@@ -1,77 +1,88 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Dashboard", href: "#" },
-  { label: "Test", href: "#" },
-  { label: "PYQ", href: "#" },
-  { label: "Analytics", href: "#" },
-  { label: "Profile", href: "#" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Test",      href: "/test" },
+  { label: "PYQ",       href: "/pyq" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Profile",   href: "/profile" },
 ];
 
 export default function Navbar() {
-  const [active, setActive] = useState("Dashboard");
+  const pathname = usePathname();
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialDark = saved ? saved === "dark" : prefersDark;
-    setDark(initialDark);
-    if (initialDark) {
+    if (saved === "dark") {
+      setDark(true);
       document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
     }
   }, []);
 
   const toggleTheme = () => {
     const next = !dark;
     setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+    if (next) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
   };
+
+  const isActive = (href) => pathname === href || pathname.startsWith(href + "/");
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 shadow-sm transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+
         {/* Logo */}
         <div className="flex-shrink-0">
-          <span className="text-xl font-black tracking-tight text-black dark:text-white font-mono">
-            AI STUDY
-          </span>
+          <Link href="/dashboard">
+            <span className="text-xl font-black tracking-tight text-black dark:text-white font-mono cursor-pointer">
+              AI STUDY
+            </span>
+          </Link>
         </div>
 
         {/* Nav Links */}
         <nav className="flex-1 flex items-center justify-center gap-1">
           {navItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => setActive(item.label)}
-              className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150
-                ${
-                  active === item.label
-                    ? "text-black dark:text-white bg-gray-100 dark:bg-gray-800"
-                    : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/60"
-                }`}
-            >
-              {item.label}
-              {active === item.label && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-black dark:bg-white rounded-full" />
-              )}
-            </button>
+            <Link key={item.label} href={item.href}>
+              <button
+                className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150
+                  ${
+                    isActive(item.href)
+                      ? "text-black dark:text-white bg-gray-100 dark:bg-gray-800"
+                      : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/60"
+                  }`}
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-black dark:bg-white rounded-full" />
+                )}
+              </button>
+            </Link>
           ))}
 
           {/* PRO button */}
-          <button
-            onClick={() => setActive("PRO")}
-            className="relative px-4 py-2 text-sm font-bold rounded-lg bg-[#1e3a5f] text-white opacity-90 hover:opacity-100 transition-opacity duration-150"
-          >
-            PRO
-          </button>
+          <Link href="/pro">
+            <button className="relative px-4 py-2 text-sm font-bold rounded-lg bg-[#1e3a5f] text-white opacity-90 hover:opacity-100 transition-opacity duration-150">
+              PRO
+            </button>
+          </Link>
+        </nav>
 
-          {/* Theme toggle near PRO */}
+        {/* Right — theme toggle + avatar */}
+        <div className="flex-shrink-0 flex items-center gap-3">
+
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
@@ -95,13 +106,13 @@ export default function Navbar() {
               </svg>
             )}
           </button>
-        </nav>
 
-        <div className="flex-shrink-0 flex items-center gap-3">
+          {/* Avatar */}
           <div className="w-9 h-9 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-sm font-bold cursor-pointer hover:opacity-80 transition-opacity">
             U
           </div>
         </div>
+
       </div>
     </header>
   );
