@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ProfileMenu from "@/components/ProfileMenu";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard" },
@@ -107,10 +108,9 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Avatar */}
-          <div className="w-9 h-9 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-sm font-bold cursor-pointer hover:opacity-80 transition-opacity">
-            U
-          </div>
+          
+          {/* Profile Menu */}
+<ProfileMenu />
         </div>
 
       </div>
