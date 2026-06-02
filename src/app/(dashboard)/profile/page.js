@@ -1,5 +1,6 @@
 "use client";
 
+import { SignOutButton } from "@clerk/nextjs";
 import { useState } from "react";
 
 // ── Mock data — replace with Supabase fetch later ─────────────────
@@ -223,15 +224,11 @@ export default function ProfilePage() {
       <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
         <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Account</h3>
         <div className="flex flex-col sm:flex-row gap-3">
-          <button
-            onClick={() => {
-              // TODO: supabase.auth.signOut() then router.push("/login")
-              alert("Sign out → redirect to /login");
-            }}
-            className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            Sign Out
-          </button>
+          <SignOutButton redirectUrl="/sign-in">
+            <button className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              Sign Out
+            </button>
+          </SignOutButton>
           <button
             onClick={() => alert("Delete account — confirm dialog here")}
             className="px-5 py-2.5 rounded-xl border border-red-200 dark:border-red-900 text-sm font-semibold text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
