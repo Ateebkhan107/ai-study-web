@@ -7,6 +7,8 @@ import {
   SIGN_IN_ROUTE,
 } from "@/lib/auth";
 
+import { supabase } from "@/lib/supabase";
+
 const EXAMS = ["JEE", "NEET"];
 
 function getYearOptions() {
@@ -28,7 +30,14 @@ export default async function OnboardingPage() {
   async function completeOnboarding(formData) {
     "use server";
 
+     console.log("ONBOARDING FUNCTION STARTED");
+
+
     const { userId: actionUserId } = await auth();
+
+    
+
+
 
     if (!actionUserId) {
       redirect(SIGN_IN_ROUTE);
@@ -43,6 +52,37 @@ export default async function OnboardingPage() {
     }
 
     const client = await clerkClient();
+    const clerkUser = await client.users.getUser(actionUserId);
+
+    const email =
+  clerkUser.primaryEmailAddress?.emailAddress || "";
+
+const fullName =
+  `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim();
+
+  console.log("USER ID:", actionUserId);
+console.log("EMAIL:", email);
+console.log("NAME:", fullName);
+console.log("EXAM:", targetExam);
+console.log("YEAR:", targetYear);
+
+/*
+const { error } = await supabase
+  .from("user_profiles")
+  .upsert({
+    clerk_user_id: actionUserId,
+    email,
+    full_name: fullName,
+    exam: targetExam,
+    target_year: targetYear,
+  });
+*/
+  console.log("SUPABASE ERROR:", error);
+
+if (error) {
+  console.error(error);
+  throw new Error("Failed to save profile");
+}
 
     await client.users.updateUserMetadata(actionUserId, {
       publicMetadata: {
