@@ -28,3 +28,102 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   transition: background 0.2s ease, color 0.2s ease;
 }
+
+
+/* ── Auth page — link hover colours ───────────────────────────── */
+.auth-link { color: #818CF8; }
+.auth-link:hover { color: #A5B4FC; }
+
+/* ── Clerk — hide internal header & footer chrome ─────────────── */
+.cl-header,
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-footer,
+.cl-footerAction,
+.cl-footerPages {
+  display: none !important;
+}
+
+/* ── Clerk — remove the black background on its footer container ─ */
+.cl-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.cl-cardBox {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── Clerk — force all text inside the card to be visible ────────
+   Clerk injects inline colour styles via its internal theme tokens;
+   these overrides ensure nothing disappears on a dark background.  */
+.cl-formFieldLabel {
+  color: #94A3B8 !important;
+}
+
+.cl-formFieldInput {
+  color: #E0E7FF !important;
+  background-color: rgba(99, 102, 241, 0.08) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+.cl-formFieldInput:focus {
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+.cl-formFieldInput::placeholder {
+  color: #475569 !important;
+}
+
+.cl-dividerText {
+  color: #475569 !important;
+}
+
+.cl-dividerLine {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.cl-socialButtonsBlockButton {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  color: #E0E7FF !important;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  background-color: rgba(99, 102, 241, 0.18) !important;
+}
+
+.cl-socialButtonsBlockButtonText {
+  color: #E0E7FF !important;
+}
+
+.cl-formButtonPrimary {
+  background-color: #6366F1 !important;
+  color: #ffffff !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background-color: #818CF8 !important;
+}
+
+.cl-identityPreviewText {
+  color: #CBD5E1 !important;
+}
+
+.cl-formFieldAction {
+  color: #818CF8 !important;
+}
+
+.cl-otpCodeFieldInput {
+  color: #E0E7FF !important;
+  background-color: rgba(99, 102, 241, 0.08) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+.cl-alertText {
+  color: #F87171 !important;
+}
