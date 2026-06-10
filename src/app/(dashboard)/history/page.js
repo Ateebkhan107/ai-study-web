@@ -1,130 +1,160 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 
-// ─── Mock Data ───────────────────────────────────────────────────────────────
+// ─── Mock Data ────────────────────────────────────────────────────────────────
 
 const MOCK_TESTS = [
   {
     id: 1,
-    name: "JEE Advanced – Full Mock #12",
-    subject: "Mixed",
+    name: "JEE Advanced – Full Mock #14",
+    category: "JEE",
+    subjects: ["Physics", "Chemistry", "Maths"],
     date: "2025-06-08",
+    questions: 54,
+    accuracy: 74,
+    timeTaken: 172,
     score: 214,
     maxScore: 300,
-    accuracy: 72,
-    duration: 180,
-    status: "completed",
-    topics: ["Physics", "Chemistry", "Mathematics"],
   },
   {
     id: 2,
-    name: "Physics – Electrostatics & Magnetism",
-    subject: "Physics",
-    date: "2025-06-06",
-    score: 88,
-    maxScore: 120,
-    accuracy: 85,
-    duration: 90,
-    status: "completed",
-    topics: ["Electrostatics", "Magnetism"],
+    name: "JEE Main – April Shift 2",
+    category: "JEE",
+    subjects: ["Physics", "Chemistry", "Maths"],
+    date: "2025-06-05",
+    questions: 75,
+    accuracy: 68,
+    timeTaken: 175,
+    score: 178,
+    maxScore: 300,
   },
   {
     id: 3,
-    name: "NEET – Biology Full Syllabus",
-    subject: "Biology",
-    date: "2025-06-04",
-    score: 310,
-    maxScore: 360,
+    name: "NEET – Full Syllabus Mock #8",
+    category: "NEET",
+    subjects: ["Biology", "Physics", "Chemistry"],
+    date: "2025-06-03",
+    questions: 180,
     accuracy: 91,
-    duration: 200,
-    status: "completed",
-    topics: ["Botany", "Zoology"],
+    timeTaken: 195,
+    score: 680,
+    maxScore: 720,
   },
   {
     id: 4,
-    name: "Chemistry – Organic Reactions",
-    subject: "Chemistry",
+    name: "Physics – Electrostatics & Magnetism",
+    category: "Physics",
+    subjects: ["Physics"],
     date: "2025-06-01",
-    score: 54,
+    questions: 30,
+    accuracy: 83,
+    timeTaken: 42,
+    score: 88,
     maxScore: 120,
-    accuracy: 45,
-    duration: 75,
-    status: "completed",
-    topics: ["GOC", "Named Reactions"],
   },
   {
     id: 5,
-    name: "Mathematics – Calculus Sprint",
-    subject: "Mathematics",
+    name: "Chemistry – Organic Reactions DPP",
+    category: "Chemistry",
+    subjects: ["Chemistry"],
     date: "2025-05-29",
-    score: 96,
-    maxScore: 120,
-    accuracy: 80,
-    duration: 60,
-    status: "completed",
-    topics: ["Limits", "Integrals", "Differential Equations"],
+    questions: 25,
+    accuracy: 48,
+    timeTaken: 38,
+    score: 54,
+    maxScore: 100,
   },
   {
     id: 6,
-    name: "JEE Main – Jan Shift 1 Mock",
-    subject: "Mixed",
-    date: "2025-05-25",
-    score: 178,
-    maxScore: 300,
-    accuracy: 63,
-    duration: 180,
-    status: "abandoned",
-    topics: ["Physics", "Chemistry", "Mathematics"],
+    name: "Maths – Calculus & Integration",
+    category: "Maths",
+    subjects: ["Maths"],
+    date: "2025-05-27",
+    questions: 30,
+    accuracy: 80,
+    timeTaken: 55,
+    score: 96,
+    maxScore: 120,
   },
   {
     id: 7,
-    name: "Physics – Modern Physics & Optics",
-    subject: "Physics",
-    date: "2025-05-22",
-    score: 74,
-    maxScore: 120,
-    accuracy: 62,
-    duration: 90,
-    status: "completed",
-    topics: ["Modern Physics", "Optics"],
+    name: "Biology – Human Physiology",
+    category: "Biology",
+    subjects: ["Biology"],
+    date: "2025-05-24",
+    questions: 45,
+    accuracy: 89,
+    timeTaken: 50,
+    score: 168,
+    maxScore: 180,
   },
   {
     id: 8,
-    name: "Chemistry – Physical Chemistry",
-    subject: "Chemistry",
+    name: "NEET – Biology Grand Test",
+    category: "NEET",
+    subjects: ["Biology"],
+    date: "2025-05-21",
+    questions: 90,
+    accuracy: 87,
+    timeTaken: 95,
+    score: 334,
+    maxScore: 360,
+  },
+  {
+    id: 9,
+    name: "JEE Main – January Shift 1",
+    category: "JEE",
+    subjects: ["Physics", "Chemistry", "Maths"],
     date: "2025-05-18",
+    questions: 75,
+    accuracy: 61,
+    timeTaken: 168,
+    score: 156,
+    maxScore: 300,
+  },
+  {
+    id: 10,
+    name: "Physics – Modern Physics & Optics",
+    category: "Physics",
+    subjects: ["Physics"],
+    date: "2025-05-15",
+    questions: 30,
+    accuracy: 63,
+    timeTaken: 47,
+    score: 74,
+    maxScore: 120,
+  },
+  {
+    id: 11,
+    name: "Chemistry – Physical Chemistry",
+    category: "Chemistry",
+    subjects: ["Chemistry"],
+    date: "2025-05-12",
+    questions: 30,
+    accuracy: 87,
+    timeTaken: 40,
     score: 102,
     maxScore: 120,
-    accuracy: 85,
-    duration: 80,
-    status: "completed",
-    topics: ["Thermodynamics", "Equilibrium", "Electrochemistry"],
+  },
+  {
+    id: 12,
+    name: "Maths – Coordinate Geometry & Vectors",
+    category: "Maths",
+    subjects: ["Maths"],
+    date: "2025-05-09",
+    questions: 25,
+    accuracy: 72,
+    timeTaken: 44,
+    score: 78,
+    maxScore: 100,
   },
 ];
 
-const TREND_DATA = [
-  { label: "May 18", accuracy: 85 },
-  { label: "May 22", accuracy: 62 },
-  { label: "May 25", accuracy: 63 },
-  { label: "May 29", accuracy: 80 },
-  { label: "Jun 1", accuracy: 45 },
-  { label: "Jun 4", accuracy: 91 },
-  { label: "Jun 6", accuracy: 85 },
-  { label: "Jun 8", accuracy: 72 },
-];
+const FILTERS = ["All", "JEE", "NEET", "Physics", "Chemistry", "Maths", "Biology"];
 
-const SUBJECTS = ["All", "Physics", "Chemistry", "Mathematics", "Biology", "Mixed"];
-const DATE_RANGES = ["All Time", "Last 7 Days", "Last 30 Days", "Last 3 Months"];
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function formatDuration(mins) {
-  if (mins < 60) return `${mins}m`;
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
-  return m ? `${h}h ${m}m` : `${h}h`;
-}
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-IN", {
@@ -134,448 +164,380 @@ function formatDate(iso) {
   });
 }
 
-function getAccuracyColor(acc) {
-  if (acc >= 80) return "text-emerald-500";
-  if (acc >= 60) return "text-yellow-500";
-  return "text-red-500";
+function formatTime(mins) {
+  if (mins < 60) return `${mins}m`;
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return m ? `${h}h ${m}m` : `${h}h`;
 }
 
-function getAccuracyBg(acc) {
-  if (acc >= 80) return "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
-  if (acc >= 60) return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-  return "bg-red-500/10 text-red-500 border-red-500/20";
+function accuracyMeta(acc) {
+  if (acc >= 80) return { color: "text-emerald-500", bg: "bg-emerald-500/10", bar: "bg-emerald-500" };
+  if (acc >= 60) return { color: "text-yellow-500", bg: "bg-yellow-500/10", bar: "bg-yellow-500" };
+  return { color: "text-red-500", bg: "bg-red-500/10", bar: "bg-red-500" };
 }
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
+function categoryColor(cat) {
+  const map = {
+    JEE: "bg-blue-500/10 text-blue-500",
+    NEET: "bg-emerald-500/10 text-emerald-500",
+    Physics: "bg-indigo-500/10 text-indigo-500",
+    Chemistry: "bg-purple-500/10 text-purple-500",
+    Maths: "bg-orange-500/10 text-orange-500",
+    Biology: "bg-teal-500/10 text-teal-500",
+  };
+  return map[cat] || "bg-gray-500/10 text-gray-500";
+}
 
-function StatCard({ icon, label, value, sub, accent }) {
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function StatCard({ icon, label, value, sub }) {
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 flex items-start gap-4">
-      <div
-        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${accent}`}
-      >
+      <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0 text-gray-500 dark:text-gray-400">
         {icon}
       </div>
       <div>
         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">{label}</p>
-        <p className="text-2xl font-bold text-gray-900 dark:text-white leading-none">{value}</p>
+        <p className="text-2xl font-black text-black dark:text-white leading-none tracking-tight">{value}</p>
         {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
       </div>
     </div>
   );
 }
 
-function TrendChart({ data }) {
-  const max = 100;
-  const min = 0;
-  const H = 120;
-  const W = 600;
-  const padX = 32;
-  const padY = 16;
-  const chartW = W - padX * 2;
-  const chartH = H - padY * 2;
-
-  const points = data.map((d, i) => {
-    const x = padX + (i / (data.length - 1)) * chartW;
-    const y = padY + chartH - ((d.accuracy - min) / (max - min)) * chartH;
-    return { x, y, ...d };
-  });
-
-  const pathD =
-    points
-      .map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`))
-      .join(" ");
-
-  const areaD =
-    `${pathD} L ${points[points.length - 1].x} ${padY + chartH} L ${points[0].x} ${padY + chartH} Z`;
-
+function AccuracyBar({ accuracy }) {
+  const meta = accuracyMeta(accuracy);
   return (
-    <div className="w-full overflow-x-auto">
-      <svg
-        viewBox={`0 0 ${W} ${H + 32}`}
-        className="w-full"
-        style={{ minWidth: 320 }}
-        aria-label="Accuracy trend chart"
-      >
-        {/* Grid lines */}
-        {[0, 25, 50, 75, 100].map((v) => {
-          const y = padY + chartH - ((v - min) / (max - min)) * chartH;
-          return (
-            <g key={v}>
-              <line
-                x1={padX}
-                x2={W - padX}
-                y1={y}
-                y2={y}
-                stroke="currentColor"
-                strokeOpacity="0.07"
-                strokeWidth="1"
-              />
-              <text
-                x={padX - 6}
-                y={y + 4}
-                textAnchor="end"
-                fontSize="9"
-                fill="currentColor"
-                opacity="0.35"
-              >
-                {v}%
-              </text>
-            </g>
-          );
-        })}
-
-        {/* Area fill */}
-        <defs>
-          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#000000" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#000000" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="areaGradDark" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.08" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path d={areaD} fill="url(#areaGrad)" className="dark:fill-[url(#areaGradDark)]" />
-
-        {/* Line */}
-        <path
-          d={pathD}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          className="text-gray-900 dark:text-white"
+    <div className="flex items-center gap-2 min-w-[100px]">
+      <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
+        <div
+          className={`h-full rounded-full ${meta.bar}`}
+          style={{ width: `${accuracy}%` }}
         />
-
-        {/* Points + labels */}
-        {points.map((p, i) => (
-          <g key={i}>
-            <circle cx={p.x} cy={p.y} r="3.5" fill="currentColor" className="text-gray-900 dark:text-white" />
-            <circle cx={p.x} cy={p.y} r="6" fill="currentColor" opacity="0.12" className="text-gray-900 dark:text-white" />
-            <text
-              x={p.x}
-              y={H + 20}
-              textAnchor="middle"
-              fontSize="9"
-              fill="currentColor"
-              opacity="0.4"
-            >
-              {p.label}
-            </text>
-            {/* Tooltip value */}
-            <text
-              x={p.x}
-              y={p.y - 10}
-              textAnchor="middle"
-              fontSize="9"
-              fill="currentColor"
-              opacity="0.6"
-              fontWeight="600"
-            >
-              {p.accuracy}%
-            </text>
-          </g>
-        ))}
-      </svg>
+      </div>
+      <span className={`text-xs font-bold tabular-nums w-8 text-right ${meta.color}`}>{accuracy}%</span>
     </div>
   );
 }
 
-function StatusBadge({ status }) {
-  if (status === "abandoned") {
-    return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-red-500/10 text-red-500 border border-red-500/20">
-        <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-        Abandoned
-      </span>
-    );
-  }
+// Mobile card
+function TestCard({ test }) {
+  const meta = accuracyMeta(test.accuracy);
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-      <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 inline-block" />
-      Completed
-    </span>
-  );
-}
-
-function SubjectChip({ subject }) {
-  const map = {
-    Physics: "bg-blue-500/10 text-blue-500",
-    Chemistry: "bg-purple-500/10 text-purple-500",
-    Mathematics: "bg-orange-500/10 text-orange-500",
-    Biology: "bg-emerald-500/10 text-emerald-500",
-    Mixed: "bg-gray-500/10 text-gray-500 dark:text-gray-400",
-  };
-  return (
-    <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold ${map[subject] || map.Mixed}`}
-    >
-      {subject}
-    </span>
-  );
-}
-
-function TestRow({ test }) {
-  return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5 flex flex-col gap-4 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
-      {/* Top row */}
-      <div className="flex items-start justify-between gap-3 flex-wrap">
+    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 flex flex-col gap-3 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
+      <div className="flex items-start justify-between gap-2">
         <div className="flex flex-col gap-1.5 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <SubjectChip subject={test.subject} />
-            <StatusBadge status={test.status} />
-          </div>
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white leading-snug">
-            {test.name}
-          </h3>
+          <span className={`self-start inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
+            {test.category}
+          </span>
+          <p className="text-sm font-semibold text-black dark:text-white leading-snug">{test.name}</p>
           <p className="text-xs text-gray-400">{formatDate(test.date)}</p>
         </div>
-
-        {/* Score ring */}
-        <div className="flex flex-col items-center shrink-0">
-          <div
-            className={`text-xl font-bold ${getAccuracyColor(test.accuracy)}`}
-          >
-            {test.accuracy}%
-          </div>
-          <div className="text-xs text-gray-400 font-medium">accuracy</div>
+        <div className="text-right shrink-0">
+          <p className={`text-xl font-black ${meta.color}`}>{test.accuracy}%</p>
+          <p className="text-xs text-gray-400">accuracy</p>
         </div>
       </div>
 
-      {/* Stats strip */}
       <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-800 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden text-center">
-        <div className="py-2 px-3">
-          <p className="text-xs text-gray-400 font-medium mb-0.5">Score</p>
-          <p className="text-sm font-bold text-gray-900 dark:text-white">
-            {test.score}
-            <span className="text-gray-400 font-normal text-xs">/{test.maxScore}</span>
+        <div className="py-2">
+          <p className="text-xs text-gray-400 mb-0.5">Score</p>
+          <p className="text-xs font-bold text-black dark:text-white">
+            {test.score}<span className="text-gray-400 font-normal">/{test.maxScore}</span>
           </p>
         </div>
-        <div className="py-2 px-3">
-          <p className="text-xs text-gray-400 font-medium mb-0.5">Duration</p>
-          <p className="text-sm font-bold text-gray-900 dark:text-white">
-            {formatDuration(test.duration)}
-          </p>
+        <div className="py-2">
+          <p className="text-xs text-gray-400 mb-0.5">Questions</p>
+          <p className="text-xs font-bold text-black dark:text-white">{test.questions}</p>
         </div>
-        <div className="py-2 px-3">
-          <p className="text-xs text-gray-400 font-medium mb-0.5">Topics</p>
-          <p className="text-sm font-bold text-gray-900 dark:text-white">
-            {test.topics.length}
-          </p>
+        <div className="py-2">
+          <p className="text-xs text-gray-400 mb-0.5">Time</p>
+          <p className="text-xs font-bold text-black dark:text-white">{formatTime(test.timeTaken)}</p>
         </div>
       </div>
 
-      {/* Actions */}
-      <div className="flex gap-2 pt-0.5">
-        <button className="flex-1 h-8 text-xs font-semibold rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+      <div className="flex gap-2">
+        <Link
+          href={`/test/result?id=${test.id}`}
+          className="flex-1 h-8 flex items-center justify-center text-xs font-semibold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+        >
+          View Result
+        </Link>
+        <Link
+          href={`/test/review?id=${test.id}`}
+          className="flex-1 h-8 flex items-center justify-center text-xs font-semibold rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        >
           Review Answers
-        </button>
-        <button className="flex-1 h-8 text-xs font-semibold rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors">
-          View Analytics
-        </button>
+        </Link>
       </div>
     </div>
+  );
+}
+
+// Desktop table row
+function TableRow({ test, isLast }) {
+  return (
+    <tr className={`group hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors ${!isLast ? "border-b border-gray-100 dark:border-gray-800" : ""}`}>
+      <td className="py-4 pl-6 pr-4">
+        <div className="flex items-center gap-3">
+          <span className={`shrink-0 inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
+            {test.category}
+          </span>
+          <span className="text-sm font-semibold text-black dark:text-white leading-snug">
+            {test.name}
+          </span>
+        </div>
+      </td>
+      <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+        {formatDate(test.date)}
+      </td>
+      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums text-center">
+        {test.questions}
+      </td>
+      <td className="py-4 px-4">
+        <AccuracyBar accuracy={test.accuracy} />
+      </td>
+      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums whitespace-nowrap">
+        {formatTime(test.timeTaken)}
+      </td>
+      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums whitespace-nowrap">
+        {test.score}
+        <span className="text-gray-400 font-normal text-xs"> /{test.maxScore}</span>
+      </td>
+      <td className="py-4 pl-4 pr-6">
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/test/result?id=${test.id}`}
+            className="h-7 px-3 flex items-center text-xs font-semibold rounded-lg bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors whitespace-nowrap"
+          >
+            View Result
+          </Link>
+          <Link
+            href={`/test/review?id=${test.id}`}
+            className="h-7 px-3 flex items-center text-xs font-semibold rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors whitespace-nowrap"
+          >
+            Review Answers
+          </Link>
+        </div>
+      </td>
+    </tr>
   );
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function TestHistoryPage() {
-  const [subject, setSubject] = useState("All");
-  const [dateRange, setDateRange] = useState("All Time");
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [search, setSearch] = useState("");
 
-  // Compute aggregate stats
   const stats = useMemo(() => {
-    const completed = MOCK_TESTS.filter((t) => t.status === "completed");
+    const totalMins = MOCK_TESTS.reduce((s, t) => s + t.timeTaken, 0);
     const avgAcc = Math.round(
-      completed.reduce((s, t) => s + t.accuracy, 0) / (completed.length || 1)
+      MOCK_TESTS.reduce((s, t) => s + t.accuracy, 0) / MOCK_TESTS.length
     );
-    const bestScore = Math.max(...completed.map((t) => t.accuracy));
-    const totalMins = MOCK_TESTS.reduce((s, t) => s + t.duration, 0);
-    const hours = Math.floor(totalMins / 60);
+    const best = Math.max(...MOCK_TESTS.map((t) => t.accuracy));
+    const h = Math.floor(totalMins / 60);
+    const m = totalMins % 60;
     return {
-      attempted: MOCK_TESTS.length,
+      total: MOCK_TESTS.length,
       avgAcc,
-      bestScore,
-      studyTime: `${hours}h`,
+      best,
+      studyTime: m ? `${h}h ${m}m` : `${h}h`,
     };
   }, []);
 
-  // Filter tests
-  const now = new Date();
   const filtered = useMemo(() => {
     return MOCK_TESTS.filter((t) => {
-      const matchSubject = subject === "All" || t.subject === subject;
-      let matchDate = true;
-      const d = new Date(t.date);
-      if (dateRange === "Last 7 Days")
-        matchDate = (now - d) / 86400000 <= 7;
-      else if (dateRange === "Last 30 Days")
-        matchDate = (now - d) / 86400000 <= 30;
-      else if (dateRange === "Last 3 Months")
-        matchDate = (now - d) / 86400000 <= 90;
-      return matchSubject && matchDate;
+      const matchFilter = activeFilter === "All" || t.category === activeFilter;
+      const q = search.toLowerCase().trim();
+      const matchSearch =
+        !q ||
+        t.name.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q) ||
+        t.subjects.some((s) => s.toLowerCase().includes(q));
+      return matchFilter && matchSearch;
     });
-  }, [subject, dateRange]);
+  }, [activeFilter, search]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
 
-        {/* ── Header ── */}
-        <div>
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
-            PrepZii
-          </p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            Test History
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Track all your previous attempts and performance
-          </p>
-        </div>
+      {/* ── Header ── */}
+      <div className="mb-8">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+          History
+        </p>
+        <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
+          Test History
+        </h1>
+        <p className="mt-1 text-sm text-gray-400">
+          Track all your previous attempts and performance.
+        </p>
+      </div>
 
-        {/* ── Stats Cards ── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <StatCard
-            label="Tests Attempted"
-            value={stats.attempted}
-            sub="all time"
-            accent="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-            icon={
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-              </svg>
-            }
+      {/* ── Stats ── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <StatCard
+          label="Total Tests"
+          value={stats.total}
+          sub="all time"
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+              <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+            </svg>
+          }
+        />
+        <StatCard
+          label="Avg Accuracy"
+          value={`${stats.avgAcc}%`}
+          sub="across all tests"
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+          }
+        />
+        <StatCard
+          label="Best Score"
+          value={`${stats.best}%`}
+          sub="highest accuracy"
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          }
+        />
+        <StatCard
+          label="Study Time"
+          value={stats.studyTime}
+          sub="total in tests"
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+            </svg>
+          }
+        />
+      </div>
+
+      {/* ── Search + Filters ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-5">
+        {/* Search bar */}
+        <div className="relative w-full sm:w-64">
+          <svg
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+          >
+            <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search tests…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full h-9 pl-9 pr-8 rounded-xl text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-black dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black/10 dark:focus:ring-white/10 transition"
           />
-          <StatCard
-            label="Avg Accuracy"
-            value={`${stats.avgAcc}%`}
-            sub="across completed tests"
-            accent="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-            icon={
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          {search && (
+            <button
+              onClick={() => setSearch("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              aria-label="Clear search"
+            >
+              <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
+                <path d="M4.293 4.293a1 1 0 011.414 0L8 6.586l2.293-2.293a1 1 0 111.414 1.414L9.414 8l2.293 2.293a1 1 0 01-1.414 1.414L8 9.414l-2.293 2.293a1 1 0 01-1.414-1.414L6.586 8 4.293 5.707a1 1 0 010-1.414z" />
               </svg>
-            }
-          />
-          <StatCard
-            label="Best Score"
-            value={`${stats.bestScore}%`}
-            sub="highest accuracy"
-            accent="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-            icon={
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            }
-          />
-          <StatCard
-            label="Study Time"
-            value={stats.studyTime}
-            sub="total test duration"
-            accent="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-            icon={
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-              </svg>
-            }
-          />
-        </div>
-
-        {/* ── Performance Trend ── */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
-          <div className="flex items-center justify-between mb-5">
-            <div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">
-                Performance Trend
-              </p>
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
-                Accuracy over recent tests
-              </h2>
-            </div>
-          </div>
-          <TrendChart data={TREND_DATA} />
-        </div>
-
-        {/* ── Filters ── */}
-        <div className="flex flex-col sm:flex-row gap-3">
-          {/* Subject filter */}
-          <div className="flex-1">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
-              Subject
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {SUBJECTS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setSubject(s)}
-                  className={`px-3 h-8 rounded-xl text-xs font-semibold transition-all border ${
-                    subject === s
-                      ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-transparent"
-                      : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Date range filter */}
-          <div>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
-              Date Range
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {DATE_RANGES.map((r) => (
-                <button
-                  key={r}
-                  onClick={() => setDateRange(r)}
-                  className={`px-3 h-8 rounded-xl text-xs font-semibold transition-all border ${
-                    dateRange === r
-                      ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-transparent"
-                      : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Test List ── */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-              {filtered.length} Test{filtered.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-
-          {filtered.length === 0 ? (
-            <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-12 text-center">
-              <p className="text-gray-400 text-sm">No tests match the selected filters.</p>
-              <button
-                onClick={() => { setSubject("All"); setDateRange("All Time"); }}
-                className="mt-3 text-xs font-semibold text-gray-900 dark:text-white underline underline-offset-2"
-              >
-                Clear filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {filtered.map((test) => (
-                <TestRow key={test.id} test={test} />
-              ))}
-            </div>
+            </button>
           )}
         </div>
 
+        {/* Filter pills */}
+        <div className="flex flex-wrap gap-1.5">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActiveFilter(f)}
+              className={`px-3 h-9 rounded-xl text-xs font-semibold transition-all border ${
+                activeFilter === f
+                  ? "bg-black dark:bg-white text-white dark:text-black border-transparent"
+                  : "bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
       </div>
+
+      {/* ── Count ── */}
+      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+        {filtered.length} Test{filtered.length !== 1 ? "s" : ""}
+      </p>
+
+      {/* ── Empty state ── */}
+      {filtered.length === 0 && (
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-16 text-center">
+          <p className="text-gray-400 text-sm mb-3">No tests match your search or filter.</p>
+          <button
+            onClick={() => { setActiveFilter("All"); setSearch(""); }}
+            className="text-xs font-semibold text-black dark:text-white underline underline-offset-2"
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
+
+      {/* ── Desktop Table ── */}
+      {filtered.length > 0 && (
+        <div className="hidden md:block bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-800/30">
+                <th className="py-3 pl-6 pr-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Test Name
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                  Date
+                </th>
+                <th className="py-3 px-4 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Qs
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Accuracy
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                  Time Taken
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Score
+                </th>
+                <th className="py-3 pl-4 pr-6 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((test, idx) => (
+                <TableRow
+                  key={test.id}
+                  test={test}
+                  isLast={idx === filtered.length - 1}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* ── Mobile Cards ── */}
+      {filtered.length > 0 && (
+        <div className="md:hidden grid grid-cols-1 gap-3">
+          {filtered.map((test) => (
+            <TestCard key={test.id} test={test} />
+          ))}
+        </div>
+      )}
+
     </div>
   );
 }
