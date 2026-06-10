@@ -5,6 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
+import NotificationBell from "@/components/NotificationBell";
+
+// ─── Mock notification count ──────────────────────────────────────────────────
+// Replace with a Supabase realtime subscription or API call when ready.
+const notificationCount = 3;
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard" },
@@ -136,6 +141,9 @@ export default function Navbar() {
               </svg>
             )}
           </button>
+
+          {/* Notification Bell */}
+          <NotificationBell count={notificationCount} />
 
           {/* Profile */}
           <ProfileMenu />
