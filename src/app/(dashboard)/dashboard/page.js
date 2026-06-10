@@ -5,7 +5,6 @@ import DailyGoals from "@/components/DailyGoals";
 export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10 space-y-10">
-      {/* 1. Say Hello First! */}
       <div>
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
           Good morning
@@ -17,14 +16,8 @@ export default function DashboardPage() {
           You're on a 7-day streak. Keep going.
         </p>
       </div>
-
-      {/* 2. Then show the Daily Goals */}
       <DailyGoals />
-      
-      {/* 3. Then show the Stats */}
       <StatsCards />
-      
-      {/* 4. Finally, the Formula Cards and Leaderboard */}
       <DashboardSection />
     </div>
   );
