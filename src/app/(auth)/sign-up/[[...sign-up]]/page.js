@@ -2,6 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
+import Logo from "@/components/Logo";
 
 export default async function Page() {
   const { userId, onboardingComplete } = await getAuthContext();
@@ -11,10 +12,12 @@ export default async function Page() {
   }
 
   return (
-  <AuthLayout
-    title="Create Account"
-    subtitle="Start your Prepzii journey and unlock smarter preparation."
-  >
+  <AuthLayout>
+    <div className="mb-8">
+      <Logo size={40} showText={false} forceDark={true} className="mb-6" />
+      <h2 className="text-4xl font-black mb-2">Create Account</h2>
+      <p className="text-zinc-400">Start your Prepzii journey and unlock smarter preparation.</p>
+    </div>
     <SignUp
       routing="path"
       path="/sign-up"

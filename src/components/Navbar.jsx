@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ProfileMenu from "@/components/ProfileMenu";
+import Logo from "@/components/Logo";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard" },
@@ -44,11 +45,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 text-black dark:text-white">
           <Link href="/dashboard">
-            <span className="text-xl font-black tracking-tight text-black dark:text-white font-mono cursor-pointer">
-              AI STUDY
-            </span>
+            <Logo className="cursor-pointer" />
           </Link>
         </div>
 

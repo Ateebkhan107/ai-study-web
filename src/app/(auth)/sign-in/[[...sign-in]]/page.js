@@ -2,6 +2,7 @@ import { SignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
+import Logo from "@/components/Logo";
 
 export default async function Page() {
   const { userId, onboardingComplete } = await getAuthContext();
@@ -11,10 +12,12 @@ export default async function Page() {
   }
 
   return (
-  <AuthLayout
-    title="Welcome Back"
-    subtitle="Continue your JEE & NEET preparation journey."
-  >
+  <AuthLayout>
+    <div className="mb-8">
+      <Logo size={40} showText={false} forceDark={true} className="mb-6" />
+      <h2 className="text-4xl font-black mb-2">Welcome Back</h2>
+      <p className="text-zinc-400">Continue your JEE & NEET preparation journey.</p>
+    </div>
     <SignIn
       routing="path"
       path="/sign-in"
