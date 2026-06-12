@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
         {/* Logo */}
-        <div className="flex-shrink-0 text-black dark:text-white">
+        <div className="shrink-0 text-black dark:text-white">
           <Link href="/dashboard">
             <Logo size={80} className="cursor-pointer" />
           </Link>
@@ -95,7 +95,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right Side */}
-        <div className="flex-shrink-0 flex items-center gap-3">
+        <div className="shrink-0 flex items-center gap-3">
 
           {/* Theme Toggle */}
           <button

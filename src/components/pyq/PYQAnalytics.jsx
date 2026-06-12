@@ -142,7 +142,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
         <div className="space-y-3">
           {CHAPTER_WEIGHTAGE.map((w) => (
             <div key={w.chapter} className="flex items-center gap-3">
-              <span className="text-sm text-gray-700 dark:text-gray-300 w-36 flex-shrink-0">
+              <span className="text-sm text-gray-700 dark:text-gray-300 w-36 shrink-0">
                 {w.chapter}
               </span>
               <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
@@ -170,7 +170,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
               key={r.tag}
               className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-800/60 rounded-xl"
             >
-              <span className="text-xl flex-shrink-0">{r.icon}</span>
+              <span className="text-xl shrink-0">{r.icon}</span>
               <div>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
                   {r.text}

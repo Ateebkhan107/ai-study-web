@@ -110,7 +110,7 @@ export default function DashboardSection() {
                   <span className="text-xs font-semibold text-gray-400">#{entry.rank}</span>
                 )}
               </div>
-              <div className="w-7 h-7 rounded-full bg-gray-100 dark:bg-[#232740] flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400 flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-gray-100 dark:bg-[#232740] flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400 shrink-0">
                 {entry.name[0]}
               </div>
               <div className="flex-1 min-w-0">
@@ -144,7 +144,7 @@ export default function DashboardSection() {
             <div className="w-6 text-center">
               <span className="text-xs font-semibold text-gray-400">#{userRank.rank}</span>
             </div>
-            <div className="w-7 h-7 rounded-full bg-indigo-500/20 flex items-center justify-center text-xs font-bold text-indigo-400 flex-shrink-0">
+            <div className="w-7 h-7 rounded-full bg-indigo-500/20 flex items-center justify-center text-xs font-bold text-indigo-400 shrink-0">
               {userRank.name[0]}
             </div>
             <div className="flex-1 min-w-0">
