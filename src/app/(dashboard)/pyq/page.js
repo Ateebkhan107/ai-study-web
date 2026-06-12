@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PYQExplore from "@/components/pyq/PYQExplore";
 import PYQPractice from "@/components/pyq/PYQPractice";
 import PYQAnalytics from "@/components/pyq/PYQAnalytics";
@@ -16,6 +16,12 @@ const TABS = [
 
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("explore");
+
+  const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
 
   // Centralised question state — shared across all tabs
   const [questions, setQuestions] = useState(
@@ -42,6 +48,10 @@ export default function PYQPage() {
     );
 
   const sharedProps = { questions, updateQuestion };
+
+  if (!mounted) {
+  return null;
+}
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
