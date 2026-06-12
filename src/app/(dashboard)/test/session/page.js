@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import { getQuestions } from "@/lib/tests";
 
 // Placeholder questions — replace with real DB fetch later
 const PLACEHOLDER_QUESTIONS = Array.from({ length: 20 }, (_, i) => ({
@@ -25,9 +26,32 @@ export default function TestSessionPage() {
   const difficulty = params.get("difficulty") || "mixed";
   const mode = params.get("mode") || "custom";
 
-  const questions = PLACEHOLDER_QUESTIONS.slice(0, count);
+  
   const totalSeconds = duration * 60;
+  useEffect(() => {
+  async function loadQuestions() {
+    try {
+      const data = await getQuestions({
+        subject: subjects[0],
+        chapter: chapters[0],
+        difficulty,
+        limit: count,
+      });
 
+      setQuestions(data || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  loadQuestions();
+}, []);
+
+
+  const [questions, setQuestions] = useState([]);
+const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
@@ -67,6 +91,22 @@ export default function TestSessionPage() {
   const attempted = Object.keys(answers).length;
   const timerDanger = timeLeft < 300; // last 5 mins
 
+
+  if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      Loading Questions...
+    </div>
+  );
+}
+
+if (!questions.length) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      No questions found.
+    </div>
+  );
+}
   if (submitted) {
     const correct = questions.filter((q) => answers[q.id] === q.correct_option).length;
     const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;

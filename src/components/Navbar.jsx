@@ -56,7 +56,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex-shrink-0 text-black dark:text-white">
           <Link href="/dashboard">
-            <Logo className="cursor-pointer" />
+            <Logo size={80} className="cursor-pointer" />
           </Link>
         </div>
 
