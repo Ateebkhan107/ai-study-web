@@ -1,343 +1,427 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
-import { getQuestions } from "@/lib/tests";
+import { useState, useEffect, useRef, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { PYQ_QUESTIONS } from "@/lib/pyqData";
+import Logo from "@/components/Logo";
 
-// Placeholder questions — replace with real DB fetch later
-const PLACEHOLDER_QUESTIONS = Array.from({ length: 20 }, (_, i) => ({
-  id: i + 1,
-  question_text: `This is sample question ${i + 1}. Once your database is connected, real questions will load here based on your selected subjects and chapters.`,
-  option_a: "Option A — first choice",
-  option_b: "Option B — second choice",
-  option_c: "Option C — third choice",
-  option_d: "Option D — fourth choice",
-  correct_option: "A",
-}));
+const LETTERS = ["A", "B", "C", "D"];
 
-export default function TestSessionPage() {
+// --- UI Helper Icons for Result Page ---
+const CheckIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+  </svg>
+);
+const XIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+const MinusIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
+  </svg>
+);
+const TargetIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" />
+  </svg>
+);
+
+function TestSessionContent() {
   const router = useRouter();
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
 
-  const subjects = params.get("subjects")?.split(",") || [];
-  const chapters = params.get("chapters")?.split(",") || [];
-  const duration = Number(params.get("duration") || 30);
-  const count = Number(params.get("count") || 20);
-  const difficulty = params.get("difficulty") || "mixed";
-  const mode = params.get("mode") || "custom";
-
+  // 1. Extract URL Parameters
+  const durationParam = Number(searchParams.get("duration")) || 30; // mins
+  const countParam = Number(searchParams.get("count")) || 20;
+  const mode = searchParams.get("mode") || "custom";
+  const subjectParam = searchParams.get("subjects") || searchParams.get("subject") || "Mixed Subjects";
+  const difficultyParam = searchParams.get("difficulty") || "Mixed";
   
-  const totalSeconds = duration * 60;
-  useEffect(() => {
-  async function loadQuestions() {
-    try {
-      const data = await getQuestions({
-        subject: subjects[0],
-        chapter: chapters[0],
-        difficulty,
-        limit: count,
-      });
-
-      setQuestions(data || []);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  loadQuestions();
-}, []);
-
-
+  // 2. State Management
   const [questions, setQuestions] = useState([]);
-const [loading, setLoading] = useState(true);
-  const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(totalSeconds);
-  const [submitted, setSubmitted] = useState(false);
-  const [flagged, setFlagged] = useState({});
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [answers, setAnswers] = useState({}); // { questionId: selectedIndex }
+  const [timeLeft, setTimeLeft] = useState(durationParam * 60);
+  const [isFinished, setIsFinished] = useState(false);
   const timerRef = useRef(null);
 
+  // 3. Initialize the Test Pool
   useEffect(() => {
+    // Simulated fetch based on params
+    const shuffled = [...PYQ_QUESTIONS].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, Math.min(countParam, shuffled.length));
+    
+    setQuestions(selected);
+    setTimeLeft(durationParam * 60);
+  }, [countParam, durationParam]);
+
+  // 4. Timer Logic
+  useEffect(() => {
+    if (questions.length === 0 || isFinished) return;
+
     timerRef.current = setInterval(() => {
-      setTimeLeft((t) => {
-        if (t <= 1) { clearInterval(timerRef.current); handleSubmit(); return 0; }
-        return t - 1;
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          handleSubmit(); // Auto-submit when time is up
+          return 0;
+        }
+        return prev - 1;
       });
     }, 1000);
+
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [questions.length, isFinished]);
 
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
-  };
-
-  const selectAnswer = (qId, option) => {
-    setAnswers((prev) => ({ ...prev, [qId]: option }));
-  };
-
-  const toggleFlag = (qId) => {
-    setFlagged((prev) => ({ ...prev, [qId]: !prev[qId] }));
+  // 5. Handlers
+  const handleSelect = (qId, optIdx) => {
+    setAnswers((prev) => ({ ...prev, [qId]: optIdx }));
   };
 
   const handleSubmit = () => {
+    setIsFinished(true);
     clearInterval(timerRef.current);
-    setSubmitted(true);
+    // TODO: Supabase save logic goes here later
   };
 
-  const attempted = Object.keys(answers).length;
-  const timerDanger = timeLeft < 300; // last 5 mins
+  // 6. Formatting & Derived State
+  const formatTime = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  };
 
+  const isTimerDanger = timeLeft < 300; 
+  const activeQ = questions[currentIdx];
 
-  if (loading) {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      Loading Questions...
-    </div>
-  );
-}
+  // ─────────────────────────────────────────────────────────────────
+  // Loading State
+  // ─────────────────────────────────────────────────────────────────
+  if (questions.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f9f9f9] dark:bg-gray-950">
+        <div className="animate-pulse flex flex-col items-center">
+          <div className="w-8 h-8 rounded-full border-4 border-gray-200 dark:border-gray-800 border-t-black dark:border-t-white animate-spin mb-4" />
+          <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Generating Test...</p>
+        </div>
+      </div>
+    );
+  }
 
-if (!questions.length) {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      No questions found.
-    </div>
-  );
-}
-  if (submitted) {
-    const correct = questions.filter((q) => answers[q.id] === q.correct_option).length;
+  // ─────────────────────────────────────────────────────────────────
+  // Finished State (Premium Result Screen)
+  // ─────────────────────────────────────────────────────────────────
+  if (isFinished) {
+    // Empty-State Safety Catch
+    if (!questions || questions.length === 0) {
+      return (
+        <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex flex-col items-center justify-center p-6">
+          <p className="text-gray-500 mb-4 font-medium">Test data is unavailable.</p>
+          <button onClick={() => router.push("/dashboard")} className="px-6 py-2 bg-black text-white rounded-xl font-bold">Return to Dashboard</button>
+        </div>
+      );
+    }
+
+    // Advanced Calculations
+    const attempted = Object.keys(answers).length;
+    let correct = 0;
+    
+    questions.forEach((q) => {
+      if (answers[q.id] === q.correct) correct++;
+    });
+
+    const wrong = attempted - correct;
+    const skipped = questions.length - attempted;
     const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+    const timeTaken = (durationParam * 60) - timeLeft;
+
+    // Dynamic Feedback Logic
+    let feedbackMessage = "Needs Improvement 📚";
+    let feedbackColor = "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10";
+    if (accuracy >= 90) {
+      feedbackMessage = "Excellent Work 🎉";
+      feedbackColor = "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10";
+    } else if (accuracy >= 70) {
+      feedbackMessage = "Good Attempt 🚀";
+      feedbackColor = "text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/10";
+    }
+
+    // Color Maps for Stats Grid
+    const themeMaps = {
+      emerald: "bg-emerald-50 border-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:border-emerald-500/20 dark:text-emerald-400",
+      rose: "bg-rose-50 border-rose-100 text-rose-600 dark:bg-rose-500/10 dark:border-rose-500/20 dark:text-rose-400",
+      slate: "bg-slate-50 border-slate-200 text-slate-600 dark:bg-slate-500/10 dark:border-slate-500/20 dark:text-slate-400",
+      indigo: "bg-indigo-50 border-indigo-100 text-indigo-600 dark:bg-indigo-500/10 dark:border-indigo-500/20 dark:text-indigo-400",
+    };
 
     return (
-      <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex items-center justify-center p-6">
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-10 max-w-md w-full text-center shadow-sm">
-          <div className="text-5xl mb-4">🎯</div>
-          <h1 className="text-3xl font-black text-black dark:text-white mb-1">Test Complete</h1>
-          <p className="text-gray-400 text-sm mb-8">Here's how you did</p>
+      <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex flex-col items-center justify-center p-4 sm:p-6">
+        <div className="w-full max-w-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-[2rem] p-6 sm:p-10 shadow-2xl shadow-gray-200/50 dark:shadow-black/50 text-center relative overflow-hidden">
+          
+          {/* Subtle Top Gradient Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
 
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4">
-              <p className="text-2xl font-black text-black dark:text-white">{correct}/{attempted}</p>
-              <p className="text-xs text-gray-400 mt-1">Correct</p>
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="w-16 h-16 mx-auto bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-5 shadow-sm">
+              🎯
             </div>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4">
-              <p className="text-2xl font-black text-black dark:text-white">{accuracy}%</p>
-              <p className="text-xs text-gray-400 mt-1">Accuracy</p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4">
-              <p className="text-2xl font-black text-black dark:text-white">{attempted}/{questions.length}</p>
-              <p className="text-xs text-gray-400 mt-1">Attempted</p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4">
-              <p className="text-2xl font-black text-black dark:text-white">
-                {formatTime(totalSeconds - timeLeft)}
-              </p>
-              <p className="text-xs text-gray-400 mt-1">Time taken</p>
-            </div>
-          </div>
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
+              Test Submitted!
+            </h1>
 
-          <div className="flex flex-col gap-3">
-            <button
-              onClick={() => router.push("/test/review")}
-              className="w-full py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Review Answers
-            </button>
-            <button
-              onClick={() => router.push("/test")}
-              className="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            >
-              Back to Test Center
-            </button>
-            <button
-              onClick={() => router.push("/dashboard")}
-              className="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            >
-              Go to Dashboard
-            </button>
+            {/* Dynamic Performance Feedback */}
+            <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-8 ${feedbackColor}`}>
+              <span className="text-sm font-black tracking-wide">{feedbackMessage}</span>
+            </div>
+
+            {/* Test Summary Pill Section */}
+            <div className="mb-8 p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 text-left">
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">Session Summary</p>
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                {[
+                  { label: "Mode", val: mode === "quick" ? "Quick Session" : "Custom Test" },
+                  { label: "Subject", val: subjectParam },
+                  { label: "Difficulty", val: difficultyParam, classes: "capitalize" },
+                  { label: "Questions", val: questions.length },
+                  { label: "Time", val: formatTime(timeTaken) },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+                    <span className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400">{item.label}:</span>
+                    <span className={`text-[10px] sm:text-xs font-black text-gray-900 dark:text-white ${item.classes || ""}`}>{item.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* New 2x2 Stats Grid */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-10">
+              {[
+                { label: "Correct", val: correct, theme: "emerald", icon: <CheckIcon /> },
+                { label: "Wrong", val: wrong, theme: "rose", icon: <XIcon /> },
+                { label: "Skipped", val: skipped, theme: "slate", icon: <MinusIcon /> },
+                { label: "Accuracy", val: `${accuracy}%`, theme: "indigo", icon: <TargetIcon /> },
+              ].map((stat, i) => (
+                <div key={i} className={`flex flex-col items-center justify-center p-5 rounded-2xl border ${themeMaps[stat.theme]} transition-transform hover:-translate-y-0.5 duration-200`}>
+                  <div className="mb-2 opacity-80">{stat.icon}</div>
+                  <p className="text-3xl font-black tracking-tight mb-1">{stat.val}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Action Button Hierarchy */}
+            <div className="flex flex-col gap-3 max-w-sm mx-auto">
+              {/* Primary: Review Answers */}
+              <button
+                onClick={() => alert("Review mode UI is coming next! Stay tuned.")}
+                className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black hover:opacity-90 hover:scale-[0.98] transition-all shadow-lg shadow-gray-900/20 dark:shadow-white/10"
+              >
+                Review Answers
+              </button>
+              
+              {/* Secondary: Test History */}
+              <button
+                onClick={() => router.push("/analytics")}
+                className="w-full py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              >
+                View Test History
+              </button>
+              
+              {/* Tertiary: Dashboard */}
+              <button
+                onClick={() => router.push("/dashboard")}
+                className="w-full py-3 text-gray-500 dark:text-gray-400 text-sm font-semibold hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                Back to Dashboard
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
-  const q = questions[current];
-
+  // ─────────────────────────────────────────────────────────────────
+  // Active Test UI (Unchanged)
+  // ─────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950">
-      {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 px-6 py-3 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => router.push("/test")}
-            className="text-xs font-semibold text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-          >
-            ← Exit
-          </button>
-          <div className="h-4 w-px bg-gray-200 dark:bg-gray-700" />
-          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-            {subjects.join(", ")} · {difficulty} · {mode}
-          </p>
+    <div className="min-h-screen flex flex-col bg-[#f9f9f9] dark:bg-gray-950">
+      
+      {/* Top Navbar */}
+      <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <Logo size={28} />
+          <div className="hidden sm:block w-px h-6 bg-gray-200 dark:bg-gray-700" />
+          <span className="hidden sm:block text-xs font-bold text-gray-400 uppercase tracking-widest">
+            {mode === "quick" ? "Quick Session" : "Custom Test"}
+          </span>
         </div>
 
         {/* Timer */}
-        <div className={`flex items-center gap-2 px-4 py-1.5 rounded-full font-black text-sm tabular-nums
-          ${timerDanger
-            ? "bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800"
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-lg font-black tabular-nums transition-colors
+          ${isTimerDanger 
+            ? "bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800" 
             : "bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
           }`}
         >
-          {timerDanger && <span className="animate-pulse">⚠</span>}
+          {isTimerDanger && <span className="animate-pulse">⏳</span>}
           {formatTime(timeLeft)}
         </div>
 
-        {/* Progress */}
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-400">{attempted}/{questions.length} answered</span>
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-1.5 rounded-lg bg-black dark:bg-white text-white dark:text-black text-xs font-black hover:opacity-90 transition-opacity"
-          >
-            Submit
-          </button>
-        </div>
-      </div>
+        <button
+          onClick={handleSubmit}
+          className="px-6 py-2 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity"
+        >
+          Submit Test
+        </button>
+      </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
-
-        {/* Question panel */}
-        <div className="lg:col-span-3 space-y-5">
-          {/* Progress bar */}
-          <div className="w-full h-1 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-black dark:bg-white rounded-full transition-all duration-300"
-              style={{ width: `${((current + 1) / questions.length) * 100}%` }}
-            />
+      {/* Main Layout */}
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        {/* Left/Top Sidebar: Question Palette */}
+        <aside className="lg:col-span-1 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5 h-fit lg:sticky lg:top-24 order-2 lg:order-1">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Question Palette</p>
+          <div className="grid grid-cols-5 gap-2">
+            {questions.map((q, idx) => {
+              const isAnswered = answers[q.id] !== undefined;
+              const isActive = currentIdx === idx;
+              
+              return (
+                <button
+                  key={q.id}
+                  onClick={() => setCurrentIdx(idx)}
+                  className={`aspect-square rounded-lg text-sm font-bold flex items-center justify-center transition-all duration-150
+                    ${isActive 
+                      ? "ring-2 ring-black dark:ring-white ring-offset-2 dark:ring-offset-gray-900" 
+                      : ""}
+                    ${isAnswered
+                      ? "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800"
+                      : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                    }
+                  `}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
           </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800 grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-emerald-100 border border-emerald-200 dark:bg-emerald-900/40 dark:border-emerald-800" /> Answered
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:border-gray-700" /> Unvisited
+            </div>
+          </div>
+        </aside>
 
-          {/* Question card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6">
-            <div className="flex items-start justify-between mb-4">
+        {/* Center: Active Question Area */}
+        <section className="lg:col-span-3 flex flex-col order-1 lg:order-2">
+          <div className="flex-1 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 shadow-sm">
+            
+            {/* Meta Tags */}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                Question {current + 1} of {questions.length}
+                Question {currentIdx + 1} of {questions.length}
               </span>
-              <button
-                onClick={() => toggleFlag(q.id)}
-                className={`text-xs font-semibold px-3 py-1 rounded-full border transition-all
-                  ${flagged[q.id]
-                    ? "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-300 dark:border-yellow-700 text-yellow-600 dark:text-yellow-400"
-                    : "border-gray-200 dark:border-gray-700 text-gray-400 hover:border-gray-400"
-                  }`}
-              >
-                {flagged[q.id] ? "🚩 Flagged" : "Flag"}
-              </button>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white">
+                {activeQ.subject}
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                {activeQ.chapter}
+              </span>
             </div>
 
-            <p className="text-base font-medium text-black dark:text-white leading-relaxed mb-6">
-              {q.question_text}
+            {/* The Question */}
+            <p className="text-lg sm:text-xl font-medium text-black dark:text-white leading-relaxed mb-8">
+              {activeQ.text}
             </p>
 
             {/* Options */}
             <div className="space-y-3">
-              {["A", "B", "C", "D"].map((opt) => {
-                const text = q[`option_${opt.toLowerCase()}`];
-                const isSelected = answers[q.id] === opt;
+              {activeQ.options.map((opt, idx) => {
+                const isSelected = answers[activeQ.id] === idx;
                 return (
                   <button
-                    key={opt}
-                    onClick={() => selectAnswer(q.id, opt)}
-                    className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border-2 text-left text-sm font-medium transition-all duration-100
+                    key={idx}
+                    onClick={() => handleSelect(activeQ.id, idx)}
+                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl border-2 text-left transition-all duration-150
                       ${isSelected
-                        ? "bg-black dark:bg-white border-black dark:border-white text-white dark:text-black"
-                        : "bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500"
+                        ? "bg-indigo-50 dark:bg-indigo-900/20 border-indigo-500 text-indigo-900 dark:text-indigo-200"
+                        : "bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300"
                       }`}
                   >
-                    <span className={`w-7 h-7 flex-shrink-0 rounded-full border-2 flex items-center justify-center text-xs font-black
-                      ${isSelected
-                        ? "border-white dark:border-black text-white dark:text-black"
+                    <span className={`w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-sm font-black border-2
+                      ${isSelected 
+                        ? "border-indigo-500 bg-indigo-500 text-white" 
                         : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400"
                       }`}
                     >
-                      {opt}
+                      {LETTERS[idx]}
                     </span>
-                    {text}
+                    <span className="text-base font-medium">{opt}</span>
                   </button>
                 );
               })}
             </div>
+            
+            {/* Clear Selection Button */}
+            {answers[activeQ.id] !== undefined && (
+               <button 
+                  onClick={() => {
+                    const newAnswers = {...answers};
+                    delete newAnswers[activeQ.id];
+                    setAnswers(newAnswers);
+                  }}
+                  className="mt-4 text-xs font-semibold text-gray-400 hover:text-red-500 transition-colors"
+                >
+                 Clear Selection
+               </button>
+            )}
           </div>
 
-          {/* Prev / Next */}
-          <div className="flex items-center justify-between">
+          {/* Bottom Navigation */}
+          <div className="mt-6 flex items-center justify-between">
             <button
-              onClick={() => setCurrent((c) => Math.max(0, c - 1))}
-              disabled={current === 0}
-              className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              onClick={() => setCurrentIdx(prev => Math.max(0, prev - 1))}
+              disabled={currentIdx === 0}
+              className="px-6 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               ← Previous
             </button>
-            <span className="text-xs text-gray-400 font-medium">
-              {current + 1} / {questions.length}
-            </span>
+            
             <button
-              onClick={() => setCurrent((c) => Math.min(questions.length - 1, c + 1))}
-              disabled={current === questions.length - 1}
-              className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              onClick={() => setCurrentIdx(prev => Math.min(questions.length - 1, prev + 1))}
+              disabled={currentIdx === questions.length - 1}
+              className="px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
             >
-              Next →
+              Save & Next →
             </button>
           </div>
-        </div>
+        </section>
 
-        {/* Question grid navigator */}
-        <div className="lg:col-span-1">
-          <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sticky top-24">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-              Questions
-            </p>
-            <div className="grid grid-cols-5 gap-1.5">
-              {questions.map((qItem, idx) => (
-                <button
-                  key={qItem.id}
-                  onClick={() => setCurrent(idx)}
-                  className={`h-8 w-full rounded-lg text-xs font-bold transition-all
-                    ${idx === current
-                      ? "bg-black dark:bg-white text-white dark:text-black"
-                      : answers[qItem.id]
-                      ? "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                      : flagged[qItem.id]
-                      ? "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400 border border-yellow-300 dark:border-yellow-700"
-                      : "bg-gray-50 dark:bg-gray-800 text-gray-400 border border-gray-200 dark:border-gray-700"
-                    }`}
-                >
-                  {idx + 1}
-                </button>
-              ))}
-            </div>
-            <div className="mt-4 space-y-1.5">
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <div className="w-3 h-3 rounded bg-black dark:bg-white" /> Current
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <div className="w-3 h-3 rounded bg-gray-300 dark:bg-gray-600" /> Answered
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <div className="w-3 h-3 rounded bg-yellow-200 dark:bg-yellow-900/50 border border-yellow-300" /> Flagged
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <div className="w-3 h-3 rounded bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700" /> Not visited
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </main>
     </div>
+  );
+}
+
+// Wrap the component that uses `useSearchParams` in a Suspense boundary
+export default function TestSessionPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex flex-col items-center justify-center">
+         <div className="w-8 h-8 rounded-full border-4 border-gray-200 dark:border-gray-800 border-t-black dark:border-t-white animate-spin" />
+      </div>
+    }>
+      <TestSessionContent />
+    </Suspense>
   );
 }

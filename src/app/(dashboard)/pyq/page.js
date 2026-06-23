@@ -37,29 +37,23 @@ const I = {
 };
 
 // ─── Theme-aware class helpers ─────────────────────────────────────────────────
-// bg — mirrors Test Center exactly: page=transparent(layout handles it), surface=#161b22, sunken=#0d1117
-const BG_PAGE    = "bg-gray-50    dark:bg-transparent";   // let layout bg (#0d1117) show through
-const BG_SURFACE = "bg-white      dark:bg-[#161b22]";     // same as Test Center panels
-const BG_SUNKEN  = "bg-gray-100   dark:bg-[#0d1117]";     // same as Test Center inner cards
+const BG_PAGE    = "bg-gray-50    dark:bg-transparent";   
+const BG_SURFACE = "bg-white      dark:bg-gray-900/40 backdrop-blur-md"; // Set back to Test page style!
+const BG_SUNKEN  = "bg-gray-100   dark:bg-gray-950/50";     
 
-// border
-const BORDER     = "border-gray-200  dark:border-[#30363d]";
-const BORDER_HV  = "hover:border-gray-300 dark:hover:border-[#3d444d]";
+const BORDER     = "border-gray-200  dark:border-gray-800/60";
+const BORDER_HV  = "hover:border-gray-300 dark:hover:border-gray-700";
 
-// text
 const TXT        = "text-gray-900  dark:text-[#e6edf3]";
 const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
 const TXT_DIM    = "text-gray-400  dark:text-[#7d8590]/60";
 
-// interactive surface
-const SURFACE_HV = `hover:bg-gray-100 dark:hover:bg-[#0d1117]`;
+const SURFACE_HV = `hover:bg-gray-100 dark:hover:bg-gray-950/40`;
 
-// active pill (inverted: dark bg in light mode, white bg in dark mode)
 const ACTIVE_PILL      = "bg-gray-900 text-white dark:bg-white dark:text-[#0d1117]";
 const ACTIVE_PILL_HV   = "hover:bg-gray-800 dark:hover:bg-[#e6edf3]";
 const INACTIVE_PILL    = `border ${BORDER} ${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] ${BORDER_HV}`;
 
-// selected card border (white in dark, gray-900 in light)
 const SELECTED_BORDER  = "border-gray-900 dark:border-white";
 const SELECTED_BG      = "bg-gray-900/5 dark:bg-white/5";
 
@@ -112,13 +106,31 @@ const TABS = [
 
 // ─── Shared Components ────────────────────────────────────────────────────────
 
+// Translucent, background-reactive glass structure matching the Test page look
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
-    <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-colors`}>
-      <IconComp size={20} style={{ color: accent }} className="mb-3" />
-      <p className={`text-2xl font-bold ${TXT} tracking-tight`}>{value}</p>
-      <p className={`text-sm font-medium ${TXT_MUTED} mt-0.5`}>{label}</p>
-      {sublabel && <p className={`text-xs ${TXT_DIM} mt-1`}>{sublabel}</p>}
+    <div className={`group relative border ${BORDER} ${BG_SURFACE} p-5 rounded-2xl ${BORDER_HV} transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg`}>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col h-full justify-between">
+        <div className="flex items-center justify-between mb-3">
+          <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>
+            {label}
+          </p>
+          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}>
+            <IconComp size={18} />
+          </div>
+        </div>
+
+        <div>
+          <p className={`text-2xl sm:text-3xl font-black tracking-tight ${TXT} mb-0.5`}>
+            {value}
+          </p>
+          <p className={`text-[11px] font-semibold ${TXT_MUTED} truncate`}>
+            {sublabel}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -581,7 +593,7 @@ export default function PYQPage() {
           </p>
         </div>
 
-        {/* Stat Cards */}
+        {/* Stat Cards Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {PAGE_STATS.map(s => <StatCard key={s.label} {...s} />)}
         </div>
@@ -596,7 +608,7 @@ export default function PYQPage() {
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
                     active
                       ? ACTIVE_PILL
-                      : `${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] hover:bg-gray-100 dark:hover:bg-[#0d1117]`
+                      : `${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] hover:bg-gray-100 dark:hover:bg-gray-950/40`
                   }`}>
                   <tab.Icon size={14} />
                   {tab.label}
