@@ -60,8 +60,7 @@ export default async function OnboardingPage() {
     console.log("EXAM:", targetExam);
     console.log("YEAR:", targetYear);
 
-    // Supabase logic temporarily disabled for testing the Clerk flow
-    /*
+
     const { error } = await supabase
       .from("user_profiles")
       .upsert({
@@ -71,14 +70,13 @@ export default async function OnboardingPage() {
         exam: targetExam,
         target_year: targetYear,
       });
-
     console.log("SUPABASE ERROR:", error);
 
     if (error) {
       console.error(error);
       throw new Error("Failed to save profile");
     }
-    */
+    
 
     await client.users.updateUserMetadata(actionUserId, {
       publicMetadata: {

@@ -2,6 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
+import Link from "next/link";
  
 export default async function Page() {
   const { userId, onboardingComplete } = await getAuthContext();
@@ -86,9 +87,9 @@ export default async function Page() {
  
       <p className="text-center text-xs mt-5" style={{ color: "#475569" }}>
         Already have an account?{" "}
-        <a href="/sign-in" className="auth-link font-bold transition-colors duration-150">
+        <Link href="/sign-in" className="auth-link font-bold transition-colors duration-150">
           Sign in
-        </a>
+        </Link>
       </p>
     </AuthLayout>
   );

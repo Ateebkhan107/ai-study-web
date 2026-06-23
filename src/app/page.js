@@ -40,7 +40,7 @@ export default function PublicLandingPage() {
             onClick={() => router.push("/dashboard")}
             className="px-8 py-4 bg-white text-black font-black text-sm rounded-2xl hover:bg-gray-100 transition-all hover:scale-[0.98] shadow-xl shadow-white/5"
           >
-            Get Started — It's Free
+            Get Started — It&apos;s Free
           </button>
         </div>
       </main>

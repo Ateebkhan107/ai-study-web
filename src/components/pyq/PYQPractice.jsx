@@ -40,6 +40,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   useEffect(() => {
     try {
       const savedSubjects = sessionStorage.getItem("pq_subjects");
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sessionStorage hydration must happen after mount to avoid SSR mismatch.
       if (savedSubjects) setSelectedSubjects(JSON.parse(savedSubjects));
 
       const savedYear = sessionStorage.getItem("pq_year");

@@ -89,7 +89,7 @@ export function AdaptiveLearning({ track = "jee" }) {
         </span>
       </div>
       <p className="text-xs text-gray-400 mb-4">
-        You're weak in <span className="font-bold text-black dark:text-white">{weakSubject}</span>. Auto-adapted path:
+        You&apos;re weak in <span className="font-bold text-black dark:text-white">{weakSubject}</span>. Auto-adapted path:
       </p>
 
       <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">
@@ -150,7 +150,7 @@ export function AIStudyPlanner({ track = "jee" }) {
       </div>
 
       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
-        Today's tasks
+        Today&apos;s tasks
       </p>
 
       <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">

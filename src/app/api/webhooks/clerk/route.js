@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabaseClient"; // Standard client used for server administrative operations
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req) {
   try {
@@ -9,23 +9,18 @@ export async function POST(req) {
 
     // 2. Listen specifically for the "user.created" notification event
     if (type === "user.created") {
-      const { id, first_name, last_name, phone_numbers } = data;
+      const { id, first_name, last_name } = data;
       
       const fullName = `${first_name || ""} ${last_name || ""}`.trim() || "New Student";
-      const primaryPhone = phone_numbers?.[0]?.phone_number || null;
 
-      // 3. Automatically insert a matching blank profile locker into your Supabase vault
+      // Keep the initial profile row aligned with the onboarding table used elsewhere.
       const { error } = await supabase
-        .from("profiles")
-        .insert({
-          id: id, // Matches Clerk's unique user ID perfectly
+        .from("user_profiles")
+        .upsert({
+          clerk_user_id: id,
           full_name: fullName,
-          phone_number: primaryPhone,
-          current_track: "jee", // Defaults safely to JEE track initialization
           target_year: 2026,
-          exam_readiness_score: 60,
-          level: 1,
-          xp: 0
+          exam: "JEE",
         });
 
       if (error) {
@@ -33,7 +28,7 @@ export async function POST(req) {
         return new NextResponse("Database write failed", { status: 500 });
       }
 
-      console.log(`Successfully created a live database locker for user: ${id}`);
+      console.log(`Successfully created a live database profile for user: ${id}`);
     }
 
     return NextResponse.json({ success: true });

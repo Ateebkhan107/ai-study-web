@@ -340,7 +340,7 @@ export default function ProPage() {
               className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5"
             >
               <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                "{t.text}"
+                &quot;{t.text}&quot;
               </p>
 
               <div>

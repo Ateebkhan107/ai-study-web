@@ -18,8 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "AI Study – JEE/NEET Dashboard",
+  title: "PREPZII– JEE/NEET Preparation",
   description: "Your intelligent JEE & NEET preparation platform",
+  icons: {
+    icon: [
+      { url: "/images/branding/favicon-16x16.png", sizes: "16x16" },
+      { url: "/images/branding/favicon-32x32.png", sizes: "32x32" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {

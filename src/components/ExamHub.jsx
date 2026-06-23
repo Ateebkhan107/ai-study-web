@@ -47,7 +47,7 @@ export default function ExamHub({ config }) {
         {/* Right Focus Block: Todays Schedule */}
         <div className="bg-white/80 border border-gray-200/60 dark:bg-[#161b22]/50 dark:border-gray-800/80 p-4 rounded-2xl w-full xl:w-72 shadow-sm shrink-0">
           <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
-            🎯 Today's Focus Topics
+            🎯 Today&apos;s Focus Topics
           </p>
           <div className="space-y-2.5">
             {config.focusTopics.map((topic, idx) => (

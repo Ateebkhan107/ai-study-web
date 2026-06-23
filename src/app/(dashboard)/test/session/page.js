@@ -54,10 +54,16 @@ function TestSessionContent() {
     const shuffled = [...PYQ_QUESTIONS].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, Math.min(countParam, shuffled.length));
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- test data is intentionally initialized after search params resolve.
     setQuestions(selected);
     setTimeLeft(durationParam * 60);
   }, [countParam, durationParam]);
-
+  function handleSubmit() {
+    setIsFinished(true);
+    clearInterval(timerRef.current);
+    // TODO: Supabase save logic goes here later
+  }
+  
   // 4. Timer Logic
   useEffect(() => {
     if (questions.length === 0 || isFinished) return;
@@ -81,11 +87,7 @@ function TestSessionContent() {
     setAnswers((prev) => ({ ...prev, [qId]: optIdx }));
   };
 
-  const handleSubmit = () => {
-    setIsFinished(true);
-    clearInterval(timerRef.current);
-    // TODO: Supabase save logic goes here later
-  };
+ 
 
   // 6. Formatting & Derived State
   const formatTime = (seconds) => {

@@ -30,7 +30,7 @@ export default async function DashboardPage() {
           Hey, Syed Ateeb 👋
         </h1>
         <p className="mt-1 text-xs text-gray-400">
-          You're on a {activeTrackKey === "NEET" ? "NEET Medical" : "IIT JEE"} 7-day streak. Keep going.
+          You&apos;re on a {activeTrackKey === "NEET" ? "NEET Medical" : "IIT JEE"} 7-day streak. Keep going.
         </p>
       </div>
 

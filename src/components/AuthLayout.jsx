@@ -153,9 +153,9 @@ export default function AuthLayout({ children }) {
             className="text-sm leading-relaxed"
             style={{ color: "#94A3B8", fontStyle: "italic" }}
           >
-            "Prepzii's mock tests and AI plans helped me go from 85%ile to{" "}
+            &quot;Prepzii&apos;s mock tests and AI plans helped me go from 85%ile to{" "}
             <span className="font-bold not-italic" style={{ color: "#A5B4FC" }}>99.2%ile</span>{" "}
-            in JEE Mains in just 3 months."
+            in JEE Mains in just 3 months.&quot;
           </p>
           <div className="flex items-center gap-3 mt-4">
             <div

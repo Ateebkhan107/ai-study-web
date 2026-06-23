@@ -48,6 +48,7 @@ export default function TestPage() {
     if (typeof window !== "undefined") {
       const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
       if (match && match[2]) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- this value is intentionally hydrated from a client-only cookie after mount.
         setTrack(match[2].toLowerCase());
       }
     }
