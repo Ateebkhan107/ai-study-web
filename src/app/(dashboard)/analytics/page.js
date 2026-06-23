@@ -1,5 +1,4 @@
-// app/(dashboard)/analytics/page.js
-
+import { cookies } from "next/headers"; // 👈 1. Import server cookie parser
 import OverviewCards from "@/components/analytics/OverviewCards";
 import {
   PerformanceTrend,
@@ -20,7 +19,13 @@ import {
   AIRecommendations,
 } from "@/components/analytics/AIComponents";
 
-export default function AnalyticsPage() {
+// 2. Transformed to an async server execution context
+export default async function AnalyticsPage() {
+  // 3. Extract track stamp seamlessly before sending HTML to the browser
+  const cookieStore = await cookies();
+  const currentTrack = cookieStore.get("prepzii_track")?.value || "jee";
+  const activeTrack = currentTrack.toLowerCase() === "neet" ? "neet" : "jee";
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-10 space-y-6">
 
@@ -37,46 +42,46 @@ export default function AnalyticsPage() {
         </p>
       </div>
 
-      {/* 1. Overview cards */}
-      <OverviewCards />
+      {/* 4. Pass track context down to isolate cards, charts, and recommendations */}
+      <OverviewCards track={activeTrack} />
 
       {/* 2. Performance trend + Subject distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3">
-          <PerformanceTrend />
+          <PerformanceTrend track={activeTrack} />
         </div>
         <div className="lg:col-span-2">
-          <SubjectDistribution />
+          <SubjectDistribution track={activeTrack} />
         </div>
       </div>
 
       {/* 3. Skill radar + Topic weakness */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <SkillRadar />
-        <TopicWeakness />
+        <SkillRadar track={activeTrack} />
+        <TopicWeakness track={activeTrack} />
       </div>
 
       {/* 4. Study heatmap */}
-      <StudyHeatmap />
+      <StudyHeatmap track={activeTrack} />
 
       {/* 5. PYQ intelligence + Time analytics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <PYQIntelligence />
-        <TimeAnalytics />
+        <PYQIntelligence track={activeTrack} />
+        <TimeAnalytics track={activeTrack} />
       </div>
 
       {/* 6. Exam readiness */}
-      <ExamReadiness />
+      <ExamReadiness track={activeTrack} />
 
       {/* 7. AI sections */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <SmartPrediction />
-        <AdaptiveLearning />
-        <AIStudyPlanner />
+        <SmartPrediction track={activeTrack} />
+        <AdaptiveLearning track={activeTrack} />
+        <AIStudyPlanner track={activeTrack} />
       </div>
 
       {/* 8. AI recommendations */}
-      <AIRecommendations />
+      <AIRecommendations track={activeTrack} />
     </div>
   );
 }

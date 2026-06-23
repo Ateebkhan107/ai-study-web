@@ -10,7 +10,14 @@ import {
 // ─────────────────────────────────────────────────────────────────
 // SmartPrediction
 // ─────────────────────────────────────────────────────────────────
-export function SmartPrediction() {
+export function SmartPrediction({ track = "jee" }) {
+  // Isolate metrics by tracking criteria
+  const filteredPredictions = AI_PREDICTIONS.filter((p) => {
+    if (track === "jee" && p.label.toLowerCase().includes("neet")) return false;
+    if (track === "neet" && p.label.toLowerCase().includes("jee")) return false;
+    return true;
+  });
+
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
@@ -23,7 +30,7 @@ export function SmartPrediction() {
       </div>
 
       <div className="space-y-3">
-        {AI_PREDICTIONS.map((p) => (
+        {filteredPredictions.map((p) => (
           <div
             key={p.label}
             className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3.5"
@@ -48,7 +55,29 @@ export function SmartPrediction() {
 // ─────────────────────────────────────────────────────────────────
 // AdaptiveLearning
 // ─────────────────────────────────────────────────────────────────
-export function AdaptiveLearning() {
+export function AdaptiveLearning({ track = "jee" }) {
+  const isNeet = track === "neet";
+  const weakSubject = isNeet ? "Genetics" : "Integration";
+
+  // Translate learning path nodes for context compliance
+  const filteredSteps = ADAPTIVE_STEPS.map((s) => {
+    if (!isNeet) return s;
+    let stepName = s.step;
+    let detailText = s.detail;
+
+    if (stepName.includes("Integration") || detailText.includes("integral")) {
+      stepName = stepName.replace("Integration", "Genetics");
+      detailText = "Mendelian cross principles · Easy · 10 Qs";
+    }
+    if (detailText.includes("IBP method")) {
+      detailText = "Linkage & recombination drills · Medium · 15 Qs";
+    }
+    if (detailText.includes("JEE")) {
+      detailText = detailText.replace("JEE", "NEET");
+    }
+    return { ...s, step: stepName, detail: detailText };
+  });
+
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm flex flex-col">
       <div className="flex items-center gap-2 mb-1">
@@ -60,11 +89,11 @@ export function AdaptiveLearning() {
         </span>
       </div>
       <p className="text-xs text-gray-400 mb-4">
-        You're weak in <span className="font-bold text-black dark:text-white">Integration</span>. Auto-adapted path:
+        You're weak in <span className="font-bold text-black dark:text-white">{weakSubject}</span>. Auto-adapted path:
       </p>
 
       <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">
-        {ADAPTIVE_STEPS.map((s) => (
+        {filteredSteps.map((s) => (
           <div key={s.step} className="flex items-start gap-3 py-2.5">
             <div
               className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"
@@ -79,9 +108,8 @@ export function AdaptiveLearning() {
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        className="mt-4 w-full py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
         onClick={() => {
-          // In production: router.push('/test/session?subject=Maths&chapter=Calculus&topic=Integration&mode=adaptive')
           alert("Redirecting to adaptive practice session…");
         }}
       >
@@ -94,7 +122,22 @@ export function AdaptiveLearning() {
 // ─────────────────────────────────────────────────────────────────
 // AIStudyPlanner
 // ─────────────────────────────────────────────────────────────────
-export function AIStudyPlanner() {
+export function AIStudyPlanner({ track = "jee" }) {
+  const isNeet = track === "neet";
+
+  // Filter daily objectives without row drift
+  const filteredTasks = DAILY_TASKS.map((t) => {
+    if (!isNeet) return t;
+    let taskName = t.task;
+    if (taskName.toLowerCase().includes("integration")) {
+      taskName = "Revise Genetics linkage charts";
+    }
+    if (taskName.toLowerCase().includes("physics mini")) {
+      taskName = "Biology structural mock test";
+    }
+    return { ...t, task: taskName };
+  });
+
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm flex flex-col">
       <div className="flex items-center gap-2 mb-4">
@@ -111,7 +154,7 @@ export function AIStudyPlanner() {
       </p>
 
       <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">
-        {DAILY_TASKS.map((t) => (
+        {filteredTasks.map((t) => (
           <div key={t.task} className="flex items-start gap-3 py-2.5">
             <div
               className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"
@@ -126,9 +169,8 @@ export function AIStudyPlanner() {
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity"
+        className="mt-4 w-full py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
         onClick={() => {
-          // In production: call your AI API route to generate a weekly schedule
           alert("Generating your full weekly schedule with AI…");
         }}
       >
@@ -148,7 +190,14 @@ const REC_CLASS = {
   info:    "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800",
 };
 
-export function AIRecommendations() {
+export function AIRecommendations({ track = "jee" }) {
+  // Isolate insight blocks cleanly to their respective tracks
+  const filteredRecs = AI_RECOMMENDATIONS.filter((r) => {
+    if (track === "jee" && (r.title.toLowerCase().includes("genetics") || r.body.toLowerCase().includes("neet"))) return false;
+    if (track === "neet" && (r.title.toLowerCase().includes("integration") || r.body.toLowerCase().includes("jee"))) return false;
+    return true;
+  });
+
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
@@ -161,7 +210,7 @@ export function AIRecommendations() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-        {AI_RECOMMENDATIONS.map((r) => (
+        {filteredRecs.map((r) => (
           <div
             key={r.title}
             className="bg-gray-50 dark:bg-gray-800/60 rounded-xl p-4"
@@ -180,9 +229,8 @@ export function AIRecommendations() {
       </div>
 
       <button
-        className="w-full py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity"
+        className="w-full py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
         onClick={() => {
-          // In production: call your AI API route, stream the response into a modal or new page
           alert("Opening AI study plan generator…");
         }}
       >

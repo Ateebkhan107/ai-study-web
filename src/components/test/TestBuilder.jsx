@@ -56,10 +56,10 @@ const colorMap = {
   rose:   { bg: "bg-rose-50 dark:bg-rose-950/30",      border: "border-rose-200 dark:border-rose-800",      text: "text-rose-700 dark:text-rose-300",      chip: "bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700" },
 };
 
-export default function TestBuilder() {
+// 1. Accept the track prop coming from page.js (defaults to "jee" for fallback safety)
+export default function TestBuilder({ track = "jee" }) {
   const router = useRouter();
 
-  // 1. Give them empty/normal values to start so the server is happy
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedChapters, setSelectedChapters] = useState({});
   const [duration, setDuration] = useState(30);
@@ -67,7 +67,16 @@ export default function TestBuilder() {
   const [difficulty, setDifficulty] = useState("mixed");
   const [expandedSubject, setExpandedSubject] = useState(null);
 
-  // 2. Wait until the page is fully drawn on the screen, THEN check memory!
+  // Normalize track data context
+  const activeTrack = track?.toLowerCase() || "jee";
+
+  // 2. Intercept and isolate target track subjects
+  const filteredSubjectsEntries = Object.entries(SUBJECTS).filter(([name]) => {
+    if (activeTrack === "jee" && name === "Biology") return false;
+    if (activeTrack === "neet" && name === "Maths") return false;
+    return true;
+  });
+
   useEffect(() => {
     try {
       const savedSubjects = sessionStorage.getItem("tb_subjects");
@@ -87,9 +96,8 @@ export default function TestBuilder() {
     } catch (error) {
       console.log("No saved data found, starting fresh!");
     }
-  }, []); // The empty [] means "only do this once when the page loads"
+  }, []);
 
-  // Save to sessionStorage whenever state changes
   const saveSubjects = (val) => {
     setSelectedSubjects(val);
     sessionStorage.setItem("tb_subjects", JSON.stringify(val));
@@ -159,7 +167,6 @@ export default function TestBuilder() {
       difficulty,
       mode: "custom",
     });
-    // Clear saved state so next visit starts fresh
     sessionStorage.removeItem("tb_subjects");
     sessionStorage.removeItem("tb_chapters");
     sessionStorage.removeItem("tb_duration");
@@ -174,21 +181,22 @@ export default function TestBuilder() {
       {/* Left — Subject + Chapter Picker */}
       <div className="lg:col-span-2 space-y-5">
 
-        {/* Step 1 — Subject selector (multi-select) */}
+        {/* Step 1 — Subject selector */}
         <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
           <p className="text-xs text-gray-400 mb-4">You can select multiple subjects</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {Object.entries(SUBJECTS).map(([name, data]) => {
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {/* 3. Changed map target from "Object.entries(SUBJECTS)" to your filtered array */}
+            {filteredSubjectsEntries.map(([name, data]) => {
               const c = colorMap[data.color];
               const isSelected = selectedSubjects.includes(name);
               return (
                 <button
                   key={name}
                   onClick={() => toggleSubject(name)}
-                  className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
+                  className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm cursor-pointer
                     ${isSelected
                       ? `${c.bg} ${c.border} ${c.text}`
                       : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/40"
@@ -209,7 +217,7 @@ export default function TestBuilder() {
           </div>
         </div>
 
-        {/* Step 2 — Chapter selector (one accordion per selected subject) */}
+        {/* Step 2 — Chapter selector */}
         <div className={`space-y-3 transition-all duration-300 ${selectedSubjects.length === 0 ? "opacity-50 pointer-events-none" : ""}`}>
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">
             02 — Choose Chapters
@@ -218,6 +226,8 @@ export default function TestBuilder() {
 
           {selectedSubjects.map((subject) => {
             const data = SUBJECTS[subject];
+            if (!data) return null; // Defensive safety line
+
             const c = colorMap[data.color];
             const chapters = selectedChapters[subject] || [];
             const isExpanded = expandedSubject === subject;
@@ -228,7 +238,6 @@ export default function TestBuilder() {
                 key={subject}
                 className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden"
               >
-                {/* Accordion header — div instead of button to avoid nested button error */}
                 <div
                   onClick={() => setExpandedSubject(isExpanded ? null : subject)}
                   className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer select-none"
@@ -257,7 +266,6 @@ export default function TestBuilder() {
                   </div>
                 </div>
 
-                {/* Chapters list */}
                 {isExpanded && (
                   <div className="px-5 pb-4 border-t border-gray-50 dark:border-gray-800 pt-3">
                     <div className="flex flex-wrap gap-2">
@@ -267,7 +275,7 @@ export default function TestBuilder() {
                           <button
                             key={chapter}
                             onClick={() => toggleChapter(subject, chapter)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-100
+                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-100 cursor-pointer
                               ${isChapterSelected
                                 ? c.chip
                                 : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
@@ -299,7 +307,7 @@ export default function TestBuilder() {
               <button
                 key={n}
                 onClick={() => saveCount(n)}
-                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100
+                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
                   ${questionCount === n
                     ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
                     : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
@@ -321,7 +329,7 @@ export default function TestBuilder() {
               <button
                 key={d}
                 onClick={() => saveDuration(d)}
-                className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100
+                className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
                   ${duration === d
                     ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
                     : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
@@ -343,7 +351,7 @@ export default function TestBuilder() {
               <button
                 key={d}
                 onClick={() => saveDifficulty(d)}
-                className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100
+                className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100 cursor-pointer
                   ${difficulty === d
                     ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
                     : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
@@ -374,7 +382,7 @@ export default function TestBuilder() {
                 <div className="flex flex-wrap gap-1.5">
                   {selectedSubjects.map((s) => (
                     <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black">
-                      {SUBJECTS[s].icon} {s}
+                      {SUBJECTS[s]?.icon} {s}
                     </span>
                   ))}
                 </div>
@@ -387,7 +395,7 @@ export default function TestBuilder() {
               </div>
               <button
                 onClick={handleStart}
-                className="w-full py-3 rounded-xl bg-white dark:bg-black text-black dark:text-white text-sm font-black hover:opacity-90 transition-opacity"
+                className="w-full py-3 rounded-xl bg-white dark:bg-black text-black dark:text-white text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Start Test →
               </button>

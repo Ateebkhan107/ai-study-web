@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -36,67 +36,21 @@ const I = {
   Sparkles:     (p) => <Svg {...p}><path d="M12 3 9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5z"/></Svg>,
 };
 
-// ─── Theme-aware class helpers ─────────────────────────────────────────────────
-const BG_PAGE    = "bg-gray-50    dark:bg-transparent";   
-const BG_SURFACE = "bg-white      dark:bg-gray-900/40 backdrop-blur-md"; // Set back to Test page style!
+// ─── Theme CSS Token Configs ──────────────────────────────────────────────────
+const BG_SURFACE = "bg-white      dark:bg-gray-900/40 backdrop-blur-md";
 const BG_SUNKEN  = "bg-gray-100   dark:bg-gray-950/50";     
-
 const BORDER     = "border-gray-200  dark:border-gray-800/60";
 const BORDER_HV  = "hover:border-gray-300 dark:hover:border-gray-700";
-
 const TXT        = "text-gray-900  dark:text-[#e6edf3]";
 const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
 const TXT_DIM    = "text-gray-400  dark:text-[#7d8590]/60";
-
-const SURFACE_HV = `hover:bg-gray-100 dark:hover:bg-gray-950/40`;
-
-const ACTIVE_PILL      = "bg-gray-900 text-white dark:bg-white dark:text-[#0d1117]";
-const ACTIVE_PILL_HV   = "hover:bg-gray-800 dark:hover:bg-[#e6edf3]";
-const INACTIVE_PILL    = `border ${BORDER} ${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] ${BORDER_HV}`;
-
-const SELECTED_BORDER  = "border-gray-900 dark:border-white";
-const SELECTED_BG      = "bg-gray-900/5 dark:bg-white/5";
-
-// ─── Mock Data ────────────────────────────────────────────────────────────────
-const SUBJECTS = [
-  { id: "physics",      label: "Physics",   emoji: "⚛️",  count: 1240 },
-  { id: "chemistry",    label: "Chemistry", emoji: "🧪",  count: 980  },
-  { id: "mathematics",  label: "Maths",     emoji: "∑",   count: 1560 },
-  { id: "biology",      label: "Biology",   emoji: "🧬",  count: 870  },
-];
-
-const YEARS = [2024,2023,2022,2021,2020,2019,2018,2017,2016,2015];
-
-const RECENT_ACTIVITY = [
-  { subject: "Physics",     topic: "Electromagnetic Waves", year: 2023, score: 78, time: "2h ago"    },
-  { subject: "Chemistry",   topic: "Organic Reactions",     year: 2022, score: 85, time: "Yesterday" },
-  { subject: "Mathematics", topic: "Integral Calculus",     year: 2023, score: 62, time: "2d ago"    },
-];
-
-const SAVED_QUESTIONS = [
-  { id: 1, subject: "Physics",     topic: "Optics",           year: 2023, difficulty: "Medium",
-    question: "A ray of light passes from air to glass at an angle of incidence 45°. Find the angle of refraction..." },
-  { id: 2, subject: "Chemistry",   topic: "Electrochemistry", year: 2022, difficulty: "Hard",
-    question: "Calculate the EMF of the cell: Zn | Zn²⁺(0.1M) || Cu²⁺(0.01M) | Cu at 298K..." },
-  { id: 3, subject: "Mathematics", topic: "Probability",      year: 2021, difficulty: "Easy",
-    question: "A bag contains 5 red and 3 blue balls. Two balls are drawn at random. Find the probability..." },
-];
-
-const ANALYTICS_DATA = {
-  bySubject: [
-    { subject: "Physics",     attempted: 98,  accuracy: 74, color: "#3b82f6" },
-    { subject: "Chemistry",   attempted: 86,  accuracy: 68, color: "#a855f7" },
-    { subject: "Mathematics", attempted: 112, accuracy: 79, color: "#06b6d4" },
-    { subject: "Biology",     attempted: 46,  accuracy: 61, color: "#10b981" },
-  ],
-};
-
+const SURFACE_HV = "hover:bg-gray-100 dark:hover:bg-gray-950/40";
+const ACTIVE_PILL = "bg-gray-900 text-white dark:bg-white dark:text-[#0d1117]";
 const DIFFICULTY_BADGE = {
   Easy:   "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
   Medium: "bg-amber-500/10   text-amber-600   dark:text-amber-400   border border-amber-500/20",
   Hard:   "bg-rose-500/10    text-rose-600    dark:text-rose-400    border border-rose-500/20",
 };
-
 const TABS = [
   { id: "explore",   label: "Explore",   Icon: I.Layers    },
   { id: "practice",  label: "Practice",  Icon: I.Target    },
@@ -104,31 +58,50 @@ const TABS = [
   { id: "saved",     label: "Saved",     Icon: I.Bookmark  },
 ];
 
-// ─── Shared Components ────────────────────────────────────────────────────────
+// ─── Multi-Tenant Core Blueprints ──────────────────────────────────────────
+const MASTER_SUBJECTS = [
+  { id: "physics",      label: "Physics",   emoji: "⚛️",  count: 1240, tracks: ["jee", "neet"] },
+  { id: "chemistry",    label: "Chemistry", emoji: "🧪",  count: 980,  tracks: ["jee", "neet"] },
+  { id: "mathematics",  label: "Maths",     emoji: "∑",   count: 1560, tracks: ["jee"] },
+  { id: "biology",      label: "Biology",   emoji: "🧬",  count: 1740, tracks: ["neet"] },
+];
 
-// Translucent, background-reactive glass structure matching the Test page look
+const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
+
+const MASTER_RECENT = [
+  { subject: "Physics",     topic: "Electromagnetic Waves", year: 2025, score: 78, time: "2h ago", track: "jee" },
+  { subject: "Biology",     topic: "Genetics & Inheritance",year: 2026, score: 92, time: "3h ago", track: "neet" },
+  { subject: "Chemistry",   topic: "Organic Reactions",     year: 2024, score: 85, time: "Yesterday", track: "mixed" },
+  { subject: "Mathematics", topic: "Integral Calculus",     year: 2025, score: 62, time: "2d ago", track: "jee" },
+];
+
+const MASTER_SAVED = [
+  { id: 1, subject: "Physics",     topic: "Optics",           year: 2025, difficulty: "Medium", track: "mixed", question: "A ray of light passes from air to glass at an angle of incidence 45°. Find the angle of refraction..." },
+  { id: 2, subject: "Chemistry",   topic: "Electrochemistry", year: 2024, difficulty: "Hard", track: "mixed", question: "Calculate the EMF of the cell: Zn | Zn²⁺(0.1M) || Cu²⁺(0.01M) | Cu at 298K..." },
+  { id: 3, subject: "Mathematics", topic: "Probability",      year: 2023, difficulty: "Easy", track: "jee", question: "A bag contains 5 red and 3 blue balls. Two balls are drawn at random. Find the probability..." },
+  { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard", track: "neet", question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
+];
+
+const MASTER_ANALYTICS = [
+  { subject: "Physics",     attempted: 98,  accuracy: 74, color: "#3b82f6", track: "mixed" },
+  { subject: "Chemistry",   attempted: 86,  accuracy: 68, color: "#a855f7", track: "mixed" },
+  { subject: "Mathematics", attempted: 112, accuracy: 79, color: "#06b6d4", track: "jee" },
+  { subject: "Biology",     attempted: 146, accuracy: 82, color: "#10b981", track: "neet" },
+];
+
+// ─── Shared Atomic Components ────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
     <div className={`group relative border ${BORDER} ${BG_SURFACE} p-5 rounded-2xl ${BORDER_HV} transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg`}>
       <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex items-center justify-between mb-3">
-          <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>
-            {label}
-          </p>
-          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}>
-            <IconComp size={18} />
-          </div>
+          <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>{label}</p>
+          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}><IconComp size={18} /></div>
         </div>
-
         <div>
-          <p className={`text-2xl sm:text-3xl font-black tracking-tight ${TXT} mb-0.5`}>
-            {value}
-          </p>
-          <p className={`text-[11px] font-semibold ${TXT_MUTED} truncate`}>
-            {sublabel}
-          </p>
+          <p className={`text-2xl sm:text-3xl font-black tracking-tight ${TXT} mb-0.5`}>{value}</p>
+          <p className={`text-[11px] font-semibold ${TXT_MUTED} truncate`}>{sublabel}</p>
         </div>
       </div>
     </div>
@@ -139,71 +112,60 @@ function ToggleChip({ label, active, onClick, count }) {
   return (
     <button onClick={onClick}
       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all whitespace-nowrap ${
-        active
-          ? "bg-[#1f6feb] text-white border-[#1f6feb]"
-          : `bg-transparent ${TXT_MUTED} ${BORDER} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
+        active ? "bg-sky-500 text-white border-sky-500" : `bg-transparent ${TXT_MUTED} ${BORDER} ${BORDER_HV}`
       }`}>
       {label}
-      {count !== undefined && (
-        <span className={`text-xs ${active ? "text-blue-200" : TXT_MUTED}`}>{count.toLocaleString()}</span>
-      )}
+      {count !== undefined && <span className={`text-xs ${active ? "text-sky-100" : TXT_MUTED}`}>{count.toLocaleString()}</span>}
     </button>
   );
 }
 
-// ─── Explore Tab ──────────────────────────────────────────────────────────────
-function ExploreTab({ onSwitchTab }) {
+// ─── Tab-Specific Layout Engines ──────────────────────────────────────────────
+function ExploreTab({ onSwitchTab, track, subjects, recentActivity }) {
   const [activeSubject, setActiveSubject] = useState(null);
+  const totalCount = subjects.reduce((acc, curr) => acc + curr.count, 0);
 
   return (
     <div className="space-y-5">
-      {/* Browse by Subject */}
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
         <div className="flex items-center justify-between mb-5">
           <div>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-1`}>01 — BROWSE SUBJECTS</p>
-            <p className={`${TXT_MUTED} text-sm`}>Select a subject to explore questions</p>
+            <p className={`${TXT_MUTED} text-sm`}>Select an active syllabus block to explore queries</p>
           </div>
-          <button className="text-xs text-[#1f6feb] hover:underline font-medium">View all</button>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-5">
-          <ToggleChip label="All Subjects" count={5290} active={activeSubject === null} onClick={() => setActiveSubject(null)} />
-          {SUBJECTS.map(s => (
-            <ToggleChip key={s.id} label={s.label} count={s.count}
-              active={activeSubject === s.id}
-              onClick={() => setActiveSubject(activeSubject === s.id ? null : s.id)} />
+          <ToggleChip label="All Subjects" count={totalCount} active={activeSubject === null} onClick={() => setActiveSubject(null)} />
+          {subjects.map(s => (
+            <ToggleChip key={s.id} label={s.label} count={s.count} active={activeSubject === s.id} onClick={() => setActiveSubject(activeSubject === s.id ? null : s.id)} />
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {SUBJECTS.filter(s => !activeSubject || s.id === activeSubject).map(s => (
-            <button key={s.id}
-              className={`group flex flex-col items-center gap-3 p-5 rounded-xl border ${BORDER} ${BG_SUNKEN} hover:border-[#1f6feb]/60 hover:bg-[#1f6feb]/5 transition-all text-center`}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {subjects.filter(s => !activeSubject || s.id === activeSubject).map(s => (
+            <button key={s.id} className={`group flex flex-col items-center gap-3 p-5 rounded-xl border ${BORDER} ${BG_SUNKEN} hover:border-sky-500/60 hover:bg-sky-500/5 transition-all text-center cursor-pointer`}>
               <span className="text-3xl">{s.emoji}</span>
               <div>
                 <p className={`text-sm font-semibold ${TXT}`}>{s.label}</p>
-                <p className={`text-xs ${TXT_MUTED} mt-0.5`}>{s.count.toLocaleString()} Qs</p>
+                <p className={`text-xs ${TXT_MUTED} mt-0.5`}>{s.count.toLocaleString()} Questions</p>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Two-col: Quick Actions + Recent */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {/* Quick Actions */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — QUICK ACTIONS</p>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { Icon: I.Zap,      title: "Quick Practice", desc: "10 random PYQs", tab: "practice",  accent: "#1f6feb" },
-              { Icon: I.Clock,    title: "Timed Mock",     desc: "Beat the clock", tab: "practice",  accent: "#a855f7" },
-              { Icon: I.Brain,    title: "Weak Areas",     desc: "AI-curated Qs",  tab: "analytics", accent: "#06b6d4" },
-              { Icon: I.Bookmark, title: "Saved Set",      desc: "Your bookmarks", tab: "saved",     accent: "#10b981" },
+              { Icon: I.Zap,      title: "Quick Practice", desc: "10 Random Qs", tab: "practice",  accent: "#3b82f6" },
+              { Icon: I.Clock,    title: "Timed Sprint",   desc: "Beat the clock", tab: "practice",  accent: "#a855f7" },
+              { Icon: I.Brain,    title: "Weak Chapters",  desc: "AI Targeted Qs", tab: "analytics", accent: "#06b6d4" },
+              { Icon: I.Bookmark, title: "Revision Deck",   desc: "Your bookmarks", tab: "saved",     accent: "#10b981" },
             ].map(item => (
-              <button key={item.title} onClick={() => onSwitchTab(item.tab)}
-                className={`group text-left p-4 rounded-xl border ${BORDER} ${BG_SUNKEN} ${BORDER_HV} ${SURFACE_HV} transition-all`}>
+              <button key={item.title} onClick={() => onSwitchTab(item.tab)} className={`group text-left p-4 rounded-xl border ${BORDER} ${BG_SUNKEN} ${BORDER_HV} ${SURFACE_HV} transition-all cursor-pointer`}>
                 <item.Icon size={18} style={{ color: item.accent }} className="mb-2.5" />
                 <p className={`text-sm font-semibold ${TXT}`}>{item.title}</p>
                 <p className={`text-xs ${TXT_MUTED} mt-0.5`}>{item.desc}</p>
@@ -212,49 +174,37 @@ function ExploreTab({ onSwitchTab }) {
           </div>
         </div>
 
-        {/* Recent Activity */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
           <div className="flex items-center justify-between mb-4">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>03 — RECENT ACTIVITY</p>
-            <button className="text-xs text-[#1f6feb] hover:underline font-medium">See all</button>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>03 — RECENT SESSIONS</p>
           </div>
-          {RECENT_ACTIVITY.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-10 text-center">
-              <I.GraduationCap size={28} className={`${TXT_MUTED} mb-2`} />
-              <p className={`text-sm ${TXT_MUTED}`}>No activity yet</p>
-              <p className={`text-xs ${TXT_DIM} mt-1`}>Start practicing to see history</p>
-            </div>
-          ) : (
-            <div className="space-y-1">
-              {RECENT_ACTIVITY.map((item, i) => {
-                const scoreColor = item.score >= 80 ? "text-emerald-500 dark:text-emerald-400" : item.score >= 60 ? "text-amber-500 dark:text-amber-400" : "text-rose-500 dark:text-rose-400";
-                return (
-                  <div key={i} className={`flex items-center gap-3 p-3 rounded-xl ${SURFACE_HV} transition-colors cursor-pointer`}>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-medium ${TXT} truncate`}>{item.topic}</p>
-                      <p className={`text-xs ${TXT_MUTED}`}>{item.subject} · JEE {item.year}</p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <p className={`text-sm font-bold ${scoreColor}`}>{item.score}%</p>
-                      <p className={`text-xs ${TXT_MUTED}`}>{item.time}</p>
-                    </div>
-                    <I.ChevronRight size={13} className={`${TXT_MUTED} shrink-0`} />
+          <div className="space-y-1">
+            {recentActivity.map((item, i) => {
+              const scoreColor = item.score >= 80 ? "text-emerald-400" : item.score >= 60 ? "text-amber-400" : "text-rose-400";
+              return (
+                <div key={i} className={`flex items-center gap-3 p-3 rounded-xl ${SURFACE_HV} transition-colors cursor-pointer`}>
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm font-medium ${TXT} truncate`}>{item.topic}</p>
+                    <p className={`text-xs ${TXT_MUTED}`}>{item.subject} · {track.toUpperCase()} Archive {item.year}</p>
                   </div>
-                );
-              })}
-            </div>
-          )}
+                  <div className="text-right shrink-0">
+                    <p className={`text-sm font-bold ${scoreColor}`}>{item.score}%</p>
+                    <p className={`text-xs ${TXT_MUTED}`}>{item.time}</p>
+                  </div>
+                  <I.ChevronRight size={13} className={`${TXT_MUTED}`} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Browse by Year */}
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — BROWSE BY YEAR</p>
+        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — ARCHIVES BY YEAR</p>
         <div className="flex flex-wrap gap-2">
           {YEARS.map(year => (
-            <button key={year}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium border ${BORDER} ${TXT_MUTED} hover:border-[#1f6feb]/60 hover:text-gray-700 dark:hover:text-[#e6edf3] hover:bg-[#1f6feb]/5 transition-all`}>
-              {year}
+            <button key={year} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium border ${BORDER} ${TXT_MUTED} hover:border-sky-500 hover:text-white hover:bg-sky-500/5 transition-all cursor-pointer`}>
+              {track.toUpperCase()} {year}
             </button>
           ))}
         </div>
@@ -263,8 +213,7 @@ function ExploreTab({ onSwitchTab }) {
   );
 }
 
-// ─── Practice Tab ─────────────────────────────────────────────────────────────
-function PracticeTab() {
+function PracticeTab({ subjects }) {
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedYears,    setSelectedYears]    = useState([]);
   const [difficulty,       setDifficulty]       = useState("Mixed");
@@ -274,35 +223,16 @@ function PracticeTab() {
   const toggleSubject = id => setSelectedSubjects(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]);
   const toggleYear    = yr => setSelectedYears(p => p.includes(yr) ? p.filter(y => y !== yr) : [...p, yr]);
 
-  const summaryText = [
-    selectedSubjects.length ? selectedSubjects.join(", ") : "All subjects",
-    selectedYears.length    ? selectedYears.sort().join(", ") : "All years",
-    `${questionsCount} questions`,
-    difficulty,
-  ].join(" · ");
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5">
-
-      {/* Left: builder */}
       <div className="space-y-4">
-
-        {/* Step 01 — Subjects */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <div className="mb-4">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>01 — CHOOSE SUBJECTS</p>
-            <p className={`text-xs ${TXT_MUTED} mt-1`}>You can select multiple subjects</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {SUBJECTS.map(s => {
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {subjects.map(s => {
               const active = selectedSubjects.includes(s.id);
               return (
-                <button key={s.id} onClick={() => toggleSubject(s.id)}
-                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all ${
-                    active
-                      ? `${SELECTED_BORDER} ${SELECTED_BG} ${TXT}`
-                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
-                  }`}>
+                <button key={s.id} onClick={() => toggleSubject(s.id)} className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${active ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`}`}>
                   <span className="text-2xl">{s.emoji}</span>
                   <span className="text-sm font-semibold">{s.label}</span>
                 </button>
@@ -311,114 +241,59 @@ function PracticeTab() {
           </div>
         </div>
 
-        {/* Step 02 — Year */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>02 — CHOOSE YEAR</p>
-              <p className={`text-xs ${TXT_MUTED} mt-1`}>Leave blank for all years</p>
-            </div>
-            {selectedYears.length > 0 && (
-              <button onClick={() => setSelectedYears([])}
-                className={`text-xs ${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] border ${BORDER} rounded-lg px-3 py-1.5 transition-colors`}>
-                Clear
-              </button>
-            )}
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>02 — SELECT YEAR BULLETINS</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {YEARS.map(yr => (
-              <button key={yr} onClick={() => toggleYear(yr)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
-                  selectedYears.includes(yr)
-                    ? `${SELECTED_BORDER} ${SELECTED_BG} ${TXT}`
-                    : `${BORDER} ${TXT_MUTED} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
-                }`}>
+              <button key={yr} onClick={() => toggleYear(yr)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${selectedYears.includes(yr) ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${TXT_MUTED}`}`}>
                 {yr}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Step 03 — Mode */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — PRACTICE MODE</p>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — MODULE METHODOLOGY</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { id: "tutor", label: "Tutor Mode",  desc: "Feedback after each Q",   Icon: I.GraduationCap },
-              { id: "timed", label: "Timed Mode",  desc: "Race against the clock",  Icon: I.Clock         },
-              { id: "exam",  label: "Exam Mode",   desc: "No hints, full simulate", Icon: I.Trophy        },
+              { id: "tutor", label: "Interactive Tutor", desc: "Instant evaluation metrics", Icon: I.GraduationCap },
+              { id: "timed", label: "Timed Sprint",      desc: "Simulate pressure boundaries", Icon: I.Clock },
+              { id: "exam",  label: "Absolute Exam",     desc: "Blind results calculation",   Icon: I.Trophy },
             ].map(m => (
-              <button key={m.id} onClick={() => setMode(m.id)}
-                className={`flex flex-col gap-2 p-4 rounded-xl border text-left transition-all ${
-                  mode === m.id
-                    ? `${SELECTED_BORDER} ${SELECTED_BG}`
-                    : `${BORDER} ${BG_SUNKEN} ${BORDER_HV}`
-                }`}>
-                <m.Icon size={18} className={mode === m.id ? TXT : TXT_MUTED} />
-                <p className={`text-sm font-semibold ${mode === m.id ? TXT : TXT_MUTED}`}>{m.label}</p>
-                <p className={`text-xs ${TXT_MUTED}`}>{m.desc}</p>
+              <button key={m.id} onClick={() => setMode(m.id)} className={`flex flex-col gap-2 p-4 rounded-xl border text-left transition-all cursor-pointer ${mode === m.id ? "border-sky-500 bg-sky-500/5" : `${BORDER} ${BG_SUNKEN}`}`}>
+                <m.Icon size={18} className={mode === m.id ? "text-sky-400" : TXT_MUTED} />
+                <p className="text-sm font-semibold">{m.label}</p>
+                <p className="text-xs text-gray-400">{m.desc}</p>
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Right: config sidebar */}
       <div className="space-y-4">
-
-        {/* Questions */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>QUESTIONS</p>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>QUANTITY</p>
           <div className="flex flex-wrap gap-2">
-            {[10, 20, 30, 40, 50].map(n => (
-              <button key={n} onClick={() => setQuestionsCount(n)}
-                className={`w-12 h-10 rounded-lg text-sm font-medium border transition-all ${
-                  questionsCount === n
-                    ? `${SELECTED_BORDER} ${ACTIVE_PILL} font-bold`
-                    : `${BORDER} ${TXT_MUTED} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
-                }`}>
-                {n}
-              </button>
+            {[10, 20, 30, 50].map(n => (
+              <button key={n} onClick={() => setQuestionsCount(n)} className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all cursor-pointer ${questionsCount === n ? "bg-white text-black border-white shadow-sm" : `${BORDER} ${TXT_MUTED}`}`}>{n}</button>
             ))}
           </div>
         </div>
 
-        {/* Difficulty */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>DIFFICULTY</p>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>DIFFICULTY CRITERIA</p>
           <div className="space-y-2">
-            {["Easy", "Medium", "Hard", "Mixed"].map((d, idx) => {
-              const dots = idx === 0 ? 1 : idx === 1 ? 2 : 3;
-              const active = difficulty === d;
-              return (
-                <button key={d} onClick={() => setDifficulty(d)}
-                  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                    active
-                      ? `${SELECTED_BORDER} ${SELECTED_BG} ${TXT}`
-                      : `${BORDER} ${TXT_MUTED} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
-                  }`}>
-                  {d}
-                  <span className="flex gap-0.5">
-                    {Array.from({ length: d === "Mixed" ? 3 : dots }).map((_, i) => (
-                      <span key={i} className={`w-2 h-2 rounded-full ${active ? "bg-gray-900 dark:bg-[#e6edf3]" : "bg-gray-300 dark:bg-[#30363d]"}`} />
-                    ))}
-                  </span>
-                </button>
-              );
-            })}
+            {["Easy", "Medium", "Hard", "Mixed"].map((d) => (
+              <button key={d} onClick={() => setDifficulty(d)} className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${difficulty === d ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${TXT_MUTED}`}`}>{d}</button>
+            ))}
           </div>
         </div>
 
-        {/* Start CTA */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 space-y-3`}>
-          <p className={`text-xs ${TXT_MUTED} leading-relaxed`}>{summaryText}</p>
-          <button className={`w-full flex items-center justify-center gap-2 ${ACTIVE_PILL} font-bold py-3 rounded-xl ${ACTIVE_PILL_HV} transition-colors text-sm`}>
-            <I.Play size={14} />
-            Start Practice
-          </button>
-          <button className={`w-full flex items-center justify-center gap-2 border ${BORDER} ${TXT_MUTED} font-medium py-2.5 rounded-xl ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3] transition-colors text-sm`}>
-            <I.Zap size={14} />
-            Quick Start (random)
+          <button className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
+            <I.Play size={14} /> Start Focused Deck
           </button>
         </div>
       </div>
@@ -426,40 +301,32 @@ function PracticeTab() {
   );
 }
 
-// ─── Analytics Tab ────────────────────────────────────────────────────────────
-function AnalyticsTab() {
+function AnalyticsTab({ track, analyticsData }) {
+  const isNeet = track === "neet";
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { Icon: I.Target,       label: "Total Attempted",  value: "342",  sublabel: "Questions",    accent: "#1f6feb" },
-          { Icon: I.CheckCircle2, label: "Overall Accuracy", value: "71%",  sublabel: "Correct rate", accent: "#10b981" },
-          { Icon: I.Flame,        label: "Study Streak",     value: "12d",  sublabel: "Keep it up!",  accent: "#f59e0b" },
-          { Icon: I.Clock,        label: "Time Spent",       value: "48h",  sublabel: "Total",        accent: "#a855f7" },
+          { Icon: I.Target,       label: "Attempted Run",    value: "342",  sublabel: "Questions Answered", accent: "#3b82f6" },
+          { Icon: I.CheckCircle2, label: "Accuracy Target",  value: "74%",  sublabel: "Correct Response",   accent: "#10b981" },
+          { Icon: I.Flame,        label: "Archive Streak",   value: "12d",  sublabel: "Daily Momentum",     accent: "#f59e0b" },
+          { Icon: I.Clock,        label: "Pacing Duration",  value: "48h",  sublabel: "Total System Time",  accent: "#a855f7" },
         ].map(s => <StatCard key={s.label} {...s} />)}
       </div>
 
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <div className="flex items-center justify-between mb-5">
-          <div>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-1`}>SUBJECT PERFORMANCE</p>
-            <p className={`text-xs ${TXT_MUTED}`}>Accuracy by subject</p>
-          </div>
-          <button className={`flex items-center gap-1.5 text-xs ${TXT_MUTED} border ${BORDER} rounded-lg px-3 py-1.5 ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3] transition-colors`}>
-            <I.Refresh size={11} /> Refresh
-          </button>
-        </div>
+        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
         <div className="space-y-5">
-          {ANALYTICS_DATA.bySubject.map(item => (
+          {analyticsData.map(item => (
             <div key={item.subject}>
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
                 <div className="flex items-center gap-3">
-                  <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
-                  <span className={`text-sm font-bold ${TXT}`}>{item.accuracy}%</span>
+                  <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} solved</span>
+                  <span className="text-sm font-bold">{item.accuracy}%</span>
                 </div>
               </div>
-              <div className="h-1.5 bg-gray-200 dark:bg-[#30363d] rounded-full overflow-hidden">
+              <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div className="h-full rounded-full" style={{ width: `${item.accuracy}%`, background: item.color }} />
               </div>
             </div>
@@ -469,22 +336,22 @@ function AnalyticsTab() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <I.Award size={18} className="text-amber-500 dark:text-amber-400 mb-3" />
-          <p className={`text-xs ${TXT_MUTED} uppercase tracking-widest font-semibold mb-1`}>Top Subject</p>
-          <p className={`text-xl font-bold ${TXT}`}>Mathematics</p>
-          <p className={`text-sm ${TXT_MUTED} mt-1`}>79% · 112 questions</p>
+          <I.Award size={18} className="text-amber-400 mb-3" />
+          <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
+          <p className="text-xl font-bold">{isNeet ? "Biology" : "Mathematics"}</p>
+          <p className="text-sm text-gray-500 mt-1">79% accuracy rating</p>
         </div>
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <I.TrendingUp size={18} className="text-blue-500 dark:text-blue-400 mb-3" />
-          <p className={`text-xs ${TXT_MUTED} uppercase tracking-widest font-semibold mb-1`}>Needs Work</p>
-          <p className={`text-xl font-bold ${TXT}`}>Biology</p>
-          <p className={`text-sm ${TXT_MUTED} mt-1`}>61% · 46 questions</p>
+          <I.TrendingUp size={18} className="text-blue-400 mb-3" />
+          <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
+          <p className="text-xl font-bold">Physics</p>
+          <p className="text-sm text-gray-500 mt-1">Target core concepts</p>
         </div>
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
-          <I.Sparkles size={18} className="text-emerald-500 dark:text-emerald-400 mb-3" />
-          <p className="text-xs text-emerald-600 dark:text-emerald-500/70 uppercase tracking-widest font-semibold mb-1">AI Insight</p>
-          <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
-            Focus on Organic Chemistry to boost your overall accuracy by ~5%
+          <I.Sparkles size={18} className="text-emerald-400 mb-3" />
+          <p className="text-xs text-emerald-500 uppercase tracking-widest font-semibold mb-1">AI Directives</p>
+          <p className="text-sm font-medium text-emerald-300">
+            {isNeet ? "Review Organic Chemistry pathways to unlock an incremental 15 marks." : "Solidify Vector Algebra formulas to accelerate mock tests speed parameters."}
           </p>
         </div>
       </div>
@@ -492,137 +359,114 @@ function AnalyticsTab() {
   );
 }
 
-// ─── Saved Tab ────────────────────────────────────────────────────────────────
-function SavedTab() {
-  const [filter, setFilter] = useState("all");
-  const subjects = ["all", ...new Set(SAVED_QUESTIONS.map(q => q.subject))];
-  const filtered = filter === "all" ? SAVED_QUESTIONS : SAVED_QUESTIONS.filter(q => q.subject === filter);
-
+function SavedTab({ track, savedQuestions }) {
   return (
     <div className="space-y-5">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <p className={`text-sm font-semibold ${TXT}`}>
-            Saved Questions <span className="text-[#1f6feb]">({SAVED_QUESTIONS.length})</span>
-          </p>
-          <p className={`text-xs ${TXT_MUTED} mt-0.5`}>Bookmarked questions for focused revision</p>
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          {subjects.map(s => (
-            <button key={s} onClick={() => setFilter(s)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize border transition-all ${
-                filter === s
-                  ? "bg-[#1f6feb] text-white border-[#1f6feb]"
-                  : `${BORDER} ${TXT_MUTED} ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3]`
-              }`}>
-              {s}
-            </button>
-          ))}
-        </div>
+      <div>
+        <h3 className="text-sm font-bold">Saved Revision Sets ({savedQuestions.length})</h3>
+        <p className="text-xs text-gray-400">Bookmarked papers filtered precisely to your active track syllabus bounds.</p>
       </div>
 
-      {filtered.length === 0 ? (
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-14 flex flex-col items-center text-center`}>
-          <I.BookMarked size={36} className={`${TXT_MUTED} mb-3`} />
-          <p className={`font-semibold ${TXT_MUTED}`}>No saved questions yet</p>
-          <p className={`text-sm ${TXT_DIM} mt-1 max-w-xs`}>Bookmark questions while practicing to build your revision set</p>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          {filtered.map(q => (
-            <div key={q.id}
-              className={`group rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-all`}>
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-2.5">
-                    <span className="text-xs font-semibold text-[#1f6feb] bg-[#1f6feb]/10 px-2 py-0.5 rounded-full border border-[#1f6feb]/20">
-                      {q.subject}
-                    </span>
-                    <span className={`text-xs ${TXT_MUTED}`}>{q.topic} · JEE {q.year}</span>
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[q.difficulty]}`}>
-                      {q.difficulty}
-                    </span>
-                  </div>
-                  <p className={`text-sm text-gray-600 dark:text-[#e6edf3]/80 line-clamp-2 leading-relaxed`}>{q.question}</p>
+      <div className="space-y-3">
+        {savedQuestions.map(q => (
+          <div key={q.id} className={`group rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-all`}>
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <span className="text-xs font-semibold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
+                    {q.subject}
+                  </span>
+                  <span className="text-xs text-gray-400">{q.topic} · {track.toUpperCase()} Archive {q.year}</span>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[q.difficulty]}`}>{q.difficulty}</span>
                 </div>
-                <div className="flex items-center gap-1 shrink-0">
-                  <button className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-lg hover:bg-[#1f6feb]/10 text-[#1f6feb]">
-                    <I.Play size={14} />
-                  </button>
-                  <button className={`p-2 rounded-lg hover:bg-rose-500/10 ${TXT_MUTED} hover:text-rose-500 dark:hover:text-rose-400 transition-colors`}>
-                    <I.Bookmark size={14} />
-                  </button>
-                </div>
+                <p className="text-sm text-gray-300 leading-relaxed">{q.question}</p>
               </div>
             </div>
-          ))}
-        </div>
-      )}
-
-      {filtered.length > 0 && (
-        <button className={`w-full py-3.5 rounded-2xl border border-dashed ${BORDER} ${TXT_MUTED} font-medium text-sm ${BORDER_HV} hover:text-gray-700 dark:hover:text-[#e6edf3] transition-colors flex items-center justify-center gap-2`}>
-          <I.Play size={14} />
-          Practice all {filtered.length} saved questions
-        </button>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
+// ─── Main Controller Page ───────────────────────────────────────────────────
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("explore");
+  const [track, setTrack] = useState("jee"); // Strict fallback baseline to prevent multi-track leaking
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
+      if (match && match[2]) {
+        const extractedTrack = match[2].toLowerCase();
+        // Force a strict binary conversion — if it isn't explicitly "neet", isolate it to "jee"
+        setTrack(extractedTrack === "neet" ? "neet" : "jee");
+      }
+    }
+  }, []);
+
+  // Filter content arrays strictly down to user track bounds
+  const filteredSubjects = MASTER_SUBJECTS.filter(s => s.tracks.includes(track));
+  const filteredRecent = MASTER_RECENT.filter(r => r.track === "mixed" || r.track === track);
+  const filteredSaved = MASTER_SAVED.filter(s => s.track === "mixed" || s.track === track);
+  const filteredAnalytics = MASTER_ANALYTICS.filter(a => a.track === "mixed" || a.track === track);
+
+  const totalQuestionBankCount = filteredSubjects.reduce((sum, s) => sum + s.count, 0);
 
   const PAGE_STATS = [
-    { Icon: I.BookOpen, label: "Question Bank",   value: "5,290", sublabel: "Across all subjects", accent: "#1f6feb" },
-    { Icon: I.Calendar, label: "Years Covered",   value: "10",    sublabel: "2015 – 2024",          accent: "#a855f7" },
-    { Icon: I.Target,   label: "Attempted",       value: "342",   sublabel: "Questions practiced",  accent: "#06b6d4" },
-    { Icon: I.Star,     label: "Saved Questions", value: "3",     sublabel: "In your collection",   accent: "#f59e0b" },
+    { Icon: I.BookOpen, label: "Question Vault", value: totalQuestionBankCount.toLocaleString(), sublabel: "Track Matched Qs", accent: "#3b82f6" },
+    { Icon: I.Calendar, label: "Index Matrix",   value: "10 Years",                 sublabel: "2017 – 2026 Bulletins", accent: "#a855f7" },
+    { Icon: I.Target,   label: "Solved Load",    value: "342 Sets",                  sublabel: "Practiced Units", accent: "#06b6d4" },
+    { Icon: I.Star,     label: "Revision Deck",  value: filteredSaved.length.toString(), sublabel: "Saved Bookmarks", accent: "#f59e0b" },
   ];
 
   return (
     <div className={`min-h-full ${TXT}`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-10">
 
-        {/* Page Header */}
+        {/* Dynamic Track Header */}
         <div className="mb-8">
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-2`}>PREVIOUS YEAR QUESTIONS</p>
-          <h1 className={`text-4xl font-extrabold ${TXT} tracking-tight`}>PYQ Practice</h1>
-          <p className={`${TXT_MUTED} mt-2 text-sm max-w-xl`}>
-            Practice real exam questions with AI-powered insights and performance tracking.
+          <div className="flex items-center gap-2 mb-1">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">PREVIOUS YEAR ENGINES</p>
+            <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border ${
+              track === "neet" ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-400" : "bg-purple-500/5 border-purple-500/20 text-purple-400"
+            }`}>
+              {track === "neet" ? "NEET UG Medical Core" : "IIT JEE Engineering Vault"}
+            </span>
+          </div>
+          <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">PYQ Practice</h1>
+          <p className="text-gray-400 mt-1 text-sm max-w-xl">
+            Analyze real past examination parameters with automated performance indicators.
           </p>
         </div>
 
-        {/* Stat Cards Row */}
+        {/* Dynamic Stats Row Displays */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {PAGE_STATS.map(s => <StatCard key={s.label} {...s} />)}
         </div>
 
-        {/* Tab Control */}
+        {/* Tab Selection Navigation Bar */}
         <div className="mb-6">
-          <div className={`inline-flex items-center ${BG_SURFACE} border ${BORDER} rounded-xl p-1 gap-1`}>
+          <div className="inline-flex items-center bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-xl p-1 gap-1">
             {TABS.map(tab => {
               const active = activeTab === tab.id;
               return (
                 <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
-                    active
-                      ? ACTIVE_PILL
-                      : `${TXT_MUTED} hover:text-gray-700 dark:hover:text-[#e6edf3] hover:bg-gray-100 dark:hover:bg-gray-950/40`
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 cursor-pointer ${
+                    active ? ACTIVE_PILL : `${TXT_MUTED} hover:text-gray-200 hover:bg-gray-800/40`
                   }`}>
-                  <tab.Icon size={14} />
-                  {tab.label}
+                  <tab.Icon size={14} /> {tab.label}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Tab Content */}
-        {activeTab === "explore"   && <ExploreTab onSwitchTab={setActiveTab} />}
-        {activeTab === "practice"  && <PracticeTab />}
-        {activeTab === "analytics" && <AnalyticsTab />}
-        {activeTab === "saved"     && <SavedTab />}
+        {/* Dynamic Tab Screen Panel Switcher */}
+        {activeTab === "explore"   && <ExploreTab onSwitchTab={setActiveTab} track={track} subjects={filteredSubjects} recentActivity={filteredRecent} />}
+        {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} />}
+        {activeTab === "analytics" && <AnalyticsTab track={track} analyticsData={filteredAnalytics} />}
+        {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
 
       </div>
     </div>

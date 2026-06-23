@@ -13,7 +13,7 @@ import {
 } from "@/lib/analyticsData";
 
 // ── shared Chart.js loader ──────────────────────────────────────
-function useChart(canvasId, buildConfig) {
+function useChart(canvasId, buildConfig, dependencies = []) {
   const chartRef = useRef(null);
   useEffect(() => {
     let chart;
@@ -36,7 +36,7 @@ function useChart(canvasId, buildConfig) {
     }
     return () => { if (chartRef.current) chartRef.current.destroy(); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, dependencies); // Hook responds immediately when track changes
 }
 
 const gridColor  = (dark) => dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
@@ -46,12 +46,20 @@ const basePlugin = { legend: { display: false } };
 // ─────────────────────────────────────────────────────────────────
 // PerformanceTrend — Line chart
 // ─────────────────────────────────────────────────────────────────
-export function PerformanceTrend() {
+export function PerformanceTrend({ track = "jee" }) {
+  // Isolate core sequence streams
+  const filteredSeries = PERFORMANCE_SERIES.filter((s) => {
+    const sub = s.subject.toLowerCase();
+    if (track === "jee" && sub === "biology") return false;
+    if (track === "neet" && (sub === "maths" || sub === "mathematics")) return false;
+    return true;
+  });
+
   useChart("perfTrendChart", (dark) => ({
     type: "line",
     data: {
       labels: PERFORMANCE_WEEKS,
-      datasets: PERFORMANCE_SERIES.map((s) => ({
+      datasets: filteredSeries.map((s) => ({
         label:           s.subject,
         data:            s.data,
         borderColor:     s.color,
@@ -75,16 +83,15 @@ export function PerformanceTrend() {
         },
       },
     },
-  }));
+  }), [track]);
 
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm h-full">
       <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
         Performance Trend
       </h2>
-      {/* Legend */}
       <div className="flex flex-wrap gap-3 mb-3">
-        {PERFORMANCE_SERIES.map((s) => (
+        {filteredSeries.map((s) => (
           <span key={s.subject} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
             <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: s.color }} />
             {s.subject}
@@ -92,7 +99,7 @@ export function PerformanceTrend() {
         ))}
       </div>
       <div className="relative h-56">
-        <canvas id="perfTrendChart" role="img" aria-label="Line chart showing weekly accuracy trends across Physics, Chemistry, Maths and Biology over 8 weeks">
+        <canvas id="perfTrendChart" role="img" aria-label="Line chart showing weekly accuracy trends">
           Performance trending upward across all subjects over 8 weeks.
         </canvas>
       </div>
@@ -103,14 +110,28 @@ export function PerformanceTrend() {
 // ─────────────────────────────────────────────────────────────────
 // SubjectDistribution — Donut + progress bars
 // ─────────────────────────────────────────────────────────────────
-export function SubjectDistribution() {
+export function SubjectDistribution({ track = "jee" }) {
+  const filteredDistribution = SUBJECT_DISTRIBUTION.filter((s) => {
+    const sub = s.subject.toLowerCase();
+    if (track === "jee" && sub === "biology") return false;
+    if (track === "neet" && (sub === "maths" || sub === "mathematics")) return false;
+    return true;
+  });
+
+  // Scale remaining segments proportionally to maintain exactly 100% donut weight
+  const totalPct = filteredDistribution.reduce((sum, item) => sum + item.pct, 0);
+  const scaledDistribution = filteredDistribution.map((item) => ({
+    ...item,
+    pct: Math.round((item.pct / totalPct) * 100),
+  }));
+
   useChart("subjectPieChart", () => ({
     type: "doughnut",
     data: {
-      labels: SUBJECT_DISTRIBUTION.map((s) => s.subject),
+      labels: scaledDistribution.map((s) => s.subject),
       datasets: [{
-        data: SUBJECT_DISTRIBUTION.map((s) => s.pct),
-        backgroundColor: SUBJECT_DISTRIBUTION.map((s) => s.color),
+        data: scaledDistribution.map((s) => s.pct),
+        backgroundColor: scaledDistribution.map((s) => s.color),
         borderWidth: 0,
         hoverOffset: 4,
       }],
@@ -121,7 +142,7 @@ export function SubjectDistribution() {
       plugins: basePlugin,
       cutout: "68%",
     },
-  }));
+  }), [track]);
 
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm h-full">
@@ -129,12 +150,12 @@ export function SubjectDistribution() {
         Subject Distribution
       </h2>
       <div className="relative h-36 mb-4">
-        <canvas id="subjectPieChart" role="img" aria-label="Donut chart: Physics 32%, Chemistry 28%, Maths 24%, Biology 16%">
-          Physics 32%, Chemistry 28%, Maths 24%, Biology 16%.
+        <canvas id="subjectPieChart" role="img" aria-label="Donut chart showing track distribution metrics">
+          Subject distribution ratios matching focus configurations.
         </canvas>
       </div>
       <div className="space-y-2">
-        {SUBJECT_DISTRIBUTION.map((s) => (
+        {scaledDistribution.map((s) => (
           <div key={s.subject} className="flex items-center gap-2">
             <span className="text-xs text-gray-500 dark:text-gray-400 w-20 flex-shrink-0">{s.subject}</span>
             <div className="flex-1 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
@@ -154,15 +175,26 @@ export function SubjectDistribution() {
 // ─────────────────────────────────────────────────────────────────
 // SkillRadar — Radar chart
 // ─────────────────────────────────────────────────────────────────
-export function SkillRadar() {
+export function SkillRadar({ track = "jee" }) {
+  const filteredRadarIndices = [];
+  RADAR_LABELS.forEach((label, index) => {
+    if (track === "jee" && label.toLowerCase().includes("genetics")) return;
+    if (track === "neet" && label.toLowerCase().includes("calculus")) return;
+    filteredRadarIndices.push(index);
+  });
+
+  const filteredLabels = filteredRadarIndices.map((i) => RADAR_LABELS[i]);
+  const filteredYou = filteredRadarIndices.map((i) => RADAR_YOU[i]);
+  const filteredTopper = filteredRadarIndices.map((i) => RADAR_TOPPER[i]);
+
   useChart("skillRadarChart", (dark) => ({
     type: "radar",
     data: {
-      labels: RADAR_LABELS,
+      labels: filteredLabels,
       datasets: [
         {
           label: "You",
-          data: RADAR_YOU,
+          data: filteredYou,
           borderColor: "#378ADD",
           backgroundColor: "rgba(55,138,221,0.15)",
           pointBackgroundColor: "#378ADD",
@@ -170,7 +202,7 @@ export function SkillRadar() {
         },
         {
           label: "Topper avg",
-          data: RADAR_TOPPER,
+          data: filteredTopper,
           borderColor: "#D4537E",
           backgroundColor: "rgba(212,83,126,0.08)",
           pointBackgroundColor: "#D4537E",
@@ -191,7 +223,7 @@ export function SkillRadar() {
         },
       },
     },
-  }));
+  }), [track]);
 
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
@@ -207,8 +239,8 @@ export function SkillRadar() {
         ))}
       </div>
       <div className="relative h-60">
-        <canvas id="skillRadarChart" role="img" aria-label="Radar chart comparing skill levels across Mechanics, Organic Chem, Calculus, Genetics and Thermodynamics. You score lower in Calculus and Organic Chemistry compared to toppers.">
-          You score lower in Calculus and Organic Chemistry compared to toppers.
+        <canvas id="skillRadarChart" role="img" aria-label="Radar chart comparing skill metrics">
+          Skill comparison parameters balanced per track criteria bounds.
         </canvas>
       </div>
     </div>
@@ -218,15 +250,25 @@ export function SkillRadar() {
 // ─────────────────────────────────────────────────────────────────
 // TopicWeakness — Horizontal bar + ranked list
 // ─────────────────────────────────────────────────────────────────
-export function TopicWeakness() {
+export function TopicWeakness({ track = "jee" }) {
+  const isNeet = track === "neet";
+
+  // Translate topic matrix items to maintain row count parity cleanly
+  const processedTopics = TOPIC_WEAKNESS.map((t) => {
+    if (isNeet && t.topic === "Integration") {
+      return { ...t, topic: "Genetics Maps" };
+    }
+    return t;
+  });
+
   useChart("topicBarChart", (dark) => ({
     type: "bar",
     data: {
-      labels: TOPIC_WEAKNESS.map((t) => t.topic),
+      labels: processedTopics.map((t) => t.topic),
       datasets: [{
         label: "Accuracy %",
-        data: TOPIC_WEAKNESS.map((t) => t.accuracy),
-        backgroundColor: TOPIC_WEAKNESS.map((t) =>
+        data: processedTopics.map((t) => t.accuracy),
+        backgroundColor: processedTopics.map((t) =>
           t.severity === "good" ? "#1D9E75" : t.severity === "warn" ? "#BA7517" : "#E24B4A"
         ),
         borderRadius: 4,
@@ -247,7 +289,7 @@ export function TopicWeakness() {
         y: { grid: { display: false }, ticks: { color: tickColor(dark), font: { size: 11 } } },
       },
     },
-  }));
+  }), [track]);
 
   const severityClass = {
     critical: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800",
@@ -262,12 +304,12 @@ export function TopicWeakness() {
         Topic Weakness Detection
       </h2>
       <div className="relative h-48 mb-4">
-        <canvas id="topicBarChart" role="img" aria-label="Horizontal bar chart showing accuracy by topic. Weakest: Integration 38%, Organic Reactions 42%.">
-          Weakest topics are Integration, Organic Reactions and Kinematics.
+        <canvas id="topicBarChart" role="img" aria-label="Horizontal bar chart showing accuracy parameters">
+          Weakest topics sorted relative to active track categories.
         </canvas>
       </div>
       <div className="divide-y divide-gray-50 dark:divide-gray-800">
-        {TOPIC_WEAKNESS.filter((t) => t.severity !== "good").map((t) => (
+        {processedTopics.filter((t) => t.severity !== "good").map((t) => (
           <div key={t.topic} className="flex items-center justify-between py-2">
             <span className="text-sm text-gray-700 dark:text-gray-300">{t.topic}</span>
             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityClass[t.severity]}`}>
@@ -283,7 +325,7 @@ export function TopicWeakness() {
 // ─────────────────────────────────────────────────────────────────
 // TimeAnalytics — Bar chart + summary stats
 // ─────────────────────────────────────────────────────────────────
-export function TimeAnalytics() {
+export function TimeAnalytics({ track = "jee" }) {
   useChart("timeBarChart", (dark) => ({
     type: "bar",
     data: {
@@ -305,7 +347,7 @@ export function TimeAnalytics() {
         y: { max: 5, grid: { color: gridColor(dark) }, ticks: { color: tickColor(dark), font: { size: 11 }, stepSize: 1 } },
       },
     },
-  }));
+  }), [track]);
 
   const avg = (TIME_BY_DAY.reduce((s, d) => s + d.hours, 0) / TIME_BY_DAY.length).toFixed(1);
   const peak = TIME_BY_DAY.reduce((a, b) => a.hours > b.hours ? a : b).day;

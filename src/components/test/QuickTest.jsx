@@ -6,57 +6,65 @@ import { useRouter } from "next/navigation";
 const QUICK_OPTIONS = [
   {
     label: "Full Mixed Test",
-    desc: "All subjects · 60 questions · 60 mins",
+    descJee: "PCM subjects · 60 questions · 60 mins",
+    descNeet: "PCB subjects · 60 questions · 60 mins",
     icon: "🎯",
     subject: "all",
     count: 60,
     duration: 60,
     difficulty: "mixed",
     tag: "Popular",
+    tracks: ["jee", "neet"], // 👈 Cross-track compatible
   },
   {
     label: "Physics Blitz",
-    desc: "Physics only · 30 questions · 30 mins",
+    descJee: "Physics only · 30 questions · 30 mins",
+    descNeet: "Physics only · 30 questions · 30 mins",
     icon: "⚛",
     subject: "Physics",
     count: 30,
     duration: 30,
     difficulty: "mixed",
     tag: null,
+    tracks: ["jee", "neet"],
   },
   {
     label: "Chemistry Sprint",
-    desc: "Chemistry only · 30 questions · 30 mins",
+    descJee: "Chemistry only · 30 questions · 30 mins",
+    descNeet: "Chemistry only · 30 questions · 30 mins",
     icon: "🧪",
     subject: "Chemistry",
     count: 30,
     duration: 30,
     difficulty: "mixed",
     tag: null,
+    tracks: ["jee", "neet"],
   },
   {
     label: "Maths Challenge",
-    desc: "Maths only · 30 questions · 45 mins",
+    descJee: "Maths only · 30 questions · 45 mins",
     icon: "∑",
     subject: "Maths",
     count: 30,
     duration: 45,
     difficulty: "hard",
     tag: "Hard",
+    tracks: ["jee"], // 👈 JEE Only
   },
   {
     label: "Biology Quick",
-    desc: "Biology only · 30 questions · 25 mins",
+    descNeet: "Biology only · 30 questions · 25 mins",
     icon: "🧬",
     subject: "Biology",
     count: 30,
     duration: 25,
     difficulty: "mixed",
     tag: null,
+    tracks: ["neet"], // 👈 NEET Only
   },
   {
     label: "JEE Mock",
-    desc: "JEE pattern · 90 questions · 180 mins",
+    descJee: "JEE pattern · 90 questions · 180 mins",
     icon: "📋",
     subject: "all",
     count: 90,
@@ -64,10 +72,11 @@ const QUICK_OPTIONS = [
     difficulty: "mixed",
     tag: "PRO",
     isPro: true,
+    tracks: ["jee"], // 👈 JEE Only
   },
   {
     label: "NEET Mock",
-    desc: "NEET pattern · 180 questions · 200 mins",
+    descNeet: "NEET pattern · 180 questions · 200 mins",
     icon: "🏥",
     subject: "all",
     count: 180,
@@ -75,22 +84,33 @@ const QUICK_OPTIONS = [
     difficulty: "mixed",
     tag: "PRO",
     isPro: true,
+    tracks: ["neet"], // 👈 NEET Only
   },
   {
     label: "Daily Warmup",
-    desc: "All subjects · 10 questions · 10 mins",
+    descJee: "PCM subjects · 10 questions · 10 mins",
+    descNeet: "PCB subjects · 10 questions · 10 mins",
     icon: "☀️",
     subject: "all",
     count: 10,
     duration: 10,
     difficulty: "easy",
     tag: "Quick",
+    tracks: ["jee", "neet"],
   },
 ];
 
-export default function QuickTest() {
+// 1. Accept the parent track context (defaults to "jee" for fallback safety)
+export default function QuickTest({ track = "jee" }) {
   const router = useRouter();
   const [launching, setLaunching] = useState(null);
+
+  const activeTrack = track?.toLowerCase() || "jee";
+
+  // 2. Filter options array according to active path criteria
+  const filteredOptions = QUICK_OPTIONS.filter((option) =>
+    option.tracks.includes(activeTrack)
+  );
 
   const handleLaunch = (option) => {
     if (option.isPro) return; // handle PRO gate
@@ -115,12 +135,13 @@ export default function QuickTest() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {QUICK_OPTIONS.map((option) => (
+        {/* 3. Map across filteredOptions instead of the global array */}
+        {filteredOptions.map((option) => (
           <button
             key={option.label}
             onClick={() => handleLaunch(option)}
             disabled={launching === option.label}
-            className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200
+            className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
               ${option.isPro
                 ? "border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 opacity-60 cursor-not-allowed"
                 : launching === option.label
@@ -160,7 +181,7 @@ export default function QuickTest() {
                 : "text-gray-400"
               }`}
             >
-              {option.desc}
+              {activeTrack === "neet" ? option.descNeet : option.descJee}
             </p>
 
             {launching === option.label && (

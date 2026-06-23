@@ -1,14 +1,15 @@
 "use client";
 
 import { SignOutButton } from "@clerk/nextjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
-// ── Mock data — replace with Supabase fetch later ─────────────────
+// ── Mock data structure ───────────────────────────────────────────
 const MOCK_USER = {
-  name: "Aryan Mehta",
+  name: "Syed Ateeb",
   phone: "+91 98765 43210",
-  avatar: "A",
-  exam: "JEE",
+  avatar: "S",
+  exam: "JEE", // Overridden dynamically on mount by active cookie
   targetYear: 2026,
   joinedDate: "January 2025",
   streak: 7,
@@ -37,12 +38,46 @@ export default function ProfilePage() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 4 }, (_, i) => currentYear + i);
 
+  // Synchronize state with actual browser cookies on component mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
+      if (match && match[2]) {
+        const validatedExam = match[2].toUpperCase() === "NEET" ? "NEET" : "JEE";
+        setUser((prev) => ({ ...prev, exam: validatedExam }));
+        setEditExam(validatedExam);
+      }
+    }
+  }, []);
+
+  // Simplified handler for instantaneous track switches
+  const handleTrackToggle = (newExam) => {
+    if (newExam === user.exam) return;
+    
+    // Write cookie selection cleanly 
+    if (typeof window !== "undefined") {
+      document.cookie = `prepzii_track=${newExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
+    }
+
+    setUser((prev) => ({ ...prev, exam: newExam }));
+    setEditExam(newExam);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1500);
+
+    // Fast layout refresh to synchronize persistent Navbar structures instantly
+    window.location.reload();
+  };
+
   const handleSave = () => {
     setUser((prev) => ({ ...prev, name: editName, exam: editExam, targetYear: editYear }));
+    
+    if (typeof window !== "undefined") {
+      document.cookie = `prepzii_track=${editExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
+    }
+
     setEditing(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
-    // TODO: await supabase.from("profiles").update({ full_name: editName, exam_target: editExam, target_year: editYear })
   };
 
   const xpProgress = Math.round((user.xp / XP_FOR_NEXT_LEVEL) * 100);
@@ -50,19 +85,19 @@ export default function ProfilePage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-10 space-y-6">
 
-      {/* ── Header ─────────────────────────────────────────────── */}
+      {/* ── Header ── */}
       <div>
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">Account</p>
         <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">Profile</h1>
       </div>
 
-      {/* ── Top section — Avatar + Info + Edit ─────────────────── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6">
+      {/* ── Top section — Avatar + Info + Edit ── */}
+      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
 
           {/* Avatar */}
           <div className="relative flex-shrink-0">
-            <div className="w-20 h-20 rounded-2xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-3xl font-black">
+            <div className="w-20 h-20 rounded-2xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-3xl font-black border border-gray-100 dark:border-gray-800">
               {user.name[0]}
             </div>
             <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
@@ -81,8 +116,12 @@ export default function ProfilePage() {
             )}
             <p className="text-sm text-gray-400 mt-0.5">{user.phone}</p>
             <div className="flex items-center gap-3 mt-2">
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#1e3a5f] text-white">
-                {user.exam}
+              <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
+                user.exam.toUpperCase() === "NEET" 
+                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-500 dark:text-emerald-400" 
+                  : "bg-purple-500/10 border-purple-500/20 text-purple-500 dark:text-purple-400"
+              }`}>
+                {user.exam} Focus
               </span>
               <span className="text-xs text-gray-400">Target {user.targetYear}</span>
               <span className="text-xs text-gray-400">Joined {user.joinedDate}</span>
@@ -98,13 +137,13 @@ export default function ProfilePage() {
               <>
                 <button
                   onClick={() => setEditing(false)}
-                  className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-opacity"
+                  className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   Save
                 </button>
@@ -112,7 +151,7 @@ export default function ProfilePage() {
             ) : (
               <button
                 onClick={() => setEditing(true)}
-                className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
               >
                 ✎ Edit Profile
               </button>
@@ -120,7 +159,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Edit fields */}
+        {/* Edit fields drawer */}
         {editing && (
           <div className="mt-5 pt-5 border-t border-gray-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -132,7 +171,7 @@ export default function ProfilePage() {
                   <button
                     key={e}
                     onClick={() => setEditExam(e)}
-                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all
+                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer
                       ${editExam === e
                         ? "bg-black dark:bg-white border-black dark:border-white text-white dark:text-black"
                         : "border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-400 bg-gray-50 dark:bg-gray-800"
@@ -152,7 +191,7 @@ export default function ProfilePage() {
                   <button
                     key={y}
                     onClick={() => setEditYear(y)}
-                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all
+                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer
                       ${editYear === y
                         ? "bg-black dark:bg-white border-black dark:border-white text-white dark:text-black"
                         : "border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-400 bg-gray-50 dark:bg-gray-800"
@@ -167,11 +206,47 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* ── XP + Level bar ─────────────────────────────────────── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+      {/* ── 🎯 RESTYLED INLINE ACADEMIC TRACK CONFIGURATION CARD ── */}
+      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div className="space-y-0.5">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+            Academic Track Configuration
+          </p>
+          <h3 className="text-base font-black text-black dark:text-white">
+            Current Target Engine
+          </h3>
+        </div>
+        
+        {/* Simplified Inline Segmented Toggle Bar */}
+        <div className="inline-flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 border border-gray-200/50 dark:border-gray-700 shrink-0">
+          <button
+            onClick={() => handleTrackToggle("JEE")}
+            className={`px-4 py-2 text-xs font-black rounded-lg transition-all cursor-pointer ${
+              user.exam === "JEE"
+                ? "bg-white dark:bg-gray-900 text-purple-600 dark:text-purple-400 shadow-sm border border-purple-500/10"
+                : "text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            }`}
+          >
+            IIT JEE Engineering 🚀
+          </button>
+          <button
+            onClick={() => handleTrackToggle("NEET")}
+            className={`px-4 py-2 text-xs font-black rounded-lg transition-all cursor-pointer ${
+              user.exam === "NEET"
+                ? "bg-white dark:bg-gray-900 text-emerald-600 dark:text-emerald-400 shadow-sm border border-emerald-500/10"
+                : "text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            }`}
+          >
+            NEET Medical 🧬
+          </button>
+        </div>
+      </div>
+
+      {/* ── XP + Level bar ── */}
+      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-sm font-black">
+            <div className="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-sm font-black border border-gray-100 dark:border-gray-800">
               {user.level}
             </div>
             <div>
@@ -192,20 +267,20 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* ── Bottom — Badges only ───────────────────────────────── */}
+      {/* ── Bottom — Badges ── */}
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">Badges</h3>
           <span className="text-xs text-gray-400">{user.badges.filter(b => b.earned).length}/{user.badges.length} earned</span>
         </div>
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 grid grid-cols-3 sm:grid-cols-6 gap-3 shadow-sm">
           {user.badges.map((badge) => (
             <div
               key={badge.label}
               className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border transition-all
                 ${badge.earned
-                  ? "bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-                  : "bg-gray-50/40 dark:bg-gray-800/30 border-dashed border-gray-200 dark:border-gray-700 opacity-40"
+                  ? "bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm"
+                  : "bg-gray-50/40 dark:bg-gray-800/30 border-dashed border-gray-200 dark:border-gray-700 opacity-40 select-none"
                 }`}
             >
               <span className={`text-2xl ${!badge.earned ? "grayscale" : ""}`}>{badge.icon}</span>
@@ -220,18 +295,18 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* ── Danger zone ────────────────────────────────────────── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
-        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Account</h3>
+      {/* ── Danger zone ── */}
+      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Account Actions</h3>
         <div className="flex flex-col sm:flex-row gap-3">
           <SignOutButton redirectUrl="/sign-in">
-            <button className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            <button className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer">
               Sign Out
             </button>
           </SignOutButton>
           <button
             onClick={() => alert("Delete account — confirm dialog here")}
-            className="px-5 py-2.5 rounded-xl border border-red-200 dark:border-red-900 text-sm font-semibold text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+            className="px-5 py-2.5 rounded-xl border border-red-200 dark:border-red-900 text-sm font-semibold text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors cursor-pointer"
           >
             Delete Account
           </button>
