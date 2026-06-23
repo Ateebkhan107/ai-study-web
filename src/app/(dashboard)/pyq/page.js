@@ -397,12 +397,8 @@ export default function PYQPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
-      if (match && match[2]) {
-        const extractedTrack = match[2].toLowerCase();
-        // Force a strict binary conversion — if it isn't explicitly "neet", isolate it to "jee"
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- this value is intentionally hydrated from a client-only cookie after mount.
-        setTrack(extractedTrack === "neet" ? "neet" : "jee");
-      }
+      const val = match ? match[2].toLowerCase() : 'jee';
+      setTrack(val === 'neet' ? 'neet' : 'jee');
     }
   }, []);
 
