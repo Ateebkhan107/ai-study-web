@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { createTestAttempt } from "@/lib/testAttempts";
 
 const SUBJECTS = {
   Physics: {
@@ -158,7 +159,7 @@ export default function TestBuilder({ track = "jee" }) {
   const totalChapters = Object.values(selectedChapters).flat().length;
   const canStart = selectedSubjects.length > 0 && totalChapters > 0;
 
-  const handleStart = () => {
+  const handleStart = async () => {
     const allChapters = Object.values(selectedChapters).flat();
     const params = new URLSearchParams({
       subjects: selectedSubjects.join(","),

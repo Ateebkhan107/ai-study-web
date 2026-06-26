@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { PYQ_QUESTIONS } from "@/lib/pyqData";
+import { getQuestions } from "@/lib/questions";
 import Logo from "@/components/Logo";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -38,6 +38,10 @@ function TestSessionContent() {
   const countParam = Number(searchParams.get("count")) || 20;
   const mode = searchParams.get("mode") || "custom";
   const subjectParam = searchParams.get("subjects") || searchParams.get("subject") || "Mixed Subjects";
+  const chapterParam =
+  searchParams.get("chapters") ||
+  searchParams.get("chapter") ||
+  "All Chapters";
   const difficultyParam = searchParams.get("difficulty") || "Mixed";
   
   // 2. State Management
@@ -49,15 +53,35 @@ function TestSessionContent() {
   const timerRef = useRef(null);
 
   // 3. Initialize the Test Pool
-  useEffect(() => {
-    // Simulated fetch based on params
-    const shuffled = [...PYQ_QUESTIONS].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, Math.min(countParam, shuffled.length));
-    
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- test data is intentionally initialized after search params resolve.
-    setQuestions(selected);
-    setTimeLeft(durationParam * 60);
-  }, [countParam, durationParam]);
+useEffect(() => {
+  async function loadQuestions() {
+    try {
+      const fetched = await getQuestions({
+    exam: "JEE Main",
+    subject: subjectParam,
+    chapter: chapterParam,
+    difficulty: difficultyParam,
+    limit: countParam,
+});
+
+      if (!fetched.length) {
+        alert("No questions found.");
+        return;
+      }
+
+      // Randomize every test
+      const shuffled = [...fetched].sort(() => Math.random() - 0.5);
+
+      setQuestions(shuffled);
+      setTimeLeft(durationParam * 60);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to load questions.");
+    }
+  }
+
+  loadQuestions();
+}, [subjectParam, difficultyParam, countParam, durationParam]);
   function handleSubmit() {
     setIsFinished(true);
     clearInterval(timerRef.current);
