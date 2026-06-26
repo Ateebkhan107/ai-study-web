@@ -20,8 +20,17 @@ export async function getQuestions({
     query = query.eq("subject", subject);
   }
 
-  if (chapter && chapter !== "All Chapters") {
-  query = query.eq("chapter", chapter);
+ if (chapter && chapter !== "All Chapters") {
+  const chapters = chapter
+    .split(",")
+    .map((c) => decodeURIComponent(c).trim())
+    .filter(Boolean);
+
+  if (chapters.length === 1) {
+    query = query.eq("chapter", chapters[0]);
+  } else {
+    query = query.in("chapter", chapters);
+  }
 }
 
   if (difficulty && difficulty !== "Mixed") {
