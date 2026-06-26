@@ -9,7 +9,7 @@ const SUBJECTS = {
     icon: "⚛",
     color: "blue",
     chapters: [
-      "Kinematics", "Laws of Motion", "Work Energy Power",
+      "Kinematics", "Laws of Motion", "Work Power and Energy",
       "Rotational Motion", "Gravitation", "Thermodynamics",
       "Waves", "Electrostatics", "Current Electricity",
       "Magnetism", "Optics", "Modern Physics",
