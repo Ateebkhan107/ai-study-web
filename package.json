@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.4.2",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
     "@supabase/supabase-js": "^2.108.2",
     "chart.js": "^4.5.1",
     "next": "16.2.4",
+    "pdfjs-dist": "^3.11.174",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

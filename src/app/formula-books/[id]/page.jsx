@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getFormulaBook, getPdfUrl } from "@/lib/formulaBooks";
 
+
 export default function FormulaBookPage() {
   const { id } = useParams();
   const router = useRouter();
@@ -73,12 +74,12 @@ export default function FormulaBookPage() {
 
       </div>
 
-      {/* PDF */}
+            {/* PDF */}
       <iframe
-        src={getPdfUrl(book.file_name)}
-        title={book.title}
-        className="h-[calc(100vh-80px)] w-full"
-      />
+  src={`${getPdfUrl(book.file_name)}#toolbar=0&navpanes=0&scrollbar=0`}
+  className="h-[calc(100vh-80px)] w-full border-0"
+  title={book.title}
+/>
     </div>
   );
 }
