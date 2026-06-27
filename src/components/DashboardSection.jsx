@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 // ─── 01. CENTRALIZED SUPABASE-READY MOCK SYSTEM DATA ──────────────────────────
 const FORMULA_CARDS = [
@@ -83,16 +84,33 @@ const AI_INSIGHT_BLUEPRINTS = {
 
 export default function DashboardSection({ config }) {
   const [launchingId, setLaunchingId] = useState(null);
+  const [formulaBooks, setFormulaBooks] = useState([]);
 
   const isNeet = config?.badge?.toLowerCase().includes("neet");
   const trackKey = isNeet ? "neet" : "jee";
   const aiData = AI_INSIGHT_BLUEPRINTS[trackKey];
 
-  const filteredFormulas = FORMULA_CARDS.filter((card) => {
-    if (!isNeet && card.subject === "Biology") return false;
-    if (isNeet && card.subject === "Maths") return false;
-    return true;
-  });
+  useEffect(() => {
+  async function loadBooks() {
+    try {
+      const res = await fetch("/api/formula-books");
+      const data = await res.json();
+      setFormulaBooks(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  loadBooks();
+}, []);
+
+  const filteredFormulas = formulaBooks.filter((book) => {
+  if (isNeet) {
+    return book.stream === "NEET";
+  }
+
+  return book.stream === "JEE";
+});
 
   const getScoreMeta = (score) => {
     if (score >= 90) return { label: "Excellent", text: "text-emerald-400", border: "border-emerald-500/30" };
@@ -124,31 +142,34 @@ export default function DashboardSection({ config }) {
 
         {/* 🛠️ Stacking items in a clean, high-density 1-column array perfectly pairs layout edges */}
         <div className="flex flex-col gap-3">
-          {filteredFormulas.map((card) => (
-            <div
-              key={card.title}
-              className="bg-white dark:bg-[#1a1d2e] border border-gray-100 dark:border-[#2a2d3e] rounded-xl p-4 hover:border-gray-200 dark:hover:border-[#363a52] transition-all duration-150 cursor-pointer shadow-sm min-h-[145px] flex flex-col justify-between"
+          {filteredFormulas.map((book) => (
+            <Link
+              href={`/formula-books/${book.id}`}
+              key={book.id}
+              className="block"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                  {card.subject}
-                </span>
-                <span className="text-[10px] bg-gray-50 dark:bg-[#232740] text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-[#2a2d3e] px-2 py-0.5 rounded-full font-medium">
-                  {card.tag}
-                </span>
-              </div>
-              <p className="text-xs font-bold text-gray-700 dark:text-gray-300 my-1.5">
-                {card.title}
-              </p>
-              <div className="bg-gray-50 dark:bg-[#232740] rounded-lg px-3 py-2 border border-gray-100 dark:border-[#2a2d3e]">
-                <p className="font-mono text-xs font-bold text-black dark:text-white">
-                  {card.formula}
+              <div className="bg-white dark:bg-[#1a1d2e] border border-gray-100 dark:border-[#2a2d3e] rounded-xl p-4 hover:border-gray-200 dark:hover:border-[#363a52] transition-all duration-150 cursor-pointer shadow-sm min-h-[145px] flex flex-col justify-between h-full">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                    {book.subject}
+                  </span>
+                  <span className="text-[10px] bg-gray-50 dark:bg-[#232740] text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-[#2a2d3e] px-2 py-0.5 rounded-full font-medium">
+                    {book.tag}
+                  </span>
+                </div>
+                <p className="text-xs font-bold text-gray-700 dark:text-gray-300 my-1.5">
+                  {book.title}
+                </p>
+                <div className="bg-gray-50 dark:bg-[#232740] rounded-lg px-3 py-2 border border-gray-100 dark:border-[#2a2d3e]">
+                  <p className="font-mono text-xs font-bold text-black dark:text-white">
+                    {book.formula}
+                  </p>
+                </div>
+                <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono mt-1">
+                  {book.sub}
                 </p>
               </div>
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono mt-1">
-                {card.sub}
-              </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
