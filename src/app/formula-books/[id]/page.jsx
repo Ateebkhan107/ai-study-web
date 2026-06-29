@@ -13,21 +13,27 @@ export default function FormulaBookPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadBook() {
-      try {
-        const data = await getFormulaBook(id);
-        setBook(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
+  async function loadBook() {
+    try {
+      const data = await getFormulaBook(id);
 
-    if (id) {
-      loadBook();
+      // Debug logs
+      console.log("BOOK DATA:", data);
+      console.log("FILE NAME:", data.file_name);
+      console.log("PDF URL:", getPdfUrl(data.file_name));
+
+      setBook(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-  }, [id]);
+  }
+
+  if (id) {
+    loadBook();
+  }
+}, [id]);
 
   if (loading) {
     return (

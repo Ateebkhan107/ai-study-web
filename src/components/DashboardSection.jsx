@@ -4,37 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // ─── 01. CENTRALIZED SUPABASE-READY MOCK SYSTEM DATA ──────────────────────────
-const FORMULA_CARDS = [
-  {
-    subject: "Physics",
-    title: "Kinematic Equations",
-    formula: "v = u + at",
-    sub: "v² = u² + 2as",
-    tag: "Mechanics",
-  },
-  {
-    subject: "Chemistry",
-    title: "Ideal Gas Law",
-    formula: "PV = nRT",
-    sub: "P = pressure, V = volume",
-    tag: "Thermodynamics",
-  },
-  {
-    subject: "Maths",
-    title: "Quadratic Formula",
-    formula: "x = (−b ± √(b²−4ac)) / 2a",
-    sub: "For ax² + bx + c = 0",
-    tag: "Algebra",
-  },
-  {
-    subject: "Biology",
-    title: "Hardy-Weinberg",
-    formula: "p² + 2pq + q² = 1",
-    sub: "p + q = 1",
-    tag: "Genetics",
-  },
-];
-
 const AI_INSIGHT_BLUEPRINTS = {
   jee: {
     readinessScore: 78,
@@ -52,11 +21,11 @@ const AI_INSIGHT_BLUEPRINTS = {
       { id: 4, priority: "Low", title: "Error Analysis Review", desc: "Fix calculus layout gaps", icon: "📝" },
     ],
     weakTopics: [
-      { name: "Rotational Dynamics", pct: 42, color: "bg-rose-500" },
-      { name: "Organic Chemistry", pct: 51, color: "bg-amber-500" },
-      { name: "Definite Integration", pct: 58, color: "bg-yellow-500" },
+      { name: "Rotational Dynamics", pct: 42, colorClass: "bg-rose-500" },
+      { name: "Organic Chemistry", pct: 51, colorClass: "bg-amber-500" },
+      { name: "Definite Integration", pct: 58, colorClass: "bg-yellow-400" },
     ],
-    strongAreas: ["Thermodynamics", "Chemical Bonding", "Modern Physics"]
+    strongAreas: ["Thermodynamics", "Chemical Bonding", "Modern Physics"],
   },
   neet: {
     readinessScore: 81,
@@ -74,14 +43,118 @@ const AI_INSIGHT_BLUEPRINTS = {
       { id: 4, priority: "Low", title: "Physics Formula Cards", desc: "Review modern mechanics sheets", icon: "⚡" },
     ],
     weakTopics: [
-      { name: "Plant Physiology", pct: 45, color: "bg-rose-500" },
-      { name: "Ionic Equilibrium", pct: 53, color: "bg-amber-500" },
-      { name: "Rotational Motion", pct: 57, color: "bg-yellow-500" },
+      { name: "Plant Physiology", pct: 45, colorClass: "bg-rose-500" },
+      { name: "Ionic Equilibrium", pct: 53, colorClass: "bg-amber-500" },
+      { name: "Rotational Motion", pct: 57, colorClass: "bg-yellow-400" },
     ],
-    strongAreas: ["Human Physiology", "Chemical Bonding", "Genetics Core"]
-  }
+    strongAreas: ["Human Physiology", "Chemical Bonding", "Genetics Core"],
+  },
 };
 
+// ─── Readiness ring SVG circumference: r=30 → 2πr ≈ 188.5 ──────────────────
+function ReadinessRing({ score }) {
+  const r = 30;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - (score / 100) * circ;
+
+  const meta =
+    score >= 90
+      ? { label: "Excellent", color: "#10B981" }
+      : score >= 75
+      ? { label: "Good", color: "#10B981" }
+      : score >= 60
+      ? { label: "Improving", color: "#F59E0B" }
+      : { label: "Needs Attention", color: "#EF4444" };
+
+  return (
+    <div className="flex items-center gap-4 bg-gray-50 dark:bg-[#13162a] border border-gray-100 dark:border-[#252840] rounded-xl p-4">
+      {/* SVG ring */}
+      <div className="relative w-[72px] h-[72px] shrink-0">
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          style={{ transform: "rotate(-90deg)" }}
+        >
+          {/* Track */}
+          <circle
+            cx="36"
+            cy="36"
+            r={r}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="6"
+            className="text-gray-200 dark:text-[#252840]"
+          />
+          {/* Fill */}
+          <circle
+            cx="36"
+            cy="36"
+            r={r}
+            fill="none"
+            stroke="#4F46E5"
+            strokeWidth="6"
+            strokeDasharray={circ}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+          />
+        </svg>
+        {/* Centre label */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-[17px] font-black text-indigo-600 dark:text-indigo-400 leading-none">
+            {score}
+          </span>
+          <span className="text-[9px] text-gray-400 font-semibold leading-none mt-0.5">
+            /100
+          </span>
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="flex-1 min-w-0">
+        <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">
+          Exam Readiness
+        </p>
+        <p
+          className="text-[17px] font-black tracking-tight leading-none mb-2"
+          style={{ color: meta.color }}
+        >
+          {meta.label}
+        </p>
+        {/* Gradient bar */}
+        <div className="h-[4px] rounded-full bg-gray-200 dark:bg-[#252840] overflow-hidden">
+          <div
+            className="h-full rounded-full"
+            style={{
+              width: `${score}%`,
+              background: "linear-gradient(90deg, #6366F1, #22D3EE)",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Priority badge ───────────────────────────────────────────────────────────
+function PriorityBadge({ priority }) {
+  const map = {
+    High: "bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400",
+    Medium: "bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400",
+    Low: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400",
+  };
+  return (
+    <span
+      className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded ${
+        map[priority] ?? map.Low
+      }`}
+    >
+      {priority}
+    </span>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 export default function DashboardSection({ config }) {
   const [launchingId, setLaunchingId] = useState(null);
   const [formulaBooks, setFormulaBooks] = useState([]);
@@ -91,35 +164,21 @@ export default function DashboardSection({ config }) {
   const aiData = AI_INSIGHT_BLUEPRINTS[trackKey];
 
   useEffect(() => {
-  async function loadBooks() {
-    try {
-      const res = await fetch("/api/formula-books");
-      const data = await res.json();
-      setFormulaBooks(data);
-    } catch (err) {
-      console.error(err);
+    async function loadBooks() {
+      try {
+        const res = await fetch("/api/formula-books");
+        const data = await res.json();
+        setFormulaBooks(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
+    loadBooks();
+  }, []);
 
-  loadBooks();
-}, []);
-
-  const filteredFormulas = formulaBooks.filter((book) => {
-  if (isNeet) {
-    return book.stream === "NEET";
-  }
-
-  return book.stream === "JEE";
-});
-
-  const getScoreMeta = (score) => {
-    if (score >= 90) return { label: "Excellent", text: "text-emerald-400", border: "border-emerald-500/30" };
-    if (score >= 75) return { label: "Good", text: "text-sky-400", border: "border-sky-500/30" };
-    if (score >= 60) return { label: "Improving", text: "text-amber-400", border: "border-amber-500/30" };
-    return { label: "Needs Attention", text: "text-rose-400", border: "border-rose-500/30" };
-  };
-
-  const scoreMeta = getScoreMeta(aiData.readinessScore);
+  const filteredFormulas = formulaBooks.filter((book) =>
+    isNeet ? book.stream === "NEET" : book.stream === "JEE"
+  );
 
   const handleActionClick = (id) => {
     setLaunchingId(id);
@@ -129,182 +188,185 @@ export default function DashboardSection({ config }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
 
-      {/* ── LEFT PANE: FORMULA SECTIONS (Optimized column-span allocation to avoid ragged layout voids) ── */}
+      {/* ── LEFT: FORMULA CARDS ─────────────────────────────────────────────── */}
       <div className="lg:col-span-2 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+          <h2 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
             Formula Cards
           </h2>
-          <button className="text-xs text-gray-400 hover:text-white transition-colors font-medium cursor-pointer">
+          <button className="text-[12px] font-semibold text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer">
             View all →
           </button>
         </div>
 
-        {/* 🛠️ Stacking items in a clean, high-density 1-column array perfectly pairs layout edges */}
         <div className="flex flex-col gap-3">
           {filteredFormulas.map((book) => (
-            <Link
-              href={`/formula-books/${book.id}`}
-              key={book.id}
-              className="block"
-            >
-              <div className="bg-white dark:bg-[#1a1d2e] border border-gray-100 dark:border-[#2a2d3e] rounded-xl p-4 hover:border-gray-200 dark:hover:border-[#363a52] transition-all duration-150 cursor-pointer shadow-sm min-h-[145px] flex flex-col justify-between h-full">
+            <Link href={`/formula-books/${book.id}`} key={book.id} className="block group">
+              <div className="bg-white dark:bg-[#13162a] border border-gray-100 dark:border-[#252840] rounded-xl p-4 hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-150 shadow-sm flex flex-col gap-3 min-h-[130px]">
+                {/* Header row */}
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                  <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
                     {book.subject}
                   </span>
-                  <span className="text-[10px] bg-gray-50 dark:bg-[#232740] text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-[#2a2d3e] px-2 py-0.5 rounded-full font-medium">
+                  <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1e2238] border border-gray-100 dark:border-[#252840] px-2 py-0.5 rounded-full">
                     {book.tag}
                   </span>
                 </div>
-                <p className="text-xs font-bold text-gray-700 dark:text-gray-300 my-1.5">
+
+                {/* Title */}
+                <p className="text-[13px] font-bold text-gray-800 dark:text-gray-200 leading-snug">
                   {book.title}
                 </p>
-                <div className="bg-gray-50 dark:bg-[#232740] rounded-lg px-3 py-2 border border-gray-100 dark:border-[#2a2d3e]">
-                  <p className="font-mono text-xs font-bold text-black dark:text-white">
+
+                {/* Formula chip */}
+                <div className="bg-gray-50 dark:bg-[#1e2238] border border-gray-100 dark:border-[#252840] rounded-lg px-3 py-2">
+                  <p className="font-mono text-[12px] font-bold text-gray-900 dark:text-white">
                     {book.formula}
                   </p>
+                  {book.sub && (
+                    <p className="font-mono text-[10px] text-gray-400 mt-0.5">
+                      {book.sub}
+                    </p>
+                  )}
                 </div>
-                <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono mt-1">
-                  {book.sub}
-                </p>
               </div>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* ── 🚀 RIGHT PANE: BRAND NEW PREPZII AI INSIGHTS WIDGET CONSOLE (Expanded horizontally for scanning clarity) ── */}
+      {/* ── RIGHT: AI INSIGHTS ──────────────────────────────────────────────── */}
       <div className="lg:col-span-3 space-y-4">
-        
-        {/* Module Title Banner */}
+
+        {/* Section heading */}
         <div>
-          <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest flex items-center gap-1.5">
-            <span>🤖</span> PrepZii AI Insights
+          <h2 className="text-[11px] font-bold text-gray-900 dark:text-white uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block" />
+            Prepzii AI Insights
           </h2>
-          <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium mt-0.5 leading-normal">
-            Personalized recommendations generated from your recent activity.
+          <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">
+            Personalised from your recent activity
           </p>
         </div>
 
-        {/* Translucent Master Console Container */}
-        <div className="bg-white dark:bg-[#1a1d2e] border border-gray-100 dark:border-[#2a2d3e] rounded-2xl p-5 space-y-5 shadow-lg relative overflow-hidden backdrop-blur-md">
-          
-          {/* Ambient Blue Background Glow Effect Layer */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 dark:sky-400/5 rounded-full filter blur-2xl pointer-events-none" />
+        {/* Card */}
+        <div className="bg-white dark:bg-[#13162a] border border-gray-100 dark:border-[#252840] rounded-2xl p-5 space-y-5 shadow-sm">
 
-          {/* ── ELEMENT 1: VISUAL AI READY SCORE DISPLAY MODULE ── */}
-          <div className="flex items-center gap-4 bg-gray-50/50 dark:bg-[#232740]/40 border border-gray-100/80 dark:border-[#2a2d3e] p-4 rounded-xl relative z-10">
-            <div className={`relative w-14 h-14 rounded-full border-4 flex items-center justify-center font-mono shrink-0 transition-all ${scoreMeta.border}`}>
-              <div className="text-center">
-                <span className="text-sm font-black text-black dark:text-white">{aiData.readinessScore}</span>
-                <span className="text-[8px] block opacity-40 font-sans font-bold leading-none">/100</span>
-              </div>
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Exam Readiness</p>
-              <p className={`text-sm font-black tracking-tight mt-0.5 ${scoreMeta.text}`}>{scoreMeta.label}</p>
-            </div>
-          </div>
+          {/* 1 — Readiness ring */}
+          <ReadinessRing score={aiData.readinessScore} />
 
-          {/* ── ELEMENT 2: MICRO INSIGHT TRACK MATRIX FEED CARDS ── */}
+          {/* 2 — Diagnostic metrics */}
           <div className="space-y-2">
-            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Diagnostic Metrics</p>
-            <div className="max-h-32 overflow-y-auto pr-1 space-y-1.5 scrollbar-thin scrollbar-thumb-gray-800">
+            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+              Diagnostic Metrics
+            </p>
+            <div className="space-y-1.5">
               {aiData.insights.map((ins) => (
-                <div 
-                  key={ins.id} 
-                  className={`flex items-start gap-2.5 px-3 py-2 rounded-lg text-xs border transition-colors ${
-                    ins.type === "warn" 
-                      ? "bg-rose-500/[0.02] dark:bg-rose-500/[0.01] border-rose-500/10 text-gray-700 dark:text-gray-300" 
-                      : "bg-emerald-500/[0.02] dark:bg-emerald-500/[0.01] border-emerald-500/10 text-gray-700 dark:text-gray-300"
+                <div
+                  key={ins.id}
+                  className={`flex items-start gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium border ${
+                    ins.type === "warn"
+                      ? "bg-amber-50 dark:bg-amber-500/5 border-amber-100 dark:border-amber-500/10 text-gray-700 dark:text-gray-300"
+                      : "bg-emerald-50 dark:bg-emerald-500/5 border-emerald-100 dark:border-emerald-500/10 text-gray-700 dark:text-gray-300"
                   }`}
                 >
-                  <span className="mt-0.5 shrink-0 text-xs">{ins.type === "warn" ? "⚠️" : "✓"}</span>
-                  <p className="font-medium leading-snug">{ins.text}</p>
+                  <span className="shrink-0 mt-px text-[12px]">
+                    {ins.type === "warn" ? "⚠️" : "✓"}
+                  </span>
+                  {ins.text}
                 </div>
               ))}
             </div>
           </div>
 
-          <hr className="border-gray-100 dark:border-[#2a2d3e]" />
+          <hr className="border-gray-100 dark:border-[#252840]" />
 
-          {/* ── ELEMENT 3: ACTIONABLE RECOMMENDATIONS SUITE PANEL ── */}
+          {/* 3 — Recommended next */}
           <div className="space-y-2">
-            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Recommended Next</p>
+            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+              Recommended Next
+            </p>
             <div className="space-y-2">
               {aiData.recommendations.map((rec) => (
-                <div 
+                <div
                   key={rec.id}
-                  className="bg-gray-50 dark:bg-[#232740]/40 border border-gray-100 dark:border-[#2a2d3e] p-3 rounded-xl flex items-center justify-between gap-3 group hover:border-sky-400/40 dark:hover:border-sky-500/30 transition-all duration-150"
+                  className="flex items-center gap-3 bg-gray-50 dark:bg-[#1e2238] border border-gray-100 dark:border-[#252840] hover:border-indigo-200 dark:hover:border-indigo-500/30 rounded-xl p-3 transition-all duration-150"
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-[#1a1d2e] flex items-center justify-center border border-gray-200/50 dark:border-[#2a2d3e] text-sm shrink-0">
-                      {rec.icon}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <p className="text-xs font-bold text-gray-800 dark:text-gray-200 truncate">{rec.title}</p>
-                        <span className={`text-[8px] font-black uppercase px-1 rounded-sm border ${
-                          rec.priority === "High" 
-                            ? "bg-rose-500/10 border-rose-500/20 text-rose-400" 
-                            : rec.priority === "Medium"
-                            ? "bg-amber-500/10 border-amber-500/20 text-amber-400"
-                            : "bg-blue-500/10 border-blue-500/20 text-blue-400"
-                        }`}>
-                          {rec.priority}
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-gray-400 mt-0.5 truncate">{rec.desc}</p>
-                    </div>
+                  {/* Icon */}
+                  <div className="w-9 h-9 rounded-lg bg-white dark:bg-[#13162a] border border-gray-100 dark:border-[#252840] flex items-center justify-center text-[15px] shrink-0">
+                    {rec.icon}
                   </div>
 
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[12px] font-bold text-gray-800 dark:text-gray-200 truncate">
+                        {rec.title}
+                      </span>
+                      <PriorityBadge priority={rec.priority} />
+                    </div>
+                    <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5 truncate">
+                      {rec.desc}
+                    </p>
+                  </div>
+
+                  {/* CTA */}
                   <button
                     onClick={() => handleActionClick(rec.id)}
                     disabled={launchingId === rec.id}
-                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-black transition-all cursor-pointer shrink-0 ${
+                    className={`shrink-0 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
                       launchingId === rec.id
                         ? "bg-emerald-500 text-white scale-95"
-                        : "bg-black text-white dark:bg-white dark:text-black hover:opacity-80"
+                        : "bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-80"
                     }`}
                   >
-                    {launchingId === rec.id ? "Launching..." : "Practice"}
+                    {launchingId === rec.id ? "Launching…" : "Practice"}
                   </button>
                 </div>
               ))}
             </div>
           </div>
 
-          <hr className="border-gray-100 dark:border-[#2a2d3e]" />
+          <hr className="border-gray-100 dark:border-[#252840]" />
 
-          {/* ── ELEMENT 4: TWO-COLUMN STRENGTHS vs WEAKNESS MATRICES PANEL ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            {/* Weak Topics Side */}
-            <div className="space-y-2">
-              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Weak Topics</p>
-              <div className="space-y-2">
-                {aiData.weakTopics.map((topic) => (
-                  <div key={topic.name} className="space-y-1">
-                    <div className="flex justify-between text-[10px] font-semibold text-gray-600 dark:text-gray-400">
-                      <span className="truncate max-w-[120px]">{topic.name}</span>
-                      <span className="font-mono">{topic.pct}%</span>
-                    </div>
-                    <div className="w-full h-1 bg-gray-100 dark:bg-[#232740] rounded-full overflow-hidden">
-                      <div className={`h-full rounded-full ${topic.color}`} style={{ width: `${topic.pct}%` }} />
-                    </div>
+          {/* 4 — Weak / Strong grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+            {/* Weak topics */}
+            <div className="space-y-2.5">
+              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                Weak Topics
+              </p>
+              {aiData.weakTopics.map((topic) => (
+                <div key={topic.name} className="space-y-1">
+                  <div className="flex justify-between text-[11px] font-semibold text-gray-600 dark:text-gray-400">
+                    <span className="truncate max-w-[130px]">{topic.name}</span>
+                    <span className="font-mono tabular-nums">{topic.pct}%</span>
                   </div>
-                ))}
-              </div>
+                  <div className="h-[3px] rounded-full bg-gray-100 dark:bg-[#252840] overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${topic.colorClass}`}
+                      style={{ width: `${topic.pct}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Strong Areas Side */}
-            <div className="space-y-2">
-              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Strong Areas</p>
-              <div className="space-y-1.5">
+            {/* Strong areas */}
+            <div className="space-y-2.5">
+              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                Strong Areas
+              </p>
+              <div className="space-y-2">
                 {aiData.strongAreas.map((area) => (
-                  <div key={area} className="flex items-center gap-1.5 text-[11px] font-bold text-gray-700 dark:text-gray-300">
-                    <span className="text-emerald-500 shrink-0 text-xs">✅</span>
+                  <div
+                    key={area}
+                    className="flex items-center gap-2 text-[12px] font-semibold text-gray-700 dark:text-gray-300"
+                  >
+                    <span className="w-[18px] h-[18px] rounded-full bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-[10px] shrink-0">
+                      ✓
+                    </span>
                     <span className="truncate">{area}</span>
                   </div>
                 ))}
@@ -312,10 +374,8 @@ export default function DashboardSection({ config }) {
             </div>
 
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
