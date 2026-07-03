@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -52,10 +53,8 @@ const DIFFICULTY_BADGE = {
   Hard:   "bg-rose-500/10    text-rose-600    dark:text-rose-400    border border-rose-500/20",
 };
 const TABS = [
-  { id: "explore",   label: "Explore",   Icon: I.Layers    },
   { id: "practice",  label: "Practice",  Icon: I.Target    },
   { id: "analytics", label: "Analytics", Icon: I.BarChart3 },
-  { id: "saved",     label: "Saved",     Icon: I.Bookmark  },
 ];
 
 // ─── Multi-Tenant Core Blueprints ──────────────────────────────────────────
@@ -121,104 +120,41 @@ function ToggleChip({ label, active, onClick, count }) {
 }
 
 // ─── Tab-Specific Layout Engines ──────────────────────────────────────────────
-function ExploreTab({ onSwitchTab, track, subjects, recentActivity }) {
-  const [activeSubject, setActiveSubject] = useState(null);
-  const totalCount = subjects.reduce((acc, curr) => acc + curr.count, 0);
-
-  return (
-    <div className="space-y-5">
-      <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <div className="flex items-center justify-between mb-5">
-          <div>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-1`}>01 — BROWSE SUBJECTS</p>
-            <p className={`${TXT_MUTED} text-sm`}>Select an active syllabus block to explore queries</p>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-2 mb-5">
-          <ToggleChip label="All Subjects" count={totalCount} active={activeSubject === null} onClick={() => setActiveSubject(null)} />
-          {subjects.map(s => (
-            <ToggleChip key={s.id} label={s.label} count={s.count} active={activeSubject === s.id} onClick={() => setActiveSubject(activeSubject === s.id ? null : s.id)} />
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {subjects.filter(s => !activeSubject || s.id === activeSubject).map(s => (
-            <button key={s.id} className={`group flex flex-col items-center gap-3 p-5 rounded-xl border ${BORDER} ${BG_SUNKEN} hover:border-sky-500/60 hover:bg-sky-500/5 transition-all text-center cursor-pointer`}>
-              <span className="text-3xl">{s.emoji}</span>
-              <div>
-                <p className={`text-sm font-semibold ${TXT}`}>{s.label}</p>
-                <p className={`text-xs ${TXT_MUTED} mt-0.5`}>{s.count.toLocaleString()} Questions</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — QUICK ACTIONS</p>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { Icon: I.Zap,      title: "Quick Practice", desc: "10 Random Qs", tab: "practice",  accent: "#3b82f6" },
-              { Icon: I.Clock,    title: "Timed Sprint",   desc: "Beat the clock", tab: "practice",  accent: "#a855f7" },
-              { Icon: I.Brain,    title: "Weak Chapters",  desc: "AI Targeted Qs", tab: "analytics", accent: "#06b6d4" },
-              { Icon: I.Bookmark, title: "Revision Deck",   desc: "Your bookmarks", tab: "saved",     accent: "#10b981" },
-            ].map(item => (
-              <button key={item.title} onClick={() => onSwitchTab(item.tab)} className={`group text-left p-4 rounded-xl border ${BORDER} ${BG_SUNKEN} ${BORDER_HV} ${SURFACE_HV} transition-all cursor-pointer`}>
-                <item.Icon size={18} style={{ color: item.accent }} className="mb-2.5" />
-                <p className={`text-sm font-semibold ${TXT}`}>{item.title}</p>
-                <p className={`text-xs ${TXT_MUTED} mt-0.5`}>{item.desc}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <div className="flex items-center justify-between mb-4">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>03 — RECENT SESSIONS</p>
-          </div>
-          <div className="space-y-1">
-            {recentActivity.map((item, i) => {
-              const scoreColor = item.score >= 80 ? "text-emerald-400" : item.score >= 60 ? "text-amber-400" : "text-rose-400";
-              return (
-                <div key={i} className={`flex items-center gap-3 p-3 rounded-xl ${SURFACE_HV} transition-colors cursor-pointer`}>
-                  <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-medium ${TXT} truncate`}>{item.topic}</p>
-                    <p className={`text-xs ${TXT_MUTED}`}>{item.subject} · {track.toUpperCase()} Archive {item.year}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className={`text-sm font-bold ${scoreColor}`}>{item.score}%</p>
-                    <p className={`text-xs ${TXT_MUTED}`}>{item.time}</p>
-                  </div>
-                  <I.ChevronRight size={13} className={`${TXT_MUTED}`} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — ARCHIVES BY YEAR</p>
-        <div className="flex flex-wrap gap-2">
-          {YEARS.map(year => (
-            <button key={year} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium border ${BORDER} ${TXT_MUTED} hover:border-sky-500 hover:text-white hover:bg-sky-500/5 transition-all cursor-pointer`}>
-              {track.toUpperCase()} {year}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PracticeTab({ subjects }) {
+function PracticeTab({ subjects, track }) {
+  const router = useRouter();
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedYears,    setSelectedYears]    = useState([]);
   const [difficulty,       setDifficulty]       = useState("Mixed");
   const [questionsCount,   setQuestionsCount]   = useState(20);
-  const [mode,             setMode]             = useState("tutor");
+  const [subjectError, setSubjectError] = useState("");
+
+  function handleStartDeck() {
+
+    if (selectedSubjects.length === 0) {
+      setSubjectError("Please select at least one subject to start.");
+      return;
+    }
+
+    setSubjectError("");
+
+    const subjectLabels = subjects
+      .filter(s => selectedSubjects.includes(s.id))
+      .map(s => s.label);
+
+    const params = new URLSearchParams();
+    params.set("exam", track.toUpperCase());
+    params.set("subjects", subjectLabels.join(","));
+
+    if (selectedYears.length > 0) {
+      params.set("years", selectedYears.join(","));
+    }
+
+    params.set("difficulty", difficulty);
+    params.set("count", String(questionsCount));
+
+    router.push(`/pyq/session?${params.toString()}`);
+
+  }
 
   const toggleSubject = id => setSelectedSubjects(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]);
   const toggleYear    = yr => setSelectedYears(p => p.includes(yr) ? p.filter(y => y !== yr) : [...p, yr]);
@@ -232,7 +168,7 @@ function PracticeTab({ subjects }) {
             {subjects.map(s => {
               const active = selectedSubjects.includes(s.id);
               return (
-                <button key={s.id} onClick={() => toggleSubject(s.id)} className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${active ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`}`}>
+                <button key={s.id} onClick={() => toggleSubject(s.id)} className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${active ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`}`}>
                   <span className="text-2xl">{s.emoji}</span>
                   <span className="text-sm font-semibold">{s.label}</span>
                 </button>
@@ -247,25 +183,8 @@ function PracticeTab({ subjects }) {
           </div>
           <div className="flex flex-wrap gap-2">
             {YEARS.map(yr => (
-              <button key={yr} onClick={() => toggleYear(yr)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${selectedYears.includes(yr) ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${TXT_MUTED}`}`}>
+              <button key={yr} onClick={() => toggleYear(yr)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${selectedYears.includes(yr) ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${TXT_MUTED}`}`}>
                 {yr}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — MODULE METHODOLOGY</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {[
-              { id: "tutor", label: "Interactive Tutor", desc: "Instant evaluation metrics", Icon: I.GraduationCap },
-              { id: "timed", label: "Timed Sprint",      desc: "Simulate pressure boundaries", Icon: I.Clock },
-              { id: "exam",  label: "Absolute Exam",     desc: "Blind results calculation",   Icon: I.Trophy },
-            ].map(m => (
-              <button key={m.id} onClick={() => setMode(m.id)} className={`flex flex-col gap-2 p-4 rounded-xl border text-left transition-all cursor-pointer ${mode === m.id ? "border-sky-500 bg-sky-500/5" : `${BORDER} ${BG_SUNKEN}`}`}>
-                <m.Icon size={18} className={mode === m.id ? "text-sky-400" : TXT_MUTED} />
-                <p className="text-sm font-semibold">{m.label}</p>
-                <p className="text-xs text-gray-400">{m.desc}</p>
               </button>
             ))}
           </div>
@@ -286,15 +205,21 @@ function PracticeTab({ subjects }) {
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>DIFFICULTY CRITERIA</p>
           <div className="space-y-2">
             {["Easy", "Medium", "Hard", "Mixed"].map((d) => (
-              <button key={d} onClick={() => setDifficulty(d)} className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${difficulty === d ? "border-sky-500 bg-sky-500/5 text-white" : `${BORDER} ${TXT_MUTED}`}`}>{d}</button>
+              <button key={d} onClick={() => setDifficulty(d)} className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${difficulty === d ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${TXT_MUTED}`}`}>{d}</button>
             ))}
           </div>
         </div>
 
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 space-y-3`}>
-          <button className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
-            <I.Play size={14} /> Start Focused Deck
-          </button>
+
+  <button onClick={handleStartDeck} className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
+    <I.Play size={14} /> Start Focused Deck
+  </button>
+
+  {subjectError && (
+    <p className="text-xs text-red-500 font-medium">{subjectError}</p>
+  )}
+
         </div>
       </div>
     </div>
@@ -391,7 +316,7 @@ function SavedTab({ track, savedQuestions }) {
 
 // ─── Main Controller Page ───────────────────────────────────────────────────
 export default function PYQPage() {
-  const [activeTab, setActiveTab] = useState("explore");
+  const [activeTab, setActiveTab] = useState("practice");
   const [track, setTrack] = useState("jee"); // Strict fallback baseline to prevent multi-track leaking
 
   useEffect(() => {
@@ -460,8 +385,11 @@ export default function PYQPage() {
         </div>
 
         {/* Dynamic Tab Screen Panel Switcher */}
-        {activeTab === "explore"   && <ExploreTab onSwitchTab={setActiveTab} track={track} subjects={filteredSubjects} recentActivity={filteredRecent} />}
-        {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} />}
+        {activeTab === "practice"  && 
+<PracticeTab 
+subjects={filteredSubjects}
+track={track}
+/>}
         {activeTab === "analytics" && <AnalyticsTab track={track} analyticsData={filteredAnalytics} />}
         {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
 
