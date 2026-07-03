@@ -6,6 +6,8 @@ import {
   SIGN_IN_ROUTE,
 } from "@/lib/auth";
 import "./globals.css";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -4,6 +4,9 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getQuestions } from "@/lib/questions";
 import Logo from "@/components/Logo";
+import { createTestSession } from "@/services/testSessions";
+import { supabase } from "@/lib/supabase";
+import { useUser } from "@clerk/nextjs";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -32,6 +35,10 @@ const TargetIcon = () => (
 function TestSessionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const { user } = useUser();
+
+const [sessionId, setSessionId] = useState(null);
 
   // 1. Extract URL Parameters
   const durationParam = Number(searchParams.get("duration")) || 30; // mins
@@ -74,6 +81,21 @@ useEffect(() => {
 
       setQuestions(shuffled);
       setTimeLeft(durationParam * 60);
+      if(user){
+
+ const session = await createTestSession({
+    userId:user.id,
+    exam:"JEE Main",
+    subjects:[subjectParam],
+    chapters:[chapterParam],
+    difficulty:difficultyParam,
+    questions:shuffled,
+    duration:durationParam,
+ });
+
+ setSessionId(session.id);
+
+}
     } catch (err) {
       console.error(err);
       alert("Failed to load questions.");
@@ -82,11 +104,84 @@ useEffect(() => {
 
   loadQuestions();
 }, [subjectParam, difficultyParam, countParam, durationParam]);
-  function handleSubmit() {
-    setIsFinished(true);
-    clearInterval(timerRef.current);
-    // TODO: Supabase save logic goes here later
-  }
+  async function handleSubmit() {
+
+try {
+
+let correct = 0;
+
+questions.forEach(q=>{
+ if(answers[q.id] === q.correct){
+   correct++;
+ }
+});
+
+
+const attempted = Object.keys(answers).length;
+const wrong = attempted - correct;
+
+
+const {data:attempt,error}=await supabase
+.from("test_attempts")
+.insert({
+
+
+user_id:user.id,
+  session_id: crypto.randomUUID(),
+score:correct,
+correct_answers:correct,
+wrong_answers:wrong,
+attempted,
+total_questions:questions.length,
+duration_minutes: Number(searchParams.get("duration")) || 15,
+
+time_taken_seconds:
+(durationParam * 60) - timeLeft
+
+})
+.select()
+.single();
+
+
+if(error) throw error;
+
+
+
+const answerRows = questions.map(q=>({
+
+attempt_id:attempt.id,
+
+question_id:q.id,
+
+selected_option:
+answers[q.id] !== undefined
+? ["A","B","C","D"][answers[q.id]]
+: null,
+
+
+is_correct:
+answers[q.id] === q.correct
+
+}));
+
+
+await supabase
+.from("user_answers")
+.insert(answerRows);
+
+
+
+setIsFinished(true);
+clearInterval(timerRef.current);
+
+
+}
+catch(err){
+ console.log("SAVE ERROR 👉", err);
+ alert(err.message);
+}
+
+}
   
   // 4. Timer Logic
   useEffect(() => {

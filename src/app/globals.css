@@ -123,6 +123,6 @@ body {
   color: #F87171 !important;
 }
 
-/* ── React PDF Viewer Base Styles ─────────────────────────────── */
-@import "@react-pdf-viewer/core/lib/styles/index.css";
-@import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+/* ── React PDF Viewer Base Styles ─────────────────────────────── 
+@import "@react-pdf-viewer/core/styles/index.css";
+@import "@react-pdf-viewer/default-layout/styles/index.css"; */
