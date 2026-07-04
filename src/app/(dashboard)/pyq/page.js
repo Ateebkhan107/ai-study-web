@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -81,12 +82,15 @@ const MASTER_SAVED = [
   { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard", track: "neet", question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
 ];
 
-const MASTER_ANALYTICS = [
-  { subject: "Physics",     attempted: 98,  accuracy: 74, color: "#3b82f6", track: "mixed" },
-  { subject: "Chemistry",   attempted: 86,  accuracy: 68, color: "#a855f7", track: "mixed" },
-  { subject: "Mathematics", attempted: 112, accuracy: 79, color: "#06b6d4", track: "jee" },
-  { subject: "Biology",     attempted: 146, accuracy: 82, color: "#10b981", track: "neet" },
-];
+// Colors for the Syllabus Coverage bars — subject list itself now comes live
+// from /api/pyq/analytics, so this is just a lookup, not a data source.
+const SUBJECT_BAR_COLORS = {
+  Physics: "#3b82f6",
+  Chemistry: "#a855f7",
+  Mathematics: "#06b6d4",
+  Maths: "#06b6d4",
+  Biology: "#10b981",
+};
 
 // ─── Shared Atomic Components ────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
@@ -226,33 +230,95 @@ function PracticeTab({ subjects, track }) {
   );
 }
 
-function AnalyticsTab({ track, analyticsData }) {
-  const isNeet = track === "neet";
+function AnalyticsTab({ track }) {
+
+  const [analytics, setAnalytics] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+
+    let cancelled = false;
+
+    async function loadAnalytics() {
+
+      setLoading(true);
+      setLoadError("");
+
+      try {
+
+        const result = await getPYQAnalytics();
+        if (!cancelled) setAnalytics(result);
+
+      }
+      catch (error) {
+
+        console.error("Failed to load PYQ analytics:", error);
+        if (!cancelled) setLoadError("Failed to load analytics. Please try again.");
+
+      }
+      finally {
+
+        if (!cancelled) setLoading(false);
+
+      }
+
+    }
+
+    loadAnalytics();
+
+    return () => { cancelled = true; };
+
+  }, []);
+
+  if (loading) {
+    return <p className={`text-sm ${TXT_MUTED}`}>Loading analytics...</p>;
+  }
+
+  if (loadError) {
+    return <p className="text-sm text-red-500">{loadError}</p>;
+  }
+
+  const attempted = analytics?.attempted ?? 0;
+  const accuracy  = analytics?.accuracy  ?? 0;
+  const streak    = analytics?.streak    ?? 0;
+  const subjects  = analytics?.subjects  ?? [];
+
+  // Derive Top Subject / Underperforming Segment from the real per-subject
+  // accuracy data instead of hardcoding them.
+  const sortedByAccuracy = [...subjects].sort((a, b) => b.accuracy - a.accuracy);
+  const topSubject = sortedByAccuracy[0];
+  const weakestSubject = sortedByAccuracy[sortedByAccuracy.length - 1];
+
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          { Icon: I.Target,       label: "Attempted Run",    value: "342",  sublabel: "Questions Answered", accent: "#3b82f6" },
-          { Icon: I.CheckCircle2, label: "Accuracy Target",  value: "74%",  sublabel: "Correct Response",   accent: "#10b981" },
-          { Icon: I.Flame,        label: "Archive Streak",   value: "12d",  sublabel: "Daily Momentum",     accent: "#f59e0b" },
-          { Icon: I.Clock,        label: "Pacing Duration",  value: "48h",  sublabel: "Total System Time",  accent: "#a855f7" },
+          { Icon: I.Target,       label: "Attempted Run",   value: String(attempted), sublabel: "Questions Answered", accent: "#3b82f6" },
+          { Icon: I.CheckCircle2, label: "Accuracy Target", value: `${accuracy}%`,    sublabel: "Correct Response",   accent: "#10b981" },
+          { Icon: I.Flame,        label: "Archive Streak",  value: `${streak}d`,      sublabel: "Daily Momentum",     accent: "#f59e0b" },
         ].map(s => <StatCard key={s.label} {...s} />)}
       </div>
 
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
         <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
+
+        {subjects.length === 0 && (
+          <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>
+        )}
+
         <div className="space-y-5">
-          {analyticsData.map(item => (
+          {subjects.map(item => (
             <div key={item.subject}>
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
                 <div className="flex items-center gap-3">
-                  <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} solved</span>
+                  <span className={`text-xs ${TXT_MUTED}`}>{item.solved} solved</span>
                   <span className="text-sm font-bold">{item.accuracy}%</span>
                 </div>
               </div>
               <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div className="h-full rounded-full" style={{ width: `${item.accuracy}%`, background: item.color }} />
+                <div className="h-full rounded-full" style={{ width: `${item.accuracy}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }} />
               </div>
             </div>
           ))}
@@ -263,20 +329,22 @@ function AnalyticsTab({ track, analyticsData }) {
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
           <I.Award size={18} className="text-amber-400 mb-3" />
           <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
-          <p className="text-xl font-bold">{isNeet ? "Biology" : "Mathematics"}</p>
-          <p className="text-sm text-gray-500 mt-1">79% accuracy rating</p>
+          <p className="text-xl font-bold">{topSubject ? topSubject.subject : "—"}</p>
+          <p className="text-sm text-gray-500 mt-1">{topSubject ? `${topSubject.accuracy}% accuracy rating` : "No data yet"}</p>
         </div>
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
           <I.TrendingUp size={18} className="text-blue-400 mb-3" />
           <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
-          <p className="text-xl font-bold">Physics</p>
-          <p className="text-sm text-gray-500 mt-1">Target core concepts</p>
+          <p className="text-xl font-bold">{weakestSubject ? weakestSubject.subject : "—"}</p>
+          <p className="text-sm text-gray-500 mt-1">{weakestSubject ? "Target core concepts" : "No data yet"}</p>
         </div>
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
           <I.Sparkles size={18} className="text-emerald-400 mb-3" />
           <p className="text-xs text-emerald-500 uppercase tracking-widest font-semibold mb-1">AI Directives</p>
           <p className="text-sm font-medium text-emerald-300">
-            {isNeet ? "Review Organic Chemistry pathways to unlock an incremental 15 marks." : "Solidify Vector Algebra formulas to accelerate mock tests speed parameters."}
+            {weakestSubject
+              ? `Focus on ${weakestSubject.subject}: only ${weakestSubject.accuracy}% accuracy across ${weakestSubject.solved} solved. Prioritize ${weakestSubject.subject} PYQs this week to close the gap.`
+              : "Solve a few PYQs to unlock a personalized recommendation."}
           </p>
         </div>
       </div>
@@ -331,15 +399,79 @@ export default function PYQPage() {
   const filteredSubjects = MASTER_SUBJECTS.filter(s => s.tracks.includes(track));
   const filteredRecent = MASTER_RECENT.filter(r => r.track === "mixed" || r.track === track);
   const filteredSaved = MASTER_SAVED.filter(s => s.track === "mixed" || s.track === track);
-  const filteredAnalytics = MASTER_ANALYTICS.filter(a => a.track === "mixed" || a.track === track);
 
-  const totalQuestionBankCount = filteredSubjects.reduce((sum, s) => sum + s.count, 0);
+  // ── Live data for the header stat cards ──────────────────────────
+  const [overview, setOverview] = useState(null);
+  const [attemptedTotal, setAttemptedTotal] = useState(null);
+
+  useEffect(() => {
+
+    let cancelled = false;
+
+    async function loadOverview() {
+
+      try {
+
+        const result = await getPYQOverview(track);
+        if (!cancelled) setOverview(result);
+
+      }
+      catch (error) {
+
+        console.error("Failed to load PYQ overview:", error);
+
+      }
+
+    }
+
+    loadOverview();
+
+    return () => { cancelled = true; };
+
+  }, [track]);
+
+  useEffect(() => {
+
+    let cancelled = false;
+
+    async function loadAttemptedTotal() {
+
+      try {
+
+        const result = await getPYQAnalytics();
+        if (!cancelled) setAttemptedTotal(result.attempted);
+
+      }
+      catch (error) {
+
+        console.error("Failed to load PYQ attempted total:", error);
+
+      }
+
+    }
+
+    loadAttemptedTotal();
+
+    return () => { cancelled = true; };
+
+  }, []);
+
+  const questionVaultValue = overview ? overview.totalQuestions.toLocaleString() : "—";
+
+  const yearRangeValue = (overview && overview.minYear && overview.maxYear)
+    ? `${overview.maxYear - overview.minYear + 1} Years`
+    : "—";
+
+  const yearRangeSublabel = (overview && overview.minYear && overview.maxYear)
+    ? `${overview.minYear} – ${overview.maxYear} Bulletins`
+    : "No data yet";
+
+  const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
 
   const PAGE_STATS = [
-    { Icon: I.BookOpen, label: "Question Vault", value: totalQuestionBankCount.toLocaleString(), sublabel: "Track Matched Qs", accent: "#3b82f6" },
-    { Icon: I.Calendar, label: "Index Matrix",   value: "10 Years",                 sublabel: "2017 – 2026 Bulletins", accent: "#a855f7" },
-    { Icon: I.Target,   label: "Solved Load",    value: "342 Sets",                  sublabel: "Practiced Units", accent: "#06b6d4" },
-    { Icon: I.Star,     label: "Revision Deck",  value: filteredSaved.length.toString(), sublabel: "Saved Bookmarks", accent: "#f59e0b" },
+    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs", accent: "#3b82f6" },
+    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel, accent: "#a855f7" },
+    { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units", accent: "#06b6d4" },
   ];
 
   return (
@@ -363,7 +495,7 @@ export default function PYQPage() {
         </div>
 
         {/* Dynamic Stats Row Displays */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {PAGE_STATS.map(s => <StatCard key={s.label} {...s} />)}
         </div>
 
@@ -390,7 +522,7 @@ export default function PYQPage() {
 subjects={filteredSubjects}
 track={track}
 />}
-        {activeTab === "analytics" && <AnalyticsTab track={track} analyticsData={filteredAnalytics} />}
+        {activeTab === "analytics" && <AnalyticsTab track={track} />}
         {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
 
       </div>

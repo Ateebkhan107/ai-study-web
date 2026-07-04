@@ -76,3 +76,57 @@ export async function savePYQAttempt(attempt) {
   return res.json();
 
 }
+
+
+
+
+// =============================
+// GET PYQ ANALYTICS
+// =============================
+
+export async function getPYQAnalytics() {
+
+  const res = await fetch("/api/pyq/analytics");
+
+
+  if (!res.ok) {
+
+    const error = await res.json().catch(() => ({}));
+
+    console.log("REAL ANALYTICS ERROR:", error);
+
+    throw new Error(error.error || "Failed to load PYQ analytics");
+
+  }
+
+
+  return res.json();
+
+}
+
+
+
+
+// =============================
+// GET PYQ OVERVIEW (Question Vault / Index Matrix)
+// =============================
+
+export async function getPYQOverview(track) {
+
+  const res = await fetch(`/api/pyq/overview?track=${track}`);
+
+
+  if (!res.ok) {
+
+    const error = await res.json().catch(() => ({}));
+
+    console.log("REAL OVERVIEW ERROR:", error);
+
+    throw new Error(error.error || "Failed to load PYQ overview");
+
+  }
+
+
+  return res.json();
+
+}
