@@ -2,91 +2,136 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 
-export async function GET(){
+// XP LEVEL SYSTEM
+function getLevel(xp) {
 
-  const {data,error}=await supabase
-  .from("pyq_attempts")
-  .select("*");
+  if (xp >= 10000) {
+    return {
+      level: "Master",
+      badge: "👑",
+      progress: 100,
+    };
+  }
 
 
-  if(error){
+  if (xp >= 5000) {
+    return {
+      level: "Diamond",
+      badge: "💎",
+      progress: Math.floor(
+        ((xp - 5000) / 5000) * 100
+      ),
+    };
+  }
+
+
+  if (xp >= 2000) {
+    return {
+      level: "Gold",
+      badge: "🥇",
+      progress: Math.floor(
+        ((xp - 2000) / 3000) * 100
+      ),
+    };
+  }
+
+
+  if (xp >= 500) {
+    return {
+      level: "Silver",
+      badge: "🥈",
+      progress: Math.floor(
+        ((xp - 500) / 1500) * 100
+      ),
+    };
+  }
+
+
+  return {
+    level: "Bronze",
+    badge: "🥉",
+    progress: Math.floor(
+      (xp / 500) * 100
+    ),
+  };
+
+}
+
+
+
+export async function GET() {
+
+  const { data, error } = await supabase
+    .from("user_xp")
+    .select(
+      `
+      user_id,
+      name,
+      xp,
+      pyq_solved,
+      correct_answers,
+      accuracy
+      `
+    )
+    .order(
+      "xp",
+      {
+        ascending:false
+      }
+    );
+
+
+  if (error) {
 
     return NextResponse.json(
-      {error:error.message},
-      {status:500}
+      {
+        error:error.message
+      },
+      {
+        status:500
+      }
     );
 
   }
 
 
-  const users={};
+
+  const leaderboard =
+    data.map((user,index)=>{
+
+      const levelData = getLevel(
+        user.xp || 0
+      );
 
 
-  data.forEach((attempt)=>{
+      return {
+
+        rank:index+1,
+
+        user_id:user.user_id,
+
+        name:user.name,
+
+        xp:user.xp,
+
+        solved:user.pyq_solved,
+
+        correct:user.correct_answers,
+
+        accuracy:user.accuracy,
 
 
-    if(!users[attempt.user_id]){
+        // NEW LEVEL SYSTEM
+        level:levelData.level,
 
-      users[attempt.user_id]={
+        badge:levelData.badge,
 
-        user_id:attempt.user_id,
-
-        name:"Student",
-
-        solved:0,
-
-        correct:0,
-
-        xp:0
+        progress:levelData.progress,
 
       };
 
-    }
+    });
 
-
-
-    users[attempt.user_id].solved++;
-
-
-    if(attempt.is_correct){
-
-      users[attempt.user_id].correct++;
-
-      users[attempt.user_id].xp += 15;
-
-    }
-
-    else{
-
-      users[attempt.user_id].xp +=5;
-
-    }
-
-
-
-  });
-
-
-
-  const leaderboard =
-  Object.values(users)
-  .map(user=>({
-
-    ...user,
-
-    accuracy:
-    Math.round(
-      (user.correct/user.solved)*100
-    )
-
-  }))
-  .sort((a,b)=>b.xp-a.xp)
-  .map((user,index)=>({
-
-      rank:index+1,
-      ...user
-
-  }));
 
 
   return NextResponse.json(

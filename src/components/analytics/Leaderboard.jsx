@@ -21,14 +21,17 @@ export default function Leaderboard() {
 
       setUsers(data);
 
+
     } catch(error) {
 
-      console.log("Leaderboard error:", error);
+      console.log(
+        "Leaderboard error:",
+        error
+      );
 
     }
 
   }
-
 
 
 
@@ -49,11 +52,11 @@ export default function Leaderboard() {
 
         {
 
-          event: "*",
+          event:"*",
 
-          schema: "public",
+          schema:"public",
 
-          table: "user_xp",
+          table:"user_xp",
 
         },
 
@@ -84,15 +87,14 @@ export default function Leaderboard() {
 
 
 
-
-
   return (
 
     <div className="rounded-2xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-[#0b1020]">
 
 
-      <div className="flex items-center gap-2 mb-6">
+      {/* HEADER */}
 
+      <div className="flex items-center gap-2 mb-6">
 
         <Trophy size={24}/>
 
@@ -103,9 +105,7 @@ export default function Leaderboard() {
 
         </h2>
 
-
       </div>
-
 
 
 
@@ -130,7 +130,6 @@ export default function Leaderboard() {
 
 
 
-
         {users.map((user,index)=>(
 
 
@@ -138,50 +137,120 @@ export default function Leaderboard() {
 
             key={user.user_id}
 
-            className="flex items-center justify-between p-5 rounded-xl bg-gray-50 dark:bg-gray-900"
+            className="
+            p-5 rounded-xl
+            bg-gray-50 dark:bg-gray-900
+            "
 
           >
 
 
 
+            {/* TOP ROW */}
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between">
 
 
-              <div className="text-xl">
+              <div className="flex items-center gap-4">
 
-                {index===0 && "🥇"}
-                {index===1 && "🥈"}
-                {index===2 && "🥉"}
-                {index>2 && `#${index+1}`}
+
+                {/* Rank */}
+
+                <div className="
+                w-12 h-12 rounded-full
+                bg-white dark:bg-gray-800
+                flex items-center justify-center
+                text-xl
+                font-black
+                ">
+
+                  {index===0 && "🥇"}
+                  {index===1 && "🥈"}
+                  {index===2 && "🥉"}
+                  {index>2 && `#${index+1}`}
+
+                </div>
+
+
+
+
+
+                {/* USER INFO */}
+
+                <div>
+
+
+                  <h3 className="
+                  font-bold text-lg
+                  text-black dark:text-white
+                  ">
+
+                    {user.name}
+
+                  </h3>
+
+
+
+                  <p className="
+                  text-sm text-gray-400
+                  ">
+
+
+                    {user.solved} solved • {user.accuracy}% accuracy
+
+
+                  </p>
+
+
+
+
+                  {/* LEVEL */}
+
+                  <div className="
+                  mt-2 inline-flex
+                  items-center gap-1
+                  px-2 py-1
+                  rounded-full
+
+                  bg-gray-200
+                  dark:bg-gray-800
+
+                  text-xs
+                  font-bold
+                  ">
+
+                    {user.badge}
+
+                    {user.level} League
+
+                  </div>
+
+
+
+
+                </div>
+
 
               </div>
 
 
 
 
-              <div>
-
-
-                <h3 className="font-bold text-lg text-black dark:text-white">
-
-                  {user.name}
-
-                </h3>
 
 
 
-                <p className="text-sm text-gray-400">
+              {/* XP */}
 
+              <div className="
+              font-black text-xl
+              text-black dark:text-white
+              ">
 
-                  {user.pyq_solved} solved • {user.accuracy}% accuracy
-
-
-                </p>
-
-
+                {user.xp} XP
 
               </div>
+
+
 
 
             </div>
@@ -191,13 +260,53 @@ export default function Leaderboard() {
 
 
 
+            {/* XP PROGRESS */}
 
-            <div className="font-black text-xl text-black dark:text-white">
+            <div className="mt-4">
 
-              {user.xp} XP
+
+              <div className="
+              h-2 rounded-full
+              bg-gray-200 dark:bg-gray-700
+              overflow-hidden
+              ">
+
+
+                <div
+
+                  className="
+                  h-full
+                  bg-blue-600
+                  rounded-full
+                  transition-all
+                  "
+
+                  style={{
+
+                    width:
+                    `${user.progress}%`
+
+                  }}
+
+                />
+
+
+              </div>
+
+
+
+
+              <p className="
+              mt-1 text-xs
+              text-gray-400
+              ">
+
+                {user.progress}% to next level
+
+              </p>
+
 
             </div>
-
 
 
 
@@ -208,14 +317,11 @@ export default function Leaderboard() {
         ))}
 
 
-
       </div>
-
 
 
     </div>
 
   );
-
 
 }
