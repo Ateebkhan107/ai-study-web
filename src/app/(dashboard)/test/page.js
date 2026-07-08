@@ -7,7 +7,7 @@ import QuickTest from "@/components/test/QuickTest";
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
 const TEST_TOOLS = [
   {
-    href: "/history",
+    href: "/test/history",
     label: "Test History",
     description: "Review all your previous attempts and scores",
     icon: (

@@ -46,65 +46,109 @@ const basePlugin = { legend: { display: false } };
 // ─────────────────────────────────────────────────────────────────
 // PerformanceTrend — Line chart
 // ─────────────────────────────────────────────────────────────────
-export function PerformanceTrend({ track = "jee" }) {
-  // Isolate core sequence streams
-  const filteredSeries = PERFORMANCE_SERIES.filter((s) => {
-    const sub = s.subject.toLowerCase();
-    if (track === "jee" && sub === "biology") return false;
-    if (track === "neet" && (sub === "maths" || sub === "mathematics")) return false;
-    return true;
-  });
+export function PerformanceTrend({ track, data = [] }) {
 
-  useChart("perfTrendChart", (dark) => ({
-    type: "line",
-    data: {
-      labels: PERFORMANCE_WEEKS,
-      datasets: filteredSeries.map((s) => ({
-        label:           s.subject,
-        data:            s.data,
-        borderColor:     s.color,
-        backgroundColor: "transparent",
-        borderDash:      s.dash,
-        tension:         0.4,
-        pointRadius:     3,
-        pointBackgroundColor: s.color,
-      })),
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: basePlugin,
-      scales: {
-        x: { grid: { color: gridColor(dark) }, ticks: { color: tickColor(dark), font: { size: 11 } } },
-        y: {
-          min: 50, max: 90,
-          grid: { color: gridColor(dark) },
-          ticks: { color: tickColor(dark), font: { size: 11 }, callback: (v) => v + "%" },
-        },
+  const chartData =
+    data.length > 0
+      ? data
+      : [
+          { label: "No tests", score: 0 }
+        ];
+
+
+  useChart(
+    "performance-chart",
+    () => ({
+      type: "line",
+
+      data: {
+        labels: chartData.map(
+          item => item.label
+        ),
+
+        datasets: [
+          {
+            label: "Score %",
+            
+            data: chartData.map(
+              item => item.score
+            ),
+
+            tension: 0.4,
+
+            showLine: true,
+
+            pointRadius: 6,
+          },
+        ],
       },
-    },
-  }), [track]);
+
+
+      options: {
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+          legend:{
+            display:false
+          }
+        },
+
+
+        scales:{
+
+          y:{
+            beginAtZero:true,
+
+            max:100,
+
+            ticks:{
+              callback:(value)=> value + "%"
+            }
+          }
+
+        }
+
+      },
+
+
+    }),
+
+    [track, data]
+
+  );
+
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm h-full">
-      <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
-        Performance Trend
-      </h2>
-      <div className="flex flex-wrap gap-3 mb-3">
-        {filteredSeries.map((s) => (
-          <span key={s.subject} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-            <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: s.color }} />
-            {s.subject}
-          </span>
-        ))}
+
+    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+
+      <div className="mb-5">
+
+        <h2 className="text-xs font-bold uppercase tracking-widest">
+          Performance Trend
+        </h2>
+
+        <p className="text-xs text-gray-400">
+          Your test score improvement
+        </p>
+
       </div>
-      <div className="relative h-56">
-        <canvas id="perfTrendChart" role="img" aria-label="Line chart showing weekly accuracy trends">
-          Performance trending upward across all subjects over 8 weeks.
-        </canvas>
+
+
+      <div className="h-72">
+
+        <canvas id="performance-chart"></canvas>
+
       </div>
+
+
     </div>
+
   );
+
 }
 
 // ─────────────────────────────────────────────────────────────────

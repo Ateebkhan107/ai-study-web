@@ -414,7 +414,7 @@ Review Answers
               
               {/* Secondary: Test History */}
               <button
-                onClick={() => router.push("/analytics")}
+                onClick={() => router.push("/test/history")}
                 className="w-full py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 View Test History
