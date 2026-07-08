@@ -52,7 +52,7 @@ function TestSessionContent() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState({}); // { questionId: selectedIndex }
   const [timeLeft, setTimeLeft] = useState(durationParam * 60);
-  const [isFinished, setIsFinished] = useState(false);
+
   const [attemptId, setAttemptId] = useState(null);
   const timerRef = useRef(null);
 
@@ -169,8 +169,9 @@ function TestSessionContent() {
       console.log("TEST XP UPDATED 👉", xpData);
 
       // FINISH TEST
-      setIsFinished(true);
-      clearInterval(timerRef.current);
+     router.replace(`/test/result/${attempt.id}`);
+
+clearInterval(timerRef.current);
 
     } catch (err) {
       console.error("SAVE ERROR 👉", err);
@@ -180,7 +181,7 @@ function TestSessionContent() {
   
   // 4. Timer Logic
   useEffect(() => {
-    if (questions.length === 0 || isFinished) return;
+    if (questions.length === 0) return;
 
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -194,7 +195,7 @@ function TestSessionContent() {
     }, 1000);
 
     return () => clearInterval(timerRef.current);
-  }, [questions.length, isFinished]);
+  }, [questions.length]);
 
   // 5. Handlers
   const handleSelect = (qId, optIdx) => {
@@ -227,123 +228,7 @@ function TestSessionContent() {
     );
   }
 
-  // ─────────────────────────────────────────────────────────────────
-  // Finished State (Premium Result Screen)
-  // ─────────────────────────────────────────────────────────────────
-  if (isFinished) {
-    if (!questions || questions.length === 0) {
-      return (
-        <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex flex-col items-center justify-center p-6">
-          <p className="text-gray-500 mb-4 font-medium">Test data is unavailable.</p>
-          <button onClick={() => router.push("/dashboard")} className="px-6 py-2 bg-black text-white rounded-xl font-bold">Return to Dashboard</button>
-        </div>
-      );
-    }
-
-    const attempted = Object.keys(answers).length;
-    let correct = 0;
-    
-    questions.forEach((q) => {
-      if (answers[q.id] === q.correct) correct++;
-    });
-
-    const wrong = attempted - correct;
-    const skipped = questions.length - attempted;
-    const score = (correct * 4) - wrong;
-    const totalMarks = questions.length * 4;
-    const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-    const timeTaken = (durationParam * 60) - timeLeft;
-    
-    let feedbackMessage = "Needs Improvement 📚";
-    let feedbackColor = "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10";
-    if (accuracy >= 90) {
-      feedbackMessage = "Excellent Work 🎉";
-      feedbackColor = "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10";
-    } else if (accuracy >= 70) {
-      feedbackMessage = "Good Attempt 🚀";
-      feedbackColor = "text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/10";
-    }
-
-    const themeMaps = {
-      emerald: "bg-emerald-50 border-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:border-emerald-500/20 dark:text-emerald-400",
-      rose: "bg-rose-50 border-rose-100 text-rose-600 dark:bg-rose-500/10 dark:border-rose-500/20 dark:text-rose-400",
-      slate: "bg-slate-50 border-slate-200 text-slate-600 dark:bg-slate-500/10 dark:border-slate-500/20 dark:text-slate-400",
-      indigo: "bg-indigo-50 border-indigo-100 text-indigo-600 dark:bg-indigo-500/10 dark:border-indigo-500/20 dark:text-indigo-400",
-    };
-
-    return (
-      <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex flex-col items-center justify-center p-4 sm:p-6">
-        <div className="w-full max-w-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-[2rem] p-6 sm:p-10 shadow-2xl shadow-gray-200/50 dark:shadow-black/50 text-center relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
-          <div className="relative z-10">
-            <div className="w-16 h-16 mx-auto bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-5 shadow-sm">
-              🎯
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-              Test Submitted!
-            </h1>
-            <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-8 ${feedbackColor}`}>
-              <span className="text-sm font-black tracking-wide">{feedbackMessage}</span>
-            </div>
-            <div className="mb-8 p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 text-left">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">Session Summary</p>
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-                {[
-                  { label: "Mode", val: mode === "quick" ? "Quick Session" : "Custom Test" },
-                  { label: "Subject", val: subjectParam },
-                  { label: "Difficulty", val: difficultyParam, classes: "capitalize" },
-                  { label: "Questions", val: questions.length },
-                  { label: "Time", val: formatTime(timeTaken) },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
-                    <span className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400">{item.label}:</span>
-                    <span className={`text-[10px] sm:text-xs font-black text-gray-900 dark:text-white ${item.classes || ""}`}>{item.val}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-10">
-              {[
-                { label: "Score", val: `${score}/${totalMarks}`, theme: "indigo", icon: <TargetIcon/> },
-                { label: "Correct", val: correct, theme: "emerald", icon: <CheckIcon/> },
-                { label: "Wrong", val: wrong, theme: "rose", icon: <XIcon/> },
-                { label: "Skipped", val: skipped, theme: "slate", icon: <MinusIcon/> },
-                { label: "Accuracy", val: `${accuracy}%`, theme: "indigo", icon: <TargetIcon/> }
-              ].map((stat, i) => (
-                <div key={i} className={`flex flex-col items-center justify-center p-5 rounded-2xl border ${themeMaps[stat.theme]} transition-transform hover:-translate-y-0.5 duration-200`}>
-                  <div className="mb-2 opacity-80">{stat.icon}</div>
-                  <p className="text-3xl font-black tracking-tight mb-1">{stat.val}</p>
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3 max-w-sm mx-auto">
-
-              {/* Primary: Review Answers */}
-              <button
-onClick={() => router.replace(`/test/review/${attemptId}`)}
-className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black"
->
-Review Answers
-</button>
-              
-              {/* Secondary: Test History */}
-             
-
-              
-              <button onClick={() => router.push("/test/history")} className="w-full py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-
-                View Test History
-              </button>
-              <button onClick={() => router.push("/dashboard")} className="w-full py-3 text-gray-500 dark:text-gray-400 text-sm font-semibold hover:text-gray-900 dark:hover:text-white transition-colors">
-                Back to Dashboard
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  
 
   // ─────────────────────────────────────────────────────────────────
   // Active Test UI

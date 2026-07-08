@@ -143,28 +143,41 @@ px-6 py-10
 
 
 
-<h1 className="
-text-4xl font-black mb-8
-">
+<div className="flex items-center justify-between mb-8">
 
+
+<div>
+
+<p className="text-sm text-gray-400">
+Test Analysis
+</p>
+
+
+<h1 className="text-3xl font-bold">
 Review Answers
-
 </h1>
+
+</div>
+
 
 
 <button
-onClick={()=>router.push("/test/history")}
+onClick={() => {
+  router.push(`/test/result/${id}`);
+}}
 className="
-mb-6
 px-5 py-2
 rounded-xl
-bg-black
-text-white
+border
 font-bold
+hover:bg-gray-100
 "
 >
-← Back to Test History
+← Back to Result
 </button>
+
+
+</div>
 
 
 

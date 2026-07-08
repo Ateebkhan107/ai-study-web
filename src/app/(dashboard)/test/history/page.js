@@ -76,11 +76,27 @@ p-10
 ">
 
 
-<h1 className="
-text-4xl font-black mb-8
-">
-Test History
-</h1>
+<div className="flex items-center justify-between mb-8">
+
+  <h1 className="text-4xl font-bold">
+    Test History
+  </h1>
+
+
+  <button
+    onClick={() => router.back()}
+    className="
+    px-5 py-2
+    rounded-xl
+    border
+    font-bold
+    hover:bg-gray-100
+    "
+  >
+    ← Back to Result
+  </button>
+
+</div>
 
 
 
