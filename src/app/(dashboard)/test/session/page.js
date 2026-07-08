@@ -57,6 +57,7 @@ const [sessionId, setSessionId] = useState(null);
   const [answers, setAnswers] = useState({}); // { questionId: selectedIndex }
   const [timeLeft, setTimeLeft] = useState(durationParam * 60);
   const [isFinished, setIsFinished] = useState(false);
+  const [attemptId, setAttemptId] = useState(null);
   const timerRef = useRef(null);
 
   // 3. Initialize the Test Pool
@@ -119,20 +120,39 @@ questions.forEach(q=>{
 
 const attempted = Object.keys(answers).length;
 const wrong = attempted - correct;
+const skipped = questions.length - attempted;
 
+
+// JEE MARKING
+const score = (correct * 4) - wrong ;
+const totalMarks = questions.length * 4;
+const accuracy = attempted > 0 
+? Math.round((correct / attempted) * 100) 
+: 0;
+
+
+const timeTaken = (durationParam * 60) - timeLeft;
 
 const {data:attempt,error}=await supabase
 .from("test_attempts")
 .insert({
 
-
 user_id:user.id,
-  session_id: crypto.randomUUID(),
-score:correct,
-correct_answers:correct,
-wrong_answers:wrong,
+
+session_id: crypto.randomUUID(),
+
+score: score,
+
+total_marks: totalMarks,
+
+correct_answers: correct,
+
+wrong_answers: wrong,
+
 attempted,
-total_questions:questions.length,
+
+total_questions: questions.length,
+
 duration_minutes: Number(searchParams.get("duration")) || 15,
 
 time_taken_seconds:
@@ -145,10 +165,13 @@ time_taken_seconds:
 
 if(error) throw error;
 
+setAttemptId(attempt.id);
+
 
 
 const answerRows = questions.map(q=>({
 
+  
 attempt_id:attempt.id,
 
 question_id:q.id,
@@ -164,10 +187,13 @@ answers[q.id] === q.correct
 
 }));
 
-
-await supabase
+const { error: answerError } = await supabase
 .from("user_answers")
 .insert(answerRows);
+
+
+if(answerError) throw answerError;
+
 
 
 
@@ -256,11 +282,21 @@ catch(err){
       if (answers[q.id] === q.correct) correct++;
     });
 
-    const wrong = attempted - correct;
-    const skipped = questions.length - attempted;
-    const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-    const timeTaken = (durationParam * 60) - timeLeft;
+   const wrong = attempted - correct;
+const skipped = questions.length - attempted;
 
+
+// JEE SCORE
+const score = (correct * 4) - wrong;
+const totalMarks = questions.length * 4;
+
+
+const accuracy = attempted > 0 
+? Math.round((correct / attempted) * 100) 
+: 0;
+
+
+const timeTaken = (durationParam * 60) - timeLeft;
     // Dynamic Feedback Logic
     let feedbackMessage = "Needs Improvement 📚";
     let feedbackColor = "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10";
@@ -323,11 +359,41 @@ catch(err){
             {/* New 2x2 Stats Grid */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-10">
               {[
-                { label: "Correct", val: correct, theme: "emerald", icon: <CheckIcon /> },
-                { label: "Wrong", val: wrong, theme: "rose", icon: <XIcon /> },
-                { label: "Skipped", val: skipped, theme: "slate", icon: <MinusIcon /> },
-                { label: "Accuracy", val: `${accuracy}%`, theme: "indigo", icon: <TargetIcon /> },
-              ].map((stat, i) => (
+ { 
+ label:"Score",
+ val:`${score}/${totalMarks}`,
+ theme:"indigo",
+ icon:<TargetIcon/>
+ },
+
+ { 
+ label: "Correct",
+ val: correct,
+ theme:"emerald",
+ icon:<CheckIcon/>
+ },
+
+ {
+ label:"Wrong",
+ val:wrong,
+ theme:"rose",
+ icon:<XIcon/>
+ },
+
+ {
+ label:"Skipped",
+ val:skipped,
+ theme:"slate",
+ icon:<MinusIcon/>
+ },
+
+ {
+ label:"Accuracy",
+ val:`${accuracy}%`,
+ theme:"indigo",
+ icon:<TargetIcon/>
+ }
+].map((stat, i) => (
                 <div key={i} className={`flex flex-col items-center justify-center p-5 rounded-2xl border ${themeMaps[stat.theme]} transition-transform hover:-translate-y-0.5 duration-200`}>
                   <div className="mb-2 opacity-80">{stat.icon}</div>
                   <p className="text-3xl font-black tracking-tight mb-1">{stat.val}</p>
@@ -340,11 +406,11 @@ catch(err){
             <div className="flex flex-col gap-3 max-w-sm mx-auto">
               {/* Primary: Review Answers */}
               <button
-                onClick={() => alert("Review mode UI is coming next! Stay tuned.")}
-                className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black hover:opacity-90 hover:scale-[0.98] transition-all shadow-lg shadow-gray-900/20 dark:shadow-white/10"
-              >
-                Review Answers
-              </button>
+onClick={() => router.push(`/test/review/${attemptId}`)}
+className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black"
+>
+Review Answers
+</button>
               
               {/* Secondary: Test History */}
               <button
