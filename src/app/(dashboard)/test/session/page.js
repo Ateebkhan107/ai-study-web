@@ -318,7 +318,7 @@ function TestSessionContent() {
               ))}
             </div>
             <div className="flex flex-col gap-3 max-w-sm mx-auto">
-<<<<<<< Updated upstream
+
               {/* Primary: Review Answers */}
               <button
 onClick={() => router.replace(`/test/review/${attemptId}`)}
@@ -328,16 +328,11 @@ Review Answers
 </button>
               
               {/* Secondary: Test History */}
-              <button
-                onClick={() => router.push("/test/history")}
-                className="w-full py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-              >
-=======
-              <button onClick={() => router.push(`/test/review/${attemptId}`)} className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black">
-                Review Answers
-              </button>
+             
+
+              
               <button onClick={() => router.push("/test/history")} className="w-full py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
->>>>>>> Stashed changes
+
                 View Test History
               </button>
               <button onClick={() => router.push("/dashboard")} className="w-full py-3 text-gray-500 dark:text-gray-400 text-sm font-semibold hover:text-gray-900 dark:hover:text-white transition-colors">
