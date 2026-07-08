@@ -1,11 +1,13 @@
 "use client";
 
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 
 const XP_FOR_NEXT_LEVEL = 3000;
 
 export default function ProfilePage() {
+  const { user: clerkUser } = useUser();
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -17,7 +19,7 @@ export default function ProfilePage() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 4 }, (_, i) => currentYear + i);
 
-  // 📡 Step 1: Fetch live student record from our background database router on load
+  // LOAD PROFILE
   useEffect(() => {
     async function fetchLiveProfile() {
       try {
@@ -25,36 +27,32 @@ export default function ProfilePage() {
         if (response.ok) {
           const data = await response.json();
           setUser(data);
-          setEditName(data.full_name || "Syed Ateeb");
+          setEditName(data.full_name || clerkUser?.fullName || "Student");
           setEditExam(data.current_track?.toUpperCase() || "JEE");
           setEditYear(data.target_year || 2026);
         }
       } catch (error) {
-        console.error("Failed to read profile vault rows:", error);
+        console.error("Profile loading failed:", error);
       } finally {
         setLoading(false);
       }
     }
     fetchLiveProfile();
-  }, []);
+  }, [clerkUser]);
 
-  // 🔄 Step 2: Instant multi-toggle handler for pill buttons (Lock-free implementation)
+  // CHANGE TRACK (JEE / NEET toggle)
   const handleTrackToggle = async (newExam) => {
     const currentActiveTrack = user?.current_track || "jee";
-    if (newExam.toLowerCase() === currentActiveTrack.toLowerCase()) return;
-    
-    // Write cookie selection cleanly for client-side layouts
-    if (typeof window !== "undefined") {
-      document.cookie = `prepzii_track=${newExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
-    }
 
-    // Optimistically update screen states instantly 
-    if (user) {
-      setUser((prev) => ({ ...prev, current_track: newExam.toLowerCase() }));
-    } else {
-      setUser({ current_track: newExam.toLowerCase() });
-    }
-    
+    if (newExam.toLowerCase() === currentActiveTrack.toLowerCase()) return;
+
+    document.cookie = `prepzii_track=${newExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
+
+    setUser((prev) => ({
+      ...prev,
+      current_track: newExam.toLowerCase(),
+    }));
+
     setEditExam(newExam);
     setSaved(true);
 
@@ -65,27 +63,25 @@ export default function ProfilePage() {
         body: JSON.stringify({ current_track: newExam.toLowerCase() }),
       });
     } catch (err) {
-      console.error("Database tracker modification failure:", err);
+      console.error(err);
     }
 
     setTimeout(() => {
       setSaved(false);
-      window.location.reload(); // Quick refresh to update the global wrapper layout states
+      window.location.reload();
     }, 1000);
   };
 
-  // 💾 Step 3: Handle saving information from popup/input drawers
+  // SAVE PROFILE (from edit modal)
   const handleSave = async () => {
-    setUser((prev) => ({ 
-      ...prev, 
-      full_name: editName, 
-      current_track: editExam.toLowerCase(), 
-      target_year: editYear 
+    setUser((prev) => ({
+      ...prev,
+      full_name: editName,
+      current_track: editExam.toLowerCase(),
+      target_year: editYear,
     }));
-    
-    if (typeof window !== "undefined") {
-      document.cookie = `prepzii_track=${editExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
-    }
+
+    document.cookie = `prepzii_track=${editExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
 
     setEditing(false);
     setSaved(true);
@@ -94,275 +90,329 @@ export default function ProfilePage() {
       await fetch("/api/profile/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          full_name: editName, 
-          current_track: editExam.toLowerCase(), 
-          target_year: editYear 
+        body: JSON.stringify({
+          full_name: editName,
+          current_track: editExam.toLowerCase(),
+          target_year: editYear,
         }),
       });
     } catch (err) {
-      console.error("Failed to update user row data:", err);
+      console.error(err);
     }
 
     setTimeout(() => setSaved(false), 2500);
   };
 
-  // Render loading skeleton screen while background fetching takes place
   if (loading) {
     return (
       <div className="max-w-5xl mx-auto px-6 py-10 space-y-6 animate-pulse">
         <div className="h-10 bg-gray-200 dark:bg-gray-800 rounded-xl w-32" />
-        <div className="h-44 bg-gray-100 dark:bg-gray-900 rounded-3xl w-full" />
+        <div className="h-44 bg-gray-100 dark:bg-gray-900 rounded-3xl" />
       </div>
     );
   }
 
-  // 🛡️ Step 4: Fallback defaults calculation mapper (Guarantees user fields are NEVER blank)
   const activeUser = {
-    name: user?.full_name || "Syed Ateeb",
-    phone: user?.phone_number || "+91 98765 43210",
-    exam: user?.current_track?.toUpperCase() || editExam || "JEE",
+    name: user?.full_name || clerkUser?.fullName || "Student",
+    email: clerkUser?.primaryEmailAddress?.emailAddress || "No email",
+    avatar: clerkUser?.hasImage ? clerkUser.imageUrl : null,
+    exam: user?.current_track?.toUpperCase() || "JEE",
     targetYear: user?.target_year || 2026,
-    joinedDate: "January 2025",
     xp: user?.xp || 0,
-    level: user?.level || 1,
-    badges: [
-      { icon: "🔥", label: "7-Day Streak", earned: true },
-      { icon: "⚡", label: "Speed Solver", earned: true },
-      { icon: "🎯", label: "Sharpshooter", earned: true },
-      { icon: "💎", label: "50 Tests", earned: false },
-      { icon: "🏆", label: "Top 100", earned: false },
-      { icon: "🧠", label: "All Subjects", earned: false },
-    ]
+    level: user?.level || "Explorer",
+    badge: user?.badge || "🌱",
+    progress: user?.progress || 0,
+
+    // live stats coming from the profile API — each has a sane fallback
+    streak: user?.streak_days ?? 0,
+    avgSolveSeconds: user?.avg_solve_seconds ?? null,
+    accuracy: user?.accuracy_percent ?? 0,
+    testsCompleted: user?.tests_completed ?? 0,
+    rank: user?.rank ?? null,
+    bestMockScore: user?.best_mock_score_percent ?? 0,
   };
 
-  const xpProgress = Math.round(((activeUser.xp || 0) / XP_FOR_NEXT_LEVEL) * 100);
+  // BADGE DEFINITIONS — computed live from activeUser stats, not hardcoded
+  const badgeDefs = [
+    {
+      icon: "🔥",
+      title: "7-Day Streak",
+      earned: activeUser.streak >= 7,
+      detail: `${Math.min(activeUser.streak, 7)}/7 days`,
+    },
+    {
+      icon: "⚡",
+      title: "Speed Solver",
+      earned: activeUser.avgSolveSeconds != null && activeUser.avgSolveSeconds <= 60,
+      detail:
+        activeUser.avgSolveSeconds != null
+          ? `${activeUser.avgSolveSeconds}s avg`
+          : "No data yet",
+    },
+    {
+      icon: "🎯",
+      title: "Sharpshooter",
+      earned: activeUser.accuracy >= 90,
+      detail: `${activeUser.accuracy}% accuracy`,
+    },
+    {
+      icon: "💎",
+      title: "50 Tests",
+      earned: activeUser.testsCompleted >= 50,
+      detail: `${Math.min(activeUser.testsCompleted, 50)}/50 tests`,
+    },
+    {
+      icon: "🏆",
+      title: "Top 100",
+      earned: activeUser.rank != null && activeUser.rank <= 100,
+      detail: activeUser.rank != null ? `Rank #${activeUser.rank}` : "Unranked",
+    },
+    {
+      icon: "🚀",
+      title: "Mock Test Ace",
+      earned: activeUser.bestMockScore >= 90,
+      detail:
+        activeUser.bestMockScore > 0
+          ? `Best: ${activeUser.bestMockScore}%`
+          : "No mocks yet",
+    },
+  ];
+
+  const earnedCount = badgeDefs.filter((b) => b.earned).length;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 space-y-6">
-
-      {/* ── Header ── */}
+    <div className="max-w-5xl mx-auto px-6 py-10 space-y-8">
+      {/* TITLE */}
       <div>
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">Account</p>
-        <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">Profile</h1>
+        <p className="text-xs font-bold uppercase tracking-widest text-gray-400">ACCOUNT</p>
+        <h1 className="text-4xl font-black">Profile</h1>
       </div>
 
-      {/* ── Top section — Avatar + Info + Edit ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-
-          {/* Avatar */}
-          <div className="relative flex-shrink-0">
-            <div className="w-20 h-20 rounded-2xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-3xl font-black border border-gray-100 dark:border-gray-800">
-              {activeUser.name[0]}
+      {/* PROFILE CARD */}
+      <div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-100 dark:border-gray-800/60 p-6 shadow-sm">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-5">
+            {/* AVATAR */}
+            <div className="w-20 h-20 rounded-2xl overflow-hidden bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-3xl font-black shrink-0">
+              {activeUser.avatar ? (
+                <img
+                  src={activeUser.avatar}
+                  alt="profile"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                activeUser.name.charAt(0)
+              )}
             </div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
-          </div>
 
-          {/* Name + meta */}
-          <div className="flex-1 min-w-0">
-            {editing ? (
-              <input
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
-                className="text-2xl font-black text-black dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-1 w-full max-w-xs focus:outline-none focus:border-gray-400 mb-1"
-              />
-            ) : (
-              <h2 className="text-2xl font-black text-black dark:text-white">{activeUser.name}</h2>
-            )}
-            <p className="text-sm text-gray-400 mt-0.5">{activeUser.phone}</p>
-            <div className="flex items-center gap-3 mt-2">
-              <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
-                activeUser.exam === "NEET" 
-                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-500 dark:text-emerald-400" 
-                  : "bg-purple-500/10 border-purple-500/20 text-purple-500 dark:text-purple-400"
-              }`}>
-                {activeUser.exam} Focus
-              </span>
-              <span className="text-xs text-gray-400">Target {activeUser.targetYear}</span>
-              <span className="text-xs text-gray-400">Live Vault Connected ✅</span>
-            </div>
-          </div>
-
-          {/* Edit / Save buttons */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {saved && (
-              <span className="text-xs text-green-500 font-semibold">✓ Live Syncing...</span>
-            )}
-            {editing ? (
-              <>
-                <button
-                  onClick={() => setEditing(false)}
-                  className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSave}
-                  className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer"
-                >
-                  Save
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={() => setEditing(true)}
-                className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
-              >
-                ✎ Edit Profile
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Edit fields drawer */}
-        {editing && (
-          <div className="mt-5 pt-5 border-t border-gray-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
-                Target Exam
-              </label>
-              <div className="flex gap-2">
-                {["JEE", "NEET"].map((e) => (
-                  <button
-                    key={e}
-                    onClick={() => setEditExam(e)}
-                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer
-                      ${editExam === e
-                        ? "bg-black dark:bg-white border-black dark:border-white text-white dark:text-black"
-                        : "border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-400 bg-gray-50 dark:bg-gray-800"
-                      }`}
-                  >
-                    {e}
-                  </button>
-                ))}
+              <h2 className="text-2xl font-black">{activeUser.name}</h2>
+              <p className="text-sm text-gray-400">{activeUser.email}</p>
+
+              <div className="mt-2 flex items-center gap-3 text-xs">
+                <span className="px-3 py-1 rounded-full bg-purple-100 text-purple-600 font-bold">
+                  {activeUser.exam} Focus
+                </span>
+                <span className="text-gray-400">Target {activeUser.targetYear}</span>
               </div>
-            </div>
-            <div>
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
-                Target Year
-              </label>
-              <div className="flex gap-2">
-                {years.map((y) => (
-                  <button
-                    key={y}
-                    onClick={() => setEditYear(y)}
-                    className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer
-                      ${editYear === y
-                        ? "bg-black dark:bg-white border-black dark:border-white text-white dark:text-black"
-                        : "border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-400 bg-gray-50 dark:bg-gray-800"
+
+              {/* JEE / NEET TOGGLE */}
+              <div className="mt-3 inline-flex rounded-xl bg-gray-100 dark:bg-gray-900 p-1">
+                {["JEE", "NEET"].map((track) => {
+                  const isActive = activeUser.exam === track;
+                  return (
+                    <button
+                      key={track}
+                      onClick={() => handleTrackToggle(track)}
+                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                        isActive
+                          ? "bg-black text-white dark:bg-white dark:text-black"
+                          : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
                       }`}
-                  >
-                    {y}
-                  </button>
-                ))}
+                    >
+                      {track}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
-        )}
-      </div>
 
-      {/* ── 🎯 RESTYLED INLINE ACADEMIC TRACK CONFIGURATION CARD ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
-        <div className="space-y-0.5">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-            Academic Track Configuration
-          </p>
-          <h3 className="text-base font-black text-black dark:text-white">
-            Current Target Engine
-          </h3>
-        </div>
-        
-        {/* Simplified Inline Segmented Toggle Bar */}
-        <div className="inline-flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 border border-gray-200/50 dark:border-gray-700 shrink-0">
           <button
-            onClick={() => handleTrackToggle("JEE")}
-            className={`px-4 py-2 text-xs font-black rounded-lg transition-all cursor-pointer ${
-              activeUser.exam === "JEE"
-                ? "bg-white dark:bg-gray-900 text-purple-600 dark:text-purple-400 shadow-sm border border-purple-500/10"
-                : "text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-            }`}
+            type="button"
+            onClick={() => setEditing(true)}
+            className="border border-gray-200 dark:border-gray-700 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2"
           >
-            IIT JEE Engineering 🚀
-          </button>
-          <button
-            onClick={() => handleTrackToggle("NEET")}
-            className={`px-4 py-2 text-xs font-black rounded-lg transition-all cursor-pointer ${
-              activeUser.exam === "NEET"
-                ? "bg-white dark:bg-gray-900 text-emerald-600 dark:text-emerald-400 shadow-sm border border-emerald-500/10"
-                : "text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-            }`}
-          >
-            NEET Medical 🧬
+            ✎ Edit Profile
           </button>
         </div>
       </div>
 
-      {/* ── XP + Level bar ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black text-sm font-black border border-gray-100 dark:border-gray-800">
-              {activeUser.level}
+      {/* XP CARD */}
+      <div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-100 dark:border-gray-800/60 p-6 shadow-sm">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center font-black text-xl shrink-0">
+              {activeUser.badge}
             </div>
             <div>
-              <p className="text-sm font-black text-black dark:text-white">Level {activeUser.level}</p>
-              <p className="text-xs text-gray-400">{activeUser.xp} / {XP_FOR_NEXT_LEVEL} XP</p>
+              <h3 className="font-bold">Level {activeUser.level}</h3>
+              <p className="text-sm text-gray-400">
+                {activeUser.xp} / {XP_FOR_NEXT_LEVEL} XP
+              </p>
             </div>
           </div>
+
           <div className="text-right">
             <p className="text-xs text-gray-400">Next level</p>
-            <p className="text-sm font-bold text-black dark:text-white">{XP_FOR_NEXT_LEVEL - activeUser.xp} XP away</p>
+            <p className="font-bold">
+              {Math.max(XP_FOR_NEXT_LEVEL - activeUser.xp, 0)} XP away
+            </p>
           </div>
         </div>
-        <div className="w-full h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+
+        <div className="mt-5 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
           <div
-            className="h-full bg-black dark:bg-white rounded-full transition-all duration-700"
-            style={{ width: `${xpProgress}%` }}
+            className="h-full bg-black dark:bg-white rounded-full"
+            style={{
+              width: `${Math.min(
+                (activeUser.xp / XP_FOR_NEXT_LEVEL) * 100,
+                100
+              )}%`,
+            }}
           />
         </div>
       </div>
 
-      {/* ── Bottom — Badges ── */}
+      {/* BADGES */}
       <div>
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">Badges</h3>
-          <span className="text-xs text-gray-400">{activeUser.badges.filter(b => b.earned).length}/{activeUser.badges.length} earned</span>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-black tracking-widest text-xs">BADGES</h3>
+          <span className="text-xs font-semibold text-gray-400">
+            {earnedCount}/{badgeDefs.length} earned
+          </span>
         </div>
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 grid grid-cols-3 sm:grid-cols-6 gap-3 shadow-sm">
-          {activeUser.badges.map((badge) => (
+
+        <div className="grid grid-cols-3 gap-4 bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-100 dark:border-gray-800/60 p-5 shadow-sm">
+          {badgeDefs.map((badge, index) => (
             <div
-              key={badge.label}
-              className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border transition-all
-                ${badge.earned
-                  ? "bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm"
-                  : "bg-gray-50/40 dark:bg-gray-800/30 border-dashed border-gray-200 dark:border-gray-700 opacity-40 select-none"
-                }`}
+              key={index}
+              className={`relative p-5 rounded-xl border text-center transition-opacity ${
+                badge.earned
+                  ? "border-gray-100 dark:border-gray-800/60 opacity-100"
+                  : "border-gray-100 dark:border-gray-800/60 opacity-40"
+              }`}
             >
-              <span className={`text-2xl ${!badge.earned ? "grayscale" : ""}`}>{badge.icon}</span>
-              <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 text-center leading-tight">
-                {badge.label}
-              </span>
               {badge.earned && (
-                <span className="text-[9px] font-bold text-green-500">Earned</span>
+                <span className="absolute top-2 right-2 text-[10px]">✅</span>
               )}
+              <div className="text-2xl">{badge.icon}</div>
+              <p className="text-xs font-bold mt-2">{badge.title}</p>
+              <p className="text-[11px] text-gray-400 mt-1">{badge.detail}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── Danger zone ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
-        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Account Actions</h3>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <SignOutButton redirectUrl="/sign-in">
-            <button className="px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer">
-              Sign Out
-            </button>
-          </SignOutButton>
-        </div>
+      {/* SIGN OUT */}
+      <div className="pt-5">
+        <SignOutButton>
+          <button className="px-5 py-3 rounded-xl bg-black text-white font-bold hover:bg-gray-800 transition-colors">
+            Sign Out
+          </button>
+        </SignOutButton>
       </div>
 
+      {/* EDIT PROFILE MODAL */}
+      {editing && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+          onClick={() => setEditing(false)}
+        >
+          <div
+            className="w-full max-w-md bg-white dark:bg-[#0b1020] rounded-3xl shadow-xl p-6 space-y-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-xl font-black">Edit Profile</h3>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400">
+                Name
+              </label>
+              <input
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400">
+                Exam Track
+              </label>
+              <div className="flex gap-2">
+                {["JEE", "NEET"].map((track) => (
+                  <button
+                    key={track}
+                    type="button"
+                    onClick={() => setEditExam(track)}
+                    className={`flex-1 py-2 rounded-xl text-sm font-bold border transition-colors ${
+                      editExam === track
+                        ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
+                        : "border-gray-200 dark:border-gray-700 text-gray-500"
+                    }`}
+                  >
+                    {track}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400">
+                Target Year
+              </label>
+              <select
+                value={editYear}
+                onChange={(e) => setEditYear(Number(e.target.value))}
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+              >
+                {years.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setEditing(false)}
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSave}
+                className="px-4 py-2 rounded-xl text-sm font-bold bg-black text-white hover:bg-gray-800 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SAVED TOAST */}
+      {saved && (
+        <div className="fixed bottom-6 right-6 bg-black text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg">
+          Saved ✓
+        </div>
+      )}
     </div>
   );
 }

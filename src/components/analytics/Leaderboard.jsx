@@ -2,36 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { Trophy } from "lucide-react";
-import { supabase } from "@/lib/supabase";
-
 
 export default function Leaderboard() {
-
   const [users, setUsers] = useState([]);
 
 
   async function loadLeaderboard() {
-
     try {
-
       const res = await fetch("/api/pyq/leaderboard");
 
       const data = await res.json();
 
       setUsers(data);
 
+    } catch (error) {
 
-    } catch(error) {
-
-      console.log(
-        "Leaderboard error:",
-        error
-      );
+      console.log("Leaderboard error:", error);
 
     }
-
   }
-
 
 
 
@@ -39,68 +28,29 @@ export default function Leaderboard() {
 
     loadLeaderboard();
 
-
-    const channel = supabase
-      .channel("user_xp_changes")
-
-      .on(
-
-        "postgres_changes",
-
-        {
-          event:"*",
-
-          schema:"public",
-
-          table:"user_xp",
-        },
-
-
-        () => {
-
-          loadLeaderboard();
-
-        }
-
-      )
-
-      .subscribe();
-
-
-
-    return () => {
-
-      supabase.removeChannel(channel);
-
-    };
-
-
   }, []);
-
 
 
 
 
   return (
 
-    <div className="rounded-2xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-[#0b1020]">
+    <div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
 
 
       {/* HEADER */}
 
       <div className="flex items-center gap-2 mb-6">
 
-        <Trophy size={24}/>
+        <Trophy size={24} />
 
-
-        <h2 className="font-black text-2xl text-black dark:text-white">
+        <h2 className="text-2xl font-black text-black dark:text-white">
 
           Leaderboard
 
         </h2>
 
       </div>
-
 
 
 
@@ -124,144 +74,65 @@ export default function Leaderboard() {
 
 
 
-
-        {users.map((user,index)=>(
-
+        {users.map((user, index) => (
 
           <div
             key={user.user_id}
-            className="p-5 rounded-xl bg-gray-50 dark:bg-gray-900"
+            className="bg-gray-50 dark:bg-gray-900 rounded-xl p-5 flex justify-between items-center"
           >
 
 
+            {/* LEFT SIDE */}
+
+            <div className="flex gap-4 items-center">
 
 
-            {/* TOP */}
+              {/* RANK */}
 
-            <div className="flex items-center justify-between">
+              <div className="text-xl">
 
-
-              <div className="flex items-center gap-4">
-
-
-
-                {/* RANK */}
-
-                <div className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-xl font-black">
-
-
-                  {index===0 && "🥇"}
-
-                  {index===1 && "🥈"}
-
-                  {index===2 && "🥉"}
-
-                  {index>2 && `#${index+1}`}
-
-
-                </div>
-
-
-
-
-
-
-                {/* USER INFO */}
-
-                <div>
-
-
-                  <h3 className="font-bold text-lg text-black dark:text-white">
-
-                    {user.name}
-
-                  </h3>
-
-
-
-
-                  <p className="text-sm text-gray-400">
-
-                    {user.solved} solved • {user.accuracy}% accuracy
-
-                  </p>
-
-
-
-
-
-
-                  {/* LEVEL */}
-
-                  <div className="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gray-200 dark:bg-gray-800 text-xs font-bold">
-
-
-                    <span>
-
-                      {user.badge}
-
-                    </span>
-
-
-                    <span>
-
-                      {user.level}
-
-                    </span>
-
-
-                  </div>
-
-
-
-
-                </div>
-
+                {
+                  index === 0 ? "🥇" :
+                  index === 1 ? "🥈" :
+                  index === 2 ? "🥉" :
+                  `#${index + 1}`
+                }
 
               </div>
 
 
 
 
+              {/* USER INFO */}
+
+              <div>
 
 
-              {/* XP */}
+                <h3 className="font-bold text-black dark:text-white">
 
-              <div className="font-black text-xl text-black dark:text-white">
+                  {user.name}
 
-                {user.xp} XP
-
-              </div>
-
-
-
-            </div>
+                </h3>
 
 
 
+                <p className="text-sm text-gray-400">
+
+                  {user.solved} solved • {user.accuracy}% accuracy
+
+                </p>
 
 
 
 
-            {/* XP PROGRESS BAR ONLY */}
+                {/* LEVEL */}
 
-            <div className="mt-4">
+                <span className="mt-2 inline-flex text-xs font-bold bg-gray-200 dark:bg-gray-800 rounded-full px-2 py-1">
 
+                  {user.badge} {user.level}
 
-              <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                </span>
 
-
-                <div
-
-                  className="h-full bg-blue-600 rounded-full transition-all"
-
-                  style={{
-
-                    width:`${user.progress}%`
-
-                  }}
-
-                />
 
 
               </div>
@@ -269,11 +140,21 @@ export default function Leaderboard() {
 
             </div>
 
+
+
+
+
+            {/* XP */}
+
+            <div className="font-black text-xl text-black dark:text-white">
+
+              {user.xp} XP
+
+            </div>
 
 
 
           </div>
-
 
         ))}
 
