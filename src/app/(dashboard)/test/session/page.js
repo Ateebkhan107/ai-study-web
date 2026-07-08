@@ -406,7 +406,7 @@ const timeTaken = (durationParam * 60) - timeLeft;
             <div className="flex flex-col gap-3 max-w-sm mx-auto">
               {/* Primary: Review Answers */}
               <button
-onClick={() => router.push(`/test/review/${attemptId}`)}
+onClick={() => router.replace(`/test/review/${attemptId}`)}
 className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black"
 >
 Review Answers

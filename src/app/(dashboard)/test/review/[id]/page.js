@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useParams } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 export default function ReviewPage(){
 
 
 const {id}=useParams();
-
+const router = useRouter();
 
 const [answers,setAnswers]=useState([]);
 
@@ -152,7 +152,19 @@ Review Answers
 </h1>
 
 
-
+<button
+onClick={()=>router.push("/test/history")}
+className="
+mb-6
+px-5 py-2
+rounded-xl
+bg-black
+text-white
+font-bold
+"
+>
+← Back to Test History
+</button>
 
 
 
