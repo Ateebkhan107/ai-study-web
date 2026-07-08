@@ -10,7 +10,6 @@ export default function Leaderboard() {
   const [users, setUsers] = useState([]);
 
 
-
   async function loadLeaderboard() {
 
     try {
@@ -38,9 +37,7 @@ export default function Leaderboard() {
 
   useEffect(() => {
 
-
     loadLeaderboard();
-
 
 
     const channel = supabase
@@ -51,13 +48,11 @@ export default function Leaderboard() {
         "postgres_changes",
 
         {
-
           event:"*",
 
           schema:"public",
 
           table:"user_xp",
-
         },
 
 
@@ -81,7 +76,6 @@ export default function Leaderboard() {
 
 
   }, []);
-
 
 
 
@@ -111,8 +105,8 @@ export default function Leaderboard() {
 
 
 
-      <div className="space-y-4">
 
+      <div className="space-y-4">
 
 
         {users.length === 0 && (
@@ -130,23 +124,19 @@ export default function Leaderboard() {
 
 
 
+
         {users.map((user,index)=>(
 
 
           <div
-
             key={user.user_id}
-
-            className="
-            p-5 rounded-xl
-            bg-gray-50 dark:bg-gray-900
-            "
-
+            className="p-5 rounded-xl bg-gray-50 dark:bg-gray-900"
           >
 
 
 
-            {/* TOP ROW */}
+
+            {/* TOP */}
 
             <div className="flex items-center justify-between">
 
@@ -154,22 +144,23 @@ export default function Leaderboard() {
               <div className="flex items-center gap-4">
 
 
-                {/* Rank */}
 
-                <div className="
-                w-12 h-12 rounded-full
-                bg-white dark:bg-gray-800
-                flex items-center justify-center
-                text-xl
-                font-black
-                ">
+                {/* RANK */}
+
+                <div className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-xl font-black">
+
 
                   {index===0 && "🥇"}
+
                   {index===1 && "🥈"}
+
                   {index===2 && "🥉"}
+
                   {index>2 && `#${index+1}`}
 
+
                 </div>
+
 
 
 
@@ -180,10 +171,7 @@ export default function Leaderboard() {
                 <div>
 
 
-                  <h3 className="
-                  font-bold text-lg
-                  text-black dark:text-white
-                  ">
+                  <h3 className="font-bold text-lg text-black dark:text-white">
 
                     {user.name}
 
@@ -191,37 +179,36 @@ export default function Leaderboard() {
 
 
 
-                  <p className="
-                  text-sm text-gray-400
-                  ">
 
+                  <p className="text-sm text-gray-400">
 
                     {user.solved} solved • {user.accuracy}% accuracy
-
 
                   </p>
 
 
 
 
+
+
                   {/* LEVEL */}
 
-                  <div className="
-                  mt-2 inline-flex
-                  items-center gap-1
-                  px-2 py-1
-                  rounded-full
+                  <div className="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gray-200 dark:bg-gray-800 text-xs font-bold">
 
-                  bg-gray-200
-                  dark:bg-gray-800
 
-                  text-xs
-                  font-bold
-                  ">
+                    <span>
 
-                    {user.badge}
+                      {user.badge}
 
-                    {user.level} League
+                    </span>
+
+
+                    <span>
+
+                      {user.level}
+
+                    </span>
+
 
                   </div>
 
@@ -238,18 +225,13 @@ export default function Leaderboard() {
 
 
 
-
               {/* XP */}
 
-              <div className="
-              font-black text-xl
-              text-black dark:text-white
-              ">
+              <div className="font-black text-xl text-black dark:text-white">
 
                 {user.xp} XP
 
               </div>
-
 
 
 
@@ -260,31 +242,22 @@ export default function Leaderboard() {
 
 
 
-            {/* XP PROGRESS */}
+
+            {/* XP PROGRESS BAR ONLY */}
 
             <div className="mt-4">
 
 
-              <div className="
-              h-2 rounded-full
-              bg-gray-200 dark:bg-gray-700
-              overflow-hidden
-              ">
+              <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
 
 
                 <div
 
-                  className="
-                  h-full
-                  bg-blue-600
-                  rounded-full
-                  transition-all
-                  "
+                  className="h-full bg-blue-600 rounded-full transition-all"
 
                   style={{
 
-                    width:
-                    `${user.progress}%`
+                    width:`${user.progress}%`
 
                   }}
 
@@ -292,18 +265,6 @@ export default function Leaderboard() {
 
 
               </div>
-
-
-
-
-              <p className="
-              mt-1 text-xs
-              text-gray-400
-              ">
-
-                {user.progress}% to next level
-
-              </p>
 
 
             </div>
