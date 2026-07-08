@@ -1,3 +1,4 @@
+import Leaderboard from "@/components/analytics/Leaderboard";
 import { cookies } from "next/headers";
 import { EXAM_CONFIG } from "@/lib/examConfig";
 import StatsCards from "@/components/StatsCards";
@@ -40,6 +41,14 @@ export default async function DashboardPage() {
       
       {/* 4. Formulas and your premium personalized AI Insights console panel */}
       <DashboardSection config={activeConfig} />
+
+      {/* Leaderboard Section */}
+
+<div className="mt-8">
+
+  <Leaderboard />
+
+</div>
       
     </div>
   );

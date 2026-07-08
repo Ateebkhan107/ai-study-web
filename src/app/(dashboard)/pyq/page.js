@@ -53,9 +53,12 @@ const DIFFICULTY_BADGE = {
   Medium: "bg-amber-500/10   text-amber-600   dark:text-amber-400   border border-amber-500/20",
   Hard:   "bg-rose-500/10    text-rose-600    dark:text-rose-400    border border-rose-500/20",
 };
+
+// TABS updated to include the missing "Saved" tab
 const TABS = [
   { id: "practice",  label: "Practice",  Icon: I.Target    },
   { id: "analytics", label: "Analytics", Icon: I.BarChart3 },
+  { id: "saved",     label: "Saved",     Icon: I.Bookmark  }, 
 ];
 
 // ─── Multi-Tenant Core Blueprints ──────────────────────────────────────────
@@ -82,8 +85,7 @@ const MASTER_SAVED = [
   { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard", track: "neet", question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
 ];
 
-// Colors for the Syllabus Coverage bars — subject list itself now comes live
-// from /api/pyq/analytics, so this is just a lookup, not a data source.
+// Colors for the Syllabus Coverage bars
 const SUBJECT_BAR_COLORS = {
   Physics: "#3b82f6",
   Chemistry: "#a855f7",
@@ -133,7 +135,6 @@ function PracticeTab({ subjects, track }) {
   const [subjectError, setSubjectError] = useState("");
 
   function handleStartDeck() {
-
     if (selectedSubjects.length === 0) {
       setSubjectError("Please select at least one subject to start.");
       return;
@@ -157,7 +158,6 @@ function PracticeTab({ subjects, track }) {
     params.set("count", String(questionsCount));
 
     router.push(`/pyq/session?${params.toString()}`);
-
   }
 
   const toggleSubject = id => setSelectedSubjects(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]);
@@ -215,15 +215,12 @@ function PracticeTab({ subjects, track }) {
         </div>
 
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 space-y-3`}>
-
-  <button onClick={handleStartDeck} className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
-    <I.Play size={14} /> Start Focused Deck
-  </button>
-
-  {subjectError && (
-    <p className="text-xs text-red-500 font-medium">{subjectError}</p>
-  )}
-
+          <button onClick={handleStartDeck} className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
+            <I.Play size={14} /> Start Focused Deck
+          </button>
+          {subjectError && (
+            <p className="text-xs text-red-500 font-medium">{subjectError}</p>
+          )}
         </div>
       </div>
     </div>
@@ -231,44 +228,29 @@ function PracticeTab({ subjects, track }) {
 }
 
 function AnalyticsTab({ track }) {
-
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
-
     let cancelled = false;
 
     async function loadAnalytics() {
-
       setLoading(true);
       setLoadError("");
-
       try {
-
         const result = await getPYQAnalytics();
         if (!cancelled) setAnalytics(result);
-
-      }
-      catch (error) {
-
+      } catch (error) {
         console.error("Failed to load PYQ analytics:", error);
         if (!cancelled) setLoadError("Failed to load analytics. Please try again.");
-
-      }
-      finally {
-
+      } finally {
         if (!cancelled) setLoading(false);
-
       }
-
     }
 
     loadAnalytics();
-
     return () => { cancelled = true; };
-
   }, []);
 
   if (loading) {
@@ -284,8 +266,6 @@ function AnalyticsTab({ track }) {
   const streak    = analytics?.streak    ?? 0;
   const subjects  = analytics?.subjects  ?? [];
 
-  // Derive Top Subject / Underperforming Segment from the real per-subject
-  // accuracy data instead of hardcoding them.
   const sortedByAccuracy = [...subjects].sort((a, b) => b.accuracy - a.accuracy);
   const topSubject = sortedByAccuracy[0];
   const weakestSubject = sortedByAccuracy[sortedByAccuracy.length - 1];
@@ -302,11 +282,9 @@ function AnalyticsTab({ track }) {
 
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
         <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
-
         {subjects.length === 0 && (
           <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>
         )}
-
         <div className="space-y-5">
           {subjects.map(item => (
             <div key={item.subject}>
@@ -385,7 +363,7 @@ function SavedTab({ track, savedQuestions }) {
 // ─── Main Controller Page ───────────────────────────────────────────────────
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
-  const [track, setTrack] = useState("jee"); // Strict fallback baseline to prevent multi-track leaking
+  const [track, setTrack] = useState("jee"); 
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -395,69 +373,52 @@ export default function PYQPage() {
     }
   }, []);
 
-  // Filter content arrays strictly down to user track bounds
   const filteredSubjects = MASTER_SUBJECTS.filter(s => s.tracks.includes(track));
   const filteredRecent = MASTER_RECENT.filter(r => r.track === "mixed" || r.track === track);
   const filteredSaved = MASTER_SAVED.filter(s => s.track === "mixed" || s.track === track);
 
-  // ── Live data for the header stat cards ──────────────────────────
+  // ── Live data for header cards ──────────────────────────
   const [overview, setOverview] = useState(null);
   const [attemptedTotal, setAttemptedTotal] = useState(null);
 
   useEffect(() => {
-
     let cancelled = false;
 
-    async function loadOverview() {
-
+    async function loadPYQStats() {
       try {
+        const [overviewData, analyticsData] = await Promise.all([
+          getPYQOverview(),
+          getPYQAnalytics()
+        ]);
 
-        const result = await getPYQOverview(track);
-        if (!cancelled) setOverview(result);
+        if (cancelled) return;
 
+        setOverview(overviewData || null);
+        setAttemptedTotal(
+          analyticsData?.totalQuestions ??
+          analyticsData?.totalAttempts ??
+          analyticsData?.attempted ?? 
+          0
+        );
+      } catch (error) {
+        console.error("Failed loading PYQ stats:", error);
+        
+        if (!cancelled) {
+          setOverview(null);
+          setAttemptedTotal(0);
+        }
       }
-      catch (error) {
-
-        console.error("Failed to load PYQ overview:", error);
-
-      }
-
     }
 
-    loadOverview();
+    loadPYQStats();
 
-    return () => { cancelled = true; };
-
-  }, [track]);
-
-  useEffect(() => {
-
-    let cancelled = false;
-
-    async function loadAttemptedTotal() {
-
-      try {
-
-        const result = await getPYQAnalytics();
-        if (!cancelled) setAttemptedTotal(result.attempted);
-
-      }
-      catch (error) {
-
-        console.error("Failed to load PYQ attempted total:", error);
-
-      }
-
-    }
-
-    loadAttemptedTotal();
-
-    return () => { cancelled = true; };
-
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const questionVaultValue = overview ? overview.totalQuestions.toLocaleString() : "—";
-
+  
   const yearRangeValue = (overview && overview.minYear && overview.maxYear)
     ? `${overview.maxYear - overview.minYear + 1} Years`
     : "—";
@@ -517,11 +478,7 @@ export default function PYQPage() {
         </div>
 
         {/* Dynamic Tab Screen Panel Switcher */}
-        {activeTab === "practice"  && 
-<PracticeTab 
-subjects={filteredSubjects}
-track={track}
-/>}
+        {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
         {activeTab === "analytics" && <AnalyticsTab track={track} />}
         {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
 
