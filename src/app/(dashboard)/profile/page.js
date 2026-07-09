@@ -357,45 +357,128 @@ activeUser.xp
         </div>
       </div>
 
-      {/* XP CARD */}
-      <div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-100 dark:border-gray-800/60 p-6 shadow-sm">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center font-black text-xl shrink-0">
-              {activeUser.badge}
-            </div>
-            <div>
-              <h3 className="font-bold">Level {activeUser.level}</h3>
-              <p className="text-sm text-gray-400">
-                {activeUser.xp} / {levelProgress.next} XP
-              </p>
-            </div>
-          </div>
+{/* XP CARD */}
+<div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-100 dark:border-gray-800/60 p-6 shadow-sm">
 
-          <div className="text-right">
-            <p className="text-xs text-gray-400">Next level</p>
-            <p className="font-bold">
-              {Math.max(
-levelProgress.next - activeUser.xp,
-0
-)} XP away
-            </p>
-          </div>
-        </div>
+  <div className="flex justify-between items-center">
 
-        <div className="mt-5 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-black dark:bg-white rounded-full"
-            style={{
-              width: `${Math.min(
-                (activeUser.xp / levelProgress.next) * 100,
-                100
-              )}%`,
-            }}
-          />
-        </div>
+    <div className="flex items-center gap-4">
+
+
+      {/* BADGE */}
+      <div
+        className="
+        min-w-[120px]
+        h-14
+        px-4
+        rounded-xl
+        bg-black
+        text-white
+        flex
+        items-center
+        justify-center
+        font-bold
+        text-sm
+        shrink-0
+        "
+      >
+
+        {activeUser.badge}
+
       </div>
 
+
+
+      <div>
+
+        <h3 className="font-bold">
+
+          Level {activeUser.level}
+
+        </h3>
+
+
+        <p className="text-sm text-gray-400">
+
+          {activeUser.xp} / {levelProgress.next} XP
+
+        </p>
+
+
+        {
+          activeUser.rank &&
+          (
+            <p className="text-xs text-gray-400 mt-1">
+
+              Global Rank #{activeUser.rank}
+
+            </p>
+          )
+        }
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div className="text-right">
+
+      <p className="text-xs text-gray-400">
+
+        Next level
+
+      </p>
+
+
+      <p className="font-bold">
+
+        {
+          Math.max(
+            levelProgress.next - activeUser.xp,
+            0
+          )
+        } XP away
+
+      </p>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <div className="mt-5 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+
+
+    <div
+
+      className="h-full bg-black dark:bg-white rounded-full transition-all"
+
+      style={{
+
+        width:`${Math.min(
+          (activeUser.xp / levelProgress.next) * 100,
+          100
+        )}%`
+
+      }}
+
+    />
+
+
+  </div>
+
+
+</div>
       {/* BADGES */}
       <div>
         <div className="flex justify-between items-center mb-4">
