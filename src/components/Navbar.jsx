@@ -2,138 +2,706 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
 
-// ─── Mock notification count ──────────────────────────────────────────────────
-// Replace with a Supabase realtime subscription or API call when ready.
-const notificationCount = 3;
+import { supabase } from "@/lib/supabaseClient";
+import { useUser } from "@clerk/nextjs";
+
 
 const navItems = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Test", href: "/test" },
-  { name: "PYQ", href: "/pyq" },
-  { name: "Analytics", href: "/analytics" },
-  { name: "Profile", href: "/profile" },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
+  {
+    name: "Test",
+    href: "/test",
+  },
+  {
+    name: "PYQ",
+    href: "/pyq",
+  },
+  {
+    name: "Analytics",
+    href: "/analytics",
+  },
+  {
+    name: "Profile",
+    href: "/profile",
+  },
 ];
 
+
+
+
+
 export default function Navbar() {
-  const pathname = usePathname();
 
-  const toggleTheme = () => {
-    const next = !document.documentElement.classList.contains("dark");
 
-    if (next) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+const pathname = usePathname();
 
-  const isActive = (href) =>
-    pathname === href || pathname.startsWith(href + "/");
 
-  return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 shadow-sm transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+const { user } = useUser();
 
-        {/* Logo */}
-        <div className="shrink-0 text-black dark:text-white">
-          <Link href="/dashboard">
-            <Logo size={80} className="cursor-pointer" />
-          </Link>
-        </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 flex items-center justify-center gap-1">
+const [mounted,setMounted] = useState(false);
 
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-            >
-              <button
-                className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150
-                  ${
-                    isActive(item.href)
-                      ? "text-black dark:text-white bg-gray-100 dark:bg-gray-800"
-                      : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/60"
-                  }`}
-              >
-                {item.name}
 
-                {isActive(item.href) && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-black dark:bg-white rounded-full" />
-                )}
-              </button>
-            </Link>
-          ))}
+const [track,setTrack] = useState(null);
 
-          {/* PRO */}
-          <Link href="/pro">
-            <button className="px-4 py-2 text-sm font-bold rounded-lg bg-[#1e3a5f] text-white opacity-90 hover:opacity-100 transition-opacity duration-150">
-              PRO
-            </button>
-          </Link>
 
-        </nav>
 
-        {/* Right Side */}
-        <div className="shrink-0 flex items-center gap-3">
 
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle Theme"
-            className="w-9 h-9 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-150"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="hidden text-yellow-400 dark:block"
-            >
-              <circle cx="12" cy="12" r="5" />
-              <line x1="12" y1="1" x2="12" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="23" />
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-              <line x1="1" y1="12" x2="3" y2="12" />
-              <line x1="21" y1="12" x2="23" y2="12" />
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="block text-gray-600 dark:hidden"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          </button>
 
-          {/* Notification Bell */}
-          <NotificationBell count={notificationCount} />
 
-          {/* Profile */}
-          <ProfileMenu />
 
-        </div>
-      </div>
-    </header>
-  );
+useEffect(()=>{
+
+
+setMounted(true);
+
+
+},[]);
+
+
+
+
+
+
+
+
+
+// LOAD USER EXAM (JEE / NEET)
+
+
+useEffect(()=>{
+
+
+
+if(!user) return;
+
+
+
+
+async function loadTrack(){
+
+
+
+const {data,error}=await supabase
+
+
+.from("user_profiles")
+
+
+.select("exam")
+
+
+.eq(
+  "clerk_user_id",
+  user.id
+)
+
+
+.single();
+
+
+
+
+
+if(error){
+
+
+console.log(
+
+"Track fetch error:",
+
+error
+
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+if(data?.exam){
+
+
+setTrack(
+
+data.exam.toUpperCase()
+
+);
+
+
+}
+
+
+
+
+}
+
+
+
+
+loadTrack();
+
+
+
+
+
+},[user]);
+
+
+
+
+
+
+
+
+
+
+
+
+// PREVENT HYDRATION ERROR
+
+
+if(!mounted){
+
+
+return null;
+
+
+}
+
+
+
+
+
+
+
+
+
+const toggleTheme=()=>{
+
+
+
+const dark =
+
+document.documentElement
+
+.classList
+
+.contains("dark");
+
+
+
+
+
+
+if(dark){
+
+
+
+document.documentElement
+
+.classList
+
+.remove("dark");
+
+
+
+localStorage.setItem(
+
+"theme",
+
+"light"
+
+);
+
+
+
+}
+
+else{
+
+
+
+document.documentElement
+
+.classList
+
+.add("dark");
+
+
+
+localStorage.setItem(
+
+"theme",
+
+"dark"
+
+);
+
+
+
+}
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+const isActive=(href)=>{
+
+
+return(
+
+pathname===href
+
+||
+
+pathname.startsWith(
+
+href+"/"
+
+)
+
+
+);
+
+
+
+};
+
+
+
+
+
+
+
+
+
+return (
+
+
+<header
+
+className="
+
+sticky
+
+top-0
+
+z-50
+
+w-full
+
+bg-white
+
+dark:bg-gray-950
+
+border-b
+
+border-gray-100
+
+dark:border-gray-800
+
+shadow-sm
+
+"
+
+>
+
+
+
+<div
+
+className="
+
+max-w-7xl
+
+mx-auto
+
+px-6
+
+h-16
+
+flex
+
+items-center
+
+justify-between
+
+gap-8
+
+"
+
+>
+
+
+
+
+
+
+
+
+
+
+{/* LOGO */}
+
+
+<div className="shrink-0">
+
+
+<Link href="/dashboard">
+
+
+<Logo size={80}/>
+
+
+</Link>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* NAV */}
+
+
+<nav
+
+className="
+
+flex-1
+
+flex
+
+items-center
+
+justify-center
+
+gap-1
+
+"
+
+>
+
+
+{
+
+
+navItems.map((item)=>(
+
+
+
+<Link
+
+href={item.href}
+
+key={item.href}
+
+>
+
+
+
+<button
+
+
+className={`
+
+relative
+
+px-4
+
+py-2
+
+rounded-lg
+
+text-sm
+
+font-medium
+
+transition-all
+
+
+${
+
+
+isActive(item.href)
+
+
+?
+
+
+"text-black dark:text-white bg-gray-100 dark:bg-gray-800"
+
+
+:
+
+
+"text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+
+
+}
+
+`}
+
+
+>
+
+
+
+{item.name}
+
+
+
+
+
+{
+
+
+isActive(item.href)
+
+&&
+
+
+<span
+
+className="
+
+absolute
+
+bottom-0
+
+left-1/2
+
+-translate-x-1/2
+
+w-5
+
+h-0.5
+
+bg-black
+
+dark:bg-white
+
+rounded-full
+
+"
+
+/>
+
+
+
+}
+
+
+
+
+</button>
+
+
+</Link>
+
+
+
+))
+
+}
+
+
+
+
+{/* PRO */}
+
+
+<Link href="/pro">
+
+
+<button
+
+className="
+
+px-4
+
+py-2
+
+rounded-lg
+
+bg-[#1e3a5f]
+
+text-white
+
+text-sm
+
+font-bold
+
+hover:opacity-90
+
+"
+
+>
+
+
+PRO
+
+
+</button>
+
+
+</Link>
+
+
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+{/* RIGHT SIDE */}
+
+
+<div
+
+className="
+
+shrink-0
+
+flex
+
+items-center
+
+gap-3
+
+"
+
+>
+
+
+
+
+
+
+{/* THEME */}
+
+
+<button
+
+
+onClick={toggleTheme}
+
+
+className="
+
+w-9
+
+h-9
+
+rounded-xl
+
+border
+
+border-gray-200
+
+dark:border-gray-700
+
+flex
+
+items-center
+
+justify-center
+
+bg-gray-50
+
+dark:bg-gray-800
+
+"
+
+>
+
+
+🌙
+
+
+</button>
+
+
+
+
+
+
+
+
+
+{/* 🔥 NOTIFICATION BELL FIXED */}
+
+
+<NotificationBell track={track}/>
+
+
+
+
+
+
+
+
+
+
+{/* PROFILE */}
+
+
+<ProfileMenu/>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</header>
+
+
+);
+
+
+
 }

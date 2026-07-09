@@ -4,258 +4,243 @@ import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 
-export default function NotificationBell() {
 
+export default function NotificationBell(){
 
-  const router = useRouter();
 
+const router = useRouter();
 
-  const [mounted,setMounted] = useState(false);
+const {user,isLoaded}=useUser();
 
-  const [open,setOpen] = useState(false);
 
-  const [notifications,setNotifications] = useState([]);
+const [open,setOpen]=useState(false);
 
+const [notifications,setNotifications]=useState([]);
 
+const [stream,setStream]=useState(null);
 
 
-  useEffect(()=>{
 
-    setMounted(true);
 
-  },[]);
 
 
 
 
 
+// ===============================
+// LOAD USER STREAM (JEE / NEET)
+// ===============================
 
 
-  useEffect(()=>{
+useEffect(()=>{
 
 
-    if(!mounted) return;
+if(!isLoaded || !user) return;
 
 
 
+async function getStream(){
 
-    async function loadNotifications(){
 
 
-      const {data,error} = await supabase
+const {data,error}=await supabase
 
-      .from("notifications")
 
-      .select("*")
+.from("user_profiles")
 
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
 
+.select("exam")
 
 
-      if(error){
+.eq(
 
-        console.log(error);
+"clerk_user_id",
 
-        return;
+user.id
 
-      }
+)
 
 
+.single();
 
-      setNotifications(data || []);
 
 
-    }
 
 
 
+if(error){
 
-    loadNotifications();
 
+console.log(
 
+"Exam fetch error:",
 
+error
 
+);
 
 
+return;
 
-    // REALTIME
 
+}
 
-    const channel = supabase
 
 
-    .channel("realtime-notifications")
 
 
-    .on(
 
-      "postgres_changes",
 
+if(data?.exam){
 
-      {
 
-        event:"INSERT",
+setStream(
 
-        schema:"public",
+data.exam.toUpperCase()
 
-        table:"notifications"
+);
 
-      },
 
+}
 
 
-      (payload)=>{
 
+}
 
-        setNotifications(
 
-          (current)=>[
 
-            payload.new,
+getStream();
 
-            ...current
 
-          ]
 
-        );
+},[isLoaded,user]);
 
 
-      }
 
-    )
 
 
-    .subscribe();
 
 
 
 
 
 
-    return()=>{
 
+// ===============================
+// LOAD NOTIFICATIONS
+// ===============================
 
-      supabase.removeChannel(channel);
 
 
-    };
+useEffect(()=>{
 
 
 
-  },[mounted]);
+if(!user || !stream) return;
 
 
 
 
 
 
+async function loadNotifications(){
 
 
 
 
-  async function openNotification(item){
 
+const {data,error}=await supabase
 
 
-    // update UI instantly
+.from("notifications")
 
 
-    setNotifications(
+.select("*")
 
-      current=>
 
-      current.map(
+.or(
 
-        n=>
+`user_id.eq.${user.id},user_id.eq.all`
 
-        n.id===item.id
+)
 
-        ?
 
-        {
-          ...n,
-          is_read:true
-        }
+.in(
 
-        :
+"stream",
 
-        n
+[
 
-      )
+stream,
 
-    );
+"ALL"
 
+]
 
+)
 
 
+.order(
 
+"created_at",
 
+{
 
-    // update database
+ascending:false
 
+}
 
-    await supabase
+);
 
-    .from("notifications")
 
-    .update({
 
-      is_read:true
 
-    })
 
-    .eq(
-      "id",
-      item.id
-    );
 
 
 
+if(error){
 
 
-    setOpen(false);
 
+console.log(
 
+"Notification error:",
 
-    router.push(
+error
 
-      item.href || "/dashboard"
+);
 
-    );
 
+return;
 
-  }
 
+}
 
 
 
 
 
 
+setNotifications(
 
+data || []
 
-  if(!mounted){
+);
 
-    return null;
 
-  }
 
+}
 
 
 
 
-  const unread = notifications.filter(
 
-    n=>!n.is_read
+loadNotifications();
 
-  ).length;
 
 
 
@@ -265,7 +250,271 @@ export default function NotificationBell() {
 
 
 
-return (
+
+// REALTIME
+
+
+const channel = supabase
+
+
+.channel("notification-channel")
+
+
+.on(
+
+"postgres_changes",
+
+
+{
+
+
+event:"INSERT",
+
+
+schema:"public",
+
+
+table:"notifications"
+
+
+},
+
+
+
+(payload)=>{
+
+
+
+
+
+const item = payload.new;
+
+
+
+
+
+if(
+
+
+(
+
+item.user_id===user.id
+
+||
+
+item.user_id==="all"
+
+)
+
+&&
+
+(
+
+item.stream===stream
+
+||
+
+item.stream==="ALL"
+
+)
+
+
+){
+
+
+
+
+
+setNotifications(
+
+prev => [
+
+item,
+
+...prev
+
+]
+
+);
+
+
+
+}
+
+
+
+
+}
+
+
+)
+
+
+.subscribe();
+
+
+
+
+
+
+
+
+return()=>{
+
+
+supabase.removeChannel(channel);
+
+
+};
+
+
+
+
+
+},[user,stream]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function openNotification(item){
+
+
+
+// UI update
+
+setNotifications(
+
+prev=>
+
+prev.map(
+
+n=>
+
+n.id===item.id
+
+?
+
+{
+
+...n,
+
+is_read:true
+
+}
+
+:
+
+n
+
+
+)
+
+
+);
+
+
+
+
+
+
+
+// DB update
+
+
+await supabase
+
+
+.from("notifications")
+
+
+.update({
+
+is_read:true
+
+})
+
+
+.eq(
+
+"id",
+
+item.id
+
+);
+
+
+
+
+
+
+
+
+setOpen(false);
+
+
+
+
+
+
+// redirect only if link exists
+
+
+if(
+
+item.href &&
+
+item.href.trim() !== ""
+
+){
+
+
+router.push(
+
+item.href
+
+);
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+const unread = notifications.filter(
+
+n=>!n.is_read
+
+).length;
+
+
+
+
+
+
+
+
+
+return(
 
 <div className="relative">
 
@@ -274,8 +523,7 @@ return (
 
 
 
-
-{/* BELL BUTTON */}
+{/* BUTTON */}
 
 
 <button
@@ -285,25 +533,38 @@ onClick={()=>setOpen(!open)}
 
 
 className="
-relative
-w-9 h-9
-rounded-xl
-border
-border-gray-200
-dark:border-gray-700
-bg-white
-dark:bg-[#0b1020]
-flex
-items-center
-justify-center
-shadow-sm
-"
 
+relative
+
+w-9
+
+h-9
+
+rounded-xl
+
+border
+
+border-gray-200
+
+bg-white
+
+flex
+
+items-center
+
+justify-center
+
+shadow-sm
+
+"
 
 >
 
 
 <Bell size={17}/>
+
+
+
 
 
 
@@ -317,25 +578,37 @@ unread>0 &&
 <span
 
 className="
+
 absolute
+
 -top-2
+
 -right-2
+
 bg-red-500
+
 text-white
-text-[10px]
-font-bold
-rounded-full
+
+text-xs
+
 px-2
+
+rounded-full
+
 "
 
 >
 
+
 {unread}
+
 
 </span>
 
 
+
 }
+
 
 
 
@@ -349,6 +622,8 @@ px-2
 
 
 
+{/* DROPDOWN */}
+
 
 {
 
@@ -360,19 +635,25 @@ open &&
 <div
 
 className="
+
 absolute
+
 right-0
+
 mt-4
+
 w-[380px]
+
 bg-white
-dark:bg-[#0b1020]
+
 rounded-3xl
-border
-border-gray-100
-dark:border-gray-800
+
 shadow-2xl
+
 overflow-hidden
+
 z-50
+
 "
 
 >
@@ -381,57 +662,24 @@ z-50
 
 
 
-{/* HEADER */}
 
 
 <div
 
 className="
+
 p-5
-flex
-justify-between
-items-center
+
+font-black
+
 border-b
-border-gray-100
-dark:border-gray-800
+
 "
 
 >
 
-
-<h2 className="font-black">
 
 Notifications
-
-</h2>
-
-
-
-
-{
-
-
-unread>0 &&
-
-
-<span
-
-className="
-bg-red-500
-text-white
-text-xs
-rounded-full
-px-2
-"
-
->
-
-{unread}
-
-</span>
-
-
-}
 
 
 </div>
@@ -445,10 +693,10 @@ px-2
 
 
 
-{/* LIST */}
-
-
 <div className="max-h-[420px] overflow-y-auto">
+
+
+
 
 
 {
@@ -456,11 +704,10 @@ px-2
 
 notifications.length===0
 
-
 ?
 
 
-<p className="p-5 text-sm text-gray-400">
+<p className="p-5 text-gray-400 text-sm">
 
 
 No notifications
@@ -474,7 +721,8 @@ No notifications
 
 
 
-notifications.map((item)=>(
+notifications.map(item=>(
+
 
 
 
@@ -489,21 +737,25 @@ onClick={()=>openNotification(item)}
 
 
 className="
+
 p-5
+
 flex
+
 gap-4
+
 items-center
-cursor-pointer
-hover:bg-gray-50
-dark:hover:bg-gray-900
-transition
+
 border-b
-border-gray-100
-dark:border-gray-800
+
+cursor-pointer
+
+hover:bg-gray-50
+
 "
 
-
 >
+
 
 
 
@@ -512,18 +764,28 @@ dark:border-gray-800
 <div
 
 className="
+
 w-10
+
 h-10
+
 rounded-xl
+
 bg-blue-100
+
 flex
+
 items-center
+
 justify-center
+
 "
 
 >
 
+
 🔔
+
 
 </div>
 
@@ -533,7 +795,10 @@ justify-center
 
 
 
+
+
 <div className="flex-1">
+
 
 
 <h3 className="font-bold text-sm">
@@ -546,7 +811,7 @@ justify-center
 
 
 
-<p className="text-xs text-gray-400 mt-1">
+<p className="text-xs text-gray-400">
 
 
 {item.message}
@@ -555,7 +820,9 @@ justify-center
 </p>
 
 
+
 </div>
+
 
 
 
@@ -573,10 +840,15 @@ justify-center
 <div
 
 className="
+
 w-2
+
 h-2
-rounded-full
+
 bg-red-500
+
+rounded-full
+
 "
 
 />
@@ -591,14 +863,19 @@ bg-red-500
 
 
 
+
 ))
+
+
 
 
 }
 
 
 
+
 </div>
+
 
 
 
@@ -610,16 +887,30 @@ bg-red-500
 
 <div
 
-onClick={()=>router.push("/notifications")}
+
+onClick={()=>{
+
+
+setOpen(false);
+
+router.push("/notifications");
+
+
+}}
+
 
 className="
+
 p-4
+
 text-center
+
 text-xs
-font-semibold
-text-gray-500
+
+font-bold
+
 cursor-pointer
-hover:bg-gray-50
+
 "
 
 >
@@ -629,6 +920,8 @@ View all notifications →
 
 
 </div>
+
+
 
 
 
@@ -646,5 +939,7 @@ View all notifications →
 
 
 );
+
+
 
 }

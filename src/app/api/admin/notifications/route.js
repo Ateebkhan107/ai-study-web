@@ -12,97 +12,188 @@ const supabase = createClient(
 
 
 
-export async function POST(req) {
-
-  try {
+export async function POST(req){
 
 
-    const body = await req.json();
+try{
 
 
-    const {
-
-      title,
-
-      message,
-
-      href
-
-    } = body;
+const body = await req.json();
 
 
 
+const {
 
-    const { error } = await supabase
+title,
 
-      .from("notifications")
+message,
 
-      .insert({
+href,
 
-        user_id: "all",
+stream
 
-        type: "admin",
-
-        title,
-
-        message,
-
-        href: href || "/dashboard",
-
-        is_read:false
-
-      });
+}=body;
 
 
 
 
-    if(error){
 
-      console.log(error);
-
-      return NextResponse.json(
-
-        {
-          success:false,
-          error:error.message
-        },
-
-        {status:500}
-
-      );
-
-    }
+if(!title || !message){
 
 
+return NextResponse.json(
+
+{
+error:"Missing fields"
+},
+
+{
+status:400
+}
+
+);
 
 
-    return NextResponse.json({
-
-      success:true
-
-    });
+}
 
 
 
 
-  } catch(error){
 
 
-    return NextResponse.json(
-
-      {
-
-        success:false,
-
-        error:error.message
-
-      },
-
-      {status:500}
-
-    );
 
 
-  }
+
+const {data,error}=await supabase
+
+
+.from("notifications")
+
+
+.insert({
+
+
+user_id:"all",
+
+
+type:"announcement",
+
+
+title:title,
+
+
+message:message,
+
+
+href:href || "/dashboard",
+
+
+// NEW JEE / NEET FILTER
+
+stream: stream || "ALL",
+
+
+is_read:false
+
+
+
+})
+
+
+.select();
+
+
+
+
+
+
+
+
+if(error){
+
+
+console.log(
+
+"Notification insert failed:",
+
+error
+
+);
+
+
+
+
+return NextResponse.json(
+
+{
+success:false,
+
+error:error.message
+},
+
+{
+status:500
+}
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+return NextResponse.json({
+
+
+success:true,
+
+
+notification:data
+
+
+});
+
+
+
+
+
+
+
+
+}
+
+
+catch(error){
+
+
+
+return NextResponse.json(
+
+{
+
+success:false,
+
+error:error.message
+
+},
+
+{
+
+status:500}
+
+);
+
+
+
+}
+
+
 
 }
