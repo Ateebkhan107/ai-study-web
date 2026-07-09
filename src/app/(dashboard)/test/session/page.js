@@ -7,6 +7,7 @@ import Logo from "@/components/Logo";
 import { createTestSession } from "@/services/testSessions";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
+import { updateGoalProgress } from "@/lib/updateGoalProgress";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -176,28 +177,57 @@ const [exam, setExam] = useState(null);
         .from("user_answers")
         .insert(answerRows);
 
-      if (answerError) throw answerError;
+     if (answerError) throw answerError;
 
-      // ===============================
-      // UPDATE XP AFTER TEST SUBMISSION
-      // ===============================
-      const xpResponse = await fetch("/api/update", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          source: "test",
-          correctAnswers: correct,
-          totalQuestions: questions.length
-        })
-      });
 
-      const xpData = await xpResponse.json();
-      console.log("TEST XP UPDATED 👉", xpData);
+// ===============================
+// UPDATE DAILY GOAL PROGRESS
+// ===============================
 
-      // FINISH TEST
-     router.replace(`/test/result/${attempt.id}`);
+await updateGoalProgress(
+  user.id,
+  "MOCK_TEST",
+  1
+);
+
+
+
+// ===============================
+// UPDATE NORMAL XP AFTER TEST SUBMISSION
+// ===============================
+
+const xpResponse = await fetch("/api/update", {
+  method: "POST",
+
+  headers: {
+    "Content-Type": "application/json"
+  },
+
+  body: JSON.stringify({
+    source: "test",
+    correctAnswers: correct,
+    totalQuestions: questions.length
+  })
+});
+
+
+
+const xpData = await xpResponse.json();
+
+
+
+console.log(
+  "TEST XP UPDATED 👉",
+  xpData
+);
+
+
+
+// FINISH TEST
+
+router.replace(
+  `/test/result/${attempt.id}`
+);
 
 clearInterval(timerRef.current);
 
@@ -241,7 +271,7 @@ clearInterval(timerRef.current);
 
   const isTimerDanger = timeLeft < 300; 
   const activeQ = questions[currentIdx];
-  
+
 if (!exam) {
   return (
     <div className="min-h-screen flex items-center justify-center">

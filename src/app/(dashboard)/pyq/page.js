@@ -6,6 +6,7 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
+import { updateGoalProgress } from "@/lib/goals";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
