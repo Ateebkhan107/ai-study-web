@@ -1,18 +1,27 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "./supabaseClient";
+import { addXP } from "./xp";
 
 
-// ===============================
-// UPDATE DAILY GOAL PROGRESS + XP
-// ===============================
+// =================================
+// UPDATE DAILY GOAL PROGRESS
+// =================================
 
 export async function updateGoalProgress(
-  userId,
-  goalType,
-  amount = 1
+userId,
+goalType,
+amount=1,
+name="Student"
 ){
 
 
 if(!userId) return;
+
+
+
+const today =
+new Date()
+.toISOString()
+.split("T")[0];
 
 
 
@@ -25,14 +34,15 @@ const {data:goals,error}=await supabase
 .select("*")
 
 .eq(
-"is_active",
-true
+"goal_type",
+goalType
 )
 
 .eq(
-"goal_type",
-goalType
+"is_active",
+true
 );
+
 
 
 
@@ -49,18 +59,11 @@ return;
 
 
 
-
 for(const goal of goals){
 
 
 
-// check user progress
-
-const today = new Date()
-.toISOString()
-.split("T")[0];
-
-
+// check existing progress
 
 const {data:existing}=await supabase
 
@@ -83,27 +86,20 @@ goal.id
 today
 )
 
-.maybeSingle();
+.single();
 
 
 
 
-
-const newProgress =
-
+let newProgress =
 (existing?.progress || 0)
-
 +
-
 amount;
 
 
 
-const completed =
-
+let completed =
 newProgress >= goal.target_value;
-
-
 
 
 
@@ -125,17 +121,12 @@ goal_date:today,
 
 progress:newProgress,
 
-completed,
-
-completed_at:
-completed ? new Date() : null
+completed
 
 },
-
 {
 
 onConflict:
-
 "user_id,goal_id,goal_date"
 
 }
@@ -145,9 +136,9 @@ onConflict:
 
 
 
-
-
+// ===============================
 // GIVE XP ONLY FIRST TIME
+// ===============================
 
 if(
 completed &&
@@ -155,18 +146,15 @@ completed &&
 ){
 
 
-await supabase.rpc(
+await addXP(
+userId,
+goal.xp,
+name
+);
 
-"add_user_xp",
 
-{
-
-uid:userId,
-
-amount:goal.xp
-
-}
-
+console.log(
+`Goal completed +${goal.xp} XP 🔥`
 );
 
 
@@ -175,6 +163,7 @@ amount:goal.xp
 
 
 }
+
 
 
 }

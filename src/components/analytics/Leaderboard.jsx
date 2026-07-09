@@ -2,168 +2,340 @@
 
 import { useEffect, useState } from "react";
 import { Trophy } from "lucide-react";
+import { getLeaderboard } from "@/lib/leaderboard";
+
+
 
 export default function Leaderboard() {
-  const [users, setUsers] = useState([]);
 
 
-  async function loadLeaderboard() {
-    try {
-      const res = await fetch("/api/pyq/leaderboard");
+const [users,setUsers]=useState([]);
 
-      const data = await res.json();
 
-      setUsers(data);
 
-    } catch (error) {
 
-      console.log("Leaderboard error:", error);
 
-    }
-  }
+// =============================
+// LOAD GLOBAL LEADERBOARD
+// =============================
 
 
+useEffect(()=>{
 
-  useEffect(() => {
 
-    loadLeaderboard();
+async function loadLeaderboard(){
 
-  }, []);
 
+try{
 
 
+const data =
+await getLeaderboard();
 
-  return (
 
-    <div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
 
+setUsers(
+data || []
+);
 
-      {/* HEADER */}
 
-      <div className="flex items-center gap-2 mb-6">
 
-        <Trophy size={24} />
+}
 
-        <h2 className="text-2xl font-black text-black dark:text-white">
+catch(error){
 
-          Leaderboard
 
-        </h2>
+console.log(
+"Leaderboard error:",
+error
+);
 
-      </div>
 
+}
 
 
 
+}
 
-      <div className="space-y-4">
 
 
-        {users.length === 0 && (
+loadLeaderboard();
 
-          <p className="text-gray-400">
 
-            No rankings yet
 
-          </p>
+},[]);
 
-        )}
 
 
 
 
 
 
-        {users.map((user, index) => (
 
-          <div
-            key={user.user_id}
-            className="bg-gray-50 dark:bg-gray-900 rounded-xl p-5 flex justify-between items-center"
-          >
+return (
 
+<div className="bg-white dark:bg-[#0b1020] rounded-3xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
 
-            {/* LEFT SIDE */}
 
-            <div className="flex gap-4 items-center">
 
+{/* HEADER */}
 
-              {/* RANK */}
 
-              <div className="text-xl">
+<div className="flex items-center gap-2 mb-6">
 
-                {
-                  index === 0 ? "🥇" :
-                  index === 1 ? "🥈" :
-                  index === 2 ? "🥉" :
-                  `#${index + 1}`
-                }
 
-              </div>
+<Trophy size={24}/>
 
 
+<h2 className="text-2xl font-black text-black dark:text-white">
 
+Leaderboard
 
-              {/* USER INFO */}
+</h2>
 
-              <div>
 
+</div>
 
-                <h3 className="font-bold text-black dark:text-white">
 
-                  {user.name}
 
-                </h3>
 
 
 
-                <p className="text-sm text-gray-400">
 
-                  {user.solved} solved • {user.accuracy}% accuracy
 
-                </p>
+<div className="space-y-4">
 
 
 
+{
 
-                {/* LEVEL */}
 
-                <span className="mt-2 inline-flex text-xs font-bold bg-gray-200 dark:bg-gray-800 rounded-full px-2 py-1">
+users.length===0 &&
 
-                  {user.badge} {user.level}
 
-                </span>
+<p className="text-gray-400">
 
+No rankings yet
 
+</p>
 
-              </div>
 
+}
 
-            </div>
 
 
 
 
 
-            {/* XP */}
 
-            <div className="font-black text-xl text-black dark:text-white">
 
-              {user.xp} XP
+{
 
-            </div>
 
+users.map((user,index)=>(
 
 
-          </div>
 
-        ))}
+<div
 
+key={user.user_id}
 
-      </div>
+className="
+bg-gray-50
+dark:bg-gray-900
+rounded-xl
+p-5
+flex
+justify-between
+items-center
+"
 
+>
 
-    </div>
 
-  );
+
+
+{/* LEFT SIDE */}
+
+
+<div className="flex gap-4 items-center">
+
+
+
+
+
+{/* RANK */}
+
+
+<div className="text-xl font-black">
+
+
+{
+
+index===0
+
+?
+
+"🥇"
+
+:
+
+index===1
+
+?
+
+"🥈"
+
+:
+
+index===2
+
+?
+
+"🥉"
+
+:
+
+`#${index+1}`
+
+}
+
+
+</div>
+
+
+
+
+
+
+
+
+{/* USER INFO */}
+
+
+<div>
+
+
+
+
+<h3 className="font-bold text-black dark:text-white">
+
+
+{user.name || "Student"}
+
+
+</h3>
+
+
+
+
+
+
+<p className="text-sm text-gray-400">
+
+
+🔥 {user.xp} XP earned
+
+
+</p>
+
+
+
+
+
+
+
+
+{/* LEVEL BADGE */}
+
+
+<span
+
+className="
+mt-2
+inline-flex
+text-xs
+font-bold
+bg-gray-200
+dark:bg-gray-800
+rounded-full
+px-2
+py-1
+"
+
+>
+
+
+{user.badge}
+
+{" "}
+
+Level {user.level}
+
+
+
+</span>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* XP */}
+
+
+<div className="font-black text-xl text-black dark:text-white">
+
+
+{user.xp}
+
+
+<span className="text-sm ml-1">
+
+XP
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+))
+
+
+}
+
+
+
+</div>
+
+
+
+</div>
+
+
+);
+
+
 
 }

@@ -2,13 +2,72 @@
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import { getUserXP, getUserRank } from "@/lib/profile";
 
-const XP_FOR_NEXT_LEVEL = 3000;
+function getLevelProgress(xp){
+
+
+if(xp >= 10000){
+
+return {
+current:xp,
+next:20000
+};
+
+}
+
+
+
+if(xp >= 5000){
+
+return {
+current:xp,
+next:10000
+};
+
+}
+
+
+
+if(xp >= 2000){
+
+return {
+current:xp,
+next:5000
+};
+
+}
+
+
+
+if(xp >= 500){
+
+return {
+current:xp,
+next:2000
+};
+
+}
+
+
+
+return {
+
+current:xp,
+
+next:500
+
+};
+
+
+}
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
 
   const [user, setUser] = useState(null);
+  const [xpData,setXpData]=useState(null);
+const [rank,setRank]=useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
@@ -39,6 +98,47 @@ export default function ProfilePage() {
     }
     fetchLiveProfile();
   }, [clerkUser]);
+
+  // ==============================
+// LOAD XP PROFILE
+// ==============================
+
+useEffect(()=>{
+
+
+if(!clerkUser) return;
+
+
+async function loadXP(){
+
+
+const xp =
+await getUserXP(
+clerkUser.id
+);
+
+
+const userRank =
+await getUserRank(
+clerkUser.id
+);
+
+
+
+setXpData(xp);
+
+setRank(userRank);
+
+
+}
+
+
+
+loadXP();
+
+
+
+},[clerkUser]);
 
   // CHANGE TRACK (JEE / NEET toggle)
   const handleTrackToggle = async (newExam) => {
@@ -118,17 +218,20 @@ export default function ProfilePage() {
     avatar: clerkUser?.hasImage ? clerkUser.imageUrl : null,
     exam: user?.current_track?.toUpperCase() || "JEE",
     targetYear: user?.target_year || 2026,
-    xp: user?.xp || 0,
-    level: user?.level || "Explorer",
-    badge: user?.badge || "🌱",
-    progress: user?.progress || 0,
+   xp: xpData?.xp || 0,
+
+level: xpData?.level || 1,
+
+badge: xpData?.badge || "🌱 Explorer",
+
+progress: xpData?.xp || 0,
 
     // live stats coming from the profile API — each has a sane fallback
     streak: user?.streak_days ?? 0,
     avgSolveSeconds: user?.avg_solve_seconds ?? null,
     accuracy: user?.accuracy_percent ?? 0,
     testsCompleted: user?.tests_completed ?? 0,
-    rank: user?.rank ?? null,
+   rank: rank,
     bestMockScore: user?.best_mock_score_percent ?? 0,
   };
 
@@ -179,6 +282,11 @@ export default function ProfilePage() {
   ];
 
   const earnedCount = badgeDefs.filter((b) => b.earned).length;
+
+  const levelProgress =
+getLevelProgress(
+activeUser.xp
+);
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10 space-y-8">
@@ -259,7 +367,7 @@ export default function ProfilePage() {
             <div>
               <h3 className="font-bold">Level {activeUser.level}</h3>
               <p className="text-sm text-gray-400">
-                {activeUser.xp} / {XP_FOR_NEXT_LEVEL} XP
+                {activeUser.xp} / {levelProgress.next} XP
               </p>
             </div>
           </div>
@@ -267,7 +375,10 @@ export default function ProfilePage() {
           <div className="text-right">
             <p className="text-xs text-gray-400">Next level</p>
             <p className="font-bold">
-              {Math.max(XP_FOR_NEXT_LEVEL - activeUser.xp, 0)} XP away
+              {Math.max(
+levelProgress.next - activeUser.xp,
+0
+)} XP away
             </p>
           </div>
         </div>
@@ -277,7 +388,7 @@ export default function ProfilePage() {
             className="h-full bg-black dark:bg-white rounded-full"
             style={{
               width: `${Math.min(
-                (activeUser.xp / XP_FOR_NEXT_LEVEL) * 100,
+                (activeUser.xp / levelProgress.next) * 100,
                 100
               )}%`,
             }}
