@@ -9,6 +9,7 @@ import {
 
 import { supabase } from "@/lib/supabase";
 import Logo from "@/components/Logo";
+import { cookies } from "next/headers";
 
 const EXAMS = ["JEE", "NEET"];
 
@@ -41,6 +42,7 @@ export default async function OnboardingPage() {
 
     const targetExam = formData.get("targetExam");
     const targetYear = Number(formData.get("targetYear"));
+    const fullName = formData.get("fullName");
     const validYears = getYearOptions();
 
     if (!EXAMS.includes(targetExam) || !validYears.includes(targetYear)) {
@@ -52,8 +54,7 @@ export default async function OnboardingPage() {
 
     const email = clerkUser.primaryEmailAddress?.emailAddress || "";
 
-    const fullName = `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim();
-
+   
     console.log("USER ID:", actionUserId);
     console.log("EMAIL:", email);
     console.log("NAME:", fullName);
@@ -69,6 +70,7 @@ export default async function OnboardingPage() {
         full_name: fullName,
         exam: targetExam,
         target_year: targetYear,
+        
       });
     console.log("SUPABASE ERROR:", error);
 
@@ -85,6 +87,13 @@ export default async function OnboardingPage() {
         targetYear,
       },
     });
+
+    const cookieStore = await cookies();
+
+cookieStore.set("prepzii_track", targetExam.toLowerCase(), {
+  path: "/",
+  maxAge: 60 * 60 * 24 * 365, // 1 year
+});
 
     redirect(DASHBOARD_ROUTE);
   }
@@ -111,6 +120,23 @@ export default async function OnboardingPage() {
         </div>
 
         <form action={completeOnboarding} className="space-y-6">
+
+          <div>
+  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">
+    Full Name
+  </label>
+
+ <input
+    type="text"
+    name="fullName"
+    placeholder="Enter your full name"
+    defaultValue={user?.fullName || ""}
+    required
+    minLength={3}
+    maxLength={50}
+    className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-3 text-sm font-medium text-black dark:text-white"
+/>
+</div>
           <div>
             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">
               Target Exam

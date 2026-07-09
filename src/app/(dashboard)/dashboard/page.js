@@ -4,7 +4,7 @@ import { EXAM_CONFIG } from "@/lib/examConfig";
 import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
-
+import UserGreeting from "@/components/UserGreeting";
 
 export default async function DashboardPage() {
 
@@ -82,20 +82,7 @@ export default async function DashboardPage() {
 
 
 
-        <h1 className="
-        text-4xl
-        font-black
-        text-black
-        dark:text-white
-        tracking-tight
-        ">
-
-
-          Hey, Syed Ateeb 👋
-
-
-        </h1>
-
+       <UserGreeting />
 
 
         <p className="
