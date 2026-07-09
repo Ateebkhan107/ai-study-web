@@ -19,6 +19,7 @@ const [track,setTrack]=useState(null);
 
 
 
+
 // ===============================
 // LOAD USER TRACK
 // ===============================
@@ -31,18 +32,29 @@ if(!user) return;
 async function loadTrack(){
 
 const {data}=await supabase
+
 .from("user_profiles")
+
 .select("exam")
+
 .eq(
+
 "clerk_user_id",
+
 user.id
+
 )
+
 .single();
 
 
+
 setTrack(
+
 data?.exam || "JEE"
+
 );
+
 
 }
 
@@ -51,6 +63,10 @@ loadTrack();
 
 
 },[user]);
+
+
+
+
 
 
 
@@ -73,7 +89,11 @@ loadNotifications();
 
 
 
+
+
+
 async function loadNotifications(){
+
 
 
 const {data,error}=await supabase
@@ -90,7 +110,9 @@ notification_reads(
 
 user_id,
 
-is_cleared
+is_cleared,
+
+is_read
 
 )
 
@@ -133,6 +155,10 @@ ascending:false
 
 
 
+
+
+
+
 if(error){
 
 
@@ -147,16 +173,22 @@ error
 
 return;
 
+
 }
 
 
 
 
-// remove notifications cleared by THIS user only
 
-const visible = (data || []).filter(
 
-(item)=>{
+// cleared + read status only for THIS user
+
+
+const visible = (data || [])
+
+
+.filter((item)=>{
+
 
 
 const cleared = item.notification_reads?.some(
@@ -170,12 +202,41 @@ read.is_cleared===true
 );
 
 
+
 return !cleared;
 
 
-}
+
+})
+
+
+.map((item)=>{
+
+
+
+const readData = item.notification_reads?.find(
+
+(read)=>
+
+read.user_id===user.id
 
 );
+
+
+
+return {
+
+...item,
+
+is_read:readData?.is_read || false
+
+};
+
+
+
+});
+
+
 
 
 
@@ -193,10 +254,11 @@ setNotifications(visible);
 
 
 
+
+
 // ===============================
 // OPEN NOTIFICATION
 // ===============================
-
 
 
 async function openNotification(item){
@@ -206,23 +268,21 @@ async function openNotification(item){
 const {error}=await supabase
 
 
-.from("notifications")
+.from("notification_reads")
 
 
-.update({
+.upsert({
+
+user_id:user.id,
+
+notification_id:item.id,
 
 is_read:true
 
-})
+});
 
 
-.eq(
 
-"id",
-
-item.id
-
-);
 
 
 
@@ -245,7 +305,7 @@ return;
 
 
 
-// update UI
+
 
 
 setNotifications(
@@ -278,7 +338,8 @@ n
 
 
 
-// redirect
+
+
 
 if(item.href){
 
@@ -289,6 +350,7 @@ router.push(item.href);
 
 
 }
+
 
 
 
@@ -316,11 +378,14 @@ user_id:user.id,
 
 notification_id:item.id,
 
-is_cleared:true
+is_cleared:true,
+
+is_read:true
 
 })
 
 );
+
 
 
 
@@ -331,6 +396,7 @@ const {error}=await supabase
 
 
 .upsert(rows);
+
 
 
 
@@ -353,11 +419,14 @@ return;
 
 
 
+
+
 setNotifications([]);
 
 
 
 }
+
 
 
 
@@ -382,6 +451,8 @@ py-12
 
 
 
+
+
 {/* HEADER */}
 
 <div className="
@@ -395,6 +466,7 @@ mb-8
 <div>
 
 
+
 <p className="
 tracking-[4px]
 text-[11px]
@@ -406,6 +478,7 @@ uppercase
 PrepZii Updates
 
 </p>
+
 
 
 
@@ -424,6 +497,8 @@ Notifications 🔔
 
 
 
+
+
 <p className="
 text-gray-400
 text-xs
@@ -436,6 +511,7 @@ mt-2
 
 
 </div>
+
 
 
 
@@ -474,6 +550,7 @@ Clear All
 
 </button>
 
+
 }
 
 
@@ -487,11 +564,11 @@ Clear All
 
 
 
+
 {/* LIST */}
 
 
 <div className="space-y-3">
-
 
 
 {
@@ -511,12 +588,15 @@ shadow
 ">
 
 <Bell
+
 size={38}
+
 className="
 mx-auto
 text-gray-300
 mb-4
 "
+
 />
 
 
@@ -527,6 +607,7 @@ No notifications
 </h2>
 
 
+
 <p className="text-gray-400 text-xs mt-1">
 
 You are all caught up 🚀
@@ -534,7 +615,9 @@ You are all caught up 🚀
 </p>
 
 
+
 </div>
+
 
 
 
@@ -572,6 +655,7 @@ gap-4
 >
 
 
+
 <div className="
 w-10
 h-10
@@ -588,6 +672,8 @@ justify-center
 
 
 
+
+
 <div className="flex-1">
 
 
@@ -601,19 +687,27 @@ justify-center
 </h2>
 
 
+
 {
 
 item.is_read &&
 
+
 <CheckCircle
+
 size={14}
+
 className="text-green-500"
+
 />
 
 }
 
 
+
 </div>
+
+
 
 
 
@@ -626,6 +720,8 @@ mt-1
 {item.message}
 
 </p>
+
+
 
 
 
@@ -646,11 +742,13 @@ mt-2
 
 
 
+
 {
 
 !item.is_read
 
 ?
+
 
 <span className="
 w-2.5
@@ -660,7 +758,9 @@ bg-red-500
 animate-pulse
 "/>
 
+
 :
+
 
 <span className="
 text-[10px]
@@ -672,7 +772,10 @@ READ
 
 </span>
 
+
 }
+
+
 
 
 </div>
@@ -691,6 +794,7 @@ READ
 
 
 </div>
+
 
 );
 

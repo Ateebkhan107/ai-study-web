@@ -7,21 +7,17 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
 
-
 export default function NotificationBell(){
-
 
 const router = useRouter();
 
 const {user,isLoaded}=useUser();
-
 
 const [open,setOpen]=useState(false);
 
 const [notifications,setNotifications]=useState([]);
 
 const [stream,setStream]=useState(null);
-
 
 
 
@@ -37,19 +33,14 @@ useEffect(()=>{
 if(!isLoaded || !user) return;
 
 
-
 async function getStream(){
-
 
 
 const {data,error}=await supabase
 
-
 .from("user_profiles")
 
-
 .select("exam")
-
 
 .eq(
 
@@ -59,10 +50,7 @@ user.id
 
 )
 
-
 .single();
-
-
 
 
 
@@ -81,12 +69,7 @@ error
 
 return;
 
-
 }
-
-
-
-
 
 
 
@@ -124,27 +107,19 @@ getStream();
 
 
 
-
 // ===============================
 // LOAD NOTIFICATIONS
 // ===============================
 
 
-
 useEffect(()=>{
-
 
 
 if(!user || !stream) return;
 
 
 
-
-
-
 async function loadNotifications(){
-
-
 
 
 
@@ -162,7 +137,9 @@ notification_reads(
 
 user_id,
 
-is_cleared
+is_cleared,
+
+is_read
 
 )
 
@@ -177,11 +154,17 @@ is_cleared
 
 
 .in(
-  "stream",
-  [
-    stream,
-    "ALL"
-  ]
+
+"stream",
+
+[
+
+stream,
+
+"ALL"
+
+]
+
 )
 
 
@@ -202,10 +185,7 @@ ascending:false
 
 
 
-
-
 if(error){
-
 
 
 console.log(
@@ -226,9 +206,13 @@ return;
 
 
 
-const visible = (data || []).filter(
 
-(item)=>{
+
+const visible = (data || [])
+
+
+.filter((item)=>{
+
 
 const cleared = item.notification_reads?.some(
 
@@ -241,11 +225,41 @@ read.is_cleared===true
 );
 
 
+
 return !cleared;
 
-}
+
+})
+
+
+.map((item)=>{
+
+
+
+const readData = item.notification_reads?.find(
+
+(read)=>
+
+read.user_id===user.id
 
 );
+
+
+
+return {
+
+...item,
+
+is_read: readData?.is_read || false
+
+};
+
+
+
+});
+
+
+
 
 
 setNotifications(visible);
@@ -253,7 +267,6 @@ setNotifications(visible);
 
 
 }
-
 
 
 
@@ -268,9 +281,10 @@ loadNotifications();
 
 
 
-
-
+// ===============================
 // REALTIME
+// ===============================
+
 
 
 const channel = supabase
@@ -286,15 +300,11 @@ const channel = supabase
 
 {
 
-
 event:"INSERT",
-
 
 schema:"public",
 
-
 table:"notifications"
-
 
 },
 
@@ -304,16 +314,12 @@ table:"notifications"
 
 
 
-
-
 const item = payload.new;
 
 
 
 
-
 if(
-
 
 (
 
@@ -329,23 +335,29 @@ item.user_id==="all"
 
 (
 
-item.stream === stream ||
-item.stream === "ALL"
+item.stream===stream
+
+||
+
+item.stream==="ALL"
 
 )
-
 
 ){
 
 
 
-
-
 setNotifications(
 
-prev => [
+prev=>[
 
-item,
+{
+
+...item,
+
+is_read:false
+
+},
 
 ...prev
 
@@ -359,7 +371,6 @@ item,
 
 
 
-
 }
 
 
@@ -367,8 +378,6 @@ item,
 
 
 .subscribe();
-
-
 
 
 
@@ -386,7 +395,6 @@ supabase.removeChannel(channel);
 
 
 
-
 },[user,stream]);
 
 
@@ -400,13 +408,15 @@ supabase.removeChannel(channel);
 
 
 
+// ===============================
+// OPEN NOTIFICATION
+// ===============================
+
 
 
 async function openNotification(item){
 
 
-
-// UI update
 
 setNotifications(
 
@@ -432,43 +442,33 @@ is_read:true
 
 n
 
-
 )
-
 
 );
 
 
 
-
-
-
-
-// DB update
 
 
 await supabase
 
 
-.from("notifications")
+.from("notification_reads")
 
 
-.update({
+.upsert({
+
+
+user_id:user.id,
+
+
+notification_id:item.id,
+
 
 is_read:true
 
-})
 
-
-.eq(
-
-"id",
-
-item.id
-
-);
-
-
+});
 
 
 
@@ -479,10 +479,6 @@ setOpen(false);
 
 
 
-
-
-
-// redirect only if link exists
 
 
 if(
@@ -502,7 +498,6 @@ item.href
 
 
 }
-
 
 
 
@@ -530,10 +525,10 @@ n=>!n.is_read
 
 
 
+
 return(
 
 <div className="relative">
-
 
 
 
@@ -544,9 +539,7 @@ return(
 
 <button
 
-
 onClick={()=>setOpen(!open)}
-
 
 className="
 
@@ -583,10 +576,7 @@ shadow-sm
 
 
 
-
-
 {
-
 
 unread>0 &&
 
@@ -621,8 +611,6 @@ rounded-full
 
 </span>
 
-
-
 }
 
 
@@ -643,9 +631,7 @@ rounded-full
 
 {
 
-
 open &&
-
 
 
 <div
@@ -676,10 +662,6 @@ z-50
 
 
 
-
-
-
-
 <div
 
 className="
@@ -694,15 +676,9 @@ border-b
 
 >
 
-
 Notifications
 
-
 </div>
-
-
-
-
 
 
 
@@ -713,10 +689,7 @@ Notifications
 
 
 
-
-
 {
-
 
 notifications.length===0
 
@@ -725,32 +698,23 @@ notifications.length===0
 
 <p className="p-5 text-gray-400 text-sm">
 
-
 No notifications
-
 
 </p>
 
 
-
 :
-
 
 
 notifications.map(item=>(
 
 
 
-
-
 <div
-
 
 key={item.id}
 
-
 onClick={()=>openNotification(item)}
-
 
 className="
 
@@ -771,9 +735,6 @@ hover:bg-gray-50
 "
 
 >
-
-
-
 
 
 
@@ -799,23 +760,19 @@ justify-center
 
 >
 
-
 🔔
 
-
 </div>
+
 
 
 
 <div className="flex-1">
 
 
-
 <h3 className="font-bold text-sm">
 
-
 {item.title}
-
 
 </h3>
 
@@ -823,12 +780,9 @@ justify-center
 
 <p className="text-xs text-gray-400">
 
-
 {item.message}
 
-
 </p>
-
 
 
 </div>
@@ -837,12 +791,7 @@ justify-center
 
 
 
-
-
-
-
 {
-
 
 !item.is_read &&
 
@@ -863,44 +812,34 @@ rounded-full
 
 />
 
-
 }
 
 
 
-
 </div>
-
-
 
 
 ))
 
-
-
-
 }
 
 
-
-
 </div>
+
+
+
 
 
 
 <div
 
-
 onClick={()=>{
-
 
 setOpen(false);
 
 router.push("/notifications");
 
-
 }}
-
 
 className="
 
@@ -927,22 +866,14 @@ View all notifications →
 
 
 
-
-
-
 </div>
-
 
 }
 
 
-
-
 </div>
 
-
 );
-
 
 
 }
