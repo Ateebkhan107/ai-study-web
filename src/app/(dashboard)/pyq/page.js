@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
+import { useUser } from "@clerk/nextjs";
+import { supabase } from "@/lib/supabase";
+
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}
@@ -363,15 +366,31 @@ function SavedTab({ track, savedQuestions }) {
 // ─── Main Controller Page ───────────────────────────────────────────────────
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
-  const [track, setTrack] = useState("jee"); 
+  const { user } = useUser();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
-      const val = match ? match[2].toLowerCase() : 'jee';
-      setTrack(val === 'neet' ? 'neet' : 'jee');
+const [track, setTrack] = useState(null);
+
+ useEffect(() => {
+  async function loadTrack() {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from("user_profiles")
+      .select("exam")
+      .eq("clerk_user_id", user.id)
+      .single();
+
+    if (data?.exam === "NEET") {
+      setTrack("neet");
+    } else {
+      setTrack("jee");
     }
-  }, []);
+  }
+
+  loadTrack();
+}, [user]);
+
+
 
   const filteredSubjects = MASTER_SUBJECTS.filter(s => s.tracks.includes(track));
   const filteredRecent = MASTER_RECENT.filter(r => r.track === "mixed" || r.track === track);
@@ -434,6 +453,15 @@ export default function PYQPage() {
     { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel, accent: "#a855f7" },
     { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units", accent: "#06b6d4" },
   ];
+
+
+  if (!track) {
+  return (
+    <div className="min-h-[400px] flex items-center justify-center">
+      Loading...
+    </div>
+  );
+}
 
   return (
     <div className={`min-h-full ${TXT}`}>

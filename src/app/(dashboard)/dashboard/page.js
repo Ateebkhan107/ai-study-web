@@ -1,24 +1,21 @@
 import Leaderboard from "@/components/analytics/Leaderboard";
-import { cookies } from "next/headers";
+
 import { EXAM_CONFIG } from "@/lib/examConfig";
 import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
+import { currentUser } from "@clerk/nextjs/server";
+import { getUserProfile } from "@/lib/userProfile";
 
 export default async function DashboardPage() {
 
+const user = await currentUser();
 
-  const cookieStore = await cookies();
+const profile = await getUserProfile(user.id);
 
-
-  const currentTrack =
-    cookieStore.get("prepzii_track")?.value || "jee";
-
-
-
-  const activeTrackKey =
-    currentTrack.toUpperCase() === "NEET"
+const activeTrackKey =
+  profile?.exam === "NEET"
     ? "NEET"
     : "JEE";
 

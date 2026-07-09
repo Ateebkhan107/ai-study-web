@@ -37,6 +37,8 @@ function TestSessionContent() {
   const searchParams = useSearchParams();
   const { user } = useUser();
 
+const [exam, setExam] = useState(null);
+
   const [sessionId, setSessionId] = useState(null);
 
   // 1. Extract URL Parameters
@@ -56,12 +58,31 @@ function TestSessionContent() {
   const [attemptId, setAttemptId] = useState(null);
   const timerRef = useRef(null);
 
+  useEffect(() => {
+  async function loadExam() {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from("user_profiles")
+      .select("exam")
+      .eq("clerk_user_id", user.id)
+      .single();
+
+    setExam(data?.exam || "JEE");
+  }
+
+  loadExam();
+}, [user]);
+
+
+
   // 3. Initialize the Test Pool
   useEffect(() => {
     async function loadQuestions() {
+      if (!exam) return;
       try {
         const fetched = await getQuestions({
-          exam: "JEE Main",
+          exam: exam === "NEET" ? "NEET" : "JEE Main",
           subject: subjectParam,
           chapter: chapterParam,
           difficulty: difficultyParam,
@@ -82,7 +103,7 @@ function TestSessionContent() {
         if (user) {
           const session = await createTestSession({
             userId: user.id,
-            exam: "JEE Main",
+            exam: exam === "NEET" ? "NEET" : "JEE Main",
             subjects: [subjectParam],
             chapters: [chapterParam],
             difficulty: difficultyParam,
@@ -98,7 +119,14 @@ function TestSessionContent() {
     }
 
     loadQuestions();
-  }, [subjectParam, difficultyParam, countParam, durationParam, user]);
+  }, [
+  subjectParam,
+  difficultyParam,
+  countParam,
+  durationParam,
+  user,
+  exam
+]);
 
   async function handleSubmit() {
     try {
@@ -213,7 +241,14 @@ clearInterval(timerRef.current);
 
   const isTimerDanger = timeLeft < 300; 
   const activeQ = questions[currentIdx];
-
+  
+if (!exam) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      Loading...
+    </div>
+  );
+}
   // ─────────────────────────────────────────────────────────────────
   // Loading State
   // ─────────────────────────────────────────────────────────────────

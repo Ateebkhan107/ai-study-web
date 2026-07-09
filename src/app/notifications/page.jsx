@@ -7,94 +7,73 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
 
-
 export default function NotificationsPage(){
-
 
 const router = useRouter();
 
 const {user}=useUser();
 
-
 const [notifications,setNotifications]=useState([]);
 
-const [track,setTrack]=useState("JEE");
+const [track,setTrack]=useState(null);
 
 
 
-
-
-
-// LOAD TRACK
-
+// ===============================
+// LOAD USER TRACK
+// ===============================
 
 useEffect(()=>{
 
-
-const cookie = document.cookie
-
-.split("; ")
-
-.find(
-
-row=>row.startsWith("prepzii_track=")
-
-);
+if(!user) return;
 
 
+async function loadTrack(){
 
-if(cookie){
+const {data}=await supabase
+.from("user_profiles")
+.select("exam")
+.eq(
+"clerk_user_id",
+user.id
+)
+.single();
 
 
 setTrack(
-
-cookie
-
-.split("=")[1]
-
-.toUpperCase()
-
+data?.exam || "JEE"
 );
-
 
 }
 
 
-
-},[]);
-
+loadTrack();
 
 
-
+},[user]);
 
 
 
+
+// ===============================
+// LOAD NOTIFICATIONS
+// ===============================
 
 
 useEffect(()=>{
 
-
-if(user){
-
+if(user && track){
 
 loadNotifications();
 
-
 }
-
 
 },[user,track]);
 
 
 
 
-
-
-
-
-
 async function loadNotifications(){
-
 
 
 const {data,error}=await supabase
@@ -103,7 +82,19 @@ const {data,error}=await supabase
 .from("notifications")
 
 
-.select("*")
+.select(`
+
+*,
+
+notification_reads(
+
+user_id,
+
+is_cleared
+
+)
+
+`)
 
 
 .or(
@@ -115,7 +106,7 @@ const {data,error}=await supabase
 
 .in(
 
-"target",
+"stream",
 
 [
 
@@ -142,9 +133,6 @@ ascending:false
 
 
 
-
-
-
 if(error){
 
 
@@ -159,6 +147,41 @@ error
 
 return;
 
+}
+
+
+
+
+// remove notifications cleared by THIS user only
+
+const visible = (data || []).filter(
+
+(item)=>{
+
+
+const cleared = item.notification_reads?.some(
+
+(read)=>
+
+read.user_id===user.id &&
+
+read.is_cleared===true
+
+);
+
+
+return !cleared;
+
+
+}
+
+);
+
+
+
+setNotifications(visible);
+
+
 
 }
 
@@ -167,23 +190,12 @@ return;
 
 
 
-setNotifications(data || []);
 
 
 
-}
-
-
-
-
-
-
-
-
-
-
-
+// ===============================
 // OPEN NOTIFICATION
+// ===============================
 
 
 
@@ -214,9 +226,6 @@ item.id
 
 
 
-
-
-
 if(error){
 
 
@@ -233,11 +242,6 @@ return;
 
 
 }
-
-
-
-
-
 
 
 
@@ -268,28 +272,18 @@ is_read:true
 
 n
 
-
 )
-
 
 );
 
 
 
-
-
-
-
-
-// 🔥 redirect only if href exists
-
+// redirect
 
 if(item.href){
 
-
 router.push(item.href);
 
-
 }
 
 
@@ -304,9 +298,9 @@ router.push(item.href);
 
 
 
-
-
-// CLEAR ALL
+// ===============================
+// CLEAR ONLY CURRENT USER
+// ===============================
 
 
 
@@ -314,23 +308,29 @@ async function clearAll(){
 
 
 
-const {error}=await supabase
+const rows = notifications.map(
 
+(item)=>({
 
-.from("notifications")
+user_id:user.id,
 
+notification_id:item.id,
 
-.delete()
+is_cleared:true
 
-
-.or(
-
-`user_id.eq.${user.id},user_id.eq.all`
+})
 
 );
 
 
 
+const {error}=await supabase
+
+
+.from("notification_reads")
+
+
+.upsert(rows);
 
 
 
@@ -353,9 +353,6 @@ return;
 
 
 
-
-
-
 setNotifications([]);
 
 
@@ -373,68 +370,38 @@ setNotifications([]);
 return(
 
 
-<div
-
-className="
+<div className="
 min-h-screen
 bg-[#fafafa]
 dark:bg-[#050816]
 px-8
 py-12
-"
+">
 
->
-
-
-
-<div
-
-className="
-max-w-3xl
-mx-auto
-"
-
->
-
-
-
-
-
-
+<div className="max-w-3xl mx-auto">
 
 
 
 {/* HEADER */}
 
-
-<div
-
-className="
+<div className="
 flex
 items-center
 justify-between
 mb-8
-"
-
->
-
+">
 
 
 <div>
 
 
-
-<p
-
-className="
+<p className="
 tracking-[4px]
 text-[11px]
 font-bold
 text-gray-400
 uppercase
-"
-
->
+">
 
 PrepZii Updates
 
@@ -442,48 +409,30 @@ PrepZii Updates
 
 
 
-
-
-
-<h1
-
-className="
+<h1 className="
 text-2xl
 font-black
 mt-2
 flex
 items-center
 gap-2
-"
-
->
+">
 
 Notifications 🔔
-
 
 </h1>
 
 
 
-
-
-
-<p
-
-className="
+<p className="
 text-gray-400
 text-xs
 mt-2
-"
-
->
-
+">
 
 {track} updates, tests and announcements
 
-
 </p>
-
 
 
 </div>
@@ -492,21 +441,14 @@ mt-2
 
 
 
-
-
-
-
 {
-
 
 notifications.length>0 &&
 
 
 <button
 
-
 onClick={clearAll}
-
 
 className="
 flex
@@ -526,24 +468,17 @@ shadow-md
 
 >
 
-
 <Trash2 size={14}/>
-
 
 Clear All
 
-
 </button>
-
 
 }
 
 
 
-
-
 </div>
-
 
 
 
@@ -555,49 +490,34 @@ Clear All
 {/* LIST */}
 
 
-
 <div className="space-y-3">
-
-
 
 
 
 {
 
-
 notifications.length===0
-
 
 ?
 
 
-<div
-
-className="
+<div className="
 bg-white
 dark:bg-[#0b1020]
 rounded-2xl
 p-12
 text-center
 shadow
-"
-
->
-
-
+">
 
 <Bell
-
 size={38}
-
 className="
 mx-auto
 text-gray-300
 mb-4
 "
-
 />
-
 
 
 <h2 className="font-bold text-base">
@@ -607,22 +527,14 @@ No notifications
 </h2>
 
 
-
 <p className="text-gray-400 text-xs mt-1">
 
-
 You are all caught up 🚀
-
 
 </p>
 
 
-
 </div>
-
-
-
-
 
 
 
@@ -632,15 +544,11 @@ You are all caught up 🚀
 notifications.map(item=>(
 
 
-
 <div
-
 
 key={item.id}
 
-
 onClick={()=>openNotification(item)}
-
 
 className="
 group
@@ -664,14 +572,7 @@ gap-4
 >
 
 
-
-
-
-
-
-<div
-
-className="
+<div className="
 w-10
 h-10
 rounded-xl
@@ -679,9 +580,7 @@ bg-blue-100
 flex
 items-center
 justify-center
-"
-
->
+">
 
 🔔
 
@@ -689,109 +588,59 @@ justify-center
 
 
 
-
-
-
-
-
-
 <div className="flex-1">
-
 
 
 <div className="flex items-center gap-2">
 
 
-
-<h2
-
-className="
-font-bold
-text-sm
-"
-
->
+<h2 className="font-bold text-sm">
 
 {item.title}
 
 </h2>
 
 
-
-
-
 {
 
 item.is_read &&
 
-
 <CheckCircle
-
 size={14}
-
 className="text-green-500"
-
 />
-
 
 }
 
 
-
-
 </div>
 
 
 
-
-
-
-
-<p
-
-className="
+<p className="
 text-gray-400
 text-xs
 mt-1
-"
-
->
-
+">
 
 {item.message}
 
-
 </p>
 
 
 
-
-
-
-<p
-
-className="
+<p className="
 text-[10px]
 text-gray-300
 mt-2
-"
-
->
-
+">
 
 {new Date(item.created_at).toLocaleString()}
-
 
 </p>
 
 
-
-
 </div>
-
-
-
-
 
 
 
@@ -799,48 +648,31 @@ mt-2
 
 {
 
-
 !item.is_read
-
 
 ?
 
-
-<span
-
-className="
+<span className="
 w-2.5
 h-2.5
 rounded-full
 bg-red-500
 animate-pulse
-"
-
-/>
-
-
+"/>
 
 :
 
-
-<span
-
-className="
+<span className="
 text-[10px]
 font-bold
 text-green-500
-"
-
->
+">
 
 READ
 
 </span>
 
-
 }
-
-
 
 
 </div>
@@ -852,20 +684,13 @@ READ
 }
 
 
-
 </div>
-
-
-
 
 
 </div>
 
 
-
 </div>
-
-
 
 );
 

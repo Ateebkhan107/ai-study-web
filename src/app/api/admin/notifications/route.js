@@ -23,16 +23,13 @@ const body = await req.json();
 
 
 const {
-
-title,
-
-message,
-
-href,
-
-stream
-
+  title,
+  message,
+  href,
+  target
 }=body;
+
+const stream = target || "ALL";
 
 
 
@@ -88,9 +85,9 @@ message:message,
 href:href || "/dashboard",
 
 
-// NEW JEE / NEET FILTER
+// JEE / NEET FILTER
 
-stream: stream || "ALL",
+stream: stream,
 
 
 is_read:false

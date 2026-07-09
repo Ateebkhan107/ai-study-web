@@ -26,10 +26,6 @@ const [stream,setStream]=useState(null);
 
 
 
-
-
-
-
 // ===============================
 // LOAD USER STREAM (JEE / NEET)
 // ===============================
@@ -158,7 +154,19 @@ const {data,error}=await supabase
 .from("notifications")
 
 
-.select("*")
+.select(`
+
+*,
+
+notification_reads(
+
+user_id,
+
+is_cleared
+
+)
+
+`)
 
 
 .or(
@@ -169,17 +177,11 @@ const {data,error}=await supabase
 
 
 .in(
-
-"stream",
-
-[
-
-stream,
-
-"ALL"
-
-]
-
+  "stream",
+  [
+    stream,
+    "ALL"
+  ]
 )
 
 
@@ -224,12 +226,29 @@ return;
 
 
 
+const visible = (data || []).filter(
 
-setNotifications(
+(item)=>{
 
-data || []
+const cleared = item.notification_reads?.some(
+
+(read)=>
+
+read.user_id===user.id &&
+
+read.is_cleared===true
 
 );
+
+
+return !cleared;
+
+}
+
+);
+
+
+setNotifications(visible);
 
 
 
@@ -310,11 +329,8 @@ item.user_id==="all"
 
 (
 
-item.stream===stream
-
-||
-
-item.stream==="ALL"
+item.stream === stream ||
+item.stream === "ALL"
 
 )
 
@@ -791,12 +807,6 @@ justify-center
 
 
 
-
-
-
-
-
-
 <div className="flex-1">
 
 
@@ -875,13 +885,6 @@ rounded-full
 
 
 </div>
-
-
-
-
-
-
-
 
 
 

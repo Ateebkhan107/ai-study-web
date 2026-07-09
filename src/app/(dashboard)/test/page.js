@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
+import { useUser } from "@clerk/nextjs";
+import { supabase } from "@/lib/supabase";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
 const TEST_TOOLS = [
@@ -31,18 +33,37 @@ const TEST_TOOLS = [
 
 export default function TestPage() {
   const [mode, setMode] = useState("build");
-  const [track, setTrack] = useState("jee");
+const { user } = useUser();
 
-  // Read cookie tracking engine state safely on client mount
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const match = document.cookie.match(new RegExp('(^| )prepzii_track=([^;]+)'));
-      if (match && match[2]) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- this value is intentionally hydrated from a client-only cookie after mount.
-        setTrack(match[2].toLowerCase());
-      }
+const [track, setTrack] = useState(null);
+
+useEffect(() => {
+  async function loadTrack() {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from("user_profiles")
+      .select("exam")
+      .eq("clerk_user_id", user.id)
+      .single();
+
+    if (data?.exam === "NEET") {
+      setTrack("neet");
+    } else {
+      setTrack("jee");
     }
-  }, []);
+  }
+
+  loadTrack();
+}, [user]);
+
+if (!track) {
+  return (
+    <div className="min-h-[400px] flex items-center justify-center">
+      Loading...
+    </div>
+  );
+}
 
   const isNeet = track === "neet";
 
