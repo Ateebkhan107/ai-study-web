@@ -5,11 +5,31 @@ import { supabase } from "@/lib/supabase";
 
 function fixSubject(subject){
 
+
 if(subject==="Maths"){
+
 return "Mathematics";
+
 }
 
+
+
+if(subject==="Biology"){
+
+return [
+
+"Botany",
+
+"Zoology"
+
+];
+
+}
+
+
+
 return subject;
+
 
 }
 
@@ -38,9 +58,24 @@ function getDistribution(exam,total){
 if(exam==="NEET"){
 
 
-const phy=Math.floor(total*0.25);
+const phy =
+Math.floor(total*0.25);
 
-const chem=Math.floor(total*0.25);
+
+const chem =
+Math.floor(total*0.25);
+
+
+const botany =
+Math.floor(total*0.25);
+
+
+const zoology =
+total
+- phy
+- chem
+- botany;
+
 
 
 return {
@@ -49,8 +84,9 @@ Physics:phy,
 
 Chemistry:chem,
 
-Biology:
-total-phy-chem
+Botany:botany,
+
+Zoology:zoology
 
 };
 
@@ -126,12 +162,20 @@ let subjects=[];
 
 
 
-if(subject){
+const isAllSubjects =
+!subject ||
+subject.trim().toLowerCase()==="all" ||
+subject.trim().toLowerCase()==="mixed subjects";
+
+
+
+if(!isAllSubjects){
 
 subjects =
 subject
 .split(",")
-.map(s=>fixSubject(s.trim()));
+.map(s=>fixSubject(s.trim()))
+.flat();
 
 }
 
@@ -197,13 +241,32 @@ let query=supabase
 .eq(
 "exam",
 exam
-)
+);
 
 
+
+
+
+if(
+sub==="Botany" ||
+sub==="Zoology"
+){
+query=query
 .eq(
+"subject",
+"Biology"
+)
+.eq(
+"biology_type",
+sub
+);
+}
+else{
+query=query.eq(
 "subject",
 sub
 );
+}
 
 
 
@@ -215,7 +278,14 @@ sub
 // chapters
 
 
-if(chapter){
+const isAllChapters =
+!chapter ||
+chapter.trim().toLowerCase()==="all" ||
+chapter.trim().toLowerCase()==="all chapters";
+
+
+
+if(!isAllChapters){
 
 
 const chapters = chapter

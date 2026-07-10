@@ -47,8 +47,40 @@ const SUBJECTS = {
   },
 };
 
-const QUESTION_COUNTS = [20, 40, 60, 75, 90];
-const DURATIONS = [45, 90, 120, 150, 180];
+// ===============================
+// JEE / NEET CONFIG
+// ===============================
+
+const JEE_QUESTION_COUNTS = [
+  20,
+  40,
+  60,
+  75,
+  90
+];
+
+const JEE_DURATIONS = [
+  45,
+  90,
+  120,
+  150,
+  180
+];
+
+
+const NEET_QUESTION_COUNTS = [
+  45,
+  90,
+  135,
+  180
+];
+
+const NEET_DURATIONS = [
+  45,
+  90,
+  135,
+  180
+];
 
 const colorMap = {
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30",     border: "border-blue-200 dark:border-blue-800",     text: "text-blue-700 dark:text-blue-300",     chip: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
@@ -63,13 +95,52 @@ export default function TestBuilder({ track = "jee" }) {
 
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedChapters, setSelectedChapters] = useState({});
-  const [duration, setDuration] = useState(30);
-  const [questionCount, setQuestionCount] = useState(20);
-  const [difficulty, setDifficulty] = useState("mixed");
-  const [expandedSubject, setExpandedSubject] = useState(null);
+  const [duration, setDuration] = useState(
+  track?.toLowerCase() === "neet"
+    ? 45
+    : 30
+);
 
-  // Normalize track data context
-  const activeTrack = track?.toLowerCase() || "jee";
+
+const [questionCount, setQuestionCount] = useState(
+  track?.toLowerCase() === "neet"
+    ? 45
+    : 20
+);
+
+
+const [difficulty, setDifficulty] =
+  useState("mixed");
+
+
+const [expandedSubject, setExpandedSubject] =
+  useState(null);
+
+
+
+// Normalize track data context
+
+const activeTrack =
+  track?.toLowerCase() || "jee";
+
+
+
+// ===============================
+// Dynamic JEE / NEET options
+// ===============================
+
+
+const QUESTION_COUNTS =
+  activeTrack === "neet"
+    ? NEET_QUESTION_COUNTS
+    : JEE_QUESTION_COUNTS;
+
+
+
+const DURATIONS =
+  activeTrack === "neet"
+    ? NEET_DURATIONS
+    : JEE_DURATIONS;
 
   // 2. Intercept and isolate target track subjects
   const filteredSubjectsEntries = Object.entries(SUBJECTS).filter(([name]) => {
