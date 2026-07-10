@@ -1,166 +1,380 @@
 import { supabase } from "@/lib/supabase";
 
 
+// convert frontend names → database names
+
+function fixSubject(subject){
+
+if(subject==="Maths"){
+return "Mathematics";
+}
+
+return subject;
+
+}
+
+
+// difficulty converter
+
+function fixDifficulty(difficulty){
+
+if(!difficulty) return "";
+
+return (
+difficulty.charAt(0).toUpperCase()
++
+difficulty.slice(1).toLowerCase()
+);
+
+}
+
+
+
+// ratio
+
+function getDistribution(exam,total){
+
+
+if(exam==="NEET"){
+
+
+const phy=Math.floor(total*0.25);
+
+const chem=Math.floor(total*0.25);
+
+
+return {
+
+Physics:phy,
+
+Chemistry:chem,
+
+Biology:
+total-phy-chem
+
+};
+
+
+}
+
+
+
+// JEE
+
+
+const each=Math.floor(total/3);
+
+
+return {
+
+Physics:each,
+
+Chemistry:each,
+
+Mathematics:
+total-(each*2)
+
+};
+
+
+}
+
+
+
+
+
+
+
+
+
 export async function getQuestions({
-  exam,
-  subject,
-  chapter,
-  difficulty,
-  limit,
-}) {
+
+exam,
+subject,
+chapter,
+difficulty,
+limit=20
+
+}){
 
 
-let query = supabase
-.from("questions")
-.select("*")
-.eq("is_active", true);
+try{
 
 
+console.log("FETCH PARAMS:",{
 
-// exam
-if (
-exam &&
-exam !== "ALL"
-){
+exam,
+subject,
+chapter,
+difficulty,
+limit
 
-query =
-query.eq(
-"exam",
-exam
-);
-
-}
+});
 
 
 
-// subject
-if (
-subject &&
-subject !== "Mixed Subjects"
-){
+let finalQuestions=[];
 
-query =
-query.eq(
-"subject",
+
+
+
+
+// selected subjects
+
+
+let subjects=[];
+
+
+
+if(subject){
+
+subjects =
 subject
-);
-
-}
-
-
-
-// chapters
-if (
-chapter &&
-chapter !== "All Chapters"
-){
-
-const chapters =
-chapter
 .split(",")
-.map(
-(c)=>decodeURIComponent(c).trim()
-)
-.filter(Boolean);
-
-
-
-if(
-chapters.length === 1
-){
-
-query =
-query.eq(
-"chapter",
-chapters[0]
-);
+.map(s=>fixSubject(s.trim()));
 
 }
 
 else{
 
-query =
-query.in(
-"chapter",
-chapters
+
+subjects =
+Object.keys(
+getDistribution(exam,limit)
 );
 
+
 }
 
 
+
+
+
+
+
+
+for(const sub of subjects){
+
+
+
+
+
+let subjectLimit = limit;
+
+
+
+
+// apply ratio only if multiple subjects
+
+
+if(subjects.length>1){
+
+
+subjectLimit =
+getDistribution(
+exam,
+limit
+)[sub];
+
+
 }
+
+
+
+
+
+
+
+let query=supabase
+
+
+.from("questions")
+
+
+.select("*")
+
+
+.eq(
+"exam",
+exam
+)
+
+
+.eq(
+"subject",
+sub
+);
+
+
+
+
+
+
+
+
+// chapters
+
+
+if(chapter){
+
+
+const chapters = chapter
+
+.split(",")
+
+.map(c=>c.trim());
+
+
+
+query=query.in(
+
+"chapter",
+
+chapters
+
+);
+
+
+}
+
+
+
+
+
+
 
 
 
 // difficulty
-// Easy / Medium / Hard only
-// Mixed = no filter
+
 
 if(
+
 difficulty &&
-difficulty.toLowerCase() !== "mixed"
+
+difficulty.toLowerCase()!=="mixed"
+
 ){
 
-query =
-query.ilike(
+
+query=query.eq(
+
 "difficulty",
-difficulty
+
+fixDifficulty(difficulty)
+
 );
+
 
 }
 
 
 
 
-const {data,error}
-=
-await query;
+
+
+
+
+const {data,error}=await query;
+
+
+
+
 
 
 
 if(error){
 
-throw error;
+
+console.log(
+"SUPABASE ERROR:",
+error
+);
+
+
+continue;
+
 
 }
 
 
 
-// RANDOM MIXING
-const shuffled =
-[...data]
-.sort(
-()=>Math.random()-0.5
-);
 
 
 
-// LIMIT AFTER SHUFFLE
-const selected =
-shuffled.slice(
+
+
+finalQuestions.push(
+
+...(data || [])
+
+.slice(
+
 0,
-limit
+
+subjectLimit
+
+)
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+console.log(
+
+"TOTAL QUESTIONS FOUND:",
+
+finalQuestions.length
+
 );
 
 
 
 
-return selected.map((q)=>({
+
+
+
+
+
+
+return finalQuestions.map(q=>({
+
+
 
 id:q.id,
 
+
 exam:q.exam,
+
 
 subject:q.subject,
 
+
 chapter:q.chapter,
 
-topic:q.topic,
 
 difficulty:q.difficulty,
 
 
+
 text:q.question_text,
+
+
+
+question_image:q.question_image,
+
+
+
 
 
 options:[
@@ -176,23 +390,92 @@ q.option_d
 ],
 
 
+
+
+
+
+option_images:[
+
+q.option_a_image,
+
+q.option_b_image,
+
+q.option_c_image,
+
+q.option_d_image
+
+],
+
+
+
+
+
+
+
 correct:
+
 ["A","B","C","D"]
+
 .indexOf(
+
 q.correct_option
+
 ),
 
 
-explanation:q.explanation,
 
 
-marks:q.marks,
 
 
-negative_marks:q.negative_marks
+
+explanation:
+
+q.explanation,
+
+
+
+explanation_image:
+
+q.explanation_image,
+
+
+
+marks:
+
+q.marks || 4,
+
+
+
+negative_marks:
+
+q.negative_marks || -1
+
+
 
 
 }));
+
+
+
+
+
+
+
+}
+
+catch(err){
+
+
+console.log(
+"Question error:",
+err
+);
+
+
+return [];
+
+
+}
 
 
 }

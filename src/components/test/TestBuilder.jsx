@@ -47,8 +47,8 @@ const SUBJECTS = {
   },
 };
 
-const DURATIONS = [15, 30, 45, 60, 90];
-const QUESTION_COUNTS = [10, 20, 30, 40, 50];
+const QUESTION_COUNTS = [20, 40, 60, 75, 90];
+const DURATIONS = [45, 90, 120, 150, 180];
 
 const colorMap = {
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30",     border: "border-blue-200 dark:border-blue-800",     text: "text-blue-700 dark:text-blue-300",     chip: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
@@ -160,22 +160,96 @@ export default function TestBuilder({ track = "jee" }) {
   const canStart = selectedSubjects.length > 0 && totalChapters > 0;
 
   const handleStart = async () => {
-    const allChapters = Object.values(selectedChapters).flat();
-    const params = new URLSearchParams({
-      subjects: selectedSubjects.join(","),
-      chapters: allChapters.join(","),
-      duration: duration.toString(),
-      count: questionCount.toString(),
-      difficulty,
-      mode: "custom",
-    });
-    sessionStorage.removeItem("tb_subjects");
-    sessionStorage.removeItem("tb_chapters");
-    sessionStorage.removeItem("tb_duration");
-    sessionStorage.removeItem("tb_count");
-    sessionStorage.removeItem("tb_difficulty");
-    router.push(`/test/session?${params.toString()}`);
-  };
+
+
+  const allChapters =
+    Object.values(selectedChapters).flat();
+
+
+
+  const exam =
+    activeTrack === "neet"
+    ?
+    "NEET"
+    :
+    "JEE Main";
+
+
+
+  const params = new URLSearchParams({
+
+
+    exam: exam,
+
+
+    subjects:
+    selectedSubjects.join(","),
+
+
+    chapters:
+    allChapters.join(","),
+
+
+    duration:
+    duration.toString(),
+
+
+    count:
+    questionCount.toString(),
+
+
+    difficulty:
+    difficulty,
+
+
+    mode:"custom"
+
+
+  });
+
+
+
+
+
+
+  sessionStorage.removeItem(
+    "tb_subjects"
+  );
+
+
+  sessionStorage.removeItem(
+    "tb_chapters"
+  );
+
+
+  sessionStorage.removeItem(
+    "tb_duration"
+  );
+
+
+  sessionStorage.removeItem(
+    "tb_count"
+  );
+
+
+  sessionStorage.removeItem(
+    "tb_difficulty"
+  );
+
+
+
+
+
+
+  router.push(
+
+    `/test/session?${params.toString()}`
+
+  );
+
+
+
+};
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -18,8 +18,14 @@ const colorMap = {
 };
 
 const YEARS = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"];
-const QUESTION_COUNTS = [10, 20, 30, 40, 50];
-const DURATIONS = [15, 30, 45, 60, 90];
+const QUESTION_COUNTS = [10, 20, 30, 40, 50, 75, 90];
+const DURATIONS = [15, 30, 45, 60, 90, 120, 150, 180];
+
+// Fixed subject weightings applied whenever a mixed/multi-subject session is built.
+// JEE: Physics / Chemistry / Maths come out equal.
+// NEET: Physics / Chemistry / Biology come out 45:45:90 (i.e. 1:1:2).
+const RATIO_JEE = { Physics: 1, Chemistry: 1, Maths: 1 };
+const RATIO_NEET = { Physics: 1, Chemistry: 1, Biology: 2 };
 
 export default function PYQPractice({ questions = [], updateQuestion, onSwitchTab }) {
   // ── Setup Configuration State ──
@@ -27,7 +33,6 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   const [selectedYear, setSelectedYear] = useState("All");
   const [questionCount, setQuestionCount] = useState(20);
   const [duration, setDuration] = useState(30);
-  const [difficulty, setDifficulty] = useState("mixed");
 
   // ── Engine State ──
   const [started, setStarted] = useState(false);
@@ -51,9 +56,6 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
 
       const savedDuration = sessionStorage.getItem("pq_duration");
       if (savedDuration) setDuration(Number(savedDuration));
-
-      const savedDifficulty = sessionStorage.getItem("pq_difficulty");
-      if (savedDifficulty) setDifficulty(savedDifficulty);
     } catch (error) {
       console.log("Starting fresh practice session configuration state.");
     }
@@ -74,10 +76,6 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   const saveDuration = (val) => {
     setDuration(val);
     sessionStorage.setItem("pq_duration", val.toString());
-  };
-  const saveDifficulty = (val) => {
-    setDifficulty(val);
-    sessionStorage.setItem("pq_difficulty", val);
   };
 
   // ── Derived Session Analytics ──
@@ -101,24 +99,69 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   };
 
   const handleStartSession = () => {
-    let pool = [...questions];
-
-    if (selectedSubjects.length > 0) {
-      pool = pool.filter((q) => selectedSubjects.includes(q.subject));
-    }
+    // Base pool after year filter (subject weighting is applied per-subject below).
+    let basePool = [...questions];
     if (selectedYear !== "All") {
-      pool = pool.filter((q) => q.year.toString() === selectedYear);
-    }
-    if (difficulty !== "mixed") {
-      pool = pool.filter((q) => q.difficulty === difficulty.toLowerCase());
+      basePool = basePool.filter((q) => q.year.toString() === selectedYear);
     }
 
-    if (pool.length === 0) {
+    if (basePool.length === 0) {
       alert("No matching questions found for this pool query. Try loosening your parameters!");
       return;
     }
 
-    const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, questionCount);
+    // Detect exam mode from whichever subjects actually exist in the question bank.
+    const hasBiology = questions.some((q) => q.subject === "Biology");
+    const ratioMap = hasBiology ? RATIO_NEET : RATIO_JEE;
+
+    // Subjects to build the ratio across: user's picks (if any), else every ratio subject present.
+    const activeSubjects =
+      selectedSubjects.length > 0
+        ? selectedSubjects.filter((s) => ratioMap[s] !== undefined)
+        : Object.keys(ratioMap).filter((s) => basePool.some((q) => q.subject === s));
+
+    if (activeSubjects.length === 0) {
+      alert("No matching questions found for this pool query. Try loosening your parameters!");
+      return;
+    }
+
+    // Largest-remainder method so counts land exactly on questionCount while respecting the ratio.
+    const totalWeight = activeSubjects.reduce((sum, s) => sum + ratioMap[s], 0);
+    const rawCounts = activeSubjects.map((s) => (ratioMap[s] / totalWeight) * questionCount);
+    const targetCounts = rawCounts.map(Math.floor);
+    let remainder = questionCount - targetCounts.reduce((a, b) => a + b, 0);
+
+    const byRemainder = rawCounts
+      .map((val, i) => ({ i, frac: val - targetCounts[i] }))
+      .sort((a, b) => b.frac - a.frac);
+    for (let k = 0; k < remainder; k++) {
+      targetCounts[byRemainder[k % byRemainder.length].i] += 1;
+    }
+
+    let combined = [];
+    activeSubjects.forEach((subject, idx) => {
+      const need = targetCounts[idx];
+      const subjectPool = basePool
+        .filter((q) => q.subject === subject)
+        .sort(() => Math.random() - 0.5);
+      combined = combined.concat(subjectPool.slice(0, need));
+    });
+
+    // Top up from leftovers if a thin subject pool left us short of the target.
+    if (combined.length < questionCount) {
+      const usedIds = new Set(combined.map((q) => q.id));
+      const leftovers = basePool
+        .filter((q) => activeSubjects.includes(q.subject) && !usedIds.has(q.id))
+        .sort(() => Math.random() - 0.5);
+      combined = combined.concat(leftovers.slice(0, questionCount - combined.length));
+    }
+
+    if (combined.length === 0) {
+      alert("No matching questions found for this pool query. Try loosening your parameters!");
+      return;
+    }
+
+    const shuffled = combined.sort(() => Math.random() - 0.5);
     setSessionQs(shuffled);
     setTimeLeft(duration * 60);
     setStarted(true);
@@ -150,6 +193,9 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   const timerDanger = timeLeft < 300 && timeLeft > 0;
   const canStart = true;
 
+  const hasBiologyBank = questions.some((q) => q.subject === "Biology");
+  const examLabel = hasBiologyBank ? "P/C/B · 45:45:90" : "P/C/M · equal split";
+
   if (finished) {
     const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
     const timeTaken = duration * 60 - timeLeft;
@@ -158,7 +204,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
       <div className="max-w-xl mx-auto p-4">
         <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-[2rem] p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
-          
+
           <div className="text-4xl mb-4">🏁</div>
           <h2 className="text-3xl font-black text-black dark:text-white tracking-tight mb-2">
             Practice Complete
@@ -255,7 +301,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-5">
-        
+
         {/* 01 - Choose Subjects */}
         <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
@@ -266,7 +312,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
             {Object.entries(SUBJECT_CONFIG).map(([name, data]) => {
               const isSelected = selectedSubjects.includes(name);
               const theme = colorMap[data.color];
-              
+
               return (
                 <button
                   type="button"
@@ -292,7 +338,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
             02 — Choose Year
           </p>
           <p className="text-xs text-gray-400 mb-4">Select a specific target paper year filter</p>
-          
+
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
@@ -324,16 +370,17 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
       </div>
 
       <div className="space-y-4">
-        {/* Total Questions Counter */}
+        {/* Total Questions Counter — mirrors Test Center's "Questions" block */}
         <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Questions</p>
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Questions</p>
+          <p className="text-[11px] text-gray-400 mb-3">Auto-split {examLabel}</p>
           <div className="flex flex-wrap gap-2">
             {QUESTION_COUNTS.map((cnt) => (
               <button
                 type="button"
                 key={cnt}
                 onClick={() => saveCount(cnt)}
-                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100
+                className={`min-w-[3rem] px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${questionCount === cnt
                     ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
                     : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
@@ -345,9 +392,9 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
           </div>
         </div>
 
-        {/* Durations Pool */}
+        {/* Duration Pool — mirrors Test Center's "Duration (mins)" block */}
         <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Duration</p>
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Duration (mins)</p>
           <div className="flex flex-wrap gap-2">
             {DURATIONS.map((dur) => (
               <button
@@ -361,30 +408,6 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                   }`}
               >
                 {dur}m
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Difficulty Select Block */}
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Difficulty</p>
-          <div className="flex flex-col gap-2">
-            {["easy", "medium", "hard", "mixed"].map((diff) => (
-              <button
-                type="button"
-                key={diff}
-                onClick={() => saveDifficulty(diff)}
-                className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100
-                  ${difficulty === diff
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
-                  }`}
-              >
-                <span className="capitalize">{diff}</span>
-                <span className="text-xs opacity-60">
-                  {diff === "easy" ? "⬤" : diff === "medium" ? "⬤⬤" : "⬤⬤⬤"}
-                </span>
               </button>
             ))}
           </div>
@@ -417,9 +440,6 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
             <p className="text-white/70 dark:text-black/70 text-xs">
               Year Range: <span className="font-bold">{selectedYear}</span> · {questionCount} questions · {duration} mins
             </p>
-            <p className="text-white/70 dark:text-black/70 text-xs capitalize">
-              {difficulty} difficulty
-            </p>
           </div>
           <button
             type="button"
@@ -430,7 +450,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
           </button>
         </div>
       </div>
-      
+
     </div>
   );
 }
