@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { isAdmin } from "@/lib/admin";
+
 
 
 const supabase = createClient(
@@ -13,6 +15,23 @@ const supabase = createClient(
 
 
 export async function POST(req){
+
+  const admin =
+await isAdmin();
+
+
+if(!admin){
+
+return NextResponse.json(
+{
+error:"Unauthorized"
+},
+{
+status:401
+}
+);
+
+}
 
 
 try{

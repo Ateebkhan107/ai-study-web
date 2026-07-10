@@ -12,14 +12,19 @@ export async function GET(req) {
   const chapter = searchParams.get("chapter");
   const mode = searchParams.get("mode") || "full";
 
+  const examType = searchParams.get("exam_type");
+  const attempt = searchParams.get("attempt");
+  const shift = searchParams.get("shift");
+
   // TODO:
   // replace userId query param with Clerk server auth
   const userId = searchParams.get("userId");
 
-  // mode=full:      complete paper — filter by exam/subject/year
+  // mode=full:      complete paper — filter by exam/subject/year/exam_type/attempt/shift
   // mode=random:    same filters, then shuffled
-  // mode=chapter:   filter by exam/subject/chapter
+  // mode=chapter:   filter by exam/subject/chapter (plus exam_type/attempt/shift if provided)
   // mode=mistakes:  fetch the user's wrong pyq_attempts, then load those questions
+  //                 (optionally narrowed by exam/subject/year/attempt/shift)
 
   if (mode === "mistakes") {
 
@@ -61,6 +66,18 @@ export async function GET(req) {
       mistakeQuery = mistakeQuery.eq("subject", subject);
     }
 
+    if (year) {
+      mistakeQuery = mistakeQuery.eq("year", year);
+    }
+
+    if (attempt) {
+      mistakeQuery = mistakeQuery.eq("attempt", attempt);
+    }
+
+    if (shift) {
+      mistakeQuery = mistakeQuery.eq("shift", shift);
+    }
+
     const { data: mistakeQuestions, error: questionsError } = await mistakeQuery;
 
     if (questionsError) {
@@ -94,6 +111,18 @@ export async function GET(req) {
 
   if (mode === "chapter" && chapter) {
     query = query.eq("chapter", chapter);
+  }
+
+  if (examType) {
+    query = query.eq("exam_type", examType);
+  }
+
+  if (attempt) {
+    query = query.eq("attempt", attempt);
+  }
+
+  if (shift) {
+    query = query.eq("shift", shift);
   }
 
   const { data, error } = await query;

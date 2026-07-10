@@ -3,10 +3,13 @@
 // =============================
 
 // options:
-//   year    - optional, filter by exam year
-//   chapter - optional, filter by chapter
-//   mode    - optional, practice mode
-//   userId  - optional, required for mode=mistakes
+//   year     - optional, filter by exam year
+//   chapter  - optional, filter by chapter
+//   mode     - optional, practice mode
+//   userId   - optional, required for mode=mistakes
+//   examType - optional, filter by exam type (e.g., MAIN)
+//   attempt  - optional, filter by attempt (e.g., JANUARY)
+//   shift    - optional, filter by shift (e.g., 22 JAN SHIFT 1)
 //
 // mode=full:      complete paper
 // mode=chapter:   chapter filtering
@@ -37,6 +40,15 @@ export async function getPYQ(exam, subject, options = {}) {
 
   if (options.userId)
     params.set("userId", options.userId);
+
+  if (options.examType)
+    params.set("exam_type", options.examType);
+
+  if (options.attempt)
+    params.set("attempt", options.attempt);
+
+  if (options.shift)
+    params.set("shift", options.shift);
 
   const res = await fetch(
     `/api/pyq?${params.toString()}`

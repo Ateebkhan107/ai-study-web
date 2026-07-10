@@ -71,7 +71,7 @@ const MASTER_SUBJECTS = [
 
 const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
 
-// Practice mode options for the "03 — PRACTICE MODE" selector.
+// Practice mode options for the selector.
 const PRACTICE_MODES = [
   { id: "full",     label: "Full Paper",   description: "Solve complete exam paper", Icon: I.FileText },
   { id: "chapter",  label: "Chapter Wise", description: "Practice selected chapters", Icon: I.Library  },
@@ -130,11 +130,15 @@ function PracticeTab({ subjects, track }) {
   const [practiceMode,     setPracticeMode]     = useState("full");
   const [subjectError,     setSubjectError]     = useState("");
 
+  const [papers,           setPapers]           = useState([]);
+  const [selectedPaper,    setSelectedPaper]    = useState(null);
+  const [loadingPapers,    setLoadingPapers]    = useState(false);
+
   // Chapter Wise mode state
   const [chapters,        setChapters]        = useState([]);
-  const [selectedChapter, setSelectedChapter]  = useState("");
-  const [loadingChapters, setLoadingChapters]  = useState(false);
-  const [chapterError,    setChapterError]     = useState("");
+  const [selectedChapter, setSelectedChapter] = useState("");
+  const [loadingChapters, setLoadingChapters] = useState(false);
+  const [chapterError,    setChapterError]    = useState("");
 
   // Load chapters only for Chapter Wise mode, once a subject is selected.
   useEffect(() => {
@@ -183,9 +187,53 @@ function PracticeTab({ subjects, track }) {
     return () => { cancelled = true; };
   }, [practiceMode, selectedSubjects, subjects, track]);
 
+  // Load papers based on track and selected years
+  useEffect(() => {
+    if (!track) return;
+    
+    let cancelled = false;
+
+    async function loadPapers() {
+      setLoadingPapers(true);
+      try {
+        const params = new URLSearchParams();
+        params.set("exam", track.toUpperCase());
+        
+        if (selectedYears.length > 0) {
+          params.set("year", selectedYears[0]);
+        }
+
+        const res = await fetch(`/api/pyq/papers?${params.toString()}`);
+        if (!res.ok) throw new Error("Failed to load papers");
+
+        const data = await res.json();
+        if (!cancelled) {
+          setPapers(Array.isArray(data) ? data : []);
+          setSelectedPaper(null);
+        }
+      } catch (error) {
+        console.error("Failed to load papers:", error);
+        if (!cancelled) {
+          setPapers([]);
+          setSelectedPaper(null);
+        }
+      } finally {
+        if (!cancelled) setLoadingPapers(false);
+      }
+    }
+
+    loadPapers();
+    return () => { cancelled = true; };
+  }, [track, selectedYears]);
+
   function handleStartDeck() {
     if (selectedSubjects.length === 0) {
       setSubjectError("Please select at least one subject to start.");
+      return;
+    }
+
+    if (practiceMode === "full" && papers.length > 0 && !selectedPaper) {
+      setSubjectError("Please select a paper");
       return;
     }
 
@@ -212,6 +260,12 @@ function PracticeTab({ subjects, track }) {
 
     if (practiceMode === "chapter" && selectedChapter) {
       params.set("chapter", selectedChapter);
+    }
+
+    if (selectedPaper) {
+      if (selectedPaper.exam_type) params.set("exam_type", selectedPaper.exam_type);
+      if (selectedPaper.attempt) params.set("attempt", selectedPaper.attempt);
+      if (selectedPaper.shift) params.set("shift", selectedPaper.shift);
     }
 
     router.push(`/pyq/session?${params.toString()}`);
@@ -281,10 +335,53 @@ function PracticeTab({ subjects, track }) {
           </div>
         </div>
 
+        {/* Paper selector */}
+        {papers.length > 0 && (
+          <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+              03 — SELECT PAPER
+            </p>
+            {loadingPapers ? (
+              <p className={`text-sm ${TXT_MUTED}`}>Loading papers...</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {papers.map((p) => {
+                  const isActive = 
+                    selectedPaper?.year === p.year && 
+                    selectedPaper?.exam_type === p.exam_type && 
+                    selectedPaper?.attempt === p.attempt && 
+                    selectedPaper?.shift === p.shift;
+                  
+                  return (
+                    <button
+                      key={`${p.year}-${p.exam_type}-${p.attempt}-${p.shift}`}
+                      onClick={() => setSelectedPaper(p)}
+                      className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left ${
+                        isActive
+                          ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                          : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                      }`}
+                    >
+                      <span className="text-sm font-bold">
+                        {track.toUpperCase()} {p.exam_type || (track === "neet" ? "UG" : "")}
+                      </span>
+                      <span className="text-xs font-semibold">
+                        {p.year} {track === "neet" && !p.exam_type ? "PAPER" : ""}
+                      </span>
+                      {p.attempt && <span className="text-xs">{p.attempt}</span>}
+                      {p.shift && <span className="text-xs opacity-80">{p.shift}</span>}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Practice mode selector */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            03 — PRACTICE MODE
+            04 — PRACTICE MODE
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PRACTICE_MODES.map((m) => {
@@ -314,7 +411,7 @@ function PracticeTab({ subjects, track }) {
         {practiceMode === "chapter" && (
           <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-              04 — SELECT CHAPTER
+              05 — SELECT CHAPTER
             </p>
 
             {selectedSubjects.length === 0 && (

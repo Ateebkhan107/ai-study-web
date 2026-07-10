@@ -41,7 +41,35 @@ const [goalLoading,setGoalLoading]=useState(false);
 
 const [allGoals,setAllGoals]=useState([]);
 
+// PYQ UPLOAD STATES
 
+const [pyqFile,setPyqFile]=useState(null);
+
+const [pyqUploading,setPyqUploading]=useState(false);
+
+// IMAGE UPLOAD STATES
+
+const [imageFile,setImageFile]=useState(null);
+
+const [imageUploading,setImageUploading]=useState(false);
+
+const [imageUrl,setImageUrl]=useState("");
+
+// PYQ MANAGER STATES
+
+const [pyqQuestions,setPyqQuestions]=useState([]);
+
+const [pyqLoading,setPyqLoading]=useState(false);
+
+// PYQ FILTER STATES
+
+const [filterExam,setFilterExam]=useState("");
+
+const [filterSubject,setFilterSubject]=useState("");
+
+const [filterYear,setFilterYear]=useState("");
+
+const [filterSearch,setFilterSearch]=useState("");
 
 useEffect(()=>{
 
@@ -54,9 +82,9 @@ setMounted(true);
 
 useEffect(()=>{
 
-
 loadGoals();
 
+loadPYQs();
 
 },[]);
 
@@ -478,7 +506,426 @@ loadGoals();
 
 }
 
+// ==============================
+// UPLOAD PYQ CSV
+// ==============================
 
+
+async function uploadPYQ(){
+
+
+if(!pyqFile){
+
+alert("Select CSV file");
+
+return;
+
+}
+
+
+
+setPyqUploading(true);
+
+
+
+try{
+
+
+const formData =
+new FormData();
+
+
+
+formData.append(
+"file",
+pyqFile
+);
+
+
+
+
+const res =
+await fetch(
+
+"/api/admin/pyq-upload",
+
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+
+
+
+const data =
+await res.json();
+
+
+
+
+if(res.ok){
+
+
+alert(
+`PYQ uploaded successfully 🚀\n${data.count} questions added`
+);
+
+
+setPyqFile(null);
+
+
+}
+
+else{
+
+
+console.log(data);
+
+alert(
+"PYQ upload failed"
+);
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+alert(
+"Something went wrong"
+);
+
+
+}
+
+
+
+
+setPyqUploading(false);
+
+
+
+}
+
+// ==============================
+// UPLOAD PYQ IMAGE
+// ==============================
+
+
+async function uploadImage(){
+
+
+if(!imageFile){
+
+
+alert("Select image");
+
+return;
+
+
+}
+
+
+
+setImageUploading(true);
+
+
+
+try{
+
+
+const formData =
+new FormData();
+
+
+
+formData.append(
+"file",
+imageFile
+);
+
+
+
+
+const res =
+await fetch(
+
+"/api/admin/upload-image",
+
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+
+
+
+
+const data =
+await res.json();
+
+
+
+
+
+if(res.ok){
+
+
+setImageUrl(
+data.url
+);
+
+
+alert(
+"Image uploaded 🖼️"
+);
+
+
+}
+
+
+else{
+
+
+console.log(data);
+
+
+alert(
+"Upload failed"
+);
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+alert(
+"Something went wrong"
+);
+
+
+}
+
+
+
+setImageUploading(false);
+
+
+
+}
+
+
+// ==============================
+// LOAD PYQ QUESTIONS
+// ==============================
+
+
+async function loadPYQs(){
+
+
+setPyqLoading(true);
+
+
+try{
+
+
+const params =
+new URLSearchParams();
+
+
+if(filterExam)
+params.set(
+"exam",
+filterExam
+);
+
+
+if(filterSubject)
+params.set(
+"subject",
+filterSubject
+);
+
+
+if(filterYear)
+params.set(
+"year",
+filterYear
+);
+
+
+if(filterSearch)
+params.set(
+"search",
+filterSearch
+);
+
+
+
+
+const res =
+await fetch(
+`/api/admin/pyq?${params}`
+);
+
+
+const data =
+await res.json();
+
+
+
+if(data.success){
+
+
+setPyqQuestions(
+data.questions
+);
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"PYQ load error",
+error
+);
+
+
+}
+
+
+
+setPyqLoading(false);
+
+
+
+}
+
+
+
+
+
+
+
+
+// ==============================
+// UPDATE PYQ
+// ==============================
+
+
+async function updatePYQ(
+id,
+changes
+){
+
+
+await fetch(
+"/api/admin/pyq",
+{
+
+method:"PATCH",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+id,
+...changes
+})
+
+}
+);
+
+
+
+loadPYQs();
+
+
+
+}
+
+
+
+
+
+
+
+
+// ==============================
+// DELETE PYQ
+// ==============================
+
+
+async function deletePYQ(id){
+
+
+
+if(
+!confirm("Delete this question?")
+)
+return;
+
+
+
+
+await fetch(
+"/api/admin/pyq",
+{
+
+method:"DELETE",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+id
+})
+
+
+}
+
+);
+
+
+
+loadPYQs();
+
+
+
+}
 
 return (
 
@@ -510,10 +957,587 @@ PrepZii Admin 🚀
 
 
 
+{/* ================= PYQ UPLOAD ================= */}
+
+
+<div className="space-y-5">
+
+
+<h2 className="font-black text-xl">
+
+Upload PYQ Paper 📚
+
+</h2>
 
 
 
 
+<p className="text-sm text-gray-500">
+
+Upload CSV file containing JEE / NEET questions
+
+</p>
+
+
+
+
+
+<input
+
+type="file"
+
+accept=".csv"
+
+onChange={(e)=>
+
+setPyqFile(
+e.target.files[0]
+)
+
+}
+
+className="
+w-full
+border
+rounded-xl
+p-4
+bg-transparent
+"
+
+/>
+
+
+
+
+
+
+{
+
+pyqFile && (
+
+<p className="text-sm text-green-500">
+
+Selected: {pyqFile.name}
+
+</p>
+
+)
+
+}
+
+
+
+
+
+
+<button
+
+onClick={uploadPYQ}
+
+disabled={pyqUploading}
+
+className="
+bg-green-600
+text-white
+px-8
+py-4
+rounded-xl
+font-bold
+disabled:opacity-50
+"
+
+>
+
+
+{
+
+pyqUploading
+
+?
+
+"Uploading..."
+
+:
+
+"Upload PYQ 🚀"
+
+}
+
+
+</button>
+
+
+
+
+</div>
+
+
+{/* ================= IMAGE UPLOAD ================= */}
+
+
+<div className="space-y-5">
+
+
+<h2 className="font-black text-xl">
+
+Upload PYQ Image 🖼️
+
+</h2>
+
+
+
+<p className="text-sm text-gray-500">
+
+Upload question / option / solution images
+
+</p>
+
+
+
+
+
+<input
+
+type="file"
+
+accept="image/*"
+
+onChange={(e)=>
+
+setImageFile(
+e.target.files[0]
+)
+
+}
+
+className="
+w-full
+border
+rounded-xl
+p-4
+bg-transparent
+"
+
+/>
+
+
+
+
+
+
+
+<button
+
+onClick={uploadImage}
+
+disabled={imageUploading}
+
+className="
+bg-purple-600
+text-white
+px-8
+py-4
+rounded-xl
+font-bold
+disabled:opacity-50
+"
+
+>
+
+
+{
+
+imageUploading
+
+?
+
+"Uploading..."
+
+:
+
+"Upload Image"
+
+}
+
+
+</button>
+
+
+
+
+
+
+{
+
+imageUrl && (
+
+<div className="
+border
+rounded-xl
+p-4
+space-y-3
+">
+
+
+<p className="
+text-sm
+break-all
+">
+
+{imageUrl}
+
+</p>
+
+
+
+<button
+
+onClick={()=>{
+
+navigator.clipboard.writeText(
+imageUrl
+);
+
+alert("Copied");
+
+}}
+
+className="
+bg-black
+text-white
+px-5
+py-2
+rounded-lg
+text-sm
+"
+
+>
+
+Copy URL
+
+</button>
+
+
+</div>
+
+)
+
+}
+
+
+
+
+</div>
+
+
+{/* ================= PYQ MANAGER ================= */}
+
+
+<div className="space-y-5">
+
+
+<h2 className="font-black text-xl">
+
+Manage PYQs 📚
+
+</h2>
+
+
+<select
+
+value={filterExam}
+
+onChange={(e)=>setFilterExam(e.target.value)}
+
+className="
+border
+rounded-xl
+p-3
+w-full
+bg-transparent
+"
+
+>
+
+<option value="">
+All Exams
+</option>
+
+<option value="JEE">
+JEE
+</option>
+
+<option value="NEET">
+NEET
+</option>
+
+</select>
+
+
+
+
+<input
+
+value={filterSubject}
+
+onChange={(e)=>setFilterSubject(e.target.value)}
+
+placeholder="Subject"
+
+className="
+border
+rounded-xl
+p-3
+w-full
+bg-transparent
+"
+
+/>
+
+
+
+
+<input
+
+value={filterYear}
+
+onChange={(e)=>setFilterYear(e.target.value)}
+
+placeholder="Year"
+
+className="
+border
+rounded-xl
+p-3
+w-full
+bg-transparent
+"
+
+/>
+
+
+
+
+<input
+
+value={filterSearch}
+
+onChange={(e)=>setFilterSearch(e.target.value)}
+
+placeholder="Search question"
+
+className="
+border
+rounded-xl
+p-3
+w-full
+bg-transparent
+"
+
+/>
+
+
+<button
+
+onClick={loadPYQs}
+
+className="
+bg-black
+text-white
+px-5
+py-2
+rounded-lg
+"
+
+>
+
+Refresh
+
+</button>
+
+
+
+
+
+
+
+{
+
+pyqLoading && (
+
+<p>
+
+Loading...
+
+</p>
+
+)
+
+}
+
+
+
+
+
+
+{
+
+pyqQuestions.map(q=>(
+
+
+<div
+
+key={q.id}
+
+className="
+border
+rounded-xl
+p-5
+space-y-3
+"
+
+>
+
+
+<p className="font-bold">
+
+{q.question}
+
+</p>
+
+
+
+
+<p className="text-sm text-gray-500">
+
+
+{q.exam}
+
+{" | "}
+
+{q.subject}
+
+{" | "}
+
+{q.chapter}
+
+
+</p>
+
+
+
+
+
+<input
+
+defaultValue={
+q.correct_option || ""
+}
+
+placeholder="Correct option"
+
+onBlur={(e)=>
+
+updatePYQ(
+q.id,
+{
+correct_option:e.target.value
+}
+)
+
+}
+
+
+className="
+border
+rounded-lg
+p-2
+w-full
+bg-transparent
+"
+
+
+/>
+
+
+
+
+
+
+
+<textarea
+
+defaultValue={
+q.explanation || ""
+}
+
+placeholder="Explanation"
+
+onBlur={(e)=>
+
+updatePYQ(
+q.id,
+{
+explanation:e.target.value
+}
+)
+
+}
+
+
+className="
+border
+rounded-lg
+p-2
+w-full
+bg-transparent
+"
+
+
+/>
+
+
+
+
+
+
+
+<button
+
+onClick={()=>
+
+deletePYQ(q.id)
+
+}
+
+className="
+bg-red-500
+text-white
+px-4
+py-2
+rounded-lg
+"
+
+>
+
+Delete
+
+</button>
+
+
+
+
+
+</div>
+
+
+))
+
+}
+
+
+
+</div>
 
 
 {/* ================= NOTIFICATIONS ================= */}

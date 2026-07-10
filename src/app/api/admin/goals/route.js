@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-
+import { isAdmin } from "@/lib/admin";
 
 const supabase=createClient(
 process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -16,6 +16,23 @@ process.env.SUPABASE_SERVICE_ROLE_KEY
 
 export async function GET(){
 
+
+const admin =
+await isAdmin();
+
+
+if(!admin){
+
+return NextResponse.json(
+{
+error:"Unauthorized"
+},
+{
+status:401
+}
+);
+
+}
 
 const {data,error}=await supabase
 
@@ -75,6 +92,22 @@ goals:data
 
 export async function POST(req){
 
+const admin =
+await isAdmin();
+
+
+if(!admin){
+
+return NextResponse.json(
+{
+error:"Unauthorized"
+},
+{
+status:401
+}
+);
+
+}
 
 try{
 
@@ -182,7 +215,22 @@ status:500
 
 export async function PATCH(req){
 
+const admin =
+await isAdmin();
 
+
+if(!admin){
+
+return NextResponse.json(
+{
+error:"Unauthorized"
+},
+{
+status:401
+}
+);
+
+}
 
 try{
 
@@ -317,7 +365,22 @@ status:500
 
 export async function DELETE(req){
 
+const admin =
+await isAdmin();
 
+
+if(!admin){
+
+return NextResponse.json(
+{
+error:"Unauthorized"
+},
+{
+status:401
+}
+);
+
+}
 
 try{
 

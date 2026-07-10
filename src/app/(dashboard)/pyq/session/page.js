@@ -29,7 +29,6 @@ export default function PYQSessionPage() {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
-  // answers[q.id] = "a" | "b" | "c" | "d"
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
@@ -39,6 +38,10 @@ export default function PYQSessionPage() {
   const yearsParam = searchParams.get("years") || "";
   const mode = searchParams.get("mode") || "full";
   const chapter = searchParams.get("chapter") || "";
+  
+  const examType = searchParams.get("exam_type") || "";
+  const attempt = searchParams.get("attempt") || "";
+  const shift = searchParams.get("shift") || "";
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
@@ -57,7 +60,10 @@ export default function PYQSessionPage() {
             getPYQ(exam, label, {
               mode,
               chapter,
-              userId: user?.id
+              userId: user?.id,
+              examType,
+              attempt,
+              shift
             })
           )
         );
@@ -78,10 +84,6 @@ export default function PYQSessionPage() {
         if (mode === "random") {
           combined = combined.sort(() => Math.random() - 0.5);
         }
-
-        // "full" and "chapter" modes: return the complete matching set as-is.
-        // "mistakes" mode: userId is passed through to getPYQ so the API can
-        // return the user's wrong attempts once that lookup is implemented.
 
         setQuestions(combined);
         setCurrentIndex(0);
@@ -109,14 +111,47 @@ export default function PYQSessionPage() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
+  const qType = currentQuestion?.question_type || "MCQ";
 
   function handleSelectOption(option) {
     if (!currentQuestion) return;
-    setAnswers(prev => ({ ...prev, [currentQuestion.id]: option }));
+    
+    if (qType === "MULTIPLE_CORRECT") {
+      setAnswers(prev => {
+        const current = Array.isArray(prev[currentQuestion.id]) ? prev[currentQuestion.id] : [];
+        let nextAns;
+        if (current.includes(option)) {
+          nextAns = current.filter(o => o !== option);
+        } else {
+          nextAns = [...current, option].sort();
+        }
+        if (nextAns.length === 0) {
+          const copy = { ...prev };
+          delete copy[currentQuestion.id];
+          return copy;
+        }
+        return { ...prev, [currentQuestion.id]: nextAns };
+      });
+    } else {
+      setAnswers(prev => ({ ...prev, [currentQuestion.id]: option }));
+    }
+  }
+
+  function handleNumericalChange(val) {
+    if (!currentQuestion) return;
+    if (val === "") {
+      setAnswers(prev => {
+        const copy = { ...prev };
+        delete copy[currentQuestion.id];
+        return copy;
+      });
+    } else {
+      setAnswers(prev => ({ ...prev, [currentQuestion.id]: val }));
+    }
   }
 
   function handleNext() {
@@ -125,6 +160,35 @@ export default function PYQSessionPage() {
 
   function handleBack() {
     setCurrentIndex(i => Math.max(i - 1, 0));
+  }
+
+  function checkAnswer(question, selected) {
+    if (!selected) return false;
+    const type = question.question_type || "MCQ";
+
+    if (type === "MCQ") {
+      return String(question.correct_option).toLowerCase() === String(selected).toLowerCase();
+    }
+
+    if (type === "MULTIPLE_CORRECT") {
+      if (!Array.isArray(selected) || !Array.isArray(question.correct_options)) return false;
+      const selectedSorted = [...selected].map(s => String(s).toLowerCase()).sort().join(",");
+      const correctSorted = [...question.correct_options].map(s => String(s).toLowerCase()).sort().join(",");
+      return selectedSorted === correctSorted;
+    }
+
+    if (type === "NUMERICAL") {
+      const numVal = Number(selected);
+      if (isNaN(numVal)) return false;
+      
+      if (question.numerical_min !== undefined && question.numerical_min !== null && 
+          question.numerical_max !== undefined && question.numerical_max !== null) {
+        return numVal >= Number(question.numerical_min) && numVal <= Number(question.numerical_max);
+      }
+      return numVal === Number(question.numerical_answer);
+    }
+
+    return false;
   }
 
   async function handleFinishDeck() {
@@ -139,12 +203,22 @@ export default function PYQSessionPage() {
     await Promise.allSettled(
       answeredQuestions.map(q => {
 
-        const option = answers[q.id];
-        const isCorrect = q.correct_option.toLowerCase() === option;
+        const rawOption = answers[q.id];
+        const isCorrect = checkAnswer(q, rawOption);
+        const type = q.question_type || "MCQ";
+        
+        let formattedOption = "";
+        if (type === "MULTIPLE_CORRECT" && Array.isArray(rawOption)) {
+          formattedOption = rawOption.sort().join(",").toUpperCase();
+        } else if (type === "NUMERICAL") {
+          formattedOption = String(rawOption);
+        } else {
+          formattedOption = String(rawOption).toUpperCase();
+        }
 
         return savePYQAttempt({
           question_id: q.id,
-          selected_option: option.toUpperCase(),
+          selected_option: formattedOption,
           is_correct: isCorrect,
           chapter: q.chapter,
           subject: q.subject,
@@ -160,8 +234,9 @@ export default function PYQSessionPage() {
     const reviewData = questions.map(q => {
 
       const selected = answers[q.id];
-      const isAnswered = !!selected;
-      const isCorrect = isAnswered && q.correct_option.toLowerCase() === selected;
+      const isAnswered = selected !== undefined && selected !== null && selected !== "";
+      
+      const isCorrect = isAnswered && checkAnswer(q, selected);
 
       if (isAnswered && isCorrect) correct += 1;
       if (isAnswered && !isCorrect) wrong += 1;
@@ -179,7 +254,13 @@ export default function PYQSessionPage() {
         option_d: q.option_d,
         correct_option: q.correct_option,
         explanation: q.explanation,
-        selected: selected || null
+        selected: selected || null,
+        
+        question_type: q.question_type || "MCQ",
+        numerical_answer: q.numerical_answer,
+        correct_options: q.correct_options,
+        numerical_min: q.numerical_min,
+        numerical_max: q.numerical_max
       };
 
     });
@@ -202,6 +283,10 @@ export default function PYQSessionPage() {
     resultParams.set("wrong", String(wrong));
     resultParams.set("skipped", String(skipped));
     resultParams.set("accuracy", String(accuracy));
+    
+    if (examType) resultParams.set("exam_type", examType);
+    if (attempt) resultParams.set("attempt", attempt);
+    if (shift) resultParams.set("shift", shift);
 
     router.push(`/pyq/session/results?${resultParams.toString()}`);
 
@@ -233,8 +318,18 @@ export default function PYQSessionPage() {
         <div className="mb-6">
           <h1 className="text-3xl font-black tracking-tight">Focused Deck</h1>
           <p className={`text-sm ${TXT_MUTED} mt-1`}>
-            {subjectLabels.join(", ") || "No subjects selected"} · {exam}
-            {years.length > 0 ? ` · ${years.join(", ")}` : ""} · {modeLabels[mode] || modeLabels.full}
+            {subjectLabels.join(", ") || "No subjects selected"} · {exam}{examType ? ` ${examType}` : ""}
+            {years.length > 0 ? ` · ${years.join(", ")}` : ""}
+            { (attempt || shift) ? (
+              <>
+                <br />
+                {[attempt, shift].filter(Boolean).join(" · ")}
+                <br />
+              </>
+            ) : (
+              " · "
+            )}
+            {modeLabels[mode] || modeLabels.full}
           </p>
         </div>
 
@@ -267,30 +362,60 @@ export default function PYQSessionPage() {
                 <span className="text-xs text-gray-400">{currentQuestion.year}</span>
               </div>
 
-              <p className={`text-sm font-semibold ${TXT}`}>{currentQuestion.question}</p>
-
-              <div className="space-y-2">
-                {["a", "b", "c", "d"].map((option) => {
-
-                  const isSelected = selectedOption === option;
-
-                  return (
-                    <button
-                      key={option}
-                      onClick={() => handleSelectOption(option)}
-                      className={`
-                        w-full text-left border rounded-lg px-3 py-2 cursor-pointer
-                        ${isSelected ? "border-sky-500 bg-sky-500/5" : SURFACE_HV}
-                      `}
-                    >
-                      {option.toUpperCase()}. {currentQuestion[`option_${option}`]}
-                    </button>
-                  );
-
-                })}
+              <div className="space-y-3">
+                <p className={`text-sm font-semibold ${TXT}`}>{currentQuestion.question}</p>
+                {currentQuestion.question_image && (
+                  <img 
+                    src={currentQuestion.question_image} 
+                    alt="Question visual" 
+                    className="rounded-xl max-w-full"
+                  />
+                )}
               </div>
 
-              <div className="flex justify-between text-xs text-gray-400">
+              {qType === "NUMERICAL" ? (
+                <div className="pt-2">
+                  <input
+                    type="number"
+                    placeholder="Enter numerical answer"
+                    value={selectedOption || ""}
+                    onChange={(e) => handleNumericalChange(e.target.value)}
+                    className={`w-full border ${BORDER} ${BG_SUNKEN} rounded-lg px-3 py-2 ${TXT} focus:border-sky-500 outline-none`}
+                  />
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {["a", "b", "c", "d"].map((option) => {
+                    const isSelected = qType === "MULTIPLE_CORRECT"
+                      ? Array.isArray(selectedOption) && selectedOption.includes(option)
+                      : selectedOption === option;
+
+                    return (
+                      <button
+                        key={option}
+                        onClick={() => handleSelectOption(option)}
+                        className={`
+                          w-full text-left border rounded-lg px-3 py-2 cursor-pointer
+                          ${isSelected ? "border-sky-500 bg-sky-500/5" : SURFACE_HV}
+                        `}
+                      >
+                        <div className="flex flex-col gap-2">
+                          <span>{option.toUpperCase()}. {currentQuestion[`option_${option}`]}</span>
+                          {currentQuestion[`option_${option}_image`] && (
+                            <img 
+                              src={currentQuestion[`option_${option}_image`]} 
+                              alt={`Option ${option.toUpperCase()} visual`} 
+                              className="rounded-xl max-w-full" 
+                            />
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div className="flex justify-between text-xs text-gray-400 pt-2">
                 <span>{currentQuestion.chapter}</span>
                 <span>{currentQuestion.difficulty}</span>
               </div>
