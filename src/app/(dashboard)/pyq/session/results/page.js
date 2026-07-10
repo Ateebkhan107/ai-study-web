@@ -12,6 +12,14 @@ const BORDER     = "border-gray-200  dark:border-gray-800/60";
 const TXT        = "text-gray-900  dark:text-[#e6edf3]";
 const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
 
+// Practice mode display labels (kept in sync with the PYQ setup + session pages).
+const modeLabels = {
+  full: "📄 Full Paper",
+  chapter: "📚 Chapter Wise",
+  random: "🎲 Random PYQs",
+  mistakes: "🔁 Mistake Revision"
+};
+
 export default function PYQResultsPage() {
 
 const router = useRouter();
@@ -27,7 +35,7 @@ const [showReview, setShowReview] = useState(false);
 
 const exam = searchParams.get("exam") || "JEE";
 const subjectsParam = searchParams.get("subjects") || "";
-const difficulty = searchParams.get("difficulty") || "Mixed";
+const mode = searchParams.get("mode") || "full";
 
 const total = parseInt(
 searchParams.get("total") || "0",
@@ -288,7 +296,7 @@ Exam: <b>{exam}</b>
 
 
 <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-Difficulty: <b>{difficulty}</b>
+Mode: <b>{modeLabels[mode] || modeLabels.full}</b>
 </span>
 
 

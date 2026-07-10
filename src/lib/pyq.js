@@ -2,10 +2,44 @@
 // GET PYQ QUESTIONS
 // =============================
 
-export async function getPYQ(exam, subject) {
+// options:
+//   year    - optional, filter by exam year
+//   chapter - optional, filter by chapter
+//   mode    - optional, practice mode
+//   userId  - optional, required for mode=mistakes
+//
+// mode=full:      complete paper
+// mode=chapter:   chapter filtering
+// mode=random:    randomized questions
+// mode=mistakes:  wrong question revision (needs userId)
+//
+// Actual database logic for these modes will be implemented
+// inside the /api/pyq route later.
+
+// TODO:
+// replace userId param with server auth check
+
+export async function getPYQ(exam, subject, options = {}) {
+
+  const params = new URLSearchParams();
+
+  params.set("exam", exam);
+  params.set("subject", subject);
+
+  if (options.year)
+    params.set("year", options.year);
+
+  if (options.chapter)
+    params.set("chapter", options.chapter);
+
+  if (options.mode)
+    params.set("mode", options.mode);
+
+  if (options.userId)
+    params.set("userId", options.userId);
 
   const res = await fetch(
-    `/api/pyq?exam=${exam}&subject=${subject}`
+    `/api/pyq?${params.toString()}`
   );
 
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
 
 // ─── Theme CSS Token Configs (kept in sync with the PYQ setup page) ──────────
@@ -11,9 +12,18 @@ const TXT        = "text-gray-900  dark:text-[#e6edf3]";
 const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
 const SURFACE_HV = "hover:bg-gray-100 dark:hover:bg-gray-950/40";
 
+// Practice mode display labels for the session header.
+const modeLabels = {
+  full: "📄 Full Paper",
+  chapter: "📚 Chapter Wise",
+  random: "🎲 Random PYQs",
+  mistakes: "🔁 Mistake Revision"
+};
+
 export default function PYQSessionPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { user } = useUser();
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,8 +37,8 @@ export default function PYQSessionPage() {
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";
   const yearsParam = searchParams.get("years") || "";
-  const difficulty = searchParams.get("difficulty") || "Mixed";
-  const count = parseInt(searchParams.get("count") || "20", 10);
+  const mode = searchParams.get("mode") || "full";
+  const chapter = searchParams.get("chapter") || "";
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
@@ -43,7 +53,13 @@ export default function PYQSessionPage() {
       try {
 
         const results = await Promise.all(
-          subjectLabels.map(label => getPYQ(exam, label))
+          subjectLabels.map(label =>
+            getPYQ(exam, label, {
+              mode,
+              chapter,
+              userId: user?.id
+            })
+          )
         );
 
         let combined = results.flat();
@@ -59,11 +75,13 @@ export default function PYQSessionPage() {
           combined = combined.filter(q => years.includes(q.year));
         }
 
-        if (difficulty !== "Mixed") {
-          combined = combined.filter(q => q.difficulty === difficulty);
+        if (mode === "random") {
+          combined = combined.sort(() => Math.random() - 0.5);
         }
 
-        combined = combined.slice(0, count);
+        // "full" and "chapter" modes: return the complete matching set as-is.
+        // "mistakes" mode: userId is passed through to getPYQ so the API can
+        // return the user's wrong attempts once that lookup is implemented.
 
         setQuestions(combined);
         setCurrentIndex(0);
@@ -91,7 +109,7 @@ export default function PYQSessionPage() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, difficulty, count, exam]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
@@ -178,7 +196,7 @@ export default function PYQSessionPage() {
     const resultParams = new URLSearchParams();
     resultParams.set("exam", exam);
     resultParams.set("subjects", subjectLabels.join(","));
-    resultParams.set("difficulty", difficulty);
+    resultParams.set("mode", mode);
     resultParams.set("total", String(questions.length));
     resultParams.set("correct", String(correct));
     resultParams.set("wrong", String(wrong));
@@ -216,7 +234,7 @@ export default function PYQSessionPage() {
           <h1 className="text-3xl font-black tracking-tight">Focused Deck</h1>
           <p className={`text-sm ${TXT_MUTED} mt-1`}>
             {subjectLabels.join(", ") || "No subjects selected"} · {exam}
-            {years.length > 0 ? ` · ${years.join(", ")}` : ""} · {difficulty}
+            {years.length > 0 ? ` · ${years.join(", ")}` : ""} · {modeLabels[mode] || modeLabels.full}
           </p>
         </div>
 

@@ -6,7 +6,6 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
-import { updateGoalProgress } from "@/lib/goals";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -24,33 +23,31 @@ const I = {
   Target:       (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></Svg>,
   Star:         (p) => <Svg {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></Svg>,
   Bookmark:     (p) => <Svg {...p}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></Svg>,
-  Layers:       (p) => <Svg {...p}><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></Svg>,
   BarChart3:    (p) => <Svg {...p}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></Svg>,
   ChevronRight: (p) => <Svg {...p}><polyline points="9 18 15 12 9 6"/></Svg>,
   Zap:          (p) => <Svg {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></Svg>,
   Clock:        (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></Svg>,
   Brain:        (p) => <Svg {...p}><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.44-3.17Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.44-3.17Z"/></Svg>,
-  BookMarked:   (p) => <Svg {...p}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20l-7-4-7 4V2z"/></Svg>,
-  GraduationCap:(p) => <Svg {...p}><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></Svg>,
-  Play:         (p) => <Svg {...p}><polygon points="5 3 19 12 5 21 5 3"/></Svg>,
   CheckCircle2: (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></Svg>,
   Trophy:       (p) => <Svg {...p}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 19.75 7 21.31 7 22h10c0-.69-.85-2.25-2.03-3.79C14.47 17.98 14 17.55 14 17v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></Svg>,
   Award:        (p) => <Svg {...p}><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></Svg>,
   TrendingUp:   (p) => <Svg {...p}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></Svg>,
   Flame:        (p) => <Svg {...p}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></Svg>,
-  Refresh:      (p) => <Svg {...p}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></Svg>,
+  Play:         (p) => <Svg {...p}><polygon points="5 3 19 12 5 21 5 3"/></Svg>,
   Sparkles:     (p) => <Svg {...p}><path d="M12 3 9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5z"/></Svg>,
+  FileText:     (p) => <Svg {...p}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></Svg>,
+  Library:      (p) => <Svg {...p}><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></Svg>,
+  Shuffle:      (p) => <Svg {...p}><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.8-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l6.1 8.6c.8 1.1 2 1.7 3.3 1.7H22"/><path d="m18 14 4 4-4 4"/></Svg>,
+  RotateCcw:    (p) => <Svg {...p}><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></Svg>,
 };
 
 // ─── Theme CSS Token Configs ──────────────────────────────────────────────────
-const BG_SURFACE = "bg-white      dark:bg-gray-900/40 backdrop-blur-md";
-const BG_SUNKEN  = "bg-gray-100   dark:bg-gray-950/50";     
-const BORDER     = "border-gray-200  dark:border-gray-800/60";
-const BORDER_HV  = "hover:border-gray-300 dark:hover:border-gray-700";
-const TXT        = "text-gray-900  dark:text-[#e6edf3]";
-const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
-const TXT_DIM    = "text-gray-400  dark:text-[#7d8590]/60";
-const SURFACE_HV = "hover:bg-gray-100 dark:hover:bg-gray-950/40";
+const BG_SURFACE  = "bg-white      dark:bg-gray-900/40 backdrop-blur-md";
+const BG_SUNKEN   = "bg-gray-100   dark:bg-gray-950/50";
+const BORDER      = "border-gray-200  dark:border-gray-800/60";
+const BORDER_HV   = "hover:border-gray-300 dark:hover:border-gray-700";
+const TXT         = "text-gray-900  dark:text-[#e6edf3]";
+const TXT_MUTED   = "text-gray-500  dark:text-[#7d8590]";
 const ACTIVE_PILL = "bg-gray-900 text-white dark:bg-white dark:text-[#0d1117]";
 const DIFFICULTY_BADGE = {
   Easy:   "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
@@ -58,47 +55,53 @@ const DIFFICULTY_BADGE = {
   Hard:   "bg-rose-500/10    text-rose-600    dark:text-rose-400    border border-rose-500/20",
 };
 
-// TABS updated to include the missing "Saved" tab
 const TABS = [
   { id: "practice",  label: "Practice",  Icon: I.Target    },
   { id: "analytics", label: "Analytics", Icon: I.BarChart3 },
-  { id: "saved",     label: "Saved",     Icon: I.Bookmark  }, 
+  { id: "saved",     label: "Saved",     Icon: I.Bookmark  },
 ];
 
-// ─── Multi-Tenant Core Blueprints ──────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const MASTER_SUBJECTS = [
-  { id: "physics",      label: "Physics",   emoji: "⚛️",  count: 1240, tracks: ["jee", "neet"] },
-  { id: "chemistry",    label: "Chemistry", emoji: "🧪",  count: 980,  tracks: ["jee", "neet"] },
-  { id: "mathematics",  label: "Maths",     emoji: "∑",   count: 1560, tracks: ["jee"] },
-  { id: "biology",      label: "Biology",   emoji: "🧬",  count: 1740, tracks: ["neet"] },
+  { id: "physics",     label: "Physics",   emoji: "⚛️",  count: 1240, tracks: ["jee", "neet"] },
+  { id: "chemistry",   label: "Chemistry", emoji: "🧪",  count: 980,  tracks: ["jee", "neet"] },
+  { id: "mathematics", label: "Maths",     emoji: "∑",   count: 1560, tracks: ["jee"] },
+  { id: "biology",     label: "Biology",   emoji: "🧬",  count: 1740, tracks: ["neet"] },
 ];
 
 const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
 
-const MASTER_RECENT = [
-  { subject: "Physics",     topic: "Electromagnetic Waves", year: 2025, score: 78, time: "2h ago", track: "jee" },
-  { subject: "Biology",     topic: "Genetics & Inheritance",year: 2026, score: 92, time: "3h ago", track: "neet" },
-  { subject: "Chemistry",   topic: "Organic Reactions",     year: 2024, score: 85, time: "Yesterday", track: "mixed" },
-  { subject: "Mathematics", topic: "Integral Calculus",     year: 2025, score: 62, time: "2d ago", track: "jee" },
+// Practice mode options for the "03 — PRACTICE MODE" selector.
+const PRACTICE_MODES = [
+  { id: "full",     label: "Full Paper",   description: "Solve complete exam paper", Icon: I.FileText },
+  { id: "chapter",  label: "Chapter Wise", description: "Practice selected chapters", Icon: I.Library  },
+  { id: "random",   label: "Random PYQs",  description: "Mixed PYQ practice",         Icon: I.Shuffle  },
+  { id: "mistakes", label: "Mistakes",     description: "Redo wrong questions",       Icon: I.RotateCcw },
 ];
+
+const PRACTICE_MODE_SUMMARY_LABEL = {
+  full:     "Full Paper",
+  chapter:  "Chapter Wise",
+  random:   "Random PYQs",
+  mistakes: "Mistake Revision",
+};
 
 const MASTER_SAVED = [
   { id: 1, subject: "Physics",     topic: "Optics",           year: 2025, difficulty: "Medium", track: "mixed", question: "A ray of light passes from air to glass at an angle of incidence 45°. Find the angle of refraction..." },
-  { id: 2, subject: "Chemistry",   topic: "Electrochemistry", year: 2024, difficulty: "Hard", track: "mixed", question: "Calculate the EMF of the cell: Zn | Zn²⁺(0.1M) || Cu²⁺(0.01M) | Cu at 298K..." },
-  { id: 3, subject: "Mathematics", topic: "Probability",      year: 2023, difficulty: "Easy", track: "jee", question: "A bag contains 5 red and 3 blue balls. Two balls are drawn at random. Find the probability..." },
-  { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard", track: "neet", question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
+  { id: 2, subject: "Chemistry",   topic: "Electrochemistry", year: 2024, difficulty: "Hard",   track: "mixed", question: "Calculate the EMF of the cell: Zn | Zn²⁺(0.1M) || Cu²⁺(0.01M) | Cu at 298K..." },
+  { id: 3, subject: "Mathematics", topic: "Probability",      year: 2023, difficulty: "Easy",   track: "jee",   question: "A bag contains 5 red and 3 blue balls. Two balls are drawn at random. Find the probability..." },
+  { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard",   track: "neet",  question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
 ];
 
-// Colors for the Syllabus Coverage bars
 const SUBJECT_BAR_COLORS = {
-  Physics: "#3b82f6",
-  Chemistry: "#a855f7",
+  Physics:     "#3b82f6",
+  Chemistry:   "#a855f7",
   Mathematics: "#06b6d4",
-  Maths: "#06b6d4",
-  Biology: "#10b981",
+  Maths:       "#06b6d4",
+  Biology:     "#10b981",
 };
 
-// ─── Shared Atomic Components ────────────────────────────────────────────────
+// ─── Shared Atomic Components ─────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
     <div className={`group relative border ${BORDER} ${BG_SURFACE} p-5 rounded-2xl ${BORDER_HV} transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg`}>
@@ -106,7 +109,9 @@ function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex items-center justify-between mb-3">
           <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>{label}</p>
-          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}><IconComp size={18} /></div>
+          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}>
+            <IconComp size={18} />
+          </div>
         </div>
         <div>
           <p className={`text-2xl sm:text-3xl font-black tracking-tight ${TXT} mb-0.5`}>{value}</p>
@@ -117,26 +122,66 @@ function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   );
 }
 
-function ToggleChip({ label, active, onClick, count }) {
-  return (
-    <button onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all whitespace-nowrap ${
-        active ? "bg-sky-500 text-white border-sky-500" : `bg-transparent ${TXT_MUTED} ${BORDER} ${BORDER_HV}`
-      }`}>
-      {label}
-      {count !== undefined && <span className={`text-xs ${active ? "text-sky-100" : TXT_MUTED}`}>{count.toLocaleString()}</span>}
-    </button>
-  );
-}
-
-// ─── Tab-Specific Layout Engines ──────────────────────────────────────────────
+// ─── Practice Tab ─────────────────────────────────────────────────────────────
 function PracticeTab({ subjects, track }) {
   const router = useRouter();
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedYears,    setSelectedYears]    = useState([]);
-  const [difficulty,       setDifficulty]       = useState("Mixed");
-  const [questionsCount,   setQuestionsCount]   = useState(20);
-  const [subjectError, setSubjectError] = useState("");
+  const [practiceMode,     setPracticeMode]     = useState("full");
+  const [subjectError,     setSubjectError]     = useState("");
+
+  // Chapter Wise mode state
+  const [chapters,        setChapters]        = useState([]);
+  const [selectedChapter, setSelectedChapter]  = useState("");
+  const [loadingChapters, setLoadingChapters]  = useState(false);
+  const [chapterError,    setChapterError]     = useState("");
+
+  // Load chapters only for Chapter Wise mode, once a subject is selected.
+  useEffect(() => {
+    if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
+      setChapters([]);
+      setSelectedChapter("");
+      return;
+    }
+
+    let cancelled = false;
+
+    async function loadChapters() {
+      setLoadingChapters(true);
+      setChapterError("");
+      try {
+        const subjectLabel = subjects.find((s) => s.id === selectedSubjects[0])?.label;
+        if (!subjectLabel) {
+          if (!cancelled) setChapters([]);
+          return;
+        }
+
+        const params = new URLSearchParams();
+        params.set("exam", track.toUpperCase());
+        params.set("subject", subjectLabel);
+
+        const res = await fetch(`/api/pyq/chapters?${params.toString()}`);
+        if (!res.ok) throw new Error("Failed to load chapters");
+
+        const data = await res.json();
+        if (!cancelled) {
+          setChapters(Array.isArray(data) ? data : []);
+          setSelectedChapter("");
+        }
+      } catch (error) {
+        console.error("Failed to load chapters:", error);
+        if (!cancelled) {
+          setChapters([]);
+          setChapterError("Failed to load chapters. Please try again.");
+        }
+      } finally {
+        if (!cancelled) setLoadingChapters(false);
+      }
+    }
+
+    loadChapters();
+    return () => { cancelled = true; };
+  }, [practiceMode, selectedSubjects, subjects, track]);
 
   function handleStartDeck() {
     if (selectedSubjects.length === 0) {
@@ -144,11 +189,16 @@ function PracticeTab({ subjects, track }) {
       return;
     }
 
+    if (practiceMode === "chapter" && !selectedChapter) {
+      setSubjectError("Please select a chapter");
+      return;
+    }
+
     setSubjectError("");
 
     const subjectLabels = subjects
-      .filter(s => selectedSubjects.includes(s.id))
-      .map(s => s.label);
+      .filter((s) => selectedSubjects.includes(s.id))
+      .map((s) => s.label);
 
     const params = new URLSearchParams();
     params.set("exam", track.toUpperCase());
@@ -158,25 +208,49 @@ function PracticeTab({ subjects, track }) {
       params.set("years", selectedYears.join(","));
     }
 
-    params.set("difficulty", difficulty);
-    params.set("count", String(questionsCount));
+    params.set("mode", practiceMode);
+
+    if (practiceMode === "chapter" && selectedChapter) {
+      params.set("chapter", selectedChapter);
+    }
 
     router.push(`/pyq/session?${params.toString()}`);
   }
 
-  const toggleSubject = id => setSelectedSubjects(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]);
-  const toggleYear    = yr => setSelectedYears(p => p.includes(yr) ? p.filter(y => y !== yr) : [...p, yr]);
+  const toggleSubject = (id) =>
+    setSelectedSubjects((p) =>
+      p.includes(id) ? p.filter((s) => s !== id) : [...p, id]
+    );
+
+  const toggleYear = (yr) =>
+    setSelectedYears((p) =>
+      p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr]
+    );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
+
+      {/* Left — subject + year + mode + chapter selectors */}
       <div className="space-y-4">
+
+        {/* Subject selector */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+            01 — SELECT SUBJECTS
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {subjects.map(s => {
+            {subjects.map((s) => {
               const active = selectedSubjects.includes(s.id);
               return (
-                <button key={s.id} onClick={() => toggleSubject(s.id)} className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${active ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`}`}>
+                <button
+                  key={s.id}
+                  onClick={() => toggleSubject(s.id)}
+                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${
+                    active
+                      ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                  }`}
+                >
                   <span className="text-2xl">{s.emoji}</span>
                   <span className="text-sm font-semibold">{s.label}</span>
                 </button>
@@ -185,43 +259,135 @@ function PracticeTab({ subjects, track }) {
           </div>
         </div>
 
+        {/* Year selector */}
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <div className="flex items-center justify-between mb-4">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>02 — SELECT YEAR BULLETINS</p>
-          </div>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+            02 — SELECT YEAR BULLETINS
+          </p>
           <div className="flex flex-wrap gap-2">
-            {YEARS.map(yr => (
-              <button key={yr} onClick={() => toggleYear(yr)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${selectedYears.includes(yr) ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${TXT_MUTED}`}`}>
+            {YEARS.map((yr) => (
+              <button
+                key={yr}
+                onClick={() => toggleYear(yr)}
+                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
+                  selectedYears.includes(yr)
+                    ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                    : `${BORDER} ${TXT_MUTED}`
+                }`}
+              >
                 {yr}
               </button>
             ))}
           </div>
         </div>
+
+        {/* Practice mode selector */}
+        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+            03 — PRACTICE MODE
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {PRACTICE_MODES.map((m) => {
+              const active = practiceMode === m.id;
+              return (
+                <button
+                  key={m.id}
+                  onClick={() => setPracticeMode(m.id)}
+                  className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left ${
+                    active
+                      ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                  }`}
+                >
+                  <m.Icon size={20} className="shrink-0 mt-0.5" />
+                  <span>
+                    <span className="block text-sm font-semibold">{m.label}</span>
+                    <span className="block text-xs mt-0.5 opacity-80">{m.description}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Chapter selector — only for Chapter Wise mode */}
+        {practiceMode === "chapter" && (
+          <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+              04 — SELECT CHAPTER
+            </p>
+
+            {selectedSubjects.length === 0 && (
+              <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>
+            )}
+
+            {selectedSubjects.length > 0 && loadingChapters && (
+              <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>
+            )}
+
+            {selectedSubjects.length > 0 && !loadingChapters && chapterError && (
+              <p className="text-sm text-red-500">{chapterError}</p>
+            )}
+
+            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && (
+              <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>
+            )}
+
+            {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {chapters.map((ch) => (
+                  <button
+                    key={ch}
+                    onClick={() => setSelectedChapter(ch)}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
+                      selectedChapter === ch
+                        ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                        : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                    }`}
+                  >
+                    {ch}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className="space-y-4">
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>QUANTITY</p>
-          <div className="flex flex-wrap gap-2">
-            {[10, 20, 30, 50].map(n => (
-              <button key={n} onClick={() => setQuestionsCount(n)} className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all cursor-pointer ${questionsCount === n ? "bg-white text-black border-white shadow-sm" : `${BORDER} ${TXT_MUTED}`}`}>{n}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>DIFFICULTY CRITERIA</p>
-          <div className="space-y-2">
-            {["Easy", "Medium", "Hard", "Mixed"].map((d) => (
-              <button key={d} onClick={() => setDifficulty(d)} className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${difficulty === d ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white" : `${BORDER} ${TXT_MUTED}`}`}>{d}</button>
-            ))}
-          </div>
-        </div>
-
+      {/* Right — start button */}
+      <div>
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 space-y-3`}>
-          <button onClick={handleStartDeck} className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer">
+          <div className="space-y-2 mb-2">
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>
+              SESSION SUMMARY
+            </p>
+            <p className={`text-xs ${TXT_MUTED}`}>
+              {selectedSubjects.length > 0
+                ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected`
+                : "No subjects selected"}
+            </p>
+            <p className={`text-xs ${TXT_MUTED}`}>
+              {selectedYears.length > 0
+                ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}`
+                : "All years"}
+            </p>
+            <p className={`text-xs ${TXT_MUTED}`}>
+              Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}
+            </p>
+            {practiceMode === "chapter" && (
+              <p className={`text-xs ${TXT_MUTED}`}>
+                {selectedChapter ? `Chapter: ${selectedChapter}` : "No chapter selected"}
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={handleStartDeck}
+            className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer transition-colors"
+          >
             <I.Play size={14} /> Start Focused Deck
           </button>
+
           {subjectError && (
             <p className="text-xs text-red-500 font-medium">{subjectError}</p>
           )}
@@ -231,10 +397,11 @@ function PracticeTab({ subjects, track }) {
   );
 }
 
+// ─── Analytics Tab ────────────────────────────────────────────────────────────
 function AnalyticsTab({ track }) {
-  const [analytics, setAnalytics] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
+  const [analytics,  setAnalytics]  = useState(null);
+  const [loading,    setLoading]    = useState(true);
+  const [loadError,  setLoadError]  = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -257,13 +424,8 @@ function AnalyticsTab({ track }) {
     return () => { cancelled = true; };
   }, []);
 
-  if (loading) {
-    return <p className={`text-sm ${TXT_MUTED}`}>Loading analytics...</p>;
-  }
-
-  if (loadError) {
-    return <p className="text-sm text-red-500">{loadError}</p>;
-  }
+  if (loading) return <p className={`text-sm ${TXT_MUTED}`}>Loading analytics...</p>;
+  if (loadError) return <p className="text-sm text-red-500">{loadError}</p>;
 
   const attempted = analytics?.attempted ?? 0;
   const accuracy  = analytics?.accuracy  ?? 0;
@@ -271,7 +433,7 @@ function AnalyticsTab({ track }) {
   const subjects  = analytics?.subjects  ?? [];
 
   const sortedByAccuracy = [...subjects].sort((a, b) => b.accuracy - a.accuracy);
-  const topSubject = sortedByAccuracy[0];
+  const topSubject     = sortedByAccuracy[0];
   const weakestSubject = sortedByAccuracy[sortedByAccuracy.length - 1];
 
   return (
@@ -281,16 +443,18 @@ function AnalyticsTab({ track }) {
           { Icon: I.Target,       label: "Attempted Run",   value: String(attempted), sublabel: "Questions Answered", accent: "#3b82f6" },
           { Icon: I.CheckCircle2, label: "Accuracy Target", value: `${accuracy}%`,    sublabel: "Correct Response",   accent: "#10b981" },
           { Icon: I.Flame,        label: "Archive Streak",  value: `${streak}d`,      sublabel: "Daily Momentum",     accent: "#f59e0b" },
-        ].map(s => <StatCard key={s.label} {...s} />)}
+        ].map((s) => <StatCard key={s.label} {...s} />)}
       </div>
 
       <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
+        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+          SYLLABUS COVERAGE RATIOS
+        </p>
         {subjects.length === 0 && (
           <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>
         )}
         <div className="space-y-5">
-          {subjects.map(item => (
+          {subjects.map((item) => (
             <div key={item.subject}>
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
@@ -300,7 +464,13 @@ function AnalyticsTab({ track }) {
                 </div>
               </div>
               <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div className="h-full rounded-full" style={{ width: `${item.accuracy}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }} />
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${item.accuracy}%`,
+                    background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280",
+                  }}
+                />
               </div>
             </div>
           ))}
@@ -312,13 +482,17 @@ function AnalyticsTab({ track }) {
           <I.Award size={18} className="text-amber-400 mb-3" />
           <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
           <p className="text-xl font-bold">{topSubject ? topSubject.subject : "—"}</p>
-          <p className="text-sm text-gray-500 mt-1">{topSubject ? `${topSubject.accuracy}% accuracy rating` : "No data yet"}</p>
+          <p className="text-sm text-gray-500 mt-1">
+            {topSubject ? `${topSubject.accuracy}% accuracy rating` : "No data yet"}
+          </p>
         </div>
         <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
           <I.TrendingUp size={18} className="text-blue-400 mb-3" />
           <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
           <p className="text-xl font-bold">{weakestSubject ? weakestSubject.subject : "—"}</p>
-          <p className="text-sm text-gray-500 mt-1">{weakestSubject ? "Target core concepts" : "No data yet"}</p>
+          <p className="text-sm text-gray-500 mt-1">
+            {weakestSubject ? "Target core concepts" : "No data yet"}
+          </p>
         </div>
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
           <I.Sparkles size={18} className="text-emerald-400 mb-3" />
@@ -334,25 +508,35 @@ function AnalyticsTab({ track }) {
   );
 }
 
+// ─── Saved Tab ────────────────────────────────────────────────────────────────
 function SavedTab({ track, savedQuestions }) {
   return (
     <div className="space-y-5">
       <div>
         <h3 className="text-sm font-bold">Saved Revision Sets ({savedQuestions.length})</h3>
-        <p className="text-xs text-gray-400">Bookmarked papers filtered precisely to your active track syllabus bounds.</p>
+        <p className="text-xs text-gray-400">
+          Bookmarked papers filtered precisely to your active track syllabus bounds.
+        </p>
       </div>
 
       <div className="space-y-3">
-        {savedQuestions.map(q => (
-          <div key={q.id} className={`group rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-all`}>
+        {savedQuestions.map((q) => (
+          <div
+            key={q.id}
+            className={`group rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-all`}
+          >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className="text-xs font-semibold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
                     {q.subject}
                   </span>
-                  <span className="text-xs text-gray-400">{q.topic} · {track.toUpperCase()} Archive {q.year}</span>
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[q.difficulty]}`}>{q.difficulty}</span>
+                  <span className="text-xs text-gray-400">
+                    {q.topic} · {track.toUpperCase()} Archive {q.year}
+                  </span>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[q.difficulty]}`}>
+                    {q.difficulty}
+                  </span>
                 </div>
                 <p className="text-sm text-gray-300 leading-relaxed">{q.question}</p>
               </div>
@@ -364,41 +548,30 @@ function SavedTab({ track, savedQuestions }) {
   );
 }
 
-// ─── Main Controller Page ───────────────────────────────────────────────────
+// ─── Main Page ────────────────────────────────────────────────────────────────
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
+  const [track, setTrack] = useState(null);
 
-const [track, setTrack] = useState(null);
-
- useEffect(() => {
-  async function loadTrack() {
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("user_profiles")
-      .select("exam")
-      .eq("clerk_user_id", user.id)
-      .single();
-
-    if (data?.exam === "NEET") {
-      setTrack("neet");
-    } else {
-      setTrack("jee");
+  useEffect(() => {
+    async function loadTrack() {
+      if (!user) return;
+      const { data } = await supabase
+        .from("user_profiles")
+        .select("exam")
+        .eq("clerk_user_id", user.id)
+        .single();
+      setTrack(data?.exam === "NEET" ? "neet" : "jee");
     }
-  }
+    loadTrack();
+  }, [user]);
 
-  loadTrack();
-}, [user]);
+  const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
+  const filteredSaved    = MASTER_SAVED.filter((s) => s.track === "mixed" || s.track === track);
 
-
-
-  const filteredSubjects = MASTER_SUBJECTS.filter(s => s.tracks.includes(track));
-  const filteredRecent = MASTER_RECENT.filter(r => r.track === "mixed" || r.track === track);
-  const filteredSaved = MASTER_SAVED.filter(s => s.track === "mixed" || s.track === track);
-
-  // ── Live data for header cards ──────────────────────────
-  const [overview, setOverview] = useState(null);
+  // Header stats
+  const [overview,       setOverview]       = useState(null);
   const [attemptedTotal, setAttemptedTotal] = useState(null);
 
   useEffect(() => {
@@ -408,21 +581,18 @@ const [track, setTrack] = useState(null);
       try {
         const [overviewData, analyticsData] = await Promise.all([
           getPYQOverview(),
-          getPYQAnalytics()
+          getPYQAnalytics(),
         ]);
-
         if (cancelled) return;
-
         setOverview(overviewData || null);
         setAttemptedTotal(
           analyticsData?.totalQuestions ??
-          analyticsData?.totalAttempts ??
-          analyticsData?.attempted ?? 
+          analyticsData?.totalAttempts  ??
+          analyticsData?.attempted      ??
           0
         );
       } catch (error) {
         console.error("Failed loading PYQ stats:", error);
-        
         if (!cancelled) {
           setOverview(null);
           setAttemptedTotal(0);
@@ -431,74 +601,85 @@ const [track, setTrack] = useState(null);
     }
 
     loadPYQStats();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
-  const questionVaultValue = overview ? overview.totalQuestions.toLocaleString() : "—";
-  
-  const yearRangeValue = (overview && overview.minYear && overview.maxYear)
+  const questionVaultValue = overview
+    ? overview.totalQuestions.toLocaleString()
+    : "—";
+
+  const yearRangeValue = overview?.minYear && overview?.maxYear
     ? `${overview.maxYear - overview.minYear + 1} Years`
     : "—";
 
-  const yearRangeSublabel = (overview && overview.minYear && overview.maxYear)
+  const yearRangeSublabel = overview?.minYear && overview?.maxYear
     ? `${overview.minYear} – ${overview.maxYear} Bulletins`
     : "No data yet";
 
-  const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
+  const solvedLoadValue = attemptedTotal !== null
+    ? `${attemptedTotal} Solved`
+    : "—";
 
   const PAGE_STATS = [
-    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs", accent: "#3b82f6" },
-    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel, accent: "#a855f7" },
-    { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units", accent: "#06b6d4" },
+    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs",  accent: "#3b82f6" },
+    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel,   accent: "#a855f7" },
+    { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units",   accent: "#06b6d4" },
   ];
 
-
   if (!track) {
-  return (
-    <div className="min-h-[400px] flex items-center justify-center">
-      Loading...
-    </div>
-  );
-}
+    return (
+      <div className="min-h-[400px] flex items-center justify-center">
+        <p className={`text-sm ${TXT_MUTED}`}>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-full ${TXT}`}>
       <div className="max-w-7xl mx-auto px-6 py-10">
 
-        {/* Dynamic Track Header */}
+        {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">PREVIOUS YEAR ENGINES</p>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+              PREVIOUS YEAR ENGINES
+            </p>
             <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border ${
-              track === "neet" ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-400" : "bg-purple-500/5 border-purple-500/20 text-purple-400"
+              track === "neet"
+                ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-400"
+                : "bg-purple-500/5  border-purple-500/20  text-purple-400"
             }`}>
               {track === "neet" ? "NEET UG Medical Core" : "IIT JEE Engineering Vault"}
             </span>
           </div>
-          <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">PYQ Practice</h1>
+          <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
+            PYQ Practice
+          </h1>
           <p className="text-gray-400 mt-1 text-sm max-w-xl">
             Analyze real past examination parameters with automated performance indicators.
           </p>
         </div>
 
-        {/* Dynamic Stats Row Displays */}
+        {/* Stats row */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {PAGE_STATS.map(s => <StatCard key={s.label} {...s} />)}
+          {PAGE_STATS.map((s) => <StatCard key={s.label} {...s} />)}
         </div>
 
-        {/* Tab Selection Navigation Bar */}
+        {/* Tab nav */}
         <div className="mb-6">
           <div className="inline-flex items-center bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-xl p-1 gap-1">
-            {TABS.map(tab => {
+            {TABS.map((tab) => {
               const active = activeTab === tab.id;
               return (
-                <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 cursor-pointer ${
-                    active ? ACTIVE_PILL : `${TXT_MUTED} hover:text-gray-200 hover:bg-gray-800/40`
-                  }`}>
+                    active
+                      ? ACTIVE_PILL
+                      : `${TXT_MUTED} hover:text-gray-200 hover:bg-gray-800/40`
+                  }`}
+                >
                   <tab.Icon size={14} /> {tab.label}
                 </button>
               );
@@ -506,7 +687,7 @@ const [track, setTrack] = useState(null);
           </div>
         </div>
 
-        {/* Dynamic Tab Screen Panel Switcher */}
+        {/* Tab panels */}
         {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
         {activeTab === "analytics" && <AnalyticsTab track={track} />}
         {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
