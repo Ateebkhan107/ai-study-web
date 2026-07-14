@@ -20,7 +20,19 @@ export async function getAuthContext() {
     };
   }
 
-  const user = await currentUser();
+  let user = null;
+
+  try {
+    user = await currentUser();
+  } catch (error) {
+    console.error("Clerk currentUser() failed:", error);
+
+    return {
+      userId,
+      user: null,
+      onboardingComplete: true,
+    };
+  }
 
   return {
     userId,
