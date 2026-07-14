@@ -22,10 +22,6 @@ const navItems = [
     href: "/test",
   },
   {
-    name: "Self Study",
-    href: "/self-study",
-  },
-  {
     name: "PYQ",
     href: "/pyq",
   },
