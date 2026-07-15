@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { createOrder } from "@/lib/payment";
 
 const FREE_FEATURES = [
   "20 questions per test",
@@ -28,36 +30,36 @@ const PLANS = [
   {
     id: "monthly",
     label: "Monthly",
-    price: 499,
+    price: 49,
     per: "month",
-    total: null,
+    total: 49,
     badge: null,
     savings: null,
   },
   {
     id: "quarterly",
     label: "Quarterly",
-    price: 399,
+    price: 43,
     per: "month",
-    total: 1197,
-    badge: "Popular",
-    savings: "Save ₹300",
+    total: 129,
+    badge: "Most Popular",
+    savings: "Save ₹18",
   },
   {
     id: "yearly",
     label: "Yearly",
-    price: 249,
+    price: 33,
     per: "month",
-    total: 2988,
+    total: 399,
     badge: "Best Value",
-    savings: "Save ₹3,000",
+    savings: "Save ₹189",
   },
 ];
 
 const FAQS = [
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. You can cancel your subscription anytime from your profile. You'll retain PRO access until the end of your billing period.",
+    q: "Can I cancel my subscription?",
+    a: "PrepZii subscriptions are fixed-term plans. They remain active until the end of the purchased billing period.",
   },
   {
     q: "Which payment methods are accepted?",
@@ -67,38 +69,86 @@ const FAQS = [
     q: "Will my data be saved if I downgrade?",
     a: "Yes. All your test history, scores, and progress are saved forever regardless of plan.",
   },
-  {
-    q: "Can I switch plans?",
-    a: "Yes. You can upgrade or downgrade between plans at any time. The difference is prorated.",
-  },
 ];
 
 export default function ProPage() {
   const [selectedPlan, setSelectedPlan] = useState("quarterly");
   const [openFaq, setOpenFaq] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   const plan = PLANS.find((p) => p.id === selectedPlan);
 
-  const handleSubscribe = () => {
-    setLoading(true);
-
-    // TODO: call /api/payment/create-order → open Razorpay checkout
-
-    setTimeout(() => {
+  const handleSubscribe = async () => {
+    if (loading) return;
+  
+    try {
+      setLoading(true);
+  
+      const order = await createOrder(selectedPlan);
+  
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: "PrepZii",
+        description: `${plan.label} Subscription`,
+        image: "/images/branding/logo.png",
+        order_id: order.id,
+        prefill: {
+          name: user?.fullName || "",
+          email: user?.primaryEmailAddress?.emailAddress || "",
+        },
+        notes: {
+          plan: selectedPlan,
+        },
+        theme: {
+          color: "#1e3a5f",
+        },
+        handler: async function (response) {
+          try {
+            const verify = await fetch("/api/payment/verify", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ...response,
+                plan: selectedPlan,
+              }),
+            });
+  
+            const result = await verify.json();
+  
+            if (result.success) {
+              window.location.href = "/payment/success";
+            } else {
+              window.location.href = "/payment/failed";
+            }
+          } catch (err) {
+            console.error(err);
+            window.location.href = "/payment/failed";
+          }
+        },
+        modal: {
+          ondismiss() {
+            setLoading(false);
+          },
+        },
+      };
+  
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+  
+    } catch (err) {
+      console.error(err);
+      alert("Unable to start payment.");
       setLoading(false);
-
-      alert(
-        `Razorpay checkout opens here for ₹${
-          plan.total || plan.price
-        } ${selectedPlan} plan`
-      );
-    }, 800);
+    }
   };
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10 space-y-12">
-
       {/* ── Hero ───────────────────────────────────────────────── */}
       <div className="text-center space-y-3">
         <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-[#1e3a5f] text-white uppercase tracking-widest">
@@ -112,14 +162,12 @@ export default function ProPage() {
         </h1>
 
         <p className="text-gray-400 text-base max-w-md mx-auto">
-          Everything you need to crack JEE & NEET — unlimited tests,
-          deep analytics, and AI-powered study plans.
+          Everything you need to crack JEE & NEET — unlimited tests, deep analytics, and AI-powered study plans.
         </p>
       </div>
 
       {/* ── Plan selector ──────────────────────────────────────── */}
       <div className="flex flex-col items-center gap-6">
-
         <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/60 p-1 rounded-2xl">
           {PLANS.map((p) => (
             <button
@@ -152,9 +200,7 @@ export default function ProPage() {
               {plan.price}
             </span>
 
-            <span className="text-gray-400 text-base mb-2">
-              /{plan.per}
-            </span>
+            <span className="text-gray-400 text-base mb-2">/{plan.per}</span>
           </div>
 
           {plan.total && (
@@ -163,10 +209,7 @@ export default function ProPage() {
               <span className="font-semibold text-black dark:text-white">
                 ₹{plan.total}
               </span>{" "}
-              per{" "}
-              {plan.id === "quarterly"
-                ? "3 months"
-                : "year"}
+              per {plan.id === "quarterly" ? "3 months" : "year"}
             </p>
           )}
 
@@ -185,17 +228,14 @@ export default function ProPage() {
         >
           {loading
             ? "Processing..."
-            : `Start PRO — ₹${plan.price}/mo`}
+            : `Get PrepZii Pro • ₹${plan.total}`}
         </button>
 
-        <p className="text-xs text-gray-400">
-          Cancel anytime · Secured by Razorpay
-        </p>
+        <p className="text-xs text-gray-400">Secure payment powered by Razorpay</p>
       </div>
 
       {/* ── Free vs PRO comparison ─────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
         {/* Free */}
         <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6">
           <div className="mb-5">
@@ -208,19 +248,17 @@ export default function ProPage() {
             </h3>
 
             <p className="text-3xl font-black text-gray-300 dark:text-gray-600 mt-1">
-              ₹0
-              <span className="text-base font-normal">/mo</span>
+              ₹0<span className="text-base font-normal">/mo</span>
             </p>
           </div>
 
           <div className="space-y-3">
             {FREE_FEATURES.map((f) => (
               <div key={f} className="flex items-start gap-3">
-                <span className="text-gray-300 dark:text-gray-600 mt-0.5 flex-shrink-0">
-                  ✕
+                <span className="text-gray-400 dark:text-gray-500 mt-0.5 flex-shrink-0">
+                  ✓
                 </span>
-
-                <span className="text-sm text-gray-400">{f}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{f}</span>
               </div>
             ))}
           </div>
@@ -228,12 +266,10 @@ export default function ProPage() {
 
         {/* PRO */}
         <div className="bg-black dark:bg-white rounded-3xl p-6 relative overflow-hidden">
-
           <div
             className="absolute inset-0 opacity-5"
             style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+              backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
               backgroundSize: "24px 24px",
             }}
           />
@@ -246,7 +282,6 @@ export default function ProPage() {
 
               <h3 className="text-xl font-black text-white dark:text-black mt-1 flex items-center gap-2">
                 PRO
-
                 <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white/70 dark:text-black/70">
                   All features
                 </span>
@@ -265,19 +300,14 @@ export default function ProPage() {
                 <div key={f.text} className="flex items-start gap-3">
                   <span
                     className={`mt-0.5 flex-shrink-0 text-sm ${
-                      f.hot
-                        ? "text-yellow-400"
-                        : "text-white/60 dark:text-black/60"
+                      f.hot ? "text-yellow-400" : "text-white/60 dark:text-black/60"
                     }`}
                   >
                     {f.hot ? "★" : "✓"}
                   </span>
-
                   <span
                     className={`text-sm ${
-                      f.hot
-                        ? "text-white dark:text-black font-semibold"
-                        : "text-white/70 dark:text-black/70"
+                      f.hot ? "text-white dark:text-black font-semibold" : "text-white/70 dark:text-black/70"
                     }`}
                   >
                     {f.text}
@@ -303,58 +333,9 @@ export default function ProPage() {
             <p className="text-3xl font-black text-black dark:text-white tracking-tight">
               {s.value}
             </p>
-
-            <p className="text-xs text-gray-400 mt-1 font-medium">
-              {s.label}
-            </p>
+            <p className="text-xs text-gray-400 mt-1 font-medium">{s.label}</p>
           </div>
         ))}
-      </div>
-
-      {/* ── Testimonials ───────────────────────────────────────── */}
-      <div>
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4 text-center">
-          What toppers say
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            {
-              name: "Priya S.",
-              rank: "JEE Advanced AIR 342",
-              text: "The AI study plan completely changed how I prepared. It found my weak spots in Thermodynamics within a week.",
-            },
-            {
-              name: "Rohan M.",
-              rank: "NEET 680/720",
-              text: "The PYQ analysis and mock tests are insane. I could see exactly which chapters were costing me marks.",
-            },
-            {
-              name: "Sneha K.",
-              rank: "JEE Mains 99.2%ile",
-              text: "Worth every rupee. The analytics showed me I was wasting time on easy questions I already knew.",
-            },
-          ].map((t) => (
-            <div
-              key={t.name}
-              className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5"
-            >
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                &quot;{t.text}&quot;
-              </p>
-
-              <div>
-                <p className="text-sm font-black text-black dark:text-white">
-                  {t.name}
-                </p>
-
-                <p className="text-xs text-gray-400">
-                  {t.rank}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* ── FAQ ────────────────────────────────────────────────── */}
@@ -370,9 +351,8 @@ export default function ProPage() {
               className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden"
             >
               <button
-                onClick={() =>
-                  setOpenFaq(openFaq === i ? null : i)
-                }
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                aria-expanded={openFaq === i}
                 className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
               >
                 <span className="text-sm font-semibold text-black dark:text-white">
@@ -400,12 +380,10 @@ export default function ProPage() {
 
       {/* ── Bottom CTA ─────────────────────────────────────────── */}
       <div className="bg-black dark:bg-white rounded-3xl p-8 text-center relative overflow-hidden">
-
         <div
           className="absolute inset-0 opacity-5"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
             backgroundSize: "24px 24px",
           }}
         />
@@ -424,7 +402,9 @@ export default function ProPage() {
             disabled={loading}
             className="px-8 py-3.5 rounded-2xl bg-white dark:bg-black text-black dark:text-white text-sm font-black hover:opacity-90 disabled:opacity-50 transition-all"
           >
-            {loading ? "Processing..." : "Get PRO →"}
+            {loading
+              ? "Processing..."
+              : `Upgrade Now • ₹${plan.total}`}
           </button>
         </div>
       </div>
