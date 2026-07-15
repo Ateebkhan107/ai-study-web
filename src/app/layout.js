@@ -1,5 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import {
   DASHBOARD_ROUTE,
   ONBOARDING_ROUTE,
@@ -21,9 +23,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
-  title: "PREPZII– JEE/NEET Preparation",
+  title: "PREPZII – JEE/NEET Preparation",
 
   description:
     "Your intelligent JEE & NEET preparation platform",
@@ -34,7 +35,6 @@ export const metadata = {
         url: "/images/branding/favicon-16x16.png",
         sizes: "16x16",
       },
-
       {
         url: "/images/branding/favicon-32x32.png",
         sizes: "32x32",
@@ -43,52 +43,32 @@ export const metadata = {
   },
 };
 
-
-
 export default function RootLayout({ children }) {
-
-
   return (
-
     <ClerkProvider
-
       afterSignOutUrl={SIGN_IN_ROUTE}
-
       signInForceRedirectUrl={DASHBOARD_ROUTE}
-
       signUpForceRedirectUrl={ONBOARDING_ROUTE}
-
     >
-
-
       <html
         lang="en"
         suppressHydrationWarning
         className="h-full"
       >
-
+        <head>
+          <Script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            strategy="beforeInteractive"
+          />
+        </head>
 
         <body
-
           suppressHydrationWarning
-
           className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col antialiased`}
-
         >
-
-
           {children}
-
-
         </body>
-
-
       </html>
-
-
     </ClerkProvider>
-
   );
-
-
 }

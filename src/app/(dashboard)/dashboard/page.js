@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { isUserPro } from "@/lib/subscription";
 import Leaderboard from "@/components/analytics/Leaderboard";
 
 import { EXAM_CONFIG } from "@/lib/examConfig";
@@ -7,6 +9,7 @@ import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
 import { currentUser } from "@clerk/nextjs/server";
 import { getUserProfile } from "@/lib/userProfile";
+
 
 export default async function DashboardPage() {
 
