@@ -2,13 +2,29 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium light mode colors: Soft slate with a hint of cool blue */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(99, 102, 241, 0.15);
+  
+  /* Animating Mesh Gradient Backgrounds */
+  --mesh-1: rgba(99, 102, 241, 0.12); /* Indigo */
+  --mesh-2: rgba(139, 92, 246, 0.12); /* Violet */
+  --mesh-3: rgba(236, 72, 153, 0.12); /* Pink */
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Premium dark mode colors: Deep rich slate/navy */
+  --background: #020617;
+  --foreground: #f8fafc;
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(99, 102, 241, 0.25);
+  
+  /* Darker animating mesh gradients */
+  --mesh-1: rgba(99, 102, 241, 0.15);
+  --mesh-2: rgba(139, 92, 246, 0.15);
+  --mesh-3: rgba(16, 185, 129, 0.1);  /* Emerald hint for EdTech vibe */
 }
 
 @theme inline {
@@ -18,16 +34,62 @@
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background 0.2s ease, color 0.2s ease;
+/* ── Smooth Ambient Background Animation ───────────────────────────── */
+@keyframes ambientPan {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
-/* ── Auth page — link hover colours ───────────────────────────── */
-.auth-link { color: #818CF8; }
-.auth-link:hover { color: #A5B4FC; }
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  background-color: var(--background);
+  background-image: 
+    radial-gradient(at 0% 0%, var(--mesh-1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--mesh-3) 0px, transparent 50%);
+  background-size: 150% 150%;
+  animation: ambientPan 20s ease-in-out infinite;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  min-height: 100vh;
+}
+
+/* ── Auth page — animated link hover colours ───────────────────────────── */
+.auth-link { 
+  color: #818CF8; 
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.auth-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, #818CF8, #C084FC);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.auth-link:hover { 
+  color: #C084FC; 
+}
+
+.auth-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
 
 /* ── Clerk — hide internal header & footer chrome ─────────────── */
 .cl-header,
@@ -39,7 +101,7 @@ body {
   display: none !important;
 }
 
-/* ── Clerk — remove the black background on its footer container ─ */
+/* ── Clerk — Glassmorphism Container ──────────────────────────── */
 .cl-card {
   background: transparent !important;
   box-shadow: none !important;
@@ -51,76 +113,140 @@ body {
   box-shadow: none !important;
 }
 
-/* ── Clerk — force all text inside the card to be visible ────────
-   Clerk injects inline colour styles via its internal theme tokens;
-   these overrides ensure nothing disappears on a dark background.  */
+/* ── Clerk — Premium EdTech Form Inputs ───────────────────────── */
 .cl-formFieldLabel {
   color: #94A3B8 !important;
+  font-weight: 500 !important;
+  transition: color 0.3s ease !important;
 }
 
 .cl-formFieldInput {
-  color: #E0E7FF !important;
-  background-color: rgba(99, 102, 241, 0.08) !important;
-  border-color: rgba(99, 102, 241, 0.25) !important;
+  color: var(--foreground) !important;
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) inset !important;
+}
+
+.cl-formFieldInput:hover {
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
 .cl-formFieldInput:focus {
-  border-color: rgba(99, 102, 241, 0.6) !important;
+  border-color: #8B5CF6 !important;
+  background-color: var(--background) !important;
   outline: none !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+  box-shadow: 
+    0 0 0 4px rgba(139, 92, 246, 0.15),
+    0 8px 20px rgba(139, 92, 246, 0.1) !important;
+  transform: translateY(-1px) !important;
 }
 
 .cl-formFieldInput::placeholder {
-  color: #475569 !important;
+  color: #64748B !important;
 }
 
+/* ── Clerk — Dividers ─────────────────────────────────────────── */
 .cl-dividerText {
-  color: #475569 !important;
+  color: #64748B !important;
+  font-weight: 500 !important;
 }
 
 .cl-dividerLine {
-  background-color: rgba(99, 102, 241, 0.2) !important;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent) !important;
+  height: 1px !important;
 }
 
+/* ── Clerk — Social Buttons (Glassy & Interactive) ────────────── */
 .cl-socialButtonsBlockButton {
-  background-color: rgba(99, 102, 241, 0.08) !important;
-  border-color: rgba(99, 102, 241, 0.25) !important;
-  color: #E0E7FF !important;
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  color: var(--foreground) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .cl-socialButtonsBlockButton:hover {
-  background-color: rgba(99, 102, 241, 0.18) !important;
+  background-color: rgba(139, 92, 246, 0.08) !important;
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(139, 92, 246, 0.1) !important;
 }
 
 .cl-socialButtonsBlockButtonText {
-  color: #E0E7FF !important;
+  color: var(--foreground) !important;
+  font-weight: 600 !important;
 }
 
+/* ── Clerk — Vibrant Animated Primary Button ──────────────────── */
 .cl-formButtonPrimary {
-  background-color: #6366F1 !important;
+  background: linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899, #6366F1) !important;
+  background-size: 300% 100% !important;
+  animation: gradientFlow 6s linear infinite !important;
   color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  font-size: 0.875rem !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .cl-formButtonPrimary:hover {
-  background-color: #818CF8 !important;
+  transform: translateY(-2px) scale(1.01) !important;
+  box-shadow: 
+    0 8px 25px rgba(139, 92, 246, 0.4),
+    0 0 12px rgba(236, 72, 153, 0.4) !important;
 }
 
+.cl-formButtonPrimary:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* ── Clerk — Miscellaneous Utilities ──────────────────────────── */
 .cl-identityPreviewText {
-  color: #CBD5E1 !important;
+  color: var(--foreground) !important;
+  font-weight: 500 !important;
 }
 
 .cl-formFieldAction {
-  color: #818CF8 !important;
+  color: #8B5CF6 !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
+}
+
+.cl-formFieldAction:hover {
+  color: #C084FC !important;
 }
 
 .cl-otpCodeFieldInput {
-  color: #E0E7FF !important;
-  background-color: rgba(99, 102, 241, 0.08) !important;
-  border-color: rgba(99, 102, 241, 0.25) !important;
+  color: var(--foreground) !important;
+  background-color: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.cl-otpCodeFieldInput:focus {
+  border-color: #8B5CF6 !important;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15) !important;
+  transform: translateY(-2px) !important;
 }
 
 .cl-alertText {
-  color: #F87171 !important;
+  color: #EF4444 !important;
+  font-weight: 500 !important;
 }
 
 /* ── React PDF Viewer Base Styles ─────────────────────────────── 

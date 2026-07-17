@@ -8,6 +8,7 @@ import { createTestSession } from "@/services/testSessions";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/lib/updateGoalProgress";
+import { updateStreak } from "@/lib/streak";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -189,6 +190,8 @@ await updateGoalProgress(
   "MOCK_TEST",
   1
 );
+
+await updateStreak(user.id);
 
 
 

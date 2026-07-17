@@ -102,32 +102,38 @@ export default function Navbar() {
     pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+    <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-indigo-500/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-colors duration-500">
+      {/* ── Subtle animated bottom glow line ── */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8 relative z-10">
 
         {/* Logo */}
-        <div className="shrink-0">
+        <div className="shrink-0 transform transition-transform duration-300 hover:scale-105">
           <Link href="/dashboard">
             <Logo size={80} />
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 flex items-center justify-center gap-1">
+        <nav className="flex-1 flex items-center justify-center gap-2">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden group ${
                 isActive(item.href)
-                  ? "bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
-                  : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  ? "text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.05)]"
+                  : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/5"
               }`}
             >
-              {item.name}
+              <span className="relative z-10">{item.name}</span>
+              
+              {/* Subtle hover background sweep */}
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               {isActive(item.href) && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-black dark:bg-white rounded-full" />
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-t-full shadow-[0_-2px_8px_rgba(99,102,241,0.6)]" />
               )}
             </Link>
           ))}
@@ -135,29 +141,40 @@ export default function Navbar() {
           {/* PrepZii Pro */}
           <Link
             href={isPro ? "/pro" : "/pricing"}
-            className={`px-4 py-2 rounded-lg text-sm font-bold transition ${
+            className={`relative ml-2 inline-flex items-center justify-center px-5 py-2 rounded-xl text-sm font-bold overflow-hidden transition-all duration-500 hover:-translate-y-0.5 active:translate-y-0 ${
               isPro
-                ? "bg-gradient-to-r from-yellow-500 to-amber-500 text-white"
-                : "bg-[#1e3a5f] text-white hover:opacity-90"
+                ? "bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.5)]"
+                : "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white shadow-[0_4px_15px_rgba(99,102,241,0.3)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.5)] bg-[length:200%_auto] hover:bg-right"
             }`}
           >
-            {isPro ? "⭐ PRO" : "PrepZii Pro"}
+            {/* Shimmer effect overlay */}
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent hover:animate-[shimmer_1.5s_infinite]" />
+            <span className="relative z-10 flex items-center gap-1.5 drop-shadow-sm">
+              {isPro ? "⭐ PRO" : "✨ PrepZii Pro"}
+            </span>
           </Link>
         </nav>
 
         {/* Right Side */}
-        <div className="shrink-0 flex items-center gap-3">
+        <div className="shrink-0 flex items-center gap-4">
 
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center bg-gray-50 dark:bg-gray-800"
+            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md hover:border-indigo-500/30 active:scale-95 group overflow-hidden"
           >
-            🌙
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <span className="relative z-10 text-lg transition-transform duration-700 group-hover:rotate-[360deg]">
+              🌙
+            </span>
           </button>
 
-          <NotificationBell track={track} />
+          <div className="transform transition-transform duration-300 hover:scale-105">
+            <NotificationBell track={track} />
+          </div>
 
-          <ProfileMenu />
+          <div className="transform transition-transform duration-300 hover:scale-105">
+            <ProfileMenu />
+          </div>
 
         </div>
       </div>

@@ -11,7 +11,7 @@ amount = 1
 if(!userId || !goalType) return;
 
 
-
+const today = new Date().toISOString().split("T")[0];
 
 // 1. Find active goals
 
@@ -99,31 +99,26 @@ newProgress >= goal.target_value;
 
 
 await supabase
-
 .from("user_daily_goals")
-
 .upsert({
 
-user_id:userId,
+user_id: userId,
 
-goal_id:goal.id,
+goal_id: goal.id,
 
-progress:newProgress,
+goal_date: today,
+
+progress: newProgress,
 
 completed,
 
-completed_at:
+completed_at: completed
+  ? new Date().toISOString()
+  : null
 
-completed
-
-?
-
-new Date()
-
-:
-
-null
-
+},
+{
+  onConflict: "user_id,goal_id,goal_date"
 });
 
 

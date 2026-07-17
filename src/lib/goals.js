@@ -86,7 +86,7 @@ goal.id
 today
 )
 
-.single();
+.maybeSingle();
 
 
 
