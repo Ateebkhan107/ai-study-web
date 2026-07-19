@@ -12,7 +12,7 @@ export async function getUserAnalytics(userId) {
     .eq("user_id", userId)
     .order("created_at", { ascending: true });
 
-  if (error) throw error;
+  if (error) throw new Error(error.message || JSON.stringify(error));
 
   const totalTests = attempts.length;
 
@@ -64,18 +64,25 @@ export async function getUserAnalytics(userId) {
      WEAK TOPICS ANALYTICS
   ========================= */
 
-  const { data: answers, error: answerError } = await supabase
-    .from("user_answers")
-    .select(`
-      is_correct,
-      questions(
-        subject,
-        chapter
-      )
-    `)
-    .eq("user_id", userId);
+  const attemptIds = attempts.map(a => a.id);
+  
+  let answers = [];
+  if (attemptIds.length > 0) {
+    const { data: fetchedAnswers, error: answerError } = await supabase
+      .from("user_answers")
+      .select(`
+        is_correct,
+        created_at,
+        questions(
+          subject,
+          chapter
+        )
+      `)
+      .in("attempt_id", attemptIds);
 
-  if (answerError) throw answerError;
+    if (answerError) throw new Error(answerError.message || JSON.stringify(answerError));
+    answers = fetchedAnswers || [];
+  }
 
   const chapterMap = {};
   const subjectMap = {};

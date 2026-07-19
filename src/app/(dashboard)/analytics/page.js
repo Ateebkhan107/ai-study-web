@@ -37,8 +37,13 @@ export default function AnalyticsPage() {
   }, [user]);
 
   async function loadUserStats() {
-    const data = await getUserAnalytics(user.id);
-    setStats(data);
+    try {
+      const data = await getUserAnalytics(user.id);
+      setStats(data);
+    } catch (err) {
+      console.error("Failed to load user stats:", err);
+      // Fallback or ignore; components will use mock data if stats is null
+    }
   }
 
   useEffect(() => {

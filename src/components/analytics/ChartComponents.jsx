@@ -152,8 +152,9 @@ export function PerformanceTrend({ track, data = [] }) {
 // ─────────────────────────────────────────────────────────────────
 // SubjectDistribution — Donut + progress bars
 // ─────────────────────────────────────────────────────────────────
-export function SubjectDistribution({ track = "jee" }) {
-  const filteredDistribution = SUBJECT_DISTRIBUTION.filter((s) => {
+export function SubjectDistribution({ track = "jee", liveData }) {
+  const baseData = liveData && liveData.length > 0 ? liveData : SUBJECT_DISTRIBUTION;
+  const filteredDistribution = baseData.filter((s) => {
     const sub = s.subject.toLowerCase();
     if (track === "jee" && sub === "biology") return false;
     if (track === "neet" && (sub === "maths" || sub === "mathematics")) return false;
@@ -217,17 +218,21 @@ export function SubjectDistribution({ track = "jee" }) {
 // ─────────────────────────────────────────────────────────────────
 // SkillRadar — Radar chart
 // ─────────────────────────────────────────────────────────────────
-export function SkillRadar({ track = "jee" }) {
+export function SkillRadar({ track = "jee", liveLabels, liveYou, liveTopper }) {
+  const baseLabels = liveLabels && liveLabels.length > 0 ? liveLabels : RADAR_LABELS;
+  const baseYou = liveYou && liveYou.length > 0 ? liveYou : RADAR_YOU;
+  const baseTopper = liveTopper && liveTopper.length > 0 ? liveTopper : RADAR_TOPPER;
+
   const filteredRadarIndices = [];
-  RADAR_LABELS.forEach((label, index) => {
+  baseLabels.forEach((label, index) => {
     if (track === "jee" && label.toLowerCase().includes("genetics")) return;
     if (track === "neet" && label.toLowerCase().includes("calculus")) return;
     filteredRadarIndices.push(index);
   });
 
-  const filteredLabels = filteredRadarIndices.map((i) => RADAR_LABELS[i]);
-  const filteredYou = filteredRadarIndices.map((i) => RADAR_YOU[i]);
-  const filteredTopper = filteredRadarIndices.map((i) => RADAR_TOPPER[i]);
+  const filteredLabels = filteredRadarIndices.map((i) => baseLabels[i]);
+  const filteredYou = filteredRadarIndices.map((i) => baseYou[i]);
+  const filteredTopper = filteredRadarIndices.map((i) => baseTopper[i]);
 
   useChart("skillRadarChart", (dark) => ({
     type: "radar",
@@ -292,11 +297,12 @@ export function SkillRadar({ track = "jee" }) {
 // ─────────────────────────────────────────────────────────────────
 // TopicWeakness — Horizontal bar + ranked list
 // ─────────────────────────────────────────────────────────────────
-export function TopicWeakness({ track = "jee" }) {
+export function TopicWeakness({ track = "jee", liveData }) {
   const isNeet = track === "neet";
+  const baseData = liveData && liveData.length > 0 ? liveData : TOPIC_WEAKNESS;
 
   // Translate topic matrix items to maintain row count parity cleanly
-  const processedTopics = TOPIC_WEAKNESS.map((t) => {
+  const processedTopics = baseData.map((t) => {
     if (isNeet && t.topic === "Integration") {
       return { ...t, topic: "Genetics Maps" };
     }
@@ -367,14 +373,16 @@ export function TopicWeakness({ track = "jee" }) {
 // ─────────────────────────────────────────────────────────────────
 // TimeAnalytics — Bar chart + summary stats
 // ─────────────────────────────────────────────────────────────────
-export function TimeAnalytics({ track = "jee" }) {
+export function TimeAnalytics({ track = "jee", liveData }) {
+  const baseData = liveData && liveData.length > 0 ? liveData : TIME_BY_DAY;
+
   useChart("timeBarChart", (dark) => ({
     type: "bar",
     data: {
-      labels: TIME_BY_DAY.map((d) => d.day),
+      labels: baseData.map((d) => d.day),
       datasets: [{
         label: "Hours",
-        data: TIME_BY_DAY.map((d) => d.hours),
+        data: baseData.map((d) => d.hours),
         backgroundColor: dark ? "rgba(55,138,221,0.7)" : "#378ADD",
         borderRadius: 4,
         borderSkipped: false,
@@ -389,10 +397,10 @@ export function TimeAnalytics({ track = "jee" }) {
         y: { max: 5, grid: { color: gridColor(dark) }, ticks: { color: tickColor(dark), font: { size: 11 }, stepSize: 1 } },
       },
     },
-  }), [track]);
+  }), [track, liveData]);
 
-  const avg = (TIME_BY_DAY.reduce((s, d) => s + d.hours, 0) / TIME_BY_DAY.length).toFixed(1);
-  const peak = TIME_BY_DAY.reduce((a, b) => a.hours > b.hours ? a : b).day;
+  const avg = baseData.length > 0 ? (baseData.reduce((s, d) => s + d.hours, 0) / baseData.length).toFixed(1) : 0;
+  const peak = baseData.length > 0 ? baseData.reduce((a, b) => a.hours > b.hours ? a : b).day : "N/A";
 
   return (
     <div className="glass-card p-5">
