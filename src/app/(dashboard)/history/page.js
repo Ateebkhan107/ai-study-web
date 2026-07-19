@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import PageWrapper from "@/components/PageWrapper";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
@@ -186,21 +187,24 @@ function categoryColor(cat) {
     Maths: "bg-orange-500/10 text-orange-500",
     Biology: "bg-teal-500/10 text-teal-500",
   };
-  return map[cat] || "bg-gray-500/10 text-gray-500";
+  return map[cat] || "bg-slate-500/10 text-slate-500";
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function StatCard({ icon, label, value, sub }) {
+function StatCard({ icon, label, value, sub, delay = "0ms" }) {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 flex items-start gap-4">
-      <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0 text-gray-500 dark:text-gray-400">
+    <div 
+      className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-5 flex items-start gap-4 animate-slideUp"
+      style={{ animationDelay: delay }}
+    >
+      <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-500 dark:text-indigo-400">
         {icon}
       </div>
       <div>
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">{label}</p>
-        <p className="text-2xl font-black text-black dark:text-white leading-none tracking-tight">{value}</p>
-        {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+        <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{label}</p>
+        <p className="text-2xl font-black text-slate-900 dark:text-white leading-none tracking-tight">{value}</p>
+        {sub && <p className="text-xs text-slate-400 mt-1">{sub}</p>}
       </div>
     </div>
   );
@@ -210,7 +214,7 @@ function AccuracyBar({ accuracy }) {
   const meta = accuracyMeta(accuracy);
   return (
     <div className="flex items-center gap-2 min-w-[100px]">
-      <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
+      <div className="flex-1 h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
         <div
           className={`h-full rounded-full ${meta.bar}`}
           style={{ width: `${accuracy}%` }}
@@ -225,48 +229,48 @@ function AccuracyBar({ accuracy }) {
 function TestCard({ test }) {
   const meta = accuracyMeta(test.accuracy);
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 flex flex-col gap-3 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
+    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-4 flex flex-col gap-3 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
       <div className="flex items-start justify-between gap-2">
         <div className="flex flex-col gap-1.5 min-w-0">
           <span className={`self-start inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
             {test.category}
           </span>
-          <p className="text-sm font-semibold text-black dark:text-white leading-snug">{test.name}</p>
-          <p className="text-xs text-gray-400">{formatDate(test.date)}</p>
+          <p className="text-sm font-semibold text-slate-900 dark:text-white leading-snug">{test.name}</p>
+          <p className="text-xs text-slate-400">{formatDate(test.date)}</p>
         </div>
         <div className="text-right shrink-0">
           <p className={`text-xl font-black ${meta.color}`}>{test.accuracy}%</p>
-          <p className="text-xs text-gray-400">accuracy</p>
+          <p className="text-xs text-slate-400">accuracy</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-800 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden text-center">
+      <div className="grid grid-cols-3 divide-x divide-slate-100 dark:divide-slate-800 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden text-center">
         <div className="py-2">
-          <p className="text-xs text-gray-400 mb-0.5">Score</p>
-          <p className="text-xs font-bold text-black dark:text-white">
-            {test.score}<span className="text-gray-400 font-normal">/{test.maxScore}</span>
+          <p className="text-xs text-slate-400 mb-0.5">Score</p>
+          <p className="text-xs font-bold text-slate-900 dark:text-white">
+            {test.score}<span className="text-slate-400 font-normal">/{test.maxScore}</span>
           </p>
         </div>
         <div className="py-2">
-          <p className="text-xs text-gray-400 mb-0.5">Questions</p>
-          <p className="text-xs font-bold text-black dark:text-white">{test.questions}</p>
+          <p className="text-xs text-slate-400 mb-0.5">Questions</p>
+          <p className="text-xs font-bold text-slate-900 dark:text-white">{test.questions}</p>
         </div>
         <div className="py-2">
-          <p className="text-xs text-gray-400 mb-0.5">Time</p>
-          <p className="text-xs font-bold text-black dark:text-white">{formatTime(test.timeTaken)}</p>
+          <p className="text-xs text-slate-400 mb-0.5">Time</p>
+          <p className="text-xs font-bold text-slate-900 dark:text-white">{formatTime(test.timeTaken)}</p>
         </div>
       </div>
 
       <div className="flex gap-2">
         <Link
           href={`/test/result?id=${test.id}`}
-          className="flex-1 h-8 flex items-center justify-center text-xs font-semibold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+          className="flex-1 h-8 flex items-center justify-center text-xs bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
         >
           View Result
         </Link>
         <Link
           href={`/test/review?id=${test.id}`}
-          className="flex-1 h-8 flex items-center justify-center text-xs font-semibold rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          className="flex-1 h-8 flex items-center justify-center text-xs border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
         >
           Review Answers
         </Link>
@@ -278,44 +282,44 @@ function TestCard({ test }) {
 // Desktop table row
 function TableRow({ test, isLast }) {
   return (
-    <tr className={`group hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors ${!isLast ? "border-b border-gray-100 dark:border-gray-800" : ""}`}>
+    <tr className={`group hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors ${!isLast ? "border-b border-slate-200/60 dark:border-slate-700/50" : ""}`}>
       <td className="py-4 pl-6 pr-4">
         <div className="flex items-center gap-3">
           <span className={`shrink-0 inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
             {test.category}
           </span>
-          <span className="text-sm font-semibold text-black dark:text-white leading-snug">
+          <span className="text-sm font-semibold text-slate-900 dark:text-white leading-snug">
             {test.name}
           </span>
         </div>
       </td>
-      <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+      <td className="py-4 px-4 text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">
         {formatDate(test.date)}
       </td>
-      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums text-center">
+      <td className="py-4 px-4 text-sm font-semibold text-slate-900 dark:text-white tabular-nums text-center">
         {test.questions}
       </td>
       <td className="py-4 px-4">
         <AccuracyBar accuracy={test.accuracy} />
       </td>
-      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums whitespace-nowrap">
+      <td className="py-4 px-4 text-sm font-semibold text-slate-900 dark:text-white tabular-nums whitespace-nowrap">
         {formatTime(test.timeTaken)}
       </td>
-      <td className="py-4 px-4 text-sm font-semibold text-black dark:text-white tabular-nums whitespace-nowrap">
+      <td className="py-4 px-4 text-sm font-semibold text-slate-900 dark:text-white tabular-nums whitespace-nowrap">
         {test.score}
-        <span className="text-gray-400 font-normal text-xs"> /{test.maxScore}</span>
+        <span className="text-slate-400 font-normal text-xs"> /{test.maxScore}</span>
       </td>
       <td className="py-4 pl-4 pr-6">
         <div className="flex items-center gap-2">
           <Link
             href={`/test/result?id=${test.id}`}
-            className="h-7 px-3 flex items-center text-xs font-semibold rounded-lg bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors whitespace-nowrap"
+            className="h-7 px-3 flex items-center text-xs bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 whitespace-nowrap"
           >
             View Result
           </Link>
           <Link
             href={`/test/review?id=${test.id}`}
-            className="h-7 px-3 flex items-center text-xs font-semibold rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors whitespace-nowrap"
+            className="h-7 px-3 flex items-center text-xs border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 whitespace-nowrap"
           >
             Review Answers
           </Link>
@@ -361,27 +365,15 @@ export default function TestHistoryPage() {
   }, [activeFilter, search]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-
-      {/* ── Header ── */}
-      <div className="mb-8">
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-          History
-        </p>
-        <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
-          Test History
-        </h1>
-        <p className="mt-1 text-sm text-gray-400">
-          Track all your previous attempts and performance.
-        </p>
-      </div>
+    <PageWrapper title='Test History' subtitle='Track all your previous attempts and performance.' badge='HISTORY 📋'>
 
       {/* ── Stats ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8 animate-slideUp">
         <StatCard
           label="Total Tests"
           value={stats.total}
           sub="all time"
+          delay="0ms"
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
@@ -392,6 +384,7 @@ export default function TestHistoryPage() {
           label="Avg Accuracy"
           value={`${stats.avgAcc}%`}
           sub="across all tests"
+          delay="100ms"
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -402,6 +395,7 @@ export default function TestHistoryPage() {
           label="Best Score"
           value={`${stats.best}%`}
           sub="highest accuracy"
+          delay="200ms"
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -412,6 +406,7 @@ export default function TestHistoryPage() {
           label="Study Time"
           value={stats.studyTime}
           sub="total in tests"
+          delay="300ms"
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
@@ -427,7 +422,7 @@ export default function TestHistoryPage() {
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+            className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
           >
             <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
           </svg>
@@ -436,12 +431,12 @@ export default function TestHistoryPage() {
             placeholder="Search tests…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full h-9 pl-9 pr-8 rounded-xl text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-black dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black/10 dark:focus:ring-white/10 transition"
+            className="w-full h-9 pl-9 pr-8 rounded-xl text-sm bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
           />
           {search && (
             <button
               onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
               aria-label="Clear search"
             >
               <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
@@ -459,8 +454,8 @@ export default function TestHistoryPage() {
               onClick={() => setActiveFilter(f)}
               className={`px-3 h-9 rounded-xl text-xs font-semibold transition-all border ${
                 activeFilter === f
-                  ? "bg-black dark:bg-white text-white dark:text-black border-transparent"
-                  : "bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
+                  ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-transparent"
+                  : "bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border-slate-200/60 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 hover:border-slate-400 dark:hover:border-slate-500"
               }`}
             >
               {f}
@@ -470,17 +465,17 @@ export default function TestHistoryPage() {
       </div>
 
       {/* ── Count ── */}
-      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+      <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
         {filtered.length} Test{filtered.length !== 1 ? "s" : ""}
       </p>
 
       {/* ── Empty state ── */}
       {filtered.length === 0 && (
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-16 text-center">
-          <p className="text-gray-400 text-sm mb-3">No tests match your search or filter.</p>
+        <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-16 text-center">
+          <p className="text-slate-400 text-sm mb-3">No tests match your search or filter.</p>
           <button
             onClick={() => { setActiveFilter("All"); setSearch(""); }}
-            className="text-xs font-semibold text-black dark:text-white underline underline-offset-2"
+            className="text-xs font-semibold text-slate-900 dark:text-white underline underline-offset-2"
           >
             Clear filters
           </button>
@@ -489,29 +484,29 @@ export default function TestHistoryPage() {
 
       {/* ── Desktop Table ── */}
       {filtered.length > 0 && (
-        <div className="hidden md:block bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden">
+        <div className="hidden md:block bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-800/30">
-                <th className="py-3 pl-6 pr-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+              <tr className="border-b border-slate-200/60 dark:border-slate-700/50 bg-slate-50/60 dark:bg-slate-800/30">
+                <th className="py-3 pl-6 pr-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Test Name
                 </th>
-                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                <th className="py-3 px-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest whitespace-nowrap">
                   Date
                 </th>
-                <th className="py-3 px-4 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <th className="py-3 px-4 text-center text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Qs
                 </th>
-                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <th className="py-3 px-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Accuracy
                 </th>
-                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                <th className="py-3 px-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest whitespace-nowrap">
                   Time Taken
                 </th>
-                <th className="py-3 px-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <th className="py-3 px-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Score
                 </th>
-                <th className="py-3 pl-4 pr-6 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <th className="py-3 pl-4 pr-6 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Action
                 </th>
               </tr>
@@ -538,6 +533,6 @@ export default function TestHistoryPage() {
         </div>
       )}
 
-    </div>
+    </PageWrapper>
   );
 }

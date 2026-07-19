@@ -6,6 +6,7 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
+import PageWrapper from "@/components/PageWrapper";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -42,13 +43,13 @@ const I = {
 };
 
 // ─── Theme CSS Token Configs ──────────────────────────────────────────────────
-const BG_SURFACE  = "bg-white      dark:bg-gray-900/40 backdrop-blur-md";
-const BG_SUNKEN   = "bg-gray-100   dark:bg-gray-950/50";
-const BORDER      = "border-gray-200  dark:border-gray-800/60";
-const BORDER_HV   = "hover:border-gray-300 dark:hover:border-gray-700";
-const TXT         = "text-gray-900  dark:text-[#e6edf3]";
-const TXT_MUTED   = "text-gray-500  dark:text-[#7d8590]";
-const ACTIVE_PILL = "bg-gray-900 text-white dark:bg-white dark:text-[#0d1117]";
+const BG_SURFACE  = "bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl";
+const BG_SUNKEN   = "bg-slate-50 dark:bg-slate-800/50";
+const BORDER      = "border-slate-200/60 dark:border-slate-700/50";
+const BORDER_HV   = "hover:border-indigo-500/30 dark:hover:border-indigo-500/30";
+const TXT         = "text-slate-900 dark:text-slate-100";
+const TXT_MUTED   = "text-slate-500 dark:text-slate-400";
+const ACTIVE_PILL = "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm";
 const DIFFICULTY_BADGE = {
   Easy:   "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
   Medium: "bg-amber-500/10   text-amber-600   dark:text-amber-400   border border-amber-500/20",
@@ -71,7 +72,6 @@ const MASTER_SUBJECTS = [
 
 const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
 
-// Practice mode options for the selector.
 const PRACTICE_MODES = [
   { id: "full",     label: "Full Paper",   description: "Solve complete exam paper", Icon: I.FileText },
   { id: "chapter",  label: "Chapter Wise", description: "Practice selected chapters", Icon: I.Library  },
@@ -94,8 +94,8 @@ const MASTER_SAVED = [
 ];
 
 const SUBJECT_BAR_COLORS = {
-  Physics:     "#3b82f6",
-  Chemistry:   "#a855f7",
+  Physics:     "#6366F1",
+  Chemistry:   "#8B5CF6",
   Mathematics: "#06b6d4",
   Maths:       "#06b6d4",
   Biology:     "#10b981",
@@ -104,18 +104,30 @@ const SUBJECT_BAR_COLORS = {
 // ─── Shared Atomic Components ─────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
-    <div className={`group relative border ${BORDER} ${BG_SURFACE} p-5 rounded-2xl ${BORDER_HV} transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg`}>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+    <div className={`premium-stat-card group cursor-default`}>
+      {/* Gradient overlay */}
+      <div
+        className="absolute inset-0 bg-gradient-to-br opacity-30 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none rounded-3xl"
+        style={{ background: `linear-gradient(135deg, ${accent}15, transparent)` }}
+      />
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex items-center justify-between mb-3">
           <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>{label}</p>
-          <div className="opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: accent }}>
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500"
+            style={{ background: `${accent}15`, color: accent }}
+          >
             <IconComp size={18} />
           </div>
         </div>
         <div>
-          <p className={`text-2xl sm:text-3xl font-black tracking-tight ${TXT} mb-0.5`}>{value}</p>
-          <p className={`text-[11px] font-semibold ${TXT_MUTED} truncate`}>{sublabel}</p>
+          <p
+            className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-0.5 bg-gradient-to-br bg-clip-text text-transparent"
+            style={{ backgroundImage: `linear-gradient(135deg, ${accent}, ${accent}cc)` }}
+          >
+            {value}
+          </p>
+          <p className={`text-[11px] font-medium ${TXT_MUTED} truncate`}>{sublabel}</p>
         </div>
       </div>
     </div>
@@ -134,174 +146,100 @@ function PracticeTab({ subjects, track }) {
   const [selectedPaper,    setSelectedPaper]    = useState(null);
   const [loadingPapers,    setLoadingPapers]    = useState(false);
 
-  // Chapter Wise mode state
   const [chapters,        setChapters]        = useState([]);
   const [selectedChapter, setSelectedChapter] = useState("");
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [chapterError,    setChapterError]    = useState("");
 
-  // Load chapters only for Chapter Wise mode, once a subject is selected.
   useEffect(() => {
     if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
       setChapters([]);
       setSelectedChapter("");
       return;
     }
-
     let cancelled = false;
-
     async function loadChapters() {
       setLoadingChapters(true);
       setChapterError("");
       try {
         const subjectLabel = subjects.find((s) => s.id === selectedSubjects[0])?.label;
-        if (!subjectLabel) {
-          if (!cancelled) setChapters([]);
-          return;
-        }
-
+        if (!subjectLabel) { if (!cancelled) setChapters([]); return; }
         const params = new URLSearchParams();
         params.set("exam", track.toUpperCase());
         params.set("subject", subjectLabel);
-
         const res = await fetch(`/api/pyq/chapters?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load chapters");
-
         const data = await res.json();
-        if (!cancelled) {
-          setChapters(Array.isArray(data) ? data : []);
-          setSelectedChapter("");
-        }
+        if (!cancelled) { setChapters(Array.isArray(data) ? data : []); setSelectedChapter(""); }
       } catch (error) {
         console.error("Failed to load chapters:", error);
-        if (!cancelled) {
-          setChapters([]);
-          setChapterError("Failed to load chapters. Please try again.");
-        }
-      } finally {
-        if (!cancelled) setLoadingChapters(false);
-      }
+        if (!cancelled) { setChapters([]); setChapterError("Failed to load chapters. Please try again."); }
+      } finally { if (!cancelled) setLoadingChapters(false); }
     }
-
     loadChapters();
     return () => { cancelled = true; };
   }, [practiceMode, selectedSubjects, subjects, track]);
 
-  // Load papers based on track and selected years
   useEffect(() => {
     if (!track) return;
-    
     let cancelled = false;
-
     async function loadPapers() {
       setLoadingPapers(true);
       try {
         const params = new URLSearchParams();
         params.set("exam", track.toUpperCase());
-        
-        if (selectedYears.length > 0) {
-          params.set("year", selectedYears[0]);
-        }
-
+        if (selectedYears.length > 0) params.set("year", selectedYears[0]);
         const res = await fetch(`/api/pyq/papers?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load papers");
-
         const data = await res.json();
-        if (!cancelled) {
-          setPapers(Array.isArray(data) ? data : []);
-          setSelectedPaper(null);
-        }
+        if (!cancelled) { setPapers(Array.isArray(data) ? data : []); setSelectedPaper(null); }
       } catch (error) {
         console.error("Failed to load papers:", error);
-        if (!cancelled) {
-          setPapers([]);
-          setSelectedPaper(null);
-        }
-      } finally {
-        if (!cancelled) setLoadingPapers(false);
-      }
+        if (!cancelled) { setPapers([]); setSelectedPaper(null); }
+      } finally { if (!cancelled) setLoadingPapers(false); }
     }
-
     loadPapers();
     return () => { cancelled = true; };
   }, [track, selectedYears]);
 
   function handleStartDeck() {
-    if (selectedSubjects.length === 0) {
-      setSubjectError("Please select at least one subject to start.");
-      return;
-    }
-
-    if (practiceMode === "full" && papers.length > 0 && !selectedPaper) {
-      setSubjectError("Please select a paper");
-      return;
-    }
-
-    if (practiceMode === "chapter" && !selectedChapter) {
-      setSubjectError("Please select a chapter");
-      return;
-    }
-
+    if (selectedSubjects.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
+    if (practiceMode === "full" && papers.length > 0 && !selectedPaper) { setSubjectError("Please select a paper"); return; }
+    if (practiceMode === "chapter" && !selectedChapter) { setSubjectError("Please select a chapter"); return; }
     setSubjectError("");
-
-    const subjectLabels = subjects
-      .filter((s) => selectedSubjects.includes(s.id))
-      .map((s) => s.label);
-
+    const subjectLabels = subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label);
     const params = new URLSearchParams();
     params.set("exam", track.toUpperCase());
     params.set("subjects", subjectLabels.join(","));
-
-    if (selectedYears.length > 0) {
-      params.set("years", selectedYears.join(","));
-    }
-
+    if (selectedYears.length > 0) params.set("years", selectedYears.join(","));
     params.set("mode", practiceMode);
-
-    if (practiceMode === "chapter" && selectedChapter) {
-      params.set("chapter", selectedChapter);
-    }
-
+    if (practiceMode === "chapter" && selectedChapter) params.set("chapter", selectedChapter);
     if (selectedPaper) {
       if (selectedPaper.exam_type) params.set("exam_type", selectedPaper.exam_type);
       if (selectedPaper.attempt) params.set("attempt", selectedPaper.attempt);
       if (selectedPaper.shift) params.set("shift", selectedPaper.shift);
     }
-
     router.push(`/pyq/session?${params.toString()}`);
   }
 
-  const toggleSubject = (id) =>
-    setSelectedSubjects((p) =>
-      p.includes(id) ? p.filter((s) => s !== id) : [...p, id]
-    );
-
-  const toggleYear = (yr) =>
-    setSelectedYears((p) =>
-      p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr]
-    );
+  const toggleSubject = (id) => setSelectedSubjects((p) => p.includes(id) ? p.filter((s) => s !== id) : [...p, id]);
+  const toggleYear = (yr) => setSelectedYears((p) => p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
-
-      {/* Left — subject + year + mode + chapter selectors */}
+      {/* Left — selectors */}
       <div className="space-y-4">
-
         {/* Subject selector */}
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            01 — SELECT SUBJECTS
-          </p>
+        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "150ms" }}>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {subjects.map((s) => {
               const active = selectedSubjects.includes(s.id);
               return (
-                <button
-                  key={s.id}
-                  onClick={() => toggleSubject(s.id)}
-                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer ${
+                <button key={s.id} onClick={() => toggleSubject(s.id)}
+                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer duration-200 ${
                     active
-                      ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                      ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
@@ -314,18 +252,14 @@ function PracticeTab({ subjects, track }) {
         </div>
 
         {/* Year selector */}
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            02 — SELECT YEAR BULLETINS
-          </p>
+        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "225ms" }}>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — SELECT YEAR BULLETINS</p>
           <div className="flex flex-wrap gap-2">
             {YEARS.map((yr) => (
-              <button
-                key={yr}
-                onClick={() => toggleYear(yr)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
+              <button key={yr} onClick={() => toggleYear(yr)}
+                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer duration-200 ${
                   selectedYears.includes(yr)
-                    ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                    ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                     : `${BORDER} ${TXT_MUTED}`
                 }`}
               >
@@ -337,37 +271,24 @@ function PracticeTab({ subjects, track }) {
 
         {/* Paper selector */}
         {papers.length > 0 && (
-          <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-              03 — SELECT PAPER
-            </p>
+          <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT PAPER</p>
             {loadingPapers ? (
               <p className={`text-sm ${TXT_MUTED}`}>Loading papers...</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {papers.map((p) => {
-                  const isActive = 
-                    selectedPaper?.year === p.year && 
-                    selectedPaper?.exam_type === p.exam_type && 
-                    selectedPaper?.attempt === p.attempt && 
-                    selectedPaper?.shift === p.shift;
-                  
+                  const isActive = selectedPaper?.year === p.year && selectedPaper?.exam_type === p.exam_type && selectedPaper?.attempt === p.attempt && selectedPaper?.shift === p.shift;
                   return (
-                    <button
-                      key={`${p.year}-${p.exam_type}-${p.attempt}-${p.shift}`}
-                      onClick={() => setSelectedPaper(p)}
-                      className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left ${
+                    <button key={`${p.year}-${p.exam_type}-${p.attempt}-${p.shift}`} onClick={() => setSelectedPaper(p)}
+                      className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
                         isActive
-                          ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                          ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                           : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                       }`}
                     >
-                      <span className="text-sm font-bold">
-                        {track.toUpperCase()} {p.exam_type || (track === "neet" ? "UG" : "")}
-                      </span>
-                      <span className="text-xs font-semibold">
-                        {p.year} {track === "neet" && !p.exam_type ? "PAPER" : ""}
-                      </span>
+                      <span className="text-sm font-bold">{track.toUpperCase()} {p.exam_type || (track === "neet" ? "UG" : "")}</span>
+                      <span className="text-xs font-semibold">{p.year} {track === "neet" && !p.exam_type ? "PAPER" : ""}</span>
                       {p.attempt && <span className="text-xs">{p.attempt}</span>}
                       {p.shift && <span className="text-xs opacity-80">{p.shift}</span>}
                     </button>
@@ -379,20 +300,16 @@ function PracticeTab({ subjects, track }) {
         )}
 
         {/* Practice mode selector */}
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            04 — PRACTICE MODE
-          </p>
+        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — PRACTICE MODE</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
               return (
-                <button
-                  key={m.id}
-                  onClick={() => setPracticeMode(m.id)}
-                  className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left ${
+                <button key={m.id} onClick={() => setPracticeMode(m.id)}
+                  className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
                     active
-                      ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                      ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
@@ -407,38 +324,21 @@ function PracticeTab({ subjects, track }) {
           </div>
         </div>
 
-        {/* Chapter selector — only for Chapter Wise mode */}
+        {/* Chapter selector */}
         {practiceMode === "chapter" && (
-          <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-              05 — SELECT CHAPTER
-            </p>
-
-            {selectedSubjects.length === 0 && (
-              <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>
-            )}
-
-            {selectedSubjects.length > 0 && loadingChapters && (
-              <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>
-            )}
-
-            {selectedSubjects.length > 0 && !loadingChapters && chapterError && (
-              <p className="text-sm text-red-500">{chapterError}</p>
-            )}
-
-            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && (
-              <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>
-            )}
-
+          <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>05 — SELECT CHAPTER</p>
+            {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
+            {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
             {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {chapters.map((ch) => (
-                  <button
-                    key={ch}
-                    onClick={() => setSelectedChapter(ch)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
+                  <button key={ch} onClick={() => setSelectedChapter(ch)}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer duration-200 ${
                       selectedChapter === ch
-                        ? "border-sky-500 bg-sky-500/5 !text-gray-900 dark:!text-white"
+                        ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                         : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                     }`}
                   >
@@ -453,41 +353,28 @@ function PracticeTab({ subjects, track }) {
 
       {/* Right — start button */}
       <div>
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 space-y-3`}>
+        <div className={`glass-card p-5 space-y-3 sticky top-24 animate-slideUp`} style={{ animationDelay: "150ms" }}>
           <div className="space-y-2 mb-2">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>
-              SESSION SUMMARY
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>SESSION SUMMARY</p>
+            <p className={`text-xs ${TXT_MUTED}`}>
+              {selectedSubjects.length > 0 ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected` : "No subjects selected"}
             </p>
             <p className={`text-xs ${TXT_MUTED}`}>
-              {selectedSubjects.length > 0
-                ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected`
-                : "No subjects selected"}
+              {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
             </p>
-            <p className={`text-xs ${TXT_MUTED}`}>
-              {selectedYears.length > 0
-                ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}`
-                : "All years"}
-            </p>
-            <p className={`text-xs ${TXT_MUTED}`}>
-              Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}
-            </p>
+            <p className={`text-xs ${TXT_MUTED}`}>Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}</p>
             {practiceMode === "chapter" && (
-              <p className={`text-xs ${TXT_MUTED}`}>
-                {selectedChapter ? `Chapter: ${selectedChapter}` : "No chapter selected"}
-              </p>
+              <p className={`text-xs ${TXT_MUTED}`}>{selectedChapter ? `Chapter: ${selectedChapter}` : "No chapter selected"}</p>
             )}
           </div>
 
-          <button
-            onClick={handleStartDeck}
-            className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-[#e6edf3] text-sm cursor-pointer transition-colors"
+          <button onClick={handleStartDeck}
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 text-sm cursor-pointer transition-all duration-300"
           >
             <I.Play size={14} /> Start Focused Deck
           </button>
 
-          {subjectError && (
-            <p className="text-xs text-red-500 font-medium">{subjectError}</p>
-          )}
+          {subjectError && <p className="text-xs text-red-500 font-medium">{subjectError}</p>}
         </div>
       </div>
     </div>
@@ -502,7 +389,6 @@ function AnalyticsTab({ track }) {
 
   useEffect(() => {
     let cancelled = false;
-
     async function loadAnalytics() {
       setLoading(true);
       setLoadError("");
@@ -512,16 +398,17 @@ function AnalyticsTab({ track }) {
       } catch (error) {
         console.error("Failed to load PYQ analytics:", error);
         if (!cancelled) setLoadError("Failed to load analytics. Please try again.");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
+      } finally { if (!cancelled) setLoading(false); }
     }
-
     loadAnalytics();
     return () => { cancelled = true; };
   }, []);
 
-  if (loading) return <p className={`text-sm ${TXT_MUTED}`}>Loading analytics...</p>;
+  if (loading) return (
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      {[...Array(3)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
+    </div>
+  );
   if (loadError) return <p className="text-sm text-red-500">{loadError}</p>;
 
   const attempted = analytics?.attempted ?? 0;
@@ -537,19 +424,19 @@ function AnalyticsTab({ track }) {
     <div className="space-y-5">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          { Icon: I.Target,       label: "Attempted Run",   value: String(attempted), sublabel: "Questions Answered", accent: "#3b82f6" },
+          { Icon: I.Target,       label: "Attempted Run",   value: String(attempted), sublabel: "Questions Answered", accent: "#6366F1" },
           { Icon: I.CheckCircle2, label: "Accuracy Target", value: `${accuracy}%`,    sublabel: "Correct Response",   accent: "#10b981" },
           { Icon: I.Flame,        label: "Archive Streak",  value: `${streak}d`,      sublabel: "Daily Momentum",     accent: "#f59e0b" },
-        ].map((s) => <StatCard key={s.label} {...s} />)}
+        ].map((s, i) => (
+          <div key={s.label} className="animate-slideUp" style={{ animationDelay: `${i * 75 + 150}ms` }}>
+            <StatCard {...s} />
+          </div>
+        ))}
       </div>
 
-      <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6`}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-          SYLLABUS COVERAGE RATIOS
-        </p>
-        {subjects.length === 0 && (
-          <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>
-        )}
+      <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
+        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
+        {subjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>}
         <div className="space-y-5">
           {subjects.map((item) => (
             <div key={item.subject}>
@@ -557,16 +444,12 @@ function AnalyticsTab({ track }) {
                 <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
                 <div className="flex items-center gap-3">
                   <span className={`text-xs ${TXT_MUTED}`}>{item.solved} solved</span>
-                  <span className="text-sm font-bold">{item.accuracy}%</span>
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">{item.accuracy}%</span>
                 </div>
               </div>
-              <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: `${item.accuracy}%`,
-                    background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280",
-                  }}
+              <div className="h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full rounded-full transition-all duration-500"
+                  style={{ width: `${item.accuracy}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }}
                 />
               </div>
             </div>
@@ -574,27 +457,27 @@ function AnalyticsTab({ track }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <I.Award size={18} className="text-amber-400 mb-3" />
-          <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
-          <p className="text-xl font-bold">{topSubject ? topSubject.subject : "—"}</p>
-          <p className="text-sm text-gray-500 mt-1">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-slideUp" style={{ animationDelay: "450ms" }}>
+        <div className={`glass-card p-5`}>
+          <I.Award size={18} className="text-amber-500 dark:text-amber-400 mb-3" />
+          <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
+          <p className="text-xl font-bold text-slate-900 dark:text-white">{topSubject ? topSubject.subject : "—"}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             {topSubject ? `${topSubject.accuracy}% accuracy rating` : "No data yet"}
           </p>
         </div>
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-5`}>
-          <I.TrendingUp size={18} className="text-blue-400 mb-3" />
-          <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
-          <p className="text-xl font-bold">{weakestSubject ? weakestSubject.subject : "—"}</p>
-          <p className="text-sm text-gray-500 mt-1">
+        <div className={`glass-card p-5`}>
+          <I.TrendingUp size={18} className="text-indigo-500 dark:text-indigo-400 mb-3" />
+          <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
+          <p className="text-xl font-bold text-slate-900 dark:text-white">{weakestSubject ? weakestSubject.subject : "—"}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             {weakestSubject ? "Target core concepts" : "No data yet"}
           </p>
         </div>
-        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
-          <I.Sparkles size={18} className="text-emerald-400 mb-3" />
-          <p className="text-xs text-emerald-500 uppercase tracking-widest font-semibold mb-1">AI Directives</p>
-          <p className="text-sm font-medium text-emerald-300">
+        <div className="glass-card p-5 border-emerald-500/20 !bg-emerald-50/30 dark:!bg-emerald-500/5">
+          <I.Sparkles size={18} className="text-emerald-500 dark:text-emerald-400 mb-3" />
+          <p className="text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-semibold mb-1">AI Directives</p>
+          <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
             {weakestSubject
               ? `Focus on ${weakestSubject.subject}: only ${weakestSubject.accuracy}% accuracy across ${weakestSubject.solved} solved. Prioritize ${weakestSubject.subject} PYQs this week to close the gap.`
               : "Solve a few PYQs to unlock a personalized recommendation."}
@@ -610,32 +493,32 @@ function SavedTab({ track, savedQuestions }) {
   return (
     <div className="space-y-5">
       <div>
-        <h3 className="text-sm font-bold">Saved Revision Sets ({savedQuestions.length})</h3>
-        <p className="text-xs text-gray-400">
+        <h3 className="text-sm font-bold text-slate-900 dark:text-white">Saved Revision Sets ({savedQuestions.length})</h3>
+        <p className="text-xs text-slate-400 dark:text-slate-500">
           Bookmarked papers filtered precisely to your active track syllabus bounds.
         </p>
       </div>
 
       <div className="space-y-3">
-        {savedQuestions.map((q) => (
-          <div
-            key={q.id}
-            className={`group rounded-2xl border ${BORDER} ${BG_SURFACE} p-5 ${BORDER_HV} transition-all`}
+        {savedQuestions.map((q, i) => (
+          <div key={q.id}
+            className={`glass-card p-5 ${BORDER_HV} transition-all duration-300 hover:-translate-y-0.5 animate-slideUp`}
+            style={{ animationDelay: `${i * 75 + 150}ms` }}
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="text-xs font-semibold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
+                  <span className="text-xs font-semibold text-indigo-500 dark:text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                     {q.subject}
                   </span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-slate-400 dark:text-slate-500">
                     {q.topic} · {track.toUpperCase()} Archive {q.year}
                   </span>
                   <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[q.difficulty]}`}>
                     {q.difficulty}
                   </span>
                 </div>
-                <p className="text-sm text-gray-300 leading-relaxed">{q.question}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{q.question}</p>
               </div>
             </div>
           </div>
@@ -667,13 +550,11 @@ export default function PYQPage() {
   const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
   const filteredSaved    = MASTER_SAVED.filter((s) => s.track === "mixed" || s.track === track);
 
-  // Header stats
   const [overview,       setOverview]       = useState(null);
   const [attemptedTotal, setAttemptedTotal] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
-
     async function loadPYQStats() {
       try {
         const [overviewData, analyticsData] = await Promise.all([
@@ -690,106 +571,73 @@ export default function PYQPage() {
         );
       } catch (error) {
         console.error("Failed loading PYQ stats:", error);
-        if (!cancelled) {
-          setOverview(null);
-          setAttemptedTotal(0);
-        }
+        if (!cancelled) { setOverview(null); setAttemptedTotal(0); }
       }
     }
-
     loadPYQStats();
     return () => { cancelled = true; };
   }, []);
 
-  const questionVaultValue = overview
-    ? overview.totalQuestions.toLocaleString()
-    : "—";
-
-  const yearRangeValue = overview?.minYear && overview?.maxYear
-    ? `${overview.maxYear - overview.minYear + 1} Years`
-    : "—";
-
-  const yearRangeSublabel = overview?.minYear && overview?.maxYear
-    ? `${overview.minYear} – ${overview.maxYear} Bulletins`
-    : "No data yet";
-
-  const solvedLoadValue = attemptedTotal !== null
-    ? `${attemptedTotal} Solved`
-    : "—";
+  const questionVaultValue = overview ? overview.totalQuestions.toLocaleString() : "—";
+  const yearRangeValue = overview?.minYear && overview?.maxYear ? `${overview.maxYear - overview.minYear + 1} Years` : "—";
+  const yearRangeSublabel = overview?.minYear && overview?.maxYear ? `${overview.minYear} – ${overview.maxYear} Bulletins` : "No data yet";
+  const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
 
   const PAGE_STATS = [
-    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs",  accent: "#3b82f6" },
-    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel,   accent: "#a855f7" },
+    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs",  accent: "#6366F1" },
+    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel,   accent: "#8B5CF6" },
     { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units",   accent: "#06b6d4" },
   ];
 
   if (!track) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center">
-        <p className={`text-sm ${TXT_MUTED}`}>Loading...</p>
-      </div>
+      <PageWrapper title="PYQ Practice" badge="Loading...">
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+            {[...Array(3)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
+          </div>
+          <div className="h-64 rounded-2xl skeleton-shimmer" />
+        </div>
+      </PageWrapper>
     );
   }
 
   return (
-    <div className={`min-h-full ${TXT}`}>
-      <div className="max-w-7xl mx-auto px-6 py-10">
+    <PageWrapper
+      title="PYQ Practice"
+      subtitle="Analyze real past examination parameters with automated performance indicators."
+      badge={track === "neet" ? "NEET UG Medical Core 🩺" : "IIT JEE Engineering Vault 🚀"}
+      badgeVariant={track === "neet" ? "emerald" : "purple"}
+    >
+      {/* Stats row */}
+      <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 animate-slideUp" style={{ animationDelay: "75ms" }}>
+        {PAGE_STATS.map((s) => <StatCard key={s.label} {...s} />)}
+      </section>
 
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-1">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
-              PREVIOUS YEAR ENGINES
-            </p>
-            <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border ${
-              track === "neet"
-                ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-400"
-                : "bg-purple-500/5  border-purple-500/20  text-purple-400"
-            }`}>
-              {track === "neet" ? "NEET UG Medical Core" : "IIT JEE Engineering Vault"}
-            </span>
-          </div>
-          <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
-            PYQ Practice
-          </h1>
-          <p className="text-gray-400 mt-1 text-sm max-w-xl">
-            Analyze real past examination parameters with automated performance indicators.
-          </p>
+      {/* Tab nav */}
+      <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm">
+          {TABS.map((tab) => {
+            const active = activeTab === tab.id;
+            return (
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                  active
+                    ? ACTIVE_PILL
+                    : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5`
+                }`}
+              >
+                <tab.Icon size={14} /> {tab.label}
+              </button>
+            );
+          })}
         </div>
+      </section>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {PAGE_STATS.map((s) => <StatCard key={s.label} {...s} />)}
-        </div>
-
-        {/* Tab nav */}
-        <div className="mb-6">
-          <div className="inline-flex items-center bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-xl p-1 gap-1">
-            {TABS.map((tab) => {
-              const active = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 cursor-pointer ${
-                    active
-                      ? ACTIVE_PILL
-                      : `${TXT_MUTED} hover:text-gray-200 hover:bg-gray-800/40`
-                  }`}
-                >
-                  <tab.Icon size={14} /> {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Tab panels */}
-        {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
-        {activeTab === "analytics" && <AnalyticsTab track={track} />}
-        {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
-
-      </div>
-    </div>
+      {/* Tab panels */}
+      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
+      {activeTab === "analytics" && <AnalyticsTab track={track} />}
+      {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
+    </PageWrapper>
   );
 }

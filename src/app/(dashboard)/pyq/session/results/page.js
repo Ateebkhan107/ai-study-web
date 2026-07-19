@@ -5,14 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/lib/goals";
 
-// ─── Theme CSS Token Configs (kept in sync with the PYQ setup page) ──────────
-const BG_SURFACE = "bg-white      dark:bg-gray-900/40 backdrop-blur-md";
-const BG_SUNKEN  = "bg-gray-100   dark:bg-gray-950/50";
-const BORDER     = "border-gray-200  dark:border-gray-800/60";
-const TXT        = "text-gray-900  dark:text-[#e6edf3]";
-const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
-
-// Practice mode display labels (kept in sync with the PYQ setup + session pages).
+// Practice mode display labels
 const modeLabels = {
   full: "📄 Full Paper",
   chapter: "📚 Chapter Wise",
@@ -21,17 +14,13 @@ const modeLabels = {
 };
 
 export default function PYQResultsPage() {
-
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const { user } = useUser();
-
   const goalUpdated = useRef(false);
 
   const [reviewData, setReviewData] = useState([]);
   const [showReview, setShowReview] = useState(false);
-
 
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";
@@ -41,338 +30,238 @@ export default function PYQResultsPage() {
   const attempt = searchParams.get("attempt") || "";
   const shift = searchParams.get("shift") || "";
 
-  const total = parseInt(
-    searchParams.get("total") || "0",
-    10
-  );
+  const total = parseInt(searchParams.get("total") || "0", 10);
+  const correct = parseInt(searchParams.get("correct") || "0", 10);
+  const wrong = parseInt(searchParams.get("wrong") || "0", 10);
+  const skipped = parseInt(searchParams.get("skipped") || "0", 10);
+  const accuracy = parseInt(searchParams.get("accuracy") || "0", 10);
 
-  const correct = parseInt(
-    searchParams.get("correct") || "0",
-    10
-  );
-
-  const wrong = parseInt(
-    searchParams.get("wrong") || "0",
-    10
-  );
-
-  const skipped = parseInt(
-    searchParams.get("skipped") || "0",
-    10
-  );
-
-  const accuracy = parseInt(
-    searchParams.get("accuracy") || "0",
-    10
-  );
-
-  const subjectLabels = subjectsParam
-    ? subjectsParam.split(",")
-    : [];
-
+  const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
 
   // =============================
   // LOAD REVIEW DATA
   // =============================
-
   useEffect(() => {
-
     if (typeof window === "undefined") return;
-
     try {
-
-      const stored = sessionStorage.getItem(
-        "pyq_session_review"
-      );
-
+      const stored = sessionStorage.getItem("pyq_session_review");
       if (stored) {
-
-        setReviewData(
-          JSON.parse(stored)
-        );
-
+        setReviewData(JSON.parse(stored));
       }
-
+    } catch (error) {
+      console.error("Failed to load review data:", error);
     }
-
-    catch (error) {
-
-      console.error(
-        "Failed to load review data:",
-        error
-      );
-
-    }
-
   }, []);
-
 
   // =============================
   // DAILY GOAL + XP UPDATE
   // =============================
-
   useEffect(() => {
-
-    if (
-      !user ||
-      total <= 0 ||
-      goalUpdated.current
-    ) return;
-
+    if (!user || total <= 0 || goalUpdated.current) return;
 
     async function updatePYQGoal() {
-
       try {
-
         goalUpdated.current = true;
-
-        await updateGoalProgress(
-          user.id,
-          "PYQ",
-          total
-        );
-
-        console.log(
-          "PYQ GOAL UPDATED 🚀",
-          total
-        );
-
-      }
-
-      catch (error) {
-
+        await updateGoalProgress(user.id, "PYQ", total);
+        console.log("PYQ GOAL UPDATED 🚀", total);
+      } catch (error) {
         goalUpdated.current = false;
-
-        console.log(
-          "PYQ goal error:",
-          error
-        );
-
+        console.log("PYQ goal error:", error);
       }
-
     }
-
     updatePYQGoal();
-
   }, [user, total]);
 
+  let resultLabel = "Needs Improvement 📚";
+  let badgeColor = "bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-500/20";
+  if (accuracy >= 80) {
+    resultLabel = "Excellent Work 🎯";
+    badgeColor = "bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20";
+  } else if (accuracy >= 50) {
+    resultLabel = "Good Effort 👍";
+    badgeColor = "bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20";
+  }
 
-  const resultLabel =
-    accuracy >= 80
-      ? "Excellent Work 🎯"
-      : accuracy >= 50
-        ? "Good Effort 👍"
-        : "Needs Improvement 📚";
-
+  // Circle math
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (accuracy / 100) * circumference;
 
   return (
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start sm:items-center justify-center relative overflow-x-hidden overflow-y-auto">
+      
+      {/* Background blobs */}
+      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-violet-500/10 dark:bg-violet-500/5 blur-[100px]" />
+      </div>
 
-    <div className={`min-h-full ${TXT}`}>
+      <div className="w-full max-w-4xl z-10 animate-slideUp py-8">
+        
+        {/* Main Card */}
+        <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-6 sm:p-10 mb-8">
+          
+          <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
+            {/* SVG Score Ring */}
+            <div className="relative w-32 h-32 flex-shrink-0">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                <circle
+                  className="text-slate-200 dark:text-slate-800"
+                  strokeWidth="8"
+                  stroke="currentColor"
+                  fill="transparent"
+                  r={radius}
+                  cx="50"
+                  cy="50"
+                />
+                <circle
+                  className="text-indigo-500 transition-all duration-1000 ease-out"
+                  strokeWidth="8"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={strokeDashoffset}
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  fill="transparent"
+                  r={radius}
+                  cx="50"
+                  cy="50"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-3xl font-black text-slate-900 dark:text-white">{accuracy}%</span>
+              </div>
+            </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-10">
-
-        {/* HEADER */}
-
-        <div className="text-center mb-8">
-
-          <h1 className="text-3xl font-black tracking-tight">
-            Deck Submitted!
-          </h1>
-
-          <span className="
-            inline-block
-            mt-3
-            px-4
-            py-1.5
-            rounded-full
-            text-sm
-            font-semibold
-            bg-amber-500/10
-            text-amber-600
-            dark:text-amber-400
-            border
-            border-amber-500/20
-          ">
-            {resultLabel}
-          </span>
-
-        </div>
-
-
-        {/* SUMMARY */}
-
-        <div className={`rounded-2xl border ${BORDER} ${BG_SURFACE} p-6 mb-6`}>
-
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4 text-center`}>
-            Session Summary
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
-
-            <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-              Subjects: <b>{subjectLabels.join(", ") || "—"}</b>
-            </span>
-
-            <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-              Exam: <b>{exam}{examType ? ` ${examType}` : ""}</b>
-            </span>
-
-            {(attempt || shift) && (
-              <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-                Paper: <b>{[attempt, shift].filter(Boolean).join(" ")}</b>
+            <div className="text-center md:text-left flex-1">
+              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+                Deck Submitted!
+              </h1>
+              <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold border ${badgeColor}`}>
+                {resultLabel}
               </span>
-            )}
+            </div>
+          </div>
 
-            <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-              Mode: <b>{modeLabels[mode] || modeLabels.full}</b>
-            </span>
+          {/* Session Summary */}
+          <div className="bg-slate-100/50 dark:bg-slate-900/50 rounded-2xl p-5 mb-8 border border-slate-200/60 dark:border-slate-800/60">
+            <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 text-center md:text-left">
+              Session Summary
+            </h2>
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                Subjects: {subjectLabels.join(", ") || "—"}
+              </span>
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                Exam: {exam}{examType ? ` ${examType}` : ""}
+              </span>
+              {(attempt || shift) && (
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                  Paper: {[attempt, shift].filter(Boolean).join(" ")}
+                </span>
+              )}
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                Mode: {modeLabels[mode] || modeLabels.full}
+              </span>
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                Questions: {total}
+              </span>
+            </div>
+          </div>
 
-            <span className={`px-3 py-1.5 rounded-lg border ${BORDER}`}>
-              Questions: <b>{total}</b>
-            </span>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200/60 dark:border-emerald-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mb-1">{correct}</span>
+              <span className="text-xs font-bold text-emerald-600/70 dark:text-emerald-500 uppercase tracking-widest">Correct</span>
+            </div>
+            
+            <div className="bg-rose-50 dark:bg-rose-500/10 border border-rose-200/60 dark:border-rose-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-3xl font-black text-rose-600 dark:text-rose-400 mb-1">{wrong}</span>
+              <span className="text-xs font-bold text-rose-600/70 dark:text-rose-500 uppercase tracking-widest">Wrong</span>
+            </div>
 
+            <div className="bg-slate-100 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-3xl font-black text-slate-700 dark:text-slate-300 mb-1">{skipped}</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Skipped</span>
+            </div>
+
+            <div className="bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200/60 dark:border-indigo-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-1">{accuracy}%</span>
+              <span className="text-xs font-bold text-indigo-600/70 dark:text-indigo-500 uppercase tracking-widest">Accuracy</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={() => setShowReview(v => !v)}
+              className="flex-1 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3.5 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+            >
+              {showReview ? "Hide Review" : "Review Answers"}
+            </button>
+            <button
+              onClick={() => router.push("/pyq")}
+              className="flex-1 border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold py-3.5 text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+            >
+              Back to Setup
+            </button>
           </div>
 
         </div>
 
-
-        {/* STATS */}
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 text-center">
-            <p className="text-3xl font-black text-emerald-500">
-              {correct}
-            </p>
-            <p className="text-xs font-semibold text-emerald-600 uppercase tracking-widest mt-1">
-              Correct
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5 text-center">
-            <p className="text-3xl font-black text-rose-500">
-              {wrong}
-            </p>
-            <p className="text-xs font-semibold text-rose-600 uppercase tracking-widest mt-1">
-              Wrong
-            </p>
-          </div>
-
-          <div className={`rounded-2xl border ${BORDER} ${BG_SUNKEN} p-5 text-center`}>
-            <p className={`text-3xl font-black ${TXT}`}>
-              {skipped}
-            </p>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mt-1`}>
-              Skipped
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-5 text-center">
-            <p className="text-3xl font-black text-sky-500">
-              {accuracy}%
-            </p>
-            <p className="text-xs font-semibold text-sky-600 uppercase tracking-widest mt-1">
-              Accuracy
-            </p>
-          </div>
-
-        </div>
-
-
-        <div className="flex flex-col gap-3 mb-8">
-
-          <button
-            onClick={() => setShowReview(v => !v)}
-            className="
-              w-full
-              py-3
-              rounded-xl
-              text-sm
-              font-bold
-              bg-gray-900
-              text-white
-              dark:bg-white
-              dark:text-[#0d1117]
-            "
-          >
-            {showReview ? "Hide Review" : "Review Answers"}
-          </button>
-
-          <button
-            onClick={() => router.push("/pyq")}
-            className={`w-full py-3 rounded-xl text-sm font-semibold border ${BORDER} ${TXT_MUTED}`}
-          >
-            Back to Setup
-          </button>
-
-        </div>
-
-
-        {/* REVIEW */}
-
+        {/* REVIEW SECTION */}
         {showReview && (
-
-          <div className="space-y-4">
-
+          <div className="space-y-6 pb-12 animate-slideUp" style={{ animationDelay: '0.1s' }}>
             {reviewData.map((q, idx) => {
-              
               const qType = q.question_type || "MCQ";
-
+              
               return (
-                <div
-                  key={q.id}
-                  className={`border ${BORDER} ${BG_SUNKEN} rounded-xl p-4 space-y-3`}
-                >
-
-                  <div className="flex justify-between">
-
-                    <span className="text-xs font-bold text-sky-400">
+                <div key={q.id} className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 shadow-sm">
+                  
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 rounded-full">
                       Q{idx + 1} · {q.subject}
                     </span>
-
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
                       {q.year}
                     </span>
-
                   </div>
 
-                  <div className="space-y-3">
-                    <p className={`text-sm font-semibold ${TXT}`}>
+                  <div className="space-y-4 mb-6">
+                    <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
                       {q.question}
                     </p>
                     {q.question_image && (
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
-                        className="rounded-xl max-w-full"
+                        className="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
                       />
                     )}
                   </div>
 
                   {qType === "NUMERICAL" ? (
-                    
-                    <div className="space-y-2 py-2">
-                      <div className={`p-3 rounded-lg border ${BORDER} bg-white dark:bg-gray-900/50`}>
-                        <span className="font-bold text-sm">Your Answer:</span>{" "}
-                        <span className="text-sm">{q.selected !== null && q.selected !== undefined && q.selected !== "" ? q.selected : "None"}</span>
+                    <div className="space-y-3 mb-6">
+                      <div className="p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between">
+                        <span className="font-bold text-sm text-slate-600 dark:text-slate-400">Your Answer:</span>
+                        <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                          {q.selected !== null && q.selected !== undefined && q.selected !== "" ? q.selected : "None"}
+                        </span>
                       </div>
-                      <div className="p-3 rounded-lg border border-green-500 bg-green-500/10 text-green-700 dark:text-green-400">
-                        <span className="font-bold text-sm">Correct Answer:</span>{" "}
-                        <span className="text-sm">{q.numerical_answer}</span>
-                        {(q.numerical_min !== undefined && q.numerical_max !== undefined && q.numerical_min !== null && q.numerical_max !== null) && (
-                          <div className="mt-1 text-xs">
-                            <span className="font-semibold">Correct Range:</span> {q.numerical_min} - {q.numerical_max}
-                          </div>
-                        )}
+                      <div className="p-4 rounded-xl border border-emerald-200/60 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span className="font-bold text-sm text-emerald-700 dark:text-emerald-400">Correct Answer:</span>
+                        <div className="text-right text-sm font-semibold text-emerald-800 dark:text-emerald-300">
+                          {q.numerical_answer}
+                          {(q.numerical_min !== undefined && q.numerical_max !== undefined && q.numerical_min !== null && q.numerical_max !== null) && (
+                            <div className="mt-1 text-xs font-medium opacity-80">
+                              Range: {q.numerical_min} - {q.numerical_max}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-
                   ) : (
-                    
-                    <div className="space-y-2">
-
+                    <div className="space-y-3 mb-6">
                       {["a", "b", "c", "d"].map(option => {
-
                         const isCorrectOption = qType === "MULTIPLE_CORRECT"
                           ? (Array.isArray(q.correct_options) && q.correct_options.map(o => String(o).toLowerCase()).includes(option))
                           : (String(q.correct_option).toLowerCase() === option);
@@ -385,56 +274,53 @@ export default function PYQResultsPage() {
                         
                         const isSelected = selectedArr.includes(option);
 
-                        let style = "";
-
-                        if (isCorrectOption)
-                          style = "bg-green-200 border-green-500 dark:text-black";
-                        else if (isSelected && !isCorrectOption)
-                          style = "bg-red-200 border-red-500 dark:text-black";
+                        let wrapperClasses = "border-slate-200/60 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30";
+                        let letterClasses = "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400";
+                        
+                        if (isCorrectOption) {
+                          wrapperClasses = "border-emerald-300 dark:border-emerald-500/50 bg-emerald-50 dark:bg-emerald-500/10";
+                          letterClasses = "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400";
+                        } else if (isSelected && !isCorrectOption) {
+                          wrapperClasses = "border-rose-300 dark:border-rose-500/50 bg-rose-50 dark:bg-rose-500/10";
+                          letterClasses = "bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400";
+                        }
 
                         return (
-
-                          <div
-                            key={option}
-                            className={`border rounded-lg px-3 py-2 ${style}`}
-                          >
-
-                            <div className="flex flex-col gap-2 text-sm">
-                              <div>
-                                {option.toUpperCase()}. {q[`option_${option}`]}
-                                {isSelected &&
-                                  <span className="ml-2 text-xs font-semibold">
+                          <div key={option} className={`border rounded-xl p-4 flex gap-4 transition-all ${wrapperClasses}`}>
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 mt-0.5 ${letterClasses}`}>
+                              {option.toUpperCase()}
+                            </div>
+                            <div className="flex flex-col gap-3 flex-1 min-w-0">
+                              <div className="text-sm font-medium text-slate-700 dark:text-slate-200 mt-1">
+                                {q[`option_${option}`]}
+                                {isSelected && (
+                                  <span className="ml-2 text-[10px] font-bold uppercase tracking-widest opacity-60">
                                     (Your answer)
                                   </span>
-                                }
+                                )}
                               </div>
                               {q[`option_${option}_image`] && (
                                 <img 
                                   src={q[`option_${option}_image`]} 
                                   alt={`Option ${option.toUpperCase()} visual`} 
-                                  className="rounded-xl max-w-full"
+                                  className="rounded-xl border border-slate-200/60 dark:border-slate-700/50 max-w-full w-auto"
                                 />
                               )}
                             </div>
-
                           </div>
-
                         );
-
                       })}
-
                     </div>
                   )}
 
-                  {!q.selected &&
-                    <p className="text-xs font-semibold text-amber-500">
-                      Skipped
-                    </p>
-                  }
+                  {!q.selected && (
+                    <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold mb-4">
+                      Skipped Question
+                    </div>
+                  )}
 
-                  <div className="text-sm">
-
-                    <p className="font-bold">
+                  <div className="bg-slate-50/80 dark:bg-slate-900/40 rounded-2xl p-5 border border-slate-100 dark:border-slate-800/80 mt-2">
+                    <p className="text-sm font-bold text-slate-900 dark:text-slate-200 mb-2">
                       {qType === "MULTIPLE_CORRECT" 
                         ? `Correct Answers: ${Array.isArray(q.correct_options) ? q.correct_options.join(", ").toUpperCase() : ""}`
                         : qType === "NUMERICAL" 
@@ -442,30 +328,27 @@ export default function PYQResultsPage() {
                           : `Correct Answer: ${String(q.correct_option).toUpperCase()}`
                       }
                     </p>
-
-                    <p className="text-gray-500 mt-2">
-                      {q.explanation}
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {q.explanation || "No explanation provided for this question."}
                     </p>
-
-                  </div>
-
-                  <div className="flex justify-between text-xs text-gray-400">
-                    <span>{q.chapter}</span>
-                    <span>{q.difficulty}</span>
+                    
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800">
+                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">
+                        {q.chapter}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">
+                        {q.difficulty}
+                      </span>
+                    </div>
                   </div>
 
                 </div>
               );
             })}
-
           </div>
-
         )}
 
       </div>
-
     </div>
-
   );
-
 }

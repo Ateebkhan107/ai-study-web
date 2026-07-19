@@ -19,9 +19,9 @@ export function SmartPrediction({ track = "jee" }) {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+    <div className="glass-card p-5">
       <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
+        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
           Smart Prediction
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
@@ -33,12 +33,12 @@ export function SmartPrediction({ track = "jee" }) {
         {filteredPredictions.map((p) => (
           <div
             key={p.label}
-            className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3.5"
+            className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3.5"
           >
-            <p className="text-xs text-gray-400 mb-1">{p.label}</p>
-            <p className="text-xl font-black text-black dark:text-white mb-2">{p.value}</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{p.label}</p>
+            <p className="text-xl font-black text-slate-900 dark:text-white mb-2">{p.value}</p>
             {p.pct !== null && (
-              <div className="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full"
                   style={{ width: `${p.pct}%`, background: p.color }}
@@ -79,20 +79,20 @@ export function AdaptiveLearning({ track = "jee" }) {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm flex flex-col">
+    <div className="glass-card p-5 flex flex-col">
       <div className="flex items-center gap-2 mb-1">
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
+        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
           Adaptive Learning
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
           ✦ AI
         </span>
       </div>
-      <p className="text-xs text-gray-400 mb-4">
-        You&apos;re weak in <span className="font-bold text-black dark:text-white">{weakSubject}</span>. Auto-adapted path:
+      <p className="text-xs text-slate-400 dark:text-slate-500 mb-4">
+        You&apos;re weak in <span className="font-bold text-slate-900 dark:text-white">{weakSubject}</span>. Auto-adapted path:
       </p>
 
-      <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">
+      <div className="flex-1 divide-y divide-slate-50 dark:divide-slate-800">
         {filteredSteps.map((s) => (
           <div key={s.step} className="flex items-start gap-3 py-2.5">
             <div
@@ -100,15 +100,15 @@ export function AdaptiveLearning({ track = "jee" }) {
               style={{ background: s.color }}
             />
             <div>
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">{s.step}</p>
-              <p className="text-xs text-gray-400 mt-0.5">{s.detail}</p>
+              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{s.step}</p>
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{s.detail}</p>
             </div>
           </div>
         ))}
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
+        className="mt-4 w-full py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-900 dark:text-white hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Redirecting to adaptive practice session…");
         }}
@@ -139,9 +139,9 @@ export function AIStudyPlanner({ track = "jee" }) {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm flex flex-col">
+    <div className="glass-card p-5 flex flex-col">
       <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
+        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
           AI Study Planner
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
@@ -149,11 +149,11 @@ export function AIStudyPlanner({ track = "jee" }) {
         </span>
       </div>
 
-      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
+      <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">
         Today&apos;s tasks
       </p>
 
-      <div className="flex-1 divide-y divide-gray-50 dark:divide-gray-800">
+      <div className="flex-1 divide-y divide-slate-50 dark:divide-slate-800">
         {filteredTasks.map((t) => (
           <div key={t.task} className="flex items-start gap-3 py-2.5">
             <div
@@ -161,15 +161,15 @@ export function AIStudyPlanner({ track = "jee" }) {
               style={{ background: t.color }}
             />
             <div>
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t.task}</p>
-              <p className="text-xs text-gray-400 mt-0.5">{t.detail}</p>
+              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{t.task}</p>
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{t.detail}</p>
             </div>
           </div>
         ))}
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
+        className="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Generating your full weekly schedule with AI…");
         }}
@@ -199,9 +199,9 @@ export function AIRecommendations({ track = "jee" }) {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+    <div className="glass-card p-5">
       <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
+        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
           AI Recommendations
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
@@ -213,12 +213,12 @@ export function AIRecommendations({ track = "jee" }) {
         {filteredRecs.map((r) => (
           <div
             key={r.title}
-            className="bg-gray-50 dark:bg-gray-800/60 rounded-xl p-4"
+            className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-1.5">
+            <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1.5">
               {r.title}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
               {r.body}
             </p>
             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${REC_CLASS[r.type]}`}>
@@ -229,7 +229,7 @@ export function AIRecommendations({ track = "jee" }) {
       </div>
 
       <button
-        className="w-full py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
+        className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Opening AI study plan generator…");
         }}

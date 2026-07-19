@@ -5,6 +5,7 @@ import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
+import PageWrapper from "@/components/PageWrapper";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
 const TEST_TOOLS = [
@@ -18,7 +19,6 @@ const TEST_TOOLS = [
       </svg>
     ),
   },
-  
   {
     href: "/analytics",
     label: "Performance",
@@ -33,115 +33,136 @@ const TEST_TOOLS = [
 
 export default function TestPage() {
   const [mode, setMode] = useState("build");
-const { user } = useUser();
+  const { user } = useUser();
+  const [track, setTrack] = useState(null);
 
-const [track, setTrack] = useState(null);
-
-useEffect(() => {
-  async function loadTrack() {
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("user_profiles")
-      .select("exam")
-      .eq("clerk_user_id", user.id)
-      .single();
-
-    if (data?.exam === "NEET") {
-      setTrack("neet");
-    } else {
-      setTrack("jee");
+  useEffect(() => {
+    async function loadTrack() {
+      if (!user) return;
+      const { data } = await supabase
+        .from("user_profiles")
+        .select("exam")
+        .eq("clerk_user_id", user.id)
+        .single();
+      if (data?.exam === "NEET") {
+        setTrack("neet");
+      } else {
+        setTrack("jee");
+      }
     }
+    loadTrack();
+  }, [user]);
+
+  if (!track) {
+    return (
+      <PageWrapper title="Test Center" badge="Loading...">
+        <div className="space-y-6">
+          <div className="h-12 w-48 rounded-xl skeleton-shimmer" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-44 rounded-2xl skeleton-shimmer" />
+            ))}
+          </div>
+        </div>
+      </PageWrapper>
+    );
   }
-
-  loadTrack();
-}, [user]);
-
-if (!track) {
-  return (
-    <div className="min-h-[400px] flex items-center justify-center">
-      Loading...
-    </div>
-  );
-}
 
   const isNeet = track === "neet";
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
-
-      {/* ── Personalized Header ── */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-1.5">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
-            Practice
-          </p>
-          <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-            isNeet 
-              ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-400" 
-              : "bg-purple-500/5 border-purple-500/20 text-purple-400"
-          }`}>
-            {isNeet ? "NEET Simulation Center 🩺" : "JEE Test Arena 🚀"}
-          </span>
-        </div>
-        <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
-          Test Center
-        </h1>
-        <p className="mt-1 text-sm text-gray-400">
-          {isNeet 
-            ? "Build a custom PCB drill or jump directly into a full-length 720 mark mock exam simulation." 
-            : "Build a custom test or jump into a randomized PCM shift-run archive parameters."}
-        </p>
-      </div>
-
+    <PageWrapper
+      title="Test Center"
+      subtitle={
+        isNeet
+          ? "Build a custom PCB drill or jump directly into a full-length 720 mark mock exam simulation."
+          : "Build a custom test or jump into a randomized PCM shift-run archive parameters."
+      }
+      badge={isNeet ? "NEET Simulation Center 🩺" : "JEE Test Arena 🚀"}
+      badgeVariant={isNeet ? "emerald" : "purple"}
+    >
       {/* ── Mode Toggle ── */}
-      <div className="flex items-center gap-2 mb-8 bg-gray-100 dark:bg-gray-800/60 p-1 rounded-xl w-fit">
-        <button
-          onClick={() => setMode("build")}
-          className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150
-            ${mode === "build"
-              ? "bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm"
-              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
+      <section
+        className="animate-slideUp"
+        style={{ animationDelay: "75ms" }}
+      >
+        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm">
+          <button
+            onClick={() => setMode("build")}
+            className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              mode === "build"
+                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
             }`}
-        >
-          ✦ Custom Test Builder
-        </button>
-        <button
-          onClick={() => setMode("quick")}
-          className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150
-            ${mode === "quick"
-              ? "bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm"
-              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
+          >
+            ✦ Custom Test Builder
+          </button>
+          <button
+            onClick={() => setMode("quick")}
+            className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              mode === "quick"
+                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
             }`}
-        >
-          ⚡ Quick Test Launch
-        </button>
-      </div>
+          >
+            ⚡ Quick Test Launch
+          </button>
+        </div>
+      </section>
 
-      {/* ── Test Builder / Quick Test (Passing track to filter builders dynamically) ── */}
-      {mode === "build" ? <TestBuilder track={track} /> : <QuickTest track={track} />}
+      {/* ── Test Builder / Quick Test ── */}
+      <section
+        className="animate-slideUp"
+        style={{ animationDelay: "150ms" }}
+      >
+        {mode === "build" ? (
+          <TestBuilder track={track} />
+        ) : (
+          <QuickTest track={track} />
+        )}
+      </section>
 
-      {/* ── Test Tools ── */}
-      <div className="mt-12">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
-          Diagnostic Tools
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {TEST_TOOLS.map((tool) => (
+      {/* ── Diagnostic Tools ── */}
+      <section
+        className="animate-slideUp mt-4"
+        style={{ animationDelay: "225ms" }}
+      >
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20">
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-indigo-500 dark:text-indigo-400">
+              <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xs font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">
+              Diagnostic Tools
+            </h2>
+            <p className="text-xs font-medium text-slate-400 dark:text-slate-500 mt-0.5">
+              Track history and analyse performance
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {TEST_TOOLS.map((tool, index) => (
             <Link
               key={tool.href}
               href={tool.href}
-              className="group flex items-start gap-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+              className="group relative overflow-hidden bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(99,102,241,0.12)] dark:hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)] hover:border-indigo-500/30 animate-slideUp flex items-start gap-4"
+              style={{ animationDelay: `${(index * 75) + 300}ms` }}
             >
-              <div className="w-9 h-9 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0 text-gray-500 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              {/* Hover gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-indigo-500/0 to-violet-500/0 group-hover:from-indigo-500/5 group-hover:via-transparent group-hover:to-violet-500/5 transition-all duration-700 pointer-events-none rounded-2xl" />
+
+              <div className="relative z-10 w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
                 {tool.icon}
               </div>
 
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-black dark:text-white leading-tight">
+              <div className="relative z-10 min-w-0 flex-1">
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-tight">
                   {tool.label}
                 </p>
-                <p className="text-xs text-gray-400 mt-0.5 leading-snug">
+                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 leading-snug">
                   {tool.description}
                 </p>
               </div>
@@ -151,15 +172,14 @@ if (!track) {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 dark:group-hover:text-gray-400 shrink-0 mt-0.5 transition-colors"
+                className="relative z-10 w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 group-hover:translate-x-1 shrink-0 mt-0.5 transition-all duration-300"
               >
                 <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           ))}
         </div>
-      </div>
-
-    </div>
+      </section>
+    </PageWrapper>
   );
 }

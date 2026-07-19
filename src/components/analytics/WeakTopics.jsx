@@ -82,22 +82,22 @@ export default function WeakTopics({ track = "jee", dbTopics }) {
   const critCount = sorted.filter((t) => t.severity === "critical").length;
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+    <div className="glass-card p-5">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
+          <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
             Weak Topics
           </h2>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
             {critCount} topic{critCount !== 1 ? "s" : ""} need urgent attention
           </p>
         </div>
-        <span className="text-xs text-gray-400 font-medium">
+        <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
           {sorted.length} topics
         </span>
       </div>
 
-      <div className="divide-y divide-gray-50 dark:divide-gray-800">
+      <div className="divide-y divide-slate-50 dark:divide-slate-800">
         {sorted.map((t, idx) => {
           const cfg = CFG[t.severity] ?? CFG.warn;
           return (
@@ -108,25 +108,25 @@ export default function WeakTopics({ track = "jee", dbTopics }) {
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`} />
 
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-black dark:text-white truncate">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                   {t.topic}
                 </p>
-                <p className="text-xs text-gray-400 mt-0.5">{t.subject}</p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{t.subject}</p>
               </div>
 
               <div className="hidden sm:flex items-center gap-3 w-40">
-                <div className="flex-1 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-black dark:bg-white rounded-full"
                     style={{ width: `${t.accuracy}%` }}
                   />
                 </div>
-                <span className="text-xs font-black text-black dark:text-white w-8 text-right tabular-nums">
+                <span className="text-xs font-black text-slate-900 dark:text-white w-8 text-right tabular-nums">
                   {t.accuracy}%
                 </span>
               </div>
 
-              <span className="sm:hidden text-xs font-black text-black dark:text-white tabular-nums">
+              <span className="sm:hidden text-xs font-black text-slate-900 dark:text-white tabular-nums">
                 {t.accuracy}%
               </span>
 

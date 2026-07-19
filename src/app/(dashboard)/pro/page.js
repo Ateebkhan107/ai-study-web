@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/lib/payment";
+import PageWrapper from "@/components/PageWrapper";
+import { Check, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
 
 const FREE_FEATURES = [
   "20 questions per test",
@@ -81,12 +83,12 @@ export default function ProPage() {
 
   const handleSubscribe = async () => {
     if (loading) return;
-  
+
     try {
       setLoading(true);
-  
+
       const order = await createOrder(selectedPlan);
-  
+
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
@@ -103,7 +105,7 @@ export default function ProPage() {
           plan: selectedPlan,
         },
         theme: {
-          color: "#1e3a5f",
+          color: "#6366f1",
         },
         handler: async function (response) {
           try {
@@ -117,9 +119,9 @@ export default function ProPage() {
                 plan: selectedPlan,
               }),
             });
-  
+
             const result = await verify.json();
-  
+
             if (result.success) {
               window.location.href = "/payment/success";
             } else {
@@ -136,10 +138,9 @@ export default function ProPage() {
           },
         },
       };
-  
+
       const razorpay = new window.Razorpay(options);
       razorpay.open();
-  
     } catch (err) {
       console.error(err);
       alert("Unable to start payment.");
@@ -148,42 +149,44 @@ export default function ProPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 space-y-12">
-      {/* ── Hero ───────────────────────────────────────────────── */}
-      <div className="text-center space-y-3">
-        <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-[#1e3a5f] text-white uppercase tracking-widest">
-          PRO
-        </span>
-
-        <h1 className="text-5xl font-black text-black dark:text-white tracking-tight leading-tight">
+    <PageWrapper
+      title=""
+      badge="✦ PRO"
+      badgeVariant="purple"
+    >
+      {/* ── Hero ── */}
+      <section className="text-center space-y-5 animate-slideUp">
+        <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
           Unlock your full
           <br />
-          potential
+          <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 bg-clip-text text-transparent">
+            potential
+          </span>
         </h1>
 
-        <p className="text-gray-400 text-base max-w-md mx-auto">
+        <p className="text-slate-400 dark:text-slate-500 text-base max-w-lg mx-auto leading-relaxed">
           Everything you need to crack JEE & NEET — unlimited tests, deep analytics, and AI-powered study plans.
         </p>
-      </div>
+      </section>
 
-      {/* ── Plan selector ──────────────────────────────────────── */}
-      <div className="flex flex-col items-center gap-6">
-        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/60 p-1 rounded-2xl">
+      {/* ── Plan Selector ── */}
+      <section className="flex flex-col items-center gap-8 animate-slideUp" style={{ animationDelay: "75ms" }}>
+        {/* Toggle */}
+        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 p-1.5 rounded-2xl gap-1">
           {PLANS.map((p) => (
             <button
               key={p.id}
               onClick={() => setSelectedPlan(p.id)}
-              className={`relative px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-150
+              className={`relative px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer
                 ${
                   selectedPlan === p.id
-                    ? "bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm"
-                    : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 }`}
             >
               {p.label}
-
               {p.savings && (
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[9px] font-black px-1.5 py-0.5 rounded-full bg-green-500 text-white whitespace-nowrap">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-black px-2 py-0.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white whitespace-nowrap shadow-sm shadow-emerald-500/20">
                   {p.savings}
                 </span>
               )}
@@ -194,19 +197,17 @@ export default function ProPage() {
         {/* Price display */}
         <div className="text-center">
           <div className="flex items-end justify-center gap-1">
-            <span className="text-2xl font-bold text-gray-400 mb-2">₹</span>
-
-            <span className="text-7xl font-black text-black dark:text-white tracking-tight leading-none">
+            <span className="text-2xl font-bold text-slate-400 dark:text-slate-500 mb-2">₹</span>
+            <span className="text-7xl sm:text-8xl font-black bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent tracking-tighter leading-none">
               {plan.price}
             </span>
-
-            <span className="text-gray-400 text-base mb-2">/{plan.per}</span>
+            <span className="text-slate-400 dark:text-slate-500 text-base mb-2">/{plan.per}</span>
           </div>
 
           {plan.total && (
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">
               Billed as{" "}
-              <span className="font-semibold text-black dark:text-white">
+              <span className="font-semibold text-slate-900 dark:text-white">
                 ₹{plan.total}
               </span>{" "}
               per {plan.id === "quarterly" ? "3 months" : "year"}
@@ -214,7 +215,7 @@ export default function ProPage() {
           )}
 
           {plan.badge && (
-            <span className="inline-block mt-2 text-[10px] font-black px-2.5 py-1 rounded-full bg-black dark:bg-white text-white dark:text-black uppercase tracking-wide">
+            <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white uppercase tracking-widest shadow-sm shadow-indigo-500/20">
               {plan.badge}
             </span>
           )}
@@ -224,190 +225,207 @@ export default function ProPage() {
         <button
           onClick={handleSubscribe}
           disabled={loading}
-          className="w-full max-w-sm py-4 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-base font-black hover:opacity-90 disabled:opacity-50 transition-all"
+          className="group w-full max-w-sm py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
-          {loading
-            ? "Processing..."
-            : `Get PrepZii Pro • ₹${plan.total}`}
+          {loading ? (
+            <>
+              <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+              Processing...
+            </>
+          ) : (
+            <>
+              Get PrepZii Pro • ₹{plan.total}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </>
+          )}
         </button>
 
-        <p className="text-xs text-gray-400">Secure payment powered by Razorpay</p>
-      </div>
+        <p className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+          <Shield className="w-3 h-3" />
+          Secure payment powered by Razorpay
+        </p>
+      </section>
 
-      {/* ── Free vs PRO comparison ─────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Free */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6">
-          <div className="mb-5">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-              Current plan
-            </span>
-
-            <h3 className="text-xl font-black text-black dark:text-white mt-1">
-              Free
-            </h3>
-
-            <p className="text-3xl font-black text-gray-300 dark:text-gray-600 mt-1">
-              ₹0<span className="text-base font-normal">/mo</span>
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            {FREE_FEATURES.map((f) => (
-              <div key={f} className="flex items-start gap-3">
-                <span className="text-gray-400 dark:text-gray-500 mt-0.5 flex-shrink-0">
-                  ✓
-                </span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">{f}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* PRO */}
-        <div className="bg-black dark:bg-white rounded-3xl p-6 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-              backgroundSize: "24px 24px",
-            }}
-          />
-
-          <div className="relative">
+      {/* ── Free vs PRO Comparison ── */}
+      <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Free Plan */}
+          <div className="glass-card p-6">
             <div className="mb-5">
-              <span className="text-xs font-bold text-white/50 dark:text-black/50 uppercase tracking-widest">
-                Upgrade to
+              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                Current plan
               </span>
-
-              <h3 className="text-xl font-black text-white dark:text-black mt-1 flex items-center gap-2">
-                PRO
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white/70 dark:text-black/70">
-                  All features
-                </span>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1">
+                Free
               </h3>
-
-              <p className="text-3xl font-black text-white dark:text-black mt-1">
-                ₹{plan.price}
-                <span className="text-base font-normal text-white/60 dark:text-black/60">
-                  /mo
-                </span>
+              <p className="text-3xl font-black text-slate-300 dark:text-slate-600 mt-1">
+                ₹0<span className="text-base font-normal">/mo</span>
               </p>
             </div>
 
             <div className="space-y-3">
-              {PRO_FEATURES.map((f) => (
-                <div key={f.text} className="flex items-start gap-3">
-                  <span
-                    className={`mt-0.5 flex-shrink-0 text-sm ${
-                      f.hot ? "text-yellow-400" : "text-white/60 dark:text-black/60"
-                    }`}
-                  >
-                    {f.hot ? "★" : "✓"}
-                  </span>
-                  <span
-                    className={`text-sm ${
-                      f.hot ? "text-white dark:text-black font-semibold" : "text-white/70 dark:text-black/70"
-                    }`}
-                  >
-                    {f.text}
-                  </span>
+              {FREE_FEATURES.map((f) => (
+                <div key={f} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-slate-400 dark:text-slate-500" />
+                  </div>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">{f}</span>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* ── Social proof ───────────────────────────────────────── */}
-      <div className="grid grid-cols-3 gap-4 text-center">
-        {[
-          { value: "12,000+", label: "Active students" },
-          { value: "94%", label: "Satisfaction rate" },
-          { value: "3.2x", label: "Better results vs free" },
-        ].map((s) => (
-          <div
-            key={s.label}
-            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5"
-          >
-            <p className="text-3xl font-black text-black dark:text-white tracking-tight">
-              {s.value}
-            </p>
-            <p className="text-xs text-gray-400 mt-1 font-medium">{s.label}</p>
+          {/* PRO Plan */}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-600 p-6 shadow-xl shadow-indigo-500/15">
+            {/* Dot pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-10"
+              style={{
+                backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+                backgroundSize: "24px 24px",
+              }}
+            />
+            {/* Shimmer */}
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_infinite] pointer-events-none" />
+
+            <div className="relative">
+              <div className="mb-5">
+                <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
+                  Upgrade to
+                </span>
+                <h3 className="text-xl font-black text-white mt-1 flex items-center gap-2">
+                  PRO
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/15 text-white/80 backdrop-blur-sm">
+                    All features
+                  </span>
+                </h3>
+                <p className="text-3xl font-black text-white mt-1">
+                  ₹{plan.price}
+                  <span className="text-base font-normal text-white/50">
+                    /mo
+                  </span>
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                {PRO_FEATURES.map((f) => (
+                  <div key={f.text} className="flex items-start gap-3">
+                    <div className={`w-5 h-5 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                      f.hot ? "bg-amber-400/20" : "bg-white/10"
+                    }`}>
+                      {f.hot ? (
+                        <Star className="w-3 h-3 text-amber-300" fill="currentColor" />
+                      ) : (
+                        <Check className="w-3 h-3 text-white/60" />
+                      )}
+                    </div>
+                    <span className={`text-sm ${
+                      f.hot ? "text-white font-semibold" : "text-white/70"
+                    }`}>
+                      {f.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
 
-      {/* ── FAQ ────────────────────────────────────────────────── */}
-      <div>
-        <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4 text-center">
+      {/* ── Social Proof ── */}
+      <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
+        <div className="grid grid-cols-3 gap-4 text-center">
+          {[
+            { value: "12,000+", label: "Active students", icon: Users },
+            { value: "94%", label: "Satisfaction rate", icon: Zap },
+            { value: "3.2x", label: "Better results vs free", icon: Star },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="glass-card p-5 group hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                <s.icon className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                {s.value}
+              </p>
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
+        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-5 text-center">
           Frequently asked questions
         </h2>
 
-        <div className="space-y-2">
+        <div className="space-y-2 max-w-2xl mx-auto">
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden"
+              className="glass-card overflow-hidden"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 aria-expanded={openFaq === i}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors cursor-pointer"
               >
-                <span className="text-sm font-semibold text-black dark:text-white">
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">
                   {faq.q}
                 </span>
-
-                <span
-                  className={`text-gray-400 text-xs transition-transform duration-200 flex-shrink-0 ml-4 ${
+                <ChevronDown
+                  className={`w-4 h-4 text-slate-400 dark:text-slate-500 transition-transform duration-300 flex-shrink-0 ml-4 ${
                     openFaq === i ? "rotate-180" : ""
                   }`}
-                >
-                  ▼
-                </span>
+                />
               </button>
 
               {openFaq === i && (
-                <div className="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-50 dark:border-gray-800 pt-3">
+                <div className="px-5 pb-4 text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100/50 dark:border-slate-800/50 pt-3">
                   {faq.a}
                 </div>
               )}
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* ── Bottom CTA ─────────────────────────────────────────── */}
-      <div className="bg-black dark:bg-white rounded-3xl p-8 text-center relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "24px 24px",
-          }}
-        />
+      {/* ── Bottom CTA ── */}
+      <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-600 p-8 sm:p-10 text-center shadow-xl shadow-indigo-500/15">
+          {/* Dot pattern */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          />
+          {/* Ambient glows */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative space-y-4">
-          <h2 className="text-3xl font-black text-white dark:text-black tracking-tight">
-            Ready to crack it?
-          </h2>
-
-          <p className="text-white/60 dark:text-black/60 text-sm">
-            Join 12,000+ students already on PRO.
-          </p>
-
-          <button
-            onClick={handleSubscribe}
-            disabled={loading}
-            className="px-8 py-3.5 rounded-2xl bg-white dark:bg-black text-black dark:text-white text-sm font-black hover:opacity-90 disabled:opacity-50 transition-all"
-          >
-            {loading
-              ? "Processing..."
-              : `Upgrade Now • ₹${plan.total}`}
-          </button>
+          <div className="relative space-y-5">
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Ready to crack it?
+            </h2>
+            <p className="text-white/60 text-sm max-w-md mx-auto">
+              Join 12,000+ students already on PRO. Start your exam prep with the best tools.
+            </p>
+            <button
+              onClick={handleSubscribe}
+              disabled={loading}
+              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
+            >
+              {loading ? "Processing..." : `Upgrade Now • ₹${plan.total}`}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </PageWrapper>
   );
 }

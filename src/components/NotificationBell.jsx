@@ -553,9 +553,15 @@ rounded-xl
 
 border
 
-border-gray-200
+border-slate-200/60
 
-bg-white
+dark:border-slate-700/50
+
+bg-white/70
+
+dark:bg-[#0f172a]/60
+
+backdrop-blur-xl
 
 flex
 
@@ -564,6 +570,10 @@ items-center
 justify-center
 
 shadow-sm
+
+text-slate-700
+
+dark:text-slate-300
 
 "
 
@@ -646,7 +656,17 @@ mt-4
 
 w-[380px]
 
-bg-white
+bg-white/90
+
+dark:bg-[#0f172a]/90
+
+backdrop-blur-xl
+
+border
+
+border-slate-200/60
+
+dark:border-slate-700/50
 
 rounded-3xl
 
@@ -670,7 +690,15 @@ p-5
 
 font-black
 
+text-slate-900
+
+dark:text-white
+
 border-b
+
+border-slate-200/60
+
+dark:border-slate-700/50
 
 "
 
@@ -696,7 +724,7 @@ notifications.length===0
 ?
 
 
-<p className="p-5 text-gray-400 text-sm">
+<p className="p-5 text-slate-400 dark:text-slate-500 text-sm">
 
 No notifications
 
@@ -728,9 +756,15 @@ items-center
 
 border-b
 
+border-slate-200/60
+
+dark:border-slate-700/50
+
 cursor-pointer
 
-hover:bg-gray-50
+hover:bg-slate-50
+
+dark:hover:bg-white/5
 
 "
 
@@ -748,7 +782,9 @@ h-10
 
 rounded-xl
 
-bg-blue-100
+bg-indigo-50
+
+dark:bg-indigo-500/10
 
 flex
 
@@ -770,7 +806,7 @@ justify-center
 <div className="flex-1">
 
 
-<h3 className="font-bold text-sm">
+<h3 className="font-bold text-sm text-slate-900 dark:text-white">
 
 {item.title}
 
@@ -778,7 +814,7 @@ justify-center
 
 
 
-<p className="text-xs text-gray-400">
+<p className="text-xs text-slate-400 dark:text-slate-500">
 
 {item.message}
 
@@ -852,6 +888,22 @@ text-xs
 font-bold
 
 cursor-pointer
+
+text-slate-500
+
+dark:text-slate-400
+
+hover:text-indigo-500
+
+dark:hover:text-indigo-400
+
+transition-colors
+
+border-t
+
+border-slate-200/60
+
+dark:border-slate-700/50
 
 "
 

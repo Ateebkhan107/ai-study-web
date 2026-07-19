@@ -34,10 +34,26 @@ function useChart(canvasId, buildConfig, dependencies = []) {
       script.onload = init;
       document.head.appendChild(script);
     }
-    return () => { if (chartRef.current) chartRef.current.destroy(); };
+
+    // Re-render chart when dark mode is toggled
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.attributeName === "class") {
+          init();
+          break;
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    return () => {
+      observer.disconnect();
+      if (chartRef.current) chartRef.current.destroy();
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies); // Hook responds immediately when track changes
 }
+
 
 const gridColor  = (dark) => dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 const tickColor  = (dark) => dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
@@ -58,80 +74,62 @@ export function PerformanceTrend({ track, data = [] }) {
 
   useChart(
     "performance-chart",
-    () => ({
+    (isDark) => ({
       type: "line",
-
       data: {
-        labels: chartData.map(
-          item => item.label
-        ),
-
+        labels: chartData.map((item) => item.label),
         datasets: [
           {
             label: "Score %",
-            
-            data: chartData.map(
-              item => item.score
-            ),
-
+            data: chartData.map((item) => item.score),
             tension: 0.4,
-
             showLine: true,
-
-            pointRadius: 6,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderColor: "#6366F1",
+            backgroundColor: isDark
+              ? "rgba(99,102,241,0.15)"
+              : "rgba(99,102,241,0.1)",
+            pointBackgroundColor: "#6366F1",
+            pointBorderColor: isDark ? "#0f172a" : "#ffffff",
+            pointBorderWidth: 2,
+            fill: true,
           },
         ],
       },
-
-
       options: {
-
-        responsive:true,
-
-        maintainAspectRatio:false,
-
-        plugins:{
-          legend:{
-            display:false
-          }
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            grid: { color: gridColor(isDark) },
+            ticks: { color: tickColor(isDark), callback: (value) => value + "%" },
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: tickColor(isDark) },
+          },
         },
-
-
-        scales:{
-
-          y:{
-            beginAtZero:true,
-
-            max:100,
-
-            ticks:{
-              callback:(value)=> value + "%"
-            }
-          }
-
-        }
-
       },
-
-
     }),
-
     [track, data]
-
   );
 
 
   return (
 
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+    <div className="glass-card p-5">
 
       <div className="mb-5">
 
-        <h2 className="text-xs font-bold uppercase tracking-widest">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
           Performance Trend
         </h2>
 
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-slate-400 dark:text-slate-500">
           Your test score improvement
         </p>
 
@@ -189,8 +187,8 @@ export function SubjectDistribution({ track = "jee" }) {
   }), [track]);
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm h-full">
-      <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
+    <div className="glass-card p-5 h-full">
+      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
         Subject Distribution
       </h2>
       <div className="relative h-36 mb-4">
@@ -201,14 +199,14 @@ export function SubjectDistribution({ track = "jee" }) {
       <div className="space-y-2">
         {scaledDistribution.map((s) => (
           <div key={s.subject} className="flex items-center gap-2">
-            <span className="text-xs text-gray-500 dark:text-gray-400 w-20 flex-shrink-0">{s.subject}</span>
-            <div className="flex-1 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+            <span className="text-xs text-slate-500 dark:text-slate-400 w-20 flex-shrink-0">{s.subject}</span>
+            <div className="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
                 style={{ width: `${s.pct}%`, background: s.color }}
               />
             </div>
-            <span className="text-xs font-bold text-black dark:text-white w-8 text-right">{s.pct}%</span>
+            <span className="text-xs font-bold text-slate-900 dark:text-white w-8 text-right">{s.pct}%</span>
           </div>
         ))}
       </div>
@@ -270,8 +268,8 @@ export function SkillRadar({ track = "jee" }) {
   }), [track]);
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
-      <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
+    <div className="glass-card p-5">
+      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
         Skill Comparison
       </h2>
       <div className="flex gap-4 mb-3">
@@ -343,8 +341,8 @@ export function TopicWeakness({ track = "jee" }) {
   const severityLabel = { critical: "Critical", warn: "Needs work", good: "Strong" };
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
-      <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
+    <div className="glass-card p-5">
+      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
         Topic Weakness Detection
       </h2>
       <div className="relative h-48 mb-4">
@@ -397,8 +395,8 @@ export function TimeAnalytics({ track = "jee" }) {
   const peak = TIME_BY_DAY.reduce((a, b) => a.hours > b.hours ? a : b).day;
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
-      <h2 className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-3">
+    <div className="glass-card p-5">
+      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
         Time Analytics
       </h2>
       <div className="relative h-40 mb-4">
@@ -408,9 +406,9 @@ export function TimeAnalytics({ track = "jee" }) {
       </div>
       <div className="grid grid-cols-2 gap-3">
         {[{ label: "Daily avg", value: `${avg}h` }, { label: "Peak day", value: peak }].map((s) => (
-          <div key={s.label} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">{s.label}</p>
-            <p className="text-xl font-black text-black dark:text-white">{s.value}</p>
+          <div key={s.label} className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3">
+            <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">{s.label}</p>
+            <p className="text-xl font-black text-slate-900 dark:text-white">{s.value}</p>
           </div>
         ))}
       </div>

@@ -4,20 +4,15 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
+import Logo from "@/components/Logo";
 
-// ─── Theme CSS Token Configs (kept in sync with the PYQ setup page) ──────────
-const BG_SUNKEN  = "bg-gray-100   dark:bg-gray-950/50";
-const BORDER     = "border-gray-200  dark:border-gray-800/60";
-const TXT        = "text-gray-900  dark:text-[#e6edf3]";
-const TXT_MUTED  = "text-gray-500  dark:text-[#7d8590]";
-const SURFACE_HV = "hover:bg-gray-100 dark:hover:bg-gray-950/40";
+const LETTERS = ["A", "B", "C", "D"];
 
-// Practice mode display labels for the session header.
 const modeLabels = {
   full: "📄 Full Paper",
   chapter: "📚 Chapter Wise",
   random: "🎲 Random PYQs",
-  mistakes: "🔁 Mistake Revision"
+  mistakes: "🔁 Mistake Revision",
 };
 
 export default function PYQSessionPage() {
@@ -38,7 +33,6 @@ export default function PYQSessionPage() {
   const yearsParam = searchParams.get("years") || "";
   const mode = searchParams.get("mode") || "full";
   const chapter = searchParams.get("chapter") || "";
-  
   const examType = searchParams.get("exam_type") || "";
   const attempt = searchParams.get("attempt") || "";
   const shift = searchParams.get("shift") || "";
@@ -47,40 +41,34 @@ export default function PYQSessionPage() {
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
 
   useEffect(() => {
-
     async function loadPYQ() {
-
       setLoading(true);
       setLoadError("");
-
       try {
-
         const results = await Promise.all(
-          subjectLabels.map(label =>
+          subjectLabels.map((label) =>
             getPYQ(exam, label, {
               mode,
               chapter,
               userId: user?.id,
               examType,
               attempt,
-              shift
+              shift,
             })
           )
         );
 
         let combined = results.flat();
-
         const seen = new Set();
-        combined = combined.filter(q => {
+        combined = combined.filter((q) => {
           if (seen.has(q.id)) return false;
           seen.add(q.id);
           return true;
         });
 
         if (years.length > 0) {
-          combined = combined.filter(q => years.includes(q.year));
+          combined = combined.filter((q) => years.includes(q.year));
         }
-
         if (mode === "random") {
           combined = combined.sort(() => Math.random() - 0.5);
         }
@@ -88,20 +76,12 @@ export default function PYQSessionPage() {
         setQuestions(combined);
         setCurrentIndex(0);
         setAnswers({});
-
-      }
-      catch (error) {
-
+      } catch (error) {
         console.error("Failed to load PYQ session:", error);
         setLoadError("Failed to load questions. Please try again.");
-
-      }
-      finally {
-
+      } finally {
         setLoading(false);
-
       }
-
     }
 
     if (subjectLabels.length > 0) {
@@ -109,23 +89,23 @@ export default function PYQSessionPage() {
     } else {
       setLoading(false);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
+  const answeredCount = Object.keys(answers).length;
+  const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
   function handleSelectOption(option) {
     if (!currentQuestion) return;
-    
     if (qType === "MULTIPLE_CORRECT") {
-      setAnswers(prev => {
+      setAnswers((prev) => {
         const current = Array.isArray(prev[currentQuestion.id]) ? prev[currentQuestion.id] : [];
         let nextAns;
         if (current.includes(option)) {
-          nextAns = current.filter(o => o !== option);
+          nextAns = current.filter((o) => o !== option);
         } else {
           nextAns = [...current, option].sort();
         }
@@ -137,76 +117,66 @@ export default function PYQSessionPage() {
         return { ...prev, [currentQuestion.id]: nextAns };
       });
     } else {
-      setAnswers(prev => ({ ...prev, [currentQuestion.id]: option }));
+      setAnswers((prev) => ({ ...prev, [currentQuestion.id]: option }));
     }
   }
 
   function handleNumericalChange(val) {
     if (!currentQuestion) return;
     if (val === "") {
-      setAnswers(prev => {
+      setAnswers((prev) => {
         const copy = { ...prev };
         delete copy[currentQuestion.id];
         return copy;
       });
     } else {
-      setAnswers(prev => ({ ...prev, [currentQuestion.id]: val }));
+      setAnswers((prev) => ({ ...prev, [currentQuestion.id]: val }));
     }
   }
 
   function handleNext() {
-    setCurrentIndex(i => Math.min(i + 1, questions.length - 1));
+    setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
   }
 
   function handleBack() {
-    setCurrentIndex(i => Math.max(i - 1, 0));
+    setCurrentIndex((i) => Math.max(i - 1, 0));
   }
 
   function checkAnswer(question, selected) {
     if (!selected) return false;
     const type = question.question_type || "MCQ";
-
     if (type === "MCQ") {
       return String(question.correct_option).toLowerCase() === String(selected).toLowerCase();
     }
-
     if (type === "MULTIPLE_CORRECT") {
       if (!Array.isArray(selected) || !Array.isArray(question.correct_options)) return false;
-      const selectedSorted = [...selected].map(s => String(s).toLowerCase()).sort().join(",");
-      const correctSorted = [...question.correct_options].map(s => String(s).toLowerCase()).sort().join(",");
+      const selectedSorted = [...selected].map((s) => String(s).toLowerCase()).sort().join(",");
+      const correctSorted = [...question.correct_options].map((s) => String(s).toLowerCase()).sort().join(",");
       return selectedSorted === correctSorted;
     }
-
     if (type === "NUMERICAL") {
       const numVal = Number(selected);
       if (isNaN(numVal)) return false;
-      
-      if (question.numerical_min !== undefined && question.numerical_min !== null && 
+      if (question.numerical_min !== undefined && question.numerical_min !== null &&
           question.numerical_max !== undefined && question.numerical_max !== null) {
         return numVal >= Number(question.numerical_min) && numVal <= Number(question.numerical_max);
       }
       return numVal === Number(question.numerical_answer);
     }
-
     return false;
   }
 
   async function handleFinishDeck() {
-
     if (questions.length === 0 || finishing) return;
-
     setFinishing(true);
 
-    const answeredQuestions = questions.filter(q => answers[q.id]);
+    const answeredQuestions = questions.filter((q) => answers[q.id]);
 
-    // Save every answered attempt; don't let one failure block the others
     await Promise.allSettled(
-      answeredQuestions.map(q => {
-
+      answeredQuestions.map((q) => {
         const rawOption = answers[q.id];
         const isCorrect = checkAnswer(q, rawOption);
         const type = q.question_type || "MCQ";
-        
         let formattedOption = "";
         if (type === "MULTIPLE_CORRECT" && Array.isArray(rawOption)) {
           formattedOption = rawOption.sort().join(",").toUpperCase();
@@ -215,32 +185,26 @@ export default function PYQSessionPage() {
         } else {
           formattedOption = String(rawOption).toUpperCase();
         }
-
         return savePYQAttempt({
           question_id: q.id,
           selected_option: formattedOption,
           is_correct: isCorrect,
           chapter: q.chapter,
           subject: q.subject,
-          exam: q.exam
+          exam: q.exam,
         });
-
       })
     );
 
     let correct = 0;
     let wrong = 0;
 
-    const reviewData = questions.map(q => {
-
+    const reviewData = questions.map((q) => {
       const selected = answers[q.id];
       const isAnswered = selected !== undefined && selected !== null && selected !== "";
-      
       const isCorrect = isAnswered && checkAnswer(q, selected);
-
       if (isAnswered && isCorrect) correct += 1;
       if (isAnswered && !isCorrect) wrong += 1;
-
       return {
         id: q.id,
         question: q.question,
@@ -255,20 +219,16 @@ export default function PYQSessionPage() {
         correct_option: q.correct_option,
         explanation: q.explanation,
         selected: selected || null,
-        
         question_type: q.question_type || "MCQ",
         numerical_answer: q.numerical_answer,
         correct_options: q.correct_options,
         numerical_min: q.numerical_min,
-        numerical_max: q.numerical_max
+        numerical_max: q.numerical_max,
       };
-
     });
 
     const skipped = questions.length - answeredQuestions.length;
-    const accuracy = questions.length > 0
-      ? Math.round((correct / questions.length) * 100)
-      : 0;
+    const accuracy = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
 
     if (typeof window !== "undefined") {
       sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));
@@ -283,129 +243,242 @@ export default function PYQSessionPage() {
     resultParams.set("wrong", String(wrong));
     resultParams.set("skipped", String(skipped));
     resultParams.set("accuracy", String(accuracy));
-    
     if (examType) resultParams.set("exam_type", examType);
     if (attempt) resultParams.set("attempt", attempt);
     if (shift) resultParams.set("shift", shift);
 
     router.push(`/pyq/session/results?${resultParams.toString()}`);
+  }
 
+  // ── Loading State ──
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+        <div className="flex flex-col items-center gap-4 animate-slideUp">
+          <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-slate-800 border-t-indigo-500 animate-spin" />
+          <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+            Loading PYQs...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Error / Empty ──
+  if (loadError || (!loading && questions.length === 0)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+        <div className="text-center animate-slideUp">
+          <div className="text-5xl mb-4">{loadError ? "⚠️" : "📭"}</div>
+          <h2 className="text-xl font-black text-slate-900 dark:text-white">
+            {loadError || "No PYQs Found"}
+          </h2>
+          <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">Try different filters or subjects.</p>
+          <button
+            onClick={() => router.push("/pyq")}
+            className="mt-6 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+          >
+            Back to PYQ Setup
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className={`min-h-full ${TXT}`}>
-      <div className="max-w-4xl mx-auto px-6 py-10">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
+      {/* ── Header ── */}
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-6 py-3.5">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Logo size={28} />
+            <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700" />
+            <div className="hidden sm:block">
+              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                {modeLabels[mode] || modeLabels.full}
+              </span>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
+                {subjectLabels.join(", ")} · {exam}
+                {years.length > 0 ? ` · ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : ""}
+              </p>
+            </div>
+          </div>
 
-        <div className="flex items-center justify-between mb-6">
-
-          <button
-            onClick={() => router.push("/pyq")}
-            className={`text-sm font-semibold ${TXT_MUTED} hover:text-sky-400 cursor-pointer`}
-          >
-            ← Back to setup
-          </button>
-
-          <button
-            onClick={handleFinishDeck}
-            disabled={loading || questions.length === 0 || finishing}
-            className="px-5 py-2 rounded-lg text-sm font-bold bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          >
-            {finishing ? "Finishing..." : "Finish Deck"}
-          </button>
-
-        </div>
-
-        <div className="mb-6">
-          <h1 className="text-3xl font-black tracking-tight">Focused Deck</h1>
-          <p className={`text-sm ${TXT_MUTED} mt-1`}>
-            {subjectLabels.join(", ") || "No subjects selected"} · {exam}{examType ? ` ${examType}` : ""}
-            {years.length > 0 ? ` · ${years.join(", ")}` : ""}
-            { (attempt || shift) ? (
-              <>
-                <br />
-                {[attempt, shift].filter(Boolean).join(" · ")}
-                <br />
-              </>
-            ) : (
-              " · "
-            )}
-            {modeLabels[mode] || modeLabels.full}
-          </p>
-        </div>
-
-        {loading && (
-          <p className={`text-sm ${TXT_MUTED}`}>Loading PYQs...</p>
-        )}
-
-        {!loading && loadError && (
-          <p className="text-sm text-red-500">{loadError}</p>
-        )}
-
-        {!loading && !loadError && questions.length === 0 && (
-          <p className={`text-sm ${TXT_MUTED}`}>No PYQs Found</p>
-        )}
-
-        {!loading && !loadError && currentQuestion && (
-          <div className="space-y-4">
-
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>
-              Question {currentIndex + 1} of {questions.length}
-            </p>
-
-            <div
-              key={currentQuestion.id}
-              className={`border ${BORDER} ${BG_SUNKEN} rounded-xl p-4 space-y-3`}
-            >
-
-              <div className="flex justify-between">
-                <span className="text-xs font-bold text-sky-400">{currentQuestion.subject}</span>
-                <span className="text-xs text-gray-400">{currentQuestion.year}</span>
+          {/* Progress + Finish */}
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
+                {answeredCount}/{questions.length}
+              </span>
+              <div className="w-20 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
+                  style={{ width: `${progressPct}%` }}
+                />
               </div>
+            </div>
+            <button
+              onClick={handleFinishDeck}
+              disabled={questions.length === 0 || finishing}
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            >
+              {finishing ? "Finishing..." : "Finish Deck"}
+            </button>
+          </div>
+        </div>
+      </header>
 
-              <div className="space-y-3">
-                <p className={`text-sm font-semibold ${TXT}`}>{currentQuestion.question}</p>
-                {currentQuestion.question_image && (
-                  <img 
-                    src={currentQuestion.question_image} 
-                    alt="Question visual" 
-                    className="rounded-xl max-w-full"
-                  />
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* ── Question Palette ── */}
+        <aside className="lg:col-span-1 order-2 lg:order-1">
+          <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
+            <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
+              Question Palette
+            </p>
+            <div className="grid grid-cols-5 gap-2">
+              {questions.map((q, idx) => {
+                const isAnswered = answers[q.id] !== undefined;
+                const isActive = currentIndex === idx;
+                return (
+                  <button
+                    key={q.id}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all duration-200 cursor-pointer
+                      ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[#0f172a] scale-110" : ""}
+                      ${
+                        isAnswered
+                          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
+                          : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/30"
+                      }
+                    `}
+                  >
+                    {idx + 1}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20" />
+                Answered
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700/50" />
+                Unvisited
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* ── Question Content ── */}
+        <section className="lg:col-span-3 flex flex-col order-1 lg:order-2">
+          <div
+            className="flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 sm:p-8 shadow-sm animate-slideUp"
+            style={{ animationDelay: "75ms" }}
+          >
+            {/* Question meta */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                  Question {currentIndex + 1} of {questions.length}
+                </span>
+                {qType !== "MCQ" && (
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">
+                    {qType === "MULTIPLE_CORRECT" ? "Multi-Select" : "Numerical"}
+                  </span>
                 )}
               </div>
+              <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">{currentQuestion.year}</span>
+            </div>
 
+            {/* Subject + Chapter tags */}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
+                {currentQuestion.subject}
+              </span>
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                {currentQuestion.chapter}
+              </span>
+              {currentQuestion.difficulty && (
+                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                  currentQuestion.difficulty === "Hard"
+                    ? "bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-500/20"
+                    : currentQuestion.difficulty === "Medium"
+                    ? "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20"
+                    : "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20"
+                }`}>
+                  {currentQuestion.difficulty}
+                </span>
+              )}
+            </div>
+
+            {/* Question text */}
+            <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
+              {currentQuestion.question}
+            </p>
+
+            {/* Question image */}
+            {currentQuestion.question_image && (
+              <img
+                src={currentQuestion.question_image}
+                alt="Question visual"
+                className="rounded-2xl max-w-full mb-4 border border-slate-200/60 dark:border-slate-700/50"
+              />
+            )}
+
+            {/* Options */}
+            <div className="mt-6">
               {qType === "NUMERICAL" ? (
-                <div className="pt-2">
+                <div>
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 block">
+                    Enter your answer
+                  </label>
                   <input
                     type="number"
                     placeholder="Enter numerical answer"
                     value={selectedOption || ""}
                     onChange={(e) => handleNumericalChange(e.target.value)}
-                    className={`w-full border ${BORDER} ${BG_SUNKEN} rounded-lg px-3 py-2 ${TXT} focus:border-sky-500 outline-none`}
+                    className="w-full max-w-sm border border-slate-200/60 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30 rounded-2xl px-5 py-4 text-lg font-semibold text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all duration-200"
                   />
                 </div>
               ) : (
-                <div className="space-y-2">
-                  {["a", "b", "c", "d"].map((option) => {
-                    const isSelected = qType === "MULTIPLE_CORRECT"
-                      ? Array.isArray(selectedOption) && selectedOption.includes(option)
-                      : selectedOption === option;
+                <div className="space-y-3">
+                  {["a", "b", "c", "d"].map((option, idx) => {
+                    const isSelected =
+                      qType === "MULTIPLE_CORRECT"
+                        ? Array.isArray(selectedOption) && selectedOption.includes(option)
+                        : selectedOption === option;
 
                     return (
                       <button
                         key={option}
                         onClick={() => handleSelectOption(option)}
-                        className={`
-                          w-full text-left border rounded-lg px-3 py-2 cursor-pointer
-                          ${isSelected ? "border-sky-500 bg-sky-500/5" : SURFACE_HV}
-                        `}
+                        className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
+                          ${
+                            isSelected
+                              ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-indigo-500/10"
+                              : "bg-white/50 dark:bg-slate-800/30 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
+                          }`}
                       >
-                        <div className="flex flex-col gap-2">
-                          <span>{option.toUpperCase()}. {currentQuestion[`option_${option}`]}</span>
+                        <span
+                          className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
+                            ${
+                              isSelected
+                                ? "border-indigo-500 bg-gradient-to-br from-indigo-500 to-violet-500 text-white"
+                                : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
+                            }`}
+                        >
+                          {LETTERS[idx]}
+                        </span>
+                        <div className="flex flex-col gap-2 flex-1">
+                          <span className="text-base font-medium">
+                            {currentQuestion[`option_${option}`]}
+                          </span>
                           {currentQuestion[`option_${option}_image`] && (
-                            <img 
-                              src={currentQuestion[`option_${option}_image`]} 
-                              alt={`Option ${option.toUpperCase()} visual`} 
-                              className="rounded-xl max-w-full" 
+                            <img
+                              src={currentQuestion[`option_${option}_image`]}
+                              alt={`Option ${option.toUpperCase()} visual`}
+                              className="rounded-xl max-w-full"
                             />
                           )}
                         </div>
@@ -414,38 +487,42 @@ export default function PYQSessionPage() {
                   })}
                 </div>
               )}
-
-              <div className="flex justify-between text-xs text-gray-400 pt-2">
-                <span>{currentQuestion.chapter}</span>
-                <span>{currentQuestion.difficulty}</span>
-              </div>
-
             </div>
 
-            <div className="flex items-center justify-between pt-2">
-
+            {/* Clear selection */}
+            {selectedOption !== undefined && (
               <button
-                onClick={handleBack}
-                disabled={currentIndex === 0}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold border ${BORDER} ${TXT_MUTED} disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
+                onClick={() => {
+                  const newAnswers = { ...answers };
+                  delete newAnswers[currentQuestion.id];
+                  setAnswers(newAnswers);
+                }}
+                className="mt-4 text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors"
               >
-                ← Back
+                Clear Selection
               </button>
-
-              <button
-                onClick={handleNext}
-                disabled={currentIndex === questions.length - 1}
-                className="px-6 py-2 rounded-lg text-sm font-bold bg-gray-900 text-white dark:bg-white dark:text-[#0d1117] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-              >
-                Next →
-              </button>
-
-            </div>
-
+            )}
           </div>
-        )}
 
-      </div>
+          {/* Navigation */}
+          <div className="mt-6 flex items-center justify-between animate-slideUp" style={{ animationDelay: "150ms" }}>
+            <button
+              onClick={handleBack}
+              disabled={currentIndex === 0}
+              className="px-6 py-3 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              ← Previous
+            </button>
+            <button
+              onClick={handleNext}
+              disabled={currentIndex === questions.length - 1}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+            >
+              Next →
+            </button>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

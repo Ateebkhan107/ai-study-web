@@ -1,208 +1,199 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { BarChart3, TrendingUp, Brain, Trophy } from "lucide-react";
 
 import OverviewCards from "@/components/analytics/OverviewCards";
-import { PerformanceTrend } from "@/components/analytics/ChartComponents";
+import { PerformanceTrend, SubjectDistribution, SkillRadar, TopicWeakness, TimeAnalytics } from "@/components/analytics/ChartComponents";
+import { StudyHeatmap, ExamReadiness, PYQIntelligence } from "@/components/analytics/NonChartComponents";
 import WeakTopics from "@/components/analytics/WeakTopics";
 import WhatToDoNext from "@/components/analytics/WhatToDoNext";
+import { SmartPrediction, AdaptiveLearning, AIStudyPlanner, AIRecommendations } from "@/components/analytics/AIComponents";
+import Leaderboard from "@/components/analytics/Leaderboard";
 
 import { getUserAnalytics } from "@/services/analytics";
 import { useUser } from "@clerk/nextjs";
+import PageWrapper from "@/components/PageWrapper";
 
+const TABS = [
+  { id: "overview",    label: "Overview",     Icon: BarChart3 },
+  { id: "charts",      label: "Charts",       Icon: TrendingUp },
+  { id: "ai-insights", label: "AI Insights",  Icon: Brain },
+  { id: "leaderboard", label: "Leaderboard",  Icon: Trophy },
+];
 
 export default function AnalyticsPage() {
-
   const { user } = useUser();
-
-
   const [stats, setStats] = useState(null);
-
   const [dbData, setDbData] = useState(null);
-
   const [loading, setLoading] = useState(true);
-
-  const [activeTrack, setActiveTrack] =
-    useState("jee");
-
-
+  const [activeTrack, setActiveTrack] = useState("jee");
+  const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
-
-    if(user){
+    if (user) {
       loadUserStats();
     }
+  }, [user]);
 
-  },[user]);
-
-
-
-  async function loadUserStats(){
-
-    const data =
-    await getUserAnalytics(user.id);
-
-
+  async function loadUserStats() {
+    const data = await getUserAnalytics(user.id);
     setStats(data);
-
   }
-
-
-
 
   useEffect(() => {
-
-
-    async function fetchAnalytics(){
-
+    async function fetchAnalytics() {
       try {
-
-
-        const match =
-        document.cookie.match(
+        const match = document.cookie.match(
           new RegExp("(^| )prepzii_track=([^;]+)")
         );
-
-
-        const clientTrack =
-        match
-        ? match[2].toLowerCase()
-        : "jee";
-
-
+        const clientTrack = match ? match[2].toLowerCase() : "jee";
         setActiveTrack(clientTrack);
 
-
-
-        const response =
-        await fetch("/api/analytics");
-
-
-
-        if(response.ok){
-
-          const data =
-          await response.json();
-
-
+        const response = await fetch("/api/analytics");
+        if (response.ok) {
+          const data = await response.json();
           setDbData(data);
-
-
-          if(data.track){
-
-            setActiveTrack(
-              data.track.toLowerCase()
-            );
-
+          if (data.track) {
+            setActiveTrack(data.track.toLowerCase());
           }
-
         }
-
-
-      }
-      catch(err){
-
-        console.error(
-          "Analytics fetch failed:",
-          err
-        );
-
-      }
-      finally{
-
+      } catch (err) {
+        console.error("Analytics fetch failed:", err);
+      } finally {
         setLoading(false);
-
       }
-
     }
-
-
     fetchAnalytics();
+  }, []);
 
-
-  },[]);
-
-
-
-
-  if(loading){
-
-    return(
-
-      <div className="max-w-5xl mx-auto px-6 py-10">
-
-        Loading analytics...
-
-      </div>
-
-    )
-
+  if (loading) {
+    return (
+      <PageWrapper title="Your Performance" badge="Analytics Dashboard 📊">
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-28 rounded-2xl skeleton-shimmer" />
+            ))}
+          </div>
+          <div className="h-72 rounded-2xl skeleton-shimmer" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="h-48 rounded-2xl skeleton-shimmer" />
+            ))}
+          </div>
+        </div>
+      </PageWrapper>
+    );
   }
 
-
-
-
-
   return (
+    <PageWrapper
+      title="Your Performance"
+      subtitle={`Updated today · ${activeTrack.toUpperCase()} track`}
+      badge="Analytics Dashboard 📊"
+    >
+      {/* ── Tab Navigation ── */}
+      <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
+        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm flex-wrap">
+          {TABS.map((tab) => {
+            const active = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  active
+                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
+                }`}
+              >
+                <tab.Icon size={14} />
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </section>
 
-    <div className="max-w-5xl mx-auto px-6 py-10 space-y-8">
+      {/* ── Overview Tab ── */}
+      {activeTab === "overview" && (
+        <div className="space-y-8">
+          <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+            <OverviewCards track={activeTrack} stats={stats} />
+          </section>
 
+          <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
+            <PerformanceTrend track={activeTrack} data={stats?.performanceTrend || []} />
+          </section>
 
-      <div>
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slideUp" style={{ animationDelay: "300ms" }}>
+            <StudyHeatmap heatmapData={stats?.heatmapValues} />
+            <ExamReadiness
+              overall={stats?.overallReadiness}
+              breakdown={stats?.readinessBreakdown}
+            />
+          </section>
 
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-          Analytics
-        </p>
+          <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
+            <WeakTopics track={activeTrack} dbTopics={stats?.weakTopics} />
+          </section>
 
+          <section className="animate-slideUp" style={{ animationDelay: "450ms" }}>
+            <WhatToDoNext track={activeTrack} weakTopics={stats?.weakTopics} />
+          </section>
+        </div>
+      )}
 
-        <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">
+      {/* ── Charts Tab ── */}
+      {activeTab === "charts" && (
+        <div className="space-y-8">
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slideUp" style={{ animationDelay: "150ms" }}>
+            <SubjectDistribution track={activeTrack} liveData={stats?.subjectDistribution} />
+            <SkillRadar track={activeTrack} liveLabels={stats?.radarLabels} liveYou={stats?.radarYou} liveTopper={stats?.radarTopper} />
+          </section>
 
-          Your Performance
+          <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
+            <TopicWeakness track={activeTrack} liveData={stats?.topicWeakness} />
+          </section>
 
-        </h1>
+          <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
+            <TimeAnalytics track={activeTrack} liveData={stats?.timeByDay} />
+          </section>
+        </div>
+      )}
 
+      {/* ── AI Insights Tab ── */}
+      {activeTab === "ai-insights" && (
+        <div className="space-y-8">
+          <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+            <SmartPrediction track={activeTrack} />
+          </section>
 
-        <p className="mt-1 text-sm text-gray-400">
+          <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
+            <AdaptiveLearning track={activeTrack} />
+          </section>
 
-          Updated today · {activeTrack.toUpperCase()} track
+          <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
+            <AIStudyPlanner track={activeTrack} />
+          </section>
 
-        </p>
+          <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
+            <AIRecommendations track={activeTrack} />
+          </section>
 
+          <section className="animate-slideUp" style={{ animationDelay: "450ms" }}>
+            <PYQIntelligence liveData={stats?.pyqInsights} />
+          </section>
+        </div>
+      )}
 
-      </div>
-
-
-
-      <OverviewCards
-        track={activeTrack}
-        stats={stats}
-      />
-
-
-
-    <PerformanceTrend
- track={activeTrack}
- data={stats?.performanceTrend || []}
-/>
-
-
-
-      <WeakTopics
- track={activeTrack}
- dbTopics={stats?.weakTopics}
-/>
-
-
-
-      <WhatToDoNext
-  track={activeTrack}
-  weakTopics={stats?.weakTopics}
-/>
-
-
-
-    </div>
-
+      {/* ── Leaderboard Tab ── */}
+      {activeTab === "leaderboard" && (
+        <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <Leaderboard />
+        </section>
+      )}
+    </PageWrapper>
   );
-
 }
