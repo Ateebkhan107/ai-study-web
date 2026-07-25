@@ -6,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
 import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 import Logo from "@/components/Logo";
+import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -29,6 +30,9 @@ export default function PYQSessionPage() {
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
+
+  // Apply Strict Exam Mode while the session is active and not finishing
+  useStrictExamMode(!finishing && questions.length > 0);
 
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";

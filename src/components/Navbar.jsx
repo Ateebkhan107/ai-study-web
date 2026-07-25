@@ -88,6 +88,11 @@ export default function Navbar() {
 
   if (!mounted) return null;
 
+  // Hide Navbar completely during active exam sessions
+  if (pathname === "/test/session" || pathname === "/pyq/session") {
+    return null;
+  }
+
   const toggleTheme = () => {
     const dark = document.documentElement.classList.contains("dark");
 

@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/lib/updateGoalProgress";
 import { updateStreak } from "@/lib/streak";
+import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -56,7 +57,11 @@ function TestSessionContent() {
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(durationParam * 60);
   const [attemptId, setAttemptId] = useState(null);
+  const [finishing, setFinishing] = useState(false);
   const timerRef = useRef(null);
+
+  // Apply Strict Exam Mode while the session is active and not finishing
+  useStrictExamMode(!finishing && questions.length > 0);
 
   useEffect(() => {
     async function loadExam() {
@@ -115,6 +120,8 @@ function TestSessionContent() {
   }, [subjectParam, difficultyParam, countParam, durationParam, user, exam]);
 
   async function handleSubmit() {
+    if (finishing) return;
+    setFinishing(true);
     try {
       let correct = 0;
       questions.forEach((q) => {
@@ -181,6 +188,7 @@ function TestSessionContent() {
     } catch (err) {
       console.error("SAVE ERROR 👉", err);
       alert(err.message);
+      setFinishing(false);
     }
   }
 
@@ -198,7 +206,7 @@ function TestSessionContent() {
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [questions.length]);
+  }, [questions.length, finishing]);
 
   // 5. Handlers
   const handleSelect = (qId, optIdx) => {
