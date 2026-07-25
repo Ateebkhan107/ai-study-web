@@ -29,11 +29,11 @@ export default function Footer() {
       {/* Subtle top glow */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-16">
+      <div className="max-w-7xl mx-auto px-6 pt-10 pb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-10">
           
           {/* Brand Column */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             <Link href="/dashboard" className="inline-flex items-center gap-2.5 group">
               <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-900 to-slate-800 text-white shadow-lg shadow-slate-900/20 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
                 <span className="font-black text-lg tracking-tighter">Pz</span>
@@ -63,8 +63,8 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-6">Quick Links</h3>
-            <ul className="space-y-3.5">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-4">Quick Links</h3>
+            <ul className="space-y-2.5">
               {[
                 { name: "Dashboard", href: "/dashboard" },
                 { name: "Tests", href: "/test" },
@@ -82,8 +82,8 @@ export default function Footer() {
 
           {/* Company & Legal */}
           <div>
-            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-6">Company & Legal</h3>
-            <ul className="space-y-3.5">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-4">Company & Legal</h3>
+            <ul className="space-y-2.5">
               {[
                 { name: "About Us", href: "#" },
                 { name: "Careers", href: "#" },
@@ -102,8 +102,8 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-6">Support</h3>
-            <ul className="space-y-3.5">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-4">Support</h3>
+            <ul className="space-y-2.5">
               {[
                 { name: "Help Center", href: "#" },
                 { name: "Report a Bug", href: "#" },
@@ -122,7 +122,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800/50">
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800/50">
           <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">
             © {currentYear} PrepZii. All Rights Reserved.
           </p>
