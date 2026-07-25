@@ -58,16 +58,16 @@ export default function RootLayout({ children }) {
         className="h-full"
       >
         <head>
-          <Script
-            src="https://checkout.razorpay.com/v1/checkout.js"
-            strategy="beforeInteractive"
-          />
         </head>
 
         <body
           suppressHydrationWarning
           className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col antialiased`}
         >
+          <Script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            strategy="afterInteractive"
+          />
           {children}
           <Footer />
         </body>

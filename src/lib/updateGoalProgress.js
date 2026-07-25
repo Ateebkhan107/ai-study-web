@@ -1,3 +1,5 @@
+"use server";
+
 import { supabase } from "@/lib/supabaseClient";
 import { addXP } from "./xp";
 
