@@ -32,7 +32,7 @@ const FAQS = [
   },
   {
     question: "How does the subscription work?",
-    answer: "PrepZii Pro plans are fixed-term subscriptions (e.g., 1 Month, 6 Months). They remain active until the billing period ends. Once expired, your account will safely return to the free tier unless you purchase a new plan."
+    answer: "PrepZii Pro plans are fixed-term subscriptions (e.g., 1 Month, 4 Months and 1 Year). They remain active until the billing period ends. Once expired, your account will safely return to the free tier unless you purchase a new plan."
   },
   {
     question: "How can I contact support?",
