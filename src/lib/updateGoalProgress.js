@@ -55,79 +55,57 @@ for(const goal of goals){
 
 
 
-// 2. Check existing progress
+    // 2. Check existing progress (ANY day)
+    const { data: existing } = await supabase
+      .from("user_daily_goals")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("goal_id", goal.id)
+      .maybeSingle();
 
+    let newProgress = amount;
+    let isNewDay = false;
 
-const {data:existing}=await supabase
+    if (existing) {
+      if (existing.goal_date === today) {
+        newProgress = (existing.progress || 0) + amount;
+      } else {
+        isNewDay = true;
+        newProgress = amount; // Reset for today
+      }
+    }
 
-.from("user_daily_goals")
+    const completed = newProgress >= goal.target_value;
 
-.select("*")
+    // 3. Save progress
+    if (existing) {
+      await supabase
+        .from("user_daily_goals")
+        .update({
+          goal_date: today,
+          progress: newProgress,
+          completed,
+          completed_at:
+            completed && (!existing.completed || isNewDay)
+              ? new Date().toISOString()
+              : existing.completed_at,
+        })
+        .eq("id", existing.id);
+    } else {
+      await supabase.from("user_daily_goals").insert({
+        user_id: userId,
+        goal_id: goal.id,
+        goal_date: today,
+        progress: newProgress,
+        completed,
+        completed_at: completed ? new Date().toISOString() : null,
+      });
+    }
 
-.eq(
-"user_id",
-userId
-)
-
-.eq(
-"goal_id",
-goal.id
-)
-
-.eq(
-"goal_date",
-today
-)
-
-.maybeSingle();
-
-
-
-
-const newProgress =
-
-(existing?.progress || 0) + amount;
-
-
-
-
-const completed =
-
-newProgress >= goal.target_value;
-
-
-
-
-
-
-
-// 3. Save progress
-
-if (existing) {
-  await supabase.from("user_daily_goals").update({
-    progress: newProgress,
-    completed,
-    completed_at: completed && !existing.completed ? new Date().toISOString() : existing.completed_at
-  }).eq("id", existing.id);
-} else {
-  await supabase.from("user_daily_goals").insert({
-    user_id: userId,
-    goal_id: goal.id,
-    goal_date: today,
-    progress: newProgress,
-    completed,
-    completed_at: completed ? new Date().toISOString() : null
-  });
-}
-
-// 4. Give XP only first completion
-
-if(
-completed &&
-!existing?.completed
-){
-  await addXP(userId, goal.xp, "Student");
-}
+    // 4. Give XP only on first completion of the day
+    if (completed && (!existing?.completed || isNewDay)) {
+      await addXP(userId, goal.xp, "Student");
+    }
 
 
 

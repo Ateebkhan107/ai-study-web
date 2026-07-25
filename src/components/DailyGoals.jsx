@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 import { CheckCircle2, Circle, Sparkles, Target, Zap } from "lucide-react";
 
 export default function DailyGoals() {
   const { user } = useUser();
+  const pathname = usePathname();
 
   const [goals, setGoals] = useState([]);
   const [track, setTrack] = useState(null);
@@ -41,39 +43,45 @@ export default function DailyGoals() {
     async function loadGoals() {
       const today = new Date().toISOString().split("T")[0];
 
-      const { data, error } = await supabase
+      // 1. Fetch active daily goals
+      const { data: goalsData, error: goalsError } = await supabase
         .from("daily_goals")
-        .select(
-          `
-*,
-user_daily_goals(
-user_id,
-progress,
-completed,
-goal_date
-)
-`
-        )
+        .select("*")
         .eq("is_active", true)
         .in("target", [track, "ALL"])
-        .order("created_at", {
-          ascending: false,
-        });
+        .order("created_at", { ascending: false });
 
-      if (error) {
-        console.log("Daily goals error:", error);
+      if (goalsError) {
+        console.log("Daily goals error:", goalsError);
+        return;
+      }
+      
+      const goalsList = goalsData || [];
+      if (goalsList.length === 0) {
+        setGoals([]);
         return;
       }
 
-      const formatted = (data || []).map((goal) => {
-        const progressData = goal.user_daily_goals?.find(
-          (item) => item.user_id === user.id && item.goal_date === today
-        );
+      const goalIds = goalsList.map(g => g.id);
 
+      // 2. Fetch only THIS user's progress for TODAY
+      const { data: progressData, error: progressError } = await supabase
+        .from("user_daily_goals")
+        .select("goal_id, progress, completed")
+        .eq("user_id", user.id)
+        .eq("goal_date", today)
+        .in("goal_id", goalIds);
+
+      if (progressError) {
+         console.log("Progress error:", progressError);
+      }
+
+      const formatted = goalsList.map((goal) => {
+        const pData = progressData?.find(p => p.goal_id === goal.id);
         return {
           ...goal,
-          progress: progressData?.progress || 0,
-          completed: progressData?.completed || false,
+          progress: pData?.progress || 0,
+          completed: pData?.completed || false,
         };
       });
 
@@ -81,7 +89,15 @@ goal_date
     }
 
     loadGoals();
-  }, [track, user?.id]);
+
+    // Listen for tab focus to silently refresh goals
+    const handleFocus = () => loadGoals();
+    window.addEventListener("focus", handleFocus);
+    
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [track, user?.id, pathname]);
 
   const completed = goals.filter((g) => g.completed).length;
 

@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
 import { getLeaderboard } from "@/lib/leaderboard";
 
 export default function Leaderboard() {
+  const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
 
   // =============================
@@ -99,16 +101,29 @@ export default function Leaderboard() {
           </div>
         )}
 
-        {users.map((user, index) => {
-          const theme = getRankTheme(index);
-          const RankIcon = theme.Icon;
-          const isTopThree = index < 3;
+        {(() => {
+          const top10 = users.slice(0, 10);
+          const currentUserIndex = currentUser ? users.findIndex(u => u.user_id === currentUser.id) : -1;
+          const currentUserObj = currentUserIndex !== -1 ? users[currentUserIndex] : null;
+
+          const displayUsers = [...top10];
+
+          if (currentUserObj && currentUserIndex >= 10) {
+            displayUsers.push({ ...currentUserObj, isCurrentUserAppended: true, originalIndex: currentUserIndex });
+          }
+
+          return displayUsers.map((user, displayIndex) => {
+            const index = user.isCurrentUserAppended ? user.originalIndex : displayIndex;
+            const theme = getRankTheme(index);
+            const RankIcon = theme.Icon;
+            const isTopThree = index < 3;
+            const isCurrentUser = currentUser?.id === user.user_id;
 
           return (
             <div
-              key={user.user_id}
-              className={`group relative flex items-center justify-between p-4 sm:p-5 rounded-2xl border transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${theme.cardBg} ${theme.border}`}
-              style={{ transitionDelay: `${index * 50}ms` }}
+              key={user.user_id + (user.isCurrentUserAppended ? "_appended" : "")}
+              className={`group relative flex items-center justify-between p-4 sm:p-5 rounded-2xl border transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
+              style={{ transitionDelay: `${displayIndex * 50}ms` }}
             >
               {/* Shimmer effect for 1st place */}
               {index === 0 && (
@@ -174,7 +189,7 @@ export default function Leaderboard() {
 
             </div>
           );
-        })}
+        }); })()}
       </div>
     </div>
   );

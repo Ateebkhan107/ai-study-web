@@ -21,15 +21,8 @@ level,
 badge
 `)
 
-.order(
-"xp",
-{
-ascending:false
-}
-
-)
-
-.limit(50);
+.order("xp", { ascending: false })
+.gt("xp", 0);
 
 
 
