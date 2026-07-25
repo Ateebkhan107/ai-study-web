@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import { addXP } from "./xp";
 
 
 export async function updateGoalProgress(
@@ -73,6 +74,11 @@ userId
 goal.id
 )
 
+.eq(
+"goal_date",
+today
+)
+
 .maybeSingle();
 
 
@@ -97,66 +103,30 @@ newProgress >= goal.target_value;
 
 // 3. Save progress
 
-
-await supabase
-.from("user_daily_goals")
-.upsert({
-
-user_id: userId,
-
-goal_id: goal.id,
-
-goal_date: today,
-
-progress: newProgress,
-
-completed,
-
-completed_at: completed
-  ? new Date().toISOString()
-  : null
-
-},
-{
-  onConflict: "user_id,goal_id,goal_date"
-});
-
-
-
-
-
-
-
+if (existing) {
+  await supabase.from("user_daily_goals").update({
+    progress: newProgress,
+    completed,
+    completed_at: completed && !existing.completed ? new Date().toISOString() : existing.completed_at
+  }).eq("id", existing.id);
+} else {
+  await supabase.from("user_daily_goals").insert({
+    user_id: userId,
+    goal_id: goal.id,
+    goal_date: today,
+    progress: newProgress,
+    completed,
+    completed_at: completed ? new Date().toISOString() : null
+  });
+}
 
 // 4. Give XP only first completion
 
-
 if(
-
 completed &&
-
 !existing?.completed
-
 ){
-
-
-
-await supabase.rpc(
-
-"increment_xp",
-
-{
-
-uid:userId,
-
-amount:goal.xp
-
-}
-
-);
-
-
-
+  await addXP(userId, goal.xp, "Student");
 }
 
 

@@ -12,9 +12,7 @@ function getLevel(xp) {
     return {
 
       level: "Legend",
-
-      badge: "👑",
-
+      badge: "Legend",
       progress: 100,
 
     };
@@ -29,9 +27,7 @@ function getLevel(xp) {
     return {
 
       level: "Master",
-
-      badge: "🚀",
-
+      badge: "Master",
       progress: Math.floor(
         ((xp - 5000) / 5000) * 100
       ),
@@ -48,9 +44,7 @@ function getLevel(xp) {
     return {
 
       level: "Achiever",
-
-      badge: "🧠",
-
+      badge: "Achiever",
       progress: Math.floor(
         ((xp - 2000) / 3000) * 100
       ),
@@ -67,9 +61,7 @@ function getLevel(xp) {
     return {
 
       level: "Scholar",
-
-      badge: "📘",
-
+      badge: "Scholar",
       progress: Math.floor(
         ((xp - 500) / 1500) * 100
       ),
@@ -84,9 +76,7 @@ function getLevel(xp) {
   return {
 
     level: "Explorer",
-
-    badge: "🌱",
-
+    badge: "Explorer",
     progress: Math.floor(
       (xp / 500) * 100
     ),

@@ -12,12 +12,6 @@ export default function HistoryPage() {
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) {
-      load();
-    }
-  }, [user]);
-
   async function load() {
     const { data, error } = await supabase
       .from("test_attempts")
@@ -35,6 +29,12 @@ export default function HistoryPage() {
     setTests(data);
     setLoading(false);
   }
+
+  useEffect(() => {
+    if (user) {
+      load();
+    }
+  }, [user]);
 
   if (loading) {
     return (
@@ -85,7 +85,7 @@ export default function HistoryPage() {
           <div className="text-6xl mb-4">📭</div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">No tests taken yet</h2>
           <p className="text-slate-400 dark:text-slate-500 mb-8">
-            You haven't attempted any tests yet. Go back and take one!
+              You haven&apos;t taken any mock tests yet. Start one now to track your progress!
           </p>
           <button
             onClick={() => router.back()}

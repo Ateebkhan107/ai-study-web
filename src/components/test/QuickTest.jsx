@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Target, Atom, FlaskConical, Calculator, Dna, ClipboardList, Hospital, Sun } from "lucide-react";
 
 const QUICK_OPTIONS = [
   {
     label: "Full Mixed Test",
     descJee: "PCM subjects · 60 questions · 60 mins",
     descNeet: "PCB subjects · 60 questions · 60 mins",
-    icon: "🎯",
+    icon: <Target className="w-8 h-8" />,
     subject: "all",
     count: 60,
     duration: 60,
@@ -20,7 +21,7 @@ const QUICK_OPTIONS = [
     label: "Physics Blitz",
     descJee: "Physics only · 30 questions · 30 mins",
     descNeet: "Physics only · 30 questions · 30 mins",
-    icon: "⚛",
+    icon: <Atom className="w-8 h-8" />,
     subject: "Physics",
     count: 30,
     duration: 30,
@@ -32,7 +33,7 @@ const QUICK_OPTIONS = [
     label: "Chemistry Sprint",
     descJee: "Chemistry only · 30 questions · 30 mins",
     descNeet: "Chemistry only · 30 questions · 30 mins",
-    icon: "🧪",
+    icon: <FlaskConical className="w-8 h-8" />,
     subject: "Chemistry",
     count: 30,
     duration: 30,
@@ -43,7 +44,7 @@ const QUICK_OPTIONS = [
   {
     label: "Maths Challenge",
     descJee: "Maths only · 30 questions · 45 mins",
-    icon: "∑",
+    icon: <Calculator className="w-8 h-8" />,
     subject: "Maths",
     count: 30,
     duration: 45,
@@ -54,7 +55,7 @@ const QUICK_OPTIONS = [
   {
     label: "Biology Quick",
     descNeet: "Biology only · 30 questions · 25 mins",
-    icon: "🧬",
+    icon: <Dna className="w-8 h-8" />,
     subject: "Biology",
     count: 30,
     duration: 25,
@@ -65,7 +66,7 @@ const QUICK_OPTIONS = [
   {
     label: "JEE Mock",
     descJee: "JEE pattern · 90 questions · 180 mins",
-    icon: "📋",
+    icon: <ClipboardList className="w-8 h-8" />,
     subject: "all",
     count: 90,
     duration: 180,
@@ -77,7 +78,7 @@ const QUICK_OPTIONS = [
   {
     label: "NEET Mock",
     descNeet: "NEET pattern · 180 questions · 200 mins",
-    icon: "🏥",
+    icon: <Hospital className="w-8 h-8" />,
     subject: "all",
     count: 180,
     duration: 200,
@@ -90,7 +91,7 @@ const QUICK_OPTIONS = [
     label: "Daily Warmup",
     descJee: "PCM subjects · 10 questions · 10 mins",
     descNeet: "PCB subjects · 10 questions · 10 mins",
-    icon: "☀️",
+    icon: <Sun className="w-8 h-8" />,
     subject: "all",
     count: 10,
     duration: 10,
@@ -165,7 +166,7 @@ export default function QuickTest({ track = "jee" }) {
               </span>
             )}
 
-            <span className="text-3xl mb-3">{option.icon}</span>
+            <span className="mb-3 flex items-center">{option.icon}</span>
 
             <p className={`text-sm font-black mb-1 transition-colors
               ${launching === option.label

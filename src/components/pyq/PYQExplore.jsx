@@ -3,14 +3,15 @@
 import { useState } from "react";
 import QuestionCard from "@/components/pyq/QuestionCard";
 import { FILTER_OPTIONS } from "@/lib/pyqData";
+import { BookOpen, Atom, FlaskConical, Calculator, Dna, Search } from "lucide-react";
 
 // Identical typography and color maps matching the Test Center design tokens
 const SUBJECT_CONFIG = {
-  "All":       { icon: "📚", color: "slate" },
-  "Physics":   { icon: "⚛", color: "blue" },
-  "Chemistry": { icon: "🧪", color: "green" },
-  "Maths":     { icon: "∑", color: "purple" },
-  "Biology":   { icon: "🧬", color: "rose" },
+  "All":       { icon: <BookOpen className="w-6 h-6" />, color: "slate" },
+  "Physics":   { icon: <Atom className="w-6 h-6" />, color: "blue" },
+  "Chemistry": { icon: <FlaskConical className="w-6 h-6" />, color: "green" },
+  "Maths":     { icon: <Calculator className="w-6 h-6" />, color: "purple" },
+  "Biology":   { icon: <Dna className="w-6 h-6" />, color: "rose" },
 };
 
 const colorMap = {
@@ -73,7 +74,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
             <p className="text-xs text-gray-400 mb-4">Select a subject area to isolate previous questions</p>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
               {subjectsPool.map((subj) => {
-                const data = SUBJECT_CONFIG[subj] || { icon: "📚", color: "slate" };
+                const data = SUBJECT_CONFIG[subj] || { icon: <BookOpen className="w-6 h-6" />, color: "slate" };
                 const c = colorMap[data.color] || colorMap.slate;
                 const isSelected = filterSubject === subj;
                 
@@ -88,7 +89,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                         : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/30"
                       }`}
                   >
-                    <span className="text-2xl mb-1">{data.icon}</span>
+                    <span className="mb-1 flex items-center justify-center">{data.icon}</span>
                     {subj}
                   </button>
                 );
@@ -242,8 +243,8 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
               />
             ))
           ) : (
-            <div className="text-center py-20 bg-gray-50 dark:bg-gray-900/20 border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl">
-              <p className="text-3xl mb-3">🔍</p>
+            <div className="text-center py-20 bg-gray-50 dark:bg-gray-900/20 border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl flex flex-col items-center">
+              <Search className="w-10 h-10 mb-3 text-gray-400" />
               <p className="text-lg font-bold text-gray-900 dark:text-white">No questions isolated</p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Try resetting filtering criteria matrices.</p>
               <button 

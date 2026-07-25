@@ -1,4 +1,12 @@
 "use client";
+import { Atom, FlaskConical, Calculator, Dna, Target } from "lucide-react";
+
+const IconMap = {
+  "atom": <Atom className="w-5 h-5" />,
+  "flask-conical": <FlaskConical className="w-5 h-5" />,
+  "calculator": <Calculator className="w-5 h-5" />,
+  "dna": <Dna className="w-5 h-5" />
+};
 
 export default function ExamHub({ config }) {
   return (
@@ -29,7 +37,7 @@ export default function ExamHub({ config }) {
             <div key={sub.id} className="bg-white/60 border border-gray-200/50 dark:bg-[#0d1117]/60 dark:border-gray-800/80 p-4 rounded-2xl flex flex-col justify-between space-y-3 shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-bold text-gray-800 dark:text-gray-200">{sub.label}</span>
-                <span className="text-base">{sub.icon}</span>
+                <span className="text-base text-gray-500">{IconMap[sub.icon] || <Atom className="w-5 h-5" />}</span>
               </div>
               <div className="space-y-1">
                 <div className="w-full bg-gray-100 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
@@ -47,7 +55,7 @@ export default function ExamHub({ config }) {
         {/* Right Focus Block: Todays Schedule */}
         <div className="bg-white/80 border border-gray-200/60 dark:bg-[#161b22]/50 dark:border-gray-800/80 p-4 rounded-2xl w-full xl:w-72 shadow-sm shrink-0">
           <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
-            🎯 Today&apos;s Focus Topics
+            <Target className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" /> Today&apos;s Focus Topics
           </p>
           <div className="space-y-2.5">
             {config.focusTopics.map((topic, idx) => (

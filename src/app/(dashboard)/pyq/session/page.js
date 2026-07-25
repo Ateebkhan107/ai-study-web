@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
+import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 import Logo from "@/components/Logo";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -21,6 +22,7 @@ export default function PYQSessionPage() {
   const { user } = useUser();
 
   const [questions, setQuestions] = useState([]);
+  const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
@@ -74,6 +76,12 @@ export default function PYQSessionPage() {
         }
 
         setQuestions(combined);
+        
+        if (user?.id) {
+          const bms = await getBookmarks(user.id);
+          setBookmarkedIds(new Set(bms));
+        }
+
         setCurrentIndex(0);
         setAnswers({});
       } catch (error) {
@@ -388,7 +396,34 @@ export default function PYQSessionPage() {
                   </span>
                 )}
               </div>
-              <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">{currentQuestion.year}</span>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={async () => {
+                    if (!user?.id) return;
+                    const qId = currentQuestion.id;
+                    const isB = bookmarkedIds.has(qId);
+                    
+                    // Optimistic
+                    const next = new Set(bookmarkedIds);
+                    if (isB) next.delete(qId); else next.add(qId);
+                    setBookmarkedIds(next);
+                    
+                    // DB
+                    await toggleBookmark(user.id, qId);
+                  }}
+                  className={`p-2 rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 ${
+                    bookmarkedIds.has(currentQuestion.id)
+                      ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20"
+                      : "bg-white/50 dark:bg-slate-800/30 text-slate-400 dark:text-slate-500 border-slate-200/60 dark:border-slate-700/50 hover:text-indigo-500"
+                  }`}
+                  title="Save Question"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill={bookmarkedIds.has(currentQuestion.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
+                  </svg>
+                </button>
+                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">{currentQuestion.year}</span>
+              </div>
             </div>
 
             {/* Subject + Chapter tags */}

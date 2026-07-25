@@ -6,6 +6,7 @@ import {
   DAILY_TASKS,
   AI_RECOMMENDATIONS,
 } from "@/lib/analyticsData";
+import { Sparkles } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────
 // SmartPrediction
@@ -25,7 +26,7 @@ export function SmartPrediction({ track = "jee" }) {
           Smart Prediction
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          ✦ AI
+          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
         </span>
       </div>
 
@@ -85,7 +86,7 @@ export function AdaptiveLearning({ track = "jee" }) {
           Adaptive Learning
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          ✦ AI
+          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
         </span>
       </div>
       <p className="text-xs text-slate-400 dark:text-slate-500 mb-4">
@@ -145,7 +146,7 @@ export function AIStudyPlanner({ track = "jee" }) {
           AI Study Planner
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          ✦ AI
+          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
         </span>
       </div>
 
@@ -205,7 +206,7 @@ export function AIRecommendations({ track = "jee" }) {
           AI Recommendations
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          ✦ AI
+          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
         </span>
       </div>
 

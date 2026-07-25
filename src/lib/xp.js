@@ -10,7 +10,7 @@ function calculateLevel(xp){
 if(xp >= 10000){
 return {
 level:5,
-badge:"👑 Master"
+badge:"Master"
 };
 }
 
@@ -18,7 +18,7 @@ badge:"👑 Master"
 if(xp >= 5000){
 return {
 level:4,
-badge:"🔥 Expert"
+badge:"Expert"
 };
 }
 
@@ -26,7 +26,7 @@ badge:"🔥 Expert"
 if(xp >= 2000){
 return {
 level:3,
-badge:"⚡ Achiever"
+badge:"Achiever"
 };
 }
 
@@ -34,7 +34,7 @@ badge:"⚡ Achiever"
 if(xp >= 500){
 return {
 level:2,
-badge:"🚀 Challenger"
+badge:"Challenger"
 };
 }
 
@@ -42,7 +42,7 @@ badge:"🚀 Challenger"
 
 return {
 level:1,
-badge:"🌱 Explorer"
+badge:"Explorer"
 };
 
 

@@ -1,6 +1,7 @@
 "use client";
 
 import PricingCard from "@/components/pricing/PricingCard";
+import { Bot, BarChart3, FileText, BookOpen } from "lucide-react";
 
 export default function PricingPage() {
   return (
@@ -82,7 +83,7 @@ export default function PricingPage() {
           <div className="grid md:grid-cols-4 gap-6 mt-10">
 
             <div className="rounded-2xl bg-white p-6 shadow">
-              <div className="text-4xl">🤖</div>
+              <div className="text-4xl text-indigo-500 mb-2 flex items-center"><Bot className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
                 AI Doubt Solver
@@ -94,7 +95,7 @@ export default function PricingPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow">
-              <div className="text-4xl">📊</div>
+              <div className="text-4xl text-emerald-500 mb-2 flex items-center"><BarChart3 className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
                 Premium Analytics
@@ -106,7 +107,7 @@ export default function PricingPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow">
-              <div className="text-4xl">📝</div>
+              <div className="text-4xl text-rose-500 mb-2 flex items-center"><FileText className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
                 Unlimited Tests
@@ -118,7 +119,7 @@ export default function PricingPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow">
-              <div className="text-4xl">📚</div>
+              <div className="text-4xl text-violet-500 mb-2 flex items-center"><BookOpen className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
                 Premium PYQs

@@ -20,6 +20,7 @@ export default function useRecentSessions() {
 
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[user]);
 
   async function loadSessions(){

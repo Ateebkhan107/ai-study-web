@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
+import { Rocket } from "lucide-react";
 
 export default function PublicLandingPage() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function PublicLandingPage() {
       {/* Hero Welcome Message */}
       <main className="max-w-3xl w-full mx-auto px-6 py-20 flex flex-col items-center text-center justify-center flex-1 relative z-10 space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/5 text-indigo-400 text-[10px] font-black uppercase tracking-widest">
-          🚀 Welcome to PrepZii
+          <Rocket className="w-3.5 h-3.5" /> Welcome to PrepZii
         </div>
         
         <h1 className="text-4xl sm:text-7xl font-black tracking-tight text-white leading-none">

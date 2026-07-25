@@ -7,6 +7,8 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
 import PageWrapper from "@/components/PageWrapper";
+import { Atom, FlaskConical, Sigma, Dna } from "lucide-react";
+import { getBookmarks, removeBookmark } from "@/lib/bookmarks";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -64,10 +66,10 @@ const TABS = [
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const MASTER_SUBJECTS = [
-  { id: "physics",     label: "Physics",   emoji: "⚛️",  count: 1240, tracks: ["jee", "neet"] },
-  { id: "chemistry",   label: "Chemistry", emoji: "🧪",  count: 980,  tracks: ["jee", "neet"] },
-  { id: "mathematics", label: "Maths",     emoji: "∑",   count: 1560, tracks: ["jee"] },
-  { id: "biology",     label: "Biology",   emoji: "🧬",  count: 1740, tracks: ["neet"] },
+  { id: "physics",     label: "Physics",   Icon: Atom,         count: 1240, tracks: ["jee", "neet"] },
+  { id: "chemistry",   label: "Chemistry", Icon: FlaskConical, count: 980,  tracks: ["jee", "neet"] },
+  { id: "mathematics", label: "Maths",     Icon: Sigma,        count: 1560, tracks: ["jee"] },
+  { id: "biology",     label: "Biology",   Icon: Dna,          count: 1740, tracks: ["neet"] },
 ];
 
 const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
@@ -86,12 +88,7 @@ const PRACTICE_MODE_SUMMARY_LABEL = {
   mistakes: "Mistake Revision",
 };
 
-const MASTER_SAVED = [
-  { id: 1, subject: "Physics",     topic: "Optics",           year: 2025, difficulty: "Medium", track: "mixed", question: "A ray of light passes from air to glass at an angle of incidence 45°. Find the angle of refraction..." },
-  { id: 2, subject: "Chemistry",   topic: "Electrochemistry", year: 2024, difficulty: "Hard",   track: "mixed", question: "Calculate the EMF of the cell: Zn | Zn²⁺(0.1M) || Cu²⁺(0.01M) | Cu at 298K..." },
-  { id: 3, subject: "Mathematics", topic: "Probability",      year: 2023, difficulty: "Easy",   track: "jee",   question: "A bag contains 5 red and 3 blue balls. Two balls are drawn at random. Find the probability..." },
-  { id: 4, subject: "Biology",     topic: "Molecular Basis",  year: 2026, difficulty: "Hard",   track: "neet",  question: "During DNA replication, identify the correct execution sequence of Okazaki fragments processing..." },
-];
+const MASTER_SAVED = []; // Unused, fetching dynamically now
 
 const SUBJECT_BAR_COLORS = {
   Physics:     "#6366F1",
@@ -243,7 +240,7 @@ function PracticeTab({ subjects, track }) {
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
-                  <span className="text-2xl">{s.emoji}</span>
+                  <s.Icon className="w-7 h-7 mb-1" />
                   <span className="text-sm font-semibold">{s.label}</span>
                 </button>
               );
@@ -489,7 +486,7 @@ function AnalyticsTab({ track }) {
 }
 
 // ─── Saved Tab ────────────────────────────────────────────────────────────────
-function SavedTab({ track, savedQuestions }) {
+function SavedTab({ track, savedQuestions, onUnsave }) {
   return (
     <div className="space-y-5">
       <div>
@@ -520,6 +517,17 @@ function SavedTab({ track, savedQuestions }) {
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{q.question}</p>
               </div>
+              {onUnsave && (
+                <button
+                  onClick={() => onUnsave(q.id)}
+                  className="p-2 text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 rounded-lg transition-colors flex-shrink-0 cursor-pointer"
+                  title="Remove Bookmark"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
         ))}
@@ -548,7 +556,31 @@ export default function PYQPage() {
   }, [user]);
 
   const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
-  const filteredSaved    = MASTER_SAVED.filter((s) => s.track === "mixed" || s.track === track);
+
+  const [savedQuestions, setSavedQuestions] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadSavedQuestions() {
+      if (!user) return;
+      const bms = await getBookmarks(user.id);
+      if (bms.length === 0) {
+        if (!cancelled) setSavedQuestions([]);
+        return;
+      }
+      const { data } = await supabase
+        .from("pyq_questions")
+        .select("*")
+        .in("id", bms);
+      if (!cancelled && data) {
+        // filter by track if needed, or show all
+        const filtered = data.filter(q => track === "jee" ? q.exam !== "NEET" : q.exam === "NEET");
+        setSavedQuestions(filtered);
+      }
+    }
+    loadSavedQuestions();
+    return () => { cancelled = true; };
+  }, [user, track]);
 
   const [overview,       setOverview]       = useState(null);
   const [attemptedTotal, setAttemptedTotal] = useState(null);
@@ -577,6 +609,12 @@ export default function PYQPage() {
     loadPYQStats();
     return () => { cancelled = true; };
   }, []);
+
+  const handleUnsave = async (qId) => {
+    if (!user?.id) return;
+    setSavedQuestions((prev) => prev.filter((q) => q.id !== qId));
+    await removeBookmark(user.id, qId);
+  };
 
   const questionVaultValue = overview ? overview.totalQuestions.toLocaleString() : "—";
   const yearRangeValue = overview?.minYear && overview?.maxYear ? `${overview.maxYear - overview.minYear + 1} Years` : "—";
@@ -637,7 +675,7 @@ export default function PYQPage() {
       {/* Tab panels */}
       {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
       {activeTab === "analytics" && <AnalyticsTab track={track} />}
-      {activeTab === "saved"     && <SavedTab track={track} savedQuestions={filteredSaved} />}
+      {activeTab === "saved"     && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
     </PageWrapper>
   );
 }

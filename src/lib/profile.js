@@ -132,7 +132,7 @@ return {
 
 level:5,
 
-badge:"🔥 Legend",
+badge:"Legend",
 
 current:xp,
 
@@ -152,7 +152,7 @@ return {
 
 level:4,
 
-badge:"💎 Master",
+badge:"Master",
 
 current:xp,
 
@@ -171,7 +171,7 @@ return {
 
 level:3,
 
-badge:"⚡ Pro",
+badge:"Pro",
 
 current:xp,
 
@@ -190,7 +190,7 @@ return {
 
 level:2,
 
-badge:"🚀 Challenger",
+badge:"Challenger",
 
 current:xp,
 
@@ -207,7 +207,7 @@ return {
 
 level:1,
 
-badge:"🌱 Explorer",
+badge:"Explorer",
 
 current:xp,
 

@@ -196,7 +196,7 @@ export default function DashboardSection({ config }) {
             No Library Books Found
           </h3>
           <p className="text-xs font-medium text-slate-500 dark:text-slate-400 max-w-sm">
-            We haven't added any formula handbooks for {isNeet ? "NEET" : "JEE"} yet. Check back soon for updates!
+            We haven&apos;t added any formula handbooks for {isNeet ? "NEET" : "JEE"} yet. Check back soon for updates!
           </p>
         </div>
       )}

@@ -11,10 +11,6 @@ export default function ResultPage() {
   const [attempt, setAttempt] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadResult();
-  }, []);
-
   async function loadResult() {
     try {
       const { data, error } = await supabase
@@ -31,6 +27,11 @@ export default function ResultPage() {
     }
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Loading State ──
   if (loading) {

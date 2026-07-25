@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import QuestionCard from "@/components/pyq/QuestionCard";
+import { Atom, FlaskConical, Calculator, Dna, BookOpen, Flag } from "lucide-react";
 
 const SUBJECT_CONFIG = {
-  Physics:   { icon: "⚛", color: "blue" },
-  Chemistry: { icon: "🧪", color: "green" },
-  Maths:     { icon: "∑", color: "purple" },
-  Biology:   { icon: "🧬", color: "rose" },
+  Physics:   { icon: <Atom className="w-6 h-6" />, color: "blue" },
+  Chemistry: { icon: <FlaskConical className="w-6 h-6" />, color: "green" },
+  Maths:     { icon: <Calculator className="w-6 h-6" />, color: "purple" },
+  Biology:   { icon: <Dna className="w-6 h-6" />, color: "rose" },
 };
 
 const colorMap = {
@@ -205,7 +206,9 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
         <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-[2rem] p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
 
-          <div className="text-4xl mb-4">🏁</div>
+          <div className="text-4xl mb-4 flex justify-center text-black dark:text-white">
+            <Flag className="w-10 h-10" />
+          </div>
           <h2 className="text-3xl font-black text-black dark:text-white tracking-tight mb-2">
             Practice Complete
           </h2>
@@ -324,7 +327,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                       : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/30"
                     }`}
                 >
-                  <span className="text-2xl mb-1">{data.icon}</span>
+                  <span className="mb-1 flex items-center justify-center">{data.icon}</span>
                   {name}
                 </button>
               );
@@ -426,13 +429,13 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
             </p>
             <div className="flex flex-wrap gap-1.5">
               {selectedSubjects.length === 0 ? (
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black">
-                  📚 Mixed Pool
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                  <BookOpen className="w-3 h-3" /> Mixed Pool
                 </span>
               ) : (
                 selectedSubjects.map((s) => (
-                  <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black">
-                    {SUBJECT_CONFIG[s].icon} {s}
+                  <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                    <span className="w-3 h-3 flex items-center justify-center">{SUBJECT_CONFIG[s].icon}</span> {s}
                   </span>
                 ))
               )}

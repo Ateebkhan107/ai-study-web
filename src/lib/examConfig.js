@@ -1,13 +1,13 @@
 export const EXAM_CONFIG = {
   JEE: {
-    badge: "🚀 JEE Main & Advanced",
+    badge: "JEE Main & Advanced",
     badgeStyles: "border-purple-500/30 bg-purple-500/10 text-purple-400 dark:border-purple-400/20 dark:bg-purple-500/5",
     themeGlow: "from-purple-500/10 via-transparent to-transparent",
-    dashboardTitle: "Welcome Back, JEE Aspirant 🚀",
+    dashboardTitle: "Welcome Back, JEE Aspirant",
     subjects: [
-      { id: "physics", label: "Physics", icon: "⚛️", color: "from-blue-500 to-indigo-600" },
-      { id: "chemistry", label: "Chemistry", icon: "🧪", color: "from-teal-500 to-emerald-600" },
-      { id: "maths", label: "Mathematics", icon: "∑", color: "from-purple-500 to-pink-600" }
+      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-indigo-600" },
+      { id: "chemistry", label: "Chemistry", icon: "flask-conical", color: "from-teal-500 to-emerald-600" },
+      { id: "maths", label: "Mathematics", icon: "calculator", color: "from-purple-500 to-pink-600" }
     ],
     focusTopics: [
       { topic: "Rotational Dynamics", subject: "Physics", urgency: "High Yield" },
@@ -29,7 +29,7 @@ export const EXAM_CONFIG = {
     
     // ── JEE SPECIFIC TEST SUITE CONFIG ──
     testSuite: {
-      title: "JEE Test Arena 🎯",
+      title: "JEE Test Arena",
       description: "Simulate real exam conditions with automated ranks, NTA-style integer type marking (+4/-1, +3/-1), and advanced percentile predictors.",
       categories: [
         { name: "JEE Main Full-Length Mock", count: "15 Available", duration: "180 mins", blueprint: "300 Marks Pattern" },
@@ -40,7 +40,7 @@ export const EXAM_CONFIG = {
     
     // ── JEE SPECIFIC PYQ ARCHIVE CONFIG ──
     pyqSuite: {
-      title: "JEE Previous Year Archives 📚",
+      title: "JEE Previous Year Archives",
       description: "Practice shift-wise previous year question sets with step-by-step symbolic derivation workflows and alternative AI short-cut analysis logs.",
       papers: [
         { title: "JEE Main 2026 (Jan/April Shifts)", meta: "All 24 Shift Booklets", difficulty: "Official NTA Standard" },
@@ -50,14 +50,14 @@ export const EXAM_CONFIG = {
     }
   },
   NEET: {
-    badge: "🧬 NEET Medical UG",
+    badge: "NEET Medical UG",
     badgeStyles: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 dark:border-emerald-400/20 dark:bg-emerald-500/5",
     themeGlow: "from-emerald-500/10 via-transparent to-transparent",
-    dashboardTitle: "Welcome Back, NEET Aspirant 🧬",
+    dashboardTitle: "Welcome Back, NEET Aspirant",
     subjects: [
-      { id: "physics", label: "Physics", icon: "⚛️", color: "from-blue-500 to-indigo-600" },
-      { id: "chemistry", label: "Chemistry", icon: "🧪", color: "from-teal-500 to-emerald-600" },
-      { id: "biology", label: "Biology", icon: "🧬", color: "from-emerald-400 to-teal-600" }
+      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-indigo-600" },
+      { id: "chemistry", label: "Chemistry", icon: "flask-conical", color: "from-teal-500 to-emerald-600" },
+      { id: "biology", label: "Biology", icon: "dna", color: "from-emerald-400 to-teal-600" }
     ],
     focusTopics: [
       { topic: "Semi-conductors", subject: "Physics", urgency: "High Yield" },
@@ -79,7 +79,7 @@ export const EXAM_CONFIG = {
     
     // ── NEET SPECIFIC TEST SUITE CONFIG ──
     testSuite: {
-      title: "NEET Test Simulation Center 🩺",
+      title: "NEET Test Simulation Center",
       description: "Master the 720-mark structure with high-velocity tracking, multi-option botanical layouts, strict negative scoring, and OMR pacing logs.",
       categories: [
         { name: "NEET Full Syllabus Mock Exam", count: "25 Available", duration: "200 mins", blueprint: "720 Marks (200 Qs Layout)" },
@@ -90,7 +90,7 @@ export const EXAM_CONFIG = {
     
     // ── NEET SPECIFIC PYQ ARCHIVE CONFIG ──
     pyqSuite: {
-      title: "NEET Past Year Archives 🧬",
+      title: "NEET Past Year Archives",
       description: "Access structured collections of medical entrance questions perfectly indexed sentence-by-sentence to the official foundational NCERT textbooks.",
       papers: [
         { title: "NEET UG 2026 Paper (With Re-test logs)", meta: "Code W, X, Y, Z Series", difficulty: "High NCERT Extraction" },

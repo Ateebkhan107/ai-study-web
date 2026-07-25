@@ -170,26 +170,12 @@ export default function AnalyticsPage() {
 
       {/* ── AI Insights Tab ── */}
       {activeTab === "ai-insights" && (
-        <div className="space-y-8">
-          <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-            <SmartPrediction track={activeTrack} />
-          </section>
-
-          <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
-            <AdaptiveLearning track={activeTrack} />
-          </section>
-
-          <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
-            <AIStudyPlanner track={activeTrack} />
-          </section>
-
-          <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
-            <AIRecommendations track={activeTrack} />
-          </section>
-
-          <section className="animate-slideUp" style={{ animationDelay: "450ms" }}>
-            <PYQIntelligence liveData={stats?.pyqInsights} />
-          </section>
+        <div className="flex flex-col items-center justify-center py-20 animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="glass-card p-10 max-w-md w-full text-center">
+            <Brain className="w-12 h-12 text-blue-500 mx-auto mb-4 opacity-50" />
+            <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">AI Insights</h2>
+            <p className="text-slate-500 dark:text-slate-400">Coming soon. Stay updated!</p>
+          </div>
         </div>
       )}
 

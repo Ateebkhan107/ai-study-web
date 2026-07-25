@@ -104,34 +104,20 @@ newProgress >= goal.target_value;
 
 
 
-// save progress
-
-await supabase
-
-.from("user_daily_goals")
-
-.upsert(
-{
-
-user_id:userId,
-
-goal_id:goal.id,
-
-goal_date:today,
-
-progress:newProgress,
-
-completed
-
-},
-{
-
-onConflict:
-"user_id,goal_id,goal_date"
-
+if (existing) {
+  await supabase.from("user_daily_goals").update({
+    progress: newProgress,
+    completed
+  }).eq("id", existing.id);
+} else {
+  await supabase.from("user_daily_goals").insert({
+    user_id: userId,
+    goal_id: goal.id,
+    goal_date: today,
+    progress: newProgress,
+    completed
+  });
 }
-
-);
 
 
 

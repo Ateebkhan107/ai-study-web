@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Rocket, BookOpen, ImageIcon, Bell } from "lucide-react";
 
 
 export default function AdminNotifications(){
@@ -71,22 +72,17 @@ const [filterYear,setFilterYear]=useState("");
 
 const [filterSearch,setFilterSearch]=useState("");
 
-useEffect(()=>{
+  useEffect(()=>{
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  },[]);
 
 
-setMounted(true);
-
-
-},[]);
-
-
-useEffect(()=>{
-
-loadGoals();
-
-loadPYQs();
-
-},[]);
+  useEffect(()=>{
+    loadGoals();
+    loadPYQs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
 
 
@@ -949,9 +945,10 @@ dark:bg-[#050816]
 <h1 className="
 text-3xl
 font-black
+flex items-center gap-2
 ">
 
-PrepZii Admin 🚀
+PrepZii Admin <Rocket className="w-8 h-8" />
 
 </h1>
 
@@ -963,9 +960,9 @@ PrepZii Admin 🚀
 <div className="space-y-5">
 
 
-<h2 className="font-black text-xl">
+<h2 className="font-black text-xl flex items-center gap-2">
 
-Upload PYQ Paper 📚
+Upload PYQ Paper <BookOpen className="w-6 h-6" />
 
 </h2>
 
@@ -1078,9 +1075,9 @@ pyqUploading
 <div className="space-y-5">
 
 
-<h2 className="font-black text-xl">
+<h2 className="font-black text-xl flex items-center gap-2">
 
-Upload PYQ Image 🖼️
+Upload PYQ Image <ImageIcon className="w-6 h-6" />
 
 </h2>
 
@@ -1236,9 +1233,9 @@ Copy URL
 <div className="space-y-5">
 
 
-<h2 className="font-black text-xl">
+<h2 className="font-black text-xl flex items-center gap-2">
 
-Manage PYQs 📚
+Manage PYQs <BookOpen className="w-6 h-6" />
 
 </h2>
 
@@ -1546,9 +1543,9 @@ Delete
 <div className="space-y-5">
 
 
-<h2 className="font-black text-xl">
+<h2 className="font-black text-xl flex items-center gap-2">
 
-Send Notification 🔔
+Send Notification <Bell className="w-6 h-6" />
 
 </h2>
 

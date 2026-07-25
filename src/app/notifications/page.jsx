@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { Trash2, Bell, CheckCircle } from "lucide-react";
+import { Trash2, Bell, CheckCircle, Rocket } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
@@ -83,6 +83,8 @@ if(user && track){
 loadNotifications();
 
 }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
 
 },[user,track]);
 
@@ -491,7 +493,7 @@ items-center
 gap-2
 ">
 
-Notifications 🔔
+Notifications <Bell className="w-6 h-6" />
 
 </h1>
 
@@ -608,9 +610,9 @@ No notifications
 
 
 
-<p className="text-gray-400 text-xs mt-1">
+<p className="text-gray-400 text-xs mt-1 flex items-center justify-center gap-1">
 
-You are all caught up 🚀
+You are all caught up <Rocket className="w-3 h-3" />
 
 </p>
 
@@ -661,12 +663,13 @@ w-10
 h-10
 rounded-xl
 bg-blue-100
+text-blue-500
 flex
 items-center
 justify-center
 ">
 
-🔔
+<Bell className="w-5 h-5" />
 
 </div>
 

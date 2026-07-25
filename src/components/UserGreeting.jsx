@@ -11,13 +11,6 @@ export default function UserGreeting() {
   const [name, setName] = useState("");
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    if (user) {
-      loadProfile();
-    }
-  }, [user]);
-
   async function loadProfile() {
     const { data, error } = await supabase
       .from("user_profiles")
@@ -32,6 +25,15 @@ export default function UserGreeting() {
 
     setName(data.full_name);
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    if (user) {
+      loadProfile();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const firstName = name ? name.split(" ")[0] : "Student";
 

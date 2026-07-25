@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createTestAttempt } from "@/lib/testAttempts";
+import { Atom, FlaskConical, Calculator, Dna } from "lucide-react";
 
 const SUBJECTS = {
   Physics: {
-    icon: "⚛",
+    icon: <Atom className="w-6 h-6" />,
     color: "blue",
     chapters: [
       "Kinematics", "Laws of Motion", "Work Power and Energy",
@@ -16,7 +17,7 @@ const SUBJECTS = {
     ],
   },
   Chemistry: {
-    icon: "🧪",
+    icon: <FlaskConical className="w-6 h-6" />,
     color: "green",
     chapters: [
       "Atomic Structure", "Chemical Bonding", "States of Matter",
@@ -26,7 +27,7 @@ const SUBJECTS = {
     ],
   },
   Maths: {
-    icon: "∑",
+    icon: <Calculator className="w-6 h-6" />,
     color: "purple",
     chapters: [
       "Sets & Relations", "Complex Numbers", "Quadratic Equations",
@@ -36,7 +37,7 @@ const SUBJECTS = {
     ],
   },
   Biology: {
-    icon: "🧬",
+    icon: <Dna className="w-6 h-6" />,
     color: "rose",
     chapters: [
       "Cell Biology", "Genetics", "Evolution",
@@ -349,7 +350,7 @@ const DURATIONS =
                       : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/40"
                     }`}
                 >
-                  <span className="text-2xl">{data.icon}</span>
+                  <span className="mb-1 flex items-center justify-center">{data.icon}</span>
                   {name}
                   {isSelected && (
                     <span className="text-[10px] font-bold opacity-70">
@@ -528,8 +529,8 @@ const DURATIONS =
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedSubjects.map((s) => (
-                    <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black">
-                      {SUBJECTS[s]?.icon} {s}
+                    <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                      <span className="w-3 h-3 flex items-center justify-center">{SUBJECTS[s]?.icon}</span> {s}
                     </span>
                   ))}
                 </div>

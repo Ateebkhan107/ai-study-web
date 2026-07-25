@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/lib/goals";
+import { updateGoalProgress } from "@/lib/updateGoalProgress";
 
 // Practice mode display labels
 const modeLabels = {
@@ -62,7 +62,7 @@ export default function PYQResultsPage() {
     async function updatePYQGoal() {
       try {
         goalUpdated.current = true;
-        await updateGoalProgress(user.id, "PYQ", total);
+        await updateGoalProgress(user.id, "PYQ", 1);
         console.log("PYQ GOAL UPDATED 🚀", total);
       } catch (error) {
         goalUpdated.current = false;

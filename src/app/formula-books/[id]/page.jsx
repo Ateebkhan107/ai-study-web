@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getFormulaBook, getPdfUrl } from "@/lib/formulaBooks";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/lib/goals";
+import { updateGoalProgress } from "@/lib/updateGoalProgress";
+import { Inbox, FlaskConical, Ruler, Zap, BookOpen } from "lucide-react";
 
 
 export default function FormulaBookPage() {
@@ -229,11 +230,9 @@ updateFormulaGoal();
       <div className="flex h-screen flex-col items-center justify-center gap-4 bg-white dark:bg-gray-950">
 
 
-        <p className="text-4xl">
-
-          📭
-
-        </p>
+        <div className="text-4xl text-gray-400">
+          <Inbox className="w-12 h-12" />
+        </div>
 
 
 
@@ -293,21 +292,21 @@ updateFormulaGoal();
     Chemistry: { 
       color:"#10B981",
       bg:"rgba(16,185,129,0.08)",
-      label:"⚗️"
+      label:<FlaskConical className="w-3 h-3" />
     },
 
 
     Mathematics:{
       color:"#6366F1",
       bg:"rgba(99,102,241,0.08)",
-      label:"📐"
+      label:<Ruler className="w-3 h-3" />
     },
 
 
     Physics:{
       color:"#F59E0B",
       bg:"rgba(245,158,11,0.08)",
-      label:"⚡"
+      label:<Zap className="w-3 h-3" />
     },
 
 
@@ -328,7 +327,7 @@ updateFormulaGoal();
 
     bg:"rgba(99,102,241,0.08)",
 
-    label:"📖"
+    label:<BookOpen className="w-3 h-3" />
 
   };
 

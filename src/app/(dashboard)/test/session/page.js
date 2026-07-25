@@ -111,6 +111,7 @@ function TestSessionContent() {
       }
     }
     loadQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectParam, difficultyParam, countParam, durationParam, user, exam]);
 
   async function handleSubmit() {
@@ -159,7 +160,7 @@ function TestSessionContent() {
 
       if (answerError) throw answerError;
 
-      await updateGoalProgress(user.id, "MOCK_TEST", 1);
+      await updateGoalProgress(user.id, "TEST", 1);
       await updateStreak(user.id);
 
       const xpResponse = await fetch("/api/update", {

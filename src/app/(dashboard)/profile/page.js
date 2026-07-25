@@ -2,6 +2,7 @@
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import { Flame, Zap, Target, Gem, Trophy, Rocket, FileText, Pencil } from "lucide-react";
 import { getUserXP, getUserRank } from "@/lib/profile";
 import PageWrapper from "@/components/PageWrapper";
 
@@ -158,13 +159,13 @@ export default function ProfilePage() {
   // BADGE DEFINITIONS
   const badgeDefs = [
     {
-      icon: "🔥",
+      icon: <Flame className="w-8 h-8 text-orange-500" />,
       title: "7-Day Streak",
       earned: activeUser.streak >= 7,
       detail: `${Math.min(activeUser.streak, 7)}/7 days`,
     },
     {
-      icon: "⚡",
+      icon: <Zap className="w-8 h-8 text-yellow-400" />,
       title: "Speed Solver",
       earned: activeUser.avgSolveSeconds != null && activeUser.avgSolveSeconds <= 60,
       detail:
@@ -173,25 +174,25 @@ export default function ProfilePage() {
           : "No data yet",
     },
     {
-      icon: "🎯",
+      icon: <Target className="w-8 h-8 text-rose-500" />,
       title: "Sharpshooter",
       earned: activeUser.accuracy >= 90,
       detail: `${activeUser.accuracy}% accuracy`,
     },
     {
-      icon: "💎",
+      icon: <Gem className="w-8 h-8 text-cyan-400" />,
       title: "50 Tests",
       earned: activeUser.testsCompleted >= 50,
       detail: `${Math.min(activeUser.testsCompleted, 50)}/50 tests`,
     },
     {
-      icon: "🏆",
+      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
       title: "Top 100",
       earned: activeUser.rank != null && activeUser.rank <= 100,
       detail: activeUser.rank != null ? `Rank #${activeUser.rank}` : "Unranked",
     },
     {
-      icon: "🚀",
+      icon: <Rocket className="w-8 h-8 text-purple-500" />,
       title: "Mock Test Ace",
       earned: activeUser.bestMockScore >= 90,
       detail:
@@ -274,9 +275,9 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={() => setEditing(true)}
-              className="border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2"
+              className="border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2"
             >
-              ✎ Edit Profile
+              <Pencil className="w-4 h-4" /> Edit Profile
             </button>
           </div>
         </div>
@@ -338,13 +339,13 @@ export default function ProfilePage() {
       <section className="animate-slideUp" style={{ animationDelay: "200ms" }}>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: "Tests Done", value: activeUser.testsCompleted, icon: "📝" },
-            { label: "Accuracy", value: `${activeUser.accuracy}%`, icon: "🎯" },
-            { label: "Streak", value: `${activeUser.streak}d`, icon: "🔥" },
-            { label: "Global Rank", value: activeUser.rank ? `#${activeUser.rank}` : "—", icon: "🏆" },
+            { label: "Tests Done", value: activeUser.testsCompleted, icon: <FileText className="w-6 h-6 text-blue-500" /> },
+            { label: "Accuracy", value: `${activeUser.accuracy}%`, icon: <Target className="w-6 h-6 text-rose-500" /> },
+            { label: "Streak", value: `${activeUser.streak}d`, icon: <Flame className="w-6 h-6 text-orange-500" /> },
+            { label: "Global Rank", value: activeUser.rank ? `#${activeUser.rank}` : "—", icon: <Trophy className="w-6 h-6 text-yellow-500" /> },
           ].map((stat) => (
-            <div key={stat.label} className="glass-card p-4 text-center group hover:-translate-y-1 transition-all duration-300">
-              <div className="text-2xl mb-1 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+            <div key={stat.label} className="glass-card p-4 text-center group hover:-translate-y-1 transition-all duration-300 flex flex-col items-center">
+              <div className="mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
               <p className="text-xl font-black text-slate-900 dark:text-white">{stat.value}</p>
               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">{stat.label}</p>
             </div>
@@ -378,7 +379,7 @@ export default function ProfilePage() {
                   <div className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
                 )}
                 <div
-                  className={`text-3xl ${
+                  className={`flex justify-center ${
                     badge.earned
                       ? "group-hover:scale-110 transition-transform duration-300"
                       : ""

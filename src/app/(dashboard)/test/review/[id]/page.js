@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useParams, useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
+import { Lightbulb } from "lucide-react";
 
 export default function ReviewPage() {
   const { id } = useParams();
@@ -11,10 +12,6 @@ export default function ReviewPage() {
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadReview();
-  }, []);
 
   async function loadReview() {
     try {
@@ -50,7 +47,7 @@ export default function ReviewPage() {
 
   if (loading) {
     return (
-      <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW 📝">
+      <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
         <div className="p-10 flex flex-col items-center justify-center min-h-[50vh]">
           <div className="h-10 w-10 border-4 border-slate-200/60 dark:border-slate-700/50 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
           <span className="text-slate-400 dark:text-slate-500 font-bold skeleton-shimmer">Loading review...</span>
@@ -60,7 +57,7 @@ export default function ReviewPage() {
   }
 
   return (
-    <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW 📝">
+    <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex justify-end mb-8">
           <button
@@ -165,7 +162,7 @@ export default function ReviewPage() {
                 {q.explanation && (
                   <div className="mt-5 p-5 rounded-2xl bg-white/50 dark:bg-[#020617]/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-sm">
                     <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <span className="text-indigo-500 text-base">💡</span> Explanation
+                      <Lightbulb className="w-4 h-4 text-indigo-500" /> Explanation
                     </p>
                     <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                       {q.explanation}

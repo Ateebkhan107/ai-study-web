@@ -106,7 +106,7 @@ goal_date
             </h2>
           </div>
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-            You've completed <span className="text-slate-800 dark:text-white font-bold">{completed}</span> out of {goals.length} tasks today.
+            You&apos;ve completed <span className="text-slate-800 dark:text-white font-bold">{completed}</span> out of {goals.length} tasks today.
           </p>
         </div>
 

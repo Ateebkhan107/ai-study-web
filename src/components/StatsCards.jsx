@@ -55,8 +55,7 @@ export default function StatsCards() {
     {
       label: "Study Streak",
       value: "0",
-      sub: "Consecutive days",
-      icon: "🔥",
+      sub: "Consecutive days"
     },
   ]);
 
@@ -125,8 +124,7 @@ export default function StatsCards() {
           {
             label: "Study Streak",
             value: `${xpData?.streak || 0}`,
-            sub: "Consecutive days",
-            icon: "🔥",
+            sub: "Consecutive days"
           },
         ]);
       } catch (error) {

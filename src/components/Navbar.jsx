@@ -9,6 +9,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
 import { supabase } from "@/lib/supabaseClient";
+import { Moon, Sun } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard" },
@@ -27,6 +28,7 @@ export default function Navbar() {
   const [isPro, setIsPro] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -163,8 +165,9 @@ export default function Navbar() {
             className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md hover:border-indigo-500/30 active:scale-95 group overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="relative z-10 text-lg transition-transform duration-700 group-hover:rotate-[360deg]">
-              🌙
+            <span className="relative z-10 text-slate-600 dark:text-slate-300 transition-transform duration-700 group-hover:rotate-[360deg]">
+              <Moon className="w-5 h-5 dark:hidden" />
+              <Sun className="w-5 h-5 hidden dark:block" />
             </span>
           </button>
 

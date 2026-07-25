@@ -1,22 +1,23 @@
 "use client";
 
 import { CHAPTER_HEATMAP, CHAPTER_WEIGHTAGE } from "@/lib/pyqData";
+import { Target, Zap, Repeat, Sparkles } from "lucide-react";
 
 const RECOMMENDATIONS = [
   {
-    icon: "🎯",
+    icon: <Target className="w-6 h-6 text-indigo-500" />,
     text: "Kinematics — 18 questions, top JEE priority. Focus on projectile motion and relative velocity.",
     tag: "Must Do",
     tagClass: "bg-black dark:bg-white text-white dark:text-black",
   },
   {
-    icon: "⚡",
+    icon: <Zap className="w-6 h-6 text-red-500" />,
     text: "Thermodynamics — Gibbs energy & entropy appear every 2 years. Your success rate here is below average.",
     tag: "Weak Area",
     tagClass: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800",
   },
   {
-    icon: "🔁",
+    icon: <Repeat className="w-6 h-6 text-violet-500" />,
     text: "Integration (Calculus) — 8 out of 11 previous questions were repeated with minor variations.",
     tag: "High Repeat",
     tagClass: "bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800",
@@ -162,7 +163,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
       {/* ── AI Recommendations ── */}
       <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
         <p className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4">
-          ✦ AI Recommendations
+          <Sparkles className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" /> AI Recommendations
         </p>
         <div className="space-y-3">
           {RECOMMENDATIONS.map((r) => (

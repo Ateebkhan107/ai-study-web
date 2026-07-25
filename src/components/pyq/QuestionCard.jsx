@@ -1,6 +1,7 @@
 "use client";
 
 import { TREND_YEARS } from "@/lib/pyqData";
+import { Repeat, BookmarkPlus, ChevronUp, ChevronDown, Sparkles } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -105,8 +106,8 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
           {q.difficulty}
         </span>
         {q.repeated && (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800">
-            🔁 Repeated
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800 flex items-center gap-1">
+            <Repeat className="w-3 h-3" /> Repeated
           </span>
         )}
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
@@ -149,14 +150,14 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
                 : "border-gray-200 dark:border-gray-700 text-gray-400 hover:border-gray-400 dark:hover:border-gray-500"
               }`}
           >
-            ⊕
+            <BookmarkPlus className="w-4 h-4" />
           </button>
           {/* Expand toggle */}
           <button
             onClick={handleToggleExpand}
             className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center text-xs text-gray-400 hover:border-gray-400 transition-all"
           >
-            {q.showAnswer ? "▲" : "▼"}
+            {q.showAnswer ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
         </div>
       </div>
@@ -197,8 +198,8 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
           {/* AI Explanation */}
           <div className="bg-gray-50 dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-xl p-4 mb-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-black dark:bg-white text-white dark:text-black tracking-widest uppercase">
-                ✦ AI Explain
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-black dark:bg-white text-white dark:text-black tracking-widest uppercase flex items-center gap-1">
+                <Sparkles className="w-3 h-3" /> AI Explain
               </span>
             </div>
             {q.aiLoading ? (

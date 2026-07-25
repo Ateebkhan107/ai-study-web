@@ -1,4 +1,5 @@
 import Logo from "@/components/Logo";
+import { BookOpen, FileText, Bot, BarChart } from "lucide-react";
 
 // Injected once — pure CSS hover, no JS event handlers needed
 const hoverStyles = `
@@ -8,22 +9,22 @@ const hoverStyles = `
 
 const FEATURES = [
   {
-    icon: "📚",
+    icon: <BookOpen className="w-5 h-5 text-indigo-400" />,
     title: "Previous Year Questions",
     desc: "2000–2024 fully solved PYQs for JEE & NEET with detailed explanations.",
   },
   {
-    icon: "📝",
+    icon: <FileText className="w-5 h-5 text-indigo-400" />,
     title: "Mock Tests",
     desc: "Full-length & chapter-wise tests that simulate the real exam experience.",
   },
   {
-    icon: "🤖",
+    icon: <Bot className="w-5 h-5 text-indigo-400" />,
     title: "AI Study Assistant",
     desc: "Personalised study plans and weak area detection powered by AI.",
   },
   {
-    icon: "📊",
+    icon: <BarChart className="w-5 h-5 text-indigo-400" />,
     title: "Smart Analytics",
     desc: "Track accuracy, rank, and progress across subjects over time.",
   },
