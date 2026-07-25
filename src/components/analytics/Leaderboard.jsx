@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
-import { getLeaderboard } from "@/lib/leaderboard";
+import { getTopLeaderboard, getUserRank } from "@/lib/leaderboard";
 
 export default function Leaderboard() {
   const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
+  const [currentUserData, setCurrentUserData] = useState(null);
 
   // =============================
   // LOAD GLOBAL LEADERBOARD
@@ -16,15 +17,38 @@ export default function Leaderboard() {
   useEffect(() => {
     async function loadLeaderboard() {
       try {
-        const data = await getLeaderboard();
-        setUsers(data || []);
+        const top10 = await getTopLeaderboard();
+        
+        // Add rank to top 10 for easier rendering
+        const rankedTop10 = top10.map((u, i) => ({ ...u, rank: i + 1 }));
+        setUsers(rankedTop10);
+
+        // If user is logged in, check if they are in top 10
+        if (currentUser?.id) {
+          const inTop10 = rankedTop10.find(u => u.user_id === currentUser.id);
+          if (!inTop10) {
+            const rankData = await getUserRank(currentUser.id);
+            if (rankData) {
+              setCurrentUserData({
+                ...rankData.userData,
+                rank: rankData.rank,
+                user_id: currentUser.id,
+                isCurrentUserAppended: true
+              });
+            }
+          } else {
+            setCurrentUserData(null);
+          }
+        }
       } catch (error) {
         console.log("Leaderboard error:", error);
       }
     }
 
-    loadLeaderboard();
-  }, []);
+    if (currentUser?.id !== undefined) {
+      loadLeaderboard();
+    }
+  }, [currentUser?.id]);
 
   // Helper for dynamic rank styling
   const getRankTheme = (index) => {
@@ -102,31 +126,37 @@ export default function Leaderboard() {
         )}
 
         {(() => {
-          const top10 = users.slice(0, 10);
-          const currentUserIndex = currentUser ? users.findIndex(u => u.user_id === currentUser.id) : -1;
-          const currentUserObj = currentUserIndex !== -1 ? users[currentUserIndex] : null;
+          const displayUsers = [...users];
 
-          const displayUsers = [...top10];
-
-          if (currentUserObj && currentUserIndex >= 10) {
-            displayUsers.push({ ...currentUserObj, isCurrentUserAppended: true, originalIndex: currentUserIndex });
+          if (currentUserData) {
+            displayUsers.push(currentUserData);
           }
 
           return displayUsers.map((user, displayIndex) => {
-            const index = user.isCurrentUserAppended ? user.originalIndex : displayIndex;
-            const theme = getRankTheme(index);
+            const rankIndex = user.rank - 1; // 0-based index for themes
+            const theme = getRankTheme(rankIndex);
             const RankIcon = theme.Icon;
-            const isTopThree = index < 3;
+            const isTopThree = rankIndex < 3;
             const isCurrentUser = currentUser?.id === user.user_id;
 
           return (
+            <div key={user.user_id + (user.isCurrentUserAppended ? "_appended" : "")}>
+              {user.isCurrentUserAppended && (
+                <div className="flex items-center gap-4 my-6">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded-full border border-slate-100 dark:border-slate-800">
+                    Your Rank
+                  </span>
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
+                </div>
+              )}
+              
             <div
-              key={user.user_id + (user.isCurrentUserAppended ? "_appended" : "")}
               className={`group relative flex items-center justify-between p-4 sm:p-5 rounded-2xl border transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
               style={{ transitionDelay: `${displayIndex * 50}ms` }}
             >
               {/* Shimmer effect for 1st place */}
-              {index === 0 && (
+              {rankIndex === 0 && (
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent animate-[shimmer_2s_infinite] pointer-events-none rounded-2xl" />
               )}
 
@@ -139,7 +169,7 @@ export default function Leaderboard() {
                     <RankIcon className={`w-6 h-6 ${theme.rankColor}`} strokeWidth={2.5} />
                   ) : (
                     <span className={`text-lg font-black ${theme.rankColor}`}>
-                      #{index + 1}
+                      #{user.rank}
                     </span>
                   )}
                 </div>
@@ -187,6 +217,7 @@ export default function Leaderboard() {
                 </div>
               </div>
 
+            </div>
             </div>
           );
         }); })()}

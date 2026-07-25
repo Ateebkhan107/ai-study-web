@@ -2,9 +2,10 @@ import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
 import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
 import TrackWrapper from "@/components/TrackWrapper"; 
+import { initUserLeaderboard } from "@/lib/leaderboard"; 
 
 export default async function DashboardLayout({ children }) {
-  const { userId, onboardingComplete } = await getAuthContext();
+  const { userId, user, onboardingComplete } = await getAuthContext();
 
   if (!userId) {
     redirect("/sign-in");
@@ -12,6 +13,11 @@ export default async function DashboardLayout({ children }) {
 
   if (!onboardingComplete) {
     redirect(ONBOARDING_ROUTE);
+  }
+
+  // Auto-initialize user's leaderboard/XP entry if they don't have one
+  if (user) {
+    await initUserLeaderboard(userId, user.firstName || "Student");
   }
 
   return (
