@@ -85,11 +85,11 @@ export default function Footer() {
             <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-4">Company & Legal</h3>
             <ul className="space-y-2.5">
               {[
-                { name: "About Us", href: "#" },
-                { name: "Careers", href: "#" },
-                { name: "Privacy Policy", href: "#" },
-                { name: "Terms & Conditions", href: "#" },
-                { name: "Refund Policy", href: "#" },
+                { name: "About Us", href: "/about" },
+                { name: "Careers", href: "/careers" },
+                { name: "Privacy Policy", href: "/privacy" },
+                { name: "Terms & Conditions", href: "/terms" },
+                { name: "Subscriptions", href: "/subscriptions" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
@@ -105,10 +105,10 @@ export default function Footer() {
             <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-4">Support</h3>
             <ul className="space-y-2.5">
               {[
-                { name: "Help Center", href: "#" },
-                { name: "Report a Bug", href: "#" },
-                { name: "Contact Us", href: "#" },
-                { name: "Feedback", href: "#" },
+                { name: "Help Center", href: "/help" },
+                { name: "Contact Us", href: "/contact" },
+                { name: "Report a Bug", href: "/report-bug" },
+                { name: "Feedback", href: "/feedback" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="group inline-flex items-center text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
