@@ -1,6 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { addXP } from "@/lib/xp";
 
 
 export async function POST(req) {
@@ -110,55 +111,25 @@ Math.round(
 
 
 
-// XP RULE
+// XP RULE - only calculate for THIS attempt
+const attemptXP = body.is_correct ? 10 : 2;
 
-const xp =
-(correct*10)
-+
-(solved*2);
-
-
-
-
-
-
-
-
-// update leaderboard
-
-
-await supabase
-.from("user_xp")
-.upsert({
-
-user_id:userId,
-
-name,
-
-xp,
-
-pyq_solved:solved,
-
-correct_answers:correct,
-
-accuracy
-
-},
-{
-onConflict:"user_id"
-});
-
-
-
-
-
+// update leaderboard centrally
+const xpResult = await addXP(
+  userId, 
+  attemptXP, 
+  name, 
+  false, 
+  {
+    pyq_solved: solved,
+    correct_answers: correct,
+    accuracy
+  }
+);
 
 return NextResponse.json({
-
-success:true,
-
-xp
-
+  success:true,
+  xp: xpResult?.xp || attemptXP
 });
 
 

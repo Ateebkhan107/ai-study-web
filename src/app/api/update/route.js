@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { createClient } from "@supabase/supabase-js";
-
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { addXP } from "@/lib/xp";
 
 
 
@@ -68,123 +63,31 @@ export async function POST(req) {
 
 
 
+    const name = user?.firstName || user?.username || "Student";
+    
+    let stats = {};
+
     if (existingUser) {
-
-
-
-      const newSolved =
-        (existingUser.pyq_solved || 0)
-        + totalQuestions;
-
-
-
-      const newCorrect =
-        (existingUser.correct_answers || 0)
-        + correctAnswers;
-
-
-
-      const newAccuracy =
-        newSolved > 0
-          ? Math.round(
-              (newCorrect / newSolved) * 100
-            )
-          : 0;
-
-
-
-
-      await supabase
-        .from("user_xp")
-        .update({
-
-
-          xp:
-            (existingUser.xp || 0)
-            + gainedXP,
-
-
-          pyq_solved:
-            newSolved,
-
-
-          correct_answers:
-            newCorrect,
-
-
-          accuracy:
-            newAccuracy,
-
-
-        })
-
-        .eq(
-          "user_id",
-          userId
-        );
-
-
-
+      const newSolved = (existingUser.pyq_solved || 0) + totalQuestions;
+      const newCorrect = (existingUser.correct_answers || 0) + correctAnswers;
+      const newAccuracy = newSolved > 0 ? Math.round((newCorrect / newSolved) * 100) : 0;
+      
+      stats = {
+        pyq_solved: newSolved,
+        correct_answers: newCorrect,
+        accuracy: newAccuracy
+      };
+    } else {
+      const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+      
+      stats = {
+        pyq_solved: totalQuestions,
+        correct_answers: correctAnswers,
+        accuracy
+      };
     }
 
-
-    else {
-
-
-      const accuracy =
-        totalQuestions > 0
-
-        ? Math.round(
-            (correctAnswers /
-             totalQuestions)
-             * 100
-          )
-
-        : 0;
-
-
-
-
-      await supabase
-        .from("user_xp")
-        .insert({
-
-
-          user_id:userId,
-
-
-
-          name:
-
-            user?.firstName ||
-
-            user?.username ||
-
-            "Student",
-
-
-
-          xp:gainedXP,
-
-
-
-          pyq_solved:
-            totalQuestions,
-
-
-
-          correct_answers:
-            correctAnswers,
-
-
-
-          accuracy,
-
-
-        });
-
-
-    }
+    await addXP(userId, gainedXP, name, false, stats);
 
 
 

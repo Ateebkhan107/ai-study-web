@@ -28,7 +28,8 @@ export async function addXP(
 userId,
 amount,
 name="Student",
-skipBadgeEval = false
+skipBadgeEval = false,
+stats = {}
 ){
 
 
@@ -89,7 +90,8 @@ user_id:userId,
 name: data?.name || name,
 xp:newXP,
 level:levelStats.currentLevel,
-badge:badgeTitle
+badge:badgeTitle,
+...stats
 
 },
 

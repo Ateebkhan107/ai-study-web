@@ -163,75 +163,7 @@ export async function savePYQAttempt(attempt) {
 
 
 
-  // 2️⃣ Update XP System
-
-  try{
-
-
-    await fetch(
-      "/api/xp",
-      {
-
-        method:"POST",
-
-
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-
-        body:JSON.stringify({
-
-
-          user_id:
-          attempt.user_id ||
-          "guest_user",
-
-
-
-          name:
-          attempt.name ||
-          "Student",
-
-
-
-          xp:
-          attempt.is_correct
-          ? 10
-          : 2,
-
-
-
-          correct:
-          attempt.is_correct
-
-
-
-        })
-
-
-      }
-    );
-
-
-
-  }
-
-
-  catch(error){
-
-
-    console.log(
-      "XP UPDATE FAILED:",
-      error
-    );
-
-
-  }
-
-
-
-
+  // 2️⃣ XP System is now handled in /api/pyq-attempts on the server!
   return attemptData;
 
 
