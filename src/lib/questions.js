@@ -3,34 +3,17 @@ import { supabase } from "@/lib/supabase";
 
 // convert frontend names → database names
 
-function fixSubject(subject){
+function fixSubject(subject) {
+  if (subject === "Maths") {
+    return "Mathematics";
+  }
 
+  // Your database stores Biology as one subject
+  if (subject === "Biology") {
+    return "Biology";
+  }
 
-if(subject==="Maths"){
-
-return "Mathematics";
-
-}
-
-
-
-if(subject==="Biology"){
-
-return [
-
-"Botany",
-
-"Zoology"
-
-];
-
-}
-
-
-
-return subject;
-
-
+  return subject;
 }
 
 
@@ -52,67 +35,26 @@ difficulty.slice(1).toLowerCase()
 
 // ratio
 
-function getDistribution(exam,total){
+function getDistribution(exam, total) {
+  if (exam === "NEET") {
+    const phy = Math.floor(total * 0.25);
+    const chem = Math.floor(total * 0.25);
+    const bio = total - phy - chem;
 
+    return {
+      Physics: phy,
+      Chemistry: chem,
+      Biology: bio,
+    };
+  }
 
-if(exam==="NEET"){
+  const each = Math.floor(total / 3);
 
-
-const phy =
-Math.floor(total*0.25);
-
-
-const chem =
-Math.floor(total*0.25);
-
-
-const botany =
-Math.floor(total*0.25);
-
-
-const zoology =
-total
-- phy
-- chem
-- botany;
-
-
-
-return {
-
-Physics:phy,
-
-Chemistry:chem,
-
-Botany:botany,
-
-Zoology:zoology
-
-};
-
-
-}
-
-
-
-// JEE
-
-
-const each=Math.floor(total/3);
-
-
-return {
-
-Physics:each,
-
-Chemistry:each,
-
-Mathematics:
-total-(each*2)
-
-};
-
-
+  return {
+    Physics: each,
+    Chemistry: each,
+    Mathematics: total - each * 2,
+  };
 }
 
 
@@ -169,25 +111,16 @@ subject.trim().toLowerCase()==="mixed subjects";
 
 
 
-if(!isAllSubjects){
-
-subjects =
-subject
-.split(",")
-.map(s=>fixSubject(s.trim()))
-.flat();
-
-}
-
-else{
-
-
-subjects =
-Object.keys(
-getDistribution(exam,limit)
-);
-
-
+if (!isAllSubjects) {
+  subjects = subject
+    .split(",")
+    .map((s) => fixSubject(s.trim()));
+} else {
+  if (exam === "NEET") {
+    subjects = ["Physics", "Chemistry", "Biology"];
+  } else {
+    subjects = ["Physics", "Chemistry", "Mathematics"];
+  }
 }
 
 
@@ -247,25 +180,13 @@ exam
 
 
 
-if(
-sub==="Botany" ||
-sub==="Zoology"
-){
-query=query
-.eq(
-"subject",
-"Biology"
-)
-.eq(
-"biology_type",
-sub
-);
-}
-else{
-query=query.eq(
-"subject",
-sub
-);
+// Subject filter
+if (sub === "Botany" || sub === "Zoology") {
+  // Your database has no biology_type column.
+  // Both Botany and Zoology questions are stored under subject = Biology.
+  query = query.eq("subject", "Biology");
+} else {
+  query = query.eq("subject", sub);
 }
 
 
