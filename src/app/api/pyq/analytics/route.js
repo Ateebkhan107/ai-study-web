@@ -2,14 +2,23 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 
+import { auth } from "@clerk/nextjs/server";
+
 export async function GET(request) {
 
   try {
+    const { searchParams } = new URL(request.url);
+    const track = searchParams.get("track")?.toUpperCase() || "JEE";
+    
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const { data, error } = await supabase
+    const { data: rawData, error } = await supabase
       .from("pyq_attempts")
-      .select("*");
-
+      .select("*, pyq_questions(exam)")
+      .eq("user_id", userId);
 
     if (error) {
 
@@ -22,6 +31,12 @@ export async function GET(request) {
 
     }
 
+
+    const data = (rawData || []).filter(a => {
+        const ex = a.pyq_questions?.exam;
+        if (!ex) return false;
+        return ex.toUpperCase().includes(track === "JEE" ? "JEE" : "NEET");
+    });
 
     const totalAttempts = data.length;
 

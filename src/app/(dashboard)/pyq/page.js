@@ -390,7 +390,7 @@ function AnalyticsTab({ track }) {
       setLoading(true);
       setLoadError("");
       try {
-        const result = await getPYQAnalytics();
+        const result = await getPYQAnalytics(track);
         if (!cancelled) setAnalytics(result);
       } catch (error) {
         console.error("Failed to load PYQ analytics:", error);
@@ -590,8 +590,8 @@ export default function PYQPage() {
     async function loadPYQStats() {
       try {
         const [overviewData, analyticsData] = await Promise.all([
-          getPYQOverview(),
-          getPYQAnalytics(),
+          getPYQOverview(track),
+          getPYQAnalytics(track),
         ]);
         if (cancelled) return;
         setOverview(overviewData || null);

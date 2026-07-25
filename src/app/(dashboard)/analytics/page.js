@@ -25,20 +25,19 @@ const TABS = [
 export default function AnalyticsPage() {
   const { user } = useUser();
   const [stats, setStats] = useState(null);
-  const [dbData, setDbData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTrack, setActiveTrack] = useState("jee");
   const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
-    if (user) {
-      loadUserStats();
+    if (user && activeTrack) {
+      loadUserStats(activeTrack);
     }
-  }, [user]);
+  }, [user, activeTrack]);
 
-  async function loadUserStats() {
+  async function loadUserStats(trackToLoad) {
     try {
-      const data = await getUserAnalytics(user.id);
+      const data = await getUserAnalytics(user.id, trackToLoad);
       setStats(data);
     } catch (err) {
       console.error("Failed to load user stats:", err);
@@ -47,29 +46,12 @@ export default function AnalyticsPage() {
   }
 
   useEffect(() => {
-    async function fetchAnalytics() {
-      try {
-        const match = document.cookie.match(
-          new RegExp("(^| )prepzii_track=([^;]+)")
-        );
-        const clientTrack = match ? match[2].toLowerCase() : "jee";
-        setActiveTrack(clientTrack);
-
-        const response = await fetch("/api/analytics");
-        if (response.ok) {
-          const data = await response.json();
-          setDbData(data);
-          if (data.track) {
-            setActiveTrack(data.track.toLowerCase());
-          }
-        }
-      } catch (err) {
-        console.error("Analytics fetch failed:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchAnalytics();
+    const match = document.cookie.match(
+      new RegExp("(^| )prepzii_track=([^;]+)")
+    );
+    const clientTrack = match ? match[2].toLowerCase() : "jee";
+    setActiveTrack(clientTrack);
+    setLoading(false);
   }, []);
 
   if (loading) {

@@ -179,12 +179,12 @@ export async function savePYQAttempt(attempt) {
 // =============================
 
 
-export async function getPYQAnalytics(){
+export async function getPYQAnalytics(track = "JEE"){
 
 
   const res =
   await fetch(
-    "/api/pyq/analytics"
+    `/api/pyq/analytics?track=${track}`
   );
 
 

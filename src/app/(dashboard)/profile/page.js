@@ -56,7 +56,7 @@ export default function ProfilePage() {
     async function loadStats() {
       const xp = await getUserXP(clerkUser.id);
       const userRank = await getGlobalRank(clerkUser.id);
-      const userAnalytics = await getProfileAnalytics(clerkUser.id);
+      const userAnalytics = await getProfileAnalytics(clerkUser.id, editExam);
       
       try {
         const badgeRes = await fetch("/api/profile/badges");
@@ -75,7 +75,7 @@ export default function ProfilePage() {
       setAnalytics(userAnalytics);
     }
     loadStats();
-  }, [clerkUser]);
+  }, [clerkUser, editExam]);
 
   // CHANGE TRACK (JEE / NEET toggle)
   const handleTrackToggle = async (newExam) => {

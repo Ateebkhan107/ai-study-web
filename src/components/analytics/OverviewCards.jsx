@@ -48,8 +48,8 @@ export default function OverviewCards({ stats }) {
     },
     {
       label: "Study Streak",
-      value: "0",
-      sub: "coming soon",
+      value: stats?.streak ?? 0,
+      sub: (stats?.streak === 1 ? "day" : "days") + " active streak",
     },
   ];
 

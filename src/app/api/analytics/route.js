@@ -3,9 +3,11 @@ import { supabase } from "@/lib/supabase";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 
-export async function GET() {
+export async function GET(request) {
 
 try {
+    const { searchParams } = new URL(request.url);
+    const track = searchParams.get("track")?.toUpperCase() || "JEE";
 
 
     // ==========================
@@ -49,16 +51,20 @@ try {
     // ==========================
 
 
-    const {data:pyqAttempts,error:pyqError} =
+    const {data:pyqAttemptsRaw,error:pyqError} =
     await supabase
     .from("pyq_attempts")
-    .select("*")
+    .select("*, pyq_questions(exam)")
     .eq("user_id",userId);
 
+    if(pyqError) throw pyqError;
 
-
-    if(pyqError)
-    throw pyqError;
+    // Filter pyq attempts by track
+    const pyqAttempts = (pyqAttemptsRaw || []).filter(a => {
+        const ex = a.pyq_questions?.exam;
+        if (!ex) return false;
+        return ex.toUpperCase().includes(track === "JEE" ? "JEE" : "NEET");
+    });
 
 
 
@@ -69,16 +75,27 @@ try {
     // ==========================
 
 
-    const {data:testAttempts,error:testError} =
+    const {data:testAttemptsRaw,error:testError} =
     await supabase
     .from("test_attempts")
-    .select("*")
+    .select("*, tests(exam), user_answers(questions(exam))")
     .eq("user_id",userId);
 
+    if(testError) throw testError;
 
-
-    if(testError)
-    throw testError;
+    // Filter test attempts by track
+    const testAttempts = (testAttemptsRaw || []).filter(a => {
+        let attemptExam = null;
+        if (a.tests?.exam) {
+            attemptExam = a.tests.exam;
+        } else if (a.user_answers && a.user_answers.length > 0) {
+            const firstAns = a.user_answers.find(ans => ans.questions?.exam);
+            if (firstAns) attemptExam = firstAns.questions.exam;
+        }
+        
+        if (!attemptExam) return false;
+        return attemptExam.toUpperCase().includes(track === "JEE" ? "JEE" : "NEET");
+    });
 
 
 
@@ -142,74 +159,6 @@ try {
 
 
     // ==========================
-    // XP FORMULA
-    // ==========================
-
-
-    const xp =
-    (correctAnswers * 10)
-    +
-    (totalAttempts * 2);
-
-
-
-
-
-
-
-
-    // ==========================
-    // UPDATE USER XP
-    // ==========================
-
-
-    const {error:xpError} =
-    await supabase
-    .from("user_xp")
-    .upsert(
-
-        {
-
-            user_id:userId,
-
-
-            name:username,
-
-
-            xp:xp,
-
-
-            pyq_solved:pyqSolved,
-
-
-            correct_answers:correctAnswers,
-
-
-            accuracy:accuracy
-
-
-        },
-
-
-        {
-            onConflict:"user_id"
-        }
-
-
-    );
-
-
-
-    if(xpError)
-    throw xpError;
-
-
-
-
-
-
-
-    // ==========================
     // RESPONSE
     // ==========================
 
@@ -228,8 +177,7 @@ try {
         accuracy,
 
 
-        xp,
-
+        track,
 
         pyqSolved,
 

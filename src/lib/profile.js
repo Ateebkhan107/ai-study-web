@@ -123,25 +123,46 @@ null;
 // =============================
 // GET USER PROFILE ANALYTICS
 // =============================
-export async function getProfileAnalytics(userId) {
+export async function getProfileAnalytics(userId, stream = "JEE") {
   if (!userId) return null;
 
   try {
     // 1. Fetch PYQ Attempts
-    const { data: pyqAttempts, error: pyqError } = await supabase
+    const { data: pyqAttemptsRaw, error: pyqError } = await supabase
       .from("pyq_attempts")
-      .select("is_correct")
+      .select("is_correct, pyq_questions(exam)")
       .eq("user_id", userId);
 
     if (pyqError) throw pyqError;
 
+    const pyqAttempts = (pyqAttemptsRaw || []).filter(a => {
+        const ex = a.pyq_questions?.exam;
+        if (!ex) return false;
+        const trackUpper = stream.toUpperCase();
+        return ex.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+    });
+
     // 2. Fetch Test Attempts
-    const { data: testAttempts, error: testError } = await supabase
+    const { data: testAttemptsRaw, error: testError } = await supabase
       .from("test_attempts")
-      .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score")
+      .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score, tests(exam), user_answers(questions(exam))")
       .eq("user_id", userId);
 
     if (testError) throw testError;
+
+    const testAttempts = (testAttemptsRaw || []).filter(a => {
+        let attemptExam = null;
+        if (a.tests?.exam) {
+            attemptExam = a.tests.exam;
+        } else if (a.user_answers && a.user_answers.length > 0) {
+            const firstAns = a.user_answers.find(ans => ans.questions?.exam);
+            if (firstAns) attemptExam = firstAns.questions.exam;
+        }
+        
+        if (!attemptExam) return false;
+        const trackUpper = stream.toUpperCase();
+        return attemptExam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+    });
 
     // 3. Calculate PYQ metrics
     const pyqTotal = pyqAttempts?.length || 0;
