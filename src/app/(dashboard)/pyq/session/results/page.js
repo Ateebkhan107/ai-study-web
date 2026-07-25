@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/lib/updateGoalProgress";
+import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 
 // Practice mode display labels
 const modeLabels = {
@@ -21,6 +22,7 @@ export default function PYQResultsPage() {
 
   const [reviewData, setReviewData] = useState([]);
   const [showReview, setShowReview] = useState(false);
+  const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
 
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";
@@ -52,6 +54,17 @@ export default function PYQResultsPage() {
       console.error("Failed to load review data:", error);
     }
   }, []);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    async function loadBookmarks() {
+      const bms = await getBookmarks(user.id);
+      setBookmarkedIds(new Set(bms));
+    }
+
+    loadBookmarks();
+  }, [user]);
 
   // =============================
   // DAILY GOAL + XP UPDATE
@@ -221,9 +234,40 @@ export default function PYQResultsPage() {
                     <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 rounded-full">
                       Q{idx + 1} · {q.subject}
                     </span>
-                    <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
-                      {q.year}
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (!user?.id) return;
+                          const qId = String(q.id);
+                          const isB = bookmarkedIds.has(qId);
+
+                          const previous = new Set(bookmarkedIds);
+                          const next = new Set(bookmarkedIds);
+                          if (isB) next.delete(qId);
+                          else next.add(qId);
+                          setBookmarkedIds(next);
+
+                          const saved = await toggleBookmark(user.id, qId);
+                          if (saved === isB) {
+                            setBookmarkedIds(previous);
+                          }
+                        }}
+                        className={`p-2 rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 ${
+                          bookmarkedIds.has(String(q.id))
+                            ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20"
+                            : "bg-white/50 dark:bg-slate-800/30 text-slate-400 dark:text-slate-500 border-slate-200/60 dark:border-slate-700/50 hover:text-indigo-500"
+                        }`}
+                        title="Save Question"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill={bookmarkedIds.has(String(q.id)) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
+                        </svg>
+                      </button>
+                      <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
+                        {q.year}
+                      </span>
+                    </div>
                   </div>
 
                   <div className="space-y-4 mb-6">

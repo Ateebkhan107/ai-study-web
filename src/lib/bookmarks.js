@@ -1,5 +1,13 @@
 import { supabase } from "./supabase";
 
+function normalizeQuestionId(questionId) {
+  if (questionId === null || questionId === undefined || questionId === "") {
+    return null;
+  }
+
+  return String(questionId);
+}
+
 // ===============================
 // GET ALL BOOKMARKED QUESTION IDS
 // ===============================
@@ -18,7 +26,7 @@ export async function getBookmarks(userId) {
     return [];
   }
 
-  return data.map((b) => Number(b.question_id));
+  return data.map((b) => String(b.question_id));
 }
 
 // ===============================
@@ -28,7 +36,8 @@ export async function getBookmarks(userId) {
 export async function isBookmarked(userId, questionId) {
   if (!userId) return false;
 
-  questionId = Number(questionId);
+  questionId = normalizeQuestionId(questionId);
+  if (!questionId) return false;
 
   const { data, error } = await supabase
     .from("pyq_bookmarks")
@@ -53,7 +62,8 @@ export async function isBookmarked(userId, questionId) {
 export async function saveBookmark(userId, questionId) {
   if (!userId) return false;
 
-  questionId = Number(questionId);
+  questionId = normalizeQuestionId(questionId);
+  if (!questionId) return false;
 
   console.log("Saving bookmark:", {
     user_id: userId,
@@ -86,7 +96,8 @@ export async function saveBookmark(userId, questionId) {
 export async function removeBookmark(userId, questionId) {
   if (!userId) return false;
 
-  questionId = Number(questionId);
+  questionId = normalizeQuestionId(questionId);
+  if (!questionId) return false;
 
   const { error } = await supabase
     .from("pyq_bookmarks")
@@ -110,7 +121,8 @@ export async function removeBookmark(userId, questionId) {
 export async function toggleBookmark(userId, questionId) {
   if (!userId) return false;
 
-  questionId = Number(questionId);
+  questionId = normalizeQuestionId(questionId);
+  if (!questionId) return false;
 
   console.log("Toggle:", {
     user_id: userId,
@@ -121,10 +133,9 @@ export async function toggleBookmark(userId, questionId) {
   const bookmarked = await isBookmarked(userId, questionId);
 
   if (bookmarked) {
-    await removeBookmark(userId, questionId);
-    return false;
-  } else {
-    await saveBookmark(userId, questionId);
-    return true;
+    const removed = await removeBookmark(userId, questionId);
+    return removed ? false : true;
   }
+
+  return (await saveBookmark(userId, questionId)) ? true : false;
 }
