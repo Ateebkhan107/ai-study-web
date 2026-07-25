@@ -5,80 +5,7 @@ import { createProfileIfNotExists } from "@/services/profile.service";
 
 
 
-// LEVEL SYSTEM
-function getLevel(xp) {
-
-
-  if (xp >= 10000) {
-
-    return {
-      level:"Master",
-      badge:"Master",
-      progress:100
-    };
-
-  }
-
-
-
-  if (xp >= 5000) {
-
-    return {
-      level:"Legend",
-      badge:"Legend",
-      progress:Math.floor(
-        ((xp-5000)/5000)*100
-      )
-    };
-
-  }
-
-
-
-
-  if (xp >= 2000) {
-
-    return {
-      level:"Champion",
-      badge:"Champion",
-      progress:Math.floor(
-        ((xp-2000)/3000)*100
-      )
-    };
-
-  }
-
-
-
-
-
-  if (xp >= 500) {
-
-    return {
-      level:"Achiever",
-      badge:"Achiever",
-      progress:Math.floor(
-        ((xp-500)/1500)*100
-      )
-    };
-
-  }
-
-
-
-
-  return {
-
-    level:"Explorer",
-    badge:"Explorer",
-    progress:Math.floor(
-      (xp/500)*100
-    )
-
-  };
-
-
-}
+import { getLevelFromXP } from "@/lib/levelEngine";
 
 
 
@@ -210,12 +137,13 @@ export async function GET() {
 
 
 
-    const xp =
-    xpData?.xp || 0;
+    const xp = xpData?.xp || 0;
+    const levelStats = getLevelFromXP(xp);
 
-
-    const levelData =
-    getLevel(xp);
+    const levelData = {
+      level: levelStats.currentLevel,
+      progress: levelStats.progressPercentage
+    };
 
 
 

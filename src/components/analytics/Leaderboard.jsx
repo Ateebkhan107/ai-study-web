@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
 import { getTopLeaderboard, getUserRank } from "@/lib/leaderboard";
+import { getLevelFromXP } from "@/lib/levelEngine";
 
 export default function Leaderboard() {
   const { user: currentUser } = useUser();
@@ -193,7 +194,7 @@ export default function Leaderboard() {
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
                       <Shield className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       <span className="text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-300 uppercase">
-                        {user.badge} <span className="opacity-60">Lvl {user.level}</span>
+                        {user.badge} <span className="opacity-60">Lvl {getLevelFromXP(user.xp).currentLevel}</span>
                       </span>
                     </div>
                   </div>
