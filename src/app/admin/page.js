@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Rocket, BookOpen, ImageIcon, Bell } from "lucide-react";
+import BadgeManager from "@/components/admin/BadgeManager";
 
 
 export default function AdminNotifications(){
@@ -2132,18 +2133,14 @@ goalLoading
 
 
 
-</div>
+        </div>
+      </div>
 
-
-
-
-</div>
-
-
-</div>
-
-
-);
-
-
+      {/* ================= BADGE MANAGEMENT ================= */}
+      <div className="mb-12">
+        <BadgeManager />
+      </div>
+      
+    </div>
+  );
 }

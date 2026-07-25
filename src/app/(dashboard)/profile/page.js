@@ -3,16 +3,13 @@
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import { Flame, Zap, Target, Gem, Trophy, Rocket, FileText, Pencil } from "lucide-react";
-import { getUserXP, getUserRank } from "@/lib/profile";
+import * as LucideIcons from "lucide-react";
+import { getUserXP, getUserRank, getProfileAnalytics } from "@/lib/profile";
+import { getUserRank as getGlobalRank } from "@/lib/leaderboard";
+import { getLevelFromXP } from "@/lib/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
 
-function getLevelProgress(xp) {
-  if (xp >= 10000) return { current: xp, next: 20000 };
-  if (xp >= 5000) return { current: xp, next: 10000 };
-  if (xp >= 2000) return { current: xp, next: 5000 };
-  if (xp >= 500) return { current: xp, next: 2000 };
-  return { current: xp, next: 500 };
-}
+
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
@@ -20,6 +17,8 @@ export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [xpData, setXpData] = useState(null);
   const [rank, setRank] = useState(null);
+  const [analytics, setAnalytics] = useState(null);
+  const [dynamicBadges, setDynamicBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
@@ -51,16 +50,31 @@ export default function ProfilePage() {
     fetchLiveProfile();
   }, [clerkUser]);
 
-  // LOAD XP PROFILE
+  // LOAD XP PROFILE & ANALYTICS
   useEffect(() => {
     if (!clerkUser) return;
-    async function loadXP() {
+    async function loadStats() {
       const xp = await getUserXP(clerkUser.id);
-      const userRank = await getUserRank(clerkUser.id);
+      const userRank = await getGlobalRank(clerkUser.id);
+      const userAnalytics = await getProfileAnalytics(clerkUser.id);
+      
+      try {
+        const badgeRes = await fetch("/api/profile/badges");
+        if (badgeRes.ok) {
+          const dbBadges = await badgeRes.json();
+          if (Array.isArray(dbBadges)) {
+            setDynamicBadges(dbBadges);
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch badges", err);
+      }
+      
       setXpData(xp);
-      setRank(userRank);
+      setRank(userRank?.rank ?? null);
+      setAnalytics(userAnalytics);
     }
-    loadXP();
+    loadStats();
   }, [clerkUser]);
 
   // CHANGE TRACK (JEE / NEET toggle)
@@ -148,62 +162,17 @@ export default function ProfilePage() {
     level: xpData?.level || 1,
     badge: xpData?.badge || "🌱 Explorer",
     progress: xpData?.xp || 0,
-    streak: user?.streak_days ?? 0,
-    avgSolveSeconds: user?.avg_solve_seconds ?? null,
-    accuracy: user?.accuracy_percent ?? 0,
-    testsCompleted: user?.tests_completed ?? 0,
+    streak: xpData?.streak || 0,
+    avgSolveSeconds: analytics?.avgSolveSeconds ?? null,
+    accuracy: analytics?.accuracy || 0,
+    testsCompleted: analytics?.testsCompleted || 0,
     rank: rank,
-    bestMockScore: user?.best_mock_score_percent ?? 0,
+    bestMockScore: analytics?.bestMockScore || 0,
   };
 
-  // BADGE DEFINITIONS
-  const badgeDefs = [
-    {
-      icon: <Flame className="w-8 h-8 text-orange-500" />,
-      title: "7-Day Streak",
-      earned: activeUser.streak >= 7,
-      detail: `${Math.min(activeUser.streak, 7)}/7 days`,
-    },
-    {
-      icon: <Zap className="w-8 h-8 text-yellow-400" />,
-      title: "Speed Solver",
-      earned: activeUser.avgSolveSeconds != null && activeUser.avgSolveSeconds <= 60,
-      detail:
-        activeUser.avgSolveSeconds != null
-          ? `${activeUser.avgSolveSeconds}s avg`
-          : "No data yet",
-    },
-    {
-      icon: <Target className="w-8 h-8 text-rose-500" />,
-      title: "Sharpshooter",
-      earned: activeUser.accuracy >= 90,
-      detail: `${activeUser.accuracy}% accuracy`,
-    },
-    {
-      icon: <Gem className="w-8 h-8 text-cyan-400" />,
-      title: "50 Tests",
-      earned: activeUser.testsCompleted >= 50,
-      detail: `${Math.min(activeUser.testsCompleted, 50)}/50 tests`,
-    },
-    {
-      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
-      title: "Top 100",
-      earned: activeUser.rank != null && activeUser.rank <= 100,
-      detail: activeUser.rank != null ? `Rank #${activeUser.rank}` : "Unranked",
-    },
-    {
-      icon: <Rocket className="w-8 h-8 text-purple-500" />,
-      title: "Mock Test Ace",
-      earned: activeUser.bestMockScore >= 90,
-      detail:
-        activeUser.bestMockScore > 0
-          ? `Best: ${activeUser.bestMockScore}%`
-          : "No mocks yet",
-    },
-  ];
-
+  const badgeDefs = dynamicBadges;
   const earnedCount = badgeDefs.filter((b) => b.earned).length;
-  const levelProgress = getLevelProgress(activeUser.xp);
+  const levelStats = getLevelFromXP(activeUser.xp);
 
   return (
     <PageWrapper
@@ -237,10 +206,6 @@ export default function ProfilePage() {
                 <h2 className="text-2xl font-black text-slate-900 dark:text-white">
                   {activeUser.name}
                 </h2>
-                <p className="text-sm text-slate-400 dark:text-slate-500">
-                  {activeUser.email}
-                </p>
-
                 <div className="mt-2 flex items-center gap-3 text-xs">
                   <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400 font-bold">
                     {activeUser.exam} Focus
@@ -295,10 +260,10 @@ export default function ProfilePage() {
 
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white">
-                  Level {activeUser.level}
+                  Level {levelStats.currentLevel}
                 </h3>
                 <p className="text-sm text-slate-400 dark:text-slate-500">
-                  {activeUser.xp} / {levelProgress.next} XP
+                  {levelStats.totalXP.toLocaleString()} / {levelStats.nextLevelXP.toLocaleString()} XP
                 </p>
                 {activeUser.rank && (
                   <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
@@ -313,7 +278,7 @@ export default function ProfilePage() {
                 Next level
               </p>
               <p className="font-bold text-slate-900 dark:text-white">
-                {Math.max(levelProgress.next - activeUser.xp, 0)} XP away
+                {levelStats.xpRemaining.toLocaleString()} XP away
               </p>
             </div>
           </div>
@@ -323,10 +288,7 @@ export default function ProfilePage() {
             <div
               className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all relative overflow-hidden"
               style={{
-                width: `${Math.min(
-                  (activeUser.xp / levelProgress.next) * 100,
-                  100
-                )}%`,
+                width: `${levelStats.progressPercentage}%`,
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-[shimmer_2s_infinite]" />
@@ -366,35 +328,36 @@ export default function ProfilePage() {
 
         <div className="glass-card p-5 shadow-sm">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {badgeDefs.map((badge, index) => (
+            {badgeDefs.map((badge, index) => {
+              const IconComponent = LucideIcons[badge.iconName] || LucideIcons.Award;
+              return (
               <div
                 key={index}
-                className={`group relative p-5 rounded-2xl border text-center transition-all duration-300 hover:-translate-y-1 ${
+                className={`relative overflow-hidden rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all duration-300 border ${
                   badge.earned
-                    ? "border-slate-200/60 dark:border-slate-700/50 opacity-100 hover:shadow-lg hover:shadow-indigo-500/10"
-                    : "border-slate-200/60 dark:border-slate-700/50 opacity-40"
+                    ? "bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-indigo-100 dark:border-indigo-500/20 shadow-sm hover:shadow-md hover:-translate-y-1"
+                    : "bg-slate-50/50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800 grayscale-[0.8] opacity-60"
                 }`}
               >
                 {badge.earned && (
-                  <div className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500" />
                 )}
-                <div
-                  className={`flex justify-center ${
-                    badge.earned
-                      ? "group-hover:scale-110 transition-transform duration-300"
-                      : ""
-                  }`}
-                >
-                  {badge.icon}
+                
+                <div className={`mb-3 transition-transform duration-300 ${badge.earned ? "scale-110" : ""}`}>
+                  <IconComponent className={`w-8 h-8 ${badge.color || 'text-slate-500'}`} />
                 </div>
-                <p className="text-xs font-bold mt-2 text-slate-800 dark:text-slate-100">
+                
+                <h4 className="font-bold text-sm text-slate-900 dark:text-white mb-1">
                   {badge.title}
-                </p>
-                <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
+                </h4>
+                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   {badge.detail}
                 </p>
+                {badge.earned && (
+                  <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-indigo-500/5 rounded-full blur-xl" />
+                )}
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>

@@ -118,102 +118,85 @@ null;
 
 
 
+
+
 // =============================
-// LEVEL SYSTEM
+// GET USER PROFILE ANALYTICS
 // =============================
+export async function getProfileAnalytics(userId) {
+  if (!userId) return null;
 
-export function getLevelProgress(xp){
+  try {
+    // 1. Fetch PYQ Attempts
+    const { data: pyqAttempts, error: pyqError } = await supabase
+      .from("pyq_attempts")
+      .select("is_correct")
+      .eq("user_id", userId);
 
+    if (pyqError) throw pyqError;
 
+    // 2. Fetch Test Attempts
+    const { data: testAttempts, error: testError } = await supabase
+      .from("test_attempts")
+      .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score")
+      .eq("user_id", userId);
 
-if(xp >= 10000){
+    if (testError) throw testError;
 
-return {
+    // 3. Calculate PYQ metrics
+    const pyqTotal = pyqAttempts?.length || 0;
+    const pyqCorrect = pyqAttempts?.filter(a => a.is_correct).length || 0;
 
-level:5,
+    // 4. Calculate Test metrics
+    const testsCompleted = testAttempts?.length || 0;
+    let testTotalQs = 0;
+    let testCorrectQs = 0;
+    let totalTimeSecs = 0;
+    let bestMockScore = 0;
 
-badge:"Legend",
+    if (testAttempts && testAttempts.length > 0) {
+      testAttempts.forEach(t => {
+        testTotalQs += (t.attempted || 0);
+        testCorrectQs += (t.correct_answers || t.correct || 0);
+        totalTimeSecs += (t.time_taken_seconds || 0);
+        const tScore = t.accuracy || t.score || 0;
+        if (tScore > bestMockScore) {
+          bestMockScore = tScore;
+        }
+      });
+    }
 
-current:xp,
+    // 5. Aggregate
+    const totalQuestionsAttempted = pyqTotal + testTotalQs;
+    const totalCorrect = pyqCorrect + testCorrectQs;
+    const accuracy = totalQuestionsAttempted > 0 
+      ? Math.round((totalCorrect / totalQuestionsAttempted) * 100) 
+      : 0;
 
-next:20000
+    const avgSolveSeconds = testTotalQs > 0 
+      ? Math.round(totalTimeSecs / testTotalQs) 
+      : null;
 
-};
+    return {
+      testsCompleted,
+      totalQuestionsAttempted,
+      totalCorrect,
+      accuracy,
+      avgSolveSeconds,
+      bestMockScore,
+      pyqSolved: pyqTotal
+    };
 
-}
-
-
-
-
-
-if(xp >= 5000){
-
-return {
-
-level:4,
-
-badge:"Master",
-
-current:xp,
-
-next:10000
-
-};
-
-}
-
-
-
-
-if(xp >= 2000){
-
-return {
-
-level:3,
-
-badge:"Pro",
-
-current:xp,
-
-next:5000
-
-};
-
-}
-
-
-
-
-if(xp >= 500){
-
-return {
-
-level:2,
-
-badge:"Challenger",
-
-current:xp,
-
-next:2000
-
-};
-
-}
-
-
-
-
-return {
-
-level:1,
-
-badge:"Explorer",
-
-current:xp,
-
-next:500
-
-};
-
-
+  } catch (error) {
+    console.error("Error fetching profile analytics:", error);
+    return {
+      testsCompleted: 0,
+      totalQuestionsAttempted: 0,
+      totalCorrect: 0,
+      accuracy: 0,
+      avgSolveSeconds: null,
+      bestMockScore: 0,
+      pyqSolved: 0
+    };
+  }
 }

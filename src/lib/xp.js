@@ -1,51 +1,21 @@
 import { supabase } from "./supabaseClient";
+import { evaluateUserBadges } from "./badgeEngine";
 
 
 // ==============================
 // LEVEL SYSTEM
 // ==============================
 
-function calculateLevel(xp){
+import { getLevelFromXP } from "@/lib/levelEngine";
 
-if(xp >= 10000){
-return {
-level:5,
-badge:"Master"
-};
-}
-
-
-if(xp >= 5000){
-return {
-level:4,
-badge:"Expert"
-};
-}
-
-
-if(xp >= 2000){
-return {
-level:3,
-badge:"Achiever"
-};
-}
-
-
-if(xp >= 500){
-return {
-level:2,
-badge:"Challenger"
-};
-}
-
-
-
-return {
-level:1,
-badge:"Explorer"
-};
-
-
+// Helper for title badge based on level
+function getLevelBadge(level) {
+  if (level >= 10) return "Grandmaster";
+  if (level >= 8) return "Master";
+  if (level >= 6) return "Elite";
+  if (level >= 4) return "Expert";
+  if (level >= 2) return "Challenger";
+  return "Explorer";
 }
 
 
@@ -57,7 +27,8 @@ badge:"Explorer"
 export async function addXP(
 userId,
 amount,
-name="Student"
+name="Student",
+skipBadgeEval = false
 ){
 
 
@@ -106,38 +77,19 @@ amount;
 
 
 
-const levelInfo =
-calculateLevel(newXP);
-
-
-
+const levelStats = getLevelFromXP(newXP);
+const badgeTitle = getLevelBadge(levelStats.currentLevel);
 
 // update / create xp row
-
 const {error:updateError}=await supabase
-
 .from("user_xp")
-
 .upsert(
-
 {
-
 user_id:userId,
-
-
-name:
-
-
-data?.name || name,
-
-
+name: data?.name || name,
 xp:newXP,
-
-
-level:levelInfo.level,
-
-
-badge:levelInfo.badge
+level:levelStats.currentLevel,
+badge:badgeTitle
 
 },
 
@@ -162,13 +114,15 @@ updateError
 }
 
 
+// Evaluate badges asynchronously if not skipped
+if (!skipBadgeEval) {
+  evaluateUserBadges(userId).catch(console.error);
+}
 
 return {
-
 xp:newXP,
-
-...levelInfo
-
+level: levelStats.currentLevel,
+badge: badgeTitle
 };
 
 
