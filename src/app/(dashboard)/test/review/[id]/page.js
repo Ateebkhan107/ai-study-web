@@ -45,6 +45,12 @@ export default function ReviewPage() {
     setLoading(false);
   }
 
+  useEffect(() => {
+    if (id) {
+      loadReview();
+    }
+  }, [id]);
+
   if (loading) {
     return (
       <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
