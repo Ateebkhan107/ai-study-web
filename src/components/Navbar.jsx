@@ -146,20 +146,24 @@ export default function Navbar() {
           ))}
 
           {/* PrepZii Pro */}
-          <Link
-            href={isPro ? "/pro" : "/pricing"}
-            className={`relative ml-2 inline-flex items-center justify-center px-5 py-2 rounded-xl text-sm font-bold overflow-hidden transition-all duration-500 hover:-translate-y-0.5 active:translate-y-0 ${
-              isPro
-                ? "bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.5)]"
-                : "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white shadow-[0_4px_15px_rgba(99,102,241,0.3)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.5)] bg-[length:200%_auto] hover:bg-right"
-            }`}
-          >
-            {/* Shimmer effect overlay */}
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent hover:animate-[shimmer_1.5s_infinite]" />
-            <span className="relative z-10 flex items-center gap-1.5 drop-shadow-sm">
-              {isPro ? "⭐ PRO" : "✨ PrepZii Pro"}
-            </span>
-          </Link>
+          {!isPro ? (
+            <Link
+              href="/pro"
+              className="relative ml-2 inline-flex items-center justify-center px-5 py-2 rounded-xl text-sm font-bold overflow-hidden transition-all duration-500 hover:-translate-y-0.5 active:translate-y-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.5)]"
+            >
+              {/* Shimmer effect overlay */}
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent hover:animate-[shimmer_1.5s_infinite]" />
+              <span className="relative z-10 flex items-center gap-1.5 drop-shadow-sm">
+                ⭐ PRO
+              </span>
+            </Link>
+          ) : (
+            <div className="ml-2 flex items-center px-4 py-2">
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 text-[15px] tracking-wide drop-shadow-sm animate-[shimmer_3s_infinite] bg-[length:200%_auto]">
+                PrepZii Pro ✨
+              </span>
+            </div>
+          )}
         </nav>
 
         {/* Right Side */}
