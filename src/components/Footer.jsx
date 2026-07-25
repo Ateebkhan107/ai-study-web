@@ -1,8 +1,10 @@
 "use client";
 
+import { FaInstagram } from "react-icons/fa";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, Hash, Briefcase, MessageSquare, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -46,17 +48,19 @@ export default function Footer() {
               Your intelligent companion for JEE & NEET preparation. Unlock your full potential with AI-powered study plans and analytics.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300">
-                <Hash className="w-4 h-4" />
+              <a 
+                href="mailto:contact.prepzii@gmail.com" 
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+              >
+                <Mail className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300">
-                <Briefcase className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300">
-                <Code2 className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300">
-                <MessageSquare className="w-4 h-4" />
+              <a 
+                href="https://www.instagram.com/prep.zii?igsh=bDRuNW9sZzJocGxr&utm_source=qr" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-400 hover:text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+              >
+                <FaInstagram className="w-4 h-4" />
               </a>
             </div>
           </div>
