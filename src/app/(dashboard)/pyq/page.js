@@ -421,7 +421,7 @@ function AnalyticsTab({ track }) {
     <div className="space-y-5">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          { Icon: I.Target,       label: "Attempted Run",   value: String(attempted), sublabel: "Questions Answered", accent: "#6366F1" },
+          { Icon: I.Target,       label: "Solved Questions",   value: String(attempted), sublabel: "Practiced Units", accent: "#6366F1" },
           { Icon: I.CheckCircle2, label: "Accuracy Target", value: `${accuracy}%`,    sublabel: "Correct Response",   accent: "#10b981" },
           { Icon: I.Flame,        label: "Archive Streak",  value: `${streak}d`,      sublabel: "Daily Momentum",     accent: "#f59e0b" },
         ].map((s, i) => (
@@ -454,7 +454,7 @@ function AnalyticsTab({ track }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-slideUp" style={{ animationDelay: "450ms" }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-slideUp" style={{ animationDelay: "450ms" }}>
         <div className={`glass-card p-5`}>
           <I.Award size={18} className="text-amber-500 dark:text-amber-400 mb-3" />
           <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
@@ -469,15 +469,6 @@ function AnalyticsTab({ track }) {
           <p className="text-xl font-bold text-slate-900 dark:text-white">{weakestSubject ? weakestSubject.subject : "—"}</p>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             {weakestSubject ? "Target core concepts" : "No data yet"}
-          </p>
-        </div>
-        <div className="glass-card p-5 border-emerald-500/20 !bg-emerald-50/30 dark:!bg-emerald-500/5">
-          <I.Sparkles size={18} className="text-emerald-500 dark:text-emerald-400 mb-3" />
-          <p className="text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-semibold mb-1">AI Directives</p>
-          <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
-            {weakestSubject
-              ? `Focus on ${weakestSubject.subject}: only ${weakestSubject.accuracy}% accuracy across ${weakestSubject.solved} solved. Prioritize ${weakestSubject.subject} PYQs this week to close the gap.`
-              : "Solve a few PYQs to unlock a personalized recommendation."}
           </p>
         </div>
       </div>
@@ -621,12 +612,6 @@ export default function PYQPage() {
   const yearRangeSublabel = overview?.minYear && overview?.maxYear ? `${overview.minYear} – ${overview.maxYear} Bulletins` : "No data yet";
   const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
 
-  const PAGE_STATS = [
-    { Icon: I.BookOpen, label: "Question Vault", value: questionVaultValue, sublabel: "Track Matched Qs",  accent: "#6366F1" },
-    { Icon: I.Calendar, label: "Index Matrix",   value: yearRangeValue,     sublabel: yearRangeSublabel,   accent: "#8B5CF6" },
-    { Icon: I.Target,   label: "Solved Load",    value: solvedLoadValue,    sublabel: "Practiced Units",   accent: "#06b6d4" },
-  ];
-
   if (!track) {
     return (
       <PageWrapper title="PYQ Practice" badge="Loading...">
@@ -647,11 +632,6 @@ export default function PYQPage() {
       badge={track === "neet" ? "NEET UG Medical Core 🩺" : "IIT JEE Engineering Vault 🚀"}
       badgeVariant={track === "neet" ? "emerald" : "purple"}
     >
-      {/* Stats row */}
-      <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 animate-slideUp" style={{ animationDelay: "75ms" }}>
-        {PAGE_STATS.map((s) => <StatCard key={s.label} {...s} />)}
-      </section>
-
       {/* Tab nav */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
         <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm">
