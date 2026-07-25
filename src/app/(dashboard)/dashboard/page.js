@@ -58,8 +58,8 @@ export default async function DashboardPage() {
             </span>
             <p className="text-xs font-bold bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent uppercase tracking-widest">
               {activeTrackKey === "NEET"
-                ? "Wassup, Future Doctor🩺"
-                : "Wassup, Future Engineer🚀"}
+                ? "Wassup, Future Doctor 🩺"
+                : "Wassup, Future Engineer 🚀"}
             </p>
           </div>
 
