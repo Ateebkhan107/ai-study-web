@@ -159,7 +159,7 @@ export default function Navbar() {
             </Link>
           ) : (
             <div className="ml-2 flex items-center px-4 py-2">
-              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 text-[15px] tracking-wide drop-shadow-sm animate-[shimmer_3s_infinite] bg-[length:200%_auto]">
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 text-[15px] tracking-wide drop-shadow-sm">
                 PrepZii Pro ✨
               </span>
             </div>
