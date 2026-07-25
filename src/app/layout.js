@@ -23,6 +23,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import Footer from "@/components/Footer";
+
 export const metadata = {
   title: "PREPZII – JEE/NEET Preparation",
 
@@ -67,6 +69,7 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col antialiased`}
         >
           {children}
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
