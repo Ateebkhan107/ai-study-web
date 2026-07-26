@@ -219,11 +219,11 @@ body {
 }
 
 .cl-formFieldInput {
-  color: var(--foreground) !important;
-  background-color: var(--glass-bg) !important;
+  color: #F8FAFC !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid var(--glass-border) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) inset !important;
@@ -231,12 +231,12 @@ body {
 
 .cl-formFieldInput:hover {
   border-color: rgba(139, 92, 246, 0.4) !important;
-  background-color: rgba(255, 255, 255, 0.03) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .cl-formFieldInput:focus {
   border-color: #8B5CF6 !important;
-  background-color: var(--background) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
   outline: none !important;
   box-shadow: 
     0 0 0 4px rgba(139, 92, 246, 0.15),
@@ -261,11 +261,11 @@ body {
 
 /* ── Clerk — Social Buttons (Glassy & Interactive) ────────────── */
 .cl-socialButtonsBlockButton {
-  background-color: var(--glass-bg) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(8px) !important;
-  border: 1px solid var(--glass-border) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
-  color: var(--foreground) !important;
+  color: #F8FAFC !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -277,7 +277,7 @@ body {
 }
 
 .cl-socialButtonsBlockButtonText {
-  color: var(--foreground) !important;
+  color: #F8FAFC !important;
   font-weight: 600 !important;
 }
 
@@ -312,7 +312,7 @@ body {
 
 /* ── Clerk — Miscellaneous Utilities ──────────────────────────── */
 .cl-identityPreviewText {
-  color: var(--foreground) !important;
+  color: #F8FAFC !important;
   font-weight: 500 !important;
 }
 
@@ -327,9 +327,9 @@ body {
 }
 
 .cl-otpCodeFieldInput {
-  color: var(--foreground) !important;
-  background-color: var(--glass-bg) !important;
-  border: 1px solid var(--glass-border) !important;
+  color: #F8FAFC !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
   font-weight: 600 !important;
   font-size: 1.25rem !important;
