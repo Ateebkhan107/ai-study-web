@@ -8,7 +8,7 @@ import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
 import { currentUser } from "@clerk/nextjs/server";
 import { getUserProfile } from "@/lib/userProfile";
-import { Sparkle, Star } from "lucide-react";
+import { Sparkle, Star, TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -67,9 +67,17 @@ export default async function DashboardPage() {
             <UserGreeting />
           </div>
 
-          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-            Keep improving every day.
-          </p>
+          <div 
+            className="animate-fadeInScale inline-flex items-center gap-2.5 px-3 py-1.5 mt-1 rounded-full bg-white/60 dark:bg-[#0f172a]/60 border border-indigo-100 dark:border-indigo-500/20 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-indigo-500/5 hover:border-indigo-200 dark:hover:border-indigo-500/40"
+            style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
+          >
+            <div className="flex items-center justify-center p-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10">
+              <TrendingUp className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+            </div>
+            <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-300 pr-1">
+              Keep improving every day
+            </span>
+          </div>
         </div>
 
         {/* Grid Components */}
