@@ -62,8 +62,8 @@ export async function GET(req) {
 
   let query = supabase
     .from("pyq_questions")
-    .select("*, pyq_exams!inner(status)")
-    .eq("pyq_exams.status", "PUBLISHED");
+    .select("*")
+    .not("exam_id", "is", null);
 
   if (examId) query = query.eq("exam_id", examId);
   if (exam) query = query.eq("exam", exam);
