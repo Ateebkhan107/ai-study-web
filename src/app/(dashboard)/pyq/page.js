@@ -150,7 +150,7 @@ function PracticeTab({ subjects, track }) {
   const [chapterError,    setChapterError]    = useState("");
 
   useEffect(() => {
-    if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
+    if (practiceMode !== "chapter" || selectedSubjects.length !== 1) {
       setChapters([]);
       setSelectedChapter("");
       return;
@@ -230,8 +230,16 @@ function PracticeTab({ subjects, track }) {
       if (availableShifts.length > 1 && !selectedShift) { setSubjectError("Please select a shift"); return; }
     }
     
-    if (practiceMode === "chapter" && !selectedChapter) { setSubjectError("Please select a chapter"); return; }
-    
+    if (practiceMode === "chapter") {
+      if (selectedSubjects.length > 1) {
+        setSubjectError("Please select only ONE subject for Chapter Wise practice.");
+        return;
+      }
+      if (!selectedChapter) {
+        setSubjectError("Please select a chapter");
+        return;
+      }
+    }
     setSubjectError("");
     const subjectLabels = subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label);
     const params = new URLSearchParams();
@@ -386,10 +394,11 @@ function PracticeTab({ subjects, track }) {
               {track === "jee" ? (availableShifts.length > 1 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
             </p>
             {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
-            {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
+            {selectedSubjects.length > 1 && <p className={`text-sm text-rose-500 font-medium`}>Please select only ONE subject to view its chapters.</p>}
+            {selectedSubjects.length === 1 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
+            {selectedSubjects.length === 1 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
+            {selectedSubjects.length === 1 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
+            {selectedSubjects.length === 1 && !loadingChapters && chapters.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {chapters.map((ch) => (
                   <button key={ch} onClick={() => setSelectedChapter(ch)}

@@ -38,11 +38,12 @@ export async function GET(req) {
 
     let mistakeQuery = supabase
       .from("pyq_questions")
-      .select("*, pyq_exams!inner(status)")
-      .eq("pyq_exams.status", "PUBLISHED")
+      .select("*")
+      .not("exam_id", "is", null)
       .in("id", questionIds);
 
     if (exam) mistakeQuery = mistakeQuery.eq("exam", exam);
+    if (examType) mistakeQuery = mistakeQuery.eq("exam_type", examType);
     if (subject) mistakeQuery = mistakeQuery.eq("subject", subject);
     if (year) mistakeQuery = mistakeQuery.eq("year", year);
     if (attempt) mistakeQuery = mistakeQuery.eq("attempt", attempt);
@@ -93,6 +94,9 @@ export async function GET(req) {
 
   if (mode === "random") {
     result = [...result].sort(() => Math.random() - 0.5);
+  } else {
+    // Sort sequentially by created_at to preserve import sequence
+    result = [...result].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
   }
 
   return NextResponse.json(result);

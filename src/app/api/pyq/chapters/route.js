@@ -19,7 +19,8 @@ searchParams.get("subject");
 
 let query = supabase
 .from("pyq_questions")
-.select("chapter");
+.select("chapter")
+.not("exam_id", "is", null);
 
 
 

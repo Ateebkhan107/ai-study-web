@@ -14,6 +14,20 @@ const modeLabels = {
   mistakes: "🔁 Mistake Revision"
 };
 
+const RemoveOrangeFilter = () => (
+  <svg width="0" height="0" className="absolute">
+    <filter id="remove-orange">
+      <feColorMatrix
+        type="matrix"
+        values="1 0 0 0 0
+                1 0 0 0 0
+                1 0 0 0 0
+                0 0 0 1 0"
+      />
+    </filter>
+  </svg>
+);
+
 export default function PYQResultsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -102,7 +116,7 @@ export default function PYQResultsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start sm:items-center justify-center relative overflow-x-hidden overflow-y-auto">
-      
+      <RemoveOrangeFilter />
       {/* Background blobs */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[100px]" />
@@ -271,14 +285,17 @@ export default function PYQResultsPage() {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
-                      {q.question}
-                    </p>
+                    {!q.question_image && (
+                      <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
+                        {q.question}
+                      </p>
+                    )}
                     {q.question_image && (
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
                         className="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
+                        style={{ filter: "url(#remove-orange)" }}
                       />
                     )}
                   </div>
@@ -336,7 +353,9 @@ export default function PYQResultsPage() {
                             </div>
                             <div className="flex flex-col gap-3 flex-1 min-w-0">
                               <div className="text-sm font-medium text-slate-700 dark:text-slate-200 mt-1">
-                                {q[`option_${option}`]}
+                                {!q[`option_${option}_image`] && (
+                                  <span>{q[`option_${option}`]}</span>
+                                )}
                                 {isSelected && (
                                   <span className="ml-2 text-[10px] font-bold uppercase tracking-widest opacity-60">
                                     (Your answer)
@@ -348,6 +367,7 @@ export default function PYQResultsPage() {
                                   src={q[`option_${option}_image`]} 
                                   alt={`Option ${option.toUpperCase()} visual`} 
                                   className="rounded-xl border border-slate-200/60 dark:border-slate-700/50 max-w-full w-auto"
+                                  style={{ filter: "url(#remove-orange)" }}
                                 />
                               )}
                             </div>
@@ -372,9 +392,19 @@ export default function PYQResultsPage() {
                           : `Correct Answer: ${String(q.correct_option).toUpperCase()}`
                       }
                     </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {q.explanation || "No explanation provided for this question."}
-                    </p>
+                    <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {!q.explanation_image && (
+                        <p>{q.explanation || "No explanation provided for this question."}</p>
+                      )}
+                      {q.explanation_image && (
+                        <img 
+                          src={q.explanation_image} 
+                          alt="Explanation visual" 
+                          className="mt-2 rounded-xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
+                          style={{ filter: "url(#remove-orange)" }}
+                        />
+                      )}
+                    </div>
                     
                     <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800">
                       <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">

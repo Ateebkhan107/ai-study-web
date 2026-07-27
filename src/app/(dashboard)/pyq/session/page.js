@@ -22,6 +22,20 @@ const modeLabels = {
   mistakes: "🔁 Mistake Revision",
 };
 
+const RemoveOrangeFilter = () => (
+  <svg width="0" height="0" className="absolute">
+    <filter id="remove-orange">
+      <feColorMatrix
+        type="matrix"
+        values="1 0 0 0 0
+                1 0 0 0 0
+                1 0 0 0 0
+                0 0 0 1 0"
+      />
+    </filter>
+  </svg>
+);
+
 export default function PYQSessionPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -35,6 +49,9 @@ export default function PYQSessionPage() {
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
+  
+  // Timer state for Full Paper mode (180 mins = 10800 secs)
+  const [timeLeft, setTimeLeft] = useState(180 * 60);
 
   // Apply Strict Exam Mode while the session is active and not finishing
   useStrictExamMode(!finishing && questions.length > 0);
@@ -50,6 +67,22 @@ export default function PYQSessionPage() {
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
+
+  useEffect(() => {
+    if (finishing || questions.length === 0 || mode !== "full") return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          handleFinishDeck(); // Auto-submit when time's up
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finishing, questions.length, mode]);
 
   useEffect(() => {
     async function loadPYQ() {
@@ -80,8 +113,25 @@ export default function PYQSessionPage() {
         if (years.length > 0) {
           combined = combined.filter((q) => years.includes(q.year));
         }
+
         if (mode === "random") {
           combined = combined.sort(() => Math.random() - 0.5);
+        } else if (mode === "full") {
+          // Absolute Sequence Guarantee for Full Papers
+          combined = combined.sort((a, b) => {
+            const numA = originalQuestionNumber(a, -1);
+            const numB = originalQuestionNumber(b, -1);
+            if (numA !== -1 && numB !== -1) {
+              return numA - numB;
+            }
+            return new Date(a.created_at) - new Date(b.created_at);
+          });
+        } else {
+          // For Chapter and Mistakes, sort by Year (desc) then by creation order
+          combined = combined.sort((a, b) => {
+            if (a.year !== b.year) return (b.year || 0) - (a.year || 0);
+            return new Date(a.created_at) - new Date(b.created_at);
+          });
         }
 
         setQuestions(combined);
@@ -305,6 +355,7 @@ export default function PYQSessionPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
+      <RemoveOrangeFilter />
       {/* ── Header ── */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-6 py-3.5">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -321,6 +372,19 @@ export default function PYQSessionPage() {
               </p>
             </div>
           </div>
+
+          {/* Full Paper Timer */}
+          {mode === "full" && (
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span className={`text-sm font-bold tracking-widest tabular-nums ${timeLeft < 300 ? "text-rose-500" : "text-slate-700 dark:text-slate-300"}`}>
+                {String(Math.floor(timeLeft / 3600)).padStart(2, "0")}:{String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0")}:{String(timeLeft % 60).padStart(2, "0")}
+              </span>
+            </div>
+          )}
 
           {/* Progress + Finish */}
           <div className="flex items-center gap-4">
@@ -462,9 +526,11 @@ export default function PYQSessionPage() {
             </div>
 
             {/* Question text */}
-            <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
-              {currentQuestion.question}
-            </p>
+            {!currentQuestion.question_image && (
+              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
+                {currentQuestion.question}
+              </p>
+            )}
 
             {/* Question image */}
             {currentQuestion.question_image && (
@@ -472,6 +538,7 @@ export default function PYQSessionPage() {
                 src={currentQuestion.question_image}
                 alt="Question visual"
                 className="rounded-2xl max-w-full mb-4 border border-slate-200/60 dark:border-slate-700/50"
+                style={{ filter: "url(#remove-orange)" }}
               />
             )}
 
@@ -520,14 +587,17 @@ export default function PYQSessionPage() {
                           {LETTERS[idx]}
                         </span>
                         <div className="flex flex-col gap-2 flex-1">
-                          <span className="text-base font-medium">
-                            {currentQuestion[`option_${option}`]}
-                          </span>
+                          {!currentQuestion[`option_${option}_image`] && (
+                            <span className="text-base font-medium">
+                              {currentQuestion[`option_${option}`]}
+                            </span>
+                          )}
                           {currentQuestion[`option_${option}_image`] && (
                             <img
                               src={currentQuestion[`option_${option}_image`]}
                               alt={`Option ${option.toUpperCase()} visual`}
                               className="rounded-xl max-w-full"
+                              style={{ filter: "url(#remove-orange)" }}
                             />
                           )}
                         </div>
