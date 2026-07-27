@@ -38,7 +38,7 @@ export async function GET(req) {
 
     // Students
     const { count: totalStudents } = await supabaseAdmin
-      .from('profiles')
+      .from('user_profiles')
       .select('*', { count: 'exact', head: true });
 
     return NextResponse.json({

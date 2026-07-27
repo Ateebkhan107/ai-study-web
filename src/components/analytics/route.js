@@ -14,7 +14,7 @@ export async function GET() {
 
     // Pull the active student's metrics record
     const { data: profile, error } = await supabaseClient
-      .from("profiles")
+      .from("user_profiles")
       .select("current_track, exam_readiness_score")
       .single();
 

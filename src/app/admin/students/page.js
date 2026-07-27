@@ -75,9 +75,9 @@ export default function AdminStudentsPage() {
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-800">
                 <th className="p-3 text-sm font-bold text-gray-500 uppercase">Student</th>
-                <th className="p-3 text-sm font-bold text-gray-500 uppercase">Track</th>
-                <th className="p-3 text-sm font-bold text-gray-500 uppercase">Level & XP</th>
-                <th className="p-3 text-sm font-bold text-gray-500 uppercase">Rank</th>
+                <th className="p-3 text-sm font-bold text-gray-500 uppercase">Exam</th>
+                <th className="p-3 text-sm font-bold text-gray-500 uppercase">XP & Level</th>
+                <th className="p-3 text-sm font-bold text-gray-500 uppercase">Activity</th>
                 <th className="p-3 text-sm font-bold text-gray-500 uppercase">Joined</th>
               </tr>
             </thead>
@@ -95,19 +95,20 @@ export default function AdminStudentsPage() {
                   <tr key={student.id} className="border-b border-gray-200 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
                     <td className="p-3">
                       <div className="font-bold">{student.full_name || "Unknown"}</div>
-                      <div className="text-xs text-gray-500">@{student.username || "user"}</div>
+                      <div className="text-xs text-gray-500">{student.email || "No email"}</div>
                     </td>
                     <td className="p-3">
                       <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-xs font-bold">
-                        {student.track || "Not Set"}
+                        {student.exam || "Not Set"}
                       </span>
                     </td>
                     <td className="p-3">
                       <div className="font-bold text-purple-600 dark:text-purple-400">Level {student.current_level}</div>
-                      <div className="text-xs text-gray-500">{student.xp?.toLocaleString()} XP</div>
+                      <div className="text-xs text-gray-500">{student.xp?.toLocaleString()} XP • {student.rank_name || "Unranked"}</div>
                     </td>
-                    <td className="p-3">
-                      <span className="font-semibold text-sm">{student.rank_name || "Unranked"}</span>
+                    <td className="p-3 text-sm">
+                      <div className="font-semibold">{student.badges_count || 0} Badges</div>
+                      <div className="text-xs text-gray-500">{student.tests_taken || 0} Tests Taken</div>
                     </td>
                     <td className="p-3 text-sm text-gray-500">
                       {new Date(student.created_at).toLocaleDateString()}
