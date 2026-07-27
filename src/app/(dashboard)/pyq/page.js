@@ -140,7 +140,8 @@ function PracticeTab({ subjects, track }) {
   const [subjectError,     setSubjectError]     = useState("");
 
   const [papers,           setPapers]           = useState([]);
-  const [selectedPaper,    setSelectedPaper]    = useState(null);
+  const [selectedAttempt,  setSelectedAttempt]  = useState("");
+  const [selectedShift,    setSelectedShift]    = useState("");
   const [loadingPapers,    setLoadingPapers]    = useState(false);
 
   const [chapters,        setChapters]        = useState([]);
@@ -189,20 +190,48 @@ function PracticeTab({ subjects, track }) {
         const res = await fetch(`/api/pyq/papers?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load papers");
         const data = await res.json();
-        if (!cancelled) { setPapers(Array.isArray(data) ? data : []); setSelectedPaper(null); }
+        if (!cancelled) { 
+          setPapers(Array.isArray(data) ? data : []); 
+          setSelectedAttempt("");
+          setSelectedShift("");
+        }
       } catch (error) {
         console.error("Failed to load papers:", error);
-        if (!cancelled) { setPapers([]); setSelectedPaper(null); }
+        if (!cancelled) { setPapers([]); setSelectedAttempt(""); setSelectedShift(""); }
       } finally { if (!cancelled) setLoadingPapers(false); }
     }
     loadPapers();
     return () => { cancelled = true; };
   }, [track, selectedYears]);
 
+  // Derived Options
+  const availableAttempts = Array.from(new Set(papers.map(p => p.attempt).filter(Boolean)));
+  const availableShifts = Array.from(new Set(papers.filter(p => (!selectedAttempt || p.attempt === selectedAttempt)).map(p => p.shift).filter(Boolean)));
+
+  // Auto-select logic
+  useEffect(() => {
+    if (track === "jee") {
+      // If we haven't selected an attempt, but there's only 1 available, auto-select it
+      if (availableAttempts.length === 1 && !selectedAttempt) {
+        setSelectedAttempt(availableAttempts[0]);
+      }
+      // If an attempt is selected (or auto-selected), and there's only 1 shift, auto-select it
+      if ((selectedAttempt || availableAttempts.length === 1) && availableShifts.length === 1 && !selectedShift) {
+        setSelectedShift(availableShifts[0]);
+      }
+    }
+  }, [papers, availableAttempts, availableShifts, selectedAttempt, selectedShift, track]);
+
   function handleStartDeck() {
     if (selectedSubjects.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
-    if (practiceMode === "full" && papers.length > 0 && !selectedPaper) { setSubjectError("Please select a paper"); return; }
+    
+    if (practiceMode === "full" && track === "jee") {
+      if (availableAttempts.length > 0 && !selectedAttempt) { setSubjectError("Please select an attempt"); return; }
+      if (availableShifts.length > 1 && !selectedShift) { setSubjectError("Please select a shift"); return; }
+    }
+    
     if (practiceMode === "chapter" && !selectedChapter) { setSubjectError("Please select a chapter"); return; }
+    
     setSubjectError("");
     const subjectLabels = subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label);
     const params = new URLSearchParams();
@@ -210,12 +239,14 @@ function PracticeTab({ subjects, track }) {
     params.set("subjects", subjectLabels.join(","));
     if (selectedYears.length > 0) params.set("years", selectedYears.join(","));
     params.set("mode", practiceMode);
+    
     if (practiceMode === "chapter" && selectedChapter) params.set("chapter", selectedChapter);
-    if (selectedPaper) {
-      if (selectedPaper.exam_type) params.set("exam_type", selectedPaper.exam_type);
-      if (selectedPaper.attempt) params.set("attempt", selectedPaper.attempt);
-      if (selectedPaper.shift) params.set("shift", selectedPaper.shift);
+    
+    if (track === "jee" && practiceMode === "full") {
+      if (selectedAttempt) params.set("attempt", selectedAttempt);
+      if (selectedShift) params.set("shift", selectedShift);
     }
+    
     router.push(`/pyq/session?${params.toString()}`);
   }
 
@@ -266,39 +297,66 @@ function PracticeTab({ subjects, track }) {
           </div>
         </div>
 
-        {/* Paper selector */}
-        {papers.length > 0 && (
-          <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT PAPER</p>
-            {loadingPapers ? (
-              <p className={`text-sm ${TXT_MUTED}`}>Loading papers...</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {papers.map((p) => {
-                  const isActive = selectedPaper?.year === p.year && selectedPaper?.exam_type === p.exam_type && selectedPaper?.attempt === p.attempt && selectedPaper?.shift === p.shift;
-                  return (
-                    <button key={`${p.year}-${p.exam_type}-${p.attempt}-${p.shift}`} onClick={() => setSelectedPaper(p)}
-                      className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
-                        isActive
-                          ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                          : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
-                      }`}
-                    >
-                      <span className="text-sm font-bold">{track.toUpperCase()} {p.exam_type || (track === "neet" ? "UG" : "")}</span>
-                      <span className="text-xs font-semibold">{p.year} {track === "neet" && !p.exam_type ? "PAPER" : ""}</span>
-                      {p.attempt && <span className="text-xs">{p.attempt}</span>}
-                      {p.shift && <span className="text-xs opacity-80">{p.shift}</span>}
-                    </button>
-                  );
-                })}
+        {/* JEE Selectors (Attempt & Shift) */}
+        {track === "jee" && selectedYears.length > 0 && (
+          <>
+            {/* Attempt Selector */}
+            {availableAttempts.length > 0 && (
+              <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
+                <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
+                {loadingPapers ? (
+                  <p className={`text-sm ${TXT_MUTED}`}>Loading attempts...</p>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {availableAttempts.map((attempt) => {
+                      const isActive = selectedAttempt === attempt;
+                      return (
+                        <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
+                          className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                            isActive
+                              ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                              : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                          }`}
+                        >
+                          <span className="text-sm font-bold">{attempt}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             )}
-          </div>
+
+            {/* Shift Selector */}
+            {selectedAttempt && availableShifts.length > 1 && (
+              <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
+                <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {availableShifts.map((shift) => {
+                    const isActive = selectedShift === shift;
+                    return (
+                      <button key={shift} onClick={() => setSelectedShift(shift)}
+                        className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                          isActive
+                            ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                        }`}
+                      >
+                        <span className="text-sm font-bold">Shift {shift}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </>
         )}
 
         {/* Practice mode selector */}
         <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — PRACTICE MODE</p>
+          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+            {track === "jee" ? (availableShifts.length > 1 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
@@ -324,7 +382,9 @@ function PracticeTab({ subjects, track }) {
         {/* Chapter selector */}
         {practiceMode === "chapter" && (
           <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>05 — SELECT CHAPTER</p>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
+              {track === "jee" ? (availableShifts.length > 1 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
+            </p>
             {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
             {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
             {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
@@ -360,6 +420,12 @@ function PracticeTab({ subjects, track }) {
               {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
             </p>
             <p className={`text-xs ${TXT_MUTED}`}>Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}</p>
+            {track === "jee" && practiceMode === "full" && selectedAttempt && (
+              <p className={`text-xs ${TXT_MUTED}`}>Attempt: {selectedAttempt}</p>
+            )}
+            {track === "jee" && practiceMode === "full" && selectedShift && (
+              <p className={`text-xs ${TXT_MUTED}`}>Shift: {selectedShift}</p>
+            )}
             {practiceMode === "chapter" && (
               <p className={`text-xs ${TXT_MUTED}`}>{selectedChapter ? `Chapter: ${selectedChapter}` : "No chapter selected"}</p>
             )}

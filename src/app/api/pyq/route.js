@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
-
 export async function GET(req) {
-
   const { searchParams } = new URL(req.url);
 
   const exam = searchParams.get("exam");
@@ -15,22 +13,13 @@ export async function GET(req) {
   const examType = searchParams.get("exam_type");
   const attempt = searchParams.get("attempt");
   const shift = searchParams.get("shift");
+  const paperCode = searchParams.get("paper_code");
+  const examId = searchParams.get("exam_id");
 
-  // TODO:
-  // replace userId query param with Clerk server auth
   const userId = searchParams.get("userId");
 
-  // mode=full:      complete paper — filter by exam/subject/year/exam_type/attempt/shift
-  // mode=random:    same filters, then shuffled
-  // mode=chapter:   filter by exam/subject/chapter (plus exam_type/attempt/shift if provided)
-  // mode=mistakes:  fetch the user's wrong pyq_attempts, then load those questions
-  //                 (optionally narrowed by exam/subject/year/attempt/shift)
-
   if (mode === "mistakes") {
-
-    if (!userId) {
-      return NextResponse.json([]);
-    }
+    if (!userId) return NextResponse.json([]);
 
     const { data: attempts, error: attemptsError } = await supabase
       .from("pyq_attempts")
@@ -40,100 +29,64 @@ export async function GET(req) {
 
     if (attemptsError) {
       console.error("PYQ MISTAKES QUERY ERROR:", attemptsError.message);
-
-      return NextResponse.json(
-        { error: "Failed to load mistake questions" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Failed to load mistake questions" }, { status: 500 });
     }
 
     const questionIds = [...new Set((attempts || []).map((a) => a.question_id))];
 
-    if (questionIds.length === 0) {
-      return NextResponse.json([]);
-    }
+    if (questionIds.length === 0) return NextResponse.json([]);
 
     let mistakeQuery = supabase
       .from("pyq_questions")
-      .select("*")
+      .select("*, pyq_exams!inner(status)")
+      .eq("pyq_exams.status", "PUBLISHED")
       .in("id", questionIds);
 
-    if (exam) {
-      mistakeQuery = mistakeQuery.eq("exam", exam);
-    }
-
-    if (subject) {
-      mistakeQuery = mistakeQuery.eq("subject", subject);
-    }
-
-    if (year) {
-      mistakeQuery = mistakeQuery.eq("year", year);
-    }
-
-    if (attempt) {
-      mistakeQuery = mistakeQuery.eq("attempt", attempt);
-    }
-
-    if (shift) {
-      mistakeQuery = mistakeQuery.eq("shift", shift);
-    }
+    if (exam) mistakeQuery = mistakeQuery.eq("exam", exam);
+    if (subject) mistakeQuery = mistakeQuery.eq("subject", subject);
+    if (year) mistakeQuery = mistakeQuery.eq("year", year);
+    if (attempt) mistakeQuery = mistakeQuery.eq("attempt", attempt);
+    if (shift) mistakeQuery = mistakeQuery.eq("shift", shift);
+    if (paperCode) mistakeQuery = mistakeQuery.eq("paper_code", paperCode);
+    if (examId) mistakeQuery = mistakeQuery.eq("exam_id", examId);
 
     const { data: mistakeQuestions, error: questionsError } = await mistakeQuery;
 
     if (questionsError) {
       console.error("PYQ MISTAKES QUERY ERROR:", questionsError.message);
-
-      return NextResponse.json(
-        { error: "Failed to load mistake questions" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Failed to load mistake questions" }, { status: 500 });
     }
 
     return NextResponse.json(mistakeQuestions || []);
-
   }
 
   let query = supabase
     .from("pyq_questions")
-    .select("*");
+    .select("*, pyq_exams!inner(status)")
+    .eq("pyq_exams.status", "PUBLISHED");
 
-  if (exam) {
-    query = query.eq("exam", exam);
-  }
+  if (examId) query = query.eq("exam_id", examId);
+  if (exam) query = query.eq("exam", exam);
+  if (subject) query = query.eq("subject", subject);
+  if (year) query = query.eq("year", year);
 
-  if (subject) {
-    query = query.eq("subject", subject);
-  }
-
-  if (year) {
-    query = query.eq("year", year);
-  }
-
-  if (mode === "chapter" && chapter) {
-    query = query.eq("chapter", chapter);
-  }
-
-  if (examType) {
-    query = query.eq("exam_type", examType);
-  }
-
-  if (attempt) {
-    query = query.eq("attempt", attempt);
-  }
-
-  if (shift) {
-    query = query.eq("shift", shift);
+  if (mode === "chapter") {
+    // Chapter Wise mode: ONLY filter by chapter (plus exam/subject/year already added above).
+    // Do NOT filter by exam_type, attempt, shift, or paper_code.
+    if (chapter) query = query.eq("chapter", chapter);
+  } else {
+    // Full paper or random mode: apply all paper metadata filters
+    if (examType) query = query.eq("exam_type", examType);
+    if (attempt) query = query.eq("attempt", attempt);
+    if (shift) query = query.eq("shift", shift);
+    if (paperCode) query = query.eq("paper_code", paperCode);
   }
 
   const { data, error } = await query;
 
   if (error) {
     console.error("PYQ QUERY ERROR:", error.message);
-
-    return NextResponse.json(
-      { error: "Failed to load PYQ questions" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
   }
 
   let result = data || [];

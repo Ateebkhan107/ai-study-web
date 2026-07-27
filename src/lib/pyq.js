@@ -50,6 +50,9 @@ export async function getPYQ(exam, subject, options = {}) {
   if (options.shift)
     params.set("shift", options.shift);
 
+  if (options.examId)
+    params.set("exam_id", options.examId);
+
   const res = await fetch(
     `/api/pyq?${params.toString()}`
   );
