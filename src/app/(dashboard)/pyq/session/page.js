@@ -10,6 +10,11 @@ import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 
 const LETTERS = ["A", "B", "C", "D"];
 
+function originalQuestionNumber(question, fallback) {
+  const match = question?.question?.match(/^\s*Question\s+(\d+)\s*:/i);
+  return match ? Number(match[1]) : fallback;
+}
+
 const modeLabels = {
   full: "📄 Full Paper",
   chapter: "📚 Chapter Wise",
@@ -107,6 +112,7 @@ export default function PYQSessionPage() {
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
+  const displayedQuestionNumber = originalQuestionNumber(currentQuestion, currentIndex + 1);
   const answeredCount = Object.keys(answers).length;
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
@@ -364,7 +370,7 @@ export default function PYQSessionPage() {
                       }
                     `}
                   >
-                    {idx + 1}
+                    {originalQuestionNumber(q, idx + 1)}
                   </button>
                 );
               })}
@@ -392,7 +398,7 @@ export default function PYQSessionPage() {
             <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                  Question {currentIndex + 1} of {questions.length}
+                  Question {displayedQuestionNumber} of {questions.length}
                 </span>
                 {qType !== "MCQ" && (
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">
