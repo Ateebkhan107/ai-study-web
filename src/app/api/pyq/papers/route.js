@@ -8,7 +8,8 @@ export async function GET(req) {
 
   let query = supabase
     .from("pyq_questions")
-    .select("exam_type, year, attempt, shift, paper_code");
+    .select("exam_type, year, attempt, shift, paper_code")
+    .eq("status", "PUBLISHED");
 
   if (exam) {
     query = query.eq("exam", exam);

@@ -97,10 +97,19 @@ export default function QuestionManager({ defaultTab = "import" }) {
   async function loadQuestions() {
     setLoadingQs(true);
     try {
+      console.log(`[QuestionManager] Fetching questions for exam_id: ${selectedExamId}`);
       const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
       const data = await res.json();
-      if (Array.isArray(data)) {
+      console.log("[QuestionManager] API Response:", data);
+      
+      if (data.questions && Array.isArray(data.questions)) {
+        console.log(`[QuestionManager] Setting ${data.questions.length} questions from data.questions`);
+        setQuestions(data.questions);
+      } else if (Array.isArray(data)) {
+        console.log(`[QuestionManager] Setting ${data.length} questions from raw array`);
         setQuestions(data);
+      } else {
+        console.warn("[QuestionManager] Unexpected data format:", data);
       }
     } catch (error) {
       console.error(error);

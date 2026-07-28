@@ -266,13 +266,23 @@ export default function PYQSessionPage() {
 
     let correct = 0;
     let wrong = 0;
+    let score = 0;
+    let maxScore = 0;
 
     const reviewData = questions.map((q) => {
+      maxScore += (Number(q.marks_positive) || 4);
+      
       const selected = answers[q.id];
       const isAnswered = selected !== undefined && selected !== null && selected !== "";
       const isCorrect = isAnswered && checkAnswer(q, selected);
-      if (isAnswered && isCorrect) correct += 1;
-      if (isAnswered && !isCorrect) wrong += 1;
+      if (isAnswered && isCorrect) {
+        correct += 1;
+        score += (Number(q.marks_positive) || 4);
+      }
+      if (isAnswered && !isCorrect) {
+        wrong += 1;
+        score -= Math.abs(q.marks_negative !== undefined && q.marks_negative !== null ? Number(q.marks_negative) : 1);
+      }
       return {
         id: q.id,
         question: q.question,
@@ -286,6 +296,7 @@ export default function PYQSessionPage() {
         option_d: q.option_d,
         correct_option: q.correct_option,
         explanation: q.explanation,
+        explanation_image: q.explanation_image,
         selected: selected || null,
         question_type: q.question_type || "MCQ",
         numerical_answer: q.numerical_answer,
@@ -296,7 +307,8 @@ export default function PYQSessionPage() {
     });
 
     const skipped = questions.length - answeredQuestions.length;
-    const accuracy = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
+    const attempted = correct + wrong;
+    const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
 
     if (typeof window !== "undefined") {
       sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));
@@ -311,6 +323,8 @@ export default function PYQSessionPage() {
     resultParams.set("wrong", String(wrong));
     resultParams.set("skipped", String(skipped));
     resultParams.set("accuracy", String(accuracy));
+    resultParams.set("score", String(score));
+    resultParams.set("maxScore", String(maxScore));
     if (examType) resultParams.set("exam_type", examType);
     if (attempt) resultParams.set("attempt", attempt);
     if (shift) resultParams.set("shift", shift);

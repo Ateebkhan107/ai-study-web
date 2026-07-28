@@ -15,6 +15,7 @@ export async function GET(req) {
 
   try {
     const { searchParams } = new URL(req.url);
+    const exam_id = searchParams.get("exam_id");
     const exam = searchParams.get("exam");
     const subject = searchParams.get("subject");
     const year = searchParams.get("year");
@@ -33,8 +34,13 @@ export async function GET(req) {
       .from("pyq_questions")
       .select("*", { count: 'exact' });
 
+    if (exam_id) query = query.eq("exam_id", exam_id);
     if (exam) query = query.eq("exam", exam);
     if (subject) query = query.eq("subject", subject);
+
+    console.log(`[API /admin/pyq] Search Params:`, {
+      exam_id, exam, subject, year, search, exam_type, attempt, shift, paper_code, chapter, question_type, image_status, page, limit
+    });
     if (year) query = query.eq("year", year);
     if (exam_type) query = query.eq("exam_type", exam_type);
     if (attempt) query = query.eq("attempt", attempt);
@@ -79,9 +85,11 @@ export async function GET(req) {
     const { data, count, error } = await query;
 
     if (error) {
-      console.error(error);
+      console.error("[API /admin/pyq] Database Query Error:", error);
       return NextResponse.json({ error: "Failed loading PYQs" }, { status: 500 });
     }
+
+    console.log(`[API /admin/pyq] Query successful. Returned ${data?.length} rows. Total count: ${count}`);
 
     return NextResponse.json({
       success: true,

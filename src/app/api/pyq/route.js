@@ -39,6 +39,7 @@ export async function GET(req) {
     let mistakeQuery = supabase
       .from("pyq_questions")
       .select("*")
+      .eq("status", "PUBLISHED")
       .not("exam_id", "is", null)
       .in("id", questionIds);
 
@@ -64,6 +65,7 @@ export async function GET(req) {
   let query = supabase
     .from("pyq_questions")
     .select("*")
+    .eq("status", "PUBLISHED")
     .not("exam_id", "is", null);
 
   if (examId) query = query.eq("exam_id", examId);
@@ -74,7 +76,10 @@ export async function GET(req) {
   if (mode === "chapter") {
     // Chapter Wise mode: ONLY filter by chapter (plus exam/subject/year already added above).
     // Do NOT filter by exam_type, attempt, shift, or paper_code.
-    if (chapter) query = query.eq("chapter", chapter);
+    if (chapter) {
+      const chaptersArray = chapter.split(",").map(c => c.trim());
+      query = query.in("chapter", chaptersArray);
+    }
   } else {
     // Full paper or random mode: apply all paper metadata filters
     if (examType) query = query.eq("exam_type", examType);

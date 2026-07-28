@@ -145,14 +145,14 @@ function PracticeTab({ subjects, track }) {
   const [loadingPapers,    setLoadingPapers]    = useState(false);
 
   const [chapters,        setChapters]        = useState([]);
-  const [selectedChapter, setSelectedChapter] = useState("");
+  const [selectedChapters, setSelectedChapters] = useState([]);
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [chapterError,    setChapterError]    = useState("");
 
   useEffect(() => {
-    if (practiceMode !== "chapter" || selectedSubjects.length !== 1) {
+    if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
       setChapters([]);
-      setSelectedChapter("");
+      setSelectedChapters([]);
       return;
     }
     let cancelled = false;
@@ -160,15 +160,19 @@ function PracticeTab({ subjects, track }) {
       setLoadingChapters(true);
       setChapterError("");
       try {
-        const subjectLabel = subjects.find((s) => s.id === selectedSubjects[0])?.label;
-        if (!subjectLabel) { if (!cancelled) setChapters([]); return; }
+        const subjectLabels = subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label);
+        if (subjectLabels.length === 0) { if (!cancelled) setChapters([]); return; }
         const params = new URLSearchParams();
         params.set("exam", track.toUpperCase());
-        params.set("subject", subjectLabel);
+        params.set("subject", subjectLabels.join(","));
         const res = await fetch(`/api/pyq/chapters?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load chapters");
         const data = await res.json();
-        if (!cancelled) { setChapters(Array.isArray(data) ? data : []); setSelectedChapter(""); }
+        if (!cancelled) {
+          const loadedChapters = Array.isArray(data) ? data : [];
+          setChapters(loadedChapters);
+          setSelectedChapters(prev => prev.filter(c => loadedChapters.includes(c)));
+        }
       } catch (error) {
         console.error("Failed to load chapters:", error);
         if (!cancelled) { setChapters([]); setChapterError("Failed to load chapters. Please try again."); }
@@ -231,12 +235,8 @@ function PracticeTab({ subjects, track }) {
     }
     
     if (practiceMode === "chapter") {
-      if (selectedSubjects.length > 1) {
-        setSubjectError("Please select only ONE subject for Chapter Wise practice.");
-        return;
-      }
-      if (!selectedChapter) {
-        setSubjectError("Please select a chapter");
+      if (selectedChapters.length === 0) {
+        setSubjectError("Please select at least one chapter");
         return;
       }
     }
@@ -248,7 +248,7 @@ function PracticeTab({ subjects, track }) {
     if (selectedYears.length > 0) params.set("years", selectedYears.join(","));
     params.set("mode", practiceMode);
     
-    if (practiceMode === "chapter" && selectedChapter) params.set("chapter", selectedChapter);
+    if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
     
     if (track === "jee" && practiceMode === "full") {
       if (selectedAttempt) params.set("attempt", selectedAttempt);
@@ -260,6 +260,7 @@ function PracticeTab({ subjects, track }) {
 
   const toggleSubject = (id) => setSelectedSubjects((p) => p.includes(id) ? p.filter((s) => s !== id) : [...p, id]);
   const toggleYear = (yr) => setSelectedYears((p) => p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr]);
+  const toggleChapter = (ch) => setSelectedChapters((p) => p.includes(ch) ? p.filter((c) => c !== ch) : [...p, ch]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
@@ -394,16 +395,15 @@ function PracticeTab({ subjects, track }) {
               {track === "jee" ? (availableShifts.length > 1 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
             </p>
             {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
-            {selectedSubjects.length > 1 && <p className={`text-sm text-rose-500 font-medium`}>Please select only ONE subject to view its chapters.</p>}
-            {selectedSubjects.length === 1 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
-            {selectedSubjects.length === 1 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
-            {selectedSubjects.length === 1 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
-            {selectedSubjects.length === 1 && !loadingChapters && chapters.length > 0 && (
+            {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {chapters.map((ch) => (
-                  <button key={ch} onClick={() => setSelectedChapter(ch)}
+                  <button key={ch} onClick={() => toggleChapter(ch)}
                     className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer duration-200 ${
-                      selectedChapter === ch
+                      selectedChapters.includes(ch)
                         ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                         : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                     }`}
@@ -436,7 +436,11 @@ function PracticeTab({ subjects, track }) {
               <p className={`text-xs ${TXT_MUTED}`}>Shift: {selectedShift}</p>
             )}
             {practiceMode === "chapter" && (
-              <p className={`text-xs ${TXT_MUTED}`}>{selectedChapter ? `Chapter: ${selectedChapter}` : "No chapter selected"}</p>
+              <p className={`text-xs ${TXT_MUTED}`}>
+              {practiceMode === "chapter" 
+                ? (selectedChapters.length > 0 ? `${selectedChapters.length} chapter${selectedChapters.length > 1 ? "s" : ""} selected` : "No chapter selected")
+                : (practiceMode === "full" ? "Complete Paper" : "All Chapters")}
+            </p>
             )}
           </div>
 
@@ -637,6 +641,7 @@ export default function PYQPage() {
       const { data } = await supabase
         .from("pyq_questions")
         .select("*")
+        .eq("status", "PUBLISHED")
         .in("id", bms);
       if (!cancelled && data) {
         // filter by track if needed, or show all

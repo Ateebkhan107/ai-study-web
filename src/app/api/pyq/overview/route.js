@@ -17,7 +17,8 @@ export async function GET(request) {
 
     const countQuery = supabase
       .from("pyq_questions")
-      .select("id", { count: "exact", head: true });
+      .select("id", { count: "exact", head: true })
+      .eq("status", "PUBLISHED");
 
     if (isNeet) {
       countQuery.eq("exam", "NEET");
@@ -32,12 +33,14 @@ export async function GET(request) {
     const minYearQuery = supabase
       .from("pyq_questions")
       .select("year")
+      .eq("status", "PUBLISHED")
       .order("year", { ascending: true })
       .limit(1);
 
     const maxYearQuery = supabase
       .from("pyq_questions")
       .select("year")
+      .eq("status", "PUBLISHED")
       .order("year", { ascending: false })
       .limit(1);
 

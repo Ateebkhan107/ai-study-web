@@ -51,6 +51,8 @@ export default function PYQResultsPage() {
   const wrong = parseInt(searchParams.get("wrong") || "0", 10);
   const skipped = parseInt(searchParams.get("skipped") || "0", 10);
   const accuracy = parseInt(searchParams.get("accuracy") || "0", 10);
+  const score = parseInt(searchParams.get("score") || "0", 10);
+  const maxScore = parseInt(searchParams.get("maxScore") || "0", 10);
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
 
@@ -160,9 +162,12 @@ export default function PYQResultsPage() {
             </div>
 
             <div className="text-center md:text-left flex-1">
-              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
                 Deck Submitted!
               </h1>
+              <p className="text-xl font-bold text-slate-600 dark:text-slate-400 mb-3">
+                Score: <span className="text-indigo-600 dark:text-indigo-400">{score}</span> / {maxScore}
+              </p>
               <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold border ${badgeColor}`}>
                 {resultLabel}
               </span>

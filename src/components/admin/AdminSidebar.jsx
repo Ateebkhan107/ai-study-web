@@ -15,7 +15,11 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  FileCheck,
+  Brain,
+  BarChart,
+  ClipboardList
 } from "lucide-react";
 import { useState } from "react";
 import { useClerk } from "@clerk/nextjs";
@@ -25,18 +29,47 @@ export default function AdminSidebar() {
   const { signOut } = useClerk();
   const [isOpen, setIsOpen] = useState(false);
 
-  const navigation = [
+  const mainNav = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  ];
+
+  const questionBankNav = [
     { name: "Exams", href: "/admin/exams", icon: FileText },
+    { name: "Import Packages", href: "/admin/imports", icon: Upload },
+    { name: "Review Queue", href: "/admin/reviews", icon: ClipboardList },
     { name: "Questions", href: "/admin/questions", icon: List },
-    { name: "Image Manager", href: "/admin/images", icon: ImageIcon },
-    { name: "Import Center", href: "/admin/import", icon: Upload },
-    { name: "Notifications", href: "/admin/notifications", icon: Bell },
-    { name: "Daily Goals", href: "/admin/goals", icon: Target },
-    { name: "Badges", href: "/admin/badges", icon: Award },
+    { name: "Images", href: "/admin/images", icon: ImageIcon },
+    { name: "Solutions", href: "/admin/solutions", icon: FileCheck },
+  ];
+
+  const managementNav = [
+    { name: "Mock Tests", href: "/admin/mock-tests", icon: FileText },
     { name: "Students", href: "/admin/students", icon: Users },
+    { name: "Notifications", href: "/admin/notifications", icon: Bell },
+    { name: "Badges", href: "/admin/badges", icon: Award },
+    { name: "Analytics", href: "/admin/analytics", icon: BarChart },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
+
+  const NavItem = ({ item }) => {
+    const isActive = pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href));
+    return (
+      <Link 
+        key={item.name} 
+        href={item.href}
+        onClick={() => setIsOpen(false)}
+        className={`
+          flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all text-sm
+          ${isActive 
+            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' 
+            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-black dark:hover:text-white'}
+        `}
+      >
+        <item.icon className={`w-5 h-5 ${isActive ? 'text-purple-600 dark:text-purple-400' : ''}`} />
+        {item.name}
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -63,47 +96,15 @@ export default function AdminSidebar() {
         </div>
 
         <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-1 mt-16 lg:mt-0">
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3">Question Bank</div>
-          {navigation.slice(0, 5).map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href));
-            return (
-              <Link 
-                key={item.name} 
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all text-sm
-                  ${isActive 
-                    ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' 
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-black dark:hover:text-white'}
-                `}
-              >
-                <item.icon className={`w-5 h-5 ${isActive ? 'text-purple-600 dark:text-purple-400' : ''}`} />
-                {item.name}
-              </Link>
-            );
-          })}
+          
+          {mainNav.map(item => <NavItem key={item.name} item={item} />)}
+
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Question Bank</div>
+          {questionBankNav.map(item => <NavItem key={item.name} item={item} />)}
 
           <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Management</div>
-          {navigation.slice(5).map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href));
-            return (
-              <Link 
-                key={item.name} 
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all text-sm
-                  ${isActive 
-                    ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' 
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-black dark:hover:text-white'}
-                `}
-              >
-                <item.icon className={`w-5 h-5 ${isActive ? 'text-purple-600 dark:text-purple-400' : ''}`} />
-                {item.name}
-              </Link>
-            );
-          })}
+          {managementNav.map(item => <NavItem key={item.name} item={item} />)}
+          
         </div>
 
         <div className="p-4 border-t border-gray-200 dark:border-gray-800">

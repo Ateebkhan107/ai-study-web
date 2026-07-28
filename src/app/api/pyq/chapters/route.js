@@ -20,6 +20,7 @@ searchParams.get("subject");
 let query = supabase
 .from("pyq_questions")
 .select("chapter")
+.eq("status", "PUBLISHED")
 .not("exam_id", "is", null);
 
 
@@ -35,12 +36,8 @@ exam
 
 
 if(subject){
-
-query=query.eq(
-"subject",
-subject
-);
-
+  const subjectsArray = subject.split(",").map(s => s.trim());
+  query = query.in("subject", subjectsArray);
 }
 
 

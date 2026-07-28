@@ -74,8 +74,20 @@ for (let start = 0; start < manifest.length; start += 12) {
   console.log(`Uploaded images through question ${group.at(-1).number}`);
 }
 
+const { data: pkgData, error: pkgErr } = await supabase
+  .from("pyq_import_packages")
+  .insert([{ name: "NEET 2025 (Auto Import)" }])
+  .select("id")
+  .single();
+if (pkgErr) throw pkgErr;
+const packageId = pkgData.id;
+
 for (let index = 0; index < records.length; index += 30) {
-  const batch = records.slice(index, index + 30);
+  const batch = records.slice(index, index + 30).map(r => ({
+    ...r,
+    import_package_id: packageId,
+    status: 'PENDING_REVIEW'
+  }));
   const { error } = await supabase.from("pyq_questions").insert(batch);
   if (error) throw new Error(`Question insert failed at ${index + 1}: ${error.message}`);
   console.log(`Inserted questions ${index + 1}-${index + batch.length}`);
