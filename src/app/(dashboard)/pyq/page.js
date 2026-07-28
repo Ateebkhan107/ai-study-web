@@ -259,7 +259,12 @@ function PracticeTab({ subjects, track }) {
   }
 
   const toggleSubject = (id) => setSelectedSubjects((p) => p.includes(id) ? p.filter((s) => s !== id) : [...p, id]);
-  const toggleYear = (yr) => setSelectedYears((p) => p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr]);
+  const toggleYear = (yr) => setSelectedYears((p) => {
+    if (practiceMode === "full") {
+      return p.includes(yr) ? [] : [yr];
+    }
+    return p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr];
+  });
   const toggleChapter = (ch) => setSelectedChapters((p) => p.includes(ch) ? p.filter((c) => c !== ch) : [...p, ch]);
 
   return (
@@ -370,7 +375,12 @@ function PracticeTab({ subjects, track }) {
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
               return (
-                <button key={m.id} onClick={() => setPracticeMode(m.id)}
+                <button key={m.id} onClick={() => {
+                  setPracticeMode(m.id);
+                  if (m.id === "full" && selectedYears.length > 1) {
+                    setSelectedYears([selectedYears[0]]);
+                  }
+                }}
                   className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
                     active
                       ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
