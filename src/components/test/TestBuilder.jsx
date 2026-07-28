@@ -177,7 +177,7 @@ export default function TestBuilder({ track = "jee" }) {
       const savedDifficulty = sessionStorage.getItem("tb_difficulty");
       if (savedDifficulty) setDifficulty(savedDifficulty);
     } catch (error) {
-      console.log("No saved data found, starting fresh!");
+//       console.log("No saved data found, starting fresh!");
     }
   }, [activeTrack]);
 

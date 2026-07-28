@@ -37,10 +37,10 @@ export default function ReviewPage() {
         .eq("attempt_id", id);
         
       if (error) throw error;
-      console.log("FULL REVIEW DATA 👉", data);
+//       console.log("FULL REVIEW DATA 👉", data);
       setAnswers(data);
     } catch (err) {
-      console.log(err);
+//       console.log(err);
     }
     setLoading(false);
   }

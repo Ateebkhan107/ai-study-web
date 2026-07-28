@@ -53,7 +53,7 @@ async function uploadSolutions(year, manifestPath, bucketPathPrefix) {
       // Wait, in my import scripts, I didn't set `question_number`! I just inserted them in order from 1 to 200!
       // So to map them back, I must fetch them ordered by ID!
     }));
-    console.log(`Uploaded solutions for ${year} up to question ${group[group.length - 1]}`);
+//     console.log(`Uploaded solutions for ${year} up to question ${group[group.length - 1]}`);
   }
 }
 
@@ -81,7 +81,7 @@ async function linkSolutions(year, manifestPath, bucketPathPrefix) {
 
   // questions are in order 1..200
   if (questions.length === 0) {
-    console.log(`No questions found in DB for ${year}`);
+//     console.log(`No questions found in DB for ${year}`);
     return;
   }
 
@@ -101,7 +101,7 @@ async function linkSolutions(year, manifestPath, bucketPathPrefix) {
       }
     }
   }
-  console.log(`Linked solutions for ${year}!`);
+//   console.log(`Linked solutions for ${year}!`);
 }
 
 async function main() {

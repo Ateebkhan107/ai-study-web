@@ -10,7 +10,7 @@ import {
   RADAR_TOPPER,
   TOPIC_WEAKNESS,
   TIME_BY_DAY,
-} from "@/lib/analyticsData";
+} from "@/constants/analyticsData";
 
 // ── shared Chart.js loader ──────────────────────────────────────
 function useChart(canvasId, buildConfig, dependencies = []) {

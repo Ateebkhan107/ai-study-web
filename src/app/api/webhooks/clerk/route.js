@@ -28,7 +28,7 @@ export async function POST(req) {
         return new NextResponse("Database write failed", { status: 500 });
       }
 
-      console.log(`Successfully created a live database profile for user: ${id}`);
+//       console.log(`Successfully created a live database profile for user: ${id}`);
     }
 
     return NextResponse.json({ success: true });

@@ -5,7 +5,7 @@ import {
   ADAPTIVE_STEPS,
   DAILY_TASKS,
   AI_RECOMMENDATIONS,
-} from "@/lib/analyticsData";
+} from "@/constants/analyticsData";
 import { Sparkles } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────

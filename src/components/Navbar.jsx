@@ -46,7 +46,7 @@ export default function Navbar() {
         .maybeSingle();
 
       if (profileError) {
-        console.log("Profile Error:", profileError);
+//         console.log("Profile Error:", profileError);
       }
 
       if (profile?.exam) {
@@ -66,11 +66,11 @@ export default function Navbar() {
         .eq("status", "active")
         .maybeSingle();
 
-      console.log("========== PRO DEBUG ==========");
-      console.log("Current Clerk User:", user.id);
-      console.log("Subscription:", subscription);
-      console.log("Subscription Error:", subscriptionError);
-      console.log("===============================");
+//       console.log("========== PRO DEBUG ==========");
+//       console.log("Current Clerk User:", user.id);
+//       console.log("Subscription:", subscription);
+//       console.log("Subscription Error:", subscriptionError);
+//       console.log("===============================");
 
       if (
         subscription &&

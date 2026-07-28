@@ -1,7 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { addXP } from "@/lib/xp";
+import { addXP } from "@/utils/xp";
 
 
 export async function POST(req) {
@@ -142,7 +142,7 @@ return NextResponse.json({
 catch(err){
 
 
-console.log(err);
+// console.log(err);
 
 
 

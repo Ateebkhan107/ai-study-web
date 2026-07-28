@@ -20,10 +20,10 @@ export default function ResultPage() {
         .single();
 
       if (error) throw error;
-      console.log("RESULT DATA 👉", data);
+//       console.log("RESULT DATA 👉", data);
       setAttempt(data);
     } catch (err) {
-      console.log(err);
+//       console.log(err);
     }
     setLoading(false);
   }

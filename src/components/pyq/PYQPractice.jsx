@@ -58,7 +58,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
       const savedDuration = sessionStorage.getItem("pq_duration");
       if (savedDuration) setDuration(Number(savedDuration));
     } catch (error) {
-      console.log("Starting fresh practice session configuration state.");
+//       console.log("Starting fresh practice session configuration state.");
     }
   }, []);
 

@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getFormulaBook, getPdfUrl } from "@/lib/formulaBooks";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/lib/updateGoalProgress";
+import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { Inbox, FlaskConical, Ruler, Zap, BookOpen } from "lucide-react";
 
 

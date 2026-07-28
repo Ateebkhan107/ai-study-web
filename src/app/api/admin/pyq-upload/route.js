@@ -33,9 +33,9 @@ export async function POST(req) {
       return NextResponse.json({ success: false, error: "Missing Exam ID" }, { status: 400 });
     }
 
-    console.log("=== CSV IMPORT DEBUG ===");
-    console.log("Received exam_id:", examId);
-    console.log("CSV filename:", fileName);
+//     console.log("=== CSV IMPORT DEBUG ===");
+//     console.log("Received exam_id:", examId);
+//     console.log("CSV filename:", fileName);
 
     // 1. Fetch Exam Metadata without .single() to debug the exact response
     const { data, error: examError } = await supabaseAdmin
@@ -43,8 +43,8 @@ export async function POST(req) {
       .select("*")
       .eq("id", examId);
 
-    console.log("Exam lookup:", data);
-    console.log("Supabase error:", examError);
+//     console.log("Exam lookup:", data);
+//     console.log("Supabase error:", examError);
 
     if (examError || !data || data.length !== 1) {
       const errorMsg = examError?.message || (data ? `Returned ${data.length} rows instead of 1` : "Data is null");
@@ -66,9 +66,9 @@ export async function POST(req) {
       console.error(errors);
     }
 
-    console.log("Headers:", Object.keys(parsedRows[0] || {}));
-    console.log("Parsed rows:", parsedRows.length);
-    console.log("First row:", parsedRows[0]);
+//     console.log("Headers:", Object.keys(parsedRows[0] || {}));
+//     console.log("Parsed rows:", parsedRows.length);
+//     console.log("First row:", parsedRows[0]);
 
     if (parsedRows.length === 0) {
       console.error("Upload Error: CSV empty or unreadable");

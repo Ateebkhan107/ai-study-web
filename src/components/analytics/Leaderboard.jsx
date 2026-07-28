@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
-import { getTopLeaderboard, getUserRank } from "@/lib/leaderboard";
-import { getLevelFromXP } from "@/lib/levelEngine";
+import { getTopLeaderboard, getUserRank } from "@/utils/leaderboard";
+import { getLevelFromXP } from "@/utils/levelEngine";
 
 export default function Leaderboard() {
   const { user: currentUser } = useUser();
@@ -42,7 +42,7 @@ export default function Leaderboard() {
           }
         }
       } catch (error) {
-        console.log("Leaderboard error:", error);
+//         console.log("Leaderboard error:", error);
       }
     }
 

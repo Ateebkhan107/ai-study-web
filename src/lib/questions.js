@@ -124,7 +124,7 @@ export async function getQuestions({
   limit = 20,
 }) {
   try {
-    console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
+//     console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
 
     let finalQuestions = [];
     let subjects = [];
@@ -218,14 +218,14 @@ export async function getQuestions({
       }
 
       if (error && (!data || data.length === 0)) {
-        console.log("SUPABASE ERROR:", error);
+//         console.log("SUPABASE ERROR:", error);
         continue;
       }
 
       finalQuestions.push(...(data || []).slice(0, subjectLimit));
     }
 
-    console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
+//     console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
 
     return finalQuestions.map((q) => ({
       id: q.id,
@@ -249,7 +249,7 @@ export async function getQuestions({
       negative_marks: q.negative_marks || -1,
     }));
   } catch (err) {
-    console.log("Question error:", err);
+//     console.log("Question error:", err);
     return [];
   }
 }

@@ -32,7 +32,7 @@ export default async function OnboardingPage() {
   async function completeOnboarding(formData) {
     "use server";
 
-    console.log("ONBOARDING FUNCTION STARTED");
+//     console.log("ONBOARDING FUNCTION STARTED");
 
     const { userId: actionUserId } = await auth();
 
@@ -55,11 +55,11 @@ export default async function OnboardingPage() {
     const email = clerkUser.primaryEmailAddress?.emailAddress || "";
 
    
-    console.log("USER ID:", actionUserId);
-    console.log("EMAIL:", email);
-    console.log("NAME:", fullName);
-    console.log("EXAM:", targetExam);
-    console.log("YEAR:", targetYear);
+//     console.log("USER ID:", actionUserId);
+//     console.log("EMAIL:", email);
+//     console.log("NAME:", fullName);
+//     console.log("EXAM:", targetExam);
+//     console.log("YEAR:", targetYear);
 
 
     const { error } = await supabase
@@ -72,7 +72,7 @@ export default async function OnboardingPage() {
         target_year: targetYear,
         
       });
-    console.log("SUPABASE ERROR:", error);
+//     console.log("SUPABASE ERROR:", error);
 
     if (error) {
       console.error(error);

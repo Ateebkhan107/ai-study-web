@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
 import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
 import TrackWrapper from "@/components/TrackWrapper"; 
-import { initUserLeaderboard } from "@/lib/leaderboard"; 
+import { initUserLeaderboard } from "@/utils/leaderboard"; 
 
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();

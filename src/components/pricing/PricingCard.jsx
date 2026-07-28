@@ -77,7 +77,7 @@ export default function PricingCard({
 
         modal: {
           ondismiss() {
-            console.log("Payment cancelled");
+//             console.log("Payment cancelled");
           },
         },
       };

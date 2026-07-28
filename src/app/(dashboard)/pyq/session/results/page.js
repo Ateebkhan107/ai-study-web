@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/lib/updateGoalProgress";
-import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
+import { updateGoalProgress } from "@/utils/updateGoalProgress";
+import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 
 // Practice mode display labels
 const modeLabels = {
@@ -92,10 +92,10 @@ export default function PYQResultsPage() {
       try {
         goalUpdated.current = true;
         await updateGoalProgress(user.id, "PYQ", 1);
-        console.log("PYQ GOAL UPDATED 🚀", total);
+//         console.log("PYQ GOAL UPDATED 🚀", total);
       } catch (error) {
         goalUpdated.current = false;
-        console.log("PYQ goal error:", error);
+//         console.log("PYQ goal error:", error);
       }
     }
     updatePYQGoal();
@@ -414,9 +414,6 @@ export default function PYQResultsPage() {
                     <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800">
                       <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">
                         {q.chapter}
-                      </span>
-                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">
-                        {q.difficulty}
                       </span>
                     </div>
                   </div>

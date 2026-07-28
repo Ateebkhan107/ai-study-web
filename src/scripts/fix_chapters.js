@@ -99,7 +99,7 @@ async function fixChapters() {
       if (upErr) console.error("Update error for ID", q.id, upErr);
     }
     
-    console.log(`Processed ${offset + questions.length} questions`);
+//     console.log(`Processed ${offset + questions.length} questions`);
     offset += limit;
   }
 }

@@ -4,9 +4,9 @@ import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import { Flame, Zap, Target, Gem, Trophy, Rocket, FileText, Pencil } from "lucide-react";
 import * as LucideIcons from "lucide-react";
-import { getUserXP, getUserRank, getProfileAnalytics } from "@/lib/profile";
-import { getUserRank as getGlobalRank } from "@/lib/leaderboard";
-import { getLevelFromXP } from "@/lib/levelEngine";
+import { getUserXP, getUserRank, getProfileAnalytics } from "@/utils/profile";
+import { getUserRank as getGlobalRank } from "@/utils/leaderboard";
+import { getLevelFromXP } from "@/utils/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
 
 

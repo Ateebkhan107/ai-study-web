@@ -55,18 +55,18 @@ export default function QuestionManager({ defaultTab = "import" }) {
     setSummary(null);
 
     try {
-      console.log("=== CSV IMPORT EXAM VALIDATION ===");
+//       console.log("=== CSV IMPORT EXAM VALIDATION ===");
       const selectedExam = exams.find(e => e.id === selectedExamId);
-      console.log("Selected exam:", selectedExam);
-      console.log("Sending exam_id:", selectedExamId);
+//       console.log("Selected exam:", selectedExam);
+//       console.log("Sending exam_id:", selectedExamId);
       
       const formData = new FormData();
       formData.append("file", csvFile);
       formData.append("exam_id", selectedExamId);
       
-      console.log("FormData being sent:");
+//       console.log("FormData being sent:");
       for (const pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
+//         console.log(pair[0], pair[1]);
       }
 
       const res = await fetch("/api/admin/pyq-upload", {
@@ -97,16 +97,16 @@ export default function QuestionManager({ defaultTab = "import" }) {
   async function loadQuestions() {
     setLoadingQs(true);
     try {
-      console.log(`[QuestionManager] Fetching questions for exam_id: ${selectedExamId}`);
+//       console.log(`[QuestionManager] Fetching questions for exam_id: ${selectedExamId}`);
       const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
       const data = await res.json();
-      console.log("[QuestionManager] API Response:", data);
+//       console.log("[QuestionManager] API Response:", data);
       
       if (data.questions && Array.isArray(data.questions)) {
-        console.log(`[QuestionManager] Setting ${data.questions.length} questions from data.questions`);
+//         console.log(`[QuestionManager] Setting ${data.questions.length} questions from data.questions`);
         setQuestions(data.questions);
       } else if (Array.isArray(data)) {
-        console.log(`[QuestionManager] Setting ${data.length} questions from raw array`);
+//         console.log(`[QuestionManager] Setting ${data.length} questions from raw array`);
         setQuestions(data);
       } else {
         console.warn("[QuestionManager] Unexpected data format:", data);

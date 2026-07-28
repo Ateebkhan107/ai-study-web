@@ -22,7 +22,7 @@ export async function GET(request) {
 
     if (error) {
 
-      console.log(error);
+//       console.log(error);
 
       return NextResponse.json(
         { error: error.message },

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
-import { addXP } from "@/lib/xp";
+import { addXP } from "@/utils/xp";
 
 
 

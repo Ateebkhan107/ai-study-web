@@ -62,7 +62,7 @@ export async function getPYQ(exam, subject, options = {}) {
 
     const error = await res.json().catch(() => ({}));
 
-    console.log("PYQ FETCH ERROR:", error);
+//     console.log("PYQ FETCH ERROR:", error);
 
     throw new Error(
       error.error || "Failed to load PYQ"

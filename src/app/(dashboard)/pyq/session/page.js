@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
-import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
+import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 
@@ -162,7 +162,7 @@ export default function PYQSessionPage() {
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
-  const displayedQuestionNumber = originalQuestionNumber(currentQuestion, currentIndex + 1);
+  const displayedQuestionNumber = mode === "full" ? originalQuestionNumber(currentQuestion, currentIndex + 1) : currentIndex + 1;
   const answeredCount = Object.keys(answers).length;
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
@@ -448,7 +448,7 @@ export default function PYQSessionPage() {
                       }
                     `}
                   >
-                    {originalQuestionNumber(q, idx + 1)}
+                    {mode === "full" ? originalQuestionNumber(q, idx + 1) : idx + 1}
                   </button>
                 );
               })}
@@ -526,17 +526,6 @@ export default function PYQSessionPage() {
               <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
                 {currentQuestion.chapter}
               </span>
-              {currentQuestion.difficulty && (
-                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                  currentQuestion.difficulty === "Hard"
-                    ? "bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-500/20"
-                    : currentQuestion.difficulty === "Medium"
-                    ? "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20"
-                    : "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20"
-                }`}>
-                  {currentQuestion.difficulty}
-                </span>
-              )}
             </div>
 
             {/* Question text */}

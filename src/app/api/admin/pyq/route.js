@@ -89,7 +89,7 @@ export async function GET(req) {
       return NextResponse.json({ error: "Failed loading PYQs" }, { status: 500 });
     }
 
-    console.log(`[API /admin/pyq] Query successful. Returned ${data?.length} rows. Total count: ${count}`);
+//     console.log(`[API /admin/pyq] Query successful. Returned ${data?.length} rows. Total count: ${count}`);
 
     return NextResponse.json({
       success: true,

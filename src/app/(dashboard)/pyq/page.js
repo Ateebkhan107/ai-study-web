@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
 import PageWrapper from "@/components/PageWrapper";
 import { Atom, FlaskConical, Sigma, Dna } from "lucide-react";
-import { getBookmarks, removeBookmark } from "@/lib/bookmarks";
+import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (

@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { getUserBadgeProgress } from "@/lib/badgeEngine";
+import { getUserBadgeProgress } from "@/utils/badgeEngine";
 
 export async function GET() {
   try {

@@ -19,7 +19,7 @@ export default function UserGreeting() {
       .single();
 
     if (error) {
-      console.log(error);
+//       console.log(error);
       return;
     }
 

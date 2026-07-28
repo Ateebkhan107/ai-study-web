@@ -52,7 +52,7 @@ export default function DailyGoals() {
         .order("created_at", { ascending: false });
 
       if (goalsError) {
-        console.log("Daily goals error:", goalsError);
+//         console.log("Daily goals error:", goalsError);
         return;
       }
       
@@ -73,7 +73,7 @@ export default function DailyGoals() {
         .in("goal_id", goalIds);
 
       if (progressError) {
-         console.log("Progress error:", progressError);
+//          console.log("Progress error:", progressError);
       }
 
       const formatted = goalsList.map((goal) => {

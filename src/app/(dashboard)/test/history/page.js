@@ -22,7 +22,7 @@ export default function HistoryPage() {
       });
 
     if (error) {
-      console.log(error);
+//       console.log(error);
       return;
     }
 

@@ -26,9 +26,9 @@ export async function GET(req) {
   const { data, error } = await query;
 
 if (error) {
-  console.log("========== SUPABASE ERROR ==========");
-  console.log(error);
-  console.log("===================================");
+//   console.log("========== SUPABASE ERROR ==========");
+//   console.log(error);
+//   console.log("===================================");
 
   return NextResponse.json(
     { error: error.message },

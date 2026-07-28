@@ -7,8 +7,8 @@ import Logo from "@/components/Logo";
 import { createTestSession } from "@/services/testSessions";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/lib/updateGoalProgress";
-import { updateStreak } from "@/lib/streak";
+import { updateGoalProgress } from "@/utils/updateGoalProgress";
+import { updateStreak } from "@/utils/streak";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -181,7 +181,7 @@ function TestSessionContent() {
       });
 
       const xpData = await xpResponse.json();
-      console.log("TEST XP UPDATED 👉", xpData);
+//       console.log("TEST XP UPDATED 👉", xpData);
 
       router.replace(`/test/result/${attempt.id}`);
       clearInterval(timerRef.current);

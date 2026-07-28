@@ -5,7 +5,7 @@ import { createProfileIfNotExists } from "@/services/profile.service";
 
 
 
-import { getLevelFromXP } from "@/lib/levelEngine";
+import { getLevelFromXP } from "@/utils/levelEngine";
 
 
 
