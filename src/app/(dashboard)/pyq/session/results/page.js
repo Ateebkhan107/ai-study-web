@@ -45,6 +45,8 @@ export default function PYQResultsPage() {
   const examType = searchParams.get("exam_type") || "";
   const attempt = searchParams.get("attempt") || "";
   const shift = searchParams.get("shift") || "";
+  const attemptLabel = searchParams.get("attempt_label") || attempt;
+  const shiftLabel = searchParams.get("shift_label") || shift;
 
   const total = parseInt(searchParams.get("total") || "0", 10);
   const correct = parseInt(searchParams.get("correct") || "0", 10);
@@ -186,9 +188,9 @@ export default function PYQResultsPage() {
               <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
                 Exam: {exam}{examType ? ` ${examType}` : ""}
               </span>
-              {(attempt || shift) && (
+              {(attemptLabel || shiftLabel) && (
                 <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                  Paper: {[attempt, shift].filter(Boolean).join(" ")}
+                  Paper: {[attemptLabel, shiftLabel].filter(Boolean).join(" · ")}
                 </span>
               )}
               <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
@@ -290,11 +292,6 @@ export default function PYQResultsPage() {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    {!q.question_image && (
-                      <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
-                        {q.question}
-                      </p>
-                    )}
                     {q.question_image && (
                       <img 
                         src={q.question_image} 
@@ -302,6 +299,11 @@ export default function PYQResultsPage() {
                         className="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
                         style={{ filter: "url(#remove-orange)" }}
                       />
+                    )}
+                    {q.question && (
+                      <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
+                        {q.question}
+                      </p>
                     )}
                   </div>
 
@@ -398,9 +400,7 @@ export default function PYQResultsPage() {
                       }
                     </p>
                     <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {!q.explanation_image && (
-                        <p>{q.explanation || "No explanation provided for this question."}</p>
-                      )}
+                      <p>{q.explanation || "No explanation provided for this question."}</p>
                       {q.explanation_image && (
                         <img 
                           src={q.explanation_image} 

@@ -64,6 +64,9 @@ export default function PYQSessionPage() {
   const examType = searchParams.get("exam_type") || "";
   const attempt = searchParams.get("attempt") || "";
   const shift = searchParams.get("shift") || "";
+  const examId = searchParams.get("exam_id") || "";
+  const attemptLabel = searchParams.get("attempt_label") || attempt;
+  const shiftLabel = searchParams.get("shift_label") || shift;
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
@@ -98,6 +101,7 @@ export default function PYQSessionPage() {
               examType,
               attempt,
               shift,
+              examId,
             })
           )
         );
@@ -157,7 +161,7 @@ export default function PYQSessionPage() {
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
@@ -286,6 +290,7 @@ export default function PYQSessionPage() {
       return {
         id: q.id,
         question: q.question,
+        question_image: q.question_image,
         subject: q.subject,
         chapter: q.chapter,
         difficulty: q.difficulty,
@@ -294,6 +299,10 @@ export default function PYQSessionPage() {
         option_b: q.option_b,
         option_c: q.option_c,
         option_d: q.option_d,
+        option_a_image: q.option_a_image,
+        option_b_image: q.option_b_image,
+        option_c_image: q.option_c_image,
+        option_d_image: q.option_d_image,
         correct_option: q.correct_option,
         explanation: q.explanation,
         explanation_image: q.explanation_image,
@@ -328,6 +337,8 @@ export default function PYQSessionPage() {
     if (examType) resultParams.set("exam_type", examType);
     if (attempt) resultParams.set("attempt", attempt);
     if (shift) resultParams.set("shift", shift);
+    if (attemptLabel) resultParams.set("attempt_label", attemptLabel);
+    if (shiftLabel) resultParams.set("shift_label", shiftLabel);
 
     router.push(`/pyq/session/results?${resultParams.toString()}`);
   }
@@ -383,6 +394,8 @@ export default function PYQSessionPage() {
               <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
                 {subjectLabels.join(", ")} · {exam}
                 {years.length > 0 ? ` · ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : ""}
+                {attemptLabel ? ` · ${attemptLabel}` : ""}
+                {shiftLabel ? ` · ${shiftLabel}` : ""}
               </p>
             </div>
           </div>
@@ -528,13 +541,6 @@ export default function PYQSessionPage() {
               </span>
             </div>
 
-            {/* Question text */}
-            {!currentQuestion.question_image && (
-              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
-                {currentQuestion.question}
-              </p>
-            )}
-
             {/* Question image */}
             {currentQuestion.question_image && (
               <img
@@ -543,6 +549,12 @@ export default function PYQSessionPage() {
                 className="rounded-2xl max-w-full mb-4 border border-slate-200/60 dark:border-slate-700/50"
                 style={{ filter: "url(#remove-orange)" }}
               />
+            )}
+
+            {currentQuestion.question && (
+              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
+                {currentQuestion.question}
+              </p>
             )}
 
             {/* Options */}

@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const exam = searchParams.get("exam");
   const year = searchParams.get("year");
 
-  let query = supabase
+  let query = supabaseAdmin
     .from("pyq_exams")
-    .select("exam_type, year, attempt, shift, paper_code")
+    .select("id, exam, exam_type, year, attempt, shift, paper_code, exam_date")
     .eq("is_published", true);
 
   if (exam) {
@@ -27,17 +27,37 @@ export async function GET(req) {
   }
 
   const papers = (data || [])
-    .map((row) => ({
-      year: row.year,
-      exam_type: row.exam_type,
-      attempt: row.attempt,
-      shift: row.shift,
-      paper_code: row.paper_code,
-    }))
+    .map((row) => {
+      const examDate = row.exam_date ? new Date(`${row.exam_date}T00:00:00Z`) : null;
+      const isJeeMain = row.exam === "JEE" && row.exam_type === "JEE Main";
+      const attemptLabel = isJeeMain && examDate
+        ? examDate.toLocaleString("en-US", { month: "long", timeZone: "UTC" })
+        : row.attempt;
+      const dateLabel = isJeeMain && examDate
+        ? examDate.toLocaleString("en-US", { day: "numeric", month: "long", timeZone: "UTC" })
+        : row.attempt;
+      const shiftLabel = isJeeMain
+        ? `${dateLabel} - ${row.shift}${row.shift === "Shift 1" ? " (9:00 AM - 12:00 PM)" : row.shift === "Shift 2" ? " (3:00 PM - 6:00 PM)" : ""}`
+        : row.shift;
+
+      return {
+        id: row.id,
+        year: row.year,
+        exam_type: row.exam_type,
+        attempt: row.attempt,
+        attempt_label: attemptLabel,
+        shift: row.shift,
+        shift_label: shiftLabel,
+        paper_code: row.paper_code,
+        exam_date: row.exam_date,
+      };
+    })
     .sort((a, b) => {
       if (a.year !== b.year) return (b.year || 0) - (a.year || 0);
-      const attemptCompare = String(a.attempt || "").localeCompare(String(b.attempt || ""), undefined, { numeric: true });
+      const attemptCompare = String(a.attempt_label || a.attempt || "").localeCompare(String(b.attempt_label || b.attempt || ""), undefined, { numeric: true });
       if (attemptCompare !== 0) return attemptCompare;
+      const dateCompare = String(a.exam_date || "").localeCompare(String(b.exam_date || ""), undefined, { numeric: true });
+      if (dateCompare !== 0) return dateCompare;
       return String(a.shift || "").localeCompare(String(b.shift || ""), undefined, { numeric: true });
     });
 

@@ -148,6 +148,7 @@ function PracticeTab({ subjects, track }) {
   const [selectedChapters, setSelectedChapters] = useState([]);
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [chapterError,    setChapterError]    = useState("");
+  const jeeFullMode = track === "jee" && practiceMode === "full";
 
   useEffect(() => {
     if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
@@ -209,8 +210,8 @@ function PracticeTab({ subjects, track }) {
   }, [track, selectedYears]);
 
   // Derived Options
-  const availableAttempts = Array.from(new Set(papers.map(p => p.attempt).filter(Boolean)));
-  const availableShifts = Array.from(new Set(papers.filter(p => (!selectedAttempt || p.attempt === selectedAttempt)).map(p => p.shift).filter(Boolean)));
+  const availableAttempts = Array.from(new Set(papers.map((paper) => paper.attempt_label || paper.attempt).filter(Boolean)));
+  const availableShiftPapers = papers.filter((paper) => !selectedAttempt || (paper.attempt_label || paper.attempt) === selectedAttempt);
 
   // Auto-select logic
   useEffect(() => {
@@ -220,18 +221,24 @@ function PracticeTab({ subjects, track }) {
         setSelectedAttempt(availableAttempts[0]);
       }
       // If an attempt is selected (or auto-selected), and there's only 1 shift, auto-select it
-      if ((selectedAttempt || availableAttempts.length === 1) && availableShifts.length === 1 && !selectedShift) {
-        setSelectedShift(availableShifts[0]);
+      if ((selectedAttempt || availableAttempts.length === 1) && availableShiftPapers.length === 1 && !selectedShift) {
+        setSelectedShift(availableShiftPapers[0].id);
       }
     }
-  }, [papers, availableAttempts, availableShifts, selectedAttempt, selectedShift, track]);
+  }, [papers, availableAttempts, availableShiftPapers, selectedAttempt, selectedShift, track]);
 
   function handleStartDeck() {
-    if (selectedSubjects.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
+    const subjectLabels = selectedSubjects.length > 0
+      ? subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label)
+      : jeeFullMode
+        ? subjects.filter((s) => ["Physics", "Chemistry", "Maths"].includes(s.label)).map((s) => s.label)
+        : [];
+
+    if (subjectLabels.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
     
     if (practiceMode === "full" && track === "jee") {
       if (availableAttempts.length > 0 && !selectedAttempt) { setSubjectError("Please select an attempt"); return; }
-      if (availableShifts.length > 1 && !selectedShift) { setSubjectError("Please select a shift"); return; }
+      if (availableShiftPapers.length > 0 && !selectedShift) { setSubjectError("Please select a shift"); return; }
     }
     
     if (practiceMode === "chapter") {
@@ -241,7 +248,6 @@ function PracticeTab({ subjects, track }) {
       }
     }
     setSubjectError("");
-    const subjectLabels = subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label);
     const params = new URLSearchParams();
     params.set("exam", track.toUpperCase());
     params.set("subjects", subjectLabels.join(","));
@@ -251,8 +257,12 @@ function PracticeTab({ subjects, track }) {
     if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
     
     if (track === "jee" && practiceMode === "full") {
-      if (selectedAttempt) params.set("attempt", selectedAttempt);
-      if (selectedShift) params.set("shift", selectedShift);
+      const selectedPaper = papers.find((paper) => paper.id === selectedShift);
+      if (selectedPaper) {
+        params.set("exam_id", selectedPaper.id);
+        params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
+        params.set("shift_label", selectedPaper.shift_label || selectedPaper.shift);
+      }
     }
     
     router.push(`/pyq/session?${params.toString()}`);
@@ -312,64 +322,72 @@ function PracticeTab({ subjects, track }) {
         </div>
 
         {/* JEE Selectors (Attempt & Shift) */}
-        {track === "jee" && selectedYears.length > 0 && (
+        {track === "jee" && (
           <>
             {/* Attempt Selector */}
-            {availableAttempts.length > 0 && (
-              <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
-                <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
-                {loadingPapers ? (
-                  <p className={`text-sm ${TXT_MUTED}`}>Loading attempts...</p>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {availableAttempts.map((attempt) => {
-                      const isActive = selectedAttempt === attempt;
-                      return (
-                        <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
-                          className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
-                            isActive
-                              ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                              : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
-                          }`}
-                        >
-                          <span className="text-sm font-bold">{attempt}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Shift Selector */}
-            {selectedAttempt && availableShifts.length > 1 && (
-              <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
-                <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
+            <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
+              <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
+              {selectedYears.length === 0 ? (
+                <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE Main attempts.</p>
+              ) : loadingPapers ? (
+                <p className={`text-sm ${TXT_MUTED}`}>Loading attempts...</p>
+              ) : availableAttempts.length === 0 ? (
+                <p className={`text-sm ${TXT_MUTED}`}>No published JEE Main papers are available for the selected year yet.</p>
+              ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {availableShifts.map((shift) => {
-                    const isActive = selectedShift === shift;
+                  {availableAttempts.map((attempt) => {
+                    const isActive = selectedAttempt === attempt;
                     return (
-                      <button key={shift} onClick={() => setSelectedShift(shift)}
+                      <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
                         className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
                           isActive
                             ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                             : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                         }`}
                       >
-                        <span className="text-sm font-bold">{shift}</span>
+                        <span className="text-sm font-bold">{attempt}</span>
                       </button>
                     );
                   })}
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+
+            {/* Shift Selector */}
+            <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
+              <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
+              {selectedYears.length === 0 ? (
+                <p className={`text-sm ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
+              ) : !selectedAttempt ? (
+                <p className={`text-sm ${TXT_MUTED}`}>Choose an attempt to view the dated shift options for that paper.</p>
+              ) : availableShiftPapers.length === 0 ? (
+                <p className={`text-sm ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {availableShiftPapers.map((paper) => {
+                    const isActive = selectedShift === paper.id;
+                    return (
+                      <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
+                        className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                          isActive
+                            ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                        }`}
+                      >
+                        <span className="text-sm font-bold">{paper.shift_label || paper.shift}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </>
         )}
 
         {/* Practice mode selector */}
         <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            {track === "jee" ? (availableShifts.length > 1 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
+            {track === "jee" ? (availableShiftPapers.length > 0 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PRACTICE_MODES.map((m) => {
@@ -402,7 +420,7 @@ function PracticeTab({ subjects, track }) {
         {practiceMode === "chapter" && (
           <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-              {track === "jee" ? (availableShifts.length > 1 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
+              {track === "jee" ? (availableShiftPapers.length > 0 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
             </p>
             {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
             {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
@@ -443,7 +461,7 @@ function PracticeTab({ subjects, track }) {
               <p className={`text-xs ${TXT_MUTED}`}>Attempt: {selectedAttempt}</p>
             )}
             {track === "jee" && practiceMode === "full" && selectedShift && (
-              <p className={`text-xs ${TXT_MUTED}`}>Shift: {selectedShift}</p>
+              <p className={`text-xs ${TXT_MUTED}`}>Shift: {papers.find((paper) => paper.id === selectedShift)?.shift_label || ""}</p>
             )}
             {practiceMode === "chapter" && (
               <p className={`text-xs ${TXT_MUTED}`}>
