@@ -356,7 +356,7 @@ function PracticeTab({ subjects, track }) {
                             : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                         }`}
                       >
-                        <span className="text-sm font-bold">Shift {shift}</span>
+                        <span className="text-sm font-bold">{shift}</span>
                       </button>
                     );
                   })}

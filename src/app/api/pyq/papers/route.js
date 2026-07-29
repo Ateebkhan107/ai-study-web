@@ -7,16 +7,16 @@ export async function GET(req) {
   const year = searchParams.get("year");
 
   let query = supabase
-    .from("pyq_questions")
+    .from("pyq_exams")
     .select("exam_type, year, attempt, shift, paper_code")
-    .eq("status", "PUBLISHED");
+    .eq("is_published", true);
 
   if (exam) {
     query = query.eq("exam", exam);
   }
 
   if (year) {
-    query = query.eq("year", year);
+    query = query.eq("year", Number(year));
   }
 
   const { data, error } = await query;
@@ -26,28 +26,20 @@ export async function GET(req) {
     return NextResponse.json({ error: "Failed loading papers" }, { status: 500 });
   }
 
-  const papersMap = new Map();
+  const papers = (data || [])
+    .map((row) => ({
+      year: row.year,
+      exam_type: row.exam_type,
+      attempt: row.attempt,
+      shift: row.shift,
+      paper_code: row.paper_code,
+    }))
+    .sort((a, b) => {
+      if (a.year !== b.year) return (b.year || 0) - (a.year || 0);
+      const attemptCompare = String(a.attempt || "").localeCompare(String(b.attempt || ""), undefined, { numeric: true });
+      if (attemptCompare !== 0) return attemptCompare;
+      return String(a.shift || "").localeCompare(String(b.shift || ""), undefined, { numeric: true });
+    });
 
-  for (const row of data || []) {
-    // Treat null/undefined values as empty string to prevent "undefined" keys
-    const examType = row.exam_type || "";
-    const attempt = row.attempt || "";
-    const shift = row.shift || "";
-    const paperCode = row.paper_code || "";
-
-    const key = `${row.year}__${examType}__${attempt}__${shift}__${paperCode}`;
-
-    if (!papersMap.has(key)) {
-      papersMap.set(key, {
-        year: row.year,
-        exam_type: row.exam_type,
-        attempt: row.attempt,
-        shift: row.shift,
-        paper_code: row.paper_code
-      });
-    }
-  }
-
-  const papers = [...papersMap.values()].sort((a, b) => b.year - a.year);
   return NextResponse.json(papers);
 }
