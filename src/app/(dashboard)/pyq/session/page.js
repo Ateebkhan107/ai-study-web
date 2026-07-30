@@ -552,7 +552,7 @@ export default function PYQSessionPage() {
             )}
 
             {currentQuestion.question && (
-              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2">
+              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2 whitespace-pre-wrap">
                 {currentQuestion.question}
               </p>
             )}
@@ -603,7 +603,7 @@ export default function PYQSessionPage() {
                         </span>
                         <div className="flex flex-col gap-2 flex-1">
                           {!currentQuestion[`option_${option}_image`] && (
-                            <span className="text-base font-medium">
+                            <span className="text-base font-medium whitespace-pre-wrap">
                               {currentQuestion[`option_${option}`]}
                             </span>
                           )}

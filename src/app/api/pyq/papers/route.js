@@ -30,9 +30,15 @@ export async function GET(req) {
     .map((row) => {
       const examDate = row.exam_date ? new Date(`${row.exam_date}T00:00:00Z`) : null;
       const isJeeMain = row.exam === "JEE" && row.exam_type === "JEE Main";
-      const attemptLabel = isJeeMain && examDate
-        ? examDate.toLocaleString("en-US", { month: "long", timeZone: "UTC" })
-        : row.attempt;
+      // JEE Main 2024 Session 1 continued through 1 February. Keep those two
+      // papers in the January session column while retaining their true date.
+      const is2024SessionOneFeb = isJeeMain && row.year === 2024 && examDate
+        && examDate.getUTCMonth() === 1 && examDate.getUTCDate() === 1;
+      const attemptLabel = is2024SessionOneFeb
+        ? "January"
+        : isJeeMain && examDate
+          ? examDate.toLocaleString("en-US", { month: "long", timeZone: "UTC" })
+          : row.attempt;
       const dateLabel = isJeeMain && examDate
         ? examDate.toLocaleString("en-US", { day: "numeric", month: "long", timeZone: "UTC" })
         : row.attempt;
