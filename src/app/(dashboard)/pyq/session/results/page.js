@@ -5,6 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 // Practice mode display labels
 const modeLabels = {
@@ -399,8 +403,10 @@ export default function PYQResultsPage() {
                           : `Correct Answer: ${String(q.correct_option).toUpperCase()}`
                       }
                     </p>
-                    <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      <p>{q.explanation || "No explanation provided for this question."}</p>
+                    <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose prose-sm max-w-none dark:prose-invert prose-p:my-2">
+                      <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+                        {q.explanation || "No explanation provided for this question."}
+                      </ReactMarkdown>
                       {q.explanation_image && (
                         <img 
                           src={q.explanation_image} 

@@ -109,6 +109,12 @@ def prepare(pdf: Path, date: str, shift: int):
             left, right = (70, width // 2 - 12) if column(marker) == "left" else (width // 2 + 12, width - 70)
             crop_path = crops / f"q{number:02}.png"
             image.crop((left, max(0, start), right, min(height, end))).save(crop_path)
+            next_markers = [m for _, m in markers if column(m) == column(marker) and top(m, height) > top(answer, height)]
+            solution_end = min((top(m, height) - 16 for m in next_markers), default=height - 70)
+            solutions = paper / "solutions"
+            solutions.mkdir(parents=True, exist_ok=True)
+            solution_path = solutions / f"q{number:02}.png"
+            image.crop((left, max(0, top(answer, height) - 12), right, min(height - 70, solution_end))).save(solution_path)
             answer_match = re.search(r"\(?([1-4])\)?", answer["text"])
             answer_value = int(answer_match.group(1)) if answer_match else None
             found[number] = {
@@ -118,6 +124,7 @@ def prepare(pdf: Path, date: str, shift: int):
                 "correct_option": "abcd"[answer_value - 1] if answer_value and q_type(number) == "MCQ" else None,
                 "numerical_answer": answer_value if answer_value and q_type(number) == "NUMERICAL" else None,
                 "image_path": str(crop_path),
+                "solution_path": str(solution_path),
                 "source_page": page_index,
             }
 
