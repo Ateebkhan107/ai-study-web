@@ -30,26 +30,26 @@ export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
+    async function loadUserStats(trackToLoad) {
+      try {
+        const data = await getUserAnalytics(user.id, trackToLoad);
+        setStats(data);
+      } catch (err) {
+        console.error("Failed to load user stats:", err);
+        // Fallback or ignore; components will use mock data if stats is null
+      }
+    }
+
     if (user && activeTrack) {
       loadUserStats(activeTrack);
     }
   }, [user, activeTrack]);
-
-  async function loadUserStats(trackToLoad) {
-    try {
-      const data = await getUserAnalytics(user.id, trackToLoad);
-      setStats(data);
-    } catch (err) {
-      console.error("Failed to load user stats:", err);
-      // Fallback or ignore; components will use mock data if stats is null
-    }
-  }
-
   useEffect(() => {
     const match = document.cookie.match(
       new RegExp("(^| )prepzii_track=([^;]+)")
     );
     const clientTrack = match ? match[2].toLowerCase() : "jee";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveTrack(clientTrack);
     setLoading(false);
   }, []);

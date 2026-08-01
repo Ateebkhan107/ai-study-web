@@ -149,15 +149,22 @@ function PracticeTab({ subjects, track }) {
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [chapterError,    setChapterError]    = useState("");
   const jeeFullMode = track === "jee" && practiceMode === "full";
+  const shouldLoadChapters = practiceMode === "chapter" && selectedSubjects.length > 0;
 
   useEffect(() => {
-    if (practiceMode !== "chapter" || selectedSubjects.length === 0) {
-      setChapters([]);
-      setSelectedChapters([]);
-      return;
-    }
     let cancelled = false;
+
     async function loadChapters() {
+      if (!shouldLoadChapters) {
+        if (!cancelled) {
+          setChapters([]);
+          setSelectedChapters([]);
+          setLoadingChapters(false);
+          setChapterError("");
+        }
+        return;
+      }
+
       setLoadingChapters(true);
       setChapterError("");
       try {
@@ -181,7 +188,7 @@ function PracticeTab({ subjects, track }) {
     }
     loadChapters();
     return () => { cancelled = true; };
-  }, [practiceMode, selectedSubjects, subjects, track]);
+  }, [shouldLoadChapters, selectedSubjects, subjects, track]);
 
   useEffect(() => {
     if (!track) return;
@@ -211,21 +218,13 @@ function PracticeTab({ subjects, track }) {
 
   // Derived Options
   const availableAttempts = Array.from(new Set(papers.map((paper) => paper.attempt_label || paper.attempt).filter(Boolean)));
-  const availableShiftPapers = papers.filter((paper) => !selectedAttempt || (paper.attempt_label || paper.attempt) === selectedAttempt);
-
-  // Auto-select logic
-  useEffect(() => {
-    if (track === "jee") {
-      // If we haven't selected an attempt, but there's only 1 available, auto-select it
-      if (availableAttempts.length === 1 && !selectedAttempt) {
-        setSelectedAttempt(availableAttempts[0]);
-      }
-      // If an attempt is selected (or auto-selected), and there's only 1 shift, auto-select it
-      if ((selectedAttempt || availableAttempts.length === 1) && availableShiftPapers.length === 1 && !selectedShift) {
-        setSelectedShift(availableShiftPapers[0].id);
-      }
-    }
-  }, [papers, availableAttempts, availableShiftPapers, selectedAttempt, selectedShift, track]);
+  const effectiveSelectedAttempt =
+    selectedAttempt || (track === "jee" && availableAttempts.length === 1 ? availableAttempts[0] : "");
+  const availableShiftPapers = papers.filter(
+    (paper) => !effectiveSelectedAttempt || (paper.attempt_label || paper.attempt) === effectiveSelectedAttempt
+  );
+  const effectiveSelectedShift =
+    selectedShift || (track === "jee" && availableShiftPapers.length === 1 ? availableShiftPapers[0].id : "");
 
   function handleStartDeck() {
     const subjectLabels = selectedSubjects.length > 0
@@ -237,8 +236,8 @@ function PracticeTab({ subjects, track }) {
     if (subjectLabels.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
     
     if (practiceMode === "full" && track === "jee") {
-      if (availableAttempts.length > 0 && !selectedAttempt) { setSubjectError("Please select an attempt"); return; }
-      if (availableShiftPapers.length > 0 && !selectedShift) { setSubjectError("Please select a shift"); return; }
+      if (availableAttempts.length > 0 && !effectiveSelectedAttempt) { setSubjectError("Please select an attempt"); return; }
+      if (availableShiftPapers.length > 0 && !effectiveSelectedShift) { setSubjectError("Please select a shift"); return; }
     }
     
     if (practiceMode === "chapter") {
@@ -257,7 +256,7 @@ function PracticeTab({ subjects, track }) {
     if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
     
     if (track === "jee" && practiceMode === "full") {
-      const selectedPaper = papers.find((paper) => paper.id === selectedShift);
+      const selectedPaper = papers.find((paper) => paper.id === effectiveSelectedShift);
       if (selectedPaper) {
         params.set("exam_id", selectedPaper.id);
         params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
@@ -336,7 +335,7 @@ function PracticeTab({ subjects, track }) {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {availableAttempts.map((attempt) => {
-                    const isActive = selectedAttempt === attempt;
+                    const isActive = effectiveSelectedAttempt === attempt;
                     return (
                       <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
                         className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
@@ -365,7 +364,7 @@ function PracticeTab({ subjects, track }) {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {availableShiftPapers.map((paper) => {
-                    const isActive = selectedShift === paper.id;
+                    const isActive = effectiveSelectedShift === paper.id;
                     return (
                       <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
                         className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
@@ -457,11 +456,11 @@ function PracticeTab({ subjects, track }) {
               {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
             </p>
             <p className={`text-xs ${TXT_MUTED}`}>Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}</p>
-            {track === "jee" && practiceMode === "full" && selectedAttempt && (
-              <p className={`text-xs ${TXT_MUTED}`}>Attempt: {selectedAttempt}</p>
+            {track === "jee" && practiceMode === "full" && effectiveSelectedAttempt && (
+              <p className={`text-xs ${TXT_MUTED}`}>Attempt: {effectiveSelectedAttempt}</p>
             )}
-            {track === "jee" && practiceMode === "full" && selectedShift && (
-              <p className={`text-xs ${TXT_MUTED}`}>Shift: {papers.find((paper) => paper.id === selectedShift)?.shift_label || ""}</p>
+            {track === "jee" && practiceMode === "full" && effectiveSelectedShift && (
+              <p className={`text-xs ${TXT_MUTED}`}>Shift: {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || ""}</p>
             )}
             {practiceMode === "chapter" && (
               <p className={`text-xs ${TXT_MUTED}`}>
@@ -506,7 +505,7 @@ function AnalyticsTab({ track }) {
     }
     loadAnalytics();
     return () => { cancelled = true; };
-  }, []);
+  }, [track]);
 
   if (loading) return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -707,7 +706,7 @@ export default function PYQPage() {
     }
     loadPYQStats();
     return () => { cancelled = true; };
-  }, []);
+  }, [track]);
 
   const handleUnsave = async (qId) => {
     if (!user?.id) return;

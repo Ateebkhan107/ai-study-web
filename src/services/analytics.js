@@ -1,323 +1,282 @@
 import { supabase } from "@/lib/supabase";
+import {
+  calculateStudyStreak,
+  examMatchesTrack,
+  normalizeTrack,
+} from "@/lib/analyticsHelpers";
+
+function getAttemptExam(attempt) {
+  if (attempt?.tests?.exam) return attempt.tests.exam;
+
+  const answerWithExam = attempt?.user_answers?.find((answer) => answer?.questions?.exam);
+  return answerWithExam?.questions?.exam || null;
+}
+
+function groupPyqTrend(pyqAttempts) {
+  const grouped = new Map();
+
+  pyqAttempts.forEach((attempt) => {
+    const date = attempt.attempted_at || attempt.created_at;
+    if (!date) return;
+
+    const bucket = new Date(date).toISOString().split("T")[0];
+    const positive = Number(attempt.pyq_questions?.marks_positive);
+    const negative = Number(attempt.pyq_questions?.marks_negative);
+    const maxScore = Number.isFinite(positive) && positive > 0 ? positive : 4;
+    const penalty = Number.isFinite(negative) ? Math.abs(negative) : 1;
+    const scoreDelta = attempt.is_correct ? maxScore : -penalty;
+
+    if (!grouped.has(bucket)) {
+      grouped.set(bucket, { date: bucket, score: 0, maxScore: 0, count: 0 });
+    }
+
+    const entry = grouped.get(bucket);
+    entry.score += scoreDelta;
+    entry.maxScore += maxScore;
+    entry.count += 1;
+  });
+
+  return [...grouped.values()]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map((item) => ({
+      date: item.date,
+      label: `PYQ ${item.date}`,
+      score: item.maxScore > 0 ? Math.max(0, Math.round((item.score / item.maxScore) * 100)) : 0,
+    }));
+}
 
 export async function getUserAnalytics(userId, stream = "JEE") {
+  const track = normalizeTrack(stream);
 
-  /* =========================
-     TEST ATTEMPTS ANALYTICS
-  ========================= */
-
-  const trackUpper = stream.toUpperCase();
-
-  const { data: rawAttempts, error } = await supabase
-    .from("test_attempts")
-    .select(`
-      *,
-      tests ( exam ),
-      user_answers ( questions ( exam ) )
-    `)
-    .eq("user_id", userId)
-    .order("created_at", { ascending: true });
-
-  if (error) throw new Error(error.message || JSON.stringify(error));
-
-  const attempts = (rawAttempts || []).filter(a => {
-    let attemptExam = null;
-    if (a.tests?.exam) {
-      attemptExam = a.tests.exam;
-    } else if (a.user_answers && a.user_answers.length > 0) {
-      const firstAns = a.user_answers.find(ans => ans.questions?.exam);
-      if (firstAns) attemptExam = firstAns.questions.exam;
-    }
-    
-    if (!attemptExam) return false;
-    return attemptExam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
-  });
-
-  /* =========================
-     PYQ ATTEMPTS ANALYTICS
-  ========================= */
-  
-  const { data: pyqAttemptsRaw, error: pyqError } = await supabase
-    .from("pyq_attempts")
-    .select("is_correct, attempted_at, pyq_questions(exam)")
-    .eq("user_id", userId)
-    .order("attempted_at", { ascending: true });
-
-  if (pyqError) throw pyqError;
-
-  const pyqAttempts = (pyqAttemptsRaw || []).filter(a => {
-    const ex = a.pyq_questions?.exam;
-    if (!ex) return false;
-    return ex.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
-  });
-
-  /* =========================
-     COMBINED METRICS
-  ========================= */
-
-  const totalTests = attempts.length + pyqAttempts.length;
-
-  let totalScore = attempts.reduce(
-    (sum, test) => sum + (test.score || 0), 0
-  );
-
-  let totalMarks = attempts.reduce(
-    (sum, test) => {
-      const marks = test.total_marks || ((test.total_questions || 0) * 4);
-      return sum + marks;
-    }, 0
-  );
-
-  // Add PYQ scoring (+4 for correct, -1 for wrong, out of 4)
-  pyqAttempts.forEach(pyq => {
-    totalMarks += 4;
-    totalScore += pyq.is_correct ? 4 : -1;
-  });
-
-  const averageScore = totalMarks > 0
-    ? Math.round((totalScore / totalMarks) * 100)
-    : 0;
-
-  let totalCorrect = attempts.reduce(
-    (sum, test) => sum + (test.correct_answers || 0), 0
-  );
-  let totalAttempted = attempts.reduce(
-    (sum, test) => sum + (test.attempted || 0), 0
-  );
-
-  totalCorrect += pyqAttempts.filter(a => a.is_correct).length;
-  totalAttempted += pyqAttempts.length;
-
-  const accuracy = totalAttempted > 0
-    ? Math.round((totalCorrect / totalAttempted) * 100)
-    : 0;
-
-
-
-  /* =========================
-     PERFORMANCE TREND
-  ========================= */
-
-  const performanceTrend = attempts.map((test, index) => {
-    let maxMarks = test.total_marks;
-    if (!maxMarks) {
-      maxMarks = (test.total_questions || 0) * 4;
-    }
-    const percentage = maxMarks > 0
-      ? Math.round(((test.score || 0) / maxMarks) * 100)
-      : 0;
-    return { label: `Test ${index + 1}`, score: percentage };
-  });
-
-
-  /* =========================
-     WEAK TOPICS ANALYTICS
-  ========================= */
-
-  const attemptIds = attempts.map(a => a.id);
-  
-  let answers = [];
-  if (attemptIds.length > 0) {
-    const { data: fetchedAnswers, error: answerError } = await supabase
-      .from("user_answers")
+  const [{ data: rawAttempts, error: testError }, { data: pyqAttemptsRaw, error: pyqError }] = await Promise.all([
+    supabase
+      .from("test_attempts")
       .select(`
-        is_correct,
         created_at,
-        questions(
-          subject,
-          chapter,
-          exam
+        score,
+        total_marks,
+        total_questions,
+        correct_answers,
+        attempted,
+        time_taken_seconds,
+        tests ( exam ),
+        user_answers (
+          selected_option,
+          is_correct,
+          created_at,
+          questions (
+            exam,
+            subject,
+            chapter
+          )
         )
       `)
-      .in("attempt_id", attemptIds);
+      .eq("user_id", userId)
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("pyq_attempts")
+      .select(`
+        is_correct,
+        attempted_at,
+        pyq_questions (
+          exam,
+          subject,
+          chapter,
+          marks_positive,
+          marks_negative
+        )
+      `)
+      .eq("user_id", userId)
+      .order("attempted_at", { ascending: true }),
+  ]);
 
-    if (answerError) throw new Error(answerError.message || JSON.stringify(answerError));
-    answers = fetchedAnswers || [];
-  }
+  if (testError) throw new Error(testError.message || JSON.stringify(testError));
+  if (pyqError) throw new Error(pyqError.message || JSON.stringify(pyqError));
 
-  /* =========================
-     STUDY STREAK (COMBINED)
-  ========================= */
+  const allTestAttempts = rawAttempts || [];
+  const allPyqAttempts = pyqAttemptsRaw || [];
 
-  const allDates = [
-    ...attempts.map(a => new Date(a.created_at)),
-    ...pyqAttempts.map(a => new Date(a.attempted_at || a.created_at))
-  ];
+  const attempts = allTestAttempts.filter((attempt) => examMatchesTrack(getAttemptExam(attempt), track));
+  const pyqAttempts = allPyqAttempts.filter((attempt) => examMatchesTrack(attempt.pyq_questions?.exam, track));
 
-  // Sort dates descending (newest first)
-  allDates.sort((a, b) => b - a);
+  const totalMockTests = attempts.length;
+  const totalPyqSolved = pyqAttempts.length;
+  const totalActivities = totalMockTests + totalPyqSolved;
 
-  let streak = 0;
-  if (allDates.length > 0) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  const totalScoreFromTests = attempts.reduce((sum, attempt) => sum + (attempt.score || 0), 0);
+  const totalMarksFromTests = attempts.reduce((sum, attempt) => {
+    const totalMarks = Number(attempt.total_marks);
+    const totalQuestions = Number(attempt.total_questions);
+    return sum + (Number.isFinite(totalMarks) && totalMarks > 0 ? totalMarks : Math.max(totalQuestions, 0) * 4);
+  }, 0);
 
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
+  const totalScoreFromPyq = pyqAttempts.reduce((sum, attempt) => {
+    const positive = Number(attempt.pyq_questions?.marks_positive);
+    const negative = Number(attempt.pyq_questions?.marks_negative);
+    const maxScore = Number.isFinite(positive) && positive > 0 ? positive : 4;
+    const penalty = Number.isFinite(negative) ? Math.abs(negative) : 1;
+    return sum + (attempt.is_correct ? maxScore : -penalty);
+  }, 0);
 
-    // Get unique days (midnight timestamps)
-    const uniqueDays = [...new Set(allDates.map(d => {
-      const copy = new Date(d);
-      copy.setHours(0, 0, 0, 0);
-      return copy.getTime();
-    }))].sort((a, b) => b - a);
+  const totalMarksFromPyq = pyqAttempts.reduce((sum, attempt) => {
+    const positive = Number(attempt.pyq_questions?.marks_positive);
+    return sum + (Number.isFinite(positive) && positive > 0 ? positive : 4);
+  }, 0);
 
-    if (uniqueDays.length > 0) {
-      const mostRecentDay = new Date(uniqueDays[0]);
-      // If the most recent activity is today or yesterday, they have an active streak
-      if (mostRecentDay.getTime() === today.getTime() || mostRecentDay.getTime() === yesterday.getTime()) {
-        streak = 1;
-        let expectedPrevDay = new Date(mostRecentDay);
-        expectedPrevDay.setDate(expectedPrevDay.getDate() - 1);
+  const totalScore = totalScoreFromTests + totalScoreFromPyq;
+  const totalMarks = totalMarksFromTests + totalMarksFromPyq;
+  const averageScore = totalMarks > 0 ? Math.max(0, Math.round((totalScore / totalMarks) * 100)) : 0;
 
-        for (let i = 1; i < uniqueDays.length; i++) {
-          if (uniqueDays[i] === expectedPrevDay.getTime()) {
-            streak++;
-            expectedPrevDay.setDate(expectedPrevDay.getDate() - 1);
-          } else {
-            break;
-          }
-        }
-      }
-    }
-  }
+  const totalCorrectFromTests = attempts.reduce((sum, attempt) => sum + (attempt.correct_answers || 0), 0);
+  const totalAttemptedFromTests = attempts.reduce((sum, attempt) => sum + (attempt.attempted || 0), 0);
+  const totalCorrectFromPyq = pyqAttempts.filter((attempt) => attempt.is_correct).length;
+  const totalAttemptedFromPyq = pyqAttempts.length;
+
+  const totalCorrect = totalCorrectFromTests + totalCorrectFromPyq;
+  const totalAttempted = totalAttemptedFromTests + totalAttemptedFromPyq;
+  const accuracy = totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0;
+
+  const testQuestionAttempts = attempts.flatMap((attempt) =>
+    (attempt.user_answers || [])
+      .filter((answer) => answer?.selected_option)
+      .map((answer) => ({
+        is_correct: Boolean(answer.is_correct),
+        created_at: answer.created_at || attempt.created_at,
+        subject: answer.questions?.subject,
+        chapter: answer.questions?.chapter,
+      }))
+  );
+
+  const pyqQuestionAttempts = pyqAttempts.map((attempt) => ({
+    is_correct: Boolean(attempt.is_correct),
+    created_at: attempt.attempted_at || attempt.created_at,
+    subject: attempt.pyq_questions?.subject,
+    chapter: attempt.pyq_questions?.chapter,
+  }));
+
+  const combinedQuestionAttempts = [...testQuestionAttempts, ...pyqQuestionAttempts];
 
   const chapterMap = {};
   const subjectMap = {};
 
-  answers.forEach((item) => {
-    const chapter = item.questions?.chapter;
-    const subject = item.questions?.subject;
+  combinedQuestionAttempts.forEach((attempt) => {
+    const chapter = attempt.chapter;
+    const subject = attempt.subject;
 
     if (!chapter) return;
 
-    // Chapter-level tracking
     if (!chapterMap[chapter]) {
-      chapterMap[chapter] = { topic: chapter, subject: subject, total: 0, correct: 0 };
+      chapterMap[chapter] = { topic: chapter, subject, total: 0, correct: 0 };
     }
-    chapterMap[chapter].total++;
-    if (item.is_correct) chapterMap[chapter].correct++;
+    chapterMap[chapter].total += 1;
+    if (attempt.is_correct) chapterMap[chapter].correct += 1;
 
-    // Subject-level tracking
     if (subject) {
       if (!subjectMap[subject]) {
         subjectMap[subject] = { subject, total: 0, correct: 0 };
       }
-      subjectMap[subject].total++;
-      if (item.is_correct) subjectMap[subject].correct++;
+      subjectMap[subject].total += 1;
+      if (attempt.is_correct) subjectMap[subject].correct += 1;
     }
   });
 
   const weakTopics = Object.values(chapterMap)
     .map((chapter) => {
-      const chapterAccuracy = chapter.total > 0
-        ? Math.round((chapter.correct / chapter.total) * 100)
-        : 0;
+      const chapterAccuracy = chapter.total > 0 ? Math.round((chapter.correct / chapter.total) * 100) : 0;
       return {
         topic: chapter.topic,
         subject: chapter.subject,
         accuracy: chapterAccuracy,
         total: chapter.total,
-        severity: chapterAccuracy < 50 ? "critical"
-          : chapterAccuracy < 70 ? "warn"
-          : "good"
+        severity: chapterAccuracy < 50 ? "critical" : chapterAccuracy < 70 ? "warn" : "good",
       };
     })
     .sort((a, b) => a.accuracy - b.accuracy);
 
-
-  /* =========================
-     SUBJECT DISTRIBUTION
-  ========================= */
-
   const SUBJECT_COLORS = {
-    "Physics": "#378ADD",
-    "Chemistry": "#1D9E75",
-    "Maths": "#BA7517",
-    "Mathematics": "#BA7517",
-    "Biology": "#D4537E",
-    "Botany": "#2CAA6E",
-    "Zoology": "#D4537E",
+    Physics: "#378ADD",
+    Chemistry: "#1D9E75",
+    Maths: "#BA7517",
+    Mathematics: "#BA7517",
+    Biology: "#D4537E",
+    Botany: "#2CAA6E",
+    Zoology: "#D4537E",
   };
 
-  const totalQuestionsAnswered = answers.length;
+  const totalQuestionsAnswered = combinedQuestionAttempts.length;
   const subjectDistribution = Object.values(subjectMap)
-    .map((s) => ({
-      subject: s.subject,
-      pct: totalQuestionsAnswered > 0
-        ? Math.round((s.total / totalQuestionsAnswered) * 100)
-        : 0,
-      color: SUBJECT_COLORS[s.subject] || "#6366F1",
-      accuracy: s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0,
-      total: s.total,
+    .map((subject) => ({
+      subject: subject.subject,
+      pct: totalQuestionsAnswered > 0 ? Math.round((subject.total / totalQuestionsAnswered) * 100) : 0,
+      color: SUBJECT_COLORS[subject.subject] || "#6366F1",
+      accuracy: subject.total > 0 ? Math.round((subject.correct / subject.total) * 100) : 0,
+      total: subject.total,
     }))
     .sort((a, b) => b.pct - a.pct);
 
-
-  /* =========================
-     SKILL RADAR
-  ========================= */
-
-  // Pick top 5 subjects/chapters for radar
   const topChapters = Object.values(chapterMap)
     .sort((a, b) => b.total - a.total)
     .slice(0, 5);
 
-  const radarLabels = topChapters.map((c) => c.topic);
-  const radarYou = topChapters.map((c) =>
-    c.total > 0 ? Math.round((c.correct / c.total) * 100) : 0
-  );
-  // Topper benchmark: assume 85% baseline
+  const radarLabels = topChapters.map((chapter) => chapter.topic);
+  const radarYou = topChapters.map((chapter) => chapter.total > 0 ? Math.round((chapter.correct / chapter.total) * 100) : 0);
   const radarTopper = topChapters.map(() => 85);
 
-
-  /* =========================
-     STUDY HEATMAP (from test_attempts dates)
-  ========================= */
+  const performanceTrend = [
+    ...attempts.map((attempt, index) => {
+      const totalMarks = Number(attempt.total_marks);
+      const totalQuestions = Number(attempt.total_questions);
+      const maxMarks = Number.isFinite(totalMarks) && totalMarks > 0 ? totalMarks : Math.max(totalQuestions, 0) * 4;
+      return {
+        date: attempt.created_at,
+        label: `Test ${index + 1}`,
+        score: maxMarks > 0 ? Math.max(0, Math.round(((attempt.score || 0) / maxMarks) * 100)) : 0,
+      };
+    }),
+    ...groupPyqTrend(pyqAttempts),
+  ]
+    .sort((a, b) => String(a.date || a.label).localeCompare(String(b.date || b.label)))
+    .map(({ label, score }) => ({ label, score }));
 
   const heatmapValues = [];
   const now = new Date();
-  for (let week = 7; week >= 0; week--) {
-    for (let day = 0; day < 7; day++) {
+  for (let week = 7; week >= 0; week -= 1) {
+    for (let day = 0; day < 7; day += 1) {
       const target = new Date(now);
       target.setDate(target.getDate() - (week * 7 + (6 - day)));
       const dateStr = target.toISOString().split("T")[0];
-      const testsOnDay = attempts.filter((a) => {
-        const aDate = new Date(a.created_at).toISOString().split("T")[0];
-        return aDate === dateStr;
+
+      const testsOnDay = attempts.filter((attempt) => {
+        const createdAt = attempt.created_at ? new Date(attempt.created_at).toISOString().split("T")[0] : "";
+        return createdAt === dateStr;
       }).length;
-      const answersOnDay = answers.filter((a) => {
-        if (!a.created_at) return false;
-        const aDate = new Date(a.created_at).toISOString().split("T")[0];
-        return aDate === dateStr;
+
+      const questionAttemptsOnDay = combinedQuestionAttempts.filter((attempt) => {
+        const createdAt = attempt.created_at ? new Date(attempt.created_at).toISOString().split("T")[0] : "";
+        return createdAt === dateStr;
       }).length;
-      const activity = testsOnDay + Math.floor(answersOnDay / 5);
+
+      const activity = testsOnDay + Math.floor(questionAttemptsOnDay / 5);
       heatmapValues.push(activity >= 3 ? 3 : activity >= 2 ? 2 : activity >= 1 ? 1 : 0);
     }
   }
 
-
-  /* =========================
-     EXAM READINESS
-  ========================= */
-
-  // Concept coverage: how many chapters attempted out of total unique
   const chaptersAttempted = Object.keys(chapterMap).length;
   const conceptCoverage = Math.min(Math.round((chaptersAttempted / Math.max(chaptersAttempted, 30)) * 100), 100);
 
-  // PYQ accuracy — from the user_answers
-  const pyqAccuracy = accuracy;
+  const pyqAccuracy = totalAttemptedFromPyq > 0 ? Math.round((totalCorrectFromPyq / totalAttemptedFromPyq) * 100) : 0;
+  const attemptsWithTime = attempts.filter((attempt) => attempt.time_taken_seconds && attempt.total_questions);
+  let speedScore = 69;
 
-  // Speed score — approximate from time_taken_seconds if available
-  const attemptsWithTime = attempts.filter((a) => a.time_taken_seconds && a.total_questions);
-  let speedScore = 69; // default
   if (attemptsWithTime.length > 0) {
-    const avgTimePerQ = attemptsWithTime.reduce((sum, a) => sum + (a.time_taken_seconds / a.total_questions), 0) / attemptsWithTime.length;
-    // Ideal time: 2 min per Q = 120s. If faster, higher score
-    speedScore = Math.min(100, Math.round((120 / Math.max(avgTimePerQ, 30)) * 75));
+    const avgTimePerQuestion = attemptsWithTime.reduce(
+      (sum, attempt) => sum + (attempt.time_taken_seconds / attempt.total_questions),
+      0
+    ) / attemptsWithTime.length;
+    speedScore = Math.min(100, Math.round((120 / Math.max(avgTimePerQuestion, 30)) * 75));
   }
 
-  const mockTestScore = averageScore;
+  const mockTestScore = totalMarksFromTests > 0 ? Math.max(0, Math.round((totalScoreFromTests / totalMarksFromTests) * 100)) : 0;
 
   const readinessBreakdown = [
     { label: "Concept coverage", pct: conceptCoverage, color: "#1D9E75" },
@@ -327,66 +286,53 @@ export async function getUserAnalytics(userId, stream = "JEE") {
   ];
 
   const overallReadiness = Math.round(
-    readinessBreakdown.reduce((sum, r) => sum + r.pct, 0) / readinessBreakdown.length
+    readinessBreakdown.reduce((sum, item) => sum + item.pct, 0) / readinessBreakdown.length
   );
 
-
-  /* =========================
-     PYQ INTELLIGENCE
-  ========================= */
-
-  const pyqInsights = weakTopics.slice(0, 4).map((t) => ({
-    topic: t.topic,
-    note: `${t.total} questions attempted in ${t.subject}`,
-    accuracy: t.accuracy,
-    status: t.accuracy < 50 ? "weak" : t.accuracy < 70 ? "avg" : "strong",
+  const pyqInsights = weakTopics.slice(0, 4).map((topic) => ({
+    topic: topic.topic,
+    note: `${topic.total} attempted across tests and PYQs in ${topic.subject || "mixed subjects"}`,
+    accuracy: topic.accuracy,
+    status: topic.accuracy < 50 ? "weak" : topic.accuracy < 70 ? "avg" : "strong",
   }));
-
-
-  /* =========================
-     TIME ANALYTICS (from test_attempts)
-  ========================= */
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dayHours = [0, 0, 0, 0, 0, 0, 0];
-  attempts.forEach((a) => {
-    if (a.time_taken_seconds) {
-      const dayIdx = new Date(a.created_at).getDay();
-      dayHours[dayIdx] += a.time_taken_seconds / 3600;
-    }
+
+  attempts.forEach((attempt) => {
+    if (!attempt.time_taken_seconds) return;
+    const dayIndex = new Date(attempt.created_at).getDay();
+    dayHours[dayIndex] += attempt.time_taken_seconds / 3600;
   });
-  const timeByDay = dayNames.map((day, idx) => ({
+
+  const timeByDayOrdered = [...dayNames.map((day, index) => ({
     day,
-    hours: Math.round(dayHours[idx] * 10) / 10,
-  }));
-  // Reorder to start from Mon
-  const timeByDayOrdered = [...timeByDay.slice(1), timeByDay[0]];
+    hours: Math.round(dayHours[index] * 10) / 10,
+  })).slice(1), ...dayNames.map((day, index) => ({
+    day,
+    hours: Math.round(dayHours[index] * 10) / 10,
+  })).slice(0, 1)];
 
-
-  /* =========================
-     TOPIC WEAKNESS (for chart)
-  ========================= */
-
-  const topicWeakness = weakTopics.slice(0, 6).map((t) => ({
-    topic: t.topic,
-    accuracy: t.accuracy,
-    severity: t.severity,
+  const topicWeakness = weakTopics.slice(0, 6).map((topic) => ({
+    topic: topic.topic,
+    accuracy: topic.accuracy,
+    severity: topic.severity,
   }));
 
-
-  console.log("ANALYTICS DATA 👉", {
-    totalTests, averageScore, accuracy, performanceTrend, weakTopics
-  });
-
+  const streak = calculateStudyStreak([
+    ...allTestAttempts.map((attempt) => attempt.created_at),
+    ...allPyqAttempts.map((attempt) => attempt.attempted_at || attempt.created_at),
+  ]);
 
   return {
-    totalTests,
+    totalTests: totalActivities,
+    totalActivities,
+    testsCompleted: totalMockTests,
+    pyqSolved: totalPyqSolved,
     averageScore,
     accuracy,
     performanceTrend,
     weakTopics,
-
-    // NEW live data
     subjectDistribution,
     radarLabels,
     radarYou,
@@ -399,6 +345,6 @@ export async function getUserAnalytics(userId, stream = "JEE") {
     topicWeakness,
     totalQuestionsAnswered,
     chaptersAttempted,
-    streak
+    streak,
   };
 }

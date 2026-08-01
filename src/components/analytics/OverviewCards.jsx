@@ -3,7 +3,7 @@
 import { Target, Trophy, Flame, TrendingUp } from "lucide-react";
 
 const STAT_STYLES = {
-  "Tests Taken": {
+  "Practice Done": {
     icon: Target,
     accent: "#6366F1",
     gradient: "from-indigo-500 to-violet-500",
@@ -32,9 +32,9 @@ const STAT_STYLES = {
 export default function OverviewCards({ stats }) {
   const cards = [
     {
-      label: "Tests Taken",
-      value: stats?.totalTests ?? 0,
-      sub: "completed tests",
+      label: "Practice Done",
+      value: stats?.totalActivities ?? stats?.totalTests ?? 0,
+      sub: "tests and PYQs combined",
     },
     {
       label: "Average Score",
@@ -56,7 +56,7 @@ export default function OverviewCards({ stats }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((s, index) => {
-        const style = STAT_STYLES[s.label] || STAT_STYLES["Tests Taken"];
+        const style = STAT_STYLES[s.label] || STAT_STYLES["Practice Done"];
         const Icon = style.icon;
 
         return (

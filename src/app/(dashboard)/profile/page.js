@@ -2,9 +2,9 @@
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { Flame, Zap, Target, Gem, Trophy, Rocket, FileText, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import * as LucideIcons from "lucide-react";
-import { getUserXP, getUserRank, getProfileAnalytics } from "@/utils/profile";
+import { getUserXP, getUserRank } from "@/utils/profile";
 import { getUserRank as getGlobalRank } from "@/utils/leaderboard";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
@@ -17,7 +17,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [xpData, setXpData] = useState(null);
   const [rank, setRank] = useState(null);
-  const [analytics, setAnalytics] = useState(null);
+
   const [dynamicBadges, setDynamicBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -56,8 +56,7 @@ export default function ProfilePage() {
     async function loadStats() {
       const xp = await getUserXP(clerkUser.id);
       const userRank = await getGlobalRank(clerkUser.id);
-      const userAnalytics = await getProfileAnalytics(clerkUser.id, editExam);
-      
+
       try {
         const badgeRes = await fetch("/api/profile/badges");
         if (badgeRes.ok) {
@@ -69,10 +68,9 @@ export default function ProfilePage() {
       } catch (err) {
         console.warn("Failed to fetch badges", err);
       }
-      
+
       setXpData(xp);
       setRank(userRank?.rank ?? null);
-      setAnalytics(userAnalytics);
     }
     loadStats();
   }, [clerkUser, editExam]);
@@ -163,11 +161,7 @@ export default function ProfilePage() {
     badge: xpData?.badge || "🌱 Explorer",
     progress: xpData?.xp || 0,
     streak: xpData?.streak || 0,
-    avgSolveSeconds: analytics?.avgSolveSeconds ?? null,
-    accuracy: analytics?.accuracy || 0,
-    testsCompleted: analytics?.testsCompleted || 0,
     rank: rank,
-    bestMockScore: analytics?.bestMockScore || 0,
   };
 
   const badgeDefs = dynamicBadges;
@@ -297,23 +291,7 @@ export default function ProfilePage() {
         </div>
       </section>
 
-      {/* ── QUICK STATS ── */}
-      <section className="animate-slideUp" style={{ animationDelay: "200ms" }}>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { label: "Tests Done", value: activeUser.testsCompleted, icon: <FileText className="w-6 h-6 text-blue-500" /> },
-            { label: "Accuracy", value: `${activeUser.accuracy}%`, icon: <Target className="w-6 h-6 text-rose-500" /> },
-            { label: "Streak", value: `${activeUser.streak}d`, icon: <Flame className="w-6 h-6 text-orange-500" /> },
-            { label: "Global Rank", value: activeUser.rank ? `#${activeUser.rank}` : "—", icon: <Trophy className="w-6 h-6 text-yellow-500" /> },
-          ].map((stat) => (
-            <div key={stat.label} className="glass-card p-4 text-center group hover:-translate-y-1 transition-all duration-300 flex flex-col items-center">
-              <div className="mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
-              <p className="text-xl font-black text-slate-900 dark:text-white">{stat.value}</p>
-              <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* ── BADGES ── */}
       <section className="animate-slideUp" style={{ animationDelay: "275ms" }}>

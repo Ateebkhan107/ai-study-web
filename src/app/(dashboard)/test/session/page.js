@@ -10,6 +10,7 @@ import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { updateStreak } from "@/utils/streak";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
+import { calculateQuestionScore } from "@/lib/analyticsHelpers";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -59,6 +60,7 @@ function TestSessionContent() {
   const [attemptId, setAttemptId] = useState(null);
   const [finishing, setFinishing] = useState(false);
   const timerRef = useRef(null);
+  const submitRef = useRef(null);
 
   // Apply Strict Exam Mode while the session is active and not finishing
   useStrictExamMode(!finishing && questions.length > 0);
@@ -124,14 +126,22 @@ function TestSessionContent() {
     setFinishing(true);
     try {
       let correct = 0;
-      questions.forEach((q) => {
-        if (answers[q.id] === q.correct) correct++;
-      });
-
       const attempted = Object.keys(answers).length;
-      const wrong = attempted - correct;
-      const score = correct * 4 - wrong;
-      const totalMarks = questions.length * 4;
+      let wrong = 0;
+      let score = 0;
+      let totalMarks = 0;
+
+      questions.forEach((question) => {
+        const result = calculateQuestionScore(question, answers[question.id], exam);
+        totalMarks += result.maxScore;
+        score += result.scoreDelta;
+
+        if (result.isCorrect) {
+          correct += 1;
+        } else if (result.attempted) {
+          wrong += 1;
+        }
+      });
 
       const { data: attempt, error } = await supabase
         .from("test_attempts")
@@ -192,6 +202,10 @@ function TestSessionContent() {
     }
   }
 
+  useEffect(() => {
+    submitRef.current = handleSubmit;
+  }, [handleSubmit]);
+
   // 4. Timer Logic
   useEffect(() => {
     if (questions.length === 0) return;
@@ -199,7 +213,7 @@ function TestSessionContent() {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current);
-          handleSubmit();
+          submitRef.current?.();
           return 0;
         }
         return prev - 1;
