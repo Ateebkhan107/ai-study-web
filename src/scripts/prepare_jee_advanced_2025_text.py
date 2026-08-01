@@ -1,36 +1,58 @@
-"""Create a text-first JEE Advanced 2025 manifest from the supplied final-key PDFs."""
+"""Create text-first manifests for the supplied JEE Advanced 2023-2025 papers."""
 import json, re, subprocess
 from pathlib import Path
 from pypdf import PdfReader
 
-ROOT = Path.cwd(); OUT = ROOT / "tmp" / "jee-advanced-2025"
-OCR = ROOT / "tmp" / "pdfs" / "vision_ocr"
+ROOT = Path.cwd()
+OUT = ROOT / "tmp" / "jee-advanced"
 PDFTOPPM = "/Users/ateebfatmi/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/pdftoppm"
-PAPERS = [(Path("/Users/ateebfatmi/Desktop/2025_1_English.pdf"), 1), (Path("/Users/ateebfatmi/Desktop/2025_2_English.pdf"), 2)]
+PAPERS = [(year, paper, Path(f"/Users/ateebfatmi/Downloads/{year}_{paper}_English.pdf")) for year in (2023, 2024, 2025) for paper in (1, 2)]
 
 def tidy(text):
     return re.sub(r"\n{3,}", "\n\n", re.sub(r"[ \t]+", " ", text)).strip()
 
-def subject(text, current):
+def find_subject(text, current):
     for value in ("Mathematics", "Physics", "Chemistry"):
-        if re.search(rf"\b{value}\b", text, re.I): current = "Maths" if value == "Mathematics" else value
+        if re.search(rf"\b{value}\b", text, re.I):
+            current = "Maths" if value == "Mathematics" else value
     return current
 
-for pdf, paper in PAPERS:
-    paper_dir = OUT / f"paper-{paper}"; pages_dir = paper_dir / "pages"; pages_dir.mkdir(parents=True, exist_ok=True)
+for year, paper, pdf in PAPERS:
+    paper_dir = OUT / str(year) / f"paper-{paper}"
+    pages_dir = paper_dir / "pages"
+    pages_dir.mkdir(parents=True, exist_ok=True)
     if not list(pages_dir.glob("*.png")):
         subprocess.run([PDFTOPPM, "-png", "-r", "180", str(pdf), str(pages_dir / "page")], check=True)
-    reader = PdfReader(pdf); current_subject = None; pieces = []
+    reader = PdfReader(pdf)
+    current_subject = None
+    pieces = []
     for index, page in enumerate(reader.pages, 1):
-        text = page.extract_text() or ""; current_subject = subject(text, current_subject)
+        text = page.extract_text() or ""
+        current_subject = find_subject(text, current_subject)
         for match in re.finditer(r"Q\.\s*(\d+)\b", text):
-            pieces.append({"number": int(match.group(1)), "subject": current_subject, "page": index, "start": match.start(), "text": text})
+            pieces.append({"source_number": int(match.group(1)), "subject": current_subject, "page": index, "start": match.start(), "text": text})
+    expected = 48 if year == 2025 else 51
+    per_subject = expected // 3
+    if not any(item["subject"] for item in pieces):
+        for index, item in enumerate(pieces):
+            item["subject"] = ("Maths", "Physics", "Chemistry")[index // per_subject]
     records = []
-    for i, item in enumerate(pieces):
-        end = pieces[i + 1]["start"] if i + 1 < len(pieces) and pieces[i + 1]["page"] == item["page"] else len(item["text"])
+    for index, item in enumerate(pieces):
+        end = pieces[index + 1]["start"] if index + 1 < len(pieces) and pieces[index + 1]["page"] == item["page"] else len(item["text"])
         chunk = tidy(item["text"][item["start"]:end])
-        options = re.findall(r"\(([A-D])\)\s*(.*?)(?=\s*\([A-D]\)|$)", chunk, re.S)
-        records.append({"source_number": item["number"], "subject": item["subject"], "page": item["page"], "question": chunk, "options": dict(options), "question_type": "MCQ" if options else "NUMERICAL"})
-    if len(records) != 48: raise ValueError(f"Paper {paper}: expected 48 questions, found {len(records)}")
+        options = re.findall(r"\(\s*([A-D])\s*\)\s*(.*?)(?=\s*\(\s*[A-D]\s*\)|$)", chunk, re.S)
+        records.append({
+            "source_number": item["source_number"],
+            "subject": item["subject"],
+            "page": item["page"],
+            "question": chunk,
+            "options": dict(options),
+            "question_type": "MCQ" if options else "NUMERICAL",
+        })
+    if len(records) != expected:
+        raise ValueError(f"{year} paper {paper}: expected {expected} questions, found {len(records)}")
+    subject_counts = {subject: sum(row["subject"] == subject for row in records) for subject in ("Maths", "Physics", "Chemistry")}
+    if sorted(subject_counts.values()) != [per_subject] * 3:
+        raise ValueError(f"{year} paper {paper}: invalid subject distribution {subject_counts}")
     (paper_dir / "text-manifest.json").write_text(json.dumps(records, ensure_ascii=False, indent=2))
-    print(json.dumps({"paper": paper, "questions": len(records)}))
+    print(json.dumps({"year": year, "paper": paper, "questions": len(records), "subjects": subject_counts}))

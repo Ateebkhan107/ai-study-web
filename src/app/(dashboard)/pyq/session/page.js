@@ -28,10 +28,7 @@ const RemoveOrangeFilter = () => (
     <filter id="remove-orange">
       <feColorMatrix
         type="matrix"
-        values="1 0 0 0 0
-                1 0 0 0 0
-                1 0 0 0 0
-                0 0 0 1 0"
+        values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0"
       />
     </filter>
   </svg>

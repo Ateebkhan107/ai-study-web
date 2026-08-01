@@ -52,6 +52,10 @@ function evaluateAttempt(question, selectedOption) {
       return false;
     }
 
+    if (Array.isArray(question.correct_options) && question.correct_options.length > 0) {
+      return question.correct_options.some((answer) => numericValue === Number(answer));
+    }
+
     if (
       question.numerical_min !== null &&
       question.numerical_min !== undefined &&

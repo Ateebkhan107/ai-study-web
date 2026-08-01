@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
+import { getPYQAnswers } from "@/lib/pyq";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -23,10 +24,7 @@ const RemoveOrangeFilter = () => (
     <filter id="remove-orange">
       <feColorMatrix
         type="matrix"
-        values="1 0 0 0 0
-                1 0 0 0 0
-                1 0 0 0 0
-                0 0 0 1 0"
+        values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0"
       />
     </filter>
   </svg>
@@ -66,15 +64,36 @@ export default function PYQResultsPage() {
   // LOAD REVIEW DATA
   // =============================
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const stored = sessionStorage.getItem("pyq_session_review");
-      if (stored) {
-        setReviewData(JSON.parse(stored));
+    let cancelled = false;
+
+    async function loadReviewData() {
+      if (typeof window === "undefined") return;
+      let parsed = [];
+      try {
+        const stored = sessionStorage.getItem("pyq_session_review");
+        parsed = stored ? JSON.parse(stored) : [];
+        if (!Array.isArray(parsed) || parsed.length === 0) return;
+
+        const currentAnswers = await getPYQAnswers(parsed.map((question) => question.id));
+        const answersById = new Map(currentAnswers.map((answer) => [String(answer.id), answer]));
+        const refreshed = parsed.map((question) => ({
+          ...question,
+          ...(answersById.get(String(question.id)) || {}),
+        }));
+        if (!cancelled) {
+          setReviewData(refreshed);
+          sessionStorage.setItem("pyq_session_review", JSON.stringify(refreshed));
+        }
+      } catch (error) {
+        console.error("Failed to load review data:", error);
+        if (!cancelled && parsed.length > 0) setReviewData(parsed);
       }
-    } catch (error) {
-      console.error("Failed to load review data:", error);
     }
+
+    loadReviewData();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -322,7 +341,9 @@ export default function PYQResultsPage() {
                       <div className="p-4 rounded-xl border border-emerald-200/60 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <span className="font-bold text-sm text-emerald-700 dark:text-emerald-400">Correct Answer:</span>
                         <div className="text-right text-sm font-semibold text-emerald-800 dark:text-emerald-300">
-                          {q.numerical_answer}
+                          {Array.isArray(q.correct_options) && q.correct_options.length > 0
+                            ? q.correct_options.join(" or ")
+                            : q.numerical_answer}
                           {(q.numerical_min !== undefined && q.numerical_max !== undefined && q.numerical_min !== null && q.numerical_max !== null) && (
                             <div className="mt-1 text-xs font-medium opacity-80">
                               Range: {q.numerical_min} - {q.numerical_max}
@@ -399,7 +420,7 @@ export default function PYQResultsPage() {
                       {qType === "MULTIPLE_CORRECT" 
                         ? `Correct Answers: ${Array.isArray(q.correct_options) ? q.correct_options.join(", ").toUpperCase() : ""}`
                         : qType === "NUMERICAL" 
-                          ? `Correct Answer: ${q.numerical_answer}` 
+                          ? `Correct Answer: ${Array.isArray(q.correct_options) && q.correct_options.length > 0 ? q.correct_options.join(" or ") : q.numerical_answer}` 
                           : `Correct Answer: ${String(q.correct_option).toUpperCase()}`
                       }
                     </p>

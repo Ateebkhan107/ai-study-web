@@ -94,6 +94,20 @@ export async function savePYQAttempts(attempts) {
   return attemptData;
 }
 
+export async function getPYQAnswers(questionIds) {
+  const res = await fetch("/api/pyq-answers", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question_ids: questionIds }),
+  });
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error.error || "Failed to load PYQ answers");
+  }
+  const data = await res.json();
+  return Array.isArray(data.answers) ? data.answers : [];
+}
+
 // =============================
 // GET PYQ ANALYTICS
 // =============================
