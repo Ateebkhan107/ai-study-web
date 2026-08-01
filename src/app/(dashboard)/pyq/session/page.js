@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempt } from "@/lib/pyq";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
+import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -55,6 +56,7 @@ export default function PYQSessionPage() {
 
   // Apply Strict Exam Mode while the session is active and not finishing
   useStrictExamMode(!finishing && questions.length > 0);
+  useQuestionImagePreload(questions, currentIndex, 2);
 
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";
@@ -88,7 +90,14 @@ export default function PYQSessionPage() {
   }, [finishing, questions.length, mode]);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function loadPYQ() {
+      if (subjectLabels.length === 0) {
+        if (!cancelled) setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setLoadError("");
       try {
@@ -138,10 +147,12 @@ export default function PYQSessionPage() {
           });
         }
 
+        if (cancelled) return;
         setQuestions(combined);
         
         if (user?.id) {
           const bms = await getBookmarks(user.id);
+          if (cancelled) return;
           setBookmarkedIds(new Set(bms));
         }
 
@@ -155,11 +166,8 @@ export default function PYQSessionPage() {
       }
     }
 
-    if (subjectLabels.length > 0) {
-      loadPYQ();
-    } else {
-      setLoading(false);
-    }
+    loadPYQ();
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId]);
 
@@ -170,7 +178,7 @@ export default function PYQSessionPage() {
   const answeredCount = Object.keys(answers).length;
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
-  function handleSelectOption(option) {
+  const handleSelectOption = useCallback((option) => {
     if (!currentQuestion) return;
     if (qType === "MULTIPLE_CORRECT") {
       setAnswers((prev) => {
@@ -191,9 +199,9 @@ export default function PYQSessionPage() {
     } else {
       setAnswers((prev) => ({ ...prev, [currentQuestion.id]: option }));
     }
-  }
+  }, [currentQuestion, qType]);
 
-  function handleNumericalChange(val) {
+  const handleNumericalChange = useCallback((val) => {
     if (!currentQuestion) return;
     if (val === "") {
       setAnswers((prev) => {
@@ -204,15 +212,15 @@ export default function PYQSessionPage() {
     } else {
       setAnswers((prev) => ({ ...prev, [currentQuestion.id]: val }));
     }
-  }
+  }, [currentQuestion]);
 
-  function handleNext() {
+  const handleNext = useCallback(() => {
     setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
-  }
+  }, [questions.length]);
 
-  function handleBack() {
+  const handleBack = useCallback(() => {
     setCurrentIndex((i) => Math.max(i - 1, 0));
-  }
+  }, []);
 
   function checkAnswer(question, selected) {
     if (!selected) return false;

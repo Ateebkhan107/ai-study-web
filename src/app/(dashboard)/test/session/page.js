@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, Suspense } from "react";
+import { memo, useCallback, useEffect, useRef, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getQuestions } from "@/lib/questions";
 import Logo from "@/components/Logo";
@@ -11,6 +11,7 @@ import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { updateStreak } from "@/utils/streak";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 import { calculateQuestionScore } from "@/lib/analyticsHelpers";
+import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -35,6 +36,125 @@ const TargetIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" />
   </svg>
 );
+
+const QuestionPalette = memo(function QuestionPalette({
+  questions,
+  answers,
+  currentIdx,
+  onSelectQuestion,
+}) {
+  return (
+    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
+      <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
+        Question Palette
+      </p>
+      <div className="grid grid-cols-5 gap-2">
+        {questions.map((question, index) => {
+          const isAnswered = answers[question.id] !== undefined;
+          const isActive = currentIdx === index;
+
+          return (
+            <button
+              key={question.id}
+              onClick={() => onSelectQuestion(index)}
+              className={`aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all duration-200 cursor-pointer
+                ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[#0f172a] scale-110" : ""}
+                ${
+                  isAnswered
+                    ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
+                    : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/30 dark:hover:border-indigo-500/30"
+                }
+              `}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
+      </div>
+      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20" />
+          Answered
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700/50" />
+          Unvisited
+        </div>
+      </div>
+    </div>
+  );
+});
+
+const TestQuestionPanel = memo(function TestQuestionPanel({
+  activeQuestion,
+  currentIdx,
+  totalQuestions,
+  selectedAnswer,
+  onSelect,
+  onClear,
+}) {
+  if (!activeQuestion) return null;
+
+  return (
+    <div className="flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 sm:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
+      <div className="flex flex-wrap items-center gap-2 mb-6">
+        <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+          Question {currentIdx + 1} of {totalQuestions}
+        </span>
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
+          {activeQuestion.subject}
+        </span>
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+          {activeQuestion.chapter}
+        </span>
+      </div>
+
+      <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-8">
+        {activeQuestion.text}
+      </p>
+
+      <div className="space-y-3">
+        {activeQuestion.options.map((option, optionIndex) => {
+          const isSelected = selectedAnswer === optionIndex;
+
+          return (
+            <button
+              key={`${activeQuestion.id}-${optionIndex}`}
+              onClick={() => onSelect(activeQuestion.id, optionIndex)}
+              className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
+                ${
+                  isSelected
+                    ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-indigo-500/10"
+                    : "bg-white/50 dark:bg-slate-800/30 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
+                }`}
+            >
+              <span
+                className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
+                  ${
+                    isSelected
+                      ? "border-indigo-500 bg-gradient-to-br from-indigo-500 to-violet-500 text-white"
+                      : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
+                  }`}
+              >
+                {LETTERS[optionIndex]}
+              </span>
+              <span className="text-base font-medium">{option}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedAnswer !== undefined && (
+        <button
+          onClick={() => onClear(activeQuestion.id)}
+          className="mt-4 text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors"
+        >
+          Clear Selection
+        </button>
+      )}
+    </div>
+  );
+});
 
 function TestSessionContent() {
   const router = useRouter();
@@ -64,6 +184,7 @@ function TestSessionContent() {
 
   // Apply Strict Exam Mode while the session is active and not finishing
   useStrictExamMode(!finishing && questions.length > 0);
+  useQuestionImagePreload(questions, currentIdx, 2);
 
   useEffect(() => {
     async function loadExam() {
@@ -121,7 +242,7 @@ function TestSessionContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectParam, difficultyParam, countParam, durationParam, user, exam]);
 
-  async function handleSubmit() {
+  const handleSubmit = useCallback(async () => {
     if (finishing) return;
     setFinishing(true);
     try {
@@ -200,7 +321,7 @@ function TestSessionContent() {
       alert(err.message);
       setFinishing(false);
     }
-  }
+  }, [answers, durationParam, exam, finishing, questions, router, searchParams, sessionId, timeLeft, user]);
 
   useEffect(() => {
     submitRef.current = handleSubmit;
@@ -223,9 +344,29 @@ function TestSessionContent() {
   }, [questions.length, finishing]);
 
   // 5. Handlers
-  const handleSelect = (qId, optIdx) => {
+  const handleSelect = useCallback((qId, optIdx) => {
     setAnswers((prev) => ({ ...prev, [qId]: optIdx }));
-  };
+  }, []);
+
+  const handleClearSelection = useCallback((qId) => {
+    setAnswers((prev) => {
+      const next = { ...prev };
+      delete next[qId];
+      return next;
+    });
+  }, []);
+
+  const handleSelectQuestion = useCallback((index) => {
+    setCurrentIdx(index);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIdx((prev) => Math.max(0, prev - 1));
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setCurrentIdx((prev) => Math.min(questions.length - 1, prev + 1));
+  }, [questions.length]);
 
   // 6. Formatting
   const formatTime = (seconds) => {
@@ -322,127 +463,36 @@ function TestSessionContent() {
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* ── Question Palette ── */}
         <aside className="lg:col-span-1 order-2 lg:order-1">
-          <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
-            <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
-              Question Palette
-            </p>
-            <div className="grid grid-cols-5 gap-2">
-              {questions.map((q, idx) => {
-                const isAnswered = answers[q.id] !== undefined;
-                const isActive = currentIdx === idx;
-                return (
-                  <button
-                    key={q.id}
-                    onClick={() => setCurrentIdx(idx)}
-                    className={`aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all duration-200 cursor-pointer
-                      ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[#0f172a] scale-110" : ""}
-                      ${
-                        isAnswered
-                          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
-                          : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/30 dark:hover:border-indigo-500/30"
-                      }
-                    `}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20" />
-                Answered
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700/50" />
-                Unvisited
-              </div>
-            </div>
-          </div>
+          <QuestionPalette
+            questions={questions}
+            answers={answers}
+            currentIdx={currentIdx}
+            onSelectQuestion={handleSelectQuestion}
+          />
         </aside>
 
         {/* ── Question Content ── */}
         <section className="lg:col-span-3 flex flex-col order-1 lg:order-2">
-          <div className="flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 sm:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
-            {/* Question meta */}
-            <div className="flex flex-wrap items-center gap-2 mb-6">
-              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                Question {currentIdx + 1} of {questions.length}
-              </span>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
-                {activeQ.subject}
-              </span>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                {activeQ.chapter}
-              </span>
-            </div>
-
-            {/* Question text */}
-            <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-8">
-              {activeQ.text}
-            </p>
-
-            {/* Options */}
-            <div className="space-y-3">
-              {activeQ.options.map((opt, idx) => {
-                const isSelected = answers[activeQ.id] === idx;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => handleSelect(activeQ.id, idx)}
-                    className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
-                      ${
-                        isSelected
-                          ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-indigo-500/10"
-                          : "bg-white/50 dark:bg-slate-800/30 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
-                      }`}
-                  >
-                    <span
-                      className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
-                        ${
-                          isSelected
-                            ? "border-indigo-500 bg-gradient-to-br from-indigo-500 to-violet-500 text-white"
-                            : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
-                        }`}
-                    >
-                      {LETTERS[idx]}
-                    </span>
-                    <span className="text-base font-medium">{opt}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Clear selection */}
-            {answers[activeQ.id] !== undefined && (
-              <button
-                onClick={() => {
-                  const newAnswers = { ...answers };
-                  delete newAnswers[activeQ.id];
-                  setAnswers(newAnswers);
-                }}
-                className="mt-4 text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors"
-              >
-                Clear Selection
-              </button>
-            )}
-          </div>
+          <TestQuestionPanel
+            activeQuestion={activeQ}
+            currentIdx={currentIdx}
+            totalQuestions={questions.length}
+            selectedAnswer={activeQ ? answers[activeQ.id] : undefined}
+            onSelect={handleSelect}
+            onClear={handleClearSelection}
+          />
 
           {/* Navigation */}
           <div className="mt-6 flex items-center justify-between animate-slideUp" style={{ animationDelay: "150ms" }}>
             <button
-              onClick={() => setCurrentIdx((prev) => Math.max(0, prev - 1))}
+              onClick={handlePrev}
               disabled={currentIdx === 0}
               className="px-6 py-3 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
             >
               ← Previous
             </button>
             <button
-              onClick={() =>
-                setCurrentIdx((prev) =>
-                  Math.min(questions.length - 1, prev + 1)
-                )
-              }
+              onClick={handleNext}
               disabled={currentIdx === questions.length - 1}
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
             >

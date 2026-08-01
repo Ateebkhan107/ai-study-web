@@ -98,6 +98,39 @@ const SUBJECT_BAR_COLORS = {
   Biology:     "#10b981",
 };
 
+const SAVED_PYQ_SELECT_FIELDS = [
+  "id",
+  "exam",
+  "exam_type",
+  "year",
+  "attempt",
+  "shift",
+  "paper_code",
+  "subject",
+  "chapter",
+  "difficulty",
+  "question",
+  "question_image",
+  "option_a",
+  "option_b",
+  "option_c",
+  "option_d",
+  "option_a_image",
+  "option_b_image",
+  "option_c_image",
+  "option_d_image",
+  "correct_option",
+  "explanation",
+  "explanation_image",
+  "question_type",
+  "correct_options",
+  "numerical_answer",
+  "numerical_min",
+  "numerical_max",
+  "marks_positive",
+  "marks_negative",
+].join(", ");
+
 // ─── Shared Atomic Components ─────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
@@ -485,28 +518,7 @@ function PracticeTab({ subjects, track }) {
 }
 
 // ─── Analytics Tab ────────────────────────────────────────────────────────────
-function AnalyticsTab({ track }) {
-  const [analytics,  setAnalytics]  = useState(null);
-  const [loading,    setLoading]    = useState(true);
-  const [loadError,  setLoadError]  = useState("");
-
-  useEffect(() => {
-    let cancelled = false;
-    async function loadAnalytics() {
-      setLoading(true);
-      setLoadError("");
-      try {
-        const result = await getPYQAnalytics(track);
-        if (!cancelled) setAnalytics(result);
-      } catch (error) {
-        console.error("Failed to load PYQ analytics:", error);
-        if (!cancelled) setLoadError("Failed to load analytics. Please try again.");
-      } finally { if (!cancelled) setLoading(false); }
-    }
-    loadAnalytics();
-    return () => { cancelled = true; };
-  }, [track]);
-
+function AnalyticsTab({ analytics, loading, loadError }) {
   if (loading) return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
       {[...Array(3)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
@@ -667,7 +679,7 @@ export default function PYQPage() {
       }
       const { data } = await supabase
         .from("pyq_questions")
-        .select("*")
+        .select(SAVED_PYQ_SELECT_FIELDS)
         .eq("status", "PUBLISHED")
         .in("id", bms);
       if (!cancelled && data) {
@@ -681,11 +693,17 @@ export default function PYQPage() {
   }, [user, track]);
 
   const [overview,       setOverview]       = useState(null);
+  const [pyqAnalytics,   setPyqAnalytics]   = useState(null);
   const [attemptedTotal, setAttemptedTotal] = useState(null);
+  const [statsLoading,   setStatsLoading]   = useState(true);
+  const [statsError,     setStatsError]     = useState("");
 
   useEffect(() => {
     let cancelled = false;
     async function loadPYQStats() {
+      if (!track) return;
+      setStatsLoading(true);
+      setStatsError("");
       try {
         const [overviewData, analyticsData] = await Promise.all([
           getPYQOverview(track),
@@ -693,6 +711,7 @@ export default function PYQPage() {
         ]);
         if (cancelled) return;
         setOverview(overviewData || null);
+        setPyqAnalytics(analyticsData || null);
         setAttemptedTotal(
           analyticsData?.totalQuestions ??
           analyticsData?.totalAttempts  ??
@@ -701,7 +720,14 @@ export default function PYQPage() {
         );
       } catch (error) {
         console.error("Failed loading PYQ stats:", error);
-        if (!cancelled) { setOverview(null); setAttemptedTotal(0); }
+        if (!cancelled) {
+          setOverview(null);
+          setPyqAnalytics(null);
+          setAttemptedTotal(0);
+          setStatsError("Failed to load analytics. Please try again.");
+        }
+      } finally {
+        if (!cancelled) setStatsLoading(false);
       }
     }
     loadPYQStats();
@@ -761,7 +787,13 @@ export default function PYQPage() {
 
       {/* Tab panels */}
       {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
-      {activeTab === "analytics" && <AnalyticsTab track={track} />}
+      {activeTab === "analytics" && (
+        <AnalyticsTab
+          analytics={pyqAnalytics}
+          loading={statsLoading}
+          loadError={statsError}
+        />
+      )}
       {activeTab === "saved"     && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
     </PageWrapper>
   );

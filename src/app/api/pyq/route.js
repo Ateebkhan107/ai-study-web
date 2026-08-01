@@ -1,6 +1,42 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
+const PYQ_SESSION_SELECT = `
+  id,
+  exam_id,
+  exam,
+  exam_type,
+  year,
+  attempt,
+  shift,
+  paper_code,
+  subject,
+  chapter,
+  difficulty,
+  question,
+  question_image,
+  option_a,
+  option_b,
+  option_c,
+  option_d,
+  option_a_image,
+  option_b_image,
+  option_c_image,
+  option_d_image,
+  correct_option,
+  explanation,
+  explanation_image,
+  question_type,
+  correct_options,
+  numerical_answer,
+  numerical_min,
+  numerical_max,
+  marks_positive,
+  marks_negative,
+  created_at,
+  status
+`;
+
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
 
@@ -38,7 +74,7 @@ export async function GET(req) {
 
     let mistakeQuery = supabase
       .from("pyq_questions")
-      .select("*")
+      .select(PYQ_SESSION_SELECT)
       .eq("status", "PUBLISHED")
       .not("exam_id", "is", null)
       .in("id", questionIds);
@@ -64,7 +100,7 @@ export async function GET(req) {
 
   let query = supabase
     .from("pyq_questions")
-    .select("*")
+    .select(PYQ_SESSION_SELECT)
     .eq("status", "PUBLISHED")
     .not("exam_id", "is", null);
 

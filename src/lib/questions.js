@@ -116,6 +116,27 @@ function getDistribution(exam, total) {
   return { Physics: each, Chemistry: each, Mathematics: total - each * 2 };
 }
 
+const QUESTION_SELECT_FIELDS = `
+  id,
+  exam,
+  subject,
+  chapter,
+  difficulty,
+  question_text,
+  question_image,
+  option_a,
+  option_b,
+  option_c,
+  option_d,
+  option_a_image,
+  option_b_image,
+  option_c_image,
+  option_d_image,
+  correct_option,
+  marks,
+  negative_marks
+`;
+
 export async function getQuestions({
   exam,
   subject,
@@ -125,8 +146,6 @@ export async function getQuestions({
 }) {
   try {
 //     console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
-
-    let finalQuestions = [];
     let subjects = [];
 
     const isAllSubjects =
@@ -144,13 +163,13 @@ export async function getQuestions({
       }
     }
 
-    for (const sub of subjects) {
+    const finalQuestions = await Promise.all(subjects.map(async (sub) => {
       let subjectLimit = limit;
       if (subjects.length > 1) {
         subjectLimit = getDistribution(exam, limit)[sub] || Math.floor(limit / subjects.length);
       }
 
-      let query = supabase.from("questions").select("*").eq("exam", exam);
+      let query = supabase.from("questions").select(QUESTION_SELECT_FIELDS).eq("exam", exam);
 
       // Subject filter
       if (sub === "Botany" || sub === "Zoology") {
@@ -190,7 +209,7 @@ export async function getQuestions({
       if (!data || data.length === 0) {
         let fallbackQuery = supabase
           .from("questions")
-          .select("*")
+          .select(QUESTION_SELECT_FIELDS)
           .eq("exam", exam)
           .eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
 
@@ -208,7 +227,7 @@ export async function getQuestions({
       if (!data || data.length === 0) {
         let anyQuery = supabase
           .from("questions")
-          .select("*")
+          .select(QUESTION_SELECT_FIELDS)
           .eq("exam", exam)
           .eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
         const anyRes = await anyQuery;
@@ -219,15 +238,15 @@ export async function getQuestions({
 
       if (error && (!data || data.length === 0)) {
 //         console.log("SUPABASE ERROR:", error);
-        continue;
+        return [];
       }
 
-      finalQuestions.push(...(data || []).slice(0, subjectLimit));
-    }
+      return (data || []).slice(0, subjectLimit);
+    }));
 
 //     console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
 
-    return finalQuestions.map((q) => ({
+    return finalQuestions.flat().map((q) => ({
       id: q.id,
       exam: q.exam,
       subject: q.subject,
@@ -243,8 +262,6 @@ export async function getQuestions({
         q.option_d_image,
       ],
       correct: ["A", "B", "C", "D"].indexOf(q.correct_option),
-      explanation: q.explanation,
-      explanation_image: q.explanation_image,
       marks: q.marks || 4,
       negative_marks: q.negative_marks || -1,
     }));
