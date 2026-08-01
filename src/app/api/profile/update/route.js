@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(req) {
   try {
@@ -25,7 +25,7 @@ export async function POST(req) {
       updateData.exam = body.current_track.toLowerCase() === "neet" ? "NEET" : "JEE";
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("user_profiles")
       .update(updateData)
       .eq("clerk_user_id", userId)

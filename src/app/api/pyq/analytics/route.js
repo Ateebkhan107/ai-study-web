@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import {
   calculateStudyStreak,
   examMatchesTrack,
@@ -18,11 +18,11 @@ export async function GET(request) {
     }
 
     const [{ data: rawPyqAttempts, error: pyqError }, { data: rawTestAttempts, error: testError }] = await Promise.all([
-      supabase
+      supabaseAdmin
         .from("pyq_attempts")
         .select("is_correct, attempted_at, pyq_questions(exam, subject)")
         .eq("user_id", userId),
-      supabase
+      supabaseAdmin
         .from("test_attempts")
         .select("created_at")
         .eq("user_id", userId),

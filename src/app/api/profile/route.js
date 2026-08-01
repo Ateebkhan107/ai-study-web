@@ -1,11 +1,26 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { createProfileIfNotExists } from "@/services/profile.service";
 
 
 
 import { getLevelFromXP } from "@/utils/levelEngine";
+
+async function getGlobalRank(userId, xp) {
+  if (!userId) return null;
+
+  const { count, error } = await supabaseAdmin
+    .from("user_xp")
+    .select("*", { count: "exact", head: true })
+    .gt("xp", xp);
+
+  if (error) {
+    throw error;
+  }
+
+  return (count || 0) + 1;
+}
 
 
 
@@ -42,7 +57,7 @@ export async function GET() {
     // GET PROFILE
 
     let {data:profile,error} =
-    await supabase
+    await supabaseAdmin
 
       .from("user_profiles")
 
@@ -112,7 +127,7 @@ export async function GET() {
     // GET XP DATA
 
     const {data:xpData} =
-    await supabase
+    await supabaseAdmin
 
       .from("user_xp")
 
@@ -140,10 +155,7 @@ export async function GET() {
     const xp = xpData?.xp || 0;
     const levelStats = getLevelFromXP(xp);
 
-    const levelData = {
-      level: levelStats.currentLevel,
-      progress: levelStats.progressPercentage
-    };
+    const rank = await getGlobalRank(userId, xp);
 
 
 
@@ -194,20 +206,23 @@ export async function GET() {
         xpData?.accuracy || 0,
 
 
+      rank,
+
+
 
 
       // LEVEL
 
       level:
-        levelData.level,
+        levelStats.currentLevel,
 
 
       badge:
-        levelData.badge,
+        xpData?.badge || "Explorer",
 
 
       progress:
-        levelData.progress
+        levelStats.progressPercentage
 
 
 

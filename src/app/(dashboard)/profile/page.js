@@ -4,8 +4,6 @@ import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import { Pencil } from "lucide-react";
 import * as LucideIcons from "lucide-react";
-import { getUserXP, getUserRank } from "@/utils/profile";
-import { getUserRank as getGlobalRank } from "@/utils/leaderboard";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
 
@@ -37,6 +35,14 @@ export default function ProfilePage() {
         if (response.ok) {
           const data = await response.json();
           setUser(data);
+          setXpData({
+            xp: data.xp || 0,
+            level: data.level || 1,
+            badge: data.badge || "Explorer",
+            progress: data.progress || 0,
+            streak: data.streak || 0,
+          });
+          setRank(data.rank ?? null);
           setEditName(data.full_name || clerkUser?.fullName || "Student");
           setEditExam(data.current_track?.toUpperCase() || "JEE");
           setEditYear(data.target_year || 2026);
@@ -54,9 +60,6 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!clerkUser) return;
     async function loadStats() {
-      const xp = await getUserXP(clerkUser.id);
-      const userRank = await getGlobalRank(clerkUser.id);
-
       try {
         const badgeRes = await fetch("/api/profile/badges");
         if (badgeRes.ok) {
@@ -68,9 +71,6 @@ export default function ProfilePage() {
       } catch (err) {
         console.warn("Failed to fetch badges", err);
       }
-
-      setXpData(xp);
-      setRank(userRank?.rank ?? null);
     }
     loadStats();
   }, [clerkUser, editExam]);

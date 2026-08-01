@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
-import { getTopLeaderboard, getUserRank } from "@/utils/leaderboard";
 import { getLevelFromXP } from "@/utils/levelEngine";
 
 export default function Leaderboard() {
@@ -18,7 +17,13 @@ export default function Leaderboard() {
   useEffect(() => {
     async function loadLeaderboard() {
       try {
-        const top10 = await getTopLeaderboard();
+        const response = await fetch("/api/pyq/leaderboard", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Failed to load leaderboard");
+        }
+
+        const allUsers = await response.json();
+        const top10 = Array.isArray(allUsers) ? allUsers.slice(0, 10) : [];
         
         // Add rank to top 10 for easier rendering
         const rankedTop10 = top10.map((u, i) => ({ ...u, rank: i + 1 }));
@@ -28,12 +33,12 @@ export default function Leaderboard() {
         if (currentUser?.id) {
           const inTop10 = rankedTop10.find(u => u.user_id === currentUser.id);
           if (!inTop10) {
-            const rankData = await getUserRank(currentUser.id);
+            const rankData = Array.isArray(allUsers)
+              ? allUsers.find((user) => user.user_id === currentUser.id)
+              : null;
             if (rankData) {
               setCurrentUserData({
-                ...rankData.userData,
-                rank: rankData.rank,
-                user_id: currentUser.id,
+                ...rankData,
                 isCurrentUserAppended: true
               });
             }

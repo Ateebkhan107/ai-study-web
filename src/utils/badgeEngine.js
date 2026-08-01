@@ -1,7 +1,130 @@
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
-import { getProfileAnalytics, getUserXP } from "@/utils/profile";
-import { getUserRank } from "@/utils/leaderboard";
 import { addXP } from "@/utils/xp";
+
+async function getUserXPWithAdmin(userId) {
+  const { data, error } = await supabase
+    .from("user_xp")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    console.log("Profile XP error:", error);
+    return null;
+  }
+
+  return data;
+}
+
+async function getUserRankWithAdmin(userId) {
+  const { data, error } = await supabase
+    .from("user_xp")
+    .select("user_id,xp")
+    .order("xp", { ascending: false });
+
+  if (error) {
+    console.log("Rank error:", error);
+    return null;
+  }
+
+  const index = data.findIndex((user) => user.user_id === userId);
+  return index >= 0 ? index + 1 : null;
+}
+
+async function getProfileAnalyticsWithAdmin(userId, stream = "JEE") {
+  if (!userId) return null;
+
+  try {
+    const { data: pyqAttemptsRaw, error: pyqError } = await supabase
+      .from("pyq_attempts")
+      .select("is_correct, pyq_questions(exam)")
+      .eq("user_id", userId);
+
+    if (pyqError) throw pyqError;
+
+    const pyqAttempts = (pyqAttemptsRaw || []).filter((attempt) => {
+      const exam = attempt.pyq_questions?.exam;
+      if (!exam) return false;
+      const trackUpper = stream.toUpperCase();
+      return exam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+    });
+
+    const { data: testAttemptsRaw, error: testError } = await supabase
+      .from("test_attempts")
+      .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score, tests(exam), user_answers(questions(exam))")
+      .eq("user_id", userId);
+
+    if (testError) throw testError;
+
+    const testAttempts = (testAttemptsRaw || []).filter((attempt) => {
+      let attemptExam = null;
+
+      if (attempt.tests?.exam) {
+        attemptExam = attempt.tests.exam;
+      } else if (attempt.user_answers && attempt.user_answers.length > 0) {
+        const firstAnswer = attempt.user_answers.find((answer) => answer.questions?.exam);
+        if (firstAnswer) {
+          attemptExam = firstAnswer.questions.exam;
+        }
+      }
+
+      if (!attemptExam) return false;
+      const trackUpper = stream.toUpperCase();
+      return attemptExam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+    });
+
+    const pyqTotal = pyqAttempts.length;
+    const pyqCorrect = pyqAttempts.filter((attempt) => attempt.is_correct).length;
+
+    const testsCompleted = testAttempts.length;
+    let testTotalQs = 0;
+    let testCorrectQs = 0;
+    let totalTimeSecs = 0;
+    let bestMockScore = 0;
+
+    testAttempts.forEach((attempt) => {
+      testTotalQs += attempt.attempted || 0;
+      testCorrectQs += attempt.correct_answers || attempt.correct || 0;
+      totalTimeSecs += attempt.time_taken_seconds || 0;
+      const score = attempt.accuracy || attempt.score || 0;
+      if (score > bestMockScore) {
+        bestMockScore = score;
+      }
+    });
+
+    const totalQuestionsAttempted = pyqTotal + testTotalQs;
+    const totalCorrect = pyqCorrect + testCorrectQs;
+    const accuracy =
+      totalQuestionsAttempted > 0
+        ? Math.round((totalCorrect / totalQuestionsAttempted) * 100)
+        : 0;
+    const avgSolveSeconds =
+      testTotalQs > 0
+        ? Math.round(totalTimeSecs / testTotalQs)
+        : null;
+
+    return {
+      testsCompleted,
+      totalQuestionsAttempted,
+      totalCorrect,
+      accuracy,
+      avgSolveSeconds,
+      bestMockScore,
+      pyqSolved: pyqTotal,
+    };
+  } catch (error) {
+    console.error("Error fetching profile analytics:", error);
+    return {
+      testsCompleted: 0,
+      totalQuestionsAttempted: 0,
+      totalCorrect: 0,
+      accuracy: 0,
+      avgSolveSeconds: null,
+      bestMockScore: 0,
+      pyqSolved: 0,
+    };
+  }
+}
 
 export async function evaluateUserBadges(userId) {
   if (!userId) return;
@@ -26,9 +149,9 @@ export async function evaluateUserBadges(userId) {
     const earnedBadgeIds = new Set(earnedBadges?.map(b => b.badge_id) || []);
 
     // 3. Fetch user stats
-    const analytics = await getProfileAnalytics(userId);
-    const xpData = await getUserXP(userId);
-    const rankData = await getUserRank(userId);
+    const analytics = await getProfileAnalyticsWithAdmin(userId);
+    const xpData = await getUserXPWithAdmin(userId);
+    const rankData = await getUserRankWithAdmin(userId);
 
     // 4. Map stats to requirement types
     const stats = {
@@ -132,9 +255,9 @@ export async function getUserBadgeProgress(userId) {
   const earnedMap = new Map(earnedBadges?.map(b => [b.badge_id, b]) || []);
   
   // 4. Fetch user stats
-  const analytics = await getProfileAnalytics(userId);
-  const xpData = await getUserXP(userId);
-  const rankData = await getUserRank(userId);
+  const analytics = await getProfileAnalyticsWithAdmin(userId);
+  const xpData = await getUserXPWithAdmin(userId);
+  const rankData = await getUserRankWithAdmin(userId);
   
   const stats = {
     tests_completed: analytics?.testsCompleted || 0,

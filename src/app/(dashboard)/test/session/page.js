@@ -2,15 +2,9 @@
 
 import { memo, useCallback, useEffect, useRef, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getQuestions } from "@/lib/questions";
 import Logo from "@/components/Logo";
-import { createTestSession } from "@/services/testSessions";
-import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
-import { updateGoalProgress } from "@/utils/updateGoalProgress";
-import { updateStreak } from "@/utils/streak";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
-import { calculateQuestionScore } from "@/lib/analyticsHelpers";
 import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -177,7 +171,6 @@ function TestSessionContent() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(durationParam * 60);
-  const [attemptId, setAttemptId] = useState(null);
   const [finishing, setFinishing] = useState(false);
   const timerRef = useRef(null);
   const submitRef = useRef(null);
@@ -186,53 +179,40 @@ function TestSessionContent() {
   useStrictExamMode(!finishing && questions.length > 0);
   useQuestionImagePreload(questions, currentIdx, 2);
 
-  useEffect(() => {
-    async function loadExam() {
-      if (!user) return;
-      const { data } = await supabase
-        .from("user_profiles")
-        .select("exam")
-        .eq("clerk_user_id", user.id)
-        .single();
-      setExam(data?.exam || "JEE");
-    }
-    loadExam();
-  }, [user]);
-
   // 3. Initialize the Test Pool
   useEffect(() => {
     async function loadQuestions() {
-      if (!exam) return;
+      if (!user) return;
       try {
-        const fetched = await getQuestions({
-          exam: exam === "NEET" ? "NEET" : "JEE Main",
-          subject: subjectParam,
-          chapter: chapterParam,
-          difficulty: difficultyParam,
-          limit: countParam,
+        const response = await fetch("/api/test-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            duration: durationParam,
+            count: countParam,
+            subject: subjectParam,
+            chapter: chapterParam,
+            difficulty: difficultyParam,
+          }),
         });
 
-        if (!fetched.length) {
+        if (!response.ok) {
+          throw new Error(`Failed to load test session: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data.questions?.length) {
           alert("No questions found.");
           return;
         }
 
-        const shuffled = [...fetched].sort(() => Math.random() - 0.5);
-        setQuestions(shuffled);
+        setExam(data.track || "JEE");
+        setQuestions(data.questions);
         setTimeLeft(durationParam * 60);
-
-        if (user) {
-          const session = await createTestSession({
-            userId: user.id,
-            exam: exam === "NEET" ? "NEET" : "JEE Main",
-            subjects: [subjectParam],
-            chapters: [chapterParam],
-            difficulty: difficultyParam,
-            questions: shuffled,
-            duration: durationParam,
-          });
-          setSessionId(session.id);
-        }
+        setSessionId(data.sessionId || null);
       } catch (err) {
         console.error(err);
         alert("Failed to load questions.");
@@ -240,88 +220,36 @@ function TestSessionContent() {
     }
     loadQuestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectParam, difficultyParam, countParam, durationParam, user, exam]);
+  }, [subjectParam, chapterParam, difficultyParam, countParam, durationParam, user]);
 
   const handleSubmit = useCallback(async () => {
     if (finishing) return;
     setFinishing(true);
     try {
-      let correct = 0;
-      const attempted = Object.keys(answers).length;
-      let wrong = 0;
-      let score = 0;
-      let totalMarks = 0;
-
-      questions.forEach((question) => {
-        const result = calculateQuestionScore(question, answers[question.id], exam);
-        totalMarks += result.maxScore;
-        score += result.scoreDelta;
-
-        if (result.isCorrect) {
-          correct += 1;
-        } else if (result.attempted) {
-          wrong += 1;
-        }
-      });
-
-      const { data: attempt, error } = await supabase
-        .from("test_attempts")
-        .insert({
-          user_id: user.id,
-          session_id: sessionId || crypto.randomUUID(),
-          score: score,
-          total_marks: totalMarks,
-          correct_answers: correct,
-          wrong_answers: wrong,
-          attempted,
-          total_questions: questions.length,
-          duration_minutes: Number(searchParams.get("duration")) || 15,
-          time_taken_seconds: durationParam * 60 - timeLeft,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      setAttemptId(attempt.id);
-
-      const answerRows = questions.map((q) => ({
-        attempt_id: attempt.id,
-        question_id: q.id,
-        selected_option:
-          answers[q.id] !== undefined ? ["A", "B", "C", "D"][answers[q.id]] : null,
-        is_correct: answers[q.id] === q.correct,
-      }));
-
-      const { error: answerError } = await supabase
-        .from("user_answers")
-        .insert(answerRows);
-
-      if (answerError) throw answerError;
-
-      await updateGoalProgress(user.id, "TEST", 1);
-      await updateStreak(user.id);
-
-      const xpResponse = await fetch("/api/update", {
-        method: "POST",
+      const response = await fetch("/api/test-session", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          source: "test",
-          correctAnswers: correct,
-          totalQuestions: questions.length,
+          sessionId,
+          answers,
+          timeTakenSeconds: durationParam * 60 - timeLeft,
         }),
       });
 
-      const xpData = await xpResponse.json();
-//       console.log("TEST XP UPDATED 👉", xpData);
+      if (!response.ok) {
+        throw new Error(`Failed to submit test: ${response.status}`);
+      }
 
-      router.replace(`/test/result/${attempt.id}`);
+      const data = await response.json();
+
+      router.replace(`/test/result/${data.attemptId}`);
       clearInterval(timerRef.current);
     } catch (err) {
       console.error("SAVE ERROR 👉", err);
       alert(err.message);
       setFinishing(false);
     }
-  }, [answers, durationParam, exam, finishing, questions, router, searchParams, sessionId, timeLeft, user]);
+  }, [answers, durationParam, finishing, router, sessionId, timeLeft]);
 
   useEffect(() => {
     submitRef.current = handleSubmit;

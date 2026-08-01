@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 
 export default function ResultPage() {
   const { id } = useParams();
@@ -13,14 +12,20 @@ export default function ResultPage() {
 
   async function loadResult() {
     try {
-      const { data, error } = await supabase
-        .from("test_attempts")
-        .select("*")
-        .eq("id", id)
-        .single();
+      const res = await fetch(`/api/test-attempts/${id}`, {
+        cache: "no-store",
+      });
 
-      if (error) throw error;
-//       console.log("RESULT DATA 👉", data);
+      if (res.status === 404) {
+        setAttempt(null);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error("Failed to load result");
+      }
+
+      const data = await res.json();
       setAttempt(data);
     } catch (err) {
 //       console.log(err);

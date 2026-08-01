@@ -4,7 +4,6 @@ import Link from "next/link";
 import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase";
 import PageWrapper from "@/components/PageWrapper";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
@@ -39,11 +38,16 @@ export default function TestPage() {
   useEffect(() => {
     async function loadTrack() {
       if (!user) return;
-      const { data } = await supabase
-        .from("user_profiles")
-        .select("exam")
-        .eq("clerk_user_id", user.id)
-        .single();
+      const response = await fetch("/api/profile", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+
       if (data?.exam === "NEET") {
         setTrack("neet");
       } else {

@@ -1,9 +1,9 @@
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function createProfileIfNotExists(user) {
   const clerkUserId = user.id;
 
-  const { data: existing } = await supabase
+  const { data: existing } = await supabaseAdmin
     .from("user_profiles")
     .select("*")
     .eq("clerk_user_id", clerkUserId)
@@ -13,7 +13,7 @@ export async function createProfileIfNotExists(user) {
     return existing;
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from("user_profiles")
     .insert({
       clerk_user_id: clerkUserId,

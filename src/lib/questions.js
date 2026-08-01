@@ -143,6 +143,7 @@ export async function getQuestions({
   chapter,
   difficulty,
   limit = 20,
+  client = supabase,
 }) {
   try {
 //     console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
@@ -169,7 +170,7 @@ export async function getQuestions({
         subjectLimit = getDistribution(exam, limit)[sub] || Math.floor(limit / subjects.length);
       }
 
-      let query = supabase.from("questions").select(QUESTION_SELECT_FIELDS).eq("exam", exam);
+      let query = client.from("questions").select(QUESTION_SELECT_FIELDS).eq("exam", exam);
 
       // Subject filter
       if (sub === "Botany" || sub === "Zoology") {
@@ -207,7 +208,7 @@ export async function getQuestions({
 
       // Fallback 1: If no questions found with strict chapter filter, relax chapter filter and fetch from subject
       if (!data || data.length === 0) {
-        let fallbackQuery = supabase
+        let fallbackQuery = client
           .from("questions")
           .select(QUESTION_SELECT_FIELDS)
           .eq("exam", exam)
@@ -225,7 +226,7 @@ export async function getQuestions({
 
       // Fallback 2: If still no questions found, ignore difficulty too
       if (!data || data.length === 0) {
-        let anyQuery = supabase
+        let anyQuery = client
           .from("questions")
           .select(QUESTION_SELECT_FIELDS)
           .eq("exam", exam)

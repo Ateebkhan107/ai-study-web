@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase";
 
 export default function useRecentSessions() {
 
@@ -24,27 +23,17 @@ export default function useRecentSessions() {
   },[user]);
 
   async function loadSessions(){
+    try {
+      const response = await fetch("/api/study-sessions/recent", {
+        cache: "no-store",
+      });
 
-    const {data,error}=await supabase
-
-      .from("study_sessions")
-
-      .select("*")
-
-      .eq("clerk_user_id",user.id)
-
-      .order("started_at",{
-
-        ascending:false
-
-      })
-
-      .limit(5);
-
-    if(!error){
-
-      setSessions(data||[]);
-
+      if (response.ok) {
+        const data = await response.json();
+        setSessions(data.sessions || []);
+      }
+    } catch (error) {
+      // ignore and keep existing fallback behavior
     }
 
     setLoading(false);

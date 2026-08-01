@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 
 // PREPZII XP JOURNEY SYSTEM
@@ -94,7 +94,7 @@ function getLevel(xp) {
 export async function GET() {
 
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
 
     .from("user_xp")
 
@@ -113,6 +113,12 @@ export async function GET() {
       "xp",
       {
         ascending:false
+      }
+    )
+    .order(
+      "updated_at",
+      {
+        ascending:true
       }
     );
 

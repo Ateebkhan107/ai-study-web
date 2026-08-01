@@ -58,7 +58,37 @@ export async function savePYQAttempt(attempt) {
   const attemptData = await res.json();
 
   invalidateFetchCache((key) =>
-    String(key).startsWith("pyq-analytics:") || String(key).startsWith("pyq-overview:")
+    String(key).startsWith("pyq:") ||
+    String(key).startsWith("pyq-analytics:") ||
+    String(key).startsWith("pyq-overview:")
+  );
+
+  return attemptData;
+}
+
+export async function savePYQAttempts(attempts) {
+  const res = await fetch("/api/pyq-attempts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      attempts,
+    }),
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    console.log("SAVE ATTEMPTS ERROR:", error);
+    throw new Error(error.error || "Failed to save attempts");
+  }
+
+  const attemptData = await res.json();
+
+  invalidateFetchCache((key) =>
+    String(key).startsWith("pyq:") ||
+    String(key).startsWith("pyq-analytics:") ||
+    String(key).startsWith("pyq-overview:")
   );
 
   return attemptData;

@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { verifyWebhook } from "@clerk/nextjs/webhooks";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(req) {
   try {
-    // 1. Parse the payload message arriving from Clerk's security system
-    const payload = await req.json();
+    const payload = await verifyWebhook(req);
+
     const { data, type } = payload;
 
     // 2. Listen specifically for the "user.created" notification event
@@ -14,7 +15,7 @@ export async function POST(req) {
       const fullName = `${first_name || ""} ${last_name || ""}`.trim() || "New Student";
 
       // Keep the initial profile row aligned with the onboarding table used elsewhere.
-      const { error } = await supabase
+      const { error } = await supabaseAdmin
         .from("user_profiles")
         .upsert({
           clerk_user_id: id,

@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { Sparkles } from "lucide-react";
 
 export default function UserGreeting() {
@@ -12,18 +11,20 @@ export default function UserGreeting() {
   const [mounted, setMounted] = useState(false);
 
   async function loadProfile() {
-    const { data, error } = await supabase
-      .from("user_profiles")
-      .select("full_name")
-      .eq("clerk_user_id", user.id)
-      .single();
+    try {
+      const response = await fetch("/api/profile", {
+        cache: "no-store",
+      });
 
-    if (error) {
-//       console.log(error);
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+      setName(data.full_name || "");
+    } catch (error) {
       return;
     }
-
-    setName(data.full_name);
   }
 
   useEffect(() => {

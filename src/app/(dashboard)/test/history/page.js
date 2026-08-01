@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
@@ -13,20 +12,21 @@ export default function HistoryPage() {
   const [loading, setLoading] = useState(true);
 
   async function load() {
-    const { data, error } = await supabase
-      .from("test_attempts")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", {
-        ascending: false,
+    try {
+      const response = await fetch("/api/test-attempts", {
+        cache: "no-store",
       });
 
-    if (error) {
-//       console.log(error);
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+      setTests(data.tests || []);
+    } catch (error) {
       return;
     }
 
-    setTests(data);
     setLoading(false);
   }
 

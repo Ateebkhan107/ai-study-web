@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { CheckCircle2, Circle, Sparkles, Target, Zap } from "lucide-react";
@@ -11,81 +10,29 @@ export default function DailyGoals() {
   const pathname = usePathname();
 
   const [goals, setGoals] = useState([]);
-  const [track, setTrack] = useState(null);
-
-  // =============================
-  // LOAD USER EXAM
-  // =============================
-
-  useEffect(() => {
-    if (!user) return;
-
-    async function loadUser() {
-      const { data } = await supabase
-        .from("user_profiles")
-        .select("exam")
-        .eq("clerk_user_id", user.id)
-        .single();
-
-      setTrack(data?.exam || "JEE");
-    }
-
-    loadUser();
-  }, [user]);
 
   // =============================
   // LOAD DAILY GOALS
   // =============================
 
   useEffect(() => {
-    if (!track || !user) return;
+    if (!user) return;
 
     async function loadGoals() {
-      const today = new Date().toISOString().split("T")[0];
+      try {
+        const response = await fetch("/api/daily-goals", {
+          cache: "no-store",
+        });
 
-      // 1. Fetch active daily goals
-      const { data: goalsData, error: goalsError } = await supabase
-        .from("daily_goals")
-        .select("*")
-        .eq("is_active", true)
-        .in("target", [track, "ALL"])
-        .order("created_at", { ascending: false });
+        if (!response.ok) {
+          return;
+        }
 
-      if (goalsError) {
-//         console.log("Daily goals error:", goalsError);
+        const data = await response.json();
+        setGoals(data.goals || []);
+      } catch (error) {
         return;
       }
-      
-      const goalsList = goalsData || [];
-      if (goalsList.length === 0) {
-        setGoals([]);
-        return;
-      }
-
-      const goalIds = goalsList.map(g => g.id);
-
-      // 2. Fetch only THIS user's progress for TODAY
-      const { data: progressData, error: progressError } = await supabase
-        .from("user_daily_goals")
-        .select("goal_id, progress, completed")
-        .eq("user_id", user.id)
-        .eq("goal_date", today)
-        .in("goal_id", goalIds);
-
-      if (progressError) {
-//          console.log("Progress error:", progressError);
-      }
-
-      const formatted = goalsList.map((goal) => {
-        const pData = progressData?.find(p => p.goal_id === goal.id);
-        return {
-          ...goal,
-          progress: pData?.progress || 0,
-          completed: pData?.completed || false,
-        };
-      });
-
-      setGoals(formatted);
     }
 
     loadGoals();
@@ -97,7 +44,7 @@ export default function DailyGoals() {
     return () => {
       window.removeEventListener("focus", handleFocus);
     };
-  }, [track, user?.id, pathname]);
+  }, [user?.id, pathname]);
 
   const completed = goals.filter((g) => g.completed).length;
 

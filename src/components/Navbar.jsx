@@ -8,7 +8,6 @@ import { useUser } from "@clerk/nextjs";
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
-import { supabase } from "@/lib/supabaseClient";
 import { Moon, Sun } from "lucide-react";
 
 const navItems = [
@@ -36,49 +35,29 @@ export default function Navbar() {
     if (!user) return;
 
     async function loadUserData() {
-      // -----------------------------
-      // Load User Exam
-      // -----------------------------
-      const { data: profile, error: profileError } = await supabase
-        .from("user_profiles")
-        .select("exam")
-        .eq("clerk_user_id", user.id)
-        .maybeSingle();
+      try {
+        const [profileRes, subscriptionRes] = await Promise.all([
+          fetch("/api/profile", { cache: "no-store" }),
+          fetch("/api/subscription", { cache: "no-store" }),
+        ]);
 
-      if (profileError) {
-//         console.log("Profile Error:", profileError);
-      }
+        if (profileRes.ok) {
+          const profile = await profileRes.json();
+          const exam = profile?.exam || profile?.current_track?.toUpperCase();
 
-      if (profile?.exam) {
-        setTrack(profile.exam.toUpperCase());
-      }
+          if (exam) {
+            setTrack(String(exam).toUpperCase());
+          }
+        }
 
-      // -----------------------------
-      // Load Subscription
-      // -----------------------------
-      const {
-        data: subscription,
-        error: subscriptionError,
-      } = await supabase
-        .from("subscriptions")
-        .select("*")
-        .eq("clerk_user_id", user.id)
-        .eq("status", "active")
-        .maybeSingle();
-
-//       console.log("========== PRO DEBUG ==========");
-//       console.log("Current Clerk User:", user.id);
-//       console.log("Subscription:", subscription);
-//       console.log("Subscription Error:", subscriptionError);
-//       console.log("===============================");
-
-      if (
-        subscription &&
-        subscription.expires_at &&
-        new Date(subscription.expires_at) > new Date()
-      ) {
-        setIsPro(true);
-      } else {
+        if (subscriptionRes.ok) {
+          const subscriptionData = await subscriptionRes.json();
+          setIsPro(Boolean(subscriptionData?.isPro));
+        } else {
+          setIsPro(false);
+        }
+      } catch (error) {
+        console.error("Failed to load navbar user data:", error);
         setIsPro(false);
       }
     }

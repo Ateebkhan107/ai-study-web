@@ -1,5 +1,3 @@
-import { supabase } from "@/lib/supabase";
-
 function normalizeQuestionId(questionId) {
   if (questionId === null || questionId === undefined || questionId === "") {
     return null;
@@ -15,18 +13,20 @@ function normalizeQuestionId(questionId) {
 export async function getBookmarks(userId) {
   if (!userId) return [];
 
-  const { data, error } = await supabase
-    .from("pyq_bookmarks")
-    .select("question_id")
-    .eq("user_id", userId);
+  try {
+    const res = await fetch("/api/pyq-bookmarks", {
+      cache: "no-store",
+    });
 
-  if (error) {
-//     console.log("GET BOOKMARKS ERROR");
-//     console.log(JSON.stringify(error, null, 2));
+    if (!res.ok) {
+      throw new Error("Failed to load bookmarks");
+    }
+
+    const data = await res.json();
+    return data?.questionIds || [];
+  } catch {
     return [];
   }
-
-  return data.map((b) => String(b.question_id));
 }
 
 // ===============================
@@ -39,20 +39,21 @@ export async function isBookmarked(userId, questionId) {
   questionId = normalizeQuestionId(questionId);
   if (!questionId) return false;
 
-  const { data, error } = await supabase
-    .from("pyq_bookmarks")
-    .select("id")
-    .eq("user_id", userId)
-    .eq("question_id", questionId)
-    .maybeSingle();
+  try {
+    const params = new URLSearchParams({ questionId });
+    const res = await fetch(`/api/pyq-bookmarks?${params.toString()}`, {
+      cache: "no-store",
+    });
 
-  if (error) {
-//     console.log("CHECK BOOKMARK ERROR");
-//     console.log(JSON.stringify(error, null, 2));
+    if (!res.ok) {
+      throw new Error("Failed to check bookmark");
+    }
+
+    const data = await res.json();
+    return Boolean(data?.bookmarked);
+  } catch {
     return false;
   }
-
-  return !!data;
 }
 
 // ===============================
@@ -65,28 +66,23 @@ export async function saveBookmark(userId, questionId) {
   questionId = normalizeQuestionId(questionId);
   if (!questionId) return false;
 
-  console.log("Saving bookmark:", {
-    user_id: userId,
-    question_id: questionId,
-    type: typeof questionId,
-  });
-
-  const { error } = await supabase
-    .from("pyq_bookmarks")
-    .insert([
-      {
-        user_id: userId,
-        question_id: questionId,
+  try {
+    const res = await fetch("/api/pyq-bookmarks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    ]);
+      body: JSON.stringify({ questionId }),
+    });
 
-  if (error) {
-//     console.log("SAVE BOOKMARK ERROR");
-//     console.log(JSON.stringify(error, null, 2));
+    if (!res.ok) {
+      throw new Error("Failed to save bookmark");
+    }
+
+    return true;
+  } catch {
     return false;
   }
-
-  return true;
 }
 
 // ===============================
@@ -99,19 +95,23 @@ export async function removeBookmark(userId, questionId) {
   questionId = normalizeQuestionId(questionId);
   if (!questionId) return false;
 
-  const { error } = await supabase
-    .from("pyq_bookmarks")
-    .delete()
-    .eq("user_id", userId)
-    .eq("question_id", questionId);
+  try {
+    const res = await fetch("/api/pyq-bookmarks", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ questionId }),
+    });
 
-  if (error) {
-//     console.log("REMOVE BOOKMARK ERROR");
-//     console.log(JSON.stringify(error, null, 2));
+    if (!res.ok) {
+      throw new Error("Failed to remove bookmark");
+    }
+
+    return true;
+  } catch {
     return false;
   }
-
-  return true;
 }
 
 // ===============================
@@ -123,12 +123,6 @@ export async function toggleBookmark(userId, questionId) {
 
   questionId = normalizeQuestionId(questionId);
   if (!questionId) return false;
-
-  console.log("Toggle:", {
-    user_id: userId,
-    question_id: questionId,
-    type: typeof questionId,
-  });
 
   const bookmarked = await isBookmarked(userId, questionId);
 

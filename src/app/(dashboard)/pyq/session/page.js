@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { getPYQ, savePYQAttempt } from "@/lib/pyq";
+import { getPYQ, savePYQAttempts } from "@/lib/pyq";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
@@ -222,59 +222,27 @@ export default function PYQSessionPage() {
     setCurrentIndex((i) => Math.max(i - 1, 0));
   }, []);
 
-  function checkAnswer(question, selected) {
-    if (!selected) return false;
-    const type = question.question_type || "MCQ";
-    if (type === "MCQ") {
-      return String(question.correct_option).toLowerCase() === String(selected).toLowerCase();
-    }
-    if (type === "MULTIPLE_CORRECT") {
-      if (!Array.isArray(selected) || !Array.isArray(question.correct_options)) return false;
-      const selectedSorted = [...selected].map((s) => String(s).toLowerCase()).sort().join(",");
-      const correctSorted = [...question.correct_options].map((s) => String(s).toLowerCase()).sort().join(",");
-      return selectedSorted === correctSorted;
-    }
-    if (type === "NUMERICAL") {
-      const numVal = Number(selected);
-      if (isNaN(numVal)) return false;
-      if (question.numerical_min !== undefined && question.numerical_min !== null &&
-          question.numerical_max !== undefined && question.numerical_max !== null) {
-        return numVal >= Number(question.numerical_min) && numVal <= Number(question.numerical_max);
-      }
-      return numVal === Number(question.numerical_answer);
-    }
-    return false;
-  }
-
   async function handleFinishDeck() {
     if (questions.length === 0 || finishing) return;
     setFinishing(true);
 
     const answeredQuestions = questions.filter((q) => answers[q.id]);
+    const submission = answeredQuestions.map((q) => ({
+      question_id: q.id,
+      selected_option: answers[q.id],
+      chapter: q.chapter,
+      subject: q.subject,
+      exam: q.exam,
+    }));
 
-    await Promise.allSettled(
-      answeredQuestions.map((q) => {
-        const rawOption = answers[q.id];
-        const isCorrect = checkAnswer(q, rawOption);
-        const type = q.question_type || "MCQ";
-        let formattedOption = "";
-        if (type === "MULTIPLE_CORRECT" && Array.isArray(rawOption)) {
-          formattedOption = rawOption.sort().join(",").toUpperCase();
-        } else if (type === "NUMERICAL") {
-          formattedOption = String(rawOption);
-        } else {
-          formattedOption = String(rawOption).toUpperCase();
-        }
-        return savePYQAttempt({
-          question_id: q.id,
-          selected_option: formattedOption,
-          is_correct: isCorrect,
-          chapter: q.chapter,
-          subject: q.subject,
-          exam: q.exam,
-        });
-      })
-    );
+    let gradingResults = [];
+
+    if (submission.length > 0) {
+      const response = await savePYQAttempts(submission);
+      gradingResults = Array.isArray(response?.results) ? response.results : [];
+    }
+
+    const resultMap = new Map(gradingResults.map((result) => [result.question_id, result]));
 
     let correct = 0;
     let wrong = 0;
@@ -286,7 +254,8 @@ export default function PYQSessionPage() {
       
       const selected = answers[q.id];
       const isAnswered = selected !== undefined && selected !== null && selected !== "";
-      const isCorrect = isAnswered && checkAnswer(q, selected);
+      const serverResult = resultMap.get(q.id);
+      const isCorrect = isAnswered && Boolean(serverResult?.is_correct);
       if (isAnswered && isCorrect) {
         correct += 1;
         score += (Number(q.marks_positive) || 4);
@@ -311,15 +280,15 @@ export default function PYQSessionPage() {
         option_b_image: q.option_b_image,
         option_c_image: q.option_c_image,
         option_d_image: q.option_d_image,
-        correct_option: q.correct_option,
-        explanation: q.explanation,
-        explanation_image: q.explanation_image,
+        correct_option: serverResult?.correct_option ?? null,
+        explanation: serverResult?.explanation ?? null,
+        explanation_image: serverResult?.explanation_image ?? null,
         selected: selected || null,
         question_type: q.question_type || "MCQ",
-        numerical_answer: q.numerical_answer,
-        correct_options: q.correct_options,
-        numerical_min: q.numerical_min,
-        numerical_max: q.numerical_max,
+        numerical_answer: serverResult?.numerical_answer ?? null,
+        correct_options: serverResult?.correct_options ?? null,
+        numerical_min: serverResult?.numerical_min ?? null,
+        numerical_max: serverResult?.numerical_max ?? null,
       };
     });
 

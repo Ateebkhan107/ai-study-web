@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabaseClient";
 import { Target, Trophy, Flame } from "lucide-react";
 
 // Mapping for dynamic, colorful styling based on stat labels
@@ -64,66 +63,32 @@ export default function StatsCards() {
 
     async function loadStats() {
       try {
-        // ==========================
-        // USER XP
-        // ==========================
+        const response = await fetch("/api/dashboard-stats", {
+          cache: "no-store",
+        });
 
-        const { data: xpData } = await supabase
-          .from("user_xp")
-          .select("xp, pyq_solved, correct_answers, streak")
-          .eq("user_id", user.id)
-          .single();
-
-        // ==========================
-        // ACCURACY
-        // ==========================
-
-        let accuracy = 0;
-
-        if (xpData?.pyq_solved) {
-          accuracy = Math.round(
-            (xpData.correct_answers / xpData.pyq_solved) * 100
-          );
+        if (!response.ok) {
+          throw new Error(`Failed to load stats: ${response.status}`);
         }
 
-        // ==========================
-        // RANK
-        // ==========================
-
-        let rank = "--";
-
-        if (xpData) {
-          const { count } = await supabase
-            .from("user_xp")
-            .select("*", {
-              count: "exact",
-              head: true,
-            })
-            .gt("xp", xpData.xp);
-
-          rank = (count || 0) + 1;
-        }
-
-        // ==========================
-        // UPDATE STATS
-        // ==========================
+        const data = await response.json();
 
         setStats([
           {
             label: "Accuracy",
-            value: `${accuracy}%`,
+            value: `${data.accuracy || 0}%`,
             sub: "Your performance",
             icon: "◎", // Logic preserved, mapped to Lucide below
           },
           {
             label: "Rank",
-            value: `#${rank}`,
+            value: `#${data.rank || "--"}`,
             sub: "Based on XP",
             icon: "◇",
           },
           {
             label: "Study Streak",
-            value: `${xpData?.streak || 0}`,
+            value: `${data.streak || 0}`,
             sub: "Consecutive days"
           },
         ]);

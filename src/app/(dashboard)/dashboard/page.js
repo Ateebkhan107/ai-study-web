@@ -12,6 +12,9 @@ import { Sparkle, Star, TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
   const user = await currentUser();
+  if (!user) {
+    redirect("/sign-in");
+  }
   const profile = await getUserProfile(user.id);
 
   const activeTrackKey = profile?.exam === "NEET" ? "NEET" : "JEE";

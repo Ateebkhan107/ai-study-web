@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { useParams, useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
 import { Lightbulb } from "lucide-react";
@@ -15,30 +14,16 @@ export default function ReviewPage() {
 
   async function loadReview() {
     try {
-      const { data, error } = await supabase
-        .from("user_answers")
-        .select(`
-          id,
-          selected_option,
-          correct_option,
-          is_correct,
-          questions:question_id(
-            id,
-            question_text,
-            option_a,
-            option_b,
-            option_c,
-            option_d,
-            explanation,
-            subject,
-            chapter
-          )
-        `)
-        .eq("attempt_id", id);
-        
-      if (error) throw error;
-//       console.log("FULL REVIEW DATA 👉", data);
-      setAnswers(data);
+      const response = await fetch(`/api/test-attempts/${id}/review`, {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to load review: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setAnswers(data.answers || []);
     } catch (err) {
 //       console.log(err);
     }

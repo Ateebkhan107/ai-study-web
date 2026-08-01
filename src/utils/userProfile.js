@@ -1,11 +1,15 @@
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function getUserProfile(clerkUserId) {
-  const { data, error } = await supabase
+  if (!clerkUserId) {
+    return null;
+  }
+
+  const { data, error } = await supabaseAdmin
     .from("user_profiles")
     .select("*")
     .eq("clerk_user_id", clerkUserId)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error(error);

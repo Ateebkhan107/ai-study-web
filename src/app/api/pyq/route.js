@@ -1,5 +1,6 @@
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -37,8 +38,57 @@ const PYQ_SESSION_SELECT = `
   status
 `;
 
+const REVEAL_FIELDS = [
+  "correct_option",
+  "explanation",
+  "explanation_image",
+  "correct_options",
+  "numerical_answer",
+  "numerical_min",
+  "numerical_max",
+];
+
+function sanitizeQuestion(question, attemptedQuestionIds) {
+  if (attemptedQuestionIds.has(question.id)) {
+    return {
+      ...question,
+      answer_revealed: true,
+    };
+  }
+
+  const sanitized = {
+    ...question,
+    answer_revealed: false,
+  };
+
+  for (const field of REVEAL_FIELDS) {
+    sanitized[field] = null;
+  }
+
+  return sanitized;
+}
+
+async function getAttemptedQuestionIds(userId, questionIds) {
+  if (!userId || questionIds.length === 0) {
+    return new Set();
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from("pyq_attempts")
+    .select("question_id")
+    .eq("user_id", userId)
+    .in("question_id", questionIds);
+
+  if (error) {
+    throw error;
+  }
+
+  return new Set((data || []).map((attempt) => attempt.question_id));
+}
+
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
+  const { userId } = await auth();
 
   const exam = searchParams.get("exam");
   const subject = searchParams.get("subject");
@@ -52,12 +102,10 @@ export async function GET(req) {
   const paperCode = searchParams.get("paper_code");
   const examId = searchParams.get("exam_id");
 
-  const userId = searchParams.get("userId");
-
   if (mode === "mistakes") {
     if (!userId) return NextResponse.json([]);
 
-    const { data: attempts, error: attemptsError } = await supabase
+    const { data: attempts, error: attemptsError } = await supabaseAdmin
       .from("pyq_attempts")
       .select("question_id")
       .eq("user_id", userId)
@@ -72,7 +120,7 @@ export async function GET(req) {
 
     if (questionIds.length === 0) return NextResponse.json([]);
 
-    let mistakeQuery = supabase
+    let mistakeQuery = supabaseAdmin
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
       .eq("status", "PUBLISHED")
@@ -95,10 +143,13 @@ export async function GET(req) {
       return NextResponse.json({ error: "Failed to load mistake questions" }, { status: 500 });
     }
 
-    return NextResponse.json(mistakeQuestions || []);
+    const attemptedQuestionIds = new Set(questionIds);
+    return NextResponse.json(
+      (mistakeQuestions || []).map((question) => sanitizeQuestion(question, attemptedQuestionIds))
+    );
   }
 
-  let query = supabase
+  let query = supabaseAdmin
     .from("pyq_questions")
     .select(PYQ_SESSION_SELECT)
     .eq("status", "PUBLISHED")
@@ -140,5 +191,17 @@ export async function GET(req) {
     result = [...result].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
   }
 
-  return NextResponse.json(result);
+  try {
+    const attemptedQuestionIds = await getAttemptedQuestionIds(
+      userId,
+      result.map((question) => question.id)
+    );
+
+    return NextResponse.json(
+      result.map((question) => sanitizeQuestion(question, attemptedQuestionIds))
+    );
+  } catch (attemptsError) {
+    console.error("PYQ ATTEMPTS LOOKUP ERROR:", attemptsError.message);
+    return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
+  }
 }

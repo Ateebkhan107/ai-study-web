@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase";
 import PageWrapper from "@/components/PageWrapper";
 import { Atom, FlaskConical, Sigma, Dna } from "lucide-react";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
@@ -654,11 +653,15 @@ export default function PYQPage() {
   useEffect(() => {
     async function loadTrack() {
       if (!user) return;
-      const { data } = await supabase
-        .from("user_profiles")
-        .select("exam")
-        .eq("clerk_user_id", user.id)
-        .single();
+      const response = await fetch("/api/profile", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
       setTrack(data?.exam === "NEET" ? "neet" : "jee");
     }
     loadTrack();
@@ -671,21 +674,23 @@ export default function PYQPage() {
   useEffect(() => {
     let cancelled = false;
     async function loadSavedQuestions() {
-      if (!user) return;
-      const bms = await getBookmarks(user.id);
-      if (bms.length === 0) {
-        if (!cancelled) setSavedQuestions([]);
+      if (!user || !track) return;
+
+      const response = await fetch(
+        `/api/pyq-bookmarks?includeQuestions=true&track=${track}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
         return;
       }
-      const { data } = await supabase
-        .from("pyq_questions")
-        .select(SAVED_PYQ_SELECT_FIELDS)
-        .eq("status", "PUBLISHED")
-        .in("id", bms);
-      if (!cancelled && data) {
-        // filter by track if needed, or show all
-        const filtered = data.filter(q => track === "jee" ? q.exam !== "NEET" : q.exam === "NEET");
-        setSavedQuestions(filtered);
+
+      const data = await response.json();
+
+      if (!cancelled) {
+        setSavedQuestions(data.questions || []);
       }
     }
     loadSavedQuestions();

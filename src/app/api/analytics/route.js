@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 
@@ -52,7 +52,7 @@ try {
 
 
     const {data:pyqAttemptsRaw,error:pyqError} =
-    await supabase
+    await supabaseAdmin
     .from("pyq_attempts")
     .select("*, pyq_questions(exam)")
     .eq("user_id",userId);
@@ -76,7 +76,7 @@ try {
 
 
     const {data:testAttemptsRaw,error:testError} =
-    await supabase
+    await supabaseAdmin
     .from("test_attempts")
     .select("*, tests(exam), user_answers(questions(exam))")
     .eq("user_id",userId);
