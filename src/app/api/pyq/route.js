@@ -32,6 +32,8 @@ const PYQ_SESSION_SELECT = `
   numerical_answer,
   numerical_min,
   numerical_max,
+  question_number,
+  display_order,
   marks_positive,
   marks_negative,
   created_at,
@@ -123,7 +125,7 @@ export async function GET(req) {
     let mistakeQuery = supabaseAdmin
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
-      .eq("status", "PUBLISHED")
+      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
       .not("exam_id", "is", null)
       .in("id", questionIds);
 
@@ -152,7 +154,7 @@ export async function GET(req) {
   let query = supabaseAdmin
     .from("pyq_questions")
     .select(PYQ_SESSION_SELECT)
-    .eq("status", "PUBLISHED")
+    .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
     .not("exam_id", "is", null);
 
   if (examId) query = query.eq("exam_id", examId);
@@ -187,8 +189,17 @@ export async function GET(req) {
   if (mode === "random") {
     result = [...result].sort(() => Math.random() - 0.5);
   } else {
-    // Sort sequentially by created_at to preserve import sequence
-    result = [...result].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    result = [...result].sort((a, b) => {
+      const displayA = Number.isFinite(Number(a.display_order)) ? Number(a.display_order) : Number(a.question_number);
+      const displayB = Number.isFinite(Number(b.display_order)) ? Number(b.display_order) : Number(b.question_number);
+      if (displayA !== displayB) return displayA - displayB;
+
+      const numberA = Number(a.question_number) || 0;
+      const numberB = Number(b.question_number) || 0;
+      if (numberA !== numberB) return numberA - numberB;
+
+      return new Date(a.created_at) - new Date(b.created_at);
+    });
   }
 
   try {

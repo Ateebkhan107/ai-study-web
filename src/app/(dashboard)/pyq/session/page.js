@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempts } from "@/lib/pyq";
+import { canShowStructuredQuestionText, shouldShowQuestionImageFallback } from "@/lib/pyqDisplay";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
@@ -516,7 +517,7 @@ export default function PYQSessionPage() {
             </div>
 
             {/* Question image */}
-            {currentQuestion.question_image && (
+            {shouldShowQuestionImageFallback(currentQuestion) && (
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
@@ -525,7 +526,7 @@ export default function PYQSessionPage() {
               />
             )}
 
-            {currentQuestion.question && (
+            {canShowStructuredQuestionText(currentQuestion) && (
               <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2 whitespace-pre-wrap">
                 {currentQuestion.question}
               </p>

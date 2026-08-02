@@ -7,7 +7,7 @@ import Link from "next/link";
 import { 
   ArrowLeft, ArrowRight, Save, CheckCircle, XCircle, 
   AlertTriangle, Image as ImageIcon, Layout, Type, 
-  Loader2, RefreshCw, ZoomIn
+  Loader2, FileText, Trash2
 } from "lucide-react";
 
 export default function ReviewQueuePage() {
@@ -102,6 +102,13 @@ export default function ReviewQueuePage() {
 
   const handleReject = async () => {
     const success = await saveQuestion("REJECTED");
+    if (success && currentIndex < questions.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+    }
+  };
+
+  const handleNeedsReview = async () => {
+    const success = await saveQuestion("NEEDS_REVIEW");
     if (success && currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
     }
@@ -270,6 +277,14 @@ export default function ReviewQueuePage() {
             <button onClick={() => saveQuestion()} disabled={saving} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
               {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save
             </button>
+
+            <button onClick={handleSaveAndNext} disabled={saving} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+              <ArrowRight className="w-4 h-4" /> Save & Next
+            </button>
+
+            <button onClick={handleNeedsReview} disabled={saving} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200">
+              <AlertTriangle className="w-4 h-4" /> Needs Review
+            </button>
             
             <button onClick={handleReject} disabled={saving} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200">
               <XCircle className="w-4 h-4" /> Reject
@@ -354,6 +369,15 @@ export default function ReviewQueuePage() {
               <h3 className="font-bold flex items-center gap-2 mb-4"><Layout className="w-5 h-5" /> Metadata</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Question Number</label>
+                  <input
+                    type="number"
+                    value={formData.question_number || ""}
+                    onChange={e => handleInputChange('question_number', Number(e.target.value))}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  />
+                </div>
+                <div>
                   <label className="text-xs font-bold text-gray-500 mb-1 block">Subject</label>
                   <select 
                     value={formData.subject || ""} 
@@ -364,6 +388,20 @@ export default function ReviewQueuePage() {
                     <option value="Physics">Physics</option>
                     <option value="Chemistry">Chemistry</option>
                     <option value="Biology">Biology</option>
+                    <option value="Maths">Maths</option>
+                    <option value="Mathematics">Mathematics</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Question Type</label>
+                  <select 
+                    value={formData.question_type || "MCQ"} 
+                    onChange={e => handleInputChange('question_type', e.target.value)}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  >
+                    <option value="MCQ">MCQ</option>
+                    <option value="NUMERICAL">NUMERICAL</option>
+                    <option value="MULTIPLE_CORRECT">MULTIPLE_CORRECT</option>
                   </select>
                 </div>
                 <div>
@@ -384,6 +422,46 @@ export default function ReviewQueuePage() {
                     type="text" 
                     value={formData.chapter || ""}
                     onChange={e => handleInputChange("chapter", e.target.value)}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Numerical Answer</label>
+                  <input 
+                    type="number"
+                    value={formData.numerical_answer ?? ""}
+                    onChange={e => handleInputChange("numerical_answer", e.target.value === "" ? null : Number(e.target.value))}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Status</label>
+                  <select
+                    value={formData.status || "NEEDS_REVIEW"}
+                    onChange={e => handleInputChange('status', e.target.value)}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  >
+                    <option value="NEEDS_REVIEW">NEEDS_REVIEW</option>
+                    <option value="APPROVED">APPROVED</option>
+                    <option value="PUBLISHED">PUBLISHED</option>
+                    <option value="REJECTED">REJECTED</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Marks Positive</label>
+                  <input
+                    type="number"
+                    value={formData.marks_positive ?? 4}
+                    onChange={e => handleInputChange('marks_positive', Number(e.target.value))}
+                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 mb-1 block">Marks Negative</label>
+                  <input
+                    type="number"
+                    value={formData.marks_negative ?? 0}
+                    onChange={e => handleInputChange('marks_negative', Number(e.target.value))}
                     className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
                   />
                 </div>
@@ -420,6 +498,13 @@ export default function ReviewQueuePage() {
                         onChange={e => handleInputChange(`option_${opt}`, e.target.value)}
                         className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent mb-1"
                         placeholder={`Option ${opt.toUpperCase()}`}
+                      />
+                      <input
+                        type="text"
+                        value={formData[`option_${opt}_image`] || ""}
+                        onChange={e => handleInputChange(`option_${opt}_image`, e.target.value)}
+                        className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-xs bg-transparent"
+                        placeholder={`Option ${opt.toUpperCase()} image URL`}
                       />
                     </div>
                   </div>

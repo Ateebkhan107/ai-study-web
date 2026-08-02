@@ -6,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import { getPYQAnswers } from "@/lib/pyq";
+import { canShowStructuredQuestionText, shouldShowQuestionImageFallback } from "@/lib/pyqDisplay";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -315,7 +316,7 @@ export default function PYQResultsPage() {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    {q.question_image && (
+                    {shouldShowQuestionImageFallback(q) && (
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
@@ -323,7 +324,7 @@ export default function PYQResultsPage() {
                         style={{ filter: "url(#remove-orange)" }}
                       />
                     )}
-                    {q.question && (
+                    {canShowStructuredQuestionText(q) && (
                       <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
                         {q.question}
                       </p>
