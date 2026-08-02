@@ -110,5 +110,3 @@ export default async function DashboardPage() {
     </div>
   );
 }
-
-print ("hello world")
