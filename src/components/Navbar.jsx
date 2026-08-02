@@ -14,6 +14,7 @@ const navItems = [
   { name: "Dashboard", href: "/dashboard" },
   { name: "Test", href: "/test" },
   { name: "PYQ", href: "/pyq" },
+  { name: "Community", href: "/community" },
   { name: "Analytics", href: "/analytics" },
   { name: "Profile", href: "/profile" },
 ];

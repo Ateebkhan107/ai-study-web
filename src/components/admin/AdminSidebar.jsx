@@ -19,7 +19,8 @@ import {
   FileCheck,
   Brain,
   BarChart,
-  ClipboardList
+  ClipboardList,
+  MessageSquare
 } from "lucide-react";
 import { useState } from "react";
 import { useClerk } from "@clerk/nextjs";
@@ -48,6 +49,7 @@ export default function AdminSidebar() {
     { name: "Notifications", href: "/admin/notifications", icon: Bell },
     { name: "Badges", href: "/admin/badges", icon: Award },
     { name: "Analytics", href: "/admin/analytics", icon: BarChart },
+    { name: "Community", href: "/admin/community", icon: MessageSquare },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 

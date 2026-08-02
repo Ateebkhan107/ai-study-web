@@ -8,6 +8,7 @@ const isProtectedRoute = createRouteMatcher([
   "/pyq(.*)",
   "/test(.*)",
   "/pro(.*)",
+  "/community(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
