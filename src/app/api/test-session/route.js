@@ -284,6 +284,8 @@ export async function POST(request) {
       exam: question.exam,
       subject: question.subject,
       chapter: question.chapter,
+      topic: question.topic,
+      question_type: question.question_type,
       difficulty: question.difficulty,
       text: question.text,
       question_image: question.question_image,
@@ -352,6 +354,7 @@ export async function PUT(request) {
           id,
           exam,
           correct_option,
+          question_type,
           marks,
           negative_marks
         )
@@ -368,6 +371,7 @@ export async function PUT(request) {
         id: row.question_id,
         exam: row.questions?.exam,
         correct_option: row.questions?.correct_option,
+        question_type: row.questions?.question_type || "MCQ",
         marks: row.questions?.marks,
         negative_marks: row.questions?.negative_marks,
       }))
@@ -387,14 +391,24 @@ export async function PUT(request) {
     let totalMarks = 0;
 
     const answerRows = questionRows.map((question) => {
-      const rawSelectedIndex = answers[String(question.id)];
-      const selectedIndex = Number(rawSelectedIndex);
-      const attemptedQuestion =
-        Number.isInteger(selectedIndex) &&
-        selectedIndex >= 0 &&
-        selectedIndex < LETTERS.length;
-      const selectedOption = attemptedQuestion ? LETTERS[selectedIndex] : null;
-      const isCorrect = attemptedQuestion && selectedOption === question.correct_option;
+      const rawAnswer = answers[String(question.id)];
+      const isNumerical = question.question_type === "Numerical";
+      const selectedIndex = Number(rawAnswer);
+      const attemptedQuestion = isNumerical
+        ? rawAnswer !== undefined && String(rawAnswer).trim() !== ""
+        : Number.isInteger(selectedIndex) && selectedIndex >= 0 && selectedIndex < LETTERS.length;
+      const selectedOption = !attemptedQuestion
+        ? null
+        : isNumerical
+        ? String(rawAnswer).trim()
+        : LETTERS[selectedIndex];
+      const selectedNumber = Number(selectedOption);
+      const correctNumber = Number(question.correct_option);
+      const isCorrect = attemptedQuestion && (isNumerical
+        ? (Number.isFinite(selectedNumber) && Number.isFinite(correctNumber)
+          ? Math.abs(selectedNumber - correctNumber) <= 1e-9
+          : selectedOption === String(question.correct_option).trim())
+        : selectedOption === question.correct_option);
       const marking = getQuestionMarking(
         {
           marks: question.marks,

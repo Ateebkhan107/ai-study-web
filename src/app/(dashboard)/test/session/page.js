@@ -6,6 +6,7 @@ import Logo from "@/components/Logo";
 import { useUser } from "@clerk/nextjs";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
+import MathText from "@/components/MathText";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -44,7 +45,8 @@ const QuestionPalette = memo(function QuestionPalette({
       </p>
       <div className="grid grid-cols-5 gap-2">
         {questions.map((question, index) => {
-          const isAnswered = answers[question.id] !== undefined;
+          const value = answers[question.id];
+          const isAnswered = value !== undefined && String(value).trim() !== "";
           const isActive = currentIdx === index;
 
           return (
@@ -85,6 +87,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
   totalQuestions,
   selectedAnswer,
   onSelect,
+  onNumericalChange,
   onClear,
 }) {
   if (!activeQuestion) return null;
@@ -103,10 +106,25 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         </span>
       </div>
 
-      <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-8">
+      <MathText className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-8">
         {activeQuestion.text}
-      </p>
+      </MathText>
 
+      {activeQuestion.question_type === "Numerical" ? (
+        <div className="max-w-xl">
+          <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
+            Enter numerical answer
+          </label>
+          <input
+            type="text"
+            inputMode="decimal"
+            value={selectedAnswer ?? ""}
+            onChange={(event) => onNumericalChange(activeQuestion.id, event.target.value)}
+            className="w-full rounded-2xl border-2 border-slate-200 bg-white/70 px-5 py-4 text-lg font-semibold text-slate-900 outline-none transition focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800/40 dark:text-white"
+            placeholder="Enter answer"
+          />
+        </div>
+      ) : (
       <div className="space-y-3">
         {activeQuestion.options.map((option, optionIndex) => {
           const isSelected = selectedAnswer === optionIndex;
@@ -132,11 +150,12 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
               >
                 {LETTERS[optionIndex]}
               </span>
-              <span className="text-base font-medium">{option}</span>
+              <MathText className="text-base font-medium">{option}</MathText>
             </button>
           );
         })}
       </div>
+      )}
 
       {selectedAnswer !== undefined && (
         <button
@@ -276,6 +295,10 @@ function TestSessionContent() {
     setAnswers((prev) => ({ ...prev, [qId]: optIdx }));
   }, []);
 
+  const handleNumericalChange = useCallback((qId, value) => {
+    setAnswers((prev) => ({ ...prev, [qId]: value }));
+  }, []);
+
   const handleClearSelection = useCallback((qId) => {
     setAnswers((prev) => {
       const next = { ...prev };
@@ -407,6 +430,7 @@ function TestSessionContent() {
             totalQuestions={questions.length}
             selectedAnswer={activeQ ? answers[activeQ.id] : undefined}
             onSelect={handleSelect}
+            onNumericalChange={handleNumericalChange}
             onClear={handleClearSelection}
           />
 

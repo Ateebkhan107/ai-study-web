@@ -1,5 +1,7 @@
 "use client";
 
+import MathText from "@/components/MathText";
+
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
@@ -92,7 +94,7 @@ export default function ReviewPage() {
                 </div>
 
                 <h2 className="text-xl font-semibold mb-6 text-slate-900 dark:text-white">
-                  {q.question_text}
+                  <MathText>{q.question_text}</MathText>
                 </h2>
 
                 <div className="space-y-3">
@@ -122,7 +124,7 @@ export default function ReviewPage() {
                         >
                           {opt.key}
                         </div>
-                        <span className="font-medium">{opt.text}</span>
+                        <MathText className="font-medium">{opt.text}</MathText>
                       </div>
                     );
                   })}
@@ -155,9 +157,9 @@ export default function ReviewPage() {
                     <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                       <Lightbulb className="w-4 h-4 text-indigo-500" /> Explanation
                     </p>
-                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <MathText className="text-slate-700 dark:text-slate-300 leading-relaxed">
                       {q.explanation}
-                    </p>
+                    </MathText>
                   </div>
                 )}
               </div>

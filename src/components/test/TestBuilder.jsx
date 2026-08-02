@@ -63,20 +63,35 @@ const SUBJECTS = {
     icon: <Calculator className="w-6 h-6" />,
     color: "purple",
     chapters: [
-      "Sets, Relations & Functions",
-      "Complex Numbers & Quadratic Equations",
-      "Matrices & Determinants",
-      "Permutations & Combinations",
-      "Binomial Theorem & Sequences (AP, GP)",
-      "Trigonometry & Inverse Trigonometric Functions",
-      "Straight Lines & Circles",
-      "Conic Sections (Parabola, Ellipse, Hyperbola)",
-      "Limits, Continuity & Differentiability",
-      "Application of Derivatives (MOD & Maxima-Minima)",
-      "Indefinite & Definite Integrals",
-      "Area Under Curves & Differential Equations",
-      "Vector Algebra & 3D Geometry",
-      "Statistics & Probability",
+      "Sets",
+      "Relations and Functions – I",
+      "Trigonometric Functions",
+      "Principle of Mathematical Induction",
+      "Complex Numbers and Quadratic Equations",
+      "Linear Inequalities",
+      "Permutations and Combinations",
+      "Binomial Theorem",
+      "Sequences and Series",
+      "Straight Lines",
+      "Conic Sections",
+      "Introduction to Three Dimensional Geometry",
+      "Limits and Derivatives",
+      "Mathematical Reasoning",
+      "Statistics",
+      "Probability – I",
+      "Relations and Functions – II",
+      "Inverse Trigonometric Functions",
+      "Matrices",
+      "Determinants",
+      "Continuity and Differentiability",
+      "Application of Derivatives",
+      "Integrals",
+      "Application of Integrals",
+      "Differential Equations",
+      "Vector Algebra",
+      "Three Dimensional Geometry",
+      "Linear Programming",
+      "Probability – II",
     ],
   },
   Biology: {
@@ -165,7 +180,14 @@ export default function TestBuilder({ track = "jee" }) {
         const parsedCh = JSON.parse(savedChapters);
         if (activeTrack === "jee") delete parsedCh.Biology;
         if (activeTrack === "neet") delete parsedCh.Maths;
-        setSelectedChapters(parsedCh);
+        const sanitizedChapters = Object.fromEntries(
+          Object.entries(parsedCh).map(([subject, selected]) => {
+            const allowed = new Set(SUBJECTS[subject]?.chapters || []);
+            return [subject, Array.isArray(selected) ? selected.filter((chapter) => allowed.has(chapter)) : []];
+          })
+        );
+        setSelectedChapters(sanitizedChapters);
+        sessionStorage.setItem("tb_chapters", JSON.stringify(sanitizedChapters));
       }
 
       const savedDuration = sessionStorage.getItem("tb_duration");

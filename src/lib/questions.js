@@ -122,6 +122,8 @@ const QUESTION_SELECT_FIELDS = `
   subject,
   chapter,
   difficulty,
+  topic,
+  question_type,
   question_text,
   question_image,
   option_a,
@@ -170,7 +172,10 @@ export async function getQuestions({
         subjectLimit = getDistribution(exam, limit)[sub] || Math.floor(limit / subjects.length);
       }
 
-      let query = client.from("questions").select(QUESTION_SELECT_FIELDS).eq("exam", exam);
+      let query = client.from("questions").select(QUESTION_SELECT_FIELDS);
+      query = exam === "JEE Main"
+        ? query.in("exam", ["JEE Main", "JEE"])
+        : query.eq("exam", exam);
 
       // Subject filter
       if (sub === "Botany" || sub === "Zoology") {
@@ -208,11 +213,11 @@ export async function getQuestions({
 
       // Fallback 1: If no questions found with strict chapter filter, relax chapter filter and fetch from subject
       if (!data || data.length === 0) {
-        let fallbackQuery = client
-          .from("questions")
-          .select(QUESTION_SELECT_FIELDS)
-          .eq("exam", exam)
-          .eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+        let fallbackQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
+        fallbackQuery = exam === "JEE Main"
+          ? fallbackQuery.in("exam", ["JEE Main", "JEE"])
+          : fallbackQuery.eq("exam", exam);
+        fallbackQuery = fallbackQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
 
         if (difficulty && difficulty.toLowerCase() !== "mixed") {
           fallbackQuery = fallbackQuery.eq("difficulty", fixDifficulty(difficulty));
@@ -226,11 +231,11 @@ export async function getQuestions({
 
       // Fallback 2: If still no questions found, ignore difficulty too
       if (!data || data.length === 0) {
-        let anyQuery = client
-          .from("questions")
-          .select(QUESTION_SELECT_FIELDS)
-          .eq("exam", exam)
-          .eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+        let anyQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
+        anyQuery = exam === "JEE Main"
+          ? anyQuery.in("exam", ["JEE Main", "JEE"])
+          : anyQuery.eq("exam", exam);
+        anyQuery = anyQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
         const anyRes = await anyQuery;
         if (anyRes.data && anyRes.data.length > 0) {
           data = anyRes.data;
@@ -253,6 +258,8 @@ export async function getQuestions({
       subject: q.subject,
       chapter: q.chapter,
       difficulty: q.difficulty,
+      topic: q.topic,
+      question_type: q.question_type || "MCQ",
       text: q.question_text,
       question_image: q.question_image,
       options: [q.option_a, q.option_b, q.option_c, q.option_d],
@@ -263,6 +270,7 @@ export async function getQuestions({
         q.option_d_image,
       ],
       correct: ["A", "B", "C", "D"].indexOf(q.correct_option),
+      correct_value: q.correct_option,
       marks: q.marks || 4,
       negative_marks: q.negative_marks || -1,
     }));
