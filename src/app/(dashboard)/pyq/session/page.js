@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempts } from "@/lib/pyq";
@@ -9,6 +9,7 @@ import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
+import MathText from "@/components/MathText";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -35,6 +36,159 @@ const RemoveOrangeFilter = () => (
   </svg>
 );
 
+const PALETTE_LEGEND = [
+  {
+    key: "answered",
+    label: "Answered",
+    className: "bg-emerald-600 border-emerald-600 text-white",
+  },
+  {
+    key: "current",
+    label: "Current",
+    className: "bg-indigo-600 border-indigo-600 text-white",
+  },
+  {
+    key: "visited",
+    label: "Visited",
+    className: "bg-amber-100 border-amber-300 text-amber-700",
+  },
+  {
+    key: "notVisited",
+    label: "Not Visited",
+    className: "bg-slate-100 border-slate-200 text-slate-500",
+  },
+];
+
+const compactImageClassName =
+  "max-h-[55vh] w-auto max-w-full rounded-lg border border-slate-200/70 object-contain dark:border-slate-700/60";
+
+const PaletteButton = memo(function PaletteButton({
+  label,
+  isActive,
+  isAnswered,
+  isVisited,
+  onClick,
+}) {
+  let stateClassName =
+    "border-slate-200 bg-white text-slate-500 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400";
+
+  if (isAnswered) {
+    stateClassName =
+      "border-emerald-600 bg-emerald-600 text-white shadow-sm shadow-emerald-600/20";
+  } else if (isVisited) {
+    stateClassName =
+      "border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-500/50 dark:bg-amber-500/10 dark:text-amber-300";
+  }
+
+  if (isActive) {
+    stateClassName =
+      "border-indigo-600 bg-indigo-600 text-white shadow-sm shadow-indigo-600/25 ring-2 ring-indigo-200 dark:ring-indigo-500/30";
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      className={`flex h-9 w-9 items-center justify-center rounded-[10px] border text-[12px] font-semibold transition-colors ${stateClassName}`}
+    >
+      {label}
+    </button>
+  );
+});
+
+const QuestionPalette = memo(function QuestionPalette({
+  questions,
+  answers,
+  currentIndex,
+  visitedQuestionIds,
+  mode,
+  onSelectQuestion,
+}) {
+  return (
+    <div className="rounded-2xl border border-slate-200/70 bg-white/95 p-3 shadow-sm dark:border-slate-700/60 dark:bg-[#0f172a]/95">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+          Question Palette
+        </p>
+        <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+          {questions.length} Qs
+        </span>
+      </div>
+
+      <div className="grid max-h-[calc(100vh-11.5rem)] grid-cols-5 gap-2 overflow-y-auto pr-1">
+        {questions.map((q, idx) => {
+          const answer = answers[q.id];
+          const isAnswered = answer !== undefined && answer !== null && String(answer).trim() !== "";
+          const isVisited = visitedQuestionIds.has(q.id);
+
+          return (
+            <PaletteButton
+              key={q.id}
+              label={mode === "full" ? originalQuestionNumber(q, idx + 1) : idx + 1}
+              isActive={currentIndex === idx}
+              isAnswered={isAnswered}
+              isVisited={isVisited}
+              onClick={() => onSelectQuestion(idx)}
+            />
+          );
+        })}
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-1.5 border-t border-slate-200/70 pt-3 text-[11px] text-slate-600 dark:border-slate-700/60 dark:text-slate-400">
+        {PALETTE_LEGEND.map((item) => (
+          <div key={item.key} className="flex items-center gap-2">
+            <span className={`h-3 w-3 rounded-[4px] border ${item.className}`} />
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
+const QuestionOption = memo(function QuestionOption({
+  optionKey,
+  index,
+  optionText,
+  optionImage,
+  isSelected,
+  onSelect,
+}) {
+  return (
+    <button
+      onClick={() => onSelect(optionKey)}
+      className={`group flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left transition-colors ${
+        isSelected
+          ? "border-indigo-600 bg-indigo-50 text-indigo-950 shadow-sm dark:bg-indigo-500/10 dark:text-indigo-100"
+          : "border-slate-200/70 bg-white text-slate-700 hover:border-indigo-300 dark:border-slate-700/60 dark:bg-slate-900/40 dark:text-slate-300 dark:hover:border-indigo-500/40"
+      }`}
+    >
+      <span
+        className={`mt-0.5 flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-md border text-[11px] font-bold ${
+          isSelected
+            ? "border-indigo-600 bg-indigo-600 text-white"
+            : "border-slate-300 text-slate-500 dark:border-slate-600 dark:text-slate-400"
+        }`}
+      >
+        {LETTERS[index]}
+      </span>
+      <span className="min-w-0 flex-1">
+        {optionImage ? (
+          <img
+            src={optionImage}
+            alt={`Option ${LETTERS[index]} visual`}
+            className={compactImageClassName}
+            loading="lazy"
+            decoding="async"
+            style={{ filter: "url(#remove-orange)" }}
+          />
+        ) : (
+          <MathText className="text-[14px] leading-5.5 text-inherit">{optionText}</MathText>
+        )}
+      </span>
+    </button>
+  );
+});
+
 export default function PYQSessionPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -48,6 +202,7 @@ export default function PYQSessionPage() {
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
+  const [visitedQuestionIds, setVisitedQuestionIds] = useState(() => new Set());
   
   // Timer state for Full Paper mode (180 mins = 10800 secs)
   const [timeLeft, setTimeLeft] = useState(180 * 60);
@@ -156,6 +311,7 @@ export default function PYQSessionPage() {
 
         setCurrentIndex(0);
         setAnswers({});
+        setVisitedQuestionIds(new Set(combined[0]?.id ? [combined[0].id] : []));
       } catch (error) {
         console.error("Failed to load PYQ session:", error);
         setLoadError("Failed to load questions. Please try again.");
@@ -173,8 +329,25 @@ export default function PYQSessionPage() {
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
   const displayedQuestionNumber = mode === "full" ? originalQuestionNumber(currentQuestion, currentIndex + 1) : currentIndex + 1;
-  const answeredCount = Object.keys(answers).length;
+  const answeredCount = useMemo(
+    () =>
+      Object.values(answers).filter(
+        (value) => value !== undefined && value !== null && String(value).trim() !== ""
+      ).length,
+    [answers]
+  );
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
+
+  const markVisitedByIndex = useCallback((index) => {
+    const questionId = questions[index]?.id;
+    if (!questionId) return;
+    setVisitedQuestionIds((prev) => {
+      if (prev.has(questionId)) return prev;
+      const next = new Set(prev);
+      next.add(questionId);
+      return next;
+    });
+  }, [questions]);
 
   const handleSelectOption = useCallback((option) => {
     if (!currentQuestion) return;
@@ -213,12 +386,25 @@ export default function PYQSessionPage() {
   }, [currentQuestion]);
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
-  }, [questions.length]);
+    setCurrentIndex((i) => {
+      const nextIndex = Math.min(i + 1, questions.length - 1);
+      markVisitedByIndex(nextIndex);
+      return nextIndex;
+    });
+  }, [markVisitedByIndex, questions.length]);
 
   const handleBack = useCallback(() => {
-    setCurrentIndex((i) => Math.max(i - 1, 0));
-  }, []);
+    setCurrentIndex((i) => {
+      const nextIndex = Math.max(i - 1, 0);
+      markVisitedByIndex(nextIndex);
+      return nextIndex;
+    });
+  }, [markVisitedByIndex]);
+
+  const handleSelectQuestion = useCallback((index) => {
+    markVisitedByIndex(index);
+    setCurrentIndex(index);
+  }, [markVisitedByIndex]);
 
   async function handleFinishDeck() {
     if (questions.length === 0 || finishing) return;
@@ -357,16 +543,16 @@ export default function PYQSessionPage() {
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
       <RemoveOrangeFilter />
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-6 py-3.5">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Logo size={28} />
-            <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700" />
-            <div className="hidden sm:block">
-              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 px-4 py-2.5 backdrop-blur-xl dark:border-slate-700/60 dark:bg-[#0f172a]/95 sm:px-5">
+        <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <Logo size={26} />
+            <div className="hidden h-5 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
+            <div className="min-w-0">
+              <span className="block truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                 {modeLabels[mode] || modeLabels.full}
               </span>
-              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
+              <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
                 {subjectLabels.join(", ")} · {exam}
                 {years.length > 0 ? ` · ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : ""}
                 {attemptLabel ? ` · ${attemptLabel}` : ""}
@@ -377,24 +563,24 @@ export default function PYQSessionPage() {
 
           {/* Full Paper Timer */}
           {mode === "full" && (
-            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs dark:border-slate-700 dark:bg-slate-800">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              <span className={`text-sm font-bold tracking-widest tabular-nums ${timeLeft < 300 ? "text-rose-500" : "text-slate-700 dark:text-slate-300"}`}>
+              <span className={`text-sm font-semibold tabular-nums ${timeLeft < 300 ? "text-rose-500" : "text-slate-700 dark:text-slate-300"}`}>
                 {String(Math.floor(timeLeft / 3600)).padStart(2, "0")}:{String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0")}:{String(timeLeft % 60).padStart(2, "0")}
               </span>
             </div>
           )}
 
           {/* Progress + Finish */}
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2">
-              <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-2 sm:flex">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 {answeredCount}/{questions.length}
               </span>
-              <div className="w-20 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
                 <div
                   className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
                   style={{ width: `${progressPct}%` }}
@@ -404,7 +590,7 @@ export default function PYQSessionPage() {
             <button
               onClick={handleFinishDeck}
               disabled={questions.length === 0 || finishing}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+              className="rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {finishing ? "Finishing..." : "Finish Deck"}
             </button>
@@ -412,67 +598,40 @@ export default function PYQSessionPage() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <main className="mx-auto grid flex-1 w-full max-w-[1600px] grid-cols-1 gap-4 px-3 py-3 sm:px-4 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4">
         {/* ── Question Palette ── */}
-        <aside className="lg:col-span-1 order-2 lg:order-1">
-          <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
-            <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
-              Question Palette
-            </p>
-            <div className="grid grid-cols-5 gap-2">
-              {questions.map((q, idx) => {
-                const isAnswered = answers[q.id] !== undefined;
-                const isActive = currentIndex === idx;
-                return (
-                  <button
-                    key={q.id}
-                    onClick={() => setCurrentIndex(idx)}
-                    className={`aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all duration-200 cursor-pointer
-                      ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[#0f172a] scale-110" : ""}
-                      ${
-                        isAnswered
-                          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
-                          : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/30"
-                      }
-                    `}
-                  >
-                    {mode === "full" ? originalQuestionNumber(q, idx + 1) : idx + 1}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20" />
-                Answered
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700/50" />
-                Unvisited
-              </div>
-            </div>
+        <aside className="order-2 lg:order-1">
+          <div className="lg:sticky lg:top-[72px]">
+            <QuestionPalette
+              questions={questions}
+              answers={answers}
+              currentIndex={currentIndex}
+              visitedQuestionIds={visitedQuestionIds}
+              mode={mode}
+              onSelectQuestion={handleSelectQuestion}
+            />
           </div>
         </aside>
 
         {/* ── Question Content ── */}
-        <section className="lg:col-span-3 flex flex-col order-1 lg:order-2">
+        <section className="order-1 flex min-w-0 flex-col lg:order-2">
           <div
-            className="flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 sm:p-8 shadow-sm animate-slideUp"
+            className="rounded-2xl border border-slate-200/70 bg-white/95 p-3 shadow-sm dark:border-slate-700/60 dark:bg-[#0f172a]/95 sm:p-4"
             style={{ animationDelay: "75ms" }}
           >
             {/* Question meta */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-1.5">
+              <div className="flex min-w-0 flex-wrap items-center gap-2">
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                   Question {displayedQuestionNumber} of {questions.length}
                 </span>
                 {qType !== "MCQ" && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">
+                  <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
                     {qType === "MULTIPLE_CORRECT" ? "Multi-Select" : "Numerical"}
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={async () => {
                     if (!user?.id) return;
@@ -491,10 +650,10 @@ export default function PYQSessionPage() {
                       setBookmarkedIds(previous);
                     }
                   }}
-                  className={`p-2 rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 ${
+                  className={`rounded-lg border p-2 transition-colors duration-200 ${
                     bookmarkedIds.has(String(currentQuestion.id))
-                      ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20"
-                      : "bg-white/50 dark:bg-slate-800/30 text-slate-400 dark:text-slate-500 border-slate-200/60 dark:border-slate-700/50 hover:text-indigo-500"
+                      ? "border-indigo-200 bg-indigo-50 text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-400"
+                      : "border-slate-200 bg-white text-slate-400 hover:text-indigo-500 dark:border-slate-700/60 dark:bg-slate-900/30 dark:text-slate-500"
                   }`}
                   title="Save Question"
                 >
@@ -502,16 +661,16 @@ export default function PYQSessionPage() {
                     <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
                   </svg>
                 </button>
-                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">{currentQuestion.year}</span>
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{currentQuestion.year}</span>
               </div>
             </div>
 
             {/* Subject + Chapter tags */}
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
+            <div className="mb-2 flex flex-wrap items-center gap-1.5">
+              <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-[10px] font-semibold text-indigo-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
                 {currentQuestion.subject}
               </span>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
                 {currentQuestion.chapter}
               </span>
             </div>
@@ -521,22 +680,24 @@ export default function PYQSessionPage() {
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
-                className="rounded-2xl max-w-full mb-4 border border-slate-200/60 dark:border-slate-700/50"
+                className={`${compactImageClassName} mb-2.5`}
+                loading="lazy"
+                decoding="async"
                 style={{ filter: "url(#remove-orange)" }}
               />
             )}
 
             {canShowStructuredQuestionText(currentQuestion) && (
-              <p className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-2 whitespace-pre-wrap">
+              <MathText className="max-w-[1100px] text-[14.5px] leading-6.5 text-slate-900 dark:text-white sm:text-[15px]">
                 {currentQuestion.question}
-              </p>
+              </MathText>
             )}
 
             {/* Options */}
-            <div className="mt-6">
+            <div className="mt-3">
               {qType === "NUMERICAL" ? (
                 <div>
-                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 block">
+                  <label className="mb-1 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                     Enter your answer
                   </label>
                   <input
@@ -544,11 +705,11 @@ export default function PYQSessionPage() {
                     placeholder="Enter numerical answer"
                     value={selectedOption || ""}
                     onChange={(e) => handleNumericalChange(e.target.value)}
-                    className="w-full max-w-sm border border-slate-200/60 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30 rounded-2xl px-5 py-4 text-lg font-semibold text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all duration-200"
+                    className="w-full max-w-md rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[15px] font-medium text-slate-900 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-700/60 dark:bg-slate-900/40 dark:text-white"
                   />
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {["a", "b", "c", "d"].map((option, idx) => {
                     const isSelected =
                       qType === "MULTIPLE_CORRECT"
@@ -556,42 +717,15 @@ export default function PYQSessionPage() {
                         : selectedOption === option;
 
                     return (
-                      <button
+                      <QuestionOption
                         key={option}
-                        onClick={() => handleSelectOption(option)}
-                        className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
-                          ${
-                            isSelected
-                              ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-indigo-500/10"
-                              : "bg-white/50 dark:bg-slate-800/30 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
-                          }`}
-                      >
-                        <span
-                          className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
-                            ${
-                              isSelected
-                                ? "border-indigo-500 bg-gradient-to-br from-indigo-500 to-violet-500 text-white"
-                                : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
-                            }`}
-                        >
-                          {LETTERS[idx]}
-                        </span>
-                        <div className="flex flex-col gap-2 flex-1">
-                          {!currentQuestion[`option_${option}_image`] && (
-                            <span className="text-base font-medium whitespace-pre-wrap">
-                              {currentQuestion[`option_${option}`]}
-                            </span>
-                          )}
-                          {currentQuestion[`option_${option}_image`] && (
-                            <img
-                              src={currentQuestion[`option_${option}_image`]}
-                              alt={`Option ${option.toUpperCase()} visual`}
-                              className="rounded-xl max-w-full"
-                              style={{ filter: "url(#remove-orange)" }}
-                            />
-                          )}
-                        </div>
-                      </button>
+                        optionKey={option}
+                        index={idx}
+                        optionText={currentQuestion[`option_${option}`]}
+                        optionImage={currentQuestion[`option_${option}_image`]}
+                        isSelected={isSelected}
+                        onSelect={handleSelectOption}
+                      />
                     );
                   })}
                 </div>
@@ -606,7 +740,7 @@ export default function PYQSessionPage() {
                   delete newAnswers[currentQuestion.id];
                   setAnswers(newAnswers);
                 }}
-                className="mt-4 text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors"
+                className="mt-2 text-xs font-medium text-slate-500 transition-colors hover:text-rose-500 dark:text-slate-400"
               >
                 Clear Selection
               </button>
@@ -614,18 +748,18 @@ export default function PYQSessionPage() {
           </div>
 
           {/* Navigation */}
-          <div className="mt-6 flex items-center justify-between animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="mt-2 flex items-center justify-between gap-3" style={{ animationDelay: "150ms" }}>
             <button
               onClick={handleBack}
               disabled={currentIndex === 0}
-              className="px-6 py-3 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-indigo-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700/60 dark:bg-[#0f172a]/90 dark:text-slate-200"
             >
               ← Previous
             </button>
             <button
               onClick={handleNext}
               disabled={currentIndex === questions.length - 1}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+              className="rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Next →
             </button>
