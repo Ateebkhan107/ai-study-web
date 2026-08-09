@@ -32,6 +32,7 @@ export default function GroupChat({ groupId, currentUserId }) {
     }
   }, [groupId]);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     loadMessages().then((data) => {
       if (data) {
@@ -41,6 +42,7 @@ export default function GroupChat({ groupId, currentUserId }) {
       setLoading(false);
     });
   }, [loadMessages]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Scroll to bottom on new messages
   useEffect(() => {

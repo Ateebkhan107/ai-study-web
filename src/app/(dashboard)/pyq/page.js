@@ -359,11 +359,11 @@ function PracticeTab({ subjects, track }) {
             <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
               <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
               {selectedYears.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE Main attempts.</p>
+                <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
               ) : loadingPapers ? (
                 <p className={`text-sm ${TXT_MUTED}`}>Loading attempts...</p>
               ) : availableAttempts.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>No published JEE Main papers are available for the selected year yet.</p>
+                <p className={`text-sm ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {availableAttempts.map((attempt) => {

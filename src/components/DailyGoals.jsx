@@ -53,11 +53,7 @@ export default function DailyGoals() {
     : 0;
 
   return (
-    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl border border-indigo-100/50 dark:border-indigo-500/10 rounded-3xl p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all duration-500">
-      
-      {/* ── Background Glow ── */}
-      <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 dark:from-indigo-500/10 dark:to-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-gradient-to-tr from-pink-500/20 to-orange-500/20 dark:from-pink-500/10 dark:to-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-sm transition-all duration-500">
 
       {/* ── Header Section ── */}
       <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
@@ -76,17 +72,15 @@ export default function DailyGoals() {
         {/* Overall Progress */}
         <div className="flex flex-col items-end gap-2 shrink-0">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-black bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-black text-slate-800 dark:text-slate-100">
               {Math.round(percentage)}%
             </span>
           </div>
-          <div className="w-32 sm:w-48 h-2.5 bg-slate-100 dark:bg-slate-800/80 rounded-full overflow-hidden shadow-inner">
+          <div className="w-32 sm:w-48 h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transition-all duration-1000 ease-out relative"
+              className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out relative"
               style={{ width: `${percentage}%` }}
-            >
-              <div className="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite] -translate-x-full" />
-            </div>
+            />
           </div>
         </div>
       </div>
@@ -100,20 +94,15 @@ export default function DailyGoals() {
           return (
             <div
               key={goal.id}
-              className={`group relative rounded-2xl p-5 border transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:-translate-y-1 overflow-hidden
+              className={`group relative rounded-2xl p-6 border transition-all duration-300 hover:shadow-sm overflow-hidden
                 ${
                   isComplete
-                    ? "bg-gradient-to-br from-emerald-50/50 to-teal-50/30 dark:from-emerald-500/10 dark:to-teal-500/5 border-emerald-200/50 dark:border-emerald-500/20"
-                    : "bg-white/50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50"
+                    ? "bg-emerald-50/50 dark:bg-emerald-500/5 border-emerald-200/50 dark:border-emerald-500/20"
+                    : "bg-white/50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50"
                 }
               `}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
-              
-              {/* Subtle hover background gradient for incomplete goals */}
-              {!isComplete && (
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-purple-500/0 to-pink-500/0 opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
-              )}
 
               <div className="relative z-10 flex items-start justify-between mb-4">
                 <div
@@ -128,10 +117,10 @@ export default function DailyGoals() {
                   )}
                 </div>
 
-                <div className={`flex items-center gap-1.5 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm backdrop-blur-md transition-all duration-300
+                <div className={`flex items-center gap-1 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-md transition-all duration-300
                   ${isComplete 
-                    ? "bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-orange-500/20" 
-                    : "bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-white"
+                    ? "bg-amber-500 text-white" 
+                    : "bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/20"
                   }
                 `}>
                   <Zap className="w-3 h-3 fill-current" />
@@ -160,9 +149,9 @@ export default function DailyGoals() {
                       {goal.progress} / {goal.target_value}
                     </span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-700/50 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full transition-all duration-1000 ease-out"
+                      className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${progressPct}%` }}
                     />
                   </div>

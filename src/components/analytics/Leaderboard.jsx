@@ -61,49 +61,45 @@ export default function Leaderboard() {
     switch (index) {
       case 0:
         return {
-          cardBg: "bg-gradient-to-r from-amber-500/10 to-orange-500/5 dark:from-amber-500/20 dark:to-orange-500/10",
-          border: "border-amber-300/50 dark:border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.15)]",
+          cardBg: "bg-amber-50/80 dark:bg-amber-500/10",
+          border: "border-amber-200 dark:border-amber-500/30",
           rankColor: "text-amber-500 dark:text-amber-400",
           rankBg: "bg-amber-100 dark:bg-amber-500/20",
           Icon: Crown,
-          xpGradient: "from-amber-500 to-orange-500",
+          xpColor: "text-amber-600 dark:text-amber-400",
         };
       case 1:
         return {
-          cardBg: "bg-gradient-to-r from-slate-300/20 to-slate-200/10 dark:from-slate-400/20 dark:to-slate-500/10",
-          border: "border-slate-300 dark:border-slate-500/30 shadow-[0_0_15px_rgba(148,163,184,0.1)]",
+          cardBg: "bg-slate-100/80 dark:bg-slate-500/10",
+          border: "border-slate-300 dark:border-slate-500/30",
           rankColor: "text-slate-500 dark:text-slate-300",
           rankBg: "bg-slate-200 dark:bg-slate-600/30",
           Icon: Medal,
-          xpGradient: "from-slate-500 to-slate-400 dark:from-slate-300 dark:to-slate-100",
+          xpColor: "text-slate-600 dark:text-slate-300",
         };
       case 2:
         return {
-          cardBg: "bg-gradient-to-r from-orange-500/10 to-rose-500/5 dark:from-orange-500/20 dark:to-rose-500/10",
-          border: "border-orange-200 dark:border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.1)]",
+          cardBg: "bg-orange-50/80 dark:bg-orange-500/10",
+          border: "border-orange-200 dark:border-orange-500/30",
           rankColor: "text-orange-500 dark:text-orange-400",
           rankBg: "bg-orange-100 dark:bg-orange-500/20",
           Icon: Award,
-          xpGradient: "from-orange-500 to-rose-500",
+          xpColor: "text-orange-600 dark:text-orange-400",
         };
       default:
         return {
           cardBg: "bg-white/50 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800",
-          border: "border-slate-100 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50",
+          border: "border-slate-200 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50",
           rankColor: "text-slate-400 dark:text-slate-500",
           rankBg: "bg-slate-100 dark:bg-slate-800",
           Icon: null,
-          xpGradient: "from-indigo-500 to-purple-500",
+          xpColor: "text-slate-800 dark:text-slate-100",
         };
     }
   };
 
   return (
-    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl rounded-3xl border border-indigo-100/50 dark:border-indigo-500/10 p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all duration-500">
-      
-      {/* ── Ambient Background Glows ── */}
-      <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 dark:from-indigo-500/10 dark:to-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-gradient-to-tr from-pink-500/20 to-orange-500/20 dark:from-pink-500/10 dark:to-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8 shadow-sm transition-all duration-500">
 
       {/* ── HEADER ── */}
       <div className="relative z-10 flex items-center gap-3 mb-8">
@@ -158,13 +154,9 @@ export default function Leaderboard() {
               )}
               
             <div
-              className={`group relative flex items-center justify-between p-4 sm:p-5 rounded-2xl border transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
+              className={`group relative flex items-center justify-between p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-sm ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
               style={{ transitionDelay: `${displayIndex * 50}ms` }}
             >
-              {/* Shimmer effect for 1st place */}
-              {rankIndex === 0 && (
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent animate-[shimmer_2s_infinite] pointer-events-none rounded-2xl" />
-              )}
 
               {/* ── LEFT SIDE ── */}
               <div className="flex items-center gap-4 sm:gap-5 z-10">
@@ -209,17 +201,12 @@ export default function Leaderboard() {
               {/* ── RIGHT SIDE / XP ── */}
               <div className="flex flex-col items-end z-10 shrink-0">
                 <div className="flex items-baseline gap-1">
-                  <span className={`text-2xl sm:text-3xl font-black tracking-tighter bg-gradient-to-br ${theme.xpGradient} bg-clip-text text-transparent`}>
+                  <span className={`text-2xl sm:text-3xl font-black tracking-tight ${theme.xpColor}`}>
                     {user.xp}
                   </span>
                   <span className="text-xs font-bold uppercase text-slate-400 dark:text-slate-500">
                     XP
                   </span>
-                </div>
-                
-                {/* Decorative mini zap on hover */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 absolute right-4 top-1/2 -translate-y-1/2 blur-xl">
-                  <Zap className={`w-12 h-12 ${theme.rankColor}`} />
                 </div>
               </div>
 

@@ -8,30 +8,24 @@ import { Target, Trophy, Flame } from "lucide-react";
 const STAT_STYLES = {
   "Accuracy": {
     icon: Target,
-    bgPattern: "from-emerald-500/10 via-teal-500/5 to-transparent dark:from-emerald-500/20 dark:via-teal-500/5",
-    borderHover: "hover:border-emerald-400/50 dark:hover:border-emerald-500/50",
+    borderHover: "hover:border-emerald-200 dark:hover:border-emerald-500/30",
     iconColor: "text-emerald-600 dark:text-emerald-400",
-    iconBg: "bg-emerald-100 dark:bg-emerald-500/20 shadow-emerald-500/20",
-    glow: "group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.2)] dark:group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)]",
-    valueGradient: "from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300"
+    iconBg: "bg-emerald-50 dark:bg-emerald-500/10",
+    valueColor: "text-slate-800 dark:text-slate-100"
   },
   "Rank": {
     icon: Trophy,
-    bgPattern: "from-amber-500/10 via-orange-500/5 to-transparent dark:from-amber-500/20 dark:via-orange-500/5",
-    borderHover: "hover:border-amber-400/50 dark:hover:border-amber-500/50",
+    borderHover: "hover:border-amber-200 dark:hover:border-amber-500/30",
     iconColor: "text-amber-600 dark:text-amber-400",
-    iconBg: "bg-amber-100 dark:bg-amber-500/20 shadow-amber-500/20",
-    glow: "group-hover:shadow-[0_8px_30px_rgba(245,158,11,0.2)] dark:group-hover:shadow-[0_8px_30px_rgba(245,158,11,0.15)]",
-    valueGradient: "from-amber-500 to-orange-500 dark:from-amber-300 dark:to-orange-400"
+    iconBg: "bg-amber-50 dark:bg-amber-500/10",
+    valueColor: "text-slate-800 dark:text-slate-100"
   },
   "Study Streak": {
     icon: Flame,
-    bgPattern: "from-rose-500/10 via-pink-500/5 to-transparent dark:from-rose-500/20 dark:via-pink-500/5",
-    borderHover: "hover:border-rose-400/50 dark:hover:border-rose-500/50",
+    borderHover: "hover:border-rose-200 dark:hover:border-rose-500/30",
     iconColor: "text-rose-600 dark:text-rose-400",
-    iconBg: "bg-rose-100 dark:bg-rose-500/20 shadow-rose-500/20",
-    glow: "group-hover:shadow-[0_8px_30px_rgba(225,29,72,0.2)] dark:group-hover:shadow-[0_8px_30px_rgba(225,29,72,0.15)]",
-    valueGradient: "from-rose-500 to-pink-500 dark:from-rose-400 dark:to-pink-300"
+    iconBg: "bg-rose-50 dark:bg-rose-500/10",
+    valueColor: "text-slate-800 dark:text-slate-100"
   }
 };
 
@@ -124,11 +118,9 @@ export default function StatsCards() {
         return (
           <div
             key={stat.label}
-            className={`group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-[#0f172a]/60 p-6 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm transition-all duration-500 hover:-translate-y-1 ${style.borderHover} ${style.glow}`}
-            style={{ transitionDelay: `${index * 75}ms` }}
+            className={`group relative overflow-hidden rounded-2xl bg-white/50 dark:bg-slate-800/40 p-6 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 transition-all duration-300 hover:shadow-sm ${style.borderHover}`}
+            style={{ transitionDelay: `${index * 50}ms` }}
           >
-            {/* Animated Gradient Background */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-40 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
             
             <div className="relative z-10 flex items-start justify-between mb-6">
               <div className="space-y-1.5">
@@ -141,24 +133,16 @@ export default function StatsCards() {
               </div>
 
               {/* Dynamic Icon Container */}
-              <div className={`flex items-center justify-center w-12 h-12 rounded-2xl ${style.iconBg} shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6`}>
+              <div className={`flex items-center justify-center w-10 h-10 rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105`}>
                 <Icon className={`w-6 h-6 ${style.iconColor}`} strokeWidth={2.5} />
               </div>
             </div>
 
             <div className="relative z-10 flex items-end justify-between">
-              <h3 className={`text-4xl sm:text-5xl font-black tracking-tighter bg-gradient-to-br ${style.valueGradient} bg-clip-text text-transparent drop-shadow-sm`}>
+              <h3 className={`text-4xl sm:text-5xl font-black tracking-tighter ${style.valueColor}`}>
                 {stat.value}
               </h3>
-              
-              {/* Subtle visual decoration behind text on hover */}
-              <div className="absolute right-0 bottom-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-2xl">
-                <Icon className={`w-24 h-24 ${style.iconColor}`} />
-              </div>
             </div>
-            
-            {/* Ambient edge highlight */}
-            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white dark:via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
         );
       })}

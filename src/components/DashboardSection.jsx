@@ -111,34 +111,20 @@ export default function DashboardSection({ config }) {
             const Icon = meta.icon;
             
             return (
-              <Link href={`/formula-books/${book.id}`} key={book.id} className="block group perspective-1000">
-                {/* Book Container with 3D elements */}
+              <Link href={`/formula-books/${book.id}`} key={book.id} className="block group">
+                {/* Clean Premium Card */}
                 <div 
-                  className="relative h-full min-h-[240px] flex flex-col bg-white dark:bg-[#0f172a] rounded-r-3xl rounded-l-lg transition-all duration-500 ease-out 
-                             group-hover:-translate-y-2 group-hover:rotate-y-2 group-hover:-rotate-x-2 
-                             shadow-[4px_4px_0_0_#f1f5f9,8px_8px_0_0_#e2e8f0,0_10px_20px_-5px_rgba(0,0,0,0.1)] 
-                             dark:shadow-[4px_4px_0_0_#1e293b,8px_8px_0_0_#0f172a,0_10px_20px_-5px_rgba(0,0,0,0.4)]
-                             group-hover:shadow-[6px_6px_0_0_#f1f5f9,12px_12px_0_0_#e2e8f0,0_15px_30px_-5px_rgba(0,0,0,0.15)]
-                             dark:group-hover:shadow-[6px_6px_0_0_#1e293b,12px_12px_0_0_#0f172a,0_15px_30px_-5px_rgba(0,0,0,0.5)]
-                             border border-slate-200/60 dark:border-slate-700/50"
-                  style={{ transformStyle: 'preserve-3d', transitionDelay: `${index * 50}ms` }}
+                  className="relative h-full min-h-[220px] flex flex-col bg-white/50 dark:bg-slate-800/40 rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-sm border border-slate-200 dark:border-slate-700/50 overflow-hidden"
+                  style={{ transitionDelay: `${index * 50}ms` }}
                 >
                   
-                  {/* Spine of the book */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-3.5 bg-gradient-to-b ${meta.spine} rounded-l-lg shadow-[inset_-2px_0_4px_rgba(0,0,0,0.1)] z-20`} />
-                  
-                  {/* Crease line next to spine */}
-                  <div className="absolute left-3.5 top-0 bottom-0 w-4 bg-gradient-to-r from-black/5 dark:from-white/5 to-transparent z-10 pointer-events-none" />
-
-                  {/* Bookmark Ribbon */}
-                  <div className="absolute top-0 right-8 text-rose-500 dark:text-rose-400 drop-shadow-md z-20 transition-transform duration-500 group-hover:translate-y-1">
-                    <Bookmark className="w-6 h-8 fill-current" />
-                  </div>
+                  {/* Subject Color Accent Line (Left Edge) */}
+                  <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${meta.spine} z-20`} />
 
                   {/* Background Watermark Icon */}
                   <Icon className={`absolute -right-6 -bottom-6 w-36 h-36 opacity-[0.03] dark:opacity-[0.04] transform -rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 ${meta.color}`} />
 
-                  <div className="relative z-10 flex flex-col h-full pl-8 pr-5 py-6">
+                  <div className="relative z-10 flex flex-col h-full pl-6 pr-5 py-6">
                     
                     {/* Top Row: Tag & Subject */}
                     <div className="flex items-start justify-between gap-2 mb-4">
@@ -175,7 +161,7 @@ export default function DashboardSection({ config }) {
 
                     {/* Interactive Arrow */}
                     <div className="absolute bottom-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 border border-slate-200 dark:border-slate-700">
-                      <ChevronRight className={`w-4 h-4 ${meta.color}`} strokeWidth={3} />
+                      <ChevronRight className={`w-4 h-4 ${meta.color}`} strokeWidth={2.5} />
                     </div>
 
                   </div>

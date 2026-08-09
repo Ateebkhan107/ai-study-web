@@ -56,9 +56,12 @@ export default function AdminCommunityPage() {
       });
   }
 
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
   useEffect(() => {
     loadReports(statusFilter);
   }, [statusFilter]);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
+
 
   async function reviewReport(reportId, action) {
     setProcessing((p) => ({ ...p, [reportId]: true }));
