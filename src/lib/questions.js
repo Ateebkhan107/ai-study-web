@@ -23,6 +23,7 @@ const CHAPTER_ALIASES = {
   "Dual Nature of Radiation & Matter": ["Dual Nature of Radiation and Matter", "Dual Nature of Matter and Radiation"],
   "Atoms & Nuclei": ["Atoms", "Nuclei", "Atoms and Nuclei", "Modern Physics", "Optics & Modern Physics"],
   "Semiconductor Electronics & Devices": ["Semiconductor", "Electronic Devices", "Semiconductor Electronics"],
+  "Communication Systems": ["Communication Systems"],
 
   // Chemistry
   "Some Basic Concepts of Chemistry (Mole Concept)": ["Some Basic Concepts of Chemistry", "Physical Chemistry"],
@@ -33,9 +34,13 @@ const CHAPTER_ALIASES = {
   "Chemical Thermodynamics & Energetics": ["Chemical Thermodynamics", "Thermodynamics"],
   "Chemical & Ionic Equilibrium": ["Equilibrium", "Equilibrium: Chemical and Ionic", "Chemical Equilibrium", "Ionic Equilibrium"],
   "Redox Reactions & Electrochemistry": ["Electrochemistry", "Redox Reactions", "Redox Reactions and Electrochemistry"],
+  "Hydrogen": ["Hydrogen"],
+  "s-Block Elements": ["The s-Block Elements", "s-Block Elements"],
   "Chemical Kinetics": ["Chemical Kinetics"],
   "Solutions & Colligative Properties": ["Solutions"],
   "Surface Chemistry": ["Surface Chemistry"],
+  "Environmental Chemistry": ["Environmental Chemistry"],
+  "Solid State": ["The Solid State", "Solid State"],
   "p-Block Elements (Groups 13 to 18)": ["The p-Block Elements (Class 11)", "The p-Block Elements (Class 12)", "The p-Block Elements", "p-Block Elements"],
   "d and f-Block Elements": ["d and f-Block Elements", "The d- and f-Block Elements", "The s-Block Elements"],
   "Coordination Compounds": ["Coordination Compounds"],
@@ -47,6 +52,9 @@ const CHAPTER_ALIASES = {
   "Aldehydes, Ketones & Carboxylic Acids": ["Aldehydes, Ketones and Carboxylic Acids"],
   "Amines & Organic Nitrogen Compounds": ["Amines"],
   "Biomolecules, Polymers & Everyday Chemistry": ["Biomolecules", "Biomolecules and Polymers", "Polymers", "Chemistry in Everyday Life"],
+  "Biomolecules": ["Biomolecules"],
+  "Polymers": ["Polymers"],
+  "Chemistry in Everyday Life": ["Chemistry in Everyday Life"],
 
   // Maths
   "Sets, Relations & Functions": ["Sets, Relations and Functions", "Sets & Relations"],

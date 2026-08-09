@@ -127,12 +127,15 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
       ) : (
       <div className="space-y-3">
         {activeQuestion.options.map((option, optionIndex) => {
-          const isSelected = selectedAnswer === optionIndex;
+          const isMultipleCorrect = activeQuestion.question_type === "Multiple Correct";
+          const isSelected = isMultipleCorrect
+            ? Array.isArray(selectedAnswer) && selectedAnswer.includes(optionIndex)
+            : selectedAnswer === optionIndex;
 
           return (
             <button
               key={`${activeQuestion.id}-${optionIndex}`}
-              onClick={() => onSelect(activeQuestion.id, optionIndex)}
+              onClick={() => onSelect(activeQuestion, optionIndex)}
               className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
                 ${
                   isSelected
@@ -238,7 +241,6 @@ function TestSessionContent() {
       }
     }
     loadQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectParam, chapterParam, difficultyParam, countParam, durationParam, user]);
 
   const handleSubmit = useCallback(async () => {
@@ -291,8 +293,23 @@ function TestSessionContent() {
   }, [questions.length, finishing]);
 
   // 5. Handlers
-  const handleSelect = useCallback((qId, optIdx) => {
-    setAnswers((prev) => ({ ...prev, [qId]: optIdx }));
+  const handleSelect = useCallback((question, optIdx) => {
+    setAnswers((prev) => {
+      if (question.question_type !== "Multiple Correct") {
+        return { ...prev, [question.id]: optIdx };
+      }
+
+      const selected = Array.isArray(prev[question.id]) ? prev[question.id] : [];
+      const nextSelected = selected.includes(optIdx)
+        ? selected.filter((index) => index !== optIdx)
+        : [...selected, optIdx].sort((a, b) => a - b);
+      if (nextSelected.length === 0) {
+        const next = { ...prev };
+        delete next[question.id];
+        return next;
+      }
+      return { ...prev, [question.id]: nextSelected };
+    });
   }, []);
 
   const handleNumericalChange = useCallback((qId, value) => {
