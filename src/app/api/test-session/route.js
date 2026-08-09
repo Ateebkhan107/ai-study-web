@@ -7,6 +7,15 @@ import { getQuestionMarking } from "@/lib/analyticsHelpers";
 
 const LETTERS = ["A", "B", "C", "D"];
 
+function normalizeOptionSet(value) {
+  return String(value || "")
+    .split(",")
+    .map((option) => option.trim().toUpperCase())
+    .filter((option) => LETTERS.includes(option))
+    .sort()
+    .join(",");
+}
+
 function shuffleQuestions(questions) {
   return [...questions].sort(() => Math.random() - 0.5);
 }
@@ -393,14 +402,21 @@ export async function PUT(request) {
     const answerRows = questionRows.map((question) => {
       const rawAnswer = answers[String(question.id)];
       const isNumerical = question.question_type === "Numerical";
+      const isMultipleCorrect = question.question_type === "Multiple Correct";
       const selectedIndex = Number(rawAnswer);
       const attemptedQuestion = isNumerical
         ? rawAnswer !== undefined && String(rawAnswer).trim() !== ""
+        : isMultipleCorrect
+        ? Array.isArray(rawAnswer) && rawAnswer.length > 0 && rawAnswer.every(
+            (index) => Number.isInteger(index) && index >= 0 && index < LETTERS.length
+          )
         : Number.isInteger(selectedIndex) && selectedIndex >= 0 && selectedIndex < LETTERS.length;
       const selectedOption = !attemptedQuestion
         ? null
         : isNumerical
         ? String(rawAnswer).trim()
+        : isMultipleCorrect
+        ? rawAnswer.map((index) => LETTERS[index]).sort().join(",")
         : LETTERS[selectedIndex];
       const selectedNumber = Number(selectedOption);
       const correctNumber = Number(question.correct_option);
@@ -408,6 +424,8 @@ export async function PUT(request) {
         ? (Number.isFinite(selectedNumber) && Number.isFinite(correctNumber)
           ? Math.abs(selectedNumber - correctNumber) <= 1e-9
           : selectedOption === String(question.correct_option).trim())
+        : isMultipleCorrect
+        ? normalizeOptionSet(selectedOption) === normalizeOptionSet(question.correct_option)
         : selectedOption === question.correct_option);
       const marking = getQuestionMarking(
         {
