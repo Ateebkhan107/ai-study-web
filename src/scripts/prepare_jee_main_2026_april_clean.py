@@ -117,6 +117,35 @@ def trim_whitespace(image: Image.Image, border: int = 4) -> Image.Image:
     return image.crop((left, top, right, bottom))
 
 
+def tight_trim(image: Image.Image) -> Image.Image:
+    grayscale = image.convert("L")
+    width, height = image.size
+    mask = grayscale.point(lambda pixel: 255 if pixel < 245 else 0)
+    x_projection, y_projection = mask.getprojection()
+
+    significant_rows = [index for index, present in enumerate(y_projection) if present]
+    significant_cols = [index for index, present in enumerate(x_projection) if present]
+
+    if not significant_rows or not significant_cols:
+        return image
+
+    top = significant_rows[0]
+    bottom = significant_rows[-1]
+    left = significant_cols[0]
+    right = significant_cols[-1]
+    pad_x = 8
+    pad_y = 8
+
+    return image.crop(
+        (
+            max(0, left - pad_x),
+            max(0, top - pad_y),
+            min(width, right + pad_x + 1),
+            min(height, bottom + pad_y + 1),
+        )
+    )
+
+
 def parse_preview_manifest(preview_pdf: Path):
     text = subprocess.check_output(
         ["/opt/homebrew/bin/pdftotext", str(preview_pdf), "-"],
@@ -419,10 +448,15 @@ def build_manifest(paper, answer_map):
             raw_left = 12 if anchor["column"] == "left" else int((mid_x + 6) * x_scale)
             raw_right = int((mid_x - 8) * x_scale) if anchor["column"] == "left" else page_image.width - 12
             raw_top = max(0, int((anchor["top"] - 8) * y_scale))
-            raw_bottom = min(page_image.height, int((max(word["bottom"] for word in column_words) + 10) * y_scale))
+            content_bottom = int((max(word["bottom"] for word in column_words) + 4) * y_scale)
+            if same_column:
+                next_anchor_bottom = max(raw_top + 1, int((next_top - 4) * y_scale))
+                raw_bottom = min(page_image.height, min(content_bottom, next_anchor_bottom))
+            else:
+                raw_bottom = min(page_image.height, content_bottom)
 
             raw_crop = page_image.crop((raw_left, raw_top, raw_right, raw_bottom))
-            cropped = trim_whitespace(raw_crop, border=4)
+            cropped = tight_trim(trim_whitespace(raw_crop, border=2))
             crop_path = crop_dir / f"q{anchor['number']:02}.png"
             cropped.save(crop_path, optimize=True)
 

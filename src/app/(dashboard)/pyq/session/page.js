@@ -225,6 +225,7 @@ export default function PYQSessionPage() {
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
+  const shouldLoadWholePaper = mode === "full" && Boolean(examId);
 
   useEffect(() => {
     if (finishing || questions.length === 0 || mode !== "full") return;
@@ -246,7 +247,8 @@ export default function PYQSessionPage() {
     let cancelled = false;
 
     async function loadPYQ() {
-      if (subjectLabels.length === 0) {
+      const requestedSubjects = shouldLoadWholePaper ? [""] : subjectLabels;
+      if (requestedSubjects.length === 0) {
         if (!cancelled) setLoading(false);
         return;
       }
@@ -255,7 +257,7 @@ export default function PYQSessionPage() {
       setLoadError("");
       try {
         const results = await Promise.all(
-          subjectLabels.map((label) =>
+          requestedSubjects.map((label) =>
             getPYQ(exam, label, {
               mode,
               chapter,
@@ -323,7 +325,7 @@ export default function PYQSessionPage() {
     loadPYQ();
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;

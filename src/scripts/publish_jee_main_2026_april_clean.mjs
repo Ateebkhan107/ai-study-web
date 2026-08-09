@@ -106,7 +106,7 @@ async function upsertQuestions(code) {
   const byNumber = new Map((existing || []).map((row) => [Number(row.question_number), row.id]));
 
   for (const item of manifest) {
-    const objectPath = `jee-main-2026-april-clean/${code}/q${String(item.number).padStart(2, "0")}.png`;
+    const objectPath = `jee-main-2026-april-recrops/${code}/q${String(item.number).padStart(2, "0")}.png`;
     const fileBytes = await fs.readFile(item.image_path);
     const { error: uploadError } = await supabase.storage
       .from(STORAGE_BUCKET)
