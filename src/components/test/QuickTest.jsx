@@ -135,7 +135,7 @@ export default function QuickTest({ track = "jee" }) {
         Jump straight in — questions are picked randomly from your subject pool.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* 3. Map across filteredOptions instead of the global array */}
         {filteredOptions.map((option) => (
           <button

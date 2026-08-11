@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { isBlockedBetweenUsers } from "@/lib/community/permissions";
 
 // ─── PATCH /api/community/direct/requests/[id] ────────────────────────────────
 // Accept or decline a DM request
@@ -39,6 +40,12 @@ export async function PATCH(request, { params }) {
 
   if (conv.status !== "PENDING")
     return NextResponse.json({ error: "Request already responded to" }, { status: 409 });
+
+  if (action === "ACTIVE") {
+    const otherId = conv.user_one_id === userId ? conv.user_two_id : conv.user_one_id;
+    const blocked = await isBlockedBetweenUsers(userId, otherId);
+    if (blocked) return NextResponse.json({ error: "Cannot accept a blocked conversation" }, { status: 403 });
+  }
 
   const { error } = await supabaseAdmin
     .from("community_direct_conversations")

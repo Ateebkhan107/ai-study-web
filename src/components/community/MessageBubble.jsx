@@ -43,28 +43,30 @@ export default function MessageBubble({ message, currentUserId, context, context
   const isDeleted = deleted || message.is_deleted;
 
   return (
-    <div className={`flex gap-2 group ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
+    <div className={`group flex gap-2 ${isOwn ? "justify-end" : "justify-start"}`}>
       {/* Avatar placeholder */}
-      <div className="shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-bold mt-1">
-        {(message.senderName || "?")[0]?.toUpperCase()}
-      </div>
+      {!isOwn && (
+        <div className="mt-5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 text-xs font-bold text-white">
+          {(message.senderName || "?")[0]?.toUpperCase()}
+        </div>
+      )}
 
-      <div className={`flex flex-col max-w-[75%] ${isOwn ? "items-end" : "items-start"}`}>
+      <div className={`flex max-w-[82%] flex-col sm:max-w-[70%] ${isOwn ? "items-end" : "items-start"}`}>
         {/* Sender + time */}
         {!isOwn && (
-          <span className="text-xs text-slate-500 dark:text-slate-400 mb-1 px-1">
+          <span className="mb-1 px-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
             {message.senderName || "Unknown"}
           </span>
         )}
 
         {/* Bubble */}
         <div
-          className={`px-3 py-2 rounded-2xl text-sm leading-relaxed ${
+          className={`rounded-2xl px-3.5 py-2 text-sm leading-relaxed shadow-sm ${
             isOwn
-              ? "bg-indigo-600 text-white rounded-tr-sm"
+              ? "rounded-br-md bg-indigo-600 text-white"
               : isDeleted
-              ? "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 italic rounded-tl-sm"
-              : "bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-100 dark:border-slate-700 rounded-tl-sm"
+              ? "rounded-bl-md bg-slate-100 text-slate-400 italic dark:bg-slate-800 dark:text-slate-500"
+              : "rounded-bl-md border border-slate-100 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
           } ${message.optimistic ? "opacity-70" : "opacity-100"}`}
         >
           {/* IMPORTANT: Plain text rendering — never dangerouslySetInnerHTML */}
@@ -73,7 +75,7 @@ export default function MessageBubble({ message, currentUserId, context, context
 
         {/* Time + actions */}
         <div className={`flex items-center gap-2 mt-1 ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
-          <span className="text-xs text-slate-400 dark:text-slate-500 px-1">
+          <span className="px-1 text-[11px] text-slate-400 dark:text-slate-500">
             {formatTime(message.created_at)}
           </span>
 

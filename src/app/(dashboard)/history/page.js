@@ -485,6 +485,7 @@ export default function TestHistoryPage() {
       {/* ── Desktop Table ── */}
       {filtered.length > 0 && (
         <div className="hidden md:block bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-slate-200/60 dark:border-slate-700/50 bg-slate-50/60 dark:bg-slate-800/30">
@@ -521,6 +522,7 @@ export default function TestHistoryPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 

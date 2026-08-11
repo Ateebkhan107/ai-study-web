@@ -29,6 +29,7 @@ export default function GroupPage({ groupId, currentUserId }) {
   const [activeTab, setActiveTab] = useState("Chat");
   const [error, setError] = useState(null);
   const [leaving, setLeaving] = useState(false);
+  const [myGroups, setMyGroups] = useState([]);
 
   // Settings state
   const [editName, setEditName] = useState("");
@@ -38,9 +39,14 @@ export default function GroupPage({ groupId, currentUserId }) {
   const [saveMsg, setSaveMsg] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/community/groups/${groupId}`)
-      .then((r) => r.json())
-      .then((data) => {
+    async function loadGroup() {
+      try {
+        const [groupResponse, mineResponse] = await Promise.all([
+          fetch(`/api/community/groups/${groupId}`),
+          fetch("/api/community/groups?type=mine&limit=50"),
+        ]);
+        const data = await groupResponse.json();
+        const mineData = await mineResponse.json();
         if (data.group) {
           setGroup(data.group);
           setMembership(data.membership);
@@ -50,12 +56,14 @@ export default function GroupPage({ groupId, currentUserId }) {
         } else {
           setError(data.error || "Group not found.");
         }
+        setMyGroups(mineData.groups || []);
         setLoading(false);
-      })
-      .catch(() => {
+      } catch {
         setError("Failed to load group.");
         setLoading(false);
-      });
+      }
+    }
+    loadGroup();
   }, [groupId]);
 
   async function handleLeave() {
@@ -119,10 +127,40 @@ export default function GroupPage({ groupId, currentUserId }) {
     return true;
   });
 
+  const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
+
   return (
-    <div className="flex flex-col h-full max-h-[calc(100vh-5rem)]">
+    <div className="mx-auto flex h-full max-h-[calc(100vh-4rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white/70 shadow-sm dark:border-slate-800 dark:bg-slate-950/40 md:rounded-2xl md:border">
+      <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-slate-50/80 p-3 dark:border-slate-800 dark:bg-slate-950/50 md:block">
+        <Link href="/community" className="mb-3 inline-flex items-center gap-2 rounded-xl px-2 py-2 text-xs font-bold text-slate-500 hover:bg-white hover:text-indigo-600 dark:hover:bg-slate-900">
+          <ArrowLeft className="h-4 w-4" />
+          Community
+        </Link>
+        <p className="mb-2 px-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">My Groups</p>
+        <div className="space-y-1">
+          {myGroups.map((item) => (
+            <Link
+              key={item.id}
+              href={`/community/groups/${item.id}`}
+              className={`block rounded-xl px-3 py-2.5 transition ${
+                item.id === groupId
+                  ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20"
+                  : "text-slate-600 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="truncate text-sm font-bold">{item.name}</span>
+                {item.myRole === "OWNER" && <span className="text-[10px] font-bold opacity-80">Owner</span>}
+              </div>
+              <p className={`mt-0.5 text-xs ${item.id === groupId ? "text-indigo-100" : "text-slate-400"}`}>{item.member_count ?? 1} members</p>
+            </Link>
+          ))}
+        </div>
+      </aside>
+
+      <div className="flex min-w-0 flex-1 flex-col">
       {/* Group header */}
-      <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center gap-3">
+      <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md flex items-center gap-3">
         <Link href="/community" className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <ArrowLeft className="w-4 h-4" />
         </Link>
@@ -169,9 +207,9 @@ export default function GroupPage({ groupId, currentUserId }) {
         </div>
       ) : (
         <>
-          {/* Tabs */}
+          {managementTabs.length > 0 && (
           <div className="px-4 border-b border-slate-200 dark:border-slate-800 flex gap-1 overflow-x-auto bg-white/40 dark:bg-slate-900/40">
-            {visibleTabs.map((tab) => (
+            {["Chat", ...managementTabs].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -190,6 +228,7 @@ export default function GroupPage({ groupId, currentUserId }) {
               </button>
             ))}
           </div>
+          )}
 
           {/* Tab content */}
           <div className="flex-1 overflow-hidden">
@@ -236,7 +275,7 @@ export default function GroupPage({ groupId, currentUserId }) {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Privacy</label>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                       {["PUBLIC", "PRIVATE"].map((opt) => (
                         <button
                           key={opt}
@@ -272,6 +311,7 @@ export default function GroupPage({ groupId, currentUserId }) {
           </div>
         </>
       )}
+      </div>
     </div>
   );
 }

@@ -80,6 +80,7 @@ export default function ProfilePage() {
     const currentActiveTrack = user?.current_track || "jee";
     if (newExam.toLowerCase() === currentActiveTrack.toLowerCase()) return;
 
+    // eslint-disable-next-line react-hooks/immutability
     document.cookie = `prepzii_track=${newExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
 
     setUser((prev) => ({
@@ -176,12 +177,12 @@ export default function ProfilePage() {
     >
       {/* ── PROFILE CARD ── */}
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="glass-card p-6 shadow-sm relative overflow-hidden">
+        <div className="glass-card p-4 sm:p-6 shadow-sm relative overflow-hidden">
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/8 via-violet-500/5 to-transparent dark:from-indigo-500/10 dark:via-violet-500/6 dark:to-transparent rounded-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-5">
+          <div className="relative z-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+            <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
               {/* AVATAR */}
               <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 dark:ring-indigo-400/40 shadow-[0_0_25px_rgba(99,102,241,0.2)] bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-3xl font-black shrink-0">
                 {activeUser.avatar ? (
@@ -196,11 +197,11 @@ export default function ProfilePage() {
                 )}
               </div>
 
-              <div>
-                <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+              <div className="min-w-0">
+                <h2 className="break-words text-xl font-black text-slate-900 dark:text-white sm:text-2xl">
                   {activeUser.name}
                 </h2>
-                <div className="mt-2 flex items-center gap-3 text-xs">
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs sm:gap-3">
                   <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400 font-bold">
                     {activeUser.exam} Focus
                   </span>
@@ -234,7 +235,7 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={() => setEditing(true)}
-              className="border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2"
+              className="w-full justify-center border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2 sm:w-auto"
             >
               <Pencil className="w-4 h-4" /> Edit Profile
             </button>
@@ -244,15 +245,15 @@ export default function ProfilePage() {
 
       {/* ── XP CARD ── */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="glass-card p-6 shadow-sm">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+        <div className="glass-card p-4 sm:p-6 shadow-sm">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               {/* BADGE */}
-              <div className="min-w-[120px] h-14 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-indigo-500/20">
+              <div className="min-h-14 min-w-0 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-indigo-500/20 sm:min-w-[120px]">
                 {activeUser.badge}
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="font-bold text-slate-900 dark:text-white">
                   Level {levelStats.currentLevel}
                 </h3>
@@ -267,7 +268,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="text-right">
+            <div className="text-left sm:text-right">
               <p className="text-xs text-slate-400 dark:text-slate-500">
                 Next level
               </p>
@@ -304,8 +305,8 @@ export default function ProfilePage() {
           </span>
         </div>
 
-        <div className="glass-card p-5 shadow-sm">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="glass-card p-4 sm:p-5 shadow-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
             {badgeDefs.map((badge, index) => {
               const IconComponent = LucideIcons[badge.iconName] || LucideIcons.Award;
               return (

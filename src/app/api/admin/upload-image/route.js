@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { isAdmin } from "@/lib/admin";
 
 
@@ -65,13 +65,13 @@ Buffer.from(bytes);
 
 
 const fileName =
-`${Date.now()}-${file.name}`;
+`admin-uploads/${Date.now()}-${file.name}`;
 
 
 
 
 
-const {error}=await supabase
+const {error}=await supabaseAdmin
 .storage
 .from("pyq-images")
 .upload(
@@ -111,7 +111,7 @@ status:500
 
 
 
-const {data}=supabase
+const {data}=supabaseAdmin
 .storage
 .from("pyq-images")
 .getPublicUrl(

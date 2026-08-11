@@ -14,6 +14,7 @@ export default function DMInbox({ currentUserId }) {
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState({});
   const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState("Conversations");
 
   useEffect(() => {
     async function load() {
@@ -67,24 +68,38 @@ export default function DMInbox({ currentUserId }) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="mx-auto max-w-3xl space-y-4">
       {error && (
         <p className="text-sm text-red-500 bg-red-50 dark:bg-red-900/20 px-4 py-2 rounded-lg">{error}</p>
       )}
 
-      {/* Pending Requests */}
-      <section>
-        <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
-          Message Requests ({requests.length})
-        </h2>
-        {requests.length === 0 ? (
-          <p className="text-sm text-slate-400 dark:text-slate-500 text-center py-6">No pending requests.</p>
-        ) : (
-          <div className="space-y-2">
-            {requests.map((req) => (
+      <div className="inline-flex rounded-xl bg-slate-100 p-1 dark:bg-slate-800/70">
+        {["Conversations", "Message Requests"].map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            onClick={() => setActiveTab(tab)}
+            className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
+              activeTab === tab
+                ? "bg-white text-indigo-600 shadow-sm dark:bg-slate-950 dark:text-indigo-300"
+                : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+            }`}
+          >
+            {tab}{tab === "Message Requests" ? ` (${requests.length})` : ""}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "Message Requests" && (
+        <section>
+          {requests.length === 0 ? (
+            <p className="py-10 text-center text-sm text-slate-400 dark:text-slate-500">No pending requests.</p>
+          ) : (
+            <div className="space-y-2">
+              {requests.map((req) => (
               <div
                 key={req.id}
-                className="glass-card p-4 flex items-center justify-between gap-3"
+                className="rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/70 flex items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white font-bold shrink-0">
@@ -125,25 +140,23 @@ export default function DMInbox({ currentUserId }) {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </section>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
-      {/* Active Conversations */}
-      <section>
-        <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
-          Conversations ({conversations.length})
-        </h2>
-        {conversations.length === 0 ? (
-          <p className="text-sm text-slate-400 dark:text-slate-500 text-center py-6">No active conversations.</p>
-        ) : (
-          <div className="space-y-2">
-            {conversations.map((conv) => (
+      {activeTab === "Conversations" && (
+        <section>
+          {conversations.length === 0 ? (
+            <p className="py-10 text-center text-sm text-slate-400 dark:text-slate-500">No active conversations.</p>
+          ) : (
+            <div className="space-y-2">
+              {conversations.map((conv) => (
               <Link
                 key={conv.id}
                 href={`/community/messages/${conv.id}`}
-                className="glass-card p-4 flex items-center gap-3 hover:shadow-md hover:shadow-indigo-500/10 transition-all"
+                className="rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/70 flex items-center gap-3 hover:border-indigo-200 hover:shadow-md hover:shadow-indigo-500/10 transition-all"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center text-white font-bold shrink-0">
                   {(conv.otherUser?.full_name || "?")[0]?.toUpperCase()}
@@ -158,10 +171,11 @@ export default function DMInbox({ currentUserId }) {
                 </div>
                 <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0" />
               </Link>
-            ))}
-          </div>
-        )}
-      </section>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

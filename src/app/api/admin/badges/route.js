@@ -1,12 +1,16 @@
-import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin"; // Use service role for admin
+import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { isAdmin } from "@/lib/admin";
+
+async function requireAdmin() {
+  const admin = await isAdmin();
+  return admin ? null : NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+}
 
 export async function GET() {
   try {
-    const { userId } = await auth();
-    // Assuming there is some admin check, but for now we proceed
-    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
 
     const { data, error } = await supabase
       .from("badges")
@@ -23,8 +27,8 @@ export async function GET() {
 
 export async function POST(req) {
   try {
-    const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
 
     const body = await req.json();
     const { data, error } = await supabase
@@ -43,8 +47,8 @@ export async function POST(req) {
 
 export async function PUT(req) {
   try {
-    const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
 
     const body = await req.json();
     const { id, ...updates } = body;
@@ -66,8 +70,8 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
   try {
-    const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
 
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");

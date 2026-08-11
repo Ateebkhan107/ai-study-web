@@ -4,7 +4,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getPYQ, savePYQAttempts } from "@/lib/pyq";
-import { canShowStructuredQuestionText, shouldShowQuestionImageFallback } from "@/lib/pyqDisplay";
+import { canShowStructuredQuestionText, shouldShowQuestionImageFallback, shouldShowRequiredQuestionImage } from "@/lib/pyqDisplay";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
@@ -33,6 +33,12 @@ const RemoveOrangeFilter = () => (
         values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0"
       />
     </filter>
+  </svg>
+);
+
+const PaletteIcon = () => (
+  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
   </svg>
 );
 
@@ -202,6 +208,7 @@ export default function PYQSessionPage() {
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const [visitedQuestionIds, setVisitedQuestionIds] = useState(() => new Set());
   
   // Timer state for Full Paper mode (180 mins = 10800 secs)
@@ -226,6 +233,7 @@ export default function PYQSessionPage() {
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
   const shouldLoadWholePaper = mode === "full" && Boolean(examId);
+  const shouldLoadBalancedJeeRandom = mode === "random" && exam === "JEE";
 
   useEffect(() => {
     if (finishing || questions.length === 0 || mode !== "full") return;
@@ -247,7 +255,7 @@ export default function PYQSessionPage() {
     let cancelled = false;
 
     async function loadPYQ() {
-      const requestedSubjects = shouldLoadWholePaper ? [""] : subjectLabels;
+      const requestedSubjects = shouldLoadWholePaper || shouldLoadBalancedJeeRandom ? [""] : subjectLabels;
       if (requestedSubjects.length === 0) {
         if (!cancelled) setLoading(false);
         return;
@@ -260,6 +268,7 @@ export default function PYQSessionPage() {
           requestedSubjects.map((label) =>
             getPYQ(exam, label, {
               mode,
+              year: years.length > 0 ? years.join(",") : undefined,
               chapter,
               userId: user?.id,
               examType,
@@ -325,7 +334,7 @@ export default function PYQSessionPage() {
     loadPYQ();
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper, shouldLoadBalancedJeeRandom]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
@@ -406,6 +415,7 @@ export default function PYQSessionPage() {
   const handleSelectQuestion = useCallback((index) => {
     markVisitedByIndex(index);
     setCurrentIndex(index);
+    setPaletteOpen(false);
   }, [markVisitedByIndex]);
 
   async function handleFinishDeck() {
@@ -577,7 +587,15 @@ export default function PYQSessionPage() {
           )}
 
           {/* Progress + Finish */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setPaletteOpen(true)}
+              className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 lg:hidden"
+            >
+              <PaletteIcon />
+              Palette
+            </button>
             <div className="hidden items-center gap-2 sm:flex">
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 {answeredCount}/{questions.length}
@@ -600,9 +618,9 @@ export default function PYQSessionPage() {
         </div>
       </header>
 
-      <main className="mx-auto grid flex-1 w-full max-w-[1600px] grid-cols-1 gap-4 px-3 py-3 sm:px-4 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4">
+      <main className="mx-auto grid flex-1 w-full min-w-0 max-w-[1600px] grid-cols-1 gap-4 px-3 py-3 pb-24 sm:px-4 sm:pb-28 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4 lg:pb-3">
         {/* ── Question Palette ── */}
-        <aside className="order-2 lg:order-1">
+        <aside className="hidden lg:order-1 lg:block">
           <div className="lg:sticky lg:top-[72px]">
             <QuestionPalette
               questions={questions}
@@ -695,6 +713,17 @@ export default function PYQSessionPage() {
               </MathText>
             )}
 
+            {shouldShowRequiredQuestionImage(currentQuestion) && (
+              <img
+                src={currentQuestion.question_image}
+                alt="Question visual"
+                className={`${compactImageClassName} mt-3 mb-2.5`}
+                loading="lazy"
+                decoding="async"
+                style={{ filter: "url(#remove-orange)" }}
+              />
+            )}
+
             {/* Options */}
             <div className="mt-3">
               {qType === "NUMERICAL" ? (
@@ -750,24 +779,46 @@ export default function PYQSessionPage() {
           </div>
 
           {/* Navigation */}
-          <div className="mt-2 flex items-center justify-between gap-3" style={{ animationDelay: "150ms" }}>
+          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-slate-200/70 bg-white/90 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-[#020617]/90 sm:px-6 lg:static lg:mt-2 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-0" style={{ animationDelay: "150ms" }}>
             <button
               onClick={handleBack}
               disabled={currentIndex === 0}
-              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-indigo-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700/60 dark:bg-[#0f172a]/90 dark:text-slate-200"
+              className="min-h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-indigo-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700/60 dark:bg-[#0f172a]/90 dark:text-slate-200 sm:flex-none"
             >
               ← Previous
             </button>
             <button
               onClick={handleNext}
               disabled={currentIndex === questions.length - 1}
-              className="rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+              className="min-h-11 flex-1 rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none"
             >
               Next →
             </button>
           </div>
         </section>
       </main>
+
+      {paletteOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <button
+            type="button"
+            aria-label="Close question palette"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setPaletteOpen(false)}
+          />
+          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-4 shadow-2xl dark:bg-[#020617]">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
+            <QuestionPalette
+              questions={questions}
+              answers={answers}
+              currentIndex={currentIndex}
+              visitedQuestionIds={visitedQuestionIds}
+              mode={mode}
+              onSelectQuestion={handleSelectQuestion}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function AdminSettingsPage() {
                 <p className="font-bold text-sm">Image Storage Bucket</p>
                 <p className="text-xs text-gray-500">Supabase bucket for question images</p>
               </div>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">question_images</span>
+              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">pyq-images</span>
             </div>
           </div>
         </div>

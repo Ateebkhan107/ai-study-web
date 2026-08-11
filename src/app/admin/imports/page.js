@@ -1,25 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { Upload, FileText, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { RefreshCw, FileText, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 
 export default function ImportPackagesPage() {
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState(null);
+  const [syncReport, setSyncReport] = useState(null);
 
-  useEffect(() => {
-    async function loadPackages() {
+  async function loadPackages() {
       try {
-        const { data, error } = await supabase
-          .from("pyq_import_packages")
-          .select("*")
-          .order("created_at", { ascending: false });
+        setError(null);
+        const response = await fetch("/api/admin/import-packages");
+        const data = await response.json();
 
-        if (error) throw error;
-        setPackages(data || []);
+        if (!response.ok) throw new Error(data.error || "Failed to load import packages");
+        setPackages(data.packages || []);
       } catch (err) {
         console.error("Failed to load import packages:", err);
         setError(err.message);
@@ -27,8 +26,32 @@ export default function ImportPackagesPage() {
         setLoading(false);
       }
     }
+
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
     loadPackages();
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  async function syncExistingPapers() {
+    setSyncing(true);
+    setSyncReport(null);
+    try {
+      const response = await fetch("/api/admin/import-packages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "sync_existing_papers" }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Failed to sync existing papers");
+      setSyncReport(data);
+      await loadPackages();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSyncing(false);
+    }
+  }
 
   if (loading) {
     return (
@@ -40,23 +63,31 @@ export default function ImportPackagesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div className="min-w-0">
           <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
             Import Packages
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Manage your AI-imported question batches before they go live.
+            Review every existing paper without re-importing or duplicating questions.
           </p>
         </div>
-        <Link 
-          href="/admin/import" 
-          className="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
+        <button
+          type="button"
+          disabled={syncing}
+          onClick={syncExistingPapers}
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 dark:bg-white dark:text-black sm:w-auto"
         >
-          <Upload className="w-4 h-4" />
-          New Import
-        </Link>
+          {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+          Sync Existing Papers
+        </button>
       </div>
+
+      {syncReport && (
+        <div className="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 p-4 rounded-xl border border-emerald-100 dark:border-emerald-800/30 text-sm">
+          Synced {syncReport.totalPapersFound} papers. Created {syncReport.importPackagesCreated} packages, linked {syncReport.questionsLinked} existing questions, duplicated {syncReport.duplicateQuestionsCreated}.
+        </div>
+      )}
 
       {error && (
         <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-4 rounded-xl flex items-start gap-3 border border-red-100 dark:border-red-800/30">
@@ -74,18 +105,21 @@ export default function ImportPackagesPage() {
       {!error && packages.length === 0 && (
         <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-12 text-center">
           <div className="w-16 h-16 bg-gray-50 dark:bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Upload className="w-8 h-8 text-gray-400" />
+            <RefreshCw className="w-8 h-8 text-gray-400" />
           </div>
           <h2 className="text-lg font-bold mb-2">No Import Packages</h2>
           <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
-            You haven't created any import packages yet. Use the New Import button to start extracting questions from a PDF.
+            Sync existing papers to create review packages from the questions already in Supabase.
           </p>
-          <Link 
-            href="/admin/import"
+          <button
+            type="button"
+            onClick={syncExistingPapers}
+            disabled={syncing}
             className="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            Start First Import
-          </Link>
+            {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+            Sync Existing Papers
+          </button>
         </div>
       )}
 
@@ -95,9 +129,9 @@ export default function ImportPackagesPage() {
             <Link 
               key={pkg.id} 
               href={`/admin/imports/${pkg.id}`}
-              className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/5 transition-all group flex items-center justify-between"
+              className="group flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/5 dark:border-gray-800 dark:bg-[#111] sm:flex-row sm:items-center sm:justify-between sm:p-5"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex min-w-0 items-center gap-4">
                 <div className={`
                   w-12 h-12 rounded-xl flex items-center justify-center shrink-0
                   ${pkg.status === 'PUBLISHED' ? 'bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400' :
@@ -107,19 +141,30 @@ export default function ImportPackagesPage() {
                 `}>
                   <FileText className="w-6 h-6" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                     {pkg.name}
                   </h3>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
-                    <span>{new Date(pkg.created_at).toLocaleDateString()}</span>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
+                    <span>{pkg.exam_type || pkg.exam || "PYQ"}</span>
                     <span>•</span>
-                    <span>{pkg.total_questions} Questions</span>
+                    <span>{pkg.year || "Year unknown"}</span>
+                    {pkg.attempt && <span>•</span>}
+                    {pkg.attempt && <span>{pkg.attempt}</span>}
+                    {pkg.shift && <span>•</span>}
+                    {pkg.shift && <span>{pkg.shift}</span>}
+                    <span>•</span>
+                    <span>{pkg.total_questions || 0} Questions</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-3 text-[11px] font-semibold text-gray-500">
+                    <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800">Reviewed {pkg.reviewed_count || 0}</span>
+                    <span className="px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">Needs {pkg.needs_review_count || 0}</span>
+                    <span className="px-2 py-1 rounded bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300">Published {pkg.published_count || 0}</span>
                   </div>
                 </div>
               </div>
               
-              <div className="flex items-center gap-6">
+              <div className="flex flex-wrap items-center gap-3 sm:justify-end">
                 <span className={`
                   px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
                   ${pkg.status === 'PUBLISHED' ? 'bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-400' :

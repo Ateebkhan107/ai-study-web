@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp, ShieldOff } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
 import { supabase } from "@/lib/supabase";
 
 export default function DMChat({ conversationId, currentUserId, otherUser }) {
+  const { getToken } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,6 +17,14 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [error, setError] = useState(null);
   const bottomRef = useRef(null);
+
+  function mergeMessages(previous, incoming) {
+    const byId = new Map(previous.map((message) => [message.id, message]));
+    for (const message of incoming) {
+      byId.set(message.id, { ...byId.get(message.id), ...message });
+    }
+    return [...byId.values()].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  }
 
   const loadMessages = useCallback(
     async (before = null) => {
@@ -47,46 +57,60 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
   // Realtime for DMs
   useEffect(() => {
-    const channel = supabase
-      .channel(`dm-${conversationId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "community_direct_messages",
-          filter: `conversation_id=eq.${conversationId}`,
-        },
-        (payload) => {
-          const newMsg = payload.new;
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === newMsg.id)) return prev;
-            if (newMsg.sender_id === currentUserId) return prev;
-            return [
-              ...prev,
-              {
-                id: newMsg.id,
-                sender_id: newMsg.sender_id,
-                content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
-                is_deleted: newMsg.is_deleted,
-                created_at: newMsg.created_at,
-                senderName: otherUser?.full_name || "Other",
-                isOwn: false,
-              },
-            ];
-          });
-        }
-      )
-      .subscribe();
-    return () => supabase.removeChannel(channel);
-  }, [conversationId, currentUserId, otherUser]);
+    let channel;
+    let cancelled = false;
+    const otherName = otherUser?.full_name || "Other";
+
+    async function subscribeToConversation() {
+      const token = await getToken({ template: "supabase" }).catch(() => null);
+      if (token) supabase.realtime.setAuth(token);
+      if (cancelled) return;
+
+      channel = supabase
+        .channel(`dm-${conversationId}`)
+        .on(
+          "postgres_changes",
+          {
+            event: "INSERT",
+            schema: "public",
+            table: "community_direct_messages",
+            filter: `conversation_id=eq.${conversationId}`,
+          },
+          (payload) => {
+            const newMsg = payload.new;
+            setMessages((prev) => {
+              if (newMsg.sender_id === currentUserId) return prev;
+              return mergeMessages(prev, [
+                {
+                  id: newMsg.id,
+                  sender_id: newMsg.sender_id,
+                  content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
+                  is_deleted: newMsg.is_deleted,
+                  created_at: newMsg.created_at,
+                  senderName: otherName,
+                  isOwn: false,
+                },
+              ]);
+            });
+          }
+        )
+        .subscribe();
+    }
+
+    subscribeToConversation();
+
+    return () => {
+      cancelled = true;
+      if (channel) supabase.removeChannel(channel);
+    };
+  }, [conversationId, currentUserId, getToken, otherUser?.full_name]);
 
   async function loadOlderMessages() {
     if (!messages.length || loadingOlder) return;
     setLoadingOlder(true);
     try {
       const data = await loadMessages(messages[0]?.created_at);
-      setMessages((prev) => [...data.messages, ...prev]);
+      setMessages((prev) => mergeMessages(prev, data.messages || []));
       setHasMore(data.hasMore || false);
     } catch {
       setError("Failed to load older messages.");
@@ -102,8 +126,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
     setIsSubmitting(true);
     const optimisticId = `opt-${Date.now()}`;
-    setMessages((prev) => [
-      ...prev,
+    setMessages((prev) => mergeMessages(prev, [
       {
         id: optimisticId,
         sender_id: currentUserId,
@@ -114,7 +137,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         isOwn: true,
         optimistic: true,
       },
-    ]);
+    ]));
     setInput("");
 
     try {
@@ -131,7 +154,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         return;
       }
       setMessages((prev) =>
-        prev.map((m) => (m.id === optimisticId ? { ...data.message, optimistic: false } : m))
+        mergeMessages(prev.filter((m) => m.id !== optimisticId), [{ ...data.message, optimistic: false }])
       );
     } catch {
       setMessages((prev) => prev.filter((m) => m.id !== optimisticId));
@@ -157,7 +180,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col bg-white/60 dark:bg-slate-950/30">
       {/* Header */}
       <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -183,7 +206,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1">
+      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-2 sm:px-5">
         {hasMore && (
           <div className="flex justify-center py-2">
             <button
@@ -226,7 +249,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       {/* Input */}
       <form
         onSubmit={sendMessage}
-        className="border-t border-slate-200 dark:border-slate-800 px-4 py-3 flex items-end gap-3"
+        className="sticky bottom-0 border-t border-slate-200 bg-white/90 px-3 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 flex items-end gap-3 sm:px-4"
       >
         <textarea
           value={input}

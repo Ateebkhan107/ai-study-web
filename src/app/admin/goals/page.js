@@ -47,7 +47,7 @@ export default function AdminGoalsPage() {
           goal_type: goalType,
           target: goalTarget,
           target_value: targetValue,
-          xp_reward: xp
+          xp
         }),
       });
       if (res.ok) {
@@ -151,7 +151,7 @@ export default function AdminGoalsPage() {
                 <p className="text-sm text-gray-500 mb-2">{goal.description}</p>
                 <div className="flex gap-4 text-sm font-medium">
                   <span className="text-purple-600">Target: {goal.target_value}</span>
-                  <span className="text-amber-500">XP: +{goal.xp_reward}</span>
+                  <span className="text-amber-500">XP: +{goal.xp}</span>
                 </div>
               </div>
               <button onClick={() => deleteGoal(goal.id)} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">

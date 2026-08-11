@@ -32,6 +32,12 @@ const TargetIcon = () => (
   </svg>
 );
 
+const PaletteIcon = () => (
+  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+  </svg>
+);
+
 const QuestionPalette = memo(function QuestionPalette({
   questions,
   answers,
@@ -39,11 +45,11 @@ const QuestionPalette = memo(function QuestionPalette({
   onSelectQuestion,
 }) {
   return (
-    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
+    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-4 sm:p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
       <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
         Question Palette
       </p>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid max-h-[60vh] grid-cols-5 gap-2 overflow-y-auto pr-1 sm:max-h-none">
         {questions.map((question, index) => {
           const value = answers[question.id];
           const isAnswered = value !== undefined && String(value).trim() !== "";
@@ -93,7 +99,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
   if (!activeQuestion) return null;
 
   return (
-    <div className="flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 sm:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
+    <div className="min-w-0 flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-4 sm:p-6 lg:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
           Question {currentIdx + 1} of {totalQuestions}
@@ -106,9 +112,21 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         </span>
       </div>
 
-      <MathText className="text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-8">
+      <MathText className="min-w-0 text-base sm:text-lg lg:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-6 sm:mb-8">
         {activeQuestion.text}
       </MathText>
+
+      {activeQuestion.question_image && (
+        <div className="mb-6 sm:mb-8 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/80 p-2 dark:border-slate-700/60 dark:bg-slate-950/30">
+          <img
+            src={activeQuestion.question_image}
+            alt="Question visual"
+            className="mx-auto h-auto max-h-[70vh] w-full max-w-4xl object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
 
       {activeQuestion.question_type === "Numerical" ? (
         <div className="max-w-xl">
@@ -153,7 +171,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
               >
                 {LETTERS[optionIndex]}
               </span>
-              <MathText className="text-base font-medium">{option}</MathText>
+              <MathText className="min-w-0 text-sm sm:text-base font-medium">{option}</MathText>
             </button>
           );
         })}
@@ -194,6 +212,7 @@ function TestSessionContent() {
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(durationParam * 60);
   const [finishing, setFinishing] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const timerRef = useRef(null);
   const submitRef = useRef(null);
 
@@ -326,6 +345,7 @@ function TestSessionContent() {
 
   const handleSelectQuestion = useCallback((index) => {
     setCurrentIdx(index);
+    setPaletteOpen(false);
   }, []);
 
   const handlePrev = useCallback(() => {
@@ -383,7 +403,7 @@ function TestSessionContent() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-6 py-3.5">
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-3 py-3 sm:px-6 sm:py-3.5">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Logo size={28} />
@@ -406,7 +426,15 @@ function TestSessionContent() {
           </div>
 
           {/* Progress + Submit */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <button
+              type="button"
+              onClick={() => setPaletteOpen(true)}
+              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 lg:hidden"
+            >
+              <PaletteIcon />
+              Palette
+            </button>
             <div className="hidden sm:flex items-center gap-2">
               <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
                 {answeredCount}/{questions.length}
@@ -420,7 +448,7 @@ function TestSessionContent() {
             </div>
             <button
               onClick={handleSubmit}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+              className="px-4 py-2.5 sm:px-6 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
             >
               Submit Test
             </button>
@@ -428,9 +456,9 @@ function TestSessionContent() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <main className="flex-1 max-w-7xl w-full min-w-0 mx-auto p-3 pb-24 sm:p-6 sm:pb-28 lg:pb-6 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
         {/* ── Question Palette ── */}
-        <aside className="lg:col-span-1 order-2 lg:order-1">
+        <aside className="hidden lg:col-span-1 lg:order-1 lg:block">
           <QuestionPalette
             questions={questions}
             answers={answers}
@@ -440,7 +468,7 @@ function TestSessionContent() {
         </aside>
 
         {/* ── Question Content ── */}
-        <section className="lg:col-span-3 flex flex-col order-1 lg:order-2">
+        <section className="min-w-0 lg:col-span-3 flex flex-col order-1 lg:order-2">
           <TestQuestionPanel
             activeQuestion={activeQ}
             currentIdx={currentIdx}
@@ -452,24 +480,44 @@ function TestSessionContent() {
           />
 
           {/* Navigation */}
-          <div className="mt-6 flex items-center justify-between animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-slate-200/70 bg-white/90 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-[#020617]/90 sm:px-6 lg:static lg:mt-6 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-0 animate-slideUp" style={{ animationDelay: "150ms" }}>
             <button
               onClick={handlePrev}
               disabled={currentIdx === 0}
-              className="px-6 py-3 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
+              className="min-h-11 flex-1 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 px-4 py-3 text-sm font-bold text-slate-700 backdrop-blur-xl disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:border-indigo-500/30 dark:bg-[#0f172a]/60 dark:text-slate-200 dark:hover:border-indigo-500/30 sm:flex-none sm:px-6"
             >
               ← Previous
             </button>
             <button
               onClick={handleNext}
               disabled={currentIdx === questions.length - 1}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+              className="min-h-11 flex-1 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 sm:flex-none sm:px-6"
             >
               Save & Next →
             </button>
           </div>
         </section>
       </main>
+
+      {paletteOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <button
+            type="button"
+            aria-label="Close question palette"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setPaletteOpen(false)}
+          />
+          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-4 shadow-2xl dark:bg-[#020617]">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
+            <QuestionPalette
+              questions={questions}
+              answers={answers}
+              currentIdx={currentIdx}
+              onSelectQuestion={handleSelectQuestion}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

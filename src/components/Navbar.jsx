@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard" },
@@ -26,6 +26,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [track, setTrack] = useState(null);
   const [isPro, setIsPro] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -88,12 +89,35 @@ export default function Navbar() {
   const isActive = (href) =>
     pathname === href || pathname.startsWith(href + "/");
 
+  const renderNavLink = (item, mobile = false) => (
+    <Link
+      key={item.href}
+      href={item.href}
+      onClick={() => mobile && setMobileOpen(false)}
+      className={`relative rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden group ${
+        mobile ? "flex min-h-11 items-center px-4 py-3" : "px-3 py-2 xl:px-4"
+      } ${
+        isActive(item.href)
+          ? "text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.05)]"
+          : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/5"
+      }`}
+    >
+      <span className="relative z-10">{item.name}</span>
+      {!mobile && (
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      )}
+      {!mobile && isActive(item.href) && (
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-t-full shadow-[0_-2px_8px_rgba(99,102,241,0.6)]" />
+      )}
+    </Link>
+  );
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-indigo-500/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-colors duration-500">
       {/* ── Subtle animated bottom glow line ── */}
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 lg:gap-6 relative z-10">
 
         {/* Logo */}
         <div className="shrink-0 transform transition-transform duration-300 hover:scale-105">
@@ -103,27 +127,8 @@ export default function Navbar() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 flex items-center justify-center gap-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden group ${
-                isActive(item.href)
-                  ? "text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.05)]"
-                  : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/5"
-              }`}
-            >
-              <span className="relative z-10">{item.name}</span>
-              
-              {/* Subtle hover background sweep */}
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {isActive(item.href) && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-t-full shadow-[0_-2px_8px_rgba(99,102,241,0.6)]" />
-              )}
-            </Link>
-          ))}
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 xl:flex">
+          {navItems.map((item) => renderNavLink(item))}
 
           {/* PrepZii Pro */}
           {!isPro ? (
@@ -147,7 +152,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right Side */}
-        <div className="shrink-0 flex items-center gap-4">
+        <div className="shrink-0 flex items-center gap-2 sm:gap-3">
 
           <button
             onClick={toggleTheme}
@@ -168,8 +173,34 @@ export default function Navbar() {
             <ProfileMenu />
           </div>
 
+          <button
+            onClick={() => setMobileOpen((value) => !value)}
+            className="xl:hidden relative flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-white/50 text-slate-700 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-indigo-500/30 dark:border-gray-700/50 dark:bg-gray-800/50 dark:text-slate-300"
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+
         </div>
       </div>
+
+      {mobileOpen && (
+        <div className="xl:hidden border-t border-indigo-500/10 bg-white/95 px-4 py-4 shadow-lg backdrop-blur-xl dark:bg-[#020617]/95">
+          <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1 sm:grid-cols-2">
+            {navItems.map((item) => renderNavLink(item, true))}
+            {!isPro && (
+              <Link
+                href="/pro"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 px-4 py-3 text-sm font-bold text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] sm:col-span-2"
+              >
+                ⭐ PRO
+              </Link>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

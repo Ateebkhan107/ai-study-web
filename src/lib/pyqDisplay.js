@@ -19,3 +19,7 @@ export function canShowStructuredQuestionText(question) {
 export function shouldShowQuestionImageFallback(question) {
   return Boolean(question?.question_image) && !canShowStructuredQuestionText(question);
 }
+
+export function shouldShowRequiredQuestionImage(question) {
+  return Boolean(question?.question_image) && canShowStructuredQuestionText(question);
+}

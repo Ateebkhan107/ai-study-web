@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { ImageIcon } from "lucide-react";
 
 export default function ImageManager() {
@@ -10,9 +10,39 @@ export default function ImageManager() {
   const [uploading, setUploading] = useState(false);
   const [filterMissing, setFilterMissing] = useState(false);
 
+  const loadExams = useCallback(async function loadExams() {
+    try {
+      const res = await fetch("/api/admin/exams");
+      const data = await res.json();
+      if (data.exams) setExams(data.exams);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const loadQuestions = useCallback(async function loadQuestions() {
+    try {
+      const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
+      const data = await res.json();
+      if (data.success && Array.isArray(data.questions)) {
+        setQuestions(data.questions);
+        setCurrentIndex(0);
+      } else if (Array.isArray(data)) {
+        setQuestions(data);
+        setCurrentIndex(0);
+      } else {
+        setQuestions([]);
+        setCurrentIndex(0);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [selectedExamId]);
+
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     loadExams();
-  }, []);
+  }, [loadExams]);
 
   useEffect(() => {
     if (selectedExamId) {
@@ -21,30 +51,8 @@ export default function ImageManager() {
       setQuestions([]);
       setCurrentIndex(0);
     }
-  }, [selectedExamId]);
-
-  async function loadExams() {
-    try {
-      const res = await fetch("/api/admin/exams");
-      const data = await res.json();
-      if (data.exams) setExams(data.exams);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function loadQuestions() {
-    try {
-      const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        setQuestions(data);
-        setCurrentIndex(0);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  }, [selectedExamId, loadQuestions]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   async function handleImageUpload(e, field) {
     const file = e.target.files[0];

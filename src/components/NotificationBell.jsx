@@ -31,6 +31,7 @@ export default function NotificationBell() {
     }
   }
 
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!isLoaded || !user) return;
 
@@ -50,6 +51,7 @@ export default function NotificationBell() {
       loadNotifications();
     }
   }, [open]);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 
   async function openNotification(item) {
     setNotifications((prev) =>
@@ -128,7 +130,8 @@ export default function NotificationBell() {
             absolute
             right-0
             mt-4
-            w-[380px]
+            w-[calc(100vw-2rem)]
+            max-w-[380px]
             bg-white/90
             dark:bg-[#0f172a]/90
             backdrop-blur-xl
@@ -193,12 +196,12 @@ export default function NotificationBell() {
                     🔔
                   </div>
 
-                  <div className="flex-1">
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="break-words font-bold text-sm text-slate-900 dark:text-white">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-slate-400 dark:text-slate-500">
+                    <p className="break-words text-xs text-slate-400 dark:text-slate-500">
                       {item.message}
                     </p>
                   </div>

@@ -174,6 +174,7 @@ export default function TestBuilder({ track = "jee" }) {
   // Compute active valid selected subjects
   const validSelectedSubjects = selectedSubjects.filter((name) => isSubjectAllowed(name));
 
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
   useEffect(() => {
     try {
       const savedSubjects = sessionStorage.getItem("tb_subjects");
@@ -210,6 +211,7 @@ export default function TestBuilder({ track = "jee" }) {
 //       console.log("No saved data found, starting fresh!");
     }
   }, [activeTrack]);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 
   const saveSubjects = (val) => {
     const sanitized = val.filter((s) => isSubjectAllowed(s));
@@ -298,18 +300,18 @@ export default function TestBuilder({ track = "jee" }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
 
       {/* Left — Subject + Chapter Picker */}
-      <div className="lg:col-span-2 space-y-5">
+      <div className="min-w-0 space-y-5 xl:col-span-2">
 
         {/* Step 1 — Subject selector */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
           <p className="text-xs text-gray-400 mb-4">You can select multiple subjects</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {filteredSubjectsEntries.map(([name, data]) => {
               const c = colorMap[data.color];
               const isSelected = validSelectedSubjects.includes(name);
@@ -362,18 +364,18 @@ export default function TestBuilder({ track = "jee" }) {
               >
                 <div
                   onClick={() => setExpandedSubject(isExpanded ? null : subject)}
-                  className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer select-none"
-                >
-                  <div className="flex items-center gap-2">
+                className="w-full flex min-w-0 items-center justify-between gap-3 px-4 py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer select-none sm:px-5"
+              >
+                  <div className="flex min-w-0 items-center gap-2">
                     <span className="text-lg">{data.icon}</span>
-                    <span className={`text-sm font-bold ${c.text}`}>{subject}</span>
+                    <span className={`truncate text-sm font-bold ${c.text}`}>{subject}</span>
                     {chapters.length > 0 && (
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${c.chip}`}>
                         {chapters.length}/{data.chapters.length}
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex shrink-0 items-center gap-3">
                     {isExpanded && (
                       <span
                         onClick={(e) => { e.stopPropagation(); selectAllChapters(subject); }}
@@ -389,7 +391,7 @@ export default function TestBuilder({ track = "jee" }) {
                 </div>
 
                 {isExpanded && (
-                  <div className="px-5 pb-4 border-t border-gray-50 dark:border-gray-800 pt-3">
+                  <div className="px-4 pb-4 border-t border-gray-50 dark:border-gray-800 pt-3 sm:px-5">
                     <div className="flex flex-wrap gap-2">
                       {data.chapters.map((chapter) => {
                         const isChapterSelected = chapters.includes(chapter);
@@ -421,7 +423,7 @@ export default function TestBuilder({ track = "jee" }) {
       <div className="space-y-4">
 
         {/* Question count */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Questions
           </p>
@@ -444,7 +446,7 @@ export default function TestBuilder({ track = "jee" }) {
         </div>
 
         {/* Duration */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Duration (mins)
           </p>
@@ -467,7 +469,7 @@ export default function TestBuilder({ track = "jee" }) {
         </div>
 
         {/* Difficulty */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5">
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Difficulty
           </p>

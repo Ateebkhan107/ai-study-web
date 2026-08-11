@@ -82,14 +82,14 @@ export default function AnalyticsPage() {
     >
       {/* ── Tab Navigation ── */}
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm flex-wrap">
+        <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           {TABS.map((tab) => {
             const active = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                className={`flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   active
                     ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
                     : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"

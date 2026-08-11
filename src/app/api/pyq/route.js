@@ -50,8 +50,12 @@ const REVEAL_FIELDS = [
   "numerical_max",
 ];
 
+const ATTEMPT_LOOKUP_CHUNK_SIZE = 100;
+const JEE_RANDOM_SUBJECTS = ["Physics", "Chemistry", "Maths"];
+const JEE_RANDOM_QUESTIONS_PER_SUBJECT = 25;
+
 function sanitizeQuestion(question, attemptedQuestionIds) {
-  if (attemptedQuestionIds.has(question.id)) {
+  if (attemptedQuestionIds.has(String(question.id))) {
     return {
       ...question,
       answer_revealed: true,
@@ -75,17 +79,118 @@ async function getAttemptedQuestionIds(userId, questionIds) {
     return new Set();
   }
 
-  const { data, error } = await supabaseAdmin
-    .from("pyq_attempts")
-    .select("question_id")
-    .eq("user_id", userId)
-    .in("question_id", questionIds);
+  const attemptedQuestionIds = new Set();
+  const uniqueQuestionIds = [...new Set(questionIds.filter(Boolean).map(String))];
 
-  if (error) {
-    throw error;
+  for (let index = 0; index < uniqueQuestionIds.length; index += ATTEMPT_LOOKUP_CHUNK_SIZE) {
+    const chunk = uniqueQuestionIds.slice(index, index + ATTEMPT_LOOKUP_CHUNK_SIZE);
+    const { data, error } = await supabaseAdmin
+      .from("pyq_attempts")
+      .select("question_id")
+      .eq("user_id", userId)
+      .in("question_id", chunk);
+
+    if (error) {
+      throw error;
+    }
+
+    for (const attempt of data || []) {
+      attemptedQuestionIds.add(String(attempt.question_id));
+    }
   }
 
-  return new Set((data || []).map((attempt) => attempt.question_id));
+  return attemptedQuestionIds;
+}
+
+function shuffleQuestions(questions) {
+  return [...questions].sort(() => Math.random() - 0.5);
+}
+
+function sortByDisplayOrder(a, b) {
+  const displayA = Number.isFinite(Number(a.display_order)) ? Number(a.display_order) : Number(a.question_number);
+  const displayB = Number.isFinite(Number(b.display_order)) ? Number(b.display_order) : Number(b.question_number);
+  if (displayA !== displayB) return displayA - displayB;
+
+  const numberA = Number(a.question_number) || 0;
+  const numberB = Number(b.question_number) || 0;
+  if (numberA !== numberB) return numberA - numberB;
+
+  return new Date(a.created_at) - new Date(b.created_at);
+}
+
+function buildJeeRandomPaper(questions) {
+  const papers = new Map();
+
+  for (const question of questions) {
+    if (!JEE_RANDOM_SUBJECTS.includes(question.subject) || !question.exam_id) continue;
+
+    if (!papers.has(question.exam_id)) {
+      papers.set(question.exam_id, {
+        year: question.year,
+        createdAt: question.created_at,
+        subjects: new Map(JEE_RANDOM_SUBJECTS.map((subjectName) => [subjectName, []])),
+      });
+    }
+
+    papers.get(question.exam_id).subjects.get(question.subject).push(question);
+  }
+
+  const completePapers = [...papers.entries()].filter(([, paper]) =>
+    JEE_RANDOM_SUBJECTS.every(
+      (subjectName) => (paper.subjects.get(subjectName) || []).length >= JEE_RANDOM_QUESTIONS_PER_SUBJECT
+    )
+  );
+
+  if (completePapers.length === 0) {
+    return [];
+  }
+
+  const [, selectedPaper] = completePapers[Math.floor(Math.random() * completePapers.length)];
+
+  return JEE_RANDOM_SUBJECTS.flatMap((subjectName) =>
+    shuffleQuestions(selectedPaper.subjects.get(subjectName) || [])
+      .slice(0, JEE_RANDOM_QUESTIONS_PER_SUBJECT)
+      .sort(sortByDisplayOrder)
+  );
+}
+
+async function getJeeRandomPaperQuestions({ exam, year }) {
+  let papersQuery = supabaseAdmin
+    .from("pyq_exams")
+    .select("id")
+    .eq("exam", exam)
+    .eq("is_published", true);
+
+  if (year) {
+    const years = year.split(",").map((value) => Number(value.trim())).filter(Boolean);
+    papersQuery = years.length > 1 ? papersQuery.in("year", years) : papersQuery.eq("year", Number(year));
+  }
+
+  const { data: papers, error: papersError } = await papersQuery;
+
+  if (papersError) {
+    throw papersError;
+  }
+
+  for (const paper of shuffleQuestions(papers || [])) {
+    const { data: questions, error: questionsError } = await supabaseAdmin
+      .from("pyq_questions")
+      .select(PYQ_SESSION_SELECT)
+      .eq("exam_id", paper.id)
+      .in("subject", JEE_RANDOM_SUBJECTS)
+      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"]);
+
+    if (questionsError) {
+      throw questionsError;
+    }
+
+    const randomPaper = buildJeeRandomPaper(questions || []);
+    if (randomPaper.length === JEE_RANDOM_SUBJECTS.length * JEE_RANDOM_QUESTIONS_PER_SUBJECT) {
+      return randomPaper;
+    }
+  }
+
+  return [];
 }
 
 export async function GET(req) {
@@ -145,61 +250,60 @@ export async function GET(req) {
       return NextResponse.json({ error: "Failed to load mistake questions" }, { status: 500 });
     }
 
-    const attemptedQuestionIds = new Set(questionIds);
+    const attemptedQuestionIds = new Set(questionIds.map(String));
     return NextResponse.json(
       (mistakeQuestions || []).map((question) => sanitizeQuestion(question, attemptedQuestionIds))
     );
   }
 
-  let query = supabaseAdmin
-    .from("pyq_questions")
-    .select(PYQ_SESSION_SELECT)
-    .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
-    .not("exam_id", "is", null);
+  let result = [];
 
-  if (examId) query = query.eq("exam_id", examId);
-  if (exam) query = query.eq("exam", exam);
-  if (subject) query = query.eq("subject", subject);
-  if (year) query = query.eq("year", year);
-
-  if (mode === "chapter") {
-    // Chapter Wise mode: ONLY filter by chapter (plus exam/subject/year already added above).
-    // Do NOT filter by exam_type, attempt, shift, or paper_code.
-    if (chapter) {
-      const chaptersArray = chapter.split(",").map(c => c.trim());
-      query = query.in("chapter", chaptersArray);
+  if (mode === "random" && exam === "JEE" && !subject && !examId) {
+    try {
+      result = await getJeeRandomPaperQuestions({ exam, year });
+    } catch (randomPaperError) {
+      console.error("JEE RANDOM PYQ QUERY ERROR:", randomPaperError.message);
+      return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
     }
   } else {
-    // Full paper or random mode: apply all paper metadata filters
-    if (examType) query = query.eq("exam_type", examType);
-    if (attempt) query = query.eq("attempt", attempt);
-    if (shift) query = query.eq("shift", shift);
-    if (paperCode) query = query.eq("paper_code", paperCode);
-  }
+    let query = supabaseAdmin
+      .from("pyq_questions")
+      .select(PYQ_SESSION_SELECT)
+      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
+      .not("exam_id", "is", null);
 
-  const { data, error } = await query;
+    if (examId) query = query.eq("exam_id", examId);
+    if (exam) query = query.eq("exam", exam);
+    if (subject) query = query.eq("subject", subject);
+    if (year) {
+      const years = year.split(",").map((value) => value.trim()).filter(Boolean);
+      query = years.length > 1 ? query.in("year", years) : query.eq("year", year);
+    }
 
-  if (error) {
-    console.error("PYQ QUERY ERROR:", error.message);
-    return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
-  }
+    if (mode === "chapter") {
+      // Chapter Wise mode: ONLY filter by chapter (plus exam/subject/year already added above).
+      // Do NOT filter by exam_type, attempt, shift, or paper_code.
+      if (chapter) {
+        const chaptersArray = chapter.split(",").map(c => c.trim());
+        query = query.in("chapter", chaptersArray);
+      }
+    } else {
+      // Full paper or random mode: apply all paper metadata filters
+      if (examType) query = query.eq("exam_type", examType);
+      if (attempt) query = query.eq("attempt", attempt);
+      if (shift) query = query.eq("shift", shift);
+      if (paperCode) query = query.eq("paper_code", paperCode);
+    }
 
-  let result = data || [];
+    const { data, error } = await query;
 
-  if (mode === "random") {
-    result = [...result].sort(() => Math.random() - 0.5);
-  } else {
-    result = [...result].sort((a, b) => {
-      const displayA = Number.isFinite(Number(a.display_order)) ? Number(a.display_order) : Number(a.question_number);
-      const displayB = Number.isFinite(Number(b.display_order)) ? Number(b.display_order) : Number(b.question_number);
-      if (displayA !== displayB) return displayA - displayB;
+    if (error) {
+      console.error("PYQ QUERY ERROR:", error.message);
+      return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
+    }
 
-      const numberA = Number(a.question_number) || 0;
-      const numberB = Number(b.question_number) || 0;
-      if (numberA !== numberB) return numberA - numberB;
-
-      return new Date(a.created_at) - new Date(b.created_at);
-    });
+    result = data || [];
+    result = mode === "random" ? shuffleQuestions(result) : [...result].sort(sortByDisplayOrder);
   }
 
   try {
@@ -212,7 +316,12 @@ export async function GET(req) {
       result.map((question) => sanitizeQuestion(question, attemptedQuestionIds))
     );
   } catch (attemptsError) {
-    console.error("PYQ ATTEMPTS LOOKUP ERROR:", attemptsError.message);
-    return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
+    console.error("PYQ ATTEMPTS LOOKUP ERROR:", {
+      message: attemptsError.message,
+      code: attemptsError.code,
+      details: attemptsError.details,
+      hint: attemptsError.hint,
+    });
+    return NextResponse.json(result.map((question) => sanitizeQuestion(question, new Set())));
   }
 }

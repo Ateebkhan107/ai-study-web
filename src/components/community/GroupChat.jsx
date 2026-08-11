@@ -2,10 +2,12 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import { supabase } from "@/lib/supabase";
 
 export default function GroupChat({ groupId, currentUserId }) {
+  const { getToken } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,6 +17,14 @@ export default function GroupChat({ groupId, currentUserId }) {
   const [error, setError] = useState(null);
   const bottomRef = useRef(null);
   const channelRef = useRef(null);
+
+  function mergeMessages(previous, incoming) {
+    const byId = new Map(previous.map((message) => [message.id, message]));
+    for (const message of incoming) {
+      byId.set(message.id, { ...byId.get(message.id), ...message });
+    }
+    return [...byId.values()].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  }
 
   // Load initial messages
   const loadMessages = useCallback(async (before = null) => {
@@ -53,42 +63,49 @@ export default function GroupChat({ groupId, currentUserId }) {
 
   // Supabase Realtime subscription
   useEffect(() => {
-    const channel = supabase
-      .channel(`group-chat-${groupId}`)
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-        (payload) => {
-          const newMsg = payload.new;
-          // Prevent duplicate: skip if sender is current user (optimistic already shown)
-          setMessages((prev) => {
-            const isDuplicate = prev.some((m) => m.id === newMsg.id);
-            if (isDuplicate) return prev;
-            // Don't add own messages via realtime — they're already optimistically shown
-            if (newMsg.sender_id === currentUserId) return prev;
-            return [
-              ...prev,
-              {
-                id: newMsg.id,
-                sender_id: newMsg.sender_id,
-                content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
-                is_deleted: newMsg.is_deleted,
-                created_at: newMsg.created_at,
-                senderName: "Loading…",
-                isOwn: false,
-              },
-            ];
-          });
-        }
-      )
-      .subscribe();
+    let channel;
+    let cancelled = false;
 
-    channelRef.current = channel;
+    async function subscribeToGroup() {
+      const token = await getToken({ template: "supabase" }).catch(() => null);
+      if (token) supabase.realtime.setAuth(token);
+      if (cancelled) return;
+
+      channel = supabase
+        .channel(`group-chat-${groupId}`)
+        .on(
+          "postgres_changes",
+          { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
+          (payload) => {
+            const newMsg = payload.new;
+            setMessages((prev) => {
+              if (newMsg.sender_id === currentUserId) return prev;
+              return mergeMessages(prev, [
+                {
+                  id: newMsg.id,
+                  sender_id: newMsg.sender_id,
+                  content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
+                  is_deleted: newMsg.is_deleted,
+                  created_at: newMsg.created_at,
+                  senderName: "Member",
+                  isOwn: false,
+                },
+              ]);
+            });
+          }
+        )
+        .subscribe();
+
+      channelRef.current = channel;
+    }
+
+    subscribeToGroup();
 
     return () => {
-      supabase.removeChannel(channel);
+      cancelled = true;
+      if (channel) supabase.removeChannel(channel);
     };
-  }, [groupId, currentUserId]);
+  }, [groupId, currentUserId, getToken]);
 
   async function loadOlderMessages() {
     if (messages.length === 0 || loadingOlder) return;
@@ -96,7 +113,7 @@ export default function GroupChat({ groupId, currentUserId }) {
     const oldest = messages[0]?.created_at;
     const data = await loadMessages(oldest);
     if (data) {
-      setMessages((prev) => [...data.messages, ...prev]);
+      setMessages((prev) => mergeMessages(prev, data.messages || []));
       setHasMore(data.hasMore || false);
     }
     setLoadingOlder(false);
@@ -123,7 +140,7 @@ export default function GroupChat({ groupId, currentUserId }) {
       optimistic: true,
     };
 
-    setMessages((prev) => [...prev, optimisticMsg]);
+    setMessages((prev) => mergeMessages(prev, [optimisticMsg]));
     setInput("");
 
     try {
@@ -144,7 +161,7 @@ export default function GroupChat({ groupId, currentUserId }) {
 
       // Replace optimistic with real message
       setMessages((prev) =>
-        prev.map((m) => (m.id === optimisticId ? { ...data.message, optimistic: false } : m))
+        mergeMessages(prev.filter((m) => m.id !== optimisticId), [{ ...data.message, optimistic: false }])
       );
     } catch {
       setMessages((prev) => prev.filter((m) => m.id !== optimisticId));
@@ -170,9 +187,9 @@ export default function GroupChat({ groupId, currentUserId }) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col bg-white/60 dark:bg-slate-950/30">
       {/* Messages area */}
-      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1 scroll-smooth">
+      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-2 scroll-smooth sm:px-5">
         {/* Load older */}
         {hasMore && (
           <div className="flex justify-center py-2">
@@ -222,7 +239,7 @@ export default function GroupChat({ groupId, currentUserId }) {
       {/* Input */}
       <form
         onSubmit={sendMessage}
-        className="border-t border-slate-200 dark:border-slate-800 px-4 py-3 flex items-end gap-3"
+        className="sticky bottom-0 border-t border-slate-200 bg-white/90 px-3 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 flex items-end gap-3 sm:px-4"
       >
         <textarea
           value={input}

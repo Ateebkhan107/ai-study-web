@@ -181,6 +181,7 @@ function PracticeTab({ subjects, track }) {
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [chapterError,    setChapterError]    = useState("");
   const jeeFullMode = track === "jee" && practiceMode === "full";
+  const jeeRandomMode = track === "jee" && practiceMode === "random";
   const shouldLoadChapters = practiceMode === "chapter" && selectedSubjects.length > 0;
 
   useEffect(() => {
@@ -261,7 +262,7 @@ function PracticeTab({ subjects, track }) {
   function handleStartDeck() {
     const subjectLabels = selectedSubjects.length > 0
       ? subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label)
-      : jeeFullMode
+      : (jeeFullMode || jeeRandomMode)
         ? subjects.filter((s) => ["Physics", "Chemistry", "Maths"].includes(s.label)).map((s) => s.label)
         : [];
 
@@ -309,11 +310,11 @@ function PracticeTab({ subjects, track }) {
   const toggleChapter = (ch) => setSelectedChapters((p) => p.includes(ch) ? p.filter((c) => c !== ch) : [...p, ch]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
+    <div className="grid min-w-0 grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
       {/* Left — selectors */}
       <div className="space-y-4">
         {/* Subject selector */}
-        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "150ms" }}>
+        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "150ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {subjects.map((s) => {
@@ -335,7 +336,7 @@ function PracticeTab({ subjects, track }) {
         </div>
 
         {/* Year selector */}
-        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "225ms" }}>
+        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "225ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — SELECT YEAR BULLETINS</p>
           <div className="flex flex-wrap gap-2">
             {YEARS.map((yr) => (
@@ -356,7 +357,7 @@ function PracticeTab({ subjects, track }) {
         {track === "jee" && (
           <>
             {/* Attempt Selector */}
-            <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
+            <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
               <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
               {selectedYears.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
@@ -385,7 +386,7 @@ function PracticeTab({ subjects, track }) {
             </div>
 
             {/* Shift Selector */}
-            <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
+            <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
               <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
               {selectedYears.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
@@ -416,7 +417,7 @@ function PracticeTab({ subjects, track }) {
         )}
 
         {/* Practice mode selector */}
-        <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
+        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
             {track === "jee" ? (availableShiftPapers.length > 0 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
           </p>
@@ -449,7 +450,7 @@ function PracticeTab({ subjects, track }) {
 
         {/* Chapter selector */}
         {practiceMode === "chapter" && (
-          <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
+          <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
               {track === "jee" ? (availableShiftPapers.length > 0 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
             </p>
@@ -478,11 +479,15 @@ function PracticeTab({ subjects, track }) {
 
       {/* Right — start button */}
       <div>
-        <div className={`glass-card p-5 space-y-3 sticky top-24 animate-slideUp`} style={{ animationDelay: "150ms" }}>
+        <div className={`glass-card p-4 sm:p-5 space-y-3 xl:sticky xl:top-24 animate-slideUp`} style={{ animationDelay: "150ms" }}>
           <div className="space-y-2 mb-2">
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>SESSION SUMMARY</p>
             <p className={`text-xs ${TXT_MUTED}`}>
-              {selectedSubjects.length > 0 ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected` : "No subjects selected"}
+              {jeeRandomMode && selectedSubjects.length === 0
+                ? "Physics, Chemistry, Maths balanced"
+                : selectedSubjects.length > 0
+                  ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected`
+                  : "No subjects selected"}
             </p>
             <p className={`text-xs ${TXT_MUTED}`}>
               {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
@@ -772,12 +777,12 @@ export default function PYQPage() {
     >
       {/* Tab nav */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm">
+        <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           {TABS.map((tab) => {
             const active = activeTab === tab.id;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   active
                     ? ACTIVE_PILL
                     : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5`

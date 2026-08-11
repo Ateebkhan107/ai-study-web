@@ -25,12 +25,12 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full min-w-0">
       
       {/* ── Full Bleed Background Layer ── 
           Using left-[calc(50%-50vw)] and w-screen forces it to break out of any max-w parent container 
       */}
-      <div className="absolute top-0 left-[calc(50%-50vw)] w-screen h-full z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-y-0 left-1/2 z-0 h-full w-dvw -translate-x-1/2 pointer-events-none overflow-hidden" aria-hidden="true">
         
         {/* 1. Subtle, Edge-to-Edge Dot Grid */}
         <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_2px,transparent_2px)] dark:bg-[radial-gradient(#475569_2px,transparent_2px)] [background-size:32px_32px] opacity-20 dark:opacity-30" />
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* ── Main Content Area (z-10 forces it above the dots) ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-10 lg:py-12 space-y-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
         
         {/* Header Section */}
         <div className="relative space-y-2">
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <div className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm pb-2">
+          <div className="break-words text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm pb-2">
             <UserGreeting />
           </div>
 

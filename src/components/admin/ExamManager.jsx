@@ -74,12 +74,12 @@ export default function ExamManager() {
   }
 
   return (
-    <div className="space-y-5 border rounded-xl p-5">
+    <div className="space-y-5 border rounded-xl p-4 sm:p-5">
       <h2 className="font-black text-xl flex items-center gap-2">
         Exam Manager <BookOpen className="w-6 h-6" />
       </h2>
       
-      <form onSubmit={createExam} className="grid grid-cols-2 gap-4">
+      <form onSubmit={createExam} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <input type="text" placeholder="Exam (e.g. JEE)" value={form.exam} onChange={e => setForm({...form, exam: e.target.value})} className="border p-3 rounded-xl bg-transparent" required />
         <input type="number" placeholder="Year (e.g. 2024)" value={form.year} onChange={e => setForm({...form, year: e.target.value})} className="border p-3 rounded-xl bg-transparent" required />
         <input type="text" placeholder="Exam Type (MAIN, ADVANCED, UG)" value={form.exam_type} onChange={e => setForm({...form, exam_type: e.target.value})} className="border p-3 rounded-xl bg-transparent" required />
@@ -89,24 +89,24 @@ export default function ExamManager() {
         <input type="text" placeholder="Paper Code" value={form.paper_code} onChange={e => setForm({...form, paper_code: e.target.value})} className="border p-3 rounded-xl bg-transparent" />
         <input type="number" placeholder="Duration (mins)" value={form.duration} onChange={e => setForm({...form, duration: e.target.value})} className="border p-3 rounded-xl bg-transparent" />
         <input type="number" placeholder="Total Marks" value={form.total_marks} onChange={e => setForm({...form, total_marks: e.target.value})} className="border p-3 rounded-xl bg-transparent" />
-        <button type="submit" className="col-span-2 bg-blue-600 text-white font-bold py-3 rounded-xl">Create Exam</button>
+        <button type="submit" className="bg-blue-600 text-white font-bold py-3 rounded-xl sm:col-span-2">Create Exam</button>
       </form>
 
       <div className="mt-8 space-y-4">
         <h3 className="font-bold text-lg">Existing Exams</h3>
         {loading ? <p>Loading exams...</p> : (
           exams.map(exam => (
-            <div key={exam.id} className="border p-4 rounded-xl flex justify-between items-center">
-              <div>
+            <div key={exam.id} className="border p-4 rounded-xl flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
                 <p className="font-bold">{exam.exam} {exam.year} - {exam.exam_type}</p>
-                <p className="text-sm text-gray-500">
+                <p className="break-words text-sm text-gray-500">
                   {exam.shift && `Shift: ${exam.shift} | `}
                   {exam.exam_date && `Date: ${exam.exam_date} | `}
                   Status: {exam.status} | Questions: {exam.question_count} | 
                   Last Updated: {new Date(exam.updated_at).toLocaleDateString()}
                 </p>
               </div>
-              <button onClick={() => deleteExam(exam.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
+              <button onClick={() => deleteExam(exam.id)} className="min-h-10 rounded-lg bg-red-500 px-4 py-2 text-white sm:self-center">Delete</button>
             </div>
           ))
         )}

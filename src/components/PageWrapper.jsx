@@ -26,10 +26,10 @@ export default function PageWrapper({
       : "border-indigo-500/20 bg-white/70 dark:bg-indigo-500/10 from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400";
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full min-w-0">
       {/* ── Full Bleed Background Layer ──────────────────────────── */}
       <div
-        className="absolute top-0 left-[calc(50%-50vw)] w-screen h-full z-0 pointer-events-none overflow-hidden"
+        className="absolute inset-y-0 left-1/2 z-0 h-full w-dvw -translate-x-1/2 pointer-events-none overflow-hidden"
         aria-hidden="true"
       >
         {/* Dot Grid */}
@@ -48,7 +48,7 @@ export default function PageWrapper({
       </div>
 
       {/* ── Main Content ────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-16 space-y-10">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-10 lg:space-y-10 lg:px-8 lg:py-14">
         {/* Header */}
         {(title || badge) && (
           <div className="relative space-y-3 animate-slideUp">
@@ -69,7 +69,7 @@ export default function PageWrapper({
             )}
 
             {title && (
-              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm break-words">
                 {title}
               </h1>
             )}

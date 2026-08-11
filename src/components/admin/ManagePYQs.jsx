@@ -150,15 +150,15 @@ export default function ManagePYQs() {
     <div className="space-y-6">
       
       {/* FILTERS */}
-      <div className="bg-gray-50 dark:bg-gray-900/50 p-5 rounded-2xl border dark:border-gray-800 space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="font-black text-xl flex items-center gap-2">Manage PYQs (CMS) <BookOpen className="w-6 h-6" /></h2>
-          <button onClick={loadQuestions} disabled={loading} className="bg-black dark:bg-white dark:text-black text-white px-5 py-2 rounded-lg text-sm font-bold disabled:opacity-50">
+      <div className="bg-gray-50 dark:bg-gray-900/50 p-4 sm:p-5 rounded-2xl border dark:border-gray-800 space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-black text-lg sm:text-xl flex items-center gap-2">Manage PYQs (CMS) <BookOpen className="w-6 h-6" /></h2>
+          <button onClick={loadQuestions} disabled={loading} className="min-h-11 w-full rounded-lg bg-black px-5 py-2 text-sm font-bold text-white disabled:opacity-50 dark:bg-white dark:text-black sm:w-auto">
             {loading ? "Searching..." : "Apply Filters"}
           </button>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <select value={filters.exam} onChange={e => handleFilterChange('exam', e.target.value)} className="border dark:border-gray-700 rounded-xl p-2 w-full bg-transparent text-sm">
             <option value="">All Exams</option>
             <option value="JEE">JEE</option>
@@ -177,7 +177,7 @@ export default function ManagePYQs() {
             <option value="Numerical">Numerical</option>
           </select>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           <select value={filters.image_status} onChange={e => handleFilterChange('image_status', e.target.value)} className="border dark:border-gray-700 rounded-xl p-2 w-full bg-transparent text-sm">
             <option value="">All Image Statuses</option>
             <option value="missing_any">Questions Missing Any Images</option>
@@ -239,8 +239,8 @@ export default function ManagePYQs() {
         </div>
         
         {/* PAGINATION */}
-        <div className="p-4 border-t dark:border-gray-800 flex items-center justify-between bg-gray-50 dark:bg-gray-900/50">
-          <div className="flex items-center gap-3">
+        <div className="p-4 border-t dark:border-gray-800 flex flex-col gap-3 bg-gray-50 dark:bg-gray-900/50 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="text-sm text-gray-500">Total: {totalCount}</span>
             <select value={limit} onChange={e => { setLimit(Number(e.target.value)); setPage(1); }} className="border dark:border-gray-700 bg-transparent rounded p-1 text-sm">
               <option value="25">25 per page</option>
@@ -259,14 +259,14 @@ export default function ManagePYQs() {
       {/* QUICK EDIT DRAWER OVERLAY */}
       {isDrawerOpen && editingQuestion && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm">
-          <div className="w-[800px] max-w-full bg-white dark:bg-[#050816] h-full shadow-2xl flex flex-col animate-slideLeft border-l dark:border-gray-800">
+          <div className="w-full max-w-[800px] bg-white dark:bg-[#050816] h-full shadow-2xl flex flex-col animate-slideLeft border-l dark:border-gray-800">
             {/* Drawer Header */}
-            <div className="p-5 border-b dark:border-gray-800 flex items-center justify-between sticky top-0 bg-white dark:bg-[#050816] z-10">
-              <div>
-                <h3 className="font-black text-lg">Edit Question #{editingQuestion.id}</h3>
+            <div className="p-4 sm:p-5 border-b dark:border-gray-800 flex items-start justify-between gap-3 sticky top-0 bg-white dark:bg-[#050816] z-10">
+              <div className="min-w-0">
+                <h3 className="break-words font-black text-base sm:text-lg">Edit Question #{editingQuestion.id}</h3>
                 <p className="text-xs text-gray-500">{editingQuestion.exam} {editingQuestion.year} • {editingQuestion.subject}</p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                 <button disabled={currentIndex <= 0} onClick={() => navigateDrawer('prev')} className="p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-30"><ChevronLeft className="w-4 h-4"/></button>
                 <button disabled={currentIndex >= questions.length - 1} onClick={() => navigateDrawer('next')} className="p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-30"><ChevronRight className="w-4 h-4"/></button>
                 <div className="w-px h-6 bg-gray-200 dark:bg-gray-800 mx-2"></div>
@@ -275,17 +275,17 @@ export default function ManagePYQs() {
             </div>
 
             {/* Drawer Content */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-8">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 sm:space-y-8">
               
               {/* Preview Section */}
-              <div className="bg-gray-50 dark:bg-gray-900/50 p-5 rounded-xl border dark:border-gray-800">
+              <div className="bg-gray-50 dark:bg-gray-900/50 p-4 sm:p-5 rounded-xl border dark:border-gray-800">
                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Student Preview</h4>
                 <div className="prose dark:prose-invert max-w-none text-sm">
                   <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{editingQuestion.question || "*No question text*"}</ReactMarkdown>
                   {editingQuestion.question_image && <img src={editingQuestion.question_image} alt="Q" className="max-h-48 rounded my-2 object-contain" />}
                   
                   {editingQuestion.question_type !== 'Numerical' && (
-                    <div className="grid grid-cols-2 gap-2 mt-4">
+                    <div className="grid grid-cols-1 gap-2 mt-4 sm:grid-cols-2">
                       {['a','b','c','d'].map(opt => {
                         const txt = editingQuestion[`option_${opt}`];
                         const img = editingQuestion[`option_${opt}_image`];
@@ -318,7 +318,7 @@ export default function ManagePYQs() {
                 <div className="space-y-2">
                   <label className="text-sm font-bold">Question Text</label>
                   <textarea value={editingQuestion.question || ""} onChange={e => setEditingQuestion({...editingQuestion, question: e.target.value})} className="w-full border dark:border-gray-700 rounded-lg p-3 bg-transparent h-24 text-sm" />
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                     <input type="file" accept="image/*" onChange={e => uploadImageDirect('question_image', e.target.files[0])} className="text-xs w-full max-w-xs" />
                     {editingQuestion.question_image && <span className="text-xs text-green-500 flex items-center gap-1"><CheckCircle2 className="w-3 h-3"/> Image Uploaded</span>}
                   </div>
@@ -326,7 +326,7 @@ export default function ManagePYQs() {
 
                 {/* Options (if not numerical) */}
                 {editingQuestion.question_type !== 'Numerical' && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {['a','b','c','d'].map(opt => (
                       <div key={opt} className="space-y-2 p-4 border dark:border-gray-800 rounded-lg bg-gray-50 dark:bg-gray-900/30">
                         <label className="text-sm font-bold uppercase">Option {opt}</label>
@@ -344,7 +344,7 @@ export default function ManagePYQs() {
                 <div className="space-y-2">
                   <label className="text-sm font-bold">Explanation</label>
                   <textarea value={editingQuestion.explanation || ""} onChange={e => setEditingQuestion({...editingQuestion, explanation: e.target.value})} className="w-full border dark:border-gray-700 rounded-lg p-3 bg-transparent h-24 text-sm" />
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                     <input type="file" accept="image/*" onChange={e => uploadImageDirect('explanation_image', e.target.files[0])} className="text-xs w-full max-w-xs" />
                     {editingQuestion.explanation_image && <span className="text-xs text-green-500 flex items-center gap-1"><CheckCircle2 className="w-3 h-3"/> Image Uploaded</span>}
                   </div>
@@ -355,13 +355,13 @@ export default function ManagePYQs() {
             </div>
 
             {/* Drawer Footer */}
-            <div className="p-5 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-900 sticky bottom-0 z-10 flex items-center justify-between">
-              <button onClick={closeDrawer} className="px-5 py-2 rounded-lg font-bold text-sm">Cancel</button>
-              <div className="flex items-center gap-3">
-                <button onClick={() => saveQuestion(false)} disabled={saving} className="bg-gray-200 dark:bg-gray-800 px-5 py-2 rounded-lg font-bold text-sm disabled:opacity-50 flex items-center gap-2">
+            <div className="p-4 sm:p-5 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-900 sticky bottom-0 z-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button onClick={closeDrawer} className="min-h-11 px-5 py-2 rounded-lg font-bold text-sm">Cancel</button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button onClick={() => saveQuestion(false)} disabled={saving} className="min-h-11 justify-center bg-gray-200 dark:bg-gray-800 px-5 py-2 rounded-lg font-bold text-sm disabled:opacity-50 flex items-center gap-2">
                   <Save className="w-4 h-4"/> {saving ? "Saving..." : "Save"}
                 </button>
-                <button onClick={() => saveQuestion(true)} disabled={saving || currentIndex >= questions.length - 1} className="bg-indigo-600 text-white px-5 py-2 rounded-lg font-bold text-sm disabled:opacity-50 flex items-center gap-2">
+                <button onClick={() => saveQuestion(true)} disabled={saving || currentIndex >= questions.length - 1} className="min-h-11 justify-center bg-indigo-600 text-white px-5 py-2 rounded-lg font-bold text-sm disabled:opacity-50 flex items-center gap-2">
                   <ArrowRight className="w-4 h-4"/> {saving ? "Saving..." : "Save & Next"}
                 </button>
               </div>

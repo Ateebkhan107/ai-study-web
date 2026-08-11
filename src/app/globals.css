@@ -61,6 +61,48 @@ body {
   min-height: 100vh;
 }
 
+html,
+body {
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+pre,
+code,
+.katex-display,
+.katex {
+  max-width: 100%;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.15rem;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
 /* ── Auth page — animated link hover colours ───────────────────────────── */
 .auth-link { 
   color: #818CF8; 

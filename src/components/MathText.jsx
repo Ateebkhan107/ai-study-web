@@ -23,7 +23,7 @@ function normalizeFlattenedTables(value) {
 
 export default function MathText({ children, className = "" }) {
   return (
-    <div className={className}>
+    <div className={`min-w-0 max-w-full overflow-wrap-anywhere ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[[rehypeKatex, { strict: false, throwOnError: false }]]}

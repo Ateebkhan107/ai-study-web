@@ -106,7 +106,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
           <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
             Privacy
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {[
               { value: "PUBLIC", label: "Public", desc: "Anyone can join" },
               { value: "PRIVATE", label: "Private", desc: "Request to join" },

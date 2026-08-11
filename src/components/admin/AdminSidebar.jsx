@@ -16,10 +16,6 @@ import {
   LogOut,
   Menu,
   X,
-  FileCheck,
-  Brain,
-  BarChart,
-  ClipboardList,
   MessageSquare
 } from "lucide-react";
 import { useState } from "react";
@@ -30,26 +26,26 @@ export default function AdminSidebar() {
   const { signOut } = useClerk();
   const [isOpen, setIsOpen] = useState(false);
 
-  const mainNav = [
+  const contentNav = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  ];
-
-  const questionBankNav = [
     { name: "Exams", href: "/admin/exams", icon: FileText },
-    { name: "Import Packages", href: "/admin/imports", icon: Upload },
-    { name: "Review Queue", href: "/admin/reviews", icon: ClipboardList },
     { name: "Questions", href: "/admin/questions", icon: List },
+    { name: "Import / Review", href: "/admin/imports", icon: Upload },
     { name: "Images", href: "/admin/images", icon: ImageIcon },
-    { name: "Solutions", href: "/admin/solutions", icon: FileCheck },
   ];
 
-  const managementNav = [
-    { name: "Mock Tests", href: "/admin/mock-tests", icon: FileText },
+  const usersNav = [
     { name: "Students", href: "/admin/students", icon: Users },
+    { name: "Community Moderation", href: "/admin/community", icon: MessageSquare },
+  ];
+
+  const engagementNav = [
     { name: "Notifications", href: "/admin/notifications", icon: Bell },
     { name: "Badges", href: "/admin/badges", icon: Award },
-    { name: "Analytics", href: "/admin/analytics", icon: BarChart },
-    { name: "Community", href: "/admin/community", icon: MessageSquare },
+    { name: "Daily Goals", href: "/admin/goals", icon: Target },
+  ];
+
+  const systemNav = [
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 
@@ -99,13 +95,17 @@ export default function AdminSidebar() {
 
         <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-1 mt-16 lg:mt-0">
           
-          {mainNav.map(item => <NavItem key={item.name} item={item} />)}
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3">Content</div>
+          {contentNav.map(item => <NavItem key={item.name} item={item} />)}
 
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Question Bank</div>
-          {questionBankNav.map(item => <NavItem key={item.name} item={item} />)}
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Users</div>
+          {usersNav.map(item => <NavItem key={item.name} item={item} />)}
 
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Management</div>
-          {managementNav.map(item => <NavItem key={item.name} item={item} />)}
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">Engagement</div>
+          {engagementNav.map(item => <NavItem key={item.name} item={item} />)}
+
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 mt-6">System</div>
+          {systemNav.map(item => <NavItem key={item.name} item={item} />)}
           
         </div>
 

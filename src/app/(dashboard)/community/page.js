@@ -25,10 +25,7 @@ export default async function CommunityPage() {
   const examTrack = (profile.exam || "JEE").toUpperCase();
 
   return (
-    <PageWrapper
-      badge={`${examTrack === "JEE" ? "⚗️ JEE" : "🧬 NEET"} Community`}
-      badgeVariant={examTrack === "NEET" ? "emerald" : "purple"}
-    >
+    <PageWrapper>
       <CommunityHub examTrack={examTrack} currentUserId={userId} />
     </PageWrapper>
   );

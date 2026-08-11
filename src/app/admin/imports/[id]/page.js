@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
@@ -31,36 +30,41 @@ export default function ImportPackageDashboard() {
   useEffect(() => {
     async function loadData() {
       try {
-        const { data: pkgData, error: pkgErr } = await supabase
-          .from("pyq_import_packages")
-          .select("*")
-          .eq("id", id)
-          .single();
-          
-        if (pkgErr) throw pkgErr;
-        setPkg(pkgData);
+        const [packageResponse, questionsResponse] = await Promise.all([
+          fetch(`/api/admin/import-packages/${id}`),
+          fetch(`/api/admin/pyq?import_package_id=${id}&limit=1000`),
+        ]);
 
-        const { data: qData, error: qErr } = await supabase
-          .from("pyq_questions")
-          .select("id, question_image, explanation_image, chapter, correct_option, subject, question_type, explanation")
-          .eq("import_package_id", id);
-          
-        if (qErr) throw qErr;
+        const packageData = await packageResponse.json();
+        const questionData = await questionsResponse.json();
+
+        if (!packageResponse.ok) throw new Error(packageData.error || "Failed to load package");
+        if (!questionsResponse.ok) throw new Error(questionData.error || "Failed to load package questions");
+
+        setPkg(packageData.package);
+        const qData = questionData.questions || [];
 
         // Calculate stats
         const total = qData.length;
         const images = qData.filter(q => q.question_image).length;
         const solutions = qData.filter(q => q.explanation || q.explanation_image).length;
-        const missingImages = qData.filter(q => !q.question_image && q.question_type !== 'TEXT').length;
+        const imageOnly = qData.filter(q => q.image_mode === "IMAGE_ONLY").length;
+        const textRequiredImage = qData.filter(q => q.image_mode === "TEXT_WITH_REQUIRED_IMAGE").length;
+        const textOnly = qData.filter(q => q.image_mode === "TEXT_ONLY").length;
+        const missingImages = qData.filter(q => !q.question_image && q.question_type !== 'TEXT' && !q.question).length;
         const missingChapters = qData.filter(q => !q.chapter || q.chapter.includes('Core')).length;
         const missingAnswers = qData.filter(q => !q.correct_option).length;
+        const reviewed = qData.filter(q => !["NEEDS_REVIEW", "REJECTED"].includes(String(q.status || "").toUpperCase())).length;
+        const needsReview = qData.filter(q => ["NEEDS_REVIEW", "REJECTED"].includes(String(q.status || "").toUpperCase())).length;
+        const published = qData.filter(q => String(q.status || "").toUpperCase() === "PUBLISHED").length;
         
         // Validation Score roughly based on missing fields
         const issues = missingImages + missingChapters + missingAnswers;
         const validationScore = total === 0 ? 0 : Math.max(0, Math.round(((total * 3 - issues) / (total * 3)) * 100));
 
         setStats({
-          total, images, solutions, missingImages, missingChapters, missingAnswers, validationScore
+          total, images, solutions, missingImages, missingChapters, missingAnswers, validationScore,
+          reviewed, needsReview, published, imageOnly, textRequiredImage, textOnly,
         });
 
       } catch (err) {
@@ -75,8 +79,12 @@ export default function ImportPackageDashboard() {
   const updatePackageStatus = async (status) => {
     setActionLoading(true);
     try {
-      await supabase.from("pyq_import_packages").update({ status }).eq("id", id);
-      await supabase.from("pyq_questions").update({ status }).eq("import_package_id", id);
+      const response = await fetch(`/api/admin/import-packages/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+      if (!response.ok) throw new Error("Failed to update package status");
       setPkg(prev => ({ ...prev, status }));
       router.refresh();
     } catch (e) {
@@ -88,11 +96,13 @@ export default function ImportPackageDashboard() {
   };
 
   const deletePackage = async () => {
-    if (!confirm("Are you sure you want to delete this import package AND all its questions? This cannot be undone.")) return;
+    if (!confirm("Remove this import package link? Existing questions will stay in the database.")) return;
     setActionLoading(true);
     try {
-      await supabase.from("pyq_questions").delete().eq("import_package_id", id);
-      await supabase.from("pyq_import_packages").delete().eq("id", id);
+      const response = await fetch(`/api/admin/import-packages/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Failed to delete package");
       router.push("/admin/imports");
     } catch (e) {
       console.error(e);
@@ -135,7 +145,9 @@ export default function ImportPackageDashboard() {
               {pkg.status.replace('_', ' ')}
             </span>
           </div>
-          <p className="text-sm text-gray-500 mt-1">Imported on {new Date(pkg.created_at).toLocaleString()}</p>
+            <p className="text-sm text-gray-500 mt-1">
+              {[pkg.exam_type || pkg.exam, pkg.year, pkg.attempt, pkg.shift, pkg.exam_date].filter(Boolean).join(" • ")}
+            </p>
         </div>
         
         <Link 
@@ -171,6 +183,33 @@ export default function ImportPackageDashboard() {
           <Target className="w-6 h-6 text-purple-500 mb-2" />
           <p className="text-3xl font-black">{stats.validationScore}%</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Validation</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Reviewed</p>
+          <p className="text-2xl font-black mt-1">{stats.reviewed}</p>
+        </div>
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Needs Review</p>
+          <p className="text-2xl font-black mt-1 text-amber-600">{stats.needsReview}</p>
+        </div>
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Published</p>
+          <p className="text-2xl font-black mt-1 text-green-600">{stats.published}</p>
+        </div>
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Image Only</p>
+          <p className="text-2xl font-black mt-1">{stats.imageOnly}</p>
+        </div>
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text + Image</p>
+          <p className="text-2xl font-black mt-1">{stats.textRequiredImage}</p>
+        </div>
+        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text Only</p>
+          <p className="text-2xl font-black mt-1">{stats.textOnly}</p>
         </div>
       </div>
 
@@ -228,7 +267,7 @@ export default function ImportPackageDashboard() {
             className="flex items-center gap-2 bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-100 dark:hover:bg-red-500/20 disabled:opacity-50 ml-auto"
           >
             <Trash2 className="w-4 h-4" />
-            Delete Package
+            Remove Package Link
           </button>
         </div>
       </div>

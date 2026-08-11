@@ -90,10 +90,10 @@ export default function TestPage() {
         className="animate-slideUp"
         style={{ animationDelay: "75ms" }}
       >
-        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm">
+        <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           <button
             onClick={() => setMode("build")}
-            className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "build"
                 ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
@@ -103,7 +103,7 @@ export default function TestPage() {
           </button>
           <button
             onClick={() => setMode("quick")}
-            className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "quick"
                 ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
@@ -23,44 +22,56 @@ import {
   Globe
 } from "lucide-react";
 
+const SCIENCE_PARTICLES = [
+  { size: 3, top: 12, left: 8, y: -90, duration: 16, delay: 0.5 },
+  { size: 5, top: 18, left: 76, y: -130, duration: 19, delay: 2 },
+  { size: 4, top: 28, left: 34, y: -80, duration: 14, delay: 1.4 },
+  { size: 3, top: 42, left: 88, y: -120, duration: 21, delay: 3.2 },
+  { size: 6, top: 54, left: 16, y: -95, duration: 18, delay: 4 },
+  { size: 4, top: 64, left: 62, y: -140, duration: 20, delay: 1.1 },
+  { size: 3, top: 72, left: 45, y: -75, duration: 15, delay: 2.8 },
+  { size: 5, top: 82, left: 24, y: -110, duration: 17, delay: 5 },
+  { size: 4, top: 8, left: 52, y: -100, duration: 22, delay: 0.2 },
+  { size: 3, top: 36, left: 6, y: -85, duration: 16, delay: 3.7 },
+  { size: 5, top: 48, left: 72, y: -125, duration: 19, delay: 2.4 },
+  { size: 4, top: 58, left: 92, y: -90, duration: 18, delay: 4.6 },
+  { size: 3, top: 70, left: 8, y: -105, duration: 20, delay: 1.9 },
+  { size: 5, top: 86, left: 68, y: -135, duration: 23, delay: 3 },
+  { size: 4, top: 94, left: 39, y: -95, duration: 17, delay: 5.5 },
+];
+
 function BackgroundScience() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
       <motion.div 
         animate={{ rotate: 360 }}
         transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] rounded-full border border-indigo-500/10 border-dashed"
+        className="absolute top-[10%] left-[-10%] h-[min(800px,120vw)] w-[min(800px,120vw)] rounded-full border border-indigo-500/10 border-dashed"
       />
       <motion.div 
         animate={{ rotate: -360 }}
         transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] rounded-full border border-purple-500/10 border-dotted"
+        className="absolute top-[20%] right-[-10%] h-[min(600px,100vw)] w-[min(600px,100vw)] rounded-full border border-purple-500/10 border-dotted"
       />
-      {mounted && [...Array(15)].map((_, i) => (
+      {SCIENCE_PARTICLES.map((particle, i) => (
         <motion.div
           key={i}
           className="absolute bg-indigo-500/20 rounded-full"
           style={{
-            width: Math.random() * 4 + 2 + "px",
-            height: Math.random() * 4 + 2 + "px",
-            top: Math.random() * 100 + "%",
-            left: Math.random() * 100 + "%",
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            top: `${particle.top}%`,
+            left: `${particle.left}%`,
           }}
           animate={{
-            y: [0, Math.random() * -100 - 50],
+            y: [0, particle.y],
             opacity: [0, 0.5, 0],
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: particle.duration,
             repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 10
+            delay: particle.delay
           }}
         />
       ))}
@@ -83,7 +94,7 @@ function DashboardPreview() {
               <Target className="w-6 h-6 text-indigo-400" />
             </div>
             <div>
-              <h3 className="text-white text-lg font-bold">Today's Goal</h3>
+              <h3 className="text-white text-lg font-bold">Today&apos;s Goal</h3>
               <p className="text-sm text-slate-400">Master Rotational Mechanics</p>
             </div>
           </div>
@@ -352,7 +363,7 @@ export default function PublicLandingPage() {
       <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">Everything You Need. <br className="sm:hidden"/> Nothing You Don't.</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">Everything You Need. <br className="sm:hidden"/> Nothing You Don&apos;t.</h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-lg">Four pillars of preparation, meticulously designed for clarity and focus.</p>
           </div>
 
@@ -399,7 +410,7 @@ export default function PublicLandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">Engineered for Excellence.</h2>
-              <p className="text-slate-400 text-lg mb-10 leading-relaxed">PrepZii is built on the foundation of real exam patterns and proven cognitive science. We don't use gimmicks—just pure, focused preparation tools that deliver results.</p>
+              <p className="text-slate-400 text-lg mb-10 leading-relaxed">PrepZii is built on the foundation of real exam patterns and proven cognitive science. We don&apos;t use gimmicks—just pure, focused preparation tools that deliver results.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <TrustCard title="Verified PYQs" desc="100% authentic previous year questions with detailed solutions." delay={0.1} />
@@ -418,7 +429,7 @@ export default function PublicLandingPage() {
                  className="relative w-full max-w-md aspect-square flex items-center justify-center"
                >
                  <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 rounded-full blur-[100px]" />
-                 <div className="relative h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] border border-slate-800 rounded-full flex items-center justify-center">
+                 <div className="relative aspect-square w-[min(300px,78vw)] sm:w-[400px] border border-slate-800 rounded-full flex items-center justify-center">
                     <div className="h-[80%] w-[80%] border border-slate-700/50 rounded-full flex items-center justify-center">
                       <div className="h-[60%] w-[60%] border border-slate-600/50 rounded-full flex items-center justify-center bg-[#0f172a]/80 backdrop-blur-md shadow-2xl">
                         <ShieldCheck className="w-16 h-16 text-emerald-400" />
