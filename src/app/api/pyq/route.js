@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -51,8 +52,10 @@ const REVEAL_FIELDS = [
 ];
 
 const ATTEMPT_LOOKUP_CHUNK_SIZE = 100;
-const JEE_RANDOM_SUBJECTS = ["Physics", "Chemistry", "Maths"];
-const JEE_RANDOM_QUESTIONS_PER_SUBJECT = 25;
+const FULL_PAPER_CONFIG = {
+  JEE: { total: 75, subjects: ["Physics", "Chemistry", "Maths"] },
+  NEET: { total: 180, subjects: ["Physics", "Chemistry", "Biology"] },
+};
 
 function sanitizeQuestion(question, attemptedQuestionIds) {
   if (attemptedQuestionIds.has(String(question.id))) {
@@ -118,17 +121,18 @@ function sortByDisplayOrder(a, b) {
   return new Date(a.created_at) - new Date(b.created_at);
 }
 
-function buildJeeRandomPaper(questions) {
+function buildBalancedPaper(questions, exam, shuffle = true) {
+  const config = FULL_PAPER_CONFIG[exam];
+  if (!config) return [];
+  const targetCounts = allocateQuestionCounts(exam, config.total, config.subjects);
   const papers = new Map();
 
   for (const question of questions) {
-    if (!JEE_RANDOM_SUBJECTS.includes(question.subject) || !question.exam_id) continue;
+    if (!config.subjects.includes(question.subject) || !question.exam_id) continue;
 
     if (!papers.has(question.exam_id)) {
       papers.set(question.exam_id, {
-        year: question.year,
-        createdAt: question.created_at,
-        subjects: new Map(JEE_RANDOM_SUBJECTS.map((subjectName) => [subjectName, []])),
+        subjects: new Map(config.subjects.map((subjectName) => [subjectName, []])),
       });
     }
 
@@ -136,8 +140,8 @@ function buildJeeRandomPaper(questions) {
   }
 
   const completePapers = [...papers.entries()].filter(([, paper]) =>
-    JEE_RANDOM_SUBJECTS.every(
-      (subjectName) => (paper.subjects.get(subjectName) || []).length >= JEE_RANDOM_QUESTIONS_PER_SUBJECT
+    config.subjects.every(
+      (subjectName) => (paper.subjects.get(subjectName) || []).length >= targetCounts[normalizeSubjectName(subjectName)]
     )
   );
 
@@ -145,16 +149,20 @@ function buildJeeRandomPaper(questions) {
     return [];
   }
 
-  const [, selectedPaper] = completePapers[Math.floor(Math.random() * completePapers.length)];
+  const [, selectedPaper] = shuffle
+    ? completePapers[Math.floor(Math.random() * completePapers.length)]
+    : completePapers[0];
 
-  return JEE_RANDOM_SUBJECTS.flatMap((subjectName) =>
-    shuffleQuestions(selectedPaper.subjects.get(subjectName) || [])
-      .slice(0, JEE_RANDOM_QUESTIONS_PER_SUBJECT)
+  return config.subjects.flatMap((subjectName) =>
+    (shuffle ? shuffleQuestions(selectedPaper.subjects.get(subjectName) || []) : selectedPaper.subjects.get(subjectName) || [])
+      .slice(0, targetCounts[normalizeSubjectName(subjectName)])
       .sort(sortByDisplayOrder)
   );
 }
 
-async function getJeeRandomPaperQuestions({ exam, year }) {
+async function getBalancedRandomPaperQuestions({ exam, year }) {
+  const config = FULL_PAPER_CONFIG[exam];
+  if (!config) return [];
   let papersQuery = supabaseAdmin
     .from("pyq_exams")
     .select("id")
@@ -177,15 +185,15 @@ async function getJeeRandomPaperQuestions({ exam, year }) {
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
       .eq("exam_id", paper.id)
-      .in("subject", JEE_RANDOM_SUBJECTS)
+      .in("subject", config.subjects)
       .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"]);
 
     if (questionsError) {
       throw questionsError;
     }
 
-    const randomPaper = buildJeeRandomPaper(questions || []);
-    if (randomPaper.length === JEE_RANDOM_SUBJECTS.length * JEE_RANDOM_QUESTIONS_PER_SUBJECT) {
+    const randomPaper = buildBalancedPaper(questions || [], exam, true);
+    if (randomPaper.length === config.total) {
       return randomPaper;
     }
   }
@@ -258,11 +266,11 @@ export async function GET(req) {
 
   let result = [];
 
-  if (mode === "random" && exam === "JEE" && !subject && !examId) {
+  if (mode === "random" && FULL_PAPER_CONFIG[exam] && !subject && !examId) {
     try {
-      result = await getJeeRandomPaperQuestions({ exam, year });
+      result = await getBalancedRandomPaperQuestions({ exam, year });
     } catch (randomPaperError) {
-      console.error("JEE RANDOM PYQ QUERY ERROR:", randomPaperError.message);
+      console.error("BALANCED RANDOM PYQ QUERY ERROR:", randomPaperError.message);
       return NextResponse.json({ error: "Failed to load PYQ questions" }, { status: 500 });
     }
   } else {
@@ -303,6 +311,9 @@ export async function GET(req) {
     }
 
     result = data || [];
+    if (mode === "full" && !subject && FULL_PAPER_CONFIG[exam]) {
+      result = buildBalancedPaper(result, exam, false);
+    }
     result = mode === "random" ? shuffleQuestions(result) : [...result].sort(sortByDisplayOrder);
   }
 

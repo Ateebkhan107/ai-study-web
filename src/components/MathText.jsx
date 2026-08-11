@@ -7,6 +7,27 @@ import "katex/dist/katex.min.css";
 function normalizeFlattenedTables(value) {
   let text = String(value ?? "");
 
+  // The Wiley source uses U+20D7 COMBINING RIGHT ARROW ABOVE for vectors.
+  // Most browser UI fonts render that combining mark as a missing-glyph box
+  // (for example `A□`). Convert it to KaTeX vector notation. Existing math
+  // spans keep their delimiters; prose receives a small inline-math span.
+  text = text
+    .split(/(\$[^$]*\$)/g)
+    .map((segment) => {
+      if (!segment.includes("\u20d7")) return segment;
+      if (segment.startsWith("$") && segment.endsWith("$")) {
+        return `$${segment.slice(1, -1).replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
+          const digits = subscript.replace(/[₀-₉]/g, (digit) => "₀₁₂₃₄₅₆₇₈₉".indexOf(digit));
+          return `\\vec{${letter}}${digits ? `_{${digits}}` : ""}`;
+        })}$`;
+      }
+      return segment.replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
+        const digits = subscript.replace(/[₀-₉]/g, (digit) => "₀₁₂₃₄₅₆₇₈₉".indexOf(digit));
+        return `$\\vec{${letter}}${digits ? `_{${digits}}` : ""}$`;
+      });
+    })
+    .join("");
+
   // Some imported matching questions contain a valid Markdown table whose
   // line breaks were flattened by PDF extraction, for example:
   // `| List I | List II | |---|---| | (a) ... | (i) ... |`.

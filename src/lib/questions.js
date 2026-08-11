@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { allocateQuestionCounts } from "@/lib/questionDistribution";
 
 // Chapter alias mapping to ensure frontend chapter selections match all DB variations
 const CHAPTER_ALIASES = {
@@ -112,18 +113,6 @@ function fixDifficulty(difficulty) {
   return difficulty.charAt(0).toUpperCase() + difficulty.slice(1).toLowerCase();
 }
 
-// ratio
-function getDistribution(exam, total) {
-  if (exam === "NEET") {
-    const phy = Math.floor(total * 0.25);
-    const chem = Math.floor(total * 0.25);
-    const bio = total - phy - chem;
-    return { Physics: phy, Chemistry: chem, Biology: bio };
-  }
-  const each = Math.floor(total / 3);
-  return { Physics: each, Chemistry: each, Mathematics: total - each * 2 };
-}
-
 const QUESTION_SELECT_FIELDS = `
   id,
   exam,
@@ -174,10 +163,11 @@ export async function getQuestions({
       }
     }
 
+    const distribution = allocateQuestionCounts(exam, limit, subjects);
     const finalQuestions = await Promise.all(subjects.map(async (sub) => {
       let subjectLimit = limit;
       if (subjects.length > 1) {
-        subjectLimit = getDistribution(exam, limit)[sub] || Math.floor(limit / subjects.length);
+        subjectLimit = distribution[sub] || 0;
       }
 
       let query = client.from("questions").select(QUESTION_SELECT_FIELDS);

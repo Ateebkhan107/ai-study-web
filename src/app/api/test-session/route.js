@@ -238,7 +238,7 @@ export async function POST(request) {
     }
 
     const track = profile?.exam || "JEE";
-    const exam = track === "NEET" ? "NEET" : "JEE Main";
+    const exam = String(track).toUpperCase().startsWith("NEET") ? "NEET" : "JEE Main";
 
     const fetchedQuestions = await getQuestions({
       exam,
@@ -249,8 +249,11 @@ export async function POST(request) {
       client: supabaseAdmin,
     });
 
-    if (!fetchedQuestions.length) {
-      return NextResponse.json({ questions: [] });
+    if (fetchedQuestions.length !== Number(count)) {
+      return NextResponse.json(
+        { error: "Not enough questions are available in the required subject ratio." },
+        { status: 422 }
+      );
     }
 
     const questions = shuffleQuestions(fetchedQuestions);

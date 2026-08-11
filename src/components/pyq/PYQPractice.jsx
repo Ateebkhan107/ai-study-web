@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import QuestionCard from "@/components/pyq/QuestionCard";
 import { Atom, FlaskConical, Calculator, Dna, BookOpen, Flag } from "lucide-react";
+import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
 
 const SUBJECT_CONFIG = {
   Physics:   { icon: <Atom className="w-6 h-6" />, color: "blue" },
@@ -19,14 +20,8 @@ const colorMap = {
 };
 
 const YEARS = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"];
-const QUESTION_COUNTS = [10, 20, 30, 40, 50, 75, 90];
+const QUESTION_COUNTS = [10, 20, 30, 40, 50, 75, 90, 180];
 const DURATIONS = [15, 30, 45, 60, 90, 120, 150, 180];
-
-// Fixed subject weightings applied whenever a mixed/multi-subject session is built.
-// JEE: Physics / Chemistry / Maths come out equal.
-// NEET: Physics / Chemistry / Biology come out 45:45:90 (i.e. 1:1:2).
-const RATIO_JEE = { Physics: 1, Chemistry: 1, Maths: 1 };
-const RATIO_NEET = { Physics: 1, Chemistry: 1, Biology: 2 };
 
 export default function PYQPractice({ questions = [], updateQuestion, onSwitchTab }) {
   // ── Setup Configuration State ──
@@ -113,52 +108,32 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
 
     // Detect exam mode from whichever subjects actually exist in the question bank.
     const hasBiology = questions.some((q) => q.subject === "Biology");
-    const ratioMap = hasBiology ? RATIO_NEET : RATIO_JEE;
+    const examName = hasBiology ? "NEET" : "JEE";
 
     // Subjects to build the ratio across: user's picks (if any), else every ratio subject present.
     const activeSubjects =
       selectedSubjects.length > 0
-        ? selectedSubjects.filter((s) => ratioMap[s] !== undefined)
-        : Object.keys(ratioMap).filter((s) => basePool.some((q) => q.subject === s));
+        ? selectedSubjects
+        : [...new Set(basePool.map((q) => q.subject))];
 
     if (activeSubjects.length === 0) {
       alert("No matching questions found for this pool query. Try loosening your parameters!");
       return;
     }
 
-    // Largest-remainder method so counts land exactly on questionCount while respecting the ratio.
-    const totalWeight = activeSubjects.reduce((sum, s) => sum + ratioMap[s], 0);
-    const rawCounts = activeSubjects.map((s) => (ratioMap[s] / totalWeight) * questionCount);
-    const targetCounts = rawCounts.map(Math.floor);
-    let remainder = questionCount - targetCounts.reduce((a, b) => a + b, 0);
-
-    const byRemainder = rawCounts
-      .map((val, i) => ({ i, frac: val - targetCounts[i] }))
-      .sort((a, b) => b.frac - a.frac);
-    for (let k = 0; k < remainder; k++) {
-      targetCounts[byRemainder[k % byRemainder.length].i] += 1;
-    }
+    const targetCounts = allocateQuestionCounts(examName, questionCount, activeSubjects);
 
     let combined = [];
-    activeSubjects.forEach((subject, idx) => {
-      const need = targetCounts[idx];
+    activeSubjects.forEach((subject) => {
+      const need = targetCounts[normalizeSubjectName(subject)] || 0;
       const subjectPool = basePool
         .filter((q) => q.subject === subject)
         .sort(() => Math.random() - 0.5);
       combined = combined.concat(subjectPool.slice(0, need));
     });
 
-    // Top up from leftovers if a thin subject pool left us short of the target.
-    if (combined.length < questionCount) {
-      const usedIds = new Set(combined.map((q) => q.id));
-      const leftovers = basePool
-        .filter((q) => activeSubjects.includes(q.subject) && !usedIds.has(q.id))
-        .sort(() => Math.random() - 0.5);
-      combined = combined.concat(leftovers.slice(0, questionCount - combined.length));
-    }
-
-    if (combined.length === 0) {
-      alert("No matching questions found for this pool query. Try loosening your parameters!");
+    if (combined.length !== questionCount) {
+      alert("This pool does not contain enough questions in the required subject ratio. Select more years or chapters.");
       return;
     }
 

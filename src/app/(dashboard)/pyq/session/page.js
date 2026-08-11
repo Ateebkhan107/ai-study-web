@@ -232,8 +232,8 @@ export default function PYQSessionPage() {
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
-  const shouldLoadWholePaper = mode === "full" && Boolean(examId);
-  const shouldLoadBalancedJeeRandom = mode === "random" && exam === "JEE";
+  const shouldLoadWholePaper = mode === "full";
+  const shouldLoadBalancedRandom = mode === "random" && (exam === "JEE" || exam === "NEET");
 
   useEffect(() => {
     if (finishing || questions.length === 0 || mode !== "full") return;
@@ -255,7 +255,7 @@ export default function PYQSessionPage() {
     let cancelled = false;
 
     async function loadPYQ() {
-      const requestedSubjects = shouldLoadWholePaper || shouldLoadBalancedJeeRandom ? [""] : subjectLabels;
+      const requestedSubjects = shouldLoadWholePaper || shouldLoadBalancedRandom ? [""] : subjectLabels;
       if (requestedSubjects.length === 0) {
         if (!cancelled) setLoading(false);
         return;
@@ -334,7 +334,7 @@ export default function PYQSessionPage() {
     loadPYQ();
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper, shouldLoadBalancedJeeRandom]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper, shouldLoadBalancedRandom]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
