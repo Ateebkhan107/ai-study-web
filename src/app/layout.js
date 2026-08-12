@@ -45,6 +45,27 @@ export const metadata = {
   },
 };
 
+const themeInitScript = `
+(() => {
+  try {
+    const hasAppliedDarkDefault = localStorage.getItem("theme-default-dark-applied") === "true";
+    let savedTheme = localStorage.getItem("theme");
+
+    if (!hasAppliedDarkDefault) {
+      savedTheme = "dark";
+      localStorage.setItem("theme", "dark");
+      localStorage.setItem("theme-default-dark-applied", "true");
+    }
+
+    document.documentElement.classList.toggle("dark", savedTheme !== "light");
+    document.documentElement.style.colorScheme = savedTheme === "light" ? "light" : "dark";
+  } catch {
+    document.documentElement.classList.add("dark");
+    document.documentElement.style.colorScheme = "dark";
+  }
+})();
+`;
+
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider
@@ -55,7 +76,7 @@ export default function RootLayout({ children }) {
       <html
         lang="en"
         suppressHydrationWarning
-        className="h-full"
+        className="h-full dark"
       >
         <head>
         </head>
@@ -64,6 +85,11 @@ export default function RootLayout({ children }) {
           suppressHydrationWarning
           className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col antialiased`}
         >
+          <Script
+            id="theme-init"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{ __html: themeInitScript }}
+          />
           <Script
             src="https://checkout.razorpay.com/v1/checkout.js"
             strategy="afterInteractive"
