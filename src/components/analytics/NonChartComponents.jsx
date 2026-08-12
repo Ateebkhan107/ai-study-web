@@ -84,9 +84,13 @@ export function ExamReadiness({ readiness }) {
   const hasData = readiness?.status === "ready" && readiness?.overall !== null;
   const overall = hasData ? readiness.overall : 0;
   const breakdown = readiness?.components || [];
+  const counts = readiness?.counts || {};
   const r = 46;
   const circ = 2 * Math.PI * r;
   const filled = (overall / 100) * circ;
+  const summaryText = hasData
+    ? `Based on ${counts.pyqAnswered || 0} questions and ${counts.mockTestsCompleted || 0} tests`
+    : "Complete more PYQs and a mock test to calculate your exam readiness.";
 
   return (
     <div className="glass-card min-w-0 p-5">
@@ -94,16 +98,11 @@ export function ExamReadiness({ readiness }) {
         Exam Readiness Score
       </h2>
 
-      {!hasData ? (
-        <EmptyState
-          title="Not enough data"
-          description="Complete more practice to calculate readiness."
-        />
-      ) : (
-        <div className="flex flex-col items-center gap-6 sm:flex-row">
-          <div className="relative shrink-0">
-            <svg width="120" height="120" viewBox="0 0 120 120" aria-label={`${overall}% ready`}>
-              <circle cx="60" cy="60" r={r} fill="none" strokeWidth="10" className="stroke-slate-100 dark:stroke-slate-800" />
+      <div className="flex flex-col items-center gap-6 sm:flex-row">
+        <div className="relative shrink-0">
+          <svg width="120" height="120" viewBox="0 0 120 120" aria-label={hasData ? `${overall}% ${readiness.label}` : "Not enough data yet"}>
+            <circle cx="60" cy="60" r={r} fill="none" strokeWidth="10" className="stroke-slate-100 dark:stroke-slate-800" />
+            {hasData && (
               <circle
                 cx="60"
                 cy="60"
@@ -115,35 +114,59 @@ export function ExamReadiness({ readiness }) {
                 strokeLinecap="round"
                 transform="rotate(-90 60 60)"
               />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-2xl font-black text-slate-900 dark:text-white">{overall}%</span>
-              <span className="text-[10px] text-slate-400 dark:text-slate-500">ready</span>
-            </div>
-          </div>
-
-          <div className="w-full flex-1 space-y-2.5">
-            {breakdown.map((item) => (
-              <div key={item.key} className="flex items-center gap-3">
-                <span className="w-32 shrink-0 text-xs text-slate-500 dark:text-slate-400">
-                  {item.label}
+            )}
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center">
+            {hasData ? (
+              <>
+                <span className="text-2xl font-black text-slate-900 dark:text-white">{overall}%</span>
+                <span className="text-[9px] font-bold uppercase leading-tight text-slate-400 dark:text-slate-500">
+                  {readiness.label}
                 </span>
-                <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                  {item.value !== null && (
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{ width: `${item.value}%`, background: item.color }}
-                    />
-                  )}
-                </div>
-                <span className="w-9 text-right text-xs font-bold text-slate-900 dark:text-white">
-                  {item.value === null ? "—" : `${item.value}%`}
-                </span>
-              </div>
-            ))}
+              </>
+            ) : (
+              <>
+                <span className="text-sm font-black leading-tight text-slate-900 dark:text-white">Not enough</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500">data yet</span>
+              </>
+            )}
           </div>
         </div>
-      )}
+
+        <div className="w-full flex-1 space-y-2.5">
+          {!hasData && (
+            <div className="mb-3">
+              <p className="text-sm font-bold text-slate-700 dark:text-slate-200">Not enough data yet</p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">{summaryText}</p>
+            </div>
+          )}
+
+          {breakdown.map((item) => (
+            <div key={item.key} className="flex items-center gap-3">
+              <span className="w-36 shrink-0 text-xs text-slate-500 dark:text-slate-400">
+                {item.label}
+              </span>
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                {item.value !== null && (
+                  <div
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{ width: `${item.value}%`, background: item.color }}
+                  />
+                )}
+              </div>
+              <span className="w-9 text-right text-xs font-bold text-slate-900 dark:text-white">
+                {item.value === null ? "—" : `${item.value}%`}
+              </span>
+            </div>
+          ))}
+
+          {hasData && (
+            <p className="pt-1 text-xs text-slate-400 dark:text-slate-500">
+              {summaryText}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

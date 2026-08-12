@@ -1,6 +1,8 @@
 import { examMatchesTrack, normalizeTrack } from "./analyticsHelpers.js";
 
 const MIN_CHAPTER_ATTEMPTS = 3;
+const MIN_READINESS_PYQ_QUESTIONS = 20;
+const MIN_READINESS_TIMED_QUESTIONS = 20;
 const RECENT_TREND_LIMIT = 8;
 const WEAK_CHAPTER_LIMIT = 6;
 const HEATMAP_DAYS = 56;
@@ -45,6 +47,40 @@ function getCompletedTestMaxMarks(attempt) {
 
 function getTestScorePercent(attempt) {
   return percent(Number(attempt.score) || 0, getCompletedTestMaxMarks(attempt));
+}
+
+function getReadinessLabel(score) {
+  if (score <= 39) return "Building Foundation";
+  if (score <= 59) return "Developing";
+  if (score <= 74) return "Getting Ready";
+  if (score <= 89) return "Exam Ready";
+  return "Strong Readiness";
+}
+
+function getTimedAttempt(attempt) {
+  const seconds = Number(attempt.time_taken_seconds);
+  const answered = Number(attempt.attempted);
+  if (!Number.isFinite(seconds) || !Number.isFinite(answered) || seconds <= 0 || answered <= 0) return null;
+
+  const secondsPerQuestion = seconds / answered;
+  if (secondsPerQuestion < 10 || secondsPerQuestion > 600) return null;
+
+  return {
+    date: attempt.created_at,
+    seconds,
+    answered,
+    secondsPerQuestion,
+    questionsPerMinute: answered / (seconds / 60),
+  };
+}
+
+function getTimeEfficiencyScore(averageSecondsPerQuestion) {
+  if (!Number.isFinite(averageSecondsPerQuestion) || averageSecondsPerQuestion <= 0) return null;
+  if (averageSecondsPerQuestion >= 60 && averageSecondsPerQuestion <= 120) return 100;
+  if (averageSecondsPerQuestion < 60) {
+    return Math.max(0, Math.min(100, Math.round((averageSecondsPerQuestion / 60) * 100)));
+  }
+  return Math.max(0, Math.min(100, Math.round(100 - ((averageSecondsPerQuestion - 120) / 180) * 100)));
 }
 
 function getChapterStatus(accuracy) {
@@ -138,38 +174,49 @@ function buildPyqTrend(pyqAttempts) {
     .filter((entry) => entry.accuracy !== null);
 }
 
-function aggregateReadiness({ pyqAccuracy, speedScore, mockTestScore }) {
+function aggregateReadiness({
+  pyqScore,
+  pyqAnswered,
+  mockScore,
+  mockTestsCompleted,
+  timeEfficiencyScore,
+  timedAnswered,
+}) {
+  const validPyq = pyqAnswered >= MIN_READINESS_PYQ_QUESTIONS && pyqScore !== null;
+  const validMock = mockTestsCompleted >= 1 && mockScore !== null;
+  const validTime = timedAnswered >= MIN_READINESS_TIMED_QUESTIONS && timeEfficiencyScore !== null;
   const components = [
-    { key: "pyqAccuracy", label: "PYQ Accuracy", value: pyqAccuracy, color: "#378ADD", source: "pyq_attempts.is_correct" },
-    { key: "speed", label: "Speed", value: speedScore, color: "#BA7517", source: "test_attempts.time_taken_seconds / attempted" },
-    { key: "mockScore", label: "Mock Test Score", value: mockTestScore, color: "#D4537E", source: "test_attempts.score / total_marks" },
+    { key: "pyqPerformance", label: "PYQ Performance", value: validPyq ? pyqScore : null, rawValue: pyqScore, valid: validPyq, color: "#378ADD", source: "pyq_attempts.is_correct" },
+    { key: "mockPerformance", label: "Mock Performance", value: validMock ? mockScore : null, rawValue: mockScore, valid: validMock, color: "#D4537E", source: "test_attempts.score / total_marks" },
+    { key: "timeEfficiency", label: "Time Efficiency", value: validTime ? timeEfficiencyScore : null, rawValue: timeEfficiencyScore, valid: validTime, color: "#BA7517", source: "test_attempts.time_taken_seconds / attempted" },
   ];
-  const available = components.filter((item) => item.value !== null);
+  const hasRequiredData = validPyq && validMock;
+  const overall = hasRequiredData
+    ? Math.round((pyqScore * 0.45) + (mockScore * 0.45) + ((validTime ? timeEfficiencyScore : 0) * 0.10))
+    : null;
 
   return {
-    status: available.length === 0 ? "insufficient_data" : "ready",
-    overall: available.length > 0 ? Math.round(available.reduce((sum, item) => sum + item.value, 0) / available.length) : null,
+    status: hasRequiredData ? "ready" : "insufficient_data",
+    overall,
+    label: overall !== null ? getReadinessLabel(overall) : null,
     components,
-    availableCount: available.length,
+    counts: {
+      pyqAnswered,
+      mockTestsCompleted,
+      timedAnswered,
+    },
+    requirements: {
+      minimumPyqQuestions: MIN_READINESS_PYQ_QUESTIONS,
+      minimumMockTests: 1,
+      minimumTimedQuestions: MIN_READINESS_TIMED_QUESTIONS,
+    },
+    formula: "PYQ Performance * 0.45 + Mock Performance * 0.45 + Time Efficiency * 0.10",
   };
 }
 
 function buildSpeedAnalytics(testAttempts) {
   const timed = testAttempts
-    .map((attempt) => {
-      const seconds = Number(attempt.time_taken_seconds);
-      const answered = Number(attempt.attempted);
-      if (!Number.isFinite(seconds) || seconds <= 0 || !Number.isFinite(answered) || answered <= 0) return null;
-
-      const secondsPerQuestion = seconds / answered;
-      return {
-        date: attempt.created_at,
-        seconds,
-        answered,
-        secondsPerQuestion,
-        questionsPerMinute: answered / (seconds / 60),
-      };
-    })
+    .map(getTimedAttempt)
     .filter(Boolean);
 
   if (timed.length === 0) {
@@ -356,17 +403,13 @@ export function aggregateAnalytics({
   const pyqCorrect = answeredPyqQuestions.filter((question) => question.isCorrect).length;
   const pyqAccuracy = percent(pyqCorrect, answeredPyqQuestions.length);
 
-  const timedTests = testAttempts.filter((attempt) => {
-    const timeTaken = Number(attempt.time_taken_seconds);
-    const attempted = Number(attempt.attempted);
-    return Number.isFinite(timeTaken) && timeTaken > 0 && Number.isFinite(attempted) && attempted > 0;
-  });
-  const averageSecondsPerQuestion = timedTests.length > 0
-    ? timedTests.reduce((sum, attempt) => sum + (Number(attempt.time_taken_seconds) / Number(attempt.attempted)), 0) / timedTests.length
+  const timedAttempts = testAttempts.map(getTimedAttempt).filter(Boolean);
+  const timedAnswered = timedAttempts.reduce((sum, attempt) => sum + attempt.answered, 0);
+  const timedSeconds = timedAttempts.reduce((sum, attempt) => sum + attempt.seconds, 0);
+  const averageSecondsPerQuestion = timedAnswered > 0
+    ? timedSeconds / timedAnswered
     : null;
-  const speedScore = averageSecondsPerQuestion !== null
-    ? Math.max(0, Math.min(100, Math.round((120 / Math.max(averageSecondsPerQuestion, 30)) * 100)))
-    : null;
+  const timeEfficiencyScore = getTimeEfficiencyScore(averageSecondsPerQuestion);
 
   const totalTestScore = testAttempts.reduce((sum, attempt) => sum + (Number(attempt.score) || 0), 0);
   const totalTestMarks = testAttempts.reduce((sum, attempt) => sum + getCompletedTestMaxMarks(attempt), 0);
@@ -436,7 +479,14 @@ export function aggregateAnalytics({
       answeredPyqQuestions: answeredPyqQuestions.length,
       completedTests,
     },
-    examReadiness: aggregateReadiness({ pyqAccuracy, speedScore, mockTestScore }),
+    examReadiness: aggregateReadiness({
+      pyqScore: pyqAccuracy,
+      pyqAnswered: answeredPyqQuestions.length,
+      mockScore: mockTestScore,
+      mockTestsCompleted: completedTests,
+      timeEfficiencyScore,
+      timedAnswered,
+    }),
     performanceTrend: {
       status: recentTrend.length >= 2 ? "ready" : "insufficient_data",
       points: recentTrend,

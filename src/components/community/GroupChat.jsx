@@ -18,13 +18,14 @@ export default function GroupChat({ groupId, currentUserId }) {
   const bottomRef = useRef(null);
   const channelRef = useRef(null);
 
-  function mergeMessages(previous, incoming) {
+  const mergeMessages = useCallback((previous, incoming) => {
     const byId = new Map(previous.map((message) => [message.id, message]));
     for (const message of incoming) {
+      if (!message?.id) continue;
       byId.set(message.id, { ...byId.get(message.id), ...message });
     }
     return [...byId.values()].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-  }
+  }, []);
 
   // Load initial messages
   const loadMessages = useCallback(async (before = null) => {
@@ -66,35 +67,74 @@ export default function GroupChat({ groupId, currentUserId }) {
     let channel;
     let cancelled = false;
 
+    async function hydrateRealtimeMessage(messageId) {
+      const res = await fetch(`/api/community/groups/${groupId}/messages?messageId=${encodeURIComponent(messageId)}`, {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed to hydrate realtime message");
+      const data = await res.json();
+      return data.message;
+    }
+
     async function subscribeToGroup() {
-      const token = await getToken({ template: "supabase" }).catch(() => null);
-      if (token) supabase.realtime.setAuth(token);
+      const token = await getToken().catch(() => null);
+      if (!token) {
+        console.error("[GROUP_CHAT_REALTIME] Missing Clerk session token");
+        return;
+      }
+
+      supabase.realtime.setAuth(token);
       if (cancelled) return;
+
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
 
       channel = supabase
         .channel(`group-chat-${groupId}`)
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-          (payload) => {
+          async (payload) => {
+            console.log("[GROUP_CHAT_REALTIME_INSERT]", payload);
             const newMsg = payload.new;
-            setMessages((prev) => {
-              if (newMsg.sender_id === currentUserId) return prev;
-              return mergeMessages(prev, [
-                {
-                  id: newMsg.id,
-                  sender_id: newMsg.sender_id,
-                  content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
-                  is_deleted: newMsg.is_deleted,
-                  created_at: newMsg.created_at,
-                  senderName: "Member",
-                  isOwn: false,
-                },
-              ]);
-            });
+            if (!newMsg?.id) return;
+
+            try {
+              const hydrated = await hydrateRealtimeMessage(newMsg.id);
+              if (cancelled || !hydrated) return;
+              setMessages((prev) => mergeMessages(prev, [hydrated]));
+            } catch (err) {
+              console.error("[GROUP_CHAT_REALTIME_HYDRATE]", err);
+              if (cancelled) return;
+              setMessages((prev) =>
+                mergeMessages(prev, [
+                  {
+                    id: newMsg.id,
+                    sender_id: newMsg.sender_id,
+                    content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
+                    is_deleted: newMsg.is_deleted,
+                    created_at: newMsg.created_at,
+                    senderName: newMsg.sender_id === currentUserId ? "You" : "Member",
+                    isOwn: newMsg.sender_id === currentUserId,
+                  },
+                ])
+              );
+            }
           }
         )
-        .subscribe();
+        .subscribe((status) => {
+          console.log(`[GROUP_CHAT_REALTIME:${groupId}]`, status);
+          if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
+            console.error("[GROUP_CHAT_REALTIME_STATUS]", {
+              groupId,
+              status,
+              table: "community_group_messages",
+              filter: `group_id=eq.${groupId}`,
+            });
+          }
+        });
 
       channelRef.current = channel;
     }
@@ -104,8 +144,9 @@ export default function GroupChat({ groupId, currentUserId }) {
     return () => {
       cancelled = true;
       if (channel) supabase.removeChannel(channel);
+      if (channelRef.current === channel) channelRef.current = null;
     };
-  }, [groupId, currentUserId, getToken]);
+  }, [groupId, currentUserId, getToken, mergeMessages]);
 
   async function loadOlderMessages() {
     if (messages.length === 0 || loadingOlder) return;
@@ -126,21 +167,6 @@ export default function GroupChat({ groupId, currentUserId }) {
     if (content.length > 2000) return;
 
     setIsSubmitting(true);
-
-    // Optimistic message
-    const optimisticId = `opt-${Date.now()}`;
-    const optimisticMsg = {
-      id: optimisticId,
-      sender_id: currentUserId,
-      content,
-      is_deleted: false,
-      created_at: new Date().toISOString(),
-      senderName: "You",
-      isOwn: true,
-      optimistic: true,
-    };
-
-    setMessages((prev) => mergeMessages(prev, [optimisticMsg]));
     setInput("");
 
     try {
@@ -152,19 +178,15 @@ export default function GroupChat({ groupId, currentUserId }) {
       const data = await res.json();
 
       if (!res.ok) {
-        // Rollback optimistic message
-        setMessages((prev) => prev.filter((m) => m.id !== optimisticId));
         setInput(content);
         setError(data.error || "Failed to send.");
         return;
       }
 
-      // Replace optimistic with real message
-      setMessages((prev) =>
-        mergeMessages(prev.filter((m) => m.id !== optimisticId), [{ ...data.message, optimistic: false }])
-      );
+      if (data.message) {
+        setMessages((prev) => mergeMessages(prev, [data.message]));
+      }
     } catch {
-      setMessages((prev) => prev.filter((m) => m.id !== optimisticId));
       setInput(content);
       setError("Network error. Message not sent.");
     } finally {
