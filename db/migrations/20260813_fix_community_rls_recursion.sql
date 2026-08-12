@@ -1,12 +1,5 @@
--- ============================================================
--- PrepZii Community RLS hardening
--- Run manually in Supabase SQL Editor after confirming the Clerk
--- Supabase session token puts the Clerk user id in auth.jwt()->>'sub'.
---
--- Server API routes use the service role and enforce permissions in code.
--- These policies protect direct client/realtime reads and keep direct
--- client writes disabled unless another reviewed policy is added later.
--- ============================================================
+-- Fix recursive Community RLS checks that prevent Supabase Realtime
+-- postgres_changes from delivering community_group_messages events.
 
 CREATE OR REPLACE FUNCTION public.community_current_user_id()
 RETURNS text
@@ -79,7 +72,6 @@ GRANT EXECUTE ON FUNCTION public.community_is_active_group_member(uuid, text) TO
 GRANT EXECUTE ON FUNCTION public.community_has_group_role(uuid, text[], text) TO anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.community_is_group_owner(uuid, text) TO anon, authenticated;
 
--- community_groups ----------------------------------------------------------
 DROP POLICY IF EXISTS "community_groups_select" ON public.community_groups;
 DROP POLICY IF EXISTS "community_groups_secure_select" ON public.community_groups;
 
@@ -95,7 +87,6 @@ CREATE POLICY "community_groups_secure_select"
     )
   );
 
--- community_group_members --------------------------------------------------
 DROP POLICY IF EXISTS "community_group_members_own_select" ON public.community_group_members;
 DROP POLICY IF EXISTS "community_group_members_owner_select" ON public.community_group_members;
 
@@ -111,14 +102,7 @@ CREATE POLICY "community_group_members_owner_select"
     public.community_is_group_owner(community_group_members.group_id)
   );
 
--- community_join_requests --------------------------------------------------
-DROP POLICY IF EXISTS "community_join_requests_own_select" ON public.community_join_requests;
 DROP POLICY IF EXISTS "community_join_requests_manager_select" ON public.community_join_requests;
-
-CREATE POLICY "community_join_requests_own_select"
-  ON public.community_join_requests
-  FOR SELECT
-  USING (user_id = public.community_current_user_id());
 
 CREATE POLICY "community_join_requests_manager_select"
   ON public.community_join_requests
@@ -127,7 +111,6 @@ CREATE POLICY "community_join_requests_manager_select"
     public.community_has_group_role(community_join_requests.group_id, ARRAY['OWNER', 'ADMIN'])
   );
 
--- community_group_messages -------------------------------------------------
 DROP POLICY IF EXISTS "community_group_messages_member_select" ON public.community_group_messages;
 
 CREATE POLICY "community_group_messages_member_select"
@@ -136,61 +119,3 @@ CREATE POLICY "community_group_messages_member_select"
   USING (
     public.community_is_active_group_member(community_group_messages.group_id)
   );
-
--- community_direct_conversations ------------------------------------------
-DROP POLICY IF EXISTS "community_direct_conversations_participant_select" ON public.community_direct_conversations;
-
-CREATE POLICY "community_direct_conversations_participant_select"
-  ON public.community_direct_conversations
-  FOR SELECT
-  USING (
-    public.community_current_user_id() IN (user_one_id, user_two_id)
-  );
-
--- community_direct_messages ------------------------------------------------
-DROP POLICY IF EXISTS "community_direct_messages_participant_select" ON public.community_direct_messages;
-
-CREATE POLICY "community_direct_messages_participant_select"
-  ON public.community_direct_messages
-  FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1
-      FROM public.community_direct_conversations c
-      WHERE c.id = community_direct_messages.conversation_id
-        AND c.status = 'ACTIVE'
-        AND public.community_current_user_id() IN (c.user_one_id, c.user_two_id)
-    )
-  );
-
--- community_user_blocks ----------------------------------------------------
-DROP POLICY IF EXISTS "community_user_blocks_own_select" ON public.community_user_blocks;
-
-CREATE POLICY "community_user_blocks_own_select"
-  ON public.community_user_blocks
-  FOR SELECT
-  USING (blocker_id = public.community_current_user_id());
-
--- community_reports --------------------------------------------------------
-DROP POLICY IF EXISTS "community_reports_own_select" ON public.community_reports;
-
-CREATE POLICY "community_reports_own_select"
-  ON public.community_reports
-  FOR SELECT
-  USING (reporter_id = public.community_current_user_id());
-
--- community_user_status ----------------------------------------------------
-DROP POLICY IF EXISTS "community_user_status_own_select" ON public.community_user_status;
-
-CREATE POLICY "community_user_status_own_select"
-  ON public.community_user_status
-  FOR SELECT
-  USING (user_id = public.community_current_user_id());
-
--- community_rate_limits ----------------------------------------------------
-DROP POLICY IF EXISTS "community_rate_limits_own_select" ON public.community_rate_limits;
-
-CREATE POLICY "community_rate_limits_own_select"
-  ON public.community_rate_limits
-  FOR SELECT
-  USING (user_id = public.community_current_user_id());
