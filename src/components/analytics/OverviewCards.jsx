@@ -1,92 +1,95 @@
 "use client";
 
-import { Target, Trophy, Flame, TrendingUp } from "lucide-react";
+import { BarChart3, CheckCircle2, ListChecks, Target } from "lucide-react";
 
 const STAT_STYLES = {
-  "Practice Done": {
-    icon: Target,
+  "Questions Practiced": {
+    icon: ListChecks,
     accent: "#6366F1",
     gradient: "from-indigo-500 to-violet-500",
     bgPattern: "from-indigo-500/10 via-violet-500/5 to-transparent dark:from-indigo-500/20 dark:via-violet-500/5",
   },
-  "Average Score": {
-    icon: TrendingUp,
+  "Overall Accuracy": {
+    icon: Target,
     accent: "#10b981",
     gradient: "from-emerald-500 to-teal-500",
     bgPattern: "from-emerald-500/10 via-teal-500/5 to-transparent dark:from-emerald-500/20 dark:via-teal-500/5",
   },
-  "Accuracy": {
-    icon: Trophy,
+  "Tests Completed": {
+    icon: CheckCircle2,
     accent: "#f59e0b",
     gradient: "from-amber-500 to-orange-500",
     bgPattern: "from-amber-500/10 via-orange-500/5 to-transparent dark:from-amber-500/20 dark:via-orange-500/5",
   },
-  "Study Streak": {
-    icon: Flame,
-    accent: "#ef4444",
+  "Average Score": {
+    icon: BarChart3,
+    accent: "#D4537E",
     gradient: "from-rose-500 to-pink-500",
     bgPattern: "from-rose-500/10 via-pink-500/5 to-transparent dark:from-rose-500/20 dark:via-pink-500/5",
   },
 };
 
+function formatPercent(value) {
+  return value === null || value === undefined ? "—" : `${value}%`;
+}
+
+function formatNumber(value) {
+  return typeof value === "number" ? value.toLocaleString() : "—";
+}
+
 export default function OverviewCards({ stats }) {
+  const overview = stats?.overview || {};
   const cards = [
     {
-      label: "Practice Done",
-      value: stats?.totalActivities ?? stats?.totalTests ?? 0,
-      sub: "tests and PYQs combined",
+      label: "Questions Practiced",
+      value: formatNumber(overview.questionsPracticed),
+      sub: overview.questionsPracticedThisWeek > 0 ? `+${overview.questionsPracticedThisWeek} this week` : "answered questions only",
+    },
+    {
+      label: "Overall Accuracy",
+      value: formatPercent(overview.overallAccuracy),
+      sub: "correct / answered",
+    },
+    {
+      label: "Tests Completed",
+      value: formatNumber(overview.testsCompleted),
+      sub: "submitted tests",
     },
     {
       label: "Average Score",
-      value: `${stats?.averageScore ?? 0}%`,
-      sub: "overall performance",
-    },
-    {
-      label: "Accuracy",
-      value: `${stats?.accuracy ?? 0}%`,
-      sub: "questions accuracy",
-    },
-    {
-      label: "Study Streak",
-      value: stats?.streak ?? 0,
-      sub: (stats?.streak === 1 ? "day" : "days") + " active streak",
+      value: formatPercent(overview.averageScore),
+      sub: "completed tests only",
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {cards.map((s, index) => {
-        const style = STAT_STYLES[s.label] || STAT_STYLES["Practice Done"];
+        const style = STAT_STYLES[s.label];
         const Icon = style.icon;
 
         return (
           <div
             key={s.label}
-            className={`group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-[#0f172a]/60 p-5 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg animate-slideUp`}
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-white/70 p-4 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700/50 dark:bg-[#0f172a]/60 sm:p-5"
             style={{ animationDelay: `${index * 75}ms` }}
           >
-            {/* Animated Gradient Background */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-40 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`}
-            />
+            <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-50 transition-opacity duration-200 group-hover:opacity-90`} />
 
-            {/* Content */}
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <p className="min-w-0 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
                   {s.label}
                 </p>
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
                   style={{ background: `${style.accent}15` }}
                 >
-                  <Icon size={18} style={{ color: style.accent }} />
+                  <Icon size={17} style={{ color: style.accent }} />
                 </div>
               </div>
 
-              <p
-                className={`text-3xl font-extrabold tracking-tight mb-1 bg-gradient-to-br ${style.gradient} bg-clip-text text-transparent`}
-              >
+              <p className={`mb-1 bg-gradient-to-br ${style.gradient} bg-clip-text text-3xl font-extrabold tracking-tight text-transparent`}>
                 {s.value}
               </p>
 

@@ -1,225 +1,95 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
+import { aggregateAnalytics } from "@/lib/analyticsAggregate";
+import { normalizeTrack } from "@/lib/analyticsHelpers";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request) {
-
-try {
-    const { searchParams } = new URL(request.url);
-    const track = searchParams.get("track")?.toUpperCase() || "JEE";
-
-
-    // ==========================
-    // CLERK USER
-    // ==========================
-
+  try {
     const { userId } = await auth();
 
-
     if (!userId) {
-
-        return NextResponse.json(
-            {
-                error:"Unauthorized"
-            },
-            {
-                status:401
-            }
-        );
-
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const { searchParams } = new URL(request.url);
+    const track = normalizeTrack(searchParams.get("track") || "JEE");
 
+    const [{ data: testAttemptsRaw, error: testError }, { data: pyqAttemptsRaw, error: pyqError }] = await Promise.all([
+      supabaseAdmin
+        .from("test_attempts")
+        .select(`
+          id,
+          created_at,
+          score,
+          total_marks,
+          total_questions,
+          correct_answers,
+          attempted,
+          time_taken_seconds,
+          tests ( exam ),
+          user_answers (
+            selected_option,
+            is_correct,
+            created_at,
+            questions (
+              exam,
+              subject,
+              chapter
+            )
+          )
+        `)
+        .eq("user_id", userId)
+        .order("created_at", { ascending: true }),
+      supabaseAdmin
+        .from("pyq_attempts")
+        .select(`
+          id,
+          question_id,
+          selected_option,
+          is_correct,
+          attempted_at,
+          pyq_questions (
+            exam,
+            subject,
+            chapter,
+            marks_positive,
+            marks_negative
+          )
+        `)
+        .eq("user_id", userId)
+        .order("attempted_at", { ascending: true }),
+    ]);
 
-    const user =
-    await currentUser();
+    if (testError) throw testError;
+    if (pyqError) throw pyqError;
 
-
-
-    const username =
-    user?.firstName ||
-    user?.username ||
-    "Student";
-
-
-
-
-
-    // ==========================
-    // PYQ ATTEMPTS
-    // ==========================
-
-
-    const {data:pyqAttemptsRaw,error:pyqError} =
-    await supabaseAdmin
-    .from("pyq_attempts")
-    .select("*, pyq_questions(exam)")
-    .eq("user_id",userId);
-
-    if(pyqError) throw pyqError;
-
-    // Filter pyq attempts by track
-    const pyqAttempts = (pyqAttemptsRaw || []).filter(a => {
-        const ex = a.pyq_questions?.exam;
-        if (!ex) return false;
-        return ex.toUpperCase().includes(track === "JEE" ? "JEE" : "NEET");
+    const analytics = aggregateAnalytics({
+      track,
+      testAttemptsRaw,
+      pyqAttemptsRaw,
     });
-
-
-
-
-
-    // ==========================
-    // TEST ATTEMPTS
-    // ==========================
-
-
-    const {data:testAttemptsRaw,error:testError} =
-    await supabaseAdmin
-    .from("test_attempts")
-    .select("*, tests(exam), user_answers(questions(exam))")
-    .eq("user_id",userId);
-
-    if(testError) throw testError;
-
-    // Filter test attempts by track
-    const testAttempts = (testAttemptsRaw || []).filter(a => {
-        let attemptExam = null;
-        if (a.tests?.exam) {
-            attemptExam = a.tests.exam;
-        } else if (a.user_answers && a.user_answers.length > 0) {
-            const firstAns = a.user_answers.find(ans => ans.questions?.exam);
-            if (firstAns) attemptExam = firstAns.questions.exam;
-        }
-        
-        if (!attemptExam) return false;
-        return attemptExam.toUpperCase().includes(track === "JEE" ? "JEE" : "NEET");
-    });
-
-
-
-
-
-
-
-    // ==========================
-    // CALCULATIONS
-    // ==========================
-
-
-    const pyqSolved =
-    pyqAttempts.length;
-
-
-    const testsAttempted =
-    testAttempts.length;
-
-
-
-    const totalAttempts =
-    pyqSolved + testsAttempted;
-
-
-
-
-    const pyqCorrect =
-    pyqAttempts.filter(
-        item=>item.is_correct
-    ).length;
-
-
-
-
-    const testCorrect =
-    testAttempts.filter(
-        item=>item.is_correct
-    ).length;
-
-
-
-
-    const correctAnswers =
-    pyqCorrect + testCorrect;
-
-
-
-
-    const accuracy =
-    totalAttempts > 0
-
-    ? Math.round(
-        (correctAnswers/totalAttempts)*100
-    )
-
-    : 0;
-
-
-
-
-
-    // ==========================
-    // RESPONSE
-    // ==========================
-
 
     return NextResponse.json({
-
-        totalAttempts,
-
-        correctAnswers,
-
-
-        wrongAnswers:
-        totalAttempts-correctAnswers,
-
-
-        accuracy,
-
-
-        track,
-
-        pyqSolved,
-
-
-        testsAttempted,
-
-
-        topics:[]
-
+      ...analytics,
+      generatedAt: new Date().toISOString(),
+      sources: {
+        questionsPracticed: ["user_answers.selected_option", "pyq_attempts.selected_option"],
+        accuracy: ["user_answers.is_correct", "pyq_attempts.is_correct"],
+        testsCompleted: ["test_attempts.id"],
+        averageScore: ["test_attempts.score", "test_attempts.total_marks"],
+        chapters: ["questions.chapter", "pyq_questions.chapter"],
+        timing: ["test_attempts.time_taken_seconds", "test_attempts.attempted"],
+      },
     });
-
-
-
-
-
-
-}catch(error){
-
-
-
-console.log(
-"ANALYTICS ERROR:",
-error
-);
-
-
-
-return NextResponse.json(
-
-{
-    error:error.message
-},
-
-{
-    status:500
-}
-
-);
-
-
-
-}
-
-
+  } catch (error) {
+    console.error("[ANALYTICS_ERROR]", error);
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }

@@ -1,144 +1,96 @@
 "use client";
 
-const DEFAULT_TOPICS_JEE = [
-  { topic: "Integration",       subject: "Maths",     accuracy: 38, severity: "critical" },
-  { topic: "Kinematics",        subject: "Physics",   accuracy: 44, severity: "critical" },
-  { topic: "Organic Reactions", subject: "Chemistry", accuracy: 42, severity: "critical" },
-  { topic: "Thermodynamics",    subject: "Chemistry", accuracy: 51, severity: "warn"     },
-  { topic: "Optics",            subject: "Physics",   accuracy: 79, severity: "good"     },
-  { topic: "Genetics",          subject: "Biology",   accuracy: 81, severity: "good"     },
-];
-
-const DEFAULT_TOPICS_NEET = [
-  { topic: "Genetics Maps",     subject: "Biology",   accuracy: 38, severity: "critical" },
-  { topic: "Organic Reactions", subject: "Chemistry", accuracy: 42, severity: "critical" },
-  { topic: "Thermodynamics",    subject: "Chemistry", accuracy: 51, severity: "warn"     },
-  { topic: "Kinematics",        subject: "Physics",   accuracy: 44, severity: "critical" },
-  { topic: "Optics",            subject: "Physics",   accuracy: 79, severity: "good"     },
-  { topic: "Cell Biology",      subject: "Biology",   accuracy: 83, severity: "good"     },
-];
-
-function getSeverity(raw, accuracy) {
-  if (typeof raw === "string") {
-    const s = raw.toLowerCase().trim();
-    if (["critical", "danger", "red", "weak"].includes(s)) return "critical";
-    if (["warn", "warning", "medium", "yellow", "avg", "average"].includes(s)) return "warn";
-    if (["good", "strong", "green", "high"].includes(s)) return "good";
-  }
-  const pct = typeof accuracy === "number" ? accuracy : 50;
-  if (pct < 50) return "critical";
-  if (pct < 70) return "warn";
-  return "good";
-}
-
 const CFG = {
   critical: {
-    dot:   "bg-black dark:bg-white",
-    badge: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
+    dot: "bg-red-500 dark:bg-red-400",
     label: "Critical",
   },
-  warn: {
-    dot:   "bg-gray-400 dark:bg-gray-500",
-    badge: "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400",
-    label: "Needs work",
+  needs_work: {
+    dot: "bg-amber-500 dark:bg-amber-400",
+    label: "Needs Work",
   },
-  good: {
-    dot:   "bg-gray-200 dark:bg-gray-700",
-    badge: "bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-500",
-    label: "Good",
+  improving: {
+    dot: "bg-indigo-500 dark:bg-indigo-400",
+    label: "Improving",
+  },
+  strong: {
+    dot: "bg-emerald-500 dark:bg-emerald-400",
+    label: "Strong",
   },
 };
 
-const SORT = { critical: 0, warn: 1, good: 2 };
-
-export default function WeakTopics({ track = "jee", dbTopics }) {
-  const raw =
-    Array.isArray(dbTopics) && dbTopics.length > 0
-      ? dbTopics
-      : track === "neet"
-      ? DEFAULT_TOPICS_NEET
-      : DEFAULT_TOPICS_JEE;
-
-  const topics = raw.map((t) => {
-    const acc =
-      typeof t.accuracy === "number"
-        ? t.accuracy
-        : typeof t.efficiency === "number"
-        ? t.efficiency
-        : 50;
-    const sev = getSeverity(t.severity, acc);
-    return {
-      topic:    t.topic   ?? "Unknown",
-      subject:  t.subject ?? "",
-      accuracy: acc,
-      severity: sev,
-    };
-  });
-
-  const sorted = [...topics].sort(
-    (a, b) => SORT[a.severity] - SORT[b.severity]
+function EmptyState({ minimumAttempts }) {
+  return (
+    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-white/45 p-5 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-400">
+      <p className="font-bold text-slate-700 dark:text-slate-200">Not enough chapter data yet</p>
+      <p className="mt-1 text-xs leading-relaxed">
+        Complete more PYQs or tests and PrepZii will identify chapters with at least {minimumAttempts} answered questions.
+      </p>
+    </div>
   );
+}
 
-  const critCount = sorted.filter((t) => t.severity === "critical").length;
+export default function WeakTopics({ weakChapters, minimumAttempts = 3 }) {
+  const chapters = weakChapters?.items || [];
 
   return (
-    <div className="glass-card p-5">
-      <div className="flex items-start justify-between mb-5">
+    <div className="glass-card min-w-0 p-5">
+      <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-            Weak Topics
+          <h2 className="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+            Weak Chapters
           </h2>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-            {critCount} topic{critCount !== 1 ? "s" : ""} need urgent attention
+          <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+            Requires {minimumAttempts}+ answered questions per chapter
           </p>
         </div>
-        <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
-          {sorted.length} topics
+        <span className="shrink-0 text-xs font-medium text-slate-400 dark:text-slate-500">
+          {weakChapters?.allCount || 0} mapped
         </span>
       </div>
 
-      <div className="divide-y divide-slate-50 dark:divide-slate-800">
-        {sorted.map((t, idx) => {
-          const cfg = CFG[t.severity] ?? CFG.warn;
-          return (
-            <div
-              key={`${t.topic}-${idx}`}
-              className="flex items-center gap-4 py-3.5"
-            >
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`} />
+      {chapters.length === 0 ? (
+        <EmptyState minimumAttempts={minimumAttempts} />
+      ) : (
+        <div className="divide-y divide-slate-50 dark:divide-slate-800">
+          {chapters.map((chapter, index) => {
+            const cfg = CFG[chapter.status] || CFG.needs_work;
+            return (
+              <div key={`${chapter.subject}-${chapter.chapter}-${index}`} className="flex min-w-0 items-center gap-4 py-3.5">
+                <div className={`h-2 w-2 shrink-0 rounded-full ${cfg.dot}`} />
 
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
-                  {t.topic}
-                </p>
-                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{t.subject}</p>
-              </div>
-
-              <div className="hidden sm:flex items-center gap-3 w-40">
-                <div className="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-black dark:bg-white rounded-full"
-                    style={{ width: `${t.accuracy}%` }}
-                  />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">
+                    {chapter.chapter}
+                  </p>
+                  <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">{chapter.subject}</p>
                 </div>
-                <span className="text-xs font-black text-slate-900 dark:text-white w-8 text-right tabular-nums">
-                  {t.accuracy}%
+
+                <span className="hidden text-xs text-slate-400 dark:text-slate-500 sm:inline">
+                  {chapter.attempted} attempted
+                </span>
+
+                <div className="hidden w-40 items-center gap-3 sm:flex">
+                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                    <div className="h-full rounded-full bg-black dark:bg-white" style={{ width: `${chapter.accuracy}%` }} />
+                  </div>
+                  <span className="w-8 text-right text-xs font-black tabular-nums text-slate-900 dark:text-white">
+                    {chapter.accuracy}%
+                  </span>
+                </div>
+
+                <span className="text-xs font-black tabular-nums text-slate-900 dark:text-white sm:hidden">
+                  {chapter.accuracy}%
+                </span>
+
+                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold ${chapter.statusClassName}`}>
+                  {chapter.statusLabel || cfg.label}
                 </span>
               </div>
-
-              <span className="sm:hidden text-xs font-black text-slate-900 dark:text-white tabular-nums">
-                {t.accuracy}%
-              </span>
-
-              <span
-                className={`text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0 ${cfg.badge}`}
-              >
-                {cfg.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

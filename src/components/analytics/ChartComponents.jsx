@@ -1,425 +1,304 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import {
-  PERFORMANCE_WEEKS,
-  PERFORMANCE_SERIES,
-  SUBJECT_DISTRIBUTION,
-  RADAR_LABELS,
-  RADAR_YOU,
-  RADAR_TOPPER,
-  TOPIC_WEAKNESS,
-  TIME_BY_DAY,
-} from "@/constants/analyticsData";
-
-// ── shared Chart.js loader ──────────────────────────────────────
-function useChart(canvasId, buildConfig, dependencies = []) {
-  const chartRef = useRef(null);
-  useEffect(() => {
-    let chart;
-    const init = () => {
-      const canvas = document.getElementById(canvasId);
-      if (!canvas || !window.Chart) return;
-      if (chartRef.current) chartRef.current.destroy();
-      const isDark = document.documentElement.classList.contains("dark");
-      chart = new window.Chart(canvas, buildConfig(isDark));
-      chartRef.current = chart;
-    };
-
-    if (window.Chart) {
-      init();
-    } else {
-      const script = document.createElement("script");
-      script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js";
-      script.onload = init;
-      document.head.appendChild(script);
-    }
-
-    // Re-render chart when dark mode is toggled
-    const observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        if (m.attributeName === "class") {
-          init();
-          break;
-        }
-      }
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-
-    return () => {
-      observer.disconnect();
-      if (chartRef.current) chartRef.current.destroy();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencies); // Hook responds immediately when track changes
+function EmptyState({ title, description }) {
+  return (
+    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-white/45 p-5 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-400">
+      <p className="font-bold text-slate-700 dark:text-slate-200">{title}</p>
+      <p className="mt-1 text-xs leading-relaxed">{description}</p>
+    </div>
+  );
 }
 
+function formatPercent(value) {
+  return value === null || value === undefined ? "—" : `${value}%`;
+}
 
-const gridColor  = (dark) => dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-const tickColor  = (dark) => dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-const basePlugin = { legend: { display: false } };
+function buildLinePoints(points, width = 640, height = 190, pad = 18) {
+  if (!points || points.length < 2) return "";
+  const usableWidth = width - pad * 2;
+  const usableHeight = height - pad * 2;
+  return points
+    .map((point, index) => {
+      const x = pad + (index / (points.length - 1)) * usableWidth;
+      const y = pad + (1 - point.accuracy / 100) * usableHeight;
+      return `${x},${y}`;
+    })
+    .join(" ");
+}
 
-// ─────────────────────────────────────────────────────────────────
-// PerformanceTrend — Line chart
-// ─────────────────────────────────────────────────────────────────
-export function PerformanceTrend({ track, data = [] }) {
-
-  const chartData =
-    data.length > 0
-      ? data
-      : [
-          { label: "No tests", score: 0 }
-        ];
-
-
-  useChart(
-    "performance-chart",
-    (isDark) => ({
-      type: "line",
-      data: {
-        labels: chartData.map((item) => item.label),
-        datasets: [
-          {
-            label: "Score %",
-            data: chartData.map((item) => item.score),
-            tension: 0.4,
-            showLine: true,
-            pointRadius: 5,
-            pointHoverRadius: 7,
-            borderColor: "#6366F1",
-            backgroundColor: isDark
-              ? "rgba(99,102,241,0.15)"
-              : "rgba(99,102,241,0.1)",
-            pointBackgroundColor: "#6366F1",
-            pointBorderColor: isDark ? "#0f172a" : "#ffffff",
-            pointBorderWidth: 2,
-            fill: true,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            grid: { color: gridColor(isDark) },
-            ticks: { color: tickColor(isDark), callback: (value) => value + "%" },
-          },
-          x: {
-            grid: { display: false },
-            ticks: { color: tickColor(isDark) },
-          },
-        },
-      },
-    }),
-    [track, data]
-  );
-
+export function PerformanceTrend({ data, detailed = false }) {
+  const points = data?.points || [];
+  const hasData = data?.status === "ready" && points.length >= 2;
+  const chartPoints = buildLinePoints(points);
 
   return (
-
-    <div className="glass-card p-5">
-
+    <div className="glass-card min-w-0 p-5">
       <div className="mb-5">
-
         <h2 className="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
           Performance Trend
         </h2>
-
         <p className="text-xs text-slate-400 dark:text-slate-500">
-          Your test score improvement
+          {detailed ? "Performance over time from completed work" : "Your test and PYQ accuracy improvement"}
         </p>
-
       </div>
 
+      {!hasData ? (
+        <EmptyState
+          title="Not enough trend data yet"
+          description="Complete more tests or PYQ practice to see how your performance changes over time."
+        />
+      ) : (
+        <div className="min-w-0">
+          <div className="relative h-56 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/40 p-3 dark:border-slate-800 dark:bg-slate-950/30 sm:h-72">
+            <svg className="h-full w-full" viewBox="0 0 640 190" preserveAspectRatio="none" role="img" aria-label="Accuracy trend over recent work">
+              {[0, 25, 50, 75, 100].map((tick) => (
+                <g key={tick}>
+                  <line
+                    x1="18"
+                    x2="622"
+                    y1={18 + (1 - tick / 100) * 154}
+                    y2={18 + (1 - tick / 100) * 154}
+                    stroke="currentColor"
+                    className="text-slate-200/80 dark:text-slate-800"
+                    strokeWidth="1"
+                  />
+                </g>
+              ))}
+              <polyline points={chartPoints} fill="none" stroke="#6366F1" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+              {points.map((point, index) => {
+                const x = 18 + (index / (points.length - 1)) * 604;
+                const y = 18 + (1 - point.accuracy / 100) * 154;
+                return <circle key={`${point.label}-${index}`} cx={x} cy={y} r="5" fill="#6366F1" />;
+              })}
+            </svg>
+          </div>
 
-      <div className="h-72">
-
-        <canvas id="performance-chart"></canvas>
-
-      </div>
-
-
+          <div className="mt-3 flex flex-wrap gap-2">
+            {points.slice(detailed ? -8 : -4).map((point, index) => (
+              <span
+                key={`${point.label}-${index}`}
+                className="rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300"
+              >
+                {point.label}: {point.accuracy}%
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
-
   );
-
 }
 
-// ─────────────────────────────────────────────────────────────────
-// SubjectDistribution — Donut + progress bars
-// ─────────────────────────────────────────────────────────────────
-export function SubjectDistribution({ track = "jee", liveData }) {
-  const baseData = liveData && liveData.length > 0 ? liveData : SUBJECT_DISTRIBUTION;
-  const filteredDistribution = baseData.filter((s) => {
-    const sub = s.subject.toLowerCase();
-    if (track === "jee" && sub === "biology") return false;
-    if (track === "neet" && (sub === "maths" || sub === "mathematics")) return false;
-    return true;
-  });
-
-  // Scale remaining segments proportionally to maintain exactly 100% donut weight
-  const totalPct = filteredDistribution.reduce((sum, item) => sum + item.pct, 0);
-  const scaledDistribution = filteredDistribution.map((item) => ({
-    ...item,
-    pct: Math.round((item.pct / totalPct) * 100),
-  }));
-
-  useChart("subjectPieChart", () => ({
-    type: "doughnut",
-    data: {
-      labels: scaledDistribution.map((s) => s.subject),
-      datasets: [{
-        data: scaledDistribution.map((s) => s.pct),
-        backgroundColor: scaledDistribution.map((s) => s.color),
-        borderWidth: 0,
-        hoverOffset: 4,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: basePlugin,
-      cutout: "68%",
-    },
-  }), [track]);
+export function SubjectDistribution({ data }) {
+  const items = data?.items || [];
+  const hasData = data?.status === "ready" && items.length > 0;
+  const segments = items.reduce((acc, item) => {
+    const previousOffset = acc.length > 0 ? acc[acc.length - 1].nextOffset : 0;
+    return [
+      ...acc,
+      {
+        ...item,
+        dash: `${item.pct} ${100 - item.pct}`,
+        offset: previousOffset,
+        nextOffset: previousOffset - item.pct,
+      },
+    ];
+  }, []);
 
   return (
-    <div className="glass-card p-5 h-full">
-      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
+    <div className="glass-card min-w-0 p-5">
+      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
         Subject Distribution
       </h2>
-      <div className="relative h-36 mb-4">
-        <canvas id="subjectPieChart" role="img" aria-label="Donut chart showing track distribution metrics">
-          Subject distribution ratios matching focus configurations.
-        </canvas>
-      </div>
-      <div className="space-y-2">
-        {scaledDistribution.map((s) => (
-          <div key={s.subject} className="flex items-center gap-2">
-            <span className="text-xs text-slate-500 dark:text-slate-400 w-20 flex-shrink-0">{s.subject}</span>
-            <div className="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${s.pct}%`, background: s.color }}
-              />
-            </div>
-            <span className="text-xs font-bold text-slate-900 dark:text-white w-8 text-right">{s.pct}%</span>
+
+      {!hasData ? (
+        <EmptyState
+          title="No subject data yet"
+          description="Practice mapped questions to see subject distribution."
+        />
+      ) : (
+        <>
+          <div className="relative mx-auto mb-4 h-36 w-36">
+            <svg viewBox="0 0 42 42" className="h-full w-full -rotate-90">
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="currentColor" strokeWidth="5" className="text-slate-100 dark:text-slate-800" />
+              {segments.map((segment) => (
+                <circle
+                  key={segment.subject}
+                  cx="21"
+                  cy="21"
+                  r="15.915"
+                  fill="transparent"
+                  stroke={segment.color}
+                  strokeWidth="5"
+                  strokeDasharray={segment.dash}
+                  strokeDashoffset={segment.offset}
+                />
+              ))}
+            </svg>
           </div>
-        ))}
-      </div>
+
+          <div className="space-y-2">
+            {items.map((subject) => (
+              <div key={subject.subject} className="flex items-center gap-2">
+                <span className="w-24 shrink-0 text-xs text-slate-500 dark:text-slate-400">{subject.subject}</span>
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                  <div className="h-full rounded-full" style={{ width: `${subject.pct}%`, background: subject.color }} />
+                </div>
+                <span className="w-8 text-right text-xs font-bold text-slate-900 dark:text-white">{subject.pct}%</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────
-// SkillRadar — Radar chart
-// ─────────────────────────────────────────────────────────────────
-export function SkillRadar({ track = "jee", liveLabels, liveYou, liveTopper }) {
-  const baseLabels = liveLabels && liveLabels.length > 0 ? liveLabels : RADAR_LABELS;
-  const baseYou = liveYou && liveYou.length > 0 ? liveYou : RADAR_YOU;
-  const baseTopper = liveTopper && liveTopper.length > 0 ? liveTopper : RADAR_TOPPER;
-
-  const filteredRadarIndices = [];
-  baseLabels.forEach((label, index) => {
-    if (track === "jee" && label.toLowerCase().includes("genetics")) return;
-    if (track === "neet" && label.toLowerCase().includes("calculus")) return;
-    filteredRadarIndices.push(index);
-  });
-
-  const filteredLabels = filteredRadarIndices.map((i) => baseLabels[i]);
-  const filteredYou = filteredRadarIndices.map((i) => baseYou[i]);
-  const filteredTopper = filteredRadarIndices.map((i) => baseTopper[i]);
-
-  useChart("skillRadarChart", (dark) => ({
-    type: "radar",
-    data: {
-      labels: filteredLabels,
-      datasets: [
-        {
-          label: "You",
-          data: filteredYou,
-          borderColor: "#378ADD",
-          backgroundColor: "rgba(55,138,221,0.15)",
-          pointBackgroundColor: "#378ADD",
-          borderDash: [],
-        },
-        {
-          label: "Topper avg",
-          data: filteredTopper,
-          borderColor: "#D4537E",
-          backgroundColor: "rgba(212,83,126,0.08)",
-          pointBackgroundColor: "#D4537E",
-          borderDash: [4, 4],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: basePlugin,
-      scales: {
-        r: {
-          min: 0, max: 100,
-          ticks: { display: false },
-          grid: { color: gridColor(dark) },
-          pointLabels: { color: tickColor(dark), font: { size: 11 } },
-        },
-      },
-    },
-  }), [track]);
+export function SubjectPerformance({ data }) {
+  const items = data?.items || [];
+  const hasData = data?.status === "ready" && items.length > 0;
 
   return (
-    <div className="glass-card p-5">
-      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
-        Skill Comparison
+    <div className="glass-card min-w-0 p-5">
+      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+        Subject Performance
       </h2>
-      <div className="flex gap-4 mb-3">
-        {[{ label: "You", color: "#378ADD" }, { label: "Topper avg", color: "#D4537E" }].map((l) => (
-          <span key={l.label} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-            <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: l.color }} />
-            {l.label}
-          </span>
-        ))}
-      </div>
-      <div className="relative h-60">
-        <canvas id="skillRadarChart" role="img" aria-label="Radar chart comparing skill metrics">
-          Skill comparison parameters balanced per track criteria bounds.
-        </canvas>
-      </div>
+
+      {!hasData ? (
+        <EmptyState
+          title="No subject performance yet"
+          description="Answer mapped questions to calculate subject accuracy."
+        />
+      ) : (
+        <div className="space-y-3">
+          {items.map((subject) => (
+            <div key={subject.subject}>
+              <div className="mb-1.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{subject.subject}</span>
+                <span className="text-xs font-black text-slate-900 dark:text-white">{formatPercent(subject.accuracy)}</span>
+              </div>
+              <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                <div className="h-full rounded-full" style={{ width: `${subject.accuracy || 0}%`, background: subject.color }} />
+              </div>
+              <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
+                {subject.correct}/{subject.attempted} correct
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────
-// TopicWeakness — Horizontal bar + ranked list
-// ─────────────────────────────────────────────────────────────────
-export function TopicWeakness({ track = "jee", liveData }) {
-  const isNeet = track === "neet";
-  const baseData = liveData && liveData.length > 0 ? liveData : TOPIC_WEAKNESS;
-
-  // Translate topic matrix items to maintain row count parity cleanly
-  const processedTopics = baseData.map((t) => {
-    if (isNeet && t.topic === "Integration") {
-      return { ...t, topic: "Genetics Maps" };
-    }
-    return t;
-  });
-
-  useChart("topicBarChart", (dark) => ({
-    type: "bar",
-    data: {
-      labels: processedTopics.map((t) => t.topic),
-      datasets: [{
-        label: "Accuracy %",
-        data: processedTopics.map((t) => t.accuracy),
-        backgroundColor: processedTopics.map((t) =>
-          t.severity === "good" ? "#1D9E75" : t.severity === "warn" ? "#BA7517" : "#E24B4A"
-        ),
-        borderRadius: 4,
-        borderSkipped: false,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: "y",
-      plugins: basePlugin,
-      scales: {
-        x: {
-          min: 0, max: 100,
-          grid: { color: gridColor(dark) },
-          ticks: { color: tickColor(dark), font: { size: 11 }, callback: (v) => v + "%" },
-        },
-        y: { grid: { display: false }, ticks: { color: tickColor(dark), font: { size: 11 } } },
-      },
-    },
-  }), [track]);
-
-  const severityClass = {
-    critical: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800",
-    warn:     "bg-yellow-50 dark:bg-yellow-950/30 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800",
-    good:     "bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800",
-  };
-  const severityLabel = { critical: "Critical", warn: "Needs work", good: "Strong" };
+export function ChapterPerformance({ data }) {
+  const weakest = data?.weakest || [];
+  const strongest = data?.strongest || [];
+  const hasData = data?.status === "ready" && weakest.length > 0;
 
   return (
-    <div className="glass-card p-5">
-      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
-        Topic Weakness Detection
+    <div className="glass-card min-w-0 p-5">
+      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+        Chapter Performance
       </h2>
-      <div className="relative h-48 mb-4">
-        <canvas id="topicBarChart" role="img" aria-label="Horizontal bar chart showing accuracy parameters">
-          Weakest topics sorted relative to active track categories.
-        </canvas>
-      </div>
-      <div className="divide-y divide-gray-50 dark:divide-gray-800">
-        {processedTopics.filter((t) => t.severity !== "good").map((t) => (
-          <div key={t.topic} className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-700 dark:text-gray-300">{t.topic}</span>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityClass[t.severity]}`}>
-              {t.accuracy}% — {severityLabel[t.severity]}
+
+      {!hasData ? (
+        <EmptyState
+          title="Not enough chapter data yet"
+          description="Complete more mapped PYQs or tests to compare chapter performance."
+        />
+      ) : (
+        <div className="grid gap-5 lg:grid-cols-2">
+          <div>
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              Needs Attention
+            </p>
+            <ChapterList chapters={weakest} />
+          </div>
+          <div>
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              Strongest
+            </p>
+            {strongest.length > 0 ? <ChapterList chapters={strongest} /> : <EmptyState title="No strong chapters yet" description="Keep practicing to establish strengths." />}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ChapterList({ chapters }) {
+  return (
+    <div className="divide-y divide-slate-100 dark:divide-slate-800">
+      {chapters.map((chapter) => (
+        <div key={`${chapter.subject}-${chapter.chapter}`} className="py-3">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">{chapter.chapter}</p>
+              <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">{chapter.subject}</p>
+            </div>
+            <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold ${chapter.statusClassName}`}>
+              {chapter.statusLabel}
             </span>
           </div>
-        ))}
-      </div>
+          <div className="mt-2 flex items-center gap-3">
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="h-full rounded-full bg-black dark:bg-white" style={{ width: `${chapter.accuracy}%` }} />
+            </div>
+            <span className="w-10 text-right text-xs font-black text-slate-900 dark:text-white">{chapter.accuracy}%</span>
+          </div>
+          <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">{chapter.attempted} attempted</p>
+        </div>
+      ))}
     </div>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────
-// TimeAnalytics — Bar chart + summary stats
-// ─────────────────────────────────────────────────────────────────
-export function TimeAnalytics({ track = "jee", liveData }) {
-  const baseData = liveData && liveData.length > 0 ? liveData : TIME_BY_DAY;
-
-  useChart("timeBarChart", (dark) => ({
-    type: "bar",
-    data: {
-      labels: baseData.map((d) => d.day),
-      datasets: [{
-        label: "Hours",
-        data: baseData.map((d) => d.hours),
-        backgroundColor: dark ? "rgba(55,138,221,0.7)" : "#378ADD",
-        borderRadius: 4,
-        borderSkipped: false,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: basePlugin,
-      scales: {
-        x: { grid: { display: false }, ticks: { color: tickColor(dark), font: { size: 11 } } },
-        y: { max: 5, grid: { color: gridColor(dark) }, ticks: { color: tickColor(dark), font: { size: 11 }, stepSize: 1 } },
-      },
-    },
-  }), [track, liveData]);
-
-  const avg = baseData.length > 0 ? (baseData.reduce((s, d) => s + d.hours, 0) / baseData.length).toFixed(1) : 0;
-  const peak = baseData.length > 0 ? baseData.reduce((a, b) => a.hours > b.hours ? a : b).day : "N/A";
+export function TimeAnalytics({ data }) {
+  const hasData = data?.status === "ready";
 
   return (
-    <div className="glass-card p-5">
-      <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
-        Time Analytics
+    <div className="glass-card min-w-0 p-5">
+      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+        Speed & Time
       </h2>
-      <div className="relative h-40 mb-4">
-        <canvas id="timeBarChart" role="img" aria-label="Bar chart showing daily study hours. Peak on Saturday 4h, low on Sunday 1h.">
-          Study peaks on Saturday, dips on Sunday.
-        </canvas>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        {[{ label: "Daily avg", value: `${avg}h` }, { label: "Peak day", value: peak }].map((s) => (
-          <div key={s.label} className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3">
-            <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">{s.label}</p>
-            <p className="text-xl font-black text-slate-900 dark:text-white">{s.value}</p>
+
+      {!hasData ? (
+        <EmptyState
+          title="No reliable timing data yet"
+          description="Submit timed tests to calculate speed and average time per question."
+        />
+      ) : (
+        <>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Avg Time / Question</p>
+              <p className="text-xl font-black text-slate-900 dark:text-white">{data.averageSecondsPerQuestion}s</p>
+            </div>
+            <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Speed</p>
+              <p className="text-xl font-black text-slate-900 dark:text-white">{data.questionsPerMinute} q/min</p>
+            </div>
           </div>
-        ))}
-      </div>
+
+          {data.recent?.length > 0 && (
+            <div className="mt-4 flex h-28 items-end gap-2">
+              {data.recent.map((item, index) => (
+                <div key={`${item.label}-${index}`} className="flex min-w-0 flex-1 flex-col items-center gap-2">
+                  <div className="flex h-20 w-full items-end rounded-t-md bg-slate-100 dark:bg-slate-800">
+                    <div
+                      className="w-full rounded-t-md bg-indigo-500/80"
+                      style={{ height: `${Math.max(8, Math.min(100, item.questionsPerMinute * 5))}%` }}
+                      title={`${item.label}: ${item.questionsPerMinute} q/min`}
+                    />
+                  </div>
+                  <span className="max-w-full truncate text-[10px] font-bold text-slate-400 dark:text-slate-500">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

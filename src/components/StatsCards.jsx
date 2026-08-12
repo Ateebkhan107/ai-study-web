@@ -2,17 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { Target, Trophy, Flame } from "lucide-react";
+import { Trophy, Flame } from "lucide-react";
 
 // Mapping for dynamic, colorful styling based on stat labels
 const STAT_STYLES = {
-  "Accuracy": {
-    icon: Target,
-    borderHover: "hover:border-emerald-200 dark:hover:border-emerald-500/30",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
-    iconBg: "bg-emerald-50 dark:bg-emerald-500/10",
-    valueColor: "text-slate-800 dark:text-slate-100"
-  },
   "Rank": {
     icon: Trophy,
     borderHover: "hover:border-amber-200 dark:hover:border-amber-500/30",
@@ -33,12 +26,6 @@ export default function StatsCards({ compact = false, stacked = false }) {
   const { user, isLoaded } = useUser();
 
   const [stats, setStats] = useState([
-    {
-      label: "Accuracy",
-      value: "0%",
-      sub: "Your performance",
-      icon: "◎",
-    },
     {
       label: "Rank",
       value: "#--",
@@ -69,12 +56,6 @@ export default function StatsCards({ compact = false, stacked = false }) {
 
         setStats([
           {
-            label: "Accuracy",
-            value: `${data.accuracy || 0}%`,
-            sub: "Your performance",
-            icon: "◎", // Logic preserved, mapped to Lucide below
-          },
-          {
             label: "Rank",
             value: `#${data.rank || "--"}`,
             sub: "Based on XP",
@@ -96,8 +77,8 @@ export default function StatsCards({ compact = false, stacked = false }) {
 
   if (!isLoaded) {
     return (
-      <div className={`grid grid-cols-1 gap-3 ${stacked ? "md:grid-cols-3 lg:grid-cols-1" : "md:grid-cols-3"} ${compact ? "" : "gap-4"}`}>
-        {Array.from({ length: 3 }).map((_, index) => (
+      <div className={`grid grid-cols-1 gap-3 ${stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2"} ${compact ? "" : "gap-4"}`}>
+        {Array.from({ length: 2 }).map((_, index) => (
           <div
             key={index}
             className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30 ${
@@ -113,10 +94,10 @@ export default function StatsCards({ compact = false, stacked = false }) {
 
   return (
     <div className={`grid grid-cols-1 gap-3 ${
-      stacked ? "md:grid-cols-3 lg:grid-cols-1" : "md:grid-cols-3 lg:gap-5"
+      stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2 lg:gap-5"
     }`}>
       {stats.map((stat, index) => {
-        const style = STAT_STYLES[stat.label] || STAT_STYLES["Accuracy"];
+        const style = STAT_STYLES[stat.label] || STAT_STYLES["Rank"];
         const Icon = style.icon;
 
         return (
