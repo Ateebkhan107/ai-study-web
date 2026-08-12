@@ -2,12 +2,13 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp } from "lucide-react";
-import { useAuth } from "@clerk/nextjs";
+import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
-import { supabase } from "@/lib/supabase";
+import { useClerkSupabase } from "@/lib/useClerkSupabase";
 
 export default function GroupChat({ groupId, currentUserId, currentUserName }) {
-  const { getToken } = useAuth();
+  const { isLoaded, session } = useSession();
+  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,6 +85,16 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
     async function subscribeToGroup() {
       if (cancelled) return;
+      if (!isLoaded || !session || !supabase) return;
+
+      const token = await session.getToken().catch(() => null);
+      if (!token) {
+        console.error("[GROUP_CHAT_REALTIME] Missing Clerk session token");
+        return;
+      }
+
+      await supabase.realtime.setAuth();
+      if (cancelled) return;
 
       // Clean up existing channels
       if (channelRef.current) {
@@ -95,18 +106,14 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         presenceChannelRef.current = null;
       }
 
-      const token = await getToken().catch(() => null);
-      if (!token || cancelled) return;
-
-      supabase.realtime.setAuth(token);
-
       // ── 1. Messages channel (postgres_changes) ──────────────────
       const msgChannel = supabase
-        .channel(`group-chat-${groupId}-${Date.now()}`)
+        .channel(`group-chat-${groupId}`)
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
           async (payload) => {
+            console.log("[GROUP_CHAT_REALTIME_INSERT]", payload.new?.id);
             const newMsg = payload.new;
             if (!newMsg?.id) return;
 
@@ -134,8 +141,15 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
           }
         )
         .subscribe((status) => {
+          console.log(`[GROUP_CHAT_REALTIME:${groupId}]`, status);
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
+            console.error("[GROUP_CHAT_REALTIME_STATUS]", {
+              groupId,
+              status,
+              table: "community_group_messages",
+              filter: `group_id=eq.${groupId}`,
+            });
             if (retryCount < MAX_RETRIES) {
               const delay = Math.min(1000 * 2 ** retryCount, 30000);
               retryCount++;
@@ -183,7 +197,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         presenceChannelRef.current = null;
       }
     };
-  }, [groupId, currentUserId, getToken, mergeMessages]);
+  }, [groupId, currentUserId, isLoaded, mergeMessages, session, supabase]);
 
   // Broadcast typing state via presence
   function broadcastTyping(isTyping) {

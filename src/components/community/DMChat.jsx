@@ -2,13 +2,14 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp, ShieldOff } from "lucide-react";
-import { useAuth } from "@clerk/nextjs";
+import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
-import { supabase } from "@/lib/supabase";
+import { useClerkSupabase } from "@/lib/useClerkSupabase";
 
 export default function DMChat({ conversationId, currentUserId, otherUser }) {
-  const { getToken } = useAuth();
+  const { isLoaded, session } = useSession();
+  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,8 +63,15 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
     const otherName = otherUser?.full_name || "Other";
 
     async function subscribeToConversation() {
-      const token = await getToken({ template: "supabase" }).catch(() => null);
-      if (token) supabase.realtime.setAuth(token);
+      if (!isLoaded || !session || !supabase) return;
+
+      const token = await session.getToken().catch(() => null);
+      if (!token) {
+        console.error("[DM_CHAT_REALTIME] Missing Clerk session token");
+        return;
+      }
+
+      await supabase.realtime.setAuth();
       if (cancelled) return;
 
       channel = supabase
@@ -103,7 +111,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       cancelled = true;
       if (channel) supabase.removeChannel(channel);
     };
-  }, [conversationId, currentUserId, getToken, otherUser?.full_name]);
+  }, [conversationId, currentUserId, isLoaded, otherUser?.full_name, session, supabase]);
 
   async function loadOlderMessages() {
     if (!messages.length || loadingOlder) return;
