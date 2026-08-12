@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getSubscriptionForUser, isSubscriptionActive } from "@/lib/accessControl";
 
 export async function GET() {
   try {
@@ -10,20 +10,8 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { data, error } = await supabaseAdmin
-      .from("subscriptions")
-      .select("*")
-      .eq("clerk_user_id", userId)
-      .eq("status", "active")
-      .maybeSingle();
-
-    if (error) {
-      throw error;
-    }
-
-    const isPro = Boolean(
-      data?.expires_at && new Date(data.expires_at) > new Date()
-    );
+    const data = await getSubscriptionForUser(userId);
+    const isPro = isSubscriptionActive(data);
 
     return NextResponse.json({
       subscription: data,

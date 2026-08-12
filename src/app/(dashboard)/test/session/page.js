@@ -205,6 +205,9 @@ function TestSessionContent() {
   const subjectParam = searchParams.get("subjects") || searchParams.get("subject") || "Mixed Subjects";
   const chapterParam = searchParams.get("chapters") || searchParams.get("chapter") || "All Chapters";
   const difficultyParam = searchParams.get("difficulty") || "Mixed";
+  const sourceTypeParam = searchParams.get("sourceType") || "";
+  const instituteSlugParam = searchParams.get("instituteSlug") || "";
+  const instituteTestIdParam = searchParams.get("instituteTestId") || "";
 
   // 2. State Management
   const [questions, setQuestions] = useState([]);
@@ -236,11 +239,16 @@ function TestSessionContent() {
             subject: subjectParam,
             chapter: chapterParam,
             difficulty: difficultyParam,
+            mode,
+            sourceType: sourceTypeParam,
+            instituteSlug: instituteSlugParam,
+            instituteTestId: instituteTestIdParam,
           }),
         });
 
         if (!response.ok) {
-          throw new Error(`Failed to load test session: ${response.status}`);
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.message || errorData.error || `Failed to load test session: ${response.status}`);
         }
 
         const data = await response.json();
@@ -260,7 +268,7 @@ function TestSessionContent() {
       }
     }
     loadQuestions();
-  }, [subjectParam, chapterParam, difficultyParam, countParam, durationParam, user]);
+  }, [subjectParam, chapterParam, difficultyParam, mode, sourceTypeParam, instituteSlugParam, instituteTestIdParam, countParam, durationParam, user]);
 
   const handleSubmit = useCallback(async () => {
     if (finishing) return;

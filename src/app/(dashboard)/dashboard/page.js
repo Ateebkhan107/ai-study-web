@@ -8,7 +8,7 @@ import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
 import { currentUser } from "@clerk/nextjs/server";
 import { getUserProfile } from "@/utils/userProfile";
-import { Sparkle, Star, TrendingUp } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -43,11 +43,11 @@ export default async function DashboardPage() {
       </div>
 
       {/* ── Main Content Area (z-10 forces it above the dots) ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-5 sm:space-y-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
         
         {/* Header Section */}
-        <div className="relative space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md shadow-sm">
+        <div className="relative space-y-1.5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 shadow-sm backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/50">
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
@@ -58,11 +58,11 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <div className="break-words text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm pb-2">
+          <div className="break-words pb-1 text-3xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-5xl">
             <UserGreeting />
           </div>
 
-          <div className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 mt-2">
+          <div className="mt-1 inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <TrendingUp className="w-4 h-4 text-indigo-500" />
             <span className="text-sm font-medium">
               Keep improving every day
@@ -71,7 +71,7 @@ export default async function DashboardPage() {
         </div>
 
         {/* Grid Components */}
-        <div className="grid gap-8 lg:gap-10 relative z-10">
+        <div className="relative z-10 grid gap-5 sm:gap-6 lg:gap-7">
           
           <section className="transform transition-all duration-700 ease-out hover:-translate-y-1">
             <DailyGoals />
@@ -85,9 +85,9 @@ export default async function DashboardPage() {
             <DashboardSection config={activeConfig} />
           </section>
 
-          <section className="relative pt-8 transform transition-all duration-700 ease-out delay-200">
+          <section className="relative pt-4 transform transition-all duration-700 ease-out delay-200">
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/30 dark:via-indigo-400/30 to-transparent" />
-            <div className="mt-8">
+            <div className="mt-5">
               <Leaderboard />
             </div>
           </section>

@@ -1,4 +1,26 @@
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
+
 export async function POST(req) {
+  const { userId } = await auth();
+  if (!userId) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await currentUser().catch(() => null);
+  const access = await getUserAccessContext({
+    userId,
+    email: user?.primaryEmailAddress?.emailAddress || "",
+  });
+  const permission = canUseFeature(access, FEATURES.AI_EXPLANATION);
+
+  if (!permission.allowed) {
+    return Response.json(
+      { error: "PRO_REQUIRED", message: "AI explanations are available with PrepZii Pro.", upgradeUrl: "/pro" },
+      { status: 403 }
+    );
+  }
+
   const { question } = await req.json();
   const apiKey = process.env.ANTHROPIC_API_KEY;
 

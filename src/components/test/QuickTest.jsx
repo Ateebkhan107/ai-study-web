@@ -102,7 +102,7 @@ const QUICK_OPTIONS = [
 ];
 
 // 1. Accept the parent track context (defaults to "jee" for fallback safety)
-export default function QuickTest({ track = "jee" }) {
+export default function QuickTest({ track = "jee", isPro = false }) {
   const router = useRouter();
   const [launching, setLaunching] = useState(null);
 
@@ -114,7 +114,10 @@ export default function QuickTest({ track = "jee" }) {
   );
 
   const handleLaunch = (option) => {
-    if (option.isPro) return; // handle PRO gate
+    if (option.isPro && !isPro) {
+      router.push("/pro");
+      return;
+    }
     setLaunching(option.label);
     setTimeout(() => {
       const params = new URLSearchParams({
@@ -143,7 +146,7 @@ export default function QuickTest({ track = "jee" }) {
             onClick={() => handleLaunch(option)}
             disabled={launching === option.label}
             className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
-              ${option.isPro
+              ${option.isPro && !isPro
                 ? "border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 opacity-60 cursor-not-allowed"
                 : launching === option.label
                 ? "border-black dark:border-white bg-black dark:bg-white scale-95"
@@ -193,8 +196,12 @@ export default function QuickTest({ track = "jee" }) {
               </div>
             )}
 
-            {option.isPro && (
-              <p className="mt-2 text-[10px] text-gray-400 font-medium">Upgrade to PRO to unlock</p>
+            {option.isPro && !isPro && (
+              <span
+                className="mt-3 rounded-lg bg-slate-900 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950"
+              >
+                Upgrade to Pro
+              </span>
             )}
           </button>
         ))}

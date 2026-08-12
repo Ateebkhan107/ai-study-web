@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
-import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
+import { ACCOUNT_TYPES, getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
+import { getActiveInstituteMemberships } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper"; 
 import { initUserLeaderboard } from "@/utils/leaderboard"; 
 
@@ -13,6 +14,14 @@ export default async function DashboardLayout({ children }) {
 
   if (!onboardingComplete) {
     redirect(ONBOARDING_ROUTE);
+  }
+
+  const email = user?.primaryEmailAddress?.emailAddress || "";
+  const memberships = await getActiveInstituteMemberships(userId, email);
+  const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
+
+  if (user?.publicMetadata?.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN || hasCoachingAdminMembership) {
+    redirect("/institute");
   }
 
   // Auto-initialize user's leaderboard/XP entry if they don't have one

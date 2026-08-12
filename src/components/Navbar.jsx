@@ -26,6 +26,9 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [track, setTrack] = useState(null);
   const [isPro, setIsPro] = useState(false);
+  const [hasInstituteAccess, setHasInstituteAccess] = useState(false);
+  const [accountType, setAccountType] = useState("STUDENT");
+  const [instituteNavLabel, setInstituteNavLabel] = useState("Institute");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -38,9 +41,9 @@ export default function Navbar() {
 
     async function loadUserData() {
       try {
-        const [profileRes, subscriptionRes] = await Promise.all([
+        const [profileRes, accessRes] = await Promise.all([
           fetch("/api/profile", { cache: "no-store" }),
-          fetch("/api/subscription", { cache: "no-store" }),
+          fetch("/api/access", { cache: "no-store" }),
         ]);
 
         if (profileRes.ok) {
@@ -52,15 +55,25 @@ export default function Navbar() {
           }
         }
 
-        if (subscriptionRes.ok) {
-          const subscriptionData = await subscriptionRes.json();
-          setIsPro(Boolean(subscriptionData?.isPro));
+        if (accessRes.ok) {
+          const accessData = await accessRes.json();
+          const institutes = accessData?.institutes || [];
+          setIsPro(Boolean(accessData?.isPro));
+          setAccountType(accessData?.accountType || "STUDENT");
+          setHasInstituteAccess(Boolean(institutes.length));
+          setInstituteNavLabel(institutes.length === 1 ? institutes[0].name : "Institute");
         } else {
           setIsPro(false);
+          setAccountType("STUDENT");
+          setHasInstituteAccess(false);
+          setInstituteNavLabel("Institute");
         }
       } catch (error) {
         console.error("Failed to load navbar user data:", error);
         setIsPro(false);
+        setAccountType("STUDENT");
+        setHasInstituteAccess(false);
+        setInstituteNavLabel("Institute");
       }
     }
 
@@ -88,6 +101,18 @@ export default function Navbar() {
 
   const isActive = (href) =>
     pathname === href || pathname.startsWith(href + "/");
+
+  const isInstituteAdminAccount = accountType === "INSTITUTE_ADMIN";
+  const instituteNavItem = { name: instituteNavLabel, href: "/institute" };
+  const visibleNavItems = isInstituteAdminAccount
+    ? [instituteNavItem]
+    : [
+        ...navItems.slice(0, 5),
+        ...(hasInstituteAccess || pathname.startsWith("/institute")
+          ? [instituteNavItem]
+          : []),
+        ...navItems.slice(5),
+      ];
 
   const renderNavLink = (item, mobile = false) => (
     <Link
@@ -128,10 +153,10 @@ export default function Navbar() {
 
         {/* Navigation */}
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 xl:flex">
-          {navItems.map((item) => renderNavLink(item))}
+          {visibleNavItems.map((item) => renderNavLink(item))}
 
           {/* PrepZii Pro */}
-          {!isPro ? (
+          {!isPro && !isInstituteAdminAccount ? (
             <Link
               href="/pro"
               className="relative ml-2 inline-flex items-center justify-center px-5 py-2 rounded-xl text-sm font-bold overflow-hidden transition-all duration-500 hover:-translate-y-0.5 active:translate-y-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.5)]"
@@ -142,13 +167,13 @@ export default function Navbar() {
                 ⭐ PRO
               </span>
             </Link>
-          ) : (
+          ) : isPro && !isInstituteAdminAccount ? (
             <div className="ml-2 flex items-center px-4 py-2">
               <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 text-[15px] tracking-wide drop-shadow-sm">
                 PrepZii Pro ✨
               </span>
             </div>
-          )}
+          ) : null}
         </nav>
 
         {/* Right Side */}
@@ -188,8 +213,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="xl:hidden border-t border-indigo-500/10 bg-white/95 px-4 py-4 shadow-lg backdrop-blur-xl dark:bg-[#020617]/95">
           <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1 sm:grid-cols-2">
-            {navItems.map((item) => renderNavLink(item, true))}
-            {!isPro && (
+            {visibleNavItems.map((item) => renderNavLink(item, true))}
+            {!isPro && !isInstituteAdminAccount && (
               <Link
                 href="/pro"
                 onClick={() => setMobileOpen(false)}

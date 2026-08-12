@@ -16,7 +16,7 @@ export async function GET(req) {
   try {
     let query = supabaseAdmin
       .from('user_profiles')
-      .select('id, clerk_user_id, email, full_name, exam, class_level, target_year, created_at, updated_at')
+      .select('id, clerk_user_id, email, full_name, account_type, exam, class_level, target_year, created_at, updated_at')
       .order('created_at', { ascending: false });
 
     if (track !== "ALL") {

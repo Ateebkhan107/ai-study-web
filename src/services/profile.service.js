@@ -19,6 +19,7 @@ export async function createProfileIfNotExists(user) {
       clerk_user_id: clerkUserId,
       email: user.primaryEmailAddress?.emailAddress,
       full_name: `${user.firstName || ""} ${user.lastName || ""}`.trim(),
+      account_type: "STUDENT",
     })
     .select()
     .single();

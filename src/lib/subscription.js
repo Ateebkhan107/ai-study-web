@@ -1,29 +1,18 @@
 import { auth } from "@clerk/nextjs/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getSubscriptionForUser, isSubscriptionActive } from "@/lib/accessControl";
 
 export async function getCurrentSubscription() {
   const { userId } = await auth();
 
   if (!userId) return null;
 
-  const { data, error } = await supabaseAdmin
-    .from("subscriptions")
-    .select("*")
-    .eq("clerk_user_id", userId)
-    .eq("status", "active")
-    .single();
-
-  if (error || !data) return null;
-
-  return data;
+  return getSubscriptionForUser(userId);
 }
 
 export async function isUserPro() {
   const subscription = await getCurrentSubscription();
 
-  if (!subscription) return false;
-
-  return new Date(subscription.expires_at) > new Date();
+  return isSubscriptionActive(subscription);
 }
 
 export async function getCurrentPlan() {

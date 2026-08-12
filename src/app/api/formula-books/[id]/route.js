@@ -1,7 +1,28 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 export async function GET(request, { params }) {
+  const { userId } = await auth();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await currentUser().catch(() => null);
+  const access = await getUserAccessContext({
+    userId,
+    email: user?.primaryEmailAddress?.emailAddress || "",
+  });
+  const permission = canUseFeature(access, FEATURES.FORMULA_HANDBOOK);
+
+  if (!permission.allowed) {
+    return NextResponse.json(
+      { error: "PRO_REQUIRED", message: "Formula Handbook is available with PrepZii Pro.", upgradeUrl: "/pro" },
+      { status: 403 }
+    );
+  }
+
   const { id } = await params;
 
   const { data, error } = await supabase

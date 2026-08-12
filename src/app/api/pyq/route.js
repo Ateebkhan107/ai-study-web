@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
+import { getChapterTargets, getSubjectTargets } from "@/lib/pyqChapterMapping";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -244,7 +245,10 @@ export async function GET(req) {
 
     if (exam) mistakeQuery = mistakeQuery.eq("exam", exam);
     if (examType) mistakeQuery = mistakeQuery.eq("exam_type", examType);
-    if (subject) mistakeQuery = mistakeQuery.eq("subject", subject);
+    if (subject) {
+      const subjectTargets = subject.split(",").flatMap((value) => getSubjectTargets(value.trim())).filter(Boolean);
+      mistakeQuery = subjectTargets.length > 1 ? mistakeQuery.in("subject", subjectTargets) : mistakeQuery.eq("subject", subjectTargets[0]);
+    }
     if (year) mistakeQuery = mistakeQuery.eq("year", year);
     if (attempt) mistakeQuery = mistakeQuery.eq("attempt", attempt);
     if (shift) mistakeQuery = mistakeQuery.eq("shift", shift);
@@ -282,7 +286,10 @@ export async function GET(req) {
 
     if (examId) query = query.eq("exam_id", examId);
     if (exam) query = query.eq("exam", exam);
-    if (subject) query = query.eq("subject", subject);
+    if (subject) {
+      const subjectTargets = subject.split(",").flatMap((value) => getSubjectTargets(value.trim())).filter(Boolean);
+      query = subjectTargets.length > 1 ? query.in("subject", subjectTargets) : query.eq("subject", subjectTargets[0]);
+    }
     if (year) {
       const years = year.split(",").map((value) => value.trim()).filter(Boolean);
       query = years.length > 1 ? query.in("year", years) : query.eq("year", year);
@@ -292,7 +299,9 @@ export async function GET(req) {
       // Chapter Wise mode: ONLY filter by chapter (plus exam/subject/year already added above).
       // Do NOT filter by exam_type, attempt, shift, or paper_code.
       if (chapter) {
-        const chaptersArray = chapter.split(",").map(c => c.trim());
+        const chaptersArray = [
+          ...new Set(chapter.split(",").flatMap((c) => getChapterTargets(c.trim())).filter(Boolean)),
+        ];
         query = query.in("chapter", chaptersArray);
       }
     } else {

@@ -22,6 +22,7 @@ export async function POST(req) {
           full_name: fullName,
           target_year: 2026,
           exam: "JEE",
+          account_type: "STUDENT",
         });
 
       if (error) {

@@ -4,6 +4,8 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getQuestions } from "@/lib/questions";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import { getQuestionMarking } from "@/lib/analyticsHelpers";
+import { getInstituteContext } from "@/lib/instituteAuth";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -18,6 +20,124 @@ function normalizeOptionSet(value) {
 
 function shuffleQuestions(questions) {
   return [...questions].sort(() => Math.random() - 0.5);
+}
+
+function mapQuestionRow(q) {
+  if (!q?.id) return null;
+
+  return {
+    id: q.id,
+    exam: q.exam,
+    subject: q.subject,
+    chapter: q.chapter,
+    difficulty: q.difficulty,
+    topic: q.topic,
+    question_type: q.question_type || "MCQ",
+    text: q.question_text,
+    question_image: q.question_image,
+    options: [q.option_a, q.option_b, q.option_c, q.option_d],
+    option_images: [
+      q.option_a_image,
+      q.option_b_image,
+      q.option_c_image,
+      q.option_d_image,
+    ],
+    correct: ["A", "B", "C", "D"].indexOf(q.correct_option),
+    correct_value: q.correct_option,
+    marks: q.marks || 4,
+    negative_marks: q.negative_marks || -1,
+  };
+}
+
+async function loadInstituteTest({ slug, testId, userId }) {
+  const context = await getInstituteContext(slug);
+  if (context.error) {
+    return { errorResponse: context.error };
+  }
+
+  if (context.actor.userId !== userId) {
+    return {
+      errorResponse: NextResponse.json({ error: "Unauthorized" }, { status: 401 }),
+    };
+  }
+
+  const { data: test, error: testError } = await supabaseAdmin
+    .from("institute_tests")
+    .select("*")
+    .eq("id", testId)
+    .eq("institute_id", context.institute.id)
+    .eq("status", "PUBLISHED")
+    .maybeSingle();
+
+  if (testError) throw testError;
+  if (!test) {
+    return { errorResponse: NextResponse.json({ error: "Test not found" }, { status: 404 }) };
+  }
+
+  const { data: assignments, error: assignmentError } = await supabaseAdmin
+    .from("institute_test_assignments")
+    .select("batch_id")
+    .eq("institute_id", context.institute.id)
+    .eq("institute_test_id", test.id);
+
+  if (assignmentError) throw assignmentError;
+
+  const assignedBatchIds = (assignments || []).map((row) => row.batch_id);
+  if (!assignedBatchIds.length || !context.member?.id) {
+    return { errorResponse: NextResponse.json({ error: "Forbidden" }, { status: 403 }) };
+  }
+
+  const { data: batchMember, error: batchMemberError } = await supabaseAdmin
+    .from("institute_batch_members")
+    .select("id")
+    .eq("institute_id", context.institute.id)
+    .eq("member_id", context.member.id)
+    .in("batch_id", assignedBatchIds)
+    .maybeSingle();
+
+  if (batchMemberError) throw batchMemberError;
+  if (!batchMember) {
+    return { errorResponse: NextResponse.json({ error: "Forbidden" }, { status: 403 }) };
+  }
+
+  const { data: testQuestions, error: questionsError } = await supabaseAdmin
+    .from("institute_test_questions")
+    .select(`
+      question_order,
+      questions:question_id(
+        id,
+        exam,
+        subject,
+        chapter,
+        difficulty,
+        topic,
+        question_type,
+        question_text,
+        question_image,
+        option_a,
+        option_b,
+        option_c,
+        option_d,
+        option_a_image,
+        option_b_image,
+        option_c_image,
+        option_d_image,
+        correct_option,
+        marks,
+        negative_marks
+      )
+    `)
+    .eq("institute_id", context.institute.id)
+    .eq("institute_test_id", test.id)
+    .order("question_order", { ascending: true });
+
+  if (questionsError) throw questionsError;
+
+  return {
+    institute: context.institute,
+    test,
+    questions: (testQuestions || []).map((row) => mapQuestionRow(row.questions)).filter(Boolean),
+  };
 }
 
 async function addXpWithAdmin(userId, amount, name = "Student", stats = {}) {
@@ -225,6 +345,10 @@ export async function POST(request) {
       subject = "Mixed Subjects",
       chapter = "All Chapters",
       difficulty = "Mixed",
+      mode = "custom",
+      sourceType,
+      instituteSlug,
+      instituteTestId,
     } = body;
 
     const { data: profile, error: profileError } = await supabaseAdmin
@@ -239,15 +363,85 @@ export async function POST(request) {
 
     const track = profile?.exam || "JEE";
     const exam = String(track).toUpperCase().startsWith("NEET") ? "NEET" : "JEE Main";
+    const normalizedSourceType = sourceType === "PREPZII_PRACTICE" ? sourceType : null;
+    const normalizedMode = String(mode || "custom").toLowerCase();
 
-    const fetchedQuestions = await getQuestions({
+    let instituteTest = null;
+    let fetchedQuestions = [];
+    let sessionMeta = {
       exam,
       subject,
       chapter,
       difficulty,
-      limit: count,
-      client: supabaseAdmin,
-    });
+      duration,
+    };
+
+    if (instituteSlug && instituteTestId) {
+      instituteTest = await loadInstituteTest({
+        slug: instituteSlug,
+        testId: instituteTestId,
+        userId,
+      });
+
+      if (instituteTest.errorResponse) {
+        return instituteTest.errorResponse;
+      }
+
+      fetchedQuestions = instituteTest.questions;
+      sessionMeta = {
+        exam: instituteTest.test.exam === "NEET" ? "NEET" : "JEE Main",
+        subject: instituteTest.test.subject,
+        chapter: (instituteTest.test.chapters || []).join(","),
+        difficulty: instituteTest.test.difficulty,
+        duration: instituteTest.test.duration_minutes,
+      };
+    } else {
+      const access = await getUserAccessContext({ userId });
+
+      if (normalizedMode === "custom") {
+        const permission = canUseFeature(access, FEATURES.CUSTOM_TEST);
+
+        if (!permission.allowed) {
+          return NextResponse.json(
+            {
+              error: "CUSTOM_TEST_LIMIT_REACHED",
+              message: "You’ve used your 2 free custom tests this month.",
+              upgradeUrl: permission.upgradeUrl || "/pro",
+              usage: permission.usage,
+            },
+            { status: 403 }
+          );
+        }
+      }
+
+      if (normalizedMode === "quick" && (Number(count) > 60 || Number(duration) > 60)) {
+        const permission = canUseFeature(access, FEATURES.PREMIUM_MOCK_TEST);
+
+        if (!permission.allowed) {
+          return NextResponse.json(
+            {
+              error: "PRO_REQUIRED",
+              message: "Full-length mock tests are available with PrepZii Pro.",
+              upgradeUrl: permission.upgradeUrl || "/pro",
+            },
+            { status: 403 }
+          );
+        }
+      }
+
+      fetchedQuestions = await getQuestions({
+        exam,
+        subject,
+        chapter,
+        difficulty,
+        limit: count,
+        client: supabaseAdmin,
+        sourceType: normalizedSourceType,
+        status: normalizedSourceType ? "PUBLISHED" : undefined,
+        activeOnly: Boolean(normalizedSourceType),
+        strictFilters: Boolean(normalizedSourceType),
+      });
+    }
 
     if (fetchedQuestions.length !== Number(count)) {
       return NextResponse.json(
@@ -256,18 +450,18 @@ export async function POST(request) {
       );
     }
 
-    const questions = shuffleQuestions(fetchedQuestions);
+    const questions = instituteTest ? fetchedQuestions : shuffleQuestions(fetchedQuestions);
 
     const { data: session, error: sessionError } = await supabaseAdmin
       .from("test_sessions")
       .insert({
         user_id: userId,
-        exam,
-        subjects: [subject],
-        chapters: [chapter],
-        difficulty,
+        exam: sessionMeta.exam,
+        subjects: [sessionMeta.subject],
+        chapters: [sessionMeta.chapter],
+        difficulty: sessionMeta.difficulty,
         total_questions: questions.length,
-        duration_minutes: duration,
+        duration_minutes: sessionMeta.duration,
         status: "in_progress",
       })
       .select()
@@ -291,6 +485,22 @@ export async function POST(request) {
       throw testQuestionsError;
     }
 
+    if (instituteTest) {
+      const { error: instituteAttemptError } = await supabaseAdmin
+        .from("institute_test_attempts")
+        .insert({
+          institute_id: instituteTest.institute.id,
+          institute_test_id: instituteTest.test.id,
+          user_id: userId,
+          session_id: session.id,
+          status: "IN_PROGRESS",
+        });
+
+      if (instituteAttemptError) {
+        throw instituteAttemptError;
+      }
+    }
+
     const safeQuestions = questions.map((question) => ({
       id: question.id,
       exam: question.exam,
@@ -311,6 +521,12 @@ export async function POST(request) {
       track,
       sessionId: session.id,
       questions: safeQuestions,
+      institute: instituteTest ? {
+        slug: instituteTest.institute.slug,
+        name: instituteTest.institute.name,
+        testId: instituteTest.test.id,
+        title: instituteTest.test.title,
+      } : null,
     });
   } catch (error) {
     console.error("[TEST_SESSION_START_ERROR]", error);
@@ -499,6 +715,20 @@ export async function PUT(request) {
 
     if (attemptError) {
       throw attemptError;
+    }
+
+    const { error: instituteAttemptError } = await supabaseAdmin
+      .from("institute_test_attempts")
+      .update({
+        attempt_id: attempt.id,
+        status: "SUBMITTED",
+        submitted_at: new Date().toISOString(),
+      })
+      .eq("session_id", sessionId)
+      .eq("user_id", userId);
+
+    if (instituteAttemptError) {
+      throw instituteAttemptError;
     }
 
     const finalAnswerRows = answerRows.map((row) => ({

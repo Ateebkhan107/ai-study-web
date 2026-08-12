@@ -96,11 +96,11 @@ export default function StatsCards() {
 
   if (!isLoaded) {
     return (
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
-            className="relative h-[160px] overflow-hidden rounded-3xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30"
+            className="relative h-[128px] overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30"
           >
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/5" />
           </div>
@@ -110,7 +110,7 @@ export default function StatsCards() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
       {stats.map((stat, index) => {
         const style = STAT_STYLES[stat.label] || STAT_STYLES["Accuracy"];
         const Icon = style.icon;
@@ -118,12 +118,12 @@ export default function StatsCards() {
         return (
           <div
             key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl bg-white/50 dark:bg-slate-800/40 p-6 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 transition-all duration-300 hover:shadow-sm ${style.borderHover}`}
+            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/50 p-4 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-slate-700/50 dark:bg-slate-800/40 sm:p-5 ${style.borderHover}`}
             style={{ transitionDelay: `${index * 50}ms` }}
           >
             
-            <div className="relative z-10 flex items-start justify-between mb-6">
-              <div className="space-y-1.5">
+            <div className="relative z-10 mb-4 flex items-start justify-between">
+              <div className="space-y-1">
                 <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 transition-colors group-hover:text-slate-700 dark:group-hover:text-slate-300">
                   {stat.label}
                 </p>
@@ -133,13 +133,13 @@ export default function StatsCards() {
               </div>
 
               {/* Dynamic Icon Container */}
-              <div className={`flex items-center justify-center w-10 h-10 rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105`}>
-                <Icon className={`w-6 h-6 ${style.iconColor}`} strokeWidth={2.5} />
+              <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105`}>
+                <Icon className={`h-5 w-5 ${style.iconColor}`} strokeWidth={2.5} />
               </div>
             </div>
 
             <div className="relative z-10 flex items-end justify-between">
-              <h3 className={`text-4xl sm:text-5xl font-black tracking-tighter ${style.valueColor}`}>
+              <h3 className={`text-4xl font-black tracking-tighter sm:text-5xl ${style.valueColor}`}>
                 {stat.value}
               </h3>
             </div>

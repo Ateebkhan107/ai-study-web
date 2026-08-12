@@ -34,13 +34,15 @@ export default function TestPage() {
   const [mode, setMode] = useState("build");
   const { user } = useUser();
   const [track, setTrack] = useState(null);
+  const [access, setAccess] = useState(null);
 
   useEffect(() => {
     async function loadTrack() {
       if (!user) return;
-      const response = await fetch("/api/profile", {
-        cache: "no-store",
-      });
+      const [response, accessResponse] = await Promise.all([
+        fetch("/api/profile", { cache: "no-store" }),
+        fetch("/api/access", { cache: "no-store" }),
+      ]);
 
       if (!response.ok) {
         return;
@@ -52,6 +54,10 @@ export default function TestPage() {
         setTrack("neet");
       } else {
         setTrack("jee");
+      }
+
+      if (accessResponse.ok) {
+        setAccess(await accessResponse.json());
       }
     }
     loadTrack();
@@ -120,9 +126,9 @@ export default function TestPage() {
         style={{ animationDelay: "150ms" }}
       >
         {mode === "build" ? (
-          <TestBuilder track={track} />
+          <TestBuilder track={track} access={access} />
         ) : (
-          <QuickTest track={track} />
+          <QuickTest track={track} isPro={Boolean(access?.isPro)} />
         )}
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Atom, FlaskConical, Calculator, Dna } from "lucide-react";
 
@@ -161,6 +162,7 @@ const JEE_DURATIONS = [45, 90, 120, 150, 180];
 
 const NEET_QUESTION_COUNTS = [45, 90, 135, 180];
 const NEET_DURATIONS = [45, 90, 135, 180];
+const NEET_BIOLOGY_PRACTICE_COUNTS = [10, 15, 20];
 
 const colorMap = {
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30",     border: "border-blue-200 dark:border-blue-800",     text: "text-blue-700 dark:text-blue-300",     chip: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
@@ -169,7 +171,7 @@ const colorMap = {
   rose:   { bg: "bg-rose-50 dark:bg-rose-950/30",      border: "border-rose-200 dark:border-rose-800",      text: "text-rose-700 dark:text-rose-300",      chip: "bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700" },
 };
 
-export default function TestBuilder({ track = "jee" }) {
+export default function TestBuilder({ track = "jee", access = null }) {
   const router = useRouter();
 
   const activeTrack = track?.toLowerCase() || "jee";
@@ -180,9 +182,9 @@ export default function TestBuilder({ track = "jee" }) {
   const [questionCount, setQuestionCount] = useState(activeTrack === "neet" ? 45 : 20);
   const [difficulty, setDifficulty] = useState("mixed");
   const [expandedSubject, setExpandedSubject] = useState(null);
-
-  const QUESTION_COUNTS = activeTrack === "neet" ? NEET_QUESTION_COUNTS : JEE_QUESTION_COUNTS;
-  const DURATIONS = activeTrack === "neet" ? NEET_DURATIONS : JEE_DURATIONS;
+  const [biologyAvailability, setBiologyAvailability] = useState({});
+  const [availabilityLoading, setAvailabilityLoading] = useState(activeTrack === "neet");
+  const [availabilityMessage, setAvailabilityMessage] = useState("");
 
   // Filter allowed subjects for current track
   const isSubjectAllowed = (name) => {
@@ -195,6 +197,56 @@ export default function TestBuilder({ track = "jee" }) {
 
   // Compute active valid selected subjects
   const validSelectedSubjects = selectedSubjects.filter((name) => isSubjectAllowed(name));
+
+  const isNeetBiologyPractice =
+    activeTrack === "neet" &&
+    validSelectedSubjects.length === 1 &&
+    validSelectedSubjects[0] === "Biology";
+  const selectedBiologyChapter = isNeetBiologyPractice
+    ? selectedChapters.Biology?.[0] || ""
+    : "";
+  const selectedBiologyAvailability = selectedBiologyChapter
+    ? biologyAvailability[selectedBiologyChapter]?.count || 0
+    : 0;
+  const questionCountOptions = isNeetBiologyPractice
+    ? NEET_BIOLOGY_PRACTICE_COUNTS
+    : activeTrack === "neet" ? NEET_QUESTION_COUNTS : JEE_QUESTION_COUNTS;
+  const DURATIONS = activeTrack === "neet" ? NEET_DURATIONS : JEE_DURATIONS;
+
+  useEffect(() => {
+    if (activeTrack !== "neet") return;
+
+    let ignore = false;
+
+    fetch("/api/test/practice-availability?exam=NEET&subject=Biology")
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Failed to load practice availability");
+        return data;
+      })
+      .then((data) => {
+        if (ignore) return;
+        const nextAvailability = {};
+        (data.chapters || []).forEach((item) => {
+          nextAvailability[item.chapter] = item;
+        });
+        setBiologyAvailability(nextAvailability);
+        setAvailabilityMessage(data.message || "");
+      })
+      .catch(() => {
+        if (!ignore) {
+          setBiologyAvailability({});
+          setAvailabilityMessage("Could not load Biology practice availability.");
+        }
+      })
+      .finally(() => {
+        if (!ignore) setAvailabilityLoading(false);
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [activeTrack]);
 
   /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -279,6 +331,18 @@ export default function TestBuilder({ track = "jee" }) {
 
   const toggleChapter = (subject, chapter) => {
     if (!isSubjectAllowed(subject)) return;
+    if (activeTrack === "neet" && subject === "Biology") {
+      const available = biologyAvailability[chapter]?.count || 0;
+      if (available <= 0) return;
+      const current = selectedChapters[subject] || [];
+      const updated = current.includes(chapter) ? [] : [chapter];
+      saveChapters({ ...selectedChapters, [subject]: updated });
+      if (!current.includes(chapter)) {
+        const nextCount = Math.min(questionCount, available);
+        if (nextCount !== questionCount) saveCount(nextCount);
+      }
+      return;
+    }
     const current = selectedChapters[subject] || [];
     const updated = current.includes(chapter)
       ? current.filter((c) => c !== chapter)
@@ -289,6 +353,7 @@ export default function TestBuilder({ track = "jee" }) {
 
   const selectAllChapters = (subject) => {
     if (!isSubjectAllowed(subject)) return;
+    if (activeTrack === "neet" && subject === "Biology") return;
     const all = SUBJECTS[subject]?.chapters || [];
     const current = selectedChapters[subject] || [];
     const next = { ...selectedChapters, [subject]: current.length === all.length ? [] : [...all] };
@@ -296,11 +361,18 @@ export default function TestBuilder({ track = "jee" }) {
   };
 
   const totalChapters = validSelectedSubjects.flatMap((s) => selectedChapters[s] || []).length;
-  const canStart = validSelectedSubjects.length > 0 && totalChapters > 0;
+  const customTestFeature = access?.features?.CUSTOM_TEST;
+  const customTestUsage = access?.customTestUsage || customTestFeature?.usage || null;
+  const customTestBlocked = customTestFeature?.allowed === false;
+  const canStart = isNeetBiologyPractice
+    ? selectedBiologyAvailability > 0 && questionCount <= selectedBiologyAvailability
+    : validSelectedSubjects.length > 0 && totalChapters > 0;
 
   const handleStart = async () => {
     const allChapters = validSelectedSubjects.flatMap((s) => selectedChapters[s] || []);
     const exam = activeTrack === "neet" ? "NEET" : "JEE Main";
+
+    if (customTestBlocked) return;
 
     const params = new URLSearchParams({
       exam: exam,
@@ -311,6 +383,10 @@ export default function TestBuilder({ track = "jee" }) {
       difficulty: difficulty,
       mode: "custom",
     });
+
+    if (isNeetBiologyPractice) {
+      params.set("sourceType", "PREPZII_PRACTICE");
+    }
 
     sessionStorage.removeItem("tb_subjects");
     sessionStorage.removeItem("tb_chapters");
@@ -332,7 +408,9 @@ export default function TestBuilder({ track = "jee" }) {
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
-          <p className="text-xs text-gray-400 mb-4">You can select multiple subjects</p>
+          <p className="text-xs text-gray-400 mb-4">
+            {activeTrack === "neet" ? "Choose Biology for chapter-wise practice" : "You can select multiple subjects"}
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {filteredSubjectsEntries.map(([name, data]) => {
               const c = colorMap[data.color];
@@ -378,6 +456,7 @@ export default function TestBuilder({ track = "jee" }) {
             const chapters = selectedChapters[subject] || [];
             const isExpanded = expandedSubject === subject;
             const allSelected = chapters.length === data.chapters.length;
+            const isBiologyPracticeSubject = activeTrack === "neet" && subject === "Biology";
 
             return (
               <div
@@ -401,7 +480,7 @@ export default function TestBuilder({ track = "jee" }) {
                     {isExpanded && (
                       <span
                         onClick={(e) => { e.stopPropagation(); selectAllChapters(subject); }}
-                        className="text-xs font-semibold text-gray-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                        className={`text-xs font-semibold text-gray-400 hover:text-black dark:hover:text-white transition-colors ${isBiologyPracticeSubject ? "hidden" : "cursor-pointer"}`}
                       >
                         {allSelected ? "Deselect all" : "Select all"}
                       </span>
@@ -414,21 +493,40 @@ export default function TestBuilder({ track = "jee" }) {
 
                 {isExpanded && (
                   <div className="px-4 pb-4 border-t border-gray-50 dark:border-gray-800 pt-3 sm:px-5">
+                    {isBiologyPracticeSubject && (
+                      <div className="mb-3 rounded-xl border border-rose-100 bg-rose-50/70 px-3 py-2 text-xs font-medium text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/20 dark:text-rose-300">
+                        {availabilityLoading
+                          ? "Loading published Biology practice counts..."
+                          : availabilityMessage || "Select one Biology chapter to build a practice test from published PrepZii questions."}
+                      </div>
+                    )}
                     <div className="flex flex-wrap gap-2">
                       {data.chapters.map((chapter) => {
                         const isChapterSelected = chapters.includes(chapter);
+                        const availability = isBiologyPracticeSubject
+                          ? biologyAvailability[chapter]?.count || 0
+                          : null;
+                        const isUnavailable = isBiologyPracticeSubject && availability <= 0;
                         return (
                           <button
                             key={chapter}
                             type="button"
                             onClick={() => toggleChapter(subject, chapter)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-100 cursor-pointer
+                            disabled={isUnavailable}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-100
                               ${isChapterSelected
                                 ? c.chip
+                                : isUnavailable
+                                ? "bg-gray-50 dark:bg-gray-800 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-800 cursor-not-allowed"
                                 : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
                               }`}
                           >
                             {isChapterSelected ? "✓ " : ""}{chapter}
+                            {isBiologyPracticeSubject && (
+                              <span className={`ml-2 font-bold ${isUnavailable ? "text-gray-300 dark:text-gray-600" : "text-rose-500 dark:text-rose-300"}`}>
+                                {availability} available
+                              </span>
+                            )}
                           </button>
                         );
                       })}
@@ -450,21 +548,45 @@ export default function TestBuilder({ track = "jee" }) {
             Questions
           </p>
           <div className="flex flex-wrap gap-2">
-            {QUESTION_COUNTS.map((n) => (
+            {questionCountOptions.map((n) => {
+              const disabled = isNeetBiologyPractice && (!selectedBiologyChapter || n > selectedBiologyAvailability);
+              return (
               <button
                 key={n}
                 type="button"
-                onClick={() => saveCount(n)}
-                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
+                onClick={() => !disabled && saveCount(n)}
+                disabled={disabled}
+                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${questionCount === n
                     ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
+                    : disabled
+                    ? "bg-gray-50 dark:bg-gray-800 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-800 cursor-not-allowed"
                     : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
                   }`}
               >
                 {n}
               </button>
-            ))}
+            );
+            })}
+            {isNeetBiologyPractice && selectedBiologyAvailability > 0 && (
+              <button
+                type="button"
+                onClick={() => saveCount(selectedBiologyAvailability)}
+                className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
+                  ${questionCount === selectedBiologyAvailability
+                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
+                    : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
+                  }`}
+              >
+                All {selectedBiologyAvailability}
+              </button>
+            )}
           </div>
+          {isNeetBiologyPractice && selectedBiologyChapter && selectedBiologyAvailability === 0 && (
+            <p className="mt-3 text-xs font-semibold text-rose-500">
+              No practice questions are available for this chapter yet.
+            </p>
+          )}
         </div>
 
         {/* Duration */}
@@ -518,7 +640,7 @@ export default function TestBuilder({ track = "jee" }) {
 
         {/* Summary + Start */}
         <div className={`rounded-2xl p-5 border-2 transition-all duration-200
-          ${canStart
+          ${canStart && !customTestBlocked
             ? "bg-black dark:bg-white border-black dark:border-white"
             : "bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
           }`}
@@ -526,30 +648,50 @@ export default function TestBuilder({ track = "jee" }) {
           {canStart ? (
             <>
               <div className="mb-4 space-y-2">
-                <p className="text-xs font-bold text-white/50 dark:text-black/50 uppercase tracking-widest">
+                <p className={`text-xs font-bold uppercase tracking-widest ${customTestBlocked ? "text-gray-400 dark:text-gray-500" : "text-white/50 dark:text-black/50"}`}>
                   Test Summary
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {validSelectedSubjects.map((s) => (
-                    <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                    <span key={s} className={`text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${customTestBlocked ? "bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-300" : "bg-white/10 dark:bg-black/10 text-white dark:text-black"}`}>
                       <span className="w-3 h-3 flex items-center justify-center">{SUBJECTS[s]?.icon}</span> {s}
                     </span>
                   ))}
                 </div>
-                <p className="text-white/70 dark:text-black/70 text-xs">
+                <p className={`text-xs ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-white/70 dark:text-black/70"}`}>
                   {totalChapters} chapters · {questionCount} questions · {duration} mins
                 </p>
-                <p className="text-white/70 dark:text-black/70 text-xs capitalize">
+                <p className={`text-xs capitalize ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-white/70 dark:text-black/70"}`}>
                   {difficulty} difficulty
                 </p>
+                {customTestUsage && !access?.isPro && (
+                  <p className={`text-xs font-semibold ${customTestBlocked ? "text-rose-500" : "text-white/70 dark:text-black/70"}`}>
+                    {customTestBlocked
+                      ? "You’ve used your 2 free custom tests this month."
+                      : `${customTestUsage.remaining} of ${customTestUsage.limit} free custom tests left this month.`}
+                  </p>
+                )}
               </div>
               <button
                 type="button"
                 onClick={handleStart}
-                className="w-full py-3 rounded-xl bg-white dark:bg-black text-black dark:text-white text-sm font-black hover:opacity-90 transition-opacity cursor-pointer"
+                disabled={customTestBlocked}
+                className={`w-full py-3 rounded-xl text-sm font-black transition-opacity ${
+                  customTestBlocked
+                    ? "cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-700 dark:text-gray-400"
+                    : "cursor-pointer bg-white text-black hover:opacity-90 dark:bg-black dark:text-white"
+                }`}
               >
                 Start Test →
               </button>
+              {customTestBlocked && (
+                <Link
+                  href="/pro"
+                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-3 text-sm font-black text-white"
+                >
+                  Upgrade to Pro
+                </Link>
+              )}
             </>
           ) : (
             <p className="text-sm text-gray-400 dark:text-gray-500 text-center font-medium">

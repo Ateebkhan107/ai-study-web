@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { CheckCircle2, Circle, Sparkles, Target, Zap } from "lucide-react";
+import { CheckCircle2, Circle, Target, Zap } from "lucide-react";
 
 export default function DailyGoals() {
   const { user } = useUser();
@@ -16,7 +16,7 @@ export default function DailyGoals() {
   // =============================
 
   useEffect(() => {
-    if (!user) return;
+    if (!user?.id) return;
 
     async function loadGoals() {
       try {
@@ -53,13 +53,13 @@ export default function DailyGoals() {
     : 0;
 
   return (
-    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-sm transition-all duration-500">
+    <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur-2xl transition-all duration-500 dark:border-slate-800 dark:bg-[#0f172a]/80 sm:p-5 lg:p-6">
 
       {/* ── Header Section ── */}
-      <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div className="relative z-10 mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 mb-3">
-            <Target className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 dark:border-indigo-500/20 dark:bg-indigo-500/10">
+            <Target className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
             <h2 className="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-widest">
               Daily Goals
             </h2>
@@ -70,13 +70,13 @@ export default function DailyGoals() {
         </div>
 
         {/* Overall Progress */}
-        <div className="flex flex-col items-end gap-2 shrink-0">
+        <div className="flex shrink-0 flex-col items-start gap-1.5 sm:items-end">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-black text-slate-800 dark:text-slate-100">
+            <span className="text-xl font-black text-slate-800 dark:text-slate-100 sm:text-2xl">
               {Math.round(percentage)}%
             </span>
           </div>
-          <div className="w-32 sm:w-48 h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-2 w-36 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800 sm:w-44">
             <div
               className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out relative"
               style={{ width: `${percentage}%` }}
@@ -86,7 +86,7 @@ export default function DailyGoals() {
       </div>
 
       {/* ── Goals Grid ── */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+      <div className="relative z-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
         {goals.map((goal, index) => {
           const isComplete = goal.completed;
           const progressPct = Math.min((goal.progress / goal.target_value) * 100, 100);
@@ -94,7 +94,7 @@ export default function DailyGoals() {
           return (
             <div
               key={goal.id}
-              className={`group relative rounded-2xl p-6 border transition-all duration-300 hover:shadow-sm overflow-hidden
+              className={`group relative overflow-hidden rounded-xl border p-4 transition-all duration-300 hover:shadow-sm sm:p-5
                 ${
                   isComplete
                     ? "bg-emerald-50/50 dark:bg-emerald-500/5 border-emerald-200/50 dark:border-emerald-500/20"
@@ -104,16 +104,16 @@ export default function DailyGoals() {
               style={{ transitionDelay: `${index * 50}ms` }}
             >
 
-              <div className="relative z-10 flex items-start justify-between mb-4">
+              <div className="relative z-10 mb-3 flex items-start justify-between">
                 <div
                   className={`flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110
                     ${isComplete ? "text-emerald-500" : "text-slate-300 dark:text-slate-600"}
                   `}
                 >
                   {isComplete ? (
-                    <CheckCircle2 className="w-7 h-7 drop-shadow-sm" />
+                    <CheckCircle2 className="h-6 w-6 drop-shadow-sm" />
                   ) : (
-                    <Circle className="w-7 h-7" />
+                    <Circle className="h-6 w-6" />
                   )}
                 </div>
 
@@ -128,13 +128,13 @@ export default function DailyGoals() {
                 </div>
               </div>
 
-              <div className="relative z-10 space-y-1.5 mb-4">
+              <div className="relative z-10 mb-3 space-y-1">
                 <h3 className={`text-base font-bold leading-snug transition-colors duration-300
                   ${isComplete ? "text-emerald-900 dark:text-emerald-300 line-through decoration-emerald-500/30" : "text-slate-800 dark:text-slate-100"}
                 `}>
                   {goal.title}
                 </h3>
-                <p className={`text-xs font-medium leading-relaxed
+                <p className={`text-xs font-medium leading-snug
                   ${isComplete ? "text-emerald-700/60 dark:text-emerald-400/50" : "text-slate-500 dark:text-slate-400"}
                 `}>
                   {goal.description}
@@ -142,8 +142,8 @@ export default function DailyGoals() {
               </div>
 
               {!isComplete && (
-                <div className="relative z-10 mt-auto pt-2">
-                  <div className="flex justify-between items-end mb-2">
+                <div className="relative z-10 mt-auto pt-1">
+                  <div className="mb-1.5 flex items-end justify-between">
                     <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Progress</span>
                     <span className="text-xs font-bold text-indigo-500 dark:text-indigo-400">
                       {goal.progress} / {goal.target_value}

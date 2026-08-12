@@ -1,15 +1,18 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import {
+  ACCOUNT_TYPES,
   DASHBOARD_ROUTE,
   getAuthContext,
+  INSTITUTE_ROUTE,
   getPostAuthRedirectPath,
   SIGN_IN_ROUTE,
 } from "@/lib/auth";
 
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import Logo from "@/components/Logo";
 import { cookies } from "next/headers";
+import OnboardingForm from "@/components/OnboardingForm";
 
 const EXAMS = ["JEE", "NEET"];
 
@@ -26,7 +29,7 @@ export default async function OnboardingPage() {
   }
 
   if (onboardingComplete) {
-    redirect(getPostAuthRedirectPath(onboardingComplete));
+    redirect(getPostAuthRedirectPath(onboardingComplete, user));
   }
 
   async function completeOnboarding(formData) {
@@ -43,9 +46,17 @@ export default async function OnboardingPage() {
     const targetExam = formData.get("targetExam");
     const targetYear = Number(formData.get("targetYear"));
     const fullName = formData.get("fullName");
+    const accountType = formData.get("accountType");
     const validYears = getYearOptions();
 
-    if (!EXAMS.includes(targetExam) || !validYears.includes(targetYear)) {
+    if (!Object.values(ACCOUNT_TYPES).includes(accountType)) {
+      throw new Error("Invalid account type.");
+    }
+
+    const normalizedExam = EXAMS.includes(targetExam) ? targetExam : "JEE";
+    const normalizedYear = validYears.includes(targetYear) ? targetYear : validYears[0];
+
+    if (accountType === ACCOUNT_TYPES.STUDENT && (!EXAMS.includes(targetExam) || !validYears.includes(targetYear))) {
       throw new Error("Invalid onboarding selection.");
     }
 
@@ -62,16 +73,34 @@ export default async function OnboardingPage() {
 //     console.log("YEAR:", targetYear);
 
 
-    const { error } = await supabase
+    const profilePayload = {
+      clerk_user_id: actionUserId,
+      email,
+      full_name: fullName,
+      exam: normalizedExam,
+      target_year: normalizedYear,
+      account_type: accountType,
+    };
+
+    const { data: existingProfile, error: lookupError } = await supabaseAdmin
       .from("user_profiles")
-      .upsert({
-        clerk_user_id: actionUserId,
-        email,
-        full_name: fullName,
-        exam: targetExam,
-        target_year: targetYear,
-        
-      });
+      .select("id")
+      .eq("clerk_user_id", actionUserId)
+      .maybeSingle();
+
+    if (lookupError) {
+      console.error(lookupError);
+      throw new Error("Failed to save profile");
+    }
+
+    const { error } = existingProfile
+      ? await supabaseAdmin
+        .from("user_profiles")
+        .update(profilePayload)
+        .eq("id", existingProfile.id)
+      : await supabaseAdmin
+      .from("user_profiles")
+        .insert(profilePayload);
 //     console.log("SUPABASE ERROR:", error);
 
     if (error) {
@@ -83,19 +112,20 @@ export default async function OnboardingPage() {
     await client.users.updateUserMetadata(actionUserId, {
       publicMetadata: {
         onboardingComplete: true,
-        targetExam,
-        targetYear,
+        accountType,
+        targetExam: normalizedExam,
+        targetYear: normalizedYear,
       },
     });
 
     const cookieStore = await cookies();
 
-cookieStore.set("prepzii_track", targetExam.toLowerCase(), {
+cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
   path: "/",
   maxAge: 60 * 60 * 24 * 365, // 1 year
 });
 
-    redirect(DASHBOARD_ROUTE);
+    redirect(accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ? INSTITUTE_ROUTE : DASHBOARD_ROUTE);
   }
 
   const yearOptions = getYearOptions();
@@ -115,79 +145,18 @@ cookieStore.set("prepzii_track", targetExam.toLowerCase(), {
             Welcome, {displayName}
           </h1>
           <p className="mt-2 text-sm text-gray-400">
-            Confirm your exam target so we can unlock the dashboard.
+            Choose how you use PrepZii. Everyone uses the same login.
           </p>
         </div>
 
-        <form action={completeOnboarding} className="space-y-6">
-
-          <div>
-  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">
-    Full Name
-  </label>
-
- <input
-    type="text"
-    name="fullName"
-    placeholder="Enter your full name"
-    defaultValue={user?.fullName || ""}
-    required
-    minLength={3}
-    maxLength={50}
-    className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-3 text-sm font-medium text-black dark:text-white"
-/>
-</div>
-          <div>
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">
-              Target Exam
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              {EXAMS.map((exam) => (
-                <label
-                  key={exam}
-                  className="flex items-center gap-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-4 text-sm font-semibold text-black dark:text-white"
-                >
-                  <input
-                    type="radio"
-                    name="targetExam"
-                    value={exam}
-                    defaultChecked={exam === "JEE"}
-                    className="h-4 w-4"
-                  />
-                  {exam}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="targetYear"
-              className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3"
-            >
-              Target Year
-            </label>
-            <select
-              id="targetYear"
-              name="targetYear"
-              defaultValue={defaultYear}
-              className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-3 text-sm font-medium text-black dark:text-white"
-            >
-              {yearOptions.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-3.5 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-sm font-black hover:opacity-90 transition-opacity"
-          >
-            Continue to Dashboard
-          </button>
-        </form>
+        <OnboardingForm
+          action={completeOnboarding}
+          accountTypes={ACCOUNT_TYPES}
+          exams={EXAMS}
+          yearOptions={yearOptions}
+          defaultYear={defaultYear}
+          defaultFullName={user?.fullName || ""}
+        />
       </div>
     </div>
   );

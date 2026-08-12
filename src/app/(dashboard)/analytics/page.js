@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { BarChart3, TrendingUp, Brain, Trophy } from "lucide-react";
 
 import OverviewCards from "@/components/analytics/OverviewCards";
@@ -28,9 +29,30 @@ export default function AnalyticsPage() {
   const [loading, setLoading] = useState(true);
   const [activeTrack, setActiveTrack] = useState("jee");
   const [activeTab, setActiveTab] = useState("overview");
+  const [access, setAccess] = useState(null);
+
+  useEffect(() => {
+    async function loadAccess() {
+      try {
+        const response = await fetch("/api/access", { cache: "no-store" });
+        if (response.ok) {
+          setAccess(await response.json());
+        }
+      } catch (error) {
+        console.error("Failed to load access context:", error);
+      }
+    }
+
+    if (user) loadAccess();
+  }, [user]);
 
   useEffect(() => {
     async function loadUserStats(trackToLoad) {
+      if (!access) return;
+      if (!access.isPro) {
+        setStats(null);
+        return;
+      }
       try {
         const data = await getUserAnalytics(user.id, trackToLoad);
         setStats(data);
@@ -43,7 +65,7 @@ export default function AnalyticsPage() {
     if (user && activeTrack) {
       loadUserStats(activeTrack);
     }
-  }, [user, activeTrack]);
+  }, [user, activeTrack, access]);
   useEffect(() => {
     const match = document.cookie.match(
       new RegExp("(^| )prepzii_track=([^;]+)")
@@ -73,6 +95,9 @@ export default function AnalyticsPage() {
       </PageWrapper>
     );
   }
+
+  const advancedAnalyticsAllowed = Boolean(access?.isPro);
+  const showAnalyticsLock = !advancedAnalyticsAllowed && activeTab !== "leaderboard";
 
   return (
     <PageWrapper
@@ -104,7 +129,25 @@ export default function AnalyticsPage() {
       </section>
 
       {/* ── Overview Tab ── */}
-      {activeTab === "overview" && (
+      {showAnalyticsLock && (
+        <div className="flex flex-col items-center justify-center py-16 animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="glass-card max-w-md p-8 text-center">
+            <BarChart3 className="mx-auto mb-4 h-12 w-12 text-indigo-500 opacity-70" />
+            <h2 className="mb-2 text-2xl font-black text-slate-900 dark:text-white">Advanced Analytics is Pro</h2>
+            <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
+              Leaderboard stays free. Upgrade to unlock deep trends, weak chapters, study heatmaps, and advanced performance insights.
+            </p>
+            <Link
+              href="/pro"
+              className="inline-flex rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-black text-white"
+            >
+              Upgrade to Pro
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "overview" && !showAnalyticsLock && (
         <div className="space-y-8">
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
             <OverviewCards track={activeTrack} stats={stats} />
@@ -133,7 +176,7 @@ export default function AnalyticsPage() {
       )}
 
       {/* ── Charts Tab ── */}
-      {activeTab === "charts" && (
+      {activeTab === "charts" && !showAnalyticsLock && (
         <div className="space-y-8">
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slideUp" style={{ animationDelay: "150ms" }}>
             <SubjectDistribution track={activeTrack} liveData={stats?.subjectDistribution} />
@@ -151,7 +194,7 @@ export default function AnalyticsPage() {
       )}
 
       {/* ── AI Insights Tab ── */}
-      {activeTab === "ai-insights" && (
+      {activeTab === "ai-insights" && !showAnalyticsLock && (
         <div className="flex flex-col items-center justify-center py-20 animate-slideUp" style={{ animationDelay: "150ms" }}>
           <div className="glass-card p-10 max-w-md w-full text-center">
             <Brain className="w-12 h-12 text-blue-500 mx-auto mb-4 opacity-50" />

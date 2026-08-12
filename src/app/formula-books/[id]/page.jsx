@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { getFormulaBook, getPdfUrl } from "@/lib/formulaBooks";
 import { useUser } from "@clerk/nextjs";
@@ -22,6 +23,7 @@ export default function FormulaBookPage() {
   const [book, setBook] = useState(null);
 
   const [loading, setLoading] = useState(true);
+  const [accessError, setAccessError] = useState(null);
 
 
 
@@ -40,6 +42,7 @@ export default function FormulaBookPage() {
 
 
         setBook(data);
+        setAccessError(null);
 
 
       } 
@@ -48,6 +51,9 @@ export default function FormulaBookPage() {
 
 
         console.error(err);
+        if (err.status === 403 || err.code === "PRO_REQUIRED") {
+          setAccessError(err);
+        }
 
 
       } 
@@ -221,6 +227,32 @@ updateFormulaGoal();
 
 
 
+
+  if (accessError) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4 text-center dark:bg-gray-950">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
+          <BookOpen className="h-7 w-7" />
+        </div>
+        <h2 className="text-xl font-black text-black dark:text-white">Formula Handbook is Pro</h2>
+        <p className="max-w-md text-sm text-gray-500 dark:text-gray-400">
+          Formula handbooks are available with PrepZii Pro. Your dashboard and free practice tools will keep working normally.
+        </p>
+        <Link
+          href="/pro"
+          className="rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-black text-white transition hover:opacity-90"
+        >
+          Upgrade to Pro
+        </Link>
+        <button
+          onClick={() => router.back()}
+          className="text-sm font-bold text-gray-400 transition hover:text-gray-700 dark:hover:text-gray-200"
+        >
+          Go Back
+        </button>
+      </div>
+    );
+  }
 
   if (!book) {
 

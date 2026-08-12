@@ -22,7 +22,12 @@ export async function getFormulaBook(id) {
   const res = await fetch(`/api/formula-books/${id}`);
 
   if (!res.ok) {
-    throw new Error("Failed to fetch formula book.");
+    const data = await res.json().catch(() => ({}));
+    const error = new Error(data.message || "Failed to fetch formula book.");
+    error.status = res.status;
+    error.code = data.error;
+    error.upgradeUrl = data.upgradeUrl;
+    throw error;
   }
 
   return res.json();

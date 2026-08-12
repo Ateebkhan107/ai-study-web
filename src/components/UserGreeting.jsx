@@ -33,7 +33,6 @@ export default function UserGreeting() {
     if (user) {
       loadProfile();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const firstName = name ? name.split(" ")[0] : "Student";
@@ -41,15 +40,15 @@ export default function UserGreeting() {
   // Display a premium loading skeleton while mounting
   if (!mounted) {
     return (
-      <div className="py-2">
-        <div className="h-14 sm:h-16 lg:h-20 w-64 sm:w-96 bg-slate-200/50 dark:bg-slate-800/50 rounded-2xl animate-pulse" />
+      <div className="py-1">
+        <div className="h-11 w-64 animate-pulse rounded-2xl bg-slate-200/50 dark:bg-slate-800/50 sm:h-12 sm:w-96 lg:h-14" />
       </div>
     );
   }
 
   return (
-    <div className="relative group inline-flex items-center py-2 sm:py-4">
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-2 sm:gap-3">
+    <div className="group relative inline-flex items-center py-1 sm:py-1.5">
+      <h1 className="flex flex-wrap items-center gap-2 text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 sm:text-4xl lg:text-5xl">
         
         <span className="opacity-90">Hey,</span>
         
@@ -58,8 +57,8 @@ export default function UserGreeting() {
         </span>
 
         {/* ── Animating Premium Icon ── */}
-        <div className="relative flex items-center justify-center ml-1">
-          <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-amber-500 dark:text-amber-400 opacity-80" strokeWidth={2} />
+        <div className="relative ml-1 flex items-center justify-center">
+          <Sparkles className="h-7 w-7 text-amber-500 opacity-80 dark:text-amber-400 sm:h-8 sm:w-8 lg:h-10 lg:w-10" strokeWidth={2} />
         </div>
 
       </h1>

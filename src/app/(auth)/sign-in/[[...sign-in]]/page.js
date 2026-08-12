@@ -5,10 +5,10 @@ import AuthLayout from "@/components/AuthLayout";
 import Link from "next/link";
  
 export default async function Page() {
-  const { userId, onboardingComplete } = await getAuthContext();
+  const { userId, onboardingComplete, user } = await getAuthContext();
  
   if (userId) {
-    redirect(getPostAuthRedirectPath(onboardingComplete));
+    redirect(getPostAuthRedirectPath(onboardingComplete, user));
   }
  
   return (

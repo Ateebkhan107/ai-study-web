@@ -1,8 +1,9 @@
 import { supabase } from "@/lib/supabase";
 import { allocateQuestionCounts } from "@/lib/questionDistribution";
+import { getChapterTargets } from "@/lib/pyqChapterMapping";
 
 // Chapter alias mapping to ensure frontend chapter selections match all DB variations
-const CHAPTER_ALIASES = {
+export const CHAPTER_ALIASES = {
   // Physics
   "Physical World & Units of Measurement": ["Units and Measurements", "Units and Dimensions", "Physical World and Measurement"],
   "Kinematics (Motion in a Straight Line & Plane)": ["Kinematics", "Motion in a Straight Line", "Motion in a Plane"],
@@ -136,6 +137,49 @@ const QUESTION_SELECT_FIELDS = `
   negative_marks
 `;
 
+function shuffleUniqueQuestions(questions) {
+  const unique = new Map();
+  for (const question of questions || []) {
+    if (question?.id && !unique.has(question.id)) {
+      unique.set(question.id, question);
+    }
+  }
+  return [...unique.values()].sort(() => Math.random() - 0.5);
+}
+
+function pickBalancedByDifficulty(questions, limit) {
+  const buckets = {
+    Easy: [],
+    Medium: [],
+    Hard: [],
+    Other: [],
+  };
+
+  shuffleUniqueQuestions(questions).forEach((question) => {
+    const key = buckets[question.difficulty] ? question.difficulty : "Other";
+    buckets[key].push(question);
+  });
+
+  const result = [];
+  const seen = new Set();
+  const order = ["Easy", "Medium", "Hard", "Other"];
+
+  while (result.length < limit) {
+    let added = false;
+    for (const key of order) {
+      const question = buckets[key].shift();
+      if (!question || seen.has(question.id)) continue;
+      result.push(question);
+      seen.add(question.id);
+      added = true;
+      if (result.length >= limit) break;
+    }
+    if (!added) break;
+  }
+
+  return result;
+}
+
 export async function getQuestions({
   exam,
   subject,
@@ -143,6 +187,10 @@ export async function getQuestions({
   difficulty,
   limit = 20,
   client = supabase,
+  sourceType,
+  status,
+  activeOnly = false,
+  strictFilters = false,
 }) {
   try {
 //     console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
@@ -175,6 +223,18 @@ export async function getQuestions({
         ? query.in("exam", ["JEE Main", "JEE"])
         : query.eq("exam", exam);
 
+      if (sourceType) {
+        query = query.eq("source_type", sourceType);
+      }
+
+      if (status) {
+        query = query.eq("status", status);
+      }
+
+      if (activeOnly) {
+        query = query.eq("is_active", true);
+      }
+
       // Subject filter
       if (sub === "Botany" || sub === "Zoology") {
         query = query.eq("subject", "Biology");
@@ -189,16 +249,7 @@ export async function getQuestions({
         chapter.trim().toLowerCase() === "all chapters";
 
       if (!isAllChapters) {
-        const rawChapters = chapter.split(",").map((c) => c.trim());
-        let targetChapters = [];
-        rawChapters.forEach((c) => {
-          targetChapters.push(c);
-          if (CHAPTER_ALIASES[c]) {
-            targetChapters.push(...CHAPTER_ALIASES[c]);
-          }
-        });
-        targetChapters = Array.from(new Set(targetChapters));
-
+        const targetChapters = getChapterTargets(chapter);
         query = query.in("chapter", targetChapters);
       }
 
@@ -209,6 +260,16 @@ export async function getQuestions({
 
       let { data, error } = await query;
 
+      if (error) {
+        throw error;
+      }
+
+      if (strictFilters) {
+        return difficulty && difficulty.toLowerCase() === "mixed"
+          ? pickBalancedByDifficulty(data || [], subjectLimit)
+          : shuffleUniqueQuestions(data || []).slice(0, subjectLimit);
+      }
+
       // Fallback 1: If no questions found with strict chapter filter, relax chapter filter and fetch from subject
       if (!data || data.length === 0) {
         let fallbackQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
@@ -216,6 +277,10 @@ export async function getQuestions({
           ? fallbackQuery.in("exam", ["JEE Main", "JEE"])
           : fallbackQuery.eq("exam", exam);
         fallbackQuery = fallbackQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+
+        if (activeOnly) {
+          fallbackQuery = fallbackQuery.eq("is_active", true);
+        }
 
         if (difficulty && difficulty.toLowerCase() !== "mixed") {
           fallbackQuery = fallbackQuery.eq("difficulty", fixDifficulty(difficulty));
@@ -234,6 +299,9 @@ export async function getQuestions({
           ? anyQuery.in("exam", ["JEE Main", "JEE"])
           : anyQuery.eq("exam", exam);
         anyQuery = anyQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+        if (activeOnly) {
+          anyQuery = anyQuery.eq("is_active", true);
+        }
         const anyRes = await anyQuery;
         if (anyRes.data && anyRes.data.length > 0) {
           data = anyRes.data;
@@ -245,7 +313,7 @@ export async function getQuestions({
         return [];
       }
 
-      return (data || []).slice(0, subjectLimit);
+      return shuffleUniqueQuestions(data || []).slice(0, subjectLimit);
     }));
 
 //     console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
