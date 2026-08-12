@@ -1,6 +1,6 @@
 "use client";
 
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -79,6 +79,15 @@ export default function Footer() {
               aria-label="Email PrepZii"
             >
               <Mail className="h-4 w-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/124944167/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-50 hover:text-[#0A66C2] dark:bg-slate-800/50 dark:hover:bg-blue-500/10"
+              aria-label="PrepZii LinkedIn"
+            >
+              <FaLinkedinIn className="h-4 w-4" />
             </a>
             <a
               href="https://www.instagram.com/prep.zii?igsh=bDRuNW9sZzJocGxr&utm_source=qr"
