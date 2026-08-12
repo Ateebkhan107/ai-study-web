@@ -23,6 +23,10 @@ export const FEATURES = {
 };
 
 export const FREE_CUSTOM_TEST_LIMIT = 2;
+export const EXAM_TRACKS = {
+  JEE: "JEE",
+  NEET: "NEET",
+};
 
 export const FEATURE_ACCESS_MATRIX = {
   [FEATURES.PYQ_FULL]: { plan: "FREE", label: "PYQ Full Paper" },
@@ -58,20 +62,66 @@ export function isSubscriptionActive(subscription, now = new Date()) {
   );
 }
 
-export async function getSubscriptionForUser(userId) {
+export function normalizeExamTrack(value) {
+  return String(value || "")
+    .trim()
+    .toUpperCase()
+    .startsWith("NEET")
+    ? EXAM_TRACKS.NEET
+    : EXAM_TRACKS.JEE;
+}
+
+export async function getSubscriptionForUser(userId, examTrack) {
   if (!userId) return null;
 
-  const { data, error } = await supabaseAdmin
+  const normalizedTrack = examTrack ? normalizeExamTrack(examTrack) : null;
+  let query = supabaseAdmin
     .from("subscriptions")
     .select("*")
     .eq("clerk_user_id", userId)
-    .eq("status", "active")
+    .eq("status", "active");
+
+  if (normalizedTrack) {
+    query = query.eq("exam_track", normalizedTrack);
+  }
+
+  const { data, error } = await query
     .order("expires_at", { ascending: false })
     .limit(1)
     .maybeSingle();
 
-  if (error) throw error;
+  if (error) {
+    if (error.code === "42703" && normalizedTrack) {
+      return null;
+    }
+    throw error;
+  }
   return data || null;
+}
+
+export async function getActiveSubscriptionTracks(userId) {
+  if (!userId) return [];
+
+  const { data, error } = await supabaseAdmin
+    .from("subscriptions")
+    .select("exam_track,expires_at,status")
+    .eq("clerk_user_id", userId)
+    .eq("status", "active");
+
+  if (error) {
+    if (error.code === "42703") {
+      return [];
+    }
+    throw error;
+  }
+
+  return [
+    ...new Set(
+      (data || [])
+        .filter((subscription) => isSubscriptionActive(subscription))
+        .map((subscription) => normalizeExamTrack(subscription.exam_track))
+    ),
+  ];
 }
 
 export async function getActiveInstituteMemberships(userId, email) {
@@ -188,38 +238,58 @@ export async function getClerkAccessMetadata(userId) {
   }
 }
 
-export async function getProfileAccountType(userId) {
-  if (!userId) return ACCOUNT_TYPES.STUDENT;
+export async function getProfileAccessProfile(userId) {
+  if (!userId) {
+    return {
+      accountType: ACCOUNT_TYPES.STUDENT,
+      examTrack: EXAM_TRACKS.JEE,
+    };
+  }
 
   const { data, error } = await supabaseAdmin
     .from("user_profiles")
-    .select("account_type")
+    .select("account_type,exam,current_track")
     .eq("clerk_user_id", userId)
     .maybeSingle();
 
   if (error) {
-    if (error.code === "42703") return ACCOUNT_TYPES.STUDENT;
+    if (error.code === "42703") {
+      return {
+        accountType: ACCOUNT_TYPES.STUDENT,
+        examTrack: EXAM_TRACKS.JEE,
+      };
+    }
     throw error;
   }
 
-  return data?.account_type === ACCOUNT_TYPES.INSTITUTE_ADMIN
-    ? ACCOUNT_TYPES.INSTITUTE_ADMIN
-    : ACCOUNT_TYPES.STUDENT;
+  return {
+    accountType: data?.account_type === ACCOUNT_TYPES.INSTITUTE_ADMIN
+      ? ACCOUNT_TYPES.INSTITUTE_ADMIN
+      : ACCOUNT_TYPES.STUDENT,
+    examTrack: normalizeExamTrack(data?.current_track || data?.exam),
+  };
 }
 
-export async function getUserAccessContext({ userId, email }) {
-  const [subscription, memberships, clerkMetadata, profileAccountType, customTestUsage] = await Promise.all([
-    getSubscriptionForUser(userId),
+export async function getProfileAccountType(userId) {
+  const profile = await getProfileAccessProfile(userId);
+  return profile.accountType;
+}
+
+export async function getUserAccessContext({ userId, email, examTrack } = {}) {
+  const [memberships, clerkMetadata, profileAccess, customTestUsage, proTracks] = await Promise.all([
     getActiveInstituteMemberships(userId, email),
     getClerkAccessMetadata(userId),
-    getProfileAccountType(userId),
+    getProfileAccessProfile(userId),
     getPersonalCustomTestUsage(userId),
+    getActiveSubscriptionTracks(userId),
   ]);
 
+  const activeExamTrack = normalizeExamTrack(examTrack || profileAccess.examTrack);
+  const subscription = await getSubscriptionForUser(userId, activeExamTrack);
   const isPro = isSubscriptionActive(subscription);
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
   const accountType = clerkMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
-    profileAccountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
+    profileAccess.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
     hasCoachingAdminMembership
     ? ACCOUNT_TYPES.INSTITUTE_ADMIN
     : ACCOUNT_TYPES.STUDENT;
@@ -227,9 +297,11 @@ export async function getUserAccessContext({ userId, email }) {
   return {
     userId,
     plan: isPro ? "PRO" : "FREE",
+    examTrack: activeExamTrack,
     accountType,
     isPro,
     subscription,
+    proTracks,
     isPlatformAdmin: clerkMetadata.isPlatformAdmin,
     instituteMemberships: memberships,
     customTestUsage,

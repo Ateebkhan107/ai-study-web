@@ -1,12 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
-import { getSubscriptionForUser, isSubscriptionActive } from "@/lib/accessControl";
+import { getProfileAccessProfile, getSubscriptionForUser, isSubscriptionActive } from "@/lib/accessControl";
 
 export async function getCurrentSubscription() {
   const { userId } = await auth();
 
   if (!userId) return null;
 
-  return getSubscriptionForUser(userId);
+  const profile = await getProfileAccessProfile(userId);
+  return getSubscriptionForUser(userId, profile.examTrack);
 }
 
 export async function isUserPro() {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import razorpay from "@/lib/razorpay";
+import { normalizeExamTrack } from "@/lib/accessControl";
 
 const PLAN_DETAILS = {
   monthly: {
@@ -18,7 +19,7 @@ const PLAN_DETAILS = {
 
 export async function POST(req) {
   try {
-    const { plan } = await req.json();
+    const { plan, examTrack } = await req.json();
 
     if (!PLAN_DETAILS[plan]) {
       return NextResponse.json(
@@ -33,13 +34,15 @@ export async function POST(req) {
     }
 
     const selectedPlan = PLAN_DETAILS[plan];
+    const normalizedTrack = normalizeExamTrack(examTrack);
 
     const options = {
       amount: selectedPlan.amount * 100,
       currency: "INR",
-      receipt: `prepzii_${Date.now()}`,
+      receipt: `prepzii_${normalizedTrack.toLowerCase()}_${Date.now()}`,
       notes: {
         plan,
+        examTrack: normalizedTrack,
         duration: selectedPlan.duration,
       },
     };

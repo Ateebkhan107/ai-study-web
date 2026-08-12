@@ -1,4 +1,4 @@
-export async function createOrder(plan) {
+export async function createOrder(plan, examTrack) {
   const res = await fetch("/api/payment/create-order", {
     method: "POST",
     headers: {
@@ -6,6 +6,7 @@ export async function createOrder(plan) {
     },
     body: JSON.stringify({
       plan,
+      examTrack,
     }),
   });
 

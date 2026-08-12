@@ -15,8 +15,10 @@ export async function GET() {
 
     return NextResponse.json({
       plan: access.plan,
+      examTrack: access.examTrack,
       accountType: access.accountType,
       isPro: access.isPro,
+      proTracks: access.proTracks,
       subscription: access.subscription,
       isPlatformAdmin: access.isPlatformAdmin,
       institutes: access.instituteMemberships.map((membership) => ({

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { normalizeExamTrack } from "@/lib/accessControl";
 
 const PLAN_DURATION = {
   monthly: 30,
@@ -22,6 +23,7 @@ export async function POST(req) {
       razorpay_payment_id,
       razorpay_signature,
       plan,
+      examTrack,
     } = await req.json();
 
     // Validate plan
@@ -76,6 +78,7 @@ export async function POST(req) {
     }
 
     const startsAt = new Date();
+    const normalizedTrack = normalizeExamTrack(examTrack);
 
     const expiresAt = new Date();
 
@@ -90,6 +93,8 @@ export async function POST(req) {
           clerk_user_id: userId,
 
           plan,
+
+          exam_track: normalizedTrack,
 
           amount: PLAN_AMOUNT[plan],
 
@@ -110,7 +115,7 @@ export async function POST(req) {
           updated_at: new Date(),
         },
         {
-          onConflict: "clerk_user_id",
+          onConflict: "clerk_user_id,exam_track",
         }
       );
 

@@ -14,6 +14,7 @@ export default function PricingCard({
 }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const [selectedTrack, setSelectedTrack] = useState("JEE");
 
   async function handlePayment() {
     if (loading) return;
@@ -21,7 +22,7 @@ export default function PricingCard({
     try {
       setLoading(true);
 
-      const order = await createOrder(plan);
+      const order = await createOrder(plan, selectedTrack);
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -32,7 +33,7 @@ export default function PricingCard({
 
         name: "PrepZii",
 
-        description: `${title} Subscription`,
+        description: `${selectedTrack} ${title} Subscription`,
 
         order_id: order.id,
 
@@ -43,6 +44,7 @@ export default function PricingCard({
 
         notes: {
           plan,
+          examTrack: selectedTrack,
         },
 
         theme: {
@@ -59,6 +61,7 @@ export default function PricingCard({
               body: JSON.stringify({
                 ...response,
                 plan,
+                examTrack: selectedTrack,
               }),
             });
 
@@ -129,6 +132,23 @@ export default function PricingCard({
         ))}
       </ul>
 
+      <div className="mt-6 grid grid-cols-2 gap-2 rounded-2xl bg-gray-50 p-1">
+        {["JEE", "NEET"].map((track) => (
+          <button
+            key={track}
+            type="button"
+            onClick={() => setSelectedTrack(track)}
+            className={`rounded-xl px-3 py-2 text-sm font-bold transition ${
+              selectedTrack === track
+                ? "bg-white text-[#1e3a5f] shadow-sm"
+                : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
+            {track}
+          </button>
+        ))}
+      </div>
+
       <button
         onClick={handlePayment}
         disabled={loading}
@@ -138,7 +158,7 @@ export default function PricingCard({
             : "bg-[#1e3a5f] hover:opacity-90"
         }`}
       >
-        {loading ? "Processing..." : "Upgrade to PrepZii Pro"}
+        {loading ? "Processing..." : `Upgrade to ${selectedTrack} Pro`}
       </button>
 
       <p className="mt-3 text-center text-xs text-gray-500">

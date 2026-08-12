@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
@@ -75,11 +75,34 @@ const FAQS = [
 
 export default function ProPage() {
   const [selectedPlan, setSelectedPlan] = useState("quarterly");
+  const [selectedTrack, setSelectedTrack] = useState("JEE");
   const [openFaq, setOpenFaq] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
 
   const plan = PLANS.find((p) => p.id === selectedPlan);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadProfileTrack() {
+      if (!user) return;
+
+      const response = await fetch("/api/profile", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) return;
+
+      const profile = await response.json();
+      if (!cancelled) {
+        setSelectedTrack(profile?.exam === "NEET" ? "NEET" : "JEE");
+      }
+    }
+
+    loadProfileTrack();
+    return () => { cancelled = true; };
+  }, [user]);
 
   const handleSubscribe = async () => {
     if (loading) return;
@@ -87,14 +110,14 @@ export default function ProPage() {
     try {
       setLoading(true);
 
-      const order = await createOrder(selectedPlan);
+      const order = await createOrder(selectedPlan, selectedTrack);
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
         name: "PrepZii",
-        description: `${plan.label} Subscription`,
+        description: `${selectedTrack} ${plan.label} Subscription`,
         image: "/images/branding/logo.png",
         order_id: order.id,
         prefill: {
@@ -103,6 +126,7 @@ export default function ProPage() {
         },
         notes: {
           plan: selectedPlan,
+          examTrack: selectedTrack,
         },
         theme: {
           color: "#6366f1",
@@ -117,6 +141,7 @@ export default function ProPage() {
               body: JSON.stringify({
                 ...response,
                 plan: selectedPlan,
+                examTrack: selectedTrack,
               }),
             });
 
@@ -165,8 +190,26 @@ export default function ProPage() {
         </h1>
 
         <p className="text-slate-400 dark:text-slate-500 text-base max-w-lg mx-auto leading-relaxed">
-          Everything you need to crack JEE & NEET — unlimited tests, deep analytics, and AI-powered study plans.
+          Choose the exam track you want to unlock. JEE Pro and NEET Pro stay separate.
         </p>
+      </section>
+
+      <section className="flex justify-center animate-slideUp" style={{ animationDelay: "50ms" }}>
+        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 p-1.5 rounded-2xl gap-1">
+          {["JEE", "NEET"].map((track) => (
+            <button
+              key={track}
+              onClick={() => setSelectedTrack(track)}
+              className={`px-6 py-3 rounded-xl text-sm font-black transition-all duration-200 cursor-pointer ${
+                selectedTrack === track
+                  ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-sm shadow-indigo-500/20"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+              }`}
+            >
+              {track} Pro
+            </button>
+          ))}
+        </div>
       </section>
 
       {/* ── Plan Selector ── */}
@@ -234,7 +277,7 @@ export default function ProPage() {
             </>
           ) : (
             <>
-              Get PrepZii Pro • ₹{plan.total}
+              Get {selectedTrack} Pro • ₹{plan.total}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </>
           )}
@@ -294,7 +337,7 @@ export default function ProPage() {
                   Upgrade to
                 </span>
                 <h3 className="text-xl font-black text-white mt-1 flex items-center gap-2">
-                  PRO
+                  {selectedTrack} PRO
                   <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/15 text-white/80 backdrop-blur-sm">
                     All features
                   </span>
@@ -420,7 +463,7 @@ export default function ProPage() {
               disabled={loading}
               className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
             >
-              {loading ? "Processing..." : `Upgrade Now • ₹${plan.total}`}
+              {loading ? "Processing..." : `Upgrade to ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
