@@ -29,7 +29,7 @@ const STAT_STYLES = {
   }
 };
 
-export default function StatsCards() {
+export default function StatsCards({ compact = false, stacked = false }) {
   const { user, isLoaded } = useUser();
 
   const [stats, setStats] = useState([
@@ -96,11 +96,13 @@ export default function StatsCards() {
 
   if (!isLoaded) {
     return (
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className={`grid grid-cols-1 gap-3 ${stacked ? "md:grid-cols-3 lg:grid-cols-1" : "md:grid-cols-3"} ${compact ? "" : "gap-4"}`}>
         {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
-            className="relative h-[128px] overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30"
+            className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30 ${
+              compact ? "h-[84px]" : "h-[128px]"
+            }`}
           >
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/5" />
           </div>
@@ -110,7 +112,9 @@ export default function StatsCards() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
+    <div className={`grid grid-cols-1 gap-3 ${
+      stacked ? "md:grid-cols-3 lg:grid-cols-1" : "md:grid-cols-3 lg:gap-5"
+    }`}>
       {stats.map((stat, index) => {
         const style = STAT_STYLES[stat.label] || STAT_STYLES["Accuracy"];
         const Icon = style.icon;
@@ -118,11 +122,13 @@ export default function StatsCards() {
         return (
           <div
             key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/50 p-4 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-slate-700/50 dark:bg-slate-800/40 sm:p-5 ${style.borderHover}`}
+            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-slate-700/50 dark:bg-slate-800/40 ${compact ? "p-3.5 sm:p-4" : "p-4 sm:p-5"} ${style.borderHover}`}
             style={{ transitionDelay: `${index * 50}ms` }}
           >
             
-            <div className="relative z-10 mb-4 flex items-start justify-between">
+            <div className={`relative z-10 flex items-start justify-between ${
+              compact ? "mb-2" : "mb-4"
+            }`}>
               <div className="space-y-1">
                 <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 transition-colors group-hover:text-slate-700 dark:group-hover:text-slate-300">
                   {stat.label}
@@ -133,13 +139,15 @@ export default function StatsCards() {
               </div>
 
               {/* Dynamic Icon Container */}
-              <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105`}>
-                <Icon className={`h-5 w-5 ${style.iconColor}`} strokeWidth={2.5} />
+              <div className={`flex items-center justify-center rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105 ${
+                compact ? "h-8 w-8" : "h-9 w-9"
+              }`}>
+                <Icon className={`${compact ? "h-4 w-4" : "h-5 w-5"} ${style.iconColor}`} strokeWidth={2.5} />
               </div>
             </div>
 
             <div className="relative z-10 flex items-end justify-between">
-              <h3 className={`text-4xl font-black tracking-tighter sm:text-5xl ${style.valueColor}`}>
+              <h3 className={`font-black tracking-tighter ${compact ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"} ${style.valueColor}`}>
                 {stat.value}
               </h3>
             </div>

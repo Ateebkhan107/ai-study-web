@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 
-export default function Leaderboard() {
+export default function Leaderboard({ compact = false }) {
   const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
   const [currentUserData, setCurrentUserData] = useState(null);
@@ -99,15 +99,21 @@ export default function Leaderboard() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8 shadow-sm transition-all duration-500">
+    <div className={`relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-500 ${
+      compact ? "p-4 sm:p-5" : "p-6 lg:p-8"
+    }`}>
 
       {/* ── HEADER ── */}
-      <div className="relative z-10 flex items-center gap-3 mb-8">
-        <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 shadow-sm">
-          <Trophy className="w-6 h-6 text-indigo-500 dark:text-indigo-400" strokeWidth={2.5} />
+      <div className={`relative z-10 flex items-center gap-3 ${compact ? "mb-4" : "mb-8"}`}>
+        <div className={`flex items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 shadow-sm ${
+          compact ? "h-9 w-9" : "w-12 h-12"
+        }`}>
+          <Trophy className={`${compact ? "h-5 w-5" : "w-6 h-6"} text-indigo-500 dark:text-indigo-400`} strokeWidth={2.5} />
         </div>
         <div>
-          <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className={`font-black tracking-tight text-slate-900 dark:text-white ${
+            compact ? "text-xl" : "text-2xl"
+          }`}>
             Global Leaderboard
           </h2>
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mt-1">
@@ -117,7 +123,7 @@ export default function Leaderboard() {
       </div>
 
       {/* ── LIST ── */}
-      <div className="relative z-10 flex flex-col gap-3">
+      <div className={`relative z-10 flex flex-col ${compact ? "gap-2" : "gap-3"}`}>
         {users.length === 0 && (
           <div className="text-center py-10 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
             <Trophy className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
@@ -144,7 +150,7 @@ export default function Leaderboard() {
           return (
             <div key={user.user_id + (user.isCurrentUserAppended ? "_appended" : "")}>
               {user.isCurrentUserAppended && (
-                <div className="flex items-center gap-4 my-6">
+                <div className={`flex items-center gap-4 ${compact ? "my-3" : "my-6"}`}>
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
                   <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded-full border border-slate-100 dark:border-slate-800">
                     Your Rank
@@ -154,27 +160,29 @@ export default function Leaderboard() {
               )}
               
             <div
-              className={`group relative flex items-center justify-between p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-sm ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
+              className={`group relative flex items-center justify-between rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm ${compact ? "min-h-[64px] p-3 sm:p-3.5" : "p-5"} ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
               style={{ transitionDelay: `${displayIndex * 50}ms` }}
             >
 
               {/* ── LEFT SIDE ── */}
-              <div className="flex items-center gap-4 sm:gap-5 z-10">
+              <div className={`flex min-w-0 items-center z-10 ${compact ? "gap-3" : "gap-4 sm:gap-5"}`}>
                 
                 {/* RANK INDICATOR */}
-                <div className={`flex items-center justify-center w-12 h-12 rounded-xl shrink-0 ${theme.rankBg} transition-transform duration-500 group-hover:scale-110`}>
+                <div className={`flex items-center justify-center rounded-xl shrink-0 ${theme.rankBg} transition-transform duration-500 group-hover:scale-110 ${
+                  compact ? "h-10 w-10" : "w-12 h-12"
+                }`}>
                   {RankIcon ? (
-                    <RankIcon className={`w-6 h-6 ${theme.rankColor}`} strokeWidth={2.5} />
+                    <RankIcon className={`${compact ? "h-5 w-5" : "w-6 h-6"} ${theme.rankColor}`} strokeWidth={2.5} />
                   ) : (
-                    <span className={`text-lg font-black ${theme.rankColor}`}>
+                    <span className={`${compact ? "text-sm" : "text-lg"} font-black ${theme.rankColor}`}>
                       #{user.rank}
                     </span>
                   )}
                 </div>
 
                 {/* USER INFO */}
-                <div className="flex flex-col">
-                  <h3 className={`text-base font-bold tracking-tight mb-1 transition-colors duration-300 ${isTopThree ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"}`}>
+                <div className="flex min-w-0 flex-col">
+                  <h3 className={`${compact ? "text-sm" : "text-base"} truncate font-bold tracking-tight mb-1 transition-colors duration-300 ${isTopThree ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"}`}>
                     {user.name || "Student"}
                   </h3>
 
@@ -182,7 +190,8 @@ export default function Leaderboard() {
                     {/* XP Indicator */}
                     <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
                       <Flame className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" strokeWidth={2.5} />
-                      {user.xp} XP earned
+                      <span className={compact ? "hidden sm:inline" : ""}>{user.xp} XP earned</span>
+                      <span className={compact ? "sm:hidden" : "hidden"}>{user.xp} XP</span>
                     </div>
 
                     <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
@@ -199,9 +208,9 @@ export default function Leaderboard() {
               </div>
 
               {/* ── RIGHT SIDE / XP ── */}
-              <div className="flex flex-col items-end z-10 shrink-0">
+              <div className="flex flex-col items-end z-10 shrink-0 pl-3">
                 <div className="flex items-baseline gap-1">
-                  <span className={`text-2xl sm:text-3xl font-black tracking-tight ${theme.xpColor}`}>
+                  <span className={`${compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"} font-black tracking-tight ${theme.xpColor}`}>
                     {user.xp}
                   </span>
                   <span className="text-xs font-bold uppercase text-slate-400 dark:text-slate-500">

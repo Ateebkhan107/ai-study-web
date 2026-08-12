@@ -43,11 +43,11 @@ export default async function DashboardPage() {
       </div>
 
       {/* ── Main Content Area (z-10 forces it above the dots) ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-5 sm:space-y-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-4 sm:space-y-5 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
         
         {/* Header Section */}
-        <div className="relative space-y-1.5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 shadow-sm backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="relative space-y-1">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-0.5 shadow-sm backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/50">
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
@@ -58,11 +58,11 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <div className="break-words pb-1 text-3xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-5xl">
+          <div className="break-words text-3xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
             <UserGreeting />
           </div>
 
-          <div className="mt-1 inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
+          <div className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <TrendingUp className="w-4 h-4 text-indigo-500" />
             <span className="text-sm font-medium">
               Keep improving every day
@@ -71,24 +71,25 @@ export default async function DashboardPage() {
         </div>
 
         {/* Grid Components */}
-        <div className="relative z-10 grid gap-5 sm:gap-6 lg:gap-7">
+        <div className="relative z-10 grid gap-4 sm:gap-5 lg:gap-6">
           
-          <section className="transform transition-all duration-700 ease-out hover:-translate-y-1">
-            <DailyGoals />
-          </section>
-
-          <section className="transform transition-all duration-700 ease-out delay-75 hover:-translate-y-1">
-            <StatsCards />
+          <section className="grid min-w-0 grid-cols-1 gap-4 transition-all duration-700 ease-out lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-stretch">
+            <div className="min-w-0 transform transition-all duration-700 ease-out hover:-translate-y-0.5">
+              <DailyGoals compact />
+            </div>
+            <div className="min-w-0 transform transition-all duration-700 ease-out delay-75 hover:-translate-y-0.5">
+              <StatsCards compact stacked />
+            </div>
           </section>
 
           <section className="relative transform transition-all duration-700 ease-out delay-150">
-            <DashboardSection config={activeConfig} />
+            <DashboardSection config={activeConfig} compact />
           </section>
 
-          <section className="relative pt-4 transform transition-all duration-700 ease-out delay-200">
+          <section className="relative pt-2 transform transition-all duration-700 ease-out delay-200">
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/30 dark:via-indigo-400/30 to-transparent" />
-            <div className="mt-5">
-              <Leaderboard />
+            <div className="mt-4">
+              <Leaderboard compact />
             </div>
           </section>
           
