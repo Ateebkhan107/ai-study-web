@@ -104,8 +104,9 @@ export default function NotificationBell() {
         <div
           className="
             absolute
+            top-full
             right-0
-            mt-4
+            mt-2
             w-[calc(100vw-2rem)]
             max-w-[380px]
             bg-white/90
