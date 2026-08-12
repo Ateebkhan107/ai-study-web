@@ -6,7 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import { supabase } from "@/lib/supabase";
 
-export default function GroupChat({ groupId, currentUserId }) {
+export default function GroupChat({ groupId, currentUserId, currentUserName }) {
   const { getToken } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -15,8 +15,12 @@ export default function GroupChat({ groupId, currentUserId }) {
   const [hasMore, setHasMore] = useState(false);
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [error, setError] = useState(null);
+  const [typingUsers, setTypingUsers] = useState([]); // array of names typing
   const bottomRef = useRef(null);
   const channelRef = useRef(null);
+  const presenceChannelRef = useRef(null);
+  const typingTimeoutRef = useRef(null);
+  const isTypingRef = useRef(false);
 
   const mergeMessages = useCallback((previous, incoming) => {
     const byId = new Map(previous.map((message) => [message.id, message]));
@@ -62,10 +66,12 @@ export default function GroupChat({ groupId, currentUserId }) {
     }
   }, [messages.length, loading]);
 
-  // Supabase Realtime subscription
+  // Supabase Realtime subscription (messages) + Presence (typing)
   useEffect(() => {
-    let channel;
     let cancelled = false;
+    let retryTimeout = null;
+    let retryCount = 0;
+    const MAX_RETRIES = 10;
 
     async function hydrateRealtimeMessage(messageId) {
       const res = await fetch(`/api/community/groups/${groupId}/messages?messageId=${encodeURIComponent(messageId)}`, {
@@ -77,27 +83,30 @@ export default function GroupChat({ groupId, currentUserId }) {
     }
 
     async function subscribeToGroup() {
-      const token = await getToken().catch(() => null);
-      if (!token) {
-        console.error("[GROUP_CHAT_REALTIME] Missing Clerk session token");
-        return;
-      }
-
-      supabase.realtime.setAuth(token);
       if (cancelled) return;
 
+      // Clean up existing channels
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
       }
+      if (presenceChannelRef.current) {
+        supabase.removeChannel(presenceChannelRef.current);
+        presenceChannelRef.current = null;
+      }
 
-      channel = supabase
-        .channel(`group-chat-${groupId}`)
+      const token = await getToken().catch(() => null);
+      if (!token || cancelled) return;
+
+      supabase.realtime.setAuth(token);
+
+      // ── 1. Messages channel (postgres_changes) ──────────────────
+      const msgChannel = supabase
+        .channel(`group-chat-${groupId}-${Date.now()}`)
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
           async (payload) => {
-            console.log("[GROUP_CHAT_REALTIME_INSERT]", payload);
             const newMsg = payload.new;
             if (!newMsg?.id) return;
 
@@ -125,28 +134,83 @@ export default function GroupChat({ groupId, currentUserId }) {
           }
         )
         .subscribe((status) => {
-          console.log(`[GROUP_CHAT_REALTIME:${groupId}]`, status);
+          if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
-            console.error("[GROUP_CHAT_REALTIME_STATUS]", {
-              groupId,
-              status,
-              table: "community_group_messages",
-              filter: `group_id=eq.${groupId}`,
-            });
+            if (retryCount < MAX_RETRIES) {
+              const delay = Math.min(1000 * 2 ** retryCount, 30000);
+              retryCount++;
+              retryTimeout = setTimeout(() => {
+                if (!cancelled) subscribeToGroup();
+              }, delay);
+            }
+          } else if (status === "SUBSCRIBED") {
+            retryCount = 0;
           }
         });
 
-      channelRef.current = channel;
+      channelRef.current = msgChannel;
+
+      // ── 2. Presence channel (typing indicators) ─────────────────
+      const presenceChannel = supabase.channel(`group-presence-${groupId}`, {
+        config: { presence: { key: currentUserId } },
+      });
+
+      presenceChannel
+        .on("presence", { event: "sync" }, () => {
+          if (cancelled) return;
+          const state = presenceChannel.presenceState();
+          const typers = Object.entries(state)
+            .filter(([uid, presences]) => uid !== currentUserId && presences.some((p) => p.typing))
+            .map(([, presences]) => presences[0]?.name || "Someone");
+          setTypingUsers(typers);
+        })
+        .subscribe();
+
+      presenceChannelRef.current = presenceChannel;
     }
 
     subscribeToGroup();
 
     return () => {
       cancelled = true;
-      if (channel) supabase.removeChannel(channel);
-      if (channelRef.current === channel) channelRef.current = null;
+      clearTimeout(retryTimeout);
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+      if (presenceChannelRef.current) {
+        supabase.removeChannel(presenceChannelRef.current);
+        presenceChannelRef.current = null;
+      }
     };
   }, [groupId, currentUserId, getToken, mergeMessages]);
+
+  // Broadcast typing state via presence
+  function broadcastTyping(isTyping) {
+    const channel = presenceChannelRef.current;
+    if (!channel) return;
+    if (isTyping) {
+      channel.track({ typing: true, name: currentUserName || "Someone" });
+    } else {
+      channel.track({ typing: false, name: currentUserName || "Someone" });
+    }
+  }
+
+  function handleInputChange(e) {
+    setInput(e.target.value);
+
+    if (!isTypingRef.current) {
+      isTypingRef.current = true;
+      broadcastTyping(true);
+    }
+
+    // Clear typing after 2 seconds of no keystrokes
+    clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      isTypingRef.current = false;
+      broadcastTyping(false);
+    }, 2000);
+  }
 
   async function loadOlderMessages() {
     if (messages.length === 0 || loadingOlder) return;
@@ -165,6 +229,11 @@ export default function GroupChat({ groupId, currentUserId }) {
     const content = input.trim();
     if (!content || isSubmitting) return;
     if (content.length > 2000) return;
+
+    // Stop typing indicator immediately on send
+    clearTimeout(typingTimeoutRef.current);
+    isTypingRef.current = false;
+    broadcastTyping(false);
 
     setIsSubmitting(true);
     setInput("");
@@ -208,6 +277,16 @@ export default function GroupChat({ groupId, currentUserId }) {
     );
   }
 
+  // Build typing text
+  const typingText =
+    typingUsers.length === 1
+      ? `${typingUsers[0]} is typing…`
+      : typingUsers.length === 2
+      ? `${typingUsers[0]} and ${typingUsers[1]} are typing…`
+      : typingUsers.length > 2
+      ? "Several people are typing…"
+      : null;
+
   return (
     <div className="flex h-full flex-col bg-white/60 dark:bg-slate-950/30">
       {/* Messages area */}
@@ -248,6 +327,18 @@ export default function GroupChat({ groupId, currentUserId }) {
           ))
         )}
 
+        {/* Typing indicator */}
+        {typingText && (
+          <div className="flex items-center gap-2 px-1">
+            <div className="flex gap-0.5 items-end h-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+            </div>
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">{typingText}</p>
+          </div>
+        )}
+
         <div ref={bottomRef} />
       </div>
 
@@ -265,7 +356,7 @@ export default function GroupChat({ groupId, currentUserId }) {
       >
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();

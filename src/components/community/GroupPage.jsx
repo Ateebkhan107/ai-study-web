@@ -21,7 +21,7 @@ import GroupCard from "./GroupCard";
 
 const TABS = ["Chat", "Members", "Requests", "Settings"];
 
-export default function GroupPage({ groupId, currentUserId }) {
+export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const router = useRouter();
   const [group, setGroup] = useState(null);
   const [membership, setMembership] = useState(null);
@@ -233,7 +233,7 @@ export default function GroupPage({ groupId, currentUserId }) {
           {/* Tab content */}
           <div className="flex-1 overflow-hidden">
             {activeTab === "Chat" && isMember && (
-              <GroupChat groupId={groupId} currentUserId={currentUserId} />
+              <GroupChat groupId={groupId} currentUserId={currentUserId} currentUserName={currentUserName} />
             )}
             {activeTab === "Chat" && !isMember && (
               <div className="flex items-center justify-center h-full text-slate-400">
