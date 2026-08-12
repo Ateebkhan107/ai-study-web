@@ -33,6 +33,8 @@ const PLANS = [
     id: "monthly",
     label: "Monthly",
     price: 49,
+    originalPrice: 199,
+    discount: 75,
     per: "month",
     total: 49,
     badge: null,
@@ -41,22 +43,28 @@ const PLANS = [
   {
     id: "quarterly",
     label: "Quarterly",
-    price: 43,
-    per: "month",
+    price: 129,
+    originalPrice: 499,
+    discount: 74,
+    per: "3 months",
     total: 129,
     badge: "Most Popular",
-    savings: "Save ₹18",
+    savings: "Save ₹370",
   },
   {
     id: "yearly",
     label: "Yearly",
-    price: 33,
-    per: "month",
+    price: 399,
+    originalPrice: 1799,
+    discount: 78,
+    per: "year",
     total: 399,
     badge: "Best Value",
-    savings: "Save ₹189",
+    savings: "Save ₹1,400",
   },
 ];
+
+const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
 
 const FAQS = [
   {
@@ -76,6 +84,7 @@ const FAQS = [
 export default function ProPage() {
   const [selectedPlan, setSelectedPlan] = useState("quarterly");
   const [selectedTrack, setSelectedTrack] = useState("JEE");
+  const [currentPlan, setCurrentPlan] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
@@ -88,15 +97,20 @@ export default function ProPage() {
     async function loadProfileTrack() {
       if (!user) return;
 
-      const response = await fetch("/api/profile", {
-        cache: "no-store",
-      });
+      const profileResponse = await fetch("/api/profile", { cache: "no-store" });
+      if (!profileResponse.ok) return;
+      const profile = await profileResponse.json();
+      const profileTrack = profile?.exam === "NEET" ? "NEET" : "JEE";
+      const subscriptionResponse = await fetch(`/api/subscription?examTrack=${profileTrack}`, { cache: "no-store" });
+      const subscriptionData = subscriptionResponse.ok ? await subscriptionResponse.json() : null;
 
-      if (!response.ok) return;
-
-      const profile = await response.json();
       if (!cancelled) {
-        setSelectedTrack(profile?.exam === "NEET" ? "NEET" : "JEE");
+        setSelectedTrack(profileTrack);
+        const activePlan = subscriptionData?.isPro ? subscriptionData.subscription?.plan : null;
+        setCurrentPlan(activePlan);
+        if (activePlan === "monthly") setSelectedPlan("quarterly");
+        if (activePlan === "quarterly") setSelectedPlan("yearly");
+        if (activePlan === "yearly") setSelectedPlan("yearly");
       }
     }
 
@@ -105,7 +119,7 @@ export default function ProPage() {
   }, [user]);
 
   const handleSubscribe = async () => {
-    if (loading) return;
+    if (loading || (currentPlan && PLAN_RANK[selectedPlan] <= PLAN_RANK[currentPlan])) return;
 
     try {
       setLoading(true);
@@ -190,25 +204,13 @@ export default function ProPage() {
         </h1>
 
         <p className="text-slate-400 dark:text-slate-500 text-base max-w-lg mx-auto leading-relaxed">
-          Your subscription is tied to your registered exam. {selectedTrack} Pro unlocks only {selectedTrack} content.
+          {selectedTrack} Pro unlocks only {selectedTrack} content. Renew or upgrade anytime to extend your access.
         </p>
       </section>
 
       <section className="flex justify-center animate-slideUp" style={{ animationDelay: "50ms" }}>
-        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 p-1.5 rounded-2xl gap-1">
-          {["JEE", "NEET"].map((track) => (
-            <button
-              key={track}
-              onClick={() => setSelectedTrack(track)}
-              className={`px-6 py-3 rounded-xl text-sm font-black transition-all duration-200 cursor-pointer ${
-                selectedTrack === track
-                  ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-sm shadow-indigo-500/20"
-                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
-              }`}
-            >
-              {track} Pro
-            </button>
-          ))}
+        <div className="rounded-2xl border border-indigo-400/20 bg-indigo-500/10 px-6 py-3 text-sm font-black text-indigo-600 dark:text-indigo-300">
+          {selectedTrack} Pro
         </div>
       </section>
 
@@ -220,16 +222,24 @@ export default function ProPage() {
             <button
               key={p.id}
               onClick={() => setSelectedPlan(p.id)}
-              className={`relative px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer
+              disabled={Boolean(currentPlan && PLAN_RANK[p.id] <= PLAN_RANK[currentPlan])}
+              className={`relative flex min-h-14 flex-col items-center justify-center rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200
                 ${
                   selectedPlan === p.id
                     ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                    : currentPlan && PLAN_RANK[p.id] <= PLAN_RANK[currentPlan]
+                      ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
+                      : "cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 }`}
             >
               {p.label}
+              {currentPlan === p.id && (
+                <span className="mt-0.5 whitespace-nowrap text-[8px] font-black uppercase tracking-wider text-indigo-500">
+                  Current plan
+                </span>
+              )}
               {p.savings && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-black px-2 py-0.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white whitespace-nowrap shadow-sm shadow-emerald-500/20">
+                <span className="mt-0.5 whitespace-nowrap rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-2 py-0.5 text-[8px] font-black text-white shadow-sm shadow-emerald-500/20">
                   {p.savings}
                 </span>
               )}
@@ -239,6 +249,14 @@ export default function ProPage() {
 
         {/* Price display */}
         <div className="text-center">
+          <div className="mb-2 flex items-center justify-center gap-2">
+            <span className="text-xl font-bold text-slate-400 line-through decoration-2 dark:text-slate-600">
+              ₹{plan.originalPrice}
+            </span>
+            <span className="rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-sm shadow-emerald-500/20">
+              {plan.discount}% off
+            </span>
+          </div>
           <div className="flex items-end justify-center gap-1">
             <span className="text-2xl font-bold text-slate-400 dark:text-slate-500 mb-2">₹</span>
             <span className="text-7xl sm:text-8xl font-black bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent tracking-tighter leading-none">
@@ -247,15 +265,9 @@ export default function ProPage() {
             <span className="text-slate-400 dark:text-slate-500 text-base mb-2">/{plan.per}</span>
           </div>
 
-          {plan.total && (
-            <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">
-              Billed as{" "}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                ₹{plan.total}
-              </span>{" "}
-              per {plan.id === "quarterly" ? "3 months" : "year"}
-            </p>
-          )}
+          <p className="mt-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+            Limited-time discounted price
+          </p>
 
           {plan.badge && (
             <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white uppercase tracking-widest shadow-sm shadow-indigo-500/20">
@@ -267,7 +279,7 @@ export default function ProPage() {
         {/* CTA */}
         <button
           onClick={handleSubscribe}
-          disabled={loading}
+          disabled={loading || currentPlan === "yearly"}
           className="group w-full max-w-sm py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           {loading ? (
@@ -277,7 +289,7 @@ export default function ProPage() {
             </>
           ) : (
             <>
-              Get {selectedTrack} Pro • ₹{plan.total}
+              {currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </>
           )}
@@ -342,10 +354,16 @@ export default function ProPage() {
                     All features
                   </span>
                 </h3>
+                <div className="mt-2 flex items-center gap-2">
+                  <span className="text-sm font-bold text-white/45 line-through decoration-2">₹{plan.originalPrice}</span>
+                  <span className="rounded-full bg-emerald-400/20 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-emerald-200">
+                    {plan.discount}% off
+                  </span>
+                </div>
                 <p className="text-3xl font-black text-white mt-1">
                   ₹{plan.price}
                   <span className="text-base font-normal text-white/50">
-                    /mo
+                    /{plan.per}
                   </span>
                 </p>
               </div>
@@ -460,10 +478,10 @@ export default function ProPage() {
             </p>
             <button
               onClick={handleSubscribe}
-              disabled={loading}
+              disabled={loading || currentPlan === "yearly"}
               className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
             >
-              {loading ? "Processing..." : `Upgrade to ${selectedTrack} Pro • ₹${plan.total}`}
+              {loading ? "Processing..." : currentPlan === "yearly" ? "Yearly plan active" : currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>

@@ -138,19 +138,19 @@ export default function Navbar() {
     </Link>
   );
 
-  const proLink = !isPro && !isInstituteAdminAccount ? (
+  const proLink = !isInstituteAdminAccount ? (
     <Link
       href="/pro"
       onClick={() => mobileOpen && setMobileOpen(false)}
-      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-amber-300/50 bg-amber-400/15 px-3 text-[13px] font-extrabold tracking-wide text-amber-700 transition-all duration-200 hover:-translate-y-px hover:bg-amber-400/20 hover:text-amber-800 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-300 dark:hover:bg-amber-400/15 dark:hover:text-amber-200"
+      className={`inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-[13px] font-extrabold tracking-wide transition-all duration-200 hover:-translate-y-px ${
+        isPro
+          ? "border border-indigo-300/40 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/15 dark:border-indigo-400/20 dark:text-indigo-300"
+          : "border border-amber-300/50 bg-amber-400/15 text-amber-700 hover:bg-amber-400/20 hover:text-amber-800 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-300 dark:hover:bg-amber-400/15 dark:hover:text-amber-200"
+      }`}
     >
-      <span aria-hidden="true" className="text-[12px] leading-none">★</span>
-      <span>PRO</span>
+      {!isPro && <span aria-hidden="true" className="text-[12px] leading-none">★</span>}
+      <span>{isPro ? `${track || ""} Pro` : "PRO"}</span>
     </Link>
-  ) : isPro && !isInstituteAdminAccount ? (
-    <div className="inline-flex h-9 items-center rounded-lg border border-indigo-300/40 bg-indigo-500/10 px-3 text-[13px] font-extrabold tracking-wide text-indigo-600 dark:border-indigo-400/20 dark:text-indigo-300">
-      PrepZii Pro
-    </div>
   ) : null;
 
   return (

@@ -7,6 +7,8 @@ import { createOrder } from "@/lib/payment";
 export default function PricingCard({
   title,
   price,
+  originalPrice,
+  discount,
   duration,
   plan,
   features = [],
@@ -15,7 +17,6 @@ export default function PricingCard({
 }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const [selectedTrack, setSelectedTrack] = useState(examTrack);
 
   async function handlePayment() {
     if (loading) return;
@@ -23,7 +24,7 @@ export default function PricingCard({
     try {
       setLoading(true);
 
-      const order = await createOrder(plan, selectedTrack);
+      const order = await createOrder(plan, examTrack);
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -34,7 +35,7 @@ export default function PricingCard({
 
         name: "PrepZii",
 
-        description: `${selectedTrack} ${title} Subscription`,
+        description: `${examTrack} ${title} Subscription`,
 
         order_id: order.id,
 
@@ -45,7 +46,7 @@ export default function PricingCard({
 
         notes: {
           plan,
-          examTrack: selectedTrack,
+          examTrack,
         },
 
         theme: {
@@ -62,7 +63,7 @@ export default function PricingCard({
               body: JSON.stringify({
                 ...response,
                 plan,
-                examTrack: selectedTrack,
+                examTrack,
               }),
             });
 
@@ -114,11 +115,18 @@ export default function PricingCard({
       <h3 className="text-2xl font-bold">{title}</h3>
 
       <div className="mt-5">
+        <div className="mb-1 flex items-center gap-2">
+          <span className="text-lg font-bold text-gray-400 line-through decoration-2">₹{originalPrice}</span>
+          <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-white">
+            {discount}% off
+          </span>
+        </div>
         <span className="text-5xl font-black">₹{price}</span>
 
         <span className="ml-2 text-gray-500">
           / {duration}
         </span>
+        <p className="mt-2 text-sm font-semibold text-emerald-600">Limited-time discounted price</p>
       </div>
 
       <ul className="mt-8 space-y-3">
@@ -133,19 +141,8 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <div className="mt-6 grid grid-cols-2 gap-2 rounded-2xl bg-gray-50 p-1">
-        {["JEE", "NEET"].map((track) => (
-          <button
-            key={track}
-            type="button"
-            onClick={() => setSelectedTrack(track)}
-            className={`rounded-xl px-3 py-2 text-sm font-bold transition ${
-              selectedTrack === track ? "bg-white text-[#1e3a5f] shadow-sm" : "text-gray-500 hover:text-gray-900"
-            }`}
-          >
-            {track} Pro
-          </button>
-        ))}
+      <div className="mt-6 rounded-2xl bg-blue-50 px-3 py-2 text-center text-sm font-bold text-[#1e3a5f]">
+        {examTrack} Pro
       </div>
 
       <button
@@ -157,7 +154,7 @@ export default function PricingCard({
             : "bg-[#1e3a5f] hover:opacity-90"
         }`}
       >
-        {loading ? "Processing..." : `Upgrade to ${selectedTrack} Pro`}
+        {loading ? "Processing..." : `Upgrade or renew ${examTrack} Pro`}
       </button>
 
       <p className="mt-3 text-center text-xs text-gray-500">

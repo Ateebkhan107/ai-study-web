@@ -40,6 +40,8 @@ export default function PricingPage() {
           <PricingCard
             title="Monthly"
             price={49}
+            originalPrice={199}
+            discount={75}
             duration="month"
             plan="monthly"
             examTrack={examTrack}
@@ -56,13 +58,15 @@ export default function PricingPage() {
           <PricingCard
             title="Quarterly"
             price={129}
+            originalPrice={499}
+            discount={74}
             duration="3 months"
             plan="quarterly"
             examTrack={examTrack}
             popular={true}
             features={[
               "Everything in Monthly",
-              "Save ₹18",
+      "Save ₹370 from the original price",
               "Unlimited AI Usage",
               "Priority Support",
               "Early Feature Access",
@@ -72,12 +76,14 @@ export default function PricingPage() {
           <PricingCard
             title="Yearly"
             price={399}
+            originalPrice={1799}
+            discount={78}
             duration="year"
             plan="yearly"
             examTrack={examTrack}
             features={[
               "Everything in Quarterly",
-              "Save ₹189",
+      "Save ₹1,400 from the original price",
               "Best Value",
               "Unlimited Everything",
             ]}

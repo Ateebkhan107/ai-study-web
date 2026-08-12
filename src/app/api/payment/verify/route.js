@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { normalizeExamTrack } from "@/lib/accessControl";
+import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
 import razorpay from "@/lib/razorpay";
 
 const PLAN_DURATION = {
@@ -16,6 +16,7 @@ const PLAN_AMOUNT = {
   quarterly: 129,
   yearly: 399,
 };
+const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
 
 export async function POST(req) {
   try {
@@ -85,15 +86,36 @@ export async function POST(req) {
     const orderTrack = normalizeExamTrack(order.notes?.examTrack);
     const normalizedTrack = normalizeExamTrack(examTrack);
     const expectedAmount = PLAN_AMOUNT[plan] * 100;
+    const profile = await getProfileAccessProfile(userId);
 
-    if (!examTrack || orderPlan !== plan || orderTrack !== normalizedTrack || Number(order.amount) !== expectedAmount) {
+    if (!examTrack || orderPlan !== plan || orderTrack !== normalizedTrack || normalizedTrack !== profile.examTrack || Number(order.amount) !== expectedAmount) {
       return NextResponse.json(
         { success: false, message: "Payment order details do not match this subscription." },
         { status: 400 }
       );
     }
 
-    const expiresAt = new Date();
+    const { data: existingSubscription } = await supabaseAdmin
+      .from("subscriptions")
+      .select("plan,status,expires_at")
+      .eq("clerk_user_id", userId)
+      .eq("exam_track", normalizedTrack)
+      .maybeSingle();
+
+    const activeCurrentPlan = existingSubscription?.status === "active" &&
+      new Date(existingSubscription.expires_at) > startsAt
+      ? existingSubscription.plan
+      : null;
+
+    if (activeCurrentPlan && PLAN_RANK[plan] <= PLAN_RANK[activeCurrentPlan]) {
+      return NextResponse.json(
+        { success: false, message: "Only upgrades to a higher plan are allowed." },
+        { status: 409 }
+      );
+    }
+
+    const currentExpiry = existingSubscription?.expires_at ? new Date(existingSubscription.expires_at) : null;
+    const expiresAt = currentExpiry && currentExpiry > startsAt ? currentExpiry : new Date(startsAt);
 
     expiresAt.setDate(
       expiresAt.getDate() + PLAN_DURATION[plan]
