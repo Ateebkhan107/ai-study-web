@@ -59,7 +59,7 @@ const DIFFICULTY_BADGE = {
 
 const TABS = [
   { id: "practice",  label: "Practice",  Icon: I.Target    },
-  { id: "analytics", label: "Analytics", Icon: I.BarChart3 },
+  { id: "analytics", label: "Analytics", Icon: I.BarChart3, pro: true },
   { id: "saved",     label: "Saved",     Icon: I.Bookmark  },
 ];
 
@@ -628,6 +628,26 @@ function AnalyticsTab({ analytics, loading, loadError }) {
   );
 }
 
+function ProLockedPanel({ title, description }) {
+  const router = useRouter();
+
+  return (
+    <div className={`glass-card p-6 sm:p-8 text-center animate-slideUp`}>
+      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
+        <I.Sparkles size={20} />
+      </div>
+      <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h3>
+      <p className={`mx-auto mt-2 max-w-md text-sm ${TXT_MUTED}`}>{description}</p>
+      <button
+        onClick={() => router.push("/pro")}
+        className="mt-5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5"
+      >
+        Upgrade to Pro
+      </button>
+    </div>
+  );
+}
+
 // ─── Saved Tab ────────────────────────────────────────────────────────────────
 function SavedTab({ track, savedQuestions, onUnsave }) {
   return (
@@ -724,6 +744,7 @@ export default function PYQPage() {
     return () => { cancelled = true; };
   }, [user]);
 
+  const isPro = Boolean(access?.isPro);
   const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
 
   const [savedQuestions, setSavedQuestions] = useState([]);
@@ -763,14 +784,12 @@ export default function PYQPage() {
   useEffect(() => {
     let cancelled = false;
     async function loadPYQStats() {
-      if (!track) return;
+      if (!track || !access) return;
       setStatsLoading(true);
       setStatsError("");
       try {
-        const [overviewData, analyticsData] = await Promise.all([
-          getPYQOverview(track),
-          getPYQAnalytics(track),
-        ]);
+        const overviewData = await getPYQOverview(track);
+        const analyticsData = isPro ? await getPYQAnalytics(track) : null;
         if (cancelled) return;
         setOverview(overviewData || null);
         setPyqAnalytics(analyticsData || null);
@@ -794,7 +813,7 @@ export default function PYQPage() {
     }
     loadPYQStats();
     return () => { cancelled = true; };
-  }, [track]);
+  }, [track, access, isPro]);
 
   const handleUnsave = async (qId) => {
     if (!user?.id) return;
@@ -832,15 +851,23 @@ export default function PYQPage() {
         <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           {TABS.map((tab) => {
             const active = activeTab === tab.id;
+            const locked = tab.pro && !isPro;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                 className={`flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   active
                     ? ACTIVE_PILL
-                    : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5`
+                    : locked
+                      ? "text-slate-400 hover:bg-slate-50 dark:text-slate-500 dark:hover:bg-white/5"
+                      : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5`
                 }`}
               >
                 <tab.Icon size={14} /> {tab.label}
+                {locked && (
+                  <span className="rounded-full bg-slate-900 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950">
+                    Pro
+                  </span>
+                )}
               </button>
             );
           })}
@@ -848,13 +875,20 @@ export default function PYQPage() {
       </section>
 
       {/* Tab panels */}
-      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} isPro={Boolean(access?.isPro)} />}
+      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />}
       {activeTab === "analytics" && (
-        <AnalyticsTab
-          analytics={pyqAnalytics}
-          loading={statsLoading}
-          loadError={statsError}
-        />
+        isPro ? (
+          <AnalyticsTab
+            analytics={pyqAnalytics}
+            loading={statsLoading}
+            loadError={statsError}
+          />
+        ) : (
+          <ProLockedPanel
+            title="PYQ Analytics is Pro"
+            description="Upgrade to unlock subject accuracy, solved-question trends, weak areas, and revision insights from your PYQ attempts."
+          />
+        )
       )}
       {activeTab === "saved"     && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
     </PageWrapper>

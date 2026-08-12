@@ -6,6 +6,7 @@ import {
   examMatchesTrack,
   normalizeTrack,
 } from "@/lib/analyticsHelpers";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 export async function GET(request) {
   try {
@@ -15,6 +16,20 @@ export async function GET(request) {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const access = await getUserAccessContext({ userId });
+    const permission = canUseFeature(access, FEATURES.PYQ_ANALYTICS);
+
+    if (!permission.allowed) {
+      return NextResponse.json(
+        {
+          error: "PRO_REQUIRED",
+          message: "PYQ Analytics is available with PrepZii Pro.",
+          upgradeUrl: permission.upgradeUrl || "/pro",
+        },
+        { status: 403 }
+      );
     }
 
     const [{ data: rawPyqAttempts, error: pyqError }, { data: rawTestAttempts, error: testError }] = await Promise.all([
