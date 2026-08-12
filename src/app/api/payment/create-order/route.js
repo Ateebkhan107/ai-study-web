@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import razorpay from "@/lib/razorpay";
 import { normalizeExamTrack } from "@/lib/accessControl";
 
@@ -20,6 +21,11 @@ const PLAN_DETAILS = {
 export async function POST(req) {
   try {
     const { plan, examTrack } = await req.json();
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+    }
 
     if (!PLAN_DETAILS[plan]) {
       return NextResponse.json(
@@ -31,6 +37,10 @@ export async function POST(req) {
           status: 400,
         }
       );
+    }
+
+    if (!examTrack || !["JEE", "NEET"].includes(String(examTrack).toUpperCase())) {
+      return NextResponse.json({ success: false, message: "Select JEE Pro or NEET Pro." }, { status: 400 });
     }
 
     const selectedPlan = PLAN_DETAILS[plan];

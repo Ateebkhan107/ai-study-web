@@ -11,10 +11,11 @@ export default function PricingCard({
   plan,
   features = [],
   popular = false,
+  examTrack = "JEE",
 }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const [selectedTrack, setSelectedTrack] = useState("JEE");
+  const [selectedTrack, setSelectedTrack] = useState(examTrack);
 
   async function handlePayment() {
     if (loading) return;
@@ -139,12 +140,10 @@ export default function PricingCard({
             type="button"
             onClick={() => setSelectedTrack(track)}
             className={`rounded-xl px-3 py-2 text-sm font-bold transition ${
-              selectedTrack === track
-                ? "bg-white text-[#1e3a5f] shadow-sm"
-                : "text-gray-500 hover:text-gray-900"
+              selectedTrack === track ? "bg-white text-[#1e3a5f] shadow-sm" : "text-gray-500 hover:text-gray-900"
             }`}
           >
-            {track}
+            {track} Pro
           </button>
         ))}
       </div>

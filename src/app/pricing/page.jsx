@@ -1,9 +1,19 @@
 "use client";
 
 import PricingCard from "@/components/pricing/PricingCard";
+import { useEffect, useState } from "react";
 import { Bot, BarChart3, FileText, BookOpen } from "lucide-react";
 
 export default function PricingPage() {
+  const [examTrack, setExamTrack] = useState("JEE");
+
+  useEffect(() => {
+    fetch("/api/profile", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((profile) => setExamTrack(profile?.exam === "NEET" ? "NEET" : "JEE"))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <div className="max-w-7xl mx-auto px-6 py-20">
@@ -17,8 +27,8 @@ export default function PricingPage() {
           </h1>
 
           <p className="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
-            Unlock AI-powered learning, unlimited tests, premium PYQs,
-            advanced analytics and much more.
+            Unlock {examTrack} learning, unlimited tests, premium PYQs,
+            advanced analytics and much more. Your subscription applies only to {examTrack}.
           </p>
 
         </div>
@@ -32,6 +42,7 @@ export default function PricingPage() {
             price={49}
             duration="month"
             plan="monthly"
+            examTrack={examTrack}
             features={[
               "Unlimited Tests",
               "Unlimited PYQs",
@@ -47,6 +58,7 @@ export default function PricingPage() {
             price={129}
             duration="3 months"
             plan="quarterly"
+            examTrack={examTrack}
             popular={true}
             features={[
               "Everything in Monthly",
@@ -62,6 +74,7 @@ export default function PricingPage() {
             price={399}
             duration="year"
             plan="yearly"
+            examTrack={examTrack}
             features={[
               "Everything in Quarterly",
               "Save ₹189",

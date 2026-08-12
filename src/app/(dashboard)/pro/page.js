@@ -190,7 +190,7 @@ export default function ProPage() {
         </h1>
 
         <p className="text-slate-400 dark:text-slate-500 text-base max-w-lg mx-auto leading-relaxed">
-          Choose the exam track you want to unlock. JEE Pro and NEET Pro stay separate.
+          Your subscription is tied to your registered exam. {selectedTrack} Pro unlocks only {selectedTrack} content.
         </p>
       </section>
 

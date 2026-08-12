@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
 import { getChapterTargets, getSubjectTargets } from "@/lib/pyqChapterMapping";
-import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
+import { FEATURES, canUseFeature, getProfileAccessProfile, getUserAccessContext, normalizeExamTrack } from "@/lib/accessControl";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -219,12 +219,22 @@ export async function GET(req) {
   const paperCode = searchParams.get("paper_code");
   const examId = searchParams.get("exam_id");
 
+  if (userId && exam) {
+    const profile = await getProfileAccessProfile(userId);
+    if (normalizeExamTrack(exam) !== profile.examTrack) {
+      return NextResponse.json(
+        { error: "EXAM_TRACK_MISMATCH", message: `Your account has access to ${profile.examTrack} content only.` },
+        { status: 403 }
+      );
+    }
+  }
+
   if (mode === "chapter" || mode === "mistakes") {
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const access = await getUserAccessContext({ userId });
+    const access = await getUserAccessContext({ userId, examTrack: exam });
     const feature = mode === "chapter" ? FEATURES.PYQ_CHAPTER : FEATURES.PYQ_MISTAKES;
     const permission = canUseFeature(access, feature);
 

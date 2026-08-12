@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { normalizeExamTrack } from "@/lib/accessControl";
+import razorpay from "@/lib/razorpay";
 
 const PLAN_DURATION = {
   monthly: 30,
@@ -78,7 +79,19 @@ export async function POST(req) {
     }
 
     const startsAt = new Date();
+
+    const order = await razorpay.orders.fetch(razorpay_order_id);
+    const orderPlan = String(order.notes?.plan || "");
+    const orderTrack = normalizeExamTrack(order.notes?.examTrack);
     const normalizedTrack = normalizeExamTrack(examTrack);
+    const expectedAmount = PLAN_AMOUNT[plan] * 100;
+
+    if (!examTrack || orderPlan !== plan || orderTrack !== normalizedTrack || Number(order.amount) !== expectedAmount) {
+      return NextResponse.json(
+        { success: false, message: "Payment order details do not match this subscription." },
+        { status: 400 }
+      );
+    }
 
     const expiresAt = new Date();
 

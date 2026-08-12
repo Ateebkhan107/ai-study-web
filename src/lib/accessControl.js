@@ -248,7 +248,7 @@ export async function getProfileAccessProfile(userId) {
 
   const { data, error } = await supabaseAdmin
     .from("user_profiles")
-    .select("account_type,exam,current_track")
+    .select("account_type,exam")
     .eq("clerk_user_id", userId)
     .maybeSingle();
 
@@ -266,7 +266,7 @@ export async function getProfileAccessProfile(userId) {
     accountType: data?.account_type === ACCOUNT_TYPES.INSTITUTE_ADMIN
       ? ACCOUNT_TYPES.INSTITUTE_ADMIN
       : ACCOUNT_TYPES.STUDENT,
-    examTrack: normalizeExamTrack(data?.current_track || data?.exam),
+    examTrack: normalizeExamTrack(data?.exam),
   };
 }
 

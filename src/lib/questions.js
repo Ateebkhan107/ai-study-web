@@ -2,6 +2,10 @@ import { supabase } from "@/lib/supabase";
 import { allocateQuestionCounts } from "@/lib/questionDistribution";
 import { getChapterTargets } from "@/lib/pyqChapterMapping";
 
+// Keep the public questions API compatible for test/institute routes that use
+// the shared chapter alias expansion.
+export { getChapterTargets };
+
 // Chapter alias mapping to ensure frontend chapter selections match all DB variations
 export const CHAPTER_ALIASES = {
   // Physics
