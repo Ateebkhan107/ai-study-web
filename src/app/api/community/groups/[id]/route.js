@@ -23,8 +23,15 @@ export async function GET(request, { params }) {
   if (!group) return NextResponse.json({ error: "Group not found" }, { status: 404 });
 
   const membership = await isGroupMember(id, userId);
+  const { count: activeMemberCount, error: countError } = await supabaseAdmin
+    .from("community_group_members")
+    .select("id", { count: "exact", head: true })
+    .eq("group_id", id)
+    .eq("status", "ACTIVE");
 
-  return NextResponse.json({ group, membership });
+  if (countError) return NextResponse.json({ error: "Server error" }, { status: 500 });
+
+  return NextResponse.json({ group: { ...group, member_count: activeMemberCount || 0 }, membership });
 }
 
 // ─── PATCH /api/community/groups/[id] ────────────────────────────────────────

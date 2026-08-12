@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import PageWrapper from "@/components/PageWrapper";
 import GroupPage from "@/components/community/GroupPage";
 
 export const metadata = {
@@ -18,7 +16,7 @@ export default async function GroupDetailPage({ params }) {
   const { id } = await params;
 
   return (
-    <div className="h-[calc(100vh-4rem)] flex flex-col">
+    <div className="flex h-[calc(100dvh-6.5rem)] min-h-[520px] flex-col">
       <GroupPage groupId={id} currentUserId={userId} currentUserName={userName} />
     </div>
   );

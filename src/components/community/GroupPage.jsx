@@ -130,19 +130,19 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
 
   return (
-    <div className="mx-auto flex h-full max-h-[calc(100vh-4rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white/70 shadow-sm dark:border-slate-800 dark:bg-slate-950/40 md:rounded-2xl md:border">
-      <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-slate-50/80 p-3 dark:border-slate-800 dark:bg-slate-950/50 md:block">
-        <Link href="/community" className="mb-3 inline-flex items-center gap-2 rounded-xl px-2 py-2 text-xs font-bold text-slate-500 hover:bg-white hover:text-indigo-600 dark:hover:bg-slate-900">
+    <div className="mx-auto flex h-full max-h-full w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white/70 shadow-sm dark:border-slate-800 dark:bg-slate-950/40 md:rounded-2xl md:border">
+      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 p-2.5 dark:border-slate-800 dark:bg-slate-950/50 md:block">
+        <Link href="/community" className="mb-2 inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-500 hover:bg-white hover:text-indigo-600 dark:hover:bg-slate-900">
           <ArrowLeft className="h-4 w-4" />
           Community
         </Link>
         <p className="mb-2 px-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">My Groups</p>
-        <div className="space-y-1">
+        <div className="max-h-[calc(100%-4.5rem)] space-y-1 overflow-y-auto pr-1">
           {myGroups.map((item) => (
             <Link
               key={item.id}
               href={`/community/groups/${item.id}`}
-              className={`block rounded-xl px-3 py-2.5 transition ${
+              className={`block rounded-xl px-3 py-2 transition ${
                 item.id === groupId
                   ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20"
                   : "text-slate-600 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
@@ -152,7 +152,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                 <span className="truncate text-sm font-bold">{item.name}</span>
                 {item.myRole === "OWNER" && <span className="text-[10px] font-bold opacity-80">Owner</span>}
               </div>
-              <p className={`mt-0.5 text-xs ${item.id === groupId ? "text-indigo-100" : "text-slate-400"}`}>{item.member_count ?? 1} members</p>
+              <p className={`mt-0.5 text-xs ${item.id === groupId ? "text-indigo-100" : "text-slate-400"}`}>{item.member_count ?? 0} members</p>
             </Link>
           ))}
         </div>
@@ -160,7 +160,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
 
       <div className="flex min-w-0 flex-1 flex-col">
       {/* Group header */}
-      <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md flex items-center gap-3">
+      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md flex items-center gap-3">
         <Link href="/community" className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <ArrowLeft className="w-4 h-4" />
         </Link>
@@ -178,7 +178,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
             </span>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
-            <Users className="w-3 h-3" /> {group.member_count} members
+            <Users className="w-3 h-3" /> {group.member_count ?? 0} members
             {myRole && <span className="ml-2 text-indigo-500">· {myRole}</span>}
           </p>
         </div>
@@ -214,7 +214,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 id={`group-tab-${tab.toLowerCase()}`}
-                className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap ${
                   activeTab === tab
                     ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                     : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"

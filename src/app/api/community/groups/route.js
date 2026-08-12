@@ -8,6 +8,29 @@ import {
   checkRateLimit,
 } from "@/lib/community/permissions";
 
+async function attachActiveMemberCounts(groups) {
+  const groupIds = (groups || []).map((group) => group.id).filter(Boolean);
+  if (groupIds.length === 0) return groups || [];
+
+  const { data: activeMembers, error } = await supabaseAdmin
+    .from("community_group_members")
+    .select("group_id")
+    .in("group_id", groupIds)
+    .eq("status", "ACTIVE");
+
+  if (error) throw error;
+
+  const countMap = new Map();
+  for (const member of activeMembers || []) {
+    countMap.set(member.group_id, (countMap.get(member.group_id) || 0) + 1);
+  }
+
+  return (groups || []).map((group) => ({
+    ...group,
+    member_count: countMap.get(group.id) || 0,
+  }));
+}
+
 // ─── GET /api/community/groups ────────────────────────────────────────────────
 // List groups for the user's exam track with optional pagination + search
 export async function GET(request) {
@@ -45,7 +68,7 @@ export async function GET(request) {
         myRole: m.role,
       }));
 
-      return NextResponse.json({ groups, page, limit });
+      return NextResponse.json({ groups: await attachActiveMemberCounts(groups), page, limit });
     }
 
     // Discover: groups matching user's exam track (excluding ones they're in)
@@ -78,7 +101,9 @@ export async function GET(request) {
 
     const membershipMap = Object.fromEntries(memberships.map((m) => [m.group_id, m]));
 
-    const enriched = (groups || []).map((g) => ({
+    const groupsWithCounts = await attachActiveMemberCounts(groups || []);
+
+    const enriched = groupsWithCounts.map((g) => ({
       ...g,
       myRole: membershipMap[g.id]?.role || null,
       myStatus: membershipMap[g.id]?.status || null,
@@ -141,7 +166,7 @@ export async function POST(request) {
   try {
     const { data: group, error: groupErr } = await supabaseAdmin
       .from("community_groups")
-      .insert({ name, description: description || null, exam_track: examTrack, privacy, owner_id: userId })
+      .insert({ name, description: description || null, exam_track: examTrack, privacy, owner_id: userId, member_count: 1 })
       .select()
       .single();
 

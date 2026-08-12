@@ -17,7 +17,8 @@ export default function Footer() {
     "/test/session",
     "/pyq/session",
     "/test/result",
-    "/pyq/session/results"
+    "/pyq/session/results",
+    "/community/groups"
   ];
 
   if (hiddenRoutes.some(route => pathname?.includes(route)) || pathname === "/") {

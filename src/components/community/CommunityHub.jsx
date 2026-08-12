@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Users,
-  MessageSquare,
   Plus,
   Search,
   Loader2,
@@ -14,11 +13,10 @@ import {
 import Link from "next/link";
 import GroupCard from "./GroupCard";
 import CreateGroupForm from "./CreateGroupForm";
-import DMInbox from "./DMInbox";
 
-const SECTIONS = ["Discover", "My Groups", "Messages"];
+const SECTIONS = ["Discover", "My Groups"];
 
-export default function CommunityHub({ examTrack, currentUserId }) {
+export default function CommunityHub({ examTrack }) {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState("Discover");
   const [groups, setGroups] = useState([]);
@@ -85,38 +83,38 @@ export default function CommunityHub({ examTrack, currentUserId }) {
   const trackLabel = examTrack === "JEE" ? "JEE" : "NEET";
 
   return (
-    <div className="mx-auto max-w-6xl space-y-5">
+    <div className="mx-auto max-w-6xl space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
+          <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
             <BookOpen className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             <span>{trackLabel}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
             Study Community
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
             Connect, discuss, and study with fellow JEE/NEET aspirants.
           </p>
         </div>
         <button
           onClick={() => setActiveSection("Create Group")}
           id="community-create-group-btn"
-          className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:-translate-y-0.5 transition-all"
+          className="shrink-0 flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-bold text-white shadow-md shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:shadow-indigo-500/30"
         >
           <Plus className="w-4 h-4" /> Create Group
         </button>
       </div>
 
       {/* Nav Tabs */}
-      <div className="flex gap-1 bg-slate-100 dark:bg-slate-800/60 p-1 rounded-xl overflow-x-auto max-w-xl">
+      <div className="flex max-w-xl gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1 dark:bg-slate-800/60">
         {SECTIONS.map((section) => (
           <button
             key={section}
             onClick={() => handleSectionChange(section)}
             id={`community-tab-${section.toLowerCase().replace(/\s/g, "-")}`}
-            className={`shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+	            className={`shrink-0 flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-all ${
               activeSection === section
                 ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -124,7 +122,6 @@ export default function CommunityHub({ examTrack, currentUserId }) {
           >
             {section === "Discover" && <Users className="w-3.5 h-3.5" />}
             {section === "My Groups" && <BookOpen className="w-3.5 h-3.5" />}
-            {section === "Messages" && <MessageSquare className="w-3.5 h-3.5" />}
             {section}
           </button>
         ))}
@@ -132,7 +129,7 @@ export default function CommunityHub({ examTrack, currentUserId }) {
 
       {/* ── Discover ──────────────────────────────────────────── */}
       {activeSection === "Discover" && (
-        <div className="space-y-5">
+        <div className="space-y-4">
           <form onSubmit={handleSearch} className="max-w-xl">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -141,7 +138,7 @@ export default function CommunityHub({ examTrack, currentUserId }) {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search groups…"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+	                className="w-full rounded-xl border border-slate-200 bg-white py-2 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-white"
               />
             </div>
           </form>
@@ -162,7 +159,7 @@ export default function CommunityHub({ examTrack, currentUserId }) {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {groups.map((g) => (
                   <GroupCard
                     key={g.id}
@@ -200,7 +197,7 @@ export default function CommunityHub({ examTrack, currentUserId }) {
 
       {/* ── My Groups ──────────────────────────────────────────── */}
       {activeSection === "My Groups" && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {loadingMine ? (
             <div className="flex justify-center py-12">
               <Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
@@ -217,12 +214,12 @@ export default function CommunityHub({ examTrack, currentUserId }) {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {myGroups.map((g) => (
                 <Link
                   key={g.id}
                   href={`/community/groups/${g.id}`}
-                  className="glass-card p-5 flex items-center justify-between gap-3 hover:shadow-lg hover:shadow-indigo-500/10 transition-all"
+                  className="glass-card flex items-center justify-between gap-3 p-4 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -231,7 +228,7 @@ export default function CommunityHub({ examTrack, currentUserId }) {
                         <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">Owner</span>
                       )}
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{g.member_count ?? 1} members</p>
+                    <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{g.member_count ?? 0} members</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
                 </Link>
@@ -239,11 +236,6 @@ export default function CommunityHub({ examTrack, currentUserId }) {
             </div>
           )}
         </div>
-      )}
-
-      {/* ── Messages ──────────────────────────────────────────── */}
-      {activeSection === "Messages" && (
-        <DMInbox currentUserId={currentUserId} />
       )}
 
       {/* ── Create Group ──────────────────────────────────────── */}
