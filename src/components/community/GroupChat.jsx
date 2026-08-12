@@ -89,12 +89,23 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
       const token = await session.getToken().catch(() => null);
       if (!token) {
-        console.error("[GROUP_CHAT_REALTIME] Missing Clerk session token");
+        console.warn("[GROUP_CHAT_REALTIME] Missing Clerk session token");
         return;
       }
 
-      await supabase.realtime.setAuth();
+      await supabase.realtime.setAuth(token);
       if (cancelled) return;
+
+      const { error: rlsProbeError } = await supabase
+        .from("community_group_messages")
+        .select("id")
+        .eq("group_id", groupId)
+        .limit(1);
+      console.log("[GROUP_CHAT_REALTIME_RLS_PROBE]", {
+        groupId,
+        ok: !rlsProbeError,
+        error: rlsProbeError?.message || null,
+      });
 
       // Clean up existing channels
       if (channelRef.current) {
@@ -110,6 +121,17 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       const msgChannel = supabase
         .channel(`group-chat-${groupId}`)
         .on(
+          "system",
+          {},
+          (payload) => {
+            console.log("[GROUP_CHAT_REALTIME_SYSTEM]", {
+              extension: payload.extension,
+              status: payload.status,
+              message: payload.message,
+            });
+          }
+        )
+        .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
           async (payload) => {
@@ -122,7 +144,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
               if (cancelled || !hydrated) return;
               setMessages((prev) => mergeMessages(prev, [hydrated]));
             } catch (err) {
-              console.error("[GROUP_CHAT_REALTIME_HYDRATE]", err);
+              console.warn("[GROUP_CHAT_REALTIME_HYDRATE]", err);
               if (cancelled) return;
               setMessages((prev) =>
                 mergeMessages(prev, [
@@ -144,7 +166,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
           console.log(`[GROUP_CHAT_REALTIME:${groupId}]`, status);
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
-            console.error("[GROUP_CHAT_REALTIME_STATUS]", {
+            console.warn("[GROUP_CHAT_REALTIME_STATUS]", {
               groupId,
               status,
               table: "community_group_messages",

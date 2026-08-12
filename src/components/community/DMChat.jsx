@@ -67,11 +67,11 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
       const token = await session.getToken().catch(() => null);
       if (!token) {
-        console.error("[DM_CHAT_REALTIME] Missing Clerk session token");
+        console.warn("[DM_CHAT_REALTIME] Missing Clerk session token");
         return;
       }
 
-      await supabase.realtime.setAuth();
+      await supabase.realtime.setAuth(token);
       if (cancelled) return;
 
       channel = supabase
