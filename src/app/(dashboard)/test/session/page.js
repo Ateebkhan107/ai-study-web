@@ -202,6 +202,7 @@ function TestSessionContent() {
   const durationParam = Number(searchParams.get("duration")) || 30;
   const countParam = Number(searchParams.get("count")) || 20;
   const mode = searchParams.get("mode") || "custom";
+  const labelParam = searchParams.get("label") || "";
   const subjectParam = searchParams.get("subjects") || searchParams.get("subject") || "Mixed Subjects";
   const chapterParam = searchParams.get("chapters") || searchParams.get("chapter") || "All Chapters";
   const difficultyParam = searchParams.get("difficulty") || "Mixed";
@@ -240,6 +241,7 @@ function TestSessionContent() {
             chapter: chapterParam,
             difficulty: difficultyParam,
             mode,
+            label: labelParam,
             sourceType: sourceTypeParam,
             instituteSlug: instituteSlugParam,
             instituteTestId: instituteTestIdParam,
@@ -268,7 +270,7 @@ function TestSessionContent() {
       }
     }
     loadQuestions();
-  }, [subjectParam, chapterParam, difficultyParam, mode, sourceTypeParam, instituteSlugParam, instituteTestIdParam, countParam, durationParam, user]);
+  }, [subjectParam, chapterParam, difficultyParam, mode, labelParam, sourceTypeParam, instituteSlugParam, instituteTestIdParam, countParam, durationParam, user]);
 
   const handleSubmit = useCallback(async () => {
     if (finishing) return;

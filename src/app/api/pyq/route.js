@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
 import { getChapterTargets, getSubjectTargets } from "@/lib/pyqChapterMapping";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -217,6 +218,29 @@ export async function GET(req) {
   const shift = searchParams.get("shift");
   const paperCode = searchParams.get("paper_code");
   const examId = searchParams.get("exam_id");
+
+  if (mode === "chapter" || mode === "mistakes") {
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const access = await getUserAccessContext({ userId });
+    const feature = mode === "chapter" ? FEATURES.PYQ_CHAPTER : FEATURES.PYQ_MISTAKES;
+    const permission = canUseFeature(access, feature);
+
+    if (!permission.allowed) {
+      return NextResponse.json(
+        {
+          error: "PRO_REQUIRED",
+          message: mode === "chapter"
+            ? "Chapter Wise PYQ is available with PrepZii Pro."
+            : "Mistakes redo is available with PrepZii Pro.",
+          upgradeUrl: permission.upgradeUrl || "/pro",
+        },
+        { status: 403 }
+      );
+    }
+  }
 
   if (mode === "mistakes") {
     if (!userId) return NextResponse.json([]);

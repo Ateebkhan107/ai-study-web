@@ -101,6 +101,10 @@ const QUICK_OPTIONS = [
   },
 ];
 
+function isDailyWarmup(option) {
+  return option.label === "Daily Warmup";
+}
+
 // 1. Accept the parent track context (defaults to "jee" for fallback safety)
 export default function QuickTest({ track = "jee", isPro = false }) {
   const router = useRouter();
@@ -114,7 +118,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
   );
 
   const handleLaunch = (option) => {
-    if (option.isPro && !isPro) {
+    if (!isPro && !isDailyWarmup(option)) {
       router.push("/pro");
       return;
     }
@@ -141,69 +145,76 @@ export default function QuickTest({ track = "jee", isPro = false }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* 3. Map across filteredOptions instead of the global array */}
         {filteredOptions.map((option) => (
-          <button
-            key={option.label}
-            onClick={() => handleLaunch(option)}
-            disabled={launching === option.label}
-            className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
-              ${option.isPro && !isPro
-                ? "border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 opacity-60 cursor-not-allowed"
-                : launching === option.label
-                ? "border-black dark:border-white bg-black dark:bg-white scale-95"
-                : "border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
-              }`}
-          >
-            {/* Tag */}
-            {option.tag && (
-              <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide
-                ${option.tag === "PRO"
-                  ? "bg-[#1e3a5f] text-white"
-                  : option.tag === "Popular"
-                  ? "bg-black dark:bg-white text-white dark:text-black"
-                  : option.tag === "Hard"
-                  ? "bg-red-500 text-white"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
-                }`}
+          (() => {
+            const locked = !isPro && !isDailyWarmup(option);
+            const tag = locked ? "PRO" : option.tag;
+
+            return (
+              <button
+                key={option.label}
+                onClick={() => handleLaunch(option)}
+                disabled={launching === option.label}
+                className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
+                  ${locked
+                    ? "border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 opacity-75 hover:opacity-100 hover:border-indigo-300 dark:hover:border-indigo-500/50"
+                    : launching === option.label
+                    ? "border-black dark:border-white bg-black dark:bg-white scale-95"
+                    : "border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
+                  }`}
               >
-                {option.tag}
-              </span>
-            )}
+                {/* Tag */}
+                {tag && (
+                  <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide
+                    ${tag === "PRO"
+                      ? "bg-[#1e3a5f] text-white"
+                      : tag === "Popular"
+                      ? "bg-black dark:bg-white text-white dark:text-black"
+                      : tag === "Hard"
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                    }`}
+                  >
+                    {tag}
+                  </span>
+                )}
 
-            <span className="mb-3 flex items-center">{option.icon}</span>
+                <span className="mb-3 flex items-center">{option.icon}</span>
 
-            <p className={`text-sm font-black mb-1 transition-colors
-              ${launching === option.label
-                ? "text-white dark:text-black"
-                : "text-black dark:text-white"
-              }`}
-            >
-              {option.label}
-            </p>
-            <p className={`text-xs transition-colors
-              ${launching === option.label
-                ? "text-white/70 dark:text-black/70"
-                : "text-gray-400"
-              }`}
-            >
-              {activeTrack === "neet" ? option.descNeet : option.descJee}
-            </p>
+                <p className={`text-sm font-black mb-1 transition-colors
+                  ${launching === option.label
+                    ? "text-white dark:text-black"
+                    : "text-black dark:text-white"
+                  }`}
+                >
+                  {option.label}
+                </p>
+                <p className={`text-xs transition-colors
+                  ${launching === option.label
+                    ? "text-white/70 dark:text-black/70"
+                    : "text-gray-400"
+                  }`}
+                >
+                  {activeTrack === "neet" ? option.descNeet : option.descJee}
+                </p>
 
-            {launching === option.label && (
-              <div className="mt-3 flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "0ms" }} />
-                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "150ms" }} />
-                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "300ms" }} />
-              </div>
-            )}
+                {launching === option.label && (
+                  <div className="mt-3 flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "300ms" }} />
+                  </div>
+                )}
 
-            {option.isPro && !isPro && (
-              <span
-                className="mt-3 rounded-lg bg-slate-900 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950"
-              >
-                Upgrade to Pro
-              </span>
-            )}
-          </button>
+                {locked && (
+                  <span
+                    className="mt-3 rounded-lg bg-slate-900 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950"
+                  >
+                    Upgrade to Pro
+                  </span>
+                )}
+              </button>
+            );
+          })()
         ))}
       </div>
     </div>

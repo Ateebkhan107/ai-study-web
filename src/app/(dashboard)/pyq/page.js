@@ -87,6 +87,8 @@ const PRACTICE_MODE_SUMMARY_LABEL = {
   mistakes: "Mistake Revision",
 };
 
+const PRO_ONLY_PRACTICE_MODES = new Set(["chapter", "mistakes"]);
+
 const MASTER_SAVED = []; // Unused, fetching dynamically now
 
 const SUBJECT_BAR_COLORS = {
@@ -164,7 +166,7 @@ function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
 }
 
 // ─── Practice Tab ─────────────────────────────────────────────────────────────
-function PracticeTab({ subjects, track }) {
+function PracticeTab({ subjects, track, isPro }) {
   const router = useRouter();
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedYears,    setSelectedYears]    = useState([]);
@@ -182,6 +184,7 @@ function PracticeTab({ subjects, track }) {
   const [chapterError,    setChapterError]    = useState("");
   const jeeFullMode = track === "jee" && practiceMode === "full";
   const jeeRandomMode = track === "jee" && practiceMode === "random";
+  const selectedModeLocked = PRO_ONLY_PRACTICE_MODES.has(practiceMode) && !isPro;
   const shouldLoadChapters = practiceMode === "chapter" && selectedSubjects.length > 0;
 
   useEffect(() => {
@@ -260,6 +263,11 @@ function PracticeTab({ subjects, track }) {
     selectedShift || (track === "jee" && availableShiftPapers.length === 1 ? availableShiftPapers[0].id : "");
 
   function handleStartDeck() {
+    if (selectedModeLocked) {
+      router.push("/pro");
+      return;
+    }
+
     const subjectLabels = selectedSubjects.length > 0
       ? subjects.filter((s) => selectedSubjects.includes(s.id)).map((s) => s.label)
       : (jeeFullMode || jeeRandomMode)
@@ -424,8 +432,14 @@ function PracticeTab({ subjects, track }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
+              const locked = PRO_ONLY_PRACTICE_MODES.has(m.id) && !isPro;
               return (
                 <button key={m.id} onClick={() => {
+                  if (locked) {
+                    setPracticeMode(m.id);
+                    setSubjectError("");
+                    return;
+                  }
                   setPracticeMode(m.id);
                   if (m.id === "full" && selectedYears.length > 1) {
                     setSelectedYears([selectedYears[0]]);
@@ -433,13 +447,24 @@ function PracticeTab({ subjects, track }) {
                 }}
                   className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
                     active
-                      ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                      ? locked
+                        ? "border-indigo-400 bg-indigo-50/40 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-300"
+                        : "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                      : locked
+                        ? "border-dashed border-slate-200 bg-slate-50/80 text-slate-400 dark:border-slate-700 dark:bg-slate-800/30 dark:text-slate-500"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
                   <m.Icon size={20} className="shrink-0 mt-0.5" />
-                  <span>
-                    <span className="block text-sm font-semibold">{m.label}</span>
+                  <span className="min-w-0">
+                    <span className="flex flex-wrap items-center gap-2 text-sm font-semibold">
+                      {m.label}
+                      {locked && (
+                        <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950">
+                          Pro
+                        </span>
+                      )}
+                    </span>
                     <span className="block text-xs mt-0.5 opacity-80">{m.description}</span>
                   </span>
                 </button>
@@ -493,6 +518,11 @@ function PracticeTab({ subjects, track }) {
               {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
             </p>
             <p className={`text-xs ${TXT_MUTED}`}>Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}</p>
+            {selectedModeLocked && (
+              <p className="text-xs font-semibold text-indigo-500 dark:text-indigo-300">
+                Upgrade to Pro to use this PYQ mode.
+              </p>
+            )}
             {track === "jee" && practiceMode === "full" && effectiveSelectedAttempt && (
               <p className={`text-xs ${TXT_MUTED}`}>Attempt: {effectiveSelectedAttempt}</p>
             )}
@@ -511,7 +541,7 @@ function PracticeTab({ subjects, track }) {
           <button onClick={handleStartDeck}
             className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 text-sm cursor-pointer transition-all duration-300"
           >
-            <I.Play size={14} /> Start Focused Deck
+            <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start Focused Deck"}
           </button>
 
           {subjectError && <p className="text-xs text-red-500 font-medium">{subjectError}</p>}
@@ -654,6 +684,7 @@ export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
   const [track, setTrack] = useState(null);
+  const [access, setAccess] = useState(null);
 
   useEffect(() => {
     async function loadTrack() {
@@ -670,6 +701,27 @@ export default function PYQPage() {
       setTrack(data?.exam === "NEET" ? "neet" : "jee");
     }
     loadTrack();
+  }, [user]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadAccess() {
+      if (!user) return;
+
+      const response = await fetch("/api/access", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+      if (!cancelled) {
+        setAccess(data);
+      }
+    }
+
+    loadAccess();
+    return () => { cancelled = true; };
   }, [user]);
 
   const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
@@ -796,7 +848,7 @@ export default function PYQPage() {
       </section>
 
       {/* Tab panels */}
-      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} />}
+      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} isPro={Boolean(access?.isPro)} />}
       {activeTab === "analytics" && (
         <AnalyticsTab
           analytics={pyqAnalytics}

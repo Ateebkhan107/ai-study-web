@@ -346,6 +346,7 @@ export async function POST(request) {
       chapter = "All Chapters",
       difficulty = "Mixed",
       mode = "custom",
+      label = "",
       sourceType,
       instituteSlug,
       instituteTestId,
@@ -365,6 +366,14 @@ export async function POST(request) {
     const exam = String(track).toUpperCase().startsWith("NEET") ? "NEET" : "JEE Main";
     const normalizedSourceType = sourceType === "PREPZII_PRACTICE" ? sourceType : null;
     const normalizedMode = String(mode || "custom").toLowerCase();
+    const normalizedLabel = String(label || "").trim().toLowerCase();
+    const numericCount = Number(count);
+    const numericDuration = Number(duration);
+    const isDailyWarmup =
+      normalizedMode === "quick" &&
+      normalizedLabel === "daily warmup" &&
+      numericCount <= 10 &&
+      numericDuration <= 10;
 
     let instituteTest = null;
     let fetchedQuestions = [];
@@ -414,14 +423,14 @@ export async function POST(request) {
         }
       }
 
-      if (normalizedMode === "quick" && (Number(count) > 60 || Number(duration) > 60)) {
-        const permission = canUseFeature(access, FEATURES.PREMIUM_MOCK_TEST);
+      if (normalizedMode === "quick") {
+        const permission = canUseFeature(access, isDailyWarmup ? FEATURES.DAILY_WARMUP : FEATURES.QUICK_TEST);
 
         if (!permission.allowed) {
           return NextResponse.json(
             {
               error: "PRO_REQUIRED",
-              message: "Full-length mock tests are available with PrepZii Pro.",
+              message: "Quick tests are available with PrepZii Pro. Daily Warmup stays free.",
               upgradeUrl: permission.upgradeUrl || "/pro",
             },
             { status: 403 }
