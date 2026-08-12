@@ -1,5 +1,15 @@
+export function getLevelTitle(level) {
+  if (level >= 10) return "Grandmaster";
+  if (level >= 8) return "Master";
+  if (level >= 6) return "Elite";
+  if (level >= 4) return "Expert";
+  if (level >= 2) return "Challenger";
+  return "Explorer";
+}
+
 export function getLevelFromXP(totalXP) {
-  const xp = Math.max(0, totalXP);
+  const numericXP = Number(totalXP);
+  const xp = Number.isFinite(numericXP) ? Math.max(0, numericXP) : 0;
   
   // Pre-defined thresholds matching the progressive example
   const baseThresholds = [0, 500, 1200, 2200, 3500, 5000];
@@ -41,6 +51,7 @@ export function getLevelFromXP(totalXP) {
 
   return {
     currentLevel,
+    title: getLevelTitle(currentLevel),
     currentLevelXP,
     nextLevelXP,
     progressPercentage,

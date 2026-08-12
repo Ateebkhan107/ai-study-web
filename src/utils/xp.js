@@ -8,16 +8,6 @@ import { evaluateUserBadges } from "@/utils/badgeEngine";
 
 import { getLevelFromXP } from "@/utils/levelEngine";
 
-// Helper for title badge based on level
-function getLevelBadge(level) {
-  if (level >= 10) return "Grandmaster";
-  if (level >= 8) return "Master";
-  if (level >= 6) return "Elite";
-  if (level >= 4) return "Expert";
-  if (level >= 2) return "Challenger";
-  return "Explorer";
-}
-
 
 
 // ==============================
@@ -79,7 +69,7 @@ amount;
 
 
 const levelStats = getLevelFromXP(newXP);
-const badgeTitle = getLevelBadge(levelStats.currentLevel);
+const badgeTitle = levelStats.title;
 
 // update / create xp row
 const {error:updateError}=await supabase

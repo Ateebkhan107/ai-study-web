@@ -217,8 +217,7 @@ export async function GET() {
         levelStats.currentLevel,
 
 
-      badge:
-        xpData?.badge || "Explorer",
+      badge: levelStats.title,
 
 
       progress:

@@ -4,28 +4,28 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
-import { Check, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
+import { Check, X, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
 
 const FREE_FEATURES = [
-  "20 questions per test",
-  "Basic chapter-wise tests",
-  "5 PYQ papers per month",
-  "Basic performance stats",
-  "Daily goals (3 goals)",
-  "Formula cards (limited)",
+  { text: "Full-paper, random and saved PYQ practice", included: true },
+  { text: "Daily Warmup", included: true },
+  { text: "2 custom tests per month", included: true },
+  { text: "Global leaderboard and community", included: true },
+  { text: "Chapter-wise PYQs and mistake redo", included: false },
+  { text: "Quick tests and premium full mock tests", included: false },
+  { text: "Advanced and PYQ analytics", included: false },
+  { text: "Formula handbooks and AI explanations", included: false },
 ];
 
 const PRO_FEATURES = [
-  { text: "Unlimited questions per test", hot: false },
-  { text: "Full JEE & NEET mock tests", hot: true },
-  { text: "All PYQ papers (2000–2024)", hot: true },
-  { text: "Advanced analytics & weak area detection", hot: true },
-  { text: "AI-powered personalised study plan", hot: true },
-  { text: "Unlimited formula cards", hot: false },
-  { text: "Detailed solution explanations", hot: false },
-  { text: "Performance vs toppers comparison", hot: false },
-  { text: "Priority support", hot: false },
-  { text: "Early access to new features", hot: false },
+  { text: "Everything included in Free", hot: false },
+  { text: "Unlimited custom tests", hot: true },
+  { text: "Quick tests and premium full-length mock tests", hot: true },
+  { text: "Chapter-wise PYQs and mistake redo", hot: true },
+  { text: "PYQ analytics and revision insights", hot: true },
+  { text: "Advanced analytics, trends and weak-area detection", hot: true },
+  { text: "Complete formula handbooks", hot: false },
+  { text: "AI-powered question explanations", hot: false },
 ];
 
 const PLANS = [
@@ -308,7 +308,7 @@ export default function ProPage() {
           <div className="glass-card p-6">
             <div className="mb-5">
               <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                Current plan
+                Free plan
               </span>
               <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1">
                 Free
@@ -320,11 +320,17 @@ export default function ProPage() {
 
             <div className="space-y-3">
               {FREE_FEATURES.map((f) => (
-                <div key={f} className="flex items-start gap-3">
+                <div key={f.text} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 text-slate-400 dark:text-slate-500" />
+                    {f.included ? (
+                      <Check className="w-3 h-3 text-emerald-500" />
+                    ) : (
+                      <X className="w-3 h-3 text-rose-400" />
+                    )}
                   </div>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">{f}</span>
+                  <span className={`text-sm ${f.included ? "text-slate-500 dark:text-slate-400" : "text-slate-400 line-through dark:text-slate-600"}`}>
+                    {f.text}
+                  </span>
                 </div>
               ))}
             </div>
@@ -346,7 +352,7 @@ export default function ProPage() {
             <div className="relative">
               <div className="mb-5">
                 <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
-                  Upgrade to
+                  Pro includes
                 </span>
                 <h3 className="text-xl font-black text-white mt-1 flex items-center gap-2">
                   {selectedTrack} PRO

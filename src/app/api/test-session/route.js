@@ -158,18 +158,7 @@ async function addXpWithAdmin(userId, amount, name = "Student", stats = {}) {
   const newXP = (data?.xp || 0) + amount;
   const levelStats = getLevelFromXP(newXP);
 
-  const badgeTitle =
-    levelStats.currentLevel >= 10
-      ? "Grandmaster"
-      : levelStats.currentLevel >= 8
-      ? "Master"
-      : levelStats.currentLevel >= 6
-      ? "Elite"
-      : levelStats.currentLevel >= 4
-      ? "Expert"
-      : levelStats.currentLevel >= 2
-      ? "Challenger"
-      : "Explorer";
+  const badgeTitle = levelStats.title;
 
   const { error: updateError } = await supabaseAdmin
     .from("user_xp")

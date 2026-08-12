@@ -1,95 +1,9 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getLevelFromXP } from "@/utils/levelEngine";
 
 
 // PREPZII XP JOURNEY SYSTEM
-
-function getLevel(xp) {
-
-
-  if (xp >= 10000) {
-
-    return {
-
-      level: "Legend",
-      badge: "Legend",
-      progress: 100,
-
-    };
-
-  }
-
-
-
-
-  if (xp >= 5000) {
-
-    return {
-
-      level: "Master",
-      badge: "Master",
-      progress: Math.floor(
-        ((xp - 5000) / 5000) * 100
-      ),
-
-    };
-
-  }
-
-
-
-
-  if (xp >= 2000) {
-
-    return {
-
-      level: "Achiever",
-      badge: "Achiever",
-      progress: Math.floor(
-        ((xp - 2000) / 3000) * 100
-      ),
-
-    };
-
-  }
-
-
-
-
-  if (xp >= 500) {
-
-    return {
-
-      level: "Scholar",
-      badge: "Scholar",
-      progress: Math.floor(
-        ((xp - 500) / 1500) * 100
-      ),
-
-    };
-
-  }
-
-
-
-
-  return {
-
-    level: "Explorer",
-    badge: "Explorer",
-    progress: Math.floor(
-      (xp / 500) * 100
-    ),
-
-  };
-
-
-}
-
-
-
-
-
 
 export async function GET() {
 
@@ -154,7 +68,7 @@ export async function GET() {
     data.map((user,index)=>{
 
 
-      const levelData = getLevel(
+      const levelData = getLevelFromXP(
         user.xp || 0
       );
 
@@ -187,13 +101,13 @@ export async function GET() {
 
         // LEVEL SYSTEM
 
-        level:levelData.level,
+        level:levelData.currentLevel,
 
 
-        badge:levelData.badge,
+        badge:levelData.title,
 
 
-        progress:levelData.progress,
+        progress:levelData.progressPercentage,
 
 
       };

@@ -200,7 +200,7 @@ export default function Leaderboard({ compact = false }) {
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
                       <Shield className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       <span className="text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-300 uppercase">
-                        {user.badge} <span className="opacity-60">Lvl {getLevelFromXP(user.xp).currentLevel}</span>
+                        {getLevelFromXP(user.xp).title} <span className="opacity-60">Lvl {getLevelFromXP(user.xp).currentLevel}</span>
                       </span>
                     </div>
                   </div>

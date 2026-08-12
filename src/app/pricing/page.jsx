@@ -27,8 +27,8 @@ export default function PricingPage() {
           </h1>
 
           <p className="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
-            Unlock {examTrack} learning, unlimited tests, premium PYQs,
-            advanced analytics and much more. Your subscription applies only to {examTrack}.
+            Unlock premium {examTrack} tests, PYQ tools, analytics, formula handbooks,
+            and AI explanations. Your subscription applies only to {examTrack}.
           </p>
 
         </div>
@@ -46,12 +46,12 @@ export default function PricingPage() {
             plan="monthly"
             examTrack={examTrack}
             features={[
-              "Unlimited Tests",
-              "Unlimited PYQs",
-              "AI Doubt Solver",
-              "AI Solutions",
-              "Premium Analytics",
-              "Priority Support",
+              "Unlimited custom tests",
+              "Quick tests and premium full mock tests",
+              "Chapter-wise PYQs and mistake redo",
+              "Advanced and PYQ analytics",
+              "Complete formula handbooks",
+              "AI-powered question explanations",
             ]}
           />
 
@@ -66,10 +66,8 @@ export default function PricingPage() {
             popular={true}
             features={[
               "Everything in Monthly",
-      "Save ₹370 from the original price",
-              "Unlimited AI Usage",
-              "Priority Support",
-              "Early Feature Access",
+              "Save ₹370 from the original price",
+              "3 months of Pro access",
             ]}
           />
 
@@ -83,9 +81,8 @@ export default function PricingPage() {
             examTrack={examTrack}
             features={[
               "Everything in Quarterly",
-      "Save ₹1,400 from the original price",
-              "Best Value",
-              "Unlimited Everything",
+              "Save ₹1,400 from the original price",
+              "12 months of Pro access",
             ]}
           />
 
@@ -105,11 +102,11 @@ export default function PricingPage() {
               <div className="text-4xl text-indigo-500 mb-2 flex items-center"><Bot className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
-                AI Doubt Solver
+                AI Explanations
               </h3>
 
               <p className="mt-2 text-sm text-gray-500">
-                Instant AI explanations for every question.
+                Get AI-powered help with supported practice questions.
               </p>
             </div>
 
@@ -129,11 +126,11 @@ export default function PricingPage() {
               <div className="text-4xl text-rose-500 mb-2 flex items-center"><FileText className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
-                Unlimited Tests
+                Unlimited Custom Tests
               </h3>
 
               <p className="mt-2 text-sm text-gray-500">
-                Practice without limits.
+                Build custom tests without the Free plan&apos;s monthly limit.
               </p>
             </div>
 
@@ -141,11 +138,11 @@ export default function PricingPage() {
               <div className="text-4xl text-violet-500 mb-2 flex items-center"><BookOpen className="w-10 h-10" /></div>
 
               <h3 className="mt-3 font-bold">
-                Premium PYQs
+                Premium PYQ Tools
               </h3>
 
               <p className="mt-2 text-sm text-gray-500">
-                Access all previous year questions.
+                Unlock chapter practice, mistake redo, analytics, and revision insights.
               </p>
             </div>
 

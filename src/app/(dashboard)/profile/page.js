@@ -250,7 +250,7 @@ export default function ProfilePage() {
             <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               {/* BADGE */}
               <div className="min-h-14 min-w-0 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-indigo-500/20 sm:min-w-[120px]">
-                {activeUser.badge}
+                {levelStats.title}
               </div>
 
               <div className="min-w-0">
