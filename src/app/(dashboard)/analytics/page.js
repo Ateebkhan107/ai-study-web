@@ -162,8 +162,8 @@ export default function AnalyticsPage() {
       badge="Analytics Dashboard"
     >
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="max-w-full overflow-x-auto rounded-xl border border-slate-200/60 bg-white/70 p-1 shadow-sm backdrop-blur-xl dark:border-slate-700/50 dark:bg-[#0f172a]/60 sm:inline-flex">
-          <div className="flex min-w-max items-center gap-1">
+        <div className="w-full rounded-xl border border-slate-200/60 bg-white/70 p-1 shadow-sm backdrop-blur-xl dark:border-slate-700/50 dark:bg-[#0f172a]/60 sm:inline-flex sm:w-auto sm:max-w-full sm:overflow-x-auto">
+          <div className="grid w-full grid-cols-4 items-center gap-0.5 sm:flex sm:min-w-max sm:gap-1">
             {TABS.map((tab) => {
               const active = activeTab === tab.id;
               return (
@@ -171,14 +171,14 @@ export default function AnalyticsPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex shrink-0 items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                  className={`flex min-w-0 items-center justify-center gap-1 rounded-lg px-1.5 py-2 text-[10.5px] font-semibold transition-all duration-200 sm:shrink-0 sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm ${
                     active
                       ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
                       : "text-slate-500 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-200"
                   }`}
                 >
-                  <tab.Icon size={14} />
-                  {tab.label}
+                  <tab.Icon className="hidden h-3.5 w-3.5 shrink-0 sm:inline" size={14} />
+                  <span className="min-w-0 truncate">{tab.label}</span>
                 </button>
               );
             })}

@@ -19,7 +19,8 @@ export async function GET() {
       xp,
       pyq_solved,
       correct_answers,
-      accuracy
+      accuracy,
+      updated_at
       `
     )
 
@@ -63,9 +64,36 @@ export async function GET() {
 
 
 
+  const dedupedUsers = [];
+  const usersById = new Map();
+
+  for (const user of data || []) {
+    const userId = String(user.user_id || "").trim();
+    if (!userId) continue;
+
+    const existing = usersById.get(userId);
+    const userXp = Number(user.xp) || 0;
+    const existingXp = Number(existing?.xp) || 0;
+    const userUpdatedAt = user.updated_at ? new Date(user.updated_at).getTime() : Number.MAX_SAFE_INTEGER;
+    const existingUpdatedAt = existing?.updated_at ? new Date(existing.updated_at).getTime() : Number.MAX_SAFE_INTEGER;
+
+    if (!existing || userXp > existingXp || (userXp === existingXp && userUpdatedAt < existingUpdatedAt)) {
+      usersById.set(userId, user);
+    }
+  }
+
+  dedupedUsers.push(...usersById.values());
+  dedupedUsers.sort((a, b) => {
+    const xpDiff = (Number(b.xp) || 0) - (Number(a.xp) || 0);
+    if (xpDiff !== 0) return xpDiff;
+    const aUpdatedAt = a.updated_at ? new Date(a.updated_at).getTime() : Number.MAX_SAFE_INTEGER;
+    const bUpdatedAt = b.updated_at ? new Date(b.updated_at).getTime() : Number.MAX_SAFE_INTEGER;
+    return aUpdatedAt - bUpdatedAt;
+  });
+
   const leaderboard =
 
-    data.map((user,index)=>{
+    dedupedUsers.map((user,index)=>{
 
 
       const levelData = getLevelFromXP(

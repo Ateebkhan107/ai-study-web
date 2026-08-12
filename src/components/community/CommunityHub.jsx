@@ -166,13 +166,18 @@ export default function CommunityHub({ examTrack }) {
                     group={g}
                     myRole={g.myRole}
                     myStatus={g.myStatus}
-                    onJoin={(groupId, status) => {
-                      setGroups((prev) => prev.map((item) => (
-                        item.id === groupId
-                          ? { ...item, myStatus: status === "joined" ? "ACTIVE" : "PENDING", myRole: status === "joined" ? "MEMBER" : item.myRole }
-                          : item
-                      )));
-                    }}
+	                    onJoin={(groupId, status) => {
+	                      setGroups((prev) => prev.map((item) => (
+	                        item.id === groupId
+	                          ? {
+	                              ...item,
+	                              member_count: status === "joined" ? (item.member_count || 0) + 1 : item.member_count,
+	                              myStatus: status === "joined" ? "ACTIVE" : "PENDING",
+	                              myRole: status === "joined" ? "MEMBER" : item.myRole,
+	                            }
+	                          : item
+	                      )));
+	                    }}
                   />
                 ))}
               </div>

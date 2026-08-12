@@ -66,6 +66,24 @@ body {
   max-width: 100%;
 }
 
+@media (max-width: 480px) {
+  html {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

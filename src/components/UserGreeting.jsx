@@ -48,7 +48,7 @@ export default function UserGreeting() {
 
   return (
     <div className="group relative inline-flex items-center py-1 sm:py-1.5">
-      <h1 className="flex flex-wrap items-center gap-2 text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 sm:text-4xl lg:text-5xl">
+      <h1 className="flex flex-wrap items-center gap-1.5 text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 sm:gap-2 sm:text-4xl lg:text-5xl">
         
         <span className="opacity-90">Hey,</span>
         
@@ -58,7 +58,7 @@ export default function UserGreeting() {
 
         {/* ── Animating Premium Icon ── */}
         <div className="relative ml-1 flex items-center justify-center">
-          <Sparkles className="h-7 w-7 text-amber-500 opacity-80 dark:text-amber-400 sm:h-8 sm:w-8 lg:h-10 lg:w-10" strokeWidth={2} />
+          <Sparkles className="h-6 w-6 text-amber-500 opacity-80 dark:text-amber-400 sm:h-8 sm:w-8 lg:h-10 lg:w-10" strokeWidth={2} />
         </div>
 
       </h1>

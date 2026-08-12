@@ -43,7 +43,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* ── Main Content Area (z-10 forces it above the dots) ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-4 sm:space-y-5 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-3 px-3 py-3 sm:space-y-5 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
         
         {/* Header Section */}
         <div className="relative space-y-1">
@@ -51,29 +51,29 @@ export default async function DashboardPage() {
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
-            <p className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest sm:text-[11px]">
               {activeTrackKey === "NEET"
                 ? "Future Doctor 🩺"
                 : "Future Engineer 🚀"}
             </p>
           </div>
 
-          <div className="break-words text-3xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+          <div className="break-words text-2xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
             <UserGreeting />
           </div>
 
           <div className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <TrendingUp className="w-4 h-4 text-indigo-500" />
-            <span className="text-sm font-medium">
+            <span className="text-xs font-medium sm:text-sm">
               Keep improving every day
             </span>
           </div>
         </div>
 
         {/* Grid Components */}
-        <div className="relative z-10 grid gap-4 sm:gap-5 lg:gap-6">
+        <div className="relative z-10 grid gap-3 sm:gap-5 lg:gap-6">
           
-          <section className="grid min-w-0 grid-cols-1 gap-4 transition-all duration-700 ease-out lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-stretch">
+          <section className="grid min-w-0 grid-cols-1 gap-3 transition-all duration-700 ease-out sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-stretch">
             <div className="min-w-0 transform transition-all duration-700 ease-out hover:-translate-y-0.5">
               <DailyGoals compact />
             </div>

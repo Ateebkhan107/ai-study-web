@@ -72,17 +72,29 @@ export async function getUserRank(userId) {
 export async function initUserLeaderboard(userId, name) {
   if (!userId) return;
 
+  const { data: existingRows, error: existingError } = await supabase
+    .from("user_xp")
+    .select("id")
+    .eq("user_id", userId)
+    .limit(1);
+
+  if (existingError) {
+//     console.log("Error checking user leaderboard:", existingError);
+    return;
+  }
+
+  if (existingRows?.length) return;
+
   const { error } = await supabase
     .from("user_xp")
-    .upsert(
+    .insert(
       {
         user_id: userId,
         name: name || "Student",
         xp: 0,
         level: 1,
         badge: "Explorer",
-      },
-      { onConflict: "user_id", ignoreDuplicates: true }
+      }
     );
 
   if (error) {

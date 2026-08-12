@@ -54,23 +54,23 @@ export default function DailyGoals({ compact = false }) {
 
   return (
     <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-2xl transition-all duration-500 dark:border-slate-800 dark:bg-[#0f172a]/80 ${
-      compact ? "p-4 sm:p-5" : "p-4 sm:p-5 lg:p-6"
+      compact ? "p-3 sm:p-5" : "p-3 sm:p-5 lg:p-6"
     }`}>
 
       {/* ── Header Section ── */}
-      <div className={`relative z-10 flex flex-col justify-between gap-3 sm:flex-row sm:items-center ${
-        compact ? "mb-4" : "mb-5"
+      <div className={`relative z-10 flex flex-col justify-between gap-2.5 sm:flex-row sm:items-center ${
+        compact ? "mb-3 sm:mb-4" : "mb-4 sm:mb-5"
       }`}>
         <div>
           <div className={`inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 dark:border-indigo-500/20 dark:bg-indigo-500/10 ${
-            compact ? "mb-1.5" : "mb-2"
+            compact ? "mb-1" : "mb-1.5 sm:mb-2"
           }`}>
             <Target className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
             <h2 className="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-widest">
               Daily Goals
             </h2>
           </div>
-          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <p className="text-xs font-medium text-slate-500 dark:text-slate-400 sm:text-sm">
             You&apos;ve completed <span className="text-slate-800 dark:text-white font-bold">{completed}</span> out of {goals.length} tasks today.
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function DailyGoals({ compact = false }) {
       </div>
 
       {/* ── Goals Grid ── */}
-      <div className={`relative z-10 grid grid-cols-1 gap-3 ${
+      <div className={`relative z-10 grid grid-cols-1 gap-2.5 sm:gap-3 ${
         compact ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3 lg:gap-4"
       }`}>
         {goals.map((goal, index) => {
@@ -107,7 +107,7 @@ export default function DailyGoals({ compact = false }) {
             <div
               key={goal.id}
               className={`group relative overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-sm ${
-                compact ? "p-3.5 sm:p-4" : "p-4 sm:p-5"
+                  compact ? "p-3 sm:p-4" : "p-3.5 sm:p-5"
               }
                 ${
                   isComplete
@@ -145,7 +145,7 @@ export default function DailyGoals({ compact = false }) {
               </div>
 
               <div className={`relative z-10 space-y-1 ${compact ? "mb-2.5" : "mb-3"}`}>
-                <h3 className={`text-base font-bold leading-snug transition-colors duration-300
+                <h3 className={`text-sm font-bold leading-snug transition-colors duration-300 sm:text-base
                   ${isComplete ? "text-emerald-900 dark:text-emerald-300 line-through decoration-emerald-500/30" : "text-slate-800 dark:text-slate-100"}
                 `}>
                   {goal.title}

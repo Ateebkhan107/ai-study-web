@@ -59,15 +59,6 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: "Failed to join group" }, { status: 500 });
     }
 
-    // Update member count
-    await supabaseAdmin.rpc("increment_community_member_count", { gid: groupId }).catch(() => {
-      // Fallback: manual update
-      supabaseAdmin
-        .from("community_groups")
-        .update({ member_count: supabaseAdmin.raw("member_count + 1"), updated_at: new Date().toISOString() })
-        .eq("id", groupId);
-    });
-
     return NextResponse.json({ status: "joined" }, { status: 200 });
   } else {
     // PRIVATE — check for existing pending request

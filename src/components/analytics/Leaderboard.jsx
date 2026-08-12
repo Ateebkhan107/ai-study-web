@@ -5,6 +5,20 @@ import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 
+function uniqueLeaderboardUsers(users = []) {
+  const usersById = new Map();
+
+  for (const user of users) {
+    const userId = String(user?.user_id || "").trim();
+    if (!userId) continue;
+    if (!usersById.has(userId)) {
+      usersById.set(userId, user);
+    }
+  }
+
+  return [...usersById.values()];
+}
+
 export default function Leaderboard({ compact = false }) {
   const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
@@ -22,7 +36,7 @@ export default function Leaderboard({ compact = false }) {
           throw new Error("Failed to load leaderboard");
         }
 
-        const allUsers = await response.json();
+        const allUsers = uniqueLeaderboardUsers(await response.json());
         const top10 = Array.isArray(allUsers) ? allUsers.slice(0, 10) : [];
         
         // Add rank to top 10 for easier rendering
@@ -134,9 +148,9 @@ export default function Leaderboard({ compact = false }) {
         )}
 
         {(() => {
-          const displayUsers = [...users];
+          const displayUsers = uniqueLeaderboardUsers(users);
 
-          if (currentUserData) {
+          if (currentUserData && !displayUsers.some((user) => user.user_id === currentUserData.user_id)) {
             displayUsers.push(currentUserData);
           }
 

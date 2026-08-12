@@ -551,31 +551,112 @@ function PracticeTab({ subjects, track, isPro }) {
   );
 }
 
-// ─── Analytics Tab ────────────────────────────────────────────────────────────
-function AnalyticsTab({ analytics, loading, loadError }) {
-  if (loading) return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-      {[...Array(3)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
+function formatPercent(value) {
+  return Number.isFinite(Number(value)) ? `${Math.round(Number(value))}%` : "—";
+}
+
+function formatPracticeStreak(days) {
+  const count = Number(days) || 0;
+  return `${count} ${count === 1 ? "day" : "days"}`;
+}
+
+function getChapterStatusClass(status) {
+  if (status === "Strong") {
+    return "border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300";
+  }
+  if (status === "Good") {
+    return "border-indigo-500/20 bg-indigo-500/10 text-indigo-600 dark:text-indigo-300";
+  }
+  if (status === "Needs Practice") {
+    return "border-amber-500/25 bg-amber-500/10 text-amber-600 dark:text-amber-300";
+  }
+  return "border-slate-300/50 bg-slate-100 text-slate-500 dark:border-slate-700/70 dark:bg-slate-800/60 dark:text-slate-400";
+}
+
+function ChapterSummaryCard({ title, chapter, emptyText, actionLabel, onAction, icon: IconComp }) {
+  return (
+    <div className="glass-card p-5">
+      {IconComp && <IconComp size={18} className="mb-3 text-indigo-500 dark:text-indigo-400" />}
+      <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">{title}</p>
+      {chapter ? (
+        <>
+          <p className="text-lg font-bold text-slate-900 dark:text-white">{chapter.chapter}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{formatPercent(chapter.accuracy)} accuracy</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{chapter.attempted} attempted</p>
+          {actionLabel && onAction && (
+            <button
+              onClick={() => onAction(chapter)}
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20"
+            >
+              {actionLabel} <I.ChevronRight size={14} />
+            </button>
+          )}
+        </>
+      ) : (
+        <p className="text-sm text-slate-500 dark:text-slate-400">{emptyText}</p>
+      )}
     </div>
   );
-  if (loadError) return <p className="text-sm text-red-500">{loadError}</p>;
+}
+
+// ─── Analytics Tab ────────────────────────────────────────────────────────────
+function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice, onPracticeChapter }) {
+  if (loading) return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[...Array(4)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
+    </div>
+  );
+  if (loadError) return (
+    <div className="glass-card p-6">
+      <p className="text-base font-bold text-slate-900 dark:text-white">Couldn&apos;t load your PYQ analytics.</p>
+      <p className={`mt-1 text-sm ${TXT_MUTED}`}>{loadError}</p>
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="mt-4 rounded-xl border border-indigo-500/30 px-4 py-2 text-sm font-bold text-indigo-500 transition-colors hover:bg-indigo-500/10 dark:text-indigo-300"
+        >
+          Retry
+        </button>
+      )}
+    </div>
+  );
 
   const attempted = analytics?.attempted ?? 0;
-  const accuracy  = analytics?.accuracy  ?? 0;
   const streak    = analytics?.streak    ?? 0;
   const subjects  = analytics?.subjects  ?? [];
+  const chapters  = analytics?.chapters  ?? [];
+  const strongestChapter = analytics?.strongestChapter ?? null;
+  const needsPracticeChapter = analytics?.needsPracticeChapter ?? null;
+  const minimumChapterAttempts = analytics?.minimumChapterAttempts ?? 5;
 
-  const sortedByAccuracy = [...subjects].sort((a, b) => b.accuracy - a.accuracy);
-  const topSubject     = sortedByAccuracy[0];
-  const weakestSubject = sortedByAccuracy[sortedByAccuracy.length - 1];
+  if (attempted === 0) {
+    return (
+      <div className="glass-card p-6 sm:p-8 text-center animate-slideUp">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
+          <I.BarChart3 size={20} />
+        </div>
+        <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">No PYQ data yet</h3>
+        <p className={`mx-auto mt-2 max-w-md text-sm ${TXT_MUTED}`}>
+          Solve a few PYQs and your performance insights will appear here.
+        </p>
+        <button
+          onClick={onStartPractice}
+          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5"
+        >
+          Start Practicing <I.ChevronRight size={14} />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { Icon: I.Target,       label: "Solved Questions",   value: String(attempted), sublabel: "Practiced Units", accent: "#6366F1" },
-          { Icon: I.CheckCircle2, label: "Accuracy Target", value: `${accuracy}%`,    sublabel: "Correct Response",   accent: "#10b981" },
-          { Icon: I.Flame,        label: "Archive Streak",  value: `${streak}d`,      sublabel: "Daily Momentum",     accent: "#f59e0b" },
+          { Icon: I.Target,       label: "Questions Attempted", value: String(attempted), sublabel: "answered PYQs",         accent: "#6366F1" },
+          { Icon: I.CheckCircle2, label: "Accuracy",            value: formatPercent(analytics?.accuracy), sublabel: "correct / attempted", accent: "#10b981" },
+          { Icon: I.Clock,        label: "Avg. Time / Question", value: analytics?.avgTimePerQuestionLabel || "—", sublabel: analytics?.timing?.available ? "tracked PYQ pace" : "Not tracked yet", accent: "#06b6d4" },
+          { Icon: I.Flame,        label: "Practice Streak",     value: formatPracticeStreak(streak), sublabel: "PYQ practice days",     accent: "#f59e0b" },
         ].map((s, i) => (
           <div key={s.label} className="animate-slideUp" style={{ animationDelay: `${i * 75 + 150}ms` }}>
             <StatCard {...s} />
@@ -584,21 +665,21 @@ function AnalyticsTab({ analytics, loading, loadError }) {
       </div>
 
       <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SYLLABUS COVERAGE RATIOS</p>
-        {subjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No attempts yet — solve some PYQs to see coverage.</p>}
+        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SUBJECT PERFORMANCE</p>
+        {subjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No subject data found for your attempted PYQs.</p>}
         <div className="space-y-5">
           {subjects.map((item) => (
             <div key={item.subject}>
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
-                <div className="flex items-center gap-3">
-                  <span className={`text-xs ${TXT_MUTED}`}>{item.solved} solved</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">{item.accuracy}%</span>
+                <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-right">
+                  <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)} accuracy</span>
                 </div>
               </div>
               <div className="h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-500"
-                  style={{ width: `${item.accuracy}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }}
+                  style={{ width: `${item.accuracy || 0}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }}
                 />
               </div>
             </div>
@@ -606,23 +687,60 @@ function AnalyticsTab({ analytics, loading, loadError }) {
         </div>
       </div>
 
+      <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>CHAPTER PERFORMANCE</p>
+            <p className={`mt-1 text-xs ${TXT_MUTED}`}>Judgments require {minimumChapterAttempts}+ attempted questions.</p>
+          </div>
+          <span className={`text-xs ${TXT_MUTED}`}>{chapters.length} mapped</span>
+        </div>
+        {chapters.length === 0 ? (
+          <p className={`text-sm ${TXT_MUTED}`}>No mapped chapter data found yet.</p>
+        ) : (
+          <div className="divide-y divide-slate-200/60 dark:divide-slate-800/70">
+            {chapters.map((item) => (
+              <div key={`${item.subject}-${item.chapter}`} className="grid gap-3 py-4 sm:grid-cols-[minmax(0,1fr)_180px_120px] sm:items-center">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{item.chapter}</p>
+                  <p className={`text-xs ${TXT_MUTED}`}>{item.subject}</p>
+                </div>
+                <div className="min-w-0">
+                  <div className="mb-1 flex items-center justify-between gap-3">
+                    <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
+                    <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)}</span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+                    <div
+                      className="h-full rounded-full bg-indigo-500 transition-all duration-500"
+                      style={{ width: `${item.accuracy || 0}%` }}
+                    />
+                  </div>
+                </div>
+                <span className={`w-fit rounded-full border px-3 py-1 text-xs font-bold ${getChapterStatusClass(item.status)}`}>
+                  {item.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-slideUp" style={{ animationDelay: "450ms" }}>
-        <div className={`glass-card p-5`}>
-          <I.Award size={18} className="text-amber-500 dark:text-amber-400 mb-3" />
-          <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-1">Top Subject Block</p>
-          <p className="text-xl font-bold text-slate-900 dark:text-white">{topSubject ? topSubject.subject : "—"}</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            {topSubject ? `${topSubject.accuracy}% accuracy rating` : "No data yet"}
-          </p>
-        </div>
-        <div className={`glass-card p-5`}>
-          <I.TrendingUp size={18} className="text-indigo-500 dark:text-indigo-400 mb-3" />
-          <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-1">Underperforming Segment</p>
-          <p className="text-xl font-bold text-slate-900 dark:text-white">{weakestSubject ? weakestSubject.subject : "—"}</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            {weakestSubject ? "Target core concepts" : "No data yet"}
-          </p>
-        </div>
+        <ChapterSummaryCard
+          title="Strongest Chapter"
+          chapter={strongestChapter}
+          emptyText={`Attempt at least ${minimumChapterAttempts} questions in a chapter to identify your strongest area.`}
+          icon={I.Award}
+        />
+        <ChapterSummaryCard
+          title="Needs Practice"
+          chapter={needsPracticeChapter}
+          emptyText={`Attempt at least ${minimumChapterAttempts} questions in a chapter to identify what needs practice.`}
+          actionLabel="Practice PYQs"
+          onAction={onPracticeChapter}
+          icon={I.TrendingUp}
+        />
       </div>
     </div>
   );
@@ -703,6 +821,7 @@ function SavedTab({ track, savedQuestions, onUnsave }) {
 export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
+  const router = useRouter();
   const [track, setTrack] = useState(null);
   const [access, setAccess] = useState(null);
 
@@ -781,6 +900,17 @@ export default function PYQPage() {
   const [statsLoading,   setStatsLoading]   = useState(true);
   const [statsError,     setStatsError]     = useState("");
 
+  const applyPYQStats = (overviewData, analyticsData) => {
+    setOverview(overviewData || null);
+    setPyqAnalytics(analyticsData || null);
+    setAttemptedTotal(
+      analyticsData?.totalQuestions ??
+      analyticsData?.totalAttempts  ??
+      analyticsData?.attempted      ??
+      0
+    );
+  };
+
   useEffect(() => {
     let cancelled = false;
     async function loadPYQStats() {
@@ -791,14 +921,7 @@ export default function PYQPage() {
         const overviewData = await getPYQOverview(track);
         const analyticsData = isPro ? await getPYQAnalytics(track) : null;
         if (cancelled) return;
-        setOverview(overviewData || null);
-        setPyqAnalytics(analyticsData || null);
-        setAttemptedTotal(
-          analyticsData?.totalQuestions ??
-          analyticsData?.totalAttempts  ??
-          analyticsData?.attempted      ??
-          0
-        );
+        applyPYQStats(overviewData, analyticsData);
       } catch (error) {
         console.error("Failed loading PYQ stats:", error);
         if (!cancelled) {
@@ -814,6 +937,43 @@ export default function PYQPage() {
     loadPYQStats();
     return () => { cancelled = true; };
   }, [track, access, isPro]);
+
+  const reloadPYQStats = async () => {
+    if (!track || !access) return;
+    setStatsLoading(true);
+    setStatsError("");
+    try {
+      const overviewData = await getPYQOverview(track);
+      const analyticsData = isPro ? await getPYQAnalytics(track) : null;
+      applyPYQStats(overviewData, analyticsData);
+    } catch (error) {
+      console.error("Failed loading PYQ stats:", error);
+      setOverview(null);
+      setPyqAnalytics(null);
+      setAttemptedTotal(0);
+      setStatsError("Failed to load analytics. Please try again.");
+    } finally {
+      setStatsLoading(false);
+    }
+  };
+
+  const startPractice = () => {
+    setActiveTab("practice");
+  };
+
+  const practiceChapter = (chapter) => {
+    if (!chapter?.chapter || !chapter?.subject || !track) {
+      setActiveTab("practice");
+      return;
+    }
+
+    const params = new URLSearchParams();
+    params.set("exam", track.toUpperCase());
+    params.set("subjects", chapter.subject);
+    params.set("mode", "chapter");
+    params.set("chapter", chapter.chapter);
+    router.push(`/pyq/session?${params.toString()}`);
+  };
 
   const handleUnsave = async (qId) => {
     if (!user?.id) return;
@@ -878,11 +1038,14 @@ export default function PYQPage() {
       {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />}
       {activeTab === "analytics" && (
         isPro ? (
-          <AnalyticsTab
-            analytics={pyqAnalytics}
-            loading={statsLoading}
-            loadError={statsError}
-          />
+	          <AnalyticsTab
+	            analytics={pyqAnalytics}
+	            loading={statsLoading}
+	            loadError={statsError}
+	            onRetry={reloadPYQStats}
+	            onStartPractice={startPractice}
+	            onPracticeChapter={practiceChapter}
+	          />
         ) : (
           <ProLockedPanel
             title="PYQ Analytics is Pro"

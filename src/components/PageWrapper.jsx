@@ -48,7 +48,7 @@ export default function PageWrapper({
       </div>
 
       {/* ── Main Content ────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-10 lg:space-y-10 lg:px-8 lg:py-14">
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-8 sm:px-6 sm:py-10 lg:space-y-10 lg:px-8 lg:py-14">
         {/* Header */}
         {(title || badge) && (
           <div className="relative space-y-3 animate-slideUp">
@@ -69,7 +69,7 @@ export default function PageWrapper({
             )}
 
             {title && (
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm break-words">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-sm break-words">
                 {title}
               </h1>
             )}
