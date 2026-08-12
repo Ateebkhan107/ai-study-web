@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, Building2, GraduationCap } from "lucide-react";
+import { ArrowRight, Building2, GraduationCap, Plus, X } from "lucide-react";
 
 function roleLabel(role) {
   return role === "COACHING_ADMIN" ? "Admin" : "Student";
@@ -15,22 +16,58 @@ function roleClasses(role) {
 }
 
 export default function InstituteHome() {
+  const router = useRouter();
   const [institutes, setInstitutes] = useState([]);
+  const [accountType, setAccountType] = useState("STUDENT");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [form, setForm] = useState({ name: "", slug: "", logo_url: "" });
+  const canCreateInstitute = accountType === "INSTITUTE_ADMIN";
 
   async function loadInstitutes() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("/api/institutes", { cache: "no-store" });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Failed to load institutes");
+      const [institutesResponse, accessResponse] = await Promise.all([
+        fetch("/api/institutes", { cache: "no-store" }),
+        fetch("/api/access", { cache: "no-store" }),
+      ]);
+      const data = await institutesResponse.json();
+      if (!institutesResponse.ok) throw new Error(data.error || "Failed to load institutes");
       setInstitutes(data.institutes || []);
+
+      if (accessResponse.ok) {
+        const access = await accessResponse.json();
+        setAccountType(access.accountType || "STUDENT");
+      }
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function createInstitute(event) {
+    event.preventDefault();
+    setSaving(true);
+    setError("");
+    try {
+      const response = await fetch("/api/institutes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Failed to create institute");
+      setModalOpen(false);
+      setForm({ name: "", slug: "", logo_url: "" });
+      router.push(`/institute/${data.institute.slug}`);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -41,11 +78,23 @@ export default function InstituteHome() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Institutes</h1>
-        <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
-          Manage or access your coaching workspaces.
-        </p>
+      <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Institutes</h1>
+          <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+            Manage or access your coaching workspaces.
+          </p>
+        </div>
+        {canCreateInstitute && (
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-black text-white transition hover:bg-indigo-700"
+          >
+            <Plus className="h-4 w-4" />
+            Create Institute
+          </button>
+        )}
       </header>
 
       {error && (
@@ -111,11 +160,91 @@ export default function InstituteHome() {
             </div>
             <h3 className="text-base font-black text-slate-950 dark:text-white">No institutes yet</h3>
             <p className="mx-auto mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
-              Your coaching workspace will appear here after you are added to an institute.
+              {canCreateInstitute
+                ? "Create your institute workspace to start managing batches, tests and results."
+                : "Your coaching workspace will appear here after you are added to an institute."}
             </p>
+            {canCreateInstitute && (
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-black text-white transition hover:bg-indigo-700"
+              >
+                <Plus className="h-4 w-4" />
+                Create Institute
+              </button>
+            )}
           </div>
         )}
       </section>
+
+      {modalOpen && (
+        <div className="fixed inset-0 z-[70] flex items-end bg-slate-950/40 p-0 backdrop-blur-sm sm:items-center sm:justify-center sm:p-4">
+          <div className="w-full rounded-t-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:max-w-lg sm:rounded-3xl">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-black text-slate-950 dark:text-white">Create Institute</h2>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Set up your coaching workspace.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setModalOpen(false)}
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-slate-800"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <form onSubmit={createInstitute} className="space-y-4">
+              <div>
+                <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Institute Name</label>
+                <input
+                  value={form.name}
+                  onChange={(event) => setForm({ ...form, name: event.target.value })}
+                  placeholder="Ateeb Coaching"
+                  required
+                  minLength={2}
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Slug</label>
+                <input
+                  value={form.slug}
+                  onChange={(event) => setForm({ ...form, slug: event.target.value })}
+                  placeholder="ateeb-coaching"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                />
+                <p className="mt-1 text-xs font-medium text-slate-400">Optional. If empty, PrepZii will create one from the name.</p>
+              </div>
+              <div>
+                <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Logo URL</label>
+                <input
+                  value={form.logo_url}
+                  onChange={(event) => setForm({ ...form, logo_url: event.target.value })}
+                  placeholder="https://..."
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                />
+              </div>
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-black text-white transition hover:bg-indigo-700 disabled:opacity-60"
+                >
+                  {saving ? "Creating..." : "Create Institute"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
