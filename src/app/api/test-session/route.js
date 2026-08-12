@@ -448,7 +448,20 @@ export async function POST(request) {
       );
     }
 
-    const questions = instituteTest ? fetchedQuestions : shuffleQuestions(fetchedQuestions);
+    let questions = instituteTest ? fetchedQuestions : shuffleQuestions(fetchedQuestions);
+
+    if (!instituteTest && (exam === "JEE" || exam === "JEE Main" || exam === "NEET")) {
+      const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+      questions.sort((a, b) => {
+        const subjA = SUBJECT_ORDER[a.subject] || 99;
+        const subjB = SUBJECT_ORDER[b.subject] || 99;
+        if (subjA !== subjB) return subjA - subjB;
+
+        const typeA = String(a.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+        const typeB = String(b.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+        return typeA - typeB;
+      });
+    }
 
     const { data: session, error: sessionError } = await supabaseAdmin
       .from("test_sessions")

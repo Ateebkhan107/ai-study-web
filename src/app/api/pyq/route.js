@@ -143,7 +143,7 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
 
   const completePapers = [...papers.entries()].filter(([, paper]) =>
     config.subjects.every(
-      (subjectName) => (paper.subjects.get(subjectName) || []).length >= targetCounts[normalizeSubjectName(subjectName)]
+      (subjectName) => (paper.subjects.get(subjectName) || []).length >= 25 // Minimum required for a JEE subject is 25
     )
   );
 
@@ -155,11 +155,33 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
     ? completePapers[Math.floor(Math.random() * completePapers.length)]
     : completePapers[0];
 
-  return config.subjects.flatMap((subjectName) =>
-    (shuffle ? shuffleQuestions(selectedPaper.subjects.get(subjectName) || []) : selectedPaper.subjects.get(subjectName) || [])
-      .slice(0, targetCounts[normalizeSubjectName(subjectName)])
-      .sort(sortByDisplayOrder)
-  );
+  return config.subjects.flatMap((subjectName) => {
+    let pool = selectedPaper.subjects.get(subjectName) || [];
+    if (shuffle) pool = shuffleQuestions(pool);
+
+    const isJee = exam === "JEE" || exam === "JEE Main";
+    const totalQuestions = pool.length;
+
+    if (isJee) {
+      if (totalQuestions >= 25) {
+        // If paper has 30 or more questions, it's a 90-question paper (20 MCQ, 10 Numeric)
+        // Otherwise, it's a 75-question paper (20 MCQ, 5 Numeric)
+        const numTarget = totalQuestions >= 30 ? 10 : 5;
+        const mcqTarget = 20;
+
+        const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
+        const nums = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
+
+        return [...mcqs.slice(0, mcqTarget), ...nums.slice(0, numTarget)].sort(sortByDisplayOrder);
+      } else {
+        const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
+        return mcqs.slice(0, targetCounts[normalizeSubjectName(subjectName)]).sort(sortByDisplayOrder);
+      }
+    }
+
+    // Default fallback
+    return pool.slice(0, targetCounts[normalizeSubjectName(subjectName)]).sort(sortByDisplayOrder);
+  });
 }
 
 async function getBalancedRandomPaperQuestions({ exam, year }) {
@@ -297,8 +319,23 @@ export async function GET(req) {
     }
 
     const attemptedQuestionIds = new Set(questionIds.map(String));
+    let resultQuestions = mistakeQuestions || [];
+    
+    if (exam === "JEE" || exam === "JEE Main" || exam === "NEET") {
+      const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+      resultQuestions.sort((a, b) => {
+        const subjA = SUBJECT_ORDER[a.subject] || 99;
+        const subjB = SUBJECT_ORDER[b.subject] || 99;
+        if (subjA !== subjB) return subjA - subjB;
+
+        const typeA = String(a.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+        const typeB = String(b.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+        return typeA - typeB;
+      });
+    }
+
     return NextResponse.json(
-      (mistakeQuestions || []).map((question) => sanitizeQuestion(question, attemptedQuestionIds))
+      resultQuestions.map((question) => sanitizeQuestion(question, attemptedQuestionIds))
     );
   }
 
@@ -358,6 +395,19 @@ export async function GET(req) {
       result = buildBalancedPaper(result, exam, false);
     }
     result = mode === "random" ? shuffleQuestions(result) : [...result].sort(sortByDisplayOrder);
+  }
+
+  if (exam === "JEE" || exam === "JEE Main" || exam === "NEET") {
+    const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+    result.sort((a, b) => {
+      const subjA = SUBJECT_ORDER[a.subject] || 99;
+      const subjB = SUBJECT_ORDER[b.subject] || 99;
+      if (subjA !== subjB) return subjA - subjB;
+
+      const typeA = String(a.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+      const typeB = String(b.question_type || "MCQ").toLowerCase() === "numerical" ? 2 : 1;
+      return typeA - typeB;
+    });
   }
 
   try {

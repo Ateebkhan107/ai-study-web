@@ -52,6 +52,7 @@ export default function PricingPage() {
               "Advanced and PYQ analytics",
               "Complete formula handbooks",
               "AI-powered question explanations",
+              "Ad-free experience",
             ]}
           />
 

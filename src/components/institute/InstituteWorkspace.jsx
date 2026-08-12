@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -21,8 +22,8 @@ import {
 } from "lucide-react";
 
 const SUBJECTS = {
-  JEE: ["Physics", "Chemistry", "Mathematics"],
-  NEET: ["Physics", "Chemistry", "Biology"],
+  JEE: ["Physics", "Chemistry", "Mathematics", "All Subjects"],
+  NEET: ["Physics", "Chemistry", "Biology", "All Subjects"],
 };
 
 const ADMIN_TABS = [
@@ -133,6 +134,7 @@ function ProgressRow({ label, value, meta }) {
 }
 
 export default function InstituteWorkspace({ slug }) {
+  const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -145,6 +147,7 @@ export default function InstituteWorkspace({ slug }) {
   const [studentBatch, setStudentBatch] = useState("");
   const [batchForm, setBatchForm] = useState({ name: "", exam: "JEE", target_year: new Date().getFullYear() + 1 });
   const [testForm, setTestForm] = useState({
+    mode: "auto", // "auto" or "custom"
     title: "",
     batch_id: "",
     exam: "JEE",
@@ -256,8 +259,8 @@ export default function InstituteWorkspace({ slug }) {
       `/api/institutes/${slug}/tests`,
       {
         ...testForm,
-        chapters: testForm.chapters.split(",").map((chapter) => chapter.trim()).filter(Boolean),
-        question_count: Number(testForm.question_count),
+        chapters: testForm.mode === "auto" ? testForm.chapters.split(",").map((chapter) => chapter.trim()).filter(Boolean) : [],
+        question_count: testForm.mode === "auto" ? Number(testForm.question_count) : 0,
         duration_minutes: Number(testForm.duration_minutes),
       },
       "test"
@@ -265,7 +268,11 @@ export default function InstituteWorkspace({ slug }) {
     if (result) {
       setTestForm((current) => ({ ...current, title: "", chapters: "" }));
       setModal(null);
-      setActiveTab("tests");
+      if (testForm.mode === "custom" && result.test?.id) {
+        router.push(`/institute/${slug}/tests/${result.test.id}/edit`);
+      } else {
+        setActiveTab("tests");
+      }
     }
   }
 
@@ -813,8 +820,25 @@ export default function InstituteWorkspace({ slug }) {
       {modal === "test" && (
         <Modal title="Create Test" onClose={() => setModal(null)}>
           <form onSubmit={createTest} className="space-y-3">
-            <input value={testForm.title} onChange={(event) => setTestForm({ ...testForm, title: event.target.value })} placeholder="Physics Mock Test" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
-            <select value={testForm.batch_id} onChange={(event) => setTestForm({ ...testForm, batch_id: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+            <div className="flex gap-2 p-1 bg-slate-100 rounded-xl dark:bg-slate-900 mb-4">
+              <button
+                type="button"
+                onClick={() => setTestForm({ ...testForm, mode: "auto" })}
+                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "auto" ? "bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
+              >
+                Auto-Generate
+              </button>
+              <button
+                type="button"
+                onClick={() => setTestForm({ ...testForm, mode: "custom" })}
+                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "custom" ? "bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
+              >
+                Build Custom
+              </button>
+            </div>
+
+            <input value={testForm.title} onChange={(event) => setTestForm({ ...testForm, title: event.target.value })} placeholder="Test Title (e.g. Physics Mock Test)" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+            <select value={testForm.batch_id} onChange={(event) => setTestForm({ ...testForm, batch_id: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white" required>
               <option value="">Choose batch</option>
               {data.batches.map((batch) => <option key={batch.id} value={batch.id}>{batch.name}</option>)}
             </select>
@@ -826,17 +850,31 @@ export default function InstituteWorkspace({ slug }) {
                 {SUBJECTS[testForm.exam].map((subject) => <option key={subject} value={subject}>{subject}</option>)}
               </select>
             </div>
-            <input value={testForm.chapters} onChange={(event) => setTestForm({ ...testForm, chapters: event.target.value })} placeholder="Chapters, comma separated" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
-            <div className="grid grid-cols-3 gap-3">
-              <input type="number" min="1" max="100" value={testForm.question_count} onChange={(event) => setTestForm({ ...testForm, question_count: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
-              <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
-              <select value={testForm.difficulty} onChange={(event) => setTestForm({ ...testForm, difficulty: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
-                <option value="mixed">Mixed</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option>
-              </select>
-            </div>
+
+            {testForm.mode === "auto" && (
+              <>
+                <input value={testForm.chapters} onChange={(event) => setTestForm({ ...testForm, chapters: event.target.value })} placeholder="Chapters, comma separated" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+                <div className="grid grid-cols-3 gap-3">
+                  <input type="number" min="1" max="100" value={testForm.question_count} onChange={(event) => setTestForm({ ...testForm, question_count: event.target.value })} placeholder="Questions" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+                  <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (min)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+                  <select value={testForm.difficulty} onChange={(event) => setTestForm({ ...testForm, difficulty: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+                    <option value="mixed">Mixed</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option>
+                  </select>
+                </div>
+              </>
+            )}
+
+            {testForm.mode === "custom" && (
+              <div className="grid grid-cols-1 gap-3">
+                <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (minutes)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+              </div>
+            )}
+
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300">Cancel</button>
-              <PrimaryButton disabled={saving === "test"} type="submit">Publish Test</PrimaryButton>
+              <PrimaryButton disabled={saving === "test"} type="submit">
+                {testForm.mode === "auto" ? "Publish Test" : "Create & Edit"}
+              </PrimaryButton>
             </div>
           </form>
         </Modal>

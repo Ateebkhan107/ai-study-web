@@ -15,6 +15,7 @@ const FREE_FEATURES = [
   { text: "Quick tests and premium full mock tests", included: false },
   { text: "Advanced and PYQ analytics", included: false },
   { text: "Formula handbooks and AI explanations", included: false },
+  { text: "Ad-free experience", included: false },
 ];
 
 const PRO_FEATURES = [
@@ -26,6 +27,7 @@ const PRO_FEATURES = [
   { text: "Advanced analytics, trends and weak-area detection", hot: true },
   { text: "Complete formula handbooks", hot: false },
   { text: "AI-powered question explanations", hot: false },
+  { text: "Ad-free experience", hot: true },
 ];
 
 const PLANS = [

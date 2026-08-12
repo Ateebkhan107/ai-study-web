@@ -268,10 +268,32 @@ export async function getQuestions({
         throw error;
       }
 
+      const applyLimit = (questionList, targetLimit) => {
+        let unique = shuffleUniqueQuestions(questionList || []);
+        if (difficulty && difficulty.toLowerCase() === "mixed" && strictFilters) {
+          unique = pickBalancedByDifficulty(questionList || [], Math.max(targetLimit, unique.length));
+        }
+
+        const isJee = exam === "JEE Main" || exam === "JEE";
+        if (isJee) {
+           if (targetLimit >= 25) {
+             const numTarget = targetLimit >= 30 ? 10 : 5;
+             const mcqTarget = 20;
+             
+             const mcqs = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
+             const nums = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
+             
+             return [...mcqs.slice(0, mcqTarget), ...nums.slice(0, numTarget)];
+           } else {
+             const mcqs = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
+             return mcqs.slice(0, targetLimit);
+           }
+        }
+        return unique.slice(0, targetLimit);
+      };
+
       if (strictFilters) {
-        return difficulty && difficulty.toLowerCase() === "mixed"
-          ? pickBalancedByDifficulty(data || [], subjectLimit)
-          : shuffleUniqueQuestions(data || []).slice(0, subjectLimit);
+        return applyLimit(data, subjectLimit);
       }
 
       // Fallback 1: If no questions found with strict chapter filter, relax chapter filter and fetch from subject
@@ -317,7 +339,7 @@ export async function getQuestions({
         return [];
       }
 
-      return shuffleUniqueQuestions(data || []).slice(0, subjectLimit);
+      return applyLimit(data, subjectLimit);
     }));
 
 //     console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
