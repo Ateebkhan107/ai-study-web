@@ -82,42 +82,18 @@ export default function NotificationBell() {
   const unread = notifications.filter((notification) => !notification.is_read).length;
 
   return (
-    <div className="relative">
+    <div className="relative flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
       <button
         onClick={() => setOpen(!open)}
-        className="
-          relative
-          w-9
-          h-9
-          rounded-xl
-          border
-          border-slate-200/60
-          dark:border-slate-700/50
-          bg-white/70
-          dark:bg-[#0f172a]/60
-          backdrop-blur-xl
-          flex
-          items-center
-          justify-center
-          shadow-sm
-          text-slate-700
-          dark:text-slate-300
-        "
+        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+        aria-label="Open notifications"
+        aria-expanded={open}
       >
-        <Bell size={17} />
+        <Bell className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" />
 
         {unread > 0 && (
           <span
-            className="
-              absolute
-              -top-2
-              -right-2
-              bg-red-500
-              text-white
-              text-xs
-              px-2
-              rounded-full
-            "
+            className="absolute -right-1.5 -top-1.5 min-w-5 rounded-full bg-red-500 px-1.5 text-center text-[10px] font-bold leading-5 text-white"
           >
             {unread}
           </span>

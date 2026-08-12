@@ -121,109 +121,108 @@ export default function Navbar() {
       key={item.href}
       href={item.href}
       onClick={() => mobile && setMobileOpen(false)}
-      className={`relative rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden group ${
-        mobile ? "flex min-h-11 items-center px-4 py-3" : "px-3 py-2 xl:px-4"
+      className={`group relative overflow-hidden font-semibold transition-colors duration-200 ${
+        mobile
+          ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
+          : "inline-flex h-9 items-center justify-center rounded-lg px-3 text-[13px] xl:px-3.5"
       } ${
         isActive(item.href)
-          ? "text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.05)]"
-          : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/5"
+          ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
+          : "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/[0.06] dark:hover:text-slate-100"
       }`}
     >
-      <span className="relative z-10">{item.name}</span>
-      {!mobile && (
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      )}
+      <span className="relative z-10 whitespace-nowrap">{item.name}</span>
       {!mobile && isActive(item.href) && (
-        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-t-full shadow-[0_-2px_8px_rgba(99,102,241,0.6)]" />
+        <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-indigo-500/80 dark:bg-indigo-300/80" />
       )}
     </Link>
   );
 
-  return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-indigo-500/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-colors duration-500">
-      {/* ── Subtle animated bottom glow line ── */}
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 lg:gap-6 relative z-10">
+  const proLink = !isPro && !isInstituteAdminAccount ? (
+    <Link
+      href="/pro"
+      onClick={() => mobileOpen && setMobileOpen(false)}
+      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-amber-300/50 bg-amber-400/15 px-3 text-[13px] font-extrabold tracking-wide text-amber-700 transition-all duration-200 hover:-translate-y-px hover:bg-amber-400/20 hover:text-amber-800 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-300 dark:hover:bg-amber-400/15 dark:hover:text-amber-200"
+    >
+      <span aria-hidden="true" className="text-[12px] leading-none">★</span>
+      <span>PRO</span>
+    </Link>
+  ) : isPro && !isInstituteAdminAccount ? (
+    <div className="inline-flex h-9 items-center rounded-lg border border-indigo-300/40 bg-indigo-500/10 px-3 text-[13px] font-extrabold tracking-wide text-indigo-600 dark:border-indigo-400/20 dark:text-indigo-300">
+      PrepZii Pro
+    </div>
+  ) : null;
 
-        {/* Logo */}
-        <div className="shrink-0 transform transition-transform duration-300 hover:scale-105">
-          <Link href="/dashboard">
-            <Logo size={80} />
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/90 shadow-[0_1px_18px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-colors duration-200 dark:border-slate-800/80 dark:bg-[rgba(2,6,23,0.92)] dark:shadow-none">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+
+        <div className="flex min-w-0 shrink-0 items-center">
+          <Link
+            href="/dashboard"
+            className="flex h-10 items-center gap-2 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200"
+            aria-label="PrepZii dashboard"
+          >
+            <Logo size={29} showText={false} />
+            <span className="text-[17px] font-black uppercase tracking-normal sm:text-[18px]">
+              PREPZII
+            </span>
           </Link>
         </div>
 
-        {/* Navigation */}
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 xl:flex">
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
+          aria-label="Primary navigation"
+        >
+          <div className="flex h-11 max-w-full items-center gap-0.5 rounded-xl border border-slate-200/70 bg-slate-100/55 p-1 dark:border-slate-800 dark:bg-slate-950/60">
           {visibleNavItems.map((item) => renderNavLink(item))}
-
-          {/* PrepZii Pro */}
-          {!isPro && !isInstituteAdminAccount ? (
-            <Link
-              href="/pro"
-              className="relative ml-2 inline-flex items-center justify-center px-5 py-2 rounded-xl text-sm font-bold overflow-hidden transition-all duration-500 hover:-translate-y-0.5 active:translate-y-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.5)]"
-            >
-              {/* Shimmer effect overlay */}
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent hover:animate-[shimmer_1.5s_infinite]" />
-              <span className="relative z-10 flex items-center gap-1.5 drop-shadow-sm">
-                ⭐ PRO
-              </span>
-            </Link>
-          ) : isPro && !isInstituteAdminAccount ? (
-            <div className="ml-2 flex items-center px-4 py-2">
-              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 text-[15px] tracking-wide drop-shadow-sm">
-                PrepZii Pro ✨
-              </span>
-            </div>
-          ) : null}
+          </div>
         </nav>
 
-        {/* Right Side */}
-        <div className="shrink-0 flex items-center gap-2 sm:gap-3">
+        <div className="flex h-10 shrink-0 items-center justify-end gap-1.5 sm:gap-2">
+          <div className="hidden items-center lg:flex">
+            {proLink}
+          </div>
 
           <button
             onClick={toggleTheme}
-            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md hover:border-indigo-500/30 active:scale-95 group overflow-hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+            aria-label="Toggle theme"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="relative z-10 text-slate-600 dark:text-slate-300 transition-transform duration-700 group-hover:rotate-[360deg]">
-              <Moon className="w-5 h-5 dark:hidden" />
-              <Sun className="w-5 h-5 hidden dark:block" />
+            <span className="flex items-center justify-center">
+              <Moon className="h-[17px] w-[17px] dark:hidden sm:h-[18px] sm:w-[18px]" />
+              <Sun className="hidden h-[17px] w-[17px] dark:block sm:h-[18px] sm:w-[18px]" />
             </span>
           </button>
 
-          <div className="transform transition-transform duration-300 hover:scale-105">
+          <div className="flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
             <NotificationBell track={track} />
           </div>
 
-          <div className="transform transition-transform duration-300 hover:scale-105">
+          <div className="flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
             <ProfileMenu />
           </div>
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
-            className="xl:hidden relative flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-white/50 text-slate-700 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-indigo-500/30 dark:border-gray-700/50 dark:bg-gray-800/50 dark:text-slate-300"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px] lg:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <X className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" /> : <Menu className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" />}
           </button>
 
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="xl:hidden border-t border-indigo-500/10 bg-white/95 px-4 py-4 shadow-lg backdrop-blur-xl dark:bg-[#020617]/95">
-          <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1 sm:grid-cols-2">
+        <div className="border-t border-slate-200/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-xl dark:border-slate-800/80 dark:bg-[#020617]/95 lg:hidden">
+          <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1.5 sm:grid-cols-2" aria-label="Mobile navigation">
             {visibleNavItems.map((item) => renderNavLink(item, true))}
-            {!isPro && !isInstituteAdminAccount && (
-              <Link
-                href="/pro"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-400 px-4 py-3 text-sm font-bold text-white shadow-[0_4px_15px_rgba(251,191,36,0.3)] sm:col-span-2"
-              >
-                ⭐ PRO
-              </Link>
+            {proLink && (
+              <div className="mt-1 flex min-h-11 items-center sm:col-span-2">
+                {proLink}
+              </div>
             )}
           </nav>
         </div>
