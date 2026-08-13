@@ -1,6 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
+import { getAuthContext, getPostAuthRedirectPath, ONBOARDING_ROUTE } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
 import Link from "next/link";
  
@@ -44,6 +44,8 @@ export default async function Page() {
         <SignUp
           routing="path"
           path="/sign-up"
+          forceRedirectUrl={ONBOARDING_ROUTE}
+          fallbackRedirectUrl={ONBOARDING_ROUTE}
           appearance={{
             elements: {
               card: "shadow-none bg-transparent p-0 border-0",

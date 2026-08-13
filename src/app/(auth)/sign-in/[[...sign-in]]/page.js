@@ -1,6 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
+import { DASHBOARD_ROUTE, getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
 import Link from "next/link";
  
@@ -44,6 +44,8 @@ export default async function Page() {
         <SignIn
           routing="path"
           path="/sign-in"
+          forceRedirectUrl={DASHBOARD_ROUTE}
+          fallbackRedirectUrl={DASHBOARD_ROUTE}
           appearance={{
             elements: {
               card: "shadow-none bg-transparent p-0 border-0",
