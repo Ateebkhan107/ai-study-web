@@ -173,9 +173,22 @@ const organizationSchema = {
   ],
 };
 
+const isLiveClerkKey =
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_live_");
+
+const productionClerkScriptProps = isLiveClerkKey
+  ? {
+      __internal_clerkJSUrl:
+        "https://clerk.prepzii.com/npm/@clerk/clerk-js@6/dist/clerk.browser.js",
+      __internal_clerkUIUrl:
+        "https://clerk.prepzii.com/npm/@clerk/ui@1/dist/ui.browser.js",
+    }
+  : {};
+
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider
+      {...productionClerkScriptProps}
       afterSignOutUrl={SIGN_IN_ROUTE}
       signInUrl={SIGN_IN_ROUTE}
       signUpUrl={SIGN_UP_ROUTE}

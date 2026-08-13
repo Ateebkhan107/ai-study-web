@@ -330,6 +330,7 @@ export default function PublicLandingPage() {
           >
             <Link
               href="/sign-up"
+              prefetch
               className="px-10 py-4 bg-white text-black font-bold text-base rounded-full hover:bg-slate-100 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.25)] flex items-center justify-center gap-2 group w-full sm:w-auto"
             >
               Start Your Journey <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -456,6 +457,7 @@ export default function PublicLandingPage() {
              <p className="text-xl text-slate-400 mb-12">Join the elite workspace and transform your preparation today.</p>
              <Link
                  href="/sign-up"
+                 prefetch
                  className="px-12 py-5 bg-white text-black font-bold text-lg rounded-full hover:bg-slate-100 transition-all duration-300 hover:scale-[1.03] shadow-[0_0_40px_rgba(255,255,255,0.2)]"
                >
                  Enter Workspace
