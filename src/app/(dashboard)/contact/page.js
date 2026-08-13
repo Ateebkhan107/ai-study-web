@@ -2,8 +2,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { Mail, MessageSquare, Clock, ArrowUpRight } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Us | PrepZii",
+  title: "Contact Us",
   description: "Get in touch with the PrepZii team for support, business inquiries, or general questions.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

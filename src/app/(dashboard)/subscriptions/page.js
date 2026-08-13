@@ -3,8 +3,9 @@ import { CreditCard, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Subscriptions | PrepZii",
+  title: "Subscriptions",
   description: "Learn how PrepZii Pro subscriptions, billing, and access work.",
+  alternates: { canonical: "/subscriptions" },
 };
 
 export default function SubscriptionsPage() {

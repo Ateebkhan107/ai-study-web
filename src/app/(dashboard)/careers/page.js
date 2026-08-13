@@ -2,8 +2,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { Code2, Brain, PenTool, Edit3, Megaphone, Users, Send } from "lucide-react";
 
 export const metadata = {
-  title: "Careers | PrepZii",
+  title: "Careers",
   description: "Join the team at PrepZii and help us revolutionize education for JEE and NEET aspirants.",
+  alternates: { canonical: "/careers" },
 };
 
 const DEPARTMENTS = [

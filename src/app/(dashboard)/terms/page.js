@@ -2,8 +2,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { Scale } from "lucide-react";
 
 export const metadata = {
-  title: "Terms & Conditions | PrepZii",
+  title: "Terms & Conditions",
   description: "Read the terms and conditions for using PrepZii.",
+  alternates: { canonical: "/terms" },
 };
 
 const SECTIONS = [

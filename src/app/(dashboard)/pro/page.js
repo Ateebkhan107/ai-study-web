@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
+import Script from "next/script";
 import { Check, X, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
+
 
 const FREE_FEATURES = [
   { text: "Full-paper, random and saved PYQ practice", included: true },
@@ -195,6 +197,11 @@ export default function ProPage() {
       badge="✦ PRO"
       badgeVariant="purple"
     >
+      {/* Razorpay checkout SDK — loaded only on this page */}
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive"
+      />
       {/* ── Hero ── */}
       <section className="text-center space-y-5 animate-slideUp">
         <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">

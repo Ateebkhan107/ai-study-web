@@ -10,25 +10,89 @@ import {
 
 import "./globals.css";
 
-
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
-import Footer from "@/components/Footer";
-
 export const metadata = {
-  title: "PREPZII – JEE/NEET Preparation",
+  // Resolves all relative URLs in OG images etc. against this base.
+  // Change to your production domain before deploying.
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://prepzii.com"
+  ),
+
+  title: {
+    default: "PrepZii – Smart JEE & NEET Preparation Platform",
+    template: "%s | PrepZii",
+  },
+
+  alternates: {
+    canonical: "/",
+  },
 
   description:
-    "Your intelligent JEE & NEET preparation platform",
+    "PrepZii is the intelligent JEE & NEET preparation platform with PYQ practice, full mock tests, AI explanations, formula books, and deep analytics — built to engineer top ranks.",
+
+  keywords: [
+    "JEE preparation",
+    "NEET preparation",
+    "JEE mock test",
+    "NEET mock test",
+    "PYQ practice",
+    "JEE previous year questions",
+    "NEET previous year questions",
+    "online test series",
+    "JEE analytics",
+    "PrepZii",
+  ],
+
+  openGraph: {
+    type: "website",
+    siteName: "PrepZii",
+    title: "PrepZii – Smart JEE & NEET Preparation Platform",
+    description:
+      "The intelligent JEE & NEET preparation platform. PYQ practice, full mock tests, AI explanations, formula books, and deep performance analytics.",
+    url: "/",
+    images: [
+      {
+        url: "/images/branding/prepzii-logo-dark.png",
+        width: 1536,
+        height: 1024,
+        alt: "PrepZii – JEE & NEET Preparation Platform",
+      },
+    ],
+    locale: "en_IN",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "PrepZii – Smart JEE & NEET Preparation Platform",
+    description:
+      "The intelligent JEE & NEET preparation platform. PYQ practice, full mock tests, AI explanations, and deep performance analytics.",
+    images: ["/images/branding/prepzii-logo-dark.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 
   icons: {
     icon: [
@@ -71,6 +135,43 @@ const themeInitScript = `
 })();
 `;
 
+// Organization + WebSite structured data for Google rich results
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://prepzii.com/#organization",
+      name: "PrepZii",
+      url: "https://prepzii.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://prepzii.com/images/branding/prepzii-logo-dark.png",
+      },
+      sameAs: [
+        "https://www.linkedin.com/company/124944167/",
+        "https://www.instagram.com/prep.zii",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "contact.prepzii@gmail.com",
+        contactType: "customer service",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://prepzii.com/#website",
+      url: "https://prepzii.com",
+      name: "PrepZii",
+      description:
+        "Intelligent JEE & NEET preparation platform with PYQ practice, mock tests, and AI-powered analytics.",
+      publisher: {
+        "@id": "https://prepzii.com/#organization",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider
@@ -84,6 +185,16 @@ export default function RootLayout({ children }) {
         className="h-full dark"
       >
         <head>
+          {/* DNS prefetch + TLS preconnect for external origins */}
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="dns-prefetch" href="https://clerk.prepzii.com" />
+          {/* Structured data for Google rich results */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationSchema),
+            }}
+          />
         </head>
 
         <body
@@ -95,10 +206,8 @@ export default function RootLayout({ children }) {
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{ __html: themeInitScript }}
           />
-          <Script
-            src="https://checkout.razorpay.com/v1/checkout.js"
-            strategy="afterInteractive"
-          />
+          {/* Razorpay checkout script is loaded only on pages that need it (/pro, /pricing).
+              It was intentionally moved out of the global layout to avoid loading it everywhere. */}
           {children}
           <Footer />
         </body>
@@ -106,3 +215,4 @@ export default function RootLayout({ children }) {
     </ClerkProvider>
   );
 }
+

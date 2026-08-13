@@ -2,8 +2,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { Target, Lightbulb, ShieldCheck, Rocket, Zap, Heart } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | PrepZii",
+  title: "About Us",
   description: "Learn more about PrepZii, our mission, vision, and how we're revolutionizing JEE & NEET preparation.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

@@ -2,8 +2,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { Shield } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | PrepZii",
+  title: "Privacy Policy",
   description: "Read about how PrepZii collects, uses, and protects your personal data.",
+  alternates: { canonical: "/privacy" },
 };
 
 const SECTIONS = [

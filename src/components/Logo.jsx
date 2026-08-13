@@ -9,7 +9,8 @@ export default function Logo({ size, showText = true, forceDark = false, classNa
 
   return (
     <div className={`flex items-center gap-2 md:gap-3 ${className}`}>
-      {/* Light Mode Logo */}
+      {/* Light Mode Logo — lazy loaded because the app defaults to dark mode.
+          This image is hidden on the initial render, so it does not need an LCP hint. */}
       {!forceDark && (
         <div className={`block dark:hidden shrink-0 relative ${containerClass}`} style={containerStyle}>
           <Image
@@ -18,12 +19,12 @@ export default function Logo({ size, showText = true, forceDark = false, classNa
             fill
             sizes={sizesAttr}
             className="object-contain"
-            priority
+            loading="lazy"
           />
         </div>
       )}
 
-      {/* Dark Mode Logo */}
+      {/* Dark Mode Logo — priority because the app starts in dark mode by default. */}
       <div className={`${forceDark ? "block" : "hidden dark:block"} shrink-0 relative ${containerClass}`} style={containerStyle}>
         <Image
           src="/images/branding/prepzii-logo-dark.png"
