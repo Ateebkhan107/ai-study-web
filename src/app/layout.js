@@ -173,22 +173,22 @@ const organizationSchema = {
   ],
 };
 
-const isLiveClerkKey =
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_live_");
+const appOrigin = (
+  process.env.NEXT_PUBLIC_APP_URL || "https://prepzii.com"
+).replace(/\/$/, "");
 
-const productionClerkScriptProps = isLiveClerkKey
-  ? {
-      __internal_clerkJSUrl:
-        "https://clerk.prepzii.com/npm/@clerk/clerk-js@6/dist/clerk.browser.js",
-      __internal_clerkUIUrl:
-        "https://clerk.prepzii.com/npm/@clerk/ui@1/dist/ui.browser.js",
-    }
-  : {};
+const clerkAllowedRedirectOrigins = Array.from(
+  new Set([
+    appOrigin,
+    "https://prepzii.com",
+    "https://www.prepzii.com",
+  ])
+);
 
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider
-      {...productionClerkScriptProps}
+      allowedRedirectOrigins={clerkAllowedRedirectOrigins}
       afterSignOutUrl={SIGN_IN_ROUTE}
       signInUrl={SIGN_IN_ROUTE}
       signUpUrl={SIGN_UP_ROUTE}
@@ -205,8 +205,6 @@ export default function RootLayout({ children }) {
         <head>
           {/* DNS prefetch + TLS preconnect for external origins */}
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="preconnect" href="https://clerk.prepzii.com" crossOrigin="anonymous" />
-          <link rel="dns-prefetch" href="https://clerk.prepzii.com" />
           {/* Structured data for Google rich results */}
           <script
             type="application/ld+json"
