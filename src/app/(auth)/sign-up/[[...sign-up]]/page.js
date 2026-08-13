@@ -2,6 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getAuthContext, getPostAuthRedirectPath, ONBOARDING_ROUTE } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
+import AuthRedirectGuard from "@/components/AuthRedirectGuard";
 import Link from "next/link";
  
 export default async function Page() {
@@ -13,6 +14,7 @@ export default async function Page() {
  
   return (
     <AuthLayout>
+      <AuthRedirectGuard />
       <div className="mb-7">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-2"
@@ -46,6 +48,7 @@ export default async function Page() {
           path="/sign-up"
           forceRedirectUrl={ONBOARDING_ROUTE}
           fallbackRedirectUrl={ONBOARDING_ROUTE}
+          oauthFlow="redirect"
           appearance={{
             elements: {
               card: "shadow-none bg-transparent p-0 border-0",

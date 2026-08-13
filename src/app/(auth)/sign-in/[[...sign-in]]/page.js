@@ -2,6 +2,7 @@ import { SignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { DASHBOARD_ROUTE, getAuthContext, getPostAuthRedirectPath } from "@/lib/auth";
 import AuthLayout from "@/components/AuthLayout";
+import AuthRedirectGuard from "@/components/AuthRedirectGuard";
 import Link from "next/link";
  
 export default async function Page() {
@@ -13,6 +14,7 @@ export default async function Page() {
  
   return (
     <AuthLayout>
+      <AuthRedirectGuard />
       <div className="mb-7">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-2"
@@ -46,6 +48,7 @@ export default async function Page() {
           path="/sign-in"
           forceRedirectUrl={DASHBOARD_ROUTE}
           fallbackRedirectUrl={DASHBOARD_ROUTE}
+          oauthFlow="redirect"
           appearance={{
             elements: {
               card: "shadow-none bg-transparent p-0 border-0",
