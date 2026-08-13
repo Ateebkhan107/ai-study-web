@@ -6,6 +6,7 @@ import {
   DASHBOARD_ROUTE,
   ONBOARDING_ROUTE,
   SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
 } from "@/lib/auth";
 
 import "./globals.css";
@@ -176,8 +177,12 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider
       afterSignOutUrl={SIGN_IN_ROUTE}
+      signInUrl={SIGN_IN_ROUTE}
+      signUpUrl={SIGN_UP_ROUTE}
       signInForceRedirectUrl={DASHBOARD_ROUTE}
       signUpForceRedirectUrl={ONBOARDING_ROUTE}
+      signInFallbackRedirectUrl={DASHBOARD_ROUTE}
+      signUpFallbackRedirectUrl={ONBOARDING_ROUTE}
     >
       <html
         lang="en"
@@ -187,6 +192,7 @@ export default function RootLayout({ children }) {
         <head>
           {/* DNS prefetch + TLS preconnect for external origins */}
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://clerk.prepzii.com" crossOrigin="anonymous" />
           <link rel="dns-prefetch" href="https://clerk.prepzii.com" />
           {/* Structured data for Google rich results */}
           <script
@@ -215,4 +221,3 @@ export default function RootLayout({ children }) {
     </ClerkProvider>
   );
 }
-

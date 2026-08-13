@@ -6,16 +6,16 @@ import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { getUserProfile } from "@/utils/userProfile";
 import { TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
-  const user = await currentUser();
-  if (!user) {
+  const { userId } = await auth();
+  if (!userId) {
     redirect("/sign-in");
   }
-  const profile = await getUserProfile(user.id);
+  const profile = await getUserProfile(userId);
 
   const activeTrackKey = profile?.exam === "NEET" ? "NEET" : "JEE";
 
