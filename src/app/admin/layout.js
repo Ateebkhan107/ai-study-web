@@ -1,8 +1,11 @@
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { isAdmin } from "@/lib/admin";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default async function AdminLayout({ children }) {
+  await connection();
+
   const admin = await isAdmin();
 
   if (!admin) {

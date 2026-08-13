@@ -1,4 +1,5 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { unstable_rethrow } from "next/navigation";
 
 
 export async function isAdmin(){
@@ -47,6 +48,7 @@ user.publicMetadata?.role
 
 catch(error){
 
+unstable_rethrow(error);
 
 console.log(
 "Admin check error",
