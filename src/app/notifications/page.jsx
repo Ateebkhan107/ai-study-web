@@ -12,29 +12,29 @@ export default function NotificationsPage() {
   const [track, setTrack] = useState(null);
 
   useEffect(() => {
+    async function loadNotifications() {
+      try {
+        const res = await fetch("/api/notifications", {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to load notifications");
+        }
+
+        const data = await res.json();
+
+        setTrack(data?.track || "JEE");
+        setNotifications(data?.notifications || []);
+      } catch (error) {
+        console.log("Notification fetch error:", error);
+      }
+    }
+
     if (user) {
       loadNotifications();
     }
   }, [user]);
-
-  async function loadNotifications() {
-    try {
-      const res = await fetch("/api/notifications", {
-        cache: "no-store",
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to load notifications");
-      }
-
-      const data = await res.json();
-
-      setTrack(data?.track || "JEE");
-      setNotifications(data?.notifications || []);
-    } catch (error) {
-      console.log("Notification fetch error:", error);
-    }
-  }
 
   async function openNotification(item) {
     try {

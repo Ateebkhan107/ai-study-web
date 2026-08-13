@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getInstituteContext } from "@/lib/instituteAuth";
 import { getChapterTargets } from "@/lib/questions";
+import { TestCreateSchema } from "@/lib/validations";
 
 function shuffle(rows) {
   return [...rows].sort(() => Math.random() - 0.5);
@@ -13,21 +14,29 @@ export async function POST(request, { params }) {
     const context = await getInstituteContext(slug, ["COACHING_ADMIN"]);
     if (context.error) return context.error;
 
-    const body = await request.json();
-    const title = String(body.title || "").trim();
-    const batchId = body.batch_id || "";
-    const exam = String(body.exam || "JEE").trim().toUpperCase();
-    const subject = String(body.subject || "").trim();
-    const chapters = Array.isArray(body.chapters) ? body.chapters.map((chapter) => String(chapter).trim()).filter(Boolean) : [];
-    const duration = Math.max(5, Math.min(Number(body.duration_minutes) || 30, 240));
-    const questionCount = Math.max(1, Math.min(Number(body.question_count) || 10, 100));
-    const difficulty = String(body.difficulty || "mixed").trim();
-
-    const mode = body.mode || "auto"; // "auto" or "custom"
-
-    if (!title || !batchId || !["JEE", "NEET"].includes(exam) || !subject) {
-      return NextResponse.json({ error: "Title, batch, exam, subject are required" }, { status: 400 });
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
+
+    const parsed = TestCreateSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const {
+      title,
+      batch_id: batchId,
+      exam,
+      subject,
+      chapters,
+      duration_minutes: duration,
+      question_count: questionCount,
+      difficulty,
+      mode,
+    } = parsed.data;
 
     if (mode === "auto" && !chapters.length) {
       return NextResponse.json({ error: "Chapters are required for auto-generated tests" }, { status: 400 });

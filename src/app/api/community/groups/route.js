@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { GroupCreateSchema } from "@/lib/validations";
 import {
   getCommunityUser,
   getUserGroupCount,
@@ -146,19 +147,12 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  // Validate fields
-  const name = (body.name || "").trim();
-  const description = (body.description || "").trim();
-  const privacy = body.privacy;
+  const parsed = GroupCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
 
-  if (!name || name.length < 3 || name.length > 60)
-    return NextResponse.json({ error: "Group name must be 3–60 characters" }, { status: 400 });
-
-  if (description.length > 300)
-    return NextResponse.json({ error: "Description must be ≤ 300 characters" }, { status: 400 });
-
-  if (!["PUBLIC", "PRIVATE"].includes(privacy))
-    return NextResponse.json({ error: "Privacy must be PUBLIC or PRIVATE" }, { status: 400 });
+  const { name, description, privacy, category, avatar_url } = parsed.data;
 
   // User can only create groups for their own exam track
   const examTrack = communityUser.examTrack;

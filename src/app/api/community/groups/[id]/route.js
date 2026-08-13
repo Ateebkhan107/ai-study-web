@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { GroupUpdateSchema } from "@/lib/validations";
 import { isGroupMember, isGroupOwner, canReadGroup } from "@/lib/community/permissions";
 
 // ─── GET /api/community/groups/[id] ──────────────────────────────────────────
@@ -52,25 +53,12 @@ export async function PATCH(request, { params }) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const updates = {};
-  if (body.name !== undefined) {
-    const name = (body.name || "").trim();
-    if (name.length < 3 || name.length > 60)
-      return NextResponse.json({ error: "Name must be 3–60 characters" }, { status: 400 });
-    updates.name = name;
-  }
-  if (body.description !== undefined) {
-    const desc = (body.description || "").trim();
-    if (desc.length > 300)
-      return NextResponse.json({ error: "Description ≤ 300 characters" }, { status: 400 });
-    updates.description = desc || null;
-  }
-  if (body.privacy !== undefined) {
-    if (!["PUBLIC", "PRIVATE"].includes(body.privacy))
-      return NextResponse.json({ error: "Invalid privacy value" }, { status: 400 });
-    updates.privacy = body.privacy;
+  const parsed = GroupUpdateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
   }
 
+  const updates = { ...parsed.data };
   if (Object.keys(updates).length === 0)
     return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
 

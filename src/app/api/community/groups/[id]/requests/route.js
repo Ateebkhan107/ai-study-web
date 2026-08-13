@@ -1,7 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { canManageJoinRequests } from "@/lib/community/permissions";
+import { canManageJoinRequests, getCommunityUser } from "@/lib/community/permissions";
+import { RequestActionSchema } from "@/lib/validations";
 
 // ─── GET /api/community/groups/[id]/requests ─────────────────────────────────
 // Owner/admin: list pending join requests
@@ -71,9 +72,12 @@ export async function PATCH(request, { params }) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { requestId, action } = body;
-  if (!requestId || !["ACCEPTED", "REJECTED"].includes(action))
-    return NextResponse.json({ error: "requestId and action (ACCEPTED|REJECTED) required" }, { status: 400 });
+  const parsed = RequestActionSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { requestId, action } = parsed.data;
 
   // Verify request belongs to this group
   const { data: req } = await supabaseAdmin

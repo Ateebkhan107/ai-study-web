@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getInstituteContext } from "@/lib/instituteAuth";
+import { BatchCreateSchema, BatchMemberSchema } from "@/lib/validations";
 
 export async function POST(request, { params }) {
   try {
@@ -8,14 +9,19 @@ export async function POST(request, { params }) {
     const context = await getInstituteContext(slug, ["COACHING_ADMIN"]);
     if (context.error) return context.error;
 
-    const body = await request.json();
-    const name = String(body.name || "").trim();
-    const exam = String(body.exam || "JEE").trim().toUpperCase();
-    const targetYear = Number(body.target_year) || null;
-
-    if (name.length < 2 || !["JEE", "NEET"].includes(exam)) {
-      return NextResponse.json({ error: "Batch name and exam are required" }, { status: 400 });
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
+
+    const parsed = BatchCreateSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const { name, exam, target_year: targetYear } = parsed.data;
 
     const { data, error } = await supabaseAdmin
       .from("institute_batches")
@@ -43,11 +49,19 @@ export async function PATCH(request, { params }) {
     const context = await getInstituteContext(slug, ["COACHING_ADMIN"]);
     if (context.error) return context.error;
 
-    const body = await request.json();
-    const { batch_id: batchId, member_id: memberId, action = "add" } = body;
-    if (!batchId || !memberId) {
-      return NextResponse.json({ error: "batch_id and member_id are required" }, { status: 400 });
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
+
+    const parsed = BatchMemberSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const { batch_id: batchId, member_id: memberId, action } = parsed.data;
 
     const [{ data: batch, error: batchError }, { data: member, error: memberError }] = await Promise.all([
       supabaseAdmin.from("institute_batches").select("id").eq("id", batchId).eq("institute_id", context.institute.id).maybeSingle(),

@@ -1,5 +1,11 @@
-const url = "https://vyqcciooigmnfmzrwtpp.supabase.co/rest/v1/";
-const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5cWNjaW9vaWdtbmZtenJ3dHBwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDg0MzQxNiwiZXhwIjoyMDk2NDE5NDE2fQ.91zhSyFkLbS5NFauG-ghdc6i8tqvxEgKCEj8nW7dkww";
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL.replace(/\/$/, "")}/rest/v1/`
+  : "";
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!url || !key) {
+  throw new Error("NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required.");
+}
 
 async function run() {
   const res = await fetch(url, {

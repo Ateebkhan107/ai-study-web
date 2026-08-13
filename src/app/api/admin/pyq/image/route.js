@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/admin";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { PyqImageDeleteSchema } from "@/lib/validations";
 import { fetchAllRows } from "@/lib/adminImportPackages";
 
 const BUCKET = "pyq-images";
@@ -58,10 +59,21 @@ export async function POST(request) {
   const admin = await isAdmin();
   if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const body = await request.json().catch(() => ({}));
-  const { id, field, imageUrl: imageUrlFromBody = null, deleteStorage = false, confirmDelete = false } = body;
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
 
-  if (!id || !REMOVABLE_FIELDS.has(field)) {
+  const parsed = PyqImageDeleteSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { id, field, imageUrl: imageUrlFromBody, deleteStorage, confirmDelete } = parsed.data;
+
+  if (!REMOVABLE_FIELDS.has(field)) {
     return NextResponse.json({ error: "Invalid image removal request" }, { status: 400 });
   }
 

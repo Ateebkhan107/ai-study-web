@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { isAdmin } from "@/lib/admin";
+import { ModerationActionSchema } from "@/lib/validations";
 
 const ALLOWED_ACTIONS = [
   "dismiss_report",
@@ -28,11 +29,12 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { action, targetType, targetId, reason, extra } = body;
+  const parsed = ModerationActionSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
 
-  if (!ALLOWED_ACTIONS.includes(action))
-    return NextResponse.json({ error: "Invalid action" }, { status: 400 });
-  if (!targetId) return NextResponse.json({ error: "targetId required" }, { status: 400 });
+  const { action, targetType, targetId, reason, extra } = parsed.data;
 
   let result;
 

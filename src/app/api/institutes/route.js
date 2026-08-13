@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getActingUser, slugifyInstituteName, unauthorized } from "@/lib/instituteAuth";
+import { InstituteCreateSchema } from "@/lib/validations";
 
 export async function GET() {
   try {
@@ -43,12 +44,22 @@ export async function POST(request) {
     const actor = await getActingUser();
     if (!actor) return unauthorized();
 
-    const body = await request.json();
-    const name = String(body.name || "").trim();
-    const logoUrl = String(body.logo_url || "").trim() || null;
-    const baseSlug = slugifyInstituteName(body.slug || name);
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    }
 
-    if (name.length < 2 || !baseSlug) {
+    const parsed = InstituteCreateSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const { name, logo_url: logoUrl, slug: customSlug } = parsed.data;
+    const baseSlug = slugifyInstituteName(customSlug || name);
+
+    if (!baseSlug) {
       return NextResponse.json({ error: "Institute name is required" }, { status: 400 });
     }
 

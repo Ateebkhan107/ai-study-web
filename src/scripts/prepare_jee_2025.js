@@ -74,10 +74,10 @@ async function extractPageData(imagePath) {
 }
 
 async function processPDF(pdfFile, shiftNumber) {
-//   console.log(\`\\n=============================================\`);
-//   console.log(\`📄 Processing \${pdfFile} (Shift \${shiftNumber})\`);
+//   console.log(`\n=============================================`);
+//   console.log(`📄 Processing ${pdfFile} (Shift ${shiftNumber})`);
   const pdfPath = path.join(rootDir, pdfFile);
-  const outputDir = path.join(rootDir, "tmp", \`jee-main-2025-shift-\${shiftNumber}\`);
+  const outputDir = path.join(rootDir, "tmp", `jee-main-2025-shift-${shiftNumber}`);
   const imagesDir = path.join(outputDir, "question-images");
   fs.mkdirSync(imagesDir, { recursive: true });
 
@@ -100,25 +100,25 @@ async function processPDF(pdfFile, shiftNumber) {
       const img = await storeAsImage(pageNum);
       const imgPath = img.path;
 
-//       console.log(\`   Extracting questions via Gemini from page \${pageNum}...\`);
+//       console.log(`   Extracting questions via Gemini from page ${pageNum}...`);
       const questionsOnPage = await extractPageData(imgPath);
       
       for (const q of questionsOnPage) {
         q.exam = "JEE Main";
         q.year = 2025;
         q.attempt = "January Session";
-        q.shift = \`Shift \${shiftNumber}\`;
+        q.shift = `Shift ${shiftNumber}`;
         q.image_path = imgPath; // Storing the full page as the image for now
         allQuestions.push(q);
       }
       
-//       console.log(\`   Found \${questionsOnPage.length} questions.\`);
+//       console.log(`   Found ${questionsOnPage.length} questions.`);
     } catch (err) {
       if (err.message && (err.message.includes("could not load pdf") || err.message.includes("Page number out of range") || err.message.includes("does not exist"))) {
-//         console.log(\`   Reached end of PDF at page \${pageNum - 1}.\`);
+//         console.log(`   Reached end of PDF at page ${pageNum - 1}.`);
         break;
       }
-      console.error(\`Error on page \${pageNum}:\`, err);
+      console.error(`Error on page ${pageNum}:`, err);
     }
   }
 
@@ -126,11 +126,11 @@ async function processPDF(pdfFile, shiftNumber) {
   allQuestions = allQuestions.filter((v,i,a)=>a.findIndex(v2=>(v2.number===v.number))===i);
   allQuestions.sort((a, b) => a.number - b.number);
 
-//   console.log(\`Total unique questions found: \${allQuestions.length}\`);
+//   console.log(`Total unique questions found: ${allQuestions.length}`);
 
-  const manifestPath = path.join(outputDir, \`jee-main-2025-shift-\${shiftNumber}-manifest.json\`);
+  const manifestPath = path.join(outputDir, `jee-main-2025-shift-${shiftNumber}-manifest.json`);
   fs.writeFileSync(manifestPath, JSON.stringify(allQuestions, null, 2));
-//   console.log(\`✅ Saved manifest to \${manifestPath}\`);
+//   console.log(`✅ Saved manifest to ${manifestPath}`);
 }
 
 async function run() {

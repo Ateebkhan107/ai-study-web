@@ -47,7 +47,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Why PrepZii?</h2>
           <div className="space-y-4 text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
             <p>
-              Preparing for competitive exams like JEE and NEET is incredibly challenging. Students often face an overwhelming amount of content, lack of structured feedback, and expensive coaching institutes that don't cater to individual learning paces.
+              Preparing for competitive exams like JEE and NEET is incredibly challenging. Students often face an overwhelming amount of content, lack of structured feedback, and expensive coaching institutes that don&apos;t cater to individual learning paces.
             </p>
             <p>
               <strong>PrepZii was built to change this.</strong> We believe that technology can provide a personalized, hyper-focused learning experience that adapts to you. Instead of just giving you questions, we analyze your weaknesses, track your performance, and provide an environment that perfectly simulates the real CBT (Computer Based Test) experience.
@@ -79,7 +79,7 @@ export default function AboutPage() {
         <div className="glass-card p-8 md:p-12 rounded-3xl border-indigo-500/20 shadow-lg shadow-indigo-500/5">
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Our Future Roadmap</h2>
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm mb-6">
-            We are constantly iterating and improving. Here is a glimpse of what's coming next to PrepZii:
+            We are constantly iterating and improving. Here is a glimpse of what&apos;s coming next to PrepZii:
           </p>
           <ul className="space-y-4">
             {[
@@ -105,7 +105,7 @@ export default function AboutPage() {
           </div>
           <h2 className="text-xl font-black text-slate-900 dark:text-white">Built with passion by Team PrepZii</h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm max-w-lg mx-auto">
-            We are dedicated to helping you achieve your dreams. Keep learning, keep pushing your limits, and trust the process. You've got this.
+            We are dedicated to helping you achieve your dreams. Keep learning, keep pushing your limits, and trust the process. You&apos;ve got this.
           </p>
         </div>
 

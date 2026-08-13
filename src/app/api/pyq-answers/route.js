@@ -16,10 +16,26 @@ export async function POST(request) {
       return NextResponse.json({ error: "No question IDs provided" }, { status: 400 });
     }
 
+    const { data: attempts, error: attemptsError } = await supabaseAdmin
+      .from("pyq_attempts")
+      .select("question_id")
+      .eq("user_id", userId)
+      .in("question_id", questionIds);
+
+    if (attemptsError) throw attemptsError;
+
+    const attemptedQuestionIds = [
+      ...new Set((attempts || []).map((attempt) => String(attempt.question_id))),
+    ];
+
+    if (attemptedQuestionIds.length === 0) {
+      return NextResponse.json({ answers: [] });
+    }
+
     const { data, error } = await supabaseAdmin
       .from("pyq_questions")
       .select("id,correct_option,correct_options,numerical_answer,numerical_min,numerical_max,explanation,explanation_image")
-      .in("id", questionIds);
+      .in("id", attemptedQuestionIds);
     if (error) throw error;
 
     return NextResponse.json({ answers: data || [] });

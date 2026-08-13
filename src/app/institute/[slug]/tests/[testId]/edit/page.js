@@ -62,22 +62,22 @@ export default function TestEditorPage({ params }) {
   const [importResult, setImportResult] = useState(null);
   const csvInputRef = useRef(null);
 
-  async function loadTest() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/institutes/${slug}/tests/${testId}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to load test");
-      setTest(data.test);
-      setQuestionForm(prev => ({ ...prev, subject: data.test.subject || "" }));
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function loadTest() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/institutes/${slug}/tests/${testId}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to load test");
+        setTest(data.test);
+        setQuestionForm(prev => ({ ...prev, subject: data.test.subject || "" }));
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     loadTest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, testId]);

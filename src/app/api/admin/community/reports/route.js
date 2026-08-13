@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { isAdmin } from "@/lib/admin";
+import { AdminReportUpdateSchema } from "@/lib/validations";
 
 // ─── GET /api/admin/community/reports ────────────────────────────────────────
 export async function GET(request) {
@@ -43,9 +44,12 @@ export async function PATCH(request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { reportId, action } = body;
-  if (!reportId || !["dismissed", "actioned"].includes(action))
-    return NextResponse.json({ error: "reportId and action (dismissed|actioned) required" }, { status: 400 });
+  const parsed = AdminReportUpdateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { reportId, action } = parsed.data;
 
   const { error } = await supabaseAdmin
     .from("community_reports")

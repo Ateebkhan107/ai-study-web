@@ -11,26 +11,26 @@ export default function HistoryPage() {
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function load() {
-    try {
-      const response = await fetch("/api/test-attempts", {
-        cache: "no-store",
-      });
+  useEffect(() => {
+    async function load() {
+      try {
+        const response = await fetch("/api/test-attempts", {
+          cache: "no-store",
+        });
 
-      if (!response.ok) {
+        if (!response.ok) {
+          return;
+        }
+
+        const data = await response.json();
+        setTests(data.tests || []);
+      } catch (error) {
         return;
       }
 
-      const data = await response.json();
-      setTests(data.tests || []);
-    } catch (error) {
-      return;
+      setLoading(false);
     }
 
-    setLoading(false);
-  }
-
-  useEffect(() => {
     if (user) {
       load();
     }

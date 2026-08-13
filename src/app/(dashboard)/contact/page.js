@@ -33,7 +33,7 @@ export default function ContactPage() {
             </div>
             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">General Support</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
-              Having trouble with your account, tests, or subscriptions? We're here to help you get back on track.
+              Having trouble with your account, tests, or subscriptions? We&apos;re here to help you get back on track.
             </p>
             <a 
               href="mailto:contact.prepzii@gmail.com" 

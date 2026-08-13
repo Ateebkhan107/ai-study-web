@@ -96,17 +96,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       await supabase.realtime.setAuth(token);
       if (cancelled) return;
 
-      const { error: rlsProbeError } = await supabase
-        .from("community_group_messages")
-        .select("id")
-        .eq("group_id", groupId)
-        .limit(1);
-      console.log("[GROUP_CHAT_REALTIME_RLS_PROBE]", {
-        groupId,
-        ok: !rlsProbeError,
-        error: rlsProbeError?.message || null,
-      });
-
       // Clean up existing channels
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current);
@@ -121,21 +110,9 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       const msgChannel = supabase
         .channel(`group-chat-${groupId}`)
         .on(
-          "system",
-          {},
-          (payload) => {
-            console.log("[GROUP_CHAT_REALTIME_SYSTEM]", {
-              extension: payload.extension,
-              status: payload.status,
-              message: payload.message,
-            });
-          }
-        )
-        .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
           async (payload) => {
-            console.log("[GROUP_CHAT_REALTIME_INSERT]", payload.new?.id);
             const newMsg = payload.new;
             if (!newMsg?.id) return;
 
@@ -163,7 +140,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
           }
         )
         .subscribe((status) => {
-          console.log(`[GROUP_CHAT_REALTIME:${groupId}]`, status);
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
             console.warn("[GROUP_CHAT_REALTIME_STATUS]", {

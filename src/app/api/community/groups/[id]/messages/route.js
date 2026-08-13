@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { MessageSchema } from "@/lib/validations";
 import { canSendGroupMessage, isGroupMember, checkRateLimit } from "@/lib/community/permissions";
 
 const PAGE_SIZE = 40;
@@ -120,10 +121,12 @@ export async function POST(request, { params }) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const content = (body.content || "").trim();
-  if (!content) return NextResponse.json({ error: "Message cannot be empty" }, { status: 400 });
-  if (content.length > 2000)
-    return NextResponse.json({ error: "Message too long (max 2000 characters)" }, { status: 400 });
+  const parsed = MessageSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { content } = parsed.data;
 
   // sender_id is always derived from the Clerk session — never from body
   const { data: message, error } = await supabaseAdmin

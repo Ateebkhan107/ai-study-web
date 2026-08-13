@@ -82,6 +82,7 @@ export async function POST(req) {
       currency: "INR",
       receipt: `prepzii_${normalizedTrack.toLowerCase()}_${Date.now()}`,
       notes: {
+        userId,
         plan,
         examTrack: normalizedTrack,
         duration: selectedPlan.duration,

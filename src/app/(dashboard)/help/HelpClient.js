@@ -115,7 +115,7 @@ export default function HelpClient() {
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No results found</h3>
               <p className="text-slate-500 dark:text-slate-400 text-sm">
-                We couldn't find any FAQs matching "{searchQuery}".
+                We couldn&apos;t find any FAQs matching &quot;{searchQuery}&quot;.
               </p>
               <button 
                 onClick={() => setSearchQuery("")}
@@ -131,7 +131,7 @@ export default function HelpClient() {
         <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-center space-y-4">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white">Still need help?</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-            Can't find the answer you're looking for? Our support team is here to help you with any questions.
+            Can&apos;t find the answer you&apos;re looking for? Our support team is here to help you with any questions.
           </p>
           <div className="pt-2">
             <Link 

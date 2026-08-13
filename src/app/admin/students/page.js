@@ -10,6 +10,20 @@ export default function AdminStudentsPage() {
   const [track, setTrack] = useState("ALL");
 
   useEffect(() => {
+    async function loadStudents() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/admin/students?search=${encodeURIComponent(search)}&track=${track}`);
+        const data = await res.json();
+        if (data.success) {
+          setStudents(data.students);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    }
+
     // Debounce search slightly
     const timeoutId = setTimeout(() => {
       loadStudents();
@@ -17,20 +31,6 @@ export default function AdminStudentsPage() {
     return () => clearTimeout(timeoutId);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, track]);
-
-  async function loadStudents() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/admin/students?search=${encodeURIComponent(search)}&track=${track}`);
-      const data = await res.json();
-      if (data.success) {
-        setStudents(data.students);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  }
 
   return (
     <div className="space-y-6">

@@ -30,7 +30,7 @@ export default function ReportBugPage() {
             <Bug className="w-8 h-8" />
           </div>
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
-            Found something that isn't working quite right? We appreciate your help in identifying issues so we can fix them as quickly as possible.
+            Found something that isn&apos;t working quite right? We appreciate your help in identifying issues so we can fix them as quickly as possible.
           </p>
         </div>
 

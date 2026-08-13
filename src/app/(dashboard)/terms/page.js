@@ -57,7 +57,7 @@ export default function TermsPage() {
         {/* Content */}
         <div className="space-y-10">
           <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-            Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the PrepZii website and the PrepZii mobile application (the "Service") operated by PrepZii ("us", "we", or "our"). Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms.
+            Please read these Terms and Conditions (&quot;Terms&quot;, &quot;Terms and Conditions&quot;) carefully before using the PrepZii website and the PrepZii mobile application (the &quot;Service&quot;) operated by PrepZii (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;). Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms.
           </p>
 
           <div className="space-y-8">

@@ -27,24 +27,41 @@ export default function QuestionManager({ defaultTab = "import" }) {
   const [editForm, setEditForm] = useState({});
 
   useEffect(() => {
+    async function loadExams() {
+      try {
+        const res = await fetch("/api/admin/exams");
+        const data = await res.json();
+        if (data.exams) setExams(data.exams);
+      } catch (error) {
+        console.error(error);
+      }
+    }
     loadExams();
   }, []);
 
   useEffect(() => {
+    async function loadQuestions() {
+      setLoadingQs(true);
+      try {
+        const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
+        const data = await res.json();
+        if (data.questions && Array.isArray(data.questions)) {
+          setQuestions(data.questions);
+        } else if (Array.isArray(data)) {
+          setQuestions(data);
+        } else {
+          console.warn("[QuestionManager] Unexpected data format:", data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setLoadingQs(false);
+    }
+
     if (activeTab === "manage" && selectedExamId) {
       loadQuestions();
     }
   }, [activeTab, selectedExamId]);
-
-  async function loadExams() {
-    try {
-      const res = await fetch("/api/admin/exams");
-      const data = await res.json();
-      if (data.exams) setExams(data.exams);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   async function handleCsvUpload(e) {
     e.preventDefault();
@@ -94,28 +111,7 @@ export default function QuestionManager({ defaultTab = "import" }) {
     setUploading(false);
   }
 
-  async function loadQuestions() {
-    setLoadingQs(true);
-    try {
-//       console.log(`[QuestionManager] Fetching questions for exam_id: ${selectedExamId}`);
-      const res = await fetch(`/api/admin/pyq?exam_id=${selectedExamId}&limit=1000`);
-      const data = await res.json();
-//       console.log("[QuestionManager] API Response:", data);
-      
-      if (data.questions && Array.isArray(data.questions)) {
-//         console.log(`[QuestionManager] Setting ${data.questions.length} questions from data.questions`);
-        setQuestions(data.questions);
-      } else if (Array.isArray(data)) {
-//         console.log(`[QuestionManager] Setting ${data.length} questions from raw array`);
-        setQuestions(data);
-      } else {
-        console.warn("[QuestionManager] Unexpected data format:", data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setLoadingQs(false);
-  }
+
 
   async function saveQuestion(id) {
     try {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { findClerkUserByEmail, getInstituteContext } from "@/lib/instituteAuth";
+import { StudentAddSchema } from "@/lib/validations";
 
 export async function POST(request, { params }) {
   try {
@@ -8,13 +9,19 @@ export async function POST(request, { params }) {
     const context = await getInstituteContext(slug, ["COACHING_ADMIN"]);
     if (context.error) return context.error;
 
-    const body = await request.json();
-    const email = String(body.email || "").trim().toLowerCase();
-    const batchId = body.batch_id || null;
-
-    if (!email || !email.includes("@")) {
-      return NextResponse.json({ error: "Valid student email is required" }, { status: 400 });
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
+
+    const parsed = StudentAddSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const { email, batch_id: batchId } = parsed.data;
 
     const clerkUser = await findClerkUserByEmail(email);
     const userId = clerkUser?.id || null;

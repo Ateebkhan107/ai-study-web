@@ -1,7 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { getCommunityUser } from "@/lib/community/permissions";
+import { getCommunityUser, getProfileMap } from "@/lib/community/permissions";
+import { BlockSchema } from "@/lib/validations";
 
 // ─── GET /api/community/blocks ────────────────────────────────────────────────
 export async function GET() {
@@ -48,8 +49,12 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { targetUserId } = body;
-  if (!targetUserId) return NextResponse.json({ error: "targetUserId required" }, { status: 400 });
+  const parsed = BlockSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { targetUserId } = parsed.data;
   if (targetUserId === userId) return NextResponse.json({ error: "Cannot block yourself" }, { status: 400 });
 
   // Verify target exists

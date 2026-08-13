@@ -14,25 +14,25 @@ export default function ReviewPage() {
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadReview() {
-    try {
-      const response = await fetch(`/api/test-attempts/${id}/review`, {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to load review: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setAnswers(data.answers || []);
-    } catch (err) {
-//       console.log(err);
-    }
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function loadReview() {
+      try {
+        const response = await fetch(`/api/test-attempts/${id}/review`, {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to load review: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setAnswers(data.answers || []);
+      } catch (err) {
+//         console.log(err);
+      }
+      setLoading(false);
+    }
+
     if (id) {
       loadReview();
     }

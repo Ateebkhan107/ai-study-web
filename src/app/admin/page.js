@@ -54,7 +54,7 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-black mb-2">Dashboard Overview</h1>
-        <p className="text-gray-500 dark:text-gray-400">Welcome to the PrepZii Admin CMS. Here's what's happening today.</p>
+        <p className="text-gray-500 dark:text-gray-400">Welcome to the PrepZii Admin CMS. Here&apos;s what&apos;s happening today.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { isGroupMember, isGroupAdmin, isGroupOwner } from "@/lib/community/permissions";
+import { GroupMemberUpdateSchema, GroupMemberRemoveSchema } from "@/lib/validations";
 
 // ─── GET /api/community/groups/[id]/members ──────────────────────────────────
 export async function GET(request, { params }) {
@@ -60,9 +61,12 @@ export async function PATCH(request, { params }) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { targetUserId, role } = body;
-  if (!targetUserId || !["ADMIN", "MEMBER"].includes(role))
-    return NextResponse.json({ error: "targetUserId and role (ADMIN|MEMBER) required" }, { status: 400 });
+  const parsed = GroupMemberUpdateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { targetUserId, role } = parsed.data;
 
   if (targetUserId === userId)
     return NextResponse.json({ error: "Cannot change your own role" }, { status: 400 });
@@ -101,8 +105,12 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { targetUserId } = body;
-  if (!targetUserId) return NextResponse.json({ error: "targetUserId required" }, { status: 400 });
+  const parsed = GroupMemberRemoveSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
+
+  const { targetUserId } = parsed.data;
   if (targetUserId === userId) return NextResponse.json({ error: "Cannot remove yourself" }, { status: 400 });
 
   const targetMembership = await isGroupMember(groupId, targetUserId);

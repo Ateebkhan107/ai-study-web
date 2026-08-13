@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getInstituteContext } from "@/lib/instituteAuth";
+import { TestQuestionCreateSchema } from "@/lib/validations";
 
 export async function POST(request, { params }) {
   try {
@@ -8,7 +9,19 @@ export async function POST(request, { params }) {
     const context = await getInstituteContext(slug, ["COACHING_ADMIN", "OWNER"]);
     if (context.error) return context.error;
 
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    }
+
+    const parsed = TestQuestionCreateSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+    }
+
+    const questionData = parsed.data;
 
     // 1. Verify test exists and is owned by institute
     const { data: test, error: testError } = await supabaseAdmin
@@ -31,25 +44,25 @@ export async function POST(request, { params }) {
       .from("questions")
       .insert({
         institute_id: context.institute.id, // Custom question isolated to this institute
-        exam: body.exam || "JEE",
-        subject: body.subject || "Physics",
-        chapter: body.chapter || "Mixed",
-        topic: body.topic || "Mixed",
-        difficulty: body.difficulty || "Medium",
-        question_type: body.question_type || "MCQ",
-        question_text: body.question_text || "",
-        question_image: body.question_image || null,
-        option_a: body.option_a || "",
-        option_b: body.option_b || "",
-        option_c: body.option_c || "",
-        option_d: body.option_d || "",
-        option_a_image: body.option_a_image || null,
-        option_b_image: body.option_b_image || null,
-        option_c_image: body.option_c_image || null,
-        option_d_image: body.option_d_image || null,
-        correct_option: body.correct_option || "A",
-        marks: Number(body.marks) || 4,
-        negative_marks: Number(body.negative_marks) || 1,
+        exam: questionData.exam,
+        subject: questionData.subject,
+        chapter: questionData.chapter,
+        topic: questionData.topic,
+        difficulty: questionData.difficulty,
+        question_type: questionData.question_type,
+        question_text: questionData.question_text,
+        question_image: questionData.question_image,
+        option_a: questionData.option_a,
+        option_b: questionData.option_b,
+        option_c: questionData.option_c,
+        option_d: questionData.option_d,
+        option_a_image: questionData.option_a_image,
+        option_b_image: questionData.option_b_image,
+        option_c_image: questionData.option_c_image,
+        option_d_image: questionData.option_d_image,
+        correct_option: questionData.correct_option,
+        marks: questionData.marks,
+        negative_marks: questionData.negative_marks,
         status: "PUBLISHED", // Published within the context of the institute
         is_active: true,
       })

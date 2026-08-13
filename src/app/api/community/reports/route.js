@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { ReportCreateSchema } from "@/lib/validations";
 import { checkRateLimit } from "@/lib/community/permissions";
 
 // ─── POST /api/community/reports ──────────────────────────────────────────────
@@ -19,17 +20,13 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { targetType, targetId, reason } = body;
+  const parsed = ReportCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
+  }
 
-  if (!["user", "message", "group"].includes(targetType))
-    return NextResponse.json({ error: "targetType must be user, message, or group" }, { status: 400 });
-
-  if (!targetId || typeof targetId !== "string")
-    return NextResponse.json({ error: "targetId required" }, { status: 400 });
-
-  const cleanReason = (reason || "").trim();
-  if (!cleanReason || cleanReason.length > 500)
-    return NextResponse.json({ error: "Reason required (max 500 characters)" }, { status: 400 });
+  const { targetType, targetId, reason } = parsed.data;
+  const cleanReason = reason.trim();
 
   const { data, error } = await supabaseAdmin
     .from("community_reports")

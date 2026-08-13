@@ -10,30 +10,30 @@ export default function ResultPage() {
   const [attempt, setAttempt] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function loadResult() {
-    try {
-      const res = await fetch(`/api/test-attempts/${id}`, {
-        cache: "no-store",
-      });
-
-      if (res.status === 404) {
-        setAttempt(null);
-        return;
-      }
-
-      if (!res.ok) {
-        throw new Error("Failed to load result");
-      }
-
-      const data = await res.json();
-      setAttempt(data);
-    } catch (err) {
-//       console.log(err);
-    }
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function loadResult() {
+      try {
+        const res = await fetch(`/api/test-attempts/${id}`, {
+          cache: "no-store",
+        });
+
+        if (res.status === 404) {
+          setAttempt(null);
+          return;
+        }
+
+        if (!res.ok) {
+          throw new Error("Failed to load result");
+        }
+
+        const data = await res.json();
+        setAttempt(data);
+      } catch (err) {
+//         console.log(err);
+      }
+      setLoading(false);
+    }
+
     loadResult();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

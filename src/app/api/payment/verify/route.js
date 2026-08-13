@@ -82,13 +82,25 @@ export async function POST(req) {
     const startsAt = new Date();
 
     const order = await razorpay.orders.fetch(razorpay_order_id);
+    const payment = await razorpay.payments.fetch(razorpay_payment_id);
     const orderPlan = String(order.notes?.plan || "");
     const orderTrack = normalizeExamTrack(order.notes?.examTrack);
+    const orderUserId = String(order.notes?.userId || "");
     const normalizedTrack = normalizeExamTrack(examTrack);
     const expectedAmount = PLAN_AMOUNT[plan] * 100;
     const profile = await getProfileAccessProfile(userId);
 
-    if (!examTrack || orderPlan !== plan || orderTrack !== normalizedTrack || normalizedTrack !== profile.examTrack || Number(order.amount) !== expectedAmount) {
+    if (
+      !examTrack ||
+      orderUserId !== userId ||
+      orderPlan !== plan ||
+      orderTrack !== normalizedTrack ||
+      normalizedTrack !== profile.examTrack ||
+      Number(order.amount) !== expectedAmount ||
+      String(payment.order_id) !== razorpay_order_id ||
+      Number(payment.amount) !== expectedAmount ||
+      payment.status !== "captured"
+    ) {
       return NextResponse.json(
         { success: false, message: "Payment order details do not match this subscription." },
         { status: 400 }
