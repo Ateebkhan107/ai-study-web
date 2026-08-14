@@ -133,6 +133,9 @@ export default function Leaderboard({ compact = false }) {
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mt-1">
             Top Performers
           </p>
+          <p className="mt-1 text-[11px] font-medium text-slate-400 dark:text-slate-500">
+            Includes clearly identified sample leaderboard data.
+          </p>
         </div>
       </div>
 
