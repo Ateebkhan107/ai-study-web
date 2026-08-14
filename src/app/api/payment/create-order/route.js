@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
-import razorpay from "@/lib/razorpay";
+import crypto from "crypto";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { createCashfreePaymentLink, getCashfreeMode } from "@/lib/cashfree";
 import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
@@ -77,31 +78,63 @@ export async function POST(req) {
       );
     }
 
-    const options = {
-      amount: selectedPlan.amount * 100,
-      currency: "INR",
-      receipt: `prepzii_${normalizedTrack.toLowerCase()}_${Date.now()}`,
-      notes: {
-        userId,
-        plan,
-        examTrack: normalizedTrack,
-        duration: selectedPlan.duration,
-      },
-    };
+    const clerkUser = await currentUser();
+    const customerEmail = clerkUser?.primaryEmailAddress?.emailAddress || undefined;
+    const customerPhone = clerkUser?.primaryPhoneNumber?.phoneNumber?.replace(/\D/g, "").slice(-10);
+    const mode = getCashfreeMode();
 
-    const order = await razorpay.orders.create(options);
+    if (mode === "production" && !customerPhone) {
+      return NextResponse.json(
+        { success: false, message: "Add a mobile number to your account before purchasing Pro." },
+        { status: 400 }
+      );
+    }
+
+    const linkId = `prepzii_${Date.now()}_${crypto.randomUUID().replaceAll("-", "").slice(0, 12)}`;
+    const returnUrl = new URL("/payment/return", req.nextUrl.origin);
+    returnUrl.searchParams.set("link_id", linkId);
+    const paymentLink = await createCashfreePaymentLink({
+      link_id: linkId,
+      link_amount: selectedPlan.amount,
+      link_currency: "INR",
+      link_purpose: `${normalizedTrack} ${plan} Pro subscription`,
+      customer_details: {
+        customer_name: clerkUser?.fullName || undefined,
+        customer_email: customerEmail,
+        customer_phone: customerPhone || "9999999999",
+      },
+      link_notes: {
+        user_id: userId,
+        plan,
+        exam_track: normalizedTrack,
+      },
+      link_meta: {
+        return_url: returnUrl.toString(),
+      },
+      link_notify: {
+        send_sms: false,
+        send_email: false,
+      },
+      link_partial_payments: false,
+    });
 
     return NextResponse.json({
       success: true,
-      order,
+      order: {
+        linkId: paymentLink.link_id,
+        paymentLink: paymentLink.link_url,
+        amount: paymentLink.link_amount,
+        currency: paymentLink.link_currency,
+        mode,
+      },
     });
   } catch (error) {
-    console.error(error);
+    console.error("Cashfree order creation failed:", error.details || error);
 
     return NextResponse.json(
       {
         success: false,
-        message: "Unable to create order",
+        message: error.message || "Unable to create order",
       },
       {
         status: 500,

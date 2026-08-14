@@ -1,4 +1,20 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function PaymentSuccess() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const redirectTimer = window.setTimeout(() => {
+      router.replace("/pro");
+    }, 2000);
+
+    return () => window.clearTimeout(redirectTimer);
+  }, [router]);
+
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="rounded-2xl bg-white p-10 shadow-xl text-center">
@@ -9,6 +25,17 @@ export default function PaymentSuccess() {
         <p className="mt-4 text-gray-600">
           Welcome to PrepZii Pro.
         </p>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Redirecting you to the Pro page…
+        </p>
+
+        <Link
+          href="/pro"
+          className="mt-6 inline-flex rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white transition hover:bg-indigo-500"
+        >
+          Continue to Pro
+        </Link>
       </div>
     </div>
   );

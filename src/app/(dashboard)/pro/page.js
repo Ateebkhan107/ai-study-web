@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { createOrder } from "@/lib/payment";
+import { createOrder, openCashfreeCheckout } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
-import Script from "next/script";
 import { Check, X, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
 
 
@@ -77,7 +76,7 @@ const FAQS = [
   },
   {
     q: "Which payment methods are accepted?",
-    a: "We accept UPI, all debit/credit cards, net banking, and wallets via Razorpay.",
+    a: "We accept UPI, debit/credit cards, net banking, and supported wallets via Cashfree Payments.",
   },
   {
     q: "Will my data be saved if I downgrade?",
@@ -130,63 +129,10 @@ export default function ProPage() {
 
       const order = await createOrder(selectedPlan, selectedTrack);
 
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        name: "PrepZii",
-        description: `${selectedTrack} ${plan.label} Subscription`,
-        image: "/images/branding/logo.png",
-        order_id: order.id,
-        prefill: {
-          name: user?.fullName || "",
-          email: user?.primaryEmailAddress?.emailAddress || "",
-        },
-        notes: {
-          plan: selectedPlan,
-          examTrack: selectedTrack,
-        },
-        theme: {
-          color: "#6366f1",
-        },
-        handler: async function (response) {
-          try {
-            const verify = await fetch("/api/payment/verify", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                ...response,
-                plan: selectedPlan,
-                examTrack: selectedTrack,
-              }),
-            });
-
-            const result = await verify.json();
-
-            if (result.success) {
-              window.location.href = "/payment/success";
-            } else {
-              window.location.href = "/payment/failed";
-            }
-          } catch (err) {
-            console.error(err);
-            window.location.href = "/payment/failed";
-          }
-        },
-        modal: {
-          ondismiss() {
-            setLoading(false);
-          },
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
+      await openCashfreeCheckout(order);
     } catch (err) {
       console.error(err);
-      alert("Unable to start payment.");
+      alert(err.message || "Unable to start payment.");
       setLoading(false);
     }
   };
@@ -197,11 +143,6 @@ export default function ProPage() {
       badge="✦ PRO"
       badgeVariant="purple"
     >
-      {/* Razorpay checkout SDK — loaded only on this page */}
-      <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        strategy="afterInteractive"
-      />
       {/* ── Hero ── */}
       <section className="text-center space-y-5 animate-slideUp">
         <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
@@ -306,7 +247,7 @@ export default function ProPage() {
 
         <p className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
           <Shield className="w-3 h-3" />
-          Secure payment powered by Razorpay
+          Secure payment powered by Cashfree Payments
         </p>
       </section>
 

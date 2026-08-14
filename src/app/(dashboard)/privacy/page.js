@@ -18,7 +18,7 @@ const SECTIONS = [
   },
   {
     title: "3. Payment Information",
-    content: "When you purchase a PrepZii Pro subscription, your payment is processed securely by our third-party payment provider (Razorpay). PrepZii does not store or have direct access to your full credit card numbers or bank account details. We only retain the transaction IDs and subscription status."
+    content: "When you purchase a PrepZii Pro subscription, your payment is processed securely by our third-party payment provider (Cashfree Payments). PrepZii does not store or have direct access to your full credit card numbers or bank account details. We only retain the transaction IDs and subscription status."
   },
   {
     title: "4. Data Security",

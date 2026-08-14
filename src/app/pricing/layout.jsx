@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 export const metadata = {
   title: "Pricing – PrepZii Pro Plans",
   description:
@@ -16,14 +14,5 @@ export const metadata = {
 };
 
 export default function PricingLayout({ children }) {
-  return (
-    <>
-      {/* Razorpay checkout SDK — loaded only on this pricing route */}
-      <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        strategy="afterInteractive"
-      />
-      {children}
-    </>
-  );
+  return children;
 }

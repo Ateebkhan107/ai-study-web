@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
-import { createOrder } from "@/lib/payment";
+import { createOrder, openCashfreeCheckout } from "@/lib/payment";
 
 export default function PricingCard({
   title,
@@ -15,7 +14,6 @@ export default function PricingCard({
   popular = false,
   examTrack = "JEE",
 }) {
-  const { user } = useUser();
   const [loading, setLoading] = useState(false);
 
   async function handlePayment() {
@@ -26,73 +24,10 @@ export default function PricingCard({
 
       const order = await createOrder(plan, examTrack);
 
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-
-        amount: order.amount,
-
-        currency: order.currency,
-
-        name: "PrepZii",
-
-        description: `${examTrack} ${title} Subscription`,
-
-        order_id: order.id,
-
-        prefill: {
-          name: user?.fullName || "",
-          email: user?.primaryEmailAddress?.emailAddress || "",
-        },
-
-        notes: {
-          plan,
-          examTrack,
-        },
-
-        theme: {
-          color: "#1e3a5f",
-        },
-
-        handler: async function (response) {
-          try {
-            const verify = await fetch("/api/payment/verify", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                ...response,
-                plan,
-                examTrack,
-              }),
-            });
-
-            const result = await verify.json();
-
-            if (result.success) {
-              window.location.href = "/payment/success";
-            } else {
-              window.location.href = "/payment/failed";
-            }
-          } catch (err) {
-            console.error(err);
-            window.location.href = "/payment/failed";
-          }
-        },
-
-        modal: {
-          ondismiss() {
-//             console.log("Payment cancelled");
-          },
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-
-      razorpay.open();
+      await openCashfreeCheckout(order);
     } catch (error) {
       console.error(error);
-      alert("Unable to start payment.");
+      alert(error.message || "Unable to start payment.");
     } finally {
       setLoading(false);
     }
@@ -158,7 +93,7 @@ export default function PricingCard({
       </button>
 
       <p className="mt-3 text-center text-xs text-gray-500">
-        🔒 Secure payment powered by Razorpay
+        🔒 Secure payment powered by Cashfree Payments
       </p>
     </div>
   );
