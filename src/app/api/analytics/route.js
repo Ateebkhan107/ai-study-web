@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
+import { canUseFeature, FEATURES, getUserAccessContext } from "@/lib/accessControl";
 import { aggregateAnalytics } from "@/lib/analyticsAggregate";
 import { normalizeTrack } from "@/lib/analyticsHelpers";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
@@ -17,6 +18,19 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
     const track = normalizeTrack(searchParams.get("track") || "JEE");
+    const access = await getUserAccessContext({ userId, examTrack: track });
+    const permission = canUseFeature(access, FEATURES.ANALYTICS_ADVANCED);
+
+    if (!permission.allowed) {
+      return NextResponse.json(
+        {
+          error: "PRO_REQUIRED",
+          message: "Advanced Analytics is available with PrepZii Pro.",
+          upgradeUrl: permission.upgradeUrl || "/pro",
+        },
+        { status: 403 }
+      );
+    }
 
     const [{ data: testAttemptsRaw, error: testError }, { data: pyqAttemptsRaw, error: pyqError }] = await Promise.all([
       supabaseAdmin

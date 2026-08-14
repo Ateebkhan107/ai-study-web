@@ -4,7 +4,7 @@ import { addXP } from "@/utils/xp";
 async function getUserXPWithAdmin(userId) {
   const { data, error } = await supabase
     .from("user_xp")
-    .select("*")
+    .select("xp, streak, name")
     .eq("user_id", userId)
     .single();
 
@@ -17,18 +17,31 @@ async function getUserXPWithAdmin(userId) {
 }
 
 async function getUserRankWithAdmin(userId) {
-  const { data, error } = await supabase
+  const { data: userData, error: userError } = await supabase
     .from("user_xp")
-    .select("user_id,xp")
-    .order("xp", { ascending: false });
+    .select("xp, updated_at")
+    .eq("user_id", userId)
+    .single();
+
+  if (userError || !userData) {
+    console.log("Rank error:", userError);
+    return null;
+  }
+
+  const rankFilter = userData.updated_at
+    ? `xp.gt.${userData.xp},and(xp.eq.${userData.xp},updated_at.lt.${userData.updated_at})`
+    : `xp.gt.${userData.xp}`;
+  const { count, error } = await supabase
+    .from("user_xp")
+    .select("id", { count: "exact", head: true })
+    .or(rankFilter);
 
   if (error) {
     console.log("Rank error:", error);
     return null;
   }
 
-  const index = data.findIndex((user) => user.user_id === userId);
-  return index >= 0 ? index + 1 : null;
+  return { rank: (count || 0) + 1 };
 }
 
 async function getProfileAnalyticsWithAdmin(userId, stream = "JEE") {
@@ -133,7 +146,7 @@ export async function evaluateUserBadges(userId) {
     // 1. Fetch all enabled badges
     const { data: badges, error: badgesError } = await supabase
       .from("badges")
-      .select("*")
+      .select("id, requirement_type, requirement_value, xp_reward")
       .eq("enabled", true);
 
     if (badgesError || !badges?.length) return;
@@ -149,9 +162,11 @@ export async function evaluateUserBadges(userId) {
     const earnedBadgeIds = new Set(earnedBadges?.map(b => b.badge_id) || []);
 
     // 3. Fetch user stats
-    const analytics = await getProfileAnalyticsWithAdmin(userId);
-    const xpData = await getUserXPWithAdmin(userId);
-    const rankData = await getUserRankWithAdmin(userId);
+    const [analytics, xpData, rankData] = await Promise.all([
+      getProfileAnalyticsWithAdmin(userId),
+      getUserXPWithAdmin(userId),
+      getUserRankWithAdmin(userId),
+    ]);
 
     // 4. Map stats to requirement types
     const stats = {
@@ -240,7 +255,7 @@ export async function getUserBadgeProgress(userId) {
   // 2. Fetch all enabled badges
   const { data: badges } = await supabase
     .from("badges")
-    .select("*")
+    .select("id, name, description, icon, color, requirement_type, requirement_value, xp_reward")
     .eq("enabled", true)
     .order("display_order", { ascending: true });
     
@@ -255,9 +270,11 @@ export async function getUserBadgeProgress(userId) {
   const earnedMap = new Map(earnedBadges?.map(b => [b.badge_id, b]) || []);
   
   // 4. Fetch user stats
-  const analytics = await getProfileAnalyticsWithAdmin(userId);
-  const xpData = await getUserXPWithAdmin(userId);
-  const rankData = await getUserRankWithAdmin(userId);
+  const [analytics, xpData, rankData] = await Promise.all([
+    getProfileAnalyticsWithAdmin(userId),
+    getUserXPWithAdmin(userId),
+    getUserRankWithAdmin(userId),
+  ]);
   
   const stats = {
     tests_completed: analytics?.testsCompleted || 0,

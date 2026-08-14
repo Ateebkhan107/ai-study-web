@@ -6,7 +6,7 @@ import {
   examMatchesTrack,
   normalizeTrack,
 } from "@/lib/analyticsHelpers";
-import { FEATURES, canUseFeature, getProfileAccessProfile, getUserAccessContext } from "@/lib/accessControl";
+import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 const MIN_CHAPTER_ATTEMPTS = 5;
 const INVALID_CHAPTERS = new Set(["", "unmapped", "unknown", "invalid", "null", "undefined"]);
@@ -70,15 +70,14 @@ export async function GET(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const profile = await getProfileAccessProfile(userId);
-    if (track !== profile.examTrack) {
+    const access = await getUserAccessContext({ userId, examTrack: track });
+    if (track !== access.examTrack) {
       return NextResponse.json(
-        { error: "EXAM_TRACK_MISMATCH", message: `Your account has access to ${profile.examTrack} analytics only.` },
+        { error: "EXAM_TRACK_MISMATCH", message: `Your account has access to ${access.examTrack} analytics only.` },
         { status: 403 }
       );
     }
 
-    const access = await getUserAccessContext({ userId, examTrack: track });
     const permission = canUseFeature(access, FEATURES.PYQ_ANALYTICS);
 
     if (!permission.allowed) {

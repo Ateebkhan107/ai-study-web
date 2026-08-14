@@ -2,11 +2,14 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp, ShieldOff } from "lucide-react";
+import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
-import { supabase } from "@/lib/supabaseClient";
+import { useClerkSupabase } from "@/lib/useClerkSupabase";
 
 export default function DMChat({ conversationId, currentUserId, otherUser }) {
+  const { isLoaded, session } = useSession();
+  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,13 +24,13 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   const remoteTypingTimeoutRef = useRef(null);
   const isTypingRef = useRef(false);
 
-  function mergeMessages(previous, incoming) {
+  const mergeMessages = useCallback((previous, incoming) => {
     const byId = new Map(previous.map((message) => [message.id, message]));
     for (const message of incoming) {
       byId.set(message.id, { ...byId.get(message.id), ...message });
     }
     return [...byId.values()].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-  }
+  }, []);
 
   const loadMessages = useCallback(
     async (before = null) => {
@@ -63,6 +66,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
     let cancelled = false;
     let retryTimeout = null;
     let retryCount = 0;
+    const MAX_RETRIES = 10;
 
     async function hydrateRealtimeMessage(messageId) {
       if (!messageId) return;
@@ -87,6 +91,16 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
     }
 
     async function subscribeToConversation() {
+      if (!isLoaded || !session || !supabase) return;
+
+      const token = await session.getToken().catch(() => null);
+      console.info(`[DM_CHAT_REALTIME] token=${Boolean(token)}`);
+      if (!token) {
+        console.warn("[DM_CHAT_REALTIME] Missing Clerk session token");
+        return;
+      }
+
+      await supabase.realtime.setAuth(token);
       if (cancelled) return;
 
       if (channelRef.current) {
@@ -96,6 +110,36 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
       const channel = supabase
         .channel(`community-dm-${conversationId}`)
+        .on(
+          "postgres_changes",
+          {
+            event: "INSERT",
+            schema: "public",
+            table: "community_direct_messages",
+            filter: `conversation_id=eq.${conversationId}`,
+          },
+          (payload) => {
+            const newMsg = payload.new;
+            if (!newMsg?.id || newMsg.sender_id === currentUserId) return;
+            hydrateRealtimeMessage(newMsg.id).catch((err) => {
+              console.warn("[DM_CHAT_REALTIME_HYDRATE]", err);
+              if (cancelled) return;
+              setMessages((prev) =>
+                mergeMessages(prev, [
+                  {
+                    id: newMsg.id,
+                    sender_id: newMsg.sender_id,
+                    content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
+                    is_deleted: newMsg.is_deleted,
+                    created_at: newMsg.created_at,
+                    senderName: otherUser?.full_name || "Other",
+                    isOwn: false,
+                  },
+                ])
+              );
+            });
+          }
+        )
         .on("broadcast", { event: "message_created" }, ({ payload }) => {
           if (payload?.senderId !== currentUserId) {
             hydrateRealtimeMessage(payload?.messageId).catch((err) => {
@@ -110,10 +154,12 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
             console.warn("[DM_CHAT_REALTIME_STATUS]", status, subscribeError);
-            if (retryCount < 10) {
+            if (retryCount < MAX_RETRIES) {
               const delay = Math.min(1000 * 2 ** retryCount, 30000);
               retryCount += 1;
-              retryTimeout = setTimeout(subscribeToConversation, delay);
+              retryTimeout = setTimeout(() => {
+                if (!cancelled) subscribeToConversation();
+              }, delay);
             }
           } else if (status === "SUBSCRIBED") {
             retryCount = 0;
@@ -135,7 +181,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         channelRef.current = null;
       }
     };
-  }, [conversationId, currentUserId]);
+  }, [conversationId, currentUserId, isLoaded, mergeMessages, otherUser?.full_name, session, supabase]);
 
   function broadcastTyping(isTyping) {
     channelRef.current?.send({

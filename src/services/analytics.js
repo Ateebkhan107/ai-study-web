@@ -9,7 +9,9 @@ export async function getUserAnalytics(_userId, stream = "JEE") {
 
   if (!response.ok) {
     const message = await response.text();
-    throw new Error(message || `Failed to load analytics: ${response.status}`);
+    const error = new Error(message || `Failed to load analytics: ${response.status}`);
+    error.status = response.status;
+    throw error;
   }
 
   return response.json();

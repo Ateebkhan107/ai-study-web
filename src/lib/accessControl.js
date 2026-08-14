@@ -275,10 +275,17 @@ export async function getProfileAccountType(userId) {
   return profile.accountType;
 }
 
-export async function getUserAccessContext({ userId, email, examTrack } = {}) {
-  const [memberships, clerkMetadata, profileAccess, customTestUsage, proTracks] = await Promise.all([
+export async function getUserAccessContext({ userId, email, examTrack, clerkMetadata } = {}) {
+  const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks] = await Promise.all([
     getActiveInstituteMemberships(userId, email),
-    getClerkAccessMetadata(userId),
+    clerkMetadata
+      ? Promise.resolve({
+        accountType: clerkMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN
+          ? ACCOUNT_TYPES.INSTITUTE_ADMIN
+          : ACCOUNT_TYPES.STUDENT,
+        isPlatformAdmin: clerkMetadata.role === "admin",
+      })
+      : getClerkAccessMetadata(userId),
     getProfileAccessProfile(userId),
     getPersonalCustomTestUsage(userId),
     getActiveSubscriptionTracks(userId),
@@ -288,7 +295,7 @@ export async function getUserAccessContext({ userId, email, examTrack } = {}) {
   const subscription = await getSubscriptionForUser(userId, activeExamTrack);
   const isPro = isSubscriptionActive(subscription);
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
-  const accountType = clerkMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
+  const accountType = clerkAccessMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
     profileAccess.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
     hasCoachingAdminMembership
     ? ACCOUNT_TYPES.INSTITUTE_ADMIN
@@ -302,7 +309,7 @@ export async function getUserAccessContext({ userId, email, examTrack } = {}) {
     isPro,
     subscription,
     proTracks,
-    isPlatformAdmin: clerkMetadata.isPlatformAdmin,
+    isPlatformAdmin: clerkAccessMetadata.isPlatformAdmin,
     instituteMemberships: memberships,
     customTestUsage,
   };

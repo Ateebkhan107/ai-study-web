@@ -826,23 +826,6 @@ export default function PYQPage() {
   const [access, setAccess] = useState(null);
 
   useEffect(() => {
-    async function loadTrack() {
-      if (!user) return;
-      const response = await fetch("/api/profile", {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        return;
-      }
-
-      const data = await response.json();
-      setTrack(data?.exam === "NEET" ? "neet" : "jee");
-    }
-    loadTrack();
-  }, [user]);
-
-  useEffect(() => {
     let cancelled = false;
     async function loadAccess() {
       if (!user) return;
@@ -856,6 +839,7 @@ export default function PYQPage() {
       const data = await response.json();
       if (!cancelled) {
         setAccess(data);
+        setTrack(data?.examTrack === "NEET" ? "neet" : "jee");
       }
     }
 

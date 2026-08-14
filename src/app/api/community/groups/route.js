@@ -88,21 +88,23 @@ export async function GET(request) {
     const { data: groups, error } = await query;
     if (error) throw error;
 
-    // Attach membership info for each group
     const groupIds = (groups || []).map((g) => g.id);
-    let memberships = [];
-    if (groupIds.length > 0) {
-      const { data: mData } = await supabaseAdmin
+    const membershipsQuery = groupIds.length > 0
+      ? supabaseAdmin
         .from("community_group_members")
         .select("group_id, role, status")
         .eq("user_id", userId)
-        .in("group_id", groupIds);
-      memberships = mData || [];
-    }
+        .in("group_id", groupIds)
+      : Promise.resolve({ data: [], error: null });
 
-    const membershipMap = Object.fromEntries(memberships.map((m) => [m.group_id, m]));
+    const [{ data: memberships, error: membershipsError }, groupsWithCounts] = await Promise.all([
+      membershipsQuery,
+      attachActiveMemberCounts(groups || []),
+    ]);
 
-    const groupsWithCounts = await attachActiveMemberCounts(groups || []);
+    if (membershipsError) throw membershipsError;
+
+    const membershipMap = Object.fromEntries((memberships || []).map((m) => [m.group_id, m]));
 
     const enriched = groupsWithCounts.map((g) => ({
       ...g,

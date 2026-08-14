@@ -12,7 +12,7 @@ async function getGlobalRank(userId, xp) {
 
   const { count, error } = await supabaseAdmin
     .from("user_xp")
-    .select("*", { count: "exact", head: true })
+    .select("id", { count: "exact", head: true })
     .gt("xp", xp);
 
   if (error) {
@@ -61,7 +61,7 @@ export async function GET() {
 
       .from("user_profiles")
 
-      .select("*")
+      .select("id, clerk_user_id, email, full_name, exam, target_year, account_type, created_at, updated_at")
 
       .eq(
         "clerk_user_id",

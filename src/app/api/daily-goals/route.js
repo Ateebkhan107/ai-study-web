@@ -26,7 +26,7 @@ export async function GET() {
 
     const { data: goalsData, error: goalsError } = await supabaseAdmin
       .from("daily_goals")
-      .select("*")
+      .select("id, title, description, target_value, xp, target, created_at")
       .eq("is_active", true)
       .in("target", [track, "ALL"])
       .order("created_at", { ascending: false });

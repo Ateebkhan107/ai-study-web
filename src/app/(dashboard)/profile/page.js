@@ -2,15 +2,57 @@
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { Pencil } from "lucide-react";
-import * as LucideIcons from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  Award,
+  BadgeCheck,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  CircleCheck,
+  Clock,
+  Crown,
+  Flame,
+  GraduationCap,
+  Medal,
+  Pencil,
+  Rocket,
+  Shield,
+  Sparkles,
+  Star,
+  Target,
+  Trophy,
+  Zap,
+} from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
+
+const BADGE_ICONS = {
+  Award,
+  BadgeCheck,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  CircleCheck,
+  Clock,
+  Crown,
+  Flame,
+  GraduationCap,
+  Medal,
+  Rocket,
+  Shield,
+  Sparkles,
+  Star,
+  Target,
+  Trophy,
+  Zap,
+};
 
 
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
+  const router = useRouter();
 
   const [user, setUser] = useState(null);
   const [xpData, setXpData] = useState(null);
@@ -103,7 +145,7 @@ export default function ProfilePage() {
 
     setTimeout(() => {
       setSaved(false);
-      window.location.reload();
+      router.refresh();
     }, 1000);
   };
 
@@ -308,7 +350,7 @@ export default function ProfilePage() {
         <div className="glass-card p-4 sm:p-5 shadow-sm">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
             {badgeDefs.map((badge, index) => {
-              const IconComponent = LucideIcons[badge.iconName] || LucideIcons.Award;
+              const IconComponent = BADGE_ICONS[badge.iconName] || Award;
               return (
               <div
                 key={index}

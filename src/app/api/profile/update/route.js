@@ -29,7 +29,7 @@ export async function POST(req) {
       .from("user_profiles")
       .update(updateData)
       .eq("clerk_user_id", userId)
-      .select("*")
+      .select("id, clerk_user_id, email, full_name, exam, target_year, account_type, created_at, updated_at")
       .maybeSingle();
 
     if (error) {

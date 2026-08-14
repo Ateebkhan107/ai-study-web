@@ -1,23 +1,16 @@
-import { redirect } from "next/navigation";
-import { isUserPro } from "@/lib/subscription";
+import { cookies } from "next/headers";
 import Leaderboard from "@/components/analytics/Leaderboard";
 import { EXAM_CONFIG } from "@/constants/examConfig";
 import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
 import UserGreeting from "@/components/UserGreeting";
-import { auth } from "@clerk/nextjs/server";
-import { getUserProfile } from "@/utils/userProfile";
 import { TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
-  const { userId } = await auth();
-  if (!userId) {
-    redirect("/sign-in");
-  }
-  const profile = await getUserProfile(userId);
-
-  const activeTrackKey = profile?.exam === "NEET" ? "NEET" : "JEE";
+  const cookieStore = await cookies();
+  const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
+  const activeTrackKey = String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
 
   const activeConfig = {
     ...EXAM_CONFIG[activeTrackKey],

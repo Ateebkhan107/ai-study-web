@@ -92,7 +92,7 @@ export default function AnalyticsPage() {
   const [loading, setLoading] = useState(true);
   const [activeTrack, setActiveTrack] = useState(() => getCookieTrack());
   const [activeTab, setActiveTab] = useState("overview");
-  const [access, setAccess] = useState(null);
+  const [advancedAnalyticsAllowed, setAdvancedAnalyticsAllowed] = useState(false);
 
   useEffect(() => {
     async function syncTrackFromCookie() {
@@ -104,32 +104,9 @@ export default function AnalyticsPage() {
   }, []);
 
   useEffect(() => {
-    async function loadAccess() {
+    async function loadAnalytics() {
       if (!isLoaded) return;
       if (!user) {
-        await Promise.resolve();
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch("/api/access", { cache: "no-store" });
-        setAccess(response.ok ? await response.json() : { isPro: false });
-      } catch (error) {
-        console.error("Failed to load access context:", error);
-        setAccess({ isPro: false });
-      }
-    }
-
-    loadAccess();
-  }, [isLoaded, user]);
-
-  useEffect(() => {
-    async function loadAnalytics() {
-      if (!user || !access) return;
-
-      if (!access.isPro) {
-        setStats(null);
         setLoading(false);
         return;
       }
@@ -138,9 +115,13 @@ export default function AnalyticsPage() {
         setLoading(true);
         const data = await getUserAnalytics(user.id, activeTrack);
         setStats(data);
+        setAdvancedAnalyticsAllowed(true);
         if (data?.track) setActiveTrack(data.track);
       } catch (error) {
-        console.error("Failed to load user stats:", error);
+        if (error?.status !== 403) {
+          console.error("Failed to load user stats:", error);
+        }
+        setAdvancedAnalyticsAllowed(false);
         setStats(null);
       } finally {
         setLoading(false);
@@ -148,11 +129,10 @@ export default function AnalyticsPage() {
     }
 
     loadAnalytics();
-  }, [user, activeTrack, access]);
+  }, [isLoaded, user, activeTrack]);
 
   if (loading) return <LoadingState />;
 
-  const advancedAnalyticsAllowed = Boolean(access?.isPro);
   const showAnalyticsLock = !advancedAnalyticsAllowed && activeTab !== "leaderboard";
 
   return (

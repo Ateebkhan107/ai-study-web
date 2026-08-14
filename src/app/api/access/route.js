@@ -1,16 +1,17 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { buildFeaturePermissions, getUserAccessContext } from "@/lib/accessControl";
+import { getEmailFromClaims, getPublicMetadataFromClaims } from "@/lib/auth";
 
 export async function GET() {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const user = await currentUser().catch(() => null);
     const access = await getUserAccessContext({
       userId,
-      email: user?.primaryEmailAddress?.emailAddress || "",
+      email: getEmailFromClaims(sessionClaims),
+      clerkMetadata: getPublicMetadataFromClaims(sessionClaims),
     });
 
     return NextResponse.json({

@@ -12,7 +12,7 @@ export async function GET() {
 
     const { data: xpData, error: xpError } = await supabaseAdmin
       .from("user_xp")
-      .select("xp, pyq_solved, correct_answers, streak")
+      .select("xp, pyq_solved, correct_answers, streak, updated_at")
       .eq("user_id", userId)
       .maybeSingle();
 
@@ -32,58 +32,18 @@ export async function GET() {
     let rank = null;
 
     if (xpData) {
-      const { data: leaderboardData, error: rankError } = await supabaseAdmin
+      const rankFilter = xpData.updated_at
+        ? `xp.gt.${xp},and(xp.eq.${xp},updated_at.lt.${xpData.updated_at})`
+        : `xp.gt.${xp}`;
+      const { count, error: rankError } = await supabaseAdmin
         .from("user_xp")
-        .select("user_id, xp, updated_at")
-        .order("xp", { ascending: false })
-        .order("updated_at", { ascending: true });
+        .select("id", { count: "exact", head: true })
+        .or(rankFilter);
 
       if (rankError) {
         throw rankError;
       }
-
-      const usersById = new Map();
-
-      for (const entry of leaderboardData || []) {
-        const entryUserId = String(entry.user_id || "").trim();
-        if (!entryUserId) continue;
-
-        const existing = usersById.get(entryUserId);
-        const entryXp = Number(entry.xp) || 0;
-        const existingXp = Number(existing?.xp) || 0;
-        const entryUpdatedAt = entry.updated_at
-          ? new Date(entry.updated_at).getTime()
-          : Number.MAX_SAFE_INTEGER;
-        const existingUpdatedAt = existing?.updated_at
-          ? new Date(existing.updated_at).getTime()
-          : Number.MAX_SAFE_INTEGER;
-
-        if (
-          !existing ||
-          entryXp > existingXp ||
-          (entryXp === existingXp && entryUpdatedAt < existingUpdatedAt)
-        ) {
-          usersById.set(entryUserId, entry);
-        }
-      }
-
-      const rankedUsers = [...usersById.values()].sort((a, b) => {
-        const xpDifference = (Number(b.xp) || 0) - (Number(a.xp) || 0);
-        if (xpDifference !== 0) return xpDifference;
-
-        const aUpdatedAt = a.updated_at
-          ? new Date(a.updated_at).getTime()
-          : Number.MAX_SAFE_INTEGER;
-        const bUpdatedAt = b.updated_at
-          ? new Date(b.updated_at).getTime()
-          : Number.MAX_SAFE_INTEGER;
-        return aUpdatedAt - bUpdatedAt;
-      });
-
-      const userIndex = rankedUsers.findIndex(
-        (entry) => String(entry.user_id).trim() === userId
-      );
-      rank = userIndex >= 0 ? userIndex + 1 : null;
+      rank = (count || 0) + 1;
     }
 
     return NextResponse.json({

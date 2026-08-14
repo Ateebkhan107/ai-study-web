@@ -2,10 +2,13 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp } from "lucide-react";
+import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
-import { supabase } from "@/lib/supabaseClient";
+import { useClerkSupabase } from "@/lib/useClerkSupabase";
 
 export default function GroupChat({ groupId, currentUserId, currentUserName }) {
+  const { isLoaded, session } = useSession();
+  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,6 +86,17 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
     async function subscribeToGroup() {
       if (cancelled) return;
+      if (!isLoaded || !session || !supabase) return;
+
+      const token = await session.getToken().catch(() => null);
+      console.info(`[GROUP_CHAT_REALTIME] token=${Boolean(token)}`);
+      if (!token) {
+        console.warn("[GROUP_CHAT_REALTIME] Missing Clerk session token");
+        return;
+      }
+
+      await supabase.realtime.setAuth(token);
+      if (cancelled) return;
 
       // Clean up existing channels
       if (channelRef.current) {
@@ -129,6 +143,15 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       // then the authorized API hydrates the stored message for this member.
       const msgChannel = supabase
         .channel(`community-group-${groupId}`)
+        .on(
+          "postgres_changes",
+          { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
+          ({ payload }) => {
+            const newMsg = payload.new;
+            if (!newMsg?.id) return;
+            receiveMessage(newMsg.id);
+          }
+        )
         .on("broadcast", { event: "message_created" }, ({ payload }) => {
           receiveMessage(payload?.messageId);
         })
@@ -137,6 +160,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         })
         .subscribe((status) => {
           if (cancelled) return;
+          console.info(`[GROUP_CHAT_REALTIME] status=${status}`);
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
             console.warn("[GROUP_CHAT_REALTIME_STATUS]", {
               groupId,
@@ -171,7 +195,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       for (const timeout of remoteTypingTimeouts.values()) clearTimeout(timeout);
       remoteTypingTimeouts.clear();
     };
-  }, [groupId, currentUserId, mergeMessages]);
+  }, [groupId, currentUserId, isLoaded, mergeMessages, session, supabase]);
 
   // Broadcast ephemeral typing state. A receiver-side expiry prevents stale UI
   // if a browser closes before it can send the final `false` event.

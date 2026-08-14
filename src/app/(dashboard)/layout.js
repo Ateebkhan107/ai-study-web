@@ -17,16 +17,14 @@ export default async function DashboardLayout({ children }) {
   }
 
   const email = user?.primaryEmailAddress?.emailAddress || "";
-  const memberships = await getActiveInstituteMemberships(userId, email);
+  const [memberships] = await Promise.all([
+    getActiveInstituteMemberships(userId, email),
+    initUserLeaderboard(userId, user?.firstName || "Student"),
+  ]);
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
 
   if (user?.publicMetadata?.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN || hasCoachingAdminMembership) {
     redirect("/institute");
-  }
-
-  // Auto-initialize user's leaderboard/XP entry if they don't have one
-  if (user) {
-    await initUserLeaderboard(userId, user.firstName || "Student");
   }
 
   return (

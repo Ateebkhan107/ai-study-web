@@ -41,23 +41,12 @@ export default function Navbar() {
 
     async function loadUserData() {
       try {
-        const [profileRes, accessRes] = await Promise.all([
-          fetch("/api/profile", { cache: "no-store" }),
-          fetch("/api/access", { cache: "no-store" }),
-        ]);
-
-        if (profileRes.ok) {
-          const profile = await profileRes.json();
-          const exam = profile?.exam || profile?.current_track?.toUpperCase();
-
-          if (exam) {
-            setTrack(String(exam).toUpperCase());
-          }
-        }
+        const accessRes = await fetch("/api/access", { cache: "no-store" });
 
         if (accessRes.ok) {
           const accessData = await accessRes.json();
           const institutes = accessData?.institutes || [];
+          setTrack(accessData?.examTrack || null);
           setIsPro(Boolean(accessData?.isPro));
           setAccountType(accessData?.accountType || "STUDENT");
           setHasInstituteAccess(Boolean(institutes.length));
