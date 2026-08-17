@@ -22,6 +22,37 @@ export async function GET(request, { params }) {
 
   const { searchParams } = new URL(request.url);
   const before = searchParams.get("before");
+  const messageId = searchParams.get("messageId");
+
+  if (messageId) {
+    const { data: message, error: messageError } = await supabaseAdmin
+      .from("community_direct_messages")
+      .select("id, sender_id, content, is_deleted, created_at")
+      .eq("conversation_id", convId)
+      .eq("id", messageId)
+      .maybeSingle();
+
+    if (messageError) {
+      console.error("[DM_MESSAGE_GET_ONE]", messageError);
+      return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
+    if (!message) return NextResponse.json({ error: "Message not found" }, { status: 404 });
+
+    const { data: profile } = await supabaseAdmin
+      .from("user_profiles")
+      .select("full_name")
+      .eq("clerk_user_id", message.sender_id)
+      .maybeSingle();
+
+    return NextResponse.json({
+      message: {
+        ...message,
+        content: message.is_deleted ? "[Message deleted]" : message.content,
+        senderName: profile?.full_name || "Unknown",
+        isOwn: message.sender_id === userId,
+      },
+    });
+  }
 
   let query = supabaseAdmin
     .from("community_direct_messages")

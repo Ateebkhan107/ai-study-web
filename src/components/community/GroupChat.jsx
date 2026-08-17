@@ -19,8 +19,8 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
   const [typingUsers, setTypingUsers] = useState([]); // array of names typing
   const bottomRef = useRef(null);
   const channelRef = useRef(null);
-  const presenceChannelRef = useRef(null);
   const typingTimeoutRef = useRef(null);
+  const remoteTypingTimeoutsRef = useRef(new Map());
   const isTypingRef = useRef(false);
 
   const mergeMessages = useCallback((previous, incoming) => {
@@ -73,6 +73,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
     let retryTimeout = null;
     let retryCount = 0;
     const MAX_RETRIES = 10;
+    const remoteTypingTimeouts = remoteTypingTimeoutsRef.current;
 
     async function hydrateRealtimeMessage(messageId) {
       const res = await fetch(`/api/community/groups/${groupId}/messages?messageId=${encodeURIComponent(messageId)}`, {
@@ -101,42 +102,57 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
       }
-      if (presenceChannelRef.current) {
-        supabase.removeChannel(presenceChannelRef.current);
-        presenceChannelRef.current = null;
+      async function receiveMessage(messageId) {
+        if (!messageId) return;
+        try {
+          const hydrated = await hydrateRealtimeMessage(messageId);
+          if (cancelled || !hydrated) return;
+          setMessages((prev) => mergeMessages(prev, [hydrated]));
+        } catch (err) {
+          console.warn("[GROUP_CHAT_REALTIME_HYDRATE]", err);
+        }
       }
 
-      // ── 1. Messages channel (postgres_changes) ──────────────────
+      function receiveTyping(payload) {
+        const { userId, name, isTyping } = payload || {};
+        if (!userId || userId === currentUserId) return;
+
+        const existingTimeout = remoteTypingTimeouts.get(userId);
+        if (existingTimeout) clearTimeout(existingTimeout);
+
+        if (!isTyping) {
+          remoteTypingTimeouts.delete(userId);
+          setTypingUsers((previous) => previous.filter((user) => user.id !== userId));
+          return;
+        }
+
+        setTypingUsers((previous) => {
+          const remaining = previous.filter((user) => user.id !== userId);
+          return [...remaining, { id: userId, name: name || "Someone" }];
+        });
+
+        const expiry = setTimeout(() => {
+          remoteTypingTimeouts.delete(userId);
+          setTypingUsers((previous) => previous.filter((user) => user.id !== userId));
+        }, 3500);
+        remoteTypingTimeouts.set(userId, expiry);
+      }
+
+      // Database changes remain as a fallback. Broadcast delivers immediately
+      // even when the table is missing from the Realtime publication.
       const msgChannel = supabase
-        .channel(`group-chat-${groupId}`)
+        .channel(`community-group-${groupId}`)
+        .on("broadcast", { event: "message_created" }, ({ payload }) => {
+          receiveMessage(payload?.messageId);
+        })
+        .on("broadcast", { event: "typing" }, ({ payload }) => {
+          receiveTyping(payload);
+        })
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-          async (payload) => {
-            const newMsg = payload.new;
-            if (!newMsg?.id) return;
-
-            try {
-              const hydrated = await hydrateRealtimeMessage(newMsg.id);
-              if (cancelled || !hydrated) return;
-              setMessages((prev) => mergeMessages(prev, [hydrated]));
-            } catch (err) {
-              console.warn("[GROUP_CHAT_REALTIME_HYDRATE]", err);
-              if (cancelled) return;
-              setMessages((prev) =>
-                mergeMessages(prev, [
-                  {
-                    id: newMsg.id,
-                    sender_id: newMsg.sender_id,
-                    content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
-                    is_deleted: newMsg.is_deleted,
-                    created_at: newMsg.created_at,
-                    senderName: newMsg.sender_id === currentUserId ? "You" : "Member",
-                    isOwn: newMsg.sender_id === currentUserId,
-                  },
-                ])
-              );
-            }
+          (payload) => {
+            receiveMessage(payload.new?.id);
           }
         )
         .subscribe((status) => {
@@ -161,24 +177,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         });
 
       channelRef.current = msgChannel;
-
-      // ── 2. Presence channel (typing indicators) ─────────────────
-      const presenceChannel = supabase.channel(`group-presence-${groupId}`, {
-        config: { presence: { key: currentUserId } },
-      });
-
-      presenceChannel
-        .on("presence", { event: "sync" }, () => {
-          if (cancelled) return;
-          const state = presenceChannel.presenceState();
-          const typers = Object.entries(state)
-            .filter(([uid, presences]) => uid !== currentUserId && presences.some((p) => p.typing))
-            .map(([, presences]) => presences[0]?.name || "Someone");
-          setTypingUsers(typers);
-        })
-        .subscribe();
-
-      presenceChannelRef.current = presenceChannel;
     }
 
     subscribeToGroup();
@@ -190,26 +188,47 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
       }
-      if (presenceChannelRef.current) {
-        supabase.removeChannel(presenceChannelRef.current);
-        presenceChannelRef.current = null;
-      }
+      clearTimeout(typingTimeoutRef.current);
+      for (const timeout of remoteTypingTimeouts.values()) clearTimeout(timeout);
+      remoteTypingTimeouts.clear();
     };
   }, [groupId, currentUserId, isLoaded, mergeMessages, session, supabase]);
 
-  // Broadcast typing state via presence
+  // Broadcast ephemeral typing state. A receiver-side expiry prevents stale UI
+  // if a browser closes before it can send the final `false` event.
   function broadcastTyping(isTyping) {
-    const channel = presenceChannelRef.current;
+    const channel = channelRef.current;
     if (!channel) return;
-    if (isTyping) {
-      channel.track({ typing: true, name: currentUserName || "Someone" });
-    } else {
-      channel.track({ typing: false, name: currentUserName || "Someone" });
+    channel.send({
+      type: "broadcast",
+      event: "typing",
+      payload: { userId: currentUserId, name: currentUserName || "Someone", isTyping },
+    });
+  }
+
+  async function broadcastMessageCreated(messageId) {
+    if (!supabase || !messageId) return;
+    const existingChannel = channelRef.current;
+    const channel = existingChannel || supabase.channel(`community-group-${groupId}`);
+    try {
+      await channel.httpSend("message_created", { messageId, senderId: currentUserId });
+    } catch (broadcastError) {
+      console.warn("[GROUP_CHAT_BROADCAST_SEND]", broadcastError);
+    } finally {
+      if (!existingChannel) await supabase.removeChannel(channel);
     }
   }
 
   function handleInputChange(e) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput(value);
+
+    if (!value) {
+      clearTimeout(typingTimeoutRef.current);
+      isTypingRef.current = false;
+      broadcastTyping(false);
+      return;
+    }
 
     if (!isTypingRef.current) {
       isTypingRef.current = true;
@@ -266,6 +285,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
       if (data.message) {
         setMessages((prev) => mergeMessages(prev, [data.message]));
+        await broadcastMessageCreated(data.message.id);
       }
     } catch {
       setInput(content);
@@ -292,9 +312,9 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
   // Build typing text
   const typingText =
     typingUsers.length === 1
-      ? `${typingUsers[0]} is typing…`
+      ? `${typingUsers[0].name} is typing…`
       : typingUsers.length === 2
-      ? `${typingUsers[0]} and ${typingUsers[1]} are typing…`
+      ? `${typingUsers[0].name} and ${typingUsers[1].name} are typing…`
       : typingUsers.length > 2
       ? "Several people are typing…"
       : null;

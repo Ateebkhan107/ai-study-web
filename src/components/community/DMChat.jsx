@@ -17,7 +17,12 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   const [hasMore, setHasMore] = useState(false);
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [error, setError] = useState(null);
+  const [otherIsTyping, setOtherIsTyping] = useState(false);
   const bottomRef = useRef(null);
+  const channelRef = useRef(null);
+  const typingTimeoutRef = useRef(null);
+  const remoteTypingTimeoutRef = useRef(null);
+  const isTypingRef = useRef(false);
 
   function mergeMessages(previous, incoming) {
     const byId = new Map(previous.map((message) => [message.id, message]));
@@ -58,12 +63,34 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
   // Realtime for DMs
   useEffect(() => {
-    let channel;
     let cancelled = false;
-    const otherName = otherUser?.full_name || "Other";
+    let retryTimeout = null;
+    let retryCount = 0;
+
+    async function hydrateRealtimeMessage(messageId) {
+      if (!messageId) return;
+      const res = await fetch(
+        `/api/community/direct/conversations/${conversationId}/messages?messageId=${encodeURIComponent(messageId)}`,
+        { cache: "no-store" }
+      );
+      if (!res.ok) throw new Error("Failed to hydrate realtime message");
+      const data = await res.json();
+      if (!cancelled && data.message) {
+        setMessages((previous) => mergeMessages(previous, [data.message]));
+      }
+    }
+
+    function receiveTyping(payload) {
+      if (!payload || payload.userId === currentUserId) return;
+      clearTimeout(remoteTypingTimeoutRef.current);
+      setOtherIsTyping(Boolean(payload.isTyping));
+      if (payload.isTyping) {
+        remoteTypingTimeoutRef.current = setTimeout(() => setOtherIsTyping(false), 3500);
+      }
+    }
 
     async function subscribeToConversation() {
-      if (!isLoaded || !session || !supabase) return;
+      if (cancelled || !isLoaded || !session || !supabase) return;
 
       const token = await session.getToken().catch(() => null);
       if (!token) {
@@ -74,8 +101,23 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       await supabase.realtime.setAuth(token);
       if (cancelled) return;
 
-      channel = supabase
-        .channel(`dm-${conversationId}`)
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+
+      const channel = supabase
+        .channel(`community-dm-${conversationId}`)
+        .on("broadcast", { event: "message_created" }, ({ payload }) => {
+          if (payload?.senderId !== currentUserId) {
+            hydrateRealtimeMessage(payload?.messageId).catch((err) => {
+              console.warn("[DM_CHAT_BROADCAST_HYDRATE]", err);
+            });
+          }
+        })
+        .on("broadcast", { event: "typing" }, ({ payload }) => {
+          receiveTyping(payload);
+        })
         .on(
           "postgres_changes",
           {
@@ -86,32 +128,87 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
           },
           (payload) => {
             const newMsg = payload.new;
-            setMessages((prev) => {
-              if (newMsg.sender_id === currentUserId) return prev;
-              return mergeMessages(prev, [
-                {
-                  id: newMsg.id,
-                  sender_id: newMsg.sender_id,
-                  content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
-                  is_deleted: newMsg.is_deleted,
-                  created_at: newMsg.created_at,
-                  senderName: otherName,
-                  isOwn: false,
-                },
-              ]);
-            });
+            if (newMsg?.sender_id !== currentUserId) {
+              hydrateRealtimeMessage(newMsg?.id).catch((err) => {
+                console.warn("[DM_CHAT_POSTGRES_HYDRATE]", err);
+              });
+            }
           }
         )
-        .subscribe();
+        .subscribe((status, subscribeError) => {
+          if (cancelled) return;
+          if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
+            console.warn("[DM_CHAT_REALTIME_STATUS]", status, subscribeError);
+            if (retryCount < 10) {
+              const delay = Math.min(1000 * 2 ** retryCount, 30000);
+              retryCount += 1;
+              retryTimeout = setTimeout(subscribeToConversation, delay);
+            }
+          } else if (status === "SUBSCRIBED") {
+            retryCount = 0;
+          }
+        });
+
+      channelRef.current = channel;
     }
 
     subscribeToConversation();
 
     return () => {
       cancelled = true;
-      if (channel) supabase.removeChannel(channel);
+      clearTimeout(retryTimeout);
+      clearTimeout(typingTimeoutRef.current);
+      clearTimeout(remoteTypingTimeoutRef.current);
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
     };
-  }, [conversationId, currentUserId, isLoaded, otherUser?.full_name, session, supabase]);
+  }, [conversationId, currentUserId, isLoaded, session, supabase]);
+
+  function broadcastTyping(isTyping) {
+    channelRef.current?.send({
+      type: "broadcast",
+      event: "typing",
+      payload: { userId: currentUserId, isTyping },
+    });
+  }
+
+  async function broadcastMessageCreated(messageId) {
+    if (!supabase || !messageId) return;
+    const existingChannel = channelRef.current;
+    const channel = existingChannel || supabase.channel(`community-dm-${conversationId}`);
+    try {
+      await channel.httpSend("message_created", { messageId, senderId: currentUserId });
+    } catch (broadcastError) {
+      console.warn("[DM_CHAT_BROADCAST_SEND]", broadcastError);
+    } finally {
+      if (!existingChannel) await supabase.removeChannel(channel);
+    }
+  }
+
+  function handleInputChange(event) {
+    const value = event.target.value;
+    setInput(value);
+
+    if (!value) {
+      clearTimeout(typingTimeoutRef.current);
+      isTypingRef.current = false;
+      broadcastTyping(false);
+      return;
+    }
+
+    if (!isTypingRef.current) {
+      isTypingRef.current = true;
+      broadcastTyping(true);
+    }
+
+    clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      isTypingRef.current = false;
+      broadcastTyping(false);
+    }, 2000);
+  }
 
   async function loadOlderMessages() {
     if (!messages.length || loadingOlder) return;
@@ -131,6 +228,10 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
     e.preventDefault();
     const content = input.trim();
     if (!content || isSubmitting) return;
+
+    clearTimeout(typingTimeoutRef.current);
+    isTypingRef.current = false;
+    broadcastTyping(false);
 
     setIsSubmitting(true);
     const optimisticId = `opt-${Date.now()}`;
@@ -164,6 +265,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       setMessages((prev) =>
         mergeMessages(prev.filter((m) => m.id !== optimisticId), [{ ...data.message, optimistic: false }])
       );
+      await broadcastMessageCreated(data.message.id);
     } catch {
       setMessages((prev) => prev.filter((m) => m.id !== optimisticId));
       setInput(content);
@@ -248,6 +350,17 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         <div ref={bottomRef} />
       </div>
 
+      {otherIsTyping && (
+        <div className="flex items-center gap-2 border-t border-slate-100 px-4 py-2 dark:border-slate-800">
+          <div className="flex gap-0.5">
+            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400" />
+            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400 [animation-delay:150ms]" />
+            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400 [animation-delay:300ms]" />
+          </div>
+          <p className="text-xs italic text-slate-400">{otherUser?.full_name || "Someone"} is typing…</p>
+        </div>
+      )}
+
       {error && (
         <div className="px-4 py-2 bg-red-50 dark:bg-red-900/20 border-t border-red-200 dark:border-red-800">
           <p className="text-xs text-red-600 dark:text-red-400">{error}</p>
@@ -261,7 +374,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       >
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(e); }
           }}
