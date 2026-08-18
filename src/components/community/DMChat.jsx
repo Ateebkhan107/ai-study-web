@@ -2,14 +2,11 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp, ShieldOff } from "lucide-react";
-import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
-import { useClerkSupabase } from "@/lib/useClerkSupabase";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function DMChat({ conversationId, currentUserId, otherUser }) {
-  const { isLoaded, session } = useSession();
-  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,15 +87,6 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
     }
 
     async function subscribeToConversation() {
-      if (cancelled || !isLoaded || !session || !supabase) return;
-
-      const token = await session.getToken().catch(() => null);
-      if (!token) {
-        console.warn("[DM_CHAT_REALTIME] Missing Clerk session token");
-        return;
-      }
-
-      await supabase.realtime.setAuth(token);
       if (cancelled) return;
 
       if (channelRef.current) {
@@ -118,23 +106,6 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         .on("broadcast", { event: "typing" }, ({ payload }) => {
           receiveTyping(payload);
         })
-        .on(
-          "postgres_changes",
-          {
-            event: "INSERT",
-            schema: "public",
-            table: "community_direct_messages",
-            filter: `conversation_id=eq.${conversationId}`,
-          },
-          (payload) => {
-            const newMsg = payload.new;
-            if (newMsg?.sender_id !== currentUserId) {
-              hydrateRealtimeMessage(newMsg?.id).catch((err) => {
-                console.warn("[DM_CHAT_POSTGRES_HYDRATE]", err);
-              });
-            }
-          }
-        )
         .subscribe((status, subscribeError) => {
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
@@ -164,7 +135,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         channelRef.current = null;
       }
     };
-  }, [conversationId, currentUserId, isLoaded, session, supabase]);
+  }, [conversationId, currentUserId]);
 
   function broadcastTyping(isTyping) {
     channelRef.current?.send({

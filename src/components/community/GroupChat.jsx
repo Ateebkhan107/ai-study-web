@@ -2,13 +2,10 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp } from "lucide-react";
-import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
-import { useClerkSupabase } from "@/lib/useClerkSupabase";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function GroupChat({ groupId, currentUserId, currentUserName }) {
-  const { isLoaded, session } = useSession();
-  const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,16 +83,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
     async function subscribeToGroup() {
       if (cancelled) return;
-      if (!isLoaded || !session || !supabase) return;
-
-      const token = await session.getToken().catch(() => null);
-      if (!token) {
-        console.warn("[GROUP_CHAT_REALTIME] Missing Clerk session token");
-        return;
-      }
-
-      await supabase.realtime.setAuth(token);
-      if (cancelled) return;
 
       // Clean up existing channels
       if (channelRef.current) {
@@ -138,8 +125,8 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         remoteTypingTimeouts.set(userId, expiry);
       }
 
-      // Database changes remain as a fallback. Broadcast delivers immediately
-      // even when the table is missing from the Realtime publication.
+      // Message content is never trusted from Broadcast. Only the ID is sent,
+      // then the authorized API hydrates the stored message for this member.
       const msgChannel = supabase
         .channel(`community-group-${groupId}`)
         .on("broadcast", { event: "message_created" }, ({ payload }) => {
@@ -148,21 +135,13 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         .on("broadcast", { event: "typing" }, ({ payload }) => {
           receiveTyping(payload);
         })
-        .on(
-          "postgres_changes",
-          { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-          (payload) => {
-            receiveMessage(payload.new?.id);
-          }
-        )
         .subscribe((status) => {
           if (cancelled) return;
           if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
             console.warn("[GROUP_CHAT_REALTIME_STATUS]", {
               groupId,
               status,
-              table: "community_group_messages",
-              filter: `group_id=eq.${groupId}`,
+              channel: `community-group-${groupId}`,
             });
             if (retryCount < MAX_RETRIES) {
               const delay = Math.min(1000 * 2 ** retryCount, 30000);
@@ -192,7 +171,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       for (const timeout of remoteTypingTimeouts.values()) clearTimeout(timeout);
       remoteTypingTimeouts.clear();
     };
-  }, [groupId, currentUserId, isLoaded, mergeMessages, session, supabase]);
+  }, [groupId, currentUserId, mergeMessages]);
 
   // Broadcast ephemeral typing state. A receiver-side expiry prevents stale UI
   // if a browser closes before it can send the final `false` event.
