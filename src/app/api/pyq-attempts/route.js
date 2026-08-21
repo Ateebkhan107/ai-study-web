@@ -1,7 +1,8 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getLevelFromXP } from "@/utils/levelEngine";
+import { getFirstNameFromClaims } from "@/lib/auth";
 
 function normalizeSelectedOption(value) {
   if (Array.isArray(value)) {
@@ -119,14 +120,13 @@ async function addXpWithAdmin(userId, amount, name = "Student", stats = {}) {
 
 export async function POST(req) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const user = await currentUser();
-    const name = user?.firstName || user?.username || "Student";
+    const name = getFirstNameFromClaims(sessionClaims) || "Student";
     const body = await req.json();
 
     const rawAttempts = Array.isArray(body.attempts)

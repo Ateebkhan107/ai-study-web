@@ -22,15 +22,27 @@ export default async function DashboardLayout({ children }) {
     initUserLeaderboard(userId, user?.firstName || "Student"),
   ]);
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
+  const accountType = user?.publicMetadata?.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN || hasCoachingAdminMembership
+    ? ACCOUNT_TYPES.INSTITUTE_ADMIN
+    : ACCOUNT_TYPES.STUDENT;
 
-  if (user?.publicMetadata?.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN || hasCoachingAdminMembership) {
+  if (accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN) {
     redirect("/institute");
   }
+
+  const activeInstitutes = memberships.map((membership) => ({
+    name: membership.institute?.name || "Institute",
+    role: membership.role,
+    member_status: membership.status,
+  }));
 
   return (
     <div className="min-h-screen bg-[var(--background)] dark:bg-[var(--background)] transition-colors duration-200">
       {/* 👈 Passed control prop to conditionally unmount the text line */}
-      <Navbar hideTrackFocus={true} />
+      <Navbar
+        accountType={accountType}
+        institutes={activeInstitutes}
+      />
       <TrackWrapper>
         {children}
       </TrackWrapper>

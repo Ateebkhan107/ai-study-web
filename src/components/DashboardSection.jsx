@@ -1,8 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FlaskConical, Calculator, Zap, Dna, BookOpen, Bookmark, ChevronRight, Library } from "lucide-react";
+import { FlaskConical, Calculator, Zap, Dna, BookOpen, ChevronRight, Library } from "lucide-react";
+import { getCachedFormulaBookSummaries } from "@/lib/formulaBooks";
 
 // Subject → Premium Book Visual Identity
 const SUBJECT_META = {
@@ -46,26 +44,9 @@ function getMeta(subject) {
   };
 }
 
-export default function DashboardSection({ config, compact = false }) {
-  const [formulaBooks, setFormulaBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+export default async function DashboardSection({ config, compact = false }) {
   const isNeet = config?.badge?.toLowerCase().includes("neet");
-
-  useEffect(() => {
-    async function loadBooks() {
-      try {
-        const res = await fetch("/api/formula-books");
-        const data = await res.json();
-        setFormulaBooks(data);
-      } catch (error) {
-        console.error("Formula books loading failed:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadBooks();
-  }, []);
+  const formulaBooks = await getCachedFormulaBookSummaries();
 
   const filteredFormulas = formulaBooks.filter((book) =>
     isNeet ? book.stream === "NEET" : book.stream === "JEE"
@@ -91,24 +72,8 @@ export default function DashboardSection({ config, compact = false }) {
         </div>
       </div>
 
-      {/* ── Loading skeleton ──────────────────────────────────── */}
-      {loading && (
-        <div className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ${compact ? "lg:gap-4" : "lg:gap-5"}`}>
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className={`relative animate-pulse overflow-hidden rounded-l-md rounded-r-2xl border border-slate-200 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] ${
-                compact ? "h-[138px]" : "h-[180px]"
-              }`}
-            >
-              <div className="absolute left-0 top-0 bottom-0 w-3 bg-slate-200 dark:bg-[var(--surface-elevated)]" />
-            </div>
-          ))}
-        </div>
-      )}
-
       {/* ── Formula grid ──────────────────────────────────────── */}
-      {!loading && filteredFormulas.length > 0 && (
+      {filteredFormulas.length > 0 && (
         <div className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ${
           compact ? "py-0 lg:gap-4" : "py-2 lg:gap-5"
         }`}>
@@ -185,7 +150,7 @@ export default function DashboardSection({ config, compact = false }) {
       )}
 
       {/* ── Empty state ───────────────────────────────────────── */}
-      {!loading && filteredFormulas.length === 0 && (
+      {filteredFormulas.length === 0 && (
         <div className="relative overflow-hidden bg-slate-50/50 dark:bg-[var(--surface)]/30 border border-dashed border-slate-300 dark:border-[var(--border)] rounded-3xl p-10 text-center flex flex-col items-center justify-center">
           <div className="w-16 h-16 mb-4 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)] flex items-center justify-center">
             <BookOpen className="w-8 h-8 text-slate-400 dark:text-slate-500" />

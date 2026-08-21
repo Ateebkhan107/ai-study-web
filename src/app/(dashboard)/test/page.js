@@ -39,26 +39,21 @@ export default function TestPage() {
   useEffect(() => {
     async function loadTrack() {
       if (!user) return;
-      const [response, accessResponse] = await Promise.all([
-        fetch("/api/profile", { cache: "no-store" }),
-        fetch("/api/access", { cache: "no-store" }),
-      ]);
+      const accessResponse = await fetch("/api/access", { cache: "no-store" });
 
-      if (!response.ok) {
+      if (!accessResponse.ok) {
         return;
       }
 
-      const data = await response.json();
+      const accessData = await accessResponse.json();
 
-      if (data?.exam === "NEET") {
+      if (accessData?.examTrack === "NEET") {
         setTrack("neet");
       } else {
         setTrack("jee");
       }
 
-      if (accessResponse.ok) {
-        setAccess(await accessResponse.json());
-      }
+      setAccess(accessData);
     }
     loadTrack();
   }, [user]);

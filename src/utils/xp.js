@@ -34,7 +34,7 @@ const {data,error}=await supabase
 
 .from("user_xp")
 
-.select("*")
+.select("name,xp")
 
 .eq(
 "user_id",

@@ -255,7 +255,11 @@ export default function PYQSessionPage() {
     let cancelled = false;
 
     async function loadPYQ() {
-      const requestedSubjects = shouldLoadWholePaper || shouldLoadBalancedRandom ? [""] : subjectLabels;
+      const requestedSubjects = shouldLoadBalancedRandom
+        ? [""]
+        : shouldLoadWholePaper && subjectLabels.length === 0
+          ? [""]
+          : subjectLabels;
       if (requestedSubjects.length === 0) {
         if (!cancelled) setLoading(false);
         return;

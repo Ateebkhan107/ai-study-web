@@ -2,7 +2,6 @@
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import {
   Award,
   BadgeCheck,
@@ -52,7 +51,6 @@ const BADGE_ICONS = {
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
-  const router = useRouter();
 
   const [user, setUser] = useState(null);
   const [xpData, setXpData] = useState(null);
@@ -145,7 +143,6 @@ export default function ProfilePage() {
 
     setTimeout(() => {
       setSaved(false);
-      router.refresh();
     }, 1000);
   };
 

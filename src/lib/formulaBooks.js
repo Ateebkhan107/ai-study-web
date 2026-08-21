@@ -1,6 +1,37 @@
 import { supabase } from "./supabase";
+import { supabase as supabaseServer } from "@/lib/supabase";
+import { unstable_cache } from "next/cache";
 
 const BUCKET_NAME = "formula-books";
+const FORMULA_BOOK_SUMMARY_COLUMNS = [
+  "id",
+  "title",
+  "subject",
+  "stream",
+].join(", ");
+
+export const getCachedFormulaBookSummaries = unstable_cache(
+  async () => {
+    const { data, error } = await supabaseServer
+      .from("formula_books")
+      .select(FORMULA_BOOK_SUMMARY_COLUMNS)
+      .order("stream", { ascending: true })
+      .order("subject", { ascending: true })
+      .order("title", { ascending: true });
+
+    if (error) {
+      console.error("[FORMULA_BOOKS_CACHE_ERROR]", error);
+      return [];
+    }
+
+    return data || [];
+  },
+  ["formula-book-summaries"],
+  {
+    revalidate: 3600,
+    tags: ["formula-books"],
+  }
+);
 
 /**
  * Get all formula books

@@ -1,17 +1,7 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getCachedFormulaBookSummaries } from "@/lib/formulaBooks";
 
 export async function GET() {
-  const { data, error } = await supabase
-    .from("formula_books")
-    .select("*");
-
-  if (error) {
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    );
-  }
-
+  const data = await getCachedFormulaBookSummaries();
   return NextResponse.json(data);
 }

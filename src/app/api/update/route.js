@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { addXP } from "@/utils/xp";
+import { getFirstNameFromClaims } from "@/lib/auth";
 
 
 
@@ -9,7 +10,7 @@ export async function POST(req) {
 
   try {
 
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
 
 
     if (!userId) {
@@ -20,9 +21,6 @@ export async function POST(req) {
       );
 
     }
-
-
-    const user = await currentUser();
 
 
     const body = await req.json();
@@ -56,14 +54,14 @@ export async function POST(req) {
     const { data: existingUser } =
       await supabase
         .from("user_xp")
-        .select("*")
+        .select("pyq_solved,correct_answers")
         .eq("user_id", userId)
         .single();
 
 
 
 
-    const name = user?.firstName || user?.username || "Student";
+    const name = getFirstNameFromClaims(sessionClaims) || "Student";
     
     let stats = {};
 

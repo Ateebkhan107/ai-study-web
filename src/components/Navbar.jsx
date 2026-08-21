@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
 
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
@@ -19,57 +18,14 @@ const navItems = [
   { name: "Profile", href: "/profile" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  accountType = "STUDENT",
+  institutes = [],
+  isPro = false,
+  track = null,
+}) {
   const pathname = usePathname();
-  const { user } = useUser();
-
-  const [mounted, setMounted] = useState(false);
-  const [track, setTrack] = useState(null);
-  const [isPro, setIsPro] = useState(false);
-  const [hasInstituteAccess, setHasInstituteAccess] = useState(false);
-  const [accountType, setAccountType] = useState("STUDENT");
-  const [instituteNavLabel, setInstituteNavLabel] = useState("Institute");
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
-
-    async function loadUserData() {
-      try {
-        const accessRes = await fetch("/api/access", { cache: "no-store" });
-
-        if (accessRes.ok) {
-          const accessData = await accessRes.json();
-          const institutes = accessData?.institutes || [];
-          setTrack(accessData?.examTrack || null);
-          setIsPro(Boolean(accessData?.isPro));
-          setAccountType(accessData?.accountType || "STUDENT");
-          setHasInstituteAccess(Boolean(institutes.length));
-          setInstituteNavLabel(institutes.length === 1 ? institutes[0].name : "Institute");
-        } else {
-          setIsPro(false);
-          setAccountType("STUDENT");
-          setHasInstituteAccess(false);
-          setInstituteNavLabel("Institute");
-        }
-      } catch (error) {
-        console.error("Failed to load navbar user data:", error);
-        setIsPro(false);
-        setAccountType("STUDENT");
-        setHasInstituteAccess(false);
-        setInstituteNavLabel("Institute");
-      }
-    }
-
-    loadUserData();
-  }, [user]);
-
-  if (!mounted) return null;
 
   // Hide Navbar completely during active exam sessions
   if (pathname === "/test/session" || pathname === "/pyq/session") {
@@ -94,6 +50,8 @@ export default function Navbar() {
     pathname === href || pathname.startsWith(href + "/");
 
   const isInstituteAdminAccount = accountType === "INSTITUTE_ADMIN";
+  const hasInstituteAccess = institutes.length > 0;
+  const instituteNavLabel = institutes.length === 1 ? institutes[0].name : "Institute";
   const instituteNavItem = { name: instituteNavLabel, href: "/institute" };
   const visibleNavItems = isInstituteAdminAccount
     ? [instituteNavItem]

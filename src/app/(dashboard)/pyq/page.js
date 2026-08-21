@@ -855,7 +855,7 @@ export default function PYQPage() {
   useEffect(() => {
     let cancelled = false;
     async function loadSavedQuestions() {
-      if (!user || !track) return;
+      if (!user || !track || activeTab !== "saved") return;
 
       const response = await fetch(
         `/api/pyq-bookmarks?includeQuestions=true&track=${track}`,
@@ -876,7 +876,7 @@ export default function PYQPage() {
     }
     loadSavedQuestions();
     return () => { cancelled = true; };
-  }, [user, track]);
+  }, [user, track, activeTab]);
 
   const [overview,       setOverview]       = useState(null);
   const [pyqAnalytics,   setPyqAnalytics]   = useState(null);
@@ -902,8 +902,10 @@ export default function PYQPage() {
       setStatsLoading(true);
       setStatsError("");
       try {
-        const overviewData = await getPYQOverview(track);
-        const analyticsData = isPro ? await getPYQAnalytics(track) : null;
+        const [overviewData, analyticsData] = await Promise.all([
+          getPYQOverview(track),
+          isPro ? getPYQAnalytics(track) : Promise.resolve(null),
+        ]);
         if (cancelled) return;
         applyPYQStats(overviewData, analyticsData);
       } catch (error) {
@@ -927,8 +929,10 @@ export default function PYQPage() {
     setStatsLoading(true);
     setStatsError("");
     try {
-      const overviewData = await getPYQOverview(track);
-      const analyticsData = isPro ? await getPYQAnalytics(track) : null;
+      const [overviewData, analyticsData] = await Promise.all([
+        getPYQOverview(track),
+        isPro ? getPYQAnalytics(track) : Promise.resolve(null),
+      ]);
       applyPYQStats(overviewData, analyticsData);
     } catch (error) {
       console.error("Failed loading PYQ stats:", error);

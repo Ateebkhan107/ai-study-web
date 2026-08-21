@@ -18,13 +18,13 @@ export default async function Page() {
       <div className="mb-7">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-2"
-          style={{ color: "#C2723F", letterSpacing: "0.15em" }}
+          style={{ color: "#EAB308", letterSpacing: "0.15em" }}
         >
           Get Started
         </p>
         <h2
           className="text-4xl font-black mb-2 tracking-tight"
-          style={{ color: "#F1F5FF" }}
+          style={{ color: "#FFFFFF" }}
         >
           Create Account
         </h2>
@@ -37,10 +37,10 @@ export default async function Page() {
       <div
         className="rounded-2xl p-6"
         style={{
-          background: "rgba(15,19,32,0.85)",
-          border: "1px solid rgba(194,114,63,0.25)",
+          background: "rgba(0,0,0,0.85)",
+          border: "1px solid rgba(234,179,8,0.25)",
           backdropFilter: "blur(16px)",
-          boxShadow: "0 0 40px rgba(194,114,63,0.08), inset 0 1px 0 rgba(165,180,252,0.06)",
+          boxShadow: "0 0 40px rgba(234,179,8,0.08), inset 0 1px 0 rgba(234,179,8,0.06)",
         }}
       >
         <SignUp
@@ -73,12 +73,12 @@ export default async function Page() {
             },
             variables: {
               colorBackground: "transparent",
-              colorInputBackground: "rgba(194,114,63,0.06)",
-              colorInputText: "#E0E7FF",
+              colorInputBackground: "rgba(234,179,8,0.06)",
+              colorInputText: "#FFFFFF",
               colorText: "#94A3B8",
               colorTextSecondary: "#64748B",
-              colorPrimary: "#C2723F",
-              colorTextOnPrimaryBackground: "#ffffff",
+              colorPrimary: "#EAB308",
+              colorTextOnPrimaryBackground: "#000000",
               borderRadius: "0.75rem",
               colorNeutral: "#334155",
               fontFamily: "inherit",

@@ -1,4 +1,4 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getQuestions } from "@/lib/questions";
@@ -6,6 +6,7 @@ import { getLevelFromXP } from "@/utils/levelEngine";
 import { getQuestionMarking } from "@/lib/analyticsHelpers";
 import { getInstituteContext } from "@/lib/instituteAuth";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
+import { getFirstNameFromClaims } from "@/lib/auth";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -321,7 +322,7 @@ async function updateGoalProgressWithAdmin(userId, goalType, amount, name) {
 
 export async function POST(request) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -550,14 +551,13 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const clerkUser = await currentUser();
-    const name = clerkUser?.firstName || clerkUser?.username || "Student";
+    const name = getFirstNameFromClaims(sessionClaims) || "Student";
 
     const body = await request.json();
     const { sessionId, answers = {}, timeTakenSeconds = 0 } = body;
