@@ -26,6 +26,18 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 
 const imageFields = ["question_image", "option_a_image", "option_b_image", "option_c_image", "option_d_image"];
 
+function reviewExplanation(source) {
+  const option = String(source.correct_option).toLowerCase();
+  const label = option.toUpperCase();
+  const answerText = String(source[`option_${option}`] || "").trim();
+  const hasAnswerDiagram = Boolean(source[`option_${option}_image`]);
+  if (hasAnswerDiagram && answerText) {
+    return `**Correct option: ${label}**\n\n${answerText}\n\nThe corresponding diagram is shown with option ${label}.`;
+  }
+  if (hasAnswerDiagram) return `**Correct option: ${label}**\n\nThe correct answer is the diagram shown with option ${label}.`;
+  return `**Correct option: ${label}**\n\n${answerText}`;
+}
+
 function contentType(file) {
   const extension = path.extname(file).toLowerCase();
   if (extension === ".png") return "image/png";
@@ -88,6 +100,8 @@ async function main() {
       option_c: source.option_c,
       option_d: source.option_d,
       correct_option: String(source.correct_option).toUpperCase(),
+      explanation: reviewExplanation(source),
+      explanation_image: null,
       question_type: "MCQ",
       question_number: source.number,
       display_order: source.number,
@@ -122,7 +136,7 @@ async function main() {
       await Promise.all(records.slice(start, start + 20).map(async (record) => {
         const patch = Object.fromEntries([
           "subject", "question", "option_a", "option_b", "option_c", "option_d", "correct_option",
-          "question_type", "question_number", "display_order", "status", ...imageFields,
+          "explanation", "explanation_image", "question_type", "question_number", "display_order", "status", ...imageFields,
         ].map((field) => [field, record[field]]));
         const { error: updateError } = await supabase.from("pyq_questions").update(patch).eq("id", record.id)
           .eq("exam", "NEET").eq("year", 2024).eq("paper_code", PAPER_CODE);
@@ -130,7 +144,7 @@ async function main() {
       }));
     }
     const { data: verified, error: verifyError } = await supabase.from("pyq_questions")
-      .select("question_number,subject,question,option_a,option_b,option_c,option_d,correct_option,question_image,option_a_image,option_b_image,option_c_image,option_d_image")
+      .select("question_number,subject,question,option_a,option_b,option_c,option_d,correct_option,explanation,explanation_image,question_image,option_a_image,option_b_image,option_c_image,option_d_image")
       .eq("exam", "NEET").eq("year", 2024).eq("paper_code", PAPER_CODE).order("question_number");
     if (verifyError) throw verifyError;
     report.verified = {
@@ -140,8 +154,10 @@ async function main() {
       optionImages: verified.reduce((sum, row) => sum + [row.option_a_image, row.option_b_image, row.option_c_image, row.option_d_image].filter(Boolean).length, 0),
       placeholders: verified.filter((row) => /refer to the source image for the complete question/i.test(row.question)).length,
       emptyStructuredFields: verified.filter((row) => [row.question, row.option_a, row.option_b, row.option_c, row.option_d].some((value) => !String(value || "").trim())).length,
+      distortedReviewText: verified.filter((row) => /[�□]|[\uE000-\uF8FF]/u.test(String(row.explanation || ""))).length,
+      explanationImages: verified.filter((row) => row.explanation_image).length,
     };
-    if (report.verified.total !== 200 || report.verified.duplicateNumbers || report.verified.placeholders || report.verified.emptyStructuredFields) {
+    if (report.verified.total !== 200 || report.verified.duplicateNumbers || report.verified.placeholders || report.verified.emptyStructuredFields || report.verified.distortedReviewText || report.verified.explanationImages) {
       throw new Error(`Post-publish verification failed: ${JSON.stringify(report.verified)}`);
     }
   }

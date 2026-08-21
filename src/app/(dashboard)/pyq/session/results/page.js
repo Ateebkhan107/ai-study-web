@@ -7,10 +7,7 @@ import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import { getPYQAnswers } from "@/lib/pyq";
 import { canShowStructuredQuestionText, shouldShowQuestionImageFallback, shouldShowRequiredQuestionImage } from "@/lib/pyqDisplay";
-import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css";
+import MathText from "@/components/MathText";
 
 // Practice mode display labels
 const modeLabels = {
@@ -271,6 +268,13 @@ export default function PYQResultsPage() {
           <div className="space-y-6 pb-12 animate-slideUp" style={{ animationDelay: '0.1s' }}>
             {reviewData.map((q, idx) => {
               const qType = q.question_type || "MCQ";
+              const correctOptionKey = String(q.correct_option || "").toLowerCase();
+              const correctOptionText = /^[a-d]$/.test(correctOptionKey)
+                ? q[`option_${correctOptionKey}`]
+                : "";
+              const correctOptionImage = /^[a-d]$/.test(correctOptionKey)
+                ? q[`option_${correctOptionKey}_image`]
+                : null;
               
               return (
                 <div key={q.id} className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 shadow-sm">
@@ -325,9 +329,9 @@ export default function PYQResultsPage() {
                       />
                     )}
                     {canShowStructuredQuestionText(q) && (
-                      <p className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
+                      <MathText className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
                         {q.question}
-                      </p>
+                      </MathText>
                     )}
                     {shouldShowRequiredQuestionImage(q) && (
                       <img
@@ -368,7 +372,7 @@ export default function PYQResultsPage() {
                       {["a", "b", "c", "d"].map(option => {
                         const isCorrectOption = qType === "MULTIPLE_CORRECT"
                           ? (Array.isArray(q.correct_options) && q.correct_options.map(o => String(o).toLowerCase()).includes(option))
-                          : (String(q.correct_option).toLowerCase() === option);
+                        : (String(q.correct_option).toLowerCase() === option);
 
                         const selectedArr = Array.isArray(q.selected) 
                           ? q.selected.map(s => String(s).toLowerCase()) 
@@ -397,7 +401,7 @@ export default function PYQResultsPage() {
                             <div className="flex flex-col gap-3 flex-1 min-w-0">
                               <div className="text-sm font-medium text-slate-700 dark:text-slate-200 mt-1">
                                 {!q[`option_${option}_image`] && (
-                                  <span>{q[`option_${option}`]}</span>
+                                  <MathText className="text-inherit">{q[`option_${option}`]}</MathText>
                                 )}
                                 {isSelected && (
                                   <span className="ml-2 text-[10px] font-bold uppercase tracking-widest opacity-60">
@@ -430,15 +434,43 @@ export default function PYQResultsPage() {
                     <p className="text-sm font-bold text-slate-900 dark:text-slate-200 mb-2">
                       {qType === "MULTIPLE_CORRECT" 
                         ? `Correct Answers: ${Array.isArray(q.correct_options) ? q.correct_options.join(", ").toUpperCase() : ""}`
+                        : String(q.correct_option).toLowerCase() === "none"
+                          ? "Dropped question: no listed option is correct"
                         : qType === "NUMERICAL" 
                           ? `Correct Answer: ${Array.isArray(q.correct_options) && q.correct_options.length > 0 ? q.correct_options.join(" or ") : q.numerical_answer}` 
                           : `Correct Answer: ${String(q.correct_option).toUpperCase()}`
                       }
                     </p>
+                    {qType === "MCQ" && /^[a-d]$/.test(correctOptionKey) && (
+                      <div className="mb-4 rounded-xl border border-emerald-200/70 bg-emerald-50/80 p-4 text-emerald-950 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100">
+                        <div className="mb-2 text-[11px] font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+                          Option {correctOptionKey.toUpperCase()}
+                        </div>
+                        {correctOptionImage ? (
+                          <div>
+                            {correctOptionText && correctOptionText !== "Diagram shown." && (
+                              <MathText className="mb-3 text-sm text-inherit">{correctOptionText}</MathText>
+                            )}
+                            <img
+                              src={correctOptionImage}
+                              alt={`Correct option ${correctOptionKey.toUpperCase()}`}
+                              className="max-h-[360px] w-auto max-w-full rounded-xl border border-emerald-200/70 object-contain dark:border-emerald-500/30"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          </div>
+                        ) : (
+                          <MathText className="text-sm font-semibold text-inherit">{correctOptionText}</MathText>
+                        )}
+                      </div>
+                    )}
                     <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose prose-sm max-w-none dark:prose-invert prose-p:my-2">
-                      <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                        Solution
+                      </p>
+                      <MathText className="text-inherit">
                         {q.explanation || "No explanation provided for this question."}
-                      </ReactMarkdown>
+                      </MathText>
                       {q.explanation_image && (
                         <img 
                           src={q.explanation_image} 
