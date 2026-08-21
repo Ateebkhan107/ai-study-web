@@ -156,19 +156,19 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 disabled={launching === option.label}
                 className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
                   ${locked
-                    ? "border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 opacity-75 hover:opacity-100 hover:border-indigo-300 dark:hover:border-indigo-500/50"
+                    ? "border-dashed border-gray-200 dark:border-[var(--border)] bg-gray-50 dark:bg-[var(--surface-elevated)]/30 opacity-75 hover:opacity-100 hover:border-indigo-300 dark:hover:border-indigo-500/50"
                     : launching === option.label
-                    ? "border-black dark:border-white bg-black dark:bg-white scale-95"
-                    : "border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
+                    ? "border-indigo-300 dark:border-indigo-700/60 bg-indigo-50 dark:bg-indigo-950/40 scale-95"
+                    : "border-gray-100 dark:border-[var(--border-subtle)] bg-[var(--card)] dark:bg-[var(--surface)] hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
                   }`}
               >
                 {/* Tag */}
                 {tag && (
                   <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide
                     ${tag === "PRO"
-                      ? "bg-[#1e3a5f] text-white"
+                      ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
                       : tag === "Popular"
-                      ? "bg-black dark:bg-white text-white dark:text-black"
+                      ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300"
                       : tag === "Hard"
                       ? "bg-red-500 text-white"
                       : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
@@ -182,7 +182,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
 
                 <p className={`text-sm font-black mb-1 transition-colors
                   ${launching === option.label
-                    ? "text-white dark:text-black"
+                    ? "text-indigo-700 dark:text-indigo-300"
                     : "text-black dark:text-white"
                   }`}
                 >
@@ -190,7 +190,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 </p>
                 <p className={`text-xs transition-colors
                   ${launching === option.label
-                    ? "text-white/70 dark:text-black/70"
+                    ? "text-indigo-700/70 dark:text-indigo-300/70"
                     : "text-gray-400"
                   }`}
                 >
@@ -199,15 +199,15 @@ export default function QuickTest({ track = "jee", isPro = false }) {
 
                 {launching === option.label && (
                   <div className="mt-3 flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 )}
 
                 {locked && (
                   <span
-                    className="mt-3 rounded-lg bg-slate-900 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950"
+                    className="mt-3 rounded-lg bg-amber-100 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
                   >
                     Upgrade to Pro
                   </span>

@@ -45,7 +45,7 @@ const QuestionPalette = memo(function QuestionPalette({
   onSelectQuestion,
 }) {
   return (
-    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-4 sm:p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
+    <div className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-4 sm:p-5 h-fit lg:sticky lg:top-24 shadow-sm animate-slideUp">
       <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
         Question Palette
       </p>
@@ -60,11 +60,11 @@ const QuestionPalette = memo(function QuestionPalette({
               key={question.id}
               onClick={() => onSelectQuestion(index)}
               className={`aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all duration-200 cursor-pointer
-                ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[#0f172a] scale-110" : ""}
+                ${isActive ? "ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-[var(--surface)] scale-110" : ""}
                 ${
                   isAnswered
                     ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
-                    : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/30 dark:hover:border-indigo-500/30"
+                    : "bg-slate-50 dark:bg-[var(--surface-elevated)]/50 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-[var(--border)]/50 hover:border-indigo-500/30 dark:hover:border-indigo-500/30"
                 }
               `}
             >
@@ -73,13 +73,13 @@ const QuestionPalette = memo(function QuestionPalette({
           );
         })}
       </div>
-      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
+      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-[var(--border-subtle)] grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20" />
           Answered
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700/50" />
+          <div className="w-3 h-3 rounded bg-slate-50 border border-slate-200 dark:bg-[var(--surface-elevated)]/50 dark:border-[var(--border)]/50" />
           Unvisited
         </div>
       </div>
@@ -99,7 +99,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
   if (!activeQuestion) return null;
 
   return (
-    <div className="min-w-0 flex-1 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-4 sm:p-6 lg:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
+    <div className="min-w-0 flex-1 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-4 sm:p-6 lg:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
           Question {currentIdx + 1} of {totalQuestions}
@@ -107,7 +107,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
           {activeQuestion.subject}
         </span>
-        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-500 dark:text-slate-400">
           {activeQuestion.chapter}
         </span>
       </div>
@@ -117,7 +117,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
       </MathText>
 
       {activeQuestion.question_image && (
-        <div className="mb-6 sm:mb-8 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/80 p-2 dark:border-slate-700/60 dark:bg-slate-950/30">
+        <div className="mb-6 sm:mb-8 overflow-hidden rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-2 dark:border-[var(--border)]/60 dark:bg-[var(--background)]/30">
           <img
             src={activeQuestion.question_image}
             alt="Question visual"
@@ -138,7 +138,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             inputMode="decimal"
             value={selectedAnswer ?? ""}
             onChange={(event) => onNumericalChange(activeQuestion.id, event.target.value)}
-            className="w-full rounded-2xl border-2 border-slate-200 bg-white/70 px-5 py-4 text-lg font-semibold text-slate-900 outline-none transition focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800/40 dark:text-white"
+            className="w-full rounded-2xl border-2 border-slate-200 bg-[var(--card)]/70 px-5 py-4 text-lg font-semibold text-slate-900 outline-none transition focus:border-indigo-500 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/40 dark:text-white"
             placeholder="Enter answer"
           />
         </div>
@@ -157,15 +157,15 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
               className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
                 ${
                   isSelected
-                    ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-indigo-500/10"
-                    : "bg-white/50 dark:bg-slate-800/30 border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
+                    ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-brand/10"
+                    : "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30 border-slate-200/60 dark:border-[var(--border)]/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
                 }`}
             >
               <span
                 className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
                   ${
                     isSelected
-                      ? "border-indigo-500 bg-gradient-to-br from-indigo-500 to-violet-500 text-white"
+                      ? "border-indigo-500 bg-gradient-to-br from-brand to-brand-hover text-white"
                       : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
                   }`}
               >
@@ -383,9 +383,9 @@ function TestSessionContent() {
 
   if (!exam) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 rounded-full border-4 border-slate-200 dark:border-slate-800 border-t-indigo-500 animate-spin" />
+          <div className="w-8 h-8 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
           <p className="text-sm font-semibold text-slate-400 dark:text-slate-500">Loading exam...</p>
         </div>
       </div>
@@ -395,9 +395,9 @@ function TestSessionContent() {
   // Loading State
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="flex flex-col items-center gap-4 animate-slideUp">
-          <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-slate-800 border-t-indigo-500 animate-spin" />
+          <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
           <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
             Generating Test...
           </p>
@@ -411,9 +411,9 @@ function TestSessionContent() {
 
   // Active Test UI
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/50 px-3 py-3 sm:px-6 sm:py-3.5">
+      <header className="sticky top-0 z-50 bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-[var(--border)]/50 px-3 py-3 sm:px-6 sm:py-3.5">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Logo size={28} />
@@ -428,7 +428,7 @@ function TestSessionContent() {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl font-black tabular-nums text-sm transition-all duration-300 ${
               isTimerDanger
                 ? "bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20 shadow-sm shadow-rose-500/10"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200/60 dark:border-slate-700/50"
+                : "bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-900 dark:text-white border border-slate-200/60 dark:border-[var(--border)]/50"
             }`}
           >
             {isTimerDanger && <span className="animate-pulse">⏳</span>}
@@ -440,7 +440,7 @@ function TestSessionContent() {
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 lg:hidden"
+              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 bg-[var(--card)]/80 px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)]/70 dark:text-slate-200 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -449,16 +449,16 @@ function TestSessionContent() {
               <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
                 {answeredCount}/{questions.length}
               </span>
-              <div className="w-20 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="w-20 h-1.5 bg-slate-200 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
+                  className="h-full bg-brand rounded-full transition-all duration-500"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
             </div>
             <button
               onClick={handleSubmit}
-              className="px-4 py-2.5 sm:px-6 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+              className="px-4 py-2.5 sm:px-6 rounded-xl bg-brand text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
             >
               Submit Test
             </button>
@@ -490,18 +490,18 @@ function TestSessionContent() {
           />
 
           {/* Navigation */}
-          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-slate-200/70 bg-white/90 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-[#020617]/90 sm:px-6 lg:static lg:mt-6 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-0 animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-slate-200/70 bg-[var(--card)]/90 px-4 py-3 backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 sm:px-6 lg:static lg:mt-6 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-0 animate-slideUp" style={{ animationDelay: "150ms" }}>
             <button
               onClick={handlePrev}
               disabled={currentIdx === 0}
-              className="min-h-11 flex-1 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 px-4 py-3 text-sm font-bold text-slate-700 backdrop-blur-xl disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:border-indigo-500/30 dark:bg-[#0f172a]/60 dark:text-slate-200 dark:hover:border-indigo-500/30 sm:flex-none sm:px-6"
+              className="min-h-11 flex-1 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 px-4 py-3 text-sm font-bold text-slate-700 backdrop-blur-xl disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:border-indigo-500/30 dark:bg-[var(--surface)]/60 dark:text-slate-200 dark:hover:border-indigo-500/30 sm:flex-none sm:px-6"
             >
               ← Previous
             </button>
             <button
               onClick={handleNext}
               disabled={currentIdx === questions.length - 1}
-              className="min-h-11 flex-1 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 sm:flex-none sm:px-6"
+              className="min-h-11 flex-1 rounded-xl bg-brand px-4 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 sm:flex-none sm:px-6"
             >
               Save & Next →
             </button>
@@ -517,7 +517,7 @@ function TestSessionContent() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setPaletteOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-4 shadow-2xl dark:bg-[#020617]">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-4 shadow-2xl dark:bg-[var(--background)]">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
             <QuestionPalette
               questions={questions}
@@ -536,8 +536,8 @@ export default function TestSessionPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 dark:bg-[#020617] flex flex-col items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-4 border-slate-200 dark:border-slate-800 border-t-indigo-500 animate-spin" />
+        <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] flex flex-col items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
         </div>
       }
     >

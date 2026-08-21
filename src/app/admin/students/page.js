@@ -41,7 +41,7 @@ export default function AdminStudentsPage() {
         <p className="text-gray-500 dark:text-gray-400">View and manage student profiles, XP, and ranks.</p>
       </div>
 
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm space-y-6">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 shadow-sm space-y-6">
         
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4">
@@ -73,7 +73,7 @@ export default function AdminStudentsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-gray-800">
+              <tr className="border-b border-gray-200 dark:border-[var(--border-subtle)]">
                 <th className="p-3 text-sm font-bold text-gray-500 uppercase">Student</th>
                 <th className="p-3 text-sm font-bold text-gray-500 uppercase">Exam</th>
                 <th className="p-3 text-sm font-bold text-gray-500 uppercase">XP & Level</th>
@@ -92,18 +92,18 @@ export default function AdminStudentsPage() {
                 </tr>
               ) : (
                 students.map((student) => (
-                  <tr key={student.id} className="border-b border-gray-200 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                  <tr key={student.id} className="border-b border-gray-200 dark:border-[var(--border-subtle)] last:border-0 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
                     <td className="p-3">
                       <div className="font-bold">{student.full_name || "Unknown"}</div>
                       <div className="text-xs text-gray-500">{student.email || "No email"}</div>
                     </td>
                     <td className="p-3">
-                      <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-xs font-bold">
+                      <span className="bg-gray-100 dark:bg-[var(--surface-elevated)] px-2 py-1 rounded text-xs font-bold">
                         {student.exam || "Not Set"}
                       </span>
                     </td>
                     <td className="p-3">
-                      <div className="font-bold text-purple-600 dark:text-purple-400">Level {student.current_level}</div>
+                      <div className="font-bold text-indigo-600 dark:text-indigo-400">Level {student.current_level}</div>
                       <div className="text-xs text-gray-500">{student.xp?.toLocaleString()} XP • {student.rank_name || "Unranked"}</div>
                     </td>
                     <td className="p-3 text-sm">

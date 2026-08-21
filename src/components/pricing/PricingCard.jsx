@@ -38,7 +38,7 @@ export default function PricingCard({
       className={`relative rounded-3xl border p-8 shadow-sm transition hover:shadow-xl ${
         popular
           ? "border-blue-600 bg-blue-50"
-          : "border-gray-200 bg-white"
+          : "border-gray-200 bg-[var(--card)]"
       }`}
     >
       {popular && (

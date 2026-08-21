@@ -45,7 +45,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative z-10 mt-auto w-full overflow-hidden border-t border-slate-200/70 bg-white dark:border-slate-800/70 dark:bg-[#020617]">
+    <footer className="relative z-10 mt-auto w-full overflow-hidden border-t border-slate-200/70 bg-[var(--card)] dark:border-[var(--border-subtle)]/70 dark:bg-[var(--background)]">
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent" />
 
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-2">
             <a
               href="mailto:contact.prepzii@gmail.com"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-50 hover:text-indigo-500 dark:bg-slate-800/50 dark:hover:bg-indigo-500/10"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-50 hover:text-indigo-500 dark:bg-[var(--surface-elevated)]/50 dark:hover:bg-indigo-500/10"
               aria-label="Email PrepZii"
             >
               <Mail className="h-4 w-4" />
@@ -85,7 +85,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/124944167/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-50 hover:text-[#0A66C2] dark:bg-slate-800/50 dark:hover:bg-blue-500/10"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-50 hover:text-[#0A66C2] dark:bg-[var(--surface-elevated)]/50 dark:hover:bg-blue-500/10"
               aria-label="PrepZii LinkedIn"
             >
               <FaLinkedinIn className="h-4 w-4" />
@@ -94,7 +94,7 @@ export default function Footer() {
               href="https://www.instagram.com/prep.zii?igsh=bDRuNW9sZzJocGxr&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-pink-50 hover:text-pink-500 dark:bg-slate-800/50 dark:hover:bg-pink-500/10"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-pink-50 hover:text-pink-500 dark:bg-[var(--surface-elevated)]/50 dark:hover:bg-pink-500/10"
               aria-label="PrepZii Instagram"
             >
               <FaInstagram className="h-4 w-4" />
@@ -102,7 +102,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-slate-100 pt-3 dark:border-slate-800/50 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-2 border-t border-slate-100 pt-3 dark:border-[var(--border-subtle)]/50 md:flex-row md:items-center md:justify-between">
           <nav className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
             {secondaryLinks.map((link) => (
               <Link

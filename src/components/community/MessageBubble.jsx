@@ -46,7 +46,7 @@ export default function MessageBubble({ message, currentUserId, context, context
     <div className={`group flex gap-2 ${isOwn ? "justify-end" : "justify-start"}`}>
       {/* Avatar placeholder */}
       {!isOwn && (
-        <div className="mt-5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 text-xs font-bold text-white">
+        <div className="mt-5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-brand-hover text-xs font-bold text-white">
           {(message.senderName || "?")[0]?.toUpperCase()}
         </div>
       )}
@@ -65,8 +65,8 @@ export default function MessageBubble({ message, currentUserId, context, context
             isOwn
               ? "rounded-br-md bg-indigo-600 text-white"
               : isDeleted
-              ? "rounded-bl-md bg-slate-100 text-slate-400 italic dark:bg-slate-800 dark:text-slate-500"
-              : "rounded-bl-md border border-slate-100 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+              ? "rounded-bl-md bg-slate-100 text-slate-400 italic dark:bg-[var(--surface-elevated)] dark:text-slate-500"
+              : "rounded-bl-md border border-slate-100 bg-[var(--card)] text-slate-900 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
           } ${message.optimistic ? "opacity-70" : "opacity-100"}`}
         >
           {/* IMPORTANT: Plain text rendering — never dangerouslySetInnerHTML */}

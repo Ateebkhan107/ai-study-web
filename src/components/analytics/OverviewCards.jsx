@@ -5,9 +5,9 @@ import { BarChart3, CheckCircle2, ListChecks, Target } from "lucide-react";
 const STAT_STYLES = {
   "Questions Practiced": {
     icon: ListChecks,
-    accent: "#6366F1",
-    gradient: "from-indigo-500 to-violet-500",
-    bgPattern: "from-indigo-500/10 via-violet-500/5 to-transparent dark:from-indigo-500/20 dark:via-violet-500/5",
+    accent: "#C2723F",
+    gradient: "from-brand to-brand-hover",
+    bgPattern: "from-indigo-500/10 via-brand-hover/5 to-transparent dark:from-indigo-500/20 dark:via-brand-hover/5",
   },
   "Overall Accuracy": {
     icon: Target,
@@ -23,7 +23,7 @@ const STAT_STYLES = {
   },
   "Average Score": {
     icon: BarChart3,
-    accent: "#D4537E",
+    accent: "#A05252",
     gradient: "from-rose-500 to-pink-500",
     bgPattern: "from-rose-500/10 via-pink-500/5 to-transparent dark:from-rose-500/20 dark:via-pink-500/5",
   },
@@ -71,7 +71,7 @@ export default function OverviewCards({ stats }) {
         return (
           <div
             key={s.label}
-            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-white/70 p-4 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700/50 dark:bg-[#0f172a]/60 sm:p-5"
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-4 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:p-5"
             style={{ animationDelay: `${index * 75}ms` }}
           >
             <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-50 transition-opacity duration-200 group-hover:opacity-90`} />

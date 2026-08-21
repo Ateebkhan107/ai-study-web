@@ -42,7 +42,7 @@ export default function ReviewPage() {
     return (
       <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
         <div className="p-10 flex flex-col items-center justify-center min-h-[50vh]">
-          <div className="h-10 w-10 border-4 border-slate-200/60 dark:border-slate-700/50 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
+          <div className="h-10 w-10 border-4 border-slate-200/60 dark:border-[var(--border)]/50 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
           <span className="text-slate-400 dark:text-slate-500 font-bold skeleton-shimmer">Loading review...</span>
         </div>
       </PageWrapper>
@@ -57,7 +57,7 @@ export default function ReviewPage() {
             onClick={() => {
               router.push(`/test/result/${id}`);
             }}
-            className="px-5 py-2.5 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 shadow-sm"
+            className="px-5 py-2.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 shadow-sm"
           >
             ← Back to Result
           </button>
@@ -78,7 +78,7 @@ export default function ReviewPage() {
             return (
               <div
                 key={item.id}
-                className="glass-card bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-3xl p-6 shadow-sm animate-slideUp"
+                className="glass-card bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-3xl p-6 shadow-sm animate-slideUp"
                 style={{ animationDelay: delay, animationFillMode: "both" }}
               >
                 <div className="flex justify-between items-center mb-6">
@@ -110,7 +110,7 @@ export default function ReviewPage() {
                             ? "bg-emerald-50 dark:bg-emerald-500/10 border-emerald-500 text-emerald-700 dark:text-emerald-400"
                             : selected
                             ? "bg-rose-50 dark:bg-rose-500/10 border-rose-500 text-rose-700 dark:text-rose-400"
-                            : "border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300"
+                            : "border-slate-200/60 dark:border-[var(--border)]/50 text-slate-700 dark:text-slate-300"
                         }`}
                       >
                         <div
@@ -119,7 +119,7 @@ export default function ReviewPage() {
                               ? "bg-emerald-500 text-white"
                               : selected
                               ? "bg-rose-500 text-white"
-                              : "bg-slate-100 dark:bg-slate-800 text-slate-500"
+                              : "bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-500"
                           }`}
                         >
                           {opt.key}
@@ -130,7 +130,7 @@ export default function ReviewPage() {
                   })}
                 </div>
 
-                <div className="mt-6 flex flex-col sm:flex-row sm:gap-6 gap-3 text-sm border-t border-slate-200/60 dark:border-slate-700/50 pt-5">
+                <div className="mt-6 flex flex-col sm:flex-row sm:gap-6 gap-3 text-sm border-t border-slate-200/60 dark:border-[var(--border)]/50 pt-5">
                   <p className="text-slate-500 dark:text-slate-400">
                     Your Answer:
                     <span
@@ -153,7 +153,7 @@ export default function ReviewPage() {
                 </div>
 
                 {q.explanation && (
-                  <div className="mt-5 p-5 rounded-2xl bg-white/50 dark:bg-[#020617]/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-sm">
+                  <div className="mt-5 p-5 rounded-2xl bg-[var(--card)]/50 dark:bg-[var(--background)]/50 backdrop-blur-md border border-slate-200/60 dark:border-[var(--border)]/50 text-sm">
                     <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                       <Lightbulb className="w-4 h-4 text-indigo-500" /> Explanation
                     </p>

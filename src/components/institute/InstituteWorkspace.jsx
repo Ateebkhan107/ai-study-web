@@ -53,7 +53,7 @@ function formatDate(value) {
 
 function EmptyState({ title, description, action }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center dark:border-slate-800 dark:bg-slate-950/40">
+    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40">
       <h3 className="text-sm font-black text-slate-950 dark:text-white">{title}</h3>
       {description && <p className="mx-auto mt-1 max-w-md text-sm text-slate-500 dark:text-slate-400">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
@@ -63,7 +63,7 @@ function EmptyState({ title, description, action }) {
 
 function StatCard({ icon: Icon, label, value, helper }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div className="rounded-2xl border border-slate-200 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-2xl font-black text-slate-950 dark:text-white">{value}</p>
@@ -80,7 +80,7 @@ function StatCard({ icon: Icon, label, value, helper }) {
 
 function Panel({ title, action, children }) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-5">
+    <section className="rounded-2xl border border-slate-200 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-sm font-black uppercase tracking-widest text-slate-400">{title}</h2>
         {action}
@@ -93,10 +93,10 @@ function Panel({ title, action, children }) {
 function Modal({ title, children, onClose }) {
   return (
     <div className="fixed inset-0 z-[70] flex items-end bg-slate-950/40 p-0 backdrop-blur-sm sm:items-center sm:justify-center sm:p-4">
-      <div className="w-full rounded-t-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:max-w-lg sm:rounded-3xl">
+      <div className="w-full rounded-t-3xl border border-slate-200 bg-[var(--card)] p-5 shadow-2xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:max-w-lg sm:rounded-3xl">
         <div className="mb-4 flex items-center justify-between gap-3">
           <h2 className="text-lg font-black text-slate-950 dark:text-white">{title}</h2>
-          <button type="button" onClick={onClose} className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-slate-800">
+          <button type="button" onClick={onClose} className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)]">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -110,7 +110,7 @@ function PrimaryButton({ children, className = "", ...props }) {
   return (
     <button
       type="button"
-      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-sm font-black text-white transition hover:bg-slate-800 disabled:opacity-60 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-black text-white transition hover:bg-brand-hover disabled:opacity-60 dark:bg-brand dark:text-white dark:hover:bg-brand-hover ${className}`}
       {...props}
     >
       {children}
@@ -126,7 +126,7 @@ function ProgressRow({ label, value, meta }) {
         <span className="truncate text-sm font-bold text-slate-700 dark:text-slate-200">{label}</span>
         <span className="shrink-0 text-xs font-black text-slate-500">{meta || `${safe}%`}</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+      <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
         <div className="h-full rounded-full bg-indigo-500" style={{ width: `${safe}%` }} />
       </div>
     </div>
@@ -296,10 +296,10 @@ export default function InstituteWorkspace({ slug }) {
   if (loading) {
     return (
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="h-32 rounded-2xl bg-slate-100 dark:bg-slate-800" />
+        <div className="h-32 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)]" />
         <div className="mt-4 grid gap-4 lg:grid-cols-[240px_1fr]">
-          <div className="h-80 rounded-2xl bg-slate-100 dark:bg-slate-800" />
-          <div className="h-80 rounded-2xl bg-slate-100 dark:bg-slate-800" />
+          <div className="h-80 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)]" />
+          <div className="h-80 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)]" />
         </div>
       </main>
     );
@@ -334,7 +334,7 @@ export default function InstituteWorkspace({ slug }) {
         className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-bold transition ${
           active
             ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300"
-            : "text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-white"
+            : "text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-brand-hover/60 dark:hover:text-white"
         }`}
       >
         <Icon className="h-4 w-4" />
@@ -344,7 +344,7 @@ export default function InstituteWorkspace({ slug }) {
   };
 
   const renderHeader = () => (
-    <header className="mb-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <header className="mb-5 rounded-2xl border border-slate-200 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
@@ -367,7 +367,7 @@ export default function InstituteWorkspace({ slug }) {
         <button
           type="button"
           onClick={() => setMobileNavOpen((value) => !value)}
-          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-black text-slate-700 lg:hidden dark:border-slate-800 dark:text-slate-200"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-black text-slate-700 lg:hidden dark:border-[var(--border-subtle)] dark:text-slate-200"
         >
           <Menu className="h-4 w-4" />
           Menu
@@ -449,7 +449,7 @@ export default function InstituteWorkspace({ slug }) {
         action={<PrimaryButton onClick={() => setModal("student")}><Plus className="h-4 w-4" /> Add Student</PrimaryButton>}
       >
         <p className="-mt-2 mb-4 text-sm text-slate-500 dark:text-slate-400">Manage students enrolled in your institute.</p>
-        <div className="mb-4 flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-800 dark:bg-slate-950/40">
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40">
           <Search className="h-4 w-4 text-slate-400" />
           <input
             value={studentSearch}
@@ -469,7 +469,7 @@ export default function InstituteWorkspace({ slug }) {
                   <tr key={member.id}>
                     <td className="py-3 font-bold text-slate-900 dark:text-white">{member.profile?.full_name || "Pending signup"}</td>
                     <td className="text-slate-500">{member.email}</td>
-                    <td><span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600 dark:bg-slate-800 dark:text-slate-300">{member.status}</span></td>
+                    <td><span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300">{member.status}</span></td>
                     <td className="text-slate-500">{formatDate(member.created_at)}</td>
                     <td className="text-slate-400">...</td>
                   </tr>
@@ -497,7 +497,7 @@ export default function InstituteWorkspace({ slug }) {
         {data.batches.length ? (
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {data.batches.map((batch) => (
-              <div key={batch.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/40">
+              <div key={batch.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40">
                 <h3 className="font-black text-slate-950 dark:text-white">{batch.name}</h3>
                 <p className="mt-1 text-sm font-semibold text-slate-500">{batch.exam} · {batch.target_year || "Target year"}</p>
                 <div className="mt-4 flex items-center justify-between text-sm">
@@ -532,7 +532,7 @@ export default function InstituteWorkspace({ slug }) {
                 type="button"
                 onClick={() => setTestFilter(filter)}
                 className={`rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-widest ${
-                  testFilter === filter ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-300"
+                  testFilter === filter ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-300"
                 }`}
               >
                 {filter}
@@ -586,7 +586,7 @@ export default function InstituteWorkspace({ slug }) {
             <select
               value={leaderboardTestId}
               onChange={(event) => loadLeaderboard(event.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white sm:max-w-md"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white sm:max-w-md"
             >
               <option value="">Choose a test</option>
               {data.tests.map((test) => <option key={test.id} value={test.id}>{test.title}</option>)}
@@ -620,7 +620,7 @@ export default function InstituteWorkspace({ slug }) {
           <select
             value={leaderboardTestId}
             onChange={(event) => loadLeaderboard(event.target.value)}
-            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white sm:max-w-md"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white sm:max-w-md"
           >
             <option value="">Choose a test</option>
             {data.tests.map((test) => <option key={test.id} value={test.id}>{test.title}</option>)}
@@ -661,12 +661,12 @@ export default function InstituteWorkspace({ slug }) {
 
   function renderLeaderboardRows(title, rows) {
     return (
-      <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/40">
+      <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40">
         <h3 className="mb-3 font-black text-slate-950 dark:text-white">{title}</h3>
         {rows.length ? (
           <div className="space-y-2">
             {rows.slice(0, 6).map((row) => (
-              <div key={row.id} className="flex items-center justify-between gap-3 rounded-xl bg-white px-3 py-2 text-sm dark:bg-slate-900">
+              <div key={row.id} className="flex items-center justify-between gap-3 rounded-xl bg-[var(--card)] px-3 py-2 text-sm dark:bg-[var(--surface)]">
                 <span className="font-bold text-slate-700 dark:text-slate-200">{row.rank}. {row.student?.full_name || row.user_id}</span>
                 <span className="font-black text-indigo-600 dark:text-indigo-300">{row.score}</span>
               </div>
@@ -687,7 +687,7 @@ export default function InstituteWorkspace({ slug }) {
             {data.tests.map((test) => {
               const completed = test.latest_attempt?.status === "SUBMITTED";
               return (
-                <div key={test.id} className="flex flex-col justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/40 sm:flex-row sm:items-center">
+                <div key={test.id} className="flex flex-col justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 sm:flex-row sm:items-center">
                   <div>
                     <div className="mb-1 flex flex-wrap items-center gap-2">
                       <p className="font-black text-slate-950 dark:text-white">{test.title}</p>
@@ -724,7 +724,7 @@ export default function InstituteWorkspace({ slug }) {
         {recentResults.length ? (
           <div className="space-y-2">
             {recentResults.map((row) => (
-              <div key={row.id} className="rounded-xl bg-slate-50 px-3 py-2 dark:bg-slate-950/40">
+              <div key={row.id} className="rounded-xl bg-slate-50 px-3 py-2 dark:bg-[var(--background)]/40">
                 <p className="text-sm font-bold text-slate-900 dark:text-white">{row.test?.title || "Institute Test"}</p>
                 <p className="text-xs font-semibold text-slate-500">Score: {row.test_attempts?.score ?? 0}</p>
               </div>
@@ -758,7 +758,7 @@ export default function InstituteWorkspace({ slug }) {
       )}
 
       <div className="grid gap-5 lg:grid-cols-[240px_minmax(0,1fr)]">
-        <aside className={`${mobileNavOpen ? "block" : "hidden"} rounded-2xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:block`}>
+        <aside className={`${mobileNavOpen ? "block" : "hidden"} rounded-2xl border border-slate-200 bg-[var(--card)] p-3 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] lg:block`}>
           <nav className="space-y-1">
             {tabs.map((tab) => <NavButton key={tab.id} tab={tab} />)}
           </nav>
@@ -773,17 +773,17 @@ export default function InstituteWorkspace({ slug }) {
           <form onSubmit={addStudent} className="space-y-4">
             <div>
               <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Student email</label>
-              <input value={studentEmail} onChange={(event) => setStudentEmail(event.target.value)} placeholder="student@email.com" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
+              <input value={studentEmail} onChange={(event) => setStudentEmail(event.target.value)} placeholder="student@email.com" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" />
             </div>
             <div>
               <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Batch</label>
-              <select value={studentBatch} onChange={(event) => setStudentBatch(event.target.value)} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+              <select value={studentBatch} onChange={(event) => setStudentBatch(event.target.value)} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white">
                 <option value="">No batch yet</option>
                 {data.batches.map((batch) => <option key={batch.id} value={batch.id}>{batch.name}</option>)}
               </select>
             </div>
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300">Cancel</button>
+              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-[var(--border-subtle)] dark:text-slate-300">Cancel</button>
               <PrimaryButton disabled={saving === "student"} type="submit">Add Student</PrimaryButton>
             </div>
           </form>
@@ -795,22 +795,22 @@ export default function InstituteWorkspace({ slug }) {
           <form onSubmit={createBatch} className="space-y-4">
             <div>
               <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Batch Name</label>
-              <input value={batchForm.name} onChange={(event) => setBatchForm({ ...batchForm, name: event.target.value })} placeholder="JEE 2027 Batch A" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
+              <input value={batchForm.name} onChange={(event) => setBatchForm({ ...batchForm, name: event.target.value })} placeholder="JEE 2027 Batch A" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Exam</label>
-                <select value={batchForm.exam} onChange={(event) => setBatchForm({ ...batchForm, exam: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+                <select value={batchForm.exam} onChange={(event) => setBatchForm({ ...batchForm, exam: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white">
                   <option value="JEE">JEE</option><option value="NEET">NEET</option>
                 </select>
               </div>
               <div>
                 <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Target Year</label>
-                <input type="number" value={batchForm.target_year} onChange={(event) => setBatchForm({ ...batchForm, target_year: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
+                <input type="number" value={batchForm.target_year} onChange={(event) => setBatchForm({ ...batchForm, target_year: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" />
               </div>
             </div>
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300">Cancel</button>
+              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-[var(--border-subtle)] dark:text-slate-300">Cancel</button>
               <PrimaryButton disabled={saving === "batch"} type="submit">Create Batch</PrimaryButton>
             </div>
           </form>
@@ -820,44 +820,44 @@ export default function InstituteWorkspace({ slug }) {
       {modal === "test" && (
         <Modal title="Create Test" onClose={() => setModal(null)}>
           <form onSubmit={createTest} className="space-y-3">
-            <div className="flex gap-2 p-1 bg-slate-100 rounded-xl dark:bg-slate-900 mb-4">
+            <div className="flex gap-2 p-1 bg-slate-100 rounded-xl dark:bg-[var(--surface)] mb-4">
               <button
                 type="button"
                 onClick={() => setTestForm({ ...testForm, mode: "auto" })}
-                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "auto" ? "bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
+                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "auto" ? "bg-[var(--card)] text-indigo-600 shadow-sm dark:bg-[var(--surface-elevated)] dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
               >
                 Auto-Generate
               </button>
               <button
                 type="button"
                 onClick={() => setTestForm({ ...testForm, mode: "custom" })}
-                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "custom" ? "bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
+                className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${testForm.mode === "custom" ? "bg-[var(--card)] text-indigo-600 shadow-sm dark:bg-[var(--surface-elevated)] dark:text-indigo-400" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"}`}
               >
                 Build Custom
               </button>
             </div>
 
-            <input value={testForm.title} onChange={(event) => setTestForm({ ...testForm, title: event.target.value })} placeholder="Test Title (e.g. Physics Mock Test)" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
-            <select value={testForm.batch_id} onChange={(event) => setTestForm({ ...testForm, batch_id: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white" required>
+            <input value={testForm.title} onChange={(event) => setTestForm({ ...testForm, title: event.target.value })} placeholder="Test Title (e.g. Physics Mock Test)" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required />
+            <select value={testForm.batch_id} onChange={(event) => setTestForm({ ...testForm, batch_id: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required>
               <option value="">Choose batch</option>
               {data.batches.map((batch) => <option key={batch.id} value={batch.id}>{batch.name}</option>)}
             </select>
             <div className="grid grid-cols-2 gap-3">
-              <select value={testForm.exam} onChange={(event) => setTestForm({ ...testForm, exam: event.target.value, subject: SUBJECTS[event.target.value][0] })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+              <select value={testForm.exam} onChange={(event) => setTestForm({ ...testForm, exam: event.target.value, subject: SUBJECTS[event.target.value][0] })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white">
                 <option value="JEE">JEE</option><option value="NEET">NEET</option>
               </select>
-              <select value={testForm.subject} onChange={(event) => setTestForm({ ...testForm, subject: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+              <select value={testForm.subject} onChange={(event) => setTestForm({ ...testForm, subject: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white">
                 {SUBJECTS[testForm.exam].map((subject) => <option key={subject} value={subject}>{subject}</option>)}
               </select>
             </div>
 
             {testForm.mode === "auto" && (
               <>
-                <input value={testForm.chapters} onChange={(event) => setTestForm({ ...testForm, chapters: event.target.value })} placeholder="Chapters, comma separated" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+                <input value={testForm.chapters} onChange={(event) => setTestForm({ ...testForm, chapters: event.target.value })} placeholder="Chapters, comma separated" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required />
                 <div className="grid grid-cols-3 gap-3">
-                  <input type="number" min="1" max="100" value={testForm.question_count} onChange={(event) => setTestForm({ ...testForm, question_count: event.target.value })} placeholder="Questions" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
-                  <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (min)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
-                  <select value={testForm.difficulty} onChange={(event) => setTestForm({ ...testForm, difficulty: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold dark:border-slate-800 dark:bg-slate-950 dark:text-white">
+                  <input type="number" min="1" max="100" value={testForm.question_count} onChange={(event) => setTestForm({ ...testForm, question_count: event.target.value })} placeholder="Questions" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required />
+                  <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (min)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required />
+                  <select value={testForm.difficulty} onChange={(event) => setTestForm({ ...testForm, difficulty: event.target.value })} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white">
                     <option value="mixed">Mixed</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option>
                   </select>
                 </div>
@@ -866,12 +866,12 @@ export default function InstituteWorkspace({ slug }) {
 
             {testForm.mode === "custom" && (
               <div className="grid grid-cols-1 gap-3">
-                <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (minutes)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white" required />
+                <input type="number" min="5" max="240" value={testForm.duration_minutes} onChange={(event) => setTestForm({ ...testForm, duration_minutes: event.target.value })} placeholder="Duration (minutes)" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" required />
               </div>
             )}
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300">Cancel</button>
+              <button type="button" onClick={() => setModal(null)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-[var(--border-subtle)] dark:text-slate-300">Cancel</button>
               <PrimaryButton disabled={saving === "test"} type="submit">
                 {testForm.mode === "auto" ? "Publish Test" : "Create & Edit"}
               </PrimaryButton>

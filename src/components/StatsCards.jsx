@@ -81,7 +81,7 @@ export default function StatsCards({ compact = false, stacked = false }) {
         {Array.from({ length: 2 }).map((_, index) => (
           <div
             key={index}
-            className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-slate-800/50 dark:bg-slate-900/30 ${
+            className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-[var(--border-subtle)]/50 dark:bg-[var(--surface)]/30 ${
               compact ? "h-[84px]" : "h-[128px]"
             }`}
           >
@@ -103,7 +103,7 @@ export default function StatsCards({ compact = false, stacked = false }) {
         return (
           <div
             key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-slate-700/50 dark:bg-slate-800/40 ${compact ? "p-3.5 sm:p-4" : "p-4 sm:p-5"} ${style.borderHover}`}
+            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${compact ? "p-3.5 sm:p-4" : "p-4 sm:p-5"} ${style.borderHover}`}
             style={{ transitionDelay: `${index * 50}ms` }}
           >
             

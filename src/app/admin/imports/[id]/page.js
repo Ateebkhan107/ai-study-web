@@ -114,7 +114,7 @@ export default function ImportPackageDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
   }
@@ -132,7 +132,7 @@ export default function ImportPackageDashboard() {
         </Link>
         <div className="flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+            <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
               {pkg.name}
             </h1>
             <span className={`
@@ -152,7 +152,7 @@ export default function ImportPackageDashboard() {
         
         <Link 
           href={`/admin/imports/${id}/review`}
-          className="flex items-center gap-2 bg-purple-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-500/30"
+          className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors shadow-lg shadow-brand/30"
         >
           <Play className="w-4 h-4" />
           Enter Review Queue
@@ -161,53 +161,53 @@ export default function ImportPackageDashboard() {
 
       {/* Summary Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center text-center">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <FileText className="w-6 h-6 text-blue-500 mb-2" />
           <p className="text-3xl font-black">{stats.total}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Total Questions</p>
         </div>
         
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center text-center">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <FileImage className="w-6 h-6 text-indigo-500 mb-2" />
           <p className="text-3xl font-black">{stats.images}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Images</p>
         </div>
 
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center text-center">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <CheckCircle2 className="w-6 h-6 text-emerald-500 mb-2" />
           <p className="text-3xl font-black">{stats.solutions}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Solutions</p>
         </div>
 
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center text-center">
-          <Target className="w-6 h-6 text-purple-500 mb-2" />
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
+          <Target className="w-6 h-6 text-indigo-500 mb-2" />
           <p className="text-3xl font-black">{stats.validationScore}%</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Validation</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Reviewed</p>
           <p className="text-2xl font-black mt-1">{stats.reviewed}</p>
         </div>
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Needs Review</p>
           <p className="text-2xl font-black mt-1 text-amber-600">{stats.needsReview}</p>
         </div>
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Published</p>
           <p className="text-2xl font-black mt-1 text-green-600">{stats.published}</p>
         </div>
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Image Only</p>
           <p className="text-2xl font-black mt-1">{stats.imageOnly}</p>
         </div>
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text + Image</p>
           <p className="text-2xl font-black mt-1">{stats.textRequiredImage}</p>
         </div>
-        <div className="bg-white dark:bg-[#111] p-5 rounded-2xl border border-gray-200 dark:border-gray-800">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text Only</p>
           <p className="text-2xl font-black mt-1">{stats.textOnly}</p>
         </div>
@@ -221,15 +221,15 @@ export default function ImportPackageDashboard() {
         </h3>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white dark:bg-[#111] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
             <p className="text-sm text-gray-600 dark:text-gray-400">Missing Images</p>
             <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.missingImages}</p>
           </div>
-          <div className="bg-white dark:bg-[#111] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
             <p className="text-sm text-gray-600 dark:text-gray-400">Unmapped Chapters</p>
             <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.missingChapters}</p>
           </div>
-          <div className="bg-white dark:bg-[#111] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 rounded-xl border border-red-100 dark:border-red-900/30">
             <p className="text-sm text-gray-600 dark:text-gray-400">Missing Answers</p>
             <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.missingAnswers}</p>
           </div>
@@ -237,7 +237,7 @@ export default function ImportPackageDashboard() {
       </div>
 
       {/* Bulk Actions */}
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6">
         <h3 className="font-bold flex items-center gap-2 mb-4">
           <Settings className="w-5 h-5" />
           Bulk Actions

@@ -12,17 +12,17 @@ export const OVERVIEW_STATS = [
 export const PERFORMANCE_WEEKS = ["W1","W2","W3","W4","W5","W6","W7","W8"];
 
 export const PERFORMANCE_SERIES = [
-  { subject: "Physics",   color: "#378ADD", dash: [],      data: [61,64,62,68,70,72,75,78] },
-  { subject: "Chemistry", color: "#1D9E75", dash: [4,4],   data: [55,58,60,62,61,65,68,71] },
-  { subject: "Maths",     color: "#BA7517", dash: [2,3],   data: [60,58,63,61,67,65,70,68] },
-  { subject: "Biology",   color: "#D4537E", dash: [6,3],   data: [72,75,76,78,79,80,81,80] },
+  { subject: "Physics",   color: "#4F6F86", dash: [],      data: [61,64,62,68,70,72,75,78] },
+  { subject: "Chemistry", color: "#4F7A59", dash: [4,4],   data: [55,58,60,62,61,65,68,71] },
+  { subject: "Maths",     color: "#A95D32", dash: [2,3],   data: [60,58,63,61,67,65,70,68] },
+  { subject: "Biology",   color: "#A05252", dash: [6,3],   data: [72,75,76,78,79,80,81,80] },
 ];
 
 export const SUBJECT_DISTRIBUTION = [
-  { subject: "Physics",   pct: 32, color: "#378ADD" },
-  { subject: "Chemistry", pct: 28, color: "#1D9E75" },
-  { subject: "Maths",     pct: 24, color: "#BA7517" },
-  { subject: "Biology",   pct: 16, color: "#D4537E" },
+  { subject: "Physics",   pct: 32, color: "#4F6F86" },
+  { subject: "Chemistry", pct: 28, color: "#4F7A59" },
+  { subject: "Maths",     pct: 24, color: "#A95D32" },
+  { subject: "Biology",   pct: 16, color: "#A05252" },
 ];
 
 export const RADAR_LABELS = ["Mechanics","Organic Chem","Calculus","Genetics","Thermo"];
@@ -68,30 +68,30 @@ export const PYQ_INSIGHTS = [
 ];
 
 export const READINESS_BREAKDOWN = [
-  { label: "Concept coverage", pct: 82, color: "#1D9E75" },
-  { label: "PYQ accuracy",     pct: 73, color: "#378ADD" },
-  { label: "Speed (q/min)",    pct: 69, color: "#BA7517" },
-  { label: "Mock test score",  pct: 76, color: "#D4537E" },
+  { label: "Concept coverage", pct: 82, color: "#4F7A59" },
+  { label: "PYQ accuracy",     pct: 73, color: "#4F6F86" },
+  { label: "Speed (q/min)",    pct: 69, color: "#A95D32" },
+  { label: "Mock test score",  pct: 76, color: "#A05252" },
 ];
 
 export const AI_PREDICTIONS = [
-  { label: "JEE percentile estimate", value: "94.2 ile", pct: 94 , color: "#1D9E75" },
-  { label: "NEET score estimate",     value: "612 / 720", pct: 85, color: "#378ADD" },
+  { label: "JEE percentile estimate", value: "94.2 ile", pct: 94 , color: "#4F7A59" },
+  { label: "NEET score estimate",     value: "612 / 720", pct: 85, color: "#4F6F86" },
   { label: "Projected rank (JEE)",    value: "#8,400",    pct: null, color: null     },
 ];
 
 export const ADAPTIVE_STEPS = [
-  { step: "Step 1 — Foundations",  detail: "Basic definite integrals · Easy · 10 Qs",  color: "#1D9E75" },
-  { step: "Step 2 — By parts",     detail: "IBP method drills · Medium · 15 Qs",        color: "#BA7517" },
-  { step: "Step 3 — PYQ Blitz",    detail: "2018–2023 JEE papers · Hard · 20 Qs",       color: "#D85A30" },
-  { step: "Step 4 — Mock test",    detail: "Timed 30 min session",                       color: "#185FA5" },
+  { step: "Step 1 — Foundations",  detail: "Basic definite integrals · Easy · 10 Qs",  color: "#4F7A59" },
+  { step: "Step 2 — By parts",     detail: "IBP method drills · Medium · 15 Qs",        color: "#A8791D" },
+  { step: "Step 3 — PYQ Blitz",    detail: "2018–2023 JEE papers · Hard · 20 Qs",       color: "#A95D32" },
+  { step: "Step 4 — Mock test",    detail: "Timed 30 min session",                       color: "#4F6F86" },
 ];
 
 export const DAILY_TASKS = [
-  { task: "Revise Integration formulas",  detail: "30 min · Critical gap",         color: "#D85A30" },
-  { task: "Solve 20 Kinematics PYQs",    detail: "45 min · High weightage",        color: "#1D9E75" },
-  { task: "Chemistry formula cards",      detail: "20 min · Scheduled revision",    color: "#378ADD" },
-  { task: "Physics mini mock test",       detail: "30 min · 25 Qs",                color: "#7F77DD" },
+  { task: "Revise Integration formulas",  detail: "30 min · Critical gap",         color: "#A95D32" },
+  { task: "Solve 20 Kinematics PYQs",    detail: "45 min · High weightage",        color: "#4F7A59" },
+  { task: "Chemistry formula cards",      detail: "20 min · Scheduled revision",    color: "#4F6F86" },
+  { task: "Physics mini mock test",       detail: "30 min · 25 Qs",                color: "#A8791D" },
 ];
 
 export const AI_RECOMMENDATIONS = [

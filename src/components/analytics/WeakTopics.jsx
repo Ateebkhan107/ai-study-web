@@ -21,7 +21,7 @@ const CFG = {
 
 function EmptyState({ minimumAttempts }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-white/45 p-5 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-400">
+    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-[var(--card)]/45 p-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/30 dark:text-slate-400">
       <p className="font-bold text-slate-700 dark:text-slate-200">Not enough chapter data yet</p>
       <p className="mt-1 text-xs leading-relaxed">
         Complete more PYQs or tests and PrepZii will identify chapters with at least {minimumAttempts} answered questions.
@@ -71,8 +71,8 @@ export default function WeakTopics({ weakChapters, minimumAttempts = 3 }) {
                 </span>
 
                 <div className="hidden w-40 items-center gap-3 sm:flex">
-                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                    <div className="h-full rounded-full bg-black dark:bg-white" style={{ width: `${chapter.accuracy}%` }} />
+                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                    <div className="h-full rounded-full bg-brand dark:bg-brand" style={{ width: `${chapter.accuracy}%` }} />
                   </div>
                   <span className="w-8 text-right text-xs font-black tabular-nums text-slate-900 dark:text-white">
                     {chapter.accuracy}%

@@ -1,13 +1,13 @@
 export const EXAM_CONFIG = {
   JEE: {
     badge: "JEE Main & Advanced",
-    badgeStyles: "border-purple-500/30 bg-purple-500/10 text-purple-400 dark:border-purple-400/20 dark:bg-purple-500/5",
-    themeGlow: "from-purple-500/10 via-transparent to-transparent",
+    badgeStyles: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 dark:border-indigo-500/25 dark:bg-indigo-500/10",
+    themeGlow: "from-indigo-500/10 via-transparent to-transparent",
     dashboardTitle: "Welcome Back, JEE Aspirant",
     subjects: [
-      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-indigo-600" },
+      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-blue-600" },
       { id: "chemistry", label: "Chemistry", icon: "flask-conical", color: "from-teal-500 to-emerald-600" },
-      { id: "maths", label: "Mathematics", icon: "calculator", color: "from-purple-500 to-pink-600" }
+      { id: "maths", label: "Mathematics", icon: "calculator", color: "from-indigo-500 to-indigo-600" }
     ],
     focusTopics: [
       { topic: "Rotational Dynamics", subject: "Physics", urgency: "High Yield" },
@@ -55,7 +55,7 @@ export const EXAM_CONFIG = {
     themeGlow: "from-emerald-500/10 via-transparent to-transparent",
     dashboardTitle: "Welcome Back, NEET Aspirant",
     subjects: [
-      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-indigo-600" },
+      { id: "physics", label: "Physics", icon: "atom", color: "from-blue-500 to-blue-600" },
       { id: "chemistry", label: "Chemistry", icon: "flask-conical", color: "from-teal-500 to-emerald-600" },
       { id: "biology", label: "Biology", icon: "dna", color: "from-emerald-400 to-teal-600" }
     ],

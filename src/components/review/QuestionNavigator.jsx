@@ -54,7 +54,7 @@ export default function QuestionNavigator({
             onClick={() => onFilterChange(f.id)}
             className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               filter === f.id
-                ? "bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm"
+                ? "bg-[var(--card)] dark:bg-[var(--surface-elevated)] text-slate-900 dark:text-slate-100 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
             }`}
           >

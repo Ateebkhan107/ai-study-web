@@ -97,11 +97,11 @@ export default function DashboardSection({ config, compact = false }) {
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className={`relative animate-pulse overflow-hidden rounded-l-md rounded-r-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900 ${
+              className={`relative animate-pulse overflow-hidden rounded-l-md rounded-r-2xl border border-slate-200 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] ${
                 compact ? "h-[138px]" : "h-[180px]"
               }`}
             >
-              <div className="absolute left-0 top-0 bottom-0 w-3 bg-slate-200 dark:bg-slate-800" />
+              <div className="absolute left-0 top-0 bottom-0 w-3 bg-slate-200 dark:bg-[var(--surface-elevated)]" />
             </div>
           ))}
         </div>
@@ -120,7 +120,7 @@ export default function DashboardSection({ config, compact = false }) {
               <Link href={`/formula-books/${book.id}`} key={book.id} className="block group">
                 {/* Clean Premium Card */}
                 <div 
-                  className={`relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-sm dark:border-slate-700/50 dark:bg-slate-800/40 ${
+                  className={`relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${
                     compact ? "min-h-[140px]" : "min-h-[180px]"
                   }`}
                   style={{ transitionDelay: `${index * 50}ms` }}
@@ -146,7 +146,7 @@ export default function DashboardSection({ config, compact = false }) {
                       </span>
 
                       {book.tag && (
-                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-1 rounded-md">
+                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] px-2 py-1 rounded-md">
                           {book.tag}
                         </span>
                       )}
@@ -159,7 +159,7 @@ export default function DashboardSection({ config, compact = false }) {
 
                     {/* Formula Embossed Box */}
                     {book.formula && (
-                      <div className={`mt-auto rounded-xl bg-gradient-to-br px-3 ${compact ? "py-2" : "py-2.5"} ${meta.bg} to-transparent border ${meta.border} shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)] backdrop-blur-md transition-all duration-300 group-hover:bg-white/50 dark:group-hover:bg-slate-800/50`}>
+                      <div className={`mt-auto rounded-xl bg-gradient-to-br px-3 ${compact ? "py-2" : "py-2.5"} ${meta.bg} to-transparent border ${meta.border} shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)] backdrop-blur-md transition-all duration-300 group-hover:bg-[var(--card)]/50 dark:group-hover:bg-slate-800/50`}>
                         <p className={`font-mono text-[13px] font-bold tracking-tight leading-snug ${meta.color}`}>
                           {book.formula}
                         </p>
@@ -172,7 +172,7 @@ export default function DashboardSection({ config, compact = false }) {
                     )}
 
                     {/* Interactive Arrow */}
-                    <div className="absolute bottom-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 border border-slate-200 dark:border-slate-700">
+                    <div className="absolute bottom-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] flex items-center justify-center opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 border border-slate-200 dark:border-[var(--border)]">
                       <ChevronRight className={`w-4 h-4 ${meta.color}`} strokeWidth={2.5} />
                     </div>
 
@@ -186,8 +186,8 @@ export default function DashboardSection({ config, compact = false }) {
 
       {/* ── Empty state ───────────────────────────────────────── */}
       {!loading && filteredFormulas.length === 0 && (
-        <div className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-900/30 border border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-10 text-center flex flex-col items-center justify-center">
-          <div className="w-16 h-16 mb-4 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+        <div className="relative overflow-hidden bg-slate-50/50 dark:bg-[var(--surface)]/30 border border-dashed border-slate-300 dark:border-[var(--border)] rounded-3xl p-10 text-center flex flex-col items-center justify-center">
+          <div className="w-16 h-16 mb-4 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)] flex items-center justify-center">
             <BookOpen className="w-8 h-8 text-slate-400 dark:text-slate-500" />
           </div>
           <h3 className="text-base font-bold text-slate-700 dark:text-slate-300 mb-1">

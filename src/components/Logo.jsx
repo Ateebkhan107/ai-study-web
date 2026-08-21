@@ -38,7 +38,7 @@ export default function Logo({ size, showText = true, forceDark = false, classNa
 
       {/* Brand Text */}
       {showText && (
-        <span className="text-xl md:text-2xl font-black tracking-tight uppercase">
+        <span className="text-xl md:text-2xl font-black tracking-tight uppercase text-foreground">
           PREPZII
         </span>
       )}

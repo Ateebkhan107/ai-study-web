@@ -44,7 +44,7 @@ export default function AboutPage() {
 
         {/* Why PrepZii */}
         <div className="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand/5 rounded-full blur-3xl" />
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Why PrepZii?</h2>
           <div className="space-y-4 text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
             <p>
@@ -66,7 +66,7 @@ export default function AboutPage() {
               { icon: Rocket, title: "Structured Practice", desc: "Unlimited tests, comprehensive PYQs, and daily goals to keep your momentum high." }
             ].map((feature, i) => (
               <div key={i} className="glass-card p-6 rounded-3xl text-center flex flex-col items-center">
-                <div className="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mb-4 border border-slate-100 dark:border-slate-700/50">
+                <div className="w-12 h-12 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)]/50 flex items-center justify-center mb-4 border border-slate-100 dark:border-[var(--border)]/50">
                   <feature.icon className="w-5 h-5 text-slate-600 dark:text-slate-300" />
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
@@ -77,7 +77,7 @@ export default function AboutPage() {
         </div>
 
         {/* Future Roadmap */}
-        <div className="glass-card p-8 md:p-12 rounded-3xl border-indigo-500/20 shadow-lg shadow-indigo-500/5">
+        <div className="glass-card p-8 md:p-12 rounded-3xl border-indigo-500/20 shadow-lg shadow-brand/5">
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Our Future Roadmap</h2>
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm mb-6">
             We are constantly iterating and improving. Here is a glimpse of what&apos;s coming next to PrepZii:
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
         {/* Closing Message */}
         <div className="text-center space-y-4 pt-8">
-          <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/30 mb-6">
+          <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-brand to-brand-hover rounded-full flex items-center justify-center shadow-lg shadow-brand/30 mb-6">
             <Heart className="w-8 h-8 text-white fill-white/20" />
           </div>
           <h2 className="text-xl font-black text-slate-900 dark:text-white">Built with passion by Team PrepZii</h2>

@@ -114,7 +114,7 @@ export default function AdminCommunityPage() {
       </div>
 
       {/* Quick actions */}
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-5">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-5">
         <h2 className="font-bold mb-4 text-sm text-gray-500 uppercase tracking-wider">Admin Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
@@ -126,7 +126,7 @@ export default function AdminCommunityPage() {
             <button
               key={item.action}
               onClick={() => setActionModal(item)}
-              className="flex flex-col items-center p-4 rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-800 hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/10 transition-all gap-2"
+              className="flex flex-col items-center p-4 rounded-xl border-2 border-dashed border-gray-200 dark:border-[var(--border-subtle)] hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all gap-2"
             >
               <item.icon className="w-6 h-6 text-gray-400" />
               <span className="text-xs font-bold text-center">{item.label}</span>
@@ -136,18 +136,18 @@ export default function AdminCommunityPage() {
       </div>
 
       {/* Reports table */}
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-[var(--border-subtle)]">
           <h2 className="font-bold">Reports</h2>
           <div className="flex items-center gap-2">
-            <div className="flex gap-1 bg-gray-100 dark:bg-gray-900 p-0.5 rounded-lg">
+            <div className="flex gap-1 bg-gray-100 dark:bg-[var(--surface)] p-0.5 rounded-lg">
               {STATUS_FILTERS.map((s) => (
                 <button
                   key={s}
                   onClick={() => setStatusFilter(s)}
                   className={`px-3 py-1.5 rounded-md text-xs font-bold capitalize transition-colors ${
                     statusFilter === s
-                      ? "bg-white dark:bg-gray-800 shadow-sm"
+                      ? "bg-[var(--card)] dark:bg-[var(--surface-elevated)] shadow-sm"
                       : "text-gray-500 hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
@@ -170,7 +170,7 @@ export default function AdminCommunityPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <Loader2 className="w-6 h-6 animate-spin text-purple-500" />
+            <Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
           </div>
         ) : reports.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
@@ -189,7 +189,7 @@ export default function AdminCommunityPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                        <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                           {report.target_type}
                         </span>
                         <span className="text-xs text-gray-400 font-mono truncate">{report.target_id}</span>
@@ -204,20 +204,20 @@ export default function AdminCommunityPage() {
                   {statusFilter === "open" && (
                     <div className="flex items-center gap-2 shrink-0">
                       {processing[report.id] ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-purple-500" />
+                        <Loader2 className="w-4 h-4 animate-spin text-indigo-500" />
                       ) : (
                         <>
                           <button
                             onClick={() => reviewReport(report.id, "dismissed")}
                             title="Dismiss"
-                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-[var(--surface-elevated)] hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                           >
                             Dismiss
                           </button>
                           <button
                             onClick={() => reviewReport(report.id, "actioned")}
                             title="Mark actioned"
-                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 transition-colors"
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
                           >
                             Action Taken
                           </button>
@@ -235,7 +235,7 @@ export default function AdminCommunityPage() {
       {/* Action modal */}
       {actionModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-          <div className="bg-white dark:bg-[#111] rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
             <h3 className="font-bold text-lg mb-1">{actionModal.label}</h3>
             <p className="text-sm text-gray-500 mb-4">
               Target type: <strong>{actionModal.targetType}</strong>
@@ -248,7 +248,7 @@ export default function AdminCommunityPage() {
                   id="moderate-target-id"
                   type="text"
                   placeholder="Paste the user/message/group ID"
-                  className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   onChange={(e) => setActionModal((m) => ({ ...m, resolvedId: e.target.value }))}
                 />
               </div>
@@ -259,7 +259,7 @@ export default function AdminCommunityPage() {
                   onChange={(e) => setActionReason(e.target.value)}
                   rows={3}
                   placeholder="Reason for this action (will be logged)"
-                  className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                  className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
                 />
               </div>
             </div>
@@ -267,7 +267,7 @@ export default function AdminCommunityPage() {
             <div className="flex gap-3 mt-5">
               <button
                 onClick={() => { setActionModal(null); setActionReason(""); }}
-                className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold"
+                className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-[var(--border)] text-sm font-bold"
               >
                 Cancel
               </button>

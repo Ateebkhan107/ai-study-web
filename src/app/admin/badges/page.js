@@ -10,7 +10,7 @@ export default function AdminBadgesPage() {
         <p className="text-gray-500 dark:text-gray-400">Create, edit, and manage achievement badges for students.</p>
       </div>
       
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 shadow-sm">
         <BadgeManager />
       </div>
     </div>

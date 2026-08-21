@@ -16,12 +16,12 @@ import QuestionNavigator from "./QuestionNavigator";
 const SUBJECT_ACCENT = {
   Physics: "bg-blue-500",
   Chemistry: "bg-emerald-500",
-  Mathematics: "bg-violet-500",
+  Mathematics: "bg-indigo-500",
 };
 
 function StatCard({ value, label, color }) {
   return (
-    <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700">
+    <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-[var(--border)]">
       <span className={`text-xl font-bold ${color}`}>{value}</span>
       <span className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 text-center leading-tight">
         {label}
@@ -46,7 +46,7 @@ export default function ReviewSidebar({
   return (
     <div className="space-y-5">
       {/* Test Info Card */}
-      <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60">
+      <div className="p-4 rounded-2xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60">
         <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide mb-1">
           Test Name
         </p>
@@ -59,7 +59,7 @@ export default function ReviewSidebar({
       </div>
 
       {/* Score + Accuracy */}
-      <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60">
+      <div className="p-4 rounded-2xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60">
         <div className="flex items-center gap-4">
           {/* Circular Accuracy */}
           <div className="relative shrink-0">
@@ -180,7 +180,7 @@ export default function ReviewSidebar({
       )}
 
       {/* Question Navigator */}
-      <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60">
+      <div className="p-4 rounded-2xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60">
         <h3 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">
           Question Navigator
         </h3>

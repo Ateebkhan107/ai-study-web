@@ -17,7 +17,7 @@ export default async function InstituteSlugPage({ params }) {
   const { slug } = await params;
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950">
+    <div className="min-h-screen bg-[var(--background)] dark:bg-[var(--background)]">
       <Navbar />
       <InstituteWorkspace slug={slug} />
     </div>

@@ -195,7 +195,7 @@ updateFormulaGoal();
 
     return (
 
-      <div className="flex h-screen items-center justify-center bg-white dark:bg-gray-950">
+      <div className="flex h-screen items-center justify-center bg-[var(--card)] dark:bg-[var(--background)]">
 
 
         <div className="flex flex-col items-center gap-3">
@@ -230,7 +230,7 @@ updateFormulaGoal();
 
   if (accessError) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4 text-center dark:bg-gray-950">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[var(--card)] px-4 text-center dark:bg-[var(--background)]">
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
           <BookOpen className="h-7 w-7" />
         </div>
@@ -240,7 +240,7 @@ updateFormulaGoal();
         </p>
         <Link
           href="/pro"
-          className="rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-black text-white transition hover:opacity-90"
+          className="rounded-xl bg-brand px-5 py-3 text-sm font-black text-white transition hover:opacity-90"
         >
           Upgrade to Pro
         </Link>
@@ -259,7 +259,7 @@ updateFormulaGoal();
 
     return (
 
-      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-white dark:bg-gray-950">
+      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-[var(--card)] dark:bg-[var(--background)]">
 
 
         <div className="text-4xl text-gray-400">
@@ -291,7 +291,7 @@ updateFormulaGoal();
           onClick={() => router.back()}
 
 
-          className="px-5 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-opacity"
+          className="px-5 py-2.5 rounded-xl bg-brand text-white text-sm font-bold hover:opacity-90 transition-opacity"
 
 
         >
@@ -329,8 +329,8 @@ updateFormulaGoal();
 
 
     Mathematics:{
-      color:"#6366F1",
-      bg:"rgba(99,102,241,0.08)",
+      color:"#C2723F",
+      bg:"rgba(194,114,63,0.08)",
       label:<Ruler className="w-3 h-3" />
     },
 
@@ -355,9 +355,9 @@ updateFormulaGoal();
 
   {
 
-    color:"#6366F1",
+    color:"#C2723F",
 
-    bg:"rgba(99,102,241,0.08)",
+    bg:"rgba(194,114,63,0.08)",
 
     label:<BookOpen className="w-3 h-3" />
 
@@ -374,13 +374,13 @@ updateFormulaGoal();
 
   return (
 
-    <div className="h-screen w-full flex flex-col bg-gray-50 dark:bg-gray-950">
+    <div className="h-screen w-full flex flex-col bg-gray-50 dark:bg-[var(--background)]">
 
 
 
 
 
-      <div className="flex items-center gap-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 px-5 py-3 flex-shrink-0 shadow-sm">
+      <div className="flex items-center gap-4 bg-[var(--card)] dark:bg-[var(--surface)] border-b border-gray-100 dark:border-[var(--border-subtle)] px-5 py-3 flex-shrink-0 shadow-sm">
 
 
 
@@ -393,7 +393,7 @@ updateFormulaGoal();
           onClick={() => router.back()}
 
 
-          className="w-9 h-9 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
+          className="w-9 h-9 rounded-xl border border-gray-200 dark:border-[var(--border)] flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
 
 
         >

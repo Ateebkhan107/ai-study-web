@@ -10,19 +10,19 @@ const FEEDBACK_TYPES = [
   { icon: Lightbulb, title: "Feature Requests", desc: "Have an idea for a new feature? We're all ears.", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-500/10" },
   { icon: Sparkles, title: "Platform Improvements", desc: "Thoughts on how we can make the dashboard or UI better.", color: "text-indigo-500", bg: "bg-indigo-50 dark:bg-indigo-500/10" },
   { icon: PenTool, title: "Study Tools", desc: "Feedback on our mock tests, analytics, or formula books.", color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-500/10" },
-  { icon: MessageSquarePlus, title: "General Feedback", desc: "Anything else you want to share about your experience.", color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-500/10" }
+  { icon: MessageSquarePlus, title: "General Feedback", desc: "Anything else you want to share about your experience.", color: "text-indigo-500", bg: "bg-indigo-50 dark:bg-indigo-500/10" }
 ];
 
 export default function FeedbackPage() {
   return (
-    <PageWrapper 
-      title="Feedback" 
-      subtitle="Your voice shapes our future." 
+    <PageWrapper
+      title="Feedback"
+      subtitle="Your voice shapes our future."
       badge="WE'RE LISTENING"
       badgeVariant="indigo"
     >
       <div className="max-w-4xl mx-auto space-y-12 pb-12 animate-slideUp">
-        
+
         {/* Intro */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
@@ -47,15 +47,15 @@ export default function FeedbackPage() {
 
         {/* CTA */}
         <div className="text-center pt-8">
-          <div className="inline-block p-1 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/20">
-            <div className="bg-white dark:bg-[#0f172a] rounded-xl px-12 py-10 relative overflow-hidden">
+          <div className="inline-block p-1 rounded-2xl bg-gradient-to-r from-indigo-500 to-brand-hover shadow-lg shadow-brand/20">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-xl px-12 py-10 relative overflow-hidden">
               <h2 className="text-xl font-black text-slate-900 dark:text-white mb-4 relative z-10">Ready to share your thoughts?</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed mb-8 relative z-10">
                 Drop us an email with your suggestions. If you are requesting a feature, let us know how it would help your preparation.
               </p>
-              <a 
+              <a
                 href="mailto:contact.prepzii@gmail.com?subject=PrepZii%20Feedback"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg relative z-10 group"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-brand text-white dark:bg-brand dark:text-white font-bold text-sm hover:bg-brand-hover dark:hover:bg-slate-100 transition-colors shadow-lg relative z-10 group"
               >
                 <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 Send Feedback

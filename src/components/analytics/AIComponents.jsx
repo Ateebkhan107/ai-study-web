@@ -34,7 +34,7 @@ export function SmartPrediction({ track = "jee" }) {
         {filteredPredictions.map((p) => (
           <div
             key={p.label}
-            className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3.5"
+            className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-3.5"
           >
             <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{p.label}</p>
             <p className="text-xl font-black text-slate-900 dark:text-white mb-2">{p.value}</p>
@@ -109,7 +109,7 @@ export function AdaptiveLearning({ track = "jee" }) {
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-900 dark:text-white hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 cursor-pointer"
+        className="mt-4 w-full py-2.5 rounded-xl border border-slate-200 dark:border-[var(--border)] text-sm font-bold text-slate-900 dark:text-white hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Redirecting to adaptive practice session…");
         }}
@@ -170,7 +170,7 @@ export function AIStudyPlanner({ track = "jee" }) {
       </div>
 
       <button
-        className="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 cursor-pointer"
+        className="mt-4 w-full py-2.5 rounded-xl bg-brand text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Generating your full weekly schedule with AI…");
         }}
@@ -214,7 +214,7 @@ export function AIRecommendations({ track = "jee" }) {
         {filteredRecs.map((r) => (
           <div
             key={r.title}
-            className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5"
+            className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5"
           >
             <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1.5">
               {r.title}
@@ -230,7 +230,7 @@ export function AIRecommendations({ track = "jee" }) {
       </div>
 
       <button
-        className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 cursor-pointer"
+        className="w-full py-3 rounded-xl bg-brand text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300 cursor-pointer"
         onClick={() => {
           alert("Opening AI study plan generator…");
         }}

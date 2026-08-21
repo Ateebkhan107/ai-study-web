@@ -221,12 +221,12 @@ export default function ProfilePage() {
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
         <div className="glass-card p-4 sm:p-6 shadow-sm relative overflow-hidden">
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/8 via-violet-500/5 to-transparent dark:from-indigo-500/10 dark:via-violet-500/6 dark:to-transparent rounded-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand/8 via-brand/5 to-transparent dark:from-brand/10 dark:via-brand/6 dark:to-transparent rounded-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
               {/* AVATAR */}
-              <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 dark:ring-indigo-400/40 shadow-[0_0_25px_rgba(99,102,241,0.2)] bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-3xl font-black shrink-0">
+              <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 dark:ring-indigo-400/40 shadow-[0_0_25px_rgba(194,114,63,0.2)] bg-slate-900 dark:bg-indigo-500 flex items-center justify-center text-white dark:text-white text-3xl font-black shrink-0">
                 {activeUser.avatar ? (
                   <img
                     src={activeUser.avatar}
@@ -253,7 +253,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* JEE / NEET TOGGLE */}
-                <div className="mt-3 inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+                <div className="mt-3 inline-flex rounded-xl bg-slate-100 dark:bg-[var(--surface-elevated)] p-1">
                   {["JEE", "NEET"].map((trackOption) => {
                     const isActive = activeUser.exam === trackOption;
                     return (
@@ -262,7 +262,7 @@ export default function ProfilePage() {
                         onClick={() => handleTrackToggle(trackOption)}
                         className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
                           isActive
-                            ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900"
+                            ? "bg-brand text-white"
                             : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                         }`}
                       >
@@ -277,7 +277,7 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={() => setEditing(true)}
-              className="w-full justify-center border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2 sm:w-auto"
+              className="w-full justify-center border border-slate-200 dark:border-[var(--border)] px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2 sm:w-auto"
             >
               <Pencil className="w-4 h-4" /> Edit Profile
             </button>
@@ -291,7 +291,7 @@ export default function ProfilePage() {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               {/* BADGE */}
-              <div className="min-h-14 min-w-0 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-indigo-500/20 sm:min-w-[120px]">
+              <div className="min-h-14 min-w-0 px-4 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-brand/20 sm:min-w-[120px]">
                 {levelStats.title}
               </div>
 
@@ -321,9 +321,9 @@ export default function ProfilePage() {
           </div>
 
           {/* Progress bar */}
-          <div className="mt-5 h-2.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden relative">
+          <div className="mt-5 h-2.5 bg-slate-200 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden relative">
             <div
-              className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all relative overflow-hidden"
+              className="h-full bg-brand rounded-full transition-all relative overflow-hidden"
               style={{
                 width: `${levelStats.progressPercentage}%`,
               }}
@@ -357,11 +357,11 @@ export default function ProfilePage() {
                 className={`relative overflow-hidden rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all duration-300 border ${
                   badge.earned
                     ? "bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-indigo-100 dark:border-indigo-500/20 shadow-sm hover:shadow-md hover:-translate-y-1"
-                    : "bg-slate-50/50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800 grayscale-[0.8] opacity-60"
+                    : "bg-slate-50/50 dark:bg-[var(--surface)]/50 border-slate-100 dark:border-[var(--border-subtle)] grayscale-[0.8] opacity-60"
                 }`}
               >
                 {badge.earned && (
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500" />
+                  <div className="absolute top-0 inset-x-0 h-1 bg-brand" />
                 )}
                 
                 <div className={`mb-3 transition-transform duration-300 ${badge.earned ? "scale-110" : ""}`}>
@@ -399,7 +399,7 @@ export default function ProfilePage() {
           onClick={() => setEditing(false)}
         >
           <div
-            className="w-full max-w-md bg-white dark:bg-[#0f172a] rounded-3xl shadow-2xl border border-slate-200/60 dark:border-slate-700/50 p-6 space-y-5 animate-fadeInScale"
+            className="w-full max-w-md bg-[var(--card)] dark:bg-[var(--surface)] rounded-3xl shadow-2xl border border-slate-200/60 dark:border-[var(--border)]/50 p-6 space-y-5 animate-fadeInScale"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-xl font-black text-slate-900 dark:text-white">
@@ -414,7 +414,7 @@ export default function ProfilePage() {
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full rounded-xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)] px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
               />
             </div>
 
@@ -430,8 +430,8 @@ export default function ProfilePage() {
                     onClick={() => setEditExam(trackOption)}
                     className={`flex-1 py-2 rounded-xl text-sm font-bold border transition-all duration-200 ${
                       editExam === trackOption
-                        ? "bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900 dark:border-white"
-                        : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
+                        ? "bg-slate-900 text-white border-slate-900 dark:bg-indigo-500 dark:text-white dark:border-white"
+                        : "border-slate-200 dark:border-[var(--border)] text-slate-500 dark:text-slate-400"
                     }`}
                   >
                     {trackOption}
@@ -447,7 +447,7 @@ export default function ProfilePage() {
               <select
                 value={editYear}
                 onChange={(e) => setEditYear(Number(e.target.value))}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full rounded-xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)] px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
               >
                 {years.map((y) => (
                   <option key={y} value={y}>
@@ -468,7 +468,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleSave}
-                className="px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-indigo-500 to-violet-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+                className="px-4 py-2 rounded-xl text-sm font-bold bg-brand text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
               >
                 Save
               </button>

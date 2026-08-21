@@ -45,7 +45,7 @@ export default function AdminNotificationsPage() {
         <p className="text-gray-500 dark:text-gray-400">Push announcements and updates to your students.</p>
       </div>
       
-      <form onSubmit={sendNotification} className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm space-y-5">
+      <form onSubmit={sendNotification} className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 shadow-sm space-y-5">
         <div>
           <label className="block text-sm font-bold mb-2">Target Audience</label>
           <select 
@@ -96,7 +96,7 @@ export default function AdminNotificationsPage() {
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full bg-purple-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {loading ? "Sending..." : "Send Notification"}
           <Send className="w-5 h-5" />

@@ -42,7 +42,7 @@ export default function HistoryPage() {
         <div className="flex justify-end mb-8">
           <button
             onClick={() => router.back()}
-            className="px-5 py-2 rounded-xl font-bold border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+            className="px-5 py-2 rounded-xl font-bold border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
           >
             ← Back
           </button>
@@ -51,7 +51,7 @@ export default function HistoryPage() {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-6 animate-pulse skeleton-shimmer"
+              className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-6 animate-pulse skeleton-shimmer"
             >
               <div className="h-6 bg-slate-200 dark:bg-slate-700/50 rounded w-1/4 mb-2"></div>
               <div className="h-4 bg-slate-200 dark:bg-slate-700/50 rounded w-1/3 mb-6"></div>
@@ -74,14 +74,14 @@ export default function HistoryPage() {
         <div></div>
         <button
           onClick={() => router.back()}
-          className="px-5 py-2 rounded-xl font-bold border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+          className="px-5 py-2 rounded-xl font-bold border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
         >
           ← Back
         </button>
       </div>
 
       {tests.length === 0 ? (
-        <div className="text-center py-20 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm animate-slideUp">
+        <div className="text-center py-20 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm animate-slideUp">
           <div className="text-6xl mb-4">📭</div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">No tests taken yet</h2>
           <p className="text-slate-400 dark:text-slate-500 mb-8">
@@ -89,7 +89,7 @@ export default function HistoryPage() {
           </p>
           <button
             onClick={() => router.back()}
-            className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+            className="px-8 py-3 bg-brand text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
           >
             Go Back
           </button>
@@ -103,7 +103,7 @@ export default function HistoryPage() {
             return (
               <div
                 key={test.id}
-                className="glass-card bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-6 animate-slideUp"
+                className="glass-card bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-6 animate-slideUp"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6 gap-4">
@@ -115,13 +115,13 @@ export default function HistoryPage() {
                   </div>
                   <button
                     onClick={() => router.push(`/test/review/${test.id}`)}
-                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+                    className="w-full sm:w-auto px-6 py-2.5 bg-brand text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
                   >
                     Review Answers
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/50 dark:border-slate-700/50">
+                <div className="grid grid-cols-3 gap-4 bg-slate-50/50 dark:bg-[var(--surface)]/50 p-4 rounded-2xl border border-slate-200/50 dark:border-[var(--border)]/50">
                   <div className="flex flex-col">
                     <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">
                       Score

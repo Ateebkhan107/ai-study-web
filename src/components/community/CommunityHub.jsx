@@ -101,14 +101,14 @@ export default function CommunityHub({ examTrack }) {
         <button
           onClick={() => setActiveSection("Create Group")}
           id="community-create-group-btn"
-          className="shrink-0 flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-bold text-white shadow-md shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:shadow-indigo-500/30"
+          className="shrink-0 flex items-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-bold text-white shadow-md shadow-brand/20 transition-all hover:-translate-y-0.5 hover:shadow-brand/30"
         >
           <Plus className="w-4 h-4" /> Create Group
         </button>
       </div>
 
       {/* Nav Tabs */}
-      <div className="flex max-w-xl gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1 dark:bg-slate-800/60">
+      <div className="flex max-w-xl gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1 dark:bg-[var(--surface-elevated)]/60">
         {SECTIONS.map((section) => (
           <button
             key={section}
@@ -116,7 +116,7 @@ export default function CommunityHub({ examTrack }) {
             id={`community-tab-${section.toLowerCase().replace(/\s/g, "-")}`}
 	            className={`shrink-0 flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-all ${
               activeSection === section
-                ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                ? "bg-[var(--card)] dark:bg-[var(--surface)] text-indigo-600 dark:text-indigo-400 shadow-sm"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
@@ -138,7 +138,7 @@ export default function CommunityHub({ examTrack }) {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search groups…"
-	                className="w-full rounded-xl border border-slate-200 bg-white py-2 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-white"
+	                className="w-full rounded-xl border border-slate-200 bg-[var(--card)] py-2 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white"
               />
             </div>
           </form>
@@ -224,7 +224,7 @@ export default function CommunityHub({ examTrack }) {
                 <Link
                   key={g.id}
                   href={`/community/groups/${g.id}`}
-                  className="glass-card flex items-center justify-between gap-3 p-4 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
+                  className="glass-card flex items-center justify-between gap-3 p-4 transition-all hover:shadow-lg hover:shadow-brand/10"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">

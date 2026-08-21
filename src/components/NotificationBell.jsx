@@ -85,7 +85,7 @@ export default function NotificationBell() {
     <div className="relative flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
       <button
         onClick={() => setOpen(!open)}
-        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
         aria-label="Open notifications"
         aria-expanded={open}
       >
@@ -109,12 +109,12 @@ export default function NotificationBell() {
             mt-2
             w-[calc(100vw-2rem)]
             max-w-[380px]
-            bg-white/90
-            dark:bg-[#0f172a]/90
+            bg-[var(--card)]/90
+            dark:bg-[var(--surface)]/90
             backdrop-blur-xl
             border
             border-slate-200/60
-            dark:border-slate-700/50
+            dark:border-[var(--border)]/50
             rounded-3xl
             shadow-2xl
             overflow-hidden
@@ -129,7 +129,7 @@ export default function NotificationBell() {
               dark:text-white
               border-b
               border-slate-200/60
-              dark:border-slate-700/50
+              dark:border-[var(--border)]/50
             "
           >
             Notifications
@@ -152,10 +152,10 @@ export default function NotificationBell() {
                     items-center
                     border-b
                     border-slate-200/60
-                    dark:border-slate-700/50
+                    dark:border-[var(--border)]/50
                     cursor-pointer
                     hover:bg-slate-50
-                    dark:hover:bg-white/5
+                    dark:hover:bg-[var(--card)]/5
                   "
                 >
                   <div
@@ -216,7 +216,7 @@ export default function NotificationBell() {
               transition-colors
               border-t
               border-slate-200/60
-              dark:border-slate-700/50
+              dark:border-[var(--border)]/50
             "
           >
             View all notifications →

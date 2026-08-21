@@ -8,14 +8,14 @@ import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDist
 const SUBJECT_CONFIG = {
   Physics:   { icon: <Atom className="w-6 h-6" />, color: "blue" },
   Chemistry: { icon: <FlaskConical className="w-6 h-6" />, color: "green" },
-  Maths:     { icon: <Calculator className="w-6 h-6" />, color: "purple" },
+  Maths:     { icon: <Calculator className="w-6 h-6" />, color: "maths" },
   Biology:   { icon: <Dna className="w-6 h-6" />, color: "rose" },
 };
 
 const colorMap = {
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30",     border: "border-blue-200 dark:border-blue-800",     text: "text-blue-700 dark:text-blue-300",     chip: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
   green:  { bg: "bg-emerald-50 dark:bg-emerald-950/30", border: "border-emerald-200 dark:border-emerald-800", text: "text-emerald-700 dark:text-emerald-300", chip: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700" },
-  purple: { bg: "bg-violet-50 dark:bg-violet-950/30",  border: "border-violet-200 dark:border-violet-800",  text: "text-violet-700 dark:text-violet-300",  chip: "bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-700" },
+  maths: { bg: "bg-indigo-50 dark:bg-indigo-950/30",  border: "border-indigo-200 dark:border-indigo-800",  text: "text-indigo-700 dark:text-indigo-300",  chip: "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-700" },
   rose:   { bg: "bg-rose-50 dark:bg-rose-950/30",      border: "border-rose-200 dark:border-rose-800",      text: "text-rose-700 dark:text-rose-300",      chip: "bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700" },
 };
 
@@ -178,7 +178,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
 
     return (
       <div className="max-w-xl mx-auto p-4">
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-[2rem] p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)]/40 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-[2rem] p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
 
           <div className="text-4xl mb-4 flex justify-center text-black dark:text-white">
@@ -196,7 +196,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
               { label: "Questions Attempted", value: `${attempted} / ${sessionQs.length}`, cls: "text-slate-500" },
               { label: "Time Expended", value: formatTime(timeTaken), cls: "text-amber-500" },
             ].map((s, i) => (
-              <div key={i} className="bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5">
+              <div key={i} className="bg-gray-50 dark:bg-[var(--surface-elevated)]/30 border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5">
                 <p className={`text-2xl font-black ${s.cls}`}>{s.value}</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1.5">{s.label}</p>
               </div>
@@ -211,14 +211,14 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                 setFinished(false);
                 saveSubjects([]);
               }}
-              className="w-full py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-black hover:opacity-90 transition-all"
+              className="w-full py-4 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white dark:text-white text-sm font-black hover:opacity-90 transition-all"
             >
               Configure New Session
             </button>
             <button
               type="button"
               onClick={() => onSwitchTab("analytics")}
-              className="w-full py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+              className="w-full py-3 rounded-xl border-2 border-gray-200 dark:border-[var(--border)] text-gray-700 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             >
               Analyze Trends →
             </button>
@@ -231,7 +231,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
   if (started) {
     return (
       <div className="space-y-6">
-        <div className="sticky top-16 z-30 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 -mx-6 px-6 py-4 flex items-center justify-between mb-6">
+        <div className="sticky top-16 z-30 bg-[var(--card)]/90 dark:bg-[var(--background)]/90 backdrop-blur-sm border-b border-gray-200 dark:border-[var(--border-subtle)] -mx-6 px-6 py-4 flex items-center justify-between mb-6">
           <div>
             <span className="text-xs font-black text-indigo-500 uppercase tracking-widest block mb-0.5">Live Practice</span>
             <span className="text-xs text-gray-400 font-medium">
@@ -242,7 +242,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
           <div className={`flex items-center gap-2 px-4 py-2 rounded-xl font-black text-sm tabular-nums border transition-all
             ${timerDanger
               ? "bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 animate-pulse"
-              : "bg-gray-100 dark:bg-gray-800 border-transparent text-black dark:text-white"
+              : "bg-gray-100 dark:bg-[var(--surface-elevated)] border-transparent text-black dark:text-white"
             }`}
           >
             {formatTime(timeLeft)}
@@ -253,7 +253,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
             <button
               type="button"
               onClick={handleFinishSession}
-              className="px-5 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-xs font-black hover:opacity-90 transition-opacity"
+              className="px-5 py-2 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white dark:text-white text-xs font-black hover:opacity-90 transition-opacity"
             >
               End & Submit
             </button>
@@ -281,7 +281,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
       <div className="lg:col-span-2 space-y-5">
 
         {/* 01 - Choose Subjects */}
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)]/40 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5 shadow-sm">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
@@ -299,7 +299,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                   className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
                     ${isSelected
                       ? `${theme.bg} ${theme.border} ${theme.text}`
-                      : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/30"
+                      : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/30"
                     }`}
                 >
                   <span className="mb-1 flex items-center justify-center">{data.icon}</span>
@@ -311,7 +311,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
         </div>
 
         {/* 02 - Choose Year */}
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)]/40 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5 shadow-sm">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             02 — Choose Year
           </p>
@@ -323,8 +323,8 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
               onClick={() => saveYear("All")}
               className={`px-4 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                 ${selectedYear === "All"
-                  ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                  : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                  ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                  : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
             >
               All Years
@@ -336,8 +336,8 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                 onClick={() => saveYear(yr)}
                 className={`px-4 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${selectedYear === yr
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                   }`}
               >
                 {yr}
@@ -349,7 +349,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
 
       <div className="space-y-4">
         {/* Total Questions Counter — mirrors Test Center's "Questions" block */}
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)]/40 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5 shadow-sm">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Questions</p>
           <p className="text-[11px] text-gray-400 mb-3">Auto-split {examLabel}</p>
           <div className="flex flex-wrap gap-2">
@@ -360,8 +360,8 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                 onClick={() => saveCount(cnt)}
                 className={`min-w-[3rem] px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${questionCount === cnt
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                   }`}
               >
                 {cnt}
@@ -371,7 +371,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
         </div>
 
         {/* Duration Pool — mirrors Test Center's "Duration (mins)" block */}
-        <div className="bg-white dark:bg-gray-900/40 backdrop-blur-md border border-gray-100 dark:border-gray-800/60 rounded-2xl p-5 shadow-sm">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)]/40 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5 shadow-sm">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Duration (mins)</p>
           <div className="flex flex-wrap gap-2">
             {DURATIONS.map((dur) => (
@@ -381,8 +381,8 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                 onClick={() => saveDuration(dur)}
                 className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${duration === dur
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                   }`}
               >
                 {dur}m
@@ -394,35 +394,35 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
         {/* Dynamic Summary Card & Trigger Action */}
         <div className={`rounded-2xl p-5 border-2 transition-all duration-200
           ${canStart
-            ? "bg-black dark:bg-white border-black dark:border-white"
-            : "bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+            ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-700/60"
+            : "bg-gray-100 dark:bg-[var(--surface-elevated)] border-gray-200 dark:border-[var(--border)]"
           }`}
         >
           <div className="mb-4 space-y-2">
-            <p className="text-xs font-bold text-white/50 dark:text-black/50 uppercase tracking-widest">
+            <p className="text-xs font-bold text-indigo-700/70 dark:text-indigo-300/70 uppercase tracking-widest">
               Practice Summary
             </p>
             <div className="flex flex-wrap gap-1.5">
               {selectedSubjects.length === 0 ? (
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-100/70 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 flex items-center gap-1">
                   <BookOpen className="w-3 h-3" /> Mixed Pool
                 </span>
               ) : (
                 selectedSubjects.map((s) => (
-                  <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10 text-white dark:text-black flex items-center gap-1">
+                  <span key={s} className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-100/70 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 flex items-center gap-1">
                     <span className="w-3 h-3 flex items-center justify-center">{SUBJECT_CONFIG[s].icon}</span> {s}
                   </span>
                 ))
               )}
             </div>
-            <p className="text-white/70 dark:text-black/70 text-xs">
+            <p className="text-indigo-700/80 dark:text-indigo-300/80 text-xs">
               Year Range: <span className="font-bold">{selectedYear}</span> · {questionCount} questions · {duration} mins
             </p>
           </div>
           <button
             type="button"
             onClick={handleStartSession}
-            className="w-full py-3 rounded-xl bg-white dark:bg-black text-black dark:text-white text-sm font-black transition-opacity hover:opacity-90 shadow-md"
+            className="w-full py-3 rounded-xl bg-indigo-600 text-white dark:bg-indigo-500 dark:text-white text-sm font-black transition-opacity hover:opacity-90 shadow-md"
           >
             Launch Practice →
           </button>

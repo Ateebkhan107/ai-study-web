@@ -45,12 +45,12 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto space-y-8 pb-12 animate-slideUp">
         
         {/* Header Info */}
-        <div className="flex items-center justify-between pb-6 border-b border-slate-200/60 dark:border-slate-800/50">
+        <div className="flex items-center justify-between pb-6 border-b border-slate-200/60 dark:border-[var(--border-subtle)]/50">
           <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
             <Shield className="w-5 h-5 text-indigo-500" />
             <span className="text-sm font-medium">Data Protection & Privacy</span>
           </div>
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+          <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400">
             Last Updated: July 2026
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
             ))}
           </div>
 
-          <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-slate-800/50">
+          <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-[var(--border-subtle)]/50">
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
               If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:contact.prepzii@gmail.com" className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline">contact.prepzii@gmail.com</a>.
             </p>

@@ -134,8 +134,8 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
     user?.firstName || user?.username || user?.primaryEmailAddress?.emailAddress || "there";
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-sm p-8">
+    <div className="min-h-screen bg-[var(--background)] dark:bg-[var(--background)] flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-xl bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-3xl shadow-sm p-8">
         <Logo className="mb-8 justify-center" />
         <div className="mb-8">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">

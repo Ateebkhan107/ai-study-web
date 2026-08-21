@@ -183,7 +183,7 @@ function categoryColor(cat) {
     JEE: "bg-blue-500/10 text-blue-500",
     NEET: "bg-emerald-500/10 text-emerald-500",
     Physics: "bg-indigo-500/10 text-indigo-500",
-    Chemistry: "bg-purple-500/10 text-purple-500",
+    Chemistry: "bg-indigo-500/10 text-indigo-500",
     Maths: "bg-orange-500/10 text-orange-500",
     Biology: "bg-teal-500/10 text-teal-500",
   };
@@ -194,8 +194,8 @@ function categoryColor(cat) {
 
 function StatCard({ icon, label, value, sub, delay = "0ms" }) {
   return (
-    <div 
-      className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-5 flex items-start gap-4 animate-slideUp"
+    <div
+      className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-5 flex items-start gap-4 animate-slideUp"
       style={{ animationDelay: delay }}
     >
       <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-500 dark:text-indigo-400">
@@ -214,7 +214,7 @@ function AccuracyBar({ accuracy }) {
   const meta = accuracyMeta(accuracy);
   return (
     <div className="flex items-center gap-2 min-w-[100px]">
-      <div className="flex-1 h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+      <div className="flex-1 h-1.5 rounded-full bg-slate-200 dark:bg-[var(--surface-elevated)] overflow-hidden">
         <div
           className={`h-full rounded-full ${meta.bar}`}
           style={{ width: `${accuracy}%` }}
@@ -229,7 +229,7 @@ function AccuracyBar({ accuracy }) {
 function TestCard({ test }) {
   const meta = accuracyMeta(test.accuracy);
   return (
-    <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-4 flex flex-col gap-3 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+    <div className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-4 flex flex-col gap-3 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
       <div className="flex items-start justify-between gap-2">
         <div className="flex flex-col gap-1.5 min-w-0">
           <span className={`self-start inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
@@ -244,7 +244,7 @@ function TestCard({ test }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-slate-100 dark:divide-slate-800 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden text-center">
+      <div className="grid grid-cols-3 divide-x divide-slate-100 dark:divide-slate-800 border border-slate-100 dark:border-[var(--border-subtle)] rounded-xl overflow-hidden text-center">
         <div className="py-2">
           <p className="text-xs text-slate-400 mb-0.5">Score</p>
           <p className="text-xs font-bold text-slate-900 dark:text-white">
@@ -264,13 +264,13 @@ function TestCard({ test }) {
       <div className="flex gap-2">
         <Link
           href={`/test/result?id=${test.id}`}
-          className="flex-1 h-8 flex items-center justify-center text-xs bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+          className="flex-1 h-8 flex items-center justify-center text-xs bg-brand text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
         >
           View Result
         </Link>
         <Link
           href={`/test/review?id=${test.id}`}
-          className="flex-1 h-8 flex items-center justify-center text-xs border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+          className="flex-1 h-8 flex items-center justify-center text-xs border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
         >
           Review Answers
         </Link>
@@ -282,7 +282,7 @@ function TestCard({ test }) {
 // Desktop table row
 function TableRow({ test, isLast }) {
   return (
-    <tr className={`group hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors ${!isLast ? "border-b border-slate-200/60 dark:border-slate-700/50" : ""}`}>
+    <tr className={`group hover:bg-slate-50/50 dark:hover:bg-[var(--card)]/5 transition-colors ${!isLast ? "border-b border-slate-200/60 dark:border-[var(--border)]/50" : ""}`}>
       <td className="py-4 pl-6 pr-4">
         <div className="flex items-center gap-3">
           <span className={`shrink-0 inline-flex px-2 py-0.5 rounded-md text-xs font-bold ${categoryColor(test.category)}`}>
@@ -313,13 +313,13 @@ function TableRow({ test, isLast }) {
         <div className="flex items-center gap-2">
           <Link
             href={`/test/result?id=${test.id}`}
-            className="h-7 px-3 flex items-center text-xs bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 whitespace-nowrap"
+            className="h-7 px-3 flex items-center text-xs bg-brand text-white font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300 whitespace-nowrap"
           >
             View Result
           </Link>
           <Link
             href={`/test/review?id=${test.id}`}
-            className="h-7 px-3 flex items-center text-xs border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 whitespace-nowrap"
+            className="h-7 px-3 flex items-center text-xs border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 whitespace-nowrap"
           >
             Review Answers
           </Link>
@@ -431,7 +431,7 @@ export default function TestHistoryPage() {
             placeholder="Search tests…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full h-9 pl-9 pr-8 rounded-xl text-sm bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
+            className="w-full h-9 pl-9 pr-8 rounded-xl text-sm bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
           />
           {search && (
             <button
@@ -454,8 +454,8 @@ export default function TestHistoryPage() {
               onClick={() => setActiveFilter(f)}
               className={`px-3 h-9 rounded-xl text-xs font-semibold transition-all border ${
                 activeFilter === f
-                  ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-transparent"
-                  : "bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border-slate-200/60 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 hover:border-slate-400 dark:hover:border-slate-500"
+                  ? "bg-brand text-white dark:bg-brand dark:text-white border-transparent"
+                  : "bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border-slate-200/60 dark:border-[var(--border)]/50 text-slate-500 dark:text-slate-400 hover:border-slate-400 dark:hover:border-slate-500"
               }`}
             >
               {f}
@@ -471,7 +471,7 @@ export default function TestHistoryPage() {
 
       {/* ── Empty state ── */}
       {filtered.length === 0 && (
-        <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-16 text-center">
+        <div className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-16 text-center">
           <p className="text-slate-400 text-sm mb-3">No tests match your search or filter.</p>
           <button
             onClick={() => { setActiveFilter("All"); setSearch(""); }}
@@ -484,11 +484,11 @@ export default function TestHistoryPage() {
 
       {/* ── Desktop Table ── */}
       {filtered.length > 0 && (
-        <div className="hidden md:block bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm overflow-hidden">
+        <div className="hidden md:block bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-200/60 dark:border-slate-700/50 bg-slate-50/60 dark:bg-slate-800/30">
+              <tr className="border-b border-slate-200/60 dark:border-[var(--border)]/50 bg-slate-50/60 dark:bg-[var(--surface-elevated)]/30">
                 <th className="py-3 pl-6 pr-4 text-left text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                   Test Name
                 </th>

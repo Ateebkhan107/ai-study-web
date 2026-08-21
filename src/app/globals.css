@@ -2,34 +2,236 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Premium light mode colors: Soft slate with a hint of cool blue */
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(99, 102, 241, 0.15);
-  
-  /* Animating Mesh Gradient Backgrounds */
-  --mesh-1: rgba(99, 102, 241, 0.12); /* Indigo */
-  --mesh-2: rgba(139, 92, 246, 0.12); /* Violet */
-  --mesh-3: rgba(236, 72, 153, 0.12); /* Pink */
+  /* Premium Light Mode: Yellow & White */
+  --background: #FEFCE8;
+  --background-secondary: #FEF9C3;
+  --foreground: #000000;
+  --text-primary: #000000;
+  --text-secondary: #222222;
+  --text-muted: #444444;
+  --text-disabled: #777777;
+  --card: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-secondary: #FAFAFA;
+  --surface-elevated: #FFFFFF;
+  --surface-hover: #FEF3C7;
+  --surface-active: #FDE68A;
+  --border: #FDE047;
+  --border-subtle: #FEF9C3;
+  --brand: #EAB308;
+  --brand-hover: #CA8A04;
+  --brand-pressed: #A16207;
+  --brand-soft: #FEF9C3;
+  --brand-border: #FDE047;
+  --accent: var(--brand);
+  --accent-hover: var(--brand-hover);
+  --accent-pressed: var(--brand-pressed);
+  --muted: var(--text-muted);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(234, 179, 8, 0.2);
+
+  --success: #2F7D4F;
+  --error: #B44436;
+  --warning: #A8791D;
+  --gold: #EAB308;
+  --subject-physics: #EAB308;
+  --subject-chemistry: #CA8A04;
+  --subject-biology: #FACC15;
+  --subject-maths: #EAB308;
+
+  /* Subtle yellow ambience */
+  --mesh-1: rgba(234, 179, 8, 0.05);
+  --mesh-2: rgba(254, 249, 195, 0.4);
+  --mesh-3: rgba(253, 224, 71, 0.1);
+  --button-text: #000000;
 }
 
 .dark {
-  /* Premium dark mode colors: Deep rich slate/navy */
-  --background: #020617;
-  --foreground: #f8fafc;
-  --glass-bg: rgba(15, 23, 42, 0.4);
-  --glass-border: rgba(99, 102, 241, 0.25);
-  
-  /* Darker animating mesh gradients */
-  --mesh-1: rgba(99, 102, 241, 0.15);
-  --mesh-2: rgba(139, 92, 246, 0.15);
-  --mesh-3: rgba(16, 185, 129, 0.1);  /* Emerald hint for EdTech vibe */
+  /* Premium Dark Mode: Black & Yellow */
+  --background: #000000;
+  --background-secondary: #0A0A0A;
+  --foreground: #FFFFFF;
+  --text-primary: #FFFFFF;
+  --text-secondary: #FEF3C7;
+  --text-muted: #FDE68A;
+  --text-disabled: #A1A1AA;
+  --card: #111111;
+  --surface: #111111;
+  --surface-secondary: #1A1A1A;
+  --surface-elevated: #222222;
+  --surface-hover: #333333;
+  --surface-active: #444444;
+  --border: #333333;
+  --border-subtle: #1F1F1F;
+  --brand: #EAB308;
+  --brand-hover: #FACC15;
+  --brand-pressed: #FDE047;
+  --brand-soft: #422006;
+  --brand-border: #854D0E;
+  --accent: var(--brand);
+  --accent-hover: var(--brand-hover);
+  --accent-pressed: var(--brand-pressed);
+  --muted: var(--text-muted);
+  --glass-bg: rgba(17, 17, 17, 0.85);
+  --glass-border: rgba(234, 179, 8, 0.3);
+
+  --success: #57A36B;
+  --error: #D05C4B;
+  --warning: #F59E0B;
+  --gold: #EAB308;
+  --subject-physics: #EAB308;
+  --subject-chemistry: #FACC15;
+  --subject-biology: #FDE047;
+  --subject-maths: #EAB308;
+
+  /* Subtle yellow ambience */
+  --mesh-1: rgba(234, 179, 8, 0.08);
+  --mesh-2: rgba(202, 138, 4, 0.05);
+  --mesh-3: rgba(250, 204, 21, 0.03);
+  --button-text: #000000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-muted: var(--muted);
+  --color-primary: var(--brand);
+  --color-accent: var(--brand);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-pressed: var(--brand-pressed);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-border: var(--brand-border);
+  --color-secondary: var(--text-secondary);
+  --color-disabled: var(--text-disabled);
+
+
+  --color-indigo-50: var(--brand-soft);
+  --color-indigo-100: var(--brand-soft);
+  --color-indigo-200: var(--brand-border);
+  --color-indigo-300: var(--brand-border);
+  --color-indigo-400: var(--brand-hover);
+  --color-indigo-500: var(--brand);
+  --color-indigo-600: var(--brand);
+  --color-indigo-700: var(--brand-hover);
+  --color-indigo-800: var(--brand-pressed);
+  --color-indigo-900: var(--brand-soft);
+  --color-indigo-950: var(--brand-soft);
+
+  --color-purple-50: var(--brand-soft);
+  --color-purple-100: var(--brand-soft);
+  --color-purple-200: var(--brand-border);
+  --color-purple-300: var(--brand-border);
+  --color-purple-400: var(--brand-hover);
+  --color-purple-500: var(--brand);
+  --color-purple-600: var(--brand);
+  --color-purple-700: var(--brand-hover);
+  --color-purple-800: var(--brand-pressed);
+  --color-purple-900: var(--brand-soft);
+  --color-purple-950: var(--brand-soft);
+
+  --color-violet-50: var(--brand-soft);
+  --color-violet-100: var(--brand-soft);
+  --color-violet-200: var(--brand-border);
+  --color-violet-300: var(--brand-border);
+  --color-violet-400: var(--brand-hover);
+  --color-violet-500: var(--brand);
+  --color-violet-600: var(--brand);
+  --color-violet-700: var(--brand-hover);
+  --color-violet-800: var(--brand-pressed);
+  --color-violet-900: var(--brand-soft);
+  --color-violet-950: var(--brand-soft);
+
+  --color-blue-50: color-mix(in srgb, var(--subject-physics) 16%, var(--surface));
+  --color-blue-100: color-mix(in srgb, var(--subject-physics) 22%, var(--surface));
+  --color-blue-200: color-mix(in srgb, var(--subject-physics) 34%, var(--surface));
+  --color-blue-300: color-mix(in srgb, var(--subject-physics) 52%, var(--surface));
+  --color-blue-400: var(--subject-physics);
+  --color-blue-500: var(--subject-physics);
+  --color-blue-600: color-mix(in srgb, var(--subject-physics) 84%, var(--text-primary));
+  --color-blue-700: color-mix(in srgb, var(--subject-physics) 72%, var(--text-primary));
+  --color-blue-800: color-mix(in srgb, var(--subject-physics) 40%, var(--surface-elevated));
+  --color-blue-900: color-mix(in srgb, var(--subject-physics) 28%, var(--background));
+  --color-blue-950: color-mix(in srgb, var(--subject-physics) 18%, var(--background));
+
+  --color-cyan-50: color-mix(in srgb, var(--subject-physics) 12%, var(--surface));
+  --color-cyan-100: color-mix(in srgb, var(--subject-physics) 18%, var(--surface));
+  --color-cyan-200: color-mix(in srgb, var(--subject-physics) 28%, var(--surface));
+  --color-cyan-300: color-mix(in srgb, var(--subject-physics) 44%, var(--surface));
+  --color-cyan-400: var(--subject-physics);
+  --color-cyan-500: var(--subject-physics);
+  --color-cyan-600: color-mix(in srgb, var(--subject-physics) 84%, var(--text-primary));
+  --color-cyan-700: color-mix(in srgb, var(--subject-physics) 72%, var(--text-primary));
+  --color-cyan-800: color-mix(in srgb, var(--subject-physics) 40%, var(--surface-elevated));
+  --color-cyan-900: color-mix(in srgb, var(--subject-physics) 28%, var(--background));
+  --color-cyan-950: color-mix(in srgb, var(--subject-physics) 18%, var(--background));
+
+  --color-sky-50: color-mix(in srgb, var(--subject-physics) 12%, var(--surface));
+  --color-sky-100: color-mix(in srgb, var(--subject-physics) 18%, var(--surface));
+  --color-sky-200: color-mix(in srgb, var(--subject-physics) 28%, var(--surface));
+  --color-sky-300: color-mix(in srgb, var(--subject-physics) 44%, var(--surface));
+  --color-sky-400: var(--subject-physics);
+  --color-sky-500: var(--subject-physics);
+  --color-sky-600: color-mix(in srgb, var(--subject-physics) 84%, var(--text-primary));
+  --color-sky-700: color-mix(in srgb, var(--subject-physics) 72%, var(--text-primary));
+  --color-sky-800: color-mix(in srgb, var(--subject-physics) 40%, var(--surface-elevated));
+  --color-sky-900: color-mix(in srgb, var(--subject-physics) 28%, var(--background));
+  --color-sky-950: color-mix(in srgb, var(--subject-physics) 18%, var(--background));
+
+  --color-fuchsia-400: var(--brand-hover);
+  --color-fuchsia-500: var(--brand);
+  --color-fuchsia-600: var(--brand-pressed);
+  --color-pink-400: var(--subject-biology);
+  --color-pink-500: var(--subject-biology);
+  --color-pink-600: color-mix(in srgb, var(--subject-biology) 82%, var(--text-primary));
+
+  --color-emerald-50: #E9F3EA;
+  --color-emerald-100: #CFE7D2;
+  --color-emerald-200: #A8D2AD;
+  --color-emerald-300: #77B983;
+  --color-emerald-400: var(--success);
+  --color-emerald-500: var(--success);
+  --color-emerald-600: #32693D;
+  --color-emerald-700: #295633;
+  --color-emerald-800: #23472D;
+  --color-emerald-900: #1E3B28;
+  --color-emerald-950: #13281B;
+
+  --color-amber-50: #FFF4DA;
+  --color-amber-100: #F8E5B5;
+  --color-amber-200: #EED080;
+  --color-amber-300: #DEB64A;
+  --color-amber-400: var(--gold);
+  --color-amber-500: var(--warning);
+  --color-amber-600: #875F18;
+  --color-amber-700: #6C4916;
+  --color-amber-800: #583B17;
+  --color-amber-900: #4A3218;
+  --color-amber-950: #2A1B0B;
+
+  --color-red-50: #FCEBE6;
+  --color-red-100: #F7D5CB;
+  --color-red-200: #EEAB9C;
+  --color-red-300: #E1806B;
+  --color-red-400: var(--error);
+  --color-red-500: var(--error);
+  --color-red-600: #973828;
+  --color-red-700: #7B2F25;
+  --color-red-800: #642A23;
+  --color-red-900: #53261F;
+  --color-red-950: #2F120D;
+
+  --color-rose-400: var(--subject-biology);
+  --color-rose-500: var(--subject-biology);
+  --color-rose-600: color-mix(in srgb, var(--subject-biology) 82%, var(--text-primary));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -49,7 +251,7 @@
 
 body {
   background-color: var(--background);
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, var(--mesh-1) 0px, transparent 50%),
     radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 50%),
     radial-gradient(at 100% 100%, var(--mesh-3) 0px, transparent 50%);
@@ -122,8 +324,8 @@ code,
 }
 
 /* ── Auth page — animated link hover colours ───────────────────────────── */
-.auth-link { 
-  color: #818CF8; 
+.auth-link {
+  color: var(--accent);
   text-decoration: none;
   position: relative;
   transition: color 0.3s ease;
@@ -137,13 +339,13 @@ code,
   height: 2px;
   bottom: -2px;
   left: 0;
-  background: linear-gradient(90deg, #818CF8, #C084FC);
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   transform-origin: bottom right;
   transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-.auth-link:hover { 
-  color: #C084FC; 
+.auth-link:hover {
+  color: var(--accent-hover);
 }
 
 .auth-link:hover::after {
@@ -191,44 +393,44 @@ code,
 
 /* ── Premium Glass Card ──────────────────────────────────────── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.6);
+  border: 1px solid var(--glass-border);
   border-radius: 24px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .glass-card {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(51, 65, 85, 0.5);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
 }
 
 .glass-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(234, 179, 8, 0.18);
 }
 
 .dark .glass-card:hover {
-  box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 20px 40px -15px rgba(234, 179, 8, 0.25);
 }
 
 /* ── Premium Stat Card (colored glow on hover) ───────────────── */
 .premium-stat-card {
   position: relative;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.6);
+  border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 1.5rem;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .premium-stat-card {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(51, 65, 85, 0.5);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
 }
 
 .premium-stat-card:hover {
@@ -239,13 +441,13 @@ code,
 .skeleton-shimmer {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+  background: linear-gradient(90deg, #FEF9C3 0%, #FEF3C7 50%, #FEF9C3 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
 
 .dark .skeleton-shimmer {
-  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background: linear-gradient(90deg, #171717 0%, #262626 50%, #171717 100%);
   background-size: 200% 100%;
 }
 
@@ -273,80 +475,80 @@ code,
 
 /* ── Clerk — Premium EdTech Form Inputs ───────────────────────── */
 .cl-formFieldLabel {
-  color: #94A3B8 !important;
+  color: var(--muted) !important;
   font-weight: 500 !important;
   transition: color 0.3s ease !important;
 }
 
 .cl-formFieldInput {
-  color: #F8FAFC !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--foreground) !important;
+  background-color: color-mix(in srgb, var(--surface) 82%, transparent) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 12px !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) inset !important;
 }
 
 .cl-formFieldInput:hover {
-  border-color: rgba(139, 92, 246, 0.4) !important;
-  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border)) !important;
+  background-color: color-mix(in srgb, var(--surface-secondary) 68%, transparent) !important;
 }
 
 .cl-formFieldInput:focus {
-  border-color: #8B5CF6 !important;
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: var(--accent) !important;
+  background-color: color-mix(in srgb, var(--surface-secondary) 72%, transparent) !important;
   outline: none !important;
-  box-shadow: 
-    0 0 0 4px rgba(139, 92, 246, 0.15),
-    0 8px 20px rgba(139, 92, 246, 0.1) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 8px 20px color-mix(in srgb, var(--accent) 12%, transparent) !important;
   transform: translateY(-1px) !important;
 }
 
 .cl-formFieldInput::placeholder {
-  color: #64748B !important;
+  color: color-mix(in srgb, var(--muted) 70%, transparent) !important;
 }
 
 /* ── Clerk — Dividers ─────────────────────────────────────────── */
 .cl-dividerText {
-  color: #64748B !important;
+  color: var(--muted) !important;
   font-weight: 500 !important;
 }
 
 .cl-dividerLine {
-  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent) !important;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 32%, transparent), transparent) !important;
   height: 1px !important;
 }
 
 /* ── Clerk — Social Buttons (Glassy & Interactive) ────────────── */
 .cl-socialButtonsBlockButton {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: color-mix(in srgb, var(--surface) 78%, transparent) !important;
   backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 12px !important;
-  color: #F8FAFC !important;
+  color: var(--foreground) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .cl-socialButtonsBlockButton:hover {
-  background-color: rgba(139, 92, 246, 0.08) !important;
-  border-color: rgba(139, 92, 246, 0.4) !important;
+  background-color: color-mix(in srgb, var(--accent) 10%, var(--surface)) !important;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border)) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 15px rgba(139, 92, 246, 0.1) !important;
+  box-shadow: 0 6px 15px color-mix(in srgb, var(--accent) 12%, transparent) !important;
 }
 
 .cl-socialButtonsBlockButtonText {
-  color: #F8FAFC !important;
+  color: var(--foreground) !important;
   font-weight: 600 !important;
 }
 
 /* ── Clerk — Vibrant Animated Primary Button ──────────────────── */
 .cl-formButtonPrimary {
-  background: linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899, #6366F1) !important;
-  background-size: 300% 100% !important;
-  animation: gradientFlow 6s linear infinite !important;
-  color: #ffffff !important;
+  background: var(--accent) !important;
+  background-size: auto !important;
+  animation: none !important;
+  color: var(--button-text) !important;
   border: none !important;
   border-radius: 12px !important;
   font-weight: 600 !important;
@@ -354,42 +556,43 @@ code,
   text-transform: uppercase !important;
   font-size: 0.875rem !important;
   padding: 12px 24px !important;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3) !important;
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 28%, transparent) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .cl-formButtonPrimary:hover {
   transform: translateY(-2px) scale(1.01) !important;
-  box-shadow: 
-    0 8px 25px rgba(139, 92, 246, 0.4),
-    0 0 12px rgba(236, 72, 153, 0.4) !important;
+  background: var(--accent-hover) !important;
+  box-shadow:
+    0 8px 25px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent) 16%, transparent) !important;
 }
 
 .cl-formButtonPrimary:active {
   transform: translateY(1px) scale(0.98) !important;
-  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3) !important;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 24%, transparent) !important;
 }
 
 /* ── Clerk — Miscellaneous Utilities ──────────────────────────── */
 .cl-identityPreviewText {
-  color: #F8FAFC !important;
+  color: var(--foreground) !important;
   font-weight: 500 !important;
 }
 
 .cl-formFieldAction {
-  color: #8B5CF6 !important;
+  color: var(--accent) !important;
   font-weight: 500 !important;
   transition: color 0.2s ease !important;
 }
 
 .cl-formFieldAction:hover {
-  color: #C084FC !important;
+  color: var(--accent-hover) !important;
 }
 
 .cl-otpCodeFieldInput {
-  color: #F8FAFC !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--foreground) !important;
+  background-color: color-mix(in srgb, var(--surface) 82%, transparent) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 12px !important;
   font-weight: 600 !important;
   font-size: 1.25rem !important;
@@ -397,8 +600,8 @@ code,
 }
 
 .cl-otpCodeFieldInput:focus {
-  border-color: #8B5CF6 !important;
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent) !important;
   transform: translateY(-2px) !important;
 }
 

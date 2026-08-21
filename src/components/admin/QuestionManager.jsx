@@ -3,7 +3,7 @@ import { BookOpen, Edit2, Check, X } from "lucide-react";
 
 export default function QuestionManager({ defaultTab = "import" }) {
   const [activeTab, setActiveTab] = useState(defaultTab); // 'import' or 'manage'
-  
+
   // IMPORT STATES
   const [exams, setExams] = useState([]);
   const [selectedExamId, setSelectedExamId] = useState("");
@@ -14,14 +14,14 @@ export default function QuestionManager({ defaultTab = "import" }) {
   // MANAGE STATES
   const [questions, setQuestions] = useState([]);
   const [loadingQs, setLoadingQs] = useState(false);
-  
+
   // Filters
   const [filterSubject, setFilterSubject] = useState("");
   const [filterChapter, setFilterChapter] = useState("");
   const [filterType, setFilterType] = useState("");
   const [filterImageStatus, setFilterImageStatus] = useState(""); // 'all', 'missing', 'complete'
   const [filterSearch, setFilterSearch] = useState("");
-  
+
   // Edit State
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
@@ -76,11 +76,11 @@ export default function QuestionManager({ defaultTab = "import" }) {
       const selectedExam = exams.find(e => e.id === selectedExamId);
 //       console.log("Selected exam:", selectedExam);
 //       console.log("Sending exam_id:", selectedExamId);
-      
+
       const formData = new FormData();
       formData.append("file", csvFile);
       formData.append("exam_id", selectedExamId);
-      
+
 //       console.log("FormData being sent:");
       for (const pair of formData.entries()) {
 //         console.log(pair[0], pair[1]);
@@ -137,7 +137,7 @@ export default function QuestionManager({ defaultTab = "import" }) {
     if (filterChapter && !q.chapter?.toLowerCase().includes(filterChapter.toLowerCase())) return false;
     if (filterType && q.question_type !== filterType) return false;
     if (filterSearch && !q.question?.toLowerCase().includes(filterSearch.toLowerCase())) return false;
-    
+
     if (filterImageStatus === "missing") {
       const missing = !q.question_image && !q.option_a_image && !q.option_b_image && !q.option_c_image && !q.option_d_image && !q.explanation_image;
       if (!missing) return false;
@@ -146,7 +146,7 @@ export default function QuestionManager({ defaultTab = "import" }) {
       const missing = !q.question_image && !q.option_a_image && !q.option_b_image && !q.option_c_image && !q.option_d_image && !q.explanation_image;
       if (missing) return false;
     }
-    
+
     return true;
   });
 
@@ -156,15 +156,15 @@ export default function QuestionManager({ defaultTab = "import" }) {
         <h2 className="font-black text-xl flex items-center gap-2">
           Question Manager <BookOpen className="w-6 h-6" />
         </h2>
-        <div className="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-          <button 
-            className={`px-4 py-1 rounded-md text-sm font-bold ${activeTab === 'import' ? 'bg-white dark:bg-black shadow' : 'text-gray-500'}`}
+        <div className="flex gap-2 bg-gray-100 dark:bg-[var(--surface-elevated)] p-1 rounded-lg">
+          <button
+            className={`px-4 py-1 rounded-md text-sm font-bold ${activeTab === 'import' ? 'bg-[var(--card)] dark:bg-[var(--surface-elevated)] shadow' : 'text-gray-500'}`}
             onClick={() => setActiveTab('import')}
           >
             Import CSV
           </button>
-          <button 
-            className={`px-4 py-1 rounded-md text-sm font-bold ${activeTab === 'manage' ? 'bg-white dark:bg-black shadow' : 'text-gray-500'}`}
+          <button
+            className={`px-4 py-1 rounded-md text-sm font-bold ${activeTab === 'manage' ? 'bg-[var(--card)] dark:bg-[var(--surface-elevated)] shadow' : 'text-gray-500'}`}
             onClick={() => setActiveTab('manage')}
           >
             Manage Questions
@@ -174,8 +174,8 @@ export default function QuestionManager({ defaultTab = "import" }) {
 
       <div className="mb-4">
         <label className="block text-sm font-bold mb-2">Target Exam</label>
-        <select 
-          value={selectedExamId} 
+        <select
+          value={selectedExamId}
           onChange={(e) => setSelectedExamId(e.target.value)}
           className="w-full border p-3 rounded-xl bg-transparent"
         >
@@ -196,8 +196,8 @@ export default function QuestionManager({ defaultTab = "import" }) {
 
           <form onSubmit={handleCsvUpload} className="space-y-4">
             <div className="border-2 border-dashed p-6 rounded-xl text-center">
-              <input 
-                type="file" 
+              <input
+                type="file"
                 accept=".csv"
                 onChange={(e) => setCsvFile(e.target.files[0])}
                 className="w-full"
@@ -205,10 +205,10 @@ export default function QuestionManager({ defaultTab = "import" }) {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={uploading || !selectedExamId}
-              className="w-full bg-purple-600 text-white font-bold py-3 rounded-xl disabled:opacity-50"
+              className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl disabled:opacity-50"
             >
               {uploading ? "Importing..." : "Import Questions"}
             </button>
@@ -223,12 +223,12 @@ export default function QuestionManager({ defaultTab = "import" }) {
                 <p><strong>Failed:</strong> 0</p>
                 <p className="text-red-500 font-bold"><strong>Questions Missing Images:</strong> {summary.missingImages || 0}</p>
               </div>
-              
-              <button 
+
+              <button
                 onClick={() => {
                   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 }}
-                className="bg-black dark:bg-white dark:text-black text-white px-5 py-2 rounded-lg font-bold"
+                className="bg-brand text-white px-5 py-2 rounded-lg font-bold"
               >
                 Go to Image Manager ↓
               </button>
@@ -240,26 +240,26 @@ export default function QuestionManager({ defaultTab = "import" }) {
       {activeTab === 'manage' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-            <input 
-              placeholder="Search text..." 
-              value={filterSearch} 
+            <input
+              placeholder="Search text..."
+              value={filterSearch}
               onChange={e => setFilterSearch(e.target.value)}
               className="border p-2 rounded bg-transparent text-sm"
             />
-            <input 
-              placeholder="Subject" 
-              value={filterSubject} 
+            <input
+              placeholder="Subject"
+              value={filterSubject}
               onChange={e => setFilterSubject(e.target.value)}
               className="border p-2 rounded bg-transparent text-sm"
             />
-            <input 
-              placeholder="Chapter" 
-              value={filterChapter} 
+            <input
+              placeholder="Chapter"
+              value={filterChapter}
               onChange={e => setFilterChapter(e.target.value)}
               className="border p-2 rounded bg-transparent text-sm"
             />
-            <select 
-              value={filterType} 
+            <select
+              value={filterType}
               onChange={e => setFilterType(e.target.value)}
               className="border p-2 rounded bg-transparent text-sm"
             >
@@ -267,8 +267,8 @@ export default function QuestionManager({ defaultTab = "import" }) {
               <option value="MCQ">MCQ</option>
               <option value="NUMERICAL">Numerical</option>
             </select>
-            <select 
-              value={filterImageStatus} 
+            <select
+              value={filterImageStatus}
               onChange={e => setFilterImageStatus(e.target.value)}
               className="border p-2 rounded bg-transparent text-sm"
             >
@@ -284,48 +284,48 @@ export default function QuestionManager({ defaultTab = "import" }) {
 
           <div className="space-y-4">
             {loadingQs ? <p>Loading questions...</p> : filteredQuestions.map(q => (
-              <div key={q.id} className="border p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/50">
+              <div key={q.id} className="border p-4 rounded-xl bg-gray-50/50 dark:bg-[var(--surface)]/50">
                 {editingId === q.id ? (
                   <div className="space-y-3">
                     <div className="flex gap-2">
-                      <input className="border p-2 rounded flex-1 text-sm bg-white dark:bg-black" value={editForm.subject || ''} onChange={e => setEditForm({...editForm, subject: e.target.value})} placeholder="Subject" />
-                      <input className="border p-2 rounded flex-1 text-sm bg-white dark:bg-black" value={editForm.chapter || ''} onChange={e => setEditForm({...editForm, chapter: e.target.value})} placeholder="Chapter" />
-                      <select className="border p-2 rounded text-sm bg-white dark:bg-black" value={editForm.question_type || ''} onChange={e => setEditForm({...editForm, question_type: e.target.value})}>
+                      <input className="border p-2 rounded flex-1 text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.subject || ''} onChange={e => setEditForm({...editForm, subject: e.target.value})} placeholder="Subject" />
+                      <input className="border p-2 rounded flex-1 text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.chapter || ''} onChange={e => setEditForm({...editForm, chapter: e.target.value})} placeholder="Chapter" />
+                      <select className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.question_type || ''} onChange={e => setEditForm({...editForm, question_type: e.target.value})}>
                         <option value="MCQ">MCQ</option>
                         <option value="NUMERICAL">NUMERICAL</option>
                       </select>
                     </div>
-                    <textarea 
-                      className="w-full border p-2 rounded text-sm bg-white dark:bg-black min-h-[100px]" 
-                      value={editForm.question || ''} 
-                      onChange={e => setEditForm({...editForm, question: e.target.value})} 
+                    <textarea
+                      className="w-full border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)] min-h-[100px]"
+                      value={editForm.question || ''}
+                      onChange={e => setEditForm({...editForm, question: e.target.value})}
                       placeholder="Question Text"
                     />
-                    
+
                     {editForm.question_type === 'MCQ' ? (
                       <div className="grid grid-cols-2 gap-2">
-                        <input className="border p-2 rounded text-sm bg-white dark:bg-black" value={editForm.option_a || ''} onChange={e => setEditForm({...editForm, option_a: e.target.value})} placeholder="Option A" />
-                        <input className="border p-2 rounded text-sm bg-white dark:bg-black" value={editForm.option_b || ''} onChange={e => setEditForm({...editForm, option_b: e.target.value})} placeholder="Option B" />
-                        <input className="border p-2 rounded text-sm bg-white dark:bg-black" value={editForm.option_c || ''} onChange={e => setEditForm({...editForm, option_c: e.target.value})} placeholder="Option C" />
-                        <input className="border p-2 rounded text-sm bg-white dark:bg-black" value={editForm.option_d || ''} onChange={e => setEditForm({...editForm, option_d: e.target.value})} placeholder="Option D" />
-                        <input className="border p-2 rounded text-sm bg-white dark:bg-black col-span-2 font-bold text-green-600" value={editForm.correct_option || ''} onChange={e => setEditForm({...editForm, correct_option: e.target.value})} placeholder="Correct Option (A, B, C, D)" />
+                        <input className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.option_a || ''} onChange={e => setEditForm({...editForm, option_a: e.target.value})} placeholder="Option A" />
+                        <input className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.option_b || ''} onChange={e => setEditForm({...editForm, option_b: e.target.value})} placeholder="Option B" />
+                        <input className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.option_c || ''} onChange={e => setEditForm({...editForm, option_c: e.target.value})} placeholder="Option C" />
+                        <input className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.option_d || ''} onChange={e => setEditForm({...editForm, option_d: e.target.value})} placeholder="Option D" />
+                        <input className="border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)] col-span-2 font-bold text-green-600" value={editForm.correct_option || ''} onChange={e => setEditForm({...editForm, correct_option: e.target.value})} placeholder="Correct Option (A, B, C, D)" />
                       </div>
                     ) : (
                       <div className="flex gap-2">
-                        <input className="border p-2 rounded flex-1 text-sm bg-white dark:bg-black" value={editForm.numerical_answer || ''} onChange={e => setEditForm({...editForm, numerical_answer: e.target.value})} placeholder="Numerical Answer" />
+                        <input className="border p-2 rounded flex-1 text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.numerical_answer || ''} onChange={e => setEditForm({...editForm, numerical_answer: e.target.value})} placeholder="Numerical Answer" />
                       </div>
                     )}
 
-                    <textarea 
-                      className="w-full border p-2 rounded text-sm bg-white dark:bg-black" 
-                      value={editForm.explanation || ''} 
-                      onChange={e => setEditForm({...editForm, explanation: e.target.value})} 
+                    <textarea
+                      className="w-full border p-2 rounded text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]"
+                      value={editForm.explanation || ''}
+                      onChange={e => setEditForm({...editForm, explanation: e.target.value})}
                       placeholder="Explanation"
                     />
 
                     <div className="flex gap-2">
-                      <input className="border p-2 rounded w-24 text-sm bg-white dark:bg-black" value={editForm.marks_positive || ''} onChange={e => setEditForm({...editForm, marks_positive: e.target.value})} placeholder="+ Marks" />
-                      <input className="border p-2 rounded w-24 text-sm bg-white dark:bg-black" value={editForm.marks_negative || ''} onChange={e => setEditForm({...editForm, marks_negative: e.target.value})} placeholder="- Marks" />
+                      <input className="border p-2 rounded w-24 text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.marks_positive || ''} onChange={e => setEditForm({...editForm, marks_positive: e.target.value})} placeholder="+ Marks" />
+                      <input className="border p-2 rounded w-24 text-sm bg-[var(--card)] dark:bg-[var(--surface-elevated)]" value={editForm.marks_negative || ''} onChange={e => setEditForm({...editForm, marks_negative: e.target.value})} placeholder="- Marks" />
                     </div>
 
                     <div className="flex gap-2 mt-4">
@@ -341,13 +341,13 @@ export default function QuestionManager({ defaultTab = "import" }) {
                   <div>
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex gap-2 text-xs font-bold text-gray-500 uppercase">
-                        <span className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{q.subject}</span>
-                        <span className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{q.chapter}</span>
-                        <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-600 px-2 py-1 rounded">{q.question_type}</span>
+                        <span className="bg-gray-200 dark:bg-[var(--surface-elevated)] px-2 py-1 rounded">{q.subject}</span>
+                        <span className="bg-gray-200 dark:bg-[var(--surface-elevated)] px-2 py-1 rounded">{q.chapter}</span>
+                        <span className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 px-2 py-1 rounded">{q.question_type}</span>
                         <span className="bg-green-100 dark:bg-green-900/30 text-green-600 px-2 py-1 rounded">+{q.marks_positive} / -{q.marks_negative}</span>
                       </div>
-                      <button 
-                        onClick={() => { setEditingId(q.id); setEditForm(q); }} 
+                      <button
+                        onClick={() => { setEditingId(q.id); setEditForm(q); }}
                         className="text-blue-500 p-1 hover:bg-blue-50 rounded"
                       >
                         <Edit2 className="w-4 h-4" />

@@ -1,7 +1,7 @@
 "use client";
 
 const HM_COLORS = [
-  "bg-slate-100 dark:bg-slate-800",
+  "bg-slate-100 dark:bg-[var(--surface-elevated)]",
   "bg-teal-100 dark:bg-teal-900/50",
   "bg-teal-400 dark:bg-teal-600",
   "bg-teal-700 dark:bg-teal-400",
@@ -9,7 +9,7 @@ const HM_COLORS = [
 
 function EmptyState({ title, description }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-white/45 p-5 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-400">
+    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-[var(--card)]/45 p-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/30 dark:text-slate-400">
       <p className="font-bold text-slate-700 dark:text-slate-200">{title}</p>
       <p className="mt-1 text-xs leading-relaxed">{description}</p>
     </div>
@@ -146,7 +146,7 @@ export function ExamReadiness({ readiness }) {
               <span className="w-36 shrink-0 text-xs text-slate-500 dark:text-slate-400">
                 {item.label}
               </span>
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
                 {item.value !== null && (
                   <div
                     className="h-full rounded-full transition-all duration-500"

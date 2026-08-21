@@ -93,7 +93,7 @@ export default function AdminGoalsPage() {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Create Form */}
-        <div className="lg:col-span-1 bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm h-fit">
+        <div className="lg:col-span-1 bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 shadow-sm h-fit">
           <h2 className="font-bold text-lg mb-4 flex items-center gap-2"><Plus className="w-5 h-5"/> New Goal</h2>
           <form onSubmit={createGoal} className="space-y-4">
             <div>
@@ -132,7 +132,7 @@ export default function AdminGoalsPage() {
                 <input type="number" value={xp} onChange={e=>setXp(e.target.value)} className="w-full border p-2 rounded-lg bg-transparent text-sm" required />
               </div>
             </div>
-            <button type="submit" disabled={submitting} className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-2.5 rounded-xl text-sm disabled:opacity-50">
+            <button type="submit" disabled={submitting} className="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-sm disabled:opacity-50">
               {submitting ? "Saving..." : "Create Goal"}
             </button>
           </form>
@@ -141,16 +141,16 @@ export default function AdminGoalsPage() {
         {/* List */}
         <div className="lg:col-span-2 space-y-4">
           {loading ? <p className="text-gray-500">Loading goals...</p> : goals.map(goal => (
-            <div key={goal.id} className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 shadow-sm flex justify-between items-center">
+            <div key={goal.id} className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm flex justify-between items-center">
               <div>
                 <div className="flex gap-2 items-center mb-1">
-                  <span className="text-xs font-bold bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{goal.target}</span>
+                  <span className="text-xs font-bold bg-gray-100 dark:bg-[var(--surface-elevated)] px-2 py-1 rounded">{goal.target}</span>
                   <span className="text-xs font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded">{goal.goal_type}</span>
                 </div>
                 <h3 className="font-bold text-lg">{goal.title}</h3>
                 <p className="text-sm text-gray-500 mb-2">{goal.description}</p>
                 <div className="flex gap-4 text-sm font-medium">
-                  <span className="text-purple-600">Target: {goal.target_value}</span>
+                  <span className="text-indigo-600">Target: {goal.target_value}</span>
                   <span className="text-amber-500">XP: +{goal.xp}</span>
                 </div>
               </div>

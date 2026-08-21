@@ -73,7 +73,7 @@ export default function JoinRequestsPanel({ groupId }) {
           {requests.map((req) => (
             <div
               key={req.id}
-              className="flex items-center justify-between gap-3 bg-white dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700 rounded-xl px-4 py-3"
+              className="flex items-center justify-between gap-3 bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 border border-slate-100 dark:border-[var(--border)] rounded-xl px-4 py-3"
             >
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm text-slate-900 dark:text-white truncate">

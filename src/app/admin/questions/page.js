@@ -10,7 +10,7 @@ export default function AdminQuestionsPage() {
         <p className="text-gray-500 dark:text-gray-400">Manage all your questions, apply filters, and bulk edit.</p>
       </div>
       
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-3 shadow-sm sm:p-6">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-3 shadow-sm sm:p-6">
         <ManagePYQs />
       </div>
     </div>

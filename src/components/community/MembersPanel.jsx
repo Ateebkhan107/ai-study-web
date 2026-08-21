@@ -107,7 +107,7 @@ export default function MembersPanel({ groupId, myRole, currentUserId }) {
               className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
             >
               <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-brand-hover flex items-center justify-center text-white text-xs font-bold shrink-0">
                   {(m.profile?.full_name || "?")[0]?.toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -133,7 +133,7 @@ export default function MembersPanel({ groupId, myRole, currentUserId }) {
                       <select
                         value={m.role}
                         onChange={(e) => changeRole(m.user_id, e.target.value)}
-                        className="text-xs bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-slate-700 dark:text-slate-300 focus:outline-none"
+                        className="text-xs bg-transparent border border-slate-200 dark:border-[var(--border)] rounded-lg px-2 py-1 text-slate-700 dark:text-slate-300 focus:outline-none"
                       >
                         <option value="MEMBER">Member</option>
                         <option value="ADMIN">Admin</option>

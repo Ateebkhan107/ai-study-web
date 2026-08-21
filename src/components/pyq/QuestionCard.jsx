@@ -74,7 +74,7 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
     const base =
       "w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 text-left text-sm font-medium transition-all duration-100";
     if (q.selected === null) {
-      return `${base} bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500 cursor-pointer`;
+      return `${base} bg-gray-50 dark:bg-[var(--surface-elevated)] border-gray-100 dark:border-[var(--border)] text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500 cursor-pointer`;
     }
     if (idx === q.correct) {
       return `${base} bg-green-50 dark:bg-green-950/30 border-green-400 dark:border-green-600 text-green-800 dark:text-green-300 cursor-default`;
@@ -82,35 +82,35 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
     if (idx === q.selected) {
       return `${base} bg-red-50 dark:bg-red-950/30 border-red-400 dark:border-red-600 text-red-800 dark:text-red-300 cursor-default`;
     }
-    return `${base} bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-700 text-gray-400 dark:text-gray-600 cursor-default`;
+    return `${base} bg-gray-50 dark:bg-[var(--surface-elevated)] border-gray-100 dark:border-[var(--border)] text-gray-400 dark:text-gray-600 cursor-default`;
   };
 
   return (
     <div
       onClick={handleToggleExpand}
-      className={`bg-white dark:bg-gray-900 border rounded-2xl p-5 shadow-sm cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-0.5
+      className={`bg-[var(--card)] dark:bg-[var(--surface)] border rounded-2xl p-5 shadow-sm cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-0.5
         ${q.showAnswer
-          ? "border-black dark:border-white"
-          : "border-gray-100 dark:border-gray-800"
+          ? "border-indigo-300 dark:border-indigo-700/60"
+          : "border-gray-100 dark:border-[var(--border-subtle)]"
         }`}
     >
       {/* ── Meta badges ── */}
       <div className="flex flex-wrap gap-1.5 mb-3">
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-[var(--border)]">
           {q.year}
         </span>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-black dark:bg-white text-white dark:text-black">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">
           {q.subject}
         </span>
         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full capitalize ${diffClasses(q.difficulty)}`}>
           {q.difficulty}
         </span>
         {q.repeated && (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800 flex items-center gap-1">
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 flex items-center gap-1">
             <Repeat className="w-3 h-3" /> Repeated
           </span>
         )}
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-[var(--border)]">
           {q.exam}
         </span>
         {q.attempted && (
@@ -146,8 +146,8 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
             onClick={handleBookmark}
             className={`w-7 h-7 rounded-lg border flex items-center justify-center text-xs transition-all duration-150
               ${q.bookmarked
-                ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                : "border-gray-200 dark:border-gray-700 text-gray-400 hover:border-gray-400 dark:hover:border-gray-500"
+                ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                : "border-gray-200 dark:border-[var(--border)] text-gray-400 hover:border-gray-400 dark:hover:border-gray-500"
               }`}
           >
             <BookmarkPlus className="w-4 h-4" />
@@ -155,7 +155,7 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
           {/* Expand toggle */}
           <button
             onClick={handleToggleExpand}
-            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center text-xs text-gray-400 hover:border-gray-400 transition-all"
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-[var(--border)] flex items-center justify-center text-xs text-gray-400 hover:border-gray-400 transition-all"
           >
             {q.showAnswer ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
@@ -165,7 +165,7 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
       {/* ── Expanded panel ── */}
       {q.showAnswer && (
         <div
-          className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800"
+          className="mt-4 pt-4 border-t border-gray-100 dark:border-[var(--border-subtle)]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Options */}
@@ -185,7 +185,7 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
                       ? "border-green-500 text-green-700 dark:text-green-400"
                       : idx === q.selected
                       ? "border-red-500 text-red-700 dark:text-red-400"
-                      : "border-gray-200 dark:border-gray-700 text-gray-400"
+                      : "border-gray-200 dark:border-[var(--border)] text-gray-400"
                     }`}
                 >
                   {LETTERS[idx]}
@@ -196,9 +196,9 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
           </div>
 
           {/* AI Explanation */}
-          <div className="bg-gray-50 dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-xl p-4 mb-4">
+          <div className="bg-gray-50 dark:bg-[var(--surface-elevated)]/60 border border-gray-100 dark:border-[var(--border)] rounded-xl p-4 mb-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-black dark:bg-white text-white dark:text-black tracking-widest uppercase flex items-center gap-1">
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 tracking-widest uppercase flex items-center gap-1">
                 <Sparkles className="w-3 h-3" /> AI Explain
               </span>
             </div>
@@ -230,7 +230,7 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
                   key={i}
                   className={`flex-1 rounded-t-sm transition-all ${
                     appeared
-                      ? "bg-black dark:bg-white"
+                      ? "bg-indigo-500 dark:bg-indigo-400"
                       : "bg-gray-200 dark:bg-gray-700"
                   }`}
                   style={{ height: appeared ? "100%" : "30%" }}

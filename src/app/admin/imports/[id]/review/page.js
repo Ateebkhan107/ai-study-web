@@ -170,7 +170,7 @@ export default function ReviewQueuePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
   }
@@ -179,7 +179,7 @@ export default function ReviewQueuePage() {
     return (
       <div className="text-center mt-12">
         <h2 className="text-xl font-bold">No questions found in this package</h2>
-        <Link href={`/admin/imports/${id}`} className="text-purple-600 mt-4 inline-block">Go Back</Link>
+        <Link href={`/admin/imports/${id}`} className="text-indigo-600 mt-4 inline-block">Go Back</Link>
       </div>
     );
   }
@@ -228,10 +228,10 @@ export default function ReviewQueuePage() {
   const suggestedChapter = suggestChapter();
 
   return (
-    <div className="flex min-h-[calc(100vh-64px)] flex-col overflow-hidden bg-gray-50 dark:bg-[#0a0a0a] -m-4 md:-m-6 xl:-m-8 lg:h-[calc(100vh-64px)] lg:flex-row">
+    <div className="flex min-h-[calc(100vh-64px)] flex-col overflow-hidden bg-gray-50 dark:bg-[var(--background)] -m-4 md:-m-6 xl:-m-8 lg:h-[calc(100vh-64px)] lg:flex-row">
       {/* Left Sidebar - Nav & Validation */}
-      <div className="w-full bg-white dark:bg-[#111] border-b border-gray-200 dark:border-gray-800 flex flex-col lg:w-80 lg:border-b-0 lg:border-r">
-        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+      <div className="w-full bg-[var(--card)] dark:bg-[var(--surface)] border-b border-gray-200 dark:border-[var(--border-subtle)] flex flex-col lg:w-80 lg:border-b-0 lg:border-r">
+        <div className="p-4 border-b border-gray-200 dark:border-[var(--border-subtle)] flex items-center justify-between">
           <Link href={`/admin/imports/${id}`} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-500">
             <ArrowLeft className="w-5 h-5" />
           </Link>
@@ -296,19 +296,19 @@ export default function ReviewQueuePage() {
       <div className="min-w-0 flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
         
         {/* Top Actions */}
-        <div className="flex flex-col gap-4 mb-6 bg-white dark:bg-[#111] p-4 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm sticky top-0 z-10 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-col gap-4 mb-6 bg-[var(--card)] dark:bg-[var(--surface)] p-4 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] shadow-sm sticky top-0 z-10 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex gap-2">
             <button 
               onClick={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
               disabled={currentIndex === 0}
-              className="p-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+              className="p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
             <button 
               onClick={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
               disabled={currentIndex === questions.length - 1}
-              className="p-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+              className="p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
             >
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -320,18 +320,18 @@ export default function ReviewQueuePage() {
                 type="checkbox" 
                 checked={compareMode}
                 onChange={e => setCompareMode(e.target.checked)}
-                className="rounded text-purple-600"
+                className="rounded text-indigo-600"
               />
               Compare Mode
             </label>
 
             <div className="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
 
-            <button onClick={() => saveQuestion()} disabled={saving} className="flex min-h-10 items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+            <button onClick={() => saveQuestion()} disabled={saving} className="flex min-h-10 items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-[var(--border)] hover:bg-gray-50 dark:hover:bg-gray-800">
               {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save
             </button>
 
-            <button onClick={handleSaveAndNext} disabled={saving} className="flex min-h-10 items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+            <button onClick={handleSaveAndNext} disabled={saving} className="flex min-h-10 items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 dark:border-[var(--border)] hover:bg-gray-50 dark:hover:bg-gray-800">
               <ArrowRight className="w-4 h-4" /> Save & Next
             </button>
 
@@ -355,22 +355,22 @@ export default function ReviewQueuePage() {
           {/* Left Column: Visuals / Compare Mode */}
           <div className="space-y-6">
             
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2"><ImageIcon className="w-5 h-5" /> Question Image</h3>
-                <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">{imageMode}</span>
+                <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-gray-100 dark:bg-[var(--surface-elevated)] text-gray-600 dark:text-gray-300">{imageMode}</span>
               </div>
               {formData.question_image ? (
                 <div className="relative group">
-                  <img src={formData.question_image} alt="Question" className="h-auto max-h-[70vh] w-full rounded-lg border border-gray-200 object-contain dark:border-gray-700" style={{ filter: "url(#remove-orange)" }} />
+                  <img src={formData.question_image} alt="Question" className="h-auto max-h-[70vh] w-full rounded-lg border border-gray-200 object-contain dark:border-[var(--border)]" style={{ filter: "url(#remove-orange)" }} />
                   <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-2 bg-white rounded-lg shadow text-gray-700 hover:text-red-600" onClick={() => removeImage('question_image')} title="Remove Question Image">
+                    <button className="p-2 bg-[var(--card)] rounded-lg shadow text-gray-700 hover:text-red-600" onClick={() => removeImage('question_image')} title="Remove Question Image">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-8 text-center text-gray-500">
+                <div className="border-2 border-dashed border-gray-300 dark:border-[var(--border)] rounded-xl p-8 text-center text-gray-500">
                   <ImageIcon className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-sm font-medium">No Image Uploaded</p>
                 </div>
@@ -381,7 +381,7 @@ export default function ReviewQueuePage() {
                   type="text" 
                   value={formData.question_image || ""}
                   onChange={e => handleInputChange("question_image", e.target.value)}
-                  className="w-full mt-1 p-2 border border-gray-200 dark:border-gray-800 rounded-lg text-sm bg-transparent"
+                  className="w-full mt-1 p-2 border border-gray-200 dark:border-[var(--border-subtle)] rounded-lg text-sm bg-transparent"
                   placeholder="https://..."
                 />
               </div>
@@ -397,19 +397,19 @@ export default function ReviewQueuePage() {
               )}
             </div>
 
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <h3 className="font-bold flex items-center gap-2 mb-4"><FileText className="w-5 h-5" /> Solution Image</h3>
               {formData.explanation_image ? (
                 <div className="relative group">
-                  <img src={formData.explanation_image} alt="Solution" className="h-auto max-h-[70vh] w-full rounded-lg border border-gray-200 object-contain dark:border-gray-700" style={{ filter: "url(#remove-orange)" }} />
+                  <img src={formData.explanation_image} alt="Solution" className="h-auto max-h-[70vh] w-full rounded-lg border border-gray-200 object-contain dark:border-[var(--border)]" style={{ filter: "url(#remove-orange)" }} />
                   <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-2 bg-white rounded-lg shadow text-gray-700 hover:text-red-600" onClick={() => removeImage('explanation_image')} title="Remove Solution Image">
+                    <button className="p-2 bg-[var(--card)] rounded-lg shadow text-gray-700 hover:text-red-600" onClick={() => removeImage('explanation_image')} title="Remove Solution Image">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-8 text-center text-gray-500">
+                <div className="border-2 border-dashed border-gray-300 dark:border-[var(--border)] rounded-xl p-8 text-center text-gray-500">
                   <FileText className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-sm font-medium">No Solution Image</p>
                 </div>
@@ -420,7 +420,7 @@ export default function ReviewQueuePage() {
                   type="text" 
                   value={formData.explanation_image || ""}
                   onChange={e => handleInputChange("explanation_image", e.target.value)}
-                  className="w-full mt-1 p-2 border border-gray-200 dark:border-gray-800 rounded-lg text-sm bg-transparent"
+                  className="w-full mt-1 p-2 border border-gray-200 dark:border-[var(--border-subtle)] rounded-lg text-sm bg-transparent"
                   placeholder="https://..."
                 />
               </div>
@@ -441,7 +441,7 @@ export default function ReviewQueuePage() {
           {/* Right Column: Text & Meta Edit */}
           <div className="space-y-6">
             
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <h3 className="font-bold flex items-center gap-2 mb-4"><Layout className="w-5 h-5" /> Metadata</h3>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -450,7 +450,7 @@ export default function ReviewQueuePage() {
                     type="number"
                     value={formData.question_number || ""}
                     onChange={e => handleInputChange('question_number', Number(e.target.value))}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -458,7 +458,7 @@ export default function ReviewQueuePage() {
                   <select 
                     value={formData.subject || ""} 
                     onChange={e => handleInputChange('subject', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   >
                     <option value="">Select Subject</option>
                     <option value="Physics">Physics</option>
@@ -473,7 +473,7 @@ export default function ReviewQueuePage() {
                   <select 
                     value={formData.question_type || "MCQ"} 
                     onChange={e => handleInputChange('question_type', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   >
                     <option value="MCQ">MCQ</option>
                     <option value="NUMERICAL">NUMERICAL</option>
@@ -485,7 +485,7 @@ export default function ReviewQueuePage() {
                   <select 
                     value={formData.difficulty || "MEDIUM"} 
                     onChange={e => handleInputChange('difficulty', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   >
                     <option value="EASY">EASY</option>
                     <option value="MEDIUM">MEDIUM</option>
@@ -498,7 +498,7 @@ export default function ReviewQueuePage() {
                     type="text" 
                     value={formData.chapter || ""}
                     onChange={e => handleInputChange("chapter", e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -507,7 +507,7 @@ export default function ReviewQueuePage() {
                     type="number"
                     value={formData.numerical_answer ?? ""}
                     onChange={e => handleInputChange("numerical_answer", e.target.value === "" ? null : Number(e.target.value))}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -515,7 +515,7 @@ export default function ReviewQueuePage() {
                   <select
                     value={formData.status || "NEEDS_REVIEW"}
                     onChange={e => handleInputChange('status', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   >
                     <option value="NEEDS_REVIEW">NEEDS_REVIEW</option>
                     <option value="APPROVED">APPROVED</option>
@@ -529,7 +529,7 @@ export default function ReviewQueuePage() {
                     type="number"
                     value={formData.marks_positive ?? 4}
                     onChange={e => handleInputChange('marks_positive', Number(e.target.value))}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -538,7 +538,7 @@ export default function ReviewQueuePage() {
                     type="number"
                     value={formData.marks_negative ?? 0}
                     onChange={e => handleInputChange('marks_negative', Number(e.target.value))}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -547,7 +547,7 @@ export default function ReviewQueuePage() {
                     type="text"
                     value={formData.exam || ""}
                     onChange={e => handleInputChange('exam', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -556,7 +556,7 @@ export default function ReviewQueuePage() {
                     type="text"
                     value={formData.exam_type || ""}
                     onChange={e => handleInputChange('exam_type', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -565,7 +565,7 @@ export default function ReviewQueuePage() {
                     type="number"
                     value={formData.year || ""}
                     onChange={e => handleInputChange('year', e.target.value === "" ? null : Number(e.target.value))}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
                 <div>
@@ -574,28 +574,28 @@ export default function ReviewQueuePage() {
                     type="text"
                     value={formData.paper_code || ""}
                     onChange={e => handleInputChange('paper_code', e.target.value)}
-                    className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent"
+                    className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <h3 className="font-bold flex items-center gap-2 mb-4"><Type className="w-5 h-5" /> Question Text</h3>
               <textarea 
                 rows={compareMode ? 8 : 4}
                 value={formData.question || ""}
                 onChange={e => handleInputChange('question', e.target.value)}
-                className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent font-mono"
+                className="w-full p-3 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent font-mono"
                 placeholder="Question text..."
               />
             </div>
 
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <h3 className="font-bold mb-4">Options</h3>
               <div className="space-y-3">
                 {['a', 'b', 'c', 'd'].map(opt => (
-                  <div key={opt} className={`flex items-start gap-3 p-3 border rounded-xl ${formData.correct_option?.toLowerCase() === opt ? 'border-green-500 bg-green-50 dark:bg-green-900/10' : 'border-gray-200 dark:border-gray-700'}`}>
+                  <div key={opt} className={`flex items-start gap-3 p-3 border rounded-xl ${formData.correct_option?.toLowerCase() === opt ? 'border-green-500 bg-green-50 dark:bg-green-900/10' : 'border-gray-200 dark:border-[var(--border)]'}`}>
                     <input 
                       type="radio" 
                       name="correct_option"
@@ -608,14 +608,14 @@ export default function ReviewQueuePage() {
                         type="text" 
                         value={formData[`option_${opt}`] || ""}
                         onChange={e => handleInputChange(`option_${opt}`, e.target.value)}
-                        className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent mb-1"
+                        className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent mb-1"
                         placeholder={`Option ${opt.toUpperCase()}`}
                       />
                       <input
                         type="text"
                         value={formData[`option_${opt}_image`] || ""}
                         onChange={e => handleInputChange(`option_${opt}_image`, e.target.value)}
-                        className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-xs bg-transparent"
+                        className="w-full p-2 border border-gray-200 dark:border-[var(--border)] rounded-lg text-xs bg-transparent"
                         placeholder={`Option ${opt.toUpperCase()} image URL`}
                       />
                     </div>
@@ -624,13 +624,13 @@ export default function ReviewQueuePage() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#111] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
               <h3 className="font-bold flex items-center gap-2 mb-4"><FileText className="w-5 h-5" /> Solution Text</h3>
               <textarea 
                 rows={4}
                 value={formData.explanation || ""}
                 onChange={e => handleInputChange('explanation', e.target.value)}
-                className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-transparent font-mono"
+                className="w-full p-3 border border-gray-200 dark:border-[var(--border)] rounded-lg text-sm bg-transparent font-mono"
                 placeholder="Explanation text..."
               />
             </div>

@@ -102,10 +102,10 @@ export default function Leaderboard({ compact = false }) {
         };
       default:
         return {
-          cardBg: "bg-white/50 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800",
-          border: "border-slate-200 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50",
+          cardBg: "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/40 hover:bg-[var(--card)] dark:hover:bg-slate-800",
+          border: "border-slate-200 dark:border-[var(--border)]/50 hover:border-indigo-300 dark:hover:border-indigo-500/50",
           rankColor: "text-slate-400 dark:text-slate-500",
-          rankBg: "bg-slate-100 dark:bg-slate-800",
+          rankBg: "bg-slate-100 dark:bg-[var(--surface-elevated)]",
           Icon: null,
           xpColor: "text-slate-800 dark:text-slate-100",
         };
@@ -113,7 +113,7 @@ export default function Leaderboard({ compact = false }) {
   };
 
   return (
-    <div className={`relative overflow-hidden bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-500 ${
+    <div className={`relative overflow-hidden bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-all duration-500 ${
       compact ? "p-4 sm:p-5" : "p-6 lg:p-8"
     }`}>
 
@@ -139,7 +139,7 @@ export default function Leaderboard({ compact = false }) {
       {/* ── LIST ── */}
       <div className={`relative z-10 flex flex-col ${compact ? "gap-2" : "gap-3"}`}>
         {users.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+          <div className="text-center py-10 border border-dashed border-slate-200 dark:border-[var(--border-subtle)] rounded-2xl">
             <Trophy className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
             <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
               No rankings available yet.
@@ -166,7 +166,7 @@ export default function Leaderboard({ compact = false }) {
               {user.isCurrentUserAppended && (
                 <div className={`flex items-center gap-4 ${compact ? "my-3" : "my-6"}`}>
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
-                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded-full border border-slate-100 dark:border-slate-800">
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-[var(--card)]/50 dark:bg-[var(--surface)]/50 px-3 py-1 rounded-full border border-slate-100 dark:border-[var(--border-subtle)]">
                     Your Rank
                   </span>
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
@@ -211,7 +211,7 @@ export default function Leaderboard({ compact = false }) {
                     <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
 
                     {/* Level Badge */}
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/50 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] backdrop-blur-sm">
                       <Shield className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       <span className="text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-300 uppercase">
                         {getLevelFromXP(user.xp).title} <span className="opacity-60">Lvl {getLevelFromXP(user.xp).currentLevel}</span>

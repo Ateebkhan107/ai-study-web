@@ -73,7 +73,7 @@ export default function BlockReportMenu({ targetUserId, targetType = "user", tar
       </button>
 
       {showMenu && (
-        <div className="absolute right-0 top-8 z-50 w-44 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden">
+        <div className="absolute right-0 top-8 z-50 w-44 bg-[var(--card)] dark:bg-[var(--surface)] border border-slate-200 dark:border-[var(--border)] rounded-xl shadow-xl overflow-hidden">
           <button
             onClick={() => { setShowReportForm(true); setShowMenu(false); }}
             className="w-full flex items-center gap-2 px-4 py-3 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -84,7 +84,7 @@ export default function BlockReportMenu({ targetUserId, targetType = "user", tar
             <button
               onClick={handleBlock}
               disabled={isSubmitting}
-              className="w-full flex items-center gap-2 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border-t border-slate-100 dark:border-slate-800"
+              className="w-full flex items-center gap-2 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border-t border-slate-100 dark:border-[var(--border-subtle)]"
             >
               <ShieldOff className="w-4 h-4" /> Block User
             </button>
@@ -94,7 +94,7 @@ export default function BlockReportMenu({ targetUserId, targetType = "user", tar
 
       {showReportForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-2xl p-6 w-full max-w-sm shadow-2xl">
             <h3 className="font-bold text-slate-900 dark:text-white mb-3">Report</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
               Describe the issue clearly. Max 500 characters.
@@ -105,14 +105,14 @@ export default function BlockReportMenu({ targetUserId, targetType = "user", tar
               maxLength={500}
               rows={4}
               placeholder="What is the problem?"
-              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
             />
             <p className="text-xs text-slate-400 mt-1">{reason.length}/500</p>
             {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
             <div className="flex gap-3 mt-4">
               <button
                 onClick={() => { setShowReportForm(false); setError(null); }}
-                className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-[var(--border)] text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 Cancel
               </button>

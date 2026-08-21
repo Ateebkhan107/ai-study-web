@@ -53,7 +53,7 @@ export default function DailyGoals({ compact = false }) {
     : 0;
 
   return (
-    <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-2xl transition-all duration-500 dark:border-slate-800 dark:bg-[#0f172a]/80 ${
+    <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/80 shadow-sm backdrop-blur-2xl transition-all duration-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 ${
       compact ? "p-3 sm:p-5" : "p-3 sm:p-5 lg:p-6"
     }`}>
 
@@ -84,7 +84,7 @@ export default function DailyGoals({ compact = false }) {
               {Math.round(percentage)}%
             </span>
           </div>
-          <div className={`overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800 ${
+          <div className={`overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] ${
             compact ? "h-1.5 w-36 sm:w-40" : "h-2 w-36 sm:w-44"
           }`}>
             <div
@@ -112,7 +112,7 @@ export default function DailyGoals({ compact = false }) {
                 ${
                   isComplete
                     ? "bg-emerald-50/50 dark:bg-emerald-500/5 border-emerald-200/50 dark:border-emerald-500/20"
-                    : "bg-white/50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50"
+                    : "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/40 border-slate-200 dark:border-[var(--border)]/50 hover:border-indigo-300 dark:hover:border-indigo-500/50"
                 }
               `}
               style={{ transitionDelay: `${index * 50}ms` }}
@@ -165,7 +165,7 @@ export default function DailyGoals({ compact = false }) {
                       {goal.progress} / {goal.target_value}
                     </span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
                     <div
                       className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${progressPct}%` }}

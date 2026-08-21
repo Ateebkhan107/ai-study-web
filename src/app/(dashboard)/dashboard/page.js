@@ -30,7 +30,7 @@ export default async function DashboardPage() {
 
         {/* 2. Soft Ambient Color Glows (no aggressive pulsing) */}
         <div className="absolute top-0 left-0 w-[50%] h-[50%] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-[150px]" />
-        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-violet-500/5 dark:bg-violet-500/10 blur-[150px]" />
+        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-brand/5 dark:bg-brand/8 blur-[150px]" />
         <div className="absolute bottom-0 left-[20%] w-[40%] h-[40%] rounded-full bg-pink-500/5 dark:bg-pink-500/10 blur-[150px]" />
         
       </div>
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
         
         {/* Header Section */}
         <div className="relative space-y-1">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-0.5 shadow-sm backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/50">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[var(--card)]/50 px-3 py-0.5 shadow-sm backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/50">
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>

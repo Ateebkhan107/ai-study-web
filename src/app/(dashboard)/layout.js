@@ -28,7 +28,7 @@ export default async function DashboardLayout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9] dark:bg-gray-950 transition-colors duration-200">
+    <div className="min-h-screen bg-[var(--background)] dark:bg-[var(--background)] transition-colors duration-200">
       {/* 👈 Passed control prop to conditionally unmount the text line */}
       <Navbar hideTrackFocus={true} />
       <TrackWrapper>

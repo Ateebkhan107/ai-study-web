@@ -128,23 +128,23 @@ export default function BadgeManager() {
       <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Badge Name</label>
-          <input required type="text" value={name} onChange={e=>setName(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="text" value={name} onChange={e=>setName(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Description</label>
-          <input type="text" value={description} onChange={e=>setDescription(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input type="text" value={description} onChange={e=>setDescription(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Icon (Lucide Name)</label>
-          <input required type="text" value={icon} onChange={e=>setIcon(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="text" value={icon} onChange={e=>setIcon(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Color Class</label>
-          <input required type="text" value={color} onChange={e=>setColor(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="text" value={color} onChange={e=>setColor(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Requirement Type</label>
-          <select value={reqType} onChange={e=>setReqType(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none">
+          <select value={reqType} onChange={e=>setReqType(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none">
             <option value="tests_completed">Tests Completed</option>
             <option value="pyq_completed">PYQs Completed</option>
             <option value="total_questions">Total Questions</option>
@@ -158,15 +158,15 @@ export default function BadgeManager() {
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Requirement Value</label>
-          <input required type="number" value={reqVal} onChange={e=>setReqVal(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="number" value={reqVal} onChange={e=>setReqVal(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">XP Reward</label>
-          <input required type="number" value={xp} onChange={e=>setXp(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="number" value={xp} onChange={e=>setXp(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-500 mb-1 block">Display Order</label>
-          <input required type="number" value={displayOrder} onChange={e=>setDisplayOrder(e.target.value)} className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm outline-none" />
+          <input required type="number" value={displayOrder} onChange={e=>setDisplayOrder(e.target.value)} className="w-full bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-xl px-4 py-3 text-sm outline-none" />
         </div>
         
         <div className="flex items-center gap-2 mt-4 md:col-span-2">
@@ -189,7 +189,7 @@ export default function BadgeManager() {
       {/* LIST */}
       <div className="space-y-3">
         {loading ? <p>Loading badges...</p> : badges.map(b => (
-          <div key={b.id} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+          <div key={b.id} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-2xl border border-slate-100 dark:border-[var(--border-subtle)]">
             <div className="flex flex-col">
               <span className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 {b.name} 

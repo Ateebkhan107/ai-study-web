@@ -140,18 +140,18 @@ export default function PYQResultsPage() {
   const strokeDashoffset = circumference - (accuracy / 100) * circumference;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start sm:items-center justify-center relative overflow-x-hidden overflow-y-auto">
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start sm:items-center justify-center relative overflow-x-hidden overflow-y-auto">
       <RemoveOrangeFilter />
       {/* Background blobs */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-violet-500/10 dark:bg-violet-500/5 blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand/8 dark:bg-brand/5 blur-[100px]" />
       </div>
 
       <div className="w-full max-w-4xl z-10 animate-slideUp py-8">
         
         {/* Main Card */}
-        <div className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm p-6 sm:p-10 mb-8">
+        <div className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-6 sm:p-10 mb-8">
           
           <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
             {/* SVG Score Ring */}
@@ -198,7 +198,7 @@ export default function PYQResultsPage() {
           </div>
 
           {/* Session Summary */}
-          <div className="bg-slate-100/50 dark:bg-slate-900/50 rounded-2xl p-5 mb-8 border border-slate-200/60 dark:border-slate-800/60">
+          <div className="bg-slate-100/50 dark:bg-[var(--surface)]/50 rounded-2xl p-5 mb-8 border border-slate-200/60 dark:border-[var(--border-subtle)]/60">
             <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 text-center md:text-left">
               Session Summary
             </h2>
@@ -235,7 +235,7 @@ export default function PYQResultsPage() {
               <span className="text-xs font-bold text-rose-600/70 dark:text-rose-500 uppercase tracking-widest">Wrong</span>
             </div>
 
-            <div className="bg-slate-100 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
+            <div className="bg-slate-100 dark:bg-[var(--surface-elevated)]/50 border border-slate-200/60 dark:border-[var(--border)]/50 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
               <span className="text-3xl font-black text-slate-700 dark:text-slate-300 mb-1">{skipped}</span>
               <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Skipped</span>
             </div>
@@ -249,13 +249,13 @@ export default function PYQResultsPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => setShowReview(v => !v)}
-              className="flex-1 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3.5 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+              className="flex-1 bg-brand text-white font-bold py-3.5 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
             >
               {showReview ? "Hide Review" : "Review Answers"}
             </button>
             <button
               onClick={() => router.push("/pyq")}
-              className="flex-1 border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-xl font-bold py-3.5 text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+              className="flex-1 border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-xl font-bold py-3.5 text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
             >
               Back to Setup
             </button>
@@ -277,7 +277,7 @@ export default function PYQResultsPage() {
                 : null;
               
               return (
-                <div key={q.id} className="bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-6 shadow-sm">
+                <div key={q.id} className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-6 shadow-sm">
                   
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 rounded-full">
@@ -305,7 +305,7 @@ export default function PYQResultsPage() {
                         className={`p-2 rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 ${
                           bookmarkedIds.has(String(q.id))
                             ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20"
-                            : "bg-white/50 dark:bg-slate-800/30 text-slate-400 dark:text-slate-500 border-slate-200/60 dark:border-slate-700/50 hover:text-indigo-500"
+                            : "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30 text-slate-400 dark:text-slate-500 border-slate-200/60 dark:border-[var(--border)]/50 hover:text-indigo-500"
                         }`}
                         title="Save Question"
                       >
@@ -324,7 +324,7 @@ export default function PYQResultsPage() {
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
-                        className="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
+                        className="rounded-2xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
                         style={{ filter: "url(#remove-orange)" }}
                       />
                     )}
@@ -337,7 +337,7 @@ export default function PYQResultsPage() {
                       <img
                         src={q.question_image}
                         alt="Question visual"
-                        className="mt-3 max-h-[420px] w-auto max-w-full rounded-2xl border border-slate-200/60 object-contain dark:border-slate-700/50"
+                        className="mt-3 max-h-[420px] w-auto max-w-full rounded-2xl border border-slate-200/60 object-contain dark:border-[var(--border)]/50"
                         loading="lazy"
                         decoding="async"
                         style={{ filter: "url(#remove-orange)" }}
@@ -347,7 +347,7 @@ export default function PYQResultsPage() {
 
                   {qType === "NUMERICAL" ? (
                     <div className="space-y-3 mb-6">
-                      <div className="p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between">
+                      <div className="p-4 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-slate-50/50 dark:bg-[var(--surface-elevated)]/50 flex items-center justify-between">
                         <span className="font-bold text-sm text-slate-600 dark:text-slate-400">Your Answer:</span>
                         <span className="text-sm font-semibold text-slate-900 dark:text-white">
                           {q.selected !== null && q.selected !== undefined && q.selected !== "" ? q.selected : "None"}
@@ -382,8 +382,8 @@ export default function PYQResultsPage() {
                         
                         const isSelected = selectedArr.includes(option);
 
-                        let wrapperClasses = "border-slate-200/60 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30";
-                        let letterClasses = "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400";
+                        let wrapperClasses = "border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30";
+                        let letterClasses = "bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400";
                         
                         if (isCorrectOption) {
                           wrapperClasses = "border-emerald-300 dark:border-emerald-500/50 bg-emerald-50 dark:bg-emerald-500/10";
@@ -413,7 +413,7 @@ export default function PYQResultsPage() {
                                 <img 
                                   src={q[`option_${option}_image`]} 
                                   alt={`Option ${option.toUpperCase()} visual`} 
-                                  className="rounded-xl border border-slate-200/60 dark:border-slate-700/50 max-w-full w-auto"
+                                  className="rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full w-auto"
                                   style={{ filter: "url(#remove-orange)" }}
                                 />
                               )}
@@ -425,12 +425,12 @@ export default function PYQResultsPage() {
                   )}
 
                   {!q.selected && (
-                    <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold mb-4">
+                    <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-500 dark:text-slate-400 text-xs font-bold mb-4">
                       Skipped Question
                     </div>
                   )}
 
-                  <div className="bg-slate-50/80 dark:bg-slate-900/40 rounded-2xl p-5 border border-slate-100 dark:border-slate-800/80 mt-2">
+                  <div className="bg-slate-50/80 dark:bg-[var(--surface)]/40 rounded-2xl p-5 border border-slate-100 dark:border-[var(--border-subtle)]/80 mt-2">
                     <p className="text-sm font-bold text-slate-900 dark:text-slate-200 mb-2">
                       {qType === "MULTIPLE_CORRECT" 
                         ? `Correct Answers: ${Array.isArray(q.correct_options) ? q.correct_options.join(", ").toUpperCase() : ""}`
@@ -475,14 +475,14 @@ export default function PYQResultsPage() {
                         <img 
                           src={q.explanation_image} 
                           alt="Explanation visual" 
-                          className="mt-2 rounded-xl border border-slate-200/60 dark:border-slate-700/50 max-w-full"
+                          className="mt-2 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
                           style={{ filter: "url(#remove-orange)" }}
                         />
                       )}
                     </div>
                     
-                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800">
-                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50">
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-[var(--surface-elevated)]/50">
                         {q.chapter}
                       </span>
                     </div>

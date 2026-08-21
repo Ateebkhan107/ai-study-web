@@ -56,7 +56,7 @@ export default function ImportPackagesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
   }
@@ -65,7 +65,7 @@ export default function ImportPackagesPage() {
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div className="min-w-0">
-          <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+          <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
             Import Packages
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -76,7 +76,7 @@ export default function ImportPackagesPage() {
           type="button"
           disabled={syncing}
           onClick={syncExistingPapers}
-          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 dark:bg-white dark:text-black sm:w-auto"
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 dark:bg-indigo-500 dark:text-white sm:w-auto"
         >
           {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
           Sync Existing Papers
@@ -103,8 +103,8 @@ export default function ImportPackagesPage() {
       )}
 
       {!error && packages.length === 0 && (
-        <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-12 text-center">
-          <div className="w-16 h-16 bg-gray-50 dark:bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-12 text-center">
+          <div className="w-16 h-16 bg-gray-50 dark:bg-[var(--surface)] rounded-full flex items-center justify-center mx-auto mb-4">
             <RefreshCw className="w-8 h-8 text-gray-400" />
           </div>
           <h2 className="text-lg font-bold mb-2">No Import Packages</h2>
@@ -115,7 +115,7 @@ export default function ImportPackagesPage() {
             type="button"
             onClick={syncExistingPapers}
             disabled={syncing}
-            className="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 bg-brand text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
           >
             {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
             Sync Existing Papers
@@ -129,7 +129,7 @@ export default function ImportPackagesPage() {
             <Link 
               key={pkg.id} 
               href={`/admin/imports/${pkg.id}`}
-              className="group flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/5 dark:border-gray-800 dark:bg-[#111] sm:flex-row sm:items-center sm:justify-between sm:p-5"
+              className="group flex flex-col gap-4 rounded-2xl border border-gray-200 bg-[var(--card)] p-4 transition-all hover:border-indigo-500/50 hover:shadow-lg hover:shadow-brand/5 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:flex-row sm:items-center sm:justify-between sm:p-5"
             >
               <div className="flex min-w-0 items-center gap-4">
                 <div className={`
@@ -142,7 +142,7 @@ export default function ImportPackagesPage() {
                   <FileText className="w-6 h-6" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                  <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     {pkg.name}
                   </h3>
                   <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
@@ -157,7 +157,7 @@ export default function ImportPackagesPage() {
                     <span>{pkg.total_questions || 0} Questions</span>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-3 text-[11px] font-semibold text-gray-500">
-                    <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800">Reviewed {pkg.reviewed_count || 0}</span>
+                    <span className="px-2 py-1 rounded bg-gray-100 dark:bg-[var(--surface-elevated)]">Reviewed {pkg.reviewed_count || 0}</span>
                     <span className="px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">Needs {pkg.needs_review_count || 0}</span>
                     <span className="px-2 py-1 rounded bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300">Published {pkg.published_count || 0}</span>
                   </div>
@@ -174,7 +174,7 @@ export default function ImportPackagesPage() {
                 `}>
                   {pkg.status.replace('_', ' ')}
                 </span>
-                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all" />
               </div>
             </Link>
           ))}

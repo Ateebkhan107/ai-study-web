@@ -51,19 +51,19 @@ export default function MathText({ children, className = "" }) {
         components={{
           p: ({ children: content }) => <span>{content}</span>,
           table: ({ children: content }) => (
-            <div className="my-5 w-full overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div className="my-5 w-full overflow-x-auto rounded-2xl border border-slate-200 dark:border-[var(--border)]">
               <table className="w-full min-w-[32rem] border-collapse text-left text-sm sm:text-base">
                 {content}
               </table>
             </div>
           ),
           thead: ({ children: content }) => (
-            <thead className="bg-slate-100/90 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+            <thead className="bg-slate-100/90 text-slate-800 dark:bg-[var(--surface-elevated)] dark:text-slate-100">
               {content}
             </thead>
           ),
           tbody: ({ children: content }) => (
-            <tbody className="divide-y divide-slate-200 bg-white/70 dark:divide-slate-700 dark:bg-slate-900/40">
+            <tbody className="divide-y divide-slate-200 bg-[var(--card)]/70 dark:divide-slate-700 dark:bg-[var(--surface)]/40">
               {content}
             </tbody>
           ),

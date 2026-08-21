@@ -42,8 +42,8 @@ export default function ReportBugPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
             {BUG_GUIDELINES.map((item, i) => (
-              <div key={i} className="flex gap-4 p-4 rounded-2xl bg-white/50 dark:bg-[#0f172a]/50 border border-slate-100 dark:border-slate-700/50">
-                <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/80 flex items-center justify-center shrink-0">
+              <div key={i} className="flex gap-4 p-4 rounded-2xl bg-[var(--card)]/50 dark:bg-[var(--surface)]/50 border border-slate-100 dark:border-[var(--border)]/50">
+                <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)]/80 flex items-center justify-center shrink-0">
                   <item.icon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
                 </div>
                 <div>

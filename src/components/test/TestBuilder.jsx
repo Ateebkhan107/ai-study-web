@@ -79,7 +79,7 @@ const SUBJECTS = {
   },
   Maths: {
     icon: <Calculator className="w-6 h-6" />,
-    color: "purple",
+    color: "maths",
     chapters: [
       "Sets",
       "Relations and Functions – I",
@@ -167,7 +167,7 @@ const NEET_BIOLOGY_PRACTICE_COUNTS = [10, 15, 20];
 const colorMap = {
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30",     border: "border-blue-200 dark:border-blue-800",     text: "text-blue-700 dark:text-blue-300",     chip: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
   green:  { bg: "bg-emerald-50 dark:bg-emerald-950/30", border: "border-emerald-200 dark:border-emerald-800", text: "text-emerald-700 dark:text-emerald-300", chip: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700" },
-  purple: { bg: "bg-violet-50 dark:bg-violet-950/30",  border: "border-violet-200 dark:border-violet-800",  text: "text-violet-700 dark:text-violet-300",  chip: "bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-700" },
+  maths: { bg: "bg-indigo-50 dark:bg-indigo-950/30",  border: "border-indigo-200 dark:border-indigo-800",  text: "text-indigo-700 dark:text-indigo-300",  chip: "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-700" },
   rose:   { bg: "bg-rose-50 dark:bg-rose-950/30",      border: "border-rose-200 dark:border-rose-800",      text: "text-rose-700 dark:text-rose-300",      chip: "bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700" },
 };
 
@@ -404,7 +404,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
       <div className="min-w-0 space-y-5 xl:col-span-2">
 
         {/* Step 1 — Subject selector */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
@@ -425,7 +425,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm cursor-pointer
                     ${isSelected
                       ? `${c.bg} ${c.border} ${c.text}`
-                      : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/40"
+                      : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/40"
                     }`}
                 >
                   <span className="mb-1 flex items-center justify-center">{data.icon}</span>
@@ -461,7 +461,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
             return (
               <div
                 key={subject}
-                className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden"
+                className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl overflow-hidden"
               >
                 <div
                   onClick={() => setExpandedSubject(isExpanded ? null : subject)}
@@ -492,7 +492,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 </div>
 
                 {isExpanded && (
-                  <div className="px-4 pb-4 border-t border-gray-50 dark:border-gray-800 pt-3 sm:px-5">
+                  <div className="px-4 pb-4 border-t border-gray-50 dark:border-[var(--border-subtle)] pt-3 sm:px-5">
                     {isBiologyPracticeSubject && (
                       <div className="mb-3 rounded-xl border border-rose-100 bg-rose-50/70 px-3 py-2 text-xs font-medium text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/20 dark:text-rose-300">
                         {availabilityLoading
@@ -517,8 +517,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
                               ${isChapterSelected
                                 ? c.chip
                                 : isUnavailable
-                                ? "bg-gray-50 dark:bg-gray-800 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-800 cursor-not-allowed"
-                                : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                                ? "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-300 dark:text-gray-600 border-gray-100 dark:border-[var(--border-subtle)] cursor-not-allowed"
+                                : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-300 dark:hover:border-gray-600"
                               }`}
                           >
                             {isChapterSelected ? "✓ " : ""}{chapter}
@@ -543,7 +543,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
       <div className="space-y-4">
 
         {/* Question count */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Questions
           </p>
@@ -558,10 +558,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 disabled={disabled}
                 className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                   ${questionCount === n
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
                     : disabled
-                    ? "bg-gray-50 dark:bg-gray-800 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-800 cursor-not-allowed"
-                    : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
+                    ? "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-300 dark:text-gray-600 border-gray-100 dark:border-[var(--border-subtle)] cursor-not-allowed"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-400"
                   }`}
               >
                 {n}
@@ -574,8 +574,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 onClick={() => saveCount(selectedBiologyAvailability)}
                 className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
                   ${questionCount === selectedBiologyAvailability
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-400"
                   }`}
               >
                 All {selectedBiologyAvailability}
@@ -590,7 +590,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
 
         {/* Duration */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Duration (mins)
           </p>
@@ -602,8 +602,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 onClick={() => saveDuration(d)}
                 className={`px-3 h-10 rounded-lg text-sm font-bold border transition-all duration-100 cursor-pointer
                   ${duration === d
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-400"
                   }`}
               >
                 {d}m
@@ -613,7 +613,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
 
         {/* Difficulty */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Difficulty
           </p>
@@ -625,8 +625,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 onClick={() => saveDifficulty(d)}
                 className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100 cursor-pointer
                   ${difficulty === d
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                    : "bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-gray-400"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-400"
                   }`}
               >
                 <span className="capitalize">{d}</span>
@@ -641,31 +641,31 @@ export default function TestBuilder({ track = "jee", access = null }) {
         {/* Summary + Start */}
         <div className={`rounded-2xl p-5 border-2 transition-all duration-200
           ${canStart && !customTestBlocked
-            ? "bg-black dark:bg-white border-black dark:border-white"
-            : "bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+            ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-700/60"
+            : "bg-gray-100 dark:bg-[var(--surface-elevated)] border-gray-200 dark:border-[var(--border)]"
           }`}
         >
           {canStart ? (
             <>
               <div className="mb-4 space-y-2">
-                <p className={`text-xs font-bold uppercase tracking-widest ${customTestBlocked ? "text-gray-400 dark:text-gray-500" : "text-white/50 dark:text-black/50"}`}>
+                <p className={`text-xs font-bold uppercase tracking-widest ${customTestBlocked ? "text-gray-400 dark:text-gray-500" : "text-indigo-700/70 dark:text-indigo-300/70"}`}>
                   Test Summary
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {validSelectedSubjects.map((s) => (
-                    <span key={s} className={`text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${customTestBlocked ? "bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-300" : "bg-white/10 dark:bg-black/10 text-white dark:text-black"}`}>
+                    <span key={s} className={`text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${customTestBlocked ? "bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-300" : "bg-indigo-100/70 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300"}`}>
                       <span className="w-3 h-3 flex items-center justify-center">{SUBJECTS[s]?.icon}</span> {s}
                     </span>
                   ))}
                 </div>
-                <p className={`text-xs ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-white/70 dark:text-black/70"}`}>
+                <p className={`text-xs ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-indigo-700/80 dark:text-indigo-300/80"}`}>
                   {totalChapters} chapters · {questionCount} questions · {duration} mins
                 </p>
-                <p className={`text-xs capitalize ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-white/70 dark:text-black/70"}`}>
+                <p className={`text-xs capitalize ${customTestBlocked ? "text-gray-500 dark:text-gray-400" : "text-indigo-700/80 dark:text-indigo-300/80"}`}>
                   {difficulty} difficulty
                 </p>
                 {customTestUsage && !access?.isPro && (
-                  <p className={`text-xs font-semibold ${customTestBlocked ? "text-rose-500" : "text-white/70 dark:text-black/70"}`}>
+                  <p className={`text-xs font-semibold ${customTestBlocked ? "text-rose-500" : "text-indigo-700/80 dark:text-indigo-300/80"}`}>
                     {customTestBlocked
                       ? "You’ve used your 2 free custom tests this month."
                       : `${customTestUsage.remaining} of ${customTestUsage.limit} free custom tests left this month.`}
@@ -679,7 +679,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 className={`w-full py-3 rounded-xl text-sm font-black transition-opacity ${
                   customTestBlocked
                     ? "cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-700 dark:text-gray-400"
-                    : "cursor-pointer bg-white text-black hover:opacity-90 dark:bg-black dark:text-white"
+                    : "cursor-pointer bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white"
                 }`}
               >
                 Start Test →
@@ -687,7 +687,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
               {customTestBlocked && (
                 <Link
                   href="/pro"
-                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-3 text-sm font-black text-white"
+                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-black text-white"
                 >
                   Upgrade to Pro
                 </Link>

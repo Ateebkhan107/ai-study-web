@@ -20,9 +20,9 @@ const SUBJECT_COLORS = {
     border: "border-emerald-500/20",
   },
   Mathematics: {
-    bg: "bg-violet-500/10 dark:bg-violet-400/10",
-    text: "text-violet-600 dark:text-violet-400",
-    border: "border-violet-500/20",
+    bg: "bg-brand/8 dark:bg-indigo-400/10",
+    text: "text-indigo-600 dark:text-indigo-400",
+    border: "border-indigo-500/20",
   },
 };
 
@@ -65,7 +65,7 @@ const OPTION_STYLES = {
   },
   neutral: {
     wrapper:
-      "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-600",
+      "border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)]/50 hover:border-slate-300 dark:hover:border-slate-600",
     label:
       "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300",
     text: "text-slate-700 dark:text-slate-300",

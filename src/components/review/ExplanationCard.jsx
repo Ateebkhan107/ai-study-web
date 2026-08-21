@@ -31,9 +31,9 @@ export default function ExplanationCard({
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 overflow-hidden">
+    <div className="rounded-2xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 overflow-hidden">
       {/* Tab Bar */}
-      <div className="flex border-b border-slate-200 dark:border-slate-700">
+      <div className="flex border-b border-slate-200 dark:border-[var(--border)]">
         {[
           {
             id: "explanation",

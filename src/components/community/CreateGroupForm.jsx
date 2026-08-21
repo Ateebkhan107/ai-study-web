@@ -80,7 +80,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
             maxLength={60}
             placeholder="e.g. JEE Physics Mastery"
             required
-            className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
           <p className="mt-1 text-xs text-slate-400">{name.length}/60</p>
         </div>
@@ -96,7 +96,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
             maxLength={300}
             rows={3}
             placeholder="What is this group about?"
-            className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+            className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
           />
           <p className="mt-1 text-xs text-slate-400">{description.length}/300</p>
         </div>
@@ -118,7 +118,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
                 className={`p-3 rounded-xl border text-left transition-all ${
                   privacy === opt.value
                     ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10"
-                    : "border-slate-200 dark:border-slate-700 hover:border-indigo-300"
+                    : "border-slate-200 dark:border-[var(--border)] hover:border-indigo-300"
                 }`}
               >
                 <p className="font-semibold text-sm text-slate-900 dark:text-white">{opt.label}</p>
@@ -138,7 +138,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
           type="submit"
           disabled={isSubmitting}
           id="create-group-submit"
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+          className="w-full py-3 rounded-xl bg-brand text-white font-bold text-sm shadow-lg shadow-brand/20 hover:shadow-brand/30 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>

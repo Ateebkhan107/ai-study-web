@@ -103,7 +103,7 @@ export default function InstituteHome() {
         </div>
       )}
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-5">
+      <section className="rounded-2xl border border-slate-200 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div>
             <h2 className="text-sm font-black uppercase tracking-widest text-slate-400">My Institutes</h2>
@@ -118,7 +118,7 @@ export default function InstituteHome() {
         {loading ? (
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {[0, 1, 2].map((item) => (
-              <div key={item} className="h-32 rounded-2xl bg-slate-100 dark:bg-slate-800" />
+              <div key={item} className="h-32 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)]" />
             ))}
           </div>
         ) : institutes.length ? (
@@ -127,10 +127,10 @@ export default function InstituteHome() {
               <Link
                 key={institute.id}
                 href={`/institute/${institute.slug}`}
-                className="group rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white hover:shadow-md dark:border-slate-800 dark:bg-slate-950/40 dark:hover:border-indigo-500/30 dark:hover:bg-slate-950"
+                className="group rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-[var(--card)] hover:shadow-md dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 dark:hover:border-indigo-500/30 dark:hover:bg-slate-950"
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-indigo-600 shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--card)] text-indigo-600 shadow-sm ring-1 ring-slate-200 dark:bg-[var(--surface)] dark:ring-slate-800">
                     {institute.logo_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={institute.logo_url} alt="" className="h-full w-full rounded-xl object-cover" />
@@ -154,8 +154,8 @@ export default function InstituteHome() {
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-8 text-center dark:border-slate-800 dark:bg-slate-950/40">
-            <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-slate-400 shadow-sm dark:bg-slate-900">
+          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-8 text-center dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40">
+            <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--card)] text-slate-400 shadow-sm dark:bg-[var(--surface)]">
               <GraduationCap className="h-5 w-5" />
             </div>
             <h3 className="text-base font-black text-slate-950 dark:text-white">No institutes yet</h3>
@@ -180,7 +180,7 @@ export default function InstituteHome() {
 
       {modalOpen && (
         <div className="fixed inset-0 z-[70] flex items-end bg-slate-950/40 p-0 backdrop-blur-sm sm:items-center sm:justify-center sm:p-4">
-          <div className="w-full rounded-t-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:max-w-lg sm:rounded-3xl">
+          <div className="w-full rounded-t-3xl border border-slate-200 bg-[var(--card)] p-5 shadow-2xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:max-w-lg sm:rounded-3xl">
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-black text-slate-950 dark:text-white">Create Institute</h2>
@@ -189,7 +189,7 @@ export default function InstituteHome() {
               <button
                 type="button"
                 onClick={() => setModalOpen(false)}
-                className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-slate-800"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -203,7 +203,7 @@ export default function InstituteHome() {
                   placeholder="Ateeb Coaching"
                   required
                   minLength={2}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white"
                 />
               </div>
               <div>
@@ -212,7 +212,7 @@ export default function InstituteHome() {
                   value={form.slug}
                   onChange={(event) => setForm({ ...form, slug: event.target.value })}
                   placeholder="ateeb-coaching"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white"
                 />
                 <p className="mt-1 text-xs font-medium text-slate-400">Optional. If empty, PrepZii will create one from the name.</p>
               </div>
@@ -222,14 +222,14 @@ export default function InstituteHome() {
                   value={form.logo_url}
                   onChange={(event) => setForm({ ...form, logo_url: event.target.value })}
                   placeholder="https://..."
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white"
                 />
               </div>
               <div className="flex justify-end gap-2 pt-2">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-slate-800 dark:text-slate-300"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black text-slate-600 dark:border-[var(--border-subtle)] dark:text-slate-300"
                 >
                   Cancel
                 </button>

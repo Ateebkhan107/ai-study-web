@@ -18,7 +18,7 @@ export default async function Page() {
       <div className="mb-7">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-2"
-          style={{ color: "#6366F1", letterSpacing: "0.15em" }}
+          style={{ color: "#C2723F", letterSpacing: "0.15em" }}
         >
           Get Started
         </p>
@@ -38,9 +38,9 @@ export default async function Page() {
         className="rounded-2xl p-6"
         style={{
           background: "rgba(15,19,32,0.85)",
-          border: "1px solid rgba(99,102,241,0.25)",
+          border: "1px solid rgba(194,114,63,0.25)",
           backdropFilter: "blur(16px)",
-          boxShadow: "0 0 40px rgba(99,102,241,0.08), inset 0 1px 0 rgba(165,180,252,0.06)",
+          boxShadow: "0 0 40px rgba(194,114,63,0.08), inset 0 1px 0 rgba(165,180,252,0.06)",
         }}
       >
         <SignUp
@@ -73,11 +73,11 @@ export default async function Page() {
             },
             variables: {
               colorBackground: "transparent",
-              colorInputBackground: "rgba(99,102,241,0.06)",
+              colorInputBackground: "rgba(194,114,63,0.06)",
               colorInputText: "#E0E7FF",
               colorText: "#94A3B8",
               colorTextSecondary: "#64748B",
-              colorPrimary: "#6366F1",
+              colorPrimary: "#C2723F",
               colorTextOnPrimaryBackground: "#ffffff",
               borderRadius: "0.75rem",
               colorNeutral: "#334155",

@@ -78,9 +78,9 @@ export default function ReviewPage() {
   const progressPct = ((currentIndex + 1) / mockQuestions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)]">
       {/* ── Top Navigation Bar ── */}
-      <header className="sticky top-0 z-40 border-b border-slate-200/60 dark:border-slate-700/50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-3">
           {/* Back */}
           <Link
@@ -107,9 +107,9 @@ export default function ReviewPage() {
             <span>
               Q{currentIndex + 1} of {mockQuestions.length}
             </span>
-            <div className="w-24 h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+            <div className="w-24 h-1.5 rounded-full bg-slate-200 dark:bg-[var(--surface-elevated)] overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-300"
+                className="h-full rounded-full bg-brand transition-all duration-300"
                 style={{ width: `${progressPct}%` }}
               />
             </div>
@@ -118,7 +118,7 @@ export default function ReviewPage() {
           {/* Mobile sidebar toggle */}
           <button
             onClick={() => setSidebarOpen((o) => !o)}
-            className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200/60 dark:border-slate-700/50 text-xs font-medium text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 transition-colors"
+            className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 text-xs font-medium text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -133,7 +133,7 @@ export default function ReviewPage() {
           {/* ── Main Content ── */}
           <main className="flex-1 min-w-0 space-y-4">
             {/* Question Card */}
-            <div className="rounded-3xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl p-6 shadow-sm animate-slideUp">
+            <div className="rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl p-6 shadow-sm animate-slideUp">
               <QuestionCard
                 question={currentQuestion}
                 index={currentIndex}
@@ -153,7 +153,7 @@ export default function ReviewPage() {
               <button
                 onClick={handlePrev}
                 disabled={!hasPrev}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-indigo-500/30 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-indigo-500/30 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -162,7 +162,7 @@ export default function ReviewPage() {
               </button>
 
               {/* Question counter pill */}
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-[var(--surface-elevated)] px-3 py-1.5 rounded-full">
                 {currentPos + 1} / {visibleIndices.length}
                 {filter !== "all" && (
                   <span className="ml-1 text-indigo-500 dark:text-indigo-400">
@@ -174,7 +174,7 @@ export default function ReviewPage() {
               <button
                 onClick={handleNext}
                 disabled={!hasNext}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
               >
                 Next
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -209,7 +209,7 @@ export default function ReviewPage() {
             onClick={() => setSidebarOpen(false)}
           />
           {/* Drawer */}
-          <div className="lg:hidden fixed right-0 top-0 bottom-0 z-50 w-80 bg-white dark:bg-[#0f172a] border-l border-slate-200/60 dark:border-slate-700/50 overflow-y-auto p-5 shadow-xl animate-slideInRight">
+          <div className="lg:hidden fixed right-0 top-0 bottom-0 z-50 w-80 bg-[var(--card)] dark:bg-[var(--surface)] border-l border-slate-200/60 dark:border-[var(--border)]/50 overflow-y-auto p-5 shadow-xl animate-slideInRight">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-sm font-semibold text-slate-800 dark:text-slate-100">
                 Stats & Navigator

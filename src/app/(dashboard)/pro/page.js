@@ -141,14 +141,14 @@ export default function ProPage() {
     <PageWrapper
       title=""
       badge="✦ PRO"
-      badgeVariant="purple"
+      badgeVariant="brand"
     >
       {/* ── Hero ── */}
       <section className="text-center space-y-5 animate-slideUp">
         <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
           Unlock your full
           <br />
-          <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-indigo-500 via-brand-hover to-pink-500 bg-clip-text text-transparent">
             potential
           </span>
         </h1>
@@ -167,7 +167,7 @@ export default function ProPage() {
       {/* ── Plan Selector ── */}
       <section className="flex flex-col items-center gap-8 animate-slideUp" style={{ animationDelay: "75ms" }}>
         {/* Toggle */}
-        <div className="inline-flex items-center bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 p-1.5 rounded-2xl gap-1">
+        <div className="inline-flex items-center bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 p-1.5 rounded-2xl gap-1">
           {PLANS.map((p) => (
             <button
               key={p.id}
@@ -176,7 +176,7 @@ export default function ProPage() {
               className={`relative flex min-h-14 flex-col items-center justify-center rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200
                 ${
                   selectedPlan === p.id
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
+                    ? "bg-brand text-white shadow-sm"
                     : currentPlan && PLAN_RANK[p.id] <= PLAN_RANK[currentPlan]
                       ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
                       : "cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
@@ -220,7 +220,7 @@ export default function ProPage() {
           </p>
 
           {plan.badge && (
-            <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white uppercase tracking-widest shadow-sm shadow-indigo-500/20">
+            <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-brand text-white uppercase tracking-widest shadow-sm shadow-brand/20">
               {plan.badge}
             </span>
           )}
@@ -230,7 +230,7 @@ export default function ProPage() {
         <button
           onClick={handleSubscribe}
           disabled={loading || currentPlan === "yearly"}
-          className="group w-full max-w-sm py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
+          className="group w-full max-w-sm py-4 rounded-2xl bg-brand text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-brand/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           {loading ? (
             <>
@@ -271,7 +271,7 @@ export default function ProPage() {
             <div className="space-y-3">
               {FREE_FEATURES.map((f) => (
                 <div key={f.text} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-lg bg-slate-100 dark:bg-[var(--surface-elevated)] flex items-center justify-center flex-shrink-0 mt-0.5">
                     {f.included ? (
                       <Check className="w-3 h-3 text-emerald-500" />
                     ) : (
@@ -287,7 +287,7 @@ export default function ProPage() {
           </div>
 
           {/* PRO Plan */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-600 p-6 shadow-xl shadow-indigo-500/15">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover dark:from-brand dark:to-brand-hover p-6 shadow-xl shadow-brand/15">
             {/* Dot pattern overlay */}
             <div
               className="absolute inset-0 opacity-10"
@@ -306,7 +306,7 @@ export default function ProPage() {
                 </span>
                 <h3 className="text-xl font-black text-white mt-1 flex items-center gap-2">
                   {selectedTrack} PRO
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/15 text-white/80 backdrop-blur-sm">
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--card)]/15 text-white/80 backdrop-blur-sm">
                     All features
                   </span>
                 </h3>
@@ -328,7 +328,7 @@ export default function ProPage() {
                 {PRO_FEATURES.map((f) => (
                   <div key={f.text} className="flex items-start gap-3">
                     <div className={`w-5 h-5 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                      f.hot ? "bg-amber-400/20" : "bg-white/10"
+                      f.hot ? "bg-amber-400/20" : "bg-[var(--card)]/10"
                     }`}>
                       {f.hot ? (
                         <Star className="w-3 h-3 text-amber-300" fill="currentColor" />
@@ -388,7 +388,7 @@ export default function ProPage() {
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 aria-expanded={openFaq === i}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-slate-50/50 dark:hover:bg-[var(--card)]/5 transition-colors cursor-pointer"
               >
                 <span className="text-sm font-semibold text-slate-900 dark:text-white">
                   {faq.q}
@@ -401,7 +401,7 @@ export default function ProPage() {
               </button>
 
               {openFaq === i && (
-                <div className="px-5 pb-4 text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100/50 dark:border-slate-800/50 pt-3">
+                <div className="px-5 pb-4 text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100/50 dark:border-[var(--border-subtle)]/50 pt-3">
                   {faq.a}
                 </div>
               )}
@@ -412,7 +412,7 @@ export default function ProPage() {
 
       {/* ── Bottom CTA ── */}
       <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-600 p-8 sm:p-10 text-center shadow-xl shadow-indigo-500/15">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover dark:from-brand dark:to-brand-hover p-8 sm:p-10 text-center shadow-xl shadow-brand/15">
           {/* Dot pattern */}
           <div
             className="absolute inset-0 opacity-10"
@@ -435,7 +435,7 @@ export default function ProPage() {
             <button
               onClick={handleSubscribe}
               disabled={loading || currentPlan === "yearly"}
-              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-[var(--card)] text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
             >
               {loading ? "Processing..." : currentPlan === "yearly" ? "Yearly plan active" : currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

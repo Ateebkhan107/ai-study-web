@@ -130,9 +130,9 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
 
   return (
-    <div className="mx-auto flex h-full max-h-full w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white/70 shadow-sm dark:border-slate-800 dark:bg-slate-950/40 md:rounded-2xl md:border">
-      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 p-2.5 dark:border-slate-800 dark:bg-slate-950/50 md:block">
-        <Link href="/community" className="mb-2 inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-500 hover:bg-white hover:text-indigo-600 dark:hover:bg-slate-900">
+    <div className="mx-auto flex h-full max-h-full w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-[var(--card)]/70 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 md:rounded-2xl md:border">
+      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 p-2.5 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/50 md:block">
+        <Link href="/community" className="mb-2 inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-500 hover:bg-[var(--card)] hover:text-indigo-600 dark:hover:bg-slate-900">
           <ArrowLeft className="h-4 w-4" />
           Community
         </Link>
@@ -145,7 +145,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
               className={`block rounded-xl px-3 py-2 transition ${
                 item.id === groupId
                   ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20"
-                  : "text-slate-600 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+                  : "text-slate-600 hover:bg-[var(--card)] hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
               }`}
             >
               <div className="flex items-center justify-between gap-2">
@@ -160,7 +160,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
 
       <div className="flex min-w-0 flex-1 flex-col">
       {/* Group header */}
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md flex items-center gap-3">
+      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-[var(--border-subtle)] bg-[var(--card)]/80 dark:bg-[var(--surface)]/70 backdrop-blur-md flex items-center gap-3">
         <Link href="/community" className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <ArrowLeft className="w-4 h-4" />
         </Link>
@@ -208,7 +208,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
       ) : (
         <>
           {managementTabs.length > 0 && (
-          <div className="px-4 border-b border-slate-200 dark:border-slate-800 flex gap-1 overflow-x-auto bg-white/40 dark:bg-slate-900/40">
+          <div className="px-4 border-b border-slate-200 dark:border-[var(--border-subtle)] flex gap-1 overflow-x-auto bg-[var(--card)]/40 dark:bg-[var(--surface)]/40">
             {["Chat", ...managementTabs].map((tab) => (
               <button
                 key={tab}
@@ -260,7 +260,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
                       maxLength={60}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                   <div>
@@ -270,7 +270,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                       onChange={(e) => setEditDesc(e.target.value)}
                       maxLength={300}
                       rows={3}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
                     />
                   </div>
                   <div>
@@ -284,7 +284,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                           className={`p-3 rounded-xl border text-sm font-semibold transition-all ${
                             editPrivacy === opt
                               ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                              : "border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"
+                              : "border-slate-200 dark:border-[var(--border)] text-slate-700 dark:text-slate-300"
                           }`}
                         >
                           {opt}

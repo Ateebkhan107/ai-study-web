@@ -41,9 +41,9 @@ export default function ResultPage() {
   // ── Loading State ──
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="flex flex-col items-center gap-3 animate-slideUp">
-          <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-slate-800 border-t-indigo-500 animate-spin" />
+          <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
           <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
             Loading Result...
           </p>
@@ -55,14 +55,14 @@ export default function ResultPage() {
   // ── Not Found ──
   if (!attempt) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="text-center animate-slideUp">
           <div className="text-5xl mb-4">📭</div>
           <h2 className="text-xl font-black text-slate-900 dark:text-white">Result not found</h2>
           <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">This test result may have been removed.</p>
           <button
             onClick={() => router.push("/test")}
-            className="mt-6 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+            className="mt-6 px-6 py-2.5 rounded-xl bg-brand text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
           >
             Back to Tests
           </button>
@@ -105,7 +105,7 @@ export default function ResultPage() {
   const r = 54;
   const circ = 2 * Math.PI * r;
   const filled = (Math.min(scorePct, 100) / 100) * circ;
-  const ringColor = accuracy >= 90 ? "#10B981" : accuracy >= 70 ? "#6366F1" : "#F59E0B";
+  const ringColor = accuracy >= 90 ? "#10B981" : accuracy >= 70 ? "#C2723F" : "#F59E0B";
 
   // Stat cards
   const stats = [
@@ -120,19 +120,19 @@ export default function ResultPage() {
   const colorMap = {
     emerald: "bg-emerald-50 dark:bg-emerald-500/10 border-emerald-100 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400",
     rose: "bg-rose-50 dark:bg-rose-500/10 border-rose-100 dark:border-rose-500/20 text-rose-600 dark:text-rose-400",
-    slate: "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50 text-slate-600 dark:text-slate-400",
+    slate: "bg-slate-50 dark:bg-[var(--surface-elevated)]/50 border-slate-200 dark:border-[var(--border)]/50 text-slate-600 dark:text-slate-400",
     indigo: "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400",
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] flex items-center justify-center p-4 sm:p-6">
       {/* Background accents */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute top-0 left-[20%] w-[40%] h-[40%] rounded-full bg-indigo-500/8 dark:bg-indigo-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-[10%] w-[35%] h-[35%] rounded-full bg-violet-500/8 dark:bg-violet-500/10 blur-[100px]" />
+        <div className="absolute bottom-0 right-[10%] w-[35%] h-[35%] rounded-full bg-brand/8 dark:bg-brand/8 blur-[100px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-slate-700/50 p-8 sm:p-10 shadow-sm text-center animate-slideUp">
+      <div className="relative z-10 w-full max-w-2xl bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-8 sm:p-10 shadow-sm text-center animate-slideUp">
 
         {/* ── Score Ring ── */}
         <div className="relative w-36 h-36 mx-auto mb-6">
@@ -168,15 +168,15 @@ export default function ResultPage() {
         </div>
 
         {/* ── Session Summary ── */}
-        <div className="mb-8 p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700/50">
+        <div className="mb-8 p-4 rounded-2xl bg-slate-50/80 dark:bg-[var(--surface-elevated)]/30 border border-slate-100 dark:border-[var(--border)]/50">
           <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">
             Session Summary
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
-            <span className="px-4 py-2 bg-white/80 dark:bg-slate-800/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-slate-700/50">
+            <span className="px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
               📝 {attempt.total_questions} Questions
             </span>
-            <span className="px-4 py-2 bg-white/80 dark:bg-slate-800/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-slate-700/50">
+            <span className="px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
               ✍️ {attempt.attempted} Attempted
             </span>
           </div>
@@ -201,14 +201,14 @@ export default function ResultPage() {
         <div className="flex flex-col gap-3">
           <button
             onClick={() => router.push(`/test/review/${id}`)}
-            className="py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+            className="py-3.5 rounded-xl bg-brand text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
           >
             Review Answers →
           </button>
 
           <button
             onClick={() => router.push("/test/history")}
-            className="py-3.5 rounded-xl border border-slate-200/60 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30 font-bold text-sm text-slate-700 dark:text-slate-300 hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
+            className="py-3.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30 font-bold text-sm text-slate-700 dark:text-slate-300 hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
           >
             View Test History
           </button>

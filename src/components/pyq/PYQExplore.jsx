@@ -10,15 +10,15 @@ const SUBJECT_CONFIG = {
   "All":       { icon: <BookOpen className="w-6 h-6" />, color: "slate" },
   "Physics":   { icon: <Atom className="w-6 h-6" />, color: "blue" },
   "Chemistry": { icon: <FlaskConical className="w-6 h-6" />, color: "green" },
-  "Maths":     { icon: <Calculator className="w-6 h-6" />, color: "purple" },
+  "Maths":     { icon: <Calculator className="w-6 h-6" />, color: "maths" },
   "Biology":   { icon: <Dna className="w-6 h-6" />, color: "rose" },
 };
 
 const colorMap = {
-  slate:  { bg: "bg-slate-50 dark:bg-slate-900/30", border: "border-slate-200 dark:border-slate-800", text: "text-slate-700 dark:text-slate-300" },
+  slate:  { bg: "bg-slate-50 dark:bg-[var(--surface)]/30", border: "border-slate-200 dark:border-[var(--border-subtle)]", text: "text-slate-700 dark:text-slate-300" },
   blue:   { bg: "bg-blue-50 dark:bg-blue-950/30", border: "border-blue-200 dark:border-blue-800", text: "text-blue-700 dark:text-blue-300" },
   green:  { bg: "bg-emerald-50 dark:bg-emerald-950/30", border: "border-emerald-200 dark:border-emerald-800", text: "text-emerald-700 dark:text-emerald-300" },
-  purple: { bg: "bg-violet-50 dark:bg-violet-950/30", border: "border-violet-200 dark:border-violet-800", text: "text-violet-700 dark:text-violet-300" },
+  maths: { bg: "bg-indigo-50 dark:bg-indigo-950/30", border: "border-indigo-200 dark:border-indigo-800", text: "text-indigo-700 dark:text-indigo-300" },
   rose:   { bg: "bg-rose-50 dark:bg-rose-950/30", border: "border-rose-200 dark:border-rose-800", text: "text-rose-700 dark:text-rose-300" },
 };
 
@@ -67,7 +67,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
         <div className="lg:col-span-2 space-y-5">
           
           {/* 01 - Choose Subjects Card */}
-          <div className="bg-white dark:bg-gray-900/60 backdrop-blur-md border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)]/60 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
               01 — Choose Subject
             </p>
@@ -86,7 +86,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                     className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
                       ${isSelected
                         ? `${c.bg} ${c.border} ${c.text}`
-                        : "border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-gray-800/30"
+                        : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/30"
                       }`}
                   >
                     <span className="mb-1 flex items-center justify-center">{data.icon}</span>
@@ -98,7 +98,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
           </div>
 
           {/* 02 - Target Scope Parameters */}
-          <div className="bg-white dark:bg-gray-900/60 backdrop-blur-md border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)]/60 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
               02 — Scope Parameters
             </p>
@@ -115,8 +115,8 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                       onClick={() => setFilterExam(exam)}
                       className={`px-4 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                         ${filterExam === exam
-                          ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                          : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                          ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                          : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                         }`}
                     >
                       {exam}
@@ -136,8 +136,8 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                       onClick={() => setFilterYear(yr)}
                       className={`px-4 h-10 rounded-lg text-sm font-bold border transition-all duration-100
                         ${filterYear === yr
-                          ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                          : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                          ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                          : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                         }`}
                     >
                       {yr}
@@ -153,7 +153,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
         <div className="space-y-5">
           
           {/* Difficulty Metric Settings */}
-          <div className="bg-white dark:bg-gray-900/60 backdrop-blur-md border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)]/60 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
               Difficulty
             </p>
@@ -165,8 +165,8 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                   onClick={() => setFilterDiff(d)}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100
                     ${filterDiff === d
-                      ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                      : "bg-gray-50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
+                      ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
+                      : "bg-gray-50 dark:bg-[var(--surface-elevated)]/30 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border-subtle)] hover:border-gray-300 dark:hover:border-gray-600"
                     }`}
                 >
                   <span>{d}</span>
@@ -181,7 +181,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
           </div>
 
           {/* Deep Keyword Exploration Card */}
-          <div className="bg-white dark:bg-gray-900/60 backdrop-blur-md border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+          <div className="bg-[var(--card)] dark:bg-[var(--surface)]/60 backdrop-blur-md border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
               Deep Search
             </p>
@@ -191,11 +191,11 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search chapters, concepts..."
-              className="w-full px-4 py-3 mb-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/20 text-sm text-black dark:text-white placeholder-gray-400 outline-none focus:border-indigo-500 transition-colors"
+              className="w-full px-4 py-3 mb-5 rounded-xl border border-gray-200 dark:border-[var(--border-subtle)] bg-gray-50/50 dark:bg-[var(--surface-elevated)]/20 text-sm text-black dark:text-white placeholder-gray-400 outline-none focus:border-indigo-500 transition-colors"
             />
 
             {/* Repeat Metric Trigger */}
-            <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-[var(--border-subtle)]">
               <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                 High Yield Only
               </span>
@@ -204,15 +204,15 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                 onClick={() => setRepeatOnly(!repeatOnly)}
                 className={`w-11 h-6 rounded-full border-2 transition-all duration-200 relative
                   ${repeatOnly
-                    ? "bg-black dark:bg-white border-black dark:border-white"
-                    : "bg-gray-200 dark:bg-gray-800 border-gray-200 dark:border-gray-800"
+                    ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-700/60"
+                    : "bg-gray-200 dark:bg-[var(--surface-elevated)] border-gray-200 dark:border-[var(--border-subtle)]"
                   }`}
               >
                 <span
                   className={`absolute top-0.5 w-4 h-4 rounded-full transition-all duration-200
                     ${repeatOnly
-                      ? "left-[18px] bg-white dark:bg-black"
-                      : "left-0.5 bg-white dark:bg-gray-400"
+                      ? "left-[18px] bg-[var(--card)] dark:bg-[var(--surface-elevated)]"
+                      : "left-0.5 bg-[var(--card)] dark:bg-gray-400"
                     }`}
                 />
               </button>
@@ -224,7 +224,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
 
       {/* ── BOTTOM: Render Results Matrix ── */}
       <div>
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs font-black text-black dark:text-white uppercase tracking-widest">
             {filtered.length} {filtered.length === 1 ? "Question" : "Questions"} Isolated
           </p>
@@ -243,7 +243,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
               />
             ))
           ) : (
-            <div className="text-center py-20 bg-gray-50 dark:bg-gray-900/20 border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl flex flex-col items-center">
+            <div className="text-center py-20 bg-gray-50 dark:bg-[var(--surface)]/20 border border-dashed border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl flex flex-col items-center">
               <Search className="w-10 h-10 mb-3 text-gray-400" />
               <p className="text-lg font-bold text-gray-900 dark:text-white">No questions isolated</p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Try resetting filtering criteria matrices.</p>
@@ -257,7 +257,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                   setSearch("");
                   setRepeatOnly(false);
                 }}
-                className="mt-6 px-6 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-bold shadow-md"
+                className="mt-6 px-6 py-2 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white dark:text-white text-sm font-bold shadow-md"
               >
                 Reset All Filters
               </button>

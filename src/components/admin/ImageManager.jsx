@@ -6,7 +6,7 @@ export default function ImageManager() {
   const [selectedExamId, setSelectedExamId] = useState("");
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const [uploading, setUploading] = useState(false);
   const [filterMissing, setFilterMissing] = useState(false);
 
@@ -77,7 +77,7 @@ export default function ImageManager() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id: currentQ.id, [field]: data.url })
         });
-        
+
         // Update local state
         const newQs = [...questions];
         const qIndex = newQs.findIndex(q => q.id === currentQ.id);
@@ -95,7 +95,7 @@ export default function ImageManager() {
     setUploading(false);
   }
 
-  const filteredQuestions = filterMissing 
+  const filteredQuestions = filterMissing
     ? questions.filter(q => !q.question_image && !q.option_a_image && !q.option_b_image && !q.option_c_image && !q.option_d_image && !q.explanation_image)
     : questions;
 
@@ -114,12 +114,12 @@ export default function ImageManager() {
       <h2 className="font-black text-xl flex items-center gap-2">
         Image Manager <ImageIcon className="w-6 h-6" />
       </h2>
-      
+
       <div className="flex gap-4 items-end">
         <div className="flex-1">
           <label className="block text-sm font-bold mb-2">Select Exam</label>
-          <select 
-            value={selectedExamId} 
+          <select
+            value={selectedExamId}
             onChange={(e) => setSelectedExamId(e.target.value)}
             className="w-full border p-3 rounded-xl bg-transparent"
           >
@@ -131,16 +131,16 @@ export default function ImageManager() {
             ))}
           </select>
         </div>
-        
+
         <div className="flex items-center gap-2 mb-3 border p-3 rounded-xl">
-          <input 
-            type="checkbox" 
-            id="missingFilter" 
-            checked={filterMissing} 
+          <input
+            type="checkbox"
+            id="missingFilter"
+            checked={filterMissing}
             onChange={e => {
               setFilterMissing(e.target.checked);
               setCurrentIndex(0);
-            }} 
+            }}
             className="w-5 h-5"
           />
           <label htmlFor="missingFilter" className="font-medium cursor-pointer">Only show questions without ANY images</label>
@@ -148,30 +148,30 @@ export default function ImageManager() {
       </div>
 
       {filteredQuestions.length > 0 && currentQ ? (
-        <div className="mt-6 p-4 border rounded-xl bg-gray-50/5 dark:bg-gray-900/50">
+        <div className="mt-6 p-4 border rounded-xl bg-gray-50/5 dark:bg-[var(--surface)]/50">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-bold">Question {currentIndex + 1} of {filteredQuestions.length}</h3>
             <div className="space-x-2">
-              <button 
+              <button
                 onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                 disabled={currentIndex === 0}
-                className="bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded disabled:opacity-50"
+                className="bg-gray-200 dark:bg-[var(--surface-elevated)] px-4 py-2 rounded disabled:opacity-50"
               >
                 Previous
               </button>
-              <button 
+              <button
                 onClick={handleSaveAndNext}
-                className="bg-black text-white px-4 py-2 rounded"
+                className="bg-brand text-white px-4 py-2 rounded"
               >
                 Save & Next
               </button>
             </div>
           </div>
-          
-          <div className="p-4 bg-white dark:bg-black rounded-lg border mb-4 whitespace-pre-wrap">
+
+          <div className="p-4 bg-[var(--card)] dark:bg-[var(--surface-elevated)] rounded-lg border mb-4 whitespace-pre-wrap">
             {currentQ.question}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {['question_image', 'option_a_image', 'option_b_image', 'option_c_image', 'option_d_image', 'explanation_image'].map(field => (
               <div key={field} className="border p-4 rounded-xl flex flex-col justify-between">
@@ -183,15 +183,15 @@ export default function ImageManager() {
                     <span className="text-red-500 font-bold text-sm">❌ Missing</span>
                   )}
                 </div>
-                
+
                 {currentQ[field] && (
-                  <div className="mb-3 flex justify-center bg-gray-100 dark:bg-gray-800 rounded-lg p-2 h-32">
+                  <div className="mb-3 flex justify-center bg-gray-100 dark:bg-[var(--surface-elevated)] rounded-lg p-2 h-32">
                     <img src={currentQ[field]} alt={field} className="max-h-full object-contain" />
                   </div>
                 )}
-                
-                <input 
-                  type="file" 
+
+                <input
+                  type="file"
                   accept="image/*"
                   onChange={(e) => handleImageUpload(e, field)}
                   disabled={uploading}

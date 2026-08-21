@@ -117,7 +117,7 @@ export default function Navbar() {
       } ${
         isActive(item.href)
           ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
-          : "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/[0.06] dark:hover:text-slate-100"
+          : "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
       }`}
     >
       <span className="relative z-10 whitespace-nowrap">{item.name}</span>
@@ -143,7 +143,7 @@ export default function Navbar() {
   ) : null;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/90 shadow-[0_1px_18px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-colors duration-200 dark:border-slate-800/80 dark:bg-[rgba(2,6,23,0.92)] dark:shadow-none">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
 
         <div className="flex min-w-0 shrink-0 items-center">
@@ -163,7 +163,7 @@ export default function Navbar() {
           className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
           aria-label="Primary navigation"
         >
-          <div className="flex h-11 max-w-full items-center gap-0.5 rounded-xl border border-slate-200/70 bg-slate-100/55 p-1 dark:border-slate-800 dark:bg-slate-950/60">
+          <div className="flex h-11 max-w-full items-center gap-0.5 rounded-xl border border-slate-200/70 bg-slate-100/55 p-1 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/60">
           {visibleNavItems.map((item) => renderNavLink(item))}
           </div>
         </nav>
@@ -175,7 +175,7 @@ export default function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
             aria-label="Toggle theme"
           >
             <span className="flex items-center justify-center">
@@ -194,7 +194,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-white/[0.06] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px] lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px] lg:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
           >
@@ -205,7 +205,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-xl dark:border-slate-800/80 dark:bg-[#020617]/95 lg:hidden">
+        <div className="border-t border-slate-200/70 bg-[var(--card)]/95 px-4 py-3 shadow-lg backdrop-blur-xl dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/95 lg:hidden">
           <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1.5 sm:grid-cols-2" aria-label="Mobile navigation">
             {visibleNavItems.map((item) => renderNavLink(item, true))}
             {proLink && (

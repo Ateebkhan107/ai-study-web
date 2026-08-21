@@ -41,7 +41,7 @@ export default function UserGreeting() {
   if (!mounted) {
     return (
       <div className="py-1">
-        <div className="h-11 w-64 animate-pulse rounded-2xl bg-slate-200/50 dark:bg-slate-800/50 sm:h-12 sm:w-96 lg:h-14" />
+        <div className="h-11 w-64 animate-pulse rounded-2xl bg-slate-200/50 dark:bg-[var(--surface-elevated)]/50 sm:h-12 sm:w-96 lg:h-14" />
       </div>
     );
   }

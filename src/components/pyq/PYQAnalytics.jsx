@@ -8,7 +8,7 @@ const RECOMMENDATIONS = [
     icon: <Target className="w-6 h-6 text-indigo-500" />,
     text: "Kinematics — 18 questions, top JEE priority. Focus on projectile motion and relative velocity.",
     tag: "Must Do",
-    tagClass: "bg-black dark:bg-white text-white dark:text-black",
+    tagClass: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300",
   },
   {
     icon: <Zap className="w-6 h-6 text-red-500" />,
@@ -17,17 +17,17 @@ const RECOMMENDATIONS = [
     tagClass: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800",
   },
   {
-    icon: <Repeat className="w-6 h-6 text-violet-500" />,
+    icon: <Repeat className="w-6 h-6 text-indigo-500" />,
     text: "Integration (Calculus) — 8 out of 11 previous questions were repeated with minor variations.",
     tag: "High Repeat",
-    tagClass: "bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800",
+    tagClass: "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800",
   },
 ];
 
 function heatmapBg(level) {
-  if (level === "high") return "bg-gray-950 dark:bg-white text-white dark:text-black";
-  if (level === "med")  return "bg-gray-500 dark:bg-gray-400 text-white dark:text-black";
-  return "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400";
+  if (level === "high") return "bg-indigo-600 dark:bg-indigo-500 text-white";
+  if (level === "med")  return "bg-gray-500 dark:bg-gray-400 text-white dark:text-gray-950";
+  return "bg-gray-100 dark:bg-[var(--surface-elevated)] text-gray-600 dark:text-gray-400";
 }
 
 export default function PYQAnalytics({ questions, correctCount }) {
@@ -62,7 +62,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
         ].map((s) => (
           <div
             key={s.label}
-            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm"
+            className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm"
           >
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
               {s.label}
@@ -76,13 +76,13 @@ export default function PYQAnalytics({ questions, correctCount }) {
       </div>
 
       {/* ── Subject performance ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
         <p className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4">
           Subject Performance
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {subjectStats.map((s) => (
-            <div key={s.subject} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+            <div key={s.subject} className="bg-gray-50 dark:bg-[var(--surface-elevated)] rounded-xl p-4">
               <p className="text-sm font-bold text-black dark:text-white mb-1">{s.subject}</p>
               <p className="text-2xl font-black text-black dark:text-white mb-0.5">
                 {s.accuracy !== null ? `${s.accuracy}%` : "—"}
@@ -93,7 +93,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
               {/* Mini bar */}
               <div className="mt-2 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-black dark:bg-white rounded-full transition-all"
+                  className="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full transition-all"
                   style={{ width: `${s.total > 0 ? (s.done / s.total) * 100 : 0}%` }}
                 />
               </div>
@@ -103,20 +103,20 @@ export default function PYQAnalytics({ questions, correctCount }) {
       </div>
 
       {/* ── Chapter heatmap ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold text-black dark:text-white uppercase tracking-widest">
             Chapter Frequency Heatmap
           </p>
           <div className="flex items-center gap-3 text-[10px] text-gray-400">
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-sm bg-gray-950 dark:bg-white inline-block" /> High
+              <span className="w-2.5 h-2.5 rounded-sm bg-indigo-600 dark:bg-indigo-500 inline-block" /> High
             </span>
             <span className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-sm bg-gray-500 dark:bg-gray-400 inline-block" /> Medium
             </span>
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-sm bg-gray-100 dark:bg-gray-800 inline-block" /> Low
+              <span className="w-2.5 h-2.5 rounded-sm bg-gray-100 dark:bg-[var(--surface-elevated)] inline-block" /> Low
             </span>
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
       </div>
 
       {/* ── Chapter weightage ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
         <p className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4">
           Exam Weightage by Chapter
         </p>
@@ -146,9 +146,9 @@ export default function PYQAnalytics({ questions, correctCount }) {
               <span className="text-sm text-gray-700 dark:text-gray-300 w-36 shrink-0">
                 {w.chapter}
               </span>
-              <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-gray-100 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-black dark:bg-white rounded-full transition-all duration-500"
+                  className="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full transition-all duration-500"
                   style={{ width: `${w.pct}%` }}
                 />
               </div>
@@ -161,7 +161,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
       </div>
 
       {/* ── AI Recommendations ── */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-5 shadow-sm">
         <p className="text-xs font-bold text-black dark:text-white uppercase tracking-widest mb-4">
           <Sparkles className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" /> AI Recommendations
         </p>
@@ -169,7 +169,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
           {RECOMMENDATIONS.map((r) => (
             <div
               key={r.tag}
-              className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-800/60 rounded-xl"
+              className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-[var(--surface-elevated)]/60 rounded-xl"
             >
               <span className="text-xl shrink-0">{r.icon}</span>
               <div>

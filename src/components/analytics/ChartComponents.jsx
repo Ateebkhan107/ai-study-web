@@ -2,7 +2,7 @@
 
 function EmptyState({ title, description }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-white/45 p-5 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-400">
+    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-[var(--card)]/45 p-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/30 dark:text-slate-400">
       <p className="font-bold text-slate-700 dark:text-slate-200">{title}</p>
       <p className="mt-1 text-xs leading-relaxed">{description}</p>
     </div>
@@ -49,7 +49,7 @@ export function PerformanceTrend({ data, detailed = false }) {
         />
       ) : (
         <div className="min-w-0">
-          <div className="relative h-56 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/40 p-3 dark:border-slate-800 dark:bg-slate-950/30 sm:h-72">
+          <div className="relative h-56 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/40 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/30 sm:h-72">
             <svg className="h-full w-full" viewBox="0 0 640 190" preserveAspectRatio="none" role="img" aria-label="Accuracy trend over recent work">
               {[0, 25, 50, 75, 100].map((tick) => (
                 <g key={tick}>
@@ -64,11 +64,11 @@ export function PerformanceTrend({ data, detailed = false }) {
                   />
                 </g>
               ))}
-              <polyline points={chartPoints} fill="none" stroke="#6366F1" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+              <polyline points={chartPoints} fill="none" stroke="#C2723F" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
               {points.map((point, index) => {
                 const x = 18 + (index / (points.length - 1)) * 604;
                 const y = 18 + (1 - point.accuracy / 100) * 154;
-                return <circle key={`${point.label}-${index}`} cx={x} cy={y} r="5" fill="#6366F1" />;
+                return <circle key={`${point.label}-${index}`} cx={x} cy={y} r="5" fill="#C2723F" />;
               })}
             </svg>
           </div>
@@ -77,7 +77,7 @@ export function PerformanceTrend({ data, detailed = false }) {
             {points.slice(detailed ? -8 : -4).map((point, index) => (
               <span
                 key={`${point.label}-${index}`}
-                className="rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300"
+                className="rounded-full border border-slate-200 bg-[var(--card)]/70 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/60 dark:text-slate-300"
               >
                 {point.label}: {point.accuracy}%
               </span>
@@ -141,7 +141,7 @@ export function SubjectDistribution({ data }) {
             {items.map((subject) => (
               <div key={subject.subject} className="flex items-center gap-2">
                 <span className="w-24 shrink-0 text-xs text-slate-500 dark:text-slate-400">{subject.subject}</span>
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
                   <div className="h-full rounded-full" style={{ width: `${subject.pct}%`, background: subject.color }} />
                 </div>
                 <span className="w-8 text-right text-xs font-bold text-slate-900 dark:text-white">{subject.pct}%</span>
@@ -177,7 +177,7 @@ export function SubjectPerformance({ data }) {
                 <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{subject.subject}</span>
                 <span className="text-xs font-black text-slate-900 dark:text-white">{formatPercent(subject.accuracy)}</span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
                 <div className="h-full rounded-full" style={{ width: `${subject.accuracy || 0}%`, background: subject.color }} />
               </div>
               <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
@@ -242,8 +242,8 @@ function ChapterList({ chapters }) {
             </span>
           </div>
           <div className="mt-2 flex items-center gap-3">
-            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-              <div className="h-full rounded-full bg-black dark:bg-white" style={{ width: `${chapter.accuracy}%` }} />
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+              <div className="h-full rounded-full bg-brand dark:bg-brand" style={{ width: `${chapter.accuracy}%` }} />
             </div>
             <span className="w-10 text-right text-xs font-black text-slate-900 dark:text-white">{chapter.accuracy}%</span>
           </div>
@@ -271,11 +271,11 @@ export function TimeAnalytics({ data }) {
       ) : (
         <>
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+            <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/50">
               <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Avg Time / Question</p>
               <p className="text-xl font-black text-slate-900 dark:text-white">{data.averageSecondsPerQuestion}s</p>
             </div>
-            <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+            <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/50">
               <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Speed</p>
               <p className="text-xl font-black text-slate-900 dark:text-white">{data.questionsPerMinute} q/min</p>
             </div>
@@ -285,7 +285,7 @@ export function TimeAnalytics({ data }) {
             <div className="mt-4 flex h-28 items-end gap-2">
               {data.recent.map((item, index) => (
                 <div key={`${item.label}-${index}`} className="flex min-w-0 flex-1 flex-col items-center gap-2">
-                  <div className="flex h-20 w-full items-end rounded-t-md bg-slate-100 dark:bg-slate-800">
+                  <div className="flex h-20 w-full items-end rounded-t-md bg-slate-100 dark:bg-[var(--surface-elevated)]">
                     <div
                       className="w-full rounded-t-md bg-indigo-500/80"
                       style={{ height: `${Math.max(8, Math.min(100, item.questionsPerMinute * 5))}%` }}

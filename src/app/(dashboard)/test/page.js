@@ -89,20 +89,20 @@ export default function TestPage() {
           : "Build a custom test or jump into a randomized PCM shift-run archive parameters."
       }
       badge={isNeet ? "NEET Simulation Center 🩺" : "JEE Test Arena 🚀"}
-      badgeVariant={isNeet ? "emerald" : "purple"}
+      badgeVariant={isNeet ? "emerald" : "brand"}
     >
       {/* ── Mode Toggle ── */}
       <section
         className="animate-slideUp"
         style={{ animationDelay: "75ms" }}
       >
-        <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
+        <div className="flex max-w-full items-center overflow-x-auto bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           <button
             onClick={() => setMode("build")}
             className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "build"
-                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
+                ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
             }`}
           >
             ✦ Custom Test Builder
@@ -111,8 +111,8 @@ export default function TestPage() {
             onClick={() => setMode("quick")}
             className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "quick"
-                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5"
+                ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
             }`}
           >
             ⚡ Quick Test Launch
@@ -158,11 +158,11 @@ export default function TestPage() {
             <Link
               key={tool.href}
               href={tool.href}
-              className="group relative overflow-hidden bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(99,102,241,0.12)] dark:hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)] hover:border-indigo-500/30 animate-slideUp flex items-start gap-4"
+              className="group relative overflow-hidden bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(194,114,63,0.12)] dark:hover:shadow-[0_8px_30px_rgba(194,114,63,0.15)] hover:border-indigo-500/30 animate-slideUp flex items-start gap-4"
               style={{ animationDelay: `${(index * 75) + 300}ms` }}
             >
               {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-indigo-500/0 to-violet-500/0 group-hover:from-indigo-500/5 group-hover:via-transparent group-hover:to-violet-500/5 transition-all duration-700 pointer-events-none rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-indigo-500/0 to-brand-hover/0 group-hover:from-indigo-500/5 group-hover:via-transparent group-hover:to-brand-hover/5 transition-all duration-700 pointer-events-none rounded-2xl" />
 
               <div className="relative z-10 w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
                 {tool.icon}

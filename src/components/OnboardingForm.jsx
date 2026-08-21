@@ -17,7 +17,7 @@ export default function OnboardingForm({
     `flex items-start gap-3 rounded-2xl border px-4 py-4 text-sm font-semibold transition ${
       active
         ? "border-indigo-300 bg-indigo-50 text-black ring-2 ring-indigo-100 dark:border-indigo-500/40 dark:bg-indigo-500/10 dark:text-white dark:ring-indigo-500/10"
-        : "border-gray-200 bg-gray-50 text-black hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+        : "border-gray-200 bg-gray-50 text-black hover:border-gray-300 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
     }`;
 
   return (
@@ -34,7 +34,7 @@ export default function OnboardingForm({
           required
           minLength={3}
           maxLength={50}
-          className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-black dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
         />
       </div>
 
@@ -89,7 +89,7 @@ export default function OnboardingForm({
               {exams.map((exam) => (
                 <label
                   key={exam}
-                  className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-sm font-semibold text-black dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                  className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-sm font-semibold text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
                 >
                   <input
                     type="radio"
@@ -115,7 +115,7 @@ export default function OnboardingForm({
               id="targetYear"
               name="targetYear"
               defaultValue={defaultYear}
-              className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-black dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
             >
               {yearOptions.map((year) => (
                 <option key={year} value={year}>
@@ -129,7 +129,7 @@ export default function OnboardingForm({
 
       <button
         type="submit"
-        className="w-full rounded-2xl bg-black py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90 dark:bg-white dark:text-black"
+        className="w-full rounded-2xl bg-brand py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90 dark:bg-indigo-500 dark:text-white"
       >
         {isStudent ? "Continue to Dashboard" : "Continue to Institute"}
       </button>

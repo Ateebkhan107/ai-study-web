@@ -19,12 +19,12 @@ export default function SubscriptionsPage() {
       <div className="max-w-3xl mx-auto space-y-8 pb-12 animate-slideUp">
         
         {/* Header Info */}
-        <div className="flex items-center justify-between pb-6 border-b border-slate-200/60 dark:border-slate-800/50">
+        <div className="flex items-center justify-between pb-6 border-b border-slate-200/60 dark:border-[var(--border-subtle)]/50">
           <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
             <CreditCard className="w-5 h-5 text-amber-500" />
             <span className="text-sm font-medium">Billing & Subscriptions</span>
           </div>
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+          <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400">
             Last Updated: July 2026
           </span>
         </div>
@@ -58,7 +58,7 @@ export default function SubscriptionsPage() {
             </div>
           </div>
 
-          <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-slate-800/50">
+          <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-[var(--border-subtle)]/50">
             <div className="glass-card p-6 rounded-3xl text-center space-y-4">
               <h3 className="font-bold text-slate-900 dark:text-white">Ready to upgrade?</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">

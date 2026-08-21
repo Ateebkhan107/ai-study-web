@@ -40,7 +40,7 @@ export default function GroupCard({ group, myRole, myStatus, onJoin }) {
   const actionLabel = myRole === "OWNER" ? "Manage" : myRole === "ADMIN" ? "Manage" : "Open";
 
   return (
-    <div className="rounded-xl border border-slate-200/80 bg-white/85 p-3.5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md hover:shadow-indigo-500/10 dark:border-slate-800 dark:bg-slate-900/70 dark:hover:border-indigo-500/30">
+    <div className="rounded-xl border border-slate-200/80 bg-[var(--card)]/85 p-3.5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md hover:shadow-indigo-500/10 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/70 dark:hover:border-indigo-500/30">
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <h3 className="truncate text-sm font-bold text-slate-950 dark:text-white">{group.name}</h3>

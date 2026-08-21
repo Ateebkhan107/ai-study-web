@@ -10,20 +10,20 @@ import { Star, Sparkle } from "lucide-react";
  *  - title: string — page heading
  *  - subtitle: string — small text below heading
  *  - badge: string — glassmorphic pill text (e.g. "JEE Test Arena 🚀")
- *  - badgeVariant: "purple" | "emerald" — color of badge
+ *  - badgeVariant: "brand" | "emerald" — color of badge
  *  - children: ReactNode
  */
 export default function PageWrapper({
   title,
   subtitle,
   badge,
-  badgeVariant = "purple",
+  badgeVariant = "brand",
   children,
 }) {
   const badgeColors =
     badgeVariant === "emerald"
-      ? "border-emerald-500/20 bg-white/70 dark:bg-emerald-500/10 from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400"
-      : "border-indigo-500/20 bg-white/70 dark:bg-indigo-500/10 from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400";
+      ? "border-emerald-500/20 bg-[var(--card)]/70 dark:bg-emerald-500/10 from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400"
+      : "border-indigo-500/20 bg-[var(--card)]/70 dark:bg-indigo-500/10 from-indigo-600 to-brand-hover dark:from-indigo-400 dark:to-brand-hover";
 
   return (
     <div className="relative min-h-screen w-full min-w-0">
@@ -33,17 +33,17 @@ export default function PageWrapper({
         aria-hidden="true"
       >
         {/* Dot Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#475569_1px,transparent_1px)] [background-size:32px_32px] opacity-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(#d5cdbd_1px,transparent_1px)] dark:bg-[radial-gradient(#37372f_1px,transparent_1px)] [background-size:32px_32px] opacity-50" />
 
         {/* Ambient Color Glows */}
-        <div className="absolute top-0 left-0 w-[50%] h-[50%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-[120px] mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-violet-500/10 dark:bg-violet-500/15 blur-[100px] mix-blend-screen animate-[pulse_12s_ease-in-out_infinite]" />
-        <div className="absolute bottom-0 left-[20%] w-[40%] h-[40%] rounded-full bg-pink-500/8 dark:bg-pink-500/10 blur-[120px] mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]" />
+        <div className="absolute top-0 left-0 w-[50%] h-[50%] rounded-full bg-brand/7 dark:bg-brand/8 blur-[120px] mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-brand/8 dark:bg-brand/10 blur-[100px] mix-blend-screen animate-[pulse_12s_ease-in-out_infinite]" />
+        <div className="absolute bottom-0 left-[20%] w-[40%] h-[40%] rounded-full bg-slate-300/20 dark:bg-slate-700/12 blur-[120px] mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]" />
 
         {/* Floating Decorative Stars */}
         <Star className="absolute top-[12%] left-[7%] w-5 h-5 text-amber-500/40 dark:text-amber-300/50 animate-[pulse_4s_ease-in-out_infinite] rotate-12" fill="currentColor" />
         <Sparkle className="absolute top-[22%] right-[9%] w-4 h-4 text-indigo-500/40 dark:text-indigo-300/50 animate-[pulse_3s_ease-in-out_infinite_0.5s]" fill="currentColor" />
-        <Star className="absolute top-[50%] left-[4%] w-3.5 h-3.5 text-purple-500/40 dark:text-purple-300/50 animate-[pulse_5s_ease-in-out_infinite_1s] -rotate-12" fill="currentColor" />
+        <Star className="absolute top-[50%] left-[4%] w-3.5 h-3.5 text-indigo-500/40 dark:text-indigo-300/50 animate-[pulse_5s_ease-in-out_infinite_1s] -rotate-12" fill="currentColor" />
         <Sparkle className="absolute bottom-[25%] right-[6%] w-5 h-5 text-pink-500/40 dark:text-pink-300/50 animate-[pulse_4s_ease-in-out_infinite_1.5s]" fill="currentColor" />
       </div>
 

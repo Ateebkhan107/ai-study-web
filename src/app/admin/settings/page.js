@@ -12,10 +12,10 @@ export default function AdminSettingsPage() {
         <p className="text-gray-500 dark:text-gray-400">Configure global app settings and feature flags.</p>
       </div>
 
-      <div className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm space-y-6">
+      <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 shadow-sm space-y-6">
         
         <div>
-          <h3 className="font-bold text-lg border-b border-gray-100 dark:border-gray-800 pb-2 mb-4">Exam Defaults</h3>
+          <h3 className="font-bold text-lg border-b border-gray-100 dark:border-[var(--border-subtle)] pb-2 mb-4">Exam Defaults</h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <div>
@@ -35,19 +35,19 @@ export default function AdminSettingsPage() {
         </div>
 
         <div>
-          <h3 className="font-bold text-lg border-b border-gray-100 dark:border-gray-800 pb-2 mb-4 mt-8">Storage Configuration</h3>
+          <h3 className="font-bold text-lg border-b border-gray-100 dark:border-[var(--border-subtle)] pb-2 mb-4 mt-8">Storage Configuration</h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-bold text-sm">Image Storage Bucket</p>
                 <p className="text-xs text-gray-500">Supabase bucket for question images</p>
               </div>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">pyq-images</span>
+              <span className="text-sm font-mono bg-gray-100 dark:bg-[var(--surface-elevated)] px-3 py-1 rounded">pyq-images</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
+        <div className="mt-8 pt-6 border-t border-gray-100 dark:border-[var(--border-subtle)]">
           <p className="text-sm text-gray-500 text-center">Settings configuration is currently hardcoded for stability. Future updates will allow dynamic overrides.</p>
         </div>
 

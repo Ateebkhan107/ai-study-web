@@ -3,16 +3,16 @@ import { BookOpen, FileText, Bot, BarChart, TrendingUp } from "lucide-react";
 
 // Injected once — pure CSS hover, no JS event handlers needed
 const hoverStyles = `
-  .feature-card { 
-    border: 1px solid rgba(99,102,241,0.1); 
-    background: rgba(15,19,32,0.4); 
+  .feature-card {
+    border: 1px solid rgba(194,114,63,0.1);
+    background: rgba(15,19,32,0.4);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .feature-card:hover { 
-    border-color: rgba(99,102,241,0.3); 
-    background: rgba(99,102,241,0.06); 
+  .feature-card:hover {
+    border-color: rgba(194,114,63,0.3);
+    background: rgba(194,114,63,0.06);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(99,102,241,0.15);
+    box-shadow: 0 10px 30px -10px rgba(194,114,63,0.15);
   }
 `;
 
@@ -57,14 +57,14 @@ export default function AuthLayout({ children }) {
       {/* ── LEFT PANEL ─────────────────────────────────────────── */}
       <div
         className="hidden lg:flex w-1/2 flex-col justify-center p-16 xl:p-24 relative overflow-hidden"
-        style={{ borderRight: "1px solid rgba(99,102,241,0.1)" }}
+        style={{ borderRight: "1px solid rgba(194,114,63,0.1)" }}
       >
 
         {/* Dot-grid background */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.1) 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, rgba(194,114,63,0.1) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -77,7 +77,7 @@ export default function AuthLayout({ children }) {
             left: "-10%",
             width: "80%",
             height: "70%",
-            background: "radial-gradient(ellipse at center, rgba(99,102,241,0.15) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse at center, rgba(194,114,63,0.15) 0%, transparent 60%)",
             filter: "blur(50px)",
             animationDuration: "1s"
           }}
@@ -106,14 +106,14 @@ export default function AuthLayout({ children }) {
             {/* Stats row */}
             <div
               className="inline-flex items-center gap-0 mt-10 rounded-2xl overflow-hidden shadow-xl shadow-indigo-500/5 backdrop-blur-sm"
-              style={{ border: "1px solid rgba(99,102,241,0.15)", background: "rgba(99,102,241,0.03)" }}
+              style={{ border: "1px solid rgba(194,114,63,0.15)", background: "rgba(194,114,63,0.03)" }}
             >
               {STATS.map((s, i) => (
                 <div
                   key={s.label}
                   className="px-8 py-5"
                   style={{
-                    borderRight: i < STATS.length - 1 ? "1px solid rgba(99,102,241,0.15)" : "none",
+                    borderRight: i < STATS.length - 1 ? "1px solid rgba(194,114,63,0.15)" : "none",
                   }}
                 >
                   <p
@@ -122,7 +122,7 @@ export default function AuthLayout({ children }) {
                   >
                     {s.value}
                   </p>
-                  <p className="text-[11px] mt-2 font-bold tracking-widest uppercase" style={{ color: "#818CF8" }}>
+                  <p className="text-[11px] mt-2 font-bold tracking-widest uppercase" style={{ color: "#C2723F" }}>
                     {s.label}
                   </p>
                 </div>
@@ -140,7 +140,7 @@ export default function AuthLayout({ children }) {
               >
                 <span
                   className="text-lg mt-0.5 shrink-0 w-11 h-11 rounded-xl flex items-center justify-center shadow-inner"
-                  style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)" }}
+                  style={{ background: "rgba(194,114,63,0.06)", border: "1px solid rgba(194,114,63,0.15)" }}
                 >
                   {f.icon}
                 </span>
@@ -158,8 +158,8 @@ export default function AuthLayout({ children }) {
       <div
         className="w-full lg:w-1/2 flex items-center justify-center p-8 relative animate-fadeInScale"
         style={{
-          background: "radial-gradient(ellipse at 60% 40%, rgba(99,102,241,0.04) 0%, transparent 70%)",
-          animationDelay: "0.3s", 
+          background: "radial-gradient(ellipse at 60% 40%, rgba(194,114,63,0.04) 0%, transparent 70%)",
+          animationDelay: "0.3s",
           animationFillMode: "both"
         }}
       >
@@ -167,7 +167,7 @@ export default function AuthLayout({ children }) {
         <div
           className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
           style={{
-            background: "radial-gradient(circle at bottom right, rgba(99,102,241,0.06) 0%, transparent 65%)",
+            background: "radial-gradient(circle at bottom right, rgba(194,114,63,0.06) 0%, transparent 65%)",
           }}
         />
 

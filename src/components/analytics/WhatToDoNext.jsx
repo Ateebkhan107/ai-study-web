@@ -21,8 +21,8 @@ export default function WhatToDoNext({ action }) {
         </p>
       </div>
 
-      <div className="flex gap-4 rounded-xl border border-slate-200/60 p-4 transition-all duration-200 hover:-translate-y-0.5 dark:border-slate-700/50">
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black text-xs font-black text-white dark:bg-white dark:text-black">
+      <div className="flex gap-4 rounded-xl border border-slate-200/60 p-4 transition-all duration-200 hover:-translate-y-0.5 dark:border-[var(--border)]/50">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-black text-white dark:bg-indigo-500 dark:text-white">
           1
         </div>
 
@@ -37,7 +37,7 @@ export default function WhatToDoNext({ action }) {
 
           <Link
             href={item.href}
-            className="inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-xs font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20"
+            className="inline-block rounded-lg bg-brand px-4 py-2 text-xs font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20"
           >
             {item.cta} →
           </Link>

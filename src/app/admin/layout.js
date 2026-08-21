@@ -13,7 +13,7 @@ export default async function AdminLayout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
+    <div className="min-h-screen bg-gray-50 dark:bg-[var(--background)]">
       <AdminSidebar />
       {/* 
         lg:pl-64 pushes the content right on desktop to make room for the sidebar.

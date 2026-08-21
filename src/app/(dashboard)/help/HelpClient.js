@@ -44,20 +44,20 @@ export default function HelpClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [openIndex, setOpenIndex] = useState(null);
 
-  const filteredFaqs = FAQS.filter(faq => 
-    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const filteredFaqs = FAQS.filter(faq =>
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
     faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <PageWrapper 
-      title="Help Center" 
-      subtitle="How can we help you today?" 
+    <PageWrapper
+      title="Help Center"
+      subtitle="How can we help you today?"
       badge="SUPPORT"
-      badgeVariant="purple"
+      badgeVariant="brand"
     >
       <div className="max-w-3xl mx-auto space-y-8 pb-12 animate-slideUp">
-        
+
         {/* Search Bar */}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -65,7 +65,7 @@ export default function HelpClient() {
           </div>
           <input
             type="text"
-            className="w-full pl-11 pr-4 py-4 bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all shadow-sm font-medium"
+            className="w-full pl-11 pr-4 py-4 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all shadow-sm font-medium"
             placeholder="Search for articles, questions, or topics..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -78,12 +78,12 @@ export default function HelpClient() {
             filteredFaqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`glass-card rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen 
-                      ? "border-indigo-500/30 bg-white/90 dark:bg-[#0f172a]/90 shadow-md shadow-indigo-500/5" 
-                      : "border-slate-200/60 dark:border-slate-700/50 bg-white/70 dark:bg-[#0f172a]/60 hover:border-slate-300 dark:hover:border-slate-600"
+                    isOpen
+                      ? "border-indigo-500/30 bg-[var(--card)]/90 dark:bg-[var(--surface)]/90 shadow-md shadow-brand/5"
+                      : "border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 hover:border-slate-300 dark:hover:border-slate-600"
                   }`}
                 >
                   <button
@@ -95,13 +95,13 @@ export default function HelpClient() {
                     </span>
                     <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-indigo-500" : ""}`} />
                   </button>
-                  
-                  <div 
+
+                  <div
                     className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
                       isOpen ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-4">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-[var(--border-subtle)]/50 pt-4">
                       {faq.answer}
                     </p>
                   </div>
@@ -110,14 +110,14 @@ export default function HelpClient() {
             })
           ) : (
             <div className="text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full bg-slate-50 dark:bg-[var(--surface-elevated)]/50 flex items-center justify-center mx-auto mb-4">
                 <MessageCircleQuestion className="w-8 h-8 text-slate-400" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No results found</h3>
               <p className="text-slate-500 dark:text-slate-400 text-sm">
                 We couldn&apos;t find any FAQs matching &quot;{searchQuery}&quot;.
               </p>
-              <button 
+              <button
                 onClick={() => setSearchQuery("")}
                 className="mt-6 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
               >
@@ -128,15 +128,15 @@ export default function HelpClient() {
         </div>
 
         {/* Still need help? */}
-        <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-center space-y-4">
+        <div className="mt-12 p-8 rounded-3xl bg-brand-soft border border-indigo-500/20 text-center space-y-4">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white">Still need help?</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
             Can&apos;t find the answer you&apos;re looking for? Our support team is here to help you with any questions.
           </p>
           <div className="pt-2">
-            <Link 
-              href="/contact" 
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25"
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 transition-colors shadow-lg shadow-brand/25"
             >
               Contact Support
             </Link>

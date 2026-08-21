@@ -44,13 +44,13 @@ const I = {
 };
 
 // ─── Theme CSS Token Configs ──────────────────────────────────────────────────
-const BG_SURFACE  = "bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl";
-const BG_SUNKEN   = "bg-slate-50 dark:bg-slate-800/50";
-const BORDER      = "border-slate-200/60 dark:border-slate-700/50";
+const BG_SURFACE  = "bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl";
+const BG_SUNKEN   = "bg-slate-50 dark:bg-[var(--surface-elevated)]/50";
+const BORDER      = "border-slate-200/60 dark:border-[var(--border)]/50";
 const BORDER_HV   = "hover:border-indigo-500/30 dark:hover:border-indigo-500/30";
 const TXT         = "text-slate-900 dark:text-slate-100";
 const TXT_MUTED   = "text-slate-500 dark:text-slate-400";
-const ACTIVE_PILL = "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm";
+const ACTIVE_PILL = "bg-indigo-50 text-indigo-700 border border-indigo-300 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-700/60 shadow-sm";
 const DIFFICULTY_BADGE = {
   Easy:   "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
   Medium: "bg-amber-500/10   text-amber-600   dark:text-amber-400   border border-amber-500/20",
@@ -92,11 +92,11 @@ const PRO_ONLY_PRACTICE_MODES = new Set(["chapter", "mistakes"]);
 const MASTER_SAVED = []; // Unused, fetching dynamically now
 
 const SUBJECT_BAR_COLORS = {
-  Physics:     "#6366F1",
-  Chemistry:   "#8B5CF6",
-  Mathematics: "#06b6d4",
-  Maths:       "#06b6d4",
-  Biology:     "#10b981",
+  Physics:     "#4F6F86",
+  Chemistry:   "#4F7A59",
+  Mathematics: "#A95D32",
+  Maths:       "#A95D32",
+  Biology:     "#A05252",
 };
 
 const SAVED_PYQ_SELECT_FIELDS = [
@@ -238,8 +238,8 @@ function PracticeTab({ subjects, track, isPro }) {
         const res = await fetch(`/api/pyq/papers?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load papers");
         const data = await res.json();
-        if (!cancelled) { 
-          setPapers(Array.isArray(data) ? data : []); 
+        if (!cancelled) {
+          setPapers(Array.isArray(data) ? data : []);
           setSelectedAttempt("");
           setSelectedShift("");
         }
@@ -275,12 +275,12 @@ function PracticeTab({ subjects, track, isPro }) {
         : [];
 
     if (subjectLabels.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
-    
+
     if (practiceMode === "full" && track === "jee") {
       if (availableAttempts.length > 0 && !effectiveSelectedAttempt) { setSubjectError("Please select an attempt"); return; }
       if (availableShiftPapers.length > 0 && !effectiveSelectedShift) { setSubjectError("Please select a shift"); return; }
     }
-    
+
     if (practiceMode === "chapter") {
       if (selectedChapters.length === 0) {
         setSubjectError("Please select at least one chapter");
@@ -293,9 +293,9 @@ function PracticeTab({ subjects, track, isPro }) {
     params.set("subjects", subjectLabels.join(","));
     if (selectedYears.length > 0) params.set("years", selectedYears.join(","));
     params.set("mode", practiceMode);
-    
+
     if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
-    
+
     if (track === "jee" && practiceMode === "full") {
       const selectedPaper = papers.find((paper) => paper.id === effectiveSelectedShift);
       if (selectedPaper) {
@@ -304,7 +304,7 @@ function PracticeTab({ subjects, track, isPro }) {
         params.set("shift_label", selectedPaper.shift_label || selectedPaper.shift);
       }
     }
-    
+
     router.push(`/pyq/session?${params.toString()}`);
   }
 
@@ -451,7 +451,7 @@ function PracticeTab({ subjects, track, isPro }) {
                         ? "border-indigo-400 bg-indigo-50/40 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-300"
                         : "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                       : locked
-                        ? "border-dashed border-slate-200 bg-slate-50/80 text-slate-400 dark:border-slate-700 dark:bg-slate-800/30 dark:text-slate-500"
+                        ? "border-dashed border-slate-200 bg-slate-50/80 text-slate-400 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-500"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
@@ -460,7 +460,7 @@ function PracticeTab({ subjects, track, isPro }) {
                     <span className="flex flex-wrap items-center gap-2 text-sm font-semibold">
                       {m.label}
                       {locked && (
-                        <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950">
+                        <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-white">
                           Pro
                         </span>
                       )}
@@ -531,7 +531,7 @@ function PracticeTab({ subjects, track, isPro }) {
             )}
             {practiceMode === "chapter" && (
               <p className={`text-xs ${TXT_MUTED}`}>
-              {practiceMode === "chapter" 
+              {practiceMode === "chapter"
                 ? (selectedChapters.length > 0 ? `${selectedChapters.length} chapter${selectedChapters.length > 1 ? "s" : ""} selected` : "No chapter selected")
                 : (practiceMode === "full" ? "Complete Paper" : "All Chapters")}
             </p>
@@ -539,7 +539,7 @@ function PracticeTab({ subjects, track, isPro }) {
           </div>
 
           <button onClick={handleStartDeck}
-            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20 text-sm cursor-pointer transition-all duration-300"
+            className="w-full flex items-center justify-center gap-2 bg-brand text-white font-bold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 text-sm cursor-pointer transition-all duration-300"
           >
             <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start Focused Deck"}
           </button>
@@ -570,7 +570,7 @@ function getChapterStatusClass(status) {
   if (status === "Needs Practice") {
     return "border-amber-500/25 bg-amber-500/10 text-amber-600 dark:text-amber-300";
   }
-  return "border-slate-300/50 bg-slate-100 text-slate-500 dark:border-slate-700/70 dark:bg-slate-800/60 dark:text-slate-400";
+  return "border-slate-300/50 bg-slate-100 text-slate-500 dark:border-[var(--border)]/70 dark:bg-[var(--surface-elevated)]/60 dark:text-slate-400";
 }
 
 function ChapterSummaryCard({ title, chapter, emptyText, actionLabel, onAction, icon: IconComp }) {
@@ -586,7 +586,7 @@ function ChapterSummaryCard({ title, chapter, emptyText, actionLabel, onAction, 
           {actionLabel && onAction && (
             <button
               onClick={() => onAction(chapter)}
-              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20"
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20"
             >
               {actionLabel} <I.ChevronRight size={14} />
             </button>
@@ -641,7 +641,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
         </p>
         <button
           onClick={onStartPractice}
-          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5"
+          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-bold text-white shadow-lg shadow-brand/20 transition hover:-translate-y-0.5"
         >
           Start Practicing <I.ChevronRight size={14} />
         </button>
@@ -653,7 +653,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { Icon: I.Target,       label: "Questions Attempted", value: String(attempted), sublabel: "answered PYQs",         accent: "#6366F1" },
+          { Icon: I.Target,       label: "Questions Attempted", value: String(attempted), sublabel: "answered PYQs",         accent: "#C2723F" },
           { Icon: I.CheckCircle2, label: "Accuracy",            value: formatPercent(analytics?.accuracy), sublabel: "correct / attempted", accent: "#10b981" },
           { Icon: I.Clock,        label: "Avg. Time / Question", value: analytics?.avgTimePerQuestionLabel || "—", sublabel: analytics?.timing?.available ? "tracked PYQ pace" : "Not tracked yet", accent: "#06b6d4" },
           { Icon: I.Flame,        label: "Practice Streak",     value: formatPracticeStreak(streak), sublabel: "PYQ practice days",     accent: "#f59e0b" },
@@ -677,7 +677,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
                   <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)} accuracy</span>
                 </div>
               </div>
-              <div className="h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-slate-200 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-500"
                   style={{ width: `${item.accuracy || 0}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }}
                 />
@@ -710,7 +710,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
                     <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
                     <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)}</span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-[var(--surface-elevated)]">
                     <div
                       className="h-full rounded-full bg-indigo-500 transition-all duration-500"
                       style={{ width: `${item.accuracy || 0}%` }}
@@ -758,7 +758,7 @@ function ProLockedPanel({ title, description }) {
       <p className={`mx-auto mt-2 max-w-md text-sm ${TXT_MUTED}`}>{description}</p>
       <button
         onClick={() => router.push("/pro")}
-        className="mt-5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5"
+        className="mt-5 rounded-xl bg-brand px-5 py-3 text-sm font-bold text-white shadow-lg shadow-brand/20 transition hover:-translate-y-0.5"
       >
         Upgrade to Pro
       </button>
@@ -988,11 +988,11 @@ export default function PYQPage() {
       title="PYQ Practice"
       subtitle="Analyze real past examination parameters with automated performance indicators."
       badge={track === "neet" ? "NEET UG Medical Core 🩺" : "IIT JEE Engineering Vault 🚀"}
-      badgeVariant={track === "neet" ? "emerald" : "purple"}
+      badgeVariant={track === "neet" ? "emerald" : "brand"}
     >
       {/* Tab nav */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="flex max-w-full items-center overflow-x-auto bg-white/70 dark:bg-[#0f172a]/60 backdrop-blur-xl border border-slate-200/60 dark:border-slate-700/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
+        <div className="flex max-w-full items-center overflow-x-auto bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           {TABS.map((tab) => {
             const active = activeTab === tab.id;
             const locked = tab.pro && !isPro;
@@ -1002,13 +1002,13 @@ export default function PYQPage() {
                   active
                     ? ACTIVE_PILL
                     : locked
-                      ? "text-slate-400 hover:bg-slate-50 dark:text-slate-500 dark:hover:bg-white/5"
-                      : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5`
+                      ? "text-slate-400 hover:bg-slate-50 dark:text-slate-500 dark:hover:bg-[var(--card)]/5"
+                      : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5`
                 }`}
               >
                 <tab.Icon size={14} /> {tab.label}
                 {locked && (
-                  <span className="rounded-full bg-slate-900 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white dark:bg-white dark:text-slate-950">
+                  <span className="rounded-full bg-slate-900 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-white">
                     Pro
                   </span>
                 )}

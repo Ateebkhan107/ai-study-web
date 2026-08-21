@@ -96,8 +96,8 @@ export default function NotificationsPage() {
     <div
       className="
         min-h-screen
-        bg-[#fafafa]
-        dark:bg-[#050816]
+        bg-[var(--background)]
+        dark:bg-[var(--background)]
         px-8
         py-12
       "
@@ -205,8 +205,8 @@ export default function NotificationsPage() {
           {notifications.length === 0 ? (
             <div
               className="
-                bg-white
-                dark:bg-[#0b1020]
+                bg-[var(--card)]
+                dark:bg-[var(--surface)]
                 rounded-2xl
                 p-12
                 text-center
@@ -235,8 +235,8 @@ export default function NotificationsPage() {
                 onClick={() => openNotification(item)}
                 className="
                   group
-                  bg-white
-                  dark:bg-[#0b1020]
+                  bg-[var(--card)]
+                  dark:bg-[var(--surface)]
                   rounded-2xl
                   px-5
                   py-4
@@ -246,7 +246,7 @@ export default function NotificationsPage() {
                   cursor-pointer
                   border
                   border-gray-100
-                  dark:border-gray-800
+                  dark:border-[var(--border-subtle)]
                   flex
                   items-center
                   gap-4

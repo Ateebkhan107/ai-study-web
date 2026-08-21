@@ -307,11 +307,11 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   }
 
   return (
-    <div className="flex h-full flex-col bg-white/60 dark:bg-slate-950/30">
+    <div className="flex h-full flex-col bg-[var(--card)]/60 dark:bg-[var(--background)]/30">
       {/* Header */}
-      <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+      <div className="border-b border-slate-200 dark:border-[var(--border-subtle)] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white font-bold">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-brand-hover flex items-center justify-center text-white font-bold">
             {(otherUser?.full_name || "?")[0]?.toUpperCase()}
           </div>
           <div>
@@ -368,7 +368,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       </div>
 
       {otherIsTyping && (
-        <div className="flex items-center gap-2 border-t border-slate-100 px-4 py-2 dark:border-slate-800">
+        <div className="flex items-center gap-2 border-t border-slate-100 px-4 py-2 dark:border-[var(--border-subtle)]">
           <div className="flex gap-0.5">
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400" />
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400 [animation-delay:150ms]" />
@@ -387,7 +387,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       {/* Input */}
       <form
         onSubmit={sendMessage}
-        className="sticky bottom-0 border-t border-slate-200 bg-white/90 px-3 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 flex items-end gap-3 sm:px-4"
+        className="sticky bottom-0 border-t border-slate-200 bg-[var(--card)]/90 px-3 py-3 backdrop-blur dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 flex items-end gap-3 sm:px-4"
       >
         <textarea
           value={input}
@@ -398,7 +398,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
           maxLength={2000}
           rows={1}
           placeholder="Type a message…"
-          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none max-h-32 overflow-y-auto"
+          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none max-h-32 overflow-y-auto"
         />
         <button
           type="submit"
