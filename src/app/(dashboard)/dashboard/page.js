@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 import Leaderboard from "@/components/analytics/Leaderboard";
 import { EXAM_CONFIG } from "@/constants/examConfig";
 import StatsCards from "@/components/StatsCards";
@@ -38,13 +39,64 @@ function getFirstName(name) {
   return String(name || "Student").trim().split(/\s+/)[0] || "Student";
 }
 
+function DashboardHeaderFallback({ activeTrackKey }) {
+  const futureLabel = activeTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
+
+  return (
+    <div className="min-w-0">
+      <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700 dark:border-brand/30 dark:bg-brand/10 dark:text-brand sm:text-[11px]">
+        <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+        {futureLabel}
+      </div>
+
+      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+        <span>Hey,</span>
+        <span>Student</span>
+        <span className="text-brand" aria-hidden="true">✦</span>
+      </h1>
+    </div>
+  );
+}
+
+async function DashboardGreeting({ activeTrackKey }) {
+  const profile = await getDashboardProfile();
+  const resolvedTrackKey = profile?.exam || activeTrackKey;
+  const futureLabel = resolvedTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
+  const examTargetLine = [resolvedTrackKey, profile?.targetYear].filter(Boolean).join(" ");
+
+  return (
+    <div className="min-w-0">
+      <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700 dark:border-brand/30 dark:bg-brand/10 dark:text-brand sm:text-[11px]">
+        <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+        {futureLabel}
+      </div>
+
+      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+        <span>Hey,</span>
+        <span>{getFirstName(profile?.fullName)}</span>
+        <span className="text-brand" aria-hidden="true">✦</span>
+      </h1>
+
+      {examTargetLine && (
+        <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">
+          {examTargetLine}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function DashboardCardFallback({ className = "h-48" }) {
+  return (
+    <div className={`${className} rounded-2xl border border-slate-200/80 bg-[var(--card)] shadow-sm skeleton-shimmer dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]`} />
+  );
+}
+
 export default async function DashboardPage() {
-  const [cookieStore, profile] = await Promise.all([cookies(), getDashboardProfile()]);
+  const cookieStore = await cookies();
   const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
   const activeTrackKey =
-    profile?.exam || (String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE");
-  const futureLabel = activeTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
-  const examTargetLine = [activeTrackKey, profile?.targetYear].filter(Boolean).join(" ");
+    String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
 
   const activeConfig = {
     ...EXAM_CONFIG[activeTrackKey],
@@ -57,26 +109,11 @@ export default async function DashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f35_1px,transparent_1px)] [background-size:34px_34px] opacity-10 dark:opacity-15" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
-        <div className="relative grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
-          <div className="min-w-0">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700 dark:border-brand/30 dark:bg-brand/10 dark:text-brand sm:text-[11px]">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-              {futureLabel}
-            </div>
-
-            <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
-              <span>Hey,</span>
-              <span>{getFirstName(profile?.fullName)}</span>
-              <span className="text-brand" aria-hidden="true">✦</span>
-            </h1>
-
-            {examTargetLine && (
-              <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">
-                {examTargetLine}
-              </p>
-            )}
-          </div>
+        <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
+          <div className="relative grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
+          <Suspense fallback={<DashboardHeaderFallback activeTrackKey={activeTrackKey} />}>
+            <DashboardGreeting activeTrackKey={activeTrackKey} />
+          </Suspense>
 
           <DashboardHeaderQuote />
         </div>
@@ -93,7 +130,9 @@ export default async function DashboardPage() {
 
           <section className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
             <div className="min-w-0">
-              <DashboardSection config={activeConfig} compact />
+              <Suspense fallback={<DashboardCardFallback className="h-[350px]" />}>
+                <DashboardSection config={activeConfig} compact />
+              </Suspense>
             </div>
             <div className="min-w-0">
               <Leaderboard compact />

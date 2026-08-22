@@ -30,22 +30,48 @@ const TEST_TOOLS = [
   },
 ];
 
+function getCookieTrack() {
+  if (typeof document === "undefined") return "jee";
+  const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
+  return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
+}
+
+function TestConfigLoading() {
+  return (
+    <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
+      <div className="min-w-0 space-y-4 sm:space-y-5 xl:col-span-2">
+        <div className="h-44 rounded-2xl skeleton-shimmer" />
+        <div className="h-56 rounded-2xl skeleton-shimmer" />
+      </div>
+      <div className="space-y-3 sm:space-y-4">
+        <div className="h-28 rounded-2xl skeleton-shimmer" />
+        <div className="h-28 rounded-2xl skeleton-shimmer" />
+        <div className="h-40 rounded-2xl skeleton-shimmer" />
+      </div>
+    </div>
+  );
+}
+
 export default function TestPage() {
   const [mode, setMode] = useState("build");
   const { user } = useUser();
-  const [track, setTrack] = useState(null);
+  const [track, setTrack] = useState(() => getCookieTrack());
   const [access, setAccess] = useState(null);
+  const [accessLoading, setAccessLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     async function loadTrack() {
       if (!user) return;
       const accessResponse = await fetch("/api/access", { cache: "no-store" });
 
       if (!accessResponse.ok) {
+        if (!cancelled) setAccessLoading(false);
         return;
       }
 
       const accessData = await accessResponse.json();
+      if (cancelled) return;
 
       if (accessData?.examTrack === "NEET") {
         setTrack("neet");
@@ -54,24 +80,11 @@ export default function TestPage() {
       }
 
       setAccess(accessData);
+      setAccessLoading(false);
     }
     loadTrack();
+    return () => { cancelled = true; };
   }, [user]);
-
-  if (!track) {
-    return (
-      <PageWrapper title="Test Center" badge="Loading...">
-        <div className="space-y-6">
-          <div className="h-12 w-48 rounded-xl skeleton-shimmer" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-44 rounded-2xl skeleton-shimmer" />
-            ))}
-          </div>
-        </div>
-      </PageWrapper>
-    );
-  }
 
   const isNeet = track === "neet";
 
@@ -120,7 +133,9 @@ export default function TestPage() {
         className="animate-slideUp"
         style={{ animationDelay: "150ms" }}
       >
-        {mode === "build" ? (
+        {accessLoading ? (
+          <TestConfigLoading />
+        ) : mode === "build" ? (
           <TestBuilder track={track} access={access} />
         ) : (
           <QuickTest track={track} isPro={Boolean(access?.isPro)} />

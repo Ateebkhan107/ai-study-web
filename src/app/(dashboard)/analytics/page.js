@@ -2,22 +2,41 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { BarChart3, Brain, TrendingUp, Trophy } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 
-import OverviewCards from "@/components/analytics/OverviewCards";
-import {
-  ChapterPerformance,
-  PerformanceTrend,
-  SubjectDistribution,
-  SubjectPerformance,
-  TimeAnalytics,
-} from "@/components/analytics/ChartComponents";
-import { ExamReadiness, StudyHeatmap } from "@/components/analytics/NonChartComponents";
-import WhatToDoNext from "@/components/analytics/WhatToDoNext";
 import Leaderboard from "@/components/analytics/Leaderboard";
 import PageWrapper from "@/components/PageWrapper";
 import { getUserAnalytics } from "@/services/analytics";
+
+const OverviewCards = dynamic(() => import("@/components/analytics/OverviewCards"), {
+  loading: () => <ContentBlockSkeleton className="h-28" />,
+});
+const PerformanceTrend = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.PerformanceTrend), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const SubjectDistribution = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.SubjectDistribution), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const SubjectPerformance = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.SubjectPerformance), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const ChapterPerformance = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.ChapterPerformance), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const TimeAnalytics = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.TimeAnalytics), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const StudyHeatmap = dynamic(() => import("@/components/analytics/NonChartComponents").then((mod) => mod.StudyHeatmap), {
+  loading: () => <ContentBlockSkeleton className="h-48" />,
+});
+const ExamReadiness = dynamic(() => import("@/components/analytics/NonChartComponents").then((mod) => mod.ExamReadiness), {
+  loading: () => <ContentBlockSkeleton className="h-48" />,
+});
+const WhatToDoNext = dynamic(() => import("@/components/analytics/WhatToDoNext"), {
+  loading: () => <ContentBlockSkeleton className="h-40" />,
+});
 
 const TABS = [
   { id: "overview", label: "Overview", Icon: BarChart3 },
@@ -32,23 +51,25 @@ function getCookieTrack() {
   return match ? decodeURIComponent(match[2]).toUpperCase() : "JEE";
 }
 
-function LoadingState() {
+function ContentBlockSkeleton({ className = "h-48" }) {
+  return <div className={`rounded-2xl skeleton-shimmer ${className}`} />;
+}
+
+function AnalyticsContentLoading() {
   return (
-    <PageWrapper title="Your Performance" subtitle="Loading your analytics" badge="Analytics Dashboard">
-      <div className="space-y-6">
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {[...Array(4)].map((_, index) => (
-            <div key={index} className="h-28 rounded-2xl skeleton-shimmer" />
-          ))}
-        </div>
-        <div className="h-72 rounded-2xl skeleton-shimmer" />
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {[...Array(2)].map((_, index) => (
-            <div key={index} className="h-48 rounded-2xl skeleton-shimmer" />
-          ))}
-        </div>
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        {[...Array(4)].map((_, index) => (
+          <ContentBlockSkeleton key={index} className="h-28" />
+        ))}
       </div>
-    </PageWrapper>
+      <ContentBlockSkeleton className="h-72" />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {[...Array(2)].map((_, index) => (
+          <ContentBlockSkeleton key={index} className="h-48" />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -131,9 +152,7 @@ export default function AnalyticsPage() {
     loadAnalytics();
   }, [isLoaded, user, activeTrack]);
 
-  if (loading) return <LoadingState />;
-
-  const showAnalyticsLock = !advancedAnalyticsAllowed && activeTab !== "leaderboard";
+  const showAnalyticsLock = !loading && !advancedAnalyticsAllowed && activeTab !== "leaderboard";
 
   return (
     <PageWrapper
@@ -166,9 +185,11 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
+      {loading && activeTab !== "leaderboard" && <AnalyticsContentLoading />}
+
       {showAnalyticsLock && <ProLock />}
 
-      {activeTab === "overview" && !showAnalyticsLock && (
+      {activeTab === "overview" && !loading && !showAnalyticsLock && (
         <div className="space-y-6 sm:space-y-8">
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
             <OverviewCards stats={stats} />
@@ -189,7 +210,7 @@ export default function AnalyticsPage() {
         </div>
       )}
 
-      {activeTab === "charts" && !showAnalyticsLock && (
+      {activeTab === "charts" && !loading && !showAnalyticsLock && (
         <div className="space-y-6 sm:space-y-8">
           <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "150ms" }}>
             <SubjectDistribution data={stats?.subjectDistribution} />
@@ -203,7 +224,7 @@ export default function AnalyticsPage() {
         </div>
       )}
 
-      {activeTab === "ai-insights" && !showAnalyticsLock && <AIComingSoon />}
+      {activeTab === "ai-insights" && !loading && !showAnalyticsLock && <AIComingSoon />}
 
       {activeTab === "leaderboard" && (
         <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>

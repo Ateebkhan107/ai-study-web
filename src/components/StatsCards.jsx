@@ -18,22 +18,18 @@ export default function StatsCards() {
 
     async function loadStats() {
       try {
-        const [statsResponse, profileResponse] = await Promise.all([
-          fetch("/api/dashboard-stats", { cache: "no-store" }),
-          fetch("/api/profile", { cache: "no-store" }),
-        ]);
+        const statsResponse = await fetch("/api/dashboard-stats", { cache: "no-store" });
 
         if (!statsResponse.ok) {
           throw new Error(`Failed to load stats: ${statsResponse.status}`);
         }
 
         const data = await statsResponse.json();
-        const profile = profileResponse.ok ? await profileResponse.json() : {};
 
         setStats({
-          rank: data.rank ?? profile.rank ?? null,
-          streak: data.streak ?? profile.streak ?? null,
-          xp: profile.xp ?? null,
+          rank: data.rank ?? null,
+          streak: data.streak ?? null,
+          xp: data.xp ?? null,
         });
       } catch (error) {
         console.error("Failed to load dashboard stats:", error);

@@ -17,6 +17,7 @@ const navItems = [
   { name: "Analytics", href: "/analytics" },
   { name: "Profile", href: "/profile" },
 ];
+const PREFETCHED_NAV_HREFS = new Set(["/dashboard", "/test", "/pyq", "/community", "/analytics"]);
 
 export default function Navbar({
   accountType = "STUDENT",
@@ -67,6 +68,7 @@ export default function Navbar({
     <Link
       key={item.href}
       href={item.href}
+      prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
       onClick={() => mobile && setMobileOpen(false)}
       className={`group relative overflow-hidden font-semibold transition-colors duration-200 ${
         mobile

@@ -50,6 +50,7 @@ export async function GET() {
       accuracy,
       rank,
       streak,
+      xp,
     });
   } catch (error) {
     console.error("[DASHBOARD_STATS_FETCH_ERROR]", error);

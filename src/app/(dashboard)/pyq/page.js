@@ -91,6 +91,25 @@ const PRO_ONLY_PRACTICE_MODES = new Set(["chapter", "mistakes"]);
 
 const MASTER_SAVED = []; // Unused, fetching dynamically now
 
+function getCookieTrack() {
+  if (typeof document === "undefined") return "jee";
+  const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
+  return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
+}
+
+function PYQPracticeLoading() {
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="h-32 rounded-2xl skeleton-shimmer" />
+        ))}
+      </div>
+      <div className="h-64 rounded-2xl skeleton-shimmer" />
+    </div>
+  );
+}
+
 const SUBJECT_BAR_COLORS = {
   Physics:     "#4F6F86",
   Chemistry:   "#4F7A59",
@@ -824,8 +843,9 @@ export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
   const router = useRouter();
-  const [track, setTrack] = useState(null);
+  const [track, setTrack] = useState(() => getCookieTrack());
   const [access, setAccess] = useState(null);
+  const [accessLoading, setAccessLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -836,12 +856,16 @@ export default function PYQPage() {
         cache: "no-store",
       });
 
-      if (!response.ok) return;
+      if (!response.ok) {
+        if (!cancelled) setAccessLoading(false);
+        return;
+      }
 
       const data = await response.json();
       if (!cancelled) {
         setAccess(data);
         setTrack(data?.examTrack === "NEET" ? "neet" : "jee");
+        setAccessLoading(false);
       }
     }
 
@@ -976,19 +1000,6 @@ export default function PYQPage() {
   const yearRangeSublabel = overview?.minYear && overview?.maxYear ? `${overview.minYear} – ${overview.maxYear} Bulletins` : "No data yet";
   const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
 
-  if (!track) {
-    return (
-      <PageWrapper title="PYQ Practice" badge="Loading...">
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(3)].map((_, i) => <div key={i} className="h-32 rounded-2xl skeleton-shimmer" />)}
-          </div>
-          <div className="h-64 rounded-2xl skeleton-shimmer" />
-        </div>
-      </PageWrapper>
-    );
-  }
-
   return (
     <PageWrapper
       title="PYQ Practice"
@@ -1025,7 +1036,13 @@ export default function PYQPage() {
       </section>
 
       {/* Tab panels */}
-      {activeTab === "practice"  && <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />}
+      {activeTab === "practice"  && (
+        accessLoading ? (
+          <PYQPracticeLoading />
+        ) : (
+          <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
+        )
+      )}
       {activeTab === "analytics" && (
         isPro ? (
 	          <AnalyticsTab
