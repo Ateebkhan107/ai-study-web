@@ -71,7 +71,7 @@ const MASTER_SUBJECTS = [
   { id: "biology",     label: "Biology",   Icon: Dna,          count: 1740, tracks: ["neet"] },
 ];
 
-const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
+const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015];
 
 const PRACTICE_MODES = [
   { id: "full",     label: "Full Paper",   description: "Solve complete exam paper", Icon: I.FileText },

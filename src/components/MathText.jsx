@@ -42,6 +42,29 @@ function normalizeFlattenedTables(value) {
   return text;
 }
 
+function normalizeLegacyScientificNotation(value) {
+  const symbols = {
+    "π": "\\pi", "μ": "\\mu", "Δ": "\\Delta", "Ω": "\\Omega",
+    "α": "\\alpha", "β": "\\beta", "λ": "\\lambda", "ρ": "\\rho",
+  };
+
+  return String(value ?? "")
+    .split(/(\$[^$]*\$)/g)
+    .map((segment) => {
+      if (segment.startsWith("$") && segment.endsWith("$")) return segment;
+      let text = segment;
+      text = text.replace(/\bd([1-6])sp([1-6])\b/gi, (_, first, second) => `$d^{${first}}sp^{${second}}$`);
+      text = text.replace(/\b(sp|dsp|d)([1-6])d([1-6])\b/gi, (_, prefix, first, second) => `$${prefix}^{${first}}d^{${second}}$`);
+      text = text.replace(/\b(sp|dsp|d)([1-6])\b/gi, (_, prefix, power) => `$${prefix}^{${power}}$`);
+      text = text.replace(/\b(XeF|XeO|XeOF|H|O|N|CO|SO|NO|NH|CH|CrO|FADH)\s*([2-9])\b/g, (_, formula, subscript) => `$\\mathrm{${formula}_${subscript}}$`);
+      text = text.replace(/10\s*[-−]\s*([1-9]\d*)/g, (_, power) => `$10^{-${power}}$`);
+      text = text.replace(/√\s*([A-Za-z0-9]+)/g, (_, radicand) => `$\\sqrt{${radicand}}$`);
+      for (const [symbol, latex] of Object.entries(symbols)) text = text.replaceAll(symbol, `$${latex}$`);
+      return text;
+    })
+    .join("");
+}
+
 export default function MathText({ children, className = "" }) {
   return (
     <div className={`min-w-0 max-w-full overflow-wrap-anywhere ${className}`}>
@@ -84,7 +107,7 @@ export default function MathText({ children, className = "" }) {
           ),
         }}
       >
-        {normalizeFlattenedTables(children)}
+        {normalizeLegacyScientificNotation(normalizeFlattenedTables(children))}
       </ReactMarkdown>
     </div>
   );

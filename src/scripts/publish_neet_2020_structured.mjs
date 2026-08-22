@@ -9,7 +9,7 @@ const DATASET=path.join(DIR,"neet-2020-structured-draft.json"), CSV=path.join(DI
 const imageFields=["question_image","option_a_image","option_b_image","option_c_image","option_d_image"];
 for(const k of ["NEXT_PUBLIC_SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY"])if(!process.env[k])throw new Error(`${k} required`);
 const supabase=createClient(process.env.NEXT_PUBLIC_SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
-function review(q){const a=q.correct_option,label=a.toUpperCase(),v=q[`option_${a}`],pic=q[`option_${a}_image`];return `**Correct option: ${label}**\n\n${v}${pic?`\n\nThe corresponding graph is shown with option ${label}.`:""}`}
+function review(q){const a=q.correct_option,label=a.toUpperCase(),v=q[`option_${a}`],pic=q[`option_${a}_image`];return `**Correct option: ${label}**\n\n${v}${pic?`\n\nThe corresponding graph is shown with option ${label}.`:""}${q.explanation?`\n\n**Solution**\n\n${q.explanation}`:""}`}
 async function upload(f,n,k){const ext=path.extname(f)||".png",object=`neet-ug-2020/set-e4/structured/q${String(n).padStart(3,"0")}-${k.replaceAll("_","-")}${ext}`;const{error}=await supabase.storage.from("pyq-images").upload(object,await fs.readFile(f),{contentType:ext===".png"?"image/png":"image/jpeg",upsert:true});if(error)throw new Error(`Q${n} ${k}: ${error.message}`);return supabase.storage.from("pyq-images").getPublicUrl(object).data.publicUrl}
 async function main(){
  const data=JSON.parse(await fs.readFile(DATASET,"utf8"));if(data.length!==180||data.some((q,i)=>q.number!==i+1))throw new Error("Expected 1..180");

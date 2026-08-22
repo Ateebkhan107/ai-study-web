@@ -6,7 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { updateGoalProgress } from "@/utils/updateGoalProgress";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import { getPYQAnswers } from "@/lib/pyq";
-import { canShowStructuredQuestionText, shouldShowQuestionImageFallback, shouldShowRequiredQuestionImage } from "@/lib/pyqDisplay";
+import { hasStructuredQuestionText } from "@/lib/pyqDisplay";
 import MathText from "@/components/MathText";
 
 // Practice mode display labels
@@ -320,7 +320,7 @@ export default function PYQResultsPage() {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    {shouldShowQuestionImageFallback(q) && (
+                    {q.question_image && !hasStructuredQuestionText(q.question) && (
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
@@ -328,12 +328,12 @@ export default function PYQResultsPage() {
                         style={{ filter: "url(#remove-orange)" }}
                       />
                     )}
-                    {canShowStructuredQuestionText(q) && (
+                    {hasStructuredQuestionText(q.question) && (
                       <MathText className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
                         {q.question}
                       </MathText>
                     )}
-                    {shouldShowRequiredQuestionImage(q) && (
+                    {q.question_image && hasStructuredQuestionText(q.question) && (
                       <img
                         src={q.question_image}
                         alt="Question visual"
