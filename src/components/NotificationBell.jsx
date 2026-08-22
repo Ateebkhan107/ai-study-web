@@ -82,18 +82,18 @@ export default function NotificationBell() {
   const unread = notifications.filter((notification) => !notification.is_read).length;
 
   return (
-    <div className="relative flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
+    <div className="relative flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
       <button
         onClick={() => setOpen(!open)}
-        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+        className="relative flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
         aria-label="Open notifications"
         aria-expanded={open}
       >
-        <Bell className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" />
+        <Bell className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
 
         {unread > 0 && (
           <span
-            className="absolute -right-1.5 -top-1.5 min-w-5 rounded-full bg-red-500 px-1.5 text-center text-[10px] font-bold leading-5 text-white"
+            className="absolute -right-1.5 -top-1.5 min-w-4 rounded-full bg-red-500 px-1 text-center text-[9px] font-bold leading-4 text-white sm:min-w-5 sm:px-1.5 sm:text-[10px] sm:leading-5"
           >
             {unread}
           </span>
@@ -103,19 +103,27 @@ export default function NotificationBell() {
       {open && (
         <div
           className="
-            absolute
-            top-full
-            right-0
-            mt-2
-            w-[calc(100vw-2rem)]
-            max-w-[380px]
+            fixed
+            left-3
+            right-3
+            top-[calc(3.5rem+8px)]
+            max-h-[min(70vh,520px)]
+            w-auto
+            sm:absolute
+            sm:left-auto
+            sm:right-0
+            sm:top-full
+            sm:mt-2
+            sm:w-[calc(100vw-2rem)]
+            sm:max-w-[380px]
             bg-[var(--card)]/90
             dark:bg-[var(--surface)]/90
             backdrop-blur-xl
             border
             border-slate-200/60
             dark:border-[var(--border)]/50
-            rounded-3xl
+            rounded-2xl
+            sm:rounded-3xl
             shadow-2xl
             overflow-hidden
             z-50
@@ -123,7 +131,8 @@ export default function NotificationBell() {
         >
           <div
             className="
-              p-5
+              p-4
+              sm:p-5
               font-black
               text-slate-900
               dark:text-white
@@ -135,9 +144,9 @@ export default function NotificationBell() {
             Notifications
           </div>
 
-          <div className="max-h-[420px] overflow-y-auto">
+          <div className="max-h-[calc(min(70vh,520px)-112px)] overflow-y-auto">
             {notifications.length === 0 ? (
-              <p className="p-5 text-slate-400 dark:text-slate-500 text-sm">
+              <p className="p-4 text-slate-400 dark:text-slate-500 text-sm sm:p-5">
                 No notifications
               </p>
             ) : (
@@ -146,7 +155,8 @@ export default function NotificationBell() {
                   key={item.id}
                   onClick={() => openNotification(item)}
                   className="
-                    p-5
+                    p-3.5
+                    sm:p-5
                     flex
                     gap-4
                     items-center
@@ -160,8 +170,10 @@ export default function NotificationBell() {
                 >
                   <div
                     className="
-                      w-10
-                      h-10
+                      w-8
+                      h-8
+                      sm:w-10
+                      sm:h-10
                       rounded-xl
                       bg-indigo-50
                       dark:bg-indigo-500/10
@@ -204,7 +216,8 @@ export default function NotificationBell() {
               router.push("/notifications");
             }}
             className="
-              p-4
+              p-3.5
+              sm:p-4
               text-center
               text-xs
               font-bold

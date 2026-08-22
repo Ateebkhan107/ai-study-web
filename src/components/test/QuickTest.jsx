@@ -137,12 +137,12 @@ export default function QuickTest({ track = "jee", isPro = false }) {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4 sm:space-y-5">
       <p className="text-sm text-gray-500 dark:text-gray-400">
         Jump straight in — questions are picked randomly from your subject pool.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         {/* 3. Map across filteredOptions instead of the global array */}
         {filteredOptions.map((option) => (
           (() => {
@@ -154,7 +154,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 key={option.label}
                 onClick={() => handleLaunch(option)}
                 disabled={launching === option.label}
-                className={`group relative flex flex-col items-start text-left p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer
+                className={`group relative flex flex-col items-start rounded-2xl border-2 p-3 text-left transition-all duration-200 cursor-pointer sm:p-5
                   ${locked
                     ? "border-dashed border-gray-200 dark:border-[var(--border)] bg-gray-50 dark:bg-[var(--surface-elevated)]/30 opacity-75 hover:opacity-100 hover:border-indigo-300 dark:hover:border-indigo-500/50"
                     : launching === option.label
@@ -178,9 +178,9 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                   </span>
                 )}
 
-                <span className="mb-3 flex items-center">{option.icon}</span>
+                <span className="mb-2 flex items-center [&>svg]:h-6 [&>svg]:w-6 sm:mb-3 sm:[&>svg]:h-8 sm:[&>svg]:w-8">{option.icon}</span>
 
-                <p className={`text-sm font-black mb-1 transition-colors
+                <p className={`mb-1 text-sm font-black leading-tight transition-colors
                   ${launching === option.label
                     ? "text-indigo-700 dark:text-indigo-300"
                     : "text-black dark:text-white"
@@ -188,7 +188,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 >
                   {option.label}
                 </p>
-                <p className={`text-xs transition-colors
+                <p className={`text-[11px] leading-snug transition-colors sm:text-xs
                   ${launching === option.label
                     ? "text-indigo-700/70 dark:text-indigo-300/70"
                     : "text-gray-400"

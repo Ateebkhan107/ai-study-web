@@ -559,16 +559,16 @@ export default function PYQSessionPage() {
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       <RemoveOrangeFilter />
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-4 py-2.5 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <Logo size={26} />
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-2.5 py-2.5 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-2">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <Logo size={24} />
             <div className="hidden h-5 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
             <div className="min-w-0">
               <span className="block truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                 {modeLabels[mode] || modeLabels.full}
               </span>
-              <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
+              <p className="hidden truncate text-[11px] text-slate-500 dark:text-slate-400 min-[390px]:block">
                 {subjectLabels.join(", ")} · {exam}
                 {years.length > 0 ? ` · ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : ""}
                 {attemptLabel ? ` · ${attemptLabel}` : ""}
@@ -579,7 +579,7 @@ export default function PYQSessionPage() {
 
           {/* Full Paper Timer */}
           {mode === "full" && (
-            <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]">
+            <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] sm:gap-2 sm:px-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
@@ -591,11 +591,11 @@ export default function PYQSessionPage() {
           )}
 
           {/* Progress + Finish */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-slate-200 bg-[var(--card)] px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-slate-200 lg:hidden"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-[var(--card)] px-2.5 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -614,15 +614,15 @@ export default function PYQSessionPage() {
             <button
               onClick={handleFinishDeck}
               disabled={questions.length === 0 || finishing}
-              className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4"
             >
-              {finishing ? "Finishing..." : "Finish Deck"}
+              {finishing ? "Finishing..." : <><span className="sm:hidden">Finish</span><span className="hidden sm:inline">Finish Deck</span></>}
             </button>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto grid flex-1 w-full min-w-0 max-w-[1600px] grid-cols-1 gap-4 px-3 py-3 pb-24 sm:px-4 sm:pb-28 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4 lg:pb-3">
+      <main className="mx-auto grid flex-1 w-full min-w-0 max-w-[1600px] grid-cols-1 gap-3 px-2.5 py-2.5 pb-24 sm:px-4 sm:py-3 sm:pb-28 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4 lg:pb-3">
         {/* ── Question Palette ── */}
         <aside className="hidden lg:order-1 lg:block">
           <div className="lg:sticky lg:top-[72px]">
@@ -810,7 +810,7 @@ export default function PYQSessionPage() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setPaletteOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-4 shadow-2xl dark:bg-[var(--background)]">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-3 shadow-2xl dark:bg-[var(--background)] sm:p-4">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
             <QuestionPalette
               questions={questions}

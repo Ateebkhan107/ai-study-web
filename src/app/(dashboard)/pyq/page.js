@@ -135,17 +135,17 @@ const SAVED_PYQ_SELECT_FIELDS = [
 // ─── Shared Atomic Components ─────────────────────────────────────────────────
 function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
   return (
-    <div className={`premium-stat-card group cursor-default`}>
+    <div className="premium-stat-card group cursor-default">
       {/* Gradient overlay */}
       <div
         className="absolute inset-0 bg-gradient-to-br opacity-30 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none rounded-3xl"
         style={{ background: `linear-gradient(135deg, ${accent}15, transparent)` }}
       />
       <div className="relative z-10 flex flex-col h-full justify-between">
-        <div className="flex items-center justify-between mb-3">
+        <div className="mb-2 flex items-center justify-between gap-2 sm:mb-3">
           <p className={`text-[10px] font-bold tracking-widest ${TXT_MUTED} uppercase`}>{label}</p>
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500"
+            className="flex h-8 w-8 items-center justify-center rounded-xl opacity-80 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:opacity-100 sm:h-10 sm:w-10"
             style={{ background: `${accent}15`, color: accent }}
           >
             <IconComp size={18} />
@@ -153,7 +153,7 @@ function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
         </div>
         <div>
           <p
-            className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-0.5 bg-gradient-to-br bg-clip-text text-transparent"
+            className="mb-0.5 bg-gradient-to-br bg-clip-text text-xl font-extrabold tracking-tight text-transparent sm:text-3xl"
             style={{ backgroundImage: `linear-gradient(135deg, ${accent}, ${accent}cc)` }}
           >
             {value}
@@ -320,22 +320,22 @@ function PracticeTab({ subjects, track, isPro }) {
   return (
     <div className="grid min-w-0 grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
       {/* Left — selectors */}
-      <div className="space-y-4">
+      <div className="space-y-3.5 sm:space-y-4">
         {/* Subject selector */}
-        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "150ms" }}>
+        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "150ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
             {subjects.map((s) => {
               const active = selectedSubjects.includes(s.id);
               return (
                 <button key={s.id} onClick={() => toggleSubject(s.id)}
-                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all cursor-pointer duration-200 ${
+                  className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 transition-all cursor-pointer duration-200 sm:gap-2.5 sm:p-4 ${
                     active
                       ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
-                  <s.Icon className="w-7 h-7 mb-1" />
+                  <s.Icon className="mb-0.5 h-5 w-5 sm:mb-1 sm:h-7 sm:w-7" />
                   <span className="text-sm font-semibold">{s.label}</span>
                 </button>
               );
@@ -344,12 +344,12 @@ function PracticeTab({ subjects, track, isPro }) {
         </div>
 
         {/* Year selector */}
-        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "225ms" }}>
+        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "225ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — SELECT YEAR BULLETINS</p>
           <div className="flex flex-wrap gap-2">
             {YEARS.map((yr) => (
               <button key={yr} onClick={() => toggleYear(yr)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer duration-200 ${
+                className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all cursor-pointer duration-200 sm:px-4 ${
                   selectedYears.includes(yr)
                     ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                     : `${BORDER} ${TXT_MUTED}`
@@ -365,7 +365,7 @@ function PracticeTab({ subjects, track, isPro }) {
         {track === "jee" && (
           <>
             {/* Attempt Selector */}
-            <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "300ms" }}>
+            <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "300ms" }}>
               <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
               {selectedYears.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
@@ -374,12 +374,12 @@ function PracticeTab({ subjects, track, isPro }) {
               ) : availableAttempts.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                   {availableAttempts.map((attempt) => {
                     const isActive = effectiveSelectedAttempt === attempt;
                     return (
                       <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
-                        className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                        className={`flex flex-col items-start gap-1 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:p-4 ${
                           isActive
                             ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                             : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
@@ -394,7 +394,7 @@ function PracticeTab({ subjects, track, isPro }) {
             </div>
 
             {/* Shift Selector */}
-            <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "350ms" }}>
+            <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "350ms" }}>
               <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
               {selectedYears.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
@@ -403,12 +403,12 @@ function PracticeTab({ subjects, track, isPro }) {
               ) : availableShiftPapers.length === 0 ? (
                 <p className={`text-sm ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                   {availableShiftPapers.map((paper) => {
                     const isActive = effectiveSelectedShift === paper.id;
                     return (
                       <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
-                        className={`flex flex-col items-start gap-1 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                        className={`flex flex-col items-start gap-1 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:p-4 ${
                           isActive
                             ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                             : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
@@ -425,11 +425,11 @@ function PracticeTab({ subjects, track, isPro }) {
         )}
 
         {/* Practice mode selector */}
-        <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
+        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "375ms" }}>
           <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
             {track === "jee" ? (availableShiftPapers.length > 0 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
               const locked = PRO_ONLY_PRACTICE_MODES.has(m.id) && !isPro;
@@ -445,7 +445,7 @@ function PracticeTab({ subjects, track, isPro }) {
                     setSelectedYears([selectedYears[0]]);
                   }
                 }}
-                  className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer text-left duration-200 ${
+                  className={`flex items-start gap-2 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:gap-3 sm:p-4 ${
                     active
                       ? locked
                         ? "border-indigo-400 bg-indigo-50/40 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-300"
@@ -455,7 +455,7 @@ function PracticeTab({ subjects, track, isPro }) {
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
                   }`}
                 >
-                  <m.Icon size={20} className="shrink-0 mt-0.5" />
+                  <m.Icon size={18} className="mt-0.5 shrink-0 sm:size-5" />
                   <span className="min-w-0">
                     <span className="flex flex-wrap items-center gap-2 text-sm font-semibold">
                       {m.label}
@@ -465,7 +465,7 @@ function PracticeTab({ subjects, track, isPro }) {
                         </span>
                       )}
                     </span>
-                    <span className="block text-xs mt-0.5 opacity-80">{m.description}</span>
+                    <span className="mt-0.5 hidden text-xs opacity-80 min-[390px]:block">{m.description}</span>
                   </span>
                 </button>
               );
@@ -475,7 +475,7 @@ function PracticeTab({ subjects, track, isPro }) {
 
         {/* Chapter selector */}
         {practiceMode === "chapter" && (
-          <div className={`glass-card p-4 sm:p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
+          <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "450ms" }}>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
               {track === "jee" ? (availableShiftPapers.length > 0 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
             </p>
@@ -487,7 +487,7 @@ function PracticeTab({ subjects, track, isPro }) {
               <div className="flex flex-wrap gap-2">
                 {chapters.map((ch) => (
                   <button key={ch} onClick={() => toggleChapter(ch)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer duration-200 ${
+                    className={`rounded-xl border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer duration-200 sm:px-4 sm:py-2 sm:text-sm ${
                       selectedChapters.includes(ch)
                         ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                         : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
@@ -504,7 +504,7 @@ function PracticeTab({ subjects, track, isPro }) {
 
       {/* Right — start button */}
       <div>
-        <div className={`glass-card p-4 sm:p-5 space-y-3 xl:sticky xl:top-24 animate-slideUp`} style={{ animationDelay: "150ms" }}>
+        <div className="glass-card space-y-3 p-4 animate-slideUp sm:p-5 xl:sticky xl:top-24" style={{ animationDelay: "150ms" }}>
           <div className="space-y-2 mb-2">
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>SESSION SUMMARY</p>
             <p className={`text-xs ${TXT_MUTED}`}>
@@ -650,8 +650,8 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
   }
 
   return (
-    <div className="space-y-5">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="space-y-4 sm:space-y-5">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {[
           { Icon: I.Target,       label: "Questions Attempted", value: String(attempted), sublabel: "answered PYQs",         accent: "#C2723F" },
           { Icon: I.CheckCircle2, label: "Accuracy",            value: formatPercent(analytics?.accuracy), sublabel: "correct / attempted", accent: "#10b981" },
@@ -664,7 +664,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
         ))}
       </div>
 
-      <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "375ms" }}>
+      <div className="glass-card p-4 animate-slideUp sm:p-6" style={{ animationDelay: "375ms" }}>
         <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SUBJECT PERFORMANCE</p>
         {subjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No subject data found for your attempted PYQs.</p>}
         <div className="space-y-5">
@@ -687,7 +687,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
         </div>
       </div>
 
-      <div className={`glass-card p-6 animate-slideUp`} style={{ animationDelay: "450ms" }}>
+      <div className="glass-card p-4 animate-slideUp sm:p-6" style={{ animationDelay: "450ms" }}>
         <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
           <div>
             <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>CHAPTER PERFORMANCE</p>
@@ -698,7 +698,8 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
         {chapters.length === 0 ? (
           <p className={`text-sm ${TXT_MUTED}`}>No mapped chapter data found yet.</p>
         ) : (
-          <div className="divide-y divide-slate-200/60 dark:divide-slate-800/70">
+          <div className="overflow-x-auto">
+          <div className="min-w-[520px] divide-y divide-slate-200/60 dark:divide-slate-800/70">
             {chapters.map((item) => (
               <div key={`${item.subject}-${item.chapter}`} className="grid gap-3 py-4 sm:grid-cols-[minmax(0,1fr)_180px_120px] sm:items-center">
                 <div className="min-w-0">
@@ -722,6 +723,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
                 </span>
               </div>
             ))}
+          </div>
           </div>
         )}
       </div>
@@ -750,7 +752,7 @@ function ProLockedPanel({ title, description }) {
   const router = useRouter();
 
   return (
-    <div className={`glass-card p-6 sm:p-8 text-center animate-slideUp`}>
+    <div className="glass-card p-5 text-center animate-slideUp sm:p-8">
       <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
         <I.Sparkles size={20} />
       </div>

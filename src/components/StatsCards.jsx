@@ -77,7 +77,7 @@ export default function StatsCards({ compact = false, stacked = false }) {
 
   if (!isLoaded) {
     return (
-      <div className={`grid grid-cols-1 gap-3 ${stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2"} ${compact ? "" : "gap-4"}`}>
+      <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2"} ${compact ? "" : "gap-4"}`}>
         {Array.from({ length: 2 }).map((_, index) => (
           <div
             key={index}
@@ -93,7 +93,7 @@ export default function StatsCards({ compact = false, stacked = false }) {
   }
 
   return (
-    <div className={`grid grid-cols-1 gap-3 ${
+    <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${
       stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2 lg:gap-5"
     }`}>
       {stats.map((stat, index) => {
@@ -103,32 +103,32 @@ export default function StatsCards({ compact = false, stacked = false }) {
         return (
           <div
             key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${compact ? "p-3.5 sm:p-4" : "p-4 sm:p-5"} ${style.borderHover}`}
+            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${compact ? "p-2.5 sm:p-4" : "p-3 sm:p-5"} ${style.borderHover}`}
             style={{ transitionDelay: `${index * 50}ms` }}
           >
             
-            <div className={`relative z-10 flex items-start justify-between ${
-              compact ? "mb-2" : "mb-4"
+            <div className={`relative z-10 flex items-start justify-between gap-2 ${
+              compact ? "mb-1.5 sm:mb-2" : "mb-3 sm:mb-4"
             }`}>
               <div className="space-y-1">
-                <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 transition-colors group-hover:text-slate-700 dark:group-hover:text-slate-300">
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400 transition-colors group-hover:text-slate-700 dark:group-hover:text-slate-300 sm:text-[11px] sm:tracking-[0.2em]">
                   {stat.label}
                 </p>
-                <p className="text-xs font-medium text-slate-400 dark:text-slate-500">
+                <p className="hidden text-xs font-medium text-slate-400 dark:text-slate-500 min-[390px]:block">
                   {stat.sub}
                 </p>
               </div>
 
               {/* Dynamic Icon Container */}
               <div className={`flex items-center justify-center rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105 ${
-                compact ? "h-8 w-8" : "h-9 w-9"
+                compact ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-9 sm:w-9"
               }`}>
-                <Icon className={`${compact ? "h-4 w-4" : "h-5 w-5"} ${style.iconColor}`} strokeWidth={2.5} />
+                <Icon className={`${compact ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-5 sm:w-5"} ${style.iconColor}`} strokeWidth={2.5} />
               </div>
             </div>
 
             <div className="relative z-10 flex items-end justify-between">
-              <h3 className={`font-black tracking-tighter ${compact ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"} ${style.valueColor}`}>
+              <h3 className={`font-black tracking-tighter ${compact ? "text-2xl sm:text-4xl" : "text-3xl sm:text-5xl"} ${style.valueColor}`}>
                 {stat.value}
               </h3>
             </div>

@@ -54,10 +54,10 @@ function LoadingState() {
 
 function ProLock() {
   return (
-    <div className="flex flex-col items-center justify-center py-16 animate-slideUp" style={{ animationDelay: "150ms" }}>
-      <div className="glass-card max-w-md p-8 text-center">
+    <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
+      <div className="glass-card max-w-md p-5 text-center sm:p-8">
         <BarChart3 className="mx-auto mb-4 h-12 w-12 text-indigo-500 opacity-70" />
-        <h2 className="mb-2 text-2xl font-black text-slate-900 dark:text-white">Advanced Analytics is Pro</h2>
+        <h2 className="mb-2 text-xl font-black text-slate-900 dark:text-white sm:text-2xl">Advanced Analytics is Pro</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
           Leaderboard stays free. Upgrade to unlock deep trends, weak chapters, study heatmaps, and performance analytics.
         </p>
@@ -74,10 +74,10 @@ function ProLock() {
 
 function AIComingSoon() {
   return (
-    <div className="flex flex-col items-center justify-center py-16 animate-slideUp" style={{ animationDelay: "150ms" }}>
-      <div className="glass-card w-full max-w-xl p-8 text-center sm:p-10">
+    <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
+      <div className="glass-card w-full max-w-xl p-5 text-center sm:p-10">
         <Brain className="mx-auto mb-4 h-12 w-12 text-blue-500 opacity-60" />
-        <h2 className="mb-2 text-2xl font-bold text-slate-800 dark:text-slate-100">AI Insights</h2>
+        <h2 className="mb-2 text-xl font-bold text-slate-800 dark:text-slate-100 sm:text-2xl">AI Insights</h2>
         <p className="mx-auto max-w-md text-sm text-slate-500 dark:text-slate-400">
           Personalized study intelligence is coming to PrepZii, including performance summaries, weak-area explanations, study-plan suggestions, and recommendations.
         </p>

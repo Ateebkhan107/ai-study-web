@@ -265,7 +265,9 @@ body {
 
 html,
 body {
+  width: 100%;
   max-width: 100%;
+  overflow-x: clip;
 }
 
 @media (max-width: 480px) {
@@ -288,6 +290,17 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+#__next,
+main,
+section,
+article,
+aside,
+header,
+footer,
+div {
+  min-width: 0;
 }
 
 img,
@@ -466,11 +479,28 @@ code,
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .cl-cardBox {
   background: transparent !important;
   box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.cl-rootBox,
+.cl-component,
+.cl-main,
+.cl-form,
+.cl-formField,
+.cl-socialButtons,
+.cl-socialButtonsBlockButton,
+.cl-footerAction,
+.cl-internal-b3fm6y {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* ── Clerk — Premium EdTech Form Inputs ───────────────────────── */
@@ -481,6 +511,8 @@ code,
 }
 
 .cl-formFieldInput {
+  width: 100% !important;
+  max-width: 100% !important;
   color: var(--foreground) !important;
   background-color: color-mix(in srgb, var(--surface) 82%, transparent) !important;
   backdrop-filter: blur(12px) !important;
@@ -523,6 +555,8 @@ code,
 
 /* ── Clerk — Social Buttons (Glassy & Interactive) ────────────── */
 .cl-socialButtonsBlockButton {
+  width: 100% !important;
+  max-width: 100% !important;
   background-color: color-mix(in srgb, var(--surface) 78%, transparent) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid var(--border) !important;
@@ -545,6 +579,8 @@ code,
 
 /* ── Clerk — Vibrant Animated Primary Button ──────────────────── */
 .cl-formButtonPrimary {
+  width: 100% !important;
+  max-width: 100% !important;
   background: var(--accent) !important;
   background-size: auto !important;
   animation: none !important;
@@ -608,6 +644,33 @@ code,
 .cl-alertText {
   color: #EF4444 !important;
   font-weight: 500 !important;
+  overflow-wrap: anywhere !important;
+}
+
+@media (max-width: 640px) {
+  body {
+    animation: none;
+  }
+
+  .glass-card {
+    border-radius: 18px;
+  }
+
+  .glass-card:hover,
+  .premium-stat-card:hover {
+    transform: none;
+  }
+
+  .premium-stat-card {
+    border-radius: 18px;
+    padding: 0.875rem;
+  }
+
+  .cl-formButtonPrimary,
+  .cl-socialButtonsBlockButton,
+  .cl-formFieldInput {
+    min-height: 42px !important;
+  }
 }
 
 /* ── React PDF Viewer Base Styles (Removed) ─────────────────────────────── */

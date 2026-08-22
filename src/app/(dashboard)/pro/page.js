@@ -144,8 +144,8 @@ export default function ProPage() {
       badgeVariant="brand"
     >
       {/* ── Hero ── */}
-      <section className="text-center space-y-5 animate-slideUp">
-        <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+      <section className="space-y-4 text-center animate-slideUp sm:space-y-5">
+        <h1 className="text-3xl font-black leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-6xl">
           Unlock your full
           <br />
           <span className="bg-gradient-to-r from-indigo-500 via-brand-hover to-pink-500 bg-clip-text text-transparent">
@@ -153,27 +153,27 @@ export default function ProPage() {
           </span>
         </h1>
 
-        <p className="text-slate-400 dark:text-slate-500 text-base max-w-lg mx-auto leading-relaxed">
+        <p className="mx-auto max-w-lg text-sm leading-relaxed text-slate-400 dark:text-slate-500 sm:text-base">
           {selectedTrack} Pro unlocks only {selectedTrack} content. Renew or upgrade anytime to extend your access.
         </p>
       </section>
 
       <section className="flex justify-center animate-slideUp" style={{ animationDelay: "50ms" }}>
-        <div className="rounded-2xl border border-indigo-400/20 bg-indigo-500/10 px-6 py-3 text-sm font-black text-indigo-600 dark:text-indigo-300">
+        <div className="rounded-2xl border border-indigo-400/20 bg-indigo-500/10 px-4 py-2 text-sm font-black text-indigo-600 dark:text-indigo-300 sm:px-6 sm:py-3">
           {selectedTrack} Pro
         </div>
       </section>
 
       {/* ── Plan Selector ── */}
-      <section className="flex flex-col items-center gap-8 animate-slideUp" style={{ animationDelay: "75ms" }}>
+      <section className="flex flex-col items-center gap-5 animate-slideUp sm:gap-8" style={{ animationDelay: "75ms" }}>
         {/* Toggle */}
-        <div className="inline-flex items-center bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 p-1.5 rounded-2xl gap-1">
+        <div className="grid w-full max-w-md grid-cols-3 items-stretch gap-1 rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-1.5 backdrop-blur-xl dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:inline-flex sm:w-auto">
           {PLANS.map((p) => (
             <button
               key={p.id}
               onClick={() => setSelectedPlan(p.id)}
               disabled={Boolean(currentPlan && PLAN_RANK[p.id] <= PLAN_RANK[currentPlan])}
-              className={`relative flex min-h-14 flex-col items-center justify-center rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200
+              className={`relative flex min-h-12 flex-col items-center justify-center rounded-xl px-2 py-2 text-xs font-bold transition-all duration-200 sm:min-h-14 sm:px-4 sm:text-sm
                 ${
                   selectedPlan === p.id
                     ? "bg-brand text-white shadow-sm"
@@ -200,7 +200,7 @@ export default function ProPage() {
         {/* Price display */}
         <div className="text-center">
           <div className="mb-2 flex items-center justify-center gap-2">
-            <span className="text-xl font-bold text-slate-400 line-through decoration-2 dark:text-slate-600">
+            <span className="text-lg font-bold text-slate-400 line-through decoration-2 dark:text-slate-600 sm:text-xl">
               ₹{plan.originalPrice}
             </span>
             <span className="rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-sm shadow-emerald-500/20">
@@ -208,8 +208,8 @@ export default function ProPage() {
             </span>
           </div>
           <div className="flex items-end justify-center gap-1">
-            <span className="text-2xl font-bold text-slate-400 dark:text-slate-500 mb-2">₹</span>
-            <span className="text-7xl sm:text-8xl font-black bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent tracking-tighter leading-none">
+            <span className="mb-1 text-xl font-bold text-slate-400 dark:text-slate-500 sm:mb-2 sm:text-2xl">₹</span>
+            <span className="bg-gradient-to-br from-slate-900 to-slate-600 bg-clip-text text-6xl font-black leading-none tracking-tighter text-transparent dark:from-white dark:to-slate-300 sm:text-8xl">
               {plan.price}
             </span>
             <span className="text-slate-400 dark:text-slate-500 text-base mb-2">/{plan.per}</span>
@@ -253,9 +253,9 @@ export default function ProPage() {
 
       {/* ── Free vs PRO Comparison ── */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Free Plan */}
-          <div className="glass-card p-6">
+          <div className="glass-card p-4 sm:p-6">
             <div className="mb-5">
               <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                 Free plan
@@ -287,7 +287,7 @@ export default function ProPage() {
           </div>
 
           {/* PRO Plan */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover dark:from-brand dark:to-brand-hover p-6 shadow-xl shadow-brand/15">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover p-4 shadow-xl shadow-brand/15 dark:from-brand dark:to-brand-hover sm:p-6">
             {/* Dot pattern overlay */}
             <div
               className="absolute inset-0 opacity-10"
@@ -351,7 +351,7 @@ export default function ProPage() {
 
       {/* ── Social Proof ── */}
       <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="grid grid-cols-3 gap-2 text-center sm:gap-4">
           {[
             { value: "12,000+", label: "Active students", icon: Users },
             { value: "94%", label: "Satisfaction rate", icon: Zap },
@@ -359,15 +359,15 @@ export default function ProPage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="glass-card p-5 group hover:-translate-y-1 transition-all duration-300"
+              className="glass-card p-3 transition-all duration-300 hover:-translate-y-1 sm:p-5 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-                <s.icon className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-xl border border-indigo-100 bg-indigo-50 transition-transform duration-300 group-hover:scale-110 dark:border-indigo-500/20 dark:bg-indigo-500/10 sm:mb-3 sm:h-10 sm:w-10">
+                <s.icon className="h-4 w-4 text-indigo-500 dark:text-indigo-400 sm:h-5 sm:w-5" />
               </div>
-              <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              <p className="text-lg font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
                 {s.value}
               </p>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium">{s.label}</p>
+              <p className="mt-1 text-[10px] font-medium leading-tight text-slate-400 dark:text-slate-500 sm:text-xs">{s.label}</p>
             </div>
           ))}
         </div>
@@ -412,7 +412,7 @@ export default function ProPage() {
 
       {/* ── Bottom CTA ── */}
       <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover dark:from-brand dark:to-brand-hover p-8 sm:p-10 text-center shadow-xl shadow-brand/15">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover p-5 text-center shadow-xl shadow-brand/15 dark:from-brand dark:to-brand-hover sm:p-10">
           {/* Dot pattern */}
           <div
             className="absolute inset-0 opacity-10"
@@ -426,7 +426,7 @@ export default function ProPage() {
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative space-y-5">
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-black tracking-tight text-white sm:text-4xl">
               Ready to crack it?
             </h2>
             <p className="text-white/60 text-sm max-w-md mx-auto">
@@ -435,7 +435,7 @@ export default function ProPage() {
             <button
               onClick={handleSubscribe}
               disabled={loading || currentPlan === "yearly"}
-              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-[var(--card)] text-indigo-600 text-sm font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 transition-all duration-300"
+              className="group inline-flex max-w-full items-center justify-center gap-2 rounded-2xl bg-[var(--card)] px-5 py-3 text-sm font-black text-indigo-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 sm:px-8 sm:py-3.5"
             >
               {loading ? "Processing..." : currentPlan === "yearly" ? "Yearly plan active" : currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

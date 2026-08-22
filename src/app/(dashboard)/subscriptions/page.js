@@ -16,26 +16,26 @@ export default function SubscriptionsPage() {
       badge="BILLING"
       badgeVariant="amber"
     >
-      <div className="max-w-3xl mx-auto space-y-8 pb-12 animate-slideUp">
+      <div className="mx-auto max-w-3xl space-y-6 pb-10 animate-slideUp sm:space-y-8 sm:pb-12">
         
         {/* Header Info */}
-        <div className="flex items-center justify-between pb-6 border-b border-slate-200/60 dark:border-[var(--border-subtle)]/50">
+        <div className="flex flex-col gap-3 border-b border-slate-200/60 pb-5 dark:border-[var(--border-subtle)]/50 sm:flex-row sm:items-center sm:justify-between sm:pb-6">
           <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
             <CreditCard className="w-5 h-5 text-amber-500" />
             <span className="text-sm font-medium">Billing & Subscriptions</span>
           </div>
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400">
+          <span className="w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-400">
             Last Updated: July 2026
           </span>
         </div>
 
         {/* Content */}
-        <div className="space-y-10">
-          <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed text-center font-bold px-4 py-3 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 rounded-xl border border-amber-200 dark:border-amber-500/30">
+        <div className="space-y-7 sm:space-y-10">
+          <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-center text-sm font-bold leading-relaxed text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-400">
             PrepZii subscriptions are fixed-term plans. They remain active until the end of the purchased billing period.
           </p>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div className="space-y-3">
               <h2 className="text-lg font-black text-slate-900 dark:text-white">1. PrepZii Pro & Premium Features</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -59,7 +59,7 @@ export default function SubscriptionsPage() {
           </div>
 
           <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-[var(--border-subtle)]/50">
-            <div className="glass-card p-6 rounded-3xl text-center space-y-4">
+            <div className="glass-card space-y-4 rounded-3xl p-4 text-center sm:p-6">
               <h3 className="font-bold text-slate-900 dark:text-white">Ready to upgrade?</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 Join thousands of other aspirants taking their preparation to the next level with PrepZii Pro.

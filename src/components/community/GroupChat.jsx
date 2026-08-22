@@ -323,9 +323,9 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       : null;
 
   return (
-    <div className="flex h-full flex-col bg-[var(--card)]/60 dark:bg-[var(--background)]/30">
+    <div className="flex h-full min-h-0 flex-col bg-[var(--card)]/60 dark:bg-[var(--background)]/30">
       {/* Messages area */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-2 scroll-smooth sm:px-5">
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-3 scroll-smooth sm:px-5 sm:py-4">
         {/* Load older */}
         {hasMore && (
           <div className="flex justify-center py-2">
@@ -387,7 +387,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       {/* Input */}
       <form
         onSubmit={sendMessage}
-        className="sticky bottom-0 border-t border-slate-200 bg-[var(--card)]/90 px-3 py-3 backdrop-blur dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 flex items-end gap-3 sm:px-4"
+        className="sticky bottom-0 flex items-end gap-2 border-t border-slate-200 bg-[var(--card)]/90 px-3 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 sm:gap-3 sm:px-4"
       >
         <textarea
           value={input}
@@ -400,8 +400,8 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
           }}
           maxLength={2000}
           rows={1}
-          placeholder="Type a message… (Enter to send, Shift+Enter for new line)"
-          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none max-h-32 overflow-y-auto"
+          placeholder="Type a message…"
+          className="max-h-28 flex-1 resize-none overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white sm:max-h-32 sm:px-4"
           style={{ height: "auto" }}
         />
         <button

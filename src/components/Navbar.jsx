@@ -101,17 +101,17 @@ export default function Navbar({
   ) : null;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-1.5 px-2.5 sm:h-16 sm:gap-3 sm:px-6 lg:px-8">
 
         <div className="flex min-w-0 shrink-0 items-center">
           <Link
             href="/dashboard"
-            className="flex h-10 items-center gap-2 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200"
+            className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2"
             aria-label="PrepZii dashboard"
           >
-            <Logo size={29} showText={false} />
-            <span className="text-[17px] font-black uppercase tracking-normal sm:text-[18px]">
+            <Logo size={26} showText={false} />
+            <span className="text-[14px] font-black uppercase tracking-normal min-[360px]:text-[15px] sm:text-[18px]">
               PREPZII
             </span>
           </Link>
@@ -126,14 +126,14 @@ export default function Navbar({
           </div>
         </nav>
 
-        <div className="flex h-10 shrink-0 items-center justify-end gap-1.5 sm:gap-2">
+        <div className="flex h-10 shrink-0 items-center justify-end gap-1 sm:gap-2">
           <div className="hidden items-center lg:flex">
             {proLink}
           </div>
 
           <button
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px]"
+            className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
             aria-label="Toggle theme"
           >
             <span className="flex items-center justify-center">
@@ -142,17 +142,17 @@ export default function Navbar({
             </span>
           </button>
 
-          <div className="flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
+          <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
             <NotificationBell track={track} />
           </div>
 
-          <div className="flex h-9 w-9 items-center justify-center sm:h-[38px] sm:w-[38px]">
+          <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
             <ProfileMenu />
           </div>
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 sm:h-[38px] sm:w-[38px] lg:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px] lg:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
           >
@@ -163,11 +163,11 @@ export default function Navbar({
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200/70 bg-[var(--card)]/95 px-4 py-3 shadow-lg backdrop-blur-xl dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/95 lg:hidden">
-          <nav className="mx-auto grid max-w-7xl grid-cols-1 gap-1.5 sm:grid-cols-2" aria-label="Mobile navigation">
+        <div className="border-t border-slate-200/70 bg-[var(--card)]/95 px-3 py-3 shadow-lg backdrop-blur-xl dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/95 lg:hidden">
+          <nav className="mx-auto grid max-w-7xl grid-cols-2 gap-1.5" aria-label="Mobile navigation">
             {visibleNavItems.map((item) => renderNavLink(item, true))}
             {proLink && (
-              <div className="mt-1 flex min-h-11 items-center sm:col-span-2">
+              <div className="col-span-2 mt-1 flex min-h-11 items-center">
                 {proLink}
               </div>
             )}

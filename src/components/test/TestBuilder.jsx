@@ -401,17 +401,17 @@ export default function TestBuilder({ track = "jee", access = null }) {
     <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
 
       {/* Left — Subject + Chapter Picker */}
-      <div className="min-w-0 space-y-5 xl:col-span-2">
+      <div className="min-w-0 space-y-4 sm:space-y-5 xl:col-span-2">
 
         {/* Step 1 — Subject selector */}
-        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-3.5 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
             01 — Choose Subjects
           </p>
           <p className="text-xs text-gray-400 mb-4">
             {activeTrack === "neet" ? "Choose Biology for chapter-wise practice" : "You can select multiple subjects"}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
             {filteredSubjectsEntries.map(([name, data]) => {
               const c = colorMap[data.color];
               const isSelected = validSelectedSubjects.includes(name);
@@ -422,13 +422,13 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   key={name}
                   type="button"
                   onClick={() => toggleSubject(name)}
-                  className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm cursor-pointer
+                  className={`group flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 text-sm font-semibold transition-all duration-150 cursor-pointer sm:gap-2 sm:p-4
                     ${isSelected
                       ? `${c.bg} ${c.border} ${c.text}`
                       : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/40"
                     }`}
                 >
-                  <span className="mb-1 flex items-center justify-center">{data.icon}</span>
+                  <span className="mb-0.5 flex items-center justify-center [&>svg]:h-5 [&>svg]:w-5 sm:mb-1 sm:[&>svg]:h-6 sm:[&>svg]:w-6">{data.icon}</span>
                   {name}
                   {isSelected && (
                     <span className="text-[10px] font-bold opacity-70">
@@ -443,7 +443,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
 
         {/* Step 2 — Chapter selector */}
         <div className={`space-y-3 transition-all duration-300 ${validSelectedSubjects.length === 0 ? "opacity-50 pointer-events-none" : ""}`}>
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">
+          <p className="px-1 text-xs font-bold uppercase tracking-widest text-gray-400">
             02 — Choose Chapters
             {validSelectedSubjects.length === 0 && <span className="ml-2 font-normal normal-case">— select a subject first</span>}
           </p>
@@ -465,7 +465,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
               >
                 <div
                   onClick={() => setExpandedSubject(isExpanded ? null : subject)}
-                className="w-full flex min-w-0 items-center justify-between gap-3 px-4 py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer select-none sm:px-5"
+                className="w-full flex min-w-0 items-center justify-between gap-2 px-3 py-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer select-none sm:gap-3 sm:px-5 sm:py-3.5"
               >
                   <div className="flex min-w-0 items-center gap-2">
                     <span className="text-lg">{data.icon}</span>
@@ -476,11 +476,11 @@ export default function TestBuilder({ track = "jee", access = null }) {
                       </span>
                     )}
                   </div>
-                  <div className="flex shrink-0 items-center gap-3">
+                  <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                     {isExpanded && (
                       <span
                         onClick={(e) => { e.stopPropagation(); selectAllChapters(subject); }}
-                        className={`text-xs font-semibold text-gray-400 hover:text-black dark:hover:text-white transition-colors ${isBiologyPracticeSubject ? "hidden" : "cursor-pointer"}`}
+                        className={`text-[11px] font-semibold text-gray-400 hover:text-black dark:hover:text-white transition-colors sm:text-xs ${isBiologyPracticeSubject ? "hidden" : "cursor-pointer"}`}
                       >
                         {allSelected ? "Deselect all" : "Select all"}
                       </span>
@@ -492,7 +492,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 </div>
 
                 {isExpanded && (
-                  <div className="px-4 pb-4 border-t border-gray-50 dark:border-[var(--border-subtle)] pt-3 sm:px-5">
+                  <div className="px-3 pb-3 border-t border-gray-50 dark:border-[var(--border-subtle)] pt-3 sm:px-5 sm:pb-4">
                     {isBiologyPracticeSubject && (
                       <div className="mb-3 rounded-xl border border-rose-100 bg-rose-50/70 px-3 py-2 text-xs font-medium text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/20 dark:text-rose-300">
                         {availabilityLoading
@@ -513,7 +513,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                             type="button"
                             onClick={() => toggleChapter(subject, chapter)}
                             disabled={isUnavailable}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-100
+                            className={`rounded-lg border px-2.5 py-1.5 text-[11px] font-semibold transition-all duration-100 sm:px-3 sm:text-xs
                               ${isChapterSelected
                                 ? c.chip
                                 : isUnavailable
@@ -540,10 +540,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
       </div>
 
       {/* Right — Config + Start */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
 
         {/* Question count */}
-        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-3.5 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Questions
           </p>
@@ -556,7 +556,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                 type="button"
                 onClick={() => !disabled && saveCount(n)}
                 disabled={disabled}
-                className={`w-12 h-10 rounded-lg text-sm font-bold border transition-all duration-100
+                className={`h-9 min-w-11 rounded-lg border px-2 text-sm font-bold transition-all duration-100 sm:h-10 sm:min-w-12
                   ${questionCount === n
                     ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
                     : disabled
@@ -590,7 +590,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
 
         {/* Duration */}
-        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-3.5 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Duration (mins)
           </p>
@@ -613,17 +613,17 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
 
         {/* Difficulty */}
-        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-4 sm:p-5">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] border border-gray-100 dark:border-[var(--border-subtle)] rounded-2xl p-3.5 sm:p-5">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
             Difficulty
           </p>
-          <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-col">
             {["easy", "medium", "hard", "mixed"].map((d) => (
               <button
                 key={d}
                 type="button"
                 onClick={() => saveDifficulty(d)}
-                className={`flex items-center justify-between px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-100 cursor-pointer
+                className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm font-semibold transition-all duration-100 cursor-pointer sm:px-4 sm:py-2.5
                   ${difficulty === d
                     ? "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700/60"
                     : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-400"
@@ -639,7 +639,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
 
         {/* Summary + Start */}
-        <div className={`rounded-2xl p-5 border-2 transition-all duration-200
+        <div className={`rounded-2xl border-2 p-4 transition-all duration-200 sm:p-5
           ${canStart && !customTestBlocked
             ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-700/60"
             : "bg-gray-100 dark:bg-[var(--surface-elevated)] border-gray-200 dark:border-[var(--border)]"

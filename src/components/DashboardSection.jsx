@@ -74,8 +74,8 @@ export default async function DashboardSection({ config, compact = false }) {
 
       {/* ── Formula grid ──────────────────────────────────────── */}
       {filteredFormulas.length > 0 && (
-        <div className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ${
-          compact ? "py-0 lg:gap-4" : "py-2 lg:gap-5"
+        <div className={`grid grid-cols-2 gap-2.5 md:grid-cols-2 lg:grid-cols-3 ${
+          compact ? "py-0 sm:gap-4 lg:gap-4" : "py-2 sm:gap-4 lg:gap-5"
         }`}>
           {filteredFormulas.map((book, index) => {
             const meta = getMeta(book.subject);
@@ -86,7 +86,7 @@ export default async function DashboardSection({ config, compact = false }) {
                 {/* Clean Premium Card */}
                 <div 
                   className={`relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${
-                    compact ? "min-h-[140px]" : "min-h-[180px]"
+                    compact ? "min-h-[112px] sm:min-h-[140px]" : "min-h-[120px] sm:min-h-[180px]"
                   }`}
                   style={{ transitionDelay: `${index * 50}ms` }}
                 >
@@ -97,35 +97,35 @@ export default async function DashboardSection({ config, compact = false }) {
                   {/* Background Watermark Icon */}
                   <Icon className={`absolute -rotate-12 transform opacity-[0.03] transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110 dark:opacity-[0.04] ${compact ? "-bottom-5 -right-5 h-24 w-24" : "-bottom-6 -right-6 h-32 w-32"} ${meta.color}`} />
 
-                  <div className={`relative z-10 flex h-full flex-col pl-5 pr-4 ${
-                    compact ? "py-4" : "py-5"
+                  <div className={`relative z-10 flex h-full flex-col pl-4 pr-3 sm:pl-5 sm:pr-4 ${
+                    compact ? "py-3 sm:py-4" : "py-3 sm:py-5"
                   }`}>
                     
                     {/* Top Row: Tag & Subject */}
                     <div className={`flex items-start justify-between gap-2 ${
                       compact ? "mb-2" : "mb-3"
                     }`}>
-                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${meta.bg} ${meta.color} border ${meta.border} backdrop-blur-sm`}>
+                      <span className={`inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-md ${meta.bg} ${meta.color} border ${meta.border} backdrop-blur-sm sm:gap-1.5 sm:text-[10px] sm:px-2.5`}>
                         <Icon className="w-3 h-3" strokeWidth={2.5} />
                         {book.subject}
                       </span>
 
                       {book.tag && (
-                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] px-2 py-1 rounded-md">
+                        <span className="hidden text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] px-2 py-1 rounded-md min-[390px]:inline">
                           {book.tag}
                         </span>
                       )}
                     </div>
 
                     {/* Book Title */}
-                    <h3 className={`text-base font-black leading-snug text-slate-800 transition-colors group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-indigo-400 ${compact ? "mb-1.5" : "mb-2 sm:text-lg"}`}>
+                    <h3 className={`text-sm font-black leading-snug text-slate-800 transition-colors group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-indigo-400 sm:text-base ${compact ? "mb-1.5" : "mb-2 sm:text-lg"}`}>
                       {book.title}
                     </h3>
 
                     {/* Formula Embossed Box */}
                     {book.formula && (
-                      <div className={`mt-auto rounded-xl bg-gradient-to-br px-3 ${compact ? "py-2" : "py-2.5"} ${meta.bg} to-transparent border ${meta.border} shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)] backdrop-blur-md transition-all duration-300 group-hover:bg-[var(--card)]/50 dark:group-hover:bg-slate-800/50`}>
-                        <p className={`font-mono text-[13px] font-bold tracking-tight leading-snug ${meta.color}`}>
+                      <div className={`mt-auto hidden rounded-xl bg-gradient-to-br px-3 ${compact ? "py-2" : "py-2.5"} ${meta.bg} to-transparent border ${meta.border} shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)] backdrop-blur-md transition-all duration-300 group-hover:bg-[var(--card)]/50 dark:group-hover:bg-slate-800/50 min-[390px]:block`}>
+                        <p className={`font-mono text-[12px] font-bold tracking-tight leading-snug sm:text-[13px] ${meta.color}`}>
                           {book.formula}
                         </p>
                         {book.sub && (

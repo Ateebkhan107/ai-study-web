@@ -96,9 +96,7 @@ export default function DailyGoals({ compact = false }) {
       </div>
 
       {/* ── Goals Grid ── */}
-      <div className={`relative z-10 grid grid-cols-1 gap-2.5 sm:gap-3 ${
-        compact ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3 lg:gap-4"
-      }`}>
+      <div className="relative z-10 overflow-hidden rounded-xl border border-slate-200/70 bg-[var(--card)]/45 dark:border-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/25 md:grid md:grid-cols-2">
         {goals.map((goal, index) => {
           const isComplete = goal.completed;
           const progressPct = Math.min((goal.progress / goal.target_value) * 100, 100);
@@ -106,73 +104,67 @@ export default function DailyGoals({ compact = false }) {
           return (
             <div
               key={goal.id}
-              className={`group relative overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-sm ${
-                  compact ? "p-3 sm:p-4" : "p-3.5 sm:p-5"
-              }
-                ${
-                  isComplete
-                    ? "bg-emerald-50/50 dark:bg-emerald-500/5 border-emerald-200/50 dark:border-emerald-500/20"
-                    : "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/40 border-slate-200 dark:border-[var(--border)]/50 hover:border-indigo-300 dark:hover:border-indigo-500/50"
-                }
-              `}
+              className={`group relative overflow-hidden border-b border-slate-200/70 p-3 transition-all duration-300 last:border-b-0 dark:border-[var(--border)]/60 md:border-r md:last:border-b md:even:border-r-0 ${
+                isComplete
+                  ? "bg-emerald-50/35 dark:bg-emerald-500/5"
+                  : "hover:bg-slate-50/60 dark:hover:bg-[var(--surface-elevated)]/40"
+              }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
 
-              <div className={`relative z-10 flex items-start justify-between ${
-                compact ? "mb-2.5" : "mb-3"
-              }`}>
+              <div className="relative z-10 flex items-start gap-2.5">
                 <div
-                  className={`flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110
+                  className={`mt-0.5 flex shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-110
                     ${isComplete ? "text-emerald-500" : "text-slate-300 dark:text-slate-600"}
                   `}
                 >
                   {isComplete ? (
-                    <CheckCircle2 className={`${compact ? "h-5 w-5" : "h-6 w-6"} drop-shadow-sm`} />
+                    <CheckCircle2 className="h-5 w-5 drop-shadow-sm" />
                   ) : (
-                    <Circle className={compact ? "h-5 w-5" : "h-6 w-6"} />
+                    <Circle className="h-5 w-5" />
                   )}
                 </div>
 
-                <div className={`flex items-center gap-1 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-md transition-all duration-300
-                  ${isComplete 
-                    ? "bg-amber-500 text-white" 
-                    : "bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/20"
-                  }
-                `}>
-                  <Zap className="w-3 h-3 fill-current" />
-                  +{goal.xp} XP
+                <div className="min-w-0 flex-1">
+                  <div className="flex min-w-0 items-start justify-between gap-2">
+                    <h3 className={`min-w-0 text-sm font-bold leading-snug transition-colors duration-300
+                      ${isComplete ? "text-emerald-900 dark:text-emerald-300 line-through decoration-emerald-500/30" : "text-slate-800 dark:text-slate-100"}
+                    `}>
+                      {goal.title}
+                    </h3>
+                    <div className={`flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-extrabold shadow-sm backdrop-blur-md transition-all duration-300
+                      ${isComplete
+                        ? "bg-amber-500 text-white"
+                        : "bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/20"
+                      }
+                    `}>
+                      <Zap className="h-2.5 w-2.5 fill-current" />
+                      +{goal.xp} XP
+                    </div>
+                  </div>
+                  <p className={`mt-0.5 line-clamp-1 text-xs font-medium leading-snug
+                    ${isComplete ? "text-emerald-700/60 dark:text-emerald-400/50" : "text-slate-500 dark:text-slate-400"}
+                  `}>
+                    {goal.description}
+                  </p>
+
+                  {!isComplete && (
+                    <div className="relative z-10 mt-2">
+                      <div className="mb-1 flex items-end justify-between">
+                        <span className="text-[11px] font-bold text-slate-400">
+                          {goal.progress} / {goal.target_value}
+                        </span>
+                      </div>
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                        <div
+                          className="h-full rounded-full bg-indigo-500 transition-all duration-1000 ease-out"
+                          style={{ width: `${progressPct}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              <div className={`relative z-10 space-y-1 ${compact ? "mb-2.5" : "mb-3"}`}>
-                <h3 className={`text-sm font-bold leading-snug transition-colors duration-300 sm:text-base
-                  ${isComplete ? "text-emerald-900 dark:text-emerald-300 line-through decoration-emerald-500/30" : "text-slate-800 dark:text-slate-100"}
-                `}>
-                  {goal.title}
-                </h3>
-                <p className={`text-xs font-medium leading-snug
-                  ${isComplete ? "text-emerald-700/60 dark:text-emerald-400/50" : "text-slate-500 dark:text-slate-400"}
-                `}>
-                  {goal.description}
-                </p>
-              </div>
-
-              {!isComplete && (
-                <div className="relative z-10 mt-auto pt-1">
-                  <div className="mb-1.5 flex items-end justify-between">
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Progress</span>
-                    <span className="text-xs font-bold text-indigo-500 dark:text-indigo-400">
-                      {goal.progress} / {goal.target_value}
-                    </span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-100 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
-                      style={{ width: `${progressPct}%` }}
-                    />
-                  </div>
-                </div>
-              )}
               
             </div>
           );

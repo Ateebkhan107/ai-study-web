@@ -216,14 +216,14 @@ export default function ProfilePage() {
     >
       {/* ── PROFILE CARD ── */}
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="glass-card p-4 sm:p-6 shadow-sm relative overflow-hidden">
+        <div className="glass-card relative overflow-hidden p-4 shadow-sm sm:p-6">
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-brand/8 via-brand/5 to-transparent dark:from-brand/10 dark:via-brand/6 dark:to-transparent rounded-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-5">
               {/* AVATAR */}
-              <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 dark:ring-indigo-400/40 shadow-[0_0_25px_rgba(194,114,63,0.2)] bg-slate-900 dark:bg-indigo-500 flex items-center justify-center text-white dark:text-white text-3xl font-black shrink-0">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 text-2xl font-black text-white shadow-[0_0_25px_rgba(194,114,63,0.2)] ring-2 ring-indigo-500/40 dark:bg-indigo-500 dark:text-white dark:ring-indigo-400/40 sm:h-20 sm:w-20 sm:text-3xl">
                 {activeUser.avatar ? (
                   <img
                     src={activeUser.avatar}
@@ -250,14 +250,14 @@ export default function ProfilePage() {
                 </div>
 
                 {/* JEE / NEET TOGGLE */}
-                <div className="mt-3 inline-flex rounded-xl bg-slate-100 dark:bg-[var(--surface-elevated)] p-1">
+                <div className="mt-3 inline-flex rounded-xl bg-slate-100 p-1 dark:bg-[var(--surface-elevated)]">
                   {["JEE", "NEET"].map((trackOption) => {
                     const isActive = activeUser.exam === trackOption;
                     return (
                       <button
                         key={trackOption}
                         onClick={() => handleTrackToggle(trackOption)}
-                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+                          className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all duration-200 sm:px-4 ${
                           isActive
                             ? "bg-brand text-white"
                             : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
@@ -284,7 +284,7 @@ export default function ProfilePage() {
 
       {/* ── XP CARD ── */}
       <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="glass-card p-4 sm:p-6 shadow-sm">
+        <div className="glass-card p-4 shadow-sm sm:p-6">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               {/* BADGE */}
@@ -345,13 +345,13 @@ export default function ProfilePage() {
         </div>
 
         <div className="glass-card p-4 sm:p-5 shadow-sm">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4">
             {badgeDefs.map((badge, index) => {
               const IconComponent = BADGE_ICONS[badge.iconName] || Award;
               return (
               <div
                 key={index}
-                className={`relative overflow-hidden rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all duration-300 border ${
+                className={`relative flex min-h-[116px] flex-col items-center justify-center overflow-hidden rounded-2xl border p-3 text-center transition-all duration-300 sm:min-h-[140px] sm:p-4 ${
                   badge.earned
                     ? "bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-indigo-100 dark:border-indigo-500/20 shadow-sm hover:shadow-md hover:-translate-y-1"
                     : "bg-slate-50/50 dark:bg-[var(--surface)]/50 border-slate-100 dark:border-[var(--border-subtle)] grayscale-[0.8] opacity-60"
@@ -392,11 +392,11 @@ export default function ProfilePage() {
       {/* ── EDIT PROFILE MODAL ── */}
       {editing && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-3 backdrop-blur-sm"
           onClick={() => setEditing(false)}
         >
           <div
-            className="w-full max-w-md bg-[var(--card)] dark:bg-[var(--surface)] rounded-3xl shadow-2xl border border-slate-200/60 dark:border-[var(--border)]/50 p-6 space-y-5 animate-fadeInScale"
+            className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-slate-200/60 bg-[var(--card)] p-4 shadow-2xl animate-fadeInScale dark:border-[var(--border)]/50 dark:bg-[var(--surface)] sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-xl font-black text-slate-900 dark:text-white">
@@ -476,7 +476,7 @@ export default function ProfilePage() {
 
       {/* ── SAVED TOAST ── */}
       {saved && (
-        <div className="fixed bottom-6 right-6 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-lg shadow-emerald-500/20 animate-slideInRight z-50">
+        <div className="fixed bottom-4 left-4 right-4 z-50 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 animate-slideInRight sm:bottom-6 sm:left-auto sm:right-6">
           Saved ✓
         </div>
       )}

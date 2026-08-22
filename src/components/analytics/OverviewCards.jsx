@@ -71,25 +71,25 @@ export default function OverviewCards({ stats }) {
         return (
           <div
             key={s.label}
-            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-4 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:p-5"
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-3 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:p-5"
             style={{ animationDelay: `${index * 75}ms` }}
           >
             <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-50 transition-opacity duration-200 group-hover:opacity-90`} />
 
             <div className="relative z-10">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <p className="min-w-0 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              <div className="mb-3 flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
+                <p className="min-w-0 text-[9px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 sm:text-[10px] sm:tracking-widest">
                   {s.label}
                 </p>
                 <div
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl sm:h-9 sm:w-9"
                   style={{ background: `${style.accent}15` }}
                 >
                   <Icon size={17} style={{ color: style.accent }} />
                 </div>
               </div>
 
-              <p className={`mb-1 bg-gradient-to-br ${style.gradient} bg-clip-text text-3xl font-extrabold tracking-tight text-transparent`}>
+              <p className={`mb-1 bg-gradient-to-br ${style.gradient} bg-clip-text text-2xl font-extrabold tracking-tight text-transparent sm:text-3xl`}>
                 {s.value}
               </p>
 

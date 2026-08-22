@@ -130,7 +130,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
 
   return (
-    <div className="mx-auto flex h-full max-h-full w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-[var(--card)]/70 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 md:rounded-2xl md:border">
+    <div className="mx-auto flex h-[calc(100dvh-5.25rem)] max-h-[calc(100dvh-5.25rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-[var(--card)]/70 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 md:h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-8rem)] md:rounded-2xl md:border">
       <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 p-2.5 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/50 md:block">
         <Link href="/community" className="mb-2 inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-500 hover:bg-[var(--card)] hover:text-indigo-600 dark:hover:bg-slate-900">
           <ArrowLeft className="h-4 w-4" />
@@ -160,14 +160,14 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
 
       <div className="flex min-w-0 flex-1 flex-col">
       {/* Group header */}
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-[var(--border-subtle)] bg-[var(--card)]/80 dark:bg-[var(--surface)]/70 backdrop-blur-md flex items-center gap-3">
+      <div className="flex items-center gap-2 border-b border-slate-200 bg-[var(--card)]/80 px-3 py-2.5 backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/70 sm:gap-3 sm:px-4">
         <Link href="/community" className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <ArrowLeft className="w-4 h-4" />
         </Link>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h1 className="font-bold text-slate-900 dark:text-white truncate">{group.name}</h1>
+            <h1 className="truncate font-bold text-slate-900 dark:text-white">{group.name}</h1>
             <span className={`shrink-0 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
               group.privacy === "PUBLIC"
                 ? "bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
@@ -177,7 +177,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
               {group.privacy}
             </span>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+          <p className="flex items-center gap-1 truncate text-xs text-slate-500 dark:text-slate-400">
             <Users className="w-3 h-3" /> {group.member_count ?? 0} members
             {myRole && <span className="ml-2 text-indigo-500">· {myRole}</span>}
           </p>
@@ -187,7 +187,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
           <button
             onClick={handleLeave}
             disabled={leaving}
-            className="shrink-0 flex items-center gap-1.5 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 px-3 py-1.5 rounded-lg transition-colors"
+            className="hidden shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-900/20 min-[390px]:flex"
           >
             {leaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
             Leave
@@ -208,13 +208,13 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
       ) : (
         <>
           {managementTabs.length > 0 && (
-          <div className="px-4 border-b border-slate-200 dark:border-[var(--border-subtle)] flex gap-1 overflow-x-auto bg-[var(--card)]/40 dark:bg-[var(--surface)]/40">
+          <div className="flex gap-1 overflow-x-auto border-b border-slate-200 bg-[var(--card)]/40 px-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/40 sm:px-4">
             {["Chat", ...managementTabs].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 id={`group-tab-${tab.toLowerCase()}`}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2 text-sm font-semibold transition-colors sm:px-4 ${
                   activeTab === tab
                     ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                     : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"

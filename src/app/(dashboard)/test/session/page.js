@@ -99,8 +99,8 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
   if (!activeQuestion) return null;
 
   return (
-    <div className="min-w-0 flex-1 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-4 sm:p-6 lg:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
-      <div className="flex flex-wrap items-center gap-2 mb-6">
+    <div className="min-w-0 flex-1 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-3.5 sm:p-6 lg:p-8 shadow-sm animate-slideUp" style={{ animationDelay: "75ms" }}>
+      <div className="mb-4 flex flex-wrap items-center gap-1.5 sm:mb-6 sm:gap-2">
         <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
           Question {currentIdx + 1} of {totalQuestions}
         </span>
@@ -112,12 +112,12 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         </span>
       </div>
 
-      <MathText className="min-w-0 text-base sm:text-lg lg:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-6 sm:mb-8">
+      <MathText className="mb-4 min-w-0 text-[15px] font-medium leading-relaxed text-slate-900 dark:text-white sm:mb-8 sm:text-lg lg:text-xl">
         {activeQuestion.text}
       </MathText>
 
       {activeQuestion.question_image && (
-        <div className="mb-6 sm:mb-8 overflow-hidden rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-2 dark:border-[var(--border)]/60 dark:bg-[var(--background)]/30">
+        <div className="mb-4 overflow-hidden rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-2 dark:border-[var(--border)]/60 dark:bg-[var(--background)]/30 sm:mb-8">
           <img
             src={activeQuestion.question_image}
             alt="Question visual"
@@ -143,7 +143,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
           />
         </div>
       ) : (
-      <div className="space-y-3">
+      <div className="space-y-2.5 sm:space-y-3">
         {activeQuestion.options.map((option, optionIndex) => {
           const isMultipleCorrect = activeQuestion.question_type === "Multiple Correct";
           const isSelected = isMultipleCorrect
@@ -154,7 +154,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             <button
               key={`${activeQuestion.id}-${optionIndex}`}
               onClick={() => onSelect(activeQuestion, optionIndex)}
-              className={`group w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer
+              className={`group w-full flex items-center gap-3 rounded-2xl border-2 px-3.5 py-3 text-left transition-all duration-200 cursor-pointer sm:gap-4 sm:px-5 sm:py-4
                 ${
                   isSelected
                     ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-brand/10"
@@ -162,7 +162,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
                 }`}
             >
               <span
-                className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-sm font-black border-2 transition-all duration-200
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border-2 text-sm font-black transition-all duration-200 sm:h-9 sm:w-9
                   ${
                     isSelected
                       ? "border-indigo-500 bg-gradient-to-br from-brand to-brand-hover text-white"
@@ -413,10 +413,10 @@ function TestSessionContent() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-[var(--border)]/50 px-3 py-3 sm:px-6 sm:py-3.5">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Logo size={28} />
+      <header className="sticky top-0 z-50 bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-[var(--border)]/50 px-2.5 py-2.5 sm:px-6 sm:py-3.5">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-4">
+            <Logo size={24} />
             <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700" />
             <span className="hidden sm:block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
               {mode === "quick" ? "Quick Session" : "Custom Test"}
@@ -425,7 +425,7 @@ function TestSessionContent() {
 
           {/* Timer */}
           <div
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl font-black tabular-nums text-sm transition-all duration-300 ${
+              className={`flex shrink-0 items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-black tabular-nums transition-all duration-300 sm:gap-2 sm:px-4 ${
               isTimerDanger
                 ? "bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20 shadow-sm shadow-rose-500/10"
                 : "bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-900 dark:text-white border border-slate-200/60 dark:border-[var(--border)]/50"
@@ -436,11 +436,11 @@ function TestSessionContent() {
           </div>
 
           {/* Progress + Submit */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-4">
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 bg-[var(--card)]/80 px-3 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)]/70 dark:text-slate-200 lg:hidden"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-xl border border-slate-200 bg-[var(--card)]/80 px-2.5 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)]/70 dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -458,15 +458,16 @@ function TestSessionContent() {
             </div>
             <button
               onClick={handleSubmit}
-              className="px-4 py-2.5 sm:px-6 rounded-xl bg-brand text-white text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
+              className="rounded-xl bg-brand px-3 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 sm:px-6"
             >
-              Submit Test
+              <span className="sm:hidden">Submit</span>
+              <span className="hidden sm:inline">Submit Test</span>
             </button>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl w-full min-w-0 mx-auto p-3 pb-24 sm:p-6 sm:pb-28 lg:pb-6 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+      <main className="flex-1 max-w-7xl w-full min-w-0 mx-auto p-2.5 pb-24 sm:p-6 sm:pb-28 lg:pb-6 grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-6">
         {/* ── Question Palette ── */}
         <aside className="hidden lg:col-span-1 lg:order-1 lg:block">
           <QuestionPalette

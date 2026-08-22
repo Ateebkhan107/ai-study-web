@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <AuthLayout>
       <AuthRedirectGuard />
-      <div className="mb-7">
+      <div className="mb-5 sm:mb-7">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-2"
           style={{ color: "#EAB308", letterSpacing: "0.15em" }}
@@ -23,7 +23,7 @@ export default async function Page() {
           Sign In
         </p>
         <h2
-          className="text-4xl font-black mb-2 tracking-tight"
+          className="text-3xl font-black mb-2 tracking-tight sm:text-4xl"
           style={{ color: "#FFFFFF" }}
         >
           Welcome Back
@@ -35,7 +35,7 @@ export default async function Page() {
  
       {/* Clerk card wrapper — glass morphism */}
       <div
-        className="rounded-2xl p-6"
+        className="w-full max-w-full rounded-2xl p-4 sm:p-6"
         style={{
           background: "rgba(0,0,0,0.85)",
           border: "1px solid rgba(234,179,8,0.25)",

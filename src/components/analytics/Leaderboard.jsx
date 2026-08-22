@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Flame, Crown, Medal, Award, Zap, Shield } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
+import Link from "next/link";
 
 function uniqueLeaderboardUsers(users = []) {
   const usersById = new Map();
@@ -37,7 +38,7 @@ export default function Leaderboard({ compact = false }) {
         }
 
         const allUsers = uniqueLeaderboardUsers(await response.json());
-        const top10 = Array.isArray(allUsers) ? allUsers.slice(0, 10) : [];
+        const top10 = Array.isArray(allUsers) ? allUsers.slice(0, compact ? 5 : 10) : [];
         
         // Add rank to top 10 for easier rendering
         const rankedTop10 = top10.map((u, i) => ({ ...u, rank: i + 1 }));
@@ -68,7 +69,7 @@ export default function Leaderboard({ compact = false }) {
     if (currentUser?.id !== undefined) {
       loadLeaderboard();
     }
-  }, [currentUser?.id]);
+  }, [compact, currentUser?.id]);
 
   // Helper for dynamic rank styling
   const getRankTheme = (index) => {
@@ -113,20 +114,21 @@ export default function Leaderboard({ compact = false }) {
   };
 
   return (
-    <div className={`relative overflow-hidden bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-all duration-500 ${
-      compact ? "p-4 sm:p-5" : "p-6 lg:p-8"
+    <div className={`relative overflow-hidden bg-[var(--card)]/80 dark:bg-[var(--surface)]/80 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-all duration-500 ${
+      compact ? "p-3 sm:p-5" : "p-4 sm:p-6 lg:p-8"
     }`}>
 
       {/* ── HEADER ── */}
-      <div className={`relative z-10 flex items-center gap-3 ${compact ? "mb-4" : "mb-8"}`}>
+      <div className={`relative z-10 flex items-center justify-between gap-3 ${compact ? "mb-3 sm:mb-4" : "mb-5 sm:mb-8"}`}>
+        <div className="flex min-w-0 items-center gap-3">
         <div className={`flex items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 shadow-sm ${
-          compact ? "h-9 w-9" : "w-12 h-12"
+          compact ? "h-8 w-8 sm:h-9 sm:w-9" : "w-10 h-10 sm:w-12 sm:h-12"
         }`}>
-          <Trophy className={`${compact ? "h-5 w-5" : "w-6 h-6"} text-indigo-500 dark:text-indigo-400`} strokeWidth={2.5} />
+          <Trophy className={`${compact ? "h-4 w-4 sm:h-5 sm:w-5" : "w-5 h-5 sm:w-6 sm:h-6"} text-indigo-500 dark:text-indigo-400`} strokeWidth={2.5} />
         </div>
-        <div>
+        <div className="min-w-0">
           <h2 className={`font-black tracking-tight text-slate-900 dark:text-white ${
-            compact ? "text-xl" : "text-2xl"
+            compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl"
           }`}>
             Global Leaderboard
           </h2>
@@ -134,6 +136,12 @@ export default function Leaderboard({ compact = false }) {
             Top Performers
           </p>
         </div>
+        </div>
+        {compact && (
+          <Link href="/analytics" className="shrink-0 text-xs font-black text-indigo-500 hover:text-indigo-600 dark:text-indigo-300">
+            View full →
+          </Link>
+        )}
       </div>
 
       {/* ── LIST ── */}
@@ -174,7 +182,7 @@ export default function Leaderboard({ compact = false }) {
               )}
               
             <div
-              className={`group relative flex items-center justify-between rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm ${compact ? "min-h-[64px] p-3 sm:p-3.5" : "p-5"} ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
+              className={`group relative flex items-center justify-between rounded-xl sm:rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm ${compact ? "min-h-[54px] p-2.5 sm:min-h-[64px] sm:p-3.5" : "p-3 sm:p-5"} ${theme.cardBg} ${isCurrentUser ? "border-indigo-400 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20" : theme.border}`}
               style={{ transitionDelay: `${displayIndex * 50}ms` }}
             >
 
@@ -183,10 +191,10 @@ export default function Leaderboard({ compact = false }) {
                 
                 {/* RANK INDICATOR */}
                 <div className={`flex items-center justify-center rounded-xl shrink-0 ${theme.rankBg} transition-transform duration-500 group-hover:scale-110 ${
-                  compact ? "h-10 w-10" : "w-12 h-12"
+                  compact ? "h-8 w-8 sm:h-10 sm:w-10" : "w-10 h-10 sm:w-12 sm:h-12"
                 }`}>
                   {RankIcon ? (
-                    <RankIcon className={`${compact ? "h-5 w-5" : "w-6 h-6"} ${theme.rankColor}`} strokeWidth={2.5} />
+                    <RankIcon className={`${compact ? "h-4 w-4 sm:h-5 sm:w-5" : "w-5 h-5 sm:w-6 sm:h-6"} ${theme.rankColor}`} strokeWidth={2.5} />
                   ) : (
                     <span className={`${compact ? "text-sm" : "text-lg"} font-black ${theme.rankColor}`}>
                       #{user.rank}
@@ -200,18 +208,17 @@ export default function Leaderboard({ compact = false }) {
                     {user.name || "Student"}
                   </h3>
 
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     {/* XP Indicator */}
                     <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                      <Flame className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" strokeWidth={2.5} />
-                      <span className={compact ? "hidden sm:inline" : ""}>{user.xp} XP earned</span>
-                      <span className={compact ? "sm:hidden" : "hidden"}>{user.xp} XP</span>
+                      <Flame className="w-3 h-3 text-rose-500 dark:text-rose-400 sm:h-3.5 sm:w-3.5" strokeWidth={2.5} />
+                      <span>{user.xp} XP</span>
                     </div>
 
                     <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
 
                     {/* Level Badge */}
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/50 dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-slate-200/50 px-1.5 py-0.5 backdrop-blur-sm dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] sm:px-2">
                       <Shield className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       <span className="text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-300 uppercase">
                         {getLevelFromXP(user.xp).title} <span className="opacity-60">Lvl {getLevelFromXP(user.xp).currentLevel}</span>
@@ -222,7 +229,7 @@ export default function Leaderboard({ compact = false }) {
               </div>
 
               {/* ── RIGHT SIDE / XP ── */}
-              <div className="flex flex-col items-end z-10 shrink-0 pl-3">
+              <div className="z-10 hidden shrink-0 flex-col items-end pl-3 sm:flex">
                 <div className="flex items-baseline gap-1">
                   <span className={`${compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"} font-black tracking-tight ${theme.xpColor}`}>
                     {user.xp}

@@ -51,7 +51,7 @@ const STATS = [
 
 export default function AuthLayout({ children }) {
   return (
-    <div className="min-h-screen text-white flex font-sans" style={{ background: "#000000" }}>
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden text-white flex font-sans" style={{ background: "#000000" }}>
       <style>{hoverStyles}</style>
 
       {/* ── LEFT PANEL ─────────────────────────────────────────── */}
@@ -156,7 +156,7 @@ export default function AuthLayout({ children }) {
 
       {/* ── RIGHT PANEL ────────────────────────────────────────── */}
       <div
-        className="w-full lg:w-1/2 flex items-center justify-center p-8 relative animate-fadeInScale"
+        className="w-full lg:w-1/2 flex min-h-screen items-center justify-center px-4 py-20 sm:px-6 lg:p-8 relative animate-fadeInScale"
         style={{
           background: "radial-gradient(ellipse at 60% 40%, rgba(234,179,8,0.04) 0%, transparent 70%)",
           animationDelay: "0.3s",
@@ -165,18 +165,18 @@ export default function AuthLayout({ children }) {
       >
         {/* Subtle corner glow */}
         <div
-          className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
+          className="absolute bottom-0 right-0 hidden w-96 h-96 pointer-events-none sm:block"
           style={{
             background: "radial-gradient(circle at bottom right, rgba(234,179,8,0.06) 0%, transparent 65%)",
           }}
         />
 
         {/* Mobile logo */}
-        <div className="absolute top-8 left-8 lg:hidden animate-slideUp" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
-          <Logo size={40} forceDark={true} />
+        <div className="absolute top-5 left-4 lg:hidden animate-slideUp sm:left-6 sm:top-8" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
+          <Logo size={36} forceDark={true} />
         </div>
 
-        <div className="w-full max-w-md relative z-10">
+        <div className="w-full max-w-[min(100%,28rem)] relative z-10">
           {children}
         </div>
       </div>
