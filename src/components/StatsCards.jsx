@@ -2,71 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { Trophy, Flame } from "lucide-react";
+import { Flame, Trophy, Zap } from "lucide-react";
 
-// Mapping for dynamic, colorful styling based on stat labels
-const STAT_STYLES = {
-  "Rank": {
-    icon: Trophy,
-    borderHover: "hover:border-amber-200 dark:hover:border-amber-500/30",
-    iconColor: "text-amber-600 dark:text-amber-400",
-    iconBg: "bg-amber-50 dark:bg-amber-500/10",
-    valueColor: "text-slate-800 dark:text-slate-100"
-  },
-  "Study Streak": {
-    icon: Flame,
-    borderHover: "hover:border-rose-200 dark:hover:border-rose-500/30",
-    iconColor: "text-rose-600 dark:text-rose-400",
-    iconBg: "bg-rose-50 dark:bg-rose-500/10",
-    valueColor: "text-slate-800 dark:text-slate-100"
-  }
-};
-
-export default function StatsCards({ compact = false, stacked = false }) {
+export default function StatsCards() {
   const { user, isLoaded } = useUser();
 
-  const [stats, setStats] = useState([
-    {
-      label: "Rank",
-      value: "#--",
-      sub: "Based on XP",
-      icon: "◇",
-    },
-    {
-      label: "Study Streak",
-      value: "0",
-      sub: "Consecutive days"
-    },
-  ]);
+  const [stats, setStats] = useState({
+    rank: null,
+    streak: null,
+    xp: null,
+  });
 
   useEffect(() => {
     if (!isLoaded || !user) return;
 
     async function loadStats() {
       try {
-        const response = await fetch("/api/dashboard-stats", {
-          cache: "no-store",
-        });
+        const [statsResponse, profileResponse] = await Promise.all([
+          fetch("/api/dashboard-stats", { cache: "no-store" }),
+          fetch("/api/profile", { cache: "no-store" }),
+        ]);
 
-        if (!response.ok) {
-          throw new Error(`Failed to load stats: ${response.status}`);
+        if (!statsResponse.ok) {
+          throw new Error(`Failed to load stats: ${statsResponse.status}`);
         }
 
-        const data = await response.json();
+        const data = await statsResponse.json();
+        const profile = profileResponse.ok ? await profileResponse.json() : {};
 
-        setStats([
-          {
-            label: "Rank",
-            value: `#${data.rank || "--"}`,
-            sub: "Based on XP",
-            icon: "◇",
-          },
-          {
-            label: "Study Streak",
-            value: `${data.streak || 0}`,
-            sub: "Consecutive days"
-          },
-        ]);
+        setStats({
+          rank: data.rank ?? profile.rank ?? null,
+          streak: data.streak ?? profile.streak ?? null,
+          xp: profile.xp ?? null,
+        });
       } catch (error) {
         console.error("Failed to load dashboard stats:", error);
       }
@@ -77,15 +45,12 @@ export default function StatsCards({ compact = false, stacked = false }) {
 
   if (!isLoaded) {
     return (
-      <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2"} ${compact ? "" : "gap-4"}`}>
-        {Array.from({ length: 2 }).map((_, index) => (
+      <div className="h-full rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+        {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
-            className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 dark:border-[var(--border-subtle)]/50 dark:bg-[var(--surface)]/30 ${
-              compact ? "h-[84px]" : "h-[128px]"
-            }`}
+            className="mb-3 h-12 animate-pulse overflow-hidden rounded-xl bg-slate-100/70 last:mb-0 dark:bg-[var(--surface-elevated)]/50"
           >
-            <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/5" />
           </div>
         ))}
       </div>
@@ -93,48 +58,43 @@ export default function StatsCards({ compact = false, stacked = false }) {
   }
 
   return (
-    <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${
-      stacked ? "md:grid-cols-2 lg:grid-cols-1" : "md:grid-cols-2 lg:gap-5"
-    }`}>
-      {stats.map((stat, index) => {
-        const style = STAT_STYLES[stat.label] || STAT_STYLES["Rank"];
-        const Icon = style.icon;
+    <div className="h-full rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+        Performance
+      </p>
 
-        return (
-          <div
-            key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-[var(--card)]/50 backdrop-blur-xl transition-all duration-300 hover:shadow-sm dark:border-[var(--border)]/50 dark:bg-[var(--surface-elevated)]/40 ${compact ? "p-2.5 sm:p-4" : "p-3 sm:p-5"} ${style.borderHover}`}
-            style={{ transitionDelay: `${index * 50}ms` }}
-          >
-            
-            <div className={`relative z-10 flex items-start justify-between gap-2 ${
-              compact ? "mb-1.5 sm:mb-2" : "mb-3 sm:mb-4"
-            }`}>
-              <div className="space-y-1">
-                <p className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400 transition-colors group-hover:text-slate-700 dark:group-hover:text-slate-300 sm:text-[11px] sm:tracking-[0.2em]">
-                  {stat.label}
-                </p>
-                <p className="hidden text-xs font-medium text-slate-400 dark:text-slate-500 min-[390px]:block">
-                  {stat.sub}
-                </p>
-              </div>
-
-              {/* Dynamic Icon Container */}
-              <div className={`flex items-center justify-center rounded-xl ${style.iconBg} transition-transform duration-300 group-hover:scale-105 ${
-                compact ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-9 sm:w-9"
-              }`}>
-                <Icon className={`${compact ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-5 sm:w-5"} ${style.iconColor}`} strokeWidth={2.5} />
-              </div>
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-1">
+        {stats.rank !== null && (
+          <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/40">
+            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-300">
+              <Trophy className="h-4 w-4" />
+              <p className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">#{stats.rank}</p>
             </div>
+            <p className="mt-1 text-xs font-bold text-slate-500 dark:text-slate-400">Rank</p>
+          </div>
+        )}
 
-            <div className="relative z-10 flex items-end justify-between">
-              <h3 className={`font-black tracking-tighter ${compact ? "text-2xl sm:text-4xl" : "text-3xl sm:text-5xl"} ${style.valueColor}`}>
-                {stat.value}
-              </h3>
+        {stats.streak !== null && (
+          <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/40">
+            <div className="flex items-center gap-2 text-rose-500">
+              <Flame className="h-4 w-4" />
+              <p className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">{stats.streak}</p>
+            </div>
+            <p className="mt-1 text-xs font-bold text-slate-500 dark:text-slate-400">Day streak</p>
+          </div>
+        )}
+
+        {stats.xp !== null && (
+          <div className="col-span-2 rounded-xl bg-amber-50 p-3 dark:bg-amber-500/10 lg:col-span-1">
+            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-300">
+              <Zap className="h-4 w-4 fill-current" />
+              <p className="text-2xl font-black tracking-tight text-slate-950 dark:text-white">
+                {Number(stats.xp).toLocaleString()} XP
+              </p>
             </div>
           </div>
-        );
-      })}
+        )}
+      </div>
     </div>
   );
 }

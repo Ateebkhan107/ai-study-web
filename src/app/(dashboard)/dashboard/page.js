@@ -4,13 +4,47 @@ import { EXAM_CONFIG } from "@/constants/examConfig";
 import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
-import UserGreeting from "@/components/UserGreeting";
-import { TrendingUp } from "lucide-react";
+import DashboardHeaderQuote from "@/components/DashboardHeaderQuote";
+import { auth } from "@clerk/nextjs/server";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
+
+async function getDashboardProfile() {
+  const { userId, sessionClaims } = await auth();
+  if (!userId) return null;
+
+  const { data: profile, error } = await supabaseAdmin
+    .from("user_profiles")
+    .select("full_name, exam, target_year")
+    .eq("clerk_user_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[DASHBOARD_PROFILE_FETCH_ERROR]", error);
+  }
+
+  const claimsName =
+    sessionClaims?.name ||
+    sessionClaims?.full_name ||
+    [sessionClaims?.given_name, sessionClaims?.family_name].filter(Boolean).join(" ");
+
+  return {
+    fullName: profile?.full_name || claimsName || "Student",
+    exam: String(profile?.exam || "").toUpperCase() === "NEET" ? "NEET" : "JEE",
+    targetYear: profile?.target_year || null,
+  };
+}
+
+function getFirstName(name) {
+  return String(name || "Student").trim().split(/\s+/)[0] || "Student";
+}
 
 export default async function DashboardPage() {
-  const cookieStore = await cookies();
+  const [cookieStore, profile] = await Promise.all([cookies(), getDashboardProfile()]);
   const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
-  const activeTrackKey = String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
+  const activeTrackKey =
+    profile?.exam || (String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE");
+  const futureLabel = activeTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
+  const examTargetLine = [activeTrackKey, profile?.targetYear].filter(Boolean).join(" ");
 
   const activeConfig = {
     ...EXAM_CONFIG[activeTrackKey],
@@ -19,73 +53,52 @@ export default async function DashboardPage() {
 
   return (
     <div className="relative min-h-screen w-full min-w-0">
-      
-      {/* ── Full Bleed Background Layer ── 
-          Using left-[calc(50%-50vw)] and w-screen forces it to break out of any max-w parent container 
-      */}
       <div className="absolute inset-y-0 left-1/2 z-0 h-full w-dvw -translate-x-1/2 pointer-events-none overflow-hidden" aria-hidden="true">
-        
-        {/* 1. Subtle, Edge-to-Edge Dot Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_2px,transparent_2px)] dark:bg-[radial-gradient(#475569_2px,transparent_2px)] [background-size:32px_32px] opacity-20 dark:opacity-30" />
-
-        {/* 2. Soft Ambient Color Glows (no aggressive pulsing) */}
-        <div className="absolute top-0 left-0 w-[50%] h-[50%] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-[150px]" />
-        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-brand/5 dark:bg-brand/8 blur-[150px]" />
-        <div className="absolute bottom-0 left-[20%] w-[40%] h-[40%] rounded-full bg-pink-500/5 dark:bg-pink-500/10 blur-[150px]" />
-        
+        <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f35_1px,transparent_1px)] [background-size:34px_34px] opacity-10 dark:opacity-15" />
       </div>
 
-      {/* ── Main Content Area (z-10 forces it above the dots) ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-3 px-3 py-3 sm:space-y-5 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
-        
-        {/* Header Section */}
-        <div className="relative space-y-1">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[var(--card)]/50 px-3 py-0.5 shadow-sm backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/50">
-            <span className="relative flex h-2 w-2">
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-            </span>
-            <p className="text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest sm:text-[11px]">
-              {activeTrackKey === "NEET"
-                ? "Future Doctor 🩺"
-                : "Future Engineer 🚀"}
-            </p>
+      <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
+        <div className="relative grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
+          <div className="min-w-0">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700 dark:border-brand/30 dark:bg-brand/10 dark:text-brand sm:text-[11px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              {futureLabel}
+            </div>
+
+            <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+              <span>Hey,</span>
+              <span>{getFirstName(profile?.fullName)}</span>
+              <span className="text-brand" aria-hidden="true">✦</span>
+            </h1>
+
+            {examTargetLine && (
+              <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                {examTargetLine}
+              </p>
+            )}
           </div>
 
-          <div className="break-words text-2xl font-extrabold tracking-tight text-slate-900 drop-shadow-sm dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
-            <UserGreeting />
-          </div>
-
-          <div className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
-            <TrendingUp className="w-4 h-4 text-indigo-500" />
-            <span className="text-xs font-medium sm:text-sm">
-              Keep improving every day
-            </span>
-          </div>
+          <DashboardHeaderQuote />
         </div>
 
-        {/* Grid Components */}
         <div className="relative z-10 grid gap-3 sm:gap-5 lg:gap-6">
-          
-          <section className="grid min-w-0 grid-cols-1 gap-3 transition-all duration-700 ease-out sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-stretch">
-            <div className="min-w-0 transform transition-all duration-700 ease-out hover:-translate-y-0.5">
+          <section className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(280px,0.75fr)] lg:items-stretch">
+            <div className="min-w-0">
               <DailyGoals compact />
             </div>
-            <div className="min-w-0 transform transition-all duration-700 ease-out delay-75 hover:-translate-y-0.5">
+            <div className="min-w-0">
               <StatsCards compact stacked />
             </div>
           </section>
 
-          <section className="relative transform transition-all duration-700 ease-out delay-150">
-            <DashboardSection config={activeConfig} compact />
-          </section>
-
-          <section className="relative pt-2 transform transition-all duration-700 ease-out delay-200">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/30 dark:via-indigo-400/30 to-transparent" />
-            <div className="mt-4">
+          <section className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+            <div className="min-w-0">
+              <DashboardSection config={activeConfig} compact />
+            </div>
+            <div className="min-w-0">
               <Leaderboard compact />
             </div>
           </section>
-          
         </div>
       </div>
     </div>

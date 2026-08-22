@@ -71,16 +71,20 @@ export default function Navbar({
       className={`group relative overflow-hidden font-semibold transition-colors duration-200 ${
         mobile
           ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
-          : "inline-flex h-9 items-center justify-center rounded-lg px-3 text-[13px] xl:px-3.5"
+          : "inline-flex h-11 items-center justify-center px-2.5 text-[13px] xl:px-3.5"
       } ${
         isActive(item.href)
-          ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
-          : "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
+          ? mobile
+            ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
+            : "font-extrabold text-slate-950 dark:text-white"
+          : mobile
+            ? "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
+            : "text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
       }`}
     >
       <span className="relative z-10 whitespace-nowrap">{item.name}</span>
       {!mobile && isActive(item.href) && (
-        <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-indigo-500/80 dark:bg-indigo-300/80" />
+        <span className="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-brand" />
       )}
     </Link>
   );
@@ -101,17 +105,18 @@ export default function Navbar({
   ) : null;
 
   return (
-    <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-1.5 px-2.5 sm:h-16 sm:gap-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none lg:top-4 lg:mx-auto lg:mt-4 lg:w-[calc(100%-32px)] lg:max-w-7xl lg:rounded-[20px] lg:border lg:border-slate-200/80 lg:bg-white/95 lg:shadow-none lg:backdrop-blur-none lg:dark:border-white/10 lg:dark:bg-[#11110f]">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-1.5 px-2.5 sm:h-16 sm:gap-3 sm:px-6 lg:h-[70px] lg:px-7 xl:px-8">
 
         <div className="flex min-w-0 shrink-0 items-center">
           <Link
             href="/dashboard"
-            className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2"
+            className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2 lg:h-12 lg:gap-2.5"
             aria-label="PrepZii dashboard"
           >
-            <Logo size={26} showText={false} />
-            <span className="text-[14px] font-black uppercase tracking-normal min-[360px]:text-[15px] sm:text-[18px]">
+            <Logo size={26} showText={false} className="lg:hidden" />
+            <Logo size={30} showText={false} className="hidden lg:flex" />
+            <span className="text-[14px] font-black uppercase tracking-normal min-[360px]:text-[15px] sm:text-[18px] lg:text-[21px]">
               PREPZII
             </span>
           </Link>
@@ -121,12 +126,12 @@ export default function Navbar({
           className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
           aria-label="Primary navigation"
         >
-          <div className="flex h-11 max-w-full items-center gap-0.5 rounded-xl border border-slate-200/70 bg-slate-100/55 p-1 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/60">
+          <div className="flex h-12 max-w-full items-center gap-2 xl:gap-3">
           {visibleNavItems.map((item) => renderNavLink(item))}
           </div>
         </nav>
 
-        <div className="flex h-10 shrink-0 items-center justify-end gap-1 sm:gap-2">
+        <div className="flex h-10 shrink-0 items-center justify-end gap-1 sm:gap-2 lg:h-12 lg:gap-2.5">
           <div className="hidden items-center lg:flex">
             {proLink}
           </div>
