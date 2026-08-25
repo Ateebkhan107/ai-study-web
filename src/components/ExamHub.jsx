@@ -1,5 +1,6 @@
 "use client";
 import { Atom, FlaskConical, Calculator, Dna, Target } from "lucide-react";
+import SubjectVisual from "@/components/SubjectVisual";
 
 const IconMap = {
   "atom": <Atom className="w-5 h-5" />,
@@ -34,12 +35,16 @@ export default function ExamHub({ config }) {
         {/* Center Focus Block: High-Yield Progress Metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1 max-w-2xl w-full">
           {config.subjects.map((sub) => (
-            <div key={sub.id} className="bg-[var(--card)]/60 border border-gray-200/50 dark:bg-[#0d1117]/60 dark:border-[var(--border-subtle)]/80 p-4 rounded-2xl flex flex-col justify-between space-y-3 shadow-sm">
-              <div className="flex items-center justify-between">
+            <div key={sub.id} className="relative overflow-hidden bg-[var(--card)]/60 border border-gray-200/50 dark:bg-[#0d1117]/60 dark:border-[var(--border-subtle)]/80 p-4 rounded-2xl flex flex-col justify-between space-y-3 shadow-sm">
+              <SubjectVisual
+                subject={sub.label}
+                className="pointer-events-none absolute -bottom-6 -right-6 h-24 w-24 text-slate-900 opacity-[0.035] dark:text-white dark:opacity-[0.055]"
+              />
+              <div className="relative z-10 flex items-center justify-between">
                 <span className="text-sm font-bold text-gray-800 dark:text-gray-200">{sub.label}</span>
                 <span className="text-base text-gray-500">{IconMap[sub.icon] || <Atom className="w-5 h-5" />}</span>
               </div>
-              <div className="space-y-1">
+              <div className="relative z-10 space-y-1">
                 <div className="w-full bg-gray-100 dark:bg-[var(--surface-elevated)] h-2 rounded-full overflow-hidden">
                   <div className={`bg-gradient-to-r ${sub.color} h-full rounded-full`} style={{ width: "65%" }} />
                 </div>

@@ -1,10 +1,8 @@
 "use client";
 
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail } from "lucide-react";
+import { BriefcaseBusiness, Camera, Mail } from "lucide-react";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -88,7 +86,7 @@ export default function Footer() {
               className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-50 hover:text-[#0A66C2] dark:bg-[var(--surface-elevated)]/50 dark:hover:bg-blue-500/10"
               aria-label="PrepZii LinkedIn"
             >
-              <FaLinkedinIn className="h-4 w-4" />
+              <BriefcaseBusiness className="h-4 w-4" />
             </a>
             <a
               href="https://www.instagram.com/prep.zii?igsh=bDRuNW9sZzJocGxr&utm_source=qr"
@@ -97,7 +95,7 @@ export default function Footer() {
               className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-400 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-pink-50 hover:text-pink-500 dark:bg-[var(--surface-elevated)]/50 dark:hover:bg-pink-500/10"
               aria-label="PrepZii Instagram"
             >
-              <FaInstagram className="h-4 w-4" />
+              <Camera className="h-4 w-4" />
             </a>
           </div>
         </div>

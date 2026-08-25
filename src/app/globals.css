@@ -336,6 +336,18 @@ code,
   overflow-wrap: anywhere;
 }
 
+.test-option-selected,
+.test-option-selected * {
+  color: #020617 !important;
+  -webkit-text-fill-color: #020617 !important;
+}
+
+.dark .test-option-selected,
+.dark .test-option-selected * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 /* ── Auth page — animated link hover colours ───────────────────────────── */
 .auth-link {
   color: var(--accent);

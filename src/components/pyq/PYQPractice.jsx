@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import QuestionCard from "@/components/pyq/QuestionCard";
 import { Atom, FlaskConical, Calculator, Dna, BookOpen, Flag } from "lucide-react";
 import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
+import SubjectVisual from "@/components/SubjectVisual";
 
 const SUBJECT_CONFIG = {
   Physics:   { icon: <Atom className="w-6 h-6" />, color: "blue" },
@@ -296,14 +297,18 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
                   type="button"
                   key={name}
                   onClick={() => handleToggleSubject(name)}
-                  className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
+                  className={`group relative flex flex-col items-center gap-2 overflow-hidden p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
                     ${isSelected
                       ? `${theme.bg} ${theme.border} ${theme.text}`
                       : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/30"
                     }`}
                 >
-                  <span className="mb-1 flex items-center justify-center">{data.icon}</span>
-                  {name}
+                  <SubjectVisual
+                    subject={name}
+                    className={`pointer-events-none absolute -bottom-5 -right-5 h-20 w-20 ${theme.text} opacity-[0.045] dark:opacity-[0.065]`}
+                  />
+                  <span className="relative z-10 mb-1 flex items-center justify-center">{data.icon}</span>
+                  <span className="relative z-10">{name}</span>
                 </button>
               );
             })}

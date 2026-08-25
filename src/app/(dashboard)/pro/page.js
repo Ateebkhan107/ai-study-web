@@ -11,11 +11,12 @@ const FREE_FEATURES = [
   { text: "Full-paper, random and saved PYQ practice", included: true },
   { text: "Daily Warmup", included: true },
   { text: "2 custom tests per month", included: true },
+  { text: "Formula handbooks", included: true },
   { text: "Global leaderboard and community", included: true },
   { text: "Chapter-wise PYQs and mistake redo", included: false },
   { text: "Quick tests and premium full mock tests", included: false },
   { text: "Advanced and PYQ analytics", included: false },
-  { text: "Formula handbooks and AI explanations", included: false },
+  { text: "AI explanations", included: false },
   { text: "Ad-free experience", included: false },
 ];
 
@@ -26,7 +27,6 @@ const PRO_FEATURES = [
   { text: "Chapter-wise PYQs and mistake redo", hot: true },
   { text: "PYQ analytics and revision insights", hot: true },
   { text: "Advanced analytics, trends and weak-area detection", hot: true },
-  { text: "Complete formula handbooks", hot: false },
   { text: "AI-powered question explanations", hot: false },
   { text: "Ad-free experience", hot: true },
 ];

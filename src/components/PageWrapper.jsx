@@ -1,10 +1,8 @@
 "use client";
 
-import { Star, Sparkle } from "lucide-react";
-
 /**
- * Premium page wrapper that gives every page the dashboard-level
- * ambient background (dot grid, animated glows, floating stars).
+ * Premium page wrapper for consistent dashboard-level spacing and headers.
+ * The dashboard layout owns the shared background treatment.
  *
  * Props:
  *  - title: string — page heading
@@ -29,26 +27,6 @@ export default function PageWrapper({
 
   return (
     <div className="relative min-h-screen w-full min-w-0">
-      {/* ── Full Bleed Background Layer ──────────────────────────── */}
-      <div
-        className="absolute inset-y-0 left-1/2 z-0 h-full w-dvw -translate-x-1/2 pointer-events-none overflow-hidden"
-        aria-hidden="true"
-      >
-        {/* Dot Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#d5cdbd_1px,transparent_1px)] dark:bg-[radial-gradient(#37372f_1px,transparent_1px)] [background-size:32px_32px] opacity-50" />
-
-        {/* Ambient Color Glows */}
-        <div className="absolute top-0 left-0 w-[50%] h-[50%] rounded-full bg-brand/7 dark:bg-brand/8 blur-[120px] mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-[30%] right-0 w-[40%] h-[40%] rounded-full bg-brand/8 dark:bg-brand/10 blur-[100px] mix-blend-screen animate-[pulse_12s_ease-in-out_infinite]" />
-        <div className="absolute bottom-0 left-[20%] w-[40%] h-[40%] rounded-full bg-slate-300/20 dark:bg-slate-700/12 blur-[120px] mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]" />
-
-        {/* Floating Decorative Stars */}
-        <Star className="absolute top-[12%] left-[7%] w-5 h-5 text-amber-500/40 dark:text-amber-300/50 animate-[pulse_4s_ease-in-out_infinite] rotate-12" fill="currentColor" />
-        <Sparkle className="absolute top-[22%] right-[9%] w-4 h-4 text-indigo-500/40 dark:text-indigo-300/50 animate-[pulse_3s_ease-in-out_infinite_0.5s]" fill="currentColor" />
-        <Star className="absolute top-[50%] left-[4%] w-3.5 h-3.5 text-indigo-500/40 dark:text-indigo-300/50 animate-[pulse_5s_ease-in-out_infinite_1s] -rotate-12" fill="currentColor" />
-        <Sparkle className="absolute bottom-[25%] right-[6%] w-5 h-5 text-pink-500/40 dark:text-pink-300/50 animate-[pulse_4s_ease-in-out_infinite_1.5s]" fill="currentColor" />
-      </div>
-
       {/* ── Main Content ────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-8 sm:px-6 sm:py-10 lg:space-y-10 lg:px-8 lg:py-14">
         {/* Header */}

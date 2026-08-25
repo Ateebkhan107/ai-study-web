@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Target, Atom, FlaskConical, Calculator, Dna, ClipboardList, Hospital, Sun } from "lucide-react";
+import SubjectVisual from "@/components/SubjectVisual";
 
 const QUICK_OPTIONS = [
   {
@@ -148,6 +149,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
           (() => {
             const locked = !isPro && !isDailyWarmup(option);
             const tag = locked ? "PRO" : option.tag;
+            const showSubjectVisual = option.subject && option.subject !== "all";
 
             return (
               <button
@@ -162,6 +164,12 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                     : "border-gray-100 dark:border-[var(--border-subtle)] bg-[var(--card)] dark:bg-[var(--surface)] hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
                   }`}
               >
+                {showSubjectVisual && (
+                  <SubjectVisual
+                    subject={option.subject}
+                    className="pointer-events-none absolute -bottom-5 -right-5 h-24 w-24 text-slate-900 opacity-[0.035] dark:text-white dark:opacity-[0.055]"
+                  />
+                )}
                 {/* Tag */}
                 {tag && (
                   <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide

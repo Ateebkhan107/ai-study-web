@@ -4,6 +4,7 @@ import { useState } from "react";
 import QuestionCard from "@/components/pyq/QuestionCard";
 import { FILTER_OPTIONS } from "@/lib/pyqData";
 import { BookOpen, Atom, FlaskConical, Calculator, Dna, Search } from "lucide-react";
+import SubjectVisual from "@/components/SubjectVisual";
 
 // Identical typography and color maps matching the Test Center design tokens
 const SUBJECT_CONFIG = {
@@ -83,14 +84,20 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                     type="button"
                     key={subj}
                     onClick={() => setFilterSubject(subj)}
-                    className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
+                    className={`group relative flex flex-col items-center gap-2 overflow-hidden p-4 rounded-xl border-2 transition-all duration-150 font-semibold text-sm
                       ${isSelected
                         ? `${c.bg} ${c.border} ${c.text}`
                         : "border-gray-100 dark:border-[var(--border-subtle)] text-gray-500 dark:text-gray-400 hover:border-gray-200 dark:hover:border-gray-700 bg-gray-50 dark:bg-[var(--surface-elevated)]/30"
                       }`}
                   >
-                    <span className="mb-1 flex items-center justify-center">{data.icon}</span>
-                    {subj}
+                    {subj !== "All" && (
+                      <SubjectVisual
+                        subject={subj}
+                        className={`pointer-events-none absolute -bottom-5 -right-5 h-20 w-20 ${c.text} opacity-[0.045] dark:opacity-[0.065]`}
+                      />
+                    )}
+                    <span className="relative z-10 mb-1 flex items-center justify-center">{data.icon}</span>
+                    <span className="relative z-10">{subj}</span>
                   </button>
                 );
               })}
@@ -172,7 +179,7 @@ export default function PYQExplore({ questions = [], updateQuestion }) {
                   <span>{d}</span>
                   {d !== "All" && (
                     <span className="text-xs opacity-60">
-                      {d === "Easy" ? "⬤" : d === "Medium" ? "⬤⬤" : "⬤⬤⬤"}
+                      {d === "Easy" ? "Low" : d === "Medium" ? "Mid" : "High"}
                     </span>
                   )}
                 </button>

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { FlaskConical, Calculator, Zap, Dna, BookOpen, ChevronRight } from "lucide-react";
+import { Atom, FlaskConical, Calculator, Dna, BookOpen, ChevronRight } from "lucide-react";
 import { getCachedFormulaBookSummaries } from "@/lib/formulaBooks";
+import SubjectVisual from "@/components/SubjectVisual";
 
 // Subject → Premium Book Visual Identity
 const SUBJECT_META = {
@@ -19,7 +20,7 @@ const SUBJECT_META = {
     border: "border-indigo-500/20 dark:border-indigo-500/30"  
   },
   Physics: { 
-    icon: Zap, 
+    icon: Atom,
     spine: "bg-amber-500",
     color: "text-amber-500", 
     bg: "bg-amber-500/10 dark:bg-amber-500/20", 
@@ -81,7 +82,10 @@ export default async function DashboardSection({ config, compact = false }) {
                   }`}
                 >
                   <div className={`absolute left-0 top-0 bottom-0 z-20 w-1.5 ${meta.spine}`} />
-                  <Icon className={`absolute -bottom-4 -right-4 h-16 w-16 -rotate-12 opacity-[0.04] dark:opacity-[0.06] sm:h-20 sm:w-20 ${meta.color}`} />
+                  <SubjectVisual
+                    subject={book.subject}
+                    className={`absolute -bottom-5 -right-5 h-20 w-20 opacity-[0.055] dark:opacity-[0.075] sm:h-24 sm:w-24 ${meta.color}`}
+                  />
 
                   <div className={`relative z-10 flex h-full min-w-0 pl-4 pr-3 sm:pl-5 sm:pr-4 ${
                     compact ? "flex-col justify-between py-3 lg:flex-row lg:items-center lg:gap-3 lg:py-3" : "flex-col justify-between py-3 sm:py-5"
@@ -113,6 +117,10 @@ export default async function DashboardSection({ config, compact = false }) {
 
       {orderedFormulas.length === 0 && (
         <div className="relative overflow-hidden bg-slate-50/50 dark:bg-[var(--surface)]/30 border border-dashed border-slate-300 dark:border-[var(--border)] rounded-2xl p-6 text-center flex flex-col items-center justify-center">
+          <SubjectVisual
+            subject={isNeet ? "Biology" : "Physics"}
+            className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 text-slate-900 opacity-[0.035] dark:text-white dark:opacity-[0.055]"
+          />
           <div className="w-16 h-16 mb-4 rounded-2xl bg-slate-100 dark:bg-[var(--surface-elevated)] flex items-center justify-center">
             <BookOpen className="w-8 h-8 text-slate-400 dark:text-slate-500" />
           </div>

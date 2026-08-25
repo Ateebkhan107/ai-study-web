@@ -1,21 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
-import { Menu, Moon, Star, Sun, X } from "lucide-react";
+import {
+  BarChart3,
+  BookOpenCheck,
+  Building2,
+  ClipboardList,
+  LayoutDashboard,
+  Menu,
+  Moon,
+  Star,
+  Sun,
+  UserRound,
+  Users,
+  X,
+} from "lucide-react";
 
 const navItems = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Test", href: "/test" },
-  { name: "PYQ", href: "/pyq" },
-  { name: "Community", href: "/community" },
-  { name: "Analytics", href: "/analytics" },
-  { name: "Profile", href: "/profile" },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Test", href: "/test", icon: ClipboardList },
+  { name: "PYQ", href: "/pyq", icon: BookOpenCheck },
+  { name: "Community", href: "/community", icon: Users },
+  { name: "Analytics", href: "/analytics", icon: BarChart3 },
+  { name: "Profile", href: "/profile", icon: UserRound },
 ];
 const PREFETCHED_NAV_HREFS = new Set(["/dashboard", "/test", "/pyq", "/community", "/analytics"]);
 
@@ -25,13 +38,10 @@ export default function Navbar({
   isPro = false,
   track = null,
 }) {
+  const router = useRouter();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Hide Navbar completely during active exam sessions
-  if (pathname === "/test/session" || pathname === "/pyq/session") {
-    return null;
-  }
+  const [pendingHref, setPendingHref] = useState(null);
 
   const toggleTheme = () => {
     const dark = document.documentElement.classList.contains("dark");
@@ -47,13 +57,10 @@ export default function Navbar({
     }
   };
 
-  const isActive = (href) =>
-    pathname === href || pathname.startsWith(href + "/");
-
   const isInstituteAdminAccount = accountType === "INSTITUTE_ADMIN";
   const hasInstituteAccess = institutes.length > 0;
   const instituteNavLabel = institutes.length === 1 ? institutes[0].name : "Institute";
-  const instituteNavItem = { name: instituteNavLabel, href: "/institute" };
+  const instituteNavItem = { name: instituteNavLabel, href: "/institute", icon: Building2 };
   const visibleNavItems = isInstituteAdminAccount
     ? [instituteNavItem]
     : [
@@ -63,19 +70,49 @@ export default function Navbar({
           : []),
         ...navItems.slice(5),
       ];
+  const prefetchHrefKey = [
+    ...visibleNavItems.map((item) => item.href),
+    !isInstituteAdminAccount ? "/pro" : "",
+  ].filter(Boolean).join("|");
 
-  const renderNavLink = (item, mobile = false) => (
+  useEffect(() => {
+    const prefetchVisibleRoutes = () => {
+      prefetchHrefKey.split("|").forEach((href) => {
+        if (href && href !== pathname) router.prefetch(href);
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(prefetchVisibleRoutes, { timeout: 1200 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(prefetchVisibleRoutes, 250);
+    return () => window.clearTimeout(timeoutId);
+  }, [pathname, prefetchHrefKey, router]);
+
+  const renderNavLink = (item, mobile = false) => {
+    const Icon = item.icon;
+    const activePathname = pendingHref && pendingHref !== pathname ? pendingHref : pathname;
+    const active = activePathname === item.href || activePathname.startsWith(item.href + "/");
+
+    return (
     <Link
       key={item.href}
       href={item.href}
       prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
-      onClick={() => mobile && setMobileOpen(false)}
+      onMouseEnter={() => router.prefetch(item.href)}
+      onFocus={() => router.prefetch(item.href)}
+      onClick={() => {
+        setPendingHref(item.href);
+        if (mobile) setMobileOpen(false);
+      }}
       className={`group relative overflow-hidden font-semibold transition-colors duration-200 ${
         mobile
           ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
           : "inline-flex h-11 items-center justify-center px-2.5 text-[13px] xl:px-3.5"
       } ${
-        isActive(item.href)
+        active
           ? mobile
             ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
             : "font-extrabold text-slate-950 dark:text-white"
@@ -84,17 +121,31 @@ export default function Navbar({
             : "text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
       }`}
     >
+      {Icon && (
+        <Icon
+          className={`relative z-10 shrink-0 ${
+            mobile ? "mr-2 h-4 w-4" : "mr-1.5 h-3.5 w-3.5"
+          }`}
+          strokeWidth={2.4}
+        />
+      )}
       <span className="relative z-10 whitespace-nowrap">{item.name}</span>
-      {!mobile && isActive(item.href) && (
+      {!mobile && active && (
         <span className="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-brand" />
       )}
     </Link>
-  );
+    );
+  };
 
   const proLink = !isInstituteAdminAccount ? (
     <Link
       href="/pro"
-      onClick={() => mobileOpen && setMobileOpen(false)}
+      onMouseEnter={() => router.prefetch("/pro")}
+      onFocus={() => router.prefetch("/pro")}
+      onClick={() => {
+        setPendingHref("/pro");
+        if (mobileOpen) setMobileOpen(false);
+      }}
       className={`inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-[13px] font-extrabold tracking-wide transition-all duration-200 hover:-translate-y-px ${
         isPro
           ? "border border-indigo-300/40 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/15 dark:border-indigo-400/20 dark:text-indigo-300"
@@ -105,6 +156,11 @@ export default function Navbar({
       <span>{isPro ? `${track || ""} Pro` : "PRO"}</span>
     </Link>
   ) : null;
+
+  // Hide Navbar completely during active exam sessions
+  if (pathname === "/test/session" || pathname === "/pyq/session") {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none lg:top-4 lg:mx-auto lg:mt-4 lg:w-[calc(100%-32px)] lg:max-w-7xl lg:rounded-[20px] lg:border lg:border-slate-200/80 lg:bg-white/95 lg:shadow-none lg:backdrop-blur-none lg:dark:border-white/10 lg:dark:bg-[#11110f]">

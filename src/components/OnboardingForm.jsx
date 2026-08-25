@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Building2, GraduationCap } from "lucide-react";
+import SubjectVisual from "@/components/SubjectVisual";
 
 export default function OnboardingForm({
   action,
@@ -52,6 +54,7 @@ export default function OnboardingForm({
               onChange={() => setAccountType(accountTypes.STUDENT)}
               className="mt-1 h-4 w-4"
             />
+            <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
             <span>
               <span className="block font-black">Student</span>
               <span className="mt-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
@@ -69,6 +72,7 @@ export default function OnboardingForm({
               onChange={() => setAccountType(accountTypes.INSTITUTE_ADMIN)}
               className="mt-1 h-4 w-4"
             />
+            <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
             <span>
               <span className="block font-black">Institute Admin</span>
               <span className="mt-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
@@ -89,16 +93,20 @@ export default function OnboardingForm({
               {exams.map((exam) => (
                 <label
                   key={exam}
-                  className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-sm font-semibold text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
+                  className="relative flex items-center gap-3 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-sm font-semibold text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
                 >
+                  <SubjectVisual
+                    subject={exam === "NEET" ? "Biology" : "Maths"}
+                    className="pointer-events-none absolute -bottom-7 -right-5 h-24 w-24 text-slate-900 opacity-[0.035] dark:text-white dark:opacity-[0.055]"
+                  />
                   <input
                     type="radio"
                     name="targetExam"
                     value={exam}
                     defaultChecked={exam === "JEE"}
-                    className="h-4 w-4"
+                    className="relative z-10 h-4 w-4"
                   />
-                  {exam}
+                  <span className="relative z-10">{exam}</span>
                 </label>
               ))}
             </div>

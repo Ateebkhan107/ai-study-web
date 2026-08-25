@@ -97,19 +97,6 @@ function getCookieTrack() {
   return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
 }
 
-function PYQPracticeLoading() {
-  return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-        {[...Array(3)].map((_, index) => (
-          <div key={index} className="h-32 rounded-2xl skeleton-shimmer" />
-        ))}
-      </div>
-      <div className="h-64 rounded-2xl skeleton-shimmer" />
-    </div>
-  );
-}
-
 const SUBJECT_BAR_COLORS = {
   Physics:     "#4F6F86",
   Chemistry:   "#4F7A59",
@@ -845,7 +832,7 @@ export default function PYQPage() {
   const router = useRouter();
   const [track, setTrack] = useState(() => getCookieTrack());
   const [access, setAccess] = useState(null);
-  const [accessLoading, setAccessLoading] = useState(true);
+  const [, setAccessLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -1038,11 +1025,7 @@ export default function PYQPage() {
 
       {/* Tab panels */}
       {activeTab === "practice"  && (
-        accessLoading ? (
-          <PYQPracticeLoading />
-        ) : (
-          <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
-        )
+        <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
       )}
       {activeTab === "analytics" && (
         isPro ? (

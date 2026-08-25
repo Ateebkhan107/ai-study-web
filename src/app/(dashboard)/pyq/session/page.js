@@ -165,16 +165,16 @@ const QuestionOption = memo(function QuestionOption({
   return (
     <button
       onClick={() => onSelect(optionKey)}
-      className={`group flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left transition-colors ${
+      className={`group flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left transition-colors ${isSelected ? "test-option-selected" : ""} ${
         isSelected
-          ? "border-indigo-600 bg-indigo-50 text-indigo-950 shadow-sm dark:bg-indigo-500/10 dark:text-indigo-100"
+          ? "border-brand bg-brand/15 text-slate-950 shadow-sm dark:bg-indigo-500/10 dark:text-white"
           : "border-slate-200/70 bg-[var(--card)] text-slate-700 hover:border-indigo-300 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/40 dark:text-slate-300 dark:hover:border-indigo-500/40"
       }`}
     >
       <span
         className={`mt-0.5 flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-md border text-[11px] font-bold ${
           isSelected
-            ? "border-indigo-600 bg-indigo-600 text-white"
+            ? "border-brand bg-brand text-slate-950 dark:text-white"
             : "border-slate-300 text-slate-500 dark:border-slate-600 dark:text-slate-400"
         }`}
       >

@@ -27,8 +27,8 @@ export default function PricingPage() {
           </h1>
 
           <p className="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
-            Unlock premium {examTrack} tests, PYQ tools, analytics, formula handbooks,
-            and AI explanations. Your subscription applies only to {examTrack}.
+            Unlock premium {examTrack} tests, PYQ tools, analytics, and AI explanations.
+            Formula handbooks are included in the free plan.
           </p>
 
         </div>
@@ -50,7 +50,6 @@ export default function PricingPage() {
               "Quick tests and premium full mock tests",
               "Chapter-wise PYQs and mistake redo",
               "Advanced and PYQ analytics",
-              "Complete formula handbooks",
               "AI-powered question explanations",
               "Ad-free experience",
             ]}

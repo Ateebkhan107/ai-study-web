@@ -42,7 +42,7 @@ export const FEATURE_ACCESS_MATRIX = {
   [FEATURES.LEADERBOARD]: { plan: "FREE", label: "Leaderboard" },
   [FEATURES.COMMUNITY]: { plan: "FREE", label: "Community" },
   [FEATURES.ANALYTICS_ADVANCED]: { plan: "PRO", label: "Advanced Analytics" },
-  [FEATURES.FORMULA_HANDBOOK]: { plan: "PRO", label: "Formula Handbook" },
+  [FEATURES.FORMULA_HANDBOOK]: { plan: "FREE", label: "Formula Handbook" },
   [FEATURES.AI_EXPLANATION]: { plan: "PRO", label: "AI Explanation" },
   [FEATURES.INSTITUTE_WORKSPACE]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Workspace" },
   [FEATURES.INSTITUTE_ASSIGNED_TEST]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Assigned Test" },

@@ -234,15 +234,15 @@ updateFormulaGoal();
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
           <BookOpen className="h-7 w-7" />
         </div>
-        <h2 className="text-xl font-black text-black dark:text-white">Formula Handbook is Pro</h2>
+        <h2 className="text-xl font-black text-black dark:text-white">Formula Handbook unavailable</h2>
         <p className="max-w-md text-sm text-gray-500 dark:text-gray-400">
-          Formula handbooks are available with PrepZii Pro. Your dashboard and free practice tools will keep working normally.
+          We could not open this handbook right now. Your dashboard and free practice tools will keep working normally.
         </p>
         <Link
-          href="/pro"
+          href="/dashboard"
           className="rounded-xl bg-brand px-5 py-3 text-sm font-black text-white transition hover:opacity-90"
         >
-          Upgrade to Pro
+          Back to Dashboard
         </Link>
         <button
           onClick={() => router.back()}

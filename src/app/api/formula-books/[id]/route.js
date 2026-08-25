@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
 
   if (!permission.allowed) {
     return NextResponse.json(
-      { error: "PRO_REQUIRED", message: "Formula Handbook is available with PrepZii Pro.", upgradeUrl: "/pro" },
+      { error: "ACCESS_DENIED", message: "Formula Handbook is not available for this account." },
       { status: 403 }
     );
   }

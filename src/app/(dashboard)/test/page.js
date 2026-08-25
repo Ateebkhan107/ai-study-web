@@ -4,8 +4,7 @@ import Link from "next/link";
 import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
 import { useUser } from "@clerk/nextjs";
-import PageWrapper from "@/components/PageWrapper";
-import { Rocket, Sparkles, Stethoscope, Zap } from "lucide-react";
+import { ArrowRight, BarChart3, ClipboardList, Sparkles, Zap } from "lucide-react";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
 const TEST_TOOLS = [
@@ -13,21 +12,13 @@ const TEST_TOOLS = [
     href: "/test/history",
     label: "Test History",
     description: "Review all your previous attempts and scores",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-      </svg>
-    ),
+    icon: <ClipboardList className="h-5 w-5" />,
   },
   {
     href: "/analytics",
     label: "Performance",
     description: "Analyse accuracy trends and weak areas",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1V4z" />
-      </svg>
-    ),
+    icon: <BarChart3 className="h-5 w-5" />,
   },
 ];
 
@@ -37,17 +28,51 @@ function getCookieTrack() {
   return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
 }
 
-function TestConfigLoading() {
+function TestPageShell({ mode, setMode, children }) {
   return (
-    <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
-      <div className="min-w-0 space-y-4 sm:space-y-5 xl:col-span-2">
-        <div className="h-44 rounded-2xl skeleton-shimmer" />
-        <div className="h-56 rounded-2xl skeleton-shimmer" />
-      </div>
-      <div className="space-y-3 sm:space-y-4">
-        <div className="h-28 rounded-2xl skeleton-shimmer" />
-        <div className="h-28 rounded-2xl skeleton-shimmer" />
-        <div className="h-40 rounded-2xl skeleton-shimmer" />
+    <div className="relative min-h-screen w-full min-w-0">
+      <div className="mx-auto w-full max-w-7xl min-w-0 space-y-5 px-3 py-5 sm:px-6 sm:py-7 lg:px-8">
+        <section className="min-w-0">
+          <div className="min-w-0">
+            <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+              Test Center
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
+              Build a focused practice test or launch a preset exam session.
+            </p>
+          </div>
+
+          <div className="mt-5 inline-flex max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)]/80 p-1 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80">
+            <button
+              type="button"
+              onClick={() => setMode("build")}
+              className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black transition-colors ${
+                mode === "build"
+                  ? "bg-brand text-black"
+                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              }`}
+            >
+              <Sparkles className="h-4 w-4 shrink-0" />
+              Custom Test
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("quick")}
+              className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black transition-colors ${
+                mode === "quick"
+                  ? "bg-brand text-black"
+                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              }`}
+            >
+              <Zap className="h-4 w-4 shrink-0" />
+              Quick Test
+            </button>
+          </div>
+        </section>
+
+        <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
+          {children}
+        </section>
       </div>
     </div>
   );
@@ -58,7 +83,7 @@ export default function TestPage() {
   const { user } = useUser();
   const [track, setTrack] = useState(() => getCookieTrack());
   const [access, setAccess] = useState(null);
-  const [accessLoading, setAccessLoading] = useState(true);
+  const [, setAccessLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -87,123 +112,58 @@ export default function TestPage() {
     return () => { cancelled = true; };
   }, [user]);
 
-  const isNeet = track === "neet";
-
   return (
-    <PageWrapper
-      title="Test Center"
-      subtitle={
-        isNeet
-          ? "Build a custom PCB drill or jump directly into a full-length 720 mark mock exam simulation."
-          : "Build a custom test or jump into a randomized PCM shift-run archive parameters."
-      }
-      badge={isNeet ? "NEET Simulation Center" : "JEE Test Arena"}
-      badgeIcon={isNeet ? <Stethoscope className="h-3.5 w-3.5" /> : <Rocket className="h-3.5 w-3.5" />}
-      badgeVariant={isNeet ? "emerald" : "brand"}
+    <TestPageShell
+      mode={mode}
+      setMode={setMode}
     >
-      {/* ── Mode Toggle ── */}
-      <section
-        className="animate-slideUp"
-        style={{ animationDelay: "75ms" }}
-      >
-        <div className="flex max-w-full items-center overflow-x-auto bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
-          <button
-            onClick={() => setMode("build")}
-            className={`inline-flex shrink-0 items-center gap-2 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              mode === "build"
-                ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
-            }`}
-          >
-            <Sparkles className="h-4 w-4" />
-            Custom Test Builder
-          </button>
-          <button
-            onClick={() => setMode("quick")}
-            className={`inline-flex shrink-0 items-center gap-2 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              mode === "quick"
-                ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
-            }`}
-          >
-            <Zap className="h-4 w-4" />
-            Quick Test Launch
-          </button>
-        </div>
-      </section>
+      {mode === "build" ? (
+        <TestBuilder track={track} access={access} />
+      ) : (
+        <QuickTest track={track} isPro={Boolean(access?.isPro)} />
+      )}
 
-      {/* ── Test Builder / Quick Test ── */}
-      <section
-        className="animate-slideUp"
-        style={{ animationDelay: "150ms" }}
-      >
-        {accessLoading ? (
-          <TestConfigLoading />
-        ) : mode === "build" ? (
-          <TestBuilder track={track} access={access} />
-        ) : (
-          <QuickTest track={track} isPro={Boolean(access?.isPro)} />
-        )}
-      </section>
-
-      {/* ── Diagnostic Tools ── */}
-      <section
-        className="animate-slideUp mt-4"
-        style={{ animationDelay: "225ms" }}
-      >
-        <div className="flex items-center gap-3 mb-5">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20">
-            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-indigo-500 dark:text-indigo-400">
-              <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-            </svg>
+      <section className="animate-slideUp mt-5" style={{ animationDelay: "175ms" }}>
+        <div className="mb-3 flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
+            <ClipboardList className="h-4 w-4" />
           </div>
           <div>
-            <h2 className="text-xs font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">
+            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">
               Diagnostic Tools
             </h2>
-            <p className="text-xs font-medium text-slate-400 dark:text-slate-500 mt-0.5">
-              Track history and analyse performance
+            <p className="mt-0.5 text-xs font-semibold text-slate-500">
+              Review attempts and performance
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {TEST_TOOLS.map((tool, index) => (
             <Link
               key={tool.href}
               href={tool.href}
-              className="group relative overflow-hidden bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(194,114,63,0.12)] dark:hover:shadow-[0_8px_30px_rgba(194,114,63,0.15)] hover:border-indigo-500/30 animate-slideUp flex items-start gap-4"
+              className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/45 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 animate-slideUp"
               style={{ animationDelay: `${(index * 75) + 300}ms` }}
             >
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-indigo-500/0 to-brand-hover/0 group-hover:from-indigo-500/5 group-hover:via-transparent group-hover:to-brand-hover/5 transition-all duration-700 pointer-events-none rounded-2xl" />
-
-              <div className="relative z-10 w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+              <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/25 bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-black">
                 {tool.icon}
               </div>
 
               <div className="relative z-10 min-w-0 flex-1">
-                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-tight">
+                <p className="text-sm font-black leading-tight text-slate-900 dark:text-white">
                   {tool.label}
                 </p>
-                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 leading-snug">
+                <p className="mt-1 text-xs font-semibold leading-snug text-slate-500">
                   {tool.description}
                 </p>
               </div>
 
-              <svg
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="relative z-10 w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 group-hover:translate-x-1 shrink-0 mt-0.5 transition-all duration-300"
-              >
-                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <ArrowRight className="relative z-10 mt-0.5 h-4 w-4 shrink-0 text-slate-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" />
             </Link>
           ))}
         </div>
       </section>
-    </PageWrapper>
+    </TestPageShell>
   );
 }

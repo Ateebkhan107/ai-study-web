@@ -154,10 +154,10 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             <button
               key={`${activeQuestion.id}-${optionIndex}`}
               onClick={() => onSelect(activeQuestion, optionIndex)}
-              className={`group w-full flex items-center gap-3 rounded-2xl border-2 px-3.5 py-3 text-left transition-all duration-200 cursor-pointer sm:gap-4 sm:px-5 sm:py-4
+              className={`group w-full flex items-center gap-3 rounded-2xl border-2 px-3.5 py-3 text-left transition-all duration-200 cursor-pointer sm:gap-4 sm:px-5 sm:py-4 ${isSelected ? "test-option-selected" : ""}
                 ${
                   isSelected
-                    ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-sm shadow-brand/10"
+                    ? "bg-brand/15 dark:bg-indigo-500/10 border-brand text-slate-950 dark:text-white shadow-sm shadow-brand/10"
                     : "bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30 border-slate-200/60 dark:border-[var(--border)]/50 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:-translate-y-0.5"
                 }`}
             >
@@ -165,13 +165,21 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border-2 text-sm font-black transition-all duration-200 sm:h-9 sm:w-9
                   ${
                     isSelected
-                      ? "border-indigo-500 bg-gradient-to-br from-brand to-brand-hover text-white"
+                      ? "border-brand bg-brand text-slate-950 dark:text-white"
                       : "border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 group-hover:border-indigo-500/40"
                   }`}
               >
                 {LETTERS[optionIndex]}
               </span>
-              <MathText className="min-w-0 text-sm sm:text-base font-medium">{option}</MathText>
+              <MathText
+                className={`min-w-0 text-sm font-medium sm:text-base ${
+                  isSelected
+                    ? "text-slate-950 dark:text-white [&_*]:!text-slate-950 dark:[&_*]:!text-white"
+                    : "text-inherit"
+                }`}
+              >
+                {option}
+              </MathText>
             </button>
           );
         })}
