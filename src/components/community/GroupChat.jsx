@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Loader2, ChevronUp } from "lucide-react";
+import { Send, Loader2, ChevronUp, MessageCircle } from "lucide-react";
 import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import { useClerkSupabase } from "@/lib/useClerkSupabase";
@@ -346,7 +346,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-40 text-slate-400 dark:text-slate-500">
-            <span className="text-3xl mb-2">💬</span>
+            <MessageCircle className="mb-2 h-8 w-8" />
             <p className="text-sm">No messages yet. Start the conversation!</p>
           </div>
         ) : (

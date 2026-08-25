@@ -319,7 +319,7 @@ export default function PublicLandingPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-relaxed mt-6 font-medium" 
           >
-            Step into the most advanced preparation headquarters. Not just another test series—a complete, intelligent ecosystem built to engineer top ranks.
+            PrepZii brings JEE & NEET PYQs, previous year questions, full-length mock tests, formula revision, performance analytics, and focused practice into one preparation workspace.
           </motion.p>
 
           <motion.div 
@@ -334,6 +334,18 @@ export default function PublicLandingPage() {
               className="px-10 py-4 bg-brand text-black font-bold text-base rounded-full hover:bg-brand-hover transition-all duration-300 hover:scale-[1.02] shadow-[0_0_30px_rgba(234,179,8,0.25)] hover:shadow-[0_0_40px_rgba(234,179,8,0.4)] flex items-center justify-center gap-2 group w-full sm:w-auto"
             >
               Start Your Journey <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="/jee"
+              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-bold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
+            >
+              JEE preparation
+            </Link>
+            <Link
+              href="/neet"
+              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-bold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
+            >
+              NEET preparation
             </Link>
           </motion.div>
 

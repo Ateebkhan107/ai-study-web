@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createOrder, openCashfreeCheckout } from "@/lib/payment";
+import { Check, LockKeyhole } from "lucide-react";
 
 export default function PricingCard({
   title,
@@ -70,7 +71,7 @@ export default function PricingCard({
             key={feature}
             className="flex items-center gap-2 text-sm"
           >
-            <span className="text-green-600">✓</span>
+            <Check className="h-4 w-4 text-green-600" />
             {feature}
           </li>
         ))}
@@ -93,7 +94,10 @@ export default function PricingCard({
       </button>
 
       <p className="mt-3 text-center text-xs text-gray-500">
-        🔒 Secure payment powered by Cashfree Payments
+        <span className="inline-flex items-center justify-center gap-1.5">
+          <LockKeyhole className="h-3.5 w-3.5" />
+          Secure payment powered by Cashfree Payments
+        </span>
       </p>
     </div>
   );

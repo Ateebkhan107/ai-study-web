@@ -19,7 +19,7 @@ if (fs.existsSync(envPath)) {
 
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) {
-  console.error("❌ Please add GEMINI_API_KEY to your .env.local file");
+  console.error("Please add GEMINI_API_KEY to your .env.local file");
   process.exit(1);
 }
 
@@ -75,7 +75,7 @@ async function extractPageData(imagePath) {
 
 async function processPDF(pdfFile, shiftNumber) {
 //   console.log(`\n=============================================`);
-//   console.log(`📄 Processing ${pdfFile} (Shift ${shiftNumber})`);
+//   console.log(`Processing ${pdfFile} (Shift ${shiftNumber})`);
   const pdfPath = path.join(rootDir, pdfFile);
   const outputDir = path.join(rootDir, "tmp", `jee-main-2025-shift-${shiftNumber}`);
   const imagesDir = path.join(outputDir, "question-images");
@@ -130,7 +130,7 @@ async function processPDF(pdfFile, shiftNumber) {
 
   const manifestPath = path.join(outputDir, `jee-main-2025-shift-${shiftNumber}-manifest.json`);
   fs.writeFileSync(manifestPath, JSON.stringify(allQuestions, null, 2));
-//   console.log(`✅ Saved manifest to ${manifestPath}`);
+//   console.log(`Saved manifest to ${manifestPath}`);
 }
 
 async function run() {
@@ -140,7 +140,7 @@ async function run() {
     // You can add logic to extract shift dynamically from file name if needed
     await processPDF(files[i], shiftNumber);
   }
-//   console.log("\\n🎉 ALL PDFS PROCESSED SUCCESSFULLY!");
+//   console.log("\\nALL PDFS PROCESSED SUCCESSFULLY!");
 }
 
 run();

@@ -45,7 +45,7 @@ async function run() {
     }
 
     console.log(`=========================================`);
-    console.log(`📦 Importing Shift ${shiftNumber} - ${manifest.length} questions`);
+    console.log(`Importing Shift ${shiftNumber} - ${manifest.length} questions`);
 
     const packageName = `JEE Main 2025 January Shift ${shiftNumber}`;
     
@@ -62,7 +62,7 @@ async function run() {
     }
 
     const packageId = packageData.id;
-    console.log(`✅ Created Import Package: ${packageId}`);
+    console.log(`Created Import Package: ${packageId}`);
 
     const records = [];
     
@@ -125,7 +125,7 @@ async function run() {
         console.error(`Batch insert error for Shift ${shiftNumber}:`, error);
       }
     }
-    console.log(`✅ Successfully imported all questions for Shift ${shiftNumber}!`);
+    console.log(`Successfully imported all questions for Shift ${shiftNumber}!`);
   }
 }
 

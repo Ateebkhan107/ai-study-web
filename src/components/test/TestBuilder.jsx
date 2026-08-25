@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Atom, FlaskConical, Calculator, Dna } from "lucide-react";
+import { Atom, FlaskConical, Calculator, Dna, Check, ChevronDown } from "lucide-react";
 
 const SUBJECTS = {
   Physics: {
@@ -432,7 +432,14 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   {name}
                   {isSelected && (
                     <span className="text-[10px] font-bold opacity-70">
-                      {chapterCount > 0 ? `${chapterCount} chapters` : "Selected ✓"}
+                      {chapterCount > 0 ? (
+                        `${chapterCount} chapters`
+                      ) : (
+                        <span className="inline-flex items-center gap-1">
+                          Selected
+                          <Check className="h-3 w-3" />
+                        </span>
+                      )}
                     </span>
                   )}
                 </button>
@@ -485,9 +492,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                         {allSelected ? "Deselect all" : "Select all"}
                       </span>
                     )}
-                    <span className={`text-gray-400 text-xs transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}>
-                      ▼
-                    </span>
+                    <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
                   </div>
                 </div>
 
@@ -521,7 +526,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
                                 : "bg-gray-50 dark:bg-[var(--surface-elevated)] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-[var(--border)] hover:border-gray-300 dark:hover:border-gray-600"
                               }`}
                           >
-                            {isChapterSelected ? "✓ " : ""}{chapter}
+                            <span className="inline-flex items-center gap-1">
+                              {isChapterSelected && <Check className="h-3 w-3" />}
+                              {chapter}
+                            </span>
                             {isBiologyPracticeSubject && (
                               <span className={`ml-2 font-bold ${isUnavailable ? "text-gray-300 dark:text-gray-600" : "text-rose-500 dark:text-rose-300"}`}>
                                 {availability} available

@@ -8,6 +8,7 @@ import DailyGoals from "@/components/DailyGoals";
 import DashboardHeaderQuote from "@/components/DashboardHeaderQuote";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { Sparkles } from "lucide-react";
 
 async function getDashboardProfile() {
   const { userId, sessionClaims } = await auth();
@@ -52,7 +53,7 @@ function DashboardHeaderFallback({ activeTrackKey }) {
       <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
         <span>Hey,</span>
         <span>Student</span>
-        <span className="text-brand" aria-hidden="true">✦</span>
+        <Sparkles className="h-6 w-6 text-brand" aria-hidden="true" />
       </h1>
     </div>
   );
@@ -74,7 +75,7 @@ async function DashboardGreeting({ activeTrackKey }) {
       <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
         <span>Hey,</span>
         <span>{getFirstName(profile?.fullName)}</span>
-        <span className="text-brand" aria-hidden="true">✦</span>
+        <Sparkles className="h-6 w-6 text-brand" aria-hidden="true" />
       </h1>
 
       {examTargetLine && (

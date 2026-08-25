@@ -15,7 +15,7 @@ const QUICK_OPTIONS = [
     duration: 60,
     difficulty: "mixed",
     tag: "Popular",
-    tracks: ["jee", "neet"], // 👈 Cross-track compatible
+    tracks: ["jee", "neet"], // Cross-track compatible
   },
   {
     label: "Physics Blitz",
@@ -50,7 +50,7 @@ const QUICK_OPTIONS = [
     duration: 45,
     difficulty: "hard",
     tag: "Hard",
-    tracks: ["jee"], // 👈 JEE Only
+    tracks: ["jee"], // JEE only
   },
   {
     label: "Biology Quick",
@@ -61,7 +61,7 @@ const QUICK_OPTIONS = [
     duration: 25,
     difficulty: "mixed",
     tag: null,
-    tracks: ["neet"], // 👈 NEET Only
+    tracks: ["neet"], // NEET only
   },
   {
     label: "JEE Mock",
@@ -73,7 +73,7 @@ const QUICK_OPTIONS = [
     difficulty: "mixed",
     tag: "PRO",
     isPro: true,
-    tracks: ["jee"], // 👈 JEE Only
+    tracks: ["jee"], // JEE only
   },
   {
     label: "NEET Mock",
@@ -85,7 +85,7 @@ const QUICK_OPTIONS = [
     difficulty: "mixed",
     tag: "PRO",
     isPro: true,
-    tracks: ["neet"], // 👈 NEET Only
+    tracks: ["neet"], // NEET only
   },
   {
     label: "Daily Warmup",

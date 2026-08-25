@@ -198,7 +198,7 @@ export default function ProfilePage() {
     targetYear: user?.target_year || 2026,
     xp: xpData?.xp || 0,
     level: xpData?.level || 1,
-    badge: xpData?.badge || "🌱 Explorer",
+    badge: xpData?.badge || "Explorer",
     progress: xpData?.xp || 0,
     streak: xpData?.streak || 0,
     rank: rank,
@@ -477,7 +477,10 @@ export default function ProfilePage() {
       {/* ── SAVED TOAST ── */}
       {saved && (
         <div className="fixed bottom-4 left-4 right-4 z-50 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 animate-slideInRight sm:bottom-6 sm:left-auto sm:right-6">
-          Saved ✓
+          <span className="inline-flex items-center justify-center gap-2">
+            <CircleCheck className="h-4 w-4" />
+            Saved
+          </span>
         </div>
       )}
     </PageWrapper>

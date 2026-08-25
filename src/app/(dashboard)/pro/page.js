@@ -140,7 +140,8 @@ export default function ProPage() {
   return (
     <PageWrapper
       title=""
-      badge="✦ PRO"
+      badge="PRO"
+      badgeIcon={<Star className="h-3.5 w-3.5" />}
       badgeVariant="brand"
     >
       {/* ── Hero ── */}

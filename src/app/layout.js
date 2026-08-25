@@ -29,11 +29,11 @@ export const metadata = {
   // Resolves all relative URLs in OG images etc. against this base.
   // Change to your production domain before deploying.
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://prepzii.com"
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com"
   ),
 
   title: {
-    default: "PrepZii – Smart JEE & NEET Preparation Platform",
+    default: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
     template: "%s | PrepZii",
   },
 
@@ -42,7 +42,7 @@ export const metadata = {
   },
 
   description:
-    "PrepZii is the intelligent JEE & NEET preparation platform with PYQ practice, full mock tests, AI explanations, formula books, and deep analytics — built to engineer top ranks.",
+    "Practice JEE and NEET previous year questions, take full-length mock tests, revise formula books, track weak chapters, and analyze your performance with PrepZii.",
 
   keywords: [
     "JEE preparation",
@@ -60,9 +60,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "PrepZii",
-    title: "PrepZii – Smart JEE & NEET Preparation Platform",
+    title: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
     description:
-      "The intelligent JEE & NEET preparation platform. PYQ practice, full mock tests, AI explanations, formula books, and deep performance analytics.",
+      "Practice JEE and NEET previous year questions, take full-length mock tests, revise formula books, track weak chapters, and analyze your performance with PrepZii.",
     url: "/",
     images: [
       {
@@ -77,9 +77,9 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "PrepZii – Smart JEE & NEET Preparation Platform",
+    title: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
     description:
-      "The intelligent JEE & NEET preparation platform. PYQ practice, full mock tests, AI explanations, and deep performance analytics.",
+      "Practice JEE and NEET previous year questions, take full-length mock tests, revise formula books, track weak chapters, and analyze your performance with PrepZii.",
     images: ["/images/branding/prepzii-logo-dark.png"],
   },
 
@@ -100,10 +100,57 @@ export const metadata = {
       {
         url: "/images/branding/favicon-16x16.png",
         sizes: "16x16",
+        type: "image/png",
       },
       {
         url: "/images/branding/favicon-32x32.png",
         sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/images/branding/favicon-48x48.png",
+        sizes: "48x48",
+        type: "image/png",
+      },
+      {
+        url: "/images/branding/favicon-96x96.png",
+        sizes: "96x96",
+        type: "image/png",
+      },
+      {
+        url: "/images/branding/favicon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/images/branding/favicon-dark-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/images/branding/favicon-dark-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/images/branding/favicon-dark-48x48.png",
+        sizes: "48x48",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/images/branding/favicon-dark-96x96.png",
+        sizes: "96x96",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/images/branding/favicon-dark-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
       },
     ],
   },
@@ -142,12 +189,12 @@ const organizationSchema = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://prepzii.com/#organization",
+      "@id": "https://www.prepzii.com/#organization",
       name: "PrepZii",
-      url: "https://prepzii.com",
+      url: "https://www.prepzii.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://prepzii.com/images/branding/prepzii-logo-dark.png",
+        url: "https://www.prepzii.com/images/branding/prepzii-logo-dark.png",
       },
       sameAs: [
         "https://www.linkedin.com/company/124944167/",
@@ -161,20 +208,20 @@ const organizationSchema = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://prepzii.com/#website",
-      url: "https://prepzii.com",
+      "@id": "https://www.prepzii.com/#website",
+      url: "https://www.prepzii.com",
       name: "PrepZii",
       description:
         "Intelligent JEE & NEET preparation platform with PYQ practice, mock tests, and AI-powered analytics.",
       publisher: {
-        "@id": "https://prepzii.com/#organization",
+        "@id": "https://www.prepzii.com/#organization",
       },
     },
   ],
 };
 
 const appOrigin = (
-  process.env.NEXT_PUBLIC_APP_URL || "https://prepzii.com"
+  process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com"
 ).replace(/\/$/, "");
 
 const clerkAllowedRedirectOrigins = Array.from(

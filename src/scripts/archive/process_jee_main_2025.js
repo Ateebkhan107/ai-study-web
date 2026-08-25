@@ -28,7 +28,7 @@ if (fs.existsSync(envPath)) {
 
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) {
-  console.error("❌ Please add GEMINI_API_KEY to your .env.local file");
+  console.error("Please add GEMINI_API_KEY to your .env.local file");
   process.exit(1);
 }
 
@@ -101,7 +101,7 @@ async function extractPageData(imagePath) {
 
 async function processPDF(pdfFile, shiftNumber) {
 //   console.log("\n=============================================");
-//   console.log("📄 Processing " + pdfFile + " (Shift " + shiftNumber + ")");
+//   console.log("Processing " + pdfFile + " (Shift " + shiftNumber + ")");
   const pdfPath = path.join(rootDir, pdfFile);
   const outputDir = path.join(rootDir, "tmp", "jee-main-2025-shift-" + shiftNumber);
   const imagesDir = path.join(outputDir, "question-images");
@@ -261,7 +261,7 @@ async function processPDF(pdfFile, shiftNumber) {
 }
 
 async function run() {
-//   console.log("🚀 Starting JEE Main 2025 Direct Importer...");
+//   console.log("Starting JEE Main 2025 Direct Importer...");
 
   for (let i = 0; i < files.length; i++) {
     let shiftNumber = i + 1;
@@ -269,7 +269,7 @@ async function run() {
   }
 
 //   console.log("\n=============================================");
-//   console.log("🎉 IMPORT COMPLETE REPORT");
+//   console.log("IMPORT COMPLETE REPORT");
 //   console.log("=============================================");
 //   console.log("- Total Questions Found: " + stats.totalFound);
 //   console.log("- Successfully Imported: " + stats.imported);

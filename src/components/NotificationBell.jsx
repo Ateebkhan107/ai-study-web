@@ -182,7 +182,7 @@ export default function NotificationBell() {
                       justify-center
                     "
                   >
-                    🔔
+                    <Bell className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
                   </div>
 
                   <div className="min-w-0 flex-1">

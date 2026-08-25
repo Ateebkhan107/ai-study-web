@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { CheckCircle2 } from "lucide-react";
 
 export default function PaymentSuccess() {
   const router = useRouter();
@@ -18,8 +19,9 @@ export default function PaymentSuccess() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="rounded-2xl bg-[var(--card)] p-10 shadow-xl text-center">
-        <h1 className="text-3xl font-bold text-green-600">
-          🎉 Payment Successful
+        <h1 className="inline-flex items-center justify-center gap-2 text-3xl font-bold text-green-600">
+          <CheckCircle2 className="h-8 w-8" />
+          Payment Successful
         </h1>
 
         <p className="mt-4 text-gray-600">

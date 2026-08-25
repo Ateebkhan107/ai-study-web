@@ -1,7 +1,7 @@
 "use client";
 
 import { TREND_YEARS } from "@/lib/pyqData";
-import { Repeat, BookmarkPlus, ChevronUp, ChevronDown, Sparkles } from "lucide-react";
+import { Repeat, BookmarkPlus, ChevronUp, ChevronDown, Sparkles, Check, X } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -114,13 +114,23 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
           {q.exam}
         </span>
         {q.attempted && (
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border
+          <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border
             ${q.selected === q.correct
               ? "bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800"
               : "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800"
             }`}
           >
-            {q.selected === q.correct ? "✓ Correct" : "✗ Wrong"}
+            {q.selected === q.correct ? (
+              <>
+                <Check className="h-3 w-3" />
+                Correct
+              </>
+            ) : (
+              <>
+                <X className="h-3 w-3" />
+                Wrong
+              </>
+            )}
           </span>
         )}
       </div>

@@ -8,13 +8,15 @@ import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
 import { getPYQAnswers } from "@/lib/pyq";
 import { hasStructuredQuestionText } from "@/lib/pyqDisplay";
 import MathText from "@/components/MathText";
+import QuestionDiagram from "@/components/pyq/QuestionDiagram";
+import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
 
 // Practice mode display labels
 const modeLabels = {
-  full: "📄 Full Paper",
-  chapter: "📚 Chapter Wise",
-  random: "🎲 Random PYQs",
-  mistakes: "🔁 Mistake Revision"
+  full: "Full Paper",
+  chapter: "Chapter Wise",
+  random: "Random PYQs",
+  mistakes: "Mistake Revision",
 };
 
 const RemoveOrangeFilter = () => (
@@ -115,7 +117,7 @@ export default function PYQResultsPage() {
       try {
         goalUpdated.current = true;
         await updateGoalProgress(user.id, "PYQ", 1);
-//         console.log("PYQ GOAL UPDATED 🚀", total);
+//         console.log("PYQ GOAL UPDATED", total);
       } catch (error) {
         goalUpdated.current = false;
 //         console.log("PYQ goal error:", error);
@@ -124,147 +126,174 @@ export default function PYQResultsPage() {
     updatePYQGoal();
   }, [user, total]);
 
-  let resultLabel = "Needs Improvement 📚";
-  let badgeColor = "bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-500/20";
+  let resultLabel = "Needs Improvement";
+  let badgeColor = "text-amber-700 dark:text-amber-300 border-amber-300/70 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10";
   if (accuracy >= 80) {
-    resultLabel = "Excellent Work 🎯";
-    badgeColor = "bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20";
+    resultLabel = "Excellent Work";
+    badgeColor = "text-emerald-700 dark:text-emerald-300 border-emerald-300/70 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10";
   } else if (accuracy >= 50) {
-    resultLabel = "Good Effort 👍";
-    badgeColor = "bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20";
+    resultLabel = "Good Effort";
+    badgeColor = "text-indigo-700 dark:text-indigo-300 border-indigo-300/70 dark:border-indigo-500/40 bg-indigo-50 dark:bg-indigo-500/10";
+  }
+  const modeMeta = modeLabels[mode] || modeLabels.full;
+  const attempted = Math.max(0, total - skipped);
+  const completion = total > 0 ? Math.round((attempted / total) * 100) : 0;
+  const paperLabel = [attemptLabel, shiftLabel].filter(Boolean).join(" · ");
+  const headlineMeta = [exam, modeMeta, `${total} Questions`].filter(Boolean).join(" · ");
+  const sessionDetails = [
+    subjectLabels.join(" · ") || "—",
+    examType ? `${exam} ${examType}` : exam,
+    paperLabel,
+    modeMeta,
+  ].filter(Boolean);
+
+  let takeaway = "Review the attempt carefully and use the mistakes to plan your next practice session.";
+  if (total > 0 && attempted <= Math.max(1, Math.floor(total * 0.1))) {
+    takeaway = `You attempted only ${attempted} ${attempted === 1 ? "question" : "questions"}. Try a shorter focused deck before another full paper.`;
+  } else if (accuracy >= 80 && completion >= 80) {
+    takeaway = "Strong attempt. Review the few mistakes before your next test.";
+  } else if (accuracy >= 70) {
+    takeaway = "Accuracy looks solid. Next, work on increasing attempts.";
+  } else if (attempted > 0 && accuracy < 50) {
+    takeaway = "Focus on accuracy before increasing speed.";
   }
 
-  // Circle math
-  const radius = 45;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (accuracy / 100) * circumference;
+  const metrics = [
+    { label: "Accuracy", value: `${accuracy}%` },
+    { label: "Correct", value: correct },
+    { label: "Wrong", value: wrong },
+    { label: "Skipped", value: skipped },
+  ];
+
+  const snapshot = [
+    { label: "Attempted", value: `${attempted} / ${total}` },
+    { label: "Accuracy", value: `${accuracy}%` },
+    { label: "Net Score", value: score },
+    { label: "Completion", value: `${completion}%` },
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start sm:items-center justify-center relative overflow-x-hidden overflow-y-auto">
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start justify-center relative overflow-x-hidden overflow-y-auto">
       <RemoveOrangeFilter />
-      {/* Background blobs */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand/8 dark:bg-brand/5 blur-[100px]" />
-      </div>
-
-      <div className="w-full max-w-4xl z-10 animate-slideUp py-8">
+      <div className="w-full max-w-5xl z-10 animate-slideUp py-6 sm:py-10">
         
-        {/* Main Card */}
-        <div className="bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm p-6 sm:p-10 mb-8">
+        {/* Main Report */}
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-2xl border border-slate-200/80 dark:border-[var(--border)]/70 shadow-sm p-6 sm:p-8 lg:p-10 mb-8">
           
-          <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
-            {/* SVG Score Ring */}
-            <div className="relative w-32 h-32 flex-shrink-0">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                <circle
-                  className="text-slate-200 dark:text-slate-800"
-                  strokeWidth="8"
-                  stroke="currentColor"
-                  fill="transparent"
-                  r={radius}
-                  cx="50"
-                  cy="50"
-                />
-                <circle
-                  className="text-indigo-500 transition-all duration-1000 ease-out"
-                  strokeWidth="8"
-                  strokeDasharray={circumference}
-                  strokeDashoffset={strokeDashoffset}
-                  strokeLinecap="round"
-                  stroke="currentColor"
-                  fill="transparent"
-                  r={radius}
-                  cx="50"
-                  cy="50"
-                />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-3xl font-black text-slate-900 dark:text-white">{accuracy}%</span>
-              </div>
-            </div>
+          <div className="border-b border-slate-200/80 pb-8 text-center dark:border-[var(--border)]/70">
+            <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+              Test Result
+            </p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
+              Deck Submitted
+            </h1>
+            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400 sm:text-base">
+              {headlineMeta}
+            </p>
 
-            <div className="text-center md:text-left flex-1">
-              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
-                Deck Submitted!
-              </h1>
-              <p className="text-xl font-bold text-slate-600 dark:text-slate-400 mb-3">
-                Score: <span className="text-indigo-600 dark:text-indigo-400">{score}</span> / {maxScore}
+            <div className="mt-8">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+                Score
               </p>
-              <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold border ${badgeColor}`}>
+              <div className="mt-2 flex items-end justify-center gap-3">
+                <span className="text-6xl font-black leading-none tracking-tight text-slate-950 dark:text-white sm:text-7xl">
+                  {score}
+                </span>
+                <span className="pb-2 text-2xl font-black text-slate-400 dark:text-slate-500 sm:text-3xl">
+                  / {maxScore}
+                </span>
+              </div>
+              <span className={`mt-5 inline-flex rounded-full border px-4 py-1.5 text-sm font-black ${badgeColor}`}>
                 {resultLabel}
               </span>
             </div>
           </div>
 
-          {/* Session Summary */}
-          <div className="bg-slate-100/50 dark:bg-[var(--surface)]/50 rounded-2xl p-5 mb-8 border border-slate-200/60 dark:border-[var(--border-subtle)]/60">
-            <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 text-center md:text-left">
-              Session Summary
-            </h2>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                Subjects: {subjectLabels.join(", ") || "—"}
-              </span>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                Exam: {exam}{examType ? ` ${examType}` : ""}
-              </span>
-              {(attemptLabel || shiftLabel) && (
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                  Paper: {[attemptLabel, shiftLabel].filter(Boolean).join(" · ")}
-                </span>
-              )}
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                Mode: {modeLabels[mode] || modeLabels.full}
-              </span>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-                Questions: {total}
-              </span>
-            </div>
+          {/* Metrics */}
+          <div className="grid grid-cols-2 border-b border-slate-200/80 py-7 dark:border-[var(--border)]/70 sm:grid-cols-4">
+            {metrics.map((item) => (
+              <div key={item.label} className="px-3 py-3 text-center sm:border-l sm:first:border-l-0 sm:border-slate-200/80 sm:dark:border-[var(--border)]/70">
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-3xl font-black text-slate-950 dark:text-white">
+                  {item.value}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200/60 dark:border-emerald-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mb-1">{correct}</span>
-              <span className="text-xs font-bold text-emerald-600/70 dark:text-emerald-500 uppercase tracking-widest">Correct</span>
-            </div>
-            
-            <div className="bg-rose-50 dark:bg-rose-500/10 border border-rose-200/60 dark:border-rose-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-rose-600 dark:text-rose-400 mb-1">{wrong}</span>
-              <span className="text-xs font-bold text-rose-600/70 dark:text-rose-500 uppercase tracking-widest">Wrong</span>
-            </div>
+          <div className="grid gap-8 py-8 lg:grid-cols-[1fr_0.9fr]">
+            {/* Performance Snapshot */}
+            <section>
+              <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                Performance Snapshot
+              </h2>
+              <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5">
+                {snapshot.map((item) => (
+                  <div key={item.label} className="border-t border-slate-200/80 pt-4 dark:border-[var(--border)]/70">
+                    <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 text-2xl font-black text-slate-950 dark:text-white">
+                      {item.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
 
-            <div className="bg-slate-100 dark:bg-[var(--surface-elevated)]/50 border border-slate-200/60 dark:border-[var(--border)]/50 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-slate-700 dark:text-slate-300 mb-1">{skipped}</span>
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Skipped</span>
-            </div>
+            {/* Session Details + Takeaway */}
+            <section className="space-y-7">
+              <div>
+                <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Session Details
+                </h2>
+                <div className="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-sm font-bold text-slate-700 dark:text-slate-200">
+                  {sessionDetails.map((item, index) => (
+                    <span key={`${item}-${index}`} className="inline-flex items-center gap-3">
+                      {index > 0 && <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600" />}
+                      <span>{item}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-            <div className="bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200/60 dark:border-indigo-500/20 rounded-2xl p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-1">{accuracy}%</span>
-              <span className="text-xs font-bold text-indigo-600/70 dark:text-indigo-500 uppercase tracking-widest">Accuracy</span>
-            </div>
+              <div className="border-l-4 border-brand bg-slate-50 px-5 py-4 dark:bg-[var(--surface-elevated)]/50">
+                <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Today&apos;s Takeaway
+                </h2>
+                <p className="mt-3 text-base font-semibold leading-7 text-slate-800 dark:text-slate-100">
+                  {takeaway}
+                </p>
+              </div>
+            </section>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-3 border-t border-slate-200/80 pt-7 dark:border-[var(--border)]/70 sm:flex-row">
             <button
               onClick={() => setShowReview(v => !v)}
-              className="flex-1 bg-brand text-white font-bold py-3.5 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
+              className="flex-1 rounded-xl bg-brand px-5 py-3.5 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover"
             >
               {showReview ? "Hide Review" : "Review Answers"}
             </button>
             <button
               onClick={() => router.push("/pyq")}
-              className="flex-1 border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-xl font-bold py-3.5 text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300"
+              className="flex-1 rounded-xl border border-slate-200/80 bg-[var(--card)] px-5 py-3.5 text-sm font-black text-slate-700 transition-colors duration-200 hover:border-brand/50 dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-200"
             >
               Back to Setup
             </button>
           </div>
-
         </div>
 
+        {showReview && reviewData.length === 0 && (
+          <div className="mb-8 rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 text-center text-sm font-semibold text-slate-500 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-400">
+            Review data is not available for this session.
+          </div>
+        )}
+
         {/* REVIEW SECTION */}
-        {showReview && (
+        {showReview && reviewData.length > 0 && (
           <div className="space-y-6 pb-12 animate-slideUp" style={{ animationDelay: '0.1s' }}>
             {reviewData.map((q, idx) => {
               const qType = q.question_type || "MCQ";
@@ -320,7 +349,7 @@ export default function PYQResultsPage() {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    {q.question_image && !hasStructuredQuestionText(q.question) && (
+                    {q.question_image && !hasNativeQuestionDiagram(q) && !hasStructuredQuestionText(q.question) && (
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
@@ -333,7 +362,8 @@ export default function PYQResultsPage() {
                         {q.question}
                       </MathText>
                     )}
-                    {q.question_image && hasStructuredQuestionText(q.question) && (
+                    <QuestionDiagram question={q} />
+                    {q.question_image && !hasNativeQuestionDiagram(q) && hasStructuredQuestionText(q.question) && (
                       <img
                         src={q.question_image}
                         alt="Question visual"

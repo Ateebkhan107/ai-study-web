@@ -2,6 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import {
+  BookOpen,
+  Check,
+  Clock,
+  FileText,
+  Inbox,
+  Minus,
+  Pencil,
+  Rocket,
+  Target,
+  Trophy,
+  X,
+} from "lucide-react";
 
 export default function ResultPage() {
   const { id } = useParams();
@@ -57,7 +70,9 @@ export default function ResultPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="text-center animate-slideUp">
-          <div className="text-5xl mb-4">📭</div>
+          <div className="mb-4 flex justify-center text-slate-400 dark:text-slate-500">
+            <Inbox className="h-12 w-12" />
+          </div>
           <h2 className="text-xl font-black text-slate-900 dark:text-white">Result not found</h2>
           <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">This test result may have been removed.</p>
           <button
@@ -84,14 +99,17 @@ export default function ResultPage() {
   const scorePct = totalMarks > 0 ? Math.round((score / totalMarks) * 100) : 0;
 
   // Feedback
-  let feedbackMessage = "Needs Improvement 📚";
+  let feedbackMessage = "Needs Improvement";
+  let FeedbackIcon = BookOpen;
   let feedbackClasses = "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/10";
 
   if (accuracy >= 90) {
-    feedbackMessage = "Excellent Work 🎉";
+    feedbackMessage = "Excellent Work";
+    FeedbackIcon = Trophy;
     feedbackClasses = "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/10";
   } else if (accuracy >= 70) {
-    feedbackMessage = "Good Attempt 🚀";
+    feedbackMessage = "Good Attempt";
+    FeedbackIcon = Rocket;
     feedbackClasses = "text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20 bg-indigo-50 dark:bg-indigo-500/10";
   }
 
@@ -109,12 +127,12 @@ export default function ResultPage() {
 
   // Stat cards
   const stats = [
-    { label: "Score", value: `${score}/${totalMarks}`, icon: "🎯", color: "indigo" },
-    { label: "Correct", value: correct, icon: "✓", color: "emerald" },
-    { label: "Wrong", value: wrong, icon: "✗", color: "rose" },
-    { label: "Skipped", value: skipped, icon: "−", color: "slate" },
-    { label: "Accuracy", value: `${accuracy}%`, icon: "🎯", color: "indigo" },
-    { label: "Time Taken", value: timeStr, icon: "⏱", color: "slate" },
+    { label: "Score", value: `${score}/${totalMarks}`, Icon: Target, color: "indigo" },
+    { label: "Correct", value: correct, Icon: Check, color: "emerald" },
+    { label: "Wrong", value: wrong, Icon: X, color: "rose" },
+    { label: "Skipped", value: skipped, Icon: Minus, color: "slate" },
+    { label: "Accuracy", value: `${accuracy}%`, Icon: Target, color: "indigo" },
+    { label: "Time Taken", value: timeStr, Icon: Clock, color: "slate" },
   ];
 
   const colorMap = {
@@ -163,7 +181,8 @@ export default function ResultPage() {
         </h1>
 
         {/* ── Feedback Badge ── */}
-        <div className={`inline-flex px-5 py-2 rounded-full border text-sm font-bold mb-8 ${feedbackClasses}`}>
+        <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-bold mb-8 ${feedbackClasses}`}>
+          <FeedbackIcon className="h-4 w-4" />
           {feedbackMessage}
         </div>
 
@@ -173,11 +192,13 @@ export default function ResultPage() {
             Session Summary
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
-            <span className="px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
-              📝 {attempt.total_questions} Questions
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
+              <FileText className="h-4 w-4" />
+              {attempt.total_questions} Questions
             </span>
-            <span className="px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
-              ✍️ {attempt.attempted} Attempted
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
+              <Pencil className="h-4 w-4" />
+              {attempt.attempted} Attempted
             </span>
           </div>
         </div>
@@ -190,7 +211,7 @@ export default function ResultPage() {
               className={`p-4 rounded-2xl border text-center transition-all duration-300 hover:-translate-y-0.5 ${colorMap[item.color]}`}
               style={{ animationDelay: `${index * 75}ms` }}
             >
-              <div className="text-lg mb-1">{item.icon}</div>
+              <item.Icon className="mx-auto mb-1 h-5 w-5" />
               <p className="text-2xl font-black">{item.value}</p>
               <p className="text-[10px] uppercase font-bold tracking-widest mt-0.5 opacity-70">{item.label}</p>
             </div>

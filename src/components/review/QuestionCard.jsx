@@ -1,5 +1,7 @@
 "use client";
 
+import { Check } from "lucide-react";
+
 // QuestionCard.jsx
 // Props:
 //   question  — full question object (see mockData shape)
@@ -167,8 +169,9 @@ export default function QuestionCard({ question, index }) {
                   )}
                 {option.id === question.userAnswer &&
                   option.id === question.correctAnswer && (
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-                      Your Answer ✓
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                      Your Answer
+                      <Check className="h-3 w-3" />
                     </span>
                   )}
                 {option.id === question.correctAnswer &&

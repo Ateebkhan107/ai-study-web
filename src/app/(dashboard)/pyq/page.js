@@ -6,7 +6,7 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
 import PageWrapper from "@/components/PageWrapper";
-import { Atom, FlaskConical, Sigma, Dna } from "lucide-react";
+import { Atom, Dna, FlaskConical, Rocket, Sigma, Stethoscope } from "lucide-react";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
@@ -1004,7 +1004,8 @@ export default function PYQPage() {
     <PageWrapper
       title="PYQ Practice"
       subtitle="Analyze real past examination parameters with automated performance indicators."
-      badge={track === "neet" ? "NEET UG Medical Core 🩺" : "IIT JEE Engineering Vault 🚀"}
+      badge={track === "neet" ? "NEET UG Medical Core" : "IIT JEE Engineering Vault"}
+      badgeIcon={track === "neet" ? <Stethoscope className="h-3.5 w-3.5" /> : <Rocket className="h-3.5 w-3.5" />}
       badgeVariant={track === "neet" ? "emerald" : "brand"}
     >
       {/* Tab nav */}

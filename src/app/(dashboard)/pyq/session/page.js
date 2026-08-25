@@ -10,6 +10,9 @@ import Logo from "@/components/Logo";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 import MathText from "@/components/MathText";
+import QuestionDiagram from "@/components/pyq/QuestionDiagram";
+import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
+import { AlertTriangle, BookOpen, FileText, Inbox, RotateCcw, Shuffle } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -19,10 +22,10 @@ function originalQuestionNumber(question, fallback) {
 }
 
 const modeLabels = {
-  full: "📄 Full Paper",
-  chapter: "📚 Chapter Wise",
-  random: "🎲 Random PYQs",
-  mistakes: "🔁 Mistake Revision",
+  full: { label: "Full Paper", Icon: FileText },
+  chapter: { label: "Chapter Wise", Icon: BookOpen },
+  random: { label: "Random PYQs", Icon: Shuffle },
+  mistakes: { label: "Mistake Revision", Icon: RotateCcw },
 };
 
 const RemoveOrangeFilter = () => (
@@ -232,6 +235,8 @@ export default function PYQSessionPage() {
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
+  const modeMeta = modeLabels[mode] || modeLabels.full;
+  const ModeIcon = modeMeta.Icon;
   const shouldLoadWholePaper = mode === "full";
   const shouldLoadBalancedRandom = mode === "random" && (exam === "JEE" || exam === "NEET");
 
@@ -344,6 +349,7 @@ export default function PYQSessionPage() {
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
   const displayedQuestionNumber = mode === "full" ? originalQuestionNumber(currentQuestion, currentIndex + 1) : currentIndex + 1;
+  const hasNativeDiagram = hasNativeQuestionDiagram(currentQuestion);
   const answeredCount = useMemo(
     () =>
       Object.values(answers).filter(
@@ -466,8 +472,15 @@ export default function PYQSessionPage() {
       }
       return {
         id: q.id,
+        paper_code: q.paper_code,
+        question_number: q.question_number,
+        display_order: q.display_order,
+        attempt: q.attempt,
+        shift: q.shift,
+        exam_type: q.exam_type,
         question: q.question,
         question_image: q.question_image,
+        exam: q.exam,
         subject: q.subject,
         chapter: q.chapter,
         difficulty: q.difficulty,
@@ -539,7 +552,9 @@ export default function PYQSessionPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[var(--background)]">
         <div className="text-center animate-slideUp">
-          <div className="text-5xl mb-4">{loadError ? "⚠️" : "📭"}</div>
+          <div className="mb-4 flex justify-center text-slate-400 dark:text-slate-500">
+            {loadError ? <AlertTriangle className="h-12 w-12" /> : <Inbox className="h-12 w-12" />}
+          </div>
           <h2 className="text-xl font-black text-slate-900 dark:text-white">
             {loadError || "No PYQs Found"}
           </h2>
@@ -565,8 +580,9 @@ export default function PYQSessionPage() {
             <Logo size={24} />
             <div className="hidden h-5 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
             <div className="min-w-0">
-              <span className="block truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                {modeLabels[mode] || modeLabels.full}
+              <span className="flex items-center gap-1.5 truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                <ModeIcon className="h-3.5 w-3.5 shrink-0" />
+                {modeMeta.label}
               </span>
               <p className="hidden truncate text-[11px] text-slate-500 dark:text-slate-400 min-[390px]:block">
                 {subjectLabels.join(", ")} · {exam}
@@ -700,7 +716,7 @@ export default function PYQSessionPage() {
             </div>
 
             {/* Question image */}
-            {shouldShowQuestionImageFallback(currentQuestion) && (
+            {!hasNativeDiagram && shouldShowQuestionImageFallback(currentQuestion) && (
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
@@ -717,7 +733,9 @@ export default function PYQSessionPage() {
               </MathText>
             )}
 
-            {shouldShowRequiredQuestionImage(currentQuestion) && (
+            <QuestionDiagram question={currentQuestion} />
+
+            {!hasNativeDiagram && shouldShowRequiredQuestionImage(currentQuestion) && (
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"

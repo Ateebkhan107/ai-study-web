@@ -8,7 +8,7 @@
  */
 export default function robots() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://prepzii.com";
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com";
 
   return {
     rules: [
@@ -16,6 +16,12 @@ export default function robots() {
         userAgent: "*",
         allow: [
           "/",
+          "/jee",
+          "/jee/pyq",
+          "/jee/mock-tests",
+          "/neet",
+          "/neet/pyq",
+          "/neet/mock-tests",
           "/pricing",
           "/about",
           "/careers",

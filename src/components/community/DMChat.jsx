@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Loader2, ChevronUp, ShieldOff } from "lucide-react";
+import { Send, Loader2, ChevronUp, ShieldOff, Mail } from "lucide-react";
 import { useSession } from "@clerk/nextjs";
 import MessageBubble from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
@@ -349,7 +349,7 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
 
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-40 text-slate-400">
-            <span className="text-3xl mb-2">✉️</span>
+            <Mail className="mb-2 h-8 w-8" />
             <p className="text-sm">Start the conversation!</p>
           </div>
         ) : (

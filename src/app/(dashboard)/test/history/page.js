@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
+import { ClipboardList, Inbox } from "lucide-react";
 
 export default function HistoryPage() {
   const { user } = useUser();
@@ -38,7 +39,7 @@ export default function HistoryPage() {
 
   if (loading) {
     return (
-      <PageWrapper title="Test History" subtitle="Review your previous test attempts" badge="HISTORY 📋">
+      <PageWrapper title="Test History" subtitle="Review your previous test attempts" badge="HISTORY" badgeIcon={<ClipboardList className="h-3.5 w-3.5" />}>
         <div className="flex justify-end mb-8">
           <button
             onClick={() => router.back()}
@@ -69,7 +70,7 @@ export default function HistoryPage() {
   }
 
   return (
-    <PageWrapper title="Test History" subtitle="Review your previous test attempts" badge="HISTORY 📋">
+    <PageWrapper title="Test History" subtitle="Review your previous test attempts" badge="HISTORY" badgeIcon={<ClipboardList className="h-3.5 w-3.5" />}>
       <div className="flex items-center justify-between mb-8">
         <div></div>
         <button
@@ -82,7 +83,9 @@ export default function HistoryPage() {
 
       {tests.length === 0 ? (
         <div className="text-center py-20 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 shadow-sm animate-slideUp">
-          <div className="text-6xl mb-4">📭</div>
+          <div className="mb-4 flex justify-center text-slate-400 dark:text-slate-500">
+            <Inbox className="h-14 w-14" />
+          </div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">No tests taken yet</h2>
           <p className="text-slate-400 dark:text-slate-500 mb-8">
               You haven&apos;t taken any mock tests yet. Start one now to track your progress!

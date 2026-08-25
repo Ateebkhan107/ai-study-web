@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { ImageIcon } from "lucide-react";
+import { CheckCircle2, ImageIcon, XCircle } from "lucide-react";
 
 export default function ImageManager() {
   const [exams, setExams] = useState([]);
@@ -178,9 +178,15 @@ export default function ImageManager() {
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-bold text-sm capitalize">{field.replace(/_/g, ' ')}</span>
                   {currentQ[field] ? (
-                    <span className="text-green-500 font-bold text-sm">✅ Uploaded</span>
+                    <span className="inline-flex items-center gap-1 text-green-500 font-bold text-sm">
+                      <CheckCircle2 className="h-4 w-4" />
+                      Uploaded
+                    </span>
                   ) : (
-                    <span className="text-red-500 font-bold text-sm">❌ Missing</span>
+                    <span className="inline-flex items-center gap-1 text-red-500 font-bold text-sm">
+                      <XCircle className="h-4 w-4" />
+                      Missing
+                    </span>
                   )}
                 </div>
 

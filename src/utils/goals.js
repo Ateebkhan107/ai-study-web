@@ -140,7 +140,7 @@ name
 
 
 console.log(
-`Goal completed +${goal.xp} XP 🔥`
+`Goal completed +${goal.xp} XP`
 );
 
 

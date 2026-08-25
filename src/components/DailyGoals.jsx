@@ -70,7 +70,12 @@ export default function DailyGoals({ compact = false }) {
             {completed > 0 && goals.length > 0 && (
               <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700 dark:text-slate-200">
                 {completed === goals.length
-                    ? "All done ✓"
+                    ? (
+                      <span className="inline-flex items-center gap-1">
+                        All done
+                        <CheckCircle2 className="h-3.5 w-3.5" />
+                      </span>
+                    )
                     : `${completed} of ${goals.length} done`}
               </p>
             )}

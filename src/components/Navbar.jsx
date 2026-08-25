@@ -7,7 +7,7 @@ import { useState } from "react";
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Star, Sun, X } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard" },
@@ -101,7 +101,7 @@ export default function Navbar({
           : "border border-amber-300/50 bg-amber-400/15 text-amber-700 hover:bg-amber-400/20 hover:text-amber-800 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-300 dark:hover:bg-amber-400/15 dark:hover:text-amber-200"
       }`}
     >
-      {!isPro && <span aria-hidden="true" className="text-[12px] leading-none">★</span>}
+      {!isPro && <Star aria-hidden="true" className="h-3.5 w-3.5" fill="currentColor" />}
       <span>{isPro ? `${track || ""} Pro` : "PRO"}</span>
     </Link>
   ) : null;

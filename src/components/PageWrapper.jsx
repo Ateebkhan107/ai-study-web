@@ -9,7 +9,8 @@ import { Star, Sparkle } from "lucide-react";
  * Props:
  *  - title: string — page heading
  *  - subtitle: string — small text below heading
- *  - badge: string — glassmorphic pill text (e.g. "JEE Test Arena 🚀")
+ *  - badge: string — glassmorphic pill text
+ *  - badgeIcon: ReactNode — optional icon shown before badge text
  *  - badgeVariant: "brand" | "emerald" — color of badge
  *  - children: ReactNode
  */
@@ -17,6 +18,7 @@ export default function PageWrapper({
   title,
   subtitle,
   badge,
+  badgeIcon,
   badgeVariant = "brand",
   children,
 }) {
@@ -60,6 +62,11 @@ export default function PageWrapper({
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
                 </span>
+                {badgeIcon && (
+                  <span className={`flex h-4 w-4 items-center justify-center ${badgeColors.split(" ").slice(3).join(" ")}`}>
+                    {badgeIcon}
+                  </span>
+                )}
                 <p
                   className={`text-xs font-bold bg-gradient-to-r bg-clip-text text-transparent uppercase tracking-widest ${badgeColors.split(" ").slice(3).join(" ")}`}
                 >

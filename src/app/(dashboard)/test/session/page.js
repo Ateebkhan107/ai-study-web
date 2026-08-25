@@ -295,7 +295,7 @@ function TestSessionContent() {
       router.replace(`/test/result/${data.attemptId}`);
       clearInterval(timerRef.current);
     } catch (err) {
-      console.error("SAVE ERROR 👉", err);
+      console.error("SAVE ERROR", err);
       alert(err.message);
       setFinishing(false);
     }

@@ -5,6 +5,7 @@ import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
 import { useUser } from "@clerk/nextjs";
 import PageWrapper from "@/components/PageWrapper";
+import { Rocket, Sparkles, Stethoscope, Zap } from "lucide-react";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
 const TEST_TOOLS = [
@@ -96,7 +97,8 @@ export default function TestPage() {
           ? "Build a custom PCB drill or jump directly into a full-length 720 mark mock exam simulation."
           : "Build a custom test or jump into a randomized PCM shift-run archive parameters."
       }
-      badge={isNeet ? "NEET Simulation Center 🩺" : "JEE Test Arena 🚀"}
+      badge={isNeet ? "NEET Simulation Center" : "JEE Test Arena"}
+      badgeIcon={isNeet ? <Stethoscope className="h-3.5 w-3.5" /> : <Rocket className="h-3.5 w-3.5" />}
       badgeVariant={isNeet ? "emerald" : "brand"}
     >
       {/* ── Mode Toggle ── */}
@@ -107,23 +109,25 @@ export default function TestPage() {
         <div className="flex max-w-full items-center overflow-x-auto bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
           <button
             onClick={() => setMode("build")}
-            className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            className={`inline-flex shrink-0 items-center gap-2 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "build"
                 ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
             }`}
           >
-            ✦ Custom Test Builder
+            <Sparkles className="h-4 w-4" />
+            Custom Test Builder
           </button>
           <button
             onClick={() => setMode("quick")}
-            className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            className={`inline-flex shrink-0 items-center gap-2 px-4 py-2.5 sm:px-5 rounded-lg text-sm font-semibold transition-all duration-200 ${
               mode === "quick"
                 ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5"
             }`}
           >
-            ⚡ Quick Test Launch
+            <Zap className="h-4 w-4" />
+            Quick Test Launch
           </button>
         </div>
       </section>

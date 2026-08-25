@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageWrapper from "@/components/PageWrapper";
+import { ClipboardList } from "lucide-react";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
@@ -365,7 +366,12 @@ export default function TestHistoryPage() {
   }, [activeFilter, search]);
 
   return (
-    <PageWrapper title='Test History' subtitle='Track all your previous attempts and performance.' badge='HISTORY 📋'>
+    <PageWrapper
+      title="Test History"
+      subtitle="Track all your previous attempts and performance."
+      badge="HISTORY"
+      badgeIcon={<ClipboardList className="h-3.5 w-3.5" />}
+    >
 
       {/* ── Stats ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8 animate-slideUp">

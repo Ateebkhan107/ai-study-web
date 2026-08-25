@@ -206,7 +206,7 @@ async function run() {
     }
   }
 
-//   console.log("🎉 NEET 2025 PYQ UPLOAD COMPLETE!");
+//   console.log("NEET 2025 PYQ UPLOAD COMPLETE!");
 }
 
 run();

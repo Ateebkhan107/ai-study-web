@@ -38,7 +38,7 @@ export default async function DashboardLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-[var(--background)] dark:bg-[var(--background)] transition-colors duration-200">
-      {/* 👈 Passed control prop to conditionally unmount the text line */}
+      {/* Passed control prop to conditionally unmount the text line */}
       <Navbar
         accountType={accountType}
         institutes={activeInstitutes}

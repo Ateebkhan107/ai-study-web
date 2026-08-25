@@ -136,7 +136,7 @@ user.id,
 
 console.log(
 
-"FORMULA GOAL UPDATED 📚"
+"FORMULA GOAL UPDATED"
 
 );
 

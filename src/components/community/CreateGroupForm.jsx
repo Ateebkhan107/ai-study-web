@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { X, Loader2 } from "lucide-react";
+import { BookOpen, X, Loader2 } from "lucide-react";
 
 export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
   const router = useRouter();
@@ -62,8 +62,9 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
       </div>
 
       <div className="mb-4 px-3 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20">
-        <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-          📚 This group will be in the <span className="uppercase">{examTrack}</span> community
+        <p className="flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+          <BookOpen className="h-4 w-4 shrink-0" />
+          <span>This group will be in the <span className="uppercase">{examTrack}</span> community</span>
         </p>
       </div>
 

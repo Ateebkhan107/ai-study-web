@@ -35,7 +35,7 @@ async function run() {
 
   for (const shiftDir of shifts) {
 //     console.log(`\n=============================================`);
-//     console.log(`🚀 Processing shift directory: ${shiftDir}`);
+//     console.log(`Processing shift directory: ${shiftDir}`);
     
     // Parse Attempt and Shift
     // Example: jee_main_22_jan_shift_1
@@ -160,7 +160,7 @@ async function run() {
       if (error) console.error(`Error inserting Q${qNum}:`, error);
     }
     
-//     console.log(`✅ Finished shift: ${shiftDir}`);
+//     console.log(`Finished shift: ${shiftDir}`);
   }
 }
 

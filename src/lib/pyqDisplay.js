@@ -1,3 +1,5 @@
+import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
+
 const PLACEHOLDER_PATTERNS = [
   /refer to the source image/i,
   /refer to the question image/i,
@@ -17,9 +19,9 @@ export function canShowStructuredQuestionText(question) {
 }
 
 export function shouldShowQuestionImageFallback(question) {
-  return Boolean(question?.question_image) && !canShowStructuredQuestionText(question);
+  return Boolean(question?.question_image) && !hasNativeQuestionDiagram(question) && !canShowStructuredQuestionText(question);
 }
 
 export function shouldShowRequiredQuestionImage(question) {
-  return Boolean(question?.question_image) && canShowStructuredQuestionText(question);
+  return Boolean(question?.question_image) && !hasNativeQuestionDiagram(question) && canShowStructuredQuestionText(question);
 }
