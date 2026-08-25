@@ -55,7 +55,7 @@ const REVEAL_FIELDS = [
 
 const ATTEMPT_LOOKUP_CHUNK_SIZE = 100;
 const FULL_PAPER_CONFIG = {
-  JEE: { total: 75, subjects: ["Physics", "Chemistry", "Maths"] },
+  JEE: { total: 75, subjects: ["Maths", "Physics", "Chemistry"] },
   NEET: { total: 180, subjects: ["Physics", "Chemistry", "Biology"] },
 };
 
@@ -322,7 +322,9 @@ export async function GET(req) {
     let resultQuestions = mistakeQuestions || [];
     
     if (exam === "JEE" || exam === "JEE Main" || exam === "NEET") {
-      const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+      const SUBJECT_ORDER = exam === "NEET"
+        ? { "Physics": 1, "Chemistry": 2, "Biology": 3, "Botany": 3, "Zoology": 4 }
+        : { "Maths": 1, "Mathematics": 1, "Physics": 2, "Chemistry": 3 };
       resultQuestions.sort((a, b) => {
         const subjA = SUBJECT_ORDER[a.subject] || 99;
         const subjB = SUBJECT_ORDER[b.subject] || 99;
@@ -398,7 +400,9 @@ export async function GET(req) {
   }
 
   if (exam === "JEE" || exam === "JEE Main" || exam === "NEET") {
-    const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+    const SUBJECT_ORDER = exam === "NEET"
+      ? { "Physics": 1, "Chemistry": 2, "Biology": 3, "Botany": 3, "Zoology": 4 }
+      : { "Maths": 1, "Mathematics": 1, "Physics": 2, "Chemistry": 3 };
     result.sort((a, b) => {
       const subjA = SUBJECT_ORDER[a.subject] || 99;
       const subjB = SUBJECT_ORDER[b.subject] || 99;

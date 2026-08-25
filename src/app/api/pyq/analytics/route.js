@@ -11,7 +11,7 @@ import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessContr
 const MIN_CHAPTER_ATTEMPTS = 5;
 const INVALID_CHAPTERS = new Set(["", "unmapped", "unknown", "invalid", "null", "undefined"]);
 const SUBJECT_ORDER = {
-  JEE: ["Physics", "Chemistry", "Mathematics", "Maths"],
+  JEE: ["Mathematics", "Maths", "Physics", "Chemistry"],
   NEET: ["Physics", "Chemistry", "Biology", "Botany", "Zoology"],
 };
 

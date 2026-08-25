@@ -132,7 +132,7 @@ const QuestionPalette = memo(function QuestionPalette({
           return (
             <PaletteButton
               key={q.id}
-              label={mode === "full" ? originalQuestionNumber(q, idx + 1) : idx + 1}
+              label={idx + 1}
               isActive={currentIndex === idx}
               isAnswered={isAnswered}
               isVisited={isVisited}
@@ -303,8 +303,17 @@ export default function PYQSessionPage() {
         if (mode === "random") {
           combined = combined.sort(() => Math.random() - 0.5);
         } else if (mode === "full") {
-          // Absolute Sequence Guarantee for Full Papers
+          // Keep each subject together in exam order, then preserve the source
+          // order within that subject. Some imported papers use a different
+          // source order.
+          const subjectOrder = exam === "NEET"
+            ? { Physics: 1, Chemistry: 2, Biology: 3, Botany: 3, Zoology: 4 }
+            : { Maths: 1, Mathematics: 1, Physics: 2, Chemistry: 3 };
+
           combined = combined.sort((a, b) => {
+            const subjectDifference = (subjectOrder[a.subject] || 99) - (subjectOrder[b.subject] || 99);
+            if (subjectDifference !== 0) return subjectDifference;
+
             const numA = originalQuestionNumber(a, -1);
             const numB = originalQuestionNumber(b, -1);
             if (numA !== -1 && numB !== -1) {
@@ -348,7 +357,7 @@ export default function PYQSessionPage() {
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
   const qType = currentQuestion?.question_type || "MCQ";
-  const displayedQuestionNumber = mode === "full" ? originalQuestionNumber(currentQuestion, currentIndex + 1) : currentIndex + 1;
+  const displayedQuestionNumber = currentIndex + 1;
   const hasNativeDiagram = hasNativeQuestionDiagram(currentQuestion);
   const answeredCount = useMemo(
     () =>

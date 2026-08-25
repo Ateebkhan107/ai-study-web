@@ -53,6 +53,11 @@ function normalizeLegacyScientificNotation(value) {
     .map((segment) => {
       if (segment.startsWith("$") && segment.endsWith("$")) return segment;
       let text = segment;
+      // PDF text layers commonly flatten superscripts on lowercase algebraic
+      // variables (for example x3, r2, t10). Restore those as real KaTeX
+      // powers without touching uppercase chemical formulae such as H2O.
+      text = text.replace(/\b([a-z])\s*([2-9]|\d{2,3})\b/g, (_, variable, power) => `$${variable}^{${power}}$`);
+      text = text.replace(/\b([a-z])_([0-9]+)\b/g, (_, variable, subscript) => `$${variable}_{${subscript}}$`);
       text = text.replace(/\bd([1-6])sp([1-6])\b/gi, (_, first, second) => `$d^{${first}}sp^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])d([1-6])\b/gi, (_, prefix, first, second) => `$${prefix}^{${first}}d^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])\b/gi, (_, prefix, power) => `$${prefix}^{${power}}$`);

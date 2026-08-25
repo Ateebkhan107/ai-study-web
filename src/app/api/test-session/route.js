@@ -452,7 +452,9 @@ export async function POST(request) {
     let questions = instituteTest ? fetchedQuestions : shuffleQuestions(fetchedQuestions);
 
     if (!instituteTest && (exam === "JEE" || exam === "JEE Main" || exam === "NEET")) {
-      const SUBJECT_ORDER = { "Physics": 1, "Chemistry": 2, "Maths": 3, "Mathematics": 3, "Biology": 3, "Botany": 3, "Zoology": 4 };
+      const SUBJECT_ORDER = exam === "NEET"
+        ? { "Physics": 1, "Chemistry": 2, "Biology": 3, "Botany": 3, "Zoology": 4 }
+        : { "Maths": 1, "Mathematics": 1, "Physics": 2, "Chemistry": 3 };
       questions.sort((a, b) => {
         const subjA = SUBJECT_ORDER[a.subject] || 99;
         const subjB = SUBJECT_ORDER[b.subject] || 99;
