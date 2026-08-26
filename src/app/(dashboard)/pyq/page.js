@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
-import PageWrapper from "@/components/PageWrapper";
-import { Atom, Dna, FlaskConical, Rocket, Sigma, Stethoscope } from "lucide-react";
+import { Atom, Dna, FlaskConical, Sigma } from "lucide-react";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
@@ -324,25 +323,30 @@ function PracticeTab({ subjects, track, isPro }) {
   const toggleChapter = (ch) => setSelectedChapters((p) => p.includes(ch) ? p.filter((c) => c !== ch) : [...p, ch]);
 
   return (
-    <div className="grid min-w-0 grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
+    <div className="grid min-w-0 grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
       {/* Left — selectors */}
-      <div className="space-y-3.5 sm:space-y-4">
+      <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 sm:p-6" style={{ animationDelay: "100ms" }}>
         {/* Subject selector */}
-        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "150ms" }}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>01 — SELECT SUBJECTS</p>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
+        <div>
+          <h2 className="text-base font-black text-slate-950 dark:text-white">Subject</h2>
+          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
             {subjects.map((s) => {
               const active = selectedSubjects.includes(s.id);
               return (
                 <button key={s.id} onClick={() => toggleSubject(s.id)}
-                  className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 transition-all cursor-pointer duration-200 sm:gap-2.5 sm:p-4 ${
+                  className={`group relative flex min-h-20 items-center gap-4 overflow-hidden rounded-xl border p-4 text-left transition-all cursor-pointer duration-200 ${
                     active
-                      ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                      ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
+                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                   }`}
                 >
-                  <s.Icon className="mb-0.5 h-5 w-5 sm:mb-1 sm:h-7 sm:w-7" />
-                  <span className="text-sm font-semibold">{s.label}</span>
+                  <s.Icon className={`h-5 w-5 shrink-0 ${active ? "text-brand" : ""}`} />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-black">{s.label}</span>
+                    <span className="mt-0.5 block text-xs font-bold opacity-80">
+                      {active ? "Selected" : "Select"}
+                    </span>
+                  </span>
                 </button>
               );
             })}
@@ -350,15 +354,15 @@ function PracticeTab({ subjects, track, isPro }) {
         </div>
 
         {/* Year selector */}
-        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "225ms" }}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>02 — SELECT YEAR BULLETINS</p>
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-8">
+          <h2 className="text-base font-black text-slate-950 dark:text-white">Years</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
             {YEARS.map((yr) => (
               <button key={yr} onClick={() => toggleYear(yr)}
-                className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all cursor-pointer duration-200 sm:px-4 ${
+                className={`rounded-full border px-4 py-2 text-sm font-black transition-all cursor-pointer duration-200 ${
                   selectedYears.includes(yr)
-                    ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                    : `${BORDER} ${TXT_MUTED}`
+                    ? "border-brand bg-brand text-black"
+                    : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                 }`}
               >
                 {yr}
@@ -371,27 +375,27 @@ function PracticeTab({ subjects, track, isPro }) {
         {track === "jee" && (
           <>
             {/* Attempt Selector */}
-            <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "300ms" }}>
-              <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>03 — SELECT ATTEMPT (SESSION)</p>
+            <div className="mt-8">
+              <h2 className="text-base font-black text-slate-950 dark:text-white">Attempt</h2>
               {selectedYears.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
               ) : loadingPapers ? (
-                <p className={`text-sm ${TXT_MUTED}`}>Loading attempts...</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Loading attempts...</p>
               ) : availableAttempts.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
               ) : (
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
                   {availableAttempts.map((attempt) => {
                     const isActive = effectiveSelectedAttempt === attempt;
                     return (
                       <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
-                        className={`flex flex-col items-start gap-1 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:p-4 ${
+                        className={`flex min-h-14 items-center rounded-xl border px-4 py-3 text-left transition-all cursor-pointer duration-200 ${
                           isActive
-                            ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                            ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
+                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                         }`}
                       >
-                        <span className="text-sm font-bold">{attempt}</span>
+                        <span className="text-sm font-black">{attempt}</span>
                       </button>
                     );
                   })}
@@ -400,27 +404,27 @@ function PracticeTab({ subjects, track, isPro }) {
             </div>
 
             {/* Shift Selector */}
-            <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "350ms" }}>
-              <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>04 — SELECT SHIFT</p>
+            <div className="mt-8">
+              <h2 className="text-base font-black text-slate-950 dark:text-white">Shift</h2>
               {selectedYears.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
               ) : !selectedAttempt ? (
-                <p className={`text-sm ${TXT_MUTED}`}>Choose an attempt to view the dated shift options for that paper.</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Choose an attempt to view the dated shift options for that paper.</p>
               ) : availableShiftPapers.length === 0 ? (
-                <p className={`text-sm ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
+                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
               ) : (
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
                   {availableShiftPapers.map((paper) => {
                     const isActive = effectiveSelectedShift === paper.id;
                     return (
                       <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
-                        className={`flex flex-col items-start gap-1 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:p-4 ${
+                        className={`flex min-h-14 items-center rounded-xl border px-4 py-3 text-left transition-all cursor-pointer duration-200 ${
                           isActive
-                            ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                            ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
+                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                         }`}
                       >
-                        <span className="text-sm font-bold">{paper.shift_label || paper.shift}</span>
+                        <span className="text-sm font-black">{paper.shift_label || paper.shift}</span>
                       </button>
                     );
                   })}
@@ -431,11 +435,9 @@ function PracticeTab({ subjects, track, isPro }) {
         )}
 
         {/* Practice mode selector */}
-        <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "375ms" }}>
-          <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-            {track === "jee" ? (availableShiftPapers.length > 0 ? "05 — PRACTICE MODE" : (availableAttempts.length > 0 ? "04 — PRACTICE MODE" : "03 — PRACTICE MODE")) : "03 — PRACTICE MODE"}
-          </p>
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+        <div className="mt-8">
+          <h2 className="text-base font-black text-slate-950 dark:text-white">Mode</h2>
+          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
               const locked = PRO_ONLY_PRACTICE_MODES.has(m.id) && !isPro;
@@ -451,14 +453,14 @@ function PracticeTab({ subjects, track, isPro }) {
                     setSelectedYears([selectedYears[0]]);
                   }
                 }}
-                  className={`flex items-start gap-2 rounded-xl border p-3 text-left transition-all cursor-pointer duration-200 sm:gap-3 sm:p-4 ${
+                  className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all cursor-pointer duration-200 ${
                     active
                       ? locked
-                        ? "border-indigo-400 bg-indigo-50/40 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-300"
-                        : "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                        ? "border-brand/70 bg-brand/10 text-slate-950 dark:text-white"
+                        : "border-brand bg-brand/10 text-slate-950 dark:text-white"
                       : locked
                         ? "border-dashed border-slate-200 bg-slate-50/80 text-slate-400 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-500"
-                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                   }`}
                 >
                   <m.Icon size={18} className="mt-0.5 shrink-0 sm:size-5" />
@@ -481,22 +483,20 @@ function PracticeTab({ subjects, track, isPro }) {
 
         {/* Chapter selector */}
         {practiceMode === "chapter" && (
-          <div className="glass-card p-3.5 animate-slideUp sm:p-6" style={{ animationDelay: "450ms" }}>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>
-              {track === "jee" ? (availableShiftPapers.length > 0 ? "06 — SELECT CHAPTER" : (availableAttempts.length > 0 ? "05 — SELECT CHAPTER" : "04 — SELECT CHAPTER")) : "04 — SELECT CHAPTER"}
-            </p>
-            {selectedSubjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
-            {selectedSubjects.length > 0 && loadingChapters && <p className={`text-sm ${TXT_MUTED}`}>Loading chapters...</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="text-sm text-red-500">{chapterError}</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No chapters found for this subject.</p>}
+          <div className="mt-8">
+            <h2 className="text-base font-black text-slate-950 dark:text-white">Chapters</h2>
+            {selectedSubjects.length === 0 && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
+            {selectedSubjects.length > 0 && loadingChapters && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Loading chapters...</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="mt-4 text-sm font-semibold text-red-500">{chapterError}</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No chapters found for this subject.</p>}
             {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {chapters.map((ch) => (
                   <button key={ch} onClick={() => toggleChapter(ch)}
-                    className={`rounded-xl border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer duration-200 sm:px-4 sm:py-2 sm:text-sm ${
+                    className={`rounded-full border px-4 py-2 text-xs font-black transition-all cursor-pointer duration-200 sm:text-sm ${
                       selectedChapters.includes(ch)
-                        ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                        : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED}`
+                        ? "border-brand bg-brand text-black"
+                        : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                     }`}
                   >
                     {ch}
@@ -510,47 +510,66 @@ function PracticeTab({ subjects, track, isPro }) {
 
       {/* Right — start button */}
       <div>
-        <div className="glass-card space-y-3 p-4 animate-slideUp sm:p-5 xl:sticky xl:top-24" style={{ animationDelay: "150ms" }}>
-          <div className="space-y-2 mb-2">
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>SESSION SUMMARY</p>
-            <p className={`text-xs ${TXT_MUTED}`}>
-              {jeeRandomMode && selectedSubjects.length === 0
-                ? "Physics, Chemistry, Maths balanced"
-                : selectedSubjects.length > 0
-                  ? `${selectedSubjects.length} subject${selectedSubjects.length > 1 ? "s" : ""} selected`
-                  : "No subjects selected"}
-            </p>
-            <p className={`text-xs ${TXT_MUTED}`}>
-              {selectedYears.length > 0 ? `Years: ${selectedYears.sort((a, b) => b - a).join(", ")}` : "All years"}
-            </p>
-            <p className={`text-xs ${TXT_MUTED}`}>Mode: {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}</p>
+        <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-5 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 xl:sticky xl:top-24" style={{ animationDelay: "100ms" }}>
+          <h2 className="text-base font-black text-slate-950 dark:text-white">Your PYQ</h2>
+
+          <div className="mt-5 space-y-4">
+            <div className="flex items-center justify-between gap-3 text-sm font-black">
+              <span className={TXT_MUTED}>Subjects</span>
+              <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
+                {jeeRandomMode && selectedSubjects.length === 0
+                  ? "PCM"
+                  : selectedSubjects.length > 0
+                    ? selectedSubjects.length
+                    : "-"}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-3 text-sm font-black">
+              <span className={TXT_MUTED}>Years</span>
+              <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
+                {selectedYears.length > 0 ? selectedYears.sort((a, b) => b - a).join(", ") : "All"}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-3 text-sm font-black">
+              <span className={TXT_MUTED}>Mode</span>
+              <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
+                {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}
+              </span>
+            </div>
+            {practiceMode === "chapter" && (
+              <div className="flex items-center justify-between gap-3 text-sm font-black">
+                <span className={TXT_MUTED}>Chapters</span>
+                <span className="text-slate-950 dark:text-white">{selectedChapters.length || "-"}</span>
+              </div>
+            )}
             {selectedModeLocked && (
-              <p className="text-xs font-semibold text-indigo-500 dark:text-indigo-300">
+              <p className="text-xs font-semibold text-brand">
                 Upgrade to Pro to use this PYQ mode.
               </p>
             )}
             {track === "jee" && practiceMode === "full" && effectiveSelectedAttempt && (
-              <p className={`text-xs ${TXT_MUTED}`}>Attempt: {effectiveSelectedAttempt}</p>
+              <div className="flex items-center justify-between gap-3 text-sm font-black">
+                <span className={TXT_MUTED}>Attempt</span>
+                <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">{effectiveSelectedAttempt}</span>
+              </div>
             )}
             {track === "jee" && practiceMode === "full" && effectiveSelectedShift && (
-              <p className={`text-xs ${TXT_MUTED}`}>Shift: {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || ""}</p>
-            )}
-            {practiceMode === "chapter" && (
-              <p className={`text-xs ${TXT_MUTED}`}>
-              {practiceMode === "chapter"
-                ? (selectedChapters.length > 0 ? `${selectedChapters.length} chapter${selectedChapters.length > 1 ? "s" : ""} selected` : "No chapter selected")
-                : (practiceMode === "full" ? "Complete Paper" : "All Chapters")}
-            </p>
+              <div className="flex items-center justify-between gap-3 text-sm font-black">
+                <span className={TXT_MUTED}>Shift</span>
+                <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
+                  {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || ""}
+                </span>
+              </div>
             )}
           </div>
 
           <button onClick={handleStartDeck}
-            className="w-full flex items-center justify-center gap-2 bg-brand text-white font-bold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 text-sm cursor-pointer transition-all duration-300"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 text-sm font-black text-black transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start Focused Deck"}
+            <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start PYQ Practice"}
           </button>
 
-          {subjectError && <p className="text-xs text-red-500 font-medium">{subjectError}</p>}
+          {subjectError && <p className="mt-3 text-xs font-bold text-red-500">{subjectError}</p>}
         </div>
       </div>
     </div>
@@ -988,63 +1007,72 @@ export default function PYQPage() {
   const solvedLoadValue = attemptedTotal !== null ? `${attemptedTotal} Solved` : "—";
 
   return (
-    <PageWrapper
-      title="PYQ Practice"
-      subtitle="Analyze real past examination parameters with automated performance indicators."
-      badge={track === "neet" ? "NEET UG Medical Core" : "IIT JEE Engineering Vault"}
-      badgeIcon={track === "neet" ? <Stethoscope className="h-3.5 w-3.5" /> : <Rocket className="h-3.5 w-3.5" />}
-      badgeVariant={track === "neet" ? "emerald" : "brand"}
-    >
-      {/* Tab nav */}
-      <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="flex max-w-full items-center overflow-x-auto bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl border border-slate-200/60 dark:border-[var(--border)]/50 rounded-xl p-1 gap-1 shadow-sm sm:inline-flex sm:flex-wrap">
-          {TABS.map((tab) => {
-            const active = activeTab === tab.id;
-            const locked = tab.pro && !isPro;
-            return (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                  active
-                    ? ACTIVE_PILL
-                    : locked
-                      ? "text-slate-400 hover:bg-slate-50 dark:text-slate-500 dark:hover:bg-[var(--card)]/5"
-                      : `${TXT_MUTED} hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[var(--card)]/5`
-                }`}
-              >
-                <tab.Icon size={14} /> {tab.label}
-                {locked && (
-                  <span className="rounded-full bg-slate-900 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-white">
-                    Pro
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </section>
+    <div className="relative min-h-screen w-full min-w-0">
+      <div className="mx-auto w-full max-w-7xl min-w-0 space-y-5 px-3 py-5 sm:px-6 sm:py-7 lg:px-8">
+        <section className="min-w-0">
+          <div className="min-w-0">
+            <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+              PYQ Practice
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
+              Practice previous year questions by subject, year, paper session, and revision mode.
+            </p>
+          </div>
 
-      {/* Tab panels */}
-      {activeTab === "practice"  && (
-        <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
-      )}
-      {activeTab === "analytics" && (
-        isPro ? (
-	          <AnalyticsTab
-	            analytics={pyqAnalytics}
-	            loading={statsLoading}
-	            loadError={statsError}
-	            onRetry={reloadPYQStats}
-	            onStartPractice={startPractice}
-	            onPracticeChapter={practiceChapter}
-	          />
-        ) : (
-          <ProLockedPanel
-            title="PYQ Analytics is Pro"
-            description="Upgrade to unlock subject accuracy, solved-question trends, weak areas, and revision insights from your PYQ attempts."
-          />
-        )
-      )}
-      {activeTab === "saved"     && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
-    </PageWrapper>
+          <div className="mt-5 inline-flex max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)]/80 p-1 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80">
+            {TABS.map((tab) => {
+              const active = activeTab === tab.id;
+              const locked = tab.pro && !isPro;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black transition-colors ${
+                    active
+                      ? "bg-brand text-black"
+                      : locked
+                        ? "text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                        : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  }`}
+                >
+                  <tab.Icon className="h-4 w-4 shrink-0" />
+                  {tab.label}
+                  {locked && (
+                    <span className="rounded-full bg-slate-900 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-black">
+                      Pro
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
+          {activeTab === "practice"  && (
+            <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
+          )}
+          {activeTab === "analytics" && (
+            isPro ? (
+              <AnalyticsTab
+                analytics={pyqAnalytics}
+                loading={statsLoading}
+                loadError={statsError}
+                onRetry={reloadPYQStats}
+                onStartPractice={startPractice}
+                onPracticeChapter={practiceChapter}
+              />
+            ) : (
+              <ProLockedPanel
+                title="PYQ Analytics is Pro"
+                description="Upgrade to unlock subject accuracy, solved-question trends, weak areas, and revision insights from your PYQ attempts."
+              />
+            )
+          )}
+          {activeTab === "saved" && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
+        </section>
+      </div>
+    </div>
   );
 }

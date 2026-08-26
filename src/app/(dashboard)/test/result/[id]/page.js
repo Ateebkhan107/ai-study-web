@@ -2,19 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  BookOpen,
-  Check,
-  Clock,
-  FileText,
-  Inbox,
-  Minus,
-  Pencil,
-  Rocket,
-  Target,
-  Trophy,
-  X,
-} from "lucide-react";
+import { Inbox } from "lucide-react";
 
 export default function ResultPage() {
   const { id } = useParams();
@@ -91,27 +79,14 @@ export default function ResultPage() {
   const totalMarks = attempt.total_marks;
   const correct = attempt.correct_answers;
   const wrong = attempt.wrong_answers;
-  const skipped = attempt.total_questions - attempt.attempted;
+  const total = attempt.total_questions;
+  const attempted = attempt.attempted;
+  const skipped = total - attempted;
   const accuracy =
-    attempt.attempted > 0
-      ? Math.round((correct / attempt.attempted) * 100)
+    attempted > 0
+      ? Math.round((correct / attempted) * 100)
       : 0;
   const scorePct = totalMarks > 0 ? Math.round((score / totalMarks) * 100) : 0;
-
-  // Feedback
-  let feedbackMessage = "Needs Improvement";
-  let FeedbackIcon = BookOpen;
-  let feedbackClasses = "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/10";
-
-  if (accuracy >= 90) {
-    feedbackMessage = "Excellent Work";
-    FeedbackIcon = Trophy;
-    feedbackClasses = "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/10";
-  } else if (accuracy >= 70) {
-    feedbackMessage = "Good Attempt";
-    FeedbackIcon = Rocket;
-    feedbackClasses = "text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20 bg-indigo-50 dark:bg-indigo-500/10";
-  }
 
   // Time formatting
   const timeTaken = attempt.time_taken_seconds || 0;
@@ -119,127 +94,166 @@ export default function ResultPage() {
   const secs = timeTaken % 60;
   const timeStr = `${mins}m ${secs}s`;
 
-  // Score ring
-  const r = 54;
-  const circ = 2 * Math.PI * r;
-  const filled = (Math.min(scorePct, 100) / 100) * circ;
-  const ringColor = accuracy >= 90 ? "#10B981" : accuracy >= 70 ? "#C2723F" : "#F59E0B";
+  let resultLabel = "Needs Improvement";
+  let badgeColor = "text-amber-700 dark:text-amber-300 border-amber-300/70 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10";
+  if (accuracy >= 80) {
+    resultLabel = "Excellent Work";
+    badgeColor = "text-emerald-700 dark:text-emerald-300 border-emerald-300/70 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10";
+  } else if (accuracy >= 50) {
+    resultLabel = "Good Effort";
+    badgeColor = "text-indigo-700 dark:text-indigo-300 border-indigo-300/70 dark:border-indigo-500/40 bg-indigo-50 dark:bg-indigo-500/10";
+  }
 
-  // Stat cards
-  const stats = [
-    { label: "Score", value: `${score}/${totalMarks}`, Icon: Target, color: "indigo" },
-    { label: "Correct", value: correct, Icon: Check, color: "emerald" },
-    { label: "Wrong", value: wrong, Icon: X, color: "rose" },
-    { label: "Skipped", value: skipped, Icon: Minus, color: "slate" },
-    { label: "Accuracy", value: `${accuracy}%`, Icon: Target, color: "indigo" },
-    { label: "Time Taken", value: timeStr, Icon: Clock, color: "slate" },
+  const completion = total > 0 ? Math.round((attempted / total) * 100) : 0;
+  const headlineMeta = ["Mock Test", `${total} Questions`, `${scorePct}% Score`]
+    .filter(Boolean)
+    .join(" · ");
+
+  let takeaway = "Review every wrong or skipped question before starting another test.";
+  if (total > 0 && attempted <= Math.max(1, Math.floor(total * 0.1))) {
+    takeaway = `You attempted only ${attempted} ${attempted === 1 ? "question" : "questions"}. Try a shorter focused test before the next mock.`;
+  } else if (accuracy >= 80 && completion >= 80) {
+    takeaway = "Strong attempt. Review the few misses and keep the rhythm going.";
+  } else if (accuracy >= 70) {
+    takeaway = "Accuracy looks solid. Next, work on increasing attempts without rushing.";
+  } else if (attempted > 0 && accuracy < 50) {
+    takeaway = "Focus on accuracy first. Review concepts behind wrong answers before speed practice.";
+  }
+
+  const metrics = [
+    { label: "Accuracy", value: `${accuracy}%` },
+    { label: "Correct", value: correct },
+    { label: "Wrong", value: wrong },
+    { label: "Skipped", value: skipped },
   ];
 
-  const colorMap = {
-    emerald: "bg-emerald-50 dark:bg-emerald-500/10 border-emerald-100 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400",
-    rose: "bg-rose-50 dark:bg-rose-500/10 border-rose-100 dark:border-rose-500/20 text-rose-600 dark:text-rose-400",
-    slate: "bg-slate-50 dark:bg-[var(--surface-elevated)]/50 border-slate-200 dark:border-[var(--border)]/50 text-slate-600 dark:text-slate-400",
-    indigo: "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400",
-  };
+  const snapshot = [
+    { label: "Attempted", value: `${attempted} / ${total}` },
+    { label: "Accuracy", value: `${accuracy}%` },
+    { label: "Net Score", value: score },
+    { label: "Completion", value: `${completion}%` },
+  ];
+
+  const sessionDetails = [
+    `${total} Questions`,
+    `${attempted} Attempted`,
+    `${timeStr} Time Taken`,
+    `${scorePct}% Score`,
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] flex items-center justify-center p-4 sm:p-6">
-      {/* Background accents */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-0 left-[20%] w-[40%] h-[40%] rounded-full bg-indigo-500/8 dark:bg-indigo-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-[10%] w-[35%] h-[35%] rounded-full bg-brand/8 dark:bg-brand/8 blur-[100px]" />
-      </div>
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start justify-center relative overflow-x-hidden overflow-y-auto">
+      <div className="w-full max-w-5xl z-10 animate-slideUp py-6 sm:py-10">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-2xl border border-slate-200/80 dark:border-[var(--border)]/70 shadow-sm p-6 sm:p-8 lg:p-10 mb-8">
+          <div className="border-b border-slate-200/80 pb-8 text-center dark:border-[var(--border)]/70">
+            <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+              Test Result
+            </p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
+              Test Submitted
+            </h1>
+            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400 sm:text-base">
+              {headlineMeta}
+            </p>
 
-      <div className="relative z-10 w-full max-w-2xl bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl rounded-3xl border border-slate-200/60 dark:border-[var(--border)]/50 p-8 sm:p-10 shadow-sm text-center animate-slideUp">
-
-        {/* ── Score Ring ── */}
-        <div className="relative w-36 h-36 mx-auto mb-6">
-          <svg width="144" height="144" viewBox="0 0 144 144" className="transform -rotate-90">
-            <circle
-              cx="72" cy="72" r={r}
-              fill="none" strokeWidth="8"
-              className="stroke-slate-100 dark:stroke-slate-800"
-            />
-            <circle
-              cx="72" cy="72" r={r}
-              fill="none" strokeWidth="8"
-              stroke={ringColor}
-              strokeDasharray={`${filled} ${circ - filled}`}
-              strokeLinecap="round"
-              className="transition-all duration-1000"
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">{scorePct}%</span>
-            <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">score</span>
-          </div>
-        </div>
-
-        {/* ── Title ── */}
-        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
-          Test Submitted!
-        </h1>
-
-        {/* ── Feedback Badge ── */}
-        <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-bold mb-8 ${feedbackClasses}`}>
-          <FeedbackIcon className="h-4 w-4" />
-          {feedbackMessage}
-        </div>
-
-        {/* ── Session Summary ── */}
-        <div className="mb-8 p-4 rounded-2xl bg-slate-50/80 dark:bg-[var(--surface-elevated)]/30 border border-slate-100 dark:border-[var(--border)]/50">
-          <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">
-            Session Summary
-          </p>
-          <div className="flex justify-center gap-3 flex-wrap">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
-              <FileText className="h-4 w-4" />
-              {attempt.total_questions} Questions
-            </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--card)]/80 dark:bg-[var(--surface-elevated)]/50 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-[var(--border)]/50">
-              <Pencil className="h-4 w-4" />
-              {attempt.attempted} Attempted
-            </span>
-          </div>
-        </div>
-
-        {/* ── Stat Cards ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10">
-          {stats.map((item, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-2xl border text-center transition-all duration-300 hover:-translate-y-0.5 ${colorMap[item.color]}`}
-              style={{ animationDelay: `${index * 75}ms` }}
-            >
-              <item.Icon className="mx-auto mb-1 h-5 w-5" />
-              <p className="text-2xl font-black">{item.value}</p>
-              <p className="text-[10px] uppercase font-bold tracking-widest mt-0.5 opacity-70">{item.label}</p>
+            <div className="mt-8">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+                Score
+              </p>
+              <div className="mt-2 flex items-end justify-center gap-3">
+                <span className="text-6xl font-black leading-none tracking-tight text-slate-950 dark:text-white sm:text-7xl">
+                  {score}
+                </span>
+                <span className="pb-2 text-2xl font-black text-slate-400 dark:text-slate-500 sm:text-3xl">
+                  / {totalMarks}
+                </span>
+              </div>
+              <span className={`mt-5 inline-flex rounded-full border px-4 py-1.5 text-sm font-black ${badgeColor}`}>
+                {resultLabel}
+              </span>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* ── Actions ── */}
-        <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-2 border-b border-slate-200/80 py-7 dark:border-[var(--border)]/70 sm:grid-cols-4">
+            {metrics.map((item) => (
+              <div key={item.label} className="px-3 py-3 text-center sm:border-l sm:first:border-l-0 sm:border-slate-200/80 sm:dark:border-[var(--border)]/70">
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-3xl font-black text-slate-950 dark:text-white">
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-8 py-8 lg:grid-cols-[1fr_0.9fr]">
+            <section>
+              <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                Performance Snapshot
+              </h2>
+              <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5">
+                {snapshot.map((item) => (
+                  <div key={item.label} className="border-t border-slate-200/80 pt-4 dark:border-[var(--border)]/70">
+                    <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 text-2xl font-black text-slate-950 dark:text-white">
+                      {item.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="space-y-7">
+              <div>
+                <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Session Details
+                </h2>
+                <div className="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-sm font-bold text-slate-700 dark:text-slate-200">
+                  {sessionDetails.map((item, index) => (
+                    <span key={`${item}-${index}`} className="inline-flex items-center gap-3">
+                      {index > 0 && <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600" />}
+                      <span>{item}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-l-4 border-brand bg-slate-50 px-5 py-4 dark:bg-[var(--surface-elevated)]/50">
+                <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Today&apos;s Takeaway
+                </h2>
+                <p className="mt-3 text-base font-semibold leading-7 text-slate-800 dark:text-slate-100">
+                  {takeaway}
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-slate-200/80 pt-7 dark:border-[var(--border)]/70 sm:flex-row">
           <button
             onClick={() => router.push(`/test/review/${id}`)}
-            className="py-3.5 rounded-xl bg-brand text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
+            className="flex-1 rounded-xl bg-brand px-5 py-3.5 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover"
           >
-            Review Answers →
+            Review Answers
           </button>
 
           <button
             onClick={() => router.push("/test/history")}
-            className="py-3.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/50 dark:bg-[var(--surface-elevated)]/30 font-bold text-sm text-slate-700 dark:text-slate-300 hover:border-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
+            className="flex-1 rounded-xl border border-slate-200/80 bg-[var(--card)] px-5 py-3.5 text-sm font-black text-slate-700 transition-colors duration-200 hover:border-brand/50 dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-200"
           >
             View Test History
           </button>
 
           <button
             onClick={() => router.push("/dashboard")}
-            className="py-3 text-slate-400 dark:text-slate-500 font-semibold text-sm hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+            className="flex-1 rounded-xl border border-slate-200/80 bg-[var(--card)] px-5 py-3.5 text-sm font-black text-slate-700 transition-colors duration-200 hover:border-brand/50 dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-200"
           >
             Back To Dashboard
           </button>
+          </div>
         </div>
       </div>
     </div>

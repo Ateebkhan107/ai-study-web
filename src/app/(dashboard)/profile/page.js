@@ -1,24 +1,16 @@
 "use client";
 
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, useClerk, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import {
   Award,
-  BadgeCheck,
   BookOpen,
-  Brain,
-  CheckCircle2,
   CircleCheck,
-  Clock,
-  Crown,
   Flame,
   GraduationCap,
   Medal,
   Pencil,
-  Rocket,
-  Shield,
-  Sparkles,
-  Star,
+  Settings,
   Target,
   Trophy,
   Zap,
@@ -28,20 +20,11 @@ import PageWrapper from "@/components/PageWrapper";
 
 const BADGE_ICONS = {
   Award,
-  BadgeCheck,
   BookOpen,
-  Brain,
-  CheckCircle2,
   CircleCheck,
-  Clock,
-  Crown,
   Flame,
   GraduationCap,
   Medal,
-  Rocket,
-  Shield,
-  Sparkles,
-  Star,
   Target,
   Trophy,
   Zap,
@@ -51,6 +34,7 @@ const BADGE_ICONS = {
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
+  const { openUserProfile } = useClerk();
 
   const [user, setUser] = useState(null);
   const [xpData, setXpData] = useState(null);
@@ -202,65 +186,88 @@ export default function ProfilePage() {
     progress: xpData?.xp || 0,
     streak: xpData?.streak || 0,
     rank: rank,
+    pyqSolved: user?.pyq_solved || 0,
+    accuracy: user?.accuracy || 0,
+    testsCompleted: user?.tests_completed ?? null,
   };
 
   const badgeDefs = dynamicBadges;
   const earnedCount = badgeDefs.filter((b) => b.earned).length;
   const levelStats = getLevelFromXP(activeUser.xp);
+  const progressPercentage = Number(levelStats.progressPercentage || 0);
+  const profileInitial = activeUser.name?.charAt(0)?.toUpperCase() || "S";
 
   return (
     <PageWrapper
-      title="Profile"
-      subtitle="Manage your account and track progress"
-      badge="ACCOUNT"
+      title="Student Profile"
+      subtitle="Your PrepZii identity, exam goal, and progress record"
+      badge="PROFILE"
     >
-      {/* ── PROFILE CARD ── */}
-      <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="glass-card relative overflow-hidden p-4 shadow-sm sm:p-6">
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-brand/8 via-brand/5 to-transparent dark:from-brand/10 dark:via-brand/6 dark:to-transparent rounded-3xl pointer-events-none" />
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
+        <div className="space-y-5">
+          {/* ── PROFILE HERO ── */}
+          <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex min-w-0 gap-4">
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-brand/30 bg-slate-950 text-2xl font-semibold text-white dark:bg-[var(--surface-elevated)] sm:h-24 sm:w-24 sm:text-3xl">
+                    {activeUser.avatar ? (
+                      <img
+                        src={activeUser.avatar}
+                        alt="profile"
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      profileInitial
+                    )}
+                  </div>
 
-          <div className="relative z-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div className="flex min-w-0 items-center gap-3 sm:gap-5">
-              {/* AVATAR */}
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 text-2xl font-black text-white shadow-[0_0_25px_rgba(194,114,63,0.2)] ring-2 ring-indigo-500/40 dark:bg-indigo-500 dark:text-white dark:ring-indigo-400/40 sm:h-20 sm:w-20 sm:text-3xl">
-                {activeUser.avatar ? (
-                  <img
-                    src={activeUser.avatar}
-                    alt="profile"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  activeUser.name.charAt(0)
-                )}
-              </div>
-
-              <div className="min-w-0">
-                <h2 className="break-words text-xl font-black text-slate-900 dark:text-white sm:text-2xl">
-                  {activeUser.name}
-                </h2>
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs sm:gap-3">
-                  <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400 font-bold">
-                    {activeUser.exam} Focus
-                  </span>
-                  <span className="text-slate-400 dark:text-slate-500">
-                    Target {activeUser.targetYear}
-                  </span>
+                  <div className="min-w-0 pt-0.5">
+                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+                      Student Profile
+                    </p>
+                    <h2 className="mt-1 break-words text-2xl font-semibold tracking-normal text-slate-950 dark:text-white sm:text-3xl">
+                      {activeUser.name}
+                    </h2>
+                    <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {activeUser.exam} aspirant for {activeUser.targetYear} · Level {levelStats.currentLevel} · {levelStats.title}
+                    </p>
+                    <p className="mt-1 truncate text-sm text-slate-400 dark:text-slate-500">
+                      {activeUser.email}
+                    </p>
+                  </div>
                 </div>
 
-                {/* JEE / NEET TOGGLE */}
-                <div className="mt-3 inline-flex rounded-xl bg-slate-100 p-1 dark:bg-[var(--surface-elevated)]">
+                <button
+                  type="button"
+                  onClick={() => setEditing(true)}
+                  className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-brand/50 hover:text-slate-950 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 dark:hover:text-white sm:w-auto"
+                >
+                  <Pencil className="h-4 w-4" /> Edit Profile
+                </button>
+              </div>
+
+              <div className="mt-5 flex flex-col gap-3 border-t border-slate-200 pt-5 dark:border-[var(--border-subtle)] sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-950 dark:text-white">
+                    Exam focus
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500">
+                    Switch your active preparation track.
+                  </p>
+                </div>
+                <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]">
                   {["JEE", "NEET"].map((trackOption) => {
                     const isActive = activeUser.exam === trackOption;
                     return (
                       <button
                         key={trackOption}
                         onClick={() => handleTrackToggle(trackOption)}
-                          className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all duration-200 sm:px-4 ${
+                        className={`rounded-md px-4 py-2 text-xs font-semibold transition-colors ${
                           isActive
-                            ? "bg-brand text-white"
-                            : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                            ? "bg-brand text-slate-950"
+                            : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
                         }`}
                       >
                         {trackOption}
@@ -270,124 +277,182 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
+          </section>
 
-            <button
-              type="button"
-              onClick={() => setEditing(true)}
-              className="w-full justify-center border border-slate-200 dark:border-[var(--border)] px-4 py-2 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:ring-offset-2 flex items-center gap-2 sm:w-auto"
-            >
-              <Pencil className="w-4 h-4" /> Edit Profile
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ── XP CARD ── */}
-      <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-        <div className="glass-card p-4 shadow-sm sm:p-6">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              {/* BADGE */}
-              <div className="min-h-14 min-w-0 px-4 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-brand/20 sm:min-w-[120px]">
-                {levelStats.title}
-              </div>
-
-              <div className="min-w-0">
-                <h3 className="font-bold text-slate-900 dark:text-white">
-                  Level {levelStats.currentLevel}
-                </h3>
-                <p className="text-sm text-slate-400 dark:text-slate-500">
-                  {levelStats.totalXP.toLocaleString()} / {levelStats.nextLevelXP.toLocaleString()} XP
-                </p>
-                {activeUser.rank && (
-                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-                    Global Rank #{activeUser.rank}
+          {/* ── PROGRESS ── */}
+          <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+                    Progress
                   </p>
-                )}
-              </div>
-            </div>
-
-            <div className="text-left sm:text-right">
-              <p className="text-xs text-slate-400 dark:text-slate-500">
-                Next level
-              </p>
-              <p className="font-bold text-slate-900 dark:text-white">
-                {levelStats.xpRemaining.toLocaleString()} XP away
-              </p>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div className="mt-5 h-2.5 bg-slate-200 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden relative">
-            <div
-              className="h-full bg-brand rounded-full transition-all relative overflow-hidden"
-              style={{
-                width: `${levelStats.progressPercentage}%`,
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-[shimmer_2s_infinite]" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ── BADGES ── */}
-      <section className="animate-slideUp" style={{ animationDelay: "275ms" }}>
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-black tracking-widest text-xs text-slate-800 dark:text-slate-100 uppercase">
-            BADGES
-          </h3>
-          <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
-            {earnedCount}/{badgeDefs.length} earned
-          </span>
-        </div>
-
-        <div className="glass-card p-4 sm:p-5 shadow-sm">
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4">
-            {badgeDefs.map((badge, index) => {
-              const IconComponent = BADGE_ICONS[badge.iconName] || Award;
-              return (
-              <div
-                key={index}
-                className={`relative flex min-h-[116px] flex-col items-center justify-center overflow-hidden rounded-2xl border p-3 text-center transition-all duration-300 sm:min-h-[140px] sm:p-4 ${
-                  badge.earned
-                    ? "bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-indigo-100 dark:border-indigo-500/20 shadow-sm hover:shadow-md hover:-translate-y-1"
-                    : "bg-slate-50/50 dark:bg-[var(--surface)]/50 border-slate-100 dark:border-[var(--border-subtle)] grayscale-[0.8] opacity-60"
-                }`}
-              >
-                {badge.earned && (
-                  <div className="absolute top-0 inset-x-0 h-1 bg-brand" />
-                )}
-                
-                <div className={`mb-3 transition-transform duration-300 ${badge.earned ? "scale-110" : ""}`}>
-                  <IconComponent className={`w-8 h-8 ${badge.color || 'text-slate-500'}`} />
+                  <h3 className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">
+                    Level {levelStats.currentLevel}: {levelStats.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {levelStats.totalXP.toLocaleString()} XP earned · {levelStats.xpRemaining.toLocaleString()} XP to next level
+                  </p>
                 </div>
-                
-                <h4 className="font-bold text-sm text-slate-900 dark:text-white mb-1">
-                  {badge.title}
-                </h4>
-                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                  {badge.detail}
-                </p>
-                {badge.earned && (
-                  <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-indigo-500/5 rounded-full blur-xl" />
-                )}
+                <div className="grid grid-cols-2 gap-4 text-left sm:text-right">
+                  <div>
+                    <p className="text-xs text-slate-500 dark:text-slate-500">Global rank</p>
+                    <p className="mt-1 text-lg font-semibold tabular-nums text-slate-950 dark:text-white">
+                      {activeUser.rank ? `#${activeUser.rank}` : "—"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 dark:text-slate-500">Progress</p>
+                    <p className="mt-1 text-lg font-semibold tabular-nums text-slate-950 dark:text-white">
+                      {progressPercentage.toFixed(2)}%
+                    </p>
+                  </div>
+                </div>
               </div>
-            )})}
-          </div>
-        </div>
-      </section>
 
-      {/* ── SIGN OUT ── */}
-      <section className="animate-slideUp pt-2" style={{ animationDelay: "350ms" }}>
-        <SignOutButton>
-          <button className="px-5 py-3 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-rose-500/20 transition-all duration-300">
-            Sign Out
-          </button>
-        </SignOutButton>
-      </section>
+              <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                <div
+                  className="h-full rounded-full bg-brand transition-all"
+                  style={{ width: `${progressPercentage}%` }}
+                />
+              </div>
+              <div className="mt-2 flex justify-between text-xs text-slate-500 dark:text-slate-500">
+                <span>{levelStats.totalXP.toLocaleString()} XP</span>
+                <span>{levelStats.nextLevelXP.toLocaleString()} XP</span>
+              </div>
+            </div>
+          </section>
+
+          {/* ── BADGES ── */}
+          <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h3 className="text-base font-semibold text-slate-950 dark:text-white">
+                  Achievements
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Badges unlocked through practice, tests, and streaks.
+                </p>
+              </div>
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-500">
+                {earnedCount}/{badgeDefs.length} earned
+              </span>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+              {badgeDefs.length === 0 || earnedCount === 0 ? (
+                <div className="flex items-start gap-4 rounded-lg border border-dashed border-slate-200 bg-slate-50 p-5 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/35">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
+                    <Award className="h-5 w-5 text-brand" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-950 dark:text-white">No badges yet</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      Complete tests and streaks to unlock achievements.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {badgeDefs.map((badge, index) => {
+                    const IconComponent = BADGE_ICONS[badge.iconName] || Award;
+                    return (
+                      <div
+                        key={index}
+                        className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
+                          badge.earned
+                            ? "border-brand/30 bg-brand/5"
+                            : "border-slate-200 bg-slate-50 opacity-65 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/35"
+                        }`}
+                      >
+                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
+                          badge.earned
+                            ? "border-brand/30 bg-brand/10"
+                            : "border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]"
+                        }`}>
+                          <IconComponent className={`h-5 w-5 ${badge.earned ? "text-brand" : "text-slate-400"}`} />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="truncate text-sm font-semibold text-slate-950 dark:text-white">
+                            {badge.title}
+                          </h4>
+                          <p className="truncate text-xs text-slate-500 dark:text-slate-500">
+                            {badge.detail}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </section>
+        </div>
+
+        {/* ── ACTIONS ── */}
+        <aside className="space-y-5 animate-slideUp" style={{ animationDelay: "200ms" }}>
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <h3 className="text-base font-semibold text-slate-950 dark:text-white">Profile Actions</h3>
+            <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
+              Keep your account and exam goal aligned with your preparation.
+            </p>
+
+            <div className="mt-5 divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
+              <button
+                type="button"
+                onClick={() => setEditing(true)}
+                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              >
+                <span className="inline-flex items-center gap-3">
+                  <Pencil className="h-4 w-4 text-slate-500" />
+                  Edit Profile
+                </span>
+                <span className="text-slate-400">›</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditing(true)}
+                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              >
+                <span className="inline-flex items-center gap-3">
+                  <Target className="h-4 w-4 text-slate-500" />
+                  Change Exam Goal
+                </span>
+                <span className="text-slate-400">›</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => openUserProfile?.()}
+                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              >
+                <span className="inline-flex items-center gap-3">
+                  <Settings className="h-4 w-4 text-slate-500" />
+                  Manage Account
+                </span>
+                <span className="text-slate-400">›</span>
+              </button>
+              <SignOutButton>
+                <button className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-rose-600 transition-colors hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300">
+                  <span className="inline-flex items-center gap-3">
+                    <Zap className="h-4 w-4" />
+                    Sign Out
+                  </span>
+                  <span className="text-rose-300">›</span>
+                </button>
+              </SignOutButton>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+              Student Summary
+            </p>
+            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              {activeUser.exam} focus for {activeUser.targetYear}. {activeUser.pyqSolved || 0} PYQs solved with {activeUser.accuracy || 0}% accuracy.
+            </p>
+          </div>
+        </aside>
+      </div>
 
       {/* ── EDIT PROFILE MODAL ── */}
       {editing && (
@@ -396,27 +461,30 @@ export default function ProfilePage() {
           onClick={() => setEditing(false)}
         >
           <div
-            className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-slate-200/60 bg-[var(--card)] p-4 shadow-2xl animate-fadeInScale dark:border-[var(--border)]/50 dark:bg-[var(--surface)] sm:p-6"
+            className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-xl border border-slate-200 bg-white p-5 shadow-2xl animate-fadeInScale dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-slate-950 dark:text-white">
               Edit Profile
             </h3>
+            <p className="mb-5 mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Update your visible name, active exam track, and target year.
+            </p>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              <label className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
                 Name
               </label>
               <input
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)] px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-brand focus:outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            <div className="mt-4 space-y-2">
+              <label className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
                 Exam Track
               </label>
               <div className="flex gap-2">
@@ -425,10 +493,10 @@ export default function ProfilePage() {
                     key={trackOption}
                     type="button"
                     onClick={() => setEditExam(trackOption)}
-                    className={`flex-1 py-2 rounded-xl text-sm font-bold border transition-all duration-200 ${
+                    className={`flex-1 rounded-lg border py-2.5 text-sm font-semibold transition-colors duration-150 ${
                       editExam === trackOption
-                        ? "bg-slate-900 text-white border-slate-900 dark:bg-indigo-500 dark:text-white dark:border-white"
-                        : "border-slate-200 dark:border-[var(--border)] text-slate-500 dark:text-slate-400"
+                        ? "border-brand bg-brand text-slate-950"
+                        : "border-slate-200 text-slate-500 hover:text-slate-900 dark:border-[var(--border-subtle)] dark:text-slate-400 dark:hover:text-white"
                     }`}
                   >
                     {trackOption}
@@ -437,14 +505,14 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            <div className="mt-4 space-y-2">
+              <label className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
                 Target Year
               </label>
               <select
                 value={editYear}
                 onChange={(e) => setEditYear(Number(e.target.value))}
-                className="w-full rounded-xl border border-slate-200 dark:border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface-elevated)] px-4 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-brand focus:outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
               >
                 {years.map((y) => (
                   <option key={y} value={y}>
@@ -454,18 +522,18 @@ export default function ProfilePage() {
               </select>
             </div>
 
-            <div className="flex justify-end gap-3 pt-2">
+            <div className="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-4 dark:border-[var(--border-subtle)]">
               <button
                 type="button"
                 onClick={() => setEditing(false)}
-                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-500 transition-colors hover:bg-slate-100 dark:hover:bg-[var(--surface-elevated)]"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleSave}
-                className="px-4 py-2 rounded-xl text-sm font-bold bg-brand text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300"
+                className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover"
               >
                 Save
               </button>
@@ -476,7 +544,7 @@ export default function ProfilePage() {
 
       {/* ── SAVED TOAST ── */}
       {saved && (
-        <div className="fixed bottom-4 left-4 right-4 z-50 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 animate-slideInRight sm:bottom-6 sm:left-auto sm:right-6">
+        <div className="fixed bottom-4 left-4 right-4 z-50 rounded-lg border border-brand/30 bg-slate-950 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg animate-slideInRight dark:bg-[var(--surface)] sm:bottom-6 sm:left-auto sm:right-6">
           <span className="inline-flex items-center justify-center gap-2">
             <CircleCheck className="h-4 w-4" />
             Saved

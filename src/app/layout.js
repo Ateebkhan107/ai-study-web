@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import "@awesome.me/webawesome/dist/styles/themes/default.css";
 
 import {
   DASHBOARD_ROUTE,
@@ -12,6 +13,7 @@ import {
 import "./globals.css";
 
 import Footer from "@/components/Footer";
+import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -270,6 +272,7 @@ export default function RootLayout({ children }) {
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{ __html: themeInitScript }}
           />
+          <WebAwesomeProvider />
           {/* The payment checkout script is loaded only on pages that need it (/pro, /pricing).
               It was intentionally moved out of the global layout to avoid loading it everywhere. */}
           {children}

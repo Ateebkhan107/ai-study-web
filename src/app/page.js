@@ -3,6 +3,7 @@
 // NOTE: This page uses 'use client' solely for Framer Motion animations.
 // All CTA navigation uses <Link> so crawlers and prefetching work correctly.
 import Link from "next/link";
+import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import {
@@ -12,7 +13,6 @@ import {
   BookOpen,
   CheckCircle2,
   Activity,
-  Sparkles,
   TestTube2,
   LineChart,
   Brain,
@@ -23,6 +23,22 @@ import {
   BarChart,
   Globe
 } from "lucide-react";
+
+const displayFont = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-prepzii-landing-display",
+  display: "swap",
+});
+
+const bodyFont = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-prepzii-landing-body",
+  display: "swap",
+});
+
+const landingBodyClass = "font-[family-name:var(--font-prepzii-landing-body)]";
+const landingDisplayClass = "font-[family-name:var(--font-prepzii-landing-display)]";
+const sectionHeadingClass = `${landingDisplayClass} text-3xl md:text-5xl font-semibold text-foreground tracking-normal leading-[1.08]`;
 
 const SCIENCE_PARTICLES = [
   { size: 3, top: 12, left: 8, y: -90, duration: 16, delay: 0.5 },
@@ -96,12 +112,12 @@ function DashboardPreview() {
               <Target className="w-6 h-6 text-brand-hover" />
             </div>
             <div>
-              <h3 className="text-foreground text-lg font-bold">Today&apos;s Goal</h3>
-              <p className="text-sm text-muted">Master Rotational Mechanics</p>
+              <h3 className={`${landingDisplayClass} text-foreground text-lg font-semibold tracking-normal`}>Today&apos;s Goal</h3>
+              <p className="text-sm text-muted leading-6">Master Rotational Mechanics</p>
             </div>
           </div>
           <div className="text-left sm:text-right">
-            <span className="text-3xl font-bold text-foreground">42<span className="text-sm text-muted ml-1">/50 PYQs</span></span>
+            <span className={`${landingDisplayClass} text-3xl font-semibold text-foreground tracking-normal`}>42<span className={`${landingBodyClass} text-sm text-muted ml-1 font-normal`}>/50 PYQs</span></span>
           </div>
         </div>
         
@@ -118,16 +134,16 @@ function DashboardPreview() {
            <div className="bg-surface-elevated/40 rounded-2xl p-5 border border-border-subtle/50 hover:border-brand/30 transition-colors">
              <div className="flex items-center gap-3 mb-3">
                <Activity className="w-5 h-5 text-brand-hover" />
-               <span className="text-sm font-medium text-secondary">Physics Accuracy</span>
+               <span className="text-sm font-normal text-secondary leading-6">Physics Accuracy</span>
              </div>
-             <span className="text-2xl font-bold text-foreground">88%</span>
+             <span className={`${landingDisplayClass} text-2xl font-semibold text-foreground tracking-normal`}>88%</span>
            </div>
            <div className="bg-surface-elevated/40 rounded-2xl p-5 border border-border-subtle/50 hover:border-brand/30 transition-colors">
              <div className="flex items-center gap-3 mb-3">
                <Trophy className="w-5 h-5 text-brand-hover" />
-               <span className="text-sm font-medium text-secondary">Total XP</span>
+               <span className="text-sm font-normal text-secondary leading-6">Total XP</span>
              </div>
-             <span className="text-2xl font-bold text-foreground">12,450</span>
+             <span className={`${landingDisplayClass} text-2xl font-semibold text-foreground tracking-normal`}>12,450</span>
            </div>
         </div>
       </motion.div>
@@ -139,9 +155,9 @@ function DashboardPreview() {
       >
         <div className="flex items-center gap-2 mb-2">
           <Flame className="w-4 h-4 text-brand-hover" />
-          <span className="text-sm font-medium text-secondary">Current Streak</span>
+          <span className="text-sm font-normal text-secondary leading-6">Current Streak</span>
         </div>
-        <span className="text-2xl font-bold text-foreground">14 <span className="text-sm text-muted font-normal">Days</span></span>
+        <span className={`${landingDisplayClass} text-2xl font-semibold text-foreground tracking-normal`}>14 <span className={`${landingBodyClass} text-sm text-muted font-normal`}>Days</span></span>
       </motion.div>
 
       <motion.div 
@@ -151,10 +167,10 @@ function DashboardPreview() {
       >
         <div className="flex items-center gap-2 mb-3">
           <TestTube2 className="w-4 h-4 text-brand-hover" />
-          <span className="text-sm font-medium text-secondary">Next Mock Test</span>
+          <span className="text-sm font-normal text-secondary leading-6">Next Mock Test</span>
         </div>
         <div className="bg-brand/10 border border-brand/20 px-3 py-2 rounded-lg inline-block">
-          <span className="text-sm font-semibold text-foreground">JEE Advanced Full</span>
+          <span className="text-sm font-medium text-foreground leading-6">JEE Advanced Full</span>
         </div>
       </motion.div>
       
@@ -165,9 +181,9 @@ function DashboardPreview() {
       >
         <div className="flex items-center gap-2 mb-2">
           <BookOpen className="w-4 h-4 text-brand-hover" />
-          <span className="text-xs font-medium text-secondary">Formula Book</span>
+          <span className="text-xs font-normal text-secondary leading-5">Formula Book</span>
         </div>
-        <span className="text-lg font-bold text-foreground block">+24 Revised</span>
+        <span className={`${landingDisplayClass} text-lg font-semibold text-foreground block tracking-normal`}>+24 Revised</span>
       </motion.div>
       
       <motion.div 
@@ -177,9 +193,9 @@ function DashboardPreview() {
       >
         <div className="flex items-center gap-2 mb-2">
           <Activity className="w-4 h-4 text-brand-hover" />
-          <span className="text-xs font-medium text-secondary">Weak Chapter</span>
+          <span className="text-xs font-normal text-secondary leading-5">Weak Chapter</span>
         </div>
-        <span className="text-sm font-bold text-foreground block truncate">Thermodynamics</span>
+        <span className="text-sm font-medium text-foreground block truncate leading-6">Thermodynamics</span>
         <div className="w-full bg-surface-elevated rounded-full h-1 mt-2">
           <div className="w-[30%] h-full bg-brand-hover rounded-full"></div>
         </div>
@@ -205,7 +221,7 @@ function JourneyStep({ icon: Icon, title, desc, delay, isLast }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: delay + 0.2 }}
-        className="text-foreground font-bold mb-2"
+        className={`${landingDisplayClass} text-foreground font-semibold mb-2 tracking-normal`}
       >
         {title}
       </motion.h4>
@@ -214,7 +230,7 @@ function JourneyStep({ icon: Icon, title, desc, delay, isLast }) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: delay + 0.3 }}
-        className="text-xs text-muted leading-relaxed"
+        className="text-xs text-muted leading-6"
       >
         {desc}
       </motion.p>
@@ -246,10 +262,10 @@ function PillarCard({ icon: Icon, title, items, colorClass, gradientClass, delay
       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${colorClass} transition-transform group-hover:scale-110 duration-300`}>
         <Icon className="w-7 h-7 text-foreground" />
       </div>
-      <h3 className="text-2xl font-bold text-foreground mb-6 tracking-tight">{title}</h3>
+      <h3 className={`${landingDisplayClass} text-2xl font-semibold text-foreground mb-6 tracking-normal leading-tight`}>{title}</h3>
       <ul className="space-y-4">
         {items.map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3 text-secondary text-sm font-medium">
+          <li key={idx} className="flex items-start gap-3 text-secondary text-sm font-normal leading-6">
             <CheckCircle2 className="w-5 h-5 text-brand-hover shrink-0" />
             <span>{item}</span>
           </li>
@@ -272,8 +288,8 @@ function TrustCard({ title, desc, delay }) {
         <CheckCircle2 className="w-5 h-5 text-brand-hover" />
       </div>
       <div>
-        <h4 className="text-foreground font-bold text-lg mb-1">{title}</h4>
-        <p className="text-muted text-sm leading-relaxed">{desc}</p>
+        <h4 className={`${landingDisplayClass} text-foreground font-semibold text-lg mb-1 tracking-normal`}>{title}</h4>
+        <p className="text-muted text-sm leading-6">{desc}</p>
       </div>
     </motion.div>
   );
@@ -281,7 +297,7 @@ function TrustCard({ title, desc, delay }) {
 
 export default function PublicLandingPage() {
   return (
-    <div className="dark min-h-screen bg-[var(--background)] text-secondary overflow-hidden font-sans selection:bg-brand/30 relative">
+    <div className={`${displayFont.variable} ${bodyFont.variable} dark min-h-screen bg-[var(--background)] text-secondary overflow-hidden ${landingBodyClass} selection:bg-brand/30 relative`}>
       <BackgroundScience />
       
       {/* Top Header Bar */}
@@ -296,20 +312,20 @@ export default function PublicLandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-foreground text-xs sm:text-sm font-bold tracking-wide mb-8 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-foreground text-xs sm:text-sm font-semibold tracking-[0.08em] mb-8 backdrop-blur-md uppercase"
           >
-            <Sparkles className="w-4 h-4 text-brand-hover" /> The Premium JEE & NEET Workspace
+            <BookOpen className="w-4 h-4 text-brand-hover" /> JEE & NEET Practice
           </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-foreground leading-[1.05] max-w-5xl" 
+            className={`${landingDisplayClass} text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-normal text-foreground leading-[0.98] max-w-5xl`} 
           >
-            Peak Performance <br className="hidden sm:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover inline-block pb-2">
-              Exam Prep.
+            Let&apos;s crack <br className="hidden sm:block" />
+            <span className="text-brand inline-block pb-2">
+              JEE &amp; NEET.
             </span>
           </motion.h1>
           
@@ -317,9 +333,9 @@ export default function PublicLandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-relaxed mt-6 font-medium" 
+            className="text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-8 mt-6 font-normal" 
           >
-            PrepZii brings JEE & NEET PYQs, previous year questions, full-length mock tests, formula revision, performance analytics, and focused practice into one preparation workspace.
+            Study from JEE and NEET PYQs, full mocks, formula revision, chapter practice, and analytics in one quiet workspace built around real exam work.
           </motion.p>
 
           <motion.div 
@@ -331,19 +347,19 @@ export default function PublicLandingPage() {
             <Link
               href="/sign-up"
               prefetch
-              className="px-10 py-4 bg-brand text-black font-bold text-base rounded-full hover:bg-brand-hover transition-all duration-300 hover:scale-[1.02] shadow-[0_0_30px_rgba(234,179,8,0.25)] hover:shadow-[0_0_40px_rgba(234,179,8,0.4)] flex items-center justify-center gap-2 group w-full sm:w-auto"
+              className="px-10 py-4 bg-brand text-black font-semibold text-base rounded-full hover:bg-brand-hover transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 group w-full sm:w-auto"
             >
               Start Your Journey <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/jee"
-              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-bold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
+              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-semibold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
             >
               JEE preparation
             </Link>
             <Link
               href="/neet"
-              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-bold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
+              className="px-6 py-4 border border-brand/30 bg-[var(--surface)]/60 text-foreground font-semibold text-base rounded-full hover:border-brand/60 transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
             >
               NEET preparation
             </Link>
@@ -357,8 +373,8 @@ export default function PublicLandingPage() {
       <section className="py-24 relative z-10 border-t border-border-subtle/50 bg-[var(--background)]/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-4">Your Preparation Journey</h2>
-            <p className="text-muted max-w-2xl mx-auto text-lg">A scientifically proven workflow designed to maximize retention and minimize mistakes.</p>
+            <h2 className={`${sectionHeadingClass} mb-4`}>Preparation, in exam order</h2>
+            <p className="text-muted max-w-2xl mx-auto text-lg leading-8 font-normal">Move from formula review to PYQs, full mocks, analysis, and discussion without changing tools.</p>
           </div>
 
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 flex-wrap">
@@ -376,8 +392,8 @@ export default function PublicLandingPage() {
       <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-4">Everything You Need. <br className="sm:hidden"/> Nothing You Don&apos;t.</h2>
-            <p className="text-muted max-w-2xl mx-auto text-lg">Four pillars of preparation, meticulously designed for clarity and focus.</p>
+            <h2 className={`${sectionHeadingClass} mb-4`}>Practice, revision, analysis, community</h2>
+            <p className="text-muted max-w-2xl mx-auto text-lg leading-8 font-normal">The core PrepZii workspace stays practical: solve, revise, review, and discuss.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -422,8 +438,8 @@ export default function PublicLandingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-6">Engineered for Excellence.</h2>
-              <p className="text-muted text-lg mb-10 leading-relaxed">PrepZii is built on the foundation of real exam patterns and proven cognitive science. We don&apos;t use gimmicks—just pure, focused preparation tools that deliver results.</p>
+              <h2 className={`${sectionHeadingClass} mb-6`}>Built around real exam work</h2>
+              <p className="text-muted text-lg mb-10 leading-8 font-normal">PrepZii starts with real exam patterns, previous year papers, and focused review. No gimmicks, just a calmer way to prepare for serious national exams.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <TrustCard title="Verified PYQs" desc="100% authentic previous year questions with detailed solutions." delay={0.1} />
@@ -465,12 +481,12 @@ export default function PublicLandingPage() {
              viewport={{ once: true }}
              transition={{ duration: 0.8 }}
            >
-             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-8">Ready to secure your rank?</h2>
-             <p className="text-xl text-muted mb-12">Join the elite workspace and transform your preparation today.</p>
+             <h2 className={`${landingDisplayClass} text-4xl md:text-6xl font-semibold text-foreground tracking-normal leading-[1.05] mb-8`}>Ready for a clearer study routine?</h2>
+             <p className="text-xl text-muted mb-12 leading-8 font-normal">Start with a workspace built for PYQs, mocks, formulas, analytics, and steady revision.</p>
              <Link
                  href="/sign-up"
                  prefetch
-                 className="px-12 py-5 bg-brand text-black font-bold text-lg rounded-full hover:bg-brand-hover transition-all duration-300 hover:scale-[1.03] shadow-[0_0_40px_rgba(234,179,8,0.3)]"
+                 className="px-12 py-5 bg-brand text-black font-semibold text-lg rounded-full hover:bg-brand-hover transition-all duration-300 hover:scale-[1.03]"
                >
                  Enter Workspace
                </Link>
@@ -479,7 +495,7 @@ export default function PublicLandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full text-center py-8 text-sm font-medium text-disabled relative z-10 border-t border-border-subtle/50">
+      <footer className="w-full text-center py-8 text-sm font-normal text-disabled relative z-10 border-t border-border-subtle/50">
         © {new Date().getFullYear()} PrepZii Systems. Built for top national ranks.
       </footer>
     </div>

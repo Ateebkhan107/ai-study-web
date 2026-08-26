@@ -20,7 +20,12 @@
     "js-yaml": "^4.3.1"
   },
   "dependencies": {
+    "@awesome.me/webawesome": "^3.12.0",
     "@clerk/nextjs": "^7.5.14",
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-regular-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.110.1",
     "framer-motion": "^12.43.0",

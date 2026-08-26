@@ -41,7 +41,7 @@ const WhatToDoNext = dynamic(() => import("@/components/analytics/WhatToDoNext")
 const TABS = [
   { id: "overview", label: "Overview", Icon: BarChart3 },
   { id: "charts", label: "Charts", Icon: TrendingUp },
-  { id: "ai-insights", label: "AI Insights", Icon: Brain },
+  { id: "ai-insights", label: "Insights", Icon: Brain },
   { id: "leaderboard", label: "Leaderboard", Icon: Trophy },
 ];
 
@@ -52,17 +52,13 @@ function getCookieTrack() {
 }
 
 function ContentBlockSkeleton({ className = "h-48" }) {
-  return <div className={`rounded-2xl skeleton-shimmer ${className}`} />;
+  return <div className={`rounded-lg skeleton-shimmer ${className}`} />;
 }
 
 function AnalyticsContentLoading() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        {[...Array(4)].map((_, index) => (
-          <ContentBlockSkeleton key={index} className="h-28" />
-        ))}
-      </div>
+      <ContentBlockSkeleton className="h-28" />
       <ContentBlockSkeleton className="h-72" />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {[...Array(2)].map((_, index) => (
@@ -76,15 +72,15 @@ function AnalyticsContentLoading() {
 function ProLock() {
   return (
     <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
-      <div className="glass-card max-w-md p-5 text-center sm:p-8">
-        <BarChart3 className="mx-auto mb-4 h-12 w-12 text-indigo-500 opacity-70" />
-        <h2 className="mb-2 text-xl font-black text-slate-900 dark:text-white sm:text-2xl">Advanced Analytics is Pro</h2>
+      <div className="max-w-md rounded-lg border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-8">
+        <BarChart3 className="mx-auto mb-4 h-10 w-10 text-slate-500 dark:text-slate-400" />
+        <h2 className="mb-2 text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Advanced Analytics is Pro</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
           Leaderboard stays free. Upgrade to unlock deep trends, weak chapters, study heatmaps, and performance analytics.
         </p>
         <Link
           href="/pro"
-          className="inline-flex rounded-xl bg-brand px-5 py-3 text-sm font-black text-white"
+          className="inline-flex rounded-md bg-brand px-5 py-3 text-sm font-semibold text-slate-950"
         >
           Upgrade to Pro
         </Link>
@@ -96,11 +92,11 @@ function ProLock() {
 function AIComingSoon() {
   return (
     <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
-      <div className="glass-card w-full max-w-xl p-5 text-center sm:p-10">
-        <Brain className="mx-auto mb-4 h-12 w-12 text-blue-500 opacity-60" />
-        <h2 className="mb-2 text-xl font-bold text-slate-800 dark:text-slate-100 sm:text-2xl">AI Insights</h2>
-        <p className="mx-auto max-w-md text-sm text-slate-500 dark:text-slate-400">
-          Personalized study intelligence is coming to PrepZii, including performance summaries, weak-area explanations, study-plan suggestions, and recommendations.
+      <div className="w-full max-w-xl rounded-lg border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-10">
+        <Brain className="mx-auto mb-4 h-10 w-10 text-slate-500 dark:text-slate-400" />
+        <h2 className="mb-2 text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Insights</h2>
+        <p className="mx-auto max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Focused study recommendations are coming to PrepZii, including performance summaries, weak-area explanations, and revision planning.
         </p>
       </div>
     </div>
@@ -156,13 +152,13 @@ export default function AnalyticsPage() {
 
   return (
     <PageWrapper
-      title="Your Performance"
+      title="Performance Report"
       subtitle={`Updated today · ${activeTrack} track`}
-      badge="Analytics Dashboard"
+      badge="Exam Analysis"
     >
       <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-        <div className="w-full rounded-xl border border-slate-200/60 bg-[var(--card)]/70 p-1 shadow-sm backdrop-blur-xl dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:inline-flex sm:w-auto sm:max-w-full sm:overflow-x-auto">
-          <div className="grid w-full grid-cols-4 items-center gap-0.5 sm:flex sm:min-w-max sm:gap-1">
+        <div className="w-full border-b border-slate-200 dark:border-[var(--border-subtle)] sm:max-w-full sm:overflow-x-auto">
+          <div className="grid w-full grid-cols-4 items-end gap-0 sm:flex sm:min-w-max sm:gap-6">
             {TABS.map((tab) => {
               const active = activeTab === tab.id;
               return (
@@ -170,13 +166,13 @@ export default function AnalyticsPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex min-w-0 items-center justify-center gap-1 rounded-lg px-1.5 py-2 text-[10.5px] font-semibold transition-all duration-200 sm:shrink-0 sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm ${
+                  className={`flex min-w-0 items-center justify-center gap-1 border-b-2 px-1.5 py-3 text-[11px] font-medium transition-colors duration-150 sm:shrink-0 sm:gap-2 sm:px-0 sm:text-sm ${
                     active
-                      ? "bg-slate-900 text-white shadow-sm dark:bg-indigo-500 dark:text-white"
-                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-[var(--card)]/5 dark:hover:text-slate-200"
+                      ? "border-brand text-slate-950 dark:text-white"
+                      : "border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
                   }`}
                 >
-                  <tab.Icon className="hidden h-3.5 w-3.5 shrink-0 sm:inline" size={14} />
+                  <tab.Icon className="hidden h-3.5 w-3.5 shrink-0 sm:inline" size={14} aria-hidden="true" />
                   <span className="min-w-0 truncate">{tab.label}</span>
                 </button>
               );

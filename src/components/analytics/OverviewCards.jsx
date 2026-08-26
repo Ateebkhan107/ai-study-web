@@ -1,34 +1,5 @@
 "use client";
 
-import { BarChart3, CheckCircle2, ListChecks, Target } from "lucide-react";
-
-const STAT_STYLES = {
-  "Questions Practiced": {
-    icon: ListChecks,
-    accent: "#C2723F",
-    gradient: "from-brand to-brand-hover",
-    bgPattern: "from-indigo-500/10 via-brand-hover/5 to-transparent dark:from-indigo-500/20 dark:via-brand-hover/5",
-  },
-  "Overall Accuracy": {
-    icon: Target,
-    accent: "#10b981",
-    gradient: "from-emerald-500 to-teal-500",
-    bgPattern: "from-emerald-500/10 via-teal-500/5 to-transparent dark:from-emerald-500/20 dark:via-teal-500/5",
-  },
-  "Tests Completed": {
-    icon: CheckCircle2,
-    accent: "#f59e0b",
-    gradient: "from-amber-500 to-orange-500",
-    bgPattern: "from-amber-500/10 via-orange-500/5 to-transparent dark:from-amber-500/20 dark:via-orange-500/5",
-  },
-  "Average Score": {
-    icon: BarChart3,
-    accent: "#A05252",
-    gradient: "from-rose-500 to-pink-500",
-    bgPattern: "from-rose-500/10 via-pink-500/5 to-transparent dark:from-rose-500/20 dark:via-pink-500/5",
-  },
-};
-
 function formatPercent(value) {
   return value === null || value === undefined ? "—" : `${value}%`;
 }
@@ -63,43 +34,22 @@ export default function OverviewCards({ stats }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-      {cards.map((s, index) => {
-        const style = STAT_STYLES[s.label];
-        const Icon = style.icon;
-
-        return (
-          <div
-            key={s.label}
-            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-3 shadow-sm backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:p-5"
-            style={{ animationDelay: `${index * 75}ms` }}
-          >
-            <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${style.bgPattern} opacity-50 transition-opacity duration-200 group-hover:opacity-90`} />
-
-            <div className="relative z-10">
-              <div className="mb-3 flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
-                <p className="min-w-0 text-[9px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 sm:text-[10px] sm:tracking-widest">
-                  {s.label}
-                </p>
-                <div
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl sm:h-9 sm:w-9"
-                  style={{ background: `${style.accent}15` }}
-                >
-                  <Icon size={17} style={{ color: style.accent }} />
-                </div>
-              </div>
-
-              <p className={`mb-1 bg-gradient-to-br ${style.gradient} bg-clip-text text-2xl font-extrabold tracking-tight text-transparent sm:text-3xl`}>
-                {s.value}
-              </p>
-
-              <p className="text-xs font-medium text-slate-400 dark:text-slate-500">
-                {s.sub}
-              </p>
-            </div>
+    <div className="rounded-lg border border-slate-200 bg-white shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+      <div className="grid grid-cols-2 divide-x divide-y divide-slate-200 dark:divide-[var(--border-subtle)] lg:grid-cols-4 lg:divide-y-0">
+        {cards.map((s) => (
+          <div key={s.label} className="min-w-0 p-4 sm:p-5">
+            <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+              {s.label}
+            </p>
+            <p className="mt-2 text-2xl font-semibold tracking-normal text-slate-950 dark:text-white sm:text-3xl">
+              {s.value}
+            </p>
+            <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-500">
+              {s.sub}
+            </p>
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }

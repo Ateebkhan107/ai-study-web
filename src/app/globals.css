@@ -2,22 +2,22 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Premium Light Mode: Yellow & White */
-  --background: #FEFCE8;
-  --background-secondary: #FEF9C3;
-  --foreground: #000000;
-  --text-primary: #000000;
-  --text-secondary: #222222;
-  --text-muted: #444444;
-  --text-disabled: #777777;
+  /* PrepZii Light Mode: scientific notebook paper + ink */
+  --background: #FFFDF2;
+  --background-secondary: #F8F1D9;
+  --foreground: #121826;
+  --text-primary: #121826;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-disabled: #94A3B8;
   --card: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-secondary: #FAFAFA;
+  --surface-secondary: #FCF8E8;
   --surface-elevated: #FFFFFF;
-  --surface-hover: #FEF3C7;
-  --surface-active: #FDE68A;
-  --border: #FDE047;
-  --border-subtle: #FEF9C3;
+  --surface-hover: #FFF8D7;
+  --surface-active: #F8E7A3;
+  --border: #E8DDAF;
+  --border-subtle: #F1E7BE;
   --brand: #EAB308;
   --brand-hover: #CA8A04;
   --brand-pressed: #A16207;
@@ -27,42 +27,57 @@
   --accent-hover: var(--brand-hover);
   --accent-pressed: var(--brand-pressed);
   --muted: var(--text-muted);
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(234, 179, 8, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(148, 119, 36, 0.18);
 
   --success: #2F7D4F;
   --error: #B44436;
   --warning: #A8791D;
   --gold: #EAB308;
-  --subject-physics: #EAB308;
-  --subject-chemistry: #CA8A04;
-  --subject-biology: #FACC15;
-  --subject-maths: #EAB308;
+  --subject-physics: #41667D;
+  --subject-chemistry: #4F7A59;
+  --subject-biology: #9A4E4E;
+  --subject-maths: #A95D32;
 
   /* Subtle yellow ambience */
-  --mesh-1: rgba(234, 179, 8, 0.05);
-  --mesh-2: rgba(254, 249, 195, 0.4);
-  --mesh-3: rgba(253, 224, 71, 0.1);
+  --mesh-1: rgba(18, 24, 38, 0.025);
+  --mesh-2: rgba(234, 179, 8, 0.05);
+  --mesh-3: rgba(79, 102, 125, 0.035);
   --button-text: #000000;
+
+  --prepzii-cream: #FFFDF2;
+  --prepzii-cream-strong: #FFF8D7;
+  --prepzii-ink: #121826;
+  --prepzii-navy: #1E2A44;
+  --prepzii-charcoal: #141412;
+  --prepzii-card-radius: 16px;
+  --prepzii-control-radius: 12px;
+  --prepzii-shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --prepzii-shadow-lift: 0 22px 55px rgba(15, 23, 42, 0.12);
+  --prepzii-paper-line: rgba(30, 42, 68, 0.07);
+  --prepzii-paper-grid: rgba(30, 42, 68, 0.045);
+  --prepzii-margin-line: rgba(180, 68, 54, 0.18);
+  --prepzii-rule: rgba(30, 42, 68, 0.16);
+  --prepzii-annotation: #A16207;
 }
 
 .dark {
-  /* Premium Dark Mode: Black & Yellow */
-  --background: #000000;
-  --background-secondary: #0A0A0A;
+  /* PrepZii Dark Mode: matte black + soft charcoal */
+  --background: #0B0B0B;
+  --background-secondary: #0D0D0D;
   --foreground: #FFFFFF;
   --text-primary: #FFFFFF;
-  --text-secondary: #FEF3C7;
-  --text-muted: #FDE68A;
+  --text-secondary: #D6D3C5;
+  --text-muted: #A9A395;
   --text-disabled: #A1A1AA;
-  --card: #111111;
-  --surface: #111111;
-  --surface-secondary: #1A1A1A;
-  --surface-elevated: #222222;
-  --surface-hover: #333333;
-  --surface-active: #444444;
-  --border: #333333;
-  --border-subtle: #1F1F1F;
+  --card: #141414;
+  --surface: #181818;
+  --surface-secondary: #1C1C1C;
+  --surface-elevated: #202020;
+  --surface-hover: #242424;
+  --surface-active: #2A2A2A;
+  --border: #323232;
+  --border-subtle: #242424;
   --brand: #EAB308;
   --brand-hover: #FACC15;
   --brand-pressed: #FDE047;
@@ -72,23 +87,36 @@
   --accent-hover: var(--brand-hover);
   --accent-pressed: var(--brand-pressed);
   --muted: var(--text-muted);
-  --glass-bg: rgba(17, 17, 17, 0.85);
-  --glass-border: rgba(234, 179, 8, 0.3);
+  --glass-bg: rgba(20, 20, 20, 0.94);
+  --glass-border: rgba(255, 255, 255, 0.08);
 
   --success: #57A36B;
   --error: #D05C4B;
   --warning: #F59E0B;
   --gold: #EAB308;
-  --subject-physics: #EAB308;
-  --subject-chemistry: #FACC15;
-  --subject-biology: #FDE047;
-  --subject-maths: #EAB308;
+  --subject-physics: #8DB4CA;
+  --subject-chemistry: #8FBE94;
+  --subject-biology: #D58B8B;
+  --subject-maths: #E0A36F;
 
-  /* Subtle yellow ambience */
-  --mesh-1: rgba(234, 179, 8, 0.08);
-  --mesh-2: rgba(202, 138, 4, 0.05);
-  --mesh-3: rgba(250, 204, 21, 0.03);
+  /* Flat matte ambience */
+  --mesh-1: rgba(255, 255, 255, 0.018);
+  --mesh-2: rgba(255, 255, 255, 0.012);
+  --mesh-3: rgba(255, 255, 255, 0.01);
   --button-text: #000000;
+
+  --prepzii-cream: #0B0B0B;
+  --prepzii-cream-strong: #141414;
+  --prepzii-ink: #FFFFFF;
+  --prepzii-navy: #F8FAFC;
+  --prepzii-charcoal: #181818;
+  --prepzii-shadow-soft: none;
+  --prepzii-shadow-lift: none;
+  --prepzii-paper-line: rgba(255, 255, 255, 0.055);
+  --prepzii-paper-grid: rgba(255, 255, 255, 0.035);
+  --prepzii-margin-line: rgba(208, 92, 75, 0.24);
+  --prepzii-rule: rgba(255, 255, 255, 0.13);
+  --prepzii-annotation: #FACC15;
 }
 
 @theme inline {
@@ -236,7 +264,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Smooth Ambient Background Animation ───────────────────────────── */
+/* ── Ambient Background Animation ───────────────────────────── */
 @keyframes ambientPan {
   0% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
@@ -252,15 +280,84 @@
 body {
   background-color: var(--background);
   background-image:
-    radial-gradient(at 0% 0%, var(--mesh-1) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, var(--mesh-3) 0px, transparent 50%);
-  background-size: 150% 150%;
-  animation: ambientPan 20s ease-in-out infinite;
+    linear-gradient(var(--prepzii-paper-line) 1px, transparent 1px),
+    radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 46%),
+    radial-gradient(at 0% 100%, var(--mesh-3) 0px, transparent 42%);
+  background-size: 100% 28px, 150% 150%, 150% 150%;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   transition: background-color 0.5s ease, color 0.5s ease;
   min-height: 100vh;
+}
+
+.prepzii-paper-surface {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(90deg, transparent 0 42px, var(--prepzii-margin-line) 42px 43px, transparent 43px),
+    linear-gradient(var(--prepzii-paper-line) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 28px;
+}
+
+.prepzii-grid-surface {
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(var(--prepzii-paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--prepzii-paper-grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.prepzii-exam-rule {
+  border-top: 1px solid var(--prepzii-rule);
+  border-bottom: 1px solid var(--prepzii-rule);
+}
+
+.prepzii-hand-note {
+  color: var(--prepzii-annotation);
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0;
+}
+
+wa-tooltip {
+  --max-width: min(260px, calc(100vw - 32px));
+}
+
+wa-tooltip::part(body) {
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: var(--prepzii-shadow-soft);
+}
+
+.prepzii-wa-dialog::part(dialog),
+.prepzii-wa-dropdown::part(menu) {
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--prepzii-card-radius);
+  background: var(--card);
+  color: var(--text-primary);
+  box-shadow: var(--prepzii-shadow-lift);
+}
+
+.prepzii-wa-dropdown::part(menu) {
+  padding: 0.35rem;
+}
+
+.prepzii-wa-dialog::part(dialog) {
+  --spacing: 1.25rem;
+}
+
+.prepzii-wa-tabs {
+  --indicator-color: var(--brand);
+  --track-color: color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.prepzii-wa-switch {
+  --width: 2.5rem;
+  --height: 1.35rem;
+  --thumb-size: 1rem;
 }
 
 html,

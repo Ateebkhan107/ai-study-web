@@ -2,9 +2,9 @@
 
 function EmptyState({ title, description }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-[var(--card)]/45 p-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/30 dark:text-slate-400">
-      <p className="font-bold text-slate-700 dark:text-slate-200">{title}</p>
-      <p className="mt-1 text-xs leading-relaxed">{description}</p>
+    <div className="border-t border-slate-200 py-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:text-slate-400">
+      <p className="font-semibold text-slate-700 dark:text-slate-200">{title}</p>
+      <p className="mt-1 text-xs leading-6">{description}</p>
     </div>
   );
 }
@@ -32,13 +32,13 @@ export function PerformanceTrend({ data, detailed = false }) {
   const chartPoints = buildLinePoints(points);
 
   return (
-    <div className="glass-card min-w-0 p-5">
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
       <div className="mb-5">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+        <h2 className="text-base font-semibold tracking-normal text-slate-950 dark:text-white">
           Performance Trend
         </h2>
-        <p className="text-xs text-slate-400 dark:text-slate-500">
-          {detailed ? "Performance over time from completed work" : "Your test and PYQ accuracy improvement"}
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          {detailed ? "Accuracy over completed work" : "Recent test and PYQ accuracy"}
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export function PerformanceTrend({ data, detailed = false }) {
         />
       ) : (
         <div className="min-w-0">
-          <div className="relative h-56 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/40 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/30 sm:h-72">
+          <div className="relative h-56 overflow-hidden border-t border-b border-slate-200 bg-[#fffdf7] py-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/25 sm:h-72">
             <svg className="h-full w-full" viewBox="0 0 640 190" preserveAspectRatio="none" role="img" aria-label="Accuracy trend over recent work">
               {[0, 25, 50, 75, 100].map((tick) => (
                 <g key={tick}>
@@ -59,25 +59,25 @@ export function PerformanceTrend({ data, detailed = false }) {
                     y1={18 + (1 - tick / 100) * 154}
                     y2={18 + (1 - tick / 100) * 154}
                     stroke="currentColor"
-                    className="text-slate-200/80 dark:text-slate-800"
+                    className="text-slate-200 dark:text-slate-800"
                     strokeWidth="1"
                   />
                 </g>
               ))}
-              <polyline points={chartPoints} fill="none" stroke="#C2723F" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+              <polyline points={chartPoints} fill="none" stroke="#C2723F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
               {points.map((point, index) => {
                 const x = 18 + (index / (points.length - 1)) * 604;
                 const y = 18 + (1 - point.accuracy / 100) * 154;
-                return <circle key={`${point.label}-${index}`} cx={x} cy={y} r="5" fill="#C2723F" />;
+                return <circle key={`${point.label}-${index}`} cx={x} cy={y} r="3.5" fill="#C2723F" />;
               })}
             </svg>
           </div>
 
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
             {points.slice(detailed ? -8 : -4).map((point, index) => (
               <span
                 key={`${point.label}-${index}`}
-                className="rounded-full border border-slate-200 bg-[var(--card)]/70 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/60 dark:text-slate-300"
+                className="text-xs font-medium text-slate-500 dark:text-slate-400"
               >
                 {point.label}: {point.accuracy}%
               </span>
@@ -92,24 +92,15 @@ export function PerformanceTrend({ data, detailed = false }) {
 export function SubjectDistribution({ data }) {
   const items = data?.items || [];
   const hasData = data?.status === "ready" && items.length > 0;
-  const segments = items.reduce((acc, item) => {
-    const previousOffset = acc.length > 0 ? acc[acc.length - 1].nextOffset : 0;
-    return [
-      ...acc,
-      {
-        ...item,
-        dash: `${item.pct} ${100 - item.pct}`,
-        offset: previousOffset,
-        nextOffset: previousOffset - item.pct,
-      },
-    ];
-  }, []);
 
   return (
-    <div className="glass-card min-w-0 p-5">
-      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+      <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Subject Distribution
       </h2>
+      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+        Attempt share by subject
+      </p>
 
       {!hasData ? (
         <EmptyState
@@ -117,38 +108,24 @@ export function SubjectDistribution({ data }) {
           description="Practice mapped questions to see subject distribution."
         />
       ) : (
-        <>
-          <div className="relative mx-auto mb-4 h-36 w-36">
-            <svg viewBox="0 0 42 42" className="h-full w-full -rotate-90">
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="currentColor" strokeWidth="5" className="text-slate-100 dark:text-slate-800" />
-              {segments.map((segment) => (
-                <circle
-                  key={segment.subject}
-                  cx="21"
-                  cy="21"
-                  r="15.915"
-                  fill="transparent"
-                  stroke={segment.color}
-                  strokeWidth="5"
-                  strokeDasharray={segment.dash}
-                  strokeDashoffset={segment.offset}
-                />
-              ))}
-            </svg>
-          </div>
-
-          <div className="space-y-2">
+          <div className="divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
             {items.map((subject) => (
-              <div key={subject.subject} className="flex items-center gap-2">
-                <span className="w-24 shrink-0 text-xs text-slate-500 dark:text-slate-400">{subject.subject}</span>
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                  <div className="h-full rounded-full" style={{ width: `${subject.pct}%`, background: subject.color }} />
+              <div key={subject.subject} className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 py-3">
+                <div className="min-w-0">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="truncate text-sm font-medium text-slate-900 dark:text-white">{subject.subject}</span>
+                    <span className="text-sm font-semibold tabular-nums text-slate-950 dark:text-white">{subject.pct}%</span>
+                  </div>
+                  <div className="mt-2 h-1 overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                    <div className="h-full bg-brand" style={{ width: `${subject.pct}%` }} />
+                  </div>
                 </div>
-                <span className="w-8 text-right text-xs font-bold text-slate-900 dark:text-white">{subject.pct}%</span>
+                <span className="self-center text-xs text-slate-500 dark:text-slate-500">
+                  {subject.attempted} attempted
+                </span>
               </div>
             ))}
           </div>
-        </>
       )}
     </div>
   );
@@ -159,10 +136,13 @@ export function SubjectPerformance({ data }) {
   const hasData = data?.status === "ready" && items.length > 0;
 
   return (
-    <div className="glass-card min-w-0 p-5">
-      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+      <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Subject Performance
       </h2>
+      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+        Correct answers against attempted questions
+      </p>
 
       {!hasData ? (
         <EmptyState
@@ -170,15 +150,15 @@ export function SubjectPerformance({ data }) {
           description="Answer mapped questions to calculate subject accuracy."
         />
       ) : (
-        <div className="space-y-3">
+        <div className="divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
           {items.map((subject) => (
-            <div key={subject.subject}>
-              <div className="mb-1.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{subject.subject}</span>
-                <span className="text-xs font-black text-slate-900 dark:text-white">{formatPercent(subject.accuracy)}</span>
+            <div key={subject.subject} className="py-3">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-slate-900 dark:text-white">{subject.subject}</span>
+                <span className="text-sm font-semibold tabular-nums text-slate-950 dark:text-white">{formatPercent(subject.accuracy)}</span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                <div className="h-full rounded-full" style={{ width: `${subject.accuracy || 0}%`, background: subject.color }} />
+              <div className="h-1 overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                <div className="h-full bg-brand" style={{ width: `${subject.accuracy || 0}%` }} />
               </div>
               <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
                 {subject.correct}/{subject.attempted} correct
@@ -197,10 +177,13 @@ export function ChapterPerformance({ data }) {
   const hasData = data?.status === "ready" && weakest.length > 0;
 
   return (
-    <div className="glass-card min-w-0 p-5">
-      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+      <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Chapter Performance
       </h2>
+      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+        Chapter-level report from mapped attempts
+      </p>
 
       {!hasData ? (
         <EmptyState
@@ -208,48 +191,45 @@ export function ChapterPerformance({ data }) {
           description="Complete more mapped PYQs or tests to compare chapter performance."
         />
       ) : (
-        <div className="grid gap-5 lg:grid-cols-2">
-          <div>
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-              Needs Attention
-            </p>
-            <ChapterList chapters={weakest} />
-          </div>
-          <div>
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-              Strongest
-            </p>
-            {strongest.length > 0 ? <ChapterList chapters={strongest} /> : <EmptyState title="No strong chapters yet" description="Keep practicing to establish strengths." />}
-          </div>
-        </div>
+        <ChapterTable chapters={[...weakest, ...strongest]} />
       )}
     </div>
   );
 }
 
-function ChapterList({ chapters }) {
+function ChapterTable({ chapters }) {
   return (
-    <div className="divide-y divide-slate-100 dark:divide-slate-800">
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[580px] border-collapse text-left">
+        <thead>
+          <tr className="border-b border-slate-200 text-xs font-medium text-slate-500 dark:border-[var(--border-subtle)] dark:text-slate-500">
+            <th className="py-2 pr-4">Chapter</th>
+            <th className="py-2 pr-4">Subject</th>
+            <th className="py-2 pr-4 text-right">Attempted</th>
+            <th className="py-2 text-right">Accuracy</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
       {chapters.map((chapter) => (
-        <div key={`${chapter.subject}-${chapter.chapter}`} className="py-3">
-          <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">{chapter.chapter}</p>
-              <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">{chapter.subject}</p>
+        <tr key={`${chapter.subject}-${chapter.chapter}`} className="text-sm">
+          <td className="max-w-[300px] py-3 pr-4">
+            <div className="flex min-w-0 items-center gap-2">
+              {chapter.statusLabel !== "Strong" && (
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              )}
+              <span className="truncate font-medium text-slate-950 dark:text-white">{chapter.chapter}</span>
             </div>
-            <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold ${chapter.statusClassName}`}>
-              {chapter.statusLabel}
-            </span>
-          </div>
-          <div className="mt-2 flex items-center gap-3">
-            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-              <div className="h-full rounded-full bg-brand dark:bg-brand" style={{ width: `${chapter.accuracy}%` }} />
-            </div>
-            <span className="w-10 text-right text-xs font-black text-slate-900 dark:text-white">{chapter.accuracy}%</span>
-          </div>
-          <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">{chapter.attempted} attempted</p>
-        </div>
+            {chapter.statusLabel !== "Strong" && (
+              <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-500">Needs attention</p>
+            )}
+          </td>
+          <td className="py-3 pr-4 text-slate-500 dark:text-slate-400">{chapter.subject}</td>
+          <td className="py-3 pr-4 text-right tabular-nums text-slate-700 dark:text-slate-300">{chapter.attempted}</td>
+          <td className="py-3 text-right font-semibold tabular-nums text-slate-950 dark:text-white">{chapter.accuracy}%</td>
+        </tr>
       ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -258,26 +238,29 @@ export function TimeAnalytics({ data }) {
   const hasData = data?.status === "ready";
 
   return (
-    <div className="glass-card min-w-0 p-5">
-      <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+      <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Speed & Time
       </h2>
+      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+        Timed test pace
+      </p>
 
       {!hasData ? (
         <EmptyState
           title="No reliable timing data yet"
-          description="Submit timed tests to calculate speed and average time per question."
+          description="Complete a few timed tests to unlock timing analysis."
         />
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/50">
-              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Avg Time / Question</p>
-              <p className="text-xl font-black text-slate-900 dark:text-white">{data.averageSecondsPerQuestion}s</p>
+          <div className="grid grid-cols-2 divide-x divide-slate-200 border-y border-slate-200 dark:divide-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
+            <div className="py-3 pr-3">
+              <p className="mb-1 text-xs text-slate-500 dark:text-slate-500">Avg time / question</p>
+              <p className="text-xl font-semibold text-slate-950 dark:text-white">{data.averageSecondsPerQuestion}s</p>
             </div>
-            <div className="rounded-xl bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/50">
-              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Speed</p>
-              <p className="text-xl font-black text-slate-900 dark:text-white">{data.questionsPerMinute} q/min</p>
+            <div className="py-3 pl-3">
+              <p className="mb-1 text-xs text-slate-500 dark:text-slate-500">Speed</p>
+              <p className="text-xl font-semibold text-slate-950 dark:text-white">{data.questionsPerMinute} q/min</p>
             </div>
           </div>
 
@@ -287,7 +270,7 @@ export function TimeAnalytics({ data }) {
                 <div key={`${item.label}-${index}`} className="flex min-w-0 flex-1 flex-col items-center gap-2">
                   <div className="flex h-20 w-full items-end rounded-t-md bg-slate-100 dark:bg-[var(--surface-elevated)]">
                     <div
-                      className="w-full rounded-t-md bg-indigo-500/80"
+                      className="w-full rounded-t-sm bg-brand/80"
                       style={{ height: `${Math.max(8, Math.min(100, item.questionsPerMinute * 5))}%` }}
                       title={`${item.label}: ${item.questionsPerMinute} q/min`}
                     />
