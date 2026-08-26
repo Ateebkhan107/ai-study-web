@@ -8,47 +8,23 @@ export const BATTLE_EXPIRES_MINUTES = 10;
 export const SAFE_BATTLE_QUESTION_SELECT = `
   id,
   exam,
-  exam_type,
-  year,
   subject,
   chapter,
+  question_text,
+  options,
   difficulty,
-  question,
-  question_image,
-  option_a,
-  option_b,
-  option_c,
-  option_d,
-  option_a_image,
-  option_b_image,
-  option_c_image,
-  option_d_image,
-  question_type,
-  question_number,
-  display_order,
-  marks_positive,
-  marks_negative
+  expected_time_seconds
 `;
 
 const SCORING_QUESTION_SELECT = `
   id,
-  question_type,
-  correct_option,
-  correct_options,
-  numerical_answer,
-  numerical_min,
-  numerical_max
+  correct_answer
 `;
 
 const REVIEW_QUESTION_SELECT = `
   ${SAFE_BATTLE_QUESTION_SELECT},
-  correct_option,
-  correct_options,
-  numerical_answer,
-  numerical_min,
-  numerical_max,
-  explanation,
-  explanation_image
+  correct_answer,
+  explanation
 `;
 
 function isExpired(expiresAt) {
@@ -68,6 +44,41 @@ function orderByQuestionIds(questions, questionIds) {
   return questionIds.map((id) => byId.get(String(id))).filter(Boolean);
 }
 
+function mapBattleQuestionForClient(question, revealAnswers = false) {
+  const options = Array.isArray(question?.options) ? question.options : [];
+  const mapped = {
+    id: question.id,
+    exam: question.exam,
+    subject: question.subject,
+    chapter: question.chapter,
+    difficulty: question.difficulty,
+    expected_time_seconds: question.expected_time_seconds,
+    question: question.question_text,
+    question_text: question.question_text,
+    question_image: null,
+    question_type: "MCQ",
+    option_a: options[0] || "",
+    option_b: options[1] || "",
+    option_c: options[2] || "",
+    option_d: options[3] || "",
+    option_a_image: null,
+    option_b_image: null,
+    option_c_image: null,
+    option_d_image: null,
+    marks_positive: 4,
+    marks_negative: -1,
+  };
+
+  if (revealAnswers) {
+    mapped.correct_answer = normalizeOption(question.correct_answer);
+    mapped.correct_option = mapped.correct_answer;
+    mapped.explanation = question.explanation || "";
+    mapped.explanation_image = null;
+  }
+
+  return mapped;
+}
+
 function parseAnswer(value) {
   if (value === undefined || value === null || value === "") return null;
   return value;
@@ -80,52 +91,11 @@ function normalizeOption(value) {
   return text;
 }
 
-function answerAsArray(value) {
-  if (Array.isArray(value)) return value.map(normalizeOption).filter(Boolean).sort();
-  if (typeof value === "string" && value.trim().startsWith("[")) {
-    try {
-      const parsed = JSON.parse(value);
-      return Array.isArray(parsed) ? parsed.map(normalizeOption).filter(Boolean).sort() : [];
-    } catch {
-      return [];
-    }
-  }
-  return String(value || "")
-    .split(",")
-    .map(normalizeOption)
-    .filter(Boolean)
-    .sort();
-}
-
-function closeEnough(a, b) {
-  const left = Number(a);
-  const right = Number(b);
-  if (!Number.isFinite(left) || !Number.isFinite(right)) return false;
-  return Math.abs(left - right) <= 1e-6;
-}
-
 export function isAnswerCorrect(question, selectedAnswer) {
   if (!question) return false;
   const answer = parseAnswer(selectedAnswer);
   if (answer === null) return false;
-
-  const type = String(question.question_type || "MCQ").toLowerCase();
-  if (type.includes("numerical")) {
-    const value = Number(answer);
-    if (!Number.isFinite(value)) return false;
-    if (question.numerical_min !== null && question.numerical_min !== undefined && question.numerical_max !== null && question.numerical_max !== undefined) {
-      return value >= Number(question.numerical_min) && value <= Number(question.numerical_max);
-    }
-    return closeEnough(value, question.numerical_answer);
-  }
-
-  if (Array.isArray(question.correct_options) && question.correct_options.length > 0) {
-    const selected = answerAsArray(answer);
-    const correct = question.correct_options.map(normalizeOption).filter(Boolean).sort();
-    return selected.length === correct.length && selected.every((item, index) => item === correct[index]);
-  }
-
-  return normalizeOption(answer) === normalizeOption(question.correct_option);
+  return normalizeOption(answer) === normalizeOption(question.correct_answer);
 }
 
 export async function getBattleProfile(userId) {
@@ -162,18 +132,17 @@ export async function requireBattleProfile(userId) {
 
 export async function selectBattleQuestionIds(exam) {
   const { data, error } = await supabaseAdmin
-    .from("pyq_questions")
+    .from("battle_questions")
     .select("id")
     .eq("exam", normalizeExam(exam))
-    .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
-    .not("exam_id", "is", null)
+    .eq("is_active", true)
     .limit(250);
 
   if (error) throw error;
 
   const ids = shuffle((data || []).map((question) => String(question.id))).slice(0, BATTLE_QUESTION_COUNT);
   if (ids.length < BATTLE_QUESTION_COUNT) {
-    const battleError = new Error("Not enough published questions for Battle Arena yet.");
+    const battleError = new Error("Not enough active Battle Arena questions yet.");
     battleError.status = 503;
     throw battleError;
   }
@@ -260,7 +229,7 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
     ? REVIEW_QUESTION_SELECT
     : SAFE_BATTLE_QUESTION_SELECT;
   const { data: questions, error: questionsError } = await supabaseAdmin
-    .from("pyq_questions")
+    .from("battle_questions")
     .select(selectFields)
     .in("id", match.question_ids || []);
   if (questionsError) throw questionsError;
@@ -270,7 +239,8 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
 
   return {
     ...match,
-    questions: orderByQuestionIds(questions || [], match.question_ids || []),
+    questions: orderByQuestionIds(questions || [], match.question_ids || [])
+      .map((question) => mapBattleQuestionForClient(question, match.status === "FINISHED" || includeReview)),
     answers: answerMap,
     players: (players || []).map((player) => {
       const profile = profileById.get(player.user_id);
@@ -317,7 +287,7 @@ export async function finishBattleForUser({ battleId, userId }) {
   }
 
   const { data: scoringQuestions, error: scoringError } = await supabaseAdmin
-    .from("pyq_questions")
+    .from("battle_questions")
     .select(SCORING_QUESTION_SELECT)
     .in("id", battle.question_ids || []);
   if (scoringError) throw scoringError;

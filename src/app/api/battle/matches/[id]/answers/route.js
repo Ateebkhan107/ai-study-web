@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getBattleForUser, isAnswerCorrect } from "@/lib/battle";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
-const SCORING_SELECT = "id, question_type, correct_option, correct_options, numerical_answer, numerical_min, numerical_max";
+const SCORING_SELECT = "id, correct_answer";
 
 function jsonError(error, fallback = 500) {
   return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: error.status || fallback });
@@ -33,7 +33,7 @@ export async function POST(request, context) {
     }
 
     const { data: question, error: questionError } = await supabaseAdmin
-      .from("pyq_questions")
+      .from("battle_questions")
       .select(SCORING_SELECT)
       .eq("id", questionId)
       .maybeSingle();
