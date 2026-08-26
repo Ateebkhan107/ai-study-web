@@ -61,7 +61,7 @@ for (const filename of files) {
   }
   summary.push({ paper_code: manifest.paper_code, total: questions.length, subjects, questionImages, optionImages });
 }
-if (files.length !== 8) failures.push(`expected 8 papers, found ${files.length}`);
-if (grandTotal !== 600) failures.push(`expected 600 questions, found ${grandTotal}`);
+if (files.length !== 9) failures.push(`expected 9 papers, found ${files.length}`);
+if (grandTotal !== 675) failures.push(`expected 675 questions, found ${grandTotal}`);
 console.log(JSON.stringify({ papers: files.length, total: grandTotal, summary, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

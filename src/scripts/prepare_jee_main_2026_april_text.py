@@ -15,17 +15,18 @@ import pdfplumber
 
 
 ROOT = Path.cwd()
-SOURCE = ROOT / "tmp" / "jee-main-2026-april" / "source"
+SOURCE = ROOT / "tmp" / "jee-main-2026-april-input"
 OUTPUT = ROOT / "tmp" / "jee-main-2026-april" / "draft"
 PAPERS = [
-    ("paper-01.pdf", 2, 1),
-    ("paper-02.pdf", 2, 2),
-    ("paper-03.pdf", 4, 1),
-    ("paper-04.pdf", 4, 2),
-    ("paper-05.pdf", 5, 1),
-    ("paper-06.pdf", 6, 1),
-    ("paper-07.pdf", 6, 2),
-    ("paper-08.pdf", 8, 2),
+    ("JEE_Main_2026_02_April_Shift_1.pdf", 2, 1),
+    ("JEE_Main_2026_02_April_Shift_2.pdf", 2, 2),
+    ("JEE_Main_2026_04_April_Shift_1.pdf", 4, 1),
+    ("JEE_Main_2026_04_April_Shift_2.pdf", 4, 2),
+    ("JEE_Main_2026_05_April_Shift_1.pdf", 5, 1),
+    ("JEE_Main_2026_05_April_Shift_2.pdf", 5, 2),
+    ("JEE_Main_2026_06_April_Shift_1.pdf", 6, 1),
+    ("JEE_Main_2026_06_April_Shift_2.pdf", 6, 2),
+    ("JEE_Main_2026_08_April_Shift_2.pdf", 8, 2),
 ]
 
 HEADER_RE = re.compile(

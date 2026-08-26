@@ -14,18 +14,19 @@ from PIL import Image
 
 
 ROOT = Path.cwd()
-SOURCE = ROOT / "tmp" / "jee-main-2026-april" / "source"
+SOURCE = ROOT / "tmp" / "jee-main-2026-april-input"
 STRUCTURED = ROOT / "tmp" / "jee-main-2026-april" / "structured"
 VISUAL_ROOT = ROOT / "tmp" / "jee-main-2026-april" / "visuals"
 PAPERS = [
-    ("paper-01.pdf", "JEE-MAIN-26-02APR-S1"),
-    ("paper-02.pdf", "JEE-MAIN-26-02APR-S2"),
-    ("paper-03.pdf", "JEE-MAIN-26-04APR-S1"),
-    ("paper-04.pdf", "JEE-MAIN-26-04APR-S2"),
-    ("paper-05.pdf", "JEE-MAIN-26-05APR-S1"),
-    ("paper-06.pdf", "JEE-MAIN-26-06APR-S1"),
-    ("paper-07.pdf", "JEE-MAIN-26-06APR-S2"),
-    ("paper-08.pdf", "JEE-MAIN-26-08APR-S2"),
+    ("JEE_Main_2026_02_April_Shift_1.pdf", "JEE-MAIN-26-02APR-S1"),
+    ("JEE_Main_2026_02_April_Shift_2.pdf", "JEE-MAIN-26-02APR-S2"),
+    ("JEE_Main_2026_04_April_Shift_1.pdf", "JEE-MAIN-26-04APR-S1"),
+    ("JEE_Main_2026_04_April_Shift_2.pdf", "JEE-MAIN-26-04APR-S2"),
+    ("JEE_Main_2026_05_April_Shift_1.pdf", "JEE-MAIN-26-05APR-S1"),
+    ("JEE_Main_2026_05_April_Shift_2.pdf", "JEE-MAIN-26-05APR-S2"),
+    ("JEE_Main_2026_06_April_Shift_1.pdf", "JEE-MAIN-26-06APR-S1"),
+    ("JEE_Main_2026_06_April_Shift_2.pdf", "JEE-MAIN-26-06APR-S2"),
+    ("JEE_Main_2026_08_April_Shift_2.pdf", "JEE-MAIN-26-08APR-S2"),
 ]
 
 

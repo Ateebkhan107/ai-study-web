@@ -1,18 +1,16 @@
 import json
 import re
-import subprocess
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
 
+import fitz  # PyMuPDF
 import pdfplumber
 from PIL import Image, ImageChops
-
 
 ROOT = Path.cwd()
 TMP_ROOT = ROOT / "tmp" / "jee-main-2026-april-clean"
 ANSWER_KEY_PDF = TMP_ROOT / "jee-main-2026-session2-final-answer-key.pdf"
-PDFTOPPM = "/opt/homebrew/bin/pdftoppm"
 
 PAPERS = [
     {
@@ -90,7 +88,8 @@ def download_if_missing(url: str, destination: Path) -> Path:
         return destination
 
     ensure_dir(destination.parent)
-    with urllib.request.urlopen(url) as response:
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req) as response:
         destination.write_bytes(response.read())
     return destination
 
@@ -146,11 +145,14 @@ def tight_trim(image: Image.Image) -> Image.Image:
     )
 
 
+def extract_text_from_pdf(pdf_path: Path) -> str:
+    doc = fitz.open(pdf_path)
+    pages_text = [page.get_text() for page in doc]
+    return "\f".join(pages_text)
+
+
 def parse_preview_manifest(preview_pdf: Path):
-    text = subprocess.check_output(
-        ["/opt/homebrew/bin/pdftotext", str(preview_pdf), "-"],
-        text=True,
-    )
+    text = extract_text_from_pdf(preview_pdf)
     result = {}
     header_pattern = re.compile(
         r"(?:^|[\n\f])Question Number\s*:\s*(\d+)\s+Question Id\s*:\s*([0-9]+)\s+Question Type\s*:\s*(MCQ|SA)",
@@ -182,16 +184,13 @@ def parse_preview_manifest(preview_pdf: Path):
         result[number] = entry
 
     if sorted(result) != list(range(1, 76)):
-        raise RuntimeError("Preview parsing did not return exactly 75 questions")
+        raise RuntimeError(f"Preview parsing did not return exactly 75 questions (found {len(result)})")
 
     return result
 
 
 def parse_final_answer_key(answer_key_pdf: Path):
-    text = subprocess.check_output(
-        ["/opt/homebrew/bin/pdftotext", str(answer_key_pdf), "-"],
-        text=True,
-    )
+    text = extract_text_from_pdf(answer_key_pdf)
     answers_by_shift = {}
 
     for page in text.split("\f"):
@@ -358,15 +357,20 @@ def detect_question_anchors(page_words, page_width):
     return anchors
 
 
-def render_pages(source_pdf: Path, page_dir: Path):
+def render_pages_with_fitz(source_pdf: Path, page_dir: Path, dpi: int = 200):
     ensure_dir(page_dir)
-    if list(page_dir.glob("page-*.png")):
+    existing_pages = list(page_dir.glob("page-*.png"))
+    if existing_pages:
         return
 
-    subprocess.run(
-        [PDFTOPPM, "-png", "-r", "200", str(source_pdf), str(page_dir / "page")],
-        check=True,
-    )
+    doc = fitz.open(source_pdf)
+    zoom = dpi / 72.0
+    mat = fitz.Matrix(zoom, zoom)
+    for page_num in range(len(doc)):
+        page = doc[page_num]
+        pix = page.get_pixmap(matrix=mat, alpha=False)
+        out_path = page_dir / f"page-{page_num + 1:02}.png"
+        pix.save(str(out_path))
 
 
 def build_manifest(paper, answer_map):
@@ -378,7 +382,7 @@ def build_manifest(paper, answer_map):
     ensure_dir(crop_dir)
 
     download_if_missing(paper["preview_url"], preview_pdf)
-    render_pages(paper["actual_pdf"], page_dir)
+    render_pages_with_fitz(paper["actual_pdf"], page_dir)
 
     preview_manifest = parse_preview_manifest(preview_pdf)
     page_images = {
@@ -487,7 +491,7 @@ def build_manifest(paper, answer_map):
         raise RuntimeError(f"{code}: manifest numbering incomplete")
 
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
-    print(code)
+    print(f"Successfully processed {code} (75 questions cropped & mapped)")
 
 
 def main():

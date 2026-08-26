@@ -1,0 +1,33 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const file = path.join(process.cwd(), "tmp/jee-main-2025-january-clean/JEE-MAIN-25-22JAN-S1/structured-dataset.json");
+const rows = JSON.parse(await fs.readFile(file, "utf8"));
+const fixes = {
+  2: { question: "Let $a_1,a_2,a_3,\\ldots$ be a G.P. of increasing positive terms. If $a_1a_5=28$ and $a_2+a_4=29$, then $a_6$ is equal to:", option_a: "526", option_b: "812", option_c: "628", option_d: "784" },
+  3: { question: "If $\\displaystyle\\sum_{r=1}^{n}T_r=\\dfrac{(2n-1)(2n+1)(2n+3)(2n+5)}{64}$, then $\\displaystyle\\lim_{n\\to\\infty}\\sum_{r=1}^{n}\\dfrac1{T_r}$ is equal to:", option_a: "1", option_b: "$\\dfrac13$", option_c: "0", option_d: "$\\dfrac23$" },
+  7: { question: "Let $z_1,z_2,z_3$ be three complex numbers on the circle $|z|=1$ with $\\arg(z_1)=-\\dfrac{\\pi}{4}$, $\\arg(z_2)=0$ and $\\arg(z_3)=\\dfrac{\\pi}{4}$. If $|z_1\\overline{z_2}+z_2\\overline{z_3}+z_3\\overline{z_1}|^2=\\alpha+\\beta\\sqrt2$, $\\alpha,\\beta\\in\\mathbb Z$, then $\\alpha^2+\\beta^2$ is:", option_a: "24", option_b: "29", option_c: "31", option_d: "41" },
+  8: { question: "Let $L_1:\\dfrac{x-1}{2}=\\dfrac{y-2}{3}=\\dfrac{z-3}{4}$ and $L_2:\\dfrac{x-2}{3}=\\dfrac{y-4}{4}=\\dfrac{z-5}{5}$. Which point lies on the line of shortest distance between $L_1$ and $L_2$?", option_a: "$(2,3,\\tfrac13)$", option_b: "$(-\\tfrac53,-7,1)$", option_c: "$(\\tfrac{14}{3},-3,\\tfrac{22}{3})$", option_d: "$(\\tfrac83,-1,\\tfrac13)$" },
+  13: { question: "Let $f(x)=7\\tan^8x+7\\tan^6x-3\\tan^4x-3\\tan^2x$, $I_1=\\displaystyle\\int_0^{\\pi/4}f(x)\\,dx$ and $I_2=\\displaystyle\\int_0^{\\pi/4}xf(x)\\,dx$. Then $7I_1+12I_2$ is equal to:", option_a: "2", option_b: "$\\pi$", option_c: "1", option_d: "$2\\pi$" },
+  25: { question: "Let $L_1:\\dfrac{x-1}{3}=\\dfrac{y-1}{-1}=\\dfrac{z+1}{0}$ and $L_2:\\dfrac{x-2}{2}=\\dfrac{y}{0}=\\dfrac{z+4}{\\alpha}$, $\\alpha\\in\\mathbb R$, intersect at $B$. If $P$ is the foot of the perpendicular from $A(1,1,-1)$ to $L_2$, find $26\\alpha(PB)^2$." },
+  26: { question: "A line charge of length $a/2$ is kept at the centre of edge $BC$ of a cube of edge $a$, as shown. If its linear charge density is $\\lambda$, the total electric flux through all faces of the cube is:", option_a: "$\\dfrac{\\lambda a}{16\\varepsilon_0}$", option_b: "$\\dfrac{\\lambda a}{8\\varepsilon_0}$", option_c: "$\\dfrac{\\lambda a}{4\\varepsilon_0}$", option_d: "$\\dfrac{\\lambda a}{2\\varepsilon_0}$" },
+  32: { question: "If $B$ is magnetic field and $\\mu_0$ is the permeability of free space, then the dimensions of $B/\\mu_0$ are:", option_a: "$[LT^{-2}A^{-1}]$", option_b: "$[ML^2T^{-2}A^{-1}]$", option_c: "$[MT^{-2}A^{-1}]$", option_d: "$[L^{-1}A]$" },
+  36: { question: "A bob of mass $m$ is suspended from $O$ by a light string of length $l$ and performs vertical circular motion. It is projected horizontally at $A$ with speed $v_0$; the string becomes slack when the bob reaches $D$. The ratio of the kinetic energies at points $B$ and $C$ shown in the figure is:", option_a: "3", option_b: "4", option_c: "1", option_d: "2" },
+  37: { question: "In the shown arrangement of water $(\\mu=4/3)$, glass $(\\mu=3/2)$ and water $(\\mu=4/3)$, three thin lenses are formed with radii $|R_1|$ and $|R_2|$. The power of the combination is:", option_a: "$\\dfrac16\\left(\\dfrac1{|R_1|}+\\dfrac1{|R_2|}\\right)$", option_b: "$-\\dfrac16\\left(\\dfrac1{|R_1|}+\\dfrac1{|R_2|}\\right)$", option_c: "$\\dfrac16\\left(\\dfrac1{|R_1|}-\\dfrac1{|R_2|}\\right)$", option_d: "$-\\dfrac16\\left(\\dfrac1{|R_1|}-\\dfrac1{|R_2|}\\right)$" },
+  38: { question: "A point mass $m$ is at distance $2R$ from the centre $O$ of a uniform solid sphere of mass $M$ and radius $R$. Its gravitational force is $F_1$. A spherical cavity of radius $R/3$ is removed as shown, and the force due to the remaining part is $F_2$. The ratio $F_1:F_2$ is:", option_a: "$12:11$", option_b: "$16:9$", option_c: "$11:10$", option_d: "$12:9$" },
+  41: { question: "A closed organ pipe and an open organ pipe contain gases having the same bulk modulus but densities $\\rho_1$ and $\\rho_2$, respectively. The ninth harmonic of the closed pipe has the same frequency as the fourth harmonic of the open pipe. If the closed pipe is $10\\,\\mathrm{cm}$ long and $\\rho_1:\\rho_2=1:16$, the open-pipe length is:", option_a: "$\\dfrac{20}{7}\\,\\mathrm{cm}$", option_b: "$\\dfrac{15}{7}\\,\\mathrm{cm}$", option_c: "$\\dfrac{20}{9}\\,\\mathrm{cm}$", option_d: "$\\dfrac{15}{9}\\,\\mathrm{cm}$" },
+  48: { question: "A particle is projected at $30^\\circ$ above the horizontal with speed $60\\,\\mathrm{m\\,s^{-1}}$. The height traversed in the first second is $h_0$, and that traversed in the last second before reaching maximum height is $h_1$. Find $h_0:h_1$. Take $g=10\\,\\mathrm{m\\,s^{-2}}$." },
+  49: { question: "Two $1\\,\\mathrm{kg}$ particles have position vectors $\\vec r_A=(\\alpha_1t^2\\hat i+\\alpha_2t\\hat j+\\alpha_3t\\hat k)\\,\\mathrm m$ and $\\vec r_B=(\\beta_1t\\hat i+\\beta_2t^2\\hat j+\\beta_3t\\hat k)\\,\\mathrm m$, where $\\alpha_1=1\\,\\mathrm{m\\,s^{-2}}$, $\\alpha_2=3\\,\\mathrm{m\\,s^{-1}}$, $\\alpha_3=2\\,\\mathrm{m\\,s^{-1}}$, $\\beta_1=2\\,\\mathrm{m\\,s^{-1}}$, $\\beta_2=-1\\,\\mathrm{m\\,s^{-2}}$ and $\\beta_3=4p\\,\\mathrm{m\\,s^{-1}}$. At $t=1\\,\\mathrm s$, $|\\vec V_A|=|\\vec V_B|$ and $\\vec V_A\\perp\\vec V_B$. If the magnitude of angular momentum of $A$ about the position of $B$ is $\\sqrt L\\,\\mathrm{kg\\,m^2s^{-1}}$, find $L$." },
+  50: { question: "Three conductors of equal length and thermal conductivities $k_1,k_2,k_3$ are connected as shown. The first two have equal cross-sectional areas and the third has twice that area. With the indicated end temperatures, find the steady-state junction temperature $\\theta$ in $^\\circ\\mathrm C$. Given $k_1=60$, $k_2=120$ and $k_3=135\\,\\mathrm{J\\,s^{-1}m^{-1}K^{-1}}$." },
+  69: { question: "The radius of the first excited state of the helium ion is given in terms of $a_0$, the radius of the first stationary state of hydrogen, by:", option_a: "$r=4a_0$", option_b: "$r=2a_0$", option_c: "$r=\\dfrac{a_0}{4}$", option_d: "$r=\\dfrac{a_0}{2}$" },
+};
+
+for (const [number, values] of Object.entries(fixes)) Object.assign(rows[Number(number) - 1], values);
+for (const row of rows) {
+  for (const field of ["question", "option_a", "option_b", "option_c", "option_d"]) {
+    const text = String(row[field] ?? "");
+    if ((text.match(/\$/g) || []).length % 2) throw new Error(`Q${row.number}: unbalanced ${field}`);
+  }
+}
+await fs.writeFile(file, JSON.stringify(rows, null, 2) + "\n");
+console.log(JSON.stringify({ paperCode: "JEE-MAIN-25-22JAN-S1", repaired: Object.keys(fixes).map(Number) }, null, 2));

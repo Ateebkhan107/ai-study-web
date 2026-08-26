@@ -150,7 +150,7 @@ async function main() {
       explanation_image: null,
       question_image: imageUrl,
       marks_positive: 4,
-      marks_negative: isNumerical ? 0 : 1,
+      marks_negative: 1,
       status: "PUBLISHED",
     };
 

@@ -4,22 +4,112 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 
+// Helper to safely split text into math tokens ($$...$$ and $...$) and non-math text
+function splitMathSegments(text) {
+  if (!text) return [];
+  // Matches display math ($$...$$) or inline math ($...$)
+  const mathRegex = /(\$\$[\s\S]*?\$\$|\$[^\$]*?\$)/g;
+  return String(text).split(mathRegex);
+}
+
+function isMathSegment(segment) {
+  return (
+    (segment.startsWith("$$") && segment.endsWith("$$") && segment.length >= 4) ||
+    (segment.startsWith("$") && segment.endsWith("$") && segment.length >= 2)
+  );
+}
+
+function normalizeBlankPlaceholders(value) {
+  let text = String(value ?? "");
+
+  // 1. Clean up legacy \text{_____} patterns
+  text = text.replace(/\$\\text\{[_–—\.\s]+\}\\text\{([^}]+)\}\$/g, "_____ $\\text{$1}$");
+  text = text.replace(/\$\\text\{[_–—\.\s]+\}\$/g, "_____");
+  text = text.replace(/\\text\{[_–—\.\s]+\}/g, "_____");
+
+  // 2. Extract multiple underscores (fill-in blanks) trapped inside math mode to prevent KaTeX subscript parse errors
+  text = text.replace(/\$\s*_{2,}\s*(\\text\{[^\}]+\}(?:\^\{?[0-9a-zA-Z\-\+]+\}?)?)\s*\$/g, "_____ $$$1$$");
+  text = text.replace(/\$([^$]*?)=\s*_{2,}\s*\$/g, "$$$1=$$ _____");
+  text = text.replace(/\$\s*_{2,}\s*(\\[a-zA-Z]+[^\$]*)\$/g, "_____ $$$1$$");
+  text = text.replace(/\$\s*_{2,}\s*\$/g, "_____");
+
+  text = text.replace(/(\$\$[\s\S]*?\$\$|\$[^\$]*?\$)/g, (match) => {
+    if (/_{2,}/.test(match)) {
+      const isDisplay = match.startsWith("$$");
+      const inner = isDisplay ? match.slice(2, -2) : match.slice(1, -1);
+      const cleaned = inner.replace(/\s*_{2,}\s*/g, isDisplay ? "$$\n_____\n$$" : "$ _____ $");
+      return (isDisplay ? `$$${cleaned}$$` : `$${cleaned}$`).replace(/\$\s*\$/g, "");
+    }
+    return match;
+  });
+
+  return text;
+}
+
+function normalizeQuestionLayout(value) {
+  let text = String(value ?? "");
+
+  // Preserve display math ($$...$$)
+  const parts = text.split(/(\$\$[\s\S]*?\$\$)/g);
+  return parts
+    .map((part) => {
+      if (part.startsWith("$$") && part.endsWith("$$")) return part;
+
+      let s = part;
+      // Format statement prefixes to be on distinct new lines:
+      // "Statement I:", "Statement II:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):", "I.", "II.", "A.", "B.", "C.", "D."
+      s = s.replace(/([^\n])\s*\b(Statement\s*(?:I|II|1|2|A|B)\s*:?)/gi, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*\b(Assertion\s*(?:\(?[Aa]\)?)\s*:?)/gi, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*\b(Reason\s*(?:\(?[Rr]\)?)\s*:?)/gi, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*(\((?:S1|S2|s1|s2|I|II|III|IV)\)\s*:?)/g, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*\b((?:I|II|III|IV)\.\s+)/g, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*\b([A-D]\.\s+)/g, "$1\n\n$2");
+
+      // Format instructions on distinct lines
+      s = s.replace(/([^\n])\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
+      s = s.replace(/([^\n])\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
+
+      // Ensure paragraphs have proper line breaks while preserving markdown tables
+      const lines = s.split("\n");
+      let inTable = false;
+      const formattedLines = [];
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line.startsWith("|") && line.endsWith("|")) {
+          inTable = true;
+          formattedLines.push(line);
+        } else {
+          if (inTable) {
+            inTable = false;
+            formattedLines.push("");
+          }
+          formattedLines.push(line);
+          if (line && i < lines.length - 1 && lines[i + 1].trim() && !lines[i + 1].trim().startsWith("|")) {
+            formattedLines.push("");
+          }
+        }
+      }
+
+      return formattedLines.filter((l, idx, arr) => !(l === "" && arr[idx - 1] === "")).join("\n");
+    })
+    .join("");
+}
+
 function normalizeFlattenedTables(value) {
   let text = String(value ?? "");
 
-  // The Wiley source uses U+20D7 COMBINING RIGHT ARROW ABOVE for vectors.
-  // Most browser UI fonts render that combining mark as a missing-glyph box
-  // (for example `A□`). Convert it to KaTeX vector notation. Existing math
-  // spans keep their delimiters; prose receives a small inline-math span.
-  text = text
-    .split(/(\$[^$]*\$)/g)
+  // Convert U+20D7 COMBINING RIGHT ARROW ABOVE for vectors outside math
+  text = splitMathSegments(text)
     .map((segment) => {
       if (!segment.includes("\u20d7")) return segment;
-      if (segment.startsWith("$") && segment.endsWith("$")) {
-        return `$${segment.slice(1, -1).replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
+      if (isMathSegment(segment)) {
+        const isDisplay = segment.startsWith("$$");
+        const inner = isDisplay ? segment.slice(2, -2) : segment.slice(1, -1);
+        const replaced = inner.replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
           const digits = subscript.replace(/[₀-₉]/g, (digit) => "₀₁₂₃₄₅₆₇₈₉".indexOf(digit));
           return `\\vec{${letter}}${digits ? `_{${digits}}` : ""}`;
-        })}$`;
+        });
+        return isDisplay ? `$$${replaced}$$` : `$${replaced}$`;
       }
       return segment.replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
         const digits = subscript.replace(/[₀-₉]/g, (digit) => "₀₁₂₃₄₅₆₇₈₉".indexOf(digit));
@@ -28,11 +118,7 @@ function normalizeFlattenedTables(value) {
     })
     .join("");
 
-  // Some imported matching questions contain a valid Markdown table whose
-  // line breaks were flattened by PDF extraction, for example:
-  // `| List I | List II | |---|---| | (a) ... | (i) ... |`.
-  // Restore only these explicit row boundaries; a single pipe may be part of
-  // mathematical notation and must remain untouched.
+  // Restore markdown table boundaries if flattened by PDF extraction
   if (/\|\s*List[\s-]*I\s*\|\s*List[\s-]*II\s*\|/i.test(text)) {
     text = text
       .replace(/\s*\|\s*(List[\s-]*I\s*\|\s*List[\s-]*II\s*\|)/i, "\n\n| $1")
@@ -48,21 +134,25 @@ function normalizeLegacyScientificNotation(value) {
     "α": "\\alpha", "β": "\\beta", "λ": "\\lambda", "ρ": "\\rho",
   };
 
-  return String(value ?? "")
-    .split(/(\$[^$]*\$)/g)
+  return splitMathSegments(value)
     .map((segment) => {
-      if (segment.startsWith("$") && segment.endsWith("$")) return segment;
+      // PRESERVE ALL MATH SEGMENTS EXACTLY AS THEY ARE
+      if (isMathSegment(segment)) return segment;
+
       let text = segment;
-      // PDF text layers commonly flatten superscripts on lowercase algebraic
-      // variables (for example x3, r2, t10). Restore those as real KaTeX
-      // powers without touching uppercase chemical formulae such as H2O.
+      // Only apply substitutions to genuine non-math prose
       text = text.replace(/\b([a-z])\s*([2-9]|\d{2,3})\b/g, (_, variable, power) => `$${variable}^{${power}}$`);
       text = text.replace(/\b([a-z])_([0-9]+)\b/g, (_, variable, subscript) => `$${variable}_{${subscript}}$`);
       text = text.replace(/\bd([1-6])sp([1-6])\b/gi, (_, first, second) => `$d^{${first}}sp^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])d([1-6])\b/gi, (_, prefix, first, second) => `$${prefix}^{${first}}d^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])\b/gi, (_, prefix, power) => `$${prefix}^{${power}}$`);
       text = text.replace(/\b(XeF|XeO|XeOF|H|O|N|CO|SO|NO|NH|CH|CrO|FADH)\s*([2-9])\b/g, (_, formula, subscript) => `$\\mathrm{${formula}_${subscript}}$`);
-      text = text.replace(/10\s*[-−]\s*([1-9]\d*)/g, (_, power) => `$10^{-${power}}$`);
+      // Only match 10^-N when explicitly formatted as exponent (e.g. 10^-3 or 10⁻³), never ranges like "10 - 15"
+      text = text.replace(/\b10\s*\^\s*[-−]?\s*([1-9]\d*)\b/g, (_, power) => `$10^{-${power}}$`);
+      text = text.replace(/\b10[⁻]([¹²³⁴⁵⁶⁷⁸⁹0-9]+)\b/g, (_, p) => {
+        const digits = p.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(d));
+        return `$10^{-${digits}}$`;
+      });
       text = text.replace(/√\s*([A-Za-z0-9]+)/g, (_, radicand) => `$\\sqrt{${radicand}}$`);
       for (const [symbol, latex] of Object.entries(symbols)) text = text.replaceAll(symbol, `$${latex}$`);
       return text;
@@ -71,13 +161,21 @@ function normalizeLegacyScientificNotation(value) {
 }
 
 export default function MathText({ children, className = "" }) {
+  const preparedText = normalizeQuestionLayout(
+    normalizeLegacyScientificNotation(
+      normalizeFlattenedTables(normalizeBlankPlaceholders(children))
+    )
+  );
+
   return (
     <div className={`min-w-0 max-w-full overflow-wrap-anywhere ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[[rehypeKatex, { strict: false, throwOnError: false }]]}
         components={{
-          p: ({ children: content }) => <span>{content}</span>,
+          p: ({ children: content }) => (
+            <p className="mb-2.5 last:mb-0 leading-relaxed block text-inherit">{content}</p>
+          ),
           table: ({ children: content }) => (
             <div className="my-5 w-full overflow-x-auto rounded-2xl border border-slate-200 dark:border-[var(--border)]">
               <table className="w-full min-w-[32rem] border-collapse text-left text-sm sm:text-base">
@@ -105,14 +203,14 @@ export default function MathText({ children, className = "" }) {
             <td className="px-4 py-3 align-top leading-relaxed">{content}</td>
           ),
           ul: ({ children: content }) => (
-            <ul className="my-3 list-disc space-y-1 pl-6">{content}</ul>
+            <ul className="my-3 list-disc space-y-1.5 pl-6">{content}</ul>
           ),
           ol: ({ children: content }) => (
-            <ol className="my-3 list-decimal space-y-1 pl-6">{content}</ol>
+            <ol className="my-3 list-decimal space-y-1.5 pl-6">{content}</ol>
           ),
         }}
       >
-        {normalizeLegacyScientificNotation(normalizeFlattenedTables(children))}
+        {preparedText}
       </ReactMarkdown>
     </div>
   );
