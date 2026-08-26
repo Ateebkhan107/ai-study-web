@@ -48,9 +48,14 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
   }
 
   return (
-    <div className="glass-card p-6 md:p-8 max-w-lg mx-auto">
+    <div className="mx-auto max-w-lg rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] md:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Create Study Group</h2>
+        <div>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Create Study Group</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Start a focused space for doubts, revision, or mock-test planning.
+          </p>
+        </div>
         {onCancel && (
           <button
             onClick={onCancel}
@@ -61,8 +66,8 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
         )}
       </div>
 
-      <div className="mb-4 px-3 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20">
-        <p className="flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+      <div className="mb-5 rounded-lg border border-brand/30 bg-brand/10 px-3 py-2">
+        <p className="flex items-center gap-2 text-xs font-semibold text-amber-700 dark:text-brand">
           <BookOpen className="h-4 w-4 shrink-0" />
           <span>This group will be in the <span className="uppercase">{examTrack}</span> community</span>
         </p>
@@ -81,7 +86,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
             maxLength={60}
             placeholder="e.g. JEE Physics Mastery"
             required
-            className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-brand/60 focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white"
           />
           <p className="mt-1 text-xs text-slate-400">{name.length}/60</p>
         </div>
@@ -97,7 +102,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
             maxLength={300}
             rows={3}
             placeholder="What is this group about?"
-            className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+            className="w-full resize-none rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-brand/60 focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white"
           />
           <p className="mt-1 text-xs text-slate-400">{description.length}/300</p>
         </div>
@@ -116,10 +121,10 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
                 key={opt.value}
                 type="button"
                 onClick={() => setPrivacy(opt.value)}
-                className={`p-3 rounded-xl border text-left transition-all ${
+                className={`rounded-lg border p-3 text-left transition-colors ${
                   privacy === opt.value
-                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10"
-                    : "border-slate-200 dark:border-[var(--border)] hover:border-indigo-300"
+                    ? "border-brand/60 bg-brand/10"
+                    : "border-slate-200 hover:border-brand/40 dark:border-[var(--border)]"
                 }`}
               >
                 <p className="font-semibold text-sm text-slate-900 dark:text-white">{opt.label}</p>
@@ -139,7 +144,7 @@ export default function CreateGroupForm({ examTrack, onSuccess, onCancel }) {
           type="submit"
           disabled={isSubmitting}
           id="create-group-submit"
-          className="w-full py-3 rounded-xl bg-brand text-white font-bold text-sm shadow-lg shadow-brand/20 hover:shadow-brand/30 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand py-3 text-sm font-bold text-black transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? (
             <>

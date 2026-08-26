@@ -12,7 +12,7 @@ import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 import MathText from "@/components/MathText";
 import QuestionDiagram from "@/components/pyq/QuestionDiagram";
 import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
-import { AlertTriangle, BookOpen, FileText, Inbox, RotateCcw, Shuffle } from "lucide-react";
+import { AlertTriangle, BookOpen, FileText, Flag, Inbox, RotateCcw, Shuffle } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -54,7 +54,17 @@ const PALETTE_LEGEND = [
   {
     key: "current",
     label: "Current",
-    className: "bg-indigo-600 border-indigo-600 text-white",
+    className: "bg-brand border-brand text-slate-950",
+  },
+  {
+    key: "marked",
+    label: "Marked",
+    className: "bg-violet-100 border-violet-300 text-violet-700",
+  },
+  {
+    key: "answeredMarked",
+    label: "Answered + Marked",
+    className: "bg-violet-600 border-violet-600 text-white",
   },
   {
     key: "visited",
@@ -76,12 +86,19 @@ const PaletteButton = memo(function PaletteButton({
   isActive,
   isAnswered,
   isVisited,
+  isMarked,
   onClick,
 }) {
   let stateClassName =
     "border-slate-200 bg-[var(--card)] text-slate-500 hover:border-slate-300 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-slate-400";
 
-  if (isAnswered) {
+  if (isAnswered && isMarked) {
+    stateClassName =
+      "border-violet-600 bg-violet-600 text-white shadow-sm shadow-violet-600/20";
+  } else if (isMarked) {
+    stateClassName =
+      "border-violet-300 bg-violet-50 text-violet-700 shadow-sm shadow-violet-500/10 dark:border-violet-500/50 dark:bg-violet-500/10 dark:text-violet-300";
+  } else if (isAnswered) {
     stateClassName =
       "border-emerald-600 bg-emerald-600 text-white shadow-sm shadow-emerald-600/20";
   } else if (isVisited) {
@@ -91,7 +108,7 @@ const PaletteButton = memo(function PaletteButton({
 
   if (isActive) {
     stateClassName =
-      "border-indigo-600 bg-indigo-600 text-white shadow-sm shadow-indigo-600/25 ring-2 ring-indigo-200 dark:ring-indigo-500/30";
+      "border-brand bg-brand text-slate-950 shadow-sm shadow-brand/25 ring-2 ring-brand/20";
   }
 
   return (
@@ -109,6 +126,7 @@ const QuestionPalette = memo(function QuestionPalette({
   answers,
   currentIndex,
   visitedQuestionIds,
+  markedQuestionIds,
   mode,
   onSelectQuestion,
 }) {
@@ -128,6 +146,7 @@ const QuestionPalette = memo(function QuestionPalette({
           const answer = answers[q.id];
           const isAnswered = answer !== undefined && answer !== null && String(answer).trim() !== "";
           const isVisited = visitedQuestionIds.has(q.id);
+          const isMarked = markedQuestionIds.has(q.id);
 
           return (
             <PaletteButton
@@ -136,6 +155,7 @@ const QuestionPalette = memo(function QuestionPalette({
               isActive={currentIndex === idx}
               isAnswered={isAnswered}
               isVisited={isVisited}
+              isMarked={isMarked}
               onClick={() => onSelectQuestion(idx)}
             />
           );
@@ -213,6 +233,7 @@ export default function PYQSessionPage() {
   const [finishing, setFinishing] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [visitedQuestionIds, setVisitedQuestionIds] = useState(() => new Set());
+  const [markedQuestionIds, setMarkedQuestionIds] = useState(() => new Set());
   
   // Timer state for Full Paper mode (180 mins = 10800 secs)
   const [timeLeft, setTimeLeft] = useState(180 * 60);
@@ -235,6 +256,21 @@ export default function PYQSessionPage() {
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
+  const reviewStorageKey = useMemo(
+    () => [
+      "pyq_marked_for_review",
+      exam,
+      mode,
+      subjectsParam || "all-subjects",
+      yearsParam || "all-years",
+      chapter || "all-chapters",
+      examType || "all-types",
+      attempt || "all-attempts",
+      shift || "all-shifts",
+      examId || "no-exam-id",
+    ].join(":"),
+    [attempt, chapter, exam, examId, examType, mode, shift, subjectsParam, yearsParam]
+  );
   const modeMeta = modeLabels[mode] || modeLabels.full;
   const ModeIcon = modeMeta.Icon;
   const shouldLoadWholePaper = mode === "full";
@@ -341,6 +377,19 @@ export default function PYQSessionPage() {
         setCurrentIndex(0);
         setAnswers({});
         setVisitedQuestionIds(new Set(combined[0]?.id ? [combined[0].id] : []));
+        if (typeof window !== "undefined") {
+          try {
+            const stored = JSON.parse(sessionStorage.getItem(reviewStorageKey) || "[]");
+            const validIds = new Set(combined.map((q) => q.id));
+            setMarkedQuestionIds(
+              new Set(Array.isArray(stored) ? stored.filter((id) => validIds.has(id)) : [])
+            );
+          } catch {
+            setMarkedQuestionIds(new Set());
+          }
+        } else {
+          setMarkedQuestionIds(new Set());
+        }
       } catch (error) {
         console.error("Failed to load PYQ session:", error);
         setLoadError("Failed to load questions. Please try again.");
@@ -352,7 +401,7 @@ export default function PYQSessionPage() {
     loadPYQ();
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper, shouldLoadBalancedRandom]);
+  }, [subjectsParam, yearsParam, mode, chapter, exam, user?.id, examType, attempt, shift, examId, shouldLoadWholePaper, shouldLoadBalancedRandom, reviewStorageKey]);
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
@@ -367,6 +416,12 @@ export default function PYQSessionPage() {
     [answers]
   );
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
+  const currentQuestionMarked = currentQuestion ? markedQuestionIds.has(currentQuestion.id) : false;
+
+  useEffect(() => {
+    if (typeof window === "undefined" || questions.length === 0) return;
+    sessionStorage.setItem(reviewStorageKey, JSON.stringify(Array.from(markedQuestionIds)));
+  }, [markedQuestionIds, questions.length, reviewStorageKey]);
 
   const markVisitedByIndex = useCallback((index) => {
     const questionId = questions[index]?.id;
@@ -436,6 +491,26 @@ export default function PYQSessionPage() {
     setCurrentIndex(index);
     setPaletteOpen(false);
   }, [markVisitedByIndex]);
+
+  const toggleCurrentMarkedForReview = useCallback(() => {
+    if (!currentQuestion) return;
+    setMarkedQuestionIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(currentQuestion.id)) next.delete(currentQuestion.id);
+      else next.add(currentQuestion.id);
+      return next;
+    });
+  }, [currentQuestion]);
+
+  const handleMarkForReviewAndNext = useCallback(() => {
+    if (!currentQuestion) return;
+    setMarkedQuestionIds((prev) => {
+      const next = new Set(prev);
+      next.add(currentQuestion.id);
+      return next;
+    });
+    handleNext();
+  }, [currentQuestion, handleNext]);
 
   async function handleFinishDeck() {
     if (questions.length === 0 || finishing) return;
@@ -520,6 +595,7 @@ export default function PYQSessionPage() {
 
     if (typeof window !== "undefined") {
       sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));
+      sessionStorage.removeItem(reviewStorageKey);
     }
 
     const resultParams = new URLSearchParams();
@@ -656,6 +732,7 @@ export default function PYQSessionPage() {
               answers={answers}
               currentIndex={currentIndex}
               visitedQuestionIds={visitedQuestionIds}
+              markedQuestionIds={markedQuestionIds}
               mode={mode}
               onSelectQuestion={handleSelectQuestion}
             />
@@ -681,6 +758,23 @@ export default function PYQSessionPage() {
                 )}
               </div>
               <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={toggleCurrentMarkedForReview}
+                  className={`inline-flex min-h-9 items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors ${
+                    currentQuestionMarked
+                      ? "border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300"
+                      : "border-slate-200 bg-[var(--card)] text-slate-600 hover:border-violet-300 hover:text-violet-700 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/30 dark:text-slate-300 dark:hover:border-violet-500/40 dark:hover:text-violet-300"
+                  }`}
+                >
+                  <Flag className="h-4 w-4" />
+                  <span className="hidden sm:inline">
+                    {currentQuestionMarked ? "Marked for Review" : "Mark for Review"}
+                  </span>
+                  <span className="sm:hidden">
+                    Review
+                  </span>
+                </button>
                 <button
                   onClick={async () => {
                     if (!user?.id) return;
@@ -819,6 +913,14 @@ export default function PYQSessionPage() {
               ← Previous
             </button>
             <button
+              type="button"
+              onClick={handleMarkForReviewAndNext}
+              className="min-h-11 flex-1 rounded-lg border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 transition-all duration-300 hover:border-violet-300 hover:bg-violet-100 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 dark:hover:bg-violet-500/15 sm:flex-none"
+            >
+              <span className="hidden sm:inline">Mark for Review & Next</span>
+              <span className="sm:hidden">Review & Next</span>
+            </button>
+            <button
               onClick={handleNext}
               disabled={currentIndex === questions.length - 1}
               className="min-h-11 flex-1 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none"
@@ -844,6 +946,7 @@ export default function PYQSessionPage() {
               answers={answers}
               currentIndex={currentIndex}
               visitedQuestionIds={visitedQuestionIds}
+              markedQuestionIds={markedQuestionIds}
               mode={mode}
               onSelectQuestion={handleSelectQuestion}
             />

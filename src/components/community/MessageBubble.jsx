@@ -43,30 +43,35 @@ export default function MessageBubble({ message, currentUserId, context, context
   const isDeleted = deleted || message.is_deleted;
 
   return (
-    <div className={`group flex gap-2 ${isOwn ? "justify-end" : "justify-start"}`}>
+    <div className={`group flex gap-2 py-1 ${isOwn ? "justify-end" : "justify-start"}`}>
       {/* Avatar placeholder */}
       {!isOwn && (
-        <div className="mt-5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-brand-hover text-xs font-bold text-white">
+        <div className="mt-5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-xs font-black text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300">
           {(message.senderName || "?")[0]?.toUpperCase()}
         </div>
       )}
 
-      <div className={`flex max-w-[82%] flex-col sm:max-w-[70%] ${isOwn ? "items-end" : "items-start"}`}>
+      <div className={`flex max-w-[86%] flex-col sm:max-w-[72%] ${isOwn ? "items-end" : "items-start"}`}>
         {/* Sender + time */}
         {!isOwn && (
-          <span className="mb-1 px-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-            {message.senderName || "Unknown"}
-          </span>
+          <div className="mb-1 flex items-center gap-2 px-1">
+            <span className="text-[11px] font-bold text-slate-600 dark:text-slate-300">
+              {message.senderName || "Unknown"}
+            </span>
+            <span className="text-[11px] text-slate-400 dark:text-slate-500">
+              {formatTime(message.created_at)}
+            </span>
+          </div>
         )}
 
         {/* Bubble */}
         <div
-          className={`rounded-2xl px-3.5 py-2 text-sm leading-relaxed shadow-sm ${
+          className={`rounded-xl px-3.5 py-2 text-sm leading-relaxed shadow-sm ${
             isOwn
-              ? "rounded-br-md bg-indigo-600 text-white"
+              ? "rounded-br-sm border border-brand/30 bg-brand/10 text-slate-900 dark:bg-[var(--surface-elevated)] dark:text-white"
               : isDeleted
-              ? "rounded-bl-md bg-slate-100 text-slate-400 italic dark:bg-[var(--surface-elevated)] dark:text-slate-500"
-              : "rounded-bl-md border border-slate-100 bg-[var(--card)] text-slate-900 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
+              ? "rounded-bl-sm bg-slate-100 text-slate-400 italic dark:bg-[var(--surface-elevated)] dark:text-slate-500"
+              : "rounded-bl-sm border border-slate-200 bg-white text-slate-900 dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-white"
           } ${message.optimistic ? "opacity-70" : "opacity-100"}`}
         >
           {/* IMPORTANT: Plain text rendering — never dangerouslySetInnerHTML */}
@@ -74,10 +79,12 @@ export default function MessageBubble({ message, currentUserId, context, context
         </div>
 
         {/* Time + actions */}
-        <div className={`flex items-center gap-2 mt-1 ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
-          <span className="px-1 text-[11px] text-slate-400 dark:text-slate-500">
-            {formatTime(message.created_at)}
-          </span>
+        <div className={`mt-1 flex items-center gap-2 ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
+          {isOwn && (
+            <span className="px-1 text-[11px] text-slate-400 dark:text-slate-500">
+              {formatTime(message.created_at)}
+            </span>
+          )}
 
           {!isDeleted && (
             <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">

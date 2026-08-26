@@ -44,6 +44,14 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
+  const [editUsername, setEditUsername] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState({
+    checking: false,
+    valid: false,
+    available: false,
+    message: "",
+  });
+  const [profileError, setProfileError] = useState("");
   const [editExam, setEditExam] = useState("JEE");
   const [editYear, setEditYear] = useState(2026);
   const [saved, setSaved] = useState(false);
@@ -68,6 +76,7 @@ export default function ProfilePage() {
           });
           setRank(data.rank ?? null);
           setEditName(data.full_name || clerkUser?.fullName || "Student");
+          setEditUsername(data.username || "");
           setEditExam(data.current_track?.toUpperCase() || "JEE");
           setEditYear(data.target_year || 2026);
         }
@@ -79,6 +88,80 @@ export default function ProfilePage() {
     }
     fetchLiveProfile();
   }, [clerkUser]);
+
+  useEffect(() => {
+    const username = editUsername.trim().toLowerCase();
+    const currentUsername = String(user?.username || "").toLowerCase();
+    const controller = new AbortController();
+
+    async function checkUsername() {
+      if (!username) {
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: "Choose a username.",
+        });
+        return;
+      }
+
+      if (!/^[a-z0-9_]{3,20}$/.test(username)) {
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: "Use 3-20 lowercase letters, numbers, or underscores.",
+        });
+        return;
+      }
+
+      if (username === currentUsername) {
+        setUsernameStatus({
+          checking: false,
+          valid: true,
+          available: true,
+          message: "Current username",
+        });
+        return;
+      }
+
+      setUsernameStatus({
+        checking: true,
+        valid: true,
+        available: false,
+        message: "Checking availability...",
+      });
+
+      try {
+        const response = await fetch(`/api/username/availability?username=${encodeURIComponent(username)}`, {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Unable to check username.");
+        setUsernameStatus({
+          checking: false,
+          valid: Boolean(data.valid),
+          available: Boolean(data.available),
+          message: data.available ? "Available" : data.error || "Already taken.",
+        });
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: error.message || "Unable to check username right now.",
+        });
+      }
+    }
+
+    const timeout = setTimeout(checkUsername, 300);
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, [editUsername, user?.username]);
 
   // LOAD XP PROFILE & ANALYTICS
   useEffect(() => {
@@ -132,30 +215,48 @@ export default function ProfilePage() {
 
   // SAVE PROFILE (from edit modal)
   const handleSave = async () => {
-    setUser((prev) => ({
-      ...prev,
-      full_name: editName,
-      current_track: editExam.toLowerCase(),
-      target_year: editYear,
-    }));
+    const normalizedUsername = editUsername.trim().toLowerCase();
+    setProfileError("");
+
+    if (!usernameStatus.available) {
+      setProfileError("Choose an available username before saving.");
+      return;
+    }
 
     document.cookie = `prepzii_track=${editExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
 
-    setEditing(false);
-    setSaved(true);
-
     try {
-      await fetch("/api/profile/update", {
+      const response = await fetch("/api/profile/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           full_name: editName,
+          username: normalizedUsername,
           current_track: editExam.toLowerCase(),
           target_year: editYear,
         }),
       });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setProfileError(data.error || "Unable to save profile.");
+        return;
+      }
+
+      const data = await response.json();
+      setUser((prev) => ({
+        ...prev,
+        ...data,
+        full_name: editName,
+        username: normalizedUsername,
+        current_track: editExam.toLowerCase(),
+        target_year: editYear,
+      }));
+      setEditing(false);
+      setSaved(true);
     } catch (err) {
       console.error(err);
+      setProfileError("Unable to save profile.");
     }
 
     setTimeout(() => setSaved(false), 2500);
@@ -176,6 +277,7 @@ export default function ProfilePage() {
 
   const activeUser = {
     name: user?.full_name || clerkUser?.fullName || "Student",
+    username: user?.username || "",
     email: clerkUser?.primaryEmailAddress?.emailAddress || "No email",
     avatar: clerkUser?.hasImage ? clerkUser.imageUrl : null,
     exam: user?.current_track?.toUpperCase() || "JEE",
@@ -230,6 +332,9 @@ export default function ProfilePage() {
                     <h2 className="mt-1 break-words text-2xl font-semibold tracking-normal text-slate-950 dark:text-white sm:text-3xl">
                       {activeUser.name}
                     </h2>
+                    <p className="mt-1 truncate text-sm font-semibold text-amber-700 dark:text-brand">
+                      {activeUser.username ? `@${activeUser.username}` : "Username not set"}
+                    </p>
                     <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
                       {activeUser.exam} aspirant for {activeUser.targetYear} · Level {levelStats.currentLevel} · {levelStats.title}
                     </p>
@@ -241,7 +346,10 @@ export default function ProfilePage() {
 
                 <button
                   type="button"
-                  onClick={() => setEditing(true)}
+                  onClick={() => {
+                    setProfileError("");
+                    setEditing(true);
+                  }}
                   className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-brand/50 hover:text-slate-950 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 dark:hover:text-white sm:w-auto"
                 >
                   <Pencil className="h-4 w-4" /> Edit Profile
@@ -278,6 +386,30 @@ export default function ProfilePage() {
               </div>
             </div>
           </section>
+
+          {/* ── PROGRESS ── */}
+          {!activeUser.username && (
+            <section className="animate-slideUp" style={{ animationDelay: "125ms" }}>
+              <div className="rounded-xl border border-brand/30 bg-brand/10 p-4 shadow-sm">
+                <p className="text-sm font-semibold text-slate-950 dark:text-white">
+                  Choose your PrepZii username
+                </p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  You&apos;ll need a unique @username for Battle Arena and student search.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProfileError("");
+                    setEditing(true);
+                  }}
+                  className="mt-3 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover"
+                >
+                  Choose Username
+                </button>
+              </div>
+            </section>
+          )}
 
           {/* ── PROGRESS ── */}
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
@@ -400,7 +532,10 @@ export default function ProfilePage() {
             <div className="mt-5 divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
               <button
                 type="button"
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                  setProfileError("");
+                  setEditing(true);
+                }}
                 className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
               >
                 <span className="inline-flex items-center gap-3">
@@ -411,7 +546,10 @@ export default function ProfilePage() {
               </button>
               <button
                 type="button"
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                  setProfileError("");
+                  setEditing(true);
+                }}
                 className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
               >
                 <span className="inline-flex items-center gap-3">
@@ -468,7 +606,7 @@ export default function ProfilePage() {
               Edit Profile
             </h3>
             <p className="mb-5 mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Update your visible name, active exam track, and target year.
+              Update your visible name, username, active exam track, and target year.
             </p>
 
             <div className="space-y-2">
@@ -481,6 +619,37 @@ export default function ProfilePage() {
                 onChange={(e) => setEditName(e.target.value)}
                 className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-brand focus:outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
               />
+            </div>
+
+            <div className="mt-4 space-y-2">
+              <label className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+                Username
+              </label>
+              <div className="relative">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+                  @
+                </span>
+                <input
+                  type="text"
+                  value={editUsername}
+                  onChange={(e) => setEditUsername(e.target.value.toLowerCase())}
+                  minLength={3}
+                  maxLength={20}
+                  pattern="[a-z0-9_]{3,20}"
+                  className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 pl-8 text-sm text-slate-900 focus:border-brand focus:outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
+                />
+              </div>
+              <p
+                className={`text-xs font-semibold ${
+                  usernameStatus.available
+                    ? "text-emerald-600 dark:text-emerald-400"
+                    : usernameStatus.checking
+                      ? "text-slate-400"
+                      : "text-amber-600 dark:text-amber-300"
+                }`}
+              >
+                {usernameStatus.message}
+              </p>
             </div>
 
             <div className="mt-4 space-y-2">
@@ -522,6 +691,12 @@ export default function ProfilePage() {
               </select>
             </div>
 
+            {profileError && (
+              <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
+                {profileError}
+              </p>
+            )}
+
             <div className="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-4 dark:border-[var(--border-subtle)]">
               <button
                 type="button"
@@ -533,7 +708,8 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleSave}
-                className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover"
+                disabled={!usernameStatus.available}
+                className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Save
               </button>

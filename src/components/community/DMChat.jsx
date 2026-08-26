@@ -118,8 +118,8 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
             table: "community_direct_messages",
             filter: `conversation_id=eq.${conversationId}`,
           },
-          (payload) => {
-            const newMsg = payload.new;
+          (event) => {
+            const newMsg = event?.payload?.new;
             if (!newMsg?.id || newMsg.sender_id === currentUserId) return;
             hydrateRealtimeMessage(newMsg.id).catch((err) => {
               console.warn("[DM_CHAT_REALTIME_HYDRATE]", err);
@@ -140,15 +140,16 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
             });
           }
         )
-        .on("broadcast", { event: "message_created" }, ({ payload }) => {
+        .on("broadcast", { event: "message_created" }, (event) => {
+          const payload = event?.payload;
           if (payload?.senderId !== currentUserId) {
             hydrateRealtimeMessage(payload?.messageId).catch((err) => {
               console.warn("[DM_CHAT_BROADCAST_HYDRATE]", err);
             });
           }
         })
-        .on("broadcast", { event: "typing" }, ({ payload }) => {
-          receiveTyping(payload);
+        .on("broadcast", { event: "typing" }, (event) => {
+          receiveTyping(event?.payload);
         })
         .subscribe((status, subscribeError) => {
           if (cancelled) return;

@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { CheckCircle2, Circle, Zap } from "lucide-react";
+
+const ROADMAP_VIEWBOX = { width: 360, height: 112 };
+const ROADMAP_PATH = "M 16 56 C 72 18, 116 18, 172 56 S 272 94, 344 56";
 
 export default function DailyGoals({ compact = false }) {
   const { user } = useUser();
   const pathname = usePathname();
 
   const [goals, setGoals] = useState([]);
+  const roadmapPathRef = useRef(null);
+  const [roadmapMetrics, setRoadmapMetrics] = useState({ totalLength: 0, points: [] });
 
   // =============================
   // LOAD DAILY GOALS
@@ -48,13 +53,36 @@ export default function DailyGoals({ compact = false }) {
 
   const completed = goals.filter((g) => g.completed).length;
   const nextGoal = goals.find((goal) => !goal.completed);
+  const activeGoalIndex = nextGoal
+    ? Math.max(0, goals.findIndex((goal) => goal.id === nextGoal.id))
+    : Math.max(0, goals.length - 1);
 
   const percentage = goals.length
     ? (completed / goals.length) * 100
     : 0;
-  const activePathWidth = goals.length > 1
-    ? (Math.min(completed, goals.length - 1) / (goals.length - 1)) * 100
+  const activePathLength = roadmapMetrics.points[activeGoalIndex]?.length || 0;
+  const activePathWidth = roadmapMetrics.totalLength
+    ? (activePathLength / roadmapMetrics.totalLength) * 100
     : percentage;
+
+  useEffect(() => {
+    const path = roadmapPathRef.current;
+    if (!path || goals.length === 0) {
+      setRoadmapMetrics({ totalLength: 0, points: [] });
+      return;
+    }
+
+    const totalLength = path.getTotalLength();
+    const points = Array.from({ length: goals.length }, (_, index) => {
+      const length = goals.length === 1
+        ? totalLength / 2
+        : (index / (goals.length - 1)) * totalLength;
+      const point = path.getPointAtLength(length);
+      return { x: point.x, y: point.y, length };
+    });
+
+    setRoadmapMetrics({ totalLength, points });
+  }, [goals.length]);
 
   return (
     <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200/80 bg-[var(--card)] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] ${
@@ -103,12 +131,6 @@ export default function DailyGoals({ compact = false }) {
           </p>
         )}
 
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-          <div
-            className="h-full rounded-full bg-brand transition-all duration-700 ease-out"
-            style={{ width: `${percentage}%` }}
-          />
-        </div>
       </div>
 
       <div className="relative z-10 mt-4">
@@ -118,45 +140,86 @@ export default function DailyGoals({ compact = false }) {
           </p>
         ) : (
           <>
-            <div className="relative px-1.5">
-              <div className="absolute left-4 right-4 top-3 h-0.5 overflow-hidden rounded-full bg-slate-200 dark:bg-[var(--border)]">
-                <div
-                  className="h-full rounded-full bg-emerald-500 transition-all duration-700 ease-out"
-                  style={{ width: `${activePathWidth}%` }}
-                />
-              </div>
+            <div className="relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2">
+              <div className="relative min-h-[10.5rem]" style={{ minWidth: `${Math.max(420, goals.length * 112)}px` }}>
+                {goals.length > 1 && (
+                  <svg
+                    className="absolute left-0 top-0 h-28 w-full overflow-visible"
+                    viewBox={`0 0 ${ROADMAP_VIEWBOX.width} ${ROADMAP_VIEWBOX.height}`}
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      ref={roadmapPathRef}
+                      d={ROADMAP_PATH}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeWidth="5"
+                      className="text-slate-200 dark:text-[var(--border)]"
+                    />
+                    <path
+                      d={ROADMAP_PATH}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeWidth="5"
+                      className="text-brand transition-all duration-700 ease-out dark:text-brand"
+                      pathLength="100"
+                      strokeDasharray={`${activePathWidth} 100`}
+                    />
+                  </svg>
+                )}
 
-              <div
-                className="relative grid min-w-0"
-                style={{ gridTemplateColumns: `repeat(${goals.length}, minmax(0, 1fr))` }}
-              >
                 {goals.map((goal, index) => {
                   const isComplete = goal.completed;
+                  const isCurrent = nextGoal?.id === goal.id;
+                  const point = roadmapMetrics.points[index] || {
+                    x: ROADMAP_VIEWBOX.width * (goals.length > 1 ? index / (goals.length - 1) : 0.5),
+                    y: ROADMAP_VIEWBOX.height / 2,
+                  };
 
                   return (
-                    <div key={goal.id} className="min-w-0 text-center">
+                    <div
+                      key={goal.id}
+                      className="absolute w-24 -translate-x-1/2 text-center"
+                      style={{
+                        left: `${(point.x / ROADMAP_VIEWBOX.width) * 100}%`,
+                        top: `${(point.y / ROADMAP_VIEWBOX.height) * 112}px`,
+                      }}
+                    >
                       <div
-                        className={`mx-auto flex h-6 w-6 items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
+                        className={`relative mx-auto flex -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
                           isComplete
-                            ? "border-emerald-500 bg-emerald-500 text-white"
-                            : "border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)] dark:text-slate-500"
+                            ? "h-7 w-7 border-emerald-500 bg-emerald-500 text-white shadow-sm shadow-emerald-500/20"
+                            : isCurrent
+                              ? "h-9 w-9 border-brand bg-brand text-slate-950 shadow-sm shadow-brand/25 ring-4 ring-brand/15"
+                              : "h-7 w-7 border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)] dark:text-slate-500"
                         }`}
                       >
-                        {isComplete ? <CheckCircle2 className="h-4 w-4" /> : index + 1}
+                        {isComplete ? (
+                          <CheckCircle2 className="h-4.5 w-4.5" />
+                        ) : (
+                          index + 1
+                        )}
                       </div>
-                      <p className="mt-1 text-[10px] font-black text-slate-400 dark:text-slate-500">
-                        {index + 1}
-                      </p>
                       <p
-                        className={`mx-auto mt-0.5 min-h-[2rem] max-w-[7rem] whitespace-normal break-words text-center text-[10px] font-bold leading-tight [text-wrap:balance] sm:text-[11px] ${
+                        className={`mx-auto -mt-1 max-w-[5.75rem] truncate whitespace-nowrap text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
                           isComplete
                             ? "text-emerald-700 dark:text-emerald-400"
+                            : isCurrent
+                              ? "text-slate-900 dark:text-white"
                             : "text-slate-500 dark:text-slate-400"
                         }`}
                         title={goal.title}
                       >
                         {goal.title}
                       </p>
+                      {isCurrent && (
+                        <p className="mx-auto mt-1 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
+                          In progress
+                        </p>
+                      )}
                     </div>
                   );
                 })}

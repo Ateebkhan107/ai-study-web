@@ -146,17 +146,17 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-          ({ payload }) => {
-            const newMsg = payload.new;
+          (event) => {
+            const newMsg = event?.payload?.new;
             if (!newMsg?.id) return;
             receiveMessage(newMsg.id);
           }
         )
-        .on("broadcast", { event: "message_created" }, ({ payload }) => {
-          receiveMessage(payload?.messageId);
+        .on("broadcast", { event: "message_created" }, (event) => {
+          receiveMessage(event?.payload?.messageId);
         })
-        .on("broadcast", { event: "typing" }, ({ payload }) => {
-          receiveTyping(payload);
+        .on("broadcast", { event: "typing" }, (event) => {
+          receiveTyping(event?.payload);
         })
         .subscribe((status) => {
           if (cancelled) return;
@@ -307,7 +307,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
+        <Loader2 className="w-6 h-6 animate-spin text-brand" />
       </div>
     );
   }
@@ -323,16 +323,16 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       : null;
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-[var(--card)]/60 dark:bg-[var(--background)]/30">
+    <div className="flex h-full min-h-0 flex-col bg-slate-50/70 dark:bg-[var(--background)]">
       {/* Messages area */}
-      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-3 scroll-smooth sm:px-5 sm:py-4">
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-4 scroll-smooth sm:px-6">
         {/* Load older */}
         {hasMore && (
-          <div className="flex justify-center py-2">
+          <div className="flex justify-center py-1">
             <button
               onClick={loadOlderMessages}
               disabled={loadingOlder}
-              className="flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 hover:underline disabled:opacity-60"
+              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-500 transition-colors hover:border-brand/50 hover:text-slate-900 disabled:opacity-60 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400 dark:hover:text-white"
             >
               {loadingOlder ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -345,9 +345,14 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         )}
 
         {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-40 text-slate-400 dark:text-slate-500">
-            <MessageCircle className="mb-2 h-8 w-8" />
-            <p className="text-sm">No messages yet. Start the conversation!</p>
+          <div className="flex h-full min-h-[260px] items-center justify-center">
+            <div className="max-w-sm rounded-xl border border-dashed border-slate-300 bg-white px-6 py-8 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
+                <MessageCircle className="h-6 w-6 text-brand" />
+              </div>
+              <p className="font-bold text-slate-900 dark:text-white">Start the conversation</p>
+              <p className="mt-2 text-sm leading-6">Ask a doubt, share a mock-test plan, or post the chapter you are revising today.</p>
+            </div>
           </div>
         ) : (
           messages.map((msg) => (
@@ -364,13 +369,13 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
         {/* Typing indicator */}
         {typingText && (
-          <div className="flex items-center gap-2 px-1">
+          <div className="flex items-center gap-2 px-1 py-1">
             <div className="flex gap-0.5 items-end h-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
-            <p className="text-xs text-slate-400 dark:text-slate-500 italic">{typingText}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 italic">{typingText}</p>
           </div>
         )}
 
@@ -379,7 +384,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
       {/* Error banner */}
       {error && (
-        <div className="px-4 py-2 bg-red-50 dark:bg-red-900/20 border-t border-red-200 dark:border-red-800">
+        <div className="border-t border-red-200 bg-red-50 px-4 py-2 dark:border-red-800 dark:bg-red-900/20">
           <p className="text-xs text-red-600 dark:text-red-400">{error}</p>
         </div>
       )}
@@ -387,7 +392,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       {/* Input */}
       <form
         onSubmit={sendMessage}
-        className="sticky bottom-0 flex items-end gap-2 border-t border-slate-200 bg-[var(--card)]/90 px-3 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 sm:gap-3 sm:px-4"
+        className="sticky bottom-0 flex items-end gap-2 border-t border-slate-200 bg-white px-3 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:gap-3 sm:px-4"
       >
         <textarea
           value={input}
@@ -400,15 +405,15 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
           }}
           maxLength={2000}
           rows={1}
-          placeholder="Type a message…"
-          className="max-h-28 flex-1 resize-none overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white sm:max-h-32 sm:px-4"
+          placeholder="Ask a doubt or share an update..."
+          className="max-h-28 flex-1 resize-none overflow-y-auto rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm leading-6 text-slate-900 placeholder-slate-400 transition-colors focus:border-brand/60 focus:bg-white focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white dark:focus:bg-[var(--surface-elevated)] sm:max-h-32 sm:px-4"
           style={{ height: "auto" }}
         />
         <button
           type="submit"
           disabled={isSubmitting || !input.trim()}
           id="send-group-message"
-          className="shrink-0 p-2.5 rounded-xl bg-indigo-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-indigo-700 transition-colors"
+          className="shrink-0 rounded-lg bg-brand p-2.5 text-black transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-40"
         >
           {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         </button>

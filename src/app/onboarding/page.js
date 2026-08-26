@@ -13,6 +13,7 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import Logo from "@/components/Logo";
 import { cookies } from "next/headers";
 import OnboardingForm from "@/components/OnboardingForm";
+import { isUniqueUsernameError, validateUsername } from "@/lib/username";
 
 const EXAMS = ["JEE", "NEET"];
 
@@ -46,6 +47,7 @@ export default async function OnboardingPage() {
     const targetExam = formData.get("targetExam");
     const targetYear = Number(formData.get("targetYear"));
     const fullName = formData.get("fullName");
+    const usernameInput = formData.get("username");
     const accountType = formData.get("accountType");
     const validYears = getYearOptions();
 
@@ -55,6 +57,11 @@ export default async function OnboardingPage() {
 
     const normalizedExam = EXAMS.includes(targetExam) ? targetExam : "JEE";
     const normalizedYear = validYears.includes(targetYear) ? targetYear : validYears[0];
+    const usernameValidation = validateUsername(usernameInput);
+
+    if (!usernameValidation.ok) {
+      throw new Error(usernameValidation.error);
+    }
 
     if (accountType === ACCOUNT_TYPES.STUDENT && (!EXAMS.includes(targetExam) || !validYears.includes(targetYear))) {
       throw new Error("Invalid onboarding selection.");
@@ -77,6 +84,7 @@ export default async function OnboardingPage() {
       clerk_user_id: actionUserId,
       email,
       full_name: fullName,
+      username: usernameValidation.username,
       exam: normalizedExam,
       target_year: normalizedYear,
       account_type: accountType,
@@ -105,6 +113,9 @@ export default async function OnboardingPage() {
 
     if (error) {
       console.error(error);
+      if (isUniqueUsernameError(error)) {
+        throw new Error("That username is already taken.");
+      }
       throw new Error("Failed to save profile");
     }
     

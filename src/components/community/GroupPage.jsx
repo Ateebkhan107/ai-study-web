@@ -130,56 +130,60 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
 
   return (
-    <div className="mx-auto flex h-[calc(100dvh-5.25rem)] max-h-[calc(100dvh-5.25rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-[var(--card)]/70 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/40 md:h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-8rem)] md:rounded-2xl md:border">
-      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 p-2.5 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/50 md:block">
-        <Link href="/community" className="mb-2 inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-500 hover:bg-[var(--card)] hover:text-indigo-600 dark:hover:bg-slate-900">
+    <div className="mx-auto flex h-[calc(100dvh-5.25rem)] max-h-[calc(100dvh-5.25rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] md:h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-8rem)] md:rounded-xl md:border">
+      <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-slate-50/90 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] md:block">
+        <Link href="/community" className="mb-4 inline-flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-bold text-slate-500 transition-colors hover:bg-white hover:text-slate-950 dark:hover:bg-[var(--surface)] dark:hover:text-white">
           <ArrowLeft className="h-4 w-4" />
           Community
         </Link>
-        <p className="mb-2 px-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">My Groups</p>
-        <div className="max-h-[calc(100%-4.5rem)] space-y-1 overflow-y-auto pr-1">
+        <div className="mb-3 px-2">
+          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">My Groups</p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">Study rooms you belong to</p>
+        </div>
+        <div className="max-h-[calc(100%-5.5rem)] space-y-1 overflow-y-auto pr-1">
           {myGroups.map((item) => (
             <Link
               key={item.id}
               href={`/community/groups/${item.id}`}
-              className={`block rounded-xl px-3 py-2 transition ${
+              className={`relative block rounded-lg border px-3 py-2.5 transition-colors ${
                 item.id === groupId
-                  ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20"
-                  : "text-slate-600 hover:bg-[var(--card)] hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+                  ? "border-brand/40 bg-white text-slate-950 dark:bg-[var(--surface)] dark:text-white"
+                  : "border-transparent text-slate-600 hover:border-slate-200 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:border-[var(--border-subtle)] dark:hover:bg-[var(--surface)] dark:hover:text-white"
               }`}
             >
+              {item.id === groupId && <span className="absolute left-0 top-2.5 h-8 w-1 rounded-r-full bg-brand" />}
               <div className="flex items-center justify-between gap-2">
                 <span className="truncate text-sm font-bold">{item.name}</span>
-                {item.myRole === "OWNER" && <span className="text-[10px] font-bold opacity-80">Owner</span>}
+                {item.myRole === "OWNER" && <span className="text-[10px] font-bold text-amber-700 dark:text-brand">Owner</span>}
               </div>
-              <p className={`mt-0.5 text-xs ${item.id === groupId ? "text-indigo-100" : "text-slate-400"}`}>{item.member_count ?? 0} members</p>
+              <p className="mt-0.5 text-xs text-slate-400">{item.member_count ?? 0} members</p>
             </Link>
           ))}
         </div>
       </aside>
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col bg-white dark:bg-[var(--surface)]">
       {/* Group header */}
-      <div className="flex items-center gap-2 border-b border-slate-200 bg-[var(--card)]/80 px-3 py-2.5 backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/70 sm:gap-3 sm:px-4">
-        <Link href="/community" className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      <div className="flex items-center gap-2 border-b border-slate-200 bg-white px-3 py-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:gap-3 sm:px-4">
+        <Link href="/community" className="rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-[var(--surface-elevated)] dark:hover:text-white md:hidden">
           <ArrowLeft className="w-4 h-4" />
         </Link>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h1 className="truncate font-bold text-slate-900 dark:text-white">{group.name}</h1>
-            <span className={`shrink-0 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
+            <h1 className="truncate text-base font-bold text-slate-900 dark:text-white">{group.name}</h1>
+            <span className={`shrink-0 inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
               group.privacy === "PUBLIC"
-                ? "bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                : "bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                ? "border-slate-200 bg-slate-50 text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-300"
+                : "border-amber-300/70 bg-amber-50 text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300"
             }`}>
               {group.privacy === "PUBLIC" ? <Globe className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-              {group.privacy}
+              {group.privacy === "PUBLIC" ? "Public" : "Private"}
             </span>
           </div>
-          <p className="flex items-center gap-1 truncate text-xs text-slate-500 dark:text-slate-400">
-            <Users className="w-3 h-3" /> {group.member_count ?? 0} members
-            {myRole && <span className="ml-2 text-indigo-500">· {myRole}</span>}
+          <p className="mt-0.5 flex items-center gap-2 truncate text-xs text-slate-500 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1"><Users className="w-3 h-3" /> {group.member_count ?? 0} members</span>
+            {myRole && <span className="text-slate-400">· {myRole.toLowerCase()}</span>}
           </p>
         </div>
 
@@ -187,7 +191,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
           <button
             onClick={handleLeave}
             disabled={leaving}
-            className="hidden shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-900/20 min-[390px]:flex"
+            className="hidden shrink-0 items-center gap-1.5 rounded-lg border border-transparent px-3 py-1.5 text-xs font-semibold text-red-500 transition-colors hover:border-red-200 hover:bg-red-50 dark:hover:border-red-500/30 dark:hover:bg-red-900/20 min-[390px]:flex"
           >
             {leaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
             Leave
@@ -198,7 +202,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
       {/* If not a member of a PRIVATE group */}
       {!isMember && group.privacy === "PRIVATE" ? (
         <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-          <Lock className="w-12 h-12 text-slate-300 dark:text-slate-600 mb-4" />
+          <Lock className="w-12 h-12 text-brand mb-4" />
           <h2 className="font-bold text-slate-700 dark:text-slate-300 mb-2">Private Group</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             Request to join to see messages and members.
@@ -208,15 +212,15 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
       ) : (
         <>
           {managementTabs.length > 0 && (
-          <div className="flex gap-1 overflow-x-auto border-b border-slate-200 bg-[var(--card)]/40 px-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/40 sm:px-4">
+          <div className="flex gap-5 overflow-x-auto border-b border-slate-200 bg-white px-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:px-4">
             {["Chat", ...managementTabs].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 id={`group-tab-${tab.toLowerCase()}`}
-                className={`flex items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2 text-sm font-semibold transition-colors sm:px-4 ${
+                className={`flex items-center gap-1.5 whitespace-nowrap border-b-2 px-0 py-2.5 text-sm font-semibold transition-colors ${
                   activeTab === tab
-                    ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                    ? "border-brand text-slate-950 dark:text-white"
                     : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
@@ -236,8 +240,8 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
               <GroupChat groupId={groupId} currentUserId={currentUserId} currentUserName={currentUserName} />
             )}
             {activeTab === "Chat" && !isMember && (
-              <div className="flex items-center justify-center h-full text-slate-400">
-                <p>Join this group to chat.</p>
+              <div className="flex h-full items-center justify-center p-6 text-center text-slate-400">
+                <p className="text-sm font-semibold">Join this group to chat.</p>
               </div>
             )}
             {activeTab === "Members" && (
@@ -260,7 +264,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
                       maxLength={60}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-brand/60 focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
                     />
                   </div>
                   <div>
@@ -270,7 +274,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                       onChange={(e) => setEditDesc(e.target.value)}
                       maxLength={300}
                       rows={3}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--card)] dark:bg-[var(--surface-elevated)] border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                      className="w-full resize-none rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-brand/60 focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
                     />
                   </div>
                   <div>
@@ -281,9 +285,9 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                           key={opt}
                           type="button"
                           onClick={() => setEditPrivacy(opt)}
-                          className={`p-3 rounded-xl border text-sm font-semibold transition-all ${
+                          className={`p-3 rounded-lg border text-sm font-semibold transition-all ${
                             editPrivacy === opt
-                              ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                              ? "border-brand/60 bg-brand/10 text-slate-900 dark:text-white"
                               : "border-slate-200 dark:border-[var(--border)] text-slate-700 dark:text-slate-300"
                           }`}
                         >
@@ -300,7 +304,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="w-full py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand py-2.5 text-sm font-bold text-black transition-colors hover:bg-brand-hover disabled:opacity-60"
                   >
                     {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                     Save Changes

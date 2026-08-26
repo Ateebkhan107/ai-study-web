@@ -83,41 +83,41 @@ export default function CommunityHub({ examTrack }) {
   const trackLabel = examTrack === "JEE" ? "JEE" : "NEET";
 
   return (
-    <div className="mx-auto max-w-6xl space-y-4">
+    <div className="mx-auto max-w-6xl space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-5 border-b border-slate-200/80 pb-5 dark:border-[var(--border-subtle)] sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
-            <BookOpen className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+          <div className="mb-3 inline-flex items-center gap-2 rounded-lg border border-brand/30 bg-brand/10 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-amber-700 dark:text-brand">
+            <BookOpen className="w-3.5 h-3.5" />
             <span>{trackLabel}</span>
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
+          <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
             Study Community
           </h1>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-            Connect, discuss, and study with fellow JEE/NEET aspirants.
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
+            Find focused study groups, compare doubts, and keep your preparation moving with students on the same exam track.
           </p>
         </div>
         <button
           onClick={() => setActiveSection("Create Group")}
           id="community-create-group-btn"
-          className="shrink-0 flex items-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-bold text-white shadow-md shadow-brand/20 transition-all hover:-translate-y-0.5 hover:shadow-brand/30"
+          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-800 transition-colors hover:border-brand/50 hover:text-slate-950 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-100 dark:hover:border-brand/50"
         >
           <Plus className="w-4 h-4" /> Create Group
         </button>
       </div>
 
       {/* Nav Tabs */}
-      <div className="flex max-w-xl gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1 dark:bg-[var(--surface-elevated)]/60">
+      <div className="flex gap-6 overflow-x-auto border-b border-slate-200/80 dark:border-[var(--border-subtle)]">
         {SECTIONS.map((section) => (
           <button
             key={section}
             onClick={() => handleSectionChange(section)}
             id={`community-tab-${section.toLowerCase().replace(/\s/g, "-")}`}
-	            className={`shrink-0 flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-all ${
+            className={`shrink-0 flex items-center gap-2 border-b-2 px-0 pb-3 text-sm font-bold transition-colors ${
               activeSection === section
-                ? "bg-[var(--card)] dark:bg-[var(--surface)] text-indigo-600 dark:text-indigo-400 shadow-sm"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                ? "border-brand text-slate-950 dark:text-white"
+                : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             {section === "Discover" && <Users className="w-3.5 h-3.5" />}
@@ -129,8 +129,15 @@ export default function CommunityHub({ examTrack }) {
 
       {/* ── Discover ──────────────────────────────────────────── */}
       {activeSection === "Discover" && (
-        <div className="space-y-4">
-          <form onSubmit={handleSearch} className="max-w-xl">
+        <div className="space-y-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-bold text-slate-950 dark:text-white">Popular Groups</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Groups are shown from your {trackLabel} community.
+              </p>
+            </div>
+            <form onSubmit={handleSearch} className="w-full sm:max-w-sm">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
@@ -138,10 +145,11 @@ export default function CommunityHub({ examTrack }) {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search groups…"
-	                className="w-full rounded-xl border border-slate-200 bg-[var(--card)] py-2 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white"
+                className="w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition-colors focus:border-brand/60 focus:outline-none dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-white"
               />
             </div>
-          </form>
+            </form>
+          </div>
 
           {error && (
             <p className="text-sm text-red-500">{error}</p>
@@ -149,17 +157,17 @@ export default function CommunityHub({ examTrack }) {
 
           {loading && page === 1 ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
+              <Loader2 className="w-6 h-6 animate-spin text-brand" />
             </div>
           ) : groups.length === 0 ? (
-            <div className="text-center py-16 text-slate-400 dark:text-slate-500">
-              <Users className="w-12 h-12 mx-auto mb-3 opacity-30" />
-              <p className="font-semibold">No groups found.</p>
-              <p className="text-sm mt-1">Be the first to create one!</p>
+            <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
+              <Users className="w-10 h-10 mx-auto mb-3 text-brand" />
+              <p className="font-bold text-slate-800 dark:text-white">No groups found</p>
+              <p className="mx-auto mt-1 max-w-sm text-sm leading-6">Start a focused group for a chapter, mock-test batch, or revision plan.</p>
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {groups.map((g) => (
                   <GroupCard
                     key={g.id}
@@ -189,7 +197,7 @@ export default function CommunityHub({ examTrack }) {
                       setPage((p) => p + 1);
                     }}
                     disabled={loading}
-                    className="px-6 py-2.5 rounded-xl border border-indigo-300 dark:border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-colors disabled:opacity-60"
+                    className="rounded-lg border border-slate-300 px-6 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:border-brand/50 hover:bg-brand/10 disabled:opacity-60 dark:border-[var(--border-subtle)] dark:text-slate-200"
                   >
                     {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Load More"}
                   </button>
@@ -202,38 +210,44 @@ export default function CommunityHub({ examTrack }) {
 
       {/* ── My Groups ──────────────────────────────────────────── */}
       {activeSection === "My Groups" && (
-        <div className="space-y-3">
+        <div className="space-y-5">
+          <div>
+            <h2 className="text-lg font-bold text-slate-950 dark:text-white">Your Groups</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Continue the discussions you already belong to.
+            </p>
+          </div>
           {loadingMine ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
+              <Loader2 className="w-6 h-6 animate-spin text-brand" />
             </div>
           ) : myGroups.length === 0 ? (
-            <div className="text-center py-16 text-slate-400 dark:text-slate-500">
-              <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-30" />
-              <p className="font-semibold">You haven&apos;t joined any groups yet.</p>
+            <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
+              <BookOpen className="w-10 h-10 mx-auto mb-3 text-brand" />
+              <p className="font-bold text-slate-800 dark:text-white">You haven&apos;t joined any groups yet</p>
               <button
                 onClick={() => setActiveSection("Discover")}
-                className="mt-3 text-sm text-indigo-500 hover:underline"
+                className="mt-3 text-sm font-semibold text-amber-700 hover:underline dark:text-brand"
               >
                 Discover groups →
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:divide-[var(--border-subtle)] dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
               {myGroups.map((g) => (
                 <Link
                   key={g.id}
                   href={`/community/groups/${g.id}`}
-                  className="glass-card flex items-center justify-between gap-3 p-4 transition-all hover:shadow-lg hover:shadow-brand/10"
+                  className="flex items-center justify-between gap-4 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-[var(--surface-elevated)]/45"
                 >
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-bold text-sm text-slate-900 dark:text-white truncate">{g.name}</p>
+                      <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{g.name}</p>
                       {g.myRole === "OWNER" && (
-                        <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">Owner</span>
+                        <span className="rounded-md border border-brand/30 bg-brand/10 px-2 py-0.5 text-[10px] font-bold text-amber-700 dark:text-brand">Owner</span>
                       )}
                     </div>
-                    <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{g.member_count ?? 0} members</p>
+                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{g.member_count ?? 0} members · {g.privacy?.toLowerCase?.() || "group"}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
                 </Link>

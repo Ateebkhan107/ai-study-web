@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Building2, GraduationCap } from "lucide-react";
 import SubjectVisual from "@/components/SubjectVisual";
 
@@ -13,7 +13,77 @@ export default function OnboardingForm({
   defaultFullName,
 }) {
   const [accountType, setAccountType] = useState(accountTypes.STUDENT);
+  const [username, setUsername] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState({
+    checking: false,
+    valid: false,
+    available: false,
+    message: "Choose a unique username.",
+  });
   const isStudent = accountType === accountTypes.STUDENT;
+  const normalizedUsername = useMemo(() => username.trim().toLowerCase(), [username]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function checkUsername() {
+      if (!normalizedUsername) {
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: "Choose a unique username.",
+        });
+        return;
+      }
+
+      if (!/^[a-z0-9_]{3,20}$/.test(normalizedUsername)) {
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: "Use 3-20 lowercase letters, numbers, or underscores.",
+        });
+        return;
+      }
+
+      setUsernameStatus({
+        checking: true,
+        valid: true,
+        available: false,
+        message: "Checking availability...",
+      });
+
+      try {
+        const response = await fetch(`/api/username/availability?username=${encodeURIComponent(normalizedUsername)}`, {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Unable to check username.");
+        setUsernameStatus({
+          checking: false,
+          valid: Boolean(data.valid),
+          available: Boolean(data.available),
+          message: data.available ? "Available" : data.error || "Already taken",
+        });
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        setUsernameStatus({
+          checking: false,
+          valid: false,
+          available: false,
+          message: "Unable to check username right now.",
+        });
+      }
+    }
+
+    const timeout = setTimeout(checkUsername, 300);
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, [normalizedUsername]);
 
   const optionClass = (active) =>
     `flex items-start gap-3 rounded-2xl border px-4 py-4 text-sm font-semibold transition ${
@@ -38,6 +108,41 @@ export default function OnboardingForm({
           maxLength={50}
           className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
         />
+      </div>
+
+      <div>
+        <label className="mb-3 block text-xs font-bold uppercase tracking-widest text-gray-400">
+          Username
+        </label>
+        <div className="relative">
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400">
+            @
+          </span>
+          <input
+            type="text"
+            name="username"
+            placeholder="your_username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value.toLowerCase())}
+            required
+            minLength={3}
+            maxLength={20}
+            pattern="[a-z0-9_]{3,20}"
+            autoComplete="username"
+            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 pl-8 text-sm font-medium text-black dark:border-[var(--border)] dark:bg-[var(--surface-elevated)] dark:text-white"
+          />
+        </div>
+        <p
+          className={`mt-2 text-xs font-semibold ${
+            usernameStatus.available
+              ? "text-emerald-600 dark:text-emerald-400"
+              : usernameStatus.checking
+                ? "text-gray-400"
+                : "text-amber-600 dark:text-amber-300"
+          }`}
+        >
+          {usernameStatus.message}
+        </p>
       </div>
 
       <div>
@@ -137,7 +242,8 @@ export default function OnboardingForm({
 
       <button
         type="submit"
-        className="w-full rounded-2xl bg-brand py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90 dark:bg-indigo-500 dark:text-white"
+        disabled={!usernameStatus.available}
+        className="w-full rounded-2xl bg-brand py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-indigo-500 dark:text-white"
       >
         {isStudent ? "Continue to Dashboard" : "Continue to Institute"}
       </button>

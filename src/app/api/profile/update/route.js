@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { isUniqueUsernameError, validateUsername } from "@/lib/username";
 
 export async function POST(req) {
   try {
@@ -25,14 +26,25 @@ export async function POST(req) {
       updateData.exam = body.current_track.toLowerCase() === "neet" ? "NEET" : "JEE";
     }
 
+    if (typeof body.username === "string") {
+      const validation = validateUsername(body.username);
+      if (!validation.ok) {
+        return NextResponse.json({ error: validation.error }, { status: 400 });
+      }
+      updateData.username = validation.username;
+    }
+
     const { data, error } = await supabaseAdmin
       .from("user_profiles")
       .update(updateData)
       .eq("clerk_user_id", userId)
-      .select("id, clerk_user_id, email, full_name, exam, target_year, account_type, created_at, updated_at")
+      .select("id, clerk_user_id, email, full_name, username, exam, target_year, account_type, created_at, updated_at")
       .maybeSingle();
 
     if (error) {
+      if (isUniqueUsernameError(error)) {
+        return NextResponse.json({ error: "That username is already taken." }, { status: 409 });
+      }
       throw error;
     }
 

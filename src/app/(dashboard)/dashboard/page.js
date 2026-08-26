@@ -6,6 +6,7 @@ import StatsCards from "@/components/StatsCards";
 import DashboardSection from "@/components/DashboardSection";
 import DailyGoals from "@/components/DailyGoals";
 import DashboardHeaderQuote from "@/components/DashboardHeaderQuote";
+import BattleFloatingButton from "@/components/battle/BattleFloatingButton";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { Sparkles } from "lucide-react";
@@ -141,6 +142,7 @@ export default async function DashboardPage() {
           </section>
         </div>
       </div>
+      <BattleFloatingButton />
     </div>
   );
 }

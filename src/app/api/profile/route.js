@@ -61,7 +61,7 @@ export async function GET() {
 
       .from("user_profiles")
 
-      .select("id, clerk_user_id, email, full_name, exam, target_year, account_type, created_at, updated_at")
+      .select("id, clerk_user_id, email, full_name, username, exam, target_year, account_type, created_at, updated_at")
 
       .eq(
         "clerk_user_id",
