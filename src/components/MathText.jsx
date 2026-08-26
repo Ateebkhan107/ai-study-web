@@ -49,48 +49,42 @@ function normalizeBlankPlaceholders(value) {
 function normalizeQuestionLayout(value) {
   let text = String(value ?? "");
 
-  // Preserve display math ($$...$$)
-  const parts = text.split(/(\$\$[\s\S]*?\$\$)/g);
-  return parts
-    .map((part) => {
-      if (part.startsWith("$$") && part.endsWith("$$")) return part;
+  // If text contains a markdown table, split out the table blocks first so they are untouched
+  const tableRegex = /(\n?\s*\|[^\n]+\|\s*\n\s*\|[\s:\-\|]+\|\s*\n(?:[^\n]*\|[^\n]*\|\s*\n*)+)/g;
+  const segments = text.split(tableRegex);
 
-      let s = part;
-      // Format statement prefixes to be on distinct new lines:
-      // "Statement I:", "Statement II:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):", "I.", "II.", "A.", "B.", "C.", "D."
-      s = s.replace(/([^\n])\s*\b(Statement\s*(?:I|II|1|2|A|B)\s*:?)/gi, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*\b(Assertion\s*(?:\(?[Aa]\)?)\s*:?)/gi, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*\b(Reason\s*(?:\(?[Rr]\)?)\s*:?)/gi, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*(\((?:S1|S2|s1|s2|I|II|III|IV)\)\s*:?)/g, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*\b((?:I|II|III|IV)\.\s+)/g, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*\b([A-D]\.\s+)/g, "$1\n\n$2");
-
-      // Format instructions on distinct lines
-      s = s.replace(/([^\n])\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
-      s = s.replace(/([^\n])\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
-
-      // Ensure paragraphs have proper line breaks while preserving markdown tables
-      const lines = s.split("\n");
-      let inTable = false;
-      const formattedLines = [];
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (line.startsWith("|") && line.endsWith("|")) {
-          inTable = true;
-          formattedLines.push(line);
-        } else {
-          if (inTable) {
-            inTable = false;
-            formattedLines.push("");
-          }
-          formattedLines.push(line);
-          if (line && i < lines.length - 1 && lines[i + 1].trim() && !lines[i + 1].trim().startsWith("|")) {
-            formattedLines.push("");
-          }
-        }
+  return segments
+    .map((segment) => {
+      // If segment is a markdown table, return it as-is with clean bounding newlines
+      if (segment.trim().startsWith("|") && segment.includes("---")) {
+        return "\n\n" + segment.trim() + "\n\n";
       }
 
-      return formattedLines.filter((l, idx, arr) => !(l === "" && arr[idx - 1] === "")).join("\n");
+      // Preserve display math ($$...$$)
+      const parts = segment.split(/(\$\$[\s\S]*?\$\$)/g);
+      return parts
+        .map((part) => {
+          if (part.startsWith("$$") && part.endsWith("$$")) return part;
+
+          let s = part;
+
+          // Format statement prefixes at statement boundaries:
+          // "Statement I:", "Statement II:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):"
+          s = s.replace(/([^\n])\s*\b(Statement\s*(?:I|II|1|2|A|B)\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\b(Assertion\s*(?:\(?[Aa]\)?)\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\b(Reason\s*(?:\(?[Rr]\)?)\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*(\((?:S1|S2|s1|s2)\)\s*:?)/g, "$1\n\n$2");
+
+          // Roman numerals only when at start of line or preceded by period: "I. ", "II. "
+          s = s.replace(/(?:^|[\.\n])\s*\b((?:I|II|III|IV|V)\.\s+)/g, "\n\n$1");
+
+          // Format instructions on distinct lines
+          s = s.replace(/([^\n])\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
+
+          return s;
+        })
+        .join("");
     })
     .join("");
 }
