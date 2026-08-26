@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Clock, Loader2, Search, Send, Swords, Trophy, UserRound } from "lucide-react";
+import { Bebas_Neue } from "next/font/google";
+
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"] });
 
 function cx(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -30,28 +32,90 @@ function initials(name) {
     .toUpperCase() || "S";
 }
 
-function PlayerSlot({ label, name, username, exam, placeholder = false }) {
+function CustomSwordsIcon(props) {
   return (
-    <div className={cx(
-      "flex min-w-0 items-center gap-3 rounded-xl border px-3 py-3 sm:px-4",
-      placeholder
-        ? "border-dashed border-slate-300/80 bg-slate-50/70 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30"
-        : "border-slate-200 bg-white/85 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]"
-    )}>
-      <div className={cx(
-        "flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border text-sm font-black",
-        placeholder
-          ? "border-slate-300 text-slate-400 dark:border-slate-700 dark:text-slate-500"
-          : "border-brand/35 bg-brand/10 text-brand"
-      )}>
-        {placeholder ? <UserRound className="h-5 w-5" /> : initials(name)}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M14.5 17.5L3 6V3h3l11.5 11.5" />
+      <path d="M13 19l6-6" />
+      <path d="M16 16l4 4" />
+      <path d="M19 21l2-2" />
+      <path d="M9.5 6.5L21 18v3h-3L6.5 9.5" />
+      <path d="M5 5l1.5 1.5" />
+    </svg>
+  );
+}
+
+function RadarIcon(props) {
+  return (
+    <div className="relative flex items-center justify-center">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M12 2v20" />
+        <path d="M2 12h20" />
+        <circle cx="12" cy="12" r="10" />
+      </svg>
+      <div className="absolute inset-0 rounded-full border-2 border-brand/50 animate-ping" />
+      <div className="absolute top-1/2 left-1/2 w-1/2 h-[2px] bg-brand origin-left animate-spin-slow" />
+    </div>
+  );
+}
+
+function HourglassIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={cx("animate-pulse", props.className)} {...props}>
+      <path d="M5 22h14" />
+      <path d="M5 2h14" />
+      <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+      <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+      <path d="M12 12v3" className="animate-bounce" />
+    </svg>
+  );
+}
+
+// Simple CountUp hook
+function useCountUp(endValue, durationMs = 1500) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let startTime = null;
+    let animationFrame;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percent = Math.min(progress / durationMs, 1);
+      // ease out cubic
+      const ease = 1 - Math.pow(1 - percent, 3);
+      setCount(Math.floor(ease * endValue));
+      if (percent < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [endValue, durationMs]);
+  return count;
+}
+
+function ScoreComparison({ scoreString }) {
+  const [myStr, oppStr] = (scoreString || "0 - 0").split(" - ");
+  const myScore = parseInt(myStr, 10) || 0;
+  const oppScore = parseInt(oppStr, 10) || 0;
+  
+  const animatedMy = useCountUp(myScore);
+  const animatedOpp = useCountUp(oppScore);
+
+  const total = Math.max(myScore + oppScore, 1);
+  const myPercent = (myScore / total) * 100;
+  
+  return (
+    <div className="flex w-32 flex-col gap-1.5 sm:w-40">
+      <div className="flex justify-between text-xs font-black">
+        <span className="text-slate-900 dark:text-white">{animatedMy}</span>
+        <span className="text-slate-500 dark:text-slate-400">{animatedOpp}</span>
       </div>
-      <div className="min-w-0">
-        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">{label}</p>
-        <p className="mt-0.5 truncate text-sm font-black text-slate-950 dark:text-white sm:text-base">{name}</p>
-        <p className="truncate text-xs font-semibold text-slate-500 dark:text-slate-400">
-          {placeholder ? "Waiting for a challenger" : `@${username || "username"} · ${exam || "JEE"}`}
-        </p>
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700/50">
+        <div 
+          className="h-full bg-brand transition-all duration-1000 ease-out" 
+          style={{ width: `${myPercent}%` }}
+        />
       </div>
     </div>
   );
@@ -59,18 +123,32 @@ function PlayerSlot({ label, name, username, exam, placeholder = false }) {
 
 function ChallengeRow({ challenge, onRespond }) {
   const incoming = challenge.direction === "incoming";
+  
+  let accent = "border-l-brand";
+  let statusColor = "text-amber-600 bg-amber-50 dark:bg-brand/10 dark:text-brand";
+  if (challenge.status === "ACCEPTED" || challenge.status === "MATCHED") {
+    accent = "border-l-emerald-500";
+    statusColor = "text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 dark:text-emerald-400";
+  } else if (challenge.status === "DECLINED") {
+    accent = "border-l-rose-500";
+    statusColor = "text-rose-700 bg-rose-50 dark:bg-rose-500/10 dark:text-rose-400";
+  } else if (!incoming) {
+    accent = "border-l-slate-400";
+    statusColor = "text-slate-600 bg-slate-100 dark:bg-slate-800 dark:text-slate-300";
+  }
+
   return (
-    <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white/70 px-3 py-3 transition hover:border-brand/40 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/35">
+    <div className={cx(
+      "relative flex animate-in slide-in-from-right-4 fade-in duration-300 items-center justify-between gap-3 rounded-r-xl border-y border-r border-slate-200 border-l-[4px] bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-y-[var(--border-subtle)] dark:border-r-[var(--border-subtle)] dark:bg-[var(--surface)]",
+      accent
+    )}>
       <div className="flex min-w-0 items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-brand/25 bg-brand/10 text-xs font-black text-brand">
-          {initials(challenge.opponent.displayName)}
-        </div>
         <div className="min-w-0">
-          <p className="truncate text-sm font-black text-slate-900 dark:text-white">
+          <p className={cx("truncate text-xl text-slate-900 dark:text-white", bebas.className)}>
             {challenge.opponent.displayName}
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            @{challenge.opponent.username || "student"} · {incoming ? "incoming challenge" : "challenge sent"}
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+            {incoming ? "Challenged you" : "You challenged"}
           </p>
         </div>
       </div>
@@ -79,20 +157,22 @@ function ChallengeRow({ challenge, onRespond }) {
           <button
             type="button"
             onClick={() => onRespond(challenge.id, "decline")}
-            className="rounded-md border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition hover:text-rose-500 dark:border-[var(--border-subtle)]"
+            className="rounded-md px-2 py-1.5 text-xs font-bold text-slate-400 transition hover:text-rose-500"
           >
-            Decline
+            DECLINE
           </button>
           <button
             type="button"
             onClick={() => onRespond(challenge.id, "accept")}
-            className="rounded-md bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition hover:bg-brand-hover"
+            className="rounded-md bg-brand px-3 py-1.5 text-xs font-black text-slate-950 shadow-sm transition hover:bg-brand-hover"
           >
-            Accept
+            ACCEPT
           </button>
         </div>
       ) : (
-        <span className="shrink-0 rounded-md border border-slate-200 px-2 py-1 text-[11px] font-black uppercase tracking-[0.08em] text-slate-500 dark:border-[var(--border-subtle)] dark:text-slate-400">{challenge.status}</span>
+        <span className={cx("shrink-0 rounded px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.1em]", statusColor)}>
+          {challenge.status}
+        </span>
       )}
     </div>
   );
@@ -249,51 +329,67 @@ export default function BattleArenaClient() {
   if (loading) {
     return (
       <div className="flex min-h-[55vh] items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-brand" />
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand border-t-transparent" />
       </div>
     );
   }
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-7 sm:px-6 lg:px-8">
-      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)] sm:p-6 lg:p-7">
+      {/* HERO SECTION - Real VS Matchup */}
+      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)]">
         <div className="absolute inset-x-0 top-0 h-px bg-brand/35" aria-hidden="true" />
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
-              <Swords className="h-3.5 w-3.5" />
-              Battle Arena
-            </div>
-            <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
-              PrepZii 1v1 Arena
-            </h1>
-            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-              Same paper set. Same exam track. A focused head-to-head sprint for serious JEE/NEET practice.
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-black uppercase tracking-[0.11em] text-slate-500 dark:text-slate-400">
-              {["10 Questions", "Mixed Chapters", profile?.exam || "JEE", "~12 min"].map((item, index) => (
-                <span key={item} className="inline-flex items-center gap-3">
-                  {index > 0 && <span className="h-1 w-1 rounded-full bg-brand/70" />}
-                  {item}
-                </span>
-              ))}
-            </div>
+        
+        <div className="px-6 pt-7 pb-6">
+          <div className="inline-flex items-center gap-2 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
+            <CustomSwordsIcon className="h-3.5 w-3.5" />
+            Battle Arena
           </div>
+          <h1 className={cx("mt-3 text-5xl tracking-wide text-slate-950 dark:text-white sm:text-6xl uppercase", bebas.className)}>
+            PrepZii 1v1 Arena
+          </h1>
+          <p className="mt-1 text-sm leading-6 font-semibold text-slate-600 dark:text-slate-400 max-w-2xl">
+            Same paper set. Same exam track. A focused head-to-head sprint for serious {profile?.exam || "JEE"} practice.
+          </p>
+        </div>
 
-          <div className="w-full max-w-xl">
-            <div className="grid items-center gap-3 sm:grid-cols-[minmax(0,1fr)_80px_minmax(0,1fr)]">
-              <PlayerSlot
-                label="You"
-                name={profile?.full_name || profile?.fullName || "Student"}
-                username={profile?.username}
-                exam={profile?.exam || "JEE"}
-              />
-              <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand shadow-[0_0_0_8px_rgba(245,181,0,0.04)] motion-safe:animate-pulse">
-                <span className="text-lg font-black tracking-tight">VS</span>
-              </div>
-              <PlayerSlot label="Opponent" name="Open Slot" placeholder />
-            </div>
-          </div>
+        {/* Fight Card Split */}
+        <div className="relative mt-2 flex w-full flex-col sm:flex-row border-t border-slate-200 dark:border-slate-800">
+           {/* Divider (Diagonal slash) */}
+           <div className={cx(
+             "absolute left-1/2 top-0 z-20 hidden sm:flex h-full w-14 -translate-x-1/2 skew-x-[-15deg] items-center justify-center border-x-4 border-slate-50 dark:border-[#141414] transition-colors duration-500",
+             queueStatus === "queued" ? "bg-brand/80 shadow-[0_0_25px_rgba(245,181,0,0.6)] animate-pulse" : "bg-brand"
+           )}>
+             <span className={cx("skew-x-[15deg] text-3xl text-slate-950 shadow-sm", bebas.className)}>VS</span>
+           </div>
+           
+           <div className="absolute left-1/2 top-1/2 z-20 flex sm:hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand border-[3px] border-slate-50 dark:border-[#141414]">
+             <span className={cx("text-xl text-slate-950", bebas.className)}>VS</span>
+           </div>
+
+           {/* Left Side (Player) */}
+           <div className="relative w-full sm:w-1/2 bg-slate-100 p-6 sm:px-10 sm:py-12 dark:bg-[#111]">
+             <div className="relative z-10 flex flex-col items-start">
+               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Challenger</span>
+               <span className={cx("mt-1 text-4xl text-slate-900 dark:text-white uppercase truncate w-full", bebas.className)}>
+                 {profile?.full_name || profile?.fullName || "Student"}
+               </span>
+               <span className="text-sm font-semibold text-slate-500">@{profile?.username}</span>
+             </div>
+           </div>
+           
+           {/* Right Side (Opponent) */}
+           <div className="relative w-full sm:w-1/2 bg-slate-50 p-6 sm:px-10 sm:py-12 dark:bg-[#0a0a0a] flex flex-col sm:items-end text-left sm:text-right">
+             <div className={cx("relative z-10 flex flex-col sm:items-end w-full", queueStatus === "queued" ? "animate-pulse" : "")}>
+               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Opponent</span>
+               <span className={cx("mt-1 text-4xl text-slate-300 dark:text-slate-600 uppercase truncate w-full", bebas.className)}>
+                 {queueStatus === "queued" ? "SEARCHING..." : "OPEN SLOT"}
+               </span>
+               <span className="text-sm font-semibold text-slate-400/80">
+                 {queueStatus === "queued" ? "Awaiting a worthy opponent" : "Waiting for a challenger"}
+               </span>
+             </div>
+           </div>
         </div>
       </section>
 
@@ -304,153 +400,181 @@ export default function BattleArenaClient() {
       )}
 
       {!profile?.username && (
-        <div className="mt-5 rounded-xl border border-brand/35 bg-brand/10 p-4 text-sm text-slate-700 dark:text-slate-200">
+        <div className="mt-5 rounded-xl border border-brand/35 bg-brand/10 p-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
           Choose a username from Profile before entering Battle Arena.
         </div>
       )}
 
-      <section className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.62fr)]">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-          <div className="rounded-xl border border-brand/25 bg-brand/[0.07] p-5 shadow-sm dark:bg-brand/[0.08]">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-black text-slate-950 dark:text-white">Find Opponent</h2>
-                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">Enter the queue for a same-track {profile?.exam || "JEE"} matchup.</p>
-              </div>
-              <div className="rounded-lg border border-brand/30 bg-brand/10 p-2 text-brand">
-                <Trophy className="h-5 w-5" />
-              </div>
+      {/* UTILITY PANELS */}
+      <section className="mt-5 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+        <div className="flex flex-col gap-4">
+          
+          {/* Find Opponent (Primary CTA) */}
+          <div className="group relative overflow-hidden rounded-2xl bg-brand px-6 py-8 shadow-sm transition hover:shadow-md sm:px-8 sm:py-10">
+            {/* Background radar/reticle graphic */}
+            <div className="pointer-events-none absolute -right-10 -top-10 text-amber-500/20 dark:text-amber-600/20 transition-transform duration-700 ease-out group-hover:scale-110">
+              <RadarIcon className="h-56 w-56" />
             </div>
-            <div className="mt-6">
-              {queueStatus === "queued" ? (
-                <div className="space-y-3">
-                  <div className="rounded-lg border border-brand/25 bg-white/60 px-3 py-3 dark:bg-[var(--surface)]/70">
-                    <div className="flex items-center gap-2 text-sm font-black text-slate-800 dark:text-slate-100">
-                      <Loader2 className="h-4 w-4 animate-spin text-brand" />
-                      Searching for an opponent
+            
+            <div className="relative z-10 flex flex-col items-start">
+              <h2 className={cx("text-4xl text-slate-950 uppercase tracking-wide", bebas.className)}>Find Opponent</h2>
+              <p className="mt-1 text-sm font-semibold text-amber-900/90 max-w-sm">Enter the queue for a same-track {profile?.exam || "JEE"} matchup right now.</p>
+              
+              <div className="mt-8 w-full max-w-xs">
+                {queueStatus === "queued" ? (
+                  <div className="space-y-3">
+                    <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 text-sm font-black text-slate-950">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
+                        SEARCHING...
+                      </div>
                     </div>
-                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">We’ll move both players to the same room when a match is ready.</p>
+                    {waitedLongEnough && (
+                      <p className="text-sm font-semibold text-amber-900/80">Taking a bit longer than usual...</p>
+                    )}
+                    <div className="flex gap-2">
+                      <button type="button" onClick={leaveQueue} className="flex-1 rounded-xl bg-slate-950/10 px-4 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-950/20">Cancel</button>
+                    </div>
                   </div>
-                  {waitedLongEnough && (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">No opponent found yet.</p>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    <button type="button" onClick={findOpponent} className="rounded-lg bg-brand px-4 py-2 text-sm font-black text-slate-950 shadow-sm transition hover:bg-brand-hover">Keep Searching</button>
-                    <button type="button" onClick={leaveQueue} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 dark:border-[var(--border-subtle)] dark:text-slate-300">Stop</button>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={findOpponent}
-                  disabled={busy || !profile?.username}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-4 py-3.5 text-sm font-black text-slate-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
-                >
-                  {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Swords className="h-4 w-4" />}
-                  Find Opponent
-                </button>
-              )}
+                ) : (
+                  <button
+                    type="button"
+                    onClick={findOpponent}
+                    disabled={busy || !profile?.username}
+                    className="group/btn relative overflow-hidden flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 py-4 text-sm font-black text-brand shadow-xl transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {busy ? <div className="h-4 w-4 animate-spin rounded-full border-2 border-brand border-t-transparent" /> : <CustomSwordsIcon className="h-5 w-5" />}
+                      Start Matchmaking
+                    </span>
+                    <div className="absolute inset-0 w-0 bg-white/10 transition-all duration-500 ease-out group-hover/btn:w-full" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h2 className="text-lg font-black text-slate-950 dark:text-white">Challenge by Username</h2>
-                <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">Search a classmate by @username and send a direct challenge.</p>
+          {/* Challenge by Username (Secondary) */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <h2 className="text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Direct Challenge</h2>
+            
+            <form onSubmit={searchUsername} className="mt-3 flex flex-col sm:flex-row gap-2">
+              <div className="relative flex-1">
+                <svg className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter @username"
+                  className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 pl-11 pr-4 py-3 text-sm font-bold text-slate-900 outline-none transition focus:border-brand focus:bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white dark:focus:border-brand"
+                />
               </div>
-              <div className="rounded-lg border border-slate-200 p-2 text-slate-500 dark:border-[var(--border-subtle)] dark:text-slate-300">
-                <Search className="h-5 w-5" />
-              </div>
-            </div>
-            <form onSubmit={searchUsername} className="mt-5 flex gap-2">
-              <input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="@username"
-                className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
-              />
-              <button type="submit" disabled={busy} className="rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-bold text-slate-700 transition hover:border-brand disabled:opacity-50 dark:border-[var(--border-subtle)] dark:text-slate-200">
-                Search
+              <button type="submit" disabled={busy} className="rounded-xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-200 disabled:opacity-50 dark:bg-[#1a1a1a] dark:text-slate-300 dark:hover:bg-[#222]">
+                Lookup
               </button>
             </form>
             {searchedUser && (
-              <div className="mt-4 flex items-center justify-between gap-3 rounded-lg bg-slate-50 p-3 dark:bg-[var(--surface-elevated)]/50">
+              <div className="mt-4 flex animate-in fade-in slide-in-from-bottom-2 duration-300 items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/50">
                 <div className="flex min-w-0 items-center gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-xs font-black text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
                     {initials(searchedUser.displayName)}
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-black text-slate-950 dark:text-white">{searchedUser.displayName}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">@{searchedUser.username} · {searchedUser.exam}</p>
-                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                      {(searchedUser.stats?.wins || 0)}W · {(searchedUser.stats?.losses || 0)}L
-                    </p>
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">@{searchedUser.username} · {searchedUser.exam}</p>
                   </div>
                 </div>
-                <button type="button" onClick={sendChallenge} disabled={busy} className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-2 text-xs font-black text-slate-950">
-                  <Send className="h-3.5 w-3.5" />
+                <button type="button" onClick={sendChallenge} disabled={busy} className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2.5 text-xs font-black text-slate-950 hover:bg-brand-hover transition">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+                    <path d="M22 2L11 13" />
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                  </svg>
                   Challenge
                 </button>
               </div>
             )}
-            {searchMessage && <p className="mt-3 text-sm font-semibold text-brand">{searchMessage}</p>}
+            {searchMessage && <p className="mt-3 text-xs font-semibold text-brand animate-in fade-in">{searchMessage}</p>}
           </div>
         </div>
 
-        <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <h2 className="flex items-center gap-2 text-lg font-black text-slate-950 dark:text-white">
-                <Clock className="h-4 w-4 text-brand" />
-                Pending Challenges
-              </h2>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Incoming and outgoing battle requests.</p>
-            </div>
-          </div>
-          <div className="mt-4">
+        {/* Pending Challenges Feed */}
+        <aside className="flex flex-col gap-3">
+          <h2 className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-1">
+            <HourglassIcon className="h-4 w-4 text-brand" />
+            Live Feed
+          </h2>
+          <div className="flex flex-col gap-2.5">
             {challenges.length ? (
-              <div className="space-y-2">
-                {challenges.slice(0, 5).map((challenge) => (
-                  <ChallengeRow key={challenge.id} challenge={challenge} onRespond={respondToChallenge} />
-                ))}
-              </div>
+              challenges.slice(0, 5).map((challenge) => (
+                <ChallengeRow key={challenge.id} challenge={challenge} onRespond={respondToChallenge} />
+              ))
             ) : (
-              <div className="rounded-lg bg-slate-50 px-4 py-5 dark:bg-[var(--surface-elevated)]/35">
-                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">No challenges waiting.</p>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Search a username or start random matchmaking.</p>
+              <div className="rounded-xl border-l-[4px] border-l-slate-300 border-y border-r border-slate-200 bg-slate-50/50 p-5 dark:border-l-slate-700 dark:border-y-[var(--border-subtle)] dark:border-r-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
+                <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">No active challenges.</p>
+                <p className="mt-1 text-xs font-medium text-slate-400 dark:text-slate-500">Incoming requests and sent challenges will appear here.</p>
               </div>
             )}
           </div>
         </aside>
       </section>
 
+      {/* MATCH HISTORY AS SCORECARDS */}
       <section className="mt-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
         <div className="flex items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 text-lg font-black text-slate-950 dark:text-white">
-            <Trophy className="h-4 w-4 text-brand" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-brand">
+              <path d="M8 21h8" />
+              <path d="M12 17v4" />
+              <path d="M7 4h10" />
+              <path d="M7 4c0 3.314-2.686 6-6 6v3c0 3.866 3.134 7 7 7h8c3.866 0 7-3.134 7-7v-3c-3.314 0-6-2.686-6-6" />
+            </svg>
             Recent Battles
           </h2>
           <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Match History</span>
         </div>
-        <div className="mt-4 divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
+        
+        <div className="mt-6 flex flex-col gap-3">
           {history.length ? history.map((item) => (
-            <div key={item.id} className="grid gap-3 py-3 text-sm sm:grid-cols-[minmax(0,1fr)_auto_auto_auto] sm:items-center">
-              <div className="flex min-w-0 items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-xs font-black text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-200">
-                  {initials(item.opponent.displayName)}
+            <div key={item.id} className="relative overflow-hidden border border-slate-200 bg-slate-50/50 py-4 px-5 transition hover:border-slate-300 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700 sm:rounded-lg">
+              {/* Ticket Cutouts */}
+              <div className="absolute -left-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-r border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
+              <div className="absolute -right-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-l border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
+
+              <div className="grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_auto_auto] sm:items-center sm:px-4">
+                <div className="flex min-w-0 items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-black text-slate-700 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
+                    {initials(item.opponent.displayName)}
+                  </div>
+                  <div className="min-w-0">
+                    <p className={cx("truncate text-xl text-slate-900 dark:text-white", bebas.className)}>{item.opponent.displayName}</p>
+                    <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">@{item.opponent.username || "student"} · {formatDate(item.date)}</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className="truncate font-black text-slate-900 dark:text-white">{item.opponent.displayName}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">@{item.opponent.username || "student"}</p>
+
+                {/* Visual Scorecard */}
+                <div className="flex items-center gap-6 sm:justify-center">
+                   <ScoreComparison scoreString={item.score} />
+                </div>
+
+                {/* Stamped Result */}
+                <div className="flex sm:justify-end">
+                  <div className={cx(
+                    "inline-flex items-center justify-center border-[2.5px] px-2.5 py-0.5 text-sm font-black uppercase tracking-widest",
+                    item.result === "Won" ? "border-brand text-brand shadow-[0_0_10px_rgba(245,181,0,0.2)] rotate-[-2deg]" 
+                    : item.result === "Lost" ? "border-rose-500 text-rose-500 rotate-[3deg] opacity-90"
+                    : "border-slate-400 text-slate-400 rotate-[-1deg]"
+                  )}>
+                    {item.result}
+                  </div>
                 </div>
               </div>
-              <span className={cx("w-fit rounded-md px-2 py-1 text-xs font-black uppercase tracking-[0.08em]", item.result === "Won" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300" : item.result === "Lost" ? "bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-400" : "bg-brand/10 text-brand")}>{item.result}</span>
-              <span className="font-black text-slate-800 dark:text-slate-100">{item.score}</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400">{formatDate(item.date)}</span>
             </div>
           )) : (
-            <p className="py-6 text-sm text-slate-500 dark:text-slate-400">Your battle history will appear here after your first completed match.</p>
+            <div className="rounded-lg border border-dashed border-slate-300 py-10 text-center dark:border-slate-700">
+              <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Your battle history will appear here after your first completed match.</p>
+            </div>
           )}
         </div>
       </section>

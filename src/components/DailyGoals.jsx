@@ -203,30 +203,34 @@ export default function DailyGoals({ compact = false }) {
                           index + 1
                         )}
                       </div>
-                      <p
-                        className={`mx-auto -mt-1 max-w-[5.75rem] truncate whitespace-nowrap text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
-                          isComplete
-                            ? "text-emerald-700 dark:text-emerald-400"
-                            : isCurrent
-                              ? "text-slate-900 dark:text-white"
-                            : "text-slate-500 dark:text-slate-400"
-                        }`}
-                        title={goal.title}
-                      >
-                        {goal.title}
-                      </p>
-                      {isCurrent && (
-                        <p className="mx-auto mt-1 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
-                          In progress
+                      <div className="flex flex-col items-center justify-start h-[3.5rem] pt-1">
+                        <p
+                          className={`max-w-[5.75rem] truncate whitespace-nowrap text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
+                            isComplete
+                              ? "text-emerald-700 dark:text-emerald-400"
+                              : isCurrent
+                                ? "text-slate-900 dark:text-white"
+                              : "text-slate-500 dark:text-slate-400"
+                          }`}
+                          title={goal.title}
+                        >
+                          {goal.title}
                         </p>
-                      )}
+                        {isCurrent ? (
+                          <p className="mt-2 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
+                            In progress
+                          </p>
+                        ) : (
+                          <div className="mt-2 h-[18px]" />
+                        )}
+                      </div>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            <div className="mt-4 rounded-xl border border-slate-200/70 bg-slate-50/40 p-3 dark:border-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/25">
+            <div className="-mt-2 rounded-xl border-y border-r border-l-[3px] border-slate-200/70 border-l-brand bg-slate-50 p-4 shadow-sm relative z-20 mx-1 dark:border-y-[var(--border)]/60 dark:border-r-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/40">
               {nextGoal ? (
                 <NextGoalCard goal={nextGoal} />
               ) : (
@@ -258,36 +262,36 @@ function NextGoalCard({ goal }) {
 
   return (
     <div className="min-w-0">
-      <p className="mb-2 text-[11px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+      <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
         Next Up
       </p>
-      <div className="flex min-w-0 items-start gap-2.5">
-        <Circle className="mt-0.5 h-5 w-5 shrink-0 text-slate-300 dark:text-slate-600" />
+      <div className="flex min-w-0 items-start gap-3">
+        <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[6px] border-[2px] border-slate-300 bg-white shadow-sm dark:border-slate-600 dark:bg-[var(--surface)]" />
         <div className="min-w-0 flex-1">
-          <div className="flex min-w-0 items-start justify-between gap-2">
+          <div className="flex min-w-0 flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
             <div className="min-w-0">
-              <h3 className="whitespace-normal break-words text-sm font-black leading-tight text-slate-900 dark:text-white">
+              <h3 className="whitespace-normal break-words text-[15px] font-black leading-tight text-slate-950 dark:text-white">
                 {goal.title}
               </h3>
-              <p className="mt-0.5 line-clamp-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <p className="mt-1 line-clamp-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
                 {goal.description}
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
-              <Zap className="h-2.5 w-2.5 fill-current" />
+            <div className="flex shrink-0 w-fit items-center gap-1.5 rounded-lg bg-brand px-2.5 py-1 text-[11px] font-black text-slate-950 shadow-sm">
+              <Zap className="h-3 w-3 fill-current" />
               +{goal.xp} XP
             </div>
           </div>
 
-          <div className="mt-2">
-            <div className="mb-1 flex items-end justify-between gap-2">
+          <div className="mt-3">
+            <div className="mb-1.5 flex items-end justify-between gap-2">
               {targetValue > 1 && (
-                <span className="text-[11px] font-bold text-slate-400">
+                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                   {progress} / {goal.target_value}
                 </span>
               )}
             </div>
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+            <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/50">
               <div
                 className="h-full rounded-full bg-brand transition-all duration-700 ease-out"
                 style={{ width: `${progressPct}%` }}
