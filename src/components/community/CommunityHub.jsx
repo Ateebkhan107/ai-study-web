@@ -91,7 +91,7 @@ export default function CommunityHub({ examTrack }) {
             <BookOpen className="w-3.5 h-3.5" />
             <span>{trackLabel}</span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+          <h1 className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
             Study Community
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
@@ -167,7 +167,7 @@ export default function CommunityHub({ examTrack }) {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {groups.map((g) => (
                   <GroupCard
                     key={g.id}

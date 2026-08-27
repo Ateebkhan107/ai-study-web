@@ -257,7 +257,7 @@ export function StatCard({ icon, label, value, helper, trend, accent = "brand", 
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">{label}</p>
-          <p className="mt-2 truncate text-2xl font-black tracking-tight text-slate-950 dark:text-white">{value}</p>
+          <p className="mt-2 truncate text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white">{value}</p>
         </div>
         {icon && (
           <div className={cx("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-current/20 bg-current/10", accentClass)}>
@@ -432,7 +432,7 @@ export function FormulaIndexCard({ title, formula, note, subject, visual, classN
         </div>
         {visual && <div className="h-16 w-16 shrink-0 text-brand">{visual}</div>}
       </div>
-      <p className="mt-4 overflow-wrap-anywhere font-mono text-lg font-black text-slate-900 dark:text-slate-100">{formula}</p>
+      <p className="mt-4 overflow-wrap-anywhere font-mono text-lg font-black font-display text-slate-900 dark:text-slate-100">{formula}</p>
       {note && <Annotation className="mt-4">{note}</Annotation>}
     </Card>
   );
@@ -501,7 +501,7 @@ export function FeatureCard({ icon, title, description, badge, className = "" })
         {icon && <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand">{icon}</div>}
         {badge && <Badge variant="brand">{badge}</Badge>}
       </div>
-      <h3 className="mt-4 text-lg font-black text-slate-950 dark:text-white">{title}</h3>
+      <h3 className="mt-4 text-lg font-black font-display text-slate-950 dark:text-white">{title}</h3>
       {description && <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{description}</p>}
     </Card>
   );
@@ -511,7 +511,7 @@ export function EmptyState({ icon, title, description, action, className = "" })
   return (
     <Card variant="secondary" padding="lg" className={cx("flex flex-col items-center justify-center py-10 text-center", className)}>
       {icon && <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand">{icon}</div>}
-      <h3 className="text-lg font-black text-slate-950 dark:text-white">{title}</h3>
+      <h3 className="text-lg font-black font-display text-slate-950 dark:text-white">{title}</h3>
       {description && <p className="mt-2 max-w-md text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{description}</p>}
       {action && <div className="mt-5">{action}</div>}
     </Card>
@@ -523,7 +523,7 @@ export function SectionHeader({ badge, title, description, action, className = "
     <div className={cx("flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="min-w-0">
         {badge && <Badge variant="brand">{badge}</Badge>}
-        <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 dark:text-white">{title}</h2>
+        <h2 className="mt-2 text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white">{title}</h2>
         {description && <p className="mt-1 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{description}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
@@ -536,7 +536,7 @@ export function MotifHeader({ motif, title, description, visual, annotation, act
     <div className={cx("grid min-w-0 gap-4 border-b border-[var(--prepzii-rule)] pb-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end", className)}>
       <div className="min-w-0">
         {motif && <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">{motif}</p>}
-        <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">{title}</h1>
+        <h1 className="mt-2 text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">{title}</h1>
         {description && <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{description}</p>}
         {annotation && <Annotation className="mt-3">{annotation}</Annotation>}
       </div>

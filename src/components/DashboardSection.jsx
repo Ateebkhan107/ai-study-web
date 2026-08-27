@@ -106,7 +106,7 @@ export default async function DashboardSection({ config, compact = false }) {
                         </span>
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-black leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-10">
+                      <h3 className="text-lg sm:text-xl font-black font-display leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-10">
                         {book.title}
                       </h3>
                     </div>

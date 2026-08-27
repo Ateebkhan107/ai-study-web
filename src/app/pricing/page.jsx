@@ -22,7 +22,7 @@ export default function PricingPage() {
 
         <div className="text-center">
 
-          <h1 className="text-5xl font-black text-gray-900">
+          <h1 className="text-5xl font-black font-display text-gray-900">
             Upgrade to PrepZii Pro
           </h1>
 

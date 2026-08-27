@@ -1011,7 +1011,7 @@ export default function PYQPage() {
       <div className="mx-auto w-full max-w-7xl min-w-0 space-y-5 px-3 py-5 sm:px-6 sm:py-7 lg:px-8">
         <section className="min-w-0">
           <div className="min-w-0">
-            <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            <h1 className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
               PYQ Practice
             </h1>
             <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">

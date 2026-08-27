@@ -57,7 +57,7 @@ export default function PricingCard({
             {discount}% off
           </span>
         </div>
-        <span className="text-5xl font-black">₹{price}</span>
+        <span className="text-5xl font-black font-display">₹{price}</span>
 
         <span className="ml-2 text-gray-500">
           / {duration}

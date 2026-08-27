@@ -335,7 +335,7 @@ export default function ProfilePage() {
         <div className="space-y-5">
           {/* ── PROFILE HERO ── */}
           <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8 relative overflow-hidden">
+            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8 relative overflow-hidden">
               {/* Subtle background glow based on tier */}
               <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${tierColor.bg} opacity-[0.03] dark:opacity-[0.05] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none`} />
 
@@ -343,7 +343,7 @@ export default function ProfilePage() {
                 <div className="flex flex-col sm:flex-row min-w-0 gap-5 sm:gap-6 sm:items-center">
                   
                   {/* TIERED AVATAR RING */}
-                  <div className={`relative flex h-24 w-24 sm:h-28 sm:w-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-[3px] sm:border-[4px] ${tierColor.border} bg-slate-950 text-3xl font-black text-white dark:bg-[var(--surface-elevated)] ring-4 sm:ring-8 ${tierColor.ring} z-10`}>
+                  <div className={`relative flex h-24 w-24 sm:h-28 sm:w-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-[3px] sm:border-[4px] ${tierColor.border} bg-slate-950 text-3xl font-black font-display text-white dark:bg-[var(--surface-elevated)] ring-4 sm:ring-8 ${tierColor.ring} z-10`}>
                     {activeUser.avatar ? (
                       <img
                         src={activeUser.avatar}
@@ -360,7 +360,7 @@ export default function ProfilePage() {
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                       Student Profile
                     </p>
-                    <h2 className="mt-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+                    <h2 className="mt-1.5 break-words text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
                       {activeUser.name}
                     </h2>
                     <p className={`mt-1.5 truncate text-sm font-bold ${tierColor.text}`}>
@@ -441,13 +441,13 @@ export default function ProfilePage() {
 
           {/* ── PROGRESS ── */}
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8">
+            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
                 <div className="flex-1">
                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                     Progression
                   </p>
-                  <h3 className="mt-1.5 text-2xl font-black text-slate-950 dark:text-white">
+                  <h3 className="mt-1.5 text-2xl font-black font-display text-slate-950 dark:text-white">
                     Level {levelStats.currentLevel}: <span className={tierColor.text}>{levelStats.title}</span>
                   </h3>
                   <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">
@@ -474,16 +474,16 @@ export default function ProfilePage() {
                 </div>
 
                 {/* ELEVATED STAT CHIPS */}
-                <div className="flex flex-row gap-3 sm:gap-4 shrink-0">
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-5 py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[100px] shadow-sm">
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Global Rank</p>
-                    <p className={`mt-1.5 text-2xl sm:text-3xl font-black tabular-nums tracking-tighter ${tierColor.text}`}>
+                <div className="flex flex-row gap-2 sm:gap-4 shrink-0">
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-3 sm:px-5 sm:py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[80px] sm:min-w-[100px] shadow-sm">
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 text-center">Global Rank</p>
+                    <p className={`mt-1.5 text-xl sm:text-3xl font-black font-display tabular-nums tracking-tighter ${tierColor.text}`}>
                       {activeUser.rank ? `#${activeUser.rank}` : "—"}
                     </p>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-5 py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[100px] shadow-sm">
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Progress</p>
-                    <p className={`mt-1.5 text-2xl sm:text-3xl font-black tabular-nums tracking-tighter text-slate-900 dark:text-white`}>
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-3 sm:px-5 sm:py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[80px] sm:min-w-[100px] shadow-sm">
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 text-center">Progress</p>
+                    <p className={`mt-1.5 text-xl sm:text-3xl font-black font-display tabular-nums tracking-tighter text-slate-900 dark:text-white`}>
                       {progressPercentage.toFixed(0)}%
                     </p>
                   </div>
@@ -496,7 +496,7 @@ export default function ProfilePage() {
           <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
             <div className="mb-4 flex items-center justify-between gap-3 px-1">
               <div>
-                <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tight">
+                <h3 className="text-lg font-black font-display text-slate-950 dark:text-white tracking-tight">
                   Achievements
                 </h3>
                 <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
@@ -518,7 +518,7 @@ export default function ProfilePage() {
                     <Trophy className="h-8 w-8 text-amber-600 dark:text-brand" strokeWidth={2} />
                   </div>
                   
-                  <h4 className="text-lg font-black text-amber-950 dark:text-white z-10 tracking-tight">
+                  <h4 className="text-lg font-black font-display text-amber-950 dark:text-white z-10 tracking-tight">
                     Your Trophy Cabinet Awaits
                   </h4>
                   <p className="mt-2 text-sm font-medium leading-relaxed text-amber-800/80 dark:text-amber-200/60 max-w-sm z-10">
@@ -565,7 +565,7 @@ export default function ProfilePage() {
         {/* ── ACTIONS SIDEBAR ── */}
         <aside className="space-y-5 animate-slideUp" style={{ animationDelay: "200ms" }}>
           <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
-            <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tight">Profile Actions</h3>
+            <h3 className="text-lg font-black font-display text-slate-950 dark:text-white tracking-tight">Profile Actions</h3>
             <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
               Manage your account identity and keep your exam goals aligned.
             </p>

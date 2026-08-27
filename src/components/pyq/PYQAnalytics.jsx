@@ -67,7 +67,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
               {s.label}
             </p>
-            <p className="text-3xl font-black text-black dark:text-white tracking-tight mb-0.5">
+            <p className="text-3xl font-black font-display text-black dark:text-white tracking-tight mb-0.5">
               {s.value}
             </p>
             <p className="text-xs text-gray-400">{s.sub}</p>
@@ -84,7 +84,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
           {subjectStats.map((s) => (
             <div key={s.subject} className="bg-gray-50 dark:bg-[var(--surface-elevated)] rounded-xl p-4">
               <p className="text-sm font-bold text-black dark:text-white mb-1">{s.subject}</p>
-              <p className="text-2xl font-black text-black dark:text-white mb-0.5">
+              <p className="text-2xl font-black font-display text-black dark:text-white mb-0.5">
                 {s.accuracy !== null ? `${s.accuracy}%` : "—"}
               </p>
               <p className="text-[11px] text-gray-400">
@@ -129,7 +129,7 @@ export default function PYQAnalytics({ questions, correctCount }) {
               <p className="text-[10px] font-semibold leading-tight mb-1 opacity-80">
                 {c.name}
               </p>
-              <p className="text-xl font-black">{c.count}</p>
+              <p className="text-xl font-black font-display">{c.count}</p>
             </div>
           ))}
         </div>

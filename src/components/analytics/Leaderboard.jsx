@@ -69,7 +69,7 @@ export default function Leaderboard({ compact = false }) {
 
   return (
     <div className={`relative bg-white dark:bg-[var(--surface)] rounded-xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-colors duration-200 ${
-      compact ? "p-3 sm:p-4" : "p-4 sm:p-6 lg:p-7"
+      compact ? "p-2.5 sm:p-4" : "p-4 sm:p-6 lg:p-7"
     }`}>
       
       <style>{`
@@ -175,7 +175,7 @@ function RankOneCard({ user, isCurrentUser, compact }) {
   const levelData = getLevelFromXP(user.xp);
   
   return (
-    <div className={`relative overflow-hidden rounded-xl border border-amber-200 dark:border-brand/30 bg-gradient-to-r from-amber-100 to-amber-50/50 dark:from-brand/20 dark:to-brand/5 shadow-sm ${compact ? "p-3 sm:p-4" : "p-4 sm:p-5"}`}>
+    <div className={`relative overflow-hidden rounded-xl border border-amber-200 dark:border-brand/30 bg-gradient-to-r from-amber-100 to-amber-50/50 dark:from-brand/20 dark:to-brand/5 shadow-sm ${compact ? "p-2.5 sm:p-4" : "p-4 sm:p-5"}`}>
       
       {/* SHIMMER ANIMATION */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent -translate-x-full animate-shimmer" style={{ animationDelay: '0s' }} />
@@ -249,7 +249,7 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
       transparent ? "" : "border-t border-slate-200 dark:border-[var(--border-subtle)] first:border-t-0 hover:bg-slate-50/80 dark:hover:bg-[var(--surface-elevated)]/55"
     } ${
       isCurrentUser && !isDocked ? "bg-indigo-50/40 dark:bg-indigo-500/5" : ""
-    } ${compact ? "px-3 py-2.5 sm:py-3" : "px-3.5 py-3 sm:px-4 sm:py-4"}`}>
+    } ${compact ? "px-2.5 py-2 sm:px-3 sm:py-3" : "px-3.5 py-3 sm:px-4 sm:py-4"}`}>
       
       {/* LEFT SIDE */}
       <div className={`flex min-w-0 flex-1 items-center z-10 ${compact ? "gap-3" : "gap-4"}`}>

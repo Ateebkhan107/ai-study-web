@@ -6,7 +6,7 @@ export default function AdminImagesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black mb-2">Image Manager</h1>
+        <h1 className="text-2xl font-black font-display mb-2">Image Manager</h1>
         <p className="text-gray-500 dark:text-gray-400">Upload missing images for exam questions, options, and explanations.</p>
       </div>
       

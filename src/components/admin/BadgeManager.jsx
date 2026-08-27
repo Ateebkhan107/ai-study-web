@@ -120,7 +120,7 @@ export default function BadgeManager() {
     <div className="glass-card p-6 mt-8">
       <div className="flex items-center gap-3 mb-6">
         <Award className="w-6 h-6 text-indigo-500" />
-        <h2 className="text-xl font-black text-slate-900 dark:text-white">
+        <h2 className="text-xl font-black font-display text-slate-900 dark:text-white">
           Badge Management
         </h2>
       </div>

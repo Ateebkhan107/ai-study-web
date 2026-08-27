@@ -39,7 +39,7 @@ export default function AdminNotificationsPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-2xl font-black mb-2 flex items-center gap-2">
+        <h1 className="text-2xl font-black font-display mb-2 flex items-center gap-2">
           Notifications <Bell className="w-6 h-6" />
         </h1>
         <p className="text-gray-500 dark:text-gray-400">Push announcements and updates to your students.</p>

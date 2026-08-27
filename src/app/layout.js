@@ -1,6 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "@awesome.me/webawesome/dist/styles/themes/default.css";
 
 import {
@@ -15,14 +15,24 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+
+const displayFont = Rajdhani({
+  variable: "--font-rajdhani",
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sansFont = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const monoFont = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -265,7 +275,7 @@ export default function RootLayout({ children }) {
 
         <body
           suppressHydrationWarning
-          className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col antialiased`}
+          className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
         >
           <Script
             id="theme-init"

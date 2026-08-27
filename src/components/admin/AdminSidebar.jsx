@@ -73,7 +73,7 @@ export default function AdminSidebar() {
     <>
       {/* Mobile Menu Button */}
       <div className="lg:hidden fixed top-0 left-0 w-full h-16 bg-[var(--card)] dark:bg-[var(--background)] border-b border-gray-200 dark:border-[var(--border-subtle)] flex items-center justify-between px-4 z-50">
-        <span className="font-black text-xl bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
+        <span className="font-black font-display text-xl bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
           PrepZii Admin
         </span>
         <button onClick={() => setIsOpen(!isOpen)} className="p-2">
@@ -88,7 +88,7 @@ export default function AdminSidebar() {
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-[var(--border-subtle)] hidden lg:flex">
-          <span className="font-black text-xl bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
+          <span className="font-black font-display text-xl bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
             PrepZii Admin
           </span>
         </div>

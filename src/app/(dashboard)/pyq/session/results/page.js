@@ -221,7 +221,7 @@ export default function PYQResultsPage() {
             <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
               Test Result
             </p>
-            <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
               Deck Submitted
             </h1>
             <p className="mt-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
@@ -248,7 +248,7 @@ export default function PYQResultsPage() {
                   />
                 </svg>
                 <div className="absolute flex flex-col items-center justify-center text-center">
-                  <span className="text-5xl sm:text-6xl font-black text-slate-950 dark:text-white tabular-nums tracking-tighter">
+                  <span className="text-5xl sm:text-6xl font-black font-display text-slate-950 dark:text-white tabular-nums tracking-tighter">
                     {Math.round(animatedScore)}
                   </span>
                   <span className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
@@ -285,11 +285,11 @@ export default function PYQResultsPage() {
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                  <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-2xl p-4 sm:p-5 border border-slate-100 dark:border-[var(--border-subtle)]/50">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-1.5">Accuracy</p>
-                    <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">{accuracy}%</p>
+                    <p className="text-2xl sm:text-3xl font-black font-display text-slate-900 dark:text-white">{accuracy}%</p>
                  </div>
                  <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-2xl p-4 sm:p-5 border border-slate-100 dark:border-[var(--border-subtle)]/50">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-1.5">Attempted</p>
-                    <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+                    <p className="text-2xl sm:text-3xl font-black font-display text-slate-900 dark:text-white">
                       {attempted}<span className="text-base sm:text-lg text-slate-400 dark:text-slate-500 ml-1">/ {total}</span>
                     </p>
                  </div>

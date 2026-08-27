@@ -37,21 +37,21 @@ export default function SubscriptionsPage() {
 
           <div className="space-y-6 sm:space-y-8">
             <div className="space-y-3">
-              <h2 className="text-lg font-black text-slate-900 dark:text-white">1. PrepZii Pro & Premium Features</h2>
+              <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">1. PrepZii Pro & Premium Features</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                 PrepZii offers a premium subscription tier known as PrepZii Pro. Purchasing a Pro plan grants you access to advanced analytics, unlimited full-length mock tests, detailed solutions, and priority support. These features are strictly tied to your active subscription status.
               </p>
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-lg font-black text-slate-900 dark:text-white">2. Subscription Plans & Billing Period</h2>
+              <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">2. Subscription Plans & Billing Period</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                 We offer multiple fixed-term plans (e.g., 1 Month, 6 Months, etc.). The duration of your subscription depends entirely on the plan selected at checkout. Payments are processed securely through Cashfree Payments. All features remain fully available to you continuously until the subscription expires.
               </p>
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-lg font-black text-slate-900 dark:text-white">3. Subscription Expiry</h2>
+              <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">3. Subscription Expiry</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                 You can view your current subscription status, plan details, and exact expiry date at any time by navigating to your account settings or profile. Once your active billing period concludes and the subscription expires, your account will automatically return to the standard free tier, and access to premium features will be restricted unless another subscription is purchased.
               </p>

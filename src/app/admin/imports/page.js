@@ -65,7 +65,7 @@ export default function ImportPackagesPage() {
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div className="min-w-0">
-          <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
+          <h1 className="text-2xl font-black font-display bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
             Import Packages
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">

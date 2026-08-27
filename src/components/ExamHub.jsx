@@ -24,7 +24,7 @@ export default function ExamHub({ config }) {
             {config.badge}
           </span>
 
-          <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-black font-display tracking-tight text-gray-900 dark:text-white">
             {config.dashboardTitle}
           </h2>
           <p className="text-xs font-medium text-gray-500 dark:text-gray-400 leading-relaxed">

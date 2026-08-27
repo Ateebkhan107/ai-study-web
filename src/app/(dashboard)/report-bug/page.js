@@ -38,7 +38,7 @@ export default function ReportBugPage() {
         <div className="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden border-rose-500/20 shadow-lg shadow-rose-500/5">
           <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
           
-          <h2 className="text-xl font-black text-slate-900 dark:text-white mb-6 relative z-10">What to include in your report:</h2>
+          <h2 className="text-xl font-black font-display text-slate-900 dark:text-white mb-6 relative z-10">What to include in your report:</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
             {BUG_GUIDELINES.map((item, i) => (

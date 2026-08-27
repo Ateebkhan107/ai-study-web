@@ -204,7 +204,7 @@ function StatCard({ icon, label, value, sub, delay = "0ms" }) {
       </div>
       <div>
         <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{label}</p>
-        <p className="text-2xl font-black text-slate-900 dark:text-white leading-none tracking-tight">{value}</p>
+        <p className="text-2xl font-black font-display text-slate-900 dark:text-white leading-none tracking-tight">{value}</p>
         {sub && <p className="text-xs text-slate-400 mt-1">{sub}</p>}
       </div>
     </div>
@@ -240,7 +240,7 @@ function TestCard({ test }) {
           <p className="text-xs text-slate-400">{formatDate(test.date)}</p>
         </div>
         <div className="text-right shrink-0">
-          <p className={`text-xl font-black ${meta.color}`}>{test.accuracy}%</p>
+          <p className={`text-xl font-black font-display ${meta.color}`}>{test.accuracy}%</p>
           <p className="text-xs text-slate-400">accuracy</p>
         </div>
       </div>

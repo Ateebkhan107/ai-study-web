@@ -640,7 +640,7 @@ export default function PYQSessionPage() {
           <div className="mb-4 flex justify-center text-slate-400 dark:text-slate-500">
             {loadError ? <AlertTriangle className="h-12 w-12" /> : <Inbox className="h-12 w-12" />}
           </div>
-          <h2 className="text-xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-xl font-black font-display text-slate-900 dark:text-white">
             {loadError || "No PYQs Found"}
           </h2>
           <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">Try different filters or subjects.</p>

@@ -64,12 +64,12 @@ function ResultPanel({ battle, userId, onRematch, rematchMessage, reviewOpen, se
       : "Battle complete";
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-5xl px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
         <div className="flex flex-col gap-3 border-b border-slate-200 pb-5 dark:border-[var(--border-subtle)] sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.16em] text-brand">Battle Complete</p>
-            <h1 className="mt-1 text-3xl font-black text-slate-950 dark:text-white">{resultText}</h1>
+            <h1 className="mt-1 text-3xl font-black font-display text-slate-950 dark:text-white">{resultText}</h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               {me?.profile.displayName} vs {opponent?.profile.displayName || "Opponent"}
             </p>
@@ -96,7 +96,7 @@ function ResultPanel({ battle, userId, onRematch, rematchMessage, reviewOpen, se
                     <p className="font-black text-slate-950 dark:text-white">{player.profile.displayName}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">@{player.profile.username}</p>
                   </td>
-                  <td className="py-4 text-lg font-black text-slate-950 dark:text-white">{player.score}</td>
+                  <td className="py-4 text-lg font-black font-display text-slate-950 dark:text-white">{player.score}</td>
                   <td className="py-4 text-emerald-600 dark:text-emerald-300">{player.correct_count}</td>
                   <td className="py-4 text-rose-500">{player.wrong_count}</td>
                   <td className="py-4 text-slate-500">{player.skipped_count}</td>

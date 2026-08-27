@@ -185,7 +185,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
           <div className="text-4xl mb-4 flex justify-center text-black dark:text-white">
             <Flag className="w-10 h-10" />
           </div>
-          <h2 className="text-3xl font-black text-black dark:text-white tracking-tight mb-2">
+          <h2 className="text-3xl font-black font-display text-black dark:text-white tracking-tight mb-2">
             Practice Complete
           </h2>
           <p className="text-sm text-gray-400 mb-8">Performance metrics recorded successfully.</p>
@@ -198,7 +198,7 @@ export default function PYQPractice({ questions = [], updateQuestion, onSwitchTa
               { label: "Time Expended", value: formatTime(timeTaken), cls: "text-amber-500" },
             ].map((s, i) => (
               <div key={i} className="bg-gray-50 dark:bg-[var(--surface-elevated)]/30 border border-gray-100 dark:border-[var(--border-subtle)]/60 rounded-2xl p-5">
-                <p className={`text-2xl font-black ${s.cls}`}>{s.value}</p>
+                <p className={`text-2xl font-black font-display ${s.cls}`}>{s.value}</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1.5">{s.label}</p>
               </div>
             ))}

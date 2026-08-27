@@ -37,7 +37,7 @@ export function SmartPrediction({ track = "jee" }) {
             className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-3.5"
           >
             <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{p.label}</p>
-            <p className="text-xl font-black text-slate-900 dark:text-white mb-2">{p.value}</p>
+            <p className="text-xl font-black font-display text-slate-900 dark:text-white mb-2">{p.value}</p>
             {p.pct !== null && (
               <div className="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                 <div

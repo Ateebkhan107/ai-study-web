@@ -53,7 +53,7 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-black mb-2">Dashboard Overview</h1>
+        <h1 className="text-2xl font-black font-display mb-2">Dashboard Overview</h1>
         <p className="text-gray-500 dark:text-gray-400">Welcome to the PrepZii Admin CMS. Here&apos;s what&apos;s happening today.</p>
       </div>
 
@@ -66,7 +66,7 @@ export default function AdminDashboard() {
                 {loading ? (
                   <div className="h-10 w-24 bg-gray-200 dark:bg-[var(--surface-elevated)] rounded animate-pulse mt-2"></div>
                 ) : (
-                  <h3 className="text-4xl font-black mt-1">{card.value}</h3>
+                  <h3 className="text-4xl font-black font-display mt-1">{card.value}</h3>
                 )}
               </div>
               <div className={`p-3 rounded-xl ${card.bg} ${card.color}`}>

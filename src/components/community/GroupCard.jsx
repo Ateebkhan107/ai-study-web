@@ -99,7 +99,7 @@ export default function GroupCard({ group, myRole, myStatus, onJoin }) {
       <div className="flex items-start gap-4">
         {/* Abstract Identity Block */}
         <div className={`relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br ${gradient} shadow-inner`}>
-          <span className="relative z-10 text-lg font-black text-white drop-shadow-md tracking-tighter">
+          <span className="relative z-10 text-lg font-black font-display text-white drop-shadow-md tracking-tighter">
             {initials}
           </span>
         </div>

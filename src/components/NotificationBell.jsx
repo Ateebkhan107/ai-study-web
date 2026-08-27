@@ -85,11 +85,11 @@ export default function NotificationBell() {
     <div className="relative flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
       <button
         onClick={() => setOpen(!open)}
-        className="relative flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
+        className="relative flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
         aria-label="Open notifications"
         aria-expanded={open}
       >
-        <Bell className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+        <Bell className="h-4 w-4 sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
 
         {unread > 0 && (
           <span

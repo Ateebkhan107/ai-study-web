@@ -75,7 +75,7 @@ export default function ExamManager() {
 
   return (
     <div className="space-y-5 border rounded-xl p-4 sm:p-5">
-      <h2 className="font-black text-xl flex items-center gap-2">
+      <h2 className="font-black font-display text-xl flex items-center gap-2">
         Exam Manager <BookOpen className="w-6 h-6" />
       </h2>
       

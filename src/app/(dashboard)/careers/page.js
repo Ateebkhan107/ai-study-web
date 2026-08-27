@@ -41,7 +41,7 @@ export default function CareersPage() {
 
         {/* Future Opportunities */}
         <div>
-          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-8 text-center">Future Opportunities</h2>
+          <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white mb-8 text-center">Future Opportunities</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {DEPARTMENTS.map((dept, i) => (
               <div key={i} className="glass-card p-6 rounded-3xl group hover:border-indigo-500/30 transition-all duration-300">
@@ -59,7 +59,7 @@ export default function CareersPage() {
         <div className="glass-card p-10 rounded-3xl border-indigo-500/20 shadow-lg shadow-indigo-500/5 text-center relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -mt-20 pointer-events-none" />
 
-          <h2 className="text-xl font-black text-slate-900 dark:text-white mb-4 relative z-10">Think you&apos;d be a great fit?</h2>
+          <h2 className="text-xl font-black font-display text-slate-900 dark:text-white mb-4 relative z-10">Think you&apos;d be a great fit?</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto leading-relaxed mb-8 relative z-10">
             Even though we don&apos;t have open roles right now, we keep an active talent pool. Send us your resume and a brief introduction about what you&apos;d like to build at PrepZii.
           </p>

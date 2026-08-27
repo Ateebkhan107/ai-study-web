@@ -202,7 +202,7 @@ export default function TestEditorPage({ params }) {
             </Link>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h1 className="truncate text-base font-black text-slate-900 dark:text-white sm:text-lg">{test.title}</h1>
+                <h1 className="truncate text-base font-black font-display text-slate-900 dark:text-white sm:text-lg">{test.title}</h1>
                 <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">Draft</span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">{test.exam} • {test.subject} • {test.duration_minutes} mins • {questions.length} questions</p>

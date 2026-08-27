@@ -117,7 +117,7 @@ export default function AuthLayout({ children }) {
                   }}
                 >
                   <p
-                    className="text-2xl font-black tracking-tight tabular-nums leading-none"
+                    className="text-2xl font-black font-display tracking-tight tabular-nums leading-none"
                     style={{ color: "#FFFFFF" }}
                   >
                     {s.value}

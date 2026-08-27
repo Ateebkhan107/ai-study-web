@@ -651,13 +651,13 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
       </div>
 
-      <aside className="lg:sticky lg:top-24">
-        <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/85 p-4 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/85">
-          <h2 className="text-sm font-black text-slate-900 dark:text-white">
+      <aside className="mobile-sticky-cta lg:sticky lg:top-24">
+        <div className="sm:rounded-2xl sm:border sm:border-slate-200/70 sm:bg-[var(--card)]/85 sm:p-4 sm:shadow-sm sm:backdrop-blur-xl dark:sm:border-[var(--border-subtle)] dark:sm:bg-[var(--surface)]/85">
+          <h2 className="hidden sm:block text-sm font-black text-slate-900 dark:text-white">
             Your Test
           </h2>
 
-          <div className="mt-4 space-y-3 text-sm">
+          <div className="hidden sm:block mt-4 space-y-3 text-sm">
             <div className="flex items-center justify-between gap-3">
               <span className="font-semibold text-slate-500 dark:text-slate-400">Subjects</span>
               <span className="truncate text-right font-black text-slate-900 dark:text-white">
@@ -683,7 +683,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
           </div>
 
           {selectedChapterGroups.length > 0 && (
-            <div className="mt-4 max-h-28 space-y-1.5 overflow-y-auto text-xs font-semibold text-slate-500 dark:text-slate-500">
+            <div className="hidden sm:block mt-4 max-h-28 space-y-1.5 overflow-y-auto text-xs font-semibold text-slate-500 dark:text-slate-500">
               {selectedChapterGroups.map(({ subject, chapters }) => (
                 <p key={subject} className="line-clamp-1">
                   <span className="font-black text-slate-700 dark:text-slate-300">{subject}:</span> {chapters.join(", ")}
@@ -693,7 +693,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
           )}
 
           {customTestUsage && !access?.isPro && (
-            <p className={`mt-4 text-xs font-bold ${
+            <p className={`hidden sm:block mt-4 text-xs font-bold ${
               customTestBlocked
                 ? "text-rose-600 dark:text-rose-300"
                 : "text-slate-500 dark:text-slate-400"
@@ -704,28 +704,43 @@ export default function TestBuilder({ track = "jee", access = null }) {
             </p>
           )}
 
-          <button
-            type="button"
-            onClick={handleStart}
-            disabled={!canStart || customTestBlocked}
-            className={`mt-5 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-black transition-colors ${
-              !canStart || customTestBlocked
-                ? "cursor-not-allowed bg-slate-200 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-500"
-                : "cursor-pointer bg-brand text-black hover:bg-brand-hover"
-            }`}
-          >
-            <Play className="h-4 w-4" fill="currentColor" />
-            Start Test
-          </button>
+          {/* Mobile Summary */}
+          <div className="sm:hidden mb-3 flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-sm font-black text-slate-900 dark:text-white">{questionCount} Qs · {duration}m</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{totalChapters} Chapters</span>
+            </div>
+            {customTestUsage && !access?.isPro && (
+               <span className={`text-[10px] font-bold ${customTestBlocked ? "text-rose-600 dark:text-rose-400" : "text-amber-600 dark:text-brand"}`}>
+                 {customTestBlocked ? "Limit reached" : `${customTestUsage.remaining} free left`}
+               </span>
+            )}
+          </div>
 
-          {customTestBlocked && (
-            <Link
-              href="/pro"
-              className="mt-3 flex w-full items-center justify-center rounded-xl border border-brand/35 px-4 py-3 text-sm font-black text-amber-700 transition-colors hover:bg-brand hover:text-black dark:text-brand"
+          <div className="flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={handleStart}
+              disabled={!canStart || customTestBlocked}
+              className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 sm:mt-5 text-sm font-black transition-colors ${
+                !canStart || customTestBlocked
+                  ? "cursor-not-allowed bg-slate-200 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-500"
+                  : "cursor-pointer bg-brand text-black hover:bg-brand-hover"
+              }`}
             >
-              Upgrade to Pro
-            </Link>
-          )}
+              <Play className="h-4 w-4" fill="currentColor" />
+              Start Test
+            </button>
+
+            {customTestBlocked && (
+              <Link
+                href="/pro"
+                className="flex w-full items-center justify-center rounded-xl border border-brand/35 px-4 py-3 text-sm font-black text-amber-700 transition-colors hover:bg-brand hover:text-black dark:text-brand sm:mt-3"
+              >
+                Upgrade to Pro
+              </Link>
+            )}
+          </div>
         </div>
       </aside>
     </div>

@@ -152,7 +152,7 @@ export default function ManagePYQs() {
       {/* FILTERS */}
       <div className="bg-gray-50 dark:bg-[var(--surface)]/50 p-4 sm:p-5 rounded-2xl border dark:border-[var(--border-subtle)] space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="font-black text-lg sm:text-xl flex items-center gap-2">Manage PYQs (CMS) <BookOpen className="w-6 h-6" /></h2>
+          <h2 className="font-black font-display text-lg sm:text-xl flex items-center gap-2">Manage PYQs (CMS) <BookOpen className="w-6 h-6" /></h2>
           <button onClick={loadQuestions} disabled={loading} className="min-h-11 w-full rounded-lg bg-brand px-5 py-2 text-sm font-bold text-white disabled:opacity-50 dark:bg-indigo-500 dark:text-white sm:w-auto">
             {loading ? "Searching..." : "Apply Filters"}
           </button>
@@ -263,7 +263,7 @@ export default function ManagePYQs() {
             {/* Drawer Header */}
             <div className="p-4 sm:p-5 border-b dark:border-[var(--border-subtle)] flex items-start justify-between gap-3 sticky top-0 bg-[var(--card)] dark:bg-[var(--background)] z-10">
               <div className="min-w-0">
-                <h3 className="break-words font-black text-base sm:text-lg">Edit Question #{editingQuestion.id}</h3>
+                <h3 className="break-words font-black font-display text-base sm:text-lg">Edit Question #{editingQuestion.id}</h3>
                 <p className="text-xs text-gray-500">{editingQuestion.exam} {editingQuestion.year} • {editingQuestion.subject}</p>
               </div>
               <div className="flex shrink-0 items-center gap-2 sm:gap-3">

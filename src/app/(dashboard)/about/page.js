@@ -24,7 +24,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center mb-6">
               <Target className="w-6 h-6 text-indigo-500" />
             </div>
-            <h2 className="text-xl font-black text-slate-900 dark:text-white">Our Mission</h2>
+            <h2 className="text-xl font-black font-display text-slate-900 dark:text-white">Our Mission</h2>
             <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
               To democratize high-quality education by providing every JEE and NEET aspirant with intelligent, affordable, and highly effective tools to unlock their true potential.
             </p>
@@ -35,7 +35,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center mb-6">
               <Lightbulb className="w-6 h-6 text-amber-500" />
             </div>
-            <h2 className="text-xl font-black text-slate-900 dark:text-white">Our Vision</h2>
+            <h2 className="text-xl font-black font-display text-slate-900 dark:text-white">Our Vision</h2>
             <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
               To become the global standard for personalized learning, where technology and education seamlessly merge to create the next generation of engineers and doctors.
             </p>
@@ -45,7 +45,7 @@ export default function AboutPage() {
         {/* Why PrepZii */}
         <div className="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand/5 rounded-full blur-3xl" />
-          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Why PrepZii?</h2>
+          <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white mb-6">Why PrepZii?</h2>
           <div className="space-y-4 text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
             <p>
               Preparing for competitive exams like JEE and NEET is incredibly challenging. Students often face an overwhelming amount of content, lack of structured feedback, and expensive coaching institutes that don&apos;t cater to individual learning paces.
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
         {/* What We Offer */}
         <div>
-          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 text-center">What We Offer</h2>
+          <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white mb-6 text-center">What We Offer</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: ShieldCheck, title: "Exam Simulation", desc: "A strict, distraction-free interface that mirrors the actual JEE/NEET CBT exam." },
@@ -78,7 +78,7 @@ export default function AboutPage() {
 
         {/* Future Roadmap */}
         <div className="glass-card p-8 md:p-12 rounded-3xl border-indigo-500/20 shadow-lg shadow-brand/5">
-          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Our Future Roadmap</h2>
+          <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white mb-6">Our Future Roadmap</h2>
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm mb-6">
             We are constantly iterating and improving. Here is a glimpse of what&apos;s coming next to PrepZii:
           </p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
           <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-brand to-brand-hover rounded-full flex items-center justify-center shadow-lg shadow-brand/30 mb-6">
             <Heart className="w-8 h-8 text-white fill-white/20" />
           </div>
-          <h2 className="text-xl font-black text-slate-900 dark:text-white">Built with passion by Team PrepZii</h2>
+          <h2 className="text-xl font-black font-display text-slate-900 dark:text-white">Built with passion by Team PrepZii</h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm max-w-lg mx-auto">
             We are dedicated to helping you achieve your dreams. Keep learning, keep pushing your limits, and trust the process. You&apos;ve got this.
           </p>

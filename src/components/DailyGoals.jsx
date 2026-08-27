@@ -141,7 +141,7 @@ export default function DailyGoals({ compact = false }) {
         ) : (
           <>
             <div className="relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2">
-              <div className="relative min-h-[10.5rem]" style={{ minWidth: `${Math.max(420, goals.length * 112)}px` }}>
+              <div className="relative min-h-[9rem]" style={{ minWidth: `${Math.max(420, goals.length * 112)}px` }}>
                 {goals.length > 1 && (
                   <svg
                     className="absolute left-0 top-0 h-28 w-full overflow-visible"
@@ -230,7 +230,7 @@ export default function DailyGoals({ compact = false }) {
               </div>
             </div>
 
-            <div className="-mt-2 rounded-xl border-y border-r border-l-[3px] border-slate-200/70 border-l-brand bg-slate-50 p-4 shadow-sm relative z-20 mx-1 dark:border-y-[var(--border)]/60 dark:border-r-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/40">
+            <div className="-mt-2 rounded-xl border-y border-r border-l-[3px] border-slate-200/70 border-l-brand bg-slate-50 p-3 sm:p-4 shadow-sm relative z-20 mx-1 dark:border-y-[var(--border)]/60 dark:border-r-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/40">
               {nextGoal ? (
                 <NextGoalCard goal={nextGoal} />
               ) : (

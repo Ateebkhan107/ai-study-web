@@ -21,8 +21,8 @@ async function getDashboardProfile() {
     .eq("clerk_user_id", userId)
     .maybeSingle();
 
-  if (error) {
-    console.error("[DASHBOARD_PROFILE_FETCH_ERROR]", error);
+  if (error && Object.keys(error).length > 0) {
+    console.warn("[DASHBOARD_PROFILE_FETCH_ERROR]", error);
   }
 
   const claimsName =
@@ -51,7 +51,7 @@ function DashboardHeaderFallback({ activeTrackKey }) {
         {futureLabel}
       </div>
 
-      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
         <span>Hey,</span>
         <span>Student</span>
         <Sparkles className="h-6 w-6 text-brand" aria-hidden="true" />
@@ -73,7 +73,7 @@ async function DashboardGreeting({ activeTrackKey }) {
         {futureLabel}
       </div>
 
-      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
         <span>Hey,</span>
         <span>{getFirstName(profile?.fullName)}</span>
         <Sparkles className="h-6 w-6 text-brand" aria-hidden="true" />
@@ -111,8 +111,8 @@ export default async function DashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f35_1px,transparent_1px)] [background-size:34px_34px] opacity-10 dark:opacity-15" />
       </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-3 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
-          <div className="relative grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
+        <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-3 px-3 py-3 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
+          <div className="relative grid min-w-0 gap-2 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
           <Suspense fallback={<DashboardHeaderFallback activeTrackKey={activeTrackKey} />}>
             <DashboardGreeting activeTrackKey={activeTrackKey} />
           </Suspense>
@@ -120,8 +120,8 @@ export default async function DashboardPage() {
           <DashboardHeaderQuote />
         </div>
 
-        <div className="relative z-10 grid gap-3 sm:gap-5 lg:gap-6">
-          <section className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(280px,0.75fr)] lg:items-stretch">
+        <div className="relative z-10 grid gap-2 sm:gap-5 lg:gap-6">
+          <section className="grid min-w-0 grid-cols-1 gap-2 sm:gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(280px,0.75fr)] lg:items-stretch">
             <div className="min-w-0">
               <DailyGoals compact />
             </div>
@@ -130,7 +130,7 @@ export default async function DashboardPage() {
             </div>
           </section>
 
-          <section className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+          <section className="grid min-w-0 grid-cols-1 gap-2 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
             <div className="min-w-0">
               <Suspense fallback={<DashboardCardFallback className="h-[350px]" />}>
                 <DashboardSection config={activeConfig} compact />

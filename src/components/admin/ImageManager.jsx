@@ -111,7 +111,7 @@ export default function ImageManager() {
 
   return (
     <div className="space-y-5 border rounded-xl p-5">
-      <h2 className="font-black text-xl flex items-center gap-2">
+      <h2 className="font-black font-display text-xl flex items-center gap-2">
         Image Manager <ImageIcon className="w-6 h-6" />
       </h2>
 

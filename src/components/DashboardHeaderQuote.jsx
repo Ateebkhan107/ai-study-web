@@ -111,7 +111,7 @@ export default function DashboardHeaderQuote() {
   const [message] = useState(() => getInitialMessage());
 
   return (
-    <div className="max-w-full min-w-0 lg:col-start-2 lg:max-w-[440px] lg:pt-8">
+    <div className="max-w-full min-w-0 lg:col-start-2 lg:max-w-[440px] lg:pt-6">
       <p className="text-[11px] font-black uppercase tracking-[0.2em] text-amber-700/75 dark:text-brand/70">
         {dateLabel}
       </p>

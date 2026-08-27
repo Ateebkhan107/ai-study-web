@@ -8,26 +8,26 @@ import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
 import NotificationBell from "@/components/NotificationBell";
 import {
-  BarChart3,
-  BookOpenCheck,
+  Compass,
+  Scroll,
   Building2,
-  ClipboardList,
-  LayoutDashboard,
+  Target,
+  LineChart,
   Menu,
   Moon,
   Star,
   Sun,
   UserRound,
-  Users,
+  Swords,
   X,
 } from "lucide-react";
 
 const navItems = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Test", href: "/test", icon: ClipboardList },
-  { name: "PYQ", href: "/pyq", icon: BookOpenCheck },
-  { name: "Community", href: "/community", icon: Users },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
+  { name: "Dashboard", href: "/dashboard", icon: Compass },
+  { name: "Test", href: "/test", icon: Target },
+  { name: "PYQ", href: "/pyq", icon: Scroll },
+  { name: "Community", href: "/community", icon: Swords },
+  { name: "Analytics", href: "/analytics", icon: LineChart },
   { name: "Profile", href: "/profile", icon: UserRound },
 ];
 const PREFETCHED_NAV_HREFS = new Set(["/dashboard", "/test", "/pyq", "/community", "/analytics"]);
@@ -107,32 +107,29 @@ export default function Navbar({
         setPendingHref(item.href);
         if (mobile) setMobileOpen(false);
       }}
-      className={`group relative overflow-hidden font-semibold transition-colors duration-200 ${
+      className={`group relative overflow-hidden font-bold transition-all duration-300 ${
         mobile
           ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
-          : "inline-flex h-11 items-center justify-center px-2.5 text-[13px] xl:px-3.5"
+          : "inline-flex h-9 items-center justify-center rounded-xl px-3.5 text-[13px] mx-0.5"
       } ${
         active
           ? mobile
-            ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-200"
-            : "font-extrabold text-slate-950 dark:text-white"
+            ? "bg-amber-500/15 text-amber-700 dark:bg-amber-400/15 dark:text-amber-400"
+            : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 shadow-[inset_0_0_0_1px_rgba(245,158,11,0.2)] dark:shadow-[inset_0_0_0_1px_rgba(251,191,36,0.15)]"
           : mobile
             ? "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
-            : "text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
+            : "text-slate-500 hover:bg-slate-100/50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-elevated)]/50 dark:hover:text-white"
       }`}
     >
       {Icon && (
         <Icon
           className={`relative z-10 shrink-0 ${
             mobile ? "mr-2 h-4 w-4" : "mr-1.5 h-3.5 w-3.5"
-          }`}
+          } ${active ? "text-amber-600 dark:text-amber-400" : ""}`}
           strokeWidth={2.4}
         />
       )}
       <span className="relative z-10 whitespace-nowrap">{item.name}</span>
-      {!mobile && active && (
-        <span className="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-brand" />
-      )}
     </Link>
     );
   };
@@ -146,10 +143,10 @@ export default function Navbar({
         setPendingHref("/pro");
         if (mobileOpen) setMobileOpen(false);
       }}
-      className={`inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-[13px] font-extrabold tracking-wide transition-all duration-200 hover:-translate-y-px ${
+      className={`inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${
         isPro
-          ? "border border-indigo-300/40 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/15 dark:border-indigo-400/20 dark:text-indigo-300"
-          : "border border-amber-300/50 bg-amber-400/15 text-amber-700 hover:bg-amber-400/20 hover:text-amber-800 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-300 dark:hover:bg-amber-400/15 dark:hover:text-amber-200"
+          ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300"
+          : "bg-gradient-to-br from-amber-400 to-amber-500 text-amber-950 shadow-md shadow-amber-500/20 hover:from-amber-400 hover:to-amber-600 hover:shadow-amber-500/30 dark:from-amber-500 dark:to-amber-600 dark:text-white"
       }`}
     >
       {!isPro && <Star aria-hidden="true" className="h-3.5 w-3.5" fill="currentColor" />}
@@ -196,12 +193,12 @@ export default function Navbar({
 
           <button
             onClick={toggleTheme}
-            className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-600 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
             aria-label="Toggle theme"
           >
             <span className="flex items-center justify-center">
-              <Moon className="h-[17px] w-[17px] dark:hidden sm:h-[18px] sm:w-[18px]" />
-              <Sun className="hidden h-[17px] w-[17px] dark:block sm:h-[18px] sm:w-[18px]" />
+              <Moon className="h-[17px] w-[17px] dark:hidden sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
+              <Sun className="hidden h-[17px] w-[17px] dark:block sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
             </span>
           </button>
 
@@ -215,11 +212,11 @@ export default function Navbar({
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
-            className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/70 bg-[var(--card)]/70 text-slate-700 shadow-sm transition-colors duration-200 hover:border-indigo-300/70 hover:bg-slate-100 hover:text-indigo-600 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/70 dark:text-slate-300 dark:shadow-none dark:hover:border-indigo-400/30 dark:hover:bg-[var(--surface-hover)] dark:hover:text-indigo-200 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px] lg:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px] lg:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" /> : <Menu className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" />}
+            {mobileOpen ? <X className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} /> : <Menu className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />}
           </button>
 
         </div>

@@ -152,7 +152,7 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
             Onboarding
           </p>
-          <h1 className="text-3xl font-black text-black dark:text-white tracking-tight">
+          <h1 className="text-3xl font-black font-display text-black dark:text-white tracking-tight">
             Welcome, {displayName}
           </h1>
           <p className="mt-2 text-sm text-gray-400">

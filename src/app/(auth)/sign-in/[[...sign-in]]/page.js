@@ -23,7 +23,7 @@ export default async function Page() {
           Sign In
         </p>
         <h2
-          className="text-3xl font-black mb-2 tracking-tight sm:text-4xl"
+          className="text-3xl font-black font-display mb-2 tracking-tight sm:text-4xl"
           style={{ color: "#FFFFFF" }}
         >
           Welcome Back

@@ -146,7 +146,7 @@ export default function ProPage() {
     >
       {/* ── Hero ── */}
       <section className="space-y-4 text-center animate-slideUp sm:space-y-5">
-        <h1 className="text-3xl font-black leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-6xl">
+        <h1 className="text-3xl font-black font-display leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-6xl">
           Unlock your full
           <br />
           <span className="bg-gradient-to-r from-indigo-500 via-brand-hover to-pink-500 bg-clip-text text-transparent">
@@ -210,7 +210,7 @@ export default function ProPage() {
           </div>
           <div className="flex items-end justify-center gap-1">
             <span className="mb-1 text-xl font-bold text-slate-400 dark:text-slate-500 sm:mb-2 sm:text-2xl">₹</span>
-            <span className="bg-gradient-to-br from-slate-900 to-slate-600 bg-clip-text text-6xl font-black leading-none tracking-tighter text-transparent dark:from-white dark:to-slate-300 sm:text-8xl">
+            <span className="bg-gradient-to-br from-slate-900 to-slate-600 bg-clip-text text-6xl font-black font-display leading-none tracking-tighter text-transparent dark:from-white dark:to-slate-300 sm:text-8xl">
               {plan.price}
             </span>
             <span className="text-slate-400 dark:text-slate-500 text-base mb-2">/{plan.per}</span>
@@ -261,10 +261,10 @@ export default function ProPage() {
               <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                 Free plan
               </span>
-              <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1">
+              <h3 className="text-xl font-black font-display text-slate-900 dark:text-white mt-1">
                 Free
               </h3>
-              <p className="text-3xl font-black text-slate-300 dark:text-slate-600 mt-1">
+              <p className="text-3xl font-black font-display text-slate-300 dark:text-slate-600 mt-1">
                 ₹0<span className="text-base font-normal">/mo</span>
               </p>
             </div>
@@ -305,7 +305,7 @@ export default function ProPage() {
                 <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
                   Pro includes
                 </span>
-                <h3 className="text-xl font-black text-white mt-1 flex items-center gap-2">
+                <h3 className="text-xl font-black font-display text-white mt-1 flex items-center gap-2">
                   {selectedTrack} PRO
                   <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--card)]/15 text-white/80 backdrop-blur-sm">
                     All features
@@ -317,7 +317,7 @@ export default function ProPage() {
                     {plan.discount}% off
                   </span>
                 </div>
-                <p className="text-3xl font-black text-white mt-1">
+                <p className="text-3xl font-black font-display text-white mt-1">
                   ₹{plan.price}
                   <span className="text-base font-normal text-white/50">
                     /{plan.per}
@@ -365,7 +365,7 @@ export default function ProPage() {
               <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-xl border border-indigo-100 bg-indigo-50 transition-transform duration-300 group-hover:scale-110 dark:border-indigo-500/20 dark:bg-indigo-500/10 sm:mb-3 sm:h-10 sm:w-10">
                 <s.icon className="h-4 w-4 text-indigo-500 dark:text-indigo-400 sm:h-5 sm:w-5" />
               </div>
-              <p className="text-lg font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+              <p className="text-lg font-black font-display tracking-tight text-slate-900 dark:text-white sm:text-3xl">
                 {s.value}
               </p>
               <p className="mt-1 text-[10px] font-medium leading-tight text-slate-400 dark:text-slate-500 sm:text-xs">{s.label}</p>
@@ -427,7 +427,7 @@ export default function ProPage() {
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative space-y-5">
-            <h2 className="text-2xl font-black tracking-tight text-white sm:text-4xl">
+            <h2 className="text-2xl font-black font-display tracking-tight text-white sm:text-4xl">
               Ready to crack it?
             </h2>
             <p className="text-white/60 text-sm max-w-md mx-auto">

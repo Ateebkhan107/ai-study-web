@@ -88,7 +88,7 @@ function Hero({ page }) {
           <p className="mb-4 inline-flex rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-brand-hover">
             {page.eyebrow}
           </p>
-          <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-black font-display tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             {page.h1}
           </h1>
           <p className="mt-6 max-w-3xl text-base font-medium leading-8 text-secondary sm:text-lg">
@@ -129,7 +129,7 @@ function LinkCards({ cards }) {
             prefetch={shouldDisablePrefetch(card.href) ? false : undefined}
             className="rounded-2xl border border-border-subtle bg-[var(--surface)] p-6 transition-colors hover:border-brand/50"
           >
-            <h2 className="text-xl font-black text-foreground">{card.title}</h2>
+            <h2 className="text-xl font-black font-display text-foreground">{card.title}</h2>
             <p className="mt-3 text-sm leading-6 text-secondary">{card.description}</p>
           </Link>
         ))}
@@ -146,7 +146,7 @@ function SectionBlock({ section, index }) {
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand-hover">
         <Icon className="h-5 w-5" />
       </div>
-      <h2 className="text-2xl font-black tracking-tight text-foreground">{section.title}</h2>
+      <h2 className="text-2xl font-black font-display tracking-tight text-foreground">{section.title}</h2>
       <p className="mt-4 leading-7 text-secondary">{section.body}</p>
       <ul className="mt-6 space-y-3">
         {section.items.map((item) => (
@@ -168,7 +168,7 @@ function PyqPreview({ page }) {
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand-hover">
         <FileText className="h-5 w-5" />
       </div>
-      <h2 className="text-2xl font-black tracking-tight text-foreground">Practice previews</h2>
+      <h2 className="text-2xl font-black font-display tracking-tight text-foreground">Practice previews</h2>
       <p className="mt-4 leading-7 text-secondary">
         Public pages do not expose private attempts, but the practice flow is organized around these safe, exam-focused paths.
       </p>
@@ -205,7 +205,7 @@ function FaqSection({ faqs }) {
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand-hover">
         <BarChart3 className="h-5 w-5" />
       </div>
-      <h2 className="text-2xl font-black tracking-tight text-foreground">Frequently asked questions</h2>
+      <h2 className="text-2xl font-black font-display tracking-tight text-foreground">Frequently asked questions</h2>
       <div className="mt-6 divide-y divide-border-subtle">
         {faqs.map((faq) => (
           <div key={faq.question} className="py-5 first:pt-0 last:pb-0">
@@ -222,7 +222,7 @@ function ClosingCta({ page }) {
   return (
     <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-6">
       <div className="rounded-3xl border border-brand/25 bg-brand/10 p-8 text-center sm:p-10">
-        <h2 className="text-3xl font-black tracking-tight text-foreground">
+        <h2 className="text-3xl font-black font-display tracking-tight text-foreground">
           Build a clearer {page.exam} practice plan with PrepZii
         </h2>
         <p className="mx-auto mt-4 max-w-2xl leading-7 text-secondary">

@@ -66,7 +66,7 @@ function StatCard({ icon: Icon, label, value, helper }) {
     <div className="rounded-2xl border border-slate-200 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-2xl font-black text-slate-950 dark:text-white">{value}</p>
+          <p className="text-2xl font-black font-display text-slate-950 dark:text-white">{value}</p>
           <p className="mt-1 text-xs font-black uppercase tracking-widest text-slate-400">{label}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
@@ -95,7 +95,7 @@ function Modal({ title, children, onClose }) {
     <div className="fixed inset-0 z-[70] flex items-end bg-slate-950/40 p-0 backdrop-blur-sm sm:items-center sm:justify-center sm:p-4">
       <div className="w-full rounded-t-3xl border border-slate-200 bg-[var(--card)] p-5 shadow-2xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:max-w-lg sm:rounded-3xl">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-lg font-black text-slate-950 dark:text-white">{title}</h2>
+          <h2 className="text-lg font-black font-display text-slate-950 dark:text-white">{title}</h2>
           <button type="button" onClick={onClose} className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)]">
             <X className="h-4 w-4" />
           </button>
@@ -360,7 +360,7 @@ export default function InstituteWorkspace({ slug }) {
               <ArrowLeft className="h-3.5 w-3.5" />
               Back to PrepZii
             </Link>
-            <h1 className="truncate text-2xl font-black tracking-tight text-slate-950 dark:text-white">{institute.name}</h1>
+            <h1 className="truncate text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white">{institute.name}</h1>
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Powered by PrepZii · {formatRole(data.role)}</p>
           </div>
         </div>

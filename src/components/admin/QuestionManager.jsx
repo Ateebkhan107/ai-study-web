@@ -153,7 +153,7 @@ export default function QuestionManager({ defaultTab = "import" }) {
   return (
     <div className="space-y-5 border rounded-xl p-5">
       <div className="flex justify-between items-center hidden">
-        <h2 className="font-black text-xl flex items-center gap-2">
+        <h2 className="font-black font-display text-xl flex items-center gap-2">
           Question Manager <BookOpen className="w-6 h-6" />
         </h2>
         <div className="flex gap-2 bg-gray-100 dark:bg-[var(--surface-elevated)] p-1 rounded-lg">
@@ -216,7 +216,7 @@ export default function QuestionManager({ defaultTab = "import" }) {
 
           {summary && (
             <div className="mt-6 p-6 border-2 border-green-500 bg-green-50 dark:bg-green-900/20 rounded-xl space-y-4">
-              <h3 className="font-black text-green-700 dark:text-green-400 text-lg">Import Successful</h3>
+              <h3 className="font-black font-display text-green-700 dark:text-green-400 text-lg">Import Successful</h3>
               <div className="space-y-2 text-sm">
                 <p><strong>Imported:</strong> {summary.count}</p>
                 <p><strong>Skipped Duplicates:</strong> {summary.skipped}</p>

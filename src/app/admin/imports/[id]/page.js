@@ -132,7 +132,7 @@ export default function ImportPackageDashboard() {
         </Link>
         <div className="flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
+            <h1 className="text-2xl font-black font-display bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-hover">
               {pkg.name}
             </h1>
             <span className={`
@@ -163,25 +163,25 @@ export default function ImportPackageDashboard() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <FileText className="w-6 h-6 text-blue-500 mb-2" />
-          <p className="text-3xl font-black">{stats.total}</p>
+          <p className="text-3xl font-black font-display">{stats.total}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Total Questions</p>
         </div>
         
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <FileImage className="w-6 h-6 text-indigo-500 mb-2" />
-          <p className="text-3xl font-black">{stats.images}</p>
+          <p className="text-3xl font-black font-display">{stats.images}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Images</p>
         </div>
 
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <CheckCircle2 className="w-6 h-6 text-emerald-500 mb-2" />
-          <p className="text-3xl font-black">{stats.solutions}</p>
+          <p className="text-3xl font-black font-display">{stats.solutions}</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Solutions</p>
         </div>
 
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)] flex flex-col items-center justify-center text-center">
           <Target className="w-6 h-6 text-indigo-500 mb-2" />
-          <p className="text-3xl font-black">{stats.validationScore}%</p>
+          <p className="text-3xl font-black font-display">{stats.validationScore}%</p>
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Validation</p>
         </div>
       </div>
@@ -189,27 +189,27 @@ export default function ImportPackageDashboard() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Reviewed</p>
-          <p className="text-2xl font-black mt-1">{stats.reviewed}</p>
+          <p className="text-2xl font-black font-display mt-1">{stats.reviewed}</p>
         </div>
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Needs Review</p>
-          <p className="text-2xl font-black mt-1 text-amber-600">{stats.needsReview}</p>
+          <p className="text-2xl font-black font-display mt-1 text-amber-600">{stats.needsReview}</p>
         </div>
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Published</p>
-          <p className="text-2xl font-black mt-1 text-green-600">{stats.published}</p>
+          <p className="text-2xl font-black font-display mt-1 text-green-600">{stats.published}</p>
         </div>
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Image Only</p>
-          <p className="text-2xl font-black mt-1">{stats.imageOnly}</p>
+          <p className="text-2xl font-black font-display mt-1">{stats.imageOnly}</p>
         </div>
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text + Image</p>
-          <p className="text-2xl font-black mt-1">{stats.textRequiredImage}</p>
+          <p className="text-2xl font-black font-display mt-1">{stats.textRequiredImage}</p>
         </div>
         <div className="bg-[var(--card)] dark:bg-[var(--surface)] p-5 rounded-2xl border border-gray-200 dark:border-[var(--border-subtle)]">
           <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Text Only</p>
-          <p className="text-2xl font-black mt-1">{stats.textOnly}</p>
+          <p className="text-2xl font-black font-display mt-1">{stats.textOnly}</p>
         </div>
       </div>
 

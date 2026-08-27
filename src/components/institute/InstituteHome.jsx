@@ -80,7 +80,7 @@ export default function InstituteHome() {
     <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Institutes</h1>
+          <h1 className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white">Institutes</h1>
           <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
             Manage or access your coaching workspaces.
           </p>
@@ -183,7 +183,7 @@ export default function InstituteHome() {
           <div className="w-full rounded-t-3xl border border-slate-200 bg-[var(--card)] p-5 shadow-2xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:max-w-lg sm:rounded-3xl">
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-black text-slate-950 dark:text-white">Create Institute</h2>
+                <h2 className="text-lg font-black font-display text-slate-950 dark:text-white">Create Institute</h2>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Set up your coaching workspace.</p>
               </div>
               <button

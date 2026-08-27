@@ -49,7 +49,7 @@ export default function FeedbackPage() {
         <div className="text-center pt-8">
           <div className="inline-block p-1 rounded-2xl bg-gradient-to-r from-indigo-500 to-brand-hover shadow-lg shadow-brand/20">
             <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-xl px-12 py-10 relative overflow-hidden">
-              <h2 className="text-xl font-black text-slate-900 dark:text-white mb-4 relative z-10">Ready to share your thoughts?</h2>
+              <h2 className="text-xl font-black font-display text-slate-900 dark:text-white mb-4 relative z-10">Ready to share your thoughts?</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed mb-8 relative z-10">
                 Drop us an email with your suggestions. If you are requesting a feature, let us know how it would help your preparation.
               </p>

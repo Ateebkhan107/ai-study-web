@@ -35,7 +35,7 @@ export default function AdminStudentsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black mb-2 flex items-center gap-2">
+        <h1 className="text-2xl font-black font-display mb-2 flex items-center gap-2">
           Student Directory <Users className="w-6 h-6" />
         </h1>
         <p className="text-gray-500 dark:text-gray-400">View and manage student profiles, XP, and ranks.</p>

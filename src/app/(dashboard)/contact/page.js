@@ -32,7 +32,7 @@ export default function ContactPage() {
             <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center mb-6">
               <MessageSquare className="w-6 h-6 text-indigo-500" />
             </div>
-            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">General Support</h3>
+            <h3 className="text-lg font-black font-display text-slate-900 dark:text-white mb-2">General Support</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
               Having trouble with your account, tests, or subscriptions? We&apos;re here to help you get back on track.
             </p>
@@ -50,7 +50,7 @@ export default function ContactPage() {
             <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center mb-6">
               <Mail className="w-6 h-6 text-indigo-500" />
             </div>
-            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">Business Enquiries</h3>
+            <h3 className="text-lg font-black font-display text-slate-900 dark:text-white mb-2">Business Enquiries</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
               Looking to partner with us, integrate PrepZii into your school, or explore enterprise options?
             </p>
