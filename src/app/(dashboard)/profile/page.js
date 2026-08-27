@@ -30,7 +30,32 @@ const BADGE_ICONS = {
   Zap,
 };
 
-
+function getTierColor(title) {
+  const t = String(title || "").toLowerCase();
+  if (t.includes("leader") || t.includes("master")) {
+    return {
+      border: "border-amber-400 dark:border-brand shadow-[0_0_20px_rgba(234,179,8,0.3)]",
+      ring: "ring-amber-200 dark:ring-amber-500/30",
+      bg: "bg-gradient-to-br from-amber-400 to-amber-600 dark:from-brand dark:to-amber-600",
+      text: "text-amber-700 dark:text-brand"
+    };
+  }
+  if (t.includes("expert") || t.includes("pro")) {
+    return {
+      border: "border-slate-300 dark:border-slate-500 shadow-[0_0_15px_rgba(148,163,184,0.3)]",
+      ring: "ring-slate-100 dark:ring-slate-700/50",
+      bg: "bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-500 dark:to-slate-600",
+      text: "text-slate-700 dark:text-slate-300"
+    };
+  }
+  // Default / Challenger / Explorer
+  return {
+    border: "border-orange-400/80 dark:border-orange-700/80 shadow-[0_0_15px_rgba(249,115,22,0.2)]",
+    ring: "ring-orange-100 dark:ring-orange-900/30",
+    bg: "bg-gradient-to-br from-orange-300 to-orange-500 dark:from-orange-700 dark:to-orange-900",
+    text: "text-orange-800 dark:text-orange-500"
+  };
+}
 
 export default function ProfilePage() {
   const { user: clerkUser } = useUser();
@@ -298,6 +323,7 @@ export default function ProfilePage() {
   const levelStats = getLevelFromXP(activeUser.xp);
   const progressPercentage = Number(levelStats.progressPercentage || 0);
   const profileInitial = activeUser.name?.charAt(0)?.toUpperCase() || "S";
+  const tierColor = getTierColor(levelStats.title);
 
   return (
     <PageWrapper
@@ -309,10 +335,15 @@ export default function ProfilePage() {
         <div className="space-y-5">
           {/* ── PROFILE HERO ── */}
           <section className="animate-slideUp" style={{ animationDelay: "75ms" }}>
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex min-w-0 gap-4">
-                  <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-brand/30 bg-slate-950 text-2xl font-semibold text-white dark:bg-[var(--surface-elevated)] sm:h-24 sm:w-24 sm:text-3xl">
+            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8 relative overflow-hidden">
+              {/* Subtle background glow based on tier */}
+              <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${tierColor.bg} opacity-[0.03] dark:opacity-[0.05] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none`} />
+
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between relative z-10">
+                <div className="flex flex-col sm:flex-row min-w-0 gap-5 sm:gap-6 sm:items-center">
+                  
+                  {/* TIERED AVATAR RING */}
+                  <div className={`relative flex h-24 w-24 sm:h-28 sm:w-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-[3px] sm:border-[4px] ${tierColor.border} bg-slate-950 text-3xl font-black text-white dark:bg-[var(--surface-elevated)] ring-4 sm:ring-8 ${tierColor.ring} z-10`}>
                     {activeUser.avatar ? (
                       <img
                         src={activeUser.avatar}
@@ -325,21 +356,18 @@ export default function ProfilePage() {
                     )}
                   </div>
 
-                  <div className="min-w-0 pt-0.5">
-                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+                  <div className="min-w-0 pt-2 sm:pt-0">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                       Student Profile
                     </p>
-                    <h2 className="mt-1 break-words text-2xl font-semibold tracking-normal text-slate-950 dark:text-white sm:text-3xl">
+                    <h2 className="mt-1.5 break-words text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl">
                       {activeUser.name}
                     </h2>
-                    <p className="mt-1 truncate text-sm font-semibold text-amber-700 dark:text-brand">
+                    <p className={`mt-1.5 truncate text-sm font-bold ${tierColor.text}`}>
                       {activeUser.username ? `@${activeUser.username}` : "Username not set"}
                     </p>
-                    <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                    <p className="mt-2 text-sm font-medium leading-relaxed text-slate-500 dark:text-slate-400">
                       {activeUser.exam} aspirant for {activeUser.targetYear} · Level {levelStats.currentLevel} · {levelStats.title}
-                    </p>
-                    <p className="mt-1 truncate text-sm text-slate-400 dark:text-slate-500">
-                      {activeUser.email}
                     </p>
                   </div>
                 </div>
@@ -350,32 +378,32 @@ export default function ProfilePage() {
                     setProfileError("");
                     setEditing(true);
                   }}
-                  className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-brand/50 hover:text-slate-950 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 dark:hover:text-white sm:w-auto"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:border-brand/50 hover:text-slate-950 hover:shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:text-white sm:w-auto"
                 >
-                  <Pencil className="h-4 w-4" /> Edit Profile
+                  <Pencil className="h-4 w-4" strokeWidth={2.5} /> Edit
                 </button>
               </div>
 
-              <div className="mt-5 flex flex-col gap-3 border-t border-slate-200 pt-5 dark:border-[var(--border-subtle)] sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-8 flex flex-col gap-4 border-t border-slate-200/80 pt-6 dark:border-[var(--border)]/70 sm:flex-row sm:items-center sm:justify-between relative z-10">
                 <div>
-                  <p className="text-sm font-medium text-slate-950 dark:text-white">
-                    Exam focus
+                  <p className="text-sm font-bold text-slate-950 dark:text-white">
+                    Exam Focus
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-500">
+                  <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">
                     Switch your active preparation track.
                   </p>
                 </div>
-                <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]">
+                <div className="inline-flex rounded-xl bg-slate-100/80 p-1.5 dark:bg-[var(--surface-elevated)]">
                   {["JEE", "NEET"].map((trackOption) => {
                     const isActive = activeUser.exam === trackOption;
                     return (
                       <button
                         key={trackOption}
                         onClick={() => handleTrackToggle(trackOption)}
-                        className={`rounded-md px-4 py-2 text-xs font-semibold transition-colors ${
+                        className={`rounded-lg px-6 py-2.5 text-xs font-black tracking-wide uppercase transition-all duration-300 ${
                           isActive
-                            ? "bg-brand text-slate-950"
-                            : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                            ? "bg-brand text-slate-950 shadow-[0_0_15px_rgba(234,179,8,0.3)] border border-brand scale-105"
+                            : "text-slate-500 hover:text-slate-900 dark:hover:text-white border border-transparent"
                         }`}
                       >
                         {trackOption}
@@ -387,14 +415,14 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          {/* ── PROGRESS ── */}
+          {/* ── USERNAME PROMPT ── */}
           {!activeUser.username && (
             <section className="animate-slideUp" style={{ animationDelay: "125ms" }}>
-              <div className="rounded-xl border border-brand/30 bg-brand/10 p-4 shadow-sm">
-                <p className="text-sm font-semibold text-slate-950 dark:text-white">
+              <div className="rounded-2xl border border-brand/30 bg-brand/10 p-5 shadow-sm sm:p-6">
+                <p className="text-base font-bold text-slate-950 dark:text-white">
                   Choose your PrepZii username
                 </p>
-                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                <p className="mt-1 text-sm font-medium text-slate-600 dark:text-slate-300">
                   You&apos;ll need a unique @username for Battle Arena and student search.
                 </p>
                 <button
@@ -403,7 +431,7 @@ export default function ProfilePage() {
                     setProfileError("");
                     setEditing(true);
                   }}
-                  className="mt-3 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover"
+                  className="mt-4 rounded-xl bg-brand px-6 py-2.5 text-sm font-black text-slate-950 transition-colors hover:bg-brand-hover shadow-sm"
                 >
                   Choose Username
                 </button>
@@ -413,102 +441,115 @@ export default function ProfilePage() {
 
           {/* ── PROGRESS ── */}
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
-                    Progress
+            <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-8">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+                <div className="flex-1">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                    Progression
                   </p>
-                  <h3 className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">
-                    Level {levelStats.currentLevel}: {levelStats.title}
+                  <h3 className="mt-1.5 text-2xl font-black text-slate-950 dark:text-white">
+                    Level {levelStats.currentLevel}: <span className={tierColor.text}>{levelStats.title}</span>
                   </h3>
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                    {levelStats.totalXP.toLocaleString()} XP earned · {levelStats.xpRemaining.toLocaleString()} XP to next level
+                  <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-700 dark:text-slate-300">{levelStats.totalXP.toLocaleString()} XP</span> earned · {levelStats.xpRemaining.toLocaleString()} XP to next level
                   </p>
+
+                  {/* SEGMENTED PROGRESS BAR */}
+                  <div className="mt-6 flex gap-1 h-2.5 sm:h-3">
+                    {Array.from({ length: 10 }).map((_, i) => {
+                      const threshold = i * 10;
+                      const isFilled = progressPercentage > threshold;
+                      return (
+                        <div
+                          key={i}
+                          className={`flex-1 rounded-sm transition-colors duration-500 ${
+                            isFilled 
+                              ? tierColor.bg 
+                              : "bg-slate-100 dark:bg-[var(--surface-elevated)]"
+                          }`}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 text-left sm:text-right">
-                  <div>
-                    <p className="text-xs text-slate-500 dark:text-slate-500">Global rank</p>
-                    <p className="mt-1 text-lg font-semibold tabular-nums text-slate-950 dark:text-white">
+
+                {/* ELEVATED STAT CHIPS */}
+                <div className="flex flex-row gap-3 sm:gap-4 shrink-0">
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-5 py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[100px] shadow-sm">
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Global Rank</p>
+                    <p className={`mt-1.5 text-2xl sm:text-3xl font-black tabular-nums tracking-tighter ${tierColor.text}`}>
                       {activeUser.rank ? `#${activeUser.rank}` : "—"}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-xs text-slate-500 dark:text-slate-500">Progress</p>
-                    <p className="mt-1 text-lg font-semibold tabular-nums text-slate-950 dark:text-white">
-                      {progressPercentage.toFixed(2)}%
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-5 py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[100px] shadow-sm">
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Progress</p>
+                    <p className={`mt-1.5 text-2xl sm:text-3xl font-black tabular-nums tracking-tighter text-slate-900 dark:text-white`}>
+                      {progressPercentage.toFixed(0)}%
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                <div
-                  className="h-full rounded-full bg-brand transition-all"
-                  style={{ width: `${progressPercentage}%` }}
-                />
-              </div>
-              <div className="mt-2 flex justify-between text-xs text-slate-500 dark:text-slate-500">
-                <span>{levelStats.totalXP.toLocaleString()} XP</span>
-                <span>{levelStats.nextLevelXP.toLocaleString()} XP</span>
               </div>
             </div>
           </section>
 
           {/* ── BADGES ── */}
           <section className="animate-slideUp" style={{ animationDelay: "300ms" }}>
-            <div className="mb-3 flex items-center justify-between gap-3">
+            <div className="mb-4 flex items-center justify-between gap-3 px-1">
               <div>
-                <h3 className="text-base font-semibold text-slate-950 dark:text-white">
+                <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tight">
                   Achievements
                 </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
                   Badges unlocked through practice, tests, and streaks.
                 </p>
               </div>
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-500">
+              <div className="shrink-0 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] px-3 py-1 text-[11px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[var(--border-subtle)]">
                 {earnedCount}/{badgeDefs.length} earned
-              </span>
+              </div>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-6">
               {badgeDefs.length === 0 || earnedCount === 0 ? (
-                <div className="flex items-start gap-4 rounded-lg border border-dashed border-slate-200 bg-slate-50 p-5 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/35">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
-                    <Award className="h-5 w-5 text-brand" />
+                // TROPHY CABINET EMPTY STATE
+                <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-amber-200/60 bg-amber-50/50 p-10 text-center dark:border-brand/30 dark:bg-brand/5 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-amber-100/30 dark:to-brand/10 pointer-events-none" />
+                  
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-amber-200 shadow-sm dark:from-brand/20 dark:to-brand/10 mb-4 z-10 border border-amber-200/50 dark:border-brand/30 ring-4 ring-amber-50 dark:ring-brand/5">
+                    <Trophy className="h-8 w-8 text-amber-600 dark:text-brand" strokeWidth={2} />
                   </div>
-                  <div>
-                    <p className="font-semibold text-slate-950 dark:text-white">No badges yet</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                      Complete tests and streaks to unlock achievements.
-                    </p>
-                  </div>
+                  
+                  <h4 className="text-lg font-black text-amber-950 dark:text-white z-10 tracking-tight">
+                    Your Trophy Cabinet Awaits
+                  </h4>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-amber-800/80 dark:text-amber-200/60 max-w-sm z-10">
+                    Complete mock tests, maintain daily study streaks, and conquer the Arena to start unlocking your exclusive achievements.
+                  </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:gap-4">
                   {badgeDefs.map((badge, index) => {
                     const IconComponent = BADGE_ICONS[badge.iconName] || Award;
                     return (
                       <div
                         key={index}
-                        className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
+                        className={`flex items-center gap-4 rounded-xl border p-4 transition-colors ${
                           badge.earned
-                            ? "border-brand/30 bg-brand/5"
-                            : "border-slate-200 bg-slate-50 opacity-65 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/35"
+                            ? "border-brand/40 bg-brand/5 shadow-sm"
+                            : "border-slate-200 bg-slate-50 opacity-60 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30"
                         }`}
                       >
-                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
+                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border ${
                           badge.earned
-                            ? "border-brand/30 bg-brand/10"
+                            ? "border-brand/40 bg-brand/10 shadow-[0_0_10px_rgba(234,179,8,0.2)]"
                             : "border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]"
                         }`}>
-                          <IconComponent className={`h-5 w-5 ${badge.earned ? "text-brand" : "text-slate-400"}`} />
+                          <IconComponent className={`h-6 w-6 ${badge.earned ? "text-brand" : "text-slate-400"}`} strokeWidth={2} />
                         </div>
                         <div className="min-w-0">
-                          <h4 className="truncate text-sm font-semibold text-slate-950 dark:text-white">
+                          <h4 className="truncate text-sm font-bold text-slate-950 dark:text-white">
                             {badge.title}
                           </h4>
-                          <p className="truncate text-xs text-slate-500 dark:text-slate-500">
+                          <p className="truncate text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5">
                             {badge.detail}
                           </p>
                         </div>
@@ -521,72 +562,86 @@ export default function ProfilePage() {
           </section>
         </div>
 
-        {/* ── ACTIONS ── */}
+        {/* ── ACTIONS SIDEBAR ── */}
         <aside className="space-y-5 animate-slideUp" style={{ animationDelay: "200ms" }}>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-            <h3 className="text-base font-semibold text-slate-950 dark:text-white">Profile Actions</h3>
-            <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
-              Keep your account and exam goal aligned with your preparation.
+          <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
+            <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tight">Profile Actions</h3>
+            <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
+              Manage your account identity and keep your exam goals aligned.
             </p>
 
-            <div className="mt-5 divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
+            <div className="mt-6 flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => {
                   setProfileError("");
                   setEditing(true);
                 }}
-                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+                className="group flex w-full items-center justify-between gap-3 rounded-xl border border-transparent p-3 text-left transition-all hover:bg-slate-50 hover:border-slate-200 dark:hover:bg-[var(--surface-elevated)]/50 dark:hover:border-[var(--border-subtle)]"
               >
-                <span className="inline-flex items-center gap-3">
-                  <Pencil className="h-4 w-4 text-slate-500" />
+                <span className="inline-flex items-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 shadow-sm border border-blue-100 dark:border-blue-500/20">
+                    <Pencil className="h-4 w-4" strokeWidth={2.5} />
+                  </div>
                   Edit Profile
                 </span>
-                <span className="text-slate-400">›</span>
+                <span className="text-slate-400 transition-transform group-hover:translate-x-1">›</span>
               </button>
+              
               <button
                 type="button"
                 onClick={() => {
                   setProfileError("");
                   setEditing(true);
                 }}
-                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+                className="group flex w-full items-center justify-between gap-3 rounded-xl border border-transparent p-3 text-left transition-all hover:bg-slate-50 hover:border-slate-200 dark:hover:bg-[var(--surface-elevated)]/50 dark:hover:border-[var(--border-subtle)]"
               >
-                <span className="inline-flex items-center gap-3">
-                  <Target className="h-4 w-4 text-slate-500" />
+                <span className="inline-flex items-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400 shadow-sm border border-indigo-100 dark:border-indigo-500/20">
+                    <Target className="h-4 w-4" strokeWidth={2.5} />
+                  </div>
                   Change Exam Goal
                 </span>
-                <span className="text-slate-400">›</span>
+                <span className="text-slate-400 transition-transform group-hover:translate-x-1">›</span>
               </button>
+
               <button
                 type="button"
                 onClick={() => openUserProfile?.()}
-                className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+                className="group flex w-full items-center justify-between gap-3 rounded-xl border border-transparent p-3 text-left transition-all hover:bg-slate-50 hover:border-slate-200 dark:hover:bg-[var(--surface-elevated)]/50 dark:hover:border-[var(--border-subtle)]"
               >
-                <span className="inline-flex items-center gap-3">
-                  <Settings className="h-4 w-4 text-slate-500" />
+                <span className="inline-flex items-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300 shadow-sm border border-slate-200 dark:border-[var(--border-subtle)]">
+                    <Settings className="h-4 w-4" strokeWidth={2.5} />
+                  </div>
                   Manage Account
                 </span>
-                <span className="text-slate-400">›</span>
+                <span className="text-slate-400 transition-transform group-hover:translate-x-1">›</span>
               </button>
+
+              <div className="my-2 border-t border-slate-200 dark:border-[var(--border-subtle)]" />
+
               <SignOutButton>
-                <button className="flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium text-rose-600 transition-colors hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300">
-                  <span className="inline-flex items-center gap-3">
-                    <Zap className="h-4 w-4" />
+                <button className="group flex w-full items-center justify-between gap-3 rounded-xl border border-transparent p-3 text-left transition-all hover:bg-rose-50 hover:border-rose-100 dark:hover:bg-rose-500/10 dark:hover:border-rose-500/20">
+                  <span className="inline-flex items-center gap-4 text-sm font-bold text-rose-600 dark:text-rose-400">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400 border border-rose-100 dark:border-rose-500/20">
+                      <Zap className="h-4 w-4" strokeWidth={2.5} />
+                    </div>
                     Sign Out
                   </span>
-                  <span className="text-rose-300">›</span>
+                  <span className="text-rose-300 transition-transform group-hover:translate-x-1">›</span>
                 </button>
               </SignOutButton>
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-            <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+          <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] relative overflow-hidden">
+             <div className="absolute top-0 left-0 w-1.5 h-full bg-brand" />
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
               Student Summary
             </p>
-            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-              {activeUser.exam} focus for {activeUser.targetYear}. {activeUser.pyqSolved || 0} PYQs solved with {activeUser.accuracy || 0}% accuracy.
+            <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-700 dark:text-slate-300">
+              {activeUser.exam} focus for {activeUser.targetYear}. <span className="text-slate-950 dark:text-white font-black">{activeUser.pyqSolved || 0} PYQs</span> solved with <span className="text-emerald-600 dark:text-emerald-400 font-black">{activeUser.accuracy || 0}% accuracy</span>.
             </p>
           </div>
         </aside>

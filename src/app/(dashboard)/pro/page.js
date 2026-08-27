@@ -177,7 +177,7 @@ export default function ProPage() {
               className={`relative flex min-h-12 flex-col items-center justify-center rounded-xl px-2 py-2 text-xs font-bold transition-all duration-200 sm:min-h-14 sm:px-4 sm:text-sm
                 ${
                   selectedPlan === p.id
-                    ? "bg-brand text-white shadow-sm"
+                    ? "bg-amber-500 dark:bg-amber-600 text-white shadow-sm"
                     : currentPlan && PLAN_RANK[p.id] <= PLAN_RANK[currentPlan]
                       ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
                       : "cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
@@ -221,7 +221,7 @@ export default function ProPage() {
           </p>
 
           {plan.badge && (
-            <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-brand text-white uppercase tracking-widest shadow-sm shadow-brand/20">
+            <span className="inline-block mt-3 text-[10px] font-black px-3 py-1 rounded-full bg-amber-500 text-white uppercase tracking-widest shadow-sm shadow-amber-500/20">
               {plan.badge}
             </span>
           )}
@@ -231,7 +231,7 @@ export default function ProPage() {
         <button
           onClick={handleSubscribe}
           disabled={loading || currentPlan === "yearly"}
-          className="group w-full max-w-sm py-4 rounded-2xl bg-brand text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-brand/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
+          className="group w-full max-w-sm py-4 rounded-2xl bg-amber-500 text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           {loading ? (
             <>
@@ -288,7 +288,7 @@ export default function ProPage() {
           </div>
 
           {/* PRO Plan */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover p-4 shadow-xl shadow-brand/15 dark:from-brand dark:to-brand-hover sm:p-6">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-400 to-amber-600 p-4 shadow-xl shadow-amber-500/15 dark:from-amber-500 dark:to-amber-700 sm:p-6">
             {/* Dot pattern overlay */}
             <div
               className="absolute inset-0 opacity-10"
@@ -413,7 +413,7 @@ export default function ProPage() {
 
       {/* ── Bottom CTA ── */}
       <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-hover p-5 text-center shadow-xl shadow-brand/15 dark:from-brand dark:to-brand-hover sm:p-10">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-400 to-amber-600 p-5 text-center shadow-xl shadow-amber-500/15 dark:from-amber-500 dark:to-amber-700 sm:p-10">
           {/* Dot pattern */}
           <div
             className="absolute inset-0 opacity-10"

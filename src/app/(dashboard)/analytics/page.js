@@ -112,6 +112,17 @@ export default function AnalyticsPage() {
   const [advancedAnalyticsAllowed, setAdvancedAnalyticsAllowed] = useState(false);
 
   useEffect(() => {
+    async function syncTabFromHash() {
+      await Promise.resolve();
+      if (window.location.hash === "#leaderboard") {
+        setActiveTab("leaderboard");
+      }
+    }
+
+    syncTabFromHash();
+  }, []);
+
+  useEffect(() => {
     async function syncTrackFromCookie() {
       await Promise.resolve();
       setActiveTrack(getCookieTrack());
