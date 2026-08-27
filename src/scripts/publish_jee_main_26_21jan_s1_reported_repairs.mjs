@@ -41,7 +41,7 @@ for (const number of numbers) {
     contentType: "image/png", cacheControl: "0", upsert: true,
   });
   if (uploadError) throw new Error(`Q${number} image: ${uploadError.message}`);
-  const imageUrl = supabase.storage.from("pyq-images").getPublicUrl(object).data.publicUrl + "?v=20260827-clean1";
+  const imageUrl = supabase.storage.from("pyq-images").getPublicUrl(object).data.publicUrl + "?v=20260827-clean2";
 
   const q = dataset.find((item) => item.number === number);
   if (!q) throw new Error(`Missing local data for Q${number}`);

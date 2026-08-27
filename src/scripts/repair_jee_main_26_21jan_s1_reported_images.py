@@ -14,9 +14,9 @@ BOXES = {
     43: (50, 190, 520, 395),      # moving conductor circuit
     44: (145, 1535, 660, 1740),   # venturimeter diagram
     46: (15, 235, 300, 490),      # connected rods
-    47: (20, 180, 330, 500),      # resistor bridge circuit
+    47: (10, 145, 350, 500),      # resistor bridge circuit
     55: (0, 75, 540, 570),        # four resonance structures
-    57: (115, 55, 670, 710),      # reaction and four structures
+    57: (0, 45, 690, 710),        # reaction and four structures
     60: (0, 0, 475, 1380),        # four graph choices
     61: (0, 430, 455, 690),       # Gibbs-energy graph
     70: (25, 190, 735, 815),      # four structural answer choices
