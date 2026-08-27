@@ -662,7 +662,7 @@ export default function PYQSessionPage() {
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-2.5 py-2.5 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
         <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <Logo size={24} />
+            <Logo size={28} showText={true} className="hidden sm:flex" />
             <div className="hidden h-5 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
             <div className="min-w-0">
               <span className="flex items-center gap-1.5 truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">

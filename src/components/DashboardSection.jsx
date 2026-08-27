@@ -84,41 +84,41 @@ export default async function DashboardSection({ config, compact = false }) {
               <Link href={`/formula-books/${book.id}`} key={book.id} className="block group outline-none">
                 <div 
                   className={`relative flex flex-col justify-between h-full overflow-hidden rounded-[20px] border bg-[var(--card)] bg-gradient-to-br ${meta.gradient} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-[var(--surface)] ${meta.border} ${meta.hoverBorder} ${meta.hoverShadow} ${
-                    compact ? "min-h-[110px]" : "min-h-[130px]"
+                    compact ? "min-h-[110px] sm:min-h-[110px]" : "min-h-[120px] sm:min-h-[130px]"
                   }`}
                 >
                   
                   {/* Oversized Cropped Watermark */}
                   <div 
-                    className={`absolute -top-8 -right-6 h-32 w-32 sm:-top-10 sm:-right-8 sm:h-40 sm:w-40 pointer-events-none transition-transform duration-700 group-hover:scale-110 opacity-[0.06] dark:opacity-[0.08] ${meta.color}`}
+                    className={`absolute -top-4 -right-4 h-24 w-24 sm:-top-10 sm:-right-8 sm:h-40 sm:w-40 pointer-events-none transition-transform duration-700 group-hover:scale-110 opacity-[0.06] dark:opacity-[0.08] ${meta.color}`}
                   >
                     <SubjectVisual subject={book.subject} className="w-full h-full" />
                   </div>
 
-                  <div className={`relative z-10 flex flex-col justify-between h-full w-full ${compact ? "p-5" : "p-6"}`}>
+                  <div className={`relative z-10 flex flex-col justify-between h-full w-full ${compact ? "p-4 sm:p-5" : "p-5 sm:p-6"}`}>
                     
                     <div>
                       {/* Eyebrow Label integrated tightly with Title */}
-                      <div className="flex items-center gap-2 mb-2 opacity-90">
-                        <Icon className={`w-3.5 h-3.5 ${meta.color}`} strokeWidth={3} />
-                        <span className={`text-[9.5px] font-black uppercase tracking-[0.25em] ${meta.color}`}>
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 opacity-90">
+                        <Icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${meta.color}`} strokeWidth={3} />
+                        <span className={`text-[9px] sm:text-[9.5px] font-black uppercase tracking-[0.25em] ${meta.color}`}>
                           {book.subject}
                         </span>
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-black font-display leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-10">
+                      <h3 className="text-base sm:text-xl font-black font-display leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-6 sm:pr-10">
                         {book.title}
                       </h3>
                     </div>
 
                     {/* Integrated Text Link Button */}
-                    <div className="mt-8 flex items-center">
-                      <div className={`inline-flex items-center gap-1.5 text-[10.5px] font-black uppercase tracking-[0.2em] transition-colors duration-300 ${meta.color}`}>
+                    <div className="mt-3 sm:mt-8 flex items-center">
+                      <div className={`inline-flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-[0.2em] transition-colors duration-300 ${meta.color}`}>
                         <span className="relative">
                           Continue
                           <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-current scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 opacity-40" />
                         </span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={3} />
+                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={3} />
                       </div>
                     </div>
 

@@ -140,11 +140,12 @@ export default function DailyGoals({ compact = false }) {
           </p>
         ) : (
           <>
-            <div className="relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2">
-              <div className="relative min-h-[9rem]" style={{ minWidth: `${Math.max(420, goals.length * 112)}px` }}>
+            {/* DESKTOP CURVED ROADMAP */}
+            <div className="hidden sm:block relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              <div className="relative min-h-[13rem]" style={{ minWidth: `${Math.max(480, goals.length * 140)}px` }}>
                 {goals.length > 1 && (
                   <svg
-                    className="absolute left-0 top-0 h-28 w-full overflow-visible"
+                    className="absolute left-0 top-0 h-32 w-full overflow-visible"
                     viewBox={`0 0 ${ROADMAP_VIEWBOX.width} ${ROADMAP_VIEWBOX.height}`}
                     preserveAspectRatio="none"
                     aria-hidden="true"
@@ -182,10 +183,10 @@ export default function DailyGoals({ compact = false }) {
                   return (
                     <div
                       key={goal.id}
-                      className="absolute w-24 -translate-x-1/2 text-center"
+                      className="absolute w-28 -translate-x-1/2 text-center"
                       style={{
                         left: `${(point.x / ROADMAP_VIEWBOX.width) * 100}%`,
-                        top: `${(point.y / ROADMAP_VIEWBOX.height) * 112}px`,
+                        top: `${(point.y / ROADMAP_VIEWBOX.height) * 128}px`,
                       }}
                     >
                       <div
@@ -203,9 +204,9 @@ export default function DailyGoals({ compact = false }) {
                           index + 1
                         )}
                       </div>
-                      <div className="flex flex-col items-center justify-start h-[3.5rem] pt-1">
+                      <div className="flex flex-col items-center justify-start h-[4.5rem] pt-1">
                         <p
-                          className={`max-w-[5.75rem] truncate whitespace-nowrap text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
+                          className={`max-w-[6.5rem] text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
                             isComplete
                               ? "text-emerald-700 dark:text-emerald-400"
                               : isCurrent
@@ -217,11 +218,11 @@ export default function DailyGoals({ compact = false }) {
                           {goal.title}
                         </p>
                         {isCurrent ? (
-                          <p className="mt-2 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
+                          <p className="mt-1.5 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
                             In progress
                           </p>
                         ) : (
-                          <div className="mt-2 h-[18px]" />
+                          <div className="mt-1.5 h-[18px]" />
                         )}
                       </div>
                     </div>
@@ -230,17 +231,60 @@ export default function DailyGoals({ compact = false }) {
               </div>
             </div>
 
-            <div className="-mt-2 rounded-xl border-y border-r border-l-[3px] border-slate-200/70 border-l-brand bg-slate-50 p-3 sm:p-4 shadow-sm relative z-20 mx-1 dark:border-y-[var(--border)]/60 dark:border-r-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/40">
+            {/* MOBILE VERTICAL MILESTONES */}
+            <div className="sm:hidden flex flex-col gap-6 px-1 pt-3 pb-6">
+              {goals.map((goal, index) => {
+                const isComplete = goal.completed;
+                const isCurrent = nextGoal?.id === goal.id;
+                
+                return (
+                  <div key={goal.id} className={`relative flex items-center gap-4 ${isComplete ? "opacity-60" : "opacity-100"}`}>
+                    {index !== goals.length - 1 && (
+                      <div className={`absolute left-[13px] top-7 bottom-[-24px] w-[2px] ${
+                        isComplete ? "bg-brand/80" : "bg-slate-200 dark:bg-slate-700"
+                      }`} />
+                    )}
+                    <div
+                      className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
+                        isComplete
+                          ? "border-emerald-500 bg-emerald-500 text-white shadow-sm"
+                          : isCurrent
+                            ? "border-brand bg-brand text-slate-950 ring-4 ring-brand/15 shadow-sm scale-110"
+                            : "border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)]"
+                      }`}
+                    >
+                      {isComplete ? <CheckCircle2 className="h-4 w-4" /> : index + 1}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className={`font-bold leading-tight ${
+                        isComplete ? "text-[11px] text-emerald-700 dark:text-emerald-400 truncate"
+                        : isCurrent ? "text-[13px] text-slate-900 dark:text-white"
+                        : "text-[12px] text-slate-500 dark:text-slate-400"
+                      }`}>
+                        {goal.title}
+                      </p>
+                      {isCurrent && (
+                        <p className="mt-1 w-fit rounded-full bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand uppercase tracking-wider">
+                          In progress
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="rounded-xl border-y border-r border-l-[3px] border-slate-200/70 border-l-brand bg-slate-50 p-4 shadow-sm relative z-20 mx-1 dark:border-y-[var(--border)]/60 dark:border-r-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/40 mt-2 sm:-mt-2">
               {nextGoal ? (
                 <NextGoalCard goal={nextGoal} />
               ) : (
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-emerald-500" />
                   <div className="min-w-0">
-                    <p className="text-sm font-black text-emerald-700 dark:text-emerald-300">
+                    <p className="text-[15px] font-black text-emerald-700 dark:text-emerald-300">
                       Today&apos;s mission complete
                     </p>
-                    <p className="mt-0.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                    <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
                       All {goals.length} goals finished.
                     </p>
                   </div>

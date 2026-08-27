@@ -42,8 +42,10 @@ export default function Footer() {
     { name: "Subscriptions", href: "/subscriptions" },
   ];
 
+  const isBattlePage = pathname === "/battle" || pathname?.startsWith("/battle/");
+  
   return (
-    <footer className="relative z-10 mt-auto w-full overflow-hidden border-t border-slate-200/70 bg-[var(--card)] dark:border-[var(--border-subtle)]/70 dark:bg-[var(--background)]">
+    <footer className={`relative z-10 mt-auto w-full overflow-hidden border-t border-slate-200/70 bg-[var(--card)] dark:border-[var(--border-subtle)]/70 dark:bg-[var(--background)] ${isBattlePage ? 'hidden sm:block' : ''}`}>
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent" />
 
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:px-8">
@@ -102,11 +104,13 @@ export default function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-slate-100 pt-3 dark:border-[var(--border-subtle)]/50 md:flex-row md:items-center md:justify-between">
           <nav className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {secondaryLinks.map((link) => (
+            {secondaryLinks.map((link, i) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-[11px] font-medium text-slate-400 transition-colors duration-200 hover:text-indigo-600 dark:text-slate-500 dark:hover:text-indigo-400"
+                className={`text-[11px] font-medium text-slate-400 transition-colors duration-200 hover:text-indigo-600 dark:text-slate-500 dark:hover:text-indigo-400 ${
+                  i >= 4 ? "hidden sm:inline-block" : ""
+                }`}
               >
                 {link.name}
               </Link>

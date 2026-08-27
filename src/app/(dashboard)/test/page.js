@@ -31,18 +31,18 @@ function getCookieTrack() {
 function TestPageShell({ mode, setMode, children }) {
   return (
     <div className="relative min-h-screen w-full min-w-0">
-      <div className="mx-auto w-full max-w-7xl min-w-0 space-y-5 px-3 py-5 sm:px-6 sm:py-7 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl min-w-0 space-y-4 sm:space-y-5 px-3 py-4 sm:px-6 sm:py-7 lg:px-8">
         <section className="min-w-0">
           <div className="min-w-0">
-            <h1 className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            <h1 className="text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
               Test Center
             </h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
+            <p className="mt-1 sm:mt-2 max-w-2xl text-xs sm:text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
               Build a focused practice test or launch a preset exam session.
             </p>
           </div>
 
-          <div className="mt-5 inline-flex max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)]/80 p-1 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80">
+          <div className="mt-4 sm:mt-5 inline-flex max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)]/80 p-1 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80">
             <button
               type="button"
               onClick={() => setMode("build")}
@@ -138,15 +138,15 @@ export default function TestPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 sm:gap-3 sm:grid-cols-2">
           {TEST_TOOLS.map((tool, index) => (
             <Link
               key={tool.href}
               href={tool.href}
-              className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/45 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 animate-slideUp"
+              className="group relative flex items-center sm:items-start gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-3 sm:p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/45 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 animate-slideUp"
               style={{ animationDelay: `${(index * 75) + 300}ms` }}
             >
-              <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/25 bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-black">
+              <div className="relative z-10 flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border border-brand/25 bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-black [&>svg]:h-4 [&>svg]:w-4 sm:[&>svg]:h-5 sm:[&>svg]:w-5">
                 {tool.icon}
               </div>
 
@@ -154,12 +154,12 @@ export default function TestPage() {
                 <p className="text-sm font-black leading-tight text-slate-900 dark:text-white">
                   {tool.label}
                 </p>
-                <p className="mt-1 text-xs font-semibold leading-snug text-slate-500">
+                <p className="hidden sm:block mt-1 text-xs font-semibold leading-snug text-slate-500">
                   {tool.description}
                 </p>
               </div>
 
-              <ArrowRight className="relative z-10 mt-0.5 h-4 w-4 shrink-0 text-slate-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" />
+              <ArrowRight className="relative z-10 h-4 w-4 shrink-0 text-slate-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" />
             </Link>
           ))}
         </div>

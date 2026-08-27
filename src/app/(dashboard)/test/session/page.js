@@ -577,7 +577,7 @@ function TestSessionContent() {
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-[#fffdf7]/95 px-2.5 py-2 sm:px-6 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2 sm:gap-4">
-            <Logo size={24} />
+            <Logo size={28} showText={true} className="hidden sm:flex" />
             <div className="hidden h-6 w-px bg-slate-200 dark:bg-[var(--border-subtle)] sm:block" />
             <span className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500 sm:block">
               {mode === "quick" ? "Quick Session" : "Custom Test"}

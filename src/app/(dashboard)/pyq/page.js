@@ -328,22 +328,22 @@ function PracticeTab({ subjects, track, isPro }) {
       <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 sm:p-6" style={{ animationDelay: "100ms" }}>
         {/* Subject selector */}
         <div>
-          <h2 className="text-base font-black text-slate-950 dark:text-white">Subject</h2>
-          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
+          <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Subject</h2>
+          <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
             {subjects.map((s) => {
               const active = selectedSubjects.includes(s.id);
               return (
                 <button key={s.id} onClick={() => toggleSubject(s.id)}
-                  className={`group relative flex min-h-20 items-center gap-4 overflow-hidden rounded-xl border p-4 text-left transition-all cursor-pointer duration-200 ${
+                  className={`group relative flex min-h-14 sm:min-h-20 items-center gap-2.5 sm:gap-4 overflow-hidden rounded-xl border p-3 sm:p-4 text-left transition-all cursor-pointer duration-200 ${
                     active
                       ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                   }`}
                 >
-                  <s.Icon className={`h-5 w-5 shrink-0 ${active ? "text-brand" : ""}`} />
+                  <s.Icon className={`h-4 w-4 sm:h-5 sm:w-5 shrink-0 ${active ? "text-brand" : ""}`} />
                   <span className="min-w-0">
-                    <span className="block text-sm font-black">{s.label}</span>
-                    <span className="mt-0.5 block text-xs font-bold opacity-80">
+                    <span className="block text-xs sm:text-sm font-black truncate">{s.label}</span>
+                    <span className="mt-0.5 block text-[10px] sm:text-xs font-bold opacity-80">
                       {active ? "Selected" : "Select"}
                     </span>
                   </span>
@@ -354,12 +354,12 @@ function PracticeTab({ subjects, track, isPro }) {
         </div>
 
         {/* Year selector */}
-        <div className="mt-8">
-          <h2 className="text-base font-black text-slate-950 dark:text-white">Years</h2>
-          <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-6 sm:mt-8">
+          <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Years</h2>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
             {YEARS.map((yr) => (
               <button key={yr} onClick={() => toggleYear(yr)}
-                className={`rounded-full border px-4 py-2 text-sm font-black transition-all cursor-pointer duration-200 ${
+                className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                   selectedYears.includes(yr)
                     ? "border-brand bg-brand text-black"
                     : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
@@ -375,27 +375,27 @@ function PracticeTab({ subjects, track, isPro }) {
         {track === "jee" && (
           <>
             {/* Attempt Selector */}
-            <div className="mt-8">
-              <h2 className="text-base font-black text-slate-950 dark:text-white">Attempt</h2>
+            <div className="mt-6 sm:mt-8">
+              <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Attempt</h2>
               {selectedYears.length === 0 ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Select a year first to see the available JEE papers.</p>
               ) : loadingPapers ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Loading attempts...</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Loading attempts...</p>
               ) : availableAttempts.length === 0 ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>No published JEE papers are available for the selected year yet.</p>
               ) : (
-                <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+                <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
                   {availableAttempts.map((attempt) => {
                     const isActive = effectiveSelectedAttempt === attempt;
                     return (
                       <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
-                        className={`flex min-h-14 items-center rounded-xl border px-4 py-3 text-left transition-all cursor-pointer duration-200 ${
+                        className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                           isActive
-                            ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
-                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
+                            ? "border-brand bg-brand text-black"
+                            : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                         }`}
                       >
-                        <span className="text-sm font-black">{attempt}</span>
+                        {attempt}
                       </button>
                     );
                   })}
@@ -404,27 +404,27 @@ function PracticeTab({ subjects, track, isPro }) {
             </div>
 
             {/* Shift Selector */}
-            <div className="mt-8">
-              <h2 className="text-base font-black text-slate-950 dark:text-white">Shift</h2>
+            <div className="mt-6 sm:mt-8">
+              <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Shift</h2>
               {selectedYears.length === 0 ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Select a year first, then choose an attempt to see the available shifts.</p>
               ) : !selectedAttempt ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Choose an attempt to view the dated shift options for that paper.</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Choose an attempt to view the dated shift options for that paper.</p>
               ) : availableShiftPapers.length === 0 ? (
-                <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>No shifts are available for the selected attempt.</p>
               ) : (
-                <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+                <div className="mt-3 sm:mt-4 flex flex-wrap gap-2 max-h-[220px] overflow-y-auto pr-2">
                   {availableShiftPapers.map((paper) => {
                     const isActive = effectiveSelectedShift === paper.id;
                     return (
                       <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
-                        className={`flex min-h-14 items-center rounded-xl border px-4 py-3 text-left transition-all cursor-pointer duration-200 ${
+                        className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                           isActive
-                            ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
-                            : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
+                            ? "border-brand bg-brand text-black"
+                            : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                         }`}
                       >
-                        <span className="text-sm font-black">{paper.shift_label || paper.shift}</span>
+                        {paper.shift_label || paper.shift}
                       </button>
                     );
                   })}
@@ -435,9 +435,9 @@ function PracticeTab({ subjects, track, isPro }) {
         )}
 
         {/* Practice mode selector */}
-        <div className="mt-8">
-          <h2 className="text-base font-black text-slate-950 dark:text-white">Mode</h2>
-          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+        <div className="mt-6 sm:mt-8">
+          <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Mode</h2>
+          <div className="mt-3 sm:mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3">
             {PRACTICE_MODES.map((m) => {
               const active = practiceMode === m.id;
               const locked = PRO_ONLY_PRACTICE_MODES.has(m.id) && !isPro;
@@ -453,7 +453,7 @@ function PracticeTab({ subjects, track, isPro }) {
                     setSelectedYears([selectedYears[0]]);
                   }
                 }}
-                  className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all cursor-pointer duration-200 ${
+                  className={`flex items-center gap-3 rounded-xl border p-3 sm:p-4 text-left transition-all cursor-pointer duration-200 ${
                     active
                       ? locked
                         ? "border-brand/70 bg-brand/10 text-slate-950 dark:text-white"
@@ -463,9 +463,9 @@ function PracticeTab({ subjects, track, isPro }) {
                       : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
                   }`}
                 >
-                  <m.Icon size={18} className="mt-0.5 shrink-0 sm:size-5" />
+                  <m.Icon size={18} className="shrink-0 sm:size-5" />
                   <span className="min-w-0">
-                    <span className="flex flex-wrap items-center gap-2 text-sm font-semibold">
+                    <span className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold">
                       {m.label}
                       {locked && (
                         <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-white">
@@ -473,7 +473,7 @@ function PracticeTab({ subjects, track, isPro }) {
                         </span>
                       )}
                     </span>
-                    <span className="mt-0.5 hidden text-xs opacity-80 min-[390px]:block">{m.description}</span>
+                    <span className="hidden sm:block mt-0.5 text-xs opacity-80">{m.description}</span>
                   </span>
                 </button>
               );
@@ -483,17 +483,17 @@ function PracticeTab({ subjects, track, isPro }) {
 
         {/* Chapter selector */}
         {practiceMode === "chapter" && (
-          <div className="mt-8">
-            <h2 className="text-base font-black text-slate-950 dark:text-white">Chapters</h2>
-            {selectedSubjects.length === 0 && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
-            {selectedSubjects.length > 0 && loadingChapters && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>Loading chapters...</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="mt-4 text-sm font-semibold text-red-500">{chapterError}</p>}
-            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`mt-4 text-sm font-semibold ${TXT_MUTED}`}>No chapters found for this subject.</p>}
+          <div className="mt-6 sm:mt-8">
+            <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Chapters</h2>
+            {selectedSubjects.length === 0 && <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Select a subject first to load its chapters.</p>}
+            {selectedSubjects.length > 0 && loadingChapters && <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>Loading chapters...</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && chapterError && <p className="mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-red-500">{chapterError}</p>}
+            {selectedSubjects.length > 0 && !loadingChapters && !chapterError && chapters.length === 0 && <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>No chapters found for this subject.</p>}
             {selectedSubjects.length > 0 && !loadingChapters && chapters.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-3 sm:mt-4 flex flex-wrap gap-2 max-h-[200px] overflow-y-auto pr-2">
                 {chapters.map((ch) => (
                   <button key={ch} onClick={() => toggleChapter(ch)}
-                    className={`rounded-full border px-4 py-2 text-xs font-black transition-all cursor-pointer duration-200 sm:text-sm ${
+                    className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                       selectedChapters.includes(ch)
                         ? "border-brand bg-brand text-black"
                         : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
@@ -508,12 +508,13 @@ function PracticeTab({ subjects, track, isPro }) {
         )}
       </div>
 
-      {/* Right — start button */}
+      {/* Right — start button & desktop summary */}
       <div>
-        <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-5 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 xl:sticky xl:top-24" style={{ animationDelay: "100ms" }}>
-          <h2 className="text-base font-black text-slate-950 dark:text-white">Your PYQ</h2>
+        <div className="rounded-xl sm:rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 sm:p-5 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 xl:sticky xl:top-24" style={{ animationDelay: "100ms" }}>
+          <h2 className="hidden sm:block text-base font-black text-slate-950 dark:text-white">Your PYQ</h2>
 
-          <div className="mt-5 space-y-4">
+          {/* Desktop Summary List */}
+          <div className="hidden sm:block mt-5 space-y-4">
             <div className="flex items-center justify-between gap-3 text-sm font-black">
               <span className={TXT_MUTED}>Subjects</span>
               <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
@@ -563,8 +564,33 @@ function PracticeTab({ subjects, track, isPro }) {
             )}
           </div>
 
+          {/* Mobile Summary Inline */}
+          <div className="sm:hidden mb-4">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+              <span className="font-black text-slate-900 dark:text-white">
+                {jeeRandomMode && selectedSubjects.length === 0 ? "PCM" : selectedSubjects.length > 0 ? `${selectedSubjects.length} Sub` : "No Sub"}
+              </span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold text-slate-600 dark:text-slate-400">
+                {selectedYears.length > 0 ? selectedYears.sort((a, b) => b - a).join(",") : "All Yrs"}
+              </span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold text-slate-600 dark:text-slate-400">
+                {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}
+              </span>
+              {track === "jee" && practiceMode === "full" && effectiveSelectedShift && (
+                <>
+                  <span className="text-slate-300 dark:text-slate-600">•</span>
+                  <span className="font-bold text-slate-600 dark:text-slate-400 truncate max-w-[120px]">
+                    {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || "Shift"}
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+
           <button onClick={handleStartDeck}
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 text-sm font-black text-black transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 sm:py-3.5 text-sm font-black text-black transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
             <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start PYQ Practice"}
           </button>

@@ -337,7 +337,7 @@ export default function BattleArenaClient() {
       <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)]">
         <div className="absolute inset-x-0 top-0 h-px bg-brand/35" aria-hidden="true" />
         
-        <div className="px-4 pt-5 pb-4 sm:px-6 sm:pt-7 sm:pb-6">
+        <div className="hidden sm:block px-4 pt-5 pb-4 sm:px-6 sm:pt-7 sm:pb-6">
           <div className="inline-flex items-center gap-2 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
             <CustomSwordsIcon className="h-3.5 w-3.5" />
             Battle Arena
@@ -349,9 +349,17 @@ export default function BattleArenaClient() {
             Same paper set. Same exam track. A focused head-to-head sprint for serious {profile?.exam || "JEE"} practice.
           </p>
         </div>
+        
+        {/* Mobile Header Title */}
+        <div className="sm:hidden px-4 pt-4 pb-2 text-center">
+          <div className="inline-flex items-center justify-center gap-1.5 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
+            <CustomSwordsIcon className="h-3 w-3" />
+            Battle Arena
+          </div>
+        </div>
 
         {/* Fight Card Split */}
-        <div className="relative mt-2 flex w-full flex-col sm:flex-row border-t border-slate-200 dark:border-slate-800">
+        <div className="relative flex w-full flex-row sm:mt-2 sm:border-t border-slate-200 dark:border-slate-800">
            {/* Divider (Diagonal slash) */}
            <div className={cx(
              "absolute left-1/2 top-0 z-20 hidden sm:flex h-full w-14 -translate-x-1/2 skew-x-[-15deg] items-center justify-center border-x-4 border-slate-50 dark:border-[#141414] transition-colors duration-500",
@@ -360,30 +368,36 @@ export default function BattleArenaClient() {
              <span className={cx("skew-x-[15deg] text-3xl text-slate-950 shadow-sm", "font-display")}>VS</span>
            </div>
            
-           <div className="absolute left-1/2 top-1/2 z-20 flex sm:hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand border-[3px] border-slate-50 dark:border-[#141414]">
-             <span className={cx("text-xl text-slate-950", "font-display")}>VS</span>
+           <div className={cx(
+             "absolute left-1/2 top-1/2 z-20 flex sm:hidden h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[2.5px] border-slate-50 dark:border-[#141414] transition-colors duration-500",
+             queueStatus === "queued" ? "bg-brand/80 shadow-[0_0_15px_rgba(245,181,0,0.6)] animate-pulse" : "bg-brand"
+           )}>
+             <span className={cx("text-sm text-slate-950", "font-display")}>VS</span>
            </div>
 
            {/* Left Side (Player) */}
-           <div className="relative w-full sm:w-1/2 bg-slate-100 p-4 sm:px-10 sm:py-12 dark:bg-[#111]">
-             <div className="relative z-10 flex flex-col items-start">
-               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Challenger</span>
-               <span className={cx("mt-1 text-2xl sm:text-4xl text-slate-900 dark:text-white uppercase truncate w-full", "font-display")}>
-                 {profile?.full_name || profile?.fullName || "Student"}
+           <div className="relative w-1/2 bg-slate-100 p-3 sm:px-10 sm:py-12 dark:bg-[#111]">
+             <div className="relative z-10 flex flex-col items-center sm:items-start text-center sm:text-left">
+               <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-brand">You</span>
+               <span className={cx("mt-0.5 sm:mt-1 text-sm sm:text-4xl text-slate-900 dark:text-white uppercase truncate w-full", "font-display")}>
+                 <span className="sm:hidden">{initials(profile?.full_name || profile?.fullName)}</span>
+                 <span className="hidden sm:inline">{profile?.full_name || profile?.fullName || "Student"}</span>
                </span>
-               <span className="text-sm font-semibold text-slate-500">@{profile?.username}</span>
+               <span className="text-[10px] sm:text-sm font-semibold text-slate-500">@{profile?.username}</span>
              </div>
            </div>
            
            {/* Right Side (Opponent) */}
-           <div className="relative w-full sm:w-1/2 bg-slate-50 p-4 sm:px-10 sm:py-12 dark:bg-[#0a0a0a] flex flex-col sm:items-end text-left sm:text-right">
-             <div className={cx("relative z-10 flex flex-col sm:items-end w-full", queueStatus === "queued" ? "animate-pulse" : "")}>
-               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Opponent</span>
-               <span className={cx("mt-1 text-2xl sm:text-4xl text-slate-300 dark:text-slate-600 uppercase truncate w-full", "font-display")}>
-                 {queueStatus === "queued" ? "SEARCHING..." : "OPEN SLOT"}
+           <div className="relative w-1/2 bg-slate-50 p-3 sm:px-10 sm:py-12 dark:bg-[#0a0a0a] flex flex-col items-center sm:items-end text-center sm:text-right">
+             <div className={cx("relative z-10 flex flex-col items-center sm:items-end w-full", queueStatus === "queued" ? "animate-pulse" : "")}>
+               <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Opponent</span>
+               <span className={cx("mt-0.5 sm:mt-1 text-sm sm:text-4xl text-slate-300 dark:text-slate-600 uppercase truncate w-full", "font-display")}>
+                 <span className="sm:hidden">{queueStatus === "queued" ? "Wait" : "?"}</span>
+                 <span className="hidden sm:inline">{queueStatus === "queued" ? "SEARCHING..." : "OPEN SLOT"}</span>
                </span>
-               <span className="text-sm font-semibold text-slate-400/80">
-                 {queueStatus === "queued" ? "Awaiting a worthy opponent" : "Waiting for a challenger"}
+               <span className="text-[10px] sm:text-sm font-semibold text-slate-400/80 leading-tight">
+                 <span className="sm:hidden">{queueStatus === "queued" ? "Searching..." : "Ready"}</span>
+                 <span className="hidden sm:inline">{queueStatus === "queued" ? "Awaiting a worthy opponent" : "Waiting for a challenger"}</span>
                </span>
              </div>
            </div>
@@ -407,30 +421,30 @@ export default function BattleArenaClient() {
         <div className="flex flex-col gap-4">
           
           {/* Find Opponent (Primary CTA) */}
-          <div className="group relative overflow-hidden rounded-2xl bg-brand px-4 py-6 shadow-sm transition hover:shadow-md sm:px-8 sm:py-10">
+          <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-brand px-4 py-5 sm:px-8 sm:py-10 shadow-sm transition hover:shadow-md">
             {/* Background radar/reticle graphic */}
-            <div className="pointer-events-none absolute -right-10 -top-10 text-amber-500/20 dark:text-amber-600/20 transition-transform duration-700 ease-out group-hover:scale-110">
-              <RadarIcon className="h-36 w-36 sm:h-56 sm:w-56" />
+            <div className="pointer-events-none absolute -right-8 -top-8 sm:-right-10 sm:-top-10 text-amber-500/20 dark:text-amber-600/20 transition-transform duration-700 ease-out group-hover:scale-110">
+              <RadarIcon className="h-28 w-28 sm:h-56 sm:w-56" />
             </div>
             
             <div className="relative z-10 flex flex-col items-start">
-              <h2 className={cx("text-2xl sm:text-4xl text-slate-950 uppercase tracking-wide", "font-display")}>Find Opponent</h2>
-              <p className="mt-1 text-sm font-semibold text-amber-900/90 max-w-sm">Enter the queue for a same-track {profile?.exam || "JEE"} matchup right now.</p>
+              <h2 className={cx("text-xl sm:text-4xl text-slate-950 uppercase tracking-wide", "font-display")}>Find Opponent</h2>
+              <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-semibold text-amber-900/90 max-w-xs sm:max-w-sm">Enter the queue for a same-track {profile?.exam || "JEE"} matchup.</p>
               
-              <div className="mt-8 w-full max-w-xs">
+              <div className="mt-4 sm:mt-8 w-full max-w-xs">
                 {queueStatus === "queued" ? (
-                  <div className="space-y-3">
-                    <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 text-sm font-black text-slate-950">
-                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="rounded-lg sm:rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 sm:px-4 sm:py-3 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black text-slate-950">
+                        <div className="h-3 w-3 sm:h-4 sm:w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
                         SEARCHING...
                       </div>
                     </div>
                     {waitedLongEnough && (
-                      <p className="text-sm font-semibold text-amber-900/80">Taking a bit longer than usual...</p>
+                      <p className="text-[11px] sm:text-sm font-semibold text-amber-900/80">Taking a bit longer than usual...</p>
                     )}
                     <div className="flex gap-2">
-                      <button type="button" onClick={leaveQueue} className="flex-1 rounded-xl bg-slate-950/10 px-4 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-950/20">Cancel</button>
+                      <button type="button" onClick={leaveQueue} className="flex-1 rounded-lg sm:rounded-xl bg-slate-950/10 px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-bold text-slate-900 transition hover:bg-slate-950/20">Cancel</button>
                     </div>
                   </div>
                 ) : (
@@ -438,10 +452,10 @@ export default function BattleArenaClient() {
                     type="button"
                     onClick={findOpponent}
                     disabled={busy || !profile?.username}
-                    className="group/btn relative overflow-hidden flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 py-4 text-sm font-black text-brand shadow-xl transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                    className="group/btn relative overflow-hidden flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl bg-slate-950 px-3 py-3 sm:px-4 sm:py-4 text-xs sm:text-sm font-black text-brand shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      {busy ? <div className="h-4 w-4 animate-spin rounded-full border-2 border-brand border-t-transparent" /> : <CustomSwordsIcon className="h-5 w-5" />}
+                    <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
+                      {busy ? <div className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin rounded-full border-2 border-brand border-t-transparent" /> : <CustomSwordsIcon className="h-4 w-4 sm:h-5 sm:w-5" />}
                       Start Matchmaking
                     </span>
                     <div className="absolute inset-0 w-0 bg-white/10 transition-all duration-500 ease-out group-hover/btn:w-full" />
@@ -452,12 +466,12 @@ export default function BattleArenaClient() {
           </div>
 
           {/* Challenge by Username (Secondary) */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-            <h2 className="text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Direct Challenge</h2>
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-3 sm:p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <h2 className="hidden sm:block text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Direct Challenge</h2>
             
-            <form onSubmit={searchUsername} className="mt-3 flex flex-col sm:flex-row gap-2">
+            <form onSubmit={searchUsername} className="sm:mt-3 flex flex-row gap-2">
               <div className="relative flex-1">
-                <svg className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="absolute left-3 sm:left-3.5 top-1/2 h-4 w-4 sm:h-5 sm:w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"/>
                   <path d="M21 21l-4.35-4.35"/>
                 </svg>
@@ -465,11 +479,12 @@ export default function BattleArenaClient() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter @username"
-                  className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 pl-11 pr-4 py-3 text-sm font-bold text-slate-900 outline-none transition focus:border-brand focus:bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white dark:focus:border-brand dark:focus:bg-[var(--surface-elevated)]"
+                  className="w-full rounded-lg sm:rounded-xl border border-slate-200 bg-slate-50 pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-slate-900 outline-none transition focus:border-brand focus:bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white dark:focus:border-brand dark:focus:bg-[var(--surface-elevated)]"
                 />
               </div>
-              <button type="submit" disabled={busy} className="rounded-xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-200 disabled:opacity-50 dark:bg-[#1a1a1a] dark:text-slate-300 dark:hover:bg-[#222]">
-                Lookup
+              <button type="submit" disabled={busy} className="rounded-lg sm:rounded-xl bg-slate-100 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-slate-700 transition hover:bg-slate-200 disabled:opacity-50 dark:bg-[#1a1a1a] dark:text-slate-300 dark:hover:bg-[#222]">
+                <span className="hidden sm:inline">Lookup</span>
+                <span className="sm:hidden">Find</span>
               </button>
             </form>
             {searchedUser && (
@@ -497,7 +512,7 @@ export default function BattleArenaClient() {
         </div>
 
         {/* Pending Challenges Feed */}
-        <aside className="flex flex-col gap-3">
+        <aside className={cx("flex flex-col gap-3", !challenges.length ? "hidden sm:flex" : "")}>
           <h2 className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-1">
             <HourglassIcon className="h-4 w-4 text-brand" />
             Live Feed
@@ -518,7 +533,8 @@ export default function BattleArenaClient() {
       </section>
 
       {/* MATCH HISTORY AS SCORECARDS */}
-      <section className="mt-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+      {/* MATCH HISTORY AS SCORECARDS */}
+      <section className="mt-5 rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
         <div className="flex items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 text-lg font-black font-display text-slate-950 dark:text-white">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-brand">
@@ -532,43 +548,69 @@ export default function BattleArenaClient() {
           <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Match History</span>
         </div>
         
-        <div className="mt-6 flex flex-col gap-3">
-          {history.length ? history.map((item) => (
-            <div key={item.id} className="relative overflow-hidden border border-slate-200 bg-slate-50/50 py-3 px-3 sm:py-4 sm:px-5 transition hover:border-slate-300 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700 sm:rounded-lg">
-              {/* Ticket Cutouts */}
-              <div className="absolute -left-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-r border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
-              <div className="absolute -right-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-l border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
+        <div className="mt-3 sm:mt-6 flex flex-col gap-0 sm:gap-3">
+          {history.length ? (
+            <>
+              {history.map((item, idx) => (
+                <div key={item.id} className={cx(
+                  "relative overflow-hidden sm:border border-slate-200 sm:bg-slate-50/50 py-3 sm:py-4 px-1 sm:px-5 transition hover:border-slate-300 dark:border-[var(--border-subtle)] sm:dark:bg-[var(--surface-elevated)]/30 sm:hover:border-slate-700 sm:rounded-lg",
+                  idx !== history.length - 1 ? "border-b" : "",
+                  idx >= 3 ? "hidden sm:block" : ""
+                )}>
+                  {/* Ticket Cutouts */}
+                  <div className="absolute -left-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-r border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
+                  <div className="absolute -right-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-l border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
 
-              <div className="grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_auto_auto] sm:items-center sm:px-4">
-                <div className="flex min-w-0 items-center gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-black text-slate-700 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
-                    {initials(item.opponent.displayName)}
+                  {/* Desktop Layout */}
+                  <div className="hidden sm:grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_auto_auto] sm:items-center sm:px-4">
+                    <div className="flex min-w-0 items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-black text-slate-700 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
+                        {initials(item.opponent.displayName)}
+                      </div>
+                      <div className="min-w-0">
+                        <p className={cx("truncate text-xl text-slate-900 dark:text-white", "font-display")}>{item.opponent.displayName}</p>
+                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">@{item.opponent.username || "student"} · {formatDate(item.date)}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-6 sm:justify-center">
+                       <ScoreComparison scoreString={item.score} />
+                    </div>
+
+                    <div className="flex sm:justify-end">
+                      <div className={cx(
+                        "inline-flex items-center justify-center border-[2.5px] px-2.5 py-0.5 text-sm font-black uppercase tracking-widest",
+                        item.result === "Won" ? "border-brand text-brand shadow-[0_0_10px_rgba(245,181,0,0.2)] rotate-[-2deg]" 
+                        : item.result === "Lost" ? "border-rose-500 text-rose-500 rotate-[3deg] opacity-90"
+                        : "border-slate-400 text-slate-400 rotate-[-1deg]"
+                      )}>
+                        {item.result}
+                      </div>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <p className={cx("truncate text-xl text-slate-900 dark:text-white", "font-display")}>{item.opponent.displayName}</p>
-                    <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">@{item.opponent.username || "student"} · {formatDate(item.date)}</p>
+
+                  {/* Mobile Layout */}
+                  <div className="flex sm:hidden items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-bold text-sm text-slate-900 dark:text-white truncate max-w-[120px]">{item.opponent.displayName}</span>
+                      <span className={cx("text-[10px] font-black px-1.5 py-0.5 rounded", item.result === "Won" ? "bg-amber-100 text-amber-700 dark:bg-brand/20 dark:text-brand" : "bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-500")}>
+                        {item.result === "Won" ? "W" : "L"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 text-[13px] font-semibold">
+                      <span className="text-slate-700 dark:text-slate-300">{item.score}</span>
+                      <span className="text-slate-400">{formatDate(item.date)}</span>
+                    </div>
                   </div>
                 </div>
-
-                {/* Visual Scorecard */}
-                <div className="flex items-center gap-6 sm:justify-center">
-                   <ScoreComparison scoreString={item.score} />
-                </div>
-
-                {/* Stamped Result */}
-                <div className="flex sm:justify-end">
-                  <div className={cx(
-                    "inline-flex items-center justify-center border-[2.5px] px-2.5 py-0.5 text-sm font-black uppercase tracking-widest",
-                    item.result === "Won" ? "border-brand text-brand shadow-[0_0_10px_rgba(245,181,0,0.2)] rotate-[-2deg]" 
-                    : item.result === "Lost" ? "border-rose-500 text-rose-500 rotate-[3deg] opacity-90"
-                    : "border-slate-400 text-slate-400 rotate-[-1deg]"
-                  )}>
-                    {item.result}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )) : (
+              ))}
+              {history.length > 3 && (
+                <button type="button" className="sm:hidden mt-2 text-xs font-bold text-slate-500 hover:text-slate-700 transition py-2 text-center w-full">
+                  View all battles ({history.length})
+                </button>
+              )}
+            </>
+          ) : (
             <div className="rounded-lg border border-dashed border-slate-300 py-10 text-center dark:border-slate-700">
               <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Your battle history will appear here after your first completed match.</p>
             </div>

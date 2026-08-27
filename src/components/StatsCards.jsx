@@ -54,40 +54,41 @@ export default function StatsCards() {
   }
 
   return (
-    <div className="h-full rounded-2xl border border-slate-200/80 bg-[var(--card)] p-3 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+    <div className="h-full rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 sm:p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
         Performance
       </p>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-1">
+      <div className="mt-4 sm:mt-4 grid grid-cols-2 gap-3 sm:gap-3 lg:grid-cols-1">
         {stats.rank !== null && (
-          <div className="rounded-xl bg-slate-50 p-2.5 sm:p-3 dark:bg-[var(--surface-elevated)]/40">
+          <div className="rounded-xl bg-slate-50 p-3 sm:p-3 dark:bg-[var(--surface-elevated)]/40">
             <div className="flex items-center gap-2 text-amber-600 dark:text-amber-300">
-              <Trophy className="h-4 w-4" />
-              <p className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white">#{stats.rank}</p>
+               <Trophy className="h-4 w-4" />
+               <p className="text-2xl sm:text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white">#{stats.rank}</p>
             </div>
-            <p className="mt-1 text-xs font-bold text-slate-500 dark:text-slate-400">Rank</p>
+            <p className="mt-1 text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400">Rank</p>
           </div>
         )}
 
         {stats.streak !== null && (
-          <div className="rounded-xl bg-slate-50 p-2.5 sm:p-3 dark:bg-[var(--surface-elevated)]/40">
+          <div className="rounded-xl bg-slate-50 p-3 sm:p-3 dark:bg-[var(--surface-elevated)]/40">
             <div className="flex items-center gap-2 text-rose-500">
-              <Flame className="h-4 w-4" />
-              <p className="text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white">{stats.streak}</p>
+               <Flame className="h-4 w-4" />
+               <p className="text-2xl sm:text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white">{stats.streak}</p>
             </div>
-            <p className="mt-1 text-xs font-bold text-slate-500 dark:text-slate-400">Day streak</p>
+            <p className="mt-1 text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400">Day streak</p>
           </div>
         )}
 
         {stats.xp !== null && (
-          <div className="col-span-2 rounded-xl bg-amber-50 p-2.5 sm:p-3 dark:bg-amber-500/10 lg:col-span-1">
+          <div className="col-span-2 rounded-xl bg-amber-50 p-3.5 sm:p-3 dark:bg-amber-500/10 lg:col-span-1 flex items-center justify-between">
             <div className="flex items-center gap-2 text-amber-600 dark:text-amber-300">
               <Zap className="h-4 w-4 fill-current" />
-              <p className="text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white">
+              <p className="text-xl sm:text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white">
                 {Number(stats.xp).toLocaleString()} XP
               </p>
             </div>
+            <span className="text-[10px] sm:hidden font-black uppercase tracking-widest text-amber-700/60 dark:text-amber-400/60">Total</span>
           </div>
         )}
       </div>

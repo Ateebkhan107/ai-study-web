@@ -414,9 +414,9 @@ export default function TestBuilder({ track = "jee", access = null }) {
   };
 
   return (
-    <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start xl:grid-cols-[minmax(0,1fr)_320px]">
-      <div className="min-w-0 rounded-2xl border border-slate-200/70 bg-[var(--card)]/82 p-4 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/82 sm:p-5">
-        <div className="space-y-7">
+    <div className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start xl:grid-cols-[minmax(0,1fr)_320px]">
+      <div className="min-w-0 rounded-xl sm:rounded-2xl border border-slate-200/70 bg-[var(--card)]/82 p-3 sm:p-5 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/82">
+        <div className="space-y-5 sm:space-y-7">
           <section>
             <h2 className="text-sm font-black text-slate-900 dark:text-white">
               Subject
@@ -651,8 +651,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
         </div>
       </div>
 
-      <aside className="mobile-sticky-cta lg:sticky lg:top-24">
-        <div className="sm:rounded-2xl sm:border sm:border-slate-200/70 sm:bg-[var(--card)]/85 sm:p-4 sm:shadow-sm sm:backdrop-blur-xl dark:sm:border-[var(--border-subtle)] dark:sm:bg-[var(--surface)]/85">
+      <aside className="lg:sticky lg:top-24">
+        <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/85 p-3 sm:p-4 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/85">
           <h2 className="hidden sm:block text-sm font-black text-slate-900 dark:text-white">
             Your Test
           </h2>
@@ -705,15 +705,25 @@ export default function TestBuilder({ track = "jee", access = null }) {
           )}
 
           {/* Mobile Summary */}
-          <div className="sm:hidden mb-3 flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-sm font-black text-slate-900 dark:text-white">{questionCount} Qs · {duration}m</span>
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{totalChapters} Chapters</span>
+          <div className="sm:hidden mb-3">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+              <span className="font-black text-slate-900 dark:text-white">
+                {validSelectedSubjects.length ? validSelectedSubjects.join(", ") : "No subjects"}
+              </span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold text-slate-600 dark:text-slate-400">{totalChapters} Ch.</span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold text-slate-600 dark:text-slate-400">{questionCount} Qs</span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold text-slate-600 dark:text-slate-400">{duration}m</span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="font-bold capitalize text-slate-600 dark:text-slate-400">{difficulty}</span>
             </div>
+            
             {customTestUsage && !access?.isPro && (
-               <span className={`text-[10px] font-bold ${customTestBlocked ? "text-rose-600 dark:text-rose-400" : "text-amber-600 dark:text-brand"}`}>
+               <div className={`mt-2 text-[10px] font-bold ${customTestBlocked ? "text-rose-600 dark:text-rose-400" : "text-amber-600 dark:text-brand"}`}>
                  {customTestBlocked ? "Limit reached" : `${customTestUsage.remaining} free left`}
-               </span>
+               </div>
             )}
           </div>
 

@@ -69,7 +69,7 @@ export default function Leaderboard({ compact = false }) {
 
   return (
     <div className={`relative bg-white dark:bg-[var(--surface)] rounded-xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-colors duration-200 ${
-      compact ? "p-2.5 sm:p-4" : "p-4 sm:p-6 lg:p-7"
+      compact ? "p-4 sm:p-5" : "p-4 sm:p-6 lg:p-7"
     }`}>
       
       <style>{`
@@ -199,7 +199,7 @@ function RankOneCard({ user, isCurrentUser, compact }) {
               <span className="shrink-0 rounded bg-brand/20 dark:bg-brand/30 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900 dark:text-white">You</span>
             )}
           </div>
-          <p className={`${compact ? "text-xs" : "text-sm"} mt-0.5 truncate font-semibold text-slate-600 dark:text-slate-300`}>
+          <p className={`hidden sm:block ${compact ? "text-xs" : "text-sm"} mt-0.5 truncate font-semibold text-slate-600 dark:text-slate-300`}>
             {levelData.title} · Level {levelData.currentLevel}
           </p>
         </div>
@@ -207,12 +207,12 @@ function RankOneCard({ user, isCurrentUser, compact }) {
         {/* XP BADGE */}
         <div className="shrink-0 flex flex-col items-end pl-2">
           <div className="flex items-baseline gap-1">
-            <span className={`${compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"} font-black tabular-nums tracking-tighter text-amber-600 dark:text-brand`}>
+            <span className={`${compact ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl"} font-black tabular-nums tracking-tighter text-amber-600 dark:text-brand`}>
               {user.xp.toLocaleString()}
             </span>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-500 dark:text-brand/80">XP</span>
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-500 dark:text-brand/80">XP</span>
           </div>
-          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-amber-600 dark:text-brand mt-1">Leader</span>
+          <span className="hidden sm:inline-block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-amber-600 dark:text-brand mt-1">Leader</span>
         </div>
       </div>
     </div>
@@ -249,7 +249,7 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
       transparent ? "" : "border-t border-slate-200 dark:border-[var(--border-subtle)] first:border-t-0 hover:bg-slate-50/80 dark:hover:bg-[var(--surface-elevated)]/55"
     } ${
       isCurrentUser && !isDocked ? "bg-indigo-50/40 dark:bg-indigo-500/5" : ""
-    } ${compact ? "px-2.5 py-2 sm:px-3 sm:py-3" : "px-3.5 py-3 sm:px-4 sm:py-4"}`}>
+    } ${compact ? "px-3 py-3 sm:px-4 sm:py-3" : "px-4 py-3 sm:px-5 sm:py-4"}`}>
       
       {/* LEFT SIDE */}
       <div className={`flex min-w-0 flex-1 items-center z-10 ${compact ? "gap-3" : "gap-4"}`}>
@@ -269,7 +269,7 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
               <span className="shrink-0 rounded bg-indigo-100 dark:bg-indigo-500/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">You</span>
             )}
           </div>
-          <p className={`${compact ? "text-[11px]" : "text-xs"} mt-0.5 truncate font-normal text-slate-500 dark:text-slate-400`}>
+          <p className={`hidden sm:block ${compact ? "text-[11px]" : "text-xs"} mt-0.5 truncate font-normal text-slate-500 dark:text-slate-400`}>
             {levelData.title} · Level {levelData.currentLevel}
           </p>
         </div>
