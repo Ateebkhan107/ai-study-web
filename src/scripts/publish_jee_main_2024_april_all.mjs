@@ -17,19 +17,19 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
 });
 
 const PAPERS = [
-  { code: "JEE-MAIN-24-27JAN-S1", attempt: "27 Jan", shift: "Shift 1", month: "01", day: "27", time: "9:00 AM - 12:00 PM" },
-  { code: "JEE-MAIN-24-27JAN-S2", attempt: "27 Jan", shift: "Shift 2", month: "01", day: "27", time: "3:00 PM - 6:00 PM" },
-  { code: "JEE-MAIN-24-29JAN-S1", attempt: "29 Jan", shift: "Shift 1", month: "01", day: "29", time: "9:00 AM - 12:00 PM" },
-  { code: "JEE-MAIN-24-29JAN-S2", attempt: "29 Jan", shift: "Shift 2", month: "01", day: "29", time: "3:00 PM - 6:00 PM" },
-  { code: "JEE-MAIN-24-30JAN-S1", attempt: "30 Jan", shift: "Shift 1", month: "01", day: "30", time: "9:00 AM - 12:00 PM" },
-  { code: "JEE-MAIN-24-30JAN-S2", attempt: "30 Jan", shift: "Shift 2", month: "01", day: "30", time: "3:00 PM - 6:00 PM" },
-  { code: "JEE-MAIN-24-31JAN-S1", attempt: "31 Jan", shift: "Shift 1", month: "01", day: "31", time: "9:00 AM - 12:00 PM" },
-  { code: "JEE-MAIN-24-31JAN-S2", attempt: "31 Jan", shift: "Shift 2", month: "01", day: "31", time: "3:00 PM - 6:00 PM" },
-  { code: "JEE-MAIN-24-01FEB-S1", attempt: "1 Feb", shift: "Shift 1", month: "02", day: "01", time: "9:00 AM - 12:00 PM" },
-  { code: "JEE-MAIN-24-01FEB-S2", attempt: "1 Feb", shift: "Shift 2", month: "02", day: "01", time: "3:00 PM - 6:00 PM" },
+  { code: "JEE-MAIN-24-04APR-S1", attempt: "4 Apr", shift: "Shift 1", day: "04" },
+  { code: "JEE-MAIN-24-04APR-S2", attempt: "4 Apr", shift: "Shift 2", day: "04" },
+  { code: "JEE-MAIN-24-05APR-S1", attempt: "5 Apr", shift: "Shift 1", day: "05" },
+  { code: "JEE-MAIN-24-05APR-S2", attempt: "5 Apr", shift: "Shift 2", day: "05" },
+  { code: "JEE-MAIN-24-06APR-S1", attempt: "6 Apr", shift: "Shift 1", day: "06" },
+  { code: "JEE-MAIN-24-06APR-S2", attempt: "6 Apr", shift: "Shift 2", day: "06" },
+  { code: "JEE-MAIN-24-08APR-S1", attempt: "8 Apr", shift: "Shift 1", day: "08" },
+  { code: "JEE-MAIN-24-08APR-S2", attempt: "8 Apr", shift: "Shift 2", day: "08" },
+  { code: "JEE-MAIN-24-09APR-S1", attempt: "9 Apr", shift: "Shift 1", day: "09" },
+  { code: "JEE-MAIN-24-09APR-S2", attempt: "9 Apr", shift: "Shift 2", day: "09" },
 ];
 
-async function withRetry(fn, retries = 5, delay = 3000) {
+async function withRetry(fn, retries = 3, delay = 2000) {
   for (let i = 0; i < retries; i++) {
     try {
       return await fn();
@@ -42,7 +42,7 @@ async function withRetry(fn, retries = 5, delay = 3000) {
 }
 
 async function publishPaper(paper) {
-  const { code, attempt, shift, month, day } = paper;
+  const { code, attempt, shift, day } = paper;
   console.log(`\n========================================`);
   console.log(`Publishing ${code} (${attempt}, ${shift})...`);
   console.log(`========================================`);
@@ -54,7 +54,7 @@ async function publishPaper(paper) {
     attempt: attempt,
     shift: shift,
     paper_code: code,
-    exam_date: `2024-${month}-${day}`,
+    exam_date: `2024-04-${day}`,
     duration_minutes: 180,
     total_marks: 300,
     status: "PUBLISHED",
@@ -97,7 +97,7 @@ async function publishPaper(paper) {
   }
 
   // 2. Read structured dataset
-  const datasetPath = `tmp/jee-main-2024-jan-clean/${code}/structured-dataset.json`;
+  const datasetPath = `tmp/jee-main-2024-apr-clean/${code}/structured-dataset.json`;
   const questions = JSON.parse(await fs.readFile(datasetPath, "utf-8"));
 
   // Fetch existing questions
@@ -120,11 +120,11 @@ async function publishPaper(paper) {
 
     if (q.needs_image) {
       const sourceCropNum = q.source_pdf_q ?? (q.number <= 30 ? q.number + 60 : q.number - 30);
-      const cropPath = `tmp/jee-main-2024-jan/${code}/crops/q${String(sourceCropNum).padStart(2, "0")}.png`;
+      const cropPath = `tmp/jee-main-2024-apr/${code}/crops/q${String(sourceCropNum).padStart(2, "0")}.png`;
 
       try {
         const imageBytes = await fs.readFile(cropPath);
-        const objectPath = `jee-main-2024-january-clean/${code.toLowerCase()}/q${String(q.number).padStart(2, "0")}.png`;
+        const objectPath = `jee-main-2024-april-clean/${code.toLowerCase()}/q${String(q.number).padStart(2, "0")}.png`;
 
         await withRetry(async () => {
           const { error: uploadError } = await supabase.storage
@@ -201,30 +201,21 @@ async function publishPaper(paper) {
 }
 
 async function main() {
-  console.log("Starting publishing pipeline for all 10 JEE Main 2024 January shifts...");
+  console.log("Starting publishing pipeline for all 10 JEE Main 2024 April shifts...");
   const results = [];
 
   for (const paper of PAPERS) {
-    let success = false;
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        const res = await publishPaper(paper);
-        results.push(res);
-        success = true;
-        break;
-      } catch (err) {
-        console.error(`⚠️ Attempt ${attempt}/3 failed for ${paper.code}:`, err.message || err);
-        await new Promise((r) => setTimeout(r, 4000));
-      }
-    }
-    if (!success) {
-      console.error(`❌ Permanent failure for ${paper.code}`);
+    try {
+      const res = await publishPaper(paper);
+      results.push(res);
+    } catch (err) {
+      console.error(`❌ Failed publishing ${paper.code}:`, err);
       process.exit(1);
     }
   }
 
   console.log(`\n========================================`);
-  console.log(`🎉 ALL 10 JANUARY PAPERS (900 QUESTIONS) SUCCESSFULLY PUBLISHED!`);
+  console.log(`🎉 ALL 10 APRIL PAPERS (900 QUESTIONS) SUCCESSFULLY PUBLISHED!`);
   console.log(`========================================`);
   console.table(results);
 }
