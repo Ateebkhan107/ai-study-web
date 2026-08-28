@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
+import crypto from "crypto";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
-import {
-  getCashfreeOrderPayments,
-  getCashfreePaymentLink,
-  getCashfreePaymentLinkOrders,
-} from "@/lib/cashfree";
+import { getRazorpayOrder, getRazorpayPayment } from "@/lib/razorpay";
 
 const PLAN_DURATION = { monthly: 30, quarterly: 90, yearly: 365 };
 const PLAN_AMOUNT = { monthly: 49, quarterly: 129, yearly: 399 };
@@ -14,44 +11,49 @@ const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
 
 export async function POST(req) {
   try {
-    const { linkId } = await req.json();
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
     const { userId } = await auth();
 
     if (!userId) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
     }
 
-    if (!linkId || !String(linkId).startsWith("prepzii_")) {
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
       return NextResponse.json({ success: false, message: "Invalid order" }, { status: 400 });
     }
 
-    const [paymentLink, linkOrders] = await Promise.all([
-      getCashfreePaymentLink(linkId),
-      getCashfreePaymentLinkOrders(linkId),
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "")
+      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .digest("hex");
+    const suppliedSignature = String(razorpay_signature);
+
+    if (expectedSignature.length !== suppliedSignature.length ||
+      !crypto.timingSafeEqual(Buffer.from(expectedSignature), Buffer.from(suppliedSignature))) {
+      return NextResponse.json({ success: false, message: "Invalid payment signature" }, { status: 400 });
+    }
+
+    const [order, payment] = await Promise.all([
+      getRazorpayOrder(razorpay_order_id),
+      getRazorpayPayment(razorpay_payment_id),
     ]);
-    const orders = Array.isArray(linkOrders) ? linkOrders : linkOrders?.orders || [];
-    const order = orders.find((candidate) => candidate.order_status === "PAID");
-    const payments = order ? await getCashfreeOrderPayments(order.order_id) : [];
-    const successfulPayment = payments.find(
-      (payment) => payment.payment_status === "SUCCESS" && payment.is_captured !== false
-    );
-    const plan = String(paymentLink.link_notes?.plan || "");
-    const orderUserId = String(paymentLink.link_notes?.user_id || "");
-    const orderTrack = normalizeExamTrack(paymentLink.link_notes?.exam_track);
+    const plan = String(order.notes?.plan || "");
+    const orderUserId = String(order.notes?.user_id || "");
+    const orderTrack = normalizeExamTrack(order.notes?.exam_track);
     const profile = await getProfileAccessProfile(userId);
 
     if (
       !PLAN_DURATION[plan] ||
       orderUserId !== userId ||
       orderTrack !== normalizeExamTrack(profile.examTrack) ||
-      paymentLink.link_status !== "PAID" ||
-      Number(paymentLink.link_amount) !== PLAN_AMOUNT[plan] ||
-      Number(paymentLink.link_amount_paid) !== PLAN_AMOUNT[plan] ||
-      paymentLink.link_currency !== "INR" ||
-      !order ||
-      !successfulPayment ||
-      Number(successfulPayment.payment_amount) !== PLAN_AMOUNT[plan] ||
-      successfulPayment.payment_currency !== "INR"
+      order.status !== "paid" ||
+      Number(order.amount) !== PLAN_AMOUNT[plan] * 100 ||
+      Number(order.amount_paid) !== PLAN_AMOUNT[plan] * 100 ||
+      order.currency !== "INR" ||
+      payment.order_id !== order.id ||
+      payment.status !== "captured" ||
+      Number(payment.amount) !== PLAN_AMOUNT[plan] * 100 ||
+      payment.currency !== "INR"
     ) {
       return NextResponse.json(
         { success: false, message: "Payment is not complete or does not match this subscription." },
@@ -69,7 +71,7 @@ export async function POST(req) {
 
     if (subscriptionError) throw subscriptionError;
 
-    if (existingSubscription?.razorpay_order_id === order.order_id) {
+    if (existingSubscription?.razorpay_order_id === order.id) {
       return NextResponse.json({ success: true, message: "Subscription already activated" });
     }
 
@@ -99,10 +101,9 @@ export async function POST(req) {
       exam_track: orderTrack,
       amount: PLAN_AMOUNT[plan],
       currency: "INR",
-      // Legacy column names are retained until the payment-history schema is migrated.
-      razorpay_order_id: order.order_id,
-      razorpay_payment_id: String(successfulPayment.cf_payment_id),
-      razorpay_signature: "cashfree_api_verified",
+      razorpay_order_id: order.id,
+      razorpay_payment_id: payment.id,
+      razorpay_signature: suppliedSignature,
       status: "active",
       starts_at: startsAt,
       expires_at: expiresAt,
@@ -116,7 +117,7 @@ export async function POST(req) {
       message: "Subscription activated successfully",
     });
   } catch (error) {
-    console.error("Cashfree verification failed:", error.details || error);
+    console.error("Razorpay verification failed:", error.details || error);
     return NextResponse.json(
       { success: false, message: error.message || "Verification failed" },
       { status: 500 }

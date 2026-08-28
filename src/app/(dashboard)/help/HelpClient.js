@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     question: "What payment methods are supported?",
-    answer: "We support a wide range of payment options through Cashfree Payments, including credit/debit cards, UPI, net banking, and supported wallets."
+    answer: "We support a wide range of payment options through Razorpay, including credit/debit cards, UPI, net banking, and supported wallets."
   },
   {
     question: "My payment was successful but Pro is not activated. What should I do?",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createOrder, openCashfreeCheckout } from "@/lib/payment";
+import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import { Check, LockKeyhole } from "lucide-react";
 
 export default function PricingCard({
@@ -25,9 +25,8 @@ export default function PricingCard({
 
       const order = await createOrder(plan, examTrack);
 
-      await openCashfreeCheckout(order);
+      await openRazorpayCheckout(order);
     } catch (error) {
-      console.error(error);
       alert(error.message || "Unable to start payment.");
     } finally {
       setLoading(false);
@@ -96,7 +95,7 @@ export default function PricingCard({
       <p className="mt-3 text-center text-xs text-gray-500">
         <span className="inline-flex items-center justify-center gap-1.5">
           <LockKeyhole className="h-3.5 w-3.5" />
-          Secure payment powered by Cashfree Payments
+          Secure payment powered by Razorpay
         </span>
       </p>
     </div>

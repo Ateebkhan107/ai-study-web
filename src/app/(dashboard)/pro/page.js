@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { createOrder, openCashfreeCheckout } from "@/lib/payment";
+import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
 import { Check, X, Star, Zap, Shield, Clock, Users, ArrowRight, ChevronDown } from "lucide-react";
 
@@ -76,7 +76,7 @@ const FAQS = [
   },
   {
     q: "Which payment methods are accepted?",
-    a: "We accept UPI, debit/credit cards, net banking, and supported wallets via Cashfree Payments.",
+    a: "We accept UPI, debit/credit cards, net banking, and supported wallets via Razorpay.",
   },
   {
     q: "Will my data be saved if I downgrade?",
@@ -129,9 +129,8 @@ export default function ProPage() {
 
       const order = await createOrder(selectedPlan, selectedTrack);
 
-      await openCashfreeCheckout(order);
+      await openRazorpayCheckout(order);
     } catch (err) {
-      console.error(err);
       alert(err.message || "Unable to start payment.");
       setLoading(false);
     }
@@ -248,7 +247,7 @@ export default function ProPage() {
 
         <p className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
           <Shield className="w-3 h-3" />
-          Secure payment powered by Cashfree Payments
+          Secure payment powered by Razorpay
         </p>
       </section>
 

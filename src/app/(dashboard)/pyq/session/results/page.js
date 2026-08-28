@@ -20,6 +20,17 @@ const modeLabels = {
   mistakes: "Mistake Revision",
 };
 
+const shouldHideReviewSolution = (exam, year) => {
+  const normalizedExam = String(exam).toUpperCase();
+  const numericYear = Number(year);
+  const isScopedJee = normalizedExam.startsWith("JEE")
+    && Number.isInteger(numericYear)
+    && numericYear >= 2022
+    && numericYear <= 2026;
+
+  return normalizedExam.startsWith("NEET") || isScopedJee;
+};
+
 const RemoveOrangeFilter = () => (
   <svg width="0" height="0" className="absolute">
     <filter id="remove-orange">
@@ -549,22 +560,24 @@ export default function PYQResultsPage() {
                         )}
                       </div>
                     )}
-                    <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose prose-sm max-w-none dark:prose-invert prose-p:my-2">
-                      <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                        Solution
-                      </p>
-                      <MathText className="text-inherit">
-                        {q.explanation || "No explanation provided for this question."}
-                      </MathText>
-                      {q.explanation_image && (
-                        <img 
-                          src={q.explanation_image} 
-                          alt="Explanation visual" 
-                          className="mt-2 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
-                          style={{ filter: "url(#remove-orange)" }}
-                        />
-                      )}
-                    </div>
+                    {!shouldHideReviewSolution(exam, q.year) && (
+                      <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose prose-sm max-w-none dark:prose-invert prose-p:my-2">
+                        <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                          Solution
+                        </p>
+                        <MathText className="text-inherit">
+                          {q.explanation || "No explanation provided for this question."}
+                        </MathText>
+                        {q.explanation_image && (
+                          <img
+                            src={q.explanation_image}
+                            alt="Explanation visual"
+                            className="mt-2 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
+                            style={{ filter: "url(#remove-orange)" }}
+                          />
+                        )}
+                      </div>
+                    )}
                     
                     <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
                       <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 py-1 rounded bg-slate-100 dark:bg-[var(--surface-elevated)]/50">

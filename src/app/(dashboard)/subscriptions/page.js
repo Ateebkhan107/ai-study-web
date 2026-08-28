@@ -46,7 +46,7 @@ export default function SubscriptionsPage() {
             <div className="space-y-3">
               <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">2. Subscription Plans & Billing Period</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                We offer multiple fixed-term plans (e.g., 1 Month, 6 Months, etc.). The duration of your subscription depends entirely on the plan selected at checkout. Payments are processed securely through Cashfree Payments. All features remain fully available to you continuously until the subscription expires.
+                We offer multiple fixed-term plans (e.g., 1 Month, 6 Months, etc.). The duration of your subscription depends entirely on the plan selected at checkout. Payments are processed securely through Razorpay. All features remain fully available to you continuously until the subscription expires.
               </p>
             </div>
 
