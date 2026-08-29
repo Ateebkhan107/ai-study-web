@@ -68,12 +68,12 @@ function normalizeQuestionLayout(value) {
 
           let s = part;
 
-          // Format statement prefixes at statement boundaries:
-          // "Statement I:", "Statement II:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):"
-          s = s.replace(/([^\n])\s*\b(Statement\s*(?:I|II|1|2|A|B)\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\b(Assertion\s*(?:\(?[Aa]\)?)\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\b(Reason\s*(?:\(?[Rr]\)?)\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*(\((?:S1|S2|s1|s2)\)\s*:?)/g, "$1\n\n$2");
+          // Format statement prefixes at statement boundaries without breaking markdown bold asterisks:
+          // "**Statement I:**", "Statement I:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):"
+          s = s.replace(/([^\n*])\s*(\*{0,2}\bStatement\s*(?:I|II|1|2|A|B)\s*:?\*{0,2})/gi, "$1\n\n$2");
+          s = s.replace(/([^\n*])\s*(\*{0,2}\bAssertion\s*(?:\(?[Aa]\)?)\s*:?\*{0,2})/gi, "$1\n\n$2");
+          s = s.replace(/([^\n*])\s*(\*{0,2}\bReason\s*(?:\(?[Rr]\)?)\s*:?\*{0,2})/gi, "$1\n\n$2");
+          s = s.replace(/([^\n*])\s*(\*{0,2}\((?:S1|S2|s1|s2)\)\s*:?\*{0,2})/g, "$1\n\n$2");
 
           // Roman numerals only when at start of line or preceded by period: "I. ", "II. "
           s = s.replace(/(?:^|[\.\n])\s*\b((?:I|II|III|IV|V)\.\s+)/g, "\n\n$1");
