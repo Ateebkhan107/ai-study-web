@@ -9,6 +9,8 @@ import { getMathBatch1Cards, getMathBatch1Chapters } from "@/lib/formulaCardsMat
 import { getMathBatch2Cards, getMathBatch2Chapters } from "@/lib/formulaCardsMathBatch2";
 import { getMathBatch3Cards, getMathBatch3Chapters } from "@/lib/formulaCardsMathBatch3";
 import { getMathBatch4Cards, getMathBatch4Chapters } from "@/lib/formulaCardsMathBatch4";
+import { getMathBatch5Cards, getMathBatch5Chapters } from "@/lib/formulaCardsMathBatch5";
+import { getMathBatch6Cards, getMathBatch6Chapters } from "@/lib/formulaCardsMathBatch6";
 
 const CARD_SELECT = `
   id,
@@ -68,6 +70,8 @@ export const FORMULA_CARD_CHAPTERS = [
   ...getMathBatch2Chapters(),
   ...getMathBatch3Chapters(),
   ...getMathBatch4Chapters(),
+  ...getMathBatch5Chapters(),
+  ...getMathBatch6Chapters(),
   {
     id: "neet-physics-unit-and-dimensions",
     subject_id: "neet-physics",
@@ -393,6 +397,8 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getMathBatch2Cards(),
   ...getMathBatch3Cards(),
   ...getMathBatch4Cards(),
+  ...getMathBatch5Cards(),
+  ...getMathBatch6Cards(),
   ...unitCards("neet-physics-unit-and-dimensions"),
   ...rectilinearCards("neet-physics-rectilinear-motion"),
   ...getBatch2Cards("neet"),

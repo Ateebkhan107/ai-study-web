@@ -1810,6 +1810,158 @@ function MathAngleCurvesDiagram() {
   );
 }
 
+function MathArgandDiagram({ rotation = false }) {
+  return (
+    <DiagramFrame title={rotation ? "complex rotation" : "argand plane"}>
+      <DiagramDefs />
+      <Axis xLabel="Re" yLabel="Im" />
+      {rotation ? (
+        <>
+          <Arrow x1="34" y1="166" x2="126" y2="118" label="z1-z2" labelX="92" labelY="112" />
+          <Arrow x1="34" y1="166" x2="102" y2="70" label="z3-z2" labelX="106" labelY="72" />
+          <path d="M82 141 A48 48 0 0 1 62 94" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="2" />
+          <text x="70" y="110" className="fill-amber-600 text-[12px] dark:fill-amber-300">theta</text>
+          <circle cx="34" cy="166" r="3" className="fill-slate-700 dark:fill-stone-200" />
+          <text x="40" y="160" className="fill-slate-700 text-[12px] dark:fill-stone-200">z2</text>
+        </>
+      ) : (
+        <>
+          <Arrow x1="34" y1="166" x2="142" y2="78" label="z=a+ib" labelX="118" labelY="70" />
+          <line x1="142" y1="78" x2="142" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+          <line x1="34" y1="78" x2="142" y2="78" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+          <path d="M58 166 A36 36 0 0 1 65 141" fill="none" className="stroke-amber-600 dark:stroke-amber-300" strokeWidth="2" />
+          <text x="67" y="151" className="fill-amber-600 text-[12px] dark:fill-amber-300">arg z</text>
+          <text x="138" y="180" className="fill-slate-700 text-[12px] dark:fill-stone-200">a</text>
+          <text x="16" y="82" className="fill-slate-700 text-[12px] dark:fill-stone-200">b</text>
+        </>
+      )}
+    </DiagramFrame>
+  );
+}
+
+function MathVectorDiagram({ volume = false }) {
+  return (
+    <DiagramFrame title={volume ? "scalar triple product volume" : "vector angle and area"}>
+      <DiagramDefs />
+      {volume ? (
+        <>
+          <path d="M54 148 L128 148 L166 112 L91 112 Z" className="fill-amber-100 stroke-slate-700 dark:fill-amber-500/10 dark:stroke-stone-300" strokeWidth="2" />
+          <path d="M54 148 L84 72 L158 72 L128 148 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+          <path d="M128 148 L158 72 L196 36 L166 112 Z" className="fill-slate-50 stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
+          <Arrow x1="54" y1="148" x2="128" y2="148" label="a" labelX="92" labelY="164" />
+          <Arrow x1="54" y1="148" x2="91" y2="112" label="b" labelX="74" labelY="120" />
+          <Arrow x1="54" y1="148" x2="84" y2="72" label="c" labelX="62" labelY="88" />
+        </>
+      ) : (
+        <>
+          <Arrow x1="48" y1="150" x2="160" y2="150" label="a" labelX="164" labelY="154" />
+          <Arrow x1="48" y1="150" x2="118" y2="68" label="b" labelX="122" labelY="72" />
+          <path d="M78 150 A34 34 0 0 1 71 122" fill="none" className="stroke-amber-600 dark:stroke-amber-300" strokeWidth="2" />
+          <text x="80" y="135" className="fill-amber-600 text-[12px] dark:fill-amber-300">theta</text>
+          <path d="M48 150 L160 150 L190 68 L118 68 Z" className="fill-amber-100/60 stroke-slate-500 dark:fill-amber-500/10 dark:stroke-stone-500" strokeWidth="2" strokeDasharray="4 4" />
+          <text x="112" y="104" className="fill-slate-700 text-[12px] dark:fill-stone-200">|a x b|</text>
+        </>
+      )}
+    </DiagramFrame>
+  );
+}
+
+function MathPointPlaneDiagram() {
+  return (
+    <DiagramFrame title="point to plane">
+      <DiagramDefs />
+      <path d="M44 134 L154 98 L194 124 L82 162 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
+      <circle cx="118" cy="52" r="4" className="fill-amber-500" />
+      <line x1="118" y1="52" x2="118" y2="119" className="stroke-amber-500" strokeDasharray="5 5" strokeWidth="3" />
+      <circle cx="118" cy="119" r="3" className="fill-slate-700 dark:fill-stone-200" />
+      <Arrow x1="118" y1="119" x2="152" y2="107" label="n" labelX="156" labelY="109" />
+      <text x="125" y="54" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">P</text>
+      <text x="124" y="92" className="fill-amber-600 text-[12px] dark:fill-amber-300">distance</text>
+    </DiagramFrame>
+  );
+}
+
+function MathSkewLinesDiagram() {
+  return (
+    <DiagramFrame title="skew lines">
+      <DiagramDefs />
+      <line x1="42" y1="142" x2="162" y2="90" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="3" />
+      <line x1="72" y1="58" x2="186" y2="146" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="3" />
+      <line x1="103" y1="116" x2="131" y2="104" className="stroke-amber-500" strokeWidth="3" strokeDasharray="5 5" />
+      <text x="44" y="154" className="fill-slate-700 text-[12px] dark:fill-stone-200">L1</text>
+      <text x="170" y="150" className="fill-slate-700 text-[12px] dark:fill-stone-200">L2</text>
+      <text x="110" y="100" className="fill-amber-600 text-[12px] dark:fill-amber-300">d</text>
+    </DiagramFrame>
+  );
+}
+
+function MathSphereDiagram() {
+  return (
+    <DiagramFrame title="sphere">
+      <DiagramDefs />
+      <Axis xLabel="x" yLabel="z" />
+      <circle cx="112" cy="98" r="52" className="fill-amber-100/50 stroke-slate-700 dark:fill-amber-500/10 dark:stroke-stone-200" strokeWidth="2.5" />
+      <ellipse cx="112" cy="98" rx="52" ry="16" className="fill-transparent stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" strokeWidth="2" />
+      <circle cx="112" cy="98" r="3" className="fill-slate-700 dark:fill-stone-200" />
+      <Arrow x1="112" y1="98" x2="151" y2="65" label="r" labelX="154" labelY="64" />
+      <text x="78" y="94" className="fill-slate-700 text-[12px] dark:fill-stone-200">(-u,-v,-w)</text>
+    </DiagramFrame>
+  );
+}
+
+function MathTriangleLabelsDiagram() {
+  return (
+    <DiagramFrame title="standard triangle labels">
+      <DiagramDefs />
+      <path d="M42 148 L178 148 L88 48 Z" className="fill-amber-100/50 stroke-slate-700 dark:fill-amber-500/10 dark:stroke-stone-200" strokeWidth="2.5" />
+      <text x="84" y="42" className="fill-slate-700 text-[13px] font-bold dark:fill-stone-200">A</text>
+      <text x="28" y="156" className="fill-slate-700 text-[13px] font-bold dark:fill-stone-200">B</text>
+      <text x="183" y="156" className="fill-slate-700 text-[13px] font-bold dark:fill-stone-200">C</text>
+      <text x="128" y="100" className="fill-amber-700 text-[13px] font-bold dark:fill-amber-300">b</text>
+      <text x="55" y="95" className="fill-amber-700 text-[13px] font-bold dark:fill-amber-300">c</text>
+      <text x="107" y="165" className="fill-amber-700 text-[13px] font-bold dark:fill-amber-300">a</text>
+      <path d="M65 148 A24 24 0 0 1 51 129" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="2" />
+      <path d="M155 148 A26 26 0 0 0 169 126" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="2" />
+      <path d="M80 60 A24 24 0 0 0 101 59" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="2" />
+    </DiagramFrame>
+  );
+}
+
+function MathTriangleCirclesDiagram() {
+  return (
+    <DiagramFrame title="incircle and circumcircle">
+      <DiagramDefs />
+      <circle cx="110" cy="100" r="73" className="fill-transparent stroke-slate-400 dark:stroke-stone-500" strokeDasharray="5 5" strokeWidth="2" />
+      <path d="M42 148 L178 148 L88 48 Z" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
+      <circle cx="101" cy="115" r="30" className="fill-amber-100/50 stroke-amber-500 dark:fill-amber-500/10" strokeWidth="2.5" />
+      <circle cx="110" cy="100" r="3" className="fill-slate-700 dark:fill-stone-200" />
+      <circle cx="101" cy="115" r="3" className="fill-amber-500" />
+      <Arrow x1="101" y1="115" x2="130" y2="107" label="r" labelX="134" labelY="107" />
+      <Arrow x1="110" y1="100" x2="168" y2="57" label="R" labelX="172" labelY="57" />
+      <text x="116" y="96" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
+      <text x="84" y="113" className="fill-amber-700 text-[12px] dark:fill-amber-300">I</text>
+    </DiagramFrame>
+  );
+}
+
+function MathPedalTriangleDiagram() {
+  return (
+    <DiagramFrame title="pedal triangle">
+      <DiagramDefs />
+      <path d="M42 150 L178 150 L92 42 Z" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
+      <circle cx="98" cy="88" r="4" className="fill-amber-500" />
+      <line x1="98" y1="88" x2="98" y2="150" className="stroke-amber-500" strokeDasharray="5 5" strokeWidth="2.5" />
+      <line x1="98" y1="88" x2="69" y2="84" className="stroke-amber-500" strokeDasharray="5 5" strokeWidth="2.5" />
+      <line x1="98" y1="88" x2="138" y2="99" className="stroke-amber-500" strokeDasharray="5 5" strokeWidth="2.5" />
+      <path d="M98 150 L69 84 L138 99 Z" className="fill-amber-100/50 stroke-amber-500 dark:fill-amber-500/10" strokeWidth="2.5" />
+      <text x="103" y="86" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">P</text>
+      <text x="100" y="165" className="fill-amber-700 text-[12px] dark:fill-amber-300">K</text>
+      <text x="57" y="82" className="fill-amber-700 text-[12px] dark:fill-amber-300">L</text>
+      <text x="142" y="99" className="fill-amber-700 text-[12px] dark:fill-amber-300">M</text>
+    </DiagramFrame>
+  );
+}
+
 export default function MotionDiagram({ type }) {
   if (type === "xt") return <PositionTimeDiagram />;
   if (type === "vt") return <VelocityTimeDiagram />;
@@ -1916,5 +2068,15 @@ export default function MotionDiagram({ type }) {
   if (type === "math-tangent-normal") return <MathTangentNormalDiagram />;
   if (type === "math-subtangent-subnormal") return <MathSubtangentSubnormalDiagram />;
   if (type === "math-angle-curves") return <MathAngleCurvesDiagram />;
+  if (type === "math-argand") return <MathArgandDiagram />;
+  if (type === "math-complex-rotation") return <MathArgandDiagram rotation />;
+  if (type === "math-vector-angle-area") return <MathVectorDiagram />;
+  if (type === "math-vector-volume") return <MathVectorDiagram volume />;
+  if (type === "math-point-plane") return <MathPointPlaneDiagram />;
+  if (type === "math-skew-lines") return <MathSkewLinesDiagram />;
+  if (type === "math-sphere") return <MathSphereDiagram />;
+  if (type === "math-triangle-labels") return <MathTriangleLabelsDiagram />;
+  if (type === "math-triangle-circles") return <MathTriangleCirclesDiagram />;
+  if (type === "math-pedal-triangle") return <MathPedalTriangleDiagram />;
   return null;
 }

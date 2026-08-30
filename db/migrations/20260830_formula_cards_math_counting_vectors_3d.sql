@@ -1,0 +1,1577 @@
+insert into public.formula_chapters (id, subject_id, title, slug, sort_order) values
+  ('jee-mathematics-permutation-and-combination', 'jee-mathematics', 'Permutation & Combination', 'permutation-and-combination', 15),
+  ('jee-mathematics-probability', 'jee-mathematics', 'Probability', 'probability', 16),
+  ('jee-mathematics-complex-number', 'jee-mathematics', 'Complex Number', 'complex-number', 17),
+  ('jee-mathematics-vectors', 'jee-mathematics', 'Vectors', 'vectors', 18),
+  ('jee-mathematics-3-dimension', 'jee-mathematics', '3-Dimension', '3-dimension', 19)
+on conflict (id) do update set
+  title = excluded.title,
+  slug = excluded.slug,
+  sort_order = excluded.sort_order;
+
+with card_seed as (
+  select *
+  from jsonb_to_recordset($$[
+  {
+    "id": "jee-mathematics-permutation-and-combination-permutations-combinations",
+    "chapter_id": "jee-mathematics-permutation-and-combination",
+    "table_data": {
+      "columns": [
+        "Counting result",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Permutations of $n$ different things taken $r$ at a time",
+          "${}^{n}P_r=n(n-1)(n-2)\\cdots(n-r+1)=\\frac{n!}{(n-r)!}$"
+        ],
+        [
+          "Circular permutations of $n$ different things taken all at a time",
+          "$(n-1)!$"
+        ],
+        [
+          "Combinations of $n$ different things taken $r$ at a time",
+          "${}^{n}C_r=\\frac{n!}{r!(n-r)!}=\\frac{{}^{n}P_r}{r!}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Permutations, Circular Permutations and Combinations",
+    "card_type": "table",
+    "body": "The source opens with arrangements, circular permutations, and selections.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "selection size, index, or position vector"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 28,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-mathematics-permutation-and-combination-similar-objects-selection",
+    "chapter_id": "jee-mathematics-permutation-and-combination",
+    "table_data": {
+      "columns": [
+        "Situation",
+        "Number of ways"
+      ],
+      "rows": [
+        [
+          "$n$ things with $p,q,r$ similar of three types",
+          "$\\frac{n!}{p!q!r!}$"
+        ],
+        [
+          "At least one selected from $n$ distinct objects",
+          "${}^{n}C_1+{}^{n}C_2+\\cdots+{}^{n}C_n=2^n-1$"
+        ],
+        [
+          "At least one selected from $p,q,r$ alike objects of three types",
+          "$(p+1)(q+1)(r+1)-1$"
+        ],
+        [
+          "At least one selected from $n$ objects with $p,q,r$ alike and the rest different",
+          "$(p+1)(q+1)(r+1)2^{n-(p+q+r)}-1$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Similar Objects and One-or-More Selection",
+    "card_type": "table",
+    "body": "The handbook groups repeated-object permutations with one-or-more selection counts.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 28,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-mathematics-permutation-and-combination-multinomial-divisors",
+    "chapter_id": "jee-mathematics-permutation-and-combination",
+    "table_data": {
+      "columns": [
+        "Result",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Coefficient of $x^r$ in $(1-x)^{-n}$",
+          "${}^{n+r-1}C_r$, $n\\in\\mathbb{N}$"
+        ],
+        [
+          "Total number of divisors of $N$ including $1$ and $N$",
+          "$(a+1)(b+1)(c+1)\\cdots$"
+        ],
+        [
+          "Sum of divisors",
+          "$(p^0+p^1+\\cdots+p^a)(q^0+q^1+\\cdots+q^b)(r^0+r^1+\\cdots+r^c)\\cdots$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Multinomial Coefficient and Divisors",
+    "card_type": "table",
+    "body": "The divisor formulas are stated for $N=p^a q^b r^c\\cdots$ with distinct primes.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "selection size, index, or position vector"
+      }
+    ],
+    "conditions": [
+      "$p,q,r,\\ldots$ are distinct primes and $a,b,c,\\ldots$ are natural numbers."
+    ],
+    "importance": 5,
+    "source_page": 28,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-mathematics-permutation-and-combination-factor-pairs-derangements",
+    "chapter_id": "jee-mathematics-permutation-and-combination",
+    "table_data": {
+      "columns": [
+        "Result",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Factor-related count when $N$ is not a perfect square",
+          "$\\frac{1}{2}(a+1)(b+1)(c+1)\\cdots$"
+        ],
+        [
+          "Factor-related count when $N$ is a perfect square",
+          "$\\frac{1}{2}\\left[(a+1)(b+1)(c+1)\\cdots+1\\right]$"
+        ],
+        [
+          "Composite $N$ resolved into two relatively-prime factors",
+          "$2^{n-1}$, where $n$ is the number of different prime factors in $N$"
+        ],
+        [
+          "Derangements of $n$ letters",
+          "$n!\\left(1-\\frac{1}{1!}+\\frac{1}{2!}-\\frac{1}{3!}+\\frac{1}{4!}-\\cdots+(-1)^n\\frac{1}{n!}\\right)$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Factor Results and Derangements",
+    "card_type": "table",
+    "body": "The next page completes the factor-pair result and gives the derangement count.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-mathematics-probability-classical-odds-complement",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Classical Probability, Odds and Complement",
+    "card_type": "formula",
+    "body": "The source defines classical probability using equally likely and mutually exclusive outcomes.",
+    "formulas": [
+      {
+        "latex": "P(A)=\\frac{m}{m+n}=\\frac{n(A)}{n(S)}"
+      },
+      {
+        "latex": "P(\\overline{A})=\\frac{n}{m+n}=1-P(A)"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Odds in favour of $A$ are $m:n$; odds against $A$ are $n:m$."
+    ],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-mathematics-probability-set-laws-addition",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": {
+      "columns": [
+        "Law",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Addition theorem",
+          "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$"
+        ],
+        [
+          "De Morgan",
+          "$(A\\cup B)^c=A^c\\cap B^c$"
+        ],
+        [
+          "De Morgan",
+          "$(A\\cap B)^c=A^c\\cup B^c$"
+        ],
+        [
+          "Distributive",
+          "$A\\cup(B\\cap C)=(A\\cup B)\\cap(A\\cup C)$"
+        ],
+        [
+          "Distributive",
+          "$A\\cap(B\\cup C)=(A\\cap B)\\cup(A\\cap C)$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Addition Theorem and Set Laws",
+    "card_type": "table",
+    "body": "The source lists the two-event addition theorem, De Morgan laws, and distributive laws.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 29,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-mathematics-probability-three-event-formulas",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": {
+      "columns": [
+        "Case",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "$A$ or $B$ or $C$",
+          "$P(A)+P(B)+P(C)-P(A\\cap B)-P(B\\cap C)-P(C\\cap A)+P(A\\cap B\\cap C)$"
+        ],
+        [
+          "At least two of $A,B,C$ occur",
+          "$P(B\\cap C)+P(C\\cap A)+P(A\\cap B)-2P(A\\cap B\\cap C)$"
+        ],
+        [
+          "Exactly two of $A,B,C$ occur",
+          "$P(B\\cap C)+P(C\\cap A)+P(A\\cap B)-3P(A\\cap B\\cap C)$"
+        ],
+        [
+          "Exactly one of $A,B,C$ occurs",
+          "$P(A)+P(B)+P(C)-2P(B\\cap C)-2P(C\\cap A)-2P(A\\cap B)+3P(A\\cap B\\cap C)$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Three-Event Probability Formulas",
+    "card_type": "table",
+    "body": "The source gives formulas for one, two, and three-event occurrence cases.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-mathematics-probability-conditional-binomial-expectation",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Conditional Probability, Binomial Probability and Expectation",
+    "card_type": "mixed",
+    "body": "The next formulas cover conditional probability, exactly $r$ successes, and expectation.",
+    "formulas": [
+      {
+        "latex": "P(A/B)=\\frac{P(A\\cap B)}{P(B)}"
+      },
+      {
+        "latex": "P(\\text{exactly }r\\text{ successes in }n\\text{ trials})={}^{n}C_rp^rq^{n-r}"
+      },
+      {
+        "latex": "\\sum p_iM_i"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "selection size, index, or position vector"
+      }
+    ],
+    "conditions": [
+      "For the binomial probability theorem, $p$ is probability of success, $q$ is probability of failure, and $p+q=1$."
+    ],
+    "importance": 5,
+    "source_page": 30,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-mathematics-probability-total-probability-bayes",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Total Probability and Bayes' Theorem",
+    "card_type": "formula",
+    "body": "Bayes' theorem is stated for mutually exclusive and exhaustive events $B_1,B_2,\\ldots,B_n$.",
+    "formulas": [
+      {
+        "latex": "P(A)=\\sum_{i=1}^{n}P(B_i)P(A/B_i)"
+      },
+      {
+        "latex": "P(B_i/A)=\\frac{P(B_i)P(A/B_i)}{\\sum_{i=1}^{n}P(B_i)P(A/B_i)}"
+      },
+      {
+        "latex": "A=(A\\cap B_1)\\cup(A\\cap B_2)\\cup\\cdots\\cup(A\\cap B_n)"
+      },
+      {
+        "latex": "P(A)=P(A\\cap B_1)+P(A\\cap B_2)+\\cdots+P(A\\cap B_n)=\\sum_{i=1}^{n}P(A\\cap B_i)"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      }
+    ],
+    "conditions": [
+      "$B_1,B_2,\\ldots,B_n$ are mutually exclusive and exhaustive."
+    ],
+    "importance": 5,
+    "source_page": 30,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-mathematics-probability-binomial-distribution-mean-variance",
+    "chapter_id": "jee-mathematics-probability",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Binomial Probability Distribution",
+    "card_type": "formula",
+    "body": "The distribution card stores the source mean and variance formulas.",
+    "formulas": [
+      {
+        "latex": "\\mu=\\frac{\\sum p_ix_i}{\\sum p_i}=\\sum p_ix_i=np"
+      },
+      {
+        "latex": "\\sigma^2=\\sum(x_i-\\mu)^2p_i=\\sum p_ix_i^2-\\mu^2=npq"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      }
+    ],
+    "conditions": [
+      "$n$ is the number of trials, $p$ is probability of success in each probability, and $q$ is probability of failure."
+    ],
+    "importance": 5,
+    "source_page": 30,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-mathematics-complex-number-form-conjugate-equality",
+    "chapter_id": "jee-mathematics-complex-number",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-argand"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Complex Form, Conjugate and Equality",
+    "card_type": "formula",
+    "body": "The chapter starts with $z=a+ib$, its conjugate, and equality of complex numbers.",
+    "formulas": [
+      {
+        "latex": "z=a+ib,\\quad \\overline{z}=a-ib"
+      },
+      {
+        "latex": "z_1=z_2\\Rightarrow \\operatorname{Re}(z_1)=\\operatorname{Re}(z_2)\\text{ and }\\operatorname{Im}(z_1)=\\operatorname{Im}(z_2)"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "z",
+        "symbol": "$z$",
+        "meaning": "complex number"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 31,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-mathematics-complex-number-argument-properties",
+    "chapter_id": "jee-mathematics-complex-number",
+    "table_data": {
+      "columns": [
+        "Property"
+      ],
+      "rows": [
+        [
+          "$\\arg(z_1z_2)=\\arg(z_1)+\\arg(z_2)+2m\\pi$"
+        ],
+        [
+          "$\\arg(z_1/z_2)=\\arg(z_1)-\\arg(z_2)+2m\\pi$"
+        ],
+        [
+          "$\\arg(z^2)=2\\arg(z)+2m\\pi$"
+        ],
+        [
+          "$\\arg(z)=0\\Longleftrightarrow z$ is a positive real number"
+        ],
+        [
+          "$\\arg(z)=\\pm\\frac{\\pi}{2}\\Longleftrightarrow z$ is purely imaginary and $z\\ne0$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Argument Properties",
+    "card_type": "table",
+    "body": "The source lists argument rules with the integer multiple term.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "z",
+        "symbol": "$z$",
+        "meaning": "complex number"
+      }
+    ],
+    "conditions": [
+      "$m$ is some integer in the first three argument identities."
+    ],
+    "importance": 4,
+    "source_page": 31,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-mathematics-complex-number-conjugate-properties",
+    "chapter_id": "jee-mathematics-complex-number",
+    "table_data": {
+      "columns": [
+        "Property"
+      ],
+      "rows": [
+        [
+          "$|z|=|\\overline{z}|$"
+        ],
+        [
+          "$z\\overline{z}=|z|^2$"
+        ],
+        [
+          "$\\overline{z_1+z_2}=\\overline{z_1}+\\overline{z_2}$"
+        ],
+        [
+          "$\\overline{z_1-z_2}=\\overline{z_1}-\\overline{z_2}$"
+        ],
+        [
+          "$\\overline{z_1z_2}=\\overline{z_1}\\,\\overline{z_2}$"
+        ],
+        [
+          "$\\overline{\\left(\\frac{z_1}{z_2}\\right)}=\\frac{\\overline{z_1}}{\\overline{z_2}}$"
+        ],
+        [
+          "$|z_1+z_2|^2=(z_1+z_2)(\\overline{z_1}+\\overline{z_2})=|z_1|^2+|z_2|^2+z_1\\overline{z_2}+\\overline{z_1}z_2$"
+        ],
+        [
+          "$\\overline{(\\overline{z_1})}=z$"
+        ],
+        [
+          "If $w=f(z)$, then $\\overline{w}=f(\\overline{z})$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Conjugate Properties",
+    "card_type": "table",
+    "body": "The visible conjugate list includes modulus, products, quotients, and conjugate of a function.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "z",
+        "symbol": "$z$",
+        "meaning": "complex number"
+      }
+    ],
+    "conditions": [
+      "The quotient identity is listed with $z_2\\ne0$."
+    ],
+    "importance": 5,
+    "source_page": 31,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-mathematics-complex-number-rotation-demoivre-unity",
+    "chapter_id": "jee-mathematics-complex-number",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-complex-rotation"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rotation, Demoivre and Cube Roots of Unity",
+    "card_type": "mixed",
+    "body": "The source gives a rotation theorem, Demoivre's theorem, and cube-root identities.",
+    "formulas": [
+      {
+        "latex": "\\frac{z_3-z_2}{z_1-z_2}=\\left|\\frac{z_3-z_2}{z_1-z_2}\\right|e^{i\\theta}"
+      },
+      {
+        "latex": "(\\cos\\theta+i\\sin\\theta)^n=\\cos n\\theta+i\\sin n\\theta"
+      },
+      {
+        "latex": "1,\\ \\frac{-1+i\\sqrt3}{2},\\ \\frac{-1-i\\sqrt3}{2}"
+      },
+      {
+        "latex": "1+\\omega+\\omega^2=0"
+      },
+      {
+        "latex": "1+\\omega^r+\\omega^{2r}=0"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      },
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "count, index, or number of trials"
+      }
+    ],
+    "conditions": [
+      "In the rotation theorem, $P(z_1)$, $Q(z_2)$, $R(z_3)$ and $\\angle PQR=\\theta$.",
+      "For $1+\\omega^r+\\omega^{2r}=0$, the source states $r\\in\\mathbb{I}$ and $r$ is not a multiple of $3$."
+    ],
+    "importance": 5,
+    "source_page": 32,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-mathematics-complex-number-geometrical-properties-loci",
+    "chapter_id": "jee-mathematics-complex-number",
+    "table_data": {
+      "columns": [
+        "Result",
+        "Formula or locus"
+      ],
+      "rows": [
+        [
+          "Distance formula",
+          "$|z_1-z_2|$"
+        ],
+        [
+          "Internal section formula",
+          "$z=\\frac{mz_2+nz_1}{m+n}$"
+        ],
+        [
+          "External section formula",
+          "$z=\\frac{mz_2-nz_1}{m-n}$"
+        ],
+        [
+          "Argument locus",
+          "$\\arg(z)=\\theta$ is a ray from the origin inclined at $\\theta$ to the $x$-axis"
+        ],
+        [
+          "Equal distance locus",
+          "$|z-a|=|z-b|$ is the perpendicular bisector of the line joining $a$ to $b$"
+        ],
+        [
+          "Ratio locus",
+          "If $\\left|\\frac{z-z_1}{z-z_2}\\right|=k\\ne1,0$, then the locus of $z$ is a circle"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Geometrical Properties and Loci",
+    "card_type": "table",
+    "body": "The complex-plane results include distance, section formula, and three listed loci.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "z",
+        "symbol": "$z$",
+        "meaning": "complex number"
+      },
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 32,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-mathematics-vectors-position-distance-section",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Position Vector, Distance and Section Formula",
+    "card_type": "formula",
+    "body": "The vectors section begins with position vectors of points and section formula.",
+    "formulas": [
+      {
+        "latex": "\\overrightarrow{AB}=\\vec b-\\vec a"
+      },
+      {
+        "latex": "AB=|\\vec a-\\vec b|"
+      },
+      {
+        "latex": "\\vec r=\\frac{n\\vec a+m\\vec b}{m+n}"
+      },
+      {
+        "latex": "\\text{Midpoint of }AB=\\frac{\\vec a+\\vec b}{2}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "$\\vec a$ and $\\vec b$ are position vectors of points $A$ and $B$."
+    ],
+    "importance": 5,
+    "source_page": 32,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-mathematics-vectors-dot-product-projection-angle",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-vector-angle-area"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Scalar Product, Projection and Angle",
+    "card_type": "mixed",
+    "body": "The dot product card stores projection, component form, angle, and perpendicularity.",
+    "formulas": [
+      {
+        "latex": "\\vec a\\cdot\\vec b=|\\vec a||\\vec b|\\cos\\theta"
+      },
+      {
+        "latex": "\\hat i\\cdot\\hat i=\\hat j\\cdot\\hat j=\\hat k\\cdot\\hat k=1,\\quad \\hat i\\cdot\\hat j=\\hat j\\cdot\\hat k=\\hat k\\cdot\\hat i=0"
+      },
+      {
+        "latex": "\\text{projection of }\\vec a\\text{ on }\\vec b=\\frac{\\vec a\\cdot\\vec b}{|\\vec b|}"
+      },
+      {
+        "latex": "\\vec a\\cdot\\vec b=a_1b_1+a_2b_2+a_3b_3"
+      },
+      {
+        "latex": "\\cos\\phi=\\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|},\\quad 0\\le\\phi\\le\\pi"
+      },
+      {
+        "latex": "\\vec a\\cdot\\vec b=0\\Longleftrightarrow \\vec a\\perp\\vec b"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [
+      "The perpendicularity line is stated for non-zero vectors."
+    ],
+    "importance": 5,
+    "source_page": 33,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-mathematics-vectors-cross-product-basics",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-vector-angle-area"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Vector Product Basics",
+    "card_type": "formula",
+    "body": "The source defines the cross product through magnitude, direction, area, and unit-vector products.",
+    "formulas": [
+      {
+        "latex": "\\vec a\\times\\vec b=|\\vec a||\\vec b|\\sin\\theta\\,\\hat n"
+      },
+      {
+        "latex": "|\\vec a\\times\\vec b|=\\text{area of the parallelogram}"
+      },
+      {
+        "latex": "\\hat i\\times\\hat i=\\hat j\\times\\hat j=\\hat k\\times\\hat k=\\vec0"
+      },
+      {
+        "latex": "\\hat i\\times\\hat j=\\hat k,\\quad \\hat j\\times\\hat k=\\hat i,\\quad \\hat k\\times\\hat i=\\hat j"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [
+      "$\\hat n$ is perpendicular to both $\\vec a$ and $\\vec b$ such that $\\vec a,\\vec b,\\hat n$ form a right-handed screw system."
+    ],
+    "importance": 5,
+    "source_page": 33,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-mathematics-vectors-cross-product-determinant-collinearity",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Cross Product Determinant and Collinearity",
+    "card_type": "formula",
+    "body": "Component cross product and parallel/collinear condition are listed together in the source.",
+    "formulas": [
+      {
+        "latex": "\\vec a\\times\\vec b=\\begin{vmatrix}\\hat i&\\hat j&\\hat k\\\\a_1&a_2&a_3\\\\b_1&b_2&b_3\\end{vmatrix}"
+      },
+      {
+        "latex": "\\vec a\\times\\vec b=\\vec0\\Longleftrightarrow \\vec a\\text{ and }\\vec b\\text{ are parallel (collinear)}"
+      },
+      {
+        "latex": "\\vec a=K\\vec b"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The source states the collinearity condition for non-zero vectors."
+    ],
+    "importance": 5,
+    "source_page": 33,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-mathematics-vectors-area-lagrange",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": {
+      "columns": [
+        "Result",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Unit vector perpendicular to plane of $\\vec a$ and $\\vec b$",
+          "$\\hat n=\\pm\\frac{\\vec a\\times\\vec b}{|\\vec a\\times\\vec b|}$"
+        ],
+        [
+          "Vector area of triangle $ABC$",
+          "$\\frac{1}{2}(\\vec a\\times\\vec b+\\vec b\\times\\vec c+\\vec c\\times\\vec a)$"
+        ],
+        [
+          "Collinearity of $A,B,C$",
+          "$\\vec a\\times\\vec b+\\vec b\\times\\vec c+\\vec c\\times\\vec a=\\vec0$"
+        ],
+        [
+          "Area of quadrilateral with diagonal vectors $\\vec d_1,\\vec d_2$",
+          "$\\frac{1}{2}|\\vec d_1\\times\\vec d_2|$"
+        ],
+        [
+          "Lagrange's identity",
+          "$(\\vec a\\times\\vec b)^2=|\\vec a|^2|\\vec b|^2-(\\vec a\\cdot\\vec b)^2$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Unit Normal, Areas and Lagrange Identity",
+    "card_type": "table",
+    "body": "The next vector-product block lists normal vector, triangle/quadrilateral area, and Lagrange's identity.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 34,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-mathematics-vectors-scalar-triple-product",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-vector-volume"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Scalar Triple Product and Volume",
+    "card_type": "mixed",
+    "body": "The scalar triple product section records volume, interchange rules, determinant form, and coplanarity.",
+    "formulas": [
+      {
+        "latex": "\\vec a\\times\\vec b\\cdot\\vec c=|\\vec a||\\vec b||\\vec c|\\sin\\theta\\cos\\phi"
+      },
+      {
+        "latex": "V=[\\vec a\\ \\vec b\\ \\vec c]"
+      },
+      {
+        "latex": "\\vec a\\cdot(\\vec b\\times\\vec c)=(\\vec a\\times\\vec b)\\cdot\\vec c"
+      },
+      {
+        "latex": "[\\vec a\\ \\vec b\\ \\vec c]=[\\vec b\\ \\vec c\\ \\vec a]=[\\vec c\\ \\vec a\\ \\vec b]"
+      },
+      {
+        "latex": "[\\vec a\\ \\vec b\\ \\vec c]=-[\\vec a\\ \\vec c\\ \\vec b]"
+      },
+      {
+        "latex": "[\\vec a\\ \\vec b\\ \\vec c]=\\begin{vmatrix}a_1&a_2&a_3\\\\b_1&b_2&b_3\\\\c_1&c_2&c_3\\end{vmatrix}"
+      },
+      {
+        "latex": "\\vec a,\\vec b,\\vec c\\text{ coplanar}\\Longleftrightarrow[\\vec a\\ \\vec b\\ \\vec c]=0"
+      },
+      {
+        "latex": "\\text{Volume of tetrahedron }OABC=\\left|\\frac{1}{6}[\\vec a\\ \\vec b\\ \\vec c]\\right|"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 34,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-mathematics-vectors-vector-triple-product",
+    "chapter_id": "jee-mathematics-vectors",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Vector Triple Product",
+    "card_type": "formula",
+    "body": "The source closes vectors with vector triple product identities and notes non-associativity.",
+    "formulas": [
+      {
+        "latex": "\\vec a\\times(\\vec b\\times\\vec c)=(\\vec a\\cdot\\vec c)\\vec b-(\\vec a\\cdot\\vec b)\\vec c"
+      },
+      {
+        "latex": "(\\vec a\\times\\vec b)\\times\\vec c=(\\vec a\\cdot\\vec c)\\vec b-(\\vec b\\cdot\\vec c)\\vec a"
+      },
+      {
+        "latex": "(\\vec a\\times\\vec b)\\times\\vec c\\ne\\vec a\\times(\\vec b\\times\\vec c)"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The non-equality is stated as true in general."
+    ],
+    "importance": 5,
+    "source_page": 35,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-mathematics-3-dimension-point-distance-section",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Topic",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Position vector of $P(x,y,z)$",
+          "$x\\hat i+y\\hat j+z\\hat k$"
+        ],
+        [
+          "3D distance",
+          "$\\sqrt{(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2}$"
+        ],
+        [
+          "Distance from coordinate axes",
+          "$PA=\\sqrt{y^2+z^2}$, $PB=\\sqrt{z^2+x^2}$, $PC=\\sqrt{x^2+y^2}$"
+        ],
+        [
+          "Section formula",
+          "$x=\\frac{mx_2+nx_1}{m+n}$, $y=\\frac{my_2+ny_1}{m+n}$, $z=\\frac{mz_2+nz_1}{m+n}$"
+        ],
+        [
+          "Midpoint",
+          "$x=\\frac{x_1+x_2}{2}$, $y=\\frac{y_1+y_2}{2}$, $z=\\frac{z_1+z_2}{2}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Point Representation, Distance and Section Formula",
+    "card_type": "table",
+    "body": "The 3-Dimension chapter begins with points, distance from axes, section formula, and midpoint.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "x",
+        "symbol": "$x$",
+        "meaning": "variable or coordinate"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 35,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-mathematics-3-dimension-direction-cosines-ratios",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Direction Cosines and Direction Ratios",
+    "card_type": "formula",
+    "body": "The source defines direction cosines using angles with positive coordinate axes and relates them to direction ratios.",
+    "formulas": [
+      {
+        "latex": "\\ell=\\cos\\alpha,\\quad m=\\cos\\beta,\\quad n=\\cos\\gamma"
+      },
+      {
+        "latex": "\\ell^2+m^2+n^2=1"
+      },
+      {
+        "latex": "\\ell=\\pm\\frac{a}{\\sqrt{a^2+b^2+c^2}},\\quad m=\\pm\\frac{b}{\\sqrt{a^2+b^2+c^2}},\\quad n=\\pm\\frac{c}{\\sqrt{a^2+b^2+c^2}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "root or coordinate parameter"
+      },
+      {
+        "latex": "\\beta",
+        "symbol": "$\\beta$",
+        "meaning": "coordinate parameter"
+      }
+    ],
+    "conditions": [
+      "$a,b,c$ are direction ratios proportional to direction cosines $\\ell,m,n$."
+    ],
+    "importance": 5,
+    "source_page": 35,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-mathematics-3-dimension-pq-direction-angle-projection",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Topic",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Direction ratios of $PQ$",
+          "$a=x_2-x_1$, $b=y_2-y_1$, $c=z_2-z_1$"
+        ],
+        [
+          "Direction cosines of $PQ$",
+          "$\\ell=\\frac{x_2-x_1}{|PQ|}$, $m=\\frac{y_2-y_1}{|PQ|}$, $n=\\frac{z_2-z_1}{|PQ|}$"
+        ],
+        [
+          "Angle between line segments",
+          "$\\cos\\theta=\\left|\\frac{a_1a_2+b_1b_2+c_1c_2}{\\sqrt{a_1^2+b_1^2+c_1^2}\\sqrt{a_2^2+b_2^2+c_2^2}}\\right|$"
+        ],
+        [
+          "Perpendicular line segments",
+          "$a_1a_2+b_1b_2+c_1c_2=0$"
+        ],
+        [
+          "Parallel line segments",
+          "$\\frac{a_1}{a_2}=\\frac{b_1}{b_2}=\\frac{c_1}{c_2}$"
+        ],
+        [
+          "Projection of $PQ$ on line with direction cosines $\\ell,m,n$",
+          "$|\\ell(x_2-x_1)+m(y_2-y_1)+n(z_2-z_1)|$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Line Segment Direction, Angle and Projection",
+    "card_type": "table",
+    "body": "For $P(x_1,y_1,z_1)$ and $Q(x_2,y_2,z_2)$, the source gives direction ratios/cosines, angle, and projection.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 36,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-mathematics-3-dimension-plane-forms",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Plane form",
+        "Equation"
+      ],
+      "rows": [
+        [
+          "General",
+          "$ax+by+cz+d=0$"
+        ],
+        [
+          "Normal",
+          "$\\ell x+my+nz=p$"
+        ],
+        [
+          "Through $(x_1,y_1,z_1)$",
+          "$a(x-x_1)+b(y-y_1)+c(z-z_1)=0$"
+        ],
+        [
+          "Intercept",
+          "$\\frac{x}{a}+\\frac{y}{b}+\\frac{z}{c}=1$"
+        ],
+        [
+          "Vector",
+          "$(\\vec r-\\vec a)\\cdot\\vec n=0$ or $\\vec r\\cdot\\vec n=\\vec a\\cdot\\vec n$"
+        ],
+        [
+          "Parallel to given plane",
+          "$ax+by+cz+\\lambda=0$"
+        ],
+        [
+          "Distance between parallel planes",
+          "$\\frac{|d_1-d_2|}{\\sqrt{a^2+b^2+c^2}}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Equation of a Plane",
+    "card_type": "table",
+    "body": "The plane section lists general, normal, point-normal, intercept, vector, and parallel-plane forms.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "a",
+        "symbol": "$a$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      },
+      {
+        "latex": "b",
+        "symbol": "$b$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      },
+      {
+        "latex": "c",
+        "symbol": "$c$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      }
+    ],
+    "conditions": [
+      "In the general form, $a,b,c$ are not all zero and $a,b,c,d\\in\\mathbb{R}$."
+    ],
+    "importance": 5,
+    "source_page": 36,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-mathematics-3-dimension-plane-through-point-parallel-vectors",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Plane Through a Point Parallel to Two Vectors",
+    "card_type": "formula",
+    "body": "The source gives parametric and non-parametric vector forms.",
+    "formulas": [
+      {
+        "latex": "\\vec r=\\vec a+\\lambda\\vec b+\\mu\\vec c"
+      },
+      {
+        "latex": "\\vec r\\cdot(\\vec b\\times\\vec c)=\\vec a\\cdot(\\vec b\\times\\vec c)"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "$\\lambda$ and $\\mu$ are scalars."
+    ],
+    "importance": 4,
+    "source_page": 37,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-mathematics-3-dimension-point-plane-distance-foot-image",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-point-plane"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "A Plane and a Point",
+    "card_type": "mixed",
+    "body": "The point-plane section gives distance, perpendicular length, foot, and image formulas.",
+    "formulas": [
+      {
+        "latex": "\\frac{ax'+by'+cz'+d}{\\sqrt{a^2+b^2+c^2}}"
+      },
+      {
+        "latex": "p=\\frac{|\\vec a\\cdot\\vec n-d|}{|\\vec n|}"
+      },
+      {
+        "latex": "\\frac{x'-x_1}{a}=\\frac{y'-y_1}{b}=\\frac{z'-z_1}{c}=-\\frac{ax_1+by_1+cz_1+d}{a^2+b^2+c^2}"
+      },
+      {
+        "latex": "\\frac{x'-x_1}{a}=\\frac{y'-y_1}{b}=\\frac{z'-z_1}{c}=-2\\frac{ax_1+by_1+cz_1+d}{a^2+b^2+c^2}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "a",
+        "symbol": "$a$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      },
+      {
+        "latex": "b",
+        "symbol": "$b$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      },
+      {
+        "latex": "c",
+        "symbol": "$c$",
+        "meaning": "constant, vector, or coordinate coefficient"
+      }
+    ],
+    "conditions": [
+      "The last formula is for the image of a point with respect to the plane."
+    ],
+    "importance": 5,
+    "source_page": 37,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-mathematics-3-dimension-angle-between-planes",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Result",
+        "Formula"
+      ],
+      "rows": [
+        [
+          "Cartesian angle",
+          "$\\cos\\theta=\\left|\\frac{aa'+bb'+cc'}{\\sqrt{a^2+b^2+c^2}\\sqrt{a'^2+b'^2+c'^2}}\\right|$"
+        ],
+        [
+          "Perpendicular planes",
+          "$aa'+bb'+cc'=0$"
+        ],
+        [
+          "Parallel planes",
+          "$\\frac{a}{a'}=\\frac{b}{b'}=\\frac{c}{c'}$"
+        ],
+        [
+          "Vector angle",
+          "$\\cos\\theta=\\frac{\\vec n_1\\cdot\\vec n_2}{|\\vec n_1|\\,|\\vec n_2|}$"
+        ],
+        [
+          "Vector perpendicular",
+          "$\\vec n_1\\cdot\\vec n_2=0$"
+        ],
+        [
+          "Vector parallel",
+          "$\\vec n_1=\\lambda\\vec n_2$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Angle Between Two Planes",
+    "card_type": "table",
+    "body": "The source gives both Cartesian and vector forms for angle between planes.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 38,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-mathematics-3-dimension-angle-bisectors-family-planes",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Topic",
+        "Formula or condition"
+      ],
+      "rows": [
+        [
+          "Angle bisectors",
+          "$\\frac{a_1x+b_1y+c_1z+d_1}{\\sqrt{a_1^2+b_1^2+c_1^2}}=\\pm\\frac{a_2x+b_2y+c_2z+d_2}{\\sqrt{a_2^2+b_2^2+c_2^2}}$"
+        ],
+        [
+          "Obtuse angle side",
+          "$a_1a_2+b_1b_2+c_1c_2>0\\Rightarrow$ origin lies on obtuse angle"
+        ],
+        [
+          "Acute angle side",
+          "$a_1a_2+b_1b_2+c_1c_2<0\\Rightarrow$ origin lies in acute angle"
+        ],
+        [
+          "Family through intersection of two planes",
+          "$a_1x+b_1y+c_1z+d_1+\\lambda(a_2x+b_2y+c_2z+d_2)=0$"
+        ],
+        [
+          "Vector family",
+          "$\\vec r\\cdot(\\vec n_1+\\lambda\\vec n_2)=d_1+\\lambda d_2$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Angle Bisectors and Family of Planes",
+    "card_type": "table",
+    "body": "The next block lists angle-bisector planes and family-of-planes equations.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "For acute/obtuse bisectors, the source says to first make both constant terms positive."
+    ],
+    "importance": 5,
+    "source_page": 38,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-mathematics-3-dimension-tetrahedron-volume",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-vector-volume"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Volume of a Tetrahedron",
+    "card_type": "formula",
+    "body": "The source gives a determinant formula for the tetrahedron with four listed vertices.",
+    "formulas": [
+      {
+        "latex": "V=\\frac{1}{6}\\begin{vmatrix}x_1&y_1&z_1&1\\\\x_2&y_2&z_2&1\\\\x_3&y_3&z_3&1\\\\x_4&y_4&z_4&1\\end{vmatrix}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Vertices are $A(x_1,y_1,z_1)$, $B(x_2,y_2,z_2)$, $C(x_3,y_3,z_3)$, and $D(x_4,y_4,z_4)$."
+    ],
+    "importance": 4,
+    "source_page": 38,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-mathematics-3-dimension-line-equations",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Form",
+        "Equation"
+      ],
+      "rows": [
+        [
+          "Intersection of two planes",
+          "$a_1x+b_1y+c_1z+d_1=0$ and $a_2x+b_2y+c_2z+d_2=0$"
+        ],
+        [
+          "Symmetric",
+          "$\\frac{x-x_1}{a}=\\frac{y-y_1}{b}=\\frac{z-z_1}{c}=r$"
+        ],
+        [
+          "Vector",
+          "$\\vec r=\\vec a+\\lambda\\vec b$"
+        ],
+        [
+          "Cartesian to vector",
+          "$\\frac{x-x_1}{a}=\\frac{y-y_1}{b}=\\frac{z-z_1}{c}\\Longleftrightarrow \\vec r=(x_1\\hat i+y_1\\hat j+z_1\\hat k)+\\lambda(a\\hat i+b\\hat j+c\\hat k)$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Equation of a Line in 3D",
+    "card_type": "table",
+    "body": "A straight line is introduced as the intersection of two planes, then represented in symmetric and vector forms.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 39,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-mathematics-3-dimension-line-plane-angle-and-incidence",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": {
+      "columns": [
+        "Topic",
+        "Formula or condition"
+      ],
+      "rows": [
+        [
+          "Line-plane angle",
+          "$\\sin\\theta=\\left|\\frac{a\\ell+bm+cn}{\\sqrt{a^2+b^2+c^2}\\sqrt{\\ell^2+m^2+n^2}}\\right|$"
+        ],
+        [
+          "Vector angle",
+          "$\\sin\\theta=\\left|\\frac{\\vec b\\cdot\\vec n}{|\\vec b||\\vec n|}\\right|$"
+        ],
+        [
+          "Line perpendicular to plane",
+          "$\\frac{\\ell}{a}=\\frac{m}{b}=\\frac{n}{c}$; vector form $\\vec b\\times\\vec n=0$"
+        ],
+        [
+          "Line parallel to plane",
+          "$a\\ell+bm+cn=0$; vector form $\\vec b\\cdot\\vec n=0$"
+        ],
+        [
+          "Line lies in plane, Cartesian",
+          "$ax_1+by_1+cz_1+d=0$ and $a\\ell+bm+cn=0$"
+        ],
+        [
+          "Line lies in plane, vector",
+          "$\\vec b\\cdot\\vec n=0$ and $\\vec a\\cdot\\vec n=d$"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "math-point-plane"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Line-Plane Angle and Incidence",
+    "card_type": "table",
+    "body": "The line-plane section gives angle, parallel/perpendicular conditions, and line-in-plane conditions.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 39,
+    "sort_order": 11
+  },
+  {
+    "id": "jee-mathematics-3-dimension-skew-lines",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-skew-lines"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Skew Lines and Shortest Distance",
+    "card_type": "mixed",
+    "body": "The source defines skew lines as non-parallel and non-coplanar non-intersecting lines, then gives distance formulas.",
+    "formulas": [
+      {
+        "latex": "\\frac{x-\\alpha}{\\ell}=\\frac{y-\\beta}{m}=\\frac{z-\\gamma}{n},\\quad \\frac{x-\\alpha'}{\\ell'}=\\frac{y-\\beta'}{m'}=\\frac{z-\\gamma'}{n'}"
+      },
+      {
+        "latex": "\\Delta=\\begin{vmatrix}\\alpha'-\\alpha&\\beta'-\\beta&\\gamma'-\\gamma\\\\\\ell&m&n\\\\\\ell'&m'&n'\\end{vmatrix}\\ne0"
+      },
+      {
+        "latex": "d=\\left|\\frac{(\\vec a_2-\\vec a_1)\\cdot(\\vec b_1\\times\\vec b_2)}{|\\vec b_1\\times\\vec b_2|}\\right|"
+      },
+      {
+        "latex": "(\\vec b_1\\times\\vec b_2)\\cdot(\\vec a_2-\\vec a_1)\\ne0"
+      },
+      {
+        "latex": "d=\\left|\\frac{(\\vec a_2-\\vec a_1)\\times\\vec b}{|\\vec b|}\\right|"
+      },
+      {
+        "latex": "[\\vec a-\\vec c\\ \\vec b\\ \\vec d]=0"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The fifth formula is the source formula for shortest distance between parallel lines.",
+      "The final formula is the condition of coplanarity of two lines."
+    ],
+    "importance": 5,
+    "source_page": 40,
+    "sort_order": 12
+  },
+  {
+    "id": "jee-mathematics-3-dimension-sphere",
+    "chapter_id": "jee-mathematics-3-dimension",
+    "table_data": null,
+    "diagram_data": {
+      "type": "math-sphere"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Sphere",
+    "card_type": "mixed",
+    "body": "The source closes this chapter with the general sphere equation, centre, and radius.",
+    "formulas": [
+      {
+        "latex": "x^2+y^2+z^2+2ux+2vy+2wz+d=0"
+      },
+      {
+        "latex": "\\text{Centre}=(-u,-v,-w)"
+      },
+      {
+        "latex": "\\text{Radius}=\\sqrt{u^2+v^2+w^2-d}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 40,
+    "sort_order": 13
+  }
+]$$::jsonb) as x(
+    id text,
+    chapter_id text,
+    title text,
+    card_type text,
+    body text,
+    formulas jsonb,
+    variables jsonb,
+    conditions jsonb,
+    table_data jsonb,
+    diagram_data jsonb,
+    diagram_svg text,
+    importance integer,
+    source_page integer,
+    sort_order integer,
+    is_active boolean
+  )
+)
+insert into public.formula_cards (
+  id,
+  chapter_id,
+  title,
+  card_type,
+  body,
+  formulas,
+  variables,
+  conditions,
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  is_active
+)
+select
+  id,
+  chapter_id,
+  title,
+  card_type,
+  body,
+  coalesce(formulas, '[]'::jsonb),
+  coalesce(variables, '[]'::jsonb),
+  coalesce(conditions, '[]'::jsonb),
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  is_active
+from card_seed
+on conflict (id) do update set
+  title = excluded.title,
+  card_type = excluded.card_type,
+  body = excluded.body,
+  formulas = excluded.formulas,
+  variables = excluded.variables,
+  conditions = excluded.conditions,
+  table_data = excluded.table_data,
+  diagram_data = excluded.diagram_data,
+  diagram_svg = excluded.diagram_svg,
+  importance = excluded.importance,
+  source_page = excluded.source_page,
+  sort_order = excluded.sort_order,
+  is_active = excluded.is_active;
