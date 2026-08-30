@@ -1,0 +1,2410 @@
+insert into public.formula_chapters (id, subject_id, title, slug, sort_order) values
+  ('jee-physics-circular-motion', 'jee-physics', 'Circular Motion', 'circular-motion', 8),
+  ('jee-physics-centre-of-mass', 'jee-physics', 'Centre of Mass', 'centre-of-mass', 9),
+  ('jee-physics-rigid-body-dynamics', 'jee-physics', 'Rigid Body Dynamics', 'rigid-body-dynamics', 10),
+  ('jee-physics-simple-harmonic-motion', 'jee-physics', 'Simple Harmonic Motion', 'simple-harmonic-motion', 11),
+  ('jee-physics-string-waves', 'jee-physics', 'String Waves', 'string-waves', 12)
+on conflict (id) do update set
+  title = excluded.title,
+  slug = excluded.slug,
+  sort_order = excluded.sort_order;
+
+with card_seed as (
+  select *
+  from jsonb_to_recordset($$[
+  {
+    "id": "jee-physics-circular-motion-angular-velocity",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "circular-angular-velocity"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Angular Velocity",
+    "card_type": "mixed",
+    "body": "The handbook gives average and instantaneous angular velocity from angular displacement.",
+    "formulas": [
+      {
+        "label": "Average angular velocity",
+        "latex": "\\omega_{av}=\\frac{\\theta_2-\\theta_1}{t_2-t_1}=\\frac{\\Delta\\theta}{\\Delta t}"
+      },
+      {
+        "label": "Instantaneous angular velocity",
+        "latex": "\\omega=\\frac{d\\theta}{dt}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 11,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-physics-circular-motion-angular-acceleration",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Angular Acceleration",
+    "card_type": "formula",
+    "body": "Average and instantaneous angular acceleration are written using the change of angular velocity.",
+    "formulas": [
+      {
+        "label": "Average angular acceleration",
+        "latex": "\\alpha_{av}=\\frac{\\omega_2-\\omega_1}{t_2-t_1}=\\frac{\\Delta\\omega}{\\Delta t}"
+      },
+      {
+        "label": "Instantaneous angular acceleration",
+        "latex": "\\alpha=\\frac{d\\omega}{dt}=\\omega\\frac{d\\omega}{d\\theta}"
+      },
+      {
+        "label": "Non-uniform circular motion",
+        "latex": "\\vec\\alpha=\\frac{d\\vec\\omega}{dt}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "angular acceleration"
+      },
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 11,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-physics-circular-motion-linear-angular-relation",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Linear and Angular Velocity",
+    "card_type": "formula",
+    "body": "The source relates speed and angular velocity for circular motion.",
+    "formulas": [
+      {
+        "latex": "v=r\\omega"
+      },
+      {
+        "latex": "\\vec v=\\vec\\omega\\times\\vec r"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 11,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-physics-circular-motion-acceleration-components",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "circular-acceleration-components"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Tangential, Radial and Total Acceleration",
+    "card_type": "mixed",
+    "body": "The handbook separates acceleration into tangential and radial components, then combines their magnitudes.",
+    "formulas": [
+      {
+        "label": "Tangential acceleration",
+        "latex": "a_t=\\frac{dv}{dt}=r\\frac{d\\omega}{dt}=\\omega\\frac{dr}{dt}"
+      },
+      {
+        "label": "Radial acceleration",
+        "latex": "a_r=\\frac{v^2}{r}=\\omega^2r"
+      },
+      {
+        "label": "Total acceleration",
+        "latex": "\\vec a=\\vec a_t+\\vec a_r\\Rightarrow a=(a_t^2+a_r^2)^{1/2}"
+      },
+      {
+        "latex": "\\vec a_t=\\vec\\alpha\\times\\vec r"
+      },
+      {
+        "latex": "\\vec a_r=\\vec\\omega\\times\\vec v"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "angular acceleration"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 11,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-physics-circular-motion-radius-of-curvature",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Radius of Curvature",
+    "card_type": "formula",
+    "body": "The source gives radius of curvature from normal acceleration and also for y as a function of x.",
+    "formulas": [
+      {
+        "latex": "R=\\frac{v^2}{a_\\perp}=\\frac{mv^2}{F_\\perp}"
+      },
+      {
+        "latex": "R=\\frac{\\left[1+\\left(\\frac{dy}{dx}\\right)^2\\right]^{3/2}}{\\frac{d^2y}{dx^2}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "R",
+        "symbol": "$R$",
+        "meaning": "radius"
+      }
+    ],
+    "conditions": [
+      "The second expression is listed for $y=f(x)$."
+    ],
+    "importance": 4,
+    "source_page": 12,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-physics-circular-motion-bridge-reactions",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "bridge-reactions"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Concave and Convex Bridge",
+    "card_type": "mixed",
+    "body": "The normal reaction formulas differ by the sign of the centripetal term.",
+    "formulas": [
+      {
+        "label": "Concave bridge",
+        "latex": "N=mg\\cos\\theta+\\frac{mv^2}{r}"
+      },
+      {
+        "label": "Convex bridge",
+        "latex": "N=mg\\cos\\theta-\\frac{mv^2}{r}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 12,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-physics-circular-motion-skidding",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Skidding Conditions",
+    "card_type": "formula",
+    "body": "The handbook lists safe speed on a level road and maximum angular speed on a rotating platform.",
+    "formulas": [
+      {
+        "label": "Vehicle on level road",
+        "latex": "v_{safe}\\le\\sqrt{\\mu gr}"
+      },
+      {
+        "label": "Object on rotating platform",
+        "latex": "\\omega_{max}=\\sqrt{\\frac{\\mu g}{r}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\mu",
+        "symbol": "$\\mu$",
+        "meaning": "coefficient of friction"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      },
+      {
+        "latex": "g",
+        "symbol": "$g$",
+        "meaning": "acceleration due to gravity"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 12,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-physics-circular-motion-banking-and-cyclist",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "banked-road"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Banking and Cyclist Bending",
+    "card_type": "formula",
+    "body": "The source uses the same basic tangent relation for cyclist bending and frictionless banking, then gives banked-road friction limits.",
+    "formulas": [
+      {
+        "label": "Cyclist bending",
+        "latex": "\\tan\\theta=\\frac{v^2}{rg}"
+      },
+      {
+        "label": "Banking without friction",
+        "latex": "\\tan\\theta=\\frac{v^2}{rg}"
+      },
+      {
+        "label": "Banking with friction",
+        "latex": "\\frac{v^2}{rg}=\\frac{\\mu+\\tan\\theta}{1-\\mu\\tan\\theta}"
+      },
+      {
+        "label": "Maximum safe speed",
+        "latex": "V_{max}=\\left[\\frac{rg(\\mu+\\tan\\theta)}{1-\\mu\\tan\\theta}\\right]^{1/2}"
+      },
+      {
+        "label": "Minimum safe speed",
+        "latex": "V_{min}=\\left[\\frac{rg(\\tan\\theta-\\mu)}{1+\\mu\\tan\\theta}\\right]^{1/2}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      },
+      {
+        "latex": "\\mu",
+        "symbol": "$\\mu$",
+        "meaning": "coefficient of friction"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 13,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-physics-circular-motion-centrifugal-apparent-weight",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Centrifugal Force and Apparent Weight",
+    "card_type": "formula",
+    "body": "The source lists centrifugal force as a pseudo force and gives the apparent-weight correction due to Earth's rotation.",
+    "formulas": [
+      {
+        "label": "Centrifugal force",
+        "latex": "f=m\\omega^2r"
+      },
+      {
+        "label": "Apparent weight",
+        "latex": "N=mg-mR\\omega^2\\cos^2\\theta"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      },
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      }
+    ],
+    "conditions": [
+      "Centrifugal force acts outwards when the particle itself is taken as a frame."
+    ],
+    "importance": 4,
+    "source_page": 13,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-physics-circular-motion-vertical-loop",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "vertical-loop"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Vertical Loop Critical Speed",
+    "card_type": "diagram",
+    "body": "For the critical condition in the vertical loop, the handbook gives the same minimum speed expression for completing the circle in the shown cases.",
+    "formulas": [
+      {
+        "latex": "V_{min}=\\sqrt{4gL}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "L",
+        "symbol": "$L$",
+        "meaning": "length shown in the source loop cases"
+      },
+      {
+        "latex": "g",
+        "symbol": "$g$",
+        "meaning": "acceleration due to gravity"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 13,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-physics-circular-motion-conical-pendulum",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "conical-pendulum"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Conical Pendulum",
+    "card_type": "mixed",
+    "body": "The conical pendulum card keeps the tension components and time-period expression shown in the source.",
+    "formulas": [
+      {
+        "latex": "T\\cos\\theta=mg"
+      },
+      {
+        "latex": "T\\sin\\theta=m\\omega^2r"
+      },
+      {
+        "label": "Time period",
+        "latex": "T_p=2\\pi\\sqrt{\\frac{L\\cos\\theta}{g}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      },
+      {
+        "latex": "L",
+        "symbol": "$L$",
+        "meaning": "string length"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 14,
+    "sort_order": 11
+  },
+  {
+    "id": "jee-physics-circular-motion-constant-angular-acceleration",
+    "chapter_id": "jee-physics-circular-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Constant Angular Acceleration Relations",
+    "card_type": "formula",
+    "body": "The handbook lists rotational kinematics relations for constant angular acceleration.",
+    "formulas": [
+      {
+        "latex": "\\omega=\\omega_0+\\alpha t"
+      },
+      {
+        "latex": "\\theta=\\omega_0t+\\frac{1}{2}\\alpha t^2"
+      },
+      {
+        "latex": "\\omega^2=\\omega_0^2+2\\alpha\\theta"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\omega_0",
+        "symbol": "$\\omega_0$",
+        "meaning": "initial angular velocity"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "angular acceleration"
+      },
+      {
+        "latex": "\\theta",
+        "symbol": "$\\theta$",
+        "meaning": "angle used in the source formula or diagram"
+      }
+    ],
+    "conditions": [
+      "The source labels these as relations among angular variables."
+    ],
+    "importance": 5,
+    "source_page": 14,
+    "sort_order": 12
+  },
+  {
+    "id": "jee-physics-centre-of-mass-mass-moment-discrete",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Mass Moment and Discrete COM",
+    "card_type": "formula",
+    "body": "The source starts centre of mass with mass moment and the COM of N discrete particles.",
+    "formulas": [
+      {
+        "label": "Mass moment",
+        "latex": "\\vec M=m\\vec r"
+      },
+      {
+        "label": "Discrete system",
+        "latex": "\\vec r_{cm}=\\frac{m_1\\vec r_1+m_2\\vec r_2+\\cdots+m_n\\vec r_n}{m_1+m_2+\\cdots+m_n}"
+      },
+      {
+        "latex": "\\vec r_{cm}=\\frac{1}{M}\\sum_{i=1}^{n}m_i\\vec r_i"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 14,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-physics-centre-of-mass-continuous-distribution",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Continuous Mass Distribution",
+    "card_type": "formula",
+    "body": "For a continuous body, COM coordinates are given by mass-weighted integrals.",
+    "formulas": [
+      {
+        "latex": "x_{cm}=\\frac{\\int x\\,dm}{\\int dm}"
+      },
+      {
+        "latex": "y_{cm}=\\frac{\\int y\\,dm}{\\int dm}"
+      },
+      {
+        "latex": "z_{cm}=\\frac{\\int z\\,dm}{\\int dm}"
+      },
+      {
+        "latex": "\\int dm=M"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      }
+    ],
+    "conditions": [
+      "$\\int dm$ is the mass of the body."
+    ],
+    "importance": 5,
+    "source_page": 15,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-physics-centre-of-mass-two-point-masses",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": {
+      "type": "com-two-masses"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Two Point Masses",
+    "card_type": "mixed",
+    "body": "For two point masses, the source shows the centre of mass closer to the heavier mass.",
+    "formulas": [
+      {
+        "latex": "m_1r_1=m_2r_2"
+      },
+      {
+        "latex": "r_1=\\frac{m_2L}{m_1+m_2}"
+      },
+      {
+        "latex": "r_2=\\frac{m_1L}{m_1+m_2}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "L",
+        "symbol": "$L$",
+        "meaning": "separation between the two masses"
+      }
+    ],
+    "conditions": [
+      "The centre of mass lies closer to the heavier mass."
+    ],
+    "importance": 5,
+    "source_page": 15,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-physics-centre-of-mass-plates-com",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": {
+      "columns": [
+        "Body",
+        "COM result"
+      ],
+      "rows": [
+        [
+          "Rectangular plate",
+          "$x_c=\\frac{b}{2},\\ y_c=\\frac{L}{2}$"
+        ],
+        [
+          "Triangular plate",
+          "$y_c=\\frac{h}{3}$ at the centroid"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "com-plates"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rectangular and Triangular Plates",
+    "card_type": "table",
+    "body": "The common plate results are shown by symmetry or qualitative argument in the handbook.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 16,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-physics-centre-of-mass-semicircular-com",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": {
+      "columns": [
+        "Body",
+        "COM result"
+      ],
+      "rows": [
+        [
+          "Semi-circular ring",
+          "$y_c=\\frac{2R}{\\pi},\\ x_c=O$"
+        ],
+        [
+          "Semi-circular disc",
+          "$y_c=\\frac{4R}{3\\pi},\\ x_c=O$"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "com-semicircles"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Semicircular Ring and Disc",
+    "card_type": "table",
+    "body": "The handbook gives COM along the symmetry axis for a semicircular ring and semicircular disc.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "R",
+        "symbol": "$R$",
+        "meaning": "radius"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 16,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-physics-centre-of-mass-hemisphere-cone-com",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": {
+      "columns": [
+        "Body",
+        "COM result"
+      ],
+      "rows": [
+        [
+          "Hemispherical shell",
+          "$y_c=\\frac{R}{2},\\ x_c=O$"
+        ],
+        [
+          "Solid hemisphere",
+          "$y_c=\\frac{3R}{8},\\ x_c=O$"
+        ],
+        [
+          "Circular cone (solid)",
+          "$y_c=\\frac{h}{4}$"
+        ],
+        [
+          "Circular cone (hollow)",
+          "$y_c=\\frac{h}{3}$"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "com-curved-bodies"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Hemispheres and Cones",
+    "card_type": "table",
+    "body": "The listed COM positions are measured along the symmetry axis shown in the source diagrams.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "R",
+        "symbol": "$R$",
+        "meaning": "radius"
+      },
+      {
+        "latex": "h",
+        "symbol": "$h$",
+        "meaning": "height"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 16,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-physics-centre-of-mass-motion-of-com",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Motion of Centre of Mass",
+    "card_type": "formula",
+    "body": "The handbook gives velocity and acceleration of the centre of mass and relates external force to COM acceleration.",
+    "formulas": [
+      {
+        "label": "COM velocity",
+        "latex": "\\vec v_{cm}=\\frac{m_1\\vec v_1+m_2\\vec v_2+\\cdots+m_n\\vec v_n}{M}"
+      },
+      {
+        "label": "System momentum",
+        "latex": "\\vec P_{system}=M\\vec v_{cm}"
+      },
+      {
+        "label": "COM acceleration",
+        "latex": "\\vec a_{cm}=\\frac{m_1\\vec a_1+m_2\\vec a_2+\\cdots+m_n\\vec a_n}{M}"
+      },
+      {
+        "label": "External force",
+        "latex": "\\vec F_{ext}=M\\vec a_{cm}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 17,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-physics-centre-of-mass-impulse-restitution",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Impulse and Coefficient of Restitution",
+    "card_type": "mixed",
+    "body": "The source defines impulse, the impulse-momentum theorem, and coefficient of restitution.",
+    "formulas": [
+      {
+        "label": "Impulse",
+        "latex": "\\vec J=\\int_{t_i}^{t_f}\\vec F\\,dt"
+      },
+      {
+        "label": "Impulse-momentum theorem",
+        "latex": "\\vec J=\\Delta\\vec P"
+      },
+      {
+        "label": "Coefficient of restitution",
+        "latex": "e=\\frac{\\text{Impulse of reformation}}{\\text{Impulse of deformation}}=\\frac{\\int F_r\\,dt}{\\int F_d\\,dt}"
+      },
+      {
+        "latex": "e=\\frac{\\text{Velocity of separation along line of impact}}{\\text{Velocity of approach along line of impact}}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Gravitational force and spring force are always non-impulsive.",
+      "An impulsive force can only be balanced by another impulsive force."
+    ],
+    "importance": 5,
+    "source_page": 17,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-physics-centre-of-mass-restitution-variable-mass",
+    "chapter_id": "jee-physics-centre-of-mass",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Restitution Cases and Rocket Propulsion",
+    "card_type": "mixed",
+    "body": "The source lists restitution cases, then gives variable-mass thrust and rocket propulsion.",
+    "formulas": [
+      {
+        "label": "Thrust force",
+        "latex": "\\vec F_t=\\vec v_{rel}\\left(\\frac{dm}{dt}\\right)"
+      },
+      {
+        "label": "Rocket propulsion",
+        "latex": "v=v_r\\ln\\left(\\frac{m_0}{m}\\right)"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\vec v_{rel}",
+        "symbol": "$\\vec v_{rel}$",
+        "meaning": "relative velocity with respect to the system"
+      }
+    ],
+    "conditions": [
+      "$e=1$: elastic collision; kinetic energy may be conserved.",
+      "$e=0$: perfectly inelastic collision; velocity of separation is zero.",
+      "$0<e<1$: inelastic collision; kinetic energy is not conserved.",
+      "Rocket formula shown for ignored gravity and initial rocket velocity $u=0$."
+    ],
+    "importance": 5,
+    "source_page": 18,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-rigid-body-constraint",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": {
+      "type": "rigid-body-constraint"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rigid Body Constraint",
+    "card_type": "mixed",
+    "body": "For the rigid body shown in the source, the velocity components along the connecting line are equal.",
+    "formulas": [
+      {
+        "latex": "V_A\\cos\\theta_1=V_B\\cos\\theta_2"
+      },
+      {
+        "latex": "\\vec V_{BA}=\\text{relative velocity of point B with respect to point A}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "For a rigid body, the distance between particles remains unchanged during motion."
+    ],
+    "importance": 4,
+    "source_page": 18,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-motion-types",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": {
+      "type": "rigid-motion-types"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Types of Rigid Body Motion",
+    "card_type": "diagram",
+    "body": "The handbook classifies rigid-body motion into three types.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Pure translational motion",
+      "Pure rotational motion",
+      "Combined translational and rotational motion"
+    ],
+    "importance": 3,
+    "source_page": 19,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-moi-definition",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Moment of Inertia Definition",
+    "card_type": "formula",
+    "body": "Moment of inertia is listed as a scalar positive quantity that opposes change in rotational motion.",
+    "formulas": [
+      {
+        "latex": "I=m_1r_1^2+m_2r_2^2+\\cdots"
+      },
+      {
+        "latex": "I=I_1+I_2+I_3+\\cdots"
+      },
+      {
+        "label": "Single particle",
+        "latex": "I=mr^2"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "m",
+        "symbol": "$m$",
+        "meaning": "mass"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [
+      "SI unit: $kg\\,m^2$."
+    ],
+    "importance": 5,
+    "source_page": 19,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-moi-systems",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "MOI of Particle Systems",
+    "card_type": "formula",
+    "body": "The source gives summation and integral forms for moment of inertia.",
+    "formulas": [
+      {
+        "label": "Many particles",
+        "latex": "I=\\sum_{i=1}^{n}m_ir_i^2"
+      },
+      {
+        "label": "Continuous object",
+        "latex": "I=\\int r^2\\,dm"
+      },
+      {
+        "label": "Larger object",
+        "latex": "I=\\int dI_{element}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "r",
+        "symbol": "$r$",
+        "meaning": "radius or perpendicular distance from axis"
+      }
+    ],
+    "conditions": [
+      "$r$ is perpendicular distance from the axis."
+    ],
+    "importance": 5,
+    "source_page": 19,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-axis-theorems",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Axis Theorems",
+    "card_type": "formula",
+    "body": "The two important theorems on moment of inertia are perpendicular and parallel axis theorems.",
+    "formulas": [
+      {
+        "label": "Perpendicular axis theorem",
+        "latex": "I_z=I_x+I_y"
+      },
+      {
+        "label": "Parallel axis theorem",
+        "latex": "I_{AB}=I_{cm}+Md^2"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      }
+    ],
+    "conditions": [
+      "Perpendicular axis theorem is only applicable to a plane lamina.",
+      "Parallel axis theorem is applicable to any type of object."
+    ],
+    "importance": 5,
+    "source_page": 20,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-moi-spheres-rings",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": {
+      "columns": [
+        "Object",
+        "Moment of inertia"
+      ],
+      "rows": [
+        [
+          "Solid sphere",
+          "$\\frac{2}{5}MR^2$ (Uniform)"
+        ],
+        [
+          "Hollow sphere",
+          "$\\frac{2}{3}MR^2$ (Uniform)"
+        ],
+        [
+          "Ring",
+          "$MR^2$ (Uniform or Non Uniform)"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "moi-spheres-rings"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "MOI: Spheres and Ring",
+    "card_type": "table",
+    "body": "This card preserves the first part of the handbook's useful MOI formula list.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      },
+      {
+        "latex": "R",
+        "symbol": "$R$",
+        "meaning": "radius"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 20,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-moi-discs-cylinders",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": {
+      "columns": [
+        "Object",
+        "Moment of inertia"
+      ],
+      "rows": [
+        [
+          "Disc",
+          "$\\frac{MR^2}{2}$ (Uniform)"
+        ],
+        [
+          "Hollow cylinder",
+          "$MR^2$ (Uniform or Non Uniform)"
+        ],
+        [
+          "Solid cylinder",
+          "$\\frac{MR^2}{2}$ (Uniform)"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "moi-discs-cylinders"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "MOI: Disc and Cylinders",
+    "card_type": "table",
+    "body": "The source lists disc and cylinder moments of inertia for the shown axes.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      },
+      {
+        "latex": "R",
+        "symbol": "$R$",
+        "meaning": "radius"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 21,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-moi-rods-plates-cuboid",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": {
+      "columns": [
+        "Object",
+        "Moment of inertia"
+      ],
+      "rows": [
+        [
+          "Rod about end",
+          "$\\frac{ML^2}{3}$ (Uniform)"
+        ],
+        [
+          "Rod about centre",
+          "$\\frac{ML^2}{12}$ (Uniform)"
+        ],
+        [
+          "Two rods about common end",
+          "$\\frac{2m\\ell^2}{3}$ (Uniform)"
+        ],
+        [
+          "Square plate, listed axes",
+          "$I_{AB}=I_{CD}=I_{EF}=\\frac{Ma^2}{12}$ (Uniform)"
+        ],
+        [
+          "Square plate",
+          "$\\frac{Ma^2}{6}$ (Uniform)"
+        ],
+        [
+          "Rectangular plate",
+          "$I=\\frac{M(a^2+b^2)}{12}$ (Uniform)"
+        ],
+        [
+          "Cuboid",
+          "$\\frac{M(a^2+b^2)}{12}$ (Uniform)"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "moi-rods-plates"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "MOI: Rods, Plates and Cuboid",
+    "card_type": "table",
+    "body": "The later entries in the useful MOI list cover rods, square plates, rectangular plates, and a cuboid.",
+    "formulas": [],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 22,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-radius-of-gyration",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Radius of Gyration",
+    "card_type": "formula",
+    "body": "Radius of gyration is given by the compact relation in the source.",
+    "formulas": [
+      {
+        "latex": "I=MK^2"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      },
+      {
+        "latex": "K",
+        "symbol": "$K$",
+        "meaning": "radius of gyration"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 23,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-torque",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": {
+      "type": "torque-line-action"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Torque",
+    "card_type": "mixed",
+    "body": "The source defines torque with a cross product and shows the line of action of force.",
+    "formulas": [
+      {
+        "latex": "\\vec\\tau=\\vec r\\times\\vec F"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\vec r",
+        "symbol": "$\\vec r$",
+        "meaning": "position vector"
+      },
+      {
+        "latex": "\\vec F",
+        "symbol": "$\\vec F$",
+        "meaning": "force"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 23,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-torque-alpha",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Torque and Angular Acceleration",
+    "card_type": "formula",
+    "body": "For a hinged object or pure rotation, the handbook relates external torque to angular acceleration.",
+    "formulas": [
+      {
+        "latex": "(\\vec\\tau_{ext})_{Hinge}=I_{Hinge}\\vec\\alpha"
+      },
+      {
+        "latex": "F_{1t}=M_1a_{1t}=M_1r_1\\alpha"
+      },
+      {
+        "latex": "F_{2t}=M_2a_{2t}=M_2r_2\\alpha"
+      },
+      {
+        "latex": "(\\tau_{resultant})_{external}=I\\alpha"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "angular acceleration"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 23,
+    "sort_order": 11
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-rotational-ke-force-parts",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rotational Kinetic Energy and Force Parts",
+    "card_type": "formula",
+    "body": "The source gives rotational kinetic energy and separates net external force into centripetal and tangential parts.",
+    "formulas": [
+      {
+        "label": "Rotational kinetic energy",
+        "latex": "K_R=\\frac{1}{2}I\\omega^2"
+      },
+      {
+        "latex": "\\vec P=M\\vec v_{CM}"
+      },
+      {
+        "latex": "\\vec F_{external}=M\\vec a_{CM}"
+      },
+      {
+        "latex": "F_C=ma_C=m\\frac{v^2}{r_{CM}}=m\\omega^2r_{CM}"
+      },
+      {
+        "latex": "F_t=ma_t=m\\alpha r_{CM}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "\\alpha",
+        "symbol": "$\\alpha$",
+        "meaning": "angular acceleration"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 23,
+    "sort_order": 12
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-rotational-equilibrium",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rotational Equilibrium",
+    "card_type": "formula",
+    "body": "The handbook lists translational equilibrium first, then the condition of rotational equilibrium.",
+    "formulas": [
+      {
+        "latex": "\\sum F_x=0"
+      },
+      {
+        "latex": "\\sum F_y=0"
+      },
+      {
+        "latex": "\\sum \\Gamma_z=0"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 24,
+    "sort_order": 13
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-angular-momentum-particle",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": {
+      "type": "angular-momentum-particle"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Angular Momentum of a Particle",
+    "card_type": "mixed",
+    "body": "For a particle about a point, angular momentum is written using position and momentum vectors.",
+    "formulas": [
+      {
+        "latex": "\\vec L=\\vec r\\times\\vec P"
+      },
+      {
+        "latex": "L=rP\\sin\\theta"
+      },
+      {
+        "latex": "|\\vec L|=r_\\perp P"
+      },
+      {
+        "latex": "|\\vec L|=P_\\perp r"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\vec P",
+        "symbol": "$\\vec P$",
+        "meaning": "linear momentum"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 24,
+    "sort_order": 14
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-fixed-axis-angular-momentum",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Fixed-Axis Angular Momentum",
+    "card_type": "formula",
+    "body": "The source gives angular momentum for a rigid body rotating about a fixed axis, and its conservation condition.",
+    "formulas": [
+      {
+        "latex": "\\vec L_H=I_H\\vec\\omega"
+      },
+      {
+        "latex": "\\tau_{ext}=0"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      }
+    ],
+    "conditions": [
+      "Angular momentum remains constant if external torque is zero about that point or axis of rotation."
+    ],
+    "importance": 5,
+    "source_page": 24,
+    "sort_order": 15
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-torque-angular-momentum-impulse",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Torque, Angular Momentum and Impulse",
+    "card_type": "formula",
+    "body": "Torque is listed as the rate of change of angular momentum, followed by impulse of torque.",
+    "formulas": [
+      {
+        "latex": "\\vec\\tau=\\frac{d\\vec L}{dt}"
+      },
+      {
+        "latex": "\\int \\tau\\,dt=\\Delta J"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\Delta J",
+        "symbol": "$\\Delta J$",
+        "meaning": "change in angular momentum"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 25,
+    "sort_order": 16
+  },
+  {
+    "id": "jee-physics-rigid-body-dynamics-combined-motion",
+    "chapter_id": "jee-physics-rigid-body-dynamics",
+    "table_data": null,
+    "diagram_data": {
+      "type": "combined-rigid-motion"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Combined Translational and Rotational Motion",
+    "card_type": "mixed",
+    "body": "The source combines motion of a rigid body with respect to another point and with respect to ground.",
+    "formulas": [
+      {
+        "latex": "V_P=\\sqrt{V_Q^2+(\\omega r)^2+2V_Q\\omega r\\cos\\theta}"
+      },
+      {
+        "latex": "\\vec\\tau_{cm}=I_{cm}\\vec\\alpha"
+      },
+      {
+        "latex": "\\vec F_{ext}=M\\vec a_{cm}"
+      },
+      {
+        "latex": "\\vec P_{system}=M\\vec v_{cm}"
+      },
+      {
+        "latex": "K_{total}=\\frac{1}{2}Mv_{cm}^2+\\frac{1}{2}I_{cm}\\omega^2"
+      },
+      {
+        "latex": "\\vec L_{AB}=I_{cm}\\vec\\omega+\\vec r_{cm}\\times M\\vec v_{cm}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "M",
+        "symbol": "$M$",
+        "meaning": "total mass"
+      },
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      }
+    ],
+    "conditions": [
+      "The source states $\\theta$, $\\omega$, and $\\alpha$ are the same about every point of the body or any point rigidly attached to it."
+    ],
+    "importance": 5,
+    "source_page": 25,
+    "sort_order": 17
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-equation-frequency-period",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SHM Equation, Frequency and Period",
+    "card_type": "formula",
+    "body": "The source starts SHM with restoring force, the general equation, angular frequency, and time period.",
+    "formulas": [
+      {
+        "latex": "F=-kx"
+      },
+      {
+        "latex": "x=A\\sin(\\omega t+\\phi)"
+      },
+      {
+        "latex": "\\omega=\\frac{2\\pi}{T}=2\\pi f"
+      },
+      {
+        "latex": "T=\\frac{2\\pi}{\\omega}=2\\pi\\sqrt{\\frac{m}{k}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "A",
+        "symbol": "$A$",
+        "meaning": "amplitude"
+      },
+      {
+        "latex": "k",
+        "symbol": "$k$",
+        "meaning": "spring constant or wave number depending on context"
+      },
+      {
+        "latex": "\\phi",
+        "symbol": "$\\phi$",
+        "meaning": "initial phase"
+      }
+    ],
+    "conditions": [
+      "$(\\omega t+\\phi)$ is the phase of the motion."
+    ],
+    "importance": 5,
+    "source_page": 26,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-speed-acceleration",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Speed and Acceleration",
+    "card_type": "formula",
+    "body": "The handbook gives speed and acceleration as functions of displacement in SHM.",
+    "formulas": [
+      {
+        "latex": "v=\\omega\\sqrt{A^2-x^2}"
+      },
+      {
+        "latex": "a=-\\omega^2x"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "A",
+        "symbol": "$A$",
+        "meaning": "amplitude"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 26,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-energy",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Energy in SHM",
+    "card_type": "formula",
+    "body": "The kinetic, potential, and total mechanical energies are listed together.",
+    "formulas": [
+      {
+        "label": "Kinetic energy",
+        "latex": "KE=\\frac{1}{2}mv^2=\\frac{1}{2}m\\omega^2(A^2-x^2)=\\frac{1}{2}k(A^2-x^2)"
+      },
+      {
+        "label": "Potential energy",
+        "latex": "PE=\\frac{1}{2}Kx^2"
+      },
+      {
+        "label": "Total mechanical energy",
+        "latex": "TME=KE+PE=\\frac{1}{2}KA^2"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "A",
+        "symbol": "$A$",
+        "meaning": "amplitude"
+      },
+      {
+        "latex": "k",
+        "symbol": "$k$",
+        "meaning": "spring constant or wave number depending on context"
+      }
+    ],
+    "conditions": [
+      "The total mechanical energy expression is marked constant in the source."
+    ],
+    "importance": 5,
+    "source_page": 26,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-spring-mass-systems",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "spring-mass-systems"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Spring-Mass Systems",
+    "card_type": "mixed",
+    "body": "The source shows single-mass and two-mass spring systems.",
+    "formulas": [
+      {
+        "label": "Single mass",
+        "latex": "T=2\\pi\\sqrt{\\frac{m}{k}}"
+      },
+      {
+        "label": "Two masses",
+        "latex": "T=2\\pi\\sqrt{\\frac{\\mu}{K}}"
+      },
+      {
+        "latex": "\\mu=\\frac{m_1m_2}{m_1+m_2}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\mu",
+        "symbol": "$\\mu$",
+        "meaning": "reduced mass"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 26,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-spring-combinations-pendulums",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Spring Combinations and Simple Pendulum",
+    "card_type": "formula",
+    "body": "The handbook gives series and parallel spring combinations, then simple pendulum period.",
+    "formulas": [
+      {
+        "label": "Series springs",
+        "latex": "\\frac{1}{k_{eq}}=\\frac{1}{k_1}+\\frac{1}{k_2}"
+      },
+      {
+        "label": "Parallel springs",
+        "latex": "k_{eq}=k_1+k_2"
+      },
+      {
+        "label": "Simple pendulum",
+        "latex": "T=2\\pi\\sqrt{\\frac{\\ell}{g}}=2\\pi\\sqrt{\\frac{\\ell}{g_{eff}}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\ell",
+        "symbol": "$\\ell$",
+        "meaning": "length"
+      }
+    ],
+    "conditions": [
+      "$g_{eff}$ is net acceleration due to pseudo force and gravitational force in an accelerating reference frame."
+    ],
+    "importance": 5,
+    "source_page": 27,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-physical-torsional-pendulum",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Physical and Torsional Pendulums",
+    "card_type": "formula",
+    "body": "The source lists time periods for compound/physical and torsional pendulums.",
+    "formulas": [
+      {
+        "label": "Physical pendulum",
+        "latex": "T=2\\pi\\sqrt{\\frac{I}{mg\\ell}}"
+      },
+      {
+        "latex": "I=I_{CM}+m\\ell^2"
+      },
+      {
+        "label": "Torsional pendulum",
+        "latex": "T=2\\pi\\sqrt{\\frac{I}{C}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "I",
+        "symbol": "$I$",
+        "meaning": "moment of inertia"
+      },
+      {
+        "latex": "\\ell",
+        "symbol": "$\\ell$",
+        "meaning": "distance between suspension point and centre of mass"
+      },
+      {
+        "latex": "C",
+        "symbol": "$C$",
+        "meaning": "torsional constant"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 27,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-superposition",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": {
+      "type": "shm-superposition"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Superposition Along the Same Direction",
+    "card_type": "mixed",
+    "body": "For two SHMs along the same direction, the source gives resultant amplitude and phase.",
+    "formulas": [
+      {
+        "latex": "x_1=A_1\\sin\\omega t"
+      },
+      {
+        "latex": "x_2=A_2\\sin(\\omega t+\\theta)"
+      },
+      {
+        "latex": "x=A\\sin(\\omega t+\\phi)"
+      },
+      {
+        "latex": "A=\\sqrt{A_1^2+A_2^2+2A_1A_2\\cos\\theta}"
+      },
+      {
+        "latex": "\\tan\\phi=\\frac{A_2\\sin\\theta}{A_1+A_2\\cos\\theta}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 27,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-damping-cases",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Damped Oscillation Cases",
+    "card_type": "formula",
+    "body": "The damping force, equation of motion, and damping cases are listed in the source.",
+    "formulas": [
+      {
+        "label": "Damping force",
+        "latex": "\\vec F=-b\\vec v"
+      },
+      {
+        "label": "Equation of motion",
+        "latex": "m\\frac{dv}{dt}=-kx-bv"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "b",
+        "symbol": "$b$",
+        "meaning": "damping constant in the source formulas"
+      }
+    ],
+    "conditions": [
+      "$b^2-4mK>0$: over damping.",
+      "$b^2-4mK=0$: critical damping.",
+      "$b^2-4mK<0$: under damping."
+    ],
+    "importance": 4,
+    "source_page": 27,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-small-damping",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Small Damping Solution",
+    "card_type": "formula",
+    "body": "For small damping, the source gives displacement, damped angular frequency, amplitude, energy, and quality factor.",
+    "formulas": [
+      {
+        "latex": "x=A_0e^{-bt/2m}\\sin(\\omega't+\\delta)"
+      },
+      {
+        "latex": "\\omega'=\\sqrt{\\frac{k}{m}-\\left(\\frac{b}{2m}\\right)^2}"
+      },
+      {
+        "latex": "\\omega'\\approx\\sqrt{\\frac{k}{m}}=\\omega_0"
+      },
+      {
+        "latex": "A=A_0e^{-bt/2m}"
+      },
+      {
+        "latex": "E(t)=\\frac{1}{2}KA^2e^{-bt/m}"
+      },
+      {
+        "latex": "Q=2\\pi\\frac{E}{|\\Delta E|}=\\frac{\\omega'}{2\\omega_Y}"
+      },
+      {
+        "latex": "\\omega_Y=\\frac{b}{2m}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The approximation is under the source heading 'For small b'."
+    ],
+    "importance": 4,
+    "source_page": 28,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-physics-simple-harmonic-motion-forced-resonance",
+    "chapter_id": "jee-physics-simple-harmonic-motion",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Forced Oscillations and Resonance",
+    "card_type": "formula",
+    "body": "The source gives the driving force, displacement response, amplitude, phase, and two special amplitude cases.",
+    "formulas": [
+      {
+        "latex": "F(t)=F_0\\cos\\omega_dt"
+      },
+      {
+        "latex": "x(t)=A\\cos(\\omega_dt+\\phi)"
+      },
+      {
+        "latex": "A=\\frac{F_0}{\\sqrt{m^2(\\omega^2-\\omega_d^2)^2+\\omega_d^2b^2}}"
+      },
+      {
+        "latex": "\\tan\\phi=\\frac{-v_0}{\\omega_dx_0}"
+      },
+      {
+        "label": "Small damping",
+        "latex": "A=\\frac{F_0}{m(\\omega^2-\\omega_d^2)}"
+      },
+      {
+        "label": "Driving frequency close to natural frequency",
+        "latex": "A=\\frac{F_0}{\\omega_db}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 28,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-physics-string-waves-wave-equation-direction",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "General Wave Equation and Direction",
+    "card_type": "formula",
+    "body": "The source gives the one-dimensional wave equation and the direction associated with each sign.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\partial^2 y}{\\partial t^2}=v^2\\frac{\\partial^2 y}{\\partial x^2}"
+      },
+      {
+        "latex": "y(x,t)=f\\left(t\\pm\\frac{x}{v}\\right)"
+      },
+      {
+        "latex": "f\\left(t+\\frac{x}{v}\\right)\\text{ represents a wave travelling in the negative x-axis}"
+      },
+      {
+        "latex": "f\\left(t-\\frac{x}{v}\\right)\\text{ represents a wave travelling in the positive x-axis}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "$y(x,t)$ should be finite everywhere."
+    ],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-physics-string-waves-progressive-sine-wave",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": {
+      "type": "progressive-sine-wave"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Progressive Sine Wave",
+    "card_type": "formula",
+    "body": "The handbook writes the one-dimensional progressive sine wave with angular frequency, wave number, and phase constant.",
+    "formulas": [
+      {
+        "latex": "y=A\\sin(\\omega t\\pm kx+\\phi)"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "A",
+        "symbol": "$A$",
+        "meaning": "amplitude"
+      },
+      {
+        "latex": "\\omega",
+        "symbol": "$\\omega$",
+        "meaning": "angular velocity"
+      },
+      {
+        "latex": "\\phi",
+        "symbol": "$\\phi$",
+        "meaning": "phase constant"
+      }
+    ],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 29,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-physics-string-waves-wave-number-phase",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Wave Number and Phase Difference",
+    "card_type": "formula",
+    "body": "Wave number and phase difference are listed under terms related to a one-dimensional progressive sine wave.",
+    "formulas": [
+      {
+        "label": "Wave number",
+        "latex": "k=\\frac{2\\pi}{\\lambda}=\\frac{\\omega}{v}"
+      },
+      {
+        "label": "Phase difference by position",
+        "latex": "\\Delta\\phi=\\frac{2\\pi}{\\lambda}\\Delta x"
+      },
+      {
+        "label": "Phase difference by time",
+        "latex": "\\Delta\\phi=\\frac{2\\pi}{T}\\Delta t"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\lambda",
+        "symbol": "$\\lambda$",
+        "meaning": "wavelength"
+      }
+    ],
+    "conditions": [
+      "Phase is the argument of the harmonic function $(\\omega t\\pm kx+\\phi)$."
+    ],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-physics-string-waves-string-speed-power-intensity",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "String Speed, Power and Intensity",
+    "card_type": "formula",
+    "body": "The source gives transverse wave speed along a string/wire, average power, and intensity.",
+    "formulas": [
+      {
+        "label": "Transverse wave speed",
+        "latex": "v=\\sqrt{\\frac{T}{\\mu}}"
+      },
+      {
+        "label": "Average power",
+        "latex": "\\langle P\\rangle=2\\pi^2f^2A^2\\mu v"
+      },
+      {
+        "label": "Intensity",
+        "latex": "I=\\frac{\\langle P\\rangle}{s}=2\\pi^2f^2A^2\\rho v"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "T",
+        "symbol": "$T$",
+        "meaning": "tension"
+      },
+      {
+        "latex": "\\mu",
+        "symbol": "$\\mu$",
+        "meaning": "mass per unit length"
+      }
+    ],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 29,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-physics-string-waves-reflection-refraction",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Reflection and Refraction",
+    "card_type": "mixed",
+    "body": "The source lists incident, transmitted, and reflected wave forms plus reflected/transmitted amplitudes.",
+    "formulas": [
+      {
+        "label": "Incident wave",
+        "latex": "y_i=A_i\\sin(\\omega t-k_1x)"
+      },
+      {
+        "label": "Rarer to denser",
+        "latex": "y_t=A_t\\sin(\\omega t-k_2x),\\quad y_r=-A_r\\sin(\\omega t+k_1x)"
+      },
+      {
+        "label": "Denser to rarer",
+        "latex": "y_t=A_t\\sin(\\omega t-k_2x),\\quad y_r=A_r\\sin(\\omega t+k_1x)"
+      },
+      {
+        "latex": "A_r=\\frac{|k_1-k_2|}{k_1+k_2}A_i"
+      },
+      {
+        "latex": "A_t=\\frac{2k_1}{k_1+k_2}A_i"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Rarer to denser case is marked with $v_2<v_1$.",
+      "Denser to rarer case is marked with $v_2>v_1$."
+    ],
+    "importance": 5,
+    "source_page": 30,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-physics-string-waves-standing-waves",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": {
+      "type": "standing-wave"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Standing Waves",
+    "card_type": "formula",
+    "body": "The source forms a standing wave by adding two opposite-travelling sine waves of equal amplitude.",
+    "formulas": [
+      {
+        "latex": "y_1=A\\sin(\\omega t-kx+\\theta_1)"
+      },
+      {
+        "latex": "y_2=A\\sin(\\omega t+kx+\\theta_2)"
+      },
+      {
+        "latex": "y_1+y_2=\\left[2A\\cos\\left(kx+\\frac{\\theta_2-\\theta_1}{2}\\right)\\right]\\sin\\left(\\omega t+\\frac{\\theta_1+\\theta_2}{2}\\right)"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "A",
+        "symbol": "$A$",
+        "meaning": "amplitude"
+      }
+    ],
+    "conditions": [
+      "Resultant amplitude is zero at nodes.",
+      "Resultant amplitude is $2A$ at antinodes."
+    ],
+    "importance": 5,
+    "source_page": 30,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-physics-string-waves-nodes-antinodes",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Nodes and Antinodes",
+    "card_type": "formula",
+    "body": "The handbook lists the standard spacing and phase facts for standing waves.",
+    "formulas": [
+      {
+        "latex": "\\text{Distance between successive nodes or antinodes}=\\frac{\\lambda}{2}"
+      },
+      {
+        "latex": "\\text{Distance between successive node and antinode}=\\frac{\\lambda}{4}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "\\lambda",
+        "symbol": "$\\lambda$",
+        "meaning": "wavelength"
+      }
+    ],
+    "conditions": [
+      "Particles in the same segment vibrate in the same phase.",
+      "Particles in two consecutive segments vibrate in opposite phase.",
+      "Since nodes are permanently at rest, energy cannot be transmitted across them."
+    ],
+    "importance": 4,
+    "source_page": 30,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-physics-string-waves-strings-fixed-free",
+    "chapter_id": "jee-physics-string-waves",
+    "table_data": null,
+    "diagram_data": {
+      "type": "string-modes"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Vibrations of Strings",
+    "card_type": "mixed",
+    "body": "The source gives fixed-at-both-ends modes and free-at-one-end modes.",
+    "formulas": [
+      {
+        "label": "Fixed at both ends",
+        "latex": "L=\\frac{n\\lambda}{2}\\quad\\text{or}\\quad \\lambda=\\frac{2L}{n}"
+      },
+      {
+        "latex": "f_n=\\frac{n}{2L}\\sqrt{\\frac{T}{\\mu}}"
+      },
+      {
+        "label": "Free at one end",
+        "latex": "L=\\frac{\\lambda}{4}\\quad\\text{or}\\quad \\lambda=4L"
+      },
+      {
+        "latex": "f_1=\\frac{3}{4L}\\sqrt{\\frac{T}{\\mu}}"
+      },
+      {
+        "latex": "f_2=\\frac{5}{4L}\\sqrt{\\frac{T}{\\mu}}"
+      },
+      {
+        "latex": "f_n=\\frac{(2n+1)}{4L}\\sqrt{\\frac{T}{\\mu}}"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "L",
+        "symbol": "$L$",
+        "meaning": "string length"
+      },
+      {
+        "latex": "\\mu",
+        "symbol": "$\\mu$",
+        "meaning": "mass per unit length"
+      }
+    ],
+    "conditions": [
+      "For fixed ends, $n=1,2,3,\\ldots$ and $n$ is the number of loops."
+    ],
+    "importance": 5,
+    "source_page": 31,
+    "sort_order": 8
+  }
+]$$::jsonb) as x(
+    id text,
+    chapter_id text,
+    title text,
+    card_type text,
+    body text,
+    formulas jsonb,
+    variables jsonb,
+    conditions jsonb,
+    table_data jsonb,
+    diagram_data jsonb,
+    diagram_svg text,
+    importance integer,
+    source_page integer,
+    sort_order integer,
+    is_active boolean
+  )
+)
+insert into public.formula_cards (
+  id,
+  chapter_id,
+  title,
+  card_type,
+  body,
+  formulas,
+  variables,
+  conditions,
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  is_active
+)
+select
+  id,
+  chapter_id,
+  title,
+  card_type,
+  body,
+  coalesce(formulas, '[]'::jsonb),
+  coalesce(variables, '[]'::jsonb),
+  coalesce(conditions, '[]'::jsonb),
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  coalesce(is_active, true)
+from card_seed
+on conflict (id) do update set
+  title = excluded.title,
+  card_type = excluded.card_type,
+  body = excluded.body,
+  formulas = excluded.formulas,
+  variables = excluded.variables,
+  conditions = excluded.conditions,
+  table_data = excluded.table_data,
+  diagram_data = excluded.diagram_data,
+  diagram_svg = excluded.diagram_svg,
+  importance = excluded.importance,
+  source_page = excluded.source_page,
+  sort_order = excluded.sort_order,
+  is_active = excluded.is_active;
+
+insert into public.formula_chapters (id, subject_id, title, slug, sort_order)
+select
+  replace(id, 'jee-', 'neet-') as id,
+  'neet-physics' as subject_id,
+  title,
+  slug,
+  sort_order
+from public.formula_chapters
+where subject_id = 'jee-physics'
+  and slug in ('circular-motion', 'centre-of-mass', 'rigid-body-dynamics', 'simple-harmonic-motion', 'string-waves')
+on conflict (id) do update set
+  title = excluded.title,
+  slug = excluded.slug,
+  sort_order = excluded.sort_order;
+
+insert into public.formula_cards (
+  id,
+  chapter_id,
+  title,
+  card_type,
+  body,
+  formulas,
+  variables,
+  conditions,
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  is_active
+)
+select
+  replace(id, 'jee-', 'neet-') as id,
+  replace(chapter_id, 'jee-', 'neet-') as chapter_id,
+  title,
+  card_type,
+  body,
+  formulas,
+  variables,
+  conditions,
+  table_data,
+  diagram_data,
+  diagram_svg,
+  importance,
+  source_page,
+  sort_order,
+  is_active
+from public.formula_cards
+where chapter_id in ('jee-physics-circular-motion', 'jee-physics-centre-of-mass', 'jee-physics-rigid-body-dynamics', 'jee-physics-simple-harmonic-motion', 'jee-physics-string-waves')
+on conflict (id) do update set
+  title = excluded.title,
+  card_type = excluded.card_type,
+  body = excluded.body,
+  formulas = excluded.formulas,
+  variables = excluded.variables,
+  conditions = excluded.conditions,
+  table_data = excluded.table_data,
+  diagram_data = excluded.diagram_data,
+  diagram_svg = excluded.diagram_svg,
+  importance = excluded.importance,
+  source_page = excluded.source_page,
+  sort_order = excluded.sort_order,
+  is_active = excluded.is_active;

@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { ArrowRight, Compass } from "lucide-react";
+
 const CFG = {
   critical: {
     dot: "bg-red-500 dark:bg-red-400",
@@ -21,11 +24,27 @@ const CFG = {
 
 function EmptyState({ minimumAttempts }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-200/70 bg-[var(--card)]/45 p-5 text-sm text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/30 dark:text-slate-400">
-      <p className="font-bold text-slate-700 dark:text-slate-200">Not enough chapter data yet</p>
-      <p className="mt-1 text-xs leading-relaxed">
-        Complete more PYQs or tests and PrepZii will identify chapters with at least {minimumAttempts} answered questions.
-      </p>
+    <div className="flex flex-col items-start justify-between rounded-xl border border-dashed border-slate-200/80 bg-slate-50/50 p-4 transition-all duration-200 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/20 sm:p-5">
+      <div className="flex items-start gap-3">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+          <Compass className="h-4 w-4" />
+        </div>
+        <div>
+          <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Not enough chapter data yet</p>
+          <p className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+            Complete {minimumAttempts}+ questions in any chapter to calculate your weakness report and revision priorities.
+          </p>
+        </div>
+      </div>
+      <div className="mt-4 w-full pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+        <Link
+          href="/pyq"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover"
+        >
+          <span>Practice Chapters</span>
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
     </div>
   );
 }
@@ -34,7 +53,7 @@ export default function WeakTopics({ weakChapters, minimumAttempts = 3 }) {
   const chapters = weakChapters?.items || [];
 
   return (
-    <div className="glass-card min-w-0 p-5">
+    <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5 min-w-0">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100">
@@ -52,7 +71,7 @@ export default function WeakTopics({ weakChapters, minimumAttempts = 3 }) {
       {chapters.length === 0 ? (
         <EmptyState minimumAttempts={minimumAttempts} />
       ) : (
-        <div className="divide-y divide-slate-50 dark:divide-slate-800">
+        <div className="divide-y divide-slate-100 dark:divide-[var(--border-subtle)]">
           {chapters.map((chapter, index) => {
             const cfg = CFG[chapter.status] || CFG.needs_work;
             return (

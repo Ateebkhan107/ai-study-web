@@ -13,6 +13,9 @@ import { getUserAnalytics } from "@/services/analytics";
 const OverviewCards = dynamic(() => import("@/components/analytics/OverviewCards"), {
   loading: () => <ContentBlockSkeleton className="h-28" />,
 });
+const AnalyticsUnlockBanner = dynamic(() => import("@/components/analytics/AnalyticsUnlockBanner"), {
+  loading: () => <ContentBlockSkeleton className="h-32" />,
+});
 const PerformanceTrend = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.PerformanceTrend), {
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
@@ -26,6 +29,9 @@ const ChapterPerformance = dynamic(() => import("@/components/analytics/ChartCom
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
 const TimeAnalytics = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.TimeAnalytics), {
+  loading: () => <ContentBlockSkeleton className="h-72" />,
+});
+const ChartsUnlockHub = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.ChartsUnlockHub), {
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
 const StudyHeatmap = dynamic(() => import("@/components/analytics/NonChartComponents").then((mod) => mod.StudyHeatmap), {
@@ -52,7 +58,7 @@ function getCookieTrack() {
 }
 
 function ContentBlockSkeleton({ className = "h-48" }) {
-  return <div className={`rounded-lg skeleton-shimmer ${className}`} />;
+  return <div className={`rounded-2xl skeleton-shimmer ${className}`} />;
 }
 
 function AnalyticsContentLoading() {
@@ -72,7 +78,7 @@ function AnalyticsContentLoading() {
 function ProLock() {
   return (
     <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
-      <div className="max-w-md rounded-lg border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-8">
+      <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-8">
         <BarChart3 className="mx-auto mb-4 h-10 w-10 text-slate-500 dark:text-slate-400" />
         <h2 className="mb-2 text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Advanced Analytics is Pro</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
@@ -80,7 +86,7 @@ function ProLock() {
         </p>
         <Link
           href="/pro"
-          className="inline-flex rounded-md bg-brand px-5 py-3 text-sm font-semibold text-slate-950"
+          className="inline-flex rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-slate-950"
         >
           Upgrade to Pro
         </Link>
@@ -92,7 +98,7 @@ function ProLock() {
 function AIComingSoon() {
   return (
     <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
-      <div className="w-full max-w-xl rounded-lg border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-10">
+      <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-10">
         <Brain className="mx-auto mb-4 h-10 w-10 text-slate-500 dark:text-slate-400" />
         <h2 className="mb-2 text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Insights</h2>
         <p className="mx-auto max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
@@ -161,6 +167,14 @@ export default function AnalyticsPage() {
 
   const showAnalyticsLock = !loading && !advancedAnalyticsAllowed && activeTab !== "leaderboard";
 
+  // Check if charts tab should show consolidated unlock hub vs full 4-panel grid
+  const hasAnyChartData = Boolean(
+    stats?.subjectDistribution?.status === "ready" ||
+    stats?.subjectPerformance?.status === "ready" ||
+    stats?.chapterPerformance?.status === "ready" ||
+    stats?.timeAnalytics?.status === "ready"
+  );
+
   return (
     <PageWrapper
       title="Performance Report"
@@ -198,20 +212,29 @@ export default function AnalyticsPage() {
 
       {activeTab === "overview" && !loading && !showAnalyticsLock && (
         <div className="space-y-6 sm:space-y-8">
-          <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+          {/* Consolidated Getting Started / Unlock Full Analytics Banner */}
+          <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
+            <AnalyticsUnlockBanner stats={stats} />
+          </section>
+
+          {/* Elevated Stat Cards */}
+          <section className="animate-slideUp" style={{ animationDelay: "175ms" }}>
             <OverviewCards stats={stats} />
           </section>
 
-          <section className="animate-slideUp" style={{ animationDelay: "225ms" }}>
+          {/* Performance Trend with preview curve */}
+          <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
             <PerformanceTrend data={stats?.performanceTrend} />
           </section>
 
-          <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "300ms" }}>
+          {/* Heatmap (preserved exactly) & Alive Multi-Segment Exam Readiness */}
+          <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "325ms" }}>
             <StudyHeatmap heatmap={stats?.heatmap} />
             <ExamReadiness readiness={stats?.examReadiness} />
           </section>
 
-          <section className="animate-slideUp" style={{ animationDelay: "375ms" }}>
+          {/* Next Action */}
+          <section className="animate-slideUp" style={{ animationDelay: "400ms" }}>
             <WhatToDoNext action={stats?.nextAction} />
           </section>
         </div>
@@ -219,15 +242,27 @@ export default function AnalyticsPage() {
 
       {activeTab === "charts" && !loading && !showAnalyticsLock && (
         <div className="space-y-6 sm:space-y-8">
-          <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "150ms" }}>
-            <SubjectDistribution data={stats?.subjectDistribution} />
-            <SubjectPerformance data={stats?.subjectPerformance} />
-          </section>
+          {!hasAnyChartData ? (
+            <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
+              <ChartsUnlockHub stats={stats} />
+            </section>
+          ) : (
+            <>
+              <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
+                <AnalyticsUnlockBanner stats={stats} />
+              </section>
 
-          <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.6fr)] lg:gap-6" style={{ animationDelay: "225ms" }}>
-            <ChapterPerformance data={stats?.chapterPerformance} />
-            <TimeAnalytics data={stats?.timeAnalytics} />
-          </section>
+              <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "175ms" }}>
+                <SubjectDistribution data={stats?.subjectDistribution} />
+                <SubjectPerformance data={stats?.subjectPerformance} />
+              </section>
+
+              <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.6fr)] lg:gap-6" style={{ animationDelay: "250ms" }}>
+                <ChapterPerformance data={stats?.chapterPerformance} />
+                <TimeAnalytics data={stats?.timeAnalytics} />
+              </section>
+            </>
+          )}
         </div>
       )}
 
