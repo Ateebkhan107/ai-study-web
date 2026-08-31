@@ -48,6 +48,7 @@ function SubjectGroup({ exam, subjects, preferred }) {
       <div className="grid gap-3 sm:grid-cols-3">
         {subjects.map((subject) => {
           const Icon = SUBJECT_ICONS[subject.name] || Layers3;
+          const deckLabel = subject.exam === "NEET" && subject.name === "Biology" ? "revision cards" : "formula cards";
           return (
             <Link
               key={subject.id}
@@ -59,7 +60,7 @@ function SubjectGroup({ exam, subjects, preferred }) {
               </div>
               <h3 className="text-lg font-black text-slate-950 dark:text-white">{subject.name}</h3>
               <p className="mt-2 text-sm font-medium leading-6 text-slate-500 dark:text-stone-400">
-                Open chapter-wise formula cards.
+                Open chapter-wise {deckLabel}.
               </p>
             </Link>
           );

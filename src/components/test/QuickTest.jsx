@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Target, Atom, FlaskConical, Calculator, Dna, ClipboardList, Hospital, Sun } from "lucide-react";
 import SubjectVisual from "@/components/SubjectVisual";
+import posthog from "posthog-js";
 
 const QUICK_OPTIONS = [
   {
@@ -120,9 +121,22 @@ export default function QuickTest({ track = "jee", isPro = false }) {
 
   const handleLaunch = (option) => {
     if (!isPro && !isDailyWarmup(option)) {
+      posthog.capture("pro_upgrade_clicked", {
+        source: "quick_test",
+        test_label: option.label,
+        track: activeTrack,
+      });
       router.push("/pro");
       return;
     }
+    posthog.capture("quick_test_launched", {
+      test_label: option.label,
+      subject: option.subject,
+      question_count: option.count,
+      duration_minutes: option.duration,
+      difficulty: option.difficulty,
+      track: activeTrack,
+    });
     setLaunching(option.label);
     setTimeout(() => {
       const params = new URLSearchParams({

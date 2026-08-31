@@ -1,8 +1,9 @@
 "use client";
 
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import posthog from "posthog-js";
 import { getPYQ, savePYQAttempts } from "@/lib/pyq";
 import { canShowStructuredQuestionText, shouldShowQuestionImageFallback, shouldShowRequiredQuestionImage } from "@/lib/pyqDisplay";
 import { getBookmarks, toggleBookmark } from "@/utils/bookmarks";
@@ -234,6 +235,7 @@ export default function PYQSessionPage() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [visitedQuestionIds, setVisitedQuestionIds] = useState(() => new Set());
   const [markedQuestionIds, setMarkedQuestionIds] = useState(() => new Set());
+  const completionType = useRef("manual");
   
   // Timer state for Full Paper mode (180 mins = 10800 secs)
   const [timeLeft, setTimeLeft] = useState(180 * 60);
@@ -282,6 +284,7 @@ export default function PYQSessionPage() {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
+          completionType.current = "timeout";
           handleFinishDeck(); // Auto-submit when time's up
           return 0;
         }
@@ -367,6 +370,13 @@ export default function PYQSessionPage() {
 
         if (cancelled) return;
         setQuestions(combined);
+        posthog.capture("pyq_practice_started", {
+          exam,
+          subjects: subjectLabels,
+          year_filter: yearsParam || "all",
+          question_count: combined.length,
+          duration_minutes: mode === "full" ? 180 : null,
+        });
         
         if (user?.id) {
           const bms = await getBookmarks(user.id);
@@ -592,6 +602,14 @@ export default function PYQSessionPage() {
     const skipped = questions.length - answeredQuestions.length;
     const attempted = correct + wrong;
     const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+    posthog.capture("pyq_practice_completed", {
+      question_count: questions.length,
+      questions_attempted: attempted,
+      correct_answers: correct,
+      accuracy_percent: accuracy,
+      time_taken_seconds: mode === "full" ? 180 * 60 - timeLeft : null,
+      completion_type: completionType.current,
+    });
 
     if (typeof window !== "undefined") {
       sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));

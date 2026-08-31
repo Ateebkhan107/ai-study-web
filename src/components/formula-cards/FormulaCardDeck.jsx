@@ -72,44 +72,48 @@ export default function FormulaCardDeck({ cards }) {
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm backdrop-blur dark:border-stone-800 dark:bg-stone-950/60 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center justify-between gap-3 sm:justify-start">
-          <div className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-black text-white dark:bg-white dark:text-slate-950">
-            {safeIndex + 1} / {visibleCards.length}
-          </div>
-          <div className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-stone-800 sm:w-48 sm:flex-none">
+      <div className="mb-3 flex items-center justify-between rounded-xl border border-slate-200/80 bg-white/90 px-3.5 py-2 shadow-none dark:border-stone-800/80 dark:bg-[#141414]">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs font-bold text-slate-700 dark:text-stone-300 tabular-nums">
+            {safeIndex + 1} <span className="text-slate-300 dark:text-stone-600">/</span> {visibleCards.length}
+          </span>
+          <div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-200 dark:bg-stone-800 sm:w-36">
             <div
-              className="h-full rounded-full bg-amber-500 transition-all"
+              className="h-full rounded-full bg-amber-500 transition-all duration-200"
               style={{ width: `${((safeIndex + 1) / visibleCards.length) * 100}%` }}
             />
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-2 sm:justify-end">
+        <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={toggleBookmark}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:border-amber-400 hover:text-amber-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-amber-500"
-            aria-label={isBookmarked ? "Remove bookmark" : "Bookmark card"}
-            title={isBookmarked ? "Remove bookmark" : "Bookmark card"}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+              isBookmarked
+                ? "bg-amber-500/15 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400"
+                : "text-slate-500 hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
+            }`}
+            aria-label={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
+            title={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
           >
             {isBookmarked ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
           </button>
           <button
             type="button"
             onClick={shuffleDeck}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:border-amber-400 hover:text-amber-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-amber-500"
-            aria-label="Shuffle cards"
-            title="Shuffle"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
+            aria-label="Shuffle card order"
+            title="Shuffle cards"
           >
             <Shuffle className="h-4 w-4" />
           </button>
           <button
             type="button"
             onClick={resetOrder}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:border-amber-400 hover:text-amber-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-amber-500"
-            aria-label="Reset card order"
-            title="Reset order"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
+            aria-label="Reset original card order"
+            title="Reset card order"
           >
             <RotateCcw className="h-4 w-4" />
           </button>
@@ -118,57 +122,64 @@ export default function FormulaCardDeck({ cards }) {
 
       <FormulaCardRenderer card={currentCard} />
 
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-[auto_1fr_auto] sm:items-center">
-        <button
-          type="button"
-          onClick={() => goToCard(-1)}
-          disabled={safeIndex === 0}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-black text-slate-700 transition hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-45 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Previous
-        </button>
-
-        <div className="col-span-2 flex flex-wrap items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/70 p-2 dark:border-stone-800 dark:bg-stone-950/50 sm:col-span-1">
+      <div className="mt-3.5 flex flex-col gap-2 rounded-xl border border-slate-200/80 bg-white/90 p-2 dark:border-stone-800/80 dark:bg-[#141414] sm:flex-row sm:items-center sm:justify-between sm:p-2.5">
+        <div className="grid grid-cols-2 gap-2 sm:contents">
           <button
             type="button"
-            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-dashed border-slate-300 px-3 text-xs font-black uppercase tracking-[0.12em] text-slate-400 dark:border-stone-700 dark:text-stone-500"
-            disabled
+            onClick={() => goToCard(-1)}
+            disabled={safeIndex === 0}
+            aria-label="Previous card"
+            className="inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50 px-3 sm:px-4 text-xs sm:text-sm font-bold text-slate-700 transition hover:border-slate-300 hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 dark:border-stone-800 dark:bg-stone-900/60 dark:text-stone-200 dark:hover:border-stone-700 dark:hover:bg-stone-900"
           >
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            Know it
+            <ChevronLeft className="h-4 w-4" />
+            <span>Previous</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goToCard(1)}
+            disabled={safeIndex === visibleCards.length - 1}
+            aria-label="Next card"
+            className="inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg bg-amber-500 px-3 sm:px-4 text-xs sm:text-sm font-bold text-black transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-amber-500 sm:order-last"
+          >
+            <span>Next</span>
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="flex items-center justify-center gap-1.5 pt-1 sm:pt-0">
+          <button
+            type="button"
+            className="inline-flex h-7 sm:h-8 items-center gap-1.5 rounded-md border border-slate-200/60 bg-transparent px-2.5 text-[11px] font-semibold text-slate-400 opacity-60 cursor-not-allowed dark:border-stone-800/80 dark:text-stone-500"
+            disabled
+            title="Self-assessment (coming soon)"
+          >
+            <CheckCircle2 className="h-3 w-3" />
+            <span>Know it</span>
           </button>
           <button
             type="button"
-            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-dashed border-slate-300 px-3 text-xs font-black uppercase tracking-[0.12em] text-slate-400 dark:border-stone-700 dark:text-stone-500"
+            className="inline-flex h-7 sm:h-8 items-center gap-1.5 rounded-md border border-slate-200/60 bg-transparent px-2.5 text-[11px] font-semibold text-slate-400 opacity-60 cursor-not-allowed dark:border-stone-800/80 dark:text-stone-500"
             disabled
+            title="Revision queue (coming soon)"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
-            Revise
+            <RotateCcw className="h-3 w-3" />
+            <span>Revise</span>
           </button>
           <button
             type="button"
             onClick={toggleImportantOnly}
-            className={`inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-black uppercase tracking-[0.12em] transition ${
+            title={importantOnly ? "Show all cards" : "Filter important cards only"}
+            className={`inline-flex h-7 sm:h-8 items-center gap-1.5 rounded-md px-2.5 text-[11px] font-semibold transition-colors ${
               importantOnly
-                ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300"
-                : "border-slate-200 bg-white text-slate-500 hover:border-amber-400 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-300"
+                ? "border border-amber-500/40 bg-amber-500/15 text-amber-700 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-300"
+                : "border border-slate-200/80 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-stone-800 dark:text-stone-400 dark:hover:border-stone-700 dark:hover:text-stone-200"
             }`}
           >
-            <Star className="h-3.5 w-3.5" />
-            Important only
+            <Star className={`h-3 w-3 ${importantOnly ? "fill-amber-500 text-amber-500" : ""}`} />
+            <span>Important</span>
           </button>
         </div>
-
-        <button
-          type="button"
-          onClick={() => goToCard(1)}
-          disabled={safeIndex === visibleCards.length - 1}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 text-sm font-black text-black transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-45"
-        >
-          Next
-          <ChevronRight className="h-4 w-4" />
-        </button>
       </div>
     </div>
   );

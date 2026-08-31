@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import { Check, LockKeyhole } from "lucide-react";
+import posthog from "posthog-js";
 
 export default function PricingCard({
   title,
@@ -22,6 +23,13 @@ export default function PricingCard({
 
     try {
       setLoading(true);
+      posthog.capture("checkout_started", {
+        plan,
+        exam_track: examTrack,
+        duration,
+        price,
+        discount_percent: discount,
+      });
 
       const order = await createOrder(plan, examTrack);
 

@@ -20,14 +20,18 @@ function Axis({ xLabel, yLabel }) {
 
 function DiagramFrame({ title, children }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white/70 p-3 dark:border-stone-700 dark:bg-stone-950/30">
-      <div className="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-stone-400">
-        {title}
+    <div className="rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20">
+      {title && (
+        <div className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400">
+          {title}
+        </div>
+      )}
+      <div className="flex justify-center">
+        <svg viewBox="0 0 220 190" role="img" aria-label={title || "diagram"} className="h-auto w-full max-w-[260px] sm:max-w-[300px]">
+          <rect x="1" y="1" width="218" height="188" rx="8" className="fill-transparent stroke-slate-100 dark:stroke-stone-800/60" />
+          {children}
+        </svg>
       </div>
-      <svg viewBox="0 0 220 190" role="img" aria-label={title} className="h-auto w-full">
-        <rect x="1" y="1" width="218" height="188" rx="12" className="fill-transparent stroke-slate-100 dark:stroke-stone-800" />
-        {children}
-      </svg>
     </div>
   );
 }
@@ -1962,6 +1966,1546 @@ function MathPedalTriangleDiagram() {
   );
 }
 
+function ChemMoleYMapDiagram() {
+  return (
+    <DiagramFrame title="mole conversion y-map">
+      <DiagramDefs />
+      <circle cx="110" cy="94" r="28" className="fill-amber-100 stroke-slate-700 dark:fill-amber-500/10 dark:stroke-stone-200" strokeWidth="2.5" />
+      <text x="95" y="99" className="fill-slate-700 text-[13px] font-bold dark:fill-stone-200">Mole</text>
+      <rect x="24" y="36" width="58" height="25" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="35" y="53" className="fill-slate-700 text-[12px] dark:fill-stone-200">Number</text>
+      <rect x="140" y="36" width="58" height="25" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="149" y="53" className="fill-slate-700 text-[12px] dark:fill-stone-200">STP vol.</text>
+      <rect x="82" y="150" width="56" height="25" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="96" y="167" className="fill-slate-700 text-[12px] dark:fill-stone-200">Mass</text>
+      <Arrow x1="84" y1="58" x2="91" y2="73" label="÷ NA" labelX="48" labelY="80" />
+      <Arrow x1="94" y1="70" x2="82" y2="56" label="x NA" labelX="74" labelY="43" />
+      <Arrow x1="136" y1="72" x2="152" y2="58" label="x 22.4 L" labelX="140" labelY="78" />
+      <Arrow x1="146" y1="58" x2="130" y2="73" label="÷ 22.4 L" labelX="130" labelY="37" />
+      <Arrow x1="108" y1="123" x2="108" y2="149" label="x mol. wt." labelX="116" labelY="139" />
+      <Arrow x1="116" y1="149" x2="116" y2="123" label="÷ mol. wt." labelX="38" labelY="139" />
+    </DiagramFrame>
+  );
+}
+
+function ChemMoleAnalysisDiagram() {
+  return (
+    <DiagramFrame title="mole-mole analysis">
+      <DiagramDefs />
+      <rect x="13" y="78" width="42" height="24" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="22" y="94" className="fill-slate-700 text-[12px] dark:fill-stone-200">Mass</text>
+      <rect x="83" y="78" width="42" height="24" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="94" y="94" className="fill-slate-700 text-[12px] dark:fill-stone-200">Mole</text>
+      <rect x="142" y="62" width="62" height="50" rx="2" className="fill-amber-100/70 stroke-slate-700 dark:fill-amber-500/10 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="151" y="81" className="fill-slate-700 text-[11px] dark:fill-stone-200">Mole-mole</text>
+      <text x="153" y="96" className="fill-slate-700 text-[11px] dark:fill-stone-200">equation</text>
+      <Arrow x1="55" y1="90" x2="83" y2="90" label="÷ wt." labelX="57" labelY="82" />
+      <Arrow x1="125" y1="90" x2="142" y2="90" />
+      <Arrow x1="172" y1="112" x2="116" y2="144" label="x wt." labelX="128" labelY="134" />
+      <rect x="90" y="145" width="45" height="23" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="100" y="161" className="fill-slate-700 text-[12px] dark:fill-stone-200">Mass</text>
+      <Arrow x1="202" y1="92" x2="202" y2="140" label="x 22.4 L" labelX="143" labelY="141" />
+      <rect x="158" y="144" width="52" height="24" rx="2" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <text x="166" y="160" className="fill-slate-700 text-[12px] dark:fill-stone-200">STP vol.</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemGasLawsDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-3">
+      <DiagramFrame title="Boyle">
+        <Axis xLabel="P" yLabel="V" />
+        <path d="M48 54 C72 76 102 120 178 154" fill="none" className="stroke-amber-500" strokeWidth="3" />
+      </DiagramFrame>
+      <DiagramFrame title="Charles">
+        <Axis xLabel="T" yLabel="V" />
+        <line x1="46" y1="148" x2="178" y2="50" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
+      </DiagramFrame>
+      <DiagramFrame title="Gay-Lussac">
+        <Axis xLabel="T" yLabel="P" />
+        <line x1="46" y1="148" x2="178" y2="50" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
+      </DiagramFrame>
+    </div>
+  );
+}
+
+function ChemMolecularSpeedsDiagram() {
+  return (
+    <DiagramFrame title="molecular speed comparison">
+      <Axis xLabel="speed" yLabel="fraction" />
+      <path d="M42 158 C70 132 84 82 110 74 C140 65 164 104 188 146" fill="none" className="stroke-amber-500" strokeWidth="3" />
+      <line x1="96" y1="74" x2="96" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <line x1="118" y1="78" x2="118" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <line x1="146" y1="100" x2="146" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <text x="72" y="181" className="fill-slate-700 text-[11px] dark:fill-stone-200">MPS</text>
+      <text x="108" y="181" className="fill-slate-700 text-[11px] dark:fill-stone-200">avg</text>
+      <text x="136" y="181" className="fill-slate-700 text-[11px] dark:fill-stone-200">rms</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemGalvanicCellDiagram() {
+  return (
+    <DiagramFrame title="galvanic cell concept">
+      <DiagramDefs />
+      <rect x="28" y="76" width="58" height="76" rx="5" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <rect x="134" y="76" width="58" height="76" rx="5" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <line x1="56" y1="58" x2="56" y2="130" className="stroke-amber-500" strokeWidth="5" />
+      <line x1="164" y1="58" x2="164" y2="130" className="stroke-amber-500" strokeWidth="5" />
+      <path d="M56 58 L56 42 L164 42 L164 58" fill="none" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
+      <Arrow x1="92" y1="42" x2="128" y2="42" label="e-" labelX="105" labelY="34" />
+      <path d="M72 91 C95 68 125 68 148 91" fill="none" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" strokeWidth="2" />
+      <text x="38" y="166" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">anode</text>
+      <text x="146" y="166" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">cathode</text>
+      <text x="38" y="96" className="fill-slate-700 text-[11px] dark:fill-stone-200">low R.P.</text>
+      <text x="144" y="96" className="fill-slate-700 text-[11px] dark:fill-stone-200">high R.P.</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemConcentrationCellDiagram() {
+  return (
+    <DiagramFrame title="concentration cell">
+      <DiagramDefs />
+      <rect x="28" y="78" width="60" height="74" rx="5" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <rect x="132" y="78" width="60" height="74" rx="5" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      <line x1="58" y1="58" x2="58" y2="130" className="stroke-amber-500" strokeWidth="5" />
+      <line x1="162" y1="58" x2="162" y2="130" className="stroke-amber-500" strokeWidth="5" />
+      <path d="M58 58 L58 43 L162 43 L162 58" fill="none" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
+      <Arrow x1="94" y1="43" x2="126" y2="43" label="E" labelX="106" labelY="35" />
+      <path d="M88 114 C101 98 119 98 132 114" fill="none" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" strokeWidth="2" />
+      <text x="42" y="166" className="fill-slate-700 text-[12px] dark:fill-stone-200">C1</text>
+      <text x="148" y="166" className="fill-slate-700 text-[12px] dark:fill-stone-200">C2</text>
+      <text x="78" y="28" className="fill-slate-700 text-[12px] dark:fill-stone-200">same electrodes</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemConductivityCellDiagram() {
+  return (
+    <DiagramFrame title="conductivity cell">
+      <DiagramDefs />
+      <rect x="44" y="58" width="132" height="92" rx="7" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
+      <line x1="82" y1="42" x2="82" y2="138" className="stroke-amber-500" strokeWidth="5" />
+      <line x1="138" y1="42" x2="138" y2="138" className="stroke-amber-500" strokeWidth="5" />
+      <line x1="82" y1="138" x2="138" y2="138" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" strokeWidth="2" />
+      <Arrow x1="82" y1="160" x2="138" y2="160" label="a" labelX="108" labelY="176" />
+      <Arrow x1="154" y1="42" x2="154" y2="138" label="l" labelX="163" labelY="93" />
+      <text x="66" y="32" className="fill-slate-700 text-[12px] dark:fill-stone-200">electrodes</text>
+      <text x="70" y="106" className="fill-slate-700 text-[12px] dark:fill-stone-200">solution</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemVapourPressureIdealDiagram() {
+  return (
+    <DiagramFrame title="vapour pressure composition">
+      <Axis xLabel="XB ->" yLabel="P" />
+      <line x1="44" y1="58" x2="178" y2="132" className="stroke-amber-500" strokeWidth="3" />
+      <line x1="44" y1="58" x2="178" y2="58" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <line x1="44" y1="132" x2="178" y2="132" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <text x="8" y="62" className="fill-slate-700 text-[11px] dark:fill-stone-200">PA0</text>
+      <text x="8" y="136" className="fill-slate-700 text-[11px] dark:fill-stone-200">PB0</text>
+      <text x="94" y="92" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">PT</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemRaoultDeviationDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <DiagramFrame title="positive deviation">
+        <Axis xLabel="XB" yLabel="P" />
+        <line x1="44" y1="132" x2="178" y2="58" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" strokeWidth="2" />
+        <path d="M44 132 C84 90 122 58 178 58" fill="none" className="stroke-amber-500" strokeWidth="3" />
+        <text x="78" y="72" className="fill-amber-600 text-[12px] dark:fill-amber-300">Pexp &gt; ideal</text>
+      </DiagramFrame>
+      <DiagramFrame title="negative deviation">
+        <Axis xLabel="XB" yLabel="P" />
+        <line x1="44" y1="132" x2="178" y2="58" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" strokeWidth="2" />
+        <path d="M44 132 C88 146 132 96 178 58" fill="none" className="stroke-amber-500" strokeWidth="3" />
+        <text x="72" y="146" className="fill-amber-600 text-[12px] dark:fill-amber-300">Pexp &lt; ideal</text>
+      </DiagramFrame>
+    </div>
+  );
+}
+
+function CubeFrame({ title, children }) {
+  return (
+    <DiagramFrame title={title}>
+      <path d="M66 72 H140 V146 H66 Z" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+      <path d="M84 50 H158 V124 H84 Z" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+      <path d="M66 72 L84 50 M140 72 L158 50 M140 146 L158 124 M66 146 L84 124" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+      {[66, 140, 66, 140, 84, 158, 84, 158].map((x, i) => {
+        const y = [72, 72, 146, 146, 50, 50, 124, 124][i];
+        return <circle key={`${x}-${y}`} cx={x} cy={y} r="4" className="fill-amber-500" />;
+      })}
+      {children}
+    </DiagramFrame>
+  );
+}
+
+function ChemCubicCellsDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-3">
+      <CubeFrame title="SC">
+        <text x="96" y="168" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">Z = 1</text>
+      </CubeFrame>
+      <CubeFrame title="BCC">
+        <circle cx="112" cy="98" r="6" className="fill-amber-500" />
+        <text x="94" y="168" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">Z = 2</text>
+      </CubeFrame>
+      <CubeFrame title="FCC">
+        {[
+          [103, 72],
+          [66, 109],
+          [140, 109],
+          [103, 146],
+          [121, 50],
+          [84, 87],
+          [158, 87],
+          [121, 124],
+        ].map(([x, y]) => (
+          <circle key={`${x}-${y}`} cx={x} cy={y} r="5" className="fill-amber-500" />
+        ))}
+        <text x="94" y="168" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">Z = 4</text>
+      </CubeFrame>
+    </div>
+  );
+}
+
+function ChemRateCurveDiagram() {
+  return (
+    <DiagramFrame title="concentration-time rate">
+      <Axis xLabel="t" yLabel="[R]" />
+      <path d="M44 54 C72 74 98 104 128 128 C148 144 166 152 184 156" fill="none" className="stroke-amber-500" strokeWidth="3" />
+      <line x1="82" y1="86" x2="142" y2="138" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+      <text x="118" y="112" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">slope</text>
+      <line x1="66" y1="76" x2="66" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <line x1="142" y1="138" x2="142" y2="166" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+    </DiagramFrame>
+  );
+}
+
+function ChemFirstOrderPlotsDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <DiagramFrame title="t vs log C0/Ct">
+        <Axis xLabel="log C0/Ct" yLabel="t" />
+        <line x1="46" y1="150" x2="178" y2="52" className="stroke-amber-500" strokeWidth="3" />
+        <text x="86" y="112" className="fill-amber-600 text-[12px] dark:fill-amber-300">slope 2.303/k</text>
+      </DiagramFrame>
+      <DiagramFrame title="t vs log Ct">
+        <Axis xLabel="log Ct" yLabel="t" />
+        <line x1="46" y1="52" x2="178" y2="150" className="stroke-amber-500" strokeWidth="3" />
+        <text x="78" y="104" className="fill-amber-600 text-[12px] dark:fill-amber-300">slope -2.303/k</text>
+      </DiagramFrame>
+    </div>
+  );
+}
+
+function ChemArrheniusPlotDiagram() {
+  return (
+    <DiagramFrame title="Arrhenius plot">
+      <Axis xLabel="1/T" yLabel="ln k" />
+      <line x1="48" y1="56" x2="178" y2="148" className="stroke-amber-500" strokeWidth="3" />
+      <text x="78" y="98" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">slope = -Ea/R</text>
+      <text x="42" y="48" className="fill-slate-700 text-[12px] dark:fill-stone-200">ln A</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemDiagonalRelationshipDiagram() {
+  return (
+    <DiagramFrame title="diagonal relationship">
+      <DiagramDefs />
+      <text x="28" y="48" className="fill-slate-700 text-[12px] dark:fill-stone-200">2nd period</text>
+      <text x="28" y="132" className="fill-slate-700 text-[12px] dark:fill-stone-200">3rd period</text>
+      {[
+        ["Li", 92, 46],
+        ["Be", 126, 46],
+        ["B", 160, 46],
+        ["Na", 92, 132],
+        ["Mg", 126, 132],
+        ["Al", 160, 132],
+        ["Si", 194, 132],
+      ].map(([label, x, y]) => (
+        <text key={label} x={x} y={y} className="fill-slate-800 text-[14px] font-bold dark:fill-stone-100">{label}</text>
+      ))}
+      <Arrow x1="101" y1="56" x2="128" y2="116" />
+      <Arrow x1="134" y1="56" x2="162" y2="116" />
+      <Arrow x1="168" y1="56" x2="194" y2="116" />
+    </DiagramFrame>
+  );
+}
+
+function ChemPeriodicTrendsDiagram() {
+  return (
+    <DiagramFrame title="periodic trends">
+      <DiagramDefs />
+      <g opacity="0.95">
+        {[0, 1, 2, 3, 4, 5].map((row) =>
+          [0, 1, 2, 3, 4, 5].map((col) => (
+            <rect
+              key={`${row}-${col}`}
+              x={56 + col * 17}
+              y={56 + row * 17}
+              width="16"
+              height="16"
+              className="fill-transparent stroke-slate-500 dark:stroke-stone-500"
+            />
+          )),
+        )}
+      </g>
+      <Arrow x1="50" y1="42" x2="168" y2="42" label="IE, EA, EN" labelX="78" labelY="32" />
+      <Arrow x1="50" y1="154" x2="50" y2="54" label="IE, EA" labelX="12" labelY="96" />
+      <Arrow x1="168" y1="154" x2="58" y2="154" label="atomic radius" labelX="78" labelY="176" />
+      <Arrow x1="86" y1="138" x2="152" y2="106" label="nonmetallic" labelX="112" labelY="98" />
+      <Arrow x1="144" y1="132" x2="80" y2="146" label="metallic" labelX="103" labelY="126" />
+    </DiagramFrame>
+  );
+}
+
+function ChemFajanPolarizationDiagram() {
+  return (
+    <DiagramFrame title="anion polarization">
+      <DiagramDefs />
+      <circle cx="76" cy="96" r="9" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+      <text x="50" y="88" className="fill-slate-700 text-[12px] dark:fill-stone-200">cation</text>
+      <ellipse cx="142" cy="96" rx="36" ry="25" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+      <ellipse cx="132" cy="96" rx="30" ry="23" className="fill-transparent stroke-slate-400 dark:stroke-stone-500" strokeDasharray="3 3" />
+      <text x="166" y="101" className="fill-slate-700 text-[12px] dark:fill-stone-200">anion</text>
+      <Arrow x1="86" y1="96" x2="118" y2="96" label="polarisation" labelX="86" labelY="78" />
+    </DiagramFrame>
+  );
+}
+
+function ChemOverlapSigmaPiDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <DiagramFrame title="sigma overlap">
+        <DiagramDefs />
+        <ellipse cx="72" cy="96" rx="26" ry="18" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <ellipse cx="126" cy="96" rx="26" ry="18" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <line x1="42" y1="96" x2="178" y2="96" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+        <text x="76" y="132" className="fill-slate-700 text-[12px] dark:fill-stone-200">head-on axis</text>
+      </DiagramFrame>
+      <DiagramFrame title="pi overlap">
+        <ellipse cx="86" cy="68" rx="18" ry="31" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <ellipse cx="132" cy="68" rx="18" ry="31" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <ellipse cx="86" cy="126" rx="18" ry="31" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <ellipse cx="132" cy="126" rx="18" ry="31" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
+        <line x1="42" y1="96" x2="178" y2="96" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
+        <text x="66" y="168" className="fill-slate-700 text-[12px] dark:fill-stone-200">parallel p-orbitals</text>
+      </DiagramFrame>
+    </div>
+  );
+}
+
+function ChemVseprShapesDiagram() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-3">
+      <DiagramFrame title="linear">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="54" y2="96" />
+        <Arrow x1="110" y1="96" x2="166" y2="96" />
+        <text x="84" y="130" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 2</text>
+      </DiagramFrame>
+      <DiagramFrame title="trigonal planar">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="110" y2="42" />
+        <Arrow x1="110" y1="96" x2="60" y2="132" />
+        <Arrow x1="110" y1="96" x2="160" y2="132" />
+        <text x="84" y="164" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 3</text>
+      </DiagramFrame>
+      <DiagramFrame title="tetrahedral">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="78" y2="55" />
+        <Arrow x1="110" y1="96" x2="154" y2="64" />
+        <Arrow x1="110" y1="96" x2="72" y2="132" />
+        <Arrow x1="110" y1="96" x2="152" y2="140" dashed />
+        <text x="84" y="166" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 4</text>
+      </DiagramFrame>
+      <DiagramFrame title="trigonal bipyramidal">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="110" y2="38" />
+        <Arrow x1="110" y1="96" x2="110" y2="154" />
+        <Arrow x1="110" y1="96" x2="58" y2="112" />
+        <Arrow x1="110" y1="96" x2="162" y2="112" />
+        <Arrow x1="110" y1="96" x2="110" y2="58" dashed />
+        <text x="84" y="176" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 5</text>
+      </DiagramFrame>
+      <DiagramFrame title="octahedral">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="110" y2="38" />
+        <Arrow x1="110" y1="96" x2="110" y2="154" />
+        <Arrow x1="110" y1="96" x2="52" y2="96" />
+        <Arrow x1="110" y1="96" x2="168" y2="96" />
+        <Arrow x1="110" y1="96" x2="72" y2="132" dashed />
+        <Arrow x1="110" y1="96" x2="148" y2="60" dashed />
+        <text x="84" y="176" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 6</text>
+      </DiagramFrame>
+      <DiagramFrame title="pentagonal bipyramidal">
+        <DiagramDefs />
+        <circle cx="110" cy="96" r="8" className="fill-amber-500" />
+        <Arrow x1="110" y1="96" x2="110" y2="36" />
+        <Arrow x1="110" y1="96" x2="110" y2="156" />
+        {[18, 90, 162, 234, 306].map((angle) => {
+          const rad = (angle * Math.PI) / 180;
+          return <Arrow key={angle} x1="110" y1="96" x2={110 + Math.cos(rad) * 48} y2={96 + Math.sin(rad) * 31} />;
+        })}
+        <text x="84" y="176" className="fill-slate-700 text-[12px] dark:fill-stone-200">SN 7</text>
+      </DiagramFrame>
+    </div>
+  );
+}
+
+function ChemMoEnergyDiagram() {
+  const levels = [
+    ["sigma 1s", 158],
+    ["sigma* 1s", 142],
+    ["sigma 2s", 124],
+    ["sigma* 2s", 106],
+    ["sigma 2pz", 88],
+    ["pi 2px = pi 2py", 72],
+    ["pi* 2px = pi* 2py", 56],
+    ["sigma* 2pz", 40],
+  ];
+  return (
+    <DiagramFrame title="MO order for O2 and F2">
+      <Axis xLabel="" yLabel="E" />
+      {levels.map(([label, y]) => (
+        <g key={label}>
+          <line x1="70" y1={y} x2="132" y2={y} className="stroke-amber-500" strokeWidth="2.5" />
+          <text x="138" y={y + 4} className="fill-slate-700 text-[10px] dark:fill-stone-200">{label}</text>
+        </g>
+      ))}
+    </DiagramFrame>
+  );
+}
+
+function ChemDipoleResultantDiagram() {
+  return (
+    <DiagramFrame title="resultant dipole">
+      <DiagramDefs />
+      <Arrow x1="66" y1="132" x2="152" y2="132" label="Q" labelX="106" labelY="150" />
+      <Arrow x1="66" y1="132" x2="128" y2="70" label="P" labelX="102" labelY="82" />
+      <Arrow x1="66" y1="132" x2="166" y2="80" label="R" labelX="144" labelY="94" dashed />
+      <path d="M88 132 A34 34 0 0 1 101 103" fill="none" className="stroke-slate-500 dark:stroke-stone-500" />
+      <text x="98" y="124" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemCoordinationGeometriesDiagram() {
+  const ligand = "fill-amber-500 stroke-amber-700 dark:fill-yellow-300 dark:stroke-yellow-100";
+  const metal = "fill-slate-900 stroke-slate-900 dark:fill-stone-100 dark:stroke-stone-100";
+  const bond = "stroke-slate-500 dark:stroke-stone-400";
+  return (
+    <DiagramFrame title="coordination geometries">
+      <g transform="translate(20 -25) scale(0.82)">
+      <g transform="translate(22 44)">
+        <line x1="12" y1="24" x2="74" y2="24" className={bond} strokeWidth="2" />
+        <circle cx="43" cy="24" r="8" className={metal} />
+        <circle cx="12" cy="24" r="5" className={ligand} />
+        <circle cx="74" cy="24" r="5" className={ligand} />
+        <text x="15" y="62" className="fill-slate-700 text-[12px] dark:fill-stone-200">CN=2 linear</text>
+      </g>
+      <g transform="translate(128 34)">
+        <line x1="42" y1="40" x2="42" y2="8" className={bond} strokeWidth="2" />
+        <line x1="42" y1="40" x2="14" y2="58" className={bond} strokeWidth="2" />
+        <line x1="42" y1="40" x2="72" y2="58" className={bond} strokeWidth="2" />
+        <line x1="42" y1="40" x2="72" y2="22" className={bond} strokeWidth="2" strokeDasharray="4 4" />
+        <circle cx="42" cy="40" r="8" className={metal} />
+        <circle cx="42" cy="8" r="5" className={ligand} />
+        <circle cx="14" cy="58" r="5" className={ligand} />
+        <circle cx="72" cy="58" r="5" className={ligand} />
+        <circle cx="72" cy="22" r="5" className={ligand} />
+        <text x="0" y="86" className="fill-slate-700 text-[12px] dark:fill-stone-200">CN=4 tetrahedral</text>
+      </g>
+      <g transform="translate(24 142)">
+        <line x1="42" y1="10" x2="42" y2="74" className={bond} strokeWidth="2" />
+        <line x1="10" y1="42" x2="74" y2="42" className={bond} strokeWidth="2" />
+        <circle cx="42" cy="42" r="8" className={metal} />
+        <circle cx="42" cy="10" r="5" className={ligand} />
+        <circle cx="42" cy="74" r="5" className={ligand} />
+        <circle cx="10" cy="42" r="5" className={ligand} />
+        <circle cx="74" cy="42" r="5" className={ligand} />
+        <text x="0" y="100" className="fill-slate-700 text-[12px] dark:fill-stone-200">CN=4 square planar</text>
+      </g>
+      <g transform="translate(146 132)">
+        <line x1="42" y1="42" x2="42" y2="4" className={bond} strokeWidth="2" />
+        <line x1="42" y1="42" x2="42" y2="80" className={bond} strokeWidth="2" />
+        <line x1="10" y1="42" x2="74" y2="42" className={bond} strokeWidth="2" />
+        <line x1="22" y1="64" x2="62" y2="20" className={bond} strokeWidth="2" />
+        <circle cx="42" cy="42" r="8" className={metal} />
+        {[ [42,4], [42,80], [10,42], [74,42], [22,64], [62,20] ].map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" className={ligand} />
+        ))}
+        <text x="8" y="106" className="fill-slate-700 text-[12px] dark:fill-stone-200">CN=6 octahedral</text>
+      </g>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemCisTransSquarePlanarDiagram() {
+  const bond = "stroke-slate-500 dark:stroke-stone-400";
+  const metal = "fill-slate-900 dark:fill-stone-100";
+  const ligandA = "fill-sky-500 dark:fill-sky-300";
+  const ligandB = "fill-amber-500 dark:fill-yellow-300";
+  const renderSquarePlanar = (x, title, trans = false) => (
+    <g transform={`translate(${x} 70)`}>
+      <line x1="50" y1="10" x2="50" y2="90" className={bond} strokeWidth="2" />
+      <line x1="10" y1="50" x2="90" y2="50" className={bond} strokeWidth="2" />
+      <circle cx="50" cy="50" r="8" className={metal} />
+      <text x="45" y="54" className="fill-white text-[10px] dark:fill-slate-900">Pt</text>
+      {trans ? (
+        <>
+          <circle cx="50" cy="10" r="7" className={ligandB} />
+          <circle cx="50" cy="90" r="7" className={ligandB} />
+          <circle cx="10" cy="50" r="7" className={ligandA} />
+          <circle cx="90" cy="50" r="7" className={ligandA} />
+          <text x="43" y="6" className="fill-slate-700 text-[11px] dark:fill-stone-200">Cl</text>
+          <text x="43" y="108" className="fill-slate-700 text-[11px] dark:fill-stone-200">Cl</text>
+        </>
+      ) : (
+        <>
+          <circle cx="50" cy="10" r="7" className={ligandB} />
+          <circle cx="90" cy="50" r="7" className={ligandB} />
+          <circle cx="10" cy="50" r="7" className={ligandA} />
+          <circle cx="50" cy="90" r="7" className={ligandA} />
+          <text x="43" y="6" className="fill-slate-700 text-[11px] dark:fill-stone-200">Cl</text>
+          <text x="94" y="54" className="fill-slate-700 text-[11px] dark:fill-stone-200">Cl</text>
+        </>
+      )}
+      <text x="18" y="126" className="fill-slate-700 text-[13px] font-semibold dark:fill-stone-200">{title}</text>
+    </g>
+  );
+  return (
+    <DiagramFrame title="square planar cis/trans">
+      <g transform="translate(0 -22) scale(0.95)">
+        {renderSquarePlanar(30, "cis")}
+        {renderSquarePlanar(150, "trans", true)}
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemOpticalIsomersDiagram() {
+  const bond = "stroke-slate-500 dark:stroke-stone-400";
+  const metal = "fill-slate-900 dark:fill-stone-100";
+  const ligand = "fill-amber-500 dark:fill-yellow-300";
+  const renderIsomer = (x, label, flip = 1) => (
+    <g transform={`translate(${x} 60) scale(${flip} 1)`}>
+      <line x1="0" y1="70" x2="70" y2="20" className={bond} strokeWidth="2" />
+      <line x1="0" y1="20" x2="70" y2="70" className={bond} strokeWidth="2" />
+      <line x1="35" y1="5" x2="35" y2="85" className={bond} strokeWidth="2" />
+      <circle cx="35" cy="45" r="9" className={metal} />
+      {[ [0,20], [0,70], [35,5], [35,85], [70,20], [70,70] ].map(([cx, cy]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" className={ligand} />
+      ))}
+      <text x="12" y="116" transform={`scale(${flip} 1)`} className="fill-slate-700 text-[13px] font-semibold dark:fill-stone-200">{label}</text>
+    </g>
+  );
+  return (
+    <DiagramFrame title="optical pair">
+      <g transform="translate(14 -10) scale(0.84)">
+        {renderIsomer(48, "d-form")}
+        <line x1="136" y1="48" x2="136" y2="190" className="stroke-slate-300 dark:stroke-stone-600" strokeWidth="2" strokeDasharray="5 5" />
+        {renderIsomer(226, "l-form", -1)}
+        <text x="92" y="220" className="fill-slate-700 text-[12px] dark:fill-stone-200">mirror image pair: [Co(en)3]3+</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemCftSplittingDiagram() {
+  const level = "stroke-amber-500 dark:stroke-yellow-300";
+  return (
+    <DiagramFrame title="crystal field splitting">
+      <g transform="translate(18 0) scale(0.68)">
+      <text x="42" y="28" className="fill-slate-700 text-[13px] font-semibold dark:fill-stone-200">octahedral</text>
+      <line x1="42" y1="118" x2="116" y2="118" className="stroke-slate-400 dark:stroke-stone-500" strokeWidth="2" strokeDasharray="4 4" />
+      <line x1="50" y1="74" x2="82" y2="74" className={level} strokeWidth="3" />
+      <line x1="86" y1="74" x2="118" y2="74" className={level} strokeWidth="3" />
+      <text x="124" y="78" className="fill-slate-700 text-[12px] dark:fill-stone-200">eg +0.6Δo</text>
+      <line x1="50" y1="152" x2="76" y2="152" className={level} strokeWidth="3" />
+      <line x1="80" y1="152" x2="106" y2="152" className={level} strokeWidth="3" />
+      <line x1="110" y1="152" x2="136" y2="152" className={level} strokeWidth="3" />
+      <text x="142" y="156" className="fill-slate-700 text-[12px] dark:fill-stone-200">t2g -0.4Δo</text>
+      <text x="44" y="124" className="fill-slate-500 text-[11px] dark:fill-stone-400">barycenter</text>
+      <text x="40" y="220" className="fill-slate-700 text-[13px] font-semibold dark:fill-stone-200">tetrahedral: Δt = 4/9 Δo</text>
+      <line x1="42" y1="244" x2="116" y2="244" className="stroke-slate-400 dark:stroke-stone-500" strokeWidth="2" strokeDasharray="4 4" />
+      <line x1="50" y1="214" x2="76" y2="214" className={level} strokeWidth="3" />
+      <line x1="80" y1="214" x2="106" y2="214" className={level} strokeWidth="3" />
+      <line x1="110" y1="214" x2="136" y2="214" className={level} strokeWidth="3" />
+      <text x="142" y="218" className="fill-slate-700 text-[12px] dark:fill-stone-200">t2g +0.4Δt</text>
+      <line x1="50" y1="270" x2="82" y2="270" className={level} strokeWidth="3" />
+      <line x1="86" y1="270" x2="118" y2="270" className={level} strokeWidth="3" />
+      <text x="124" y="274" className="fill-slate-700 text-[12px] dark:fill-stone-200">eg -0.6Δt</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemFrothFlotationDiagram() {
+  return (
+    <DiagramFrame title="froth flotation">
+      <g transform="translate(22 4) scale(0.78)">
+      <rect x="58" y="72" width="156" height="132" rx="8" fill="none" className="stroke-slate-600 dark:stroke-stone-300" strokeWidth="3" />
+      <path d="M62 112 C90 96, 116 122, 146 106 S194 118, 210 102" fill="none" className="stroke-sky-500 dark:stroke-sky-300" strokeWidth="3" />
+      <path d="M66 124 L206 124 L206 200 L66 200 Z" className="fill-sky-100/60 dark:fill-sky-500/20" />
+      {[82, 104, 126, 150, 176, 196].map((cx, i) => (
+        <circle key={cx} cx={cx} cy={94 - (i % 2) * 10} r="8" className="fill-white stroke-sky-400 dark:fill-stone-900 dark:stroke-sky-300" strokeWidth="2" />
+      ))}
+      <Arrow x1="136" y1="200" x2="136" y2="146" label="air" labelX="146" labelY="178" />
+      <circle cx="96" cy="172" r="8" className="fill-slate-700 dark:fill-stone-300" />
+      <circle cx="168" cy="164" r="8" className="fill-slate-700 dark:fill-stone-300" />
+      <text x="70" y="224" className="fill-slate-700 text-[12px] dark:fill-stone-200">sulphide ore + pine oil froth</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemElectrolyticRefiningDiagram() {
+  return (
+    <DiagramFrame title="electrolytic refining">
+      <g transform="translate(22 2) scale(0.78)">
+      <rect x="48" y="76" width="176" height="130" rx="8" fill="none" className="stroke-slate-600 dark:stroke-stone-300" strokeWidth="3" />
+      <rect x="82" y="54" width="18" height="112" rx="3" className="fill-amber-700 dark:fill-yellow-500" />
+      <rect x="174" y="54" width="18" height="112" rx="3" className="fill-amber-400 dark:fill-yellow-200" />
+      <path d="M52 118 L220 118 L220 202 L52 202 Z" className="fill-sky-100/60 dark:fill-sky-500/20" />
+      <text x="62" y="44" className="fill-slate-700 text-[12px] dark:fill-stone-200">impure anode</text>
+      <text x="156" y="44" className="fill-slate-700 text-[12px] dark:fill-stone-200">pure cathode</text>
+      <Arrow x1="110" y1="100" x2="164" y2="100" label="M ions" labelX="122" labelY="90" />
+      <text x="88" y="228" className="fill-slate-700 text-[12px] dark:fill-stone-200">Cu, Ni, Al in source list</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemZoneRefiningDiagram() {
+  return (
+    <DiagramFrame title="zone refining">
+      <g transform="translate(18 0) scale(0.82)">
+      <rect x="42" y="116" width="188" height="34" rx="17" className="fill-slate-200 stroke-slate-500 dark:fill-stone-800 dark:stroke-stone-300" strokeWidth="2" />
+      <rect x="104" y="108" width="34" height="50" rx="10" className="fill-amber-400/80 stroke-amber-700 dark:fill-yellow-300/80 dark:stroke-yellow-100" strokeWidth="2" />
+      <Arrow x1="86" y1="184" x2="166" y2="184" label="moving molten zone" labelX="80" labelY="206" />
+      <text x="44" y="88" className="fill-slate-700 text-[12px] dark:fill-stone-200">impure solid</text>
+      <text x="166" y="88" className="fill-slate-700 text-[12px] dark:fill-stone-200">purified solid</text>
+      <text x="60" y="232" className="fill-slate-700 text-[12px] dark:fill-stone-200">used for high purity Si and Ge</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemPBlockTrendsDiagram() {
+  return (
+    <DiagramFrame title="p-block trends">
+      <DiagramDefs />
+      <rect x="56" y="42" width="108" height="92" rx="2" className="fill-slate-100 stroke-slate-600 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+      {["B", "C", "N", "O", "F", "Ne", "Al", "Si", "P", "S", "Cl", "Ar", "Ga", "Ge", "As", "Se", "Br", "Kr", "In", "Sn", "Sb", "Te", "I", "Xe", "Tl", "Pb", "Bi", "Po", "At", "Rn"].map((el, index) => {
+        const col = index % 6;
+        const row = Math.floor(index / 6);
+        return (
+          <text key={el} x={65 + col * 17} y={59 + row * 17} className="fill-slate-700 text-[11px] dark:fill-stone-200">
+            {el}
+          </text>
+        );
+      })}
+      <Arrow x1="64" y1="28" x2="154" y2="28" label="EN, IE, oxidizing power" labelX="44" labelY="20" />
+      <Arrow x1="44" y1="46" x2="44" y2="130" label="" />
+      <text x="13" y="78" className="fill-slate-700 text-[10px] dark:fill-stone-200">radius</text>
+      <text x="6" y="92" className="fill-slate-700 text-[10px] dark:fill-stone-200">metallic</text>
+      <text x="11" y="106" className="fill-slate-700 text-[10px] dark:fill-stone-200">character</text>
+      <Arrow x1="166" y1="130" x2="166" y2="46" label="" />
+      <text x="174" y="76" className="fill-slate-700 text-[10px] dark:fill-stone-200">EN, IE</text>
+      <text x="174" y="90" className="fill-slate-700 text-[10px] dark:fill-stone-200">oxidizing</text>
+      <text x="174" y="104" className="fill-slate-700 text-[10px] dark:fill-stone-200">power</text>
+      <Arrow x1="154" y1="152" x2="64" y2="152" label="radius, metallic character" labelX="43" labelY="171" />
+    </DiagramFrame>
+  );
+}
+
+function ChemSilicateTetrahedraDiagram() {
+  return (
+    <DiagramFrame title="silicate units">
+      <g transform="translate(10 4)">
+        <polygon points="54,34 22,98 86,98" fill="none" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+        <line x1="54" y1="34" x2="54" y2="122" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="2" />
+        <circle cx="54" cy="72" r="5" className="fill-slate-900 dark:fill-stone-100" />
+        {[ [54,34], [22,98], [86,98], [54,122] ].map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="7" className="fill-amber-500 dark:fill-yellow-300" />
+        ))}
+        <text x="44" y="78" className="fill-white text-[9px] dark:fill-slate-900">Si</text>
+        <text x="15" y="148" className="fill-slate-700 text-[12px] dark:fill-stone-200">SiO4 tetrahedron</text>
+      </g>
+      <g transform="translate(118 16)">
+        <polygon points="36,34 6,94 66,94" fill="none" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+        <polygon points="86,34 56,94 116,94" fill="none" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+        <line x1="66" y1="94" x2="56" y2="94" className="stroke-slate-700 dark:stroke-stone-200" strokeWidth="2" />
+        {[ [36,34], [6,94], [66,94], [86,34], [116,94], [56,94] ].map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" className="fill-amber-500 dark:fill-yellow-300" />
+        ))}
+        <circle cx="36" cy="70" r="4" className="fill-slate-900 dark:fill-stone-100" />
+        <circle cx="86" cy="70" r="4" className="fill-slate-900 dark:fill-stone-100" />
+        <text x="18" y="136" className="fill-slate-700 text-[12px] dark:fill-stone-200">shared oxygen</text>
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemXef2LinearDiagram() {
+  return (
+    <DiagramFrame title="XeF2 linear">
+      <line x1="50" y1="96" x2="170" y2="96" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="3" />
+      <circle cx="50" cy="96" r="18" className="fill-amber-400 stroke-amber-700 dark:fill-yellow-300 dark:stroke-yellow-100" strokeWidth="2" />
+      <circle cx="110" cy="96" r="22" className="fill-slate-900 stroke-slate-900 dark:fill-stone-100 dark:stroke-stone-100" strokeWidth="2" />
+      <circle cx="170" cy="96" r="18" className="fill-amber-400 stroke-amber-700 dark:fill-yellow-300 dark:stroke-yellow-100" strokeWidth="2" />
+      <text x="45" y="101" className="fill-slate-900 text-[14px] font-bold">F</text>
+      <text x="100" y="102" className="fill-white text-[14px] font-bold dark:fill-slate-900">Xe</text>
+      <text x="165" y="101" className="fill-slate-900 text-[14px] font-bold">F</text>
+      <path d="M76 124 A52 52 0 0 0 144 124" fill="none" className="stroke-slate-400 dark:stroke-stone-500" strokeDasharray="4 4" />
+      <text x="90" y="150" className="fill-slate-700 text-[12px] dark:fill-stone-200">linear geometry</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemDblockDdTransitionDiagram() {
+  const level = "stroke-slate-700 dark:stroke-stone-200";
+  const orbital = "fill-slate-200 stroke-slate-500 dark:fill-stone-700 dark:stroke-stone-300";
+  return (
+    <DiagramFrame title="d-d transition">
+      <line x1="32" y1="62" x2="94" y2="62" className={level} strokeWidth="2" />
+      <circle cx="50" cy="46" r="16" className={orbital} />
+      <circle cx="78" cy="46" r="16" className={orbital} />
+      <text x="42" y="84" className="fill-slate-700 text-[10px] dark:fill-stone-200">eg</text>
+      <line x1="32" y1="128" x2="112" y2="128" className={level} strokeWidth="2" />
+      <circle cx="50" cy="112" r="15" className={orbital} />
+      <circle cx="78" cy="112" r="15" className={orbital} />
+      <circle cx="106" cy="112" r="15" className={orbital} />
+      <text x="40" y="150" className="fill-slate-700 text-[10px] dark:fill-stone-200">t2g</text>
+      <Arrow x1="136" y1="116" x2="136" y2="62" label="hν" labelX="146" labelY="90" />
+      <line x1="156" y1="62" x2="208" y2="62" className={level} strokeWidth="2" />
+      <circle cx="174" cy="46" r="16" className={orbital} />
+      <circle cx="202" cy="46" r="16" className={orbital} />
+      <text x="172" y="43" className="fill-slate-900 text-[14px] dark:fill-stone-100">↑</text>
+      <line x1="156" y1="128" x2="212" y2="128" className={level} strokeWidth="2" />
+      <circle cx="174" cy="112" r="15" className={orbital} />
+      <circle cx="202" cy="112" r="15" className={orbital} />
+      <text x="157" y="170" className="fill-slate-700 text-[12px] dark:fill-stone-200">absorbed colour</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemCationGroupFlowDiagram() {
+  return (
+    <DiagramFrame title="cation group sequence">
+      <DiagramDefs />
+      <g transform="translate(8 10) scale(0.92)">
+        {[
+          ["Original", 78, 10],
+          ["I", 18, 48],
+          ["II", 138, 48],
+          ["III", 18, 86],
+          ["IV", 138, 86],
+          ["V", 18, 124],
+          ["VI", 138, 124],
+        ].map(([label, x, y]) => (
+          <g key={label}>
+            <rect x={x} y={y} width="58" height="23" rx="4" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
+            <text x={x + 12} y={y + 16} className="fill-slate-700 text-[11px] font-semibold dark:fill-stone-200">{label}</text>
+          </g>
+        ))}
+        <Arrow x1="106" y1="34" x2="48" y2="48" label="dil. HCl" labelX="36" labelY="38" />
+        <Arrow x1="136" y1="34" x2="168" y2="48" label="filtrate" labelX="146" labelY="38" />
+        <Arrow x1="168" y1="71" x2="48" y2="86" label="H2S" labelX="96" labelY="78" />
+        <Arrow x1="48" y1="109" x2="168" y2="86" label="NH4OH" labelX="84" labelY="102" />
+        <Arrow x1="168" y1="109" x2="48" y2="124" label="(NH4)2CO3" labelX="74" labelY="124" />
+        <Arrow x1="76" y1="135" x2="138" y2="135" label="filtrate" labelX="96" labelY="153" />
+      </g>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicInductiveDiagram() {
+  return (
+    <DiagramFrame title="inductive effect">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[15px] font-semibold dark:fill-stone-100">
+        <text x="28" y="98">C4</text>
+        <text x="74" y="98">C3</text>
+        <text x="120" y="98">C2</text>
+        <text x="166" y="98">C1</text>
+        <text x="196" y="98">Cl</text>
+      </g>
+      <g className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2">
+        <line x1="54" y1="92" x2="72" y2="92" />
+        <line x1="100" y1="92" x2="118" y2="92" />
+        <line x1="146" y1="92" x2="164" y2="92" />
+        <line x1="190" y1="92" x2="196" y2="92" />
+      </g>
+      <Arrow x1="52" y1="75" x2="72" y2="75" />
+      <Arrow x1="98" y1="75" x2="118" y2="75" />
+      <Arrow x1="144" y1="75" x2="166" y2="75" />
+      <Arrow x1="184" y1="75" x2="200" y2="75" />
+      <text x="69" y="55" className="fill-amber-600 text-[11px] font-bold dark:fill-yellow-300">δδδ+</text>
+      <text x="116" y="55" className="fill-amber-600 text-[11px] font-bold dark:fill-yellow-300">δδ+</text>
+      <text x="164" y="55" className="fill-amber-600 text-[11px] font-bold dark:fill-yellow-300">δ+</text>
+      <text x="196" y="55" className="fill-sky-700 text-[11px] font-bold dark:fill-sky-300">δ-</text>
+      <text x="34" y="142" className="fill-slate-600 text-[12px] dark:fill-stone-300">electron withdrawal by -Cl through σ bonds</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicResonanceDiagram() {
+  return (
+    <DiagramFrame title="resonance">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[16px] font-semibold dark:fill-stone-100">
+        <text x="16" y="76">CH2=CH-CH=CH2</text>
+        <text x="44" y="132">CH2-CH=CH-CH2</text>
+      </g>
+      <path d="M74 52 C84 34 110 34 120 52" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <path d="M122 52 C132 34 154 34 164 52" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <Arrow x1="88" y1="94" x2="132" y2="94" />
+      <text x="34" y="116" className="fill-slate-600 text-[11px] dark:fill-stone-300">canonical forms contribute to hybrid</text>
+      <text x="40" y="134" className="fill-sky-700 text-[14px] font-bold dark:fill-sky-300">+</text>
+      <text x="174" y="134" className="fill-sky-700 text-[14px] font-bold dark:fill-sky-300">-</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicHyperconjugationDiagram() {
+  return (
+    <DiagramFrame title="hyperconjugation">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[16px] font-semibold dark:fill-stone-100">
+        <text x="22" y="82">H-C-CH=CH2</text>
+        <text x="92" y="132">CH2=CH-CH2</text>
+      </g>
+      <line x1="36" y1="58" x2="36" y2="72" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
+      <path d="M42 58 C58 38 83 45 92 64" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <Arrow x1="72" y1="104" x2="112" y2="104" />
+      <text x="23" y="45" className="fill-slate-600 text-[11px] dark:fill-stone-300">σ electron delocalises with p-orbital</text>
+      <text x="175" y="128" className="fill-sky-700 text-[14px] font-bold dark:fill-sky-300">H+</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicAromaticityDiagram() {
+  const hex = "M75 52 L105 35 L135 52 L135 86 L105 103 L75 86 Z";
+  return (
+    <DiagramFrame title="aromaticity">
+      <path d={hex} fill="none" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="2" />
+      <circle cx="105" cy="69" r="20" fill="none" className="stroke-amber-500" strokeWidth="2" />
+      <text x="28" y="132" className="fill-slate-700 text-[12px] font-semibold dark:fill-stone-200">cyclic + planar + sp2 ring</text>
+      <text x="38" y="154" className="fill-slate-700 text-[13px] font-bold dark:fill-stone-100">(4n + 2)π electrons</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicBondFissionDiagram() {
+  return (
+    <DiagramFrame title="homolytic fission">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[17px] font-semibold dark:fill-stone-100">
+        <text x="38" y="86">A:B</text>
+        <text x="146" y="86">A· + B·</text>
+      </g>
+      <Arrow x1="78" y1="80" x2="132" y2="80" label="homolysis" labelX="82" labelY="62" />
+      <path d="M48 66 C44 48 64 48 60 66" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <path d="M62 66 C66 48 82 50 76 66" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <text x="36" y="124" className="fill-slate-600 text-[12px] dark:fill-stone-300">one electron goes to each fragment</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicWurtzDiagram() {
+  return (
+    <DiagramFrame title="Wurtz reaction">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[16px] font-semibold dark:fill-stone-100">
+        <text x="18" y="88">R-X + 2Na</text>
+        <text x="151" y="88">R-R</text>
+      </g>
+      <Arrow x1="100" y1="82" x2="140" y2="82" label="ether" labelX="108" labelY="65" />
+      <text x="40" y="126" className="fill-slate-600 text-[12px] dark:fill-stone-300">1° and 2° alkyl halides</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicElectrophilicAdditionDiagram() {
+  return (
+    <DiagramFrame title="electrophilic addition">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[16px] font-semibold dark:fill-stone-100">
+        <text x="26" y="62">C=C + E+</text>
+        <text x="132" y="62">C-C+</text>
+        <text x="24" y="132">C-C+ + Nu:</text>
+        <text x="142" y="132">C-C</text>
+      </g>
+      <text x="158" y="82" className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">E</text>
+      <text x="148" y="153" className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">E</text>
+      <text x="178" y="153" className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">Nu</text>
+      <Arrow x1="90" y1="56" x2="124" y2="56" />
+      <Arrow x1="112" y1="126" x2="134" y2="126" />
+      <path d="M50 42 C66 24 86 28 92 48" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <text x="50" y="100" className="fill-slate-600 text-[11px] dark:fill-stone-300">+ on more substituted carbon</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicSn2Diagram() {
+  return (
+    <DiagramFrame title="SN2 transition">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[15px] font-semibold dark:fill-stone-100">
+        <text x="18" y="92">HO- + R-X</text>
+        <text x="95" y="92">HO···R···X</text>
+        <text x="166" y="92">HO-R + X-</text>
+      </g>
+      <Arrow x1="74" y1="86" x2="92" y2="86" />
+      <Arrow x1="148" y1="86" x2="164" y2="86" />
+      <path d="M31 66 C46 48 64 54 70 73" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <text x="92" y="62" className="fill-sky-700 text-[12px] font-bold dark:fill-sky-300">δ-</text>
+      <text x="137" y="62" className="fill-sky-700 text-[12px] font-bold dark:fill-sky-300">δ-</text>
+      <text x="54" y="134" className="fill-slate-600 text-[12px] dark:fill-stone-300">dotted transition shown in source</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicAlcoholHalideDiagram() {
+  return (
+    <DiagramFrame title="alcohol to alkyl halide">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[16px] font-semibold dark:fill-stone-100">
+        <text x="16" y="84">R-OH</text>
+        <text x="88" y="84">R-OH2+</text>
+        <text x="158" y="84">R-X</text>
+      </g>
+      <Arrow x1="58" y1="78" x2="84" y2="78" label="H+" labelX="65" labelY="61" />
+      <Arrow x1="132" y1="78" x2="154" y2="78" label="-H2O, X-" labelX="116" labelY="61" />
+      <text x="35" y="124" className="fill-slate-600 text-[12px] dark:fill-stone-300">SN1 route; R may rearrange</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicWilliamsonDiagram() {
+  return (
+    <DiagramFrame title="Williamson synthesis">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[15px] font-semibold dark:fill-stone-100">
+        <text x="16" y="90">R1O- + R2-X</text>
+        <text x="146" y="90">R1OR2 + X-</text>
+      </g>
+      <Arrow x1="104" y1="84" x2="140" y2="84" label="SN2" labelX="112" labelY="67" />
+      <path d="M44 62 C58 40 84 45 92 68" fill="none" className="stroke-amber-500" strokeWidth="2" markerEnd="url(#arrowHead)" />
+      <text x="42" y="126" className="fill-slate-600 text-[12px] dark:fill-stone-300">alkoxide + alkyl halide</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicGrignardCarbonylDiagram() {
+  return (
+    <DiagramFrame title="Grignard alcohol family">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="15" y="54">H2C=O</text>
+        <text x="15" y="96">R-CHO</text>
+        <text x="15" y="138">R-CO-R</text>
+        <text x="146" y="54">1° alcohol</text>
+        <text x="146" y="96">2° alcohol</text>
+        <text x="146" y="138">3° alcohol</text>
+      </g>
+      <Arrow x1="70" y1="48" x2="140" y2="48" label="RMgX, H3O+" labelX="78" labelY="33" />
+      <Arrow x1="70" y1="90" x2="140" y2="90" label="RMgX, H3O+" labelX="78" labelY="75" />
+      <Arrow x1="70" y1="132" x2="140" y2="132" label="RMgX, H3O+" labelX="78" labelY="117" />
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicReductionLadderDiagram() {
+  return (
+    <DiagramFrame title="reduction ladder">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="22" y="58">acid derivatives</text>
+        <text x="40" y="102">carbonyl</text>
+        <text x="142" y="102">alcohol</text>
+        <text x="152" y="148">alkane</text>
+      </g>
+      <Arrow x1="86" y1="96" x2="136" y2="96" label="LiAlH4 / NaBH4" labelX="72" labelY="80" />
+      <Arrow x1="105" y1="62" x2="142" y2="88" label="LiAlH4" labelX="120" labelY="61" />
+      <Arrow x1="162" y1="110" x2="162" y2="138" label="red P + HI" labelX="92" labelY="132" />
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicOxidationLadderDiagram() {
+  return (
+    <DiagramFrame title="oxidation ladder">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="20" y="76">1° alcohol</text>
+        <text x="91" y="76">aldehyde</text>
+        <text x="164" y="76">acid</text>
+        <text x="28" y="132">2° alcohol</text>
+        <text x="128" y="132">ketone</text>
+      </g>
+      <Arrow x1="78" y1="70" x2="88" y2="70" />
+      <Arrow x1="146" y1="70" x2="160" y2="70" />
+      <Arrow x1="90" y1="126" x2="122" y2="126" />
+      <text x="38" y="33" className="fill-slate-600 text-[12px] dark:fill-stone-300">strong oxidants reach acid</text>
+      <text x="45" y="160" className="fill-slate-600 text-[12px] dark:fill-stone-300">3° alcohol: no reaction in listed oxidations</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicAldolDiagram() {
+  return (
+    <DiagramFrame title="aldol condensation">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="24" y="68">2 CH3CHO</text>
+        <text x="133" y="68">aldol</text>
+        <text x="63" y="136">CH3CH=CHCHO</text>
+      </g>
+      <Arrow x1="92" y1="62" x2="126" y2="62" label="dil. NaOH" labelX="87" labelY="45" />
+      <Arrow x1="148" y1="78" x2="112" y2="124" label="H+, Δ" labelX="146" labelY="108" />
+      <text x="20" y="104" className="fill-slate-600 text-[12px] dark:fill-stone-300">acidic sp3 alpha-H required</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicCannizzaroDiagram() {
+  return (
+    <DiagramFrame title="Cannizzaro">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="20" y="74">2 RCHO</text>
+        <text x="132" y="58">RCH2OH</text>
+        <text x="132" y="104">RCOONa</text>
+      </g>
+      <Arrow x1="84" y1="69" x2="126" y2="55" label="NaOH 50%" labelX="78" labelY="40" />
+      <Arrow x1="84" y1="78" x2="126" y2="99" />
+      <text x="23" y="138" className="fill-slate-600 text-[12px] dark:fill-stone-300">no sp3 alpha-H in source condition</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicHaloformDiagram() {
+  return (
+    <DiagramFrame title="haloform">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">
+        <text x="18" y="75">RCOCH3</text>
+        <text x="128" y="60">RCOONa</text>
+        <text x="128" y="106">CHX3</text>
+      </g>
+      <Arrow x1="86" y1="70" x2="122" y2="56" label="X2 / NaOH" labelX="77" labelY="39" />
+      <Arrow x1="86" y1="78" x2="122" y2="101" />
+      <text x="24" y="142" className="fill-slate-600 text-[12px] dark:fill-stone-300">X = Cl, Br or I in the handbook</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicCarboxyDerivativesDiagram() {
+  return (
+    <DiagramFrame title="acid derivatives">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">
+        <text x="82" y="96">RCOOH</text>
+        <text x="22" y="42">RCOCl</text>
+        <text x="152" y="42">RCONH2</text>
+        <text x="17" y="156">(RCO)2O</text>
+        <text x="148" y="156">RCOOR&apos;</text>
+      </g>
+      <Arrow x1="88" y1="83" x2="58" y2="48" label="SOCl2" labelX="40" labelY="70" />
+      <Arrow x1="132" y1="83" x2="156" y2="48" label="NH3, Δ" labelX="134" labelY="70" />
+      <Arrow x1="90" y1="104" x2="58" y2="142" label="P2O5, Δ" labelX="24" labelY="125" />
+      <Arrow x1="130" y1="104" x2="156" y2="142" label="R'OH" labelX="147" labelY="124" />
+    </DiagramFrame>
+  );
+}
+
+function BenzeneRing({ cx = 80, cy = 94, r = 30, label }) {
+  const points = Array.from({ length: 6 }, (_, index) => {
+    const angle = (Math.PI / 3) * index - Math.PI / 6;
+    return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+  });
+  const path = `M${points.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L")} Z`;
+  return (
+    <g>
+      <path d={path} fill="none" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="2.2" />
+      <circle cx={cx} cy={cy} r={r * 0.48} fill="none" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="1.8" />
+      {label && <text x={cx - 22} y={cy + r + 20} className="fill-slate-700 text-[12px] font-semibold dark:fill-stone-200">{label}</text>}
+    </g>
+  );
+}
+
+function ChemOrganicEasBenzeneDiagram() {
+  return (
+    <DiagramFrame title="electrophilic aromatic substitution">
+      <DiagramDefs />
+      <BenzeneRing cx={62} cy={92} r={28} label="benzene" />
+      <g className="fill-slate-800 text-[15px] font-semibold dark:fill-stone-100">
+        <text x="27" y="42">E+</text>
+        <text x="153" y="82">E</text>
+        <text x="142" y="124">+ H+</text>
+      </g>
+      <Arrow x1="90" y1="90" x2="132" y2="90" label="attack" labelX="96" labelY="72" />
+      <BenzeneRing cx={160} cy={92} r={24} />
+      <line x1="160" y1="68" x2="160" y2="50" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="2" />
+      <text x="34" y="151" className="fill-slate-600 text-[12px] dark:fill-stone-300">aromaticity is restored after proton loss</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicSigmaComplexDiagram() {
+  return (
+    <DiagramFrame title="sigma complex">
+      <DiagramDefs />
+      <BenzeneRing cx={92} cy={94} r={34} />
+      <line x1="122" y1="77" x2="144" y2="62" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="2" />
+      <text x="148" y="64" className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">Br</text>
+      <text x="128" y="89" className="fill-slate-800 text-[14px] font-semibold dark:fill-stone-100">H</text>
+      <text x="88" y="105" className="fill-amber-600 text-[18px] font-bold dark:fill-amber-300">+</text>
+      <Arrow x1="156" y1="116" x2="128" y2="98" label="FeBr4-" labelX="140" labelY="139" />
+      <text x="34" y="154" className="fill-slate-600 text-[12px] dark:fill-stone-300">source shows resonance forms of this arenium ion</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicEasPositionsDiagram() {
+  return (
+    <DiagramFrame title="ortho / meta / para positions">
+      <BenzeneRing cx={108} cy={94} r={40} />
+      <line x1="108" y1="54" x2="108" y2="32" className="stroke-slate-800 dark:stroke-stone-100" strokeWidth="2" />
+      <text x="99" y="27" className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">Et</text>
+      <text x="151" y="76" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">ortho</text>
+      <text x="151" y="122" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">meta</text>
+      <text x="94" y="158" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">para</text>
+      <text x="28" y="178" className="fill-slate-600 text-[11px] dark:fill-stone-300">source example gives p-ethyl-acetophenone</text>
+    </DiagramFrame>
+  );
+}
+
+function ChemOrganicPolymerRepeatDiagram() {
+  return (
+    <DiagramFrame title="copolymer repeat idea">
+      <DiagramDefs />
+      <g className="fill-slate-800 text-[13px] font-semibold dark:fill-stone-100">
+        <text x="18" y="68">monomer A</text>
+        <text x="18" y="118">monomer B</text>
+        <text x="142" y="93">[-A-B-]n</text>
+      </g>
+      <Arrow x1="82" y1="64" x2="128" y2="88" />
+      <Arrow x1="82" y1="114" x2="128" y2="96" />
+      <text x="30" y="154" className="fill-slate-600 text-[12px] dark:fill-stone-300">used for the PHBV copolymer card</text>
+    </DiagramFrame>
+  );
+}
+
+function BioNode({ x, y, width = 80, text, tone = "amber" }) {
+  const fillClass = tone === "green" ? "fill-emerald-100 dark:fill-emerald-950/40" : "fill-amber-100 dark:fill-amber-950/40";
+  const strokeClass = tone === "green" ? "stroke-emerald-500/60" : "stroke-amber-500/60";
+  return (
+    <g>
+      <rect x={x} y={y} width={width} height="25" rx="6" className={`${fillClass} ${strokeClass}`} strokeWidth="1.5" />
+      <text x={x + width / 2} y={y + 16} textAnchor="middle" className="fill-slate-800 text-[10px] font-bold dark:fill-stone-100">
+        {text}
+      </text>
+    </g>
+  );
+}
+
+function BioTaxonomicHierarchyDiagram() {
+  const ranks = ["Kingdom", "Phylum/Division", "Class", "Order", "Family", "Genus", "Species"];
+  return (
+    <DiagramFrame title="taxonomic hierarchy">
+      <DiagramDefs />
+      {ranks.map((rank, index) => {
+        const y = 18 + index * 22;
+        return (
+          <g key={rank}>
+            <BioNode x={57} y={y} width={106} text={rank} tone={index > 4 ? "green" : "amber"} />
+            {index < ranks.length - 1 && <Arrow x1="110" y1={y + 25} x2="110" y2={y + 40} />}
+          </g>
+        );
+      })}
+      <text x="110" y="181" textAnchor="middle" className="fill-slate-500 text-[11px] font-bold dark:fill-stone-400">
+        ascending order in source table
+      </text>
+    </DiagramFrame>
+  );
+}
+
+function BioAlgaeComparisonDiagram() {
+  return (
+    <DiagramFrame title="algae classes">
+      <BioNode x={15} y={38} width={62} text="Green" tone="green" />
+      <BioNode x={79} y={38} width={62} text="Brown" />
+      <BioNode x={143} y={38} width={62} text="Red" />
+      <text x="46" y="82" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">a, b</text>
+      <text x="110" y="82" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">a, c</text>
+      <text x="174" y="82" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">a, d</text>
+      <text x="46" y="103" textAnchor="middle" className="fill-emerald-700 text-[10px] dark:fill-emerald-300">starch</text>
+      <text x="110" y="103" textAnchor="middle" className="fill-amber-700 text-[10px] dark:fill-amber-300">mannitol</text>
+      <text x="174" y="103" textAnchor="middle" className="fill-rose-700 text-[10px] dark:fill-rose-300">floridean</text>
+      <line x1="46" y1="116" x2="46" y2="142" className="stroke-emerald-500" strokeWidth="3" strokeLinecap="round" />
+      <line x1="110" y1="116" x2="110" y2="142" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
+      <line x1="174" y1="116" x2="174" y2="142" className="stroke-rose-500" strokeWidth="3" strokeLinecap="round" />
+      <text x="46" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">2-8 equal</text>
+      <text x="110" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">2 unequal</text>
+      <text x="174" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">absent</text>
+    </DiagramFrame>
+  );
+}
+
+function BioAlternationFlowDiagram() {
+  return (
+    <DiagramFrame title="alternation of generations">
+      <DiagramDefs />
+      <BioNode x={13} y={32} width={76} text="Gametophyte" tone="green" />
+      <BioNode x={132} y={32} width={62} text="Gametes" tone="green" />
+      <BioNode x={132} y={118} width={58} text="Zygote" />
+      <BioNode x={18} y={118} width={70} text="Sporophyte" />
+      <Arrow x1="90" y1="45" x2="130" y2="45" label="mitosis" labelX="94" labelY="36" />
+      <Arrow x1="165" y1="58" x2="165" y2="116" label="fert." labelX="171" labelY="89" />
+      <Arrow x1="130" y1="131" x2="90" y2="131" label="mitosis" labelX="92" labelY="150" />
+      <Arrow x1="53" y1="116" x2="53" y2="59" label="meiosis" labelX="59" labelY="88" />
+      <text x="110" y="89" textAnchor="middle" className="fill-slate-500 text-[10px] font-bold dark:fill-stone-400">spores return to gametophyte</text>
+    </DiagramFrame>
+  );
+}
+
+function BioLifeCyclePatternsDiagram() {
+  return (
+    <DiagramFrame title="plant life-cycle patterns">
+      {[
+        ["Haplontic", "Gametophyte", "zygote only", 28],
+        ["Diplontic", "Sporophyte", "few-celled gametophyte", 82],
+        ["Haplo-diplontic", "Both multicellular", "often free-living", 136],
+      ].map(([name, major, note, y]) => (
+        <g key={name}>
+          <text x="22" y={y} className="fill-slate-700 text-[11px] font-bold dark:fill-stone-200">{name}</text>
+          <rect x="98" y={y - 12} width="88" height="14" rx="7" className="fill-emerald-400/40" />
+          <text x="104" y={y - 2} className="fill-slate-700 text-[9px] dark:fill-stone-200">{major}</text>
+          <text x="104" y={y + 14} className="fill-slate-500 text-[9px] dark:fill-stone-400">{note}</text>
+        </g>
+      ))}
+    </DiagramFrame>
+  );
+}
+
+function BioVertebrataFlowDiagram() {
+  return (
+    <DiagramFrame title="classification of vertebrata">
+      <DiagramDefs />
+      <BioNode x={66} y={14} width={88} text="Vertebrata" />
+      <BioNode x={18} y={62} width={76} text="Agnatha" />
+      <BioNode x={126} y={62} width={84} text="Gnathostomata" />
+      <Arrow x1="88" y1="39" x2="58" y2="61" />
+      <Arrow x1="132" y1="39" x2="168" y2="61" />
+      <BioNode x={18} y={110} width={76} text="Cyclostomata" tone="green" />
+      <BioNode x={104} y={110} width={50} text="Pisces" tone="green" />
+      <BioNode x={160} y={110} width={50} text="Tetrapoda" tone="green" />
+      <Arrow x1="56" y1="87" x2="56" y2="109" />
+      <Arrow x1="168" y1="87" x2="130" y2="109" />
+      <Arrow x1="168" y1="87" x2="185" y2="109" />
+      <text x="127" y="151" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">Chondrichthyes, Osteichthyes</text>
+      <text x="184" y="169" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">Amphibia, Reptilia, Aves, Mammalia</text>
+    </DiagramFrame>
+  );
+}
+
+function BioRootSystemsDiagram() {
+  return (
+    <DiagramFrame title="root systems">
+      <path d="M38 32 L38 138" className="stroke-amber-700 dark:stroke-amber-300" strokeWidth="4" strokeLinecap="round" />
+      <path d="M38 72 C20 88 20 105 14 124 M38 86 C55 103 58 121 66 143" className="stroke-amber-500" strokeWidth="2.5" fill="none" />
+      <path d="M108 40 C94 66 92 106 82 144 M108 40 C108 73 108 104 108 146 M108 40 C122 72 124 109 138 144" className="stroke-emerald-500" strokeWidth="2.5" fill="none" />
+      <path d="M172 52 C164 76 160 116 151 145 M170 62 C185 88 191 112 198 145 M171 75 C166 89 181 107 177 141" className="stroke-sky-500" strokeWidth="2.5" fill="none" />
+      <text x="38" y="166" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">tap</text>
+      <text x="108" y="166" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">fibrous</text>
+      <text x="174" y="166" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">adventitious</text>
+    </DiagramFrame>
+  );
+}
+
+function BioRootRegionsDiagram() {
+  const regions = [
+    ["Maturation", 24, "green"],
+    ["Elongation", 57, "amber"],
+    ["Meristem", 90, "amber"],
+    ["Root cap", 123, "green"],
+  ];
+  return (
+    <DiagramFrame title="regions of root">
+      <DiagramDefs />
+      {regions.map(([label, y, tone], index) => (
+        <g key={label}>
+          <BioNode x={68} y={y} width={84} text={label} tone={tone} />
+          {index < regions.length - 1 && <Arrow x1="110" y1={y + 25} x2="110" y2={y + 32} />}
+        </g>
+      ))}
+      <path d="M66 30 C42 35 43 50 61 53 M154 31 C182 35 180 51 158 53" className="stroke-emerald-500" fill="none" strokeWidth="2" />
+      <text x="110" y="169" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">root hairs behind elongation</text>
+    </DiagramFrame>
+  );
+}
+
+function BioLeafPartsDiagram() {
+  return (
+    <DiagramFrame title="leaf parts">
+      <ellipse cx="110" cy="78" rx="54" ry="28" className="fill-emerald-200 stroke-emerald-600 dark:fill-emerald-950/50" strokeWidth="2" />
+      <line x1="56" y1="78" x2="164" y2="78" className="stroke-emerald-700 dark:stroke-emerald-300" strokeWidth="2" />
+      <line x1="110" y1="106" x2="110" y2="145" className="stroke-amber-600 dark:stroke-amber-300" strokeWidth="4" strokeLinecap="round" />
+      <circle cx="110" cy="153" r="8" className="fill-amber-200 stroke-amber-600 dark:fill-amber-950/50" strokeWidth="2" />
+      <text x="110" y="50" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">lamina</text>
+      <text x="138" y="123" className="fill-slate-700 text-[10px] dark:fill-stone-200">petiole</text>
+      <text x="124" y="158" className="fill-slate-700 text-[10px] dark:fill-stone-200">leaf base</text>
+      <text x="110" y="82" textAnchor="middle" className="fill-slate-700 text-[9px] dark:fill-stone-200">midrib</text>
+    </DiagramFrame>
+  );
+}
+
+function BioVenationDiagram() {
+  return (
+    <DiagramFrame title="venation">
+      <ellipse cx="66" cy="82" rx="42" ry="54" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <line x1="66" y1="30" x2="66" y2="134" className="stroke-emerald-700 dark:stroke-emerald-300" strokeWidth="2" />
+      {[42, 62, 82, 102, 122].map((y) => (
+        <path key={y} d={`M66 ${y} C50 ${y + 6} 42 ${y + 12} 32 ${y + 20} M66 ${y} C82 ${y + 6} 90 ${y + 12} 100 ${y + 20}`} className="stroke-emerald-500" fill="none" />
+      ))}
+      <ellipse cx="158" cy="82" rx="30" ry="54" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      {[144, 154, 164, 174].map((x) => <line key={x} x1={x} y1="34" x2={x} y2="130" className="stroke-amber-500" strokeWidth="1.5" />)}
+      <text x="66" y="160" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">reticulate</text>
+      <text x="158" y="160" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">parallel</text>
+    </DiagramFrame>
+  );
+}
+
+function BioPhyllotaxyDiagram() {
+  return (
+    <DiagramFrame title="phyllotaxy">
+      {[42, 110, 178].map((x) => <line key={x} x1={x} y1="36" x2={x} y2="132" className="stroke-amber-700 dark:stroke-amber-300" strokeWidth="3" />)}
+      <ellipse cx="30" cy="56" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="54" cy="84" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="30" cy="112" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="94" cy="62" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="126" cy="62" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="94" cy="102" rx="15" ry="7" className="fill-emerald-300" />
+      <ellipse cx="126" cy="102" rx="15" ry="7" className="fill-emerald-300" />
+      {[150, 162, 194, 206].map((x, index) => <ellipse key={x} cx={x} cy={index < 2 ? 78 : 92} rx="13" ry="7" className="fill-emerald-300" />)}
+      <text x="42" y="160" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">alternate</text>
+      <text x="110" y="160" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">opposite</text>
+      <text x="178" y="160" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">whorled</text>
+    </DiagramFrame>
+  );
+}
+
+function BioFlowerSymmetryDiagram() {
+  return (
+    <DiagramFrame title="flower symmetry">
+      <circle cx="48" cy="82" r="28" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <line x1="48" y1="50" x2="48" y2="114" className="stroke-slate-500" strokeDasharray="3 3" />
+      <line x1="18" y1="82" x2="78" y2="82" className="stroke-slate-500" strokeDasharray="3 3" />
+      <ellipse cx="110" cy="82" rx="22" ry="34" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      <line x1="110" y1="44" x2="110" y2="120" className="stroke-slate-500" strokeDasharray="3 3" />
+      <path d="M158 62 C190 28 210 98 182 116 C162 130 143 94 158 62" className="fill-rose-100 stroke-rose-500 dark:fill-rose-950/40" strokeWidth="2" />
+      <text x="48" y="158" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">actinomorphic</text>
+      <text x="110" y="158" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">zygomorphic</text>
+      <text x="178" y="158" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">asymmetric</text>
+    </DiagramFrame>
+  );
+}
+
+function BioOvaryPositionDiagram() {
+  const items = [["Hypogynous", 38, 56, 100], ["Perigynous", 110, 74, 86], ["Epigynous", 178, 96, 64]];
+  return (
+    <DiagramFrame title="ovary position">
+      {items.map(([label, x, ovaryY, partsY]) => (
+        <g key={label}>
+          <ellipse cx={x} cy={ovaryY} rx="13" ry="20" className="fill-emerald-200 stroke-emerald-600 dark:fill-emerald-950/50" strokeWidth="2" />
+          <path d={`M${x - 24} ${partsY} Q${x} ${partsY - 26} ${x + 24} ${partsY}`} className="stroke-amber-500" fill="none" strokeWidth="3" />
+          <text x={x} y="152" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">{label}</text>
+        </g>
+      ))}
+      <text x="38" y="174" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">superior</text>
+      <text x="110" y="174" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">half inferior</text>
+      <text x="178" y="174" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">inferior</text>
+    </DiagramFrame>
+  );
+}
+
+function BioAestivationDiagram() {
+  const labels = ["Valvate", "Twisted", "Imbricate", "Vexillary"];
+  return (
+    <DiagramFrame title="aestivation">
+      {labels.map((label, index) => {
+        const x = 34 + index * 51;
+        return (
+          <g key={label}>
+            <circle cx={x} cy="76" r="19" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+            {label === "Vexillary" ? (
+              <path d={`M${x - 16} 81 C${x - 2} 54 ${x + 18} 54 ${x + 16} 81 M${x - 12} 88 L${x} 68 L${x + 12} 88`} className="stroke-rose-500" fill="none" strokeWidth="2" />
+            ) : (
+              <path d={`M${x - 16} 76 Q${x} ${label === "Valvate" ? 58 : 52} ${x + 16} 76 Q${x} ${label === "Imbricate" ? 106 : 100} ${x - 16} 76`} className="stroke-rose-500" fill="none" strokeWidth="2" />
+            )}
+            <text x={x} y="132" textAnchor="middle" className="fill-slate-700 text-[8px] font-bold dark:fill-stone-200">{label}</text>
+          </g>
+        );
+      })}
+    </DiagramFrame>
+  );
+}
+
+function BioPlacentationDiagram() {
+  const labels = ["Marginal", "Axile", "Parietal", "Basal", "Free central"];
+  return (
+    <DiagramFrame title="placentation">
+      {labels.map((label, index) => {
+        const x = 30 + index * 40;
+        return (
+          <g key={label}>
+            <circle cx={x} cy="78" r="18" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+            {label === "Marginal" && <path d={`M${x - 6} 62 C${x + 4} 78 ${x - 6} 92 ${x + 5} 98`} className="stroke-amber-600" fill="none" strokeWidth="2" />}
+            {label === "Axile" && <><line x1={x} y1="60" x2={x} y2="96" className="stroke-amber-600" /><line x1={x - 16} y1="78" x2={x + 16} y2="78" className="stroke-amber-600" /></>}
+            {label === "Parietal" && <path d={`M${x - 14} 72 C${x - 6} 58 ${x + 7} 58 ${x + 14} 72 M${x - 14} 84 C${x - 6} 98 ${x + 7} 98 ${x + 14} 84`} className="stroke-amber-600" fill="none" />}
+            {label === "Basal" && <circle cx={x} cy="93" r="4" className="fill-amber-600" />}
+            {label === "Free central" && <circle cx={x} cy="78" r="5" className="fill-amber-600" />}
+            <text x={x} y="130" textAnchor="middle" className="fill-slate-700 text-[8px] font-bold dark:fill-stone-200">{label}</text>
+          </g>
+        );
+      })}
+    </DiagramFrame>
+  );
+}
+
+function BioSeedComparisonDiagram() {
+  return (
+    <DiagramFrame title="seed comparison">
+      <ellipse cx="65" cy="78" rx="42" ry="28" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      <line x1="65" y1="52" x2="65" y2="104" className="stroke-amber-600" strokeWidth="2" />
+      <circle cx="65" cy="78" r="5" className="fill-emerald-500" />
+      <ellipse cx="158" cy="78" rx="28" ry="48" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <path d="M145 103 C165 96 176 80 172 54" className="stroke-amber-600" fill="none" strokeWidth="3" />
+      <circle cx="146" cy="104" r="5" className="fill-rose-500" />
+      <text x="65" y="145" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">dicot: 2 cotyledons</text>
+      <text x="158" y="145" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">monocot: scutellum</text>
+    </DiagramFrame>
+  );
+}
+
+function BioMeristemPositionsDiagram() {
+  return (
+    <DiagramFrame title="meristem positions">
+      <DiagramDefs />
+      <BioNode x={67} y={18} width={86} text="Apical" tone="green" />
+      <BioNode x={26} y={80} width={78} text="Intercalary" />
+      <BioNode x={122} y={80} width={72} text="Lateral" />
+      <Arrow x1="110" y1="44" x2="65" y2="79" />
+      <Arrow x1="110" y1="44" x2="158" y2="79" />
+      <text x="110" y="140" textAnchor="middle" className="fill-slate-600 text-[10px] dark:fill-stone-300">primary tissues vs secondary tissues</text>
+      <text x="110" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">apical + intercalary are primary</text>
+    </DiagramFrame>
+  );
+}
+
+function BioVascularBundlesDiagram() {
+  return (
+    <DiagramFrame title="vascular bundles">
+      <circle cx="50" cy="78" r="35" className="fill-slate-50 stroke-slate-300 dark:fill-stone-900 dark:stroke-stone-700" strokeWidth="2" />
+      {[0, 90, 180, 270].map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        return <ellipse key={deg} cx={50 + Math.cos(rad) * 20} cy={78 + Math.sin(rad) * 20} rx="8" ry="5" className="fill-rose-500" />;
+      })}
+      <rect x="92" y="54" width="48" height="48" rx="12" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <line x1="92" y1="78" x2="140" y2="78" className="stroke-amber-600" strokeWidth="3" />
+      <rect x="160" y="54" width="48" height="48" rx="12" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      <text x="50" y="140" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">radial</text>
+      <text x="116" y="140" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">conjoint open</text>
+      <text x="184" y="140" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">closed</text>
+      <text x="116" y="102" textAnchor="middle" className="fill-slate-600 text-[8px] dark:fill-stone-300">cambium</text>
+    </DiagramFrame>
+  );
+}
+
+function BioDicotMonocotRootDiagram() {
+  return (
+    <DiagramFrame title="root anatomy pattern">
+      <circle cx="70" cy="78" r="43" className="fill-emerald-50 stroke-emerald-500 dark:fill-emerald-950/30" strokeWidth="2" />
+      <circle cx="70" cy="78" r="15" className="fill-rose-100 stroke-rose-500" strokeWidth="2" />
+      <path d="M62 78 H78 M70 70 V86" className="stroke-rose-600" strokeWidth="3" />
+      <circle cx="158" cy="78" r="43" className="fill-amber-50 stroke-amber-500 dark:fill-amber-950/30" strokeWidth="2" />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        return <circle key={deg} cx={158 + Math.cos(rad) * 17} cy={78 + Math.sin(rad) * 17} r="4" className="fill-rose-500" />;
+      })}
+      <text x="70" y="146" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">dicot: 2-4 patches</text>
+      <text x="158" y="146" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">monocot: polyarch</text>
+    </DiagramFrame>
+  );
+}
+
+function BioDicotMonocotStemDiagram() {
+  return (
+    <DiagramFrame title="stem bundle pattern">
+      <circle cx="70" cy="78" r="43" className="fill-emerald-50 stroke-emerald-500 dark:fill-emerald-950/30" strokeWidth="2" />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        return <circle key={deg} cx={70 + Math.cos(rad) * 28} cy={78 + Math.sin(rad) * 28} r="5" className="fill-rose-500" />;
+      })}
+      <circle cx="158" cy="78" r="43" className="fill-amber-50 stroke-amber-500 dark:fill-amber-950/30" strokeWidth="2" />
+      {[[-6, -18], [16, -8], [-20, 8], [8, 18], [0, 0], [23, 20], [-27, -23]].map(([dx, dy]) => <circle key={`${dx}-${dy}`} cx={158 + dx} cy={78 + dy} r="5" className="fill-rose-500" />)}
+      <text x="70" y="146" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">dicot: ring/open</text>
+      <text x="158" y="146" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">monocot: scattered/closed</text>
+    </DiagramFrame>
+  );
+}
+
+function BioLeafAnatomyDiagram() {
+  return (
+    <DiagramFrame title="leaf anatomy">
+      <rect x="24" y="52" width="72" height="14" className="fill-emerald-300" />
+      <rect x="24" y="68" width="72" height="24" className="fill-emerald-100 stroke-emerald-500" />
+      <rect x="24" y="96" width="72" height="14" className="fill-emerald-300" />
+      <circle cx="60" cy="84" r="9" className="fill-rose-400" />
+      <rect x="124" y="52" width="72" height="14" className="fill-amber-300" />
+      <rect x="124" y="68" width="72" height="28" className="fill-amber-100 stroke-amber-500" />
+      <rect x="124" y="100" width="72" height="14" className="fill-amber-300" />
+      <circle cx="160" cy="84" r="9" className="fill-rose-400" />
+      <text x="60" y="144" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">dicot: differentiated</text>
+      <text x="160" y="144" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">monocot: isobilateral</text>
+    </DiagramFrame>
+  );
+}
+
+function BioSecondaryGrowthDiagram() {
+  return (
+    <DiagramFrame title="secondary growth">
+      <DiagramDefs />
+      <BioNode x={16} y={40} width={70} text="Cambium" tone="green" />
+      <BioNode x={124} y={22} width={78} text="Sec. phloem" />
+      <BioNode x={124} y={78} width={78} text="Sec. xylem" tone="green" />
+      <Arrow x1="86" y1="53" x2="122" y2="35" label="outer" labelX="90" labelY="32" />
+      <Arrow x1="86" y1="53" x2="122" y2="91" label="inner" labelX="90" labelY="89" />
+      <circle cx="110" cy="145" r="22" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      <circle cx="110" cy="145" r="13" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <text x="110" y="176" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">annual rings from seasonal wood</text>
+    </DiagramFrame>
+  );
+}
+
 export default function MotionDiagram({ type }) {
   if (type === "xt") return <PositionTimeDiagram />;
   if (type === "vt") return <VelocityTimeDiagram />;
@@ -2078,5 +3622,79 @@ export default function MotionDiagram({ type }) {
   if (type === "math-triangle-labels") return <MathTriangleLabelsDiagram />;
   if (type === "math-triangle-circles") return <MathTriangleCirclesDiagram />;
   if (type === "math-pedal-triangle") return <MathPedalTriangleDiagram />;
+  if (type === "chem-mole-y-map") return <ChemMoleYMapDiagram />;
+  if (type === "chem-mole-analysis") return <ChemMoleAnalysisDiagram />;
+  if (type === "chem-gas-laws") return <ChemGasLawsDiagram />;
+  if (type === "chem-molecular-speeds") return <ChemMolecularSpeedsDiagram />;
+  if (type === "chem-galvanic-cell") return <ChemGalvanicCellDiagram />;
+  if (type === "chem-concentration-cell") return <ChemConcentrationCellDiagram />;
+  if (type === "chem-conductivity-cell") return <ChemConductivityCellDiagram />;
+  if (type === "chem-vapour-pressure-ideal") return <ChemVapourPressureIdealDiagram />;
+  if (type === "chem-raoult-deviations") return <ChemRaoultDeviationDiagram />;
+  if (type === "chem-cubic-cells") return <ChemCubicCellsDiagram />;
+  if (type === "chem-rate-curve") return <ChemRateCurveDiagram />;
+  if (type === "chem-first-order-plots") return <ChemFirstOrderPlotsDiagram />;
+  if (type === "chem-arrhenius-plot") return <ChemArrheniusPlotDiagram />;
+  if (type === "chem-diagonal-relationship") return <ChemDiagonalRelationshipDiagram />;
+  if (type === "chem-periodic-trends") return <ChemPeriodicTrendsDiagram />;
+  if (type === "chem-fajan-polarization") return <ChemFajanPolarizationDiagram />;
+  if (type === "chem-overlap-sigma-pi") return <ChemOverlapSigmaPiDiagram />;
+  if (type === "chem-vsepr-shapes") return <ChemVseprShapesDiagram />;
+  if (type === "chem-mo-energy") return <ChemMoEnergyDiagram />;
+  if (type === "chem-dipole-resultant") return <ChemDipoleResultantDiagram />;
+  if (type === "chem-coordination-geometries") return <ChemCoordinationGeometriesDiagram />;
+  if (type === "chem-cis-trans-square-planar") return <ChemCisTransSquarePlanarDiagram />;
+  if (type === "chem-optical-isomers") return <ChemOpticalIsomersDiagram />;
+  if (type === "chem-cft-splitting") return <ChemCftSplittingDiagram />;
+  if (type === "chem-froth-flotation") return <ChemFrothFlotationDiagram />;
+  if (type === "chem-electrolytic-refining") return <ChemElectrolyticRefiningDiagram />;
+  if (type === "chem-zone-refining") return <ChemZoneRefiningDiagram />;
+  if (type === "chem-pblock-trends") return <ChemPBlockTrendsDiagram />;
+  if (type === "chem-silicate-tetrahedra") return <ChemSilicateTetrahedraDiagram />;
+  if (type === "chem-xef2-linear") return <ChemXef2LinearDiagram />;
+  if (type === "chem-dblock-dd-transition") return <ChemDblockDdTransitionDiagram />;
+  if (type === "chem-cation-group-flow") return <ChemCationGroupFlowDiagram />;
+  if (type === "chem-organic-inductive") return <ChemOrganicInductiveDiagram />;
+  if (type === "chem-organic-resonance") return <ChemOrganicResonanceDiagram />;
+  if (type === "chem-organic-hyperconjugation") return <ChemOrganicHyperconjugationDiagram />;
+  if (type === "chem-organic-aromaticity") return <ChemOrganicAromaticityDiagram />;
+  if (type === "chem-organic-bond-fission") return <ChemOrganicBondFissionDiagram />;
+  if (type === "chem-organic-wurtz") return <ChemOrganicWurtzDiagram />;
+  if (type === "chem-organic-electrophilic-addition") return <ChemOrganicElectrophilicAdditionDiagram />;
+  if (type === "chem-organic-sn2") return <ChemOrganicSn2Diagram />;
+  if (type === "chem-organic-alcohol-halide") return <ChemOrganicAlcoholHalideDiagram />;
+  if (type === "chem-organic-williamson") return <ChemOrganicWilliamsonDiagram />;
+  if (type === "chem-organic-grignard-carbonyl") return <ChemOrganicGrignardCarbonylDiagram />;
+  if (type === "chem-organic-reduction-ladder") return <ChemOrganicReductionLadderDiagram />;
+  if (type === "chem-organic-oxidation-ladder") return <ChemOrganicOxidationLadderDiagram />;
+  if (type === "chem-organic-aldol") return <ChemOrganicAldolDiagram />;
+  if (type === "chem-organic-cannizzaro") return <ChemOrganicCannizzaroDiagram />;
+  if (type === "chem-organic-haloform") return <ChemOrganicHaloformDiagram />;
+  if (type === "chem-organic-carboxy-derivatives") return <ChemOrganicCarboxyDerivativesDiagram />;
+  if (type === "chem-organic-eas-benzene") return <ChemOrganicEasBenzeneDiagram />;
+  if (type === "chem-organic-sigma-complex") return <ChemOrganicSigmaComplexDiagram />;
+  if (type === "chem-organic-eas-positions") return <ChemOrganicEasPositionsDiagram />;
+  if (type === "chem-organic-polymer-repeat") return <ChemOrganicPolymerRepeatDiagram />;
+  if (type === "bio-taxonomic-hierarchy") return <BioTaxonomicHierarchyDiagram />;
+  if (type === "bio-algae-comparison") return <BioAlgaeComparisonDiagram />;
+  if (type === "bio-alternation-flow") return <BioAlternationFlowDiagram />;
+  if (type === "bio-life-cycle-patterns") return <BioLifeCyclePatternsDiagram />;
+  if (type === "bio-vertebrata-flow") return <BioVertebrataFlowDiagram />;
+  if (type === "bio-root-systems") return <BioRootSystemsDiagram />;
+  if (type === "bio-root-regions") return <BioRootRegionsDiagram />;
+  if (type === "bio-leaf-parts") return <BioLeafPartsDiagram />;
+  if (type === "bio-venation") return <BioVenationDiagram />;
+  if (type === "bio-phyllotaxy") return <BioPhyllotaxyDiagram />;
+  if (type === "bio-flower-symmetry") return <BioFlowerSymmetryDiagram />;
+  if (type === "bio-ovary-position") return <BioOvaryPositionDiagram />;
+  if (type === "bio-aestivation") return <BioAestivationDiagram />;
+  if (type === "bio-placentation") return <BioPlacentationDiagram />;
+  if (type === "bio-seed-comparison") return <BioSeedComparisonDiagram />;
+  if (type === "bio-meristem-positions") return <BioMeristemPositionsDiagram />;
+  if (type === "bio-vascular-bundles") return <BioVascularBundlesDiagram />;
+  if (type === "bio-dicot-monocot-root") return <BioDicotMonocotRootDiagram />;
+  if (type === "bio-dicot-monocot-stem") return <BioDicotMonocotStemDiagram />;
+  if (type === "bio-leaf-anatomy") return <BioLeafAnatomyDiagram />;
+  if (type === "bio-secondary-growth") return <BioSecondaryGrowthDiagram />;
   return null;
 }

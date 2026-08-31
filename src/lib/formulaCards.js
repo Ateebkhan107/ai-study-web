@@ -5,12 +5,26 @@ import { getBatch3Cards, getBatch3Chapters } from "@/lib/formulaCardsBatch3";
 import { getBatch4Cards, getBatch4Chapters } from "@/lib/formulaCardsBatch4";
 import { getBatch5Cards, getBatch5Chapters } from "@/lib/formulaCardsBatch5";
 import { getBatch6Cards, getBatch6Chapters } from "@/lib/formulaCardsBatch6";
+import { getChemistryBatch1Cards, getChemistryBatch1Chapters } from "@/lib/formulaCardsChemistryBatch1";
+import { getChemistryBatch2Cards, getChemistryBatch2Chapters } from "@/lib/formulaCardsChemistryBatch2";
+import { getChemistryBatch3Cards, getChemistryBatch3Chapters } from "@/lib/formulaCardsChemistryBatch3";
+import { getChemistryInorganicBatch1Cards, getChemistryInorganicBatch1Chapters } from "@/lib/formulaCardsChemistryInorganicBatch1";
+import { getChemistryInorganicBatch2Cards, getChemistryInorganicBatch2Chapters } from "@/lib/formulaCardsChemistryInorganicBatch2";
+import { getChemistryInorganicBatch3Cards, getChemistryInorganicBatch3Chapters } from "@/lib/formulaCardsChemistryInorganicBatch3";
+import { getChemistryInorganicBatch4Cards, getChemistryInorganicBatch4Chapters } from "@/lib/formulaCardsChemistryInorganicBatch4";
+import { getChemistryOrganicBatch1Cards, getChemistryOrganicBatch1Chapters } from "@/lib/formulaCardsChemistryOrganicBatch1";
+import { getChemistryOrganicBatch2Cards, getChemistryOrganicBatch2Chapters } from "@/lib/formulaCardsChemistryOrganicBatch2";
+import { getChemistryOrganicBatch3Cards, getChemistryOrganicBatch3Chapters } from "@/lib/formulaCardsChemistryOrganicBatch3";
+import { getChemistryOrganicBatch4Cards, getChemistryOrganicBatch4Chapters } from "@/lib/formulaCardsChemistryOrganicBatch4";
+import { getChemistryOrganicBatch5Cards, getChemistryOrganicBatch5Chapters } from "@/lib/formulaCardsChemistryOrganicBatch5";
 import { getMathBatch1Cards, getMathBatch1Chapters } from "@/lib/formulaCardsMathBatch1";
 import { getMathBatch2Cards, getMathBatch2Chapters } from "@/lib/formulaCardsMathBatch2";
 import { getMathBatch3Cards, getMathBatch3Chapters } from "@/lib/formulaCardsMathBatch3";
 import { getMathBatch4Cards, getMathBatch4Chapters } from "@/lib/formulaCardsMathBatch4";
 import { getMathBatch5Cards, getMathBatch5Chapters } from "@/lib/formulaCardsMathBatch5";
 import { getMathBatch6Cards, getMathBatch6Chapters } from "@/lib/formulaCardsMathBatch6";
+import { getBiologyBatch1Cards, getBiologyBatch1Chapters } from "@/lib/formulaCardsBiologyBatch1";
+import { getBiologyBatch2Cards, getBiologyBatch2Chapters } from "@/lib/formulaCardsBiologyBatch2";
 
 const CARD_SELECT = `
   id,
@@ -23,6 +37,7 @@ const CARD_SELECT = `
   table_data,
   diagram_data,
   diagram_svg,
+  recall_data,
   importance,
   source_page,
   sort_order,
@@ -66,6 +81,18 @@ export const FORMULA_CARD_CHAPTERS = [
   ...getBatch4Chapters("jee"),
   ...getBatch5Chapters("jee"),
   ...getBatch6Chapters("jee"),
+  ...getChemistryBatch1Chapters("jee"),
+  ...getChemistryBatch2Chapters("jee"),
+  ...getChemistryBatch3Chapters("jee"),
+  ...getChemistryInorganicBatch1Chapters("jee"),
+  ...getChemistryInorganicBatch2Chapters("jee"),
+  ...getChemistryInorganicBatch3Chapters("jee"),
+  ...getChemistryInorganicBatch4Chapters("jee"),
+  ...getChemistryOrganicBatch1Chapters("jee"),
+  ...getChemistryOrganicBatch2Chapters("jee"),
+  ...getChemistryOrganicBatch3Chapters("jee"),
+  ...getChemistryOrganicBatch4Chapters("jee"),
+  ...getChemistryOrganicBatch5Chapters("jee"),
   ...getMathBatch1Chapters(),
   ...getMathBatch2Chapters(),
   ...getMathBatch3Chapters(),
@@ -91,6 +118,20 @@ export const FORMULA_CARD_CHAPTERS = [
   ...getBatch4Chapters("neet"),
   ...getBatch5Chapters("neet"),
   ...getBatch6Chapters("neet"),
+  ...getChemistryBatch1Chapters("neet"),
+  ...getChemistryBatch2Chapters("neet"),
+  ...getChemistryBatch3Chapters("neet"),
+  ...getChemistryInorganicBatch1Chapters("neet"),
+  ...getChemistryInorganicBatch2Chapters("neet"),
+  ...getChemistryInorganicBatch3Chapters("neet"),
+  ...getChemistryInorganicBatch4Chapters("neet"),
+  ...getChemistryOrganicBatch1Chapters("neet"),
+  ...getChemistryOrganicBatch2Chapters("neet"),
+  ...getChemistryOrganicBatch3Chapters("neet"),
+  ...getChemistryOrganicBatch4Chapters("neet"),
+  ...getChemistryOrganicBatch5Chapters("neet"),
+  ...getBiologyBatch1Chapters(),
+  ...getBiologyBatch2Chapters(),
 ];
 
 const unitCards = (chapterId) => [
@@ -393,6 +434,18 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getBatch4Cards("jee"),
   ...getBatch5Cards("jee"),
   ...getBatch6Cards("jee"),
+  ...getChemistryBatch1Cards("jee"),
+  ...getChemistryBatch2Cards("jee"),
+  ...getChemistryBatch3Cards("jee"),
+  ...getChemistryInorganicBatch1Cards("jee"),
+  ...getChemistryInorganicBatch2Cards("jee"),
+  ...getChemistryInorganicBatch3Cards("jee"),
+  ...getChemistryInorganicBatch4Cards("jee"),
+  ...getChemistryOrganicBatch1Cards("jee"),
+  ...getChemistryOrganicBatch2Cards("jee"),
+  ...getChemistryOrganicBatch3Cards("jee"),
+  ...getChemistryOrganicBatch4Cards("jee"),
+  ...getChemistryOrganicBatch5Cards("jee"),
   ...getMathBatch1Cards(),
   ...getMathBatch2Cards(),
   ...getMathBatch3Cards(),
@@ -406,6 +459,20 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getBatch4Cards("neet"),
   ...getBatch5Cards("neet"),
   ...getBatch6Cards("neet"),
+  ...getChemistryBatch1Cards("neet"),
+  ...getChemistryBatch2Cards("neet"),
+  ...getChemistryBatch3Cards("neet"),
+  ...getChemistryInorganicBatch1Cards("neet"),
+  ...getChemistryInorganicBatch2Cards("neet"),
+  ...getChemistryInorganicBatch3Cards("neet"),
+  ...getChemistryInorganicBatch4Cards("neet"),
+  ...getChemistryOrganicBatch1Cards("neet"),
+  ...getChemistryOrganicBatch2Cards("neet"),
+  ...getChemistryOrganicBatch3Cards("neet"),
+  ...getChemistryOrganicBatch4Cards("neet"),
+  ...getChemistryOrganicBatch5Cards("neet"),
+  ...getBiologyBatch1Cards(),
+  ...getBiologyBatch2Cards(),
 ];
 
 function sortByOrder(items) {

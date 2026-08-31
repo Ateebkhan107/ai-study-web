@@ -1,0 +1,2007 @@
+insert into public.formula_chapters (id, subject_id, title, slug, sort_order) values
+  ('jee-chemistry-alcohol', 'jee-chemistry', 'Alcohol', 'alcohol', 25),
+  ('jee-chemistry-grignard-reagent', 'jee-chemistry', 'Grignard Reagent', 'grignard-reagent', 26),
+  ('jee-chemistry-reduction', 'jee-chemistry', 'Reduction', 'reduction', 27),
+  ('jee-chemistry-oxidation-reaction', 'jee-chemistry', 'Oxidation Reaction', 'oxidation-reaction', 28),
+  ('neet-chemistry-alcohol', 'neet-chemistry', 'Alcohol', 'alcohol', 25),
+  ('neet-chemistry-grignard-reagent', 'neet-chemistry', 'Grignard Reagent', 'grignard-reagent', 26),
+  ('neet-chemistry-reduction', 'neet-chemistry', 'Reduction', 'reduction', 27),
+  ('neet-chemistry-oxidation-reaction', 'neet-chemistry', 'Oxidation Reaction', 'oxidation-reaction', 28)
+on conflict (id) do update set
+  title = excluded.title,
+  slug = excluded.slug,
+  sort_order = excluded.sort_order;
+
+with card_seed as (
+  select *
+  from jsonb_to_recordset($$[
+  {
+    "id": "jee-chemistry-alcohol-sn1-conversion-to-alkyl-halide",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-alcohol-halide"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN1 Conversion to Alkyl Halide",
+    "card_type": "reaction",
+    "body": "The Alcohol section begins with an SN1 conversion of alcohol to alkyl halide through protonation and water loss.",
+    "formulas": [
+      {
+        "latex": "R-OH\\xrightarrow{H^+}R-OH_2^+\\xrightarrow{-H_2O}R^+\\xrightarrow{X^-}R-X"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "$R$ may rearrange.",
+      "Reactivity of HX: $HI>HBr>HCl$.",
+      "Reactivity of ROH: allyl, benzyl $>3^\\circ>2^\\circ>1^\\circ$."
+    ],
+    "importance": 5,
+    "source_page": 128,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-alcohol-isopropyl-alcohol-to-bromide",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Isopropyl Alcohol to Isopropyl Bromide",
+    "card_type": "reaction",
+    "body": "The source gives isopropyl alcohol conversion to isopropyl bromide under concentrated HBr or NaBr/H2SO4 reflux.",
+    "formulas": [
+      {
+        "latex": "CH_3CH(OH)CH_3\\xrightarrow[\\text{reflux}]{\\text{conc. }HBr\\ \\text{or}\\ NaBr,H_2SO_4}CH_3CH(Br)CH_3"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 129,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-alcohol-sn2-halogenating-reagents",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": {
+      "columns": [
+        "Alcohol reaction",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$ROH+PCl_5$",
+          "$RCl+POCl_3$"
+        ],
+        [
+          "$ROH+PCl_3$",
+          "$RCl+H_3PO_3$"
+        ],
+        [
+          "$ROH+SOCl_2\\xrightarrow{\\text{pyridine}}$",
+          "$RCl+SO_2+HCl$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2 Halogenating Reagents",
+    "card_type": "reaction",
+    "body": "The source lists three SN2 routes converting alcohols to alkyl chlorides.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-alcohol-williamson-synthesis",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-williamson"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Williamson's Synthesis",
+    "card_type": "preparation",
+    "body": "The source defines Williamson's synthesis as heating sodium or potassium alkoxide with an alkyl halide by SN2.",
+    "formulas": [
+      {
+        "latex": "R^1O^-+R^2-X\\longrightarrow R^1OR^2+X^-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "This method is particularly useful for preparing mixed ethers."
+    ],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-alcohol-sn2ar-conditions",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Conditions",
+    "card_type": "rule",
+    "body": "The source introduces nucleophilic aromatic substitution of aryl halides and states the key activating condition.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "An electron-withdrawing group at ortho or para positions with respect to a good leaving group is necessary for $S_N2Ar$.",
+      "Step I is RDS; Step II is fast loss of $X^-.",
+      "The intermediate ion is stabilised by resonance and the stable salts are called Meisenheimer salts."
+    ],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-alcohol-sn2ar-substituent-effects",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": {
+      "columns": [
+        "Group type",
+        "Groups listed",
+        "Effect in source"
+      ],
+      "rows": [
+        [
+          "Electron withdrawing",
+          "$-N(CH_3)_3^+$, $-NO_2$, $-CN$, $-SO_3H$, $-COOH$, $-CHO$, $-COR$, $-X$",
+          "Stabilizes carbanion and activates Ar-SN2 reaction."
+        ],
+        [
+          "Electron releasing",
+          "$-NH_2$, $-OH$, $-OR$, $-R$",
+          "Destabilizes carbanion and deactivates Ar-SN2 reaction."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Substituent Effects",
+    "card_type": "comparison",
+    "body": "The handbook compares electron-withdrawing and electron-releasing groups in aryl SN2.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-alcohol-sn2ar-element-effect",
+    "chapter_id": "jee-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Element Effect",
+    "card_type": "reactivity_order",
+    "body": "The source gives reactivity order toward SN2Ar with different halogens.",
+    "formulas": [
+      {
+        "latex": "Ar-F>Ar-Cl>Ar-Br>Ar-I"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-grignard-reagent-identity-active-h",
+    "chapter_id": "jee-chemistry-grignard-reagent",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard Reagent and Active-H Compounds",
+    "card_type": "reaction",
+    "body": "The source defines Grignard reagent as alkyl magnesium halide and shows active-H compounds giving alkane.",
+    "formulas": [
+      {
+        "latex": "RMgX=\\text{alkyl magnesium halide}"
+      },
+      {
+        "latex": "\\text{active-H containing compounds}\\xrightarrow{RMgX}R-H"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The source examples beside the arrow include $R'COOH$, $R'OH$ and $H_2O$."
+    ],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-grignard-reagent-carbonyl-alcohol-family",
+    "chapter_id": "jee-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Electrophile",
+        "Workup shown",
+        "Product after hydrolysis"
+      ],
+      "rows": [
+        [
+          "$H_2C=O$",
+          "$H_3O^+$",
+          "$1^\\circ$ alcohol"
+        ],
+        [
+          "$R-CHO$",
+          "$H_3O^+$",
+          "$2^\\circ$ alcohol"
+        ],
+        [
+          "$R-C(=O)-R$",
+          "$H_3O^+$",
+          "$3^\\circ$ alcohol"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-grignard-carbonyl"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard + Carbonyl: Alcohol Family",
+    "card_type": "comparison",
+    "body": "The source reaction network compares carbonyl substrates by the alcohol class obtained after acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-grignard-reagent-other-core-grignard-reactions",
+    "chapter_id": "jee-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Substrate / reagent",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "$RCN/H_3O^+$",
+          "$R-C(=O)-R$"
+        ],
+        [
+          "$R'-X$",
+          "$R-R'$"
+        ],
+        [
+          "$CO_2$ then $H_2O$",
+          "$RCOOH$"
+        ],
+        [
+          "$O_2$ then $H_2O$",
+          "$ROH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Other Core Grignard Reactions",
+    "card_type": "comparison",
+    "body": "The source map also gives nitrile, alkyl halide, carbon dioxide and oxygen reactions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-grignard-reagent-epoxide-reactions",
+    "chapter_id": "jee-chemistry-grignard-reagent",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard + Epoxides",
+    "card_type": "reaction",
+    "body": "The source shows Grignard reagent opening oxirane-type rings to alcohols after acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The first epoxide example gives a $1^\\circ$ alcohol.",
+      "The substituted epoxide example gives a $2^\\circ$ alcohol."
+    ],
+    "importance": 4,
+    "source_page": 130,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-grignard-reagent-esters-acyl-chloride-lactone",
+    "chapter_id": "jee-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Reagent/workup",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "$R'-C(=O)-OR$",
+          "$2RMgX$, then $H_3O^+$",
+          "tertiary alcohol + $ROH$"
+        ],
+        [
+          "$R'-C(=O)-Cl$",
+          "$2RMgX$, then $H_3O^+$",
+          "tertiary alcohol + $HCl$"
+        ],
+        [
+          "six-membered lactone",
+          "$2RMgX$, then $H_3O^+$",
+          "$R-C(OH)(R)-(CH_2)_4-OH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard with Ester, Acyl Chloride and Lactone",
+    "card_type": "comparison",
+    "body": "The next rendered page shows three reactions using two equivalents of RMgX followed by acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source notes that two alkyl groups in these products come from Grignard reagent."
+    ],
+    "importance": 4,
+    "source_page": 131,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-reduction-lialh4-reduction-map",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Starting group",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$R-CHO$",
+          "$RCH_2OH$"
+        ],
+        [
+          "$R-C(=O)-R$",
+          "$R-CH(OH)-R$"
+        ],
+        [
+          "$RCOOH$",
+          "$R-CH_2OH$"
+        ],
+        [
+          "$R-C(=O)-O-C(=O)-R$",
+          "$2R-CH_2OH$"
+        ],
+        [
+          "$R-C(=O)-OR'$",
+          "$RCH_2OH+R'OH$"
+        ],
+        [
+          "$R-C(=O)-NH_2$",
+          "$R-CH_2NH_2$"
+        ],
+        [
+          "$R-C(=O)-Cl$",
+          "$R-CH_2OH$"
+        ],
+        [
+          "$R-CN$",
+          "$R-CH_2NH_2$"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-reduction-ladder"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "LiAlH4 Reduction Map",
+    "card_type": "comparison",
+    "body": "The source lists LiAlH4 reductions across carbonyls and carboxylic acid derivatives.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "$C=C/C{\\equiv}C$ gives no reaction under the listed LiAlH4 map."
+    ],
+    "importance": 5,
+    "source_page": 131,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-reduction-lialh4-exception",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "LiAlH4 Exception",
+    "card_type": "exception",
+    "body": "The source lists one exception immediately after stating no reaction with $C=C/C\\equiv C$.",
+    "formulas": [
+      {
+        "latex": "Ph-CH=CH-COOH\\longrightarrow Ph-CH_2-CH_2-CH_2OH"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 131,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-reduction-nabh4-naetoh-mpv",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Reagent",
+        "Conversions shown"
+      ],
+      "rows": [
+        [
+          "$NaBH_4$, EtOH",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol; acid halide $\\to 1^\\circ$ alcohol"
+        ],
+        [
+          "Na/EtOH, Bouveault Blanc reduction",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol; acid halide $\\to 1^\\circ$ alcohol; ester $\\to$ alcohol + alcohol; $RCN\\to RCH_2NH_2$"
+        ],
+        [
+          "Na-Hg/HCl or $Al[OCHMe_2]_3$, MPV reduction",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "NaBH4, Bouveault-Blanc and MPV Reductions",
+    "card_type": "comparison",
+    "body": "The source gives three reagent families and their functional-group conversions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 131,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-reduction-rosenmund-reduction",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rosenmund's Reduction",
+    "card_type": "reaction",
+    "body": "The source shows acid chloride reduction to aldehyde using hydrogen and palladium on barium sulfate.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-Cl\\xrightarrow{H_2/Pd/BaSO_4}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-reduction-birch-reduction",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Birch Reduction",
+    "card_type": "reaction",
+    "body": "The source lists Birch reduction with Li/Na/K in liquid ammonia.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}C-R\\xrightarrow{Li/Na/K+\\text{liq. }NH_3}\\text{trans alkene}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Terminal alkynes are not reduced.",
+      "The source also shows benzene conversion to a non-aromatic diene structure."
+    ],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-reduction-stephen-reduction",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Stephen's Reduction",
+    "card_type": "reaction",
+    "body": "The source shows nitrile reduction to aldehyde through SnCl2/HCl followed by water.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}N\\xrightarrow[(2)\\ H_2O]{(1)\\ SnCl_2/HCl}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "DIBAL-H is also used for the same conversion."
+    ],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-reduction-carbonyl-to-alkane-reductions",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Named reduction",
+        "Reagent/condition",
+        "Conversion",
+        "Avoid if"
+      ],
+      "rows": [
+        [
+          "Clemmensen",
+          "$Zn-Hg/HCl/\\Delta$",
+          "$>C=O\\to >CH_2$",
+          "acid-sensitive groups such as $C=C$, $C{\\equiv}C$, OH, OR"
+        ],
+        [
+          "Wolff-Kishner",
+          "$NH_2NH_2/KOH/\\Delta$",
+          "$>C=O\\to >CH_2$",
+          "base-sensitive groups such as COOR, COX, CONH2, $-CO-O-CO-$, $R-X$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbonyl to Alkane Reductions",
+    "card_type": "comparison",
+    "body": "The source separates acid-sensitive and base-sensitive carbonyl-to-alkane reductions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-reduction-lindlar-catalyst",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Lindlar Catalyst",
+    "card_type": "reaction",
+    "body": "The source shows partial reduction of internal alkyne to cis alkene.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}C-R\\xrightarrow{H_2/Pd/CaCO_3/\\text{quinoline}}\\text{cis alkene}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Syn addition.",
+      "$H_2$, Pd, $BaSO_4$ is also used for the same conversion."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-chemistry-reduction-red-phosphorus-hi",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Red Phosphorus and HI",
+    "card_type": "reaction",
+    "body": "The source states that almost all functional-group-containing compounds convert into corresponding alkane by red P + HI.",
+    "formulas": [
+      {
+        "latex": "R-CH_2OH\\longrightarrow R-CH_3"
+      },
+      {
+        "latex": "R-CHO\\longrightarrow R-CH_3"
+      },
+      {
+        "latex": "R_2CO\\longrightarrow R_2CH_2"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Reagent family: red phosphorus and HI."
+    ],
+    "importance": 4,
+    "source_page": 133,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-chemistry-reduction-dibal-h-reduction",
+    "chapter_id": "jee-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "DIBAL-H Reduction",
+    "card_type": "reaction",
+    "body": "The source lists DIBAL-H reductions of esters and nitriles to aldehydes.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-OR'\\xrightarrow[\\text{cold}]{DIBAL-H}RCH=O+R'OH"
+      },
+      {
+        "latex": "R-C{\\equiv}N\\xrightarrow{DIBAL-H}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "At ordinary temperature esters reduce to alcohols; at low temperature esters reduce to aldehyde."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-strong-oxidation-map",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "Aldehyde",
+          "acid"
+        ],
+        [
+          "$1^\\circ$ alcohol",
+          "acid"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ],
+        [
+          "alkene",
+          "$R_2C=O+R'COOH$"
+        ],
+        [
+          "$R-C{\\equiv}C-R'$",
+          "$RCOOH+R'COOH$"
+        ],
+        [
+          "aromatic side chain",
+          "benzoic acid side-chain product"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-oxidation-ladder"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "KMnO4 / Dichromate Oxidation Map",
+    "card_type": "comparison",
+    "body": "The source begins oxidation with KMnO4 in both media or K2Cr2O7 in acidic medium.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Oxidant: $KMnO_4$ in both medium or $K_2Cr_2O_7$ in acidic medium."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-pcc-chromic-reagent",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ ROH$",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ ROH$",
+          "ketone"
+        ],
+        [
+          "$3^\\circ ROH$",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "PCC / Chromic Reagent Oxidation",
+    "card_type": "comparison",
+    "body": "The source lists PCC and CrO3/HCl/pyridine together.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "PCC means pyridinium chloro chromate in the source."
+    ],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-cu-573k",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Alcohol class",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ$ alcohol",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "alkene"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Cu / 573 K",
+    "card_type": "comparison",
+    "body": "The source gives distinct products for primary, secondary and tertiary alcohols over copper at 573 K.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-periodic-acid",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate pattern",
+        "Product pattern shown"
+      ],
+      "rows": [
+        [
+          "vicinal diol",
+          "$2\\ >C=O$"
+        ],
+        [
+          "$\\alpha$-hydroxy ketone",
+          "$-COOH + >C=O$"
+        ],
+        [
+          "$\\alpha$-diketone",
+          "$2\\ -COOH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "HIO4 Periodic Acid Oxidation",
+    "card_type": "reaction",
+    "body": "The source states that vicinal diol, alpha-hydroxy ketone and alpha-diketone can be oxidised by periodic acid.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Condition: vicinal diol, $\\alpha$-hydroxy ketone and $\\alpha$-diketone can oxidise by $HIO_4$."
+    ],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-syn-dihydroxylation",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Syn Dihydroxylation",
+    "card_type": "reaction",
+    "body": "The rendered source shows alkene conversion to a vicinal diol and labels it stereospecific syn addition.",
+    "formulas": [
+      {
+        "latex": "-C=C-\\longrightarrow -C(OH)-C(OH)-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The reagent label is not fully visible in the available rendered crop, so only the source-backed conversion and stereochemical note are stored."
+    ],
+    "importance": 4,
+    "source_page": 135,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-baeyer-villiger",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Baeyer-Villiger Oxidation",
+    "card_type": "reaction",
+    "body": "The source shows Baeyer-Villiger oxidation of ketone to ester.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-R'\\xrightarrow{m\\text{-}CPBA\\ \\text{or}\\ CH_3CO_3H}R-C(=O)-OR'"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Priority of shift / O-accepting aptitude: $R'=Ph>Ethyl>Methyl$."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-prilezhaev-anti-hydroxylation",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Prilezhaev Reaction and Anti Hydroxylation",
+    "card_type": "reaction",
+    "body": "The source shows MCPBA epoxidation followed by acidic opening to anti hydroxylation.",
+    "formulas": [
+      {
+        "latex": "-C=C-\\xrightarrow{MCPBA}\\text{epoxide}"
+      },
+      {
+        "latex": "\\text{epoxide}\\xrightarrow{H_3O^+}-C(OH)-C(OH)-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The second step is labelled anti hydroxylation in the source."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-hno3-oxidation",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product"
+      ],
+      "rows": [
+        [
+          "aldehyde",
+          "acid"
+        ],
+        [
+          "$1^\\circ$ alcohol",
+          "acid"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "no reaction"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Oxidation by HNO3",
+    "card_type": "comparison",
+    "body": "The source gives a separate HNO3 oxidation comparison.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 135,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-chemistry-oxidation-reaction-mno2-oxidation",
+    "chapter_id": "jee-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Alcohol class",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ$ alcohol",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Oxidation by MnO2",
+    "card_type": "comparison",
+    "body": "The source closes the oxidation section with MnO2 alcohol oxidation.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Only allylic and benzylic alcohols are oxidised by $MnO_2$."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 9
+  },
+  {
+    "id": "neet-chemistry-alcohol-sn1-conversion-to-alkyl-halide",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-alcohol-halide"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN1 Conversion to Alkyl Halide",
+    "card_type": "reaction",
+    "body": "The Alcohol section begins with an SN1 conversion of alcohol to alkyl halide through protonation and water loss.",
+    "formulas": [
+      {
+        "latex": "R-OH\\xrightarrow{H^+}R-OH_2^+\\xrightarrow{-H_2O}R^+\\xrightarrow{X^-}R-X"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "$R$ may rearrange.",
+      "Reactivity of HX: $HI>HBr>HCl$.",
+      "Reactivity of ROH: allyl, benzyl $>3^\\circ>2^\\circ>1^\\circ$."
+    ],
+    "importance": 5,
+    "source_page": 128,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-alcohol-isopropyl-alcohol-to-bromide",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Isopropyl Alcohol to Isopropyl Bromide",
+    "card_type": "reaction",
+    "body": "The source gives isopropyl alcohol conversion to isopropyl bromide under concentrated HBr or NaBr/H2SO4 reflux.",
+    "formulas": [
+      {
+        "latex": "CH_3CH(OH)CH_3\\xrightarrow[\\text{reflux}]{\\text{conc. }HBr\\ \\text{or}\\ NaBr,H_2SO_4}CH_3CH(Br)CH_3"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 129,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-alcohol-sn2-halogenating-reagents",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": {
+      "columns": [
+        "Alcohol reaction",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$ROH+PCl_5$",
+          "$RCl+POCl_3$"
+        ],
+        [
+          "$ROH+PCl_3$",
+          "$RCl+H_3PO_3$"
+        ],
+        [
+          "$ROH+SOCl_2\\xrightarrow{\\text{pyridine}}$",
+          "$RCl+SO_2+HCl$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2 Halogenating Reagents",
+    "card_type": "reaction",
+    "body": "The source lists three SN2 routes converting alcohols to alkyl chlorides.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-alcohol-williamson-synthesis",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-williamson"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Williamson's Synthesis",
+    "card_type": "preparation",
+    "body": "The source defines Williamson's synthesis as heating sodium or potassium alkoxide with an alkyl halide by SN2.",
+    "formulas": [
+      {
+        "latex": "R^1O^-+R^2-X\\longrightarrow R^1OR^2+X^-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "This method is particularly useful for preparing mixed ethers."
+    ],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-alcohol-sn2ar-conditions",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Conditions",
+    "card_type": "rule",
+    "body": "The source introduces nucleophilic aromatic substitution of aryl halides and states the key activating condition.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "An electron-withdrawing group at ortho or para positions with respect to a good leaving group is necessary for $S_N2Ar$.",
+      "Step I is RDS; Step II is fast loss of $X^-.",
+      "The intermediate ion is stabilised by resonance and the stable salts are called Meisenheimer salts."
+    ],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-alcohol-sn2ar-substituent-effects",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": {
+      "columns": [
+        "Group type",
+        "Groups listed",
+        "Effect in source"
+      ],
+      "rows": [
+        [
+          "Electron withdrawing",
+          "$-N(CH_3)_3^+$, $-NO_2$, $-CN$, $-SO_3H$, $-COOH$, $-CHO$, $-COR$, $-X$",
+          "Stabilizes carbanion and activates Ar-SN2 reaction."
+        ],
+        [
+          "Electron releasing",
+          "$-NH_2$, $-OH$, $-OR$, $-R$",
+          "Destabilizes carbanion and deactivates Ar-SN2 reaction."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Substituent Effects",
+    "card_type": "comparison",
+    "body": "The handbook compares electron-withdrawing and electron-releasing groups in aryl SN2.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 129,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-alcohol-sn2ar-element-effect",
+    "chapter_id": "neet-chemistry-alcohol",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "SN2Ar Element Effect",
+    "card_type": "reactivity_order",
+    "body": "The source gives reactivity order toward SN2Ar with different halogens.",
+    "formulas": [
+      {
+        "latex": "Ar-F>Ar-Cl>Ar-Br>Ar-I"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-grignard-reagent-identity-active-h",
+    "chapter_id": "neet-chemistry-grignard-reagent",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard Reagent and Active-H Compounds",
+    "card_type": "reaction",
+    "body": "The source defines Grignard reagent as alkyl magnesium halide and shows active-H compounds giving alkane.",
+    "formulas": [
+      {
+        "latex": "RMgX=\\text{alkyl magnesium halide}"
+      },
+      {
+        "latex": "\\text{active-H containing compounds}\\xrightarrow{RMgX}R-H"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The source examples beside the arrow include $R'COOH$, $R'OH$ and $H_2O$."
+    ],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-grignard-reagent-carbonyl-alcohol-family",
+    "chapter_id": "neet-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Electrophile",
+        "Workup shown",
+        "Product after hydrolysis"
+      ],
+      "rows": [
+        [
+          "$H_2C=O$",
+          "$H_3O^+$",
+          "$1^\\circ$ alcohol"
+        ],
+        [
+          "$R-CHO$",
+          "$H_3O^+$",
+          "$2^\\circ$ alcohol"
+        ],
+        [
+          "$R-C(=O)-R$",
+          "$H_3O^+$",
+          "$3^\\circ$ alcohol"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-grignard-carbonyl"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard + Carbonyl: Alcohol Family",
+    "card_type": "comparison",
+    "body": "The source reaction network compares carbonyl substrates by the alcohol class obtained after acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-grignard-reagent-other-core-grignard-reactions",
+    "chapter_id": "neet-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Substrate / reagent",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "$RCN/H_3O^+$",
+          "$R-C(=O)-R$"
+        ],
+        [
+          "$R'-X$",
+          "$R-R'$"
+        ],
+        [
+          "$CO_2$ then $H_2O$",
+          "$RCOOH$"
+        ],
+        [
+          "$O_2$ then $H_2O$",
+          "$ROH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Other Core Grignard Reactions",
+    "card_type": "comparison",
+    "body": "The source map also gives nitrile, alkyl halide, carbon dioxide and oxygen reactions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 130,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-grignard-reagent-epoxide-reactions",
+    "chapter_id": "neet-chemistry-grignard-reagent",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard + Epoxides",
+    "card_type": "reaction",
+    "body": "The source shows Grignard reagent opening oxirane-type rings to alcohols after acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The first epoxide example gives a $1^\\circ$ alcohol.",
+      "The substituted epoxide example gives a $2^\\circ$ alcohol."
+    ],
+    "importance": 4,
+    "source_page": 130,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-grignard-reagent-esters-acyl-chloride-lactone",
+    "chapter_id": "neet-chemistry-grignard-reagent",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Reagent/workup",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "$R'-C(=O)-OR$",
+          "$2RMgX$, then $H_3O^+$",
+          "tertiary alcohol + $ROH$"
+        ],
+        [
+          "$R'-C(=O)-Cl$",
+          "$2RMgX$, then $H_3O^+$",
+          "tertiary alcohol + $HCl$"
+        ],
+        [
+          "six-membered lactone",
+          "$2RMgX$, then $H_3O^+$",
+          "$R-C(OH)(R)-(CH_2)_4-OH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Grignard with Ester, Acyl Chloride and Lactone",
+    "card_type": "comparison",
+    "body": "The next rendered page shows three reactions using two equivalents of RMgX followed by acidic hydrolysis.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source notes that two alkyl groups in these products come from Grignard reagent."
+    ],
+    "importance": 4,
+    "source_page": 131,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-reduction-lialh4-reduction-map",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Starting group",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$R-CHO$",
+          "$RCH_2OH$"
+        ],
+        [
+          "$R-C(=O)-R$",
+          "$R-CH(OH)-R$"
+        ],
+        [
+          "$RCOOH$",
+          "$R-CH_2OH$"
+        ],
+        [
+          "$R-C(=O)-O-C(=O)-R$",
+          "$2R-CH_2OH$"
+        ],
+        [
+          "$R-C(=O)-OR'$",
+          "$RCH_2OH+R'OH$"
+        ],
+        [
+          "$R-C(=O)-NH_2$",
+          "$R-CH_2NH_2$"
+        ],
+        [
+          "$R-C(=O)-Cl$",
+          "$R-CH_2OH$"
+        ],
+        [
+          "$R-CN$",
+          "$R-CH_2NH_2$"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-reduction-ladder"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "LiAlH4 Reduction Map",
+    "card_type": "comparison",
+    "body": "The source lists LiAlH4 reductions across carbonyls and carboxylic acid derivatives.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "$C=C/C{\\equiv}C$ gives no reaction under the listed LiAlH4 map."
+    ],
+    "importance": 5,
+    "source_page": 131,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-reduction-lialh4-exception",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "LiAlH4 Exception",
+    "card_type": "exception",
+    "body": "The source lists one exception immediately after stating no reaction with $C=C/C\\equiv C$.",
+    "formulas": [
+      {
+        "latex": "Ph-CH=CH-COOH\\longrightarrow Ph-CH_2-CH_2-CH_2OH"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 131,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-reduction-nabh4-naetoh-mpv",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Reagent",
+        "Conversions shown"
+      ],
+      "rows": [
+        [
+          "$NaBH_4$, EtOH",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol; acid halide $\\to 1^\\circ$ alcohol"
+        ],
+        [
+          "Na/EtOH, Bouveault Blanc reduction",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol; acid halide $\\to 1^\\circ$ alcohol; ester $\\to$ alcohol + alcohol; $RCN\\to RCH_2NH_2$"
+        ],
+        [
+          "Na-Hg/HCl or $Al[OCHMe_2]_3$, MPV reduction",
+          "Aldehyde $\\to 1^\\circ$ alcohol; ketone $\\to 2^\\circ$ alcohol"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "NaBH4, Bouveault-Blanc and MPV Reductions",
+    "card_type": "comparison",
+    "body": "The source gives three reagent families and their functional-group conversions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 131,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-reduction-rosenmund-reduction",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Rosenmund's Reduction",
+    "card_type": "reaction",
+    "body": "The source shows acid chloride reduction to aldehyde using hydrogen and palladium on barium sulfate.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-Cl\\xrightarrow{H_2/Pd/BaSO_4}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-reduction-birch-reduction",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Birch Reduction",
+    "card_type": "reaction",
+    "body": "The source lists Birch reduction with Li/Na/K in liquid ammonia.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}C-R\\xrightarrow{Li/Na/K+\\text{liq. }NH_3}\\text{trans alkene}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Terminal alkynes are not reduced.",
+      "The source also shows benzene conversion to a non-aromatic diene structure."
+    ],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-reduction-stephen-reduction",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Stephen's Reduction",
+    "card_type": "reaction",
+    "body": "The source shows nitrile reduction to aldehyde through SnCl2/HCl followed by water.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}N\\xrightarrow[(2)\\ H_2O]{(1)\\ SnCl_2/HCl}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "DIBAL-H is also used for the same conversion."
+    ],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-reduction-carbonyl-to-alkane-reductions",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": {
+      "columns": [
+        "Named reduction",
+        "Reagent/condition",
+        "Conversion",
+        "Avoid if"
+      ],
+      "rows": [
+        [
+          "Clemmensen",
+          "$Zn-Hg/HCl/\\Delta$",
+          "$>C=O\\to >CH_2$",
+          "acid-sensitive groups such as $C=C$, $C{\\equiv}C$, OH, OR"
+        ],
+        [
+          "Wolff-Kishner",
+          "$NH_2NH_2/KOH/\\Delta$",
+          "$>C=O\\to >CH_2$",
+          "base-sensitive groups such as COOR, COX, CONH2, $-CO-O-CO-$, $R-X$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbonyl to Alkane Reductions",
+    "card_type": "comparison",
+    "body": "The source separates acid-sensitive and base-sensitive carbonyl-to-alkane reductions.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 132,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-reduction-lindlar-catalyst",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Lindlar Catalyst",
+    "card_type": "reaction",
+    "body": "The source shows partial reduction of internal alkyne to cis alkene.",
+    "formulas": [
+      {
+        "latex": "R-C{\\equiv}C-R\\xrightarrow{H_2/Pd/CaCO_3/\\text{quinoline}}\\text{cis alkene}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Syn addition.",
+      "$H_2$, Pd, $BaSO_4$ is also used for the same conversion."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 8
+  },
+  {
+    "id": "neet-chemistry-reduction-red-phosphorus-hi",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Red Phosphorus and HI",
+    "card_type": "reaction",
+    "body": "The source states that almost all functional-group-containing compounds convert into corresponding alkane by red P + HI.",
+    "formulas": [
+      {
+        "latex": "R-CH_2OH\\longrightarrow R-CH_3"
+      },
+      {
+        "latex": "R-CHO\\longrightarrow R-CH_3"
+      },
+      {
+        "latex": "R_2CO\\longrightarrow R_2CH_2"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Reagent family: red phosphorus and HI."
+    ],
+    "importance": 4,
+    "source_page": 133,
+    "sort_order": 9
+  },
+  {
+    "id": "neet-chemistry-reduction-dibal-h-reduction",
+    "chapter_id": "neet-chemistry-reduction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "DIBAL-H Reduction",
+    "card_type": "reaction",
+    "body": "The source lists DIBAL-H reductions of esters and nitriles to aldehydes.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-OR'\\xrightarrow[\\text{cold}]{DIBAL-H}RCH=O+R'OH"
+      },
+      {
+        "latex": "R-C{\\equiv}N\\xrightarrow{DIBAL-H}R-CH=O"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "At ordinary temperature esters reduce to alcohols; at low temperature esters reduce to aldehyde."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 10
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-strong-oxidation-map",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product shown"
+      ],
+      "rows": [
+        [
+          "Aldehyde",
+          "acid"
+        ],
+        [
+          "$1^\\circ$ alcohol",
+          "acid"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ],
+        [
+          "alkene",
+          "$R_2C=O+R'COOH$"
+        ],
+        [
+          "$R-C{\\equiv}C-R'$",
+          "$RCOOH+R'COOH$"
+        ],
+        [
+          "aromatic side chain",
+          "benzoic acid side-chain product"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-oxidation-ladder"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "KMnO4 / Dichromate Oxidation Map",
+    "card_type": "comparison",
+    "body": "The source begins oxidation with KMnO4 in both media or K2Cr2O7 in acidic medium.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Oxidant: $KMnO_4$ in both medium or $K_2Cr_2O_7$ in acidic medium."
+    ],
+    "importance": 5,
+    "source_page": 133,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-pcc-chromic-reagent",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ ROH$",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ ROH$",
+          "ketone"
+        ],
+        [
+          "$3^\\circ ROH$",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "PCC / Chromic Reagent Oxidation",
+    "card_type": "comparison",
+    "body": "The source lists PCC and CrO3/HCl/pyridine together.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "PCC means pyridinium chloro chromate in the source."
+    ],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-cu-573k",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Alcohol class",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ$ alcohol",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "alkene"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Cu / 573 K",
+    "card_type": "comparison",
+    "body": "The source gives distinct products for primary, secondary and tertiary alcohols over copper at 573 K.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-periodic-acid",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate pattern",
+        "Product pattern shown"
+      ],
+      "rows": [
+        [
+          "vicinal diol",
+          "$2\\ >C=O$"
+        ],
+        [
+          "$\\alpha$-hydroxy ketone",
+          "$-COOH + >C=O$"
+        ],
+        [
+          "$\\alpha$-diketone",
+          "$2\\ -COOH$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "HIO4 Periodic Acid Oxidation",
+    "card_type": "reaction",
+    "body": "The source states that vicinal diol, alpha-hydroxy ketone and alpha-diketone can be oxidised by periodic acid.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Condition: vicinal diol, $\\alpha$-hydroxy ketone and $\\alpha$-diketone can oxidise by $HIO_4$."
+    ],
+    "importance": 5,
+    "source_page": 134,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-syn-dihydroxylation",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Syn Dihydroxylation",
+    "card_type": "reaction",
+    "body": "The rendered source shows alkene conversion to a vicinal diol and labels it stereospecific syn addition.",
+    "formulas": [
+      {
+        "latex": "-C=C-\\longrightarrow -C(OH)-C(OH)-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The reagent label is not fully visible in the available rendered crop, so only the source-backed conversion and stereochemical note are stored."
+    ],
+    "importance": 4,
+    "source_page": 135,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-baeyer-villiger",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Baeyer-Villiger Oxidation",
+    "card_type": "reaction",
+    "body": "The source shows Baeyer-Villiger oxidation of ketone to ester.",
+    "formulas": [
+      {
+        "latex": "R-C(=O)-R'\\xrightarrow{m\\text{-}CPBA\\ \\text{or}\\ CH_3CO_3H}R-C(=O)-OR'"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Priority of shift / O-accepting aptitude: $R'=Ph>Ethyl>Methyl$."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-prilezhaev-anti-hydroxylation",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Prilezhaev Reaction and Anti Hydroxylation",
+    "card_type": "reaction",
+    "body": "The source shows MCPBA epoxidation followed by acidic opening to anti hydroxylation.",
+    "formulas": [
+      {
+        "latex": "-C=C-\\xrightarrow{MCPBA}\\text{epoxide}"
+      },
+      {
+        "latex": "\\text{epoxide}\\xrightarrow{H_3O^+}-C(OH)-C(OH)-"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The second step is labelled anti hydroxylation in the source."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-hno3-oxidation",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Substrate",
+        "Product"
+      ],
+      "rows": [
+        [
+          "aldehyde",
+          "acid"
+        ],
+        [
+          "$1^\\circ$ alcohol",
+          "acid"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "no reaction"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Oxidation by HNO3",
+    "card_type": "comparison",
+    "body": "The source gives a separate HNO3 oxidation comparison.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 135,
+    "sort_order": 8
+  },
+  {
+    "id": "neet-chemistry-oxidation-reaction-mno2-oxidation",
+    "chapter_id": "neet-chemistry-oxidation-reaction",
+    "table_data": {
+      "columns": [
+        "Alcohol class",
+        "Product"
+      ],
+      "rows": [
+        [
+          "$1^\\circ$ alcohol",
+          "aldehyde"
+        ],
+        [
+          "$2^\\circ$ alcohol",
+          "ketone"
+        ],
+        [
+          "$3^\\circ$ alcohol",
+          "no reaction"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Oxidation by MnO2",
+    "card_type": "comparison",
+    "body": "The source closes the oxidation section with MnO2 alcohol oxidation.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Only allylic and benzylic alcohols are oxidised by $MnO_2$."
+    ],
+    "importance": 5,
+    "source_page": 135,
+    "sort_order": 9
+  }
+]$$::jsonb) as seed(
+    id text,
+    chapter_id text,
+    title text,
+    card_type text,
+    body text,
+    formulas jsonb,
+    variables jsonb,
+    conditions jsonb,
+    table_data jsonb,
+    diagram_data jsonb,
+    diagram_svg text,
+    importance integer,
+    source_page integer,
+    sort_order integer,
+    is_active boolean
+  )
+)
+insert into public.formula_cards (
+  id, chapter_id, title, card_type, body, formulas, variables, conditions, table_data, diagram_data, diagram_svg, importance, source_page, sort_order, is_active
+)
+select
+  id, chapter_id, title, card_type, body, formulas, variables, conditions, table_data, diagram_data, diagram_svg, importance, source_page, sort_order, is_active
+from card_seed
+on conflict (id) do update set
+  title = excluded.title,
+  card_type = excluded.card_type,
+  body = excluded.body,
+  formulas = excluded.formulas,
+  variables = excluded.variables,
+  conditions = excluded.conditions,
+  table_data = excluded.table_data,
+  diagram_data = excluded.diagram_data,
+  diagram_svg = excluded.diagram_svg,
+  importance = excluded.importance,
+  source_page = excluded.source_page,
+  sort_order = excluded.sort_order,
+  is_active = excluded.is_active;

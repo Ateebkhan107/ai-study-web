@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import posthog from "posthog-js";
 
 function cx(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -242,6 +243,10 @@ export default function BattleArenaClient() {
     setError("");
     try {
       const data = await fetchJson("/api/battle/queue", { method: "POST" });
+      posthog.capture("battle_matchmaking_started", {
+        exam: profile?.exam,
+        matched_immediately: Boolean(data.status === "matched" && data.battleId),
+      });
       if (data.status === "matched" && data.battleId) {
         router.push(`/battle/${data.battleId}`);
         return;
@@ -294,6 +299,9 @@ export default function BattleArenaClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: searchedUser.username }),
       });
+      posthog.capture("battle_challenge_sent", {
+        exam: searchedUser.exam,
+      });
       setSearchMessage("Challenge sent.");
       await refreshBasics();
     } catch (err) {
@@ -310,6 +318,10 @@ export default function BattleArenaClient() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action }),
+      });
+      posthog.capture("battle_challenge_responded", {
+        response: action,
+        match_created: Boolean(data.battleId),
       });
       if (data.battleId) {
         router.push(`/battle/${data.battleId}`);

@@ -1,0 +1,2541 @@
+insert into public.formula_chapters (id, subject_id, title, slug, sort_order) values
+  ('jee-chemistry-nomenclature', 'jee-chemistry', 'Nomenclature', 'nomenclature', 19),
+  ('jee-chemistry-structure-isomerism', 'jee-chemistry', 'Structure Isomerism', 'structure-isomerism', 20),
+  ('jee-chemistry-general-organic-chemistry', 'jee-chemistry', 'General Organic Chemistry', 'general-organic-chemistry', 21),
+  ('neet-chemistry-nomenclature', 'neet-chemistry', 'Nomenclature', 'nomenclature', 19),
+  ('neet-chemistry-structure-isomerism', 'neet-chemistry', 'Structure Isomerism', 'structure-isomerism', 20),
+  ('neet-chemistry-general-organic-chemistry', 'neet-chemistry', 'General Organic Chemistry', 'general-organic-chemistry', 21)
+on conflict (id) do update set
+  title = excluded.title,
+  slug = excluded.slug,
+  sort_order = excluded.sort_order;
+
+with card_seed as (
+  select *
+  from jsonb_to_recordset($$[
+  {
+    "id": "jee-chemistry-nomenclature-common-prefix-carbonyl-family",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Prefix",
+        "Aldehyde",
+        "Carboxylic acid",
+        "Acyl chloride",
+        "Amide"
+      ],
+      "rows": [
+        [
+          "Form",
+          "$HCHO$ formaldehyde",
+          "$HCOOH$ formic acid",
+          "$HCOCl$ formyl chloride",
+          "$HCONH_2$ formamide"
+        ],
+        [
+          "Acet",
+          "$CH_3CHO$ acetaldehyde",
+          "$CH_3COOH$ acetic acid",
+          "$CH_3COCl$ acetyl chloride",
+          "$CH_3CONH_2$ acetamide"
+        ],
+        [
+          "Propion",
+          "$CH_3CH_2CHO$ propion aldehyde",
+          "$CH_3CH_2COOH$ propionic acid",
+          "$CH_3CH_2COCl$ propionyl chloride",
+          "$CH_3CH_2CONH_2$ propionamide"
+        ],
+        [
+          "Butyr",
+          "$CH_3CH_2CH_2CHO$ n-butyraldehyde",
+          "$CH_3CH_2CH_2COOH$ n-butyric acid",
+          "$CH_3CH_2CH_2COCl$ n-butyryl chloride",
+          "$CH_3CH_2CH_2CONH_2$ n-butyramide"
+        ],
+        [
+          "Valer",
+          "$CH_3CH_2CH_2CH_2CHO$ n-valeraldehyde",
+          "$CH_3CH_2CH_2CH_2COOH$ n-valeric acid",
+          "$CH_3CH_2CH_2CH_2COCl$ n-valeryl chloride",
+          "$CH_3CH_2CH_2CH_2CONH_2$ n-valeramide"
+        ],
+        [
+          "Acryl",
+          "$CH_2{=}CHCHO$ acrylaldehyde",
+          "$CH_2{=}CHCOOH$ acrylic acid",
+          "$CH_2{=}CHCOCl$ acrylyl chloride",
+          "$CH_2{=}CHCONH_2$ acrylamide"
+        ],
+        [
+          "Croton",
+          "$CH_3CH{=}CHCHO$ crotonaldehyde",
+          "$CH_3CH{=}CHCOOH$ crotonic acid",
+          "$CH_3CH{=}CHCOCl$ crotonyl chloride",
+          "$CH_3CH{=}CHCONH_2$ crotonamide"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common Prefixes: Carbonyl Families",
+    "card_type": "table",
+    "body": "The source lists common/trivial prefixes for related aldehydes, carboxylic acids, acyl chlorides and amides.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Acryl has three carbons with one double bond; croton has four carbons with one double bond at the second carbon."
+    ],
+    "importance": 4,
+    "source_page": 110,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-nomenclature-common-prefix-nitrile-ester-family",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Prefix",
+        "Nitrile",
+        "Isonitrile",
+        "Ester"
+      ],
+      "rows": [
+        [
+          "Form",
+          "$HC{\\equiv}N$ formonitrile",
+          "$HN{\\equiv}C$ formoisonitrile",
+          "$HCOOCH_3$ methyl formate"
+        ],
+        [
+          "Acet",
+          "$CH_3C{\\equiv}N$ acetonitrile",
+          "$CH_3N{\\equiv}C$ acetoisonitrile",
+          "$CH_3COOCH_3$ methyl acetate"
+        ],
+        [
+          "Butyr",
+          "$CH_3CH_2CH_2C{\\equiv}N$ n-butyronitrile",
+          "$CH_3CH_2CH_2N{\\equiv}C$ n-butyroisonitrile",
+          "$CH_3CH_2CH_2COOCH_3$ methyl n-butyrate"
+        ],
+        [
+          "Acryl",
+          "$CH_2{=}CHC{\\equiv}N$ acrylonitrile",
+          "$CH_2{=}CHNC$ acryl isonitrile",
+          "$CH_2{=}CHCOOCH_3$ methyl acrylate"
+        ],
+        [
+          "Croton",
+          "$CH_3CH{=}CHC{\\equiv}N$ crotonitrile",
+          "$CH_3CH{=}CHNC$ crotonisonitrile",
+          "$CH_3CH{=}CHCOOCH_3$ methyl crotonate"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common Prefixes: Nitriles, Isonitriles and Esters",
+    "card_type": "table",
+    "body": "The source continues the same prefix families for nitriles, isonitriles and methyl esters.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "If suffix isocyanide or carbylamine is used, the carbon atom of $-NC$ is not counted.",
+      "If O-isonitrile is used, the carbon atom of $-NC$ is counted."
+    ],
+    "importance": 4,
+    "source_page": 111,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-nomenclature-functional-group-priority",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Priority",
+        "Functional group",
+        "Class"
+      ],
+      "rows": [
+        [
+          "1",
+          "$R-COOH$",
+          "alkanoic acid"
+        ],
+        [
+          "2",
+          "$R-SO_3H$",
+          "alkane sulphonic acid"
+        ],
+        [
+          "3",
+          "$RCOOCOR$",
+          "alkanonic anhydride"
+        ],
+        [
+          "4",
+          "$RCOOR$",
+          "alkyl alkanoate"
+        ],
+        [
+          "5",
+          "$RCOX$",
+          "alkanoyl halide"
+        ],
+        [
+          "6",
+          "$RCONH_2$",
+          "alkanamide"
+        ],
+        [
+          "7",
+          "$RC{\\equiv}N$",
+          "alkanenitrile"
+        ],
+        [
+          "8",
+          "$RCHO$",
+          "alkanal"
+        ],
+        [
+          "9",
+          "$RCOR$",
+          "alkanone"
+        ],
+        [
+          "10",
+          "$ROH$",
+          "alkanol"
+        ],
+        [
+          "11",
+          "$RSH$",
+          "alkanethiol"
+        ],
+        [
+          "12",
+          "$RNH_2$",
+          "alkanamine"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Principal Functional Groups",
+    "card_type": "table",
+    "body": "The handbook gives these functional groups in decreasing seniority order.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-nomenclature-suffix-prefix-forms",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Functional group",
+        "Secondary suffix",
+        "Prefix"
+      ],
+      "rows": [
+        [
+          "$-COOH$",
+          "-oic acid / carboxylic acid",
+          "carboxy"
+        ],
+        [
+          "$-SO_3H$",
+          "-sulphonic acid",
+          "sulpho"
+        ],
+        [
+          "$-COOR$",
+          "-oate / carboxylate",
+          "alkoxy carbonyl / alkanoyl oxy"
+        ],
+        [
+          "$-COX$",
+          "-oyl halide / carbonyl halide",
+          "halo carbonyl"
+        ],
+        [
+          "$-CONH_2$",
+          "-amide / carboxamide",
+          "carbamoyl"
+        ],
+        [
+          "$-CN$",
+          "-nitrile / carbonitrile",
+          "cyano"
+        ],
+        [
+          "$-CHO$",
+          "-al / carbaldehyde",
+          "formyl / oxo"
+        ],
+        [
+          "$>C{=}O$",
+          "-one",
+          "oxo"
+        ],
+        [
+          "$-OH$",
+          "-ol",
+          "hydroxy"
+        ],
+        [
+          "$-SH$",
+          "-thiol",
+          "mercapto"
+        ],
+        [
+          "$-NH_2$",
+          "-amine",
+          "amino"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Functional Group Suffix and Prefix Forms",
+    "card_type": "table",
+    "body": "The source pairs each principal group with its secondary suffix and prefix form.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-nomenclature-iupac-name-anatomy",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Anatomy of an IUPAC Name",
+    "card_type": "formula",
+    "body": "The handbook explicitly gives a five-part construction for IUPAC names.",
+    "formulas": [
+      {
+        "latex": "\\text{Secondary prefix}+\\text{Primary prefix}+\\text{Word root}+\\text{Primary suffix}+\\text{Secondary suffix}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-nomenclature-word-root-suffix-examples",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Structure",
+        "Parts shown in source",
+        "IUPAC name"
+      ],
+      "rows": [
+        [
+          "$CH_3CH_2OH$",
+          "Eth + an(e) + ol",
+          "ethanol"
+        ],
+        [
+          "$CH_3CH_2CH_2NH_2$",
+          "Prop + an(e) + amine",
+          "propanamine"
+        ],
+        [
+          "$CH_3CH_2CH_2COOH$",
+          "But + an(e) + oic acid",
+          "butanoic acid"
+        ],
+        [
+          "$CH_3CH_2CN$",
+          "Prop + an(e) + nitrile",
+          "propanenitrile"
+        ],
+        [
+          "$CH_2{=}CHCHO$",
+          "Prop + en(e) + al",
+          "propenal"
+        ],
+        [
+          "$HC{\\equiv}CCOOH$",
+          "Prop + yn(e) + oic acid",
+          "propynoic acid"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Word Root and Suffix Examples",
+    "card_type": "table",
+    "body": "These source examples show how word root, primary suffix and secondary suffix combine.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 112,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-nomenclature-cyclic-multiple-bond-examples",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Source-backed name",
+        "Construction clue"
+      ],
+      "rows": [
+        [
+          "4-bromocyclohexan-1-ol",
+          "4-bromo + cyclo + hex + an(e) + 1-ol"
+        ],
+        [
+          "2-iodo-3-methylcyclopentane-1-sulphonic acid",
+          "2-iodo-3-methyl + cyclo + pent + ane + 1-sulphonic acid"
+        ],
+        [
+          "3-methyl-3-propylhex-1-ene",
+          "Longest chain is six carbons and the double bond gets locant 1."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Cyclic and Multiple-Bond Naming Examples",
+    "card_type": "table",
+    "body": "The source uses these examples to illustrate secondary prefixes, cyclic parent names and multiple-bond locants.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 113,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-nomenclature-common-vs-iupac-names",
+    "chapter_id": "jee-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Common name",
+        "IUPAC name"
+      ],
+      "rows": [
+        [
+          "propylene",
+          "propene"
+        ],
+        [
+          "isobutylene",
+          "2-methylpropene"
+        ],
+        [
+          "methyl acetylene",
+          "propyne"
+        ],
+        [
+          "isobutyl chloride",
+          "1-chloro-2-methylpropane"
+        ],
+        [
+          "ethylene dibromide",
+          "1,2-dibromoethane"
+        ],
+        [
+          "vinyl chloride",
+          "chloroethene"
+        ],
+        [
+          "isopropyl alcohol",
+          "propan-2-ol"
+        ],
+        [
+          "allyl alcohol",
+          "prop-2-en-1-ol"
+        ],
+        [
+          "glycerol / glycerine",
+          "propane-1,2,3-triol"
+        ],
+        [
+          "acetaldehyde",
+          "ethanal"
+        ],
+        [
+          "ethyl methyl ketone",
+          "butanone"
+        ],
+        [
+          "acetic acid",
+          "ethanoic acid"
+        ],
+        [
+          "oxalic acid",
+          "ethanedioic acid"
+        ],
+        [
+          "pyruvic acid",
+          "2-oxopropanoic acid"
+        ],
+        [
+          "acetyl chloride",
+          "ethanoyl chloride"
+        ],
+        [
+          "acetamide",
+          "ethanamide"
+        ],
+        [
+          "methylamine",
+          "methanamine"
+        ],
+        [
+          "methyl cyanide / acetonitrile",
+          "ethanenitrile"
+        ],
+        [
+          "methyl isocyanide / methyl carbylamine",
+          "methane isocyanide"
+        ],
+        [
+          "toluene",
+          "methylbenzene / toluene"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common and IUPAC Names",
+    "card_type": "table",
+    "body": "The handbook lists common names beside IUPAC names for frequently used organic compounds.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 114,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-isomerism-comparison",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": {
+      "columns": [
+        "Type",
+        "What changes",
+        "What remains same",
+        "Key condition"
+      ],
+      "rows": [
+        [
+          "Chain isomerism",
+          "Size of main chain or side chain",
+          "Nature of locants",
+          "Same nature of locants."
+        ],
+        [
+          "Positional isomerism",
+          "Position of locants",
+          "Size of main/side chain and nature of locant",
+          "Same size of main chain and side chain."
+        ],
+        [
+          "Functional isomerism",
+          "Nature of locant",
+          "Molecular formula",
+          "Chain and positional isomerism are not considered."
+        ],
+        [
+          "Metamerism",
+          "Nature of alkyl groups around polyvalent functional group",
+          "Nature of functional group",
+          "Chain and positional isomerism are ignored."
+        ],
+        [
+          "Tautomerism",
+          "Position of hydrogen atom",
+          "Two functional-isomer forms",
+          "Two functional isomers remain in dynamic equilibrium."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Structure Isomerism Comparison",
+    "card_type": "table",
+    "body": "The source table classifies five kinds of structural isomerism and gives the key condition for each.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 115,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-chain-isomerism",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Chain Isomerism",
+    "card_type": "concept",
+    "body": "Chain isomerism depends on a different size of the main chain or side chain while the nature of locants remains the same.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source counts dimethyl cyclopropane and dimethyl cyclobutane structure isomers as 2 and 3 respectively."
+    ],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-positional-isomerism",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Positional Isomerism",
+    "card_type": "concept",
+    "body": "Positional isomerism changes the position of locants without changing the size of the main chain, side chain, or nature of the locant.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-functional-isomerism",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Functional Isomerism",
+    "card_type": "concept",
+    "body": "Functional isomerism changes the nature of the locant; the source notes that chain and positional isomerism are not considered here.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-metamerism",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Metamerism",
+    "card_type": "concept",
+    "body": "Metamerism involves a different nature of alkyl groups attached around a polyvalent functional group.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source keeps the functional group nature the same and ignores chain and positional isomerism for this type."
+    ],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-tautomerism",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Tautomerism",
+    "card_type": "mixed",
+    "body": "The source defines tautomerism through a change in hydrogen position and states that two functional isomers remain in dynamic equilibrium.",
+    "formulas": [
+      {
+        "latex": "\\text{functional isomer}\\rightleftharpoons\\text{functional isomer}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "No specific keto-enol example is added because the visible table only states the dynamic-equilibrium condition."
+    ],
+    "importance": 5,
+    "source_page": 115,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-structure-isomerism-selected-solved-examples",
+    "chapter_id": "jee-chemistry-structure-isomerism",
+    "table_data": {
+      "columns": [
+        "Prompt/result",
+        "Source-backed answer"
+      ],
+      "rows": [
+        [
+          "Name a readable structure",
+          "2-ethoxybutanoic acid"
+        ],
+        [
+          "Name a cyclohexane sulphonic acid structure",
+          "3-bromocyclohexane-1-sulphonic acid"
+        ],
+        [
+          "Name a trimethyl cyclopentane structure",
+          "1,1,2-trimethylcyclopentane"
+        ],
+        [
+          "Total cyclic isomers of $C_4H_7Cl$",
+          "4"
+        ],
+        [
+          "Total cycloalkanone structures for $C_5H_8O$",
+          "6"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Selected Readable Examples",
+    "card_type": "table",
+    "body": "Only clearly readable examples from the source exercise block are retained as quick checks.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 3,
+    "source_page": 115,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-inductive-effect-definition",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-inductive"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Inductive Effect",
+    "card_type": "mixed",
+    "body": "The source defines inductive effect as permanent displacement of sigma-bond pair electrons due to a dipole or polar bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It is also called transmission effect.",
+      "It causes permanent polarisation in the molecule.",
+      "Electrons never leave their original atomic orbital.",
+      "Its magnitude decreases with distance and is almost negligible after the third carbon atom.",
+      "It operates through sigma bonds and does not involve pi-bond electrons."
+    ],
+    "importance": 5,
+    "source_page": 120,
+    "sort_order": 1
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-inductive-orders",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Effect",
+        "Decreasing strength order"
+      ],
+      "rows": [
+        [
+          "-I",
+          "$-\\overset{+}{N}R_3 > -\\overset{+}{S}R_2 > -\\overset{+}{N}H_3 > -NO_2 > -SO_2R > -CN > -CHO > -COOH > -F > -Cl > -Br > -I > -OR > -OH > -C{\\equiv}CH > -NH_2 > -C_6H_5 > -CH{=}CH_2 > -H$"
+        ],
+        [
+          "+I",
+          "$-\\overset{-}{O} > -\\overset{-}{COO} > -C(CH_3)_3 > -CH(CH_3)_2 > -CH_2CH_3 > -CH_3 > -D > -H$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "-I and +I Orders",
+    "card_type": "table",
+    "body": "The source lists groups in decreasing inductive strength.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Hydrogen is the reference for +I and -I series; its inductive effect is assumed to be zero."
+    ],
+    "importance": 5,
+    "source_page": 120,
+    "sort_order": 2
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-cooh-coo-inductive-example",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "COOH and COO- Inductive Example",
+    "card_type": "concept",
+    "body": "The source compares carbon chains attached to $-COO^-$ and $-COOH$.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Due to electron-donating nature of $-COO^-$, the carbon chain becomes partially negative.",
+      "$-COOH$ is a -I group; therefore the carbon chain becomes partially positive."
+    ],
+    "importance": 4,
+    "source_page": 121,
+    "sort_order": 3
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-resonance-definition",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-resonance"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Resonance and Resonance Hybrid",
+    "card_type": "mixed",
+    "body": "Resonance is the phenomenon where two or more structures with identical atom positions can be written for a species.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The possible structures are resonating or canonical structures.",
+      "Resonating structures are hypothetical and contribute to the real resonance hybrid.",
+      "The resonance hybrid is more stable than any resonating structure.",
+      "The most stable resonating structure contributes maximum to the hybrid."
+    ],
+    "importance": 5,
+    "source_page": 121,
+    "sort_order": 4
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-conjugation-types",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Conjugated feature",
+        "With $C=C$"
+      ],
+      "rows": [
+        [
+          "Pi bond",
+          "$CH_2{=}CH-CH{=}CH_2$"
+        ],
+        [
+          "Positive charge",
+          "$CH_2{=}CH-\\overset{+}{C}H_2$"
+        ],
+        [
+          "Lone pair",
+          "$:Cl-CH{=}CH_2$"
+        ],
+        [
+          "Odd electron",
+          "$CH_2{=}CH-\\dot{C}H_2$"
+        ],
+        [
+          "Negative charge",
+          "$CH_2{=}CH-\\overset{-}{C}H_2$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Conjugation Types",
+    "card_type": "table",
+    "body": "The handbook says a group is conjugated with an unsaturated system when it is directly linked through a single bond and has the listed electron feature.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 5
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-mesomeric-effect-definition",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Mesomeric Effect",
+    "card_type": "concept",
+    "body": "The source defines mesomeric effect as a permanent pi-electron shift from multiple bond to atom, multiple bond to single bond, or lone pair to single bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It mainly operates in a conjugated system of double bonds and is also known as conjugate effect."
+    ],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 6
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-mesomeric-orders",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Effect",
+        "Source order"
+      ],
+      "rows": [
+        [
+          "+M",
+          "$-\\overset{-}{O} > -NH_2 > -NHR > -NR_2 > -OH > -OR > -NHCOR > -OCOR > -Ph > -F > -Cl > -Br > -I > -NO$"
+        ],
+        [
+          "-M",
+          "$-NO_2 > -CHO > >C{=}O > -C(=O)-O-C(=O)-R > -C(=O)-O-R > -COOH > -CONH_2 > -C(=O)O^-$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "+M and -M Orders",
+    "card_type": "table",
+    "body": "The visible source gives usual relative orders for mesomeric effects.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 7
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-hyperconjugation",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-hyperconjugation"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Hyperconjugation",
+    "card_type": "mixed",
+    "body": "The source defines hyperconjugation as delocalisation of sigma electrons with a p-orbital.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It is also known as sigma-pi conjugation or no-bond resonance.",
+      "It may take place in alkene, alkyne, carbocation, free radical and benzene nucleus.",
+      "Necessary condition: at least one hydrogen on the saturated alpha carbon with respect to alkene, alkyne, carbocation, free radical or benzene nucleus."
+    ],
+    "importance": 5,
+    "source_page": 123,
+    "sort_order": 8
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-aromaticity-rules",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Aromaticity Rules",
+    "card_type": "formula",
+    "body": "The source gives the rule set for predicting whether a compound is aromatic.",
+    "formulas": [
+      {
+        "latex": "(4n+2)\\pi\\ \\text{electrons}=2,6,10,14,\\ldots"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "integer: 0, 1, 2, 3, ..."
+      }
+    ],
+    "conditions": [
+      "Aromatic compounds are cyclic and planar.",
+      "Each atom in an aromatic ring is $sp^2$ hybridised.",
+      "The cyclic pi molecular orbital must contain $(4n+2)\\pi$ electrons.",
+      "The source notes characteristic smell, extra stability and sooty flame."
+    ],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 9
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-aromatic-comparison",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Characteristic",
+        "Aromatic",
+        "Anti-aromatic",
+        "Non-aromatic"
+      ],
+      "rows": [
+        [
+          "Structure",
+          "Cyclic, planar, all ring atoms $sp^2$",
+          "Cyclic, planar, all ring atoms $sp^2$",
+          "Cyclic or acyclic; planar or non-planar"
+        ],
+        [
+          "Pi electrons",
+          "$(4n+2)\\pi$ electrons",
+          "$(4n)\\pi$ electrons",
+          "Any number of pi electrons"
+        ],
+        [
+          "Overlap",
+          "Favourable p-orbital overlap",
+          "Unfavourable p-orbital overlap",
+          "Simple overlap like alkenes"
+        ],
+        [
+          "Resonance energy",
+          "Very high; $>20-25$ kcal/mol",
+          "Zero",
+          "$4-8$ kcal/mol like alkenes"
+        ],
+        [
+          "Stability",
+          "Extra stability due to conjugation",
+          "Unstable; not exist at room temperature",
+          "Normal stability like a conjugated system"
+        ],
+        [
+          "Reaction",
+          "Electrophilic substitution",
+          "Dimerisation to attain stability",
+          "Electrophilic addition like alkenes"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-aromaticity"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Aromatic, Anti-Aromatic and Non-Aromatic",
+    "card_type": "mixed",
+    "body": "The source compares aromatic, anti-aromatic and non-aromatic compounds across structure, electron count, overlap, resonance energy, stability and reactions.",
+    "formulas": [
+      {
+        "latex": "\\text{Aromatic} > \\text{Non-Aromatic} > \\text{Anti-Aromatic}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 10
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-carbocation",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Hybridisation",
+        "Visible examples"
+      ],
+      "rows": [
+        [
+          "$sp^2$",
+          "$\\overset{+}{C}H_3$, $CH_3\\overset{+}{C}H_2$, $CH_3\\overset{+}{C}HCH_3$, $(CH_3)_3\\overset{+}{C}$"
+        ],
+        [
+          "sp",
+          "$H_2C{=}\\overset{+}{C}H$, $HC{\\equiv}\\overset{+}{C}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbocations",
+    "card_type": "table",
+    "body": "The source defines carbocations as carbon intermediates with three bond pairs and a positive charge.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Carbocations may be $sp^2$ or sp hybridised.",
+      "They are electron deficient with only six valence-shell electrons and act as Lewis acids/electrophiles.",
+      "They are stabilised by +I effect, +M effect, hyperconjugation and delocalisation of charge."
+    ],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 11
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-carbocation-stability",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbocation Stability Order",
+    "card_type": "note",
+    "body": "The source gives a long general carbocation stability order using phenyl, vinyl, tertiary, secondary and primary carbocations.",
+    "formulas": [
+      {
+        "latex": "Ph_3\\overset{+}{C} > Ph_2\\overset{+}{C}H > Ph-\\overset{+}{C}H-R > CH_2{=}CH-\\overset{+}{C}H-R \\ge (CH_3)_3\\overset{+}{C} \\ge Ph\\overset{+}{C}H_2 > CH_2{=}CH-\\overset{+}{C}H_2 \\ge (CH_3)_2\\overset{+}{C}H > CH_3\\overset{+}{C}H_2 > \\overset{+}{C}H_3 > CH_2{=}\\overset{+}{C}H \\simeq \\text{phenyl cation}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Order preserved from the visually inspected page; highly detailed structures remain available in the PDF fallback."
+    ],
+    "importance": 5,
+    "source_page": 125,
+    "sort_order": 12
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-carbanions",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Hybridisation",
+        "Visible examples"
+      ],
+      "rows": [
+        [
+          "$sp^3$",
+          "$\\overset{-}{C}H_3$, $CH_3\\overset{-}{C}H_2$, $CH_3\\overset{-}{C}HCH_3$, $(CH_3)_3\\overset{-}{C}$"
+        ],
+        [
+          "$sp^2$",
+          "$H_2C{=}\\overset{-}{C}H$, $CH_2{=}CH-\\overset{-}{C}H_2$, phenyl carbanion"
+        ],
+        [
+          "sp",
+          "$HC{\\equiv}\\overset{-}{C}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbanions",
+    "card_type": "table",
+    "body": "The source defines carbanions as carbon intermediates with three bond pairs and a negative charge.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Carbanions may be $sp^3$, $sp^2$ or sp hybridised and are stabilised by -I effect, -M effect and delocalisation of charge."
+    ],
+    "importance": 5,
+    "source_page": 125,
+    "sort_order": 13
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-free-radicals",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-bond-fission"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Free Radicals",
+    "card_type": "mixed",
+    "body": "The source says homolysis of a covalent bond gives free-radical intermediates with unpaired electrons.",
+    "formulas": [
+      {
+        "latex": "A:B\\xrightarrow{\\text{homolysis}}\\dot{A}+\\dot{B}"
+      },
+      {
+        "latex": "R-X\\xrightarrow{h\\nu\\ \\text{or}\\ \\Delta}\\dot{R}+\\dot{X}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Generated in the presence of sunlight, peroxides or high temperature.",
+      "A free radical is an uncharged intermediate with three bond pairs and one unpaired electron on carbon.",
+      "It is neutral, paramagnetic, generally shows no rearrangement and the odd-electron carbon is $sp^2$ hybridised."
+    ],
+    "importance": 5,
+    "source_page": 126,
+    "sort_order": 14
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-free-radical-stability",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Free Radical Stability",
+    "card_type": "formula",
+    "body": "The source states that free radicals are stabilised by resonance, hyperconjugation and +I groups.",
+    "formulas": [
+      {
+        "latex": "(CH_3)_3\\dot{C} > CH_3-\\dot{C}H-CH_3 > CH_3-\\dot{C}H_2 > \\dot{C}H_3"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The displayed order is labelled as the stability order in the source."
+    ],
+    "importance": 5,
+    "source_page": 126,
+    "sort_order": 15
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-carbenes-nitrenes",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Intermediate",
+        "Source-backed point"
+      ],
+      "rows": [
+        [
+          "Carbenes",
+          "Neutral divalent carbon species; most are highly unstable and short-lived."
+        ],
+        [
+          "Nitrenes",
+          "Nitrogen analog of carbenes; very reactive because the octet of nitrogen is incomplete."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbenes and Nitrenes",
+    "card_type": "table",
+    "body": "The GOC section closes with divalent carbon intermediates and nitrenes before the Alkane chapter begins.",
+    "formulas": [
+      {
+        "latex": "CHCl_3+HO^-\\xrightarrow{-HCl}:CCl_2"
+      },
+      {
+        "latex": "CH_2I_2+Zn\\xrightarrow[\\Delta]{-ZnI_2}:CH_2"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 126,
+    "sort_order": 16
+  },
+  {
+    "id": "jee-chemistry-general-organic-chemistry-benzyne",
+    "chapter_id": "jee-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Benzyne Bond",
+    "card_type": "concept",
+    "body": "The source describes benzyne as a benzene ring with one extra C-C pi bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The newly formed pi bond cannot enter resonance with other ring pi orbitals because it is in a perpendicular plane.",
+      "Each carbon involved in the benzynic bond is $sp^2$ hybridised.",
+      "Overlap between these $sp^2$ hybrid orbitals is not very effective."
+    ],
+    "importance": 4,
+    "source_page": 127,
+    "sort_order": 17
+  },
+  {
+    "id": "neet-chemistry-nomenclature-common-prefix-carbonyl-family",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Prefix",
+        "Aldehyde",
+        "Carboxylic acid",
+        "Acyl chloride",
+        "Amide"
+      ],
+      "rows": [
+        [
+          "Form",
+          "$HCHO$ formaldehyde",
+          "$HCOOH$ formic acid",
+          "$HCOCl$ formyl chloride",
+          "$HCONH_2$ formamide"
+        ],
+        [
+          "Acet",
+          "$CH_3CHO$ acetaldehyde",
+          "$CH_3COOH$ acetic acid",
+          "$CH_3COCl$ acetyl chloride",
+          "$CH_3CONH_2$ acetamide"
+        ],
+        [
+          "Propion",
+          "$CH_3CH_2CHO$ propion aldehyde",
+          "$CH_3CH_2COOH$ propionic acid",
+          "$CH_3CH_2COCl$ propionyl chloride",
+          "$CH_3CH_2CONH_2$ propionamide"
+        ],
+        [
+          "Butyr",
+          "$CH_3CH_2CH_2CHO$ n-butyraldehyde",
+          "$CH_3CH_2CH_2COOH$ n-butyric acid",
+          "$CH_3CH_2CH_2COCl$ n-butyryl chloride",
+          "$CH_3CH_2CH_2CONH_2$ n-butyramide"
+        ],
+        [
+          "Valer",
+          "$CH_3CH_2CH_2CH_2CHO$ n-valeraldehyde",
+          "$CH_3CH_2CH_2CH_2COOH$ n-valeric acid",
+          "$CH_3CH_2CH_2CH_2COCl$ n-valeryl chloride",
+          "$CH_3CH_2CH_2CH_2CONH_2$ n-valeramide"
+        ],
+        [
+          "Acryl",
+          "$CH_2{=}CHCHO$ acrylaldehyde",
+          "$CH_2{=}CHCOOH$ acrylic acid",
+          "$CH_2{=}CHCOCl$ acrylyl chloride",
+          "$CH_2{=}CHCONH_2$ acrylamide"
+        ],
+        [
+          "Croton",
+          "$CH_3CH{=}CHCHO$ crotonaldehyde",
+          "$CH_3CH{=}CHCOOH$ crotonic acid",
+          "$CH_3CH{=}CHCOCl$ crotonyl chloride",
+          "$CH_3CH{=}CHCONH_2$ crotonamide"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common Prefixes: Carbonyl Families",
+    "card_type": "table",
+    "body": "The source lists common/trivial prefixes for related aldehydes, carboxylic acids, acyl chlorides and amides.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Acryl has three carbons with one double bond; croton has four carbons with one double bond at the second carbon."
+    ],
+    "importance": 4,
+    "source_page": 110,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-nomenclature-common-prefix-nitrile-ester-family",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Prefix",
+        "Nitrile",
+        "Isonitrile",
+        "Ester"
+      ],
+      "rows": [
+        [
+          "Form",
+          "$HC{\\equiv}N$ formonitrile",
+          "$HN{\\equiv}C$ formoisonitrile",
+          "$HCOOCH_3$ methyl formate"
+        ],
+        [
+          "Acet",
+          "$CH_3C{\\equiv}N$ acetonitrile",
+          "$CH_3N{\\equiv}C$ acetoisonitrile",
+          "$CH_3COOCH_3$ methyl acetate"
+        ],
+        [
+          "Butyr",
+          "$CH_3CH_2CH_2C{\\equiv}N$ n-butyronitrile",
+          "$CH_3CH_2CH_2N{\\equiv}C$ n-butyroisonitrile",
+          "$CH_3CH_2CH_2COOCH_3$ methyl n-butyrate"
+        ],
+        [
+          "Acryl",
+          "$CH_2{=}CHC{\\equiv}N$ acrylonitrile",
+          "$CH_2{=}CHNC$ acryl isonitrile",
+          "$CH_2{=}CHCOOCH_3$ methyl acrylate"
+        ],
+        [
+          "Croton",
+          "$CH_3CH{=}CHC{\\equiv}N$ crotonitrile",
+          "$CH_3CH{=}CHNC$ crotonisonitrile",
+          "$CH_3CH{=}CHCOOCH_3$ methyl crotonate"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common Prefixes: Nitriles, Isonitriles and Esters",
+    "card_type": "table",
+    "body": "The source continues the same prefix families for nitriles, isonitriles and methyl esters.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "If suffix isocyanide or carbylamine is used, the carbon atom of $-NC$ is not counted.",
+      "If O-isonitrile is used, the carbon atom of $-NC$ is counted."
+    ],
+    "importance": 4,
+    "source_page": 111,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-nomenclature-functional-group-priority",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Priority",
+        "Functional group",
+        "Class"
+      ],
+      "rows": [
+        [
+          "1",
+          "$R-COOH$",
+          "alkanoic acid"
+        ],
+        [
+          "2",
+          "$R-SO_3H$",
+          "alkane sulphonic acid"
+        ],
+        [
+          "3",
+          "$RCOOCOR$",
+          "alkanonic anhydride"
+        ],
+        [
+          "4",
+          "$RCOOR$",
+          "alkyl alkanoate"
+        ],
+        [
+          "5",
+          "$RCOX$",
+          "alkanoyl halide"
+        ],
+        [
+          "6",
+          "$RCONH_2$",
+          "alkanamide"
+        ],
+        [
+          "7",
+          "$RC{\\equiv}N$",
+          "alkanenitrile"
+        ],
+        [
+          "8",
+          "$RCHO$",
+          "alkanal"
+        ],
+        [
+          "9",
+          "$RCOR$",
+          "alkanone"
+        ],
+        [
+          "10",
+          "$ROH$",
+          "alkanol"
+        ],
+        [
+          "11",
+          "$RSH$",
+          "alkanethiol"
+        ],
+        [
+          "12",
+          "$RNH_2$",
+          "alkanamine"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Principal Functional Groups",
+    "card_type": "table",
+    "body": "The handbook gives these functional groups in decreasing seniority order.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-nomenclature-suffix-prefix-forms",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Functional group",
+        "Secondary suffix",
+        "Prefix"
+      ],
+      "rows": [
+        [
+          "$-COOH$",
+          "-oic acid / carboxylic acid",
+          "carboxy"
+        ],
+        [
+          "$-SO_3H$",
+          "-sulphonic acid",
+          "sulpho"
+        ],
+        [
+          "$-COOR$",
+          "-oate / carboxylate",
+          "alkoxy carbonyl / alkanoyl oxy"
+        ],
+        [
+          "$-COX$",
+          "-oyl halide / carbonyl halide",
+          "halo carbonyl"
+        ],
+        [
+          "$-CONH_2$",
+          "-amide / carboxamide",
+          "carbamoyl"
+        ],
+        [
+          "$-CN$",
+          "-nitrile / carbonitrile",
+          "cyano"
+        ],
+        [
+          "$-CHO$",
+          "-al / carbaldehyde",
+          "formyl / oxo"
+        ],
+        [
+          "$>C{=}O$",
+          "-one",
+          "oxo"
+        ],
+        [
+          "$-OH$",
+          "-ol",
+          "hydroxy"
+        ],
+        [
+          "$-SH$",
+          "-thiol",
+          "mercapto"
+        ],
+        [
+          "$-NH_2$",
+          "-amine",
+          "amino"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Functional Group Suffix and Prefix Forms",
+    "card_type": "table",
+    "body": "The source pairs each principal group with its secondary suffix and prefix form.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-nomenclature-iupac-name-anatomy",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Anatomy of an IUPAC Name",
+    "card_type": "formula",
+    "body": "The handbook explicitly gives a five-part construction for IUPAC names.",
+    "formulas": [
+      {
+        "latex": "\\text{Secondary prefix}+\\text{Primary prefix}+\\text{Word root}+\\text{Primary suffix}+\\text{Secondary suffix}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 112,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-nomenclature-word-root-suffix-examples",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Structure",
+        "Parts shown in source",
+        "IUPAC name"
+      ],
+      "rows": [
+        [
+          "$CH_3CH_2OH$",
+          "Eth + an(e) + ol",
+          "ethanol"
+        ],
+        [
+          "$CH_3CH_2CH_2NH_2$",
+          "Prop + an(e) + amine",
+          "propanamine"
+        ],
+        [
+          "$CH_3CH_2CH_2COOH$",
+          "But + an(e) + oic acid",
+          "butanoic acid"
+        ],
+        [
+          "$CH_3CH_2CN$",
+          "Prop + an(e) + nitrile",
+          "propanenitrile"
+        ],
+        [
+          "$CH_2{=}CHCHO$",
+          "Prop + en(e) + al",
+          "propenal"
+        ],
+        [
+          "$HC{\\equiv}CCOOH$",
+          "Prop + yn(e) + oic acid",
+          "propynoic acid"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Word Root and Suffix Examples",
+    "card_type": "table",
+    "body": "These source examples show how word root, primary suffix and secondary suffix combine.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 112,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-nomenclature-cyclic-multiple-bond-examples",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Source-backed name",
+        "Construction clue"
+      ],
+      "rows": [
+        [
+          "4-bromocyclohexan-1-ol",
+          "4-bromo + cyclo + hex + an(e) + 1-ol"
+        ],
+        [
+          "2-iodo-3-methylcyclopentane-1-sulphonic acid",
+          "2-iodo-3-methyl + cyclo + pent + ane + 1-sulphonic acid"
+        ],
+        [
+          "3-methyl-3-propylhex-1-ene",
+          "Longest chain is six carbons and the double bond gets locant 1."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Cyclic and Multiple-Bond Naming Examples",
+    "card_type": "table",
+    "body": "The source uses these examples to illustrate secondary prefixes, cyclic parent names and multiple-bond locants.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 113,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-nomenclature-common-vs-iupac-names",
+    "chapter_id": "neet-chemistry-nomenclature",
+    "table_data": {
+      "columns": [
+        "Common name",
+        "IUPAC name"
+      ],
+      "rows": [
+        [
+          "propylene",
+          "propene"
+        ],
+        [
+          "isobutylene",
+          "2-methylpropene"
+        ],
+        [
+          "methyl acetylene",
+          "propyne"
+        ],
+        [
+          "isobutyl chloride",
+          "1-chloro-2-methylpropane"
+        ],
+        [
+          "ethylene dibromide",
+          "1,2-dibromoethane"
+        ],
+        [
+          "vinyl chloride",
+          "chloroethene"
+        ],
+        [
+          "isopropyl alcohol",
+          "propan-2-ol"
+        ],
+        [
+          "allyl alcohol",
+          "prop-2-en-1-ol"
+        ],
+        [
+          "glycerol / glycerine",
+          "propane-1,2,3-triol"
+        ],
+        [
+          "acetaldehyde",
+          "ethanal"
+        ],
+        [
+          "ethyl methyl ketone",
+          "butanone"
+        ],
+        [
+          "acetic acid",
+          "ethanoic acid"
+        ],
+        [
+          "oxalic acid",
+          "ethanedioic acid"
+        ],
+        [
+          "pyruvic acid",
+          "2-oxopropanoic acid"
+        ],
+        [
+          "acetyl chloride",
+          "ethanoyl chloride"
+        ],
+        [
+          "acetamide",
+          "ethanamide"
+        ],
+        [
+          "methylamine",
+          "methanamine"
+        ],
+        [
+          "methyl cyanide / acetonitrile",
+          "ethanenitrile"
+        ],
+        [
+          "methyl isocyanide / methyl carbylamine",
+          "methane isocyanide"
+        ],
+        [
+          "toluene",
+          "methylbenzene / toluene"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Common and IUPAC Names",
+    "card_type": "table",
+    "body": "The handbook lists common names beside IUPAC names for frequently used organic compounds.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 114,
+    "sort_order": 8
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-isomerism-comparison",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": {
+      "columns": [
+        "Type",
+        "What changes",
+        "What remains same",
+        "Key condition"
+      ],
+      "rows": [
+        [
+          "Chain isomerism",
+          "Size of main chain or side chain",
+          "Nature of locants",
+          "Same nature of locants."
+        ],
+        [
+          "Positional isomerism",
+          "Position of locants",
+          "Size of main/side chain and nature of locant",
+          "Same size of main chain and side chain."
+        ],
+        [
+          "Functional isomerism",
+          "Nature of locant",
+          "Molecular formula",
+          "Chain and positional isomerism are not considered."
+        ],
+        [
+          "Metamerism",
+          "Nature of alkyl groups around polyvalent functional group",
+          "Nature of functional group",
+          "Chain and positional isomerism are ignored."
+        ],
+        [
+          "Tautomerism",
+          "Position of hydrogen atom",
+          "Two functional-isomer forms",
+          "Two functional isomers remain in dynamic equilibrium."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Structure Isomerism Comparison",
+    "card_type": "table",
+    "body": "The source table classifies five kinds of structural isomerism and gives the key condition for each.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 115,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-chain-isomerism",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Chain Isomerism",
+    "card_type": "concept",
+    "body": "Chain isomerism depends on a different size of the main chain or side chain while the nature of locants remains the same.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source counts dimethyl cyclopropane and dimethyl cyclobutane structure isomers as 2 and 3 respectively."
+    ],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-positional-isomerism",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Positional Isomerism",
+    "card_type": "concept",
+    "body": "Positional isomerism changes the position of locants without changing the size of the main chain, side chain, or nature of the locant.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-functional-isomerism",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Functional Isomerism",
+    "card_type": "concept",
+    "body": "Functional isomerism changes the nature of the locant; the source notes that chain and positional isomerism are not considered here.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-metamerism",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Metamerism",
+    "card_type": "concept",
+    "body": "Metamerism involves a different nature of alkyl groups attached around a polyvalent functional group.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The source keeps the functional group nature the same and ignores chain and positional isomerism for this type."
+    ],
+    "importance": 4,
+    "source_page": 115,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-tautomerism",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Tautomerism",
+    "card_type": "mixed",
+    "body": "The source defines tautomerism through a change in hydrogen position and states that two functional isomers remain in dynamic equilibrium.",
+    "formulas": [
+      {
+        "latex": "\\text{functional isomer}\\rightleftharpoons\\text{functional isomer}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "No specific keto-enol example is added because the visible table only states the dynamic-equilibrium condition."
+    ],
+    "importance": 5,
+    "source_page": 115,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-structure-isomerism-selected-solved-examples",
+    "chapter_id": "neet-chemistry-structure-isomerism",
+    "table_data": {
+      "columns": [
+        "Prompt/result",
+        "Source-backed answer"
+      ],
+      "rows": [
+        [
+          "Name a readable structure",
+          "2-ethoxybutanoic acid"
+        ],
+        [
+          "Name a cyclohexane sulphonic acid structure",
+          "3-bromocyclohexane-1-sulphonic acid"
+        ],
+        [
+          "Name a trimethyl cyclopentane structure",
+          "1,1,2-trimethylcyclopentane"
+        ],
+        [
+          "Total cyclic isomers of $C_4H_7Cl$",
+          "4"
+        ],
+        [
+          "Total cycloalkanone structures for $C_5H_8O$",
+          "6"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Selected Readable Examples",
+    "card_type": "table",
+    "body": "Only clearly readable examples from the source exercise block are retained as quick checks.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 3,
+    "source_page": 115,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-inductive-effect-definition",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-inductive"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Inductive Effect",
+    "card_type": "mixed",
+    "body": "The source defines inductive effect as permanent displacement of sigma-bond pair electrons due to a dipole or polar bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It is also called transmission effect.",
+      "It causes permanent polarisation in the molecule.",
+      "Electrons never leave their original atomic orbital.",
+      "Its magnitude decreases with distance and is almost negligible after the third carbon atom.",
+      "It operates through sigma bonds and does not involve pi-bond electrons."
+    ],
+    "importance": 5,
+    "source_page": 120,
+    "sort_order": 1
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-inductive-orders",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Effect",
+        "Decreasing strength order"
+      ],
+      "rows": [
+        [
+          "-I",
+          "$-\\overset{+}{N}R_3 > -\\overset{+}{S}R_2 > -\\overset{+}{N}H_3 > -NO_2 > -SO_2R > -CN > -CHO > -COOH > -F > -Cl > -Br > -I > -OR > -OH > -C{\\equiv}CH > -NH_2 > -C_6H_5 > -CH{=}CH_2 > -H$"
+        ],
+        [
+          "+I",
+          "$-\\overset{-}{O} > -\\overset{-}{COO} > -C(CH_3)_3 > -CH(CH_3)_2 > -CH_2CH_3 > -CH_3 > -D > -H$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "-I and +I Orders",
+    "card_type": "table",
+    "body": "The source lists groups in decreasing inductive strength.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Hydrogen is the reference for +I and -I series; its inductive effect is assumed to be zero."
+    ],
+    "importance": 5,
+    "source_page": 120,
+    "sort_order": 2
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-cooh-coo-inductive-example",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "COOH and COO- Inductive Example",
+    "card_type": "concept",
+    "body": "The source compares carbon chains attached to $-COO^-$ and $-COOH$.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Due to electron-donating nature of $-COO^-$, the carbon chain becomes partially negative.",
+      "$-COOH$ is a -I group; therefore the carbon chain becomes partially positive."
+    ],
+    "importance": 4,
+    "source_page": 121,
+    "sort_order": 3
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-resonance-definition",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-resonance"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Resonance and Resonance Hybrid",
+    "card_type": "mixed",
+    "body": "Resonance is the phenomenon where two or more structures with identical atom positions can be written for a species.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The possible structures are resonating or canonical structures.",
+      "Resonating structures are hypothetical and contribute to the real resonance hybrid.",
+      "The resonance hybrid is more stable than any resonating structure.",
+      "The most stable resonating structure contributes maximum to the hybrid."
+    ],
+    "importance": 5,
+    "source_page": 121,
+    "sort_order": 4
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-conjugation-types",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Conjugated feature",
+        "With $C=C$"
+      ],
+      "rows": [
+        [
+          "Pi bond",
+          "$CH_2{=}CH-CH{=}CH_2$"
+        ],
+        [
+          "Positive charge",
+          "$CH_2{=}CH-\\overset{+}{C}H_2$"
+        ],
+        [
+          "Lone pair",
+          "$:Cl-CH{=}CH_2$"
+        ],
+        [
+          "Odd electron",
+          "$CH_2{=}CH-\\dot{C}H_2$"
+        ],
+        [
+          "Negative charge",
+          "$CH_2{=}CH-\\overset{-}{C}H_2$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Conjugation Types",
+    "card_type": "table",
+    "body": "The handbook says a group is conjugated with an unsaturated system when it is directly linked through a single bond and has the listed electron feature.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 5
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-mesomeric-effect-definition",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Mesomeric Effect",
+    "card_type": "concept",
+    "body": "The source defines mesomeric effect as a permanent pi-electron shift from multiple bond to atom, multiple bond to single bond, or lone pair to single bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It mainly operates in a conjugated system of double bonds and is also known as conjugate effect."
+    ],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 6
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-mesomeric-orders",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Effect",
+        "Source order"
+      ],
+      "rows": [
+        [
+          "+M",
+          "$-\\overset{-}{O} > -NH_2 > -NHR > -NR_2 > -OH > -OR > -NHCOR > -OCOR > -Ph > -F > -Cl > -Br > -I > -NO$"
+        ],
+        [
+          "-M",
+          "$-NO_2 > -CHO > >C{=}O > -C(=O)-O-C(=O)-R > -C(=O)-O-R > -COOH > -CONH_2 > -C(=O)O^-$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "+M and -M Orders",
+    "card_type": "table",
+    "body": "The visible source gives usual relative orders for mesomeric effects.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 122,
+    "sort_order": 7
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-hyperconjugation",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-hyperconjugation"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Hyperconjugation",
+    "card_type": "mixed",
+    "body": "The source defines hyperconjugation as delocalisation of sigma electrons with a p-orbital.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "It is also known as sigma-pi conjugation or no-bond resonance.",
+      "It may take place in alkene, alkyne, carbocation, free radical and benzene nucleus.",
+      "Necessary condition: at least one hydrogen on the saturated alpha carbon with respect to alkene, alkyne, carbocation, free radical or benzene nucleus."
+    ],
+    "importance": 5,
+    "source_page": 123,
+    "sort_order": 8
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-aromaticity-rules",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Aromaticity Rules",
+    "card_type": "formula",
+    "body": "The source gives the rule set for predicting whether a compound is aromatic.",
+    "formulas": [
+      {
+        "latex": "(4n+2)\\pi\\ \\text{electrons}=2,6,10,14,\\ldots"
+      }
+    ],
+    "variables": [
+      {
+        "latex": "n",
+        "symbol": "$n$",
+        "meaning": "integer: 0, 1, 2, 3, ..."
+      }
+    ],
+    "conditions": [
+      "Aromatic compounds are cyclic and planar.",
+      "Each atom in an aromatic ring is $sp^2$ hybridised.",
+      "The cyclic pi molecular orbital must contain $(4n+2)\\pi$ electrons.",
+      "The source notes characteristic smell, extra stability and sooty flame."
+    ],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 9
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-aromatic-comparison",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Characteristic",
+        "Aromatic",
+        "Anti-aromatic",
+        "Non-aromatic"
+      ],
+      "rows": [
+        [
+          "Structure",
+          "Cyclic, planar, all ring atoms $sp^2$",
+          "Cyclic, planar, all ring atoms $sp^2$",
+          "Cyclic or acyclic; planar or non-planar"
+        ],
+        [
+          "Pi electrons",
+          "$(4n+2)\\pi$ electrons",
+          "$(4n)\\pi$ electrons",
+          "Any number of pi electrons"
+        ],
+        [
+          "Overlap",
+          "Favourable p-orbital overlap",
+          "Unfavourable p-orbital overlap",
+          "Simple overlap like alkenes"
+        ],
+        [
+          "Resonance energy",
+          "Very high; $>20-25$ kcal/mol",
+          "Zero",
+          "$4-8$ kcal/mol like alkenes"
+        ],
+        [
+          "Stability",
+          "Extra stability due to conjugation",
+          "Unstable; not exist at room temperature",
+          "Normal stability like a conjugated system"
+        ],
+        [
+          "Reaction",
+          "Electrophilic substitution",
+          "Dimerisation to attain stability",
+          "Electrophilic addition like alkenes"
+        ]
+      ]
+    },
+    "diagram_data": {
+      "type": "chem-organic-aromaticity"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Aromatic, Anti-Aromatic and Non-Aromatic",
+    "card_type": "mixed",
+    "body": "The source compares aromatic, anti-aromatic and non-aromatic compounds across structure, electron count, overlap, resonance energy, stability and reactions.",
+    "formulas": [
+      {
+        "latex": "\\text{Aromatic} > \\text{Non-Aromatic} > \\text{Anti-Aromatic}"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 10
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-carbocation",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Hybridisation",
+        "Visible examples"
+      ],
+      "rows": [
+        [
+          "$sp^2$",
+          "$\\overset{+}{C}H_3$, $CH_3\\overset{+}{C}H_2$, $CH_3\\overset{+}{C}HCH_3$, $(CH_3)_3\\overset{+}{C}$"
+        ],
+        [
+          "sp",
+          "$H_2C{=}\\overset{+}{C}H$, $HC{\\equiv}\\overset{+}{C}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbocations",
+    "card_type": "table",
+    "body": "The source defines carbocations as carbon intermediates with three bond pairs and a positive charge.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Carbocations may be $sp^2$ or sp hybridised.",
+      "They are electron deficient with only six valence-shell electrons and act as Lewis acids/electrophiles.",
+      "They are stabilised by +I effect, +M effect, hyperconjugation and delocalisation of charge."
+    ],
+    "importance": 5,
+    "source_page": 124,
+    "sort_order": 11
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-carbocation-stability",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbocation Stability Order",
+    "card_type": "note",
+    "body": "The source gives a long general carbocation stability order using phenyl, vinyl, tertiary, secondary and primary carbocations.",
+    "formulas": [
+      {
+        "latex": "Ph_3\\overset{+}{C} > Ph_2\\overset{+}{C}H > Ph-\\overset{+}{C}H-R > CH_2{=}CH-\\overset{+}{C}H-R \\ge (CH_3)_3\\overset{+}{C} \\ge Ph\\overset{+}{C}H_2 > CH_2{=}CH-\\overset{+}{C}H_2 \\ge (CH_3)_2\\overset{+}{C}H > CH_3\\overset{+}{C}H_2 > \\overset{+}{C}H_3 > CH_2{=}\\overset{+}{C}H \\simeq \\text{phenyl cation}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Order preserved from the visually inspected page; highly detailed structures remain available in the PDF fallback."
+    ],
+    "importance": 5,
+    "source_page": 125,
+    "sort_order": 12
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-carbanions",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Hybridisation",
+        "Visible examples"
+      ],
+      "rows": [
+        [
+          "$sp^3$",
+          "$\\overset{-}{C}H_3$, $CH_3\\overset{-}{C}H_2$, $CH_3\\overset{-}{C}HCH_3$, $(CH_3)_3\\overset{-}{C}$"
+        ],
+        [
+          "$sp^2$",
+          "$H_2C{=}\\overset{-}{C}H$, $CH_2{=}CH-\\overset{-}{C}H_2$, phenyl carbanion"
+        ],
+        [
+          "sp",
+          "$HC{\\equiv}\\overset{-}{C}$"
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbanions",
+    "card_type": "table",
+    "body": "The source defines carbanions as carbon intermediates with three bond pairs and a negative charge.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "Carbanions may be $sp^3$, $sp^2$ or sp hybridised and are stabilised by -I effect, -M effect and delocalisation of charge."
+    ],
+    "importance": 5,
+    "source_page": 125,
+    "sort_order": 13
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-free-radicals",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": {
+      "type": "chem-organic-bond-fission"
+    },
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Free Radicals",
+    "card_type": "mixed",
+    "body": "The source says homolysis of a covalent bond gives free-radical intermediates with unpaired electrons.",
+    "formulas": [
+      {
+        "latex": "A:B\\xrightarrow{\\text{homolysis}}\\dot{A}+\\dot{B}"
+      },
+      {
+        "latex": "R-X\\xrightarrow{h\\nu\\ \\text{or}\\ \\Delta}\\dot{R}+\\dot{X}"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "Generated in the presence of sunlight, peroxides or high temperature.",
+      "A free radical is an uncharged intermediate with three bond pairs and one unpaired electron on carbon.",
+      "It is neutral, paramagnetic, generally shows no rearrangement and the odd-electron carbon is $sp^2$ hybridised."
+    ],
+    "importance": 5,
+    "source_page": 126,
+    "sort_order": 14
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-free-radical-stability",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Free Radical Stability",
+    "card_type": "formula",
+    "body": "The source states that free radicals are stabilised by resonance, hyperconjugation and +I groups.",
+    "formulas": [
+      {
+        "latex": "(CH_3)_3\\dot{C} > CH_3-\\dot{C}H-CH_3 > CH_3-\\dot{C}H_2 > \\dot{C}H_3"
+      }
+    ],
+    "variables": [],
+    "conditions": [
+      "The displayed order is labelled as the stability order in the source."
+    ],
+    "importance": 5,
+    "source_page": 126,
+    "sort_order": 15
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-carbenes-nitrenes",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": {
+      "columns": [
+        "Intermediate",
+        "Source-backed point"
+      ],
+      "rows": [
+        [
+          "Carbenes",
+          "Neutral divalent carbon species; most are highly unstable and short-lived."
+        ],
+        [
+          "Nitrenes",
+          "Nitrogen analog of carbenes; very reactive because the octet of nitrogen is incomplete."
+        ]
+      ]
+    },
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Carbenes and Nitrenes",
+    "card_type": "table",
+    "body": "The GOC section closes with divalent carbon intermediates and nitrenes before the Alkane chapter begins.",
+    "formulas": [
+      {
+        "latex": "CHCl_3+HO^-\\xrightarrow{-HCl}:CCl_2"
+      },
+      {
+        "latex": "CH_2I_2+Zn\\xrightarrow[\\Delta]{-ZnI_2}:CH_2"
+      }
+    ],
+    "variables": [],
+    "conditions": [],
+    "importance": 4,
+    "source_page": 126,
+    "sort_order": 16
+  },
+  {
+    "id": "neet-chemistry-general-organic-chemistry-benzyne",
+    "chapter_id": "neet-chemistry-general-organic-chemistry",
+    "table_data": null,
+    "diagram_data": null,
+    "diagram_svg": null,
+    "is_active": true,
+    "title": "Benzyne Bond",
+    "card_type": "concept",
+    "body": "The source describes benzyne as a benzene ring with one extra C-C pi bond.",
+    "formulas": [],
+    "variables": [],
+    "conditions": [
+      "The newly formed pi bond cannot enter resonance with other ring pi orbitals because it is in a perpendicular plane.",
+      "Each carbon involved in the benzynic bond is $sp^2$ hybridised.",
+      "Overlap between these $sp^2$ hybrid orbitals is not very effective."
+    ],
+    "importance": 4,
+    "source_page": 127,
+    "sort_order": 17
+  }
+]$$::jsonb) as seed(
+    id text,
+    chapter_id text,
+    title text,
+    card_type text,
+    body text,
+    formulas jsonb,
+    variables jsonb,
+    conditions jsonb,
+    table_data jsonb,
+    diagram_data jsonb,
+    diagram_svg text,
+    importance integer,
+    source_page integer,
+    sort_order integer,
+    is_active boolean
+  )
+)
+insert into public.formula_cards (
+  id, chapter_id, title, card_type, body, formulas, variables, conditions, table_data, diagram_data, diagram_svg, importance, source_page, sort_order, is_active
+)
+select
+  id, chapter_id, title, card_type, body, formulas, variables, conditions, table_data, diagram_data, diagram_svg, importance, source_page, sort_order, is_active
+from card_seed
+on conflict (id) do update set
+  title = excluded.title,
+  card_type = excluded.card_type,
+  body = excluded.body,
+  formulas = excluded.formulas,
+  variables = excluded.variables,
+  conditions = excluded.conditions,
+  table_data = excluded.table_data,
+  diagram_data = excluded.diagram_data,
+  diagram_svg = excluded.diagram_svg,
+  importance = excluded.importance,
+  source_page = excluded.source_page,
+  sort_order = excluded.sort_order,
+  is_active = excluded.is_active;
