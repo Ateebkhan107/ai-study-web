@@ -25,6 +25,8 @@ import { getMathBatch5Cards, getMathBatch5Chapters } from "@/lib/formulaCardsMat
 import { getMathBatch6Cards, getMathBatch6Chapters } from "@/lib/formulaCardsMathBatch6";
 import { getBiologyBatch1Cards, getBiologyBatch1Chapters } from "@/lib/formulaCardsBiologyBatch1";
 import { getBiologyBatch2Cards, getBiologyBatch2Chapters } from "@/lib/formulaCardsBiologyBatch2";
+import { getBiologyBatch3Cards, getBiologyBatch3Chapters } from "@/lib/formulaCardsBiologyBatch3";
+import { getBiologyBatch4Cards, getBiologyBatch4Chapters } from "@/lib/formulaCardsBiologyBatch4";
 
 const CARD_SELECT = `
   id,
@@ -132,6 +134,8 @@ export const FORMULA_CARD_CHAPTERS = [
   ...getChemistryOrganicBatch5Chapters("neet"),
   ...getBiologyBatch1Chapters(),
   ...getBiologyBatch2Chapters(),
+  ...getBiologyBatch3Chapters(),
+  ...getBiologyBatch4Chapters(),
 ];
 
 const unitCards = (chapterId) => [
@@ -473,6 +477,8 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getChemistryOrganicBatch5Cards("neet"),
   ...getBiologyBatch1Cards(),
   ...getBiologyBatch2Cards(),
+  ...getBiologyBatch3Cards(),
+  ...getBiologyBatch4Cards(),
 ];
 
 function sortByOrder(items) {

@@ -3506,6 +3506,434 @@ function BioSecondaryGrowthDiagram() {
   );
 }
 
+function BioEpitheliumTypesDiagram() {
+  return (
+    <DiagramFrame title="simple epithelium">
+      {[
+        ["Squamous", 32, 118, 10],
+        ["Cuboidal", 94, 104, 22],
+        ["Columnar", 158, 82, 44],
+      ].map(([label, x, y, h]) => (
+        <g key={label}>
+          {[0, 1, 2].map((i) => (
+            <rect key={i} x={x + i * 14} y={y - h} width="13" height={h} rx="2" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" />
+          ))}
+          <text x={x + 20} y="146" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">{label}</text>
+        </g>
+      ))}
+      <path d="M154 35 C164 24 174 24 184 35 M164 35 C174 24 184 24 194 35" className="stroke-amber-500" fill="none" strokeWidth="2" />
+      <text x="174" y="52" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">cilia/microvilli cue</text>
+    </DiagramFrame>
+  );
+}
+
+function BioMuscleTypesDiagram() {
+  return (
+    <DiagramFrame title="muscle tissues">
+      <rect x="28" y="54" width="40" height="70" rx="4" className="fill-rose-100 stroke-rose-500 dark:fill-rose-950/40" strokeWidth="2" />
+      {[62, 76, 90, 104].map((y) => <line key={y} x1="30" y1={y} x2="66" y2={y} className="stroke-rose-500" />)}
+      <path d="M104 50 C84 84 124 94 104 128 M124 50 C104 84 144 94 124 128" className="stroke-emerald-500" fill="none" strokeWidth="4" />
+      <path d="M162 52 L188 84 L166 114 M174 52 L198 84 L178 126" className="stroke-amber-500" fill="none" strokeWidth="5" strokeLinecap="round" />
+      <text x="48" y="150" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">skeletal</text>
+      <text x="114" y="150" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">smooth</text>
+      <text x="180" y="150" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">cardiac</text>
+    </DiagramFrame>
+  );
+}
+
+function BioCockroachBodyDiagram() {
+  return (
+    <DiagramFrame title="cockroach body regions">
+      <ellipse cx="48" cy="90" rx="19" ry="25" className="fill-amber-200 stroke-amber-700 dark:fill-amber-950/50" strokeWidth="2" />
+      <ellipse cx="94" cy="90" rx="30" ry="38" className="fill-rose-200 stroke-rose-600 dark:fill-rose-950/40" strokeWidth="2" />
+      <ellipse cx="152" cy="90" rx="42" ry="52" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <path d="M35 66 C18 38 18 32 8 22 M61 66 C78 38 78 32 88 22" className="stroke-slate-500 dark:stroke-stone-400" fill="none" strokeWidth="2" />
+      {[62, 84, 106].map((x) => <path key={x} d={`M${x} 110 L${x - 24} 150 M${x} 72 L${x - 24} 42`} className="stroke-slate-500 dark:stroke-stone-400" fill="none" strokeWidth="2" />)}
+      <text x="48" y="165" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">head</text>
+      <text x="94" y="165" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">thorax</text>
+      <text x="152" y="165" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">abdomen</text>
+    </DiagramFrame>
+  );
+}
+
+function BioProkaryoticCellDiagram() {
+  return (
+    <DiagramFrame title="prokaryotic cell">
+      <ellipse cx="110" cy="92" rx="76" ry="48" className="fill-emerald-50 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      <ellipse cx="110" cy="92" rx="60" ry="35" className="fill-transparent stroke-amber-500" strokeDasharray="4 3" strokeWidth="2" />
+      <path d="M84 91 C100 70 123 72 138 92 C124 116 103 116 84 91" className="fill-rose-100 stroke-rose-500 dark:fill-rose-950/40" strokeWidth="2" />
+      <circle cx="75" cy="74" r="3" className="fill-slate-500" />
+      <circle cx="142" cy="112" r="3" className="fill-slate-500" />
+      <path d="M184 92 C204 88 204 64 218 62" className="stroke-amber-600" fill="none" strokeWidth="3" />
+      <text x="110" y="154" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">cell envelope + nucleoid + flagellum</text>
+    </DiagramFrame>
+  );
+}
+
+function BioPlasmaMembraneDiagram() {
+  return (
+    <DiagramFrame title="fluid mosaic membrane">
+      {[48, 68, 88, 108, 128, 148, 168].map((x) => (
+        <g key={x}>
+          <circle cx={x} cy="74" r="5" className="fill-amber-400" />
+          <circle cx={x} cy="118" r="5" className="fill-amber-400" />
+          <line x1={x - 2} y1="80" x2={x - 8} y2="112" className="stroke-amber-500" strokeWidth="2" />
+          <line x1={x + 2} y1="80" x2={x + 8} y2="112" className="stroke-amber-500" strokeWidth="2" />
+        </g>
+      ))}
+      <rect x="92" y="70" width="18" height="54" rx="8" className="fill-emerald-500" />
+      <path d="M130 58 C150 44 162 52 174 38" className="stroke-rose-500" fill="none" strokeWidth="3" />
+      <text x="101" y="145" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">integral protein</text>
+      <text x="150" y="35" textAnchor="middle" className="fill-slate-700 text-[9px] dark:fill-stone-200">carbohydrate</text>
+    </DiagramFrame>
+  );
+}
+
+function BioMitochondrionDiagram() {
+  return (
+    <DiagramFrame title="mitochondrion">
+      <ellipse cx="110" cy="92" rx="75" ry="42" className="fill-amber-100 stroke-amber-600 dark:fill-amber-950/40" strokeWidth="2" />
+      <ellipse cx="110" cy="92" rx="58" ry="29" className="fill-transparent stroke-rose-500" strokeWidth="2" />
+      <path d="M62 92 C80 58 96 126 114 92 C132 58 148 126 164 92" className="stroke-rose-500" fill="none" strokeWidth="3" />
+      <text x="110" y="154" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">cristae increase surface area</text>
+    </DiagramFrame>
+  );
+}
+
+function BioChloroplastDiagram() {
+  return (
+    <DiagramFrame title="chloroplast">
+      <ellipse cx="110" cy="92" rx="75" ry="42" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      {[72, 102, 132].map((x) => (
+        <g key={x}>
+          {[0, 1, 2, 3].map((i) => <ellipse key={i} cx={x} cy={78 + i * 8} rx="15" ry="5" className="fill-emerald-400 stroke-emerald-700" />)}
+        </g>
+      ))}
+      <path d="M86 94 C102 118 130 63 150 91" className="stroke-amber-500" fill="none" strokeWidth="2" />
+      <text x="110" y="154" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">grana + stroma lamellae</text>
+    </DiagramFrame>
+  );
+}
+
+function BioAxonemeDiagram() {
+  return (
+    <DiagramFrame title="9+2 axoneme">
+      <circle cx="110" cy="90" r="56" className="fill-slate-50 stroke-slate-300 dark:fill-stone-900 dark:stroke-stone-700" strokeWidth="2" />
+      {[0, 40, 80, 120, 160, 200, 240, 280, 320].map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        return <circle key={deg} cx={110 + Math.cos(rad) * 38} cy={90 + Math.sin(rad) * 38} r="7" className="fill-emerald-200 stroke-emerald-600" />;
+      })}
+      <circle cx="104" cy="90" r="5" className="fill-amber-500" />
+      <circle cx="118" cy="90" r="5" className="fill-amber-500" />
+      <text x="110" y="164" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">9 peripheral doublets + 2 central</text>
+    </DiagramFrame>
+  );
+}
+
+function BioChromosomeTypesDiagram() {
+  const data = [["Meta", 34, 88], ["Sub-meta", 84, 72], ["Acro", 136, 58], ["Telo", 184, 42]];
+  return (
+    <DiagramFrame title="chromosome types">
+      {data.map(([label, x, cy]) => (
+        <g key={label}>
+          <line x1={x} y1="42" x2={x} y2="140" className="stroke-rose-400" strokeWidth="8" strokeLinecap="round" />
+          <circle cx={x} cy={cy} r="5" className="fill-amber-500 stroke-slate-700 dark:stroke-stone-200" />
+          <text x={x} y="164" textAnchor="middle" className="fill-slate-700 text-[8px] font-bold dark:fill-stone-200">{label}</text>
+        </g>
+      ))}
+    </DiagramFrame>
+  );
+}
+
+function BioCellCycleDiagram() {
+  return (
+    <DiagramFrame title="cell cycle">
+      <DiagramDefs />
+      <circle cx="110" cy="92" r="55" className="fill-amber-50 stroke-amber-500 dark:fill-amber-950/30" strokeWidth="2" />
+      <path d="M110 37 A55 55 0 0 1 161 113 L110 92 Z" className="fill-emerald-200/70" />
+      <path d="M161 113 A55 55 0 0 1 83 140 L110 92 Z" className="fill-amber-200/70" />
+      <path d="M83 140 A55 55 0 0 1 61 68 L110 92 Z" className="fill-sky-200/70" />
+      <path d="M61 68 A55 55 0 0 1 110 37 L110 92 Z" className="fill-rose-200/70" />
+      <text x="130" y="70" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">G1</text>
+      <text x="110" y="128" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">S</text>
+      <text x="74" y="90" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">G2</text>
+      <text x="96" y="56" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">M</text>
+      <text x="110" y="169" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">interphase &gt; 95%</text>
+    </DiagramFrame>
+  );
+}
+
+function BioMitosisSequenceDiagram() {
+  const labels = ["Pro", "Meta", "Ana", "Telo"];
+  return (
+    <DiagramFrame title="mitosis sequence">
+      <DiagramDefs />
+      {labels.map((label, index) => {
+        const x = 32 + index * 52;
+        return (
+          <g key={label}>
+            <circle cx={x} cy="82" r="20" className="fill-amber-100 stroke-amber-500 dark:fill-amber-950/40" strokeWidth="2" />
+            <path d={`M${x - 10} 77 C${x} 66 ${x + 10} 77 ${x} 90`} className="stroke-rose-500" fill="none" strokeWidth="3" />
+            <text x={x} y="132" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">{label}</text>
+            {index < labels.length - 1 && <Arrow x1={x + 20} y1="82" x2={x + 31} y2="82" />}
+          </g>
+        );
+      })}
+    </DiagramFrame>
+  );
+}
+
+function BioProphaseOneDiagram() {
+  return (
+    <DiagramFrame title="prophase I">
+      <DiagramDefs />
+      {["Leptotene", "Zygotene", "Pachytene", "Diplotene", "Diakinesis"].map((label, index) => (
+        <g key={label}>
+          <BioNode x={54} y={18 + index * 29} width={112} text={label} tone={index === 2 ? "green" : "amber"} />
+          {index < 4 && <Arrow x1="110" y1={43 + index * 29} x2="110" y2={47 + index * 29} />}
+        </g>
+      ))}
+      <text x="110" y="180" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">crossing over at pachytene</text>
+    </DiagramFrame>
+  );
+}
+
+function BioMeiosisFlowDiagram() {
+  return (
+    <DiagramFrame title="meiosis flow">
+      <DiagramDefs />
+      <BioNode x={24} y={28} width={70} text="Meiosis I" />
+      <BioNode x={128} y={28} width={70} text="Meiosis II" tone="green" />
+      <Arrow x1="96" y1="41" x2="126" y2="41" />
+      <circle cx="60" cy="102" r="16" className="fill-amber-100 stroke-amber-500 dark:fill-amber-950/40" strokeWidth="2" />
+      <circle cx="44" cy="142" r="14" className="fill-emerald-100 stroke-emerald-500 dark:fill-emerald-950/40" strokeWidth="2" />
+      <circle cx="76" cy="142" r="14" className="fill-emerald-100 stroke-emerald-500 dark:fill-emerald-950/40" strokeWidth="2" />
+      {[140, 168].map((x) => [120, 158].map((y) => <circle key={`${x}-${y}`} cx={x} cy={y} r="12" className="fill-emerald-100 stroke-emerald-500 dark:fill-emerald-950/40" strokeWidth="2" />))}
+      <Arrow x1="60" y1="118" x2="44" y2="128" />
+      <Arrow x1="60" y1="118" x2="76" y2="128" />
+      <text x="154" y="96" textAnchor="middle" className="fill-slate-700 text-[9px] font-bold dark:fill-stone-200">4 haploid cells</text>
+    </DiagramFrame>
+  );
+}
+
+function BioApoplastSymplastDiagram() {
+  return (
+    <DiagramFrame title="apoplast vs symplast">
+      <DiagramDefs />
+      {[22, 68, 114, 160].map((x) => (
+        <rect key={x} x={x} y="62" width="38" height="44" rx="6" className="fill-emerald-100 stroke-emerald-600 dark:fill-emerald-950/40" strokeWidth="2" />
+      ))}
+      <path d="M12 50 C54 40 100 44 132 38 C164 32 190 38 210 30" className="stroke-amber-500" fill="none" strokeWidth="3" strokeLinecap="round" />
+      <path d="M18 86 H203" className="stroke-rose-500" fill="none" strokeWidth="3" strokeDasharray="7 5" strokeLinecap="round" />
+      <rect x="148" y="50" width="8" height="70" className="fill-amber-600" />
+      <text x="110" y="32" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">apoplast: walls/spaces</text>
+      <text x="110" y="139" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">symplast: cytoplasm/plasmodesmata</text>
+      <text x="152" y="126" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">Casparian strip</text>
+    </DiagramFrame>
+  );
+}
+
+function BioTranspirationPullDiagram() {
+  return (
+    <DiagramFrame title="transpiration pull">
+      <DiagramDefs />
+      <line x1="54" y1="148" x2="54" y2="42" className="stroke-sky-500" strokeWidth="8" strokeLinecap="round" />
+      {[128, 146, 164].map((x) => <ellipse key={x} cx={x} cy="80" rx="36" ry="12" className="fill-emerald-200 stroke-emerald-600 dark:fill-emerald-950/50" strokeWidth="2" />)}
+      <Arrow x1="54" y1="145" x2="54" y2="52" label="xylem water" labelX="62" labelY="96" />
+      <Arrow x1="112" y1="78" x2="82" y2="58" />
+      <path d="M150 48 C150 32 170 28 170 12 M166 48 C166 34 188 30 188 15" className="stroke-sky-400" fill="none" strokeWidth="2" strokeLinecap="round" />
+      <text x="158" y="112" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">evaporation through stomata</text>
+      <text x="110" y="169" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">cohesion + adhesion + surface tension</text>
+    </DiagramFrame>
+  );
+}
+
+function BioSourceSinkFlowDiagram() {
+  return (
+    <DiagramFrame title="source to sink">
+      <DiagramDefs />
+      <BioNode x={18} y={38} width={58} text="Source" tone="green" />
+      <BioNode x={82} y={38} width={64} text="Phloem" />
+      <BioNode x={154} y={38} width={48} text="Sink" tone="green" />
+      <Arrow x1="76" y1="51" x2="80" y2="51" />
+      <Arrow x1="146" y1="51" x2="152" y2="51" />
+      <BioNode x={18} y={102} width={64} text="Sucrose" tone="green" />
+      <BioNode x={87} y={102} width={52} text="Water" />
+      <BioNode x={150} y={102} width={56} text="Unload" tone="green" />
+      <Arrow x1="50" y1="64" x2="50" y2="100" label="loading" labelX="56" labelY="88" />
+      <Arrow x1="112" y1="100" x2="112" y2="66" label="osmosis" labelX="120" labelY="88" />
+      <Arrow x1="176" y1="64" x2="176" y2="100" label="use/store" labelX="128" labelY="132" />
+      <text x="110" y="165" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">pressure moves sap to lower osmotic pressure</text>
+    </DiagramFrame>
+  );
+}
+
+function BioNitrogenCycleDiagram() {
+  return (
+    <DiagramFrame title="nitrogen cycle">
+      <DiagramDefs />
+      <BioNode x={64} y={16} width={92} text="Atmospheric N2" />
+      <BioNode x={78} y={62} width={64} text="NH3" tone="green" />
+      <BioNode x={78} y={106} width={64} text="NO3-" />
+      <BioNode x={20} y={148} width={74} text="Biomass" tone="green" />
+      <BioNode x={126} y={148} width={76} text="Denitrify" />
+      <Arrow x1="110" y1="42" x2="110" y2="61" label="fixation" labelX="119" labelY="54" />
+      <Arrow x1="110" y1="87" x2="110" y2="105" label="nitrification" labelX="119" labelY="99" />
+      <Arrow x1="95" y1="131" x2="70" y2="147" label="uptake" labelX="45" labelY="131" />
+      <Arrow x1="142" y1="118" x2="164" y2="147" />
+      <Arrow x1="166" y1="148" x2="140" y2="42" label="N2" labelX="174" labelY="91" />
+    </DiagramFrame>
+  );
+}
+
+function BioNoduleFormationDiagram() {
+  return (
+    <DiagramFrame title="nodule formation">
+      <DiagramDefs />
+      {["Attach", "Curl", "Infect", "Nodule", "Vascular"].map((label, index) => {
+        const x = 13 + index * 41;
+        return (
+          <g key={label}>
+            <circle cx={x + 18} cy="82" r="16" className={index === 3 ? "fill-emerald-100 stroke-emerald-500 dark:fill-emerald-950/40" : "fill-amber-100 stroke-amber-500 dark:fill-amber-950/40"} strokeWidth="2" />
+            <text x={x + 18} y="124" textAnchor="middle" className="fill-slate-700 text-[8px] font-bold dark:fill-stone-200">{label}</text>
+            {index < 4 && <Arrow x1={x + 34} y1="82" x2={x + 39} y2="82" />}
+          </g>
+        );
+      })}
+      <text x="110" y="156" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">infection thread carries bacteria into cortex</text>
+    </DiagramFrame>
+  );
+}
+
+function BioLightReactionFlowDiagram() {
+  return (
+    <DiagramFrame title="light reaction flow">
+      <DiagramDefs />
+      <BioNode x={18} y={54} width={48} text="PSII" />
+      <BioNode x={86} y={54} width={48} text="ETS" tone="green" />
+      <BioNode x={154} y={54} width={44} text="PSI" />
+      <Arrow x1="66" y1="67" x2="84" y2="67" />
+      <Arrow x1="134" y1="67" x2="152" y2="67" />
+      <Arrow x1="176" y1="80" x2="176" y2="118" label="NADP+" labelX="137" labelY="103" />
+      <text x="42" y="38" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">P680</text>
+      <text x="176" y="38" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">P700</text>
+      <text x="38" y="128" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">H2O to O2 + e-</text>
+      <text x="176" y="143" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">NADPH + H+</text>
+    </DiagramFrame>
+  );
+}
+
+function BioCyclicNoncyclicDiagram() {
+  return (
+    <DiagramFrame title="photophosphorylation">
+      <DiagramDefs />
+      <BioNode x={20} y={36} width={56} text="PSII" />
+      <BioNode x={88} y={36} width={48} text="PSI" />
+      <BioNode x={154} y={36} width={50} text="NADP" tone="green" />
+      <Arrow x1="76" y1="49" x2="86" y2="49" />
+      <Arrow x1="136" y1="49" x2="152" y2="49" />
+      <text x="110" y="82" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">non-cyclic: ATP + NADPH</text>
+      <path d="M84 126 C84 94 140 94 140 126 C140 154 84 154 84 126" className="stroke-amber-500" fill="none" strokeWidth="3" markerEnd="url(#arrow)" />
+      <BioNode x={91} y={118} width={42} text="PSI" tone="green" />
+      <text x="110" y="169" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">cyclic: ATP only</text>
+    </DiagramFrame>
+  );
+}
+
+function BioCalvinCycleDiagram() {
+  return (
+    <DiagramFrame title="calvin cycle">
+      <DiagramDefs />
+      <BioNode x={78} y={24} width={64} text="RuBP" tone="green" />
+      <BioNode x={150} y={78} width={48} text="3-PGA" />
+      <BioNode x={78} y={132} width={64} text="Triose" tone="green" />
+      <BioNode x={20} y={78} width={58} text="Regen." />
+      <Arrow x1="139" y1="42" x2="158" y2="77" label="CO2" labelX="156" labelY="52" />
+      <Arrow x1="166" y1="103" x2="120" y2="131" label="ATP NADPH" labelX="144" labelY="126" />
+      <Arrow x1="80" y1="145" x2="58" y2="104" />
+      <Arrow x1="50" y1="78" x2="80" y2="45" label="ATP" labelX="35" labelY="61" />
+      <text x="110" y="172" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">carboxylation to reduction to regeneration</text>
+    </DiagramFrame>
+  );
+}
+
+function BioC4PathwayDiagram() {
+  return (
+    <DiagramFrame title="C4 pathway">
+      <DiagramDefs />
+      <rect x="18" y="36" width="78" height="92" rx="8" className="fill-emerald-50 stroke-emerald-500 dark:fill-emerald-950/30" strokeWidth="2" />
+      <rect x="124" y="36" width="78" height="92" rx="8" className="fill-amber-50 stroke-amber-500 dark:fill-amber-950/30" strokeWidth="2" />
+      <text x="57" y="58" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">Mesophyll</text>
+      <text x="163" y="58" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">Bundle sheath</text>
+      <BioNode x={31} y={76} width={50} text="PEP" tone="green" />
+      <BioNode x={138} y={76} width={50} text="RuBisCO" />
+      <Arrow x1="82" y1="88" x2="136" y2="88" label="C4 acid" labelX="95" labelY="78" />
+      <Arrow x1="136" y1="112" x2="82" y2="112" label="C3 back" labelX="92" labelY="130" />
+      <text x="110" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">CO2 released near RuBisCO</text>
+    </DiagramFrame>
+  );
+}
+
+function BioRespirationOverviewDiagram() {
+  return (
+    <DiagramFrame title="fate of pyruvate">
+      <DiagramDefs />
+      <BioNode x={70} y={18} width={80} text="Glucose" tone="green" />
+      <BioNode x={70} y={66} width={80} text="Glycolysis" />
+      <BioNode x={70} y={114} width={80} text="Pyruvate" tone="green" />
+      <Arrow x1="110" y1="43" x2="110" y2="65" />
+      <Arrow x1="110" y1="91" x2="110" y2="113" />
+      <Arrow x1="70" y1="127" x2="28" y2="157" label="ferment" labelX="24" labelY="139" />
+      <Arrow x1="150" y1="127" x2="192" y2="157" label="aerobic" labelX="166" labelY="139" />
+      <text x="28" y="175" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">lactic/alcoholic</text>
+      <text x="192" y="175" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">Krebs cycle</text>
+    </DiagramFrame>
+  );
+}
+
+function BioKrebsEtsDiagram() {
+  return (
+    <DiagramFrame title="Krebs to ETS">
+      <DiagramDefs />
+      <circle cx="74" cy="88" r="42" className="fill-amber-100 stroke-amber-500 dark:fill-amber-950/40" strokeWidth="2" />
+      <text x="74" y="84" textAnchor="middle" className="fill-slate-700 text-[11px] font-bold dark:fill-stone-200">TCA</text>
+      <text x="74" y="101" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">NADH FADH2</text>
+      <BioNode x={140} y={50} width={56} text="ETS" tone="green" />
+      <BioNode x={140} y={106} width={56} text="ATP" />
+      <Arrow x1="112" y1="80" x2="138" y2="63" />
+      <Arrow x1="168" y1="76" x2="168" y2="105" label="O2" labelX="176" labelY="95" />
+      <text x="110" y="158" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">oxygen is final hydrogen acceptor</text>
+    </DiagramFrame>
+  );
+}
+
+function BioGrowthPhasesDiagram() {
+  return (
+    <DiagramFrame title="growth phases">
+      <DiagramDefs />
+      {["Meristematic", "Elongation", "Maturation"].map((label, index) => (
+        <g key={label}>
+          <BioNode x={56} y={28 + index * 44} width={108} text={label} tone={index === 0 ? "green" : "amber"} />
+          {index < 2 && <Arrow x1="110" y1={53 + index * 44} x2="110" y2={71 + index * 44} />}
+        </g>
+      ))}
+      <text x="110" y="172" textAnchor="middle" className="fill-slate-500 text-[9px] dark:fill-stone-400">root/shoot apex to proximal cells to mature cells</text>
+    </DiagramFrame>
+  );
+}
+
+function BioGrowthCurvesDiagram() {
+  return (
+    <DiagramFrame title="growth curves">
+      <path d="M28 136 H96 M28 136 V48 M34 126 L88 70" className="stroke-slate-500 dark:stroke-stone-400" fill="none" strokeWidth="2" />
+      <path d="M124 136 H198 M124 136 V48 M130 130 C142 126 148 124 154 112 C164 92 176 74 194 72" className="stroke-slate-500 dark:stroke-stone-400" fill="none" strokeWidth="2" />
+      <text x="62" y="158" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">arithmetic</text>
+      <text x="162" y="158" textAnchor="middle" className="fill-slate-700 text-[10px] font-bold dark:fill-stone-200">geometrical</text>
+      <text x="160" y="54" textAnchor="middle" className="fill-slate-500 text-[8px] dark:fill-stone-400">lag to log to stationary</text>
+    </DiagramFrame>
+  );
+}
+
 export default function MotionDiagram({ type }) {
   if (type === "xt") return <PositionTimeDiagram />;
   if (type === "vt") return <VelocityTimeDiagram />;
@@ -3696,5 +4124,31 @@ export default function MotionDiagram({ type }) {
   if (type === "bio-dicot-monocot-stem") return <BioDicotMonocotStemDiagram />;
   if (type === "bio-leaf-anatomy") return <BioLeafAnatomyDiagram />;
   if (type === "bio-secondary-growth") return <BioSecondaryGrowthDiagram />;
+  if (type === "bio-epithelium-types") return <BioEpitheliumTypesDiagram />;
+  if (type === "bio-muscle-types") return <BioMuscleTypesDiagram />;
+  if (type === "bio-cockroach-body") return <BioCockroachBodyDiagram />;
+  if (type === "bio-prokaryotic-cell") return <BioProkaryoticCellDiagram />;
+  if (type === "bio-plasma-membrane") return <BioPlasmaMembraneDiagram />;
+  if (type === "bio-mitochondrion") return <BioMitochondrionDiagram />;
+  if (type === "bio-chloroplast") return <BioChloroplastDiagram />;
+  if (type === "bio-axoneme") return <BioAxonemeDiagram />;
+  if (type === "bio-chromosome-types") return <BioChromosomeTypesDiagram />;
+  if (type === "bio-cell-cycle") return <BioCellCycleDiagram />;
+  if (type === "bio-mitosis-sequence") return <BioMitosisSequenceDiagram />;
+  if (type === "bio-prophase-one") return <BioProphaseOneDiagram />;
+  if (type === "bio-meiosis-flow") return <BioMeiosisFlowDiagram />;
+  if (type === "bio-apoplast-symplast") return <BioApoplastSymplastDiagram />;
+  if (type === "bio-transpiration-pull") return <BioTranspirationPullDiagram />;
+  if (type === "bio-source-sink-flow") return <BioSourceSinkFlowDiagram />;
+  if (type === "bio-nitrogen-cycle") return <BioNitrogenCycleDiagram />;
+  if (type === "bio-nodule-formation") return <BioNoduleFormationDiagram />;
+  if (type === "bio-light-reaction-flow") return <BioLightReactionFlowDiagram />;
+  if (type === "bio-cyclic-noncyclic") return <BioCyclicNoncyclicDiagram />;
+  if (type === "bio-calvin-cycle") return <BioCalvinCycleDiagram />;
+  if (type === "bio-c4-pathway") return <BioC4PathwayDiagram />;
+  if (type === "bio-respiration-overview") return <BioRespirationOverviewDiagram />;
+  if (type === "bio-krebs-ets") return <BioKrebsEtsDiagram />;
+  if (type === "bio-growth-phases") return <BioGrowthPhasesDiagram />;
+  if (type === "bio-growth-curves") return <BioGrowthCurvesDiagram />;
   return null;
 }

@@ -86,10 +86,12 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
     async function subscribeToGroup() {
       if (cancelled) return;
-      if (!isLoaded || !session || !supabase) return;
+      if (!isLoaded || !session || !supabase || !groupId) return;
 
-      const token = await session.getToken().catch(() => null);
-      console.info(`[GROUP_CHAT_REALTIME] token=${Boolean(token)}`);
+      const token =
+        (await session.getToken({ template: "supabase" }).catch(() => null)) ||
+        (await session.getToken().catch(() => null));
+      console.info(`[GROUP_CHAT_REALTIME] tokenPresent=${Boolean(token)}`);
       if (!token) {
         console.warn("[GROUP_CHAT_REALTIME] Missing Clerk session token");
         return;
@@ -103,14 +105,33 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
       }
-      async function receiveMessage(messageId) {
-        if (!messageId) return;
-        try {
-          const hydrated = await hydrateRealtimeMessage(messageId);
-          if (cancelled || !hydrated) return;
-          setMessages((prev) => mergeMessages(prev, [hydrated]));
-        } catch (err) {
-          console.warn("[GROUP_CHAT_REALTIME_HYDRATE]", err);
+
+      async function handleIncomingMessage(newMsg) {
+        if (!newMsg?.id) return;
+        const isOwn = newMsg.sender_id === currentUserId;
+
+        const baseMessage = {
+          id: newMsg.id,
+          group_id: newMsg.group_id,
+          sender_id: newMsg.sender_id,
+          content: newMsg.is_deleted ? "[Message deleted]" : newMsg.content,
+          is_deleted: Boolean(newMsg.is_deleted),
+          created_at: newMsg.created_at,
+          senderName: isOwn ? (currentUserName || "You") : "Member",
+          isOwn,
+        };
+
+        setMessages((prev) => mergeMessages(prev, [baseMessage]));
+
+        if (!isOwn) {
+          try {
+            const hydrated = await hydrateRealtimeMessage(newMsg.id);
+            if (!cancelled && hydrated) {
+              setMessages((prev) => mergeMessages(prev, [hydrated]));
+            }
+          } catch (err) {
+            console.warn("[GROUP_CHAT_REALTIME_HYDRATE]", err);
+          }
         }
       }
 
@@ -139,34 +160,33 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
         remoteTypingTimeouts.set(userId, expiry);
       }
 
-      // Message content is never trusted from Broadcast. Only the ID is sent,
-      // then the authorized API hydrates the stored message for this member.
       const msgChannel = supabase
-        .channel(`community-group-${groupId}`)
+        .channel(`community-group-messages-${groupId}`)
         .on(
           "postgres_changes",
-          { event: "INSERT", schema: "public", table: "community_group_messages", filter: `group_id=eq.${groupId}` },
-          (event) => {
-            const newMsg = event?.payload?.new;
+          {
+            event: "INSERT",
+            schema: "public",
+            table: "community_group_messages",
+            filter: `group_id=eq.${groupId}`,
+          },
+          (payload) => {
+            const newMsg = payload?.new;
             if (!newMsg?.id) return;
-            receiveMessage(newMsg.id);
+            handleIncomingMessage(newMsg);
           }
         )
-        .on("broadcast", { event: "message_created" }, (event) => {
-          receiveMessage(event?.payload?.messageId);
-        })
         .on("broadcast", { event: "typing" }, (event) => {
           receiveTyping(event?.payload);
         })
-        .subscribe((status) => {
+        .subscribe((status, error) => {
           if (cancelled) return;
-          console.info(`[GROUP_CHAT_REALTIME] status=${status}`);
-          if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(status)) {
-            console.warn("[GROUP_CHAT_REALTIME_STATUS]", {
-              groupId,
-              status,
-              channel: `community-group-${groupId}`,
-            });
+          console.info("[GROUP_CHAT_REALTIME_STATUS]", {
+            groupId,
+            status,
+            error: error?.message ?? null,
+          });
+          if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
             if (retryCount < MAX_RETRIES) {
               const delay = Math.min(1000 * 2 ** retryCount, 30000);
               retryCount++;
@@ -195,7 +215,7 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       for (const timeout of remoteTypingTimeouts.values()) clearTimeout(timeout);
       remoteTypingTimeouts.clear();
     };
-  }, [groupId, currentUserId, isLoaded, mergeMessages, session, supabase]);
+  }, [currentUserId, currentUserName, groupId, isLoaded, mergeMessages, session, supabase]);
 
   // Broadcast ephemeral typing state. A receiver-side expiry prevents stale UI
   // if a browser closes before it can send the final `false` event.
@@ -207,19 +227,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
       event: "typing",
       payload: { userId: currentUserId, name: currentUserName || "Someone", isTyping },
     });
-  }
-
-  async function broadcastMessageCreated(messageId) {
-    if (!supabase || !messageId) return;
-    const existingChannel = channelRef.current;
-    const channel = existingChannel || supabase.channel(`community-group-${groupId}`);
-    try {
-      await channel.httpSend("message_created", { messageId, senderId: currentUserId });
-    } catch (broadcastError) {
-      console.warn("[GROUP_CHAT_BROADCAST_SEND]", broadcastError);
-    } finally {
-      if (!existingChannel) await supabase.removeChannel(channel);
-    }
   }
 
   function handleInputChange(e) {
@@ -288,7 +295,6 @@ export default function GroupChat({ groupId, currentUserId, currentUserName }) {
 
       if (data.message) {
         setMessages((prev) => mergeMessages(prev, [data.message]));
-        await broadcastMessageCreated(data.message.id);
       }
     } catch {
       setInput(content);

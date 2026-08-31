@@ -14,7 +14,12 @@ export function useClerkSupabase() {
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       {
-        accessToken: async () => session.getToken(),
+        accessToken: async () => {
+          return (
+            (await session.getToken({ template: "supabase" }).catch(() => null)) ||
+            (await session.getToken().catch(() => null))
+          );
+        },
       }
     );
   }, [isLoaded, session]);
