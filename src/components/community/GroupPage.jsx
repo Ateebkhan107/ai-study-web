@@ -31,6 +31,8 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const [leaving, setLeaving] = useState(false);
   const [myGroups, setMyGroups] = useState([]);
 
+  const [onlineCount, setOnlineCount] = useState(null);
+
   // Settings state
   const [editName, setEditName] = useState("");
   const [editDesc, setEditDesc] = useState("");
@@ -183,6 +185,12 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
           </div>
           <p className="mt-0.5 flex items-center gap-2 truncate text-xs text-slate-500 dark:text-slate-400">
             <span className="inline-flex items-center gap-1"><Users className="w-3 h-3" /> {group.member_count ?? 0} members</span>
+            {onlineCount !== null && onlineCount > 0 && (
+              <span className="inline-flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                {onlineCount} online
+              </span>
+            )}
             {myRole && <span className="text-slate-400">· {myRole.toLowerCase()}</span>}
           </p>
         </div>
@@ -235,15 +243,22 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
           )}
 
           {/* Tab content */}
-          <div className="flex-1 overflow-hidden">
-            {activeTab === "Chat" && isMember && (
-              <GroupChat groupId={groupId} currentUserId={currentUserId} currentUserName={currentUserName} />
-            )}
-            {activeTab === "Chat" && !isMember && (
-              <div className="flex h-full items-center justify-center p-6 text-center text-slate-400">
-                <p className="text-sm font-semibold">Join this group to chat.</p>
-              </div>
-            )}
+          <div className="flex-1 overflow-hidden relative">
+            <div className={`h-full ${activeTab === "Chat" ? "block" : "hidden"}`}>
+              {isMember ? (
+                <GroupChat
+                  groupId={groupId}
+                  currentUserId={currentUserId}
+                  currentUserName={currentUserName}
+                  onPresenceChange={setOnlineCount}
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center p-6 text-center text-slate-400">
+                  <p className="text-sm font-semibold">Join this group to chat.</p>
+                </div>
+              )}
+            </div>
+
             {activeTab === "Members" && (
               <div className="overflow-y-auto h-full p-4">
                 <MembersPanel groupId={groupId} myRole={myRole} currentUserId={currentUserId} />

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { useState, memo } from "react";
+import { Trash2, Check, Clock, AlertCircle } from "lucide-react";
 import BlockReportMenu from "./BlockReportMenu";
 
 function formatTime(iso) {
+  if (!iso) return "Just now";
   const d = new Date(iso);
   const now = new Date();
   const diff = now - d;
@@ -16,7 +17,14 @@ function formatTime(iso) {
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 }
 
-export default function MessageBubble({ message, currentUserId, context, contextId, onDelete }) {
+function MessageBubbleComponent({
+  message,
+  currentUserId,
+  context,
+  contextId,
+  onDelete,
+  onRetry,
+}) {
   const [deleting, setDeleting] = useState(false);
   const [deleted, setDeleted] = useState(message.is_deleted || false);
 
@@ -41,10 +49,17 @@ export default function MessageBubble({ message, currentUserId, context, context
 
   const isOwn = message.sender_id === currentUserId || message.isOwn;
   const isDeleted = deleted || message.is_deleted;
+  const status = message.status || (message.optimistic ? "sending" : "sent");
+  const isFailed = status === "failed";
+  const isSending = status === "sending";
 
   return (
-    <div className={`group flex gap-2 py-1 ${isOwn ? "justify-end" : "justify-start"}`}>
-      {/* Avatar placeholder */}
+    <div
+      className={`group flex gap-2 py-1 transition-opacity duration-150 motion-safe:animate-[fadeIn_150ms_ease-out] ${
+        isOwn ? "justify-end" : "justify-start"
+      }`}
+    >
+      {/* Avatar for others */}
       {!isOwn && (
         <div className="mt-5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-xs font-black text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300">
           {(message.senderName || "?")[0]?.toUpperCase()}
@@ -52,7 +67,7 @@ export default function MessageBubble({ message, currentUserId, context, context
       )}
 
       <div className={`flex max-w-[86%] flex-col sm:max-w-[72%] ${isOwn ? "items-end" : "items-start"}`}>
-        {/* Sender + time */}
+        {/* Sender + time for other users */}
         {!isOwn && (
           <div className="mb-1 flex items-center gap-2 px-1">
             <span className="text-[11px] font-bold text-slate-600 dark:text-slate-300">
@@ -66,27 +81,52 @@ export default function MessageBubble({ message, currentUserId, context, context
 
         {/* Bubble */}
         <div
-          className={`rounded-xl px-3.5 py-2 text-sm leading-relaxed shadow-sm ${
+          className={`break-words rounded-xl px-3.5 py-2 text-sm leading-relaxed shadow-sm transition-all ${
             isOwn
-              ? "rounded-br-sm border border-brand/30 bg-brand/10 text-slate-900 dark:bg-[var(--surface-elevated)] dark:text-white"
+              ? isFailed
+                ? "rounded-br-sm border border-red-300/80 bg-red-50/70 text-slate-900 dark:border-red-500/40 dark:bg-red-950/30 dark:text-white"
+                : "rounded-br-sm border border-brand/30 bg-brand/10 text-slate-900 dark:bg-[var(--surface-elevated)] dark:text-white"
               : isDeleted
-              ? "rounded-bl-sm bg-slate-100 text-slate-400 italic dark:bg-[var(--surface-elevated)] dark:text-slate-500"
+              ? "rounded-bl-sm bg-slate-100 italic text-slate-400 dark:bg-[var(--surface-elevated)] dark:text-slate-500"
               : "rounded-bl-sm border border-slate-200 bg-white text-slate-900 dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-white"
-          } ${message.optimistic ? "opacity-70" : "opacity-100"}`}
+          } ${isSending ? "opacity-85" : "opacity-100"}`}
         >
-          {/* IMPORTANT: Plain text rendering — never dangerouslySetInnerHTML */}
+          {/* Plain text rendering */}
           {isDeleted ? "[Message deleted]" : message.content}
         </div>
 
-        {/* Time + actions */}
-        <div className={`mt-1 flex items-center gap-2 ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
+        {/* Status + Time + Actions */}
+        <div className={`mt-1 flex items-center gap-1.5 ${isOwn ? "flex-row-reverse" : "flex-row"}`}>
           {isOwn && (
-            <span className="px-1 text-[11px] text-slate-400 dark:text-slate-500">
-              {formatTime(message.created_at)}
-            </span>
+            <div className="flex items-center gap-1 px-0.5 text-[11px] text-slate-400 dark:text-slate-500">
+              <span>{formatTime(message.created_at)}</span>
+
+              {/* Message delivery status for sender */}
+              {isSending && (
+                <span title="Sending…" className="inline-flex items-center">
+                  <Clock className="h-3 w-3 text-slate-400 animate-pulse" />
+                </span>
+              )}
+              {status === "sent" && !isDeleted && (
+                <span title="Sent" className="inline-flex items-center">
+                  <Check className="h-3 w-3 text-slate-400 dark:text-slate-500" />
+                </span>
+              )}
+              {isFailed && (
+                <button
+                  type="button"
+                  onClick={() => onRetry && onRetry(message)}
+                  className="inline-flex items-center gap-1 font-semibold text-red-500 hover:text-red-600 transition-colors"
+                  title="Retry sending message"
+                >
+                  <AlertCircle className="h-3 w-3" />
+                  <span className="underline">Retry</span>
+                </button>
+              )}
+            </div>
           )}
 
-          {!isDeleted && (
+          {!isDeleted && !isSending && !isFailed && (
             <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
               {isOwn ? (
                 <button
@@ -111,3 +151,17 @@ export default function MessageBubble({ message, currentUserId, context, context
     </div>
   );
 }
+
+const MessageBubble = memo(MessageBubbleComponent, (prev, next) => {
+  return (
+    prev.message.id === next.message.id &&
+    prev.message.content === next.message.content &&
+    prev.message.status === next.message.status &&
+    prev.message.is_deleted === next.message.is_deleted &&
+    prev.message.senderName === next.message.senderName &&
+    prev.message.created_at === next.message.created_at &&
+    prev.currentUserId === next.currentUserId
+  );
+});
+
+export default MessageBubble;

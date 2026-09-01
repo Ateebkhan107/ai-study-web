@@ -27,6 +27,13 @@ import { getBiologyBatch1Cards, getBiologyBatch1Chapters } from "@/lib/formulaCa
 import { getBiologyBatch2Cards, getBiologyBatch2Chapters } from "@/lib/formulaCardsBiologyBatch2";
 import { getBiologyBatch3Cards, getBiologyBatch3Chapters } from "@/lib/formulaCardsBiologyBatch3";
 import { getBiologyBatch4Cards, getBiologyBatch4Chapters } from "@/lib/formulaCardsBiologyBatch4";
+import { getBiologyBatch5Cards, getBiologyBatch5Chapters } from "@/lib/formulaCardsBiologyBatch5";
+import { getBiologyBatch6Cards, getBiologyBatch6Chapters } from "@/lib/formulaCardsBiologyBatch6";
+import { getBiologyBatch7Cards, getBiologyBatch7Chapters } from "@/lib/formulaCardsBiologyBatch7";
+import { getBiologyBatch8Cards, getBiologyBatch8Chapters } from "@/lib/formulaCardsBiologyBatch8";
+import { getBiologyBatch9Cards, getBiologyBatch9Chapters } from "@/lib/formulaCardsBiologyBatch9";
+import { getBiologyBatch10Cards, getBiologyBatch10Chapters } from "@/lib/formulaCardsBiologyBatch10";
+import { getBiologyBatch11Cards, getBiologyBatch11Chapters } from "@/lib/formulaCardsBiologyBatch11";
 
 const CARD_SELECT = `
   id,
@@ -136,6 +143,13 @@ export const FORMULA_CARD_CHAPTERS = [
   ...getBiologyBatch2Chapters(),
   ...getBiologyBatch3Chapters(),
   ...getBiologyBatch4Chapters(),
+  ...getBiologyBatch5Chapters(),
+  ...getBiologyBatch6Chapters(),
+  ...getBiologyBatch7Chapters(),
+  ...getBiologyBatch8Chapters(),
+  ...getBiologyBatch9Chapters(),
+  ...getBiologyBatch10Chapters(),
+  ...getBiologyBatch11Chapters(),
 ];
 
 const unitCards = (chapterId) => [
@@ -479,6 +493,13 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getBiologyBatch2Cards(),
   ...getBiologyBatch3Cards(),
   ...getBiologyBatch4Cards(),
+  ...getBiologyBatch5Cards(),
+  ...getBiologyBatch6Cards(),
+  ...getBiologyBatch7Cards(),
+  ...getBiologyBatch8Cards(),
+  ...getBiologyBatch9Cards(),
+  ...getBiologyBatch10Cards(),
+  ...getBiologyBatch11Cards(),
 ];
 
 function sortByOrder(items) {
