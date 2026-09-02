@@ -136,7 +136,11 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
   maxAge: 60 * 60 * 24 * 365, // 1 year
 });
 
-    redirect(accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ? INSTITUTE_ROUTE : DASHBOARD_ROUTE);
+    const redirectTarget = accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN
+      ? INSTITUTE_ROUTE
+      : `${DASHBOARD_ROUTE}?tour=welcome`;
+
+    redirect(redirectTarget);
   }
 
   const yearOptions = getYearOptions();

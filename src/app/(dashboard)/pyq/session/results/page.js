@@ -316,7 +316,7 @@ export default function PYQResultsPage() {
                 <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
               </div>
               <div className="pt-0.5">
-                <h3 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-pressed dark:text-brand/80 mb-1.5">Today's Takeaway</h3>
+                <h3 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-pressed dark:text-brand/80 mb-1.5">Today&apos;s Takeaway</h3>
                 <p className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">{takeaway}</p>
               </div>
             </div>

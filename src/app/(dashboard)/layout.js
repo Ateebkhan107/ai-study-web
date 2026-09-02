@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
 import { ACCOUNT_TYPES, getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
 import { getActiveInstituteMemberships } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper"; 
 import { initUserLeaderboard } from "@/utils/leaderboard"; 
+import ProductTourManager from "@/components/tour/ProductTourManager"; 
 
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();
@@ -51,6 +53,9 @@ export default async function DashboardLayout({ children }) {
         <TrackWrapper>
           {children}
         </TrackWrapper>
+        <Suspense fallback={null}>
+          <ProductTourManager />
+        </Suspense>
       </div>
     </div>
   );

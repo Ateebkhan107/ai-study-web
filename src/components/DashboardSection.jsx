@@ -64,7 +64,7 @@ export default async function DashboardSection({ config, compact = false }) {
     .filter(Boolean);
 
   return (
-    <div className={compact ? "space-y-3" : "space-y-4"}>
+    <div data-tour="tour-revision-cards" className={compact ? "space-y-3" : "space-y-4"}>
 
       <div>
         <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">

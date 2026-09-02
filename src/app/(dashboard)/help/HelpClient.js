@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import PageWrapper from "@/components/PageWrapper";
-import { Search, ChevronDown, MessageCircleQuestion } from "lucide-react";
+import { Search, ChevronDown, MessageCircleQuestion, Compass } from "lucide-react";
 import Link from "next/link";
+import { startProductTour } from "@/components/tour/ProductTourManager";
 
 const FAQS = [
   {
@@ -57,6 +58,28 @@ export default function HelpClient() {
       badgeVariant="brand"
     >
       <div className="max-w-3xl mx-auto space-y-8 pb-12 animate-slideUp">
+        {/* Quick Product Tour Card */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-amber-200/80 bg-amber-50/60 p-4 sm:p-5 dark:border-brand/30 dark:bg-brand/5">
+          <div className="flex items-center gap-3.5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-brand/20 dark:text-brand">
+              <Compass className="h-5 w-5" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-amber-950 dark:text-white">Product Tour</h4>
+              <p className="text-xs text-amber-900/80 dark:text-slate-300 mt-0.5">
+                Explore key features with the interactive guided tour in under 1 minute.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => startProductTour()}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-sm hover:bg-brand-hover active:scale-[0.98] transition"
+          >
+            <Compass className="h-3.5 w-3.5" />
+            <span>Take Product Tour Again</span>
+          </button>
+        </div>
 
         {/* Search Bar */}
         <div className="relative">

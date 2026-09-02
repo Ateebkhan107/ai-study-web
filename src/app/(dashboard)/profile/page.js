@@ -6,6 +6,7 @@ import {
   Award,
   BookOpen,
   CircleCheck,
+  Compass,
   Flame,
   GraduationCap,
   Medal,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import PageWrapper from "@/components/PageWrapper";
+import { startProductTour } from "@/components/tour/ProductTourManager";
 
 const BADGE_ICONS = {
   Award,
@@ -694,6 +696,20 @@ export default function ProfilePage() {
                   Manage Account
                 </span>
                 <span className="text-slate-400 transition-transform group-hover:translate-x-1">›</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => startProductTour()}
+                className="group flex w-full items-center justify-between gap-3 rounded-xl border border-transparent p-2 sm:p-3 text-left transition-all hover:bg-amber-50 hover:border-amber-200 dark:hover:bg-amber-500/10 dark:hover:border-amber-500/20"
+              >
+                <span className="inline-flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-300">
+                  <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400 shadow-sm border border-amber-200 dark:border-amber-500/30">
+                    <Compass className="h-3 w-3 sm:h-4 sm:w-4 text-amber-600 dark:text-brand" strokeWidth={2.5} />
+                  </div>
+                  Take Product Tour Again
+                </span>
+                <span className="text-amber-400 transition-transform group-hover:translate-x-1">›</span>
               </button>
 
               <div className="my-1 sm:my-2 border-t border-slate-200 dark:border-[var(--border-subtle)]" />

@@ -96,10 +96,19 @@ export default function Navbar({
     const activePathname = pendingHref && pendingHref !== pathname ? pendingHref : pathname;
     const active = activePathname === item.href || activePathname.startsWith(item.href + "/");
 
+    const tourAttr = {
+      "/dashboard": "tour-dashboard",
+      "/test": "tour-tests",
+      "/pyq": "tour-pyqs",
+      "/community": "tour-community",
+      "/analytics": "tour-analytics",
+    }[item.href];
+
     return (
     <Link
       key={item.href}
       href={item.href}
+      data-tour={tourAttr}
       prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
       onMouseEnter={() => router.prefetch(item.href)}
       onFocus={() => router.prefetch(item.href)}

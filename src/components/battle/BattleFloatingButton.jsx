@@ -58,6 +58,7 @@ export default function BattleFloatingButton() {
       {/* Button */}
       <Link
         href="/battle"
+        data-tour="tour-battle"
         aria-label="Battle Arena"
         className="group relative flex h-11 w-11 sm:h-14 sm:w-auto items-center justify-center gap-0 sm:gap-2.5 rounded-full border border-brand/45 bg-white sm:pl-5 sm:pr-6 text-brand shadow-md sm:shadow-lg shadow-brand/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-brand/50 dark:bg-[var(--surface-elevated)] dark:shadow-black/30 pointer-events-auto"
         style={{ marginBottom: "env(safe-area-inset-bottom)" }}
