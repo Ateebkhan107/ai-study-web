@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { createBattleForPlayers, requireBattleProfile } from "@/lib/battle";
+import { createBattleForPlayers, getBattleProfile, requireBattleProfile } from "@/lib/battle";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 function jsonError(error, fallback = 500) {
@@ -28,7 +28,22 @@ async function getActiveBattle(userId) {
     .limit(1)
     .maybeSingle();
   if (matchError) throw matchError;
-  return match;
+  if (!match) return null;
+
+  // Fetch opponent in this match
+  const { data: otherPlayer } = await supabaseAdmin
+    .from("battle_players")
+    .select("user_id")
+    .eq("battle_id", match.id)
+    .neq("user_id", userId)
+    .maybeSingle();
+
+  let opponentProfile = null;
+  if (otherPlayer?.user_id) {
+    opponentProfile = await getBattleProfile(otherPlayer.user_id).catch(() => null);
+  }
+
+  return { match, opponent: opponentProfile };
 }
 
 export async function GET() {
@@ -36,9 +51,13 @@ export async function GET() {
     const { userId } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const activeBattle = await getActiveBattle(userId);
-    if (activeBattle) {
-      return NextResponse.json({ status: "matched", battleId: activeBattle.id });
+    const active = await getActiveBattle(userId);
+    if (active?.match) {
+      return NextResponse.json({
+        status: "matched",
+        battleId: active.match.id,
+        opponent: active.opponent,
+      });
     }
 
     const { data: queueRow, error: queueError } = await supabaseAdmin
@@ -64,9 +83,13 @@ export async function POST() {
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const profile = await requireBattleProfile(userId);
-    const activeBattle = await getActiveBattle(userId);
-    if (activeBattle) {
-      return NextResponse.json({ status: "matched", battleId: activeBattle.id });
+    const active = await getActiveBattle(userId);
+    if (active?.match) {
+      return NextResponse.json({
+        status: "matched",
+        battleId: active.match.id,
+        opponent: active.opponent,
+      });
     }
 
     const { data: opponent, error: opponentError } = await supabaseAdmin
@@ -85,7 +108,12 @@ export async function POST() {
         playerAId: opponent.user_id,
         playerBId: userId,
       });
-      return NextResponse.json({ status: "matched", battleId: match.id });
+      const opponentProfile = await getBattleProfile(opponent.user_id).catch(() => null);
+      return NextResponse.json({
+        status: "matched",
+        battleId: match.id,
+        opponent: opponentProfile,
+      });
     }
 
     const { error: queueError } = await supabaseAdmin

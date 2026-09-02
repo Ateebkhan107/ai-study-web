@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Loader2, ChevronUp, ChevronDown, Mail } from "lucide-react";
+import Link from "next/link";
+import { Send, Loader2, ChevronUp, ChevronDown, Mail, ArrowLeft } from "lucide-react";
 import { useSession } from "@clerk/nextjs";
-import MessageBubble from "./MessageBubble";
+import MessageBubble, { getDateDividerLabel } from "./MessageBubble";
 import BlockReportMenu from "./BlockReportMenu";
 import { useClerkSupabase } from "@/lib/useClerkSupabase";
+
+
 
 function DMSkeleton() {
   return (
@@ -374,19 +377,28 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
   }, []);
 
   return (
-    <div className="relative flex h-full flex-col bg-[var(--card)]/60 dark:bg-[var(--background)]/30">
+    <div className="relative flex h-full flex-col bg-white dark:bg-[var(--surface)]">
       {/* Header */}
-      <div className="border-b border-slate-200 dark:border-[var(--border-subtle)] px-4 py-3 flex items-center justify-between">
+      <div className="border-b border-stone-200 bg-white/95 px-4 py-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] flex items-center justify-between backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-brand-hover flex items-center justify-center text-white font-bold">
-            {(otherUser?.full_name || "?")[0]?.toUpperCase()}
+          <Link
+            href="/community/messages"
+            className="rounded-xl border border-stone-200 p-2 text-slate-500 hover:text-slate-900 dark:border-white/10 dark:text-slate-400 dark:hover:text-white transition sm:hidden"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <div className="relative">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 via-brand to-amber-600 flex items-center justify-center text-slate-950 font-black shadow-xs text-sm">
+              {(otherUser?.full_name || "?")[0]?.toUpperCase()}
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-500 dark:border-[var(--surface)]" />
           </div>
           <div>
-            <p className="font-semibold text-sm text-slate-900 dark:text-white">
+            <p className="font-bold text-sm text-slate-900 dark:text-white leading-tight">
               {otherUser?.full_name || "User"}
             </p>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              {otherUser?.exam} · Target {otherUser?.target_year}
+              {otherUser?.exam || "JEE"} · Target {otherUser?.target_year || "2026"}
             </p>
           </div>
         </div>
@@ -403,65 +415,91 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
       <div
         ref={messagesContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto px-3 py-4 space-y-2 sm:px-5 scroll-smooth"
+        className="flex-1 overflow-y-auto px-3 py-4 scroll-smooth sm:px-6 bg-[#faf9f6]/80 dark:bg-[var(--background)]"
       >
-        {hasMore && (
-          <div className="flex justify-center py-2">
-            <button
-              onClick={loadOlderMessages}
-              disabled={loadingOlder}
-              className="flex items-center gap-1.5 text-xs text-indigo-500 hover:underline disabled:opacity-60"
-            >
-              {loadingOlder ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ChevronUp className="w-3.5 h-3.5" />}
-              Load older messages
-            </button>
-          </div>
-        )}
+        <div className="mx-auto w-full max-w-3xl space-y-1">
+          {hasMore && (
+            <div className="flex justify-center py-2">
+              <button
+                onClick={loadOlderMessages}
+                disabled={loadingOlder}
+                className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 text-xs font-semibold text-slate-500 shadow-xs transition-colors hover:border-brand/60 hover:text-slate-900 disabled:opacity-60 dark:border-white/10 dark:bg-[var(--surface-elevated)] dark:text-slate-400 dark:hover:text-white"
+              >
+                {loadingOlder ? <Loader2 className="w-3.5 h-3.5 animate-spin text-brand" /> : <ChevronUp className="w-3.5 h-3.5 text-brand" />}
+                Load older messages
+              </button>
+            </div>
+          )}
 
-        {loading ? (
-          <DMSkeleton />
-        ) : messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-40 text-slate-400">
-            <Mail className="mb-2 h-8 w-8" />
-            <p className="text-sm">Start the conversation!</p>
-          </div>
-        ) : (
-          messages.map((msg) => (
-            <MessageBubble
-              key={msg.id}
-              message={msg}
-              currentUserId={currentUserId}
-              context="dm"
-              contextId={conversationId}
-              onDelete={handleDelete}
-              onRetry={handleRetry}
-            />
-          ))
-        )}
-        <div ref={bottomRef} />
+          {loading ? (
+            <DMSkeleton />
+          ) : messages.length === 0 ? (
+            <div className="flex flex-col items-center justify-center min-h-[220px] text-slate-400">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/40 bg-brand/10 shadow-xs">
+                <Mail className="h-6 w-6 text-amber-600 dark:text-brand" />
+              </div>
+              <p className="font-bold text-slate-900 dark:text-white">Start the conversation</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Send a direct message to connect and study together.</p>
+            </div>
+          ) : (
+            messages.map((msg, index) => {
+              const prev = messages[index - 1];
+              const next = messages[index + 1];
+
+              const prevTime = prev ? new Date(prev.created_at).getTime() : 0;
+              const currTime = new Date(msg.created_at).getTime();
+              const nextTime = next ? new Date(next.created_at).getTime() : 0;
+
+              const prevDivider = prev ? getDateDividerLabel(prev.created_at) : null;
+              const currDivider = getDateDividerLabel(msg.created_at);
+              const dateDivider = currDivider !== prevDivider ? currDivider : null;
+
+              const isSameSenderAsPrev = prev && prev.sender_id === msg.sender_id && currTime - prevTime < 5 * 60 * 1000 && !dateDivider;
+              const isSameSenderAsNext = next && next.sender_id === msg.sender_id && nextTime - currTime < 5 * 60 * 1000 && getDateDividerLabel(next.created_at) === currDivider;
+
+              return (
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  currentUserId={currentUserId}
+                  context="dm"
+                  contextId={conversationId}
+                  onDelete={handleDelete}
+                  onRetry={handleRetry}
+                  isFirstInGroup={!isSameSenderAsPrev}
+                  isLastInGroup={!isSameSenderAsNext}
+                  dateDivider={dateDivider}
+                />
+              );
+            })
+          )}
+
+          {/* Typing indicator */}
+          {otherIsTyping && (
+            <div className="flex items-center gap-2 px-2 py-1.5 animate-in fade-in duration-200">
+              <div className="flex items-center gap-1 rounded-full bg-slate-200/80 px-3 py-1 dark:bg-white/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                <span className="ml-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 italic">{otherUser?.full_name || "Someone"} is typing…</span>
+              </div>
+            </div>
+          )}
+
+          <div ref={bottomRef} />
+        </div>
       </div>
 
       {/* Floating "New Messages" Pill */}
       {unreadCount > 0 && (
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <button
             onClick={() => scrollToBottom({ behavior: "smooth" })}
-            className="flex items-center gap-1.5 rounded-full bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-lg transition-transform hover:scale-105 dark:bg-brand dark:text-black"
+            className="flex items-center gap-1.5 rounded-full bg-slate-900 px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-black/20 hover:bg-slate-800 transition-all dark:bg-brand dark:text-slate-950 dark:hover:bg-brand-hover"
           >
             <ChevronDown className="h-3.5 w-3.5" />
             <span>{unreadCount === 1 ? "New message" : `${unreadCount} new messages`}</span>
           </button>
-        </div>
-      )}
-
-      {otherIsTyping && (
-        <div className="flex items-center gap-2 border-t border-slate-100 px-4 py-2 dark:border-[var(--border-subtle)]">
-          <div className="flex gap-0.5">
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400" />
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400 [animation-delay:150ms]" />
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-400 [animation-delay:300ms]" />
-          </div>
-          <p className="text-xs italic text-slate-400">{otherUser?.full_name || "Someone"} is typing…</p>
         </div>
       )}
 
@@ -471,36 +509,47 @@ export default function DMChat({ conversationId, currentUserId, otherUser }) {
         </div>
       )}
 
-      {/* Input */}
-      <form
-        onSubmit={sendMessage}
-        className="sticky bottom-0 border-t border-slate-200 bg-[var(--card)]/90 px-3 py-3 backdrop-blur dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 flex items-end gap-3 sm:px-4"
-      >
-        <textarea
-          ref={textareaRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              sendMessage(e);
-            }
-          }}
-          maxLength={2000}
-          rows={1}
-          placeholder="Type a message…"
-          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[var(--surface-elevated)]/60 border border-slate-200 dark:border-[var(--border)] text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none max-h-32 overflow-y-auto"
-        />
-        <button
-          type="submit"
-          disabled={!input.trim()}
-          id="send-dm-message"
-          aria-label="Send message"
-          className="shrink-0 p-2.5 rounded-xl bg-indigo-600 text-white disabled:opacity-40 hover:bg-indigo-700 transition-colors"
+      {/* Input Composer */}
+      <div className="sticky bottom-0 border-t border-stone-200 bg-white/95 px-3 py-3 backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:px-6">
+        <form
+          onSubmit={sendMessage}
+          className="mx-auto flex w-full max-w-3xl items-end gap-2 sm:gap-3"
         >
-          <Send className="w-4 h-4" />
-        </button>
-      </form>
+          <div className="relative flex flex-1 items-center rounded-2xl border border-stone-200 bg-stone-50/70 p-1.5 transition-all focus-within:border-brand/70 focus-within:bg-white focus-within:ring-2 focus-within:ring-brand/20 dark:border-white/10 dark:bg-[var(--surface-elevated)]/70 dark:focus-within:border-brand/60 dark:focus-within:bg-[var(--surface-elevated)]">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  sendMessage(e);
+                }
+              }}
+              maxLength={2000}
+              rows={1}
+              placeholder="Type a message…"
+              className="max-h-32 flex-1 resize-none overflow-y-auto bg-transparent px-3 py-1.5 text-sm leading-6 text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white"
+              style={{ height: "auto" }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={!input.trim()}
+            id="send-dm-message"
+            aria-label="Send message"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand text-slate-950 shadow-xs transition-all hover:bg-brand-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <Send className="h-4 w-4 stroke-[2.2]" />
+          </button>
+        </form>
+        <div className="mx-auto max-w-3xl px-2 pt-1.5 hidden sm:flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
+          <span>Press <strong>Enter ↵</strong> to send, <strong>Shift+Enter</strong> for newline</span>
+          <span>Max 2000 characters</span>
+        </div>
+      </div>
     </div>
   );
 }
+

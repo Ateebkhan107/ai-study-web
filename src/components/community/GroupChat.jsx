@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ChevronUp, ChevronDown, MessageCircle, AlertCircle, WifiOff } from "lucide-react";
 import { useSession } from "@clerk/nextjs";
-import MessageBubble from "./MessageBubble";
+import MessageBubble, { getDateDividerLabel } from "./MessageBubble";
 import { useClerkSupabase } from "@/lib/useClerkSupabase";
+
 
 function ChatSkeleton() {
   return (
@@ -493,71 +494,92 @@ export default function GroupChat({ groupId, currentUserId, currentUserName, onP
       <div
         ref={messagesContainerRef}
         onScroll={handleScroll}
-        className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-4 scroll-smooth sm:px-6"
+        className="min-h-0 flex-1 overflow-y-auto px-3 py-4 scroll-smooth sm:px-6 bg-[#faf9f6]/80 dark:bg-[var(--background)]"
       >
-        {/* Load older */}
-        {hasMore && (
-          <div className="flex justify-center py-1">
-            <button
-              onClick={loadOlderMessages}
-              disabled={loadingOlder}
-              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-500 transition-colors hover:border-brand/50 hover:text-slate-900 disabled:opacity-60 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400 dark:hover:text-white"
-            >
-              {loadingOlder ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ChevronUp className="w-3.5 h-3.5" />}
-              Load older messages
-            </button>
-          </div>
-        )}
+        <div className="mx-auto w-full max-w-3xl space-y-1">
+          {/* Load older */}
+          {hasMore && (
+            <div className="flex justify-center py-2">
+              <button
+                onClick={loadOlderMessages}
+                disabled={loadingOlder}
+                className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 text-xs font-semibold text-slate-500 shadow-xs transition-colors hover:border-brand/60 hover:text-slate-900 disabled:opacity-60 dark:border-white/10 dark:bg-[var(--surface-elevated)] dark:text-slate-400 dark:hover:text-white"
+              >
+                {loadingOlder ? <Loader2 className="w-3.5 h-3.5 animate-spin text-brand" /> : <ChevronUp className="w-3.5 h-3.5 text-brand" />}
+                Load older messages
+              </button>
+            </div>
+          )}
 
-        {loading ? (
-          <ChatSkeleton />
-        ) : messages.length === 0 ? (
-          <div className="flex h-full min-h-[260px] items-center justify-center">
-            <div className="max-w-sm rounded-xl border border-dashed border-slate-300 bg-white px-6 py-8 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
-                <MessageCircle className="h-6 w-6 text-brand" />
+          {loading ? (
+            <ChatSkeleton />
+          ) : messages.length === 0 ? (
+            <div className="flex h-full min-h-[260px] items-center justify-center">
+              <div className="max-w-sm rounded-2xl border border-dashed border-stone-300 bg-white p-6 sm:p-8 text-center text-slate-500 shadow-xs dark:border-white/10 dark:bg-[var(--surface-elevated)] dark:text-slate-400">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/40 bg-brand/10 shadow-xs">
+                  <MessageCircle className="h-6 w-6 text-amber-600 dark:text-brand" />
+                </div>
+                <p className="font-bold text-slate-900 dark:text-white">Start the conversation</p>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                  Ask a doubt, share a study schedule, or post a question you solved today.
+                </p>
               </div>
-              <p className="font-bold text-slate-900 dark:text-white">Start the conversation</p>
-              <p className="mt-2 text-sm leading-6">
-                Ask a doubt, share a mock-test plan, or post the chapter you are revising today.
-              </p>
             </div>
-          </div>
-        ) : (
-          messages.map((msg) => (
-            <MessageBubble
-              key={msg.id}
-              message={msg}
-              currentUserId={currentUserId}
-              context="group"
-              contextId={groupId}
-              onDelete={handleDelete}
-              onRetry={handleRetry}
-            />
-          ))
-        )}
+          ) : (
+            messages.map((msg, index) => {
+              const prev = messages[index - 1];
+              const next = messages[index + 1];
 
-        {/* Typing indicator */}
-        {typingText && (
-          <div className="flex items-center gap-2 px-1 py-1">
-            <div className="flex gap-0.5 items-end h-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "150ms" }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "300ms" }} />
+              const prevTime = prev ? new Date(prev.created_at).getTime() : 0;
+              const currTime = new Date(msg.created_at).getTime();
+              const nextTime = next ? new Date(next.created_at).getTime() : 0;
+
+              const prevDivider = prev ? getDateDividerLabel(prev.created_at) : null;
+              const currDivider = getDateDividerLabel(msg.created_at);
+              const dateDivider = currDivider !== prevDivider ? currDivider : null;
+
+              const isSameSenderAsPrev = prev && prev.sender_id === msg.sender_id && currTime - prevTime < 5 * 60 * 1000 && !dateDivider;
+              const isSameSenderAsNext = next && next.sender_id === msg.sender_id && nextTime - currTime < 5 * 60 * 1000 && getDateDividerLabel(next.created_at) === currDivider;
+
+              return (
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  currentUserId={currentUserId}
+                  context="group"
+                  contextId={groupId}
+                  onDelete={handleDelete}
+                  onRetry={handleRetry}
+                  isFirstInGroup={!isSameSenderAsPrev}
+                  isLastInGroup={!isSameSenderAsNext}
+                  dateDivider={dateDivider}
+                />
+              );
+            })
+          )}
+
+          {/* Typing indicator */}
+          {typingText && (
+            <div className="flex items-center gap-2 px-2 py-1.5 animate-in fade-in duration-200">
+              <div className="flex items-center gap-1 rounded-full bg-slate-200/80 px-3 py-1 dark:bg-white/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                <span className="ml-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 italic">{typingText}</span>
+              </div>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 italic">{typingText}</p>
-          </div>
-        )}
+          )}
 
-        <div ref={bottomRef} />
+          <div ref={bottomRef} />
+        </div>
       </div>
 
       {/* Floating "New Messages" Pill */}
       {unreadCount > 0 && (
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <button
             onClick={() => scrollToBottom({ behavior: "smooth" })}
-            className="flex items-center gap-1.5 rounded-full bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-lg transition-transform hover:scale-105 dark:bg-brand dark:text-black"
+            className="flex items-center gap-1.5 rounded-full bg-slate-900 px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-black/20 hover:bg-slate-800 transition-all dark:bg-brand dark:text-slate-950 dark:hover:bg-brand-hover"
           >
             <ChevronDown className="h-3.5 w-3.5" />
             <span>{unreadCount === 1 ? "New message" : `${unreadCount} new messages`}</span>
@@ -572,37 +594,46 @@ export default function GroupChat({ groupId, currentUserId, currentUserName, onP
         </div>
       )}
 
-      {/* Input */}
-      <form
-        onSubmit={sendMessage}
-        className="sticky bottom-0 flex items-end gap-2 border-t border-slate-200 bg-white px-3 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:gap-3 sm:px-4"
-      >
-        <textarea
-          ref={textareaRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              sendMessage(e);
-            }
-          }}
-          maxLength={2000}
-          rows={1}
-          placeholder="Ask a doubt or share an update…"
-          className="max-h-32 flex-1 resize-none overflow-y-auto rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm leading-6 text-slate-900 placeholder-slate-400 transition-colors focus:border-brand/60 focus:bg-white focus:outline-none dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/60 dark:text-white dark:focus:bg-[var(--surface-elevated)] sm:px-4"
-          style={{ height: "auto" }}
-        />
-        <button
-          type="submit"
-          disabled={!input.trim()}
-          id="send-group-message"
-          aria-label="Send message"
-          className="shrink-0 rounded-lg bg-brand p-2.5 text-black transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-40"
+      {/* Input Composer */}
+      <div className="sticky bottom-0 border-t border-stone-200 bg-white/95 px-3 py-3 backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:px-6">
+        <form
+          onSubmit={sendMessage}
+          className="mx-auto flex w-full max-w-3xl items-end gap-2 sm:gap-3"
         >
-          <Send className="w-4 h-4" />
-        </button>
-      </form>
+          <div className="relative flex flex-1 items-center rounded-2xl border border-stone-200 bg-stone-50/70 p-1.5 transition-all focus-within:border-brand/70 focus-within:bg-white focus-within:ring-2 focus-within:ring-brand/20 dark:border-white/10 dark:bg-[var(--surface-elevated)]/70 dark:focus-within:border-brand/60 dark:focus-within:bg-[var(--surface-elevated)]">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  sendMessage(e);
+                }
+              }}
+              maxLength={2000}
+              rows={1}
+              placeholder="Ask a doubt or share an update…"
+              className="max-h-32 flex-1 resize-none overflow-y-auto bg-transparent px-3 py-1.5 text-sm leading-6 text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white"
+              style={{ height: "auto" }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={!input.trim()}
+            id="send-group-message"
+            aria-label="Send message"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand text-slate-950 shadow-xs transition-all hover:bg-brand-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <Send className="h-4 w-4 stroke-[2.2]" />
+          </button>
+        </form>
+        <div className="mx-auto max-w-3xl px-2 pt-1.5 hidden sm:flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
+          <span>Press <strong>Enter ↵</strong> to send, <strong>Shift+Enter</strong> for newline</span>
+          <span>Max 2000 characters</span>
+        </div>
+      </div>
     </div>
   );
 }

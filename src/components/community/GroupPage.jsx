@@ -132,33 +132,33 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
   const managementTabs = visibleTabs.filter((tab) => tab !== "Chat");
 
   return (
-    <div className="mx-auto flex h-[calc(100dvh-5.25rem)] max-h-[calc(100dvh-5.25rem)] w-full max-w-6xl overflow-hidden rounded-none border-slate-200 bg-white shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] md:h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-8rem)] md:rounded-xl md:border">
-      <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-slate-50/90 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] md:block">
-        <Link href="/community" className="mb-4 inline-flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-bold text-slate-500 transition-colors hover:bg-white hover:text-slate-950 dark:hover:bg-[var(--surface)] dark:hover:text-white">
+    <div className="mx-auto flex h-[calc(100dvh-5.25rem)] max-h-[calc(100dvh-5.25rem)] w-full max-w-6xl overflow-hidden rounded-none border-stone-200 bg-white shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] md:h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-8rem)] md:rounded-2xl md:border">
+      <aside className="hidden w-72 shrink-0 border-r border-stone-200 bg-stone-50/60 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] md:block">
+        <Link href="/community" className="mb-4 inline-flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs font-bold text-slate-500 transition-colors hover:bg-white hover:text-slate-950 dark:hover:bg-[var(--surface-elevated)] dark:hover:text-white">
           <ArrowLeft className="h-4 w-4" />
-          Community
+          Community Hub
         </Link>
         <div className="mb-3 px-2">
-          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">My Groups</p>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">Study rooms you belong to</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">My Study Groups</p>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Your enrolled rooms</p>
         </div>
-        <div className="max-h-[calc(100%-5.5rem)] space-y-1 overflow-y-auto pr-1">
+        <div className="max-h-[calc(100%-5.5rem)] space-y-1.5 overflow-y-auto pr-1">
           {myGroups.map((item) => (
             <Link
               key={item.id}
               href={`/community/groups/${item.id}`}
-              className={`relative block rounded-lg border px-3 py-2.5 transition-colors ${
+              className={`relative block rounded-xl border p-3 transition-all ${
                 item.id === groupId
-                  ? "border-brand/40 bg-white text-slate-950 dark:bg-[var(--surface)] dark:text-white"
-                  : "border-transparent text-slate-600 hover:border-slate-200 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:border-[var(--border-subtle)] dark:hover:bg-[var(--surface)] dark:hover:text-white"
+                  ? "border-brand/50 bg-white shadow-xs text-slate-950 dark:bg-[var(--surface-elevated)] dark:text-white"
+                  : "border-transparent text-slate-600 hover:border-stone-200 hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:border-white/10 dark:hover:bg-[var(--surface-elevated)] dark:hover:text-white"
               }`}
             >
-              {item.id === groupId && <span className="absolute left-0 top-2.5 h-8 w-1 rounded-r-full bg-brand" />}
+              {item.id === groupId && <span className="absolute left-0 top-3 h-8 w-1 rounded-r-full bg-brand" />}
               <div className="flex items-center justify-between gap-2">
                 <span className="truncate text-sm font-bold">{item.name}</span>
-                {item.myRole === "OWNER" && <span className="text-[10px] font-bold text-amber-700 dark:text-brand">Owner</span>}
+                {item.myRole === "OWNER" && <span className="text-[10px] font-black text-amber-700 dark:text-brand uppercase">Owner</span>}
               </div>
-              <p className="mt-0.5 text-xs text-slate-400">{item.member_count ?? 0} members</p>
+              <p className="mt-0.5 text-xs text-slate-400 font-medium">{item.member_count ?? 0} members</p>
             </Link>
           ))}
         </div>
@@ -166,32 +166,35 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
 
       <div className="flex min-w-0 flex-1 flex-col bg-white dark:bg-[var(--surface)]">
       {/* Group header */}
-      <div className="flex items-center gap-2 border-b border-slate-200 bg-white px-3 py-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:gap-3 sm:px-4">
-        <Link href="/community" className="rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-[var(--surface-elevated)] dark:hover:text-white md:hidden">
+      <div className="flex items-center gap-2 border-b border-stone-200 bg-white/95 px-3 py-3 backdrop-blur-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:gap-3 sm:px-5">
+        <Link href="/community" className="rounded-xl p-2 text-slate-500 transition-colors hover:bg-stone-100 hover:text-slate-900 dark:hover:bg-[var(--surface-elevated)] dark:hover:text-white md:hidden">
           <ArrowLeft className="w-4 h-4" />
         </Link>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h1 className="truncate text-base font-bold text-slate-900 dark:text-white">{group.name}</h1>
-            <span className={`shrink-0 inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
+            <h1 className="truncate text-base sm:text-lg font-bold text-slate-900 dark:text-white">{group.name}</h1>
+            <span className={`shrink-0 inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
               group.privacy === "PUBLIC"
-                ? "border-slate-200 bg-slate-50 text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-300"
+                ? "border-stone-200 bg-stone-50 text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
                 : "border-amber-300/70 bg-amber-50 text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300"
             }`}>
               {group.privacy === "PUBLIC" ? <Globe className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
               {group.privacy === "PUBLIC" ? "Public" : "Private"}
             </span>
           </div>
-          <p className="mt-0.5 flex items-center gap-2 truncate text-xs text-slate-500 dark:text-slate-400">
-            <span className="inline-flex items-center gap-1"><Users className="w-3 h-3" /> {group.member_count ?? 0} members</span>
+          <p className="mt-0.5 flex items-center gap-2.5 truncate text-xs text-slate-500 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1"><Users className="w-3.5 h-3.5 text-slate-400" /> {group.member_count ?? 0} members</span>
             {onlineCount !== null && onlineCount > 0 && (
-              <span className="inline-flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                {onlineCount} online
+              <span className="inline-flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                {onlineCount} active
               </span>
             )}
-            {myRole && <span className="text-slate-400">· {myRole.toLowerCase()}</span>}
+            {myRole && <span className="text-slate-400 font-medium">· {myRole.toLowerCase()}</span>}
           </p>
         </div>
 
@@ -199,7 +202,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
           <button
             onClick={handleLeave}
             disabled={leaving}
-            className="hidden shrink-0 items-center gap-1.5 rounded-lg border border-transparent px-3 py-1.5 text-xs font-semibold text-red-500 transition-colors hover:border-red-200 hover:bg-red-50 dark:hover:border-red-500/30 dark:hover:bg-red-900/20 min-[390px]:flex"
+            className="hidden shrink-0 items-center gap-1.5 rounded-xl border border-rose-200/80 bg-rose-50/50 px-3 py-1.5 text-xs font-bold text-rose-600 transition-colors hover:bg-rose-100 dark:border-rose-500/30 dark:bg-rose-900/20 dark:text-rose-400 min-[390px]:flex"
           >
             {leaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
             Leave

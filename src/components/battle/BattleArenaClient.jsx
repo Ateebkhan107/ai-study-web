@@ -3,6 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
+import { Volume2, VolumeX, Mic, MicOff, Flame, Trophy, Shield, Swords, Users, RefreshCw } from "lucide-react";
+import { getSoundEnabled, setSoundEnabled, getVoiceEnabled, setVoiceEnabled, unlockAudioContext } from "@/lib/battleAudio";
+import BattleMatchmakingModal from "./BattleMatchmakingModal";
+import BattleLeaderboard from "./BattleLeaderboard";
+import BattleLiveFeed from "./BattleLiveFeed";
+import BattleChampionCelebration from "./BattleChampionCelebration";
+import { StarsBackground } from "@/components/ui/stars-background";
+
 
 function cx(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -57,68 +65,6 @@ function RadarIcon(props) {
   );
 }
 
-function HourglassIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={cx("animate-pulse", props.className)} {...props}>
-      <path d="M5 22h14" />
-      <path d="M5 2h14" />
-      <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
-      <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
-      <path d="M12 12v3" className="animate-bounce" />
-    </svg>
-  );
-}
-
-// Simple CountUp hook
-function useCountUp(endValue, durationMs = 1500) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let startTime = null;
-    let animationFrame;
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      const percent = Math.min(progress / durationMs, 1);
-      // ease out cubic
-      const ease = 1 - Math.pow(1 - percent, 3);
-      setCount(Math.floor(ease * endValue));
-      if (percent < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [endValue, durationMs]);
-  return count;
-}
-
-function ScoreComparison({ scoreString }) {
-  const [myStr, oppStr] = (scoreString || "0 - 0").split(" - ");
-  const myScore = parseInt(myStr, 10) || 0;
-  const oppScore = parseInt(oppStr, 10) || 0;
-  
-  const animatedMy = useCountUp(myScore);
-  const animatedOpp = useCountUp(oppScore);
-
-  const total = Math.max(myScore + oppScore, 1);
-  const myPercent = (myScore / total) * 100;
-  
-  return (
-    <div className="flex w-32 flex-col gap-1.5 sm:w-40">
-      <div className="flex justify-between text-xs font-black">
-        <span className="text-slate-900 dark:text-white">{animatedMy}</span>
-        <span className="text-slate-500 dark:text-slate-400">{animatedOpp}</span>
-      </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700/50">
-        <div 
-          className="h-full bg-brand transition-all duration-1000 ease-out" 
-          style={{ width: `${myPercent}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
 function ChallengeRow({ challenge, onRespond }) {
   const incoming = challenge.direction === "incoming";
   
@@ -142,7 +88,7 @@ function ChallengeRow({ challenge, onRespond }) {
     )}>
       <div className="flex min-w-0 items-center gap-3">
         <div className="min-w-0">
-          <p className={cx("truncate text-xl text-slate-900 dark:text-white", "font-display")}>
+          <p className={cx("truncate text-lg text-slate-900 dark:text-white", "font-display")}>
             {challenge.opponent.displayName}
           </p>
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -155,7 +101,7 @@ function ChallengeRow({ challenge, onRespond }) {
           <button
             type="button"
             onClick={() => onRespond(challenge.id, "decline")}
-            className="rounded-md px-2 py-1.5 text-xs font-bold text-slate-400 transition hover:text-rose-500"
+            className="rounded-md px-2.5 py-1.5 text-xs font-bold text-slate-400 transition hover:text-rose-500"
           >
             DECLINE
           </button>
@@ -182,7 +128,6 @@ export default function BattleArenaClient() {
   const [history, setHistory] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [queueStatus, setQueueStatus] = useState("idle");
-  const [queueStartedAt, setQueueStartedAt] = useState(null);
   const [username, setUsername] = useState("");
   const [searchedUser, setSearchedUser] = useState(null);
   const [searchMessage, setSearchMessage] = useState("");
@@ -190,7 +135,27 @@ export default function BattleArenaClient() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  const [waitedLongEnough, setWaitedLongEnough] = useState(false);
+  // Audio Toggles
+  const [soundOn, setSoundOn] = useState(() => getSoundEnabled());
+  const [voiceOn, setVoiceOn] = useState(() => getVoiceEnabled());
+
+  // Matchmaking Modal State
+  const [matchModalOpen, setMatchModalOpen] = useState(false);
+  const [matchedData, setMatchedData] = useState(null);
+
+  function toggleSound() {
+    const next = !soundOn;
+    setSoundOn(next);
+    setSoundEnabled(next);
+    unlockAudioContext();
+  }
+
+  function toggleVoice() {
+    const next = !voiceOn;
+    setVoiceOn(next);
+    setVoiceEnabled(next);
+    unlockAudioContext();
+  }
 
   const refreshBasics = useCallback(async function refreshBasics() {
     const profileData = await fetchJson("/api/profile");
@@ -214,8 +179,12 @@ export default function BattleArenaClient() {
     setChallenges(challengeData.challenges || []);
     setQueueStatus(queueData.status || "idle");
     setError("");
-    if (queueData.status === "matched" && queueData.battleId) router.push(`/battle/${queueData.battleId}`);
-  }, [router]);
+
+    if (queueData.status === "matched" && queueData.battleId) {
+      setMatchedData({ battleId: queueData.battleId, opponent: queueData.opponent });
+      setMatchModalOpen(true);
+    }
+  }, []);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -228,34 +197,30 @@ export default function BattleArenaClient() {
   useEffect(() => {
     const interval = setInterval(() => {
       refreshBasics().catch(() => {});
-    }, queueStatus === "queued" ? 2500 : 6000);
+    }, queueStatus === "queued" || matchModalOpen ? 2500 : 8000);
     return () => clearInterval(interval);
-  }, [queueStatus, refreshBasics]);
-
-  useEffect(() => {
-    if (queueStatus !== "queued" || !queueStartedAt) return;
-    const timeout = setTimeout(() => setWaitedLongEnough(true), 15000);
-    return () => clearTimeout(timeout);
-  }, [queueStartedAt, queueStatus]);
+  }, [queueStatus, matchModalOpen, refreshBasics]);
 
   async function findOpponent() {
+    unlockAudioContext();
     setBusy(true);
     setError("");
+    setMatchModalOpen(true);
     try {
       const data = await fetchJson("/api/battle/queue", { method: "POST" });
       posthog.capture("battle_matchmaking_started", {
         exam: profile?.exam,
         matched_immediately: Boolean(data.status === "matched" && data.battleId),
       });
+
       if (data.status === "matched" && data.battleId) {
-        router.push(`/battle/${data.battleId}`);
-        return;
+        setMatchedData({ battleId: data.battleId, opponent: data.opponent });
+      } else {
+        setQueueStatus("queued");
       }
-      setQueueStatus("queued");
-      setQueueStartedAt(Date.now());
-      setWaitedLongEnough(false);
     } catch (err) {
       setError(err.message);
+      setMatchModalOpen(false);
     } finally {
       setBusy(false);
     }
@@ -264,8 +229,8 @@ export default function BattleArenaClient() {
   async function leaveQueue() {
     await fetchJson("/api/battle/queue", { method: "DELETE" }).catch(() => {});
     setQueueStatus("idle");
-    setQueueStartedAt(null);
-    setWaitedLongEnough(false);
+    setMatchModalOpen(false);
+    setMatchedData(null);
   }
 
   async function searchUsername(e) {
@@ -312,6 +277,7 @@ export default function BattleArenaClient() {
   }
 
   async function respondToChallenge(id, action) {
+    unlockAudioContext();
     setBusy(true);
     try {
       const data = await fetchJson(`/api/battle/challenges/${id}`, {
@@ -324,7 +290,8 @@ export default function BattleArenaClient() {
         match_created: Boolean(data.battleId),
       });
       if (data.battleId) {
-        router.push(`/battle/${data.battleId}`);
+        setMatchedData({ battleId: data.battleId, opponent: null });
+        setMatchModalOpen(true);
         return;
       }
       await refreshBasics();
@@ -343,291 +310,276 @@ export default function BattleArenaClient() {
     );
   }
 
+  const myRating = profile?.arena_rating || 1000;
+  const myStreak = profile?.win_streak || 0;
+  const myTier = profile?.tier || { name: "Bronze", icon: "🛡️" };
+
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-7 sm:px-6 lg:px-8">
-      {/* HERO SECTION - Real VS Matchup */}
-      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)]">
-        <div className="absolute inset-x-0 top-0 h-px bg-brand/35" aria-hidden="true" />
-        
-        <div className="hidden sm:block px-4 pt-5 pb-4 sm:px-6 sm:pt-7 sm:pb-6">
+    <main className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-6">
+      {/* Ambient Arena Stars Background */}
+      <StarsBackground className="pointer-events-none -z-10 opacity-60" />
+      
+      {/* Monthly Champion Celebration Pop-up */}
+      <BattleChampionCelebration />
+
+      {/* Matchmaking VS & Countdown Modal */}
+      <BattleMatchmakingModal
+        isOpen={matchModalOpen}
+        profile={{ ...profile, arena_rating: myRating }}
+        matchedData={matchedData}
+        onCancel={leaveQueue}
+      />
+
+      {/* HEADER CONTROLS (Title + Sound & Voice Toggles) */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
           <div className="inline-flex items-center gap-2 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
             <CustomSwordsIcon className="h-3.5 w-3.5" />
             Battle Arena
           </div>
-          <h1 className={cx("mt-3 text-3xl tracking-wide text-slate-950 dark:text-white sm:text-5xl lg:text-6xl uppercase", "font-display")}>
+          <h1 className={cx("mt-2 text-3xl sm:text-5xl uppercase tracking-tight text-slate-950 dark:text-white", "font-display")}>
             PrepZii 1v1 Arena
           </h1>
-          <p className="mt-1 text-sm leading-6 font-semibold text-slate-600 dark:text-slate-400 max-w-2xl">
-            Same paper set. Same exam track. A focused head-to-head sprint for serious {profile?.exam || "JEE"} practice.
+          <p className="mt-0.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Realtime 10-question sprint on {profile?.exam || "JEE"} track.
           </p>
         </div>
-        
-        {/* Mobile Header Title */}
-        <div className="sm:hidden px-4 pt-4 pb-2 text-center">
-          <div className="inline-flex items-center justify-center gap-1.5 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand">
-            <CustomSwordsIcon className="h-3 w-3" />
-            Battle Arena
-          </div>
+
+        {/* Audio Toggles */}
+        <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+          <button
+            type="button"
+            onClick={toggleSound}
+            title={soundOn ? "Sound Effects Enabled" : "Sound Muted"}
+            className={cx(
+              "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-bold transition",
+              soundOn
+                ? "bg-brand/15 text-brand"
+                : "text-slate-400 hover:text-slate-600 dark:hover:text-white"
+            )}
+          >
+            {soundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            <span className="hidden sm:inline">SFX</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleVoice}
+            title={voiceOn ? "Arena Announcer Enabled" : "Announcer Muted"}
+            className={cx(
+              "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-bold transition",
+              voiceOn
+                ? "bg-brand/15 text-brand"
+                : "text-slate-400 hover:text-slate-600 dark:hover:text-white"
+            )}
+          >
+            {voiceOn ? <Mic className="h-4 w-4" /> : <MicOff className="h-4 w-4" />}
+            <span className="hidden sm:inline">Voice</span>
+          </button>
         </div>
+      </div>
 
-        {/* Fight Card Split */}
-        <div className="relative flex w-full flex-row sm:mt-2 sm:border-t border-slate-200 dark:border-slate-800">
-           {/* Divider (Diagonal slash) */}
-           <div className={cx(
-             "absolute left-1/2 top-0 z-20 hidden sm:flex h-full w-14 -translate-x-1/2 skew-x-[-15deg] items-center justify-center border-x-4 border-slate-50 dark:border-[#141414] transition-colors duration-500",
-             queueStatus === "queued" ? "bg-brand/80 shadow-[0_0_25px_rgba(245,181,0,0.6)] animate-pulse" : "bg-brand"
-           )}>
-             <span className={cx("skew-x-[15deg] text-3xl text-slate-950 shadow-sm", "font-display")}>VS</span>
-           </div>
-           
-           <div className={cx(
-             "absolute left-1/2 top-1/2 z-20 flex sm:hidden h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[2.5px] border-slate-50 dark:border-[#141414] transition-colors duration-500",
-             queueStatus === "queued" ? "bg-brand/80 shadow-[0_0_15px_rgba(245,181,0,0.6)] animate-pulse" : "bg-brand"
-           )}>
-             <span className={cx("text-sm text-slate-950", "font-display")}>VS</span>
-           </div>
+      {/* FIGHT CARD HERO BANNER */}
+      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)]">
+        <div className="absolute inset-x-0 top-0 h-px bg-brand/35" aria-hidden="true" />
 
-           {/* Left Side (Player) */}
-           <div className="relative w-1/2 bg-slate-100 p-3 sm:px-10 sm:py-12 dark:bg-[#111]">
-             <div className="relative z-10 flex flex-col items-center sm:items-start text-center sm:text-left">
-               <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-brand">You</span>
-               <span className={cx("mt-0.5 sm:mt-1 text-sm sm:text-4xl text-slate-900 dark:text-white uppercase truncate w-full", "font-display")}>
-                 <span className="sm:hidden">{initials(profile?.full_name || profile?.fullName)}</span>
-                 <span className="hidden sm:inline">{profile?.full_name || profile?.fullName || "Student"}</span>
-               </span>
-               <span className="text-[10px] sm:text-sm font-semibold text-slate-500">@{profile?.username}</span>
-             </div>
-           </div>
-           
-           {/* Right Side (Opponent) */}
-           <div className="relative w-1/2 bg-slate-50 p-3 sm:px-10 sm:py-12 dark:bg-[#0a0a0a] flex flex-col items-center sm:items-end text-center sm:text-right">
-             <div className={cx("relative z-10 flex flex-col items-center sm:items-end w-full", queueStatus === "queued" ? "animate-pulse" : "")}>
-               <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Opponent</span>
-               <span className={cx("mt-0.5 sm:mt-1 text-sm sm:text-4xl text-slate-300 dark:text-slate-600 uppercase truncate w-full", "font-display")}>
-                 <span className="sm:hidden">{queueStatus === "queued" ? "Wait" : "?"}</span>
-                 <span className="hidden sm:inline">{queueStatus === "queued" ? "SEARCHING..." : "OPEN SLOT"}</span>
-               </span>
-               <span className="text-[10px] sm:text-sm font-semibold text-slate-400/80 leading-tight">
-                 <span className="sm:hidden">{queueStatus === "queued" ? "Searching..." : "Ready"}</span>
-                 <span className="hidden sm:inline">{queueStatus === "queued" ? "Awaiting a worthy opponent" : "Waiting for a challenger"}</span>
-               </span>
-             </div>
-           </div>
+        <div className="relative flex w-full flex-row">
+          {/* Center VS Emblem */}
+          <div className="absolute left-1/2 top-1/2 z-20 flex h-10 w-10 sm:h-14 sm:w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand border-4 border-slate-50 dark:border-[#141414] shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+            <span className={cx("text-sm sm:text-xl font-black text-slate-950", "font-display")}>VS</span>
+          </div>
+
+          {/* Left Player Side (You) */}
+          <div className="relative w-1/2 bg-slate-100 p-4 sm:px-10 sm:py-8 dark:bg-[#111] flex flex-col items-center sm:items-start text-center sm:text-left">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">YOU</span>
+            <span className={cx("mt-1 text-base sm:text-3xl text-slate-900 dark:text-white uppercase truncate w-full", "font-display")}>
+              {profile?.full_name || profile?.fullName || "Student"}
+            </span>
+            <span className="text-xs text-slate-500 font-semibold">@{profile?.username}</span>
+
+            {/* Elo Rating & Tier Badge */}
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1 rounded-md border border-brand/40 bg-brand/10 px-2.5 py-0.5 text-xs font-black text-brand font-display">
+                {myRating} Elo
+              </span>
+              <span className="rounded-md bg-white/10 px-2 py-0.5 text-[11px] font-bold text-slate-400">
+                {myTier.icon} {myTier.name}
+              </span>
+              {myStreak >= 2 && (
+                <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-0.5 text-[11px] font-black text-amber-500">
+                  <Flame className="h-3 w-3" /> {myStreak} Streak
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Right Opponent Side */}
+          <div className="relative w-1/2 bg-slate-50 p-4 sm:px-10 sm:py-8 dark:bg-[#0a0a0a] flex flex-col items-center sm:items-end text-center sm:text-right">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">OPPONENT</span>
+            <span className={cx("mt-1 text-base sm:text-3xl text-slate-400 dark:text-slate-600 uppercase truncate w-full", "font-display")}>
+              {queueStatus === "queued" ? "SEARCHING..." : "OPEN SLOT"}
+            </span>
+            <span className="text-xs text-slate-500 font-semibold">
+              {queueStatus === "queued" ? "Matching opponent..." : "Waiting for battle"}
+            </span>
+            <div className="mt-3">
+              <span className="rounded-md border border-dashed border-slate-300 dark:border-slate-800 px-2.5 py-0.5 text-xs text-slate-400">
+                Live matchmaking
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
       {error && (
-        <div className="mt-5 rounded-lg border border-amber-300/50 bg-amber-100/60 px-4 py-3 text-sm font-semibold text-amber-800 dark:border-brand/30 dark:bg-brand/10 dark:text-brand">
+        <div className="rounded-xl border border-amber-300/50 bg-amber-100/60 px-4 py-3 text-sm font-semibold text-amber-800 dark:border-brand/30 dark:bg-brand/10 dark:text-brand">
           {error}
         </div>
       )}
 
-      {!profile?.username && (
-        <div className="mt-5 rounded-xl border border-brand/35 bg-brand/10 p-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
-          Choose a username from Profile before entering Battle Arena.
-        </div>
-      )}
-
-      {/* UTILITY PANELS */}
-      <section className="mt-5 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-        <div className="flex flex-col gap-4">
+      {/* PRIMARY ACTIONS & LIVE FEED GRID */}
+      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        
+        {/* Left Column: Matchmaking CTA & Direct Challenge */}
+        <div className="space-y-6">
           
-          {/* Find Opponent (Primary CTA) */}
-          <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-brand px-4 py-5 sm:px-8 sm:py-10 shadow-sm transition hover:shadow-md">
-            {/* Background radar/reticle graphic */}
-            <div className="pointer-events-none absolute -right-8 -top-8 sm:-right-10 sm:-top-10 text-amber-500/20 dark:text-amber-600/20 transition-transform duration-700 ease-out group-hover:scale-110">
-              <RadarIcon className="h-28 w-28 sm:h-56 sm:w-56" />
+          {/* Start Matchmaking Card */}
+          <div className="group relative overflow-hidden rounded-2xl bg-brand p-6 sm:p-8 shadow-sm transition hover:shadow-md">
+            <div className="pointer-events-none absolute -right-6 -top-6 text-amber-500/20 dark:text-amber-600/20 transition-transform duration-700 ease-out group-hover:scale-110">
+              <RadarIcon className="h-36 w-36 sm:h-48 sm:w-48" />
             </div>
-            
-            <div className="relative z-10 flex flex-col items-start">
-              <h2 className={cx("text-xl sm:text-4xl text-slate-950 uppercase tracking-wide", "font-display")}>Find Opponent</h2>
-              <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-semibold text-amber-900/90 max-w-xs sm:max-w-sm">Enter the queue for a same-track {profile?.exam || "JEE"} matchup.</p>
-              
-              <div className="mt-4 sm:mt-8 w-full max-w-xs">
-                {queueStatus === "queued" ? (
-                  <div className="space-y-2 sm:space-y-3">
-                    <div className="rounded-lg sm:rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 sm:px-4 sm:py-3 backdrop-blur-sm">
-                      <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black text-slate-950">
-                        <div className="h-3 w-3 sm:h-4 sm:w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
-                        SEARCHING...
-                      </div>
-                    </div>
-                    {waitedLongEnough && (
-                      <p className="text-[11px] sm:text-sm font-semibold text-amber-900/80">Taking a bit longer than usual...</p>
-                    )}
-                    <div className="flex gap-2">
-                      <button type="button" onClick={leaveQueue} className="flex-1 rounded-lg sm:rounded-xl bg-slate-950/10 px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-bold text-slate-900 transition hover:bg-slate-950/20">Cancel</button>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={findOpponent}
-                    disabled={busy || !profile?.username}
-                    className="group/btn relative overflow-hidden flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl bg-slate-950 px-3 py-3 sm:px-4 sm:py-4 text-xs sm:text-sm font-black text-brand shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
-                      {busy ? <div className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin rounded-full border-2 border-brand border-t-transparent" /> : <CustomSwordsIcon className="h-4 w-4 sm:h-5 sm:w-5" />}
-                      Start Matchmaking
-                    </span>
-                    <div className="absolute inset-0 w-0 bg-white/10 transition-all duration-500 ease-out group-hover/btn:w-full" />
-                  </button>
-                )}
+
+            <div className="relative z-10">
+              <span className="rounded-md bg-slate-950/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-slate-950">
+                1v1 Ranked Match
+              </span>
+              <h2 className={cx("mt-2 text-2xl sm:text-4xl text-slate-950 uppercase tracking-wide", "font-display")}>
+                Find Opponent
+              </h2>
+              <p className="mt-1 text-xs sm:text-sm font-semibold text-amber-950/80 max-w-sm">
+                Compete against a fellow {profile?.exam || "JEE"} aspirant for Arena Elo rating points.
+              </p>
+
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={findOpponent}
+                  disabled={busy}
+                  className="rounded-full bg-slate-950 px-8 py-3.5 text-sm font-black uppercase tracking-wider text-white shadow-md hover:bg-slate-900 transition active:scale-95 disabled:opacity-50"
+                >
+                  Start Matchmaking
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Challenge by Username (Secondary) */}
-          <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-3 sm:p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-            <h2 className="hidden sm:block text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Direct Challenge</h2>
-            
-            <form onSubmit={searchUsername} className="sm:mt-3 flex flex-row gap-2">
-              <div className="relative flex-1">
-                <svg className="absolute left-3 sm:left-3.5 top-1/2 h-4 w-4 sm:h-5 sm:w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/>
-                  <path d="M21 21l-4.35-4.35"/>
-                </svg>
-                <input
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter @username"
-                  className="w-full rounded-lg sm:rounded-xl border border-slate-200 bg-slate-50 pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-slate-900 outline-none transition focus:border-brand focus:bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white dark:focus:border-brand dark:focus:bg-[var(--surface-elevated)]"
-                />
-              </div>
-              <button type="submit" disabled={busy} className="rounded-lg sm:rounded-xl bg-slate-100 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-slate-700 transition hover:bg-slate-200 disabled:opacity-50 dark:bg-[#1a1a1a] dark:text-slate-300 dark:hover:bg-[#222]">
-                <span className="hidden sm:inline">Lookup</span>
-                <span className="sm:hidden">Find</span>
+          {/* Direct Challenge Box */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <h3 className={cx("text-lg font-black text-slate-900 dark:text-white uppercase", "font-display")}>
+              Direct Challenge
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Challenge a friend or classmate by their username.
+            </p>
+
+            <form onSubmit={searchUsername} className="mt-4 flex gap-2">
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter @username"
+                className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-900 outline-none transition focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-white"
+              />
+              <button
+                type="submit"
+                disabled={busy || !username.trim()}
+                className="rounded-xl bg-slate-900 dark:bg-white dark:text-slate-950 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white hover:bg-slate-800 transition disabled:opacity-40"
+              >
+                Find
               </button>
             </form>
+
+            {searchMessage && (
+              <p className="mt-2 text-xs font-bold text-brand">{searchMessage}</p>
+            )}
+
             {searchedUser && (
-              <div className="mt-4 flex animate-in fade-in slide-in-from-bottom-2 duration-300 items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/50">
-                <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-xs font-black text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
-                    {initials(searchedUser.displayName)}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-black text-slate-950 dark:text-white">{searchedUser.displayName}</p>
-                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">@{searchedUser.username} · {searchedUser.exam}</p>
-                  </div>
+              <div className="mt-3 flex items-center justify-between rounded-xl border border-brand/30 bg-brand/10 p-3">
+                <div>
+                  <p className="text-sm font-black text-slate-900 dark:text-white">{searchedUser.displayName}</p>
+                  <p className="text-xs text-slate-400">@{searchedUser.username} · {searchedUser.exam}</p>
                 </div>
-                <button type="button" onClick={sendChallenge} disabled={busy} className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2.5 text-xs font-black text-slate-950 hover:bg-brand-hover transition">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
-                    <path d="M22 2L11 13" />
-                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-                  </svg>
+                <button
+                  type="button"
+                  onClick={sendChallenge}
+                  disabled={busy}
+                  className="rounded-lg bg-brand px-3.5 py-1.5 text-xs font-black uppercase text-slate-950 hover:bg-brand-hover transition"
+                >
                   Challenge
                 </button>
               </div>
             )}
-            {searchMessage && <p className="mt-3 text-xs font-semibold text-brand animate-in fade-in">{searchMessage}</p>}
-          </div>
-        </div>
 
-        {/* Pending Challenges Feed */}
-        <aside className={cx("flex flex-col gap-3", !challenges.length ? "hidden sm:flex" : "")}>
-          <h2 className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-1">
-            <HourglassIcon className="h-4 w-4 text-brand" />
-            Live Feed
-          </h2>
-          <div className="flex flex-col gap-2.5">
-            {challenges.length ? (
-              challenges.slice(0, 5).map((challenge) => (
-                <ChallengeRow key={challenge.id} challenge={challenge} onRespond={respondToChallenge} />
-              ))
-            ) : (
-              <div className="rounded-xl border-l-[4px] border-l-slate-300 border-y border-r border-slate-200 bg-slate-50/50 p-5 dark:border-l-slate-700 dark:border-y-[var(--border-subtle)] dark:border-r-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
-                <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">No active challenges.</p>
-                <p className="mt-1 text-xs font-medium text-slate-400 dark:text-slate-500">Incoming requests and sent challenges will appear here.</p>
+            {/* Pending Challenges List */}
+            {challenges.length > 0 && (
+              <div className="mt-4 space-y-2">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Active Challenges</p>
+                {challenges.map((c) => (
+                  <ChallengeRow key={c.id} challenge={c} onRespond={respondToChallenge} />
+                ))}
               </div>
             )}
           </div>
-        </aside>
-      </section>
-
-      {/* MATCH HISTORY AS SCORECARDS */}
-      {/* MATCH HISTORY AS SCORECARDS */}
-      <section className="mt-5 rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="flex items-center gap-2 text-lg font-black font-display text-slate-950 dark:text-white">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-brand">
-              <path d="M8 21h8" />
-              <path d="M12 17v4" />
-              <path d="M7 4h10" />
-              <path d="M7 4c0 3.314-2.686 6-6 6v3c0 3.866 3.134 7 7 7h8c3.866 0 7-3.134 7-7v-3c-3.314 0-6-2.686-6-6" />
-            </svg>
-            Recent Battles
-          </h2>
-          <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Match History</span>
         </div>
-        
-        <div className="mt-3 sm:mt-6 flex flex-col gap-0 sm:gap-3">
-          {history.length ? (
-            <>
-              {history.map((item, idx) => (
-                <div key={item.id} className={cx(
-                  "relative overflow-hidden sm:border border-slate-200 sm:bg-slate-50/50 py-3 sm:py-4 px-1 sm:px-5 transition hover:border-slate-300 dark:border-[var(--border-subtle)] sm:dark:bg-[var(--surface-elevated)]/30 sm:hover:border-slate-700 sm:rounded-lg",
-                  idx !== history.length - 1 ? "border-b" : "",
-                  idx >= 3 ? "hidden sm:block" : ""
-                )}>
-                  {/* Ticket Cutouts */}
-                  <div className="absolute -left-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-r border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
-                  <div className="absolute -right-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border-l border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] hidden sm:block" />
 
-                  {/* Desktop Layout */}
-                  <div className="hidden sm:grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_auto_auto] sm:items-center sm:px-4">
-                    <div className="flex min-w-0 items-center gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-black text-slate-700 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200">
-                        {initials(item.opponent.displayName)}
+        {/* Right Column: Live Feed & Battle History */}
+        <div className="space-y-6">
+          <BattleLiveFeed />
+
+          {/* Recent Battle History */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <h3 className={cx("text-base font-black text-slate-900 dark:text-white uppercase mb-3", "font-display")}>
+              Your Recent Battles
+            </h3>
+
+            {history.length === 0 ? (
+              <p className="py-6 text-center text-xs text-slate-400">No battle history yet.</p>
+            ) : (
+              <div className="space-y-2">
+                {history.slice(0, 5).map((h) => {
+                  const won = h.result === "Won";
+                  return (
+                    <div
+                      key={h.id}
+                      className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 dark:border-white/5 dark:bg-white/[0.02]"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className={cx(
+                          "rounded-md px-2 py-0.5 text-[10px] font-black uppercase",
+                          won ? "bg-emerald-500/10 text-emerald-500" : "bg-rose-500/10 text-rose-500"
+                        )}>
+                          {h.result}
+                        </span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                          vs @{h.opponent.username || "Opponent"}
+                        </span>
                       </div>
-                      <div className="min-w-0">
-                        <p className={cx("truncate text-xl text-slate-900 dark:text-white", "font-display")}>{item.opponent.displayName}</p>
-                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">@{item.opponent.username || "student"} · {formatDate(item.date)}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-6 sm:justify-center">
-                       <ScoreComparison scoreString={item.score} />
-                    </div>
-
-                    <div className="flex sm:justify-end">
-                      <div className={cx(
-                        "inline-flex items-center justify-center border-[2.5px] px-2.5 py-0.5 text-sm font-black uppercase tracking-widest",
-                        item.result === "Won" ? "border-brand text-brand shadow-[0_0_10px_rgba(245,181,0,0.2)] rotate-[-2deg]" 
-                        : item.result === "Lost" ? "border-rose-500 text-rose-500 rotate-[3deg] opacity-90"
-                        : "border-slate-400 text-slate-400 rotate-[-1deg]"
-                      )}>
-                        {item.result}
+                      <div className="text-right">
+                        <span className="text-xs font-black font-display text-slate-900 dark:text-white">{h.score}</span>
+                        <span className="block text-[10px] text-slate-400">{formatDate(h.date)}</span>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Mobile Layout */}
-                  <div className="flex sm:hidden items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-bold text-sm text-slate-900 dark:text-white truncate max-w-[120px]">{item.opponent.displayName}</span>
-                      <span className={cx("text-[10px] font-black px-1.5 py-0.5 rounded", item.result === "Won" ? "bg-amber-100 text-amber-700 dark:bg-brand/20 dark:text-brand" : "bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-500")}>
-                        {item.result === "Won" ? "W" : "L"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3 text-[13px] font-semibold">
-                      <span className="text-slate-700 dark:text-slate-300">{item.score}</span>
-                      <span className="text-slate-400">{formatDate(item.date)}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {history.length > 3 && (
-                <button type="button" className="sm:hidden mt-2 text-xs font-bold text-slate-500 hover:text-slate-700 transition py-2 text-center w-full">
-                  View all battles ({history.length})
-                </button>
-              )}
-            </>
-          ) : (
-            <div className="rounded-lg border border-dashed border-slate-300 py-10 text-center dark:border-slate-700">
-              <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Your battle history will appear here after your first completed match.</p>
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* MONTHLY SEASONS LEADERBOARD */}
+      <section className="pt-2">
+        <BattleLeaderboard />
       </section>
     </main>
   );

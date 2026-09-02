@@ -7,6 +7,8 @@ import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { BreathingText } from "@/components/ui/breathing-text";
+
 
 import {
   Target,
@@ -339,9 +341,30 @@ export default function PublicLandingPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className={`${landingDisplayClass} text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-normal text-foreground leading-[0.98] max-w-5xl`} 
           >
-            Let&apos;s crack <br className="hidden sm:block" />
+            <BreathingText
+              text="Let's crack"
+              fromWeight={550}
+              toWeight={680}
+              fromSlant={0}
+              toSlant={-1.5}
+              duration={1.9}
+              pause={1.6}
+              delay={0.2}
+              className="text-foreground inline-block"
+            />
+            <br className="hidden sm:block" />{" "}
             <span className="text-brand inline-block pb-2">
-              JEE &amp; NEET.
+              <BreathingText
+                text="JEE & NEET."
+                fromWeight={600}
+                toWeight={780}
+                fromSlant={0}
+                toSlant={-3.5}
+                duration={1.9}
+                pause={1.6}
+                delay={0.35}
+                className="text-brand inline-block"
+              />
             </span>
           </motion.h1>
           
