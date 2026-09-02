@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { BarChart3, Brain, TrendingUp, Trophy } from "lucide-react";
@@ -64,6 +64,10 @@ function ContentBlockSkeleton({ className = "h-48" }) {
 function AnalyticsContentLoading() {
   return (
     <div className="space-y-6">
+      <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+        <div className="h-5 w-5 rounded-full border-2 border-slate-200 border-t-indigo-500 animate-spin dark:border-slate-700 dark:border-t-indigo-400" />
+        <p className="text-sm font-bold text-slate-500 dark:text-slate-400">Loading analytics...</p>
+      </div>
       <ContentBlockSkeleton className="h-28" />
       <ContentBlockSkeleton className="h-72" />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -116,6 +120,7 @@ export default function AnalyticsPage() {
   const [activeTrack, setActiveTrack] = useState(() => getCookieTrack());
   const [activeTab, setActiveTab] = useState("overview");
   const [advancedAnalyticsAllowed, setAdvancedAnalyticsAllowed] = useState(false);
+  const analyticsCacheRef = useRef(new Map());
 
   useEffect(() => {
     async function syncTabFromHash() {
@@ -138,6 +143,8 @@ export default function AnalyticsPage() {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function loadAnalytics() {
       if (!isLoaded) return;
       if (!user) {
@@ -145,13 +152,29 @@ export default function AnalyticsPage() {
         return;
       }
 
+      if (activeTab === "leaderboard") {
+        setLoading(false);
+        return;
+      }
+
+      const cacheKey = activeTrack;
+      const cached = analyticsCacheRef.current.get(cacheKey);
+      if (cached) {
+        setStats(cached);
+        setAdvancedAnalyticsAllowed(true);
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
-        const data = await getUserAnalytics(user.id, activeTrack);
+        const data = await getUserAnalytics(user.id, activeTrack, { signal: controller.signal });
+        analyticsCacheRef.current.set(cacheKey, data);
         setStats(data);
         setAdvancedAnalyticsAllowed(true);
         if (data?.track) setActiveTrack(data.track);
       } catch (error) {
+        if (error?.name === "AbortError") return;
         if (error?.status !== 403) {
           console.error("Failed to load user stats:", error);
         }
@@ -163,7 +186,10 @@ export default function AnalyticsPage() {
     }
 
     loadAnalytics();
-  }, [isLoaded, user, activeTrack]);
+    return () => {
+      controller.abort();
+    };
+  }, [isLoaded, user, activeTrack, activeTab]);
 
   const showAnalyticsLock = !loading && !advancedAnalyticsAllowed && activeTab !== "leaderboard";
 

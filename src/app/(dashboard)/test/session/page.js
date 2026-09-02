@@ -334,6 +334,7 @@ function TestSessionContent() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const timerRef = useRef(null);
   const submitRef = useRef(null);
+  const submitInFlightRef = useRef(false);
 
   // Apply Strict Exam Mode while the session is active and not finishing
   useStrictExamMode(!finishing && questions.length > 0);
@@ -398,7 +399,8 @@ function TestSessionContent() {
   }, [markedForReview, sessionId]);
 
   const handleSubmit = useCallback(async () => {
-    if (finishing) return;
+    if (submitInFlightRef.current) return;
+    submitInFlightRef.current = true;
     setFinishing(true);
     try {
       const response = await fetch("/api/test-session", {
@@ -418,14 +420,15 @@ function TestSessionContent() {
       const data = await response.json();
 
       clearStoredReviewState(sessionId);
-      router.replace(`/test/result/${data.attemptId}`);
       clearInterval(timerRef.current);
+      router.replace(`/test/result/${data.attemptId}`);
     } catch (err) {
       console.error("SAVE ERROR", err);
       alert(err.message);
+      submitInFlightRef.current = false;
       setFinishing(false);
     }
-  }, [answers, durationParam, finishing, router, sessionId, timeLeft]);
+  }, [answers, durationParam, router, sessionId, timeLeft]);
 
   useEffect(() => {
     submitRef.current = handleSubmit;
@@ -433,7 +436,7 @@ function TestSessionContent() {
 
   // 4. Timer Logic
   useEffect(() => {
-    if (questions.length === 0) return;
+    if (questions.length === 0 || finishing) return;
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -573,6 +576,14 @@ function TestSessionContent() {
   // Active Test UI
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
+      {finishing ? (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/25 backdrop-blur-[2px] dark:bg-black/35">
+          <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-lg dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+            <div className="h-5 w-5 rounded-full border-2 border-slate-200 border-t-indigo-500 animate-spin dark:border-slate-700 dark:border-t-indigo-400" />
+            <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Submitting...</span>
+          </div>
+        </div>
+      ) : null}
       {/* ── Header ── */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-[#fffdf7]/95 px-2.5 py-2 sm:px-6 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
@@ -617,11 +628,20 @@ function TestSessionContent() {
               </div>
             </div>
             <button
+              type="button"
               onClick={handleSubmit}
-              className="rounded-md bg-brand px-3 py-2.5 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-brand-hover sm:px-6"
+              disabled={finishing}
+              aria-busy={finishing}
+              className="inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2.5 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
             >
-              <span className="sm:hidden">Submit</span>
-              <span className="hidden sm:inline">Submit Test</span>
+              {finishing ? (
+                "Submitting..."
+              ) : (
+                <>
+                  <span className="sm:hidden">Submit</span>
+                  <span className="hidden sm:inline">Submit Test</span>
+                </>
+              )}
             </button>
           </div>
         </div>

@@ -77,7 +77,7 @@ export default function ResultPage() {
         <div className="flex flex-col items-center gap-3 animate-slideUp">
           <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
           <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-            Loading Result...
+            Preparing your result...
           </p>
         </div>
       </div>
@@ -267,7 +267,7 @@ export default function ResultPage() {
                 <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
               </div>
               <div className="pt-0.5">
-                <h3 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-pressed dark:text-brand/80 mb-1.5">Today's Takeaway</h3>
+                <h3 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-pressed dark:text-brand/80 mb-1.5">Today&apos;s Takeaway</h3>
                 <p className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">{takeaway}</p>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
-import { canUseFeature, FEATURES, getUserAccessContext } from "@/lib/accessControl";
+import { getSubscriptionForUser, isSubscriptionActive } from "@/lib/accessControl";
 import { aggregateAnalytics } from "@/lib/analyticsAggregate";
 import { normalizeTrack } from "@/lib/analyticsHelpers";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
@@ -18,21 +18,20 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
     const track = normalizeTrack(searchParams.get("track") || "JEE");
-    const access = await getUserAccessContext({ userId, examTrack: track });
-    const permission = canUseFeature(access, FEATURES.ANALYTICS_ADVANCED);
+    const subscription = await getSubscriptionForUser(userId, track);
 
-    if (!permission.allowed) {
+    if (!isSubscriptionActive(subscription)) {
       return NextResponse.json(
         {
           error: "PRO_REQUIRED",
           message: "Advanced Analytics is available with PrepZii Pro.",
-          upgradeUrl: permission.upgradeUrl || "/pro",
+          upgradeUrl: "/pro",
         },
         { status: 403 }
       );
     }
 
-    const [{ data: testAttemptsRaw, error: testError }, { data: pyqAttemptsRaw, error: pyqError }] = await Promise.all([
+    const [{ data: testAttempts, error: testError }, { data: pyqAttemptsRaw, error: pyqError }] = await Promise.all([
       supabaseAdmin
         .from("test_attempts")
         .select(`
@@ -44,17 +43,7 @@ export async function GET(request) {
           correct_answers,
           attempted,
           time_taken_seconds,
-          tests ( exam ),
-          user_answers (
-            selected_option,
-            is_correct,
-            created_at,
-            questions (
-              exam,
-              subject,
-              chapter
-            )
-          )
+          tests ( exam )
         `)
         .eq("user_id", userId)
         .order("created_at", { ascending: true }),
@@ -80,6 +69,41 @@ export async function GET(request) {
 
     if (testError) throw testError;
     if (pyqError) throw pyqError;
+
+    const attemptIds = (testAttempts || []).map((attempt) => attempt.id).filter(Boolean);
+    let answerRows = [];
+
+    if (attemptIds.length > 0) {
+      const { data, error } = await supabaseAdmin
+        .from("user_answers")
+        .select(`
+          attempt_id,
+          selected_option,
+          is_correct,
+          created_at,
+          questions (
+            exam,
+            subject,
+            chapter
+          )
+        `)
+        .in("attempt_id", attemptIds);
+
+      if (error) throw error;
+      answerRows = data || [];
+    }
+
+    const answersByAttempt = new Map();
+    for (const answer of answerRows) {
+      const attemptAnswers = answersByAttempt.get(answer.attempt_id) || [];
+      attemptAnswers.push(answer);
+      answersByAttempt.set(answer.attempt_id, attemptAnswers);
+    }
+
+    const testAttemptsRaw = (testAttempts || []).map((attempt) => ({
+      ...attempt,
+      user_answers: answersByAttempt.get(attempt.id) || [],
+    }));
 
     const analytics = aggregateAnalytics({
       track,

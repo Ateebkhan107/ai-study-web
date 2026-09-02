@@ -1,10 +1,11 @@
-export async function getUserAnalytics(_userId, stream = "JEE") {
+export async function getUserAnalytics(_userId, stream = "JEE", options = {}) {
   const params = new URLSearchParams({
     track: String(stream || "JEE").toUpperCase(),
   });
 
   const response = await fetch(`/api/analytics?${params.toString()}`, {
     cache: "no-store",
+    signal: options.signal,
   });
 
   if (!response.ok) {

@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getQuestions } from "@/lib/questions";
 import { getLevelFromXP } from "@/utils/levelEngine";
@@ -317,6 +317,36 @@ async function updateGoalProgressWithAdmin(userId, goalType, amount, name) {
     if (completed && (!existing?.completed || isNewDay)) {
       await addXpWithAdmin(userId, goal.xp, name);
     }
+  }
+}
+
+async function runPostSubmitProgressUpdates({ userId, correct, questionCount, name }) {
+  try {
+    const { data: xpRowBefore, error: xpRowBeforeError } = await supabaseAdmin
+      .from("user_xp")
+      .select("pyq_solved, correct_answers")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (xpRowBeforeError) {
+      throw xpRowBeforeError;
+    }
+
+    const newSolved = (xpRowBefore?.pyq_solved || 0) + questionCount;
+    const newCorrect = (xpRowBefore?.correct_answers || 0) + correct;
+    const newAccuracy = newSolved > 0 ? Math.round((newCorrect / newSolved) * 100) : 0;
+
+    await updateStreakWithAdmin(userId);
+
+    await addXpWithAdmin(userId, correct * 15, name, {
+      pyq_solved: newSolved,
+      correct_answers: newCorrect,
+      accuracy: newAccuracy,
+    });
+
+    await updateGoalProgressWithAdmin(userId, "TEST", 1, name);
+  } catch (error) {
+    console.error("[TEST_SESSION_POST_SUBMIT_PROGRESS_ERROR]", error);
   }
 }
 
@@ -695,20 +725,6 @@ export async function PUT(request) {
       Math.min(Number(timeTakenSeconds) || 0, (session.duration_minutes || 0) * 60)
     );
 
-    const { data: xpRowBefore, error: xpRowBeforeError } = await supabaseAdmin
-      .from("user_xp")
-      .select("pyq_solved, correct_answers")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    if (xpRowBeforeError) {
-      throw xpRowBeforeError;
-    }
-
-    const newSolved = (xpRowBefore?.pyq_solved || 0) + questionRows.length;
-    const newCorrect = (xpRowBefore?.correct_answers || 0) + correct;
-    const newAccuracy = newSolved > 0 ? Math.round((newCorrect / newSolved) * 100) : 0;
-
     const { data: attempt, error: attemptError } = await supabaseAdmin
       .from("test_attempts")
       .insert({
@@ -730,42 +746,42 @@ export async function PUT(request) {
       throw attemptError;
     }
 
-    const { error: instituteAttemptError } = await supabaseAdmin
-      .from("institute_test_attempts")
-      .update({
-        attempt_id: attempt.id,
-        status: "SUBMITTED",
-        submitted_at: new Date().toISOString(),
-      })
-      .eq("session_id", sessionId)
-      .eq("user_id", userId);
-
-    if (instituteAttemptError) {
-      throw instituteAttemptError;
-    }
-
     const finalAnswerRows = answerRows.map((row) => ({
       ...row,
       attempt_id: attempt.id,
     }));
 
-    const { error: answersError } = await supabaseAdmin
-      .from("user_answers")
-      .insert(finalAnswerRows);
+    const [{ error: instituteAttemptError }, { error: answersError }] = await Promise.all([
+      supabaseAdmin
+        .from("institute_test_attempts")
+        .update({
+          attempt_id: attempt.id,
+          status: "SUBMITTED",
+          submitted_at: new Date().toISOString(),
+        })
+        .eq("session_id", sessionId)
+        .eq("user_id", userId),
+      supabaseAdmin
+        .from("user_answers")
+        .insert(finalAnswerRows),
+    ]);
+
+    if (instituteAttemptError) {
+      throw instituteAttemptError;
+    }
 
     if (answersError) {
       throw answersError;
     }
 
-    await updateStreakWithAdmin(userId);
-
-    await addXpWithAdmin(userId, correct * 15, name, {
-      pyq_solved: newSolved,
-      correct_answers: newCorrect,
-      accuracy: newAccuracy,
+    after(() => {
+      return runPostSubmitProgressUpdates({
+        userId,
+        correct,
+        questionCount: questionRows.length,
+        name,
+      });
     });
-
-    await updateGoalProgressWithAdmin(userId, "TEST", 1, name);
 
     return NextResponse.json({
       attemptId: attempt.id,

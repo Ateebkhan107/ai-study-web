@@ -48,26 +48,26 @@ async function getProfileAnalyticsWithAdmin(userId, stream = "JEE") {
   if (!userId) return null;
 
   try {
-    const { data: pyqAttemptsRaw, error: pyqError } = await supabase
-      .from("pyq_attempts")
-      .select("is_correct, pyq_questions(exam)")
-      .eq("user_id", userId);
+    const [{ data: pyqAttemptsRaw, error: pyqError }, { data: testAttemptsRaw, error: testError }] = await Promise.all([
+      supabase
+        .from("pyq_attempts")
+        .select("is_correct, pyq_questions(exam)")
+        .eq("user_id", userId),
+      supabase
+        .from("test_attempts")
+        .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score, tests(exam), user_answers(questions(exam))")
+        .eq("user_id", userId),
+    ]);
 
     if (pyqError) throw pyqError;
+    if (testError) throw testError;
 
+    const trackUpper = stream.toUpperCase();
+    const examNeedle = trackUpper === "JEE" ? "JEE" : "NEET";
     const pyqAttempts = (pyqAttemptsRaw || []).filter((attempt) => {
       const exam = attempt.pyq_questions?.exam;
-      if (!exam) return false;
-      const trackUpper = stream.toUpperCase();
-      return exam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+      return exam && exam.toUpperCase().includes(examNeedle);
     });
-
-    const { data: testAttemptsRaw, error: testError } = await supabase
-      .from("test_attempts")
-      .select("attempted, correct_answers, correct, time_taken_seconds, accuracy, score, tests(exam), user_answers(questions(exam))")
-      .eq("user_id", userId);
-
-    if (testError) throw testError;
 
     const testAttempts = (testAttemptsRaw || []).filter((attempt) => {
       let attemptExam = null;
@@ -82,8 +82,7 @@ async function getProfileAnalyticsWithAdmin(userId, stream = "JEE") {
       }
 
       if (!attemptExam) return false;
-      const trackUpper = stream.toUpperCase();
-      return attemptExam.toUpperCase().includes(trackUpper === "JEE" ? "JEE" : "NEET");
+      return attemptExam.toUpperCase().includes(examNeedle);
     });
 
     const pyqTotal = pyqAttempts.length;
@@ -139,143 +138,26 @@ async function getProfileAnalyticsWithAdmin(userId, stream = "JEE") {
   }
 }
 
-export async function evaluateUserBadges(userId) {
-  if (!userId) return;
-
-  try {
-    // 1. Fetch all enabled badges
-    const { data: badges, error: badgesError } = await supabase
+async function getBadgeProgressInputs(userId) {
+  const [{ data: badges, error: badgesError }, { data: earnedBadges, error: earnedError }, analytics, xpData, rankData] = await Promise.all([
+    supabase
       .from("badges")
-      .select("id, requirement_type, requirement_value, xp_reward")
-      .eq("enabled", true);
-
-    if (badgesError || !badges?.length) return;
-
-    // 2. Fetch user's currently earned badges
-    const { data: earnedBadges, error: earnedError } = await supabase
+      .select("id, name, description, icon, color, requirement_type, requirement_value, xp_reward")
+      .eq("enabled", true)
+      .order("display_order", { ascending: true }),
+    supabase
       .from("user_badges")
-      .select("badge_id")
-      .eq("user_id", userId);
-
-    if (earnedError) throw earnedError;
-
-    const earnedBadgeIds = new Set(earnedBadges?.map(b => b.badge_id) || []);
-
-    // 3. Fetch user stats
-    const [analytics, xpData, rankData] = await Promise.all([
-      getProfileAnalyticsWithAdmin(userId),
-      getUserXPWithAdmin(userId),
-      getUserRankWithAdmin(userId),
-    ]);
-
-    // 4. Map stats to requirement types
-    const stats = {
-      tests_completed: analytics?.testsCompleted || 0,
-      pyq_completed: analytics?.pyqSolved || 0,
-      total_questions: analytics?.totalQuestionsAttempted || 0,
-      total_xp: xpData?.xp || 0,
-      streak: xpData?.streak || 0,
-      accuracy: analytics?.accuracy || 0,
-      leaderboard_rank: rankData?.rank || Infinity,
-      mock_test_ace: analytics?.bestMockScore || 0, // Using this for high mock score
-      speed_solver: analytics?.avgSolveSeconds || Infinity,
-    };
-
-    // 5. Evaluate unearned badges
-    for (const badge of badges) {
-      if (earnedBadgeIds.has(badge.id)) continue;
-
-      let requirementMet = false;
-      const type = badge.requirement_type;
-      const val = badge.requirement_value;
-
-      switch (type) {
-        case 'tests_completed':
-          requirementMet = stats.tests_completed >= val;
-          break;
-        case 'pyq_completed':
-          requirementMet = stats.pyq_completed >= val;
-          break;
-        case 'total_questions':
-          requirementMet = stats.total_questions >= val;
-          break;
-        case 'total_xp':
-          requirementMet = stats.total_xp >= val;
-          break;
-        case 'streak':
-          requirementMet = stats.streak >= val;
-          break;
-        case 'accuracy':
-          requirementMet = stats.accuracy >= val;
-          break;
-        case 'leaderboard_rank':
-          // Rank lower is better. e.g. Rank 10 is <= Top 100.
-          requirementMet = stats.leaderboard_rank <= val;
-          break;
-        case 'mock_tests':
-          requirementMet = stats.mock_test_ace >= val;
-          break;
-        case 'speed_solver':
-          // Lower time is better, but must not be Infinity
-          requirementMet = stats.speed_solver !== Infinity && stats.speed_solver <= val;
-          break;
-        default:
-          requirementMet = false;
-      }
-
-      // Award badge if met
-      if (requirementMet) {
-        const { error: insertError } = await supabase
-          .from("user_badges")
-          .insert({
-            user_id: userId,
-            badge_id: badge.id
-          });
-
-        if (!insertError) {
-          earnedBadgeIds.add(badge.id);
-          // Award XP
-          if (badge.xp_reward > 0) {
-            await addXP(userId, badge.xp_reward, xpData?.name || "Student", true);
-          }
-        }
-      }
-    }
-  } catch (error) {
-    console.error("Badge Evaluation Error:", error);
-  }
-}
-
-export async function getUserBadgeProgress(userId) {
-  if (!userId) return [];
-  
-  // 1. Evaluate first to ensure anything new is awarded
-  await evaluateUserBadges(userId);
-  
-  // 2. Fetch all enabled badges
-  const { data: badges } = await supabase
-    .from("badges")
-    .select("id, name, description, icon, color, requirement_type, requirement_value, xp_reward")
-    .eq("enabled", true)
-    .order("display_order", { ascending: true });
-    
-  if (!badges || !badges.length) return [];
-  
-  // 3. Fetch earned badges
-  const { data: earnedBadges } = await supabase
-    .from("user_badges")
-    .select("badge_id, earned_at")
-    .eq("user_id", userId);
-    
-  const earnedMap = new Map(earnedBadges?.map(b => [b.badge_id, b]) || []);
-  
-  // 4. Fetch user stats
-  const [analytics, xpData, rankData] = await Promise.all([
+      .select("badge_id, earned_at")
+      .eq("user_id", userId),
     getProfileAnalyticsWithAdmin(userId),
     getUserXPWithAdmin(userId),
     getUserRankWithAdmin(userId),
   ]);
-  
+
+  if (badgesError) throw badgesError;
+  if (earnedError) throw earnedError;
+
+  const earnedMap = new Map(earnedBadges?.map((badge) => [badge.badge_id, badge]) || []);
   const stats = {
     tests_completed: analytics?.testsCompleted || 0,
     pyq_completed: analytics?.pyqSolved || 0,
@@ -287,8 +169,82 @@ export async function getUserBadgeProgress(userId) {
     mock_tests: analytics?.bestMockScore || 0,
     speed_solver: analytics?.avgSolveSeconds || Infinity,
   };
-  
-  // 5. Build UI array
+
+  return {
+    badges: badges || [],
+    earnedMap,
+    stats,
+    xpName: xpData?.name || "Student",
+  };
+}
+
+function hasMetBadgeRequirement(type, value, stats) {
+  switch (type) {
+    case 'tests_completed':
+      return stats.tests_completed >= value;
+    case 'pyq_completed':
+      return stats.pyq_completed >= value;
+    case 'total_questions':
+      return stats.total_questions >= value;
+    case 'total_xp':
+      return stats.total_xp >= value;
+    case 'streak':
+      return stats.streak >= value;
+    case 'accuracy':
+      return stats.accuracy >= value;
+    case 'leaderboard_rank':
+      return stats.leaderboard_rank <= value;
+    case 'mock_tests':
+      return stats.mock_tests >= value;
+    case 'speed_solver':
+      return stats.speed_solver !== Infinity && stats.speed_solver <= value;
+    default:
+      return false;
+  }
+}
+
+async function awardEligibleBadges(userId, { badges, earnedMap, stats, xpName }) {
+  for (const badge of badges) {
+    if (earnedMap.has(badge.id)) continue;
+    if (!hasMetBadgeRequirement(badge.requirement_type, badge.requirement_value, stats)) continue;
+
+    const { error: insertError } = await supabase
+      .from("user_badges")
+      .insert({
+        user_id: userId,
+        badge_id: badge.id,
+      });
+
+    if (!insertError) {
+      earnedMap.set(badge.id, { badge_id: badge.id, earned_at: new Date().toISOString() });
+      if (badge.xp_reward > 0) {
+        await addXP(userId, badge.xp_reward, xpName, true);
+        stats.total_xp += badge.xp_reward;
+      }
+    }
+  }
+}
+
+export async function evaluateUserBadges(userId) {
+  if (!userId) return;
+
+  try {
+    const inputs = await getBadgeProgressInputs(userId);
+    await awardEligibleBadges(userId, inputs);
+  } catch (error) {
+    console.error("Badge Evaluation Error:", error);
+  }
+}
+
+export async function getUserBadgeProgress(userId) {
+  if (!userId) return [];
+
+  const inputs = await getBadgeProgressInputs(userId);
+  await awardEligibleBadges(userId, inputs);
+
+  const { badges, earnedMap, stats } = inputs;
+  if (!badges || !badges.length) return [];
+
   return badges.map(badge => {
     const isEarned = earnedMap.has(badge.id);
     const type = badge.requirement_type;

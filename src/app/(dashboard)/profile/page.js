@@ -66,6 +66,7 @@ export default function ProfilePage() {
   const [rank, setRank] = useState(null);
 
   const [dynamicBadges, setDynamicBadges] = useState([]);
+  const [badgesLoading, setBadgesLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
@@ -88,7 +89,7 @@ export default function ProfilePage() {
   useEffect(() => {
     async function fetchLiveProfile() {
       try {
-        const response = await fetch("/api/profile");
+        const response = await fetch("/api/profile", { cache: "no-store" });
         if (response.ok) {
           const data = await response.json();
           setUser(data);
@@ -112,7 +113,7 @@ export default function ProfilePage() {
       }
     }
     fetchLiveProfile();
-  }, [clerkUser]);
+  }, [clerkUser?.fullName, clerkUser?.id]);
 
   useEffect(() => {
     const username = editUsername.trim().toLowerCase();
@@ -190,10 +191,22 @@ export default function ProfilePage() {
 
   // LOAD XP PROFILE & ANALYTICS
   useEffect(() => {
-    if (!clerkUser) return;
+    if (!clerkUser || loading) return undefined;
+    const controller = new AbortController();
+    const schedule = typeof window !== "undefined" && "requestIdleCallback" in window
+      ? window.requestIdleCallback
+      : (callback) => window.setTimeout(callback, 120);
+    const cancel = typeof window !== "undefined" && "cancelIdleCallback" in window
+      ? window.cancelIdleCallback
+      : window.clearTimeout;
+
     async function loadStats() {
       try {
-        const badgeRes = await fetch("/api/profile/badges");
+        setBadgesLoading(true);
+        const badgeRes = await fetch("/api/profile/badges", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
         if (badgeRes.ok) {
           const dbBadges = await badgeRes.json();
           if (Array.isArray(dbBadges)) {
@@ -201,11 +214,19 @@ export default function ProfilePage() {
           }
         }
       } catch (err) {
+        if (err.name === "AbortError") return;
         console.warn("Failed to fetch badges", err);
+      } finally {
+        setBadgesLoading(false);
       }
     }
-    loadStats();
-  }, [clerkUser, editExam]);
+
+    const taskId = schedule(loadStats);
+    return () => {
+      cancel(taskId);
+      controller.abort();
+    };
+  }, [clerkUser, loading]);
 
   // CHANGE TRACK (JEE / NEET toggle)
   const handleTrackToggle = async (newExam) => {
@@ -288,13 +309,44 @@ export default function ProfilePage() {
   };
 
   if (loading) {
+    const fallbackName = clerkUser?.fullName || "Student Profile";
+    const fallbackInitial = fallbackName.charAt(0)?.toUpperCase() || "S";
+
     return (
       <PageWrapper title="Profile" badge="ACCOUNT">
         <div className="space-y-6">
-          <div className="h-10 w-32 rounded-xl skeleton-shimmer" />
-          <div className="h-44 rounded-3xl skeleton-shimmer" />
-          <div className="h-36 rounded-3xl skeleton-shimmer" />
-          <div className="h-48 rounded-3xl skeleton-shimmer" />
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 sm:p-8 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-slate-200 bg-slate-950 text-2xl font-black text-white dark:border-[var(--border-subtle)] sm:h-24 sm:w-24">
+                {clerkUser?.hasImage ? (
+                  <img
+                    src={clerkUser.imageUrl}
+                    alt="profile"
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  fallbackInitial
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Loading profile...
+                </p>
+                <h2 className="mt-1.5 truncate text-2xl font-black font-display text-slate-950 dark:text-white sm:text-3xl">
+                  {fallbackName}
+                </h2>
+                <div className="mt-3 h-3 w-36 rounded-full skeleton-shimmer" />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
+            <div className="space-y-5">
+              <div className="h-36 rounded-2xl skeleton-shimmer" />
+              <div className="h-48 rounded-2xl skeleton-shimmer" />
+            </div>
+            <div className="h-64 rounded-2xl skeleton-shimmer" />
+          </div>
         </div>
       </PageWrapper>
     );
@@ -520,7 +572,19 @@ export default function ProfilePage() {
             </div>
 
             <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-6">
-              {badgeDefs.length === 0 || earnedCount === 0 ? (
+              {badgesLoading ? (
+                <div className="grid grid-cols-1 gap-2 sm:gap-3 sm:grid-cols-2 lg:gap-4">
+                  {Array.from({ length: 4 }).map((_, index) => (
+                    <div key={index} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
+                      <div className="h-10 w-10 rounded-xl skeleton-shimmer" />
+                      <div className="min-w-0 flex-1 space-y-2">
+                        <div className="h-3 w-28 rounded-full skeleton-shimmer" />
+                        <div className="h-3 w-20 rounded-full skeleton-shimmer" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : badgeDefs.length === 0 || earnedCount === 0 ? (
                 // TROPHY CABINET EMPTY STATE
                 <div className="flex flex-row sm:flex-col items-center sm:justify-center rounded-xl sm:rounded-2xl border border-dashed border-amber-200/60 bg-amber-50/50 p-4 sm:p-10 text-left sm:text-center dark:border-brand/30 dark:bg-brand/5 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-amber-100/30 dark:to-brand/10 pointer-events-none hidden sm:block" />
