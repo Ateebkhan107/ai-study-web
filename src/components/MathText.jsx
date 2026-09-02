@@ -72,20 +72,27 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/(\band the other (?:is )?labelled as \*{0,2}Reason\s*(?:\(?[Rr]\)?)\*{0,2})\s*:/gi, "$1.");
 
           // Format actual statement declarations (which have a colon) onto distinct paragraphs
-          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bStatement\s*(?:I|II|1|2|A|B)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bAssertion\s*(?:\(?[Aa]\)?)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bReason\s*(?:\(?[Rr]\)?)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\((?:S1|S2|s1|s2)\)\s*:)/g, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bStatement\s*(?:\(?([I|V|X]+|[0-9]+|[A-E])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Statement $2:** ");
+          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bAssertion\s*(?:\(?([Aa])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Assertion ($2):** ");
+          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bReason\s*(?:\(?([Rr])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Reason ($2):** ");
+          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S1|s1)\)\s*:\s*/g, "$1\n\n**(S1):** ");
+          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S2|s2)\)\s*:\s*/g, "$1\n\n**(S2):** ");
 
           // Roman numerals only when at start of line or preceded by period: "I. ", "II. "
           s = s.replace(/(?:^|[\.\n])\s*\b((?:I|II|III|IV|V)\.\s+)/g, "\n\n$1");
 
-          // Lettered statements A., B., C., D., E. in multiple-statement questions
+          // Lettered statements A., B., C., D., E. or (A), (B), (C), (D), (E) in multiple-statement questions
           s = s.replace(/([^\n])\s*\n*\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
+          s = s.replace(/([^\n])\s*\n*\s*\(([A-E])\)\s+/g, "$1\n\n**($2)** ");
 
           // Format instructions on distinct lines
-          s = s.replace(/([^\n])\s*\n*\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*\n*\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(In (?:the )?light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(?<!In (?:the )?light of the above statements,\s*)(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, (m, p1, p2) => {
+            if (/In (?:the )?light of the above statements,\s*$/i.test(p1)) return p1 + " " + p2;
+            return p1 + "\n\n" + p2;
+          });
+          s = s.replace(/([^\n])\s*\n*\s*(From the statements given below\s*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(Given below are two statements\s*:?)/gi, "$1\n\n$2");
 
           return s;
         })
