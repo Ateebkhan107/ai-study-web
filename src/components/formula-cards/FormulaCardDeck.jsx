@@ -89,7 +89,7 @@ export default function FormulaCardDeck({ cards }) {
           <button
             type="button"
             onClick={toggleBookmark}
-            className={`inline-flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+            className={`prepzii-interactive group inline-flex h-8 w-8 items-center justify-center rounded-lg ${
               isBookmarked
                 ? "bg-amber-500/15 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400"
                 : "text-slate-500 hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
@@ -97,25 +97,25 @@ export default function FormulaCardDeck({ cards }) {
             aria-label={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
             title={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
           >
-            {isBookmarked ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
+            {isBookmarked ? <BookmarkCheck className="prepzii-interactive-icon h-4 w-4" /> : <Bookmark className="prepzii-interactive-icon h-4 w-4" />}
           </button>
           <button
             type="button"
             onClick={shuffleDeck}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
+            className="prepzii-interactive group inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
             aria-label="Shuffle card order"
             title="Shuffle cards"
           >
-            <Shuffle className="h-4 w-4" />
+            <Shuffle className="prepzii-interactive-icon h-4 w-4" />
           </button>
           <button
             type="button"
             onClick={resetOrder}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
+            className="prepzii-interactive group inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-stone-400 dark:hover:bg-stone-800/60"
             aria-label="Reset original card order"
             title="Reset card order"
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="prepzii-interactive-icon h-4 w-4" />
           </button>
         </div>
       </div>
@@ -129,9 +129,9 @@ export default function FormulaCardDeck({ cards }) {
             onClick={() => goToCard(-1)}
             disabled={safeIndex === 0}
             aria-label="Previous card"
-            className="inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50 px-3 sm:px-4 text-xs sm:text-sm font-bold text-slate-700 transition hover:border-slate-300 hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 dark:border-stone-800 dark:bg-stone-900/60 dark:text-stone-200 dark:hover:border-stone-700 dark:hover:bg-stone-900"
+            className="prepzii-interactive group inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50 px-3 sm:px-4 text-xs sm:text-sm font-bold text-slate-700 hover:border-slate-300 hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 dark:border-stone-800 dark:bg-stone-900/60 dark:text-stone-200 dark:hover:border-stone-700 dark:hover:bg-stone-900"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="prepzii-interactive-icon h-4 w-4" />
             <span>Previous</span>
           </button>
 
@@ -140,10 +140,10 @@ export default function FormulaCardDeck({ cards }) {
             onClick={() => goToCard(1)}
             disabled={safeIndex === visibleCards.length - 1}
             aria-label="Next card"
-            className="inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg bg-amber-500 px-3 sm:px-4 text-xs sm:text-sm font-bold text-black transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-amber-500 sm:order-last"
+            className="prepzii-interactive group inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg bg-amber-500 px-3 sm:px-4 text-xs sm:text-sm font-bold text-black hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-amber-500 sm:order-last"
           >
             <span>Next</span>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="prepzii-interactive-icon h-4 w-4" />
           </button>
         </div>
 
@@ -170,13 +170,13 @@ export default function FormulaCardDeck({ cards }) {
             type="button"
             onClick={toggleImportantOnly}
             title={importantOnly ? "Show all cards" : "Filter important cards only"}
-            className={`inline-flex h-7 sm:h-8 items-center gap-1.5 rounded-md px-2.5 text-[11px] font-semibold transition-colors ${
+            className={`prepzii-interactive group inline-flex h-7 sm:h-8 items-center gap-1.5 rounded-md px-2.5 text-[11px] font-semibold ${
               importantOnly
                 ? "border border-amber-500/40 bg-amber-500/15 text-amber-700 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-300"
                 : "border border-slate-200/80 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-stone-800 dark:text-stone-400 dark:hover:border-stone-700 dark:hover:text-stone-200"
             }`}
           >
-            <Star className={`h-3 w-3 ${importantOnly ? "fill-amber-500 text-amber-500" : ""}`} />
+            <Star className={`prepzii-interactive-icon h-3 w-3 ${importantOnly ? "fill-amber-500 text-amber-500" : ""}`} />
             <span>Important</span>
           </button>
         </div>

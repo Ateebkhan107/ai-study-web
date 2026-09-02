@@ -85,15 +85,15 @@ export default function NotificationBell() {
     <div className="relative flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
       <button
         onClick={() => setOpen(!open)}
-        className="relative flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
+        className="prepzii-interactive group relative flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
         aria-label="Open notifications"
         aria-expanded={open}
       >
-        <Bell className="h-4 w-4 sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
+        <Bell className="prepzii-interactive-icon h-4 w-4 sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
 
         {unread > 0 && (
           <span
-            className="absolute -right-1.5 -top-1.5 min-w-4 rounded-full bg-red-500 px-1 text-center text-[9px] font-bold leading-4 text-white sm:min-w-5 sm:px-1.5 sm:text-[10px] sm:leading-5"
+            className="motion-safe:animate-in motion-safe:zoom-in-75 motion-safe:duration-150 absolute -right-1.5 -top-1.5 min-w-4 rounded-full bg-red-500 px-1 text-center text-[9px] font-bold leading-4 text-white sm:min-w-5 sm:px-1.5 sm:text-[10px] sm:leading-5"
           >
             {unread}
           </span>
@@ -103,6 +103,10 @@ export default function NotificationBell() {
       {open && (
         <div
           className="
+            motion-safe:animate-in
+            motion-safe:fade-in
+            motion-safe:slide-in-from-top-1
+            motion-safe:duration-150
             fixed
             left-3
             right-3
@@ -155,6 +159,7 @@ export default function NotificationBell() {
                   key={item.id}
                   onClick={() => openNotification(item)}
                   className="
+                    prepzii-interactive
                     p-3.5
                     sm:p-5
                     flex
@@ -216,6 +221,7 @@ export default function NotificationBell() {
               router.push("/notifications");
             }}
             className="
+              prepzii-interactive
               p-3.5
               sm:p-4
               text-center

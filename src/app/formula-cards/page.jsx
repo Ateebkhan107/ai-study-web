@@ -102,7 +102,7 @@ export default async function FormulaCardsPage() {
               Choose a subject
             </h1>
             <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-slate-600 dark:text-stone-300">
-              Native revision cards for formulas, tables, and quick concept checks. The original PDF handbooks remain available as fallback.
+              Native revision cards for formulas, tables, and quick concept checks.
             </p>
           </div>
         </header>

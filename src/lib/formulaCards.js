@@ -589,7 +589,7 @@ export async function getFormulaChaptersForSubject(subjectSlug, exam = "JEE") {
 export async function getFormulaChapterDeck(subjectSlug, chapterSlug, exam = "JEE") {
   const { subject, chapters } = await getFormulaChaptersForSubject(subjectSlug, exam);
   const chapter = chapters.find((item) => item.slug === chapterSlug) || null;
-  if (!subject || !chapter) return { subject, chapter: null, cards: [], originalBook: null };
+  if (!subject || !chapter) return { subject, chapter: null, cards: [] };
 
   const fallbackCards = FORMULA_CARD_SEED_CARDS.filter((card) => card.chapter_id === chapter.id && card.is_active);
   const dbCards = await readDbOrFallback(
@@ -603,13 +603,10 @@ export async function getFormulaChapterDeck(subjectSlug, chapterSlug, exam = "JE
     []
   );
 
-  const originalBook = await getOriginalFormulaBook(subject.name, subject.exam);
-
   return {
     subject,
     chapter,
     cards: sortByOrder(mergeById(dbCards, fallbackCards)),
-    originalBook,
   };
 }
 

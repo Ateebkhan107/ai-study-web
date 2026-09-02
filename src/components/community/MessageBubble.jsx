@@ -55,7 +55,7 @@ function MessageBubbleComponent({
 
   return (
     <div
-      className={`group flex gap-2 py-1 transition-opacity duration-150 motion-safe:animate-[fadeIn_150ms_ease-out] ${
+      className={`group flex gap-2 py-1 transition-opacity duration-150 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-0.5 motion-safe:duration-150 ${
         isOwn ? "justify-end" : "justify-start"
       }`}
     >
@@ -116,7 +116,7 @@ function MessageBubbleComponent({
                 <button
                   type="button"
                   onClick={() => onRetry && onRetry(message)}
-                  className="inline-flex items-center gap-1 font-semibold text-red-500 hover:text-red-600 transition-colors"
+                  className="prepzii-interactive inline-flex items-center gap-1 font-semibold text-red-500 hover:text-red-600"
                   title="Retry sending message"
                 >
                   <AlertCircle className="h-3 w-3" />
@@ -133,7 +133,7 @@ function MessageBubbleComponent({
                   onClick={handleDelete}
                   disabled={deleting}
                   title="Delete message"
-                  className="p-1 rounded text-slate-400 hover:text-red-500 transition-colors"
+                  className="prepzii-interactive p-1 rounded text-slate-400 hover:text-red-500"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>

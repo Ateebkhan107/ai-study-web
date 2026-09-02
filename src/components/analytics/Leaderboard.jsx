@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { Trophy, Crown } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import Link from "next/link";
+import AnimatedNumber from "@/components/AnimatedNumber";
 
 function uniqueLeaderboardUsers(users = []) {
   const usersById = new Map();
@@ -208,7 +209,7 @@ function RankOneCard({ user, isCurrentUser, compact }) {
         <div className="shrink-0 flex flex-col items-end pl-2">
           <div className="flex items-baseline gap-1">
             <span className={`${compact ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl"} font-black tabular-nums tracking-tighter text-amber-600 dark:text-brand`}>
-              {user.xp.toLocaleString()}
+              <AnimatedNumber number={user.xp} />
             </span>
             <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-500 dark:text-brand/80">XP</span>
           </div>
@@ -283,7 +284,7 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
             : "bg-slate-100 text-slate-700 dark:bg-slate-800/80 dark:text-slate-300"
         }`}>
           <span className="font-bold tabular-nums text-sm sm:text-base">
-            {user.xp.toLocaleString()}
+            <AnimatedNumber number={user.xp} />
           </span>
           <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] opacity-70">XP</span>
         </div>

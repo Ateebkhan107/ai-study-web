@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, FileText } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import FormulaCardDeck from "@/components/formula-cards/FormulaCardDeck";
 import { getFormulaChapterDeck } from "@/lib/formulaCards";
 
@@ -10,7 +10,7 @@ export default async function FormulaDeckPage({ params, searchParams }) {
   const { subjectSlug, chapterSlug } = await params;
   const query = await searchParams;
   const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
-  const { subject, chapter, cards, originalBook } = await getFormulaChapterDeck(subjectSlug, chapterSlug, exam);
+  const { subject, chapter, cards } = await getFormulaChapterDeck(subjectSlug, chapterSlug, exam);
 
   if (!subject || !chapter) notFound();
 
@@ -58,15 +58,6 @@ export default async function FormulaDeckPage({ params, searchParams }) {
               </p>
             </div>
 
-            {originalBook?.id && (
-              <Link
-                href={`/formula-books/${originalBook.id}`}
-                className="inline-flex h-9 sm:h-10 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-700 transition hover:border-amber-400 hover:text-amber-700 dark:border-stone-800 dark:bg-[#141414] dark:text-stone-200 dark:hover:border-stone-700 dark:hover:text-amber-300 sm:w-auto"
-              >
-                <FileText className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                <span>View original handbook</span>
-              </Link>
-            )}
           </div>
         </header>
 

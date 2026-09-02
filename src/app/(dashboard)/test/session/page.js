@@ -139,7 +139,7 @@ const QuestionPalette = memo(function QuestionPalette({
             <button
               key={question.id}
               onClick={() => onSelectQuestion(index)}
-              className={`relative flex aspect-square items-center justify-center rounded-md border text-xs font-semibold tabular-nums transition-colors duration-150 hover:border-brand/50 ${stateClass}`}
+              className={`prepzii-interactive relative flex aspect-square items-center justify-center rounded-md border text-xs font-semibold tabular-nums hover:border-brand/50 ${stateClass}`}
               aria-label={`Question ${index + 1}${isMarked ? ", marked for review" : ""}${isAnswered ? ", answered" : ""}`}
             >
               {index + 1}
@@ -206,7 +206,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         <button
           type="button"
           onClick={() => onToggleReview(activeQuestion.id)}
-          className={`inline-flex min-h-9 items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold transition-colors ${
+          className={`prepzii-interactive inline-flex min-h-9 items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold ${
             isMarked
               ? "border-brand/70 bg-brand/10 text-slate-900 dark:text-brand"
               : "border-slate-200 bg-transparent text-slate-600 hover:border-brand/50 hover:text-slate-900 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:text-white"
@@ -243,7 +243,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             inputMode="decimal"
             value={selectedAnswer ?? ""}
             onChange={(event) => onNumericalChange(activeQuestion.id, event.target.value)}
-            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-900 outline-none transition-colors focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40 dark:text-white"
+            className="prepzii-interactive w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40 dark:text-white"
             placeholder="Enter answer"
           />
         </div>
@@ -259,7 +259,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             <button
               key={`${activeQuestion.id}-${optionIndex}`}
               onClick={() => onSelect(activeQuestion, optionIndex)}
-              className={`group flex w-full cursor-pointer items-start gap-3 rounded-lg border px-3.5 py-3 text-left transition-colors duration-150 sm:gap-4 sm:px-4 sm:py-3.5 ${isSelected ? "test-option-selected" : ""}
+              className={`prepzii-interactive group flex w-full cursor-pointer items-start gap-3 rounded-lg border px-3.5 py-3 text-left sm:gap-4 sm:px-4 sm:py-3.5 ${isSelected ? "test-option-selected shadow-sm shadow-amber-500/10" : ""}
                 ${
                   isSelected
                     ? "border-brand bg-brand/10 text-slate-950 dark:bg-brand/10 dark:text-white"
@@ -267,7 +267,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
                 }`}
             >
               <span
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md border text-sm font-semibold transition-colors duration-150 sm:h-8 sm:w-8
+                className={`prepzii-interactive-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-md border text-sm font-semibold sm:h-8 sm:w-8
                   ${
                     isSelected
                       ? "border-brand bg-brand text-slate-950"
@@ -294,7 +294,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
       {selectedAnswer !== undefined && (
         <button
           onClick={() => onClear(activeQuestion.id)}
-          className="mt-4 text-xs font-semibold text-slate-500 transition-colors hover:text-rose-500 dark:text-slate-500"
+          className="prepzii-interactive mt-4 text-xs font-semibold text-slate-500 hover:text-rose-500 dark:text-slate-500"
         >
           Clear Selection
         </button>
@@ -611,7 +611,7 @@ function TestSessionContent() {
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-2 text-xs font-semibold text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
+              className="prepzii-interactive inline-flex min-h-9 items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-2 text-xs font-semibold text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -632,7 +632,7 @@ function TestSessionContent() {
               onClick={handleSubmit}
               disabled={finishing}
               aria-busy={finishing}
-              className="inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2.5 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
+              className="prepzii-interactive inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2.5 text-sm font-semibold text-slate-950 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
             >
               {finishing ? (
                 "Submitting..."
@@ -679,21 +679,21 @@ function TestSessionContent() {
             <button
               onClick={handlePrev}
               disabled={currentIdx === 0}
-              className="min-h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-150 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:flex-none sm:px-6"
+              className="prepzii-interactive min-h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:flex-none sm:px-6"
             >
               ← Previous
             </button>
             <button
               onClick={handleMarkForReviewAndNext}
               disabled={currentIdx === questions.length - 1}
-              className="hidden min-h-11 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-150 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:inline-flex"
+              className="prepzii-interactive hidden min-h-11 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:inline-flex"
             >
               Mark for Review &amp; Next
             </button>
             <button
               onClick={handleNext}
               disabled={currentIdx === questions.length - 1}
-              className="min-h-11 flex-1 rounded-lg bg-brand px-4 py-3 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-150 hover:bg-brand-hover sm:flex-none sm:px-6"
+              className="prepzii-interactive min-h-11 flex-1 rounded-lg bg-brand px-4 py-3 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-brand-hover sm:flex-none sm:px-6"
             >
               Save & Next →
             </button>
@@ -709,7 +709,7 @@ function TestSessionContent() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setPaletteOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-xl bg-slate-50 p-4 shadow-2xl dark:bg-[var(--background)]">
+          <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-150 absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-xl bg-slate-50 p-4 shadow-2xl dark:bg-[var(--background)]">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
             <QuestionPalette
               questions={questions}

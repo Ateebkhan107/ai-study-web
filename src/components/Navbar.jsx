@@ -107,7 +107,7 @@ export default function Navbar({
         setPendingHref(item.href);
         if (mobile) setMobileOpen(false);
       }}
-      className={`group relative overflow-hidden font-bold transition-all duration-300 ${
+      className={`group prepzii-interactive relative overflow-hidden font-bold ${
         mobile
           ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
           : "inline-flex h-9 items-center justify-center rounded-xl px-3.5 text-[13px] mx-0.5"
@@ -123,7 +123,7 @@ export default function Navbar({
     >
       {Icon && (
         <Icon
-          className={`relative z-10 shrink-0 ${
+          className={`prepzii-interactive-icon relative z-10 shrink-0 ${
             mobile ? "mr-2 h-4 w-4" : "mr-1.5 h-3.5 w-3.5"
           } ${active ? "text-amber-600 dark:text-amber-400" : ""}`}
           strokeWidth={2.4}
@@ -143,13 +143,13 @@ export default function Navbar({
         setPendingHref("/pro");
         if (mobileOpen) setMobileOpen(false);
       }}
-      className={`inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${
+      className={`prepzii-interactive inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest hover:shadow-lg ${
         isPro
           ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300"
           : "bg-gradient-to-br from-amber-400 to-amber-500 text-amber-950 shadow-md shadow-amber-500/20 hover:from-amber-400 hover:to-amber-600 hover:shadow-amber-500/30 dark:from-amber-500 dark:to-amber-600 dark:text-white"
       }`}
     >
-      {!isPro && <Star aria-hidden="true" className="h-3.5 w-3.5" fill="currentColor" />}
+      {!isPro && <Star aria-hidden="true" className="prepzii-interactive-icon h-3.5 w-3.5" fill="currentColor" />}
       <span>{isPro ? `${track || ""} Pro` : "PRO"}</span>
     </Link>
   ) : null;
@@ -193,12 +193,12 @@ export default function Navbar({
 
           <button
             onClick={toggleTheme}
-            className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
+            className="prepzii-interactive group flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]"
             aria-label="Toggle theme"
           >
             <span className="flex items-center justify-center">
-              <Moon className="h-[17px] w-[17px] dark:hidden sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
-              <Sun className="hidden h-[17px] w-[17px] dark:block sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
+              <Moon className="prepzii-interactive-icon h-[17px] w-[17px] dark:hidden sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
+              <Sun className="prepzii-interactive-icon hidden h-[17px] w-[17px] dark:block sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
             </span>
           </button>
 
@@ -212,18 +212,18 @@ export default function Navbar({
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
-            className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors duration-200 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px] lg:hidden"
+            className="prepzii-interactive group flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100/80 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100 min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px] lg:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} /> : <Menu className="h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />}
+            {mobileOpen ? <X className="prepzii-interactive-icon h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} /> : <Menu className="prepzii-interactive-icon h-[17px] w-[17px] sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />}
           </button>
 
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200/70 bg-[var(--card)]/95 px-3 py-3 shadow-lg backdrop-blur-xl dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/95 lg:hidden">
+        <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1 motion-safe:duration-150 border-t border-slate-200/70 bg-[var(--card)]/95 px-3 py-3 shadow-lg backdrop-blur-xl dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/95 lg:hidden">
           <nav className="mx-auto grid max-w-7xl grid-cols-2 gap-1.5" aria-label="Mobile navigation">
             {visibleNavItems.map((item) => renderNavLink(item, true))}
             {proLink && (

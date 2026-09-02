@@ -3,10 +3,51 @@
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { CheckCircle2, Circle, Zap } from "lucide-react";
+import { CheckCircle2, Zap } from "lucide-react";
+import AnimatedNumber from "@/components/AnimatedNumber";
 
 const ROADMAP_VIEWBOX = { width: 360, height: 112 };
 const ROADMAP_PATH = "M 16 56 C 72 18, 116 18, 172 56 S 272 94, 344 56";
+
+function getGoalCountLabel(count) {
+  return count === 1 ? "Goal" : "Goals";
+}
+
+function getRoadmapLayout(goalCount) {
+  if (goalCount <= 1) {
+    return {
+      minHeight: 112,
+      minWidth: 260,
+      path: "M 112 56 H 248",
+      svgHeight: 88,
+    };
+  }
+
+  if (goalCount === 2) {
+    return {
+      minHeight: 136,
+      minWidth: 360,
+      path: "M 36 56 C 118 30, 242 30, 324 56",
+      svgHeight: 96,
+    };
+  }
+
+  if (goalCount === 3) {
+    return {
+      minHeight: 176,
+      minWidth: 420,
+      path: "M 24 56 C 82 22, 136 22, 180 56 S 278 90, 336 56",
+      svgHeight: 112,
+    };
+  }
+
+  return {
+    minHeight: 208,
+    minWidth: Math.max(480, goalCount * 140),
+    path: ROADMAP_PATH,
+    svgHeight: 128,
+  };
+}
 
 export default function DailyGoals({ compact = false }) {
   const { user } = useUser();
@@ -60,10 +101,13 @@ export default function DailyGoals({ compact = false }) {
   const percentage = goals.length
     ? (completed / goals.length) * 100
     : 0;
+  const roadmapLayout = getRoadmapLayout(goals.length);
   const activePathLength = roadmapMetrics.points[activeGoalIndex]?.length || 0;
-  const activePathWidth = roadmapMetrics.totalLength
-    ? (activePathLength / roadmapMetrics.totalLength) * 100
-    : percentage;
+  const activePathWidth = goals.length === 1
+    ? percentage
+    : roadmapMetrics.totalLength
+      ? (activePathLength / roadmapMetrics.totalLength) * 100
+      : percentage;
 
   useEffect(() => {
     const path = roadmapPathRef.current;
@@ -82,7 +126,7 @@ export default function DailyGoals({ compact = false }) {
     });
 
     setRoadmapMetrics({ totalLength, points });
-  }, [goals.length]);
+  }, [goals.length, roadmapLayout.path]);
 
   return (
     <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200/80 bg-[var(--card)] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] ${
@@ -109,8 +153,8 @@ export default function DailyGoals({ compact = false }) {
             )}
           </div>
           {completed === 0 && goals.length > 0 ? (
-            <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-700 dark:text-slate-200">
-              {goals.length} goals
+            <p className="text-xs font-black tracking-[0.08em] text-slate-700 dark:text-slate-200">
+              <AnimatedNumber number={goals.length} /> {getGoalCountLabel(goals.length)}
             </p>
           ) : completed > 0 && completed < goals.length ? (
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -141,18 +185,70 @@ export default function DailyGoals({ compact = false }) {
         ) : (
           <>
             {/* DESKTOP CURVED ROADMAP */}
-            <div className="hidden sm:block relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              <div className="relative min-h-[13rem]" style={{ minWidth: `${Math.max(480, goals.length * 140)}px` }}>
-                {goals.length > 1 && (
+            {goals.length === 1 ? (
+              <div className="hidden sm:flex justify-center px-1 pb-4 pt-3">
+                {goals.map((goal, index) => {
+                  const isComplete = goal.completed;
+                  const isCurrent = nextGoal?.id === goal.id;
+
+                  return (
+                    <div key={goal.id} className="relative flex min-h-[6rem] w-full max-w-sm flex-col items-center justify-center text-center">
+                      <div className="absolute left-8 right-8 top-8 h-1 rounded-full bg-slate-200 dark:bg-[var(--border)]" aria-hidden="true" />
+                      <div
+                        className={`relative z-10 flex items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
+                          isComplete
+                            ? "h-8 w-8 border-emerald-500 bg-emerald-500 text-white shadow-sm shadow-emerald-500/20"
+                            : isCurrent
+                              ? "h-10 w-10 border-brand bg-brand text-slate-950 shadow-sm shadow-brand/25 ring-4 ring-brand/15"
+                              : "h-8 w-8 border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)] dark:text-slate-500"
+                        }`}
+                      >
+                        {isComplete ? (
+                          <CheckCircle2 className="h-4.5 w-4.5" />
+                        ) : (
+                          <AnimatedNumber number={index + 1} />
+                        )}
+                      </div>
+                      <p
+                        className={`mt-2 max-w-[12rem] text-center text-[11px] font-bold leading-tight ${
+                          isComplete
+                            ? "text-emerald-700 dark:text-emerald-400"
+                            : isCurrent
+                              ? "text-slate-900 dark:text-white"
+                              : "text-slate-500 dark:text-slate-400"
+                        }`}
+                        title={goal.title}
+                      >
+                        {goal.title}
+                      </p>
+                      {isCurrent && (
+                        <p className="mt-1.5 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
+                          In progress
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="hidden sm:block relative overflow-x-auto overflow-y-hidden px-1 pb-1 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                <div
+                  className="relative"
+                  style={{
+                    minHeight: `${roadmapLayout.minHeight}px`,
+                    minWidth: `${roadmapLayout.minWidth}px`,
+                  }}
+                >
                   <svg
-                    className="absolute left-0 top-0 h-32 w-full overflow-visible"
+                    className="absolute left-0 top-0 w-full overflow-visible"
+                    style={{ height: `${roadmapLayout.svgHeight}px` }}
                     viewBox={`0 0 ${ROADMAP_VIEWBOX.width} ${ROADMAP_VIEWBOX.height}`}
                     preserveAspectRatio="none"
                     aria-hidden="true"
                   >
                     <path
                       ref={roadmapPathRef}
-                      d={ROADMAP_PATH}
+                      d={roadmapLayout.path}
                       fill="none"
                       stroke="currentColor"
                       strokeLinecap="round"
@@ -160,7 +256,7 @@ export default function DailyGoals({ compact = false }) {
                       className="text-slate-200 dark:text-[var(--border)]"
                     />
                     <path
-                      d={ROADMAP_PATH}
+                      d={roadmapLayout.path}
                       fill="none"
                       stroke="currentColor"
                       strokeLinecap="round"
@@ -170,66 +266,66 @@ export default function DailyGoals({ compact = false }) {
                       strokeDasharray={`${activePathWidth} 100`}
                     />
                   </svg>
-                )}
 
-                {goals.map((goal, index) => {
-                  const isComplete = goal.completed;
-                  const isCurrent = nextGoal?.id === goal.id;
-                  const point = roadmapMetrics.points[index] || {
-                    x: ROADMAP_VIEWBOX.width * (goals.length > 1 ? index / (goals.length - 1) : 0.5),
-                    y: ROADMAP_VIEWBOX.height / 2,
-                  };
+                  {goals.map((goal, index) => {
+                    const isComplete = goal.completed;
+                    const isCurrent = nextGoal?.id === goal.id;
+                    const point = roadmapMetrics.points[index] || {
+                      x: ROADMAP_VIEWBOX.width * (index / (goals.length - 1)),
+                      y: ROADMAP_VIEWBOX.height / 2,
+                    };
 
-                  return (
-                    <div
-                      key={goal.id}
-                      className="absolute w-28 -translate-x-1/2 text-center"
-                      style={{
-                        left: `${(point.x / ROADMAP_VIEWBOX.width) * 100}%`,
-                        top: `${(point.y / ROADMAP_VIEWBOX.height) * 128}px`,
-                      }}
-                    >
+                    return (
                       <div
-                        className={`relative mx-auto flex -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
-                          isComplete
-                            ? "h-7 w-7 border-emerald-500 bg-emerald-500 text-white shadow-sm shadow-emerald-500/20"
-                            : isCurrent
-                              ? "h-9 w-9 border-brand bg-brand text-slate-950 shadow-sm shadow-brand/25 ring-4 ring-brand/15"
-                              : "h-7 w-7 border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)] dark:text-slate-500"
-                        }`}
+                        key={goal.id}
+                        className="absolute w-28 -translate-x-1/2 text-center"
+                        style={{
+                          left: `${(point.x / ROADMAP_VIEWBOX.width) * 100}%`,
+                          top: `${(point.y / ROADMAP_VIEWBOX.height) * roadmapLayout.svgHeight}px`,
+                        }}
                       >
-                        {isComplete ? (
-                          <CheckCircle2 className="h-4.5 w-4.5" />
-                        ) : (
-                          index + 1
-                        )}
-                      </div>
-                      <div className="flex flex-col items-center justify-start h-[4.5rem] pt-1">
-                        <p
-                          className={`max-w-[6.5rem] text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
+                        <div
+                          className={`relative mx-auto flex -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-black transition-colors ${
                             isComplete
-                              ? "text-emerald-700 dark:text-emerald-400"
+                              ? "h-7 w-7 border-emerald-500 bg-emerald-500 text-white shadow-sm shadow-emerald-500/20"
                               : isCurrent
-                                ? "text-slate-900 dark:text-white"
-                              : "text-slate-500 dark:text-slate-400"
+                                ? "h-9 w-9 border-brand bg-brand text-slate-950 shadow-sm shadow-brand/25 ring-4 ring-brand/15"
+                                : "h-7 w-7 border-slate-300 bg-[var(--card)] text-slate-400 dark:border-slate-600 dark:bg-[var(--surface)] dark:text-slate-500"
                           }`}
-                          title={goal.title}
                         >
-                          {goal.title}
-                        </p>
-                        {isCurrent ? (
-                          <p className="mt-1.5 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
-                            In progress
+                          {isComplete ? (
+                            <CheckCircle2 className="h-4.5 w-4.5" />
+                          ) : (
+                            <AnimatedNumber number={index + 1} />
+                          )}
+                        </div>
+                        <div className="flex flex-col items-center justify-start h-[4.5rem] pt-1">
+                          <p
+                            className={`max-w-[6.5rem] text-center text-[10px] font-bold leading-tight sm:text-[11px] ${
+                              isComplete
+                                ? "text-emerald-700 dark:text-emerald-400"
+                                : isCurrent
+                                  ? "text-slate-900 dark:text-white"
+                                  : "text-slate-500 dark:text-slate-400"
+                            }`}
+                            title={goal.title}
+                          >
+                            {goal.title}
                           </p>
-                        ) : (
-                          <div className="mt-1.5 h-[18px]" />
-                        )}
+                          {isCurrent ? (
+                            <p className="mt-1.5 w-fit rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-amber-700 dark:text-brand">
+                              In progress
+                            </p>
+                          ) : (
+                            <div className="mt-1.5 h-[18px]" />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* MOBILE VERTICAL MILESTONES */}
             <div className="sm:hidden flex flex-col gap-6 px-1 pt-3 pb-6">
@@ -323,7 +419,7 @@ function NextGoalCard({ goal }) {
             </div>
             <div className="flex shrink-0 w-fit items-center gap-1.5 rounded-lg bg-brand px-2.5 py-1 text-[11px] font-black text-slate-950 shadow-sm">
               <Zap className="h-3 w-3 fill-current" />
-              +{goal.xp} XP
+              +<AnimatedNumber number={goal.xp} /> XP
             </div>
           </div>
 
@@ -331,7 +427,7 @@ function NextGoalCard({ goal }) {
             <div className="mb-1.5 flex items-end justify-between gap-2">
               {targetValue > 1 && (
                 <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                  {progress} / {goal.target_value}
+                  <AnimatedNumber number={progress} /> / <AnimatedNumber number={targetValue} />
                 </span>
               )}
             </div>

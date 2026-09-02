@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpen, FileText } from "lucide-react";
-import { getFormulaChaptersForSubject, getOriginalFormulaBook } from "@/lib/formulaCards";
+import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { getFormulaChaptersForSubject } from "@/lib/formulaCards";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,6 @@ export default async function FormulaSubjectPage({ params, searchParams }) {
 
   if (!subject) notFound();
 
-  const originalBook = await getOriginalFormulaBook(subject.name, subject.exam);
   const isBiologyRevision = subject.exam === "NEET" && subject.name === "Biology";
   const deckTitle = isBiologyRevision ? "Revision Cards" : "Formula Cards";
 
@@ -58,15 +57,6 @@ export default async function FormulaSubjectPage({ params, searchParams }) {
               </p>
             </div>
 
-            {originalBook?.id && (
-              <Link
-                href={`/formula-books/${originalBook.id}`}
-                className="inline-flex h-10 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-700 transition hover:border-amber-400 hover:text-amber-700 dark:border-stone-800 dark:bg-[#141414] dark:text-stone-200 dark:hover:border-stone-700 dark:hover:text-amber-300 sm:w-auto sm:text-sm"
-              >
-                <FileText className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                <span>View original handbook</span>
-              </Link>
-            )}
           </div>
         </header>
 

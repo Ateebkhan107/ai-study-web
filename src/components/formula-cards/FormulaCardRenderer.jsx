@@ -229,7 +229,7 @@ export default function FormulaCardRenderer({ card }) {
           </MathText>
         )}
 
-        <div className="mt-4 sm:mt-5 space-y-4">
+        <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-1 motion-safe:duration-150 mt-4 sm:mt-5 space-y-4">
           <RecallSection card={card} />
 
           {Array.isArray(card.formulas) && card.formulas.length > 0 && (
