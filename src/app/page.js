@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
+import { FlickeringGrid } from "@/components/ui/flickering-grid";
+
 import {
   Target,
   Trophy,
@@ -307,7 +309,21 @@ export default function PublicLandingPage() {
 
       {/* Hero Section */}
       <main className="relative z-10 pt-16 pb-32">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center relative">
+          {/* Subtle Inspira-style Flickering Grid Hero Background */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[520px] sm:h-[580px] pointer-events-none -z-10 overflow-hidden [mask-image:radial-gradient(ellipse_60%_50%_at_50%_45%,#000_10%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_60%_50%_at_50%_45%,#000_10%,transparent_100%)]">
+            <FlickeringGrid
+              squareSize={4}
+              gridGap={8}
+              color="#EAB308"
+              lightColor="#CA8A04"
+              maxOpacity={0.18}
+              lightMaxOpacity={0.12}
+              flickerChance={0.15}
+              className="w-full h-full"
+            />
+          </div>
+
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
