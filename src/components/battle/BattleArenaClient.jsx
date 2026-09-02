@@ -3,13 +3,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
-import { Volume2, VolumeX, Mic, MicOff, Flame, Trophy, Shield, Swords, Users, RefreshCw } from "lucide-react";
+import { Volume2, VolumeX, Mic, MicOff, Flame, Trophy, Shield, Swords, Crown, Gem, Sparkles, Users, RefreshCw } from "lucide-react";
 import { getSoundEnabled, setSoundEnabled, getVoiceEnabled, setVoiceEnabled, unlockAudioContext } from "@/lib/battleAudio";
 import BattleMatchmakingModal from "./BattleMatchmakingModal";
 import BattleLeaderboard from "./BattleLeaderboard";
 import BattleLiveFeed from "./BattleLiveFeed";
 import BattleChampionCelebration from "./BattleChampionCelebration";
 import { StarsBackground } from "@/components/ui/stars-background";
+
+function TierIcon({ tierKey, className = "h-3.5 w-3.5" }) {
+  const key = String(tierKey || "").toLowerCase();
+  if (key.includes("silver")) return <Swords className={className} />;
+  if (key.includes("gold")) return <Crown className={className} />;
+  if (key.includes("platinum")) return <Gem className={className} />;
+  if (key.includes("diamond")) return <Sparkles className={className} />;
+  if (key.includes("master") && !key.includes("grand")) return <Flame className={className} />;
+  if (key.includes("grandmaster")) return <Trophy className={className} />;
+  return <Shield className={className} />;
+}
 
 
 function cx(...classes) {
@@ -312,7 +323,7 @@ export default function BattleArenaClient() {
 
   const myRating = profile?.arena_rating || 1000;
   const myStreak = profile?.win_streak || 0;
-  const myTier = profile?.tier || { name: "Bronze", icon: "🛡️" };
+  const myTier = profile?.tier || { name: "Bronze", key: "bronze" };
 
   return (
     <main className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-6">
@@ -402,8 +413,9 @@ export default function BattleArenaClient() {
               <span className="inline-flex items-center gap-1 rounded-md border border-brand/40 bg-brand/10 px-2.5 py-0.5 text-xs font-black text-brand font-display">
                 {myRating} Elo
               </span>
-              <span className="rounded-md bg-white/10 px-2 py-0.5 text-[11px] font-bold text-slate-400">
-                {myTier.icon} {myTier.name}
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-slate-200/80 bg-white/90 px-2 py-0.5 text-[11px] font-bold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-slate-300">
+                <TierIcon tierKey={myTier.key || myTier.name} className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                <span>{myTier.name}</span>
               </span>
               {myStreak >= 2 && (
                 <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-0.5 text-[11px] font-black text-amber-500">

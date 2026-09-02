@@ -57,8 +57,9 @@ export function BattleChampionCelebration() {
             <Sparkles className="absolute -top-2 -right-2 h-6 w-6 text-amber-300 animate-spin-slow" />
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/15 px-4 py-1 text-xs font-black uppercase tracking-[0.2em] text-brand mb-2">
-            🏆 Arena Champion Award
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-brand/40 bg-brand/15 px-4 py-1 text-xs font-black uppercase tracking-[0.2em] text-brand mb-2">
+            <Trophy className="h-3.5 w-3.5 text-brand" />
+            <span>Arena Champion Award</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-wider text-white font-display">

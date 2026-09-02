@@ -32,13 +32,13 @@ const REVIEW_QUESTION_SELECT = `
 // ==========================================
 
 export const ARENA_TIERS = [
-  { name: "Bronze", key: "bronze", color: "#CD7F32", min: 0, max: 1099, icon: "🛡️" },
-  { name: "Silver", key: "silver", color: "#C0C0C0", min: 1100, max: 1299, icon: "⚔️" },
-  { name: "Gold", key: "gold", color: "#EAB308", min: 1300, max: 1499, icon: "👑" },
-  { name: "Platinum", key: "platinum", color: "#00CED1", min: 1500, max: 1699, icon: "💎" },
-  { name: "Diamond", key: "diamond", color: "#B9F2FF", min: 1700, max: 1899, icon: "✨" },
-  { name: "Master", key: "master", color: "#A855F7", min: 1900, max: 2099, icon: "🔥" },
-  { name: "Grandmaster", key: "grandmaster", color: "#F43F5E", min: 2100, max: 9999, icon: "🏆" },
+  { name: "Bronze", key: "bronze", color: "#CD7F32", min: 0, max: 1099, icon: "shield" },
+  { name: "Silver", key: "silver", color: "#C0C0C0", min: 1100, max: 1299, icon: "swords" },
+  { name: "Gold", key: "gold", color: "#EAB308", min: 1300, max: 1499, icon: "crown" },
+  { name: "Platinum", key: "platinum", color: "#00CED1", min: 1500, max: 1699, icon: "gem" },
+  { name: "Diamond", key: "diamond", color: "#B9F2FF", min: 1700, max: 1899, icon: "sparkles" },
+  { name: "Master", key: "master", color: "#A855F7", min: 1900, max: 2099, icon: "flame" },
+  { name: "Grandmaster", key: "grandmaster", color: "#F43F5E", min: 2100, max: 9999, icon: "trophy" },
 ];
 
 export function getRatingTier(rating = 1000) {
@@ -586,7 +586,7 @@ export async function finishBattleForUser({ battleId, userId }) {
             eventType: "streak",
             userId: winner.user_id,
             opponentId: null,
-            message: `${winner.profile.displayName} reached a ${winningStats.win_streak}-win streak 🔥`,
+            message: `${winner.profile.displayName} reached a ${winningStats.win_streak}-win streak`,
             metadata: { streak: winningStats.win_streak },
           });
         }
@@ -713,15 +713,35 @@ async function updateSeasonBattleStats(seasonId, userId, result, ratingChange = 
 }
 
 export async function recordBattleEvent({ eventType, userId, opponentId, message, metadata = {} }) {
-  const { error } = await supabaseAdmin.from("battle_events").insert({
+  const eventPayload = {
     event_type: eventType,
     user_id: userId,
     opponent_id: opponentId,
     message,
     metadata,
-  });
+  };
+
+  const { data: inserted, error } = await supabaseAdmin
+    .from("battle_events")
+    .insert(eventPayload)
+    .select()
+    .maybeSingle();
+
   if (error) {
     console.error("[RECORD_BATTLE_EVENT_DB_ERROR]", error);
+  }
+
+  // Instant broadcast via Supabase Realtime Channel
+  try {
+    const channel = supabaseAdmin.channel("arena_live_feed_channel");
+    await channel.send({
+      type: "broadcast",
+      event: "arena_event",
+      payload: inserted || { ...eventPayload, id: `ev_${Date.now()}`, created_at: new Date().toISOString() },
+    });
+    supabaseAdmin.removeChannel(channel);
+  } catch (bcErr) {
+    // Gracefully handle broadcast error
   }
 }
 
