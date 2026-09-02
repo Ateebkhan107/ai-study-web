@@ -89,7 +89,7 @@ const MATHEMATICS_SECTIONS = [
       "inverse-trig",
       "solution-of-triangle",
       "triangle",
-      "ratio",
+      "trigonometric ratio",
       "identity",
       "identities",
     ],
@@ -203,85 +203,181 @@ const MATHEMATICS_SECTIONS = [
 
 const PHYSICS_SECTIONS = [
   {
-    title: "Mechanics",
-    description: "Motion, forces, energy and rotation",
+    title: "Measurements & Basics",
+    description: "Units, dimensions, errors and practical measurement techniques",
     Icon: Gauge,
+    cue: "Core Foundations",
+    accentClass: "border-l-sky-500/80 dark:border-l-sky-400/80",
+    iconContainerClass:
+      "border-sky-500/20 bg-sky-500/10 text-sky-700 dark:border-sky-400/20 dark:bg-sky-400/10 dark:text-sky-400",
+    slugs: [
+      "unit-and-dimensions",
+      "error-and-measurement",
+    ],
     match: [
       "unit",
       "dimension",
-      "motion",
+      "measurement",
+      "error",
+      "vernier",
+      "screw gauge",
+    ],
+  },
+  {
+    title: "Mechanics",
+    description: "Kinematics, Newton's laws, work-energy, rotational dynamics, gravitation & fluids",
+    Icon: Gauge,
+    cue: "Kinematics & Dynamics",
+    accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
+    iconContainerClass:
+      "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400",
+    slugs: [
+      "rectilinear-motion",
+      "projectile-motion-vector",
+      "relative-motion",
+      "newtons-laws-of-motion",
+      "friction",
+      "work-power-energy",
+      "circular-motion",
+      "centre-of-mass",
+      "rigid-body-dynamics",
+      "gravitation",
+      "fluid-mechanics-properties-matter",
+    ],
+    match: [
+      "rectilinear",
       "projectile",
+      "relative",
       "laws of motion",
       "friction",
       "work",
-      "energy",
       "power",
       "circular",
       "centre of mass",
       "center of mass",
-      "collision",
+      "rigid",
       "rotation",
       "gravitation",
       "fluid",
-      "elastic",
+      "matter",
       "viscosity",
       "surface tension",
+      "elasticity",
     ],
   },
   {
     title: "Thermodynamics & Waves",
-    description: "Heat, kinetic theory, oscillations and waves",
+    description: "Heat, kinetic theory, simple harmonic motion and wave mechanics",
     Icon: Waves,
+    cue: "Thermal & Wave Motion",
+    accentClass: "border-l-rose-500/80 dark:border-l-rose-400/80",
+    iconContainerClass:
+      "border-rose-500/20 bg-rose-500/10 text-rose-700 dark:border-rose-400/20 dark:bg-rose-400/10 dark:text-rose-400",
+    slugs: [
+      "simple-harmonic-motion",
+      "string-waves",
+      "heat-thermodynamics",
+      "sound-waves",
+    ],
     match: [
+      "simple harmonic",
+      "shm",
+      "oscillation",
+      "string wave",
       "thermal",
       "calorimetry",
       "heat",
       "thermodynamics",
-      "kinetic",
-      "oscillation",
-      "simple harmonic",
-      "wave",
+      "kinetic theory",
       "sound",
+      "doppler",
     ],
   },
   {
     title: "Electromagnetism",
-    description: "Charges, circuits, fields and induction",
+    description: "Electrostatics, current electricity, capacitance, magnetism, induction, AC & EM waves",
     Icon: Magnet,
+    cue: "Fields & Circuits",
+    accentClass: "border-l-indigo-500/80 dark:border-l-indigo-400/80",
+    iconContainerClass:
+      "border-indigo-500/20 bg-indigo-500/10 text-indigo-700 dark:border-indigo-400/20 dark:bg-indigo-400/10 dark:text-indigo-400",
+    slugs: [
+      "electrostatics",
+      "current-electricity",
+      "capacitance",
+      "magnetic-effect-current-force",
+      "electromagnetic-induction",
+      "alternating-current",
+      "electromagnetic-waves",
+    ],
     match: [
       "electrostatics",
       "electric",
       "current",
+      "capacitance",
       "capacitor",
-      "magnet",
       "magnetic",
+      "magnetism",
+      "electromagnetic induction",
       "emi",
-      "induction",
-      "alternating",
+      "alternating current",
       "ac ",
-      "electromagnetic",
+      "electromagnetic wave",
+      "em wave",
     ],
   },
   {
     title: "Optics",
-    description: "Ray optics, wave optics and instruments",
+    description: "Geometrical ray optics, optical instruments and wave optics",
     Icon: Sparkles,
-    match: ["ray", "optics", "lens", "mirror", "wave optics", "interference", "diffraction"],
+    cue: "Ray & Wave Optics",
+    accentClass: "border-l-violet-500/80 dark:border-l-violet-400/80",
+    iconContainerClass:
+      "border-violet-500/20 bg-violet-500/10 text-violet-700 dark:border-violet-400/20 dark:bg-violet-400/10 dark:text-violet-400",
+    slugs: [
+      "geometrical-optics",
+      "wave-optics",
+    ],
+    match: [
+      "geometrical optics",
+      "ray optics",
+      "wave optics",
+      "lens",
+      "mirror",
+      "optical",
+      "interference",
+      "diffraction",
+      "polarisation",
+      "polarization",
+      "optics",
+    ],
   },
   {
     title: "Modern Physics",
-    description: "Atoms, nuclei, quantum ideas and devices",
+    description: "Atoms, nuclei, dual nature, semiconductors & communication systems",
     Icon: Atom,
+    cue: "Quantum & Electronic Devices",
+    accentClass: "border-l-emerald-500/80 dark:border-l-emerald-400/80",
+    iconContainerClass:
+      "border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-400",
+    slugs: [
+      "modern-physics",
+      "semiconductor",
+      "principle-of-communication",
+    ],
     match: [
-      "modern",
-      "dual",
-      "matter",
+      "modern physics",
+      "dual nature",
+      "matter wave",
       "radiation",
+      "photoelectric",
       "atom",
       "nuclei",
       "nucleus",
       "semiconductor",
       "communication",
+      "logic gate",
+      "transistor",
     ],
   },
 ];
@@ -487,9 +583,66 @@ function buildMathSections(chapters) {
   return sections;
 }
 
+function buildPhysicsSections(chapters) {
+  const remaining = new Set(chapters.map((chapter) => chapter.id));
+
+  const sections = PHYSICS_SECTIONS.map((section) => {
+    const matchedChapters = [];
+
+    // 1. First add matching predefined slugs in pedagogical order
+    if (section.slugs) {
+      section.slugs.forEach((slug) => {
+        const found = chapters.find((c) => c.slug === slug && remaining.has(c.id));
+        if (found) {
+          matchedChapters.push(found);
+          remaining.delete(found.id);
+        }
+      });
+    }
+
+    // 2. Add any additional chapters matching keywords
+    if (section.match) {
+      chapters.forEach((chapter) => {
+        if (!remaining.has(chapter.id)) return;
+        const searchable = `${chapter.title} ${chapter.slug}`.toLowerCase();
+        const isMatch = section.match.some((term) => searchable.includes(term));
+        if (isMatch) {
+          matchedChapters.push(chapter);
+          remaining.delete(chapter.id);
+        }
+      });
+    }
+
+    return {
+      ...section,
+      chapters: matchedChapters,
+    };
+  }).filter((section) => section.chapters.length > 0);
+
+  const uncategorized = chapters.filter((chapter) => remaining.has(chapter.id));
+  if (uncategorized.length > 0) {
+    sections.push({
+      title: "Additional Topics",
+      description: "More physics formula decks",
+      Icon: Orbit,
+      cue: "Formula Deck",
+      accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
+      iconContainerClass:
+        "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400",
+      chapters: uncategorized,
+    });
+  }
+
+  return sections;
+}
+
 function getChapterSections(subject, chapters) {
   if (subject.name === "Mathematics") {
     return buildMathSections(chapters);
+  }
+
+  if (subject.name === "Physics") {
+    return buildPhysicsSections(chapters);
   }
 
   if (subject.name === "Chemistry") {
@@ -500,55 +653,18 @@ function getChapterSections(subject, chapters) {
     return buildRangeSections(BIOLOGY_SECTIONS, chapters);
   }
 
-  if (subject.name !== "Physics") {
-    return [
-      {
-        title: "Study Syllabus",
-        description: "Chapter decks ready for revision",
-        Icon: Orbit,
-        cue: "Revision Deck",
-        accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
-        iconContainerClass:
-          "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400",
-        chapters,
-      },
-    ];
-  }
-
-  const remaining = new Set(chapters.map((chapter) => chapter.id));
-  const sections = PHYSICS_SECTIONS.map((section) => {
-    const sectionChapters = chapters.filter((chapter) => {
-      if (!remaining.has(chapter.id)) return false;
-      const searchable = `${chapter.title} ${chapter.slug}`.toLowerCase();
-      const isMatch = section.match.some((term) => searchable.includes(term));
-      if (isMatch) remaining.delete(chapter.id);
-      return isMatch;
-    });
-
-    return { ...section, chapters: sectionChapters };
-  }).filter((section) => section.chapters.length > 0);
-
-  const uncategorized = chapters.filter((chapter) => remaining.has(chapter.id));
-  if (uncategorized.length > 0) {
-    sections.push({
-      title: "More Physics",
-      description: "Additional formula decks",
-      Icon: Radio,
-      cue: "Formula Deck",
+  return [
+    {
+      title: "Study Syllabus",
+      description: "Chapter decks ready for revision",
+      Icon: Orbit,
+      cue: "Revision Deck",
       accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
       iconContainerClass:
         "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400",
-      chapters: uncategorized,
-    });
-  }
-
-  return sections.map((section) => ({
-    cue: "Formula Deck",
-    accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
-    iconContainerClass:
-      "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400",
-    ...section,
-  }));
+      chapters,
+    },
+  ];
 }
 
 function getWeightLevel(cardCount, maxCards) {
@@ -637,7 +753,7 @@ export default async function FormulaSubjectPage({ params, searchParams }) {
                 )}
               </div>
               <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-slate-600 dark:text-stone-300 sm:text-base">
-                Pick a chapter to open the interactive {isBiologyRevision ? "revision" : "formula"} deck. Structured by syllabus units for targeted JEE revision.
+                Pick a chapter to open the interactive {isBiologyRevision ? "revision" : "formula"} deck. Structured by syllabus units for targeted {subject.exam || exam} revision.
               </p>
             </div>
           </div>

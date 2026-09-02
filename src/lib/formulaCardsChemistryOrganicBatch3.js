@@ -1,5 +1,5 @@
 export const CHEMISTRY_ORGANIC_BATCH_3_CHAPTER_DEFINITIONS = [
-  { title: "Alcohol", slug: "alcohol", sort_order: 25 },
+  { title: "Alcohols", slug: "alcohol", sort_order: 25 },
   { title: "Grignard Reagent", slug: "grignard-reagent", sort_order: 26 },
   { title: "Reduction", slug: "reduction", sort_order: 27 },
   { title: "Oxidation Reaction", slug: "oxidation-reaction", sort_order: 28 },

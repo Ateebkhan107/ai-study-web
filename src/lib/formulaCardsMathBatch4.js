@@ -1,5 +1,5 @@
 export const MATH_BATCH_4_CHAPTER_DEFINITIONS = [
-  { title: "Fundamental of Mathematics", slug: "fundamental-of-mathematics", sort_order: 11 },
+  { title: "Fundamentals of Mathematics", slug: "fundamental-of-mathematics", sort_order: 11 },
   { title: "Quadratic Equation", slug: "quadratic-equation", sort_order: 12 },
   { title: "Sequence & Series", slug: "sequence-and-series", sort_order: 13 },
   { title: "Binomial Theorem", slug: "binomial-theorem", sort_order: 14 },

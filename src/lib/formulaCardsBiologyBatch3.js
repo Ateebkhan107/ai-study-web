@@ -1,6 +1,6 @@
 export const BIOLOGY_BATCH_3_CHAPTER_DEFINITIONS = [
-  { title: "Structural Organization in Animals", slug: "structural-organization-in-animals", sort_order: 7, source_page: 32 },
-  { title: "Cells: The Unit of Life", slug: "cells-the-unit-of-life", sort_order: 8, source_page: 36 },
+  { title: "Structural Organisation in Animals", slug: "structural-organization-in-animals", sort_order: 7, source_page: 32 },
+  { title: "Cell: The Unit of Life", slug: "cells-the-unit-of-life", sort_order: 8, source_page: 36 },
   { title: "Cell Cycle and Cell Division", slug: "cell-cycle-and-cell-division", sort_order: 9, source_page: 41 },
 ];
 

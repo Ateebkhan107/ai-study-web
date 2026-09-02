@@ -212,11 +212,6 @@ export default function FormulaCardRenderer({ card }) {
           <span className="inline-flex items-center rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-700 dark:text-amber-400">
             {card.card_type}
           </span>
-          {card.source_page && (
-            <span className="font-mono text-[10px] sm:text-[11px] font-medium text-slate-400 dark:text-stone-500">
-              Page {card.source_page}
-            </span>
-          )}
         </div>
 
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-950 dark:text-stone-100 font-display">

@@ -1,7 +1,7 @@
 export const CHEMISTRY_ORGANIC_BATCH_2_CHAPTER_DEFINITIONS = [
   { title: "Alkane", slug: "alkane", sort_order: 22 },
   { title: "Alkene & Alkyne", slug: "alkene-alkyne", sort_order: 23 },
-  { title: "Alkyl Halide", slug: "alkyl-halide", sort_order: 24 },
+  { title: "Alkyl Halides", slug: "alkyl-halide", sort_order: 24 },
 ];
 
 const chapter = (track, slug) => `${track}-chemistry-${slug}`;

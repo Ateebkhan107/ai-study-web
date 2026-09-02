@@ -1,9 +1,9 @@
 export const MATH_BATCH_6_CHAPTER_DEFINITIONS = [
-  { title: "Solution of Triangle", slug: "solution-of-triangle", sort_order: 20 },
+  { title: "Solution of Triangles", slug: "solution-of-triangle", sort_order: 20 },
   { title: "Inverse Trigonometric Functions", slug: "inverse-trigonometric-functions", sort_order: 21 },
   { title: "Statistics", slug: "statistics", sort_order: 22 },
   { title: "Mathematical Reasoning", slug: "mathematical-reasoning", sort_order: 23 },
-  { title: "Sets and Relation", slug: "sets-and-relation", sort_order: 24 },
+  { title: "Sets and Relations", slug: "sets-and-relation", sort_order: 24 },
 ];
 
 const chapter = (slug) => `jee-mathematics-${slug}`;

@@ -1,5 +1,5 @@
 export const BIOLOGY_BATCH_4_CHAPTER_DEFINITIONS = [
-  { title: "Transportation in Plants", slug: "transportation-in-plants", sort_order: 10, source_page: 42 },
+  { title: "Transport in Plants", slug: "transportation-in-plants", sort_order: 10, source_page: 42 },
   { title: "Minerals Nutrition", slug: "minerals-nutrition", sort_order: 11, source_page: 47 },
   { title: "Photosynthesis", slug: "photosynthesis", sort_order: 12, source_page: 51 },
   { title: "Respiration in Plants", slug: "respiration-in-plants", sort_order: 13, source_page: 56 },

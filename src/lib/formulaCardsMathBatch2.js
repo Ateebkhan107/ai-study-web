@@ -1,6 +1,6 @@
 export const MATH_BATCH_2_CHAPTER_DEFINITIONS = [
-  { title: "Limit of Function", slug: "limit-of-function", sort_order: 6 },
-  { title: "Method of Differentiation", slug: "method-of-differentiation", sort_order: 7 },
+  { title: "Limits of Functions", slug: "limit-of-function", sort_order: 6 },
+  { title: "Methods of Differentiation", slug: "method-of-differentiation", sort_order: 7 },
   { title: "Application of Derivatives", slug: "application-of-derivatives", sort_order: 8 },
 ];
 

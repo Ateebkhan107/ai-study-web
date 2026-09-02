@@ -1,5 +1,5 @@
 export const BIOLOGY_BATCH_11_CHAPTER_DEFINITIONS = [
-  { title: "Organisms and Population", slug: "organisms-and-population", sort_order: 33, source_page: 135 },
+  { title: "Organisms and Populations", slug: "organisms-and-population", sort_order: 33, source_page: 135 },
   { title: "Ecosystem", slug: "ecosystem", sort_order: 34, source_page: 140 },
   { title: "Biodiversity and Conservation", slug: "biodiversity-and-conservation", sort_order: 35, source_page: 144 },
 ];

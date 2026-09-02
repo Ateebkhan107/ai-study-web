@@ -1,5 +1,5 @@
 export const BIOLOGY_BATCH_8_CHAPTER_DEFINITIONS = [
-  { title: "Principles of Inheritance and Variations", slug: "principles-of-inheritance-and-variations", sort_order: 25, source_page: 107 },
+  { title: "Principles of Inheritance and Variation", slug: "principles-of-inheritance-and-variations", sort_order: 25, source_page: 107 },
   { title: "Molecular Basis of Inheritance", slug: "molecular-basis-of-inheritance", sort_order: 26, source_page: 147 },
   { title: "Evolution", slug: "evolution", sort_order: 27, source_page: 113 },
 ];

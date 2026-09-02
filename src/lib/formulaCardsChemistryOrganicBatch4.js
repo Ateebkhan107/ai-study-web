@@ -1,6 +1,6 @@
 export const CHEMISTRY_ORGANIC_BATCH_4_CHAPTER_DEFINITIONS = [
-  { title: "Aldehyde & Ketones", slug: "aldehyde-ketones", sort_order: 29 },
-  { title: "Carboxylic Acid & Derivatives", slug: "carboxylic-acid-derivatives", sort_order: 30 },
+  { title: "Aldehydes & Ketones", slug: "aldehyde-ketones", sort_order: 29 },
+  { title: "Carboxylic Acids & Derivatives", slug: "carboxylic-acid-derivatives", sort_order: 30 },
 ];
 
 const chapter = (track, slug) => `${track}-chemistry-${slug}`;

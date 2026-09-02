@@ -1,9 +1,9 @@
 export const MATH_BATCH_5_CHAPTER_DEFINITIONS = [
-  { title: "Permutation & Combination", slug: "permutation-and-combination", sort_order: 15 },
+  { title: "Permutations & Combinations", slug: "permutation-and-combination", sort_order: 15 },
   { title: "Probability", slug: "probability", sort_order: 16 },
-  { title: "Complex Number", slug: "complex-number", sort_order: 17 },
+  { title: "Complex Numbers", slug: "complex-number", sort_order: 17 },
   { title: "Vectors", slug: "vectors", sort_order: 18 },
-  { title: "3-Dimension", slug: "3-dimension", sort_order: 19 },
+  { title: "3D Geometry", slug: "3-dimension", sort_order: 19 },
 ];
 
 const chapter = (slug) => `jee-mathematics-${slug}`;
