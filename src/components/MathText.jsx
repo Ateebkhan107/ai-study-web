@@ -78,12 +78,9 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S1|s1)\)\s*:\s*/g, "$1\n\n**(S1):** ");
           s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S2|s2)\)\s*:\s*/g, "$1\n\n**(S2):** ");
 
-          // Roman numerals only when at start of line or preceded by period: "I. ", "II. "
-          s = s.replace(/(?:^|[\.\n])\s*\b((?:I|II|III|IV|V)\.\s+)/g, "\n\n$1");
-
-          // Lettered statements A., B., C., D., E. or (A), (B), (C), (D), (E) in multiple-statement questions
-          s = s.replace(/([^\n])\s*\n*\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
-          s = s.replace(/([^\n])\s*\n*\s*\(([A-E])\)\s+/g, "$1\n\n**($2)** ");
+          // Lettered statements A., B., C., D., E. or (A), (B), (C), (D), (E) only when starting a line or preceded by period/colon
+          s = s.replace(/(^|[\.\:\n])\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
+          s = s.replace(/(^|[\.\:\n])\s*\(([A-E])\)\s+/g, "$1\n\n**($2)** ");
 
           // Format instructions on distinct lines
           s = s.replace(/([^\n])\s*\n*\s*(In (?:the )?light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
@@ -168,6 +165,15 @@ function normalizeLegacyScientificNotation(value) {
 
 function normalizeDisplayMathDelimiters(value) {
   let text = String(value ?? "");
+  // Heal stray single $ inside $$ ... $$ blocks
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (match, inner) => {
+    if (inner.includes("$")) {
+      const parts = inner.split(/\s*\$\s*/).map((p) => p.trim()).filter(Boolean);
+      return parts.map((p) => `$$\n${p}\n$$`).join("\n\n");
+    }
+    return match;
+  });
+
   // In JS string replacement, '$$$$' inserts '$$'
   text = text.replace(/([^\n])\s*\$\$/g, "$1\n\n$$$$");
   text = text.replace(/\$\$\s*([^\n\s$])/g, "$$$$\n$1");
