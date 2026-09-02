@@ -68,19 +68,24 @@ function normalizeQuestionLayout(value) {
 
           let s = part;
 
-          // Format statement prefixes at statement boundaries without breaking markdown bold asterisks:
-          // "**Statement I:**", "Statement I:", "Assertion (A):", "Reason (R):", "(S1):", "(S2):"
-          s = s.replace(/([^\n*])\s*(\*{0,2}\bStatement\s*(?:I|II|1|2|A|B)\s*:?\*{0,2})/gi, "$1\n\n$2");
-          s = s.replace(/([^\n*])\s*(\*{0,2}\bAssertion\s*(?:\(?[Aa]\)?)\s*:?\*{0,2})/gi, "$1\n\n$2");
-          s = s.replace(/([^\n*])\s*(\*{0,2}\bReason\s*(?:\(?[Rr]\)?)\s*:?\*{0,2})/gi, "$1\n\n$2");
-          s = s.replace(/([^\n*])\s*(\*{0,2}\((?:S1|S2|s1|s2)\)\s*:?\*{0,2})/g, "$1\n\n$2");
+          // Convert preamble colon to period so "Reason R:" in preamble is not mistaken for the statement
+          s = s.replace(/(\band the other (?:is )?labelled as \*{0,2}Reason\s*(?:\(?[Rr]\)?)\*{0,2})\s*:/gi, "$1.");
+
+          // Format actual statement declarations (which have a colon) onto distinct paragraphs
+          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bStatement\s*(?:I|II|1|2|A|B)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bAssertion\s*(?:\(?[Aa]\)?)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\bReason\s*(?:\(?[Rr]\)?)\b\*{0,2}\s*:)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(\*{0,2}\((?:S1|S2|s1|s2)\)\s*:)/g, "$1\n\n$2");
 
           // Roman numerals only when at start of line or preceded by period: "I. ", "II. "
           s = s.replace(/(?:^|[\.\n])\s*\b((?:I|II|III|IV|V)\.\s+)/g, "\n\n$1");
 
+          // Lettered statements A., B., C., D., E. in multiple-statement questions
+          s = s.replace(/([^\n])\s*\n*\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
+
           // Format instructions on distinct lines
-          s = s.replace(/([^\n])\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
-          s = s.replace(/([^\n])\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*(In the light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
 
           return s;
         })
@@ -154,10 +159,22 @@ function normalizeLegacyScientificNotation(value) {
     .join("");
 }
 
+function normalizeDisplayMathDelimiters(value) {
+  let text = String(value ?? "");
+  // In JS string replacement, '$$$$' inserts '$$'
+  text = text.replace(/([^\n])\s*\$\$/g, "$1\n\n$$$$");
+  text = text.replace(/\$\$\s*([^\n\s$])/g, "$$$$\n$1");
+  text = text.replace(/([^\n\s$])\s*\$\$/g, "$1\n$$$$");
+  text = text.replace(/\$\$\s*([^\n])/g, "$$$$\n\n$1");
+  return text;
+}
+
 export default function MathText({ children, className = "" }) {
-  const preparedText = normalizeQuestionLayout(
-    normalizeLegacyScientificNotation(
-      normalizeFlattenedTables(normalizeBlankPlaceholders(children))
+  const preparedText = normalizeDisplayMathDelimiters(
+    normalizeQuestionLayout(
+      normalizeLegacyScientificNotation(
+        normalizeFlattenedTables(normalizeBlankPlaceholders(children))
+      )
     )
   );
 

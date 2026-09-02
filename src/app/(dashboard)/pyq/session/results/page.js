@@ -419,7 +419,7 @@ export default function PYQResultsPage() {
                       <img 
                         src={q.question_image} 
                         alt="Question visual" 
-                        className="rounded-2xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
+                        className="max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] rounded-2xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
                         style={{ filter: "url(#remove-orange)" }}
                       />
                     )}
@@ -433,7 +433,7 @@ export default function PYQResultsPage() {
                       <img
                         src={q.question_image}
                         alt="Question visual"
-                        className="mt-3 max-h-[420px] w-auto max-w-full rounded-2xl border border-slate-200/60 object-contain dark:border-[var(--border)]/50"
+                        className="mt-3 max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] rounded-2xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
                         loading="lazy"
                         decoding="async"
                         style={{ filter: "url(#remove-orange)" }}

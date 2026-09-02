@@ -79,8 +79,11 @@ const PALETTE_LEGEND = [
   },
 ];
 
-const compactImageClassName =
-  "max-h-[55vh] w-auto max-w-full rounded-lg border border-slate-200/70 object-contain dark:border-[var(--border)]/60";
+const compactQuestionImageClassName =
+  "max-h-[170px] sm:max-h-[200px] w-auto max-w-[460px] rounded-xl border border-slate-200/70 bg-white p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
+
+const compactOptionImageClassName =
+  "max-h-[70px] sm:max-h-[85px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1.5 object-contain dark:border-[var(--border)]/60";
 
 const PaletteButton = memo(function PaletteButton({
   label,
@@ -206,7 +209,7 @@ const QuestionOption = memo(function QuestionOption({
           <img
             src={optionImage}
             alt={`Option ${LETTERS[index]} visual`}
-            className={compactImageClassName}
+            className={compactOptionImageClassName}
             loading="lazy"
             decoding="async"
             style={{ filter: "url(#remove-orange)" }}
@@ -841,7 +844,7 @@ export default function PYQSessionPage() {
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
-                className={`${compactImageClassName} mb-2.5`}
+                className={`${compactQuestionImageClassName} mb-2.5`}
                 loading="lazy"
                 decoding="async"
                 style={{ filter: "url(#remove-orange)" }}
@@ -860,7 +863,7 @@ export default function PYQSessionPage() {
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
-                className={`${compactImageClassName} mt-3 mb-2.5`}
+                className={`${compactQuestionImageClassName} mt-3 mb-2.5`}
                 loading="lazy"
                 decoding="async"
                 style={{ filter: "url(#remove-orange)" }}

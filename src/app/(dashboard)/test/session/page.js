@@ -222,11 +222,11 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
       </MathText>
 
       {activeQuestion.question_image && (
-        <div className="mb-5 overflow-hidden rounded-lg border border-slate-200 bg-white p-2 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/30 sm:mb-8">
+        <div className="mb-5 inline-block overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-[var(--border-subtle)] dark:bg-white sm:mb-8">
           <img
             src={activeQuestion.question_image}
             alt="Question visual"
-            className="mx-auto h-auto max-h-[70vh] w-full max-w-4xl object-contain"
+            className="mx-auto h-auto max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] object-contain"
             loading="lazy"
             decoding="async"
           />

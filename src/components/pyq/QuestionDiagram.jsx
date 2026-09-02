@@ -230,8 +230,6 @@ const DIAGRAMS = {
   "JEE-MAIN-24-27JAN-S1:59": TwoLiquidBeaker,
 };
 
-export default function QuestionDiagram({ question }) {
-  const key = getQuestionDiagramKey(question);
-  const Diagram = key ? DIAGRAMS[key] : null;
-  return Diagram ? <Diagram /> : null;
+export default function QuestionDiagram() {
+  return null;
 }

@@ -1,16 +1,6 @@
-const NATIVE_QUESTION_DIAGRAMS = new Set([
-  "JEE-MAIN-24-27JAN-S1:49",
-  "JEE-MAIN-24-27JAN-S1:56",
-  "JEE-MAIN-24-27JAN-S1:57",
-  "JEE-MAIN-24-27JAN-S1:59",
-]);
+const NATIVE_QUESTION_DIAGRAMS = new Set([]);
 
-const NATIVE_QUESTION_DIAGRAM_IDS = new Map([
-  ["4dafde95-dbdb-4037-9b87-7a8ffc1f543b", "JEE-MAIN-24-27JAN-S1:49"],
-  ["dc467a8c-2b48-4294-89b4-6e0dfa834896", "JEE-MAIN-24-27JAN-S1:56"],
-  ["d0e4e7a8-3dc6-4afa-88ed-6686e15317dd", "JEE-MAIN-24-27JAN-S1:57"],
-  ["65a71688-82a3-44e5-bf50-d6f6782637b8", "JEE-MAIN-24-27JAN-S1:59"],
-]);
+const NATIVE_QUESTION_DIAGRAM_IDS = new Map([]);
 
 function normalizePaperCode(question) {
   const explicitCode = question?.paper_code || question?.paperCode;
