@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Bookmark, BookmarkCheck, CheckCircle2, ChevronLeft, ChevronRight, RotateCcw, Shuffle, Star } from "lucide-react";
 import FormulaCardRenderer from "./FormulaCardRenderer";
+import { markFormulaCardReviewed } from "./FormulaChapterProgress";
 
 function shuffleCards(cards) {
   const next = [...cards];
@@ -13,7 +14,7 @@ function shuffleCards(cards) {
   return next;
 }
 
-export default function FormulaCardDeck({ cards }) {
+export default function FormulaCardDeck({ cards, chapterId }) {
   const [orderedCards, setOrderedCards] = useState(cards || []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [bookmarkedIds, setBookmarkedIds] = useState(() => new Set());
@@ -27,6 +28,11 @@ export default function FormulaCardDeck({ cards }) {
   const safeIndex = Math.min(currentIndex, Math.max(visibleCards.length - 1, 0));
   const currentCard = visibleCards[safeIndex];
   const isBookmarked = currentCard ? bookmarkedIds.has(currentCard.id) : false;
+
+  useEffect(() => {
+    if (!currentCard) return;
+    markFormulaCardReviewed(chapterId, currentCard.id);
+  }, [chapterId, currentCard]);
 
   function goToCard(offset) {
     setCurrentIndex((index) => {

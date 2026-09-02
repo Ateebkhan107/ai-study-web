@@ -61,7 +61,7 @@ export default async function FormulaDeckPage({ params, searchParams }) {
           </div>
         </header>
 
-        <FormulaCardDeck cards={cards} />
+        <FormulaCardDeck cards={cards} chapterId={chapter.id} />
       </div>
     </main>
   );
