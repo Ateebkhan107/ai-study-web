@@ -26,14 +26,22 @@ export async function GET(request) {
 
     if (requestedSeason === "all-time") {
       // Query all-time stats
-      const { data: allTimeStats, error: statsError } = await supabaseAdmin
+      let { data: allTimeStats, error: statsError } = await supabaseAdmin
         .from("battle_stats")
         .select("user_id, arena_rating, peak_rating, wins, losses, draws, win_streak, best_streak, total_battles")
         .order("arena_rating", { ascending: false })
         .order("wins", { ascending: false })
         .limit(50);
 
-      if (statsError) throw statsError;
+      if (statsError) {
+        const fallback = await supabaseAdmin
+          .from("battle_stats")
+          .select("user_id, wins, losses, draws, total_battles")
+          .order("wins", { ascending: false })
+          .limit(50);
+        allTimeStats = fallback.data || [];
+        statsError = null;
+      }
 
       const userIds = (allTimeStats || []).map((s) => s.user_id);
       if (userId && !userIds.includes(userId)) {
@@ -188,12 +196,20 @@ export async function GET(request) {
           }
         }
       } else {
-        // Fallback: If new season table is empty, display all-time active players as current season participants
-        const { data: fallbackStats } = await supabaseAdmin
+        let { data: fallbackStats } = await supabaseAdmin
           .from("battle_stats")
           .select("user_id, arena_rating, wins, losses, win_streak, total_battles")
           .order("arena_rating", { ascending: false })
           .limit(50);
+
+        if (!fallbackStats) {
+          const fb = await supabaseAdmin
+            .from("battle_stats")
+            .select("user_id, wins, losses, total_battles")
+            .order("wins", { ascending: false })
+            .limit(50);
+          fallbackStats = fb.data || [];
+        }
 
         const userIds = (fallbackStats || []).map((s) => s.user_id);
         if (userId && !userIds.includes(userId)) userIds.push(userId);

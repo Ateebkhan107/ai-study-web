@@ -337,10 +337,21 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
     throw error;
   }
 
-  const { data: players, error: playersError } = await supabaseAdmin
+  let { data: players, error: playersError } = await supabaseAdmin
     .from("battle_players")
     .select("id, battle_id, user_id, score, correct_count, wrong_count, skipped_count, rating_before, rating_after, rating_change, completed_at, created_at")
     .eq("battle_id", battleId);
+
+  if (playersError) {
+    const fallback = await supabaseAdmin
+      .from("battle_players")
+      .select("id, battle_id, user_id, score, correct_count, wrong_count, skipped_count, completed_at, created_at")
+      .eq("battle_id", battleId);
+    if (!fallback.error) {
+      players = fallback.data;
+      playersError = null;
+    }
+  }
   if (playersError) throw playersError;
 
   if (!(players || []).some((player) => player.user_id === userId)) {
@@ -363,7 +374,16 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
     supabaseAdmin
       .from("battle_stats")
       .select("user_id, arena_rating, win_streak")
-      .in("user_id", playerIds),
+      .in("user_id", playerIds)
+      .then((res) => {
+        if (res.error) {
+          return supabaseAdmin
+            .from("battle_stats")
+            .select("user_id")
+            .in("user_id", playerIds);
+        }
+        return res;
+      }),
   ]);
 
   if (profileError) throw profileError;
@@ -506,10 +526,18 @@ export async function finishBattleForUser({ battleId, userId }) {
     }
 
     // Fetch existing stats for Elo calculations
-    const { data: statsRows } = await supabaseAdmin
+    let { data: statsRows } = await supabaseAdmin
       .from("battle_stats")
       .select("user_id, arena_rating, peak_rating, win_streak, best_streak")
       .in("user_id", [pA.user_id, pB.user_id]);
+
+    if (!statsRows) {
+      const fallbackStats = await supabaseAdmin
+        .from("battle_stats")
+        .select("user_id, wins, losses, total_battles")
+        .in("user_id", [pA.user_id, pB.user_id]);
+      statsRows = fallbackStats.data;
+    }
 
     const statsMap = new Map((statsRows || []).map((s) => [s.user_id, s]));
     const ratingA = statsMap.get(pA.user_id)?.arena_rating ?? 1000;
@@ -529,7 +557,7 @@ export async function finishBattleForUser({ battleId, userId }) {
       .eq("id", battleId);
     if (finishError) throw finishError;
 
-    // Update match player rating deltas
+    // Update match player rating deltas if columns exist
     await Promise.all([
       supabaseAdmin
         .from("battle_players")
@@ -549,7 +577,7 @@ export async function finishBattleForUser({ battleId, userId }) {
         })
         .eq("battle_id", battleId)
         .eq("user_id", pB.user_id),
-    ]);
+    ]).catch(() => {});
 
     // Ensure current season is registered
     const seasonId = getCurrentSeasonId();
@@ -624,34 +652,70 @@ async function updateBattleStats(userId, result, ratingChange = 0) {
     best_streak: 0,
   };
 
-  const { data: current, error: readError } = await supabaseAdmin
+  let hasEloColumns = true;
+  let { data: current, error: readError } = await supabaseAdmin
     .from("battle_stats")
     .select("user_id, wins, losses, draws, total_battles, arena_rating, peak_rating, win_streak, best_streak")
     .eq("user_id", userId)
     .maybeSingle();
 
-  if (readError) throw readError;
+  if (readError) {
+    const fallback = await supabaseAdmin
+      .from("battle_stats")
+      .select("user_id, wins, losses, draws, total_battles")
+      .eq("user_id", userId)
+      .maybeSingle();
+    current = fallback.data;
+    hasEloColumns = false;
+  }
 
   const next = current || defaults;
-  next.total_battles += 1;
+  next.total_battles = (next.total_battles || 0) + 1;
   if (result === "win") {
-    next.wins += 1;
+    next.wins = (next.wins || 0) + 1;
     next.win_streak = (next.win_streak || 0) + 1;
     next.best_streak = Math.max(next.best_streak || 0, next.win_streak);
   } else if (result === "loss") {
-    next.losses += 1;
+    next.losses = (next.losses || 0) + 1;
     next.win_streak = 0;
   } else if (result === "draw") {
-    next.draws += 1;
+    next.draws = (next.draws || 0) + 1;
   }
 
   next.arena_rating = Math.max(100, (next.arena_rating || 1000) + ratingChange);
   next.peak_rating = Math.max(next.peak_rating || 1000, next.arena_rating);
 
+  const payload = hasEloColumns
+    ? { ...next, updated_at: new Date().toISOString() }
+    : {
+        user_id: next.user_id,
+        wins: next.wins,
+        losses: next.losses,
+        draws: next.draws,
+        total_battles: next.total_battles,
+        updated_at: new Date().toISOString(),
+      };
+
   const { error } = await supabaseAdmin
     .from("battle_stats")
-    .upsert({ ...next, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
-  if (error) throw error;
+    .upsert(payload, { onConflict: "user_id" });
+
+  if (error && hasEloColumns) {
+    await supabaseAdmin
+      .from("battle_stats")
+      .upsert(
+        {
+          user_id: next.user_id,
+          wins: next.wins,
+          losses: next.losses,
+          draws: next.draws,
+          total_battles: next.total_battles,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id" }
+      )
+      .catch((e) => console.error("[UPDATE_BATTLE_STATS_FALLBACK_ERROR]", e));
+  }
 
   return next;
 }
