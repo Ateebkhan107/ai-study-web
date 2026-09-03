@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { GroupCreateSchema } from "@/lib/validations";
+import { listCommunityGroupsForUser } from "@/services/community.server";
 import {
   getCommunityUser,
   getUserGroupCount,
@@ -9,110 +10,27 @@ import {
   checkRateLimit,
 } from "@/lib/community/permissions";
 
-async function attachActiveMemberCounts(groups) {
-  const groupIds = (groups || []).map((group) => group.id).filter(Boolean);
-  if (groupIds.length === 0) return groups || [];
-
-  const { data: activeMembers, error } = await supabaseAdmin
-    .from("community_group_members")
-    .select("group_id")
-    .in("group_id", groupIds)
-    .eq("status", "ACTIVE");
-
-  if (error) throw error;
-
-  const countMap = new Map();
-  for (const member of activeMembers || []) {
-    countMap.set(member.group_id, (countMap.get(member.group_id) || 0) + 1);
-  }
-
-  return (groups || []).map((group) => ({
-    ...group,
-    member_count: countMap.get(group.id) || 0,
-  }));
-}
-
 // ─── GET /api/community/groups ────────────────────────────────────────────────
 // List groups for the user's exam track with optional pagination + search
 export async function GET(request) {
   const { userId } = await auth();
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const communityUser = await getCommunityUser(userId);
-  if (!communityUser) return NextResponse.json({ error: "Profile not found" }, { status: 404 });
-
   const { searchParams } = new URL(request.url);
-  const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
-  const limit = Math.min(50, parseInt(searchParams.get("limit") || "20"));
-  const search = searchParams.get("q") || "";
-  const type = searchParams.get("type") || "discover"; // "discover" | "mine"
-  const offset = (page - 1) * limit;
 
   try {
-    if (type === "mine") {
-      // Groups the user is an active member of
-      const { data, error } = await supabaseAdmin
-        .from("community_group_members")
-        .select(
-          `role, status, joined_at,
-           community_groups (id, name, description, exam_track, privacy, owner_id, member_count, created_at)`
-        )
-        .eq("user_id", userId)
-        .eq("status", "ACTIVE")
-        .order("joined_at", { ascending: false })
-        .range(offset, offset + limit - 1);
+    const result = await listCommunityGroupsForUser(userId, {
+      page: searchParams.get("page") || "1",
+      limit: searchParams.get("limit") || "20",
+      search: searchParams.get("q") || "",
+      type: searchParams.get("type") || "discover",
+    });
 
-      if (error) throw error;
-
-      const groups = (data || []).map((m) => ({
-        ...m.community_groups,
-        myRole: m.role,
-      }));
-
-      return NextResponse.json({ groups: await attachActiveMemberCounts(groups), page, limit });
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: result.status || 500 });
     }
 
-    // Discover: groups matching user's exam track (excluding ones they're in)
-    let query = supabaseAdmin
-      .from("community_groups")
-      .select("id, name, description, exam_track, privacy, owner_id, member_count, created_at")
-      .eq("exam_track", communityUser.examTrack)
-      .eq("is_frozen", false)
-      .order("member_count", { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    if (search.trim()) {
-      query = query.ilike("name", `%${search.trim()}%`);
-    }
-
-    const { data: groups, error } = await query;
-    if (error) throw error;
-
-    const groupIds = (groups || []).map((g) => g.id);
-    const membershipsQuery = groupIds.length > 0
-      ? supabaseAdmin
-        .from("community_group_members")
-        .select("group_id, role, status")
-        .eq("user_id", userId)
-        .in("group_id", groupIds)
-      : Promise.resolve({ data: [], error: null });
-
-    const [{ data: memberships, error: membershipsError }, groupsWithCounts] = await Promise.all([
-      membershipsQuery,
-      attachActiveMemberCounts(groups || []),
-    ]);
-
-    if (membershipsError) throw membershipsError;
-
-    const membershipMap = Object.fromEntries((memberships || []).map((m) => [m.group_id, m]));
-
-    const enriched = groupsWithCounts.map((g) => ({
-      ...g,
-      myRole: membershipMap[g.id]?.role || null,
-      myStatus: membershipMap[g.id]?.status || null,
-    }));
-
-    return NextResponse.json({ groups: enriched, page, limit });
+    return NextResponse.json(result);
   } catch (err) {
     console.error("[COMMUNITY_GROUPS_GET]", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
@@ -154,7 +72,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid payload", details: parsed.error.format() }, { status: 400 });
   }
 
-  const { name, description, privacy, category, avatar_url } = parsed.data;
+  const { name, description, privacy } = parsed.data;
 
   // User can only create groups for their own exam track
   const examTrack = communityUser.examTrack;

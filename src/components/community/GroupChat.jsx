@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Loader2, ChevronUp, ChevronDown, MessageCircle, AlertCircle, WifiOff } from "lucide-react";
+import { memo, useState, useRef, useEffect, useCallback } from "react";
+import { Send, Loader2, ChevronUp, ChevronDown, MessageCircle } from "lucide-react";
 import { useSession } from "@clerk/nextjs";
 import MessageBubble, { getDateDividerLabel } from "./MessageBubble";
 import { useClerkSupabase } from "@/lib/useClerkSupabase";
@@ -31,7 +31,7 @@ function ChatSkeleton() {
   );
 }
 
-export default function GroupChat({ groupId, currentUserId, currentUserName, onPresenceChange }) {
+function GroupChat({ groupId, currentUserId, currentUserName, onPresenceChange }) {
   const { isLoaded, session } = useSession();
   const supabase = useClerkSupabase();
   const [messages, setMessages] = useState([]);
@@ -637,3 +637,5 @@ export default function GroupChat({ groupId, currentUserId, currentUserName, onP
     </div>
   );
 }
+
+export default memo(GroupChat);

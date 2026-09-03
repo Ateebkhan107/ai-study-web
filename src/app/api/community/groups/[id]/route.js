@@ -2,7 +2,8 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { GroupUpdateSchema } from "@/lib/validations";
-import { isGroupMember, isGroupOwner, canReadGroup } from "@/lib/community/permissions";
+import { isGroupOwner } from "@/lib/community/permissions";
+import { getCommunityGroupForUser } from "@/services/community.server";
 
 // ─── GET /api/community/groups/[id] ──────────────────────────────────────────
 export async function GET(request, { params }) {
@@ -11,28 +12,16 @@ export async function GET(request, { params }) {
 
   const { id } = await params;
 
-  const canRead = await canReadGroup(id, userId);
-  if (!canRead) return NextResponse.json({ error: "Access denied" }, { status: 403 });
-
-  const { data: group, error } = await supabaseAdmin
-    .from("community_groups")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
-
-  if (error) return NextResponse.json({ error: "Server error" }, { status: 500 });
-  if (!group) return NextResponse.json({ error: "Group not found" }, { status: 404 });
-
-  const membership = await isGroupMember(id, userId);
-  const { count: activeMemberCount, error: countError } = await supabaseAdmin
-    .from("community_group_members")
-    .select("id", { count: "exact", head: true })
-    .eq("group_id", id)
-    .eq("status", "ACTIVE");
-
-  if (countError) return NextResponse.json({ error: "Server error" }, { status: 500 });
-
-  return NextResponse.json({ group: { ...group, member_count: activeMemberCount || 0 }, membership });
+  try {
+    const result = await getCommunityGroupForUser(id, userId);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: result.status || 500 });
+    }
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("[GROUP_GET]", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }
 
 // ─── PATCH /api/community/groups/[id] ────────────────────────────────────────

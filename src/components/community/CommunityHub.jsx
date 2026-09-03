@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
   Users,
@@ -16,33 +16,64 @@ import CreateGroupForm from "./CreateGroupForm";
 
 const SECTIONS = ["Discover", "My Groups"];
 
-export default function CommunityHub({ examTrack }) {
+function GroupGridSkeleton({ count = 6 }) {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="h-4 w-32 rounded-full skeleton-shimmer" />
+            <div className="h-6 w-16 rounded-full skeleton-shimmer" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-3 w-full rounded-full skeleton-shimmer" />
+            <div className="h-3 w-3/4 rounded-full skeleton-shimmer" />
+          </div>
+          <div className="mt-5 flex items-center justify-between">
+            <div className="h-3 w-20 rounded-full skeleton-shimmer" />
+            <div className="h-8 w-24 rounded-lg skeleton-shimmer" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function CommunityHub({ examTrack, initialGroups = [], initialHasMore = false }) {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState("Discover");
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState(initialGroups);
   const [myGroups, setMyGroups] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loadingMine, setLoadingMine] = useState(false);
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
+  const [hasMore, setHasMore] = useState(initialHasMore);
   const [error, setError] = useState(null);
+  const loadedMineRef = useRef(false);
+  const skipInitialDiscoverFetchRef = useRef(true);
 
   useEffect(() => {
     if (activeSection !== "Discover") return;
+    if (searchInput.trim() === search) return;
     const timeout = setTimeout(() => {
       setLoading(true);
       setSearch(searchInput.trim());
       setPage(1);
     }, 300);
     return () => clearTimeout(timeout);
-  }, [activeSection, searchInput]);
+  }, [activeSection, search, searchInput]);
 
   useEffect(() => {
     if (activeSection !== "Discover") return;
+    if (page === 1 && !search && skipInitialDiscoverFetchRef.current) {
+      skipInitialDiscoverFetchRef.current = false;
+      return;
+    }
+    const controller = new AbortController();
     const q = search ? `&q=${encodeURIComponent(search)}` : "";
-    fetch(`/api/community/groups?type=discover&page=${page}&limit=12${q}`)
+    fetch(`/api/community/groups?type=discover&page=${page}&limit=12${q}`, { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
         if (page === 1) setGroups(data.groups || []);
@@ -50,21 +81,32 @@ export default function CommunityHub({ examTrack }) {
         setHasMore((data.groups || []).length === 12);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.name === "AbortError") return;
         setError("Failed to load groups.");
         setLoading(false);
       });
+    return () => controller.abort();
   }, [activeSection, page, search]);
 
   useEffect(() => {
     if (activeSection !== "My Groups") return;
-    fetch("/api/community/groups?type=mine")
+    if (loadedMineRef.current) {
+      setLoadingMine(false);
+      return;
+    }
+    const controller = new AbortController();
+    fetch("/api/community/groups?type=mine", { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
         setMyGroups(data.groups || []);
+        loadedMineRef.current = true;
         setLoadingMine(false);
       })
-      .catch(() => setLoadingMine(false));
+      .catch((err) => {
+        if (err.name !== "AbortError") setLoadingMine(false);
+      });
+    return () => controller.abort();
   }, [activeSection]);
 
   function handleSearch(e) {
@@ -76,8 +118,7 @@ export default function CommunityHub({ examTrack }) {
 
   function handleSectionChange(section) {
     setActiveSection(section);
-    if (section === "Discover") setLoading(true);
-    if (section === "My Groups") setLoadingMine(true);
+    if (section === "My Groups" && !loadedMineRef.current) setLoadingMine(true);
   }
 
   const trackLabel = examTrack === "JEE" ? "JEE" : "NEET";
@@ -156,9 +197,7 @@ export default function CommunityHub({ examTrack }) {
           )}
 
           {loading && page === 1 ? (
-            <div className="flex justify-center py-12">
-              <Loader2 className="w-6 h-6 animate-spin text-brand" />
-            </div>
+            <GroupGridSkeleton />
           ) : groups.length === 0 ? (
             <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
               <Users className="w-10 h-10 mx-auto mb-3 text-brand" />
@@ -218,9 +257,7 @@ export default function CommunityHub({ examTrack }) {
             </p>
           </div>
           {loadingMine ? (
-            <div className="flex justify-center py-12">
-              <Loader2 className="w-6 h-6 animate-spin text-brand" />
-            </div>
+            <GroupGridSkeleton count={3} />
           ) : myGroups.length === 0 ? (
             <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-slate-500 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-400">
               <BookOpen className="w-10 h-10 mx-auto mb-3 text-brand" />

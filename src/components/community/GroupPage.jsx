@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import {
   MessageSquare,
   Users,
@@ -15,32 +16,64 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import GroupChat from "./GroupChat";
-import MembersPanel from "./MembersPanel";
-import JoinRequestsPanel from "./JoinRequestsPanel";
 import GroupCard from "./GroupCard";
 
 const TABS = ["Chat", "Members", "Requests", "Settings"];
 
-export default function GroupPage({ groupId, currentUserId, currentUserName }) {
+const MembersPanel = dynamic(() => import("./MembersPanel"), {
+  loading: () => <PanelSkeleton />,
+});
+const JoinRequestsPanel = dynamic(() => import("./JoinRequestsPanel"), {
+  loading: () => <PanelSkeleton />,
+});
+
+function PanelSkeleton() {
+  return (
+    <div className="space-y-3">
+      <div className="h-4 w-32 rounded-full skeleton-shimmer" />
+      {Array.from({ length: 5 }).map((_, index) => (
+        <div key={index} className="flex items-center gap-3 rounded-xl px-3 py-2.5">
+          <div className="h-8 w-8 rounded-full skeleton-shimmer" />
+          <div className="min-w-0 flex-1 space-y-2">
+            <div className="h-3 w-36 rounded-full skeleton-shimmer" />
+            <div className="h-3 w-20 rounded-full skeleton-shimmer" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function GroupPage({
+  groupId,
+  currentUserId,
+  currentUserName,
+  initialGroup = null,
+  initialMembership = null,
+  initialError = null,
+  initialMyGroups = [],
+}) {
   const router = useRouter();
-  const [group, setGroup] = useState(null);
-  const [membership, setMembership] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [group, setGroup] = useState(initialGroup);
+  const [membership, setMembership] = useState(initialMembership);
+  const [loading, setLoading] = useState(!initialGroup && !initialError);
   const [activeTab, setActiveTab] = useState("Chat");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(initialError);
   const [leaving, setLeaving] = useState(false);
-  const [myGroups, setMyGroups] = useState([]);
+  const [myGroups, setMyGroups] = useState(initialMyGroups);
 
   const [onlineCount, setOnlineCount] = useState(null);
 
   // Settings state
-  const [editName, setEditName] = useState("");
-  const [editDesc, setEditDesc] = useState("");
-  const [editPrivacy, setEditPrivacy] = useState("PUBLIC");
+  const [editName, setEditName] = useState(initialGroup?.name || "");
+  const [editDesc, setEditDesc] = useState(initialGroup?.description || "");
+  const [editPrivacy, setEditPrivacy] = useState(initialGroup?.privacy || "PUBLIC");
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState(null);
 
   useEffect(() => {
+    if (initialGroup || initialError) return undefined;
+
     async function loadGroup() {
       try {
         const [groupResponse, mineResponse] = await Promise.all([
@@ -66,7 +99,7 @@ export default function GroupPage({ groupId, currentUserId, currentUserName }) {
       }
     }
     loadGroup();
-  }, [groupId]);
+  }, [groupId, initialError, initialGroup]);
 
   async function handleLeave() {
     if (!confirm("Are you sure you want to leave this group?")) return;
