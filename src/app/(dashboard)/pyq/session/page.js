@@ -418,7 +418,7 @@ export default function PYQSessionPage() {
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : undefined;
-  const qType = currentQuestion?.question_type || "MCQ";
+  const qType = String(currentQuestion?.question_type || "MCQ").toUpperCase();
   const displayedQuestionNumber = currentIndex + 1;
   const hasNativeDiagram = hasNativeQuestionDiagram(currentQuestion);
   const answeredCount = useMemo(

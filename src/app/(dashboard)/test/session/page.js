@@ -233,7 +233,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         </div>
       )}
 
-      {activeQuestion.question_type === "Numerical" ? (
+      {String(activeQuestion.question_type || "").toUpperCase() === "NUMERICAL" ? (
         <div className="max-w-xl">
           <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
             Enter numerical answer
@@ -250,7 +250,9 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
       ) : (
       <div className="space-y-2">
         {activeQuestion.options.map((option, optionIndex) => {
-          const isMultipleCorrect = activeQuestion.question_type === "Multiple Correct";
+          const isMultipleCorrect =
+            String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE_CORRECT" ||
+            String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE CORRECT";
           const isSelected = isMultipleCorrect
             ? Array.isArray(selectedAnswer) && selectedAnswer.includes(optionIndex)
             : selectedAnswer === optionIndex;
@@ -453,7 +455,8 @@ function TestSessionContent() {
   // 5. Handlers
   const handleSelect = useCallback((question, optIdx) => {
     setAnswers((prev) => {
-      if (question.question_type !== "Multiple Correct") {
+      const qType = String(question.question_type || "").toUpperCase();
+      if (qType !== "MULTIPLE_CORRECT" && qType !== "MULTIPLE CORRECT") {
         return { ...prev, [question.id]: optIdx };
       }
 

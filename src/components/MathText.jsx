@@ -174,12 +174,25 @@ function normalizeDisplayMathDelimiters(value) {
     return match;
   });
 
-  // In JS string replacement, '$$$$' inserts '$$'
-  text = text.replace(/([^\n])\s*\$\$/g, "$1\n\n$$$$");
-  text = text.replace(/\$\$\s*([^\n\s$])/g, "$$$$\n$1");
-  text = text.replace(/([^\n\s$])\s*\$\$/g, "$1\n$$$$");
-  text = text.replace(/\$\$\s*([^\n])/g, "$$$$\n\n$1");
-  return text;
+  // If $$ is used inline inside text (e.g. "If $$math$$, then ..."), convert to clean inline $math$
+  text = text.replace(/([^\n])\s*\$\$([^\n]+?)\$\$\s*([^\n])/g, (match, before, math, after) => {
+    return `${before} $${math.trim()}$ ${after}`;
+  });
+
+  // For genuine standalone or multi-line $$...$$, format properly with single bounding newlines
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (match, inner) => {
+    const trimmed = inner.trim();
+    if (!trimmed) return "";
+    return `\n\n$$\n${trimmed}\n$$\n\n`;
+  });
+
+  // Clean trailing spaces before punctuation (e.g. "$math$ ," -> "$math$,")
+  text = text.replace(/\$\s+([,.\?!:])/g, "$$$1");
+
+  // Ensure no more than 2 consecutive newlines
+  text = text.replace(/\n{3,}/g, "\n\n");
+
+  return text.trim();
 }
 
 export default function MathText({ children, className = "" }) {
