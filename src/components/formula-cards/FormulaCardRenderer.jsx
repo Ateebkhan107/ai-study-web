@@ -194,6 +194,8 @@ function RecallSection({ card }) {
 }
 
 export default function FormulaCardRenderer({ card }) {
+  const isPhysicsCard = String(card?.chapter_id || "").includes("-physics-");
+
   return (
     <article className="relative min-h-[260px] sm:min-h-[300px] overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200/90 bg-[#FFFDF8] dark:border-stone-800/90 dark:bg-[#151515] shadow-sm dark:shadow-none">
       {/* Soft notebook guide lines */}
@@ -237,7 +239,7 @@ export default function FormulaCardRenderer({ card }) {
 
           <DataTable table={card.table_data} />
 
-          {card.diagram_data?.type && <MotionDiagram type={card.diagram_data.type} />}
+          {card.diagram_data?.type && <MotionDiagram type={card.diagram_data.type} compact={isPhysicsCard} />}
 
           <Variables variables={card.variables} />
           <Conditions conditions={card.conditions} />

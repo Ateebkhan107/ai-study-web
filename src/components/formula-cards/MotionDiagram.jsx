@@ -1,3 +1,7 @@
+import { createContext, useContext } from "react";
+
+const DiagramSizeContext = createContext({ compact: false });
+
 function Axis({ xLabel, yLabel }) {
   return (
     <>
@@ -19,16 +23,23 @@ function Axis({ xLabel, yLabel }) {
 }
 
 function DiagramFrame({ title, children }) {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+  const svgClassName = compact
+    ? "h-auto w-full max-w-[210px] sm:max-w-[230px] [&_text]:text-[10px] sm:[&_text]:text-[10.5px]"
+    : "h-auto w-full max-w-[260px] sm:max-w-[300px]";
+
   return (
-    <div className="rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20">
+    <div className={frameClassName}>
       {title && (
-        <div className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400">
+        <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
           {title}
         </div>
       )}
-      <div className="flex justify-center">
-        <svg viewBox="0 0 220 190" role="img" aria-label={title || "diagram"} className="h-auto w-full max-w-[260px] sm:max-w-[300px]">
-          <rect x="1" y="1" width="218" height="188" rx="8" className="fill-transparent stroke-slate-100 dark:stroke-stone-800/60" />
+      <div className="flex justify-center overflow-hidden">
+        <svg viewBox="0 0 220 190" role="img" aria-label={title || "diagram"} className={svgClassName}>
           {children}
         </svg>
       </div>
@@ -156,17 +167,17 @@ function ProjectileInclineDiagram() {
   return (
     <DiagramFrame title="projection on inclined plane">
       <DiagramDefs />
-      <line x1="32" y1="146" x2="186" y2="70" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <line x1="72" y1="126" x2="182" y2="126" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="2" />
-      <line x1="72" y1="126" x2="46" y2="72" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="2" />
-      <path d="M78 121 C94 90 128 80 164 66" fill="none" className="stroke-amber-500" strokeWidth="3" />
-      <Arrow x1="73" y1="125" x2="101" y2="72" label="u" labelX="104" labelY="76" />
-      <path d="M83 122 A26 26 0 0 1 101 105" fill="none" className="stroke-slate-500 dark:stroke-stone-400" />
-      <text x="93" y="116" className="fill-slate-700 text-[12px] dark:fill-stone-200">alpha</text>
-      <path d="M112 126 A42 42 0 0 0 151 88" fill="none" className="stroke-slate-500 dark:stroke-stone-400" />
-      <text x="123" y="116" className="fill-slate-700 text-[12px] dark:fill-stone-200">beta</text>
-      <Arrow x1="50" y1="138" x2="28" y2="160" label="x" labelX="23" labelY="174" />
-      <Arrow x1="54" y1="130" x2="38" y2="82" label="y" labelX="32" labelY="79" />
+      <line x1="34" y1="150" x2="180" y2="82" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
+      <line x1="78" y1="130" x2="176" y2="130" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="1.8" />
+      <line x1="78" y1="130" x2="56" y2="82" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="1.8" />
+      <path d="M80 128 C96 101 122 91 156 78" fill="none" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
+      <Arrow x1="78" y1="130" x2="101" y2="88" label="u" labelX="107" labelY="91" />
+      <path d="M89 125 A25 25 0 0 1 101 107" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="1.6" />
+      <text x="101" y="119" className="fill-slate-700 text-[11px] dark:fill-stone-200">alpha</text>
+      <path d="M118 130 A43 43 0 0 0 156 101" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="1.6" />
+      <text x="142" y="120" className="fill-slate-700 text-[11px] dark:fill-stone-200">beta</text>
+      <Arrow x1="68" y1="135" x2="40" y2="148" label="x" labelX="36" labelY="164" />
+      <Arrow x1="70" y1="126" x2="54" y2="90" label="y" labelX="47" labelY="82" />
     </DiagramFrame>
   );
 }
@@ -5333,7 +5344,8 @@ function BioConservationTypesDiagram() {
   );
 }
 
-export default function MotionDiagram({ type }) {
+export default function MotionDiagram({ type, compact = false }) {
+  const renderDiagram = () => {
   if (type === "xt") return <PositionTimeDiagram />;
   if (type === "vt") return <VelocityTimeDiagram />;
   if (type === "at") return <AccelerationTimeDiagram />;
@@ -5633,4 +5645,13 @@ export default function MotionDiagram({ type }) {
   if (type === "bio-evil-quartet") return <BioEvilQuartetDiagram />;
   if (type === "bio-conservation-types") return <BioConservationTypesDiagram />;
   return null;
+  };
+
+  return (
+    <DiagramSizeContext.Provider value={{ compact }}>
+      <div className={compact ? "mx-auto w-full max-w-[520px]" : undefined}>
+        {renderDiagram()}
+      </div>
+    </DiagramSizeContext.Provider>
+  );
 }
