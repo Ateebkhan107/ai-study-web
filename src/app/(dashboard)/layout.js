@@ -6,6 +6,7 @@ import { getActiveInstituteMemberships } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper"; 
 import { initUserLeaderboard } from "@/utils/leaderboard"; 
 import ProductTourManager from "@/components/tour/ProductTourManager"; 
+import ZiLauncher from "@/components/zi/ZiLauncher";
 
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();
@@ -56,6 +57,7 @@ export default async function DashboardLayout({ children }) {
         <Suspense fallback={null}>
           <ProductTourManager />
         </Suspense>
+        <ZiLauncher />
       </div>
     </div>
   );
