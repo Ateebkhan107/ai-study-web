@@ -4,18 +4,21 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 
-// Helper to safely split text into math tokens ($$...$$ and $...$) and non-math text
+// Helper to safely split text into math tokens ($$...$$ and $...$), markdown images/links, URLs, and non-math text
 function splitMathSegments(text) {
   if (!text) return [];
-  // Matches display math ($$...$$) or inline math ($...$)
-  const mathRegex = /(\$\$[\s\S]*?\$\$|\$[^\$]*?\$)/g;
+  // Matches display math ($$...$$), inline math ($...$), markdown images/links, or URLs
+  const mathRegex = /(\$\$[\s\S]*?\$\$|\$[^\$]*?\$|!\[[^\]]*\]\([^\)]*\)|https?:\/\/[^\s\)]+)/g;
   return String(text).split(mathRegex);
 }
 
-function isMathSegment(segment) {
+function isPreservedSegment(segment) {
   return (
     (segment.startsWith("$$") && segment.endsWith("$$") && segment.length >= 4) ||
-    (segment.startsWith("$") && segment.endsWith("$") && segment.length >= 2)
+    (segment.startsWith("$") && segment.endsWith("$") && segment.length >= 2) ||
+    (segment.startsWith("![") && segment.endsWith(")")) ||
+    segment.startsWith("http://") ||
+    segment.startsWith("https://")
   );
 }
 
@@ -82,6 +85,9 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/(^|[\.\:\n])\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
           s = s.replace(/(^|[\.\:\n])\s*\(([A-E])\)\s+/g, "$1\n\n**($2)** ");
 
+          // Roman numeral sub-statements (i), (ii), (iii), (iv), (v)
+          s = s.replace(/(^|[\.\:\n]|\band)\s*\(([i|v|x]+)\)\s+/gi, "$1\n\n**($2)** ");
+
           // Format instructions on distinct lines
           s = s.replace(/([^\n])\s*\n*\s*(In (?:the )?light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
           s = s.replace(/([^\n])\s*\n*\s*(?<!In (?:the )?light of the above statements,\s*)(Choose the (?:correct|most appropriate) answer[^\n:]*:?)/gi, (m, p1, p2) => {
@@ -90,6 +96,8 @@ function normalizeQuestionLayout(value) {
           });
           s = s.replace(/([^\n])\s*\n*\s*(From the statements given below\s*:?)/gi, "$1\n\n$2");
           s = s.replace(/([^\n])\s*\n*\s*(Given below are two statements\s*:?)/gi, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*\b(Identify the (?:correct|incorrect) statements?[^\n:]*:?)/g, "$1\n\n$2");
+          s = s.replace(/([^\n])\s*\n*\s*\b(The (?:correct|most likely|major|final) (?:name|structure|product|statement|order|value)[^\n:]*:?)/g, "$1\n\n$2");
 
           return s;
         })
@@ -105,7 +113,7 @@ function normalizeFlattenedTables(value) {
   text = splitMathSegments(text)
     .map((segment) => {
       if (!segment.includes("\u20d7")) return segment;
-      if (isMathSegment(segment)) {
+      if (isPreservedSegment(segment)) {
         const isDisplay = segment.startsWith("$$");
         const inner = isDisplay ? segment.slice(2, -2) : segment.slice(1, -1);
         const replaced = inner.replace(/([A-Za-z])\u20d7([₀-₉]*)/g, (_, letter, subscript) => {
@@ -139,8 +147,8 @@ function normalizeLegacyScientificNotation(value) {
 
   return splitMathSegments(value)
     .map((segment) => {
-      // PRESERVE ALL MATH SEGMENTS EXACTLY AS THEY ARE
-      if (isMathSegment(segment)) return segment;
+      // PRESERVE ALL MATH & IMAGE/LINK SEGMENTS EXACTLY AS THEY ARE
+      if (isPreservedSegment(segment)) return segment;
 
       let text = segment;
       // Only apply substitutions to genuine non-math prose
@@ -244,6 +252,14 @@ export default function MathText({ children, className = "" }) {
           ),
           ol: ({ children: content }) => (
             <ol className="my-3 list-decimal space-y-1.5 pl-6">{content}</ol>
+          ),
+          img: ({ src, alt }) => (
+            <img
+              src={src}
+              alt={alt || "Diagram"}
+              className="my-3 max-h-56 max-w-full rounded-xl border border-slate-200 object-contain p-2 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]"
+              loading="lazy"
+            />
           ),
         }}
       >

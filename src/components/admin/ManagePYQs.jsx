@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { BookOpen, Image as ImageIcon, Search, ChevronLeft, ChevronRight, X, CheckCircle2, XCircle, Upload, Save, ArrowRight } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css";
+import MathText from "@/components/MathText";
 
 export default function ManagePYQs() {
   // Filters
@@ -281,7 +278,7 @@ export default function ManagePYQs() {
               <div className="bg-gray-50 dark:bg-[var(--surface)]/50 p-4 sm:p-5 rounded-xl border dark:border-[var(--border-subtle)]">
                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Student Preview</h4>
                 <div className="prose dark:prose-invert max-w-none text-sm">
-                  <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{editingQuestion.question || "*No question text*"}</ReactMarkdown>
+                  <MathText>{editingQuestion.question || "*No question text*"}</MathText>
                   {editingQuestion.question_image && <img src={editingQuestion.question_image} alt="Q" className="max-h-48 rounded my-2 object-contain" />}
                   
                   {editingQuestion.question_type !== 'Numerical' && (
@@ -293,7 +290,7 @@ export default function ManagePYQs() {
                         return (
                           <div key={opt} className="p-3 border dark:border-[var(--border)] rounded-lg bg-[var(--card)] dark:bg-[#0A0D1A]">
                             <span className="font-bold mr-2 uppercase">{opt}.</span>
-                            {txt && <span className="inline"><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{txt}</ReactMarkdown></span>}
+                            {txt && <span className="inline"><MathText className="inline">{txt}</MathText></span>}
                             {img && <img src={img} alt={opt} className="max-h-24 rounded mt-2 object-contain" />}
                           </div>
                         )
