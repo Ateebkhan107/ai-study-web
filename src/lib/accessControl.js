@@ -46,7 +46,7 @@ export const FEATURE_ACCESS_MATRIX = {
   [FEATURES.ANALYTICS_ADVANCED]: { plan: "PRO", label: "Advanced Analytics" },
   [FEATURES.FORMULA_HANDBOOK]: { plan: "FREE", label: "Formula Handbook" },
   [FEATURES.AI_EXPLANATION]: { plan: "PRO", label: "AI Explanation" },
-  ZI_ACCESS: { plan: "PRO", label: "Zi AI Companion" },
+  ZI_ACCESS: { plan: "AI_MODE", label: "Zi AI Companion" },
   ZI_PREMIUM: { plan: "AI_MODE", label: "Premium AI Usage" },
   [FEATURES.INSTITUTE_WORKSPACE]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Workspace" },
   [FEATURES.INSTITUTE_ASSIGNED_TEST]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Assigned Test" },

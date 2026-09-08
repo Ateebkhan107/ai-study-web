@@ -17,7 +17,7 @@ export async function POST(request) {
     const { userId } = await auth();
     if (!userId) return jsonError("Unauthorized", 401);
     const access = await getUserAccessContext({ userId });
-    if (access.plan === "FREE") return jsonError("ZI_PRO_REQUIRED", 403);
+    if (!access.isAiMode) return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "Zi AI requires AI Mode." }, { status: 403 });
 
     let body;
     try {

@@ -225,7 +225,7 @@ export default function ZiLauncher({ plan }) {
     <>
       <ZiStartupGreeting
         displayName={greetingName}
-        disabled={!isLoaded || !isSignedIn || isOpen}
+        disabled={!isLoaded || !isSignedIn || isOpen || plan !== "AI_MODE"}
         onActiveChange={setIsStartupGreetingActive}
       />
 
@@ -258,7 +258,7 @@ export default function ZiLauncher({ plan }) {
         onSend={() => sendMessage(input)}
         onStop={stopGeneration}
         onSuggestionSelect={sendMessage}
-        isLocked={!plan || plan === "FREE"}
+        isLocked={plan !== "AI_MODE"}
         plan={plan}
       />
     </>

@@ -68,19 +68,20 @@ export default function ZiPanel({
               <Lock className="h-10 w-10" strokeWidth={2} />
             </div>
             <h2 className="mb-3 font-display text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-              Zi
+              AI Mode
             </h2>
+            <div className="mb-2 text-lg font-bold text-slate-800 dark:text-slate-200">
+              ₹2,000/month
+            </div>
             <p className="mb-8 text-[0.95rem] font-medium leading-relaxed text-slate-600 dark:text-slate-400">
-              Your personal AI study companion.
-              <br />
-              Available with PrepZii Pro.
+              Unlock Zi AI and the complete AI study companion experience.
             </p>
             <Link
               href="/pricing"
               onClick={onClose}
-              className="inline-flex h-12 w-full max-w-[200px] items-center justify-center rounded-xl bg-brand px-6 font-display text-lg font-bold text-white shadow-lg shadow-brand/25 transition-all hover:scale-105 active:scale-95"
+              className="inline-flex h-12 w-full max-w-[240px] items-center justify-center rounded-xl bg-brand px-6 font-display text-lg font-bold text-white shadow-lg shadow-brand/25 transition-all hover:scale-105 active:scale-95"
             >
-              Explore Pro
+              Upgrade to AI Mode
             </Link>
           </div>
         </div>

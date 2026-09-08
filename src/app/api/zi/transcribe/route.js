@@ -20,8 +20,8 @@ export async function POST(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const access = await getUserAccessContext({ userId });
-    if (access.plan === "FREE") {
-      return NextResponse.json({ error: "ZI_PRO_REQUIRED" }, { status: 403 });
+    if (!access.isAiMode) {
+      return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "Zi AI requires AI Mode." }, { status: 403 });
     }
 
   const { allowed, remaining, resetMs } = checkZiRateLimit(userId, access.plan);

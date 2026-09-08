@@ -19,8 +19,8 @@ export async function GET(request) {
     }
 
     const access = await getUserAccessContext({ userId });
-    if (access.plan === "FREE") {
-      return NextResponse.json({ error: "ZI_PRO_REQUIRED" }, { status: 403 });
+    if (!access.isAiMode) {
+      return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "Zi AI requires AI Mode." }, { status: 403 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -54,8 +54,8 @@ export async function POST(request) {
     }
 
     const access = await getUserAccessContext({ userId });
-    if (access.plan === "FREE") {
-      return NextResponse.json({ error: "ZI_PRO_REQUIRED" }, { status: 403 });
+    if (!access.isAiMode) {
+      return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "Zi AI requires AI Mode." }, { status: 403 });
     }
 
     const body = await request.json();
