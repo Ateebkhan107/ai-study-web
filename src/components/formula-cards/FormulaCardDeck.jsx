@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Bookmark, BookmarkCheck, CheckCircle2, ChevronLeft, ChevronRight, RotateCcw, Shuffle, Star } from "lucide-react";
 import FormulaCardRenderer from "./FormulaCardRenderer";
 import { markFormulaCardReviewed } from "./FormulaChapterProgress";
+import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 function shuffleCards(cards) {
   const next = [...cards];
@@ -28,6 +29,12 @@ export default function FormulaCardDeck({ cards, chapterId }) {
   const safeIndex = Math.min(currentIndex, Math.max(visibleCards.length - 1, 0));
   const currentCard = visibleCards[safeIndex];
   const isBookmarked = currentCard ? bookmarkedIds.has(currentCard.id) : false;
+
+  useRegisterZiEntity(
+    currentCard?.id
+      ? { type: "revision_card", id: currentCard.id }
+      : null
+  );
 
   useEffect(() => {
     if (!currentCard) return;

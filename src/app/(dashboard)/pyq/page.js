@@ -967,12 +967,18 @@ export default function PYQPage() {
         if (cancelled) return;
         applyPYQStats(overviewData, analyticsData);
       } catch (error) {
-        console.error("Failed loading PYQ stats:", error);
+        if (error.message !== "EXAM_TRACK_MISMATCH") {
+          console.error("Failed loading PYQ stats:", error);
+        }
         if (!cancelled) {
           setOverview(null);
           setPyqAnalytics(null);
           setAttemptedTotal(0);
-          setStatsError("Failed to load analytics. Please try again.");
+          setStatsError(
+            error.message === "EXAM_TRACK_MISMATCH"
+              ? error.info?.message || "Track mismatch."
+              : "Failed to load analytics. Please try again."
+          );
         }
       } finally {
         if (!cancelled) setStatsLoading(false);
@@ -993,11 +999,17 @@ export default function PYQPage() {
       ]);
       applyPYQStats(overviewData, analyticsData);
     } catch (error) {
-      console.error("Failed loading PYQ stats:", error);
+      if (error.message !== "EXAM_TRACK_MISMATCH") {
+        console.error("Failed loading PYQ stats:", error);
+      }
       setOverview(null);
       setPyqAnalytics(null);
       setAttemptedTotal(0);
-      setStatsError("Failed to load analytics. Please try again.");
+      setStatsError(
+        error.message === "EXAM_TRACK_MISMATCH"
+          ? error.info?.message || "Track mismatch."
+          : "Failed to load analytics. Please try again."
+      );
     } finally {
       setStatsLoading(false);
     }

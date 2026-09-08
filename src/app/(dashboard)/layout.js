@@ -2,11 +2,12 @@ import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
 import { ACCOUNT_TYPES, getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
-import { getActiveInstituteMemberships } from "@/lib/accessControl";
+import { getActiveInstituteMemberships, getUserAccessContext } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper"; 
 import { initUserLeaderboard } from "@/utils/leaderboard"; 
 import ProductTourManager from "@/components/tour/ProductTourManager"; 
 import ZiLauncher from "@/components/zi/ZiLauncher";
+import { ZiEntityContextProvider } from "@/lib/zi/ZiEntityContext";
 
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();
@@ -20,8 +21,10 @@ export default async function DashboardLayout({ children }) {
   }
 
   const email = user?.primaryEmailAddress?.emailAddress || "";
-  const [memberships] = await Promise.all([
+  const [memberships, accessContext] = await Promise.all([
+
     getActiveInstituteMemberships(userId, email),
+    getUserAccessContext({ userId, email }),
     initUserLeaderboard(userId, user?.firstName || "Student"),
   ]);
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
@@ -46,18 +49,23 @@ export default async function DashboardLayout({ children }) {
       </div>
 
       <div className="relative z-10">
-        {/* Passed control prop to conditionally unmount the text line */}
-        <Navbar
-          accountType={accountType}
-          institutes={activeInstitutes}
-        />
-        <TrackWrapper>
-          {children}
-        </TrackWrapper>
-        <Suspense fallback={null}>
-          <ProductTourManager />
-        </Suspense>
-        <ZiLauncher />
+        <ZiEntityContextProvider>
+          {/* Passed control prop to conditionally unmount the text line */}
+          <Navbar
+            accountType={accountType}
+            institutes={activeInstitutes}
+            plan={accessContext.plan}
+          />
+          <TrackWrapper>
+            {children}
+          </TrackWrapper>
+          <Suspense fallback={null}>
+            <ProductTourManager />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ZiLauncher plan={accessContext.plan} />
+          </Suspense>
+        </ZiEntityContextProvider>
       </div>
     </div>
   );

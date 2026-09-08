@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
 import { Lightbulb } from "lucide-react";
+import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 export default function ReviewPage() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function ReviewPage() {
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasReviewAccess, setHasReviewAccess] = useState(false);
 
   useEffect(() => {
     async function loadReview() {
@@ -27,8 +29,10 @@ export default function ReviewPage() {
 
         const data = await response.json();
         setAnswers(data.answers || []);
+        setHasReviewAccess(true);
       } catch (err) {
 //         console.log(err);
+        setHasReviewAccess(false);
       }
       setLoading(false);
     }
@@ -37,6 +41,12 @@ export default function ReviewPage() {
       loadReview();
     }
   }, [id]);
+
+  useRegisterZiEntity(
+    hasReviewAccess && id
+      ? { type: "test_result", id }
+      : null
+  );
 
   if (loading) {
     return (

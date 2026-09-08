@@ -13,6 +13,7 @@ import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 import MathText from "@/components/MathText";
 import QuestionDiagram from "@/components/pyq/QuestionDiagram";
 import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
+import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 import { AlertTriangle, BookOpen, FileText, Flag, Inbox, RotateCcw, Shuffle } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -404,8 +405,14 @@ export default function PYQSessionPage() {
           setMarkedQuestionIds(new Set());
         }
       } catch (error) {
-        console.error("Failed to load PYQ session:", error);
-        setLoadError("Failed to load questions. Please try again.");
+        if (error.message !== "EXAM_TRACK_MISMATCH") {
+          console.error("Failed to load PYQ session:", error);
+        }
+        setLoadError(
+          error.message === "EXAM_TRACK_MISMATCH"
+            ? error.info?.message || "Track mismatch."
+            : "Failed to load questions. Please try again."
+        );
       } finally {
         setLoading(false);
       }
@@ -430,6 +437,12 @@ export default function PYQSessionPage() {
   );
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
   const currentQuestionMarked = currentQuestion ? markedQuestionIds.has(currentQuestion.id) : false;
+
+  useRegisterZiEntity(
+    currentQuestion?.id
+      ? { type: "pyq_question", id: currentQuestion.id }
+      : null
+  );
 
   useEffect(() => {
     if (typeof window === "undefined" || questions.length === 0) return;

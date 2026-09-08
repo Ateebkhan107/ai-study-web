@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Inbox, Lightbulb } from "lucide-react";
+import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 export default function ResultPage() {
   const { id } = useParams();
@@ -69,6 +70,12 @@ export default function ResultPage() {
       clearTimeout(t2);
     };
   }, [attempt]);
+
+  useRegisterZiEntity(
+    attempt?.id
+      ? { type: "test_result", id: attempt.id }
+      : null
+  );
 
   // ── Loading State ──
   if (loading) {

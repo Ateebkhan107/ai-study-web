@@ -35,7 +35,7 @@ export default function PricingPage() {
 
         {/* Cards */}
 
-        <div className="grid lg:grid-cols-3 gap-8 mt-20">
+        <div className="grid lg:grid-cols-4 gap-8 mt-20">
 
           <PricingCard
             title="Monthly"
@@ -63,7 +63,7 @@ export default function PricingPage() {
             duration="3 months"
             plan="quarterly"
             examTrack={examTrack}
-            popular={true}
+            
             features={[
               "Everything in Monthly",
               "Save ₹370 from the original price",
@@ -83,6 +83,27 @@ export default function PricingPage() {
               "Everything in Quarterly",
               "Save ₹1,400 from the original price",
               "12 months of Pro access",
+            ]}
+          />
+
+
+          <PricingCard
+            title="AI Mode"
+            price={2000}
+            originalPrice={2000}
+            discount={0}
+            duration="month"
+            plan="ai_mode"
+            examTrack={examTrack}
+            isAiMode={true}
+            features={[
+              "Everything in Pro",
+              "Full Zi AI companion",
+              "Higher AI usage limits",
+              "Voice interaction",
+              "Visual explanations",
+              "Personalized study memory",
+              "Personalized study plans",
             ]}
           />
 

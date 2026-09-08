@@ -17,8 +17,12 @@ const PLAN_DETAILS = {
     amount: 399,
     duration: 365,
   },
+  ai_mode: {
+    amount: 2000,
+    duration: 30,
+  },
 };
-const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
+const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 
 export async function POST(req) {
   try {
@@ -61,6 +65,7 @@ export async function POST(req) {
       .select("plan,status,expires_at")
       .eq("clerk_user_id", userId)
       .eq("exam_track", normalizedTrack)
+      .eq("plan", plan)
       .maybeSingle();
 
     if (subscriptionError) throw subscriptionError;

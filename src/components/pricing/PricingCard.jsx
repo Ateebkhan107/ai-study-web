@@ -15,6 +15,7 @@ export default function PricingCard({
   features = [],
   popular = false,
   examTrack = "JEE",
+  isAiMode = false,
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -44,12 +45,19 @@ export default function PricingCard({
   return (
     <div
       className={`relative rounded-3xl border p-8 shadow-sm transition hover:shadow-xl ${
-        popular
-          ? "border-blue-600 bg-blue-50"
+        isAiMode
+          ? "border-[#c49a45] bg-[#fffcf3] dark:bg-[#1a1712]"
+          : popular
+          ? "border-blue-600 bg-blue-50 dark:bg-blue-950/20"
           : "border-gray-200 bg-[var(--card)]"
       }`}
     >
-      {popular && (
+      {isAiMode && (
+        <span className="absolute right-6 top-6 rounded-full bg-[#c49a45] px-3 py-1 text-xs font-semibold text-white shadow-sm">
+          Premium
+        </span>
+      )}
+      {popular && !isAiMode && (
         <span className="absolute right-6 top-6 rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
           Most Popular
         </span>
@@ -85,7 +93,7 @@ export default function PricingCard({
       </ul>
 
       <div className="mt-6 rounded-2xl bg-blue-50 px-3 py-2 text-center text-sm font-bold text-[#1e3a5f]">
-        {examTrack} Pro
+        {isAiMode ? `${examTrack} AI Mode` : `${examTrack} Pro`}
       </div>
 
       <button
@@ -97,7 +105,7 @@ export default function PricingCard({
             : "bg-[#1e3a5f] hover:opacity-90"
         }`}
       >
-        {loading ? "Processing..." : `Upgrade or renew ${examTrack} Pro`}
+        {loading ? "Processing..." : `Upgrade or renew ${isAiMode ? examTrack + " AI Mode" : examTrack + " Pro"}`}
       </button>
 
       <p className="mt-3 text-center text-xs text-gray-500">

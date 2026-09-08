@@ -1,23 +1,25 @@
 import "server-only";
 
 const ZI_RATE_LIMIT = {
-  count: 20,
-  windowMs: 60 * 1000,
+  FREE: { count: 0, windowMs: 60 * 1000 },
+  PRO: { count: 50, windowMs: 60 * 1000 },
+  AI_MODE: { count: 200, windowMs: 60 * 1000 },
 };
 
 const store = globalThis.__prepziiZiRateLimitStore || new Map();
 globalThis.__prepziiZiRateLimitStore = store;
 
-export function checkZiRateLimit(userId) {
+export function checkZiRateLimit(userId, plan = "FREE") {
   if (!userId) {
-    return { allowed: false, remaining: 0, resetMs: ZI_RATE_LIMIT.windowMs };
+    return { allowed: false, remaining: 0, resetMs: 60 * 1000 };
   }
 
   const now = Date.now();
-  const windowStart = now - ZI_RATE_LIMIT.windowMs;
+  const limit = ZI_RATE_LIMIT[plan] || ZI_RATE_LIMIT.FREE;
+  const windowStart = now - limit.windowMs;
   const previousHits = store.get(userId) || [];
   const activeHits = previousHits.filter((timestamp) => timestamp > windowStart);
-  const allowed = activeHits.length < ZI_RATE_LIMIT.count;
+  const allowed = activeHits.length < limit.count;
 
   if (allowed) {
     activeHits.push(now);
@@ -29,8 +31,8 @@ export function checkZiRateLimit(userId) {
   const oldestHit = activeHits[0] || now;
   return {
     allowed,
-    remaining: Math.max(0, ZI_RATE_LIMIT.count - activeHits.length),
-    resetMs: Math.max(0, oldestHit + ZI_RATE_LIMIT.windowMs - now),
+    remaining: Math.max(0, limit.count - activeHits.length),
+    resetMs: Math.max(0, oldestHit + limit.windowMs - now),
   };
 }
 

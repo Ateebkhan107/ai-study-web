@@ -71,7 +71,7 @@ function getXpData(profile) {
   };
 }
 
-export default function ProfilePageClient({ initialProfile = null }) {
+export default function ProfilePageClient({ initialProfile = null, plan = "FREE" }) {
   const { user: clerkUser } = useUser();
   const { openUserProfile } = useClerk();
 
@@ -655,8 +655,56 @@ export default function ProfilePageClient({ initialProfile = null }) {
           </section>
         </div>
 
+        
+          
+
+
         {/* ── ACTIONS SIDEBAR ── */}
         <aside className="space-y-4 sm:space-y-5 animate-slideUp" style={{ animationDelay: "200ms" }}>
+          {/* ── CURRENT PLAN ── */}
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
+            <h3 className="text-sm sm:text-lg font-black font-display text-slate-950 dark:text-white tracking-tight">Current Plan</h3>
+            <div className="mt-3 sm:mt-5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className={`flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl shadow-sm ${
+                  plan === "AI_MODE" 
+                    ? "bg-gradient-to-br from-amber-400 to-yellow-500 text-amber-950 shadow-yellow-500/20"
+                    : plan === "PRO"
+                    ? "bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-orange-500/20"
+                    : "bg-slate-100 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-400 border border-slate-200 dark:border-[var(--border-subtle)]"
+                }`}>
+                  <Compass className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                    Active Subscription
+                  </p>
+                  <p className="font-display text-lg sm:text-xl font-black text-slate-900 dark:text-white">
+                    {plan === "AI_MODE" ? "AI MODE" : plan === "PRO" ? "PRO" : "Free"}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {(!plan || plan === "FREE") && (
+              <a
+                href="/pro"
+                className="mt-4 sm:mt-5 flex w-full items-center justify-center rounded-xl bg-indigo-50 px-4 py-2.5 text-sm font-bold text-indigo-600 transition-colors hover:bg-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:hover:bg-indigo-500/20"
+              >
+                Upgrade to Pro
+              </a>
+            )}
+            
+            {plan === "PRO" && (
+              <a
+                href="/pricing"
+                className="mt-4 sm:mt-5 flex w-full items-center justify-center rounded-xl bg-amber-50 px-4 py-2.5 text-sm font-bold text-amber-700 transition-colors hover:bg-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:hover:bg-amber-500/20"
+              >
+                Upgrade to AI Mode
+              </a>
+            )}
+          </div>
+
           <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
             <h3 className="text-sm sm:text-lg font-black font-display text-slate-950 dark:text-white tracking-tight">Profile Actions</h3>
             <p className="hidden sm:block mt-1.5 text-xs font-semibold leading-relaxed text-slate-500 dark:text-slate-400">
@@ -742,15 +790,7 @@ export default function ProfilePageClient({ initialProfile = null }) {
             </div>
           </div>
 
-          <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 sm:p-6 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] relative overflow-hidden">
-             <div className="absolute top-0 left-0 w-1 sm:w-1.5 h-full bg-brand" />
-            <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-              Student Summary
-            </p>
-            <p className="mt-1 sm:mt-2 text-xs sm:text-sm font-semibold leading-relaxed text-slate-700 dark:text-slate-300">
-              {activeUser.exam} focus for {activeUser.targetYear}. <span className="text-slate-950 dark:text-white font-black">{activeUser.pyqSolved || 0} PYQs</span> solved with <span className="text-emerald-600 dark:text-emerald-400 font-black">{activeUser.accuracy || 0}% accuracy</span>.
-            </p>
-          </div>
+          
         </aside>
       </div>
 

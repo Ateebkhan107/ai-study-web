@@ -18,6 +18,8 @@ export const FEATURES = {
   ANALYTICS_ADVANCED: "ANALYTICS_ADVANCED",
   FORMULA_HANDBOOK: "FORMULA_HANDBOOK",
   AI_EXPLANATION: "AI_EXPLANATION",
+  ZI_ACCESS: "ZI_ACCESS",
+  ZI_PREMIUM: "ZI_PREMIUM",
   INSTITUTE_WORKSPACE: "INSTITUTE_WORKSPACE",
   INSTITUTE_ASSIGNED_TEST: "INSTITUTE_ASSIGNED_TEST",
 };
@@ -44,6 +46,8 @@ export const FEATURE_ACCESS_MATRIX = {
   [FEATURES.ANALYTICS_ADVANCED]: { plan: "PRO", label: "Advanced Analytics" },
   [FEATURES.FORMULA_HANDBOOK]: { plan: "FREE", label: "Formula Handbook" },
   [FEATURES.AI_EXPLANATION]: { plan: "PRO", label: "AI Explanation" },
+  ZI_ACCESS: { plan: "PRO", label: "Zi AI Companion" },
+  ZI_PREMIUM: { plan: "AI_MODE", label: "Premium AI Usage" },
   [FEATURES.INSTITUTE_WORKSPACE]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Workspace" },
   [FEATURES.INSTITUTE_ASSIGNED_TEST]: { plan: "INSTITUTE_MEMBERSHIP", label: "Institute Assigned Test" },
 };
@@ -69,6 +73,30 @@ export function normalizeExamTrack(value) {
     .startsWith("NEET")
     ? EXAM_TRACKS.NEET
     : EXAM_TRACKS.JEE;
+}
+
+
+export async function getActiveSubscriptionsForUser(userId, examTrack) {
+  if (!userId) return [];
+  const normalizedTrack = examTrack ? normalizeExamTrack(examTrack) : null;
+  let query = supabaseAdmin
+    .from("subscriptions")
+    .select("*")
+    .eq("clerk_user_id", userId)
+    .eq("status", "active");
+
+  if (normalizedTrack) {
+    query = query.eq("exam_track", normalizedTrack);
+  }
+
+  const { data, error } = await query;
+  if (error) {
+    if (error.code === "42703" && normalizedTrack) {
+      return [];
+    }
+    throw error;
+  }
+  return data || [];
 }
 
 export async function getSubscriptionForUser(userId, examTrack) {
@@ -292,8 +320,12 @@ export async function getUserAccessContext({ userId, email, examTrack, clerkMeta
   ]);
 
   const activeExamTrack = normalizeExamTrack(examTrack || profileAccess.examTrack);
-  const subscription = await getSubscriptionForUser(userId, activeExamTrack);
-  const isPro = isSubscriptionActive(subscription);
+  const subscriptions = await getActiveSubscriptionsForUser(userId, activeExamTrack);
+  const activeSubs = subscriptions.filter(s => isSubscriptionActive(s));
+  const aiModeSub = activeSubs.find(s => s.plan === "ai_mode");
+  const isPro = activeSubs.length > 0;
+  const isAiMode = !!aiModeSub;
+  const subscription = activeSubs[0] || null;
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
   const accountType = clerkAccessMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
     profileAccess.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
@@ -303,7 +335,8 @@ export async function getUserAccessContext({ userId, email, examTrack, clerkMeta
 
   return {
     userId,
-    plan: isPro ? "PRO" : "FREE",
+    plan: isAiMode ? "AI_MODE" : isPro ? "PRO" : "FREE",
+    isAiMode,
     examTrack: activeExamTrack,
     accountType,
     isPro,
@@ -332,6 +365,11 @@ export function canUseFeature(access, feature, options = {}) {
     return access?.isPro
       ? { allowed: true }
       : { allowed: false, reason: "PRO_REQUIRED", upgradeUrl: "/pro" };
+  }
+  if (rule.plan === "AI_MODE") {
+    return access?.isAiMode
+      ? { allowed: true }
+      : { allowed: false, reason: "AI_MODE_REQUIRED", upgradeUrl: "/pro" };
   }
   if (rule.plan === "LIMITED_FREE") {
     if (access?.isPro) return { allowed: true, unlimited: true };

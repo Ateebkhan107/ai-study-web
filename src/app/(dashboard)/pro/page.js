@@ -31,6 +31,17 @@ const PRO_FEATURES = [
   { text: "Ad-free experience", hot: true },
 ];
 
+
+const AI_MODE_FEATURES = [
+  { text: "Everything included in Pro", hot: false },
+  { text: "Full Zi AI companion", hot: true },
+  { text: "Higher AI usage limits", hot: true },
+  { text: "Voice interaction", hot: true },
+  { text: "Visual explanations", hot: true },
+  { text: "Personalized study memory", hot: true },
+  { text: "Personalized study plans", hot: true },
+];
+
 const PLANS = [
   {
     id: "monthly",
@@ -65,9 +76,20 @@ const PLANS = [
     badge: "Best Value",
     savings: "Save ₹1,400",
   },
+  {
+    id: "ai_mode",
+    label: "AI Mode",
+    price: 2000,
+    originalPrice: 2000,
+    discount: 0,
+    per: "month",
+    total: 2000,
+    badge: "Premium AI",
+    savings: null,
+  },
 ];
 
-const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
+const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 
 const FAQS = [
   {
@@ -167,7 +189,7 @@ export default function ProPage() {
       {/* ── Plan Selector ── */}
       <section className="flex flex-col items-center gap-5 animate-slideUp sm:gap-8" style={{ animationDelay: "75ms" }}>
         {/* Toggle */}
-        <div className="grid w-full max-w-md grid-cols-3 items-stretch gap-1 rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-1.5 backdrop-blur-xl dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:inline-flex sm:w-auto">
+        <div className="grid w-full max-w-2xl grid-cols-2 md:grid-cols-4 items-stretch gap-1 rounded-2xl border border-slate-200/60 bg-[var(--card)]/70 p-1.5 backdrop-blur-xl dark:border-[var(--border)]/50 dark:bg-[var(--surface)]/60 sm:inline-flex sm:w-auto">
           {PLANS.map((p) => (
             <button
               key={p.id}
@@ -229,7 +251,7 @@ export default function ProPage() {
         {/* CTA */}
         <button
           onClick={handleSubscribe}
-          disabled={loading || currentPlan === "yearly"}
+          disabled={loading || (currentPlan && PLAN_RANK[plan.id] <= PLAN_RANK[currentPlan])}
           className="group w-full max-w-sm py-4 rounded-2xl bg-amber-500 text-white text-base font-black hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/25 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           {loading ? (
@@ -302,10 +324,10 @@ export default function ProPage() {
             <div className="relative">
               <div className="mb-5">
                 <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
-                  Pro includes
+                  {selectedPlan === "ai_mode" ? "AI Mode includes" : "Pro includes"}
                 </span>
                 <h3 className="text-xl font-black font-display text-white mt-1 flex items-center gap-2">
-                  {selectedTrack} PRO
+                  {selectedTrack} {selectedPlan === "ai_mode" ? "AI MODE" : "PRO"}
                   <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--card)]/15 text-white/80 backdrop-blur-sm">
                     All features
                   </span>
@@ -325,7 +347,7 @@ export default function ProPage() {
               </div>
 
               <div className="space-y-3">
-                {PRO_FEATURES.map((f) => (
+                {(selectedPlan === "ai_mode" ? AI_MODE_FEATURES : PRO_FEATURES).map((f) => (
                   <div key={f.text} className="flex items-start gap-3">
                     <div className={`w-5 h-5 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ${
                       f.hot ? "bg-amber-400/20" : "bg-[var(--card)]/10"
@@ -437,7 +459,7 @@ export default function ProPage() {
               disabled={loading || currentPlan === "yearly"}
               className="group inline-flex max-w-full items-center justify-center gap-2 rounded-2xl bg-[var(--card)] px-5 py-3 text-sm font-black text-indigo-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-white/20 disabled:opacity-50 sm:px-8 sm:py-3.5"
             >
-              {loading ? "Processing..." : currentPlan === "yearly" ? "Yearly plan active" : currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
+              {loading ? "Processing..." : (currentPlan && PLAN_RANK[plan.id] <= PLAN_RANK[currentPlan]) ? "Plan already active" : currentPlan ? `Upgrade to ${plan.label} • ₹${plan.total}` : `Get ${selectedTrack} Pro • ₹${plan.total}`}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>

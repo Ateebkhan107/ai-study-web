@@ -33,6 +33,7 @@ const navItems = [
 const PREFETCHED_NAV_HREFS = new Set(["/dashboard", "/test", "/pyq", "/community", "/analytics"]);
 
 export default function Navbar({
+  plan,
   accountType = "STUDENT",
   institutes = [],
   isPro = false,
@@ -216,7 +217,7 @@ export default function Navbar({
           </div>
 
           <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
-            <ProfileMenu />
+            <ProfileMenu plan={plan} />
           </div>
 
           <button

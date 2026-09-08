@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
 import { useQuestionImagePreload } from "@/hooks/useQuestionImagePreload";
 import MathText from "@/components/MathText";
+import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 const LETTERS = ["A", "B", "C", "D"];
 const REVIEW_STORAGE_PREFIX = "prepzii:test-session:marked-for-review:";
@@ -547,6 +548,12 @@ function TestSessionContent() {
   const activeQ = questions[currentIdx];
   const answeredCount = Object.values(answers).filter(hasAnswer).length;
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
+
+  useRegisterZiEntity(
+    activeQ?.id
+      ? { type: "test_question", id: activeQ.id }
+      : null
+  );
 
   if (!exam) {
     return (

@@ -22,8 +22,10 @@ export async function fetchJsonCached(url, options = {}) {
   const request = fetch(url, fetchOptions)
     .then(async (response) => {
       if (!response.ok) {
-        const error = await response.json().catch(() => ({}));
-        throw new Error(error.error || `Request failed: ${response.status}`);
+        const errorBody = await response.json().catch(() => ({}));
+        const error = new Error(errorBody.error || `Request failed: ${response.status}`);
+        error.info = errorBody;
+        throw error;
       }
 
       const data = await response.json();

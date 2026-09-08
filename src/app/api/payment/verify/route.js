@@ -5,9 +5,9 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
 import { getRazorpayOrder, getRazorpayPayment } from "@/lib/razorpay";
 
-const PLAN_DURATION = { monthly: 30, quarterly: 90, yearly: 365 };
-const PLAN_AMOUNT = { monthly: 49, quarterly: 129, yearly: 399 };
-const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3 };
+const PLAN_DURATION = { monthly: 30, quarterly: 90, yearly: 365, ai_mode: 30 };
+const PLAN_AMOUNT = { monthly: 49, quarterly: 129, yearly: 399, ai_mode: 2000 };
+const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 
 export async function POST(req) {
   try {
@@ -67,6 +67,7 @@ export async function POST(req) {
       .select("plan,status,expires_at,razorpay_order_id")
       .eq("clerk_user_id", userId)
       .eq("exam_track", orderTrack)
+      .eq("plan", plan)
       .maybeSingle();
 
     if (subscriptionError) throw subscriptionError;
@@ -108,7 +109,7 @@ export async function POST(req) {
       starts_at: startsAt,
       expires_at: expiresAt,
       updated_at: new Date(),
-    }, { onConflict: "clerk_user_id,exam_track" });
+    }, { onConflict: "clerk_user_id,exam_track,plan" });
 
     if (error) throw error;
 

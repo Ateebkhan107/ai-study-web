@@ -15,7 +15,7 @@ function getTierColor(title) {
   return "border-orange-400/80 dark:border-orange-700/80 shadow-[0_0_10px_rgba(249,115,22,0.2)]";
 }
 
-export default function ProfileMenu() {
+export default function ProfileMenu({ plan }) {
   const { user } = useUser();
   const [xp, setXp] = useState(0);
 
@@ -38,7 +38,26 @@ export default function ProfileMenu() {
   const levelStats = getLevelFromXP(xp);
   const ringClass = getTierColor(levelStats.title);
 
+
+  const renderBadge = () => {
+    if (!plan || plan === "FREE") return null;
+
+    const isAiMode = plan === "AI_MODE";
+    return (
+      <span
+        className={`absolute -bottom-1 -right-4 md:-right-6 z-10 flex h-4 items-center justify-center whitespace-nowrap rounded-full px-1.5 text-[8px] sm:text-[9px] font-black tracking-wider shadow-sm backdrop-blur-md ${
+          isAiMode
+            ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950 shadow-yellow-500/30"
+            : "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-orange-500/20"
+        }`}
+      >
+        {isAiMode ? "AI MODE" : "PRO"}
+      </span>
+    );
+  };
+
   return (
+    <div className="relative inline-flex items-center">
     <div className={`relative flex items-center justify-center rounded-full border-[2.5px] p-0.5 ${ringClass}`}>
       <UserButton
         userProfileMode="navigation"
@@ -51,6 +70,8 @@ export default function ProfileMenu() {
           },
         }}
       />
+    </div>
+      {renderBadge()}
     </div>
   );
 }
