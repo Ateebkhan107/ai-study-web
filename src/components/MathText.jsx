@@ -139,6 +139,29 @@ function normalizeFlattenedTables(value) {
   return text;
 }
 
+function sanitizeListsAndMarkdownSymbols(value) {
+  let text = String(value ?? "");
+
+  // Prevent leading +/- signs (like -I effect, +R effect, -5 V) from becoming markdown unordered lists
+  text = splitMathSegments(text)
+    .map((segment) => {
+      if (isPreservedSegment(segment)) return segment;
+      let s = segment;
+      // Convert "+ I effect", "- I effect", "+ R effect", "- R effect" etc. to math mode
+      s = s.replace(/(^|[\s\(\[\{])([+-])\s*([IRMEH]|Inductive|Resonance|Mesomeric|Electromeric)\s+effect\b/gi, (match, prefix, sign, effect) => {
+        return `${prefix}$${sign}${effect}\\text{ effect}$`;
+      });
+      // Convert leading "+ " or "- " at the very start of string/line to escaped "\+ " or "\- "
+      s = s.replace(/(^|\n)\s*([+-])\s+(?=[0-9A-Za-z\$\\\(])/g, "$1\\$2 ");
+      // Clean stray bullet symbols at start of lines
+      s = s.replace(/(^|\n)\s*[•·]\s*(?=[0-9A-Za-z\$\\\(])/g, "$1");
+      return s;
+    })
+    .join("");
+
+  return text;
+}
+
 function normalizeLegacyScientificNotation(value) {
   const symbols = {
     "π": "\\pi", "μ": "\\mu", "Δ": "\\Delta", "Ω": "\\Omega",
@@ -151,14 +174,34 @@ function normalizeLegacyScientificNotation(value) {
       if (isPreservedSegment(segment)) return segment;
 
       let text = segment;
-      // Only apply substitutions to genuine non-math prose
-      text = text.replace(/\b([a-z])\s*([2-9]|\d{2,3})\b/g, (_, variable, power) => `$${variable}^{${power}}$`);
-      text = text.replace(/\b([a-z])_([0-9]+)\b/g, (_, variable, subscript) => `$${variable}_{${subscript}}$`);
+      // Only apply substitutions to genuine non-math variables (excluding English articles 'a' and 'I')
+      text = text.replace(/\b([b-hj-z])\s*([2-9]|\d{2,3})\b/g, (_, variable, power) => `$${variable}^{${power}}$`);
+      text = text.replace(/\b([b-hj-z])_([0-9]+)\b/g, (_, variable, subscript) => `$${variable}_{${subscript}}$`);
       text = text.replace(/\bd([1-6])sp([1-6])\b/gi, (_, first, second) => `$d^{${first}}sp^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])d([1-6])\b/gi, (_, prefix, first, second) => `$${prefix}^{${first}}d^{${second}}$`);
       text = text.replace(/\b(sp|dsp|d)([1-6])\b/gi, (_, prefix, power) => `$${prefix}^{${power}}$`);
-      text = text.replace(/\b(XeF|XeO|XeOF|H|O|N|CO|SO|NO|NH|CH|CrO|FADH)\s*([2-9])\b/g, (_, formula, subscript) => `$\\mathrm{${formula}_${subscript}}$`);
-      // Only match 10^-N when explicitly formatted as exponent (e.g. 10^-3 or 10⁻³), never ranges like "10 - 15"
+
+      // Common spaced chemical formulas: CO 2, H 2O, CaCl 2, KO 2, etc.
+      text = text.replace(/\b(XeF|XeO|XeOF|H|O|N|CO|SO|NO|NH|CH|CrO|FADH|CaCl|MgCl|NaCl|BaO|Fe|Cu|KO|SiO|SnO|PbO)\s+([2-9])\b/g, (_, formula, subscript) => `$\\mathrm{${formula}_${subscript}}$`);
+      text = text.replace(/\b(XeF|XeO|XeOF|H|O|N|CO|SO|NO|NH|CH|CrO|FADH|KO|SiO|SnO|PbO)\s*([2-9])\b/g, (_, formula, subscript) => `$\\mathrm{${formula}_${subscript}}$`);
+
+      // Negative exponents & units like 10 -3 s-1, 10-7 C, 10 2V, 10 4V
+      text = text.replace(/\b10\s*-\s*([1-9]\d*)\s*(s-1|s\s*-\s*1|m-1|m\s*-\s*1|mol-1|mol\s*-\s*1|rad|N\/C|C|M|V|T|cm)?\b/g, (_, power, unit) => {
+        return `$10^{-${power}}${unit ? `\\text{ ${unit.replace(/\s+/g, "")}}` : ""}$`;
+      });
+      text = text.replace(/\b10\s+([2-9])\s*V\b/g, (_, power) => `$10^{${power}}\\text{ V}$`);
+
+      // Units with negative powers like g mol -1, kg mol -1, m s -1, ms -1, ms -2, kg/m3, rad s-1
+      text = text.replace(/\b(g|kg|J|kJ|cal|kcal)\s+mol\s*-\s*1\b/gi, (_, mass) => `$\\text{${mass} mol}^{-1}$`);
+      text = text.replace(/\b(m\s+s|ms)\s*-\s*1\b/gi, "$\\text{m s}^{-1}$");
+      text = text.replace(/\b(m\s+s|ms)\s*-\s*2\b/gi, "$\\text{m s}^{-2}$");
+      text = text.replace(/\brad\s*s\s*-\s*1\b/gi, "$\\text{rad s}^{-1}$");
+      text = text.replace(/\brad\s*s\s*-\s*2\b/gi, "$\\text{rad s}^{-2}$");
+      text = text.replace(/\bV\s+m\s*-\s*1\b/gi, "$\\text{V m}^{-1}$");
+      text = text.replace(/\bkg\/m3\b/gi, "$\\text{kg/m}^3$");
+      text = text.replace(/\bg\s*cm\s*-\s*3\b/gi, "$\\text{g cm}^{-3}$");
+
+      // Exponents formatted as 10^-N or 10⁻³
       text = text.replace(/\b10\s*\^\s*[-−]?\s*([1-9]\d*)\b/g, (_, power) => `$10^{-${power}}$`);
       text = text.replace(/\b10[⁻]([¹²³⁴⁵⁶⁷⁸⁹0-9]+)\b/g, (_, p) => {
         const digits = p.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(d));
@@ -207,7 +250,11 @@ export default function MathText({ children, className = "" }) {
   const preparedText = normalizeDisplayMathDelimiters(
     normalizeQuestionLayout(
       normalizeLegacyScientificNotation(
-        normalizeFlattenedTables(normalizeBlankPlaceholders(children))
+        normalizeFlattenedTables(
+          normalizeBlankPlaceholders(
+            sanitizeListsAndMarkdownSymbols(children)
+          )
+        )
       )
     )
   );
