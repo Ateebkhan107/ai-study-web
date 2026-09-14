@@ -875,9 +875,20 @@ export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
   const router = useRouter();
-  const [track, setTrack] = useState(() => getCookieTrack());
+  const [track, setTrack] = useState("jee");
   const [access, setAccess] = useState(null);
   const [, setAccessLoading] = useState(true);
+
+  useEffect(() => {
+    async function syncTrack() {
+      await Promise.resolve();
+      const cookieTrack = getCookieTrack();
+      if (cookieTrack && cookieTrack !== track) {
+        setTrack(cookieTrack);
+      }
+    }
+    syncTrack();
+  }, [track]);
 
   useEffect(() => {
     let cancelled = false;
