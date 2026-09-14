@@ -69,7 +69,7 @@ export default function Leaderboard({ compact = false }) {
   }, [compact, currentUser?.id]);
 
   return (
-    <div className={`relative bg-white dark:bg-[var(--surface)] rounded-xl border border-slate-200 dark:border-[var(--border-subtle)] shadow-sm transition-colors duration-200 ${
+    <div className={`relative bg-white dark:bg-[#141414] rounded-xl border border-slate-200 dark:border-[#2A2A2A] transition-colors duration-200 ${
       compact ? "p-4 sm:p-5" : "p-4 sm:p-6 lg:p-7"
     }`}>
       
@@ -103,7 +103,7 @@ export default function Leaderboard({ compact = false }) {
           </div>
         </div>
         {compact && (
-          <Link href="/analytics#leaderboard" className="shrink-0 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-hover dark:text-brand dark:hover:text-amber-400 transition-colors bg-brand/10 px-2.5 py-1.5 rounded-md">
+          <Link href="/analytics#leaderboard" className="shrink-0 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black transition-colors bg-[#F5C518] px-2.5 py-1.5 rounded-md">
             View full
           </Link>
         )}
@@ -148,12 +148,12 @@ export default function Leaderboard({ compact = false }) {
         )}
 
         {/* DOCKED "YOUR POSITION" */}
+        {/* DOCKED "YOUR POSITION" */}
         {currentUserData && (
-          <div className="mt-4 sm:mt-5 rounded-xl border border-indigo-200 dark:border-indigo-500/30 bg-indigo-50/30 dark:bg-indigo-950/20 shadow-[0_0_15px_rgba(99,102,241,0.08)] relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-100/50 dark:via-indigo-500/10 to-transparent -translate-x-full animate-shimmer" style={{ animationDelay: '1.5s' }} />
+          <div className="mt-4 sm:mt-5 rounded-xl border border-[#F5C518] bg-[#F5C518] relative overflow-hidden">
             
-            <div className="px-3 py-1.5 sm:py-2 border-b border-indigo-100 dark:border-indigo-500/20 bg-indigo-100/40 dark:bg-indigo-500/10 flex justify-center items-center">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-700 dark:text-indigo-400 shadow-sm">Your Position</span>
+            <div className="px-3 py-1.5 sm:py-2 border-b border-black/10 bg-black/5 flex justify-center items-center">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/80">Your Position</span>
             </div>
             
             <div className="relative bg-transparent">
@@ -176,31 +176,28 @@ function RankOneCard({ user, isCurrentUser, compact }) {
   const levelData = getLevelFromXP(user.xp);
   
   return (
-    <div className={`relative overflow-hidden rounded-xl border border-amber-200 dark:border-brand/30 bg-gradient-to-r from-amber-100 to-amber-50/50 dark:from-brand/20 dark:to-brand/5 shadow-sm ${compact ? "p-2.5 sm:p-4" : "p-4 sm:p-5"}`}>
-      
-      {/* SHIMMER ANIMATION */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent -translate-x-full animate-shimmer" style={{ animationDelay: '0s' }} />
+    <div className={`relative overflow-hidden rounded-xl border border-[#F5C518] bg-[#F5C518] shadow-none ${compact ? "p-2.5 sm:p-4" : "p-4 sm:p-5"}`}>
 
       <div className="relative z-10 flex items-center justify-between gap-3 sm:gap-4">
         
         {/* RANK INDICATOR */}
         <div className="flex shrink-0 items-center justify-center">
-          <div className={`flex items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-500 dark:from-brand dark:to-amber-600 text-white shadow-[0_4px_15px_rgba(234,179,8,0.4)] ${compact ? "w-11 h-11" : "w-12 h-12 sm:w-14 sm:h-14"}`}>
-            <Crown className={`${compact ? "w-5 h-5 sm:w-6 sm:h-6" : "w-6 h-6 sm:w-7 sm:h-7"} drop-shadow-md`} strokeWidth={2.5} />
+          <div className={`flex items-center justify-center rounded-full bg-black text-[#F5C518] ${compact ? "w-11 h-11" : "w-12 h-12 sm:w-14 sm:h-14"}`}>
+            <Crown className={`${compact ? "w-5 h-5 sm:w-6 sm:h-6" : "w-6 h-6 sm:w-7 sm:h-7"}`} strokeWidth={2.5} />
           </div>
         </div>
 
         {/* USER INFO */}
         <div className="min-w-0 flex-1 pl-1 sm:pl-2">
           <div className="flex items-center gap-2">
-            <h3 className={`${compact ? "text-sm sm:text-base" : "text-base sm:text-lg"} font-black tracking-tight text-slate-950 dark:text-white truncate`}>
+            <h3 className={`${compact ? "text-sm sm:text-base" : "text-base sm:text-lg"} font-black tracking-tight text-black truncate`}>
               {user.name || "Student"}
             </h3>
             {isCurrentUser && (
-              <span className="shrink-0 rounded bg-brand/20 dark:bg-brand/30 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900 dark:text-white">You</span>
+              <span className="shrink-0 rounded bg-black px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#F5C518]">You</span>
             )}
           </div>
-          <p className={`hidden sm:block ${compact ? "text-xs" : "text-sm"} mt-0.5 truncate font-semibold text-slate-600 dark:text-slate-300`}>
+          <p className={`hidden sm:block ${compact ? "text-xs" : "text-sm"} mt-0.5 truncate font-semibold text-black/80`}>
             {levelData.title} · Level {levelData.currentLevel}
           </p>
         </div>
@@ -208,12 +205,12 @@ function RankOneCard({ user, isCurrentUser, compact }) {
         {/* XP BADGE */}
         <div className="shrink-0 flex flex-col items-end pl-2">
           <div className="flex items-baseline gap-1">
-            <span className={`${compact ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl"} font-black tabular-nums tracking-tighter text-amber-600 dark:text-brand`}>
+            <span className={`${compact ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl"} font-black tabular-nums tracking-tighter text-black`}>
               <AnimatedNumber number={user.xp} />
             </span>
-            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-500 dark:text-brand/80">XP</span>
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-black/70">XP</span>
           </div>
-          <span className="hidden sm:inline-block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-amber-600 dark:text-brand mt-1">Leader</span>
+          <span className="hidden sm:inline-block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-black/70 mt-1">Leader</span>
         </div>
       </div>
     </div>
@@ -223,33 +220,39 @@ function RankOneCard({ user, isCurrentUser, compact }) {
 function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
   const levelData = getLevelFromXP(user.xp);
   
+  const isHighlightedRow = isCurrentUser || isDocked;
+
   // Rank indicator styles
   let rankIndicator = null;
   if (user.rank === 2) {
     rankIndicator = (
-      <div className={`flex items-center justify-center rounded-full bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-500 dark:to-slate-600 shadow-sm ${compact ? "w-8 h-8" : "w-9 h-9"}`}>
-        <span className="text-slate-800 dark:text-white font-black text-sm">2</span>
+      <div className={`flex items-center justify-center rounded-full bg-slate-300 dark:bg-[#333333] shadow-none ${compact ? "w-8 h-8" : "w-9 h-9"}`}>
+        <span className="text-black dark:text-white font-black text-sm">2</span>
       </div>
     );
   } else if (user.rank === 3) {
     rankIndicator = (
-      <div className={`flex items-center justify-center rounded-full bg-gradient-to-br from-orange-300/80 to-orange-400/80 dark:from-orange-700/80 dark:to-orange-900/80 shadow-sm ${compact ? "w-7 h-7" : "w-8 h-8"}`}>
-        <span className="text-orange-950 dark:text-orange-50 font-black text-sm">3</span>
+      <div className={`flex items-center justify-center rounded-full bg-orange-300 dark:bg-orange-800 shadow-none ${compact ? "w-7 h-7" : "w-8 h-8"}`}>
+        <span className="text-black dark:text-white font-black text-sm">3</span>
       </div>
     );
   } else {
     rankIndicator = (
-      <div className={`flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[var(--surface-elevated)] ${compact ? "w-6 h-6" : "w-7 h-7"}`}>
-        <span className="text-slate-400 dark:text-slate-500 font-bold text-[10px] sm:text-xs">{user.rank}</span>
+      <div className={`flex items-center justify-center rounded-md border ${
+        isHighlightedRow 
+          ? "border-black/20 bg-black/10 text-black" 
+          : "border-slate-200 dark:border-[#2A2A2A] bg-slate-50 dark:bg-[#1A1A1A] text-slate-400 dark:text-slate-500"
+      } ${compact ? "w-6 h-6" : "w-7 h-7"}`}>
+        <span className="font-bold text-[10px] sm:text-xs">{user.rank}</span>
       </div>
     );
   }
 
   return (
     <div className={`group relative flex items-center justify-between transition-colors duration-150 ${
-      transparent ? "" : "border-t border-slate-200 dark:border-[var(--border-subtle)] first:border-t-0 hover:bg-slate-50/80 dark:hover:bg-[var(--surface-elevated)]/55"
+      transparent ? "" : "border-t border-slate-200 dark:border-[#2A2A2A] first:border-t-0 hover:bg-slate-50 dark:hover:bg-[#1F1F1F]"
     } ${
-      isCurrentUser && !isDocked ? "bg-indigo-50/40 dark:bg-indigo-500/5" : ""
+      isCurrentUser && !isDocked ? "bg-[#F5C518] dark:bg-[#F5C518]" : ""
     } ${compact ? "px-3 py-3 sm:px-4 sm:py-3" : "px-4 py-3 sm:px-5 sm:py-4"}`}>
       
       {/* LEFT SIDE */}
@@ -263,14 +266,18 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
         {/* USER INFO */}
         <div className="min-w-0 flex-1 pl-1">
           <div className="flex items-center gap-2">
-            <h3 className={`${compact ? "text-sm" : "text-base"} truncate font-semibold tracking-normal text-slate-950 dark:text-white`}>
+            <h3 className={`${compact ? "text-sm" : "text-base"} truncate font-semibold tracking-normal ${
+              isHighlightedRow ? "text-black" : "text-slate-950 dark:text-white"
+            }`}>
               {user.name || "Student"}
             </h3>
             {isCurrentUser && !isDocked && (
-              <span className="shrink-0 rounded bg-indigo-100 dark:bg-indigo-500/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">You</span>
+              <span className="shrink-0 rounded bg-black px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#F5C518]">You</span>
             )}
           </div>
-          <p className={`hidden sm:block ${compact ? "text-[11px]" : "text-xs"} mt-0.5 truncate font-normal text-slate-500 dark:text-slate-400`}>
+          <p className={`hidden sm:block ${compact ? "text-[11px]" : "text-xs"} mt-0.5 truncate font-normal ${
+            isHighlightedRow ? "text-black/80" : "text-slate-500 dark:text-slate-400"
+          }`}>
             {levelData.title} · Level {levelData.currentLevel}
           </p>
         </div>
@@ -279,9 +286,11 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
       {/* RIGHT SIDE / XP */}
       <div className="z-10 shrink-0 pl-3">
         <div className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:py-1 rounded-full ${
-          isCurrentUser || isDocked
-            ? "bg-indigo-100/70 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400"
-            : "bg-slate-100 text-slate-700 dark:bg-slate-800/80 dark:text-slate-300"
+          isCurrentUser && !isDocked
+            ? "text-black"
+            : isDocked 
+              ? "bg-[#F5C518] text-black" 
+              : "bg-slate-100 text-slate-700 dark:bg-[#141414] dark:text-slate-300"
         }`}>
           <span className="font-bold tabular-nums text-sm sm:text-base">
             <AnimatedNumber number={user.xp} />

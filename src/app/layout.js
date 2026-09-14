@@ -192,6 +192,32 @@ const themeInitScript = `
     document.documentElement.classList.add("dark");
     document.documentElement.style.colorScheme = "dark";
   }
+
+  // Workaround for browser extensions (like Bitdefender/Norton) injecting attributes and causing React hydration errors.
+  if (typeof MutationObserver !== "undefined") {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "attributes" && mutation.attributeName === "bis_skin_checked") {
+          mutation.target.removeAttribute("bis_skin_checked");
+        }
+        if (mutation.type === "childList") {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1 && node.hasAttribute("bis_skin_checked")) {
+              node.removeAttribute("bis_skin_checked");
+            }
+          });
+        }
+      });
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      attributeFilter: ["bis_skin_checked", "data-new-gr-c-s-check-loaded", "data-gr-ext-installed"],
+    });
+
+    document.querySelectorAll("[bis_skin_checked]").forEach((el) => el.removeAttribute("bis_skin_checked"));
+  }
 })();
 `;
 

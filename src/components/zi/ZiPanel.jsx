@@ -112,7 +112,7 @@ export default function ZiPanel({
         role="dialog"
         aria-modal="true"
         aria-labelledby="zi-panel-title"
-        className={`zi-console-surface pointer-events-auto absolute bottom-0 right-0 z-10 flex h-[min(94dvh,calc(100dvh-0.5rem))] w-full max-w-full flex-col overflow-hidden rounded-t-[1.75rem] border border-brand/25 text-white shadow-[0_24px_90px_rgba(0,0,0,0.45),0_0_70px_rgba(234,179,8,0.16)] transition-transform duration-300 ease-out motion-reduce:transition-none sm:bottom-4 sm:right-4 sm:top-4 sm:h-auto sm:w-[min(460px,calc(100vw-2rem))] sm:rounded-[1.75rem] ${
+        className={`zi-console-surface pointer-events-auto absolute bottom-0 right-0 z-10 flex h-[min(94dvh,calc(100dvh-0.5rem))] w-full max-w-full flex-col overflow-hidden rounded-t-[1.75rem] border border-brand/20 text-slate-900 dark:text-white shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none sm:bottom-4 sm:right-4 sm:top-4 sm:h-auto sm:w-[min(460px,calc(100vw-2rem))] sm:rounded-[1.75rem] ${
           isOpen ? "zi-panel-reveal" : ""
         } ${panelTransformClass}`}
       >

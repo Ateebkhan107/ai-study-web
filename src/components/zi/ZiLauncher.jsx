@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useRef, useState } from "react";
-import ZiCoreOrb from "@/components/zi/ZiCoreOrb";
+import Logo from "@/components/Logo";
 import ZiPanel from "@/components/zi/ZiPanel";
 import ZiStartupGreeting from "@/components/zi/ZiStartupGreeting";
 import { useZiPageContext } from "@/lib/zi/pageContext";
@@ -232,16 +232,16 @@ export default function ZiLauncher({ plan }) {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className={`prepzii-interactive group fixed right-4 z-[55] inline-flex h-14 items-center gap-3 rounded-full border border-white/10 bg-[#0f0d09]/95 px-4 text-sm font-black text-white shadow-xl backdrop-blur-xl transition-transform hover:-translate-y-0.5 hover:border-white/20 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:bottom-[calc(8rem+env(safe-area-inset-bottom))] sm:right-7 ${
-          isOpen ? "pointer-events-none scale-95 opacity-0" : "opacity-100"
-        } bottom-[calc(9.5rem+env(safe-area-inset-bottom))]`}
+        className={`prepzii-interactive group fixed right-0 top-1/2 z-[55] flex -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-l-xl border-y border-l border-brand/20 bg-[var(--card)]/95 px-2 py-6 shadow-[0_0_40px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-transform hover:-translate-x-1 hover:border-brand/40 sm:px-2.5 ${
+          isOpen ? "translate-x-full opacity-0 pointer-events-none" : "translate-x-0 opacity-100"
+        }`}
         aria-label="Open Zi study companion"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >
-        <ZiCoreOrb size="sm" state={isStartupGreetingActive ? "speaking" : isGenerating ? "thinking" : "idle"} />
-        <span className="font-display text-lg tracking-normal">
-          Zi
+        <Logo size={20} showText={false} className="opacity-90 grayscale group-hover:grayscale-0 transition-all duration-300" />
+        <span className="font-display text-[10px] font-black uppercase tracking-[0.25em] text-slate-400 group-hover:text-brand transition-colors duration-300" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+          Zi Assistant
         </span>
       </button>
 

@@ -6,46 +6,46 @@ import SubjectVisual from "@/components/SubjectVisual";
 const SUBJECT_META = {
   Chemistry: { 
     icon: FlaskConical, 
-    color: "text-emerald-600 dark:text-emerald-400", 
-    border: "border-emerald-200/60 dark:border-emerald-500/20",
-    gradient: "from-emerald-50/80 to-transparent dark:from-emerald-900/10 dark:to-transparent",
-    hoverBorder: "hover:border-emerald-400/60 dark:hover:border-emerald-500/40",
-    hoverShadow: "hover:shadow-emerald-500/10"
+    color: "text-emerald-700 dark:text-emerald-400", 
+    border: "border-emerald-200 dark:border-[#2A2A2A]",
+    gradient: "",
+    hoverBorder: "hover:border-emerald-400 dark:hover:border-emerald-500",
+    hoverShadow: "hover:shadow-none"
   },
   Mathematics: { 
     icon: Calculator, 
-    color: "text-orange-600 dark:text-orange-400", 
-    border: "border-orange-200/60 dark:border-orange-500/20",
-    gradient: "from-orange-50/80 to-transparent dark:from-orange-900/10 dark:to-transparent",
-    hoverBorder: "hover:border-orange-400/60 dark:hover:border-orange-500/40",
-    hoverShadow: "hover:shadow-orange-500/10"
+    color: "text-orange-700 dark:text-orange-400", 
+    border: "border-orange-200 dark:border-[#2A2A2A]",
+    gradient: "",
+    hoverBorder: "hover:border-orange-400 dark:hover:border-orange-500",
+    hoverShadow: "hover:shadow-none"
   },
   Physics: { 
     icon: Atom,
-    color: "text-amber-600 dark:text-amber-400", 
-    border: "border-amber-200/60 dark:border-amber-500/20",
-    gradient: "from-amber-50/80 to-transparent dark:from-amber-900/10 dark:to-transparent",
-    hoverBorder: "hover:border-amber-400/60 dark:hover:border-amber-500/40",
-    hoverShadow: "hover:shadow-amber-500/10"
+    color: "text-amber-700 dark:text-amber-400", 
+    border: "border-amber-200 dark:border-[#2A2A2A]",
+    gradient: "",
+    hoverBorder: "hover:border-amber-400 dark:hover:border-amber-500",
+    hoverShadow: "hover:shadow-none"
   },
   Biology: { 
     icon: Dna, 
-    color: "text-rose-600 dark:text-rose-400", 
-    border: "border-rose-200/60 dark:border-rose-500/20",
-    gradient: "from-rose-50/80 to-transparent dark:from-rose-900/10 dark:to-transparent",
-    hoverBorder: "hover:border-rose-400/60 dark:hover:border-rose-500/40",
-    hoverShadow: "hover:shadow-rose-500/10"
+    color: "text-rose-700 dark:text-rose-400", 
+    border: "border-rose-200 dark:border-[#2A2A2A]",
+    gradient: "",
+    hoverBorder: "hover:border-rose-400 dark:hover:border-rose-500",
+    hoverShadow: "hover:shadow-none"
   },
 };
 
 function getMeta(subject) {
   return SUBJECT_META[subject] || { 
     icon: BookOpen, 
-    color: "text-blue-600 dark:text-blue-400", 
-    border: "border-blue-200/60 dark:border-blue-500/20",
-    gradient: "from-blue-50/80 to-transparent dark:from-blue-900/10 dark:to-transparent",
-    hoverBorder: "hover:border-blue-400/60 dark:hover:border-blue-500/40",
-    hoverShadow: "hover:shadow-blue-500/10"
+    color: "text-blue-700 dark:text-blue-400", 
+    border: "border-blue-200 dark:border-[#2A2A2A]",
+    gradient: "",
+    hoverBorder: "hover:border-blue-400 dark:hover:border-blue-500",
+    hoverShadow: "hover:shadow-none"
   };
 }
 
@@ -83,7 +83,7 @@ export default async function DashboardSection({ config, compact = false }) {
             return (
               <Link href={`/formula-cards/${book.subject.toLowerCase()}?exam=${book.stream}`} key={book.id} className="block group outline-none">
                 <div 
-                  className={`relative flex flex-col justify-between h-full overflow-hidden rounded-[20px] border bg-[var(--card)] bg-gradient-to-br ${meta.gradient} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-[var(--surface)] ${meta.border} ${meta.hoverBorder} ${meta.hoverShadow} ${
+                  className={`relative flex flex-col justify-between h-full overflow-hidden rounded-[20px] border bg-white dark:bg-[#141414] transition-all duration-300 hover:-translate-y-1 ${meta.border} ${meta.hoverBorder} ${meta.hoverShadow} ${
                     compact ? "min-h-[110px] sm:min-h-[110px]" : "min-h-[120px] sm:min-h-[130px]"
                   }`}
                 >
@@ -131,7 +131,7 @@ export default async function DashboardSection({ config, compact = false }) {
       )}
 
       {orderedFormulas.length === 0 && (
-        <div className="relative overflow-hidden bg-slate-50/50 dark:bg-[var(--surface)]/30 border border-dashed border-slate-300 dark:border-[var(--border)] rounded-2xl p-6 text-center flex flex-col items-center justify-center">
+        <div className="relative overflow-hidden bg-slate-50 border border-dashed border-slate-300 rounded-2xl p-6 text-center flex flex-col items-center justify-center dark:bg-[#1A1A1A] dark:border-[#2A2A2A]">
           <SubjectVisual
             subject={isNeet ? "Biology" : "Physics"}
             className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 text-slate-900 opacity-[0.035] dark:text-white dark:opacity-[0.055]"

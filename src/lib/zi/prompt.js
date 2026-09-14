@@ -86,11 +86,12 @@ __ZI_ACTION__={"type":"visual_explanation","visual":{"visualType":"comparison","
   - Allowed visualType values only: comparison, flow, timeline, process_steps, concept_map, simple_graph, labeled_diagram, data_table.
   - Visuals complement your short explanation. Do not replace all teaching with a visual.
   - Output semantic visual data only. Do NOT output HTML, JSX, SVG strings, CSS, JavaScript, Mermaid, iframes, image URLs, external URLs, slugs, or executable code.
-  - For simple_graph, provide numeric points only: {"x":-2,"y":4}. Do NOT provide functions, formulas to execute, or JavaScript expressions.
+  - Schema for simple_graph: Must include "xLabel", "yLabel", and EITHER "points" (array of {"x": number, "y": number, "label"?: string}) OR "graphKind" (one of: quadratic, linear, exponential, sine) with "params" (e.g. {"a": 1, "b": 0, "c": 0} for quadratic). Do NOT provide functions.
+  - Schema for labeled_diagram: Must include "diagramKind" (one of: radial, layered, horizontal, vertical), "centerLabel", and "labels" array. Each item in "labels" must have "label" and "position" (one of: center, outer, middle, left, right, top, bottom).
   - Keep visuals compact: around 2-8 rows/items/steps/nodes where possible.
   - If the requested visual needs a precise scientific illustration that this limited renderer cannot represent, answer with text instead of inventing a bad diagram.
   - Active-test and hidden-answer rules still apply. Never use a visual to reveal protected answers, solutions, marking keys, or correct options.
-  - Append this as the one __ZI_ACTION__ at the very end of your response. Do not combine it with another action in the same response.
+  - Append this as the one __ZI_ACTION__ at the very end of your response. Do not combine it with another action in the same response. If you want a visual AND a quiz, put the quiz inside the visual's interaction object IF compatible.
 
 9. For safe visual interactions (Phase 9B):
   - You may add an optional interaction object inside visual when it helps active recall.
@@ -100,10 +101,10 @@ __ZI_ACTION__={"type":"visual_explanation","visual":{"visualType":"comparison","
     * label_reveal: labeled_diagram
     * node_inspect: concept_map, flow
     * row_reveal: comparison, data_table
-    * quick_quiz: comparison, process_steps, concept_map, labeled_diagram, data_table
+    * quick_quiz: comparison, process_steps, concept_map, labeled_diagram, data_table (NOT compatible with simple_graph)
     * graph_parameter: simple_graph only
   - For node_inspect, add short semantic detail text either on flow nodes / concept branches or in interaction.details keyed by node id/label. Do not add callbacks or click logic.
-  - For quick_quiz, include at most 3 recall questions, 2-4 options, correctIndex, and a short explanation. This is only local recall practice, not a test.
+  - Schema for quick_quiz: interaction type must be "quick_quiz" and include a "questions" array. Each question must have "question" (string), "options" (array of 2-4 strings), "correctIndex" (integer 0-3), and "explanation" (string). This is only local recall practice, not a test.
   - For graph_parameter, use graphKind only from: quadratic, linear, exponential, sine. Include numeric params and numeric slider parameters only. Do NOT include function bodies, expressions, JavaScript, callbacks, URLs, or code.
   - Do NOT define onClick, onChange, callbacks, reducers, state machines, routes, tools, timers, scoring, XP, or analytics behavior.
   - During active unrevealed tests, avoid quick_quiz if it could expose the current correct answer or an answer-equivalent clue. Use general concept interactions only.

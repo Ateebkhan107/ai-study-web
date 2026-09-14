@@ -8,6 +8,7 @@ import { useRouter, usePathname } from "next/navigation";
 import MathText from "@/components/MathText";
 import ZiSpeakButton from "@/components/zi/ZiSpeakButton";
 import ZiVisual from "@/components/zi/ZiVisual";
+import Logo from "@/components/Logo";
 
 const ACTION_META = {
   dashboard: { label: "Open Dashboard", description: "Return to your main overview", route: "/dashboard" },
@@ -335,34 +336,29 @@ export default function ZiMessage({
       <div
         className={`text-sm leading-6 ${
           isUser
-            ? "max-w-[78%] rounded-2xl rounded-br-md border border-white/10 bg-white/[0.09] px-3.5 py-2.5 text-stone-100 shadow-lg shadow-black/10"
+            ? "max-w-[78%] rounded-2xl rounded-br-md border border-brand/20 bg-brand/10 px-3.5 py-2.5 text-slate-900 dark:text-white shadow-lg shadow-black/10"
             : isError
-            ? "max-w-[92%] rounded-2xl border border-red-300/40 bg-red-950/50 px-4 py-3 text-red-100"
-            : "zi-notebook-surface relative w-full rounded-[1.35rem] border border-amber-900/15 px-5 py-4 text-stone-900 shadow-[0_18px_42px_rgba(0,0,0,0.24)]"
+            ? "max-w-[92%] rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-red-700 dark:text-red-200"
+            : "relative w-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] px-5 py-4 text-slate-800 dark:text-slate-200 shadow-sm"
         }`}
       >
         {!isUser && !isError ? (
-          <div className="mb-3 flex items-center gap-2 border-b border-amber-900/10 pb-2 text-[0.66rem] font-black uppercase tracking-[0.16em] text-amber-700">
-            <BookOpen className="h-3.5 w-3.5" strokeWidth={2.4} />
-            <span>Zi study notebook</span>
+          <div className="mb-3 flex items-center gap-2 border-b border-[var(--border)] pb-2 text-[0.66rem] font-black uppercase tracking-[0.16em] text-brand">
+            <Logo size={16} showText={false} forceDark={false} />
+            <span>Zi Assistant</span>
           </div>
         ) : null}
         {isLoading ? (
-          <span className="inline-flex items-center gap-3 text-stone-700">
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-amber-500/40 bg-amber-100 text-amber-800">
-              <span className="absolute h-5 w-5 rounded-full border border-amber-500/50 motion-safe:animate-ping" aria-hidden="true" />
-              <BookOpen className="h-3.5 w-3.5" strokeWidth={2.4} />
+          <span className="inline-flex items-center gap-3 text-slate-700 dark:text-slate-300">
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand">
+              <span className="absolute h-5 w-5 rounded-full border border-brand/50 motion-safe:animate-ping" aria-hidden="true" />
+              <Logo size={16} showText={false} forceDark={false} />
             </span>
-            <span className="font-semibold">Zi is responding</span>
-            <span className="zi-voice-wave flex h-5 items-center gap-1 text-amber-700" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </span>
+            <span className="font-semibold text-sm">Zi is thinking...</span>
           </span>
         ) : (
           shouldRenderMarkdown ? (
-            <MathText className="zi-markdown text-sm leading-6 text-stone-800 [&_blockquote]:my-3 [&_blockquote]:rounded-r-xl [&_blockquote]:border-l-2 [&_blockquote]:border-amber-500 [&_blockquote]:bg-amber-100/45 [&_blockquote]:py-2 [&_blockquote]:pl-3 [&_code]:rounded [&_code]:bg-amber-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-[0.82rem] [&_h1]:mb-2 [&_h1]:mt-1 [&_h1]:font-display [&_h1]:text-xl [&_h1]:font-black [&_h2]:mb-2 [&_h2]:mt-3 [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-black [&_h3]:mb-1.5 [&_h3]:mt-3 [&_h3]:text-sm [&_h3]:font-black [&_li]:pl-0.5 [&_pre]:my-3 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-stone-950 [&_pre]:p-3 [&_pre]:text-stone-100 [&_pre_code]:bg-transparent [&_pre_code]:p-0">
+            <MathText className="zi-markdown text-sm leading-6 text-slate-800 dark:text-slate-200 [&_blockquote]:my-3 [&_blockquote]:rounded-r-xl [&_blockquote]:border-l-2 [&_blockquote]:border-brand [&_blockquote]:bg-brand/10 [&_blockquote]:py-2 [&_blockquote]:pl-3 [&_code]:rounded [&_code]:bg-[var(--surface-elevated)] [&_code]:text-brand [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-[0.82rem] [&_h1]:mb-2 [&_h1]:mt-1 [&_h1]:font-display [&_h1]:text-xl [&_h1]:font-black [&_h1]:text-slate-900 dark:[&_h1]:text-white [&_h2]:mb-2 [&_h2]:mt-3 [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-slate-900 dark:[&_h2]:text-white [&_h3]:mb-1.5 [&_h3]:mt-3 [&_h3]:text-sm [&_h3]:font-black [&_h3]:text-slate-900 dark:[&_h3]:text-white [&_li]:pl-0.5 [&_pre]:my-3 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-slate-100 dark:[&_pre]:bg-black/40 [&_pre]:border [&_pre]:border-[var(--border)] [&_pre]:p-3 [&_pre]:text-slate-800 dark:[&_pre]:text-slate-300 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit">
               {children}
             </MathText>
           ) : (

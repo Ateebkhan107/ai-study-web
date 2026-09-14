@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Mic, MicOff } from "lucide-react";
-import ZiCoreOrb from "@/components/zi/ZiCoreOrb";
 
 const MAX_RECORDING_MS = 45_000;
 const MAX_AUDIO_BYTES = 8 * 1024 * 1024;
@@ -431,21 +430,14 @@ export default function ZiVoiceInput({
         onClick={isListening ? stopListening : startListening}
         className={`prepzii-interactive group relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
           isListening
-            ? "border-brand/80 bg-brand/15 text-brand shadow-[0_0_24px_rgba(234,179,8,0.28)]"
+            ? "border-brand bg-brand/20 text-brand shadow-sm"
             : isTranscribing
             ? "border-brand/50 bg-brand/10 text-brand"
-            : "border-white/10 bg-white/5 text-stone-300 hover:border-brand/50 hover:text-brand"
+            : "border-[var(--border)] bg-[var(--surface-elevated)] text-slate-400 hover:border-brand/50 hover:bg-[var(--surface-hover)] hover:text-brand"
         } disabled:cursor-not-allowed disabled:opacity-50`}
         aria-label={isListening ? "Stop voice input" : "Start voice input"}
         title={isListening ? "Stop voice input" : "Start voice input"}
       >
-        <span className="absolute inset-0 flex items-center justify-center opacity-45 transition-opacity group-hover:opacity-70" aria-hidden="true">
-          <ZiCoreOrb
-            size="sm"
-            state={isListening ? "listening" : isTranscribing ? "thinking" : "idle"}
-            showRings={isListening || isTranscribing}
-          />
-        </span>
         {isListening ? (
           <MicOff className="relative z-10 h-4 w-4" strokeWidth={2.4} />
         ) : (

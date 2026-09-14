@@ -1,68 +1,68 @@
 const SUGGESTIONS_BY_PAGE = {
   dashboard: [
-    "What should I do here?",
-    "Help me start studying",
-    "Explain PrepZii features",
+    "What's my mission today?",
+    "Find my weakest chapter",
+    "Plan a quick revision",
   ],
   test: [
-    "Give me test strategy",
-    "How should I manage time?",
-    "Help me stay calm",
+    "Test-taking strategy",
+    "Time management tips",
+    "How to handle tough questions",
   ],
   pyq: [
-    "How should I approach PYQs?",
-    "Explain a concept",
-    "Give me a solving strategy",
+    "High-yield topics analysis",
+    "Explain tricky concepts",
+    "Problem solving frameworks",
   ],
   revision: [
-    "How should I revise effectively?",
-    "Quiz me",
-    "Explain a concept",
+    "Active recall practice",
+    "Quiz me on this",
+    "Simplify complex topics",
   ],
   analytics: [
-    "Help me understand Analytics",
-    "What metrics matter most?",
-    "How should I use this page?",
+    "Identify weak areas",
+    "Performance breakdown",
+    "How to improve accuracy",
   ],
   profile: [
-    "How should I use Profile?",
-    "Help me plan my next step",
-    "Explain what I can update here",
+    "Update my study goals",
+    "Adjust target exam",
+    "Change my prep track",
   ],
   community: [
-    "How should I use Community?",
-    "Help me ask a good doubt",
-    "How do I explain my problem?",
+    "How to ask good doubts",
+    "Explain my problem better",
+    "Find study partners",
   ],
   arena: [
-    "Give me battle strategy",
-    "How should I manage speed?",
-    "Help me stay focused",
+    "Speed vs accuracy strategy",
+    "How to stay focused",
+    "Handling exam pressure",
   ],
   unknown: [
-    "What can you help me with?",
-    "Explain something",
-    "Help me decide what to do next",
+    "Test my knowledge",
+    "Explain a concept",
+    "Help me plan",
   ],
 };
 
 const SUGGESTIONS_BY_ENTITY = {
   pyq_question: [
     "Give me a hint",
-    "Explain this question",
-    "Why is this option wrong?",
-    "Explain the concept",
+    "Break down this question",
+    "Why is my approach wrong?",
+    "Explain the core concept",
   ],
   revision_card: [
     "Explain this simply",
     "Quiz me from this",
     "Give me a memory trick",
-    "What should I remember?",
+    "What's the key takeaway?",
   ],
   test_question: [
     "Give me a hint",
     "Explain the concept",
-    "What is this question asking?",
+    "What is the catch here?",
     "Help me approach this",
   ],
   test_result: [
@@ -85,7 +85,7 @@ export default function ZiSuggestions({
     SUGGESTIONS_BY_PAGE.unknown;
 
   return (
-    <div className="border-t border-white/10 px-4 py-3 sm:px-5">
+    <div className="border-t border-[var(--border-subtle)] px-4 py-3 sm:px-5">
       <p className="sr-only">Suggested prompts</p>
       <div className="flex flex-wrap gap-2">
         {suggestions.map((suggestion) => (
@@ -94,7 +94,7 @@ export default function ZiSuggestions({
             type="button"
             onClick={() => onSelect(suggestion)}
             disabled={disabled}
-            className="prepzii-interactive rounded-full border border-brand/20 bg-brand/[0.08] px-3 py-1.5 text-xs font-bold text-amber-100/90 shadow-sm transition-colors hover:border-brand/60 hover:bg-brand/15 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+            className="prepzii-interactive rounded-full border border-brand/40 bg-brand/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand shadow-sm transition-colors hover:border-brand hover:bg-brand/20 hover:text-amber-900 dark:hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {suggestion}
           </button>
