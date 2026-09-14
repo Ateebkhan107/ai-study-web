@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -111,6 +111,7 @@ export function ProductTour({
   onDismiss,
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
   const [phase, setPhase] = useState(initialPhase);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -166,9 +167,14 @@ export function ProductTour({
   }, [currentStepIndex, phase, prefersReducedMotion]);
 
   const handleStartTour = useCallback(() => {
-    setPhase("tour");
-    setCurrentStepIndex(0);
-  }, []);
+    if (pathname !== "/dashboard") {
+      // Navigate to dashboard with ?tour=start; ProductTourManager will handle the rest on remount
+      router.push("/dashboard?tour=start");
+    } else {
+      setPhase("tour");
+      setCurrentStepIndex(0);
+    }
+  }, [pathname, router]);
 
   const handleNext = useCallback(() => {
     if (currentStepIndex < totalSteps - 1) {

@@ -28,8 +28,53 @@ const REVIEW_QUESTION_SELECT = `
 `;
 
 // ==========================================
-// RATING & ELO CALCULATIONS
+// MARKS & RANKING CALCULATIONS
 // ==========================================
+
+/**
+ * Threshold for "significantly different" Marks.
+ * If opponent's Marks differ by this amount or more, the reward/penalty adjusts.
+ */
+const MARKS_THRESHOLD = 100;
+
+/**
+ * Calculates Marks change for two players after a ranked battle.
+ * @param {number} marksA - Player A's current Marks
+ * @param {number} marksB - Player B's current Marks
+ * @param {"win"|"loss"|"draw"} resultForA - Result from Player A's perspective
+ * @returns {{ changeA: number, changeB: number, newMarksA: number, newMarksB: number }}
+ */
+export function calculateMarksChange(marksA = 1000, marksB = 1000, resultForA = "win") {
+  const ma = Math.max(0, Number(marksA) || 1000);
+  const mb = Math.max(0, Number(marksB) || 1000);
+  const diff = mb - ma; // positive = B is stronger, negative = A is stronger
+
+  let changeA = 0;
+  let changeB = 0;
+
+  if (resultForA === "draw") {
+    // No Marks change on draw
+    return { changeA: 0, changeB: 0, newMarksA: ma, newMarksB: mb };
+  }
+
+  if (resultForA === "win") {
+    // A wins
+    changeA = diff >= MARKS_THRESHOLD ? 30 : diff <= -MARKS_THRESHOLD ? 20 : 25;
+    // B loses — mirror penalty
+    changeB = diff >= MARKS_THRESHOLD ? -20 : diff <= -MARKS_THRESHOLD ? -30 : -25;
+  } else {
+    // A loses
+    changeA = diff >= MARKS_THRESHOLD ? -20 : diff <= -MARKS_THRESHOLD ? -30 : -25;
+    // B wins — mirror reward
+    changeB = diff >= MARKS_THRESHOLD ? 30 : diff <= -MARKS_THRESHOLD ? 20 : 25;
+  }
+
+  const newMarksA = Math.max(0, ma + changeA);
+  const newMarksB = Math.max(0, mb + changeB);
+
+  return { changeA, changeB, newMarksA, newMarksB };
+}
+
 
 export const ARENA_TIERS = [
   { name: "Bronze", key: "bronze", color: "#CD7F32", min: 0, max: 1099, icon: "shield" },
@@ -49,36 +94,6 @@ export function getRatingTier(rating = 1000) {
   );
 }
 
-/**
- * Calculates Elo rating change for two players.
- * @param {number} ratingA - Player A's current rating
- * @param {number} ratingB - Player B's current rating
- * @param {number} scoreA - 1 for A win, 0.5 for draw, 0 for A loss
- * @param {number} kFactor - K-factor (default 32)
- * @returns {{ changeA: number, changeB: number, newRatingA: number, newRatingB: number }}
- */
-export function calculateEloChange(ratingA = 1000, ratingB = 1000, scoreA = 1, kFactor = 32) {
-  const ra = Math.max(100, Number(ratingA) || 1000);
-  const rb = Math.max(100, Number(ratingB) || 1000);
-
-  const expectedA = 1 / (1 + Math.pow(10, (rb - ra) / 400));
-  const expectedB = 1 / (1 + Math.pow(10, (ra - rb) / 400));
-  const scoreB = 1 - scoreA;
-
-  let changeA = Math.round(kFactor * (scoreA - expectedA));
-  let changeB = Math.round(kFactor * (scoreB - expectedB));
-
-  // Minimum +/- 1 on definitive outcome to avoid static zero delta
-  if (scoreA === 1 && changeA <= 0) changeA = 1;
-  if (scoreA === 0 && changeA >= 0) changeA = -1;
-  if (scoreB === 1 && changeB <= 0) changeB = 1;
-  if (scoreB === 0 && changeB >= 0) changeB = -1;
-
-  const newRatingA = Math.max(100, ra + changeA);
-  const newRatingB = Math.max(100, rb + changeB);
-
-  return { changeA, changeB, newRatingA, newRatingB };
-}
 
 // ==========================================
 // SEASONS ARCHITECTURE
@@ -540,11 +555,11 @@ export async function finishBattleForUser({ battleId, userId }) {
     }
 
     const statsMap = new Map((statsRows || []).map((s) => [s.user_id, s]));
-    const ratingA = statsMap.get(pA.user_id)?.arena_rating ?? 1000;
-    const ratingB = statsMap.get(pB.user_id)?.arena_rating ?? 1000;
+    const marksA = statsMap.get(pA.user_id)?.arena_rating ?? 1000;
+    const marksB = statsMap.get(pB.user_id)?.arena_rating ?? 1000;
 
-    const scoreForA = isDraw ? 0.5 : pA.user_id === winnerUserId ? 1 : 0;
-    const { changeA, changeB, newRatingA, newRatingB } = calculateEloChange(ratingA, ratingB, scoreForA);
+    const resultForA = isDraw ? "draw" : pA.user_id === winnerUserId ? "win" : "loss";
+    const { changeA, changeB, newMarksA, newMarksB } = calculateMarksChange(marksA, marksB, resultForA);
 
     // Update match status and winner
     const { error: finishError } = await supabaseAdmin
@@ -557,13 +572,13 @@ export async function finishBattleForUser({ battleId, userId }) {
       .eq("id", battleId);
     if (finishError) throw finishError;
 
-    // Update match player rating deltas if columns exist
+    // Update match player Marks deltas if columns exist
     await Promise.all([
       supabaseAdmin
         .from("battle_players")
         .update({
-          rating_before: ratingA,
-          rating_after: newRatingA,
+          rating_before: marksA,
+          rating_after: newMarksA,
           rating_change: changeA,
         })
         .eq("battle_id", battleId)
@@ -571,8 +586,8 @@ export async function finishBattleForUser({ battleId, userId }) {
       supabaseAdmin
         .from("battle_players")
         .update({
-          rating_before: ratingB,
-          rating_after: newRatingB,
+          rating_before: marksB,
+          rating_after: newMarksB,
           rating_change: changeB,
         })
         .eq("battle_id", battleId)
@@ -619,8 +634,8 @@ export async function finishBattleForUser({ battleId, userId }) {
           });
         }
 
-        const tierBefore = getRatingTier(winner.user_id === pA.user_id ? ratingA : ratingB);
-        const tierAfter = getRatingTier(winner.user_id === pA.user_id ? newRatingA : newRatingB);
+        const tierBefore = getRatingTier(winner.user_id === pA.user_id ? marksA : marksB);
+        const tierAfter = getRatingTier(winner.user_id === pA.user_id ? newMarksA : newMarksB);
         if (tierAfter.min > tierBefore.min) {
           await recordBattleEvent({
             eventType: "tier_up",
@@ -682,7 +697,7 @@ async function updateBattleStats(userId, result, ratingChange = 0) {
     next.draws = (next.draws || 0) + 1;
   }
 
-  next.arena_rating = Math.max(100, (next.arena_rating || 1000) + ratingChange);
+  next.arena_rating = Math.max(0, (next.arena_rating || 1000) + ratingChange);
   next.peak_rating = Math.max(next.peak_rating || 1000, next.arena_rating);
 
   const payload = hasEloColumns
@@ -759,7 +774,7 @@ async function updateSeasonBattleStats(seasonId, userId, result, ratingChange = 
     next.draws += 1;
   }
 
-  next.arena_rating = Math.max(100, (next.arena_rating || 1000) + ratingChange);
+  next.arena_rating = Math.max(0, (next.arena_rating || 1000) + ratingChange);
   next.peak_rating = Math.max(next.peak_rating || 1000, next.arena_rating);
 
   const { error } = await supabaseAdmin

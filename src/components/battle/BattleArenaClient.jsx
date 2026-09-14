@@ -7,7 +7,6 @@ import { Volume2, VolumeX, Mic, MicOff, Flame, Trophy, Shield, Swords, Crown, Ge
 import { getSoundEnabled, setSoundEnabled, getVoiceEnabled, setVoiceEnabled, unlockAudioContext } from "@/lib/battleAudio";
 import BattleMatchmakingModal from "./BattleMatchmakingModal";
 import BattleLeaderboard from "./BattleLeaderboard";
-import BattleLiveFeed from "./BattleLiveFeed";
 import BattleChampionCelebration from "./BattleChampionCelebration";
 import { StarsBackground } from "@/components/ui/stars-background";
 
@@ -408,10 +407,10 @@ export default function BattleArenaClient() {
             </span>
             <span className="text-xs text-slate-500 font-semibold">@{profile?.username}</span>
 
-            {/* Elo Rating & Tier Badge */}
+            {/* Marks & Tier Badge */}
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1 rounded-md border border-brand/40 bg-brand/10 px-2.5 py-0.5 text-xs font-black text-brand font-display">
-                {myRating} Elo
+                {myRating} Marks
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-md border border-slate-200/80 bg-white/90 px-2 py-0.5 text-[11px] font-bold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-slate-300">
                 <TierIcon tierKey={myTier.key || myTier.name} className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
@@ -469,7 +468,7 @@ export default function BattleArenaClient() {
                 Find Opponent
               </h2>
               <p className="mt-1 text-xs sm:text-sm font-semibold text-amber-950/80 max-w-sm">
-                Compete against a fellow {profile?.exam || "JEE"} aspirant for Arena Elo rating points.
+                Compete against a fellow {profile?.exam || "JEE"} aspirant for Arena Marks.
               </p>
 
               <div className="mt-6">
@@ -544,10 +543,8 @@ export default function BattleArenaClient() {
           </div>
         </div>
 
-        {/* Right Column: Live Feed & Battle History */}
+        {/* Right Column: Battle History */}
         <div className="space-y-6">
-          <BattleLiveFeed />
-
           {/* Recent Battle History */}
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
             <h3 className={cx("text-base font-black text-slate-900 dark:text-white uppercase mb-3", "font-display")}>

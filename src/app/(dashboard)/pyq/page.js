@@ -590,7 +590,7 @@ function PracticeTab({ subjects, track, isPro }) {
           </div>
 
           <button onClick={handleStartDeck}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 sm:py-3.5 text-sm font-black text-black transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 sm:py-3.5 text-sm font-black text-black transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
             <I.Play size={14} /> {selectedModeLocked ? "Upgrade to Pro" : "Start PYQ Practice"}
           </button>

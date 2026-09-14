@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Trophy, Flame, Shield, ChevronRight, User } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 function cx(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -35,155 +35,149 @@ export function BattleLeaderboard({ initialSeason = "all-time" }) {
   }, [season]);
 
   const seasonsList = data?.seasons || [];
-  const rows = data?.leaderboard || [];
+  const rows = (data?.leaderboard || []).slice(0, 10);
   const myRank = data?.myRank;
+  const myInTop10 = rows.some((r) => r.isMe);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-      
-      {/* Header & Season Switcher */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-4 dark:border-[var(--border-subtle)]">
-        <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.16em] text-brand">
-            <Trophy className="h-3.5 w-3.5" />
-            Arena Rankings
-          </div>
-          <h3 className="text-xl sm:text-2xl font-black font-display text-slate-900 dark:text-white uppercase mt-0.5">
-            Leaderboard
-          </h3>
-        </div>
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
 
-        {/* Season Selector Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto rounded-xl bg-slate-100 p-1 dark:bg-[#111]">
+      {/* Header */}
+      <div className="flex items-center gap-1.5 mb-1">
+        <Trophy className="h-3.5 w-3.5 text-brand" />
+        <span className="text-[10px] font-black uppercase tracking-[0.16em] text-brand">Arena Rankings</span>
+      </div>
+      <h3 className="text-lg font-black font-display text-slate-900 dark:text-white uppercase mb-3">
+        Leaderboard
+      </h3>
+
+      {/* Season Selector */}
+      <div className="flex items-center gap-1 overflow-x-auto pb-0.5 mb-3 scrollbar-none">
+        <button
+          type="button"
+          onClick={() => setSeason("all-time")}
+          className={cx(
+            "shrink-0 rounded-lg px-2.5 py-1 text-[10px] font-black uppercase tracking-wider transition",
+            season === "all-time"
+              ? "bg-brand text-slate-950"
+              : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+          )}
+        >
+          All Time
+        </button>
+        {seasonsList.map((s) => (
           <button
+            key={s.id}
             type="button"
-            onClick={() => setSeason("all-time")}
+            onClick={() => setSeason(s.id)}
             className={cx(
-              "rounded-lg px-3 py-1.5 text-xs font-black uppercase tracking-wider transition shrink-0",
-              season === "all-time"
-                ? "bg-brand text-slate-950 shadow-sm"
+              "shrink-0 rounded-lg px-2.5 py-1 text-[10px] font-black uppercase tracking-wider transition",
+              season === s.id
+                ? "bg-brand text-slate-950"
                 : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
             )}
           >
-            All Time
+            {s.name?.replace(" Season", "") || s.id}
           </button>
-          {seasonsList.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => setSeason(s.id)}
-              className={cx(
-                "rounded-lg px-3 py-1.5 text-xs font-black uppercase tracking-wider transition shrink-0",
-                season === s.id
-                  ? "bg-brand text-slate-950 shadow-sm"
-                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-              )}
-            >
-              {s.id}
-            </button>
-          ))}
-        </div>
+        ))}
       </div>
 
-      {/* Pinned "Your Rank" Bar */}
-      {myRank && (
-        <div className="my-4 flex items-center justify-between rounded-xl border border-brand/40 bg-brand/10 p-3 sm:px-4 sm:py-3.5 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand text-slate-950 font-black font-display text-sm">
+      {/* Your Rank — pinned above table, only if outside top 10 */}
+      {myRank && !myInTop10 && (
+        <div className="mb-2 flex items-center justify-between rounded-lg border border-brand/40 bg-brand/5 px-3 py-2">
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-brand text-slate-950 text-[11px] font-black font-display">
               #{myRank.rank}
-            </div>
+            </span>
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-brand">Your Standing</p>
-              <p className="text-sm font-black text-slate-900 dark:text-white">
-                @{myRank.username} · <span className="text-slate-500 dark:text-slate-400 font-semibold">{myRank.tier?.name || "Bronze"}</span>
+              <p className="text-[11px] font-black text-slate-900 dark:text-white leading-none">
+                @{myRank.username}
+                <span className="ml-1 text-[9px] font-black text-brand uppercase">(You)</span>
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-right">
-            <div>
-              <p className="text-base sm:text-lg font-black font-display text-brand">{myRank.arenaRating} Elo</p>
-              <p className="text-[10px] font-bold text-slate-500">{myRank.wins}W - {myRank.losses}L</p>
-            </div>
+          <div className="text-right">
+            <p className="text-sm font-black font-display text-brand leading-none">{myRank.arenaRating} <span className="text-[10px] font-bold text-slate-400">Marks</span></p>
+            <p className="text-[10px] font-bold text-slate-400 mt-0.5">
+              <span className="text-emerald-500">{myRank.wins}W</span>
+              {" – "}
+              <span className="text-rose-500">{myRank.losses}L</span>
+            </p>
           </div>
         </div>
       )}
 
-      {/* Table Content */}
+      {/* Table */}
       {loading ? (
-        <div className="flex min-h-[220px] items-center justify-center">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand border-t-transparent" />
+        <div className="flex min-h-[160px] items-center justify-center">
+          <div className="h-5 w-5 animate-spin rounded-full border-2 border-brand border-t-transparent" />
         </div>
       ) : rows.length === 0 ? (
-        <div className="py-12 text-center text-xs font-semibold text-slate-500 dark:text-slate-400">
-          No battles recorded for this season yet. Be the first to rank!
+        <div className="py-8 text-center text-xs font-semibold text-slate-400">
+          No battles recorded yet. Be the first to rank!
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-[11px] uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-800">
-              <tr>
-                <th className="py-2.5 px-2 font-black">Rank</th>
-                <th className="py-2.5 px-2 font-black">Student</th>
-                <th className="py-2.5 px-2 font-black text-right">Rating</th>
-                <th className="py-2.5 px-2 font-black text-center hidden sm:table-cell">W/L</th>
-                <th className="py-2.5 px-2 font-black text-right hidden sm:table-cell">Streak</th>
+          <table className="w-full text-left">
+            <thead className="border-b border-slate-100 dark:border-slate-800">
+              <tr className="text-[10px] uppercase tracking-[0.12em] text-slate-400 dark:text-slate-500">
+                <th className="py-1.5 px-1 font-black w-8">#</th>
+                <th className="py-1.5 px-1 font-black">Student</th>
+                <th className="py-1.5 px-1 font-black text-right">Marks</th>
+                <th className="py-1.5 px-1 font-black text-right hidden sm:table-cell">W / L</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
               {rows.map((player) => {
-                const isTop3 = player.rank <= 3;
-                const rankBadgeClass = player.rank === 1
-                  ? "bg-amber-400 text-slate-950 font-black"
-                  : player.rank === 2
-                  ? "bg-slate-300 text-slate-900 font-black"
-                  : player.rank === 3
-                  ? "bg-amber-700/80 text-white font-black"
-                  : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300";
+                const rankBadgeClass =
+                  player.rank === 1
+                    ? "bg-amber-400 text-slate-950"
+                    : player.rank === 2
+                    ? "bg-slate-300 text-slate-900"
+                    : player.rank === 3
+                    ? "bg-amber-700/80 text-white"
+                    : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400";
 
                 return (
                   <tr
                     key={player.userId}
                     className={cx(
-                      "transition hover:bg-slate-50 dark:hover:bg-white/[0.02]",
-                      player.isMe ? "bg-brand/5 dark:bg-brand/10" : ""
+                      "transition-colors",
+                      player.isMe
+                        ? "bg-brand/5 dark:bg-brand/10"
+                        : "hover:bg-slate-50 dark:hover:bg-white/[0.02]"
                     )}
                   >
-                    <td className="py-3 px-2">
-                      <span className={cx("inline-flex h-6 w-6 items-center justify-center rounded-md text-xs font-display", rankBadgeClass)}>
+                    {/* Rank */}
+                    <td className="py-2 px-1">
+                      <span className={cx("inline-flex h-5 w-5 items-center justify-center rounded text-[10px] font-black font-display", rankBadgeClass)}>
                         {player.rank}
                       </span>
                     </td>
-                    <td className="py-3 px-2">
-                      <div className="flex items-center gap-2">
-                        <div>
-                          <p className="font-black text-slate-900 dark:text-white truncate max-w-[140px] sm:max-w-[200px]">
-                            {player.displayName}
-                            {player.isMe && <span className="ml-1.5 text-[10px] font-black text-brand uppercase">(You)</span>}
-                          </p>
-                          <p className="text-xs text-slate-400">@{player.username}</p>
-                        </div>
-                      </div>
+
+                    {/* Student */}
+                    <td className="py-2 px-1">
+                      <p className="text-xs font-black text-slate-900 dark:text-white truncate max-w-[110px] sm:max-w-[170px] leading-none">
+                        {player.displayName}
+                        {player.isMe && (
+                          <span className="ml-1 text-[9px] font-black text-brand uppercase">(You)</span>
+                        )}
+                      </p>
+                      <p className="text-[10px] text-slate-400 mt-0.5 truncate">@{player.username}</p>
                     </td>
-                    <td className="py-3 px-2 text-right">
-                      <span className="font-black font-display text-sm sm:text-base text-slate-900 dark:text-white">
+
+                    {/* Marks */}
+                    <td className="py-2 px-1 text-right">
+                      <span className={cx("font-black font-display text-sm", player.rank <= 3 ? "text-brand" : "text-slate-900 dark:text-white")}>
                         {player.arenaRating}
                       </span>
-                      <span className="block text-[10px] font-bold text-slate-400">{player.tier?.name}</span>
                     </td>
-                    <td className="py-3 px-2 text-center text-xs font-semibold text-slate-500 hidden sm:table-cell">
+
+                    {/* W/L */}
+                    <td className="py-2 px-1 text-right text-[11px] hidden sm:table-cell whitespace-nowrap">
                       <span className="text-emerald-600 dark:text-emerald-400 font-bold">{player.wins}W</span>
-                      {" - "}
+                      <span className="text-slate-300 dark:text-slate-600 mx-0.5">–</span>
                       <span className="text-rose-500 font-bold">{player.losses}L</span>
-                    </td>
-                    <td className="py-3 px-2 text-right text-xs font-semibold text-slate-500 hidden sm:table-cell">
-                      {player.winStreak >= 2 ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-amber-600 dark:text-brand font-black">
-                          <Flame className="h-3 w-3" />
-                          {player.winStreak}
-                        </span>
-                      ) : (
-                        "—"
-                      )}
                     </td>
                   </tr>
                 );
@@ -195,5 +189,6 @@ export function BattleLeaderboard({ initialSeason = "all-time" }) {
     </div>
   );
 }
+
 
 export default BattleLeaderboard;
