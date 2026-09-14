@@ -94,7 +94,7 @@ export default function ZiSuggestions({
             type="button"
             onClick={() => onSelect(suggestion)}
             disabled={disabled}
-            className="prepzii-interactive rounded-full border border-brand/40 bg-brand/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 dark:text-brand shadow-sm transition-colors hover:border-brand hover:bg-brand/20 hover:text-amber-900 dark:hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="prepzii-interactive rounded-full border border-brand bg-brand px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-stone-950 transition-colors hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {suggestion}
           </button>

@@ -10,7 +10,6 @@ import NotificationBell from "@/components/NotificationBell";
 import {
   Compass,
   Scroll,
-  Building2,
   Target,
   LineChart,
   Menu,
@@ -58,22 +57,10 @@ export default function Navbar({
     }
   };
 
-  const isInstituteAdminAccount = accountType === "INSTITUTE_ADMIN";
-  const hasInstituteAccess = institutes.length > 0;
-  const instituteNavLabel = institutes.length === 1 ? institutes[0].name : "Institute";
-  const instituteNavItem = { name: instituteNavLabel, href: "/institute", icon: Building2 };
-  const visibleNavItems = isInstituteAdminAccount
-    ? [instituteNavItem]
-    : [
-        ...navItems.slice(0, 5),
-        ...(hasInstituteAccess || pathname.startsWith("/institute")
-          ? [instituteNavItem]
-          : []),
-        ...navItems.slice(5),
-      ];
+  const visibleNavItems = navItems;
   const prefetchHrefKey = [
     ...visibleNavItems.map((item) => item.href),
-    !isInstituteAdminAccount ? "/pro" : "",
+    "/pro",
   ].filter(Boolean).join("|");
 
   useEffect(() => {
@@ -144,7 +131,7 @@ export default function Navbar({
     );
   };
 
-  const proLink = !isInstituteAdminAccount ? (
+  const proLink = (
     <Link
       href="/pro"
       onMouseEnter={() => router.prefetch("/pro")}
@@ -162,7 +149,7 @@ export default function Navbar({
       {!isPro && <Star aria-hidden="true" className="prepzii-interactive-icon h-3.5 w-3.5" fill="currentColor" />}
       <span>{isPro ? `${track || ""} Pro` : "PRO"}</span>
     </Link>
-  ) : null;
+  );
 
   // Hide Navbar completely during active exam sessions
   if (pathname === "/test/session" || pathname === "/pyq/session") {

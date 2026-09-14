@@ -4,7 +4,6 @@ import {
   ACCOUNT_TYPES,
   DASHBOARD_ROUTE,
   getAuthContext,
-  INSTITUTE_ROUTE,
   getPostAuthRedirectPath,
   SIGN_IN_ROUTE,
 } from "@/lib/auth";
@@ -136,9 +135,7 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
   maxAge: 60 * 60 * 24 * 365, // 1 year
 });
 
-    const redirectTarget = accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN
-      ? INSTITUTE_ROUTE
-      : `${DASHBOARD_ROUTE}?tour=welcome`;
+    const redirectTarget = `${DASHBOARD_ROUTE}?tour=welcome`;
 
     redirect(redirectTarget);
   }
@@ -160,7 +157,7 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
             Welcome, {displayName}
           </h1>
           <p className="mt-2 text-sm text-gray-400">
-            Choose how you use PrepZii. Everyone uses the same login.
+            Set up your student profile to get started.
           </p>
         </div>
 

@@ -71,10 +71,10 @@ export default function ZiSpeakButton({ text, disabled = false }) {
     <button
       type="button"
       onClick={handleClick}
-      className={`prepzii-interactive mt-3 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+      className={`prepzii-interactive mt-3 inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs font-black transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
         isSpeaking
-          ? "border-amber-500/50 bg-amber-100 text-amber-800 shadow-[0_0_22px_rgba(234,179,8,0.18)]"
-          : "border-amber-900/15 bg-white/55 text-stone-600 hover:border-amber-500/45 hover:text-amber-700"
+          ? "border-[#333] bg-[#2A2A2A] text-brand"
+          : "border-[#2A2A2A] bg-[#1A1A1A] text-slate-400 hover:border-[#333] hover:text-slate-200"
       }`}
       aria-label={isSpeaking ? "Stop reading response aloud" : "Read response aloud"}
       title={isSpeaking ? "Stop reading response aloud" : "Read response aloud"}

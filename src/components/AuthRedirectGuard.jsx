@@ -17,9 +17,7 @@ export default function AuthRedirectGuard() {
       return;
     }
 
-    router.replace(
-      metadata.accountType === "INSTITUTE_ADMIN" ? "/institute" : "/dashboard"
-    );
+    router.replace("/dashboard");
   }, [isLoaded, isSignedIn, router, user]);
 
   return null;

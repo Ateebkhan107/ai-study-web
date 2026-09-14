@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
-import { ACCOUNT_TYPES, getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
-import { getActiveInstituteMemberships, getUserAccessContext } from "@/lib/accessControl";
+import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
+import { getUserAccessContext } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper"; 
 import { initUserLeaderboard } from "@/utils/leaderboard"; 
 import ProductTourManager from "@/components/tour/ProductTourManager"; 
@@ -21,26 +21,8 @@ export default async function DashboardLayout({ children }) {
   }
 
   const email = user?.primaryEmailAddress?.emailAddress || "";
-  const [memberships, accessContext] = await Promise.all([
-
-    getActiveInstituteMemberships(userId, email),
-    getUserAccessContext({ userId, email }),
-    initUserLeaderboard(userId, user?.firstName || "Student"),
-  ]);
-  const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
-  const accountType = user?.publicMetadata?.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN || hasCoachingAdminMembership
-    ? ACCOUNT_TYPES.INSTITUTE_ADMIN
-    : ACCOUNT_TYPES.STUDENT;
-
-  if (accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN) {
-    redirect("/institute");
-  }
-
-  const activeInstitutes = memberships.map((membership) => ({
-    name: membership.institute?.name || "Institute",
-    role: membership.role,
-    member_status: membership.status,
-  }));
+  const accessContext = await getUserAccessContext({ userId, email });
+  await initUserLeaderboard(userId, user?.firstName || "Student");
 
   return (
     <div className="relative min-h-screen bg-[var(--background)] transition-colors duration-200">
@@ -51,11 +33,7 @@ export default async function DashboardLayout({ children }) {
       <div className="relative z-10">
         <ZiEntityContextProvider>
           {/* Passed control prop to conditionally unmount the text line */}
-          <Navbar
-            accountType={accountType}
-            institutes={activeInstitutes}
-            plan={accessContext.plan}
-          />
+          <Navbar plan={accessContext.plan} />
           <TrackWrapper>
             {children}
           </TrackWrapper>

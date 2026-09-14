@@ -3,7 +3,7 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export const ONBOARDING_ROUTE = "/onboarding";
 export const DASHBOARD_ROUTE = "/dashboard";
-export const INSTITUTE_ROUTE = "/institute";
+
 export const SIGN_IN_ROUTE = "/sign-in";
 export const SIGN_UP_ROUTE = "/sign-up";
 
@@ -115,7 +115,5 @@ export async function getAuthContext() {
 
 export function getPostAuthRedirectPath(onboardingComplete, user) {
   if (!onboardingComplete) return ONBOARDING_ROUTE;
-  return getAccountType(user) === ACCOUNT_TYPES.INSTITUTE_ADMIN
-    ? INSTITUTE_ROUTE
-    : DASHBOARD_ROUTE;
+  return DASHBOARD_ROUTE;
 }

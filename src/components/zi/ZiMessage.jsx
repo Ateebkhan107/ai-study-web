@@ -116,18 +116,18 @@ function ZiStudyPlan({ plan }) {
   };
 
   return (
-    <div className="mt-5 border-t border-amber-900/15 pt-4">
+    <div className="mt-5 border-t border-[#2A2A2A] pt-4">
       <div className="mb-2 flex items-start justify-between gap-3">
         <div>
-          <div className="font-display text-lg font-black text-stone-950">
+          <div className="font-display text-lg font-black text-slate-200">
             {plan.title}
           </div>
-          <div className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
+          <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand">
             {plan.durationMinutes} min plan
           </div>
         </div>
       </div>
-      <p className="mb-3 text-xs leading-5 text-stone-600">
+      <p className="mb-3 text-xs leading-5 text-slate-400">
         {plan.reason}
       </p>
       <ol className="space-y-3">
@@ -140,20 +140,20 @@ function ZiStudyPlan({ plan }) {
           const isBusy = status === "opening";
 
           return (
-          <li key={key} className="flex gap-3 rounded-xl border border-amber-900/10 bg-white/45 p-3">
-            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-amber-500/40 bg-amber-100 text-xs font-black text-amber-800">
+          <li key={key} className="flex gap-3 rounded-md border border-[#2A2A2A] bg-[#1A1A1A] p-3">
+            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border border-[#333] bg-[#222] text-xs font-black text-slate-300">
               {step.order}
             </span>
             <div className="min-w-0">
-              <div className="text-sm font-bold text-stone-900">
+              <div className="text-sm font-bold text-slate-200">
                 {formatActivity(step.activity)}
                 {step.chapter ? ` · ${step.chapter}` : step.subject ? ` · ${step.subject}` : ""} · {step.durationMinutes} min
               </div>
-              <div className="text-xs leading-5 text-stone-600">
+              <div className="text-xs leading-5 text-slate-400">
                 {step.goal}
               </div>
               {alreadyHere ? (
-                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700">
+                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-brand">
                   <Check className="h-3.5 w-3.5" strokeWidth={2.4} />
                   You&apos;re already here
                 </div>
@@ -176,10 +176,10 @@ function ZiStudyPlan({ plan }) {
                         setStepStatus(key, "error");
                       }
                     }}
-                    className={`inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-bold transition-colors ${
+                    className={`inline-flex items-center justify-center rounded-md px-3 py-1.5 text-xs font-bold transition-colors ${
                       isBusy
-                        ? "cursor-wait bg-amber-500/60 text-black"
-                        : "bg-stone-950 text-amber-100 hover:bg-stone-800"
+                        ? "cursor-wait bg-[#854D0E] text-black"
+                        : "bg-[#222] text-slate-200 hover:bg-[#2A2A2A] border border-[#333]"
                     }`}
                   >
                     {isBusy ? actionMeta.loadingLabel : actionMeta.label}
@@ -246,9 +246,9 @@ export default function ZiMessage({
           title: "Custom Test",
           description: (
              <div className="flex flex-col gap-0.5 mt-1">
-                <div className="font-medium text-slate-700 dark:text-slate-300">{action.questionCount} Questions</div>
+                <div className="font-medium text-slate-300">{action.questionCount} Questions</div>
                 <div>{subjectNames}</div>
-                <div className="text-slate-400 dark:text-slate-500">{chapterNames}</div>
+                <div className="text-slate-400">{chapterNames}</div>
                 {action.source === "weak_chapters" && (
                    <div className="mt-1 text-brand italic">Based on your recent weak areas</div>
                 )}
@@ -264,8 +264,8 @@ export default function ZiMessage({
           title: "Save preference",
           description: (
              <div className="flex flex-col gap-0.5 mt-1">
-                <div className="font-medium text-slate-700 dark:text-slate-300">{action.value}</div>
-                <div className="text-slate-400 dark:text-slate-500">Default Zi {action.key.replace("_", " ")}</div>
+                <div className="font-medium text-slate-300">{action.value}</div>
+                <div className="text-slate-400">Default Zi {action.key.replace("_", " ")}</div>
              </div>
           )
        };
@@ -311,12 +311,12 @@ export default function ZiMessage({
         description: (
           <div className="flex flex-col gap-0.5 mt-1">
             {scope ? (
-              <div className="text-slate-500 dark:text-slate-400">{scope}</div>
+              <div className="text-slate-400">{scope}</div>
             ) : null}
-            <div className="font-medium text-slate-700 dark:text-slate-300">
+            <div className="font-medium text-slate-300">
               {memory.memory_text}
             </div>
-            <div className="text-slate-400 dark:text-slate-500">
+            <div className="text-slate-400">
               {formatMemoryType(memory.memory_type)}
               {expiryLabel ? ` · until ${expiryLabel}` : ""}
             </div>
@@ -336,29 +336,29 @@ export default function ZiMessage({
       <div
         className={`text-sm leading-6 ${
           isUser
-            ? "max-w-[78%] rounded-2xl rounded-br-md border border-brand/20 bg-brand/10 px-3.5 py-2.5 text-slate-900 dark:text-white shadow-lg shadow-black/10"
+            ? "max-w-[78%] rounded-md rounded-br-sm border border-[#2A2A2A] bg-[#1E1E1E] px-3.5 py-2.5 text-slate-200"
             : isError
-            ? "max-w-[92%] rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-red-700 dark:text-red-200"
-            : "relative w-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] px-5 py-4 text-slate-800 dark:text-slate-200 shadow-sm"
+            ? "max-w-[92%] rounded-md border border-[#4A1515] bg-[#1A1111] px-4 py-3 text-red-400"
+            : "relative w-full rounded-md border border-[#2A2A2A] bg-[#141414] px-5 py-4 text-slate-200"
         }`}
       >
         {!isUser && !isError ? (
-          <div className="mb-3 flex items-center gap-2 border-b border-[var(--border)] pb-2 text-[0.66rem] font-black uppercase tracking-[0.16em] text-brand">
-            <Logo size={16} showText={false} forceDark={false} />
+          <div className="mb-3 flex items-center gap-2 border-b border-[#2A2A2A] pb-2 text-[0.66rem] font-black uppercase tracking-[0.16em] text-brand">
+            <Logo size={16} showText={false} forceDark={true} />
             <span>Zi Assistant</span>
           </div>
         ) : null}
         {isLoading ? (
-          <span className="inline-flex items-center gap-3 text-slate-700 dark:text-slate-300">
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand">
-              <span className="absolute h-5 w-5 rounded-full border border-brand/50 motion-safe:animate-ping" aria-hidden="true" />
-              <Logo size={16} showText={false} forceDark={false} />
+          <span className="inline-flex items-center gap-3 text-slate-300">
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-[#333] bg-[#222] text-brand">
+              <span className="absolute h-5 w-5 rounded-full border border-[#854D0E] motion-safe:animate-ping" aria-hidden="true" />
+              <Logo size={16} showText={false} forceDark={true} />
             </span>
             <span className="font-semibold text-sm">Zi is thinking...</span>
           </span>
         ) : (
           shouldRenderMarkdown ? (
-            <MathText className="zi-markdown text-sm leading-6 text-slate-800 dark:text-slate-200 [&_blockquote]:my-3 [&_blockquote]:rounded-r-xl [&_blockquote]:border-l-2 [&_blockquote]:border-brand [&_blockquote]:bg-brand/10 [&_blockquote]:py-2 [&_blockquote]:pl-3 [&_code]:rounded [&_code]:bg-[var(--surface-elevated)] [&_code]:text-brand [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-[0.82rem] [&_h1]:mb-2 [&_h1]:mt-1 [&_h1]:font-display [&_h1]:text-xl [&_h1]:font-black [&_h1]:text-slate-900 dark:[&_h1]:text-white [&_h2]:mb-2 [&_h2]:mt-3 [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-slate-900 dark:[&_h2]:text-white [&_h3]:mb-1.5 [&_h3]:mt-3 [&_h3]:text-sm [&_h3]:font-black [&_h3]:text-slate-900 dark:[&_h3]:text-white [&_li]:pl-0.5 [&_pre]:my-3 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-slate-100 dark:[&_pre]:bg-black/40 [&_pre]:border [&_pre]:border-[var(--border)] [&_pre]:p-3 [&_pre]:text-slate-800 dark:[&_pre]:text-slate-300 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit">
+            <MathText className="zi-markdown text-sm leading-6 text-slate-200 [&_blockquote]:my-3 [&_blockquote]:rounded-r-md [&_blockquote]:border-l-2 [&_blockquote]:border-brand [&_blockquote]:bg-[#222222] [&_blockquote]:py-2 [&_blockquote]:pl-3 [&_code]:rounded [&_code]:bg-[#222] [&_code]:text-brand [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-[0.82rem] [&_h1]:mb-2 [&_h1]:mt-1 [&_h1]:font-display [&_h1]:text-xl [&_h1]:font-black [&_h1]:text-white [&_h2]:mb-2 [&_h2]:mt-3 [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-white [&_h3]:mb-1.5 [&_h3]:mt-3 [&_h3]:text-sm [&_h3]:font-black [&_h3]:text-white [&_li]:pl-0.5 [&_pre]:my-3 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-[#0A0A0A] [&_pre]:border [&_pre]:border-[#2A2A2A] [&_pre]:p-3 [&_pre]:text-slate-300 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit">
               {children}
             </MathText>
           ) : (
@@ -372,12 +372,12 @@ export default function ZiMessage({
         {!isUser && !isError && !isLoading ? <ZiSpeakButton text={children} /> : null}
 
         {showAction && (
-          <div className="mt-4 border-t border-amber-900/15 pt-3">
+          <div className="mt-4 border-t border-[#2A2A2A] pt-3">
             <div className="mb-2">
-              <div className="font-semibold text-stone-900">
+              <div className="font-semibold text-slate-200">
                 {destMeta.title || destMeta.label.replace("Open ", "")}
               </div>
-              <div className="text-xs text-stone-600">
+              <div className="text-xs text-slate-400">
                 {destMeta.description}
               </div>
             </div>
@@ -409,10 +409,10 @@ export default function ZiMessage({
                         setIsNavigating(false);
                      }
                    }}
-                   className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                   className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
                       isNavigating
-                         ? "cursor-wait bg-amber-500/60 text-black"
-                         : "bg-stone-950 text-amber-100 hover:bg-stone-800"
+                         ? "cursor-wait bg-[#854D0E] text-black"
+                         : "bg-[#222] text-slate-200 hover:bg-[#2A2A2A] border border-[#333]"
                    }`}
                  >
                    {isNavigating ? (destMeta.apiPayload.action === "save" || destMeta.apiPayload.action === "update" ? "Saving..." : destMeta.apiPayload.action === "delete" ? "Removing..." : "Resetting...") : destMeta.label}
@@ -421,7 +421,7 @@ export default function ZiMessage({
                    type="button"
                    disabled={isNavigating}
                    onClick={() => setApiActionStatus("dismissed")}
-                   className="inline-flex flex-1 items-center justify-center rounded-lg bg-stone-100 px-3 py-2 text-sm font-semibold text-stone-600 transition-colors hover:bg-stone-200"
+                   className="inline-flex flex-1 items-center justify-center rounded-md bg-[#222] px-3 py-2 text-sm font-semibold text-slate-200 border border-[#333] transition-colors hover:bg-[#2A2A2A]"
                  >
                    Cancel
                  </button>
@@ -435,10 +435,10 @@ export default function ZiMessage({
                     router.push(destMeta.route);
                     setTimeout(() => setIsNavigating(false), 3000);
                  }}
-                 className={`inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                 className={`inline-flex w-full items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
                     isNavigating
-                       ? "cursor-wait bg-amber-500/60 text-black"
-                       : "bg-stone-950 text-amber-100 hover:bg-stone-800"
+                       ? "cursor-wait bg-[#854D0E] text-black"
+                       : "bg-[#222] text-slate-200 hover:bg-[#2A2A2A] border border-[#333]"
                  }`}
                >
                  {isNavigating ? (destMeta.label === "Start Test" ? "Preparing test..." : "Preparing...") : destMeta.label}
@@ -451,7 +451,7 @@ export default function ZiMessage({
 
       {isUser ? (
         <span
-          className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-stone-300"
+          className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm border border-[#333] bg-[#1A1A1A] text-slate-300"
           aria-hidden="true"
         >
           <UserRound className="h-3.5 w-3.5" strokeWidth={2.4} />
