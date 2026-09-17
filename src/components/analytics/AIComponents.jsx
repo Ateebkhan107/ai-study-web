@@ -1,26 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import {
   Brain,
   Sparkles,
   Zap,
-  TrendingUp,
   Target,
-  AlertTriangle,
-  CheckCircle2,
   ArrowRight,
   Clock,
-  Compass,
   Flame,
-  BookOpen,
-  Award,
   ChevronRight,
-  BarChart3,
-  Layers,
-  GraduationCap,
-  RefreshCw,
 } from "lucide-react";
 
 // Track metadata & high-yield baseline data
@@ -69,10 +58,10 @@ function getSubjectColor(subject) {
 }
 
 function calculatePredictions(stats, track) {
-  const isNeet = String(track || "").toUpperCase() === "NEET";
+  const normTrack = String(track || "").toUpperCase();
+  const isNeet = normTrack === "NEET";
   const accuracy = stats?.overview?.overallAccuracy;
   const totalQuestions = stats?.counts?.answeredQuestions || stats?.overview?.questionsPracticed || 0;
-  const testsCount = stats?.counts?.completedTests || stats?.overview?.testsCompleted || 0;
   const hasSample = typeof accuracy === "number" && totalQuestions >= 10;
 
   if (isNeet) {
@@ -315,7 +304,7 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
       {/* Main Stats Grid */}
       <div className="relative mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Metric 1: Projected Score */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
             {isNeet ? "Projected NEET Score" : "Projected JEE Score"}
           </p>
@@ -342,7 +331,7 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
         </div>
 
         {/* Metric 2: Projected Percentile / AIR */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
             {isNeet ? "Estimated Percentile" : "Projected Percentile"}
           </p>
@@ -363,7 +352,7 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
         </div>
 
         {/* Metric 3: Admission Target Tier */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
             Target College Zone
           </p>
@@ -484,18 +473,18 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
           return (
             <div
               key={`${item.chapter}-${index}`}
-              className="flex flex-col justify-between rounded-xl border border-slate-200/70 bg-slate-50/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50/90 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700"
+              className="group flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100/70 dark:border-[var(--border-subtle)] dark:bg-[var(--card)] dark:hover:border-slate-700 dark:hover:bg-[var(--surface-elevated)]/60"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span
-                    className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold text-white"
+                    className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold text-white shadow-xs"
                     style={{ backgroundColor: subjectColor }}
                   >
                     {item.subject}
                   </span>
 
-                  <span className="rounded-full border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-bold text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
+                  <span className="rounded-full border border-red-200/80 bg-red-50/80 px-2 py-0.5 text-[10px] font-bold text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
                     {item.statusLabel}
                   </span>
                 </div>
@@ -510,10 +499,10 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
 
                 {item.isRealData ? (
                   <div className="mt-3 flex items-center gap-3">
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
                       <div
                         className="h-full rounded-full bg-red-500"
-                        style={{ width: `${Math.max(8, item.accuracy || 0)}%` }}
+                        style={{ width: `${Math.max(6, item.accuracy || 0)}%` }}
                       />
                     </div>
                     <span className="text-xs font-black text-red-600 dark:text-red-400 tabular-nums">
@@ -530,7 +519,7 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
               <div className="mt-4 flex items-center gap-2 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
                 <Link
                   href={pyqHref}
-                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover"
+                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover shadow-xs"
                 >
                   <span>Practice PYQs</span>
                   <ArrowRight className="h-3 w-3" />
@@ -538,7 +527,7 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
 
                 <Link
                   href="/test"
-                  className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]"
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-300/80 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-[var(--border-subtle)] dark:hover:text-white shadow-xs"
                 >
                   <span>10-Q Test</span>
                 </Link>
@@ -622,12 +611,12 @@ export function AdaptiveLearningJourney({ stats, track = "JEE" }) {
       </div>
 
       <div className="relative mt-5 space-y-3">
-        {steps.map((s, idx) => (
+        {steps.map((s) => (
           <div
             key={s.step}
-            className="flex items-start gap-3.5 rounded-xl border border-slate-200/70 bg-slate-50/40 p-3.5 transition-all dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30"
+            className="flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 transition-all dark:border-[var(--border-subtle)] dark:bg-[var(--card)] dark:hover:bg-[var(--surface-elevated)]/50"
           >
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand font-display text-xs font-black text-slate-950">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand font-display text-xs font-black text-slate-950 shadow-xs">
               {s.step}
             </div>
 
@@ -658,7 +647,7 @@ export function AdaptiveLearningJourney({ stats, track = "JEE" }) {
         </Link>
         <Link
           href="/test"
-          className="inline-flex items-center justify-center rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]"
+          className="inline-flex items-center justify-center rounded-xl border border-slate-300/80 bg-white py-2.5 px-4 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-[var(--border-subtle)]"
         >
           Custom Test Builder
         </Link>
@@ -730,7 +719,7 @@ export function StrategyAndBalanceDiagnostic({ stats, track = "JEE" }) {
                 </div>
 
                 {/* Progress bar comparing actual vs ideal */}
-                <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
                   <div
                     className="h-full rounded-full transition-all duration-700"
                     style={{
@@ -772,7 +761,7 @@ export function StrategyAndBalanceDiagnostic({ stats, track = "JEE" }) {
             Diagnostic of time spent per question vs accuracy tradeoffs
           </p>
 
-          <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--card)]">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/15 text-slate-950 dark:text-brand">
                 <Clock className="h-5 w-5" />
@@ -792,7 +781,7 @@ export function StrategyAndBalanceDiagnostic({ stats, track = "JEE" }) {
                 <span className="text-slate-500 dark:text-slate-400">Time Efficiency Score</span>
                 <span className="font-black text-slate-900 dark:text-white">{pacing.speedScore}/100</span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
                 <div
                   className="h-full rounded-full bg-brand"
                   style={{ width: `${pacing.speedScore}%` }}
@@ -877,7 +866,7 @@ export function AIDailyPlanAndTips({ stats, track = "JEE" }) {
         {tasks.map((task, idx) => (
           <div
             key={task.id}
-            className="flex flex-col justify-between rounded-xl border border-slate-200/70 bg-slate-50/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700"
+            className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100/70 dark:border-[var(--border-subtle)] dark:bg-[var(--card)] dark:hover:border-slate-700 dark:hover:bg-[var(--surface-elevated)]/60"
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
