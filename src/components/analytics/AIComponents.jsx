@@ -55,40 +55,40 @@ const SUBJECT_COLORS = {
 
 // Calibrated NTA NEET UG Score vs Percentile vs AIR (2.4M test-takers benchmark)
 const NEET_CALIBRATION_TABLE = [
-  { score: 720, pct: 100.0, rankMin: 1, rankMax: 1, tier: "AIIMS New Delhi (Top Rank)", tierColor: "text-emerald-500" },
-  { score: 710, pct: 99.997, rankMin: 1, rankMax: 70, tier: "AIIMS New Delhi / Top Central GMCs", tierColor: "text-emerald-500" },
-  { score: 700, pct: 99.985, rankMin: 70, rankMax: 350, tier: "MAMC / VMMC / Top 5 Medical Colleges", tierColor: "text-emerald-500" },
-  { score: 680, pct: 99.90, rankMin: 350, rankMax: 2200, tier: "Top State Govt. Medical Colleges", tierColor: "text-emerald-500" },
-  { score: 655, pct: 99.60, rankMin: 2200, rankMax: 9500, tier: "Govt. Medical College (AIQ 15% Safe)", tierColor: "text-emerald-500" },
-  { score: 630, pct: 98.90, rankMin: 9500, rankMax: 26000, tier: "Govt. Medical College (State 85% GMC)", tierColor: "text-emerald-500" },
-  { score: 605, pct: 97.60, rankMin: 26000, rankMax: 56000, tier: "State GMC / Top Semi-Govt Seats", tierColor: "text-blue-500" },
-  { score: 570, pct: 95.00, rankMin: 56000, rankMax: 115000, tier: "State Quota Borderline / BDS Top", tierColor: "text-blue-500" },
-  { score: 520, pct: 90.00, rankMin: 115000, rankMax: 230000, tier: "Semi-Govt / Govt BDS / High-cutoff Private", tierColor: "text-amber-500" },
-  { score: 460, pct: 83.00, rankMin: 230000, rankMax: 400000, tier: "Private Medical College / Merit Seats", tierColor: "text-amber-500" },
-  { score: 400, pct: 73.00, rankMin: 400000, rankMax: 650000, tier: "BAMS / BHMS / Private BDS Seats", tierColor: "text-amber-500" },
-  { score: 340, pct: 60.00, rankMin: 650000, rankMax: 950000, tier: "Allied Medical / Deemed Universities", tierColor: "text-slate-400" },
-  { score: 260, pct: 42.00, rankMin: 950000, rankMax: 1400000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 180, pct: 24.00, rankMin: 1400000, rankMax: 1850000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 100, pct: 8.00, rankMin: 1850000, rankMax: 2200000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 0, pct: 0.00, rankMin: 2400000, rankMax: 2400000, tier: "Initial Baseline", tierColor: "text-slate-400" },
+  { score: 720, pct: 100.0, rankMin: 1, rankMax: 1, tier: "AIIMS New Delhi (Top Rank)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 710, pct: 99.997, rankMin: 1, rankMax: 70, tier: "AIIMS New Delhi / Top Central GMCs", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 700, pct: 99.985, rankMin: 70, rankMax: 350, tier: "MAMC / VMMC / Top 5 Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 680, pct: 99.90, rankMin: 350, rankMax: 2200, tier: "Top State Govt. Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 655, pct: 99.60, rankMin: 2200, rankMax: 9500, tier: "Govt. Medical College (AIQ 15% Safe)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 630, pct: 98.90, rankMin: 9500, rankMax: 26000, tier: "Govt. Medical College (State 85% GMC)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 605, pct: 97.60, rankMin: 26000, rankMax: 56000, tier: "State GMC / Top Semi-Govt Seats", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 570, pct: 95.00, rankMin: 56000, rankMax: 115000, tier: "State Quota Borderline / BDS Top", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 520, pct: 90.00, rankMin: 115000, rankMax: 230000, tier: "Semi-Govt / Govt BDS / High-cutoff Private", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 460, pct: 83.00, rankMin: 230000, rankMax: 400000, tier: "Private Medical College / Merit Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 400, pct: 73.00, rankMin: 400000, rankMax: 650000, tier: "BAMS / BHMS / Private BDS Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 340, pct: 60.00, rankMin: 650000, rankMax: 950000, tier: "Allied Medical / Deemed Universities", tierColor: "text-slate-800 dark:text-slate-200 font-bold" },
+  { score: 260, pct: 42.00, rankMin: 950000, rankMax: 1400000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 180, pct: 24.00, rankMin: 1400000, rankMax: 1850000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 100, pct: 8.00, rankMin: 1850000, rankMax: 2200000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 0, pct: 0.00, rankMin: 2400000, rankMax: 2400000, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
 ];
 
 // Calibrated NTA JEE Main Score vs Percentile vs AIR (1.4M test-takers benchmark)
 const JEE_CALIBRATION_TABLE = [
-  { score: 300, pct: 100.0, rankMin: 1, rankMax: 1, tier: "Top 10 AIR / All IITs & NITs Open", tierColor: "text-emerald-500" },
-  { score: 280, pct: 99.95, rankMin: 1, rankMax: 700, tier: "Top NITs (Trichy/Surathkal/Warangal CSE)", tierColor: "text-emerald-500" },
-  { score: 250, pct: 99.75, rankMin: 700, rankMax: 3500, tier: "Top NITs / IIITs (CSE Priority)", tierColor: "text-emerald-500" },
-  { score: 220, pct: 99.30, rankMin: 3500, rankMax: 9800, tier: "Top NITs / IIITs (CSE/ECE Priority)", tierColor: "text-emerald-500" },
-  { score: 190, pct: 98.50, rankMin: 9800, rankMax: 21000, tier: "NITs Core Branches / Top IIITs", tierColor: "text-emerald-500" },
-  { score: 165, pct: 97.20, rankMin: 21000, rankMax: 39000, tier: "NITs Core / State Govt. Top Engineering", tierColor: "text-blue-500" },
-  { score: 140, pct: 95.20, rankMin: 39000, rankMax: 67000, tier: "NITs Lower Branches / Newer IIITs", tierColor: "text-blue-500" },
-  { score: 120, pct: 93.20, rankMin: 67000, rankMax: 95000, tier: "JEE Advanced Qualifying Cutoff Zone", tierColor: "text-blue-500" },
-  { score: 100, pct: 89.50, rankMin: 95000, rankMax: 147000, tier: "State Govt. Engineering Universities", tierColor: "text-amber-500" },
-  { score: 80, pct: 83.50, rankMin: 147000, rankMax: 231000, tier: "State Private / Regional Engineering", tierColor: "text-amber-500" },
-  { score: 60, pct: 74.00, rankMin: 231000, rankMax: 364000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 40, pct: 58.00, rankMin: 364000, rankMax: 588000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 20, pct: 35.00, rankMin: 588000, rankMax: 910000, tier: "Foundation Building Needed", tierColor: "text-slate-400" },
-  { score: 0, pct: 0.00, rankMin: 1400000, rankMax: 1400000, tier: "Initial Baseline", tierColor: "text-slate-400" },
+  { score: 300, pct: 100.0, rankMin: 1, rankMax: 1, tier: "Top 10 AIR / All IITs & NITs Open", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 280, pct: 99.95, rankMin: 1, rankMax: 700, tier: "Top NITs (Trichy/Surathkal/Warangal CSE)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 250, pct: 99.75, rankMin: 700, rankMax: 3500, tier: "Top NITs / IIITs (CSE Priority)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 220, pct: 99.30, rankMin: 3500, rankMax: 9800, tier: "Top NITs / IIITs (CSE/ECE Priority)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 190, pct: 98.50, rankMin: 9800, rankMax: 21000, tier: "NITs Core Branches / Top IIITs", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 165, pct: 97.20, rankMin: 21000, rankMax: 39000, tier: "NITs Core / State Govt. Top Engineering", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 140, pct: 95.20, rankMin: 39000, rankMax: 67000, tier: "NITs Lower Branches / Newer IIITs", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 120, pct: 93.20, rankMin: 67000, rankMax: 95000, tier: "JEE Advanced Qualifying Cutoff Zone", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 100, pct: 89.50, rankMin: 95000, rankMax: 147000, tier: "State Govt. Engineering Universities", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 80, pct: 83.50, rankMin: 147000, rankMax: 231000, tier: "State Private / Regional Engineering", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 60, pct: 74.00, rankMin: 231000, rankMax: 364000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 40, pct: 58.00, rankMin: 364000, rankMax: 588000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 20, pct: 35.00, rankMin: 588000, rankMax: 910000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 0, pct: 0.00, rankMin: 1400000, rankMax: 1400000, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
 ];
 
 function interpolateNTA(table, score) {
@@ -399,8 +399,8 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
       {/* Main Stats Grid */}
       <div className="relative mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Metric 1: Projected Score */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 shadow-xs">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
             {isNeet ? "Projected NEET Score" : "Projected JEE Score"}
           </p>
           <div className="mt-2 flex items-baseline gap-2">
@@ -409,20 +409,20 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
                 <span className="font-display text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl tabular-nums">
                   {pred.predictedScore}
                 </span>
-                <span className="text-sm font-bold text-slate-400 dark:text-slate-500">
+                <span className="text-sm font-bold text-slate-600 dark:text-slate-400">
                   / {pred.maxScore}
                 </span>
               </>
             ) : (
-              <span className="font-display text-2xl font-black tracking-tight text-slate-400 dark:text-slate-500">
+              <span className="font-display text-2xl font-black tracking-tight text-slate-500 dark:text-slate-400">
                 — / {pred.maxScore}
               </span>
             )}
           </div>
-          <div className="mt-2 flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+          <div className="mt-2 flex items-center justify-between text-[11px] font-semibold text-slate-700 dark:text-slate-300">
             <span>Range: {pred.scoreRange}</span>
             {pred.predictedScore !== null && (
-              <span className="font-bold text-brand">
+              <span className="font-bold text-amber-900 dark:text-brand">
                 {Math.round((pred.predictedScore / pred.maxScore) * 100)}%
               </span>
             )}
@@ -438,8 +438,8 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
         </div>
 
         {/* Metric 2: Projected Percentile / AIR */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 shadow-xs">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
             {isNeet ? "Estimated Percentile" : "Projected Percentile"}
           </p>
           <div className="mt-2 flex items-baseline gap-2">
@@ -448,27 +448,27 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
                 <span className="font-display text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl tabular-nums">
                   {pred.percentile}
                 </span>
-                <span className="text-sm font-bold text-slate-400 dark:text-slate-500">
+                <span className="text-sm font-bold text-slate-600 dark:text-slate-400">
                   %ile
                 </span>
               </>
             ) : (
-              <span className="font-display text-2xl font-black tracking-tight text-slate-400 dark:text-slate-500">
+              <span className="font-display text-2xl font-black tracking-tight text-slate-500 dark:text-slate-400">
                 —
               </span>
             )}
           </div>
-          <p className="mt-2 text-[11px] font-bold text-slate-600 dark:text-slate-300 line-clamp-1">
+          <p className="mt-2 text-[11px] font-black text-slate-900 dark:text-slate-100 line-clamp-1">
             {pred.rankEstimate}
           </p>
-          <p className="mt-0.5 text-[10px] text-slate-400 dark:text-slate-500">
+          <p className="mt-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-400">
             All India Rank band estimate
           </p>
         </div>
 
         {/* Metric 3: Admission Target Tier */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 shadow-xs">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
             Target College Zone
           </p>
           <div className="mt-2">
@@ -476,7 +476,7 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
               {pred.tierLabel}
             </span>
           </div>
-          <p className="mt-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+          <p className="mt-2 text-[11px] font-semibold text-slate-700 dark:text-slate-300">
             {isNeet
               ? "Based on General category closing ranks"
               : "Based on JoSAA / CSAB cutoff trends"}
@@ -484,33 +484,33 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
         </div>
 
         {/* Metric 4: Potential Score Gain */}
-        <div className="rounded-xl border border-emerald-200/60 bg-emerald-50/50 p-4 dark:border-emerald-900/40 dark:bg-emerald-950/20">
+        <div className="rounded-xl border border-emerald-300/80 bg-emerald-50/70 p-4 dark:border-emerald-900/40 dark:bg-emerald-950/20 shadow-xs">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+            <p className="text-xs font-bold uppercase tracking-wider text-emerald-900 dark:text-emerald-300">
               Unlock Potential
             </p>
-            <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <Zap className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
           </div>
           <div className="mt-2 flex items-baseline gap-1">
-            <span className="font-display text-2xl font-black tracking-tight text-emerald-900 dark:text-emerald-200 sm:text-3xl">
+            <span className="font-display text-2xl font-black tracking-tight text-emerald-950 dark:text-emerald-100 sm:text-3xl">
               {pred.potentialGain}
             </span>
           </div>
-          <p className="mt-2 text-[11px] leading-relaxed text-emerald-700 dark:text-emerald-300">
+          <p className="mt-2 text-[11px] font-semibold leading-relaxed text-emerald-900 dark:text-emerald-300">
             Achievable by mastering your bottom 3 weak chapters & eliminating negative marking.
           </p>
         </div>
       </div>
 
       {/* Bottom Summary Bar */}
-      <div className="mt-5 flex flex-col justify-between gap-3 rounded-xl border border-slate-200/60 bg-slate-100/50 px-4 py-3 text-xs text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-300 sm:flex-row sm:items-center">
+      <div className="mt-5 flex flex-col justify-between gap-3 rounded-xl border border-slate-200/80 bg-slate-100/70 px-4 py-3 text-xs text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-200 sm:flex-row sm:items-center">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-brand shrink-0" />
-          <span>{pred.summary}</span>
+          <Sparkles className="h-4 w-4 text-amber-600 dark:text-brand shrink-0" />
+          <span className="font-medium text-slate-800 dark:text-slate-200">{pred.summary}</span>
         </div>
         <Link
           href="/pyq"
-          className="inline-flex shrink-0 items-center gap-1 font-bold text-brand hover:underline"
+          className="inline-flex shrink-0 items-center gap-1 font-bold text-amber-800 dark:text-brand hover:underline"
         >
           <span>Practice High-Yield Questions</span>
           <ArrowRight className="h-3 w-3" />
