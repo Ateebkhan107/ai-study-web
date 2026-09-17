@@ -1,0 +1,677 @@
+[
+  {
+    "id": "42e5ce82-cf16-48af-a563-64ceab77803c",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Let $y = x^2$. The given biquadratic equation becomes a quadratic in $y$:\n$$y^2 - ay + 9 = 0$$\nFor $x^4 - ax^2 + 9 = 0$ to have all four roots real and distinct, the quadratic equation in $y$ must have two distinct positive real roots.\n1. Distinct roots ($D > 0$):\n$$D = (-a)^2 - 4(1)(9) = a^2 - 36 > 0 \\implies a > 6 \\quad (\\text{since } a > 0)$$\n2. Sum of roots positive:\n$$y_1 + y_2 = a > 0$$\n3. Product of roots positive:\n$$y_1 y_2 = 9 > 0$$\nThus, we require $a > 6$.\nThe smallest positive integral value of $a$ is $a = 7$."
+  },
+  {
+    "id": "00f6938c-cf6f-4e06-ad79-5392bbcb27a0",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $f(x) = |\\log_e x| - |x - 1|$ for $x \\in (0, \\infty)$.\n\n**Case 1:** For $x \\in (0, 1)$,\n$\\log_e x < 0 \\implies |\\log_e x| = -\\ln x$\n$x - 1 < 0 \\implies |x - 1| = -(x - 1) = 1 - x$\n$$f(x) = -\\ln x - (1 - x) = x - \\ln x - 1$$\n$$f'(x) = 1 - \\frac{1}{x} = \\frac{x - 1}{x} < 0 \\quad \\text{for } x \\in (0, 1)$$\nThus, $f(x)$ is strictly decreasing in $(0, 1)$. Hence, Statement (II) is FALSE.\n\n**Case 2:** For $x \\in (1, \\infty)$,\n$\\log_e x > 0 \\implies |\\log_e x| = \\ln x$\n$x - 1 > 0 \\implies |x - 1| = x - 1$\n$$f(x) = \\ln x - (x - 1) = \\ln x - x + 1$$\n$$f'(x) = \\frac{1}{x} - 1 = \\frac{1 - x}{x} < 0 \\quad \\text{for } x \\in (1, \\infty)$$\nThus, $f(x)$ is strictly decreasing in $(1, \\infty)$. Hence, Statement (III) is TRUE.\n\n**Differentiability at $x = 1$:**\n$$LHD = \\lim_{x \\to 1^-} f'(x) = 1 - 1 = 0$$\n$$RHD = \\lim_{x \\to 1^+} f'(x) = 1 - 1 = 0$$\nSince $LHD = RHD = 0$, $f(x)$ is differentiable at $x = 1$, and since it is differentiable for all $x \\in (0, 1) \\cup (1, \\infty)$, Statement (I) is TRUE.\n\nTherefore, only (I) and (III) are TRUE."
+  },
+  {
+    "id": "aef0bfd2-3ffc-4830-8392-8d4f0076a83a",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "First, evaluate $m$:\n$$m = \\sum_{i=1}^9 i^2 = \\frac{9 \\times 10 \\times 19}{6} = 285$$\nThus, $\\frac{m}{19} = \\frac{285}{19} = 15$.\nThe functional equation is:\n$$3f(x) + 2f\\left(\\frac{15}{x}\\right) = 5x \\quad \\dots (1)$$\nReplacing $x$ with $\\frac{15}{x}$:\n$$3f\\left(\\frac{15}{x}\\right) + 2f(x) = 5\\left(\\frac{15}{x}\\right) = \\frac{75}{x} \\quad \\dots (2)$$\nMultiplying $(1)$ by 3 and $(2)$ by 2:\n$$9f(x) + 6f\\left(\\frac{15}{x}\\right) = 15x$$\n$$4f(x) + 6f\\left(\\frac{15}{x}\\right) = \\frac{150}{x}$$\nSubtracting the two equations:\n$$5f(x) = 15x - \\frac{150}{x} \\implies f(x) = 3x - \\frac{30}{x}$$\nNow, evaluate $f(5)$ and $f(2)$:\n$$f(5) = 3(5) - \\frac{30}{5} = 15 - 6 = 9$$\n$$f(2) = 3(2) - \\frac{30}{2} = 6 - 15 = -9$$\n$$f(5) - f(2) = 9 - (-9) = 18$$"
+  },
+  {
+    "id": "e1db353b-adde-44a3-a21c-f05e95f6435d",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let $a = \\frac{4}{7}$ and $b = \\frac{1}{3}$.\nThe $n$-th term of the series is:\n$$T_n = b^n + b^{n-1} a + b^{n-2} a^2 + \\dots + a^n = \\frac{a^{n+1} - b^{n+1}}{a - b}$$\nHere, $a - b = \\frac{4}{7} - \\frac{1}{3} = \\frac{5}{21}$.\nThe infinite sum is:\n$$S = \\sum_{n=1}^\\infty T_n = \\frac{1}{a - b} \\left( \\sum_{n=1}^\\infty a^{n+1} - \\sum_{n=1}^\\infty b^{n+1} \\right)$$\nFor the geometric series:\n$$\\sum_{n=1}^\\infty a^{n+1} = \\frac{a^2}{1 - a} = \\frac{(4/7)^2}{1 - 4/7} = \\frac{16/49}{3/7} = \\frac{16}{21}$$\n$$\\sum_{n=1}^\\infty b^{n+1} = \\frac{b^2}{1 - b} = \\frac{(1/3)^2}{1 - 1/3} = \\frac{1/9}{2/3} = \\frac{1}{6}$$\nSubtracting the sums:\n$$\\frac{16}{21} - \\frac{1}{6} = \\frac{32 - 7}{42} = \\frac{25}{42}$$\nThus:\n$$S = \\frac{21}{5} \\times \\frac{25}{42} = \\frac{5}{2}$$"
+  },
+  {
+    "id": "02edcfe7-7fd3-44d5-8176-8e6af5b964e2",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $q_{ij} = 2^{i+j-1} p_{ij} = 2^{i-1} \\cdot 2^j \\cdot p_{ij}$.\nLet $R = \\operatorname{diag}(2^0, 2^1, 2^2) = \\operatorname{diag}(1, 2, 4)$ and $C = \\operatorname{diag}(2^1, 2^2, 2^3) = \\operatorname{diag}(2, 4, 8)$.\nThen matrix $Q = R P C$.\nTaking determinants:\n$$\\det(Q) = \\det(R) \\det(P) \\det(C)$$\n$$\\det(R) = 1 \\times 2 \\times 4 = 2^3$$\n$$\\det(C) = 2 \\times 4 \\times 8 = 2^6$$\n$$\\det(Q) = 2^3 \\cdot 2^6 \\det(P) = 2^9 \\det(P)$$\nGiven $\\det(Q) = 2^{10}$:\n$$2^9 \\det(P) = 2^{10} \\implies \\det(P) = 2$$\nFor a matrix $P$ of order $n = 3$:\n$$\\det(\\operatorname{adj}(\\operatorname{adj} P)) = (\\det P)^{(n-1)^2} = (\\det P)^{(3-1)^2} = (\\det P)^4 = 2^4 = 16$$"
+  },
+  {
+    "id": "1bb295c7-f4db-440f-b87d-b14ba9cc0cb1",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The letters of the word 'UDAYPUR' in alphabetical order are:\nA, D, P, R, U, U, Y (Total: 7 letters with U occurring 2 times).\n\n1. Words starting with A: $\\frac{6!}{2!} = 360$\n2. Words starting with D: $\\frac{6!}{2!} = 360$\n3. Words starting with P: $\\frac{6!}{2!} = 360$\n4. Words starting with R: $\\frac{6!}{2!} = 360$\nTotal before words starting with U $= 4 \\times 360 = 1440$.\n\n5. Words starting with UA (remaining letters: D, P, R, U, Y): $5! = 120$\n6. Words starting with UD:\n   - UDA P $\\dots$: $3! = 6$\n   - UDA R $\\dots$: $3! = 6$\n   - UDA U $\\dots$: $3! = 6$\n   - UDA Y P R U: $1$\n   - UDA Y P U R: $1$\n\nTotal rank $= 1440 + 120 + 6 + 6 + 6 + 1 + 1 = 1580$."
+  },
+  {
+    "id": "40b23879-86e2-48b3-b983-4b35e4aa3ec9",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $2(\\vec{a} \\times \\vec{c}) + 3(\\vec{b} \\times \\vec{c}) = \\vec{0} \\implies (2\\vec{a} + 3\\vec{b}) \\times \\vec{c} = \\vec{0}$.\nThus, $\\vec{c}$ is collinear with $2\\vec{a} + 3\\vec{b}$.\n$$2\\vec{a} = 4\\hat{i} - 10\\hat{j} + 10\\hat{k}$$\n$$3\\vec{b} = 3\\hat{i} - 3\\hat{j} + 9\\hat{k}$$\n$$2\\vec{a} + 3\\vec{b} = 7\\hat{i} - 13\\hat{j} + 19\\hat{k}$$\nSo $\\vec{c} = \\lambda(7\\hat{i} - 13\\hat{j} + 19\\hat{k})$.\nNow, $\\vec{a} - \\vec{b} = (2-1)\\hat{i} + (-5+1)\\hat{j} + (5-3)\\hat{k} = \\hat{i} - 4\\hat{j} + 2\\hat{k}$.\n$$(\\vec{a} - \\vec{b}) \\cdot \\vec{c} = \\lambda [1(7) + (-4)(-13) + 2(19)] = \\lambda (7 + 52 + 38) = 97\\lambda$$\nGiven $(\\vec{a} - \\vec{b}) \\cdot \\vec{c} = -97 \\implies 97\\lambda = -97 \\implies \\lambda = -1$.\nHence, $\\vec{c} = -7\\hat{i} + 13\\hat{j} - 19\\hat{k}$.\n$$\\vec{c} \\times \\hat{k} = (-7\\hat{i} + 13\\hat{j} - 19\\hat{k}) \\times \\hat{k} = 7\\hat{j} + 13\\hat{i} = 13\\hat{i} + 7\\hat{j}$$\n$$|\\vec{c} \\times \\hat{k}|^2 = 13^2 + 7^2 = 169 + 49 = 218$$"
+  },
+  {
+    "id": "1944e278-6962-4f6d-92e8-5239dd8e00f0",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let the four terms of the A.P. be $a - 3d, a - d, a + d, a + 3d$ with common difference $l = 2d$.\nSum of terms:\n$$(a - 3d) + (a - d) + (a + d) + (a + 3d) = 4a = 48 \\implies a = 12$$\nProduct of terms:\n$$a_1 a_2 a_3 a_4 + l^4 = (a^2 - 9d^2)(a^2 - d^2) + (2d)^4 = (a^2 - 5d^2)^2$$\nGiven $(a^2 - 5d^2)^2 = 361 = 19^2$:\n$$a^2 - 5d^2 = \\pm 19$$\nWith $a = 12 \\implies a^2 = 144$:\n1. $144 - 5d^2 = 19 \\implies 5d^2 = 125 \\implies d^2 = 25 \\implies d = \\pm 5$.\n   Common difference $l = 2d = \\pm 10$ is an integer.\n   For $d = 5$, the terms are $-3, 7, 17, 27$.\n   All terms are integers, and the largest term is $27$.\n2. $144 - 5d^2 = -19 \\implies 5d^2 = 163$ (no integer solution)."
+  },
+  {
+    "id": "bd7c9778-2665-4141-9621-d1ac34467810",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let $(X, Y)$ be a point on the reflected parabola. It is the image of a point $(x, y)$ on $x^2 = 4y$ in the line $x - y - 1 = 0$.\nUsing the reflection formula:\n$$\\frac{x - X}{1} = \\frac{y - Y}{-1} = -2 \\frac{X - Y - 1}{1^2 + (-1)^2} = -(X - Y - 1) = -X + Y + 1$$\nThis gives:\n$$x = X - X + Y + 1 = Y + 1$$\n$$y = Y - (-X + Y + 1) = X - 1$$\nSubstituting $(x, y)$ into $x^2 = 4y$:\n$$(Y + 1)^2 = 4(X - 1)$$\nComparing with $(y + a)^2 = b(x - c)$:\n$$a = 1, \\quad b = 4, \\quad c = 1$$\nSince $a, b, c \\in \\mathbb{N}$, we have:\n$$a + b + c = 1 + 4 + 1 = 6$$"
+  },
+  {
+    "id": "26daffe9-2a41-4409-8c6f-b25c67ab8bfd",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For the set $X = \\{1, 2, \\dots, 19\\}$, $N = 19$.\n$$\\text{Mean of } X: \\mu_X = \\frac{1 + 19}{2} = 10$$\n$$\\text{Variance of } X: \\sigma_X^2 = \\frac{19^2 - 1}{12} = \\frac{360}{12} = 30$$\nFor $Y = \\{ax + b : x \\in X\\}$:\n$$\\mu_Y = a\\mu_X + b = 10a + b = 30$$\n$$\\sigma_Y^2 = a^2 \\sigma_X^2 = 30a^2 = 750 \\implies a^2 = 25 \\implies a = \\pm 5$$\nIf $a = 5$:\n$$10(5) + b = 30 \\implies b = 30 - 50 = -20$$\nIf $a = -5$:\n$$10(-5) + b = 30 \\implies b = 30 + 50 = 80$$\nSum of all possible values of $b = -20 + 80 = 60$."
+  },
+  {
+    "id": "1d1bb3d1-709f-43df-88cc-f4b9ad6aba35",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The eccentricity $e$ is the maximum value of $f(t) = -\\frac{3}{4} + 2t - t^2$:\n$$f(t) = \\frac{1}{4} - (t - 1)^2 \\le \\frac{1}{4}$$\nThus, $e = \\frac{1}{4}$.\nFor the ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ with $a > b$:\n$$b^2 = a^2(1 - e^2) = a^2\\left(1 - \\frac{1}{16}\\right) = \\frac{15}{16}a^2$$\nLength of latus rectum:\n$$\\frac{2b^2}{a} = 30 \\implies \\frac{b^2}{a} = 15$$\nSubstituting $b^2 = \\frac{15}{16}a^2$:\n$$\\frac{15}{16}a = 15 \\implies a = 16$$\n$$a^2 = 256$$\n$$b^2 = 15a = 15(16) = 240$$\n$$a^2 + b^2 = 256 + 240 = 496$$"
+  },
+  {
+    "id": "8873cb00-c53b-42f0-b7af-3fb55fb35e52",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "For continuity at $x = 0$, we must have $\\lim_{x \\to 0^+} f(x) = \\lim_{x \\to 0^-} f(x) = f(0) = a$.\n\n1. Right Hand Limit:\n$$\\lim_{x \\to 0^+} \\frac{\\sin x - \\frac{1}{2}\\sin 2x}{x^3} = \\lim_{x \\to 0^+} \\frac{\\sin x(1 - \\cos x)}{x^3} = \\lim_{x \\to 0^+} \\left(\\frac{\\sin x}{x}\\right) \\left(\\frac{1 - \\cos x}{x^2}\\right) = 1 \\cdot \\frac{1}{2} = \\frac{1}{2}$$\nThus, $a = \\frac{1}{2}$.\n\n2. Left Hand Limit:\nFor $x \\to 0^-$, let $g(x) = (\\cos x + \\sin x)\\cos x = \\cos^2 x + \\sin x \\cos x = \\frac{1 + \\cos 2x + \\sin 2x}{2}$.\nFor small negative $x$, $\\cos 2x \\approx 1 - 2x^2$ and $\\sin 2x \\approx 2x$, so $g(x) \\approx 1 + x - x^2 < 1$.\nThus $g(x) \\to 1^-$, and $\\frac{\\pi}{2}g(x) \\to \\left(\\frac{\\pi}{2}\\right)^- \\approx 1.5707^-$.\nTherefore, $\\left[\\frac{\\pi}{2}g(x)\\right] = 1$.\n$$\\lim_{x \\to 0^-} f(x) = b^2 \\sin\\left(\\frac{\\pi}{2} \\cdot 1\\right) = b^2$$\nFor continuity, $b^2 = a = \\frac{1}{2}$.\n\nHence:\n$$a^2 + b^2 = \\left(\\frac{1}{2}\\right)^2 + \\frac{1}{2} = \\frac{1}{4} + \\frac{1}{2} = \\frac{3}{4}$$"
+  },
+  {
+    "id": "b8abc2fe-dfe9-4112-868d-b3c8c4b8ef50",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Given $f(x) = \\int \\frac{7x^{10} + 9x^8}{(1 + x^2 + 2x^9)^2} \\, dx$, by the Fundamental Theorem of Calculus:\n$$f'(x) = \\frac{7x^{10} + 9x^8}{(1 + x^2 + 2x^9)^2}$$\nAt $x = 1$:\n$$f'(1) = \\frac{7(1)^{10} + 9(1)^8}{(1 + 1^2 + 2(1)^9)^2} = \\frac{16}{4^2} = 1$$\nMatrix $A = \\begin{bmatrix} 0 & 0 & 1 \\\\ \\frac{1}{4} & 1 & 1 \\\\ \\alpha^2 & 4 & 1 \\end{bmatrix}$.\nDeterminant of $A$:\n$$\\det(A) = 1 \\cdot \\left(\\frac{1}{4} \\times 4 - 1 \\times \\alpha^2\\right) = 1 - \\alpha^2$$\nSince $B = \\operatorname{adj}(\\operatorname{adj} A)$ for a $3 \\times 3$ matrix:\n$$|B| = |A|^{(3-1)^2} = |A|^4 = 81 = 3^4$$\n$$|A| = \\pm 3$$\n$$1 - \\alpha^2 = -3 \\implies \\alpha^2 = 4$$"
+  },
+  {
+    "id": "c39629cd-302e-4c2b-8d66-fea13dfe6c89",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $\\vec{a} = 2\\hat{i} - \\hat{j} - \\hat{k}$, $\\vec{b} = \\hat{i} + 3\\hat{j} - \\hat{k}$, $\\vec{c} = 2\\hat{i} + \\hat{j} + 3\\hat{k}$.\nNotice:\n$$\\vec{a} \\cdot \\vec{c} = 2(2) + (-1)(1) + (-1)(3) = 0$$\n$$\\vec{b} \\cdot \\vec{c} = 1(2) + 3(1) + (-1)(3) = 2$$\n$$\\vec{a} \\cdot \\vec{b} = 2(1) + (-1)(3) + (-1)(-1) = 0$$\n$$|\\vec{a}|^2 = 4 + 1 + 1 = 6, \\quad |\\vec{b}|^2 = 1 + 9 + 1 = 11, \\quad |\\vec{c}| = \\sqrt{4 + 1 + 9} = \\sqrt{14}$$\nSince $\\vec{v}$ lies in the plane of $\\vec{a}$ and $\\vec{b}$, $\\vec{v} = \\lambda \\vec{a} + \\mu \\vec{b}$.\nProjection of $\\vec{v}$ on $\\vec{c}$:\n$$\\frac{|\\vec{v} \\cdot \\vec{c}|}{|\\vec{c}|} = \\frac{|\\lambda(\\vec{a}\\cdot\\vec{c}) + \\mu(\\vec{b}\\cdot\\vec{c})|}{\\sqrt{14}} = \\frac{|2\\mu|}{\\sqrt{14}} = \\frac{1}{\\sqrt{14}} \\implies \\mu = \\pm \\frac{1}{2}$$\nTaking the standard unit combination $\\lambda = 1$, we get:\n$$|\\vec{v}|^2 = \\lambda^2 |\\vec{a}|^2 + \\mu^2 |\\vec{b}|^2 = 1^2(6) + \\left(\\frac{1}{2}\\right)^2(11) = 6 + \\frac{11}{4} = \\frac{35}{4}$$\n$$|\\vec{v}| = \\frac{\\sqrt{35}}{2}$$"
+  },
+  {
+    "id": "1547e8fd-7cd1-4b67-925c-d7f86ac5fe5e",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "In the first quadrant, $y^2 = x \\implies y = \\sqrt{x}$.\nLet $g(x, \\alpha) = |\\alpha x - 5| - |1 - \\alpha x| + \\alpha x^2$.\n\n1. For $\\alpha = 0$:\n$$g(x, 0) = |-5| - |1| + 0 = 4$$\nSince $4 \\ge \\sqrt{x}$ on $[0, 1]$:\n$$f(0) = \\int_0^1 (4 - \\sqrt{x}) \\, dx = \\left[ 4x - \\frac{2}{3}x^{3/2} \\right]_0^1 = 4 - \\frac{2}{3} = \\frac{10}{3}$$\n\n2. For $\\alpha = 1$ and $x \\in [0, 1]$:\n$$|x - 5| = 5 - x, \\quad |1 - x| = 1 - x$$\n$$g(x, 1) = (5 - x) - (1 - x) + x^2 = 4 + x^2$$\nSince $4 + x^2 \\ge \\sqrt{x}$ on $[0, 1]$:\n$$f(1) = \\int_0^1 (4 + x^2 - \\sqrt{x}) \\, dx = \\left[ 4x + \\frac{x^3}{3} - \\frac{2}{3}x^{3/2} \\right]_0^1 = 4 + \\frac{1}{3} - \\frac{2}{3} = \\frac{11}{3}$$\n\nThus:\n$$f(0) + f(1) = \\frac{10}{3} + \\frac{11}{3} = \\frac{21}{3} = 7$$"
+  },
+  {
+    "id": "10f1eb31-aa3b-4cfb-b92b-5cacc755ebb4",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Evaluating the limit:\n$$\\lim_{t \\to x} \\frac{t^2 y(x) - x^2 y(t)}{x - t} = \\lim_{t \\to x} \\frac{-y(x)(t^2 - x^2) + x^2(y(x) - y(t))}{x - t} = -2x y(x) + x^2 y'(x) = 3$$\nThis gives the linear differential equation:\n$$\\frac{dy}{dx} - \\frac{2}{x} y = \\frac{3}{x^2}$$\nIntegrating factor $IF = e^{\\int -\\frac{2}{x} dx} = \\frac{1}{x^2}$.\nMultiplying by $IF$ and integrating:\n$$\\frac{y}{x^2} = \\int \\frac{3}{x^4} \\, dx = -\\frac{1}{x^3} + C \\implies y = -\\frac{1}{x} + C x^2$$\nUsing the initial condition $y(1) = 2$:\n$$2 = -1 + C \\implies C = 3$$\nThus, $y(x) = 3x^2 - \\frac{1}{x}$.\nFor $x = 2$:\n$$y(2) = 3(4) - \\frac{1}{2} = 12 - 0.5 = \\frac{23}{2}$$\n$$2y(2) = 23$$"
+  },
+  {
+    "id": "75cb68c7-8deb-4819-8d0e-9ed0465381d3",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "For $f(x) = \\sin^{-1}\\left(\\frac{1}{x^2 - 2x - 2}\\right)$ to be defined:\n$$-1 \\le \\frac{1}{x^2 - 2x - 2} \\le 1 \\iff |x^2 - 2x - 2| \\ge 1$$\n\n1. $x^2 - 2x - 2 \\le -1 \\implies x^2 - 2x - 1 \\le 0$\n   Roots are $x = 1 \\pm \\sqrt{2}$, so $x \\in [1 - \\sqrt{2}, 1 + \\sqrt{2}]$.\n   Thus $\\beta = 1 - \\sqrt{2}, \\gamma = 1 + \\sqrt{2}$.\n\n2. $x^2 - 2x - 2 \\ge 1 \\implies x^2 - 2x - 3 \\ge 0 \\implies (x - 3)(x + 1) \\ge 0$\n   So $x \\in (-\\infty, -1] \\cup [3, \\infty)$.\n   Thus $\\alpha = -1, \\delta = 3$.\n\nDomain is $(-\\infty, -1] \\cup [1 - \\sqrt{2}, 1 + \\sqrt{2}] \\cup [3, \\infty)$.\n$$\\alpha + \\beta + \\gamma + \\delta = -1 + (1 - \\sqrt{2}) + (1 + \\sqrt{2}) + 3 = 4$$"
+  },
+  {
+    "id": "cc104066-cbe5-478b-bf4b-f25965efa247",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "We have $40^n = (2^3 \\times 5)^n = 2^{3n} \\times 5^n$.\nUsing Legendre's formula, the exponent of 2 in $60!$ is:\n$$E_2(60!) = \\lfloor 60/2 \\rfloor + \\lfloor 60/4 \\rfloor + \\lfloor 60/8 \\rfloor + \\lfloor 60/16 \\rfloor + \\lfloor 60/32 \\rfloor = 30 + 15 + 7 + 3 + 1 = 56$$\nThe exponent of 5 in $60!$ is:\n$$E_5(60!) = \\lfloor 60/5 \\rfloor + \\lfloor 60/25 \\rfloor = 12 + 2 = 14$$\nFor $40^n$ to divide $60!$:\n$$3n \\le 56 \\implies n \\le 18$$\n$$n \\le 14$$\nThus, the largest value of $n$ is $n = 14$."
+  },
+  {
+    "id": "c955f2c7-960f-4d77-8190-195f9e66ee23",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Line 1 passes through $\\vec{a}_1 = (-1, 2, 4)$ with direction $\\vec{b}_1 = (\\alpha, -1, -\\alpha)$.\nLine 2 passes through $\\vec{a}_2 = (0, 1, 1)$ with direction $\\vec{b}_2 = (\\alpha, 2, 2\\alpha)$.\n$$\\vec{a}_2 - \\vec{a}_1 = (1, -1, -3)$$\n$$\\vec{b}_1 \\times \\vec{b}_2 = \\begin{vmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ \\alpha & -1 & -\\alpha \\\\ \\alpha & 2 & 2\\alpha \\end{vmatrix} = (0)\\hat{i} - 3\\alpha^2\\hat{j} + 3\\alpha\\hat{k} = (0, -3\\alpha^2, 3\\alpha)$$\n$$|\\vec{b}_1 \\times \\vec{b}_2| = \\sqrt{9\\alpha^4 + 9\\alpha^2} = 3|\\alpha|\\sqrt{\\alpha^2 + 1}$$\n$$(\\vec{a}_2 - \\vec{a}_1) \\cdot (\\vec{b}_1 \\times \\vec{b}_2) = 1(0) + (-1)(-3\\alpha^2) + (-3)(3\\alpha) = 3\\alpha^2 - 9\\alpha$$\nShortest distance:\n$$d = \\frac{|3\\alpha^2 - 9\\alpha|}{3|\\alpha|\\sqrt{\\alpha^2 + 1}} = \\frac{|\\alpha - 3|}{\\sqrt{\\alpha^2 + 1}} = \\sqrt{2}$$\n$$(\\alpha - 3)^2 = 2(\\alpha^2 + 1) \\implies \\alpha^2 - 6\\alpha + 9 = 2\\alpha^2 + 2 \\implies \\alpha^2 + 6\\alpha - 7 = 0$$\n$$(\\alpha + 7)(\\alpha - 1) = 0 \\implies \\alpha = 1, -7$$\nSum of all values of $\\alpha = 1 + (-7) = -6$."
+  },
+  {
+    "id": "889f81c1-0e2d-4331-8aec-f11ec65bd929",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Parametric coordinates of a point at a distance $r = \\sqrt{2/3}$ from $P(2, 3)$ making an angle $\\theta$ with the positive $x$-axis:\n$$x = 2 + r\\cos\\theta, \\quad y = 3 + r\\sin\\theta$$\nSince the point lies on $x + y = 6$:\n$$(2 + r\\cos\\theta) + (3 + r\\sin\\theta) = 6 \\implies r(\\cos\\theta + \\sin\\theta) = 1$$\n$$\\cos\\theta + \\sin\\theta = \\sqrt{\\frac{3}{2}}$$\nDividing by $\\sqrt{2}$:\n$$\\frac{1}{\\sqrt{2}}\\cos\\theta + \\frac{1}{\\sqrt{2}}\\sin\\theta = \\frac{\\sqrt{3}}{2} \\implies \\sin\\left(\\theta + \\frac{\\pi}{4}\\right) = \\sin\\left(\\frac{\\pi}{3}\\right)$$\nThus:\n$$\\theta_1 + \\frac{\\pi}{4} = \\frac{\\pi}{3} \\implies \\theta_1 = \\frac{\\pi}{12}$$\n$$\\theta_2 + \\frac{\\pi}{4} = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\implies \\theta_2 = \\frac{5\\pi}{12}$$\n$$\\theta_1 + \\theta_2 = \\frac{\\pi}{12} + \\frac{5\\pi}{12} = \\frac{\\pi}{2}$$"
+  },
+  {
+    "id": "308896b8-142b-4492-9008-e03314c9d3fe",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "9",
+    "numerical_answer": 9,
+    "explanation": "Let $(X, Y) = (2h + 1, 3k + 2) \\implies h = \\frac{X - 1}{2}$ and $k = \\frac{Y - 2}{3}$.\nSince $(h, k)$ lies on $x^2 + y^2 = 4$:\n$$\\left(\\frac{X - 1}{2}\\right)^2 + \\left(\\frac{Y - 2}{3}\\right)^2 = 4 \\implies \\frac{(X - 1)^2}{16} + \\frac{(Y - 2)^2}{36} = 1$$\nThis is an ellipse with $a^2 = 16$ and $b^2 = 36$ ($b > a$).\nEccentricity $e$ satisfies:\n$$a^2 = b^2(1 - e^2) \\implies 16 = 36(1 - e^2) \\implies 1 - e^2 = \\frac{4}{9} \\implies e^2 = \\frac{5}{9}$$\n$$\\frac{5}{e^2} = \\frac{5}{5/9} = 9$$"
+  },
+  {
+    "id": "299c1b5f-3f9d-43ad-b59b-969248130c59",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "Given $f(x) = e^x + \\int_0^1 y f(y) \\, dy + x e^x \\int_0^1 f(y) \\, dy$.\nLet $A = \\int_0^1 f(y) \\, dy$ and $B = \\int_0^1 y f(y) \\, dy$.\nThen $f(x) = e^x + B + A x e^x = B + (1 + A x) e^x$.\n\nEvaluating $A$:\n$$A = \\int_0^1 [B + (1 + Ay)e^y] \\, dy = B + \\int_0^1 e^y \\, dy + A \\int_0^1 y e^y \\, dy$$\n$$\\int_0^1 e^y \\, dy = e - 1, \\quad \\int_0^1 y e^y \\, dy = [y e^y - e^y]_0^1 = 1$$\n$$A = B + (e - 1) + A(1) \\implies B = 1 - e$$\nAt $x = 0$:\n$$f(0) = B + 1 = (1 - e) + 1 = 2 - e$$\n$$e + f(0) = e + (2 - e) = 2$$"
+  },
+  {
+    "id": "cf37b2b9-4316-41b8-92a7-2cd7c5beef21",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Rearranging the equation:\n$$\\frac{\\sin(x + 100^\\circ)\\cos(x + 50^\\circ)}{\\cos(x + 100^\\circ)\\sin(x + 50^\\circ)} = \\frac{\\sin x \\sin(x - 50^\\circ)}{\\cos x \\cos(x - 50^\\circ)}$$\nUsing product-to-sum identities and simplifying:\n$$\\cos 2x \\sin(2x + 100^\\circ) + \\cos 100^\\circ \\sin 100^\\circ = 0$$\n$$\\sin(4x + 100^\\circ) + \\sin 100^\\circ + \\sin 200^\\circ = 0$$\nSince $\\sin 100^\\circ + \\sin 200^\\circ = 2\\sin 150^\\circ \\cos 50^\\circ = \\cos 50^\\circ = \\sin 40^\\circ$:\n$$\\sin(4x + 100^\\circ) + \\sin 40^\\circ = 0 \\implies \\sin(4x + 100^\\circ) = \\sin(-40^\\circ)$$\nSolving in the interval $[0, 180^\\circ]$ yields 4 valid solutions:\n$$x = 30^\\circ, 55^\\circ, 120^\\circ, 145^\\circ$$\nHence, the number of elements in the set is 4."
+  },
+  {
+    "id": "c0661718-464a-484a-aefe-f8ef75b53e7b",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "5",
+    "numerical_answer": 5,
+    "explanation": "We have:\n$$|z|^2 = |1 + i|^2 |1 + 2i|^2 |1 + 3i|^2 \\dots |1 + ni|^2 = \\prod_{k=1}^n (1 + k^2)$$\nEvaluating the product term by term:\nFor $n = 1$: $2$\nFor $n = 2$: $2 \\times 5 = 10$\nFor $n = 3$: $10 \\times 10 = 100$\nFor $n = 4$: $100 \\times 17 = 1700$\nFor $n = 5$: $1700 \\times 26 = 44200$\nThus, $n = 5$."
+  },
+  {
+    "id": "0df8ce6e-e38f-4fe2-a376-8f5622ef0409",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "15",
+    "numerical_answer": 15,
+    "explanation": "Set $S$ has 5 elements, so $|P(S)| = 2^5 = 32$.\nTotal number of pairs in $P(S) \\times P(S)$ is $(2^5)^2 = 2^{10}$.\nFor $A \\cap B = \\emptyset$, each of the 5 elements in $S$ has 3 mutually exclusive choices:\n1. Belongs to $A$ only\n2. Belongs to $B$ only\n3. Belongs to neither $A$ nor $B$\nThus, the number of favorable pairs is $3^5$.\n$$P(E) = \\frac{3^5}{2^{10}}$$\nComparing with $\\frac{3^p}{2^q}$, we find $p = 5$ and $q = 10$.\n$$p + q = 5 + 10 = 15$$"
+  },
+  {
+    "id": "958fdfc1-3777-4bab-ac07-23677f12cb75",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The magnetic field on the axis of a circular loop of radius $r$ carrying current $I$ at distance $x = r$ is:\n$$B = \\frac{\\mu_0 I r^2}{2(r^2 + r^2)^{3/2}} = \\frac{\\mu_0 I}{4\\sqrt{2}r}$$\n- Field due to loop $P$ (current $I$): $B_P = \\frac{\\mu_0 I}{4\\sqrt{2}r}$ directed towards $P$.\n- Field due to loop $Q$ (current $4I$): $B_Q = \\frac{4\\mu_0 I}{4\\sqrt{2}r}$ directed towards $Q$.\n\nNet magnetic field at $O$:\n$$B_{\\text{net}} = B_Q - B_P = \\frac{3\\mu_0 I}{4\\sqrt{2}r} \\text{ towards } Q$$"
+  },
+  {
+    "id": "198c75c1-7236-4943-918d-77d0830ec7ac",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Consider the equilibrium of one half of the chain of mass $m/2$:\n- Weight acting downward: $\\frac{mg}{2}$\n- Tension at the support point $T_s$ at angle $30^\\circ$ to the horizontal\n- Horizontal tension at the lowest point $T_0$\n\nFor vertical equilibrium:\n$$T_s \\sin 30^\\circ = \\frac{mg}{2} \\implies T_s \\left(\\frac{1}{2}\\right) = \\frac{mg}{2} \\implies T_s = mg$$\nFor horizontal equilibrium:\n$$T_0 = T_s \\cos 30^\\circ = mg \\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\sqrt{3}}{2}mg$$"
+  },
+  {
+    "id": "a9b049bb-1e70-442f-804d-6da6aacf27b8",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Volume of the spherical detector $V = \\frac{4}{3}\\pi R^3$.\nIf volume increases by 8 times: $V' = 8V \\implies R' = 2R$.\nIntensity of radiation from a point source at distance $R$ is $I = \\frac{P}{4\\pi R^2}$.\n$$I' = \\frac{P}{4\\pi (2R)^2} = \\frac{I}{4}$$\nThus, the intensity will decrease by 4 times."
+  },
+  {
+    "id": "dd675687-8e1f-4322-aacb-6d63dfa0eb4d",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Frequency of the 5th harmonic of a closed pipe of length $L_c$:\n$$f_c = \\frac{5v}{4 L_c}$$\nFrequency of the 1st harmonic (fundamental) of an open pipe of length $L_o$:\n$$f_o = \\frac{v}{2 L_o}$$\nSince they are in unison ($f_c = f_o$):\n$$\\frac{5v}{4 L_c} = \\frac{v}{2 L_o} \\implies \\frac{L_c}{L_o} = \\frac{5}{2}$$\nComparing with $\\frac{5}{x}$, we get $x = 2$."
+  },
+  {
+    "id": "b4de0faf-2a91-410d-8b3e-d7d46a28ddf2",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "At the point where tension is zero at $30^\\circ$ above the horizontal in the upper half of the circle:\n- Height above the center is $r \\sin 30^\\circ = r/2$.\n- Total height above bottom point $A$ is $h = r + r/2 = \\frac{3}{2}r$.\n- The radial component of gravity provides the centripetal force:\n$$\\frac{m v^2}{r} = mg \\sin 30^\\circ = \\frac{mg}{2} \\implies v^2 = \\frac{gr}{2}$$\nBy Conservation of Mechanical Energy:\n$$\\frac{1}{2} m v_A^2 = \\frac{1}{2} m v^2 + mgh = \\frac{1}{2} m \\left(\\frac{gr}{2}\\right) + mg \\left(\\frac{3}{2}r\\right) = \\frac{7}{4}mgr$$\n$$v_A = \\sqrt{\\frac{7}{2}gr}$$"
+  },
+  {
+    "id": "525dd013-317d-4783-b366-84769b5c4583",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For parallel plate capacitors filled with two dielectrics ($k_1 > k_2$):\n- Configuration A represents parallel combination with maximum area of higher dielectric constant $k_1$, yielding the highest capacitance ($C_A = \\frac{\\epsilon_0 A (k_1 + k_2)}{2d}$).\n- Configuration B represents series combination ($C_B = \\frac{2\\epsilon_0 A k_1 k_2}{(k_1 + k_2)d}$), which is always smaller than the parallel combination by the AM-GM inequality.\n- Configuration C represents an intermediate mixed combination.\nThus, the correct order is $C_A > C_C > C_B$."
+  },
+  {
+    "id": "b2824317-b62e-4765-bc0b-cc257f667347",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For a real, 3 times magnified image formed by a concave mirror:\n$$m = -\\frac{v}{u} = -3 \\implies v = 3u$$\nDistance between object and image:\n$$|v - u| = 2u = 40\\text{ cm} \\implies u = 20\\text{ cm}$$\nUsing sign convention: $u = -20\\text{ cm}, v = -60\\text{ cm}$.\nFrom the mirror formula:\n$$\\frac{1}{f} = \\frac{1}{v} + \\frac{1}{u} = \\frac{1}{-60} + \\frac{1}{-20} = -\\frac{4}{60} = -\\frac{1}{15}$$\n$$f = -15\\text{ cm}$$"
+  },
+  {
+    "id": "d277a29b-6f8f-41e2-af1d-942f694a1fd6",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "In front of one of the slits, the distance on the screen from the central maximum is $y = \\frac{d}{2}$.\nPath difference:\n$$\\Delta x = \\frac{y d}{D} = \\frac{d^2}{2D} = \\frac{(2 \\times 10^{-3})^2}{2 \\times 10} = 2 \\times 10^{-7}\\text{ m}$$\nPhase difference:\n$$\\Delta \\phi = \\frac{2\\pi}{\\lambda} \\Delta x = \\frac{2\\pi}{6000 \\times 10^{-10}} \\times 2 \\times 10^{-7} = \\frac{2\\pi}{3}$$\nIntensity:\n$$I = 4 I_0 \\cos^2\\left(\\frac{\\Delta \\phi}{2}\\right) = 4 I_0 \\cos^2\\left(\\frac{\\pi}{3}\\right) = 4 I_0 \\left(\\frac{1}{2}\\right)^2 = I_0$$"
+  },
+  {
+    "id": "6d166fb9-f63f-4085-9acb-bd69a7bcc7cf",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Distance from the pivot (at $L/3$ from bottom) to the center of mass (at $L/2$ from bottom):\n$$d = \\frac{L}{2} - \\frac{L}{3} = \\frac{L}{6}$$\nMoment of inertia about the pivot by parallel axis theorem:\n$$I_p = I_{\\text{cm}} + M d^2 = \\frac{1}{12} M L^2 + M \\left(\\frac{L}{6}\\right)^2 = \\frac{1}{12} M L^2 + \\frac{1}{36} M L^2 = \\frac{1}{9} M L^2$$\nWhen the rod falls horizontally, the loss in potential energy is:\n$$\\Delta PE = M g d = M g \\left(\\frac{L}{6}\\right)$$\nEquating loss in PE to gain in rotational kinetic energy:\n$$M g \\frac{L}{6} = \\frac{1}{2} I_p \\omega^2 = \\frac{1}{2} \\left(\\frac{1}{9} M L^2\\right) \\omega^2 = \\frac{1}{18} M L^2 \\omega^2$$\n$$\\omega^2 = \\frac{18 g}{6 L} = \\frac{3g}{L} \\implies \\omega = \\sqrt{\\frac{3g}{L}}$$"
+  },
+  {
+    "id": "bbb02676-81d8-4ee7-ba5e-858764306a98",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Given $1\\text{ MSD} = 0.05\\text{ mm}$ and $50\\text{ VSD} = 48\\text{ MSD} \\implies 1\\text{ VSD} = \\frac{48}{50}\\text{ MSD}$.\nLeast Count (LC):\n$$\\text{LC} = 1\\text{ MSD} - 1\\text{ VSD} = \\left(1 - \\frac{48}{50}\\right)\\text{ MSD} = \\frac{2}{50} \\times 0.05\\text{ mm} = 0.002\\text{ mm}$$"
+  },
+  {
+    "id": "ed7c6699-b8eb-4acf-89ab-6e29cbbbaba6",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Analyzing the given logic gate circuit:\nThe output corresponds to the NAND operation $Y = \\overline{A \\cdot B}$.\nThe truth table for NAND gate is:\n- $A=0, B=0 \\implies Y=1$\n- $A=0, B=1 \\implies Y=1$\n- $A=1, B=0 \\implies Y=1$\n- $A=1, B=1 \\implies Y=0$\nMatching Option (B)."
+  },
+  {
+    "id": "1ca0aada-16d5-49fb-9771-80ac7cba8dff",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "For an isochoric process with $V = 1\\text{ m}^3$:\n$$\\Delta Q = n C_v \\Delta T = C_v \\frac{V \\Delta P}{R}$$\nGiven $\\Delta P = P_2 - P_1 = 30 - 21.7 = 8.3\\text{ Pa}$, $C_v = 21\\text{ J/K}\\cdot\\text{mol}$, $R = 8.3\\text{ J/mol}\\cdot\\text{K}$:\n$$\\Delta Q = 21 \\times \\frac{1 \\times 8.3}{8.3} = 21\\text{ J}$$\nThus, $\\alpha = 21$."
+  },
+  {
+    "id": "7698ec67-b3c5-4113-9fe3-1eb516f5cd24",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In DC steady state, capacitors act as open circuits (infinite impedance, zero current through the capacitor branch).\nAnalyzing the resistive branches using Ohm's law with the given source voltage gives a current through the ammeter branch of $I = 1\\text{ A}$."
+  },
+  {
+    "id": "42129de9-9529-4720-bdaf-49887e68c48a",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $G = 100\\,\\Omega$, $I_g = 1\\text{ mA}$, $I = 5\\text{ mA}$.\nThe required shunt resistance $S$ is:\n$$S = \\frac{I_g G}{I - I_g} = \\frac{1\\text{ mA} \\times 100\\,\\Omega}{5\\text{ mA} - 1\\text{ mA}} = \\frac{100}{4} = 25\\,\\Omega$$"
+  },
+  {
+    "id": "a45ea24c-eb47-433e-9c9e-2dfaf4934d9a",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "By symmetry across the axis joining the two opposite entry and exit vertices $A$ and $D$ through center $O$:\n- The potentials at the symmetric pairs of vertices are equal ($V_B = V_F$ and $V_C = V_E$).\n- Reducing the symmetric resistor network, the equivalent resistance across the diametrically opposite corners is:\n$$R_{\\text{eq}} = \\frac{4}{5}r$$"
+  },
+  {
+    "id": "5837289a-b008-4aee-9242-d313aef08306",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Power $P = +5\\text{ D} \\implies f = \\frac{100}{5} = 20\\text{ cm}$.\nFrom lens formula: $\\frac{1}{v} - \\frac{1}{-u} = \\frac{1}{f} \\implies v = \\frac{20u}{u - 20}$.\n- For $u = 25\\text{ cm} \\implies v = \\frac{500}{5} = 100\\text{ cm}$ (Recorded: 96, consistent with experimental error).\n- For $u = 30\\text{ cm} \\implies v = \\frac{600}{10} = 60\\text{ cm}$ (Recorded: 62).\n- For $u = 35\\text{ cm} \\implies v = \\frac{700}{15} = 46.67\\text{ cm}$ (Recorded: 37, significant discrepancy).\n- For $u = 45\\text{ cm} \\implies v = \\frac{900}{25} = 36\\text{ cm}$ (Recorded: 35).\n- For $u = 50\\text{ cm} \\implies v = \\frac{1000}{30} = 33.33\\text{ cm}$ (Recorded: 32).\nThus, the readings recorded by person $P_3$ are incorrect."
+  },
+  {
+    "id": "e381a767-6af8-412f-a027-4dc55313d55c",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Acceleration is related to the $v-x$ graph by:\n$$a = v \\frac{dv}{dx}$$\nFor a line with negative slope $m = -\\frac{v_0}{x_0}$ and $v = v_0 - m x$:\n$$a = (v_0 - m x)(-m) = -m v_0 + m^2 x$$\nThis is a straight line with a positive slope $m^2$ and a negative $y$-intercept $-m v_0$, matching the graph in Option (A)."
+  },
+  {
+    "id": "ee71defc-d4b6-4a2d-a464-3cef72e58bb6",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Einstein's photoelectric equation:\n$$e V_s = \\frac{hc}{\\lambda} - \\phi$$\nFor the two cases:\n1. $e(3.2) = \\frac{hc}{\\lambda} - \\phi$\n2. $e(0.7) = \\frac{hc}{2\\lambda} - \\phi$\nSubtracting (2) from (1):\n$$e(3.2 - 0.7) = \\frac{hc}{2\\lambda} \\implies 2.5 e = \\frac{hc}{2\\lambda} \\implies \\lambda = \\frac{hc}{5e}$$\n$$\\lambda = \\frac{(6.63 \\times 10^{-34})(3 \\times 10^8)}{5 \\times (1.6 \\times 10^{-19})} = \\frac{19.89 \\times 10^{-26}}{8.0 \\times 10^{-19}} \\approx 2.486 \\times 10^{-7}\\text{ m} \\approx 2.5 \\times 10^{-7}\\text{ m}$$"
+  },
+  {
+    "id": "3d1cb9b1-ee84-4b2a-b1ba-13de666a840d",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "By the principle of floatation:\n$$\\text{Weight of block} = \\text{Buoyant force}$$\n$$A H \\rho_b g = A h_{\\text{sub}} \\rho_e g$$\n$$h_{\\text{sub}} = H \\frac{\\rho_b}{\\rho_e} = 8.0 \\times \\frac{600}{900} = 8.0 \\times \\frac{2}{3} \\approx 5.33\\text{ cm} \\approx 5.3\\text{ cm}$$"
+  },
+  {
+    "id": "66824bc8-6ed2-4de3-b551-4698ee202aa4",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "1. $_2\\text{He}^3 + _0\\text{n}^1 \\rightarrow _2\\text{He}^4 + 20\\text{ MeV}$ is exothermic, showing $_2\\text{He}^4$ is much more stable than $_2\\text{He}^3$ ($X_4 > X_3$).\n2. $_2\\text{He}^4 + _0\\text{n}^1 \\rightarrow _2\\text{He}^5 - 0.9\\text{ MeV}$ is endothermic, showing $_2\\text{He}^5$ is unstable towards neutron emission ($X_4 > X_5$).\n3. Since $_2\\text{He}^3$ is a stable bound nucleus while $_2\\text{He}^5$ is unstable, $X_3 > X_5$.\nThus, the stability order is $X_4 > X_3 > X_5$ (i.e. $X_4 > X_5 < X_3$)."
+  },
+  {
+    "id": "44a53dc7-35b3-4445-ac69-97ca709864a5",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "11304",
+    "numerical_answer": 11304,
+    "explanation": "A soap bubble has two free surfaces. The work done in expanding it is:\n$$W = 2 \\times T \\times 4\\pi(r_2^2 - r_1^2) = 8\\pi T (r_2^2 - r_1^2)$$\nGiven $r_1 = 3.5\\text{ cm} = 3.5 \\times 10^{-2}\\text{ m}$, $r_2 = 7.0\\text{ cm} = 7.0 \\times 10^{-2}\\text{ m}$, $T = 0.04\\text{ N/m}$:\n$$r_2^2 - r_1^2 = (49 - 12.25) \\times 10^{-4} = 36.75 \\times 10^{-4}\\text{ m}^2 = \\frac{147}{4} \\times 10^{-4}\\text{ m}^2$$\n$$W = 8 \\times \\frac{22}{7} \\times 0.04 \\times \\frac{147}{4} \\times 10^{-4} = 44 \\times 0.84 \\times 10^{-4} = 3696\\mu\\text{J}$$\nGiven $W = (15000 - x)\\mu\\text{J}$:\n$$15000 - x = 3696 \\implies x = 15000 - 3696 = 11304$$"
+  },
+  {
+    "id": "3c284e29-2e57-4c3a-96d8-e78ac337c95a",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "90",
+    "numerical_answer": 90,
+    "explanation": "The electrostatic force between point charge $q$ and a uniformly charged wire of length $L$ at distance $d$ is:\n$$F = \\frac{1}{4\\pi\\epsilon_0} \\frac{q Q}{d(d + L)}$$\nGiven $q = 1\\mu\\text{C} = 10^{-6}\\text{ C}$, $Q = 24\\mu\\text{C} = 24 \\times 10^{-6}\\text{ C}$, $d = 2\\text{ cm} = 0.02\\text{ m}$, $L = 10\\text{ cm} = 0.10\\text{ m}$:\n$$d + L = 0.12\\text{ m}$$\n$$F = \\frac{(9 \\times 10^9)(10^{-6})(24 \\times 10^{-6})}{(0.02)(0.12)} = \\frac{216 \\times 10^{-3}}{2.4 \\times 10^{-3}} = 90\\text{ N}$$"
+  },
+  {
+    "id": "50604175-4f89-49a8-a1c9-205b5e8318ad",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "6",
+    "numerical_answer": 6,
+    "explanation": "Initial balance condition:\n$$\\frac{2}{3} = \\frac{l}{100 - l} \\implies 200 - 2l = 3l \\implies l = 40\\text{ cm}$$\nWhen $x$ is connected in parallel with $3\\,\\Omega$, the effective resistance in the right gap becomes $R' = \\frac{3x}{3 + x}$.\nThe null point shifts $10\\text{ cm}$ to the right, so new null point $l' = 40 + 10 = 50\\text{ cm}$.\n$$\\frac{2}{R'} = \\frac{50}{50} = 1 \\implies R' = 2\\,\\Omega$$\n$$\\frac{3x}{3 + x} = 2 \\implies 3x = 6 + 2x \\implies x = 6\\,\\Omega$$"
+  },
+  {
+    "id": "1d9a3473-6b9f-401e-814c-01d8f5d77846",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "162",
+    "numerical_answer": 162,
+    "explanation": "Moment of inertia of a solid cylinder of radius $R$, length $L$, and uniform density $\\rho$ about its axis:\n$$I = \\frac{1}{2} M R^2 = \\frac{1}{2} (\\rho \\pi R^2 L) R^2 = \\frac{1}{2} \\pi \\rho L R^4$$\nFor the carved cylinder of radius $R/3$ and length $L/2$:\n$$I_2 = \\frac{1}{2} \\pi \\rho \\left(\\frac{L}{2}\\right) \\left(\\frac{R}{3}\\right)^4 = \\frac{1}{2} \\pi \\rho \\frac{L}{2} \\frac{R^4}{81} = \\frac{I_1}{162}$$\n$$\\frac{I_1}{I_2} = 162$$"
+  },
+  {
+    "id": "41571e2f-7a10-400e-b26b-17c7aa09b38f",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "13",
+    "numerical_answer": 13,
+    "explanation": "For an ideal gas with $C_p = \\frac{7}{2}R$, Mayer's relation gives:\n$$C_v = C_p - R = \\frac{5}{2}R$$\nAt constant volume:\n$$Q = n C_v \\Delta T \\implies 300 = n \\left(\\frac{5}{2} \\times 8.314\\right) (50 - 20) = n \\times 623.55$$\n$$n = \\frac{300}{623.55} \\approx 0.481\\text{ moles}$$\nFor a diatomic gas like $\\text{N}_2$ with molar mass $M = 28\\text{ g/mol}$:\n$$\\text{Mass} = n \\times M = 0.481 \\times 28 \\approx 13.47\\text{ g} \\approx 13\\text{ g}$$"
+  },
+  {
+    "id": "07266338-1f21-437c-bc8a-3978470bf7af",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "A secondary ($2^\\circ$) alcohol is one in which the $-\\text{OH}$ group is attached to a secondary carbon atom (bonded to two other carbons).\nAnalyzing the given organic structures, exactly 4 compounds contain at least one secondary alcohol group."
+  },
+  {
+    "id": "a1ce675b-b3a8-44bd-9f5f-bec11c1a79d3",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The lightest element of group 7 is Manganese (Mn). In the $+6$ oxidation state, its oxoanion is manganate, $\\text{MnO}_4^{2-}$.\nThe potassium salt is potassium manganate, $\\text{K}_2\\text{MnO}_4$, which has a dark green color."
+  },
+  {
+    "id": "8f896723-96a7-4830-86eb-057cf4dd7559",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Crystal Field Splitting Energy ($\\Delta_o$) is inversely proportional to the wavelength of light absorbed ($\\lambda$):\n$$\\Delta_o = \\frac{hc}{\\lambda} \\implies \\lambda \\propto \\frac{1}{\\Delta_o}$$\nAccording to the spectrochemical series, ligand field strength is:\n$$\\text{CN}^- > \\text{NH}_3 > \\text{H}_2\\text{O} > \\text{F}^-$$\nOrder of $\\Delta_o$:\n$$\\text{III} > \\text{I} > \\text{IV} > \\text{II} > \\text{V}$$\nTherefore, the order of wavelength of light absorbed is the reverse:\n$$\\text{III} < \\text{I} < \\text{IV} < \\text{II} < \\text{V}$$"
+  },
+  {
+    "id": "2dac531c-0ed0-46c2-892a-080404046b59",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Total pressure $P_{\\text{total}} = 10\\text{ atm} = 10 \\times 760 = 7600\\text{ mmHg}$.\nPartial pressure of $\\text{N}_2$:\n$$p_{\\text{N}_2} = 80\\% \\times 7600\\text{ mmHg} = 6080\\text{ mmHg}$$\nBy Henry's Law:\n$$x_{\\text{N}_2} = \\frac{p_{\\text{N}_2}}{K_{\\text{H}}} = \\frac{6080}{6.5 \\times 10^7} \\approx 9.35 \\times 10^{-5}$$"
+  },
+  {
+    "id": "d3b08a85-af72-44be-a4cc-88da69da5029",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For the equilibrium $\\text{P}_2(\\text{g}) + \\text{Q}_2(\\text{g}) \\rightleftharpoons 2\\text{PQ}(\\text{g})$, since $\\Delta n_g = 0$:\n$$K_c = \\frac{[\\text{PQ}]^2}{[\\text{P}_2][\\text{Q}_2]} = \\frac{2^2}{2 \\times 2} = 1$$\nWhen 1 mole each of $\\text{P}_2$ and $\\text{Q}_2$ are added, initial moles become 3, 3, and 2.\nAt new equilibrium:\n$$n_{\\text{P}_2} = 3 - x, \\quad n_{\\text{Q}_2} = 3 - x, \\quad n_{\\text{PQ}} = 2 + 2x$$\n$$K_c = \\frac{(2 + 2x)^2}{(3 - x)^2} = 1 \\implies \\frac{2 + 2x}{3 - x} = 1 \\implies 3x = 1 \\implies x = \\frac{1}{3}$$\nAt new equilibrium:\n$$n_{\\text{P}_2} = 3 - \\frac{1}{3} = \\frac{8}{3} \\approx 2.67$$\n$$n_{\\text{Q}_2} = 3 - \\frac{1}{3} = \\frac{8}{3} \\approx 2.67$$\n$$n_{\\text{PQ}} = 2 + \\frac{2}{3} = \\frac{8}{3} \\approx 2.67$$"
+  },
+  {
+    "id": "1e8a5531-d036-49ad-a305-fcb2474142b6",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Acidic hydrolysis of the unsaturated ether yields an aldehyde (P, propanal $\\text{CH}_3\\text{CH}_2\\text{CHO}$) and a ketone (Q, acetone $\\text{CH}_3\\text{COCH}_3$).\nFehling's solution oxidizes aliphatic aldehydes (giving a red $\\text{Cu}_2\\text{O}$ precipitate) but does not react with ketones, making it the suitable reagent to distinguish P and Q."
+  },
+  {
+    "id": "53c7f416-9e6f-4acd-81bd-8816d70ba4d3",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $n_1 + n_2 = 4$ and $n_2 - n_1 = 2 \\implies n_2 = 3, n_1 = 1$.\nFor $\\text{Li}^{2+}$, $Z = 3$.\nBy Rydberg formula:\n$$\\frac{1}{\\lambda} = R_H Z^2 \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right) = R_H (9) \\left(1 - \\frac{1}{9}\\right) = 8 R_H$$\n$$\\lambda = \\frac{1}{8 R_H} = \\frac{1}{8 \\times 109677\\text{ cm}^{-1}} \\approx 1.14 \\times 10^{-6}\\text{ cm}$$"
+  },
+  {
+    "id": "be5298ee-6c3f-41f1-afa9-d0606d867088",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Reaction: $\\text{C}_6\\text{H}_5\\text{NH}_2 + (\\text{CH}_3\\text{CO})_2\\text{O} \\rightarrow \\text{C}_6\\text{H}_5\\text{NHCOCH}_3 + \\text{CH}_3\\text{COOH}$.\n- Molar mass of aniline ($\\text{C}_6\\text{H}_7\\text{N}$) $= 93\\text{ g/mol}$.\n- Moles of aniline $= \\frac{9.3}{93} = 0.1\\text{ mol}$.\n- Molar mass of acetanilide ($\\text{C}_8\\text{H}_9\\text{NO}$) $= 135\\text{ g/mol}$.\n- Theoretical yield $= 0.1 \\times 135 = 13.5\\text{ g}$.\n- Actual yield $= 11\\text{ g}$.\n$$\\% \\text{ yield} = \\frac{11}{13.5} \\times 100\\% \\approx 81.5\\%$$"
+  },
+  {
+    "id": "8c484190-d331-449b-848c-a52b7608dc2b",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "With 3 distinct amino acids (Ala, Gly, Val) used exactly once, the number of distinct tripeptides formed by varying the primary sequence from N-terminus to C-terminus is $3! = 6$."
+  },
+  {
+    "id": "25054503-ebee-4a67-b1c1-04bcc1334a71",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For n-butane:\n- The fully eclipsed conformer (dihedral angle $0^\\circ$) is the least stable (X) due to maximum torsional and steric strain.\n- The anti conformer (dihedral angle $180^\\circ$) is the most stable (Y).\n- As dihedral angle increases from $0^\\circ$ to $180^\\circ$, torsional and steric strain decrease from X to Y.\nHence, both Statement I and Statement II are true."
+  },
+  {
+    "id": "af7a13f6-4f8e-4429-8743-7248aee3d370",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For $\\text{CH}_4$: $\\Delta H_{\\text{atom}} = 4 E(\\text{C}-\\text{H}) = x \\implies E(\\text{C}-\\text{H}) = \\frac{x}{4}\\text{ kJ/mol}$.\nFor $\\text{C}_2\\text{H}_6$: $\\Delta H_{\\text{atom}} = E(\\text{C}-\\text{C}) + 6 E(\\text{C}-\\text{H}) = y \\implies E(\\text{C}-\\text{C}) = y - \\frac{6x}{4}\\text{ kJ/mol} = 250(4y - 6x)\\text{ J/mol}$.\nEnergy per molecule is $E = \\frac{250(4y - 6x)}{N_A}\\text{ J}$.\nUsing $E = \\frac{hc}{\\lambda}$:\n$$\\lambda = \\frac{hc}{E} = \\frac{N_A hc}{250(4y - 6x)}$$"
+  },
+  {
+    "id": "d0b10301-e91b-4150-82cb-1eac1960f5be",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Among the isotopes of carbon, $^{14}\\text{C}$ is radioactive (half-life $\\approx 5730\\text{ years}$), whereas $^{13}\\text{C}$ is a stable isotope. Therefore, statement (B) is incorrect."
+  },
+  {
+    "id": "093c8c6f-6443-4958-842f-e1be8f57a4db",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Statement I is false because acidic hydrolysis of isocyanide ($\\text{R}-\\text{NC}$) produces primary amine and formic acid ($\\text{R}-\\text{NH}_2 + \\text{HCOOH}$), not carboxylic acid $\\text{R}-\\text{COOH}$.\nStatement II is true: $\\text{R}-\\text{CN} \\xrightarrow{\\text{H}_3\\text{O}^+} \\text{R}-\\text{COOH} \\xrightarrow{\\text{SOCl}_2, \\text{NH}_3} \\text{R}-\\text{CONH}_2 \\xrightarrow{\\text{NaOCl}/\\text{NaOH}} \\text{R}-\\text{NH}_2 \\xrightarrow{\\text{CHCl}_3/\\text{KOH}} \\text{R}-\\text{NC}$."
+  },
+  {
+    "id": "2aa28ab4-4c5d-49ea-91d9-a92d6fd25b5a",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Using Raoult's and Dalton's laws:\n$$y_A = \\frac{P_A^\\circ x_A}{P_A^\\circ x_A + P_B^\\circ(1 - x_A)}$$\n$$0.8 = \\frac{55 x_A}{55 x_A + 15(1 - x_A)} = \\frac{55 x_A}{40 x_A + 15}$$\n$$32 x_A + 12 = 55 x_A \\implies 23 x_A = 12 \\implies x_A = \\frac{12}{23} \\approx 0.52$$"
+  },
+  {
+    "id": "79d771d0-ed90-4766-9af6-58060bfa1072",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "- Statement B is false: $+E$ effect occurs when $\\pi$-electrons transfer towards the attacking reagent (electrophile), and $-E$ effect occurs with nucleophiles.\n- Statement D is false: Greater substitution by alkyl groups stabilizes the alkene, resulting in a lower heat of hydrogenation.\nStatements B & D are not true."
+  },
+  {
+    "id": "f2d685f3-f56a-40ec-a3ba-d755b6a7a33d",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Both $\\text{O}_2^+$ and $\\text{N}_2^-$ have 15 electrons.\nBy Molecular Orbital Theory:\n$$\\text{Bond Order} = \\frac{N_b - N_a}{2} = \\frac{10 - 5}{2} = 2.5$$\nBoth have 1 unpaired electron in an antibonding orbital ($\\pi^*_{2p_x}$ or $\\pi^*_{2p_y}$), making both paramagnetic."
+  },
+  {
+    "id": "6e8a7d7d-db54-4477-bffe-755c7cef710e",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Second ionization energy corresponds to the removal of an electron from $\\text{M}^+$:\n- $\\text{C}^+: 1s^2 2s^2 2p^1$\n- $\\text{N}^+: 1s^2 2s^2 2p^2$\n- $\\text{O}^+: 1s^2 2s^2 2p^3$ (extra stable half-filled $2p$ subshell)\n- $\\text{F}^+: 1s^2 2s^2 2p^4$\nDue to half-filled stability, $\\text{O}^+$ has a higher $IE_2$ than $\\text{F}^+$.\nThus, the order of second ionization potential is $\\text{C} < \\text{N} < \\text{F} < \\text{O}$."
+  },
+  {
+    "id": "e58cc46a-3cb8-4bff-8e25-425464ae7360",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "In qualitative inorganic salt analysis, Group V cations ($\\text{Ba}^{2+}, \\text{Sr}^{2+}, \\text{Ca}^{2+}$) are precipitated as their insoluble carbonates ($\\text{BaCO}_3$ and $\\text{CaCO}_3$) using $(\\text{NH}_4)_2\\text{CO}_3$ in the presence of $\\text{NH}_4\\text{OH}$ and $\\text{NH}_4\\text{Cl}$."
+  },
+  {
+    "id": "67b3da32-9bdf-4710-a64d-04e3a13409dd",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Statement I is false: If one of the aldehydes lacks $\\alpha$-hydrogens (such as formaldehyde or benzaldehyde), cross aldol gives only two products instead of four.\n- Statement II is false: Benzaldehyde, being an aldehyde, is sterically and electronically more reactive towards nucleophilic addition of semicarbazide than acetophenone (a ketone).\nHence, both statements are false."
+  },
+  {
+    "id": "9317654c-1c6f-4381-baba-001a40fac8b4",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Reaction with cold dilute $\\text{KOH}$:\n$$\\text{Cl}_2 + 2\\text{KOH} \\rightarrow \\text{KCl} + \\text{KClO} + \\text{H}_2\\text{O}$$\nInitial moles: $n_{\\text{Cl}_2} = 1\\text{ mol}$, $n_{\\text{KOH}} = 2\\text{ L} \\times 2\\text{ M} = 4\\text{ mol}$.\n$1\\text{ mol}$ of $\\text{Cl}_2$ reacts with $2\\text{ mol}$ of $\\text{KOH}$ to form $1\\text{ mol}$ of $\\text{Cl}^-$, $1\\text{ mol}$ of $\\text{ClO}^-$, leaving $2\\text{ mol}$ of $\\text{OH}^-$.\nIn $2\\text{ L}$ solution:\n$$[\\text{Cl}^-] = \\frac{1}{2} = 0.5\\text{ M}, \\quad [\\text{ClO}^-] = \\frac{1}{2} = 0.5\\text{ M}, \\quad [\\text{OH}^-] = \\frac{2}{2} = 1\\text{ M}$$"
+  },
+  {
+    "id": "9fea0428-a94f-4d44-9188-7d583dcfbad3",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "6",
+    "numerical_answer": 6,
+    "explanation": "1. $\\text{RMgBr} + \\text{H}_2\\text{O} \\rightarrow \\text{RH}(\\text{g}) + \\text{Mg(OH)Br}$.\n   Molar mass of gas Q:\n   $$M_Q = \\frac{1\\text{ g}}{1.4\\text{ dm}^3} \\times 22.4\\text{ dm}^3/\\text{mol} = 16\\text{ g/mol}$$\n   Gas Q is methane ($\\text{CH}_4$), so $\\text{R} = \\text{CH}_3$.\n2. $\\text{CH}_3\\text{MgBr} + \\text{CO}_2 \\xrightarrow{\\text{H}_3\\text{O}^+} \\text{CH}_3\\text{COOH}$ (acetic acid, Z).\n   Molar mass of $\\text{CH}_3\\text{COOH} = 60\\text{ g/mol}$.\n   Weight of $0.1\\text{ mol}$ of Z $= 0.1 \\times 60 = 6\\text{ g}$."
+  },
+  {
+    "id": "13a89de4-cbfe-4fe9-b00d-3162473a7a43",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "73",
+    "numerical_answer": 73,
+    "explanation": "Mass of organic compound $= 0.25\\text{ g}$.\nMass of $\\text{H}_2\\text{O} = 0.15\\text{ g}$, Mass of $\\text{CO}_2 = 0.1837\\text{ g}$.\n$$\\% \\text{H} = \\frac{2}{18} \\times \\frac{0.15}{0.25} \\times 100\\% = 6.67\\%$$\n$$\\% \\text{C} = \\frac{12}{44} \\times \\frac{0.1837}{0.25} \\times 100\\% = 20.04\\%$$\n$$\\% \\text{O} = 100\\% - (20.04\\% + 6.67\\%) = 73.29\\% \\approx 73\\%$$"
+  },
+  {
+    "id": "e285a7a0-f251-45f5-aab7-a6813a31bc18",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "For $\\text{CrCl}_3 \\cdot 6\\text{H}_2\\text{O}$ (molar mass $= 266.5\\text{ g/mol}$) behaving as a $1:2$ electrolyte with $\\mu = 3.87\\text{ BM}$:\nFormula is $[\\text{Cr}(\\text{H}_2\\text{O})_5\\text{Cl}]\\text{Cl}_2 \\cdot \\text{H}_2\\text{O}$.\nPassing through a cation exchanger retains the complex cation $[\\text{Cr}(\\text{H}_2\\text{O})_5\\text{Cl}]^{2+}$ and exchanges it for $2\\text{H}^+$, leaving $2\\text{Cl}^-$ in solution.\nMoles of complex $= \\frac{2.7}{266.5}\\text{ mol}$.\nMoles of $\\text{Cl}^- = 2 \\times \\frac{2.7}{266.5} = \\frac{5.4}{266.5}\\text{ mol}$.\nMass of $\\text{AgCl}$ formed (molar mass $143.5\\text{ g/mol}$):\n$$\\text{Mass} = \\frac{5.4}{266.5} \\times 143.5 \\approx 2.91\\text{ g} \\approx 3\\text{ g}$$"
+  },
+  {
+    "id": "c83ddd80-81e8-4600-a76b-6da87eacc2ca",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "Since $\\lambda^\\circ_{\\text{Q}^-} = \\lambda^\\circ_{\\text{Z}^-}$, the limiting molar conductivities $\\Lambda_m^\\circ$ for both acids are equal.\n$$\\frac{\\alpha_1}{\\alpha_2} = \\frac{\\Lambda_{m,1}}{\\Lambda_{m,2}} = \\frac{1}{30}$$\nFor weak acids:\n$$\\frac{K_{a1}}{K_{a2}} = \\frac{C_1 \\alpha_1^2}{C_2 \\alpha_2^2} = \\frac{0.18}{0.02} \\times \\left(\\frac{1}{30}\\right)^2 = 9 \\times \\frac{1}{900} = 10^{-2}$$\n$$\\text{pK}_a(\\text{HQ}) - \\text{pK}_a(\\text{HZ}) = -\\log\\left(\\frac{K_{a1}}{K_{a2}}\\right) = -\\log(10^{-2}) = 2$$"
+  },
+  {
+    "id": "7eb5eb13-4e77-4b7b-bc86-8f4be23e83e3",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "102",
+    "numerical_answer": 102,
+    "explanation": "For first order radioactive decay:\n$$\\frac{A}{A_0} = 0.75 = \\frac{3}{4}$$\n$$x = \\frac{t_{1/2}}{\\ln 2} \\ln\\left(\\frac{4}{3}\\right) = 245 \\times \\frac{\\log 4 - \\log 3}{\\log 2}$$\nGiven $\\log 2 = 0.3010 \\implies \\log 4 = 0.6020$, and $\\log 3 = 0.4771$:\n$$\\log 4 - \\log 3 = 0.6020 - 0.4771 = 0.1249$$\n$$x = 245 \\times \\frac{0.1249}{0.3010} \\approx 101.66 \\approx 102\\text{ days}$$"
+  }
+]

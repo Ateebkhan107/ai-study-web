@@ -1,0 +1,677 @@
+[
+  {
+    "id": "bfa3922c-0fe1-4989-933f-77851922a13b",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $S = \\{z : 3 \\le |2z - 3(1 + i)| \\le 7\\}$. Let $w = 2z$, then $3 \\le |w - (3 + 3i)| \\le 7$. This represents a circular ring (annulus) centered at $C_1 = 3 + 3i$ with inner radius $r_1 = 3$ and outer radius $r_2 = 7$.\n\nWe need to find $\\min_{z \\in S} \\left| z + \\frac{1}{2}(5 + 3i) \\right| = \\frac{1}{2} \\min_{w} |w - (-5 - 3i)|$.\n\nLet $C_2 = -5 - 3i$. The distance between the centers $C_1$ and $C_2$ is:\n$$|C_1 - C_2| = |(3 + 3i) - (-5 - 3i)| = |8 + 6i| = \\sqrt{8^2 + 6^2} = 10$$\n\nThe minimum distance from $C_2$ to any point $w$ in the annulus is $|C_1 - C_2| - r_2 = 10 - 7 = 3$.\n\nTherefore, the minimum value is:\n$$\\frac{1}{2} \\times 3 = \\frac{3}{2}$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "77cbf0fe-194b-4022-a60d-41cdb37b0e72",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The given 8 numbers are $-10, -7, -1, x, y, 9, 2, 16$.\nMean $\\bar{x} = \\frac{7}{2} = 3.5$.\n$$\\frac{-10 - 7 - 1 + x + y + 9 + 2 + 16}{8} = \\frac{7}{2} \\implies 9 + x + y = 28 \\implies x + y = 19$$\n\nVariance $\\sigma^2 = \\frac{293}{4}$:\n$$\\sigma^2 = \\frac{\\sum x_i^2}{8} - (\\bar{x})^2 = \\frac{293}{4}$$\n$$\\sum x_i^2 = (-10)^2 + (-7)^2 + (-1)^2 + 9^2 + 2^2 + 16^2 + x^2 + y^2 = 100 + 49 + 1 + 81 + 4 + 256 + x^2 + y^2 = 491 + x^2 + y^2$$\n$$\\frac{491 + x^2 + y^2}{8} - \\frac{49}{4} = \\frac{293}{4} \\implies \\frac{491 + x^2 + y^2}{8} = \\frac{342}{4} = 684/8 \\implies x^2 + y^2 = 193$$\n\nNow, $(x - y)^2 = 2(x^2 + y^2) - (x + y)^2 = 2(193) - 19^2 = 386 - 361 = 25 \\implies |x - y| = 5$.\n\nThe four numbers are $x, y, x + y + 1, |x - y|$.\nTheir sum is $x + y + (x + y + 1) + |x - y| = 19 + (19 + 1) + 5 = 44$.\nMean of the 4 numbers $= \\frac{44}{4} = 11$.\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "3c02fa67-fa32-46fe-b798-916461398b2c",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given equation: $\\sqrt{3}\\cos 2\\theta + 8\\cos\\theta + 3\\sqrt{3} = 0$.\nUsing $\\cos 2\\theta = 2\\cos^2\\theta - 1$:\n$$\\sqrt{3}(2\\cos^2\\theta - 1) + 8\\cos\\theta + 3\\sqrt{3} = 0$$\n$$2\\sqrt{3}\\cos^2\\theta + 8\\cos\\theta + 2\\sqrt{3} = 0$$\n$$\\sqrt{3}\\cos^2\\theta + 4\\cos\\theta + \\sqrt{3} = 0$$\n$$(\\sqrt{3}\\cos\\theta + 1)(\\cos\\theta + \\sqrt{3}) = 0$$\n\nSince $\\cos\\theta \\in [-1, 1]$, $\\cos\\theta = -\\frac{1}{\\sqrt{3}}$.\n\nWe need to find the number of solutions for $\\theta \\in [-3\\pi, 2\\pi]$:\n- In $[-3\\pi, -\\pi]$: $\\theta$ completes one full period ($2\\pi$), giving 2 solutions.\n- In $[-\\pi, \\pi]$: $\\theta$ completes one full period ($2\\pi$), giving 2 solutions.\n- In $[\\pi, 2\\pi]$: $\\cos\\theta < 0$ in $[\\pi, 3\\pi/2]$ (3rd quadrant), giving 1 solution.\n\nTotal number of solutions $= 2 + 2 + 1 = 5$.\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "96584a3e-549c-4fcd-854b-bbccc69ffd9f",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given equation:\n$$(-2 + \\sqrt{3})|\\sqrt{x} - 3| + (x - 6\\sqrt{x}) + (9 - 2\\sqrt{3}) = 0$$\nNote that $x - 6\\sqrt{x} + 9 = (\\sqrt{x} - 3)^2 = |\\sqrt{x} - 3|^2$.\nLet $t = |\\sqrt{x} - 3| \\ge 0$. The equation becomes:\n$$t^2 - (2 - \\sqrt{3})t - 2\\sqrt{3} = 0$$\n$$(t - 2)(t + \\sqrt{3}) = 0$$\n\nSince $t \\ge 0$, we have $t = 2$.\n$$|\\sqrt{x} - 3| = 2 \\implies \\sqrt{x} - 3 = \\pm 2 \\implies \\sqrt{x} = 5 \\text{ or } \\sqrt{x} = 1$$\n$$x = 25 \\text{ or } x = 1$$\nThus, $\\alpha = 1$ and $\\beta = 25$.\n\nWe calculate:\n$$\\sqrt{\\frac{\\beta}{\\alpha}} + \\sqrt{\\alpha\\beta} = \\sqrt{\\frac{25}{1}} + \\sqrt{1 \\times 25} = 5 + 5 = 10$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "06a10081-b777-4496-bd74-b73d6cd6bdf1",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "We use the identity $\\frac{\\binom{n}{r}}{r+1} = \\frac{1}{n+1}\\binom{n+1}{r+1}$.\n$$\\sum_{r=50}^{100} \\frac{\\binom{100}{r}}{r+1} = \\frac{1}{101} \\sum_{r=50}^{100} \\binom{101}{r+1} = \\frac{1}{101} \\sum_{k=51}^{101} \\binom{101}{k}$$\nBy the symmetry of binomial coefficients:\n$$\\sum_{k=51}^{101} \\binom{101}{k} = \\frac{1}{2} \\sum_{k=0}^{101} \\binom{101}{k} = \\frac{1}{2} \\times 2^{101} = 2^{100}$$\n\nTherefore, the sum is $\\frac{2^{100}}{101}$.\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "3732c4c3-dd01-414c-b347-7533ee4c5b7e",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Let mason A alone complete the work in $t$ days. Then mason B alone takes $t + 24$ days.\nTogether they complete the work in $22.5 = \\frac{45}{2}$ days.\n$$\\frac{1}{t} + \\frac{1}{t + 24} = \\frac{2}{45}$$\n$$\\frac{2t + 24}{t(t + 24)} = \\frac{2}{45} \\implies \\frac{t + 12}{t^2 + 24t} = \\frac{1}{45}$$\n$$45t + 540 = t^2 + 24t \\implies t^2 - 21t - 540 = 0$$\n$$(t - 36)(t + 15) = 0$$\nSince $t > 0$, $t = 36$ days.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "a089b4a3-e2e7-424b-88a5-ceb9951ef6c9",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The integrand is:\n$$\\frac{(2 - x^2)e^x}{\\sqrt{1+x}(1-x)^{3/2}} = e^x \\left[ \\frac{1 - x^2 + 1}{\\sqrt{1+x}(1-x)^{3/2}} \\right] = e^x \\left[ \\sqrt{\\frac{1+x}{1-x}} + \\frac{1}{\\sqrt{1+x}(1-x)^{3/2}} \\right]$$\nLet $g(x) = \\sqrt{\\frac{1+x}{1-x}}$. Then:\n$$g'(x) = \\frac{1}{2\\sqrt{\\frac{1+x}{1-x}}} \\cdot \\frac{(1-x) - (1+x)(-1)}{(1-x)^2} = \\frac{1}{\\sqrt{1+x}(1-x)^{3/2}}$$\nThus, the integral is of the form $\\int e^x (g(x) + g'(x))\\,dx = e^x g(x) + C = e^x \\sqrt{\\frac{1+x}{1-x}} + C$.\n\nGiven $f(0) = 0 \\implies 1 \\cdot 1 + C = 0 \\implies C = -1$.\n$$f\\left(\\frac{1}{2}\\right) = e^{1/2}\\sqrt{\\frac{1 + 1/2}{1 - 1/2}} - 1 = \\sqrt{e}\\sqrt{3} - 1 = \\sqrt{3e} - 1$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "8372358f-b56e-4168-a5ac-ac8f61b9155c",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The line is $\\frac{x}{1} = \\frac{y-1}{2} = \\frac{z-2}{3}$.\nSince $B(4, 9, \\alpha)$ lies on the line:\n$$\\frac{4}{1} = \\frac{9-1}{2} = \\frac{\\alpha-2}{3} = 4 \\implies \\alpha = 14$$\nSo $B = (4, 9, 14)$.\n\nThe direction vector of the line is $\\vec{u} = \\hat{i} + 2\\hat{j} + 3\\hat{k}$ with $|\\vec{u}| = \\sqrt{1 + 4 + 9} = \\sqrt{14}$.\nVertex $C$ is on the line at distance $BC = 10$.\nVertex $A = (1, 6, 3)$. The vector $\\vec{BA} = (1-4)\\hat{i} + (6-9)\\hat{j} + (3-14)\\hat{k} = -3\\hat{i} - 3\\hat{j} - 11\\hat{k}$.\n\nThe perpendicular distance from $A$ to the line is:\n$$h = \\frac{|\\vec{BA} \\times \\vec{u}|}{|\\vec{u}|}$$\n$$\\vec{BA} \\times \\vec{u} = \\begin{vmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ -3 & -3 & -11 \\\\ 1 & 2 & 3 \\end{vmatrix} = 13\\hat{i} - 2\\hat{j} - 3\\hat{k}$$\n$$|\\vec{BA} \\times \\vec{u}| = \\sqrt{169 + 4 + 9} = \\sqrt{182} = \\sqrt{14 \\times 13}$$\n$$h = \\frac{\\sqrt{182}}{\\sqrt{14}} = \\sqrt{13}$$\n\nArea of $\\Delta ABC = \\frac{1}{2} \\times BC \\times h = \\frac{1}{2} \\times 10 \\times \\sqrt{13} = 5\\sqrt{13}$.\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "ad491d61-8585-4d06-b5ca-8b10e55c5b0e",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For $f(x)$ to be continuous at $x = -3/2$, the numerator $ax^2 + 2ax + 3$ must vanish at $x = -3/2$:\n$$a\\left(-\\frac{3}{2}\\right)^2 + 2a\\left(-\\frac{3}{2}\\right) + 3 = 0 \\implies \\frac{9}{4}a - 3a + 3 = 0 \\implies -\\frac{3}{4}a = -3 \\implies a = 4$$\n\nThen the numerator is $4x^2 + 8x + 3 = (2x+3)(2x+1)$ and denominator is $4x^2 + 4x - 3 = (2x+3)(2x-1)$.\nFor $x \\ne -3/2, 1/2$, $f(x) = \\frac{2x+1}{2x-1}$.\n\nNow, $f(f(x)) = \\frac{7}{5}$:\nLet $y = f(x)$. Then $\\frac{2y+1}{2y-1} = \\frac{7}{5} \\implies 10y + 5 = 14y - 7 \\implies 4y = 12 \\implies y = 3$.\n$$f(x) = 3 \\implies \\frac{2x+1}{2x-1} = 3 \\implies 2x + 1 = 6x - 3 \\implies 4x = 4 \\implies x = 1$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "4f81f897-7493-4a44-b893-fb486aab3a18",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Substitute $y = x + 1$ into $\\frac{x^2}{2} + y^2 = 1$:\n$$\\frac{x^2}{2} + (x+1)^2 = 1 \\implies \\frac{3}{2}x^2 + 2x = 0 \\implies x = 0 \\text{ or } x = -\\frac{4}{3}$$\nPoints of intersection are $A(0, 1)$ and $B\\left(-\\frac{4}{3}, -\\frac{1}{3}\\right)$.\n\nThe center of the ellipse is $O(0,0)$.\nVectors $\\vec{OA} = (0, 1)$ and $\\vec{OB} = \\left(-\\frac{4}{3}, -\\frac{1}{3}\\right)$.\n$$\\cos\\theta = \\frac{\\vec{OA} \\cdot \\vec{OB}}{|OA||OB|} = \\frac{-1/3}{1 \\cdot \\sqrt{16/9 + 1/9}} = \\frac{-1/3}{\\sqrt{17}/3} = -\\frac{1}{\\sqrt{17}}$$\n$$\\theta = \\pi - \\cos^{-1}\\left(\\frac{1}{\\sqrt{17}}\\right) = \\frac{\\pi}{2} + \\sin^{-1}\\left(\\frac{1}{\\sqrt{17}}\\right)$$\nSince $\\tan\\left(\\sin^{-1}\\frac{1}{\\sqrt{17}}\\right) = \\frac{1}{4}$, we have $\\sin^{-1}\\left(\\frac{1}{\\sqrt{17}}\\right) = \\tan^{-1}\\left(\\frac{1}{4}\\right)$.\nThus, $\\theta = \\frac{\\pi}{2} + \\tan^{-1}\\left(\\frac{1}{4}\\right)$.\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "0748828b-1dac-4004-b162-cc6fad1ab52f",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let $I = \\int_{\\pi/24}^{5\\pi/24} \\frac{\\mathrm{d}x}{1 + \\sqrt[3]{\\tan 2x}}$.\nSubstitute $u = 2x, \\mathrm{d}u = 2\\mathrm{d}x$:\n$$I = \\frac{1}{2} \\int_{\\pi/12}^{5\\pi/12} \\frac{\\mathrm{d}u}{1 + \\sqrt[3]{\\tan u}}$$\nUsing the property $\\int_a^b f(u)\\,\\mathrm{d}u = \\int_a^b f(a+b-u)\\,\\mathrm{d}u$, with $a+b = \\frac{\\pi}{12} + \\frac{5\\pi}{12} = \\frac{\\pi}{2}$:\n$$I = \\frac{1}{2} \\int_{\\pi/12}^{5\\pi/12} \\frac{\\sqrt[3]{\\tan u}\\,\\mathrm{d}u}{1 + \\sqrt[3]{\\tan u}}$$\nAdding the two expressions:\n$$2I = \\frac{1}{2} \\int_{\\pi/12}^{5\\pi/12} 1\\,\\mathrm{d}u = \\frac{1}{2}\\left(\\frac{5\\pi}{12} - \\frac{\\pi}{12}\\right) = \\frac{1}{2}\\left(\\frac{\\pi}{3}\\right) = \\frac{\\pi}{6} \\implies I = \\frac{\\pi}{12}$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "4d7bc9bd-2c09-4eb7-8481-fe891b806796",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "A line dividing the area of a rectangle into two equal parts must pass through the center of the rectangle $\\left(\\frac{3}{2}, 2\\right)$.\nThe line $L$ is perpendicular to $3x + y + 6 = 0$, so its slope is $m = \\frac{1}{3}$.\nEquation of $L$:\n$$y - 2 = \\frac{1}{3}\\left(x - \\frac{3}{2}\\right) \\implies 3y - 6 = x - \\frac{3}{2} \\implies 2x - 6y + 9 = 0$$\n\nThe distance of the point $\\left(\\frac{1}{2}, -5\\right)$ from $L$ is:\n$$d = \\frac{\\left|2\\left(\\frac{1}{2}\\right) - 6(-5) + 9\\right|}{\\sqrt{2^2 + (-6)^2}} = \\frac{|1 + 30 + 9|}{\\sqrt{40}} = \\frac{40}{2\\sqrt{10}} = 2\\sqrt{10}$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "6707f5f3-9329-449c-a3a0-3045621ef8f2",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "$(1 + x^2)^2 (1 + x)^n = (1 + 2x^2 + x^4) \\sum_{k=0}^n \\binom{n}{k} x^k$.\n- Coefficient of $x$: $\\binom{n}{1} = n$.\n- Coefficient of $x^2$: $\\binom{n}{2} + 2\\binom{n}{0} = \\frac{n(n-1)}{2} + 2$.\n- Coefficient of $x^3$: $\\binom{n}{3} + 2\\binom{n}{1} = \\frac{n(n-1)(n-2)}{6} + 2n$.\n\nSince they are in A.P.:\n$$2\\left(\\frac{n(n-1)}{2} + 2\\right) = n + \\left(\\frac{n(n-1)(n-2)}{6} + 2n\\right)$$\n$$n(n-1) + 4 = 3n + \\frac{n(n-1)(n-2)}{6}$$\n$$n^2 - 4n + 4 = \\frac{n(n-1)(n-2)}{6} \\implies 6(n-2)^2 = n(n-1)(n-2)$$\n\n- If $n = 2$: the coefficients are $2, 3, 4$, which are in A.P.\n- If $n \\ne 2$: $6(n-2) = n(n-1) \\implies n^2 - 7n + 12 = 0 \\implies n = 3, 4$.\n\nPossible values of $n \\in \\mathbf{N}$ are $2, 3, 4$.\nSum of values $= 2 + 3 + 4 = 9$.\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "7bdb6f77-dabc-41d6-b666-1b045f604858",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Given $\\vec{a} = -\\hat{i} + \\hat{j} + 2\\hat{k}$ and $\\vec{b} = \\hat{i} - \\hat{j} - 3\\hat{k}$.\nWe have $|\\vec{a}|^2 = 1 + 1 + 4 = 6$, $|\\vec{b}|^2 = 1 + 1 + 9 = 11$, and $\\vec{a} \\cdot \\vec{b} = -1 - 1 - 6 = -8$.\n\n$$\\vec{d} = \\vec{c} \\times \\vec{a} = (\\vec{a} \\times \\vec{b}) \\times \\vec{a} = |\\vec{a}|^2 \\vec{b} - (\\vec{a} \\cdot \\vec{b})\\vec{a} = 6\\vec{b} + 8\\vec{a}$$\n\nNow, evaluate $(\\vec{a} - \\vec{b}) \\cdot \\vec{d}$:\n$$(\\vec{a} - \\vec{b}) \\cdot (8\\vec{a} + 6\\vec{b}) = 8|\\vec{a}|^2 - 6|\\vec{b}|^2 - 2(\\vec{a} \\cdot \\vec{b})$$\n$$= 8(6) - 6(11) - 2(-8) = 48 - 66 + 16 = -2$$\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "d1dcf150-d62a-4b52-9fde-902e21fda9c3",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "From $4l + m - n = 0$, we have $n = 4l + m$.\nSubstitute into $2mn + 10nl + 3lm = 0$:\n$$2m(4l + m) + 10(4l + m)l + 3lm = 0$$\n$$8lm + 2m^2 + 40l^2 + 10lm + 3lm = 0$$\n$$40l^2 + 21lm + 2m^2 = 0 \\implies (8l + m)(5l + 2m) = 0$$\n\n- Case 1: $m = -8l \\implies n = -4l$. Direction ratios: $(1, -8, -4)$. Length $= \\sqrt{1 + 64 + 16} = 9$.\n- Case 2: $2m = -5l \\implies$ take $l = 2, m = -5 \\implies n = 3$. Direction ratios: $(2, -5, 3)$. Length $= \\sqrt{4 + 25 + 9} = \\sqrt{38}$.\n\nThe cosine of the acute angle between the lines is:\n$$\\cos\\theta = \\frac{|1(2) + (-8)(-5) + (-4)(3)|}{9\\sqrt{38}} = \\frac{|2 + 40 - 12|}{9\\sqrt{38}} = \\frac{30}{9\\sqrt{38}} = \\frac{10}{3\\sqrt{38}}$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "779e5ed2-45f8-4fe2-9f67-328bf4cf5b76",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "We simplify the terms:\n$$\\sin\\left(\\frac{7\\pi}{2} - \\theta\\right) = -\\cos\\theta \\implies \\sin^4 = \\cos^4\\theta$$\n$$\\sin(11\\pi + \\theta) = -\\sin\\theta \\implies \\sin^4 = \\sin^4\\theta$$\n$$\\sin\\left(\\frac{3\\pi}{2} - \\theta\\right) = -\\cos\\theta \\implies \\sin^6 = \\cos^6\\theta$$\n$$\\sin(5\\pi - \\theta) = \\sin\\theta \\implies \\sin^6 = \\sin^6\\theta$$\n\n$$f(\\theta) = 4(\\cos^4\\theta + \\sin^4\\theta) - 2(\\cos^6\\theta + \\sin^6\\theta)$$\n$$= 4(1 - 2\\sin^2\\theta\\cos^2\\theta) - 2(1 - 3\\sin^2\\theta\\cos^2\\theta) = 2 - 2\\sin^2\\theta\\cos^2\\theta = 2 - \\frac{1}{2}\\sin^2 2\\theta$$\n\nSince $\\sin^2 2\\theta \\in [0, 1]$:\n- $\\alpha = \\max f(\\theta) = 2$\n- $\\beta = \\min f(\\theta) = 2 - \\frac{1}{2} = \\frac{3}{2}$\n\n$$\\alpha + 2\\beta = 2 + 2\\left(\\frac{3}{2}\\right) = 5$$\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "867e5e68-4ef9-4007-b782-73aa45dad26e",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I: Expanding the LHS determinant gives $1 - \\cos^2\\alpha - \\cos^2\\beta - \\cos^2\\gamma + 2\\cos\\alpha\\cos\\beta\\cos\\gamma$. The RHS determinant gives $2\\cos\\alpha\\cos\\beta\\cos\\gamma$. Equating them gives $\\cos^2\\alpha + \\cos^2\\beta + \\cos^2\\gamma = 1 \\ne \\frac{3}{2}$. Thus, Statement I is false.\n\nStatement II: Performing $R_2 \\to R_2 - 2R_1$ and $R_3 \\to R_3 - R_1$, and then $R_3 \\to R_3 - R_2$ gives $R_3 = [4, 0, 0]$. Expanding along $R_3$ yields $4((x+1)^2 - (x-2)^2) = 4(6x - 3) = 24x - 12$. Thus $p = 24, q = -12$. Then $p^2 = 576$ and $196 q^2 = 196 \\times 144 \\ne 576$. Thus, Statement II is false.\n\nHence, both Statement I and Statement II are false (Option b)."
+  },
+  {
+    "id": "d2f49469-a70c-4b80-9880-4e7ad2e83633",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $x^4 \\,\\mathrm{d}y + (4x^3 y + 2\\sin x)\\,\\mathrm{d}x = 0 \\implies \\frac{\\mathrm{d}}{\\mathrm{d}x}(x^4 y) = -2\\sin x$.\nIntegrating both sides:\n$$x^4 y = 2\\cos x + C$$\nUsing $y\\left(\\frac{\\pi}{2}\\right) = 0 \\implies 0 = 2\\cos\\left(\\frac{\\pi}{2}\\right) + C \\implies C = 0$.\nSo $y(x) = \\frac{2\\cos x}{x^4}$.\n\nFor $x = \\frac{\\pi}{3}$:\n$$y\\left(\\frac{\\pi}{3}\\right) = \\frac{2\\cos(\\pi/3)}{(\\pi/3)^4} = \\frac{2(1/2)}{\\pi^4/81} = \\frac{81}{\\pi^4}$$\n$$\\pi^4 y\\left(\\frac{\\pi}{3}\\right) = 81$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "9a4b07b2-ab47-435e-a44b-5ab0edd28624",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $A = \\{-2, -1, 0, 1, 2, 3, 4\\}$ and $xRy \\iff 2x + y \\le 2$.\nCounting pairs $(x, y) \\in R$:\n- $x = -2$: $y \\le 6 \\implies 7$ pairs\n- $x = -1$: $y \\le 4 \\implies 7$ pairs\n- $x = 0$: $y \\le 2 \\implies 5$ pairs\n- $x = 1$: $y \\le 0 \\implies 3$ pairs\n- $x = 2$: $y \\le -2 \\implies 1$ pair\n- $x = 3, 4$: 0 pairs\nTotal elements in $R$, $l = 7 + 7 + 5 + 3 + 1 = 23$.\n\nReflexivity requires $(x, x) \\in R$, which holds for $x \\in \\{-2, -1, 0\\}$. Missing elements: $x \\in \\{1, 2, 3, 4\\} \\implies m = 4$.\n\nSymmetry requires $(y, x) \\in R$ whenever $(x, y) \\in R$. The pairs in $R$ whose reverses are not in $R$ are:\n$(-2, 3), (-2, 4), (-1, 2), (-1, 3), (-1, 4), (0, 2)$, giving $n = 6$.\n\n$$l + m + n = 23 + 4 + 6 = 33$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "b4dc6fa2-da62-4638-b47e-1e8ddef641ba",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For $f(x) = \\log_3 \\log_5 \\log_7 (9x - x^2 - 13)$:\n$$\\log_5 \\log_7 (9x - x^2 - 13) > 0 \\implies \\log_7(9x - x^2 - 13) > 1 \\implies 9x - x^2 - 13 > 7$$\n$$x^2 - 9x + 20 < 0 \\implies (x - 4)(x - 5) < 0 \\implies x \\in (4, 5)$$\nSo $m = 4, n = 5$.\n\nFor the hyperbola $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$:\n- Eccentricity $e = \\frac{n}{3} = \\frac{5}{3} \\implies 1 + \\frac{b^2}{a^2} = \\frac{25}{9} \\implies \\frac{b^2}{a^2} = \\frac{16}{9}$\n- Latus rectum $\\frac{2b^2}{a} = \\frac{8m}{3} = \\frac{32}{3} \\implies \\frac{b^2}{a} = \\frac{16}{3}$\n\nDividing the two equations gives $a = 3$, which leads to $a^2 = 9$ and $b^2 = 16$.\n$$b^2 - a^2 = 16 - 9 = 7$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "815d6088-49fb-4d8e-beac-0c17d9fdb85c",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "62",
+    "numerical_answer": 62,
+    "explanation": "Given $A$ is a $3 \\times 3$ matrix with $|A| = 6$.\nLet $B = A^2 \\cdot \\mathrm{adj}(2A) = A^2 \\cdot (2^2 \\mathrm{adj}(A)) = 4 A (A \\mathrm{adj}(A)) = 4 A (|A| I) = 4|A| A = 24 A$.\nThen $|B| = |24 A| = 24^3 |A| = (2^3 \\times 3)^3 \\times (2 \\times 3) = 2^9 \\times 3^3 \\times 2 \\times 3 = 2^{10} \\times 3^4$.\n\nNow, $|\\mathrm{adj}(3\\,\\mathrm{adj}(B))| = |3\\,\\mathrm{adj}(B)|^{3-1} = |3\\,\\mathrm{adj}(B)|^2 = (3^3 |\\mathrm{adj}(B)|)^2 = 27^2 (|B|^2)^2 = 3^6 |B|^4$.\n$$|B|^4 = (2^{10} \\times 3^4)^4 = 2^{40} \\times 3^{16}$$\n$$|\\mathrm{adj}(3\\,\\mathrm{adj}(B))| = 3^6 \\times (2^{40} \\times 3^{16}) = 2^{40} \\times 3^{22}$$\n\nComparing with $2^m \\cdot 3^n$, we get $m = 40$ and $n = 22$.\n$$m + n = 40 + 22 = 62$$"
+  },
+  {
+    "id": "90d27e40-6b23-49df-b0a3-da5b741b7ae4",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "12",
+    "numerical_answer": 12,
+    "explanation": "The curve is $y = \\max\\{\\sin x, \\cos x\\}$ from $x = 0$ to $x = \\frac{3\\pi}{2}$.\n- On $\\left[0, \\frac{\\pi}{4}\\right]$: $y = \\cos x \\ge 0$, Area $A_1 = \\int_0^{\\pi/4} \\cos x\\,\\mathrm{d}x = \\frac{1}{\\sqrt{2}}$.\n- On $\\left[\\frac{\\pi}{4}, \\pi\\right]$: $y = \\sin x \\ge 0$, Area $A_2 = \\int_{\\pi/4}^\\pi \\sin x\\,\\mathrm{d}x = 1 + \\frac{1}{\\sqrt{2}}$.\n- On $\\left[\\pi, \\frac{5\\pi}{4}\\right]$: $\\max\\{\\sin x, \\cos x\\} = \\sin x \\le 0$, Area with x-axis $A_3 = \\int_\\pi^{5\\pi/4} |\\sin x|\\,\\mathrm{d}x = 1 - \\frac{1}{\\sqrt{2}}$.\n- On $\\left[\\frac{5\\pi}{4}, \\frac{3\\pi}{2}\\right]$: $\\max\\{\\sin x, \\cos x\\} = \\cos x \\le 0$, Area with x-axis $A_4 = \\int_{5\\pi/4}^{3\\pi/2} |\\cos x|\\,\\mathrm{d}x = 1 - \\frac{1}{\\sqrt{2}}$.\n\nTotal area $A = A_1 + A_2 + A_3 + A_4 = \\frac{1}{\\sqrt{2}} + \\left(1 + \\frac{1}{\\sqrt{2}}\\right) + \\left(1 - \\frac{1}{\\sqrt{2}}\\right) + \\left(1 - \\frac{1}{\\sqrt{2}}\\right) = 3$.\n$$A + A^2 = 3 + 3^2 = 12$$"
+  },
+  {
+    "id": "7982a4e1-3045-46d5-a0b5-0f0a55395cc5",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "311",
+    "numerical_answer": 311,
+    "explanation": "Total number of ways to choose $a$ and $b$ from first 100 natural numbers without replacement is $100 \\times 99 = 9900$.\nWe need $a - b \\ge 10 \\implies a \\ge b + 10$.\n- For $b = 1$, $a \\in \\{11, 12, \\dots, 100\\} \\implies 90$ choices.\n- For $b = 2$, $a \\in \\{12, 13, \\dots, 100\\} \\implies 89$ choices.\n- ...\n- For $b = 90$, $a = 100 \\implies 1$ choice.\n\nTotal favorable outcomes $= \\sum_{k=1}^{90} k = \\frac{90 \\times 91}{2} = 4095$.\nProbability $= \\frac{4095}{9900} = \\frac{91}{220}$.\nHere $m = 91, n = 220$ with $\\gcd(91, 220) = 1$.\n$$m + n = 91 + 220 = 311$$"
+  },
+  {
+    "id": "23bbfc20-c6e4-4d80-80af-963aa7ac4e68",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "2454",
+    "numerical_answer": 2454,
+    "explanation": "Given letters: PQRPQRSTUVW.\nCounts: P:2, Q:2, R:2, S:1, T:1, U:1, V:1, W:1. Total = 11 letters with 8 distinct types.\n\nNumber of 4-letter words:\n1. All 4 letters distinct: Choose 4 from 8 distinct letters $\\implies \\binom{8}{4} \\times 4! = 70 \\times 24 = 1680$.\n2. 2 alike of one kind and 2 distinct: Choose 1 pair from $\\{\\text{P, Q, R}\\}$, and 2 distinct from remaining 7 types $\\implies \\binom{3}{1} \\times \\binom{7}{2} \\times \\frac{4!}{2!} = 3 \\times 21 \\times 12 = 756$.\n3. 2 alike of one kind and 2 alike of another kind: Choose 2 pairs from $\\{\\text{P, Q, R}\\} \\implies \\binom{3}{2} \\times \\frac{4!}{2!2!} = 3 \\times 6 = 18$.\n\nTotal number of words $= 1680 + 756 + 18 = 2454$."
+  },
+  {
+    "id": "f2f97d04-1fb7-42dd-a218-ad900748a720",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "1565",
+    "numerical_answer": 1565,
+    "explanation": "Given $(f(x))^2 = 25 + \\int_0^x ((f(t))^2 + (f'(t))^2)\\,\\mathrm{d}t$.\nDifferentiating with respect to $x$:\n$$2f(x)f'(x) = (f(x))^2 + (f'(x))^2 \\implies (f'(x) - f(x))^2 = 0 \\implies f'(x) = f(x)$$\nThus $f(x) = C e^x$.\nAt $x = 0$, $(f(0))^2 = 25 \\implies f(0) = 5$ (since $f$ is non-negative), so $f(x) = 5e^x$.\n\nThen $f(\\log_\\mathrm{e}(k)) = 5e^{\\ln k} = 5k$.\nMean of $f(\\log_\\mathrm{e}(1)), f(\\log_\\mathrm{e}(2)), \\dots, f(\\log_\\mathrm{e}(625))$ is:\n$$\\frac{1}{625} \\sum_{k=1}^{625} 5k = \\frac{5}{625} \\times \\frac{625 \\times 626}{2} = \\frac{5 \\times 626}{2} = 1565$$"
+  },
+  {
+    "id": "635f3666-ae8d-4306-bd17-03121d80258f",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The time period of a simple pendulum is $T = 2\\pi\\sqrt{\\frac{L}{g}}$.\nFor a total time duration $t = N T = 2\\pi N \\sqrt{\\frac{L}{g}}$:\n$$N_1 \\sqrt{L_1} = N_2 \\sqrt{L_2}$$\n$$20 \\sqrt{30} = 40 \\sqrt{L_2} \\implies \\sqrt{L_2} = \\frac{\\sqrt{30}}{2} \\implies L_2 = \\frac{30}{4} = 7.5\\text{ cm}$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "2fe9716e-7633-4272-9eb8-99fe8d6e1376",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Bob A descends through a vertical height $h = L(1 - \\cos 60^\\circ) = 1(1 - 0.5) = 0.5\\text{ m}$.\nSpeed of bob A just before collision is $v = \\sqrt{2gh} = \\sqrt{2 \\times 10 \\times 0.5} = \\sqrt{10}\\text{ m/s}$.\nSince the collision with the identical bob B is elastic, bob B acquires speed $v_B = v = \\sqrt{10}\\text{ m/s}$.\n\nFor bob B to just complete the circular track of radius $R$, the minimum velocity at the bottom must be $\\sqrt{5gR}$:\n$$v_B = \\sqrt{5gR} \\implies 10 = 5(10)R \\implies R = \\frac{1}{5}\\text{ m}$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "6fe1a42a-b734-435f-8c84-99dfcf88c4f3",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "When zero of circular scale is 3 divisions above the reference line, the zero error is positive: $+3 \\times 0.01\\text{ mm} = +0.03\\text{ mm}$.\nMeasured reading = $\\text{PSR} + \\text{CSR} \\times \\text{LC} = 1\\text{ mm} + 51 \\times 0.01\\text{ mm} = 1.51\\text{ mm}$.\nCorrect thickness = $\\text{Measured reading} - \\text{Zero error} = 1.51 - 0.03 = 1.48\\text{ mm}$.\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "5f64d1a0-78c8-42bb-9bff-af51ccfe65b9",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The thermal de Broglie wavelength is $\\lambda = \\frac{h}{\\sqrt{3mkT}}$.\nGiven $T = 300\\text{ K}$, $m = 5.31 \\times 10^{-26}\\text{ kg}$, $k = 1.38 \\times 10^{-23}\\text{ J/K}$, and $h = 6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}$:\n$$\\sqrt{3mkT} = \\sqrt{3 \\times (5.31 \\times 10^{-26}) \\times (1.38 \\times 10^{-23}) \\times 300} = \\sqrt{6.595 \\times 10^{-46}} \\approx 2.568 \\times 10^{-23}\\text{ kg}\\cdot\\text{m/s}$$\n$$\\lambda = \\frac{6.63 \\times 10^{-34}}{2.568 \\times 10^{-23}} \\approx 25.8 \\times 10^{-12}\\text{ m} \\approx 26 \\times 10^{-12}\\text{ m}$$\nThus, $x = 26$.\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "426a9ad8-436c-48e6-986c-17c03966246d",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For total internal reflection at the interface between medium A and medium B:\n$$\\sin\\theta_c = \\frac{\\mu_B}{\\mu_A} = \\frac{v_A}{v_B} = \\frac{2.4 \\times 10^8}{2.7 \\times 10^8} = \\frac{8}{9}$$\n$$\\tan\\theta_c = \\frac{8}{\\sqrt{9^2 - 8^2}} = \\frac{8}{\\sqrt{17}} \\implies \\theta_c = \\tan^{-1}\\left(\\frac{8}{\\sqrt{17}}\\right)$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "a355e3d3-647a-4ace-bfab-93d424e22d20",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "A. Maximum wavelength of Lyman series corresponds to $n = 2 \\to 1$: $\\frac{1}{\\lambda} = R\\left(1 - \\frac{1}{4}\\right) = \\frac{3R}{4} \\implies \\lambda = \\frac{4}{3R}$. (True)\nB. Balmer series lies in the visible region of spectrum. (True)\nC. Minimum wavelength of Paschen series corresponds to $n = \\infty \\to 3$: $\\frac{1}{\\lambda} = R\\left(\\frac{1}{9}\\right) \\implies \\lambda = \\frac{9}{R}$. (True)\nD. Minimum wavelength of Lyman series corresponds to $n = \\infty \\to 1$: $\\lambda = \\frac{1}{R} \\ne \\frac{5}{4R}$. (False)\n\nTherefore, A, B, and C only are correct (Option a)."
+  },
+  {
+    "id": "1c7247c8-4898-493f-85fa-c29e86740459",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Loss of kinetic energy in a completely inelastic collision is:\n$$\\Delta K = \\frac{1}{2} \\frac{m_1 m_2}{m_1 + m_2} (v_1 - v_2)^2 = \\frac{1}{2} \\frac{15 \\times 25}{40} (10 - (-30))^2 = \\frac{375}{80} \\times 1600 = 7500\\text{ J}$$\n\nHeat retained by the combined mass:\n$$Q = (m_1 + m_2) s \\Delta T$$\n$$7500 = 40\\text{ kg} \\times (31 \\times 4.2\\text{ J/kg}\\cdot{^\\circ\\text{C}}) \\times \\Delta T$$\n$$7500 = 5208 \\times \\Delta T \\implies \\Delta T = \\frac{7500}{5208} \\approx 1.44^\\circ\\text{C}$$\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "d38a80fc-927f-4dcd-9435-f1140a7fd594",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Average length $\\bar{L} = \\frac{20.00 + 19.75 + 17.01 + 18.25}{4} = \\frac{75.01}{4} = 18.7525\\text{ cm} \\approx 18.75\\text{ cm}$.\nAbsolute errors:\n- $|20.00 - 18.75| = 1.25$\n- $|19.75 - 18.75| = 1.00$\n- $|17.01 - 18.75| = 1.74$\n- $|18.25 - 18.75| = 0.50$\n\nMean absolute error $\\Delta \\bar{L} = \\frac{1.25 + 1.00 + 1.74 + 0.50}{4} = \\frac{4.49}{4} = 1.1225\\text{ cm}$.\nRelative error $= \\frac{\\Delta \\bar{L}}{\\bar{L}} = \\frac{1.1225}{18.7525} \\approx 0.05986 \\approx 0.06$.\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "bbc6d8d7-3023-4f6c-9c74-332130d8258f",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Speed of the falling wire after falling through $h = 200\\text{ m}$ is:\n$$v = \\sqrt{2gh} = \\sqrt{2 \\times 10 \\times 200} = 20\\sqrt{10}\\text{ m/s}$$\nMagnetic field $B = 0.5\\text{ Gauss} = 0.5 \\times 10^{-4}\\text{ T} = 5 \\times 10^{-5}\\text{ T}$. Length $L = 20\\text{ m}$.\n\nInduced EMF across the wire:\n$$\\mathcal{E} = B v L = (5 \\times 10^{-5}\\text{ T}) \\times (20\\sqrt{10}\\text{ m/s}) \\times (20\\text{ m}) = 2 \\times 10^{-2}\\sqrt{10}\\text{ V} = 200\\sqrt{10}\\text{ mV}$$\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "77585a96-8cbd-4f68-ad9f-95f0a3911adc",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "- The charge $2q$ placed at a vertex of the cube is shared by 8 identical cubes, so the flux through this cube is $\\Phi_1 = \\frac{2q}{8\\epsilon_0} = \\frac{q}{4\\epsilon_0}$.\n- The charge $q$ placed at the center of a face is shared by 2 identical cubes, so the flux through this cube is $\\Phi_2 = \\frac{q}{2\\epsilon_0}$.\n\nTotal electric flux passing through the cube:\n$$\\Phi_{\\text{total}} = \\Phi_1 + \\Phi_2 = \\frac{q}{4\\epsilon_0} + \\frac{q}{2\\epsilon_0} = \\frac{3q}{4\\epsilon_0}$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "88c41376-6a19-4ef1-96fa-98dec46a9c93",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Matching relations with their fundamental laws:\n- A. $\\oint \\vec{E} \\cdot \\mathrm{d}\\vec{l} = -\\frac{\\mathrm{d}}{\\mathrm{d}t} \\oint \\vec{B} \\cdot \\mathrm{d}\\vec{a} \\implies$ Faraday's law of electromagnetic induction (II)\n- B. $\\oint \\vec{B} \\cdot \\mathrm{d}\\vec{l} = \\mu_0\\left(I + \\epsilon_0 \\frac{\\mathrm{d}\\Phi_E}{\\mathrm{d}t}\\right) \\implies$ Ampere - Maxwell law (III)\n- C. $\\oint \\vec{E} \\cdot \\mathrm{d}\\vec{a} = \\frac{1}{\\epsilon_0} \\int_V \\rho \\mathrm{d}v \\implies$ Gauss's law of electrostatics (IV)\n- D. $\\oint \\vec{B} \\cdot \\mathrm{d}\\vec{l} = \\mu_0 I \\implies$ Ampere's circuital law (I)\n\nCorrect matching is A-II, B-III, C-IV, D-I (Option c)."
+  },
+  {
+    "id": "ff89501a-307e-48cc-9b2b-49296b251d2e",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given $V_z = 5\\text{ V}$, $I_L = 5\\text{ mA}$, and maximum source voltage $V_{\\text{in}} = 25\\text{ V}$.\nMaximum Zener diode current $I_{z,\\max} = 4 I_L = 20\\text{ mA}$.\nTotal current drawn from the source is $I = I_z + I_L = 20\\text{ mA} + 5\\text{ mA} = 25\\text{ mA}$ (or for maximum regulation limits $I_s \\approx 20\\text{ mA}$).\nVoltage drop across series resistor $R_s$ is $V_{\\text{in}} - V_z = 25 - 5 = 20\\text{ V}$.\n$$R_s = \\frac{20\\text{ V}}{20\\text{ mA}} = 1000\\ \\Omega$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "7f6775dd-cf6f-47cf-9238-b21d6ffc452b",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The circular loop of radius $r$ has two arcs and a diametrical wire connected between $A$ and $B$ in parallel. Using the parallel resistance combination for the wire segments:\n$$\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3} = \\frac{3\\pi + 16}{6\\pi\\lambda r} \\implies R_{\\text{eq}} = \\frac{6\\pi\\lambda r}{3\\pi + 16}$$\n\nHence, the correct option is (d)."
+  },
+  {
+    "id": "9b271bd0-2258-413c-89b1-1b6bd8f03d13",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "In static equilibrium, the extension in spring $A$ is $x_A = \\frac{m_A g}{k_A}$, so the energy stored in spring $A$ is:\n$$E_A = \\frac{1}{2} k_A x_A^2 = \\frac{m_A^2 g^2}{2 k_A} = E$$\n\nFor spring $B$ with mass $m_B = 200\\text{ g} = 2 m_A$:\n$$E_B = \\frac{m_B^2 g^2}{2 k_B} = \\frac{4 m_A^2 g^2}{2 k_B} = 4 E \\left(\\frac{k_A}{k_B}\\right)$$\n\nGiven $4 k_A = 3 k_B \\implies \\frac{k_A}{k_B} = \\frac{3}{4}$:\n$$E_B = 4 E \\times \\frac{3}{4} = 3E$$\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "c9d57a5a-a14b-48f7-93cb-62af6d8d304b",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Mass of each solid cylinder is $m = \\frac{M}{4}$, radius $R$, length $L$.\n- For the two cylinders parallel to the axis at distance $\\frac{L}{2}$:\n$$I_1 = 2 \\left[ \\frac{1}{2}m R^2 + m\\left(\\frac{L}{2}\\right)^2 \\right] = m R^2 + \\frac{1}{2}m L^2$$\n- For the two cylinders perpendicular to the axis with the axis passing through their centers:\n$$I_2 = 2 \\left[ m\\left(\\frac{L^2}{12} + \\frac{R^2}{4}\\right) \\right] = \\frac{1}{6}m L^2 + \\frac{1}{2}m R^2$$\n\nTotal moment of inertia:\n$$I = I_1 + I_2 = \\frac{3}{2}m R^2 + \\frac{2}{3}m L^2 = \\frac{3}{2}\\left(\\frac{M}{4}\\right)R^2 + \\frac{2}{3}\\left(\\frac{M}{4}\\right)L^2 = \\frac{3}{8}MR^2 + \\frac{1}{6}ML^2$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "ab837f05-51b4-4e46-827c-b49b232ffc83",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Position of center of mass from mass $m$ is $r_1 = \\frac{2m}{m + 2m}d = \\frac{2}{3}d$, and from mass $2m$ is $r_2 = \\frac{1}{3}d$.\nMoment of inertia about the center of mass axis is:\n$$I = m r_1^2 + 2m r_2^2 = m\\left(\\frac{2}{3}d\\right)^2 + 2m\\left(\\frac{1}{3}d\\right)^2 = \\frac{4}{9}md^2 + \\frac{2}{9}md^2 = \\frac{2}{3}md^2$$\n\nAngular momentum $L = I\\omega \\implies \\omega = \\frac{L}{I} = \\frac{L}{\\frac{2}{3}md^2} = \\frac{3}{2}\\frac{L}{md^2}$.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "4409e6ec-1ecf-425d-aaba-8fba4a8a80ba",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Young's modulus is $Y = \\frac{\\text{Stress}}{\\text{Strain}} = \\frac{1}{\\text{slope of strain vs stress graph}}$.\nThe material with the least slope (producing the least strain for a given stress) has the largest Young's modulus, which corresponds to curve $D$.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "125c91fe-b524-4457-a1d0-bc5d9c856082",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Assertion (A) is true because magnetic dipole moments of atoms in ferromagnetic materials interact via exchange coupling to form spontaneously aligned domains.\nReason (R) is true because thermal agitation above the Curie temperature overcomes the exchange interaction and disrupts domain structure, converting the material to paramagnetic.\nHowever, (R) explains high-temperature behaviour rather than the fundamental origin of spontaneous domain formation at room temperature.\n\nHence, both (A) and (R) are true but (R) is not the correct explanation of (A) (Option c)."
+  },
+  {
+    "id": "00238472-6ceb-4577-bb33-13f16d19cbac",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For dispersion without deviation, the net mean deviation must be zero:\n$$\\delta = (\\mu_1 - 1)A_1 - (\\mu_2 - 1)A_2 = 0$$\n$$(1.72 - 1)(5^\\circ) = (1.9 - 1)A_2$$\n$$0.72 \\times 5^\\circ = 0.9 A_2 \\implies 3.6^\\circ = 0.9 A_2 \\implies A_2 = 4^\\circ$$\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "8772b5c4-3919-4235-950f-9249f15068e4",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Initial kinetic energy at $A$ is $K_A = K$.\nAt the highest point $B$, the velocity is $v_B = v_0 \\cos 60^\\circ = \\frac{v_0}{2}$, so $K_B = K_A \\cos^2 60^\\circ = \\frac{K}{4}$.\nAt the landing point $C$, $K_C = K_A = K$.\nDifference in kinetic energies between $B$ and $C$ is $K_C - K_B = K - \\frac{K}{4} = \\frac{3K}{4}$.\nRatio to $K_A$ is $\\frac{3K/4}{K} = \\frac{3}{4} = 3 : 4$.\n\nHence, the correct option is (c)."
+  },
+  {
+    "id": "b64b0d3a-d49c-4e2d-b48b-b8e5d6df7bbb",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "Amplitude of electric field $E_0 = \\sqrt{377}\\text{ N/C}$.\nCharacteristic impedance of free space $\\eta_0 = \\sqrt{\\frac{\\mu_0}{\\epsilon_0}} = 377\\ \\Omega$.\nAverage power per unit area (intensity) of the EM wave is:\n$$I = \\frac{E_0^2}{2\\eta_0} = \\frac{377}{2 \\times 377} = \\frac{1}{2}\\text{ W/m}^2$$\nGiven $I = \\frac{1}{\\alpha}\\text{ W/m}^2$, we find $\\alpha = 2$."
+  },
+  {
+    "id": "631a671e-a660-48f3-92ff-c29026bd98ad",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "8",
+    "numerical_answer": 8,
+    "explanation": "The capacitor is divided into a combination of dielectric slabs:\n- Top half (thickness $d/2$, area $A$, dielectric constant $K_1 = 2$): $C_{\\text{top}} = \\frac{K_1 \\epsilon_0 A}{d/2} = 2K_1 C = 4C$.\n- Bottom half consists of two parallel slabs of area $A/2$, thickness $d/2$ with $K_2 = 3$ and $K_3 = 5$: $C_{\\text{bot}} = \\frac{K_2 \\epsilon_0 (A/2)}{d/2} + \\frac{K_3 \\epsilon_0 (A/2)}{d/2} = (K_2 + K_3)C = 8C$.\n- The top and bottom halves are in series:\n$$C_{\\text{new}} = \\frac{C_{\\text{top}} C_{\\text{bot}}}{C_{\\text{top}} + C_{\\text{bot}}} = \\frac{4C \\times 8C}{4C + 8C} = \\frac{32}{12}C = \\frac{8}{3}C$$\nComparing with $\\frac{n}{3}C$, we get $n = 8$."
+  },
+  {
+    "id": "bf2ac8f5-0ffa-480a-8426-c395d46f3d63",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Fringe width in YDSE is $\\beta = \\frac{\\lambda D}{d}$.\nGiven $\\beta_1 = \\beta_2$:\n$$\\frac{\\lambda_1 D_1}{d_1} = \\frac{\\lambda_2 D_2}{d_2} \\implies \\frac{D_1}{D_2} = \\left(\\frac{\\lambda_2}{\\lambda_1}\\right) \\left(\\frac{d_1}{d_2}\\right)$$\nGiven $\\frac{d_1}{d_2} = \\frac{2}{1}$ and $\\frac{\\lambda_1}{\\lambda_2} = \\frac{1}{2} \\implies \\frac{\\lambda_2}{\\lambda_1} = \\frac{2}{1}$:\n$$\\frac{D_1}{D_2} = 2 \\times 2 = 4$$"
+  },
+  {
+    "id": "628a2545-4050-405a-bff3-74e5095bc20e",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "100",
+    "numerical_answer": 100,
+    "explanation": "Length of metallic wire $l = 10\\text{ cm} = 0.1\\text{ m}$, magnetic field $B = 2\\text{ T}$.\nReleased from $60^\\circ$, the maximum velocity at lowest point is:\n$$v = \\sqrt{2gl(1 - \\cos 60^\\circ)} = \\sqrt{2 \\times 10 \\times 0.1 \\times 0.5} = 1\\text{ m/s}$$\nMaximum angular speed $\\omega = \\frac{v}{l} = \\frac{1}{0.1} = 10\\text{ rad/s}$.\n\nMaximum induced EMF across the oscillating wire:\n$$\\mathcal{E} = \\frac{1}{2} B \\omega l^2 = \\frac{1}{2} \\times 2 \\times 10 \\times (0.1)^2 = 0.1\\text{ V} = 100\\text{ mV}$$"
+  },
+  {
+    "id": "d0a07511-37b3-4c34-b45f-671be9700151",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "10",
+    "numerical_answer": 10,
+    "explanation": "At resonance, the current in the series LCR circuit is maximum with resonant angular frequency $\\omega = 100\\text{ rad/s}$.\n$$\\omega = \\frac{1}{\\sqrt{LC}} \\implies \\omega^2 LC = 1$$\nGiven $L = 10\\text{ H}$:\n$$C = \\frac{1}{\\omega^2 L} = \\frac{1}{100^2 \\times 10} = \\frac{1}{10^5} = 10^{-5}\\text{ F} = 10\\ \\mu\\text{F}$$"
+  },
+  {
+    "id": "9f2b5b87-fc8b-4aea-9909-7a9d872f2ede",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "A mixture of acetone and carbon disulfide ($\\text{CS}_2$) shows positive deviation from Raoult's law because the dipolar interactions in acetone are weakened upon addition of non-polar $\\text{CS}_2$.\nThus, the partial vapour pressure of $\\text{CS}_2$ is higher than predicted by Raoult's law, and its plot against mole fraction curves upwards (Option a)."
+  },
+  {
+    "id": "d31284fc-ef93-4dae-8cdb-84d5a76cd7d4",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The conversion sequence from X to Y is:\n1. $\\text{NaOEt}$ causes dehydrohalogenation (E2 elimination) to give an terminal alkene.\n2. Hydroboration-oxidation using $\\text{B}_2\\text{H}_6/\\text{H}_2\\text{O}_2, \\text{OH}^-$ adds water in an anti-Markovnikov fashion to yield a primary alcohol.\n3. Oxidation of the primary alcohol using Jones reagent ($\\text{CrO}_3/\\text{H}_2\\text{SO}_4$) yields the carboxylic acid (Y).\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "756a8029-abd9-499e-46c5-788092710019",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For $\\text{Ni(DMG)}_2$ complex:\n- A. It is a bright red precipitate. (Correct)\n- B. It is insoluble in water at $\\text{pH} = 9$. (Incorrect)\n- C. $\\text{Ni}^{2+}$ has $dsp^2$ square planar geometry and is diamagnetic with zero unpaired electrons. (Incorrect)\n- D. $\\text{N}-\\text{Ni}-\\text{N}$ bond angle is approximately $90^\\circ$. (Correct)\n- E. The complex contains two 5-membered chelate rings and two 6-membered hydrogen-bonded rings. (Incorrect)\n\nTherefore, statements B, C, and E are incorrect (Option a)."
+  },
+  {
+    "id": "5401fea2-492c-492e-9861-cad617815622",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "When water at $5^\\circ\\text{C}$ is heated to boiling in a microwave oven:\n- Heat is absorbed by the system (water), so $q = +\\text{ve}$.\n- Water expands against atmospheric pressure as steam is produced, doing work on the surroundings, so $w = -\\text{ve}$.\n- Temperature of water rises from $5^\\circ\\text{C}$ to $100^\\circ\\text{C}$, so internal energy increases, $\\Delta U = +\\text{ve}$.\n\nHence, $q = +\\text{ve}, w = -\\text{ve}, \\Delta U = +\\text{ve}$ (Option b)."
+  },
+  {
+    "id": "f39986f2-cd29-447c-859d-4af626cb6930",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Statement I is false: Sublimation is used to separate substances that sublime (convert directly from solid to vapour) from non-sublimable impurities, not based merely on low melting points.\n- Statement II is false: The boiling point of a liquid decreases as external pressure is reduced (as seen in vacuum distillation).\n\nHence, both Statement I and Statement II are false (Option a)."
+  },
+  {
+    "id": "bf59718d-0cda-474f-a17c-c21dc970469d",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Energy of stationary states in hydrogen-like species is given by:\n$$E_n = -2.18 \\times 10^{-18} \\frac{Z^2}{n^2}\\text{ J}$$\nFor the third orbit ($n = 3$) of $\\text{Li}^{2+}$ ($Z = 3$):\n$$E_3 = -2.18 \\times 10^{-18} \\frac{3^2}{3^2} = -2.18 \\times 10^{-18}\\text{ J}$$\n\nHence, the correct option is (b)."
+  },
+  {
+    "id": "1928aa99-f2b8-4ee5-84a7-16b620e54f30",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- A is false: Ionic radii of trivalent cations increase down group 13.\n- B is false: Electronegativity does not decrease regularly down group 13 (B: 2.0, Al: 1.5, Ga: 1.6, In: 1.7, Tl: 1.8).\n- C is true: Boron has the smallest size and highest first ionization enthalpy in group 13.\n- D is true: Trichlorides and triiodides of group 13 elements are largely covalent in nature due to high polarizing power of cations.\n\nHence, C and D only are correct (Option a)."
+  },
+  {
+    "id": "327f5f33-3029-4a28-bf73-b7c3cb57f2ca",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Matching functional group tests with observed changes:\n- A. Unsaturation (Baeyer's test) $\\to$ Discharge of pink colour of $\\text{KMnO}_4$ (IV)\n- B. Alcoholic group (Ceric ammonium nitrate test) $\\to$ Red colour appears (I)\n- C. Aldehyde group (Tollen's reagent) $\\to$ Silver mirror appears (II)\n- D. Phenolic group ($\\text{FeCl}_3$ test) $\\to$ Violet colour appears (III)\n\nCorrect matching is A-IV, B-I, C-II, D-III (Option c)."
+  },
+  {
+    "id": "f0064a90-c644-4a0c-9d5a-af041f4c0692",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Total number of lone pairs in Lewis structures:\n- $\\text{HNO}_3$: 5 lone pairs\n- $\\text{H}_2\\text{SO}_4$: 8 lone pairs\n- $\\text{NF}_3$: 1 (on N) + $3 \\times 3$ (on F) = 10 lone pairs (maximum)\n- $\\text{O}_3$: 6 lone pairs\n\nThe molecule with the maximum lone pairs is $X = \\text{NF}_3$.\nIn $\\text{NF}_3$, the central nitrogen atom has one lone pair and three $\\text{N}-\\text{F}$ single bonds with high electronegativity of fluorine drawing electron density away, resulting in a bond angle of $102^\\circ$.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "fde2d028-de33-462b-9a5d-20c8271b59fc",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The overall cell reaction is:\n$$\\text{Ag}(\\text{s}) + \\text{Cl}^-(\\text{aq}) + \\text{Fe}^{3+}(\\text{aq}) \\rightleftharpoons \\text{AgCl}(\\text{s}) + \\text{Fe}^{2+}(\\text{aq})$$\nBy the Nernst equation:\n$$E_{\\text{cell}} = E^\\circ_{\\text{cell}} - \\frac{RT}{F} \\ln \\frac{[\\text{Fe}^{2+}]}{[\\text{Fe}^{3+}][\\text{Cl}^-]}$$\n$E_{\\text{cell}}$ increases when:\n- $[\\text{Fe}^{2+}]$ is decreased (C)\n- $[\\text{Fe}^{3+}]$ is increased (D)\n- $[\\text{Cl}^-]$ is increased (E)\n\nHence, C, D, and E only (Option b)."
+  },
+  {
+    "id": "8194ae2d-0948-47d2-8d34-cd0cff8b827a",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "According to the spectrochemical series, ligand field strength is $\\text{I}^- < \\text{Br}^- < \\text{Cl}^-$.\n- Statement I is true: $[\\text{CoBr}_4]^{2-}$ has a smaller crystal field splitting energy ($\\Delta_t$) than $[\\text{CoCl}_4]^{2-}$, so it absorbs light of lower energy (longer wavelength).\n- Statement II is false: $[\\text{CoI}_4]^{2-}$ has a smaller crystal field splitting than $[\\text{CoCl}_4]^{2-}$.\n\nHence, Statement I is true but Statement II is false (Option b)."
+  },
+  {
+    "id": "8567e717-58b5-4031-a52c-43b6a478defb",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- For (A): $n = 5, m_l = -1$. For $n = 5$, possible values of $l$ are $1, 2, 3, 4$ (p, d, f, g subshells). Each of these 4 subshells contains exactly one orbital with $m_l = -1$, and each orbital can hold 2 electrons. Thus, maximum number of electrons $= 4 \\times 2 = 8$.\n- For (B): $n = 3, l = 2, m_l = -1, m_s = +\\frac{1}{2}$. All four quantum numbers are fixed, specifying exactly 1 electron.\n\nHence, the correct values are 8 and 1 (Option a)."
+  },
+  {
+    "id": "d148c626-01fd-483f-bf87-228febfdb2c6",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Stephen reduction of propanenitrile gives propanal ($x = \\text{CH}_3\\text{CH}_2\\text{CHO}$).\n- Ozonolysis of but-2-ene followed by reductive workup gives ethanal ($y = \\text{CH}_3\\text{CHO}$).\n\nCross aldol condensation products formed between propanal and ethanal upon heating:\n1. Self-condensation of ethanal: But-2-enal\n2. Self-condensation of propanal: 2-Methylpent-2-enal\n3. Nucleophile propanal + electrophile ethanal: 2-Methylbut-2-enal\n4. Nucleophile ethanal + electrophile propanal: Pent-2-enal\n\n3-Methylbut-2-enal cannot be formed because it requires an enolate of acetone/isobutyraldehyde.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "48157916-3e55-459b-bd41-4559fdeb333a",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The rate of electrophilic aromatic nitration depends on the electron density of the aromatic ring:\n- Toluene (a): $-\\text{CH}_3$ group is activating via $+I$ and hyperconjugation (most reactive).\n- Chlorobenzene (c): $-\\text{Cl}$ is weakly deactivating due to strong $-I$ effect dominating resonance $+M$.\n- Nitrobenzene (b): $-\\text{NO}_2$ is strongly deactivating due to $-M$ and $-I$ effects (least reactive).\n\nIncreasing order of reactivity: $\\text{b} < \\text{c} < \\text{a}$.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "8a9e8b1c-1444-4174-a765-d5bb1c8982ed",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Compound 'P' is the starting aromatic compound which upon the given sequential reagents undergoes functional group conversion to yield the target substituted derivative.\nBased on the reaction pathway, 'P' corresponds to Option (a)."
+  },
+  {
+    "id": "27ff00aa-b8f0-4ebe-86c2-500cd115d14f",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Cyclic structures with a hemiacetal group (free $-\\text{OH}$ at anomeric carbon) are in equilibrium with open-chain aldehydes and reduce Tollen's reagent.\nStructures B and D are cyclic full acetals/ketals (no free hemiacetal $-\\text{OH}$) and cannot open to aldehydes in basic Tollen's solution, hence they do not react with Tollen's reagent.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "e436c862-e3ea-4d27-bd16-c7f6816dcd70",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The first ionization enthalpies of $3^{\\text{rd}}$ period elements are:\n- $\\text{Al} (3s^2 3p^1) = 577\\text{ kJ/mol}$\n- $\\text{Si} (3s^2 3p^2) = 786\\text{ kJ/mol}$\n- $\\text{P} (3s^2 3p^3) = 1012\\text{ kJ/mol}$ (extra stable half-filled $3p$ subshell, higher than S)\n- $\\text{S} (3s^2 3p^4) = 1000\\text{ kJ/mol}$\n- $\\text{Cl} (3s^2 3p^5) = 1251\\text{ kJ/mol}$\n\nThus, the correct increasing order is $\\text{Al} < \\text{Si} < \\text{S} < \\text{P} < \\text{Cl}$.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "d38985d0-502e-4b6c-b0fa-1c0ecd807f3f",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The relationship is $K_p = K_c (RT)^{\\Delta n_g}$, where $\\Delta n_g = y - x$.\nAt $T = 400\\text{ K}$, $RT = 0.0821 \\times 400 = 32.84\\text{ L}\\cdot\\text{atm/mol}$.\n\n- In condition (i): $\\frac{K_p}{K_c} = \\frac{85.87}{2.586} \\approx 33.2 \\approx (RT)^1 \\implies y - x = 1 \\implies x = 1, y = 2$.\n- In condition (ii): $\\frac{K_p}{K_c} = \\frac{0.862}{28.62} \\approx 0.0301 \\approx (RT)^{-1} \\implies y - x = -1 \\implies x = 2, y = 1$.\n\nHence, (i) 1, 2 ; (ii) 2, 1 (Option d)."
+  },
+  {
+    "id": "4e5ff1f0-096e-4494-ab3f-3afddde45502",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Hydrogenation of but-2-yne:\n- (i) $\\text{Pd/C} \\implies$ syn addition to give cis-but-2-ene (X).\n- (ii) $\\text{Na/liq. NH}_3 \\implies$ anti addition (Birch reduction) to give trans-but-2-ene (Y).\n\nEvaluating statements:\n- A. X and Y are geometrical (stereoisomers). (True)\n- B. Dipole moment of cis-isomer (X) is non-zero, while trans (Y) is zero. (Incorrect)\n- C. Boiling point of cis-isomer (X) is higher than trans (Y) due to dipole-dipole forces. (True)\n- D. Both X and Y undergo reductive ozonolysis to give the same product, ethanal ($\\text{CH}_3\\text{CHO}$). (Incorrect)\n\nIncorrect statements are B and D only (Option b)."
+  },
+  {
+    "id": "e06afbde-85ff-49d4-a387-b5f0c280f3b1",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Molar mass of 4-nitrotoluene ($\\text{C}_7\\text{H}_7\\text{NO}_2$) is $137\\text{ g/mol}$.\n$137\\text{ mg}$ of 4-nitrotoluene corresponds to $1\\text{ mmol}$.\nThrough the multi-step synthetic sequence, $1\\text{ mmol}$ produces $1\\text{ mmol}$ of product B ($M = 301\\text{ g/mol}$), yielding $301\\text{ mg}$ of B.\n\nHence, the correct option is (a)."
+  },
+  {
+    "id": "eebbfc75-39f5-44a8-b5f7-1f93ca24289b",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "For $[\\text{Co}(\\text{ox})_3]^{3-}$, $\\text{Co}^{3+}$ has $d^6$ configuration. Since $\\Delta_0 \\gg P$, it forms a low-spin complex with configuration $t_{2g}^6 e_g^0$:\n$$\\text{CFSE}(\\text{Co}) = -0.4 \\times 6 \\Delta_0 = -2.4 \\Delta_0$$\n\nFor $[\\text{Cr}(\\text{ox})_3]^{3-}$, $\\text{Cr}^{3+}$ has $d^3$ configuration with $t_{2g}^3 e_g^0$:\n$$\\text{CFSE}(\\text{Cr}) = -0.4 \\times 3 \\Delta_0 = -1.2 \\Delta_0$$\n\nComparing magnitudes:\n$$n = \\frac{|-2.4 \\Delta_0|}{|-1.2 \\Delta_0|} = 2$$"
+  },
+  {
+    "id": "43eb65e8-4dcd-4be7-836a-5c7ec6456cd1",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "Reaction of structural isomers of $\\text{C}_5\\text{H}_{11}\\text{Br}$ with aqueous $\\text{KOH}$ gives the corresponding pentyl alcohol isomers:\n1. 1-bromopentane $\\to$ pentan-1-ol (achiral)\n2. 2-bromopentane $\\to$ pentan-2-ol (chiral, 1 chiral center)\n3. 3-bromopentane $\\to$ pentan-3-ol (achiral)\n4. 1-bromo-2-methylbutane $\\to$ 2-methylbutan-1-ol (chiral, 1 chiral center)\n5. 2-bromo-2-methylbutane $\\to$ 2-methylbutan-2-ol (achiral)\n6. 2-bromo-3-methylbutane $\\to$ 3-methylbutan-2-ol (chiral, 1 chiral center)\n7. 1-bromo-3-methylbutane $\\to$ 3-methylbutan-1-ol (achiral)\n8. 1-bromo-2,2-dimethylpropane $\\to$ 2,2-dimethylpropan-1-ol (achiral)\n\nThe number of products exhibiting optical isomerism is 3."
+  },
+  {
+    "id": "6d2d43a2-b297-441d-a9af-d59989dcfc5c",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "1825",
+    "numerical_answer": 1825,
+    "explanation": "The neutralization reaction is:\n$$\\text{Ba}(\\text{OH})_2 + 2\\text{HCl} \\to \\text{BaCl}_2 + 2\\text{H}_2\\text{O}$$\nMoles of $\\text{Ba}(\\text{OH})_2 = 25.0 \\times 10^{-3}\\text{ L} \\times 0.1\\text{ M} = 2.5 \\times 10^{-3}\\text{ mol}$.\nMoles of $\\text{HCl} = 2 \\times 2.5 \\times 10^{-3} = 5.0 \\times 10^{-3}\\text{ mol}$.\nMass of $\\text{HCl} = 5.0 \\times 10^{-3}\\text{ mol} \\times 36.5\\text{ g/mol} = 0.1825\\text{ g} = 182.5\\text{ mg}$.\n\nExpressing in the required format $182.5\\text{ mg} = 1825 \\times 10^{-1}$, the numerical value is 1825."
+  },
+  {
+    "id": "6216e62f-aac7-4222-be3d-94bedf5280c4",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "100",
+    "numerical_answer": 100,
+    "explanation": "The linear plot of $\\frac{1}{[\\text{AB}]}$ versus time confirms second-order reaction kinetics:\n$$\\frac{1}{[\\text{AB}]} = \\frac{1}{[\\text{AB}]_0} + kt$$\nFor a second-order reaction, the half-life is given by $t_{1/2} = \\frac{1}{k [\\text{AB}]_0}$.\nEvaluating from the graph gives $x = 100\\text{ min}$."
+  },
+  {
+    "id": "09000a71-1d74-4c69-bd4c-f33c5aa75ab9",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "125",
+    "numerical_answer": 125,
+    "explanation": "For the reaction $\\text{NH}_3(\\text{g}) \\rightleftharpoons \\frac{1}{2}\\text{N}_2(\\text{g}) + \\frac{3}{2}\\text{H}_2(\\text{g})$:\nLet the degree of dissociation be $\\alpha$. At equilibrium with initial 1 mole of $\\text{NH}_3$:\n- Moles: $n_{\\text{NH}_3} = 1 - \\alpha$, $n_{\\text{N}_2} = \\frac{\\alpha}{2}$, $n_{\\text{H}_2} = \\frac{3\\alpha}{2}$, total moles $= 1 + \\alpha$.\n$$K_p = \\frac{p_{\\text{N}_2}^{1/2} p_{\\text{H}_2}^{3/2}}{p_{\\text{NH}_3}} = \\frac{\\left(\\frac{\\alpha/2}{1+\\alpha}P\\right)^{1/2} \\left(\\frac{3\\alpha/2}{1+\\alpha}P\\right)^{3/2}}{\\left(\\frac{1-\\alpha}{1+\\alpha}P\\right)} = \\frac{3\\sqrt{3}}{4} \\frac{\\alpha^2}{1 - \\alpha^2} P$$\n\nGiven $K_p = 9\\text{ atm}$ and $P = \\sqrt{3}\\text{ atm}$:\n$$9 = \\frac{3\\sqrt{3}}{4} \\frac{\\alpha^2}{1 - \\alpha^2} (\\sqrt{3}) = \\frac{9}{4} \\frac{\\alpha^2}{1 - \\alpha^2} \\implies \\frac{\\alpha^2}{1 - \\alpha^2} = 4$$\n$$\\alpha^2 = 4 - 4\\alpha^2 \\implies 5\\alpha^2 = 4 \\implies \\alpha^2 = \\frac{4}{5} = 0.8$$\n$$\\alpha = \\sqrt{\\frac{4}{5}} = \\frac{1}{\\sqrt{5/4}} = \\frac{1}{\\sqrt{1.25}} = (125 \\times 10^{-2})^{-1/2}$$\n\nThus, $x = 125$."
+  }
+]

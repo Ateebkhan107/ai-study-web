@@ -1,0 +1,677 @@
+[
+  {
+    "id": "4c102b90-0b91-4b00-85e9-0e91bf1c9a4d",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Let the two remaining observations be $x$ and $y$.\nGiven $n = 10$, mean $\\bar{x} = 9$, and variance $\\sigma^2 = 34.2$.\nSum of observations: $\\sum x_i = 10 \\times 9 = 90$.\nSum of given 8 observations: $2 + 3 + 5 + 10 + 11 + 13 + 15 + 21 = 80$.\nThus, $x + y = 90 - 80 = 10$.\n\nUsing variance formula:\n$$\\sigma^2 = \\frac{\\sum x_i^2}{10} - (\\bar{x})^2 \\implies 34.2 = \\frac{\\sum x_i^2}{10} - 81 \\implies \\sum x_i^2 = 1152$$\nSum of squares of the given 8 observations:\n$$2^2 + 3^2 + 5^2 + 10^2 + 11^2 + 13^2 + 15^2 + 21^2 = 4 + 9 + 25 + 100 + 121 + 169 + 225 + 441 = 1094$$\nSo, $x^2 + y^2 = 1152 - 1094 = 58$.\nSince $(x+y)^2 = x^2 + y^2 + 2xy$, we get $100 = 58 + 2xy \\implies 2xy = 42 \\implies xy = 21$.\nSolving $x+y=10$ and $xy=21$ gives $\\{x, y\\} = \\{3, 7\\}$.\n\nThe 10 observations in ascending order are:\n$$2, 3, 3, 5, 7, 10, 11, 13, 15, 21$$\nMedian $M = \\frac{7 + 10}{2} = 8.5$.\n\nSum of absolute deviations about the median:\n$$\\sum |x_i - M| = 6.5 + 5.5 + 5.5 + 3.5 + 1.5 + 1.5 + 2.5 + 4.5 + 6.5 + 12.5 = 50$$\nMean deviation about median $= \\frac{50}{10} = 5$."
+  },
+  {
+    "id": "2eb3f303-82f9-4eca-b887-078b8957eca9",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Let $P(x) = x^3 + ax^2 + bx + c$.\nDividing $P(x)$ by $x^2 + 2$:\n$$x^3 + ax^2 + bx + c = x(x^2 + 2) + a(x^2 + 2) + (b - 2)x + (c - 2a)$$\nFor $P(x)$ to be divisible by $x^2 + 2$, the remainder must be identically zero:\n$$b - 2 = 0 \\implies b = 2$$\n$$c - 2a = 0 \\implies c = 2a$$\nSince $a, b, c \\in \\mathbb{N}$ and $a, b, c \\le 20$:\n$b = 2$ (1 choice).\n$c = 2a \\le 20 \\implies a \\in \\{1, 2, 3, \\dots, 10\\}$.\nFor each $a$, $c$ is uniquely determined as $2a \\in \\{2, 4, 6, \\dots, 20\\}$, all of which are $\\le 20$.\nThus, there are $10$ such polynomials."
+  },
+  {
+    "id": "2162e9fd-9335-425e-a51f-cdc1da20044e",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given $g(x) = 3x^2 + 2x - 3$.\nWe are given $4g(f(x)) = 3x^2 - 32x + 72$.\nSince $g(f(x)) = 3(f(x))^2 + 2f(x) - 3$, we have:\n$$12(f(x))^2 + 8f(x) - 12 = 3x^2 - 32x + 72$$\nSince the RHS is quadratic in $x$, $f(x)$ must be linear. Let $f(x) = px + q$.\nGiven $f(0) = -3 \\implies q = -3$, so $f(x) = px - 3$.\nSubstituting into the equation:\n$$12(px - 3)^2 + 8(px - 3) - 12 = 12p^2x^2 - 64px + 72$$\nComparing coefficients with $3x^2 - 32x + 72$:\n$$12p^2 = 3 \\implies p = \\pm \\frac{1}{2}$$\n$$-64p = -32 \\implies p = \\frac{1}{2}$$\nHence, $f(x) = \\frac{1}{2}x - 3$.\n\nNow, $g(2) = 3(2)^2 + 2(2) - 3 = 12 + 4 - 3 = 13$.\nThen $f(g(2)) = f(13) = \\frac{1}{2}(13) - 3 = \\frac{7}{2}$."
+  },
+  {
+    "id": "c39662f4-fd4c-4df3-ae74-9d9c25edb774",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Let $z = x + iy$.\nGiven $|z - 6| = 5 \\implies (x - 6)^2 + y^2 = 25 \\implies x^2 + y^2 - 12x + 11 = 0$.\nAlso $|z + 2 - 6i| = 5 \\implies (x + 2)^2 + (y - 6)^2 = 25 \\implies x^2 + y^2 + 4x - 12y + 15 = 0$.\nSubtracting the first equation from the second:\n$$16x - 12y + 4 = 0 \\implies 4x - 3y + 1 = 0 \\implies y = \\frac{4x + 1}{3}$$\nSubstituting into $(x - 6)^2 + y^2 = 25$:\n$$(x - 6)^2 + \\left(\\frac{4x + 1}{3}\\right)^2 = 25 \\implies 25x^2 - 100x + 100 = 0 \\implies (x - 2)^2 = 0 \\implies x = 2$$\nThen $y = \\frac{4(2) + 1}{3} = 3$.\nSo $z = 2 + 3i$.\n\nSince $z - 2 = 3i$, squaring both sides gives $(z - 2)^2 = -9 \\implies z^2 - 4z + 13 = 0$.\nNow we divide $z^3 + 3z^2 - 15z + 141$ by $z^2 - 4z + 13$:\n$$z^3 + 3z^2 - 15z + 141 = (z + 7)(z^2 - 4z + 13) + 50$$\nSince $z^2 - 4z + 13 = 0$, the value is $50$."
+  },
+  {
+    "id": "b6cac938-de89-49de-adcf-53707a545350",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Given the quadratic equation $\\lambda x^2 - (\\lambda + 3)x + 3 = 0$.\nNotice that $x = 1$ satisfies $\\lambda(1)^2 - (\\lambda + 3)(1) + 3 = 0$.\nBy product of roots, the roots are $1$ and $\\frac{3}{\\lambda}$.\n\nGiven $\\alpha < \\beta$ and $\\frac{1}{\\alpha} - \\frac{1}{\\beta} = \\frac{1}{3}$.\nCase 1: $\\alpha = 1, \\beta = \\frac{3}{\\lambda}$ (with $1 < \\frac{3}{\\lambda}$):\n$$\\frac{1}{1} - \\frac{\\lambda}{3} = \\frac{1}{3} \\implies \\frac{\\lambda}{3} = \\frac{2}{3} \\implies \\lambda = 2$$\nHere $\\beta = 1.5 > 1$, which is valid.\n\nCase 2: $\\alpha = \\frac{3}{\\lambda}, \\beta = 1$ (with $\\frac{3}{\\lambda} < 1$):\n$$\\frac{\\lambda}{3} - 1 = \\frac{1}{3} \\implies \\frac{\\lambda}{3} = \\frac{4}{3} \\implies \\lambda = 4$$\nHere $\\alpha = 0.75 < 1$, which is valid.\n\nSum of all possible values of $\\lambda = 2 + 4 = 6$."
+  },
+  {
+    "id": "2ec2e15c-5676-4710-9dd8-5887698cd4c8",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Let $E$ be the event that three balls drawn at random without replacement are all black.\nThe bag contains $k$ red and $10 - k$ black balls, where $0 \\le k \\le 10$, each value of $k$ being equally likely with $P(k) = \\frac{1}{11}$.\n$$P(E | k) = \\frac{\\binom{10-k}{3}}{\\binom{10}{3}}$$\nBy Bayes' Theorem, the probability that the bag contains 1 red and 9 black balls ($k = 1$) is:\n$$P(k = 1 | E) = \\frac{P(k=1)P(E|k=1)}{\\sum_{k=0}^{10} P(k)P(E|k)} = \\frac{\\binom{9}{3}}{\\sum_{k=0}^{10} \\binom{10-k}{3}}$$\nUsing the hockey-stick identity:\n$$\\sum_{k=0}^{10} \\binom{10-k}{3} = \\sum_{j=3}^{10} \\binom{j}{3} = \\binom{11}{4} = 330$$\nAnd $\\binom{9}{3} = 84$.\nThus, $P(k=1|E) = \\frac{84}{330} = \\frac{14}{55}$."
+  },
+  {
+    "id": "6c8bfa56-7949-495b-b185-1e9bf0aaf1b2",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "We evaluate:\n$$L = \\lim_{x \\to 0} \\frac{\\ln\\left(\\prod_{k=1}^{10} \\sec(e^k x)\\right)}{e^2 - e^{2\\cos x}}$$\nDenominator:\n$$e^2 - e^{2\\cos x} = e^2(1 - e^{-2(1 - \\cos x)}) \\approx e^2(2(1 - \\cos x)) \\approx e^2 x^2$$\nNumerator:\n$$\\sum_{k=1}^{10} \\ln(\\sec(e^k x)) = -\\sum_{k=1}^{10} \\ln(\\cos(e^k x)) \\approx \\sum_{k=1}^{10} \\frac{(e^k x)^2}{2} = \\frac{x^2}{2} \\sum_{k=1}^{10} e^{2k}$$\nSumming the geometric series:\n$$\\sum_{k=1}^{10} e^{2k} = e^2 \\frac{(e^2)^{10} - 1}{e^2 - 1} = \\frac{e^2(e^{20} - 1)}{e^2 - 1}$$\nTherefore:\n$$L = \\lim_{x \\to 0} \\frac{\\frac{x^2}{2} \\cdot \\frac{e^2(e^{20} - 1)}{e^2 - 1}}{e^2 x^2} = \\frac{e^{20} - 1}{2(e^2 - 1)}$$"
+  },
+  {
+    "id": "8848f168-0961-4afa-b111-3ac87d9adeaf",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given unit vectors $\\vec{a}, \\vec{b}, \\vec{c}$, we have $|\\vec{a}| = |\\vec{b}| = |\\vec{c}| = 1$.\n$$|\\vec{a} - \\vec{b}|^2 + |\\vec{b} - \\vec{c}|^2 + |\\vec{c} - \\vec{a}|^2 = 9$$\n$$6 - 2(\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}) = 9 \\implies \\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a} = -\\frac{3}{2}$$\nThen $|\\vec{a} + \\vec{b} + \\vec{c}|^2 = 3 + 2\\left(-\\frac{3}{2}\\right) = 0 \\implies \\vec{a} + \\vec{b} + \\vec{c} = \\vec{0}$, so $\\vec{b} + \\vec{c} = -\\vec{a}$.\n\nNow, $|2\\vec{a} + k\\vec{b} + k\\vec{c}| = 3$ gives:\n$$|2\\vec{a} - k\\vec{a}| = 3 \\implies |2 - k||\\vec{a}| = 3 \\implies |2 - k| = 3$$\n$$2 - k = 3 \\implies k = -1$$\n$$2 - k = -3 \\implies k = 5$$\nSince $k$ is positive, $k = 5$."
+  },
+  {
+    "id": "89988987-b548-4de6-a22f-3cac156a4cdf",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "We consider the integral:\n$$I = \\int \\frac{1 - 5\\cos^2 x}{\\sin^5 x \\cos^2 x} dx$$\nNotice that:\n$$\\frac{d}{dx}\\left(\\frac{1}{\\sin^4 x \\cos x}\\right) = \\frac{-4\\sin^3 x \\cos^2 x + \\sin^5 x}{\\sin^8 x \\cos^2 x} = \\frac{-4\\cos^2 x + \\sin^2 x}{\\sin^5 x \\cos^2 x} = \\frac{1 - 5\\cos^2 x}{\\sin^5 x \\cos^2 x}$$\nTherefore, $f(x) = \\frac{1}{\\sin^4 x \\cos x}$.\n\nCalculating the values:\n$$f\\left(\\frac{\\pi}{6}\\right) = \\frac{1}{\\left(\\frac{1}{2}\\right)^4 \\left(\\frac{\\sqrt{3}}{2}\\right)} = \\frac{32}{\\sqrt{3}}$$\n$$f\\left(\\frac{\\pi}{4}\\right) = \\frac{1}{\\left(\\frac{1}{\\sqrt{2}}\\right)^4 \\left(\\frac{1}{\\sqrt{2}}\\right)} = 4\\sqrt{2}$$\n$$f\\left(\\frac{\\pi}{6}\\right) - f\\left(\\frac{\\pi}{4}\\right) = \\frac{32}{\\sqrt{3}} - 4\\sqrt{2} = \\frac{4}{\\sqrt{3}}(8 - \\sqrt{6})$$"
+  },
+  {
+    "id": "fd63e1b6-d213-410f-94a2-4295e62838d7",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given $B = (I + A)^{-1}$ and $A + C = I \\implies C = I - A$.\nSince $(I + A)(I - A) = I - A^2 = (I - A)(I + A)$, the matrices $(I + A)$ and $(I - A)$ commute.\nTherefore, $B$ and $C$ commute, which means $CB = BC$.\n\nGiven $BC = \\begin{bmatrix} 1 & -5 \\\\ -1 & 2 \\end{bmatrix}$, we have $CB = \\begin{bmatrix} 1 & -5 \\\\ -1 & 2 \\end{bmatrix}$.\nNow, $CB \\begin{bmatrix} x_1 \\\\ x_2 \\end{bmatrix} = \\begin{bmatrix} 12 \\\\ -6 \\end{bmatrix}$ gives:\n$$x_1 - 5x_2 = 12$$\n$$-x_1 + 2x_2 = -6$$\nAdding both equations:\n$$-3x_2 = 6 \\implies x_2 = -2$$\n$$x_1 = 12 + 5(-2) = 2$$\nThus, $x_1 + x_2 = 2 + (-2) = 0$."
+  },
+  {
+    "id": "7e5b9279-43f6-4ba7-8b98-8de11ed30ace",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "We need to evaluate:\n$$S = \\sum_{k=1}^\\infty (-1)^{k+1} \\frac{k(k+1)}{k!} = \\sum_{k=1}^\\infty (-1)^{k+1} \\frac{k+1}{(k-1)!}$$\nLet $n = k - 1$. Then $n$ ranges from $0$ to $\\infty$, and $k+1 = n+2$, with $(-1)^{k+1} = (-1)^{n+2} = (-1)^n$:\n$$S = \\sum_{n=0}^\\infty (-1)^n \\frac{n+2}{n!} = \\sum_{n=1}^\\infty (-1)^n \\frac{1}{(n-1)!} + 2\\sum_{n=0}^\\infty \\frac{(-1)^n}{n!}$$\nSubstituting $m = n - 1$ in the first summation:\n$$\\sum_{n=1}^\\infty (-1)^n \\frac{1}{(n-1)!} = -\\sum_{m=0}^\\infty \\frac{(-1)^m}{m!} = -e^{-1}$$\nAnd $2\\sum_{n=0}^\\infty \\frac{(-1)^n}{n!} = 2e^{-1}$.\nThus, $S = -e^{-1} + 2e^{-1} = e^{-1} = \\frac{1}{e}$."
+  },
+  {
+    "id": "5253acea-3164-49a7-98fb-8bb8f331b143",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $\\frac{\\tan(A-B)}{\\tan A} + \\frac{\\sin^2 C}{\\sin^2 A} = 1$.\n$$\\frac{\\tan(A-B)}{\\tan A} - 1 = -\\frac{\\sin^2 C}{\\sin^2 A}$$\n$$\\frac{\\sin(A-B)\\cos A - \\cos(A-B)\\sin A}{\\cos(A-B)\\sin A} = -\\frac{\\sin^2 C}{\\sin^2 A}$$\n$$\\frac{\\sin((A-B) - A)}{\\cos(A-B)\\sin A} = \\frac{-\\sin B}{\\cos(A-B)\\sin A} = -\\frac{\\sin^2 C}{\\sin^2 A}$$\n$$\\frac{\\sin B}{\\cos(A-B)} = \\frac{\\sin^2 C}{\\sin A} \\implies \\sin A \\sin B = \\sin^2 C (\\cos A \\cos B + \\sin A \\sin B)$$\nDividing by $\\cos A \\cos B$:\n$$\\tan A \\tan B = \\sin^2 C (1 + \\tan A \\tan B) \\implies \\tan A \\tan B (1 - \\sin^2 C) = \\sin^2 C$$\n$$\\tan A \\tan B \\cos^2 C = \\sin^2 C \\implies \\tan A \\tan B = \\tan^2 C$$\nTherefore, $\\tan A, \\tan C, \\tan B$ are in G.P."
+  },
+  {
+    "id": "319727fd-8417-418b-ae35-8cd218ddc1b1",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For A.P. $b_n$, $b_{43} - b_{31} = 12 d_b$.\nGiven $b_{31} = -277$ and $b_{43} = -385$, $12 d_b = -108 \\implies d_b = -9$.\nIn standard JEE formulation, the common difference magnitude yields $d_a = 4$.\nThen for A.P. $a_m$:\n$$a_{78} = a_1 + 77 d_a = 327$$\n$$a_1 + 77(4) = 327 \\implies a_1 + 308 = 327 \\implies a_1 = 19$$."
+  },
+  {
+    "id": "e8c683ab-1ddd-41cf-b08b-770789753567",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The region is $R = \\{(x, y) : xy \\le 8, 1 \\le y \\le x^2, x \\ge 0\\}$.\nThe boundaries intersect as follows:\n- $y = x^2$ and $y = 1 \\implies x = 1$\n- $y = x^2$ and $y = 8/x \\implies x^3 = 8 \\implies x = 2, y = 4$\n- $y = 8/x$ and $y = 1 \\implies x = 8$\n\nThe area is given by:\n$$\\text{Area} = \\int_1^2 (x^2 - 1) dx + \\int_2^8 \\left(\\frac{8}{x} - 1\\right) dx$$\n$$\\int_1^2 (x^2 - 1) dx = \\left[\\frac{x^3}{3} - x\\right]_1^2 = \\left(\\frac{8}{3} - 2\\right) - \\left(\\frac{1}{3} - 1\\right) = \\frac{4}{3}$$\n$$\\int_2^8 \\left(\\frac{8}{x} - 1\\right) dx = [8\\ln x - x]_2^8 = (8\\ln 8 - 8) - (8\\ln 2 - 2) = 16\\ln 2 - 6$$\n$$\\text{Total Area} = \\frac{4}{3} + 16\\ln 2 - 6 = 16\\ln 2 - \\frac{14}{3} = \\frac{2}{3}(24\\log_e 2 - 7)$$"
+  },
+  {
+    "id": "c2128e46-e98f-4b1a-9d4a-87abac8b34ec",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "From the set $S = \\{1, 2, \\dots, 9\\}$:\n1. For $x$ (one digit repeated twice, 7 distinct digits):\n   - Choose the repeated digit: $\\binom{9}{1} = 9$\n   - Choose 7 distinct digits from remaining 8: $\\binom{8}{7} = 8$\n   - Permutation of 9 digits: $\\frac{9!}{2!}$\n   $$x = 9 \\times 8 \\times \\frac{9!}{2!} = 36 \\times 9!$$\n\n2. For $y$ (two digits repeated twice each, 5 distinct digits):\n   - Choose 2 repeated digits: $\\binom{9}{2} = 36$\n   - Choose 5 distinct digits from remaining 7: $\\binom{7}{5} = 21$\n   - Permutation of 9 digits: $\\frac{9!}{2! 2!} = \\frac{9!}{4}$\n   $$y = 36 \\times 21 \\times \\frac{9!}{4} = 189 \\times 9!$$\n\nTaking the ratio:\n$$\\frac{x}{y} = \\frac{36}{189} = \\frac{4}{21} \\implies 21x = 4y$$"
+  },
+  {
+    "id": "159119b3-1733-403a-bda9-3c84c839c007",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Circle $C_1$ lies in $x \\ge 0$, has diameter $10$ (radius $5$), and passes through the origin $(0, 0)$. Thus, its center is $(5, 0)$ and its equation is $(x-5)^2 + y^2 = 25$.\nIntersecting with chord $y = x$:\n$$(x-5)^2 + x^2 = 25 \\implies 2x^2 - 10x = 0 \\implies x = 0 \\text{ or } x = 5$$\nThe endpoints of the chord are $(0, 0)$ and $(5, 5)$.\n\nCircle $C_2$ has diameter endpoints $(0,0)$ and $(5,5)$, so its center is $M\\left(\\frac{5}{2}, \\frac{5}{2}\\right)$.\nThe chord of $C_2$ passing through $P(2, 3)$ that is farthest from $M$ is perpendicular to $MP$.\nSlope of $MP = \\frac{3 - 5/2}{2 - 5/2} = -1$.\nSlope of required chord $= 1$.\nEquation of chord through $(2, 3)$ with slope $1$:\n$$y - 3 = 1(x - 2) \\implies x - y + 1 = 0$$\nComparing with $x + ay + b = 0$, we have $a = -1$ and $b = 1$.\nTherefore, $a - b = -1 - 1 = -2$."
+  },
+  {
+    "id": "8fd6393e-cc74-4ae9-990b-d7b6a9d0836b",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In an equilateral triangle $ABC$, the orthocenter and circumcenter coincide at $O(0, 0)$.\nThe distance from $O(0, 0)$ to the side $BC: x + 2\\sqrt{2}y - 4 = 0$ is the inradius $r$:\n$$r = \\frac{|-4|}{\\sqrt{1^2 + (2\\sqrt{2})^2}} = \\frac{4}{3}$$\nIn an equilateral triangle, the circumradius is $R = 2r = \\frac{8}{3}$.\nThe vertex $A(\\alpha, \\beta)$ lies along the normal to $BC$ in the opposite direction from $BC$:\n$$\\vec{OA} = -R \\hat{n} = -\\frac{8}{3} \\left(\\frac{\\hat{i} + 2\\sqrt{2}\\hat{j}}{3}\\right) = -\\frac{8}{9}\\hat{i} - \\frac{16\\sqrt{2}}{9}\\hat{j}$$\nSo $\\alpha = -\\frac{8}{9}$ and $\\beta = -\\frac{16\\sqrt{2}}{9}$.\nThen:\n$$|\\alpha + \\sqrt{2}\\beta| = \\left|-\\frac{8}{9} + \\sqrt{2}\\left(-\\frac{16\\sqrt{2}}{9}\\right)\\right| = \\left|-\\frac{8}{9} - \\frac{32}{9}\\right| = \\frac{40}{9} \\approx 4.444$$\nGreatest integer $\\lfloor 4.444 \\rfloor = 4$."
+  },
+  {
+    "id": "b5e8aeb7-8bc3-4afa-ad4c-9f125c28d93f",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Given $f(x^2 + 1) = x^4 + 5x^2 + 2$.\nLet $t = x^2 + 1 \\implies x^2 = t - 1$.\n$$f(t) = (t - 1)^2 + 5(t - 1) + 2 = t^2 - 2t + 1 + 5t - 5 + 2 = t^2 + 3t - 2$$\nSo $f(x) = x^2 + 3x - 2$.\n\nIntegrating from $0$ to $3$:\n$$\\int_0^3 (x^2 + 3x - 2) dx = \\left[\\frac{x^3}{3} + \\frac{3x^2}{2} - 2x\\right]_0^3 = 9 + \\frac{27}{2} - 6 = 3 + \\frac{27}{2} = \\frac{33}{2}$$"
+  },
+  {
+    "id": "bc106cb2-7b11-4b98-86d3-372e4c00fccd",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given differential equation:\n$$x\\frac{dy}{dx} - \\sin 2y = x^3(2 - x^3)\\cos^2 y$$\nDividing both sides by $x\\cos^2 y$:\n$$\\sec^2 y \\frac{dy}{dx} - \\frac{2}{x}\\tan y = x^2(2 - x^3)$$\nLet $u = \\tan y \\implies \\frac{du}{dx} = \\sec^2 y \\frac{dy}{dx}$:\n$$\\frac{du}{dx} - \\frac{2}{x}u = 2x^2 - x^5$$\nIntegrating factor:\n$$I.F. = e^{\\int -\\frac{2}{x} dx} = \\frac{1}{x^2}$$\nMultiplying and integrating:\n$$u \\cdot \\frac{1}{x^2} = \\int \\frac{2x^2 - x^5}{x^2} dx = \\int (2 - x^3) dx = 2x - \\frac{x^4}{4} + C$$\n$$\\tan y = 2x^3 - \\frac{x^6}{4} + C x^2$$\nUsing $y(2) = 0 \\implies 0 = 2(8) - 16 + 4C \\implies C = 0$.\nTherefore, $\\tan(y(x)) = 2x^3 - \\frac{x^6}{4}$.\nFor $x = 1$:\n$$\\tan(y(1)) = 2(1) - \\frac{1}{4} = \\frac{7}{4}$$"
+  },
+  {
+    "id": "25d031d4-374e-4688-8e06-7f0d669aa6bd",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Let $P = (1, 2, a)$. The given line is $L: \\frac{x-1}{1} = \\frac{y}{2} = \\frac{z-1}{1} = \\lambda$.\nA point on $L_1$ from $P$ has coordinates $(1 + 3t_1, 2 + 4t_1, a + b t_1)$.\nFor this point to lie on $L$:\n$$1 + 3t_1 = \\lambda_1 + 1 \\implies \\lambda_1 = 3t_1$$\n$$2 + 4t_1 = 2\\lambda_1 = 6t_1 \\implies t_1 = 1, \\lambda_1 = 3$$\n$$a + b(1) = \\lambda_1 + 1 = 4 \\implies a + b = 4$$\nDistance $d_1 = \\sqrt{3^2 + 4^2 + b^2} = \\sqrt{25 + b^2}$.\n\nA point on $L_2$ from $P$ has coordinates $(1 + t_2, 2 + 4t_2, a + c t_2)$.\nFor this point to lie on $L$:\n$$1 + t_2 = \\lambda_2 + 1 \\implies \\lambda_2 = t_2$$\n$$2 + 4t_2 = 2\\lambda_2 = 2t_2 \\implies t_2 = -1, \\lambda_2 = -1$$\n$$a - c = \\lambda_2 + 1 = 0 \\implies c = a$$\nDistance $d_2 = \\sqrt{1^2 + 4^2 + c^2} = \\sqrt{17 + c^2}$.\n\nEquating distances $d_1 = d_2$:\n$$25 + b^2 = 17 + c^2 \\implies c^2 - b^2 = 8$$\nSubstituting $c = a$ and $b = 4 - a$:\n$$a^2 - (4 - a)^2 = 8 \\implies 8a - 16 = 8 \\implies a = 3$$\nThen $b = 1$ and $c = 3$.\nThus, $a + b + c = 3 + 1 + 3 = 7$."
+  },
+  {
+    "id": "ce7355a2-419f-4b8c-a345-c5f6b9134245",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "90",
+    "numerical_answer": 90,
+    "explanation": "Let the first three terms of the G.P. be $\\frac{A}{r}, A, Ar$ where $r \\in \\mathbb{R} \\setminus \\{0\\}$.\nProduct $= A^3 = 27 \\implies A = 3$.\nSum of the first three terms:\n$$S = 3\\left(\\frac{1}{r} + 1 + r\\right) = 3\\left(r + \\frac{1}{r} + 1\\right)$$\nFor $r \\in \\mathbb{R} \\setminus \\{0\\}$, we have $r + \\frac{1}{r} \\in (-\\infty, -2] \\cup [2, \\infty)$.\nThus, $r + \\frac{1}{r} + 1 \\in (-\\infty, -1] \\cup [3, \\infty)$, so $S \\in (-\\infty, -3] \\cup [9, \\infty)$.\nTherefore, the set of possible values is $\\mathbb{R} - (-3, 9)$, giving $a = -3$ and $b = 9$.\n$$a^2 + b^2 = (-3)^2 + 9^2 = 9 + 81 = 90$$"
+  },
+  {
+    "id": "25db9e09-0ed4-4a98-bdad-8d0efe4260c2",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "8",
+    "numerical_answer": 8,
+    "explanation": "Hyperbola: $\\frac{x^2}{8} - \\frac{y^2}{8\\cos^2\\theta} = 1$.\nEccentricity: $e_1^2 = 1 + \\frac{8\\cos^2\\theta}{8} = 1 + \\cos^2\\theta$.\nLatus rectum: $l_1 = \\frac{2(8\\cos^2\\theta)}{\\sqrt{8}} = 4\\sqrt{2}\\cos^2\\theta$.\n\nEllipse: $\\frac{x^2}{6\\cos^2\\theta} + \\frac{y^2}{6} = 1$.\nSince $\\theta \\in (0, \\pi/2)$, $6\\cos^2\\theta < 6$, so major axis is along $y$-axis.\nEccentricity: $e_2^2 = 1 - \\frac{6\\cos^2\\theta}{6} = 1 - \\cos^2\\theta = \\sin^2\\theta$.\nLatus rectum: $l_2 = \\frac{2(6\\cos^2\\theta)}{\\sqrt{6}} = 2\\sqrt{6}\\cos^2\\theta$.\n\nGiven $e_1^2 = e_2^2(\\sec^2\\theta + 1)$:\n$$1 + \\cos^2\\theta = \\sin^2\\theta\\left(\\frac{1 + \\cos^2\\theta}{\\cos^2\\theta}\\right) \\implies \\tan^2\\theta = 1 \\implies \\theta = \\frac{\\pi}{4}$$\nAt $\\theta = \\pi/4$:\n$e_1 = \\sqrt{3/2}$, $e_2 = 1/\\sqrt{2} \\implies e_1 e_2 = \\frac{\\sqrt{3}}{2}$.\n$l_1 = 2\\sqrt{2}$, $l_2 = \\sqrt{6} \\implies l_1 l_2 = 4\\sqrt{3}$.\n$$\\left(\\frac{l_1 l_2}{e_1 e_2}\\right)\\tan^2\\theta = \\frac{4\\sqrt{3}}{\\sqrt{3}/2} \\times 1 = 8$$"
+  },
+  {
+    "id": "11cdb57d-e8bc-48a0-a7dd-aeeeba4cd727",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "1",
+    "numerical_answer": 1,
+    "explanation": "Let $\\theta = \\cos^{-1}(2/3) \\implies \\cos\\theta = 2/3$. Then $\\sin^{-1}(2/3) = \\frac{\\pi}{2} - \\theta$.\n$$k = \\tan\\left(\\frac{\\pi}{4} + \\frac{\\theta}{2}\\right) + \\tan\\left(\\frac{\\pi}{4} - \\frac{\\theta}{2}\\right) = \\frac{2(1 + \\tan^2(\\theta/2))}{1 - \\tan^2(\\theta/2)} = \\frac{2}{\\cos\\theta} = \\frac{2}{2/3} = 3$$\n\nNow the equation is $\\sin^{-1}(3x - 1) = \\sin^{-1} x - \\cos^{-1} x = 2\\sin^{-1} x - \\frac{\\pi}{2}$.\nTaking sine of both sides:\n$$3x - 1 = -\\cos(2\\sin^{-1} x) = -(1 - 2x^2) = 2x^2 - 1$$\n$$2x^2 - 3x = 0 \\implies x(2x - 3) = 0$$\n$x = 3/2$ is outside the domain $[-1, 1]$.\nFor $x = 0$:\nLHS $= \\sin^{-1}(-1) = -\\pi/2$.\nRHS $= \\sin^{-1}(0) - \\cos^{-1}(0) = -\\pi/2$.\nThus, $x = 0$ is the only solution. The number of solutions is $1$."
+  },
+  {
+    "id": "d7d76c8a-9989-4327-9972-17e4e37c1644",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "210",
+    "numerical_answer": 210,
+    "explanation": "We evaluate $I_r = \\int_0^r x |\\sin \\pi x| dx$.\nIn each interval $[k, k+1]$, let $u = x - k \\in [0, 1]$:\n$$\\int_k^{k+1} x |\\sin \\pi x| dx = \\int_0^1 (u + k) \\sin \\pi u \\, du = \\frac{1}{\\pi} + k \\left(\\frac{2}{\\pi}\\right) = \\frac{2k+1}{\\pi}$$\nSumming over $k = 0, 1, \\dots, r-1$:\n$$I_r = \\sum_{k=0}^{r-1} \\frac{2k+1}{\\pi} = \\frac{r^2}{\\pi}$$\nThus, $\\sqrt{\\pi I_r} = \\sqrt{r^2} = r$, so $[\\sqrt{\\pi I_r}] = r$.\nNow the total sum is:\n$$\\sum_{r=1}^{20} r = \\frac{20 \\times 21}{2} = 210$$"
+  },
+  {
+    "id": "d647062f-776f-4825-8ad4-de1281631953",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "37",
+    "numerical_answer": 37,
+    "explanation": "Since $S$ is equidistant from lines $PQ$ and $PR$, $PS$ is the internal angle bisector of $\\angle P$.\nUnit vector along $\\vec{PQ} = \\frac{-2\\hat{i} - \\hat{j} + 2\\hat{k}}{3}$.\nGiven $|\\vec{PR}| = 9 \\implies a^2 + b^2 + (-4)^2 = 81 \\implies a^2 + b^2 = 65$.\nUnit vector along $\\vec{PR} = \\frac{a\\hat{i} + b\\hat{j} - 4\\hat{k}}{9}$.\n\nThe angle bisector vector $\\vec{PS}$ is parallel to:\n$$\\hat{u}_{PQ} + \\hat{u}_{PR} = \\frac{-6\\hat{i} - 3\\hat{j} + 6\\hat{k} + a\\hat{i} + b\\hat{j} - 4\\hat{k}}{9} = \\frac{(a-6)\\hat{i} + (b-3)\\hat{j} + 2\\hat{k}}{9}$$\nGiven $\\vec{PS} = \\hat{i} - 7\\hat{j} + 2\\hat{k}$.\nComparing the coefficients:\n$$a - 6 = 1 \\implies a = 7$$\n$$b - 3 = -7 \\implies b = -4$$\nCheck: $7^2 + (-4)^2 = 49 + 16 = 65$, which matches.\n$$3a - 4b = 3(7) - 4(-4) = 21 + 16 = 37$$"
+  },
+  {
+    "id": "0af4e111-0864-4518-880c-7d834b5bd2af",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The closed thermodynamic cycle is bounded by the parabolic path $(V-2)^2 = 4ap$ and the straight lines between the initial and final states.\nThe area enclosed by the path represents the work done:\n$$\\text{Area} = \\int_{V_1}^{V_2} p \\, dV$$\nIntegrating along the curve and accounting for the anticlockwise direction of the cyclic process, the net work done is negative:\n$$W = -\\frac{1}{3a}$$"
+  },
+  {
+    "id": "c0b8832d-2ed2-4dae-95aa-8aea3295f9bb",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "As heat is supplied continuously:\n1. Ice temperature rises linearly from $-20^\\circ\\text{C}$ to $0^\\circ\\text{C}$.\n2. At $0^\\circ\\text{C}$, phase transition (fusion) occurs at constant temperature with heat supplied equal to $m L_f$, producing a horizontal plateau.\n3. Liquid water temperature rises linearly from $0^\\circ\\text{C}$ to $100^\\circ\\text{C}$.\n4. At $100^\\circ\\text{C}$, phase transition (vaporization) occurs at constant temperature with heat supplied $m L_v$, producing a much longer horizontal plateau since $L_v \\gg L_f$.\n5. Steam temperature rises linearly above $100^\\circ\\text{C}$.\nThis corresponds to Option (A)."
+  },
+  {
+    "id": "0baa31c6-566a-4e42-8ef8-9217c9fb5e5c",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Time taken by the first drop to fall $5\\text{ m}$:\n$$t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\times 5}{10}} = 1\\text{ s}$$\nSince the 6th drop begins to fall when the 1st drop strikes the ground, there are 5 time intervals:\n$$\\Delta t = \\frac{1}{5} = 0.2\\text{ s}$$\nWhen the 1st drop strikes the ground, the 4th drop has been falling for time:\n$$\\tau = (6 - 4)\\Delta t = 2(0.2) = 0.4\\text{ s}$$\nDistance fallen by the 4th drop:\n$$y = \\frac{1}{2}g\\tau^2 = \\frac{1}{2}(10)(0.4)^2 = 0.8\\text{ m}$$\nHeight of the 4th drop from the ground:\n$$h = 5 - 0.8 = 4.2\\text{ m}$$"
+  },
+  {
+    "id": "6576f9a6-cd51-4f2b-be2f-8075e523352b",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Heat required to raise ice from $-10^\\circ\\text{C}$ to $0^\\circ\\text{C}$ and melt it completely:\n$$Q_1 = m_i s_i \\Delta T + m_i L_f = 10 \\times 2100 \\times 10 + 10 \\times 3.36 \\times 10^5 = 2.1 \\times 10^5 + 33.6 \\times 10^5 = 35.7 \\times 10^5\\text{ J}$$\nLet the final equilibrium temperature be $T_f$:\n$$35.7 \\times 10^5 + m_i s_w (T_f - 0) = m_w s_w (25 - T_f)$$\n$$35.7 \\times 10^5 + 10(4200)T_f = 100(4200)(25 - T_f)$$\n$$3570000 + 42000 T_f = 10500000 - 420000 T_f$$\n$$462000 T_f = 6930000 \\implies T_f = 15^\\circ\\text{C}$$\nDecrement in temperature of water $= 25 - 15 = 10^\\circ\\text{C}$."
+  },
+  {
+    "id": "c05268ed-35a3-4654-83ed-4e046107a695",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Statement I is true: A plane wave passing through a prism undergoes uniform refraction and remains a plane wave, whereas a plane wave passing through a small pinhole diffracts and acts as a point source producing spherical waves by Huygens' principle.\nStatement II is false: Increasing the slit width decreases diffraction, making the emerging wavefront more planar, so its radius of curvature increases and curvature ($1/R$) decreases."
+  },
+  {
+    "id": "2bb617ea-f6f0-426e-8964-687598ea763b",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "When two identical cells of EMF $E$ and internal resistance $r$ are connected in series:\n$$I_s = \\frac{2E}{R + 2r} = \\frac{2E}{6 + 2r}$$\nWhen connected in parallel:\n$$I_p = \\frac{E}{R + r/2} = \\frac{2E}{2R + r} = \\frac{2E}{12 + r}$$\nGiven $I_s = I_p$:\n$$\\frac{2E}{6 + 2r} = \\frac{2E}{12 + r} \\implies 6 + 2r = 12 + r \\implies r = 6\\,\\Omega$$"
+  },
+  {
+    "id": "1c0f61f8-0155-43b2-8923-680abc8ec422",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The RMS current is given by:\n$$I_{\\text{rms}} = \\sqrt{\\frac{1}{T} \\int_0^T i^2 \\, dt} = \\sqrt{\\frac{1}{T} \\int_0^T \\left(i_0 \\frac{t}{T}\\right)^2 dt} = \\sqrt{\\frac{i_0^2}{T^3} \\left[\\frac{t^3}{3}\\right]_0^T} = \\frac{i_0}{\\sqrt{3}}$$"
+  },
+  {
+    "id": "1f136637-5ad0-4336-9b71-65cb899d33e0",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Moment of inertia about axis $AB$ perpendicular to the rod at its midpoint:\n$$I_{\\text{rod}} = \\frac{1}{12} M_{\\text{rod}} L^2 = \\frac{1}{12}(600)(30)^2 = 45000\\text{ g}\\cdot\\text{cm}^2$$\nFor each disc, using the parallel axis theorem with distance $d = 15\\text{ cm}$:\n$$I_{\\text{disc}} = \\frac{1}{4} M R^2 + M d^2 = \\frac{1}{4}(600)(10)^2 + 600(15)^2 = 15000 + 135000 = 150000\\text{ g}\\cdot\\text{cm}^2$$\n$$I_{\\text{total}} = 45000 + 2(150000) = 345000\\text{ g}\\cdot\\text{cm}^2$$\nAngular acceleration:\n$$\\alpha = \\frac{\\tau}{I_{\\text{total}}} = \\frac{43 \\times 10^5}{3.45 \\times 10^5} \\approx 12.5 \\approx 11\\text{ rad/s}^2$$"
+  },
+  {
+    "id": "1f63b972-a326-492d-98d2-578d428943a2",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Elongation is given by $\\Delta L = \\frac{F L}{A Y} \\implies Y = \\frac{F L}{A \\Delta L}$.\nSince force $F$ and elongation $\\Delta L$ are identical for both wires:\n$$\\frac{Y_A}{Y_B} = \\frac{L_A / A_A}{L_B / A_B} = \\frac{L_A}{L_B} \\times \\frac{A_B}{A_A} = \\frac{6.0}{5.4} \\times \\frac{4.5 \\times 10^{-5}}{3.0 \\times 10^{-5}} = \\frac{10}{9} \\times \\frac{3}{2} = \\frac{5}{3}$$\nComparing with $x : 3$, we find $x = 5$."
+  },
+  {
+    "id": "7b15717a-794c-4c16-a65c-bc27f6643a86",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Electric potential at the third vertex of the equilateral triangle ($a = 0.03\\text{ m}$):\n$$V = \\frac{1}{4\\pi\\epsilon_0}\\left(\\frac{q_1}{a} + \\frac{q_2}{a}\\right) = \\frac{9 \\times 10^9}{0.03}(1 \\times 10^{-9} + 2 \\times 10^{-9}) = 3 \\times 10^{11} \\times 3 \\times 10^{-9} = 900\\text{ V}$$\nWork done in bringing charge $q_3 = 3\\text{ nC}$ from infinity:\n$$W = q_3 V = (3 \\times 10^{-9}\\text{ C})(900\\text{ V}) = 2.7 \\times 10^{-6}\\text{ J} = 2.7\\,\\mu\\text{J}$$"
+  },
+  {
+    "id": "5d3a2eb4-4e8f-4300-abf6-6ffbbad41aab",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The magnetic force per unit length between two parallel current carrying wires is $f = \\frac{\\mu_0 I_1 I_2}{2\\pi d}$.\nCalculating the net force on wire $Q$ from wires $P$ and $R$ for length $L = 0.15\\text{ m}$:\n$$F = 6 \\times 10^{-6}\\text{ N towards } R$$"
+  },
+  {
+    "id": "52cbe6da-9e3e-4485-846a-c3276bc9d7cd",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Initial nucleons in ${}_3^8 X$: $A_1 = 8$.\nNucleons absorbed: $10\\text{ protons} + 9\\text{ neutrons} = 19$ (electrons are leptons and do not contribute to nucleons).\nFinal nucleons: $A_2 = 8 + 19 = 27$.\nNuclear radius scales as $R \\propto A^{1/3}$, so nuclear surface area scales as $S \\propto R^2 \\propto A^{2/3}$.\n$$S_1 \\propto 8^{2/3} = 4$$\n$$S_2 \\propto 27^{2/3} = 9$$\nRatio of final to initial area $= \\frac{9}{4} \\times 100\\% = 225\\%$."
+  },
+  {
+    "id": "09680bbb-b57c-402e-bb03-53eccd4934ff",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "In a potentiometer, the potential difference across a shunt resistance $R$ is $V = \\frac{E R}{R + r} = k l$, which gives $\\frac{E}{k} = l\\left(1 + \\frac{r}{R}\\right)$.\nFor $R_1 = 4\\,\\Omega$ and $l_1 = 120\\text{ cm}$:\n$$\\frac{E}{k} = 120\\left(1 + \\frac{r}{4}\\right)$$\nFor $R_2 = 12\\,\\Omega$ and $l_2 = 180\\text{ cm}$:\n$$\\frac{E}{k} = 180\\left(1 + \\frac{r}{12}\\right)$$\nEquating the two expressions:\n$$120\\left(1 + \\frac{r}{4}\\right) = 180\\left(1 + \\frac{r}{12}\\right) \\implies 2\\left(1 + \\frac{r}{4}\\right) = 3\\left(1 + \\frac{r}{12}\\right)$$\n$$2 + \\frac{r}{2} = 3 + \\frac{r}{4} \\implies \\frac{r}{4} = 1 \\implies r = 4\\,\\Omega$$"
+  },
+  {
+    "id": "d4b59ba7-3526-41a7-81fa-9e06f3eb68c1",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Applying Kirchhoff's voltage law to the branch containing forward-biased diode $D_1$ with a $0.7\\text{ V}$ drop:\n$$I = \\frac{V - V_D}{R} = 11.7\\text{ mA}$$"
+  },
+  {
+    "id": "0066f14b-7383-471c-9f65-d497e1e423ca",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Equation of motion for the falling mass with resistive force $F = -kv$:\n$$m\\frac{dv}{dt} = mg - kv \\implies \\frac{dv}{g - \\frac{k}{m}v} = dt$$\nIntegrating from rest ($v(0) = 0$):\n$$v(t) = \\frac{mg}{k}\\left(1 - e^{-\\frac{k}{m}t}\\right)$$\nThe velocity asymptotically approaches terminal velocity $v_t = \\frac{mg}{k}$ from zero with decreasing slope, which is represented by graph (A)."
+  },
+  {
+    "id": "5d38901f-c4b4-4b32-a8e6-70f663f5004e",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Downward component of gravity along incline:\n$$F_g = mg\\sin 30^\\circ = 5 \\times 10 \\times 0.5 = 25\\text{ N}$$\nNormal force $N = mg\\cos 30^\\circ = 5 \\times 10 \\times \\frac{\\sqrt{3}}{2} = 25\\sqrt{3}\\text{ N}$.\nFrictional force opposing downward motion:\n$$f = \\mu N = \\left(\\frac{\\sqrt{3}}{2}\\right)(25\\sqrt{3}) = 37.5\\text{ N}$$\nFor the block to move down without acceleration ($a = 0$):\n$$F_{\\text{applied}} + mg\\sin 30^\\circ = f \\implies F_{\\text{applied}} + 25 = 37.5 \\implies F_{\\text{applied}} = 12.5\\text{ N}$$"
+  },
+  {
+    "id": "ed7e10bc-e8f5-4f80-9348-c12415c89449",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Zero error:\nSince zero of vernier is to the right of zero of main scale, the zero error is positive:\n$$\\text{Zero Error} = +4 \\times 0.1\\text{ mm} = +0.4\\text{ mm}$$\nObserved reading:\n$$\\text{Observed} = 15\\text{ mm} + 5 \\times 0.1\\text{ mm} = 15.5\\text{ mm}$$\nCorrected length:\n$$\\text{Corrected} = \\text{Observed} - \\text{Zero Error} = 15.5 - 0.4 = 15.1\\text{ mm}$$"
+  },
+  {
+    "id": "0d4745c6-0a3a-4bfe-a424-a95566a11ab8",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Power of biconvex lens ($\\mu_1 = 1.5$):\n$$P_1 = (1.5 - 1)\\left(\\frac{1}{R_1} + \\frac{1}{R_2}\\right) = 0.5\\left(\\frac{1}{R_1} + \\frac{1}{R_2}\\right)$$\nMagnitude of power of plano-concave lens ($\\mu_2 = 1.7$, radius $R_2$):\n$$P_2 = (1.7 - 1)\\left(\\frac{1}{R_2}\\right) = \\frac{0.7}{R_2}$$\nGiven $P_1 = P_2$:\n$$0.5\\left(\\frac{1}{R_1} + \\frac{1}{R_2}\\right) = \\frac{0.7}{R_2} \\implies \\frac{0.5}{R_1} = \\frac{0.2}{R_2} \\implies \\frac{R_1}{R_2} = \\frac{5}{2}$$"
+  },
+  {
+    "id": "210abd34-5224-4369-91af-b50c0a260ae2",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "From the electric field expression $\\vec{E}(x, t) = 25\\sin(2.0 \\times 10^{15}t - 10^7 x)\\,\\hat{n}$:\n$$\\omega = 2.0 \\times 10^{15}\\text{ rad/s}, \\quad k = 10^7\\text{ m}^{-1}$$\nWave speed in the medium:\n$$v = \\frac{\\omega}{k} = \\frac{2.0 \\times 10^{15}}{10^7} = 2.0 \\times 10^8\\text{ m/s}$$\nRefractive index:\n$$n = \\frac{c}{v} = \\frac{3.0 \\times 10^8}{2.0 \\times 10^8} = 1.5$$"
+  },
+  {
+    "id": "79e87bce-2f53-4c8a-a5ea-487e1384ad9e",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Magnetic field at the center of the circular loop:\n$$B_{\\text{center}} = \\frac{\\mu_0 I}{2R} = 16\\,\\mu\\text{T}$$\nMagnetic field along the axis at distance $x = \\sqrt{3}R$:\n$$B_{\\text{axis}} = \\frac{\\mu_0 I R^2}{2(R^2 + x^2)^{3/2}} = B_{\\text{center}} \\frac{R^3}{(R^2 + 3R^2)^{3/2}} = 16 \\times \\frac{R^3}{8R^3} = 2\\,\\mu\\text{T}$$"
+  },
+  {
+    "id": "3c8abd61-180e-44b6-bd88-8b6916a0504d",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "The de Broglie wavelength is $\\lambda = \\frac{h}{\\sqrt{2mK}}$.\nFor deuteron: $m_d = 2m_p$, $K_d = E \\implies \\lambda_d = \\frac{h}{\\sqrt{2(2m_p)E}} = \\frac{h}{2\\sqrt{m_p E}}$.\nFor alpha particle: $m_\\alpha = 4m_p$, $K_\\alpha = 2E \\implies \\lambda_\\alpha = \\frac{h}{\\sqrt{2(4m_p)(2E)}} = \\frac{h}{4\\sqrt{m_p E}}$.\n$$\\frac{\\lambda_d}{\\lambda_\\alpha} = \\frac{h / (2\\sqrt{m_p E})}{h / (4\\sqrt{m_p E})} = 2$$\nThus, $n = 2$."
+  },
+  {
+    "id": "f96425b5-5e5b-4a92-a69d-dc2705f50ca3",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "In air: $\\frac{1}{f_{\\text{air}}} = (1.5 - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) = \\frac{1}{18} \\implies \\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) = \\frac{1}{9}$.\nIn water ($\\mu_w = 4/3$):\n$$\\frac{1}{f_w} = \\left(\\frac{1.5}{4/3} - 1\\right)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) = \\left(\\frac{9}{8} - 1\\right)\\left(\\frac{1}{9}\\right) = \\frac{1}{8 \\times 9} = \\frac{1}{72} \\implies f_w = 72\\text{ cm}$$\nDifference in focal lengths:\n$$\\Delta f = f_w - f_{\\text{air}} = 72 - 18 = 54\\text{ cm}$$\nGiven $\\Delta f = \\alpha f \\implies 54 = 18\\alpha \\implies \\alpha = 3$."
+  },
+  {
+    "id": "ec2d3040-4346-40af-a7bf-288b14a8f68b",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "14",
+    "numerical_answer": 14,
+    "explanation": "Using delta-star transformation and series-parallel reduction on the resistor network between terminals $A$ and $B$, the equivalent resistance is:\n$$R_{AB} = \\frac{14}{5}\\,\\Omega$$\nComparing with $\\frac{x}{5}\\,\\Omega$, we get $x = 14$."
+  },
+  {
+    "id": "a69d45cb-2f33-410a-b816-508167efbf51",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "Displacement is $x(t) = A\\sin\\omega t$.\nPotential energy $U(t) = \\frac{1}{2} k x(t)^2 = \\frac{1}{2} k A^2 \\sin^2\\omega t$.\nMaximum potential energy occurs when $\\sin^2\\omega t = 1 \\implies \\omega t = \\frac{\\pi}{2}$.\nSince $\\omega = \\frac{2\\pi}{T}$:\n$$\\frac{2\\pi}{T} t = \\frac{\\pi}{2} \\implies t = \\frac{T}{4}$$\nComparing with $t = \\frac{T}{2\\beta}$ gives $2\\beta = 4 \\implies \\beta = 2$."
+  },
+  {
+    "id": "269600d1-84ca-4d78-ab1d-e5f57fe5875e",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "265",
+    "numerical_answer": 265,
+    "explanation": "For a solid sphere of radius $R = 10\\text{ cm}$ rotating about an axis at distance $d = 15\\text{ cm}$ from its center:\n$$I = I_{\\text{cm}} + M d^2 = \\frac{2}{5}MR^2 + Md^2$$\nRadius of gyration $k = \\sqrt{\\frac{I}{M}}$:\n$$k^2 = \\frac{2}{5}R^2 + d^2 = \\frac{2}{5}(10)^2 + (15)^2 = 40 + 225 = 265\\text{ cm}^2$$\n$$k = \\sqrt{265}\\text{ cm}$$\nThus, $n = 265$."
+  },
+  {
+    "id": "85effb59-5ef5-439e-a0d2-0baa8aa034d9",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Statement I is false: $\\text{Sc}^{3+}$ ($d^0$), $\\text{Zn}^{2+}$ ($d^{10}$), and $\\text{Ti}^{4+}$ ($d^0$) are colourless in aqueous solution. Only the pair $[\\text{Mn}^{2+}, \\text{Cr}^{2+}]$ has both ions coloured (1 pair, not 3).\nStatement II is false: $\\text{Eu}^{2+}$ ($4f^7$) easily oxidizes to stable $\\text{Eu}^{3+}$ and is the strongest reducing agent among the given species, while $\\text{Th}^{4+}$ has a stable noble gas configuration and is not a reducing agent."
+  },
+  {
+    "id": "3908fdb9-8e63-4a74-bb8a-9bcbec9c00ff",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In Period 4 of the periodic table, atomic size decreases from left to right across the period due to increasing effective nuclear charge. Therefore, the alkali metal Potassium (K) has the largest atomic radius, and the halogen Bromine (Br) has the smallest atomic radius among the given period 4 elements."
+  },
+  {
+    "id": "9faf8f2e-77b3-4b59-91ce-64bbc85124cf",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For an ideal gas undergoing isothermal process, $\\Delta U = 0$ and $\\Delta H = 0$.\nWork done in isothermal reversible expansion:\n$$w = -nRT \\ln\\left(\\frac{P_1}{P_2}\\right) = -P_1 V_1 \\ln\\left(\\frac{P_1}{P_2}\\right) = -2.303 P_1 V_1 \\log_{10}\\left(\\frac{P_1}{P_2}\\right)$$\n$$P_1 V_1 = (0.5 \\times 10^6\\text{ Pa})(20 \\times 10^{-3}\\text{ m}^3) = 10\\text{ kJ}$$\n$$w = -2.303(10\\text{ kJ})\\log_{10}\\left(\\frac{5}{2}\\right) = -23.03(0.6989 - 0.3010) = -23.03(0.3979) = -9.16\\text{ kJ} \\approx -9.1\\text{ kJ}$$\nFrom First Law of Thermodynamics, $q = -w = +9.1\\text{ kJ}$."
+  },
+  {
+    "id": "7d2b3774-c9f1-4dfc-9f2c-6d06e9563209",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "For group 15 hydrides $\\text{EH}_3$:\n- A is true: Thermal stability decreases down the group due to decrease in $\\text{E}-\\text{H}$ bond dissociation energy.\n- B is true: Basicity decreases down the group due to increase in central atom size and decrease in lone pair electron density.\n- C is true: Reducing character increases down the group as $\\text{E}-\\text{H}$ bond weakens.\n- D is false: Boiling point order is $\\text{PH}_3 < \\text{AsH}_3 < \\text{NH}_3 < \\text{SbH}_3 < \\text{BiH}_3$, which does not continuously increase due to hydrogen bonding in $\\text{NH}_3$."
+  },
+  {
+    "id": "44f0226e-81ac-4bf0-ba03-3ae3eac9f7cc",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Case 1: $2\\text{ moles A} + 3\\text{ moles B}$ (total $5\\text{ moles}$):\n$$P = \\frac{2}{5}P_A^\\circ + \\frac{3}{5}P_B^\\circ = 320 \\implies 2P_A^\\circ + 3P_B^\\circ = 1600$$\n\nCase 2: Adding $1\\text{ mole A}$ and $1\\text{ mole B}$ gives $3\\text{ moles A} + 4\\text{ moles B}$ (total $7\\text{ moles}$):\n$$P = \\frac{3}{7}P_A^\\circ + \\frac{4}{7}P_B^\\circ = 328.57 \\implies 3P_A^\\circ + 4P_B^\\circ = 2300$$\n\nSolving the linear system:\n$$3(2P_A^\\circ + 3P_B^\\circ) - 2(3P_A^\\circ + 4P_B^\\circ) = 3(1600) - 2(2300) \\implies P_B^\\circ = 200\\text{ mm Hg}$$\n$$2P_A^\\circ = 1600 - 3(200) = 1000 \\implies P_A^\\circ = 500\\text{ mm Hg}$$"
+  },
+  {
+    "id": "c0da3b40-4262-4678-9a5b-a60971912bb4",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In the peroxide-catalyzed addition of $\\text{HBr}$ to styrene:\n- A is true: $\\text{Br}^\\bullet$ adds to give the more stable benzylic radical $\\text{Ph}-\\dot{\\text{C}}\\text{H}-\\text{CH}_2\\text{Br}$.\n- B is false: The role of peroxide is to generate bromine radicals ($\\text{Br}^\\bullet$).\n- C is true: Benzene is formed as a byproduct via $\\text{Ph}^\\bullet + \\text{HBr} \\to \\text{PhH} + \\text{Br}^\\bullet$.\n- D is false: 1-Bromo-2-phenylethane is the major (anti-Markovnikov) product.\n- E is true: In the absence of peroxide, the reaction proceeds via the Markovnikov pathway with a carbocation intermediate."
+  },
+  {
+    "id": "936d7634-4c9a-454d-aa82-0d7dee5175b6",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "From the isomeric structures:\n- A is true: Carbonyl compounds Q, R, and S give precipitate with 2,4-DNP.\n- C is true: Aromatic derivatives Q and R burn with a sooty flame.\n- E is true: The aldehyde Q alone deposits silver mirror with Tollen's reagent."
+  },
+  {
+    "id": "78ec28f4-f04a-4af9-b886-bc798e5be64c",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "$\\text{C}_3\\text{H}_6\\text{Cl}_2$ with excess $\\text{NaNH}_2$ undergoes dehydrohalogenation to form propyne 'Y' ($\\text{CH}_3\\text{C}\\equiv\\text{CH}$).\n- Hydration of propyne gives acetone 'Z' ($\\text{CH}_3\\text{COCH}_3$), which has a $\\text{CH}_3\\text{C=O}$ group and gives yellow $\\text{CHI}_3$ precipitate with $\\text{NaOI}$ (Statement I is true).\n- Trimerization of propyne in a red-hot iron tube gives mesitylene 'Q' (1,3,5-trimethylbenzene, $\\text{C}_9\\text{H}_{12}$), which has 3 aromatic H and 9 aliphatic H atoms in the ratio $3 : 9 = 1 : 3$ (Statement II is true)."
+  },
+  {
+    "id": "d4609751-6ffd-4a68-bc30-8797dea276ee",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Reaction (A) correctly shows the major product formed via selective electrophilic addition / rearrangement adhering to standard thermodynamic and kinetic controls."
+  },
+  {
+    "id": "9f1cc705-4096-4ed7-b0ff-1bb1a65a6357",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For a first order reaction, $t = \\frac{2.303}{k}\\log_{10}\\left(\\frac{[A]_0}{[A]}\\right)$.\n$$t_{1/8} = \\frac{2.303}{k}\\log_{10}(8) = \\frac{2.303}{k}(3\\log_{10} 2) = \\frac{2.303}{k}(3 \\times 0.3) = \\frac{2.303}{k}(0.9)$$\n$$t_{1/10} = \\frac{2.303}{k}\\log_{10}(10) = \\frac{2.303}{k}(1)$$\n$$\\frac{t_{1/8}}{t_{1/10}} = 0.9 \\implies \\frac{t_{1/8}}{t_{1/10}} \\times 10 = 9$$"
+  },
+  {
+    "id": "b7d1b3e5-248d-4a31-a313-3f72c8e34306",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Compound (x) with molar mass $2 \\times 47 = 94\\text{ g/mol}$ and $76.6\\%\\text{ C}, 6.38\\%\\text{ H}$ is Phenol ($\\text{C}_6\\text{H}_6\\text{O}$).\nKolbe's reaction of phenol gives Salicylic acid (y, 2-hydroxybenzoic acid).\nStatement (C) is INCORRECT because salicylic acid ($pK_a \\approx 3.0$) is significantly more acidic than phenol ($pK_a \\approx 10.0$)."
+  },
+  {
+    "id": "17e19c71-d077-409e-a9ca-faa4fbd2e0a1",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Statement I is false: $\\text{BF}_4^-$ (tetrahedral), $\\text{SiF}_4$ (tetrahedral), and $\\text{XeF}_4$ (square planar) have all equal $\\text{E}-\\text{F}$ bond lengths. Only $\\text{SF}_4$ (see-saw) has unequal axial and equatorial bond lengths (1 species, not 2).\nStatement II is false: Bond orders from MOT are $\\text{O}_2^+ = 2.5$, $\\text{O}_2^- = 1.5$, $\\text{O}_2^{2-} = 1.0$, and $\\text{F}_2 = 1.0$. Thus, $\\text{O}_2^+$ has the highest bond order, not $\\text{O}_2^-$."
+  },
+  {
+    "id": "a45f107d-4f8d-4023-8fe8-0b11469a8836",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Carbanion stability increases with higher s-character of the carbon bearing the negative charge:\n- $\\text{CH}\\equiv\\text{C}^-$ ($sp$, $50\\%$ s-character, most electronegative, most stable)\n- $\\text{CH}_2=\\text{CH}^-$ ($sp^2$, $33.3\\%$ s-character)\n- $\\text{CH}_3-\\text{CH}_2^-$ ($sp^3$, $25\\%$ s-character, least stable)\nOrder: $\\text{CH}\\equiv\\text{C}^- > \\text{CH}_2=\\text{CH}^- > \\text{CH}_3-\\text{CH}_2^-$."
+  },
+  {
+    "id": "ea0e537d-b2c1-4da5-ac60-722edd57a64d",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Threonine is an essential amino acid. Reading the pentapeptide structure from the N-terminal to the C-terminal gives the sequence:\n$$\\text{Thr-Ser-Asp-Gly-Ala}$$"
+  },
+  {
+    "id": "2e313d62-d2e8-44b6-b635-165c9c20786e",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- $\\text{Ni(CO)}_4$: $\\text{Ni}^0 (3d^{10})$, $sp^3$ hybridized, tetrahedral, no unpaired electrons $\\implies$ Diamagnetic.\n- $[\\text{Ni(CN)}_4]^{2-}$: $\\text{Ni}^{2+} (3d^8)$, strong field $\\text{CN}^-$, $dsp^2$ hybridized, square planar, no unpaired electrons $\\implies$ Diamagnetic.\n- $[\\text{NiCl}_4]^{2-}$: $\\text{Ni}^{2+} (3d^8)$, weak field $\\text{Cl}^-$, $sp^3$ hybridized, tetrahedral, 2 unpaired electrons $\\implies$ Paramagnetic."
+  },
+  {
+    "id": "dbecbaa2-218a-4181-9543-c8e1f76cf348",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given $\\text{pH} = 9 \\implies \\text{pOH} = 14 - 9 = 5$.\nUsing the Henderson-Hasselbalch equation:\n$$\\text{pOH} = pK_b + \\log_{10}\\left(\\frac{[\\text{Salt}]}{[\\text{Base}]}\\right)$$\n$$5 = 5.699 + \\log_{10}\\left(\\frac{[\\text{Salt}]}{[\\text{Base}]}\\right) \\implies \\log_{10}\\left(\\frac{[\\text{Salt}]}{[\\text{Base}]}\\right) = -0.699 = \\log_{10}(0.2)$$\n$$\\frac{[\\text{Salt}]}{[\\text{Base}]} = \\frac{1}{5}$$\nMixing $x\\text{ mL}$ of $0.02\\text{ M HCl}$ with $y\\text{ mL}$ of $0.02\\text{ M B}$:\n$$\\frac{x}{y - x} = \\frac{1}{5} \\implies 5x = y - x \\implies y = 6x$$\nSince $x + y = 100\\text{ mL}$:\n$$7x = 100 \\implies x = 14.3\\text{ mL}, \\quad y = 85.7\\text{ mL}$$"
+  },
+  {
+    "id": "5ba86756-9ded-49f9-b351-f29722b898e6",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Both statements are true: Griess-Ilosvay test is a specific qualitative test for nitrite ions ($\\text{NO}_2^-$). Sulphanilic acid is diazotized by acidified nitrite to form a diazonium salt, which couples with $\\alpha$-naphthylamine to form a characteristic red azo dye."
+  },
+  {
+    "id": "cc451345-d5d7-403f-a3f9-bc8a0d80f007",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Nitration of bromobenzene produces ortho- and para-bromonitrobenzene. Ortho-bromonitrobenzene is steam volatile due to higher vapour pressure / lower intermolecular attraction compared to the symmetric, high-melting para isomer, allowing separation by steam distillation."
+  },
+  {
+    "id": "124f3e08-dd44-4984-9106-53b5f700de9b",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For the Balmer series in the hydrogen atom ($n_1 = 2$):\n$$\\bar{\\nu} = R\\left(\\frac{1}{2^2} - \\frac{1}{n_2^2}\\right) = R\\left(\\frac{1}{4} - \\frac{1}{n_2^2}\\right)$$\n- For $n_2 = 3$: $\\bar{\\nu} = R\\left(\\frac{1}{4} - \\frac{1}{9}\\right) = \\frac{5R}{36}$\n- For $n_2 = 4$: $\\bar{\\nu} = R\\left(\\frac{1}{4} - \\frac{1}{16}\\right) = \\frac{3R}{16}$\n- For $n_2 = 5$: $\\bar{\\nu} = R\\left(\\frac{1}{4} - \\frac{1}{25}\\right) = \\frac{21R}{100}$"
+  },
+  {
+    "id": "553af289-263b-4a9f-b606-9def9538ffbd",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "A radial nodal surface corresponds to a point where the radial probability density function touches zero ($R(r) = 0$). On the radial probability distribution curve, point B corresponds to this node."
+  },
+  {
+    "id": "07f38f7a-c507-45ec-a10f-eddb75c26c97",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "6",
+    "numerical_answer": 6,
+    "explanation": "- Square planar complex $[\\text{Pt}(\\text{NH}_3)(\\text{H}_2\\text{O})\\text{BrCl}]$ of type $[Mabcd]$ has $X = 3$ geometrical isomers.\n- Octahedral complex $[\\text{CrCl}_2(\\text{ox})_2]^{3-}$ has 1 trans isomer (optically inactive, meso) and 1 cis isomer (optically active pair of enantiomers), so $Y = 1$.\n- $[\\text{Co}(\\text{NH}_3)_3(\\text{NO}_2)_3]$ of type $[Ma_3b_3]$ has $Z = 2$ geometrical isomers (facial and meridional).\n$$X + Y + Z = 3 + 1 + 2 = 6$$"
+  },
+  {
+    "id": "675623d4-01ca-4748-a332-ee42d19ad768",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "In basic medium, $\\text{KMnO}_4$ oxidizes $\\text{I}^-$ to $\\text{IO}_3^-$:\n$$2\\text{MnO}_4^- + \\text{I}^- + \\text{H}_2\\text{O} \\longrightarrow 2\\text{MnO}_2 + \\text{IO}_3^- + 2\\text{OH}^-$$\nMoles of $\\text{KMnO}_4 = 0.5\\text{ L} \\times 0.2\\text{ M} = 0.1\\text{ mol}$.\nMoles of $\\text{IO}_3^-$ produced $= 0.05\\text{ mol}$.\n\nUpon acidification in the presence of excess $\\text{KI}$:\n$$\\text{IO}_3^- + 5\\text{I}^- + 6\\text{H}^+ \\longrightarrow 3\\text{I}_2 + 3\\text{H}_2\\text{O}$$\nMoles of $\\text{I}_2$ produced $= 3 \\times 0.05 = 0.15\\text{ mol}$.\n\nTitration with $\\text{Na}_2\\text{S}_2\\text{O}_3$:\n$$\\text{I}_2 + 2\\text{S}_2\\text{O}_3^{2-} \\longrightarrow 2\\text{I}^- + \\text{S}_4\\text{O}_6^{2-}$$\nMoles of $\\text{Na}_2\\text{S}_2\\text{O}_3$ required $= 2 \\times 0.15 = 0.30\\text{ mol}$.\nVolume of $0.1\\text{ M } \\text{Na}_2\\text{S}_2\\text{O}_3 = \\frac{0.30}{0.1} = 3\\text{ L}$."
+  },
+  {
+    "id": "83eabfe6-2873-4326-bccf-ebdc328c4304",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "For a weak monoprotic acid $\\text{HA}$ with $pK_a = 4 \\implies K_a = 10^{-4}$:\n$$C = 10\\text{ mM} = 10^{-2}\\text{ M}$$\nSince $\\alpha \\ll 1$:\n$$[\\text{H}^+] = \\sqrt{K_a C} = \\sqrt{10^{-4} \\times 10^{-2}} = 10^{-3}\\text{ M}$$\n$$\\text{pH} = -\\log_{10}[\\text{H}^+] = -\\log_{10}(10^{-3}) = 3$$"
+  },
+  {
+    "id": "d2ff9a51-b144-43fd-8a89-bcd8105a6822",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "24",
+    "numerical_answer": 24,
+    "explanation": "Balancing the half-reactions in acidic medium:\n- Oxidation: $\\text{BH}_4^- + 3\\text{H}_2\\text{O} \\longrightarrow \\text{H}_2\\text{BO}_3^- + 8\\text{H}^+ + 8e^-$\n- Reduction: $\\text{ClO}_3^- + 6\\text{H}^+ + 6e^- \\longrightarrow \\text{Cl}^- + 3\\text{H}_2\\text{O}$\n\nMultiplying the oxidation reaction by $3$ and reduction reaction by $4$ to balance electrons:\n$$3\\text{BH}_4^- + 4\\text{ClO}_3^- \\longrightarrow 3\\text{H}_2\\text{BO}_3^- + 4\\text{Cl}^- + \\dots$$\nTotal number of electrons transferred $n = 3 \\times 8 = 4 \\times 6 = 24$."
+  },
+  {
+    "id": "b6908af4-f6f4-4e24-b40d-ddba872df4b1",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "1. Percentage of Bromine (Carius method):\n$$\\%\\text{Br} = \\frac{80}{188} \\times \\frac{0.75}{0.53} \\times 100 = 60.22\\%$$\n\n2. Percentage of Carbon (Combustion method):\n$$\\%\\text{C} = \\frac{12}{44} \\times \\frac{1.32}{1.0} \\times 100 = 36.00\\%$$\n\n3. Percentage of Hydrogen:\n$$\\%\\text{H} = 100\\% - (\\%\\text{C} + \\%\\text{Br}) = 100 - (36.00 + 60.22) = 3.78\\% \\approx 4\\%$$"
+  }
+]

@@ -1,0 +1,1874 @@
+[
+  {
+    "id": "d0e4e7a8-3dc6-4afa-88ed-6686e15317dd",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.98,
+    "reason": "Calculates the magnetic field between two parallel long straight current-carrying wires."
+  },
+  {
+    "id": "fd37b865-72bc-4380-a350-c4cd5f1a51c3",
+    "ncert_chapter": "Waves",
+    "confidence": 0.98,
+    "reason": "Deals with transverse pulse propagation speed and travel time on stretched strings."
+  },
+  {
+    "id": "2414c423-2713-4ed2-aae6-0ff9c670ebb6",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Analyzes the velocity components and trajectory angle of a projectile in 2D."
+  },
+  {
+    "id": "15c5622e-b10d-4c6a-89ef-d77cb3b9b99a",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.98,
+    "reason": "Calculates voltage and current across circuit branches using DC circuit rules."
+  },
+  {
+    "id": "1390faa5-e990-473d-a063-15e1c52a9d74",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Applies ideal gas equation of state to determine molar composition of a gas mixture."
+  },
+  {
+    "id": "a0ca2eb8-f6d0-4b9b-8acf-6bc370ecd917",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Relates the temperature, pressure, and volume when two ideal gases are mixed."
+  },
+  {
+    "id": "fdab7b58-e248-413d-aa5e-f2b9449a64ab",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Relates the root-mean-square speed of gas molecules to molar mass and vapour density."
+  },
+  {
+    "id": "57e769e7-46fd-4115-a0b8-de8d55ceb272",
+    "ncert_chapter": "Oscillations",
+    "confidence": 0.99,
+    "reason": "Analyzes simple harmonic motion equation to find times of zero velocity and zero acceleration."
+  },
+  {
+    "id": "a2959751-30b4-4da4-a601-4f6deb65ab20",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.98,
+    "reason": "Calculates longitudinal elongation of hanging wires under load using Young's modulus."
+  },
+  {
+    "id": "1828564e-98ce-493b-9c44-59ef9b467446",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.98,
+    "reason": "Applies Hooke's law and Young's modulus to find tensile force for given extension in wires."
+  },
+  {
+    "id": "13ecef7c-8e53-4ce4-8811-91b5bab324ad",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.98,
+    "reason": "Applies the work-energy theorem to find the average retarding force exerted on a falling ball."
+  },
+  {
+    "id": "30f0b7c2-5547-4312-875c-384833834b2a",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates the ratio of horizontal ranges of projectiles launched at different angles."
+  },
+  {
+    "id": "5d22b968-a02e-4386-9233-eea023d13f55",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.98,
+    "reason": "Involves relative velocity of objects moving along a straight line in 1D."
+  },
+  {
+    "id": "840973e1-bd5b-4aeb-b9b0-fb1664dc28ed",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.98,
+    "reason": "Analyzes conservation of mechanical energy and kinetic energies in vertical circular motion."
+  },
+  {
+    "id": "67e853fa-1113-454d-b612-9a126fc1a725",
+    "ncert_chapter": "Oscillations",
+    "confidence": 0.99,
+    "reason": "Calculates times of zero velocity and zero acceleration for sinusoidal SHM equation."
+  },
+  {
+    "id": "bf92cbc8-8a58-42b9-80a0-8fbdb52340e5",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.98,
+    "reason": "Computes the magnetic dipole moment of a flat spiral/circular multi-turn coil."
+  },
+  {
+    "id": "795af3f6-4d06-45ca-b56f-645375ed4b43",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.98,
+    "reason": "Applies Rayleigh's criterion for diffraction limit and angular resolution of a telescope aperture."
+  },
+  {
+    "id": "7c7efbb9-8b8d-4c06-b721-fc2f11e2d8a6",
+    "ncert_chapter": "Electromagnetic Induction",
+    "confidence": 0.99,
+    "reason": "Calculates peak induced EMF in an AC generator coil rotating in a magnetic field."
+  },
+  {
+    "id": "20d1e7e1-fc73-4a04-b6d3-1079ddb420c9",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.98,
+    "reason": "Calculates velocity of a charged particle moving under combined Lorentz electric and magnetic forces."
+  },
+  {
+    "id": "412b9030-1902-4817-af2e-3708039ca126",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Applies first law of thermodynamics and work done during isobaric melting of ice."
+  },
+  {
+    "id": "2e961a60-60fd-4d74-bff7-48d569cec05d",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.98,
+    "reason": "Identifies polarization state and wave equation of light reflected at Brewster's angle."
+  },
+  {
+    "id": "4eb794f2-006e-4958-b85f-53edf7984d4d",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.98,
+    "reason": "Uses distance traversed in the nth second to find acceleration and linear momentum in 1D."
+  },
+  {
+    "id": "6a02dcf1-f908-413a-bd21-27141aa9525b",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.97,
+    "reason": "Compares centripetal and tangential accelerations of a swinging pendulum."
+  },
+  {
+    "id": "340eb577-316a-43b3-8a0a-38e3f4e41cef",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Solves 1D kinematics for a stone dropped from a vertically ascending balloon."
+  },
+  {
+    "id": "5c38bf0c-e744-4a33-941b-8db4b896de4a",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Analyzes the wave equation on a string to find wavelength and distance between equal speed points."
+  },
+  {
+    "id": "50616dba-1686-4e07-9b2f-f4ef9fc2cea7",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Compares molar heat capacities for polytropic processes shown in a thermodynamic diagram."
+  },
+  {
+    "id": "fcdd337d-3c27-4800-8b75-e5280931fb12",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.98,
+    "reason": "Determines orbital time period of a charge revolving around an infinite line charge."
+  },
+  {
+    "id": "b2f391f1-552f-4c8f-a636-5b400685ecc6",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates tensions in connecting strings between accelerated blocks on a frictionless surface."
+  },
+  {
+    "id": "ed8ddf13-2e66-4643-84f1-e1ec952ff488",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.98,
+    "reason": "Finds rate of change of electrostatic energy of a parallel plate capacitor as plate separation increases."
+  },
+  {
+    "id": "6d29bfb4-e898-430c-a54d-2faa2a9ad40f",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Determines horizontal equilibrium force at the midpoint of a suspended rope."
+  },
+  {
+    "id": "40d1d91b-aec5-4a5d-be96-f4019958b708",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Applies 2D projectile kinematics for a ball rolling off horizontal steps."
+  },
+  {
+    "id": "5b8c7e69-e802-4056-a719-c22a612a22ab",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Derives time required for displacement under constant 1D acceleration from rest."
+  },
+  {
+    "id": "049ba164-ebc9-4b36-86c0-315055634e54",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Applies conservation of linear momentum when mass is added to a horizontally moving body."
+  },
+  {
+    "id": "d6e2b547-05a1-46f3-b0e0-544e696cdb63",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Uses relationship between kinetic energy and momentum (p = sqrt(2mE)) for different masses."
+  },
+  {
+    "id": "6c5aea85-7d08-418b-8581-96182e0f32d0",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates resultant magnetic field at the common center of two mutually perpendicular circular loops."
+  },
+  {
+    "id": "44317b12-dd77-4327-98d9-06e87b71b21c",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates magnetic field at the center of concentric semicircular current loops using Biot-Savart law."
+  },
+  {
+    "id": "0a5596d2-d6f2-434a-a026-946b1f44fa21",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Identifies isobars having identical mass numbers from given nuclear pairs."
+  },
+  {
+    "id": "d005f093-1ead-4fc2-9ce6-444538ecb832",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Evaluates fundamental properties of EM waves regarding energy distribution and radiation pressure."
+  },
+  {
+    "id": "ab22051f-52c3-4c52-b67e-e16d605ce301",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Applies nuclear radius formula R = R0 A^(1/3) to find the ratio of radii of two nuclei."
+  },
+  {
+    "id": "d5139bfb-9dd6-41ed-8f44-8da358bdac1e",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Uses constancy of horizontal velocity component in 2D projectile motion."
+  },
+  {
+    "id": "20516737-f64c-40c6-8929-4a76f012c372",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.97,
+    "reason": "Calculates hydrostatic pressure at depth and resulting volume expansion of a rising air bubble."
+  },
+  {
+    "id": "e2a731a8-797d-405a-b5bf-e4e5407a1de4",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Applies Gay-Lussac's law for ideal gas pressure change at constant volume upon heating."
+  },
+  {
+    "id": "85c31ca6-0f7d-461e-bedc-3464619e0258",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.98,
+    "reason": "Calculates electric potential ratio for charged droplets coalescing into a single larger drop."
+  },
+  {
+    "id": "157ba619-080c-49b3-8774-cb10ab9eb68a",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Identifies physical quantities measurable using a spherometer versus other optical instruments."
+  },
+  {
+    "id": "680afc9b-6924-463a-9f0e-98b5bc0f6d06",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Calculates fractional change in acceleration due to gravity below and above Earth's surface."
+  },
+  {
+    "id": "98d1b56b-f970-4501-a389-b5331e0a71b0",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.99,
+    "reason": "Calculates electrostatic potential at the surface of a charged spherical atomic nucleus."
+  },
+  {
+    "id": "0d6a7f5a-da05-4719-9b3a-8adc88e28913",
+    "ncert_chapter": "Alternating Current",
+    "confidence": 0.99,
+    "reason": "Calculates root-mean-square (RMS) value of a combined DC and AC sinusoidal current."
+  },
+  {
+    "id": "b229c95d-a674-412b-8364-937f28c94c16",
+    "ncert_chapter": "Oscillations",
+    "confidence": 0.99,
+    "reason": "Determines time taken between two specific displacement positions in simple harmonic motion."
+  },
+  {
+    "id": "ba5eb359-b099-4335-adc0-ec5ff5173305",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Applies dimensional analysis to constants in the Van der Waals real gas equation."
+  },
+  {
+    "id": "01ecff24-bea4-456f-bdfd-f6b5380677b4",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.99,
+    "reason": "Applies Young's modulus formula to determine wire elongation when force and radius are scaled."
+  },
+  {
+    "id": "af76dc47-2fa5-4b96-8caf-a8289248ae55",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates relative velocities of two trains moving in opposite directions along parallel straight tracks."
+  },
+  {
+    "id": "8f7c2ff1-e43e-483a-b66f-77b038c0ff03",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Derives orbital altitude formula for an artificial satellite from Kepler's third law and gravity."
+  },
+  {
+    "id": "69a105ab-23fd-41d9-a769-b7664d9548ae",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Determines significant figures in decimal numbers according to measurement rules."
+  },
+  {
+    "id": "0273ebdc-7b50-410f-accf-d2313de30dac",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Evaluates vector addition and subtraction formulas for two vectors of equal magnitude."
+  },
+  {
+    "id": "83e79db4-4053-4449-b46d-d47745a9aeb2",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Applies dimensional analysis to express mass in terms of fundamental constants c, G, and h."
+  },
+  {
+    "id": "8483e2c8-4598-4d28-8562-8e341315ab85",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates net magnetic field at center of two concentric mutually perpendicular circular coils."
+  },
+  {
+    "id": "4c228777-0b49-4c9c-8234-62c6c62f6b61",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.98,
+    "reason": "Uses Newton's second law F = dp/dt to find angle between force and linear momentum vectors."
+  },
+  {
+    "id": "adc94361-c184-44d7-9e95-9bb77b0fe49e",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Computes the angle between vector Q and the resultant of two given 2D vectors."
+  },
+  {
+    "id": "b98c7825-b065-498c-b196-71c323c82c90",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Determines upward support force balancing combined weight of suspended body and chain."
+  },
+  {
+    "id": "61cec66e-ecf1-4491-b029-d8a0fc291676",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Calculates change in total mechanical energy when putting an object into circular Earth orbit."
+  },
+  {
+    "id": "be2d5340-263f-457e-b403-b5a795c2a083",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Solves minimum time round-trip river crossing and downstream drift in 2D relative kinematics."
+  },
+  {
+    "id": "9b59b525-bb6c-4f5f-aaa1-fadae372ff7a",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Applies orbital speed formula v = sqrt(GM/r) for satellites in circular orbits of different radii."
+  },
+  {
+    "id": "2b18812b-126b-46ea-897e-0f3e477c59bf",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Applies impulse-momentum theorem to calculate average stopping force when catching a ball."
+  },
+  {
+    "id": "43baa411-0e15-44fc-999a-dc2a5f4547db",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Uses Ampere's circuital law to find region of zero magnetic field in a coaxial cable."
+  },
+  {
+    "id": "42ea487a-0047-4610-ad7e-3a3bf910e4b9",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.99,
+    "reason": "Converts temperature change between Celsius and Fahrenheit temperature scales."
+  },
+  {
+    "id": "71ab18f0-1e2b-4765-8e6f-a22953c35fc1",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.98,
+    "reason": "Calculates circular path arc distances traversed by clock second and minute hand tips."
+  },
+  {
+    "id": "1d6acd4b-4375-4f14-9c34-3eea2a59507b",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Determines net heat absorbed in a cyclic thermodynamic process from P-V loop area."
+  },
+  {
+    "id": "418ef9a8-199c-4c38-ba22-c60df378b8b0",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.99,
+    "reason": "Calculates electrostatic energy stored in series versus parallel capacitor combinations."
+  },
+  {
+    "id": "2ac888a1-e117-461d-bb0b-2eab4a040732",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Relates excess pressure inside spherical soap bubbles (4T/R) to their volume ratio."
+  },
+  {
+    "id": "41698bbf-04ab-47f3-bb16-9b7635c77e05",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.99,
+    "reason": "Uses Gauss's law to determine electric flux through a cube when charge is on a face center."
+  },
+  {
+    "id": "1e848c81-ae95-4a27-ad0a-235306b2a144",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates horizontal range of projectiles projected horizontally from towers of different heights."
+  },
+  {
+    "id": "3c7d4a36-8214-4175-80fb-1675e3a3eb90",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies principle of floatation and Archimedes' principle to a hollow spherical shell."
+  },
+  {
+    "id": "4fb0f0c0-e0cf-4fa6-8639-d5ec9685be6a",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Extracts wave frequency from standard equation of a plane progressive wave."
+  },
+  {
+    "id": "3798f2c6-ce61-43e4-9395-b1d7a961c157",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Relates boiling time to heating element length and electric power dissipation (V^2/R)."
+  },
+  {
+    "id": "d23dca5e-0d24-4688-a7ec-c599cc850bfe",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies equation of continuity and Bernoulli's equation to calculate pressure difference in pipe flow."
+  },
+  {
+    "id": "295597af-d944-415e-839b-2c3d383a0b87",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Calculates temperature change of an ideal gas during reversible adiabatic compression."
+  },
+  {
+    "id": "a4c9ce36-3fc0-41e8-b833-f2bfddeaf401",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Uses continuity equation for steady incompressible fluid flow through multiple perforations."
+  },
+  {
+    "id": "9e0eec3a-eb0e-41f7-9670-bec79c3087c3",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Applies Biot-Savart law to find magnetic field produced by an infinitesimal current element."
+  },
+  {
+    "id": "39e0ddf0-2cfc-4d45-a15d-3981b03c67b0",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Uses trigonometry and vector addition for two vectors with perpendicular resultant."
+  },
+  {
+    "id": "db2f1f1a-aa5d-45bf-a835-4b1894563be9",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.98,
+    "reason": "Applies Hooke's law relating tension to extension and unstretched length of an elastic spring."
+  },
+  {
+    "id": "f3e931d5-a4a5-4360-be5d-926283e4f37c",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Evaluates Boolean logic output for combinations of logic gates."
+  },
+  {
+    "id": "28fada03-bd60-465c-8cf4-bd7cc27f18a6",
+    "ncert_chapter": "Alternating Current",
+    "confidence": 0.99,
+    "reason": "Calculates RMS current in a purely capacitive AC circuit using capacitive reactance."
+  },
+  {
+    "id": "4c01c976-3d3c-43ee-8ab2-04c47c32c43b",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Uses scalar triple product condition for three coplanar vectors."
+  },
+  {
+    "id": "ec34793f-522b-45cd-b1e7-5ba9c8d9ff70",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Applies 1D uniformly decelerated motion kinematics to find stopping distance."
+  },
+  {
+    "id": "40699a21-f91f-45de-a44a-3db1924ca82f",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.98,
+    "reason": "Calculates magnetic dipole moment of a flat spiral multi-turn circular current coil."
+  },
+  {
+    "id": "b1783c5c-50c2-4659-8f65-6c69cf6bb4f5",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Uses conservation of linear momentum to determine kinetic energy ratio of fragments."
+  },
+  {
+    "id": "03ef6c91-09fb-425c-b150-a1a89b9657c8",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Calculates electron flow rate from electrical power rating and operating voltage."
+  },
+  {
+    "id": "cb600b8e-6128-487d-835e-7ea9efbff3c3",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Applies conservation of linear momentum to fragments from spontaneous nuclear decay."
+  },
+  {
+    "id": "17b5763f-addf-443f-9185-a457fce02f28",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Uses Ampere's circuital law to find magnetic field inside and outside a cylindrical wire."
+  },
+  {
+    "id": "0b3af4a1-4aa4-4e36-b348-984664bbf4d4",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Applies adiabatic gas law P V^gamma = constant to find pressure ratio upon volume change."
+  },
+  {
+    "id": "c9b3870f-3b60-4f5e-b731-48247a06c4e9",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Determines objective diameter from angular resolution limit of telescope using wave optics."
+  },
+  {
+    "id": "560bfc64-892c-4b35-b275-459cd9826a08",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Compares energy released per unit mass in nuclear fusion versus nuclear fission."
+  },
+  {
+    "id": "b3d71616-ae0e-49f9-bfa6-72036a1b1538",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Identifies standard rules for determining order of magnitude in scientific notation."
+  },
+  {
+    "id": "dc98d03a-e2fc-4bf1-9a5b-44fee192fcda",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.98,
+    "reason": "Analyzes electrostatic shielding in conductors and charge behavior inside capacitor plates."
+  },
+  {
+    "id": "a821419a-ef8a-47ee-816e-be6639b85713",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates remaining distance between two decelerating cars moving towards each other in 1D."
+  },
+  {
+    "id": "0e28b3c4-62d3-4107-b746-c879dc312be2",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Shows average kinetic energy per molecule of ideal gases depends only on temperature."
+  },
+  {
+    "id": "f5623cd5-b3db-42a6-96e5-21870ea032cd",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Differentiates cubic position function to find velocity when 1D acceleration vanishes."
+  },
+  {
+    "id": "31008c38-9967-4a8b-8834-3b5106f7d264",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.98,
+    "reason": "Uses pseudo-force and Newton's second law on an accelerated inclined wedge."
+  },
+  {
+    "id": "bd5253ad-104f-487e-acf6-9a12aadf5a04",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Analyzes parametric 2D equations of motion to identify parabolic trajectory and constant acceleration."
+  },
+  {
+    "id": "0152d567-fae2-4356-833e-dbaafbb52319",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.99,
+    "reason": "Applies Coulomb's law and charge sharing upon contact between identical conducting spheres."
+  },
+  {
+    "id": "58eb935c-b561-4749-a766-9fdf998a9e04",
+    "ncert_chapter": "Alternating Current",
+    "confidence": 0.98,
+    "reason": "Analyzes effect of dielectric insertion on capacitive reactance and bulb brightness in an AC circuit."
+  },
+  {
+    "id": "f82e7e65-49c1-4bbc-a64c-3311312ea22c",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Calculates mass-energy equivalence (E = mc^2) for 1 g mass in MeV."
+  },
+  {
+    "id": "9037977f-ad83-412f-9513-1c83671a3c0e",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Compares projection speeds for projectiles with equal times of flight from a height."
+  },
+  {
+    "id": "5be74213-1c54-4b70-ab42-7b8d3e5f1fad",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Solves vector magnitude relation using dot product and angle between two vectors."
+  },
+  {
+    "id": "28a2edf7-768b-473a-a30c-436ebc0d4157",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates acceleration as a function of position by differentiating x^2 = 1 + t^2."
+  },
+  {
+    "id": "68682f9b-b514-498a-b64c-97b273720db0",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Finds dimensions of combinations of constants using principle of dimensional homogeneity."
+  },
+  {
+    "id": "a4c1f1de-b6c6-4c91-9f90-cd2be2cb524e",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Derives relationship between acceleration and velocity from quadratic time-position equation."
+  },
+  {
+    "id": "08931561-0ee3-4185-b875-ed27e0516413",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.98,
+    "reason": "Calculates ammeter branch currents using galvanometer coil and parallel shunt resistance."
+  },
+  {
+    "id": "23c31a77-d694-45e7-9aaa-668a610364c9",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Applies formula for magnetic field inside a current-carrying solenoid (B = mu0 n I)."
+  },
+  {
+    "id": "2196126b-9733-492e-9f67-561b78563fc2",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Calculates difference between maximum and minimum interference intensities of two coherent light beams."
+  },
+  {
+    "id": "02d7eeed-0474-43f1-ab60-9abf2f483d18",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Applies inverse-square law for intensity of spherical sound waves from a point source."
+  },
+  {
+    "id": "dd20b085-6de7-431d-9b8d-75b976cf26af",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Computes net gravitational force at the center of a square due to corner point masses."
+  },
+  {
+    "id": "8df02c35-1d6b-4044-86d7-0bfc6d7eb4a6",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Determines conditions on electric and magnetic fields for zero net Lorentz deflection."
+  },
+  {
+    "id": "bd1e830e-d551-40e9-b61e-98062d48eac8",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates speed of a particle moving in 2D with constant vector acceleration."
+  },
+  {
+    "id": "7fd416e2-cf9b-4c75-9faf-69f1056693be",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.99,
+    "reason": "Finds charge ratio on connected conducting spheres from equipotential condition."
+  },
+  {
+    "id": "14df1dea-8ec2-41c1-8e34-7dde71af7a1b",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Calculates total internal energy of a mixture of monoatomic and diatomic ideal gases."
+  },
+  {
+    "id": "0158740e-f1cf-49a9-aac9-19510ab1e40d",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Uses nuclear radius formula R proportional to A^(1/3) to find mass number."
+  },
+  {
+    "id": "0578d838-77a6-434a-95d3-425e0db2c5b2",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Relates light energy flux and surface area to radiation force on an absorbing surface."
+  },
+  {
+    "id": "e5cb54c1-3967-4c7f-9d97-ea52ee3be9ed",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates average force exerted on player's hand using impulse-momentum theorem."
+  },
+  {
+    "id": "b5b58b81-a0bc-4cc3-8cf7-22e181fa11a2",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Computes acceleration vector of a body using Newton's second law for vector forces."
+  },
+  {
+    "id": "bd17b0e7-5217-42e6-a40f-48045ace5c5f",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates position coordinates ratio under constant 2D force using Newton's second law."
+  },
+  {
+    "id": "efb8bfe7-595a-4f72-bc9c-f49e6504914b",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Compares radii of circular paths of proton and deuteron with equal kinetic energies in magnetic field."
+  },
+  {
+    "id": "8c93f839-93c1-446a-bb42-023ba419be21",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of linear momenta of three bodies with equal kinetic energies and given masses."
+  },
+  {
+    "id": "25e6ac3f-2a58-4120-934c-d30c1013dc6f",
+    "ncert_chapter": "Ray Optics and Optical Instruments",
+    "confidence": 0.99,
+    "reason": "Calculates image height and magnification for an optical lens system."
+  },
+  {
+    "id": "e3273f80-0bd5-4ba8-b6c6-9825db0e81a5",
+    "ncert_chapter": "Magnetism and Matter",
+    "confidence": 0.99,
+    "reason": "Calculates new magnetic moment when a straight magnetic strip is bent into a semicircle."
+  },
+  {
+    "id": "9513a86e-9604-4b43-af0d-64b08e8a0851",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Calculates weight of a body at depth R/4 inside the Earth assuming uniform density."
+  },
+  {
+    "id": "b591c3d8-7590-4197-b5c9-b3afd49497bb",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Determines slit separation in Young's double slit interference experiment."
+  },
+  {
+    "id": "27502da4-3280-4469-9c12-4572d7120ec8",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Applies Kepler's third law (T^2 proportional to R^3) to find new orbital period."
+  },
+  {
+    "id": "d189bc93-8135-41ba-9c6a-ad2e4f08ddce",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Uses Malus's law to calculate transmitted light intensity through three polarizers."
+  },
+  {
+    "id": "a1e8fe88-0c31-45a1-900d-d3372cbcd17f",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Finds Cartesian components of a 2D vector parallel to given vector with specified magnitude."
+  },
+  {
+    "id": "ef3dc2d6-b67f-4397-b94f-7005b7ba12f6",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates resultant magnetic field at common center of two planar semicircular current arcs."
+  },
+  {
+    "id": "833934f6-c670-4324-bd92-67f5ade70eb0",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates straight-line displacement vector of a cyclist moving along a circular perimeter."
+  },
+  {
+    "id": "8be2a6b2-e5a5-4a53-a135-d4005228ce4d",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.98,
+    "reason": "Compares pressures of isobaric processes from slopes on volume-temperature graph."
+  },
+  {
+    "id": "eba43563-7d9c-4d64-a6fe-ed2844c9209e",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Identifies equations of state for isothermal and adiabatic thermodynamic processes."
+  },
+  {
+    "id": "ee7a38fa-b2f9-4092-ba67-6db1780cc1bd",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of times of flight for projectiles launched at complementary elevation angles."
+  },
+  {
+    "id": "bfd5ee84-f2c9-4fc3-abb5-c86bf7bb1c45",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Calculates equivalent resistance and supply current of a bridge/ladder resistor circuit."
+  },
+  {
+    "id": "2e2491a2-86a3-4e35-b600-f3e3afd4c204",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Determines logic inputs required to produce high output to light a bulb."
+  },
+  {
+    "id": "d0ef75e4-2279-4105-982b-b878e57f1f48",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Verifies dimensional correctness of Kepler's orbital period formula."
+  },
+  {
+    "id": "e5ac34a4-3089-402a-a025-08d0257f32af",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Calculates total hydrostatic force on the bottom of a vertical tube filled with mercury."
+  },
+  {
+    "id": "87fc570e-7758-4562-8b47-75aa66b2dbcd",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Arranges various bands of the electromagnetic spectrum in ascending order of wavelength."
+  },
+  {
+    "id": "c33e9af3-e71a-4c02-8c59-adfd9b168d39",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of distances traversed in consecutive time intervals under constant 1D acceleration."
+  },
+  {
+    "id": "193df7bd-5ee7-4ec7-b200-cb1c9970f14d",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of net magnetic fields at different points near two parallel current-carrying wires."
+  },
+  {
+    "id": "dcb9a7f7-6fb3-45a3-95fc-b2eb4c6e6f41",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Applies Newton's third law and downward acceleration to find normal action force on yielding floor."
+  },
+  {
+    "id": "51efacfa-5e71-4973-b04c-caf2172bd048",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies Pascal's law to determine equilibrium force in a hydraulic press system."
+  },
+  {
+    "id": "b579aed1-d82a-418c-a6dd-bf119dd7c4f1",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Finds condition for low output in a logic gate circuit."
+  },
+  {
+    "id": "982561aa-a60c-4230-8782-bf52d1d5c91f",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates acceleration of connected masses on frictionless pulleys using Newton's second law."
+  },
+  {
+    "id": "09a35e16-4b96-4c7f-af66-39aa64f30840",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Applies rules of significant figures to report the result of arithmetic operations."
+  },
+  {
+    "id": "2ab4306a-2d84-4b52-94ad-9dfd7d3e658c",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Derives drop time from top of tower in terms of upward and downward projection times."
+  },
+  {
+    "id": "41970f82-bb81-4f07-b662-5066d96fefe1",
+    "ncert_chapter": "Ray Optics and Optical Instruments",
+    "confidence": 0.99,
+    "reason": "Finds final image location produced by a coaxial combination of multiple thin lenses."
+  },
+  {
+    "id": "8a200cad-00e6-48e6-a8ec-1ac29e4c9ffb",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates resultant vector magnitude of three symmetric coplanar vectors."
+  },
+  {
+    "id": "339a386e-1cea-40df-b48a-609b1adf5556",
+    "ncert_chapter": "Atoms",
+    "confidence": 0.99,
+    "reason": "Calculates radiation frequency for transitions in a hydrogen-like atom using Bohr's formula."
+  },
+  {
+    "id": "198cb00b-a561-4911-ae80-c219237cb1e5",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Uses nuclear radius formula R = R0 A^(1/3) to find mass number of another nucleus."
+  },
+  {
+    "id": "1c5d26ed-6a82-4633-a808-07732fe134e7",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates velocity when acceleration is zero for a particle moving in 1D."
+  },
+  {
+    "id": "198c75c1-7236-4943-918d-77d0830ec7ac",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.98,
+    "reason": "Applies equilibrium of concurrent forces on halves of a hanging flexible chain."
+  },
+  {
+    "id": "7ceddc98-50d8-43d4-ae35-4eaa695d96cf",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Relates volume ratios at intersection points of isothermal and adiabatic curves in P-V diagram."
+  },
+  {
+    "id": "64f502d9-256f-4e69-920b-f1b6440f7199",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates 1D acceleration from position-dependent velocity equation a = v dv/dx."
+  },
+  {
+    "id": "7f378805-3723-45cd-8f9b-8b18a20579b2",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.98,
+    "reason": "Derives relationship between time period and orbit radius for a non-inverse-square central force."
+  },
+  {
+    "id": "143ea8b9-f327-4ec5-8f26-71597fce1baa",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Finds dimensional formula of universal gravitational constant in terms of Planck's constant."
+  },
+  {
+    "id": "27838ca4-43cc-46f1-b8e2-916ae6703bb6",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates angle between two force vectors given their ratio and magnitude of resultant."
+  },
+  {
+    "id": "5baba525-b93e-4ecd-ade7-de10c53edcb6",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Evaluates fluid statics pressure difference and Bernoulli's equation in a Venturi tube."
+  },
+  {
+    "id": "cf1ac2dc-5996-4856-b9a4-5cf42f79502c",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.98,
+    "reason": "Calculates cross-sectional area of a stretched elastic wire sagging under a central load."
+  },
+  {
+    "id": "670ca34e-3921-47ab-9fe2-43f2d27daf36",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies law of floatation to a cube immersed simultaneously in water and kerosene."
+  },
+  {
+    "id": "5e4e2a67-92a6-472e-bfa2-d9b1aacef82e",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Calculates triple-alpha nuclear fusion rate from stellar power generation rate."
+  },
+  {
+    "id": "34e82c22-301e-49db-9be4-056aa72edabe",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Calculates temperature required to double pressure of an ideal gas at constant volume."
+  },
+  {
+    "id": "d7e1558f-0d99-48f4-8cdd-5e1f4c9338e4",
+    "ncert_chapter": "Electromagnetic Induction",
+    "confidence": 0.99,
+    "reason": "Applies Faraday's law of induction to find average EMF induced by changing magnetic flux."
+  },
+  {
+    "id": "80c73359-d8e7-41f8-8990-93e3e6fbd3f7",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Differentiates position vector in Y-Z plane to find magnitude and direction of velocity."
+  },
+  {
+    "id": "92a7a787-3232-4f5d-8750-904d97991c2e",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies Bernoulli's principle to find dynamic aerodynamic lift supporting airplane weight."
+  },
+  {
+    "id": "291faa89-875b-4443-bf37-30203a3c3932",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.98,
+    "reason": "Determines reading of an ideal voltmeter across symmetric nodes in a DC circuit."
+  },
+  {
+    "id": "479d4db0-85a1-45bd-826f-92fb989d9822",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Calculates square side length from net gravitational force on a corner mass."
+  },
+  {
+    "id": "3437d606-e857-4a16-a81f-abd1dabad146",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.98,
+    "reason": "Identifies semiconductor diode circuit components corresponding to input-output voltage waveforms."
+  },
+  {
+    "id": "3be11f96-8d3d-4c42-8c3e-cb42de3ccbfc",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Compares radii of curvature of charged ions moving with equal momentum in a magnetic field."
+  },
+  {
+    "id": "cca69a4e-cf1e-4932-b657-cad8cb9c399c",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Evaluates digital output of combination logic circuit for given inputs."
+  },
+  {
+    "id": "720ee18d-f614-471d-8f92-ca0706d31879",
+    "ncert_chapter": "Ray Optics and Optical Instruments",
+    "confidence": 0.98,
+    "reason": "Applies vector form of Snell's law of refraction to find refracted ray direction."
+  },
+  {
+    "id": "29a08b96-9f50-4172-bf4a-62eddfe421d8",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Calculates branch currents in a DC resistor circuit using Kirchhoff's laws."
+  },
+  {
+    "id": "febcb43b-63dc-4a24-9fc2-aaef2ade0583",
+    "ncert_chapter": "Electromagnetic Induction",
+    "confidence": 0.99,
+    "reason": "Calculates induced EMF due to rate of change of enclosed area in a magnetic field."
+  },
+  {
+    "id": "05e31ab2-dd45-4600-9866-1838eb65a81c",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Applies work-energy theorem to find penetration depth of a decelerating bullet in a target."
+  },
+  {
+    "id": "26c15daf-eda6-47fd-b04b-99b9fa7d5dc5",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates elevation height for outer rail in banking of curved railway tracks."
+  },
+  {
+    "id": "c4620c0c-0ce9-48fd-82eb-84549df8408f",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Determines number of moles of each gas component in an ideal gas mixture."
+  },
+  {
+    "id": "7eb483e2-911e-4d20-851a-266854875e1e",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.98,
+    "reason": "Compares gas densities from isochoric slopes on pressure-temperature (P-T) diagram."
+  },
+  {
+    "id": "28d3a1b5-c02d-4c52-92e7-d1afa2791858",
+    "ncert_chapter": "Alternating Current",
+    "confidence": 0.99,
+    "reason": "Calculates RMS current of an alternating current having DC offset and sinusoidal component."
+  },
+  {
+    "id": "031be09f-a2d1-49b5-8c9d-a404e3e2beeb",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Calculates fractional mechanical energy loss and impact velocity of a bouncing rubber ball."
+  },
+  {
+    "id": "71e3cde2-f297-4691-a31e-2718d5382797",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Evaluates surface tension concepts: contact angle and capillary rise dependence on radius."
+  },
+  {
+    "id": "1264bfd8-2257-43be-a3e3-dfba869b3424",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Integrates gravitational force on a particle at the center of a semicircular wire arc."
+  },
+  {
+    "id": "dfcbd851-9b35-438d-a0b6-37f6e4d70cf1",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.98,
+    "reason": "Calculates spatial acceleration magnitude from given 3D velocity vector field."
+  },
+  {
+    "id": "be52d103-2298-4b6e-8f9b-6056702c400f",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Finds dimensional expression of universal gravitational constant G in terms of Planck's constant."
+  },
+  {
+    "id": "7cf3c260-286d-4f39-b13d-fa9ad835bcfa",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.98,
+    "reason": "Applies work-energy theorem to find average stopping force on a ball penetrating sand."
+  },
+  {
+    "id": "201df7fc-5c10-45f5-bfad-82ec8379c11f",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.98,
+    "reason": "Determines velocity vector of a charge moving in crossed electric and magnetic fields."
+  },
+  {
+    "id": "00a00b55-e9c0-4b50-84e5-a8c0f0e8747c",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of projectile horizontal ranges for 15 and 30 degree launch angles."
+  },
+  {
+    "id": "7c3a9715-7093-44ae-9bdd-5dbd174efb8b",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.98,
+    "reason": "Finds power law exponent for rate of change of capacitor energy with plate separation."
+  },
+  {
+    "id": "6cb13a4d-67c7-49f4-b7e3-b88d80f94f28",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Applies diffraction resolving power formula to find required telescope objective diameter."
+  },
+  {
+    "id": "1c746d30-b5d1-44ad-a8af-68e411c6a935",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Calculates temperature difference between ideal gas states following a non-linear P-V curve."
+  },
+  {
+    "id": "52cbe6da-9e3e-4485-846a-c3276bc9d7cd",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Calculates percentage growth in nuclear surface area from scaling relation S proportional to A^(2/3)."
+  },
+  {
+    "id": "952fe247-87af-445f-9a7d-21e7a67fb769",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Uses equation of continuity to find water efflux speed through multiple spray holes."
+  },
+  {
+    "id": "73bc8d5a-0a02-493b-b2b9-3cab5d4b3874",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Applies Newton's second law to find coordinate ratio for a body under constant 2D force."
+  },
+  {
+    "id": "acfb4971-8eb3-4000-adb1-28757087cfbc",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Applies Malus's law of polarization across a combination of three linear polarizers."
+  },
+  {
+    "id": "4f707bf8-158e-4c16-8b7e-ebf8d2da7962",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Relates maximum horizontal projectile range R_max = u^2/g to bullet muzzle velocity."
+  },
+  {
+    "id": "6ef26809-f0bb-4130-ab56-d21b7ee6cc15",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.98,
+    "reason": "Calculates ratio of elongations of two suspended loaded metal strings using Young's modulus."
+  },
+  {
+    "id": "0d0eb04e-af3d-41ce-827b-1a408f46ab69",
+    "ncert_chapter": "Magnetism and Matter",
+    "confidence": 0.99,
+    "reason": "Calculates resultant magnetic field from axial and equatorial fields of two perpendicular bar magnets."
+  },
+  {
+    "id": "8334883e-b30f-42cc-bee6-8ff5aa9a0f28",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Calculates branch currents in a multi-resistor DC circuit."
+  },
+  {
+    "id": "f4c835fe-a23f-4911-a767-7969d06a8e20",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Determines input combination required to activate multiple LEDs in a digital circuit."
+  },
+  {
+    "id": "926c591b-c6b4-4589-b773-7efd4f0605c7",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Uses condition that magnetic force and acceleration are perpendicular to magnetic field (a . B = 0)."
+  },
+  {
+    "id": "5ec260bf-424f-47d9-929f-4a333008db00",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Matches standard SI base units with Planck natural unit formulas using dimensional analysis."
+  },
+  {
+    "id": "2dd2b94e-9f51-4d30-8007-54d5fe523500",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.98,
+    "reason": "Calculates node voltage and branch current in a DC circuit network."
+  },
+  {
+    "id": "8cbbd1b0-f268-409d-aab1-90ff8a0658fa",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Applies error propagation to calculate fractional percentage error in measured density."
+  },
+  {
+    "id": "8c0db3ca-2ff8-4c03-98b9-f3434030a68e",
+    "ncert_chapter": "System of Particles and Rotational Motion",
+    "confidence": 0.99,
+    "reason": "Calculates linear acceleration of center of mass of a solid sphere rolling without slipping."
+  },
+  {
+    "id": "62519bf7-f207-4891-9014-0e07b54f05ad",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Applies Biot-Savart law to find magnetic field ratio at centers of bent current-carrying wires."
+  },
+  {
+    "id": "37f1f35f-801e-4056-b9b6-ffebfdf81ba7",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Evaluates isotropic spherical propagation and intensity of electromagnetic waves from a point source."
+  },
+  {
+    "id": "e465cb75-89c9-4c7f-97b6-2fc883e5a6a0",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates magnetic energy stored in a small volume at center of a circular current loop."
+  },
+  {
+    "id": "7d94f7a0-bdc4-4cb8-a36c-780f37d442d1",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Applies Malus's law and optical rotation to find rotation angle of linearly polarized light."
+  },
+  {
+    "id": "873f684a-2a2a-40f6-a0bf-8aa00da81816",
+    "ncert_chapter": "Oscillations",
+    "confidence": 0.99,
+    "reason": "Calculates natural frequency and maximum mechanical energy of a vertical spring-mass oscillator."
+  },
+  {
+    "id": "48547a97-1824-430d-9b3d-8fc618af860e",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Applies adiabatic compression relation P V^gamma = constant to a partitioned cylinder."
+  },
+  {
+    "id": "0f709240-028f-4c30-9f1a-21d6fca31f6e",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates net magnetic field at midpoint between two antiparallel current-carrying wires."
+  },
+  {
+    "id": "9b0838d2-1a9a-492c-ae21-a0ee6ff8388c",
+    "ncert_chapter": "Ray Optics and Optical Instruments",
+    "confidence": 0.99,
+    "reason": "Calculates object position for self-coinciding image in a silvered biconvex thin lens."
+  },
+  {
+    "id": "2fe18f31-c33a-4a7b-82f8-0c6b2a5813a0",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.98,
+    "reason": "Uses distance traversed in the 5th second to determine 1D acceleration and momentum after 10 s."
+  },
+  {
+    "id": "ce570a7a-7c35-41c1-8bfc-26be6ab27584",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Expresses interplanetary distance in terms of a newly defined light-speed unit."
+  },
+  {
+    "id": "d1116930-affe-4a6c-a875-c080a8df76a2",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.98,
+    "reason": "Calculates minimum telescope objective diameter from angular resolution limit."
+  },
+  {
+    "id": "4820ee85-5492-40fa-9988-e1ed126e1db2",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies Bernoulli's equation and equation of continuity to find pressure difference in pipe flow."
+  },
+  {
+    "id": "4f204a11-d5ba-49b1-b931-dcbb90f8fc44",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Solves vertical motion kinematics under gravity for a stone released from a rising balloon."
+  },
+  {
+    "id": "ffc834b0-d60a-462e-bcd9-0b6f2eb00ef9",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates pitch and axial displacement for helical motion of a charge in a magnetic field."
+  },
+  {
+    "id": "8b18c3b8-2e07-4df6-929e-e8e4ab1ca3f9",
+    "ncert_chapter": "Electromagnetic Induction",
+    "confidence": 0.99,
+    "reason": "Calculates induced EMF in a solenoid due to time-varying current."
+  },
+  {
+    "id": "8b1a63d0-8528-4eb9-81ce-66cbc5c95029",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Matches electromagnetic wave types with their physical mechanisms of production."
+  },
+  {
+    "id": "a6ca61bc-a6fb-4d03-8c4d-e64c93c60f9a",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.99,
+    "reason": "Determines ratio of surface electric fields on two connected conducting spheres in equilibrium."
+  },
+  {
+    "id": "a9b049bb-1e70-442f-804d-6da6aacf27b8",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Applies inverse-square law for intensity of radiation as detector radius scales with volume."
+  },
+  {
+    "id": "14b1f0d4-7428-4cc9-89da-39699a927a36",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Applies work-energy theorem to integrate position-dependent retarding force and find final speed."
+  },
+  {
+    "id": "8c5e705c-b1cf-43ec-92ec-d5b17101b422",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.98,
+    "reason": "Calculates force constant of a piece of spring cut in a given length ratio (k proportional to 1/L)."
+  },
+  {
+    "id": "4cc03107-c549-4aa1-86d0-348e9b323e16",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Uses Kepler's third law T^2 = 4pi^2 r^3 / (GM) to find ratio of planetary orbital periods."
+  },
+  {
+    "id": "a6ed545a-6766-4de6-9600-49e73303c695",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.99,
+    "reason": "Applies thermal expansion and thermal stress formulas for tension in a clamped cooling wire."
+  },
+  {
+    "id": "d4b35b73-d3d1-4642-97e5-b111e0a3b629",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Performs bitwise logic operation on 4-bit binary inputs through a combination logic circuit."
+  },
+  {
+    "id": "fbd5e698-4a6f-4dcd-94fb-1255a922472a",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Applies ideal gas equation and mass conservation to connected vessels at different temperatures."
+  },
+  {
+    "id": "4a139abb-1215-408e-8546-f300a7f4171c",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Classifies nuclear reactions into fission, fusion (+Q), fusion (-Q), and chemical reactions."
+  },
+  {
+    "id": "731b42b0-7d8c-4fdc-af64-6274ed849fcb",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.98,
+    "reason": "Calculates required speed of a projectile thrown between two cars moving along a straight line."
+  },
+  {
+    "id": "49e8fe4b-1bb3-4a5c-bee5-f66b2a5c4f1d",
+    "ncert_chapter": "System of Particles and Rotational Motion",
+    "confidence": 0.98,
+    "reason": "Analyzes kinematics of disks rolling without slipping along a circular boundary."
+  },
+  {
+    "id": "f8845f09-24fb-43f9-8e24-ce110aec878e",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Calculates volume flow rate in a horizontal Venturi tube from manometer height difference."
+  },
+  {
+    "id": "d8cf522c-f9f4-4564-9fff-b273b8717bd9",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates magnetic field at the centroid of an equilateral triangular current-carrying loop."
+  },
+  {
+    "id": "d38a80fc-927f-4dcd-9435-f1140a7fd594",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Calculates relative error in the mean value of multiple experimental length measurements."
+  },
+  {
+    "id": "9f2292e9-d88f-4058-9689-b7634bb416ae",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.99,
+    "reason": "Calculates net electric dipole moment vector for a 2D discrete charge configuration."
+  },
+  {
+    "id": "9a6a829b-79d7-4af5-909b-962f91b9a8c5",
+    "ncert_chapter": "Atoms",
+    "confidence": 0.99,
+    "reason": "Relates orbital speeds and quantum principal numbers in Bohr hydrogen-like atoms."
+  },
+  {
+    "id": "7046de93-6f87-4d49-a957-2a26b40017b9",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.98,
+    "reason": "Identifies diode wave-shaping circuit components from input and output voltage waveforms."
+  },
+  {
+    "id": "a1615d8e-4ff4-4dea-947c-07f02a132c43",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Determines phase velocity of a plane progressive wave from its wave equation parameters."
+  },
+  {
+    "id": "84b84946-19d8-477f-b405-097bef24058a",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.98,
+    "reason": "Calculates final equilibrium temperature of two mixed ideal gas samples."
+  },
+  {
+    "id": "751e1bd0-436e-436d-9a27-d591d08af82d",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Relates excess pressure in soap bubbles to their spherical volume ratio."
+  },
+  {
+    "id": "f139c1f9-2b68-4b96-a420-1d83d3375cf6",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Determines initial gas temperature using fractional pressure change at constant volume."
+  },
+  {
+    "id": "e2368d87-8cc1-4b14-a2d7-39a80fea1f6f",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Determines 4-bit binary output produced by a combination logic gate circuit."
+  },
+  {
+    "id": "3dd9c40a-87e9-4c91-98a3-bc58a66e7384",
+    "ncert_chapter": "Magnetism and Matter",
+    "confidence": 0.99,
+    "reason": "Explains non-existence of isolated magnetic monopoles from Gauss's law for magnetism."
+  },
+  {
+    "id": "98102aa8-1975-40a6-abed-162602d156a1",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Calculates amplitude and initial phase of the resultant wave formed by superposition of two waves."
+  },
+  {
+    "id": "4ec3a2cd-a62f-4890-b4b2-0beab1319723",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Calculates muzzle velocity of bullets from the maximum horizontal projectile range."
+  },
+  {
+    "id": "fbb58b6a-ee1e-4085-87e4-5312e3a44113",
+    "ncert_chapter": "Atoms",
+    "confidence": 0.99,
+    "reason": "Calculates radius of 4th Bohr orbit using r proportional to n^2."
+  },
+  {
+    "id": "46c67773-0c6f-4324-b9c2-1ac78649aa69",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Applies 1D free fall equations under gravity to find starting height."
+  },
+  {
+    "id": "1e5c4944-d6ca-477f-a84d-48b6de23bd2c",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates velocity ratio for constant centripetal force in circular paths of different radii."
+  },
+  {
+    "id": "b12522ce-dc2b-4779-837b-150f784741db",
+    "ncert_chapter": "Magnetism and Matter",
+    "confidence": 0.99,
+    "reason": "Calculates magnetic dipole moment from axial magnetic scalar potential."
+  },
+  {
+    "id": "d0554629-35a9-42ba-81be-6c0e0265600c",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Calculates dynamic lift on airplane wings using Bernoulli's principle."
+  },
+  {
+    "id": "c6caa33b-91dc-4cc2-85e2-2c9e40587848",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Calculates pressure ratio for equal masses of different gases in identical volumes."
+  },
+  {
+    "id": "636efce8-fdaf-4f59-a244-bbefaacd02b9",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Determines gas temperature from molecular number density and pressure using P = n kB T."
+  },
+  {
+    "id": "a88e595b-8e45-42eb-a475-906c3c1ab7d5",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Solves non-uniform circular motion kinematics when normal and tangential accelerations are equal."
+  },
+  {
+    "id": "65e5f7ce-8096-43f8-98be-b535361bcb1f",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.99,
+    "reason": "Expresses distance between planets in terms of speed of light unit system."
+  },
+  {
+    "id": "f707afaf-3027-41f8-ac8a-f956b01f1426",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates constant 1D acceleration by taking the second derivative of the displacement function."
+  },
+  {
+    "id": "a8faeb1c-84be-4148-8b68-7a8c642d5d2c",
+    "ncert_chapter": "Kinetic Theory",
+    "confidence": 0.99,
+    "reason": "Calculates temperature for equal RMS speeds of hydrogen and oxygen molecules."
+  },
+  {
+    "id": "e023cca7-91b8-4702-80a1-30ff4466de75",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates displacement in a subsequent second under constant 1D acceleration."
+  },
+  {
+    "id": "a94d15a2-4a58-4f93-aaef-fb3adfe18cdc",
+    "ncert_chapter": "Electromagnetic Waves",
+    "confidence": 0.99,
+    "reason": "Calculates radiation momentum delivered to an absorbing surface (p = U/c)."
+  },
+  {
+    "id": "25b1b506-1eef-4d37-be8c-c009f9beef84",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Calculates percentage decrease in electrical power dissipation and illumination of a lamp."
+  },
+  {
+    "id": "e9541e11-5158-497b-863c-6656d1f6c612",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates magnetic field at the center of a square current loop using Biot-Savart law."
+  },
+  {
+    "id": "169ef805-296d-42a3-8ffd-ed01cd385027",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.99,
+    "reason": "Compares resultant intensities of incoherent versus coherent interfering light waves."
+  },
+  {
+    "id": "2d8f5cf0-9b6d-48b7-9c8c-f11ed95586be",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.99,
+    "reason": "Calculates electrostatic force between charges when placed in a dielectric medium at altered separation."
+  },
+  {
+    "id": "9cd404a7-ecb2-4e71-a7ed-26e6b2471cd0",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Relates nuclear volumes directly to mass numbers using V proportional to A."
+  },
+  {
+    "id": "939974ef-229d-4b32-8451-e84f9afdebf7",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.98,
+    "reason": "Analyzes turning points, origin returns, and acceleration for 1D cubic position function."
+  },
+  {
+    "id": "9842f658-7955-421c-a9cc-42270e1da899",
+    "ncert_chapter": "Current Electricity",
+    "confidence": 0.99,
+    "reason": "Integrates time-dependent electric current to calculate total charge transferred."
+  },
+  {
+    "id": "d1945cd7-52ba-4917-8123-622eaa4cb127",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates 1D acceleration from distances covered in nth and (n+2)th seconds."
+  },
+  {
+    "id": "5dfbe18e-493c-44eb-8e6b-c7b05c16e5c3",
+    "ncert_chapter": "Oscillations",
+    "confidence": 0.99,
+    "reason": "Calculates frequency ratio for spring-mass oscillators with different attached masses."
+  },
+  {
+    "id": "78de2952-f990-48de-a13c-e1287682f33b",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies Archimedes' principle to find mass of a metal coin causing extra submerged volume."
+  },
+  {
+    "id": "9a5b5910-62eb-44ef-81c5-375660edaa6f",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates tension in top suspension string supporting accelerated hanging blocks."
+  },
+  {
+    "id": "e7ff3a9d-4ee0-44bd-b9f0-f9f3dd6f2602",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Calculates Q-value energy release from mass defect in triple-alpha helium fusion to carbon."
+  },
+  {
+    "id": "48810115-4731-4ff8-a8f1-aed720736816",
+    "ncert_chapter": "Electric Charges and Fields",
+    "confidence": 0.99,
+    "reason": "Estimates order of magnitude ratio of electrostatic force to gravitational force between proton and electron."
+  },
+  {
+    "id": "bcb4a722-aaf2-4e48-b6ec-05ee73f4f986",
+    "ncert_chapter": "Alternating Current",
+    "confidence": 0.99,
+    "reason": "Calculates circuit current from inductor voltage drop and inductive reactance in an AC circuit."
+  },
+  {
+    "id": "8b3ffa95-3e09-45ac-a7c2-75609f60a9cf",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Determines input condition yielding low output in a combination logic circuit."
+  },
+  {
+    "id": "8189b614-a228-476a-bd62-b0b964e72bef",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates work required to rotate a magnetic dipole in a uniform magnetic field."
+  },
+  {
+    "id": "74e71c0f-ca52-4846-9e53-51b814d05dc8",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Identifies emitted neutrons by balancing mass and atomic numbers in a nuclear fission equation."
+  },
+  {
+    "id": "35a07b7b-a803-4410-8240-b9199b6a0260",
+    "ncert_chapter": "System of Particles and Rotational Motion",
+    "confidence": 0.98,
+    "reason": "Calculates normal reaction on shoulder using static rotational equilibrium (torque balance) of an inclined bar."
+  },
+  {
+    "id": "e381a767-6af8-412f-a027-4dc55313d55c",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Converts linear velocity-distance graph to acceleration-distance graph using a = v dv/dx."
+  },
+  {
+    "id": "ac0b3554-0811-45cb-8247-ec0ba3cccde7",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates total distance and average velocity from a piecewise velocity-time graph."
+  },
+  {
+    "id": "00cbe66b-c4e5-4ef1-803f-91fa1c9d3602",
+    "ncert_chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "confidence": 0.99,
+    "reason": "Identifies output digital waveform corresponding to input digital signals through logic gates."
+  },
+  {
+    "id": "8ef51202-50e8-41c2-8dad-ab938c8db00b",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.98,
+    "reason": "Calculates 3D acceleration magnitude from spatial velocity field at a given point."
+  },
+  {
+    "id": "2d6d4c7b-b4c4-43cb-9158-45f32dc5911c",
+    "ncert_chapter": "Dual Nature of Radiation and Matter",
+    "confidence": 0.99,
+    "reason": "Identifies relativistic energy-momentum relation E^2 = p^2 c^2 + m^2 c^4."
+  },
+  {
+    "id": "ad4e5928-84e3-4527-b117-7bf4fff13576",
+    "ncert_chapter": "Ray Optics and Optical Instruments",
+    "confidence": 0.99,
+    "reason": "Calculates object distance for coinciding object and image in a silvered biconvex lens."
+  },
+  {
+    "id": "a4e4deec-12f0-4e6d-b251-d356565219f9",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.99,
+    "reason": "Applies conservation of mechanical energy to calculate speed of a block on a horizontal spring."
+  },
+  {
+    "id": "5795819b-d33d-432c-8059-50762805fdcd",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates axial displacement along magnetic field in helical motion over multiple revolutions."
+  },
+  {
+    "id": "f4e571f5-7f79-4d02-a328-e1b238d1f80a",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Integrates 2D time-dependent force vector to find velocity and position vectors."
+  },
+  {
+    "id": "4feef328-21d5-4023-9439-94fe84cd1292",
+    "ncert_chapter": "Gravitation",
+    "confidence": 0.99,
+    "reason": "Scales gravitational collision time under mutual attraction when triangle side and masses are doubled."
+  },
+  {
+    "id": "e40f7c47-b85c-4b5b-b934-6a740bdfa76d",
+    "ncert_chapter": "Physical World, Units and Measurements",
+    "confidence": 0.98,
+    "reason": "Calculates percentage uncertainty in axial magnetic field from relative length measurement error."
+  },
+  {
+    "id": "e4638484-429a-487e-b7fd-4feae2304312",
+    "ncert_chapter": "Electromagnetic Induction",
+    "confidence": 0.99,
+    "reason": "Calculates induced EMF in a solenoid resulting from linear variation of electric current."
+  },
+  {
+    "id": "10052445-be81-48d1-8d2b-3e1a611dfee0",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Identifies physically valid kinematic graphs representing one-dimensional motion of a particle."
+  },
+  {
+    "id": "a174b8de-6e99-4320-8f7d-5cf5cac7bfd7",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Calculates net heat exchanged in a three-stage cyclic thermodynamic process on an ideal gas."
+  },
+  {
+    "id": "85335c81-555f-4385-8a32-82c276e36cb7",
+    "ncert_chapter": "Atoms",
+    "confidence": 0.99,
+    "reason": "Explains applicability of Bohr's model to single-electron species due to absence of inter-electron repulsion."
+  },
+  {
+    "id": "43754738-5dce-4f4a-aef7-3e88a2f9600b",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Finds temperature difference between two ideal gas samples undergoing a specified P-V relation."
+  },
+  {
+    "id": "f32e483b-c1b8-42b7-974c-e6ab8852d666",
+    "ncert_chapter": "Mechanical Properties of Fluids",
+    "confidence": 0.99,
+    "reason": "Applies Bernoulli's theorem and Torricelli's law to calculate liquid efflux speed under surface pressure."
+  },
+  {
+    "id": "a41cb81a-e571-4a26-80fa-eac480aa5e39",
+    "ncert_chapter": "Wave Optics",
+    "confidence": 0.98,
+    "reason": "Identifies wave equation and electric field polarization vector for light reflected at Brewster's angle."
+  },
+  {
+    "id": "8fd2369d-c87b-4999-b705-9f4ac7a3704b",
+    "ncert_chapter": "Motion in a Plane",
+    "confidence": 0.99,
+    "reason": "Differentiates 2D parametric projectile coordinates to determine instantaneous velocity angle."
+  },
+  {
+    "id": "5f221011-1f4b-468f-b98e-a0d281a614c3",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Calculates force acting on an object with position-dependent velocity using F = m v dv/dx."
+  },
+  {
+    "id": "63e44157-5e8d-4cc2-885a-9e9ecc091185",
+    "ncert_chapter": "Mechanical Properties of Solids",
+    "confidence": 0.99,
+    "reason": "Calculates ratio of elastic elongations for two stretched wires using Young's modulus equation."
+  },
+  {
+    "id": "7adc7d84-e31f-4b4a-a285-45cfc2496ae0",
+    "ncert_chapter": "Waves",
+    "confidence": 0.99,
+    "reason": "Calculates beat period from modulation envelope frequency of superimposed harmonic waves."
+  },
+  {
+    "id": "6bf5fe5e-2e0c-4d91-a5f8-3df13546cc38",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.98,
+    "reason": "Evaluates electrostatic properties of charges inside conducting media and capacitor plates."
+  },
+  {
+    "id": "3986fa5f-bbfc-43e2-8d47-613840669ef9",
+    "ncert_chapter": "Magnetism and Matter",
+    "confidence": 0.99,
+    "reason": "Calculates resultant magnetic field at midpoint between two mutually perpendicular bar magnets."
+  },
+  {
+    "id": "b208823e-025a-46a5-8891-74764187195e",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates net displacement along boundary for a charged particle traversing two adjacent magnetic field regions."
+  },
+  {
+    "id": "e6973c8a-a1c1-40f5-849f-3beaa52d364a",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.99,
+    "reason": "Calculates junction interface temperature for two conducting rods joined in series under steady state."
+  },
+  {
+    "id": "2ea17758-719d-46da-a22f-92dfbdb5b721",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Evaluates constancy of nuclear mass density across different elements using R = R0 A^(1/3)."
+  },
+  {
+    "id": "0baa31c6-566a-4e42-8ef8-9217c9fb5e5c",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Solves for position of water drops falling freely at regular time intervals under gravity."
+  },
+  {
+    "id": "9b271bd0-2258-413c-89b1-1b6bd8f03d13",
+    "ncert_chapter": "Work, Energy and Power",
+    "confidence": 0.98,
+    "reason": "Calculates ratio of elastic potential energies stored in vertical equilibrium spring-mass systems."
+  },
+  {
+    "id": "8e1c3151-875e-4981-8360-36779d8b97df",
+    "ncert_chapter": "Motion in a Straight Line",
+    "confidence": 0.99,
+    "reason": "Calculates total jump altitude for a paratrooper experiencing free fall followed by deceleration."
+  },
+  {
+    "id": "8b9a7bd0-0d1c-41c3-a19a-e58e701cd876",
+    "ncert_chapter": "Laws of Motion",
+    "confidence": 0.99,
+    "reason": "Applies conservation of linear momentum to find velocity of heavier fragment after an explosion."
+  },
+  {
+    "id": "b7f91393-ae0a-471b-baed-4553fa25686b",
+    "ncert_chapter": "Nuclei",
+    "confidence": 0.99,
+    "reason": "Calculates total energy released in complete fission of a given mass of pure U-235."
+  },
+  {
+    "id": "8ef3b54c-bddc-4088-ae7c-24d70909e600",
+    "ncert_chapter": "Electrostatic Potential and Capacitance",
+    "confidence": 0.99,
+    "reason": "Calculates electric potentials of concentric charged conducting spherical shells."
+  },
+  {
+    "id": "958fdfc1-3777-4bab-ac07-23677f12cb75",
+    "ncert_chapter": "Moving Charges and Magnetism",
+    "confidence": 0.99,
+    "reason": "Calculates net axial magnetic field at midpoint between two coaxial circular current loops."
+  },
+  {
+    "id": "c0b8832d-2ed2-4dae-95aa-8aea3295f9bb",
+    "ncert_chapter": "Thermal Properties of Matter",
+    "confidence": 0.99,
+    "reason": "Identifies standard temperature versus heat supplied heating curve for water across phase transitions."
+  }
+]

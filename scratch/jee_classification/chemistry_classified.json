@@ -1,0 +1,2852 @@
+[
+  {
+    "id": "3e0908e2-b055-4d6f-ba00-03284bde82e2",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Electronic configurations of first row transition metal cations (Cr2+, Mn+, Ni2+, V+)."
+  },
+  {
+    "id": "45ceacd8-6554-4d39-a204-92b2be38662c",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Work done in a cyclic thermodynamic P-V process."
+  },
+  {
+    "id": "b167a698-6994-492a-b982-283f58729b62",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Reactivity of alcohols as nucleophiles and electrophiles and reaction with active metals."
+  },
+  {
+    "id": "41cc70f3-2ef2-435f-85b4-6fc3c9950029",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.97,
+    "reason": "Eudiometry and stoichiometric combustion of hydrocarbon to determine molecular formula."
+  },
+  {
+    "id": "70aab68b-f059-4190-b08b-efbda7834a23",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.98,
+    "reason": "Structure and IUPAC naming of dihaloalkane derivative 2,3-dibromo-1-phenylpentane."
+  },
+  {
+    "id": "0f3250e8-c414-4db7-9d6c-2745468bd6e0",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Periodic trends in first ionisation enthalpy across a period and nuclear charge vs shielding."
+  },
+  {
+    "id": "94081175-651e-4088-9282-4af9d3fb11d1",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Relative stability of resonating structures and formal charges."
+  },
+  {
+    "id": "a0eec526-6a7b-4a6a-b291-412253d83075",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.97,
+    "reason": "IUPAC nomenclature of unsaturated cyclic alcohol (cyclohex-2-en-1-ol)."
+  },
+  {
+    "id": "2f0331bf-e475-46be-9ca7-462f6322df68",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Acidic strength comparison of alkynes, alkenes, and alkanes based on hybridization."
+  },
+  {
+    "id": "436ce2c1-3ea9-4c9b-8f0d-99d4a5b9a8e3",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Hydrogen emission spectrum, Lyman and Balmer spectral series transitions."
+  },
+  {
+    "id": "8da24dd3-8aa4-40ce-83d3-516c19367de1",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.98,
+    "reason": "Acidic, basic, amphoteric, and neutral nature of various element oxides."
+  },
+  {
+    "id": "7384b018-bc79-4d3c-aa3b-1a6262dafc2a",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Molar heat capacities at constant pressure and volume (Cp and Cv) for ideal gases."
+  },
+  {
+    "id": "930da7ad-3ac5-4106-a7dc-74491053c192",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Classification of oxides across the periodic table as basic, acidic, amphoteric, or neutral."
+  },
+  {
+    "id": "5a523ab4-6143-4f6a-a43a-2d6dabebdcb0",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.96,
+    "reason": "d-orbital crystal field splitting in octahedral and tetrahedral coordination complexes."
+  },
+  {
+    "id": "4d18cd17-cfa7-4658-a964-af8bbd2cc7bd",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Paramagnetic nature and unpaired electrons in coordination complexes using CFT/VBT."
+  },
+  {
+    "id": "b091dcd2-4ceb-4707-934a-6d268052c07b",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Molecular orbital theory: pi bonding and pi* antibonding orbital characteristics."
+  },
+  {
+    "id": "442f7df6-3696-4416-9a07-2d8b5cbdaed1",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Reagents for reduction and functional group conversions (DIBAL-H, Wolff-Kishner, Clemmensen)."
+  },
+  {
+    "id": "3af3a93c-e6cb-4acf-b189-56980c6509c8",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field theory octahedral splitting parameters (+0.6 Delta_o and -0.4 Delta_o)."
+  },
+  {
+    "id": "2c04b0f2-88e0-450b-90e0-37f4a011e3a0",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR theory: counting lone pairs on central atoms of covalent species."
+  },
+  {
+    "id": "611c580e-7ddc-49c4-b74e-5952ce30b20c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.96,
+    "reason": "Identification of heteroatoms in heterocyclic compounds and amino acids."
+  },
+  {
+    "id": "3b1f7528-f0ab-4a59-8913-a24a9758c561",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.96,
+    "reason": "Reaction product functional groups and number of hydroxyl groups formed."
+  },
+  {
+    "id": "20f44f1f-713c-484a-8aba-4f00f533136e",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Lewis structure and sigma bond-pairs/lone-pairs of xenon oxoanion XeO6 4-."
+  },
+  {
+    "id": "97156d04-7be5-46a8-8463-90a0fcd29724",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Bond-line structural representations of organic molecules."
+  },
+  {
+    "id": "c40bdadf-b773-4ebc-8d51-807136dbfb07",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Dipole moments and molecular polarity of polyatomic molecules."
+  },
+  {
+    "id": "0d82b66b-a586-4bc2-8bfd-96e07d52158b",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Magnetic moments corresponding to 3d transition metal electron configurations."
+  },
+  {
+    "id": "9a0f07b4-41d0-4606-bec3-7c6d5e54f580",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configuration of lanthanoid element Neodymium (Z=60)."
+  },
+  {
+    "id": "e8092465-dda5-4797-929a-f7a131e7e8f3",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.97,
+    "reason": "Commercial batteries and the metals employed in their electrochemical reactions."
+  },
+  {
+    "id": "8101893f-4720-44ca-b1f6-579684df6608",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Reactivity in electrophilic aromatic substitution of substituted arenes."
+  },
+  {
+    "id": "d4880ee8-3cb1-4de5-b4c1-dc8984eef397",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Ambident nucleophile reactions of haloalkanes with KCN and AgCN."
+  },
+  {
+    "id": "b5ecbe29-3683-47bf-8417-05ce697e7c3a",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "pH calculation of strong acid solution upon dilution (ionic equilibrium)."
+  },
+  {
+    "id": "32fca833-9b3d-4a4b-9d80-fd38869aefe9",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR bond pair to lone pair ratios in polyatomic species (ICl2-, H2O, SO2, XeF4)."
+  },
+  {
+    "id": "cb3cffc4-0b6f-4759-bf45-4552a494321b",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Enthalpy of atomisation, aquated ion colour, and oxide nature of transition metals (Cr)."
+  },
+  {
+    "id": "85a53cf6-86c2-4f5e-9b50-643aeeeeee49",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Determination of overall reaction order using initial rate method data."
+  },
+  {
+    "id": "f6a78232-8d97-4723-95da-be82116d31d8",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Calculation of number of atoms from mass and molar mass (mole concept)."
+  },
+  {
+    "id": "c2878c55-8ac4-4619-9984-ee9a7ca0b2a5",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Optical isomerism in octahedral trioxalatoiron(III) complex [Fe(ox)3]3-."
+  },
+  {
+    "id": "dd4cf885-f3f7-4050-aad5-9b2ed4421c33",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Relative stability rules for contributing resonance structures."
+  },
+  {
+    "id": "ac7dcdd1-fb68-4b92-b447-bcdac171d568",
+    "ncert_chapter": "Redox Reactions",
+    "confidence": 0.99,
+    "reason": "Oxidation state limits and ability of species to function as oxidising agents."
+  },
+  {
+    "id": "672b370b-2200-4598-9c7b-580235da6653",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Calculation of standard enthalpy of reaction from standard enthalpies of formation."
+  },
+  {
+    "id": "490fc914-9f5c-4efa-ab08-064b2e5152d9",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Degeneracy of atomic orbitals in single-electron vs multi-electron systems."
+  },
+  {
+    "id": "ec811851-5278-4235-94b9-2e8793708b87",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.97,
+    "reason": "IUPAC nomenclature and structure of unsaturated aldehyde (4-methylpent-2-enal)."
+  },
+  {
+    "id": "1b113f76-06f6-430a-8248-66143ac1ff5c",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.96,
+    "reason": "Qualitative salt analysis confirmatory test for sulfide ion releasing H2S gas."
+  },
+  {
+    "id": "5e9f315b-7f94-4e42-ae14-e01bf10c4a1c",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Molecular orbital theory electron configuration and number of unpaired electrons."
+  },
+  {
+    "id": "817a6517-9116-4a96-b85c-4869a0d3a953",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Rate of decomposition of N2O5 and rate of formation of NO2."
+  },
+  {
+    "id": "26ddbc83-02de-4fb6-beac-3fe295b62357",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Hybridization of central atoms in SO2, NO2-, and N3-."
+  },
+  {
+    "id": "8267a9bb-d9f6-433b-8afa-64f8072fe94c",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Origin of intense colour in K2Cr2O7 and KMnO4 due to charge transfer transitions."
+  },
+  {
+    "id": "41c95d59-3a28-4053-86b6-de4971005d61",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Heisenberg uncertainty principle, orbital size, and electronic configurations."
+  },
+  {
+    "id": "55be370b-2bf8-48d3-94cb-ea73af962c2a",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Standard enthalpy of formation conventions for elements in their reference standard states."
+  },
+  {
+    "id": "2371a4ec-3841-43a6-804a-e005e880b2a4",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.96,
+    "reason": "Primary valency of cobalt in complex combined with acidic oxides of transition metals."
+  },
+  {
+    "id": "5a9fdde1-40d8-4d00-a380-47b4bc9f6776",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Oxidation states of manganese in fluorides and oxides and unpaired electrons in 3d ions."
+  },
+  {
+    "id": "ececa254-252e-4a11-bb5d-2f2086746799",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Limiting reagent and stoichiometry of precipitation reaction between PbCl2 and (NH4)3PO4."
+  },
+  {
+    "id": "08ba4bf7-b29a-4069-acdd-9182b0c2ed29",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Ratio of wave numbers of Balmer series and Brackett series spectral lines in H atom."
+  },
+  {
+    "id": "d17a2fe3-2c1b-4b4d-9683-2d92445d5b17",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Acidic strength and bond dissociation enthalpy trends of Group 16 hydrides (H2Te vs H2S)."
+  },
+  {
+    "id": "821658d3-1430-4f56-9816-662369716412",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Oxidising reactions of K2Cr2O7 and KMnO4 in acidic medium."
+  },
+  {
+    "id": "b6922b64-1bd6-4ea1-a690-f6714605643e",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Classification and definition of allylic halides (halogen attached to sp3 C adjacent to C=C)."
+  },
+  {
+    "id": "31762023-09f7-4f0f-85d8-a76eb0d8ec2d",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Purification methods of organic substances based on sublimation."
+  },
+  {
+    "id": "9f28aa72-d240-444b-af9f-817a100cc5d4",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Melting point trends across 3d, 4d, and 5d transition metal series."
+  },
+  {
+    "id": "a8e51d57-cc3f-4d0f-ba38-203aeff14baf",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Colours of nickel complexes [Ni(H2O)6]2+ and [Ni(CN)4]2- based on crystal field theory."
+  },
+  {
+    "id": "5196ce26-8187-42ec-904f-34109bcc7006",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Reduction and carbonyl addition reactions (DIBAL-H, Clemmensen, Grignard, NaBH4)."
+  },
+  {
+    "id": "146d3af5-522e-471f-9261-00e201c415a6",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Characteristic colours of aqueous 3d transition metal cations."
+  },
+  {
+    "id": "5309cb41-5156-421e-9f30-9cafbb5c7aac",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.97,
+    "reason": "Free radical chlorination of alkanes (n-butane) and constitutional/stereoisomer counting."
+  },
+  {
+    "id": "5401fea2-492c-492e-9861-cad617815622",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "First law of thermodynamics sign conventions: q, w, and Delta U for heated water."
+  },
+  {
+    "id": "5615807a-e203-44be-8bc4-77f70e87376f",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Alkylation of terminal alkynyl sodium salts with alkyl halides to higher alkynes."
+  },
+  {
+    "id": "5b19061b-35df-4762-8365-c24645a0572f",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Periodic trends in atomic radii across periods and down groups."
+  },
+  {
+    "id": "e436c862-e3ea-4d27-bd16-c7f6816dcd70",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Periodic trends in first ionization enthalpies of 3rd period elements (Al, Si, P, S, Cl)."
+  },
+  {
+    "id": "6fa3fb77-3656-458e-9e9a-55f3aacd39d0",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.95,
+    "reason": "Solubility properties of metal chlorides in cold vs hot water (AgCl, PbCl2, CuCl2)."
+  },
+  {
+    "id": "bbfe6546-e84c-41f6-8fb9-f116c940fcd1",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Number of unpaired electrons in low spin octahedral complexes of 3d ions."
+  },
+  {
+    "id": "0bac7caf-0356-4519-9cac-c7b09fac7310",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Stoichiometry from concentration-time kinetic plot of dissociation reaction A -> nB."
+  },
+  {
+    "id": "c08f3e99-fae9-4acc-8e97-93f4df360d25",
+    "ncert_chapter": "Amines",
+    "confidence": 0.97,
+    "reason": "Bromination of activated aromatic amine / phenol derivative to tribromo product."
+  },
+  {
+    "id": "496af113-b590-4a8d-b9ec-2b651d0163fd",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Energy calculation of first and second Balmer spectral lines of hydrogen atom."
+  },
+  {
+    "id": "27ff00aa-b8f0-4ebe-86c2-500cd115d14f",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.97,
+    "reason": "Reducing vs non-reducing carbohydrate structures and reaction with Tollens reagent."
+  },
+  {
+    "id": "2e313d62-d2e8-44b6-b635-165c9c20786e",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Magnetic behaviour and geometry of nickel complexes [Ni(CO)4], [Ni(CN)4]2-, [NiCl4]2-."
+  },
+  {
+    "id": "161c1d3b-e90c-4b06-9b52-85f13ccba395",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Hybridization and VSEPR molecular geometry of interhalogen species (IF3, IF5, IF7)."
+  },
+  {
+    "id": "10851c63-0f03-4fa7-a806-7f17dc05e221",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Molar excitation energy between Bohr orbits in atomic hydrogen."
+  },
+  {
+    "id": "e58cc46a-3cb8-4bff-8e25-425464ae7360",
+    "ncert_chapter": "The s-Block Elements",
+    "confidence": 0.96,
+    "reason": "Qualitative salt analysis of Group V cations (Ba2+, Ca2+) as insoluble carbonates."
+  },
+  {
+    "id": "91a9d6c2-8529-4a37-a02d-405f5587b001",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Arrhenius equation and determination of temperature where rate constants are equal."
+  },
+  {
+    "id": "59a29ff4-95e1-4566-b94a-257d911e5425",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.98,
+    "reason": "Preparation of hindered secondary alcohols and carbocation rearrangement during alkene hydration."
+  },
+  {
+    "id": "a8a9bc63-203f-414d-92f1-956bae181907",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Identification of sp3d hybridized steric numbers in various polyatomic species."
+  },
+  {
+    "id": "bb6d84c8-aab0-4d93-af98-a51686004b93",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.97,
+    "reason": "Bond angle trends in oxygen halides/hydrides and ionic/covalent nature of group 14 tetrafluorides."
+  },
+  {
+    "id": "27542a6a-5b22-4ac1-9e81-ff474f5ce4a7",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Thermodynamic expressions for heat and work in reversible/irreversible isothermal processes."
+  },
+  {
+    "id": "f8bd2dc9-d4e0-4ee1-a0d3-3463c64c0cd9",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Paramagnetic behaviour and unpaired electron calculation in octahedral aqua complexes."
+  },
+  {
+    "id": "d4175381-2ef1-48e0-8fa3-67e9c073ed53",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Lewis dot structure and valence electrons around nitrogen in NO2-."
+  },
+  {
+    "id": "edef720b-9512-49ce-b23c-ef660398aa2e",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Chromyl chloride test reactions yielding CrO2Cl2 and Na2CrO4."
+  },
+  {
+    "id": "b0ca6217-cb1c-4a43-acce-3c278da92a42",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Bohr radius formula r_n = a_0 * n^2 / Z for hydrogen-like ions."
+  },
+  {
+    "id": "c100f97a-61eb-4aec-9f12-1a85a3fe5a1c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Purification techniques: steam distillation for steam volatile water-immiscible liquids."
+  },
+  {
+    "id": "ce6b7f37-b8b9-4525-8b29-c21bfc30b5cf",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "First order decay kinetics and time calculation for equal reactant concentrations."
+  },
+  {
+    "id": "977732f6-9315-43a1-a05f-d9ccb2582904",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Reactions of alkanes (heptane): isomerization, aromatization to toluene, and cyclisation."
+  },
+  {
+    "id": "04655dc4-4ca3-4bf1-8e71-28c274f58645",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Isoelectronic species and ionic radius trends (O2-, F-, Na+, Mg2+)."
+  },
+  {
+    "id": "4b6fe604-e686-4f11-9b03-32d0063a4210",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Geometry and hybridization of carbocation (sp2, trigonal planar)."
+  },
+  {
+    "id": "3f3744f9-326f-45c3-9651-e1c25b78de73",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.98,
+    "reason": "Electron gain enthalpy and negative electron affinity values of elements (Be, N, O-)."
+  },
+  {
+    "id": "d99bf0c6-58bf-4f63-a262-541cddf1a160",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configuration of actinoid element Einsteinium (Z=99)."
+  },
+  {
+    "id": "8e7d0590-010c-486b-90bd-6dc330bf0560",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.97,
+    "reason": "Multi-step organic reaction sequence involving carbonyl and carboxylic acid derivatives."
+  },
+  {
+    "id": "a014458d-2e93-4173-8c76-271bfbb129e7",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.96,
+    "reason": "SI base units definition for candela (luminous intensity) in chemistry measurements."
+  },
+  {
+    "id": "79cc6f2f-d5e3-419e-a216-749282d7a81b",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Classification and counting of primary, secondary, and tertiary carbon atoms in branched alkanes."
+  },
+  {
+    "id": "9716f31c-5251-48c2-98f2-ddb093b09f21",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Ionization states and zwitterionic structure of valine at acidic (pH 2) and basic (pH 10) pH."
+  },
+  {
+    "id": "6330bf52-21d5-4116-afbb-a6830291fe0c",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.98,
+    "reason": "Qualitative salt analysis: chloride test releasing greenish yellow Cl2 gas with MnO2/H2SO4."
+  },
+  {
+    "id": "b03520ac-1ace-484b-b88b-d9421bbc4311",
+    "ncert_chapter": "Environmental Chemistry",
+    "confidence": 0.96,
+    "reason": "Water fluoridation and conversion of hydroxyapatite to fluoroapatite in tooth enamel."
+  },
+  {
+    "id": "b0e8b374-aa2f-4bf4-a33a-4fcadc641470",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Cathode half-cell reaction in Leclanche dry cell: reduction of Mn from +4 to +3."
+  },
+  {
+    "id": "9c7b82d0-7730-4e48-903b-c4a85ec5a123",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Number of unpaired d-electrons in neutral 3d transition metal atoms."
+  },
+  {
+    "id": "31f83ab3-461e-4130-83fb-65355ce373eb",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Stability order of substituted carbanions based on inductive and resonance effects."
+  },
+  {
+    "id": "8c8bd9f9-7e05-4899-88e8-0579613e8d1f",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "LCAO wave function representation of antibonding sigma* molecular orbital (psi_A - psi_B)."
+  },
+  {
+    "id": "c0ae3640-890e-4f6b-9e0e-bac8a69dfbd3",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Standard reduction potentials and reducing ability of Ti2+, Cr2+, and V2+ to liberate H2."
+  },
+  {
+    "id": "f5b2e577-dc21-4afb-a09f-7fe32450f1a6",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "IUPAC naming of polyfunctional carboxylic acid compound."
+  },
+  {
+    "id": "9d0abcfa-cdef-40ea-bfaa-64222e85af27",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Structure, hybridization, bond length, and bond strength in ethyne vs ethene."
+  },
+  {
+    "id": "ad8d2aa9-e168-4f00-93d3-fe096b6f301f",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Huckel's (4n+2) rule and aromaticity determination in annulenes and polycyclic systems."
+  },
+  {
+    "id": "1488adaf-0f74-40e9-9298-f54248d9b210",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Spectrochemical series order of ligands by crystal field splitting strength."
+  },
+  {
+    "id": "ddba88ca-3a55-4df8-872b-fd75a9b326d3",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Wavenumber ratio calculation for Balmer and Brackett spectral lines in hydrogen spectrum."
+  },
+  {
+    "id": "07c97953-ac56-468f-8738-113eb4a4bb44",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Classification of f-block elements: distinguishing lanthanoids from actinoids (Cm is actinoid)."
+  },
+  {
+    "id": "15f39961-d69d-4a94-9a0a-3bcf3a13316a",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.98,
+    "reason": "Preparation of Mohr's salt crystals and prevention of Fe2+ hydrolysis using dilute H2SO4."
+  },
+  {
+    "id": "332ba4a0-ae79-4ee0-a28b-8fcbb9c78dba",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.98,
+    "reason": "Coordination geometry and environment of Ca2+ in octahedral complex with hexadentate EDTA4-."
+  },
+  {
+    "id": "0444605e-80a5-4eb3-9e73-a9c40ed987b1",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Principles of purification methods for organic compounds."
+  },
+  {
+    "id": "2751e8d5-c5a2-476b-b0b5-30eb7443e3f3",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Conversion of acetic acid to alpha-hydroxy carboxylic acid (lactic acid) via cyanohydrin route."
+  },
+  {
+    "id": "21972c58-d24f-4d7b-9bf0-4eb80ebc3f53",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Acidity of phenol vs aliphatic alcohols and solubility/reaction in dilute NaOH."
+  },
+  {
+    "id": "985c525a-5d4c-4cff-915c-fa114959c48d",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Rate law calculation from partial pressures in a single-step gas phase reaction."
+  },
+  {
+    "id": "6c308178-24cc-4eca-b69f-80c146cc5411",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Electromagnetic radiation characteristics: wavelength, speed of light, and frequency."
+  },
+  {
+    "id": "0ecf81cd-7883-4e9a-8180-4e1b0ad2690e",
+    "ncert_chapter": "Amines",
+    "confidence": 0.99,
+    "reason": "Hinsberg test using p-toluenesulfonyl chloride with 1°, 2°, and 3° amines."
+  },
+  {
+    "id": "26f6f4aa-1620-4cad-aac3-75a0ae38da5b",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Relationship between ligand field strength and wavenumber of light absorbed in complexes."
+  },
+  {
+    "id": "d2bbf38f-b9ef-49d6-9536-39e85504610c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.97,
+    "reason": "Solubility of acidic organic compounds (phenols, carboxylic acids, active sulfonamides) in NaOH."
+  },
+  {
+    "id": "0ef4d7e5-baed-41f9-8343-0f5e8b33dafd",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Gibbs free energy change and temperature of spontaneity (T = Delta H / Delta S)."
+  },
+  {
+    "id": "33c501fb-c588-4059-8ebe-9ef53ee34540",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Gabriel phthalimide synthesis: structure and pi-bonds in N-benzylphthalimide."
+  },
+  {
+    "id": "346d6569-1cfb-4ea6-8bda-2ba24775a837",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Wolff-Kishner reduction of butan-2-one with hydrazine and KOH to butane."
+  },
+  {
+    "id": "a1d9d0e8-1b88-45ea-80a9-852e3b340154",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Thin layer chromatography Rf value calculation from spot distance."
+  },
+  {
+    "id": "6484d2f2-abd9-422c-8722-1bf2c0b224b2",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Born-Haber cycle and heat of solution calculation from lattice enthalpy and hydration enthalpies."
+  },
+  {
+    "id": "b03629af-96af-4ce4-bd37-3242943dfcff",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Reaction of primary aliphatic amine with HNO2 to evolve N2 gas (stoichiometry/Kjeldahl context)."
+  },
+  {
+    "id": "913cd0f0-50b5-4d8e-a52d-b7789156ce4b",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Extra stability factors for half-filled and fully filled subshells: exchange energy and symmetry."
+  },
+  {
+    "id": "ae1a0721-4242-4a27-b0a0-44264e22a1ac",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.97,
+    "reason": "Aromatic hydrocarbon reaction sequence and counting of pi electrons in major products."
+  },
+  {
+    "id": "6a34d4df-6a47-4b57-9a0f-2dba595b49ff",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Catalytic properties of 3d transition metals and adsorption theory of catalysis."
+  },
+  {
+    "id": "5c47755b-aeac-469b-b1d9-04ffd205fad2",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Bohr model: relation between kinetic energy, potential energy, and total energy of electron."
+  },
+  {
+    "id": "ac4b916b-77ca-4f56-aec3-91d07cd103a4",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.96,
+    "reason": "Characteristic precipitation reactions of cations (Cu2+, Fe3+, Zn2+) with potassium ferrocyanide."
+  },
+  {
+    "id": "642be3c2-83d9-484c-b38e-1895c096c4d0",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Order of increasing ionic character based on electronegativity difference."
+  },
+  {
+    "id": "3c5308bc-17e4-4b85-b534-490f9f30dcc2",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Isothermal irreversible expansion work and heat transfer against constant opposing pressure."
+  },
+  {
+    "id": "1c44447a-e5f0-4e83-aabb-3c2717b328fa",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.96,
+    "reason": "Qualitative salt analysis: identification of white precipitate of lead sulphate."
+  },
+  {
+    "id": "36930815-ad81-4cc1-a9dd-feb6cd65242c",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Hydrolysis of salts of weak acid and weak base and dependence on Ka and Kb."
+  },
+  {
+    "id": "06a1b66c-5d61-43e6-b8e4-937863d1a14c",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Chemical properties and reactions of D-glucose (oxidation with Br2 water, mutarotation, Schiff's test)."
+  },
+  {
+    "id": "09974937-fe62-40cf-829d-98556179e99d",
+    "ncert_chapter": "The s-Block Elements",
+    "confidence": 0.95,
+    "reason": "Qualitative salt analysis precipitates and colour identification of alkaline earth salts."
+  },
+  {
+    "id": "0454ccd0-0fea-4b6b-8a89-8186c97d964e",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.98,
+    "reason": "Oxidation of lead sulfide PbS by ozone O3 to PbSO4 and O2 (Group 16 chemistry)."
+  },
+  {
+    "id": "2049cb55-98f5-4ce7-aca6-6a76e93a5edc",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Quantitative estimation of nitrogen in organic compounds by Kjeldahl's method."
+  },
+  {
+    "id": "d46b5615-7e1d-435a-9ba9-1443945e1e56",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.98,
+    "reason": "Inert pair effect and oxidising nature of high oxidation states (Pb4+, Tl3+)."
+  },
+  {
+    "id": "cceae54d-eefc-4e27-9aa4-54b39f21d027",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Molecular orbital theory: counting electrons in pi* antibonding MOs of O2, O2+, O2-."
+  },
+  {
+    "id": "2de2411a-36d3-4dc5-b998-616b23cf3bd1",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.98,
+    "reason": "Electrophilic substitution of alkyl aryl ether (phenetole): nitration and bromination."
+  },
+  {
+    "id": "24e8fce1-3ef9-4456-b5a4-18f34fd6879b",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Huckel's rule: total number of aromatic compounds among conjugated rings."
+  },
+  {
+    "id": "c735332b-4ca9-4f7e-84a4-f08bdbf591f4",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Normal boiling point temperature from enthalpy and entropy of vaporisation (T_b = Delta H_vap / Delta S_vap)."
+  },
+  {
+    "id": "c11a6011-f466-4c21-807a-76104b42aaac",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "De Broglie wavelength of electron in nth Bohr orbit (2*pi*r_n = n*lambda)."
+  },
+  {
+    "id": "03389a8e-6746-4ca8-95dd-27b443b8a949",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Faraday's laws of electrolysis: mass deposited per coulomb equals electrochemical equivalent."
+  },
+  {
+    "id": "2c2ad613-e32f-43be-86fb-d6a134082091",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Bond angle comparison based on VSEPR theory and hybridization in BF3, PF3, ClF3."
+  },
+  {
+    "id": "71a4a1ac-c8e3-472f-8dfa-43fb4e73e036",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Calculation of total number of stereoisomers for polyfunctional organic compound."
+  },
+  {
+    "id": "1f6c868d-bbe3-48c7-b3da-77588d945e68",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.98,
+    "reason": "Crystal field electronic configurations (e and t2 levels) in tetrahedral complexes."
+  },
+  {
+    "id": "71c7d624-3913-41af-aa49-2a09854aa0bd",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Identification of functional groups in organic chemistry (-SO3H for sulphonic acid)."
+  },
+  {
+    "id": "7cd92400-e03d-4d4a-9fb5-986ff3a088b1",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Catalytic redox cycle of Fe(III)/Fe(II) in the reaction between persulphate and iodide."
+  },
+  {
+    "id": "59bab122-99ae-43c2-ab3c-376d0ff2dd66",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Conjugated alkene reaction product and counting total number of pi bonds."
+  },
+  {
+    "id": "fa70a493-b0c2-475d-9cf8-8af9625fc539",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Chain/structural isomer counting for alkane heptane (C7H16 = 9 isomers)."
+  },
+  {
+    "id": "81aaeffa-e218-4972-a1aa-e2302a55dbdb",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Counting sigma and pi bonds in ethylene (ethene) molecule (5 sigma, 1 pi)."
+  },
+  {
+    "id": "362d64a3-bca1-4025-abb7-2a38fd8af1b4",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Hess's law calculation of enthalpy of hydration of CuSO4 from enthalpies of solution."
+  },
+  {
+    "id": "23a6961c-07f1-4a29-8981-e9d3d15daacc",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Chromatographic retardation factor (Rf) calculation from plate elution distances."
+  },
+  {
+    "id": "bac2c042-0ef6-4808-8442-93c5aa2ff29e",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Enthalpy of neutralization for strong monobasic vs dibasic acids with strong base."
+  },
+  {
+    "id": "d0369719-999d-4a57-a421-23cbd82ddd91",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.98,
+    "reason": "Nucleophilic substitution (SN1/SN2) of secondary chloroalkane with aqueous NaOH."
+  },
+  {
+    "id": "b3d6b5c5-9a35-44b3-8f37-674c034bdc2b",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Steady-state approximation for intermediate B in sequential reactions A -> B -> C."
+  },
+  {
+    "id": "7628c148-e8d0-470a-9e3c-d906e8c23479",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Birch reduction of 2-butyne to trans-alkene followed by syn-hydroxylation with cold dilute KMnO4."
+  },
+  {
+    "id": "553af289-263b-4a9f-b606-9def9538ffbd",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Radial distribution curves and identification of radial nodal surfaces in atomic orbitals."
+  },
+  {
+    "id": "c9bfae82-3f9f-4904-9f6c-6ee0d90813cb",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Exceptions to the octet rule: expanded octet, incomplete octet, and odd-electron molecules."
+  },
+  {
+    "id": "fe1145fa-18a7-44b5-976f-92ffcfeb89e0",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field theory octahedral splitting and coordination number of low-spin iron(III) complex."
+  },
+  {
+    "id": "d94705b7-f0c0-4184-ad25-5001d5f98c09",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Quantum numbers: counting orbitals with principal quantum number n=4 and magnetic quantum number m_l=0."
+  },
+  {
+    "id": "0ba801b4-7651-467d-8d2b-30fd0fa81c2a",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Calculation of change in internal energy during vaporization of water (Delta U = Delta H - Delta n_g RT)."
+  },
+  {
+    "id": "f2633456-299d-427f-9e21-237c7b26adf1",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Optical activity and chiral center identification in substituted organic molecules."
+  },
+  {
+    "id": "04146cef-8545-4f05-80cd-b2cf6c77ed8c",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Relative stability of Cu(II) vs Cu(I) in aqueous solution due to high hydration enthalpy."
+  },
+  {
+    "id": "61ba9fe8-22e2-41f5-a50e-e48c11455164",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Counting total unpaired electrons in low spin [Co(NH3)6]3+ (d6) and tetrahedral [NiCl4]2- (d8)."
+  },
+  {
+    "id": "318f626a-9b55-45d2-8dd8-dfd6c2bca54f",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Calculation of wavenumber from wavelength of electromagnetic radiation (nu_bar = 1/lambda)."
+  },
+  {
+    "id": "13cd6030-16d6-4ff8-a46b-1f357a35264a",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Structure, IUPAC name, and counting sigma and pi bonds in 2-formylhex-4-enoic acid."
+  },
+  {
+    "id": "87c69194-6d9a-4a75-85e7-0580a6557bfe",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Alkylation of sodium alkynide with isobutyl halide to form 5-methylhex-2-yne."
+  },
+  {
+    "id": "02ed94d8-5a9a-4f6a-ad8c-bcf2df91b591",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Qualitative inorganic analysis confirmatory test for cobalt using potassium nitrite (Fischer's salt)."
+  },
+  {
+    "id": "e9b429a3-2a3e-4f3a-a9ea-71d4f5ba8846",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Bohr radii comparison for hydrogen-like species (r proportional to n^2 / Z)."
+  },
+  {
+    "id": "27b3e4d1-50c0-4272-8eb0-bd052627e963",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Relationship between time of completion (t_100%) and half-life (t_1/2) for zero and first order reactions."
+  },
+  {
+    "id": "c47e2718-4efa-4eae-b645-7beffb3efe69",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Unpaired electrons and diamagnetic vs paramagnetic character in coordination complexes."
+  },
+  {
+    "id": "44a3ce64-4af2-4384-9694-14f4dd164368",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Nucleophilicity and reactivity order in SN2 substitution of methyl bromide in methanol."
+  },
+  {
+    "id": "62f826df-e44c-42bb-b43c-cd91ade46449",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Fat-soluble vitamins (A, D, E, K) stored in body vs water-soluble vitamins (B, C)."
+  },
+  {
+    "id": "483098c8-6c35-4c22-8175-322e1fe8900b",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.97,
+    "reason": "Identification of intermediates in oxidation and addition reactions of carbonyl compounds."
+  },
+  {
+    "id": "9a029e2d-1474-47b3-be76-8f17f20c83a4",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.96,
+    "reason": "Organic reaction mechanisms and isomer stability statements."
+  },
+  {
+    "id": "db322667-2ce5-4292-b70d-7b5c142e3c9a",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Conditions for linear combination of atomic orbitals (LCAO) to form molecular orbitals."
+  },
+  {
+    "id": "a4c1c34e-6697-4d05-a45e-e74d49e26e76",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.96,
+    "reason": "Evaluation of correctness of fundamental organic reaction transformations."
+  },
+  {
+    "id": "866ff385-8bbc-4f41-be37-e421632740c6",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Intramolecular Cannizzaro / benzil-benzilic acid type rearrangement of phenylglyoxal."
+  },
+  {
+    "id": "0515d798-edd9-4e28-be82-409a0380c90f",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.98,
+    "reason": "Electrophilic aromatic substitution of bromobenzene: sulfonation followed by bromination."
+  },
+  {
+    "id": "5022c795-b87b-41f3-b7a8-fc179b4e0e7c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Increasing order of electron-withdrawing power (-I / -M) of functional groups."
+  },
+  {
+    "id": "60449135-e549-4988-bba3-15863a225c30",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.97,
+    "reason": "Solubility of organic acidic compounds (phenols, carboxylic acids, active amides) in aqueous NaOH."
+  },
+  {
+    "id": "904e27ba-6940-4e18-9b82-d10e63d6f86f",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Pictorial representation and nodal planes of pi* antibonding molecular orbital."
+  },
+  {
+    "id": "82ea339f-2a39-4a3a-8fb2-e8b4ef054bb7",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Ozonolysis of alkenes followed by iodoform test / oxidation sequence."
+  },
+  {
+    "id": "411e8b6b-4715-47b7-aac4-f6d519c69cdf",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Oxidation of D-aldotetrose (D-erythrose) to meso-tartaric acid (optically inactive aldaric acid)."
+  },
+  {
+    "id": "634bf1dc-d6f3-42c5-969a-5b70334de275",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.98,
+    "reason": "Periodic valency trends and elements incapable of forming group valency compounds (N, O, F)."
+  },
+  {
+    "id": "132ff437-3acb-4f0a-8f91-581f21f6f0bc",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Postulates of Dalton's atomic theory and law of definite proportions."
+  },
+  {
+    "id": "45500d58-f70d-4c64-bc61-9ba970a1b9e9",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Historical postulates and incorrect statements regarding Dalton's atomic theory."
+  },
+  {
+    "id": "16552c5d-a10a-4626-8578-30a5072b333f",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Acidity of organic acids and ability to decompose sodium bicarbonate to liberate CO2."
+  },
+  {
+    "id": "cec096fc-275b-4fdf-8e8e-fe567bfb843c",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.98,
+    "reason": "Comparison of boiling points of alkane, ether, ketone, and alcohol of comparable molecular mass."
+  },
+  {
+    "id": "4dcd8ec8-2099-4d3e-89bb-95a00994e4b8",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Velocity of electron in first Bohr orbit of hydrogen atom from Rydberg constant and mass."
+  },
+  {
+    "id": "a19bfb1a-8659-40fb-9c6d-2310870e23cc",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Standard enthalpy of neutralization of strong acid and strong base (-57.1 kJ/mol)."
+  },
+  {
+    "id": "fe9f9b1b-9c5a-4884-9ec7-5e2e4cf0e47f",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Photoelectric effect: threshold frequency, intensity vs photocurrent, and photon frequency."
+  },
+  {
+    "id": "6cd6615b-e3ce-427b-8972-60732e05bd2d",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Determination of reaction rate law and overall order from initial rate table data."
+  },
+  {
+    "id": "c7e7e2f4-2ed9-45f4-92e6-805bd568a816",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.98,
+    "reason": "Kinetic graphs for first order bacterial growth and second order decay."
+  },
+  {
+    "id": "54c1e67c-9c14-4768-9e61-e3f74a929cf4",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Shapes and geometries of interhalogen compounds (ICl, ICl3, ClF5, IF7)."
+  },
+  {
+    "id": "53cfba46-ae68-4a4a-950a-617c0db7e17e",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Reaction sequence from acetophenone via alkyne to aldehyde and counting sp2 carbons."
+  },
+  {
+    "id": "f03e0517-035c-4a54-a77c-58ca7cec2980",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Cell EMF calculation and spontaneity of galvanic cell reactions from reduction potentials."
+  },
+  {
+    "id": "7ed97d10-3a09-4d30-bdc0-aad38b477a18",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Oxidation of ethanol to ethanoic acid followed by soda-lime decarboxylation to methane."
+  },
+  {
+    "id": "5586ae7a-5e92-43c8-a2e3-c81aa8ad9192",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Frequency of de-Broglie matter wave of electron in first Bohr orbit of hydrogen atom."
+  },
+  {
+    "id": "27bb1e36-038f-41b9-adb9-69e7f3b2a20b",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Reactivity of aliphatic aldehydes towards nucleophilic addition (formaldehyde HCHO is most reactive)."
+  },
+  {
+    "id": "32a42821-733c-436e-8c62-a202cc0ca961",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Irreversible adiabatic expansion of ideal gas against constant external pressure."
+  },
+  {
+    "id": "ce3b004b-18ad-4905-8fef-57d0b5a3be12",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Identifying species with sp2 hybridized central atoms in bonding."
+  },
+  {
+    "id": "363e4138-cf27-4cd9-9b09-6c84c8bb9020",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Reversible isothermal work done by ideal gas (w = -nRT ln(V2/V1))."
+  },
+  {
+    "id": "aba522db-d62c-4d8f-a76e-f1c0d69114c4",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.98,
+    "reason": "Physical properties and high temperature liquid range of gallium in thermometers."
+  },
+  {
+    "id": "8a9e8b1c-1444-4174-a765-d5bb1c8982ed",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.97,
+    "reason": "Multi-step aromatic functional group conversion to carboxylic acid / ester derivative."
+  },
+  {
+    "id": "d9932d82-fc80-443a-be55-af424a47d3e9",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Predicting metal oxidation by dichromate using standard reduction potentials."
+  },
+  {
+    "id": "de1cd50c-d5bd-4c96-abcc-dfe29a3fc65a",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Electronic configurations of main group elements (N, S, Br, Kr)."
+  },
+  {
+    "id": "f2a17b4b-ad9d-42c5-9a5e-04645b8f23b0",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Hybridization of central metal in coordination complexes (dsp2, sp3, d2sp3, sp3d2)."
+  },
+  {
+    "id": "32cc52b7-5f31-4111-a782-35954566e116",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Determining individual orders for reactants A (1st order) and B (0th order) and overall order."
+  },
+  {
+    "id": "127fb008-d866-4c6e-befd-ee678bf669d0",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Stereochemical outcomes of SN1 (racemization) and SN2 (inversion) substitution reactions."
+  },
+  {
+    "id": "11d148ec-7cc6-40fc-aa0e-d17022af0eff",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Azo coupling reaction of benzenediazonium chloride with activated aromatic compounds."
+  },
+  {
+    "id": "8079697f-78ca-4e7c-a70f-881cb0158254",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Heterolytic bond cleavage mechanism in ionic organic reactions."
+  },
+  {
+    "id": "aedf2255-0886-4989-9666-9cdd19d82920",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.98,
+    "reason": "Ligand properties and metal-ligand bonding differences of N(CH3)3 vs P(CH3)3."
+  },
+  {
+    "id": "890176e0-338d-4d0b-a939-fa7b1a439e10",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Nernst equation calculation for standard hydrogen electrode at non-standard pressure."
+  },
+  {
+    "id": "4e359a11-23d1-463e-8906-d429b78ffc0e",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Third ionisation enthalpies of 3d transition metals (Mn has high 3rd IE due to 3d5 stability)."
+  },
+  {
+    "id": "30279fe1-7e90-4197-8e2e-6a801dc31f02",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Homoleptic vs heteroleptic coordination complexes ([Ni(CN)4]2- is homoleptic)."
+  },
+  {
+    "id": "16e03459-7545-440b-a308-b7df7bbca384",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Chirality and number of optical isomers (enantiomers) for 2-chlorobutane."
+  },
+  {
+    "id": "2d23127e-bd74-4ef3-8f55-500ea111b0a7",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Deactivating substituent groups in electrophilic aromatic substitution (-COOCH3, -CN)."
+  },
+  {
+    "id": "7fba0e58-295a-43ec-aecf-fa6d0421cdb1",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Joule-Thomson free expansion of ideal gas under adiabatic conditions: q=0, w=0, Delta T=0."
+  },
+  {
+    "id": "3aa936e9-df40-48c7-9c84-d2ea53f85de5",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.98,
+    "reason": "Identification of amphoteric oxides among p-block oxides (PbO2, Al2O3, SnO2)."
+  },
+  {
+    "id": "a0724972-0215-44b2-9c7a-661725d96de3",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.98,
+    "reason": "Redox reactions of thiosulphate with iodine and bromine and oxidising strength of halogens."
+  },
+  {
+    "id": "a0b7c940-d40e-4412-8213-947895ec1878",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Preparation of potassium permanganate via oxidative fusion to manganate and electrolytic oxidation."
+  },
+  {
+    "id": "65a9455d-1d2b-4d15-baaf-1f5b586fee34",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Conversion of ethyl bromide via ethene, 1,2-dibromoethane, and succinonitrile to succinic acid."
+  },
+  {
+    "id": "28bc02a6-5842-481c-a858-b410410773ab",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Eudiometry: determining hydrocarbon formula CxHy from combustion volumes of CO2 and H2O."
+  },
+  {
+    "id": "aa824f14-5d01-4592-ac84-4acd78f802d5",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Meta-directing functional groups in electrophilic aromatic substitution (-NO2, -CHO, -SO3H, -COR)."
+  },
+  {
+    "id": "7802c5b6-3934-4c5e-b900-8147be92bd53",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Resonance effects in organic chemistry: -R (electron withdrawing resonance) group -COOH."
+  },
+  {
+    "id": "83476501-2580-40b5-9d4b-9a0f276b9de6",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Monochlorination of 2-methylbutane and counting total constitutional and stereoisomers (6 isomers)."
+  },
+  {
+    "id": "79751969-cbf2-45ed-bd29-a9c7332099ca",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Faraday's law of electrolysis: electric charge needed for oxidation of 1 mol H2O to O2 (2 F = 1.93 x 10^5 C)."
+  },
+  {
+    "id": "f39986f2-cd29-447c-859d-4af626cb6930",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Principles of sublimation and distillation under reduced pressure for separation/purification."
+  },
+  {
+    "id": "e0969db1-92ca-4db1-bc26-2787973e0746",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Origin of colour in transition metal salts: d-d transition in CuSO4.5H2O vs charge transfer in oxyanions."
+  },
+  {
+    "id": "dacd3eea-51ec-49ed-9c7b-369c7ee11154",
+    "ncert_chapter": "Amines",
+    "confidence": 0.99,
+    "reason": "Reactivity of primary and secondary amines with Hinsberg's reagent (benzenesulfonyl chloride)."
+  },
+  {
+    "id": "0f48c9a6-8536-4822-96bc-25834cdd199f",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Electronic configurations and counting even number of unpaired d-electrons in hexaaqua complexes."
+  },
+  {
+    "id": "d16a507b-17e8-4521-95dc-d7b05edd88d4",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Relative basic strength of conjugate bases (RO- > OH- > CH3COO- > Cl-)."
+  },
+  {
+    "id": "90591001-fd08-4a88-a060-d28aca4c2a71",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Stability of higher oxidation states down transition groups and standard reduction potential of copper."
+  },
+  {
+    "id": "21793d65-4276-44e7-bd4f-29e58c1c0616",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR shapes and geometries of SF4 (seesaw), BrF3 (T-shape), BrO3- (pyramidal), NH4+ (tetrahedral)."
+  },
+  {
+    "id": "cda3d9d6-aca6-4365-b63b-0e9f96ed03ac",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.98,
+    "reason": "Requirements and characteristics of primary standard substances in volumetric titrations."
+  },
+  {
+    "id": "c47fdcc5-1694-497a-8d3e-5cfbc4f48a68",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.98,
+    "reason": "Qualitative salt analysis: group reagents and precipitating conditions for cation analytical groups."
+  },
+  {
+    "id": "e9ef2ac0-56fe-48d5-a4ba-afd24105fffc",
+    "ncert_chapter": "The s-Block Elements",
+    "confidence": 0.99,
+    "reason": "Flame test emission wavelengths for alkali metals (Li, Na, Rb, Cs)."
+  },
+  {
+    "id": "a575a872-2956-4796-9bc8-eec8bad0a717",
+    "ncert_chapter": "Amines",
+    "confidence": 0.99,
+    "reason": "Comparison of basic strengths of heterocyclic amines (Piperidine > Pyridine > Pyrrole)."
+  },
+  {
+    "id": "b7d63d7a-1bf9-4367-a840-0164d739a8bd",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.97,
+    "reason": "Colours of metal sulfide precipitates in qualitative cation analysis (As2S3, As2S5, (NH4)2S)."
+  },
+  {
+    "id": "b2448e12-32f4-4ded-b144-5d1fea85c2db",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Lassaigne's qualitative test: characteristic colours of Prussian blue, nitroprusside violet, blood red thiocyanate."
+  },
+  {
+    "id": "9f3ae6e9-01de-4d52-9a46-c9b2498d8c7e",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Decreasing order of acidic strength of aliphatic carboxylic acids (HCOOH > CH3COOH > propanoic > butanoic)."
+  },
+  {
+    "id": "8b20d1ec-d48a-43ad-89e4-ff38ff0a9ddf",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Reducing agents that reduce orange dichromate K2Cr2O7 to green Cr3+ in acidic solution."
+  },
+  {
+    "id": "bd09f5a2-9f0d-4ceb-bf15-5a9eae85f501",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Hydration of propene: Markovnikov acid-catalyzed hydration vs anti-Markovnikov hydroboration-oxidation."
+  },
+  {
+    "id": "26d6f063-4fbc-4bc6-87e1-63a186f43b3a",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Resonance energy and relative stability of canonical resonating structures of enals."
+  },
+  {
+    "id": "ae902d67-cb1b-4b00-b74e-e32c5c201bf8",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.99,
+    "reason": "Functional group identification tests: Br2 water, ceric ammonium nitrate, neutral FeCl3, and 2,4-DNP."
+  },
+  {
+    "id": "7c284082-272f-4ece-901b-1d799915c151",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Classification of periodic oxides into basic, acidic, amphoteric, and neutral sets."
+  },
+  {
+    "id": "69f3559f-2c97-47bd-af5f-62b1a4bd7e61",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Spectral regions of hydrogen emission series (Lyman in UV, Balmer in visible, Paschen/Pfund in IR)."
+  },
+  {
+    "id": "dde39fbd-275d-49d5-9ec7-8142b5314bb0",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Markovnikov addition of HI to 1-methylcyclohexene yielding 1-iodo-1-methylcyclohexane."
+  },
+  {
+    "id": "23c5cdfe-3621-4e0c-bf2c-30563bc8b1c7",
+    "ncert_chapter": "Redox Reactions",
+    "confidence": 0.99,
+    "reason": "Balancing the acidic dichromate half-reaction Cr2O7 2- + 14 H+ + 6 e- -> 2 Cr3+ + 7 H2O."
+  },
+  {
+    "id": "72317cea-7165-4da8-8c40-35f64edfd90f",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Stability order of alkyl carbocations: 3° > 2° > 1° > methyl based on hyperconjugation and inductive effect."
+  },
+  {
+    "id": "40f3db02-33b7-4f1b-9157-46a9f32601ce",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Properties, geometries, and magnetic nature of manganate and permanganate ions."
+  },
+  {
+    "id": "0c1854ae-4206-404a-bf33-8023fa2873f2",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.98,
+    "reason": "Substances unsuitable as primary standards due to deliquescence/oxidation (NaOH, Na2Cr2O7, FeSO4)."
+  },
+  {
+    "id": "2bb5667e-3d24-4c34-95c2-470f02dcb270",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.97,
+    "reason": "Reaction sequence product structure and counting pi electrons and lone pairs."
+  },
+  {
+    "id": "f4ee8d83-20f5-4bba-97e8-0118da6654fc",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.96,
+    "reason": "Evaluation of correctness of organic reaction mechanisms and transformation pathways."
+  },
+  {
+    "id": "9ecfe9d9-6562-4d0c-99ab-dd654e47899d",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Faraday's law of electrolysis: 1 Faraday liberates 0.5 gram atom of Cu from Cu2+."
+  },
+  {
+    "id": "f195f732-b9c4-42bf-be6c-0ca4949a3b65",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Relation between standard Gibbs free energy and equilibrium constant (Delta G° = -RT ln K)."
+  },
+  {
+    "id": "6cf6e177-f532-4e32-8f31-58eebc30dfbc",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Molecular orbital theory: counting unpaired electrons in O2-, NO, and other diatomic species."
+  },
+  {
+    "id": "f589833b-e6c7-4203-a83e-b539d3779a1b",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field theory: low spin d6 configuration of [Co(H2O)6]3+ having zero unpaired d-electrons."
+  },
+  {
+    "id": "06ead4a6-7687-4c80-9326-b55ed7fdc5ad",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Decreasing field strength of ligands according to the spectrochemical series."
+  },
+  {
+    "id": "34e89347-e2c7-4558-81c6-195da5d928b1",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR shapes: identifying pyramidal geometry in sulfur oxyanions (SO3 2-)."
+  },
+  {
+    "id": "c7567d1b-fe97-413b-aada-146e8d2d73a7",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Interconversion between chromate (K2CrO4) and dichromate (K2Cr2O7) with pH changes."
+  },
+  {
+    "id": "c1f4a0c3-89ab-4ccd-bbba-16ecb3a72dd9",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "First law of thermodynamics (Delta U = q + w) for cyclic state changes X -> Y -> X."
+  },
+  {
+    "id": "3cc91414-8c5d-4371-8b61-b04576a49493",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Classification of electrodes: Calomel electrode as a metal-insoluble salt-anion electrode."
+  },
+  {
+    "id": "77b1bf7f-5324-43da-80bd-de8f21387ad0",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.97,
+    "reason": "Chemical reactions of alkenes, alkynes, and aromatic hydrocarbons."
+  },
+  {
+    "id": "0eea48e7-a907-4af6-8942-5b6d5ac9c1ee",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Counting sigma and pi bonds in 2-oxohex-4-ynoic acid."
+  },
+  {
+    "id": "219567a7-f054-4157-a348-efaa30646c87",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Isostructural species with seesaw geometry (SF4, IF4+, XeO2F2)."
+  },
+  {
+    "id": "606cc9d6-ca80-46de-a6db-6602f2b0ded3",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Substances capable of reducing acidified potassium dichromate solution (Fe2+, Sn2+, I-, S2-)."
+  },
+  {
+    "id": "1e363e07-8280-4adc-9f72-8800a3d7d637",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Ionic equilibrium: common ion effect of strong acid HCl on polyprotic weak acid H2A dissociation."
+  },
+  {
+    "id": "b0952417-e2c2-4ac4-8e12-e48f8b180085",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR shapes: identifying seesaw geometry isostructural with SF4 (IF4+, XeO2F2)."
+  },
+  {
+    "id": "5c8f6166-a6de-495d-abf3-a9c42e157d81",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Chromyl chloride test reactions and counting terminal oxygen atoms in dichromate ion."
+  },
+  {
+    "id": "9784caee-9782-4eb8-bd41-0e0893e5a220",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Resonance stabilization of diaryl carbocation (+R of -OCH3) and carbanion (-R of -NO2)."
+  },
+  {
+    "id": "07c92e3e-d610-44f0-8b75-2e7544818e53",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Einstein's photoelectric equation calculation of incident wavelength from work function and KE."
+  },
+  {
+    "id": "5e5e1035-8596-4b4a-a64a-755744e24d0c",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Integrated rate law and partial pressure calculation for gas-phase decomposition reaction."
+  },
+  {
+    "id": "8182d528-cbfc-47ee-92e8-fa480835fb7e",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.97,
+    "reason": "Colour observation of reaction product in qualitative inorganic/organic identification."
+  },
+  {
+    "id": "d26d84fc-cc8d-45c3-b984-58a6dc647cca",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Identification of element Bromine (A = 80, Group 17, liquid at room temperature) from protons and neutrons."
+  },
+  {
+    "id": "896525cb-f4bc-4912-b9f1-b1b3ff097065",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Order of electron-withdrawing capacity of substituents (-NO2 > -CN > -COOH > -I)."
+  },
+  {
+    "id": "58f6b3c6-9549-48be-a064-4e79fc95dfc8",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Lewis dot structure and sigma bonds/lone pairs in perxenate ion XeO6 4-."
+  },
+  {
+    "id": "83970018-dc6d-4745-bc2a-4f9bc101c307",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Highest oxidation states of Mn (MnF4 vs Mn2O7) and unpaired electrons in transition metal cations."
+  },
+  {
+    "id": "d3e392cf-9e5a-406b-a51a-5cd5cb142d3a",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Lanthanoid electronic configurations: pairing elements with equal 4f electron count (Eu and Gd, Yb and Hf)."
+  },
+  {
+    "id": "12795c61-7d8c-4c48-98b3-76e2bd4d88eb",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Relative basicity of nitrogenous organic bases and identifying the strongest conjugate acid."
+  },
+  {
+    "id": "7a77103f-ceef-4231-941c-d6de3608a8d2",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Carbon-oxygen bond length comparison based on aromatic resonance and partial single-bond character."
+  },
+  {
+    "id": "6b57e797-a25d-481a-b6da-616c8abf300a",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Bohr orbit radii equivalence (r_n = a_0 * n^2 / Z) for H (n=1) and Be3+ (n=2)."
+  },
+  {
+    "id": "e3852b1f-2e35-4149-87ea-f868d4e3944b",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Unpaired electrons and absorption frequency order in nickel(II) coordination complexes."
+  },
+  {
+    "id": "2e95df87-e9b4-4d59-84b5-7755ecfb308b",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "(n+l) Aufbau rule for ordering atomic orbitals by energy in multi-electron atoms."
+  },
+  {
+    "id": "16473ab8-a91d-4475-b6c5-edd1b179e516",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "pH calculation for mixtures of strong acids and strong bases."
+  },
+  {
+    "id": "ba17c497-91f8-4771-a64f-c3a012eec961",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Physical and chemical characteristics of transition metal interstitial compounds."
+  },
+  {
+    "id": "2f74b792-4ce3-4a4f-9304-416c59eb09b1",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Principles governing orbital energies, size, and calculation of radial nodes (n - l - 1)."
+  },
+  {
+    "id": "e22f3630-ab4f-438a-b2bb-a958138fce82",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Purification techniques: matching distillation methods with liquid mixture characteristics."
+  },
+  {
+    "id": "e8fb41e5-bbc7-4192-8ae9-1d9f688dc0a6",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Nucleophilic addition-elimination of semicarbazide with ethanal and hydrolysis of hemiacetals."
+  },
+  {
+    "id": "7f1fd5f5-e87a-40b4-a258-73e43205a333",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.98,
+    "reason": "VSEPR geometries of ICl4-, ClO3-, and IBr2- and reaction of aluminium with NaOH."
+  },
+  {
+    "id": "4b0402b2-a1ac-458e-a0c1-e4d6c35de7d6",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.98,
+    "reason": "Order of molar heat capacities for monoatomic gas, liquid, and solid metals."
+  },
+  {
+    "id": "d2fca2ae-a1c6-4666-99f2-bebfaedf0adb",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Hydrolysis of propionitrile followed by Hell-Volhard-Zelinsky (HVZ) alpha-halogenation."
+  },
+  {
+    "id": "cc8de4b3-560c-435b-b4f8-99b4c70c65e9",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Nernst equation application to Zn-Ag voltaic cell to determine silver ion concentration."
+  },
+  {
+    "id": "1a1d6b48-c7c5-45ab-af3a-3361ae40f620",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Rydberg formula for shortest Lyman line of H vs longest Balmer line of He+."
+  },
+  {
+    "id": "45d5c2d1-49ff-453a-932e-82182c667559",
+    "ncert_chapter": "Solutions",
+    "confidence": 0.99,
+    "reason": "Raoult's law: relative lowering of vapour pressure by non-volatile solute."
+  },
+  {
+    "id": "069ce44b-b80b-47c6-8237-fdb5889967bb",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.98,
+    "reason": "Comparison of Lewis dot structures and isoelectronic character of molecular pairs."
+  },
+  {
+    "id": "ca07f467-9f55-4a3c-ac1f-b7d69cd63fee",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Comparison of work magnitudes in single-stage vs multi-stage isothermal expansion and compression."
+  },
+  {
+    "id": "6b279691-2d6f-40a2-9350-19dcd3a0895a",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field stabilization energy (CFSE) for tetrahedral d-electron configurations."
+  },
+  {
+    "id": "f2050896-224f-4cc0-a1a3-b78fd572bce9",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Boiling point comparison of alkane, secondary amine, primary amine, and alcohol."
+  },
+  {
+    "id": "0b52d4d1-b54b-4627-8700-cb33873da04b",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Brown ring test for nitrate/nitrite yielding NO gas and brown nitrosoferrous complex [Fe(H2O)5(NO)]SO4."
+  },
+  {
+    "id": "0d8e0c87-dd04-4cb3-a960-afca78f19bb9",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Heat capacity relations (Cp > Cv) and first law of thermodynamics at constant volume."
+  },
+  {
+    "id": "3952fa20-d205-4090-bf7a-248584901726",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Octet rule exceptions and counting lone pairs in sulfur/halogen/noble gas covalent molecules."
+  },
+  {
+    "id": "1c3c9fb0-2ff1-4046-87ea-c0fc17b62d9c",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Comparison of first and second ionisation enthalpies of Chromium and Manganese."
+  },
+  {
+    "id": "72fb6877-7fd9-43a1-a8a4-8a9c7ec21396",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Autoionization of BrF3 and VSEPR shapes of BrF2+ (bent) and BrF4- (square planar)."
+  },
+  {
+    "id": "9a8d5d60-2363-4abe-a2da-82f6a7043165",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Free energy relation and reduction potential of Fe3+/Fe2+ couple from Fe3+/Fe and Fe2+/Fe."
+  },
+  {
+    "id": "1012ad14-a2ee-403f-8fa3-a1aa921229e8",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Coloured ions of 3d series and diamagnetic electron configurations of lanthanoid/actinoid ions."
+  },
+  {
+    "id": "13122719-558c-499d-a754-c02404090d45",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Principles of fractional distillation and composition of ascending vapour in fractionating column."
+  },
+  {
+    "id": "69f8c058-8953-4d3a-82ca-1d70b8a7615e",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Counting paramagnetic metal complexes using valence bond / crystal field theory."
+  },
+  {
+    "id": "4893c9d5-34e2-4fd2-9972-b8bb15648a64",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Selective precipitation of metal sulfides, solubility product (Ksp), and pH calculation."
+  },
+  {
+    "id": "39dc9edd-8639-4576-85e9-b80f04a8c6e6",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Huckel's rule: counting aromatic compounds and ions."
+  },
+  {
+    "id": "e077867b-a5e5-4be1-a039-e83cd8be0244",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Photochemical chlorination of n-butane and constitutional/stereoisomers of dichlorobutanes."
+  },
+  {
+    "id": "5940f757-cb18-44c5-9c59-4f95a490917a",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Photon energy calculation (E = hc/lambda) and energy ratio for two wavelengths."
+  },
+  {
+    "id": "663b4f0c-df94-4de9-bcdf-bf20aca29ab9",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Molecular orbital theory: bond lengths and unpaired electron trends in O2+, O2, O2-, O2(2-)."
+  },
+  {
+    "id": "cb503ca2-c508-4a79-8340-27b3fb418998",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Boiling points and melting points of haloalkanes and isomeric dichlorobenzenes."
+  },
+  {
+    "id": "a30aad11-7fbf-41d6-b6ad-2b1b24148f33",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Enthalpy of reaction calculation from standard enthalpies of formation."
+  },
+  {
+    "id": "4716d5a6-3c4d-45a4-bd18-536d0334c9e6",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Potential energy reaction coordinate profiles for multi-step elementary reactions."
+  },
+  {
+    "id": "94af7bfd-ea6d-403c-a4ce-1387424fadcd",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.98,
+    "reason": "VSEPR structures, geometry, and fluorinating properties of halogen/noble gas compounds."
+  },
+  {
+    "id": "0cc4eaf5-cff6-46fe-b599-3a7df0f2c22f",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Comparison of O-N-O bond angles in NO2+, NO2, NO3-, and NO2- using hybridization and VSEPR."
+  },
+  {
+    "id": "bc008078-a98e-4479-9c3d-a737f887d120",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "First law of thermodynamics applied to state transformation cycles."
+  },
+  {
+    "id": "b1b49266-5467-410b-a4cc-fd04c59eacfa",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.98,
+    "reason": "Covalent radii, internuclear bond distance, and total length of diatomic molecule AB."
+  },
+  {
+    "id": "ea3a77b7-8f33-44bc-b220-00420e140566",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Carbylamine test and nucleophilic substitution methods to obtain benzyl isocyanide."
+  },
+  {
+    "id": "47d94d3d-d34c-4f1d-9700-420a89ee7e54",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Acid-catalyzed dehydration of alcohols and diols to form alkenes and conjugated dienes."
+  },
+  {
+    "id": "6e725daf-290e-4919-a161-39da264f0763",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Synthetic sequence using protection, bromination, and diazotization to synthesize 3,4,5-tribromoaniline."
+  },
+  {
+    "id": "441b4f90-33d9-4514-ab32-ebd506956b39",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configurations of 4f lanthanoid elements and pairing by 4f electron count."
+  },
+  {
+    "id": "afa6e683-6ed1-478d-8501-063297a06f69",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Irreversible multi-step isothermal compression work of ideal gas."
+  },
+  {
+    "id": "18208269-af8b-4a80-860e-018b06a257e4",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Alkylation of buta-1,3-diyne and collinearity of sp hybridized carbon atoms."
+  },
+  {
+    "id": "df86242f-903e-4e03-95b4-6905741f225b",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.97,
+    "reason": "Matching major organic reaction products with corresponding chemical structures."
+  },
+  {
+    "id": "fea698a8-4e18-48f8-a01e-909e62c29c45",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.97,
+    "reason": "Friedel-Crafts acylation, Gammaxane formation, and Tollens test for aromatic products."
+  },
+  {
+    "id": "aac0a00b-ecac-4cc8-9dd1-1812ae4cde46",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Ozonolysis and oxidation reactions and counting total carbonyl (>C=O) groups in products."
+  },
+  {
+    "id": "f4c60d33-10bf-4e56-bc06-4c05ddce1c87",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Reductive ozonolysis of cyclic/acyclic alkenes followed by intramolecular aldol condensation."
+  },
+  {
+    "id": "b5ecfe4d-7016-4ed6-a428-584dd2fc52a8",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.98,
+    "reason": "Applications and structures of halogen and noble gas compounds (chlorine dioxide, fluorine compounds)."
+  },
+  {
+    "id": "bc82ba1a-ea59-4c2b-8ce4-e12435fc61d7",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Isomerism in square planar complexes with ambidentate and unsymmetrical bidentate ligands."
+  },
+  {
+    "id": "f93c1ad4-6441-4ce9-9aa8-be241f7f5484",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Quantitative nitrogen estimation by Kjeldahl's method and neutralization stoichiometry."
+  },
+  {
+    "id": "c616889f-9cf1-4172-b72f-c975b9718835",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Hybridization and Lewis acid/base character of group 13 vs group 15 trifluorides (BF3 vs NF3)."
+  },
+  {
+    "id": "3cd3d729-78b8-4bd2-be15-4dbe860ab2c4",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Comparison of covalent bond lengths based on bond multiplicity and atomic radii."
+  },
+  {
+    "id": "bf59718d-0cda-474f-a17c-c21dc970469d",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Energy of stationary states in hydrogen-like ions (E_n = -2.18 x 10^-18 * Z^2 / n^2 J)."
+  },
+  {
+    "id": "e1aa3498-37ed-44d5-bd17-beb2e163aa5a",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Ionization isomerism and precipitation reactions of complex salts with AgNO3 and BaCl2."
+  },
+  {
+    "id": "4db2de34-77cd-47cb-8c4c-4f5ac71d4f82",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Reactions of heptane: catalytic isomerization, aromatization to toluene, and cyclization."
+  },
+  {
+    "id": "2b4d0293-3d76-4f4c-a0e3-f1338622856b",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Pictorial representation and nodal planes of pi* antibonding molecular orbital."
+  },
+  {
+    "id": "8736c17c-0380-489c-985e-e2ac089ee48c",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Valence electrons of transition metal with lowest enthalpy of atomisation among Cr, Fe, Co, Ni."
+  },
+  {
+    "id": "93fb4ca7-54a7-4ca3-b0bb-e1a70016e12d",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Keto-enol tautomerism and aromatic stabilization of enol in cyclohexane-1,3,5-trione."
+  },
+  {
+    "id": "89b57370-b585-4141-bd36-cad32a78c630",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Classification of organic compounds: cyclohexene is an alicyclic hydrocarbon."
+  },
+  {
+    "id": "8485ea4b-94df-403d-9560-fc55f10527a9",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Directing effects in electrophilic aromatic substitution: counting meta-directing groups."
+  },
+  {
+    "id": "4e4cd3b2-9a4b-42ba-8fad-7880e8d1a128",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.98,
+    "reason": "Anti-Markovnikov addition of HBr in presence of peroxide to alkene and stereoisomer counting."
+  },
+  {
+    "id": "7891086c-977c-489f-9e2c-147980c9ec8f",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Periodic trends in first ionisation enthalpy: alkali metals have the lowest values (K, Z=19)."
+  },
+  {
+    "id": "86fdfcb7-f8e8-4ed7-a4b2-69d65c5b1b50",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Quantitative elemental analysis of C, H, and O in organic compound via combustion."
+  },
+  {
+    "id": "d2422d7f-e1e5-4bff-aa57-f96cdcf33b64",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Autoionization of BrF3: VSEPR shapes of cation BrF2+ (bent) and anion BrF4- (square planar)."
+  },
+  {
+    "id": "195ef3c1-d3ae-400c-8afb-791c3b0bdd20",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.97,
+    "reason": "Matching characteristic organic reactions and transformations."
+  },
+  {
+    "id": "affd8585-d4aa-4bce-8138-03606a80fcce",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Identification of aromatic systems using Huckel's rule."
+  },
+  {
+    "id": "896c9178-67ee-43e4-8308-7170be361b7c",
+    "ncert_chapter": "Amines",
+    "confidence": 0.99,
+    "reason": "Ammonolysis of 1,4-dichlorobutane followed by NaOH basification to 1,4-diaminobutane (putrescine)."
+  },
+  {
+    "id": "3f600572-914d-4579-a6c0-2d56ea9c7b41",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Identification and counting of chiral (asymmetric) carbon centers in organic structures."
+  },
+  {
+    "id": "711a3730-3100-4192-b3a7-8e06517bd5d1",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Molarity calculation and solution volume preparation from mass of solute NaOH."
+  },
+  {
+    "id": "f0210ae5-9326-473d-abdf-72c0ec46ef71",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Determination of dipole moment and non-polar molecular symmetry (H2, CO2, CH4, BF3)."
+  },
+  {
+    "id": "c0a188d6-7a53-46d9-9371-a58eb607b78a",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configurations of d-block elements with completely filled d10 subshell (Cu, Zn, Cd, Ag)."
+  },
+  {
+    "id": "c8dfcc7a-fcac-4a4d-a7a9-86c53edc8977",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.98,
+    "reason": "Major substitution and elimination products in haloalkane reactions."
+  },
+  {
+    "id": "921fb102-ea58-48f3-b4df-af127de099d2",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Nernst equation calculation for hydrogen electrode potential at pH = 3 (E = -0.059 * pH V)."
+  },
+  {
+    "id": "218b1bd8-f03f-46d7-8938-5b2f0b0cf76f",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Thermal decomposition of potassium permanganate KMnO4 into K2MnO4, MnO2, and O2."
+  },
+  {
+    "id": "41c3ba6a-ae56-4b23-8b8c-5b5cf9a08a8f",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Oxidation of iodide ion by permanganate in alkaline/neutral medium to iodate IO3-."
+  },
+  {
+    "id": "f3c68e31-dfaf-4775-b46d-9f5a5f52c0d8",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Hydrolysis of proteins yields alpha-amino acids."
+  },
+  {
+    "id": "e272035e-9237-496b-bd95-093129cac7d2",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Lassaigne's test: blood red coloration with FeCl3 indicates simultaneous presence of N and S."
+  },
+  {
+    "id": "b61aa09a-e96f-496c-bc3a-d26d7963d0fd",
+    "ncert_chapter": "General Principles and Processes of Isolation of Elements",
+    "confidence": 0.98,
+    "reason": "Ores and minerals chemical formulas: fluorspar is CaF2, not BF3."
+  },
+  {
+    "id": "dfa23e09-c32c-4ef3-a8fa-dc7f8b5f44de",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Bridging carbonyl ligands in polynuclear metal carbonyls ([Co2(CO)8] in solid state)."
+  },
+  {
+    "id": "404d5835-1ffe-4564-8790-e95edea37acd",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.99,
+    "reason": "Dimethylglyoxime (DMG) test for nickel(II) producing red bis(dimethylglyoximato)nickel(II)."
+  },
+  {
+    "id": "717938f2-b753-4e9d-8c69-5c04fff36f12",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Counting total antibonding molecular orbitals formed by 2s and 2p AOs (sigma*2s, sigma*2pz, pi*2px, pi*2py = 4)."
+  },
+  {
+    "id": "d267246b-4d51-4225-8475-96d90df8b97a",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Nessler's reagent test for ammonia gas producing brown precipitate of iodide of Millon's base."
+  },
+  {
+    "id": "0dcb5240-d842-47ba-9312-6f08e0005006",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Unpaired electrons and absorption frequency ranking in octahedral/tetrahedral nickel complexes."
+  },
+  {
+    "id": "fab94075-87ff-4dcb-b01b-fafb7e068602",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Acid-base titration stoichiometry between dibasic oxalic acid and NaOH."
+  },
+  {
+    "id": "f610d027-2c82-45c9-89d8-e12fdace80d5",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Faraday's law calculation of total charge passed from mass of gold deposited from [AuCl4]-."
+  },
+  {
+    "id": "274dd6bf-65eb-4b64-b2f0-85a20c8b0892",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR molecular geometries: BrF5 (sq pyramidal), H2O (bent), ClF3 (T-shape), SF4 (seesaw)."
+  },
+  {
+    "id": "13cbcb8e-f326-4a26-90bb-99864fb84a15",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Etard reaction (CrO2Cl2) and CrO3/acetic anhydride oxidation of toluene to benzaldehyde."
+  },
+  {
+    "id": "0fdcf745-17e3-4642-9a80-b85bb2d5f389",
+    "ncert_chapter": "Redox Reactions",
+    "confidence": 0.99,
+    "reason": "Stoichiometric coefficient balancing of redox reaction of permanganate with iodide in alkaline medium."
+  },
+  {
+    "id": "29af6726-895c-4bff-80ae-f341ba4b2a22",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Retardation factor (Rf = 3.5/5.0 = 0.7) calculation in thin layer chromatography."
+  },
+  {
+    "id": "5dec507a-883d-4db0-830f-181d58e40db7",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Aromatic stability of 2-pi electron cyclopropenyl cation vs antiaromatic/nonaromatic species."
+  },
+  {
+    "id": "6b4c4678-1b99-45ed-b4d8-55d94293791d",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Solubility product Ksp calculation of precipitation pH for Mg(OH)2."
+  },
+  {
+    "id": "953d3908-27bf-4569-aeb6-440b460f0d9a",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Total number of molecular orbitals formed by linear combination of eight 2s and 2p atomic orbitals (8 MOs)."
+  },
+  {
+    "id": "270bfbc5-cf29-4b59-954c-fedc6e474c26",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Standard reduction potential calculation for Fe3+/Fe2+ couple using Delta G° values."
+  },
+  {
+    "id": "e54ae2a5-0f62-4214-a745-95792027ccc1",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Calculation of number of silver atoms from thickness, area, density, and molar mass."
+  },
+  {
+    "id": "fe8fd68a-1d8d-4a13-b942-7ba6f43f8e23",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.99,
+    "reason": "Structure of ethanal semicarbazone and counting 3 nitrogen atoms in the semicarbazone derivative."
+  },
+  {
+    "id": "6d411ea4-0a95-43d8-8617-1cd5a7e32a3a",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Oxidising power order based directly on standard reduction potentials (BrO4- > IO4- > ClO4-)."
+  },
+  {
+    "id": "6a11d3a2-bbb3-48f9-8eff-4d062965300a",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Reactions of chromyl chloride with NaOH to give sodium chromate and formation of blue CrO5 with H2O2."
+  },
+  {
+    "id": "a0cb7db9-bb14-4ef3-8386-31d41cc37bb4",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Alkaline oxidative fusion of MnO2 to green manganate (MnO4 2-) and electrolytic oxidation to purple permanganate (MnO4 -)."
+  },
+  {
+    "id": "5f65267c-f487-4305-9933-a2af42564139",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR molecular geometry of BrF5 (square pyramidal, sp3d2, 5 bond pairs and 1 lone pair)."
+  },
+  {
+    "id": "d09a9fe3-6e33-44ae-a637-1473d165d47e",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Geometrical isomerism (cis-trans) counting across multiple carbon-carbon double bonds."
+  },
+  {
+    "id": "d9e83a58-a0d5-4bfe-8ba1-ce26f6ce4b8b",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.98,
+    "reason": "Chlorination of 2-chlorobutane to dichlorobutane isomers and counting optically active enantiomeric pairs."
+  },
+  {
+    "id": "e170710b-133f-468b-9531-9cabd6ee45de",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Spectral emission lines formula N = (n2 - n1)(n2 - n1 + 1)/2 for transition from n=6 to n=2 (10 lines)."
+  },
+  {
+    "id": "441fedce-4a40-4fd3-95a5-0fd37f877a26",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Dehydrohalogenation of 1-bromopropane to propene followed by Markovnikov HBr addition and hydrolysis to propan-2-ol."
+  },
+  {
+    "id": "642b98fe-4288-411b-b083-81c919e8ba78",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Elimination (alcoholic NaOH gives ethene) vs substitution (aqueous NaOH gives ethanol) of ethyl bromide."
+  },
+  {
+    "id": "75c63877-d03c-455d-aa25-681aeb51ee5b",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Reversible isothermal work done for expansion of ideal gas (w = -nRT ln(V2/V1))."
+  },
+  {
+    "id": "3ccf1ce4-6f79-435f-81c9-af45a16bd082",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Monochlorination of 2-methylbutane forming 4 constitutional isomers and 6 total stereoisomers."
+  },
+  {
+    "id": "83bdf348-4d8f-4f48-94f5-4f952fb3e7b6",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Magnetic properties: diamagnetic [Ni(CO)4] (sp3, 3d10) vs paramagnetic [NiCl4]2- (sp3, 3d8)."
+  },
+  {
+    "id": "aa8e8562-ce04-4709-9a46-fe1c4d4c75fe",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Physical state and acid-base nature of transition metal oxides (Mn2O7, V2O4, CrO, V2O5)."
+  },
+  {
+    "id": "9c745b79-7fa8-4b0a-b805-b4afc48a2625",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.98,
+    "reason": "Electrical conductivity values classifying substances as metallic conductors vs insulators/semiconductors."
+  },
+  {
+    "id": "ab36c174-5333-40c3-a5f6-e95f9a3397a8",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "First order kinetics: calculating time required for 90% completion from half-life."
+  },
+  {
+    "id": "97bc3724-eb43-4463-83df-d11333a86e4b",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Fajan's rules: pseudo-noble gas configuration of Ag+ conferring highest covalent (least ionic) character to AgCl."
+  },
+  {
+    "id": "d225eb65-d06e-4070-b888-9907f7f6ba8c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Extraction and purification of essential oils by steam distillation."
+  },
+  {
+    "id": "236422f6-4a89-4042-abb4-6f7fff7b9a32",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Fundamental definitions of mass, volume, absolute temperature scales, precision and accuracy."
+  },
+  {
+    "id": "c1a2a486-2a28-48e8-998f-ac69f92ec900",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Nernst equation calculation of hydrogen gas pressure required for zero EMF in pure water at pH 7."
+  },
+  {
+    "id": "97369993-4480-4b7f-a44f-c38fba3a6e17",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Common ion effect: addition of NH4Cl before NH4OH in Group III cation analysis to suppress OH- concentration."
+  },
+  {
+    "id": "9b916687-029d-4158-ab69-703bc57b8520",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Intermolecular hydrogen bonding giving highest boiling point to butan-1-ol compared to butane, ether, and butanal."
+  },
+  {
+    "id": "590fa015-520f-4758-b328-eb8c32484bf5",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Structure of vanillin (4-hydroxy-3-methoxybenzaldehyde) and counting oxygen atoms and pi electrons."
+  },
+  {
+    "id": "845646ef-c5c1-45fa-976b-1f45986c595f",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Isothermal irreversible compression work against constant external pressure (w = -P_ext * Delta V)."
+  },
+  {
+    "id": "8f1f2869-ef1f-4697-b7d8-2f076aaec873",
+    "ncert_chapter": "Amines",
+    "confidence": 0.98,
+    "reason": "Stoichiometry of ethanamine reaction with nitrous acid to liberate N2 and HCl neutralised by NaOH."
+  },
+  {
+    "id": "d0b6482a-83cd-4a16-b34f-0caf65e7a95d",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field electronic configurations of octahedral aqua complexes and counting even t2g electrons."
+  },
+  {
+    "id": "e13ddd7f-1939-45ee-9110-fc750205f4d4",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Calculation of number of optical isomers (2^n) for chiral compound with 5 asymmetric carbons (32 isomers)."
+  },
+  {
+    "id": "faf5b5a1-9fde-4cd6-88d9-fd3291007086",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "Magnetic properties and VSEPR geometries of SO2Cl2 (tetrahedral), NO (paramagnetic), NO2-, I3- (linear)."
+  },
+  {
+    "id": "e9398ddb-0df3-43ac-ada3-4a3cf458e604",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field d-orbital electron configurations (e and t2 levels) in tetrahedral coordination complexes."
+  },
+  {
+    "id": "53c7f416-9e6f-4acd-81bd-8816d70ba4d3",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Rydberg formula for transition between quantum levels n1=1 and n2=3 in Li2+ ion."
+  },
+  {
+    "id": "0ee80549-eac8-4ce1-8e56-7882961fa993",
+    "ncert_chapter": "Solutions",
+    "confidence": 0.99,
+    "reason": "Osmosis across semi-permeable membrane: solvent water flows toward hypertonic solution with higher osmotic pressure."
+  },
+  {
+    "id": "b55e7ab8-2352-47f1-b657-22099016a260",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Multi-step organic reaction sequence involving ketone oxidation/reduction."
+  },
+  {
+    "id": "ee72fc46-2818-42ed-a36c-e41db772cb0c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Resonance and comparison of carbon-oxygen bond lengths in methyl acetate ester."
+  },
+  {
+    "id": "676b5294-f1ee-42c0-9fe4-638bce0dbe95",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Aldol condensation / carbonyl condensation reaction pathway."
+  },
+  {
+    "id": "cad97a86-802a-47d6-bdd1-e30c3f7bd236",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Carbocation rearrangements (hydride/alkyl shifts) vs direct substitution in organic reactions."
+  },
+  {
+    "id": "f98d4100-8c0d-4a7b-8a90-2483c11f9160",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Spectrochemical series: matching octahedral crystal field splitting parameter Delta_o for Cr(III) complexes."
+  },
+  {
+    "id": "524b2d44-93c8-4e33-8916-e65d4d5dad45",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Acid-base conjugate pairs and determining the strongest conjugate acid from relative base strengths."
+  },
+  {
+    "id": "51d65cf3-e595-4197-bfd3-76e256a35f46",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Carbocation stabilization by +R of -OCH3 and carbanion stabilization by -R of -NO2."
+  },
+  {
+    "id": "b0ca2419-3b4e-423b-9738-8878062d339c",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Structure of proteins, alpha-amino acid hydrolysis, and denaturation of globular/fibrous proteins."
+  },
+  {
+    "id": "5ec8503d-5d8b-44f5-93fa-4eeaab71ef99",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.98,
+    "reason": "Steam volatility of o-nitrophenol (intramolecular H-bonding) vs p-nitrophenol (intermolecular H-bonding)."
+  },
+  {
+    "id": "fddbc296-68d9-47a9-b4a9-7965b8b3f4a8",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Van der Waals forces and boiling points of haloalkanes and symmetry in melting points of p-dichlorobenzene."
+  },
+  {
+    "id": "79bdc98f-55b3-4976-9a09-5b5f3ca77ad6",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "Periodic table identification of Bromine (Group 17, A=80, liquid state) from atomic numbers and neutrons."
+  },
+  {
+    "id": "ffcfc3f9-df11-4ae0-af66-9f667b90e404",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Chromatography principles: partition chromatography and paper chromatography stationary phases."
+  },
+  {
+    "id": "6aa42522-9f29-4b0b-beec-102e99d7210e",
+    "ncert_chapter": "Chemical Bonding and Molecular Structure",
+    "confidence": 0.99,
+    "reason": "VSEPR tetrahedral geometry identification and incomplete octet molecules."
+  },
+  {
+    "id": "2acf2a78-99c0-4d35-9c8c-ce64392202eb",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Thermodynamic work done represented by the area under the P-V curve."
+  },
+  {
+    "id": "1db7227b-e1bd-442c-902b-a3711cc30593",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Disproportionation of manganate ion MnO4 2- in acidic medium to permanganate and MnO2."
+  },
+  {
+    "id": "8a61433d-dcef-4293-87fa-b519583b1be7",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configurations of 4d transition elements Niobium (4d4 5s1) and Ruthenium (4d7 5s1)."
+  },
+  {
+    "id": "be4ad019-4487-4341-8b1f-9b8a1a337548",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.99,
+    "reason": "Redox titration principles: heating in oxalic acid vs KMnO4 (autocatalysis by Mn2+) vs FAS vs KMnO4."
+  },
+  {
+    "id": "4c0e5e46-5f07-4f9b-ae48-59eb48fd2042",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Comparison of Bohr model circular orbits with 3D probability distributions of quantum mechanical model."
+  },
+  {
+    "id": "446c0689-fa42-4ba9-936b-659565479d9c",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Le Chatelier's principle: effect of increasing pressure on ice-water equilibrium at constant temperature."
+  },
+  {
+    "id": "d1b0b22e-82ff-4a6c-a4b0-a776aa450e3a",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Photon energy calculation (E = hc/lambda) and ratio of energies for two wavelengths."
+  },
+  {
+    "id": "fca3ab32-e98b-4a9b-8a28-9666931499fd",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Shapes and spin-only magnetic moments of tetrahedral and square planar nickel and manganese complexes."
+  },
+  {
+    "id": "6f1357ad-bbeb-44b1-9c21-5c90e6a31f3e",
+    "ncert_chapter": "Chemical Kinetics",
+    "confidence": 0.99,
+    "reason": "Gas phase reaction kinetics and total pressure analysis to calculate product partial pressure."
+  },
+  {
+    "id": "6a57ebbc-16d5-4bcd-b449-53316c3397b9",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.98,
+    "reason": "Conductometric titration curves for mixture of strong acid (HCl) and weak acid (CH3COOH) with strong base."
+  },
+  {
+    "id": "0243145c-b019-457c-81b9-fd26009f130b",
+    "ncert_chapter": "Alcohols, Phenols and Ethers",
+    "confidence": 0.99,
+    "reason": "Acidity of substituted phenols based on electron donating and withdrawing substituents."
+  },
+  {
+    "id": "c17b8df3-0b26-4985-a764-02a4e941aee6",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Thermodynamic state changes on P-V indicator diagram and reversible work calculations."
+  },
+  {
+    "id": "3122567d-440f-40ce-9d71-97d521a98921",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Composition of transition metal alloys: bronze (Cu, Sn), brass (Cu, Zn), stainless steel (Fe, Cr, Ni, C)."
+  },
+  {
+    "id": "0062f7af-9109-4f4a-aa87-a3c56f670387",
+    "ncert_chapter": "Some Basic Concepts of Chemistry",
+    "confidence": 0.99,
+    "reason": "Molarity and neutralization stoichiometry in aqueous acid-base solutions."
+  },
+  {
+    "id": "62212398-3491-4e4b-b398-a10dedd82a21",
+    "ncert_chapter": "Principles of Practical Chemistry",
+    "confidence": 0.97,
+    "reason": "Identification of colour of inorganic/organic qualitative analysis product."
+  },
+  {
+    "id": "9077605b-f2ed-4086-a2d7-cda98e784de2",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.98,
+    "reason": "Carbon-oxygen bond length comparison in tropone, acetone, and acetate ion based on resonance."
+  },
+  {
+    "id": "9d5b6391-edf6-4f3e-944f-f081dc7e2e28",
+    "ncert_chapter": "Classification of Elements and Periodicity in Properties",
+    "confidence": 0.99,
+    "reason": "First ionisation enthalpy trends across period 3 and very high third ionisation enthalpy of calcium."
+  },
+  {
+    "id": "27471e45-4672-4b5c-884a-d6aed7d0cb9c",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Spectrochemical series and order of wavelength of light absorbed by cobalt(III) complexes."
+  },
+  {
+    "id": "fea8594e-9996-458d-8c06-638c1ec3e757",
+    "ncert_chapter": "Equilibrium",
+    "confidence": 0.99,
+    "reason": "Suppression of dissociation of weak dibasic acid by common ion effect of strong acid HCl."
+  },
+  {
+    "id": "ddfa20e7-79da-4ced-9c37-50f9ca1a1377",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Photoelectric effect: calculating wavelength of incident radiation from work function and kinetic energy."
+  },
+  {
+    "id": "97989dcf-7203-4acd-9a97-a32c63df3982",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Latent heat of fusion at melting point of ice and constant temperature during phase transition."
+  },
+  {
+    "id": "771a8b03-9659-4457-a140-d838587bb34f",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Enthalpy calculation for cooling water, freezing at 0°C, and cooling ice to -10°C."
+  },
+  {
+    "id": "96024130-3af5-4876-b26d-6f72fe6580dd",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Crystal field theory: unpaired electron counts in high and low spin coordination complexes."
+  },
+  {
+    "id": "c8903ad1-9984-48fc-ac49-6b7680ed14bf",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Number of unpaired electrons in octahedral complexes with strong field and weak field ligands."
+  },
+  {
+    "id": "d4bfde78-4fc1-403e-9664-a39427fb7deb",
+    "ncert_chapter": "Electrochemistry",
+    "confidence": 0.99,
+    "reason": "Electrolysis of aqueous nitrate solutions: preferential cathodic discharge based on reduction potentials."
+  },
+  {
+    "id": "1a100b5a-0895-4de6-9e12-30a3ea9f2ae8",
+    "ncert_chapter": "Solutions",
+    "confidence": 0.99,
+    "reason": "Colligative properties and direction of solvent osmosis across semi-permeable membrane."
+  },
+  {
+    "id": "88ff9c10-f1e4-4434-b4d1-a6b4df24dbd7",
+    "ncert_chapter": "Biomolecules",
+    "confidence": 0.99,
+    "reason": "Nitric acid oxidation of D-erythrose to optically inactive meso-tartaric acid."
+  },
+  {
+    "id": "a03518b0-138c-42c9-a931-d1fb305a10f4",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Werner's coordination theory: primary valency (oxidation state) and secondary valency (coordination number)."
+  },
+  {
+    "id": "3187eace-e181-4562-910a-2f1ac4339cc1",
+    "ncert_chapter": "Haloalkanes and Haloarenes",
+    "confidence": 0.99,
+    "reason": "Dipole moments and boiling point comparisons of cis and trans 1,2-dihaloethenes."
+  },
+  {
+    "id": "2779039d-b131-4c4a-8285-7273dbbada7a",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Principles of fractional distillation and vapor-liquid equilibrium in fractionating columns."
+  },
+  {
+    "id": "1ec6a65b-d241-442f-95c7-25597fdb152d",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.99,
+    "reason": "Inert pair effect in Group 13 elements: stability of +1 vs +3 oxidation states for Al vs Tl."
+  },
+  {
+    "id": "c3840daa-e550-4bb6-a85e-0bf3ee69fe76",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Electronic configurations of 3d cations (colours) and f0/f14 diamagnetic configurations of lanthanoid/actinoid ions."
+  },
+  {
+    "id": "2354fc63-4812-4474-8e52-0d5e4b86d3bb",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.98,
+    "reason": "Catalytic mechanism of transition metals involving variable oxidation states and surface adsorption."
+  },
+  {
+    "id": "c9fb9e82-8e39-466b-a89c-18eea40de4c6",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.99,
+    "reason": "Periodic trends in first ionization enthalpies and stable oxidation states (+1/+3, +2/+4) of p-block metals."
+  },
+  {
+    "id": "140199f8-ce8f-4240-972c-e543a045c50c",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.96,
+    "reason": "Reaction mechanisms and validation of organic reaction products."
+  },
+  {
+    "id": "6946bd49-0ded-4bef-b314-5d371b244648",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Comparison of photon energies from wavelength, frequency, and wave number."
+  },
+  {
+    "id": "83599220-2f78-4c11-a36b-1458286aa7cc",
+    "ncert_chapter": "The p-Block Elements (Group 13 and 14)",
+    "confidence": 0.99,
+    "reason": "Amphoteric nature of group 14 oxides (SnO, SnO2, PbO, PbO2) and Lewis acidity of BF3."
+  },
+  {
+    "id": "4c3b5798-300e-43a7-95f7-757244591ce2",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Ascending energy order of spectral transitions in atomic hydrogen series (Balmer, Paschen, Brackett)."
+  },
+  {
+    "id": "c547ecdc-03e6-42fd-858a-4c76da2de45c",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Bond dissociation enthalpies of halogens (Cl2 > Br2 > F2 > I2) and Fajan's rules for metal halides."
+  },
+  {
+    "id": "e476dabb-ba1f-4cf4-ad6b-e9146ea35b2f",
+    "ncert_chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "confidence": 0.98,
+    "reason": "Multi-step organic synthesis involving carbonyl derivatives."
+  },
+  {
+    "id": "7ba6b51c-e649-4656-aba7-4c98243056d7",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Identification of mixed oxides (Mn3O4, Fe3O4, Co3O4) of 3d transition elements."
+  },
+  {
+    "id": "a17a4a1e-20cf-4ba6-a0a9-94120d087821",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Kjeldahl's method calculation of percentage of nitrogen in organic compound."
+  },
+  {
+    "id": "efd0c221-9e71-437c-a57d-f03e215027ff",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Counting total unpaired electrons in square planar and tetrahedral Ni and Pt coordination complexes."
+  },
+  {
+    "id": "b1d38545-80ff-4b8c-bf3b-3977c7822e23",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Photoelectric effect work function ratio calculation from electron kinetic energy ratio."
+  },
+  {
+    "id": "5a76e7a5-1df2-4da1-93de-3ca579b1405d",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Atomic notation, frequency-wavelength relation, and photon energy calculations."
+  },
+  {
+    "id": "2e5997dd-edb6-427e-924a-1622f8a5517d",
+    "ncert_chapter": "The d- and f-Block Elements",
+    "confidence": 0.99,
+    "reason": "Stoichiometric electron transfer during oxidation of iodide and sulfide by acidified dichromate."
+  },
+  {
+    "id": "00e09f6c-c3ad-46d2-9f87-9e55a7c8def3",
+    "ncert_chapter": "Coordination Compounds",
+    "confidence": 0.99,
+    "reason": "Paramagnetic vs diamagnetic complexes and ordering complexes by number of unpaired electrons."
+  },
+  {
+    "id": "9317654c-1c6f-4381-baba-001a40fac8b4",
+    "ncert_chapter": "The p-Block Elements (Group 15 to 18)",
+    "confidence": 0.99,
+    "reason": "Disproportionation of chlorine in cold dilute KOH forming chloride, hypochlorite, and water."
+  },
+  {
+    "id": "25054503-ebee-4a67-b1c1-04bcc1334a71",
+    "ncert_chapter": "Hydrocarbons",
+    "confidence": 0.99,
+    "reason": "Conformational analysis of n-butane: dihedral angle, torsional strain, and relative stabilities."
+  },
+  {
+    "id": "bad38b56-21d5-4303-b7e9-d1e81bb8cff6",
+    "ncert_chapter": "Thermodynamics",
+    "confidence": 0.99,
+    "reason": "Matching expressions for work done in reversible, free, and irreversible isothermal processes."
+  },
+  {
+    "id": "72f328cb-e925-4c2c-b848-7445ef04f517",
+    "ncert_chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "confidence": 0.99,
+    "reason": "Stability order of substituted benzyl carbanions based on electronic substituent effects (-M, -I, +M)."
+  },
+  {
+    "id": "124f3e08-dd44-4984-9106-53b5f700de9b",
+    "ncert_chapter": "Structure of Atom",
+    "confidence": 0.99,
+    "reason": "Calculation of wave numbers of spectral lines belonging to Balmer series in atomic hydrogen."
+  }
+]

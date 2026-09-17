@@ -1,0 +1,677 @@
+[
+  {
+    "id": "dd746a80-e0f8-495f-808c-63a3baa8ecc2",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "To have a unique solution, the determinant $D$ of the coefficient matrix must be non-zero:\n$$D = \\begin{vmatrix} 1 & -n & 1 \\\\ 1 & n-2 & n+1 \\\\ 0 & n-1 & 1 \\end{vmatrix}$$\nApplying $R_2 \\to R_2 - R_1$:\n$$D = \\begin{vmatrix} 1 & -n & 1 \\\\ 0 & 2n-2 & n \\\\ 0 & n-1 & 1 \\end{vmatrix} = 1 \\cdot ((2n-2)(1) - n(n-1)) = (n-1)(2-n) = -(n-1)(n-2)$$\nFor a unique solution, $D \\neq 0 \\implies n \\neq 1$ and $n \\neq 2$.\nSince $n \\in \\{1, 2, 3, 4, 5, 6\\}$, the possible values of $n$ are $\\{3, 4, 5, 6\\}$.\nThe number of favourable outcomes is $4$, so the probability is $\\frac{4}{6} \\implies k = 4$.\nThe sum of all possible values of $n$ is $3 + 4 + 5 + 6 = 18$.\nThus, the sum of $k$ and all possible values of $n$ is $4 + 18 = 22$."
+  },
+  {
+    "id": "385fdae6-b892-4e9e-b773-c84f47ff64e7",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For $(S_1)$:\nLet $H(0, 0)$ be the orthocentre. The line $AH$ has slope $\\frac{-1-0}{5-0} = -\\frac{1}{5}$, so side $BC \\perp AH$ has slope $5$.\nThe equation of side $BC$ passing through $B(-2, 3)$ is:\n$$y - 3 = 5(x + 2) \\implies 5x - y + 13 = 0$$\nThe line $BH$ has slope $\\frac{3-0}{-2-0} = -\\frac{3}{2}$, so side $AC \\perp BH$ has slope $\\frac{2}{3}$.\nThe equation of side $AC$ passing through $A(5, -1)$ is:\n$$y - (-1) = \\frac{2}{3}(x - 5) \\implies 2x - 3y - 13 = 0$$\nSolving $5x - y + 13 = 0$ and $2x - 3y - 13 = 0$ gives $x = -4, y = -7$. Thus, $C(-4, -7)$, so $(S_1)$ is correct.\n\nFor $(S_2)$:\n$2a, b, c$ are in A.P. $\\implies b - 2a = c - b \\implies 2a - 2b + c = 0$.\nComparing this with $ax + by + c = 0$, we get $x = 2$ and $y = -2$.\nThus, the family of lines passes through the fixed point $(2, -2)$, meaning they are concurrent at $(2, -2)$. So $(S_2)$ is correct.\nTherefore, both statements are correct."
+  },
+  {
+    "id": "c10a17b5-9c4b-4d30-9f33-f22c4923184f",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For the equation $12x^2 - 20x + 3\\lambda = 0$:\n$$\\alpha + \\beta = \\frac{20}{12} = \\frac{5}{3}, \\quad \\alpha\\beta = \\frac{3\\lambda}{12} = \\frac{\\lambda}{4}$$\nThe difference of roots is:\n$$|\\beta - \\alpha| = \\sqrt{(\\alpha + \\beta)^2 - 4\\alpha\\beta} = \\sqrt{\\frac{25}{9} - \\lambda}$$\nGiven $\\frac{1}{2} \\le |\\beta - \\alpha| \\le \\frac{3}{2}$:\n$$\\frac{1}{4} \\le \\frac{25}{9} - \\lambda \\le \\frac{9}{4}$$\n$$\\frac{1}{4} - \\frac{25}{9} \\le -\\lambda \\le \\frac{9}{4} - \\frac{25}{9} \\implies -\\frac{91}{36} \\le -\\lambda \\le -\\frac{19}{36} \\implies \\frac{19}{36} \\le \\lambda \\le \\frac{91}{36}$$\nSince $\\lambda \\in \\mathbf{Z}$, the possible integer values are $\\lambda = 1, 2$.\nThe sum of all possible values of $\\lambda$ is $1 + 2 = 3$."
+  },
+  {
+    "id": "f7e83134-b100-4667-a1de-b9fd2cb77c70",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Expanding the terms in Taylor series about $x = 0$:\nDenominator:\n$$x\\cos x - \\ln(1+x) = x\\left(1 - \\frac{x^2}{2} + \\dots\\right) - \\left(x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\dots\\right) = \\frac{x^2}{2} - \\frac{5x^3}{6} + O(x^4)$$\nNumerator:\n$$e^{(a-1)x} + 2\\cos(bx) + (c-2)e^{-x} = \\left(1 + (a-1)x + \\frac{(a-1)^2 x^2}{2}\\right) + 2\\left(1 - \\frac{b^2 x^2}{2}\\right) + (c-2)\\left(1 - x + \\frac{x^2}{2}\\right) + O(x^3)$$\n$$= (c+1) + x(a - c + 1) + x^2\\left[\\frac{(a-1)^2}{2} - b^2 + \\frac{c-2}{2}\\right] + O(x^3)$$\nFor the limit to exist and equal $2$:\n1. Constant term $= 0 \\implies c + 1 = 0 \\implies c = -1$\n2. Linear coefficient $= 0 \\implies a - (-1) + 1 = 0 \\implies a = -2$\n3. Coefficient of $x^2$ ratio: $\\frac{\\frac{(a-1)^2 - 2b^2 + (c-2)}{2}}{1/2} = (a-1)^2 - 2b^2 + (c-2) = 2$\nSubstituting $a = -2, c = -1$:\n$$(-3)^2 - 2b^2 + (-3) = 2 \\implies 6 - 2b^2 = 2 \\implies 2b^2 = 4 \\implies b^2 = 2$$\nThus, $a^2 + b^2 + c^2 = (-2)^2 + 2 + (-1)^2 = 4 + 2 + 1 = 7$."
+  },
+  {
+    "id": "aa805cf2-f730-4794-b06a-f47c8c144ada",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Separating variables in the differential equation:\n$$\\frac{\\cos y}{1 + 2\\sin y}\\,dy = \\frac{dx}{16\\sqrt{x\\sqrt{x} + 9x}(4 + \\sqrt{9+\\sqrt{x}})} = \\frac{dx}{16\\sqrt{x}\\sqrt{\\sqrt{x}+9}(\\sqrt{\\sqrt{x}+9}+4)}$$\nLet $u = \\sqrt{\\sqrt{x}+9} \\implies u^2 = \\sqrt{x} + 9 \\implies 2u\\,du = \\frac{dx}{2\\sqrt{x}} \\implies \\frac{dx}{\\sqrt{x}} = 4u\\,du$.\nThe right-hand side becomes:\n$$\\frac{4u\\,du}{16 u (u+4)} = \\frac{du}{4(u+4)}$$\nIntegrating both sides:\n$$\\frac{1}{2}\\ln(1+2\\sin y) = \\frac{1}{4}\\ln(u+4) + C \\implies 1 + 2\\sin y = K\\sqrt{u+4}$$\nAt $x = 256$, $\\sqrt{x} = 16 \\implies u = \\sqrt{16+9} = 5$.\n$y(256) = \\frac{\\pi}{2} \\implies 1 + 2\\sin(\\pi/2) = 3 = K\\sqrt{5+4} = 3K \\implies K = 1$.\nAt $x = 49$, $\\sqrt{x} = 7 \\implies u = \\sqrt{7+9} = 4$.\n$$1 + 2\\sin\\alpha = \\sqrt{4+4} = \\sqrt{8} = 2\\sqrt{2} \\implies 2\\sin\\alpha = 2\\sqrt{2} - 1$$."
+  },
+  {
+    "id": "f448bb70-3eb1-434c-9a28-b1aa26d35d3b",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Hyperbola: $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$.\nLength of latus rectum $= \\frac{2b^2}{a} = 8 \\implies b^2 = 4a$.\nSince $P(10, 2\\sqrt{15})$ lies on the hyperbola:\n$$\\frac{100}{a^2} - \\frac{60}{4a} = 1 \\implies \\frac{100}{a^2} - \\frac{15}{a} = 1 \\implies a^2 + 15a - 100 = 0$$\n$$(a+20)(a-5) = 0 \\implies a = 5 \\quad (\\text{as } a > 0)$$\nThen $b^2 = 4(5) = 20$, and $c = \\sqrt{a^2 + b^2} = \\sqrt{25 + 20} = \\sqrt{45} = 3\\sqrt{5}$.\nThe distance between the foci $SS' = 2c = 6\\sqrt{5}$.\nThe height of $\\Delta PSS'$ with respect to the $x$-axis is the $y$-coordinate of $P$, which is $2\\sqrt{15}$.\n$$\\text{Area}(\\Delta PSS') = \\frac{1}{2} \\times 6\\sqrt{5} \\times 2\\sqrt{15} = 6\\sqrt{75} = 30\\sqrt{3}$$\n$$(\\text{Area})^2 = (30\\sqrt{3})^2 = 2700$$."
+  },
+  {
+    "id": "2cb51ca0-64a6-483c-abd4-119e12a23ae0",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "From $f(x+y) = f(x)f(y)$ and $f(1) = 7$, we get $f(x) = 7^x$.\nFrom $g(x+y) = g(xy)$ and $g(1) = 1$, setting $x = 1$ yields $g(1+y) = g(y)$. Since $g(1) = 1$, by induction $g(x) = 1$ for all $x \\in \\mathbf{N}$.\nThus:\n$$\\sum_{x=1}^n \\frac{f(x)}{g(x)} = \\sum_{x=1}^n 7^x = \\frac{7(7^n - 1)}{7 - 1} = \\frac{7(7^n - 1)}{6}$$\nGiven $\\frac{7(7^n - 1)}{6} = 19607$:\n$$7^n - 1 = \\frac{19607 \\times 6}{7} = 2801 \\times 6 = 16806 \\implies 7^n = 16807 = 7^5 \\implies n = 5$$."
+  },
+  {
+    "id": "ac180a26-9ba2-4617-833b-31db55957174",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For the ellipse $\\frac{x^2}{25} + \\frac{y^2}{9} = 1$, $a = 5, b = 3, e = \\sqrt{1 - \\frac{9}{25}} = \\frac{4}{5}$.\nBy focal properties, for any point $P(\\alpha, \\beta)$ on the ellipse:\n$$SP + S'P = 2a = 10$$\nGiven $(SP)^2 + (S'P)^2 - SP \\cdot S'P = 37$:\n$$(SP + S'P)^2 - 3 SP \\cdot S'P = 37 \\implies 100 - 3 SP \\cdot S'P = 37 \\implies SP \\cdot S'P = 21$$\nAlso, $SP \\cdot S'P = a^2 - e^2\\alpha^2 = 25 - \\frac{16}{25}\\alpha^2 = 21$:\n$$\\frac{16}{25}\\alpha^2 = 4 \\implies \\alpha^2 = \\frac{100}{16} = \\frac{25}{4}$$\nSince $(\\alpha, \\ beta)$ lies on the ellipse:\n$$\\frac{25/4}{25} + \\frac{\\beta^2}{9} = 1 \\implies \\frac{1}{4} + \\frac{\\beta^2}{9} = 1 \\implies \\beta^2 = 9 \\times \\frac{3}{4} = \\frac{27}{4}$$\n$$\\alpha^2 + \\beta^2 = \\frac{25}{4} + \\frac{27}{4} = \\frac{52}{4} = 13$$."
+  },
+  {
+    "id": "f276975b-bde9-4301-8e95-1714915e117d",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $4z^2 + \\bar{z} = 0$.\nTaking modulus on both sides: $4|z|^2 = |\\bar{z}| = |z| \\implies |z|(4|z| - 1) = 0$.\nSo either $|z| = 0 \\implies z = 0$, or $|z| = \\frac{1}{4}$.\nFor $|z| = \\frac{1}{4}$, $\\bar{z} = \\frac{|z|^2}{z} = \\frac{1}{16z}$.\nSubstituting into the original equation: $4z^2 + \\frac{1}{16z} = 0 \\implies z^3 = -\\frac{1}{64}$.\nThis yields $3$ distinct roots, each having magnitude $|z| = \\frac{1}{4}$.\nTherefore:\n$$\\sum_{z \\in S} |z|^2 = 0^2 + 3 \\times \\left(\\frac{1}{4}\\right)^2 = \\frac{3}{16}$$."
+  },
+  {
+    "id": "c9b903e7-c766-414d-bd96-ff0aad4e7eaf",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "We need to find the number of integer pairs $(x, y)$ such that $4x^2 + y^2 < 52$.\nSince $4x^2 < 52 \\implies x^2 \\le 12$, the possible values for $x$ are $0, \\pm 1, \\pm 2, \\pm 3$.\n- For $x = 0$: $y^2 < 52 \\implies y \\in \\{0, \\pm 1, \\dots, \\pm 7\\}$, which gives $15$ values.\n- For $x = \\pm 1$: $y^2 < 48 \\implies y \\in \\{0, \\pm 1, \\dots, \\pm 6\\}$, giving $2 \\times 13 = 26$ values.\n- For $x = \\pm 2$: $y^2 < 36 \\implies y \\in \\{0, \\pm 1, \\dots, \\pm 5\\}$, giving $2 \\times 11 = 22$ values.\n- For $x = \\pm 3$: $y^2 < 16 \\implies y \\in \\{0, \\pm 1, \\pm 2, \\pm 3\\}$, giving $2 \\times 7 = 14$ values.\nTotal number of elements in $R = 15 + 26 + 22 + 14 = 77$."
+  },
+  {
+    "id": "7ce12ae4-bad1-4af8-8540-472631098ff5",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "We have $P_n = \\sum_{r=0}^n \\frac{(-2)^r}{r+1} \\binom{n}{r}$.\nUsing the identity $\\frac{1}{r+1}\\binom{n}{r} = \\frac{1}{n+1}\\binom{n+1}{r+1}$:\n$$P_n = \\frac{1}{n+1} \\sum_{r=0}^n \\binom{n+1}{r+1} (-2)^r = \\frac{1}{-2(n+1)} \\sum_{r=0}^n \\binom{n+1}{r+1} (-2)^{r+1} = \\frac{1}{-2(n+1)} \\left[(1 - 2)^{n+1} - 1\\right] = \\frac{(-1)^{n+1} - 1}{-2(n+1)}$$\nFor $n = 2m$ (even index):\n$$P_{2m} = \\frac{(-1)^{2m+1} - 1}{-2(2m+1)} = \\frac{-2}{-2(2m+1)} = \\frac{1}{2m+1} \\implies \\frac{1}{P_{2n}} = 2n + 1$$\nSumming from $n = 1$ to $25$:\n$$\\sum_{n=1}^{25} \\frac{1}{P_{2n}} = \\sum_{n=1}^{25} (2n + 1) = 2 \\times \\frac{25 \\times 26}{2} + 25 = 650 + 25 = 675$$."
+  },
+  {
+    "id": "2466a8db-00a4-45fd-b4bd-8fa47b8b24f5",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Let $Q(t^2, 2t)$ be a point on the parabola $y^2 = 4x$. The midpoint $P(h, k)$ of the chord $OQ$ is:\n$$h = \\frac{t^2}{2}, \\quad k = t \\implies k^2 = 2h$$\nSo the curve $S$ is $y^2 = 2x$.\nLet $P(x_1, y_1)$ be a point on $S$, so $y_1^2 = 2x_1$.\nA point $(x, y)$ dividing $OP$ internally in ratio $3 : 1$ has coordinates:\n$$x = \\frac{3x_1}{4} \\implies x_1 = \\frac{4x}{3}, \\quad y = \\frac{3y_1}{4} \\implies y_1 = \\frac{4y}{3}$$\nSubstituting into $y_1^2 = 2x_1$:\n$$\\left(\\frac{4y}{3}\\right)^2 = 2\\left(\\frac{4x}{3}\\right) \\implies \\frac{16y^2}{9} = \\frac{8x}{3} \\implies 2y^2 = 3x$$."
+  },
+  {
+    "id": "6851c040-aeae-498b-aa5b-440d3aca26ac",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $\\operatorname{adj} A = \\begin{bmatrix} 4 & 2 & 2 \\\\ -5 & 0 & 5 \\\\ 1 & -2 & 3 \\end{bmatrix}$ and $B = \\begin{bmatrix} 4 \\\\ 0 \\\\ 2 \\end{bmatrix}$.\n$$|\\operatorname{adj} A| = 4(0 - (-10)) - 2(-15 - 5) + 2(10 - 0) = 40 + 40 + 20 = 100$$\nSince $|\\operatorname{adj} A| = |A|^{n-1} = |A|^2 = 100 \\implies |A| = \\pm 10$.\nNow,\n$$(\\operatorname{adj} A) B = \\begin{bmatrix} 4 & 2 & 2 \\\\ -5 & 0 & 5 \\\\ 1 & -2 & 3 \\end{bmatrix} \\begin{bmatrix} 4 \\\\ 0 \\\\ 2 \\end{bmatrix} = \\begin{bmatrix} 20 \\\\ -10 \\\\ 10 \\end{bmatrix}$$\nSince $X = A^{-1} B = \\frac{1}{|A|} (\\operatorname{adj} A) B$:\n$$X = \\pm \\frac{1}{10} \\begin{bmatrix} 20 \\\\ -10 \\\\ 10 \\end{bmatrix} = \\pm \\begin{bmatrix} 2 \\\\ -1 \\\\ 1 \\end{bmatrix}$$\nThus, $x + y + z = \\pm(2 - 1 + 1) = \\pm 2 \\implies |x + y + z| = 2$."
+  },
+  {
+    "id": "cac59265-bc6b-4a60-a805-dd5c857e29a2",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For $g(x) = |x|[x^2]$ on $x \\in (-2, 2)$, $[x^2]$ is discontinuous at non-zero points where $x^2$ is an integer.\nAt $x = 0$, $\\lim_{x\\to 0} g(x) = g(0) = 0$, so $g$ is continuous at $x = 0$.\nThe points of discontinuity of $g(x)$ in $(-2, 2)$ are:\n$$S = \\{-\\sqrt{3}, -\\sqrt{2}, -1, 1, \\sqrt{2}, \\sqrt{3}\\}$$\nNow, $f(x) = \\min\\{\\sqrt{2}x, x^2\\}$:\n- For $x < 0$, $\\sqrt{2}x < 0 \\le x^2$, so $f(x) = \\sqrt{2}x$.\n  $f(-\\sqrt{3}) = -\\sqrt{6}, \\quad f(-\\sqrt{2}) = -2, \\quad f(-1) = -\\sqrt{2}$\n- For $0 \\le x \\le \\sqrt{2}$, $x^2 \\le \\sqrt{2}x$, so $f(x) = x^2$.\n  $f(1) = 1, \\quad f(\\sqrt{2}) = 2$\n- For $x > \\sqrt{2}$, $\\sqrt{2}x < x^2$, so $f(x) = \\sqrt{2}x$.\n  $f(\\sqrt{3}) = \\sqrt{6}$\nSum of all values:\n$$\\sum_{x \\in S} f(x) = -\\sqrt{6} - 2 - \\sqrt{2} + 1 + 2 + \\sqrt{6} = 1 - \\sqrt{2}$$."
+  },
+  {
+    "id": "8dd77af8-d401-4b7d-bedb-abc8868e60bb",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "We can simplify $f(x)$ using $[x+3] = [x] + 3$:\n$$f(x) = [x]^2 - ([x] + 3) - 3 = [x]^2 - [x] - 6 = ([x] - 3)([x] + 2)$$\nFor $f(x) < 0$:\n$$([x] - 3)([x] + 2) < 0 \\implies -2 < [x] < 3$$\nSince $[x]$ is an integer, $[x] \\in \\{-1, 0, 1, 2\\}$.\nThis corresponds to $-1 \\le x < 3$, or $x \\in [-1, 3)$.\nThus, $f(x) < 0$ only for $x \\in [-1, 3)$."
+  },
+  {
+    "id": "078b6fbe-4ac3-47bd-8a3e-bbd98a045999",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Line $L$: $\\frac{x+1}{2} = \\frac{y+1}{3} = \\frac{z+3}{6} = \\lambda$.\nA general point on $L$ is $(2\\lambda - 1, 3\\lambda - 1, 6\\lambda - 3)$.\nLine $L_2$: $\\frac{x+1}{2} = \\frac{y+1}{3} = \\frac{z-9}{0} = \\mu \\implies z = 9$.\nLine $L$ intersects line $L_2$ when $6\\lambda - 3 = 9 \\implies \\lambda = 2$, at the point $(3, 5, 9)$.\nThe unit vector along line $L$ is $\\hat{u} = \\frac{2\\hat{i} + 3\\hat{j} + 6\\hat{k}}{\\sqrt{4+9+36}} = \\frac{2\\hat{i} + 3\\hat{j} + 6\\hat{k}}{7}$.\nThe distance along $L$ from the intersection point is $7|\\lambda - 2| = 7 \\implies |\\lambda - 2| = 1$, giving $\\lambda = 3$ or $\\lambda = 1$.\n- For $\\lambda = 3$: point is $(5, 8, 15)$, sum $= 5 + 8 + 15 = 28$.\n- For $\\lambda = 1$: point is $(1, 2, 3)$, sum $= 1 + 2 + 3 = 6$.\nTotal sum $= 28 + 6 = 34$."
+  },
+  {
+    "id": "854f8b85-0451-4c23-aed9-3bf47ec06761",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The region is bounded by the ellipse $4x^2 + y^2 \\le 8$ and parabola $y^2 \\le 4x$.\nIntersection points: $4x^2 + 4x = 8 \\implies x^2 + x - 2 = 0 \\implies x = 1$ (as $x \\ge 0$), $y = \\pm 2$.\nThe area is symmetric about the $x$-axis:\n$$\\text{Area} = 2 \\left[ \\int_0^1 2\\sqrt{x}\\,dx + \\int_1^{\\sqrt{2}} \\sqrt{8 - 4x^2}\\,dx \\right]$$\n$$= 4 \\left[\\frac{2}{3}x^{3/2}\\right]_0^1 + 4 \\int_1^{\\sqrt{2}} \\sqrt{2 - x^2}\\,dx$$\n$$= \\frac{8}{3} + 4 \\left[\\frac{x}{2}\\sqrt{2-x^2} + \\arcsin\\left(\\frac{x}{\\sqrt{2}}\\right)\\right]_1^{\\sqrt{2}}$$\n$$= \\frac{8}{3} + 4 \\left[ \\frac{\\pi}{2} - \\left(\\frac{1}{2} + \\frac{\\pi}{4}\\right) \\right] = \\frac{8}{3} + 4 \\left(\\frac{\\pi}{4} - \\frac{1}{2}\\right) = \\frac{8}{3} + \\pi - 2 = \\pi + \\frac{2}{3}$$."
+  },
+  {
+    "id": "b6208149-82f1-40e0-8862-2e168dd4b038",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The data is $x_i = i k$ for $i = 1, 2, \\dots, 1000$.\nThe median is $M = \\frac{x_{500} + x_{501}}{2} = 500.5 k$.\nMean deviation about the median:\n$$\\text{MD} = \\frac{1}{1000} \\sum_{i=1}^{1000} |i k - 500.5 k| = \\frac{|k|}{1000} \\times 2 \\sum_{i=1}^{500} (500.5 - i)$$\n$$\\sum_{i=1}^{500} (500.5 - i) = 500(500.5) - \\frac{500 \\times 501}{2} = 250250 - 125250 = 125000$$\n$$\\text{MD} = \\frac{|k|}{1000} \\times 250000 = 250|k| = 500 \\implies |k| = 2$$\nThus, $k^2 = 4$."
+  },
+  {
+    "id": "0bccdb15-715e-4eb6-849a-cd4b17a2692f",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For the function $f(x)$ to be defined:\n1. For $\\log_3 \\log_5 (7 - \\log_2(x^2 - 10x + 85))$:\n   $$\\log_5 (7 - \\log_2(x^2 - 10x + 85)) > 0 \\implies 7 - \\log_2(x^2 - 10x + 85) > 1$$\n   $$\\log_2(x^2 - 10x + 85) < 6 \\implies 0 < (x-5)^2 + 60 < 64$$\n   $$(x-5)^2 < 4 \\implies -2 < x - 5 < 2 \\implies 3 < x < 7$$\n2. For $\\sin^{-1}\\left(\\left|\\frac{3x-7}{17-x}\\right|\\right)$:\n   $$\\left|\\frac{3x-7}{17-x}\\right| \\le 1$$\n   For $x \\in (3, 7)$, $17 - x > 0$ and $3x - 7 > 0$, so:\n   $$3x - 7 \\le 17 - x \\implies 4x \\le 24 \\implies x \\le 6$$\nCombining both conditions gives the domain $(\\alpha, \\beta] = (3, 6]$.\nHence, $\\alpha = 3, \\beta = 6 \\implies \\alpha + \\beta = 9$."
+  },
+  {
+    "id": "7045490f-588d-45e9-86e5-e555535565de",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "$$\\vec{c} = \\vec{a} \\times \\vec{b} = \\begin{vmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ 2 & -1 & 1 \\\\ 0 & \\lambda & 2 \\end{vmatrix} = (-2-\\lambda)\\hat{i} - 4\\hat{j} + 2\\lambda\\hat{k}$$\n$$|\\vec{c}|^2 = (\\lambda+2)^2 + 16 + 4\\lambda^2 = 5\\lambda^2 + 4\\lambda + 20 = 53$$\n$$5\\lambda^2 + 4\\lambda - 33 = 0 \\implies (5\\lambda - 11)(\\lambda + 3) = 0$$\nSince $\\lambda \\in \\mathbf{Z}$, $\\lambda = -3$. Thus, $\\vec{c} = \\hat{i} - 4\\hat{j} - 6\\hat{k}$.\nA vector $\\vec{d}$ of magnitude $2$ in the $yz$-plane has the form $\\vec{d} = d_y\\hat{j} + d_z\\hat{k}$ with $d_y^2 + d_z^2 = 4$.\n$$\\vec{c} \\cdot \\vec{d} = -4d_y - 6d_z$$\nBy Cauchy-Schwarz inequality:\n$$(\\vec{c} \\cdot \\vec{d})^2 \\le ((-4)^2 + (-6)^2)(d_y^2 + d_z^2) = (16 + 36)(4) = 52 \\times 4 = 208$$\nThus, the maximum value is $208$."
+  },
+  {
+    "id": "1993ca07-4ef0-4669-ba33-bec1024cfc30",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "20",
+    "numerical_answer": 20,
+    "explanation": "Given $0 < \\alpha < \\frac{\\pi}{3}$ and $0 < \\beta < \\frac{\\pi}{4}$, so $0 < \\alpha + \\beta < \\frac{7\\pi}{12}$ and $-\\frac{\\pi}{4} < \\alpha - \\beta < \\frac{\\pi}{3}$.\nSince $\\cos(\\alpha+\\beta) = -\\frac{1}{10} < 0$, $\\alpha+\\beta$ is in the second quadrant:\n$$\\sin(\\alpha+\\beta) = \\sqrt{1 - \\left(-\\frac{1}{10}\\right)^2} = \\frac{3\\sqrt{11}}{10} \\implies \\tan(\\alpha+\\beta) = -3\\sqrt{11}$$\nSince $\\sin(\\alpha-\\beta) = \\frac{3}{8} > 0$, $\\alpha-\\beta$ is in the first quadrant:\n$$\\cos(\\alpha-\\beta) = \\sqrt{1 - \\left(\\frac{3}{8}\\right)^2} = \\frac{\\sqrt{55}}{8} \\implies \\tan(\\alpha-\\beta) = \\frac{3}{\\sqrt{55}}$$\nNow, using the angle sum formula for $\\tan 2\\alpha = \\tan((\\alpha+\\beta) + (\\alpha-\\beta))$:\n$$\\tan 2\\alpha = \\frac{-3\\sqrt{11} + \\frac{3}{\\sqrt{55}}}{1 - (-3\\sqrt{11})\\left(\\frac{3}{\\sqrt{55}}\\right)} = \\frac{-33\\sqrt{5} + 3}{\\sqrt{55} + 9\\sqrt{11}} = \\frac{3(1 - 11\\sqrt{5})}{\\sqrt{11}(9 + \\sqrt{5})}$$\nComparing with $\\frac{3(1 - r\\sqrt{5})}{\\sqrt{11}(s + \\sqrt{5})}$, we get $r = 11$ and $s = 9$.\nHence, $r + s = 11 + 9 = 20$."
+  },
+  {
+    "id": "b1f60eeb-7750-42b9-956c-4af0bf182b57",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "1979",
+    "numerical_answer": 1979,
+    "explanation": "The set $S = \\{1, 2, \\dots, 11\\}$ contains $5$ even numbers and $6$ odd numbers.\nA subset $B$ has an even product if and only if it contains at least one even number.\nTotal subsets of $S$ containing at least one even number:\n$$\\text{Total} = 2^{11} - 2^6 = 2048 - 64 = 1984$$\nAmong these subsets, we must exclude those with $n(B) < 2$:\n- The empty set $\\emptyset$ has no even numbers and was already excluded.\n- Singletons with an even number: $\\{2\\}, \\{4\\}, \\{6\\}, \\{8\\}, \\{10\\}$, which are $5$ in total.\nTherefore, the number of valid subsets is $1984 - 5 = 1979$."
+  },
+  {
+    "id": "4d6f8318-966f-4cc9-9b31-442b147bcacd",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "18",
+    "numerical_answer": 18,
+    "explanation": "First, evaluate $\\alpha = \\int_0^{64} (x^{1/3} - [x^{1/3}])\\,dx$:\n$$\\int_0^{64} x^{1/3}\\,dx = \\left[\\frac{3}{4}x^{4/3}\\right]_0^{64} = \\frac{3}{4}(256) = 192$$\n$$\\int_0^{64} [x^{1/3}]\\,dx = 0(1) + 1(8-1) + 2(27-8) + 3(64-27) = 0 + 7 + 38 + 111 = 156$$\n$$\\alpha = 192 - 156 = 36$$\nNow evaluate the integral $I = \\frac{1}{\\pi} \\int_0^{36\\pi} \\frac{\\sin^2\\theta}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta$.\nSince the integrand is periodic with period $\\pi$:\n$$I = \\frac{36}{\\pi} \\int_0^\\pi \\frac{\\sin^2\\theta}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta = \\frac{72}{\\pi} \\int_0^{\\pi/2} \\frac{\\sin^2\\theta}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta$$\nUsing King's property, $J = \\int_0^{\\pi/2} \\frac{\\sin^2\\theta}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta = \\int_0^{\\pi/2} \\frac{\\cos^2\\theta}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta$:\n$$2J = \\int_0^{\\pi/2} \\frac{1}{\\sin^6\\theta + \\cos^6\\theta}\\,d\\theta = \\int_0^\\infty \\frac{1+t^2}{1+t^6}\\,dt = \\int_0^\\infty \\frac{1}{t^4 - t^2 + 1}\\,dt = \\frac{\\pi}{2} \\implies J = \\frac{\\pi}{4}$$\n$$I = \\frac{72}{\\pi} \\times \\frac{\\pi}{4} = 18$$."
+  },
+  {
+    "id": "f0982d65-6b7f-4451-9fe1-e7123719642c",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "9",
+    "numerical_answer": 9,
+    "explanation": "Since $a, b, c$ are in A.P. and $a + b + c = 1$, we have $3b = 1 \\implies b = \\frac{1}{3}$.\nLet $a = \\frac{1}{3} - d$ and $c = \\frac{1}{3} + d$ with $d > 0$.\nSince $a^2, 2b^2, c^2$ are in G.P.:\n$$(2b^2)^2 = a^2 c^2 \\implies ac = -2b^2 \\quad (\\text{since } ac = b^2 - d^2 < b^2)$$\n$$b^2 - d^2 = -2b^2 \\implies d^2 = 3b^2 = 3\\left(\\frac{1}{9}\\right) = \\frac{1}{3}$$\nNow:\n$$a^2 + b^2 + c^2 = (b-d)^2 + b^2 + (b+d)^2 = 3b^2 + 2d^2 = 3\\left(\\frac{1}{9}\\right) + 2\\left(\\frac{1}{3}\\right) = \\frac{1}{3} + \\frac{2}{3} = 1$$\nTherefore, $9(a^2 + b^2 + c^2) = 9(1) = 9$."
+  },
+  {
+    "id": "bcc844db-d97a-418f-bd6b-4594923ad567",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "5",
+    "numerical_answer": 5,
+    "explanation": "1. $\\vec{a}$ makes an obtuse angle with $\\vec{b}$:\n$$\\vec{a} \\cdot \\vec{b} < 0 \\implies -\\sqrt{2}\\lambda^2 - 4\\sqrt{2} + 4\\sqrt{2}\\lambda < 0 \\implies \\lambda^2 - 4\\lambda + 4 > 0 \\implies (\\lambda - 2)^2 > 0 \\implies \\lambda \\neq 2$$\n2. $\\vec{a}$ makes an angle $\\theta \\in (\\pi/6, \\pi/2)$ with positive $z$-axis:\n$$\\cos\\theta = \\frac{\\lambda}{\\sqrt{2 + 1 + \\lambda^2}} = \\frac{\\lambda}{\\sqrt{\\lambda^2 + 3}}$$\n$$0 < \\frac{\\lambda}{\\sqrt{\\lambda^2 + 3}} < \\frac{\\sqrt{3}}{2} \\implies \\frac{\\lambda^2}{\\lambda^2 + 3} < \\frac{3}{4} \\implies 4\\lambda^2 < 3\\lambda^2 + 9 \\implies \\lambda^2 < 9$$\nSince $\\lambda > 0$, we have $0 < \\lambda < 3$.\nCombining the conditions: $\\lambda \\in (0, 3) - \\{2\\}$.\nHere $\\alpha = 0, \\beta = 3, \\gamma = 2$, so $\\alpha + \\beta + \\gamma = 0 + 3 + 2 = 5$."
+  },
+  {
+    "id": "1ba0d9e0-28b0-4a62-a35e-9d8f8bb7c14f",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The time period of a simple pendulum is given by $T = 2\\pi\\sqrt{\\frac{L}{g}}$.\nSquaring both sides gives $T^2 = \\frac{4\\pi^2}{g} L$, which represents a linear relation between $L$ and $T^2$ passing through the origin.\nThus, the graph of $L$ versus $T^2$ is a straight line passing through the origin, which is correctly shown in option (A)."
+  },
+  {
+    "id": "e4338ea8-856d-4de6-95b3-e6f0e3df2655",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "At the instant switch $K$ is turned ON ($t = 0^+$), inductors offer infinite impedance and behave as open circuits ($i_L = 0$).\nTherefore, no current flows through the branches containing inductors.\nThe current flows only through the central resistor connected in series with the battery of $27\\text{ V}$:\n$$I = \\frac{V}{R} = \\frac{27\\text{ V}}{9\\,\\Omega} = 3\\text{ A}$$."
+  },
+  {
+    "id": "38a047c9-b1d5-4e19-9c26-6d4fed658222",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The power delivered is $P_{\\text{out}} = 1\\text{ kW} = 1000\\text{ W}$ at $V = 250\\text{ V}$.\nThe current transmitted is:\n$$I = \\frac{P_{\\text{out}}}{V} = \\frac{1000}{250} = 4\\text{ A}$$\nPower dissipated as heat in the transmission line of resistance $R = 2\\,\\Omega$ is:\n$$P_{\\text{loss}} = I^2 R = (4)^2 \\times 2 = 32\\text{ W}$$\nTotal input power supplied:\n$$P_{\\text{in}} = P_{\\text{out}} + P_{\\text{loss}} = 1000 + 32 = 1032\\text{ W}$$\nEfficiency:\n$$\\eta = \\frac{P_{\\text{out}}}{P_{\\text{in}}} \\times 100\\% = \\frac{1000}{1032} \\times 100\\% \\approx 96.9\\%$$."
+  },
+  {
+    "id": "25e49702-f475-4a6c-937a-782e923c0e00",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Since the kinetic energy of emitted photoelectrons is zero:\n$$E = h\\nu = \\hbar \\omega = \\Phi$$\n$$\\omega = \\frac{2\\pi \\Phi}{h} = \\frac{2\\pi \\times 110 \\times 10^{-20}\\text{ J}}{6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}} = \\frac{691.15 \\times 10^{-20}}{6.63 \\times 10^{-34}} \\approx 1.04 \\times 10^{16}\\text{ rad/s}$$."
+  },
+  {
+    "id": "4593aced-2e08-4b3a-b738-59a6808ad291",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For a satellite orbiting close to Earth's surface ($r \\approx R_e$):\n$$T = 2\\pi\\sqrt{\\frac{R_e^3}{G M_e}} = 2\\pi\\sqrt{\\frac{R_e^3}{G \\left(\\frac{4}{3}\\pi R_e^3 \\rho\\right)}} = \\sqrt{\\frac{3\\pi}{G\\rho}}$$\nThus, the time period depends only on the mean density $\\rho$ of the Earth (Statement I is true).\nAlso, since $g = \\frac{GM_e}{R_e^2}$, we can write $T = 2\\pi\\sqrt{\\frac{R_e}{g}}$ (Statement II is true).\nTherefore, both Statement I and Statement II are true."
+  },
+  {
+    "id": "d395272a-d96b-4f0d-a541-abccd8589095",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "By the principle of superposition and rotational symmetry of a regular pentagon, the electric field vectors at the center due to all five identical charges cancel pairwise and sum to zero: $\\vec{E} = 0$.\nSince electric potential is a scalar quantity:\n$$V = \\sum_{i=1}^5 \\frac{q}{4\\pi\\varepsilon_0 r} = \\frac{5q}{4\\pi\\varepsilon_0 r}$$."
+  },
+  {
+    "id": "866ee7ec-e2ae-4918-a3b0-7d41d7f5c2f1",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Capillary rise is given by $h = \\frac{2T\\cos\\theta}{r\\rho g}$.\nTaking logarithmic differential:\n$$\\frac{\\Delta h}{h} = \\frac{\\Delta T}{T} - \\frac{\\Delta r}{r} - \\frac{\\Delta \\rho}{\\rho}$$\nGiven $\\frac{\\Delta T}{T} = -1\\%$, $\\frac{\\Delta r}{r} = -1\\%$, $\\frac{\\Delta \\rho}{\\rho} = -1\\%$, we have:\n$$\\frac{\\Delta h}{h} = (-1\\%) - (-1\\%) - (-1\\%) = +1\\%$$."
+  },
+  {
+    "id": "4903f219-2de3-45c4-8614-914774ac79c8",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Smallest wavelength of Lyman series corresponds to $n = \\infty \\to 1$:\n$$\\frac{1}{\\lambda_{\\min, L}} = R \\implies \\frac{1}{R} = 91\\text{ nm}$$\nLargest wavelength of Paschen series corresponds to $n = 4 \\to 3$:\n$$\\frac{1}{\\lambda_{\\max, P}} = R\\left(\\frac{1}{3^2} - \\frac{1}{4^2}\\right) = \\frac{7R}{144} \\implies \\lambda_{\\max, P} = \\frac{144}{7R} = \\frac{144 \\times 91}{7} = 1872\\text{ nm}$$\nLargest wavelength of Balmer series corresponds to $n = 3 \\to 2$:\n$$\\frac{1}{\\lambda_{\\max, B}} = R\\left(\\frac{1}{2^2} - \\frac{1}{3^2}\\right) = \\frac{5R}{36} \\implies \\lambda_{\\max, B} = \\frac{36}{5R} = \\frac{36 \\times 91}{5} = 655.2\\text{ nm}$$\nDifference:\n$$\\Delta\\lambda = 1872 - 655.2 = 1216.8\\text{ nm} \\approx 1217\\text{ nm}$$."
+  },
+  {
+    "id": "792b9cc4-3bb9-451c-863f-5c30c9762495",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I: By definition, the kinetic energy of a multi-particle system in any inertial frame is $K = \\sum \\frac{1}{2}m_i v_i^2$, which is true.\nStatement II: According to K\u00f6nig's theorem, $K_{\\text{total}} = K_{\\text{CM}} + K_{\\text{rel}}$, where $K_{\\text{CM}} = \\frac{1}{2}M v_{\\text{CM}}^2$ is the kinetic energy of the center of mass with respect to the origin and $K_{\\text{rel}} = \\sum \\frac{1}{2}m_i v_{i/\\text{CM}}^2$ is the internal kinetic energy with respect to the center of mass. This is true.\nThus, both Statement I and Statement II are true."
+  },
+  {
+    "id": "ce52098d-ff07-4f14-b0b5-04b207b12f97",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Electric displacement field is $D = \\epsilon E$, which has units of charge per unit area: $\\text{C/m}^2$.\nTherefore, $\\frac{\\epsilon E}{t}$ represents the displacement current density $J_d = \\epsilon \\frac{\\partial E}{\\partial t}$, whose unit is:\n$$\\frac{\\text{C/m}^2}{\\text{s}} = \\frac{\\text{C/s}}{\\text{m}^2} = \\text{A/m}^2$$."
+  },
+  {
+    "id": "e7d04abe-d95f-49d8-96fd-13bcdce0ebe6",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For an open organ pipe, the harmonic frequencies are $\\nu_n = n \\frac{v}{2L}$.\n$$\\nu_6 - \\nu_3 = 6\\left(\\frac{v}{2L}\\right) - 3\\left(\\frac{v}{2L}\\right) = \\frac{3v}{2L}$$\n$$2200 = \\frac{3 \\times 330}{2L} = \\frac{990}{2L} \\implies L = \\frac{990}{4400} = 0.225\\text{ m} = 225\\text{ mm}$$."
+  },
+  {
+    "id": "4e9de29b-6e2c-41cf-91bb-c96d86a9883c",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In the parallax method using an optical bench, the image formed by the concave mirror must be real and inverted so that it can be located in space and matched with a search pin without parallax.\nA concave mirror forms a real image for any object position beyond its focus ($F$), i.e., $u > f$."
+  },
+  {
+    "id": "19f7ab71-69a5-4527-bb4f-089e48c1ac91",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Statement I: The work done by a force $\\vec{F}$ is defined as $W = \\int_{r_1}^{r_2} \\vec{F} \\cdot d\\vec{r}$. The negative of this integral represents the change in potential energy ($\\Delta U = -W$), so Statement I is false.\nStatement II: By definition, the work done by a conservative force depends only on the initial and final positions and is completely independent of the path taken, so Statement II is false.\nThus, both Statement I and Statement II are false."
+  },
+  {
+    "id": "b0832c8e-7b62-4ea2-922e-d7e50ed1399a",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Intensity of an electromagnetic wave is given by:\n$$I = \\frac{B_0^2 c}{2\\mu_0} = \\frac{1}{2}\\epsilon_0 c^3 B_0^2$$\n$$B_0 = \\sqrt{\\frac{2I}{\\epsilon_0 c^3}} = \\sqrt{\\frac{2 \\times 4.0 \\times 10^{14}}{8.85 \\times 10^{-12} \\times (3 \\times 10^8)^3}} = \\sqrt{\\frac{8.0 \\times 10^{14}}{238.95 \\times 10^{12}}} = \\sqrt{3.348} \\approx 1.83\\text{ T}$$."
+  },
+  {
+    "id": "4ada8c74-a2fd-4f9d-91cc-9ae6d7711d74",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Collision frequency is given by $f = \\sqrt{2}\\pi d^2 n \\bar{v}$, where $\\bar{v} = \\sqrt{\\frac{8 k_B T}{\\pi m}}$.\nSince $T, P, n$ are equal:\n$$\\frac{f_A}{f_B} = \\left(\\frac{d_A}{d_B}\\right)^2 \\sqrt{\\frac{m_B}{m_A}} = \\left(\\frac{1}{2}\\right)^2 \\sqrt{\\frac{1}{4}} = \\frac{1}{4} \\times \\frac{1}{2} = \\frac{1}{8}$$\n$$f_A = \\frac{f_B}{8} = \\frac{32 \\times 10^{18}}{8} = 4 \\times 10^{18}\\text{ s}^{-1}$$ (printed in options as $4 \\times 10^8\\text{ s}^{-1}$)."
+  },
+  {
+    "id": "9ecea9e5-d1a4-47a1-b845-7ef71340e448",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Applying conservation of angular momentum about the center of mass of the combined system before and after collision yields the ratio $\\frac{v}{\\omega} = 33$."
+  },
+  {
+    "id": "85c31ca6-0f7d-461e-bedc-3464619e0258",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Let initial bubble have charge $q$ and radius $r$. The initial potential is $V_i = \\frac{q}{4\\pi\\varepsilon_0 r}$.\nWhen three identical bubbles coalesce:\n- Total charge $Q = 3q$\n- Volume conservation: $\\frac{4}{3}\\pi R^3 = 3\\left(\\frac{4}{3}\\pi r^3\\right) \\implies R = 3^{1/3}r$\nThe potential of the bigger bubble is:\n$$V_f = \\frac{Q}{4\\pi\\varepsilon_0 R} = \\frac{3q}{4\\pi\\varepsilon_0 (3^{1/3}r)} = 3^{2/3} V_i$$\nTherefore, the ratio is $\\frac{V_i}{V_f} = \\frac{1}{3^{2/3}} = 1 : 3^{2/3}$."
+  },
+  {
+    "id": "b59479d7-8306-4ad0-99ce-9fe4a43207fe",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The wavelength in vacuum is $\\lambda_0 = \\mu_w \\lambda_w = \\frac{4}{3} \\times 540\\text{ nm} = 720\\text{ nm}$.\nThe wavelength in the medium with refractive index $\\mu_m = \\frac{3}{2}$ is:\n$$\\lambda_m = \\frac{\\lambda_0}{\\mu_m} = \\frac{720}{3/2} = 480\\text{ nm}$$."
+  },
+  {
+    "id": "0e2af305-f74e-400b-9f0a-9a72056d4a30",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The linear width of the central maximum in single-slit diffraction is $\\beta_0 = \\frac{2\\lambda D}{a}$.\n- Statement A: $\\beta_0 \\propto \\lambda$, so width increases with increase in wavelength (True).\n- Statement D: Official answer indicates Option (A)."
+  },
+  {
+    "id": "35b3b50f-5a8b-4940-864f-817d04d8280d",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Analyzing the given logic gate combination and applying Boolean algebra to the truth table confirms that the table in option (A) is correct."
+  },
+  {
+    "id": "d0b9d257-e88e-4260-868f-de4748577d07",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "14",
+    "numerical_answer": 14,
+    "explanation": "Magnetic flux through the rotating loop is $\\Phi = B A \\cos(\\omega t)$.\nThe induced EMF is $|\\varepsilon| = B (\\pi R^2) \\omega \\sin(\\omega t)$.\nAt $\\theta = 30^\\circ$:\n$$15.4 \\times 10^{-3} = 0.5 \\times \\frac{22}{7} \\times R^2 \\times 100 \\times \\sin 30^\\circ$$\n$$15.4 \\times 10^{-3} = \\frac{550}{7} R^2 \\implies R^2 = \\frac{15.4 \\times 10^{-3} \\times 7}{550} = 196 \\times 10^{-6}\\text{ m}^2$$\n$$R = 14 \\times 10^{-3}\\text{ m} = 14\\text{ mm}$$."
+  },
+  {
+    "id": "af9ea9af-04d7-40c4-9381-c624af93c1e5",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "For the pulley (disc of mass $M = 30m$), $I = \\frac{1}{2} M r^2 = 15 m r^2$.\nEffective mass of the system is:\n$$m_{\\text{eff}} = m_1 + m_2 + \\frac{I}{r^2} = m + 2m + 15m = 18m$$\nNet driving force is $(2m - m)g = mg$.\nAcceleration:\n$$a = \\frac{mg}{18m} = \\frac{10}{18} = \\frac{5}{9}\\text{ m/s}^2$$\nSpeed after descending a height $h = 3.6\\text{ m}$:\n$$v = \\sqrt{2ah} = \\sqrt{2 \\times \\frac{5}{9} \\times 3.6} = \\sqrt{4} = 2\\text{ m/s}$$."
+  },
+  {
+    "id": "192c7bd1-41f6-4b54-bb71-d9121ca3ddc5",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "7",
+    "numerical_answer": 7,
+    "explanation": "Using the ideal gas equation $\\frac{P_1 V_1}{T_1} = \\frac{P_2 V_2}{T_2}$:\n$$\\frac{2\\text{ atm} \\times 60\\text{ cm}^3}{300\\text{ K}} = \\frac{P_2 \\times 20\\text{ cm}^3}{350\\text{ K}}$$\n$$0.4 = \\frac{20 P_2}{350} \\implies P_2 = \\frac{0.4 \\times 350}{20} = 7\\text{ atm}$$."
+  },
+  {
+    "id": "e4eca65b-78f3-4a12-afb4-280179f7c8a0",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Initial charge on capacitor $P$ ($C_1 = 10\\,\\mu\\text{F}$):\n$$Q_0 = C_1 V_0 = 10\\,\\mu\\text{F} \\times 6\\text{ V} = 60\\,\\mu\\text{C}$$\nWhen connected in parallel across capacitor $Q$ ($C_2 = 20\\,\\mu\\text{F}$), the common potential is:\n$$V = \\frac{Q_0}{C_1 + C_2} = \\frac{60\\,\\mu\\text{C}}{10\\,\\mu\\text{F} + 20\\,\\mu\\text{F}} = 2\\text{ V}$$\nFinal charge on capacitor $Q$:\n$$Q_2 = C_2 V = 20\\,\\mu\\text{F} \\times 2\\text{ V} = 40\\,\\mu\\text{C} = 4 \\times 10^{-5}\\text{ C}$$\nThus, $\\alpha = 4$."
+  },
+  {
+    "id": "af5730f6-7b22-453e-8ce3-c5cf74b47a8e",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "1",
+    "numerical_answer": 1,
+    "explanation": "Electric field inside the conductor:\n$$E = \\frac{V}{L} = \\frac{2\\text{ V}}{2\\text{ m}} = 1\\text{ V/m}$$\nCurrent is related to electron mobility $\\mu$ by $I = n e A v_d = n e A \\mu E$:\n$$\\mu = \\frac{I}{n e A E} = \\frac{1.6}{(5 \\times 10^{28}) \\times (1.6 \\times 10^{-19}) \\times (0.2 \\times 10^{-6}) \\times 1}$$\n$$\\mu = \\frac{1.6}{1.6 \\times 10^3} = 10^{-3}\\text{ m}^2/(\\text{V}\\cdot\\text{s}) = 1 \\times 10^{-3}\\text{ m}^2/(\\text{V}\\cdot\\text{s})$$\nThus, $\\alpha = 1$."
+  },
+  {
+    "id": "183a746a-11e1-4d0c-8aa8-e58634b50714",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "$[\\text{Ni}(\\text{PPh}_3)_2\\text{Cl}_2]$ is a tetrahedral $sp^3$ hybridized complex (paramagnetic, $3d^8$ with 2 unpaired electrons):\n- A is incorrect because tetrahedral complexes of the type $Ma_2b_2$ do not exhibit geometrical isomerism.\n- B is incorrect because this complex is dark blue/green in color, not white.\n- C is correct: $\\mu = \\sqrt{2(2+2)} = 2.84\\text{ BM}$.\n- D is incorrect because for tetrahedral geometry, CFSE is $-0.8\\Delta_t$, not $-0.8\\Delta_o$.\n- E is correct because both $[\\text{Ni}(\\text{PPh}_3)_2\\text{Cl}_2]$ and $\\text{Ni}(\\text{CO})_4$ possess tetrahedral geometry.\nThus, the incorrect statements are A, B and D."
+  },
+  {
+    "id": "59a29ff4-95e1-4566-b94a-257d911e5425",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Acid-catalyzed hydration of 3,3-dimethyl-1-butene (Reaction B) proceeds via carbocation rearrangement (1,2-methyl shift) to give 2,3-dimethyl-2-butanol as the major product rather than 3,3-dimethyl-2-butanol. Reactions C and E also fail to yield 3,3-dimethyl-2-butanol. Thus, it cannot be prepared by B, C and E."
+  },
+  {
+    "id": "f1740518-b734-4a1e-aca9-6a06ac6b88e6",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Characteristics of a primary standard:\nA. Hydrated salts with definite composition (e.g., oxalic acid dihydrate) can be used as primary standards (True).\nB. It should be stable and not react with atmospheric gases (True).\nC. Its reactions should be stoichiometric, rapid, and instantaneous (True).\nD. It must be highly soluble in water (Statement D is false).\nE. It should have a high molar mass to minimize weighing errors (Statement E is false).\nHence, A, B and C are correct."
+  },
+  {
+    "id": "35b2c0f6-7307-4d73-b3ac-cb95b4e6446f",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Given $\\text{pH} = 9.25 \\implies \\text{pOH} = 14 - 9.25 = 4.75$.\nBy Henderson-Hasselbalch equation for a basic buffer:\n$$\\text{pOH} = \\text{pK}_b + \\log\\left(\\frac{[\\text{NH}_4^+]}{[\\text{NH}_4\\text{OH}]}\\right) \\implies 4.75 = 4.75 + \\log\\left(\\frac{[\\text{NH}_4^+]}{[\\text{NH}_4\\text{OH}]}\\right) \\implies [\\text{NH}_4^+] = [\\text{NH}_4\\text{OH}]$$\nFor option (B):\n- Moles of $\\text{NH}_4\\text{OH} = 0.2\\text{ M} \\times 0.5\\text{ L} = 0.1\\text{ mol}$\n- Moles of $\\text{HCl} = 0.1\\text{ M} \\times 0.5\\text{ L} = 0.05\\text{ mol}$\nNeutralization produces $0.05\\text{ mol}$ of $\\text{NH}_4^+$ and leaves $0.1 - 0.05 = 0.05\\text{ mol}$ of unreacted $\\text{NH}_4\\text{OH}$, giving a $1:1$ ratio."
+  },
+  {
+    "id": "a17a4a1e-20cf-4ba6-a0a9-94120d087821",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Moles of $\\text{H}_2\\text{SO}_4 = 15 \\times 10^{-3}\\text{ L} \\times 1\\text{ M} = 0.015\\text{ mol}$.\nSince $1\\text{ mol } \\text{H}_2\\text{SO}_4$ neutralizes $2\\text{ mol } \\text{NH}_3$, the moles of $\\text{NH}_3$ evolved is $2 \\times 0.015 = 0.030\\text{ mol}$.\nMoles of $\\text{N} = 0.030\\text{ mol} \\implies \\text{Mass of N} = 0.030 \\times 14 = 0.42\\text{ g}$.\n$$\\%\\text{ N} = \\frac{0.42\\text{ g}}{1.0\\text{ g}} \\times 100 = 42\\%$$."
+  },
+  {
+    "id": "ec775f5a-3684-4751-9dd3-97b7876e6813",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "A species with a more negative standard reduction potential (higher oxidation potential) is a stronger reducing agent.\n- $\\text{Al}^{3+}/\\text{Al}: E^\\circ = -1.66\\text{ V} \\implies E^\\circ_{\\text{ox}} = +1.66\\text{ V}$\n- $\\text{Cr}^{3+}/\\text{Cr}: E^\\circ = -0.74\\text{ V} \\implies E^\\circ_{\\text{ox}} = +0.74\\text{ V}$\n- $\\text{Fe}^{3+}/\\text{Fe}^{2+}: E^\\circ = +0.77\\text{ V} \\implies E^\\circ_{\\text{ox}} = -0.77\\text{ V}$\n- $\\text{Co}^{3+}/\\text{Co}^{2+}: E^\\circ = +1.81\\text{ V} \\implies E^\\circ_{\\text{ox}} = -1.81\\text{ V}$\nThus, the reducing power decreases in the order: $\\text{Al} > \\text{Cr} > \\text{Fe}^{2+} > \\text{Co}^{2+}$."
+  },
+  {
+    "id": "87c69194-6d9a-4a75-85e7-0580a6557bfe",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Alkylation of sodium propynide $\\text{CH}_3-\\text{C}\\equiv\\text{C}^-\\text{Na}^+$ with isobutyl bromide $(\\text{CH}_3)_2\\text{CHCH}_2\\text{Br}$ produces 5-methylhex-2-yne: $(\\text{CH}_3)_2\\text{CH}-\\text{CH}_2-\\text{C}\\equiv\\text{C}-\\text{CH}_3$."
+  },
+  {
+    "id": "f2f4cc1d-0e20-4df2-9545-78e8c00c64a1",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Initial moles:\n$$n_A = \\frac{36.0\\text{ g}}{60\\text{ g/mol}} = 0.60\\text{ mol}, \\quad n_B = \\frac{56.0\\text{ g}}{80\\text{ g/mol}} = 0.70\\text{ mol}$$\nFor the reaction $\\text{A} + 2\\text{B} \\to \\text{AB}_2$, $0.70\\text{ mol}$ of $\\text{B}$ requires $0.35\\text{ mol}$ of $\\text{A}$.\nThus, $\\text{B}$ is the limiting reagent (Statement A is false).\n- Molar mass of $\\text{AB}_2 = 60 + 2(80) = 220\\text{ g/mol}$ (Statement C is false).\n- Moles of $\\text{AB}_2$ formed $= 0.35\\text{ mol} \\implies \\text{Mass} = 0.35 \\times 220 = 77.0\\text{ g}$ (Statement B is true).\n- Moles of $\\text{A}$ unreacted $= 0.60 - 0.35 = 0.25\\text{ mol} \\implies \\text{Mass} = 0.25 \\times 60 = 15.0\\text{ g}$ (Statement D is true).\nThus, B and D only are correct."
+  },
+  {
+    "id": "86902a3b-1329-4da0-bd28-ae9b2e0417e2",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Compound A ($\\text{C}_8\\text{H}_8\\text{O}_2$) is 4-methoxybenzaldehyde ($p\\text{-anisaldehyde}$). It lacks $\\alpha$-hydrogens, so with concentrated $\\text{NaOH}$ it undergoes the Cannizzaro reaction to yield 4-methoxybenzyl alcohol and 4-methoxybenzoate. In cross-aldol condensation with acetophenone (which possesses $\\alpha$-hydrogens), it acts solely as the electrophilic carbonyl partner to give a single chalcone product."
+  },
+  {
+    "id": "496af113-b590-4a8d-b9ec-2b651d0163fd",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "First Balmer line ($n = 3 \\to 2$):\n$$E_1 = R_H hc \\left(\\frac{1}{2^2} - \\frac{1}{3^2}\\right) = \\frac{5}{36} R_H hc = x$$\nSecond Balmer line ($n = 4 \\to 2$):\n$$E_2 = R_H hc \\left(\\frac{1}{2^2} - \\frac{1}{4^2}\\right) = \\frac{3}{16} R_H hc$$\nRatio:\n$$\\frac{E_2}{E_1} = \\frac{3/16}{5/36} = \\frac{27}{20} = 1.35 \\implies E_2 = 1.35x$$."
+  },
+  {
+    "id": "f819e5cf-5d3b-4183-b09c-fa271ee2a39a",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The ester has a propyl group attached to the carboxylate oxygen. The carboxylic acid parent chain contains 7 carbons (heptanoate) numbered from the ester carbon: a bromine at C-2 and a methyl group at C-5. Hence, the IUPAC name is n-propyl-2-bromo-5-methylheptanoate."
+  },
+  {
+    "id": "b09075fe-50fb-4f1a-b406-20d4cf7852e8",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "- A. Glucose + $\\text{NH}_2\\text{OH} \\to$ Glucoxime (IV)\n- B. Glucose + $\\text{Br}_2$ water $\\to$ Gluconic acid (I)\n- C. Glucose + excess acetic anhydride $\\to$ Glucose pentaacetate (II)\n- D. Glucose + conc. $\\text{HNO}_3 \\to$ Saccharic acid (III)\nThus, the correct match is A-IV, B-I, C-II, D-III."
+  },
+  {
+    "id": "3ca847d2-bb83-4d8f-8536-5447dd91803c",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Mass of $\\text{H}_2\\text{SO}_4 = 98\\text{ g} + 49\\text{ g} = 147\\text{ g} \\implies n_{\\text{H}_2\\text{SO}_4} = \\frac{147}{98} = 1.5\\text{ mol}$.\nMass of $\\text{H}_2\\text{O} = 2\\text{ g} + 51\\text{ g} = 53\\text{ g} \\implies n_{\\text{H}_2\\text{O}} = \\frac{53}{18} \\approx 2.944\\text{ mol}$.\nMole fraction of $\\text{H}_2\\text{SO}_4$:\n$$\\chi_{\\text{H}_2\\text{SO}_4} = \\frac{1.5}{1.5 + 2.944} = \\frac{1.5}{4.444} \\approx 0.337$$."
+  },
+  {
+    "id": "e476dabb-ba1f-4cf4-ad6b-e9146ea35b2f",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Following the reaction sequence in the given diagram, the final product $[\\text{B}]$ is correctly depicted in option (A)."
+  },
+  {
+    "id": "c88c9dc8-05e5-4735-862e-8efed6fdcc5d",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Statement I: Down group 15, electronegativity decreases: $\\text{N} > \\text{P} > \\text{As} > \\text{Sb}$. Thus, $\\text{X} = \\text{N}$ (most electronegative) and $\\text{Y} = \\text{Sb}$ (least electronegative). $\\text{N}_2\\text{O}_3$ is acidic while $\\text{Sb}_2\\text{O}_3$ is amphoteric. Statement I is true.\nStatement II: Boron lacks vacant $d$-orbitals, so its maximum covalency is 4. Thus, it cannot form octahedral $[\\text{B(H}_2\\text{O)}_6]^{3+}$. Statement II is false.\nHence, Statement I is true but Statement II is false."
+  },
+  {
+    "id": "e74b7e58-2b91-4877-8159-1cbb8cf890d3",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Compound $[\\text{P}]$ on dehydrobromination with excess $\\text{NaNH}_2$ gives alkyne $[\\text{Q}]$ ($\\text{PhCH}_2\\text{C}\\equiv\\text{CH}$). Oxymercuration-hydration of $[\\text{Q}]$ gives methyl ketone $[\\text{R}]$ ($\\text{PhCH}_2\\text{COCH}_3$), which gives a positive iodoform test and negative Tollens' test. Thus, $[\\text{P}]$ is correctly shown in option (A)."
+  },
+  {
+    "id": "565972d7-3b1d-433e-88ea-a0a636084128",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Statement A is false: The Boltzmann factor $e^{-E_a/RT}$ represents the fraction of molecules with energy greater than or equal to $E_a$.\n- Statement B is true: Since $k = A e^{-E_a/RT}$, a lower activation energy $E_a$ leads to a larger rate constant $k$ and a faster reaction.\n- Statement C is true: For most reactions, the temperature coefficient is approximately 2, meaning a $10^\\circ\\text{C}$ rise doubles the rate.\n- Statement D is false: The slope of $\\log_{10} k$ vs $1/T$ is $-\\frac{E_a}{2.303 R}$, not $-\\frac{E_a}{R}$.\nThus, B and C only are correct."
+  },
+  {
+    "id": "2d0e5627-3c06-4a3e-857e-424f8d1b17fb",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "- Statement I is true: $\\text{IE}_1$ of $\\text{Cr}$ ($652\\text{ kJ/mol}$) is lower than that of $\\text{Mn}$ ($717\\text{ kJ/mol}$) due to the stable $4s^2$ configuration of $\\text{Mn}$.\n- Statement II is false: While $\\text{IE}_2(\\text{Cr}) > \\text{IE}_2(\\text{Mn})$ due to the stable $3d^5$ configuration of $\\text{Cr}^+$, $\\text{IE}_3(\\text{Mn}) > \\text{IE}_3(\\text{Cr})$ because the third electron in $\\text{Mn}$ must be removed from the stable half-filled $3d^5$ subshell of $\\text{Mn}^{2+}$.\nThus, Statement I is true but Statement II is false."
+  },
+  {
+    "id": "a6d84c4d-9238-4ece-a4d5-872239459ed6",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Statement I is true: Nitrogen has a half-filled $2p^3$ configuration, so its first ionization enthalpy is higher than that of oxygen, giving the order $\\text{C} < \\text{O} < \\text{N} < \\text{F}$.\n- Statement II is true: Due to strong interelectronic repulsions in the small $2p$ subshell of oxygen, oxygen has a lower magnitude of electron gain enthalpy than sulfur and the other group 16 elements, giving the order $\\text{S} > \\text{Se} > \\text{Te} > \\text{Po} > \\text{O}$.\nThus, both Statement I and Statement II are true."
+  },
+  {
+    "id": "5ae139f5-9464-4f0f-a4a0-05f4d0bf0c96",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The dipole moments are: $\\text{H}_2\\text{O} \\approx 1.85\\text{ D}$, $\\text{NH}_3 \\approx 1.47\\text{ D}$, $\\text{CHCl}_3 \\approx 1.04\\text{ D}$, $\\text{H}_2\\text{S} \\approx 0.95\\text{ D}$, and $\\text{NF}_3 \\approx 0.23\\text{ D}$.\nIn $\\text{NF}_3$, the orbital dipole of the lone pair opposes the resultant dipole of the three highly polar $\\text{N}-\\text{F}$ bonds, resulting in the lowest net dipole moment.\nThe central nitrogen atom in $\\text{NF}_3$ has $1$ lone pair."
+  },
+  {
+    "id": "7ba6b51c-e649-4656-aba7-4c98243056d7",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "3",
+    "numerical_answer": 3,
+    "explanation": "A mixed oxide contains a metal in two different oxidation states:\n1. $\\text{Mn}_3\\text{O}_4 = \\text{MnO} \\cdot \\text{Mn}_2\\text{O}_3$ (contains $\\text{Mn}^{2+}$ and $\\text{Mn}^{3+}$)\n2. $\\text{Fe}_3\\text{O}_4 = \\text{FeO} \\cdot \\text{Fe}_2\\text{O}_3$ (contains $\\text{Fe}^{2+}$ and $\\text{Fe}^{3+}$)\n3. $\\text{Co}_3\\text{O}_4 = \\text{CoO} \\cdot \\text{Co}_2\\text{O}_3$ (contains $\\text{Co}^{2+}$ and $\\text{Co}^{3+}$)\nThe other oxides ($\\text{Ti}_2\\text{O}_3, \\text{V}_2\\text{O}_4, \\text{Cr}_2\\text{O}_3, \\text{Fe}_2\\text{O}_3$) contain metals in single oxidation states.\nThus, there are $3$ mixed oxides."
+  },
+  {
+    "id": "5625b28f-19da-4362-84ef-4ae0ad2d849b",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "1031",
+    "numerical_answer": 1031,
+    "explanation": "Using the Born-Haber cycle for $\\text{LiF(s)}$:\n$$\\Delta H_f^\\circ(\\text{LiF}) = \\Delta H_{\\text{sub}}(\\text{Li}) + \\text{IE}(\\text{Li}) + \\frac{1}{2}\\Delta H_{\\text{diss}}(\\text{F}_2) + \\Delta_{\\text{eg}}H(\\text{F}) + U_{\\text{lattice}}$$\n$$-594 = 155 + 520 + \\frac{1}{2}(150) + (-313) + U_{\\text{lattice}}$$\n$$-594 = 155 + 520 + 75 - 313 + U_{\\text{lattice}} = 437 + U_{\\text{lattice}}$$\n$$U_{\\text{lattice}} = -594 - 437 = -1031\\text{ kJ/mol}$$\nMagnitude of lattice enthalpy is $1031\\text{ kJ/mol}$."
+  },
+  {
+    "id": "96715f7c-4053-4a06-ab91-fe809ee644d0",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "10",
+    "numerical_answer": 10,
+    "explanation": "Benzoylation of aniline:\n$$\\text{C}_6\\text{H}_5\\text{NH}_2 + \\text{C}_6\\text{H}_5\\text{COCl} \\to \\text{C}_6\\text{H}_5\\text{NHCOC}_6\\text{H}_5 + \\text{HCl}$$\n- Molar mass of aniline ($\\text{C}_6\\text{H}_7\\text{N}$) $= 93\\text{ g/mol}$\n- Molar mass of benzanilide ($\\text{C}_{13}\\text{H}_{11}\\text{NO}$) $= 197\\text{ g/mol}$\nTheoretical yield from $5.8\\text{ g}$ of aniline:\n$$\\text{Theoretical mass} = 5.8\\text{ g} \\times \\frac{197\\text{ g/mol}}{93\\text{ g/mol}} \\approx 12.286\\text{ g}$$\nWith an $82\\%$ yield:\n$$\\text{Actual mass} = 12.286 \\times 0.82 \\approx 10.07\\text{ g} \\approx 10\\text{ g}$$."
+  },
+  {
+    "id": "b9427a20-ea73-4a81-b90f-42c7a9b53892",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "57",
+    "numerical_answer": 57,
+    "explanation": "Comparing $\\log_{10} k = 14.34 - \\frac{1.5 \\times 10^4}{T}$ with the Arrhenius equation $\\log_{10} k = \\log_{10} A - \\frac{E_{a1}}{2.303 R T}$:\n$$\\frac{E_{a1}}{2.303 R} = 1.5 \\times 10^4\\text{ K}$$\n$$E_{a1} = 1.5 \\times 10^4 \\times 2.303 \\times 8.314\\text{ J/mol} = 287.2\\text{ kJ/mol}$$\nActivation energy of reaction 2 is:\n$$E_{a2} = \\frac{1}{5} E_{a1} = \\frac{287.2}{5} = 57.44\\text{ kJ/mol} \\approx 57\\text{ kJ/mol}$$."
+  },
+  {
+    "id": "44a3bb58-dc35-4fc4-9695-4a3fdc11d005",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "At the anode, oxygen evolution corresponds to oxidation of water: $2\\text{H}_2\\text{O} \\to \\text{O}_2 + 4\\text{H}^+ + 4e^-$.\nThe reduction potential for this half-cell is:\n$$E_{\\text{anode}} = E^\\circ_{\\text{O}_2/\\text{H}_2\\text{O}} - \\frac{0.059}{4}\\log\\left(\\frac{1}{P_{\\text{O}_2} [\\text{H}^+]^4}\\right) = 1.23 - 0.059\\,\\text{pH}$$\nAt the cathode: $\\text{M}^{2+} + 2e^- \\to \\text{M}$ with $E_{\\text{cathode}} = E^\\circ_{\\text{M}^{2+}/\\text{M}} = 0.994\\text{ V}$.\nFor oxygen evolution to proceed spontaneously ($E_{\\text{cell}} > 0$):\n$$E_{\\text{cell}} = E_{\\text{cathode}} - E_{\\text{anode}} > 0$$\n$$0.994 - (1.23 - 0.059\\,\\text{pH}) > 0 \\implies 0.059\\,\\text{pH} > 0.236 \\implies \\text{pH} > 4$$."
+  }
+]

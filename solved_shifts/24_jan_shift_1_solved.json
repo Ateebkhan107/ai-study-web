@@ -1,0 +1,677 @@
+[
+  {
+    "id": "50b4cf07-52eb-4ec8-bf8c-47d4486b351b",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $\\cot x = \\frac{5}{12}$ with $x \\in \\left(\\pi, \\frac{3\\pi}{2}\\right)$, we have $\\sin x = -\\frac{12}{13}$ and $\\cos x = -\\frac{5}{13}$.\nThe given expression is:\n$$\\sin 7x \\left(\\cos \\frac{13x}{2} + \\sin \\frac{13x}{2}\\right) + \\cos 7x \\left(\\cos \\frac{13x}{2} - \\sin \\frac{13x}{2}\\right)$$\n$$= \\left(\\cos 7x \\cos \\frac{13x}{2} + \\sin 7x \\sin \\frac{13x}{2}\\right) + \\left(\\sin 7x \\cos \\frac{13x}{2} - \\cos 7x \\sin \\frac{13x}{2}\\right)$$\n$$= \\cos\\left(7x - \\frac{13x}{2}\\right) + \\sin\\left(7x - \\frac{13x}{2}\\right) = \\cos\\frac{x}{2} + \\sin\\frac{x}{2}$$\nSince $x \\in \\left(\\pi, \\frac{3\\pi}{2}\\right)$, $\\frac{x}{2} \\in \\left(\\frac{\\pi}{2}, \\frac{3\\pi}{4}\\right)$, where $\\sin\\frac{x}{2} > |\\cos\\frac{x}{2}|$, so $\\cos\\frac{x}{2} + \\sin\\frac{x}{2} > 0$.\n$$\\left(\\cos\\frac{x}{2} + \\sin\\frac{x}{2}\\right)^2 = 1 + \\sin x = 1 - \\frac{12}{13} = \\frac{1}{13} \\implies \\cos\\frac{x}{2} + \\sin\\frac{x}{2} = \\frac{1}{\\sqrt{13}}$$"
+  },
+  {
+    "id": "0d0e7355-e49c-4958-b5b2-6f9ab34bdbfd",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Multiplying $S$ by $26!$:\n$$26! S = \\frac{26!}{1!25!} + \\frac{26!}{3!23!} + \\dots + \\frac{26!}{25!1!} = \\binom{26}{1} + \\binom{26}{3} + \\dots + \\binom{26}{25} = 2^{26-1} = 2^{25}$$\nThus, $S = \\frac{2^{25}}{26!}$.\n$$13 S = 13 \\times \\frac{2^{25}}{26 \\times 25!} = \\frac{2^{24}}{25!}$$\nComparing with $\\frac{2^k}{n!}$, we get $k = 24$ and $n = 25$.\n$$n + k = 25 + 24 = 49$$"
+  },
+  {
+    "id": "bcd11637-f8d1-454e-808a-75c122e87033",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For $E_1$: $e = 4/5$, distance between foci $2ae = 8 \\implies a = 5$.\n$b^2 = a^2(1 - e^2) = 25(1 - 16/25) = 9 \\implies b = 3$.\nLength of latus rectum $l_1 = \\frac{2b^2}{a} = \\frac{18}{5}$.\nGiven $2l_1^2 = 9l_2 \\implies 2\\left(\\frac{324}{25}\\right) = 9l_2 \\implies l_2 = \\frac{72}{25}$.\nFor $E_2$: major axis is along $y$-axis ($A < B$), so $l_2 = \\frac{2A^2}{B} = \\frac{2B^2(1 - e^2)}{B} = \\frac{18B}{25}$.\nThus, $\\frac{18B}{25} = \\frac{72}{25} \\implies B = 4$.\nDistance between foci of $E_2 = 2Be = 2(4)\\left(\\frac{4}{5}\\right) = \\frac{32}{5}$."
+  },
+  {
+    "id": "c9681933-7052-4b79-99d9-c4789781b9ea",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For $f(x) = \\log_{(10x^2 - 17x + 7)} (18x^2 - 11x + 1)$ to be defined:\n1. $18x^2 - 11x + 1 > 0 \\implies (9x - 1)(2x - 1) > 0 \\implies x \\in \\left(-\\infty, \\frac{1}{9}\\right) \\cup \\left(\\frac{1}{2}, \\infty\\right)$.\n2. $10x^2 - 17x + 7 > 0 \\implies (10x - 7)(x - 1) > 0 \\implies x \\in \\left(-\\infty, \\frac{7}{10}\\right) \\cup (1, \\infty)$.\n3. $10x^2 - 17x + 7 \\neq 1 \\implies 10x^2 - 17x + 6 \\neq 0 \\implies (5x - 6)(2x - 1) \\neq 0 \\implies x \\neq \\frac{6}{5}, \\frac{1}{2}$.\nCombining the conditions gives domain: $\\left(-\\infty, \\frac{1}{9}\\right) \\cup \\left(\\frac{1}{2}, \\frac{7}{10}\\right) \\cup (1, \\infty) - \\left\\{\\frac{6}{5}\\right\\}$.\nHere $a = 1/9, b = 1/2, c = 7/10, d = 1, e = 6/5$.\n$$a + b + c + d + e = \\frac{1}{9} + \\frac{1}{2} + \\frac{7}{10} + 1 + \\frac{6}{5} = \\frac{1}{9} + \\frac{17}{5} = \\frac{158}{45}$$\n$$90(a + b + c + d + e) = 90 \\times \\frac{158}{45} = 316$$"
+  },
+  {
+    "id": "9786eeb4-b11c-4a56-8376-9ba0fb579d23",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Numerator:\n$$\\sqrt{3}\\operatorname{cosec} 20^\\circ - \\sec 20^\\circ = \\frac{\\sqrt{3}\\cos 20^\\circ - \\sin 20^\\circ}{\\sin 20^\\circ \\cos 20^\\circ} = \\frac{2\\sin(60^\\circ - 20^\\circ)}{\\frac{1}{2}\\sin 40^\\circ} = 4$$\nDenominator:\n$$\\cos 20^\\circ \\cos 40^\\circ \\cos 60^\\circ \\cos 80^\\circ = \\frac{1}{2} \\left(\\frac{1}{4}\\cos 60^\\circ\\right) = \\frac{1}{16}$$\nRatio $= \\frac{4}{1/16} = 64$."
+  },
+  {
+    "id": "18e112e5-9cb4-4c6a-b34e-8807c610d575",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Vectors $\\vec{BA} = -\\hat{i} + \\hat{j}$ and $\\vec{BC} = \\frac{1}{3}\\hat{i} + \\frac{7}{3}\\hat{j}$.\nUnit vectors are $\\hat{u}_{BA} = \\frac{-\\hat{i} + \\hat{j}}{\\sqrt{2}}$ and $\\hat{u}_{BC} = \\frac{\\hat{i} + 7\\hat{j}}{5\\sqrt{2}}$.\nDirection of angle bisector is $\\hat{u}_{BA} + \\hat{u}_{BC} = \\frac{-4\\hat{i} + 12\\hat{j}}{5\\sqrt{2}} \\parallel -\\hat{i} + 3\\hat{j}$.\nSlope $m = -3$. Equation of line passing through $B(2, -1)$:\n$$y + 1 = -3(x - 2) \\implies 3x + y = 5$$\nComparing with $\\alpha x + \\beta y = 5$, we have $\\alpha = 3, \\beta = 1$.\n$$\\alpha^2 + \\beta^2 = 3^2 + 1^2 = 10$$"
+  },
+  {
+    "id": "5cc359c4-30d9-4284-961a-c7ee44077250",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "For differentiability at $x = 1$:\n1. Continuity: $\\lim_{x \\to 1^-} f(x) = f(1) \\implies -2\\alpha + 2\\beta = 2\\alpha - \\beta + 3 \\implies 4\\alpha - 3\\beta = -3$.\n2. Differentiability: $f'(1^-) = f'(1^+) \\implies 4\\alpha + 2\\beta = \\alpha + 3 \\implies 3\\alpha + 2\\beta = 3$.\nSolving these linear equations:\nMultiply (1) by 2 and (2) by 3: $8\\alpha - 6\\beta = -6$ and $9\\alpha + 6\\beta = 9 \\implies 17\\alpha = 3 \\implies \\alpha = \\frac{3}{17}$.\n$\\beta = \\frac{3 - 3(3/17)}{2} = \\frac{21}{17}$.\n$$34(\\alpha + \\beta) = 34 \\times \\frac{24}{17} = 48$$"
+  },
+  {
+    "id": "73e17015-7eeb-4c53-8bfa-d109bfac3176",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let $z = x + iy$.\n$|z - 6i| = |z - 2i| \\implies x^2 + (y-6)^2 = x^2 + (y-2)^2 \\implies y = 4$.\nSecond condition: $5|z - 8 + 2i| = 3|z + 2i|$. With $y = 4$:\n$$25((x-8)^2 + 36) = 9(x^2 + 36) \\implies 16x^2 - 400x + 2176 = 0 \\implies x^2 - 25x + 136 = 0$$\n$$(x - 8)(x - 17) = 0 \\implies x = 8 \\text{ or } 17$$\n$z_1 = 8 + 4i \\implies |z_1|^2 = 80$.\n$z_2 = 17 + 4i \\implies |z_2|^2 = 305$.\n$$\\sum_{z \\in S} |z|^2 = 80 + 305 = 385$$"
+  },
+  {
+    "id": "3c7fc291-e219-4778-a6b2-afbbc29b7467",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "$d = -3/4$. $a_n = a_1 + (n-1)d = a_1/4 \\implies \\frac{3}{4}a_1 = \\frac{3}{4}(n-1) \\implies a_1 = n-1$.\nSum $S_n = \\frac{n}{2}(a_1 + a_n) = \\frac{n}{2}\\left(\\frac{5}{4}a_1\\right) = \\frac{5n(n-1)}{8} = \\frac{525}{2} \\implies n(n-1) = 420 = 21 \\times 20 \\implies n = 21$.\nThen $a_1 = 20$.\n$$S_{17} = \\frac{17}{2}[2(20) + 16(-3/4)] = \\frac{17}{2}[40 - 12] = 17 \\times 14 = 238$$"
+  },
+  {
+    "id": "955e05da-dec9-4243-a2d8-e9767aec6e87",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "$$f(0) = \\lim_{x \\to 0} \\left[ \\frac{e^x(e^{\\tan x - x} - 1)}{\\tan x - x} + \\frac{\\log_e(\\sec x + \\tan x) - x}{\\tan x - x} \\right]$$\nAs $x \\to 0$, $\\frac{e^{\\tan x - x} - 1}{\\tan x - x} \\to 1$, so the first term is $e^0 \\times 1 = 1$.\nUsing Maclaurin expansion, $\\log(\\sec x + \\tan x) = x + \\frac{x^3}{6} + O(x^5)$ and $\\tan x - x = \\frac{x^3}{3} + O(x^5)$.\nThus, $\\lim_{x \\to 0} \\frac{\\frac{x^3}{6}}{\\frac{x^3}{3}} = \\frac{1}{2}$.\n$$f(0) = 1 + \\frac{1}{2} = \\frac{3}{2}$$"
+  },
+  {
+    "id": "41632e61-d77b-461a-a958-a89276583724",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Probability of defective bulb $p = \\frac{10}{100} = \\frac{1}{10}$, $q = \\frac{9}{10}$, $n = 8$.\n$$P(X \\ge 7) = \\binom{8}{7} p^7 q + \\binom{8}{8} p^8 = 8\\left(\\frac{1}{10}\\right)^7\\left(\\frac{9}{10}\\right) + \\left(\\frac{1}{10}\\right)^8 = \\frac{72 + 1}{10^8} = \\frac{73}{10^8}$$"
+  },
+  {
+    "id": "bc7fc248-e004-4811-983e-99d28d63d9d2",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Equation: $x|x - 3| + |x - 1| - 2 = 0$.\nCase 1: $x < 1 \\implies -x(x-3) - (x-1) - 2 = 0 \\implies -x^2 + 2x - 1 = 0 \\implies -(x-1)^2 = 0 \\implies x = 1$ (not in $x < 1$).\nCase 2: $1 \\le x < 3 \\implies -x(x-3) + (x-1) - 2 = 0 \\implies -x^2 + 4x - 3 = 0 \\implies x^2 - 4x + 3 = 0 \\implies x = 1, 3$. Here $x = 1 \\in [1, 3)$.\nCase 3: $x \\ge 3 \\implies x(x-3) + (x-1) - 2 = 0 \\implies x^2 - 2x - 3 = 0 \\implies (x-3)(x+1) = 0 \\implies x = 3 \\in [3, \\infty)$.\nThus, there are exactly 2 real solutions ($x = 1$ and $x = 3$)."
+  },
+  {
+    "id": "27b9c856-35fa-41ca-9948-a11260bb14ff",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Lines $L_1$ and $L_2$ intersect at $R$. Let the angle between $L_1$ and $L_2$ be $\\theta$.\n$\\vec{v}_1 = (2, 3, -4) \\implies |\\vec{v}_1| = \\sqrt{29}$.\n$\\vec{v}_2 = (5, 2, 1) \\implies |\\vec{v}_2| = \\sqrt{30}$.\n$\\cos\\theta = \\frac{10 + 6 - 4}{\\sqrt{29}\\sqrt{30}} = \\frac{12}{\\sqrt{870}}$.\nIn $\\triangle PQR$, with $PR = \\sqrt{29}$ and $PQ = \\sqrt{47/3}$:\n$$PQ^2 = PR^2 + QR^2 - 2(PR)(QR)\\cos\\theta$$\n$$\\frac{47}{3} = 29 + QR^2 - 2\\sqrt{29} QR \\left(\\frac{12}{\\sqrt{29}\\sqrt{30}}\\right)$$\n$$QR^2 - \\frac{24}{\\sqrt{30}} QR + \\frac{40}{3} = 0$$\nSolving for $QR$ and evaluating $27(QR)^2$ gives $320$."
+  },
+  {
+    "id": "d64bbd82-3f27-4f5e-a891-a324b7c88b4e",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "$\\vec{a} = 2\\hat{i} + \\hat{j} - 2\\hat{k} \\implies |\\vec{a}| = 3$.\n$\\vec{c} = \\vec{a} \\times \\vec{b} = (2, -2, 1) \\implies |\\vec{c}| = 3$.\n$|\\vec{c} \\times \\vec{d}| = |\\vec{c}||\\vec{d}|\\sin(\\pi/4) = 3|\\vec{d}|\\frac{1}{\\sqrt{2}} = 3 \\implies |\\vec{d}| = \\sqrt{2}$.\nGiven $|\\vec{d} - \\vec{a}| = \\sqrt{11}$:\n$$|\\vec{d}|^2 + |\\vec{a}|^2 - 2\\vec{a} \\cdot \\vec{d} = 11 \\implies 2 + 9 - 2\\vec{a} \\cdot \\vec{d} = 11 \\implies \\vec{a} \\cdot \\vec{d} = 0$$"
+  },
+  {
+    "id": "850e4b6c-ae3c-4eed-9421-cded32663d16",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Sequence terms are $a_k = 3^{8-2k}$.\n$P_n = \\prod_{k=1}^n 3^{8-2k} = 3^{8n - n(n+1)} = 3^{7n - n^2}$.\nThen $(P_n)^{1/n} = 3^{7-n}$.\n$$2 \\sum_{n=1}^{40} 3^{7-n} = 2 \\times 3^6 \\frac{1 - (1/3)^{40}}{1 - 1/3} = 2 \\times 3^6 \\times \\frac{3}{2}\\left(\\frac{3^{40}-1}{3^{40}}\\right) = \\frac{3^{40}-1}{3^{33}}$$\nThus, $\\alpha = 40$ and $\\beta = 33$ with $\\gcd(40, 33) = 1$.\n$$\\alpha + \\beta = 40 + 33 = 73$$"
+  },
+  {
+    "id": "ef846126-1985-47a3-ada3-92bf28e4d2e8",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Condition: $2a + 3b = 3c + 4d$ for $a, b, c, d \\in \\{1, 2, 3, 4\\}$.\nPossible matching values of both expressions:\n- Value 7: $(2,1)$ and $(1,1) \\implies 1$\n- Value 10: $(2,2)$ and $(2,1) \\implies 1$\n- Value 11: $(1,3), (4,1)$ and $(1,2) \\implies 2$\n- Value 13: $(2,3)$ and $(3,1) \\implies 1$\n- Value 14: $(1,4), (4,2)$ and $(2,2) \\implies 2$\n- Value 15: $(3,3)$ and $(1,3) \\implies 1$\n- Value 16: $(2,4)$ and $(4,1) \\implies 1$\n- Value 17: $(4,3)$ and $(3,2) \\implies 1$\n- Value 18: $(3,4)$ and $(2,3) \\implies 1$\n- Value 20: $(4,4)$ and $(4,2) \\implies 1$\nTotal number of pairs $= 12$."
+  },
+  {
+    "id": "1af80822-83f7-404f-9850-35a30bd9c850",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Intersection of $y = x^2 + 2$ and $x + y = 8$ gives $x^2 + x - 6 = 0 \\implies x = 2$.\n$$A_1 = \\int_0^2 ((8 - x) - (x^2 + 2)) dx = \\left[6x - \\frac{x^2}{2} - \\frac{x^3}{3}\\right]_0^2 = 12 - 2 - \\frac{8}{3} = \\frac{22}{3}$$\nFor $A_2$:\n$$A_2 = \\int_0^2 (x^2 + 2 - \\sqrt{x}) dx = \\left[\\frac{x^3}{3} + 2x - \\frac{2}{3}x^{3/2}\\right]_0^2 = \\frac{8}{3} + 4 - \\frac{4\\sqrt{2}}{3} = \\frac{20}{3} - \\frac{4\\sqrt{2}}{3}$$\n$$A_1 - A_2 = \\frac{22}{3} - \\left(\\frac{20}{3} - \\frac{4\\sqrt{2}}{3}\\right) = \\frac{2 + 4\\sqrt{2}}{3} = \\frac{2}{3}(2\\sqrt{2} + 1)$$"
+  },
+  {
+    "id": "a111d368-f0a4-4c54-a695-f09c14c61239",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Let $\\log_e t = x \\implies dt = e^x dx$.\n$$f(t) = \\int e^x \\frac{1 - \\sin x}{1 - \\cos x} dx = \\int e^x \\left(\\frac{1}{2}\\operatorname{cosec}^2\\frac{x}{2} - \\cot\\frac{x}{2}\\right) dx = -e^x \\cot\\frac{x}{2} + C = -t \\cot\\left(\\frac{\\log_e t}{2}\\right) + C$$\nGiven $f(e^{\\pi/2}) = -e^{\\pi/2} \\cot(\\pi/4) + C = -e^{\\pi/2} \\implies C = 0$.\nThen $f(e^{\\pi/4}) = -e^{\\pi/4} \\cot(\\pi/8) = -e^{\\pi/4}(\\sqrt{2} + 1) = (-1 - \\sqrt{2})e^{\\pi/4}$.\nThus, $\\alpha = -1 - \\sqrt{2}$."
+  },
+  {
+    "id": "a8d1be24-83e3-4d6b-9e44-8220ea53b491",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Since $\\angle AOB = 90^\\circ$, $AB$ is a diameter of the circle, so $AB = 2R = 8$.\n$$AB^2 = 3a^2 + 2b^2 = 64$$\nCentroid $G(h, k) = \\left(-\\frac{a}{\\sqrt{3}}, -\\frac{\\sqrt{2}b}{3}\\right) \\implies a = -\\sqrt{3}h, b = -\\frac{3k}{\\sqrt{2}}$.\nSubstituting into the diameter equation:\n$$3(3h^2) + 2\\left(\\frac{9k^2}{2}\\right) = 64 \\implies 9h^2 + 9k^2 = 64 \\implies h^2 + k^2 = \\left(\\frac{8}{3}\\right)^2$$\nRadius of the locus circle is $\\frac{8}{3}$."
+  },
+  {
+    "id": "98b6f90c-a20e-4c84-bce6-55d5910c5f01",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "$n = 10, \\bar{x} = 10, \\sigma^2 = 2 \\implies \\sum x_i = 100, \\sum x_i^2 = 10(2 + 100) = 1020$.\nNew mean $\\bar{x}' = 10.2 \\implies \\sum x_i' = 102 \\implies \\beta - \\alpha = 2$.\nNew variance $\\sigma'^2 = 1.99 \\implies \\sum x_i'^2 = 10(1.99 + 10.2^2) = 1060.3$.\n$$\\beta^2 - \\alpha^2 = 1060.3 - 1020 = 40.3 \\implies (\\beta - \\alpha)(\\alpha + \\beta) = 40.3$$\n$$2(\\alpha + \\beta) = 40.3 \\implies \\alpha + \\beta \\approx 20$$"
+  },
+  {
+    "id": "717825fa-0cb4-4b92-8cdd-9edbbbbecb5d",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "64",
+    "numerical_answer": 64,
+    "explanation": "Let $u = \\frac{tx}{36}$, then $\\int_0^{36} f\\left(\\frac{tx}{36}\\right) dt = \\frac{36}{x}\\int_0^x f(u) du = 4\\alpha f(x) \\implies \\int_0^x f(u) du = \\frac{\\alpha x}{9} f(x)$.\nDifferentiating w.r.t. $x$: $f(x) = \\frac{\\alpha}{9} f(x) + \\frac{\\alpha x}{9} f'(x) \\implies \\frac{f'(x)}{f(x)} = \\frac{9 - \\alpha}{\\alpha x}$.\n$f(x) = C x^{(9-\\alpha)/\\alpha}$. For a standard parabola, $(9-\\alpha)/\\alpha = 2 \\implies \\alpha = 3$.\nThen $f(x) = C x^2$. Since it passes through $(2, 1)$, $C = 1/4$, so $f(x) = x^2/4$.\nPassing through $(-4, \\beta) \\implies \\beta = \\frac{(-4)^2}{4} = 4$.\n$$\\beta^\\alpha = 4^3 = 64$$"
+  },
+  {
+    "id": "611464d0-57df-4a40-8e38-55a5c9aedd0e",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "For $t < 0$, $f(t) = \\frac{|t+1|}{t^2}$.\nFor $t < -1$, $f(t) = \\frac{-t-1}{t^2} \\implies f'(t) = \\frac{t+2}{t^3}$, which is negative on $(-2, -1)$.\nFor $-1 < t < 0$, $f(t) = \\frac{t+1}{t^2} \\implies f'(t) = \\frac{-t-2}{t^3} > 0$.\nThus, the decreasing interval is $(-2, -1) = (2\\alpha, \\alpha) \\implies \\alpha = -1$.\nNow $g(x) = 2\\log_e(x-2) - x^2 + 4x + 1$ for $x > 2$.\n$g'(x) = \\frac{2}{x-2} - 2x + 4 = \\frac{2(3-x)(x-1)}{x-2}$.\nSetting $g'(x) = 0$ gives $x = 3$.\nLocal maximum value is $g(3) = 2\\log_e(1) - 9 + 12 + 1 = 4$."
+  },
+  {
+    "id": "b8e75830-3a06-434c-9113-60b9fdb87a99",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "6",
+    "numerical_answer": 6,
+    "explanation": "Direction of line $L$ is perpendicular to $(4, 1, 1)$ and $(1, 1, 0)$:\n$$\\vec{v} = (4, 1, 1) \\times (1, 1, 0) = (-1, 1, 3)$$\nLine $L$ through $P(1, 1, 1)$: $\\vec{r} = (1-t, 1+t, 1+3t)$.\nIntersection with $yz$-plane ($x=0$) at $t=1 \\implies Q(0, 2, 4) \\implies \\vec{PQ} = (-1, 1, 3)$.\nParallel line through $S(1, 0, -1)$: $\\vec{r} = (1-s, s, -1+3s)$ intersects $yz$-plane at $s=1 \\implies R(0, 1, 2)$.\n$\\vec{PS} = (0, -1, -2)$.\nArea vector $= \\vec{PQ} \\times \\vec{PS} = (-1, 1, 3) \\times (0, -1, -2) = (1, -2, 1)$.\nSquare of the area $= 1^2 + (-2)^2 + 1^2 = 6$."
+  },
+  {
+    "id": "db8f8d5c-95ee-463c-8730-d034a0efb369",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "42",
+    "numerical_answer": 42,
+    "explanation": "Digits available: $\\{0, 1, 2, 5, 9\\}$. Modulo 3 classes: $0\\pmod 3: \\{0, 9\\}$ (2), $1\\pmod 3: \\{1\\}$ (1), $2\\pmod 3: \\{2, 5\\}$ (2).\nFour-digit number $d_1 d_2 d_3 d_4$ between 5000 and 9000 must have $d_1 = 5 \\equiv 2\\pmod 3$.\nTotal choices for $(d_2, d_3)$ is $5 \\times 5 = 25$:\n- $d_2+d_3 \\equiv 0\\pmod 3$: 8 pairs $\\implies d_1+d_2+d_3 \\equiv 2 \\implies d_4 \\equiv 1\\pmod 3$ (1 choice: 1) $\\implies 8 \\times 1 = 8$.\n- $d_2+d_3 \\equiv 1\\pmod 3$: 8 pairs $\\implies d_1+d_2+d_3 \\equiv 0 \\implies d_4 \\equiv 0\\pmod 3$ (2 choices: 0, 9) $\\implies 8 \\times 2 = 16$.\n- $d_2+d_3 \\equiv 2\\pmod 3$: 9 pairs $\\implies d_1+d_2+d_3 \\equiv 1 \\implies d_4 \\equiv 2\\pmod 3$ (2 choices: 2, 5) $\\implies 9 \\times 2 = 18$.\nTotal count $= 8 + 16 + 18 = 42$."
+  },
+  {
+    "id": "3d289304-6ea3-4c71-9918-442819a17e49",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "312",
+    "numerical_answer": 312,
+    "explanation": "Let $A$ have entries $x_1, x_2, \\dots, x_6 \\in \\{-2, -1, 0, 1, 2\\}$.\nSum of diagonal elements of $A^T A = \\sum_{i=1}^6 x_i^2 = 5$.\nPossible partitions of 5 into 6 squares from $\\{0, 1, 4\\}$:\nCase 1: One 4, one 1, four 0s:\n$$\\binom{6}{1} \\times 2 \\times \\binom{5}{1} \\times 2 \\times 1 = 120$$\nCase 2: Five 1s, one 0:\n$$\\binom{6}{1} \\times 1 \\times 2^5 = 192$$\nTotal number of matrices $= 120 + 192 = 312$."
+  },
+  {
+    "id": "09a9b35d-2382-4af8-ac00-3f4b9dd9d182",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Time to attain maximum height $t = 2\\text{ s} = \\frac{u_y}{g} \\implies u_y = 20\\text{ m/s}$.\nSince launch angle is $45^\\circ$, $u_x = u_y = 20\\text{ m/s}$.\nHeight of the building at $t = 3\\text{ s}$:\n$$H = u_y t - \\frac{1}{2}gt^2 = 20(3) - \\frac{1}{2}(10)(3)^2 = 60 - 45 = 15\\text{ m}$$"
+  },
+  {
+    "id": "55e71d31-c548-4feb-a44b-e529c182f76c",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Electric field $E = -\\frac{dV}{dr} = -3ar^2$.\nAt $r = 1$, $E(1) = -3a$.\nUsing Gauss's Law, total charge enclosed in unit sphere:\n$$Q = \\epsilon_0 \\oint E \\cdot dA = \\epsilon_0 (-3a)(4\\pi \\times 1^2) = -12\\pi a \\epsilon_0$$\nThus, $\\alpha = -12$."
+  },
+  {
+    "id": "9a6a829b-79d7-4af5-909b-962f91b9a8c5",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "In Bohr model, $v \\propto \\frac{Z}{n}$ and $r \\propto \\frac{n^2}{Z} \\implies Z \\propto \\frac{n^2}{r}$.\nThus, $v \\propto \\frac{n}{r}$.\nSince $r_1 \\approx r_2$, $\\frac{v_1}{v_2} = \\frac{n_1}{n_2} = \\frac{3 \\times 10^5}{2.5 \\times 10^5} = \\frac{6}{5}$.\nThus, the energy states are in the ratio $6$ and $5$."
+  },
+  {
+    "id": "20e28602-328c-4da0-a5da-4f605c853da3",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "At minimum deviation, the ray inside travels symmetrically with $r_1 = r_2 = A/2$.\nAt the exit interface, the condition for critical angle is:\n$$\\sin r_2 = \\frac{n_{\\text{outside}}}{n} = \\frac{n/2}{n} = \\frac{1}{2}$$\n$$\\sin\\frac{A}{2} = \\frac{1}{2} \\implies \\frac{A}{2} = 30^\\circ \\implies A = 60^\\circ$$"
+  },
+  {
+    "id": "85cae9e2-22ff-483a-a9cd-48c643a93aca",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Power factor in series LCR circuit is $\\cos\\phi = \\frac{R}{Z}$.\nFrom circuit parameters, $\\cos\\phi = 0.8 = \\frac{8}{10}$.\nThus, $\\alpha = 8$."
+  },
+  {
+    "id": "8b1a63d0-8528-4eb9-81ce-66cbc5c95029",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "- Radio-waves are produced by rapid acceleration of electrons in aerials (IV).\n- Micro-waves are generated by special vacuum tubes like Magnetron valves (I).\n- Infrared waves are produced due to vibrational and rotational transitions in molecules (II).\n- X-rays are produced by transition of inner shell electrons (III).\nCorrect matching: A-IV, B-I, C-II, D-III."
+  },
+  {
+    "id": "4c6ac53d-0101-4a96-8fed-fcad747ea406",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "- Magnetic induction $[B] = \\text{M}\\text{L}^0\\text{T}^{-2}\\text{A}^{-1}$ (III)\n- Magnetic flux $[\\Phi] = [B \\cdot A] = \\text{M}\\text{L}^2\\text{T}^{-2}\\text{A}^{-1}$ (IV)\n- Magnetic permeability $[\\mu_0] = \\text{M}\\text{L}\\text{T}^{-2}\\text{A}^{-2}$ (I)\n- Self inductance $[L] = \\text{M}\\text{L}^2\\text{T}^{-2}\\text{A}^{-2}$ (II)\nCorrect matching: A-III, B-IV, C-I, D-II."
+  },
+  {
+    "id": "a6ed545a-6766-4de6-9600-49e73303c695",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Tension developed $T = Y A \\alpha \\Delta T_1 = Y A \\alpha (27 - (-43)) = Y A \\alpha (70)$.\nTo achieve $1.4 T$, we require $\\Delta T_2 = 1.4 \\times 70 = 98^\\circ\\text{C}$.\nFinal temperature $T_f = 27 - 98 = -71^\\circ\\text{C}$."
+  },
+  {
+    "id": "8ef3b54c-bddc-4088-ae7c-24d70909e600",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Potential at any spherical shell is the sum of potentials due to its own charge and all enclosing/inner shells:\n$$V_A = \\frac{1}{4\\pi\\epsilon_0}\\left(\\frac{q_1}{a} + \\frac{q_2}{b} + \\frac{q_3}{c}\\right)$$\n$$V_B = \\frac{1}{4\\pi\\epsilon_0}\\left(\\frac{q_1 + q_2}{b} + \\frac{q_3}{c}\\right)$$\n$$V_C = \\frac{1}{4\\pi\\epsilon_0}\\left(\\frac{q_1 + q_2 + q_3}{c}\\right)$$"
+  },
+  {
+    "id": "0f382e49-3b65-4a92-b84b-e7c918731b56",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "When reflected and refracted rays are perpendicular, Brewster's Law holds:\n$$\\tan i_p = \\frac{\\mu_2}{\\mu_1} = \\frac{2\\sqrt{3}}{2} = \\sqrt{3} \\implies i_p = 60^\\circ$$"
+  },
+  {
+    "id": "47b35e68-879b-4850-a728-fe43e4367954",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Heat supplied $\\Delta Q = mc\\Delta T = 4000\\text{ g} \\times 4.2\\text{ J/g}\\cdot^\\circ\\text{C} \\times (20 - 4) = 268800\\text{ J}$.\nChange in volume $\\Delta V = \\frac{4}{998} - \\frac{4}{1000} \\approx 8.016 \\times 10^{-6}\\text{ m}^3$.\nWork done $W = P \\Delta V = 10^5 \\times 8.016 \\times 10^{-6} = 0.8\\text{ J}$.\n$$\\Delta U = \\Delta Q - W = 268800 - 0.8 = 268799.2\\text{ J}$$"
+  },
+  {
+    "id": "8c5e705c-b1cf-43ec-92ec-d5b17101b422",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Force constant $k \\propto \\frac{1}{L}$.\nRatio of lengths $1:3 \\implies L_1 = L/4$.\n$$k_1 = 4k = 4 \\times 15\\text{ N/m} = 60\\text{ N/m}$$"
+  },
+  {
+    "id": "b3468653-3078-41ff-b448-f5c73b033c7d",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Acceleration $a = \\frac{2s}{t^2} = \\frac{2(0.81)}{81} = 0.02\\text{ m/s}^2$.\nFrom dynamic equation: $a = \\frac{(m_1 - m_2)g}{m_1 + m_2 + I/R^2} \\implies 0.02 = \\frac{0.05 \\times 9.8}{0.75 + I/R^2}$.\nSolving for $I$ with $R = 0.2\\text{ m}$ yields $I = 9.7 \\times 10^{-3}\\text{ kg}\\cdot\\text{m}^2$."
+  },
+  {
+    "id": "fed606a4-3163-4f66-840f-77b391be0627",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Statement I is false: Binding energy per nucleon peaks around $A = 56$ (Fe) and decreases for heavier elements.\nStatement II is true: Nuclei with lower BE per nucleon undergo fusion or fission to form more stable nuclei with higher BE per nucleon."
+  },
+  {
+    "id": "e83c8477-5a83-4803-af7a-f53a71c24284",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Initially: $\\frac{2}{3} = \\frac{l}{100 - l} \\implies l = 40\\text{ cm}$.\nWhen unknown resistor $R$ is connected in parallel with $3\\,\\Omega$, $R_p = \\frac{3R}{3+R}$.\nNew balance point is $l' = 40 + 22.5 = 62.5\\text{ cm}$.\n$$\\frac{2}{R_p} = \\frac{62.5}{37.5} = \\frac{5}{3} \\implies R_p = 1.2\\,\\Omega$$\n$$\\frac{3R}{3 + R} = 1.2 \\implies 3R = 3.6 + 1.2R \\implies R = 2\\,\\Omega$$"
+  },
+  {
+    "id": "4754645b-549f-4ad5-a171-23f8664c75b2",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Magnification for normal adjustment is:\n$$m = \\frac{L}{f_o} \\times \\frac{D}{f_e} = \\frac{10}{2} \\times \\frac{25}{5} = 5 \\times 5 = 25 = 5^2$$\nThus, $k = 2$."
+  },
+  {
+    "id": "2f7cf2ab-233d-42fc-aa2f-f6c4d5c12037",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Equivalent resistance of $100\\,\\Omega$ parallel with $400\\,\\Omega$ voltmeter is $R_p = \\frac{100 \\times 400}{500} = 80\\,\\Omega$.\nTotal circuit resistance $R_{eq} = 80 + 100 = 180\\,\\Omega$.\nVoltage reading across voltmeter is $V = 9\\text{ V} \\times \\frac{80}{180} = 4\\text{ V}$."
+  },
+  {
+    "id": "057da34c-7b85-4acf-9ebb-cc0030bba49a",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Work done $W = U_f - U_i = G(m_1m_2 + m_2m_3 + m_3m_1)\\left(\\frac{1}{r_i} - \\frac{1}{r_f}\\right)$.\n$$m_1m_2 + m_2m_3 + m_3m_1 = 200(300) + 300(400) + 400(200) = 260000\\text{ kg}^2$$\n$$\\frac{1}{r_i} - \\frac{1}{r_f} = \\frac{1}{20} - \\frac{1}{25} = \\frac{1}{100}\\text{ m}^{-1}$$\n$$W = 6.7 \\times 10^{-11} \\times 260000 \\times 10^{-2} = 1.74 \\times 10^{-7}\\text{ J}$$"
+  },
+  {
+    "id": "4b2ccfef-242d-40c8-beda-75bf32db239c",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "When depressed by $x$, restoring buoyant force is $F = -(\\rho A x)g = -(\\rho A g)x$.\nThis is SHM with spring constant $k = \\rho A g$.\nTime period $T = 2\\pi\\sqrt{\\frac{M}{k}} = 2\\pi\\sqrt{\\frac{M}{\\rho A g}}$."
+  },
+  {
+    "id": "9f2292e9-d88f-4058-9689-b7634bb416ae",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Dipole moment $\\vec{p} = \\sum q_i \\vec{r}_i$:\n$$\\vec{p} = (2q)(-3a\\hat{j}) + (3q)(2a\\hat{i}) + (-4q)(-2a\\hat{i}) = -6qa\\hat{j} + 6qa\\hat{i} + 8qa\\hat{i} = 14qa\\hat{i} - 6qa\\hat{j} = 2qa(7\\hat{i} - 3\\hat{j})$$"
+  },
+  {
+    "id": "90ebf661-ed59-4d48-8ee8-a293030469cd",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "160",
+    "numerical_answer": 160,
+    "explanation": "When 64 identical drops coalesce, volume conservation gives $R = 64^{1/3} r = 4r$.\nTerminal velocity $v_T \\propto r^2$, so $v_T' = \\left(\\frac{R}{r}\\right)^2 v_T = 16 \\times 10 = 160\\text{ cm/s}$."
+  },
+  {
+    "id": "d485e16f-0fcf-4a77-84c0-0b605f9d9030",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "140",
+    "numerical_answer": 140,
+    "explanation": "Frictional forces acting on block C:\n- At surface between B and C: $f_2 = \\mu (m_A + m_B)g = 0.5(4 + 6)(10) = 50\\text{ N}$.\n- At surface between C and floor: $f_3 = \\mu (m_A + m_B + m_C)g = 0.5(4 + 6 + 8)(10) = 90\\text{ N}$.\nTotal force required to pull C at constant speed: $F = f_2 + f_3 = 50 + 90 = 140\\text{ N}$."
+  },
+  {
+    "id": "1eef2a4b-5f37-4174-98d2-a9b85778b274",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "64",
+    "numerical_answer": 64,
+    "explanation": "Torque $\\tau = M B \\sin 30^\\circ \\implies 0.016 = M (800 \\times 10^{-4})(0.5) \\implies M = 0.4\\text{ A}\\cdot\\text{m}^2$.\nWork done from most stable ($\\\theta = 0^\\circ$) to most unstable ($\\\theta = 180^\\circ$):\n$$W = -MB(\\cos 180^\\circ - \\cos 0^\\circ) = 2MB = 2(0.4)(0.08) = 0.064\\text{ J} = 64 \\times 10^{-3}\\text{ J}$$\nThus, $\\alpha = 64$."
+  },
+  {
+    "id": "d8929179-b092-4781-b145-29847746e77c",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "125",
+    "numerical_answer": 125,
+    "explanation": "Maximum current through Zener diode $I_{max} = \\frac{P_{max}}{V_Z} = \\frac{0.4\\text{ W}}{10\\text{ V}} = 0.04\\text{ A}$.\nVoltage drop across series resistor $V_R = V_{in} - V_Z = 15 - 10 = 5\\text{ V}$.\nResistance $R = \\frac{V_R}{I_{max}} = \\frac{5}{0.04} = 125\\,\\Omega$."
+  },
+  {
+    "id": "e2a731a8-797d-405a-b5bf-e4e5407a1de4",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "3730",
+    "numerical_answer": 3730,
+    "explanation": "Initial temperature $T_1 = 50^\\circ\\text{C} = 323\\text{ K}$, $P_1 = 3.23\\text{ kPa} = 3230\\text{ Pa}$.\nDoubling Celsius temperature gives $T_2 = 100^\\circ\\text{C} = 373\\text{ K}$.\nAt constant volume: $\\frac{P_2}{T_2} = \\frac{P_1}{T_1} \\implies P_2 = 3230 \\times \\frac{373}{323} = 3730\\text{ Pa}$."
+  },
+  {
+    "id": "6fa3fb77-3656-458e-9e9a-55f3aacd39d0",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "- $\\text{CuCl}_2$ is highly soluble in water at room temperature.\n- $\\text{AgCl}$ is sparingly soluble in water at room temperature.\n- $\\text{PbCl}_2$ is sparingly soluble in cold water but dissolves readily in hot water."
+  },
+  {
+    "id": "aa12f4c7-7542-4edc-92e6-d772bf8f8c00",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Aryl diazonium salts are stabilized by resonance. Electron-donating groups ($-\\text{OCH}_3$) at para position increase stability by dispersing the positive charge via $+M$ effect. Aliphatic diazonium salts are highly unstable and decompose rapidly at room temperature. Thus, the order is $\\text{C} > \\text{A} > \\text{D} > \\text{B}$."
+  },
+  {
+    "id": "12d8a699-0539-4d4f-b18c-857a74d4df9a",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Aldehydes and $\\alpha$-hydroxy ketones reduce Tollen's reagent to give a positive silver mirror test. Compound A contains an aldehyde/$\\alpha$-hydroxy ketone functionality and readily reduces Tollen's reagent."
+  },
+  {
+    "id": "252b1bd3-681b-48a2-9a13-8e851a3cd73b",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Moles of A: $n_A = \\frac{0.3}{60} = 0.005\\text{ mol}$.\nMoles of B: $n_B = \\frac{0.9}{180} = 0.005\\text{ mol}$.\nTotal moles $n = 0.01\\text{ mol}$. Volume $V = 100\\text{ mL} = 0.1\\text{ L}$. Temperature $T = 300\\text{ K}$.\n$$\\pi = \\frac{nRT}{V} = \\frac{0.01 \\times 0.082 \\times 300}{0.1} = 2.46\\text{ atm}$$"
+  },
+  {
+    "id": "0fa903f8-313f-470a-b71e-a1a2a17f0cc9",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I is true: Metallic character decreases across a period and increases down a group, following $\\text{K} > \\text{Mg} > \\text{Al} > \\text{B}$.\nStatement II is false: For anions, the ionic radius is larger than the atomic radius due to increased electron-electron repulsion and lower effective nuclear charge."
+  },
+  {
+    "id": "9846ad19-2a1d-4788-978a-b81746240a37",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "- A is incorrect: $\\mu(\\text{NH}_3) > \\mu(\\text{NF}_3)$ because in $\\text{NH}_3$ bond dipoles and lone pair reinforce each other, whereas in $\\text{NF}_3$ they oppose.\n- B is correct: $\\text{BeH}_2$ is linear, $\\mu = 0$.\n- C is correct: Both $\\text{O}_2^{2-}$ and $\\text{F}_2$ have 18 electrons and a bond order of 1.\n- D is incorrect: Formal charge on central oxygen in ozone is $+1$.\n- E is incorrect: $\\text{NO}_2$ is an odd-electron molecule and does not satisfy the octet rule on nitrogen."
+  },
+  {
+    "id": "e1aa3498-37ed-44d5-bd17-beb2e163aa5a",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "$4\\text{ L}$ solution contains $0.4\\text{ mol}$ of $\\text{Br}^-$ ions and $0.4\\text{ mol}$ of $\\text{SO}_4^{2-}$ ions (concentration $= 0.1\\text{ M}$ each).\nIn $2\\text{ L}$ with excess $\\text{BaCl}_2$, precipitate Z is $\\text{BaSO}_4$.\nMoles of $\\text{BaSO}_4$ formed $= 2\\text{ L} \\times 0.1\\text{ M} = 0.2\\text{ mol}$."
+  },
+  {
+    "id": "72f328cb-e925-4c2c-b848-7445ef04f517",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Carbanions are stabilized by electron-withdrawing groups and destabilized by electron-donating groups.\n- $-\\text{CHO}$ has strong $-M$ and $-I$ effect $\\implies$ most stable (IV).\n- $-\\text{Br}$ has $-I$ effect $\\implies$ stabilizes (I).\n- Unsubstituted benzyl carbanion (II).\n- $-\\text{CH}_3$ has $+I$ and $+H$ effect $\\implies$ destabilizes (V).\n- $-\\text{OCH}_3$ has strong $+M$ effect at para position $\\implies$ least stable (III).\nDecreasing stability order: $\\text{IV} > \\text{I} > \\text{II} > \\text{V} > \\text{III}$."
+  },
+  {
+    "id": "161c1d3b-e90c-4b06-9b52-85f13ccba395",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "- $\\text{IF}_3$: 3 bond pairs, 2 lone pairs $\\implies$ T-shaped ($sp^3d$). (Correct)\n- $\\text{IF}_5$: 5 bond pairs, 1 lone pair $\\implies$ square pyramidal ($sp^3d^2$). (Correct)\n- $\\text{IF}_7$: 7 bond pairs, 0 lone pairs $\\implies$ pentagonal bipyramidal ($sp^3d^3$). (Correct)\n- $\\text{ClO}_4^-$: tetrahedral ($sp^3$). (Incorrect)\nThus, A, B and C are correct."
+  },
+  {
+    "id": "34961b32-54c5-4f66-99bd-02757243d264",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Relative lowering of vapour pressure: $\\frac{\\Delta P}{P^\\circ} = \\frac{640 - 600}{640} = \\frac{1}{16}$.\nAlso $\\Delta T_b = 375 - 373 = 2\\text{ K} = i K_b m = i(0.52)\\frac{W/M}{0.1} \\implies i\\frac{W}{M} = \\frac{0.2}{0.52} = \\frac{1}{2.6}$.\nUsing Raoult's law relation, mole fraction $x_2 = \\frac{1.3}{8} \\times \\frac{\\text{W}}{\\text{M}}$."
+  },
+  {
+    "id": "21613e9e-c822-44b9-a472-434fff0b73a5",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I is true: The $\\text{C}-\\text{Cl}$ bond in vinyl chloride has partial double bond character due to resonance with the double bond, making it stronger and shorter than in ethyl chloride.\nStatement II is false: Hydrolysis of a tertiary alkyl halide proceeds via $S_N1$ through a planar carbocation intermediate, leading to racemization (optically inactive solution)."
+  },
+  {
+    "id": "00e09f6c-c3ad-46d2-9f87-9e55a7c8def3",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Statement I is true: $[\\text{CoF}_6]^{3-} (d^6, 4\\text{ unpaired})$, $[\\text{TiF}_6]^{3-} (d^1, 1\\text{ unpaired})$, and $[\\text{Fe}(\\text{CN})_6]^{3-} (d^5, 1\\text{ unpaired})$ are paramagnetic, whereas $\\text{V}_2\\text{O}_5 (d^0)$ is diamagnetic. Total paramagnetic species = 3.\nStatement II is true: $\\text{K}_4[\\text{Fe}(\\text{CN})_6] (0\\text{ unpaired}) < \\text{K}_3[\\text{Fe}(\\text{CN})_6] (1\\text{ unpaired}) < [\\text{Fe}(\\text{H}_2\\text{O})_6]\\text{SO}_4 (4\\text{ unpaired}) < [\\text{Fe}(\\text{H}_2\\text{O})_6]\\text{Cl}_3 (5\\text{ unpaired})$."
+  },
+  {
+    "id": "4716d5a6-3c4d-45a4-bd18-536d0334c9e6",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The reaction $A \\to D$ is endothermic overall ($E_D > E_A$). Step 1 is endothermic ($E_B > E_A$), Step 2 is exothermic ($E_C < E_B$), and Step 3 is exothermic ($E_D < E_C$). Graph A correctly displays these relative intermediate energy levels."
+  },
+  {
+    "id": "3310d08d-c852-4ab5-a084-319e536c3b0a",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Stability of alkenes increases with the number of $\\alpha$-hydrogens due to hyperconjugation:\n- III has the highest number of $\\alpha$-hydrogens (tetrasubstituted).\n- II is trisubstituted.\n- I is disubstituted.\n- IV is monosubstituted.\nDecreasing order: $\\text{III} > \\text{II} > \\text{I} > \\text{IV}$."
+  },
+  {
+    "id": "d7ea9cef-7df4-4982-9c7d-4cdea2018c48",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Evaluating the molecular weights of products $x$ and $y$ from the two given reactions yields molar mass of $x$ + molar mass of $y = 88$."
+  },
+  {
+    "id": "1d7a41b4-b772-42f3-ac8b-53686a900d12",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "- Vinyl Chloride: $\\text{CH}_2 = \\text{CHCl}$ (III)\n- Benzyl Chloride: $\\text{C}_6\\text{H}_5\\text{CH}_2\\text{Cl}$ (IV)\n- Alkyl Chloride: $\\text{CH}_3-\\text{CH}(\\text{Cl})\\text{CH}_3$ (II)\n- Allyl Chloride: $\\text{CH}_2 = \\text{CH}-\\text{CH}_2\\text{Cl}$ (I)\nCorrect matching: A-III, B-IV, C-II, D-I."
+  },
+  {
+    "id": "5ba1152c-aea0-4815-9eab-f7ddbf0e4981",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I is true: In $\\text{K}_3[\\text{Co}(\\text{CO}_3)_3]$, cobalt is $+3$ with carbonato as a weak field bidentate ligand, giving $sp^3d^2$ octahedral geometry and $4.9\\text{ BM}$ spin-only magnetic moment.\nStatement II is true: $[\\text{Ni}(\\text{CN})_4]^{2-}$ is square planar ($dsp^2, 0\\text{ BM}$), $[\\text{MnBr}_4]^{2-}$ is tetrahedral ($sp^3, 5.9\\text{ BM}$), and $[\\text{CoF}_6]^{3-}$ is octahedral ($sp^3d^2, 4.9\\text{ BM}$)."
+  },
+  {
+    "id": "853ded77-080f-4e78-ad6e-9093bdd4aa85",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "From Arrhenius equation:\n$$\\log_{10}\\left(\\frac{k_{\\text{cat}}}{k_{\\text{uncat}}}\\right) = \\frac{\\Delta E_a}{2.303 RT} = \\frac{10000\\text{ J mol}^{-1}}{2.303 \\times 8.314 \\times 300\\text{ J mol}^{-1}} = \\frac{10000}{5744.1} \\approx 1.741$$"
+  },
+  {
+    "id": "bad38b56-21d5-4303-b7e9-d1e81bb8cff6",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "- Reversible isothermal expansion: $w = -nRT \\ln\\frac{V_f}{V_i}$ (II)\n- Free expansion ($p_{\\text{ex}} = 0$): $w = 0$ (I)\n- Irreversible expansion: $w = -p_{\\text{ex}}(V_f - V_i)$ (III)\n- Irreversible compression: $w = -p_{\\text{ex}}(V_f - V_i) = -p_{\\text{ex}}(V_i - V_f)$ (IV)\nMatching: A-II, B-I, C-III, D-IV."
+  },
+  {
+    "id": "b60c82ff-8651-414b-9328-bdc8d36ca50c",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Acetylation of each $-\\text{OH}$ group replaces $-\\text{H}$ ($1\\text{ g/mol}$) with $-\\text{COCH}_3$ ($43\\text{ g/mol}$), causing a net molar mass increase of $42\\text{ g/mol}$ per hydroxyl group.\n$$\\text{Number of }-\\text{OH groups} = \\frac{290 - 122}{42} = \\frac{168}{42} = 4$$"
+  },
+  {
+    "id": "5a5c00d0-7757-4e4f-8650-8da784efc54a",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "111",
+    "numerical_answer": 111,
+    "explanation": "Phase 1: Deposition of $300\\text{ mg} = 0.3\\text{ g}$ Cu.\nMoles of Cu $= \\frac{0.3}{63.54} = 4.721 \\times 10^{-3}\\text{ mol}$.\nEquivalents of $\\text{O}_2 = 2 \\times 4.721 \\times 10^{-3} = 9.443 \\times 10^{-3}\\text{ eq} \\implies n_1(\\text{O}_2) = \\frac{9.443 \\times 10^{-3}}{4} = 2.361 \\times 10^{-3}\\text{ mol}$.\nPhase 2: $I = 0.6\\text{ A}$ for $t = 28 \\times 60 = 1680\\text{ s}$.\nCharge $Q = 0.6 \\times 1680 = 1008\\text{ C} \\implies \\text{eq} = \\frac{1008}{96500} = 0.010446\\text{ eq}$.\nMoles of $\\text{O}_2 = \\frac{0.010446}{4} = 2.611 \\times 10^{-3}\\text{ mol}$.\nTotal moles of $\\text{O}_2 = 2.361 \\times 10^{-3} + 2.611 \\times 10^{-3} = 4.972 \\times 10^{-3}\\text{ mol}$.\nVolume at STP $= 4.972 \\times 10^{-3} \\times 22400\\text{ mL} = 111.38\\text{ mL} \\approx 111\\text{ mL}$."
+  },
+  {
+    "id": "5fa6dbe9-0036-4513-9833-b5cd380c3de4",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "54",
+    "numerical_answer": 54,
+    "explanation": "Lowest energy line in Lyman series $L_1$ ($n=2 \\to n=1$):\n$$E(L_1) = 13.6\\left(1 - \\frac{1}{4}\\right) = 13.6 \\times \\frac{3}{4}$$\nLowest energy line in Balmer series $B_1$ ($n=3 \\to n=2$):\n$$E(B_1) = 13.6\\left(\\frac{1}{4} - \\frac{1}{9}\\right) = 13.6 \\times \\frac{5}{36}$$\n$$x = \\frac{E(L_1)}{E(B_1)} = \\frac{3/4}{5/36} = \\frac{27}{5} = 5.4 = 54 \\times 10^{-1}$$\nThus, the integer value is 54."
+  },
+  {
+    "id": "fd15402c-a02f-41d2-8abc-4ea35788c83a",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "15",
+    "numerical_answer": 15,
+    "explanation": "Pressure of dry nitrogen $P_1 = 715 - 15 = 700\\text{ mm Hg}$, $V_1 = 70\\text{ mL}$, $T_1 = 300\\text{ K}$.\nVolume at STP ($P_0 = 760\\text{ mm Hg}, T_0 = 273\\text{ K}$):\n$$V_0 = \\frac{700 \\times 70 \\times 273}{760 \\times 300} = 58.67\\text{ mL}$$\n$$\\%\\text{N} = \\frac{28 \\times V_0}{22400 \\times w} \\times 100 = \\frac{28 \\times 58.67}{224 \\times 0.50} \\approx 14.67\\% \\approx 15\\%$$"
+  },
+  {
+    "id": "4893c9d5-34e2-4fd2-9972-b8bb15648a64",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "For YS to precipitate: $[\\text{Y}^{2+}][\\text{S}^{2-}] \\ge K_{\\text{sp}}(\\text{YS}) = 4 \\times 10^{-16}$.\nWith $[\\text{Y}^{2+}] = 0.01\\text{ M}$, $[\\text{S}^{2-}] = 4 \\times 10^{-14}\\text{ M}$.\n$$[\\text{S}^{2-}] = \\frac{K_{a1}K_{a2}[\\text{H}_2\\text{S}]}{[\\text{H}^+]^2} = \\frac{10^{-21} \\times 0.1}{[\\text{H}^+]^2} = 4 \\times 10^{-14}$$\n$$[\\text{H}^+]^2 = 2.5 \\times 10^{-9} \\implies [\\text{H}^+] = 5 \\times 10^{-5}\\text{ M}$$\n$$\\text{pH} = -\\log(5 \\times 10^{-5}) = 5 - \\log 5 = 5 - 0.70 = 4.30 \\approx 4$$"
+  },
+  {
+    "id": "2e5997dd-edb6-427e-924a-1622f8a5517d",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "12",
+    "numerical_answer": 12,
+    "explanation": "For 1 mole of $\\text{Cr}_2\\text{O}_7^{2-}$:\n- Oxidation of iodide: $6\\text{I}^- \\to 3\\text{I}_2 + 6e^- \\implies X = 6$.\n- Oxidation of sulfide: $3\\text{S}^{2-} \\to 3\\text{S} + 6e^- \\implies Y = 6$.\n$$\\text{X} + \\text{Y} = 6 + 6 = 12$$"
+  }
+]

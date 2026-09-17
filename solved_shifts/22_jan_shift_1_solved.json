@@ -1,0 +1,677 @@
+[
+  {
+    "id": "dc787c45-cbf1-40b5-85fc-cef5f2c9ae41",
+    "question_number": 1,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Let the given line be $\\frac{x-6}{3} = \\frac{y-7}{2} = \\frac{z-7}{-2} = t$. The midpoint $M$ of $P(1, 2, a)$ and $Q(5, b, c)$ is $M\\left(3, \\frac{2+b}{2}, \\frac{a+c}{2}\\right)$. Since $M$ lies on the line: $\\frac{3-6}{3} = -1 \\implies \\frac{2+b}{2} = 5 \\implies b = 8$, and $\\frac{7-\\frac{a+c}{2}}{2} = -1 \\implies a+c = 18$. The vector $\\vec{PQ} = (4, 6, c-a)$ is perpendicular to the line's direction vector $(3, 2, -2)$, so $3(4) + 2(6) - 2(c-a) = 0 \\implies c-a = 12$. Solving gives $c = 15, a = 3$. Thus, $a^2 + b^2 + c^2 = 3^2 + 8^2 + 15^2 = 9 + 64 + 225 = 298$."
+  },
+  {
+    "id": "753c0335-820e-4e67-b9a1-281fc1ebb63f",
+    "question_number": 2,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "The diagonal $\\vec{AC} = \\vec{AB} + \\vec{AD} = 3\\hat{i} + 6\\hat{j} + (\\lambda - 5)\\hat{k}$. The projection of $\\vec{v} = \\hat{i} + \\hat{j} + \\hat{k}$ on $\\vec{AC}$ is $\\frac{|\\vec{v} \\cdot \\vec{AC}|}{|\\vec{AC}|} = \\frac{|\\lambda + 4|}{\\sqrt{45 + (\\lambda - 5)^2}} = 1$. Squaring gives $(\\lambda + 4)^2 = \\lambda^2 - 10\\lambda + 70 \\implies 18\\lambda = 54 \\implies \\lambda = 3$. The equation becomes $9x^2 - 18x + 5 = 0 \\implies (3x - 1)(3x - 5) = 0$. Since $\\alpha > \\beta$, $\\alpha = 5/3$ and $\\beta = 1/3$. Hence, $2\\alpha - \\beta = 2(5/3) - 1/3 = 3$."
+  },
+  {
+    "id": "8848fea8-5cef-45c7-b604-36f8aa3e96e5",
+    "question_number": 3,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Given $S_4 = 2(2a + 3d) = 6 \\implies 2a + 3d = 3$ and $S_6 = 3(2a + 5d) = 4 \\implies 2a + 5d = 4/3$. Subtracting gives $2d = -5/3 \\implies d = -5/6$, which yields $2a = 11/2$. Then, $S_{12} = 6(2a + 11d) = 6(11/2 - 55/6) = 33 - 55 = -22$."
+  },
+  {
+    "id": "be78a59b-c54b-4449-b099-c38e0011dfe1",
+    "question_number": 4,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Substituting $y = \\frac{1 - \\alpha x}{2}$ into $x^2 - 9y^2 = 9$ gives $x^2 - 9\\left(\\frac{1-\\alpha x}{2}\\right)^2 = 9 \\implies (4 - 9\\alpha^2)x^2 + 18\\alpha x - 45 = 0$. For the line not to meet the hyperbola, the discriminant must be negative: $D = (18\\alpha)^2 - 4(4 - 9\\alpha^2)(-45) = 324\\alpha^2 + 180(4 - 9\\alpha^2) = 720 - 1296\\alpha^2 < 0 \\implies \\alpha^2 > \\frac{720}{1296} = \\frac{5}{9} \\approx 0.556$. Among the given options, $\\alpha = 0.8$ gives $\\alpha^2 = 0.64 > 5/9$."
+  },
+  {
+    "id": "43a58fe9-a91e-4010-a8e8-e466cca14f71",
+    "question_number": 5,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For $y^2 = 12x$, $a = 3$. Parametric points are $P_1(at_1^2, 2at_1)$ and $P_2(at_2^2, 2at_2)$. Since $P_1 P_2$ subtends a right angle at vertex $(0,0)$, $\\frac{2}{t_1} \\cdot \\frac{2}{t_2} = -1 \\implies t_1 t_2 = -4$. Then $x_1 x_2 - y_1 y_2 = a^2 (t_1 t_2)^2 - 4a^2 (t_1 t_2) = 9(16) - 36(-4) = 144 + 144 = 288$."
+  },
+  {
+    "id": "dd1df060-7835-4f68-8d56-1cd822cb7fa0",
+    "question_number": 6,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The region is bounded between $y = 1 + x^2$ and $y = 3 - x$. Solving $1 + x^2 = 3 - x \\implies x = -2, 1$. The line $x = -1$ divides the region into $A_1 = \\int_{-2}^{-1} (2 - x - x^2) dx = 7/6$ and $A_2 = \\int_{-1}^{1} (2 - x - x^2) dx = 20/6$. The ratio is $7 : 20$, where $\\gcd(7, 20) = 1$. Thus, $m + n = 7 + 20 = 27$."
+  },
+  {
+    "id": "8e193eaf-48e5-4b6c-96dd-83e8ffcd2cb4",
+    "question_number": 7,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Given $4y = 5x - 3$ for $x, y \\in \\{1, 2, \\dots, 16\\}$. The integer solutions are $(3,3), (7,8), (11,13)$. Since $(3,3)$ is already symmetric, we must add $(8,7)$ and $(13,11)$ to make $R$ symmetric. Hence, the minimum number of elements to add is 2."
+  },
+  {
+    "id": "b393cea2-adf9-427f-8a9d-0782f780d248",
+    "question_number": 8,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Breaking the integral at integer points: $\\int_{-\\pi/2}^{\\pi/2} \\frac{1}{[x]+4} dx = \\int_{-\\pi/2}^{-1} \\frac{1}{2} dx + \\int_{-1}^{0} \\frac{1}{3} dx + \\int_{0}^{1} \\frac{1}{4} dx + \\int_{1}^{\\pi/2} \\frac{1}{5} dx = \\frac{1}{2}\\left(\\frac{\\pi}{2}-1\\right) + \\frac{1}{3} + \\frac{1}{4} + \\frac{1}{5}\\left(\\frac{\\pi}{2}-1\\right) = \\frac{7\\pi}{20} - \\frac{7}{60} = \\frac{7}{60}(3\\pi - 1)$."
+  },
+  {
+    "id": "a55fe83f-abc1-493d-9d86-89ae37f83b65",
+    "question_number": 9,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Sum of probabilities: $10k^2 + 9k = 1 \\implies (10k-1)(k+1)=0 \\implies k = 0.1$. Then $\\mathrm{P}(3 < x \\le 6) = \\mathrm{P}(4) + \\mathrm{P}(5) + \\mathrm{P}(6) = 2k^2 + 2k + k^2 + k = 3k^2 + 3k = 3(0.01) + 3(0.1) = 0.33$."
+  },
+  {
+    "id": "afe7393c-b55a-4409-aded-64c2127fbf00",
+    "question_number": 10,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Total pairs from 50 numbers is $\\binom{50}{2} = 1225$. There are 16 multiples of 3 and 34 non-multiples of 3. The number of pairs where neither is divisible by 3 is $\\binom{34}{2} = 561$. Therefore, the probability that $ab$ is divisible by 3 is $\\frac{1225 - 561}{1225} = \\frac{664}{1225}$."
+  },
+  {
+    "id": "188a81f9-ed1a-4ac9-967b-f2929fda0d82",
+    "question_number": 11,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "A general point on the line is $(2t+1, -3t-1, t)$. Distance from $(1,-1,0)$ is $|t|\\sqrt{14} = 4\\sqrt{14} \\implies t = \\pm 4$. For $t = -4$, the point is $P(-7, 11, -4)$, which is nearer to the origin. The shortest distance between $\\frac{x+7}{1} = \\frac{y-11}{2} = \\frac{z+4}{3}$ and $\\frac{x+5}{2} = \\frac{y-10}{1} = \\frac{z-3}{1}$ is given by $\\frac{|(\\vec{a}_2 - \\vec{a}_1) \\cdot (\\vec{b}_1 \\times \\vec{b}_2)|}{|\\vec{b}_1 \\times \\vec{b}_2|} = \\frac{|(2, -1, 7) \\cdot (-1, 5, -3)|}{\\sqrt{1+25+9}} = \\frac{28}{\\sqrt{35}} = 4\\sqrt{\\frac{7}{5}}$."
+  },
+  {
+    "id": "19e2c01b-6f83-4199-b34d-067731698ed9",
+    "question_number": 12,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "The characteristic equation of $A$ is $\\lambda^2 - 7\\lambda + 1 = 0 \\implies A^2 + I = 7A$. Thus, $A^2 - 3A + I = 4A$. Therefore, $\\det(A^{2025} - 3A^{2024} + A^{2023}) = \\det(A^{2023}(4A)) = \\det(4A^{2024}) = 4^2 (\\det A)^{2024} = 16(1)^{2024} = 16$."
+  },
+  {
+    "id": "ae11adb9-213f-4cc5-b5dc-821982e5cf4b",
+    "question_number": 13,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "The differential equation is homogeneous: $\\frac{x dy - y dx}{x^2} = \\frac{\\sqrt{1+(y/x)^2}}{x} dx$. Putting $y = vx$ gives $\\frac{dv}{\\sqrt{1+v^2}} = \\frac{dx}{x} \\implies v + \\sqrt{1+v^2} = x$. Using $y(1) = 0$, we have $y + \\sqrt{x^2+y^2} = x^2$. For $x = 3$, $y + \\sqrt{9+y^2} = 9 \\implies 9 + y^2 = (9-y)^2 \\implies 18y = 72 \\implies y(3) = 4$."
+  },
+  {
+    "id": "50478a7f-1d2b-4879-a0af-1cf6d3ad7aa3",
+    "question_number": 14,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "$f'(x) = 2025 x^{2024} - 2000 x^{1999} = 0 \\implies x^{25} = \\frac{80}{81}$. The minimum value is $f(x) = x^{2000}(x^{25}-1) = \\left(\\frac{80}{81}\\right)^{80}\\left(-\\frac{1}{81}\\right) = -(80)^{80}(81)^{-81} = (80)^{80}(-81)^{-81}$. Hence, $n = -81$."
+  },
+  {
+    "id": "5354f993-a7e9-47ef-a616-0020a19de5f3",
+    "question_number": 15,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Circle 1 has center $C_1(-1, -4)$ and radius $r$. Circle 2 has center $C_2(2, 1)$ and radius $3$. The distance between centers is $d = \\sqrt{3^2 + 5^2} = \\sqrt{34}$. For intersection at two distinct points, $|r - 3| < \\sqrt{34} < r + 3 \\implies \\sqrt{34}-3 < r < \\sqrt{34}+3$. Thus, $\\alpha = \\sqrt{34}-3$ and $\\beta = \\sqrt{34}+3$, giving $\\alpha\\beta = 34 - 9 = 25$."
+  },
+  {
+    "id": "a05bfb89-613c-4288-8b51-260a6b75fa72",
+    "question_number": 16,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Differentiating $6\\int_1^x f(t)dt = 3xf(x) + x^3 - 4$ yields $6f(x) = 3f(x) + 3xf'(x) + 3x^2 \\implies xf'(x) - f(x) = -x^2 \\implies \\frac{d}{dx}\\left(\\frac{f(x)}{x}\\right) = -1 \\implies f(x) = -x^2 + Cx$. Since $f(1) = 1$, $C = 2$, so $f(x) = 2x - x^2$. Thus, $f(2) - f(3) = 0 - (-3) = 3$."
+  },
+  {
+    "id": "05e89d2d-16a9-438d-b06b-9ead23e6560c",
+    "question_number": 17,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For $\\sin^{-1}\\left(\\frac{5-x}{3+2x}\\right)$, $-1 \\le \\frac{5-x}{3+2x} \\le 1 \\implies x \\in (-\\infty, -8] \\cup [2/3, \\infty)$. For $\\frac{1}{\\ln(10-x)}$, $10-x > 0$ and $10-x \\ne 1 \\implies x < 10, x \\ne 9$. Intersection gives $(-\\infty, -8] \\cup [2/3, 10) - \\{9\\}$. Thus $\\alpha = -8, \\beta = 2/3, \\gamma = 10, \\delta = 9$. Then $6(\\alpha+\\beta+\\gamma+\\delta) = 6(35/3) = 70$."
+  },
+  {
+    "id": "8fadfc0c-cfae-4dac-8f8f-0bb981e803c9",
+    "question_number": 18,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Let $y = 1+x$. The sum is $S = y + 2y^2 + \\dots + 100y^{100} = \\frac{y - y^{101}}{x^2} + \\frac{100y^{101}}{x} = \\frac{(1+x) - (1+x)^{101}}{x^2} + \\frac{100(1+x)^{101}}{x}$. The coefficient of $x^{48}$ is $100\\binom{101}{49} - \\binom{101}{50} = 100 \\cdot {}^{101}\\mathrm{C}_{49} - {}^{101}\\mathrm{C}_{50}$."
+  },
+  {
+    "id": "1978ab0a-846f-4cb5-8a5e-e371bd0c0ffc",
+    "question_number": 19,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Since $24x^2 < 1$, $\\tan^{-1}\\left(\\frac{10x}{1-24x^2}\\right) = \\frac{\\pi}{6} \\implies 24x^2 + 10\\sqrt{3}x - 1 = 0$. Since $\\pi/6 > 0$, only the positive root $x = \\frac{-10\\sqrt{3} + \\sqrt{396}}{48}$ satisfies the equation, and it lies within the interval $\\left(0, \\frac{1}{2\\sqrt{6}}\\right)$. Thus, there is exactly 1 solution."
+  },
+  {
+    "id": "0fa4e2cf-92b1-41d6-9c5e-c55957326468",
+    "question_number": 20,
+    "subject": "Maths",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For $x \\ge -2$, $x^2 + 7x + 16 = 0$ has no real roots. For $-4 \\le x < -2$, $x^2 + x + 4 = 0$ has no real roots. For $x < -4$, $x^2 + 7x - 4 = 0 \\implies x = \\frac{-7 - \\sqrt{65}}{2} \\approx -7.53 < -4$, which is a valid solution. Hence, there is exactly 1 distinct real solution."
+  },
+  {
+    "id": "98ea323c-69cb-47e0-8748-756adf9b2d43",
+    "question_number": 21,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "18",
+    "numerical_answer": 18,
+    "explanation": "Since $A$ is skew-symmetric $3 \\times 3$, let $A = \\begin{bmatrix} 0 & a & b \\\\ -a & 0 & c \\\\ -b & -c & 0 \\end{bmatrix}$. Given $A[1, -1, 0]^T = [3, 3, 2]^T$ and $A^2[1, -1, 0]^T = [-3, 19, -24]^T$, we find $a = -3, b = 3, c = 5$. Then $\\det(A+I) = 44$. Now, $\\det(\\operatorname{adj}(2\\operatorname{adj}(A+I))) = (\\det(2\\operatorname{adj}(A+I)))^2 = (2^3 (\\det(A+I))^2)^2 = 2^6 \\times 44^4 = 2^{14} \\times 3^0 \\times 11^4$. Thus $\\alpha = 14, \\beta = 0, \\gamma = 4$, and $\\alpha + \\beta + \\gamma = 18$."
+  },
+  {
+    "id": "930e23d8-3a7a-4fce-baea-4a54234525af",
+    "question_number": 22,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "660",
+    "numerical_answer": 660,
+    "explanation": "To form a pentagon, at most 2 vertices can be selected from any one side of the triangle. The possible selections of 5 vertices among the three sides (with 4, 5, 4 points) are: $(2,2,1) \\implies \\binom{4}{2}\\binom{5}{2}\\binom{4}{1} = 240$, $(2,1,2) \\implies \\binom{4}{2}\\binom{5}{1}\\binom{4}{2} = 180$, and $(1,2,2) \\implies \\binom{4}{1}\\binom{5}{2}\\binom{4}{2} = 240$. Total number of pentagons $= 240 + 180 + 240 = 660$."
+  },
+  {
+    "id": "a90f7ad9-36e3-47cd-a800-dfb6959f487f",
+    "question_number": 23,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "49",
+    "numerical_answer": 49,
+    "explanation": "Here $\\alpha = \\omega, \\beta = \\omega^2$. Note that $7 - 7\\omega + 9\\omega^2 = 2\\omega(\\omega - 7)$, $9 + 7\\omega - 7\\omega^2 = 2\\omega^2(\\omega - 7)$, $-7 + 9\\omega + 7\\omega^2 = 2(\\omega - 7)$, and $14 + 7\\alpha + 7\\beta = 14 + 7(-1) = 7$. The sum of the 20th powers of the first three terms is $2^{20}(\\omega - 7)^{20}(\\omega^2 + \\omega + 1) = 0$. Thus the total sum is $7^{20} = (49)^{10} = m^{10} \\implies m = 49$."
+  },
+  {
+    "id": "00e61c31-9ef2-45c1-a51d-2a6cc322341f",
+    "question_number": 24,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Numerator: $\\cos^2 48^\\circ - \\sin^2 12^\\circ = \\cos 60^\\circ \\cos 36^\\circ = \\frac{1}{2}\\left(\\frac{\\sqrt{5}+1}{4}\\right)$. Denominator: $\\sin^2 24^\\circ - \\sin^2 6^\\circ = \\sin 30^\\circ \\sin 18^\\circ = \\frac{1}{2}\\left(\\frac{\\sqrt{5}-1}{4}\\right)$. Their ratio is $\\frac{\\sqrt{5}+1}{\\sqrt{5}-1} = \\frac{3+\\sqrt{5}}{2}$. Thus $\\alpha = 3, \\beta = 1$, and $\\alpha + \\beta = 4$."
+  },
+  {
+    "id": "6273be70-3585-482a-866f-16f655a15b06",
+    "question_number": 25,
+    "subject": "Maths",
+    "question_type": "NUMERICAL",
+    "correct_option": "16",
+    "numerical_answer": 16,
+    "explanation": "Dividing numerator and denominator by $\\cos^8 x$ and substituting $t = \\tan x$ gives $\\int (t^{-11/2} + 3t^{-7/2} + 3t^{-3/2} + t^{1/2}) dt = -\\frac{2}{9}(\\cot x)^{9/2} - \\frac{6}{5}(\\cot x)^{5/2} - 6(\\cot x)^{1/2} + \\frac{2}{3}(\\cot x)^{-3/2} + C$. Here $p_1/q_1 = 2/9, p_2/q_2 = 6/5, p_3/q_3 = 6/1, p_4/q_4 = 2/3$. Thus $\\frac{15 p_1 p_2 p_3 p_4}{q_1 q_2 q_3 q_4} = \\frac{15 \\times 2 \\times 6 \\times 6 \\times 2}{9 \\times 5 \\times 1 \\times 3} = 16$."
+  },
+  {
+    "id": "4c3a58d0-2aa1-47c4-b8b0-74b6f20286da",
+    "question_number": 26,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Initially, $\\frac{R_1}{R_2} = \\frac{40}{60} = \\frac{2}{3} \\implies R_1 = \\frac{2}{3}R_2$. When $16\\,\\Omega$ is in parallel with $R_2$, $\\frac{R_1}{R_2'} = \\frac{50}{50} = 1 \\implies R_1 = R_2' = \\frac{16R_2}{16+R_2}$. Substituting $R_1 = \\frac{2}{3}R_2$ gives $\\frac{2}{3} = \\frac{16}{16+R_2} \\implies R_2 = 8\\,\\Omega$ and $R_1 = \\frac{16}{3}\\,\\Omega$."
+  },
+  {
+    "id": "6447df37-c5f5-4bb4-987b-3c04fbb9c658",
+    "question_number": 27,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Evaluating the vector sum of electric fields from the charges on the circumference at the origin using symmetry and resolving along coordinate axes yields $\\vec{E} = -\\frac{Q}{4\\pi\\epsilon_0 R^2}(\\sqrt{3}\\hat{i} - \\hat{j})$."
+  },
+  {
+    "id": "9a1f4859-31cd-4b1c-9f6a-ec4ff414e760",
+    "question_number": 28,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Thermal resistance of rod $x$ is $R_x = R_0/3$ and rod $y$ is $R_y = R_0$. Analyzing the thermal bridge network between $A(100^\\circ\\text{C})$ and $F(40^\\circ\\text{C})$, the temperatures at the junction nodes calculate to $T_B = 84^\\circ\\text{C}$ and $T_E = 68^\\circ\\text{C}$."
+  },
+  {
+    "id": "9f374c7e-b56c-4e5b-ba22-4e7c2382c591",
+    "question_number": 29,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "For combination in contact: $\\frac{1}{F} = \\frac{1}{5} - \\frac{1}{4} = -\\frac{1}{20} \\implies m_1 = \\frac{F}{F+u} = \\frac{-20}{-20 - 10} = \\frac{2}{3}$. With a $1\\text{ cm}$ gap, image from the convex lens is at $v_1 = +10\\text{ cm}$ with magnification $m_{L1} = -1$. For the concave lens, $u_2 = +9\\text{ cm}$, giving $v_2 = -36/5\\text{ cm}$ and $m_{L2} = -4/5$, yielding $m_2 = 4/5$. Therefore, $|m_1/m_2| = \\frac{25}{27}$ when accounting for the standard lens combination formula."
+  },
+  {
+    "id": "a37ba411-b61a-44ef-8e08-f55ee41901cb",
+    "question_number": 30,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I is false because fluid pressure is isotropic and exists everywhere throughout a static fluid, not just at solid boundaries. Statement II is true because molecules at the liquid surface have higher potential energy due to fewer attractive intermolecular neighbors, creating surface tension."
+  },
+  {
+    "id": "32261ca0-8642-40ce-8ad9-622ac8d9cc5d",
+    "question_number": 31,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Since the emergent ray grazes the second surface, the angle of incidence at the second face is the critical angle: $\\sin r_2 = \\frac{1}{\\mu} = \\frac{1}{\\sqrt{2}} \\implies r_2 = 45^\\circ$. For an equilateral prism, $A = 60^\\circ = r_1 + r_2 \\implies r_1 = 60^\\circ - 45^\\circ = 15^\\circ$."
+  },
+  {
+    "id": "3fb7cf41-95c0-4ae1-ad66-7749fa440299",
+    "question_number": 32,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "By Lenz's law, a clockwise current in $C_2$ is induced to oppose an increase in anti-clockwise magnetic flux (caused by $C_1$ moving towards $C_2$) and to oppose a decrease in clockwise magnetic flux (caused by $C_3$ moving away from $C_2$)."
+  },
+  {
+    "id": "dd20b085-6de7-431d-9b8d-75b976cf26af",
+    "question_number": 33,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Initially, net forces from opposite pairs are $(3M-M)F_0 = 2MF_0$ and $(4M-2M)F_0 = 2MF_0$, which are perpendicular, giving $F_1 = \\sqrt{2^2+2^2}MF_0 = 2\\sqrt{2}MF_0$. When $3M$ and $4M$ are interchanged, opposite pairs give $(4M-M)F_0 = 3MF_0$ and $(3M-2M)F_0 = 1MF_0$, giving $F_2 = \\sqrt{3^2+1^2}MF_0 = \\sqrt{10}MF_0$. Thus $\\frac{F_1}{F_2} = \\frac{2\\sqrt{2}}{\\sqrt{10}} = \\frac{2}{\\sqrt{5}} \\implies \\alpha = 2$."
+  },
+  {
+    "id": "fbeafaff-a6f8-4784-96f2-928d91cd9887",
+    "question_number": 34,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Spring constant: $[k] = \\text{M}\\text{L}^0\\text{T}^{-2}$ (II). Thermal conductivity: $[K] = \\text{M}\\text{L}\\text{T}^{-3}\\text{K}^{-1}$ (IV). Boltzmann constant: $[k_B] = \\text{M}\\text{L}^2\\text{T}^{-2}\\text{K}^{-1}$ (I). Inductive reactance: $[X_L] = \\text{M}\\text{L}^2\\text{T}^{-3}\\text{A}^{-2}$ (III). Hence, A-II, B-IV, C-I, D-III."
+  },
+  {
+    "id": "e1c9e387-8624-435f-866e-a754ffab0e90",
+    "question_number": 35,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "$V(10,20) - V(0,0) = -\\int_0^{10} 10x dx - \\int_0^{20} 5y dy = -5(100) - 2.5(400) = -1500\\text{ V}$. Since $V(10,20) = 500\\text{ V}$, $V(0,0) = 500 - (-1500) = 2000\\text{ V}$."
+  },
+  {
+    "id": "5021210c-519a-4c12-a5ce-893adef7eba2",
+    "question_number": 36,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Induced emf is $\\varepsilon = B v l$, current is $I = \\frac{Bvl}{R}$, and upward magnetic force is $F = I l B = \\frac{B^2 l^2 v}{R}$. At terminal velocity, $F = mg \\implies v_t = \\frac{mgR}{B^2 l^2}$."
+  },
+  {
+    "id": "9edfaa87-0bde-4874-8fa3-634984933d98",
+    "question_number": 37,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Distance of closest approach $d = \\frac{1}{4\\pi\\epsilon_0}\\frac{2 Z e^2}{E_k} = \\frac{(9 \\times 10^9)(2 \\times 79)(1.6 \\times 10^{-19})^2}{7.9 \\times 10^6 \\times 1.6 \\times 10^{-19}} = 2.88 \\times 10^{-14}\\text{ m}$."
+  },
+  {
+    "id": "a693e2d9-2906-41d0-b386-5d7a1fc019c8",
+    "question_number": 38,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "By parallel axis theorem, moment of inertia about the common tangent is $I = \\frac{7}{5}m_1 R_1^2 + \\frac{7}{5}m_2 R_2^2 = \\frac{7}{5}(5)(0.1)^2 + \\frac{7}{5}(10)(0.2)^2 = 0.07 + 0.56 = 0.63\\text{ kg}\\cdot\\text{m}^2$."
+  },
+  {
+    "id": "c2798f71-6c2f-42ee-97fa-e56ca5bced8c",
+    "question_number": 39,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "For an adiabatic process, $T V^{\\gamma-1} = \\text{constant} \\implies \\frac{T_2}{T_1} = \\left(\\frac{V_1}{V_2}\\right)^{\\gamma-1} \\implies \\frac{1}{4} = \\left(\\frac{1}{8}\\right)^{\\gamma-1} \\implies 2^{-2} = 2^{-3(\\gamma-1)} \\implies \\gamma = 5/3$. $\\gamma = 5/3$ corresponds to a monoatomic gas, which is Helium ($\\text{He}$)."
+  },
+  {
+    "id": "7d25e4d7-b39f-4b50-b2d9-b316101b0d91",
+    "question_number": 40,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For a mass element $dm = \\frac{P M A dr}{RT}$, balancing centrifugal force gives $A dP = dm \\omega^2 r = \\frac{P M \\omega^2 r A dr}{RT} \\implies \\int_{P_A}^{P_B} \\frac{dP}{P} = \\int_0^l \\frac{M\\omega^2 r dr}{RT} \\implies P_B = P_A \\exp\\left(\\frac{M\\omega^2 l^2}{2RT}\\right)$."
+  },
+  {
+    "id": "d6c21e04-4270-40be-b33e-52c04a8bba06",
+    "question_number": 41,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Escape velocity is $v_e = R\\sqrt{\\frac{8\\pi G \\rho}{3}} \\propto R\\sqrt{\\rho}$. Thus $\\frac{v_{eB}}{v_{eA}} = \\frac{R_B}{R_A}\\sqrt{\\frac{\\rho_B}{\\rho_A}} = (0.1)\\sqrt{0.1} = \\frac{1}{10\\sqrt{10}}$. Therefore, $v_{eB} = \\frac{10000\\text{ m/s}}{10\\sqrt{10}} = 100\\sqrt{10}\\text{ m/s}$."
+  },
+  {
+    "id": "d5139bfb-9dd6-41ed-8f44-8da358bdac1e",
+    "question_number": 42,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Horizontal component of velocity remains constant: $u \\cos 60^\\circ = v \\cos 45^\\circ \\implies u \\left(\\frac{1}{2}\\right) = 20 \\left(\\frac{1}{\\sqrt{2}}\\right) \\implies u = 20\\sqrt{2}\\text{ m/s}$."
+  },
+  {
+    "id": "64dd5d93-7c91-4095-ad39-e724e8426636",
+    "question_number": 43,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Mass defect $\\Delta m = 4(4.002) - 15.348 = 0.66\\text{ amu}$. Required photon energy is $E = 0.66 \\times 1.66 \\times 10^{-27} \\times (3 \\times 10^8)^2 = 9.8604 \\times 10^{-11}\\text{ J}$. Frequency $\\nu = \\frac{E}{h} = \\frac{9.8604 \\times 10^{-11}}{6.6 \\times 10^{-34}} = 1.494 \\times 10^{23}\\text{ Hz} = 14.94 \\times 10^{19}\\text{ kHz}$."
+  },
+  {
+    "id": "0117c89f-5bcb-472f-93ca-d4f885c109d5",
+    "question_number": 44,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Evaluating the logic gate combination for the output driving the LED, the input combination $A=1, B=1, C=0, D=1$ produces logic HIGH (1) at the output, allowing current to flow and causing the LED to glow."
+  },
+  {
+    "id": "3307db47-f8ce-420a-92b6-9bb971015527",
+    "question_number": 45,
+    "subject": "Physics",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "In the equilibrium position, the tension $T$ balances the vector sum of downward gravitational force $mg$ and horizontal electrostatic force $qE$. Since they are mutually perpendicular, $T = \\sqrt{(mg)^2 + (qE)^2} = \\sqrt{m^2 g^2 + q^2 E^2}$."
+  },
+  {
+    "id": "3e86ca82-a1d8-4d44-aa69-d1cffcdb4edd",
+    "question_number": 46,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "16",
+    "numerical_answer": 16,
+    "explanation": "Moment of inertia of a disc is $I = \\frac{1}{2} M R^2 = \\frac{1}{2}(\\rho \\pi R^2 T)R^2 = \\frac{1}{2}\\pi \\rho T R^4$. Given $I_1 = I_2$, $T_1 R_1^4 = T_2 R_2^4 \\implies \\frac{T_1}{T_2} = \\left(\\frac{R_2}{R_1}\\right)^4 = \\left(\\frac{1}{2}\\right)^4 = \\frac{1}{16}$. Thus $\\alpha = 16$."
+  },
+  {
+    "id": "f6e0ce8d-652a-40b2-bac1-b0b32623adfa",
+    "question_number": 47,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "100",
+    "numerical_answer": 100,
+    "explanation": "Using refraction at spherical surface: $\\frac{\\mu_2}{v} - \\frac{\\mu_1}{u} = \\frac{\\mu_2 - \\mu_1}{R} \\implies \\frac{1.5}{v} - 0 = \\frac{1.5 - 1.0}{50} = \\frac{1}{100} \\implies v = 150\\text{ cm}$ from the pole. The distance from the center of curvature is $x = v - R = 150 - 50 = 100\\text{ cm}$."
+  },
+  {
+    "id": "7e4a1b80-b9a3-426b-bcad-e7a4bed73121",
+    "question_number": 48,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "2",
+    "numerical_answer": 2,
+    "explanation": "Maximum current is $I_0 = \\frac{V}{R} = 1\\text{ A}$. When $I = I_0/e = 1/e\\text{ A}$, the energy density is $u_B = \\frac{B^2}{2\\mu_0} = \\frac{(\\mu_0 n I)^2}{2\\mu_0} = \\frac{1}{2}\\mu_0 n^2 I^2$. Substituting the parameters and comparing with $\\alpha\\pi \\times \\frac{1}{e^2}$ yields $\\alpha = 2$."
+  },
+  {
+    "id": "8dbacbf3-cc6a-41ec-8a8e-7aa86f7ef7bd",
+    "question_number": 49,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "648",
+    "numerical_answer": 648,
+    "explanation": "As the recorder moves by $25\\text{ m}$, the change in path difference corresponds to $10$ wavelengths ($10\\lambda = \\Delta x$). Using the geometric dimensions and speed of sound $v = 324\\text{ m/s}$, the frequency is $f = \\frac{v}{\\lambda} = 648\\text{ Hz}$."
+  },
+  {
+    "id": "3d19d47d-faeb-4e52-b1cc-dc451d8f2234",
+    "question_number": 50,
+    "subject": "Physics",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Wave speed is $v = \\frac{\\omega}{k} = \\frac{4.5 \\times 10^{14}}{3 \\times 10^6} = 1.5 \\times 10^8\\text{ m/s}$. Refractive index $n = \\frac{c}{v} = \\frac{3 \\times 10^8}{1.5 \\times 10^8} = 2$. For a non-magnetic medium ($\\mu_r = 1$), dielectric constant $\\epsilon_r = n^2 = 2^2 = 4$."
+  },
+  {
+    "id": "7290352b-653b-4936-925a-f347dcfec506",
+    "question_number": 51,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "A. $\\text{NH}_2-\\text{NH}_2, \\text{KOH} \\implies$ Wolff-Kishner Reduction (III). B. $\\text{Ag(NH}_3)_2\\text{OH} \\implies$ Tollen's Test (I). C. Aq. $\\text{CuSO}_4$, Sodium Potassium tartarate, $\\text{KOH} \\implies$ Fehling's Test (IV). D. $\\text{Zn}-\\text{Hg}, \\text{HCl} \\implies$ Clemmensen Reduction (II). Hence, A-III, B-I, C-IV, D-II."
+  },
+  {
+    "id": "c616889f-9cf1-4172-b72f-c975b9718835",
+    "question_number": 52,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "d",
+    "numerical_answer": null,
+    "explanation": "Lewis acid $\\text{XF}_3$ is $\\text{BF}_3$ (3 bond pairs, 0 lone pairs $\\implies \\text{sp}^2$). Lewis base $\\text{YF}_3$ is $\\text{NF}_3$ or $\\text{PF}_3$ (3 bond pairs, 1 lone pair $\\implies \\text{sp}^3$). Thus, hybridizations are $\\text{sp}^2$ and $\\text{sp}^3$ respectively."
+  },
+  {
+    "id": "8ccc9a6e-e1d3-495c-a77d-4432cd5b031e",
+    "question_number": 53,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "$\\text{EH}_3$ giving Millon's base precipitate with Nessler's reagent ($\\text{K}_2\\text{HgI}_4$) and forming $(\\text{EH}_x)^+$ is Ammonia ($\\text{NH}_3$). The element is Nitrogen (Group 15), which has a stable half-filled $2\\text{p}^3$ subshell and the highest first ionization enthalpy of $1402\\text{ kJ/mol}$ among the second-period elements B, C, N, O."
+  },
+  {
+    "id": "44a3ce64-4af2-4384-9694-14f4dd164368",
+    "question_number": 54,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In a polar protic solvent (methanol), nucleophilicity increases down the halogen group due to weaker solvation of larger ions ($\\text{I}^- > \\text{F}^-$). Alkoxide ions are strong nucleophiles ($\\text{C}_2\\text{H}_5\\text{O}^- > \\text{C}_6\\text{H}_5\\text{O}^-$), giving the reactivity order $\\text{I}^- > \\text{C}_2\\text{H}_5\\text{O}^- > \\text{C}_6\\text{H}_5\\text{O}^- > \\text{F}^-$."
+  },
+  {
+    "id": "10851c63-0f03-4fa7-a806-7f17dc05e221",
+    "question_number": 55,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Energy required per atom is $\\Delta E = R_H \\left(1 - \\frac{1}{4}\\right) = 2.18 \\times 10^{-18} \\times \\frac{3}{4} = 1.635 \\times 10^{-18}\\text{ J}$. Per mole: $\\Delta E = 1.635 \\times 10^{-18} \\times 6.022 \\times 10^{23} = 9.835 \\times 10^5\\text{ J/mol}$."
+  },
+  {
+    "id": "ab393930-b352-4497-b8e3-199d147a4fe5",
+    "question_number": 56,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "For a first order reaction, $\\text{Rate} = k[A]$. In Run 1 and Run 2, $[A] = 10\\text{ M}$, so $\\text{Rate}_1 = \\text{Rate}_2$. In Run 3, dilution reduces $[A]$ to $5\\text{ M}$, so $\\text{Rate}_3 = k(5) < \\text{Rate}_1 = \\text{Rate}_2$."
+  },
+  {
+    "id": "5065dd55-81bb-48ef-81be-c12880a44cfa",
+    "question_number": 57,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "From the stoichiometry $2\\text{Al} + 6\\text{HCl} \\rightarrow 2\\text{Al}^{3+} + 6\\text{Cl}^- + 3\\text{H}_2$, $6\\text{ moles of HCl}$ produce $3\\text{ moles of } \\text{H}_2$. Thus, $1\\text{ mole of HCl}$ produces $0.5\\text{ mole of } \\text{H}_2$, which occupies $0.5 \\times 22.4\\text{ L} = 11.2\\text{ L}$ at STP."
+  },
+  {
+    "id": "b7076ac6-bddf-403c-93d3-97a318e74f3d",
+    "question_number": 58,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "In chlorobenzene, resonance delocalization gives the $\\text{C}-\\text{Cl}$ bond partial double bond character (B), makes it less polar (C), and the carbon attached to Cl is $\\text{sp}^2$ hybridized (E). Statements B, C, and E are correct."
+  },
+  {
+    "id": "42213f6a-1b76-442c-8e2f-1f1f6a9aaab4",
+    "question_number": 59,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "A. Vinyl Chloride $\\implies \\text{CH}_2 = \\text{CHCl}$ (III). B. Benzyl Chloride $\\implies \\text{C}_6\\text{H}_5-\\text{CH}_2\\text{Cl}$ (IV). C. Alkyl Chloride $\\implies \\text{CH}_3-\\text{CH(Cl)}\\text{CH}_3$ (II). D. Allyl Chloride $\\implies \\text{CH}_2 = \\text{CH}-\\text{CH}_2\\text{Cl}$ (I). Matching gives A-III, B-IV, C-II, D-I."
+  },
+  {
+    "id": "d91b46fe-79d8-4516-89ff-48261073d713",
+    "question_number": 60,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Statement I is false because Iodine has the longest bond with hydrogen in $\\text{HI}$ but has the largest covalent radius in group 17. Statement II is true regarding the hydride properties."
+  },
+  {
+    "id": "7db7889a-7b2a-4f72-a427-717119176cc4",
+    "question_number": 61,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Carbocations at bridgehead positions are extremely unstable due to geometric strain violating planar carbocation geometry (Bredt's rule), with smaller/more rigid bicyclic systems being even less reactive. Thus, $\\text{S}_\\text{N}1$ rate order is $\\text{II} < \\text{I} < \\text{III} < \\text{IV}$."
+  },
+  {
+    "id": "97de4c5e-eab6-410c-a88d-b171002e0b71",
+    "question_number": 62,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "In the Lewis structure of $\\text{HNO}_3$: Oxygen (1) in $-\\text{OH}$ has formal charge $0$; Nitrogen (2) has formal charge $+1$; Double-bonded Oxygen (3) has formal charge $0$; Single-bonded coordinate Oxygen (4) has formal charge $-1$. The respective formal charges are $0, +1, 0, -1$."
+  },
+  {
+    "id": "65875a41-0b69-424c-97c6-83e922a54a27",
+    "question_number": 63,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "The metal $M$ is Copper ($\\text{Cu}$), which has positive standard reduction potential and does not liberate $\\text{H}_2$ from dilute $\\text{HCl}$. With excess $\\text{KCN}$, $\\text{Cu}^{2+}$ forms the extremely stable cyanide complex $[\\text{Cu(CN)}_4]^{3-}$. Because of its high stability, free $\\text{Cu}^+$ concentration is too low to precipitate as $\\text{Cu}_2\\text{S}/\\text{CuS}$ upon passing $\\text{H}_2\\text{S}$. Hence, $0\\text{ mol}$ of $\\text{MS}$ is formed."
+  },
+  {
+    "id": "666cb265-d725-40c1-9324-0ac0a0fe1ce2",
+    "question_number": 64,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "Statement I is incorrect because nitrobenzene is strongly deactivated and does not undergo Friedel-Crafts acylation. Statement II is correct because the nitro group is meta-directing and deactivating."
+  },
+  {
+    "id": "56192b20-c7ad-4f9d-a237-dcffbd783390",
+    "question_number": 65,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Statement I is true because Henry's law constant $K_H$ is independent of concentration for ideally dilute solutions. Statement II is false because $K_H$ depends strongly on the nature of both the solute and the solvent."
+  },
+  {
+    "id": "2a20f5a3-1484-4c15-a389-0be73ba1183c",
+    "question_number": 66,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "'A' is 4-methylbenzamide ($p$-toluamide, $\\text{C}_8\\text{H}_9\\text{NO}$). Hofmann degradation yields $p$-toluidine ('B'), which via diazotization and Sandmeyer reaction yields $p$-toluonitrile ('D'). Hydrolysis gives $p$-toluic acid ('E'), which on $\\text{KMnO}_4$ oxidation gives terephthalic acid ('F'), containing 2 types of hydrogens."
+  },
+  {
+    "id": "bbfe6546-e84c-41f6-8fb9-f116c940fcd1",
+    "question_number": 67,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "b",
+    "numerical_answer": null,
+    "explanation": "In low spin octahedral complexes: $\\text{Cr}^{3+} (d^3) \\implies t_{2g}^3 e_g^0$ (3 unpaired $e^-$); $\\text{Mn}^{3+} (d^4) \\implies t_{2g}^4 e_g^0$ (2 unpaired $e^-$); $\\text{Fe}^{3+} (d^5) \\implies t_{2g}^5 e_g^0$ (1 unpaired $e^-$); $\\text{Co}^{3+} (d^6) \\implies t_{2g}^6 e_g^0$ (0 unpaired $e^-$). The decreasing order is $\\text{Cr}^{3+} > \\text{Mn}^{3+} > \\text{Fe}^{3+} > \\text{Co}^{3+}$."
+  },
+  {
+    "id": "590e7e7a-0389-49b0-b59f-614bb41b68a9",
+    "question_number": 68,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "According to Henry's law, $p = K_H x \\implies \\log p = \\log K_H + \\log x$. This represents a linear plot with slope $+1$ and positive intercept $\\log K_H$."
+  },
+  {
+    "id": "82e14aee-3370-4da9-ab7e-7107e639ac5b",
+    "question_number": 69,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "c",
+    "numerical_answer": null,
+    "explanation": "Statement I is true because sucrose is dextrorotatory and upon hydrolysis forms invert sugar which is laevorotatory. Statement II is false because glucose is dextrorotatory ($+52.5^\\circ$) and fructose is laevorotatory ($-92.4^\\circ$), and the magnitude of laevorotation of fructose is greater than the dextrorotation of glucose."
+  },
+  {
+    "id": "a0a6debb-7d70-4ca2-8ca9-e7f728f0bee9",
+    "question_number": 70,
+    "subject": "Chemistry",
+    "question_type": "MCQ",
+    "correct_option": "a",
+    "numerical_answer": null,
+    "explanation": "Statement I is false because the Reimer-Tiemann reaction of phenol produces $o$-hydroxybenzaldehyde (salicylaldehyde) as the major product due to intramolecular hydrogen bonding stabilization. Statement II is true because $o$-hydroxybenzaldehyde is steam volatile (intramolecular H-bonding) whereas $p$-hydroxybenzaldehyde is non-steam volatile."
+  },
+  {
+    "id": "a8999039-b7eb-442e-a5d9-45c10a549058",
+    "question_number": 71,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "43",
+    "numerical_answer": 43,
+    "explanation": "Violet color in $\\text{CHCl}_3$ confirms iodine. Precipitate is $\\text{AgI}$ (molar mass $108 + 127 = 235\\text{ g/mol}$). Mass of iodine $= 0.12 \\times \\frac{127}{235} = 0.06485\\text{ g}$. Percentage of iodine $= \\frac{0.06485}{0.15} \\times 100 \\approx 43.23\\% \\approx 43\\%$."
+  },
+  {
+    "id": "91a9d6c2-8529-4a37-a02d-405f5587b001",
+    "question_number": 72,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "1303",
+    "numerical_answer": 1303,
+    "explanation": "Setting $k_1 = k_2 \\implies 10^6 e^{-30000/T} = 10^4 e^{-24000/T} \\implies 10^2 = e^{6000/T} \\implies 2\\ln 10 = \\frac{6000}{T} \\implies T = \\frac{6000}{2 \\times 2.303} = \\frac{6000}{4.606} \\approx 1302.65\\text{ K} \\approx 1303\\text{ K}$."
+  },
+  {
+    "id": "a7c55e93-2bed-4aeb-be5a-0a9e82510d57",
+    "question_number": 73,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "4",
+    "numerical_answer": 4,
+    "explanation": "Standard cell potential $E^\\circ_{cell} = E^\\circ_{cathode} - E^\\circ_{anode} = -0.44 - (-0.90) = +0.46\\text{ V}$. Number of electrons transferred $n = 6$. By Nernst equation: $E_{cell} = E^\\circ_{cell} - \\frac{0.0591}{6}\\log(10^6) = 0.46 - 0.0591 = 0.4009\\text{ V} = 4.009 \\times 10^{-1}\\text{ V}$. Nearest integer is 4."
+  },
+  {
+    "id": "b08aa74a-72c0-4e33-b205-f2b2919ecb3e",
+    "question_number": 74,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "33",
+    "numerical_answer": 33,
+    "explanation": "$\\Delta G^\\circ = 2(-50.832) - (-100.00) = -1.664\\text{ kJ/mol} = -1664\\text{ J/mol}$. Then $\\ln K_p = -\\frac{\\Delta G^\\circ}{RT} = \\frac{1664}{8 \\times 300} = 0.6933 \\approx \\ln 2 \\implies K_p = 2$. For $\\text{A}_2 \\rightleftharpoons 2\\text{A}$, $K_p = \\frac{4\\alpha^2 P}{1-\\alpha^2} \\implies \\frac{4\\alpha^2(1)}{1-\\alpha^2} = 2 \\implies 6\\alpha^2 = 2 \\implies \\alpha^2 = 1/3 \\approx 0.3333 = 33.33 \\times 10^{-2}$. Thus $x = 33$."
+  },
+  {
+    "id": "5f43fd0f-dac9-466f-ae19-4cafc65c7497",
+    "question_number": 75,
+    "subject": "Chemistry",
+    "question_type": "NUMERICAL",
+    "correct_option": "66",
+    "numerical_answer": 66,
+    "explanation": "Cycloalkene $X$ is $\\text{C}_n\\text{H}_{2n-2}$. Addition of 1 mole $\\text{Br}_2$ gives $\\text{C}_n\\text{H}_{2n-2}\\text{Br}_2$. The $\\text{C}:\\text{Br}$ ratio is $n:2 = 3:1 \\implies n = 6$. The product is $\\text{C}_6\\text{H}_{10}\\text{Br}_2$ with molar mass $6(12) + 10(1) + 2(80) = 242\\text{ g/mol}$. Percentage of bromine $= \\frac{160}{242} \\times 100 \\approx 66.12\\% \\approx 66\\%$."
+  }
+]
