@@ -43,6 +43,10 @@ const WhatToDoNext = dynamic(() => import("@/components/analytics/WhatToDoNext")
   loading: () => <ContentBlockSkeleton className="h-40" />,
 });
 
+const AIInsightsView = dynamic(() => import("@/components/analytics/AIComponents"), {
+  loading: () => <ContentBlockSkeleton className="h-96" />,
+});
+
 const TABS = [
   { id: "overview", label: "Overview", Icon: BarChart3 },
   { id: "charts", label: "Charts", Icon: TrendingUp },
@@ -93,20 +97,6 @@ function ProLock() {
         >
           Upgrade to Pro
         </Link>
-      </div>
-    </div>
-  );
-}
-
-function AIComingSoon() {
-  return (
-    <div className="flex flex-col items-center justify-center py-8 animate-slideUp sm:py-16" style={{ animationDelay: "150ms" }}>
-      <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-10">
-        <Brain className="mx-auto mb-4 h-10 w-10 text-slate-500 dark:text-slate-400" />
-        <h2 className="mb-2 text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Insights</h2>
-        <p className="mx-auto max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
-          Focused study recommendations are coming to PrepZii, including performance summaries, weak-area explanations, and revision planning.
-        </p>
       </div>
     </div>
   );
@@ -294,7 +284,9 @@ export default function AnalyticsPageClient({
         </div>
       )}
 
-      {activeTab === "ai-insights" && !loading && !showAnalyticsLock && <AIComingSoon />}
+      {activeTab === "ai-insights" && !loading && !showAnalyticsLock && (
+        <AIInsightsView stats={stats} track={activeTrack} />
+      )}
 
       {activeTab === "leaderboard" && (
         <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>

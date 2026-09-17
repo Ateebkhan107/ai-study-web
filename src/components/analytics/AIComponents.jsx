@@ -1,242 +1,948 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import {
-  AI_PREDICTIONS,
-  ADAPTIVE_STEPS,
-  DAILY_TASKS,
-  AI_RECOMMENDATIONS,
-} from "@/constants/analyticsData";
-import { Sparkles } from "lucide-react";
+  Brain,
+  Sparkles,
+  Zap,
+  TrendingUp,
+  Target,
+  AlertTriangle,
+  CheckCircle2,
+  ArrowRight,
+  Clock,
+  Compass,
+  Flame,
+  BookOpen,
+  Award,
+  ChevronRight,
+  BarChart3,
+  Layers,
+  GraduationCap,
+  RefreshCw,
+} from "lucide-react";
 
-// ─────────────────────────────────────────────────────────────────
-// SmartPrediction
-// ─────────────────────────────────────────────────────────────────
-export function SmartPrediction({ track = "jee" }) {
-  // Isolate metrics by tracking criteria
-  const filteredPredictions = AI_PREDICTIONS.filter((p) => {
-    if (track === "jee" && p.label.toLowerCase().includes("neet")) return false;
-    if (track === "neet" && p.label.toLowerCase().includes("jee")) return false;
-    return true;
-  });
-
-  return (
-    <div className="glass-card p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-          Smart Prediction
-        </h2>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
-        </span>
-      </div>
-
-      <div className="space-y-3">
-        {filteredPredictions.map((p) => (
-          <div
-            key={p.label}
-            className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-3.5"
-          >
-            <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{p.label}</p>
-            <p className="text-xl font-black font-display text-slate-900 dark:text-white mb-2">{p.value}</p>
-            {p.pct !== null && (
-              <div className="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full"
-                  style={{ width: `${p.pct}%`, background: p.color }}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// AdaptiveLearning
-// ─────────────────────────────────────────────────────────────────
-export function AdaptiveLearning({ track = "jee" }) {
-  const isNeet = track === "neet";
-  const weakSubject = isNeet ? "Genetics" : "Integration";
-
-  // Translate learning path nodes for context compliance
-  const filteredSteps = ADAPTIVE_STEPS.map((s) => {
-    if (!isNeet) return s;
-    let stepName = s.step;
-    let detailText = s.detail;
-
-    if (stepName.includes("Integration") || detailText.includes("integral")) {
-      stepName = stepName.replace("Integration", "Genetics");
-      detailText = "Mendelian cross principles · Easy · 10 Qs";
-    }
-    if (detailText.includes("IBP method")) {
-      detailText = "Linkage & recombination drills · Medium · 15 Qs";
-    }
-    if (detailText.includes("JEE")) {
-      detailText = detailText.replace("JEE", "NEET");
-    }
-    return { ...s, step: stepName, detail: detailText };
-  });
-
-  return (
-    <div className="glass-card p-5 flex flex-col">
-      <div className="flex items-center gap-2 mb-1">
-        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-          Adaptive Learning
-        </h2>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
-        </span>
-      </div>
-      <p className="text-xs text-slate-400 dark:text-slate-500 mb-4">
-        You&apos;re weak in <span className="font-bold text-slate-900 dark:text-white">{weakSubject}</span>. Auto-adapted path:
-      </p>
-
-      <div className="flex-1 divide-y divide-slate-50 dark:divide-slate-800">
-        {filteredSteps.map((s) => (
-          <div key={s.step} className="flex items-start gap-3 py-2.5">
-            <div
-              className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"
-              style={{ background: s.color }}
-            />
-            <div>
-              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{s.step}</p>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{s.detail}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <button
-        className="mt-4 w-full py-2.5 rounded-xl border border-slate-200 dark:border-[var(--border)] text-sm font-bold text-slate-900 dark:text-white hover:border-indigo-500/30 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5 transition-all duration-300 cursor-pointer"
-        onClick={() => {
-          alert("Redirecting to adaptive practice session…");
-        }}
-      >
-        Start Adaptive Session →
-      </button>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// AIStudyPlanner
-// ─────────────────────────────────────────────────────────────────
-export function AIStudyPlanner({ track = "jee" }) {
-  const isNeet = track === "neet";
-
-  // Filter daily objectives without row drift
-  const filteredTasks = DAILY_TASKS.map((t) => {
-    if (!isNeet) return t;
-    let taskName = t.task;
-    if (taskName.toLowerCase().includes("integration")) {
-      taskName = "Revise Genetics linkage charts";
-    }
-    if (taskName.toLowerCase().includes("physics mini")) {
-      taskName = "Biology structural mock test";
-    }
-    return { ...t, task: taskName };
-  });
-
-  return (
-    <div className="glass-card p-5 flex flex-col">
-      <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-          AI Study Planner
-        </h2>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
-        </span>
-      </div>
-
-      <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">
-        Today&apos;s tasks
-      </p>
-
-      <div className="flex-1 divide-y divide-slate-50 dark:divide-slate-800">
-        {filteredTasks.map((t) => (
-          <div key={t.task} className="flex items-start gap-3 py-2.5">
-            <div
-              className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"
-              style={{ background: t.color }}
-            />
-            <div>
-              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{t.task}</p>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{t.detail}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <button
-        className="mt-4 w-full py-2.5 rounded-xl bg-brand text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300 cursor-pointer"
-        onClick={() => {
-          alert("Generating your full weekly schedule with AI…");
-        }}
-      >
-        Generate Full Schedule →
-      </button>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// AIRecommendations
-// ─────────────────────────────────────────────────────────────────
-const REC_CLASS = {
-  danger:  "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800",
-  success: "bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800",
-  warn:    "bg-yellow-50 dark:bg-yellow-950/30 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800",
-  info:    "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800",
+// Track metadata & high-yield baseline data
+const TRACK_DEFAULTS = {
+  JEE: {
+    maxMarks: 300,
+    idealDistribution: [
+      { subject: "Physics", idealPct: 33.3, color: "#6366F1" },
+      { subject: "Chemistry", idealPct: 33.3, color: "#10B981" },
+      { subject: "Mathematics", idealPct: 33.4, color: "#F59E0B" },
+    ],
+    highYieldChapters: [
+      { chapter: "Definite Integration & Calculus", subject: "Mathematics", weight: "20-24 Marks", priority: "Critical Gap" },
+      { chapter: "Thermodynamics & Heat", subject: "Physics", weight: "12-16 Marks", priority: "High Yield" },
+      { chapter: "Organic Reactions & Mechanisms", subject: "Chemistry", weight: "16-20 Marks", priority: "Critical Gap" },
+      { chapter: "Rotational Motion & Dynamics", subject: "Physics", weight: "12-16 Marks", priority: "High Yield" },
+    ],
+  },
+  NEET: {
+    maxMarks: 720,
+    idealDistribution: [
+      { subject: "Biology", idealPct: 50.0, color: "#EC4899" },
+      { subject: "Chemistry", idealPct: 25.0, color: "#10B981" },
+      { subject: "Physics", idealPct: 25.0, color: "#6366F1" },
+    ],
+    highYieldChapters: [
+      { chapter: "Genetics and Evolution", subject: "Biology", weight: "40-48 Marks (10-12 Qs)", priority: "Top Priority" },
+      { chapter: "Human Physiology", subject: "Biology", weight: "48-56 Marks (12-14 Qs)", priority: "High Yield" },
+      { chapter: "Chemical Bonding & Molecular Structure", subject: "Chemistry", weight: "16-20 Marks (4-5 Qs)", priority: "Critical Gap" },
+      { chapter: "Optics & Ray Optics", subject: "Physics", weight: "16-20 Marks (4-5 Qs)", priority: "High Yield" },
+    ],
+  },
 };
 
-export function AIRecommendations({ track = "jee" }) {
-  // Isolate insight blocks cleanly to their respective tracks
-  const filteredRecs = AI_RECOMMENDATIONS.filter((r) => {
-    if (track === "jee" && (r.title.toLowerCase().includes("genetics") || r.body.toLowerCase().includes("neet"))) return false;
-    if (track === "neet" && (r.title.toLowerCase().includes("integration") || r.body.toLowerCase().includes("jee"))) return false;
-    return true;
-  });
+const SUBJECT_COLORS = {
+  biology: "#EC4899",
+  physics: "#6366F1",
+  chemistry: "#10B981",
+  mathematics: "#F59E0B",
+  maths: "#F59E0B",
+  general: "#8B5CF6",
+};
+
+function getSubjectColor(subject) {
+  return SUBJECT_COLORS[String(subject || "").toLowerCase()] || "#8B5CF6";
+}
+
+function calculatePredictions(stats, track) {
+  const isNeet = String(track || "").toUpperCase() === "NEET";
+  const accuracy = stats?.overview?.overallAccuracy;
+  const totalQuestions = stats?.counts?.answeredQuestions || stats?.overview?.questionsPracticed || 0;
+  const testsCount = stats?.counts?.completedTests || stats?.overview?.testsCompleted || 0;
+  const hasSample = typeof accuracy === "number" && totalQuestions >= 10;
+
+  if (isNeet) {
+    if (!hasSample) {
+      return {
+        hasData: false,
+        predictedScore: 580,
+        maxScore: 720,
+        scoreRange: "540 – 620",
+        percentile: "88.5",
+        rankEstimate: "AIR 35,000 – 48,000",
+        tierLabel: "Foundation Building",
+        tierColor: "text-amber-500",
+        confidence: "Calibrating",
+        confidencePct: Math.min(90, Math.round((totalQuestions / 30) * 100)),
+        potentialGain: "+60 to +85 marks",
+        sampleSize: totalQuestions,
+        summary: "Complete at least 15 PYQs or 1 test to calculate your personalized NEET score & rank projection.",
+      };
+    }
+
+    // Dynamic NEET Calculation
+    const effectiveAcc = Math.min(100, Math.max(25, accuracy));
+    const rawScore = Math.round((effectiveAcc / 100) * 660 + (totalQuestions > 50 ? 30 : 15));
+    const predictedScore = Math.min(715, Math.max(220, rawScore));
+    const lowRange = Math.max(180, predictedScore - 25);
+    const highRange = Math.min(720, predictedScore + 20);
+
+    let rankEstimate = "AIR 120,000+";
+    let tierLabel = "Foundation Building";
+    let tierColor = "text-amber-500";
+
+    if (predictedScore >= 660) {
+      rankEstimate = "AIR < 3,000";
+      tierLabel = "AIIMS & Top Govt. Medical Colleges";
+      tierColor = "text-emerald-500";
+    } else if (predictedScore >= 620) {
+      rankEstimate = "AIR 3,000 – 14,000";
+      tierLabel = "Govt. Medical College (GMC) Safe Zone";
+      tierColor = "text-emerald-500";
+    } else if (predictedScore >= 560) {
+      rankEstimate = "AIR 14,000 – 42,000";
+      tierLabel = "State Quota / Semi-Govt. Range";
+      tierColor = "text-blue-500";
+    } else if (predictedScore >= 480) {
+      rankEstimate = "AIR 42,000 – 95,000";
+      tierLabel = "Borderline / BDS & Merit Private";
+      tierColor = "text-amber-500";
+    }
+
+    const potentialGain = `+${Math.max(35, Math.min(90, Math.round((100 - effectiveAcc) * 1.4)))} marks`;
+
+    return {
+      hasData: true,
+      predictedScore,
+      maxScore: 720,
+      scoreRange: `${lowRange} – ${highRange}`,
+      percentile: (Math.min(99.9, Math.max(50, (predictedScore / 720) * 105))).toFixed(1),
+      rankEstimate,
+      tierLabel,
+      tierColor,
+      confidence: totalQuestions > 80 ? "High Confidence" : "Moderate Confidence",
+      confidencePct: Math.min(100, Math.round((totalQuestions / 100) * 100)),
+      potentialGain,
+      sampleSize: totalQuestions,
+      summary: `Based on ${totalQuestions} practice attempts across NEET subjects with ${accuracy}% accuracy.`,
+    };
+  }
+
+  // JEE Calculation
+  if (!hasSample) {
+    return {
+      hasData: false,
+      predictedScore: 135,
+      maxScore: 300,
+      scoreRange: "115 – 155",
+      percentile: "91.2",
+      rankEstimate: "AIR 75,000 – 95,000",
+      tierLabel: "Foundation Building",
+      tierColor: "text-amber-500",
+      confidence: "Calibrating",
+      confidencePct: Math.min(90, Math.round((totalQuestions / 30) * 100)),
+      potentialGain: "+32 to +50 marks",
+      sampleSize: totalQuestions,
+      summary: "Complete at least 15 PYQs or 1 test to calculate your personalized JEE percentile & rank forecast.",
+    };
+  }
+
+  const effectiveAcc = Math.min(100, Math.max(25, accuracy));
+  const rawPercentile = Math.min(99.8, Math.max(55.0, (effectiveAcc * 0.94) + (totalQuestions > 60 ? 4.5 : 2.0)));
+  const percentile = rawPercentile.toFixed(1);
+  const predictedScore = Math.min(290, Math.max(45, Math.round((effectiveAcc / 100) * 260 + (totalQuestions > 50 ? 15 : 5))));
+  const lowScore = Math.max(30, predictedScore - 18);
+  const highScore = Math.min(300, predictedScore + 15);
+
+  let rankEstimate = "AIR 100,000+";
+  let tierLabel = "Foundation Building";
+  let tierColor = "text-amber-500";
+
+  if (rawPercentile >= 99.0) {
+    rankEstimate = "AIR < 11,000";
+    tierLabel = "Top NITs / IIITs (CSE/ECE Priority)";
+    tierColor = "text-emerald-500";
+  } else if (rawPercentile >= 96.5) {
+    rankEstimate = "AIR 11,000 – 38,000";
+    tierLabel = "NITs Core Branches / Top IIITs";
+    tierColor = "text-emerald-500";
+  } else if (rawPercentile >= 93.0) {
+    rankEstimate = "AIR 38,000 – 78,000";
+    tierLabel = "JEE Advanced Qualifying Zone";
+    tierColor = "text-blue-500";
+  } else if (rawPercentile >= 85.0) {
+    rankEstimate = "AIR 78,000 – 160,000";
+    tierLabel = "State Technical Universities";
+    tierColor = "text-amber-500";
+  }
+
+  const potentialGain = `+${Math.max(24, Math.min(65, Math.round((100 - effectiveAcc) * 0.85)))} marks`;
+
+  return {
+    hasData: true,
+    predictedScore,
+    maxScore: 300,
+    scoreRange: `${lowScore} – ${highScore}`,
+    percentile,
+    rankEstimate,
+    tierLabel,
+    tierColor,
+    confidence: totalQuestions > 80 ? "High Confidence" : "Moderate Confidence",
+    confidencePct: Math.min(100, Math.round((totalQuestions / 100) * 100)),
+    potentialGain,
+    sampleSize: totalQuestions,
+    summary: `Based on ${totalQuestions} practice attempts across JEE subjects with ${accuracy}% accuracy.`,
+  };
+}
+
+function getPacingPersona(stats) {
+  const time = stats?.timeAnalytics;
+  const avgSec = time?.averageSecondsPerQuestion;
+  const accuracy = stats?.overview?.overallAccuracy ?? 70;
+
+  if (!avgSec || time?.status !== "ready") {
+    return {
+      persona: "Pacing Calibration",
+      description: "Take a timed test session to diagnose your speed vs accuracy balance.",
+      speedScore: 75,
+      tag: "Need Timed Data",
+      tagColor: "bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-700 dark:text-slate-300",
+      recommendation: "Target 60-80s per question in Biology/Chemistry and 120-150s in Physics/Maths.",
+    };
+  }
+
+  if (avgSec < 45 && accuracy < 65) {
+    return {
+      persona: "Rapid Guesser (High Slip Risk)",
+      description: `Averaging ${Math.round(avgSec)}s/question with ${accuracy}% accuracy. Speed is causing avoidable negative marking.`,
+      speedScore: 45,
+      tag: "Risk: Negative Marking",
+      tagColor: "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/60",
+      recommendation: "Slow down by 15-20 seconds per question. Read all 4 options before answering.",
+    };
+  }
+
+  if (avgSec > 130 && accuracy >= 75) {
+    return {
+      persona: "Precision First (Time Bottleneck)",
+      description: `High accuracy of ${accuracy}%, but taking ${Math.round(avgSec)}s/question. You risk leaving questions unattempted.`,
+      speedScore: 68,
+      tag: "Speed Bottleneck",
+      tagColor: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60",
+      recommendation: "Practice 2-minute timed speed sprints on easy to moderate PYQs to build intuitive speed.",
+    };
+  }
+
+  if (avgSec >= 50 && avgSec <= 110 && accuracy >= 70) {
+    return {
+      persona: "Optimal Exam Flow",
+      description: `Solid rhythm of ${Math.round(avgSec)}s/question combined with strong ${accuracy}% accuracy.`,
+      speedScore: 92,
+      tag: "Exam Ready Rhythm",
+      tagColor: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60",
+      recommendation: "Maintain this pacing rhythm during full-length 3-hour mock tests.",
+    };
+  }
+
+  return {
+    persona: "Steady Pace",
+    description: `Averaging ${Math.round(avgSec)}s per question. Consistent time management.`,
+    speedScore: 78,
+    tag: "Balanced",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60",
+    recommendation: "Focus on eliminating calculation slips in multi-step questions.",
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 1. AI PREDICTION HERO CARD
+// ─────────────────────────────────────────────────────────────────
+export function ScoreForecastHero({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+  const isNeet = normTrack === "NEET";
+  const pred = calculatePredictions(stats, normTrack);
 
   return (
-    <div className="glass-card p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <h2 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-          AI Recommendations
-        </h2>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-          <Sparkles className="w-3 h-3 inline-block mr-0.5 -mt-0.5" /> AI
-        </span>
+    <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-7">
+      {/* Background Subtle Gradient Glow */}
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl dark:bg-brand/5" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/5" />
+
+      {/* Header Row */}
+      <div className="relative flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4 dark:border-[var(--border-subtle)]">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand/15 text-brand dark:bg-brand/20">
+            <Brain className="h-5 w-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+                AI Score & Rank Forecaster
+              </h2>
+              <span className="inline-flex items-center gap-1 rounded-full bg-brand/15 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-900 dark:text-brand">
+                <Sparkles className="h-3 w-3" />
+                Live Model
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Calibrated for {normTrack} 2025/2026 examination benchmarks
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-300">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            {pred.confidence} ({pred.sampleSize} Qs)
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-        {filteredRecs.map((r) => (
-          <div
-            key={r.title}
-            className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1.5">
-              {r.title}
-            </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              {r.body}
-            </p>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${REC_CLASS[r.type]}`}>
-              {r.tag}
+      {/* Main Stats Grid */}
+      <div className="relative mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Metric 1: Projected Score */}
+        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            {isNeet ? "Projected NEET Score" : "Projected JEE Score"}
+          </p>
+          <div className="mt-2 flex items-baseline gap-2">
+            <span className="font-display text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl tabular-nums">
+              {pred.predictedScore}
             </span>
+            <span className="text-sm font-bold text-slate-400 dark:text-slate-500">
+              / {pred.maxScore}
+            </span>
+          </div>
+          <div className="mt-2 flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+            <span>Range: {pred.scoreRange}</span>
+            <span className="font-bold text-brand">
+              {Math.round((pred.predictedScore / pred.maxScore) * 100)}%
+            </span>
+          </div>
+          <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+            <div
+              className="h-full rounded-full bg-brand transition-all duration-700"
+              style={{ width: `${Math.min(100, (pred.predictedScore / pred.maxScore) * 100)}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Metric 2: Projected Percentile / AIR */}
+        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            {isNeet ? "Estimated Percentile" : "Projected Percentile"}
+          </p>
+          <div className="mt-2 flex items-baseline gap-2">
+            <span className="font-display text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl tabular-nums">
+              {pred.percentile}
+            </span>
+            <span className="text-sm font-bold text-slate-400 dark:text-slate-500">
+              %ile
+            </span>
+          </div>
+          <p className="mt-2 text-[11px] font-bold text-slate-600 dark:text-slate-300">
+            {pred.rankEstimate}
+          </p>
+          <p className="mt-0.5 text-[10px] text-slate-400 dark:text-slate-500">
+            All India Rank band estimate
+          </p>
+        </div>
+
+        {/* Metric 3: Admission Target Tier */}
+        <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            Target College Zone
+          </p>
+          <div className="mt-2">
+            <span className={`text-sm font-black leading-snug ${pred.tierColor}`}>
+              {pred.tierLabel}
+            </span>
+          </div>
+          <p className="mt-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            {isNeet
+              ? "Based on General category closing ranks"
+              : "Based on JoSAA / CSAB cutoff trends"}
+          </p>
+        </div>
+
+        {/* Metric 4: Potential Score Gain */}
+        <div className="rounded-xl border border-emerald-200/60 bg-emerald-50/50 p-4 dark:border-emerald-900/40 dark:bg-emerald-950/20">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+              Unlock Potential
+            </p>
+            <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          </div>
+          <div className="mt-2 flex items-baseline gap-1">
+            <span className="font-display text-2xl font-black tracking-tight text-emerald-900 dark:text-emerald-200 sm:text-3xl">
+              {pred.potentialGain}
+            </span>
+          </div>
+          <p className="mt-2 text-[11px] leading-relaxed text-emerald-700 dark:text-emerald-300">
+            Achievable by mastering your bottom 3 weak chapters & eliminating negative marking.
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom Summary Bar */}
+      <div className="mt-5 flex flex-col justify-between gap-3 rounded-xl border border-slate-200/60 bg-slate-100/50 px-4 py-3 text-xs text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-300 sm:flex-row sm:items-center">
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-4 w-4 text-brand shrink-0" />
+          <span>{pred.summary}</span>
+        </div>
+        <Link
+          href="/pyq"
+          className="inline-flex shrink-0 items-center gap-1 font-bold text-brand hover:underline"
+        >
+          <span>Practice High-Yield Questions</span>
+          <ArrowRight className="h-3 w-3" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 2. WEAK-SPOT INTERCEPTOR & REMEDIATION CENTER
+// ─────────────────────────────────────────────────────────────────
+export function WeakSpotInterceptor({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+  const isNeet = normTrack === "NEET";
+  const defaults = TRACK_DEFAULTS[normTrack] || TRACK_DEFAULTS.JEE;
+
+  // Real user weak chapters
+  const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
+  const hasRealWeak = userWeak.length > 0;
+
+  const displayList = hasRealWeak
+    ? userWeak.slice(0, 4).map((c) => ({
+        chapter: c.chapter,
+        subject: c.subject || "General",
+        accuracy: c.accuracy,
+        attempted: c.attempted,
+        statusLabel: c.statusLabel || (c.accuracy <= 45 ? "Critical Gap" : "Needs Work"),
+        weight: isNeet ? "High NEET Weightage" : "High JEE Frequency",
+        isRealData: true,
+      }))
+    : defaults.highYieldChapters.map((h) => ({
+        chapter: h.chapter,
+        subject: h.subject,
+        accuracy: null,
+        attempted: 0,
+        statusLabel: h.priority,
+        weight: h.weight,
+        isRealData: false,
+      }));
+
+  return (
+    <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+              Weak-Spot Interceptor
+            </h2>
+            <span className="rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-red-600 dark:text-red-400">
+              High ROI Fixes
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            {hasRealWeak
+              ? `Identified from your lowest accuracy chapters in ${normTrack}`
+              : `Key high-yield chapters that decide ${normTrack} ranking`}
+          </p>
+        </div>
+
+        <Link
+          href="/pyq"
+          className="inline-flex items-center gap-1 rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:bg-brand hover:text-slate-950 dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-brand dark:hover:text-slate-950"
+        >
+          <span>All Chapters</span>
+          <ChevronRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {displayList.map((item, index) => {
+          const subjectColor = getSubjectColor(item.subject);
+          const pyqHref = `/pyq?mode=chapter&subject=${encodeURIComponent(item.subject)}&chapter=${encodeURIComponent(item.chapter)}`;
+
+          return (
+            <div
+              key={`${item.chapter}-${index}`}
+              className="flex flex-col justify-between rounded-xl border border-slate-200/70 bg-slate-50/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50/90 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span
+                    className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold text-white"
+                    style={{ backgroundColor: subjectColor }}
+                  >
+                    {item.subject}
+                  </span>
+
+                  <span className="rounded-full border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-bold text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
+                    {item.statusLabel}
+                  </span>
+                </div>
+
+                <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-1">
+                  {item.chapter}
+                </h3>
+
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                  {item.weight}
+                </p>
+
+                {item.isRealData ? (
+                  <div className="mt-3 flex items-center gap-3">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+                      <div
+                        className="h-full rounded-full bg-red-500"
+                        style={{ width: `${Math.max(8, item.accuracy || 0)}%` }}
+                      />
+                    </div>
+                    <span className="text-xs font-black text-red-600 dark:text-red-400 tabular-nums">
+                      {item.accuracy}% Acc ({item.attempted} Qs)
+                    </span>
+                  </div>
+                ) : (
+                  <div className="mt-2 text-[11px] text-amber-700 dark:text-amber-400 font-medium">
+                    Priority diagnostic topic · 0 Qs completed
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-4 flex items-center gap-2 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+                <Link
+                  href={pyqHref}
+                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover"
+                >
+                  <span>Practice PYQs</span>
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+
+                <Link
+                  href="/test"
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]"
+                >
+                  <span>10-Q Test</span>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 3. AI ADAPTIVE 4-STEP LEARNING ROADMAP
+// ─────────────────────────────────────────────────────────────────
+export function AdaptiveLearningJourney({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+  const isNeet = normTrack === "NEET";
+
+  // Pick top weak chapter or fall back to high-yield
+  const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
+  const focusChapter = userWeak[0]?.chapter || (isNeet ? "Genetics and Evolution" : "Definite Integration & Calculus");
+  const focusSubject = userWeak[0]?.subject || (isNeet ? "Biology" : "Mathematics");
+
+  const steps = [
+    {
+      step: 1,
+      title: "Core NCERT & Formula Mastery",
+      detail: `Review high-frequency formulas & memory hooks for ${focusChapter}.`,
+      duration: "15 min",
+      type: "Concept Review",
+      color: "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400",
+      status: "In Progress",
+    },
+    {
+      step: 2,
+      title: "Foundational Accuracy Drills",
+      detail: "10 moderate conceptual questions to lock in formula recall and eliminate silly errors.",
+      duration: "20 min · 10 Qs",
+      type: "Practice Drill",
+      color: "border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400",
+      status: "Up Next",
+    },
+    {
+      step: 3,
+      title: "5-Year PYQ Exam Blitz",
+      detail: `Solve official 2020-2024 ${normTrack} previous year questions under exact exam marking.`,
+      duration: "30 min · 15 Qs",
+      type: "Exam PYQ",
+      color: "border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+      status: "Locked",
+    },
+    {
+      step: 4,
+      title: "Timed Speed & Negative Marking Mock",
+      detail: "20-minute timed sprint with +4/-1 scoring to test retention under strict time pressure.",
+      duration: "20 min · Timed",
+      type: "Simulation",
+      color: "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+      status: "Milestone",
+    },
+  ];
+
+  return (
+    <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+              AI Adaptive Recovery Plan
+            </h2>
+            <span className="rounded-full bg-blue-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">
+              Personalized
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            Automated 4-stage progression engineered to raise accuracy in{" "}
+            <span className="font-bold text-slate-900 dark:text-white">{focusChapter}</span> ({focusSubject}) to 80%+
+          </p>
+        </div>
+      </div>
+
+      <div className="relative mt-5 space-y-3">
+        {steps.map((s, idx) => (
+          <div
+            key={s.step}
+            className="flex items-start gap-3.5 rounded-xl border border-slate-200/70 bg-slate-50/40 p-3.5 transition-all dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30"
+          >
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand font-display text-xs font-black text-slate-950">
+              {s.step}
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center justify-between gap-1">
+                <h4 className="font-bold text-sm text-slate-900 dark:text-white">
+                  {s.title}
+                </h4>
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
+                  {s.duration}
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                {s.detail}
+              </p>
+            </div>
           </div>
         ))}
       </div>
 
-      <button
-        className="w-full py-3 rounded-xl bg-brand text-white text-sm font-black hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 transition-all duration-300 cursor-pointer"
-        onClick={() => {
-          alert("Opening AI study plan generator…");
-        }}
-      >
-        Generate Full AI Study Plan →
-      </button>
+      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <Link
+          href={`/pyq?mode=chapter&subject=${encodeURIComponent(focusSubject)}&chapter=${encodeURIComponent(focusChapter)}`}
+          className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand py-2.5 px-4 text-sm font-bold text-slate-950 transition-colors hover:bg-brand-hover shadow-sm"
+        >
+          <Flame className="h-4 w-4" />
+          <span>Launch Adaptive Recovery Session →</span>
+        </Link>
+        <Link
+          href="/test"
+          className="inline-flex items-center justify-center rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]"
+        >
+          Custom Test Builder
+        </Link>
+      </div>
     </div>
   );
 }
+
+// ─────────────────────────────────────────────────────────────────
+// 4. STRATEGY & BEHAVIORAL DIAGNOSTICS (SPEED & EFFORT BALANCE)
+// ─────────────────────────────────────────────────────────────────
+export function StrategyAndBalanceDiagnostic({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+  const isNeet = normTrack === "NEET";
+  const defaults = TRACK_DEFAULTS[normTrack] || TRACK_DEFAULTS.JEE;
+  const pacing = getPacingPersona(stats);
+
+  // Calculate actual subject distribution
+  const subjectDist = stats?.subjectDistribution?.items || [];
+  const totalAttempted = subjectDist.reduce((acc, curr) => acc + (curr.attempted || 0), 0);
+
+  const distributionComparison = defaults.idealDistribution.map((ideal) => {
+    const actual = subjectDist.find((s) => String(s.subject).toLowerCase() === ideal.subject.toLowerCase());
+    const actualPct = actual?.pct ?? (totalAttempted > 0 ? Math.round(((actual?.attempted || 0) / totalAttempted) * 100) : null);
+    return {
+      subject: ideal.subject,
+      idealPct: ideal.idealPct,
+      actualPct: actualPct !== null ? actualPct : 0,
+      hasData: actualPct !== null && totalAttempted > 0,
+      color: ideal.color,
+    };
+  });
+
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      {/* Box 1: Subject Time & Effort Balance */}
+      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6 flex flex-col justify-between">
+        <div>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white">
+              Subject Effort Balance
+            </h2>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400">
+              Exam Target vs Your Split
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-5">
+            {isNeet
+              ? "NEET weightage requires 50% Biology (360 marks), 25% Chemistry (180), 25% Physics (180)."
+              : "JEE Main marks are distributed equally (33.3% each) across Physics, Chemistry, Maths."}
+          </p>
+
+          <div className="space-y-4">
+            {distributionComparison.map((item) => (
+              <div key={item.subject} className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-semibold">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+                    <span className="text-slate-800 dark:text-slate-200">{item.subject}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] tabular-nums">
+                    <span className="text-slate-400 dark:text-slate-500">
+                      Target: {Math.round(item.idealPct)}%
+                    </span>
+                    <span className="font-black text-slate-900 dark:text-white">
+                      You: {item.hasData ? `${item.actualPct}%` : "—"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Progress bar comparing actual vs ideal */}
+                <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
+                  <div
+                    className="h-full rounded-full transition-all duration-700"
+                    style={{
+                      width: `${Math.min(100, item.hasData ? item.actualPct : item.idealPct)}%`,
+                      backgroundColor: item.color,
+                      opacity: item.hasData ? 1 : 0.4,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 rounded-xl border border-slate-200/60 bg-slate-50/70 p-3 text-xs text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-400">
+          <div className="flex items-start gap-2">
+            <Sparkles className="h-4 w-4 text-brand shrink-0 mt-0.5" />
+            <p className="leading-relaxed">
+              {isNeet
+                ? "Biology offers the highest ROI per hour spent. Ensure 1 in every 2 questions practiced is Biology."
+                : "Balanced preparation across all 3 subjects ensures you clear subject-wise cutoffs and maximize total score."}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Box 2: Speed vs Accuracy Persona */}
+      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6 flex flex-col justify-between">
+        <div>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white">
+              Speed & Pacing Persona
+            </h2>
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${pacing.tagColor}`}>
+              {pacing.tag}
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-5">
+            Diagnostic of time spent per question vs accuracy tradeoffs
+          </p>
+
+          <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/15 text-slate-950 dark:text-brand">
+                <Clock className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm text-slate-950 dark:text-white">
+                  {pacing.persona}
+                </h3>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  {pacing.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+              <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
+                <span className="text-slate-500 dark:text-slate-400">Time Efficiency Score</span>
+                <span className="font-black text-slate-900 dark:text-white">{pacing.speedScore}/100</span>
+              </div>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+                <div
+                  className="h-full rounded-full bg-brand"
+                  style={{ width: `${pacing.speedScore}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-5 rounded-xl border border-amber-200/60 bg-amber-50/50 p-3 text-xs text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-200">
+          <div className="flex items-start gap-2">
+            <Zap className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <p className="leading-relaxed font-medium">
+              {pacing.recommendation}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 5. DAILY AI STUDY PLAN & RECOMMENDATIONS
+// ─────────────────────────────────────────────────────────────────
+export function AIDailyPlanAndTips({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+  const isNeet = normTrack === "NEET";
+
+  const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
+  const focusChapter = userWeak[0]?.chapter || (isNeet ? "Genetics and Evolution" : "Integration & Calculus");
+  const focusSubject = userWeak[0]?.subject || (isNeet ? "Biology" : "Mathematics");
+
+  const tasks = [
+    {
+      id: "task-1",
+      title: `Fix Gap: ${focusChapter}`,
+      detail: `Solve 15 targeted PYQs in ${focusChapter} (${focusSubject}). Target >75% accuracy.`,
+      tag: "Priority Fix",
+      tagColor: "bg-red-500/10 text-red-600 dark:text-red-400",
+      href: `/pyq?mode=chapter&subject=${encodeURIComponent(focusSubject)}&chapter=${encodeURIComponent(focusChapter)}`,
+    },
+    {
+      id: "task-2",
+      title: "Daily 20-Q Speed Sprint",
+      detail: isNeet
+        ? "Complete a 20-question mixed Chemistry & Physics drill to maintain exam pacing."
+        : "Complete a 20-question mixed Physics & Chemistry drill to improve velocity.",
+      tag: "Pacing",
+      tagColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+      href: "/test",
+    },
+    {
+      id: "task-3",
+      title: "Mistake Journal Review",
+      detail: "Re-attempt questions you missed in your recent tests before taking new mocks.",
+      tag: "Retention",
+      tagColor: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+      href: "/analytics",
+    },
+  ];
+
+  return (
+    <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+              Today&apos;s AI High-Impact Tasks
+            </h2>
+            <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+              Daily Missions
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            3 high-yield actions prioritized by our AI engine to optimize today&apos;s study session
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {tasks.map((task, idx) => (
+          <div
+            key={task.id}
+            className="flex flex-col justify-between rounded-xl border border-slate-200/70 bg-slate-50/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] font-black text-slate-950">
+                  {idx + 1}
+                </span>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${task.tagColor}`}>
+                  {task.tag}
+                </span>
+              </div>
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                {task.title}
+              </h3>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                {task.detail}
+              </p>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+              <Link
+                href={task.href}
+                className="inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline"
+              >
+                <span>Start Task</span>
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MAIN COMPOSITE VIEW: AIInsightsView
+// ─────────────────────────────────────────────────────────────────
+export default function AIInsightsView({ stats, track = "JEE" }) {
+  const normTrack = String(track || "JEE").toUpperCase();
+
+  return (
+    <div className="space-y-6 sm:space-y-8 animate-slideUp" style={{ animationDelay: "100ms" }}>
+      {/* 1. Score & Rank Prediction Hero */}
+      <ScoreForecastHero stats={stats} track={normTrack} />
+
+      {/* 2. Weak-Spot Interceptor */}
+      <WeakSpotInterceptor stats={stats} track={normTrack} />
+
+      {/* 3. Adaptive 4-Step Learning Roadmap */}
+      <AdaptiveLearningJourney stats={stats} track={normTrack} />
+
+      {/* 4. Strategy & Pacing Diagnostics */}
+      <StrategyAndBalanceDiagnostic stats={stats} track={normTrack} />
+
+      {/* 5. Daily AI Action Plan */}
+      <AIDailyPlanAndTips stats={stats} track={normTrack} />
+    </div>
+  );
+}
+
+// Export legacy individual components for backwards compatibility
+export {
+  AIInsightsView,
+  ScoreForecastHero as SmartPrediction,
+  AdaptiveLearningJourney as AdaptiveLearning,
+  AIDailyPlanAndTips as AIStudyPlanner,
+  WeakSpotInterceptor as AIRecommendations,
+};
