@@ -1,8 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { getChapterTargets } from "@/lib/questions";
-import { TEST_PAGE_CHAPTERS } from "@/lib/pyqChapterMapping";
+import { getChapterTargets, TEST_PAGE_CHAPTERS } from "@/lib/pyqChapterMapping";
 
 export async function GET(request) {
   try {
@@ -18,9 +17,51 @@ export async function GET(request) {
     const subject = rawSubject === "Maths" ? "Mathematics" : rawSubject;
     const lookupKey = rawSubject === "Mathematics" ? "Maths" : rawSubject;
 
-    const chaptersList = TEST_PAGE_CHAPTERS[lookupKey] || TEST_PAGE_CHAPTERS[rawSubject] || [];
+    const rawChaptersList = TEST_PAGE_CHAPTERS[lookupKey] || TEST_PAGE_CHAPTERS[rawSubject] || [];
 
-    if (!chaptersList.length) {
+    const TEST_BUILDER_EXTRA = {
+      Biology: [
+        "The Living World",
+        "Biological Classification",
+        "Plant Kingdom",
+        "Animal Kingdom",
+        "Morphology of Flowering Plants",
+        "Anatomy of Flowering Plants",
+        "Structural Organisation in Animals",
+        "Cell: The Unit of Life",
+        "Biomolecules",
+        "Cell Cycle and Cell Division",
+        "Photosynthesis in Higher Plants",
+        "Respiration in Plants",
+        "Plant Growth and Development",
+        "Digestion and Absorption",
+        "Breathing and Exchange of Gases",
+        "Body Fluids and Circulation",
+        "Excretory Products and their Elimination",
+        "Locomotion and Movement",
+        "Neural Control and Coordination",
+        "Chemical Coordination and Integration",
+        "Sexual Reproduction in Flowering Plants",
+        "Human Reproduction",
+        "Reproductive Health",
+        "Principles of Inheritance and Variation",
+        "Molecular Basis of Inheritance",
+        "Evolution",
+        "Human Health and Disease",
+        "Microbes in Human Welfare",
+        "Biotechnology: Principles and Processes",
+        "Biotechnology and its Applications",
+        "Organisms and Populations",
+        "Ecosystem",
+        "Biodiversity and Conservation",
+      ],
+    };
+
+    const combinedList = [
+      ...new Set([...rawChaptersList, ...(TEST_BUILDER_EXTRA[lookupKey] || TEST_BUILDER_EXTRA[rawSubject] || [])]),
+    ];
+
+    if (!combinedList.length) {
       return NextResponse.json({ chapters: [] });
     }
 
@@ -35,7 +76,7 @@ export async function GET(request) {
 
     if (error?.code === "42703") {
       return NextResponse.json({
-        chapters: chaptersList.map((chapter) => ({
+        chapters: combinedList.map((chapter) => ({
           chapter,
           count: 0,
           difficultyCounts: { easy: 0, medium: 0, hard: 0 },
@@ -50,7 +91,7 @@ export async function GET(request) {
     }
 
     const rows = data || [];
-    const chapters = chaptersList.map((chapter) => {
+    const chapters = combinedList.map((chapter) => {
       const targets = new Set(getChapterTargets(chapter));
       const matches = rows.filter((row) => targets.has(row.chapter));
       return {
