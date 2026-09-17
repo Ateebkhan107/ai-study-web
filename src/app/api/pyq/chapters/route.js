@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getCanonicalChaptersForSubject, getChapterTargets, getSubjectTargets, normalizeChapterName } from "@/lib/pyqChapterMapping";
 
 
@@ -18,7 +18,7 @@ searchParams.get("subject");
 
 
 
-let query = supabase
+let query = supabaseAdmin
 .from("pyq_questions")
 .select("chapter")
 .eq("status", "PUBLISHED")

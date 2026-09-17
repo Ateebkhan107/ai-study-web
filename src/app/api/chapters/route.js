@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 
 export async function GET(req){
@@ -10,7 +10,7 @@ const subject =
 searchParams.get("subject");
 
 
-let query = supabase
+let query = supabaseAdmin
 .from("chapters")
 .select("*");
 

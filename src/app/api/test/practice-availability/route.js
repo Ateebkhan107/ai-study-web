@@ -2,29 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getChapterTargets } from "@/lib/questions";
-
-const BIOLOGY_CHAPTERS = [
-  "The Living World & Biological Classification",
-  "Plant Kingdom",
-  "Animal Kingdom",
-  "Morphology & Anatomy of Flowering Plants",
-  "Structural Organisation in Animals",
-  "Cell: Structure, Function & Cell Division",
-  "Biomolecules",
-  "Plant Physiology (Photosynthesis & Respiration)",
-  "Plant Growth & Development",
-  "Human Physiology (Digestion, Respiration, Circulation)",
-  "Excretion, Locomotion & Neural Control",
-  "Chemical Coordination & Integration",
-  "Sexual Reproduction in Flowering Plants",
-  "Human Reproduction & Reproductive Health",
-  "Principles of Inheritance & Variation (Genetics)",
-  "Molecular Basis of Inheritance",
-  "Evolution",
-  "Human Health, Diseases & Microbes",
-  "Biotechnology: Principles & Applications",
-  "Ecology, Ecosystem & Biodiversity Conservation",
-];
+import { TEST_PAGE_CHAPTERS } from "@/lib/pyqChapterMapping";
 
 export async function GET(request) {
   try {
@@ -36,24 +14,28 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
     const exam = searchParams.get("exam") || "NEET";
-    const subject = searchParams.get("subject") || "Biology";
+    const rawSubject = searchParams.get("subject") || "Biology";
+    const subject = rawSubject === "Maths" ? "Mathematics" : rawSubject;
+    const lookupKey = rawSubject === "Mathematics" ? "Maths" : rawSubject;
 
-    if (exam !== "NEET" || subject !== "Biology") {
+    const chaptersList = TEST_PAGE_CHAPTERS[lookupKey] || TEST_PAGE_CHAPTERS[rawSubject] || [];
+
+    if (!chaptersList.length) {
       return NextResponse.json({ chapters: [] });
     }
 
     const { data, error } = await supabaseAdmin
       .from("questions")
       .select("id,chapter,difficulty")
-      .eq("exam", "NEET")
-      .eq("subject", "Biology")
+      .eq("exam", exam)
+      .eq("subject", subject)
       .eq("source_type", "PREPZII_PRACTICE")
       .eq("status", "PUBLISHED")
       .eq("is_active", true);
 
     if (error?.code === "42703") {
       return NextResponse.json({
-        chapters: BIOLOGY_CHAPTERS.map((chapter) => ({
+        chapters: chaptersList.map((chapter) => ({
           chapter,
           count: 0,
           difficultyCounts: { easy: 0, medium: 0, hard: 0 },
@@ -68,7 +50,7 @@ export async function GET(request) {
     }
 
     const rows = data || [];
-    const chapters = BIOLOGY_CHAPTERS.map((chapter) => {
+    const chapters = chaptersList.map((chapter) => {
       const targets = new Set(getChapterTargets(chapter));
       const matches = rows.filter((row) => targets.has(row.chapter));
       return {

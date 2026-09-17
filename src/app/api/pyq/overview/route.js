@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 // GET /api/pyq/overview?track=jee|neet
 // Returns real question-bank stats for the given track (used by the
@@ -15,7 +15,7 @@ export async function GET(request) {
     // single exact value. Adjust here if your exam column uses different strings.
     const isNeet = track === "neet";
 
-    const countQuery = supabase
+    const countQuery = supabaseAdmin
       .from("pyq_questions")
       .select("id", { count: "exact", head: true })
       .eq("status", "PUBLISHED");
@@ -30,14 +30,14 @@ export async function GET(request) {
 
     if (countError) throw countError;
 
-    const minYearQuery = supabase
+    const minYearQuery = supabaseAdmin
       .from("pyq_questions")
       .select("year")
       .eq("status", "PUBLISHED")
       .order("year", { ascending: true })
       .limit(1);
 
-    const maxYearQuery = supabase
+    const maxYearQuery = supabaseAdmin
       .from("pyq_questions")
       .select("year")
       .eq("status", "PUBLISHED")
