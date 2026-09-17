@@ -1,0 +1,569 @@
+[
+  {
+    "num": 6,
+    "subject": "Physics",
+    "question": "The current passing through the battery in the given circuit, is:",
+    "options": {
+      "a": "2.5 A",
+      "b": "1.5 A",
+      "c": "2.0 A",
+      "d": "0.5 A"
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q006-question-image.png?v=1789386296765",
+        "file": "q006_question.png"
+      }
+    ]
+  },
+  {
+    "num": 7,
+    "subject": "Physics",
+    "question": "Three identical heat conducting rods are connected in series as shown in the figure. The rods on the sides have thermal conductivity $2K$ while that in the middle has thermal conductivity $K$. The left end of the combination is maintained at temperature $3T$ and the right end at $T$. The rods are thermally insulated from outside. In steady state, temperature at the left junction is $T_1$ and that at the right junction is $T_2$. The ratio $\\frac{T_1}{T_2}$ is :",
+    "options": {
+      "a": "$\\frac{5}{3}$",
+      "b": "$\\frac{5}{4}$",
+      "c": "$\\frac{3}{2}$",
+      "d": "$\\frac{4}{3}$"
+    },
+    "correct": "A",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q007-question-image.png?v=1789386296765",
+        "file": "q007_question.png"
+      }
+    ]
+  },
+  {
+    "num": 8,
+    "subject": "Physics",
+    "question": "In an oscillating spring-mass system, the spring is connected to a sand-filled box. As sand leaks slowly and vertically, how do the average angular frequency $\\omega(t)$ and amplitude $A(t)$ vary with time? Choose the correct schematic.",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q008-option-a-image.png?v=1789386693617",
+        "file": "q008_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q008-option-b-image.png?v=1789386693617",
+        "file": "q008_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q008-option-c-image.png?v=1789386693617",
+        "file": "q008_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q008-option-d-image.png?v=1789386693617",
+        "file": "q008_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 9,
+    "subject": "Physics",
+    "question": "AB is a part of an electrical circuit (see figure). The potential difference $V_A - V_B$, at the instant when current $i = 2\\text{ A}$ and is increasing at a rate of $1\\text{ A/s}$ is :",
+    "options": {
+      "a": "$9\\text{ V}$",
+      "b": "$10\\text{ V}$",
+      "c": "$5\\text{ V}$",
+      "d": "$6\\text{ V}$"
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q009-question-image.png?v=1789386296765",
+        "file": "q009_question.png"
+      }
+    ]
+  },
+  {
+    "num": 15,
+    "subject": "Physics",
+    "question": "The full-wave rectifier shown uses diodes $D_1$ and $D_2$. If $V_{\\mathrm{in}}=220\\sin(100\\pi t)\\,\\mathrm{V}$, then at $t=15\\,\\mathrm{ms}$:",
+    "options": {
+      "a": "$ and $ both are forward biased",
+      "b": "$ and $ both are reverse biased",
+      "c": "$ is forward biased, $ is reverse biased",
+      "d": "$ is reverse biased, $ is forward biased"
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q015-question-image.png?v=1789386591698",
+        "file": "q015_question.png"
+      }
+    ]
+  },
+  {
+    "num": 22,
+    "subject": "Physics",
+    "question": "Which of the following options represent the variation of photoelectric current with property of light shown on the x-axis?",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q022-option-a-image.png?v=1789386591698",
+        "file": "q022_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q022-option-b-image.png?v=1789386591698",
+        "file": "q022_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q022-option-c-image.png?v=1789386591698",
+        "file": "q022_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q022-option-d-image.png?v=1789386591698",
+        "file": "q022_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 25,
+    "subject": "Physics",
+    "question": "The output (Y) of the given logic implementation is similar to the output of an/a ____ gate.",
+    "options": {
+      "a": "OR",
+      "b": "NOR",
+      "c": "AND",
+      "d": "NAND"
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q025-question-image.png?v=1789386296765",
+        "file": "q025_question.png"
+      }
+    ]
+  },
+  {
+    "num": 30,
+    "subject": "Physics",
+    "question": "A bob of mass $m$ hangs from a light string of length $l$ and is projected horizontally with speed $v_0$, as shown. If the string becomes slack at point $P$, where the string makes angle $\\theta$ with the horizontal, the ratio $v/v_0$ is:",
+    "options": {
+      "a": "$\\sqrt{\\dfrac{\\cos\\theta}{2+3\\sin\\theta}}$",
+      "b": "$\\sqrt{\\dfrac{\\sin\\theta}{2+3\\sin\\theta}}$",
+      "c": "$\\sqrt{\\sin\\theta}$",
+      "d": "$\\sqrt{\\dfrac{1}{2+3\\sin\\theta}}$"
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q030-question-image.png?v=1789386296765",
+        "file": "q030_question.png"
+      }
+    ]
+  },
+  {
+    "num": 36,
+    "subject": "Physics",
+    "question": "A sphere of radius $R$ is cut from a larger solid sphere of radius $2R$ as shown in the figure. The ratio of the moment of inertia of the smaller sphere to that of the rest part of the sphere about the Y-axis is :",
+    "options": {
+      "a": "$\\frac{7}{57}$",
+      "b": "$\\frac{7}{64}$",
+      "c": "$\\frac{7}{8}$",
+      "d": "$\\frac{7}{40}$"
+    },
+    "correct": "A",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q036-question-image.png?v=1789386296765",
+        "file": "q036_question.png"
+      }
+    ]
+  },
+  {
+    "num": 41,
+    "subject": "Physics",
+    "question": "A constant voltage of 50 V is maintained between the points A and B of the circuit shown in the figure. The current through the branch CD of the circuit is:",
+    "options": {
+      "a": "2.5 A",
+      "b": "3.0 A",
+      "c": "1.5 A",
+      "d": "2.0 A"
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q041-question-image.png?v=1789386296765",
+        "file": "q041_question.png"
+      }
+    ]
+  },
+  {
+    "num": 45,
+    "subject": "Physics",
+    "question": "For the wide liquid tank shown, the surface has height $y(x)$ and makes a small angle $\\theta_0$ with the $x$-axis at $x=L$. With surface tension $S$, density $\\rho$, and $\\theta\\simeq dy/dx$, the governing equation is:",
+    "options": {
+      "a": "$\\dfrac{d^2y}{dx^2}=\\dfrac{\\rho g}{S}$",
+      "b": "$\\dfrac{dy}{dx}=\\dfrac{\\rho g}{S}x$",
+      "c": "$\\dfrac{d^2y}{dx^2}=\\dfrac{\\rho g}{S}x$",
+      "d": "$\\dfrac{d^2y}{dx^2}=\\dfrac{\\rho g}{S}y$"
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q045-question-image.png?v=1789386296765",
+        "file": "q045_question.png"
+      }
+    ]
+  },
+  {
+    "num": 46,
+    "subject": "Chemistry",
+    "question": "Identify the suitable reagent for the following conversion.",
+    "options": {
+      "a": "(i) NaBH4, (ii) H+/H2O",
+      "b": "H2/Pd-BaSO4",
+      "c": "(i) LiAlH4, (ii) H+/H2O",
+      "d": "(i) AlH(iBu)2 (ii) H2O"
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q046-question-image.png?v=1789386296765",
+        "file": "q046_question.png"
+      }
+    ]
+  },
+  {
+    "num": 58,
+    "subject": "Chemistry",
+    "question": "Which one of the following reactions does Not give benzene as the product?",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q058-option-a-image.png?v=1788975722147",
+        "file": "q058_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q058-option-b-image.png?v=1788975722147",
+        "file": "q058_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q058-option-c-image.png?v=1788975722147",
+        "file": "q058_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q058-option-d-image.png?v=1788975722147",
+        "file": "q058_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 60,
+    "subject": "Chemistry",
+    "question": "How many products, including stereoisomers, are expected from monochlorination of the compound shown?",
+    "options": {
+      "a": "5",
+      "b": "6",
+      "c": "2",
+      "d": "3"
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q060-question-image.png?v=1789386296765",
+        "file": "q060_question.png"
+      }
+    ]
+  },
+  {
+    "num": 64,
+    "subject": "Chemistry",
+    "question": "$\\text{C}(\\text{s}) + 2\\text{H}_2(\\text{g}) \\to \\text{CH}_4(\\text{g});\\ \\Delta H = -74.8\\text{ kJ mol}^{-1}$\n\nWhich of the following diagrams gives an accurate representation of the above reaction? [$\\text{R} \\to \\text{reactants};\\ \\text{P} \\to \\text{products}$]",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q064-option-a-image.png?v=1788975722147",
+        "file": "q064_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q064-option-b-image.png?v=1788975722147",
+        "file": "q064_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q064-option-c-image.png?v=1788975722147",
+        "file": "q064_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q064-option-d-image.png?v=1788975722147",
+        "file": "q064_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 75,
+    "subject": "Chemistry",
+    "question": "Among the given compounds I-III, the correct order of bond dissociation energy of C—H bond marked with * (is).",
+    "options": {
+      "a": "III > II > I",
+      "b": "II > III > I",
+      "c": "II > I > III",
+      "d": "I > II > III"
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q075-question-image.png?v=1789386296765",
+        "file": "q075_question.png"
+      }
+    ]
+  },
+  {
+    "num": 81,
+    "subject": "Chemistry",
+    "question": "Which one of the following compounds does not decolourize bromine water?",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q081-option-a-image.png?v=1788975722147",
+        "file": "q081_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q081-option-b-image.png?v=1788975722147",
+        "file": "q081_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q081-option-c-image.png?v=1788975722147",
+        "file": "q081_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q081-option-d-image.png?v=1788975722147",
+        "file": "q081_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 82,
+    "subject": "Chemistry",
+    "question": "Predict the major product ‘P in the following sequence of reactions",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q082-question-image.png?v=1788975722147",
+        "file": "q082_question.png"
+      },
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q082-option-a-image.png?v=1788975722147",
+        "file": "q082_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q082-option-b-image.png?v=1788975722147",
+        "file": "q082_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q082-option-c-image.png?v=1788975722147",
+        "file": "q082_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q082-option-d-image.png?v=1788975722147",
+        "file": "q082_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 90,
+    "subject": "Chemistry",
+    "question": "The major product of the following reaction is:",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q090-question-image.png?v=1788975722147",
+        "file": "q090_question.png"
+      },
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q090-option-a-image.png?v=1788975722147",
+        "file": "q090_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q090-option-b-image.png?v=1788975722147",
+        "file": "q090_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q090-option-c-image.png?v=1788975722147",
+        "file": "q090_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q090-option-d-image.png?v=1788975722147",
+        "file": "q090_opt_d.png"
+      }
+    ]
+  },
+  {
+    "num": 91,
+    "subject": "Biology",
+    "question": "In the above represented plasmid an alien piece of DNA is inserted at EcoRI site. Which of the following strategies will be chosen to select the recombinant colonies?",
+    "options": {
+      "a": "White color colonies will be selected",
+      "b": "Blue color colonies grown on ampicillin",
+      "c": "Using ampicillin & tetracyclin containing medium plate.",
+      "d": "Blue color colonies will be selected."
+    },
+    "correct": "A",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q091-question-image.png?v=1789386296765",
+        "file": "q091_question.png"
+      }
+    ]
+  },
+  {
+    "num": 112,
+    "subject": "Biology",
+    "question": "Identify the part of a bio-reactor which is used as a foam braker from the given figure.",
+    "options": {
+      "a": "D",
+      "b": "C",
+      "c": "A",
+      "d": "B"
+    },
+    "correct": "B",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q112-question-image.png?v=1789386296765",
+        "file": "q112_question.png"
+      }
+    ]
+  },
+  {
+    "num": 155,
+    "subject": "Biology",
+    "question": "With the help of given pedigree, find out the probability for the birth of a child having no disease and being a carrier (has the disease mutation in one allele of the gene) in F3 generation.",
+    "options": {
+      "a": "1/8",
+      "b": "Zero",
+      "c": "1/4",
+      "d": "1/2"
+    },
+    "correct": "C",
+    "images": [
+      {
+        "type": "question",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q155-question-image.png?v=1789386296765",
+        "file": "q155_question.png"
+      }
+    ]
+  },
+  {
+    "num": 164,
+    "subject": "Biology",
+    "question": "Which of the following diagrams is correct with regard to the proximal (P) and distal (D) tubule of the Nephron.",
+    "options": {
+      "a": "Diagram shown.",
+      "b": "Diagram shown.",
+      "c": "Diagram shown.",
+      "d": "Diagram shown."
+    },
+    "correct": "D",
+    "images": [
+      {
+        "type": "opt_a",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q164-option-a-image.png?v=1789386296765",
+        "file": "q164_opt_a.png"
+      },
+      {
+        "type": "opt_b",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q164-option-b-image.png?v=1789386296765",
+        "file": "q164_opt_b.png"
+      },
+      {
+        "type": "opt_c",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q164-option-c-image.png?v=1789386296765",
+        "file": "q164_opt_c.png"
+      },
+      {
+        "type": "opt_d",
+        "url": "https://vyqcciooigmnfmzrwtpp.supabase.co/storage/v1/object/public/pyq-images/neet-ug-2025/structured/q164-option-d-image.png?v=1789386296765",
+        "file": "q164_opt_d.png"
+      }
+    ]
+  }
+]
