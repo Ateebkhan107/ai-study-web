@@ -21,18 +21,26 @@ export default function ProfileMenu({ plan }) {
 
   useEffect(() => {
     if (!user) return;
+    let active = true;
+
     async function loadXP() {
       try {
         const res = await fetch("/api/profile", { cache: "no-store" });
-        if (res.ok) {
+        if (res.ok && active) {
           const data = await res.json();
-          setXp(data.xp || 0);
+          if (active) {
+            setXp(data.xp || 0);
+          }
         }
-      } catch (e) {
-        console.error(e);
+      } catch {
+        // Silently ignore network aborts / transient fetch issues
       }
     }
     loadXP();
+
+    return () => {
+      active = false;
+    };
   }, [user]);
 
   const levelStats = getLevelFromXP(xp);
