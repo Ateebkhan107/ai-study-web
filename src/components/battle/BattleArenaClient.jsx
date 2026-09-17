@@ -390,7 +390,7 @@ export default function BattleArenaClient() {
       </div>
 
       {/* FIGHT CARD HERO BANNER */}
-      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[linear-gradient(180deg,#181818,#141414)]">
+      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,250,252,0.84))] shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
         <div className="absolute inset-x-0 top-0 h-px bg-brand/35" aria-hidden="true" />
 
         <div className="relative flex w-full flex-row">

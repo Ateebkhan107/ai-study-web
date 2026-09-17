@@ -96,7 +96,7 @@ export default function AnalyticsUnlockBanner({ stats }) {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/80 via-white to-amber-50/40 p-4 shadow-sm transition-all duration-300 dark:border-brand/30 dark:bg-gradient-to-br dark:from-brand/10 dark:via-[var(--surface)] dark:to-brand/5 dark:bg-[var(--surface)] sm:p-5">
+    <div className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/80 via-white to-amber-50/40 p-4 shadow-sm transition-all duration-300 dark:border-brand/30 dark:bg-[var(--surface)] sm:p-5">
       {/* Background Watermark Accent */}
       <div className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full bg-brand/10 blur-2xl dark:bg-brand/15" />
 

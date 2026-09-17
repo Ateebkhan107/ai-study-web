@@ -35,7 +35,7 @@ function PageHeader() {
     <header className="border-b border-border-subtle/70 bg-[var(--background)]/95">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-6">
         <Link href="/" aria-label="PrepZii home">
-          <Logo forceDark size={34} />
+          <Logo forceLight size={44} />
         </Link>
         <nav aria-label="Public exam pages" className="hidden items-center gap-5 text-sm font-semibold text-secondary sm:flex">
           <Link href="/jee" className="transition-colors hover:text-brand-hover">
@@ -250,9 +250,28 @@ function ClosingCta({ page }) {
   );
 }
 
+const lightThemeVars = {
+  "--background": "#FFFDF2",
+  "--background-secondary": "#F8F1D9",
+  "--foreground": "#121826",
+  "--text-primary": "#121826",
+  "--text-secondary": "#334155",
+  "--text-muted": "#64748B",
+  "--text-disabled": "#94A3B8",
+  "--card": "#FFFFFF",
+  "--surface": "#FFFFFF",
+  "--surface-secondary": "#FCF8E8",
+  "--surface-elevated": "#FFFFFF",
+  "--surface-hover": "#FFF8D7",
+  "--surface-active": "#F8E7A3",
+  "--border": "#E8DDAF",
+  "--border-subtle": "#F1E7BE",
+  "--muted": "#64748B",
+};
+
 export default function SeoLandingPage({ page }) {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-foreground">
+    <div className="min-h-screen bg-[var(--background)] text-foreground" style={lightThemeVars}>
       <JsonLd data={buildBreadcrumbJsonLd(page)} />
       <PageHeader />
       <main>

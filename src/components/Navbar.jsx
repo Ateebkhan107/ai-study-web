@@ -140,10 +140,10 @@ export default function Navbar({
         setPendingHref("/pro");
         if (mobileOpen) setMobileOpen(false);
       }}
-      className={`prepzii-interactive inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest hover:shadow-lg ${
+      className={`prepzii-interactive inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest ${
         isPro
           ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300"
-          : "bg-gradient-to-br from-amber-400 to-amber-500 text-amber-950 shadow-md shadow-amber-500/20 hover:from-amber-400 hover:to-amber-600 hover:shadow-amber-500/30 dark:from-amber-500 dark:to-amber-600 dark:text-white"
+          : "bg-gradient-to-br from-amber-400 to-amber-500 text-amber-950 hover:from-amber-400 hover:to-amber-600 dark:bg-none dark:bg-brand dark:text-black dark:hover:bg-brand-hover"
       }`}
     >
       {!isPro && <Star aria-hidden="true" className="prepzii-interactive-icon h-3.5 w-3.5" fill="currentColor" />}
@@ -157,7 +157,7 @@ export default function Navbar({
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)]/80 dark:bg-[var(--background)]/92 dark:shadow-none lg:top-4 lg:mx-auto lg:mt-4 lg:w-[calc(100%-32px)] lg:max-w-7xl lg:rounded-[20px] lg:border lg:border-slate-200/80 lg:bg-white/95 lg:shadow-none lg:backdrop-blur-none lg:dark:border-white/10 lg:dark:bg-[#11110f]">
+    <header className="sticky top-0 z-50 w-full max-w-full border-b border-slate-200/70 bg-[var(--card)]/90 shadow-[0_1px_18px_rgba(32,33,30,0.06)] backdrop-blur-xl transition-colors duration-200 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/92 dark:shadow-none lg:top-4 lg:mx-auto lg:mt-4 lg:w-[calc(100%-32px)] lg:max-w-7xl lg:rounded-[20px] lg:border lg:border-slate-200/80 lg:bg-white/95 lg:shadow-none lg:backdrop-blur-none lg:dark:border-[var(--border)] lg:dark:bg-[var(--surface)]">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-1.5 px-2.5 sm:h-16 sm:gap-3 sm:px-6 lg:h-[70px] lg:px-7 xl:px-8">
 
         <div className="flex min-w-0 shrink-0 items-center">

@@ -459,7 +459,7 @@ export function ChartsUnlockHub({ stats }) {
   const unlockedCount = chartCards.filter((c) => c.ready).length;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/80 via-white to-amber-50/40 p-5 shadow-sm dark:border-brand/30 dark:bg-gradient-to-br dark:from-brand/10 dark:via-[var(--surface)] dark:to-brand/5 dark:bg-[var(--surface)] sm:p-7">
+    <div className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/80 via-white to-amber-50/40 p-5 shadow-sm dark:border-brand/30 dark:bg-[var(--surface)] sm:p-7">
       <div className="pointer-events-none absolute -right-8 -top-8 h-48 w-48 rounded-full bg-brand/10 blur-3xl dark:bg-brand/15" />
 
       <div className="relative z-10">

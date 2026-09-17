@@ -90,64 +90,72 @@
 
 .dark {
   /* PrepZii Dark Mode: matte black + soft charcoal */
-  --background: #0B0B0B;
-  --background-secondary: #0D0D0D;
-  --foreground: #FFFFFF;
-  --text-primary: #FFFFFF;
-  --text-secondary: #D6D3C5;
-  --text-muted: #A9A395;
-  --text-disabled: #A1A1AA;
-  --card: #141414;
-  --surface: #181818;
-  --surface-secondary: #1C1C1C;
-  --surface-elevated: #202020;
-  --surface-hover: #242424;
-  --surface-active: #2A2A2A;
-  --border: #323232;
-  --border-subtle: #242424;
+  --background: #09090B;
+  --background-secondary: #0F0F11;
+  --foreground: #FAFAFA;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --text-disabled: #52525B;
+  --card: #141415;
+  --surface: #141415;
+  --surface-secondary: #18181B;
+  --surface-elevated: #27272A;
+  --surface-hover: #1E1E22;
+  --surface-active: #27272A;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.06);
   --brand: #EAB308;
   --brand-hover: #FACC15;
   --brand-pressed: #FDE047;
-  --brand-soft: #422006;
-  --brand-border: #854D0E;
+  --brand-soft: rgba(234, 179, 8, 0.1);
+  --brand-border: rgba(234, 179, 8, 0.2);
   --accent: var(--brand);
   --accent-hover: var(--brand-hover);
   --accent-pressed: var(--brand-pressed);
   --muted: var(--text-muted);
-  --glass-bg: rgba(20, 20, 20, 0.94);
+  --glass-bg: rgba(20, 20, 21, 0.94);
   --glass-border: rgba(255, 255, 255, 0.08);
 
-  --success: #57A36B;
-  --error: #D05C4B;
-  --warning: #F59E0B;
+  --success: #2E8752;
+  --error: #C14A3A;
+  --warning: #D97706;
   --gold: #EAB308;
-  --subject-physics: #8DB4CA;
-  --subject-chemistry: #8FBE94;
-  --subject-biology: #D58B8B;
-  --subject-maths: #E0A36F;
+  
+  /* Muted blue for secondary info */
+  --subject-physics: #3B82F6;
+  --subject-chemistry: #10B981;
+  --subject-biology: #F43F5E;
+  --subject-maths: #F59E0B;
 
   /* Flat matte ambience */
-  --mesh-1: rgba(255, 255, 255, 0.018);
-  --mesh-2: rgba(255, 255, 255, 0.012);
+  --mesh-1: rgba(255, 255, 255, 0.015);
+  --mesh-2: rgba(255, 255, 255, 0.008);
   --mesh-3: rgba(255, 255, 255, 0.01);
-  --button-text: #000000;
+  --button-text: #09090B;
 
-  --prepzii-cream: #0B0B0B;
-  --prepzii-cream-strong: #141414;
-  --prepzii-ink: #FFFFFF;
-  --prepzii-navy: #F8FAFC;
-  --prepzii-charcoal: #181818;
+  --prepzii-cream: #09090B;
+  --prepzii-cream-strong: #141415;
+  --prepzii-ink: #FAFAFA;
+  --prepzii-navy: #A1A1AA;
+  --prepzii-charcoal: #141415;
   --prepzii-shadow-soft: none;
   --prepzii-shadow-lift: none;
-  --prepzii-paper-line: rgba(255, 255, 255, 0.055);
-  --prepzii-paper-grid: rgba(255, 255, 255, 0.035);
-  --prepzii-margin-line: rgba(208, 92, 75, 0.24);
-  --prepzii-rule: rgba(255, 255, 255, 0.13);
+  --prepzii-paper-line: rgba(255, 255, 255, 0.04);
+  --prepzii-paper-grid: rgba(255, 255, 255, 0.02);
+  --prepzii-margin-line: rgba(255, 255, 255, 0.08);
+  --prepzii-rule: rgba(255, 255, 255, 0.1);
   --prepzii-annotation: #FACC15;
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
+
+  /* Flatten all shadows and colored glows for an academic, non-SaaS look, adding minimal depth */
+  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6), 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
+  --tw-shadow-colored: 0 1px 2px 0 rgba(0, 0, 0, 0.6), 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
+  --tw-ring-color: rgba(255, 255, 255, 0.1) !important;
+
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -1089,4 +1097,10 @@ code,
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Global Button Readability Fix */
+.bg-brand.text-white,
+.bg-brand.dark\:text-white {
+  color: var(--button-text) !important;
 }

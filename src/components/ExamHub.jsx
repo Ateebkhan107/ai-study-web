@@ -11,7 +11,7 @@ const IconMap = {
 
 export default function ExamHub({ config }) {
   return (
-    <div className="relative overflow-hidden w-full rounded-3xl border border-gray-200/80 bg-gradient-to-br from-sky-400/10 via-white/80 to-sky-100/30 p-6 shadow-xl shadow-sky-500/[0.03] dark:border-[var(--border-subtle)]/60 dark:bg-gradient-to-br dark:from-[#161b22]/80 dark:via-[#0d1117]/60 dark:to-[#161b22]/40 backdrop-blur-md">
+    <div className="relative overflow-hidden w-full rounded-3xl border border-gray-200/80 bg-gradient-to-br from-sky-400/10 via-white/80 to-sky-100/30 p-6 shadow-xl shadow-sky-500/[0.03] dark:border-[var(--border-subtle)]/60 dark:bg-[var(--surface-elevated)] backdrop-blur-md">
       
       {/* Visual Ambient Background Layer */}
       <div className={`absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl ${config.themeGlow} rounded-full filter blur-[60px] pointer-events-none opacity-70`} />

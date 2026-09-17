@@ -108,7 +108,7 @@ export default async function DashboardPage() {
   return (
     <div className="relative min-h-screen w-full min-w-0">
       <div className="absolute inset-y-0 left-1/2 z-0 h-full w-dvw -translate-x-1/2 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f35_1px,transparent_1px)] [background-size:34px_34px] opacity-10 dark:opacity-15" />
+        <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-none [background-size:34px_34px] opacity-10 dark:opacity-15" />
       </div>
 
         <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
