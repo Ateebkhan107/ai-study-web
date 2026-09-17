@@ -12,10 +12,14 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+const NEET_TOTAL_CANDIDATES = 2205035; // 22,05,035 appeared candidates in NEET UG
+const JEE_TOTAL_CANDIDATES = 1415110;  // 14,15,110 appeared candidates in JEE Main
+
 // Track metadata & high-yield baseline data
 const TRACK_DEFAULTS = {
   JEE: {
     maxMarks: 300,
+    totalCandidates: JEE_TOTAL_CANDIDATES,
     idealDistribution: [
       { subject: "Physics", idealPct: 33.3, color: "#6366F1" },
       { subject: "Chemistry", idealPct: 33.3, color: "#10B981" },
@@ -30,6 +34,7 @@ const TRACK_DEFAULTS = {
   },
   NEET: {
     maxMarks: 720,
+    totalCandidates: NEET_TOTAL_CANDIDATES,
     idealDistribution: [
       { subject: "Biology", idealPct: 50.0, color: "#EC4899" },
       { subject: "Chemistry", idealPct: 25.0, color: "#10B981" },
@@ -53,27 +58,29 @@ const SUBJECT_COLORS = {
   general: "#8B5CF6",
 };
 
-// Calibrated NTA NEET UG Score vs Percentile vs AIR (2.4M test-takers benchmark)
+// Calibrated NTA NEET UG Score vs Percentile vs AIR (22,05,035 candidates benchmark)
 const NEET_CALIBRATION_TABLE = [
   { score: 720, pct: 100.0, rankMin: 1, rankMax: 1, tier: "AIIMS New Delhi (Top Rank)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 710, pct: 99.997, rankMin: 1, rankMax: 70, tier: "AIIMS New Delhi / Top Central GMCs", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 700, pct: 99.985, rankMin: 70, rankMax: 350, tier: "MAMC / VMMC / Top 5 Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 680, pct: 99.90, rankMin: 350, rankMax: 2200, tier: "Top State Govt. Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 655, pct: 99.60, rankMin: 2200, rankMax: 9500, tier: "Govt. Medical College (AIQ 15% Safe)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 630, pct: 98.90, rankMin: 9500, rankMax: 26000, tier: "Govt. Medical College (State 85% GMC)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
-  { score: 605, pct: 97.60, rankMin: 26000, rankMax: 56000, tier: "State GMC / Top Semi-Govt Seats", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
-  { score: 570, pct: 95.00, rankMin: 56000, rankMax: 115000, tier: "State Quota Borderline / BDS Top", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
-  { score: 520, pct: 90.00, rankMin: 115000, rankMax: 230000, tier: "Semi-Govt / Govt BDS / High-cutoff Private", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
-  { score: 460, pct: 83.00, rankMin: 230000, rankMax: 400000, tier: "Private Medical College / Merit Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
-  { score: 400, pct: 73.00, rankMin: 400000, rankMax: 650000, tier: "BAMS / BHMS / Private BDS Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
-  { score: 340, pct: 60.00, rankMin: 650000, rankMax: 950000, tier: "Allied Medical / Deemed Universities", tierColor: "text-slate-800 dark:text-slate-200 font-bold" },
-  { score: 260, pct: 42.00, rankMin: 950000, rankMax: 1400000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
-  { score: 180, pct: 24.00, rankMin: 1400000, rankMax: 1850000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
-  { score: 100, pct: 8.00, rankMin: 1850000, rankMax: 2200000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
-  { score: 0, pct: 0.00, rankMin: 2400000, rankMax: 2400000, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
+  { score: 715, pct: 99.997, rankMin: 1, rankMax: 67, tier: "AIIMS New Delhi / Top Central GMCs", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 710, pct: 99.991, rankMin: 68, rankMax: 195, tier: "AIIMS New Delhi / Top Central GMCs", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 700, pct: 99.980, rankMin: 196, rankMax: 430, tier: "MAMC / VMMC / Top 5 Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 680, pct: 99.882, rankMin: 430, rankMax: 2600, tier: "Top State Govt. Medical Colleges", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 655, pct: 99.450, rankMin: 2600, rankMax: 12120, tier: "Govt. Medical College (AIQ 15% Safe)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 630, pct: 98.600, rankMin: 12120, rankMax: 30870, tier: "Govt. Medical College (State 85% GMC)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
+  { score: 600, pct: 97.100, rankMin: 30870, rankMax: 63940, tier: "State GMC / Top Semi-Govt Seats", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 560, pct: 94.200, rankMin: 63940, rankMax: 127890, tier: "State Quota Borderline / BDS Top", tierColor: "text-blue-700 dark:text-blue-400 font-bold" },
+  { score: 510, pct: 89.000, rankMin: 127890, rankMax: 242550, tier: "Semi-Govt / Govt BDS / High-cutoff Private", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 450, pct: 80.500, rankMin: 242550, rankMax: 429980, tier: "Private Medical College / Merit Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 390, pct: 70.000, rankMin: 429980, rankMax: 661510, tier: "BAMS / BHMS / Private BDS Seats", tierColor: "text-amber-800 dark:text-amber-300 font-bold" },
+  { score: 330, pct: 57.000, rankMin: 661510, rankMax: 948160, tier: "Allied Medical / Deemed Universities", tierColor: "text-slate-800 dark:text-slate-200 font-bold" },
+  { score: 260, pct: 40.000, rankMin: 948160, rankMax: 1323020, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 190, pct: 23.000, rankMin: 1323020, rankMax: 1697870, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 120, pct: 8.500, rankMin: 1697870, rankMax: 2017600, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 50, pct: 2.200, rankMin: 2017600, rankMax: 2156500, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
+  { score: 0, pct: 0.000, rankMin: 2156500, rankMax: NEET_TOTAL_CANDIDATES, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
 ];
 
-// Calibrated NTA JEE Main Score vs Percentile vs AIR (1.4M test-takers benchmark)
+// Calibrated NTA JEE Main Score vs Percentile vs AIR (14,15,110 candidates benchmark)
 const JEE_CALIBRATION_TABLE = [
   { score: 300, pct: 100.0, rankMin: 1, rankMax: 1, tier: "Top 10 AIR / All IITs & NITs Open", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
   { score: 280, pct: 99.95, rankMin: 1, rankMax: 700, tier: "Top NITs (Trichy/Surathkal/Warangal CSE)", tierColor: "text-emerald-700 dark:text-emerald-400 font-bold" },
@@ -88,10 +95,10 @@ const JEE_CALIBRATION_TABLE = [
   { score: 60, pct: 74.00, rankMin: 231000, rankMax: 364000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
   { score: 40, pct: 58.00, rankMin: 364000, rankMax: 588000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
   { score: 20, pct: 35.00, rankMin: 588000, rankMax: 910000, tier: "Foundation Building Needed", tierColor: "text-slate-950 dark:text-slate-100 font-black" },
-  { score: 0, pct: 0.00, rankMin: 1400000, rankMax: 1400000, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
+  { score: 0, pct: 0.00, rankMin: 910000, rankMax: JEE_TOTAL_CANDIDATES, tier: "Initial Baseline", tierColor: "text-slate-900 dark:text-slate-200 font-bold" },
 ];
 
-function interpolateNTA(table, score) {
+function interpolateNTA(table, score, totalCandidates = NEET_TOTAL_CANDIDATES) {
   const s = Math.max(0, Math.min(table[0].score, score));
   for (let i = 0; i < table.length - 1; i++) {
     const high = table[i];
@@ -100,15 +107,25 @@ function interpolateNTA(table, score) {
       const range = high.score - low.score;
       const ratio = range === 0 ? 0 : (s - low.score) / range;
       const pct = (low.pct + ratio * (high.pct - low.pct)).toFixed(2);
-      const rankMin = Math.round(low.rankMin - ratio * (low.rankMin - high.rankMin));
-      const rankMax = Math.round(low.rankMax - ratio * (low.rankMax - high.rankMax));
+      const rawRankMin = Math.round(low.rankMin - ratio * (low.rankMin - high.rankMin));
+      const rawRankMax = Math.round(low.rankMax - ratio * (low.rankMax - high.rankMax));
+      
+      const rankMin = Math.max(1, Math.min(totalCandidates, rawRankMin));
+      const rankMax = Math.max(rankMin, Math.min(totalCandidates, rawRankMax));
+      
       const tier = ratio > 0.5 ? high.tier : low.tier;
       const tierColor = ratio > 0.5 ? high.tierColor : low.tierColor;
       return { pct, rankMin, rankMax, tier, tierColor };
     }
   }
   const last = table[table.length - 1];
-  return { pct: "0.00", rankMin: last.rankMin, rankMax: last.rankMax, tier: last.tier, tierColor: last.tierColor };
+  return {
+    pct: "0.00",
+    rankMin: Math.min(totalCandidates, last.rankMin),
+    rankMax: totalCandidates,
+    tier: last.tier,
+    tierColor: last.tierColor,
+  };
 }
 
 function getSubjectColor(subject) {
@@ -122,31 +139,34 @@ function calculatePredictions(stats, track) {
   const totalQuestions = stats?.counts?.answeredQuestions || stats?.overview?.questionsPracticed || 0;
   const averageTestScore = stats?.overview?.averageScore; // completed test % score if available
   const hasSample = typeof accuracy === "number" && totalQuestions >= 10;
+  const totalCandidates = isNeet ? NEET_TOTAL_CANDIDATES : JEE_TOTAL_CANDIDATES;
 
   if (isNeet) {
     if (!hasSample) {
       if (totalQuestions > 0 && typeof accuracy === "number") {
-        // Compute realistic diagnostic baseline from whatever small sample exists
-        const simulatedAttempted = Math.round(Math.min(180, Math.max(80, 80 + (accuracy / 100) * 80)));
-        const correct = Math.round(simulatedAttempted * (accuracy / 100));
+        // Safe conservative baseline from small sample
+        const safeAcc = Math.max(0, accuracy - 3);
+        const simulatedAttempted = Math.round(Math.min(175, Math.max(75, 75 + (safeAcc / 100) * 85)));
+        const correct = Math.round(simulatedAttempted * (safeAcc / 100));
         const incorrect = simulatedAttempted - correct;
         const rawScore = Math.max(0, Math.min(720, (correct * 4) - (incorrect * 1)));
-        const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(NEET_CALIBRATION_TABLE, rawScore);
+        const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(NEET_CALIBRATION_TABLE, rawScore, NEET_TOTAL_CANDIDATES);
+        const safeRankMax = Math.min(NEET_TOTAL_CANDIDATES, rankMax);
 
         return {
           hasData: false,
           predictedScore: rawScore,
           maxScore: 720,
-          scoreRange: `${Math.max(0, rawScore - 25)} – ${Math.min(720, rawScore + 25)}`,
+          scoreRange: `${Math.max(0, rawScore - 15)} – ${Math.min(720, rawScore + 15)}`,
           percentile: pct,
-          rankEstimate: `AIR ~${rankMin.toLocaleString()}`,
+          rankEstimate: `AIR ~${rankMin.toLocaleString()} – ${safeRankMax.toLocaleString()}`,
           tierLabel: tier,
           tierColor,
           confidence: "Calibrating",
           confidencePct: Math.min(90, Math.round((totalQuestions / 10) * 100)),
-          potentialGain: `+${Math.max(40, 500 - rawScore)} marks`,
+          potentialGain: `+${Math.max(40, 520 - rawScore)} marks`,
           sampleSize: totalQuestions,
-          summary: `Calibrating: ${totalQuestions}/10 questions completed (${accuracy}% accuracy). Solve ${10 - totalQuestions} more questions for high-confidence percentile.`,
+          summary: `Calibrating: ${totalQuestions}/10 questions completed (${accuracy}% accuracy). Solve ${10 - totalQuestions} more questions for calibrated percentile.`,
         };
       }
 
@@ -163,28 +183,30 @@ function calculatePredictions(stats, track) {
         confidencePct: 0,
         potentialGain: "+120+ marks",
         sampleSize: 0,
-        summary: "Complete at least 10 PYQs or 1 mock test to calculate your personalized NTA score, percentile, and AIR.",
+        summary: "Complete at least 10 PYQs or 1 mock test to calculate your personalized NTA score, percentile, and AIR (22,05,035 candidates benchmark).",
       };
     }
 
-    // Dynamic NEET Calculation for sample >= 10 questions
-    // In NEET, higher accuracy allows candidates to attempt more questions safely.
-    const simulatedAttempted = Math.round(Math.min(180, Math.max(100, 90 + (accuracy / 100) * 85)));
-    const correct = Math.round(simulatedAttempted * (accuracy / 100));
+    // Safe & Accurate NEET Calculation for sample >= 10 questions
+    // Safe adjustment: in practice questions, students perform ~3-4% above 3-hour mixed pressure
+    const safeAccuracy = Math.max(0, accuracy - 3);
+    const simulatedAttempted = Math.round(Math.min(175, Math.max(85, 80 + (safeAccuracy / 100) * 90)));
+    const correct = Math.round(simulatedAttempted * (safeAccuracy / 100));
     const incorrect = simulatedAttempted - correct;
     const practiceScore = Math.max(0, Math.min(720, (correct * 4) - (incorrect * 1)));
 
-    // If student has full mock test average, blend with 60% mock test weight
+    // If student has full mock test average, blend with 65% mock test weight
     let finalScore = practiceScore;
     if (typeof averageTestScore === "number" && averageTestScore > 0) {
       const mockScore = Math.round((averageTestScore / 100) * 720);
-      finalScore = Math.round(practiceScore * 0.4 + mockScore * 0.6);
+      finalScore = Math.round(practiceScore * 0.35 + mockScore * 0.65);
     }
 
-    const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(NEET_CALIBRATION_TABLE, finalScore);
-    const lowRange = Math.max(0, finalScore - 20);
-    const highRange = Math.min(720, finalScore + 20);
-    const rankStr = rankMin === rankMax ? `AIR ${rankMin}` : `AIR ${rankMin.toLocaleString()} – ${rankMax.toLocaleString()}`;
+    const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(NEET_CALIBRATION_TABLE, finalScore, NEET_TOTAL_CANDIDATES);
+    const lowRange = Math.max(0, finalScore - 18);
+    const highRange = Math.min(720, finalScore + 15);
+    const safeRankMax = Math.min(NEET_TOTAL_CANDIDATES, rankMax);
+    const rankStr = rankMin === safeRankMax ? `AIR ${rankMin}` : `AIR ${rankMin.toLocaleString()} – ${safeRankMax.toLocaleString()}`;
 
     // Target potential score with 85%+ accuracy
     const targetAttempted = 170;
@@ -206,26 +228,28 @@ function calculatePredictions(stats, track) {
       confidencePct: Math.min(100, Math.round((totalQuestions / 100) * 100)),
       potentialGain,
       sampleSize: totalQuestions,
-      summary: `Based on ${totalQuestions} practice attempts across NEET with ${accuracy}% accuracy.`,
+      summary: `Based on ${totalQuestions} practice attempts across NEET with ${accuracy}% accuracy (benchmarked against 22,05,035 candidates).`,
     };
   }
 
   // JEE Main Calculation
   if (!hasSample) {
     if (totalQuestions > 0 && typeof accuracy === "number") {
-      const simulatedAttempted = Math.round(Math.min(75, Math.max(30, 25 + (accuracy / 100) * 45)));
-      const correct = Math.round(simulatedAttempted * (accuracy / 100));
+      const safeAcc = Math.max(0, accuracy - 3);
+      const simulatedAttempted = Math.round(Math.min(72, Math.max(28, 25 + (safeAcc / 100) * 42)));
+      const correct = Math.round(simulatedAttempted * (safeAcc / 100));
       const incorrect = simulatedAttempted - correct;
       const rawScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
-      const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(JEE_CALIBRATION_TABLE, rawScore);
+      const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(JEE_CALIBRATION_TABLE, rawScore, JEE_TOTAL_CANDIDATES);
+      const safeRankMax = Math.min(JEE_TOTAL_CANDIDATES, rankMax);
 
       return {
         hasData: false,
         predictedScore: rawScore,
         maxScore: 300,
-        scoreRange: `${Math.max(0, rawScore - 12)} – ${Math.min(300, rawScore + 12)}`,
+        scoreRange: `${Math.max(0, rawScore - 10)} – ${Math.min(300, rawScore + 10)}`,
         percentile: pct,
-        rankEstimate: `AIR ~${rankMin.toLocaleString()}`,
+        rankEstimate: `AIR ~${rankMin.toLocaleString()} – ${safeRankMax.toLocaleString()}`,
         tierLabel: tier,
         tierColor,
         confidence: "Calibrating",
@@ -249,26 +273,28 @@ function calculatePredictions(stats, track) {
       confidencePct: 0,
       potentialGain: "+45+ marks",
       sampleSize: 0,
-      summary: "Complete at least 10 PYQs or 1 mock test to calculate your personalized JEE percentile and rank forecast.",
+      summary: "Complete at least 10 PYQs or 1 mock test to calculate your personalized JEE percentile and rank forecast (14,15,110 candidates benchmark).",
     };
   }
 
-  // Dynamic JEE Calculation for sample >= 10 questions
-  const simulatedAttempted = Math.round(Math.min(75, Math.max(35, 30 + (accuracy / 100) * 42)));
-  const correct = Math.round(simulatedAttempted * (accuracy / 100));
+  // Safe & Accurate JEE Calculation for sample >= 10 questions
+  const safeAccuracy = Math.max(0, accuracy - 3);
+  const simulatedAttempted = Math.round(Math.min(72, Math.max(30, 28 + (safeAccuracy / 100) * 40)));
+  const correct = Math.round(simulatedAttempted * (safeAccuracy / 100));
   const incorrect = simulatedAttempted - correct;
   const practiceScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
 
   let finalScore = practiceScore;
   if (typeof averageTestScore === "number" && averageTestScore > 0) {
     const mockScore = Math.round((averageTestScore / 100) * 300);
-    finalScore = Math.round(practiceScore * 0.4 + mockScore * 0.6);
+    finalScore = Math.round(practiceScore * 0.35 + mockScore * 0.65);
   }
 
-  const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(JEE_CALIBRATION_TABLE, finalScore);
-  const lowRange = Math.max(0, finalScore - 12);
-  const highRange = Math.min(300, finalScore + 12);
-  const rankStr = rankMin === rankMax ? `AIR ${rankMin}` : `AIR ${rankMin.toLocaleString()} – ${rankMax.toLocaleString()}`;
+  const { pct, rankMin, rankMax, tier, tierColor } = interpolateNTA(JEE_CALIBRATION_TABLE, finalScore, JEE_TOTAL_CANDIDATES);
+  const lowRange = Math.max(0, finalScore - 10);
+  const highRange = Math.min(300, finalScore + 10);
+  const safeRankMax = Math.min(JEE_TOTAL_CANDIDATES, rankMax);
+  const rankStr = rankMin === safeRankMax ? `AIR ${rankMin}` : `AIR ${rankMin.toLocaleString()} – ${safeRankMax.toLocaleString()}`;
 
   const targetAttempted = 65;
   const targetAcc = Math.max(82, accuracy + 12);
@@ -289,7 +315,7 @@ function calculatePredictions(stats, track) {
     confidencePct: Math.min(100, Math.round((totalQuestions / 100) * 100)),
     potentialGain,
     sampleSize: totalQuestions,
-    summary: `Based on ${totalQuestions} practice attempts across JEE Main with ${accuracy}% accuracy.`,
+    summary: `Based on ${totalQuestions} practice attempts across JEE Main with ${accuracy}% accuracy (benchmarked against 14,15,110 candidates).`,
   };
 }
 
@@ -379,11 +405,13 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
               </h2>
               <span className="inline-flex items-center gap-1 rounded-full bg-brand/15 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-900 dark:text-brand">
                 <Sparkles className="h-3 w-3" />
-                NTA Calibrated
+                {isNeet ? "22,05,035 Pool" : "14,15,110 Pool"}
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Calibrated for {normTrack} 2025/2026 examination benchmarks
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              {isNeet
+                ? "Calibrated for NEET UG benchmarks (22,05,035 appeared candidates pool)"
+                : "Calibrated for JEE Main benchmarks (14,15,110 appeared candidates pool)"}
             </p>
           </div>
         </div>
