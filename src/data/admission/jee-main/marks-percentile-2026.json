@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "source": "Estimated based on past NTA data",
+  "year": 2026,
+  "updatedAt": "2026-09-18",
+  "totalCandidates": 1415110,
+  "data": [
+    { "score": 300, "percentile": 100.0 },
+    { "score": 280, "percentile": 99.95 },
+    { "score": 250, "percentile": 99.75 },
+    { "score": 220, "percentile": 99.30 },
+    { "score": 190, "percentile": 98.50 },
+    { "score": 165, "percentile": 97.20 },
+    { "score": 140, "percentile": 95.20 },
+    { "score": 120, "percentile": 93.20 },
+    { "score": 100, "percentile": 89.50 },
+    { "score": 80, "percentile": 83.50 },
+    { "score": 60, "percentile": 74.00 },
+    { "score": 40, "percentile": 58.00 },
+    { "score": 20, "percentile": 35.00 },
+    { "score": 0, "percentile": 0.00 }
+  ]
+}

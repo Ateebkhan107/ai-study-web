@@ -192,7 +192,10 @@ function aggregateReadiness({
   ];
   const hasRequiredData = validPyq && validMock;
   const overall = hasRequiredData
-    ? Math.round((pyqScore * 0.45) + (mockScore * 0.45) + ((validTime ? timeEfficiencyScore : 0) * 0.10))
+    ? Math.round(
+        (pyqScore * 0.45 + mockScore * 0.45 + (validTime ? timeEfficiencyScore * 0.10 : 0)) /
+        (validTime ? 1.0 : 0.90)
+      )
     : null;
 
   return {
@@ -241,12 +244,16 @@ function buildSpeedAnalytics(testAttempts) {
 function buildHeatmap(answeredQuestions, testAttempts, nowMs) {
   const end = new Date(nowMs);
   end.setHours(0, 0, 0, 0);
-  const startMs = end.getTime() - (HEATMAP_DAYS - 1) * ONE_DAY_MS;
+  const jsDay = end.getDay();
+  const dayIndex = jsDay === 0 ? 6 : jsDay - 1; // Mon=0 ... Sun=6
+  // startMs is Monday 8 weeks ago (7 full weeks + current week up to Monday)
+  const startMs = end.getTime() - (7 * 7 + dayIndex) * ONE_DAY_MS;
   const activityByDate = new Map();
 
-  for (let index = 0; index < HEATMAP_DAYS; index += 1) {
-    const day = new Date(startMs + index * ONE_DAY_MS).toISOString().slice(0, 10);
-    activityByDate.set(day, { date: day, questions: 0, tests: 0, total: 0, intensity: 0 });
+  for (let index = 0; index < 56; index += 1) {
+    const day = new Date(startMs + index * ONE_DAY_MS);
+    const dayStr = day.toISOString().slice(0, 10);
+    activityByDate.set(dayStr, { date: dayStr, questions: 0, tests: 0, total: 0, intensity: 0, future: day > end });
   }
 
   for (const question of answeredQuestions) {

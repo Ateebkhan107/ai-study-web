@@ -11,6 +11,8 @@ import {
   Flame,
   ChevronRight,
 } from "lucide-react";
+import JEEMainPredictor from "./JEEMainPredictor";
+import NEETPredictor from "./NEETPredictor";
 
 const NEET_TOTAL_CANDIDATES = 2205035; // 22,05,035 appeared candidates in NEET UG
 const JEE_TOTAL_CANDIDATES = 1415110;  // 14,15,110 appeared candidates in JEE Main
@@ -551,34 +553,58 @@ export function ScoreForecastHero({ stats, track = "JEE" }) {
 // ─────────────────────────────────────────────────────────────────
 // 2. WEAK-SPOT INTERCEPTOR & REMEDIATION CENTER
 // ─────────────────────────────────────────────────────────────────
+
 export function WeakSpotInterceptor({ stats, track = "JEE" }) {
   const normTrack = String(track || "JEE").toUpperCase();
   const isNeet = normTrack === "NEET";
-  const defaults = TRACK_DEFAULTS[normTrack] || TRACK_DEFAULTS.JEE;
 
-  // Real user weak chapters
   const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
   const hasRealWeak = userWeak.length > 0;
 
-  const displayList = hasRealWeak
-    ? userWeak.slice(0, 4).map((c) => ({
-        chapter: c.chapter,
-        subject: c.subject || "General",
-        accuracy: c.accuracy,
-        attempted: c.attempted,
-        statusLabel: c.statusLabel || (c.accuracy <= 45 ? "Critical Gap" : "Needs Work"),
-        weight: isNeet ? "High NEET Weightage" : "High JEE Frequency",
-        isRealData: true,
-      }))
-    : defaults.highYieldChapters.map((h) => ({
-        chapter: h.chapter,
-        subject: h.subject,
-        accuracy: null,
-        attempted: 0,
-        statusLabel: h.priority,
-        weight: h.weight,
-        isRealData: false,
-      }));
+  if (!hasRealWeak) {
+    return (
+      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+        <div className="flex items-center gap-2 mb-5">
+          <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+            Weak-Spot Interceptor
+          </h2>
+          <span className="rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-red-600 dark:text-red-400">
+            High ROI Fixes
+          </span>
+        </div>
+        <div className="flex flex-col items-center justify-center py-10 text-center rounded-xl border border-dashed border-slate-200/80 bg-slate-50/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/20">
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
+            <Target className="h-5 w-5 text-brand" />
+          </div>
+          <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-200">Not enough data</h3>
+          <p className="mt-1 max-w-sm text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+            Practice more questions to identify your specific weak chapters and get AI-driven high ROI fixes.
+          </p>
+          <Link
+            href="/pyq"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover"
+          >
+            <span>Start Practice</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const displayList = userWeak.slice(0, 4).map((c) => {
+    const errorRate = Math.round((c.incorrect / c.attempted) * 100) || 0;
+    const marksLost = c.incorrect * 5; // 4 missed + 1 negative (approx)
+    
+    return {
+      chapter: c.chapter,
+      subject: c.subject || "General",
+      accuracy: c.accuracy,
+      attempted: c.attempted,
+      statusLabel: c.statusLabel || (c.accuracy <= 45 ? "Critical Gap" : "Needs Work"),
+      weight: `${c.incorrect} Errors (Cost: ~${marksLost} Marks)`,
+    };
+  });
 
   return (
     <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
@@ -593,9 +619,7 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
             </span>
           </div>
           <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-            {hasRealWeak
-              ? `Identified from your lowest accuracy chapters in ${normTrack}`
-              : `Key high-yield chapters that decide ${normTrack} ranking`}
+            Identified from your lowest accuracy chapters in {normTrack}
           </p>
         </div>
 
@@ -604,13 +628,12 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
           className="inline-flex items-center gap-1 rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:bg-brand hover:text-slate-950 dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-brand dark:hover:text-slate-950"
         >
           <span>All Chapters</span>
-          <ChevronRight className="h-3.5 w-3.5" />
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {displayList.map((item, index) => {
-          const subjectColor = getSubjectColor(item.subject);
           const pyqHref = `/pyq?mode=chapter&subject=${encodeURIComponent(item.subject)}&chapter=${encodeURIComponent(item.chapter)}`;
 
           return (
@@ -620,59 +643,32 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span
-                    className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold text-white shadow-xs"
-                    style={{ backgroundColor: subjectColor }}
-                  >
+                  <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold text-slate-700 bg-slate-200 dark:text-slate-300 dark:bg-slate-800">
                     {item.subject}
                   </span>
-
                   <span className="rounded-full border border-red-200/80 bg-red-50/80 px-2 py-0.5 text-[10px] font-bold text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
                     {item.statusLabel}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-1">
+                <h3 className="text-sm font-bold leading-snug text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand">
                   {item.chapter}
                 </h3>
-
-                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                  {item.weight}
+                <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                  {item.accuracy !== null ? `${item.accuracy}% accuracy (${item.attempted} Qs)` : "Not enough data"}
                 </p>
-
-                {item.isRealData ? (
-                  <div className="mt-3 flex items-center gap-3">
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-                      <div
-                        className="h-full rounded-full bg-red-500"
-                        style={{ width: `${Math.max(6, item.accuracy || 0)}%` }}
-                      />
-                    </div>
-                    <span className="text-xs font-black text-red-600 dark:text-red-400 tabular-nums">
-                      {item.accuracy}% Acc ({item.attempted} Qs)
-                    </span>
-                  </div>
-                ) : (
-                  <div className="mt-2 text-[11px] text-amber-700 dark:text-amber-400 font-medium">
-                    Priority diagnostic topic · 0 Qs completed
-                  </div>
-                )}
               </div>
 
-              <div className="mt-4 flex items-center gap-2 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
+              <div className="mt-4 flex items-center justify-between border-t border-slate-200/60 pt-3 dark:border-slate-800/80">
+                <span className="text-[10px] font-semibold text-slate-400 dark:text-slate-500">
+                  {item.weight}
+                </span>
                 <Link
                   href={pyqHref}
-                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover shadow-xs"
+                  className="flex items-center gap-1 text-[10px] font-bold text-brand hover:underline"
                 >
-                  <span>Practice PYQs</span>
+                  <span>Practice targeted PYQs</span>
                   <ArrowRight className="h-3 w-3" />
-                </Link>
-
-                <Link
-                  href="/test"
-                  className="inline-flex items-center justify-center rounded-lg border border-slate-300/80 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-[var(--border-subtle)] dark:hover:text-white shadow-xs"
-                >
-                  <span>10-Q Test</span>
                 </Link>
               </div>
             </div>
@@ -683,280 +679,46 @@ export function WeakSpotInterceptor({ stats, track = "JEE" }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────
-// 3. AI ADAPTIVE 4-STEP LEARNING ROADMAP
-// ─────────────────────────────────────────────────────────────────
-export function AdaptiveLearningJourney({ stats, track = "JEE" }) {
-  const normTrack = String(track || "JEE").toUpperCase();
-  const isNeet = normTrack === "NEET";
-
-  // Pick top weak chapter or fall back to high-yield
-  const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
-  const focusChapter = userWeak[0]?.chapter || (isNeet ? "Genetics and Evolution" : "Definite Integration & Calculus");
-  const focusSubject = userWeak[0]?.subject || (isNeet ? "Biology" : "Mathematics");
-
-  const steps = [
-    {
-      step: 1,
-      title: "Core NCERT & Formula Mastery",
-      detail: `Review high-frequency formulas & memory hooks for ${focusChapter}.`,
-      duration: "15 min",
-      type: "Concept Review",
-      color: "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400",
-      status: "In Progress",
-    },
-    {
-      step: 2,
-      title: "Foundational Accuracy Drills",
-      detail: "10 moderate conceptual questions to lock in formula recall and eliminate silly errors.",
-      duration: "20 min · 10 Qs",
-      type: "Practice Drill",
-      color: "border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400",
-      status: "Up Next",
-    },
-    {
-      step: 3,
-      title: "5-Year PYQ Exam Blitz",
-      detail: `Solve official 2020-2024 ${normTrack} previous year questions under exact exam marking.`,
-      duration: "30 min · 15 Qs",
-      type: "Exam PYQ",
-      color: "border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
-      status: "Locked",
-    },
-    {
-      step: 4,
-      title: "Timed Speed & Negative Marking Mock",
-      detail: "20-minute timed sprint with +4/-1 scoring to test retention under strict time pressure.",
-      duration: "20 min · Timed",
-      type: "Simulation",
-      color: "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-      status: "Milestone",
-    },
-  ];
-
-  return (
-    <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
-              AI Adaptive Recovery Plan
-            </h2>
-            <span className="rounded-full bg-blue-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">
-              Personalized
-            </span>
-          </div>
-          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-            Automated 4-stage progression engineered to raise accuracy in{" "}
-            <span className="font-bold text-slate-900 dark:text-white">{focusChapter}</span> ({focusSubject}) to 80%+
-          </p>
-        </div>
-      </div>
-
-      <div className="relative mt-5 space-y-3">
-        {steps.map((s) => (
-          <div
-            key={s.step}
-            className="flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 transition-all dark:border-[var(--border-subtle)] dark:bg-[var(--card)] dark:hover:bg-[var(--surface-elevated)]/50"
-          >
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand font-display text-xs font-black text-slate-950 shadow-xs">
-              {s.step}
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center justify-between gap-1">
-                <h4 className="font-bold text-sm text-slate-900 dark:text-white">
-                  {s.title}
-                </h4>
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
-                  {s.duration}
-                </span>
-              </div>
-              <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                {s.detail}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-        <Link
-          href={`/pyq?mode=chapter&subject=${encodeURIComponent(focusSubject)}&chapter=${encodeURIComponent(focusChapter)}`}
-          className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand py-2.5 px-4 text-sm font-bold text-slate-950 transition-colors hover:bg-brand-hover shadow-sm"
-        >
-          <Flame className="h-4 w-4" />
-          <span>Launch Adaptive Recovery Session →</span>
-        </Link>
-        <Link
-          href="/test"
-          className="inline-flex items-center justify-center rounded-xl border border-slate-300/80 bg-white py-2.5 px-4 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-100 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:bg-[var(--border-subtle)]"
-        >
-          Custom Test Builder
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// 4. STRATEGY & BEHAVIORAL DIAGNOSTICS (SPEED & EFFORT BALANCE)
-// ─────────────────────────────────────────────────────────────────
-export function StrategyAndBalanceDiagnostic({ stats, track = "JEE" }) {
-  const normTrack = String(track || "JEE").toUpperCase();
-  const isNeet = normTrack === "NEET";
-  const defaults = TRACK_DEFAULTS[normTrack] || TRACK_DEFAULTS.JEE;
-  const pacing = getPacingPersona(stats);
-
-  // Calculate actual subject distribution
-  const subjectDist = stats?.subjectDistribution?.items || [];
-  const totalAttempted = subjectDist.reduce((acc, curr) => acc + (curr.attempted || 0), 0);
-
-  const distributionComparison = defaults.idealDistribution.map((ideal) => {
-    const actual = subjectDist.find((s) => String(s.subject).toLowerCase() === ideal.subject.toLowerCase());
-    const actualPct = actual?.pct ?? (totalAttempted > 0 ? Math.round(((actual?.attempted || 0) / totalAttempted) * 100) : null);
-    return {
-      subject: ideal.subject,
-      idealPct: ideal.idealPct,
-      actualPct: actualPct !== null ? actualPct : 0,
-      hasData: actualPct !== null && totalAttempted > 0,
-      color: ideal.color,
-    };
-  });
-
-  return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      {/* Box 1: Subject Time & Effort Balance */}
-      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6 flex flex-col justify-between">
-        <div>
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <h2 className="text-base font-bold text-slate-950 dark:text-white">
-              Subject Effort Balance
-            </h2>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] text-slate-600 dark:text-slate-400">
-              Exam Target vs Your Split
-            </span>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-5">
-            {isNeet
-              ? "NEET weightage requires 50% Biology (360 marks), 25% Chemistry (180), 25% Physics (180)."
-              : "JEE Main marks are distributed equally (33.3% each) across Physics, Chemistry, Maths."}
-          </p>
-
-          <div className="space-y-4">
-            {distributionComparison.map((item) => (
-              <div key={item.subject} className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs font-semibold">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-slate-800 dark:text-slate-200">{item.subject}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[11px] tabular-nums">
-                    <span className="text-slate-400 dark:text-slate-500">
-                      Target: {Math.round(item.idealPct)}%
-                    </span>
-                    <span className="font-black text-slate-900 dark:text-white">
-                      You: {item.hasData ? `${item.actualPct}%` : "—"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Progress bar comparing actual vs ideal */}
-                <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                  <div
-                    className="h-full rounded-full transition-all duration-700"
-                    style={{
-                      width: `${Math.min(100, item.hasData ? item.actualPct : item.idealPct)}%`,
-                      backgroundColor: item.color,
-                      opacity: item.hasData ? 1 : 0.4,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-5 rounded-xl border border-slate-200/60 bg-slate-50/70 p-3 text-xs text-slate-600 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-400">
-          <div className="flex items-start gap-2">
-            <Sparkles className="h-4 w-4 text-brand shrink-0 mt-0.5" />
-            <p className="leading-relaxed">
-              {isNeet
-                ? "Biology offers the highest ROI per hour spent. Ensure 1 in every 2 questions practiced is Biology."
-                : "Balanced preparation across all 3 subjects ensures you clear subject-wise cutoffs and maximize total score."}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Box 2: Speed vs Accuracy Persona */}
-      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6 flex flex-col justify-between">
-        <div>
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <h2 className="text-base font-bold text-slate-950 dark:text-white">
-              Speed & Pacing Persona
-            </h2>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${pacing.tagColor}`}>
-              {pacing.tag}
-            </span>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-5">
-            Diagnostic of time spent per question vs accuracy tradeoffs
-          </p>
-
-          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--card)]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/15 text-slate-950 dark:text-brand">
-                <Clock className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="font-bold text-sm text-slate-950 dark:text-white">
-                  {pacing.persona}
-                </h3>
-                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                  {pacing.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
-              <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
-                <span className="text-slate-500 dark:text-slate-400">Time Efficiency Score</span>
-                <span className="font-black text-slate-900 dark:text-white">{pacing.speedScore}/100</span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-                <div
-                  className="h-full rounded-full bg-brand"
-                  style={{ width: `${pacing.speedScore}%` }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5 rounded-xl border border-amber-200/60 bg-amber-50/50 p-3 text-xs text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-200">
-          <div className="flex items-start gap-2">
-            <Zap className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-            <p className="leading-relaxed font-medium">
-              {pacing.recommendation}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// 5. DAILY AI STUDY PLAN & RECOMMENDATIONS
-// ─────────────────────────────────────────────────────────────────
 export function AIDailyPlanAndTips({ stats, track = "JEE" }) {
   const normTrack = String(track || "JEE").toUpperCase();
   const isNeet = normTrack === "NEET";
 
   const userWeak = stats?.weakChapters?.items || stats?.chapterPerformance?.weakest || [];
-  const focusChapter = userWeak[0]?.chapter || (isNeet ? "Genetics and Evolution" : "Integration & Calculus");
-  const focusSubject = userWeak[0]?.subject || (isNeet ? "Biology" : "Mathematics");
+  const hasRealWeak = userWeak.length > 0;
+
+  if (!hasRealWeak) {
+    return (
+      <div className="rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
+            Daily AI Action Plan
+          </h2>
+          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            Personalized
+          </span>
+        </div>
+        <div className="flex flex-col items-center justify-center py-10 text-center rounded-xl border border-dashed border-slate-200/80 bg-slate-50/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/20">
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
+            <Zap className="h-5 w-5 text-brand" />
+          </div>
+          <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-200">Awaiting Data</h3>
+          <p className="mt-1 max-w-sm text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+            Your personalized daily action plan will appear here once you&apos;ve completed some practice sessions.
+          </p>
+          <Link
+            href="/pyq"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-slate-950 transition-colors hover:bg-brand-hover"
+          >
+            <span>Start Practice</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const focusChapter = userWeak[0]?.chapter;
+  const focusSubject = userWeak[0]?.subject;
 
   const tasks = [
     {
@@ -993,50 +755,42 @@ export function AIDailyPlanAndTips({ stats, track = "JEE" }) {
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-base font-bold text-slate-950 dark:text-white sm:text-lg">
-              Today&apos;s AI High-Impact Tasks
+              Daily AI Action Plan
             </h2>
-            <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              Daily Missions
+            <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+              Personalized
             </span>
           </div>
           <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-            3 high-yield actions prioritized by our AI engine to optimize today&apos;s study session
+            3 high-impact tasks formulated for today based on your weaknesses.
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {tasks.map((task, idx) => (
+        {tasks.map((task) => (
           <div
             key={task.id}
-            className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100/70 dark:border-[var(--border-subtle)] dark:bg-[var(--card)] dark:hover:border-slate-700 dark:hover:bg-[var(--surface-elevated)]/60"
+            className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100/70 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 dark:hover:border-slate-700 dark:hover:bg-[var(--surface-elevated)]/50"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] font-black text-slate-950">
-                  {idx + 1}
-                </span>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${task.tagColor}`}>
-                  {task.tag}
-                </span>
-              </div>
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+              <span className={`mb-3 inline-block rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${task.tagColor}`}>
+                {task.tag}
+              </span>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                 {task.title}
               </h3>
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                 {task.detail}
               </p>
             </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-[var(--border-subtle)]">
-              <Link
-                href={task.href}
-                className="inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline"
-              >
-                <span>Start Task</span>
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
+            <Link
+              href={task.href}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 transition-colors hover:border-brand hover:text-brand dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-brand dark:hover:text-brand"
+            >
+              <span>Execute Task</span>
+              <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         ))}
       </div>
@@ -1044,25 +798,23 @@ export function AIDailyPlanAndTips({ stats, track = "JEE" }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────
-// MAIN COMPOSITE VIEW: AIInsightsView
-// ─────────────────────────────────────────────────────────────────
+
 export default function AIInsightsView({ stats, track = "JEE" }) {
   const normTrack = String(track || "JEE").toUpperCase();
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-slideUp" style={{ animationDelay: "100ms" }}>
       {/* 1. Score & Rank Prediction Hero */}
-      <ScoreForecastHero stats={stats} track={normTrack} />
+      {normTrack === "JEE" ? (
+        <JEEMainPredictor stats={stats} />
+      ) : (
+        <NEETPredictor stats={stats} />
+      )}
 
       {/* 2. Weak-Spot Interceptor */}
       <WeakSpotInterceptor stats={stats} track={normTrack} />
 
-      {/* 3. Adaptive 4-Step Learning Roadmap */}
-      <AdaptiveLearningJourney stats={stats} track={normTrack} />
 
-      {/* 4. Strategy & Pacing Diagnostics */}
-      <StrategyAndBalanceDiagnostic stats={stats} track={normTrack} />
 
       {/* 5. Daily AI Action Plan */}
       <AIDailyPlanAndTips stats={stats} track={normTrack} />
@@ -1074,7 +826,6 @@ export default function AIInsightsView({ stats, track = "JEE" }) {
 export {
   AIInsightsView,
   ScoreForecastHero as SmartPrediction,
-  AdaptiveLearningJourney as AdaptiveLearning,
   AIDailyPlanAndTips as AIStudyPlanner,
   WeakSpotInterceptor as AIRecommendations,
 };

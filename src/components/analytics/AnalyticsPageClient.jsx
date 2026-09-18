@@ -12,9 +12,7 @@ import { getUserAnalytics } from "@/services/analytics";
 const OverviewCards = dynamic(() => import("@/components/analytics/OverviewCards"), {
   loading: () => <ContentBlockSkeleton className="h-28" />,
 });
-const AnalyticsUnlockBanner = dynamic(() => import("@/components/analytics/AnalyticsUnlockBanner"), {
-  loading: () => <ContentBlockSkeleton className="h-32" />,
-});
+
 const PerformanceTrend = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.PerformanceTrend), {
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
@@ -24,9 +22,7 @@ const SubjectDistribution = dynamic(() => import("@/components/analytics/ChartCo
 const SubjectPerformance = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.SubjectPerformance), {
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
-const ChapterPerformance = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.ChapterPerformance), {
-  loading: () => <ContentBlockSkeleton className="h-72" />,
-});
+
 const TimeAnalytics = dynamic(() => import("@/components/analytics/ChartComponents").then((mod) => mod.TimeAnalytics), {
   loading: () => <ContentBlockSkeleton className="h-72" />,
 });
@@ -39,9 +35,7 @@ const StudyHeatmap = dynamic(() => import("@/components/analytics/NonChartCompon
 const ExamReadiness = dynamic(() => import("@/components/analytics/NonChartComponents").then((mod) => mod.ExamReadiness), {
   loading: () => <ContentBlockSkeleton className="h-48" />,
 });
-const WhatToDoNext = dynamic(() => import("@/components/analytics/WhatToDoNext"), {
-  loading: () => <ContentBlockSkeleton className="h-40" />,
-});
+
 
 const AIInsightsView = dynamic(() => import("@/components/analytics/AIComponents"), {
   loading: () => <ContentBlockSkeleton className="h-96" />,
@@ -230,11 +224,6 @@ export default function AnalyticsPageClient({
 
       {activeTab === "overview" && !loading && !showAnalyticsLock && (
         <div className="space-y-6 sm:space-y-8">
-          {/* Consolidated Getting Started / Unlock Full Analytics Banner */}
-          <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
-            <AnalyticsUnlockBanner stats={stats} />
-          </section>
-
           {/* Elevated Stat Cards */}
           <section className="animate-slideUp" style={{ animationDelay: "175ms" }}>
             <OverviewCards stats={stats} />
@@ -251,10 +240,7 @@ export default function AnalyticsPageClient({
             <ExamReadiness readiness={stats?.examReadiness} />
           </section>
 
-          {/* Next Action */}
-          <section className="animate-slideUp" style={{ animationDelay: "400ms" }}>
-            <WhatToDoNext action={stats?.nextAction} />
-          </section>
+
         </div>
       )}
 
@@ -266,17 +252,13 @@ export default function AnalyticsPageClient({
             </section>
           ) : (
             <>
-              <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
-                <AnalyticsUnlockBanner stats={stats} />
-              </section>
 
               <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-2 lg:gap-6" style={{ animationDelay: "175ms" }}>
                 <SubjectDistribution data={stats?.subjectDistribution} />
                 <SubjectPerformance data={stats?.subjectPerformance} />
               </section>
 
-              <section className="grid grid-cols-1 gap-4 animate-slideUp lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.6fr)] lg:gap-6" style={{ animationDelay: "250ms" }}>
-                <ChapterPerformance data={stats?.chapterPerformance} />
+              <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
                 <TimeAnalytics data={stats?.timeAnalytics} />
               </section>
             </>

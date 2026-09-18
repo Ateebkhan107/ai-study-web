@@ -41,6 +41,22 @@ export default function FormulaCardDeck({ cards, chapterId }) {
     markFormulaCardReviewed(chapterId, currentCard.id);
   }, [chapterId, currentCard]);
 
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      
+      if (e.key === "ArrowRight") {
+        goToCard(1);
+      } else if (e.key === "ArrowLeft") {
+        goToCard(-1);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visibleCards.length]);
+
   function goToCard(offset) {
     setCurrentIndex((index) => {
       const nextIndex = index + offset;

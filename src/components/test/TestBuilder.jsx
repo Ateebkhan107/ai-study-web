@@ -373,6 +373,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
       mode: "custom",
     });
 
+    const isNeetBiologyPractice = activeTrack === "neet" && validSelectedSubjects.some(s => s.toLowerCase() === "biology");
     if (isNeetBiologyPractice) {
       params.set("sourceType", "PREPZII_PRACTICE");
     }

@@ -6,6 +6,7 @@ import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
 import { Atom, Dna, FlaskConical, Sigma } from "lucide-react";
+import PYQAnalytics from "@/components/pyq/PYQAnalytics";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
@@ -715,86 +716,7 @@ function AnalyticsTab({ analytics, loading, loadError, onRetry, onStartPractice,
         ))}
       </div>
 
-      <div className="glass-card p-4 animate-slideUp sm:p-6" style={{ animationDelay: "375ms" }}>
-        <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest mb-4`}>SUBJECT PERFORMANCE</p>
-        {subjects.length === 0 && <p className={`text-sm ${TXT_MUTED}`}>No subject data found for your attempted PYQs.</p>}
-        <div className="space-y-5">
-          {subjects.map((item) => (
-            <div key={item.subject}>
-              <div className="flex items-center justify-between mb-2">
-                <span className={`text-sm font-medium ${TXT}`}>{item.subject}</span>
-                <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-right">
-                  <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)} accuracy</span>
-                </div>
-              </div>
-              <div className="h-1.5 bg-slate-200 dark:bg-[var(--surface-elevated)] rounded-full overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-500"
-                  style={{ width: `${item.accuracy || 0}%`, background: SUBJECT_BAR_COLORS[item.subject] || "#6b7280" }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="glass-card p-4 animate-slideUp sm:p-6" style={{ animationDelay: "450ms" }}>
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
-          <div>
-            <p className={`text-xs font-semibold ${TXT_MUTED} uppercase tracking-widest`}>CHAPTER PERFORMANCE</p>
-            <p className={`mt-1 text-xs ${TXT_MUTED}`}>Judgments require {minimumChapterAttempts}+ attempted questions.</p>
-          </div>
-          <span className={`text-xs ${TXT_MUTED}`}>{chapters.length} mapped</span>
-        </div>
-        {chapters.length === 0 ? (
-          <p className={`text-sm ${TXT_MUTED}`}>No mapped chapter data found yet.</p>
-        ) : (
-          <div className="overflow-x-auto">
-          <div className="min-w-[520px] divide-y divide-slate-200/60 dark:divide-slate-800/70">
-            {chapters.map((item) => (
-              <div key={`${item.subject}-${item.chapter}`} className="grid gap-3 py-4 sm:grid-cols-[minmax(0,1fr)_180px_120px] sm:items-center">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{item.chapter}</p>
-                  <p className={`text-xs ${TXT_MUTED}`}>{item.subject}</p>
-                </div>
-                <div className="min-w-0">
-                  <div className="mb-1 flex items-center justify-between gap-3">
-                    <span className={`text-xs ${TXT_MUTED}`}>{item.attempted} attempted</span>
-                    <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPercent(item.accuracy)}</span>
-                  </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-[var(--surface-elevated)]">
-                    <div
-                      className="h-full rounded-full bg-indigo-500 transition-all duration-500"
-                      style={{ width: `${item.accuracy || 0}%` }}
-                    />
-                  </div>
-                </div>
-                <span className={`w-fit rounded-full border px-3 py-1 text-xs font-bold ${getChapterStatusClass(item.status)}`}>
-                  {item.status}
-                </span>
-              </div>
-            ))}
-          </div>
-          </div>
-        )}
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-slideUp" style={{ animationDelay: "450ms" }}>
-        <ChapterSummaryCard
-          title="Strongest Chapter"
-          chapter={strongestChapter}
-          emptyText={`Attempt at least ${minimumChapterAttempts} questions in a chapter to identify your strongest area.`}
-          icon={I.Award}
-        />
-        <ChapterSummaryCard
-          title="Needs Practice"
-          chapter={needsPracticeChapter}
-          emptyText={`Attempt at least ${minimumChapterAttempts} questions in a chapter to identify what needs practice.`}
-          actionLabel="Practice PYQs"
-          onAction={onPracticeChapter}
-          icon={I.TrendingUp}
-        />
-      </div>
+      <PYQAnalytics analytics={analytics} />
     </div>
   );
 }

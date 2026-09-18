@@ -200,13 +200,24 @@ export function PerformanceTrend({ data, detailed = false }) {
 export function SubjectDistribution({ data }) {
   const items = data?.items || [];
   const hasData = data?.status === "ready" && items.length > 0;
+  
+  const r = 40;
+  const circ = 2 * Math.PI * r;
+  const { slices } = items.reduce((acc, item) => {
+    const length = (item.pct / 100) * circ;
+    acc.slices.push({ ...item, length, offset: acc.currentOffset });
+    acc.currentOffset += length;
+    return acc;
+  }, { slices: [], currentOffset: 0 });
+
+  const totalAttempted = items.reduce((sum, item) => sum + item.attempted, 0);
 
   return (
-    <div className="min-w-0 rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+    <div className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Subject Distribution
       </h2>
-      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
         Attempt share by subject
       </p>
 
@@ -219,23 +230,45 @@ export function SubjectDistribution({ data }) {
           href="/pyq"
         />
       ) : (
-        <div className="divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
-          {items.map((subject) => (
-            <div key={subject.subject} className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 py-3">
-              <div className="min-w-0">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="truncate text-sm font-medium text-slate-900 dark:text-white">{subject.subject}</span>
-                  <span className="text-sm font-semibold tabular-nums text-slate-950 dark:text-white">{subject.pct}%</span>
-                </div>
-                <div className="mt-2 h-1 overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                  <div className="h-full bg-brand" style={{ width: `${subject.pct}%` }} />
-                </div>
-              </div>
-              <span className="self-center text-xs text-slate-500 dark:text-slate-500">
-                {subject.attempted} attempted
-              </span>
+        <div className="flex flex-1 flex-col items-center justify-center gap-8 sm:flex-row sm:justify-start">
+          <div className="relative h-40 w-40 shrink-0">
+            <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90 transform overflow-visible">
+              <circle cx="50" cy="50" r={r} fill="none" strokeWidth="16" className="stroke-slate-100 dark:stroke-slate-800" />
+              {slices.map((slice) => {
+                if (slice.length <= 0) return null;
+                return (
+                  <circle
+                    key={slice.subject}
+                    cx="50"
+                    cy="50"
+                    r={r}
+                    fill="none"
+                    strokeWidth="16"
+                    stroke={slice.color}
+                    strokeDasharray={`${slice.length} ${circ}`}
+                    strokeDashoffset={-slice.offset}
+                    className="transition-all duration-700"
+                  />
+                );
+              })}
+            </svg>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+              <span className="mb-1 text-2xl font-black leading-none tabular-nums text-slate-950 dark:text-white">{totalAttempted}</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Qs</span>
             </div>
-          ))}
+          </div>
+
+          <div className="flex w-full min-w-[140px] flex-col gap-3 sm:w-auto">
+            {items.map((item) => (
+              <div key={item.subject} className="flex items-center justify-between gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: item.color }} />
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">{item.subject}</span>
+                </div>
+                <span className="font-bold tabular-nums text-slate-950 dark:text-white">{item.pct}%</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -245,13 +278,13 @@ export function SubjectDistribution({ data }) {
 export function SubjectPerformance({ data }) {
   const items = data?.items || [];
   const hasData = data?.status === "ready" && items.length > 0;
-
+  
   return (
-    <div className="min-w-0 rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
+    <div className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
       <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
         Subject Performance
       </h2>
-      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
         Correct answers against attempted questions
       </p>
 
@@ -264,21 +297,52 @@ export function SubjectPerformance({ data }) {
           href="/pyq"
         />
       ) : (
-        <div className="divide-y divide-slate-200 dark:divide-[var(--border-subtle)]">
-          {items.map((subject) => (
-            <div key={subject.subject} className="py-3">
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-slate-900 dark:text-white">{subject.subject}</span>
-                <span className="text-sm font-semibold tabular-nums text-slate-950 dark:text-white">{formatPercent(subject.accuracy)}</span>
-              </div>
-              <div className="h-1 overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                <div className="h-full bg-brand" style={{ width: `${subject.accuracy || 0}%` }} />
-              </div>
-              <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
-                {subject.correct}/{subject.attempted} correct
-              </p>
+        <div className="flex flex-1 flex-col items-center justify-center gap-8 sm:flex-row sm:justify-start">
+          <div className="relative h-40 w-40 shrink-0">
+            <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90 transform overflow-visible">
+              {items.map((item, i) => {
+                const r = 45 - (i * 12);
+                const circ = 2 * Math.PI * r;
+                const length = (Math.max(4, item.accuracy || 0) / 100) * circ;
+                return (
+                  <g key={item.subject}>
+                    <circle cx="60" cy="60" r={r} fill="none" strokeWidth="8" className="stroke-slate-100 dark:stroke-slate-800" />
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r={r}
+                      fill="none"
+                      strokeWidth="8"
+                      stroke={item.color}
+                      strokeDasharray={`${length} ${circ}`}
+                      strokeLinecap="round"
+                      className="transition-all duration-700"
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+              <Target className="h-6 w-6 text-slate-300 dark:text-slate-600" />
             </div>
-          ))}
+          </div>
+
+          <div className="flex w-full min-w-[160px] flex-col gap-3 sm:w-auto">
+            {items.map((item) => (
+              <div key={item.subject} className="flex flex-col gap-0.5">
+                <div className="flex items-center justify-between gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: item.color }} />
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{item.subject}</span>
+                  </div>
+                  <span className="font-bold tabular-nums text-slate-950 dark:text-white">{item.accuracy !== null ? item.accuracy + "%" : "—"}</span>
+                </div>
+                <div className="pl-5 text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                  {item.correct}/{item.attempted} correct
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -353,15 +417,80 @@ function ChapterTable({ chapters }) {
 
 export function TimeAnalytics({ data }) {
   const hasData = data?.status === "ready";
+  const isMultiple = hasData && data.recent?.length > 1;
+  const isSingle = hasData && data.recent?.length === 1;
+
+  const renderLineChart = () => {
+    if (!isMultiple) return null;
+    const maxVal = Math.max(...data.recent.map((r) => r.secondsPerQuestion));
+    const minVal = Math.min(...data.recent.map((r) => r.secondsPerQuestion));
+    const range = maxVal - minVal || 1;
+
+    const width = 400;
+    const height = 80;
+    const paddingX = 20;
+    const paddingY = 20;
+    const usableW = width - paddingX * 2;
+    const usableH = height - paddingY * 2;
+
+    const points = data.recent.map((item, i) => {
+      const x = paddingX + (i / (data.recent.length - 1)) * usableW;
+      const y = paddingY + usableH - ((item.secondsPerQuestion - minVal) / range) * usableH;
+      return { x, y, value: item.secondsPerQuestion, label: item.label };
+    });
+
+    const pathData = `M ${points.map((p) => `${p.x},${p.y}`).join(" L ")}`;
+
+    return (
+      <div className="mt-6 w-full relative">
+        <svg viewBox={`0 0 ${width} ${height}`} className="h-auto w-full overflow-visible">
+          <path
+            d={pathData}
+            fill="none"
+            stroke="#F59E0B"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {points.map((p, i) => (
+            <g key={i}>
+              <circle
+                cx={p.x}
+                cy={p.y}
+                r="4"
+                fill="#ffffff"
+                stroke="#F59E0B"
+                strokeWidth="2.5"
+                className="dark:fill-[var(--surface)]"
+              />
+              <text
+                x={p.x}
+                y={p.y - 10}
+                textAnchor="middle"
+                fontSize="9"
+                fontWeight="800"
+                fill="currentColor"
+                className="text-slate-600 dark:text-slate-300"
+              >
+                {p.value}s
+              </text>
+            </g>
+          ))}
+        </svg>
+        <div className="mt-3 flex justify-between px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          {points.map((p, i) => (
+            <span key={i} className="w-10 text-center">{p.label}</span>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div className="min-w-0 rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
-      <h2 className="mb-1 text-base font-semibold tracking-normal text-slate-950 dark:text-white">
-        Speed & Time
+    <div className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
+      <h2 className="mb-4 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+        Timing & Pace
       </h2>
-      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-        Timed test pace
-      </p>
 
       {!hasData ? (
         <ActionableEmptyState
@@ -372,35 +501,55 @@ export function TimeAnalytics({ data }) {
           href="/test"
         />
       ) : (
-        <>
-          <div className="grid grid-cols-2 divide-x divide-slate-200 border-y border-slate-200 dark:divide-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
-            <div className="py-3 pr-3">
-              <p className="mb-1 text-xs text-slate-500 dark:text-slate-500">Avg time / question</p>
-              <p className="text-xl font-semibold text-slate-950 dark:text-white">{data.averageSecondsPerQuestion}s</p>
+        <div className="flex flex-1 flex-col justify-between">
+          <div>
+            <div className="grid grid-cols-2 gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                  Avg time / question
+                </p>
+                <div className="mt-1 flex items-baseline gap-1">
+                  <span className="tabular-nums text-3xl font-black tracking-tight text-slate-950 dark:text-white">
+                    {data.averageSecondsPerQuestion}
+                  </span>
+                  <span className="text-sm font-bold text-slate-500 dark:text-slate-400">s</span>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                  Question pace
+                </p>
+                <div className="mt-1 flex items-baseline gap-1">
+                  <span className="tabular-nums text-3xl font-black tracking-tight text-slate-950 dark:text-white">
+                    {data.questionsPerMinute}
+                  </span>
+                  <span className="text-sm font-bold text-slate-500 dark:text-slate-400">q/min</span>
+                </div>
+              </div>
             </div>
-            <div className="py-3 pl-3">
-              <p className="mb-1 text-xs text-slate-500 dark:text-slate-400">Speed</p>
-              <p className="text-xl font-semibold text-slate-950 dark:text-white">{data.questionsPerMinute} q/min</p>
-            </div>
+
+            {isMultiple && renderLineChart()}
+            {isSingle && (
+              <div className="mt-6 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/50">
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                  {data.recent[0].label}
+                </span>
+                <div className="flex items-center gap-2 text-brand">
+                  <Clock className="h-4 w-4" />
+                  <span className="tabular-nums text-sm font-black text-slate-950 dark:text-white">
+                    {data.recent[0].secondsPerQuestion}s / q
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
 
-          {data.recent?.length > 0 && (
-            <div className="mt-4 flex h-28 items-end gap-2">
-              {data.recent.map((item, index) => (
-                <div key={`${item.label}-${index}`} className="flex min-w-0 flex-1 flex-col items-center gap-2">
-                  <div className="flex h-20 w-full items-end rounded-t-md bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                    <div
-                      className="w-full rounded-t-sm bg-brand/80"
-                      style={{ height: `${Math.max(8, Math.min(100, item.questionsPerMinute * 5))}%` }}
-                      title={`${item.label}: ${item.questionsPerMinute} q/min`}
-                    />
-                  </div>
-                  <span className="max-w-full truncate text-[10px] font-bold text-slate-400 dark:text-slate-500">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </>
+          <div className="mt-6 rounded-xl border border-blue-100/50 bg-blue-50/50 p-4 dark:border-blue-900/30 dark:bg-blue-900/10">
+            <p className="text-sm font-medium leading-snug text-slate-800 dark:text-blue-100">
+              Your current pace is <strong className="font-bold text-blue-600 dark:text-blue-400">{data.averageSecondsPerQuestion} seconds</strong> per question.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

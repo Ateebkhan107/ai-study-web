@@ -64,8 +64,8 @@ export function StudyHeatmap({ heatmap }) {
               {days.map((day) => (
                 <div
                   key={day.date}
-                  className={`h-6 rounded-sm ${HM_COLORS[day.intensity] || HM_COLORS[0]}`}
-                  title={`${formatDateLabel(day.date)} · ${day.questions} questions practiced · ${day.tests} tests submitted`}
+                  className={`h-6 rounded-sm ${day.future ? 'opacity-0' : HM_COLORS[day.intensity] || HM_COLORS[0]}`}
+                  title={day.future ? '' : `${formatDateLabel(day.date)} · ${day.questions} questions practiced · ${day.tests} tests submitted`}
                 />
               ))}
             </div>
@@ -106,318 +106,107 @@ export function ExamReadiness({ readiness }) {
   const mockValid = mockCount >= mockTarget;
   const timedValid = timedCount >= timedTarget;
 
-  // Multi-segment Ring Calculations
-  const r = 46;
-  const circ = 2 * Math.PI * r; // ~289.03
-
-  // Segments: PYQ (45%), Mock (45%), Time (10%)
-  // We leave a 3-unit gap between segments
-  const gap = 3;
-  const pyqLength = circ * 0.45 - gap;
-  const mockLength = circ * 0.45 - gap;
-  const timeLength = circ * 0.10 - gap;
-
-  // Segment partial fill ratios
-  const pyqFillRatio = pyqValid
-    ? ((readiness?.components?.[0]?.value ?? 100) / 100)
-    : Math.min(pyqCount / pyqTarget, 1);
-  const mockFillRatio = mockValid
-    ? ((readiness?.components?.[1]?.value ?? 100) / 100)
-    : Math.min(mockCount / mockTarget, 1);
-  const timeFillRatio = timedValid
-    ? ((readiness?.components?.[2]?.value ?? 100) / 100)
-    : Math.min(timedCount / timedTarget, 1);
-
-  const pyqFilled = pyqFillRatio * pyqLength;
-  const mockFilled = mockFillRatio * mockLength;
-  const timeFilled = timeFillRatio * timeLength;
-
-  // Rotations for 3 arcs starting at top (-90 deg)
-  const pyqOffset = 0;
-  const mockOffset = circ * 0.45;
-  const timeOffset = circ * 0.90;
+  const getComponentStatus = (value, valid) => {
+    if (!valid) return "Needs data";
+    if (value < 40) return "Needs practice";
+    if (value < 60) return "Needs work";
+    if (value < 75) return "Developing";
+    if (value < 90) return "Good";
+    return "Excellent";
+  };
 
   const componentsData = [
     {
       key: "pyqPerformance",
-      label: "PYQ Performance",
-      weight: "45%",
-      current: pyqCount,
-      target: pyqTarget,
-      unit: "questions",
+      label: "PYQs",
       valid: pyqValid,
       value: readiness?.components?.find((c) => c.key === "pyqPerformance")?.value ?? null,
-      color: "#378ADD",
-      bgBar: "bg-blue-500",
-      cta: "Practice PYQs",
-      href: "/pyq",
-      icon: Target,
+      current: pyqCount,
+      target: pyqTarget,
     },
     {
       key: "mockPerformance",
-      label: "Mock Performance",
-      weight: "45%",
-      current: mockCount,
-      target: mockTarget,
-      unit: "test",
+      label: "Mocks",
       valid: mockValid,
       value: readiness?.components?.find((c) => c.key === "mockPerformance")?.value ?? null,
-      color: "#D4537E",
-      bgBar: "bg-rose-500",
-      cta: "Start Test",
-      href: "/test",
-      icon: FileText,
+      current: mockCount,
+      target: mockTarget,
     },
     {
       key: "timeEfficiency",
-      label: "Time Efficiency",
-      weight: "10%",
-      current: timedCount,
-      target: timedTarget,
-      unit: "timed Qs",
+      label: "Time Management",
       valid: timedValid,
       value: readiness?.components?.find((c) => c.key === "timeEfficiency")?.value ?? null,
-      color: "#BA7517",
-      bgBar: "bg-amber-500",
-      cta: "Timed Drill",
-      href: "/test",
-      icon: Clock,
+      current: timedCount,
+      target: timedTarget,
     },
   ];
 
-  const unlockedComponentsCount = [pyqValid, mockValid, timedValid].filter(Boolean).length;
+  let nextFocus = "";
+  if (!pyqValid || !mockValid || !timedValid) {
+    const missing = [];
+    if (!pyqValid) missing.push("more PYQs");
+    if (!mockValid) missing.push("a mock test");
+    if (!timedValid && mockValid && pyqValid) missing.push("a timed drill");
+    nextFocus = `Complete ${missing.join(" and ")} to unlock your full score.`;
+  } else {
+    const weakest = [...componentsData].sort((a, b) => (a.value ?? 100) - (b.value ?? 100))[0];
+    if (weakest.key === "pyqPerformance") nextFocus = "Focus on practicing more PYQs to improve your foundation.";
+    else if (weakest.key === "mockPerformance") nextFocus = "Take another mock test to improve your exam-taking stamina and strategy.";
+    else nextFocus = "Work on your speed by taking timed drills.";
+  }
 
   return (
-    <div className="min-w-0 rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5">
-      <div className="flex items-center justify-between gap-2 mb-1">
-        <h2 className="text-base font-semibold tracking-normal text-slate-950 dark:text-white">
-          Exam Readiness Score
-        </h2>
-        {!isReady && (
-          <span className="flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:text-brand">
-            <Sparkles className="h-2.5 w-2.5" />
-            Unlocking
-          </span>
-        )}
+    <div className="flex h-full min-w-0 flex-col justify-between rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6">
+      <div>
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <h2 className="text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+            Exam Readiness
+          </h2>
+          {!isReady && (
+            <span className="flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:text-brand">
+              <Sparkles className="h-2.5 w-2.5" />
+              Unlocking
+            </span>
+          )}
+        </div>
+
+        <div className="mb-8">
+          <div className="flex items-baseline gap-2">
+            <span className="text-4xl font-black tracking-tight text-slate-950 tabular-nums dark:text-white sm:text-5xl">
+              {isReady ? `${overall}%` : "—"}
+            </span>
+          </div>
+          <p className="mt-1 text-sm font-bold text-slate-600 dark:text-slate-400">
+            {isReady ? readiness.label : "Need more data"}
+          </p>
+        </div>
+
+        <div className="mb-8 space-y-3.5">
+          {componentsData.map((item) => (
+            <div key={item.key} className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-sm">
+              <span className="font-bold text-slate-700 dark:text-slate-300">{item.label}</span>
+              <div className="flex items-center gap-2">
+                <span className="font-black tabular-nums text-slate-900 dark:text-white">
+                  {item.valid ? `${item.value}%` : `${item.current}/${item.target}`}
+                </span>
+                <span className="text-slate-300 dark:text-slate-600">—</span>
+                <span className={`text-xs font-bold ${item.valid && item.value < 60 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500 dark:text-slate-400'}`}>
+                  {getComponentStatus(item.value, item.valid)}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">Composite preparation signal</p>
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-        {/* Multi-Segment Alive SVG Ring */}
-        <div className="relative shrink-0 self-center sm:self-auto">
-          <svg width="128" height="128" viewBox="0 0 128 128" aria-label={isReady ? `${overall}% ${readiness.label}` : "Exam readiness unlocking"}>
-            {/* Background Base Ring */}
-            <circle
-              cx="64"
-              cy="64"
-              r={r}
-              fill="none"
-              strokeWidth="8"
-              className="stroke-slate-100 dark:stroke-slate-800"
-            />
-
-            {/* Ghosted Arc 1: PYQ (45%) */}
-            <circle
-              cx="64"
-              cy="64"
-              r={r}
-              fill="none"
-              strokeWidth="8"
-              stroke="#378ADD"
-              strokeOpacity="0.2"
-              strokeDasharray={`${pyqLength} ${circ - pyqLength}`}
-              strokeDashoffset={-pyqOffset}
-              transform="rotate(-90 64 64)"
-            />
-            {/* Live Fill Arc 1 */}
-            {pyqFilled > 0 && (
-              <circle
-                cx="64"
-                cy="64"
-                r={r}
-                fill="none"
-                strokeWidth="8"
-                stroke="#378ADD"
-                strokeDasharray={`${pyqFilled} ${circ - pyqFilled}`}
-                strokeDashoffset={-pyqOffset}
-                strokeLinecap="round"
-                transform="rotate(-90 64 64)"
-                className="transition-all duration-700"
-              />
-            )}
-
-            {/* Ghosted Arc 2: Mock (45%) */}
-            <circle
-              cx="64"
-              cy="64"
-              r={r}
-              fill="none"
-              strokeWidth="8"
-              stroke="#D4537E"
-              strokeOpacity="0.2"
-              strokeDasharray={`${mockLength} ${circ - mockLength}`}
-              strokeDashoffset={-mockOffset}
-              transform="rotate(-90 64 64)"
-            />
-            {/* Live Fill Arc 2 */}
-            {mockFilled > 0 && (
-              <circle
-                cx="64"
-                cy="64"
-                r={r}
-                fill="none"
-                strokeWidth="8"
-                stroke="#D4537E"
-                strokeDasharray={`${mockFilled} ${circ - mockFilled}`}
-                strokeDashoffset={-mockOffset}
-                strokeLinecap="round"
-                transform="rotate(-90 64 64)"
-                className="transition-all duration-700"
-              />
-            )}
-
-            {/* Ghosted Arc 3: Time (10%) */}
-            <circle
-              cx="64"
-              cy="64"
-              r={r}
-              fill="none"
-              strokeWidth="8"
-              stroke="#BA7517"
-              strokeOpacity="0.2"
-              strokeDasharray={`${timeLength} ${circ - timeLength}`}
-              strokeDashoffset={-timeOffset}
-              transform="rotate(-90 64 64)"
-            />
-            {/* Live Fill Arc 3 */}
-            {timeFilled > 0 && (
-              <circle
-                cx="64"
-                cy="64"
-                r={r}
-                fill="none"
-                strokeWidth="8"
-                stroke="#BA7517"
-                strokeDasharray={`${timeFilled} ${circ - timeFilled}`}
-                strokeDashoffset={-timeOffset}
-                strokeLinecap="round"
-                transform="rotate(-90 64 64)"
-                className="transition-all duration-700"
-              />
-            )}
-          </svg>
-
-          {/* Center Text inside Ring */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-2 text-center pointer-events-none">
-            {isReady ? (
-              <>
-                <span className="font-display text-2xl font-black tracking-tight text-slate-950 dark:text-white sm:text-3xl">
-                  {overall}%
-                </span>
-                <span className="max-w-[70px] truncate text-[9.5px] font-bold text-slate-500 dark:text-slate-400">
-                  {readiness.label}
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="font-display text-lg font-black tracking-tight text-slate-950 dark:text-white sm:text-xl">
-                  {unlockedComponentsCount}/3
-                </span>
-                <span className="text-[9.5px] font-black uppercase tracking-wider text-amber-700 dark:text-brand">
-                  Ready
-                </span>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Breakdown Component Rows with Progress & Inline CTAs */}
-        <div className="w-full flex-1 space-y-3">
-          {componentsData.map((item) => {
-            const progressPct = item.valid
-              ? item.value ?? 100
-              : Math.min(100, Math.round((item.current / item.target) * 100));
-
-            return (
-              <div key={item.key} className="group min-w-0">
-                <div className="flex items-center justify-between gap-2 text-xs">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <span
-                      className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                      aria-hidden="true"
-                    />
-                    <span className="truncate font-medium text-slate-700 dark:text-slate-300">
-                      {item.label}
-                    </span>
-                    <span className="text-[10px] font-semibold text-slate-400 dark:text-slate-500">
-                      ({item.weight})
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2 shrink-0">
-                    {item.valid ? (
-                      <span className="font-bold tabular-nums text-slate-950 dark:text-white">
-                        {item.value !== null ? `${item.value}%` : "—"}
-                      </span>
-                    ) : (
-                      <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 tabular-nums">
-                        {item.current}/{item.target}
-                      </span>
-                    )}
-
-                    {!item.valid && (
-                      <Link
-                        href={item.href}
-                        className="inline-flex items-center gap-0.5 rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 transition-colors hover:bg-brand hover:text-slate-950 dark:bg-[var(--surface-elevated)] dark:text-slate-300 dark:hover:bg-brand dark:hover:text-slate-950"
-                      >
-                        <span>{item.cta.split(" ")[0]}</span>
-                        <ArrowRight className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)]">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      item.valid ? item.bgBar : "bg-slate-300 dark:bg-slate-700"
-                    }`}
-                    style={{
-                      width: `${Math.max(4, progressPct)}%`,
-                      backgroundColor: item.valid ? item.color : undefined,
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-
-          {/* Bottom Helper / Summary */}
-          <div className="pt-1">
-            {isReady ? (
-              <p className="text-xs text-slate-400 dark:text-slate-500">
-                Based on {counts.pyqAnswered || 0} questions and {counts.mockTestsCompleted || 0} tests
-              </p>
-            ) : (
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {pyqCount < pyqTarget
-                    ? `Need ${pyqTarget - pyqCount} more PYQs & ${mockCount < mockTarget ? 1 : 0} test to unlock readiness`
-                    : "Need 1 mock test to unlock full composite score"}
-                </p>
-                <Link
-                  href={pyqCount < pyqTarget ? "/pyq" : "/test"}
-                  className="shrink-0 text-xs font-bold text-brand hover:underline inline-flex items-center gap-1"
-                >
-                  <span>{pyqCount < pyqTarget ? "Practice PYQs" : "Start Test"}</span>
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+      <div className="mt-auto rounded-xl border border-slate-100 bg-slate-50 p-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]">
+        <p className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+          Next Focus
+        </p>
+        <p className="text-sm font-medium leading-snug text-slate-800 dark:text-slate-200">
+          {nextFocus}
+        </p>
       </div>
     </div>
   );
