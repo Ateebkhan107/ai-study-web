@@ -7,7 +7,7 @@ import ZiHeader from "@/components/zi/ZiHeader";
 import ZiMessages from "@/components/zi/ZiMessages";
 import ZiSuggestions from "@/components/zi/ZiSuggestions";
 
-import { Lock } from "lucide-react";
+import { Lock, X } from "lucide-react";
 import Link from "next/link";
 
 export default function ZiPanel({
@@ -63,6 +63,14 @@ export default function ZiPanel({
         <div
           className={`absolute inset-x-2 bottom-3 top-2 z-10 mx-auto flex w-auto max-w-[28rem] flex-col overflow-hidden rounded-[2rem] border border-brand/20 bg-slate-50 shadow-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none dark:border-brand/10 dark:bg-slate-950 sm:inset-auto sm:bottom-[calc(6.5rem+env(safe-area-inset-bottom))] sm:right-6 sm:top-20 sm:w-[30rem] sm:max-w-none ${panelTransformClass}`}
         >
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 z-20 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 transition-colors hover:border-brand/40 hover:bg-brand/10 hover:text-black dark:hover:text-white pointer-events-auto"
+            aria-label="Close panel"
+          >
+            <X className="h-4 w-4" strokeWidth={2.4} />
+          </button>
           <div className="flex h-full flex-col items-center justify-center p-8 text-center pointer-events-auto">
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10 text-brand">
               <Lock className="h-10 w-10" strokeWidth={2} />

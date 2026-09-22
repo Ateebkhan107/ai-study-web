@@ -177,20 +177,20 @@ export const viewport = {
 const themeInitScript = `
 (() => {
   try {
-    const hasAppliedDarkDefault = localStorage.getItem("theme-default-dark-applied") === "true";
+    const hasAppliedLightDefault = localStorage.getItem("theme-default-light-applied") === "true";
     let savedTheme = localStorage.getItem("theme");
 
-    if (!hasAppliedDarkDefault) {
-      savedTheme = "dark";
-      localStorage.setItem("theme", "dark");
-      localStorage.setItem("theme-default-dark-applied", "true");
+    if (!hasAppliedLightDefault) {
+      savedTheme = "light";
+      localStorage.setItem("theme", "light");
+      localStorage.setItem("theme-default-light-applied", "true");
     }
 
-    document.documentElement.classList.toggle("dark", savedTheme !== "light");
-    document.documentElement.style.colorScheme = savedTheme === "light" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    document.documentElement.style.colorScheme = savedTheme === "dark" ? "dark" : "light";
   } catch {
-    document.documentElement.classList.add("dark");
-    document.documentElement.style.colorScheme = "dark";
+    document.documentElement.classList.remove("dark");
+    document.documentElement.style.colorScheme = "light";
   }
 
   // Workaround for browser extensions (like Bitdefender/Norton) injecting attributes and causing React hydration errors.
@@ -285,7 +285,7 @@ export default function RootLayout({ children }) {
       <html
         lang="en"
         suppressHydrationWarning
-        className="h-full dark"
+        className="h-full"
       >
         <head>
           {/* DNS prefetch + TLS preconnect for external origins */}

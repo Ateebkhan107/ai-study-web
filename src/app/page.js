@@ -3,6 +3,8 @@
 // NOTE: 'use client' is retained for Framer Motion entrance animations only.
 // All CTA navigation uses <Link> so crawlers and prefetching work correctly.
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion, MotionConfig } from "framer-motion";
 import Logo from "@/components/Logo";
@@ -309,8 +311,67 @@ function ProductPreview() {
 
 /* ── Main Page ──────────────────────────────────────────────── */
 export default function PublicLandingPage() {
+  const router = useRouter();
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleStartClick = (e) => {
+    e.preventDefault();
+    setIsTransitioning(true);
+    router.prefetch("/sign-up");
+    setTimeout(() => {
+      router.push("/sign-up");
+      setTimeout(() => setIsTransitioning(false), 2000);
+    }, 1500);
+  };
+
   return (
     <MotionConfig reducedMotion="user">
+      {isTransitioning && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-[99999] bg-[#09090B] flex flex-col items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+            className="flex flex-col items-center justify-center relative"
+          >
+            {/* Glow effect */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-brand/15 blur-3xl rounded-full pointer-events-none" />
+            
+            {/* Logo */}
+            <div className="relative z-10 mb-8">
+              <Logo forceDark size={48} />
+            </div>
+            
+            {/* Loader dots */}
+            <div className="flex gap-1.5 mb-6">
+              <motion.div 
+                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+                className="w-1.5 h-1.5 bg-brand rounded-full"
+              />
+              <motion.div 
+                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                className="w-1.5 h-1.5 bg-brand rounded-full"
+              />
+              <motion.div 
+                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+                className="w-1.5 h-1.5 bg-brand rounded-full"
+              />
+            </div>
+            
+            <p className={`${B} text-white/60 text-sm font-medium tracking-wide animate-pulse`}>
+              Preparing your experience...
+            </p>
+          </motion.div>
+        </motion.div>
+      )}
       <div
         className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
       >
@@ -353,6 +414,7 @@ export default function PublicLandingPage() {
             </Link>
             <Link
               href="/sign-up"
+              onClick={handleStartClick}
               prefetch
               className={`${B} text-sm font-semibold bg-brand hover:bg-brand-hover text-black px-4 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5`}
             >
@@ -432,6 +494,7 @@ export default function PublicLandingPage() {
               >
                 <Link
                   href="/sign-up"
+                  onClick={handleStartClick}
                   prefetch
                   className={`${B} inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-brand hover:bg-brand-hover text-black font-semibold text-base rounded-xl transition-all duration-200 hover:shadow-md group`}
                 >
@@ -907,6 +970,7 @@ export default function PublicLandingPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/sign-up"
+                onClick={handleStartClick}
                 prefetch
                 className={`${B} inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand hover:bg-brand-hover text-black font-semibold text-base rounded-xl transition-all duration-200 hover:shadow-lg group`}
               >

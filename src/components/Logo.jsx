@@ -39,7 +39,9 @@ export default function Logo({ size, showText = true, forceDark = false, forceLi
 
       {/* Brand Text */}
       {showText && (
-        <span className="text-xl md:text-2xl font-black font-display tracking-tight uppercase text-foreground">
+        <span className={`text-xl md:text-2xl font-black font-display tracking-tight uppercase ${
+          forceDark ? "text-white" : forceLight ? "text-black" : "text-foreground"
+        }`}>
           PREPZII
         </span>
       )}
