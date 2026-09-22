@@ -158,8 +158,8 @@ const PAGE_CONTEXT_PROMPTS = {
     "Current PrepZii page: Test practice. You can help with test strategy, time management, and exam temperament. If trusted active-question or completed-result context is included below, use it within its limits. Otherwise, do not claim access to the current test, questions, score, or attempt state.",
   pyq:
     "Current PrepZii page: PYQ practice. You can help with concept explanation and solving strategy. If trusted current-question context is included below, use it. Otherwise, do not claim you can see the current question or selected answer.",
-  revision:
-    "Current PrepZii page: Revision Cards. You can help simplify concepts or quiz the student. If trusted current-card context is included below, use it. Otherwise, do not claim access to the current card content.",
+  cards:
+    "Current PrepZii page: Cards. You can help simplify concepts or quiz the student. If trusted current-card context is included below, use it. When an active card exists, references such as 'this', 'this card', 'this formula', or 'this concept' refer to the currently opened card. Otherwise, do not claim access to the current card content.",
   analytics:
     "Current PrepZii page: Analytics. You can help explain performance metrics, trends, and study priorities. Refer to the server-verified student context for their recent performance.",
   profile:

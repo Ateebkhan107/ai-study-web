@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Logo from "@/components/Logo";
 import ZiPanel from "@/components/zi/ZiPanel";
 import ZiStartupGreeting from "@/components/zi/ZiStartupGreeting";
+import { usePathname } from "next/navigation";
 import { useZiPageContext } from "@/lib/zi/pageContext";
 
 const WELCOME_MESSAGE = {
@@ -41,6 +42,7 @@ function getZiGreetingName(user) {
 
 export default function ZiLauncher({ plan }) {
   const { isLoaded, isSignedIn, user } = useUser();
+  const pathname = usePathname();
   const pageContext = useZiPageContext();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -220,6 +222,12 @@ export default function ZiLauncher({ plan }) {
       setIsGenerating(false);
     }
   };
+
+  const isSolvingSession = (pageContext.pageType === "test" || pageContext.pageType === "pyq") && pathname?.includes("/session");
+
+  if (isSolvingSession) {
+    return null;
+  }
 
   return (
     <>

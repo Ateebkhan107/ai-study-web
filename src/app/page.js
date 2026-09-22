@@ -4,7 +4,7 @@
 // All CTA navigation uses <Link> so crawlers and prefetching work correctly.
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, startTransition } from "react";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion, MotionConfig } from "framer-motion";
 import Logo from "@/components/Logo";
@@ -319,7 +319,9 @@ export default function PublicLandingPage() {
     setIsTransitioning(true);
     router.prefetch("/sign-up");
     setTimeout(() => {
-      router.push("/sign-up");
+      startTransition(() => {
+        router.push("/sign-up");
+      });
       setTimeout(() => setIsTransitioning(false), 2000);
     }, 1500);
   };

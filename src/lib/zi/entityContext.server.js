@@ -330,33 +330,41 @@ async function findFormulaCardLocation(card) {
 
 function formatRevisionCardContext(card, chapter, subject) {
   const lines = [
-    "Trusted current entity context: Revision card.",
+    "CURRENT CONTEXT:",
+    "Section: Cards",
     `Subject: ${cleanText(subject?.name, 120) || "Unknown"}`,
-    `Exam: ${cleanText(subject?.exam, 24) || "Unknown"}`,
-    `Chapter: ${cleanText(chapter?.title, 160) || "Unknown"}`,
-    `Title: ${cleanText(card.title, 180) || "Untitled card"}`,
-    `Card type: ${cleanText(card.card_type, 80) || "revision"}`,
+    `Topic: ${cleanText(chapter?.title, 160) || "Unknown"}`,
+    `Active Card: ${cleanText(card.title, 180) || "Untitled card"}`,
+    "Card Content:"
   ];
 
+  const contentParts = [];
+  
   const body = cleanText(card.body, 1200);
-  if (body) lines.push(`Content: ${body}`);
+  if (body) contentParts.push(body);
 
   const formulas = formatMaybeJson(card.formulas, 900);
-  if (formulas) lines.push(`Formulas: ${formulas}`);
+  if (formulas) contentParts.push(`Formulas:\n${formulas}`);
 
   const variables = formatMaybeJson(card.variables, 700);
-  if (variables) lines.push(`Variables: ${variables}`);
+  if (variables) contentParts.push(`Variables:\n${variables}`);
 
   const conditions = formatMaybeJson(card.conditions, 500);
-  if (conditions) lines.push(`Conditions: ${conditions}`);
+  if (conditions) contentParts.push(`Conditions:\n${conditions}`);
 
   const tableData = formatMaybeJson(card.table_data, 700);
-  if (tableData) lines.push(`Table data: ${tableData}`);
+  if (tableData) contentParts.push(`Table Data:\n${tableData}`);
 
   const recallData = formatMaybeJson(card.recall_data, 700);
-  if (recallData) lines.push(`Recall data: ${recallData}`);
+  if (recallData) contentParts.push(`Recall Data:\n${recallData}`);
 
-  return lines.filter(Boolean).join("\n");
+  if (contentParts.length > 0) {
+    lines.push(contentParts.join("\n\n"));
+  } else {
+    lines.push("No content available.");
+  }
+
+  return lines.join("\n");
 }
 
 async function fetchRevisionCardContext({ userId, id }) {
@@ -679,7 +687,7 @@ export async function buildZiEntityContext({ userId, pageContext }) {
     return fetchPyqQuestionContext({ userId, id: entity.id });
   }
 
-  if (entity.type === "revision_card" && pageContext.pageType === "revision") {
+  if (entity.type === "revision_card" && pageContext.pageType === "cards") {
     return fetchRevisionCardContext({ userId, id: entity.id });
   }
 

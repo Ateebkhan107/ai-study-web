@@ -9,7 +9,7 @@ export const ZiPageTypeSchema = z.enum([
   "dashboard",
   "test",
   "pyq",
-  "revision",
+  "cards",
   "analytics",
   "profile",
   "community",
@@ -46,7 +46,7 @@ const ZiPageContextSchema = z
 
     const expectedPageTypeByEntity = {
       pyq_question: "pyq",
-      revision_card: "revision",
+      revision_card: "cards",
       test_question: "test",
       test_result: "test",
     };

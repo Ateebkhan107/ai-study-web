@@ -36,13 +36,24 @@ function toGeminiRole(role) {
 }
 
 function toGeminiContents(messages) {
-  return messages
-    .filter((message) => message?.content?.trim())
-    .map((message) => ({
-      role: toGeminiRole(message.role),
-      parts: [{ text: message.content.trim() }],
-    }))
-    .filter((message, index) => index > 0 || message.role === "user");
+  const contents = [];
+  const validMessages = messages.filter((message) => message?.content?.trim());
+  
+  for (const message of validMessages) {
+    const role = toGeminiRole(message.role);
+    const text = message.content.trim();
+    
+    if (contents.length > 0 && contents[contents.length - 1].role === role) {
+      contents[contents.length - 1].parts[0].text += `\n\n${text}`;
+    } else {
+      contents.push({
+        role,
+        parts: [{ text }],
+      });
+    }
+  }
+  
+  return contents.filter((message, index) => index > 0 || message.role === "user");
 }
 
 export async function streamZiResponse({

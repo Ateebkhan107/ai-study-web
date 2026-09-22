@@ -7,7 +7,7 @@ export const ZI_PAGE_TYPES = [
   "dashboard",
   "test",
   "pyq",
-  "revision",
+  "cards",
   "analytics",
   "profile",
   "community",
@@ -25,8 +25,8 @@ export function getZiPageType(pathname) {
   if (path === "/pyq" || path.startsWith("/pyq/")) return "pyq";
   if (path === "/jee/pyq" || path.startsWith("/jee/pyq/")) return "pyq";
   if (path === "/neet/pyq" || path.startsWith("/neet/pyq/")) return "pyq";
-  if (path === "/formula-cards" || path.startsWith("/formula-cards/")) return "revision";
-  if (path === "/formula-books" || path.startsWith("/formula-books/")) return "revision";
+  if (path === "/formula-cards" || path.startsWith("/formula-cards/")) return "cards";
+  if (path === "/formula-books" || path.startsWith("/formula-books/")) return "cards";
   if (path === "/analytics" || path.startsWith("/analytics/")) return "analytics";
   if (path === "/profile" || path.startsWith("/profile/")) return "profile";
   if (path === "/community" || path.startsWith("/community/")) return "community";
@@ -42,7 +42,7 @@ export function useZiPageContext() {
   const pageType = getZiPageType(pathname);
   const entityMatchesPage =
     (pageType === "pyq" && entity?.type === "pyq_question") ||
-    (pageType === "revision" && entity?.type === "revision_card") ||
+    (pageType === "cards" && entity?.type === "revision_card") ||
     (pageType === "test" && (
       entity?.type === "test_question" ||
       entity?.type === "test_result"

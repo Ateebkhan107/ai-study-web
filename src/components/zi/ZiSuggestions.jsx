@@ -14,7 +14,7 @@ const SUGGESTIONS_BY_PAGE = {
     "Explain tricky concepts",
     "Problem solving frameworks",
   ],
-  revision: [
+  cards: [
     "Active recall practice",
     "Quiz me on this",
     "Simplify complex topics",
@@ -85,9 +85,9 @@ export default function ZiSuggestions({
     SUGGESTIONS_BY_PAGE.unknown;
 
   return (
-    <div className="border-t border-[var(--border-subtle)] px-4 py-3 sm:px-5">
+    <div className="border-t border-[var(--border-subtle)] px-4 py-3 sm:px-5" suppressHydrationWarning>
       <p className="sr-only">Suggested prompts</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" suppressHydrationWarning>
         {suggestions.map((suggestion) => (
           <button
             key={suggestion}
