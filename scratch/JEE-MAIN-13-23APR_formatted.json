@@ -1,0 +1,902 @@
+[
+  {
+    "qnum": 1,
+    "question_text": "If the time period t of the oscillation of a drop of liquid of density d , radius r , vibrating under surface tension s\nis given by the formula t = \\sqrtr2bscda/2 . It is observed that the time period is directly proportional to \\sqrtd . The\ns\nvalue of b should therefore be :",
+    "option_a": "3",
+    "option_b": "\\sqrt3\n4",
+    "option_c": "3",
+    "option_d": "2\n2 3",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 2,
+    "question_text": "A 70 kg man leaps vertically into the air from a crouching position. To take the leap the man pushes the ground\nwith a constant force F to raise himself. The center of gravity rises by 0.5 m before he leaps. After the leap the\nc.g. rises by another 1 m . The maximum power delivered by the muscles is : (Take g = 10 ms-2 )",
+    "option_a": "6.26 \u00d7 103 Watts at the start",
+    "option_b": "6.26 \u00d7 103 Watts at take off",
+    "option_c": "6.26 \u00d7 104 Watts at the start",
+    "option_d": "6.26 \u00d7 104 Watts at take off",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 3,
+    "question_text": "A boy of mass 20 kg is standing on a 80 kg free to move long cart. There is negligible friction between cart and\nground. Initially, the boy is standing 25 m from a wall. If he walks 10 m on the cart towards the wall, then the\nfinal distance of the boy from the wall will be",
+    "option_a": "15 m",
+    "option_b": "12.5 m",
+    "option_c": "15.5 m",
+    "option_d": "17 m",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 4,
+    "question_text": "A projectile of mass M is fired so that the horizontal range is 4 km . At the highest point the projectile explodes\nin two parts of masses M/4 and 3M/4 respectively and the heavier part starts falling down vertically with zero\ninitial speed. The horizontal range (distance from point of firing) of the lighter part is :",
+    "option_a": "16 km",
+    "option_b": "1 km\n \\rightarrow r(t)",
+    "option_c": "10 km",
+    "option_d": "2 km",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 5,
+    "question_text": "A particle of mass 2 kg is moving such that at time t , its position, in meter, is given by = 5^i -2t2^j . The\nangular momentum of the particle at t = 2s about the origin in kgm-2 s-1 is :",
+    "option_a": "-80^k",
+    "option_b": "(10^i -16^j)",
+    "option_c": "-40^k",
+    "option_d": "40^k",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 6,
+    "question_text": "A body of mass ' m ' is tied to one end of a spring and whirled round in a horizontal plane with a constant\nangular velocity. The elongation in the spring is 1 cm . If the angular velocity is doubled, the elongation in the\nspring is 5 cm . The original length of the spring is :",
+    "option_a": "15 cm",
+    "option_b": "12 cm",
+    "option_c": "16 cm",
+    "option_d": "10 cm",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 7,
+    "question_text": "A copper wire of length 1.0 m and a steel wire of length 0.5 m having equal cross-sectional areas are joined end\nto end. The composite wire is stretched by a certain load which stretches the copper wire by 1 mm . If the\nYoung's modulii of copper and steel are respectively 1.0 \u00d7 1011 Nm-2 and 2.0 \u00d7 1011Nm-2 , the total extension\nof the composite wire is :",
+    "option_a": "1.75 mm",
+    "option_b": "2.0 mm",
+    "option_c": "1.50 mm",
+    "option_d": "1.25 mm",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 8,
+    "question_text": "Wax is coated on the inner wall of a capillary tube and the tube is then dipped in water. Then, compared to the\nunwaxed capillary, the angle of contact \\theta and the height h upto which water rises change. These changes are :\nQuestion Paper MathonGo",
+    "option_a": "\\theta increases and h also increases",
+    "option_b": "\\theta decreases and h also decreases",
+    "option_c": "\\theta increases and h decreases",
+    "option_d": "\\theta decreases and h increases",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 9,
+    "question_text": "A thin tube sealed at both ends is 100 cm long. It lies horizontally, the middle 20 cm containing mercury and\ntwo equal ends containing air at standard atmospheric pressure. If the tube is now turned to a vertical position,\nby what amount will the mercury be displaced ?\n(Given : cross-section of the tube can be assumed to be uniform)",
+    "option_a": "2.95 cm",
+    "option_b": "5.18 cm",
+    "option_c": "8.65 cm",
+    "option_d": "0.0 cm",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 10,
+    "question_text": "The ratio of the coefficient of volume expansion of a glass container to that of a viscous liquid kept inside the\ncontainer is 1 : 4 . What fraction of the inner volume of the container should the liquid occupy so that the\nvolume of the remaining vacant space will be same at all temperatures ?",
+    "option_a": "2 : 5",
+    "option_b": "1 : 4",
+    "option_c": "1 : 64",
+    "option_d": "1 : 8",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 11,
+    "question_text": "500 g of water and 100 g of ice at 0\u2218C are in a calorimeter whose water equivalent is 40 g.10 g of steam at\n100\u2218C is added to it. Then water in the calorimeter is : (Latent heat of ice = 80cal/g , Latent heat of steam\n= 540cal/g )",
+    "option_a": "580 g",
+    "option_b": "590 g",
+    "option_c": "600 g",
+    "option_d": "610 g",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 12,
+    "question_text": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\nthat best describes the two Statements. Statement 1: The internal energy of a perfect gas is entirely kinetic and\ndepends only on absolute temperature of the gas and not on its pressure or volume. Statement 2: A perfect gas\nis heated keeping pressure constant and later at constant volume. For the same amount of heat the temperature\nof the gas at constant pressure is lower than that at constant volume.",
+    "option_a": "Statement-1 is true, Statement- 2 is true and",
+    "option_b": "Statement-1 is true, Statement-2 is false.\nStatement -2 is the correct explanation of\nStatement-1.",
+    "option_c": "Statement-1 is true, Statement-2 is true but",
+    "option_d": "Statement-1 is false, Statement-2 is true.\nStatement-2 is not the correct explanation of\nStatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 13,
+    "question_text": "Bob of a simple pendulum of length l is made of iron. The pendulum is oscillating over a horizontal coil\ncarrying direct current. If the time period of the pendulum is T then :\nQuestion Paper MathonGo",
+    "option_a": "T < 2\\pi\\sqrtl and damping is smaller than in air alone.\ng",
+    "option_b": "T = 2\\pi\\sqrtl and damping is larger than in air alone.\ng",
+    "option_c": "T > 2\\pi\\sqrtl and damping is smaller than in air alone.\ng",
+    "option_d": "T < 2\\pi\\sqrtl and damping is larger than in air alone.\ng",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 14,
+    "question_text": "A sonometer wire of length 114 cm is fixed at both the ends. Where should the two bridges be placed so as to\ndivide the wire into three segments whose fundamental frequencies are in the ratio 1 : 3 : 4 ?",
+    "option_a": "At 36 cm and 84 cm from one end",
+    "option_b": "At 24 cm and 72 cm from one end",
+    "option_c": "At 48 cm and 96 cm from one end",
+    "option_d": "At 72 cm and 96 cm from one end",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 15,
+    "question_text": "Consider a finite insulated, uncharged conductor placed near a finite positively charged conductor. The\nuncharged body must have a potential :",
+    "option_a": "less than the charged conductor and more than at infinity.",
+    "option_b": "more than the charged conductor and less than at infinity.",
+    "option_c": "more than the charged conductor and more than at infinity.",
+    "option_d": "less than the charged conductor and less than at infinity.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 16,
+    "question_text": "A liquid drop having 6 excess electrons is kept stationary under a uniform electric field of 25.5 kVm-1 . The\ndensity of liquid is 1.26 \u00d7 103 kg m-3 . The radius of the drop is (neglect buoyancy).",
+    "option_a": "4.3 \u00d7 10-7 m",
+    "option_b": "7.8 \u00d7 10-7 m",
+    "option_c": "0.078 \u00d7 10-7 m",
+    "option_d": "3.4 \u00d7 10-7 m",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 17,
+    "question_text": "A parallel plate capacitor of area 60 cm2 and separation 3 mm is charged initially to 90\u03bcC . If the medium\nbetween the plate gets slightly conducting and the plate loses the charge initially at the rate of 2.5 \u00d7 10-8C/s ,\nthen what is the magnetic field between the plates ?",
+    "option_a": "2.5 \u00d7 10-8 T",
+    "option_b": "2.0 \u00d7 10-7 T",
+    "option_c": "1.63 \u00d7 10-11 T",
+    "option_d": "Zero",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 18,
+    "question_text": "Which of the four resistances P, Q, R and S generate the greatest amount of heat when a current flows from A\nto B ?",
+    "option_a": "Q",
+    "option_b": "S\n \\rightarrow B",
+    "option_c": "P",
+    "option_d": "R",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 19,
+    "question_text": "A rectangular loop of wire, supporting a mass m , hangs with one end in a uniform magnetic field pointing\nout of the plane of the paper. A clockwise current is set up such that i > mg/Ba , where a is the width of the\nQuestion Paper MathonGo\nloop. Then :",
+    "option_a": "The weight rises due to a vertical force caused by",
+    "option_b": "The weight do not rise due to vertical for caused\nthe magnetic field and work is done on the by the magnetic field and work is done on the\nsystem. system.",
+    "option_c": "The weight rises due to a vertical force caused by",
+    "option_d": "The weight rises due to a vertical force caused by\nthe magnetic field but no work is done on the the magnetic field and work is extracted from the\nsystem. magnetic field.\n \\rightarrow B",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 20,
+    "question_text": "A particle of charge 16 \u00d7 10-16C moving with velocity 10 ms-1 along x -axis  \\rightarrow B enters a region where magnetic\nfield of induction is along the y -axis and an electric field of magnitude 104Vm-1 is along the negative z -\naxis. If the charged particle continues moving along x -axis, the magnitude of is :",
+    "option_a": "16 \u00d7 103 Wb m-2",
+    "option_b": "2 \u00d7 103 Wb m-2",
+    "option_c": "1 \u00d7 103 Wb m-2",
+    "option_d": "4 \u00d7 103 Wb m-2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 21,
+    "question_text": "The plot given below is of the average power delivered to an LRC circuit versus frequency. The quality factor\nof the circuit is :",
+    "option_a": "5.0",
+    "option_b": "2.0",
+    "option_c": "2.5",
+    "option_d": "0.4",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 22,
+    "question_text": "Select the correct statement from the following :",
+    "option_a": "Electromagnetic waves cannot travel in vacuum.",
+    "option_b": "Electromagnetic waves are longitudinal waves.",
+    "option_c": "Electromagnetic waves are produced by charges",
+    "option_d": "Electromagnetic waves carry both energy and\nmoving with uniform velocity. momentum as they propagate through space.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 23,
+    "question_text": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\nthat best describes the two Statements. Statement 1: Very large size telescopes are reflecting telescopes instead\nof refracting telescopes. Statement 2: It is easier to provide mechanical support to large size mirrors than large\nsize lenses.\nQuestion Paper MathonGo",
+    "option_a": "Statement-1 is true and Statement-2 is false.",
+    "option_b": "Statement-1 is false and Statement-2 is true.",
+    "option_c": "Statement-1 and statement-2 are true and",
+    "option_d": "Statements-1 and statement-2 are true and\nStatement-2 is correct explanation for statement- Statement-2 is not the correct explanation for\n1. statement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 24,
+    "question_text": "A light ray falls on a square glass slab as shown in the diagram. The index of refraction of the glass, if total\ninternal reflection is to occur at the vertical face, is equal to :",
+    "option_a": "(\\sqrt2+1)",
+    "option_b": "\\sqrt5\n2 2",
+    "option_c": "3",
+    "option_d": "\\sqrt3\n2 2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 25,
+    "question_text": "n identical waves each of intensity I0 interfere with each other. The ratio of maximum intensities if the\ninterference is (i) coherent and (ii) incoherent is :",
+    "option_a": "n2",
+    "option_b": "1\nn",
+    "option_c": "1",
+    "option_d": "n\nn2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 26,
+    "question_text": "Electrons are accelerated through a potential difference V and protons are accelerated through a potential\ndifference 4 V . The de-Broglie wavelengths are \\lambdae and \\lambdap for electrons and protons respectively. The ratio of\n\\lambdae is given by: (given me is mass of electron and mp is mass of proton).\n\\lambdap",
+    "option_a": "\\lambdae = \\sqrtmp",
+    "option_b": "\\lambdae = \\sqrtme\n\\lambdap me \\lambdap mp",
+    "option_c": "\\lambdae = 1 \\sqrtme",
+    "option_d": "\\lambdae = 2\\sqrtmp\n\\lambdap 2 mp \\lambdap me",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 27,
+    "question_text": "In the Bohr's model of hydrogen-like atom the force between the nucleus and the electron is modified as\nF = e2 ( 1 + \u03b2 ) , where \u03b2 is a constant. For this atom, the radius of the nth orbit in terms of the Bohr\n4\\pi\u03b50 r2 r3\nradius (a0 = \u03b50h2 ) is :\nm\\pie2",
+    "option_a": "rn = a0n -\u03b2",
+    "option_b": "rn = a0n2 + \u03b2",
+    "option_c": "rn = a0n2 -\u03b2",
+    "option_d": "rn = a0n + \u03b2\nQuestion Paper MathonGo",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 28,
+    "question_text": "A system of four gates is set up as shown. The 'truth table' corresponding to this system is :\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 29,
+    "question_text": "Which of the following statement is NOT correct?",
+    "option_a": "Ground wave signals are more stable than the sky",
+    "option_b": "The critical frequency of an ionospheric layer is\nwave signals. the highest frequency that will be reflected back\nby the layer when it is vertically incident.",
+    "option_c": "Electromagnetic waves of frequencies higher",
+    "option_d": "Sky wave signals in the broadcast frequency\nthan about 30MHz cannot penetrate the range are stronger at night than in the day time.\nionosphere.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 30,
+    "question_text": "Correct set up to verify Ohm's law is :\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 31,
+    "question_text": "Number of atoms in the following samples of substances is largest in:",
+    "option_a": "4.0 g of hydrogen",
+    "option_b": "71.0 g of chlorine",
+    "option_c": "127.0 g of iodine",
+    "option_d": "48.0 g of magnesium",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 32,
+    "question_text": "The de Broglie wavelength of a car of mass 1000 kg and velocity 36 km/hr is :\nQuestion Paper MathonGo",
+    "option_a": "6.626 \u00d7 10-34 m",
+    "option_b": "6.626 \u00d7 10-38 m",
+    "option_c": "6.626 \u00d7 10-31 m",
+    "option_d": "6.626 \u00d7 10-30 m",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 33,
+    "question_text": "Which is the correct order of second ionization potential of C, N, O and F in the following ?",
+    "option_a": "O > N > F > C",
+    "option_b": "O > F > N > C",
+    "option_c": "F > O > N > C",
+    "option_d": "C > N > O > F",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 34,
+    "question_text": "The shape of IF- is :\n6",
+    "option_a": "Trigonally distorted octahedron",
+    "option_b": "Pyramidal",
+    "option_c": "Octahedral",
+    "option_d": "Square antiprism",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 35,
+    "question_text": "Bond distance in HF is 9.17 \u00d7 10-11 m . Dipole moment of HF is 6.104 \u00d7 10-30Cm . The percentage ionic\ncharacter in HF will be : (electron charge = 1.60 \u00d7 10-19C )",
+    "option_a": "61.0%",
+    "option_b": "38.0%",
+    "option_c": "35.5%",
+    "option_d": "41.5%",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 36,
+    "question_text": "The correct order of viscosity of the following liquids will be :",
+    "option_a": "Water < methyl alcohol < dimethyl ether < glycerol",
+    "option_b": "methyl alcohol < glycerol < water < dimethyl ether",
+    "option_c": "dimethyl ether < methyl alcohol < water < glycerol",
+    "option_d": "glycerol < dimethyl ether < water < methyl alcohol",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 37,
+    "question_text": "Which of the following statements/relationships is not correct in thermodynamic changes ?",
+    "option_a": "\u0394U = 0 (isothermal reversible expansion of a",
+    "option_b": "w = -nRT ln V2 (isothermal reversible\nV1\ngas) expansion of an ideal gas)",
+    "option_c": "w = nRT ln V2 (isothermal reversible",
+    "option_d": "For a system of constant volume heat involved\nV1\nexpansion of an ideal gas) directly changes to internal energy.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 38,
+    "question_text": "",
+    "option_a": "K1\u22c5K2",
+    "option_b": "K1\u22c5K2\nK3 3\nK2",
+    "option_c": "K1 K2 K3",
+    "option_d": "K2\u22c5K3 3\nK1",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 39,
+    "question_text": "What is the pH of a 10-4MOH- solution at 330 K , if Kw at 330 K is 10-13.6 ?",
+    "option_a": "4",
+    "option_b": "9.0",
+    "option_c": "10",
+    "option_d": "9.6",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 40,
+    "question_text": "The numbers of protons, electrons and neutrons in a molecule of heavy water are respectively :",
+    "option_a": "8, 10, 11",
+    "option_b": "10, 10, 10",
+    "option_c": "10, 11, 10",
+    "option_d": "11, 10, 10\nQuestion Paper MathonGo",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 41,
+    "question_text": "Equimolar solutions of the following compounds are prepared separately in water. Which will have the lowest\npH value ?",
+    "option_a": "BeCl2",
+    "option_b": "SrCl2",
+    "option_c": "CaCl2",
+    "option_d": "MgCl2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 42,
+    "question_text": "Monocarboxylic acids are functional isomers of:",
+    "option_a": "Ethers",
+    "option_b": "Amines",
+    "option_c": "Esters",
+    "option_d": "Alcohols",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 43,
+    "question_text": "In a face centred cubic lattice, atoms of A form the corner points and atoms of B form the face centred points.\nIf two atoms of A are missing from the corner points, the formula of the ionic compound is :",
+    "option_a": "AB3",
+    "option_b": "AB4",
+    "option_c": "A2 B5",
+    "option_d": "AB2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 44,
+    "question_text": "Vapour pressure of pure benzene is 119 torr and that of toluene is 37.0 torr at the same temperature. Mole\nfraction of toluene in vapour phase which is in equilibrium with a solution of benzene and toluene having a\nmole fraction of toluene 0.50 , will be :",
+    "option_a": "0.137",
+    "option_b": "0.237",
+    "option_c": "0.435",
+    "option_d": "0.205",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 45,
+    "question_text": "Given :\nEo Cl2/Cl-= 1.36 V, Eo = -0.74 V\n1 Cr3+/Cr\n2\nEo = 1.33 V, Eo = 1.51 V\nCr2O2- /Cr3+ MnO- /Mn2+\n7 4\nThe correct order of reducing power of the species (Cr, Cr3+, Mn2+ and Cl-) will be:",
+    "option_a": "Mn2+ < Cl-< Cr3+ < Cr",
+    "option_b": "Mn2+ < Cl3+ < Cl-< Cr",
+    "option_c": "Cr3+ < Cl-< Mn2+ < Cr",
+    "option_d": "Cr3+ < Cl-< Cr < Mn2+",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 46,
+    "question_text": "The rate constant of a zero order reaction is 2.0\u00d7 10-2 mol L-1 s-1 . If the concentration of the reactant after\n25 seconds is 0.5M . What is the initial concentration?",
+    "option_a": "0.5M",
+    "option_b": "1.25M",
+    "option_c": "12.5M",
+    "option_d": "1.0M",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 47,
+    "question_text": "Smoke is an example of:",
+    "option_a": "Solid dispersed in solid",
+    "option_b": "Gas dispersed in liquid",
+    "option_c": "Solid dispersed in gas",
+    "option_d": "Gas dispersed in solid",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 48,
+    "question_text": "Which has trigonal bipyramidal shape ?",
+    "option_a": "XeOF4",
+    "option_b": "XeO3",
+    "option_c": "XeO3 F2",
+    "option_d": "XeOF2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 49,
+    "question_text": "When a small amount of KMnO4 is added to concentrated H2SO4 , a green oily compound is obtained which\nis highly explosive in nature. Compound may be :",
+    "option_a": "MnSO4",
+    "option_b": "Mn2O7",
+    "option_c": "MnO2",
+    "option_d": "Mn2O3\nQuestion Paper MathonGo",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 50,
+    "question_text": "Identify incorrect statement :",
+    "option_a": "Cu2O is colourless.",
+    "option_b": "Copper (I) compounds are colourless except\nwhen colour results from charge transfer.",
+    "option_c": "Copper (I) compounds are diamagnetic.",
+    "option_d": "Cu2 S is black.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 51,
+    "question_text": "The magnetic moment of the complex anion [Cr(NO) (NH3)(CN)4]2- is :",
+    "option_a": "5.91BM",
+    "option_b": "3.87BM",
+    "option_c": "1.73BM",
+    "option_d": "2.82BM",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 52,
+    "question_text": "Identify the incorrect statement:",
+    "option_a": "In (Si3O9)6- , tetrahedral SiO4 units share two",
+    "option_b": "Trialkylchlorosilane on hydrolysis gives R3SiOH\noxygen atoms. .",
+    "option_c": "SiCl4 undergoes hydrolysis to give H4SiO4 .",
+    "option_d": "(Si3O9)6- has cyclic structure.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 53,
+    "question_text": "The order of reactivity of the given haloalkanes towards nucleophile is :",
+    "option_a": "RI > RBr > RCl",
+    "option_b": "RCl > RBr > RI",
+    "option_c": "RBr > RCl > RI",
+    "option_d": "RBr > RI > RCl",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 54,
+    "question_text": "The reaction of phenol with benzoyl chloride to give phenyl benzoate is known as :",
+    "option_a": "Claisen reaction",
+    "option_b": "Schotten-Baumann reaction",
+    "option_c": "Reimer-Tiemann reaction",
+    "option_d": "Gatterman-Koch reaction",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 55,
+    "question_text": "Which of the following is the product of aldol condensation?\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 56,
+    "question_text": "The order of basicity of amines in gaseous state is :",
+    "option_a": "1\u2218> 2\u2218> 3\u2218> NH3",
+    "option_b": "3\u2218> 2\u2218> NH3 > 1\u2218",
+    "option_c": "3\u2218> 2\u2218> 1\u2218> NH3",
+    "option_d": "NH3 > 1\u2218> 2\u2218> 3\u2218",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 57,
+    "question_text": "Which of the following polymer is a polyamide ?",
+    "option_a": "Terylene",
+    "option_b": "Nylon",
+    "option_c": "Rubber",
+    "option_d": "Vulcanised rubber",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 58,
+    "question_text": "H1- Receptor antagonists is a term associated with :",
+    "option_a": "Antiseptics",
+    "option_b": "Antihistamins",
+    "option_c": "Antacids",
+    "option_d": "Analgesics",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 59,
+    "question_text": "Glycosidic linkage is actually an :",
+    "option_a": "Carbonyl bond",
+    "option_b": "Ether bond",
+    "option_c": "Ester bond",
+    "option_d": "Amide bond\nQuestion Paper MathonGo",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 60,
+    "question_text": "Natural glucose is termed D-glucose because :",
+    "option_a": "-OH on the second carbon is on the right side in",
+    "option_b": "-OH on the sixth carbon is on the right side in\nFischer projection Fischer projection.",
+    "option_c": "-OH on the fifth carbon is on the right side in",
+    "option_d": "It is dextrorotatory.\nFischer projection.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 61,
+    "question_text": "The least integral value \u03b1 of x such that x-5 > 0 , satisfies :\nx2+5x-14",
+    "option_a": "\u03b12 + 3\u03b1 -4 = 0",
+    "option_b": "\u03b12 -5\u03b1 + 4 = 0",
+    "option_c": "\u03b12 -7\u03b1 + 6 = 0",
+    "option_d": "\u03b12 + 5\u03b1 -6 = 0",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 62,
+    "question_text": "Let a = Im ( 1+z2 ) , where z is any non-zero complex number. The set A = {a : |z| = 1 and z  \\neq \u00b11} is equal\n2iz\nto:",
+    "option_a": "(-1, 1)",
+    "option_b": "[-1, 1]",
+    "option_c": "[0, 1)",
+    "option_d": "(-1, 0]",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 63,
+    "question_text": "The sum of the series :",
+    "option_a": "11300",
+    "option_b": "11200",
+    "option_c": "12100",
+    "option_d": "12300",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 64,
+    "question_text": "If a1, a2, a3, \u2026 , an, \u2026 . are in A.P. such that a4 -a7 +a10 = m , then the sum of first 13 terms of this A.P., is\n:",
+    "option_a": "10 m",
+    "option_b": "12 m",
+    "option_c": "13 m",
+    "option_d": "15 m",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 65,
+    "question_text": "The sum of the rational terms in the binomial expansion of (2 1 + 3 1 ) 10 is :\n2 5",
+    "option_a": "25",
+    "option_b": "32",
+    "option_c": "9",
+    "option_d": "41",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 66,
+    "question_text": "The number of solutions of the equation sin 2x -2 cos x + 4 sin x = 4 in the interval [0, 5\\pi] is :",
+    "option_a": "3",
+    "option_b": "5",
+    "option_c": "4",
+    "option_d": "6",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 67,
+    "question_text": "If two lines L1 and L2 in space, are defined by\nL1 = {x = \\sqrt\\lambday + (\\sqrt\\lambda -1),\nz = (\\sqrt\\lambda -1)y + \\sqrt\\lambda} and\nL2 = {x = \\sqrt\u03bcy + (1 -\\sqrt\u03bc),\nz = (1 -\\sqrt\u03bc)y + \\sqrt\u03bc}\nthen L1 is perpendicular to L2 , for all nonnegative reals \\lambda and \u03bc , such that :",
+    "option_a": "\\sqrt\\lambda + \\sqrt\u03bc = 1",
+    "option_b": "\\lambda  \\neq \u03bc",
+    "option_c": "\\lambda + \u03bc = 0",
+    "option_d": "\\lambda = \u03bc",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 68,
+    "question_text": "Let \\theta1 be the angle between two lines 2x + 3y+ c1 = 0 and -x + 5y + c2 = 0 and \\theta2 be the angle between\ntwo lines 2x + 3y + c1 = 0 and -x + 5y+ c3 = 0 , where c1, c2, c3 are any real numbers : Statement-1: If c2\nQuestion Paper MathonGo\nand c3 are proportional, then \\theta1 = \\theta2 . Statement-2: \\theta1 = \\theta2 for all c2 and c3 .",
+    "option_a": "Statement-1 is true, Statement-2 is true;",
+    "option_b": "Statement-1 is true, Statement-2 is true;\nStatement-2 is a correct explanation of Statement-2 is not a correct explanation of\nStatement-1. Statement-1.",
+    "option_c": "Statement-1 is false; Statement- 2 is true.",
+    "option_d": "Statement-1 is true; Statement- 2 is false.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 69,
+    "question_text": "If the circle x2 + y2 -6x -8y + (25 -a2) = 0 touches the axis of x , then a equals.",
+    "option_a": "0",
+    "option_b": "\u00b14",
+    "option_c": "\u00b12",
+    "option_d": "\u00b13",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 70,
+    "question_text": "The point of intersection of the normals to the parabola y2 = 4x at the ends of its latus rectum is :",
+    "option_a": "(0, 2)",
+    "option_b": "(3, 0)",
+    "option_c": "(0, 3)",
+    "option_d": "(2, 0)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 71,
+    "question_text": "A tangent to the hyperbola x2 -y2 = 1 meets x -axis at P and y -axis at Q . Lines PR and QR are drawn such\n4 2\nthat OPRQ is a rectangle (where O is the origin). Then R lies on :",
+    "option_a": "4 + 2 = 1",
+    "option_b": "2 - 4 = 1\nx2 y2 x2 y2",
+    "option_c": "2 + 4 = 1",
+    "option_d": "4 - 2 = 1\nx2 y2 x2 y2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 72,
+    "question_text": "For integers m and n , both greater than 1, consider the following three statements : P : m divides n Q : m\ndivides n2 R : m is prime, then",
+    "option_a": "Q \u2227R  \\rightarrow P",
+    "option_b": "P \u2227Q  \\rightarrow R",
+    "option_c": "Q  \\rightarrow R",
+    "option_d": "Q  \\rightarrow P",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 73,
+    "question_text": "If the median and the range of four numbers {x, y, 2x + y, x -y} , where 0 < y < x < 2y , are 10 and 28\nrespectively, then the mean of the numbers is :",
+    "option_a": "18",
+    "option_b": "10",
+    "option_c": "5",
+    "option_d": "14",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 74,
+    "question_text": "If the extremities of the base of an isosceles triangle are the points (2a, 0) and (0, a) and the equation of one of\nthe sides is x = 2a , then the area of the triangle, in square units, is :",
+    "option_a": "5 a2",
+    "option_b": "5 a2\n4 2",
+    "option_c": "25a2",
+    "option_d": "5a2\n4",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 75,
+    "question_text": "On the sides AB, BC, CA of a \u25b3ABC, 3, 4, 5 distinct points (excluding vertices A, B, C ) are respectively\nchosen. The number of triangles that can be constructed using these chosen points as vertices are :",
+    "option_a": "210",
+    "option_b": "205",
+    "option_c": "215",
+    "option_d": "220",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 76,
+    "question_text": "Let R = {(x, y) : x, y  \\in N and x2 -4xy + 3y2 = 0} , where N is the set of all natural numbers. Then the\nrelation R is :",
+    "option_a": "reflexive but neither symmetric nor transitive.",
+    "option_b": "symmetric and transitive.",
+    "option_c": "reflexive and symmetric,",
+    "option_d": "reflexive and transitive.\nQuestion Paper MathonGo",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 77,
+    "question_text": "Let A , other than I or -I , be a 2 \u00d7 2 real matrix such that A2 = I , I being the unit matrix. Let Tr(A) be the\nsum of diagonal elements of A. Statement-1: Tr(A) = 0 Statement-2: det(A) = -1",
+    "option_a": "Statement-1 is true; Statement- 2 is false.",
+    "option_b": "Statement-1 is true; Statement-2 is true; Statement-2 is not a correct explanation for Statement-1.",
+    "option_c": "Statement-1 is true; Statement-2 is true; Statement-2 is a correct explanation for Statement-1.",
+    "option_d": "Statement-1 is false; Statement- 2 is true.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 78,
+    "question_text": "Statement-1: The system of linear equations\nx + (sin \u03b1)y + (cos \u03b1)z = 0\nx + (cos \u03b1)y + (sin \u03b1)z = 0\nx -(sin \u03b1)y -(cos \u03b1)z = 0\nhas a non-trivial solution for only one value of \u03b1 lying in the interval (0, \\pi ) . Statement-2: The equation in \u03b1\n2\ncos \u03b1 sin \u03b1 cos \u03b1\nsin \u03b1 cos \u03b1 sin \u03b1 = 0\ncos \u03b1 -sin \u03b1 -cos \u03b1\nhas only one solution lying in the interval (0, \\pi )\n2",
+    "option_a": "Statement-1 is true, Statement-2 is true,",
+    "option_b": "Statement-1 is true, Statement-2 is true,\nStatement-2 is not correct explantion for Statement-2 is a correct explantion for\nStatement-1. Statement-1.",
+    "option_c": "Statement-1 is true, Statement- 2 is false.",
+    "option_d": "Statememt-1 is false, Statement-2 is true.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 79,
+    "question_text": "S = tan-1 ( 1 ) + tan-1 ( 1 ) + \u2026 + tan-1 ( 1 ) , then tan S is equal to :\nn2+n+1 n2+3n+3 1+(n+19)(n+20)",
+    "option_a": "20",
+    "option_b": "n\n401+20n n2+20n+1",
+    "option_c": "20",
+    "option_d": "n\nn2+20n+1 401+20n",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 80,
+    "question_text": "Let f be a composite function of x defined by f(u) = 1 , u(x) = 1 . Then the number of points x\nu2+u-2 x-1\nwhere f is discontinuous is :",
+    "option_a": "4",
+    "option_b": "3",
+    "option_c": "2",
+    "option_d": "1",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 81,
+    "question_text": "If f(x) = sin(sin x) and f \u2032\u2032(x) + tan xf \u2032(x) + g(x) = 0 , then g(x) is :",
+    "option_a": "cos2 x cos(sin x)",
+    "option_b": "sin2 x cos(cos x)",
+    "option_c": "sin2 x sin(cos x)",
+    "option_d": "cos2 x sin(sin x)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 82,
+    "question_text": "If the curves x2 + y2 = 1 and y3 = 16x intersect at right angles, then a value of \u03b1 is :\n\u03b1 4",
+    "option_a": "2",
+    "option_b": "4\n3",
+    "option_c": "1",
+    "option_d": "3\n2 4",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 83,
+    "question_text": "The cost of running a bus from A to B is Rs. (av + b/v) where vkm/h is the average speed of the bus. When\nthe bus travels at 30 km/h , the cost comes out to be Rs. 75 while at 40 km/h , it is Rs. 65. Then the most\neconomical speed (in km/h) of the bus is :\nQuestion Paper MathonGo",
+    "option_a": "45",
+    "option_b": "50",
+    "option_c": "60",
+    "option_d": "40",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 84,
+    "question_text": "If a curve passes through the point (2, 7 ) and has slope (1 - 1 ) at any point (x, y) on it, then the ordinate of\n2 x2\nthe point on the curve whose abscissa is -2 is :",
+    "option_a": "-3",
+    "option_b": "3\n2 2",
+    "option_c": "5",
+    "option_d": "-5\n2 2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 85,
+    "question_text": "The integral \u222b xdx equals :\n2-x2+\\sqrt2-x2",
+    "option_a": "log 1 + \\sqrt2 + x2 + c",
+    "option_b": "-log 1 + \\sqrt2 -x2 + c",
+    "option_c": "-x log 1 -\\sqrt2 -x2 + c",
+    "option_d": "x log 1 -\\sqrt2 + x2 + c",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 86,
+    "question_text": "The value of \u222b\\pi/2 sin2 x dx is :\n-\\pi/2 1+2x",
+    "option_a": "\\pi",
+    "option_b": "\\pi\n2",
+    "option_c": "4\\pi",
+    "option_d": "\\pi\n4",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 87,
+    "question_text": "The area under the curve y = | cos x -sin x| , 0  \\le x  \\le \\pi , and above x -axis is :\n2",
+    "option_a": "2\\sqrt2",
+    "option_b": "2\\sqrt2 -2\n \\rightarrow a  \\rightarrow b  \\rightarrow u -2) \\rightarrow a  \\rightarrow b",
+    "option_c": "2\\sqrt2 + 2",
+    "option_d": "0\n \\rightarrow v 3\u03b1) \\rightarrow a -3 \\rightarrow b",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 88,
+    "question_text": "If and are non-collinear vectors, then the value of \u03b1 for which the vectors = (\u03b1 + and\n= (2 + are collinear is :",
+    "option_a": "3",
+    "option_b": "2\n2 3",
+    "option_c": "-3",
+    "option_d": "-2\n2 3",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 89,
+    "question_text": "If the projections of a line segment on the x, y and z -axes in 3-dimensional space are 2, 3 and 6 respectively,\nthen the length of the line segment is :",
+    "option_a": "12",
+    "option_b": "7",
+    "option_c": "9",
+    "option_d": "6",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 90,
+    "question_text": "A, B, C try to hit a target simultaneously but independently. Their respective probabilities of hitting the targets\nare 3 , 1 , 5 . The probability that the target is hit by A or B but not by C is :\n4 2 8",
+    "option_a": "21/64",
+    "option_b": "7/8",
+    "option_c": "7/32",
+    "option_d": "9/64",
+    "correct_option": "a",
+    "ans_num": 1
+  }
+]

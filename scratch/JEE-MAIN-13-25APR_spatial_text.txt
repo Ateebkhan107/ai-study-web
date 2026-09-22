@@ -1,0 +1,460 @@
+Q1. A block is placed on a rough horizontal plane. A time dependent horizontal force F = kt acts on the block,
+where k is a positive constant. The acceleration - time graph of the block is :
+(1) (2)
+(3) (4)
+Q2. The maximum range of a bullet fired from a toy pistol mounted on a car at rest is R0 = 40 m . What will be the
+acute angle of inclination of the pistol for maximum range when the car is moving in the direction of firing with
+uniform velocity v = 20 m/s on a horizontal surface? (g = 10 m/s2)
+(1) 30∘ (2) 60∘
+(3) 75∘ (4) 45∘
+Q3. A wind-powered generator converts wind energy into electrical energy. Assume that the generator converts a
+fixed fraction of the wind energy intercepted by its blades into electrical energy. For wind speed v , the electrical
+power output will be most likely proportional to
+(1) v4 (2) v2
+(3) v (4) v3
+Q4. A ring of mass M and radius R is rotating about its axis with angular velocity ω . Two identical bodies each of
+mass m are now gently attached at the two ends of a diameter of the ring. Because of this, the kinetic energy
+loss will be :
+(1) m(M+2m) ω2R2 (2) Mm ω2R2
+M (M+m)
+(3) Mm ω2R2 (4) (M+m)M ω2R2
+(M+2m) (M+2m)
+Q5. Two blocks of masses m and M are connected by means of a metal wire of cross-sectional area A passing over a
+frictionless fixed pulley as shown in the figure. The system is then released. If M = 2 m , then the stress
+produced in the wire is:
+(1) 2mg (2) 4mg
+3 A 3 A
+(3) mg (4) 3mg
+A 4 A
+Q6. In an experiment, a small steel ball falls through a liquid at a constant speed of 10 cm/s . If the steel ball is
+pulled upward with a force equal to twice its effective weight, how fast will it move upward ?
+(1) 5 cm/s (2) Zero
+(3) 10 cm/s (4) 20 cm/s
+Q7. A mass of 50 g of water in a closed vessel, with surroundings at a constant temperature takes 2 minutes to cool
+from 30∘C to 25∘C . A mass of 100 g of another liquid in an identical vessel with identical surroundings takes
+the same time to cool from 30∘C to 25∘C . The specific heat of the liquid is : (The water equivalent of the vessel
+is 30 g .)
+(1) 2.0kcal/kg (2) 7kcal/kg
+(3) 3kcal/kg (4) 0.5kcal/kg
+Q8. A sample of gas expands from V1 to V2 . In which of the following, the work done will be greatest?
+(1) Same in all processes (2) Isobaric process
+(3) Isothermal process (4) Adiabatic process
+Q9. In the isothermal expansion of 10 g of gas from volume V to 2 V the work done by the gas is 575 J . What is the
+root mean square speed of the molecules of the gas at that temperature?
+(1) 398 m/s (2) 520 m/s
+(3) 499 m/s (4) 532 m/s
+Q10.A uniform cylinder of length L and mass M having cross-sectional area A is suspended, with its length
+vertical, from a fixed point by a massless spring, such that it is half submerged in a liquid of density σ at
+equilibrium position. When the cylinder is given a downward push and released, it starts oscillating vertically
+with a small amplitude. The time period T of the oscillations of the cylinder will be :
+(1) 2π[ ] 1/2 (2) 2π√M
+Smaller than M
+(k+Aσg) k
+(3) 2π[ ] 1/2 (4) 2π[ ] 1/2
+Larger than M M
+(k+Aσg) (k+Aσg)
+Q11.In a transverse wave the distance between a crest and neighbouring trough at the same instant is 4.0 cm and the
+distance between a crest and trough at the same place is 1.0 cm . The next crest appears at the same place after
+a time interval of 0.4 s . The maximum speed of the vibrating particles in the medium is:
+(1) 3π cm/s (2) 5π cm/s
+2 2
+(3) π cm/s (4) 2 π cm/s
+2
+Q12.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: No work is required to be done to move a test charge
+between any two points on an equipotential surface. Statement 2 : Electric lines of force at the equipotential
+surfaces are mutually perpendicular to each other.
+(1) Statement 1 is true, Statement 2 is true, (2) Statement 1 is true, Statement 2 is true,
+Statement 2 is the correct explanation of Statement 2 is not the correct explanation of
+Statement 1. Statement 1.
+(3) Statement 1 is true, Statement 2 is false. (4) Statement 1 is false, Statement 2 is true.
+Q13.The surface charge density of a thin charged disc of radius R is σ . The value of the electric field at the centre
+of the disc is σ . With respect to the field at the centre, the electric field along the axis at a distance R from
+2∈0
+the centre of the disc:
+(1) reduces by 70.7% (2) reduces by 29.3%
+→E
+(3) reduces by 9.7% (4) reduces by 14.6%
+Q14.The gravitational field in a region is given by: = (5N/kg)^i + (12N/kg)^j If the potential at the origin is
+taken to be zero, then the ratio of the potential at the points (12 m, 0) and (0, 5 m) is :
+(1) Zero (2) 1
+(3) 144 (4) 25
+25 144
+Q15.A parallel plate capacitor having a separation between the plates d , plate area A and material with dielectric
+constant K has capacitance C0 . Now one-third of the material is replaced by another material with dielectric
+constant 2 K , so that effectively there are two capacitors one with area 1 A , dielectric constant 2 K and
+3
+another with area 2 A and dielectric constant K . If the capacitance of this new capacitor is C then C is
+3 C0
+(1) 1 (2) 4
+3
+(3) 2 (4) 1
+3 3
+Q16.Six equal resistances are connected between points P, Q and R as shown in figure. Then net resistance will be
+maximum between :
+(1) P and R (2) P and Q
+(3) Q and R (4) Any two points
+Q17.The earth's magnetic field lines resemble that of a dipole at the centre of the earth. If the magnetic moment of
+this dipole is close to 8 × 1022Am2 , the value of earth's magnetic field near the equator is close to (radius of
+the earth = 6.4 × 106 m)
+(1) 0.6 Gauss (2) 1.2 Gauss
+(3) 1.8 Gauss (4) 0.32 Gauss
+Q18.One of the two small circular coils, (none of them having any self - inductance) is suspended with a V-shaped
+copper wire, with plane horizontal. The other coil is placed just below the first one with plane horizontal. Both
+the coils are connected in series with a dc supply. The coils are found to attract each other with a force. Which
+one of the following statements is incorrect?
+(1) Both the coils carry currents in the same (2) Coils will attract each other, even if the supply is
+direction. an ac source.
+(3) Force is proportional to d−1 (4) Force is proportional to d−2
+Q19.A metal sample carrying a current along X− axis with density Jx is subjected to a magnetic field Bz (along z−
+axis). The electric field Ey developed along Y -axis is directly proportional to Jx as well as Bz . The constant of
+proportionality has SI unit.
+(1) m2 (2) m3
+A As
+(3) m2 (4) As
+As m3
+Q20.When resonance is produced in a series LCR circuit, then which of the following is not correct?
+(1) Current in the circuit is in phase with the applied (2) Inductive and capacitive reactances are equal.
+voltage.
+(3) If R is reduced, the voltage across capacitor will (4) Impedance of the circuit is maximum.
+increase.
+Q21.A series LR circuit is connected to an ac source of frequency ω and the inductive reactance is equal to 2R . A
+capacitance of capacitive reactance equal to R is added in series with L and R . The ratio of the new power
+factor to the old one is :
+(1) √2 (2) √2
+3 5
+(3) √3 (4) √5
+2 2
+Q22.A printed page is pressed by a glass of water. The refractive index of the glass and water is 1.5 and 1.33 ,
+respectively. If the thickness of the bottom of glass is 1 cm and depth of water is 5 cm , how much the page
+will appear to be shifted if viewed from the top ?
+(1) 1.033 cm (2) 3.581 cm
+(3) 1.3533 cm (4) 1.90 cm
+Q23.A thin glass plate of thickness is 2500 λ ( λ is wavelength of light used) and refractive index μ = 1.5 is inserted
+3
+between one of the slits and the screen in Young's double slit experiment. At a point on the screen equidistant
+from the slits, the ratio of the intensities before and after the introduction of the glass plate is :
+(1) 2 : 1 (2) 1 : 4
+(3) 4 : 1 (4) 4 : 3
+Q24.The source that illuminates the double − slit in 'double - slit interference experiment' emits two distinct
+monochromatic waves of wavelength 500 nm and 600 nm , each of them producing its own pattern on the
+screen. At the central point of the pattern when path difference is zero, maxima of both the patterns coincide
+and the resulting interference pattern is most distinct at the region of zero path difference. But as one moves
+out of this central region, the two fringe systems are gradually out of step such that maximum due to on
+wavelength coincides with the minimum due to the other and the combined fringe system becomes completely
+indistinct. This may happen when path difference in nm is:
+(1) 2000 (2) 3000
+(3) 1000 (4) 1500
+Q25.This question has Statement-1 and Statements2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1 : Out of radio waves and microwaves, the radio waves
+undergo more diffraction. Statement-2 : Radio waves have greater frequency compared to microwaves.
+(1) Statement-1 is true, Statement-2 is true and (2) Statement-1 is false, Statement-2 is true.
+Statement-2 is the correct explanation of
+Statement-1
+(3) Statement-1 is true, Statement-2 is false. (4) Statement-1 is true, Statement-2 is true but
+Statement-2 is not the correct explanation of
+Statement-1
+Q26.In an experiment on photoelectric effect, a student plots stopping potential V0 against reciprocal of the
+wavelength λ of the incident light for two different metals A and B . These are shown in the figure.
+Looking at the graphs, you can most appropriately say that:
+(1) Work function of metal B is greater than that of (2) For light of certain wavelength falling on both
+metal A metal, maximum kinetic energy of electrons
+emitted from A will be greater than those emitted
+from B .
+(3) Work function of metal A is greater than that of (4) Students data is not correct
+metal B
+Q27.A copper ball of radius 1 cm and work function 4.47 eV is irradiated with ultraviolet radiation of wavelength
+2500 Å . The effect of irradiation results in the emission of electrons from the ball. Further the ball will acquire
+charge and due to this there will be a finite value of the potential on the ball. The charge acquired by the ball is
+:
+(1) 5.5 × 10−13 C (2) 7.5 × 10−13 C
+(3) 4.5 × 10−12 C (4) 2.5 × 10−11 C
+Q28.A 12.5eV electron beam is used to bombard gaseous hydrogen at room temperature. It will emit:
+(1) 2 lines in the Lyman series and 1 line in the (2) 3 lines in the Lyman series
+Balmar series
+(3) 1 line in the Lyman series and 2 lines in the (4) 3 lines in the Balmer series
+Balmar series
+Q29.
+Which of the following circuits correctly represents the following truth table ?
+(1) (2)
+(3) (4)
+Q30.Which of the following modulated signal has the best noise-tolerance ?
+(1) Long-wave (2) Short-wave
+(3) Medium-wave (4) Amplitude-modulated
+Q31. 6 litres of an alkene require 27 litres of oxygen at constant temperature and pressure for complete combustion.
+The alkene is :
+(1) Ethene (2) Propene
+(3) 1− Butene (4) 2− Butene
+Q32.How many grams of methyl alcohol should be added to 10 litre tank of water to prevent its freezing at 268 K ?
+( Kf for water is 1.86 K kg mol−1)
+(1) 880.07 g (2) 899.04 g
+(3) 886.02 g (4) 868.06 g
+Q33. 10 mL of 2(M) NaOH solution is added to 200 mL of 0.5 (M) of NaOH solution. What is the final
+concentration ?
+(1) 0.57(M) (2) 5.7(M)
+(3) 11.4(M) (4) 1.14(M)
+Q34.Given (A) n = 5, mℓ= +1 (B) n = 2, ℓ= 1, mℓ= −1, ms = −l/2 The maximum number of electron(s) in
+an atom that can have the quantum numbers as given in (A) and (B) are respectively:
+(1) 25 and 1 (2) 8 and 1
+(3) 2 and 4 (4) 4 and 1
+Q35.The catenation tendency of C, Si and Ge is in the order Ge < Si < C . The bond energies (in kJ mol−1 ) of
+C −C, Si −Si and Ge −Ge bonds are respectively ;
+(1) 348, 297, 260 (2) 297, 348, 260
+(3) 348, 260, 297 (4) 260, 297, 348
+Q36.Which one of the following cannot function as an oxidising agent?
+(1) I− (2) S(s)
+(3) NO− (aq) (4) Cr2O2−
+3 7
+Q37.In which of the following sets, all the given species are isostructural ?
+(1) CO2, NO2, ClO2, SiO2 (2) PCl3, AlCl3, BCl3, SbCl3
+(3) BF3, NF3, PF3, AlF3 (4) BF− , CCl4, NH+ , PCl+
+4 4 4
+Q38.The internuclear distances in O −O bonds for O+ , O2, O− and O2− respectively are :
+2 2 2
+(1) 1.30 Å, 1.49 Å, 1.12 Å, 1.21 Å (2) 1.49 Å, 1.21 Å, 1.12 Å, 1.30 Å
+(3) 1.21 Å, 1.12 Å, 1.49 Å, 1.30 Å (4) 1.12 Å, 1.21 Å, 1.30 Å, 1.49 Å
+Q39.The structure of which of the following chloro species can be explained on the basis of dsp2 hybridization?
+(1) PdCl2− (2) FeCl2−
+4 4
+(3) CoCl2− (4) NiCl2−
+4 4
+Q40.Which one of the following is the wrong assumption of kinetic theory of gases ?
+(1) Momentum and energy always remain conserved.(2) Pressure is the result of elastic collision of
+molecules with the container's wall.
+(3) Molecules are separated by great distances (4) All the molecules move in straight line between
+compared to their sizes. collision and with same velocity.
+Q41.In which of the following exothermic reactions, the heat liberated per mole is the highest ?
+(1) CaO + H2O →Ca(OH)2 (2) SrO + H2O →Sr(OH)2
+(3) BaO + H2O →Ba(OH)2 (4) MgO + H2O →Mg(OH)2
+Q42.Given that: (i) ΔfH∘ of N2O is 82 kJ mol−1 (ii) Bond energies of N ≡N, N = N, O = O and N = O are
+946, 418, 498 and 607 kJ mol−1 respectively, The resonance energy of N2O is :
+(1) −88 kJ (2) −66 kJ
+(3) −62 kJ (4) −44 kJ
+Q43.The ratio Kp for the reaction CO(g) + 1 O2(g) ⇌CO2(g) is:
+Kc 2
+(1) 1 (2) (RT)1/2
+√RT
+(3) RT (4) 1
+Q44.What would be the pH of a solution obtained by mixing 5 g of acetic acid and 7.5 g of sodium acetate and
+making the volume equal to 500 mL ? (Ka = 1.75 × 10−5, pKa = 4.76)
+(1) pH = 4.70 (2) pH < 4.70
+(3) pH of solution will be equal to pH of acetic acid (4) 4.76 < pH < 5.0
+Q45.Which one of the following arrangements represents the correct order of the proton affinity of the given
+species :
+(1) I−< F−< HS−< NH− (2) HS−< NH− < F−< I−
+2 2
+(3) F−< I−< NH− < HS− (4) NH− < HS−< I−< F−
+2 2
+Q46.
+Given
+In the above compounds correct order of reactivity in electrophilic substitution reactions will be:
+(1) B > A > C > D (2) D > C > B > A
+(3) A > B > C > D (4) B > C > A > D
+Q47.Copper crystallises in fcc with a unit length of 361 pm . What is the radius of copper atom ?
+(1) 157 pm (2) 128 pm
+(3) 108 pm (4) 181 pm
+Q48.The Gibbs energy for the decomposition of Al2O3 at 500 C is as follows :
+2 Al2O3 →4 Al + O2, ΔrG = +940 kJ mol−1 The potential difference needed for the electrolytic reduction
+3 3
+of aluminium oxide at 500∘C should be at least :
+(1) 4.5 V (2) 3.0 V
+(3) 5.0 V (4) 2.5 V
+Q49.A solution of copper sulphate (CuSO4) is electrolysed for 10 minutes with a current of 1.5 amperes. The mass
+of copper deposited at the cathode (at. mass of Cu = 63u ) is :
+(1) 0.3892 g (2) 0.2938 g
+(3) 0.2398 g (4) 0.3928 g
+Q50.A radioactive isotope having a half - life period of 3 days was received after 12 days. If 3 g of the isotope is
+left in the container, what would be the initial mass of the isotope ?
+(1) 12 g (2) 36 g
+(3) 48 g (4) 24 g
+Q51.In which of the following octahedral complex species the magnitude of Δ0 will be maximum?
+(1) [Co(H2O)6]2+ (2) [Co(CN)6]3−
+(3) [Co(C2O4)3]3− (4) [Co(NH3)6]3+
+Q52.In nucleophilic substitution reaction, order of halogens as incoming (attacking) nucleophile is:
+I−> Br−> Cl− The order of halogens as departing nucleophile should be :
+(1) Br−> I−> Cl− (2) I−> Br−> Cl−
+(3) Cl−> Br−> I− (4) Cl−> I−> Br−
+Q53.
+The major product in the following reaction
+(1) (2)
+(3) (4)
+Q54.Cannizaro's reaction is not given by :
+(1) (2)
+(3) CH3CHO (4) HCHO
+Q55.Phenol on heating with CHCl3 and NaOH gives salicylaldehyde. The reaction is called:
+(1) Reimer - Tiemann reaction (2) Claisen reaction
+(3) Cannizzaro's reaction (4) Hell - Volhard - Zelinsky reaction
+Q56.Which of the following reagent(s) used for the conversion?
+(1) glycol/ LiAlH4/H3O+ (2) glycol/ NaH/H3O+
+(3) LiAlH4 (4) NaBH4
+Q57.Carbylamine forms from aliphatic or aromatic primary amine via which of the following intermediates?
+(1) Carbanion (2) Carbene
+(3) Carbocation (4) Carbon radical
+Q58.Which of the following statement is not correct?
+(1) Amylopectin is a branched polymer of α - (2) Cellulose is a linear polymer of β -glucose.
+glucose.
+(3) Glycogen is the food reserve of plants. (4) All proteins are polymers of α - amino acids.
+Q59.Bakelite is obtained from phenol by reacting with:
+(1) Acetal (2) CH3CHO
+(3) HCHO (4) Chlorobenzene
+Q60.Among the following vitamins the one whose deficiency causes rickets (bone deficiency) is :
+(1) Vitamin A (2) Vitamin B
+(3) Vitamin D (4) Vitamin C
+Q61.If p and q are non-zero real numbers and α3 + β3 = −p, αβ = q , then a quadratic equation whose roots are
+α2 , β2 is :
+β α
+(1) px2 −qx + p2 = 0 (2) qx2 + px + q2 = 0
+(3) px2 + qx + p2 = 0 (4) qx2 −px + q2 = 0
+Q62.Let z satisfy |z| = 1 and z = 1 −¯z . Statement 1 : z is a real number. Statement 2 : Principal argument of z is π
+3
+(1) Statement 1 is true Statement 2 is true; Statement (2) Statement 1 is false; Statement 2 is true
+2 is a correct explanation for Statement 1 .
+(3) Statement 1 is true, Statement 2 is false. (4) Statement 1 is true; Statement 2 is true;
+Statement 2 is not a correct explanation for
+Statement 1 .
+Q63.5 - digit numbers are to be formed using 2, 3, 5, 7 , 9 without repeating the digits. If p be the number of such
+numbers that exceed 20000 and q be the number of those that lie between 30000 and 90000 , then p : q is:
+(1) 6 : 5 (2) 3 : 2
+(3) 4 : 3 (4) 5 : 3
+Q64.Given a sequence of 4 numbers, first three of which are in G.P. and the last three are in A.P. with common
+difference six. If first and last terms of this sequence are equal, then the last term is :
+(1) 16 (2) 8
+(3) 4 (4) 2
+Q65.
+(1) 2925 (2) 1469
+(3) 1728 (4) 1456
+Q66.If for positive integers r > 1, n > 2 , the coefficients of the (3r)th and (r + 2)th powers of x in the expansion
+of (1 + x)2n are equal, then n is equal to:
+(1) 2r + 1 (2) 2r −1
+(3) 3r (4) r + 1
+Q67.Let A = {θ : sin(θ) = tan(θ)} and B = (θ : cos(θ) = 1\} be two sets. Then:
+(1) A = B (2) A ⊄ B
+(3) B ⊄ A (4) A ⊂B and B −A ≠ϕ
+Q68.If the image of point P(2, 3) in a line L is Q(4, 5) , then the image of point R(0, 0) in the same line is:
+(1) (2, 2) (2) (4, 5)
+(3) (3, 4) (4) (7, 7)
+Q69.Let x ∈(0, 1) . The set of all x such that sin−1 x > cos−1 x , is the interval:
+(1) ( 1 , 1 ) (2) ( 1 , 1)
+2 √2 √2
+(3) (0, 1) (4) (0, √3 )
+2
+Q70.Statement 1: The only circle having radius √10 and a diameter along line 2x + y = 5 is x2 + y2 −6x
++2y = 0 . Statement 2 : 2x + y = 5 is a normal to the circle x2 + y2 −6x + 2y = 0 .
+(1) Statement 1 is false; Statement 2 is true. (2) Statement 1 is true; Statement 2 is true,
+Statement 2 is a correct explanation for
+Statement 1.
+(3) Statement 1 is true; Statement 2 is false. (4) Statement 1 is true; Statement 2 is true;
+Statement 2 is not a correct explanation for
+Statement 1.
+Q71.If a circle of unit radius is divided into two parts by an arc of another circle subtending an angle 60∘ on the
+circumference of the first circle, then the radius of the arc is:
+(1) √3 (2) 1
+2
+(3) 1 (4) None of these
+Q72.A point on the ellipse, 4x2 + 9y2 = 36 , where the normal is parallel to the line, 4x −2y −5 = 0 , is :
+(1) ( 9 , 8 ) (2) ( 8 , −9 )
+5 5 5 5
+(3) (−9 , 8 ) (4) ( 8 , 9 )
+5 5 5 5
+Q73.Consider the system of equations : x + ay = 0, y + az = 0 and z + ax = 0 . Then the set of all real values of '
+a ' for which the system has a unique solution is:
+(1) R −{1} (2) R −{−1}
+(3) {1, −1} (4) {1, 0, −1}
+Q74.Let p and q be any two logical statements and r : p →(∼p ∨q) . If r has a truth value F , then the truth values
+of p and q are respectively:
+(1) F, F (2) T, T
+(3) T, F (4) F, T
+Q75.In a set of 2n observations, half of them are equal to ' a ' and the remaining hall are equal to ' −a′ '. If the
+standard deviation of all the observations is 2 ; then the value of |a| is :
+(1) 2 (2) √2
+(3) 4 (4) 2√2
+Q76.A common tangent to the conics x2 = 6y and 2x2 −4y2 = 9 is:
+(1) x −y = 3 (2) x + y = 1
+2
+(3) x + y = 9 (4) x −y = 1
+2
+Q77.Let {( a11 a12 ) a22}
+S = : aij ∈{0, 1, 2}, a11 = Then the number of non-singular matrices in the set S is :
+a21 a22
+(1) 27 (2) 24
+(3) 10 (4) 20
+Q78.Consider the function : f(x) = [x] + |1 −x|, −1 ≤x ≤3 where [x] is the greatest integer function. Statement
+−x, −1 ≤x < 0
+1 −x, 0 ≤x < 1
+1: f is not continuous at x = 0, 1, 2 and 3 Statement 2:f(x)= =
+1 + x, 1 ≤x < 2
+2 + x, 2 ≤x ≤3
+(1) Statement 1 is true; Statement 2 is false, (2) Statement 1 is true; Statement 2 is true;
+Statement 2 is not correct explanation for
+Statement 1.
+(3) Statement 1 is true; Statement 2 is true; (4) Statement 1 is false; Statement 2 is true.
+Statement It is a correct explanation for
+Statement 1.
+Q79.A spherical balloon is being inflated at the rate of 35cc/min . The rate of increase in the surface area (in
+cm2/min .) of the balloon when its diameter is 14 cm , is :
+(1) 10 (2) √10
+(3) 100 (4) 10√10
+Q80.Let f(1) = −2 and f ′(x) ≥4.2 for 1 ≤x ≤6 . The possible value of f(6) lies in the interval :
+(1) [15, 19) (2) (−∞, 12)
+(3) [12, 15) (4) [19, ∞)
+Q81.If an equation of a tangent to the curve, y −cos(x + f), −1 −1 ≤x ≤1 + π , is x + 2y = k then k is equal to
+:
+(1) 1 (2) 2
+(3) π (4) π
+4 2
+Q82.If the integral
+∫ cos 8x + 1
+dx = A cos 8x + k
+cot 2x −tan 2x
+where k is an arbitrary constant, then A is equal to:
+(1) −1 (2) 1
+16 16
+(3) 1 (4) −1
+8 8
+Q83.For 0 ≤x ≤π , the value of
+2
+∫ sin2 x ∫ cos2 x
+sin−1(√t)dt + cos−1(√t)dt equals :
+0 0
+(1) π (2) 0
+4
+(3) 1 (4) −π
+4
+Q84.Let f : [−2, 3] →[0, ∞) be a continuous function such that f(1 −x) = f(x) for all x ∈[−2, 3] . If R1 is the
+numerical value of the area of the region bounded by y = f(x), x = −2, x = 3 and the axis of x and
+R2 = ∫3 xf(x)dx , then :
+−2
+(1) 3R1 = 2R2 (2) 2R1 = 3R2
+(3) R1 = R2 (4) R1 = 2R2
+Q85.The equation of the curve passing through the origin and satisfying the differential equation
+(1 + x2) dy + 2xy = 4x2 is
+dx
+(1) (1 + x2)y = x3 (2) 3 (1 + x2)y = 2x3
+→a −2^k,→b →c →a ∙→c |→c|, |→c −→a|
+(3) (1 + x2)y = 3x3 (4) 3 (1 + x2)y = 4x3
+→a →b →c |(→a →b) →c|
+Q86.Let = 2^i + ^j = ^i + ^j . If is a vector such that = = 2√2 and the angle between
+× and is 30∘ , then × × equals:
+(1) 1 (2) 3√3
+2 2
+(3) 3 (4) 3
+2
+Q87.Let A(−3, 2) and B(−2, 1) be the vertices of a triangle ABC . If the centroid of this triangle lies on the line
+3x + 4y + 2 = 0 , then the vertex C lies on the line :
+(1) 4x + 3y + 5 = 0 (2) 3x + 4y + 3 = 0
+(3) 4x + 3y + 3 = 0 (4) 3x + 4y + 5 = 0
+Q88.Let ABC be a triangle with vertices at points A (2, 3, 5) , B (−1, 3, 2) and C(λ, 5, μ) in three dimensional
+space. If the median through A is equally inclined with the axes, then (λ, μ) is equal to:
+(1) (10, 7) (2) (7, 5)
+(3) (7, 10) (4) (5, 7)
+Q89.The equation of a plane through the line of intersection of the planes x + 2y = 3, y −2z + 1 = 0 , and
+perpendicular to the first plane is :
+(1) 2x −y −10z = 9 (2) 2x −y + 7z = 11
+(3) 2x −y + 10z = 11 (4) 2x −y −9z = 10
+Q90.If the events A and B are mutually exclusive events such that P(A) = 3x+1 and P(B) = 1−x , then the set of
+3 4
+possible values of x lies in the interval :
+(1) [0, 1] (2) [ 1 , 2 ]
+3 3
+(3) [−1 , 5 ] (4) [−7 , 4 ]
+3 9 9 9

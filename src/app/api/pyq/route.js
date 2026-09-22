@@ -55,7 +55,7 @@ const REVEAL_FIELDS = [
 
 const ATTEMPT_LOOKUP_CHUNK_SIZE = 100;
 const FULL_PAPER_CONFIG = {
-  JEE: { total: 75, subjects: ["Maths", "Physics", "Chemistry"] },
+  JEE: { total: 75, subjects: ["Physics", "Chemistry", "Maths", "Mathematics"] },
   NEET: { total: 180, subjects: ["Physics", "Chemistry", "Biology"] },
 };
 
@@ -163,18 +163,22 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
     const totalQuestions = pool.length;
 
     if (isJee) {
+      const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
+      const nums = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
+
+      if (nums.length === 0) {
+        // Legacy paper with all MCQs (e.g., 30 MCQs per subject in JEE 2013)
+        return mcqs.slice(0, totalQuestions >= 30 ? 30 : 25).sort(sortByDisplayOrder);
+      }
+
       if (totalQuestions >= 25) {
-        // If paper has 30 or more questions, it's a 90-question paper (20 MCQ, 10 Numeric)
+        // If paper has 30 or more questions with numericals, it's a 90-question paper (20 MCQ, 10 Numeric)
         // Otherwise, it's a 75-question paper (20 MCQ, 5 Numeric)
         const numTarget = totalQuestions >= 30 ? 10 : 5;
         const mcqTarget = 20;
 
-        const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
-        const nums = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
-
         return [...mcqs.slice(0, mcqTarget), ...nums.slice(0, numTarget)].sort(sortByDisplayOrder);
       } else {
-        const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
         return mcqs.slice(0, targetCounts[normalizeSubjectName(subjectName)]).sort(sortByDisplayOrder);
       }
     }

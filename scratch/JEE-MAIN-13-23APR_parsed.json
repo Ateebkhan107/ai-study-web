@@ -1,0 +1,632 @@
+[
+  {
+    "qnum": 1,
+    "subject": "Physics",
+    "raw_block": "If the time period  of the oscillation of a drop of liquid of density , radius , vibrating under surface tension \n\nt\nd\nr\ns\n\nt = \u221ar2bscda/2\n\u221ad\n\nis given by the formula \n. It is observed that the time period is directly proportional to \n. The\n\ns\nb\n\nvalue of  should therefore be :\n\n3\n4\n\u221a3\n\n(1)\n(2)\n\n3\n2\n2\n3\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 2,
+    "subject": "Physics",
+    "raw_block": "A \n man leaps vertically into the air from a crouching position. To take the leap the man pushes the ground\n\n70\u00a0kg\nF\n0.5\u00a0m\n1\u00a0m\ng = 10\u00a0ms\u22122\n\nwith a constant force  to raise himself. The center of gravity rises by \n before he leaps. After the leap the\n\nc.g. rises by another \n. The maximum power delivered by the muscles is : (Take \n )\n\n6.26 \u00d7 103\n6.26 \u00d7 103\n\n(1)\n Watts at the start\n(2)\n Watts at take off\n\n6.26 \u00d7 104\n6.26 \u00d7 104\n\n(3)\n Watts at the start\n(4)\n Watts at take off",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 3,
+    "subject": "Physics",
+    "raw_block": "A boy of mass \n is standing on a \n free to move long cart. There is negligible friction between cart and\n\n20\u00a0kg\n80\u00a0kg\n25\u00a0m\n10\u00a0m\n\nground. Initially, the boy is standing \n from a wall. If he walks \n on the cart towards the wall, then the\n\nfinal distance of the boy from the wall will be\n\n(1)\n(2)\n\n15\u00a0m\n12.5\u00a0m\n15.5\u00a0m\n17\u00a0m\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 4,
+    "subject": "Physics",
+    "raw_block": "A projectile of mass \n is fired so that the horizontal range is \n. At the highest point the projectile explodes\n\nM\n4\u00a0km\nM/4\n3M/4\n\nin two parts of masses \n and \n respectively and the heavier part starts falling down vertically with zero\n\ninitial speed. The horizontal range (distance from point of firing) of the lighter part is :\n\n(1)\n(2)\n\n16\u00a0km\n1\u00a0km\n10\u00a0km\n2\u00a0km\n\n2\u00a0kg\nt\n\u2192r(t) = 5^i \u22122t2^j\nt = 2s\nkgm\u22122\u00a0s\u22121\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 5,
+    "subject": "Physics",
+    "raw_block": "A particle of mass \n is moving such that at time , its position, in meter, is given by \n. The\n\nangular momentum of the particle at \n about the origin in \n is :\n\n\u221280^k\n(10^i \u221216^j)\n\n(1)\n(2)\n\n\u221240^k\n40^k\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 6,
+    "subject": "Physics",
+    "raw_block": "A body of mass ' \n ' is tied to one end of a spring and whirled round in a horizontal plane with a constant\n\nm\n\nangular velocity. The elongation in the spring is \n. If the angular velocity is doubled, the elongation in the\n\n1\u00a0cm\n5\u00a0cm\n15\u00a0cm\n12\u00a0cm\n16\u00a0cm\n10\u00a0cm\n\nspring is \n. The original length of the spring is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 7,
+    "subject": "Physics",
+    "raw_block": "A copper wire of length \n and a steel wire of length \n having equal cross-sectional areas are joined end\n\n1.0\u00a0m\n0.5\u00a0m\n1\u00a0mm\n1.0 \u00d7 1011 Nm\u22122\n2.0 \u00d7 1011Nm\u22122\n\nto end. The composite wire is stretched by a certain load which stretches the copper wire by \n. If the\n\nYoung's modulii of copper and steel are respectively \n \n and \n, the total extension\n\nof the composite wire is :\n\n(1)\n(2)\n\n1.75\u00a0mm\n2.0\u00a0mm\n1.50\u00a0mm\n1.25\u00a0mm\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 8,
+    "subject": "Physics",
+    "raw_block": "Wax is coated on the inner wall of a capillary tube and the tube is then dipped in water. Then, compared to the\n\nunwaxed capillary, the angle of contact  and the height  upto which water rises change. These changes are :\n\n\u03b8\nh\n\n\u00a0\n\n(1) increases and  also increases\n(2) decreases and  also decreases\n\n\u03b8\nh\n\u03b8\nh\n\u03b8\nh\n\u03b8\nh\n\n(3) increases and  decreases\n(4) decreases and  increases",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 9,
+    "subject": "Physics",
+    "raw_block": "A thin tube sealed at both ends is \n long. It lies horizontally, the middle \n containing mercury and\n\n100\u00a0cm\n20\u00a0cm\n\ntwo equal ends containing air at standard atmospheric pressure. If the tube is now turned to a vertical position,\n\nby what amount will the mercury be displaced ? \n\n(Given : cross-section of the tube can be assumed to be uniform)\n\n(1)\n(2)\n\n2.95\u00a0cm\n5.18\u00a0cm\n8.65\u00a0cm\n0.0\u00a0cm\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 10,
+    "subject": "Physics",
+    "raw_block": "The ratio of the coefficient of volume expansion of a glass container to that of a viscous liquid kept inside the\n\ncontainer is \n. What fraction of the inner volume of the container should the liquid occupy so that the\n\n1 : 4\n\nvolume of the remaining vacant space will be same at all temperatures ?\n\n(1)\n(2)\n\n2 : 5\n1 : 4\n1 : 64\n1 : 8\n\n(3)\n(4)\n\n500\u00a0g\n100\u00a0g\n0\u2218C\n40\u00a0g.10\u00a0g\n100\u2218C\n= 80cal/g\n= 540cal/g",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 11,
+    "subject": "Physics",
+    "raw_block": "of water and \n of ice at \n are in a calorimeter whose water equivalent is \n of steam at\n\n is added to it. Then water in the calorimeter is : (Latent heat of ice \n, Latent heat of steam\n\n )\n\n(1)\n(2)\n\n580\u00a0g\n590\u00a0g\n600\u00a0g\n610\u00a0g\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 12,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement 1: The internal energy of a perfect gas is entirely kinetic and\n\ndepends only on absolute temperature of the gas and not on its pressure or volume. Statement 2: A perfect gas\n\nis heated keeping pressure constant and later at constant volume. For the same amount of heat the temperature\n\nof the gas at constant pressure is lower than that at constant volume.\n\n(1) Statement-1 is true, Statement- 2 is true and\n\n(2) Statement-1 is true, Statement-2 is false.\n\nStatement \n is the correct explanation of\n\n\u22122\n\nStatement-1.\n\n(3) Statement-1 is true, Statement-2 is true but\n\n(4) Statement-1 is false, Statement-2 is true.\n\nStatement-2 is not the correct explanation of\n\nStatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 13,
+    "subject": "Physics",
+    "raw_block": "Bob of a simple pendulum of length  is made of iron. The pendulum is oscillating over a horizontal coil\n\nl\n\ncarrying direct current. If the time period of the pendulum is  then :\n\nT\n\n\u00a0\n\nT < 2\u03c0\u221al\n\n(1)\n and damping is smaller than in air alone.\n\ng\n\nT = 2\u03c0\u221al\n\n(2)\n and damping is larger than in air alone.\n\ng\n\nT > 2\u03c0\u221al\n\n(3)\n and damping is smaller than in air alone.\n\ng\n\nT < 2\u03c0\u221al\n\n(4)\n and damping is larger than in air alone.\n\ng",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 14,
+    "subject": "Physics",
+    "raw_block": "A sonometer wire of length \n is fixed at both the ends. Where should the two bridges be placed so as to\n\n114\u00a0cm\n1 : 3 : 4\n36\u00a0cm\n84\u00a0cm\n24\u00a0cm\n72\u00a0cm\n48\u00a0cm\n96\u00a0cm\n72\u00a0cm\n96\u00a0cm\n\ndivide the wire into three segments whose fundamental frequencies are in the ratio \n ?\n\n(1) At \n and \n from one end\n(2) At \n and \n from one end\n\n(3) At \n and \n from one end\n(4) At \n and \n from one end",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 15,
+    "subject": "Physics",
+    "raw_block": "Consider a finite insulated, uncharged conductor placed near a finite positively charged conductor. The\n\nuncharged body must have a potential :\n\n(1) less than the charged conductor and more than at infinity.\n\n(2) more than the charged conductor and less than at infinity.\n\n(3) more than the charged conductor and more than at infinity.\n\n(4) less than the charged conductor and less than at infinity.\n\n25.5 kVm\u22121",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 16,
+    "subject": "Physics",
+    "raw_block": "A liquid drop having 6 excess electrons is kept stationary under a uniform electric field of \n \n. The\n\n1.26 \u00d7 103\u00a0kg\u00a0m\u22123\n\ndensity of liquid is \n. The radius of the drop is (neglect buoyancy).\n\n4.3 \u00d7 10\u22127\u00a0m\n7.8 \u00d7 10\u22127\u00a0m\n0.078 \u00d7 10\u22127\u00a0m\n3.4 \u00d7 10\u22127\u00a0m\n\n(1)\n(2)\n\n(3)\n(4)\n\n60\u00a0cm2\n3\u00a0mm\n90\u03bcC\n2.5 \u00d7 10\u22128C/s",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 17,
+    "subject": "Physics",
+    "raw_block": "A parallel plate capacitor of area \n and separation \n is charged initially to \n. If the medium\n\nbetween the plate gets slightly conducting and the plate loses the charge initially at the rate of \n,\n\nthen what is the magnetic field between the plates ?\n\n2.5 \u00d7 10\u22128\u00a0T\n2.0 \u00d7 10\u22127\u00a0T\n1.63 \u00d7 10\u221211\u00a0T\n\n(1)\n(2)\n\n(3)\n(4) Zero",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 18,
+    "subject": "Physics",
+    "raw_block": "Which of the four resistances \n and  generate the greatest amount of heat when a current flows from A\n\nP, Q, R\nS\n\nto B ? \n\n(1)\n(2)\n\nQ\nS\nP\nR\n\nm\n\u2192B\ni > mg/Ba\na\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 19,
+    "subject": "Physics",
+    "raw_block": "A rectangular loop of wire, supporting a mass \n, hangs with one end in a uniform magnetic field  pointing\n\nout of the plane of the paper. A clockwise current is set up such that \n, where  is the width of the\n\n\u00a0\n\nloop. Then : \n\n(1) The weight rises due to a vertical force caused by\n\n(2) The weight do not rise due to vertical for caused\n\nthe magnetic field and work is done on the\n\nby the magnetic field and work is done on the\n\nsystem.\n\nsystem.\n\n(3) The weight rises due to a vertical force caused by\n\n(4) The weight rises due to a vertical force caused by\n\nthe magnetic field but no work is done on the\n\nthe magnetic field and work is extracted from the\n\nsystem.\n\nmagnetic field.\n\n16 \u00d7 10\u221216C\n10\u00a0ms\u22121\nx\n\u2192B\ny\n104Vm\u22121\nz",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 20,
+    "subject": "Physics",
+    "raw_block": "A particle of charge \n moving with velocity \n along -axis enters a region where magnetic\n\nx\n\u2192B\n16 \u00d7 103\u00a0Wb\u00a0m\u22122\n2 \u00d7 103\u00a0Wb\u00a0m\u22122\n\nfield of induction  is along the -axis and an electric field of magnitude \n is along the negative -\n\naxis. If the charged particle continues moving along -axis, the magnitude of  is :\n\n(1)\n(2)\n\n1 \u00d7 103\u00a0Wb\u00a0m\u22122\n4 \u00d7 103\u00a0Wb\u00a0m\u22122\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 21,
+    "subject": "Physics",
+    "raw_block": "The plot given below is of the average power delivered to an LRC circuit versus frequency. The quality factor\n\nof the circuit is : \n\n(1)\n(2)\n\n5.0\n2.0\n2.5\n0.4\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 22,
+    "subject": "Physics",
+    "raw_block": "Select the correct statement from the following :\n\n(1) Electromagnetic waves cannot travel in vacuum. (2) Electromagnetic waves are longitudinal waves.\n\n(3) Electromagnetic waves are produced by charges\n\n(4) Electromagnetic waves carry both energy and\n\nmoving with uniform velocity.\n\nmomentum as they propagate through space.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 23,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement 1: Very large size telescopes are reflecting telescopes instead\n\nof refracting telescopes. Statement 2: It is easier to provide mechanical support to large size mirrors than large\n\nsize lenses.\n\n\u00a0\n\n(1) Statement-1 is true and Statement-2 is false.\n(2) Statement-1 is false and Statement-2 is true.\n\n(3) Statement-1 and statement-2 are true and\n\n(4) Statements-1 and statement-2 are true and\n\nStatement-2 is correct explanation for statement-\n\nStatement-2 is not the correct explanation for\n\n1.\n\nstatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 24,
+    "subject": "Physics",
+    "raw_block": "A light ray falls on a square glass slab as shown in the diagram. The index of refraction of the glass, if total\n\ninternal reflection is to occur at the vertical face, is equal to : \n\n(\u221a2+1)\n\n2\n\u221a5\n\n(1)\n(2)\n\n2\n3\n2\n\u221a3\n\n(3)\n(4)\n\n2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 25,
+    "subject": "Physics",
+    "raw_block": "identical waves each of intensity \n interfere with each other. The ratio of maximum intensities if the\n\nn\nI0\n\ninterference is (i) coherent and (ii) incoherent is :\n\nn2\n1\nn\n1\nn2\nn\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 26,
+    "subject": "Physics",
+    "raw_block": "Electrons are accelerated through a potential difference  and protons are accelerated through a potential\n\nV\n4\u00a0V\n\u03bbe\n\u03bbp\n\u03bbe\n\u03bbp\nme\nmp\n\ndifference \n. The de-Broglie wavelengths are \n and \n for electrons and protons respectively. The ratio of\n\n is given by: (given \n is mass of electron and \n is mass of proton).\n\n\u03bbe\n\u03bbp = \u221ame\n\n\u03bbe\n\u03bbp = \u221amp\n\n(1)\n(2)\n\nmp\n\nme\n\n2 \u221ame\nmp\n\n\u03bbe\n\u03bbp = 2\u221amp\n\n(3)\n(4)\n\n\u03bbe\n\u03bbp = 1\n\nme",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 27,
+    "subject": "Physics",
+    "raw_block": "In the Bohr's model of hydrogen-like atom the force between the nucleus and the electron is modified as\n\nF =\ne2\n4\u03c0\u03b50 ( 1\nr2 + \u03b2\n\nr3 )\n\u03b2\nnth\u00a0\n\n, where  is a constant. For this atom, the radius of the \n orbit in terms of the Bohr\n\n(a0 =\n\u03b50h2\n\nm\u03c0e2 )\n\nradius \n is :\n\nrn = a0n \u2212\u03b2\nrn = a0n2 + \u03b2\nrn = a0n2 \u2212\u03b2\nrn = a0n + \u03b2\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 28,
+    "subject": "Physics",
+    "raw_block": "A system of four gates is set up as shown. The 'truth table' corresponding to this system is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 29,
+    "subject": "Physics",
+    "raw_block": "Which of the following statement is NOT correct?\n\n(1) Ground wave signals are more stable than the sky\n\n(2) The critical frequency of an ionospheric layer is\n\nwave signals.\n\nthe highest frequency that will be reflected back\n\nby the layer when it is vertically incident.\n\n(3) Electromagnetic waves of frequencies higher\n\n(4) Sky wave signals in the broadcast frequency\n\nthan about \n cannot penetrate the\n\nrange are stronger at night than in the day time.\n\n30MHz\n\nionosphere.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 30,
+    "subject": "Physics",
+    "raw_block": "Correct set up to verify Ohm's law is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 31,
+    "subject": "Chemistry",
+    "raw_block": "Number of atoms in the following samples of substances is largest in:\n\n(1)\n of hydrogen\n(2)\n of chlorine\n\n4.0\u00a0g\n71.0\u00a0g\n127.0\u00a0g\n48.0\u00a0g\n\n(3)\n of iodine\n(4)\n of magnesium",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 32,
+    "subject": "Chemistry",
+    "raw_block": "The de Broglie wavelength of a car of mass 1000 \n and velocity \n is :\n\nkg\n36\u00a0km/hr\n\n\u00a0\n\n6.626 \u00d7 10\u221234\u00a0m\n6.626 \u00d7 10\u221238\u00a0m\n6.626 \u00d7 10\u221231\u00a0m\n6.626 \u00d7 10\u221230\u00a0m\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 33,
+    "subject": "Chemistry",
+    "raw_block": "Which is the correct order of second ionization potential of \n and  in the following ?\n\nC, N, O\nF\nO > N > F > C\nO > F > N > C\n>\n> N > C\n>\n> O > F\n\n(1)\n(2)\n\n(3) F  O \n(4)\n C  N \n\nIF\u2212",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 34,
+    "subject": "Chemistry",
+    "raw_block": "The shape of \nis :\n\n6\n\n(1) Trigonally distorted octahedron\n(2) Pyramidal\n\n(3) Octahedral\n(4) Square antiprism\n\nHF\n9.17 \u00d7 10\u221211\u00a0m\nHF\n6.104 \u00d7 10\u221230Cm\nHF\n= 1.60 \u00d7 10\u221219C\n61.0%\n38.0%\n35.5%\n41.5%",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 35,
+    "subject": "Chemistry",
+    "raw_block": "Bond distance in \n is \n. Dipole moment of \n is \n. The percentage ionic\n\ncharacter in \n will be : (electron charge \n )\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 36,
+    "subject": "Chemistry",
+    "raw_block": "The correct order of viscosity of the following liquids will be :\n\n(1) Water  methyl alcohol  dimethyl ether  glycerol\n\n<\n<\n<\n<\n<\n<\n<\n<\n<\n<\n<\n<\n\n(2) methyl alcohol  glycerol  water  dimethyl ether\n\n(3) dimethyl ether  methyl alcohol  water  glycerol\n\n(4) glycerol  dimethyl ether  water  methyl alcohol",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 37,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following statements/relationships is not correct in thermodynamic changes ?\n\n\u0394U = 0\nw = \u2212nRT ln V2\n\n(1)\n (isothermal reversible expansion of a\n\n(2)\n (isothermal reversible\n\n\u00a0V1\n\ngas)\n\nexpansion of an ideal gas)\n\nw = nRT ln V2\n\n(3)\n (isothermal reversible\n\n(4) For a system of constant volume heat involved\n\n\u00a0V1\n\ndirectly changes to internal energy.\n\nexpansion of an ideal gas)\n\nN2(\u00a0g) + 3H2(\u00a0g) \u21cc2NH3(\u00a0g), K1\nN2(\u00a0g) + O2(\u00a0g) \u21cc2NO(g), K2\nH2(\u00a0g) + 1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 38,
+    "subject": "Chemistry",
+    "raw_block": "(1) \n (2) \n (3)\n\n2 O2(\u00a0g) \u21ccH2O(g), K3\n\n The equation for the equilibrium constant of the reaction\n\n2NH3(\u00a0g) + 5\n2 O2(\u00a0g) \u21cc2NO(g) + 3H2O(g),\u00a0\n\n in terms of \n and \n is :\n\n(K4)\nK1, \u00a0K2\nK3\nK1\u22c5K2\n\nK1\u22c5K2\n\n(1)\n(2)\n\n3\n\u00a0K2\nK1\u00a0K2\u00a0K3\nK2\u22c5K3\n\n\u00a0K3\n\n(3)\n(4)\n\n3\n\u00a0K1\n\npH\n10\u22124MOH\u2212\n330\u00a0K\nKw\n330\u00a0K\n10\u221213.6",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 39,
+    "subject": "Chemistry",
+    "raw_block": "What is the \n of a \nsolution at \n, if \n at \n is \n ?\n\n(1) 4\n(2)\n\n9.0\n9.6\n\n(3) 10\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 40,
+    "subject": "Chemistry",
+    "raw_block": "The numbers of protons, electrons and neutrons in a molecule of heavy water are respectively :\n\n(1)\n(2)\n\n8, 10, 11\n10, 10, 10\n10, 11, 10\n11, 10, 10\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 41,
+    "subject": "Chemistry",
+    "raw_block": "Equimolar solutions of the following compounds are prepared separately in water. Which will have the lowest\n\n value ?\n\npH\n\n(1)\n(2)\n\nBeCl2\nSrCl2\nCaCl2\nMgCl2\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 42,
+    "subject": "Chemistry",
+    "raw_block": "Monocarboxylic acids are functional isomers of:\n\n(1) Ethers\n(2) Amines\n\n(3) Esters\n(4) Alcohols",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 43,
+    "subject": "Chemistry",
+    "raw_block": "In a face centred cubic lattice, atoms of A form the corner points and atoms of B form the face centred points.\n\nIf two atoms of  are missing from the corner points, the formula of the ionic compound is :\n\nA\nAB3\nAB4\nA2\u00a0B5\nAB2\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 44,
+    "subject": "Chemistry",
+    "raw_block": "Vapour pressure of pure benzene is 119 torr and that of toluene is \n torr at the same temperature. Mole\n\n37.0\n\nfraction of toluene in vapour phase which is in equilibrium with a solution of benzene and toluene having a\n\nmole fraction of toluene \n, will be :\n\n0.50\n0.137\n0.237\n0.435\n0.205\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 45,
+    "subject": "Chemistry",
+    "raw_block": "Given :\n\n1\n2 Cl2/Cl\u2212= 1.36\u00a0V, Eo\nCr3+/Cr = \u22120.74\u00a0V\n\nEo\n\nEo\n\n7 /Cr3+ = 1.33\u00a0V, Eo\nMnO\u2212\n\n4 /Mn2+ = 1.51\u00a0V\n\nCr2O2\u2212\n\n(Cr, Cr3+, Mn2+\nCl\u2212)\nMn2+ < Cl\u2212< Cr3+ < Cr\nMn2+ < Cl3+ < Cl\u2212< Cr\nCr3+ < Cl\u2212< Mn2+ < Cr\nCr3+ < Cl\u2212< Cr < Mn2+\n\nThe correct order of reducing power of the species \n and \nwill be:\n\n(1)\n(2)\n\n(3)\n(4)\n\n2.0\u00d7 10\u22122\u00a0mol\u00a0L\u22121\u00a0s\u22121",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 46,
+    "subject": "Chemistry",
+    "raw_block": "The rate constant of a zero order reaction is \n \n. If the concentration of the reactant after\n\n25 seconds is \n. What is the initial concentration?\n\n0.5M\n0.5M\n1.25M\n12.5M\n1.0M\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 47,
+    "subject": "Chemistry",
+    "raw_block": "Smoke is an example of:\n\n(1) Solid dispersed in solid\n(2) Gas dispersed in liquid\n\n(3) Solid dispersed in gas\n(4) Gas dispersed in solid",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 48,
+    "subject": "Chemistry",
+    "raw_block": "Which has trigonal bipyramidal shape ?\n\n(1)\n(2)\n\nXeOF4\nXeO3\nXeO3\u00a0F2\nXeOF2\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 49,
+    "subject": "Chemistry",
+    "raw_block": "When a small amount of \n is added to concentrated \n, a green oily compound is obtained which\n\nKMnO4\nH2SO4\n\nis highly explosive in nature. Compound may be :\n\n(1)\n(2)\n\nMnSO4\nMn2O7\nMnO2\nMn2O3\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 50,
+    "subject": "Chemistry",
+    "raw_block": "Identify incorrect statement :\n\n(1)\n is colourless.\n(2) Copper (I) compounds are colourless except\n\nCu2O\n\nwhen colour results from charge transfer.\n\n(3) Copper (I) compounds are diamagnetic.\n(4)\n is black.\n\nCu2\u00a0S\n\n[Cr(NO) (NH3)(CN)4]2\u2212",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 51,
+    "subject": "Chemistry",
+    "raw_block": "The magnetic moment of the complex anion \n is :\n\n(1)\n(2)\n\n5.91BM\n3.87BM\n1.73BM\n2.82BM\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 52,
+    "subject": "Chemistry",
+    "raw_block": "Identify the incorrect statement:\n\n(Si3O9)6\u2212\nSiO4\nR3SiOH\n\n(1) In \n, tetrahedral \n units share two\n\n(2) Trialkylchlorosilane on hydrolysis gives \n\noxygen atoms.\n\n.\n\nSiCl4\nH4SiO4\n(Si3O9)6\u2212\n\n(3)\n undergoes hydrolysis to give \n.\n(4)\n has cyclic structure.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 53,
+    "subject": "Chemistry",
+    "raw_block": "The order of reactivity of the given haloalkanes towards nucleophile is :\n\n(1)\n(2)\n\nRI > RBr > RCl\nRCl > RBr > RI\nRBr > RCl > RI\nRBr > RI > RCl\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 54,
+    "subject": "Chemistry",
+    "raw_block": "The reaction of phenol with benzoyl chloride to give phenyl benzoate is known as :\n\n(1) Claisen reaction\n(2) Schotten-Baumann reaction\n\n(3) Reimer-Tiemann reaction\n(4) Gatterman-Koch reaction",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 55,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following is the product of aldol condensation?\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 56,
+    "subject": "Chemistry",
+    "raw_block": "The order of basicity of amines in gaseous state is :\n\n1\u2218> 2\u2218> 3\u2218> NH3\n3\u2218> 2\u2218> NH3 > 1\u2218\n\n(1)\n(2)\n\n3\u2218> 2\u2218> 1\u2218> NH3\nNH3 > 1\u2218> 2\u2218> 3\u2218\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 57,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following polymer is a polyamide ?\n\n(1) Terylene\n(2) Nylon\n\n(3) Rubber\n(4) Vulcanised rubber",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 58,
+    "subject": "Chemistry",
+    "raw_block": "Receptor antagonists is a term associated with :\n\nH1\u2212\n\n(1) Antiseptics\n(2) Antihistamins\n\n(3) Antacids\n(4) Analgesics",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 59,
+    "subject": "Chemistry",
+    "raw_block": "Glycosidic linkage is actually an :\n\n(1) Carbonyl bond\n(2) Ether bond\n\n(3) Ester bond\n(4) Amide bond",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 60,
+    "subject": "Chemistry",
+    "raw_block": "Natural glucose is termed D-glucose because :\n\n(1)\n on the second carbon is on the right side in\n\n(2)\n on the sixth carbon is on the right side in\n\n\u2212OH\n\u2212OH\n\nFischer projection\n\nFischer projection.\n\n(3)\n on the fifth carbon is on the right side in\n\n(4) It is dextrorotatory.\n\n\u2212OH\n\nFischer projection.\n\n\u03b1\nx\nx\u22125\nx2+5x\u221214 > 0",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 61,
+    "subject": "Mathematics",
+    "raw_block": "The least integral value  of  such that \n, satisfies :\n\n\u03b12 + 3\u03b1 \u22124 = 0\n\u03b12 \u22125\u03b1 + 4 = 0\n\u03b12 \u22127\u03b1 + 6 = 0\n\u03b12 + 5\u03b1 \u22126 = 0\n\n(1)\n(2)\n\n(3)\n(4)\n\na = Im ( 1+z2\n\n2iz )\nz\nA = {a : |z| = 1\nz \u2260\u00b11}",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 62,
+    "subject": "Mathematics",
+    "raw_block": "Let \n, where  is any non-zero complex number. The set \n and \n is equal\n\nto:\n\n(1)\n(2)\n\n(\u22121, 1)\n[\u22121, 1]\n[0, 1)\n(\u22121, 0]\n\n(3)\n(4)\n\n(2)2 + 2(4)2 + 3(6)2 + \u2026",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 63,
+    "subject": "Mathematics",
+    "raw_block": "The sum of the series : \n upto 10 terms is :\n\n(1) 11300\n(2) 11200\n\n(3) 12100\n(4) 12300",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 64,
+    "subject": "Mathematics",
+    "raw_block": "If \n. are in A.P. such that \n \n, then the sum of first 13 terms of this A.P., is\n\na1, a2, a3, \u2026 , an, \u2026\na4 \u2212a7 +a10 = m\n\n:\n\n(1)\n(2)\n\n10\u00a0m\n12\u00a0m\n13\u00a0m\n15\u00a0m\n\n(3)\n(4)\n\n1\n2 + 3\n1\n5 )\n10",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 65,
+    "subject": "Mathematics",
+    "raw_block": "The sum of the rational terms in the binomial expansion of \n is :\n\n(2\n\n(1) 25\n(2) 32\n\n(3) 9\n(4) 41",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 66,
+    "subject": "Mathematics",
+    "raw_block": "The number of solutions of the equation \n in the interval \n is :\n\nsin 2x \u22122 cos x + 4 sin x = 4\n[0, 5\u03c0]\n\n(1) 3\n(2) 5\n\n(3) 4\n(4) 6",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 67,
+    "subject": "Mathematics",
+    "raw_block": "If two lines \n and \n in space, are defined by\n\nL1\nL2\n\nL1 = {x = \u221a\u03bby + (\u221a\u03bb \u22121),\n\nz = (\u221a\u03bb \u22121)y + \u221a\u03bb}\u00a0and\u00a0\nL2 = {x = \u221a\u03bcy + (1 \u2212\u221a\u03bc),\n\nz = (1 \u2212\u221a\u03bc)y + \u221a\u03bc}\n\nthen \n is perpendicular to \n, for all nonnegative reals  and , such that :\n\nL1\nL2\n\u03bb\n\u03bc\n\u221a\u03bb + \u221a\u03bc = 1\n\u03bb \u2260\u03bc\n\u03bb + \u03bc = 0\n\u03bb = \u03bc\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 68,
+    "subject": "Mathematics",
+    "raw_block": "Let \n be the angle between two lines \n \n and \n and \n be the angle between\n\n\u03b81\n2x + 3y+ c1 = 0\n\u2212x + 5y + c2 = 0\n\u03b82\n2x + 3y + c1 = 0\n\u2212x + 5y+ c3 = 0\nc1, c2, c3\nc2\n\ntwo lines \n and \n \n, where \n are any real numbers : Statement-1: If \n\n\u00a0\n\nand \n are proportional, then \n. Statement-2: \n for all \n and \n.\n\nc3\n\u03b81 = \u03b82\n\u03b81 = \u03b82\nc2\nc3\n\n(1) Statement-1 is true, Statement-2 is true;\n\n(2) Statement-1 is true, Statement-2 is true;\n\nStatement-2 is a correct explanation of\n\nStatement-2 is not a correct explanation of\n\nStatement-1.\n\nStatement-1.\n\n(3) Statement-1 is false; Statement- 2 is true.\n(4) Statement-1 is true; Statement- 2 is false.\n\nx2 + y2 \u22126x \u22128y + (25 \u2212a2) = 0\nx\n\u00b14\n\u00b12\n\u00b13",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 69,
+    "subject": "Mathematics",
+    "raw_block": "If the circle \n touches the axis of , then a equals.\n\n(1) 0\n(2)\n\n(3)\n(4)\n\ny2 = 4x\n(0, 2)\n(3, 0)\n(0, 3)\n(2, 0)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 70,
+    "subject": "Mathematics",
+    "raw_block": "The point of intersection of the normals to the parabola \n at the ends of its latus rectum is :\n\n(1)\n(2)\n\n(3)\n(4)\n\n4 \u2212y2\n\nx2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 71,
+    "subject": "Mathematics",
+    "raw_block": "A tangent to the hyperbola \n meets -axis at  and -axis at . Lines \n and \n are drawn such\n\n2 = 1\nx\nP\ny\nQ\nPR\nQR\nO\nR\n\nthat OPRQ is a rectangle (where  is the origin). Then  lies on :\n\n4\nx2 +\n2\ny2 = 1\n2\nx2 \u2212\n4\ny2 = 1\n\n(1)\n(2)\n\n2\nx2 +\n4\ny2 = 1\n4\nx2 \u2212\n2\ny2 = 1\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 72,
+    "subject": "Mathematics",
+    "raw_block": "For integers \n and , both greater than 1, consider the following three statements : \n divides  \n\nm\nn\nP : m\nn Q : m\nn2 R : m\nQ \u2227R \u2192P\nP \u2227Q \u2192R\nQ \u2192R\nQ \u2192P\n\ndivides \n \n is prime, then\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 73,
+    "subject": "Mathematics",
+    "raw_block": "If the median and the range of four numbers \n, where \n, are 10 and 28\n\n{x, y, 2x + y, x \u2212y}\n0 < y < x < 2y\n\nrespectively, then the mean of the numbers is :\n\n(1) 18\n(2) 10\n\n(3) 5\n(4) 14",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 74,
+    "subject": "Mathematics",
+    "raw_block": "If the extremities of the base of an isosceles triangle are the points \n and \n and the equation of one of\n\n(2a, 0)\n(0, a)\nx = 2a\n\nthe sides is \n, then the area of the triangle, in square units, is :\n\n5\n4 a2\n5\n2 a2\n\n(1)\n(2)\n\n25a2\n4\n5a2\n\n(3)\n(4)\n\nAB, BC, CA\n\u25b3ABC, 3, 4, 5\nA, B, C",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 75,
+    "subject": "Mathematics",
+    "raw_block": "On the sides \n of a \n distinct points (excluding vertices \n ) are respectively\n\nchosen. The number of triangles that can be constructed using these chosen points as vertices are :\n\n(1) 210\n(2) 205\n\n(3) 215\n(4) 220\n\nR = {(x, y) : x, y \u2208N\nx2 \u22124xy + 3y2 = 0}\nN\nR",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 76,
+    "subject": "Mathematics",
+    "raw_block": "Let \n and \n, where \n is the set of all natural numbers. Then the\n\nrelation  is :\n\n(1) reflexive but neither symmetric nor transitive.\n(2) symmetric and transitive.\n\n(3) reflexive and symmetric,\n(4) reflexive and transitive.\n\n\u00a0\n\nA\nI\n\u2212I\n2 \u00d7 2\nA2 = I\nTr(A)\nTr(A) = 0\ndet(A) = \u22121",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 77,
+    "subject": "Mathematics",
+    "raw_block": "Let , other than  or \n, be a \n real matrix such that \n, I being the unit matrix. Let \n be the\n\nsum of diagonal elements of A. Statement-1: \n Statement-2: \n\n(1) Statement-1 is true; Statement- 2 is false.\n\n(2) Statement-1 is true; Statement-2 is true; Statement-2 is not a correct explanation for Statement-1.\n\n(3) Statement-1 is true; Statement-2 is true; Statement-2 is a correct explanation for Statement-1.\n\n(4) Statement-1 is false; Statement- 2 is true.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 78,
+    "subject": "Mathematics",
+    "raw_block": "Statement-1: The system of linear equations\n\nx + (sin \u03b1)y + (cos \u03b1)z = 0\nx + (cos \u03b1)y + (sin \u03b1)z = 0\nx \u2212(sin \u03b1)y \u2212(cos \u03b1)z = 0\n\n\u03b1\n(0, \u03c0\n\nhas a non-trivial solution for only one value of  lying in the interval \n. Statement-2: The equation in \n\n2 )\n\u03b1\n\ncos \u03b1\nsin \u03b1\ncos \u03b1\nsin \u03b1\ncos \u03b1\nsin \u03b1\ncos \u03b1\n\u2212sin \u03b1\n\u2212cos \u03b1\n\n= 0\n\n(0, \u03c0\n\nhas only one solution lying in the interval \n\n2 )\n\n(1) Statement-1 is true, Statement-2 is true,\n\n(2) Statement-1 is true, Statement-2 is true,\n\nStatement-2 is not correct explantion for\n\nStatement-2 is a correct explantion for\n\nStatement-1.\n\nStatement-1.\n\n(3) Statement-1 is true, Statement- 2 is false.\n(4) Statememt-1 is false, Statement-2 is true.\n\nS = tan\u22121 (\n1\nn2+n+1 ) + tan\u22121 (\n1\nn2+3n+3 ) + \u2026 + tan\u22121 (\n1\n1+(n+19)(n+20) )\ntan S",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 79,
+    "subject": "Mathematics",
+    "raw_block": ", then \n is equal to :\n\n20\n401+20n\nn\nn2+20n+1\n20\nn2+20n+1\n\n(1)\n(2)\n\nn\n401+20n\n\n(3)\n(4)\n\nf\nx\nf(u) =\n1\nu2+u\u22122 , u(x) =\n1\nx\u22121\nx",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 80,
+    "subject": "Mathematics",
+    "raw_block": "Let  be a composite function of  defined by \n. Then the number of points \n\nwhere  is discontinuous is :\n\nf\n\n(1) 4\n(2) 3\n\n(3) 2\n(4) 1\n\nf(x) = sin(sin x)\nf \u2032\u2032(x) + tan xf \u2032(x) + g(x) = 0\ng(x)\ncos2 x cos(sin x)\nsin2 x cos(cos x)\nsin2 x sin(cos x)\ncos2 x sin(sin x)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 81,
+    "subject": "Mathematics",
+    "raw_block": "If \n and \n \n, then \n is :\n\n(1)\n(2)\n\n(3)\n(4)\n\n\u03b1 + y2\n\n4 = 1\ny3 = 16x\n\u03b1\n\nx2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 82,
+    "subject": "Mathematics",
+    "raw_block": "If the curves \n and \n intersect at right angles, then a value of  is :\n\n4\n3\n1\n2\n3\n4\n\n(1) 2\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 83,
+    "subject": "Mathematics",
+    "raw_block": "The cost of running a bus from A to B is \n where \n is the average speed of the bus. When\n\nRs. (av + b/v)\nvkm/h\n30\u00a0km/h\n40\u00a0km/h\n\nthe bus travels at \n, the cost comes out to be Rs. 75 while at \n, it is Rs. 65. Then the most\n\neconomical speed (in km/h) of the bus is :\n\n\u00a0\n\n(1) 45\n(2) 50\n\n(3) 60\n(4) 40\n\n(2, 7\n\n2 )\n(1 \u2212\n1\nx2 )\n(x, y)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 84,
+    "subject": "Mathematics",
+    "raw_block": "If a curve passes through the point \n and has slope \n at any point \n on it, then the ordinate of\n\nthe point on the curve whose abscissa is \n is :\n\n\u22122\n\u22123\n\n2\n3\n2\n5\n2\n\u22125\n\n(1)\n(2)\n\n(3)\n(4)\n\n2\n\n\u222b\nxdx\n2\u2212x2+\u221a2\u2212x2\nlog 1 + \u221a2 + x2 + c",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 85,
+    "subject": "Mathematics",
+    "raw_block": "The integral \n equals :\n\n\u2212log 1 + \u221a2 \u2212x2 + c\n\n(1)\n(2)\n\n\u2212x log 1 \u2212\u221a2 \u2212x2 + c\n\nx log 1 \u2212\u221a2 + x2 + c\n\n(3)\n(4)\n\nsin2 x\n\n\u222b\u03c0/2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 86,
+    "subject": "Mathematics",
+    "raw_block": "The value of \n is :\n\n1+2x dx\n\n\u2212\u03c0/2\n\n\u03c0\n\u03c0\n2\n4\u03c0\n\u03c0\n4\n\n(1)\n(2)\n\n(3)\n(4)\n\ny = | cos x \u2212sin x| 0 \u2264x \u2264\u03c0",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 87,
+    "subject": "Mathematics",
+    "raw_block": "The area under the curve \n, \n, and above -axis is :\n\n2\nx\n2\u221a2\n2\u221a2 \u22122\n2\u221a2 + 2\n\n(1)\n(2)\n\n\u2192a\n\u2192b\n\u03b1\n\u2192u = (\u03b1 \u22122)\u2192a + \u2192b\n\u2192v = (2 + 3\u03b1)\u2192a \u22123\u2192b\n\n(3)\n(4) 0",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 88,
+    "subject": "Mathematics",
+    "raw_block": "If  and  are non-collinear vectors, then the value of  for which the vectors \n and\n\n are collinear is :\n\n3\n2\n2\n3\n\u22123\n\n(1)\n(2)\n\n2\n\u22122\n\n(3)\n(4)\n\n3",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 89,
+    "subject": "Mathematics",
+    "raw_block": "If the projections of a line segment on the \n and -axes in 3-dimensional space are 2, 3 and 6 respectively,\n\nx, y\nz\n\nthen the length of the line segment is :\n\n(1) 12\n(2) 7\n\n(3) 9\n(4) 6",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 90,
+    "subject": "Mathematics",
+    "raw_block": "try to hit a target simultaneously but independently. Their respective probabilities of hitting the targets\n\nA, B, C\n\n3\n4 , 1\n2 , 5\n8\nC\n21/64\n7/8\n7/32\n9/64\n\nare \n. The probability that the target is hit by A or B but not by  is :\n\n(1)\n(2)\n\n(3)\n(4)\n\n\u00a0\n",
+    "correct_option": "a",
+    "ans_num": 1
+  }
+]

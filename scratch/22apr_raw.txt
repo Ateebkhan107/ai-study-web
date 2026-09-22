@@ -1,0 +1,1641 @@
+ 
+Q1. The dimensions of angular momentum, latent heat and capacitance are, respectively.
+(1)
+(2)
+(3)
+(4)
+Q2. A ball projected from ground at an angle of 
+ just clears a wall in front. If point of projection is 
+ from the
+foot of wall and ball strikes the ground at a distance of 
+ on the other side of the wall, the height of the wall is
+:
+(1)
+(2)
+(3)
+(4)
+Q3. Two blocks of mass 
+ and 
+ are connected by a metal rod of mass 
+. The system is
+pulled vertically up by applying a force of 
+ as shown. The tension at the mid-point of the rod is:
+(1)
+(2)
+(3)
+(4)
+Q4. A body starts from rest on a long inclined plane of slope 
+. The coefficient of friction between the body and
+the plane varies as 
+, where  is distance travelled down the plane. The body will have maximum speed
+(for 
+ ) when 
+(1)
+(2)
+(3)
+(4)
+Q5. A tennis ball (treated as hollow spherical shell) starting from  rolls down a hill. At point  the ball becomes
+air borne leaving at an angle of 
+ with the horizontal. The ball strikes the ground at . What is the value of
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+ML2 T1 A2,  L2 T−2, M−1 L−2 T2
+ML2 T−2,  L2 T2, M−1 L−2 T4 A2
+ML2 T−1,  L2 T−2, ML2TA2
+ML2 T−1,  L2 T−2, M−1 L−2 T4 A2
+45∘
+4 m
+6 m
+4.4 m
+2.4 m
+3.6 m
+1.6 m
+M1 = 20 kg
+M2 = 12 kg
+8 kg
+480 N
+144 N
+96 N
+240 N
+192 N
+45∘
+μ = 0.3x
+x
+g = 10 m/s2
+x =
+9.8 m
+27 m
+12 m
+3.33 m
+O
+A
+30∘
+B
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+the distance 
+ ? (Moment of inertia of a spherical shell of mass 
+ and radius  about its diameter 
+ )
+(1)
+(2)
+(3)
+(4)
+Q6. The change in the value of acceleration of earth towards sun, when the moon comes from the position of solar
+eclipse to the position on the other side of earth in line with sun is: (mass of the moon 
+, radius
+of the moon's orbit 
+ ).
+(1)
+(2)
+(3)
+(4)
+Q7. A uniform wire (Young's modulus 
+ ) is subjected to longitudinal tensile stress of 
+.
+If the overall volume change in the wire is 
+, the fractional decrease in the radius of the wire is close to:
+(1)
+(2)
+(3)
+(4)
+Q8. Air of density 
+ is blowing across the horizontal wings of an aeroplane in such a way that its speeds
+above and below the wings are 
+ and 
+, respectively. The pressure difference between the
+upper and lower sides of the wings, is :
+(1)
+(2)
+(3)
+(4)
+Q9. Given that 
+ of water in liquid phase has volume 
+ and in vapour phase 
+ at atmospheric
+pressure and the latent heat of vaporization of water is 
+; the change in the internal energy in joules for
+ of water at 
+ when it changes from liquid phase to vapour phase at the same temperature is :
+(1) 2256
+(2) 167
+(3) 2089
+(4) 1
+Q10.An ideal gas at atmospheric pressure is adiabatically compressed so that its density becomes 32 times of its
+initial value. If the final pressure of gas is 128 atmospheres, the value of '  'of the gas is :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+AB
+m
+R
+= 2
+3 mR2
+1.87 m
+2.08 m
+1.57 m
+1.77 m
+= 7.36 × 1022 kg
+= 3.8 × 108 m
+6.73 × 10−5 m/s2
+6.73 × 10−3 m/s2
+6.73 × 10−2 m/s2
+6.73 × 10−4 m/s2
+2 × 1011Nm−2
+5 × 107Nm−2
+0.02%
+1.0 × 10−4
+1.5 × 10−4
+0.25 × 10−4
+5 × 10−4
+1.2 kg m−3
+150 ms−1
+100 ms−1
+60Nm−2
+180Nm−2
+7500Nm−2
+12500Nm−2
+1 g
+1 cm3
+1671 cm3
+2256 J/g
+1 g
+373 K
+γ
+1.5
+1.4
+1.3
+1.6
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q11.A certain amount of gas is taken through a cyclic process (A B C D A) that has two isobars, one isochore and
+one isothermal. The cycle can be represented on a 
+ indicator diagram as :
+(1)
+(2)
+(3)
+(4)
+Q12.A mass 
+ is put on a flat pan attached to a vertical spring fixed on the ground. The mass of the
+spring and the pan is negligible. When pressed slightly and released, the mass executes simple harmonic
+motion. The spring constant is 
+. What is the amplitude A of the motion, so that the mass 
+ tends to
+get detached from the pan ? (Take 
+ ). The spring is stiff enough so that it does not get distorted
+during the motion. 
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+P −V
+m = 1.0 kg
+500 N/m
+m
+g = 10 m/s2
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q13.A and B are two sources generating sound waves. A listener is situated at . The frequency of the source at 
+is 
+. A, now, moves towards  with a speed 
+. The number of beats heard at  is 6 . When  moves
+away from  with speed 
+, the number of beats heard at  is 18 . The speed of sound is 
+. The
+frequency of the source at  is : 
+(1)
+(2)
+(3)
+(4)
+Q14.A point charge of magnitude 
+ is fixed at 
+, 
+. An isolated uncharged spherical conductor, is fixed
+with its center at 
+. The potential and the induced electric field at the centre of the sphere is :
+(1)
+ and 
+(2)
+ and 
+(3)
+ and 
+(4)
+ and 
+Q15.Two small equal point charges of magnitude  are suspended from a common point on the ceiling by insulating
+mass less strings of equal lengths. They come to equilibrium with each string making angle  from the vertical.
+If the mass of each charge is 
+, then the electrostatic potential at the centre of line joining them will be
+(1)
+(2)
+(3)
+(4)
+Q16.To establish an instantaneous current of 
+ through a 
+ capacitor ; the potential difference across the
+capacitor plates should be changed at the rate of:
+(1)
+(2)
+(3)
+(4)
+Q17.A dc source of emf 
+ and internal resistance 
+, a storage battery of emf 
+ and an
+external resistance  are connected as shown in figure. For what value of R no current will pass through the
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+A > 2.0 cm
+A = 2.0 cm
+A < 2.0 cm
+A = 1.5 cm
+C
+A
+500 Hz
+C
+4 m/s
+C
+A
+C
+4 m/s
+C
+340 m/s
+B
+500 Hz
+506 Hz
+512 Hz
+494 Hz
++1μC
+(0 0, 0)
+(4, 0, 0)
+1.8 × 105 V
+−5.625 × 106 V/m
+0 V
+0 V/m
+2.25 × 105 V
+−5.625 × 106 V/m
+2.25 × 105 V
+0 V/m
+q
+θ
+m
+(
+1
+4π ∈0
+= k). 
+2√kmg tan θ
+√kmg tan θ
+4√kmg/ tan θ
+4√kmg/ tan θ
+2 A
+1μF
+2 × 104 V/s
+4 × 106 V/s
+2 × 106 V/s
+4 × 104 V/s
+E1 = 100 V
+r = 0.5Ω
+E2 = 90 V
+R
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+battery? 
+(1)
+(2)
+(3)
+(4)
+Q18.To find the resistance of a galvanometer by the half deflection method the following circuit is used with
+resistances 
+ and 
+. The deflection in the galvanometer is d. With
+ the deflection changed to 
+. The galvanometer resistance is approximately:
+(1)
+(2)
+(3)
+(4)
+Q19.Choose the correct sketch of the magnetic field lines of a circular current loop shown by the dot
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+5.5Ω
+3.5Ω
+4.5Ω
+2.5Ω
+R1 = 9970 W, R2 = 30 W
+R3 = 0
+R3 = 107 W
+d
+2
+107Ω
+137Ω
+107/2Ω
+77Ω
+ and the cross  ⊗. 
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q20.A current  is flowing in a straight conductor of length . The magnetic induction at a point on its axis at a
+distance 
+ from its centre will be :
+(1) Zero
+(2)
+(3)
+(4)
+Q21.An LCR circuit as shown in the figure is connected to a voltage source 
+ whose frequency can be varied.
+The frequency, at which the voltage across the resistor is maximum, is :
+(1)
+(2)
+(3)
+(4)
+Q22.In a series 
+ circuit, 
+ Farad, 
+  Henry and 
+, when a constant D.C.
+voltage  is applied to the circuit, the capacitor acquires a charge 
+ C. The D.C. source is replaced by a
+sinusoidal voltage source in which the peak voltage 
+ is equal to the constant D.C. voltage E. At resonance
+the peak value of the charge acquired by the capacitor will be :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+i
+L
+L
+4
+μ0i
+2πL
+μ0i
+√2L
+4μ0i
+√5πL
+Vac
+902 Hz
+143 Hz
+23 Hz
+345 Hz
+L −C −R
+C = 10−11
+L = 10−5
+R = 100Ohm
+E
+10−9
+E0
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q23.A plane electromagnetic wave in a non-magnetic dielectric medium is given by 
+with distance being in meter and time in seconds. The dielectric constant of the medium is :
+(1)
+(2)
+(3)
+(4)
+Q24.The focal length of the objective and the eyepiece of a telescope are 
+ and 
+ respectively. If the
+telescope is focussed for distinct vision on a scale distant 
+ from its objective, then its magnifying power
+will be :
+(1)
+(2)
+(3)
+(4)
+Q25.The image of an illuminated square is obtained on a screen with the help of a converging lens. The distance of
+the square from the lens is 40 
+. The area of the image is 9 times that of the square. The focal length of the
+lens is :
+(1)
+(2)
+(3)
+(4)
+Q26.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1: Short wave transmission is achieved due to the total
+internal reflection of the e-m wave from an appropriate height in the ionosphere. Statement-2: Refractive index
+of a plasma is independent of the frequency of e-m waves.
+(1) Statement-1 is true, Statement- 2 is false.
+(2) Statement-1 is false, Statement- 2 is true.
+(3) Statement-1 is true, Statement- 2 is true but
+Statement 
+ is not the correct explanation of
+statement-1.
+(4) Statement-1 is true, Statement-2 is true and
+Statement 
+ is the correct explanation of
+Statement-1.
+Q27.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1: In Young's double slit experiment, the number of fringes
+observed in the field of view is small with longer wavelength of light and is large with shorter wavelength of
+light. Statement-2: In the double slit experiment the fringe width depends directly on the wavelength of light.
+(1) Statement-1 is true, Statement-2 is true and the
+Statement-2 is correct explanation of the
+Statement-1.
+(2) Statement-1 is false and the Statement-2 is true.
+(3) Statement-1 is true Statement-2 is true and the
+Statement-2 is not correct explanation of the
+Statement-1.
+(4) Statement-1 is true and the Statement-2 is false.
+Q28.Orbits of a particle moving in a circle are such that the perimeter of the orbit equals an integer number of de-
+Broglie wavelengths of the particle. For a charged particle moving in a plane perpendicular to a magnetic field,
+the radius of the 
+ orbital will therefore be proportional to :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+10−15C
+10−6C
+10−10C
+10−8C
+→E = →E0 (4 × 10−7x −50t)
+2.4
+5.8
+8.2
+4.8
+50 cm
+5 cm
+2 m
+−4
+−8
++8
+−2
+cm
+36 cm
+27 cm
+60 cm
+30 cm
+−2
+−2
+nth 
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q29.The half-life of a radioactive element  is the same as the mean-life of another radioactive element B. Initially
+both substances have the same number of atoms, then :
+(1) A and B decay at the same rate always.
+(2) A and  decay at the same rate initially.
+(3) A will decay at a faster rate than B.
+(4)
+ will decay at a faster rate than .
+Q30.Figure shows a circuit in which three identical diodes are used. Each diode has forward resistance of 
+ and
+infinite backward resistance. Resistors 
+. Battery voltage is 
+. The current through 
+is : 
+(1)
+(2)
+(3)
+(4)
+Q31.The density of 
+ solution of sodium chloride is 
+. The molality of the solution will be :  molar
+mass, 
+(1)
+(2)
+(3)
+(4)
+Q32.The wave number of the first emission line in the Balmer series of -Spectrum is : 
+ Rydberg constant  :
+(1)
+(2)
+(3)
+(4)
+Q33.The order of increasing sizes of atomic radii among the elements O, , Se and As is :
+(1) As 
+(2)
+(3) O  S  As 
+(4)
+Q34.The solubility order for alkali metal fluoride in water is :
+(1)
+(2)
+(3)
+(4)
+Q35.Bond order normally gives idea of stability of a molecular species. All the molecules viz. 
+ and 
+ have
+the same bond order yet they are not equally stable. Their stability order is :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+n2
+n
+n1/2
+n1/4
+A
+B
+B
+A
+20Ω
+R1 = R2 = R3 = 50Ω
+6 V
+R3
+50 mA
+100 mA
+60 mA
+25 mA
+3M
+1.252 g mL−1
+(
+NaCl = 585 g mol−1)
+260 m
+2.18 m
+2.79 m
+3.00 m
+H
+(R =
+)
+5
+36 R
+9
+400 R
+7
+6 R
+3
+4 R
+S
+< S < O < Se
+Se < S < As < O
+<
+<
+< Se
+O < S < Se < As
+LiF < RbF < KF < NaF
+RbF < KF < NaF < LiF
+LiF > NaF > KF > RbF
+LiF < NaF < KF < RbF
+H2, Li2
+B2
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4) None of these
+Q36.
+Given Reaction Energy Change 
+ Based on data provided, the
+value of electron gain enthalpy of fluorine would be :
+(1)
+(2)
+(3)
+(4)
+Q37.The reaction 
+ is an exothermic reaction. Activation energy of the reaction for  into  is 
+. Enthalpy of reaction is 
+ 
+. The activation energy for the reverse reaction, 
+ will be :
+(1)
+(2)
+(3)
+(4)
+Q38.Which one of the following arrangements represents the correct order of solubilities of sparingly soluble salts
+, 
+ and 
+ respectively?
+(1)
+(2)
+(3)
+(4)
+Q39.
+ is a strong base. What will be 
+ of 
+ solution ? 
+(1)
+(2)
+(3)
+(4)
+Q40.
+Values of dissociation constant, 
+ are given as follows : 
+ Correct order of increasing
+base strength of the base 
+and 
+will be :
+(1)
+(2)
+(3)
+(4)
+Q41.For which of the following compounds Kjeldahl method can be used to determine the percentage of Nitrogen?
+(1) Nitrobenzene
+(2) Pyridine
+(3) Alanine
+(4) Diazomethane
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+H2 > B2 > Li2
+Li2 > H2 > B2
+Li2 > B2 > H2
+ (in kJ) 
+Li(s) →Li(g)
+161
+Li(g) →Li+(g)
+520
+1
+2  F2( g) →F(g)
+77
+ F( g) + e−→F−(g)
+Li+(g) + F−(g) →LiF(s)
+−1047
+Li(s) + 1
+2  F2( g) →LiF(s)
+−617
+ (Electron gain 
+ enthalpy) 
+−300 kJ mol−1
+−350 kJ mol−1
+−328 kJ mol−1
+−228 kJ mol−1
+X →Y
+X
+Y
+150 kJ mol−1
+135 kJ mol−1
+Y →X
+280 kJ mol−1
+285 kJ mol−1
+270 kJ mol−1
+15 kJ mol−1
+Hg2Cl2, Cr2(SO4)3 BaSO4
+CrCl3
+BaSO4 > Hg2Cl2 > Cr2(SO4)3 > CrCl3
+BaSO4 > Hg2Cl2 > CrCl3 > Cr2(SO4)3
+BaSO4 > CrCl3 > Hg2Cl2 > Cr2(SO4)3
+Hg2Cl2 > BaSO4 > CrCl3 > Cr2(SO4)3
+NaOH
+pH
+5.0 × 10−2MNaOH
+(log 2 = 0.3)
+14.00
+13.70
+13.00
+12.70
+Ka
+ Acid 
+Ka
+HCN
+6.2 × 10−10
+HF
+7.2 × 10−4
+HNO2
+4.0 × 10−4
+CN−, F−
+NO−
+2
+F−< CN−< NO−
+2
+NO−
+2 < CN−< F−
+F−< NO−
+2 < CN−
+NO−
+2 < F−< CN−
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q42.Arrange in the correct order of stability (decreasing order) for the following molecules: (I)
+(II)
+(III)
+(IV)
+(1) (I)  (II)  (III)  (IV)
+(2) (IV)  (III)  (II)  (I)
+(3) (I)  (II)  (III)  (IV)
+(4) (III)  (I)  (II)  (IV)
+Q43.A major component of Borsch reagent is obtained by reacting hydrazine hydrate with which of the following ?
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+>
+>
+>
+>
+>
+≈
+>
+≈
+>
+>
+≈
+>
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q44.Clemmensen reduction of a ketone is carried out in the presence of :
+(1)
+(2)
+ with 
+(3) Glycol with 
+(4)
+ with 
+ as catalyst
+Q45.Which of the following would not give 2-phenylbutane as the major product in a Friedel-Crafts alkylation
+reaction ?
+(1) 1-butene 
+(2) 2-butanol 
+(3) Butanoyl chloride 
+ then 
+(4) Butyl choloride 
+Q46.Which one of the following statements about packing in solids is incorrect ?
+(1) Coordination number in bcc mode of packing is 8
+.
+(2) Coordination number in hep mode of packing is
+12 .
+(3) Void space in hcp mode of packing is 
+.
+(4) Void space in ccp mode of packing is 
+.
+Q47.A molecule 
+ associates in a given solvent according to the equation 
+. For a certain concentration
+of M, the van't Hoff factor was found to be 
+ and the fraction of associated molecules was 
+. The value of
+ is:
+(1) 3
+(2) 5
+(3) 2
+(4) 4
+Q48.Flocculation value of 
+ is much less than that of 
+ for sol  and flocculation value of 
+ is much
+less than that of 
+ for sol . The correct statement among the following is :
+(1) Both the sols A and B are negatively charged.
+(2) Sol A is positively charged and Sol B is
+negatively charged.
+(3) Both the sols A and B are positively charged.
+(4) Sol A is negatively charged and sol B is
+positively charged.
+Q49.In Goldschmidt aluminothermic process which of the following reducing agents is used :
+(1) calcium
+(2) coke
+(3) Al-powder
+(4) sodium
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+LiAlH4
+Zn −Hg
+HCl
+KOH
+H2
+Pt
++HF
++H2SO4
++AlCl3
+Zn, HCl
++AlCl3
+32%
+26%
+M
+M ⇌(M)n
+0.9
+0.2
+n
+BaCl2
+KCl
+A
+Na2SO4
+NaBr
+B
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q50.Oxidation state of sulphur in anions 
+ and 
+ increases in the orders :
+(1)
+(2)
+(3)
+(4)
+Q51.
+ molecule is tetrahedral having:
+(1) Two 
+ bonds
+(2) One 
+ bonds
+(3) Four 
+ bonds
+(4) Three 
+ bonds
+Q52.Which of the following is diamagnetic ?
+(1)
+(2)
+(3)
+(4)
+Q53.Which of the following statements is incorrect?
+(1)
+ ion also gives blood red colour with 
+ion.
+(2)
+ ion also gives blood red colour with 
+ion.
+(3) On passing 
+ into 
+ solution a white
+ppt of 
+ is formed.
+(4) Cupric ion reacts with excess of ammonia
+solution to give deep blue colour of
+ ion.
+Q54.The Wurtz-Fittig reaction involves condensation of:
+(1) two molecules of aryl halides
+(2) one molecule of each of aryl-halide and alkyl-
+halide.
+(3) one molecule of each of aryl-halide and phenol.
+(4) two molecules of aralkyl-halides.
+Q55.What is the structure of the major product when phenol is treated with bromine water?
+(1)
+(2)
+(3)
+(4)
+Q56.Amongst the following alcohols which would react fastest with conc. 
+ and 
+ ?
+(1) pentanol
+(2) 2-methyl butanol
+(3) 2-pentanol
+(4) 2-methyl butan-2-ol
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+SO2−
+3 , S2O2−
+4
+S2O2−
+6
+S2O2−
+6
+< S2O2−
+4
+< SO2−
+3
+SO2−
+6
+< S2O2−
+4
+< S2O2−
+6
+S2O2−
+4
+< SO2−
+3
+< S2O2−
+6
+S2O2−
+4
+< S2O2−
+6
+< SO2−
+3
+XeO4
+pπ −dπ
+pπ −dπ
+pπ −dπ
+pπ −dπ
+[Fe(CN)6]3−
+[Co(ox)3]3−
+[FeF6]3−
+[CoF6]3−
+Fe2+
+SCN−
+Fe3+
+SCN−
+H2 S
+Na2ZnO2
+ZnS
+[Cu(NH3)4]2+
+HCl
+ZnCl2
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q57.In Williamson synthesis of mixed ether having a primary and a tertiary alkyl group if tertiary halide is used,
+then :
+(1) Rate of reaction will be slow due to slow
+cleavage of carbon-halogen bond.
+(2) Alkene will be the main product.
+(3) Simple ether will form instead of mixed ether.
+(4) Expected mixed ether will be formed.
+Q58.The polymer used for optical lenses is :
+(1) polypropylene
+(2) polyvinyl chloride
+(3) polythene
+(4) polymethyl methacrylate
+Q59.Which of the following statements about aspirin is not true?
+(1) It is effective in relieving pain.
+(2) It is a neurologically active drug.
+(3) It has antiblood clotting action.
+(4) It belongs to narcotic analgesics.
+Q60.Which of the following structures represents thymine ?
+(1)
+(2)
+(3)
+(4)
+Q61.If  and  are roots of the equation 
+, such that 
+, then  belongs to the set :
+(1)
+(2)
+(3)
+(4)
+Q62.If a complex number  statisfies the equation 
+, then 
+ is equal to :
+(1) 2
+(2)
+(3)
+(4) 1
+Q63.The number of ways in which an examiner can assign 30 marks to 8 questions, giving not less than 2 marks to
+any question, is :
+(1)
+(2)
+(3)
+(4)
+Q64.Given sum of the first  terms of an A.P. is 
+ 
+. Another A.P. is formed with the same first term and
+double of the common difference, the sum of  terms of the new A.P. is :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+α
+β
+x2 + px + 3p
+4 = 0
+|α −β| = √10
+p
+{2, −5}
+{−3, 2}
+{−2, 5}
+{3, −5}
+z
+x + √2|z + 1| + i = 0
+|z|
+√3
+√5
+30C7
+21C8
+21C7
+30C8
+n
+2n+ 3n2
+n
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q65.The sum 
+. upto 11-terms is:
+(1)
+(2)
+(3)
+(4)
+Q66.If the 7th term in the binomial expansion of 
+, is equal to 729 , then  can be:
+(1)
+(2)
+(3)
+(4)
+Q67.The number of solutions of the equation, 
+ (in principal values) is :
+(1) 1
+(2) 4
+(3) 2
+(4) 3
+Q68.Statement-1: The number of common solutions of the trigonometric equations 
+ 
+ and
+ in the interval 
+ is two. Statement-2: The number of solutions of the equation,
+ in the interval 
+ is two.
+(1) Statement-1 is true; Statement-2 is true;
+Statement-2 is a correct explanation for
+statement-1.
+(2) Statement-1 is true; Statement-2 is true;
+Statement-2 is not a correct explanation for
+statement-1.
+(3) Statement-1 is false; Statement-2 is true.
+(4) Statement-1 is true; Statement-2 is false.
+Q69.If the -intercept of some line  is double as that of the line, 
+ and the -intercept of  is half as
+that of the same line, then the slope of  is :
+(1)
+(2)
+(3)
+(4)
+Q70.The acute angle between two lines such that the direction cosines 
+, of each of them satisfy the equations
+ and 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q71.If a circle  passing through 
+ touches the circle 
+ externally at a point 
+, then the radius of the circle  is :
+(1) 5
+(2)
+(3) 4
+(4)
+Q72.Statement-1: The line 
+ meets the parabola, 
+ only at the point 
+. Statement-2:
+The line 
+ is tangent to the parabola, 
+ at the point 
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+n + 4n2
+6n2 −n
+n2 + 4n
+3n + 2n2
+3
+12 +
+5
+12+22 +
+7
+12+22+32 + …
+7
+2
+11
+4
+11
+2
+60
+11
+(
+3
+3√84 + √3 ln x)
+9
+, x > 0
+x
+e2
+e
+e
+2
+2e
+sin−1 x = 2 tan−1 x
+2 sin2 θ −cos 2θ = 0
+2 cos2 θ −3 sin θ = 0
+[0, 2π]
+2 cos2 θ −3 sin θ = 0
+[0, π]
+x
+L
+3x + 4y = 12
+y
+L
+L
+−3
+−3/8
+−3/2
+−3/16
+l, m, n
+l + m + n = 0
+l2 + m2 −n2 = 0
+15∘
+30∘
+60∘
+45∘
+C
+(4, 0)
+x2 + y2 + 4x −6y −12 = 0
+(1, −1)
+C
+2√5
+√57
+x −2y = 2
+y2 + 2x = 0
+(−2, −2)
+y = mx −
+1
+2m (m ≠0)
+y2 = −2x
+(−
+1
+2m2 , −1
+m )
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) Statement-1 is true; Statement- 2 is false.
+(2) Statement-1 is true; Statement-2 is true;
+Statement-2 is a correct explanation for
+statement-1.
+(3) Statement-1 is false; Statement-2 is true.
+(4) Statement-1 a true; Statement-2 is true;
+Statement-2 is not a correct explanation for
+statement-1.
+Q73.Let the equations of two ellipses be
+If the product of their eccentricities is 
+, then the length of the minor axis of ellipse 
+ is :
+(1) 8
+(2) 9
+(3) 4
+(4) 2
+Q74.The statement 
+ is equivalent to :
+(1)
+(2)
+(3)
+(4)
+Q75.Mean of 5 observations is 7 . If four of these observations are 
+ and one is missing then the variance of
+all the five observations is :
+(1) 4
+(2) 6
+(3) 8
+(4) 2
+Q76.If two vertices of an equilateral triangle are 
+ and 
+, and the third vertex C lies above -
+axis then the equation of the circumcircle of 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q77.Let 
+, 
+ be a relation on the 
+.
+Then,  is :
+(1) reflexive, symmetric but not transitive.
+(2) symmetric, transitive but not reflexive.
+(3) an equivalence relation.
+(4) reflexive, transitive but not symmetric.
+Q78.
+If 
+ are 3 real numbers satisfying the matrix equation, 
+ then 
+equals :
+(1)
+(2)
+(3) 4
+(4) 2
+Q79.If the system of linear equations :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+E1 : x2
+3 + y2
+2 = 1 and E2 : x2
+16 + y2
+b2 = 1, 
+1
+2
+E2
+p →(q →p)
+p →q
+p →(p ∨q)
+p →(p →q)
+p →(p ∧q)
+6, 7, 8, 10
+A(−a, 0)
+B(a, 0), a > 0
+x
+△ABC
+3x2 + 3y2 −2√3ay = 3a2
+3x2 + 3y2 −2ay = 3a2
+x2 + y2 −2ay = a2
+x2 + y2 −√3ay = a2
+R = {(3, 3)(5, 5), (9, 9), (12, 12), (5, 12), (3, 9) (3, 12), (3, 5)}
+set A = {3, 5, 9, 12}
+R
+p, q, r
+[pqr]
+= [
+]
+⎡
+⎢
+⎣
+3
+4
+1
+3
+2
+3
+2
+0
+2
+⎤
+⎥
+⎦
+3
+0
+1
+2p + q −r
+−3
+−1
+x1 + 2x2 + 3x3 = 6
+x1 + 3x2 + 5x3 = 9
+2x1 + 5x2 + ax3 = b
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+is consistent and has infinite number of solutions, then :
+(1)
+ can be any real number
+(2)
+ can be any real number
+(3)
+ and 
+(4)
+Q80.Let 
+, and 
+; then the set of all points where 
+ is discontinuous is :
+(1)
+(2)
+(3)
+(4) an empty set
+Q81.For 
+, let 
+ and 
+, Then, 
+ equals :
+(1)
+(2)
+(3)
+(4)
+Q82.Statement-1: The function 
+ is increasing for all 
+. Statement-2: The functions 
+ and
+ are increasing for all 
+ and the sum of two increasing functions in any interval 
+ is an
+increasing function in 
+.
+(1) Statement-1 is false; Statement-2 is true.
+(2) Statement-1 is true; Statement-2 is true;
+Statement-2 is not a correct explanation for
+Statement-1.
+(3) Statement-1 is true; Statement-2 is false.
+(4) Statement-1is true; Statement-2 is true;
+Statement-2 is a correct explanation for
+statement-1.
+Q83.The maximum area of a right angled triangle with hypotenuse  is :
+(1)
+(2)
+(3)
+(4)
+Q84.If 
+, then 
+ is equal to :
+(1)
+(2)
+(3)
+(4)
+Q85.The integral 
+ is equal to :
+(1)
+(2)
+(3)
+(4)
+Q86.The area of the region (in sq. units), in the first quadrant bounded by the parabola 
+ and the lines
+ and 
+, is :
+(1)
+(2)
+(3)
+(4)
+Q87.Consider the differential equation :
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+a = 8, b
+b = 15, a
+a ∈R −{8}
+b ∈R −{15}
+a = 8, b = 15
+f(x) = −1 + |x −2|
+g(x) = 1 −|x|
+fog
+{0, 2}
+{0, 1, 2}
+{0}
+a > 0, t ∈(0, π
+2 )
+x = √asin−1 t
+y = √acos−1 t
+1 + ( dy
+dx )
+2
+x2
+y2
+y2
+x2
+x2+y2
+y2
+x2+y2
+x2
+x2 (ex + e−x)
+x > 0
+x2ex
+x2e−x
+x > 0
+(a, b)
+(a, b)
+h
+h2
+2√2
+h2
+2
+h2
+√2
+h2
+4
+∫x2−x+1
+x2+1 ecot−1 xdx = A(x)ecot−1 x + C
+A(x)
+−x
+x
+√1 −x
+√1 + x
+∫7π/3
+7π/4 √tan2 xdx
+log 2√2
+log 2
+2 log 2
+log √2
+y = 9x2
+x = 0, y = 1
+y = 4
+7/9
+14/3
+7/3
+14/9
+dy
+dx =
+y3
+2 (xy2 −x2)
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Statement-1: The substitution 
+ transforms the above equation into a first order homogenous differential
+equation. Statement-2: The solution of this differential equation is 
+.
+(1) Both statements are false.
+(2) Statement-1 is true and statement- 2 is false.
+(3) Statement-1 is false and statement-2 is true.
+(4) Both statements are true.
+Q88.If 
+ and  are unit vectors satisfying 
+, then the angle between the vectors  and  is :
+(1)
+(2)
+(3)
+(4)
+Q89.Let  be the foot of perpendicular from the origin to the plane 
+ and  be a point
+ on the plane. Then length 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q90.Given two independent events, if the probability that exactly one of them occurs is 
+ and the probability that
+none of them occurs is 
+, then the probability of more probable of the two events is :
+(1)
+(2)
+(3) 3/7
+(4)
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+z = y2
+y2e−y2/x = C
+^a,^b
+^c
+^a −√3^b + ^c =
+→
+0
+^a
+^c
+π
+4
+π
+3
+π
+6
+π
+2
+Q
+4x −3y + z + 13 = 0
+R
+(−1, −6)
+QR
+√14
+√19
+2
+3√7
+2
+3
+√2
+26
+49
+15
+49
+4/7
+6/7
+5/7
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+ANSWER KEYS
+1. (4)
+2. (2)
+3. (4)
+4. (4)
+5. (2)
+6. (1)
+7. (3)
+8. (3)
+9. (3)
+10. (2)
+11. (3)
+12. (3)
+13. (3)
+14. (3)
+15. (3)
+16. (3)
+17. (3)
+18. (4)
+19. (1)
+20. (1)
+21. (3)
+22. (4)
+23. (2)
+24. (4)
+25. (4)
+26. (1)
+27. (3)
+28. (3)
+29. (4)
+30. (1)
+31. (3)
+32. (1)
+33. (3)
+34. (4)
+35. (4)
+36. (3)
+37. (2)
+38. (2)
+39. (4)
+40. (3)
+41. (3)
+42. (4)
+43. (3)
+44. (2)
+45. (3)
+46. (3)
+47. (3)
+48. (2)
+49. (3)
+50. (3)
+51. (3)
+52. (2)
+53. (1)
+54. (2)
+55. (1)
+56. (4)
+57. (2)
+58. (4)
+59. (4)
+60. (4)
+61. (3)
+62. (3)
+63. (3)
+64. (2)
+65. (3)
+66. (2)
+67. (1)
+68. (2)
+69. (4)
+70. (3)
+71. (1)
+72. (2)
+73. (3)
+74. (2)
+75. (4)
+76. (1)
+77. (4)
+78. (1)
+79. (4)
+80. (4)
+81. (4)
+82. (3)
+83. (4)
+84. (2)
+85. (4)
+86. (4)
+87. (4)
+88. (2)
+89. (3)
+90. (1)
+ 
+JEE Main 2013 (22 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+
+--- PAGE BREAK ---

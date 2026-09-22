@@ -1,0 +1,456 @@
+Q1. If the time period t of the oscillation of a drop of liquid of density d , radius r , vibrating under surface tension s
+is given by the formula t = √r2bscda/2 . It is observed that the time period is directly proportional to √d . The
+s
+value of b should therefore be :
+(1) 3 (2) √3
+4
+(3) 3 (4) 2
+2 3
+Q2. A 70 kg man leaps vertically into the air from a crouching position. To take the leap the man pushes the ground
+with a constant force F to raise himself. The center of gravity rises by 0.5 m before he leaps. After the leap the
+c.g. rises by another 1 m . The maximum power delivered by the muscles is : (Take g = 10 ms−2 )
+(1) 6.26 × 103 Watts at the start (2) 6.26 × 103 Watts at take off
+(3) 6.26 × 104 Watts at the start (4) 6.26 × 104 Watts at take off
+Q3. A boy of mass 20 kg is standing on a 80 kg free to move long cart. There is negligible friction between cart and
+ground. Initially, the boy is standing 25 m from a wall. If he walks 10 m on the cart towards the wall, then the
+final distance of the boy from the wall will be
+(1) 15 m (2) 12.5 m
+(3) 15.5 m (4) 17 m
+Q4. A projectile of mass M is fired so that the horizontal range is 4 km . At the highest point the projectile explodes
+in two parts of masses M/4 and 3M/4 respectively and the heavier part starts falling down vertically with zero
+initial speed. The horizontal range (distance from point of firing) of the lighter part is :
+(1) 16 km (2) 1 km
+→r(t)
+(3) 10 km (4) 2 km
+Q5. A particle of mass 2 kg is moving such that at time t , its position, in meter, is given by = 5^i −2t2^j . The
+angular momentum of the particle at t = 2s about the origin in kgm−2 s−1 is :
+(1) −80^k (2) (10^i −16^j)
+(3) −40^k (4) 40^k
+Q6. A body of mass ' m ' is tied to one end of a spring and whirled round in a horizontal plane with a constant
+angular velocity. The elongation in the spring is 1 cm . If the angular velocity is doubled, the elongation in the
+spring is 5 cm . The original length of the spring is :
+(1) 15 cm (2) 12 cm
+(3) 16 cm (4) 10 cm
+Q7. A copper wire of length 1.0 m and a steel wire of length 0.5 m having equal cross-sectional areas are joined end
+to end. The composite wire is stretched by a certain load which stretches the copper wire by 1 mm . If the
+Young's modulii of copper and steel are respectively 1.0 × 1011 Nm−2 and 2.0 × 1011Nm−2 , the total extension
+of the composite wire is :
+(1) 1.75 mm (2) 2.0 mm
+(3) 1.50 mm (4) 1.25 mm
+Q8. Wax is coated on the inner wall of a capillary tube and the tube is then dipped in water. Then, compared to the
+unwaxed capillary, the angle of contact θ and the height h upto which water rises change. These changes are :
+(1) θ increases and h also increases (2) θ decreases and h also decreases
+(3) θ increases and h decreases (4) θ decreases and h increases
+Q9. A thin tube sealed at both ends is 100 cm long. It lies horizontally, the middle 20 cm containing mercury and
+two equal ends containing air at standard atmospheric pressure. If the tube is now turned to a vertical position,
+by what amount will the mercury be displaced ?
+(Given : cross-section of the tube can be assumed to be uniform)
+(1) 2.95 cm (2) 5.18 cm
+(3) 8.65 cm (4) 0.0 cm
+Q10.The ratio of the coefficient of volume expansion of a glass container to that of a viscous liquid kept inside the
+container is 1 : 4 . What fraction of the inner volume of the container should the liquid occupy so that the
+volume of the remaining vacant space will be same at all temperatures ?
+(1) 2 : 5 (2) 1 : 4
+(3) 1 : 64 (4) 1 : 8
+Q11. 500 g of water and 100 g of ice at 0∘C are in a calorimeter whose water equivalent is 40 g.10 g of steam at
+100∘C is added to it. Then water in the calorimeter is : (Latent heat of ice = 80cal/g , Latent heat of steam
+= 540cal/g )
+(1) 580 g (2) 590 g
+(3) 600 g (4) 610 g
+Q12.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: The internal energy of a perfect gas is entirely kinetic and
+depends only on absolute temperature of the gas and not on its pressure or volume. Statement 2: A perfect gas
+is heated keeping pressure constant and later at constant volume. For the same amount of heat the temperature
+of the gas at constant pressure is lower than that at constant volume.
+(1) Statement-1 is true, Statement- 2 is true and (2) Statement-1 is true, Statement-2 is false.
+Statement −2 is the correct explanation of
+Statement-1.
+(3) Statement-1 is true, Statement-2 is true but (4) Statement-1 is false, Statement-2 is true.
+Statement-2 is not the correct explanation of
+Statement-1.
+Q13.Bob of a simple pendulum of length l is made of iron. The pendulum is oscillating over a horizontal coil
+carrying direct current. If the time period of the pendulum is T then :
+(1) T < 2π√l and damping is smaller than in air alone.
+g
+(2) T = 2π√l and damping is larger than in air alone.
+g
+(3) T > 2π√l and damping is smaller than in air alone.
+g
+(4) T < 2π√l and damping is larger than in air alone.
+g
+Q14.A sonometer wire of length 114 cm is fixed at both the ends. Where should the two bridges be placed so as to
+divide the wire into three segments whose fundamental frequencies are in the ratio 1 : 3 : 4 ?
+(1) At 36 cm and 84 cm from one end (2) At 24 cm and 72 cm from one end
+(3) At 48 cm and 96 cm from one end (4) At 72 cm and 96 cm from one end
+Q15.Consider a finite insulated, uncharged conductor placed near a finite positively charged conductor. The
+uncharged body must have a potential :
+(1) less than the charged conductor and more than at infinity.
+(2) more than the charged conductor and less than at infinity.
+(3) more than the charged conductor and more than at infinity.
+(4) less than the charged conductor and less than at infinity.
+Q16.A liquid drop having 6 excess electrons is kept stationary under a uniform electric field of 25.5 kVm−1 . The
+density of liquid is 1.26 × 103 kg m−3 . The radius of the drop is (neglect buoyancy).
+(1) 4.3 × 10−7 m (2) 7.8 × 10−7 m
+(3) 0.078 × 10−7 m (4) 3.4 × 10−7 m
+Q17.A parallel plate capacitor of area 60 cm2 and separation 3 mm is charged initially to 90μC . If the medium
+between the plate gets slightly conducting and the plate loses the charge initially at the rate of 2.5 × 10−8C/s ,
+then what is the magnetic field between the plates ?
+(1) 2.5 × 10−8 T (2) 2.0 × 10−7 T
+(3) 1.63 × 10−11 T (4) Zero
+Q18.Which of the four resistances P, Q, R and S generate the greatest amount of heat when a current flows from A
+to B ?
+(1) Q (2) S
+→B
+(3) P (4) R
+Q19.A rectangular loop of wire, supporting a mass m , hangs with one end in a uniform magnetic field pointing
+out of the plane of the paper. A clockwise current is set up such that i > mg/Ba , where a is the width of the
+loop. Then :
+(1) The weight rises due to a vertical force caused by (2) The weight do not rise due to vertical for caused
+the magnetic field and work is done on the by the magnetic field and work is done on the
+system. system.
+(3) The weight rises due to a vertical force caused by (4) The weight rises due to a vertical force caused by
+the magnetic field but no work is done on the the magnetic field and work is extracted from the
+system. magnetic field.
+→B
+Q20.A particle of charge 16 × 10−16C moving with velocity 10 ms−1 along x -axis →B enters a region where magnetic
+field of induction is along the y -axis and an electric field of magnitude 104Vm−1 is along the negative z -
+axis. If the charged particle continues moving along x -axis, the magnitude of is :
+(1) 16 × 103 Wb m−2 (2) 2 × 103 Wb m−2
+(3) 1 × 103 Wb m−2 (4) 4 × 103 Wb m−2
+Q21.The plot given below is of the average power delivered to an LRC circuit versus frequency. The quality factor
+of the circuit is :
+(1) 5.0 (2) 2.0
+(3) 2.5 (4) 0.4
+Q22.Select the correct statement from the following :
+(1) Electromagnetic waves cannot travel in vacuum. (2) Electromagnetic waves are longitudinal waves.
+(3) Electromagnetic waves are produced by charges (4) Electromagnetic waves carry both energy and
+moving with uniform velocity. momentum as they propagate through space.
+Q23.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: Very large size telescopes are reflecting telescopes instead
+of refracting telescopes. Statement 2: It is easier to provide mechanical support to large size mirrors than large
+size lenses.
+(1) Statement-1 is true and Statement-2 is false. (2) Statement-1 is false and Statement-2 is true.
+(3) Statement-1 and statement-2 are true and (4) Statements-1 and statement-2 are true and
+Statement-2 is correct explanation for statement- Statement-2 is not the correct explanation for
+1. statement-1.
+Q24.A light ray falls on a square glass slab as shown in the diagram. The index of refraction of the glass, if total
+internal reflection is to occur at the vertical face, is equal to :
+(1) (√2+1) (2) √5
+2 2
+(3) 3 (4) √3
+2 2
+Q25. n identical waves each of intensity I0 interfere with each other. The ratio of maximum intensities if the
+interference is (i) coherent and (ii) incoherent is :
+(1) n2 (2) 1
+n
+(3) 1 (4) n
+n2
+Q26.Electrons are accelerated through a potential difference V and protons are accelerated through a potential
+difference 4 V . The de-Broglie wavelengths are λe and λp for electrons and protons respectively. The ratio of
+λe is given by: (given me is mass of electron and mp is mass of proton).
+λp
+(1) λe = √mp (2) λe = √me
+λp me λp mp
+(3) λe = 1 √me (4) λe = 2√mp
+λp 2 mp λp me
+Q27.In the Bohr's model of hydrogen-like atom the force between the nucleus and the electron is modified as
+F = e2 ( 1 + β ) , where β is a constant. For this atom, the radius of the nth orbit in terms of the Bohr
+4πε0 r2 r3
+radius (a0 = ε0h2 ) is :
+mπe2
+(1) rn = a0n −β (2) rn = a0n2 + β
+(3) rn = a0n2 −β (4) rn = a0n + β
+Q28.A system of four gates is set up as shown. The 'truth table' corresponding to this system is :
+(1) (2)
+(3) (4)
+Q29.Which of the following statement is NOT correct?
+(1) Ground wave signals are more stable than the sky (2) The critical frequency of an ionospheric layer is
+wave signals. the highest frequency that will be reflected back
+by the layer when it is vertically incident.
+(3) Electromagnetic waves of frequencies higher (4) Sky wave signals in the broadcast frequency
+than about 30MHz cannot penetrate the range are stronger at night than in the day time.
+ionosphere.
+Q30.Correct set up to verify Ohm's law is :
+(1) (2)
+(3) (4)
+Q31.Number of atoms in the following samples of substances is largest in:
+(1) 4.0 g of hydrogen (2) 71.0 g of chlorine
+(3) 127.0 g of iodine (4) 48.0 g of magnesium
+Q32.The de Broglie wavelength of a car of mass 1000 kg and velocity 36 km/hr is :
+(1) 6.626 × 10−34 m (2) 6.626 × 10−38 m
+(3) 6.626 × 10−31 m (4) 6.626 × 10−30 m
+Q33.Which is the correct order of second ionization potential of C, N, O and F in the following ?
+(1) O > N > F > C (2) O > F > N > C
+(3) F > O > N > C (4) C > N > O > F
+Q34.The shape of IF− is :
+6
+(1) Trigonally distorted octahedron (2) Pyramidal
+(3) Octahedral (4) Square antiprism
+Q35.Bond distance in HF is 9.17 × 10−11 m . Dipole moment of HF is 6.104 × 10−30Cm . The percentage ionic
+character in HF will be : (electron charge = 1.60 × 10−19C )
+(1) 61.0% (2) 38.0%
+(3) 35.5% (4) 41.5%
+Q36.The correct order of viscosity of the following liquids will be :
+(1) Water < methyl alcohol < dimethyl ether < glycerol
+(2) methyl alcohol < glycerol < water < dimethyl ether
+(3) dimethyl ether < methyl alcohol < water < glycerol
+(4) glycerol < dimethyl ether < water < methyl alcohol
+Q37.Which of the following statements/relationships is not correct in thermodynamic changes ?
+(1) ΔU = 0 (isothermal reversible expansion of a (2) w = −nRT ln V2 (isothermal reversible
+V1
+gas) expansion of an ideal gas)
+(3) w = nRT ln V2 (isothermal reversible (4) For a system of constant volume heat involved
+V1
+expansion of an ideal gas) directly changes to internal energy.
+Q38.(1) N2( g) + 3H2( g) ⇌2NH3( g), K1 (2) N2( g) + O2( g) ⇌2NO(g), K2 (3)
+H2( g) + 1 O2( g) ⇌H2O(g), K3 The equation for the equilibrium constant of the reaction
+2
+5
+2NH3( g) + O2( g) ⇌2NO(g) + 3H2O(g),
+2
+(K4) in terms of K1, K2 and K3 is :
+(1) K1⋅K2 (2) K1⋅K2
+K3 3
+K2
+(3) K1 K2 K3 (4) K2⋅K3 3
+K1
+Q39.What is the pH of a 10−4MOH− solution at 330 K , if Kw at 330 K is 10−13.6 ?
+(1) 4 (2) 9.0
+(3) 10 (4) 9.6
+Q40.The numbers of protons, electrons and neutrons in a molecule of heavy water are respectively :
+(1) 8, 10, 11 (2) 10, 10, 10
+(3) 10, 11, 10 (4) 11, 10, 10
+Q41.Equimolar solutions of the following compounds are prepared separately in water. Which will have the lowest
+pH value ?
+(1) BeCl2 (2) SrCl2
+(3) CaCl2 (4) MgCl2
+Q42.Monocarboxylic acids are functional isomers of:
+(1) Ethers (2) Amines
+(3) Esters (4) Alcohols
+Q43.In a face centred cubic lattice, atoms of A form the corner points and atoms of B form the face centred points.
+If two atoms of A are missing from the corner points, the formula of the ionic compound is :
+(1) AB3 (2) AB4
+(3) A2 B5 (4) AB2
+Q44.Vapour pressure of pure benzene is 119 torr and that of toluene is 37.0 torr at the same temperature. Mole
+fraction of toluene in vapour phase which is in equilibrium with a solution of benzene and toluene having a
+mole fraction of toluene 0.50 , will be :
+(1) 0.137 (2) 0.237
+(3) 0.435 (4) 0.205
+Q45.Given :
+Eo Cl2/Cl−= 1.36 V, Eo = −0.74 V
+1 Cr3+/Cr
+2
+Eo = 1.33 V, Eo = 1.51 V
+Cr2O2− /Cr3+ MnO− /Mn2+
+7 4
+The correct order of reducing power of the species (Cr, Cr3+, Mn2+ and Cl−) will be:
+(1) Mn2+ < Cl−< Cr3+ < Cr (2) Mn2+ < Cl3+ < Cl−< Cr
+(3) Cr3+ < Cl−< Mn2+ < Cr (4) Cr3+ < Cl−< Cr < Mn2+
+Q46.The rate constant of a zero order reaction is 2.0× 10−2 mol L−1 s−1 . If the concentration of the reactant after
+25 seconds is 0.5M . What is the initial concentration?
+(1) 0.5M (2) 1.25M
+(3) 12.5M (4) 1.0M
+Q47.Smoke is an example of:
+(1) Solid dispersed in solid (2) Gas dispersed in liquid
+(3) Solid dispersed in gas (4) Gas dispersed in solid
+Q48.Which has trigonal bipyramidal shape ?
+(1) XeOF4 (2) XeO3
+(3) XeO3 F2 (4) XeOF2
+Q49.When a small amount of KMnO4 is added to concentrated H2SO4 , a green oily compound is obtained which
+is highly explosive in nature. Compound may be :
+(1) MnSO4 (2) Mn2O7
+(3) MnO2 (4) Mn2O3
+Q50.Identify incorrect statement :
+(1) Cu2O is colourless. (2) Copper (I) compounds are colourless except
+when colour results from charge transfer.
+(3) Copper (I) compounds are diamagnetic. (4) Cu2 S is black.
+Q51.The magnetic moment of the complex anion [Cr(NO) (NH3)(CN)4]2− is :
+(1) 5.91BM (2) 3.87BM
+(3) 1.73BM (4) 2.82BM
+Q52.Identify the incorrect statement:
+(1) In (Si3O9)6− , tetrahedral SiO4 units share two (2) Trialkylchlorosilane on hydrolysis gives R3SiOH
+oxygen atoms. .
+(3) SiCl4 undergoes hydrolysis to give H4SiO4 . (4) (Si3O9)6− has cyclic structure.
+Q53.The order of reactivity of the given haloalkanes towards nucleophile is :
+(1) RI > RBr > RCl (2) RCl > RBr > RI
+(3) RBr > RCl > RI (4) RBr > RI > RCl
+Q54.The reaction of phenol with benzoyl chloride to give phenyl benzoate is known as :
+(1) Claisen reaction (2) Schotten-Baumann reaction
+(3) Reimer-Tiemann reaction (4) Gatterman-Koch reaction
+Q55.Which of the following is the product of aldol condensation?
+(1) (2)
+(3) (4)
+Q56.The order of basicity of amines in gaseous state is :
+(1) 1∘> 2∘> 3∘> NH3 (2) 3∘> 2∘> NH3 > 1∘
+(3) 3∘> 2∘> 1∘> NH3 (4) NH3 > 1∘> 2∘> 3∘
+Q57.Which of the following polymer is a polyamide ?
+(1) Terylene (2) Nylon
+(3) Rubber (4) Vulcanised rubber
+Q58. H1− Receptor antagonists is a term associated with :
+(1) Antiseptics (2) Antihistamins
+(3) Antacids (4) Analgesics
+Q59.Glycosidic linkage is actually an :
+(1) Carbonyl bond (2) Ether bond
+(3) Ester bond (4) Amide bond
+Q60.Natural glucose is termed D-glucose because :
+(1) −OH on the second carbon is on the right side in (2) −OH on the sixth carbon is on the right side in
+Fischer projection Fischer projection.
+(3) −OH on the fifth carbon is on the right side in (4) It is dextrorotatory.
+Fischer projection.
+Q61.The least integral value α of x such that x−5 > 0 , satisfies :
+x2+5x−14
+(1) α2 + 3α −4 = 0 (2) α2 −5α + 4 = 0
+(3) α2 −7α + 6 = 0 (4) α2 + 5α −6 = 0
+Q62.Let a = Im ( 1+z2 ) , where z is any non-zero complex number. The set A = {a : |z| = 1 and z ≠±1} is equal
+2iz
+to:
+(1) (−1, 1) (2) [−1, 1]
+(3) [0, 1) (4) (−1, 0]
+Q63.The sum of the series : (2)2 + 2(4)2 + 3(6)2 + … upto 10 terms is :
+(1) 11300 (2) 11200
+(3) 12100 (4) 12300
+Q64.If a1, a2, a3, … , an, … . are in A.P. such that a4 −a7 +a10 = m , then the sum of first 13 terms of this A.P., is
+:
+(1) 10 m (2) 12 m
+(3) 13 m (4) 15 m
+Q65.The sum of the rational terms in the binomial expansion of (2 1 + 3 1 ) 10 is :
+2 5
+(1) 25 (2) 32
+(3) 9 (4) 41
+Q66.The number of solutions of the equation sin 2x −2 cos x + 4 sin x = 4 in the interval [0, 5π] is :
+(1) 3 (2) 5
+(3) 4 (4) 6
+Q67.If two lines L1 and L2 in space, are defined by
+L1 = {x = √λy + (√λ −1),
+z = (√λ −1)y + √λ} and
+L2 = {x = √μy + (1 −√μ),
+z = (1 −√μ)y + √μ}
+then L1 is perpendicular to L2 , for all nonnegative reals λ and μ , such that :
+(1) √λ + √μ = 1 (2) λ ≠μ
+(3) λ + μ = 0 (4) λ = μ
+Q68.Let θ1 be the angle between two lines 2x + 3y+ c1 = 0 and −x + 5y + c2 = 0 and θ2 be the angle between
+two lines 2x + 3y + c1 = 0 and −x + 5y+ c3 = 0 , where c1, c2, c3 are any real numbers : Statement-1: If c2
+and c3 are proportional, then θ1 = θ2 . Statement-2: θ1 = θ2 for all c2 and c3 .
+(1) Statement-1 is true, Statement-2 is true; (2) Statement-1 is true, Statement-2 is true;
+Statement-2 is a correct explanation of Statement-2 is not a correct explanation of
+Statement-1. Statement-1.
+(3) Statement-1 is false; Statement- 2 is true. (4) Statement-1 is true; Statement- 2 is false.
+Q69.If the circle x2 + y2 −6x −8y + (25 −a2) = 0 touches the axis of x , then a equals.
+(1) 0 (2) ±4
+(3) ±2 (4) ±3
+Q70.The point of intersection of the normals to the parabola y2 = 4x at the ends of its latus rectum is :
+(1) (0, 2) (2) (3, 0)
+(3) (0, 3) (4) (2, 0)
+Q71.A tangent to the hyperbola x2 −y2 = 1 meets x -axis at P and y -axis at Q . Lines PR and QR are drawn such
+4 2
+that OPRQ is a rectangle (where O is the origin). Then R lies on :
+(1) 4 + 2 = 1 (2) 2 − 4 = 1
+x2 y2 x2 y2
+(3) 2 + 4 = 1 (4) 4 − 2 = 1
+x2 y2 x2 y2
+Q72.For integers m and n , both greater than 1, consider the following three statements : P : m divides n Q : m
+divides n2 R : m is prime, then
+(1) Q ∧R →P (2) P ∧Q →R
+(3) Q →R (4) Q →P
+Q73.If the median and the range of four numbers {x, y, 2x + y, x −y} , where 0 < y < x < 2y , are 10 and 28
+respectively, then the mean of the numbers is :
+(1) 18 (2) 10
+(3) 5 (4) 14
+Q74.If the extremities of the base of an isosceles triangle are the points (2a, 0) and (0, a) and the equation of one of
+the sides is x = 2a , then the area of the triangle, in square units, is :
+(1) 5 a2 (2) 5 a2
+4 2
+(3) 25a2 (4) 5a2
+4
+Q75.On the sides AB, BC, CA of a △ABC, 3, 4, 5 distinct points (excluding vertices A, B, C ) are respectively
+chosen. The number of triangles that can be constructed using these chosen points as vertices are :
+(1) 210 (2) 205
+(3) 215 (4) 220
+Q76.Let R = {(x, y) : x, y ∈N and x2 −4xy + 3y2 = 0} , where N is the set of all natural numbers. Then the
+relation R is :
+(1) reflexive but neither symmetric nor transitive. (2) symmetric and transitive.
+(3) reflexive and symmetric, (4) reflexive and transitive.
+Q77.Let A , other than I or −I , be a 2 × 2 real matrix such that A2 = I , I being the unit matrix. Let Tr(A) be the
+sum of diagonal elements of A. Statement-1: Tr(A) = 0 Statement-2: det(A) = −1
+(1) Statement-1 is true; Statement- 2 is false.
+(2) Statement-1 is true; Statement-2 is true; Statement-2 is not a correct explanation for Statement-1.
+(3) Statement-1 is true; Statement-2 is true; Statement-2 is a correct explanation for Statement-1.
+(4) Statement-1 is false; Statement- 2 is true.
+Q78.Statement-1: The system of linear equations
+x + (sin α)y + (cos α)z = 0
+x + (cos α)y + (sin α)z = 0
+x −(sin α)y −(cos α)z = 0
+has a non-trivial solution for only one value of α lying in the interval (0, π ) . Statement-2: The equation in α
+2
+cos α sin α cos α
+sin α cos α sin α = 0
+cos α −sin α −cos α
+has only one solution lying in the interval (0, π )
+2
+(1) Statement-1 is true, Statement-2 is true, (2) Statement-1 is true, Statement-2 is true,
+Statement-2 is not correct explantion for Statement-2 is a correct explantion for
+Statement-1. Statement-1.
+(3) Statement-1 is true, Statement- 2 is false. (4) Statememt-1 is false, Statement-2 is true.
+Q79. S = tan−1 ( 1 ) + tan−1 ( 1 ) + … + tan−1 ( 1 ) , then tan S is equal to :
+n2+n+1 n2+3n+3 1+(n+19)(n+20)
+(1) 20 (2) n
+401+20n n2+20n+1
+(3) 20 (4) n
+n2+20n+1 401+20n
+Q80.Let f be a composite function of x defined by f(u) = 1 , u(x) = 1 . Then the number of points x
+u2+u−2 x−1
+where f is discontinuous is :
+(1) 4 (2) 3
+(3) 2 (4) 1
+Q81.If f(x) = sin(sin x) and f ′′(x) + tan xf ′(x) + g(x) = 0 , then g(x) is :
+(1) cos2 x cos(sin x) (2) sin2 x cos(cos x)
+(3) sin2 x sin(cos x) (4) cos2 x sin(sin x)
+Q82.If the curves x2 + y2 = 1 and y3 = 16x intersect at right angles, then a value of α is :
+α 4
+(1) 2 (2) 4
+3
+(3) 1 (4) 3
+2 4
+Q83.The cost of running a bus from A to B is Rs. (av + b/v) where vkm/h is the average speed of the bus. When
+the bus travels at 30 km/h , the cost comes out to be Rs. 75 while at 40 km/h , it is Rs. 65. Then the most
+economical speed (in km/h) of the bus is :
+(1) 45 (2) 50
+(3) 60 (4) 40
+Q84.If a curve passes through the point (2, 7 ) and has slope (1 − 1 ) at any point (x, y) on it, then the ordinate of
+2 x2
+the point on the curve whose abscissa is −2 is :
+(1) −3 (2) 3
+2 2
+(3) 5 (4) −5
+2 2
+Q85.The integral ∫ xdx equals :
+2−x2+√2−x2
+(1) log 1 + √2 + x2 + c (2) −log 1 + √2 −x2 + c
+(3) −x log 1 −√2 −x2 + c (4) x log 1 −√2 + x2 + c
+Q86.The value of ∫π/2 sin2 x dx is :
+−π/2 1+2x
+(1) π (2) π
+2
+(3) 4π (4) π
+4
+Q87.The area under the curve y = | cos x −sin x| , 0 ≤x ≤π , and above x -axis is :
+2
+(1) 2√2 (2) 2√2 −2
+→a →b →u −2)→a →b
+(3) 2√2 + 2 (4) 0
+→v 3α)→a −3→b
+Q88.If and are non-collinear vectors, then the value of α for which the vectors = (α + and
+= (2 + are collinear is :
+(1) 3 (2) 2
+2 3
+(3) −3 (4) −2
+2 3
+Q89.If the projections of a line segment on the x, y and z -axes in 3-dimensional space are 2, 3 and 6 respectively,
+then the length of the line segment is :
+(1) 12 (2) 7
+(3) 9 (4) 6
+Q90. A, B, C try to hit a target simultaneously but independently. Their respective probabilities of hitting the targets
+are 3 , 1 , 5 . The probability that the target is hit by A or B but not by C is :
+4 2 8
+(1) 21/64 (2) 7/8
+(3) 7/32 (4) 9/64

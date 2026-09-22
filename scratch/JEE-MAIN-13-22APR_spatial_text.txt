@@ -1,0 +1,447 @@
+Q1. The dimensions of angular momentum, latent heat and capacitance are, respectively.
+(1) ML2 T1 A2, L2 T−2, M−1 L−2 T2 (2) ML2 T−2, L2 T2, M−1 L−2 T4 A2
+(3) ML2 T−1, L2 T−2, ML2TA2 (4) ML2 T−1, L2 T−2, M−1 L−2 T4 A2
+Q2. A ball projected from ground at an angle of 45∘ just clears a wall in front. If point of projection is 4 m from the
+foot of wall and ball strikes the ground at a distance of 6 m on the other side of the wall, the height of the wall is
+:
+(1) 4.4 m (2) 2.4 m
+(3) 3.6 m (4) 1.6 m
+Q3. Two blocks of mass M1 = 20 kg and M2 = 12 kg are connected by a metal rod of mass 8 kg . The system is
+pulled vertically up by applying a force of 480 N as shown. The tension at the mid-point of the rod is:
+(1) 144 N (2) 96 N
+(3) 240 N (4) 192 N
+Q4. A body starts from rest on a long inclined plane of slope 45∘ . The coefficient of friction between the body and
+the plane varies as μ = 0.3x , where x is distance travelled down the plane. The body will have maximum speed
+(for g = 10 m/s2 ) when x =
+(1) 9.8 m (2) 27 m
+(3) 12 m (4) 3.33 m
+Q5. A tennis ball (treated as hollow spherical shell) starting from O rolls down a hill. At point A the ball becomes
+air borne leaving at an angle of 30∘ with the horizontal. The ball strikes the ground at B . What is the value of
+the distance AB ? (Moment of inertia of a spherical shell of mass m and radius R about its diameter = 2 mR2 )
+3
+(1) 1.87 m (2) 2.08 m
+(3) 1.57 m (4) 1.77 m
+Q6. The change in the value of acceleration of earth towards sun, when the moon comes from the position of solar
+eclipse to the position on the other side of earth in line with sun is: (mass of the moon = 7.36 × 1022 kg , radius
+of the moon's orbit = 3.8 × 108 m ).
+(1) 6.73 × 10−5 m/s2 (2) 6.73 × 10−3 m/s2
+(3) 6.73 × 10−2 m/s2 (4) 6.73 × 10−4 m/s2
+Q7. A uniform wire (Young's modulus 2 × 1011Nm−2 ) is subjected to longitudinal tensile stress of 5 × 107Nm−2 .
+If the overall volume change in the wire is 0.02% , the fractional decrease in the radius of the wire is close to:
+(1) 1.0 × 10−4 (2) 1.5 × 10−4
+(3) 0.25 × 10−4 (4) 5 × 10−4
+Q8. Air of density 1.2 kg m−3 is blowing across the horizontal wings of an aeroplane in such a way that its speeds
+above and below the wings are 150 ms−1 and 100 ms−1 , respectively. The pressure difference between the
+upper and lower sides of the wings, is :
+(1) 60Nm−2 (2) 180Nm−2
+(3) 7500Nm−2 (4) 12500Nm−2
+Q9. Given that 1 g of water in liquid phase has volume 1 cm3 and in vapour phase 1671 cm3 at atmospheric
+pressure and the latent heat of vaporization of water is 2256 J/g ; the change in the internal energy in joules for
+1 g of water at 373 K when it changes from liquid phase to vapour phase at the same temperature is :
+(1) 2256 (2) 167
+(3) 2089 (4) 1
+Q10.An ideal gas at atmospheric pressure is adiabatically compressed so that its density becomes 32 times of its
+initial value. If the final pressure of gas is 128 atmospheres, the value of ' γ 'of the gas is :
+(1) 1.5 (2) 1.4
+(3) 1.3 (4) 1.6
+Q11.A certain amount of gas is taken through a cyclic process (A B C D A) that has two isobars, one isochore and
+one isothermal. The cycle can be represented on a P −V indicator diagram as :
+(1) (2)
+(3) (4)
+Q12.A mass m = 1.0 kg is put on a flat pan attached to a vertical spring fixed on the ground. The mass of the
+spring and the pan is negligible. When pressed slightly and released, the mass executes simple harmonic
+motion. The spring constant is 500 N/m . What is the amplitude A of the motion, so that the mass m tends to
+get detached from the pan ? (Take g = 10 m/s2 ). The spring is stiff enough so that it does not get distorted
+during the motion.
+(1) A > 2.0 cm (2) A = 2.0 cm
+(3) A < 2.0 cm (4) A = 1.5 cm
+Q13.A and B are two sources generating sound waves. A listener is situated at C . The frequency of the source at A
+is 500 Hz . A, now, moves towards C with a speed 4 m/s . The number of beats heard at C is 6 . When A moves
+away from C with speed 4 m/s , the number of beats heard at C is 18 . The speed of sound is 340 m/s . The
+frequency of the source at B is :
+(1) 500 Hz (2) 506 Hz
+(3) 512 Hz (4) 494 Hz
+Q14.A point charge of magnitude +1μC is fixed at (0 , 0, 0) . An isolated uncharged spherical conductor, is fixed
+with its center at (4, 0, 0) . The potential and the induced electric field at the centre of the sphere is :
+(1) 1.8 × 105 V and −5.625 × 106 V/m (2) 0 V and 0 V/m
+(3) 2.25 × 105 V and −5.625 × 106 V/m (4) 2.25 × 105 V and 0 V/m
+Q15.Two small equal point charges of magnitude q are suspended from a common point on the ceiling by insulating
+mass less strings of equal lengths. They come to equilibrium with each string making angle θ from the vertical.
+If the mass of each charge is m , then the electrostatic potential at the centre of line joining them will be
+( 1 k).
+=
+4π ∈0
+(1) 2√kmg tan θ (2) √kmg tan θ
+(3) 4√kmg/ tan θ (4) 4√kmg/ tan θ
+Q16.To establish an instantaneous current of 2 A through a 1μF capacitor ; the potential difference across the
+capacitor plates should be changed at the rate of:
+(1) 2 × 104 V/s (2) 4 × 106 V/s
+(3) 2 × 106 V/s (4) 4 × 104 V/s
+Q17.A dc source of emf E1 = 100 V and internal resistance r = 0.5Ω , a storage battery of emf E2 = 90 V and an
+external resistance R are connected as shown in figure. For what value of R no current will pass through the
+battery?
+(1) 5.5Ω (2) 3.5Ω
+(3) 4.5Ω (4) 2.5Ω
+Q18.To find the resistance of a galvanometer by the half deflection method the following circuit is used with
+resistances R1 = 9970 W, R2 = 30 W and R3 = 0 . The deflection in the galvanometer is d. With
+R3 = 107 W the deflection changed to d . The galvanometer resistance is approximately:
+2
+(1) 107Ω (2) 137Ω
+(3) 107/2Ω (4) 77Ω
+Q19.Choose the correct sketch of the magnetic field lines of a circular current loop shown by the dot
+and the cross ⊗.
+(1) (2)
+(3) (4)
+Q20.A current i is flowing in a straight conductor of length L . The magnetic induction at a point on its axis at a
+distance L from its centre will be :
+4
+(1) Zero (2) μ0i
+2πL
+(3) μ0i (4) 4μ0i
+√2L √5πL
+Q21.An LCR circuit as shown in the figure is connected to a voltage source Vac whose frequency can be varied.
+The frequency, at which the voltage across the resistor is maximum, is :
+(1) 902 Hz (2) 143 Hz
+(3) 23 Hz (4) 345 Hz
+Q22.In a series L −C −R circuit, C = 10−11 Farad, L = 10−5 Henry and R = 100Ohm , when a constant D.C.
+voltage E is applied to the circuit, the capacitor acquires a charge 10−9 C. The D.C. source is replaced by a
+sinusoidal voltage source in which the peak voltage E0 is equal to the constant D.C. voltage E. At resonance
+the peak value of the charge acquired by the capacitor will be :
+(1) 10−15C (2) 10−6C
+→E →E0
+(3) 10−10C (4) 10−8C
+Q23.A plane electromagnetic wave in a non-magnetic dielectric medium is given by = (4 × 10−7x −50t)
+with distance being in meter and time in seconds. The dielectric constant of the medium is :
+(1) 2.4 (2) 5.8
+(3) 8.2 (4) 4.8
+Q24.The focal length of the objective and the eyepiece of a telescope are 50 cm and 5 cm respectively. If the
+telescope is focussed for distinct vision on a scale distant 2 m from its objective, then its magnifying power
+will be :
+(1) −4 (2) −8
+(3) +8 (4) −2
+Q25.The image of an illuminated square is obtained on a screen with the help of a converging lens. The distance of
+the square from the lens is 40 cm . The area of the image is 9 times that of the square. The focal length of the
+lens is :
+(1) 36 cm (2) 27 cm
+(3) 60 cm (4) 30 cm
+Q26.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1: Short wave transmission is achieved due to the total
+internal reflection of the e-m wave from an appropriate height in the ionosphere. Statement-2: Refractive index
+of a plasma is independent of the frequency of e-m waves.
+(1) Statement-1 is true, Statement- 2 is false. (2) Statement-1 is false, Statement- 2 is true.
+(3) Statement-1 is true, Statement- 2 is true but (4) Statement-1 is true, Statement-2 is true and
+Statement −2 is not the correct explanation of Statement −2 is the correct explanation of
+statement-1. Statement-1.
+Q27.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1: In Young's double slit experiment, the number of fringes
+observed in the field of view is small with longer wavelength of light and is large with shorter wavelength of
+light. Statement-2: In the double slit experiment the fringe width depends directly on the wavelength of light.
+(1) Statement-1 is true, Statement-2 is true and the (2) Statement-1 is false and the Statement-2 is true.
+Statement-2 is correct explanation of the
+Statement-1.
+(3) Statement-1 is true Statement-2 is true and the (4) Statement-1 is true and the Statement-2 is false.
+Statement-2 is not correct explanation of the
+Statement-1.
+Q28.Orbits of a particle moving in a circle are such that the perimeter of the orbit equals an integer number of de-
+Broglie wavelengths of the particle. For a charged particle moving in a plane perpendicular to a magnetic field,
+the radius of the nth orbital will therefore be proportional to :
+(1) n2 (2) n
+(3) n1/2 (4) n1/4
+Q29.The half-life of a radioactive element A is the same as the mean-life of another radioactive element B. Initially
+both substances have the same number of atoms, then :
+(1) A and B decay at the same rate always. (2) A and B decay at the same rate initially.
+(3) A will decay at a faster rate than B. (4) B will decay at a faster rate than A .
+Q30.Figure shows a circuit in which three identical diodes are used. Each diode has forward resistance of 20Ω and
+infinite backward resistance. Resistors R1 = R2 = R3 = 50Ω . Battery voltage is 6 V . The current through R3
+is :
+(1) 50 mA (2) 100 mA
+(3) 60 mA (4) 25 mA
+Q31.The density of 3M solution of sodium chloride is 1.252 g mL−1 . The molality of the solution will be : ( molar
+mass, NaCl = 585 g mol−1)
+(1) 260 m (2) 2.18 m
+(3) 2.79 m (4) 3.00 m
+Q32.The wave number of the first emission line in the Balmer series of H -Spectrum is : (R = Rydberg constant ) :
+(1) 5 R (2) 9 R
+36 400
+(3) 7 R (4) 3 R
+6 4
+Q33.The order of increasing sizes of atomic radii among the elements O, S , Se and As is :
+(1) As < S < O < Se (2) Se < S < As < O
+(3) O < S < As < Se (4) O < S < Se < As
+Q34.The solubility order for alkali metal fluoride in water is :
+(1) LiF < RbF < KF < NaF (2) RbF < KF < NaF < LiF
+(3) LiF > NaF > KF > RbF (4) LiF < NaF < KF < RbF
+Q35.Bond order normally gives idea of stability of a molecular species. All the molecules viz. H2, Li2 and B2 have
+the same bond order yet they are not equally stable. Their stability order is :
+(1) H2 > B2 > Li2 (2) Li2 > H2 > B2
+(3) Li2 > B2 > H2 (4) None of these
+Q36. (in kJ)
+Li(s) →Li(g) 161
+Li(g) →Li+(g) 520
+1 F2( g) →F(g) 77
+Given Reaction Energy Change 2 Based on data provided, the
+(Electron gain
+F( g) + e−→F−(g)
+enthalpy)
+Li+(g) + F−(g) →LiF(s) −1047
+Li(s) + 1 F2( g) →LiF(s) −617
+2
+value of electron gain enthalpy of fluorine would be :
+(1) −300 kJ mol−1 (2) −350 kJ mol−1
+(3) −328 kJ mol−1 (4) −228 kJ mol−1
+Q37.The reaction X →Y is an exothermic reaction. Activation energy of the reaction for X into Y is 150 kJ mol−1
+. Enthalpy of reaction is 135 kJ mol−1 . The activation energy for the reverse reaction, Y →X will be :
+(1) 280 kJ mol−1 (2) 285 kJ mol−1
+(3) 270 kJ mol−1 (4) 15 kJ mol−1
+Q38.Which one of the following arrangements represents the correct order of solubilities of sparingly soluble salts
+Hg2Cl2, Cr2(SO4)3 , BaSO4 and CrCl3 respectively?
+(1) BaSO4 > Hg2Cl2 > Cr2(SO4)3 > CrCl3 (2) BaSO4 > Hg2Cl2 > CrCl3 > Cr2(SO4)3
+(3) BaSO4 > CrCl3 > Hg2Cl2 > Cr2(SO4)3 (4) Hg2Cl2 > BaSO4 > CrCl3 > Cr2(SO4)3
+Q39. NaOH is a strong base. What will be pH of 5.0 × 10−2MNaOH solution ? (log 2 = 0.3)
+(1) 14.00 (2) 13.70
+(3) 13.00 (4) 12.70
+Q40. Acid Ka
+HCN 6.2 × 10−10
+Values of dissociation constant, Ka are given as follows : Correct order of increasing
+HF 7.2 × 10−4
+HNO2 4.0 × 10−4
+base strength of the base CN−, F− and NO− will be :
+2
+(1) F−< CN−< NO− (2) NO− < CN−< F−
+2 2
+(3) F−< NO− < CN− (4) NO− < F−< CN−
+2 2
+Q41.For which of the following compounds Kjeldahl method can be used to determine the percentage of Nitrogen?
+(1) Nitrobenzene (2) Pyridine
+(3) Alanine (4) Diazomethane
+Q42.Arrange in the correct order of stability (decreasing order) for the following molecules: (I)
+(II)
+(III)
+(IV)
+(1) (I) > (II) > (III) > (IV) (2) (IV) > (III) > (II) ≈ (I)
+(3) (I) > (II) ≈ (III) > (IV) (4) (III) > (I) ≈ (II) > (IV)
+Q43.A major component of Borsch reagent is obtained by reacting hydrazine hydrate with which of the following ?
+(1) (2)
+(3) (4)
+Q44.Clemmensen reduction of a ketone is carried out in the presence of :
+(1) LiAlH4 (2) Zn −Hg with HCl
+(3) Glycol with KOH (4) H2 with Pt as catalyst
+Q45.Which of the following would not give 2-phenylbutane as the major product in a Friedel-Crafts alkylation
+reaction ?
+(1) 1-butene +HF (2) 2-butanol +H2SO4
+(3) Butanoyl chloride +AlCl3 then Zn, HCl (4) Butyl choloride +AlCl3
+Q46.Which one of the following statements about packing in solids is incorrect ?
+(1) Coordination number in bcc mode of packing is 8 (2) Coordination number in hep mode of packing is
+. 12 .
+(3) Void space in hcp mode of packing is 32% . (4) Void space in ccp mode of packing is 26% .
+Q47.A molecule M associates in a given solvent according to the equation M ⇌(M)n . For a certain concentration
+of M, the van't Hoff factor was found to be 0.9 and the fraction of associated molecules was 0.2 . The value of
+n is:
+(1) 3 (2) 5
+(3) 2 (4) 4
+Q48.Flocculation value of BaCl2 is much less than that of KCl for sol A and flocculation value of Na2SO4 is much
+less than that of NaBr for sol B . The correct statement among the following is :
+(1) Both the sols A and B are negatively charged. (2) Sol A is positively charged and Sol B is
+negatively charged.
+(3) Both the sols A and B are positively charged. (4) Sol A is negatively charged and sol B is
+positively charged.
+Q49.In Goldschmidt aluminothermic process which of the following reducing agents is used :
+(1) calcium (2) coke
+(3) Al-powder (4) sodium
+Q50.Oxidation state of sulphur in anions SO2− , S2O2− and S2O2− increases in the orders :
+3 4 6
+(1) S2O2− < S2O2− < SO2− (2) SO2− < S2O2− < S2O2−
+6 4 3 6 4 6
+(3) S2O2− < SO2− < S2O2− (4) S2O2− < S2O2− < SO2−
+4 3 6 4 6 3
+Q51. XeO4 molecule is tetrahedral having:
+(1) Two pπ −dπ bonds (2) One pπ −dπ bonds
+(3) Four pπ −dπ bonds (4) Three pπ −dπ bonds
+Q52.Which of the following is diamagnetic ?
+(1) [Fe(CN)6]3− (2) [Co(ox)3]3−
+(3) [FeF6]3− (4) [CoF6]3−
+Q53.Which of the following statements is incorrect?
+(1) Fe2+ ion also gives blood red colour with SCN− (2) Fe3+ ion also gives blood red colour with SCN−
+ion. ion.
+(3) On passing H2 S into Na2ZnO2 solution a white (4) Cupric ion reacts with excess of ammonia
+ppt of ZnS is formed. solution to give deep blue colour of
+[Cu(NH3)4]2+ ion.
+Q54.The Wurtz-Fittig reaction involves condensation of:
+(1) two molecules of aryl halides (2) one molecule of each of aryl-halide and alkyl-
+halide.
+(3) one molecule of each of aryl-halide and phenol. (4) two molecules of aralkyl-halides.
+Q55.What is the structure of the major product when phenol is treated with bromine water?
+(1) (2)
+(3) (4)
+Q56.Amongst the following alcohols which would react fastest with conc. HCl and ZnCl2 ?
+(1) pentanol (2) 2-methyl butanol
+(3) 2-pentanol (4) 2-methyl butan-2-ol
+Q57.In Williamson synthesis of mixed ether having a primary and a tertiary alkyl group if tertiary halide is used,
+then :
+(1) Rate of reaction will be slow due to slow (2) Alkene will be the main product.
+cleavage of carbon-halogen bond.
+(3) Simple ether will form instead of mixed ether. (4) Expected mixed ether will be formed.
+Q58.The polymer used for optical lenses is :
+(1) polypropylene (2) polyvinyl chloride
+(3) polythene (4) polymethyl methacrylate
+Q59.Which of the following statements about aspirin is not true?
+(1) It is effective in relieving pain. (2) It is a neurologically active drug.
+(3) It has antiblood clotting action. (4) It belongs to narcotic analgesics.
+Q60.Which of the following structures represents thymine ?
+(1) (2)
+(3) (4)
+Q61.If α and β are roots of the equation x2 + px + 3p = 0 , such that |α −β| = √10 , then p belongs to the set :
+4
+(1) {2, −5} (2) {−3, 2}
+(3) {−2, 5} (4) {3, −5}
+Q62.If a complex number z statisfies the equation x + √2|z + 1| + i = 0 , then |z| is equal to :
+(1) 2 (2) √3
+(3) √5 (4) 1
+Q63.The number of ways in which an examiner can assign 30 marks to 8 questions, giving not less than 2 marks to
+any question, is :
+(1) 30C7 (2) 21C8
+(3) 21C7 (4) 30C8
+Q64.Given sum of the first n terms of an A.P. is 2n+ 3n2 . Another A.P. is formed with the same first term and
+double of the common difference, the sum of n terms of the new A.P. is :
+(1) n + 4n2 (2) 6n2 −n
+(3) n2 + 4n (4) 3n + 2n2
+Q65.The sum 3 + 5 + 7 + … . upto 11-terms is:
+12 12+22 12+22+32
+(1) 7 (2) 11
+2 4
+(3) 11 (4) 60
+2 11
+Q66.If the 7th term in the binomial expansion of ( 3 + √3 ln x) 9 , x > 0 , is equal to 729 , then x can be:
+3√84
+(1) e2 (2) e
+(3) e (4) 2e
+2
+Q67.The number of solutions of the equation, sin−1 x = 2 tan−1 x (in principal values) is :
+(1) 1 (2) 4
+(3) 2 (4) 3
+Q68.Statement-1: The number of common solutions of the trigonometric equations 2 sin2 θ −cos 2θ = 0 and
+2 cos2 θ −3 sin θ = 0 in the interval [0, 2π] is two. Statement-2: The number of solutions of the equation,
+2 cos2 θ −3 sin θ = 0 in the interval [0, π] is two.
+(1) Statement-1 is true; Statement-2 is true; (2) Statement-1 is true; Statement-2 is true;
+Statement-2 is a correct explanation for Statement-2 is not a correct explanation for
+statement-1. statement-1.
+(3) Statement-1 is false; Statement-2 is true. (4) Statement-1 is true; Statement-2 is false.
+Q69.If the x -intercept of some line L is double as that of the line, 3x + 4y = 12 and the y -intercept of L is half as
+that of the same line, then the slope of L is :
+(1) −3 (2) −3/8
+(3) −3/2 (4) −3/16
+Q70.The acute angle between two lines such that the direction cosines l, m, n , of each of them satisfy the equations
+l + m + n = 0 and l2 + m2 −n2 = 0 is :
+(1) 15∘ (2) 30∘
+(3) 60∘ (4) 45∘
+Q71.If a circle C passing through (4, 0) touches the circle x2 + y2 + 4x −6y −12 = 0 externally at a point (1, −1)
+, then the radius of the circle C is :
+(1) 5 (2) 2√5
+(3) 4 (4) √57
+Q72.Statement-1: The line x −2y = 2 meets the parabola, y2 + 2x = 0 only at the point (−2, −2) . Statement-2:
+The line y = mx − 1 (m ≠0) is tangent to the parabola, y2 = −2x at the point (− 1 , −1 )
+2m 2m2 m
+(1) Statement-1 is true; Statement- 2 is false. (2) Statement-1 is true; Statement-2 is true;
+Statement-2 is a correct explanation for
+statement-1.
+(3) Statement-1 is false; Statement-2 is true. (4) Statement-1 a true; Statement-2 is true;
+Statement-2 is not a correct explanation for
+statement-1.
+Q73.Let the equations of two ellipses be
+x2 y2 x2 y2
+E1 : + = 1 and E2 : + = 1,
+3 2 16 b2
+If the product of their eccentricities is 1 , then the length of the minor axis of ellipse E2 is :
+2
+(1) 8 (2) 9
+(3) 4 (4) 2
+Q74.The statement p →(q →p) is equivalent to :
+(1) p →q (2) p →(p ∨q)
+(3) p →(p →q) (4) p →(p ∧q)
+Q75.Mean of 5 observations is 7 . If four of these observations are 6, 7, 8, 10 and one is missing then the variance of
+all the five observations is :
+(1) 4 (2) 6
+(3) 8 (4) 2
+Q76.If two vertices of an equilateral triangle are A(−a, 0) and B(a, 0), a > 0 , and the third vertex C lies above x -
+axis then the equation of the circumcircle of △ABC is :
+(1) 3x2 + 3y2 −2√3ay = 3a2 (2) 3x2 + 3y2 −2ay = 3a2
+(3) x2 + y2 −2ay = a2 (4) x2 + y2 −√3ay = a2
+Q77.Let R = {(3, 3)(5, 5), (9, 9), (12, 12), (5, 12), (3, 9) , (3, 12), (3, 5)} be a relation on the set A = {3, 5, 9, 12} .
+Then, R is :
+(1) reflexive, symmetric but not transitive. (2) symmetric, transitive but not reflexive.
+(3) an equivalence relation. (4) reflexive, transitive but not symmetric.
+Q78. ⎡ 3 4 1 ⎤
+If p, q, r are 3 real numbers satisfying the matrix equation, [pqr] 3 2 3 = [ 3 0 1 ] then 2p + q −r
+⎣ ⎦
+2 0 2
+equals :
+(1) −3 (2) −1
+(3) 4 (4) 2
+Q79.If the system of linear equations :
+x1 + 2x2 + 3x3 = 6
+x1 + 3x2 + 5x3 = 9
+2x1 + 5x2 + ax3 = b
+is consistent and has infinite number of solutions, then :
+(1) a = 8, b can be any real number (2) b = 15, a can be any real number
+(3) a ∈R −{8} and b ∈R −{15} (4) a = 8, b = 15
+Q80.Let f(x) = −1 + |x −2| , and g(x) = 1 −|x| ; then the set of all points where fog is discontinuous is :
+(1) {0, 2} (2) {0, 1, 2}
+(3) {0} (4) an empty set
+Q81.For a > 0, t ∈(0, π ) , let x = √asin−1 t and y = √acos−1 t , Then, 1 + ( dy ) 2 equals :
+2 dx
+(1) x2 (2) y2
+y2 x2
+(3) x2+y2 (4) x2+y2
+y2 x2
+Q82.Statement-1: The function x2 (ex + e−x) is increasing for all x > 0 . Statement-2: The functions x2ex and
+x2e−x are increasing for all x > 0 and the sum of two increasing functions in any interval (a, b) is an
+increasing function in (a, b) .
+(1) Statement-1 is false; Statement-2 is true. (2) Statement-1 is true; Statement-2 is true;
+Statement-2 is not a correct explanation for
+Statement-1.
+(3) Statement-1 is true; Statement-2 is false. (4) Statement-1is true; Statement-2 is true;
+Statement-2 is a correct explanation for
+statement-1.
+Q83.The maximum area of a right angled triangle with hypotenuse h is :
+(1) h2 (2) h2
+2√2 2
+(3) h2 (4) h2
+√2 4
+Q84.If ∫x2−x+1 ecot−1 xdx = A(x)ecot−1 x + C , then A(x) is equal to :
+x2+1
+(1) −x (2) x
+(3) √1 −x (4) √1 + x
+Q85.The integral ∫7π/3 √tan2 xdx is equal to :
+7π/4
+(1) log 2√2 (2) log 2
+(3) 2 log 2 (4) log √2
+Q86.The area of the region (in sq. units), in the first quadrant bounded by the parabola y = 9x2 and the lines
+x = 0, y = 1 and y = 4 , is :
+(1) 7/9 (2) 14/3
+(3) 7/3 (4) 14/9
+Q87.Consider the differential equation :
+dy y3
+=
+dx 2 (xy2 −x2)
+Statement-1: The substitution z = y2 transforms the above equation into a first order homogenous differential
+equation. Statement-2: The solution of this differential equation is y2e−y2/x = C .
+(1) Both statements are false. (2) Statement-1 is true and statement- 2 is false.
+(3) Statement-1 is false and statement-2 is true. (4) Both statements are true.
+Q88.If →
+^a,^b and ^c are unit vectors satisfying ^a −√3^b + ^c = 0 , then the angle between the vectors ^a and ^c is :
+(1) π (2) π
+4 3
+(3) π (4) π
+6 2
+Q89.Let Q be the foot of perpendicular from the origin to the plane 4x −3y + z + 13 = 0 and R be a point
+(−1, −6) on the plane. Then length QR is :
+(1) √14 (2) √19
+2
+(3) 3√7 (4) 3
+2 √2
+Q90.Given two independent events, if the probability that exactly one of them occurs is 26 and the probability that
+49
+none of them occurs is 15 , then the probability of more probable of the two events is :
+49
+(1) 4/7 (2) 6/7
+(3) 3/7 (4) 5/7

@@ -1,0 +1,632 @@
+[
+  {
+    "qnum": 1,
+    "subject": "Physics",
+    "raw_block": "The dimensions of angular momentum, latent heat and capacitance are, respectively.\n\nML2\u00a0T1\u00a0A2, \u00a0L2\u00a0T\u22122, M\u22121\u00a0L\u22122\u00a0T2\nML2\u00a0T\u22122, \u00a0L2\u00a0T2, M\u22121\u00a0L\u22122\u00a0T4\u00a0A2\n\n(1)\n(2)\n\nML2\u00a0T\u22121, \u00a0L2\u00a0T\u22122, ML2TA2\nML2\u00a0T\u22121, \u00a0L2\u00a0T\u22122, M\u22121\u00a0L\u22122\u00a0T4\u00a0A2\n\n(3)\n(4)\n\n45\u2218\n4\u00a0m\n6\u00a0m",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 2,
+    "subject": "Physics",
+    "raw_block": "A ball projected from ground at an angle of \n just clears a wall in front. If point of projection is \n from the\n\nfoot of wall and ball strikes the ground at a distance of \n on the other side of the wall, the height of the wall is\n\n:\n\n(1)\n(2)\n\n4.4\u00a0m\n2.4\u00a0m\n3.6\u00a0m\n1.6\u00a0m\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 3,
+    "subject": "Physics",
+    "raw_block": "Two blocks of mass \n and \n are connected by a metal rod of mass \n. The system is\n\nM1 = 20\u00a0kg\nM2 = 12\u00a0kg\n8\u00a0kg\n480\u00a0N\n\npulled vertically up by applying a force of \n as shown. The tension at the mid-point of the rod is:\n\n(1)\n(2)\n\n144\u00a0N\n96\u00a0N\n240\u00a0N\n192\u00a0N\n\n(3)\n(4)\n\n45\u2218",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 4,
+    "subject": "Physics",
+    "raw_block": "A body starts from rest on a long inclined plane of slope \n. The coefficient of friction between the body and\n\nthe plane varies as \n, where  is distance travelled down the plane. The body will have maximum speed\n\n\u03bc = 0.3x\nx\ng = 10\u00a0m/s2\nx =\n9.8\u00a0m\n27\u00a0m\n12\u00a0m\n3.33\u00a0m\n\n(for \n ) when \n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 5,
+    "subject": "Physics",
+    "raw_block": "A tennis ball (treated as hollow spherical shell) starting from  rolls down a hill. At point  the ball becomes\n\nO\nA\n30\u2218\nB\n\nair borne leaving at an angle of \n with the horizontal. The ball strikes the ground at . What is the value of\n\n\u00a0\n\nAB\nm\nR\n= 2\n\n3 mR2\n\nthe distance \n ? (Moment of inertia of a spherical shell of mass \n and radius  about its diameter \n )\n\n(1)\n(2)\n\n1.87\u00a0m\n2.08\u00a0m\n1.57\u00a0m\n1.77\u00a0m\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 6,
+    "subject": "Physics",
+    "raw_block": "The change in the value of acceleration of earth towards sun, when the moon comes from the position of solar\n\n= 7.36 \u00d7 1022\u00a0kg\n= 3.8 \u00d7 108\u00a0m\n6.73 \u00d7 10\u22125\u00a0m/s2\n6.73 \u00d7 10\u22123\u00a0m/s2\n\neclipse to the position on the other side of earth in line with sun is: (mass of the moon \n, radius\n\nof the moon's orbit \n ).\n\n(1)\n(2)\n\n6.73 \u00d7 10\u22122\u00a0m/s2\n6.73 \u00d7 10\u22124\u00a0m/s2\n\n(3)\n(4)\n\n2 \u00d7 1011Nm\u22122\n5 \u00d7 107Nm\u22122",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 7,
+    "subject": "Physics",
+    "raw_block": "A uniform wire (Young's modulus \n ) is subjected to longitudinal tensile stress of \n.\n\nIf the overall volume change in the wire is \n, the fractional decrease in the radius of the wire is close to:\n\n0.02%\n1.0 \u00d7 10\u22124\n1.5 \u00d7 10\u22124\n\n(1)\n(2)\n\n0.25 \u00d7 10\u22124\n5 \u00d7 10\u22124\n\n(3)\n(4)\n\n1.2\u00a0kg\u00a0m\u22123",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 8,
+    "subject": "Physics",
+    "raw_block": "Air of density \n is blowing across the horizontal wings of an aeroplane in such a way that its speeds\n\n150\u00a0ms\u22121\n100\u00a0ms\u22121\n\nabove and below the wings are \n and \n, respectively. The pressure difference between the\n\nupper and lower sides of the wings, is :\n\n60Nm\u22122\n180Nm\u22122\n\n(1)\n(2)\n\n7500Nm\u22122\n12500Nm\u22122\n\n(3)\n(4)\n\n1\u00a0g\n1\u00a0cm3\n1671\u00a0cm3",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 9,
+    "subject": "Physics",
+    "raw_block": "Given that \n of water in liquid phase has volume \n and in vapour phase \n at atmospheric\n\npressure and the latent heat of vaporization of water is \n; the change in the internal energy in joules for\n\n2256\u00a0J/g\n1\u00a0g\n373\u00a0K\n\n of water at \n when it changes from liquid phase to vapour phase at the same temperature is :\n\n(1) 2256\n(2) 167\n\n(3) 2089\n(4) 1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 10,
+    "subject": "Physics",
+    "raw_block": "An ideal gas at atmospheric pressure is adiabatically compressed so that its density becomes 32 times of its\n\ninitial value. If the final pressure of gas is 128 atmospheres, the value of '  'of the gas is :\n\n\u03b3\n1.5\n1.4\n1.3\n1.6\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 11,
+    "subject": "Physics",
+    "raw_block": "A certain amount of gas is taken through a cyclic process (A B C D A) that has two isobars, one isochore and\n\none isothermal. The cycle can be represented on a \n indicator diagram as :\n\nP \u2212V\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 12,
+    "subject": "Physics",
+    "raw_block": "A mass \n is put on a flat pan attached to a vertical spring fixed on the ground. The mass of the\n\nm = 1.0\u00a0kg\n\nspring and the pan is negligible. When pressed slightly and released, the mass executes simple harmonic\n\nmotion. The spring constant is \n. What is the amplitude A of the motion, so that the mass \n tends to\n\n500\u00a0N/m\nm\ng = 10\u00a0m/s2\n\nget detached from the pan ? (Take \n ). The spring is stiff enough so that it does not get distorted\n\nduring the motion. \n\n\u00a0\n\n(1)\n(2)\n\nA > 2.0\u00a0cm\nA = 2.0\u00a0cm\nA < 2.0\u00a0cm\nA = 1.5\u00a0cm\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 13,
+    "subject": "Physics",
+    "raw_block": "A and B are two sources generating sound waves. A listener is situated at . The frequency of the source at \n\nC\nA\n500\u00a0Hz\nC\n4\u00a0m/s\nC\nA\nC\n4\u00a0m/s\nC\n340\u00a0m/s\n\nis \n. A, now, moves towards  with a speed \n. The number of beats heard at  is 6 . When  moves\n\naway from  with speed \n, the number of beats heard at  is 18 . The speed of sound is \n. The\n\nfrequency of the source at  is : \n\nB\n500\u00a0Hz\n506\u00a0Hz\n512\u00a0Hz\n494\u00a0Hz\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 14,
+    "subject": "Physics",
+    "raw_block": "A point charge of magnitude \n is fixed at \n, \n. An isolated uncharged spherical conductor, is fixed\n\n+1\u03bcC\n(0 0, 0)\n(4, 0, 0)\n1.8 \u00d7 105\u00a0V\n\u22125.625 \u00d7 106\u00a0V/m\n0\u00a0V\n0\u00a0V/m\n2.25 \u00d7 105\u00a0V\n\u22125.625 \u00d7 106\u00a0V/m\n2.25 \u00d7 105\u00a0V\n0\u00a0V/m\n\nwith its center at \n. The potential and the induced electric field at the centre of the sphere is :\n\n(1)\n and \n(2)\n and \n\n(3)\n and \n(4)\n and ",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 15,
+    "subject": "Physics",
+    "raw_block": "Two small equal point charges of magnitude  are suspended from a common point on the ceiling by insulating\n\nq\n\nmass less strings of equal lengths. They come to equilibrium with each string making angle  from the vertical.\n\n\u03b8\nm\n\nIf the mass of each charge is \n, then the electrostatic potential at the centre of line joining them will be\n\n(\n1\n4\u03c0 \u22080\n= k).\u00a0\n\n2\u221akmg tan \u03b8\n\u221akmg tan \u03b8\n4\u221akmg/ tan \u03b8\n4\u221akmg/ tan \u03b8\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 16,
+    "subject": "Physics",
+    "raw_block": "To establish an instantaneous current of \n through a \n capacitor ; the potential difference across the\n\n2\u00a0A\n1\u03bcF\n\ncapacitor plates should be changed at the rate of:\n\n2 \u00d7 104\u00a0V/s\n4 \u00d7 106\u00a0V/s\n2 \u00d7 106\u00a0V/s\n4 \u00d7 104\u00a0V/s\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 17,
+    "subject": "Physics",
+    "raw_block": "A dc source of emf \n and internal resistance \n, a storage battery of emf \n and an\n\nE1 = 100\u00a0V\nr = 0.5\u03a9\nE2 = 90\u00a0V\nR\n\nexternal resistance  are connected as shown in figure. For what value of R no current will pass through the\n\n\u00a0\n\nbattery? \n\n(1)\n(2)\n\n5.5\u03a9\n3.5\u03a9\n4.5\u03a9\n2.5\u03a9\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 18,
+    "subject": "Physics",
+    "raw_block": "To find the resistance of a galvanometer by the half deflection method the following circuit is used with\n\nresistances \n and \n. The deflection in the galvanometer is d. With\n\nR1 = 9970\u00a0W, R2 = 30\u00a0W\nR3 = 0\nR3 = 107\u00a0W\nd\n2\n\n the deflection changed to \n. The galvanometer resistance is approximately:\n\n(1)\n(2)\n\n107\u03a9\n137\u03a9\n107/2\u03a9\n77\u03a9\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 19,
+    "subject": "Physics",
+    "raw_block": "Choose the correct sketch of the magnetic field lines of a circular current loop shown by the dot\n\n\u00a0and the cross\u00a0 \u2297.\u00a0\n\n\u00a0\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 20,
+    "subject": "Physics",
+    "raw_block": "A current  is flowing in a straight conductor of length . The magnetic induction at a point on its axis at a\n\ni\nL\n\nL\n\ndistance \n from its centre will be :\n\n4\n\u03bc0i\n2\u03c0L\n\u03bc0i\n\u221a2L\n\n(1) Zero\n(2)\n\n4\u03bc0i\n\u221a5\u03c0L\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 21,
+    "subject": "Physics",
+    "raw_block": "An LCR circuit as shown in the figure is connected to a voltage source \n whose frequency can be varied.\n\nVac\n\nThe frequency, at which the voltage across the resistor is maximum, is :\n\n(1)\n(2)\n\n902\u00a0Hz\n143\u00a0Hz\n23\u00a0Hz\n345\u00a0Hz\n\n(3)\n(4)\n\nL \u2212C \u2212R\nC = 10\u221211\nL = 10\u22125\nR = 100Ohm\nE\n10\u22129",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 22,
+    "subject": "Physics",
+    "raw_block": "In a series \n circuit, \n Farad, \n  Henry and \n, when a constant D.C.\n\nvoltage  is applied to the circuit, the capacitor acquires a charge \n C. The D.C. source is replaced by a\n\nsinusoidal voltage source in which the peak voltage \n is equal to the constant D.C. voltage E. At resonance\n\nE0\n\nthe peak value of the charge acquired by the capacitor will be :\n\n\u00a0\n\n10\u221215C\n10\u22126C\n10\u221210C\n10\u22128C\n\n(1)\n(2)\n\n\u2192E = \u2192E0 (4 \u00d7 10\u22127x \u221250t)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 23,
+    "subject": "Physics",
+    "raw_block": "A plane electromagnetic wave in a non-magnetic dielectric medium is given by \n\nwith distance being in meter and time in seconds. The dielectric constant of the medium is :\n\n(1)\n(2)\n\n2.4\n5.8\n8.2\n4.8\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 24,
+    "subject": "Physics",
+    "raw_block": "The focal length of the objective and the eyepiece of a telescope are \n and \n respectively. If the\n\n50\u00a0cm\n5\u00a0cm\n2\u00a0m\n\ntelescope is focussed for distinct vision on a scale distant \n from its objective, then its magnifying power\n\nwill be :\n\n(1)\n(2)\n\n\u22124\n\u22128\n+8\n\u22122\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 25,
+    "subject": "Physics",
+    "raw_block": "The image of an illuminated square is obtained on a screen with the help of a converging lens. The distance of\n\nthe square from the lens is 40 \n. The area of the image is 9 times that of the square. The focal length of the\n\ncm\n\nlens is :\n\n(1)\n(2)\n\n36\u00a0cm\n27\u00a0cm\n60\u00a0cm\n30\u00a0cm\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 26,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement-1: Short wave transmission is achieved due to the total\n\ninternal reflection of the e-m wave from an appropriate height in the ionosphere. Statement-2: Refractive index\n\nof a plasma is independent of the frequency of e-m waves.\n\n(1) Statement-1 is true, Statement- 2 is false.\n(2) Statement-1 is false, Statement- 2 is true.\n\n(3) Statement-1 is true, Statement- 2 is true but\n\n(4) Statement-1 is true, Statement-2 is true and\n\nStatement \n is not the correct explanation of\n\nStatement \n is the correct explanation of\n\n\u22122\n\u22122\n\nstatement-1.\n\nStatement-1.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 27,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement-1: In Young's double slit experiment, the number of fringes\n\nobserved in the field of view is small with longer wavelength of light and is large with shorter wavelength of\n\nlight. Statement-2: In the double slit experiment the fringe width depends directly on the wavelength of light.\n\n(1) Statement-1 is true, Statement-2 is true and the\n\n(2) Statement-1 is false and the Statement-2 is true.\n\nStatement-2 is correct explanation of the\n\nStatement-1.\n\n(3) Statement-1 is true Statement-2 is true and the\n\n(4) Statement-1 is true and the Statement-2 is false.\n\nStatement-2 is not correct explanation of the\n\nStatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 28,
+    "subject": "Physics",
+    "raw_block": "Orbits of a particle moving in a circle are such that the perimeter of the orbit equals an integer number of de-\n\nBroglie wavelengths of the particle. For a charged particle moving in a plane perpendicular to a magnetic field,\n\nnth\u00a0\n\nthe radius of the \n orbital will therefore be proportional to :\n\n\u00a0\n\nn2\nn\nn1/2\nn1/4\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 29,
+    "subject": "Physics",
+    "raw_block": "The half-life of a radioactive element  is the same as the mean-life of another radioactive element B. Initially\n\nA\n\nboth substances have the same number of atoms, then :\n\n(1) A and B decay at the same rate always.\n(2) A and  decay at the same rate initially.\n\nB\nB\nA\n\n(3) A will decay at a faster rate than B.\n(4)\n will decay at a faster rate than .",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 30,
+    "subject": "Physics",
+    "raw_block": "Figure shows a circuit in which three identical diodes are used. Each diode has forward resistance of \n and\n\n20\u03a9\nR1 = R2 = R3 = 50\u03a9\n6\u00a0V\nR3\n\ninfinite backward resistance. Resistors \n. Battery voltage is \n. The current through \n\nis : \n\n(1)\n(2)\n\n50\u00a0mA\n100\u00a0mA\n60\u00a0mA\n25\u00a0mA\n\n(3)\n(4)\n\n3M\n1.252\u00a0g\u00a0mL\u22121\n(\nNaCl = 585\u00a0g\u00a0mol\u22121)\n260\u00a0m\n2.18\u00a0m\n2.79\u00a0m\n3.00\u00a0m",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 31,
+    "subject": "Chemistry",
+    "raw_block": "The density of \n solution of sodium chloride is \n. The molality of the solution will be :  molar\n\nmass, \n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 32,
+    "subject": "Chemistry",
+    "raw_block": "The wave number of the first emission line in the Balmer series of -Spectrum is : \n Rydberg constant  :\n\nH\n(R =\n)\n\n5\n36 R\n9\n400 R\n\n(1)\n(2)\n\n7\n6 R\n3\n4 R\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 33,
+    "subject": "Chemistry",
+    "raw_block": "The order of increasing sizes of atomic radii among the elements O, , Se and As is :\n\nS\n< S < O < Se\nSe < S < As < O\n<\n<\n< Se\nO < S < Se < As\n\n(1) As \n(2)\n\n(3) O  S  As \n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 34,
+    "subject": "Chemistry",
+    "raw_block": "The solubility order for alkali metal fluoride in water is :\n\n(1)\n(2)\n\nLiF < RbF < KF < NaF\nRbF < KF < NaF < LiF\nLiF > NaF > KF > RbF\nLiF < NaF < KF < RbF\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 35,
+    "subject": "Chemistry",
+    "raw_block": "Bond order normally gives idea of stability of a molecular species. All the molecules viz. \n and \n have\n\nH2, Li2\nB2\n\nthe same bond order yet they are not equally stable. Their stability order is :\n\n\u00a0\n\n(1)\n(2)\n\nH2 > B2 > Li2\nLi2 > H2 > B2\nLi2 > B2 > H2\n\n(3)\n(4) None of these\n\n\u00a0(in kJ)\u00a0\nLi(s) \u2192Li(g)\n161\nLi(g) \u2192Li+(g)\n520",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 36,
+    "subject": "Chemistry",
+    "raw_block": "1\n2 \u00a0F2(\u00a0g) \u2192F(g)\n77\n\nGiven Reaction Energy Change \n Based on data provided, the\n\n\u00a0(Electron gain\u00a0\n\u00a0enthalpy)\u00a0\n\n\u00a0F(\u00a0g) + e\u2212\u2192F\u2212(g)\n\nLi+(g) + F\u2212(g) \u2192LiF(s)\n\u22121047\nLi(s) + 1\n\n2 \u00a0F2(\u00a0g) \u2192LiF(s)\n\u2212617\n\nvalue of electron gain enthalpy of fluorine would be :\n\n\u2212300\u00a0kJ\u00a0mol\u22121\n\u2212350\u00a0kJ\u00a0mol\u22121\n\n(1)\n(2)\n\n\u2212328\u00a0kJ\u00a0mol\u22121\n\u2212228\u00a0kJ\u00a0mol\u22121\n\n(3)\n(4)\n\nX \u2192Y\nX\nY\n150\u00a0kJ\u00a0mol\u22121",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 37,
+    "subject": "Chemistry",
+    "raw_block": "The reaction \n is an exothermic reaction. Activation energy of the reaction for  into  is \n\n135\u00a0kJ mol\u22121\nY \u2192X\n280\u00a0kJ\u00a0mol\u22121\n285\u00a0kJ\u00a0mol\u22121\n\n. Enthalpy of reaction is \n \n. The activation energy for the reverse reaction, \n will be :\n\n(1)\n(2)\n\n270\u00a0kJ\u00a0mol\u22121\n15\u00a0kJ\u00a0mol\u22121\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 38,
+    "subject": "Chemistry",
+    "raw_block": "Which one of the following arrangements represents the correct order of solubilities of sparingly soluble salts\n\n, \n and \n respectively?\n\nHg2Cl2, Cr2(SO4)3 BaSO4\nCrCl3\nBaSO4 > Hg2Cl2 > Cr2(SO4)3 > CrCl3\nBaSO4 > Hg2Cl2 > CrCl3 > Cr2(SO4)3\nBaSO4 > CrCl3 > Hg2Cl2 > Cr2(SO4)3\nHg2Cl2 > BaSO4 > CrCl3 > Cr2(SO4)3\n\n(1)\n(2)\n\n(3)\n(4)\n\nNaOH\npH\n5.0 \u00d7 10\u22122MNaOH\n(log 2 = 0.3)\n14.00\n13.70\n13.00\n12.70",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 39,
+    "subject": "Chemistry",
+    "raw_block": "is a strong base. What will be \n of \n solution ? \n\n(1)\n(2)\n\n(3)\n(4)\n\n\u00a0Acid\u00a0\nKa\nHCN\n6.2 \u00d7 10\u221210",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 40,
+    "subject": "Chemistry",
+    "raw_block": "Values of dissociation constant, \n are given as follows : \n Correct order of increasing\n\nKa\n\nHF\n7.2 \u00d7 10\u22124\n\nHNO2\n4.0 \u00d7 10\u22124\n\nCN\u2212, F\u2212\nNO\u2212\n\nbase strength of the base \nand \nwill be :\n\n2\nF\u2212< CN\u2212< NO\u2212\n\n2\nNO\u2212\n\n2 < CN\u2212< F\u2212\n\n(1)\n(2)\n\nF\u2212< NO\u2212\n\n2 < CN\u2212\nNO\u2212\n\n2 < F\u2212< CN\u2212\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 41,
+    "subject": "Chemistry",
+    "raw_block": "For which of the following compounds Kjeldahl method can be used to determine the percentage of Nitrogen?\n\n(1) Nitrobenzene\n(2) Pyridine\n\n(3) Alanine\n(4) Diazomethane",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 42,
+    "subject": "Chemistry",
+    "raw_block": "Arrange in the correct order of stability (decreasing order) for the following molecules: (I)\n\n(II)\n\n(III)\n\n(IV)\n\n(1) (I)  (II)  (III)  (IV)\n(2) (IV)  (III)  (II)  (I)\n\n>\n>\n>\n>\n>\n\u2248\n>\n\u2248\n>\n>\n\u2248\n>\n\n(3) (I)  (II)  (III)  (IV)\n(4) (III)  (I)  (II)  (IV)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 43,
+    "subject": "Chemistry",
+    "raw_block": "A major component of Borsch reagent is obtained by reacting hydrazine hydrate with which of the following ?\n\n\u00a0\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 44,
+    "subject": "Chemistry",
+    "raw_block": "Clemmensen reduction of a ketone is carried out in the presence of :\n\n(1)\n(2)\n with \n\nLiAlH4\nZn \u2212Hg\nHCl\nKOH\nH2\nPt\n\n(3) Glycol with \n(4)\n with \n as catalyst",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 45,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following would not give 2-phenylbutane as the major product in a Friedel-Crafts alkylation\n\nreaction ?\n\n(1) 1-butene \n(2) 2-butanol \n\n+HF\n+H2SO4\n+AlCl3\nZn, HCl\n+AlCl3\n\n(3) Butanoyl chloride \n then \n(4) Butyl choloride ",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 46,
+    "subject": "Chemistry",
+    "raw_block": "Which one of the following statements about packing in solids is incorrect ?\n\n(1) Coordination number in bcc mode of packing is 8\n\n(2) Coordination number in hep mode of packing is\n\n.\n\n12 .\n\n(3) Void space in hcp mode of packing is \n.\n(4) Void space in ccp mode of packing is \n.\n\n32%\n26%\n\nM\nM \u21cc(M)n\n0.9\n0.2\nn",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 47,
+    "subject": "Chemistry",
+    "raw_block": "A molecule \n associates in a given solvent according to the equation \n. For a certain concentration\n\nof M, the van't Hoff factor was found to be \n and the fraction of associated molecules was \n. The value of\n\n is:\n\n(1) 3\n(2) 5\n\n(3) 2\n(4) 4",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 48,
+    "subject": "Chemistry",
+    "raw_block": "Flocculation value of \n is much less than that of \n for sol  and flocculation value of \n is much\n\nBaCl2\nKCl\nA\nNa2SO4\nNaBr\nB\n\nless than that of \n for sol . The correct statement among the following is :\n\n(1) Both the sols A and B are negatively charged.\n(2) Sol A is positively charged and Sol B is\n\nnegatively charged.\n\n(3) Both the sols A and B are positively charged.\n(4) Sol A is negatively charged and sol B is\n\npositively charged.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 49,
+    "subject": "Chemistry",
+    "raw_block": "In Goldschmidt aluminothermic process which of the following reducing agents is used :\n\n(1) calcium\n(2) coke\n\n(3) Al-powder\n(4) sodium\n\n\u00a0\n\nSO2\u2212\n\n3 , S2O2\u2212\n4\nS2O2\u2212",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 50,
+    "subject": "Chemistry",
+    "raw_block": "Oxidation state of sulphur in anions \n and \n increases in the orders :\n\n6\nS2O2\u2212\n\n6\n< S2O2\u2212\n\n4\n< SO2\u2212\n\n3\nSO2\u2212\n\n6\n< S2O2\u2212\n\n4\n< S2O2\u2212\n\n(1)\n(2)\n\n6\nS2O2\u2212\n\n4\n< SO2\u2212\n\n3\n< S2O2\u2212\n\n6\nS2O2\u2212\n\n4\n< S2O2\u2212\n\n6\n< SO2\u2212\n\n(3)\n(4)\n\n3",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 51,
+    "subject": "Chemistry",
+    "raw_block": "molecule is tetrahedral having:\n\nXeO4\n\n(1) Two \n bonds\n(2) One \n bonds\n\np\u03c0 \u2212d\u03c0\np\u03c0 \u2212d\u03c0\np\u03c0 \u2212d\u03c0\np\u03c0 \u2212d\u03c0\n\n(3) Four \n bonds\n(4) Three \n bonds",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 52,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following is diamagnetic ?\n\n[Fe(CN)6]3\u2212\n[Co(ox)3]3\u2212\n\n(1)\n(2)\n\n[FeF6]3\u2212\n[CoF6]3\u2212\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 53,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following statements is incorrect?\n\nFe2+\nSCN\u2212\nFe3+\nSCN\u2212\n\n(1)\n ion also gives blood red colour with \n\n(2)\n ion also gives blood red colour with \n\nion.\n\nion.\n\n(3) On passing \n into \n solution a white\n\n(4) Cupric ion reacts with excess of ammonia\n\nH2\u00a0S\nNa2ZnO2\nZnS\n\nppt of \n is formed.\n\nsolution to give deep blue colour of\n\n[Cu(NH3)4]2+\n\n ion.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 54,
+    "subject": "Chemistry",
+    "raw_block": "The Wurtz-Fittig reaction involves condensation of:\n\n(1) two molecules of aryl halides\n(2) one molecule of each of aryl-halide and alkyl-\n\nhalide.\n\n(3) one molecule of each of aryl-halide and phenol.\n(4) two molecules of aralkyl-halides.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 55,
+    "subject": "Chemistry",
+    "raw_block": "What is the structure of the major product when phenol is treated with bromine water?\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 56,
+    "subject": "Chemistry",
+    "raw_block": "Amongst the following alcohols which would react fastest with conc. \n and \n ?\n\nHCl\nZnCl2\n\n(1) pentanol\n(2) 2-methyl butanol\n\n(3) 2-pentanol\n(4) 2-methyl butan-2-ol",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 57,
+    "subject": "Chemistry",
+    "raw_block": "In Williamson synthesis of mixed ether having a primary and a tertiary alkyl group if tertiary halide is used,\n\nthen :\n\n(1) Rate of reaction will be slow due to slow\n\n(2) Alkene will be the main product.\n\ncleavage of carbon-halogen bond.\n\n(3) Simple ether will form instead of mixed ether.\n(4) Expected mixed ether will be formed.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 58,
+    "subject": "Chemistry",
+    "raw_block": "The polymer used for optical lenses is :\n\n(1) polypropylene\n(2) polyvinyl chloride\n\n(3) polythene\n(4) polymethyl methacrylate",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 59,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following statements about aspirin is not true?\n\n(1) It is effective in relieving pain.\n(2) It is a neurologically active drug.\n\n(3) It has antiblood clotting action.\n(4) It belongs to narcotic analgesics.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 60,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following structures represents thymine ?\n\n(1)\n(2)\n\n(3)\n(4)\n\n\u03b1\n\u03b2\nx2 + px + 3p",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 61,
+    "subject": "Mathematics",
+    "raw_block": "If  and  are roots of the equation \n, such that \n, then  belongs to the set :\n\n4 = 0\n|\u03b1 \u2212\u03b2| = \u221a10\np\n{2, \u22125}\n{\u22123, 2}\n{\u22122, 5}\n{3, \u22125}\n\n(1)\n(2)\n\n(3)\n(4)\n\nz\nx + \u221a2|z + 1| + i = 0\n|z|\n\u221a3\n\u221a5",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 62,
+    "subject": "Mathematics",
+    "raw_block": "If a complex number  statisfies the equation \n, then \n is equal to :\n\n(1) 2\n(2)\n\n(3)\n(4) 1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 63,
+    "subject": "Mathematics",
+    "raw_block": "The number of ways in which an examiner can assign 30 marks to 8 questions, giving not less than 2 marks to\n\nany question, is :\n\n30C7\n21C8\n21C7\n30C8\n\n(1)\n(2)\n\n(3)\n(4)\n\nn\n2n+ 3n2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 64,
+    "subject": "Mathematics",
+    "raw_block": "Given sum of the first  terms of an A.P. is \n \n. Another A.P. is formed with the same first term and\n\ndouble of the common difference, the sum of  terms of the new A.P. is :\n\nn\n\n\u00a0\n\nn + 4n2\n6n2 \u2212n\nn2 + 4n\n3n + 2n2\n\n(1)\n(2)\n\n(3)\n(4)\n\n3\n12 +\n5\n12+22 +\n7\n12+22+32 + \u2026",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 65,
+    "subject": "Mathematics",
+    "raw_block": "The sum \n. upto 11-terms is:\n\n7\n2\n11\n4\n11\n2\n60\n11\n\n(1)\n(2)\n\n(3)\n(4)\n\n(\n3\n3\u221a84 + \u221a3 ln x)\n9\n, x > 0\nx",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 66,
+    "subject": "Mathematics",
+    "raw_block": "If the 7th term in the binomial expansion of \n, is equal to 729 , then  can be:\n\ne2\ne\n\n(1)\n(2)\n\ne\n2\n2e\n\n(3)\n(4)\n\nsin\u22121 x = 2 tan\u22121 x",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 67,
+    "subject": "Mathematics",
+    "raw_block": "The number of solutions of the equation, \n (in principal values) is :\n\n(1) 1\n(2) 4\n\n(3) 2\n(4) 3\n\n2 sin2 \u03b8 \u2212cos 2\u03b8 = 0\n2 cos2 \u03b8 \u22123 sin \u03b8 = 0\n[0, 2\u03c0]\n2 cos2 \u03b8 \u22123 sin \u03b8 = 0\n[0, \u03c0]",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 68,
+    "subject": "Mathematics",
+    "raw_block": "Statement-1: The number of common solutions of the trigonometric equations \n \n and\n\n in the interval \n is two. Statement-2: The number of solutions of the equation,\n\n in the interval \n is two.\n\n(1) Statement-1 is true; Statement-2 is true;\n\n(2) Statement-1 is true; Statement-2 is true;\n\nStatement-2 is a correct explanation for\n\nStatement-2 is not a correct explanation for\n\nstatement-1.\n\nstatement-1.\n\n(3) Statement-1 is false; Statement-2 is true.\n(4) Statement-1 is true; Statement-2 is false.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 69,
+    "subject": "Mathematics",
+    "raw_block": "If the -intercept of some line  is double as that of the line, \n and the -intercept of  is half as\n\nx\nL\n3x + 4y = 12\ny\nL\nL\n\u22123\n\u22123/8\n\u22123/2\n\u22123/16\n\nthat of the same line, then the slope of  is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 70,
+    "subject": "Mathematics",
+    "raw_block": "The acute angle between two lines such that the direction cosines \n, of each of them satisfy the equations\n\nl, m, n\nl + m + n = 0\nl2 + m2 \u2212n2 = 0\n15\u2218\n30\u2218\n\n and \n is :\n\n(1)\n(2)\n\n60\u2218\n45\u2218\n\n(3)\n(4)\n\nC\n(4, 0)\nx2 + y2 + 4x \u22126y \u221212 = 0\n(1, \u22121)\nC",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 71,
+    "subject": "Mathematics",
+    "raw_block": "If a circle  passing through \n touches the circle \n externally at a point \n\n, then the radius of the circle  is :\n\n(1) 5\n(2)\n\n2\u221a5\n\u221a57\n\n(3) 4\n(4)\n\nx \u22122y = 2\ny2 + 2x = 0\n(\u22122, \u22122)\ny = mx \u2212\n1\n2m (m \u22600)\ny2 = \u22122x\n(\u2212\n1\n2m2 , \u22121\nm )",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 72,
+    "subject": "Mathematics",
+    "raw_block": "Statement-1: The line \n meets the parabola, \n only at the point \n. Statement-2:\n\nThe line \n is tangent to the parabola, \n at the point \n\n\u00a0\n\n(1) Statement-1 is true; Statement- 2 is false.\n(2) Statement-1 is true; Statement-2 is true;\n\nStatement-2 is a correct explanation for\n\nstatement-1.\n\n(3) Statement-1 is false; Statement-2 is true.\n(4) Statement-1 a true; Statement-2 is true;\n\nStatement-2 is not a correct explanation for\n\nstatement-1.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 73,
+    "subject": "Mathematics",
+    "raw_block": "Let the equations of two ellipses be\n\nE1 : x2\n\n3 + y2\n\n2 = 1\u00a0and\u00a0E2 : x2\n\n16 + y2\n\nb2 = 1,\u00a0\n\n1\n2\nE2\n\nIf the product of their eccentricities is \n, then the length of the minor axis of ellipse \n is :\n\n(1) 8\n(2) 9\n\n(3) 4\n(4) 2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 74,
+    "subject": "Mathematics",
+    "raw_block": "The statement \n is equivalent to :\n\np \u2192(q \u2192p)\np \u2192q\np \u2192(p \u2228q)\np \u2192(p \u2192q)\np \u2192(p \u2227q)\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 75,
+    "subject": "Mathematics",
+    "raw_block": "Mean of 5 observations is 7 . If four of these observations are \n and one is missing then the variance of\n\n6, 7, 8, 10\n\nall the five observations is :\n\n(1) 4\n(2) 6\n\n(3) 8\n(4) 2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 76,
+    "subject": "Mathematics",
+    "raw_block": "If two vertices of an equilateral triangle are \n and \n, and the third vertex C lies above -\n\nA(\u2212a, 0)\nB(a, 0), a > 0\nx\n\u25b3ABC\n3x2 + 3y2 \u22122\u221a3ay = 3a2\n3x2 + 3y2 \u22122ay = 3a2\n\naxis then the equation of the circumcircle of \n is :\n\n(1)\n(2)\n\nx2 + y2 \u22122ay = a2\nx2 + y2 \u2212\u221a3ay = a2\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 77,
+    "subject": "Mathematics",
+    "raw_block": "Let \n, \n be a relation on the \n.\n\nR = {(3, 3)(5, 5), (9, 9), (12, 12), (5, 12), (3, 9) (3, 12), (3, 5)}\nset A = {3, 5, 9, 12}\nR\n\nThen,  is :\n\n(1) reflexive, symmetric but not transitive.\n(2) symmetric, transitive but not reflexive.\n\n(3) an equivalence relation.\n(4) reflexive, transitive but not symmetric.\n\n3\n4\n1\n3\n2\n3\n2\n0\n2\n\np, q, r\n[pqr]\n= [\n]\n\u23a1\n\n\u23a4",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 78,
+    "subject": "Mathematics",
+    "raw_block": "If \n are 3 real numbers satisfying the matrix equation, \n then \n\n3\n0\n1\n2p + q \u2212r\n\n\u23a3\n\n\u23a6\n\nequals :\n\n(1)\n(2)\n\n\u22123\n\u22121\n\n(3) 4\n(4) 2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 79,
+    "subject": "Mathematics",
+    "raw_block": "If the system of linear equations :\n\nx1 + 2x2 + 3x3 = 6\nx1 + 3x2 + 5x3 = 9\n2x1 + 5x2 + ax3 = b\n\n\u00a0\n\nis consistent and has infinite number of solutions, then :\n\n(1)\n can be any real number\n(2)\n can be any real number\n\na = 8, b\nb = 15, a\na \u2208R \u2212{8}\nb \u2208R \u2212{15}\na = 8, b = 15\n\n(3)\n and \n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 80,
+    "subject": "Mathematics",
+    "raw_block": "Let \n, and \n; then the set of all points where \n is discontinuous is :\n\nf(x) = \u22121 + |x \u22122|\ng(x) = 1 \u2212|x|\nfog\n{0, 2}\n{0, 1, 2}\n{0}\n\n(1)\n(2)\n\n(3)\n(4) an empty set\n\n2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 81,
+    "subject": "Mathematics",
+    "raw_block": "For \n, let \n and \n, Then, \n equals :\n\n2 )\nx = \u221aasin\u22121 t\ny = \u221aacos\u22121 t\n1 + ( dy\ndx )\n\na > 0, t \u2208(0, \u03c0\n\nx2\n\ny2\n\n(1)\n(2)\n\ny2\n\nx2\nx2+y2\n\nx2+y2\n\n(3)\n(4)\n\ny2\n\nx2\n\nx2 (ex + e\u2212x)\nx > 0\nx2ex",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 82,
+    "subject": "Mathematics",
+    "raw_block": "Statement-1: The function \n is increasing for all \n. Statement-2: The functions \n and\n\nx2e\u2212x\nx > 0\n(a, b)\n(a, b)\n\n are increasing for all \n and the sum of two increasing functions in any interval \n is an\n\nincreasing function in \n.\n\n(1) Statement-1 is false; Statement-2 is true.\n(2) Statement-1 is true; Statement-2 is true;\n\nStatement-2 is not a correct explanation for\n\nStatement-1.\n\n(3) Statement-1 is true; Statement-2 is false.\n(4) Statement-1is true; Statement-2 is true;\n\nStatement-2 is a correct explanation for\n\nstatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 83,
+    "subject": "Mathematics",
+    "raw_block": "The maximum area of a right angled triangle with hypotenuse  is :\n\nh\n\n2\u221a2\nh2\n\nh2\n\n(1)\n(2)\n\n2\nh2\n\nh2\n\n(3)\n(4)\n\n4\n\n\u221a2\n\nx2+1 ecot\u22121 xdx = A(x)ecot\u22121 x + C\nA(x)\n\n\u222bx2\u2212x+1",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 84,
+    "subject": "Mathematics",
+    "raw_block": "If \n, then \n is equal to :\n\n(1)\n(2)\n\n\u2212x\nx\n\u221a1 \u2212x\n\u221a1 + x\n\n(3)\n(4)\n\n7\u03c0/4 \u221atan2 xdx\n\n\u222b7\u03c0/3",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 85,
+    "subject": "Mathematics",
+    "raw_block": "The integral \n is equal to :\n\n(1)\n(2)\n\nlog 2\u221a2\nlog 2\n2 log 2\nlog \u221a2\n\n(3)\n(4)\n\ny = 9x2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 86,
+    "subject": "Mathematics",
+    "raw_block": "The area of the region (in sq. units), in the first quadrant bounded by the parabola \n and the lines\n\n and \n, is :\n\nx = 0, y = 1\ny = 4\n7/9\n14/3\n7/3\n14/9\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 87,
+    "subject": "Mathematics",
+    "raw_block": "Consider the differential equation :\n\ndy\ndx =\ny3\n\n2 (xy2 \u2212x2)\n\n\u00a0\n\nz = y2\n\nStatement-1: The substitution \n transforms the above equation into a first order homogenous differential\n\ny2e\u2212y2/x = C\n\nequation. Statement-2: The solution of this differential equation is \n.\n\n(1) Both statements are false.\n(2) Statement-1 is true and statement- 2 is false.\n\n(3) Statement-1 is false and statement-2 is true.\n(4) Both statements are true.\n\n\u2192",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 88,
+    "subject": "Mathematics",
+    "raw_block": "If \n and  are unit vectors satisfying \n, then the angle between the vectors  and  is :\n\n^a,^b\n^c\n^a \u2212\u221a3^b + ^c =\n\n0\n^a\n^c\n\n\u03c0\n4\n\u03c0\n3\n\u03c0\n6\n\u03c0\n2\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 89,
+    "subject": "Mathematics",
+    "raw_block": "Let  be the foot of perpendicular from the origin to the plane \n and  be a point\n\nQ\n4x \u22123y + z + 13 = 0\nR\n(\u22121, \u22126)\nQR\n\u221a14\n\u221a19\n\n on the plane. Then length \n is :\n\n(1)\n(2)\n\n2\n\n3\u221a7\n2\n3\n\u221a2\n\n(3)\n(4)\n\n26\n49\n15\n49\n4/7\n6/7\n5/7",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 90,
+    "subject": "Mathematics",
+    "raw_block": "Given two independent events, if the probability that exactly one of them occurs is \n and the probability that\n\nnone of them occurs is \n, then the probability of more probable of the two events is :\n\n(1)\n(2)\n\n(3) 3/7\n(4)\n\n\u00a0\n",
+    "correct_option": "a",
+    "ans_num": 1
+  }
+]

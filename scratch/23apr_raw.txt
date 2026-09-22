@@ -1,0 +1,1617 @@
+ 
+Q1. If the time period  of the oscillation of a drop of liquid of density , radius , vibrating under surface tension 
+is given by the formula 
+. It is observed that the time period is directly proportional to 
+. The
+value of  should therefore be :
+(1)
+(2)
+(3)
+(4)
+Q2. A 
+ man leaps vertically into the air from a crouching position. To take the leap the man pushes the ground
+with a constant force  to raise himself. The center of gravity rises by 
+ before he leaps. After the leap the
+c.g. rises by another 
+. The maximum power delivered by the muscles is : (Take 
+ )
+(1)
+ Watts at the start
+(2)
+ Watts at take off
+(3)
+ Watts at the start
+(4)
+ Watts at take off
+Q3. A boy of mass 
+ is standing on a 
+ free to move long cart. There is negligible friction between cart and
+ground. Initially, the boy is standing 
+ from a wall. If he walks 
+ on the cart towards the wall, then the
+final distance of the boy from the wall will be
+(1)
+(2)
+(3)
+(4)
+Q4. A projectile of mass 
+ is fired so that the horizontal range is 
+. At the highest point the projectile explodes
+in two parts of masses 
+ and 
+ respectively and the heavier part starts falling down vertically with zero
+initial speed. The horizontal range (distance from point of firing) of the lighter part is :
+(1)
+(2)
+(3)
+(4)
+Q5. A particle of mass 
+ is moving such that at time , its position, in meter, is given by 
+. The
+angular momentum of the particle at 
+ about the origin in 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q6. A body of mass ' 
+ ' is tied to one end of a spring and whirled round in a horizontal plane with a constant
+angular velocity. The elongation in the spring is 
+. If the angular velocity is doubled, the elongation in the
+spring is 
+. The original length of the spring is :
+(1)
+(2)
+(3)
+(4)
+Q7. A copper wire of length 
+ and a steel wire of length 
+ having equal cross-sectional areas are joined end
+to end. The composite wire is stretched by a certain load which stretches the copper wire by 
+. If the
+Young's modulii of copper and steel are respectively 
+ 
+ and 
+, the total extension
+of the composite wire is :
+(1)
+(2)
+(3)
+(4)
+Q8. Wax is coated on the inner wall of a capillary tube and the tube is then dipped in water. Then, compared to the
+unwaxed capillary, the angle of contact  and the height  upto which water rises change. These changes are :
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+t
+d
+r
+s
+t = √r2bscda/2
+√d
+s
+b
+3
+4
+√3
+3
+2
+2
+3
+70 kg
+F
+0.5 m
+1 m
+g = 10 ms−2
+6.26 × 103
+6.26 × 103
+6.26 × 104
+6.26 × 104
+20 kg
+80 kg
+25 m
+10 m
+15 m
+12.5 m
+15.5 m
+17 m
+M
+4 km
+M/4
+3M/4
+16 km
+1 km
+10 km
+2 km
+2 kg
+t
+→r(t) = 5^i −2t2^j
+t = 2s
+kgm−2 s−1
+−80^k
+(10^i −16^j)
+−40^k
+40^k
+m
+1 cm
+5 cm
+15 cm
+12 cm
+16 cm
+10 cm
+1.0 m
+0.5 m
+1 mm
+1.0 × 1011 Nm−2
+2.0 × 1011Nm−2
+1.75 mm
+2.0 mm
+1.50 mm
+1.25 mm
+θ
+h
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) increases and  also increases
+(2) decreases and  also decreases
+(3) increases and  decreases
+(4) decreases and  increases
+Q9. A thin tube sealed at both ends is 
+ long. It lies horizontally, the middle 
+ containing mercury and
+two equal ends containing air at standard atmospheric pressure. If the tube is now turned to a vertical position,
+by what amount will the mercury be displaced ? 
+(Given : cross-section of the tube can be assumed to be uniform)
+(1)
+(2)
+(3)
+(4)
+Q10.The ratio of the coefficient of volume expansion of a glass container to that of a viscous liquid kept inside the
+container is 
+. What fraction of the inner volume of the container should the liquid occupy so that the
+volume of the remaining vacant space will be same at all temperatures ?
+(1)
+(2)
+(3)
+(4)
+Q11.
+ of water and 
+ of ice at 
+ are in a calorimeter whose water equivalent is 
+ of steam at
+ is added to it. Then water in the calorimeter is : (Latent heat of ice 
+, Latent heat of steam
+ )
+(1)
+(2)
+(3)
+(4)
+Q12.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: The internal energy of a perfect gas is entirely kinetic and
+depends only on absolute temperature of the gas and not on its pressure or volume. Statement 2: A perfect gas
+is heated keeping pressure constant and later at constant volume. For the same amount of heat the temperature
+of the gas at constant pressure is lower than that at constant volume.
+(1) Statement-1 is true, Statement- 2 is true and
+Statement 
+ is the correct explanation of
+Statement-1.
+(2) Statement-1 is true, Statement-2 is false.
+(3) Statement-1 is true, Statement-2 is true but
+Statement-2 is not the correct explanation of
+Statement-1.
+(4) Statement-1 is false, Statement-2 is true.
+Q13.Bob of a simple pendulum of length  is made of iron. The pendulum is oscillating over a horizontal coil
+carrying direct current. If the time period of the pendulum is  then :
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+θ
+h
+θ
+h
+θ
+h
+θ
+h
+100 cm
+20 cm
+2.95 cm
+5.18 cm
+8.65 cm
+0.0 cm
+1 : 4
+2 : 5
+1 : 4
+1 : 64
+1 : 8
+500 g
+100 g
+0∘C
+40 g.10 g
+100∘C
+= 80cal/g
+= 540cal/g
+580 g
+590 g
+600 g
+610 g
+−2
+l
+T
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+ and damping is smaller than in air alone.
+(2)
+ and damping is larger than in air alone.
+(3)
+ and damping is smaller than in air alone.
+(4)
+ and damping is larger than in air alone.
+Q14.A sonometer wire of length 
+ is fixed at both the ends. Where should the two bridges be placed so as to
+divide the wire into three segments whose fundamental frequencies are in the ratio 
+ ?
+(1) At 
+ and 
+ from one end
+(2) At 
+ and 
+ from one end
+(3) At 
+ and 
+ from one end
+(4) At 
+ and 
+ from one end
+Q15.Consider a finite insulated, uncharged conductor placed near a finite positively charged conductor. The
+uncharged body must have a potential :
+(1) less than the charged conductor and more than at infinity.
+(2) more than the charged conductor and less than at infinity.
+(3) more than the charged conductor and more than at infinity.
+(4) less than the charged conductor and less than at infinity.
+Q16.A liquid drop having 6 excess electrons is kept stationary under a uniform electric field of 
+ 
+. The
+density of liquid is 
+. The radius of the drop is (neglect buoyancy).
+(1)
+(2)
+(3)
+(4)
+Q17.A parallel plate capacitor of area 
+ and separation 
+ is charged initially to 
+. If the medium
+between the plate gets slightly conducting and the plate loses the charge initially at the rate of 
+,
+then what is the magnetic field between the plates ?
+(1)
+(2)
+(3)
+(4) Zero
+Q18.Which of the four resistances 
+ and  generate the greatest amount of heat when a current flows from A
+to B ? 
+(1)
+(2)
+(3)
+(4)
+Q19.A rectangular loop of wire, supporting a mass 
+, hangs with one end in a uniform magnetic field  pointing
+out of the plane of the paper. A clockwise current is set up such that 
+, where  is the width of the
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+T < 2π√l
+g
+T = 2π√l
+g
+T > 2π√l
+g
+T < 2π√l
+g
+114 cm
+1 : 3 : 4
+36 cm
+84 cm
+24 cm
+72 cm
+48 cm
+96 cm
+72 cm
+96 cm
+25.5 kVm−1
+1.26 × 103 kg m−3
+4.3 × 10−7 m
+7.8 × 10−7 m
+0.078 × 10−7 m
+3.4 × 10−7 m
+60 cm2
+3 mm
+90μC
+2.5 × 10−8C/s
+2.5 × 10−8 T
+2.0 × 10−7 T
+1.63 × 10−11 T
+P, Q, R
+S
+Q
+S
+P
+R
+m
+→B
+i > mg/Ba
+a
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+loop. Then : 
+(1) The weight rises due to a vertical force caused by
+the magnetic field and work is done on the
+system.
+(2) The weight do not rise due to vertical for caused
+by the magnetic field and work is done on the
+system.
+(3) The weight rises due to a vertical force caused by
+the magnetic field but no work is done on the
+system.
+(4) The weight rises due to a vertical force caused by
+the magnetic field and work is extracted from the
+magnetic field.
+Q20.A particle of charge 
+ moving with velocity 
+ along -axis enters a region where magnetic
+field of induction  is along the -axis and an electric field of magnitude 
+ is along the negative -
+axis. If the charged particle continues moving along -axis, the magnitude of  is :
+(1)
+(2)
+(3)
+(4)
+Q21.The plot given below is of the average power delivered to an LRC circuit versus frequency. The quality factor
+of the circuit is : 
+(1)
+(2)
+(3)
+(4)
+Q22.Select the correct statement from the following :
+(1) Electromagnetic waves cannot travel in vacuum. (2) Electromagnetic waves are longitudinal waves.
+(3) Electromagnetic waves are produced by charges
+moving with uniform velocity.
+(4) Electromagnetic waves carry both energy and
+momentum as they propagate through space.
+Q23.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: Very large size telescopes are reflecting telescopes instead
+of refracting telescopes. Statement 2: It is easier to provide mechanical support to large size mirrors than large
+size lenses.
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+16 × 10−16C
+10 ms−1
+x
+→B
+y
+104Vm−1
+z
+x
+→B
+16 × 103 Wb m−2
+2 × 103 Wb m−2
+1 × 103 Wb m−2
+4 × 103 Wb m−2
+5.0
+2.0
+2.5
+0.4
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) Statement-1 is true and Statement-2 is false.
+(2) Statement-1 is false and Statement-2 is true.
+(3) Statement-1 and statement-2 are true and
+Statement-2 is correct explanation for statement-
+1.
+(4) Statements-1 and statement-2 are true and
+Statement-2 is not the correct explanation for
+statement-1.
+Q24.A light ray falls on a square glass slab as shown in the diagram. The index of refraction of the glass, if total
+internal reflection is to occur at the vertical face, is equal to : 
+(1)
+(2)
+(3)
+(4)
+Q25. identical waves each of intensity 
+ interfere with each other. The ratio of maximum intensities if the
+interference is (i) coherent and (ii) incoherent is :
+(1)
+(2)
+(3)
+(4)
+Q26.Electrons are accelerated through a potential difference  and protons are accelerated through a potential
+difference 
+. The de-Broglie wavelengths are 
+ and 
+ for electrons and protons respectively. The ratio of
+ is given by: (given 
+ is mass of electron and 
+ is mass of proton).
+(1)
+(2)
+(3)
+(4)
+Q27.In the Bohr's model of hydrogen-like atom the force between the nucleus and the electron is modified as
+, where  is a constant. For this atom, the radius of the 
+ orbit in terms of the Bohr
+radius 
+ is :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+(√2+1)
+2
+√5
+2
+3
+2
+√3
+2
+n
+I0
+n2
+1
+n
+1
+n2
+n
+V
+4 V
+λe
+λp
+λe
+λp
+me
+mp
+λe
+λp = √mp
+me
+λe
+λp = √me
+mp
+λe
+λp = 1
+2 √me
+mp
+λe
+λp = 2√mp
+me
+F =
+e2
+4πε0 ( 1
+r2 + β
+r3 )
+β
+nth 
+(a0 =
+ε0h2
+mπe2 )
+rn = a0n −β
+rn = a0n2 + β
+rn = a0n2 −β
+rn = a0n + β
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q28.A system of four gates is set up as shown. The 'truth table' corresponding to this system is :
+(1)
+(2)
+(3)
+(4)
+Q29.Which of the following statement is NOT correct?
+(1) Ground wave signals are more stable than the sky
+wave signals.
+(2) The critical frequency of an ionospheric layer is
+the highest frequency that will be reflected back
+by the layer when it is vertically incident.
+(3) Electromagnetic waves of frequencies higher
+than about 
+ cannot penetrate the
+ionosphere.
+(4) Sky wave signals in the broadcast frequency
+range are stronger at night than in the day time.
+Q30.Correct set up to verify Ohm's law is :
+(1)
+(2)
+(3)
+(4)
+Q31.Number of atoms in the following samples of substances is largest in:
+(1)
+ of hydrogen
+(2)
+ of chlorine
+(3)
+ of iodine
+(4)
+ of magnesium
+Q32.The de Broglie wavelength of a car of mass 1000 
+ and velocity 
+ is :
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+30MHz
+4.0 g
+71.0 g
+127.0 g
+48.0 g
+kg
+36 km/hr
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q33.Which is the correct order of second ionization potential of 
+ and  in the following ?
+(1)
+(2)
+(3) F  O 
+(4)
+ C  N 
+Q34.The shape of 
+is :
+(1) Trigonally distorted octahedron
+(2) Pyramidal
+(3) Octahedral
+(4) Square antiprism
+Q35.Bond distance in 
+ is 
+. Dipole moment of 
+ is 
+. The percentage ionic
+character in 
+ will be : (electron charge 
+ )
+(1)
+(2)
+(3)
+(4)
+Q36.The correct order of viscosity of the following liquids will be :
+(1) Water  methyl alcohol  dimethyl ether  glycerol
+(2) methyl alcohol  glycerol  water  dimethyl ether
+(3) dimethyl ether  methyl alcohol  water  glycerol
+(4) glycerol  dimethyl ether  water  methyl alcohol
+Q37.Which of the following statements/relationships is not correct in thermodynamic changes ?
+(1)
+ (isothermal reversible expansion of a
+gas)
+(2)
+ (isothermal reversible
+expansion of an ideal gas)
+(3)
+ (isothermal reversible
+expansion of an ideal gas)
+(4) For a system of constant volume heat involved
+directly changes to internal energy.
+Q38.(1) 
+ (2) 
+ (3)
+ The equation for the equilibrium constant of the reaction
+ in terms of 
+ and 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q39.What is the 
+ of a 
+solution at 
+, if 
+ at 
+ is 
+ ?
+(1) 4
+(2)
+(3) 10
+(4)
+Q40.The numbers of protons, electrons and neutrons in a molecule of heavy water are respectively :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+6.626 × 10−34 m
+6.626 × 10−38 m
+6.626 × 10−31 m
+6.626 × 10−30 m
+C, N, O
+F
+O > N > F > C
+O > F > N > C
+>
+> N > C
+>
+> O > F
+IF−
+6
+HF
+9.17 × 10−11 m
+HF
+6.104 × 10−30Cm
+HF
+= 1.60 × 10−19C
+61.0%
+38.0%
+35.5%
+41.5%
+<
+<
+<
+<
+<
+<
+<
+<
+<
+<
+<
+<
+ΔU = 0
+w = −nRT ln V2
+ V1
+w = nRT ln V2
+ V1
+N2( g) + 3H2( g) ⇌2NH3( g), K1
+N2( g) + O2( g) ⇌2NO(g), K2
+H2( g) + 1
+2 O2( g) ⇌H2O(g), K3
+2NH3( g) + 5
+2 O2( g) ⇌2NO(g) + 3H2O(g), 
+(K4)
+K1,  K2
+K3
+K1⋅K2
+ K3
+K1⋅K2
+3
+ K2
+K1 K2 K3
+K2⋅K3
+3
+ K1
+pH
+10−4MOH−
+330 K
+Kw
+330 K
+10−13.6
+9.0
+9.6
+8, 10, 11
+10, 10, 10
+10, 11, 10
+11, 10, 10
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q41.Equimolar solutions of the following compounds are prepared separately in water. Which will have the lowest
+ value ?
+(1)
+(2)
+(3)
+(4)
+Q42.Monocarboxylic acids are functional isomers of:
+(1) Ethers
+(2) Amines
+(3) Esters
+(4) Alcohols
+Q43.In a face centred cubic lattice, atoms of A form the corner points and atoms of B form the face centred points.
+If two atoms of  are missing from the corner points, the formula of the ionic compound is :
+(1)
+(2)
+(3)
+(4)
+Q44.Vapour pressure of pure benzene is 119 torr and that of toluene is 
+ torr at the same temperature. Mole
+fraction of toluene in vapour phase which is in equilibrium with a solution of benzene and toluene having a
+mole fraction of toluene 
+, will be :
+(1)
+(2)
+(3)
+(4)
+Q45.Given :
+The correct order of reducing power of the species 
+ and 
+will be:
+(1)
+(2)
+(3)
+(4)
+Q46.The rate constant of a zero order reaction is 
+ 
+. If the concentration of the reactant after
+25 seconds is 
+. What is the initial concentration?
+(1)
+(2)
+(3)
+(4)
+Q47.Smoke is an example of:
+(1) Solid dispersed in solid
+(2) Gas dispersed in liquid
+(3) Solid dispersed in gas
+(4) Gas dispersed in solid
+Q48.Which has trigonal bipyramidal shape ?
+(1)
+(2)
+(3)
+(4)
+Q49.When a small amount of 
+ is added to concentrated 
+, a green oily compound is obtained which
+is highly explosive in nature. Compound may be :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+pH
+BeCl2
+SrCl2
+CaCl2
+MgCl2
+A
+AB3
+AB4
+A2 B5
+AB2
+37.0
+0.50
+0.137
+0.237
+0.435
+0.205
+Eo
+1
+2 Cl2/Cl−= 1.36 V, Eo
+Cr3+/Cr = −0.74 V
+Eo
+Cr2O2−
+7 /Cr3+ = 1.33 V, Eo
+MnO−
+4 /Mn2+ = 1.51 V
+(Cr, Cr3+, Mn2+
+Cl−)
+Mn2+ < Cl−< Cr3+ < Cr
+Mn2+ < Cl3+ < Cl−< Cr
+Cr3+ < Cl−< Mn2+ < Cr
+Cr3+ < Cl−< Cr < Mn2+
+2.0× 10−2 mol L−1 s−1
+0.5M
+0.5M
+1.25M
+12.5M
+1.0M
+XeOF4
+XeO3
+XeO3 F2
+XeOF2
+KMnO4
+H2SO4
+MnSO4
+Mn2O7
+MnO2
+Mn2O3
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q50.Identify incorrect statement :
+(1)
+ is colourless.
+(2) Copper (I) compounds are colourless except
+when colour results from charge transfer.
+(3) Copper (I) compounds are diamagnetic.
+(4)
+ is black.
+Q51.The magnetic moment of the complex anion 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q52.Identify the incorrect statement:
+(1) In 
+, tetrahedral 
+ units share two
+oxygen atoms.
+(2) Trialkylchlorosilane on hydrolysis gives 
+.
+(3)
+ undergoes hydrolysis to give 
+.
+(4)
+ has cyclic structure.
+Q53.The order of reactivity of the given haloalkanes towards nucleophile is :
+(1)
+(2)
+(3)
+(4)
+Q54.The reaction of phenol with benzoyl chloride to give phenyl benzoate is known as :
+(1) Claisen reaction
+(2) Schotten-Baumann reaction
+(3) Reimer-Tiemann reaction
+(4) Gatterman-Koch reaction
+Q55.Which of the following is the product of aldol condensation?
+(1)
+(2)
+(3)
+(4)
+Q56.The order of basicity of amines in gaseous state is :
+(1)
+(2)
+(3)
+(4)
+Q57.Which of the following polymer is a polyamide ?
+(1) Terylene
+(2) Nylon
+(3) Rubber
+(4) Vulcanised rubber
+Q58.
+ Receptor antagonists is a term associated with :
+(1) Antiseptics
+(2) Antihistamins
+(3) Antacids
+(4) Analgesics
+Q59.Glycosidic linkage is actually an :
+(1) Carbonyl bond
+(2) Ether bond
+(3) Ester bond
+(4) Amide bond
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+Cu2O
+Cu2 S
+[Cr(NO) (NH3)(CN)4]2−
+5.91BM
+3.87BM
+1.73BM
+2.82BM
+(Si3O9)6−
+SiO4
+R3SiOH
+SiCl4
+H4SiO4
+(Si3O9)6−
+RI > RBr > RCl
+RCl > RBr > RI
+RBr > RCl > RI
+RBr > RI > RCl
+1∘> 2∘> 3∘> NH3
+3∘> 2∘> NH3 > 1∘
+3∘> 2∘> 1∘> NH3
+NH3 > 1∘> 2∘> 3∘
+H1−
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q60.Natural glucose is termed D-glucose because :
+(1)
+ on the second carbon is on the right side in
+Fischer projection
+(2)
+ on the sixth carbon is on the right side in
+Fischer projection.
+(3)
+ on the fifth carbon is on the right side in
+Fischer projection.
+(4) It is dextrorotatory.
+Q61.The least integral value  of  such that 
+, satisfies :
+(1)
+(2)
+(3)
+(4)
+Q62.Let 
+, where  is any non-zero complex number. The set 
+ and 
+ is equal
+to:
+(1)
+(2)
+(3)
+(4)
+Q63.The sum of the series : 
+ upto 10 terms is :
+(1) 11300
+(2) 11200
+(3) 12100
+(4) 12300
+Q64.If 
+. are in A.P. such that 
+ 
+, then the sum of first 13 terms of this A.P., is
+:
+(1)
+(2)
+(3)
+(4)
+Q65.The sum of the rational terms in the binomial expansion of 
+ is :
+(1) 25
+(2) 32
+(3) 9
+(4) 41
+Q66.The number of solutions of the equation 
+ in the interval 
+ is :
+(1) 3
+(2) 5
+(3) 4
+(4) 6
+Q67.If two lines 
+ and 
+ in space, are defined by
+then 
+ is perpendicular to 
+, for all nonnegative reals  and , such that :
+(1)
+(2)
+(3)
+(4)
+Q68.Let 
+ be the angle between two lines 
+ 
+ and 
+ and 
+ be the angle between
+two lines 
+ and 
+ 
+, where 
+ are any real numbers : Statement-1: If 
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+−OH
+−OH
+−OH
+α
+x
+x−5
+x2+5x−14 > 0
+α2 + 3α −4 = 0
+α2 −5α + 4 = 0
+α2 −7α + 6 = 0
+α2 + 5α −6 = 0
+a = Im ( 1+z2
+2iz )
+z
+A = {a : |z| = 1
+z ≠±1}
+(−1, 1)
+[−1, 1]
+[0, 1)
+(−1, 0]
+(2)2 + 2(4)2 + 3(6)2 + …
+a1, a2, a3, … , an, …
+a4 −a7 +a10 = m
+10 m
+12 m
+13 m
+15 m
+(2
+1
+2 + 3
+1
+5 )
+10
+sin 2x −2 cos x + 4 sin x = 4
+[0, 5π]
+L1
+L2
+L1 = {x = √λy + (√λ −1),
+z = (√λ −1)y + √λ} and 
+L2 = {x = √μy + (1 −√μ),
+z = (1 −√μ)y + √μ}
+L1
+L2
+λ
+μ
+√λ + √μ = 1
+λ ≠μ
+λ + μ = 0
+λ = μ
+θ1
+2x + 3y+ c1 = 0
+−x + 5y + c2 = 0
+θ2
+2x + 3y + c1 = 0
+−x + 5y+ c3 = 0
+c1, c2, c3
+c2
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+and 
+ are proportional, then 
+. Statement-2: 
+ for all 
+ and 
+.
+(1) Statement-1 is true, Statement-2 is true;
+Statement-2 is a correct explanation of
+Statement-1.
+(2) Statement-1 is true, Statement-2 is true;
+Statement-2 is not a correct explanation of
+Statement-1.
+(3) Statement-1 is false; Statement- 2 is true.
+(4) Statement-1 is true; Statement- 2 is false.
+Q69.If the circle 
+ touches the axis of , then a equals.
+(1) 0
+(2)
+(3)
+(4)
+Q70.The point of intersection of the normals to the parabola 
+ at the ends of its latus rectum is :
+(1)
+(2)
+(3)
+(4)
+Q71.A tangent to the hyperbola 
+ meets -axis at  and -axis at . Lines 
+ and 
+ are drawn such
+that OPRQ is a rectangle (where  is the origin). Then  lies on :
+(1)
+(2)
+(3)
+(4)
+Q72.For integers 
+ and , both greater than 1, consider the following three statements : 
+ divides  
+divides 
+ 
+ is prime, then
+(1)
+(2)
+(3)
+(4)
+Q73.If the median and the range of four numbers 
+, where 
+, are 10 and 28
+respectively, then the mean of the numbers is :
+(1) 18
+(2) 10
+(3) 5
+(4) 14
+Q74.If the extremities of the base of an isosceles triangle are the points 
+ and 
+ and the equation of one of
+the sides is 
+, then the area of the triangle, in square units, is :
+(1)
+(2)
+(3)
+(4)
+Q75.On the sides 
+ of a 
+ distinct points (excluding vertices 
+ ) are respectively
+chosen. The number of triangles that can be constructed using these chosen points as vertices are :
+(1) 210
+(2) 205
+(3) 215
+(4) 220
+Q76.Let 
+ and 
+, where 
+ is the set of all natural numbers. Then the
+relation  is :
+(1) reflexive but neither symmetric nor transitive.
+(2) symmetric and transitive.
+(3) reflexive and symmetric,
+(4) reflexive and transitive.
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+c3
+θ1 = θ2
+θ1 = θ2
+c2
+c3
+x2 + y2 −6x −8y + (25 −a2) = 0
+x
+±4
+±2
+±3
+y2 = 4x
+(0, 2)
+(3, 0)
+(0, 3)
+(2, 0)
+x2
+4 −y2
+2 = 1
+x
+P
+y
+Q
+PR
+QR
+O
+R
+4
+x2 +
+2
+y2 = 1
+2
+x2 −
+4
+y2 = 1
+2
+x2 +
+4
+y2 = 1
+4
+x2 −
+2
+y2 = 1
+m
+n
+P : m
+n Q : m
+n2 R : m
+Q ∧R →P
+P ∧Q →R
+Q →R
+Q →P
+{x, y, 2x + y, x −y}
+0 < y < x < 2y
+(2a, 0)
+(0, a)
+x = 2a
+5
+4 a2
+5
+2 a2
+25a2
+4
+5a2
+AB, BC, CA
+△ABC, 3, 4, 5
+A, B, C
+R = {(x, y) : x, y ∈N
+x2 −4xy + 3y2 = 0}
+N
+R
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q77.Let , other than  or 
+, be a 
+ real matrix such that 
+, I being the unit matrix. Let 
+ be the
+sum of diagonal elements of A. Statement-1: 
+ Statement-2: 
+(1) Statement-1 is true; Statement- 2 is false.
+(2) Statement-1 is true; Statement-2 is true; Statement-2 is not a correct explanation for Statement-1.
+(3) Statement-1 is true; Statement-2 is true; Statement-2 is a correct explanation for Statement-1.
+(4) Statement-1 is false; Statement- 2 is true.
+Q78.Statement-1: The system of linear equations
+has a non-trivial solution for only one value of  lying in the interval 
+. Statement-2: The equation in 
+has only one solution lying in the interval 
+(1) Statement-1 is true, Statement-2 is true,
+Statement-2 is not correct explantion for
+Statement-1.
+(2) Statement-1 is true, Statement-2 is true,
+Statement-2 is a correct explantion for
+Statement-1.
+(3) Statement-1 is true, Statement- 2 is false.
+(4) Statememt-1 is false, Statement-2 is true.
+Q79.
+ 
+, then 
+ is equal to :
+(1)
+(2)
+(3)
+(4)
+Q80.Let  be a composite function of  defined by 
+. Then the number of points 
+where  is discontinuous is :
+(1) 4
+(2) 3
+(3) 2
+(4) 1
+Q81.If 
+ and 
+ 
+, then 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q82.If the curves 
+ and 
+ intersect at right angles, then a value of  is :
+(1) 2
+(2)
+(3)
+(4)
+Q83.The cost of running a bus from A to B is 
+ where 
+ is the average speed of the bus. When
+the bus travels at 
+, the cost comes out to be Rs. 75 while at 
+, it is Rs. 65. Then the most
+economical speed (in km/h) of the bus is :
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+A
+I
+−I
+2 × 2
+A2 = I
+Tr(A)
+Tr(A) = 0
+det(A) = −1
+x + (sin α)y + (cos α)z = 0
+x + (cos α)y + (sin α)z = 0
+x −(sin α)y −(cos α)z = 0
+α
+(0, π
+2 )
+α
+= 0
+∣
+cos α
+sin α
+cos α
+sin α
+cos α
+sin α
+cos α
+−sin α
+−cos α
+∣
+(0, π
+2 )
+S = tan−1 (
+1
+n2+n+1 ) + tan−1 (
+1
+n2+3n+3 ) + … + tan−1 (
+1
+1+(n+19)(n+20) )
+tan S
+20
+401+20n
+n
+n2+20n+1
+20
+n2+20n+1
+n
+401+20n
+f
+x
+f(u) =
+1
+u2+u−2 , u(x) =
+1
+x−1
+x
+f
+f(x) = sin(sin x)
+f ′′(x) + tan xf ′(x) + g(x) = 0
+g(x)
+cos2 x cos(sin x)
+sin2 x cos(cos x)
+sin2 x sin(cos x)
+cos2 x sin(sin x)
+x2
+α + y2
+4 = 1
+y3 = 16x
+α
+4
+3
+1
+2
+3
+4
+Rs. (av + b/v)
+vkm/h
+30 km/h
+40 km/h
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) 45
+(2) 50
+(3) 60
+(4) 40
+Q84.If a curve passes through the point 
+ and has slope 
+ at any point 
+ on it, then the ordinate of
+the point on the curve whose abscissa is 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q85.The integral 
+ equals :
+(1)
+(2)
+(3)
+(4)
+Q86.The value of 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q87.The area under the curve 
+, 
+, and above -axis is :
+(1)
+(2)
+(3)
+(4) 0
+Q88.If  and  are non-collinear vectors, then the value of  for which the vectors 
+ and
+ are collinear is :
+(1)
+(2)
+(3)
+(4)
+Q89.If the projections of a line segment on the 
+ and -axes in 3-dimensional space are 2, 3 and 6 respectively,
+then the length of the line segment is :
+(1) 12
+(2) 7
+(3) 9
+(4) 6
+Q90.
+ try to hit a target simultaneously but independently. Their respective probabilities of hitting the targets
+are 
+. The probability that the target is hit by A or B but not by  is :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+(2, 7
+2 )
+(1 −
+1
+x2 )
+(x, y)
+−2
+−3
+2
+3
+2
+5
+2
+−5
+2
+∫
+xdx
+2−x2+√2−x2
+log 1 + √2 + x2 + c
+∣∣
+−log 1 + √2 −x2 + c
+∣∣
+−x log 1 −√2 −x2 + c
+∣∣
+x log 1 −√2 + x2 + c
+∣∣
+∫π/2
+−π/2
+sin2 x
+1+2x dx
+π
+π
+2
+4π
+π
+4
+y = | cos x −sin x| 0 ≤x ≤π
+2
+x
+2√2
+2√2 −2
+2√2 + 2
+→a
+→b
+α
+→u = (α −2)→a + →b
+→v = (2 + 3α)→a −3→b
+3
+2
+2
+3
+−3
+2
+−2
+3
+x, y
+z
+A, B, C
+3
+4 , 1
+2 , 5
+8
+C
+21/64
+7/8
+7/32
+9/64
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+ANSWER KEYS
+1. (3)
+2. (2)
+3. (4)
+4. (3)
+5. (1)
+6. (1)
+7. (4)
+8. (3)
+9. (2)
+10. (2)
+11. (2)
+12. (3)
+13. (4)
+14. (4)
+15. (1)
+16. (2)
+17. (4)
+18. (2)
+19. (3)
+20. (3)
+21. (2)
+22. (4)
+23. (3)
+24. (4)
+25. (4)
+26. (4)
+27. (3)
+28. (1)
+29. (3)
+30. (1)
+31. (1)
+32. (2)
+33. (2)
+34. (1)
+35. (4)
+36. (3)
+37. (3)
+38. (4)
+39. (4)
+40. (2)
+41. (1)
+42. (3)
+43. (2)
+44. (2)
+45. (1)
+46. (4)
+47. (3)
+48. (3)
+49. (2)
+50. (1)
+51. (4)
+52. (2)
+53. (1)
+54. (2)
+55. (2)
+56. (3)
+57. (2)
+58. (2)
+59. (2)
+60. (3)
+61. (1)
+62. (1)
+63. (3)
+64. (3)
+65. (4)
+66. (1)
+67. (4)
+68. (1)
+69. (2)
+70. (2)
+71. (4)
+72. (1)
+73. (4)
+74. (2)
+75. (2)
+76. (4)
+77. (2)
+78. (3)
+79. (3)
+80. (2)
+81. (4)
+82. (2)
+83. (3)
+84. (1)
+85. (2)
+86. (4)
+87. (2)
+88. (2)
+89. (2)
+90. (1)
+ 
+JEE Main 2013 (23 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+
+--- PAGE BREAK ---

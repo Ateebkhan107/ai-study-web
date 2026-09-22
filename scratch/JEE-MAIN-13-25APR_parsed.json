@@ -1,0 +1,632 @@
+[
+  {
+    "qnum": 1,
+    "subject": "Physics",
+    "raw_block": "A block is placed on a rough horizontal plane. A time dependent horizontal force \n acts on the block,\n\nF = kt\nk\n\nwhere  is a positive constant. The acceleration - time graph of the block is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 2,
+    "subject": "Physics",
+    "raw_block": "The maximum range of a bullet fired from a toy pistol mounted on a car at rest is \n. What will be the\n\nR0 = 40\u00a0m\n\nacute angle of inclination of the pistol for maximum range when the car is moving in the direction of firing with\n\nv = 20\u00a0m/s\n(g = 10\u00a0m/s2)\n30\u2218\n60\u2218\n\nuniform velocity \n on a horizontal surface? \n\n(1)\n(2)\n\n75\u2218\n45\u2218\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 3,
+    "subject": "Physics",
+    "raw_block": "A wind-powered generator converts wind energy into electrical energy. Assume that the generator converts a\n\nfixed fraction of the wind energy intercepted by its blades into electrical energy. For wind speed , the electrical\n\nv\n\npower output will be most likely proportional to\n\nv4\nv2\n\n(1)\n(2)\n\nv\nv3\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 4,
+    "subject": "Physics",
+    "raw_block": "A ring of mass \n and radius  is rotating about its axis with angular velocity . Two identical bodies each of\n\nM\nR\n\u03c9\nm\n\nmass \n are now gently attached at the two ends of a diameter of the ring. Because of this, the kinetic energy\n\nloss will be :\n\nm(M+2m)\n\nM\n\u03c92R2\nMm\n(M+m) \u03c92R2\n\n(1)\n(2)\n\nMm\n(M+2m) \u03c92R2\n(M+m)M\n\n(M+2m) \u03c92R2\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 5,
+    "subject": "Physics",
+    "raw_block": "Two blocks of masses \n and \n are connected by means of a metal wire of cross-sectional area A passing over a\n\nm\nM\n\nfrictionless fixed pulley as shown in the figure. The system is then released. If \n, then the stress\n\nM = 2\u00a0m\n\n\u00a0\n\nproduced in the wire is: \n\n2mg\n3\u00a0A\n4mg\n3\u00a0A\nmg\n\n(1)\n(2)\n\n3mg\n4\u00a0A\n\n(3)\n(4)\n\nA",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 6,
+    "subject": "Physics",
+    "raw_block": "In an experiment, a small steel ball falls through a liquid at a constant speed of \n. If the steel ball is\n\n10\u00a0cm/s\n\npulled upward with a force equal to twice its effective weight, how fast will it move upward ?\n\n(1)\n(2) Zero\n\n5\u00a0cm/s\n10\u00a0cm/s\n20\u00a0cm/s\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 7,
+    "subject": "Physics",
+    "raw_block": "A mass of \n of water in a closed vessel, with surroundings at a constant temperature takes 2 minutes to cool\n\n50\u00a0g\n30\u2218C\n25\u2218C\n100\u00a0g\n30\u2218C\n25\u2218C\n30\u00a0g\n2.0kcal/kg\n7kcal/kg\n3kcal/kg\n0.5kcal/kg\n\nfrom \n to \n. A mass of \n of another liquid in an identical vessel with identical surroundings takes\n\nthe same time to cool from \n to \n. The specific heat of the liquid is : (The water equivalent of the vessel\n\nis \n.)\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 8,
+    "subject": "Physics",
+    "raw_block": "A sample of gas expands from \n to \n. In which of the following, the work done will be greatest?\n\nV1\nV2\n\n(1) Same in all processes\n(2) Isobaric process\n\n(3) Isothermal process\n(4) Adiabatic process",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 9,
+    "subject": "Physics",
+    "raw_block": "In the isothermal expansion of \n of gas from volume  to \n the work done by the gas is \n. What is the\n\n10\u00a0g\nV\n2\u00a0V\n575\u00a0J\n\nroot mean square speed of the molecules of the gas at that temperature?\n\n(1)\n(2)\n\n398\u00a0m/s\n520\u00a0m/s\n499\u00a0m/s\n532\u00a0m/s\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 10,
+    "subject": "Physics",
+    "raw_block": "A uniform cylinder of length  and mass \n having cross-sectional area  is suspended, with its length\n\nL\nM\nA\n\nvertical, from a fixed point by a massless spring, such that it is half submerged in a liquid of density  at\n\n\u03c3\n\nequilibrium position. When the cylinder is given a downward push and released, it starts oscillating vertically\n\nwith a small amplitude. The time period  of the oscillations of the cylinder will be :\n\nT\n\n1/2\n2\u03c0\u221aM\nk\n\n2\u03c0[\nM\n(k+A\u03c3g) ]\n\n(1) Smaller than \n(2)\n\n1/2\n2\u03c0[\nM\n(k+A\u03c3g) ]\n\n1/2\n\n2\u03c0[\nM\n(k+A\u03c3g) ]\n\n(3) Larger than \n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 11,
+    "subject": "Physics",
+    "raw_block": "In a transverse wave the distance between a crest and neighbouring trough at the same instant is \n and the\n\n4.0\u00a0cm\n1.0\u00a0cm\n0.4\u00a0s\n\ndistance between a crest and trough at the same place is \n. The next crest appears at the same place after\n\na time interval of \n. The maximum speed of the vibrating particles in the medium is:\n\n3\u03c0\n2 \u00a0cm/s\n5\u03c0\n2 \u00a0cm/s\n\n(1)\n(2)\n\n\u03c0\n2 \u00a0cm/s\n2\u00a0\u03c0\u00a0cm/s\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 12,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement 1: No work is required to be done to move a test charge\n\nbetween any two points on an equipotential surface. Statement 2 : Electric lines of force at the equipotential\n\nsurfaces are mutually perpendicular to each other.\n\n(1) Statement 1 is true, Statement 2 is true,\n\n(2) Statement 1 is true, Statement 2 is true,\n\nStatement 2 is the correct explanation of\n\nStatement 2 is not the correct explanation of\n\nStatement 1.\n\nStatement 1.\n\n(3) Statement 1 is true, Statement 2 is false.\n(4) Statement 1 is false, Statement 2 is true.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 13,
+    "subject": "Physics",
+    "raw_block": "The surface charge density of a thin charged disc of radius  is . The value of the electric field at the centre\n\nR\n\u03c3\n\n\u03c3\n2\u22080\nR\n\nof the disc is \n. With respect to the field at the centre, the electric field along the axis at a distance  from\n\nthe centre of the disc:\n\n(1) reduces by \n(2) reduces by \n\n70.7%\n29.3%\n9.7%\n14.6%\n\n\u2192E = (5N/kg)^i + (12N/kg)^j\n\n(3) reduces by \n(4) reduces by ",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 14,
+    "subject": "Physics",
+    "raw_block": "The gravitational field in a region is given by: \n If the potential at the origin is\n\ntaken to be zero, then the ratio of the potential at the points \n and \n is :\n\n(12\u00a0m, 0)\n(0, 5\u00a0m)\n\n(1) Zero\n(2) 1\n\n144\n25\n25\n144\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 15,
+    "subject": "Physics",
+    "raw_block": "A parallel plate capacitor having a separation between the plates , plate area  and material with dielectric\n\nd\nA\nK\nC0\n2\u00a0K\n1\n3 \u00a0A\n2\u00a0K\n\nconstant  has capacitance \n. Now one-third of the material is replaced by another material with dielectric\n\nconstant \n, so that effectively there are two capacitors one with area \n, dielectric constant \n and\n\n2\n3 \u00a0A\nK\nC\nC\nC0\n1\n4\n3\n2\n3\n1\n3\n\nanother with area \n and dielectric constant . If the capacitance of this new capacitor is  then \n is\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 16,
+    "subject": "Physics",
+    "raw_block": "Six equal resistances are connected between points \n and  as shown in figure. Then net resistance will be\n\nP, Q\nR\n\nmaximum between : \n\n(1)\n and \n(2) P and Q\n\nP\nR\n\n(3) Q and R\n(4) Any two points",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 17,
+    "subject": "Physics",
+    "raw_block": "The earth's magnetic field lines resemble that of a dipole at the centre of the earth. If the magnetic moment of\n\n8 \u00d7 1022Am2\n\nthis dipole is close to \n, the value of earth's magnetic field near the equator is close to (radius of\n\n= 6.4 \u00d7 106\u00a0m)\n0.6\n1.2\n1.8\n0.32\n\nthe earth \n\n(1)\n Gauss\n(2)\n Gauss\n\n(3)\n Gauss\n(4)\n Gauss",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 18,
+    "subject": "Physics",
+    "raw_block": "One of the two small circular coils, (none of them having any self - inductance) is suspended with a V-shaped\n\ncopper wire, with plane horizontal. The other coil is placed just below the first one with plane horizontal. Both\n\nthe coils are connected in series with a dc supply. The coils are found to attract each other with a force. Which\n\none of the following statements is incorrect?\n\n(1) Both the coils carry currents in the same\n\n(2) Coils will attract each other, even if the supply is\n\ndirection.\n\nan ac source.\n\nd\u22121\nd\u22122\n\n(3) Force is proportional to \n(4) Force is proportional to ",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 19,
+    "subject": "Physics",
+    "raw_block": "A metal sample carrying a current along \n axis with density \n is subjected to a magnetic field \n (along \n\nX\u2212\nJx\nBz\nz\u2212\nEy\nY\nJx\nBz\n\naxis). The electric field \n developed along -axis is directly proportional to \n as well as \n. The constant of\n\nproportionality has SI unit.\n\nm2\n\nm3\nAs\nm2\nAs\n\n(1)\n(2)\n\nA\n\nAs\nm3\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 20,
+    "subject": "Physics",
+    "raw_block": "When resonance is produced in a series LCR circuit, then which of the following is not correct?\n\n(1) Current in the circuit is in phase with the applied\n\n(2) Inductive and capacitive reactances are equal.\n\nvoltage.\n\n(3) If  is reduced, the voltage across capacitor will\n\n(4) Impedance of the circuit is maximum.\n\nR\n\nincrease.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 21,
+    "subject": "Physics",
+    "raw_block": "A series \n circuit is connected to an ac source of frequency  and the inductive reactance is equal to \n. A\n\nLR\n\u03c9\n2R\nR\nL\nR\n\ncapacitance of capacitive reactance equal to  is added in series with  and . The ratio of the new power\n\nfactor to the old one is :\n\n\u00a0\n\n\u221a2\n\n3\n\u221a2\n\n(1)\n(2)\n\n5\n\n\u221a3\n\n2\n\u221a5\n\n(3)\n(4)\n\n2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 22,
+    "subject": "Physics",
+    "raw_block": "A printed page is pressed by a glass of water. The refractive index of the glass and water is \n and \n,\n\n1.5\n1.33\n1\u00a0cm\n5\u00a0cm\n\nrespectively. If the thickness of the bottom of glass is \n and depth of water is \n, how much the page\n\nwill appear to be shifted if viewed from the top ?\n\n(1)\n(2)\n\n1.033\u00a0cm\n3.581\u00a0cm\n1.3533\u00a0cm\n1.90\u00a0cm\n\n(3)\n(4)\n\n2500\n3 \u03bb\n\u03bb\n\u03bc = 1.5",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 23,
+    "subject": "Physics",
+    "raw_block": "A thin glass plate of thickness is \n (  is wavelength of light used) and refractive index \n is inserted\n\nbetween one of the slits and the screen in Young's double slit experiment. At a point on the screen equidistant\n\nfrom the slits, the ratio of the intensities before and after the introduction of the glass plate is :\n\n(1)\n(2)\n\n2 : 1\n1 : 4\n4 : 1\n4 : 3\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 24,
+    "subject": "Physics",
+    "raw_block": "The source that illuminates the double  slit in 'double - slit interference experiment' emits two distinct\n\n\u2212\n500\u00a0nm\n600\u00a0nm\n\nmonochromatic waves of wavelength \n and \n, each of them producing its own pattern on the\n\nscreen. At the central point of the pattern when path difference is zero, maxima of both the patterns coincide\n\nand the resulting interference pattern is most distinct at the region of zero path difference. But as one moves\n\nout of this central region, the two fringe systems are gradually out of step such that maximum due to on\n\nwavelength coincides with the minimum due to the other and the combined fringe system becomes completely\n\nindistinct. This may happen when path difference in \n is:\n\nnm\n2000\n3000\n1000\n1500\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 25,
+    "subject": "Physics",
+    "raw_block": "This question has Statement-1 and Statements2. Of the four choices given after the Statements, choose the one\n\nthat best describes the two Statements. Statement-1 : Out of radio waves and microwaves, the radio waves\n\nundergo more diffraction. Statement-2 : Radio waves have greater frequency compared to microwaves.\n\n(1) Statement-1 is true, Statement-2 is true and\n\n(2) Statement-1 is false, Statement-2 is true.\n\nStatement-2 is the correct explanation of\n\nStatement-1\n\n(3) Statement-1 is true, Statement-2 is false.\n(4) Statement-1 is true, Statement-2 is true but\n\nStatement-2 is not the correct explanation of\n\nStatement-1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 26,
+    "subject": "Physics",
+    "raw_block": "In an experiment on photoelectric effect, a student plots stopping potential \n against reciprocal of the\n\nV0\n\u03bb\nA\nB\n\nwavelength  of the incident light for two different metals  and . These are shown in the figure.\n\n\u00a0\n\nLooking at the graphs, you can most appropriately say that:\n\n(1) Work function of metal  is greater than that of\n\n(2) For light of certain wavelength falling on both\n\nB\nA\n\nmetal \n\nmetal, maximum kinetic energy of electrons\n\nemitted from A will be greater than those emitted\n\nfrom .\n\nB\nA\nB\n\n(3) Work function of metal  is greater than that of\n\n(4) Students data is not correct\n\nmetal ",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 27,
+    "subject": "Physics",
+    "raw_block": "A copper ball of radius \n and work function \n is irradiated with ultraviolet radiation of wavelength\n\n1\u00a0cm\n4.47\u00a0eV\n2500\u00a0\u00c5\n\n. The effect of irradiation results in the emission of electrons from the ball. Further the ball will acquire\n\ncharge and due to this there will be a finite value of the potential on the ball. The charge acquired by the ball is\n\n:\n\n5.5 \u00d7 10\u221213\u00a0C\n7.5 \u00d7 10\u221213\u00a0C\n4.5 \u00d7 10\u221212\u00a0C\n2.5 \u00d7 10\u221211\u00a0C\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 28,
+    "subject": "Physics",
+    "raw_block": "A \n electron beam is used to bombard gaseous hydrogen at room temperature. It will emit:\n\n12.5eV\n\n(1) 2 lines in the Lyman series and 1 line in the\n\n(2) 3 lines in the Lyman series\n\nBalmar series\n\n(3) 1 line in the Lyman series and 2 lines in the\n\n(4) 3 lines in the Balmer series\n\nBalmar series",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 29,
+    "subject": "Physics",
+    "raw_block": "Which of the following circuits correctly represents the following truth table ? \n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 30,
+    "subject": "Physics",
+    "raw_block": "Which of the following modulated signal has the best noise-tolerance ?\n\n(1) Long-wave\n(2) Short-wave\n\n(3) Medium-wave\n(4) Amplitude-modulated",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 31,
+    "subject": "Chemistry",
+    "raw_block": "litres of an alkene require \n litres of oxygen at constant temperature and pressure for complete combustion.\n\n6\n27\n\nThe alkene is :\n\n(1) Ethene\n(2) Propene\n\n(3)\nButene\n(4)\nButene\n\n1\u2212\n2\u2212",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 32,
+    "subject": "Chemistry",
+    "raw_block": "How many grams of methyl alcohol should be added to \n litre tank of water to prevent its freezing at \n ?\n\n10\n268\u00a0K\nKf\n1.86\u00a0K\u00a0kg mol\u22121)\n880.07\u00a0g\n899.04\u00a0g\n886.02\u00a0g\n868.06\u00a0g\n\n( \n for water is \n \n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 33,
+    "subject": "Chemistry",
+    "raw_block": "of \n solution is added to \n of \n \n of \n solution. What is the final\n\n10\u00a0mL\n2(M)\u00a0NaOH\n200\u00a0mL\n0.5 (M)\nNaOH\n\nconcentration ?\n\n(1)\n(2)\n\n0.57(M)\n5.7(M)\n11.4(M)\n1.14(M)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 34,
+    "subject": "Chemistry",
+    "raw_block": "Given (A) \n (B) \n The maximum number of electron(s) in\n\nn = 5, \u00a0m\u2113= +1\nn = 2, \u2113= 1, \u00a0m\u2113= \u22121, \u00a0ms = \u2212l/2\n\nan atom that can have the quantum numbers as given in (A) and (B) are respectively:\n\n(1)\n and \n(2) and \n\n25\n1\n8\n1\n2\n4\n4\n1\n\n(3) and \n(4) and \n\nC, Si\nGe\nGe < Si < C\nkJ\u00a0mol\u22121",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 35,
+    "subject": "Chemistry",
+    "raw_block": "The catenation tendency of \n and \n is in the order \n. The bond energies (in \n ) of\n\n and \n bonds are respectively ;\n\nC \u2212C, Si \u2212Si\nGe \u2212Ge\n348, 297, 260\n297, 348, 260\n348, 260, 297\n260, 297, 348\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 36,
+    "subject": "Chemistry",
+    "raw_block": "Which one of the following cannot function as an oxidising agent?\n\nI\u2212\nS(s)\nNO\u2212\n\n(1)\n(2)\n\n3 (aq)\nCr2O2\u2212\n\n(3)\n(4)\n\n7",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 37,
+    "subject": "Chemistry",
+    "raw_block": "In which of the following sets, all the given species are isostructural ?\n\n(1)\n(2)\n\nCO2, NO2, ClO2, SiO2\nPCl3, AlCl3, BCl3, SbCl3\nBF3, NF3, PF3, AlF3\nBF\u2212\n\n4 , CCl4, NH+\n4 , PCl+\n4\n\n(3)\n(4)\n\nO \u2212O\nO+\n\n2 , O2, O\u2212\n2\nO2\u2212",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 38,
+    "subject": "Chemistry",
+    "raw_block": "The internuclear distances in \n bonds for \nand \n respectively are :\n\n2\n1.30\u00a0\u00c5, 1.49\u00a0\u00c5, 1.12\u00a0\u00c5, 1.21\u00a0\u00c5\n1.49\u00a0\u00c5, 1.21\u00a0\u00c5, 1.12\u00a0\u00c5, 1.30\u00a0\u00c5\n1.21\u00a0\u00c5, 1.12\u00a0\u00c5, 1.49\u00a0\u00c5, 1.30\u00a0\u00c5\n1.12\u00a0\u00c5, 1.21\u00a0\u00c5, 1.30\u00a0\u00c5, 1.49\u00a0\u00c5\n\n(1)\n(2)\n\n(3)\n(4)\n\ndsp2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 39,
+    "subject": "Chemistry",
+    "raw_block": "The structure of which of the following chloro species can be explained on the basis of \n hybridization?\n\nPdCl2\u2212\n\n4\nFeCl2\u2212\n\n(1)\n(2)\n\n4\nCoCl2\u2212\n\n4\nNiCl2\u2212\n\n(3)\n(4)\n\n4",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 40,
+    "subject": "Chemistry",
+    "raw_block": "Which one of the following is the wrong assumption of kinetic theory of gases ?\n\n\u00a0\n\n(1) Momentum and energy always remain conserved.(2) Pressure is the result of elastic collision of\n\nmolecules with the container's wall.\n\n(3) Molecules are separated by great distances\n\n(4) All the molecules move in straight line between\n\ncompared to their sizes.\n\ncollision and with same velocity.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 41,
+    "subject": "Chemistry",
+    "raw_block": "In which of the following exothermic reactions, the heat liberated per mole is the highest ?\n\n(1)\n(2)\n\nCaO + H2O \u2192Ca(OH)2\nSrO + H2O \u2192Sr(OH)2\nBaO + H2O \u2192Ba(OH)2\nMgO + H2O \u2192Mg(OH)2\n\n(3)\n(4)\n\n\u0394fH\u2218\nN2O\n82\u00a0kJ\u00a0mol\u22121\nN \u2261N, N = N, O = O\nN = O\n946, 418, 498\n607\u00a0kJ\u00a0mol\u22121\nN2O\n\u221288\u00a0kJ\n\u221266\u00a0kJ\n\u221262\u00a0kJ\n\u221244\u00a0kJ",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 42,
+    "subject": "Chemistry",
+    "raw_block": "Given that: (i) \n of \n is \n (ii) Bond energies of \n and \n are\n\n and \n respectively, The resonance energy of \n is :\n\n(1)\n(2)\n\n(3)\n(4)\n\nKp\nKc\nCO(g) + 1\n\n2 O2(g) \u21ccCO2(g)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 43,
+    "subject": "Chemistry",
+    "raw_block": "The ratio \n for the reaction \n is:\n\n1\n\u221aRT\n(RT)1/2\n\n(1)\n(2)\n\n(3)\n(4)\n\nRT\n1",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 44,
+    "subject": "Chemistry",
+    "raw_block": "What would be the \n of a solution obtained by mixing \n of acetic acid and \n of sodium acetate and\n\npH\n5\u00a0g\n7.5\u00a0g\n500\u00a0mL\n(Ka = 1.75 \u00d7 10\u22125, pKa = 4.76)\npH = 4.70\npH < 4.70\npH\npH\n4.76 < pH < 5.0\n\nmaking the volume equal to \n ? \n\n(1)\n(2)\n\n(3)\n of solution will be equal to \n of acetic acid (4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 45,
+    "subject": "Chemistry",
+    "raw_block": "Which one of the following arrangements represents the correct order of the proton affinity of the given\n\nspecies :\n\nI\u2212< F\u2212< HS\u2212< NH\u2212\n\n2\nHS\u2212< NH\u2212\n\n2 < F\u2212< I\u2212\n\n(1)\n(2)\n\nF\u2212< I\u2212< NH\u2212\n\n2 < HS\u2212\nNH\u2212\n\n2 < HS\u2212< I\u2212< F\u2212\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 46,
+    "subject": "Chemistry",
+    "raw_block": "Given \n\nIn the above compounds correct order of reactivity in electrophilic substitution reactions will be:\n\n(1)\n(2)\n\nB > A > C > D\nD > C > B > A\nA > B > C > D\nB > C > A > D\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 47,
+    "subject": "Chemistry",
+    "raw_block": "Copper crystallises in fcc with a unit length of \n. What is the radius of copper atom ?\n\n361\u00a0pm\n157\u00a0pm\n128\u00a0pm\n108\u00a0pm\n181\u00a0pm\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 48,
+    "subject": "Chemistry",
+    "raw_block": "The Gibbs energy for the decomposition of \n at \n is as follows :\n\nAl2O3\n500\u00a0C\n\n2\n3 Al2O3 \u21924\n3 Al + O2, \u0394rG = +940\u00a0kJ\u00a0mol\u22121\n\n The potential difference needed for the electrolytic reduction\n\n500\u2218C\n\nof aluminium oxide at \n should be at least :\n\n\u00a0\n\n(1)\n(2)\n\n4.5\u00a0V\n3.0\u00a0V\n5.0\u00a0V\n2.5\u00a0V\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 49,
+    "subject": "Chemistry",
+    "raw_block": "A solution of copper sulphate \n is electrolysed for \n minutes with a current of \n amperes. The mass\n\n(CuSO4)\n10\n1.5\nCu = 63u\n0.3892\u00a0g\n0.2938\u00a0g\n0.2398\u00a0g\n0.3928\u00a0g\n\nof copper deposited at the cathode (at. mass of \n ) is :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 50,
+    "subject": "Chemistry",
+    "raw_block": "A radioactive isotope having a half - life period of  days was received after \n days. If \n of the isotope is\n\n3\n12\n3\u00a0g\n\nleft in the container, what would be the initial mass of the isotope ?\n\n(1)\n(2)\n\n12\u00a0g\n36\u00a0g\n48\u00a0g\n24\u00a0g\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 51,
+    "subject": "Chemistry",
+    "raw_block": "In which of the following octahedral complex species the magnitude of \n will be maximum?\n\n\u03940\n[Co(H2O)6]2+\n[Co(CN)6]3\u2212\n\n(1)\n(2)\n\n[Co(C2O4)3]3\u2212\n[Co(NH3)6]3+\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 52,
+    "subject": "Chemistry",
+    "raw_block": "In nucleophilic substitution reaction, order of halogens as incoming (attacking) nucleophile is:\n\nI\u2212> Br\u2212> Cl\u2212\n\n The order of halogens as departing nucleophile should be :\n\nBr\u2212> I\u2212> Cl\u2212\nI\u2212> Br\u2212> Cl\u2212\n\n(1)\n(2)\n\nCl\u2212> Br\u2212> I\u2212\nCl\u2212> I\u2212> Br\u2212\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 53,
+    "subject": "Chemistry",
+    "raw_block": "The major product in the following reaction \n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 54,
+    "subject": "Chemistry",
+    "raw_block": "Cannizaro's reaction is not given by :\n\n\u00a0\n\n(1)\n(2)\n\n(3)\n(4)\n\nCH3CHO\nHCHO",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 55,
+    "subject": "Chemistry",
+    "raw_block": "Phenol on heating with \n and \n gives salicylaldehyde. The reaction is called:\n\nCHCl3\nNaOH\n\n(1) Reimer - Tiemann reaction\n(2) Claisen reaction\n\n(3) Cannizzaro's reaction\n(4) Hell - Volhard - Zelinsky reaction",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 56,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following reagent(s) used for the conversion?\n\nLiAlH4/H3O+\nNaH/H3O+\n\n(1) glycol/\n(2) glycol/ \n\n(3)\n(4)\n\nLiAlH4\nNaBH4",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 57,
+    "subject": "Chemistry",
+    "raw_block": "Carbylamine forms from aliphatic or aromatic primary amine via which of the following intermediates?\n\n(1) Carbanion\n(2) Carbene\n\n(3) Carbocation\n(4) Carbon radical",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 58,
+    "subject": "Chemistry",
+    "raw_block": "Which of the following statement is not correct?\n\n(1) Amylopectin is a branched polymer of  -\n\n(2) Cellulose is a linear polymer of -glucose.\n\n\u03b1\n\u03b2\n\nglucose.\n\n(3) Glycogen is the food reserve of plants.\n(4) All proteins are polymers of  - amino acids.\n\n\u03b1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 59,
+    "subject": "Chemistry",
+    "raw_block": "Bakelite is obtained from phenol by reacting with:\n\n(1) Acetal\n(2)\n\nCH3CHO\nHCHO\n\n(3)\n(4) Chlorobenzene",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 60,
+    "subject": "Chemistry",
+    "raw_block": "Among the following vitamins the one whose deficiency causes rickets (bone deficiency) is :\n\n(1) Vitamin A\n(2) Vitamin B\n\n(3) Vitamin D\n(4) Vitamin C\n\np\nq\n\u03b13 + \u03b23 = \u2212p, \u03b1\u03b2 = q",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 61,
+    "subject": "Mathematics",
+    "raw_block": "If  and  are non-zero real numbers and \n, then a quadratic equation whose roots are\n\n\u03b2 , \u03b22\n\n\u03b12\n\n is :\n\n\u03b1\npx2 \u2212qx + p2 = 0\nqx2 + px + q2 = 0\npx2 + qx + p2 = 0\nqx2 \u2212px + q2 = 0\n\n(1)\n(2)\n\n(3)\n(4)\n\nz\n|z| = 1\nz = 1 \u2212\u00afz\n1 : z\n\u03c0\n3",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 62,
+    "subject": "Mathematics",
+    "raw_block": "Let  satisfy \n and \n. Statement \n is a real number. Statement 2 : Principal argument of z is \n\n(1) Statement 1 is true Statement 2 is true; Statement\n\n(2) Statement 1 is false; Statement 2 is true\n\n2 is a correct explanation for Statement 1 .\n\n(3) Statement 1 is true, Statement 2 is false.\n(4) Statement 1 is true; Statement 2 is true;\n\nStatement 2 is not a correct explanation for\n\nStatement 1 .",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 63,
+    "subject": "Mathematics",
+    "raw_block": "5 - digit numbers are to be formed using \n, 9 without repeating the digits. If  be the number of such\n\n2, 3, 5, 7\np\nq\np : q\n6 : 5\n3 : 2\n4 : 3\n5 : 3\n\nnumbers that exceed 20000 and  be the number of those that lie between 30000 and 90000 , then \n is:\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 64,
+    "subject": "Mathematics",
+    "raw_block": "Given a sequence of 4 numbers, first three of which are in G.P. and the last three are in A.P. with common\n\ndifference six. If first and last terms of this sequence are equal, then the last term is :\n\n(1) 16\n(2) 8\n\n(3) 4\n(4) 2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 65,
+    "subject": "Mathematics",
+    "raw_block": "(1) 2925\n(2) 1469\n\n(3) 1728\n(4) 1456\n\nr > 1, n > 2\n(3r)th\u00a0\n(r + 2)th\u00a0\nx\n(1 + x)2n\nn\n2r + 1\n2r \u22121\n3r\nr + 1",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 66,
+    "subject": "Mathematics",
+    "raw_block": "If for positive integers \n, the coefficients of the \n and \n powers of  in the expansion\n\nof \n are equal, then  is equal to:\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 67,
+    "subject": "Mathematics",
+    "raw_block": "Let \n and \n 1\\} be two sets. Then:\n\nA = {\u03b8 : sin(\u03b8) = tan(\u03b8)}\nB = (\u03b8 : cos(\u03b8) =\nA = B\nA \u2282\u0338 B\nB \u2282\u0338 A\nA \u2282B\nB \u2212A \u2260\u03d5\n\n(1)\n(2)\n\n(3)\n(4)\n and ",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 68,
+    "subject": "Mathematics",
+    "raw_block": "If the image of point \n in a line  is \n, then the image of point \n in the same line is:\n\nP(2, 3)\nL\nQ(4, 5)\nR(0, 0)\n(2, 2)\n(4, 5)\n(3, 4)\n(7, 7)\n\n(1)\n(2)\n\n(3)\n(4)\n\nx \u2208(0, 1)\nx\nsin\u22121 x > cos\u22121 x",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 69,
+    "subject": "Mathematics",
+    "raw_block": "Let \n. The set of all  such that \n, is the interval:\n\n( 1\n\n2 ,\n1\n\u221a2 )\n( 1\n\n\u221a2 , 1)\n\n(1)\n(2)\n\n(0, 1)\n(0, \u221a3\n\n2 )\n\n(3)\n(4)\n\n\u221a10\n2x + y = 5\nx2 + y2 \u22126x\n+2y = 0\n2 : 2x + y = 5\nx2 + y2 \u22126x + 2y = 0",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 70,
+    "subject": "Mathematics",
+    "raw_block": "Statement 1: The only circle having radius \n and a diameter along line \n is \n\n. Statement \n is a normal to the circle \n.\n\n(1) Statement 1 is false; Statement 2 is true.\n(2) Statement 1 is true; Statement 2 is true,\n\nStatement 2 is a correct explanation for\n\nStatement 1.\n\n(3) Statement 1 is true; Statement 2 is false.\n(4) Statement 1 is true; Statement 2 is true;\n\nStatement 2 is not a correct explanation for\n\nStatement 1.\n\n60\u2218",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 71,
+    "subject": "Mathematics",
+    "raw_block": "If a circle of unit radius is divided into two parts by an arc of another circle subtending an angle \n on the\n\ncircumference of the first circle, then the radius of the arc is:\n\n\u00a0\n\n\u221a3\n1\n2\n\n(1)\n(2)\n\n(3) 1\n(4) None of these\n\n4x2 + 9y2 = 36\n4x \u22122y \u22125 = 0\n( 9",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 72,
+    "subject": "Mathematics",
+    "raw_block": "A point on the ellipse, \n, where the normal is parallel to the line, \n, is :\n\n5 , 8\n5 )\n( 8\n\n5 , \u22129\n5 )\n(\u22129\n\n(1)\n(2)\n\n5 , 8\n5 )\n( 8\n\n5 , 9\n5 )\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 73,
+    "subject": "Mathematics",
+    "raw_block": "Consider the system of equations : \n and \n. Then the set of all real values of '\n\nx + ay = 0, y + az = 0\nz + ax = 0\na\n\n ' for which the system has a unique solution is:\n\n(1)\n(2)\n\nR \u2212{1}\nR \u2212{\u22121}\n{1, \u22121}\n{1, 0, \u22121}\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 74,
+    "subject": "Mathematics",
+    "raw_block": "Let  and  be any two logical statements and \n. If  has a truth value , then the truth values\n\np\nq\nr : p \u2192(\u223cp \u2228q)\nr\nF\np\nq\nF, F\nT, T\n\nof  and  are respectively:\n\n(1)\n(2)\n\n(3) T, F\n(4) F, T\n\n2n\na\n\u2212a\u2032",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 75,
+    "subject": "Mathematics",
+    "raw_block": "In a set of \n observations, half of them are equal to '  ' and the remaining hall are equal to ' \n '. If the\n\nstandard deviation of all the observations is 2 ; then the value of \n is :\n\n|a|\n\u221a2\n2\u221a2\n\n(1) 2\n(2)\n\n(3) 4\n(4)\n\nx2 = 6y\n2x2 \u22124y2 = 9\nx \u2212y = 3",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 76,
+    "subject": "Mathematics",
+    "raw_block": "A common tangent to the conics \n and \n is:\n\n(1)\n(2)\n\n2\nx + y = 1\nx + y = 9\n\n(3)\n(4)\n\n2\nx \u2212y = 1\n\nS = {(\n) : aij \u2208{0, 1, 2}, a11 = a22}\na11\na12\na21\na22",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 77,
+    "subject": "Mathematics",
+    "raw_block": "Let \n Then the number of non-singular matrices in the set  is :\n\nS\n\n(1) 27\n(2) 24\n\n(3) 10\n(4) 20",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 78,
+    "subject": "Mathematics",
+    "raw_block": "Consider the function : \n where \n is the greatest integer function. Statement\n\nf(x) = [x] + |1 \u2212x|, \u22121 \u2264x \u22643\n[x]\n\n\u2212x,\n\u22121 \u2264x < 0\n1 \u2212x,\n0 \u2264x < 1\n1 + x,\n1 \u2264x < 2\n2 + x,\n2 \u2264x \u22643\n\n1:  is not continuous at \n and 3 Statement 2:f(x)= \n\nf\nx = 0, 1, 2\n=\n\n(1) Statement 1 is true; Statement 2 is false,\n(2) Statement 1 is true; Statement 2 is true;\n\nStatement 2 is not correct explanation for\n\nStatement 1.\n\n(3) Statement 1 is true; Statement 2 is true;\n\n(4) Statement 1 is false; Statement 2 is true.\n\nStatement It is a correct explanation for\n\nStatement 1.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 79,
+    "subject": "Mathematics",
+    "raw_block": "A spherical balloon is being inflated at the rate of \n. The rate of increase in the surface area (in\n\n35cc/min\ncm2/min\n14\u00a0cm\n\n.) of the balloon when its diameter is \n, is :\n\n\u00a0\n\n(1) 10\n(2)\n\n\u221a10\n10\u221a10\n\n(3) 100\n(4)\n\nf(1) = \u22122\nf \u2032(x) \u22654.2\n1 \u2264x \u22646\nf(6)\n[15, 19)\n(\u2212\u221e, 12)\n[12, 15)\n[19, \u221e)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 80,
+    "subject": "Mathematics",
+    "raw_block": "Let \n and \n for \n. The possible value of \n lies in the interval :\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 81,
+    "subject": "Mathematics",
+    "raw_block": "If an equation of a tangent to the curve, \n, is \n then  is equal to\n\ny \u2212cos(x + f), \u22121 \u22121 \u2264x \u22641 + \u03c0\nx + 2y = k\nk\n\n:\n\n(1) 1\n(2) 2\n\n\u03c0\n4\n\u03c0\n2\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 82,
+    "subject": "Mathematics",
+    "raw_block": "If the integral\n\n\u222b\ncos 8x + 1\ncot 2x \u2212tan 2x dx = A cos 8x + k\n\nwhere  is an arbitrary constant, then  is equal to:\n\nk\nA\n\u22121\n\n16\n1\n16\n1\n8\n\u22121\n\n(1)\n(2)\n\n(3)\n(4)\n\n8\n\n0 \u2264x \u2264\u03c0\n2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 83,
+    "subject": "Mathematics",
+    "raw_block": "For \n, the value of\n\nsin2 x\n\ncos2 x\n\n\u222b\n\n0\nsin\u22121(\u221at)dt + \u222b\n\n0\ncos\u22121(\u221at)dt\u00a0equals :\u00a0\n\n\u03c0\n4\n\u2212\u03c0\n\n(1)\n(2) 0\n\n(3) 1\n(4)\n\n4",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 84,
+    "subject": "Mathematics",
+    "raw_block": "Let \n be a continuous function such that \n for all \n. If \n is the\n\nf : [\u22122, 3] \u2192[0, \u221e)\nf(1 \u2212x) = f(x)\nx \u2208[\u22122, 3]\nR1\ny = f(x), x = \u22122, x = 3\nx\nR2 = \u222b3\n\nnumerical value of the area of the region bounded by \n and the axis of  and\n\n, then :\n\n\u22122 xf(x)dx\n\n(1)\n(2)\n\n3R1 = 2R2\n2R1 = 3R2\nR1 = R2\nR1 = 2R2\n\n(3)\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 85,
+    "subject": "Mathematics",
+    "raw_block": "The equation of the curve passing through the origin and satisfying the differential equation\n\n(1 + x2) dy\n\ndx + 2xy = 4x2\n\n is\n\n(1 + x2)y = x3\n3 (1 + x2)y = 2x3\n\n(1)\n(2)\n\n\u2192a = 2^i + ^j \u22122^k,\u2192b = ^i + ^j\n\u2192c\n\u2192a \u2219\u2192c = |\u2192c|, |\u2192c \u2212\u2192a| = 2\u221a2\n\n(1 + x2)y = 3x3\n3 (1 + x2)y = 4x3\n\n(3)\n(4)\n\n\u2192a \u00d7 \u2192b\n\u2192c\n30\u2218\n|(\u2192a \u00d7 \u2192b) \u00d7 \u2192c|",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 86,
+    "subject": "Mathematics",
+    "raw_block": "Let \n. If  is a vector such that \n and the angle between\n\n and  is \n, then \n equals:\n\n1\n2\n3\u221a3\n2\n3\n2\n\n(1)\n(2)\n\n(3) 3\n(4)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 87,
+    "subject": "Mathematics",
+    "raw_block": "Let \n and \n be the vertices of a triangle \n. If the centroid of this triangle lies on the line\n\nA(\u22123, 2)\nB(\u22122, 1)\nABC\n3x + 4y + 2 = 0\nC\n\n, then the vertex  lies on the line :\n\n\u00a0\n\n(1)\n(2)\n\n4x + 3y + 5 = 0\n3x + 4y + 3 = 0\n4x + 3y + 3 = 0\n3x + 4y + 5 = 0\n\n(3)\n(4)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 88,
+    "subject": "Mathematics",
+    "raw_block": "Let \n be a triangle with vertices at points  \n, B \n and \n in three dimensional\n\nABC\nA (2, 3, 5)\n(\u22121, 3, 2)\nC(\u03bb, 5, \u03bc)\nA\n(\u03bb, \u03bc)\n(10, 7)\n(7, 5)\n(7, 10)\n(5, 7)\n\nspace. If the median through  is equally inclined with the axes, then \n is equal to:\n\n(1)\n(2)\n\n(3)\n(4)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 89,
+    "subject": "Mathematics",
+    "raw_block": "The equation of a plane through the line of intersection of the planes \n, and\n\nx + 2y = 3, y \u22122z + 1 = 0\n\nperpendicular to the first plane is :\n\n(1)\n(2)\n\n2x \u2212y \u221210z = 9\n2x \u2212y + 7z = 11\n2x \u2212y + 10z = 11\n2x \u2212y \u22129z = 10\n\n(3)\n(4)\n\nA\nB\nP(A) = 3x+1\n\n3\nP(B) = 1\u2212x",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 90,
+    "subject": "Mathematics",
+    "raw_block": "If the events  and  are mutually exclusive events such that \n and \n, then the set of\n\n4\nx\n[0, 1]\n[ 1\n\npossible values of  lies in the interval :\n\n3 , 2\n3 ]\n[\u22121\n\n(1)\n(2)\n\n3 , 5\n9 ]\n[\u22127\n\n9 , 4\n9 ]\n\n(3)\n(4)\n\n\u00a0\n",
+    "correct_option": "c",
+    "ans_num": 3
+  }
+]

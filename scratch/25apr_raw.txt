@@ -1,0 +1,1621 @@
+ 
+Q1. A block is placed on a rough horizontal plane. A time dependent horizontal force 
+ acts on the block,
+where  is a positive constant. The acceleration - time graph of the block is :
+(1)
+(2)
+(3)
+(4)
+Q2. The maximum range of a bullet fired from a toy pistol mounted on a car at rest is 
+. What will be the
+acute angle of inclination of the pistol for maximum range when the car is moving in the direction of firing with
+uniform velocity 
+ on a horizontal surface? 
+(1)
+(2)
+(3)
+(4)
+Q3. A wind-powered generator converts wind energy into electrical energy. Assume that the generator converts a
+fixed fraction of the wind energy intercepted by its blades into electrical energy. For wind speed , the electrical
+power output will be most likely proportional to
+(1)
+(2)
+(3)
+(4)
+Q4. A ring of mass 
+ and radius  is rotating about its axis with angular velocity . Two identical bodies each of
+mass 
+ are now gently attached at the two ends of a diameter of the ring. Because of this, the kinetic energy
+loss will be :
+(1)
+(2)
+(3)
+(4)
+Q5. Two blocks of masses 
+ and 
+ are connected by means of a metal wire of cross-sectional area A passing over a
+frictionless fixed pulley as shown in the figure. The system is then released. If 
+, then the stress
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+F = kt
+k
+R0 = 40 m
+v = 20 m/s
+(g = 10 m/s2)
+30∘
+60∘
+75∘
+45∘
+v
+v4
+v2
+v
+v3
+M
+R
+ω
+m
+m(M+2m)
+M
+ω2R2
+Mm
+(M+m) ω2R2
+Mm
+(M+2m) ω2R2
+(M+m)M
+(M+2m) ω2R2
+m
+M
+M = 2 m
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+produced in the wire is: 
+(1)
+(2)
+(3)
+(4)
+Q6. In an experiment, a small steel ball falls through a liquid at a constant speed of 
+. If the steel ball is
+pulled upward with a force equal to twice its effective weight, how fast will it move upward ?
+(1)
+(2) Zero
+(3)
+(4)
+Q7. A mass of 
+ of water in a closed vessel, with surroundings at a constant temperature takes 2 minutes to cool
+from 
+ to 
+. A mass of 
+ of another liquid in an identical vessel with identical surroundings takes
+the same time to cool from 
+ to 
+. The specific heat of the liquid is : (The water equivalent of the vessel
+is 
+.)
+(1)
+(2)
+(3)
+(4)
+Q8. A sample of gas expands from 
+ to 
+. In which of the following, the work done will be greatest?
+(1) Same in all processes
+(2) Isobaric process
+(3) Isothermal process
+(4) Adiabatic process
+Q9. In the isothermal expansion of 
+ of gas from volume  to 
+ the work done by the gas is 
+. What is the
+root mean square speed of the molecules of the gas at that temperature?
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+2mg
+3 A
+4mg
+3 A
+mg
+A
+3mg
+4 A
+10 cm/s
+5 cm/s
+10 cm/s
+20 cm/s
+50 g
+30∘C
+25∘C
+100 g
+30∘C
+25∘C
+30 g
+2.0kcal/kg
+7kcal/kg
+3kcal/kg
+0.5kcal/kg
+V1
+V2
+10 g
+V
+2 V
+575 J
+398 m/s
+520 m/s
+499 m/s
+532 m/s
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q10.A uniform cylinder of length  and mass 
+ having cross-sectional area  is suspended, with its length
+vertical, from a fixed point by a massless spring, such that it is half submerged in a liquid of density  at
+equilibrium position. When the cylinder is given a downward push and released, it starts oscillating vertically
+with a small amplitude. The time period  of the oscillations of the cylinder will be :
+(1) Smaller than 
+(2)
+(3) Larger than 
+(4)
+Q11.In a transverse wave the distance between a crest and neighbouring trough at the same instant is 
+ and the
+distance between a crest and trough at the same place is 
+. The next crest appears at the same place after
+a time interval of 
+. The maximum speed of the vibrating particles in the medium is:
+(1)
+(2)
+(3)
+(4)
+Q12.This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement 1: No work is required to be done to move a test charge
+between any two points on an equipotential surface. Statement 2 : Electric lines of force at the equipotential
+surfaces are mutually perpendicular to each other.
+(1) Statement 1 is true, Statement 2 is true,
+Statement 2 is the correct explanation of
+Statement 1.
+(2) Statement 1 is true, Statement 2 is true,
+Statement 2 is not the correct explanation of
+Statement 1.
+(3) Statement 1 is true, Statement 2 is false.
+(4) Statement 1 is false, Statement 2 is true.
+Q13.The surface charge density of a thin charged disc of radius  is . The value of the electric field at the centre
+of the disc is 
+. With respect to the field at the centre, the electric field along the axis at a distance  from
+the centre of the disc:
+(1) reduces by 
+(2) reduces by 
+(3) reduces by 
+(4) reduces by 
+Q14.The gravitational field in a region is given by: 
+ If the potential at the origin is
+taken to be zero, then the ratio of the potential at the points 
+ and 
+ is :
+(1) Zero
+(2) 1
+(3)
+(4)
+Q15.A parallel plate capacitor having a separation between the plates , plate area  and material with dielectric
+constant  has capacitance 
+. Now one-third of the material is replaced by another material with dielectric
+constant 
+, so that effectively there are two capacitors one with area 
+, dielectric constant 
+ and
+another with area 
+ and dielectric constant . If the capacitance of this new capacitor is  then 
+ is
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+L
+M
+A
+σ
+T
+2π[
+M
+(k+Aσg) ]
+1/2
+2π√M
+k
+2π[
+M
+(k+Aσg) ]
+1/2
+2π[
+M
+(k+Aσg) ]
+1/2
+4.0 cm
+1.0 cm
+0.4 s
+3π
+2  cm/s
+5π
+2  cm/s
+π
+2  cm/s
+2 π cm/s
+R
+σ
+σ
+2∈0
+R
+70.7%
+29.3%
+9.7%
+14.6%
+→E = (5N/kg)^i + (12N/kg)^j
+(12 m, 0)
+(0, 5 m)
+144
+25
+25
+144
+d
+A
+K
+C0
+2 K
+1
+3  A
+2 K
+2
+3  A
+K
+C
+C
+C0
+1
+4
+3
+2
+3
+1
+3
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q16.Six equal resistances are connected between points 
+ and  as shown in figure. Then net resistance will be
+maximum between : 
+(1)
+ and 
+(2) P and Q
+(3) Q and R
+(4) Any two points
+Q17.The earth's magnetic field lines resemble that of a dipole at the centre of the earth. If the magnetic moment of
+this dipole is close to 
+, the value of earth's magnetic field near the equator is close to (radius of
+the earth 
+(1)
+ Gauss
+(2)
+ Gauss
+(3)
+ Gauss
+(4)
+ Gauss
+Q18.One of the two small circular coils, (none of them having any self - inductance) is suspended with a V-shaped
+copper wire, with plane horizontal. The other coil is placed just below the first one with plane horizontal. Both
+the coils are connected in series with a dc supply. The coils are found to attract each other with a force. Which
+one of the following statements is incorrect?
+(1) Both the coils carry currents in the same
+direction.
+(2) Coils will attract each other, even if the supply is
+an ac source.
+(3) Force is proportional to 
+(4) Force is proportional to 
+Q19.A metal sample carrying a current along 
+ axis with density 
+ is subjected to a magnetic field 
+ (along 
+axis). The electric field 
+ developed along -axis is directly proportional to 
+ as well as 
+. The constant of
+proportionality has SI unit.
+(1)
+(2)
+(3)
+(4)
+Q20.When resonance is produced in a series LCR circuit, then which of the following is not correct?
+(1) Current in the circuit is in phase with the applied
+voltage.
+(2) Inductive and capacitive reactances are equal.
+(3) If  is reduced, the voltage across capacitor will
+increase.
+(4) Impedance of the circuit is maximum.
+Q21.A series 
+ circuit is connected to an ac source of frequency  and the inductive reactance is equal to 
+. A
+capacitance of capacitive reactance equal to  is added in series with  and . The ratio of the new power
+factor to the old one is :
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+P, Q
+R
+P
+R
+8 × 1022Am2
+= 6.4 × 106 m)
+0.6
+1.2
+1.8
+0.32
+d−1
+d−2
+X−
+Jx
+Bz
+z−
+Ey
+Y
+Jx
+Bz
+m2
+A
+m3
+As
+m2
+As
+As
+m3
+R
+LR
+ω
+2R
+R
+L
+R
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q22.A printed page is pressed by a glass of water. The refractive index of the glass and water is 
+ and 
+,
+respectively. If the thickness of the bottom of glass is 
+ and depth of water is 
+, how much the page
+will appear to be shifted if viewed from the top ?
+(1)
+(2)
+(3)
+(4)
+Q23.A thin glass plate of thickness is 
+ (  is wavelength of light used) and refractive index 
+ is inserted
+between one of the slits and the screen in Young's double slit experiment. At a point on the screen equidistant
+from the slits, the ratio of the intensities before and after the introduction of the glass plate is :
+(1)
+(2)
+(3)
+(4)
+Q24.The source that illuminates the double  slit in 'double - slit interference experiment' emits two distinct
+monochromatic waves of wavelength 
+ and 
+, each of them producing its own pattern on the
+screen. At the central point of the pattern when path difference is zero, maxima of both the patterns coincide
+and the resulting interference pattern is most distinct at the region of zero path difference. But as one moves
+out of this central region, the two fringe systems are gradually out of step such that maximum due to on
+wavelength coincides with the minimum due to the other and the combined fringe system becomes completely
+indistinct. This may happen when path difference in 
+ is:
+(1)
+(2)
+(3)
+(4)
+Q25.This question has Statement-1 and Statements2. Of the four choices given after the Statements, choose the one
+that best describes the two Statements. Statement-1 : Out of radio waves and microwaves, the radio waves
+undergo more diffraction. Statement-2 : Radio waves have greater frequency compared to microwaves.
+(1) Statement-1 is true, Statement-2 is true and
+Statement-2 is the correct explanation of
+Statement-1
+(2) Statement-1 is false, Statement-2 is true.
+(3) Statement-1 is true, Statement-2 is false.
+(4) Statement-1 is true, Statement-2 is true but
+Statement-2 is not the correct explanation of
+Statement-1
+Q26.In an experiment on photoelectric effect, a student plots stopping potential 
+ against reciprocal of the
+wavelength  of the incident light for two different metals  and . These are shown in the figure.
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+√2
+3
+√2
+5
+√3
+2
+√5
+2
+1.5
+1.33
+1 cm
+5 cm
+1.033 cm
+3.581 cm
+1.3533 cm
+1.90 cm
+2500
+3 λ
+λ
+μ = 1.5
+2 : 1
+1 : 4
+4 : 1
+4 : 3
+−
+500 nm
+600 nm
+nm
+2000
+3000
+1000
+1500
+V0
+λ
+A
+B
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Looking at the graphs, you can most appropriately say that:
+(1) Work function of metal  is greater than that of
+metal 
+(2) For light of certain wavelength falling on both
+metal, maximum kinetic energy of electrons
+emitted from A will be greater than those emitted
+from .
+(3) Work function of metal  is greater than that of
+metal 
+(4) Students data is not correct
+Q27.A copper ball of radius 
+ and work function 
+ is irradiated with ultraviolet radiation of wavelength
+. The effect of irradiation results in the emission of electrons from the ball. Further the ball will acquire
+charge and due to this there will be a finite value of the potential on the ball. The charge acquired by the ball is
+:
+(1)
+(2)
+(3)
+(4)
+Q28.A 
+ electron beam is used to bombard gaseous hydrogen at room temperature. It will emit:
+(1) 2 lines in the Lyman series and 1 line in the
+Balmar series
+(2) 3 lines in the Lyman series
+(3) 1 line in the Lyman series and 2 lines in the
+Balmar series
+(4) 3 lines in the Balmer series
+Q29.
+Which of the following circuits correctly represents the following truth table ? 
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+B
+A
+B
+A
+B
+1 cm
+4.47 eV
+2500 Å
+5.5 × 10−13 C
+7.5 × 10−13 C
+4.5 × 10−12 C
+2.5 × 10−11 C
+12.5eV
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q30.Which of the following modulated signal has the best noise-tolerance ?
+(1) Long-wave
+(2) Short-wave
+(3) Medium-wave
+(4) Amplitude-modulated
+Q31. litres of an alkene require 
+ litres of oxygen at constant temperature and pressure for complete combustion.
+The alkene is :
+(1) Ethene
+(2) Propene
+(3)
+Butene
+(4)
+Butene
+Q32.How many grams of methyl alcohol should be added to 
+ litre tank of water to prevent its freezing at 
+ ?
+( 
+ for water is 
+ 
+(1)
+(2)
+(3)
+(4)
+Q33.
+ of 
+ solution is added to 
+ of 
+ 
+ of 
+ solution. What is the final
+concentration ?
+(1)
+(2)
+(3)
+(4)
+Q34.Given (A) 
+ (B) 
+ The maximum number of electron(s) in
+an atom that can have the quantum numbers as given in (A) and (B) are respectively:
+(1)
+ and 
+(2) and 
+(3) and 
+(4) and 
+Q35.The catenation tendency of 
+ and 
+ is in the order 
+. The bond energies (in 
+ ) of
+ and 
+ bonds are respectively ;
+(1)
+(2)
+(3)
+(4)
+Q36.Which one of the following cannot function as an oxidising agent?
+(1)
+(2)
+(3)
+(4)
+Q37.In which of the following sets, all the given species are isostructural ?
+(1)
+(2)
+(3)
+(4)
+Q38.The internuclear distances in 
+ bonds for 
+and 
+ respectively are :
+(1)
+(2)
+(3)
+(4)
+Q39.The structure of which of the following chloro species can be explained on the basis of 
+ hybridization?
+(1)
+(2)
+(3)
+(4)
+Q40.Which one of the following is the wrong assumption of kinetic theory of gases ?
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+6
+27
+1−
+2−
+10
+268 K
+Kf
+1.86 K kg mol−1)
+880.07 g
+899.04 g
+886.02 g
+868.06 g
+10 mL
+2(M) NaOH
+200 mL
+0.5 (M)
+NaOH
+0.57(M)
+5.7(M)
+11.4(M)
+1.14(M)
+n = 5,  mℓ= +1
+n = 2, ℓ= 1,  mℓ= −1,  ms = −l/2
+25
+1
+8
+1
+2
+4
+4
+1
+C, Si
+Ge
+Ge < Si < C
+kJ mol−1
+C −C, Si −Si
+Ge −Ge
+348, 297, 260
+297, 348, 260
+348, 260, 297
+260, 297, 348
+I−
+S(s)
+NO−
+3 (aq)
+Cr2O2−
+7
+CO2, NO2, ClO2, SiO2
+PCl3, AlCl3, BCl3, SbCl3
+BF3, NF3, PF3, AlF3
+BF−
+4 , CCl4, NH+
+4 , PCl+
+4
+O −O
+O+
+2 , O2, O−
+2
+O2−
+2
+1.30 Å, 1.49 Å, 1.12 Å, 1.21 Å
+1.49 Å, 1.21 Å, 1.12 Å, 1.30 Å
+1.21 Å, 1.12 Å, 1.49 Å, 1.30 Å
+1.12 Å, 1.21 Å, 1.30 Å, 1.49 Å
+dsp2
+PdCl2−
+4
+FeCl2−
+4
+CoCl2−
+4
+NiCl2−
+4
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) Momentum and energy always remain conserved.(2) Pressure is the result of elastic collision of
+molecules with the container's wall.
+(3) Molecules are separated by great distances
+compared to their sizes.
+(4) All the molecules move in straight line between
+collision and with same velocity.
+Q41.In which of the following exothermic reactions, the heat liberated per mole is the highest ?
+(1)
+(2)
+(3)
+(4)
+Q42.Given that: (i) 
+ of 
+ is 
+ (ii) Bond energies of 
+ and 
+ are
+ and 
+ respectively, The resonance energy of 
+ is :
+(1)
+(2)
+(3)
+(4)
+Q43.The ratio 
+ for the reaction 
+ is:
+(1)
+(2)
+(3)
+(4)
+Q44.What would be the 
+ of a solution obtained by mixing 
+ of acetic acid and 
+ of sodium acetate and
+making the volume equal to 
+ ? 
+(1)
+(2)
+(3)
+ of solution will be equal to 
+ of acetic acid (4)
+Q45.Which one of the following arrangements represents the correct order of the proton affinity of the given
+species :
+(1)
+(2)
+(3)
+(4)
+Q46.
+Given 
+In the above compounds correct order of reactivity in electrophilic substitution reactions will be:
+(1)
+(2)
+(3)
+(4)
+Q47.Copper crystallises in fcc with a unit length of 
+. What is the radius of copper atom ?
+(1)
+(2)
+(3)
+(4)
+Q48.The Gibbs energy for the decomposition of 
+ at 
+ is as follows :
+ The potential difference needed for the electrolytic reduction
+of aluminium oxide at 
+ should be at least :
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+CaO + H2O →Ca(OH)2
+SrO + H2O →Sr(OH)2
+BaO + H2O →Ba(OH)2
+MgO + H2O →Mg(OH)2
+ΔfH∘
+N2O
+82 kJ mol−1
+N ≡N, N = N, O = O
+N = O
+946, 418, 498
+607 kJ mol−1
+N2O
+−88 kJ
+−66 kJ
+−62 kJ
+−44 kJ
+Kp
+Kc
+CO(g) + 1
+2 O2(g) ⇌CO2(g)
+1
+√RT
+(RT)1/2
+RT
+1
+pH
+5 g
+7.5 g
+500 mL
+(Ka = 1.75 × 10−5, pKa = 4.76)
+pH = 4.70
+pH < 4.70
+pH
+pH
+4.76 < pH < 5.0
+I−< F−< HS−< NH−
+2
+HS−< NH−
+2 < F−< I−
+F−< I−< NH−
+2 < HS−
+NH−
+2 < HS−< I−< F−
+B > A > C > D
+D > C > B > A
+A > B > C > D
+B > C > A > D
+361 pm
+157 pm
+128 pm
+108 pm
+181 pm
+Al2O3
+500 C
+2
+3 Al2O3 →4
+3 Al + O2, ΔrG = +940 kJ mol−1
+500∘C
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q49.A solution of copper sulphate 
+ is electrolysed for 
+ minutes with a current of 
+ amperes. The mass
+of copper deposited at the cathode (at. mass of 
+ ) is :
+(1)
+(2)
+(3)
+(4)
+Q50.A radioactive isotope having a half - life period of  days was received after 
+ days. If 
+ of the isotope is
+left in the container, what would be the initial mass of the isotope ?
+(1)
+(2)
+(3)
+(4)
+Q51.In which of the following octahedral complex species the magnitude of 
+ will be maximum?
+(1)
+(2)
+(3)
+(4)
+Q52.In nucleophilic substitution reaction, order of halogens as incoming (attacking) nucleophile is:
+ The order of halogens as departing nucleophile should be :
+(1)
+(2)
+(3)
+(4)
+Q53.
+The major product in the following reaction 
+(1)
+(2)
+(3)
+(4)
+Q54.Cannizaro's reaction is not given by :
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+4.5 V
+3.0 V
+5.0 V
+2.5 V
+(CuSO4)
+10
+1.5
+Cu = 63u
+0.3892 g
+0.2938 g
+0.2398 g
+0.3928 g
+3
+12
+3 g
+12 g
+36 g
+48 g
+24 g
+Δ0
+[Co(H2O)6]2+
+[Co(CN)6]3−
+[Co(C2O4)3]3−
+[Co(NH3)6]3+
+I−> Br−> Cl−
+Br−> I−> Cl−
+I−> Br−> Cl−
+Cl−> Br−> I−
+Cl−> I−> Br−
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q55.Phenol on heating with 
+ and 
+ gives salicylaldehyde. The reaction is called:
+(1) Reimer - Tiemann reaction
+(2) Claisen reaction
+(3) Cannizzaro's reaction
+(4) Hell - Volhard - Zelinsky reaction
+Q56.Which of the following reagent(s) used for the conversion?
+(1) glycol/
+(2) glycol/ 
+(3)
+(4)
+Q57.Carbylamine forms from aliphatic or aromatic primary amine via which of the following intermediates?
+(1) Carbanion
+(2) Carbene
+(3) Carbocation
+(4) Carbon radical
+Q58.Which of the following statement is not correct?
+(1) Amylopectin is a branched polymer of  -
+glucose.
+(2) Cellulose is a linear polymer of -glucose.
+(3) Glycogen is the food reserve of plants.
+(4) All proteins are polymers of  - amino acids.
+Q59.Bakelite is obtained from phenol by reacting with:
+(1) Acetal
+(2)
+(3)
+(4) Chlorobenzene
+Q60.Among the following vitamins the one whose deficiency causes rickets (bone deficiency) is :
+(1) Vitamin A
+(2) Vitamin B
+(3) Vitamin D
+(4) Vitamin C
+Q61.If  and  are non-zero real numbers and 
+, then a quadratic equation whose roots are
+ is :
+(1)
+(2)
+(3)
+(4)
+Q62.Let  satisfy 
+ and 
+. Statement 
+ is a real number. Statement 2 : Principal argument of z is 
+(1) Statement 1 is true Statement 2 is true; Statement
+2 is a correct explanation for Statement 1 .
+(2) Statement 1 is false; Statement 2 is true
+(3) Statement 1 is true, Statement 2 is false.
+(4) Statement 1 is true; Statement 2 is true;
+Statement 2 is not a correct explanation for
+Statement 1 .
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+CH3CHO
+HCHO
+CHCl3
+NaOH
+LiAlH4/H3O+
+NaH/H3O+
+LiAlH4
+NaBH4
+α
+β
+α
+CH3CHO
+HCHO
+p
+q
+α3 + β3 = −p, αβ = q
+α2
+β , β2
+α
+px2 −qx + p2 = 0
+qx2 + px + q2 = 0
+px2 + qx + p2 = 0
+qx2 −px + q2 = 0
+z
+|z| = 1
+z = 1 −¯z
+1 : z
+π
+3
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+Q63.5 - digit numbers are to be formed using 
+, 9 without repeating the digits. If  be the number of such
+numbers that exceed 20000 and  be the number of those that lie between 30000 and 90000 , then 
+ is:
+(1)
+(2)
+(3)
+(4)
+Q64.Given a sequence of 4 numbers, first three of which are in G.P. and the last three are in A.P. with common
+difference six. If first and last terms of this sequence are equal, then the last term is :
+(1) 16
+(2) 8
+(3) 4
+(4) 2
+Q65.
+(1) 2925
+(2) 1469
+(3) 1728
+(4) 1456
+Q66.If for positive integers 
+, the coefficients of the 
+ and 
+ powers of  in the expansion
+of 
+ are equal, then  is equal to:
+(1)
+(2)
+(3)
+(4)
+Q67.Let 
+ and 
+ 1\} be two sets. Then:
+(1)
+(2)
+(3)
+(4)
+ and 
+Q68.If the image of point 
+ in a line  is 
+, then the image of point 
+ in the same line is:
+(1)
+(2)
+(3)
+(4)
+Q69.Let 
+. The set of all  such that 
+, is the interval:
+(1)
+(2)
+(3)
+(4)
+Q70.Statement 1: The only circle having radius 
+ and a diameter along line 
+ is 
+. Statement 
+ is a normal to the circle 
+.
+(1) Statement 1 is false; Statement 2 is true.
+(2) Statement 1 is true; Statement 2 is true,
+Statement 2 is a correct explanation for
+Statement 1.
+(3) Statement 1 is true; Statement 2 is false.
+(4) Statement 1 is true; Statement 2 is true;
+Statement 2 is not a correct explanation for
+Statement 1.
+Q71.If a circle of unit radius is divided into two parts by an arc of another circle subtending an angle 
+ on the
+circumference of the first circle, then the radius of the arc is:
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+2, 3, 5, 7
+p
+q
+p : q
+6 : 5
+3 : 2
+4 : 3
+5 : 3
+r > 1, n > 2
+(3r)th 
+(r + 2)th 
+x
+(1 + x)2n
+n
+2r + 1
+2r −1
+3r
+r + 1
+A = {θ : sin(θ) = tan(θ)}
+B = (θ : cos(θ) =
+A = B
+A ⊄ B
+B ⊄ A
+A ⊂B
+B −A ≠ϕ
+P(2, 3)
+L
+Q(4, 5)
+R(0, 0)
+(2, 2)
+(4, 5)
+(3, 4)
+(7, 7)
+x ∈(0, 1)
+x
+sin−1 x > cos−1 x
+( 1
+2 ,
+1
+√2 )
+( 1
+√2 , 1)
+(0, 1)
+(0, √3
+2 )
+√10
+2x + y = 5
+x2 + y2 −6x
++2y = 0
+2 : 2x + y = 5
+x2 + y2 −6x + 2y = 0
+60∘
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3) 1
+(4) None of these
+Q72.A point on the ellipse, 
+, where the normal is parallel to the line, 
+, is :
+(1)
+(2)
+(3)
+(4)
+Q73.Consider the system of equations : 
+ and 
+. Then the set of all real values of '
+ ' for which the system has a unique solution is:
+(1)
+(2)
+(3)
+(4)
+Q74.Let  and  be any two logical statements and 
+. If  has a truth value , then the truth values
+of  and  are respectively:
+(1)
+(2)
+(3) T, F
+(4) F, T
+Q75.In a set of 
+ observations, half of them are equal to '  ' and the remaining hall are equal to ' 
+ '. If the
+standard deviation of all the observations is 2 ; then the value of 
+ is :
+(1) 2
+(2)
+(3) 4
+(4)
+Q76.A common tangent to the conics 
+ and 
+ is:
+(1)
+(2)
+(3)
+(4)
+Q77.Let 
+ Then the number of non-singular matrices in the set  is :
+(1) 27
+(2) 24
+(3) 10
+(4) 20
+Q78.Consider the function : 
+ where 
+ is the greatest integer function. Statement
+1:  is not continuous at 
+ and 3 Statement 2:f(x)= 
+(1) Statement 1 is true; Statement 2 is false,
+(2) Statement 1 is true; Statement 2 is true;
+Statement 2 is not correct explanation for
+Statement 1.
+(3) Statement 1 is true; Statement 2 is true;
+Statement It is a correct explanation for
+Statement 1.
+(4) Statement 1 is false; Statement 2 is true.
+Q79.A spherical balloon is being inflated at the rate of 
+. The rate of increase in the surface area (in
+.) of the balloon when its diameter is 
+, is :
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+√3
+1
+2
+4x2 + 9y2 = 36
+4x −2y −5 = 0
+( 9
+5 , 8
+5 )
+( 8
+5 , −9
+5 )
+(−9
+5 , 8
+5 )
+( 8
+5 , 9
+5 )
+x + ay = 0, y + az = 0
+z + ax = 0
+a
+R −{1}
+R −{−1}
+{1, −1}
+{1, 0, −1}
+p
+q
+r : p →(∼p ∨q)
+r
+F
+p
+q
+F, F
+T, T
+2n
+a
+−a′
+|a|
+√2
+2√2
+x2 = 6y
+2x2 −4y2 = 9
+x −y = 3
+2
+x + y = 1
+x + y = 9
+2
+x −y = 1
+S = {(
+) : aij ∈{0, 1, 2}, a11 = a22}
+a11
+a12
+a21
+a22
+S
+f(x) = [x] + |1 −x|, −1 ≤x ≤3
+[x]
+f
+x = 0, 1, 2
+=
+−x,
+−1 ≤x < 0
+1 −x,
+0 ≤x < 1
+1 + x,
+1 ≤x < 2
+2 + x,
+2 ≤x ≤3
+35cc/min
+cm2/min
+14 cm
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1) 10
+(2)
+(3) 100
+(4)
+Q80.Let 
+ and 
+ for 
+. The possible value of 
+ lies in the interval :
+(1)
+(2)
+(3)
+(4)
+Q81.If an equation of a tangent to the curve, 
+, is 
+ then  is equal to
+:
+(1) 1
+(2) 2
+(3)
+(4)
+Q82.If the integral
+where  is an arbitrary constant, then  is equal to:
+(1)
+(2)
+(3)
+(4)
+Q83.For 
+, the value of
+(1)
+(2) 0
+(3) 1
+(4)
+Q84.Let 
+ be a continuous function such that 
+ for all 
+. If 
+ is the
+numerical value of the area of the region bounded by 
+ and the axis of  and
+, then :
+(1)
+(2)
+(3)
+(4)
+Q85.The equation of the curve passing through the origin and satisfying the differential equation
+ is
+(1)
+(2)
+(3)
+(4)
+Q86.Let 
+. If  is a vector such that 
+ and the angle between
+ and  is 
+, then 
+ equals:
+(1)
+(2)
+(3) 3
+(4)
+Q87.Let 
+ and 
+ be the vertices of a triangle 
+. If the centroid of this triangle lies on the line
+, then the vertex  lies on the line :
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+√10
+10√10
+f(1) = −2
+f ′(x) ≥4.2
+1 ≤x ≤6
+f(6)
+[15, 19)
+(−∞, 12)
+[12, 15)
+[19, ∞)
+y −cos(x + f), −1 −1 ≤x ≤1 + π
+x + 2y = k
+k
+π
+4
+π
+2
+∫
+cos 8x + 1
+cot 2x −tan 2x dx = A cos 8x + k
+k
+A
+−1
+16
+1
+16
+1
+8
+−1
+8
+0 ≤x ≤π
+2
+∫
+sin2 x
+0
+sin−1(√t)dt + ∫
+cos2 x
+0
+cos−1(√t)dt equals : 
+π
+4
+−π
+4
+f : [−2, 3] →[0, ∞)
+f(1 −x) = f(x)
+x ∈[−2, 3]
+R1
+y = f(x), x = −2, x = 3
+x
+R2 = ∫3
+−2 xf(x)dx
+3R1 = 2R2
+2R1 = 3R2
+R1 = R2
+R1 = 2R2
+(1 + x2) dy
+dx + 2xy = 4x2
+(1 + x2)y = x3
+3 (1 + x2)y = 2x3
+(1 + x2)y = 3x3
+3 (1 + x2)y = 4x3
+→a = 2^i + ^j −2^k,→b = ^i + ^j
+→c
+→a ∙→c = |→c|, |→c −→a| = 2√2
+→a × →b
+→c
+30∘
+|(→a × →b) × →c|
+1
+2
+3√3
+2
+3
+2
+A(−3, 2)
+B(−2, 1)
+ABC
+3x + 4y + 2 = 0
+C
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+(1)
+(2)
+(3)
+(4)
+Q88.Let 
+ be a triangle with vertices at points  
+, B 
+ and 
+ in three dimensional
+space. If the median through  is equally inclined with the axes, then 
+ is equal to:
+(1)
+(2)
+(3)
+(4)
+Q89.The equation of a plane through the line of intersection of the planes 
+, and
+perpendicular to the first plane is :
+(1)
+(2)
+(3)
+(4)
+Q90.If the events  and  are mutually exclusive events such that 
+ and 
+, then the set of
+possible values of  lies in the interval :
+(1)
+(2)
+(3)
+(4)
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+4x + 3y + 5 = 0
+3x + 4y + 3 = 0
+4x + 3y + 3 = 0
+3x + 4y + 5 = 0
+ABC
+A (2, 3, 5)
+(−1, 3, 2)
+C(λ, 5, μ)
+A
+(λ, μ)
+(10, 7)
+(7, 5)
+(7, 10)
+(5, 7)
+x + 2y = 3, y −2z + 1 = 0
+2x −y −10z = 9
+2x −y + 7z = 11
+2x −y + 10z = 11
+2x −y −9z = 10
+A
+B
+P(A) = 3x+1
+3
+P(B) = 1−x
+4
+x
+[0, 1]
+[ 1
+3 , 2
+3 ]
+[−1
+3 , 5
+9 ]
+[−7
+9 , 4
+9 ]
+Join the Most Relevant Test Series for JEE Main with Most Detailed & Advanced Analysis here: https://links.mathongo.com/mWN
+
+--- PAGE BREAK ---
+ 
+ANSWER KEYS
+1. (2)
+2. (2)
+3. (4)
+4. (3)
+5. (2)
+6. (3)
+7. (4)
+8. (2)
+9. (3)
+10. (1)
+11. (2)
+12. (3)
+13. (1)
+14. (2)
+15. (2)
+16. (2)
+17. (1)
+18. (4)
+19. (2)
+20. (4)
+21. (4)
+22. (3)
+23. (3)
+24. (4)
+25. (3)
+26. (4)
+27. (1)
+28. (1)
+29. (1)
+30. (2)
+31. (4)
+32. (4)
+33. (1)
+34. (2)
+35. (1)
+36. (1)
+37. (4)
+38. (4)
+39. (1)
+40. (4)
+41. (1)
+42. (1)
+43. (1)
+44. (4)
+45. (1)
+46. (1)
+47. (2)
+48. (2)
+49. (2)
+50. (3)
+51. (2)
+52. (2)
+53. (3)
+54. (3)
+55. (1)
+56. (1)
+57. (2)
+58. (3)
+59. (3)
+60. (3)
+61. (2)
+62. (2)
+63. (4)
+64. (2)
+65. (1)
+66. (1)
+67. (2)
+68. (4)
+69. (2)
+70. (1)
+71. (4)
+72. (3)
+73. (2)
+74. (3)
+75. (1)
+76. (1)
+77. (4)
+78. (1)
+79. (1)
+80. (4)
+81. (4)
+82. (1)
+83. (1)
+84. (4)
+85. (4)
+86. (4)
+87. (2)
+88. (3)
+89. (3)
+90. (3)
+ 
+JEE Main 2013 (25 Apr Online)
+Question Paper
+JEE Main Previous Year Paper
+MathonGo
+
+--- PAGE BREAK ---

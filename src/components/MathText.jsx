@@ -75,9 +75,15 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/(\band the other (?:is )?labelled as \*{0,2}Reason\s*(?:\(?[Rr]\)?)\*{0,2})\s*:/gi, "$1.");
 
           // Format actual statement declarations (which have a colon) onto distinct paragraphs
-          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bStatement\s*(?:\(?([I|V|X]+|[0-9]+|[A-E])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Statement $2:** ");
-          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bAssertion\s*(?:\(?([Aa])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Assertion ($2):** ");
-          s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\bReason\s*(?:\(?([Rr])\)?)\*{0,2}\s*:\s*/gi, "$1\n\n**Reason ($2):** ");
+          s = s.replace(/(^|[^\n])\s*\n*\s*\*{0,2}\bStatement\s*[-–—]?\s*(?:\(?([IVX]+|[0-9]+|[A-E])\)?)\*{0,2}\s*:\s*/gi, (match, prefix, num) => {
+            return (prefix ? prefix + "\n\n" : "") + `**Statement ${num}:** `;
+          });
+          s = s.replace(/(^|[^\n])\s*\n*\s*\*{0,2}\bAssertion\s*(?:\(?([Aa])\)?)\*{0,2}\s*:\s*/gi, (match, prefix, letter) => {
+            return (prefix ? prefix + "\n\n" : "") + `**Assertion (${letter.toUpperCase()}):** `;
+          });
+          s = s.replace(/(^|[^\n])\s*\n*\s*\*{0,2}\bReason\s*(?:\(?([Rr])\)?)\*{0,2}\s*:\s*/gi, (match, prefix, letter) => {
+            return (prefix ? prefix + "\n\n" : "") + `**Reason (${letter.toUpperCase()}):** `;
+          });
           s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S1|s1)\)\s*:\s*/g, "$1\n\n**(S1):** ");
           s = s.replace(/([^\n])\s*\n*\s*\*{0,2}\((?:S2|s2)\)\s*:\s*/g, "$1\n\n**(S2):** ");
 
@@ -85,8 +91,8 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/(^|[\.\:\n])\s*\b([A-E])\.\s+/g, "$1\n\n**$2.** ");
           s = s.replace(/(^|[\.\:\n])\s*\(([A-E])\)\s+/g, "$1\n\n**($2)** ");
 
-          // Roman numeral sub-statements (i), (ii), (iii), (iv), (v)
-          s = s.replace(/(^|[\.\:\n]|\band)\s*\(([i|v|x]+)\)\s+/gi, "$1\n\n**($2)** ");
+          // Roman numeral sub-statements (i), (ii), (iii), (iv), (v) only when starting a line
+          s = s.replace(/(^|\n)\s*\(([ivx]+)\)\s+/gi, "$1**($2)** ");
 
           // Format instructions on distinct lines
           s = s.replace(/([^\n])\s*\n*\s*(In (?:the )?light of the above statements[^\n:]*:?)/gi, "$1\n\n$2");
@@ -246,13 +252,45 @@ function normalizeDisplayMathDelimiters(value) {
   return text.trim();
 }
 
+function autoFormatBareLatex(value) {
+  let text = String(value ?? "");
+
+  return splitMathSegments(text)
+    .map((segment) => {
+      if (isPreservedSegment(segment)) return segment;
+
+      let s = segment;
+
+      // 1. Convert bare LaTeX commands like \hat{\imath}, \sigma, \omega, \theta, \varepsilon, \frac, \sqrt, \text outside math
+      s = s.replace(/(\(?\s*\\(?:hat|vec|mathrm|mathbf|text|sigma|omega|theta|lambda|alpha|beta|gamma|mu|Delta|Omega|varepsilon|in|times|approx|le|ge|ne|pm|mp|frac|sqrt)[a-zA-Z0-9\s\^_\{\}\(\)\+\-\*\/\=\.,]*?\)?)/g, (match) => {
+        const trimmed = match.trim();
+        if (!trimmed) return match;
+        return ` $${trimmed}$ `;
+      });
+
+      // 2. Wrap bare algebraic expressions like "y = x - 5x^{2}" or "4y = 2x - 25x^{2}"
+      s = s.replace(/([0-9]*[a-zA-Z]\s*=\s*[0-9a-zA-Z\s\+\-\*\/\^_\{\}]+(?:\^\{[0-9a-zA-Z\+\-]+\}|_\{[0-9a-zA-Z\+\-]+\})[0-9a-zA-Z\s\+\-\*\/\^_\{\}]*)/g, (match) => {
+        return ` $${match.trim()}$ `;
+      });
+
+      // 3. Fix adjacent variables and words: "$L$and" -> "$L$ and", "area$A$is" -> "area $A$ is"
+      s = s.replace(/([a-zA-Z0-9,\.\?\)])\$([^\$]+)\$/g, "$1 $$2$");
+      s = s.replace(/\$([^\$]+)\$([a-zA-Z0-9\(])/g, "$$$1$ $2");
+
+      return s;
+    })
+    .join("");
+}
+
 export default function MathText({ children, className = "" }) {
   const preparedText = normalizeDisplayMathDelimiters(
     normalizeQuestionLayout(
-      normalizeLegacyScientificNotation(
-        normalizeFlattenedTables(
-          normalizeBlankPlaceholders(
-            sanitizeListsAndMarkdownSymbols(children)
+      autoFormatBareLatex(
+        normalizeLegacyScientificNotation(
+          normalizeFlattenedTables(
+            normalizeBlankPlaceholders(
+              sanitizeListsAndMarkdownSymbols(children)
+            )
           )
         )
       )

@@ -19,6 +19,12 @@ import { AlertTriangle, BookOpen, FileText, Flag, Inbox, RotateCcw, Shuffle } fr
 const LETTERS = ["A", "B", "C", "D"];
 
 function originalQuestionNumber(question, fallback) {
+  if (Number.isFinite(Number(question?.question_number)) && Number(question.question_number) > 0) {
+    return Number(question.question_number);
+  }
+  if (Number.isFinite(Number(question?.display_order)) && Number(question.display_order) > 0) {
+    return Number(question.display_order);
+  }
   const match = question?.question?.match(/^\s*Question\s+(\d+)\s*:/i);
   return match ? Number(match[1]) : fallback;
 }
@@ -351,17 +357,18 @@ export default function PYQSessionPage() {
           // source order.
           const subjectOrder = exam === "NEET"
             ? { Physics: 1, Chemistry: 2, Biology: 3, Botany: 3, Zoology: 4 }
-            : { Maths: 1, Mathematics: 1, Physics: 2, Chemistry: 3 };
+            : { Physics: 1, Chemistry: 2, Maths: 3, Mathematics: 3 };
 
           combined = combined.sort((a, b) => {
-            const subjectDifference = (subjectOrder[a.subject] || 99) - (subjectOrder[b.subject] || 99);
-            if (subjectDifference !== 0) return subjectDifference;
-
             const numA = originalQuestionNumber(a, -1);
             const numB = originalQuestionNumber(b, -1);
             if (numA !== -1 && numB !== -1) {
               return numA - numB;
             }
+
+            const subjectDifference = (subjectOrder[a.subject] || 99) - (subjectOrder[b.subject] || 99);
+            if (subjectDifference !== 0) return subjectDifference;
+
             return new Date(a.created_at) - new Date(b.created_at);
           });
         } else {

@@ -1,0 +1,902 @@
+[
+  {
+    "qnum": 1,
+    "question_text": "The dimensions of angular momentum, latent heat and capacitance are, respectively.",
+    "option_a": "ML2 T1 A2, L2 T-2, M-1 L-2 T2",
+    "option_b": "ML2 T-2, L2 T2, M-1 L-2 T4 A2",
+    "option_c": "ML2 T-1, L2 T-2, ML2TA2",
+    "option_d": "ML2 T-1, L2 T-2, M-1 L-2 T4 A2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 2,
+    "question_text": "A ball projected from ground at an angle of 45\u2218 just clears a wall in front. If point of projection is 4 m from the\nfoot of wall and ball strikes the ground at a distance of 6 m on the other side of the wall, the height of the wall is\n:",
+    "option_a": "4.4 m",
+    "option_b": "2.4 m",
+    "option_c": "3.6 m",
+    "option_d": "1.6 m",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 3,
+    "question_text": "Two blocks of mass M1 = 20 kg and M2 = 12 kg are connected by a metal rod of mass 8 kg . The system is\npulled vertically up by applying a force of 480 N as shown. The tension at the mid-point of the rod is:",
+    "option_a": "144 N",
+    "option_b": "96 N",
+    "option_c": "240 N",
+    "option_d": "192 N",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 4,
+    "question_text": "A body starts from rest on a long inclined plane of slope 45\u2218 . The coefficient of friction between the body and\nthe plane varies as \u03bc = 0.3x , where x is distance travelled down the plane. The body will have maximum speed\n(for g = 10 m/s2 ) when x =",
+    "option_a": "9.8 m",
+    "option_b": "27 m",
+    "option_c": "12 m",
+    "option_d": "3.33 m",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 5,
+    "question_text": "A tennis ball (treated as hollow spherical shell) starting from O rolls down a hill. At point A the ball becomes\nair borne leaving at an angle of 30\u2218 with the horizontal. The ball strikes the ground at B . What is the value of\nQuestion Paper MathonGo\nthe distance AB ? (Moment of inertia of a spherical shell of mass m and radius R about its diameter = 2 mR2 )\n3",
+    "option_a": "1.87 m",
+    "option_b": "2.08 m",
+    "option_c": "1.57 m",
+    "option_d": "1.77 m",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 6,
+    "question_text": "The change in the value of acceleration of earth towards sun, when the moon comes from the position of solar\neclipse to the position on the other side of earth in line with sun is: (mass of the moon = 7.36 \u00d7 1022 kg , radius\nof the moon's orbit = 3.8 \u00d7 108 m ).",
+    "option_a": "6.73 \u00d7 10-5 m/s2",
+    "option_b": "6.73 \u00d7 10-3 m/s2",
+    "option_c": "6.73 \u00d7 10-2 m/s2",
+    "option_d": "6.73 \u00d7 10-4 m/s2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 7,
+    "question_text": "A uniform wire (Young's modulus 2 \u00d7 1011Nm-2 ) is subjected to longitudinal tensile stress of 5 \u00d7 107Nm-2 .\nIf the overall volume change in the wire is 0.02% , the fractional decrease in the radius of the wire is close to:",
+    "option_a": "1.0 \u00d7 10-4",
+    "option_b": "1.5 \u00d7 10-4",
+    "option_c": "0.25 \u00d7 10-4",
+    "option_d": "5 \u00d7 10-4",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 8,
+    "question_text": "Air of density 1.2 kg m-3 is blowing across the horizontal wings of an aeroplane in such a way that its speeds\nabove and below the wings are 150 ms-1 and 100 ms-1 , respectively. The pressure difference between the\nupper and lower sides of the wings, is :",
+    "option_a": "60Nm-2",
+    "option_b": "180Nm-2",
+    "option_c": "7500Nm-2",
+    "option_d": "12500Nm-2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 9,
+    "question_text": "Given that 1 g of water in liquid phase has volume 1 cm3 and in vapour phase 1671 cm3 at atmospheric\npressure and the latent heat of vaporization of water is 2256 J/g ; the change in the internal energy in joules for\n1 g of water at 373 K when it changes from liquid phase to vapour phase at the same temperature is :",
+    "option_a": "2256",
+    "option_b": "167",
+    "option_c": "2089",
+    "option_d": "1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 10,
+    "question_text": "An ideal gas at atmospheric pressure is adiabatically compressed so that its density becomes 32 times of its\ninitial value. If the final pressure of gas is 128 atmospheres, the value of ' \u03b3 'of the gas is :",
+    "option_a": "1.5",
+    "option_b": "1.4",
+    "option_c": "1.3",
+    "option_d": "1.6\nQuestion Paper MathonGo",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 11,
+    "question_text": "A certain amount of gas is taken through a cyclic process (A B C D A) that has two isobars, one isochore and\none isothermal. The cycle can be represented on a P -V indicator diagram as :\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 12,
+    "question_text": "A mass m = 1.0 kg is put on a flat pan attached to a vertical spring fixed on the ground. The mass of the\nspring and the pan is negligible. When pressed slightly and released, the mass executes simple harmonic\nmotion. The spring constant is 500 N/m . What is the amplitude A of the motion, so that the mass m tends to\nget detached from the pan ? (Take g = 10 m/s2 ). The spring is stiff enough so that it does not get distorted\nduring the motion.\nQuestion Paper MathonGo",
+    "option_a": "A > 2.0 cm",
+    "option_b": "A = 2.0 cm",
+    "option_c": "A < 2.0 cm",
+    "option_d": "A = 1.5 cm",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 13,
+    "question_text": "A and B are two sources generating sound waves. A listener is situated at C . The frequency of the source at A\nis 500 Hz . A, now, moves towards C with a speed 4 m/s . The number of beats heard at C is 6 . When A moves\naway from C with speed 4 m/s , the number of beats heard at C is 18 . The speed of sound is 340 m/s . The\nfrequency of the source at B is :",
+    "option_a": "500 Hz",
+    "option_b": "506 Hz",
+    "option_c": "512 Hz",
+    "option_d": "494 Hz",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 14,
+    "question_text": "A point charge of magnitude +1\u03bcC is fixed at (0 , 0, 0) . An isolated uncharged spherical conductor, is fixed\nwith its center at (4, 0, 0) . The potential and the induced electric field at the centre of the sphere is :",
+    "option_a": "1.8 \u00d7 105 V and -5.625 \u00d7 106 V/m",
+    "option_b": "0 V and 0 V/m",
+    "option_c": "2.25 \u00d7 105 V and -5.625 \u00d7 106 V/m",
+    "option_d": "2.25 \u00d7 105 V and 0 V/m",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 15,
+    "question_text": "Two small equal point charges of magnitude q are suspended from a common point on the ceiling by insulating\nmass less strings of equal lengths. They come to equilibrium with each string making angle \\theta from the vertical.\nIf the mass of each charge is m , then the electrostatic potential at the centre of line joining them will be\n( 1 k).\n=\n4\\pi  \\in 0",
+    "option_a": "2\\sqrtkmg tan \\theta",
+    "option_b": "\\sqrtkmg tan \\theta",
+    "option_c": "4\\sqrtkmg/ tan \\theta",
+    "option_d": "4\\sqrtkmg/ tan \\theta",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 16,
+    "question_text": "To establish an instantaneous current of 2 A through a 1\u03bcF capacitor ; the potential difference across the\ncapacitor plates should be changed at the rate of:",
+    "option_a": "2 \u00d7 104 V/s",
+    "option_b": "4 \u00d7 106 V/s",
+    "option_c": "2 \u00d7 106 V/s",
+    "option_d": "4 \u00d7 104 V/s",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 17,
+    "question_text": "A dc source of emf E1 = 100 V and internal resistance r = 0.5\u03a9 , a storage battery of emf E2 = 90 V and an\nexternal resistance R are connected as shown in figure. For what value of R no current will pass through the\nQuestion Paper MathonGo\nbattery?",
+    "option_a": "5.5\u03a9",
+    "option_b": "3.5\u03a9",
+    "option_c": "4.5\u03a9",
+    "option_d": "2.5\u03a9",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 18,
+    "question_text": "To find the resistance of a galvanometer by the half deflection method the following circuit is used with\nresistances R1 = 9970 W, R2 = 30 W and R3 = 0 . The deflection in the galvanometer is d. With\nR3 = 107 W the deflection changed to d . The galvanometer resistance is approximately:\n2",
+    "option_a": "107\u03a9",
+    "option_b": "137\u03a9",
+    "option_c": "107/2\u03a9",
+    "option_d": "77\u03a9",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 19,
+    "question_text": "Choose the correct sketch of the magnetic field lines of a circular current loop shown by the dot\nand the cross \u2297.\nQuestion Paper MathonGo\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 20,
+    "question_text": "A current i is flowing in a straight conductor of length L . The magnetic induction at a point on its axis at a\ndistance L from its centre will be :\n4",
+    "option_a": "Zero",
+    "option_b": "\u03bc0i\n2\\piL",
+    "option_c": "\u03bc0i",
+    "option_d": "4\u03bc0i\n\\sqrt2L \\sqrt5\\piL",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 21,
+    "question_text": "An LCR circuit as shown in the figure is connected to a voltage source Vac whose frequency can be varied.\nThe frequency, at which the voltage across the resistor is maximum, is :",
+    "option_a": "902 Hz",
+    "option_b": "143 Hz",
+    "option_c": "23 Hz",
+    "option_d": "345 Hz",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 22,
+    "question_text": "In a series L -C -R circuit, C = 10-11 Farad, L = 10-5 Henry and R = 100Ohm , when a constant D.C.\nvoltage E is applied to the circuit, the capacitor acquires a charge 10-9 C. The D.C. source is replaced by a\nsinusoidal voltage source in which the peak voltage E0 is equal to the constant D.C. voltage E. At resonance\nthe peak value of the charge acquired by the capacitor will be :\nQuestion Paper MathonGo",
+    "option_a": "10-15C",
+    "option_b": "10-6C\n \\rightarrow E  \\rightarrow E0",
+    "option_c": "10-10C",
+    "option_d": "10-8C",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 23,
+    "question_text": "A plane electromagnetic wave in a non-magnetic dielectric medium is given by = (4 \u00d7 10-7x -50t)\nwith distance being in meter and time in seconds. The dielectric constant of the medium is :",
+    "option_a": "2.4",
+    "option_b": "5.8",
+    "option_c": "8.2",
+    "option_d": "4.8",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 24,
+    "question_text": "The focal length of the objective and the eyepiece of a telescope are 50 cm and 5 cm respectively. If the\ntelescope is focussed for distinct vision on a scale distant 2 m from its objective, then its magnifying power\nwill be :",
+    "option_a": "-4",
+    "option_b": "-8",
+    "option_c": "+8",
+    "option_d": "-2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 25,
+    "question_text": "The image of an illuminated square is obtained on a screen with the help of a converging lens. The distance of\nthe square from the lens is 40 cm . The area of the image is 9 times that of the square. The focal length of the\nlens is :",
+    "option_a": "36 cm",
+    "option_b": "27 cm",
+    "option_c": "60 cm",
+    "option_d": "30 cm",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 26,
+    "question_text": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\nthat best describes the two Statements. Statement-1: Short wave transmission is achieved due to the total\ninternal reflection of the e-m wave from an appropriate height in the ionosphere. Statement-2: Refractive index\nof a plasma is independent of the frequency of e-m waves.",
+    "option_a": "Statement-1 is true, Statement- 2 is false.",
+    "option_b": "Statement-1 is false, Statement- 2 is true.",
+    "option_c": "Statement-1 is true, Statement- 2 is true but",
+    "option_d": "Statement-1 is true, Statement-2 is true and\nStatement -2 is not the correct explanation of Statement -2 is the correct explanation of\nstatement-1. Statement-1.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 27,
+    "question_text": "This question has Statement-1 and Statement-2. Of the four choices given after the Statements, choose the one\nthat best describes the two Statements. Statement-1: In Young's double slit experiment, the number of fringes\nobserved in the field of view is small with longer wavelength of light and is large with shorter wavelength of\nlight. Statement-2: In the double slit experiment the fringe width depends directly on the wavelength of light.",
+    "option_a": "Statement-1 is true, Statement-2 is true and the",
+    "option_b": "Statement-1 is false and the Statement-2 is true.\nStatement-2 is correct explanation of the\nStatement-1.",
+    "option_c": "Statement-1 is true Statement-2 is true and the",
+    "option_d": "Statement-1 is true and the Statement-2 is false.\nStatement-2 is not correct explanation of the\nStatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 28,
+    "question_text": "Orbits of a particle moving in a circle are such that the perimeter of the orbit equals an integer number of de-\nBroglie wavelengths of the particle. For a charged particle moving in a plane perpendicular to a magnetic field,\nthe radius of the nth orbital will therefore be proportional to :\nQuestion Paper MathonGo",
+    "option_a": "n2",
+    "option_b": "n",
+    "option_c": "n1/2",
+    "option_d": "n1/4",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 29,
+    "question_text": "The half-life of a radioactive element A is the same as the mean-life of another radioactive element B. Initially\nboth substances have the same number of atoms, then :",
+    "option_a": "A and B decay at the same rate always.",
+    "option_b": "A and B decay at the same rate initially.",
+    "option_c": "A will decay at a faster rate than B.",
+    "option_d": "B will decay at a faster rate than A .",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 30,
+    "question_text": "Figure shows a circuit in which three identical diodes are used. Each diode has forward resistance of 20\u03a9 and\ninfinite backward resistance. Resistors R1 = R2 = R3 = 50\u03a9 . Battery voltage is 6 V . The current through R3\nis :",
+    "option_a": "50 mA",
+    "option_b": "100 mA",
+    "option_c": "60 mA",
+    "option_d": "25 mA",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 31,
+    "question_text": "The density of 3M solution of sodium chloride is 1.252 g mL-1 . The molality of the solution will be : ( molar\nmass, NaCl = 585 g mol-1)",
+    "option_a": "260 m",
+    "option_b": "2.18 m",
+    "option_c": "2.79 m",
+    "option_d": "3.00 m",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 32,
+    "question_text": "The wave number of the first emission line in the Balmer series of H -Spectrum is : (R = Rydberg constant ) :",
+    "option_a": "5 R",
+    "option_b": "9 R\n36 400",
+    "option_c": "7 R",
+    "option_d": "3 R\n6 4",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 33,
+    "question_text": "The order of increasing sizes of atomic radii among the elements O, S , Se and As is :",
+    "option_a": "As < S < O < Se",
+    "option_b": "Se < S < As < O",
+    "option_c": "O < S < As < Se",
+    "option_d": "O < S < Se < As",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 34,
+    "question_text": "The solubility order for alkali metal fluoride in water is :",
+    "option_a": "LiF < RbF < KF < NaF",
+    "option_b": "RbF < KF < NaF < LiF",
+    "option_c": "LiF > NaF > KF > RbF",
+    "option_d": "LiF < NaF < KF < RbF",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 35,
+    "question_text": "Bond order normally gives idea of stability of a molecular species. All the molecules viz. H2, Li2 and B2 have\nthe same bond order yet they are not equally stable. Their stability order is :\nQuestion Paper MathonGo",
+    "option_a": "H2 > B2 > Li2",
+    "option_b": "Li2 > H2 > B2",
+    "option_c": "Li2 > B2 > H2",
+    "option_d": "None of these",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 36,
+    "question_text": "(in kJ)\nLi(s)  \\rightarrow Li(g) 161\nLi(g)  \\rightarrow Li+(g) 520\n1 F2( g)  \\rightarrow F(g) 77\nGiven Reaction Energy Change 2 Based on data provided, the\n(Electron gain\nF( g) + e- \\rightarrow F-(g)\nenthalpy)\nLi+(g) + F-(g)  \\rightarrow LiF(s) -1047\nLi(s) + 1 F2( g)  \\rightarrow LiF(s) -617\n2\nvalue of electron gain enthalpy of fluorine would be :",
+    "option_a": "-300 kJ mol-1",
+    "option_b": "-350 kJ mol-1",
+    "option_c": "-328 kJ mol-1",
+    "option_d": "-228 kJ mol-1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 37,
+    "question_text": "The reaction X  \\rightarrow Y is an exothermic reaction. Activation energy of the reaction for X into Y is 150 kJ mol-1\n. Enthalpy of reaction is 135 kJ mol-1 . The activation energy for the reverse reaction, Y  \\rightarrow X will be :",
+    "option_a": "280 kJ mol-1",
+    "option_b": "285 kJ mol-1",
+    "option_c": "270 kJ mol-1",
+    "option_d": "15 kJ mol-1",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 38,
+    "question_text": "Which one of the following arrangements represents the correct order of solubilities of sparingly soluble salts\nHg2Cl2, Cr2(SO4)3 , BaSO4 and CrCl3 respectively?",
+    "option_a": "BaSO4 > Hg2Cl2 > Cr2(SO4)3 > CrCl3",
+    "option_b": "BaSO4 > Hg2Cl2 > CrCl3 > Cr2(SO4)3",
+    "option_c": "BaSO4 > CrCl3 > Hg2Cl2 > Cr2(SO4)3",
+    "option_d": "Hg2Cl2 > BaSO4 > CrCl3 > Cr2(SO4)3",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 39,
+    "question_text": "NaOH is a strong base. What will be pH of 5.0 \u00d7 10-2MNaOH solution ? (log 2 = 0.3)",
+    "option_a": "14.00",
+    "option_b": "13.70",
+    "option_c": "13.00",
+    "option_d": "12.70",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 40,
+    "question_text": "Acid Ka\nHCN 6.2 \u00d7 10-10\nValues of dissociation constant, Ka are given as follows : Correct order of increasing\nHF 7.2 \u00d7 10-4\nHNO2 4.0 \u00d7 10-4\nbase strength of the base CN-, F- and NO- will be :\n2",
+    "option_a": "F-< CN-< NO-",
+    "option_b": "NO- < CN-< F-\n2 2",
+    "option_c": "F-< NO- < CN-",
+    "option_d": "NO- < F-< CN-\n2 2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 41,
+    "question_text": "For which of the following compounds Kjeldahl method can be used to determine the percentage of Nitrogen?",
+    "option_a": "Nitrobenzene",
+    "option_b": "Pyridine",
+    "option_c": "Alanine",
+    "option_d": "Diazomethane\nQuestion Paper MathonGo",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 42,
+    "question_text": "Arrange in the correct order of stability (decreasing order) for the following molecules: (I)\n(II)\n(III)\n(IV)",
+    "option_a": "(I) > (II) > (III) > (IV)",
+    "option_b": "(IV) > (III) > (II) \u2248 (I)",
+    "option_c": "(I) > (II) \u2248 (III) > (IV)",
+    "option_d": "(III) > (I) \u2248 (II) > (IV)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 43,
+    "question_text": "A major component of Borsch reagent is obtained by reacting hydrazine hydrate with which of the following ?\nQuestion Paper MathonGo\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 44,
+    "question_text": "Clemmensen reduction of a ketone is carried out in the presence of :",
+    "option_a": "LiAlH4",
+    "option_b": "Zn -Hg with HCl",
+    "option_c": "Glycol with KOH",
+    "option_d": "H2 with Pt as catalyst",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 45,
+    "question_text": "Which of the following would not give 2-phenylbutane as the major product in a Friedel-Crafts alkylation\nreaction ?",
+    "option_a": "1-butene +HF",
+    "option_b": "2-butanol +H2SO4",
+    "option_c": "Butanoyl chloride +AlCl3 then Zn, HCl",
+    "option_d": "Butyl choloride +AlCl3",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 46,
+    "question_text": "Which one of the following statements about packing in solids is incorrect ?",
+    "option_a": "Coordination number in bcc mode of packing is 8",
+    "option_b": "Coordination number in hep mode of packing is\n. 12 .",
+    "option_c": "Void space in hcp mode of packing is 32% .",
+    "option_d": "Void space in ccp mode of packing is 26% .",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 47,
+    "question_text": "A molecule M associates in a given solvent according to the equation M \u21cc(M)n . For a certain concentration\nof M, the van't Hoff factor was found to be 0.9 and the fraction of associated molecules was 0.2 . The value of\nn is:",
+    "option_a": "3",
+    "option_b": "5",
+    "option_c": "2",
+    "option_d": "4",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 48,
+    "question_text": "Flocculation value of BaCl2 is much less than that of KCl for sol A and flocculation value of Na2SO4 is much\nless than that of NaBr for sol B . The correct statement among the following is :",
+    "option_a": "Both the sols A and B are negatively charged.",
+    "option_b": "Sol A is positively charged and Sol B is\nnegatively charged.",
+    "option_c": "Both the sols A and B are positively charged.",
+    "option_d": "Sol A is negatively charged and sol B is\npositively charged.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 49,
+    "question_text": "In Goldschmidt aluminothermic process which of the following reducing agents is used :",
+    "option_a": "calcium",
+    "option_b": "coke",
+    "option_c": "Al-powder",
+    "option_d": "sodium\nQuestion Paper MathonGo",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 50,
+    "question_text": "Oxidation state of sulphur in anions SO2- , S2O2- and S2O2- increases in the orders :\n3 4 6",
+    "option_a": "S2O2- < S2O2- < SO2-",
+    "option_b": "SO2- < S2O2- < S2O2-\n6 4 3 6 4 6",
+    "option_c": "S2O2- < SO2- < S2O2-",
+    "option_d": "S2O2- < S2O2- < SO2-\n4 3 6 4 6 3",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 51,
+    "question_text": "XeO4 molecule is tetrahedral having:",
+    "option_a": "Two p\\pi -d\\pi bonds",
+    "option_b": "One p\\pi -d\\pi bonds",
+    "option_c": "Four p\\pi -d\\pi bonds",
+    "option_d": "Three p\\pi -d\\pi bonds",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 52,
+    "question_text": "Which of the following is diamagnetic ?",
+    "option_a": "[Fe(CN)6]3-",
+    "option_b": "[Co(ox)3]3-",
+    "option_c": "[FeF6]3-",
+    "option_d": "[CoF6]3-",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 53,
+    "question_text": "Which of the following statements is incorrect?",
+    "option_a": "Fe2+ ion also gives blood red colour with SCN-",
+    "option_b": "Fe3+ ion also gives blood red colour with SCN-\nion. ion.",
+    "option_c": "On passing H2 S into Na2ZnO2 solution a white",
+    "option_d": "Cupric ion reacts with excess of ammonia\nppt of ZnS is formed. solution to give deep blue colour of\n[Cu(NH3)4]2+ ion.",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 54,
+    "question_text": "The Wurtz-Fittig reaction involves condensation of:",
+    "option_a": "two molecules of aryl halides",
+    "option_b": "one molecule of each of aryl-halide and alkyl-\nhalide.",
+    "option_c": "one molecule of each of aryl-halide and phenol.",
+    "option_d": "two molecules of aralkyl-halides.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 55,
+    "question_text": "What is the structure of the major product when phenol is treated with bromine water?\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 56,
+    "question_text": "Amongst the following alcohols which would react fastest with conc. HCl and ZnCl2 ?",
+    "option_a": "pentanol",
+    "option_b": "2-methyl butanol",
+    "option_c": "2-pentanol",
+    "option_d": "2-methyl butan-2-ol\nQuestion Paper MathonGo",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 57,
+    "question_text": "In Williamson synthesis of mixed ether having a primary and a tertiary alkyl group if tertiary halide is used,\nthen :",
+    "option_a": "Rate of reaction will be slow due to slow",
+    "option_b": "Alkene will be the main product.\ncleavage of carbon-halogen bond.",
+    "option_c": "Simple ether will form instead of mixed ether.",
+    "option_d": "Expected mixed ether will be formed.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 58,
+    "question_text": "The polymer used for optical lenses is :",
+    "option_a": "polypropylene",
+    "option_b": "polyvinyl chloride",
+    "option_c": "polythene",
+    "option_d": "polymethyl methacrylate",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 59,
+    "question_text": "Which of the following statements about aspirin is not true?",
+    "option_a": "It is effective in relieving pain.",
+    "option_b": "It is a neurologically active drug.",
+    "option_c": "It has antiblood clotting action.",
+    "option_d": "It belongs to narcotic analgesics.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 60,
+    "question_text": "Which of the following structures represents thymine ?\n(1) (2)\n(3) (4)",
+    "option_a": "Option (A)",
+    "option_b": "Option (B)",
+    "option_c": "Option (C)",
+    "option_d": "Option (D)",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 61,
+    "question_text": "If \u03b1 and \u03b2 are roots of the equation x2 + px + 3p = 0 , such that |\u03b1 -\u03b2| = \\sqrt10 , then p belongs to the set :\n4",
+    "option_a": "{2, -5}",
+    "option_b": "{-3, 2}",
+    "option_c": "{-2, 5}",
+    "option_d": "{3, -5}",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 62,
+    "question_text": "If a complex number z statisfies the equation x + \\sqrt2|z + 1| + i = 0 , then |z| is equal to :",
+    "option_a": "2",
+    "option_b": "\\sqrt3",
+    "option_c": "\\sqrt5",
+    "option_d": "1",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 63,
+    "question_text": "The number of ways in which an examiner can assign 30 marks to 8 questions, giving not less than 2 marks to\nany question, is :",
+    "option_a": "30C7",
+    "option_b": "21C8",
+    "option_c": "21C7",
+    "option_d": "30C8",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 64,
+    "question_text": "Given sum of the first n terms of an A.P. is 2n+ 3n2 . Another A.P. is formed with the same first term and\ndouble of the common difference, the sum of n terms of the new A.P. is :\nQuestion Paper MathonGo",
+    "option_a": "n + 4n2",
+    "option_b": "6n2 -n",
+    "option_c": "n2 + 4n",
+    "option_d": "3n + 2n2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 65,
+    "question_text": "The sum 3 + 5 + 7 + \u2026 . upto 11-terms is:\n12 12+22 12+22+32",
+    "option_a": "7",
+    "option_b": "11\n2 4",
+    "option_c": "11",
+    "option_d": "60\n2 11",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 66,
+    "question_text": "If the 7th term in the binomial expansion of ( 3 + \\sqrt3 ln x) 9 , x > 0 , is equal to 729 , then x can be:\n3\\sqrt84",
+    "option_a": "e2",
+    "option_b": "e",
+    "option_c": "e",
+    "option_d": "2e\n2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 67,
+    "question_text": "The number of solutions of the equation, sin-1 x = 2 tan-1 x (in principal values) is :",
+    "option_a": "1",
+    "option_b": "4",
+    "option_c": "2",
+    "option_d": "3",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 68,
+    "question_text": "Statement-1: The number of common solutions of the trigonometric equations 2 sin2 \\theta -cos 2\\theta = 0 and\n2 cos2 \\theta -3 sin \\theta = 0 in the interval [0, 2\\pi] is two. Statement-2: The number of solutions of the equation,\n2 cos2 \\theta -3 sin \\theta = 0 in the interval [0, \\pi] is two.",
+    "option_a": "Statement-1 is true; Statement-2 is true;",
+    "option_b": "Statement-1 is true; Statement-2 is true;\nStatement-2 is a correct explanation for Statement-2 is not a correct explanation for\nstatement-1. statement-1.",
+    "option_c": "Statement-1 is false; Statement-2 is true.",
+    "option_d": "Statement-1 is true; Statement-2 is false.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 69,
+    "question_text": "If the x -intercept of some line L is double as that of the line, 3x + 4y = 12 and the y -intercept of L is half as\nthat of the same line, then the slope of L is :",
+    "option_a": "-3",
+    "option_b": "-3/8",
+    "option_c": "-3/2",
+    "option_d": "-3/16",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 70,
+    "question_text": "The acute angle between two lines such that the direction cosines l, m, n , of each of them satisfy the equations\nl + m + n = 0 and l2 + m2 -n2 = 0 is :",
+    "option_a": "15\u2218",
+    "option_b": "30\u2218",
+    "option_c": "60\u2218",
+    "option_d": "45\u2218",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 71,
+    "question_text": "If a circle C passing through (4, 0) touches the circle x2 + y2 + 4x -6y -12 = 0 externally at a point (1, -1)\n, then the radius of the circle C is :",
+    "option_a": "5",
+    "option_b": "2\\sqrt5",
+    "option_c": "4",
+    "option_d": "\\sqrt57",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 72,
+    "question_text": "Statement-1: The line x -2y = 2 meets the parabola, y2 + 2x = 0 only at the point (-2, -2) . Statement-2:\nThe line y = mx - 1 (m  \\neq 0) is tangent to the parabola, y2 = -2x at the point (- 1 , -1 )\n2m 2m2 m\nQuestion Paper MathonGo",
+    "option_a": "Statement-1 is true; Statement- 2 is false.",
+    "option_b": "Statement-1 is true; Statement-2 is true;\nStatement-2 is a correct explanation for\nstatement-1.",
+    "option_c": "Statement-1 is false; Statement-2 is true.",
+    "option_d": "Statement-1 a true; Statement-2 is true;\nStatement-2 is not a correct explanation for\nstatement-1.",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 73,
+    "question_text": "Let the equations of two ellipses be\nx2 y2 x2 y2\nE1 : + = 1 and E2 : + = 1,\n3 2 16 b2\nIf the product of their eccentricities is 1 , then the length of the minor axis of ellipse E2 is :\n2",
+    "option_a": "8",
+    "option_b": "9",
+    "option_c": "4",
+    "option_d": "2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 74,
+    "question_text": "The statement p  \\rightarrow (q  \\rightarrow p) is equivalent to :",
+    "option_a": "p  \\rightarrow q",
+    "option_b": "p  \\rightarrow (p \u2228q)",
+    "option_c": "p  \\rightarrow (p  \\rightarrow q)",
+    "option_d": "p  \\rightarrow (p \u2227q)",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 75,
+    "question_text": "Mean of 5 observations is 7 . If four of these observations are 6, 7, 8, 10 and one is missing then the variance of\nall the five observations is :",
+    "option_a": "4",
+    "option_b": "6",
+    "option_c": "8",
+    "option_d": "2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 76,
+    "question_text": "If two vertices of an equilateral triangle are A(-a, 0) and B(a, 0), a > 0 , and the third vertex C lies above x -\naxis then the equation of the circumcircle of \u25b3ABC is :",
+    "option_a": "3x2 + 3y2 -2\\sqrt3ay = 3a2",
+    "option_b": "3x2 + 3y2 -2ay = 3a2",
+    "option_c": "x2 + y2 -2ay = a2",
+    "option_d": "x2 + y2 -\\sqrt3ay = a2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 77,
+    "question_text": "Let R = {(3, 3)(5, 5), (9, 9), (12, 12), (5, 12), (3, 9) , (3, 12), (3, 5)} be a relation on the set A = {3, 5, 9, 12} .\nThen, R is :",
+    "option_a": "reflexive, symmetric but not transitive.",
+    "option_b": "symmetric, transitive but not reflexive.",
+    "option_c": "an equivalence relation.",
+    "option_d": "reflexive, transitive but not symmetric.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 78,
+    "question_text": "\u23a1 3 4 1 \u23a4\nIf p, q, r are 3 real numbers satisfying the matrix equation, [pqr] 3 2 3 = [ 3 0 1 ] then 2p + q -r\n\u23a3 \u23a6\n2 0 2\nequals :",
+    "option_a": "-3",
+    "option_b": "-1",
+    "option_c": "4",
+    "option_d": "2",
+    "correct_option": "a",
+    "ans_num": 1
+  },
+  {
+    "qnum": 79,
+    "question_text": "If the system of linear equations :\nx1 + 2x2 + 3x3 = 6\nx1 + 3x2 + 5x3 = 9\n2x1 + 5x2 + ax3 = b\nQuestion Paper MathonGo\nis consistent and has infinite number of solutions, then :",
+    "option_a": "a = 8, b can be any real number",
+    "option_b": "b = 15, a can be any real number",
+    "option_c": "a  \\in R -{8} and b  \\in R -{15}",
+    "option_d": "a = 8, b = 15",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 80,
+    "question_text": "Let f(x) = -1 + |x -2| , and g(x) = 1 -|x| ; then the set of all points where fog is discontinuous is :",
+    "option_a": "{0, 2}",
+    "option_b": "{0, 1, 2}",
+    "option_c": "{0}",
+    "option_d": "an empty set",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 81,
+    "question_text": "For a > 0, t  \\in (0, \\pi ) , let x = \\sqrtasin-1 t and y = \\sqrtacos-1 t , Then, 1 + ( dy ) 2 equals :\n2 dx",
+    "option_a": "x2",
+    "option_b": "y2\ny2 x2",
+    "option_c": "x2+y2",
+    "option_d": "x2+y2\ny2 x2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 82,
+    "question_text": "Statement-1: The function x2 (ex + e-x) is increasing for all x > 0 . Statement-2: The functions x2ex and\nx2e-x are increasing for all x > 0 and the sum of two increasing functions in any interval (a, b) is an\nincreasing function in (a, b) .",
+    "option_a": "Statement-1 is false; Statement-2 is true.",
+    "option_b": "Statement-1 is true; Statement-2 is true;\nStatement-2 is not a correct explanation for\nStatement-1.",
+    "option_c": "Statement-1 is true; Statement-2 is false.",
+    "option_d": "Statement-1is true; Statement-2 is true;\nStatement-2 is a correct explanation for\nstatement-1.",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 83,
+    "question_text": "The maximum area of a right angled triangle with hypotenuse h is :",
+    "option_a": "h2",
+    "option_b": "h2\n2\\sqrt2 2",
+    "option_c": "h2",
+    "option_d": "h2\n\\sqrt2 4",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 84,
+    "question_text": "If \u222bx2-x+1 ecot-1 xdx = A(x)ecot-1 x + C , then A(x) is equal to :\nx2+1",
+    "option_a": "-x",
+    "option_b": "x",
+    "option_c": "\\sqrt1 -x",
+    "option_d": "\\sqrt1 + x",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 85,
+    "question_text": "The integral \u222b7\\pi/3 \\sqrttan2 xdx is equal to :\n7\\pi/4",
+    "option_a": "log 2\\sqrt2",
+    "option_b": "log 2",
+    "option_c": "2 log 2",
+    "option_d": "log \\sqrt2",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 86,
+    "question_text": "The area of the region (in sq. units), in the first quadrant bounded by the parabola y = 9x2 and the lines\nx = 0, y = 1 and y = 4 , is :",
+    "option_a": "7/9",
+    "option_b": "14/3",
+    "option_c": "7/3",
+    "option_d": "14/9",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 87,
+    "question_text": "Consider the differential equation :\ndy y3\n=\ndx 2 (xy2 -x2)\nQuestion Paper MathonGo\nStatement-1: The substitution z = y2 transforms the above equation into a first order homogenous differential\nequation. Statement-2: The solution of this differential equation is y2e-y2/x = C .",
+    "option_a": "Both statements are false.",
+    "option_b": "Statement-1 is true and statement- 2 is false.",
+    "option_c": "Statement-1 is false and statement-2 is true.",
+    "option_d": "Both statements are true.",
+    "correct_option": "d",
+    "ans_num": 4
+  },
+  {
+    "qnum": 88,
+    "question_text": "If  \\rightarrow \n^a,^b and ^c are unit vectors satisfying ^a -\\sqrt3^b + ^c = 0 , then the angle between the vectors ^a and ^c is :",
+    "option_a": "\\pi",
+    "option_b": "\\pi\n4 3",
+    "option_c": "\\pi",
+    "option_d": "\\pi\n6 2",
+    "correct_option": "b",
+    "ans_num": 2
+  },
+  {
+    "qnum": 89,
+    "question_text": "Let Q be the foot of perpendicular from the origin to the plane 4x -3y + z + 13 = 0 and R be a point\n(-1, -6) on the plane. Then length QR is :",
+    "option_a": "\\sqrt14",
+    "option_b": "\\sqrt19\n2",
+    "option_c": "3\\sqrt7",
+    "option_d": "3\n2 \\sqrt2",
+    "correct_option": "c",
+    "ans_num": 3
+  },
+  {
+    "qnum": 90,
+    "question_text": "Given two independent events, if the probability that exactly one of them occurs is 26 and the probability that\n49\nnone of them occurs is 15 , then the probability of more probable of the two events is :\n49",
+    "option_a": "4/7",
+    "option_b": "6/7",
+    "option_c": "3/7",
+    "option_d": "5/7",
+    "correct_option": "a",
+    "ans_num": 1
+  }
+]
