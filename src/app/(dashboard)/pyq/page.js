@@ -71,8 +71,6 @@ const MASTER_SUBJECTS = [
   { id: "biology",     label: "Biology",   Icon: Dna,          count: 1740, tracks: ["neet"] },
 ];
 
-const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013];
-
 const PRACTICE_MODES = [
   { id: "full",     label: "Full Paper",   description: "Solve complete exam paper", Icon: I.FileText },
   { id: "chapter",  label: "Chapter Wise", description: "Practice selected chapters", Icon: I.Library  },
@@ -179,7 +177,7 @@ function PracticeTab({ subjects, track, isPro }) {
   const [practiceMode,     setPracticeMode]     = useState("full");
   const [subjectError,     setSubjectError]     = useState("");
 
-  const [papers,           setPapers]           = useState([]);
+  const [allTrackPapers,   setAllTrackPapers]   = useState([]);
   const [selectedAttempt,  setSelectedAttempt]  = useState("");
   const [selectedShift,    setSelectedShift]    = useState("");
   const [loadingPapers,    setLoadingPapers]    = useState(false);
@@ -240,33 +238,48 @@ function PracticeTab({ subjects, track, isPro }) {
       try {
         const params = new URLSearchParams();
         params.set("exam", track.toUpperCase());
-        if (selectedYears.length > 0) params.set("year", selectedYears[0]);
         const res = await fetch(`/api/pyq/papers?${params.toString()}`);
         if (!res.ok) throw new Error("Failed to load papers");
         const data = await res.json();
         if (!cancelled) {
-          setPapers(Array.isArray(data) ? data : []);
+          const loaded = Array.isArray(data) ? data : [];
+          setAllTrackPapers(loaded);
+          setSelectedYears((prev) => {
+            const validYears = Array.from(new Set(loaded.map((p) => Number(p.year)).filter(Boolean)));
+            return prev.filter((y) => validYears.includes(y));
+          });
           setSelectedAttempt("");
           setSelectedShift("");
         }
       } catch (error) {
         console.error("Failed to load papers:", error);
-        if (!cancelled) { setPapers([]); setSelectedAttempt(""); setSelectedShift(""); }
-      } finally { if (!cancelled) setLoadingPapers(false); }
+        if (!cancelled) {
+          setAllTrackPapers([]);
+          setSelectedAttempt("");
+          setSelectedShift("");
+        }
+      } finally {
+        if (!cancelled) setLoadingPapers(false);
+      }
     }
     loadPapers();
     return () => { cancelled = true; };
-  }, [track, selectedYears]);
+  }, [track]);
+
+  // Derived available years strictly from papers that exist in database
+  const availableYears = Array.from(
+    new Set(allTrackPapers.map((paper) => Number(paper.year)).filter(Boolean))
+  ).sort((a, b) => b - a);
+
+  const papers = selectedYears.length > 0
+    ? allTrackPapers.filter((paper) => selectedYears.includes(Number(paper.year)))
+    : allTrackPapers;
 
   // Derived Options
   const availableAttempts = Array.from(new Set(papers.map((paper) => paper.attempt_label || paper.attempt).filter(Boolean)));
-  const effectiveSelectedAttempt =
-    selectedAttempt || (track === "jee" && availableAttempts.length === 1 ? availableAttempts[0] : "");
   const availableShiftPapers = papers.filter(
-    (paper) => !effectiveSelectedAttempt || (paper.attempt_label || paper.attempt) === effectiveSelectedAttempt
+    (paper) => !selectedAttempt || (paper.attempt_label || paper.attempt) === selectedAttempt
   );
-  const effectiveSelectedShift =
-    selectedShift || (track === "jee" && availableShiftPapers.length === 1 ? availableShiftPapers[0].id : "");
 
   function handleStartDeck() {
     if (selectedModeLocked) {
@@ -283,8 +296,8 @@ function PracticeTab({ subjects, track, isPro }) {
     if (subjectLabels.length === 0) { setSubjectError("Please select at least one subject to start."); return; }
 
     if (practiceMode === "full" && track === "jee") {
-      if (availableAttempts.length > 0 && !effectiveSelectedAttempt) { setSubjectError("Please select an attempt"); return; }
-      if (availableShiftPapers.length > 0 && !effectiveSelectedShift) { setSubjectError("Please select a shift"); return; }
+      if (availableAttempts.length > 0 && !selectedAttempt) { setSubjectError("Please select an attempt"); return; }
+      if (availableShiftPapers.length > 0 && !selectedShift) { setSubjectError("Please select a shift"); return; }
     }
 
     if (practiceMode === "chapter") {
@@ -303,7 +316,7 @@ function PracticeTab({ subjects, track, isPro }) {
     if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
 
     if (track === "jee" && practiceMode === "full") {
-      const selectedPaper = papers.find((paper) => paper.id === effectiveSelectedShift);
+      const selectedPaper = papers.find((paper) => paper.id === selectedShift);
       if (selectedPaper) {
         params.set("exam_id", selectedPaper.id);
         params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
@@ -315,12 +328,23 @@ function PracticeTab({ subjects, track, isPro }) {
   }
 
   const toggleSubject = (id) => setSelectedSubjects((p) => p.includes(id) ? p.filter((s) => s !== id) : [...p, id]);
-  const toggleYear = (yr) => setSelectedYears((p) => {
-    if (practiceMode === "full") {
-      return p.includes(yr) ? [] : [yr];
-    }
-    return p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr];
-  });
+  const toggleYear = (yr) => {
+    setSelectedAttempt("");
+    setSelectedShift("");
+    setSelectedYears((p) => {
+      if (practiceMode === "full") {
+        return p.includes(yr) ? [] : [yr];
+      }
+      return p.includes(yr) ? p.filter((y) => y !== yr) : [...p, yr];
+    });
+  };
+  const toggleAttempt = (attempt) => {
+    setSelectedShift("");
+    setSelectedAttempt((prev) => (prev === attempt ? "" : attempt));
+  };
+  const toggleShift = (id) => {
+    setSelectedShift((prev) => (prev === id ? "" : id));
+  };
   const toggleChapter = (ch) => setSelectedChapters((p) => p.includes(ch) ? p.filter((c) => c !== ch) : [...p, ch]);
 
   return (
@@ -357,19 +381,31 @@ function PracticeTab({ subjects, track, isPro }) {
         {/* Year selector */}
         <div className="mt-6 sm:mt-8">
           <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Years</h2>
-          <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
-            {YEARS.map((yr) => (
-              <button key={yr} onClick={() => toggleYear(yr)}
-                className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
-                  selectedYears.includes(yr)
-                    ? "border-brand bg-brand text-black"
-                    : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
-                }`}
-              >
-                {yr}
-              </button>
-            ))}
-          </div>
+          {loadingPapers && availableYears.length === 0 ? (
+            <div className="mt-3 sm:mt-4 flex flex-wrap gap-2 animate-pulse">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="h-9 w-16 rounded-full bg-slate-200 dark:bg-slate-800" />
+              ))}
+            </div>
+          ) : availableYears.length === 0 ? (
+            <p className={`mt-3 sm:mt-4 text-xs sm:text-sm font-semibold ${TXT_MUTED}`}>
+              No published PYQ papers are available for this track yet.
+            </p>
+          ) : (
+            <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
+              {availableYears.map((yr) => (
+                <button key={yr} onClick={() => toggleYear(yr)}
+                  className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
+                    selectedYears.includes(yr)
+                      ? "border-brand bg-brand text-black"
+                      : `${BORDER} ${TXT_MUTED} bg-[var(--surface-secondary)]/70 hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
+                  }`}
+                >
+                  {yr}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* JEE Selectors (Attempt & Shift) */}
@@ -387,9 +423,9 @@ function PracticeTab({ subjects, track, isPro }) {
               ) : (
                 <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
                   {availableAttempts.map((attempt) => {
-                    const isActive = effectiveSelectedAttempt === attempt;
+                    const isActive = selectedAttempt === attempt;
                     return (
-                      <button key={attempt} onClick={() => { setSelectedAttempt(attempt); setSelectedShift(""); }}
+                      <button key={attempt} onClick={() => toggleAttempt(attempt)}
                         className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                           isActive
                             ? "border-brand bg-brand text-black"
@@ -416,9 +452,9 @@ function PracticeTab({ subjects, track, isPro }) {
               ) : (
                 <div className="mt-3 sm:mt-4 flex flex-wrap gap-2 max-h-[220px] overflow-y-auto pr-2">
                   {availableShiftPapers.map((paper) => {
-                    const isActive = effectiveSelectedShift === paper.id;
+                    const isActive = selectedShift === paper.id;
                     return (
-                      <button key={paper.id} onClick={() => setSelectedShift(paper.id)}
+                      <button key={paper.id} onClick={() => toggleShift(paper.id)}
                         className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-black transition-all cursor-pointer duration-200 ${
                           isActive
                             ? "border-brand bg-brand text-black"
@@ -549,17 +585,17 @@ function PracticeTab({ subjects, track, isPro }) {
                 Upgrade to Pro to use this PYQ mode.
               </p>
             )}
-            {track === "jee" && practiceMode === "full" && effectiveSelectedAttempt && (
+            {track === "jee" && practiceMode === "full" && selectedAttempt && (
               <div className="flex items-center justify-between gap-3 text-sm font-black">
                 <span className={TXT_MUTED}>Attempt</span>
-                <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">{effectiveSelectedAttempt}</span>
+                <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">{selectedAttempt}</span>
               </div>
             )}
-            {track === "jee" && practiceMode === "full" && effectiveSelectedShift && (
+            {track === "jee" && practiceMode === "full" && selectedShift && (
               <div className="flex items-center justify-between gap-3 text-sm font-black">
                 <span className={TXT_MUTED}>Shift</span>
                 <span className="max-w-[150px] truncate text-right text-slate-950 dark:text-white">
-                  {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || ""}
+                  {papers.find((paper) => paper.id === selectedShift)?.shift_label || ""}
                 </span>
               </div>
             )}
@@ -579,11 +615,11 @@ function PracticeTab({ subjects, track, isPro }) {
               <span className="font-bold text-slate-600 dark:text-slate-400">
                 {PRACTICE_MODE_SUMMARY_LABEL[practiceMode]}
               </span>
-              {track === "jee" && practiceMode === "full" && effectiveSelectedShift && (
+              {track === "jee" && practiceMode === "full" && selectedShift && (
                 <>
                   <span className="text-slate-300 dark:text-slate-600">•</span>
                   <span className="font-bold text-slate-600 dark:text-slate-400 truncate max-w-[120px]">
-                    {papers.find((paper) => paper.id === effectiveSelectedShift)?.shift_label || "Shift"}
+                    {papers.find((paper) => paper.id === selectedShift)?.shift_label || "Shift"}
                   </span>
                 </>
               )}
