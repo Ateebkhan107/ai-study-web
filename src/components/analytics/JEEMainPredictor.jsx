@@ -33,6 +33,22 @@ export default function JEEMainPredictor({ stats }) {
   const hasSample = typeof accuracy === "number" && totalQuestions >= 10;
   const totalCandidates = jeeMarksPercentile.totalCandidates;
 
+
+  const [homeState, setHomeState] = useState("");
+  const [userRanksInput, setUserRanksInput] = useState({
+    "EWS": "",
+    "OBC-NCL": "",
+    "SC": "",
+    "ST": ""
+  });
+  const handleRankInputChange = (cat, val) => {
+    setUserRanksInput(prev => ({ ...prev, [cat]: val }));
+  };
+
+  const [predictionSource, setPredictionSource] = useState("My Result");
+  const [customMode, setCustomMode] = useState("Marks");
+  const [customMarks, setCustomMarks] = useState("");
+  const [customPercentile, setCustomPercentile] = useState("");
   const [category, setCategory] = useState("OPEN");
   const [gender, setGender] = useState("Gender-Neutral");
   const [branch, setBranch] = useState("Computer Science and Engineering");
@@ -48,58 +64,77 @@ export default function JEEMainPredictor({ stats }) {
   let rankRange = "";
   let confidence = "Calibrating";
 
-  if (hasSample) {
-    hasData = true;
-    const safeAccuracy = Math.max(0, accuracy - 3);
-    const simulatedAttempted = Math.round(Math.min(72, Math.max(30, 28 + (safeAccuracy / 100) * 40)));
-    const correct = Math.round(simulatedAttempted * (safeAccuracy / 100));
-    const incorrect = simulatedAttempted - correct;
-    const practiceScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
-
-    finalScore = practiceScore;
-    if (typeof averageTestScore === "number" && averageTestScore > 0) {
-      const mockScore = Math.round((averageTestScore / 100) * 300);
-      finalScore = Math.round(practiceScore * 0.35 + mockScore * 0.65);
+  if (predictionSource === "Custom Score") {
+    if (customMode === "Marks" && customMarks !== "" && !isNaN(customMarks) && Number(customMarks) >= -75 && Number(customMarks) <= 300) {
+      hasData = true;
+      finalScore = Math.floor(Number(customMarks));
+      percentile = interpolatePercentile(finalScore);
+      rawRank = calculateRank(percentile, totalCandidates);
+      rankEstimate = rawRank < 1000 ? `~${rawRank}` : `~${(rawRank / 1000).toFixed(1)}K`;
+    } else if (customMode === "Percentile" && customPercentile !== "" && !isNaN(customPercentile) && Number(customPercentile) >= 0 && Number(customPercentile) <= 100) {
+      hasData = true;
+      percentile = Number(customPercentile).toFixed(2);
+      rawRank = calculateRank(percentile, totalCandidates);
+      rankEstimate = rawRank < 1000 ? `~${rawRank}` : `~${(rawRank / 1000).toFixed(1)}K`;
     }
+    confidence = "Custom Input";
+  } else {
+    // Existing logic for "My Result"
+    if (hasSample) {
+      hasData = true;
+      const safeAccuracy = Math.max(0, accuracy - 3);
+      const simulatedAttempted = Math.round(Math.min(72, Math.max(30, 28 + (safeAccuracy / 100) * 40)));
+      const correct = Math.round(simulatedAttempted * (safeAccuracy / 100));
+      const incorrect = simulatedAttempted - correct;
+      const practiceScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
 
-    percentile = interpolatePercentile(finalScore);
-    rawRank = calculateRank(percentile, totalCandidates);
-    
-    // Rank Range
-    const rankMin = Math.max(1, Math.round(rawRank * 0.9));
-    const rankMax = Math.min(totalCandidates, Math.round(rawRank * 1.15));
-    
-    rankEstimate = `~${(rawRank / 100000).toFixed(2)}L AIR`;
-    if (rawRank < 1000) rankEstimate = `~${rawRank} AIR`;
-    else if (rawRank < 100000) rankEstimate = `~${(rawRank / 1000).toFixed(1)}K AIR`;
+      finalScore = practiceScore;
+      if (typeof averageTestScore === "number" && averageTestScore > 0) {
+        const mockScore = Math.round((averageTestScore / 100) * 300);
+        finalScore = Math.round(practiceScore * 0.35 + mockScore * 0.65);
+      }
 
-    rankRange = rawRank < 1000 ? `${rankMin} - ${rankMax}` : `${(rankMin / 100000).toFixed(2)}L - ${(rankMax / 100000).toFixed(2)}L`;
+      percentile = interpolatePercentile(finalScore);
+      rawRank = calculateRank(percentile, totalCandidates);
+      
+      const rankMin = Math.max(1, Math.round(rawRank * 0.9));
+      const rankMax = Math.min(totalCandidates, Math.round(rawRank * 1.15));
+      
+      rankEstimate = `~${(rawRank / 100000).toFixed(2)}L AIR`;
+      if (rawRank < 1000) rankEstimate = `~${rawRank} AIR`;
+      else if (rawRank < 100000) rankEstimate = `~${(rawRank / 1000).toFixed(1)}K AIR`;
 
-    confidence = totalQuestions > 80 ? "High Confidence" : "Moderate Confidence";
-  } else if (totalQuestions > 0 && typeof accuracy === "number") {
-    // Limited data
-    const safeAcc = Math.max(0, accuracy - 3);
-    const simulatedAttempted = Math.round(Math.min(72, Math.max(28, 25 + (safeAcc / 100) * 42)));
-    const correct = Math.round(simulatedAttempted * (safeAcc / 100));
-    const incorrect = simulatedAttempted - correct;
-    finalScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
-    
-    percentile = interpolatePercentile(finalScore);
-    rawRank = calculateRank(percentile, totalCandidates);
-    rankEstimate = `~${(rawRank / 100000).toFixed(2)}L AIR`;
-    if (rawRank < 1000) rankEstimate = `~${rawRank} AIR`;
-    else if (rawRank < 100000) rankEstimate = `~${(rawRank / 1000).toFixed(1)}K AIR`;
-    
-    confidence = "Low confidence — limited attempts";
+      rankRange = rawRank < 1000 ? `${rankMin} - ${rankMax}` : `${(rankMin / 100000).toFixed(2)}L - ${(rankMax / 100000).toFixed(2)}L`;
+
+      confidence = totalQuestions > 80 ? "High Confidence" : "Moderate Confidence";
+    } else if (totalQuestions > 0 && typeof accuracy === "number") {
+      const safeAcc = Math.max(0, accuracy - 3);
+      const simulatedAttempted = Math.round(Math.min(72, Math.max(28, 25 + (safeAcc / 100) * 42)));
+      const correct = Math.round(simulatedAttempted * (safeAcc / 100));
+      const incorrect = simulatedAttempted - correct;
+      finalScore = Math.max(0, Math.min(300, (correct * 4) - (incorrect * 1)));
+      
+      percentile = interpolatePercentile(finalScore);
+      rawRank = calculateRank(percentile, totalCandidates);
+      rankEstimate = `~${(rawRank / 100000).toFixed(2)}L AIR`;
+      if (rawRank < 1000) rankEstimate = `~${rawRank} AIR`;
+      else if (rawRank < 100000) rankEstimate = `~${(rawRank / 1000).toFixed(1)}K AIR`;
+      
+      confidence = "Low confidence — limited attempts";
+    }
   }
 
   const [matchedColleges, setMatchedColleges] = useState({ likely: [], possible: [], stretch: [] });
 
-  let effectiveRank = rawRank;
-  if (category === "EWS") effectiveRank = Math.max(1, Math.round(rawRank / 6));
-  if (category === "OBC-NCL") effectiveRank = Math.max(1, Math.round(rawRank / 4));
-  if (category === "SC") effectiveRank = Math.max(1, Math.round(rawRank / 20));
-  if (category === "ST") effectiveRank = Math.max(1, Math.round(rawRank / 40));
+  const userRanks = {
+    "OPEN": rawRank,
+    "EWS": userRanksInput["EWS"] || "",
+    "OBC-NCL": userRanksInput["OBC-NCL"] || "",
+    "SC": userRanksInput["SC"] || "",
+    "ST": userRanksInput["ST"] || ""
+  };
+  const effectiveRank = category === "OPEN" ? rawRank : Number(userRanks[category]);
+  const isRankValid = category === "OPEN" ? (rawRank > 0) : (!isNaN(effectiveRank) && effectiveRank > 0);
 
   useEffect(() => {
     if (!hasData && !finalScore) {
@@ -170,6 +205,63 @@ export default function JEEMainPredictor({ stats }) {
     <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-[var(--card)] p-5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-7">
       <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/5" />
       
+      {/* NEW: Input Mode Selector */}
+      <div className="relative border-b border-slate-100 pb-5 mb-5 dark:border-[var(--border-subtle)]">
+        <div className="flex flex-wrap items-end gap-3">
+          <div className="w-full sm:w-auto">
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Prediction Source</label>
+            <select 
+              value={predictionSource} 
+              onChange={e => {
+                setPredictionSource(e.target.value);
+                setUserRanksInput({"EWS": "", "OBC-NCL": "", "SC": "", "ST": ""});
+              }}
+              className="w-full sm:w-48 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none"
+            >
+              <option value="My Result">My Result</option>
+              <option value="Custom Score">Try a Custom Score</option>
+            </select>
+          </div>
+          
+          {predictionSource === "Custom Score" && (
+            <>
+              <div className="w-full sm:w-auto">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Input Type</label>
+                <select 
+                  value={customMode} 
+                  onChange={e => setCustomMode(e.target.value)}
+                  className="w-full sm:w-32 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none"
+                >
+                  <option value="Marks">Marks</option>
+                  <option value="Percentile">Percentile</option>
+                </select>
+              </div>
+              
+              <div className="w-full sm:w-auto">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                  JEE Main {customMode}
+                </label>
+                <input 
+                  type="number"
+                  value={customMode === "Marks" ? customMarks : customPercentile}
+                  onChange={e => customMode === "Marks" ? setCustomMarks(e.target.value) : setCustomPercentile(e.target.value)}
+                  placeholder={`Enter ${customMode}`}
+                  className="w-full sm:w-32 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none"
+                />
+              </div>
+            </>
+          )}
+          
+          {predictionSource === "Custom Score" && (
+            <div className="w-full sm:w-auto pb-1.5">
+               <button onClick={() => setPredictionSource("My Result")} className="text-xs text-blue-500 font-medium hover:underline">
+                 Use My Result
+               </button>
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="relative flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/15 text-blue-600 dark:bg-blue-500/20">
@@ -195,8 +287,17 @@ export default function JEEMainPredictor({ stats }) {
       {!hasData && finalScore === null ? (
         <div className="mt-6 flex flex-col items-center justify-center py-8">
           <AlertCircle className="h-8 w-8 text-slate-400 mb-3" />
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Not enough data yet</h3>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Complete more practice questions to calculate your personalized estimate.</p>
+          {predictionSource === "Custom Score" ? (
+            <>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Enter a valid score</h3>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Enter a valid {customMode.toLowerCase()} to estimate your chances.</p>
+            </>
+          ) : (
+            <>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Not enough data yet</h3>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Complete more practice questions to calculate your personalized estimate.</p>
+            </>
+          )}
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
@@ -204,27 +305,74 @@ export default function JEEMainPredictor({ stats }) {
           {/* Left Column: Stats */}
           <div className="lg:col-span-5 space-y-4">
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-5 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated Score</p>
-                  <div className="mt-1 flex items-baseline gap-2">
-                    <span className="font-display text-4xl font-black tabular-nums text-slate-950 dark:text-white">{finalScore}</span>
-                    <span className="text-sm font-bold text-slate-500">/ 300</span>
+              {predictionSource === "Custom Score" ? (
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles className="h-4 w-4 text-purple-500" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                      Estimated from your entered score
+                    </span>
+                  </div>
+                  
+                  {customMode === "Marks" && (
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Marks</p>
+                        <div className="mt-1 flex items-baseline gap-2">
+                          <span className="font-display text-4xl font-black tabular-nums text-slate-950 dark:text-white">{finalScore}</span>
+                          <span className="text-sm font-bold text-slate-500">/ 300</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated Percentile</p>
+                        <p className="mt-1 font-display text-2xl font-black text-slate-900 dark:text-slate-100">~{percentile}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {customMode === "Percentile" && (
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Percentile</p>
+                        <div className="mt-1 flex items-baseline gap-2">
+                          <span className="font-display text-4xl font-black tabular-nums text-slate-950 dark:text-white">{percentile}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="mt-2 pt-4 border-t border-slate-200 dark:border-slate-700/50">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated Rank</p>
+                    <div className="mt-1 flex items-baseline gap-3">
+                      <span className="font-display text-3xl font-black text-blue-600 dark:text-blue-400">{rankEstimate}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Percentile</p>
-                  <p className="mt-1 font-display text-2xl font-black text-slate-900 dark:text-slate-100">~{percentile}</p>
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700/50">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated AIR</p>
-                <div className="mt-1 flex items-baseline gap-3">
-                  <span className="font-display text-3xl font-black text-blue-600 dark:text-blue-400">{rankEstimate}</span>
-                </div>
-                <p className="mt-1 text-[11px] font-medium text-slate-500">Expected range: {rankRange}</p>
-              </div>
+              ) : (
+                <>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated Score</p>
+                      <div className="mt-1 flex items-baseline gap-2">
+                        <span className="font-display text-4xl font-black tabular-nums text-slate-950 dark:text-white">{finalScore}</span>
+                        <span className="text-sm font-bold text-slate-500">/ 300</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Percentile</p>
+                      <p className="mt-1 font-display text-2xl font-black text-slate-900 dark:text-slate-100">~{percentile}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700/50">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Estimated AIR</p>
+                    <div className="mt-1 flex items-baseline gap-3">
+                      <span className="font-display text-3xl font-black text-blue-600 dark:text-blue-400">{rankEstimate}</span>
+                    </div>
+                    <p className="mt-1 text-[11px] font-medium text-slate-500">Expected range: {rankRange}</p>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="rounded-xl border border-amber-200/80 bg-amber-50/50 p-4 dark:border-amber-900/30 dark:bg-amber-900/10">
@@ -263,6 +411,18 @@ export default function JEEMainPredictor({ stats }) {
                 </select>
               </div>
               <div>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Home State</label>
+                <select 
+                  value={homeState} 
+                  onChange={e => setHomeState(e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none mb-4"
+                >
+                  <option value="">Select State</option>
+                  {["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"].map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+
+              <div>
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Quota</label>
                 <select 
                   value={quota} 
@@ -296,6 +456,14 @@ export default function JEEMainPredictor({ stats }) {
               <div className="text-center py-6 border border-dashed border-slate-200 rounded-lg dark:border-slate-700 flex flex-col items-center">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600 mb-2"></div>
                 <p className="text-sm text-slate-500">Fetching live cutoffs...</p>
+              </div>
+            ) : !isRankValid ? (
+              <div className="text-center py-6 border border-dashed border-slate-200 rounded-lg dark:border-slate-700">
+                <p className="text-sm text-slate-500">Enter your {category} category rank to see {category} cutoff matches.</p>
+              </div>
+            ) : ((quota === "HS" || quota === "OS") && !homeState) ? (
+              <div className="text-center py-6 border border-dashed border-slate-200 rounded-lg dark:border-slate-700">
+                <p className="text-sm text-slate-500">Please select your Home State to view {quota} matches.</p>
               </div>
             ) : matchedColleges.likely.length === 0 && matchedColleges.possible.length === 0 && matchedColleges.stretch.length === 0 ? (
               <div className="text-center py-6 border border-dashed border-slate-200 rounded-lg dark:border-slate-700">
