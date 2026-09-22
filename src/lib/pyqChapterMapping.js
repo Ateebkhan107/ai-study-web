@@ -263,13 +263,26 @@ export function getCanonicalChaptersForSubject(subject) {
 }
 
 export function getChapterTargets(chapter) {
-  const canonical = normalizeChapterName(chapter);
-  const targets = new Set([chapter, canonical].filter(Boolean));
-  for (const alias of CHAPTER_ALIASES[canonical] || []) {
-    targets.add(alias);
+  if (!chapter) return [];
+
+  const rawList = Array.isArray(chapter)
+    ? chapter
+    : typeof chapter === "string" && chapter.includes(",")
+    ? chapter.split(",").map((c) => c.trim()).filter(Boolean)
+    : [chapter];
+
+  const targets = new Set();
+  for (const raw of rawList) {
+    const canonical = normalizeChapterName(raw);
+    if (raw) targets.add(raw);
+    if (canonical) targets.add(canonical);
+    for (const alias of CHAPTER_ALIASES[canonical] || []) {
+      targets.add(alias);
+    }
+    for (const legacyBroadChapter of LEGACY_BROAD_CHAPTER_TARGETS[canonical] || []) {
+      targets.add(legacyBroadChapter);
+    }
   }
-  for (const legacyBroadChapter of LEGACY_BROAD_CHAPTER_TARGETS[canonical] || []) {
-    targets.add(legacyBroadChapter);
-  }
+
   return [...targets];
 }

@@ -484,7 +484,7 @@ export async function POST(request) {
     if (!instituteTest && (exam === "JEE" || exam === "JEE Main" || exam === "NEET")) {
       const SUBJECT_ORDER = exam === "NEET"
         ? { "Physics": 1, "Chemistry": 2, "Biology": 3, "Botany": 3, "Zoology": 4 }
-        : { "Maths": 1, "Mathematics": 1, "Physics": 2, "Chemistry": 3 };
+        : { "Physics": 1, "Chemistry": 2, "Mathematics": 3, "Maths": 3 };
       questions.sort((a, b) => {
         const subjA = SUBJECT_ORDER[a.subject] || 99;
         const subjB = SUBJECT_ORDER[b.subject] || 99;

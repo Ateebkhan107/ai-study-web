@@ -1,6 +1,6 @@
-import { supabase } from "@/lib/supabase";
-import { allocateQuestionCounts } from "@/lib/questionDistribution";
-import { getChapterTargets } from "@/lib/pyqChapterMapping";
+import { supabase } from "./supabase.js";
+import { allocateQuestionCounts } from "./questionDistribution.js";
+import { getChapterTargets } from "./pyqChapterMapping.js";
 
 // Keep the public questions API compatible for test/institute routes that use
 // the shared chapter alias expansion.
@@ -184,6 +184,107 @@ function pickBalancedByDifficulty(questions, limit) {
   return result;
 }
 
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function distributeEvenlyByChapter(questions, targetLimit, isJee = false, difficulty = "mixed") {
+  if (!questions || questions.length === 0) return [];
+  if (questions.length <= targetLimit) return shuffleArray(questions);
+
+  // Group by chapter
+  const byChapter = new Map();
+  for (const q of questions) {
+    const ch = q.chapter || "General";
+    if (!byChapter.has(ch)) byChapter.set(ch, []);
+    byChapter.get(ch).push(q);
+  }
+
+  // Determine Numerical vs MCQ targets for JEE
+  let numTarget = 0;
+  if (isJee) {
+    if (targetLimit >= 30) numTarget = 10;
+    else if (targetLimit >= 25) numTarget = 5;
+    else numTarget = Math.max(1, Math.round(targetLimit * 0.2));
+  }
+  const mcqTarget = targetLimit - numTarget;
+
+  function sampleEvenly(poolByChapter, limit, filterFn = () => true) {
+    if (limit <= 0) return [];
+    const chapters = shuffleArray(Array.from(poolByChapter.keys()));
+    const chapterQueues = new Map();
+    for (const ch of chapters) {
+      let qs = (poolByChapter.get(ch) || []).filter(filterFn);
+      if (difficulty && difficulty.toLowerCase() === "mixed") {
+        qs = pickBalancedByDifficulty(qs, qs.length);
+      } else {
+        qs = shuffleArray(qs);
+      }
+      if (qs.length > 0) chapterQueues.set(ch, qs);
+    }
+
+    const selected = [];
+    const activeChapters = Array.from(chapterQueues.keys());
+    let round = 0;
+
+    while (selected.length < limit && activeChapters.length > 0) {
+      const ch = activeChapters[round % activeChapters.length];
+      const qList = chapterQueues.get(ch);
+      if (qList && qList.length > 0) {
+        selected.push(qList.shift());
+        round++;
+      } else {
+        const idx = activeChapters.indexOf(ch);
+        if (idx !== -1) activeChapters.splice(idx, 1);
+      }
+    }
+    return selected;
+  }
+
+  if (isJee && numTarget > 0) {
+    const mcqs = sampleEvenly(
+      byChapter,
+      mcqTarget,
+      (q) => String(q.question_type || "MCQ").toLowerCase() !== "numerical"
+    );
+    const seenIds = new Set(mcqs.map((q) => q.id));
+
+    const remainingByChapter = new Map();
+    for (const [ch, qs] of byChapter.entries()) {
+      remainingByChapter.set(
+        ch,
+        qs.filter((q) => !seenIds.has(q.id))
+      );
+    }
+
+    const nums = sampleEvenly(
+      remainingByChapter,
+      numTarget,
+      (q) => String(q.question_type || "MCQ").toLowerCase() === "numerical"
+    );
+    nums.forEach((q) => seenIds.add(q.id));
+
+    // If numericals were fewer than numTarget, backfill from mcqs
+    if (mcqs.length + nums.length < targetLimit) {
+      const needed = targetLimit - (mcqs.length + nums.length);
+      const backfill = sampleEvenly(
+        remainingByChapter,
+        needed,
+        (q) => !seenIds.has(q.id)
+      );
+      return [...mcqs, ...nums, ...backfill];
+    }
+    return [...mcqs, ...nums];
+  }
+
+  return sampleEvenly(byChapter, targetLimit);
+}
+
 export async function getQuestions({
   exam,
   subject,
@@ -197,7 +298,6 @@ export async function getQuestions({
   strictFilters = false,
 }) {
   try {
-//     console.log("FETCH PARAMS:", { exam, subject, chapter, difficulty, limit });
     let subjects = [];
 
     const isAllSubjects =
@@ -216,93 +316,108 @@ export async function getQuestions({
     }
 
     const distribution = allocateQuestionCounts(exam, limit, subjects);
-    const finalQuestions = await Promise.all(subjects.map(async (sub) => {
-      let subjectLimit = limit;
-      if (subjects.length > 1) {
-        subjectLimit = distribution[sub] || 0;
-      }
+    const isJee = exam === "JEE Main" || exam === "JEE";
 
-      let query = client.from("questions").select(QUESTION_SELECT_FIELDS);
-      query = exam === "JEE Main"
-        ? query.in("exam", ["JEE Main", "JEE"])
-        : query.eq("exam", exam);
-
-      if (sourceType) {
-        query = query.eq("source_type", sourceType);
-      }
-
-      if (status) {
-        query = query.eq("status", status);
-      }
-
-      if (activeOnly) {
-        query = query.eq("is_active", true);
-      }
-
-      // Subject filter
-      if (sub === "Botany" || sub === "Zoology") {
-        query = query.eq("subject", "Biology");
-      } else {
-        query = query.eq("subject", sub);
-      }
-
-      // Chapters
-      const isAllChapters =
-        !chapter ||
-        chapter.trim().toLowerCase() === "all" ||
-        chapter.trim().toLowerCase() === "all chapters";
-
-      if (!isAllChapters) {
-        const targetChapters = getChapterTargets(chapter);
-        query = query.in("chapter", targetChapters);
-      }
-
-      // Difficulty
-      if (difficulty && difficulty.toLowerCase() !== "mixed") {
-        query = query.eq("difficulty", fixDifficulty(difficulty));
-      }
-
-      let { data, error } = await query;
-
-      if (error) {
-        throw error;
-      }
-
-      const applyLimit = (questionList, targetLimit) => {
-        let unique = shuffleUniqueQuestions(questionList || []);
-        if (difficulty && difficulty.toLowerCase() === "mixed" && strictFilters) {
-          unique = pickBalancedByDifficulty(questionList || [], Math.max(targetLimit, unique.length));
+    const finalQuestions = await Promise.all(
+      subjects.map(async (sub) => {
+        let subjectLimit = limit;
+        if (subjects.length > 1) {
+          subjectLimit = distribution[sub] || 0;
         }
 
-        const isJee = exam === "JEE Main" || exam === "JEE";
-        if (isJee) {
-           if (targetLimit >= 25) {
-             const numTarget = targetLimit >= 30 ? 10 : 5;
-             const mcqTarget = 20;
-             
-             const mcqs = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
-             const nums = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
-             
-             return [...mcqs.slice(0, mcqTarget), ...nums.slice(0, numTarget)];
-           } else {
-             const mcqs = unique.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
-             return mcqs.slice(0, targetLimit);
-           }
+        if (subjectLimit <= 0) return [];
+
+        const buildQuery = () => {
+          let query = client.from("questions").select(QUESTION_SELECT_FIELDS);
+          query = isJee
+            ? query.in("exam", ["JEE Main", "JEE"])
+            : query.eq("exam", exam);
+
+          if (sourceType) {
+            query = query.eq("source_type", sourceType);
+          }
+
+          if (status) {
+            query = query.eq("status", status);
+          }
+
+          if (activeOnly) {
+            query = query.eq("is_active", true);
+          }
+
+          if (sub === "Botany" || sub === "Zoology") {
+            query = query.eq("subject", "Biology");
+          } else {
+            query = query.eq("subject", sub);
+          }
+
+          const isAllChapters =
+            !chapter ||
+            chapter.trim().toLowerCase() === "all" ||
+            chapter.trim().toLowerCase() === "all chapters";
+
+          if (!isAllChapters) {
+            const targetChapters = getChapterTargets(chapter);
+            query = query.in("chapter", targetChapters);
+          }
+
+          if (difficulty && difficulty.toLowerCase() !== "mixed") {
+            query = query.eq("difficulty", fixDifficulty(difficulty));
+          }
+
+          return { query, isAllChapters };
+        };
+
+        const { query: baseQuery, isAllChapters } = buildQuery();
+
+        let data = [];
+
+        if (isAllChapters) {
+          // Fetch across multiple chunks in parallel to ensure all 30+ chapters are covered
+          const pageRanges = [
+            [0, 999],
+            [1000, 1999],
+            [2000, 2999],
+            [3000, 3999],
+            [4000, 4999],
+          ];
+
+          const results = await Promise.all(
+            pageRanges.map(([start, end]) => {
+              const { query } = buildQuery();
+              return query.range(start, end);
+            })
+          );
+
+          for (const res of results) {
+            if (res.data && res.data.length > 0) {
+              data.push(...res.data);
+            }
+          }
+        } else {
+          const res = await baseQuery.range(0, 999);
+          if (res.data && res.data.length > 0) {
+            data = res.data;
+          }
         }
-        return unique.slice(0, targetLimit);
-      };
 
-      if (strictFilters) {
-        return applyLimit(data, subjectLimit);
-      }
+        if (data && data.length > 0) {
+          return distributeEvenlyByChapter(data, subjectLimit, isJee, difficulty);
+        }
 
-      // Fallback 1: If no questions found with strict chapter filter, relax chapter filter and fetch from subject
-      if (!data || data.length === 0) {
+        if (strictFilters) {
+          return [];
+        }
+
+        // Fallback 1: Relax chapter filter if no questions found
         let fallbackQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
-        fallbackQuery = exam === "JEE Main"
+        fallbackQuery = isJee
           ? fallbackQuery.in("exam", ["JEE Main", "JEE"])
           : fallbackQuery.eq("exam", exam);
-        fallbackQuery = fallbackQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+        fallbackQuery = fallbackQuery.eq(
+          "subject",
+          sub === "Botany" || sub === "Zoology" ? "Biology" : sub
+        );
 
         if (activeOnly) {
           fallbackQuery = fallbackQuery.eq("is_active", true);
@@ -312,37 +427,31 @@ export async function getQuestions({
           fallbackQuery = fallbackQuery.eq("difficulty", fixDifficulty(difficulty));
         }
 
-        const fallbackRes = await fallbackQuery;
+        const fallbackRes = await fallbackQuery.range(0, 999);
         if (fallbackRes.data && fallbackRes.data.length > 0) {
-          data = fallbackRes.data;
+          return distributeEvenlyByChapter(fallbackRes.data, subjectLimit, isJee, difficulty);
         }
-      }
 
-      // Fallback 2: If still no questions found, ignore difficulty too
-      if (!data || data.length === 0) {
+        // Fallback 2: Relax difficulty too
         let anyQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
-        anyQuery = exam === "JEE Main"
+        anyQuery = isJee
           ? anyQuery.in("exam", ["JEE Main", "JEE"])
           : anyQuery.eq("exam", exam);
-        anyQuery = anyQuery.eq("subject", sub === "Botany" || sub === "Zoology" ? "Biology" : sub);
+        anyQuery = anyQuery.eq(
+          "subject",
+          sub === "Botany" || sub === "Zoology" ? "Biology" : sub
+        );
         if (activeOnly) {
           anyQuery = anyQuery.eq("is_active", true);
         }
-        const anyRes = await anyQuery;
+        const anyRes = await anyQuery.range(0, 999);
         if (anyRes.data && anyRes.data.length > 0) {
-          data = anyRes.data;
+          return distributeEvenlyByChapter(anyRes.data, subjectLimit, isJee, difficulty);
         }
-      }
 
-      if (error && (!data || data.length === 0)) {
-//         console.log("SUPABASE ERROR:", error);
         return [];
-      }
-
-      return applyLimit(data, subjectLimit);
-    }));
-
-//     console.log("TOTAL QUESTIONS FOUND:", finalQuestions.length);
+      })
+    );
 
     return finalQuestions.flat().map((q) => ({
       id: q.id,
@@ -367,7 +476,7 @@ export async function getQuestions({
       negative_marks: q.negative_marks || -1,
     }));
   } catch (err) {
-//     console.log("Question error:", err);
+    console.error("Question fetch error:", err);
     return [];
   }
 }
