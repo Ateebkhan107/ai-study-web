@@ -29,12 +29,12 @@ const FEATURES = [
   },
   {
     icon: <Bot className="w-5 h-5 text-brand" />,
-    title: "AI Study Tutor (Coming Soon)",
+    title: "AI Study Tutor",
     desc: "Personalized AI tutor for doubt solving, explanations, and guided learning.",
   },
   {
     icon: <TrendingUp className="w-5 h-5 text-brand" />,
-    title: "Rank Predictor (Coming Soon)",
+    title: "Rank Predictor",
     desc: "Predict your expected JEE or NEET rank based on your performance.",
   },
   {

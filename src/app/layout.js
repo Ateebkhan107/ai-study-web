@@ -176,6 +176,36 @@ export const viewport = {
 
 const themeInitScript = `
 (() => {
+  const isExtensionSource = (value) =>
+    typeof value === "string" &&
+    /^(chrome|moz|safari-web)-extension:\\/\\//.test(value);
+
+  const isExtensionError = (event) => {
+    const error = event?.error || event?.reason;
+    return (
+      isExtensionSource(event?.filename) ||
+      isExtensionSource(error?.fileName) ||
+      isExtensionSource(error?.sourceURL) ||
+      (typeof error?.stack === "string" && /\\b(chrome|moz|safari-web)-extension:\\/\\//.test(error.stack))
+    );
+  };
+
+  ${
+    process.env.NODE_ENV === "development"
+      ? `
+  // Next's dev overlay listens for global errors. Browser-extension errors are
+  // outside the app, but can still bubble into the page and cover the UI.
+  const stopExtensionError = (event) => {
+    if (!isExtensionError(event)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  };
+  window.addEventListener("error", stopExtensionError, true);
+  window.addEventListener("unhandledrejection", stopExtensionError, true);
+`
+      : ""
+  }
+
   try {
     const hasAppliedLightDefault = localStorage.getItem("theme-default-light-applied") === "true";
     let savedTheme = localStorage.getItem("theme");
@@ -193,31 +223,12 @@ const themeInitScript = `
     document.documentElement.style.colorScheme = "light";
   }
 
-  // Workaround for browser extensions (like Bitdefender/Norton) injecting attributes and causing React hydration errors.
-  if (typeof MutationObserver !== "undefined") {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === "attributes" && mutation.attributeName === "bis_skin_checked") {
-          mutation.target.removeAttribute("bis_skin_checked");
-        }
-        if (mutation.type === "childList") {
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === 1 && node.hasAttribute("bis_skin_checked")) {
-              node.removeAttribute("bis_skin_checked");
-            }
-          });
-        }
-      });
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      attributeFilter: ["bis_skin_checked", "data-new-gr-c-s-check-loaded", "data-gr-ext-installed"],
-    });
-
-    document.querySelectorAll("[bis_skin_checked]").forEach((el) => el.removeAttribute("bis_skin_checked"));
-  }
+  // Remove extension-only hydration attributes that may already exist in the
+  // parsed HTML. Avoid observing the whole DOM because that can fight with the
+  // extension code that owns those nodes.
+  document
+    .querySelectorAll("[bis_skin_checked]")
+    .forEach((el) => el.removeAttribute("bis_skin_checked"));
 })();
 `;
 

@@ -14,9 +14,9 @@ code = code.replace(
 const aiModeCard = `
           <PricingCard
             title="AI Mode"
-            price={2000}
-            originalPrice={2000}
-            discount={0}
+            price={1999}
+            originalPrice={2699}
+            discount={75}
             duration="month"
             plan="ai_mode"
             examTrack={examTrack}
