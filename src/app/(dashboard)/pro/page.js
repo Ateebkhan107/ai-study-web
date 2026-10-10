@@ -245,7 +245,9 @@ export default function ProPage() {
             <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
             <span className="tracking-wide font-extrabold">Academic Intelligence Pass</span>
             <span className="text-amber-400">•</span>
-            <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">{selectedTrack} ASPIRANTS</span>
+            <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">
+              {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
+            </span>
           </div>
 
           {/* Main Title matching PrepZii typography */}
@@ -259,40 +261,17 @@ export default function ProPage() {
             <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg font-medium leading-relaxed pt-2">
               Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo decks, and AI assistance tuned for{" "}
               <strong className="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-500 decoration-2 underline-offset-4">
-                {selectedTrack}
+                {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
               </strong>.
             </p>
           </div>
 
-          {/* Exam Track Switcher */}
-          <div className="flex items-center justify-center gap-3 pt-2">
-            <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Track:</span>
-            <div className="inline-flex rounded-2xl border border-slate-200/90 dark:border-white/10 bg-slate-100/90 dark:bg-[#141415] p-1.5 shadow-sm">
-              <button
-                type="button"
-                onClick={() => setSelectedTrack("JEE")}
-                className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
-                  selectedTrack === "JEE"
-                    ? "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 shadow-md shadow-amber-500/20"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                }`}
-              >
-                <Zap className="h-3.5 w-3.5 fill-current" />
-                <span>JEE Track</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedTrack("NEET")}
-                className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
-                  selectedTrack === "NEET"
-                    ? "bg-emerald-500 text-white dark:bg-emerald-500 dark:text-white shadow-md shadow-emerald-500/20"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                }`}
-              >
-                <Stethoscope className="h-3.5 w-3.5" />
-                <span>NEET Track</span>
-              </button>
-            </div>
+          {/* Track Badge */}
+          <div className="pt-1">
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-500/30 dark:border-amber-400/20 bg-amber-500/10 dark:bg-amber-400/10 text-xs font-black text-amber-600 dark:text-amber-400 shadow-sm">
+              <Zap className="h-3.5 w-3.5 fill-current" />
+              {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
+            </span>
           </div>
         </section>
 
@@ -303,7 +282,6 @@ export default function ProPage() {
             <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-white/10 dark:bg-[#141415] sm:grid-cols-4 shadow-sm">
               {PLANS.map((p) => {
                 const isSelected = selectedPlan === p.id;
-                const isAi = p.id === "ai_mode";
                 return (
                   <button
                     key={p.id}
@@ -311,9 +289,7 @@ export default function ProPage() {
                     onClick={() => setSelectedPlan(p.id)}
                     className={`relative flex min-h-[78px] flex-col items-center justify-center rounded-xl p-2.5 text-center transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? isAi
-                          ? "bg-purple-600 text-white dark:bg-purple-500 dark:text-white shadow-lg ring-2 ring-purple-400/50"
-                          : "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
+                        ? "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
                         : "hover:bg-white dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"
                     }`}
                   >
@@ -321,9 +297,7 @@ export default function ProPage() {
                       <span
                         className={`absolute -top-3 rounded-full px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider shadow-sm ${
                           isSelected
-                            ? "bg-white text-slate-950 dark:bg-white dark:text-slate-950"
-                            : isAi
-                            ? "bg-purple-600 text-white"
+                            ? "bg-slate-950 text-white dark:bg-white dark:text-slate-950"
                             : "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950"
                         }`}
                       >
@@ -332,10 +306,10 @@ export default function ProPage() {
                     )}
 
                     <span className="text-xs font-black sm:text-sm">{p.label}</span>
-                    <span className={`text-xs font-bold ${isSelected ? (isAi ? "text-white" : "text-slate-950") : "text-slate-500 dark:text-slate-400"}`}>
+                    <span className={`text-xs font-bold ${isSelected ? "text-slate-950" : "text-slate-500 dark:text-slate-400"}`}>
                       ₹{p.price}
                     </span>
-                    <span className={`text-[10px] font-medium ${isSelected ? (isAi ? "text-purple-100" : "text-slate-900") : "text-slate-400 dark:text-slate-500"}`}>
+                    <span className={`text-[10px] font-medium ${isSelected ? "text-slate-900" : "text-slate-400 dark:text-slate-500"}`}>
                       {p.perMonthCalc}
                     </span>
                   </button>
@@ -345,7 +319,7 @@ export default function ProPage() {
           </div>
 
           {/* Central Featured Pricing Box */}
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-[#141415] text-white p-6 sm:p-8 shadow-2xl">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800/80 dark:border-white/10 bg-[#141415] text-white p-6 sm:p-8 shadow-2xl">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
               {/* Left Column: Details & Price */}
               <div className="space-y-4 text-center md:text-left">
@@ -390,8 +364,8 @@ export default function ProPage() {
                     <span>Automated Mistake Redo Deck & Spaced Repetition</span>
                   </div>
                   {selectedPlan === "ai_mode" ? (
-                    <div className="flex items-center gap-2.5 text-purple-300 font-bold">
-                      <Sparkles className="h-4 w-4 shrink-0 text-purple-400" />
+                    <div className="flex items-center gap-2.5 text-amber-300 font-bold">
+                      <Sparkles className="h-4 w-4 shrink-0 text-amber-400" />
                       <span>Full Zi AI Voice, Visual & Memory Companion for {selectedTrack}</span>
                     </div>
                   ) : (
@@ -411,8 +385,6 @@ export default function ProPage() {
                   className={`group w-full py-4 px-6 rounded-2xl text-base font-black transition-all duration-200 flex items-center justify-center gap-2.5 shadow-xl cursor-pointer ${
                     isCurrentPlanSelected
                       ? "bg-slate-700 text-slate-400 cursor-not-allowed shadow-none"
-                      : selectedPlan === "ai_mode"
-                      ? "bg-purple-600 hover:bg-purple-500 text-white active:scale-[0.98]"
                       : "bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 font-black active:scale-[0.98]"
                   }`}
                 >
@@ -527,10 +499,10 @@ export default function ProPage() {
             </div>
 
             {/* AI Mode Plan */}
-            <div className="relative rounded-3xl border border-purple-500/30 dark:border-purple-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-purple-500/50 flex flex-col justify-between">
+            <div className="relative rounded-3xl border border-amber-500/30 dark:border-amber-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-amber-500/50 flex flex-col justify-between">
               <div>
                 <div className="mb-4">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">Complete {selectedTrack} AI Co-pilot</span>
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Complete {selectedTrack} AI Co-pilot</span>
                   <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">
                     {selectedTrack} AI Mode
                   </h3>
@@ -548,7 +520,7 @@ export default function ProPage() {
                 <div className="space-y-3 pt-2">
                   {aiFeatures.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
-                      <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-purple-600 text-white font-bold" : "bg-indigo-500 text-white"}`}>
+                      <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-amber-500 text-slate-950 font-bold" : "bg-emerald-500 text-white"}`}>
                         <Sparkles className="h-2.5 w-2.5" />
                       </div>
                       <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-950 dark:text-white" : "font-medium"}`}>
@@ -562,7 +534,7 @@ export default function ProPage() {
                 type="button"
                 onClick={() => handleSubscribe("ai_mode")}
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["ai_mode"] <= PLAN_RANK[currentPlan])}
-                className="mt-6 w-full py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 dark:bg-purple-500 dark:hover:bg-purple-400 text-white font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="mt-6 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <span>Get {selectedTrack} AI Mode • ₹{PLANS[3].total}</span>
                 <ArrowRight className="h-4 w-4" />
@@ -676,7 +648,7 @@ export default function ProPage() {
 
         {/* ── Bottom Finale CTA Banner ── */}
         <section className="animate-slideUp" style={{ animationDelay: "350ms" }}>
-          <div className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800 dark:border-white/10">
+          <div className="relative overflow-hidden rounded-3xl bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800/80 dark:border-white/10">
             <div className="relative z-10 mx-auto max-w-2xl space-y-5">
               <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
                 Ready to Boost Your {selectedTrack} Rank?

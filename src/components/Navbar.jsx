@@ -143,7 +143,7 @@ export default function Navbar({
       className={`prepzii-interactive inline-flex h-9 items-center justify-center gap-1.5 rounded-xl px-3.5 text-[12px] uppercase font-black tracking-widest ${
         isPro
           ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300"
-          : "bg-gradient-to-br from-amber-400 to-amber-500 text-amber-950 hover:from-amber-400 hover:to-amber-600 dark:bg-none dark:bg-brand dark:text-black dark:hover:bg-brand-hover"
+          : "bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 font-black"
       }`}
     >
       {!isPro && <Star aria-hidden="true" className="prepzii-interactive-icon h-3.5 w-3.5" fill="currentColor" />}
