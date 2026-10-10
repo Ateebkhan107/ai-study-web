@@ -227,23 +227,23 @@ export default function ProPage() {
 
         {/* ── Hero Section ── */}
         <section className="space-y-6 text-center animate-slideUp">
-          {/* Top Pill Badge with High Contrast */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/15 dark:border-amber-400/40 dark:bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 shadow-sm backdrop-blur-md">
+          {/* Top Pill Badge matching PrepZii Dark Mode */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/15 dark:border-amber-400/30 dark:bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-900 dark:text-amber-300 shadow-sm backdrop-blur-md">
             <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
             <span className="tracking-wide font-extrabold">Academic Intelligence Pass</span>
             <span className="text-amber-400">•</span>
             <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">{selectedTrack} Aspirants</span>
           </div>
 
-          {/* Main Title matching user screenshot */}
+          {/* Main Title matching PrepZii typography */}
           <div className="space-y-2">
-            <h1 className="text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
+            <h1 className="text-4xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
               Master Every PYQ With <br />
               <span className="text-amber-500 dark:text-amber-400 font-black">
                 Precision & Confidence
               </span>
             </h1>
-            <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg font-medium leading-relaxed pt-2">
+            <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg font-medium leading-relaxed pt-2">
               Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo decks, and AI assistance tuned for{" "}
               <strong className="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-500 decoration-2 underline-offset-4">
                 {selectedTrack}
@@ -254,13 +254,13 @@ export default function ProPage() {
           {/* Exam Track Switcher */}
           <div className="flex items-center justify-center gap-3 pt-2">
             <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Track:</span>
-            <div className="inline-flex rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-900/90 p-1.5 shadow-sm">
+            <div className="inline-flex rounded-2xl border border-slate-200/90 dark:border-white/10 bg-slate-100/90 dark:bg-[#141415] p-1.5 shadow-sm">
               <button
                 type="button"
                 onClick={() => setSelectedTrack("JEE")}
                 className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
                   selectedTrack === "JEE"
-                    ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
+                    ? "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 shadow-md shadow-amber-500/20"
                     : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
@@ -272,7 +272,7 @@ export default function ProPage() {
                 onClick={() => setSelectedTrack("NEET")}
                 className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
                   selectedTrack === "NEET"
-                    ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                    ? "bg-emerald-500 text-white dark:bg-emerald-500 dark:text-white shadow-md shadow-emerald-500/20"
                     : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
@@ -287,7 +287,7 @@ export default function ProPage() {
         <section className="space-y-6 animate-slideUp" style={{ animationDelay: "100ms" }}>
           {/* Plan Selector Buttons Bar */}
           <div className="mx-auto max-w-3xl">
-            <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-slate-800 dark:bg-slate-900/80 sm:grid-cols-4 shadow-sm">
+            <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-white/10 dark:bg-[#141415] sm:grid-cols-4 shadow-sm">
               {PLANS.map((p) => {
                 const isSelected = selectedPlan === p.id;
                 const isAi = p.id === "ai_mode";
@@ -299,19 +299,19 @@ export default function ProPage() {
                     className={`relative flex min-h-[78px] flex-col items-center justify-center rounded-xl p-2.5 text-center transition-all duration-200 cursor-pointer ${
                       isSelected
                         ? isAi
-                          ? "bg-purple-600 text-white shadow-lg ring-2 ring-purple-400/50"
-                          : "bg-amber-500 text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
-                        : "hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                          ? "bg-purple-600 text-white dark:bg-purple-500 dark:text-white shadow-lg ring-2 ring-purple-400/50"
+                          : "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
+                        : "hover:bg-white dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"
                     }`}
                   >
                     {p.badge && (
                       <span
                         className={`absolute -top-3 rounded-full px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider shadow-sm ${
                           isSelected
-                            ? "bg-white text-slate-950"
+                            ? "bg-white text-slate-950 dark:bg-white dark:text-slate-950"
                             : isAi
                             ? "bg-purple-600 text-white"
-                            : "bg-amber-500 text-slate-950"
+                            : "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950"
                         }`}
                       >
                         {p.badge}
@@ -331,20 +331,20 @@ export default function ProPage() {
             </div>
           </div>
 
-          {/* Central Featured Pricing Box */}
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 text-white p-6 sm:p-8 shadow-2xl">
+          {/* Central Featured Pricing Box (Dark mode matches #141415) */}
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-[#141415] text-white p-6 sm:p-8 shadow-2xl">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
               {/* Left Column: Details & Price */}
               <div className="space-y-4 text-center md:text-left">
                 <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
-                  <span className="rounded-full bg-amber-500 text-slate-950 px-3.5 py-1 text-xs font-black">
+                  <span className="rounded-full bg-amber-500 dark:bg-amber-400 text-slate-950 px-3.5 py-1 text-xs font-black">
                     {selectedTrack} {plan.label} Pass
                   </span>
                   <span className="rounded-full bg-emerald-500 text-white px-3 py-1 text-[11px] font-black uppercase tracking-wider shadow-sm">
                     {plan.discount}% OFF
                   </span>
                   {plan.savings && (
-                    <span className="rounded-full bg-slate-800 text-slate-200 px-3 py-1 text-[11px] font-bold border border-slate-700">
+                    <span className="rounded-full bg-slate-800 dark:bg-slate-800/80 text-slate-200 px-3 py-1 text-[11px] font-bold border border-slate-700 dark:border-slate-700">
                       {plan.savings}
                     </span>
                   )}
@@ -391,7 +391,7 @@ export default function ProPage() {
               </div>
 
               {/* Right Column: CTA & Trust */}
-              <div className="flex flex-col items-center justify-center space-y-3.5 rounded-2xl bg-slate-800/80 p-5 border border-slate-700 sm:p-6">
+              <div className="flex flex-col items-center justify-center space-y-3.5 rounded-2xl bg-slate-800/80 dark:bg-slate-900/90 p-5 border border-slate-700 dark:border-slate-800 sm:p-6">
                 <button
                   onClick={() => handleSubscribe()}
                   disabled={loading || isCurrentPlanSelected}
@@ -400,7 +400,7 @@ export default function ProPage() {
                       ? "bg-slate-700 text-slate-400 cursor-not-allowed shadow-none"
                       : selectedPlan === "ai_mode"
                       ? "bg-purple-600 hover:bg-purple-500 text-white active:scale-[0.98]"
-                      : "bg-amber-500 hover:bg-amber-400 text-slate-950 font-black active:scale-[0.98]"
+                      : "bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 font-black active:scale-[0.98]"
                   }`}
                 >
                   {loading ? (
@@ -431,18 +431,18 @@ export default function ProPage() {
             <span className="text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400">
               Transparent Pricing
             </span>
-            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+            <h2 className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-3xl">
               Compare Plans & Capabilities
             </h2>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {/* Free Plan */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 flex flex-col justify-between">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#141415] flex flex-col justify-between">
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Free Tier</span>
-                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">Basic</h3>
+                  <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">Basic</h3>
                   <p className="mt-1 text-3xl font-black text-slate-400 dark:text-slate-500">
                     ₹0<span className="text-sm font-normal">/forever</span>
                   </p>
@@ -471,22 +471,22 @@ export default function ProPage() {
             </div>
 
             {/* PRO Plan (Highlighted Gold Border) */}
-            <div className="relative rounded-3xl border-2 border-amber-500 bg-white p-6 shadow-xl dark:bg-slate-900 flex flex-col justify-between">
-              <div className="absolute -top-3.5 right-6 rounded-full bg-amber-500 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-slate-950 shadow-md">
+            <div className="relative rounded-3xl border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#141415] p-6 shadow-xl flex flex-col justify-between">
+              <div className="absolute -top-3.5 right-6 rounded-full bg-amber-500 dark:bg-amber-400 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-slate-950 shadow-md">
                 Recommended
               </div>
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Unlimited Exam Prep</span>
-                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">
+                  <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">
                     {selectedTrack} PRO
                   </h3>
                   <div className="mt-2 flex items-baseline gap-2">
                     <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[1].originalPrice}</span>
-                    <span className="text-3xl font-black text-slate-900 dark:text-white">
+                    <span className="text-3xl font-black text-slate-950 dark:text-white">
                       ₹{PLANS[1].price}
                     </span>
-                    <span className="text-xs font-semibold text-slate-500">/3 months</span>
+                    <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/3 months</span>
                     <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-black text-white">
                       {PLANS[1].discount}% OFF
                     </span>
@@ -498,7 +498,7 @@ export default function ProPage() {
                       <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-amber-500 text-slate-950 font-bold" : "bg-emerald-500 text-white"}`}>
                         <Check className="h-2.5 w-2.5 stroke-[3]" />
                       </div>
-                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-950 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -509,7 +509,7 @@ export default function ProPage() {
                 type="button"
                 onClick={() => handleSubscribe("quarterly")}
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["quarterly"] <= PLAN_RANK[currentPlan])}
-                className="mt-6 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="mt-6 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <span>Get {selectedTrack} Pro • ₹{PLANS[1].total}</span>
                 <ArrowRight className="h-4 w-4" />
@@ -517,22 +517,22 @@ export default function ProPage() {
             </div>
 
             {/* AI Mode Plan (Highlighted Purple Border) */}
-            <div className="relative rounded-3xl border-2 border-purple-500 bg-white p-6 shadow-xl dark:bg-slate-900 flex flex-col justify-between">
+            <div className="relative rounded-3xl border-2 border-purple-500 dark:border-purple-400 bg-white dark:bg-[#141415] p-6 shadow-xl flex flex-col justify-between">
               <div className="absolute -top-3.5 right-6 rounded-full bg-purple-600 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-md">
                 AI Powered
               </div>
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">The Complete AI Co-pilot</span>
-                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">
+                  <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">
                     Zi AI Mode
                   </h3>
                   <div className="mt-2 flex items-baseline gap-2">
                     <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[3].originalPrice}</span>
-                    <span className="text-3xl font-black text-slate-900 dark:text-white">
+                    <span className="text-3xl font-black text-slate-950 dark:text-white">
                       ₹{PLANS[3].price}
                     </span>
-                    <span className="text-xs font-semibold text-slate-500">/month</span>
+                    <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/month</span>
                     <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-black text-white">
                       {PLANS[3].discount}% OFF
                     </span>
@@ -544,7 +544,7 @@ export default function ProPage() {
                       <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-purple-600 text-white font-bold" : "bg-indigo-500 text-white"}`}>
                         <Sparkles className="h-2.5 w-2.5" />
                       </div>
-                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-950 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -555,7 +555,7 @@ export default function ProPage() {
                 type="button"
                 onClick={() => handleSubscribe("ai_mode")}
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["ai_mode"] <= PLAN_RANK[currentPlan])}
-                className="mt-6 w-full py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="mt-6 w-full py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 dark:bg-purple-500 dark:hover:bg-purple-400 text-white font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <span>Get AI Mode • ₹{PLANS[3].total}</span>
                 <ArrowRight className="h-4 w-4" />
@@ -568,7 +568,7 @@ export default function ProPage() {
         <section className="space-y-6 animate-slideUp" style={{ animationDelay: "200ms" }}>
           <div className="text-center space-y-1">
             <span className="text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400">Built For High Scorers</span>
-            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+            <h2 className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-3xl">
               Everything You Need to Boost Your Percentile
             </h2>
           </div>
@@ -579,12 +579,12 @@ export default function ProPage() {
               return (
                 <div
                   key={card.title}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-[#141415]"
                 >
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-base font-black font-display text-slate-900 dark:text-white">
+                  <h3 className="text-base font-black font-display text-slate-950 dark:text-white">
                     {card.title}
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
@@ -598,20 +598,20 @@ export default function ProPage() {
 
         {/* ── Social Proof & Trust Metrics ── */}
         <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
-          <div className="grid grid-cols-3 gap-3 rounded-3xl border border-slate-200 bg-white p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <div className="grid grid-cols-3 gap-3 rounded-3xl border border-slate-200 bg-white p-4 text-center shadow-sm dark:border-white/10 dark:bg-[#141415] sm:p-6">
             <div className="space-y-1">
               <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
                 <Users className="h-5 w-5" />
               </div>
-              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">12,000+</p>
+              <p className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-4xl">12,000+</p>
               <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Active Aspirants</p>
             </div>
 
-            <div className="space-y-1 border-x border-slate-200 dark:border-slate-800">
+            <div className="space-y-1 border-x border-slate-200 dark:border-white/10">
               <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <Zap className="h-5 w-5 fill-current" />
               </div>
-              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">94%</p>
+              <p className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-4xl">94%</p>
               <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Reported Higher Speed</p>
             </div>
 
@@ -619,7 +619,7 @@ export default function ProPage() {
               <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
                 <Award className="h-5 w-5" />
               </div>
-              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">3.2x</p>
+              <p className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-4xl">3.2x</p>
               <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Faster Mistake Mastery</p>
             </div>
           </div>
@@ -629,7 +629,7 @@ export default function ProPage() {
         <section className="mx-auto max-w-3xl space-y-6 animate-slideUp" style={{ animationDelay: "300ms" }}>
           <div className="text-center space-y-1">
             <span className="text-xs font-black uppercase tracking-widest text-slate-400">Got Questions?</span>
-            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+            <h2 className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-3xl">
               Frequently Asked Questions
             </h2>
           </div>
@@ -640,24 +640,24 @@ export default function ProPage() {
               return (
                 <div
                   key={faq.q}
-                  className={`overflow-hidden rounded-2xl border transition-all duration-200 bg-white dark:bg-slate-900 ${
-                    isOpen ? "border-amber-500/60 shadow-sm" : "border-slate-200 dark:border-slate-800"
+                  className={`overflow-hidden rounded-2xl border transition-all duration-200 bg-white dark:bg-[#141415] ${
+                    isOpen ? "border-amber-500/60 dark:border-amber-400/60 shadow-sm" : "border-slate-200 dark:border-white/10"
                   }`}
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between p-4 text-left font-bold text-sm text-slate-900 dark:text-white sm:p-5 cursor-pointer"
+                    className="flex w-full items-center justify-between p-4 text-left font-bold text-sm text-slate-950 dark:text-white sm:p-5 cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
                       className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 text-amber-500" : ""
+                        isOpen ? "rotate-180 text-amber-500 dark:text-amber-400" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="border-t border-slate-100 dark:border-slate-800 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300 sm:px-5 sm:pb-5">
+                    <div className="border-t border-slate-100 dark:border-white/10 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:px-5 sm:pb-5">
                       {faq.a}
                     </div>
                   )}
@@ -669,19 +669,19 @@ export default function ProPage() {
 
         {/* ── Bottom Finale CTA Banner ── */}
         <section className="animate-slideUp" style={{ animationDelay: "350ms" }}>
-          <div className="relative overflow-hidden rounded-3xl bg-slate-900 text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800">
+          <div className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800 dark:border-white/10">
             <div className="relative z-10 mx-auto max-w-2xl space-y-5">
               <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
                 Ready to Boost Your Rank?
               </h2>
-              <p className="text-slate-300 text-sm font-semibold sm:text-base">
+              <p className="text-slate-300 dark:text-slate-400 text-sm font-semibold sm:text-base">
                 Join thousands of students mastering previous years questions and timed mock tests on PrepZii.
               </p>
               <div className="pt-2">
                 <button
                   onClick={() => handleSubscribe()}
                   disabled={loading || isCurrentPlanSelected}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-4 text-sm font-black text-slate-950 shadow-xl transition-all duration-200 hover:bg-amber-400 cursor-pointer active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 px-8 py-4 text-sm font-black text-slate-950 shadow-xl transition-all duration-200 cursor-pointer active:scale-[0.98]"
                 >
                   <span>{getCtaLabel()}</span>
                   <ArrowRight className="h-4 w-4" />
