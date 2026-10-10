@@ -311,6 +311,11 @@ const organizationSchema = {
   ],
 };
 
+const organizationSchemaJson = JSON.stringify(organizationSchema).replace(
+  /</g,
+  "\\u003c",
+);
+
 const appOrigin = (
   process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com"
 ).replace(/\/$/, "");
@@ -325,46 +330,45 @@ const clerkAllowedRedirectOrigins = Array.from(
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider
-      allowedRedirectOrigins={clerkAllowedRedirectOrigins}
-      afterSignOutUrl={SIGN_IN_ROUTE}
-      signInUrl={SIGN_IN_ROUTE}
-      signUpUrl={SIGN_UP_ROUTE}
-      signInForceRedirectUrl={DASHBOARD_ROUTE}
-      signUpForceRedirectUrl={ONBOARDING_ROUTE}
-      signInFallbackRedirectUrl={DASHBOARD_ROUTE}
-      signUpFallbackRedirectUrl={ONBOARDING_ROUTE}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="h-full"
     >
-      <html
-        lang="en"
+      <body
         suppressHydrationWarning
-        className="h-full"
+        className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
       >
-        <head>
-          <script
-            id="theme-init"
-            dangerouslySetInnerHTML={{ __html: themeInitScript }}
-          />
-          {/* Structured data for Google rich results */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(organizationSchema),
-            }}
-          />
-        </head>
-
-        <body
+        <script
+          id="theme-init"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+        {/* Structured data for Google rich results */}
+        <script
+          id="organization-jsonld"
+          type="application/ld+json"
           suppressHydrationWarning
-          className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
+          dangerouslySetInnerHTML={{
+            __html: organizationSchemaJson,
+          }}
+        />
+        <ClerkProvider
+          allowedRedirectOrigins={clerkAllowedRedirectOrigins}
+          afterSignOutUrl={SIGN_IN_ROUTE}
+          signInUrl={SIGN_IN_ROUTE}
+          signUpUrl={SIGN_UP_ROUTE}
+          signInForceRedirectUrl={DASHBOARD_ROUTE}
+          signUpForceRedirectUrl={ONBOARDING_ROUTE}
+          signInFallbackRedirectUrl={DASHBOARD_ROUTE}
+          signUpFallbackRedirectUrl={ONBOARDING_ROUTE}
         >
           <WebAwesomeProvider />
           {/* The payment checkout script is loaded only on pages that need it (/pro, /pricing).
               It was intentionally moved out of the global layout to avoid loading it everywhere. */}
           {children}
           <Footer />
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
