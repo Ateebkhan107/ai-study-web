@@ -394,27 +394,27 @@ export default function PublicLandingPage() {
       {/* ════════════════════════════════════════════════════════
           NAVBAR
       ════════════════════════════════════════════════════════ */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+      <header className="sticky top-0 z-50 border-b-[3px] border-[#111111] bg-[#FFF9E6] shadow-[0_5px_0_#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
           <Logo forceLight size={44} />
 
           {/* Nav links — desktop only */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-2">
             <Link
               href="/jee"
-              className={`${B} text-sm text-[#334155] hover:text-[#121826] font-medium px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors`}
+              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
             >
               JEE
             </Link>
             <Link
               href="/neet"
-              className={`${B} text-sm text-[#334155] hover:text-[#121826] font-medium px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors`}
+              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
             >
               NEET
             </Link>
             <Link
               href="/pricing"
-              className={`${B} text-sm text-[#334155] hover:text-[#121826] font-medium px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors`}
+              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
             >
               Pricing
             </Link>
@@ -424,7 +424,7 @@ export default function PublicLandingPage() {
           <div className="flex items-center gap-2">
             <Link
               href="/sign-in"
-              className={`${B} hidden sm:inline-flex text-sm text-[#334155] hover:text-[#121826] font-medium px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors`}
+              className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
             >
               Log in
             </Link>
@@ -432,10 +432,10 @@ export default function PublicLandingPage() {
               href="/sign-up"
               onClick={handleStartClick}
               prefetch
-              className={`${B} text-sm font-semibold bg-brand hover:bg-brand-hover text-black px-4 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5`}
+              className={`${B} inline-flex items-center gap-1.5 border-[3px] border-[#111111] bg-[#F4B400] px-4 py-2 text-sm font-black text-black shadow-[4px_4px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#111111]`}
             >
               Get Started
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-3.5 h-3.5" strokeWidth={3} />
             </Link>
           </div>
         </div>
