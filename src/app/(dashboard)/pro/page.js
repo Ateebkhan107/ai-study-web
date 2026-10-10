@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
@@ -34,23 +35,23 @@ const FREE_FEATURES = [
   { text: "100% Ad-free experience", included: false },
 ];
 
-const PRO_FEATURES = [
+const getProFeatures = (track) => [
   { text: "Everything included in Free plan", hot: false },
-  { text: "Unlimited custom tests & mock generators", hot: true },
-  { text: "Full-length timed exam mock tests", hot: true },
-  { text: "15+ Years Chapter-wise authentic PYQs", hot: true },
+  { text: `Unlimited custom tests & ${track} mock generators`, hot: true },
+  { text: `Full-length timed ${track} exam mock tests`, hot: true },
+  { text: `15+ Years Chapter-wise authentic ${track} PYQs`, hot: true },
   { text: "Automated Mistake Redo Deck", hot: true },
-  { text: "Deep chapter analytics & weak-spot alerts", hot: true },
-  { text: "Step-by-step AI question hints", hot: true },
+  { text: `Deep ${track} chapter analytics & weak-spot alerts`, hot: true },
+  { text: "Step-by-step AI question hints & explanations", hot: true },
   { text: "100% Ad-free & priority fast servers", hot: false },
 ];
 
-const AI_MODE_FEATURES = [
-  { text: "Everything included in Pro plan", hot: false },
-  { text: "Full Zi AI Voice & Visual Study Companion", hot: true },
+const getAiFeatures = (track) => [
+  { text: `Everything included in ${track} Pro plan`, hot: false },
+  { text: `Full Zi AI Voice & Visual Companion for ${track}`, hot: true },
   { text: "High-capacity AI usage & instant doubt solving", hot: true },
   { text: "Personalized study memory & weak-area tracking", hot: true },
-  { text: "Autonomous daily & weekly AI study plans", hot: true },
+  { text: `Autonomous daily & weekly ${track} AI study plans`, hot: true },
   { text: "Step-by-step interactive problem breakdown", hot: true },
 ];
 
@@ -107,11 +108,11 @@ const PLANS = [
 
 const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 
-const BENTO_CARDS = [
+const getBentoCards = (track) => [
   {
     icon: Target,
-    title: "Chapter-wise PYQ Mastery",
-    desc: "Target high-yield chapters with 15+ years of authentic PYQs, instant difficulty filters, and paper-wise breakdowns.",
+    title: `Chapter-wise ${track} PYQ Mastery`,
+    desc: `Target high-yield chapters with 15+ years of authentic ${track} PYQs, instant difficulty filters, and paper-wise breakdowns.`,
   },
   {
     icon: RotateCcw,
@@ -126,7 +127,7 @@ const BENTO_CARDS = [
   {
     icon: Brain,
     title: "Zi AI Instant Doubt Solver",
-    desc: "Ask any conceptual PYQ question and get instant step-by-step voice and visual problem breakdowns.",
+    desc: `Ask any conceptual ${track} PYQ question and get instant step-by-step voice and visual problem breakdowns.`,
   },
 ];
 
@@ -157,7 +158,11 @@ export default function ProPage() {
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
 
+  const router = useRouter();
   const plan = PLANS.find((p) => p.id === selectedPlan) || PLANS[1];
+  const proFeatures = getProFeatures(selectedTrack);
+  const aiFeatures = getAiFeatures(selectedTrack);
+  const bentoCards = getBentoCards(selectedTrack);
 
   useEffect(() => {
     let cancelled = false;
@@ -194,6 +199,12 @@ export default function ProPage() {
     const targetPlan = planId || selectedPlan;
     setSelectedPlan(targetPlan);
 
+    if (!user) {
+      const returnUrl = typeof window !== "undefined" ? window.location.pathname : "/pro";
+      router.push(`/sign-in?redirect_url=${encodeURIComponent(returnUrl)}`);
+      return;
+    }
+
     if (loading || (currentPlan && PLAN_RANK[targetPlan] <= PLAN_RANK[currentPlan])) return;
 
     try {
@@ -201,7 +212,9 @@ export default function ProPage() {
       const order = await createOrder(targetPlan, selectedTrack);
       await openRazorpayCheckout(order);
     } catch (err) {
-      alert(err.message || "Unable to start payment.");
+      if (err?.message && !err.message.includes("cancelled")) {
+        alert(err.message || "Unable to start payment. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -211,7 +224,7 @@ export default function ProPage() {
 
   const getCtaLabel = (p = plan) => {
     if (isCurrentPlanSelected) return "Current Active Plan";
-    if (currentPlan) return `Upgrade to ${p.label} • ₹${p.total}`;
+    if (currentPlan) return `Upgrade to ${selectedTrack} ${p.label} • ₹${p.total}`;
     if (p.id === "ai_mode") return `Get ${selectedTrack} AI Mode • ₹${p.total}`;
     return `Get ${selectedTrack} Pro • ₹${p.total}`;
   };
@@ -232,13 +245,13 @@ export default function ProPage() {
             <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
             <span className="tracking-wide font-extrabold">Academic Intelligence Pass</span>
             <span className="text-amber-400">•</span>
-            <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">{selectedTrack} Aspirants</span>
+            <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">{selectedTrack} ASPIRANTS</span>
           </div>
 
           {/* Main Title matching PrepZii typography */}
           <div className="space-y-2">
             <h1 className="text-4xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
-              Master Every PYQ With <br />
+              Master Every {selectedTrack} PYQ With <br />
               <span className="text-amber-500 dark:text-amber-400 font-black">
                 Precision & Confidence
               </span>
@@ -331,7 +344,7 @@ export default function ProPage() {
             </div>
           </div>
 
-          {/* Central Featured Pricing Box (Dark mode matches #141415) */}
+          {/* Central Featured Pricing Box */}
           <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-[#141415] text-white p-6 sm:p-8 shadow-2xl">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
               {/* Left Column: Details & Price */}
@@ -363,14 +376,14 @@ export default function ProPage() {
                 </div>
 
                 <p className="text-xs font-bold text-amber-400">
-                  ⚡ Limited-time discounted academic pass active
+                  ⚡ Limited-time discounted {selectedTrack} academic pass active
                 </p>
 
                 {/* Instant Highlights */}
                 <div className="space-y-2.5 pt-2 text-xs text-slate-200">
                   <div className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
-                    <span>Instant access to 15+ years chapter PYQs & tests</span>
+                    <span>Instant access to 15+ years {selectedTrack} chapter PYQs & tests</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
@@ -379,19 +392,19 @@ export default function ProPage() {
                   {selectedPlan === "ai_mode" ? (
                     <div className="flex items-center gap-2.5 text-purple-300 font-bold">
                       <Sparkles className="h-4 w-4 shrink-0 text-purple-400" />
-                      <span>Full Zi AI Voice, Visual & Memory Study Companion</span>
+                      <span>Full Zi AI Voice, Visual & Memory Companion for {selectedTrack}</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2.5">
                       <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
-                      <span>Step-by-step AI question hints & explanations</span>
+                      <span>Step-by-step AI question hints & explanations for {selectedTrack}</span>
                     </div>
                   )}
                 </div>
               </div>
 
               {/* Right Column: CTA & Trust */}
-              <div className="flex flex-col items-center justify-center space-y-3.5 rounded-2xl bg-slate-800/80 dark:bg-slate-900/90 p-5 border border-slate-700 dark:border-slate-800 sm:p-6">
+              <div className="flex flex-col items-center justify-center space-y-3.5">
                 <button
                   onClick={() => handleSubscribe()}
                   disabled={loading || isCurrentPlanSelected}
@@ -470,14 +483,11 @@ export default function ProPage() {
               </button>
             </div>
 
-            {/* PRO Plan (Highlighted Gold Border) */}
-            <div className="relative rounded-3xl border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#141415] p-6 shadow-xl flex flex-col justify-between">
-              <div className="absolute -top-3.5 right-6 rounded-full bg-amber-500 dark:bg-amber-400 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-slate-950 shadow-md">
-                Recommended
-              </div>
+            {/* PRO Plan */}
+            <div className="relative rounded-3xl border border-amber-500/30 dark:border-amber-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-amber-500/50 flex flex-col justify-between">
               <div>
                 <div className="mb-4">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Unlimited Exam Prep</span>
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Unlimited {selectedTrack} Prep</span>
                   <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">
                     {selectedTrack} PRO
                   </h3>
@@ -493,7 +503,7 @@ export default function ProPage() {
                   </div>
                 </div>
                 <div className="space-y-3 pt-2">
-                  {PRO_FEATURES.map((f) => (
+                  {proFeatures.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
                       <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-amber-500 text-slate-950 font-bold" : "bg-emerald-500 text-white"}`}>
                         <Check className="h-2.5 w-2.5 stroke-[3]" />
@@ -516,16 +526,13 @@ export default function ProPage() {
               </button>
             </div>
 
-            {/* AI Mode Plan (Highlighted Purple Border) */}
-            <div className="relative rounded-3xl border-2 border-purple-500 dark:border-purple-400 bg-white dark:bg-[#141415] p-6 shadow-xl flex flex-col justify-between">
-              <div className="absolute -top-3.5 right-6 rounded-full bg-purple-600 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-md">
-                AI Powered
-              </div>
+            {/* AI Mode Plan */}
+            <div className="relative rounded-3xl border border-purple-500/30 dark:border-purple-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-purple-500/50 flex flex-col justify-between">
               <div>
                 <div className="mb-4">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">The Complete AI Co-pilot</span>
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">Complete {selectedTrack} AI Co-pilot</span>
                   <h3 className="text-2xl font-black font-display text-slate-950 dark:text-white">
-                    Zi AI Mode
+                    {selectedTrack} AI Mode
                   </h3>
                   <div className="mt-2 flex items-baseline gap-2">
                     <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[3].originalPrice}</span>
@@ -539,7 +546,7 @@ export default function ProPage() {
                   </div>
                 </div>
                 <div className="space-y-3 pt-2">
-                  {AI_MODE_FEATURES.map((f) => (
+                  {aiFeatures.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
                       <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-purple-600 text-white font-bold" : "bg-indigo-500 text-white"}`}>
                         <Sparkles className="h-2.5 w-2.5" />
@@ -557,7 +564,7 @@ export default function ProPage() {
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["ai_mode"] <= PLAN_RANK[currentPlan])}
                 className="mt-6 w-full py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 dark:bg-purple-500 dark:hover:bg-purple-400 text-white font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                <span>Get AI Mode • ₹{PLANS[3].total}</span>
+                <span>Get {selectedTrack} AI Mode • ₹{PLANS[3].total}</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -574,7 +581,7 @@ export default function ProPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {BENTO_CARDS.map((card) => {
+            {bentoCards.map((card) => {
               const Icon = card.icon;
               return (
                 <div
@@ -604,7 +611,7 @@ export default function ProPage() {
                 <Users className="h-5 w-5" />
               </div>
               <p className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-4xl">12,000+</p>
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Active Aspirants</p>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Active {selectedTrack} Aspirants</p>
             </div>
 
             <div className="space-y-1 border-x border-slate-200 dark:border-white/10">
@@ -672,10 +679,10 @@ export default function ProPage() {
           <div className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800 dark:border-white/10">
             <div className="relative z-10 mx-auto max-w-2xl space-y-5">
               <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
-                Ready to Boost Your Rank?
+                Ready to Boost Your {selectedTrack} Rank?
               </h2>
               <p className="text-slate-300 dark:text-slate-400 text-sm font-semibold sm:text-base">
-                Join thousands of students mastering previous years questions and timed mock tests on PrepZii.
+                Join thousands of {selectedTrack} aspirants mastering previous years questions and timed mock tests on PrepZii.
               </p>
               <div className="pt-2">
                 <button
