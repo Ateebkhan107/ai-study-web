@@ -2,7 +2,15 @@
 
 import { useEffect } from "react";
 import posthog from "posthog-js";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const sansFont = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function GlobalError({ error, reset }) {
   useEffect(() => {
@@ -11,7 +19,7 @@ export default function GlobalError({ error, reset }) {
 
   return (
     <html lang="en" className="h-full">
-      <body className="font-sans min-h-full flex flex-col items-center justify-center antialiased bg-[var(--background)]">
+      <body className={`${sansFont.variable} font-sans min-h-full flex flex-col items-center justify-center antialiased bg-[var(--background)]`}>
         <main className="flex flex-col items-center justify-center p-8 text-center max-w-md bg-[var(--card)] rounded-2xl shadow-xl border border-[var(--border)]">
           <div className="mb-6 rounded-full bg-red-100 p-4 text-red-600 dark:bg-red-900/30 dark:text-red-400">
             <svg

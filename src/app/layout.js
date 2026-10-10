@@ -14,6 +14,28 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
 
+import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+
+const displayFont = Rajdhani({
+  variable: "--font-rajdhani",
+  weight: ["500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const sansFont = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const monoFont = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata = {
   // Resolves all relative URLs in OG images etc. against this base.
   // Change to your production domain before deploying.
@@ -334,7 +356,7 @@ export default function RootLayout({ children }) {
 
         <body
           suppressHydrationWarning
-          className="font-sans min-h-full flex flex-col antialiased"
+          className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
         >
           <WebAwesomeProvider />
           {/* The payment checkout script is loaded only on pages that need it (/pro, /pricing).
