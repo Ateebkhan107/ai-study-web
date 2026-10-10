@@ -30,9 +30,9 @@ import {
   MessageSquare,
 } from "lucide-react";
 
-// Shorthand class references
-const D = "font-[family-name:var(--font-prepzii-landing-display)]";
-const B = "font-[family-name:var(--font-prepzii-landing-body)]";
+// Shorthand class references using primary brand fonts (Space Grotesk)
+const D = "font-[family-name:var(--font-space-grotesk)] font-bold tracking-tight";
+const B = "font-[family-name:var(--font-space-grotesk)]";
 
 /* ── Shared animation variants ──────────────────────────────── */
 const fadeUp = {
