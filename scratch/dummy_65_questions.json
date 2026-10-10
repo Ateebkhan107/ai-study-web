@@ -1,0 +1,587 @@
+[
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-12APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 45,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "In the given reaction:\n\n$$\\text{Me}-\\overset{\\mathrm{O}}{\\underset{\\parallel}{\\mathrm{C}}}-(\\mathrm{CH}_2)_4-\\overset{\\mathrm{O}}{\\underset{\\parallel}{\\mathrm{C}}}-\\mathrm{CH}_3 \\xrightarrow[\\Delta]{\\mathrm{OEt}^-} \\underset{\\text{(major Product)}}{\\text{'A'}}$$\n\nIdentify the major product 'A':",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-12APR-S1/crops/q45.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-12APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 48,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "In the following reaction:\n\nIdentify the major product 'A':",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-12APR-S1/crops/q48.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-12APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 49,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "The major product 'P' formed in the following sequence of reaction is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-12APR-S1/crops/q49.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-30JAN-S1_physics.json",
+    "paper": "JEE-MAIN-23-30JAN-S1",
+    "qnum": 13,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "question": "The output waveform of the given logical circuit for the following inputs A and B as shown below, is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-30JAN-S1/crops/q13.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 35,
+    "subject": "Chemistry",
+    "chapter": "Haloalkanes and Haloarenes",
+    "question": "Identify the incorrect option from the following:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S1/crops/q35.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 37,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "In the following reaction, '$\\text{A}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S1/crops/q37.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 40,
+    "subject": "Chemistry",
+    "chapter": "Biomolecules",
+    "question": "The correct representation in six membered pyranose form for the following sugar [$\\text{X}$] is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S1/crops/q40.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 32,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "Find out the major product from the following reaction.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S2/crops/q32.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 47,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "'A' in the given reaction is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S2/crops/q47.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 61,
+    "subject": "Chemistry",
+    "chapter": "Biomolecules",
+    "question": "$\\text{L}$-isomer of tetrose $\\text{X}$ $(\\text{C}_4\\text{H}_8\\text{O}_4)$ gives positive Schiff's test and has two chiral carbons. On acetylation, '$\\text{X}$' yields triacetate. '$\\text{X}$' also undergoes following reactions:\n\n$$\\text{'A'} \\xleftarrow{\\text{HNO}_3} \\text{'X'} \\xrightarrow{\\text{NaBH}_4} \\underset{\\text{Chiral compound}}{\\text{'B'}}$$\n\n'$\\text{X}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S1/crops/q61.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 66,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "'$\\text{A}$' and '$\\text{B}$' in the below reactions are :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S1/crops/q66.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 80,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "$$\\text{o-Phenylenediamine} \\xrightarrow{\\text{HNO}_2} \\underset{\\text{Major Product}}{\\text{'X'}}$$\n\n'$\\text{X}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S1/crops/q80.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 31,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "'A' and 'B' formed in the following set of reactions are:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S1/crops/q31.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 34,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "'R' formed in the following sequence of reactions is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S1/crops/q34.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 40,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "In the following given reaction, '$\\text{A}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S1/crops/q40.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 44,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Compound (X) undergoes following sequence of reactions to give the Lactone (Y).\n\nCompound (X) is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S1/crops/q44.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S2_physics.json",
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 16,
+    "subject": "Physics",
+    "chapter": "Oscillations",
+    "question": "Choose the correct length ($L$) versus square of time period ($T^2$) graph for a simple pendulum executing simple harmonic motion.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S2/crops/q16.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 66,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "The strongest acid from the following is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S2/crops/q66.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 71,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Find out the major product from the following reaction",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S2/crops/q71.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 78,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "In the following reaction, '$\\text{B}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S2/crops/q78.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-10APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-10APR-S1",
+    "qnum": 66,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "Isomeric amines with molecular formula $\\text{C}_8\\text{H}_{11}\\text{N}$ give the following tests:\n\nIsomer (P) $\\Rightarrow$ Can be prepared by Gabriel phthalimide synthesis\n\nIsomer (Q) $\\Rightarrow$ Reacts with Hinsberg's reagent to give solid insoluble in $\\text{NaOH}$\n\nIsomer (R) $\\Rightarrow$ Reacts with $\\text{HONO}$ followed by $\\beta$-naphthol in $\\text{NaOH}$ to give red dye.\n\nIsomers (P), (Q) and (R) respectively are",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-10APR-S1/crops/q66.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-10APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-10APR-S1",
+    "qnum": 78,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "The major product 'P' formed in the given reaction is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-10APR-S1/crops/q78.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 74,
+    "subject": "Mathematics",
+    "chapter": "Relations and Functions",
+    "question": "The number of functions $f : \\{1, 2, 3, 4\\} \\to \\{a \\in \\mathbb{Z} : |a| \\le 8\\}$ satisfying $f(n) + \\frac{1}{n}f(n + 1) = 1, \\forall n \\in \\{1, 2, 3\\}$ is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S2/crops/q74.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 31,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "In the cumene to phenol preparation in presence of air, the intermediate is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S1/crops/q31.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 32,
+    "subject": "Chemistry",
+    "chapter": "Haloalkanes and Haloarenes",
+    "question": "The compound which will have the lowest rate towards nucleophilic aromatic substitution on treatment with $\\text{OH}^-$ is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S1/crops/q32.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 34,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "Which of the following conformations will be the most stable ?",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S1/crops/q34.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-25JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 45,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "Identify the products formed (A and E) in the given reaction sequence.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-25JAN-S1/crops/q45.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 32,
+    "subject": "Chemistry",
+    "chapter": "Biomolecules",
+    "question": "All structures given below are of vitamin C. Most stable of them is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S2/crops/q32.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 38,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "In the following reaction, '$\\text{X}$' is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S2/crops/q38.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 40,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics",
+    "question": "The graph which represents the following reaction is :\n\n$$(\\text{C}_6\\text{H}_5)_3\\text{C}-\\text{Cl} \\xrightarrow[\\text{Pyridine}]{\\text{OH}^-} (\\text{C}_6\\text{H}_5)_3\\text{C}-\\text{OH}$$",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S2/crops/q40.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-01FEB-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 47,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "The structures of major products $\\text{A}$, $\\text{B}$ and $\\text{C}$ in the following reaction sequence are :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-01FEB-S2/crops/q47.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 67,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "The product $(\\text{P})$ formed from the following multistep reaction is :-\n\n$\\text{p-nitrotoluene} \\xrightarrow[\\substack{\\text{(iii) } \\text{NaNO}_2,\\; \\text{HCl},\\; 0^\\circ\\text{C} \\\\ \\text{(iv) } \\text{H}_3\\text{PO}_2}]{\\substack{\\text{(i) } \\text{Br}_2 \\\\ \\text{(ii) } \\text{H}_2/\\text{Pd}}} (\\text{P})\\;\\text{Product}$",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S2/crops/q67.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 68,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics",
+    "question": "The correct reaction profile diagram for a positive catalyst reaction.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S2/crops/q68.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 72,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Major product 'P' formed in the following reaction is :-",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S2/crops/q72.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 76,
+    "subject": "Chemistry",
+    "chapter": "Structure of Atom",
+    "question": "Henry Moseley studied characteristic X-ray spectra of elements. The graph which represents his observation correctly is : (Given $\\nu = \\text{frequency of X-ray emitted};\\; Z = \\text{atomic number}$)",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S2/crops/q76.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 41,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "question": "Choose the correct representation of conductometric titration of benzoic acid vs sodium hydroxide.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S2/crops/q41.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 43,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "Find out the major products from the following reaction",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S2/crops/q43.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-24JAN-S2_physics.json",
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 17,
+    "subject": "Physics",
+    "chapter": "Thermodynamics",
+    "question": "In an Isothermal change, the change in pressure and volume of a gas can be represented for three different temperature; $T_3 > T_2 > T_1$ as:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-24JAN-S2/crops/q17.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-10APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-10APR-S2",
+    "qnum": 66,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "In the reaction give below:\n\nThe product 'X' is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-10APR-S2/crops/q66.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-10APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-10APR-S2",
+    "qnum": 75,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "The major product \u2018P\u2019 formed in the given reaction is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-10APR-S2/crops/q75.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 70,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "Compound $\\text{P}$ is neutral. $\\text{Q}$ gives effervescence with $\\text{NaHCO}_3$ while $\\text{R}$ reacts with Hinsbergs reagent to give solid soluble in $\\text{NaOH}$. Compound $\\text{P}$ is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S1/crops/q70.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 72,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "The major products $\\text{A}$ and $\\text{B}$ from the following reactions are:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S1/crops/q72.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 78,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "The major product formed in the following reaction is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S1/crops/q78.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 46,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "question": "A student is provided with a variable voltage source $\\text{V}$, a test resistor $\\text{R}_\\text{r} = 10\\,\\Omega$, two identical galvanometers $\\text{G}_1$ and $\\text{G}_2$ and two additional resistors, $\\text{R}_1 = 10\\text{ M}\\Omega$ and $\\text{R}_2 = 0.001\\,\\Omega$. For conducting an experiment to verify ohms law, the most suitable circuit is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S2/crops/q46.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 40,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "question": "For the logic circuit shown, the output waveform at $Y$ is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S1/crops/q40.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 45,
+    "subject": "Physics",
+    "chapter": "Electric Charges and Fields",
+    "question": "Graphical variation of electric field due to a uniformly charged insulating solid sphere of radius $R$, with distance $r$ from the centre $O$ is represented by:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S1/crops/q45.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-08APR-S1_mathematics.json",
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 68,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "The major product formed in the following reaction is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-08APR-S1/crops/q68.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-15APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 34,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "'A' formed in the above reaction is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-15APR-S1/crops/q34.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-15APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 42,
+    "subject": "Chemistry",
+    "chapter": "Haloalkanes and Haloarenes",
+    "question": "The major product formed in the Friedel-Crafts acylation of chlorobenzene is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-15APR-S1/crops/q42.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-15APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 47,
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "question": "Consider the following sequence of reactions:\n\n'B' is:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-15APR-S1/crops/q47.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-31JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-31JAN-S1",
+    "qnum": 45,
+    "subject": "Chemistry",
+    "chapter": "Surface Chemistry",
+    "question": "Adding surfactants in non polar solvent, the micelles structure will look like",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-31JAN-S1/crops/q45.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-29JAN-S1_physics.json",
+    "paper": "JEE-MAIN-23-29JAN-S1",
+    "qnum": 8,
+    "subject": "Physics",
+    "chapter": "Moving Charges and Magnetism",
+    "question": "A single current carrying loop of wire carrying current $I$ flowing in anticlockwise direction seen from $+z$ direction and lying in $xy$ plane is shown in figure. The plot of $\\hat{j}$ component of magnetic field ($B_y$) at a distance $a$ (less than radius of the coil) and on $yz$ plane vs $z$ coordinate looks like",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-29JAN-S1/crops/q08.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-29JAN-S1_physics.json",
+    "paper": "JEE-MAIN-23-29JAN-S1",
+    "qnum": 19,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "question": "Which one of the following statement is not correct in the case of light emitting diodes?\n\nA. It is a heavily doped p-n junction.\n\nB. It emits light only when it is forward biased.\n\nC. It emits light only when it is reverse biased.\n\nD. The energy of the light emitted is equal to or slightly less than the energy gap of the semiconductor used.\n\nChoose the correct answer from the options given below:",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-29JAN-S1/crops/q19.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-30JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-30JAN-S2",
+    "qnum": 46,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "question": "The most stable carbocation for the following is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-30JAN-S2/crops/q46.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-29JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-29JAN-S2",
+    "qnum": 40,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "question": "Find out the major product for the following reaction.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-29JAN-S2/crops/q40.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-29JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-29JAN-S2",
+    "qnum": 45,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Find out the major products from the following reaction sequence.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-29JAN-S2/crops/q45.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 43,
+    "subject": "Physics",
+    "chapter": "Electrostatic Potential and Capacitance",
+    "question": "For a uniformly charged thin spherical shell, the electric potential $(\\text{V})$ radially away from the center $(\\text{O})$ of shell can be graphically represented as",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S1/crops/q43.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-06APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 44,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "question": "The resistivity ($\\rho$) of semiconductor varies with temperature. Which of the following curve represents the correct behaviour",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-06APR-S1/crops/q44.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-31JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-31JAN-S2",
+    "qnum": 46,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Cyclohexylamine when treated with nitrous acid yields (P). On treating (P) with PCC results in (Q). When (Q) is heated with dil. NaOH we get (R) The final product (R) is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-31JAN-S2/crops/q46.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-31JAN-S2_chemistry.json",
+    "paper": "JEE-MAIN-23-31JAN-S2",
+    "qnum": 50,
+    "subject": "Chemistry",
+    "chapter": "Biomolecules",
+    "question": "Compound A, $\\text{C}_5\\text{H}_{10}\\text{O}_5$, gives a tetraacetate with $\\text{Ac}_2\\text{O}$ and oxidation of A with $\\text{Br}_2 - \\text{H}_2\\text{O}$ gives an acid, $\\text{C}_5\\text{H}_{10}\\text{O}_6$. Reduction of A with HI gives isopentane. The possible structure of A is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-31JAN-S2/crops/q50.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-31JAN-S1_physics.json",
+    "paper": "JEE-MAIN-23-31JAN-S1",
+    "qnum": 17,
+    "subject": "Physics",
+    "chapter": "Electrostatic Potential and Capacitance",
+    "question": "Which of the following correctly represents the variation of electric potential ($V$) of a charged spherical conductor of radius ($R$) with radial distance ($r$) from the center?",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-31JAN-S1/crops/q17.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-30JAN-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-30JAN-S1",
+    "qnum": 36,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "question": "Which of the following compounds would give the following set of qualitative analysis?\n(i) Fehling's Test : Positive\n(ii) Na fusion extract upon treatment with sodium nitroprusside gives a blood red colour but not prussian blue.",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-january-clean/JEE-MAIN-23-30JAN-S1/crops/q36.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-11APR-S2",
+    "qnum": 70,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "question": "Compound '$\\text{B}$' is",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S2/crops/q70.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S2_mathematics.json",
+    "paper": "JEE-MAIN-23-11APR-S2",
+    "qnum": 73,
+    "subject": "Chemistry",
+    "chapter": "Haloalkanes and Haloarenes",
+    "question": "Compound from the following that will not produce precipitate on reaction with $\\text{AgNO}_3$ is :",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S2/crops/q73.png"
+  },
+  {
+    "file": "scratch/jee2023/transcribed/JEE-MAIN-23-11APR-S1_chemistry.json",
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 45,
+    "subject": "Physics",
+    "chapter": "Oscillations",
+    "question": "The variation of kinetic energy (KE) of a particle executing simple harmonic motion with the displacement (x) starting from mean position to extreme position (A) is given by",
+    "image_path": "/Users/ateebfatmi/Desktop/prepzii/tmp/jee-main-2023-april-clean/JEE-MAIN-23-11APR-S1/crops/q45.png"
+  }
+]

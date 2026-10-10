@@ -1,0 +1,7 @@
+Let P be a plane passing through the points
+d, 0, 1), (1, -2, 1) and (0, 1, —2). Let a vector
+a=ai+Bj+yk be such that a is parallel to the
+
+plane P, perpendicular to (i+2)+3k) and
+
+a-(i+j+2k)=2 , then (a — B + yy equals

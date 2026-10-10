@@ -1,0 +1,10 @@
+The expected graphical representation of the
+variation of angle of deviation 'd' with angle of
+incidence ‘i' in a prism is :
+
+iz
+
+X
+(3) 1) (4) 1)
+
+iz i>

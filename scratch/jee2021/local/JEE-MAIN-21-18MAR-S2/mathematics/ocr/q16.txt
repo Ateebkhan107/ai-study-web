@@ -1,0 +1,12 @@
+16.
+
+Define a relation R over a class of n x n real
+matrices A and B as "ARB iff there exists a
+non-singular matrix P such that PAP-! = B".
+Then which of the following is true ?
+
+(1) R is symmetric, transitive but not reflexive,
+(2) R is reflexive, symmetric but not transitive
+
+(3) R is an equivalence relation
+(4) R is reflexive, transitive but not symmetric

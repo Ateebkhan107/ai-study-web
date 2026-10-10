@@ -1,0 +1,7 @@
+A body of mass 2kg moves under a force of
+(2i+ 3]+5K)N. It starts from rest and was at
+
+the origin initially. After 4s, its new coordinates
+are (8, b, 20). The value of bis_ .
+
+(Round off to the Nearest Integer)

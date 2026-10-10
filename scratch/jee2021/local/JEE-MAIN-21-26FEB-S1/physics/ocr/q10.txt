@@ -1,0 +1,25 @@
+10.
+
+A planet revolving in elliptical orbit has :
+
+(A) a constant velocity of revolution.
+
+(B) has the least velocity when it is nearest to
+the sun.
+
+(C) its areal velocity is directly proportional to
+its velocity.
+
+(D) areal velocity is inversely proportional to
+its velocity.
+
+(E) to follow a trajectory such that the areal
+velocity is constant.
+
+Choose the correct answer from the options
+
+given below :
+
+(1) A only (2) D only
+
+(3) C only (4) E only

@@ -1,0 +1,2 @@
+7. Let n be an odd natural number such that the
+variance of 1, 2, 3, 4, .... n is 14. Then n is equal to

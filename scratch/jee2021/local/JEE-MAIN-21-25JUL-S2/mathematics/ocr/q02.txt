@@ -1,0 +1,7 @@
+The first of the two samples in a group has 100
+items with mean 15 and standard deviation 3. If the
+whole group has 250 items with mean 15.6 and
+standard deviation V13.44 , then the standard
+deviation of the second sample is :
+
+(1)8 (2) 6 (3) 4 (4)5

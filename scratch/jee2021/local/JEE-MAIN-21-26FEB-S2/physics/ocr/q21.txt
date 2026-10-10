@@ -1,0 +1,5 @@
+The volume V of a given mass of monoatomic
+gas changes with temperature T according to
+the relation V = KT23. The workdone when
+temperature changes by 90 K will be xR. The
+value of x is [R = universal gas constant]

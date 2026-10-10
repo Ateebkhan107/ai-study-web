@@ -1,0 +1,9 @@
+17.
+
+An RC circuit as shown in the figure is driven
+by a AC source generating a square wave. The
+output wave pattern monitored by CRO would
+look close to :
+
+ILO ct &
+

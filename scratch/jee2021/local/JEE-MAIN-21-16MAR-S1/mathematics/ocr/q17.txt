@@ -1,0 +1,12 @@
+17.
+
+If y = y(x) is the solution of the differential
+equation, dy | 2y tan x = sin x, (5) =0, then
+dx 3
+the maximum value of the function y(x) over R
+
+is equal to :
+1
+
+1 5 1
+(1) 8 oars Q-_Z Os,

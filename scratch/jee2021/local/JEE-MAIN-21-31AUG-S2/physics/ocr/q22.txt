@@ -1,0 +1,7 @@
+A parallel plate capacitor of capacitance 200 pF is
+connected to a battery of 200 V. A dielectric slab
+of dielectric constant 2 is now inserted into the
+space between plates of capacitor while the battery
+remain connected. The change in the electrostatic
+
+energy in the capacitor will be J.

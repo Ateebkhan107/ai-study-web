@@ -1,0 +1,8 @@
+If 'C' and 'V' represent capacity and voltage
+respectively then what are the dimensions of
+
+i, wh C4?
+» where 7 = ?
+
+(1) [M2L3PT9] (2) [M3L4BT7]
+(3) [ML312T-7] (4) [M2L4BT7]

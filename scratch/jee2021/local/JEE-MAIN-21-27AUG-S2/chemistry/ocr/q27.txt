@@ -1,0 +1,7 @@
+The number of photons emitted by a
+monochromatic (single frequency) infrared range
+finder of power 1 mW and wavelength of 1000 nm,
+in 0.1 second is x x 10°. The value of xis
+(Nearest integer)
+
+(h = 6.63 x 10“ Js, c=3.00 x 10° ms’)

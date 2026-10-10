@@ -1,0 +1,28 @@
+12.
+
+A box open from top is made from a rectangular
+sheet of dimension a x b by cutting squares each of
+side x from each of the four corners and folding up
+the flaps. If the volume of the box is maximum,
+then x is equal to :
+
+a+b—vVa* +b’ —ab
+
+1
+
+(1) D
+a+b—va? +b? +ab
+
+2
+
+(2) 6
+a+b—yva> +b? —ab
+
+3
+
+(3) 6
+a+b+Va’ +b? —ab
+
+(4)
+
+a

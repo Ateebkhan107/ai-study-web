@@ -1,0 +1,7 @@
+An inductor coil stores 64 J of magnetic field
+energy and dissipates energy at the rate of 640 W
+when a current of 8A is passed through it. If this
+coil is joined across an ideal battery, find the time
+constant of the circuit in seconds :
+
+(1) 0.4 (2) 0.8 (3)0.125 (4)0.2

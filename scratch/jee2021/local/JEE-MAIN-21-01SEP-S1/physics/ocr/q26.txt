@@ -1,0 +1,8 @@
+A uniform heating wire of resistance 36 Qis
+connected across a potential difference of 240 V.
+The wire is then cut into half and potential
+difference of 240 V is applied across each half
+separately. The ratio of power dissipation in first
+case to the total power dissipation in the second
+case would be | : x, where x is
+

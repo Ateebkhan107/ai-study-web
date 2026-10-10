@@ -1,0 +1,20 @@
+Moment of inertia (M.I.) of four bodies, having
+same mass and radius, are reported as ;
+
+I, = MI. of thin circular ring about its diameter.
+I, = MI. of circular disc about an axis
+perpendicular to the disc and going through the
+centre,
+
+I; = MI. of solid cylinder about its axis and
+I, = MLL. of solid sphere about its diameter.
+Then :
+
+Qi+h<L+h
+
+5
+(2)i+L=h+ ala
+
+B1=L=L>
+4)L=L=h<\
+

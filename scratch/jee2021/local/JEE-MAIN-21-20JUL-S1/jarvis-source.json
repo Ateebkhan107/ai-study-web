@@ -1,0 +1,1006 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "The amount of heat needed to raise the temperature of 4 moles of a rigid diatomic gas from 0°C to 50°C when no work is done is ________. (R is the universal gas constant)",
+    "options": [
+      "175 R",
+      "750 R",
+      "250 R",
+      "500 R"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "A deuteron and an alpha particle having equal kinetic energy enter perpendicularly into a magnetic field. Let $r_d$ and $r_d$ be their respective radii of circular path. The value of $\\frac{r_d}{r_\\alpha}$ is equal to :",
+    "options": [
+      "$\\sqrt{2}$",
+      "2",
+      "$\\frac{1}{\\sqrt{2}}$",
+      "1"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "If $\\vec{A}$ and $\\vec{B}$ are two vectors satisfying the relation $\\vec{A}\\cdot\\vec{B} = \\left|\\vec{A}\\times\\vec{B}\\right|$. Then the value of $\\left|\\vec{A}-\\vec{B}\\right|$ will be :",
+    "options": [
+      "$\\sqrt{A^2+B^2-\\sqrt{2}AB}$",
+      "$\\sqrt{A^2+B^2}$",
+      "$\\sqrt{A^2+B^2+2AB}$",
+      "$\\sqrt{A^2+B^2+\\sqrt{2}AB}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "Consider a mixture of gas molecule of types A, B and C having masses $m_A < m_B < m_C$. The ratio of their root mean square speeds at normal temperature and pressure is :",
+    "options": [
+      "$\\frac{1}{\\upsilon_A} > \\frac{1}{\\upsilon_B} > \\frac{1}{\\upsilon_C}$",
+      "$\\upsilon_A = \\upsilon_B = \\upsilon_C = 0$",
+      "$\\frac{1}{\\upsilon_A} < \\frac{1}{\\upsilon_B} < \\frac{1}{\\upsilon_C}$",
+      "$\\upsilon_A = \\upsilon_B \\neq \\upsilon_C$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "A nucleus of mass M emits γ − ray photon of frequency 'ν'. The loss of internal energy by the nucleus is : [Take 'c' as the speed of electromagnetic wave ]",
+    "options": [
+      "$h\\nu\\left[1+\\frac{h\\nu}{2Mc^2}\\right]$",
+      "0",
+      "$h\\nu\\left[1-\\frac{h\\nu}{2Mc^2}\\right]$",
+      "$h\\nu$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "A radioactive material decays by simultaneous emissions of two particles with half lives of 1400 years and 700 years respectively. What will be the time after which one third of the material remains? (Take ln 3 = 1.1)",
+    "options": [
+      "340 years",
+      "1110 years",
+      "700 years",
+      "740 years"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "The value of current in the 6Ω resistance is :",
+    "options": [
+      "6 A",
+      "10 A",
+      "4 A",
+      "8 A"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/524db1a8-99fe-4a45-b0fd-806e694aa1d0_fig.png"
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "The radiation corresponding to $3 \\rightarrow 2$ transition of a hydrogen atom falls on a gold surface to generate photoelectrons. These electrons are passed through a magnetic field of $5 \\times 10^{-4}$ T. Assume that the radius of the largest circular circular path followed by these electrons is 7mm, the work function of the metal is : (Mass of electron = $9.1 \\times 10^{-31}$ kg )",
+    "options": [
+      "0.82 eV",
+      "1.88 eV",
+      "1.36 eV",
+      "0.16 eV"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "For the circuit shown below, calculate the value of $I_2$ :",
+    "options": [
+      "0.15 A",
+      "0.1 A",
+      "25 mA",
+      "0.05 A"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/bec9b196-84b5-4b8d-888d-52785e585bc9_fig.png"
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "The arm PQ of a rectangular conductor is moving from x = 0 to x = 2b outwards and then inwards from x = 2b to x = 0 as shown in the figure. A uniform magnetic field perpendicular to the plane is acting from x = 0 to x = b. Identify the graph the variation of different quantities with distance.",
+    "options": [
+      "A − Flux, B − EMF, C − Power dissipated",
+      "A − EMF, B − Power dissipated, C − Flux",
+      "A − Power dissipated, B − Flux, C − EMF",
+      "A − Flux, B − Power dissipated, C − EMF"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-20-morning/b5ee2b60-5709-427d-a0d6-44e4e713422e_fig.png"
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "Region I and II are separated by a spherical surface of radius 25 cm. An object is kept in region I at a distance of 40 cm from the surface. The distance of the image from the surface is :",
+    "options": [
+      "9.52 cm",
+      "18.23 cm",
+      "37.58 cm",
+      "55.44 cm"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/579d8b4e-ae04-4647-a8c3-ad50e8a2a16e_fig.png"
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "The normal reaction 'N' for a vehicle of 800 kg mass, negotiating a turn on a 30° banked road at maximum possible speed without skidding is ________ $\\times 10^{3}$ kg m / s$^2$. [ Given cos30° = 0.87, $\\mu_5$ = 0.2 ]",
+    "options": [
+      "6.96",
+      "10.2",
+      "12.4",
+      "7.2"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "The entropy of any system is given by $S = \\alpha^2\\beta\\ \\ell n\\left[\\frac{\\mu kR}{J\\beta^2}+3\\right]$ Where $\\alpha$ and $\\beta$ are the constants. μ, J, k and R no. of moles, mechanical equivalent of heat, Boltzmann constant and gas constant respectively . [ Take $S = \\frac{dQ}{T}$ ] Choose the incorrect option from the following :",
+    "options": [
+      "S, β, k and μR have the same dimensions.",
+      "α and k have the same dimensions.",
+      "S and α have different dimensions.",
+      "α and J have the same dimensions."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "A current of 5 A is passing through a non-linear magnesium wire of cross − section $0.04\\,m^2$. At every point the direction of current density is at an angle of 60° with unit vector of area of cross -section. The magnitude of electric field at every point of the conductor is : (Resistivity of magnesium ρ = $44 \\times 10^{-8}$ Ωm )",
+    "options": [
+      "$11 \\times 10^{-7}$ V / m",
+      "$11 \\times 10^{-2}$ V / m",
+      "$11 \\times 10^{-5}$ V / m",
+      "$11 \\times 10^{-3}$ V / m"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "The value of tension in a long thin metal wire has been changed from $T_1$ to $T_2$. The lengths of the metal wire at two different values of tension $T_1$ and $T_2$ are $\\ell_1$ and $\\ell_2$ respectively. The actual length of the metal wire is :",
+    "options": [
+      "$\\frac{T_1\\ell_2 - T_2\\ell_1}{T_1 - T_2}$",
+      "$\\sqrt{T_1 T_2 \\ell_1 \\ell_2}$",
+      "$\\frac{\\ell_1 + \\ell_2}{2}$",
+      "$\\frac{T_1\\ell_1 - T_2\\ell_2}{T_1 - T_2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "AC voltage $V(t) = 20\\sin\\omega t$ of frequency 50Hz is applied to a parallel plate capacitor. The separation between the plates is 2mm and the area is $1\\,m^2$. The amplitude of the oscillating displacement current for the applied Ac voltage is ________. [ Take $\\varepsilon_0 = 8.85 \\times 10^{-12}$ F / m ]",
+    "options": [
+      "83.37 μA",
+      "55.58 μA",
+      "21.14 μA",
+      "27.79 μA"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "A butterfly is flying with a velocity $4\\sqrt{2}$ m/s in North − East direction. Wind is slowly blowing at 1m/s from North to South. The resultant displacement of the butterfly in 3 seconds is :",
+    "options": [
+      "15m",
+      "20m",
+      "3 m",
+      "$12\\sqrt{2}$ m"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "A certain charge Q is divided into parts q and (Q − q). How should the charges Q and q be divided so that q and (Q − q) placed at a certain distance apart experience maximum electrostatic repulsion ?",
+    "options": [
+      "$Q = \\frac{q}{2}$",
+      "$Q = 4q$",
+      "$Q = 2q$",
+      "$Q = 3q$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "A steel block of 10 kg rests on a horizontal floor as shown. When three iron cylinders are placed on it as shown, the block and cylinders go down with an acceleration 0.2 m/s$^2$. The normal reaction R' by the floor if mass of the iron cylinders are equal and of 20kg each, is ________ N. [ Take g = 10m / s$^2$ and $\\mu_s$ = 0.2 ]",
+    "options": [
+      "714",
+      "684",
+      "716",
+      "686"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/8553bd13-8de6-4fd5-939a-84ba0edbdbd1_fig.png"
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "A person whose mass is 100 kg travels from Earth to Mars in a spaceship. Neglect all other object in sky and take acceleration due to gravity on the surface of the Earth and mars as 10m / s$^2$ and 4m / s$^2$ respectively. Identify from the below figures, the curve that fits best for the weight of the passenger as a function of time.",
+    "options": [
+      "(c)",
+      "(a)",
+      "(b)",
+      "(d)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/6de359d1-4b3b-4027-9ad8-e668d6c2535d_fig.png"
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "The amplitude of wave disturbance propagating in the positive x-direction is given by $y = \\frac{1}{1+(x)^2}$ at time $t = 0$ and $y = \\frac{1}{1+(x-2)^2}$ at $t = 1$ s , where x and y are in metres. The shape of wave does not change during the propagation. The velocity of the wave will be ________ m /s.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "In the reported figure, heat energy absorbed by a system in going through a cyclic process is ________ $\\pi$ J.",
+    "options": [],
+    "correct": "100",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/21e0e9c7-24ca-4b19-9818-38c805bb9f01_fig.png"
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "In a spring gun having spring constant 100 N / m a small ball 'B' of mass 100 g is put in its barrel (as shown in figure) by compressing the spring through 0.05 m. There should be a box placed at a distance 'd' on the ground so that the ball falls in it. If the ball leaves the gun horizontally at a height of 2 m above the ground . The value of d is ____________ m.",
+    "options": [],
+    "correct": "1",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/f3a9cd28-a684-46f9-a984-85251e2a310a_fig.png"
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "The frequency of a car horn encountered a change from 400 Hz to 500 Hz, when the car approaches a vertical wall. If the speed of sound is 330 m /s. Then the speed of car is __________ km /h.",
+    "options": [],
+    "correct": "132",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A body having specific charge 8 μC / g is resting on a frictionless plane at a distance 10 cm from the wall (as shown in the figure). It starts moving towards the wall when a uniform electric field of 100 V / m is applied horizontally towards the wall. If the collision of the body with the wall is perfectly elastic, then the time period of the motion will be ____________ s.",
+    "options": [],
+    "correct": "1",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/e12a9637-d5d0-43a0-9e37-af241e10db1f_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "A rod of mass M and length L is lying on a horizontal frictionless surface. A particle of mass 'm' travelling along the surface hits at one end of the rod with a velocity 'u' in a direction perpendicular to the rod. The collision is completely elastic. After collision, particle comes to rest. The ratio of masses $\\left( \\frac{m}{M} \\right)$ is $\\frac{1}{x}$. The value of 'x' will be ________.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "An object viewed from a near point distance of 25 cm, using a microscopic lens with magnification '6', gives an unresolved image, A resolved image is observed at infinite distance with a total magnification double the earlier using an eyepiece along with the given lens and a tube of length 0.6 m, if the focal length of the eyepiece is equal to _________ cm.",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "In an LCR series circuit, an inductor 30 mH and a resistor 1 Ω are connected to an Ac source of angular frequency 300 rad /s. The value of capacitance for which, the current leads the voltage by 45° is $\\frac{1}{x} \\times 10^{-3}$ F. Then the value of x is ____________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "A carrier wave $V_C(t) = 160 \\sin(2\\pi \\times 10^6 t)$ volts is made to very between $V_{max} = 200$ V and $V_{min} = 120$ V by a message signal $V_m(t) = A_m \\sin(2\\pi \\times 10^3 t)$ volts. The peak voltage $A_m$ of the modulating single is _________ V.",
+    "options": [],
+    "correct": "40",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Chemistry",
+    "question": "Chemical nature of the nitrogen oxide compound obtained from a reaction of concentrated nitric acid and $P_4O_{10}$ (in 4:1 ratio) is:",
+    "options": [
+      "basic",
+      "neutral",
+      "amphoteric",
+      "acidic"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Compound A is converted to B on reaction with $CHCl_3$ and KOH. The compound B is toxic and can be decomposed by C. A, B and C respectively are:",
+    "options": [
+      "Primary amine, nitrile compound, conc. HCl",
+      "Primary amine, isonitrile compound , conc. HCl",
+      "Secondary amine, isonitrile compound, conc NaOH",
+      "Secondary amine, nitrile compound, conc. NaOH"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : One is labelled as Assertion A and the other is labelled as Reason R. Assertion A: The dihedral angles in $H_2O_2$ in gaseous phase is 90.2° and in solid phase is 111.5°. Reason R: The change in dihedral angle in solid and gaseous phase is due to the difference in the intermolecular forces. Choose the most appropriate answer from the options given below for A and R.",
+    "options": [
+      "A is correct but R is not correct.",
+      "Both A and R are correct but R is not the correct explanation of A.",
+      "Both A and R are correct and R is the correct explanation of A",
+      "A is not correct but R is correct."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Among the given species the Resonance stabilized carbocations are:",
+    "options": [
+      "(A), (B) and (C) only",
+      "(C) and (D) only",
+      "(A), (B) and (D) only",
+      "(A) and (B) only"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-20-morning/3039ed26-6b10-4d41-ba8a-f79e20822cb8_fig.png"
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "A s-block element (M) reacts with oxygen to form an oxide of the formula $MO_2$. The oxide is pale yellow in colour and paramagnetic. The element (M) is:",
+    "options": [
+      "Na",
+      "K",
+      "Mg",
+      "Ca"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Green chemistry in day- to day life is in the use of:",
+    "options": [
+      "Chlorine for bleaching of paper",
+      "Large amount of water alone for washing clothes",
+      "Liquified $CO_{2}$ for dry cleaning of clothes",
+      "Tetrachloroethene for laundry"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Identify the incorrect statement from the following:",
+    "options": [
+      "β-Glycosidic linkage makes cellulose polymer",
+      "Amylose is a branched chain polymer of glucose",
+      "Starch is a polymer of α- D glucose",
+      "Glycogen is called as animal starch"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The metal that can be purified economically by fractional distillation method is:",
+    "options": [
+      "Ni",
+      "Cu",
+      "Fe",
+      "Zn"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "The set in which compounds have different nature is:",
+    "options": [
+      "$B(OH)_{3}$ and Al $(OH)_{3}$",
+      "$B(OH)_{3}$ and $H_{3}PO_{3}$",
+      "NaOH and $Ca(OH)_{2}$",
+      "$Be(OH)_{2}$ and $Al(OH)_{3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "The conditions given below are in the context of observing Tyndall effect in colloidal solutions: (a) The diameter of the colloidal particles is comparable to the wavelength of light used. (b) The diameter of the colloidal particles in much smaller than the wavelength of light used. (c) The diameter of the colloidal particles is much larger than the wavelength of light used. (d) The refractive indices of the dispersed phase and the dispersion medium are comparable. (e) The dispersed phase has a very different refractive index from the dispersion medium. Choose the most appropriate conditions from the options given below.",
+    "options": [
+      "(a) and (d) only",
+      "(a) and (e) only",
+      "(c) and (d) only",
+      "(b) and (e) only"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "According to the valence bond theory the hybridization of central metal atom is $dsp^{2}$ for which one of the following compounds?",
+    "options": [
+      "$K_{2}[Ni(CN)_{4}]$",
+      "$NiCl_{2}.6H_{2}O$",
+      "$Na_{2}[NiCl_{4}]$",
+      "$[Ni(CO)_{4}]$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "In the given reaction 3-Bromo-2,2-dimethyl butane $\\xrightarrow{C_{2}H_{5}OH}$ 'A' (Major Product) Product A is:",
+    "options": [
+      "2-Ethoxy-2,3-dimethyl butane",
+      "2-Hydroxy-3,3-dimethyl butane.",
+      "2-Ethoxy-3,3-dimethyl butane",
+      "1-Ethoxy-3,3-dimethyl butane."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Orlon fibres are made up of:",
+    "options": [
+      "Polyamide",
+      "Polyacrylonitrile",
+      "Cellulose",
+      "Polyesters"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "The species given below that does NOT show disproportionation reaction is:",
+    "options": [
+      "$BrO^{-}$",
+      "$BrO_{3}^{-}$",
+      "$BrO_{2}^{-}$",
+      "$BrO_{4}^{-}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "For above chemical reactions, identify the correct statement from the following",
+    "options": [
+      "Both compound 'A' and compound 'B' are dicarboxylic acids.",
+      "Compound 'A' is dicarboxylic acid and compound 'B' is diol.",
+      "Compound 'A' is diol and compound 'B' is dicarboxylic acid.",
+      "Both compound 'A' and compound 'B' are diols."
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-20-morning/d09574a8-1eb4-4ba2-b864-8fcafe953481_fig.png"
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "An inorganic compound ‘X’ on treatment with concentrated $H_{2}SO_{4}$ produces brown fumes and gives dark brown ring with $FeSO_{4}$ in presence of concentrated $H_{2}SO_{4}$. Also compound ‘X’ gives precipitate ‘Y’, when its solution in dilute HCl is treated with $H_{2}S$ gas. The precipitate ‘Y’ on treatment with concentrated $HNO_{3}$ followed by excess of $NH_{4}OH$ further gives deep blue coloured solution, Compound ‘X’ is:",
+    "options": [
+      "$Cu(NO_{3})_{2}$",
+      "$Pb(NO_{3})_{2}$",
+      "$Co(NO_{3})_{2}$",
+      "$Pb(NO_{2})_{2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Which among the above compound/s does / do not form silver mirror when treated with Tollen’s reagent?",
+    "options": [
+      "Only (IV)",
+      "(III) and (IV) only",
+      "Only (II)",
+      "(I), (III) and (IV) only"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/010cca28-858a-4034-bec5-8baa412d1e6e_fig.png"
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "Given below are two statements. One is labelled as Assertion A and the other is labelled as Reason R. Assertion A: Sharp glass edge becomes smooth on heating it upto its melting point. Reason R: The viscosity of glass decreases on melting. Choose the most appropriate answer from the options given below.",
+    "options": [
+      "A is false but R is true.",
+      "Both A and R are true but R is NOT the correct explanation of A.",
+      "A is true but R is false",
+      "Both A and R are true and R is the correct explanation of A."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "The correct structure of Rhumann’s Purple, the compound formed in the reaction of ninhydrin with proteins is:",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-20-morning/06aa77b3-1c19-4e65-8fca-53b141535f42_fig.png"
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "The correct order of intensity of colors of the compounds is:",
+    "options": [
+      "$[NiCl_{4}]^{2-} > [Ni(H_{2}O)_{6}]^{2+} > [Ni(CN)_{4}]^{2-}$",
+      "$[NiCl_{4}]^{2-} > [Ni(CN)_{4}]^{2-} > [Ni(H_{2}O)_{6}]^{2+}$",
+      "$[Ni(H_{2}O)_{6}]^{2+} > [NiCl_{4}]^{2-} > [Ni(CN)_{4}]^{2-}$",
+      "$[Ni(CN)_{4}]^{2-} > [NiCl_{4}]^{2-} > [Ni(H_{2}O)_{6}]^{2+}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The number of lone pairs of electrons on the central I atom in $I_3^-$ is______________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "An average person needs abut 10000 KJ energy per day.The amount of glucose (molar mass = 180.0 g mol$^{-1}$) needed to meet this energy requirement is____________ g, (Nearest integer) (Use : $\\Delta_c$H (glucose) = $-2700$kJ mol$^{-1}$)",
+    "options": [],
+    "correct": "667",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "To synthesise 1.0 mole of 2-methylpropan-2-ol from Ethylethanoate __________ equivalents of CH$_3$MgBr reagent will be required. (Integer value)",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "The spin only magnetic moment value for the complex [Co(CN)$_6$]$^{4-}$ is________ BM. [At. No. of Co= 27]",
+    "options": [],
+    "correct": "1.73 OR 2",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "At 20°C, the vapour pressure of benzene is 70 torr and that of methyl benzene is 20 torr. The mole fraction of benzene in the vapour phase at 20°C above an equimolar mixture of benzene and methyl benzene is ______________ $\\times 10^{-2}$. (Nearest integer)",
+    "options": [],
+    "correct": "78",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "2SO$_2$(g) + O$_2$(g) ⇌ 2SO$_3$(g) In an equilibrium mixture, the partial pressures are $P_{SO_3}$ = 43kPa ; $P_{O_2}$ = 530 Pa and $P_{SO_2}$ = 45kPa . The equilibrium constant $K_p$ = ______________ $\\times 10^{-2}$ (Nearest integer)",
+    "options": [],
+    "correct": "172",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "250 mL of 0.5 M NaOH was added to 500 mL of 1 M HCl. The number of unreacted HCl molecules in the solution after complete reaction is____________ $\\times 10^{21}$ (Nearest integer) $\\left(N_A = 6.022 \\times 10^{23}\\right)$",
+    "options": [],
+    "correct": "226",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "The number of nitrogen atoms in a semicarbazone molecule of acetone is___________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "The inactivation rate of a viral preparation in proportional to the amount of virus. In the first minute after preparation, 10% of the virus is inactivated. The rate constant for viral inactivation is ______________ $\\times 10^{-3}$min$^{-1}$. (Nearest integer) [ Use: $\\ell n10$ = 2.303; log$_{10}$ 3=0.477; property of logarithm: $\\log x^y = y \\log x$]",
+    "options": [],
+    "correct": "106",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "The Azimuthal quantum number for the valence electrons of Ga$^+$ ion is______________. (Atomic number of Ga= 31)",
+    "options": [],
+    "correct": "0",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "Let 'a' be a real number such that the function $f(x) = ax^2 + 6x - 15$, x ∈ R is increasing in $\\left(-\\infty, \\frac{3}{4}\\right)$ and decreasing in $\\left(\\frac{3}{4}, \\infty\\right)$. Then the function $g(x) = ax^2 - 6x + 15$, x ∈ R has a :",
+    "options": [
+      "local minimum at $x = \\frac{3}{4}$",
+      "local maximum at $x = \\frac{3}{4}$",
+      "local minimum at $x = -\\frac{3}{4}$",
+      "local maximum at $x = -\\frac{3}{4}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "Let $A = \\left[a_{ij}\\right]$ be a 3 x 3 matrix, where $a_{ij} = \\begin{cases} 1 , & \\text{if } i = j \\\\ -x , & \\text{if } |i - j| = 1 \\\\ 2x+1 , & \\text{otherwise} \\end{cases}$ Let a function $f : R \\rightarrow R$ be defined as $f(x) = \\det(A)$. Then the sum of maximum and minimum values of f on R is equal to :",
+    "options": [
+      "$-\\frac{88}{27}$",
+      "$\\frac{20}{27}$",
+      "$\\frac{88}{27}$",
+      "$-\\frac{20}{27}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "If z and ω are two complex numbers such that $|z\\omega| = 1$ and $\\arg(z) - \\arg(w) = \\frac{3\\pi}{2}$, then $\\arg\\left(\\frac{1 - 2\\bar{z}\\omega}{1 + 3\\bar{z}\\omega}\\right)$ is : (Here arg(z) denotes the principal argument of complex number z)",
+    "options": [
+      "$\\frac{\\pi}{4}$",
+      "$-\\frac{3\\pi}{4}$",
+      "$-\\frac{\\pi}{4}$",
+      "$\\frac{3\\pi}{4}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "If in a triangle ABC, AB = 5 units, $\\angle B = \\cos^{-1}\\left(\\frac{3}{5}\\right)$ and radius of circumcircle of ΔABC is 5 units, then the area (in sq. units) of ΔABC is :",
+    "options": [
+      "$6 + 8\\sqrt{3}$",
+      "$8 + 2\\sqrt{2}$",
+      "$10 + 6\\sqrt{2}$",
+      "$4 + 2\\sqrt{3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "Words with or without meaning are to be formed using all the letters of the word EXAMINATION. The probability that the letter M appears at the fourth position in any such word is :",
+    "options": [
+      "$\\frac{1}{9}$",
+      "$\\frac{1}{11}$",
+      "$\\frac{2}{11}$",
+      "$\\frac{1}{66}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "The coefficient of $x^{256}$ in the expansion of $(1-x)^{101}\\left(x^2+x+1\\right)^{100}$ is :",
+    "options": [
+      "$-{}^{100}C_{15}$",
+      "${}^{100}C_{16}$",
+      "$-{}^{100}C_{16}$",
+      "${}^{100}C_{15}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "The probability of selecting integers $a \\in [-5, 30]$ such that $x^2+2(a+4)x-5a+64 > 0$, for all $x \\in R$ is :",
+    "options": [
+      "$\\frac{2}{9}$",
+      "$\\frac{1}{6}$",
+      "$\\frac{7}{36}$",
+      "$\\frac{1}{4}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "The Boolean expression $(p \\wedge \\sim q) \\Rightarrow (q \\vee \\sim p)$ is equivalent to :",
+    "options": [
+      "$q \\Rightarrow p$",
+      "$\\sim q \\Rightarrow p$",
+      "$p \\Rightarrow q$",
+      "$p \\Rightarrow \\sim q$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "Let a be a positive real numbers such that $\\int_{0}^{a} e^{x-[x]}dx = 10e - 9$ where [x] is the greatest integer less than or equal to x. Then a is equal to :",
+    "options": [
+      "$10+\\log_e 2$",
+      "$10-\\log_e(1+e)$",
+      "$10+\\log_e(1+e)$",
+      "$10+\\log_e 3$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "Let $A = \\begin{bmatrix} 2 & 3 \\\\ a & 0 \\end{bmatrix}$, $a \\in R$ be written as P + Q where P is a symmetric matrix and Q is skew symmetric matrix. If $\\det(Q) = 9$, then the modulus of the sum of all possible values of determinant of P is equal to :",
+    "options": [
+      "18",
+      "36",
+      "24",
+      "45"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "If $\\alpha$ and $\\beta$ are the distinct roots of the equation $x^2+\\left(3\\right)^{\\frac{1}{4}}x+3^{\\frac{1}{2}} = 0$, then the value of $\\alpha^{96}\\left(\\alpha^{12}-1\\right)+\\beta^{96}\\left(\\beta^{12}-1\\right)$ is equal to :",
+    "options": [
+      "$56 \\times 3^{25}$",
+      "$28 \\times 3^{25}$",
+      "$52 \\times 3^{24}$",
+      "$56 \\times 3^{24}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "The number of real roots of the equation $\\tan^{-1}\\sqrt{x(x+1)}+\\sin^{-1}\\sqrt{x^2+x+1} = \\frac{\\pi}{4}$ is :",
+    "options": [
+      "4",
+      "1",
+      "0",
+      "2"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "The value of the integral $\\int_{-1}^{1} \\log_e\\left(\\sqrt{1-x}+\\sqrt{1+x}\\right)dx$ is equal to :",
+    "options": [
+      "$2\\log_e 2+\\frac{\\pi}{4}-1$",
+      "$\\log_e 2+\\frac{\\pi}{2}-1$",
+      "$\\frac{1}{2}\\log_e 2+\\frac{\\pi}{4}-\\frac{3}{2}$",
+      "$2\\log_e 2+\\frac{\\pi}{2}-\\frac{1}{2}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "The mean of 6 distinct observations is 6.5 and their variance is 10.25. If 4 out of 6 observations are 2, 4, 5 and 7, then the remaining two observations are :",
+    "options": [
+      "10, 11",
+      "3, 18",
+      "1, 20",
+      "8, 13"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "Let the tangent to the parabola S : $y^2 = 2x$ at the point P(2, 2) meet the x-axis at Q and normal at it meet the parabola S at the point R. Then the area (in sq. units) of the triangle PQR is equal to :",
+    "options": [
+      "$\\frac{35}{2}$",
+      "$\\frac{15}{2}$",
+      "25",
+      "$\\frac{25}{2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "Let a function f : R → R be defined as $f(x) = \\begin{cases} \\sin x - e^x & \\text{if } x \\leq 0 \\\\ a + [-x] & \\text{if } 0 < x < 1 \\\\ 2x - b & \\text{if } x \\geq 1 \\end{cases}$ where [x] is the greatest integer less than or equal to x. If f is continuous on R, then $\\left(a+b\\right)$ is equal to :",
+    "options": [
+      "2",
+      "5",
+      "3",
+      "4"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{a} = 2\\hat{i}+\\hat{j}-2\\hat{k}$ and $\\vec{b} = \\hat{i}+\\hat{j}$. If $\\vec{c}$ is a vector such that $\\vec{a}.\\vec{c} = |\\vec{c}|$, $\\left|\\vec{c}-\\vec{a}\\right| = 2\\sqrt{2}$ and the angle between $\\left(\\vec{a} \\times \\vec{b}\\right)$ and $\\vec{c}$ is $\\frac{\\pi}{6}$, then the value of $\\left|\\left(\\vec{a} \\times \\vec{b}\\right) \\times \\vec{c}\\right|$ is :",
+    "options": [
+      "3",
+      "$\\frac{2}{3}$",
+      "$\\frac{3}{2}$",
+      "4"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "Let $y = y(x)$ be the solution of the differential equation $e^x\\sqrt{1-y^2}\\,dx+\\left(\\frac{y}{x}\\right)dy = 0$, $y\\left(1\\right) = -1$ Then the value of $\\left(y(3)\\right)^2$ is equal to :",
+    "options": [
+      "$1+4e^6$",
+      "$1-4e^3$",
+      "$1+4e^3$",
+      "$1-4e^6$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "Let [x] denote the greatest integer $\\leq x$, where $x \\in R$. If the domain of the real valued function $f(x) = \\sqrt{\\frac{\\big|[x]\\big|-2}{\\big|[x]\\big|-3}}$ is $(-\\infty, a) \\cup [b, c) \\cup [4, \\infty)$, $a < b < c$, then the value of $a+b+c$ is:",
+    "options": [
+      "-3",
+      "8",
+      "-2",
+      "1"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let $y = y(x)$ be the solution of the differential equation $x\\tan\\left(\\frac{y}{x}\\right)dy = \\left(y\\tan\\left(\\frac{y}{x}\\right)-x\\right)dx$, $-1 \\leq x \\leq 1$, $y\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{6}$ Then the area of the region bounded by the curves $x = 0$, $x = \\frac{1}{\\sqrt{2}}$ and $y = y(x)$ in the upper half plane is :",
+    "options": [
+      "$\\frac{1}{6}(\\pi-1)$",
+      "$\\frac{1}{8}(\\pi-1)$",
+      "$\\frac{1}{4}(\\pi-2)$",
+      "$\\frac{1}{12}(\\pi-3)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "Let $A = \\begin{pmatrix} 1 & -1 & 0 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 1 \\end{pmatrix}$ and $B = 7A^{20} - 20A^{7} + 2I$ , where $I$ is an identity matrix of order 3 x 3. If $B = \\left[ b_{ij} \\right]$, then $b_{13}$ is equal to..........",
+    "options": [],
+    "correct": "910",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Let $y = mx + c$, $m > 0$ be the focal chord of $y^2 = -64x$, which is tangent to $\\left(x + 10\\right)^2 + y^2 = 4$. Then, the value of $4\\sqrt{2}\\left(m + c\\right)$ is equal to .......",
+    "options": [],
+    "correct": "34",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "Let a, b, c, d be in arithmetic progression with common difference $\\lambda$. If $\\begin{vmatrix} x + a - c & x + b & x + a \\\\ x - 1 & x + c & x + b \\\\ x - b + d & x + d & x + c \\end{vmatrix} = 2$, then the value of $\\lambda^2$ is equal to.........",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{a}, \\vec{b}, \\vec{c}$ be three mutually perpendicular vectors of the same magnitude and equally inclined at an angle $\\theta$, with the vector $\\vec{a} + \\vec{b} + \\vec{c}$. Then $36\\cos^2 2\\theta$ is equal to.......",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "There are 15 players in a cricket team, out of which 6 are bowlers, 7 are batsmen and 2 are wicketkeepers. The number of ways, a team of 11 players be selected from them so as to include at least 4 bowlers, 5 batsmen and 1 wicketkeeper, is ..........",
+    "options": [],
+    "correct": "777",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "The number of rational terms in the binomial expansion of $\\left(4^{\\frac{1}{4}} + 5^{\\frac{1}{6}}\\right)^{120}$ is.....",
+    "options": [],
+    "correct": "21",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "Let P be a plane passing through the points $\\left(1, 0, 1\\right)\\left(1, -2, 1\\right)$ and $\\left(0, 1, -2\\right)$. Let a vector $\\vec{a} = \\alpha\\hat{i} + \\beta\\hat{j} + \\gamma\\hat{k}$ be such that $\\vec{a}$ is parallel to the plane P, perpendicular to $\\left(\\hat{i} + 2\\hat{j} + 3\\hat{k}\\right)$ and $\\vec{a}.\\left(\\hat{i} + \\hat{j} + 2\\hat{k}\\right) = 2$, then $\\left(\\alpha - \\beta + \\gamma\\right)^2$ equals........",
+    "options": [],
+    "correct": "81",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "If the value of $\\lim_{x \\to 0} \\left(2 - \\cos x \\sqrt{\\cos 2x}\\right)^{\\left(\\frac{x + 2}{x^2}\\right)}$ is equal to $e^a$, then a is equal to.......",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "If the shortest distance between the lines $\\vec{r}_1 = \\alpha\\hat{i} + 2\\hat{j} + 2\\hat{k} + \\lambda\\left(\\hat{i} - 2\\hat{j} + 2\\hat{k}\\right), \\lambda \\in R$, $\\alpha > 0$ and $\\vec{r}_2 = -4\\hat{i} - \\hat{k} + \\mu\\left(3\\hat{i} - 2\\hat{j} - 2\\hat{k}\\right), \\mu \\in R$ is 9, then $\\alpha$ is equal to........",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  }
+]

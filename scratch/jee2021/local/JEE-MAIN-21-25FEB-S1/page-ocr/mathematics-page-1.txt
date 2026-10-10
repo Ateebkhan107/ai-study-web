@@ -1,0 +1,143 @@
+~Saral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP 3
+
+Sol.
+
+Sol.
+
+Sol.
+
+JEE Exam Solution
+
+FINAL JEE-MAIN EXAMINATION — FEBRUARY, 2021
+Held On Wednesday 25th February, 2021
+TIME: 9:00 AM to 12:00 NOON
+
+SECTION-A
+When a missile is fired from a ship, the
+
+1
+probability that it is intercepted is 3 and the
+
+probability that the missile hits the target, given
+
+3
+that it is not intercepted, is re If three missiles
+
+are fired independently from the ship, then the
+probability that all three hit the target, is :
+
+re 32 wt w3
+Op 7 @;, @;
+
+Official Ans. by NTA (3)
+
+Required babili 2,3 pat
+equired probability = 3° 4 8
+
+If 0<0,6<7,x=) cos” 0, y=)'sin*" 6
+n=0
+
+n=0
+
+and z= )°cos”" @-sin*" > then :
+
+n=0
+()xy-z=(x+y)z (2)xy+yz+zx=z
+(3) xyz =4 (4) xy+z=(k+y)z
+Official Ans. by NTA (4)
+1 1
+= —, => sin? 9 =—
+1-—cos’ 0 x
+am 2 2 1
+Also, cos2@ = & 1-sin“ 0cos* 0 =—
+y Z
+1 1 1
+1-—x—=->2(xy-l)=x
+80, Fe (xy-l=xy 1)
+
+1 1
+Also, —+—=! >x+y=xy (2)
+x y
+
+From (i) and (ii)
+
+xy +zZ=xyz=(x+y)z
+
+Let f, g : NN such that f(n + 1) = f(n) + f(1)
+vy n é N and g be any arbitrary function.
+Which of the following statements is NOT true?
+(1) If fog is one-one, then g is one-one
+
+(2) If f is onto, then f(n) = n yneN
+
+(3) f is one-one
+
+(4) If g is onto, then fog is one-one
+
+Official Ans. by NTA (4)
+
+f(n + 1) — f(n) = f(1)
+= f(n) = nf (1)
+
+Sol.
+
+=> f is one-one
+
+Now, Let f (g(x) = f(g(x,))
+
+=> g(X,) = g(X,) (as f is one-one)
+
+=> X, = X, (as fog is one-one)
+
+=> g is one-one
+
+Now, f(g(n)) = g(n) f(1)
+
+may be many-one if
+
+g(n) is many-one
+
+The equation of the line through the point
+
+(0,1,2) and perpendicular to the line
+
+2 3 —2
+-1 2-2
+
+Or earmar
+-1 2-2
+
+Os 43
+-1 -2
+Osa
+-1 2-2
+OE 3
+
+Official Ans. by NTA (4)
+x-l_y+l_ z-l -;
+
+2 3 —2
+=> P«, y, z) = (r+ 1, 3r - 1, -2r + 1)
+Since, QP 1 (21+3j—2k)
+>4r+2+9r-64+4r+2=0
+
+2 Q(0,1,2)
+mane]
+
+- p(2i us P
+17 17 17
+
+> PO= 211 —28)j—21k
+
+17
+
+a~5. xX _y-l_z-2
+$0 PT TG
+Let a be the angle between the lines whose
+direction cosines satisfy the equations
+1+ m-—n=0 and I? + m? - n? = 0. Then the
+
+www .esaral.com
+

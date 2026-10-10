@@ -1,0 +1,10 @@
+11.
+
+The contrapositive of the statement "If you will
+work, you will earn money" is :
+
+(1) You will earn money, if you will not work
+(2) If you will earn money, you will work
+
+(3) If you will not earn money, you will not work
+(4) To earn money, you need to work

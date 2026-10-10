@@ -1,0 +1,8 @@
+1. The following logic gate is equivalent to :
+
+A
+
+B
+
+(1) NOR Gate (2) OR Gate
+(3) AND Gate (4) NAND Gate

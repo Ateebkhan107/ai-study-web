@@ -1,0 +1,6 @@
+A force F=4i+3j+4k is applied on an
+intersection point of x = 2 plane and x-axis. The
+magnitude of torque of this force about a point
+
+(2, 3, 4) is . (Round off to the Nearest
+Integer)

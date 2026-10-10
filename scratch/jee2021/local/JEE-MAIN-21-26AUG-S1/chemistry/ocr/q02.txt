@@ -1,0 +1,6 @@
+Which one of the following is correct for the
+adsorption of a gas at a given temperature on a
+solid surface?
+
+(1) AH> 0, AS>0 (2) AH > 0, AS <0
+(3) AH <0, AS <0 (4) AH <0, AS>0

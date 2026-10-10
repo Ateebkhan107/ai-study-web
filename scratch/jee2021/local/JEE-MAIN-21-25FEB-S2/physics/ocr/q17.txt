@@ -1,0 +1,6 @@
+17.
+
+The truth table for the followng logic circuit
+
+1s:
+

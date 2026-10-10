@@ -1,0 +1,7 @@
+If P is a point on the parabola y = x? + 4 which
+is closest to the straight line y = 4x — 1, then the
+co-ordinates of P are :
+
+(1) G, 13) (2) (1, 5)
+
+(3) (2,8) (4) (2, 8)

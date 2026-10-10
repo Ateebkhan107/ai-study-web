@@ -1,0 +1,5 @@
+The distance of the point P(3, 4, 4) from the point
+of intersection of the line joining the points.
+Q(3, -4, -5) and R(@2, -3, 1) and the plane
+
+2x +y +z=7, is equal to

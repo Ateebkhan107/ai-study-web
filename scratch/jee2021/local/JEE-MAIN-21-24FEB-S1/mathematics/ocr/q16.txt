@@ -1,0 +1,12 @@
+Let p and q be two positive numbers such that
+p+q=2 and p* + q* = 272. Then p and q are
+roots of the equation :
+
+(1) x2-2x+2=0
+
+(2) x2-2x +8 =0
+
+(3) x2 - 2x + 136=0
+
+(4) x2- 2x + 16=0
+

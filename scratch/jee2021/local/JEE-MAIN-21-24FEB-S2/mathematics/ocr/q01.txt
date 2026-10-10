@@ -1,0 +1,15 @@
+For the statements p and q, consider the following
+compound statements :
+
+(a) (~qA (p >q)) >~P
+
+(b) (p vq) A~p) > q
+
+Then which of the following statements is correct?
+(1) (a) and (b) both are not tautologies.
+
+(2) (a) and (b) both are tautologies.
+
+(3) (a) is a tautology but not (b).
+
+(4) (b) is a tautology but not (a).

@@ -1,0 +1,4 @@
+Let *, [] € {av} be such that the Boolean
+expression (p * ~q) > (p [] q) is a tautology. Then :
+(1) «=v, [J=v (2)*=a, [J=a
+(3)*=a, LJ=v (4) *=v, [J=a

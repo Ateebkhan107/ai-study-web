@@ -1,0 +1,5 @@
+A square shaped wire with resistance of each side
+3Q is bent to form a complete circle. The
+resistance between two diametrically opposite
+
+points of the circle in unit of Q will be

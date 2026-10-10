@@ -1,0 +1,13 @@
+TAI
+
+e* -[x]
+
+If the value of the integral [er dx=ae'+B,
+
+where a, B € R, 5a + 66 = 0, and [x] denotes the
+greatest integer less than or equal to x; then the
+value of (. + B)’ is equal to :
+
+(1) 100 (2) 25
+
+(3) 16 (4) 36

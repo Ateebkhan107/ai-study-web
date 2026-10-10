@@ -1,0 +1,11 @@
+The functional groups that are responsible for
+the ion-exchange property of cation and anion
+exchange resins, respectively, are :
+
+(1) -SO3H and —NH,
+
+(2) -SO,H and -COOH
+
+(3) -NH, and -COOH
+
+(4) -NH, and —SO,H

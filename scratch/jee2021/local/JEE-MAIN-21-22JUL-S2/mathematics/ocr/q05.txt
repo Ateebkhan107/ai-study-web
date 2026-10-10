@@ -1,0 +1,10 @@
+Four dice are thrown simultaneously and _ the
+numbers shown on these dice are recorded in
+2 x 2 matrices. The probability that such formed
+matrices have all different entries and are
+non-singular, is :
+
+45 23 22 43
+3 4
+OTe Os O er OTe
+

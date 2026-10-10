@@ -1,0 +1,17 @@
+17.
+
+Consider the three planes
+
+P, : 3x + ISy + 21z=9,
+P,:x-3y-—z=5, and
+
+P;: 2x + 10y + 14z=5
+
+Then, which one of the following is true ?
+(1) P, and P, are parallel
+
+(2) P, and P; are parallel
+
+(3) P, and P; are parallel
+
+(4) P,,P, and P; all are parallel

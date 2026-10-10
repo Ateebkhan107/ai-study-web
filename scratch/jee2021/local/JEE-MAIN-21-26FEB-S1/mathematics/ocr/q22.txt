@@ -1,0 +1,4 @@
+The number of integral values of 'k' for which the
+equation 3sinx + 4 cosx =k + | has a solution, k
+
+€ Ris

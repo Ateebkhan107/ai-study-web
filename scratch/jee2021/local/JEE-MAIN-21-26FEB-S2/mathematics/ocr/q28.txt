@@ -1,0 +1,4 @@
+Let a be an integer such that all the real roots of
+the polynomial 2x5+5x4+ + 10x3 + 10x? + 10x + 10
+
+lie in the interval (a, a + 1). Then, lal is equal

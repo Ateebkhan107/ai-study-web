@@ -1,0 +1,20 @@
+16.
+
+Given below are two statements :
+
+Statement I :
+
+The identification of Ni2* is carried out by
+dimethyl glyoxime in the presence of NH,OH.
+Statement II :
+
+The dimethyl glyoxime is a bidentate neutral
+ligand.
+
+In the light of the above statements, choose the
+
+correct answer from the options given below:
+(1) Statement I is false but Statement II is true.
+(2) Both Statement I and Statement II are false.
+(3) Statement I is true but Statement II is false.
+(4) Both Statement I and Statement II are true.

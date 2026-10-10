@@ -1,0 +1,7 @@
+Let L be the line of intersection of planes
+t(i-j+2k)=2 and F(2i+j-k)=2. 1
+Pa, B, y) is the foot of perpendicular on L from the
+point (1,2,0), then the value of 35(a+fB+y) is
+
+equal to :
+(1) 101 (2) 119 (3) 143 (4) 134

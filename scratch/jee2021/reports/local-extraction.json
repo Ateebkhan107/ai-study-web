@@ -1,0 +1,392 @@
+[
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S1",
+    "subject": "physics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S1",
+    "subject": "chemistry",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S1",
+    "subject": "mathematics",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S2",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S2",
+    "subject": "chemistry",
+    "questions": 16
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S2",
+    "subject": "mathematics",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S1",
+    "subject": "physics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S1",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S1",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S2",
+    "subject": "physics",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S2",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S2",
+    "subject": "mathematics",
+    "questions": 16
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S1",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S1",
+    "subject": "chemistry",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S1",
+    "subject": "mathematics",
+    "questions": 16
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S2",
+    "subject": "physics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S2",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S2",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S1",
+    "subject": "physics",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S1",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S1",
+    "subject": "mathematics",
+    "questions": 17
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S2",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S2",
+    "subject": "chemistry",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S2",
+    "subject": "mathematics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S1",
+    "subject": "physics",
+    "questions": 9
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S1",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S1",
+    "subject": "mathematics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S2",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S2",
+    "subject": "chemistry",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S2",
+    "subject": "mathematics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S1",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S1",
+    "subject": "chemistry",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S1",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S2",
+    "subject": "physics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S2",
+    "subject": "chemistry",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S2",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S1",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S1",
+    "subject": "chemistry",
+    "questions": 8
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S1",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S2",
+    "subject": "physics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S2",
+    "subject": "chemistry",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S2",
+    "subject": "mathematics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-22JUL-S2",
+    "subject": "physics",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-22JUL-S2",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-22JUL-S2",
+    "subject": "mathematics",
+    "questions": 10
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S1",
+    "subject": "physics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S1",
+    "subject": "chemistry",
+    "questions": 5
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S1",
+    "subject": "mathematics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S2",
+    "subject": "physics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S2",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S2",
+    "subject": "mathematics",
+    "questions": 8
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S1",
+    "subject": "physics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S1",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S1",
+    "subject": "mathematics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S2",
+    "subject": "physics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S2",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S2",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S1",
+    "subject": "physics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S1",
+    "subject": "chemistry",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S1",
+    "subject": "mathematics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S2",
+    "subject": "physics",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S2",
+    "subject": "chemistry",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S2",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S1",
+    "subject": "physics",
+    "questions": 15
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S1",
+    "subject": "chemistry",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S1",
+    "subject": "mathematics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S2",
+    "subject": "physics",
+    "questions": 16
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S2",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S2",
+    "subject": "mathematics",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S1",
+    "subject": "physics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S1",
+    "subject": "chemistry",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S1",
+    "subject": "mathematics",
+    "questions": 11
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S2",
+    "subject": "physics",
+    "questions": 14
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S2",
+    "subject": "chemistry",
+    "questions": 12
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S2",
+    "subject": "mathematics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-01SEP-S1",
+    "subject": "physics",
+    "questions": 13
+  },
+  {
+    "paper_code": "JEE-MAIN-21-01SEP-S1",
+    "subject": "chemistry",
+    "questions": 16
+  },
+  {
+    "paper_code": "JEE-MAIN-21-01SEP-S1",
+    "subject": "mathematics",
+    "questions": 12
+  }
+]

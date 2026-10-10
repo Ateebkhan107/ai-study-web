@@ -1,0 +1,10 @@
+14.
+
+The length of the latus rectum of a parabola, whose
+vertex and focus are on the positive x—axis at a
+distance R and S (>R) respectively from the origin,
+is :
+
+(1) 4(S + R) (2) 2(S —R)
+
+(3) 4(S —R) (4) 2(S + R)

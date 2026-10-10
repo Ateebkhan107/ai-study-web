@@ -1,0 +1,6 @@
+Let z be those complex numbers which satisfy
+Iz + 51<4 and z(1+i)+Z(1-i)>-10,i=V-1.
+
+If the maximum value of Iz + 1I? is a+BV2 ,
+
+then the value of (a + B) is

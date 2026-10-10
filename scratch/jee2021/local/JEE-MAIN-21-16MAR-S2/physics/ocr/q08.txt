@@ -1,0 +1,18 @@
+8.
+
+For the given circuit, comment on the type of
+transformer used :
+
+i, O.11A
+
+i,
+b
+O V
+220V@) [P] || Aj OOW ©
+P|
+
+(1) Auxilliary transformer
+(2) Auto transformer
+
+(3) Step-up transformer
+(4) Step down transformer

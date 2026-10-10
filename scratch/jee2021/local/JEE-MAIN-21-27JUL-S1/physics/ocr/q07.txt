@@ -1,0 +1,17 @@
+In the reported figure, a capacitor is formed by
+placing a compound dielectric between the plates
+of parallel plate capacitor. The expression for the
+capacity of the said capacitor will be :
+
+(Given area of plate = A)
+
+Ci | Cy | C3
+K | 3K ] 5K
+<d>'<2d>'<3d>
+15 Ke,A 15 Ke,A
+—_ 2) =
+() 34 d ( 1% d
+25 Ke,A 9 Ke,A
+GB) = = (4) =
+
+d

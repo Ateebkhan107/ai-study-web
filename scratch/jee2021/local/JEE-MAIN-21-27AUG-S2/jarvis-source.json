@@ -1,0 +1,1001 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "Curved surfaces of a plano-convex lens of refractive index $\\mu_{1}$ and a plano-concave lens of refractive index $\\mu_{2}$ have equal radius of curvature as shown in figure. Find the ratio of radius of curvature to the focal length of the combined lenses.",
+    "options": [
+      "$\\frac{1}{\\mu_{2}-\\mu_{1}}$",
+      "$\\mu_{1}-\\mu_{2}$",
+      "$\\frac{1}{\\mu_{1}-\\mu_{2}}$",
+      "$\\mu_{2}-\\mu_{1}$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/34d26b1b-06b0-414c-a0fc-7175c6748568_fig.png"
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "The boxes of masses 2 kg and 8 kg are connected by a massless string passing over smooth pulleys. Calculate the time taken by box of mass 8 kg to strike the ground starting from rest. (use g = 10 m/s$^{2}$)",
+    "options": [
+      "0.34 s",
+      "0.2 s",
+      "0.25 s",
+      "0.4 s"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/61b5b270-2c28-49dc-9ff5-26cd4486c26b_fig.png"
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "For a transistor α and β are given as $\\alpha = \\frac{I_{C}}{I_{E}}$ and $\\beta = \\frac{I_{C}}{I_{B}}$. Then the correct relation between α and β will be :",
+    "options": [
+      "$\\alpha = \\frac{1-\\beta}{\\beta}$",
+      "$\\beta = \\frac{\\alpha}{1-\\alpha}$",
+      "$\\alpha\\beta = 1$",
+      "$\\alpha = \\frac{\\beta}{1-\\beta}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "Water drops are falling from a nozzle of a shower onto the floor, from a height of 9.8 m. The drops fall at a regular interval of time. When the first drop strikes the floor, at that instant, the third drop begins to fall. Locate the position of second drop from the floor when the first drop strikes the floor.",
+    "options": [
+      "4.18 m",
+      "2.94 m",
+      "2.45 m",
+      "7.35 m"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "Two discs have moments of intertia $I_{1}$ and $I_{2}$ about their respective axes perpendicular to the plane and passing through the centre. They are rotating with angular speeds, $\\omega_{1}$ and $\\omega_{2}$ respectively and are brought into contact face to face with their axes of rotation coaxial. The loss in kinetic energy of the system in the process is given by :",
+    "options": [
+      "$\\frac{I_{1}I_{2}}{(I_{1}+I_{2})}\\left(\\omega_{1}-\\omega_{2}\\right)^{2}$",
+      "$\\frac{(I_{1}-I_{2})^{2}\\,\\omega_{1}\\omega_{2}}{2(I_{1}+I_{2})}$",
+      "$\\frac{I_{1}I_{2}}{2(I_{1}+I_{2})}\\left(\\omega_{1}-\\omega_{2}\\right)^{2}$",
+      "$\\frac{(\\omega_{1}-\\omega_{2})^{2}}{2(I_{1}+I_{2})}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "Three capacitors $C_{1}$ = 2μF, $C_{2}$ = 6 μF and $C_{3}$ = 12 μF are connected as shown in figure. Find the ratio of the charges on capacitors $C_{1}$, $C_{2}$ and $C_{3}$ respectively :",
+    "options": [
+      "2 : 1 : 1",
+      "2 : 3 : 3",
+      "1 : 2 : 2",
+      "3 : 4 : 4"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f614ff2b-5897-4401-9c80-7abf8b770122_fig.png"
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "The colour coding on a carbon resistor is shown in the given figure. The resistance value of the given resistor is :",
+    "options": [
+      "(5700 ± 285) Ω",
+      "(7500 ± 750) Ω",
+      "(5700 ± 375) Ω",
+      "(7500 ± 375) Ω"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f1457c7b-d430-4222-9d96-c07cd8cddbd1_fig.png"
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "An antenna is mounted on a 400 m tall building. What will be the wavelength of signal of signal that can be radiated effectively by the transmission tower upto a range of 44 km?",
+    "options": [
+      "37.8 m",
+      "605 m",
+      "75.6 m",
+      "302 m"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "If the rms speed of oxygen molecules at 0°C is 160 m/s, find the rms speed of hydrogen molecules at 0°C.",
+    "options": [
+      "640 m/s",
+      "40 m/s",
+      "80 m/s",
+      "332 m/s"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "A constant magnetic field of 1 T is applied in the x > 0 region. A metallic circular ring of radius 1m is moving with a constant velocity of 1 m/s along the x-axis. At t = 0s, the centre of O of the ring is at x = − 1m. What will be the value of the induced emf in the ring at t = 1s? (Assume the velocity of the ring does not change.)",
+    "options": [
+      "1 V",
+      "2π V",
+      "2 V",
+      "0 V"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/62d3a92e-96c6-40d5-a65f-32e6922d666c_fig.png"
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "A mass of 50 kg is placed at the centre of a uniform spherical shell of mass 100 kg and radius 50 m. If the gravitational potential at a point, 25 m from the centre is V kg/m. The value of V is :",
+    "options": [
+      "− 60 G",
+      "+ 2 G",
+      "− 20 G",
+      "− 4 G"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "For full scale deflection of total 50 divisions, 50 mV voltage is required in galvanometer. The resistance of galvanometer if its current sensitivity is 2 div/mA will be :",
+    "options": [
+      "1 Ω",
+      "5 Ω",
+      "4 Ω",
+      "2 Ω"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "A monochromatic neon lamp with wavelength of 670.5 nm illuminates a photo-sensitive material which has a stopping voltage of 0.48 V. What will be the stopping voltage if the source light is changed with another source of wavelength of 474.6 nm?",
+    "options": [
+      "0.96 V",
+      "1.25 V",
+      "0.24 V",
+      "1.5 V"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Match List-I (physical quantity) with List-II (SI unit). Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(a)–(ii), (b)–(iii), (c)–(iv), (d)–(i)",
+      "(a)–(iii), (b)–(ii), (c)–(iv), (d)–(i)",
+      "(a)–(iv), (b)–(ii), (c)–(i), (d)–(iii)",
+      "(a)–(iii), (b)–(ii), (c)–(i), (d)–(iv)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "If force (F), length (L) and time (T) are taken as the fundamental quantities. Then what will be the dimension of density :",
+    "options": [
+      "[FL$^{-4}$ T$^{2}$]",
+      "[FL$^{-3}$ T$^{2}$]",
+      "[FL$^{-5}$ T$^{2}$]",
+      "[FL$^{-3}$ T$^{3}$]"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "A coaxial cable consists of an inner wire of radius 'a' surrounded by an outer shell of inner and outer radii 'b' and 'c' respectively. The inner wire carries an electric current $i_{0}$, which is distributed uniformly across cross-sectional area. The outer shell carries an equal current in opposite direction and distributed uniformly. What will be the ratio of the magnetic field at a distance x from the axis when (i) x < a and (ii) a < x < b ?",
+    "options": [
+      "$\\frac{x^{2}}{a^{2}}$",
+      "$\\frac{a^{2}}{x^{2}}$",
+      "$\\frac{x^{2}}{b^{2}-a^{2}}$",
+      "$\\frac{b^{2}-a^{2}}{x^{2}}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "The height of victoria falls is 63 m. What is the difference in temperature of water at the top and at the bottom of fall ? [Given 1 cal = 4.2 J and specific heat of water = 1 cal g$^{-1}$ °C$^{-1}$]",
+    "options": [
+      "0.147° C",
+      "14.76° C",
+      "1.476°",
+      "0.014° C"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "A player kicks a football with an initial speed of 25 ms$^{-1}$ at an angle of 45° from the ground. What are the maximum height and the time taken by the football to reach at the highest point during motion ? (Take g = 10 ms$^{-2}$)",
+    "options": [
+      "h$_{max}$ = 10 m, T = 2.5 s",
+      "h$_{max}$ = 15.625 m, T = 3.54 s",
+      "h$_{max}$ = 15.625 m, T = 1.77 s",
+      "h$_{max}$ = 3.54 m, T = 0.125 s"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "The light waves from two coherent sources have same intensity $I_{1}$ = $I_{2}$ = $I_{0}$. In interference pattern the intensity of light at minima is zero. What will be the intensity of light at maxima ?",
+    "options": [
+      "$I_{0}$",
+      "2 $I_{0}$",
+      "5 $I_{0}$",
+      "4 $I_{0}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "Figure shows a rod AB, which is bent in a 120° circular arc of radius R. A charge (−Q) is uniformly distributed over rod AB. What is the electric field $\\vec{E}$ at the centre of curvature O ?",
+    "options": [
+      "$\\frac{3\\sqrt{3}\\,Q}{8\\pi\\varepsilon_{0}R^{2}}(\\hat{i})$",
+      "$\\frac{3\\sqrt{3}\\,Q}{8\\pi^{2}\\varepsilon_{0}R^{2}}(\\hat{i})$",
+      "$\\frac{3\\sqrt{3}\\,Q}{16\\pi^{2}\\varepsilon_{0}R^{2}}(\\hat{i})$",
+      "$\\frac{3\\sqrt{3}\\,Q}{8\\pi^{2}\\varepsilon_{0}R^{2}}(-\\hat{i})$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/61ac4f17-8840-484c-ad43-97f676554b5a_fig.png"
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "A heat engine operates between a cold reservoir at temperature $T_2$ = 400 K and a hot reservoir at temperature $T_1$. It takes 300 J of heat from the hot reservoir and delivers 240 J of heat to the cold reservoir in a cycle. The minimum temperature of the hot reservoir has to be __________ K.",
+    "options": [],
+    "correct": "500",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "Two simple harmonic motion, are represented by the equations $y_1 = 10 \\sin\\left(3\\pi t + \\frac{\\pi}{3}\\right)$ $y_2 = 5(\\sin 3\\pi t + \\sqrt{3}\\cos 3\\pi t)$ Ratio of amplitude of $y_1$ to $y_2$ = x : 1. The value of x is _________ .",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "X different wavelengths may be observed in the spectrum from a hydrogen sample if the atoms are exited to states with principal quantum number n = 6 ? The value of X is ________ .",
+    "options": [],
+    "correct": "15",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "A zener diode of power rating 2W is to be used as a voltage regulator. If the zener diode has a breakdown of 10 V and it has to regulate voltage fluctuated between 6 V and 14 V, the value of $R_s$ for safe operation should be ________ Ω.",
+    "options": [],
+    "correct": "20",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/d4348b26-5a0f-46a1-b78d-fa306981bc33_fig.png"
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "Wires $W_1$ and $W_2$ are made of same material having the breaking stress of 1.25 × 10$^{9}$ N/m$^{2}$. $W_1$ and $W_2$ have cross-sectional area of 8 × 10$^{-7}$ m$^{2}$ and 4 × 10$^{-7}$ m$^{2}$, respectively. Masses of 20 kg and 10 kg hang from them as shown in the figure. The maximum mass that can be placed in the pan without breaking the wires is _____ kg. (Use g = 10 m/s$^{2}$)",
+    "options": [],
+    "correct": "40",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/959e6750-fcf4-47ca-8748-0f2af54aefc8_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "A bullet of 10 g, moving with velocity v, collides head-on with the stationary bob of a pendulum and recoils with velocity 100 m/s. The length of the pendulum is 0.5 m and mass of the bob is 1 kg. The minimum value of v = _____ m/s so that the pendulum describes a circle. (Assume the string to be inextensible and g = 10 m/s$^{2}$)",
+    "options": [],
+    "correct": "400",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/e90d0a5c-b003-458a-b3be-8fa279ae32ce_fig.png"
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "An ac circuit has an inductor and a resistor of resistance R in series, such that $X_L$ = 3R. Now, a capacitor is added in series such that $X_C$ = 2R. The ratio of new power factor with the old power factor of the circuit is $\\sqrt{5}$ : x . The value of x is _____ .",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "The ratio of the equivalent resistance of the network (shown in figure) between the points a and b when switch is open and switch is closed is x : 8. The value of x is ________ .",
+    "options": [],
+    "correct": "9",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/29572748-6a37-4955-90b3-1de62f8efc20_fig.png"
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "A plane electromagnetic wave with frequency of 30 MHz travels in free space. At particular point in space and time, electric field is 6 V/m. The magnetic field at this point will be x × 10$^{-8}$ T. The value of x is _____ .",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Physics",
+    "question": "A tuning fork is vibrating at 250 Hz. The length of the shortest closed organ pipe that will resonate with the tuning fork will be _____ cm. (Take speed of sound in air as 340 ms$^{-1}$)",
+    "options": [],
+    "correct": "34",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Choose the correct statement from the following :",
+    "options": [
+      "The standard enthalpy of formation for alkali metal bromides becomes less negative on descending the group.",
+      "The low solubility of CsI in water is due to its high lattice enthalpy.",
+      "Among the alkali metal halides, LiF is least soluble in water.",
+      "LiF has least negative standard enthalpy of formation among alkali metal fluorides."
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "The addition of dilute NaOH to Cr$^{3+}$ salt solution will give :",
+    "options": [
+      "a solution of [Cr(OH)$_{4}$]$^{-}$",
+      "precipitate of Cr$_{2}$O$_{3}$(H$_{2}$O)$_{n}$",
+      "precipitate of [Cr(OH)$_{6}$]$^{3-}$",
+      "precipitate of Cr(OH)$_{3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement I : Ethyl pent–4–yn–oate on reaction with CH$_{3}$MgBr gives a 3°–alcohol. Statement II : In this reaction one mole of ethyl pent–4–yn–oate utilizes two moles of CH$_{3}$MgBr. In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "Both Statement I and Statement II are false.",
+      "Statement I is false but Statement II is true.",
+      "Statement I is true but Statement II is false.",
+      "Both Statement I and Statement II are true."
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "In stratosphere most of the ozone formation is assisted by :",
+    "options": [
+      "cosmic rays.",
+      "γ–rays.",
+      "ultraviolet radiation.",
+      "visible radiations."
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "The compound/s which will show significant intermolecular H–bonding is/are :",
+    "options": [
+      "(b) only",
+      "(c) only",
+      "(a) and (b) only",
+      "(a), (b) and (c)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-08-27-evening/a1844dda-8da0-4da5-b602-316cfd9ce1b7_fig.png"
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Which one of the following chemicals is responsible for the production of HCl in the stomach leading to irritation and pain?",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-08-27-evening/2f6a0676-f36b-4a44-bb37-bc12f72699eb_fig.png"
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The oxide that gives H$_{2}$O$_{2}$ most readily on treatment with H$_{2}$O is :",
+    "options": [
+      "PbO$_{2}$",
+      "Na$_{2}$O$_{2}$",
+      "SnO$_{2}$",
+      "BaO$_{2}$·8H$_{2}$O"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "The correct order of ionic radii for the ions, P$^{3-}$, S$^{2-}$, Ca$^{2+}$, K$^{+}$, Cl$^{-}$ is :",
+    "options": [
+      "P$^{3-}$ > S$^{2-}$ > Cl$^{-}$ > K$^{+}$ > Ca$^{2+}$",
+      "Cl$^{-}$ > S$^{2-}$ > P$^{3-}$ > Ca$^{2+}$ > K$^{+}$",
+      "P$^{3-}$ > S$^{2-}$ > Cl$^{-}$ > Ca$^{2+}$ > K$^{+}$",
+      "K$^{+}$ > Ca$^{2+}$ > P$^{3-}$ > S$^{2-}$ > Cl$^{-}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Which one of the following is the major product of the given reaction?",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/7e961ba3-f52d-4c01-9eb3-958d48d197b8_fig.png"
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "The major product (A) formed in the reaction given below is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/4d4c98e2-097e-4dca-beea-14dd6100063c_fig.png"
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Which one of the following is used to remove most of plutonium from spent nuclear fuel?",
+    "options": [
+      "ClF$_{3}$",
+      "O$_{2}$F$_{2}$",
+      "I$_{2}$O$_{5}$",
+      "BrO$_{3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Lyophilic sols are more stable than lyophobic sols because :",
+    "options": [
+      "there is a strong electrostatic repulsion between the negatively charged colloidal particles.",
+      "the colloidal particles have positive charge.",
+      "the colloidal particles have no charge.",
+      "the colloidal particles are solvated."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "The major product of the following reaction, if it occurs by S$_{N}$2 mechanism is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/8c94d9e8-c19a-48a3-8c56-b897efb71720_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Potassium permanganate on heating at 513 K gives a product which is :",
+    "options": [
+      "paramagnetic and colourless",
+      "diamagnetic and green",
+      "diamagnetic and colourless",
+      "paramagnetic and green"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Which one of the following tests used for the identification of functional groups in organic compounds does not use copper reagent ?",
+    "options": [
+      "Barfoed's test",
+      "Seliwanoff's test",
+      "Benedict's test",
+      "Biuret test for peptide bond"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Hydrolysis of sucrose gives :",
+    "options": [
+      "α-D-(–)-Glucose and β-D-(–)-Fructose",
+      "α-D-(+)-Glucose and α-D-(–)-Fructose",
+      "α-D-(–)-Glucose and α-D-(+)-Fructose",
+      "α-D-(+)-Glucose and β-D-(–)-Fructose"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "Match List-I (Name of ore/mineral) with List – II (Chemical formula) : Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(a)-(iii), (b)-(iv), (c)-(ii), (d)-(i)",
+      "(a)-(iii), (b)-(iv), (c)-(i), (d)-(ii)",
+      "(a)-(iv), (b)-(iii), (c)-(i), (d)-(ii)",
+      "(a)-(iii), (b)-(ii), (c)-(iv), (d)-(i)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "Which one of the following is formed (mainly) when red phosphorus is heated in a sealed tube at 803 K ?",
+    "options": [
+      "White phosphorus",
+      "Yellow phosphorus",
+      "β-Black phosphorus",
+      "α-Black phosphorus"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "The correct structures of A and B formed in the following reactions are :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/905a517d-f366-4972-9447-847b3f0d68aa_fig.png"
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The first order rate constant for the decomposition of CaCO$_{3}$ at 700 K is 6.36 × 10$^{-3}$s$^{-1}$ and activation energy is 209 kJ mol$^{-1}$. Its rate constant (in s$^{-1}$) at 600 K is x × 10$^{-6}$. The value of x is _____ . (Nearest integer) [Given R = 8.31 J K$^{-1}$ mol$^{-1}$; log 6.36 × 10$^{-3}$ = −2.19, 10$^{-4.79}$ = 1.62 × 10$^{-5}$]",
+    "options": [],
+    "correct": "16",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "The number of optical isomers possible for [Cr(C$_{2}$O$_{4}$)$_{3}$]$^{3-}$ is _____ .",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "Two flasks I and II shown below are connected by a valve of negligible volume. When the valve is opened, the final pressure of the system in bar is x × 10$^{-2}$. The value of x is _____ . (Integer answer) [Assume–Ideal gas; 1 bar = 10$^{5}$ Pa; Molar mass of N$_{2}$ = 28.0 g mol$^{-1}$ ; R = 8.31 J mol$^{-1}$K$^{-1}$]",
+    "options": [],
+    "correct": "84",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/72fc08c7-7ab4-484d-b0ba-bc7d90d090c5_fig.png"
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "100 g of propane is completely reacted with 1000 g of oxygen. The mole fraction of carbon dioxide in the resulting mixture is x × 10$^{-2}$. The value of x is _____ . (Nearest integer) [Atomic weight : H = 1.008; C = 12.00; O = 16.00]",
+    "options": [],
+    "correct": "19",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "40 g of glucose (Molar mass = 180) is mixed with 200 mL of water. The freezing point of solution is _____ K. (Nearest integer) [Given : K$_{f}$ = 1.86 K kg mol$^{-1}$ ; Density of water = 1.00 g cm$^{-3}$; Freezing point of water = 273.15 K]",
+    "options": [],
+    "correct": "271",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "The resistance of a conductivity cell with cell constant 1.14 cm$^{-1}$, containing 0.001 M KCl at 298 K is 1500 Ω. The molar conductivity of 0.001 M KCl solution at 298 K in S cm$^{2}$ mol$^{-1}$ is _____ . (Integer answer)",
+    "options": [],
+    "correct": "760",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "The number of photons emitted by a monochromatic (single frequency) infrared range finder of power 1 mW and wavelength of 1000 nm, in 0.1 second is x × 10$^{13}$. The value of x is _____ . (Nearest integer) (h = 6.63 × 10$^{-34}$ Js, c = 3.00 × 10$^{8}$ ms$^{-1}$)",
+    "options": [],
+    "correct": "50",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "When 5.1 g of solid NH$_{4}$HS is introduced into a two litre evacuated flask at 27°C, 20% of the solid decomposes into gaseous ammonia and hydrogen sulphide. The K$_{p}$ for the reaction at 27°C is x × 10$^{-2}$. The value of x is _____ . (Integer answer) [Given R = 0.082 L atm K$^{-1}$ mol$^{-1}$]",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "The number of species having non–pyramidal shape among the following is _____ . (A) SO$_{3}$ (B) NO$_{3}^{-}$ (C) PCl$_{3}$ (D) CO$_{3}^{2-}$",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "Data given for the following reaction is as follows: FeO$_{(s)}$ + C$_{(graphite)}$ → Fe$_{(s)}$ + CO$_{(g)}$ Substance | ΔH° (kJ mol$^{-1}$) | ΔS° (J mol$^{-1}$K$^{-1}$) FeO$_{(s)}$ | −266.3 | 57.49 C$_{(graphite)}$ | 0 | 5.74 Fe$_{(s)}$ | 0 | 27.28 CO$_{(g)}$ | −110.5 | 197.6 The minimum temperature in K at which the reaction becomes spontaneous is _____ . (Integer answer)",
+    "options": [],
+    "correct": "964",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "The angle between the straight lines, whose direction cosines are given by the equations 2l + 2m − n = 0 and mn + nl + lm = 0, is :",
+    "options": [
+      "$\\frac{\\pi}{2}$",
+      "$\\pi - \\cos^{-1}\\left(\\frac{4}{9}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{8}{9}\\right)$",
+      "$\\frac{\\pi}{3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "Let $A = \\begin{pmatrix} [x+1] & [x+2] & [x+3] \\\\ [x] & [x+3] & [x+3] \\\\ [x] & [x+2] & [x+4] \\end{pmatrix}$, where [t] denotes the greatest integer less than or equal to t. If det(A) = 192, then the set of values of x is the interval:",
+    "options": [
+      "[68, 69)",
+      "[62, 63)",
+      "[65, 66)",
+      "[60, 61)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "Let M and m respectively be the maximum and minimum values of the function $f(x) = \\tan^{-1}(\\sin x + \\cos x)$ in $\\left[0, \\frac{\\pi}{2}\\right]$, Then the value of tan(M − m) is equal to:",
+    "options": [
+      "$2 + \\sqrt{3}$",
+      "$2 - \\sqrt{3}$",
+      "$3 + 2\\sqrt{2}$",
+      "$3 - 2\\sqrt{2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "Each of the persons A and B independently tosses three fair coins. The probability that both of them get the same number of heads is :",
+    "options": [
+      "$\\frac{1}{8}$",
+      "$\\frac{5}{8}$",
+      "$\\frac{5}{16}$",
+      "1"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "A differential equation representing the family of parabolas with axis parallel to y-axis and whose length of latus rectum is the distance of the point (2, −3) form the line 3x + 4y = 5, is given by :",
+    "options": [
+      "$10\\frac{d^{2}y}{dx^{2}} = 11$",
+      "$11\\frac{d^{2}x}{dy^{2}} = 10$",
+      "$10\\frac{d^{2}x}{dy^{2}} = 11$",
+      "$11\\frac{d^{2}y}{dx^{2}} = 10$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "If two tangents drawn from a point P to the parabola $y^{2} = 16(x - 3)$ are at right angles, then the locus of point P is :",
+    "options": [
+      "x + 3 = 0",
+      "x + 1 = 0",
+      "x + 2 = 0",
+      "x + 4 = 0"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "The equation of the plane passing through the line of intersection of the planes $\\vec{r}\\cdot\\left(\\hat{i} + \\hat{j} + \\hat{k}\\right) = 1$ and $\\vec{r}\\cdot\\left(2\\hat{i} + 3\\hat{j} - \\hat{k}\\right) + 4 = 0$ and parallel to the x-axis is:",
+    "options": [
+      "$\\vec{r}\\cdot\\left(\\hat{j} - 3\\hat{k}\\right) + 6 = 0$",
+      "$\\vec{r}\\cdot\\left(\\hat{i} + 3\\hat{k}\\right) + 6 = 0$",
+      "$\\vec{r}\\cdot\\left(\\hat{i} - 3\\hat{k}\\right) + 6 = 0$",
+      "$\\vec{r}\\cdot\\left(\\hat{j} - 3\\hat{k}\\right) - 6 = 0$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "If the solution curve of the differential equation $(2x - 10y^{3})\\,dy + y\\,dx = 0$, passes through the points (0, 1) and (2, β), then β is a root of the equation:",
+    "options": [
+      "$y^{5} - 2y - 2 = 0$",
+      "$2y^{5} - 2y - 1 = 0$",
+      "$2y^{5} - y^{2} - 2 = 0$",
+      "$y^{5} - y^{2} - 1 = 0$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "Let A(a, 0), B(b, 2b +1) and C(0, b), b ≠ 0, |b| ≠ 1, be points such that the area of triangle ABC is 1 sq. unit, then the sum of all possible values of a is :",
+    "options": [
+      "$\\frac{-2b}{b+1}$",
+      "$\\frac{2b}{b+1}$",
+      "$\\frac{2b^{2}}{b+1}$",
+      "$\\frac{-2b^{2}}{b+1}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "Let [λ] be the greatest integer less than or equal to λ. The set of all values of λ for which the system of linear equations x + y + z = 4, 3x + 2y+ 5z = 3, 9x + 4y + (28+ [λ])z = [λ] has a solution is:",
+    "options": [
+      "ℝ",
+      "$(-\\infty, -9) \\cup (-9, \\infty)$",
+      "[−9, −8)",
+      "$(-\\infty, -9) \\cup [-8, \\infty)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "The set of all values of k > −1, for which the equation $(3x^{2} + 4x + 3)^{2} - (k+1)(3x^{2} + 4x + 3)(3x^{2} + 4x + 2) + k(3x^{2} + 4x + 2)^{2} = 0$ has real roots, is :",
+    "options": [
+      "$\\left(1, \\frac{5}{2}\\right]$",
+      "[2, 3)",
+      "$\\left[-\\frac{1}{2}, 1\\right)$",
+      "$\\left(\\frac{1}{2}, \\frac{3}{2}\\right] - \\{1\\}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "A box open from top is made from a rectangular sheet of dimension a × b by cutting squares each of side x from each of the four corners and folding up the flaps. If the volume of the box is maximum, then x is equal to :",
+    "options": [
+      "$\\frac{a + b - \\sqrt{a^{2} + b^{2} - ab}}{12}$",
+      "$\\frac{a + b - \\sqrt{a^{2} + b^{2} + ab}}{6}$",
+      "$\\frac{a + b - \\sqrt{a^{2} + b^{2} - ab}}{6}$",
+      "$\\frac{a + b + \\sqrt{a^{2} + b^{2} - ab}}{6}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "The Boolean expression $(p \\wedge q) \\Rightarrow ((r \\wedge q) \\wedge p)$ is equivalent to :",
+    "options": [
+      "$(p \\wedge q) \\Rightarrow (r \\wedge q)$",
+      "$(q \\wedge r) \\Rightarrow (p \\wedge q)$",
+      "$(p \\wedge q) \\Rightarrow (r \\vee q)$",
+      "$(p \\wedge r) \\Rightarrow (p \\wedge q)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "Let ℤ be the set of all integers, A = {(x, y) ∈ ℤ × ℤ : $(x - 2)^{2} + y^{2} \\le 4$}, B = {(x, y) ∈ ℤ × ℤ : $x^{2} + y^{2} \\le 4$} and C = {(x, y) ∈ ℤ × ℤ : $(x - 2)^{2} + (y - 2)^{2} \\le 4$} If the total number of relation from A ∩ B to A ∩ C is $2^{p}$, then the value of p is :",
+    "options": [
+      "16",
+      "25",
+      "49",
+      "9"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "The area of the region bounded by the parabola $(y - 2)^{2} = (x - 1)$, the tangent to it at the point whose ordinate is 3 and the x-axis is :",
+    "options": [
+      "9",
+      "10",
+      "4",
+      "6"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "If $y(x) = \\cot^{-1}\\left(\\frac{\\sqrt{1 + \\sin x} + \\sqrt{1 - \\sin x}}{\\sqrt{1 + \\sin x} - \\sqrt{1 - \\sin x}}\\right)$, x ∈ $\\left(\\frac{\\pi}{2}, \\pi\\right)$, then $\\frac{dy}{dx}$ at $x = \\frac{5\\pi}{6}$ is:",
+    "options": [
+      "$-\\frac{1}{2}$",
+      "−1",
+      "$\\frac{1}{2}$",
+      "0"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "Two poles, AB of length a metres and CD of length a + b (b ≠ a) metres are erected at the same horizontal level with bases at B and D. If BD = x and $\\tan \\angle ACB = \\frac{1}{2}$, then:",
+    "options": [
+      "$x^{2} + 2(a + 2b)x - b(a + b) = 0$",
+      "$x^{2} + 2(a + 2b)x + a(a + b) = 0$",
+      "$x^{2} - 2ax + b(a + b) = 0$",
+      "$x^{2} - 2ax + a(a + b) = 0$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "If 0 < x < 1 and $y = \\frac{1}{2}x^{2} + \\frac{2}{3}x^{3} + \\frac{3}{4}x^{4} + \\ldots$, then the value of $e^{1+y}$ at $x = \\frac{1}{2}$ is:",
+    "options": [
+      "$\\frac{1}{2}e^{2}$",
+      "2e",
+      "$\\frac{1}{2}\\sqrt{e}$",
+      "$2e^{2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "The value of the integral $\\int_{0}^{1} \\frac{\\sqrt{x}\\,dx}{(1+x)(1+3x)(3+x)}$ is:",
+    "options": [
+      "$\\frac{\\pi}{8}\\left(1 - \\frac{\\sqrt{3}}{2}\\right)$",
+      "$\\frac{\\pi}{4}\\left(1 - \\frac{\\sqrt{3}}{6}\\right)$",
+      "$\\frac{\\pi}{8}\\left(1 - \\frac{\\sqrt{3}}{6}\\right)$",
+      "$\\frac{\\pi}{4}\\left(1 - \\frac{\\sqrt{3}}{2}\\right)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "If $\\lim_{x \\to \\infty}\\left(\\sqrt{x^{2} - x + 1} - ax\\right) = b$, then the ordered pair (a, b) is:",
+    "options": [
+      "$\\left(1, \\frac{1}{2}\\right)$",
+      "$\\left(1, -\\frac{1}{2}\\right)$",
+      "$\\left(-1, \\frac{1}{2}\\right)$",
+      "$\\left(-1, -\\frac{1}{2}\\right)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "Let S be the sum of all solutions (in radians) of the equation $\\sin^{4}\\theta + \\cos^{4}\\theta - \\sin\\theta\\,\\cos\\theta = 0$ in $[0,\\ 4\\pi]$. Then $\\frac{8S}{\\pi}$ is equal to _________ .",
+    "options": [],
+    "correct": "56",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Let S be the mirror image of the point Q(1, 3, 4) with respect to the plane 2x − y + z + 3 = 0 and let R (3, 5, γ) be a point of this plane. Then the square of the length of the line segment SR is ___________ .",
+    "options": [],
+    "correct": "72",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "The probability distribution of random variable X is given by: X | 1 | 2 | 3 | 4 | 5 P(X) | K | 2K | 2K | 3K | K Let p = P(1 < X < 4 | X < 3). If 5p = λK, then λ equal to _________ .",
+    "options": [],
+    "correct": "30",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "Let $z_{1}$ and $z_{2}$ be two complex numbers such that $\\arg\\,(z_{1} - z_{2}) = \\frac{\\pi}{4}$ and $z_{1}$, $z_{2}$ satisfy the equation $|z - 3| = \\mathrm{Re}(z)$. Then the imaginary part of $z_{1} + z_{2}$ is equal to ___________ .",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "Let S = {1, 2, 3, 4, 5, 6, 9}. Then the number of elements in the set T = {A ⊆ S : A ≠ φ and the sum of all the elements of A is not a multiple of 3} is ___________ .",
+    "options": [],
+    "correct": "80",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "Two circles each of radius 5 units touch each other at the point (1, 2). If the equation of their common tangent is 4x + 3y = 10, and $C_{1}(\\alpha,\\ \\beta)$ and $C_{2}\\,(\\gamma,\\ \\delta)$, $C_{1} \\neq C_{2}$ are their centres, then $|(\\alpha + \\beta)\\,(\\gamma + \\delta)|$ is equal to ____________ .",
+    "options": [],
+    "correct": "40",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "$3 \\times 7^{22} + 2 \\times 10^{22} - 44$ when divided by 18 leaves the remainder __________ .",
+    "options": [],
+    "correct": "15",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "An online exam is attempted by 50 candidates out of which 20 are boys. The average marks obtained by boys is 12 with a variance 2. The variance of marks obtained by 30 girls is also 2. The average marks of all 50 candidates is 15. If μ is the average marks of girls and $\\sigma^{2}$ is the variance of marks of 50 candidates, then $\\mu + \\sigma^{2}$ is equal to _________ .",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "If $\\int \\frac{2e^{x} + 3e^{-x}}{4e^{x} + 7e^{-x}}\\,dx = \\frac{1}{14}\\left(ux + v\\,\\log_{e}(4e^{x} + 7e^{-x})\\right) + C$, where C is a constant of integration, then u + v is equal to ___________ .",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  }
+]

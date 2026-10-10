@@ -1,0 +1,5 @@
+Fex, and Fey; are known when x and y are :
+(1) x =F, Cl, Br, I and y = F, Cl, Br
+(2) x =F, Cl, Br and y = F, Cl, Br, I
+(3) x = Cl, Br, I and y = F, Cl, Br, I
+(4) x =F, Cl, Br, I and y = F, Cl, Br, I

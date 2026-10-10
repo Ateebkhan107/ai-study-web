@@ -1,0 +1,13 @@
+10.
+
+An LCR circuit contains resistance of 110 O
+and a supply of 220 V at 300 rad/s angular
+frequency. If only capacitance is removed from
+the circuit, current lags behind the voltage by
+45°. If on the other hand, only inductor is
+removed the current leads by 45° with the
+applied voltage. The rms current flowing in the
+
+circuit will be :
+(1) 1A (2)2.5 A
+G3) 15 A (4) 2A

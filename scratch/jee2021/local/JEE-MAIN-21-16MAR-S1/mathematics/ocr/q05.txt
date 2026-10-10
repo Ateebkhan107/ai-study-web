@@ -1,0 +1,7 @@
+If for xe 0, a); log ;sinx + log,cosx = —-1
+
+1
+and log; 9(sinx + cosx) = 7 (logion -1),n>0,
+
+then the value of n is equal to :
+(1) 20 (2) 12 (3) 9 (4) 16

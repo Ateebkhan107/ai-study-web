@@ -1,0 +1,2 @@
+The number of acyclic structural isomers
+(including geometrical isomers) for pentene are

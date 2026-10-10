@@ -1,0 +1,11 @@
+The reaction that occurs in a breath analyser, a
+device used to determine the alcohol level in a
+person's blood stream is
+
+2K,Cr,O, + 8H,SO, + 3C,H,O > 2Cr(SO,), +
+3C,H,O, + 2K,SO, + 11H,O
+
+If the rate of appearance of Cr,(SO,), is 2.67 mol
+min' at a particular time, the rate of disappearance
+of C,H,O at the same time is mol min’.
+(Nearest integer)

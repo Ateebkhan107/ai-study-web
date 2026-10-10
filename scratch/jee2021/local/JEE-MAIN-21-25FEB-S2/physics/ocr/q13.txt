@@ -1,0 +1,13 @@
+13.
+
+Y =A sin(ot + 9) is the time-displacement
+equation of a SHM. At t = 0 the displacement
+
+A
+of the particle is Y = p and it is moving along
+
+negative x-direction. Then the initial phase
+angle 9 will be :
+
+5 2
+OF OF OF @F

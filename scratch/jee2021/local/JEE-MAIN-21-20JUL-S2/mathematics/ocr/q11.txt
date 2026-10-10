@@ -1,0 +1,11 @@
+11.
+
+The sum of all the local minimum values of the
+
+twice differentiable function f : R — R defined by
+
+_3f"(Q) a
+
+f(x) =x) —3x? x+f"(1) is
+
+(1)-22. (2) 5 (3) -27 (4) 0

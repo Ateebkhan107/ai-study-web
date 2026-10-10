@@ -1,0 +1,20 @@
+10.
+
+Given below are two statements :
+
+Statement I: An electric dipole is placed at the
+centre of a hollow sphere. The flux of electric field
+through the sphere is zero but the electric field is
+not zero anywhere in the sphere.
+
+Statement II : If R is the radius of a solid metallic
+sphere and Q be the total charge on it. The electric
+field at any point on the spherical surface of radius
+r(<R) is zero but the electric flux passing through
+this closed spherical surface of radius r is not zero.
+In the light of the above statements, choose the
+correct answer from the options given below :
+(1) Both Statement I and Statement II are true
+(2) Statement I is true but Statement II is false
+(3) Both Statement I and Statement II are false
+(4) Statement I is false but Statement II is true.

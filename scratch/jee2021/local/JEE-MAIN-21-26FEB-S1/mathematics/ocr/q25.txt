@@ -1,0 +1,11 @@
+5.
+
+Let m,n € N and gcd (2,n) = 1. If
+
+30 30 +29 30 +..42 30 +1 30 =n.2™
+0 1 28 29 ,
+
+then n + m is equal to
+
+n n
+(Here k = C,)

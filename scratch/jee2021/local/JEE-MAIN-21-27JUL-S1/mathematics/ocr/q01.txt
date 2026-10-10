@@ -1,0 +1,7 @@
+If the mean and variance of the following data:
+6, 10, 7, 13, a, 12, b, 12
+
+7
+are 9 and = respectively, then (a — b)’ is equal to:
+
+(1) 24 (2) 12 (3) 32 (4) 16

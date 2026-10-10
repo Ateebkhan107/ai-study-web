@@ -1,0 +1,22 @@
+6. The value of the integral
+
+pan 0.sin 20(sin® 6+ sin* 0+sin? 6)V2sin* 0+3sin? 0+6 ae
+
+1—cos20
+
+is:
+
+(where c is a constant of integration)
+
+1 3
+(1) walt! 18sin’ 0 + 9sin* @—2sin® 6 |? +c
+
+1 2
+(2) rik 2cos° 6 —3cos* 0 6cos’ 0]? +c
+
+- 3
+(3) < 9—2sin® 0 —3sin* 0 6sin? 0? +c
+
+lr 3
+(4) ig 11—18cos’ 0+ 9cos* 0 2cos° 6}? +c
+

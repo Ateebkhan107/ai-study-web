@@ -1,0 +1,27 @@
+A student determined Young's Modulus of
+3
+
+MgL’
+
+elasticity using the formula Y = td's | The value
+
+of g is taken to be 9.8 m/s’, without any significant
+error, his observation are as following.
+
+Least count of the
+Physical
+Equipment used Observed value
+Quantity
+for measurement
+Mass (M) lg 2kg
+Length of bar (L) Imm lm
+Breadth of bar (b) 0.1mm 4cm
+Thickness of bar (d) 0.01 mm 04cm
+Depression (8) 0.01 mm 5mm
+
+Then the fractional error in the measurement of Y
+is:
+
+(1) 0.0083 (2) 0.0155
+
+(3) 0.155 (4) 0.083

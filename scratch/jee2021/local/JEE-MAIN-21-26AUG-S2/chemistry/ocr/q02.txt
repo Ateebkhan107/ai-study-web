@@ -1,0 +1,21 @@
+Given below are two statements : one is labelled as
+Assertion (A) and the other is labelled as Reason (R).
+Assertion (A) : Photochemical smog causes
+cracking of rubber.
+
+Reason (R) : Presence of ozone, nitric oxide,
+acrolein, formaldehyde and peroxyacetyl nitrate in
+photochemical smog makes it oxidizing.
+
+Choose the most appropriate answer from the
+options given below :
+
+(1) Both (A) and (R) are true but (R) is not the
+true explanation of (A)
+
+(2) (A) is false but (R) is true.
+
+(3) (A) is true but (R) is false
+
+(4) Both (A) and (R) are true and (R) is the true
+explanation of (A)

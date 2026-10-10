@@ -1,0 +1,6 @@
+Let f(x) and g(x) be two functions satisfying f(x?)
++ g(4 —x) = 4x? and g(4 — x) + g(x) = 0, then the
+
+4
+value of J f(x) dx is
+4

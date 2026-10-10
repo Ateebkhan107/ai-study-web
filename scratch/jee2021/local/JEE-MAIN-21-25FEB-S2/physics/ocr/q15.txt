@@ -1,0 +1,17 @@
+15.
+
+An electron with kinetic energy K, enters
+between parallel plates of a capacitor at an angle
+‘a’ with the plates. It leaves the plates at angle
+'B' with kinetic energy K,. Then the ratio of
+kinetic energies K, : K, will be:
+
+sin’ B cos’ B cos B cosB
+
+(2) (3) (4)
+
+cos” a cosa sina
+
+(1)
+
+cos’ a

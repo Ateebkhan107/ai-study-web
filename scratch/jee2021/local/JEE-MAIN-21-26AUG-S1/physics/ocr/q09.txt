@@ -1,0 +1,11 @@
+9.
+
+Identify the logic operation carried out by the
+given circuit :-
+
+Xx
+A
+
+B Y
+
+(1) OR (2)AND (3)NOR  (4)NAND

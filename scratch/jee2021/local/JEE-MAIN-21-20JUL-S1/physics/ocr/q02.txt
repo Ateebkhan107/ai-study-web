@@ -1,0 +1,8 @@
+The normal reaction 'N' for a vehicle of 800 |
+
+mass, negotiating a turn on a 30° banked road
+
+maximum possible speed without skidding
+x 10° kg m/s’.
+
+(1) 10.2 (2) 7.2 (3) 12.4 (4) 6.96

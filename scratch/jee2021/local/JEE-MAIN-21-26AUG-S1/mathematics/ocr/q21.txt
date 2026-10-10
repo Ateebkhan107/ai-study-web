@@ -1,0 +1,29 @@
+20.
+
+=> Ta-4b=1 ...... (ii)
+*. by (i) and (ii): a=3,b=5
+=> C3, 5)
+m,. = 2/3
+Also, m,, = 7/4
+
+2 4
+tan 3 7 same u
+1+ 22
+12
+1
+2.—
+=> tanQ=—_2.=-*
+1 3
+i
+4
+
+If the truth value of the Boolean expression
+
+((py q)A (q > r) A(~ r)) > (p Aq) is false,
+then the truth values of the statements p, q, r
+respectively can be:
+
+(1) TET (2) FFT
+
+(3) TFF (4)FTF
+

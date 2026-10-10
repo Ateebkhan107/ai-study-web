@@ -1,0 +1,21 @@
+In Freundlich adsorption isotherm, slope of AB
+
+line is :
+
+—
+
+Ax
+m
+
+log
+
+log P —~>
+(1) log n with (n > 1)
+(2) n with (n, 0.1 to 0.5)
+
+(3) log_with(n <1)
+n
+
+1 1
+(4) — with [+ =o )
+n n

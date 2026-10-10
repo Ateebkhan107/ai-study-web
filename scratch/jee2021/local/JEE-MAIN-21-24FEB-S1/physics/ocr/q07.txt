@@ -1,0 +1,14 @@
+Given below are two statements :
+Statement-I : Two photons having equal linear
+momenta have equal wavelengths.
+Statement-II : If the wavelength of photon is
+decreased, then the momentum and energy of
+a photon will also decrease.
+
+In the light of the above statements, choose the
+correct answer from the options given below.
+(1) Both Statement I and Statement II are true
+(2) Statement I is false but Statement II is true
+(3) Both Statement I and Statement I are false
+(4) Statement I is true but Statement II is false
+

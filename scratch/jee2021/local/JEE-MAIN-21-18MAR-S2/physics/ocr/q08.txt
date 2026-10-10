@@ -1,0 +1,12 @@
+The correct relation between a (ratio of
+collector current to emitter current) and B (ratio
+of collector current to base current) of a
+
+transistor is :
+
+() B=
+(2) a=
+3) B=
+aan
+
+1+8

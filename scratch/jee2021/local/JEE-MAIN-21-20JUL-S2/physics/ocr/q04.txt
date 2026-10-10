@@ -1,0 +1,7 @@
+With what speed should a galaxy move outward
+with respect to earth so that the sodium-D line at
+wavelength 5890 A is observed at 5896 A ?
+
+(1) 306 km/sec (2) 322 km/sec
+
+(3) 296 km/sec (4) 336 km/sec

@@ -1,0 +1,19 @@
+The point P (a,b) undergoes the following three
+
+transformations successively :
+
+(a) reflection about the line y = x.
+
+(b) translation through 2 units along the positive
+direction of x-axis.
+
+(c) rotation through angle i about the origin in
+
+the anti-clockwise direction.
+If the co-ordinates of the final position of the point
+
+1 7
+P are | -—~,—= |, then the value of 2a + b is
+a5]
+equal to :
+(1) 13 (2)9 (3)5 (4)7

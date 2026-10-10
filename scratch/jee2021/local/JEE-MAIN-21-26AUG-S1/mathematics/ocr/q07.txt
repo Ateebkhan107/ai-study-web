@@ -1,0 +1,8 @@
+Let f(x) = cos| 2 tan”! sin [cor iw) ,
+
+0<x<1.Then:
+
+(1) (l= xy f(x) - 2(f@))’ = 0
+(2) (1 + xy f(x) + 2(f())Y = 0
+(3) (1x f(x) + 2(f@))’ = 0
+(4) (1 + xy f(x) -24@@) =0

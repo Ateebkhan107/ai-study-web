@@ -1,0 +1,12 @@
+3.
+
+The voltage across the 10Q resistor in the given
+circuit is x volt.
+
+50Q
+
+10Q 200
+
+170 V
+
+The value of 'x' to the nearest integer is

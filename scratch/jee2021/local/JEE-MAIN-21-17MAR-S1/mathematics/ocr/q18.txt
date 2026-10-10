@@ -1,0 +1,19 @@
+18.
+
+Which of the following statements is incorrect
+for the function g(a) for a € R such that
+
+«a
+sin’ Xx
+s(®)=|—
+cos X+sin xX
+
+ala quia
+
+(1) g(a) is a strictly increasing function
+
+1
+(2) g(a) has an inflection point at a = “5
+
+(3) g(a) is a strictly decreasing function
+(4) g(a) is an even function

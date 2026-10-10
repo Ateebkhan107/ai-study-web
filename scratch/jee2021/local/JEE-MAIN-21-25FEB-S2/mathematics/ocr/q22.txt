@@ -1,0 +1,8 @@
+A function f is defined on [-3, 3] as
+
+(x)= min ({Ix|,2—x?},-2<x<2
+[xl] ,2<Ix1<3
+
+where [x] denotes the greatest integer < x. The
+number of points, where f is not differentiable in
+(-3, 3) is_

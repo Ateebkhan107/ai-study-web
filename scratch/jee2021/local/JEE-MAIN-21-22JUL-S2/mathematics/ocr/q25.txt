@@ -1,0 +1,2 @@
+The sum of all the elements in the set {n € {1, 2, ...., 100} |
+H.C.F. of n and 2040 is 1} is equal to

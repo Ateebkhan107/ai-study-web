@@ -1,0 +1,9 @@
+15.
+
+The coefficients a, b and c of the quadratic
+equation, ax? + bx + c = 0 are obtained by
+throwing a dice three times. The probability that
+this equation has equal roots is:
+
+ryt o> wt we
+) 5 ) a6 ) 36 4 oy

@@ -1,0 +1,12 @@
+A 2 pF capacitor C, is first charged to a potential
+difference of 10 V using a battery.Then the
+battery is removed and the capacitor is
+connected to an uncharged capacitor C, of 8uF.
+The charge in C, on equilibrium condition
+is uC. (Round off to the Nearest
+
+Integer)
+
+S, S,
+| 2uF 8pF
+10V l Te T c,

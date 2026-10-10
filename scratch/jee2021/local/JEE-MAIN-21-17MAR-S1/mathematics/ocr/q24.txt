@@ -1,0 +1,14 @@
+Let there be three independent events E,, E, and
+E;. The probability that only E, occurs is a,
+only E, occurs is B and only E; occurs is y. Let
+‘p' denote the probability of none of events
+occurs that satisfies the equations
+(a — 2B) p = of and (B — 3y)p = 2fy. All the
+given probabilities are assumed to lie in the
+interval (0, 1).
+
+Then Probability of occurrence of E,
+
+” Probability of occurrence of E, is equal
+
+to

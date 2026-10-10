@@ -1,0 +1,7 @@
+A signal of 0.1 kW is transmitted in a cable. The
+attenuation of cable is —5 dB per km and cable
+length is 20 km. The power received at receiver
+is 10-* W. The value of x is
+
+P, \
+[Gain in dB = 10 logiol p } 1

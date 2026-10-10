@@ -1,0 +1,18 @@
+15.
+
+Given below are two statements :-
+Statement I: The value of the parameter
+"Biochemical Oxygen Demand (BOD)" is
+important for survival of aquatic life.
+Statement II : The optimum value of BOD is
+6.5 ppm.
+
+In the light of the above statements, choose the
+most appropriate answer from the options given
+below :
+
+(1) Statement I is false but Statement II is true
+(2) Both Statement I and Statement II are true
+
+(3) Statement I is true but Statement II is false
+(4) Both Statement I and Statement II are false

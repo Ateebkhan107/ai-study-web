@@ -1,0 +1,2 @@
+1. The total number of two digit numbers 'n’, such that
+39 + 7. is a multiple of 10, is

@@ -1,0 +1,8 @@
+10.
+
+At 20°C, the vapour pressure of benzene is 70 torr
+and that of methyl benzene is 20 torr. The mole
+fraction of benzene in the vapour phase at 20°C
+above an equimolar mixture of benzene and methyl
+
+benzene is x 10°. (Nearest integer)

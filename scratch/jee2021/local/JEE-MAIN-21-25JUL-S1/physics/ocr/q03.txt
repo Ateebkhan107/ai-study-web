@@ -1,0 +1,8 @@
+What should be the order of arrangement of
+de-Broglie wavelength of electron (A,.), an
+a-particle (A,,) and proton (A,) given that all have
+the same kinetic energy ?
+
+(1) Ac = Ap = Ae (2) Ae < Mp < Aa
+
+(3) Ac > Ap > Ae (4) Ac = Ap > Aa

@@ -1,0 +1,14 @@
+Water drops are falling from a nozzle of a shower
+onto the floor, from a height of 9.8 m. The drops
+fall at a regular interval of time. When the first
+drop strikes the floor, at that instant, the third drop
+begins to fall. Locate the position of second drop
+from the floor when the first drop strikes the floor.
+
+(1) 4.18 m
+
+(2) 2.94m
+
+(3) 2.45 m
+
+(4) 7.35 m

@@ -1,0 +1,98 @@
+wSaral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP >
+
+4. The angular frequency of alternating current in
+a L-C-R circuit is 100 rad/s. The components
+connected are shown in the figure. Find the
+value of inductance of the coil and capacity of
+
+condenser.
+
+R=60Q
+
+(1) 0.8 H and 150 pF
+
+(2) 0.8 H and 250 uF
+
+(3) 1.33 H and 250 pF
+(4) 1.33 H and 150 pF
+Official Ans. by NTA (2)
+
+15 1
+Sol. Current through 600 resistance “bo 4 A
+thus capacitor current = 4 A
+Vo =1 Xe
+10 t
+= 7-7 x 7
+
+4 of
+Cc a 250 pF
+
+~** 400 ~ 4000 ~~
+Now,
+
+t th h 40Q resist 1 A
+current throug resistance = 7 = 5
+th t th h induct it aN
+
+us current through inductor = —77 =],
+1
+V, = IX, =— x oL
+4
+
+1
+20=— x 100xL
+
+4
+>L=08H
+
+JEE Exam Solution
+
+Sol.
+
+A proton, a deuteron and an a particle are
+moving with same momentum in a uniform
+magnetic field. The ratio of magnetic forces
+acting on them is ____ and their speed is ___
+
+in the ratio.
+
+()1:2:4and2:1:1
+(2)2:1:land4:2: 1
+(3)4:2:land2:1:1
+(4)1:2:4and1:1:2
+
+Official Ans. by NTA (2)
+
+F = q(vxB) = = (BxB)
+
+=> Foc
+
+m
+
+ee 2e
+—~m 2m. 4m
+P Pp Pp
+1.1.2
+~1°2°4
+=2:1:1
+
+Now for speed calculation
+
+P =constant > Vx—
+
+m
+re oe
+
+thus Vv) > V2:V3= my Om 4m
+Pp P Pp
+
+1 iil
+
+“1°27 4
+
+=4:2:1
+
+www.esaral.com 2
+

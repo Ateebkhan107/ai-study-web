@@ -1,0 +1,6 @@
+A body of mass 'm' dropped from a height ‘h'
+reaches the ground with a speed of 0.8./gh . The
+
+value of workdone by the air-friction is :
+(1) -0.68 mgh (2) mgh
+(3) 1.64 mgh (4) 0.64 mgh

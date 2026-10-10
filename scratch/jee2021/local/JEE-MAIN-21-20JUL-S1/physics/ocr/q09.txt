@@ -1,0 +1,10 @@
+If A and B are two vectors satisfying the relatic
+
+A-B =|AxB| . Then the value of |A-B will be
+a) VA? +BU
+
+(2) VA? +B?+V2AB
+
+(3) VA’ +B’ +2AB
+
+(4) VA? +B?-V2AB

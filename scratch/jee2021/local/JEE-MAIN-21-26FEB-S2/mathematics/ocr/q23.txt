@@ -1,0 +1,5 @@
+Let a and B be two real numbers such that
+a+ =1 and of =-1. Let p, = (a)? + (B),
+Pn_, = 11 and p,, ; = 29 for some integer
+
+n= 1. Then, the value of p2 is _____

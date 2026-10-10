@@ -1,0 +1,5 @@
+5. Let A=|y z x], where x, y and z are real
+ZxY
+
+numbers such that x + y + z > 0 and xyz = 2.
+If A2 = I,, then the value of x3 + y3 + z3 is

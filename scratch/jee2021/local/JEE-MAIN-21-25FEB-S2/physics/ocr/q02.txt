@@ -1,0 +1,15 @@
+In a ferromagnetic material, below the curie
+temperature, a domain is defined as :
+
+(1) a macroscopic region with zero
+magnetization.
+
+(2) a macroscopic region with consecutive
+magnetic dipoles oriented in opposite
+direction.
+
+(3) a macroscopic region with randomly
+oriented magnetic dipoles.
+
+(4) a macroscopic region with saturation
+magnetization.

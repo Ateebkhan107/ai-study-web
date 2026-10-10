@@ -1,0 +1,16 @@
+10.
+
+A small square loop of side 'a' and one turn is
+placed inside a larger square loop of side b and one
+turn (b >> a). The two loops are coplanar with their
+centres coinciding. If a current I is passed in the
+square loop of side 'b', then the coefficient of
+mutual inductance between the two loops is :
+
+2
+Ho a Ho 82
+1) 28/2 — 2) 2
+(1) 4n b @) 4n a
+b? 82
+@) 82 (4) Po eNe
+T a 4n b

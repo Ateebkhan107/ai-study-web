@@ -1,0 +1,386 @@
+[
+  {
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 45,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 48,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-12APR-S1",
+    "qnum": 49,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-30JAN-S1",
+    "qnum": 13,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 35,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 37,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S1",
+    "qnum": 40,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 32,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 47,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 61,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 66,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 80,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 31,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 34,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 40,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S1",
+    "qnum": 44,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 16,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 66,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 71,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 78,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-10APR-S1",
+    "qnum": 66,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-10APR-S1",
+    "qnum": 78,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S2",
+    "qnum": 74,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 31,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 32,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 34,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-25JAN-S1",
+    "qnum": 45,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 32,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 38,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 40,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-01FEB-S2",
+    "qnum": 47,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 67,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 68,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 72,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S2",
+    "qnum": 76,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 41,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 43,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-24JAN-S2",
+    "qnum": 17,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-10APR-S2",
+    "qnum": 66,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-10APR-S2",
+    "qnum": 75,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 70,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 72,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 78,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S2",
+    "qnum": 46,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 40,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 45,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-08APR-S1",
+    "qnum": 68,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 34,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 42,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-15APR-S1",
+    "qnum": 47,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-31JAN-S1",
+    "qnum": 45,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-29JAN-S1",
+    "qnum": 8,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-30JAN-S2",
+    "qnum": 46,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-29JAN-S2",
+    "qnum": 40,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-29JAN-S2",
+    "qnum": 45,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 43,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-06APR-S1",
+    "qnum": 44,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-31JAN-S2",
+    "qnum": 46,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-31JAN-S2",
+    "qnum": 50,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-31JAN-S1",
+    "qnum": 17,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-30JAN-S1",
+    "qnum": 36,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S2",
+    "qnum": 70,
+    "has_q_image": true,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S2",
+    "qnum": 73,
+    "has_q_image": false,
+    "has_opt_images": true
+  },
+  {
+    "paper": "JEE-MAIN-23-11APR-S1",
+    "qnum": 45,
+    "has_q_image": false,
+    "has_opt_images": true
+  }
+]

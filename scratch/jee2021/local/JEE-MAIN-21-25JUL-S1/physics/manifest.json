@@ -1,0 +1,90 @@
+[
+  {
+    "local_number": 1,
+    "question_number": 1,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q01.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q01.txt"
+  },
+  {
+    "local_number": 2,
+    "question_number": 2,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q02.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q02.txt"
+  },
+  {
+    "local_number": 3,
+    "question_number": 3,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q03.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q03.txt"
+  },
+  {
+    "local_number": 4,
+    "question_number": 4,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q04.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q04.txt"
+  },
+  {
+    "local_number": 8,
+    "question_number": 8,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q08.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q08.txt"
+  },
+  {
+    "local_number": 9,
+    "question_number": 9,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q09.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q09.txt"
+  },
+  {
+    "local_number": 10,
+    "question_number": 10,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q10.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q10.txt"
+  },
+  {
+    "local_number": 22,
+    "question_number": 22,
+    "question_type": "NUMERICAL",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q22.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q22.txt"
+  },
+  {
+    "local_number": 23,
+    "question_number": 23,
+    "question_type": "NUMERICAL",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q23.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q23.txt"
+  },
+  {
+    "local_number": 24,
+    "question_number": 24,
+    "question_type": "NUMERICAL",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q24.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q24.txt"
+  },
+  {
+    "local_number": 25,
+    "question_number": 25,
+    "question_type": "NUMERICAL",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/crops/q25.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-25JUL-S1/physics/ocr/q25.txt"
+  }
+]

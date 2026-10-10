@@ -1,0 +1,11 @@
+A plane electromagnetic wave propagating
+
+along y-direction can have the following pair
+of electric field (E) and magnetic field (B)
+
+components.
+
+(1) E,, B, or E,, B,
+(2) Ey, B, or E,, B,
+(3) E, B, or E,, By
+(4) E,, B, or E,, B,

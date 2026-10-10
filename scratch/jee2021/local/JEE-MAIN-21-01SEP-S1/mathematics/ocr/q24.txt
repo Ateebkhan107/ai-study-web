@@ -1,0 +1,4 @@
+Let the points of intersections of the lines x — y + 1 =0,
+x — 2y +3 =O and 2x — 5y + 11 = 0 are the mid points
+of the sides of a triangle ABC. Then the area of the
+triangle ABC is

@@ -1,0 +1,18 @@
+Curved surfaces of a plano-convex lens of
+refractive index py, and a plano-concave lens of
+refractive index py have equal radius of curvature
+as shown in figure. Find the ratio of radius of
+curvature to the focal length of the combined
+
+lenses.
+
+1
+Hy ~ Hy
+
+(1) (2) fi — be
+
+1
+Hy ~ Hy
+
+(3) (4) bo - bh
+

@@ -1,0 +1,18 @@
+A parallel plate capacitor with plate area 'A' and
+distance of separation 'd' is filled with a dielectric.
+What is the capacity of the capacitor when
+
+permittivity of the dielectric varies as :
+
+€(X) =, + kx, for fo<xs$}]
+
+e(x) =€, + k(d—x), for (5 <xsa|
+
+2/kA
+(1) [« Mt) (2) ——*4
+
+DI 2€, +kd
+2&,
+
+kA 2&,
+(3)0 OF (5 ]

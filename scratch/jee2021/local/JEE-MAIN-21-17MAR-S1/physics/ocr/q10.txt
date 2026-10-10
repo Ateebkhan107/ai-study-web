@@ -1,0 +1,13 @@
+10.
+
+A car accelerates from rest at a constant rate a
+for some time after which it decelerates at a
+constant rate B to come to rest. If the total time
+elapsed is t seconds, the total distance travelled
+is:
+
+AaB 2 208 2
+) (a+p) (2) (a+B)
+ap fa ap 2
+
+) (+B) aap)

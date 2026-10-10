@@ -1,0 +1,1022 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A 5V battery is connected across the points X and Y. Assume $D_1$ and $D_2$ to be normal silicon diodes. Find the current supplied by the battery if the +ve terminal of the battery is connected to point X.",
+    "options": [
+      "~0.86 A",
+      "~0.5 A",
+      "~ 0.43 A",
+      "~ 1.5 A"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/277d8748-144a-4b72-a2ed-9288cd07a896_fig.png"
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "A solid sphere of radius R gravitationally attracts a particle placed at 3R from its centre with a force $F_1$. Now a spherical cavity of radius $\\left(\\dfrac{R}{2}\\right)$ is made in the sphere (as shown in figure) and the force becomes $F_2$. The value of $F_1 : F_2$ is :",
+    "options": [
+      "41 : 50",
+      "36 : 25",
+      "50 : 41",
+      "25 : 36"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/9fd92f79-165e-4865-809a-924eff8ce047_fig.png"
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "A student is performing the experiment of resonance column. The diameter of the column tube is 6 cm. The frequency of the tuning fork is 504 Hz. Speed of the sound at the given temperature is 336 m/s. The zero of the metre scale coincides with the top end of the resonance column tube. The reading of the water level in the column when the first resonance occurs is :",
+    "options": [
+      "13 cm",
+      "14.8 cm",
+      "16.6 cm",
+      "18.4 cm"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "A diatomic gas, having $C_p = \\dfrac{7}{2}R$ and $C_v = \\dfrac{5}{2}R$, is heated at constant pressure. The ratio dU : dQ : dW",
+    "options": [
+      "3 : 7 : 2",
+      "5 : 7 : 2",
+      "5 : 7 : 3",
+      "3 : 5 : 2"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "Given below are two statements : Statement I : A speech signal of 2 kHz is used to modulate a carrier signal of 1 MHz. The bandwidth requirement for the signal is 4 kHz. Statement II : The side band frequencies are 1002 kHz and 998 kHz. In the light of the above statements, choose the correct answer from the options given below :",
+    "options": [
+      "Both statement I and statement II are false",
+      "Statement I is false but statement II is true",
+      "Statement I is true but statement II is false",
+      "Both statement I and statement II are true"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "The current (i) at time t=0 and $t = \\infty$ respectively for the given circuit is :",
+    "options": [
+      "$\\dfrac{18E}{55}, \\dfrac{5E}{18}$",
+      "$\\dfrac{5E}{18}, \\dfrac{18E}{55}$",
+      "$\\dfrac{5E}{18}, \\dfrac{10E}{33}$",
+      "$\\dfrac{10E}{33}, \\dfrac{5E}{18}$"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/97406b89-b9c6-443c-ba65-470e2b74a866_fig.png"
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "Two satellites A and B of masses 200 kg and 400 kg are revolving round the earth at height of 600 km and 1600 km respectively. If $T_A$ and $T_B$ are the time periods of A and B respectively then the value of $T_B - T_A$ : [Given : radius of earth = 6400 km, mass of earth = $6 \\times 10^{24}$ kg]",
+    "options": [
+      "$4.24 \\times 10^2$ s",
+      "$3.33 \\times 10^2$ s",
+      "$1.33 \\times 10^3$ s",
+      "$4.24 \\times 10^3$ s"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/f1c475b1-73c2-4b0a-b445-9f28b1e374af_fig.png"
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "An engine of a train, moving with uniform acceleration, passes the signal post with velocity u and the last compartment with velocity v. The velocity with which middle point of the train passes the signal post is :",
+    "options": [
+      "$\\sqrt{\\dfrac{v^2 - u^2}{2}}$",
+      "$\\dfrac{v - u}{2}$",
+      "$\\sqrt{\\dfrac{v^2 + u^2}{2}}$",
+      "$\\dfrac{u + v}{2}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "A proton, a deuteron and an α particle are moving with same momentum in a uniform magnetic field. The ratio of magnetic forces action on them is ________ and their speed is ______, in the ratio.",
+    "options": [
+      "2 : 1 : 1 and 4 : 2 : 1",
+      "1 : 2 : 4 and 2 : 1 :1",
+      "1 : 2 : 4 and 1 : 1 : 2",
+      "4 : 2 : 1 and 2 : 1 : 1"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "Given below are two statements : one is labelled as Assertion A and the other is labelled as Reason R. Assertion A : When a rod lying freely is heated, no thermal stress is developed in it. Reason R : On heating, the length of the rod increases. In the light of the above statements, choose the corect answer from the options given below :",
+    "options": [
+      "A is true but R is false",
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is false but R is true"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "In an octagon ABCDEFGH of equal side, what is the sum of $\\overrightarrow{AB} + \\overrightarrow{AC} + \\overrightarrow{AD} + \\overrightarrow{AE} + \\overrightarrow{AF} + \\overrightarrow{AG} + \\overrightarrow{AH}$ If, $\\overrightarrow{AO} = 2\\hat{i} + 3\\hat{j} - 4\\hat{k}$",
+    "options": [
+      "$16\\hat{i} + 24\\hat{j} - 32\\hat{k}$",
+      "$-16\\hat{i} - 24\\hat{j} - 32\\hat{k}$",
+      "$-16\\hat{i} - 24\\hat{j} + 32\\hat{k}$",
+      "$-16\\hat{i} + 24\\hat{j} + 32\\hat{k}$"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/605d151d-1dc4-4752-827d-aa1afd371672_fig.png"
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "Two radioactive substances X and Y originally have $N_1$ and $N_2$nuclei respectively. Half life of X is half of the half life of Y. After there half lives of Y, number of nuclei of both are equal. The ratio $\\dfrac{N_1}{N_2}$ will be equal to :",
+    "options": [
+      "$\\dfrac{8}{1}$",
+      "$\\dfrac{1}{8}$",
+      "$\\dfrac{3}{1}$",
+      "$\\dfrac{1}{3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "Match List –I with List- II : List-I (a)h (Planck's constant) (b)E (kinetic energy) (c)V (electric potential) (d)P (linear momentum) List-II (i) $[M\\,L\\,T^{-1}]$ (ii) $[M\\,L^2\\,T^{-1}]$ (iii) $[M\\,L^2\\,T^{-2}]$ (iv) $[ML^2I^{-1}\\,T^{-3}]$ Choose the correct answer from the options given below :",
+    "options": [
+      "(a) → (ii), (b) → (iii), (c) → (iv), (d) → (i)",
+      "(a) → (i), (b) → (ii), (c) → (iv), (d) → (iii)",
+      "(a) → (iii), (b) → (ii), (c) → (iv), (d) → (i)",
+      "(a) → (iii), (b) → (iv), (c) → (ii), (d) → (i)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "The pitch of the screw guage is 1 mm and there are 100 divisions on the circular scale. When nothing is put in between the jaws, the zero of the circular scale lines 8 divisions below the reference line. When a wire is placed between the jaws, the first linear scale division is clearly visible while $72^{nd}$ division on circular scale coincides with the reference line. The radius of the wire is :",
+    "options": [
+      "1.64 mm",
+      "1.80 mm",
+      "0.82 mm",
+      "0.90 mm"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "If the time period of a two meter long simple pendulum is 2 s, the acceleration due to gravity at the place where pendulum is executing S.H.M. is :",
+    "options": [
+      "$2\\pi^2 \\mathrm{ms}^{-2}$",
+      "$16 \\mathrm{m/s}^2$",
+      "$9.8 \\mathrm{ms}^{-2}$",
+      "$\\pi^2 \\mathrm{ms}^{-2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "An $\\alpha$ particle and a proton are accelerated from rest by a potential difference of 200 V. After this, their de Broglie wavelengths are $\\lambda_\\alpha$ and $\\lambda_p$ respectively. The ratio $\\dfrac{\\lambda_p}{\\lambda_\\alpha}$ is :",
+    "options": [
+      "8",
+      "2.8",
+      "3.8",
+      "7.8"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "Given below are two statements : one is labelled as Assertion A and the other is labelled as reason R. Assertion A : The escape velocities of planet A and B are same. But A and B are of unequal mass. Reason R : The product of their mass and radius must be same. $M_1R_1 = M_2R_2$ In the light of the above statements, choose the most appropriate answer from the options given below:",
+    "options": [
+      "Both A and R are correct but R is NOT the correct explanation of A",
+      "A is correct but R is not correct",
+      "Both A and R are correct and R is the correct explanation of A",
+      "A is not correct but R is correct"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "The angular frequency of alterlating current in a L-C-R circuit is 100 rad/s. The components connected are shown in the figure. Find the value of inductance of the coil and capacity of condenser.",
+    "options": [
+      "0.8 H and 250 $\\mu$F",
+      "0.8 H and 150 $\\mu$F",
+      "1.33 H and 250 $\\mu$F",
+      "1.33 H and 150 $\\mu$F"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/a529846b-8983-4360-beef-16b4e39c04ff_fig.png"
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "Two coherent light sources having intensity in the ratio 2x produce an interference pattern. The ratio $\\dfrac{I_{max} - I_{min}}{I_{max} + I_{min}}$ will be :",
+    "options": [
+      "$\\dfrac{2\\sqrt{2x}}{x + 1}$",
+      "$\\dfrac{\\sqrt{2x}}{2x + 1}$",
+      "$\\dfrac{2\\sqrt{2x}}{2x + 1}$",
+      "$\\dfrac{\\sqrt{2x}}{x + 1}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "Magnetic fields at two points on the axis of a circular coil at a distance of 0.05 m and 02 m from the centre are in the rato 8 : 1. The radius of coil is ________",
+    "options": [
+      "0.15 m",
+      "0.2 m",
+      "0.1 m",
+      "1.0 m"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "The same size images are formed by a convex lens when the object is placed at 20 cm or at 10 cm from the lens. The focal length of convex lens is ________ cm.",
+    "options": [],
+    "correct": "15",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "The electric field in a region is given by $\\vec{E} = \\left(\\dfrac{3}{5}E_0\\hat{i} + \\dfrac{4}{5}E_0\\hat{j}\\right)\\dfrac{N}{C}$. The ratio of flux of reported field through the rectangular surface of area 0.2 $m^2$ (parallel to y-z plane) to that of the surface of area 0.3 $m^2$ (parallel to x-z plane) is a : b, where a = __________ [Here $\\hat{i}$, $\\hat{j}$ and $\\hat{k}$ are unit vectors along x, y and z-axes respectively]",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "512 identical drops of mercury are charged to a potential of 2 V each. The drops are joined to form a single drop. The potential of this drop is _____ V.",
+    "options": [],
+    "correct": "128",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "The potential energy (U) of a diatomic molecule is a function dependent on r (interatomic distance) as $U = \\dfrac{\\alpha}{r^{10}} - \\dfrac{\\beta}{r^5} - 3$ Where, a and b are positive constants. The equilibrium distance between two atoms will $\\left(\\dfrac{2\\alpha}{\\beta}\\right)^{\\frac{a}{b}}$. Where a = ________",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A small bob tied at one end of a thin string of length 1m is describing a vertical circle so that the maximum and minimum tension in the string are in the rato 5 : 1. The velocity of the bob at the highest position is ________ m/s. (take g=10 $m/s^2$)",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "In a certain themodynamical process, the pressure ofa gas depends on its volume as $kV^3$ . The work done when the temperature changes from 100ºC to 300ºC will be _____ nR, where n denotes number of moles of a gas.",
+    "options": [],
+    "correct": "50",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "In the given circuit of potentiometer, the potentital difference E across AB (10 m length) is larger than $E_1$ and $E_2$ as well. For key $K_1$ (closed), the jockey is adjusted to touch the wire at point $J_1$ so that there is no deflection in the galvanometer. Now the first battery ($E_1$) is replaced by second battery ($E_2$) for working by making $K_1$ open and $E_2$ closed. The galvanometer gives then null deflection at $J_2$. The value of $\\dfrac{E_1}{E_2}$ is $\\dfrac{a}{b}$, where a = _____.",
+    "options": [],
+    "correct": "1",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-02-25-morning/7a9f9ccb-f9bf-4913-8d68-8b6e409bec69_fig.png"
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "A monoatomic gas of mass 4.0 u is kept in an insulated container. Container is moving with velocity 30 m/s. If container is suddenly stopped then change in temperature of the gas (R=gas constant) is $\\dfrac{x}{3R}$. Value of x is ________ .",
+    "options": [],
+    "correct": "3600",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "A coil of inductance 2 H having negligible resistance is connected to a source of supply whose voltage is given by V =3t volt. (where t is in second). If the voltage is applied when t = 0, then the energy stored in the coil after 4 s is ________ J.",
+    "options": [],
+    "correct": "144",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Physics",
+    "question": "A transmitting station releases waves of wavelength 960 m. A capacitor of 2.56 $\\mu$F is used in the resonant circuit. The self inductance of coil necessary for resonance is ______ $\\times 10^{-8}$H.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Ellingham diagram is a graphical representation of:",
+    "options": [
+      "ΔG vs T",
+      "(ΔG − TΔS) vs T",
+      "ΔH vs T",
+      "ΔG vs P"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "Which of the following equation depicts the oxidizing nature of H$_{2}$O$_{2}$?",
+    "options": [
+      "Cl$_{2}$ + H$_{2}$O$_{2}$ → 2HCl + O$_{2}$",
+      "KIO$_{4}$ + H$_{2}$O$_{2}$ → KIO$_{3}$ + H$_{2}$O + O$_{2}$",
+      "2I$^{-}$ + H$_{2}$O$_{2}$ + 2H$^{+}$ → I$_{2}$ + 2H$_{2}$O",
+      "I$_{2}$ + H$_{2}$O$_{2}$ + 2OH$^{-}$ → 2I$^{-}$ + 2H2O + O$_{2}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "In Freundlich adsorption isotherm at moderate pressure, the extent of adsorption $\\left(\\dfrac{x}{m}\\right)$ is directly proportional to P$^{x}$. The value of x is:",
+    "options": [
+      "∞",
+      "1",
+      "zero",
+      "$\\dfrac{1}{n}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "According to molecular orbital theory, the species among the following that does not exist is:",
+    "options": [
+      "He$_{2}^{-}$",
+      "He$_{2}^{+}$",
+      "O$_{2}^{2-}$",
+      "Be$_{2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Identify A in the given chemical reaction.",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/de19c681-8763-45d9-b57b-c91fe8fdee29_fig.png"
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Given below are two statements: Statement-I : CeO$_{2}$ can be used for oxidation of aldehydes and ketones. Statement-II : Aqueous solution of EuSO$_{4}$ is a strong reducing agent.",
+    "options": [
+      "Statement I is true, statement II is false",
+      "Statement I is false, statement II is true",
+      "Both Statement I and Statement II are false",
+      "Both Statement I and Statement II are true"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The major product of the following chemical reaction is: CH$_{3}$CH$_{2}$CN $\\xrightarrow[\\text{3) Pd/BaSO}_{4}\\text{, H}_{2}]{\\substack{\\text{1) H}_{3}\\text{O}^{+}\\text{, }\\Delta \\\\ \\text{2) SOCl}_{2}}}$ ?",
+    "options": [
+      "(CH$_{3}$CH$_{2}$CO)$_{2}$O",
+      "CH$_{3}$CH$_{2}$CHO",
+      "CH$_{3}$CH$_{2}$CH$_{3}$",
+      "CH$_{3}$CH$_{2}$CH$_{2}$OH"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Complete combustion of 1.80 g of an oxygen containing compound (C$_{x}$H$_{y}$O$_{z}$) gave 2.64 g of CO$_{2}$ and 1.08 g of H$_{2}$O. The percentage of oxygen in the organic compound is:",
+    "options": [
+      "63.53",
+      "53.33",
+      "51.63",
+      "50.33"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "The correct statement about B$_{2}$H$_{6}$ is:",
+    "options": [
+      "All B−H−B angles are of 120°.",
+      "Its fragment, BH$_{3}$, behaves as a Lewis base.",
+      "Terminal B−H bonds have less p-character when compared to bridging bonds.",
+      "The two B−H−B bonds are not of same length."
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "In which of the following pairs, the outer most electronic configuration will be the same?",
+    "options": [
+      "Fe$^{2+}$ and Co$^{+}$",
+      "Cr$^{+}$ and Mn$^{2+}$",
+      "Ni$^{2+}$ and Cu$^{+}$",
+      "V$^{2+}$ and Cr$^{+}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Which statement is correct?",
+    "options": [
+      "Buna-S is a synthetic and linear thermosetting polymer",
+      "Neoprene is addition copolymer used in plastic bucket manufacturing",
+      "Synthesis of Buna-S needs nascent oxygen",
+      "Buna-N is a natural polymer"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Given below are two statements: Statement-I : An allotrope of oxygen is an important intermediate in the formation of reducing smog. Statement-II : Gases such as oxides of nitrogen and sulphur present in troposphere contribute to the formation of photochemical smog. In the light of the above statements, choose the correct answer from the options given below:",
+    "options": [
+      "Statement I and Statement II are true",
+      "Statement I is true about Statement II is false",
+      "Both Statement I and Statement II are false",
+      "Statement I is false but Statement II is true"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "The plots of radial distribution functions for various orbitals of hydrogen atom against 'r' are given below: The correct plot for 3s orbital is:",
+    "options": [
+      "D",
+      "B",
+      "A",
+      "C"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/390c9d27-b6ce-40e2-abff-426b80fbc7e3_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Which of the glycosidic linkage galactose and glucose is present in lactose?",
+    "options": [
+      "C-1 of glucose and C-6 of galactose",
+      "C-1 of galactose and C-4 of glucose",
+      "C-1 of glucose and C-4 of galactose",
+      "C-1 of galactose and C-6 of glucose"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Which one of the following reactions will not form acetaldehyde?",
+    "options": [
+      "CH$_{3}$CH$_{2}$OH $\\xrightarrow{\\text{CrO}_{3} - \\text{H}_{2}\\text{SO}_{4}}$",
+      "CH$_{3}$CN $\\xrightarrow[\\text{ii) H}_{2}\\text{O}]{\\text{i) DIBAL-H}}$",
+      "CH$_{2}$ = CH$_{2}$ + O$_{2}$ $\\xrightarrow[\\text{H}_{2}\\text{O}]{\\text{Pd(II)/Cu(II)}}$",
+      "CH$_{3}$CH$_{2}$OH $\\xrightarrow[\\text{573 K}]{\\text{Cu}}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Which of the following reaction/s will not give p-aminoazobenzene?",
+    "options": [
+      "B only",
+      "A and B",
+      "C only",
+      "A only"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/e799622b-c1c3-4084-a0a8-a3b9c0cf62eb_fig.png"
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "The hybridization and magnetic nature of [Mn(CN)$_{6}$]$^{4-}$ and [Fe(CN)$_{6}$]$^{3-}$, respectively are:",
+    "options": [
+      "d$^{2}$sp$^{3}$ and paramagnetic",
+      "sp$^{3}$d$^{2}$ and paramagnetic",
+      "d$^{2}$sp$^{3}$ and diamagnetic",
+      "sp$^{3}$d$^{2}$ and diamagnetic"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "Identify A and B in the chemical reaction.",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/dcbbf719-aa2d-4a4b-8420-5cd8a26f3f7a_fig.png"
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "Compound(s) which will liberate carbon dioxide with sodium bicarbonate solution is/are:",
+    "options": [
+      "B and C only",
+      "B only",
+      "A and B only",
+      "C only"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/edcaa291-2919-44b7-8e13-17046723e09f_fig.png"
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The solubility of AgCN in a buffer solution of pH = 3 is x. The value of x is: [Assume: No cyano complex is formed; K$_{sp}$(AgCN) = 2.2 × 10$^{-16}$ and K$_{a}$ (HCN) = 6.2 × 10$^{-10}$]",
+    "options": [
+      "0.625 × 10$^{-6}$",
+      "1.6 × 10$^{-6}$",
+      "2.2 × 10$^{-16}$",
+      "1.9 × 10$^{-5}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "The reaction of cyanamide, NH$_{2}$CN$_{(s)}$ with oxygen was run in a bomb calorimeter and ΔU was found to be −742.24 kJ mol$^{-1}$. The magnitude of ΔH$_{298}$ for the reaction NH$_{2}$CN$_{(s)}$ + $\\frac{3}{2}$O$_{2}$(g) → N$_{2(g)}$ + O$_{2(g)}$ + H$_{2}$O$_{(l)}$ is _______ kJ. (Rounded off to the nearest integer) [Assume ideal gases and R = 8.314 J mol$^{-1}$ K$^{-1}$]",
+    "options": [],
+    "correct": "741",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "In basic medium CrO$_{4}^{2-}$ oxidizes S$_{2}$O$_{3}^{2-}$ to form SO$_{4}^{2-}$ and itself changes into Cr(OH)$_{4}^{-}$. The volume of 0.154 M CrO$_{4}^{2-}$ required to react with 40 mL of 0.25 M S$_{2}$O$_{3}^{2-}$ is _______ mL. (Rounded-off to the nearest integer)",
+    "options": [],
+    "correct": "173",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "For the reaction, aA + bB → cC + dD, the plot of log k vs $\\frac{1}{T}$ is given below: The temperature at which the rate constant of the reaction is 10$^{-4}$s$^{-1}$ is _______ K. [Rounded off to the nearest integer) [Given: The rate constant of the reaction is 10$^{-5}$ s$^{-1}$ at 500 K]",
+    "options": [],
+    "correct": "526",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/3a182893-8d94-4243-98a3-dc5b0884b6a9_fig.png"
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "0.4g mixture of NaOH, Na$_{2}$CO$_{3}$ and some inert impurities was first titrated with $\\frac{N}{10}$ HCl using phenolphthalein as an indicator, 17.5 mL of HCl was required at the end point. After this methyl orange was added and titrated. 1.5 mL of same HCl was required for the next end point. The weight percentage of Na$_{2}$CO$_{3}$ in the mixture is _______. (Rounded-off to the nearest integer)",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "The ionization enthalpy of Na$^{+}$ formation from Na$_{(g)}$ is 495.8 kJ mol$^{-1}$, while the electron gain enthalpy of Br is −325.0 kJ mol$^{-1}$. Given the lattice enthalpy of NaBr is −728.4 kJ mol$^{-1}$. The energy for the formation of NaBr ionic solid is (−)_______ × 10$^{-1}$ kJ mol$^{-1}$.",
+    "options": [],
+    "correct": "5576",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "Consider the following chemical reaction. HC ≡ CH $\\xrightarrow[\\text{(2) CO+HCl/AlCl}_{3}]{\\text{(1) Red hot Fe tube, 873 K}}$ Product The number of sp$^{2}$ hybridized carbon atom(s) present in the product is _______.",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "A car tyre is filled with nitrogen gas at 35 psi at 27°C. It will burst if pressure exceeds 40 psi. The temperature in °C at which the car tyre will burst is _______. (Rounded-off to the nearest integer)",
+    "options": [],
+    "correct": "70",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "Among the following, the number of halide(s) which is/are inert to hydrolysis is _______. (A) BF$_{3}$ (B) SiCl$_{4}$ (C) PCl$_{5}$ (D) SF$_{6}$",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "1 molal aqueous solution of an electrolyte A$_{2}$B$_{3}$ is 60% ionised. The boiling point of the solution at 1 atm is _______ K. (Rounded-off to the nearest integer) [Given K$_{b}$ for (H$_{2}$O) = 0.52 K kg mol$^{-1}$]",
+    "options": [],
+    "correct": "375",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Chemistry",
+    "question": "Using the provided information in the following paper chromatogram: Fig: Paper chromatography for compounds A and B the calculated R$_{f}$ value of A _______ × 10$^{-1}$.",
+    "options": [],
+    "correct": "4",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/92484108-2f97-46d6-8f99-0f0bfd0a2a61_fig.png"
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The coefficients a, b and c of the quadratic equation, $ax^{2} + bx + c = 0$ are obtained by throwing a dice three times. The probability that this equation has equal roots is :",
+    "options": [
+      "$\\frac{1}{54}$",
+      "$\\frac{1}{72}$",
+      "$\\frac{1}{36}$",
+      "$\\frac{5}{216}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "Let $\\alpha$ be the angle between the lines whose direction cosines satisfy the equations $l + m - n = 0$ and $l^{2} + m^{2} - n^{2} = 0$. Then the value of $\\sin^{4}\\alpha + \\cos^{4}\\alpha$ is :",
+    "options": [
+      "$\\frac{3}{4}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{5}{8}$",
+      "$\\frac{3}{8}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "The value of the integral $\\int \\frac{\\sin\\theta \\cdot \\sin 2\\theta (\\sin^{6}\\theta + \\sin^{4}\\theta + \\sin^{2}\\theta)\\sqrt{2\\sin^{4}\\theta + 3\\sin^{2}\\theta + 6}}{1 - \\cos 2\\theta}\\, d\\theta$ is (where c is a constant of integration)",
+    "options": [
+      "$\\frac{1}{18}\\left[9 - 2\\sin^{6}\\theta - 3\\sin^{4}\\theta - 6\\sin^{2}\\theta\\right]^{\\frac{3}{2}} + c$",
+      "$\\frac{1}{18}\\left[11 - 18\\sin^{2}\\theta + 9\\sin^{4}\\theta - 2\\sin^{6}\\theta\\right]^{\\frac{3}{2}} + c$",
+      "$\\frac{1}{18}\\left[11 - 18\\cos^{2}\\theta + 9\\cos^{4}\\theta - 2\\cos^{6}\\theta\\right]^{\\frac{3}{2}} + c$",
+      "$\\frac{1}{18}\\left[9 - 2\\cos^{6}\\theta - 3\\cos^{4}\\theta - 6\\cos^{2}\\theta\\right]^{\\frac{3}{2}} + c$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "A man is observing, from the top of a tower, a boat speeding towards the tower from a certain point A, with uniform speed. At that point, angle of depression of the boat with the man's eye is $30^{\\circ}$ (Ignore man's height). After sailing for 20 seconds towards the base of the tower (which is at the level of water), the boat has reached a point B, where the angle of depression is $45^{\\circ}$. Then the time taken (in seconds) by the boat from B to reach the base of the tower is :",
+    "options": [
+      "$10(\\sqrt{3} - 1)$",
+      "$10\\sqrt{3}$",
+      "$10$",
+      "$10(\\sqrt{3} + 1)$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "If $0 < \\theta, \\phi < \\frac{\\pi}{2}$, $x = \\sum_{n=0}^{\\infty} \\cos^{2n}\\theta$, $y = \\sum_{n=0}^{\\infty} \\sin^{2n}\\phi$ and $z = \\sum_{n=0}^{\\infty} \\cos^{2n}\\theta \\cdot \\sin^{2n}\\phi$ then :",
+    "options": [
+      "$xyz = 4$",
+      "$xy - z = (x + y)z$",
+      "$xy + yz + zx = z$",
+      "$xy + z = (x + y)z$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "The equation of the line through the point (0, 1, 2) and perpendicular to the line $\\frac{x-1}{2} = \\frac{y+1}{3} = \\frac{z-1}{-2}$ is :",
+    "options": [
+      "$\\frac{x}{-3} = \\frac{y-1}{4} = \\frac{z-2}{3}$",
+      "$\\frac{x}{3} = \\frac{y-1}{4} = \\frac{z-2}{3}$",
+      "$\\frac{x}{3} = \\frac{y-1}{-4} = \\frac{z-2}{3}$",
+      "$\\frac{x}{3} = \\frac{y-1}{4} = \\frac{z-2}{-3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "The statement $A \\rightarrow (B \\rightarrow A)$ is equivalent to:",
+    "options": [
+      "$A \\rightarrow (A \\wedge B)$",
+      "$A \\rightarrow (A \\vee B)$",
+      "$A \\rightarrow (A \\rightarrow B)$",
+      "$A \\rightarrow (A \\leftrightarrow B)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "The integer 'k', for which the inequality $x^{2} - 2(3k - 1)x + 8k^{2} - 7 > 0$ is valid for every x in R is :",
+    "options": [
+      "$3$",
+      "$2$",
+      "$4$",
+      "$0$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "A tangent is drawn to the parabola $y^{2} = 6x$ which is perpendicular to the line $2x + y = 1$. Which of the following points does NOT lie on it ?",
+    "options": [
+      "$(0, 3)$",
+      "$(-6, 0)$",
+      "$(4, 5)$",
+      "$(5, 4)$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "Let f, g: $N \\rightarrow N$ such that $f(n + 1) = f(n) + f(1)$ $\\forall n \\in N$ and g be any arbitrary function. Which of the following statements is NOT true ?",
+    "options": [
+      "f is one-one",
+      "If fog is one-one, then g is one-one",
+      "If g is onto, then fog is one-one",
+      "If f is onto, then $f(n) = n\\ \\forall n \\in N$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "Let the lines $(2 - i)z = (2 + i)\\bar{z}$ and $(2 + i)z + (i - 2)\\bar{z} - 4i = 0$, (here $i^{2} = -1$) be normal to a circle C. If the line $iz + \\bar{z} + 1 + i = 0$ is tangent to this circle C, then its radius is :",
+    "options": [
+      "$\\frac{3}{\\sqrt{2}}$",
+      "$3\\sqrt{2}$",
+      "$\\frac{3}{2\\sqrt{2}}$",
+      "$\\frac{1}{2\\sqrt{2}}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "All possible values of $\\theta \\in [0, 2\\pi]$ for which $\\sin 2\\theta + \\tan 2\\theta > 0$ lie in:",
+    "options": [
+      "$\\left(0, \\frac{\\pi}{2}\\right) \\cup \\left(\\pi, \\frac{3\\pi}{2}\\right)$",
+      "$\\left(0, \\frac{\\pi}{4}\\right) \\cup \\left(\\frac{\\pi}{2}, \\frac{3\\pi}{4}\\right) \\cup \\left(\\pi, \\frac{5\\pi}{4}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{7\\pi}{4}\\right)$",
+      "$\\left(0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\frac{3\\pi}{4}\\right) \\cup \\left(\\pi, \\frac{7\\pi}{6}\\right)$",
+      "$\\left(0, \\frac{\\pi}{4}\\right) \\cup \\left(\\frac{\\pi}{2}, \\frac{3\\pi}{4}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{11\\pi}{6}\\right)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "The image of the point (3,5) in the line $x - y + 1 = 0$, lies on :",
+    "options": [
+      "$(x - 2)^{2} + (y - 4)^{2} = 4$",
+      "$(x - 4)^{2} + (y + 2)^{2} = 16$",
+      "$(x - 4)^{2} + (y - 4)^{2} = 8$",
+      "$(x - 2)^{2} + (y - 2)^{2} = 12$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "If Rolle's theorem holds for the function $f(x) = x^{3} - ax^{2} + bx - 4$, $x \\in [1, 2]$ with $f'\\left(\\frac{4}{3}\\right) = 0$, then ordered pair (a, b) is equal to :",
+    "options": [
+      "$(-5, 8)$",
+      "$(5, 8)$",
+      "$(5, -8)$",
+      "$(-5, -8)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "If the curves, $\\frac{x^{2}}{a} + \\frac{y^{2}}{b} = 1$ and $\\frac{x^{2}}{c} + \\frac{y^{2}}{d} = 1$ intersect each other at an angle of $90^{\\circ}$, then which of the following relations is true ?",
+    "options": [
+      "$a + b = c + d$",
+      "$a - b = c - d$",
+      "$ab = \\frac{c+d}{a+b}$",
+      "$a - c = b + d$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "$\\lim\\limits_{n \\to \\infty} \\left( 1 + \\dfrac{1 + \\frac{1}{2} + \\dots + \\frac{1}{n}}{n^2} \\right)^{n}$ is equal to :",
+    "options": [
+      "$\\frac{1}{2}$",
+      "$\\frac{1}{e}$",
+      "$1$",
+      "$0$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "The total number of positive integral solutions (x, y, z) such that $xyz = 24$ is",
+    "options": [
+      "$36$",
+      "$45$",
+      "$24$",
+      "$30$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "If a curve passes through the origin and the slope of the tangent to it at any point $(x, y)$ is $\\dfrac{x^2 - 4x + y + 8}{x - 2}$, then this curve also passes through the point :",
+    "options": [
+      "$(4, 5)$",
+      "$(5, 4)$",
+      "$(4, 4)$",
+      "$(5, 5)$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "The value of $\\int\\limits_{-1}^{1} x^2 e^{[x^3]} dx$, where $[t]$ denotes the greatest integer $\\le t$, is :",
+    "options": [
+      "$\\frac{e+1}{3}$",
+      "$\\frac{e-1}{3e}$",
+      "$\\frac{e+1}{3e}$",
+      "$\\frac{1}{3e}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "When a missile is fired from a ship, the probability that it is intercepted is $\\frac{1}{3}$ and the probability that the missile hits the target, given that it is not intercepted, is $\\frac{3}{4}$. If three missiles are fired independently from the ship, then the probability that all three hit the target, is:",
+    "options": [
+      "$\\frac{1}{8}$",
+      "$\\frac{1}{27}$",
+      "$\\frac{3}{4}$",
+      "$\\frac{3}{8}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Let $A_1, A_2, A_3, \\dots$ be squares such that for each $n \\ge 1$, the length of the side of $A_n$ equals the length of diagonal of $A_{n+1}$. If the length of $A_1$ is 12 cm, then the smallest value of $n$ for which area of $A_n$ is less than one, is __________.",
+    "options": [],
+    "correct": "9",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "The graphs of sine and cosine functions, intersect each other at a number of points and between two consecutive points of intersection, the two graphs enclose the same area A. Then $A^4$ is equal to __________",
+    "options": [],
+    "correct": "64",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "The locus of the point of intersection of the lines $(\\sqrt{3})kx + ky - 4\\sqrt{3} = 0$ and $\\sqrt{3}x - y - 4(\\sqrt{3})k = 0$ is a conic, whose eccentricity is __________.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "If $A = \\begin{bmatrix} 0 & -\\tan\\left(\\frac{\\theta}{2}\\right) \\\\ \\tan\\left(\\frac{\\theta}{2}\\right) & 0 \\end{bmatrix}$ and $(I_2 + A)(I_2 - A)^{-1} = \\begin{bmatrix} a & -b \\\\ b & a \\end{bmatrix}$, then $13(a^2 + b^2)$ is equal to _______.",
+    "options": [],
+    "correct": "13",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "Let $f(x)$ be a polynomial of degree 6 in $x$, in which the coefficient of $x^6$ is unity and it has extrema at $x = -1$ and $x = 1$. If $\\lim\\limits_{x \\to 0} \\dfrac{f(x)}{x^3} = 1$, then $5 \\cdot f(2)$ is equal to __________",
+    "options": [],
+    "correct": "144",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "The number of points, at which the function $f(x) = |2x + 1| - 3|x + 2| + |x^2 + x - 2|$, $x \\in R$ is not differentiable, is __________.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "If the system of equations $kx + y + 2z = 1$ $3x - y - 2z = 2$ $-2x - 2y - 4z = 3$ has infinitely many solutions, then $k$ is equal to ___________.",
+    "options": [],
+    "correct": "21",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{a} = \\hat{i} + 2\\hat{j} - \\hat{k}$, $\\vec{b} = \\hat{i} - \\hat{j}$ and $\\vec{c} = \\hat{i} - \\hat{j} - \\hat{k}$ be three given vectors. If $\\vec{r}$ is a vector such that $\\vec{r} \\times \\vec{a} = \\vec{c} \\times \\vec{a}$ and $\\vec{r} \\cdot \\vec{b} = 0$, then $\\vec{r} \\cdot \\vec{a}$ is equal to ________",
+    "options": [],
+    "correct": "12",
+    "source_image": null
+  },
+  {
+    "source_number": 89,
+    "subject": "Mathematics",
+    "question": "Let $A = \\begin{bmatrix} x & y & z \\\\ y & z & x \\\\ z & x & y \\end{bmatrix}$, where $x$, $y$ and $z$ are real numbers such that $x + y + z > 0$ and $xyz = 2$. If $A^2 = I_3$, then the value of $x^3 + y^3 + z^3$ is ________.",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  },
+  {
+    "source_number": 90,
+    "subject": "Mathematics",
+    "question": "The total number of numbers, lying between 100 and 1000 that can be formed with the digits 1, 2, 3, 4, 5, if the repetition of digits is not allowed and numbers are divisible by either 3 or 5 is _________.",
+    "options": [],
+    "correct": "32",
+    "source_image": null
+  }
+]

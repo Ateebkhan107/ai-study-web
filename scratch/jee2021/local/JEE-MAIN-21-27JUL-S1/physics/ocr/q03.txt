@@ -1,0 +1,8 @@
+The relative permittivity of distilled water is 81.
+The velocity of light in it will be :
+
+(Given pL, = 1)
+
+(1) 4.33 x 10’ m/s (2) 2.33 x 10’ m/s
+
+(3) 3.33 x 10’ m/s (4) 5.33 x 10’ m/s

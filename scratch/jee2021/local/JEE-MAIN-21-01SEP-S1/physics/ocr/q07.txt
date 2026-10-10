@@ -1,0 +1,13 @@
+Due to cold weather a 1 m water pipe of
+cross-sectional area 1 cm” is filled with ice at
+—10°C. Resistive heating is used to melt the ice.
+Current of 0.5 A is passed through 4 kQ resistance.
+Assuming that all the heat produced is used for
+melting, what is the minimum time required ?
+(Given latent heat of fusion for water/ice
+= 3.33 x 10° J kg”, specific heat of ice = 2 x 10° J
+kg”! and density of ice = 10° kg / m?
+
+(1) 0.353 s (2) 35.3s
+
+(3) 3.53 s (4) 70.6 s

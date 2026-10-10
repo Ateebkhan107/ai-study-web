@@ -1,0 +1,12 @@
+The kinetic energy of an electron in the second Bohr
+
+2
+
+orbit of a hydrogen atom is equal to The value
+
+To
+ao
+
+of 10x is . (a, is radius of Bohr's orbit)
+
+(Nearest integer) [Given : x = 3.14]

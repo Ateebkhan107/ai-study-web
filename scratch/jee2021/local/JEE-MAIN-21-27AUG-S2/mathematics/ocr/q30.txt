@@ -1,0 +1,8 @@
+10.
+
+If |x = —(ux + v log (4e* + 7e*))+ C,
+4e* + 7e* 14
+
+where C is a constant of integration, then u + v is
+
+equal to

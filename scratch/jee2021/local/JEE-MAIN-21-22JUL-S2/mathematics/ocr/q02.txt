@@ -1,0 +1,5 @@
+Let S, denote the sum of first n-terms of an
+arithmetic progression. If S,, = 530, S,= 140, then
+S,, — S, is equal to :
+
+(1) 1862) (2) 1842, (3) 1852 (4) 1872

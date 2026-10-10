@@ -1,0 +1,6 @@
+1.
+
+The sum of all those terms which are rational
+
+numbers in the expansion of (2'? +3!4 )” is:
+(1) 89 (2) 27 (3) 35 (4) 43

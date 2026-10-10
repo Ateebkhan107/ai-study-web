@@ -1,0 +1,6 @@
+If the solution curve of the differential equation
+(2x — 10y’) dy + ydx = 0, passes through the points
+(0, 1) and (2, B), then B is a root of the equation:
+(1) y -2y-2=0 (2) 2y’-2y-1=0
+
+(3) 2y’-y'-2=0 (4)y-y-1=0

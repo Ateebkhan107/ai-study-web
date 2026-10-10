@@ -1,0 +1,24 @@
+(d)
+
+Match List-I with List-II
+
+List-I List-I
+(Parameter) (Unit)
+
+Cell constant (i) S cm’ mol
+Molar conductivity (ii) Dimensionless
+Conductivity (iii) m*
+
+Degree of dissociation (iv) Q' m'
+of electrolyte
+
+Choose the most appropriate answer from the
+options given below :
+
+(1) (a)-Giii), (b)-(), (¢)-(iv), (d)-Gi)
+
+(2) (a)-(ili), (b)-(i), (¢)-(ii), (d)-Gv)
+
+(3) (a)-(), (b)-(iv), (c)-(aii), (d)-Gi)
+
+(4) (a)-Gii), (b)-G), (c)-(aii), (d)-Gv)

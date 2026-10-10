@@ -1,0 +1,17 @@
+Consider the statement "The match will be played
+
+only if the weather is good and ground is not wet".
+
+Select the correct negation from the following:
+
+(1) The match will not be played and weather is
+not good and ground is wet.
+
+(2) If the match will not be played, then either
+weather is not good or ground is wet.
+
+(3) The match will be played and weather is not
+good or ground is wet.
+
+(4) The match will not be played or weather is
+good and ground is not wet.

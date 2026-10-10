@@ -1,0 +1,26 @@
+18.
+
+For a body executing S.H.M. :
+
+(a) Potential energy is always equal to its K.E.
+
+(b) Average potential and kinetic energy over any
+given time interval are always equal.
+
+(c) Sum of the kinetic and potential energy at any
+point of time is constant.
+
+(d) Average K.E. in one time period is equal to
+average potential energy in one time period.
+
+Choose the most appropriate option from the
+
+options given below :
+
+(1) (c) and (d)
+
+(2) only (c)
+
+(3) (b) and (c)
+
+(4) only (b)

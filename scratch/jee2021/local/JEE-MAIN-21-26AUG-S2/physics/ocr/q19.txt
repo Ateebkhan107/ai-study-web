@@ -1,0 +1,8 @@
+19.
+
+If the length of the pendulum in pendulum clock
+increases by 0.1%, then the error in time per day is:
+(1) 864s
+(2) 4.32 s
+(3) 43.2 s
+(4) 8.64 s

@@ -1,0 +1,90 @@
+[
+  {
+    "local_number": 1,
+    "question_number": 31,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q01.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q01.txt"
+  },
+  {
+    "local_number": 5,
+    "question_number": 35,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q05.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q05.txt"
+  },
+  {
+    "local_number": 6,
+    "question_number": 36,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q06.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q06.txt"
+  },
+  {
+    "local_number": 7,
+    "question_number": 37,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q07.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q07.txt"
+  },
+  {
+    "local_number": 10,
+    "question_number": 40,
+    "question_type": "MCQ",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q10.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q10.txt"
+  },
+  {
+    "local_number": 11,
+    "question_number": 41,
+    "question_type": "MCQ",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q11.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q11.txt"
+  },
+  {
+    "local_number": 15,
+    "question_number": 45,
+    "question_type": "MCQ",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q15.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q15.txt"
+  },
+  {
+    "local_number": 20,
+    "question_number": 50,
+    "question_type": "MCQ",
+    "source_page": 7,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q20.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q20.txt"
+  },
+  {
+    "local_number": 21,
+    "question_number": 51,
+    "question_type": "NUMERICAL",
+    "source_page": 6,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q21.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q21.txt"
+  },
+  {
+    "local_number": 23,
+    "question_number": 53,
+    "question_type": "NUMERICAL",
+    "source_page": 6,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q23.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q23.txt"
+  },
+  {
+    "local_number": 25,
+    "question_number": 55,
+    "question_type": "NUMERICAL",
+    "source_page": 6,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/crops/q25.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-31AUG-S1/chemistry/ocr/q25.txt"
+  }
+]

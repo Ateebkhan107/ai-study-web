@@ -1,0 +1,8 @@
+12.
+
+The sum of all values of x in [0, 27], for which
+sinx + sin2x + sin3x + sin4x = 0, is equal to :
+
+(1) 8x (2) 11%
+
+(3) 127 (4)9n

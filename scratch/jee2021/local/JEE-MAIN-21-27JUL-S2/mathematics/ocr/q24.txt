@@ -1,0 +1,5 @@
+Let E be an ellipse whose axes are parallel to the
+co-ordinates axes, having its center at (3, — 4), one
+focus at (4, — 4) and one vertex at (5, — 4). If
+mx — y = 4, m> 0 is a tangent to the ellipse E, then
+the value of 5m’ is equal to

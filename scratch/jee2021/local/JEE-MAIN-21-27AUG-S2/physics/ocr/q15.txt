@@ -1,0 +1,13 @@
+15.
+
+If force (F), length (L) and time (T) are taken as
+the fundamental quantities. Then what will be the
+dimension of density :
+
+(1)[FL“*T’]
+
+(2) [FL°T’]
+
+(3) [FL°T’]
+
+(4) [FL°T’]

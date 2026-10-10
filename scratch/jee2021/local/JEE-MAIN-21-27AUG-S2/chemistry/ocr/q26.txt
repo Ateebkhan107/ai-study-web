@@ -1,0 +1,6 @@
+The resistance of a conductivity cell with cell
+constant 1.14 cm', containing 0.001 M KCl at 298 K
+is 1500 Q. The molar conductivity of 0.001 M KCl
+solution at 298 K in S cm’ mol’ is
+
+(Integer answer)

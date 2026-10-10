@@ -1,0 +1,5 @@
+Two circles each of radius 5 units touch each other
+at the point (1, 2). If the equation of their common
+tangent is 4x + 3y = 10, and C,(a, B) and C, (y, 5),
+C, # C, are their centres, then (a + B) (y + 5)I is
+equal to .

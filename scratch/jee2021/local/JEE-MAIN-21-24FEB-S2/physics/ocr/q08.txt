@@ -1,0 +1,12 @@
+In the given figure, a body of mass M is held
+between two massless springs, on a smooth
+inclined plane. The free ends of the springs are
+attached to firm supports. If each spring has
+spring constant k, the frequency of oscillation
+of given body is :
+
+1 [k a1 [2k
+() on V2M (2) on) Mg sina
+
+1 Pk » 2
+(3) 2n VM (4) 2m \ Mg sina

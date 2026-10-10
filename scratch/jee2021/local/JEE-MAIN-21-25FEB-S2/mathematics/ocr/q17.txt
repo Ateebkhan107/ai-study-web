@@ -1,0 +1,11 @@
+17.
+
+Let A bea set of all 4-digit natural numbers whose
+exactly one digit is 7. Then the probability that a
+randomly chosen element of A leaves remainder
+2 when divided by 5 is :
+
+2 » 122
+9 (2) 507
+» 20 »t
+3) 597 4) 5

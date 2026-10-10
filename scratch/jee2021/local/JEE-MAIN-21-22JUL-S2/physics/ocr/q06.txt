@@ -1,0 +1,11 @@
+A ray of light passes from a denser medium to a
+rarer medium at an angle of incidence i. The
+reflected and refracted rays make an angle of 90°
+with each other. The angle of reflection and
+refraction are resepectively r and r'. The critical
+angle is given by :
+
+(1) sin (cotr)
+(2) tan (sini)
+(3) sin! (tanr')
+(4) sin | (tanr)

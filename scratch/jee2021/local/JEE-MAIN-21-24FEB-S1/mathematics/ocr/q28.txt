@@ -1,0 +1,7 @@
+Let three vectors 4, b and ¢ be such that ¢ is
+
+coplanar with 4 and b,a.¢=7 and b is
+perpendicular to ¢, where a=-i+jtk and
+- A A - _p
+b=2i+k, then the value of 2la+b+¢|
+

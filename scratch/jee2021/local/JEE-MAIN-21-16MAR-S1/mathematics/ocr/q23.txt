@@ -1,0 +1,10 @@
+Let ABCD be a square of side of unit length.
+Let a circle C, centered at A with unit radius
+is drawn. Another circle C, which touches C,
+and the lines AD and AB are tangent to it, is
+also drawn. Let a tangent line from the
+
+point C to the circle C, meet the side AB at E.
+If the length of EB is a+ 3B , where a, B are
+
+integers, then a + B is equal to__

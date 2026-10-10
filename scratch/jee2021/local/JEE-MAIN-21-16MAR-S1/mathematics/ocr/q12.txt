@@ -1,0 +1,7 @@
+12.
+
+If n is the number of irrational terms in the
+expansion of (31/4 + 51/8)60, then(n — 1) is
+divisible by :
+
+(1) 26 (2) 30 (3) 8 (4) 7

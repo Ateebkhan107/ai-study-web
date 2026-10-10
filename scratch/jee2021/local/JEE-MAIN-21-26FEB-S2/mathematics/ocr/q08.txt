@@ -1,0 +1,7 @@
+Let L be a line obtained from the intersection
+of two planes x + 2y + z = 6 and y + 2z = 4.
+If point P(a, B, y) is the foot of perpendicular
+from (3, 2, 1) on L, then the value of
+21(a + B + y) equals :
+
+(1) 142 (2) 68 (3) 136 (4) 102

@@ -1,0 +1,15 @@
+2.
+
+Let a,b,¢ be three vectors mutually perpendicular
+
+to each other and have same magnitude. If a vector
+
+T satisfies.
+
+ax{(F—b)x a} +6x{(F—2) xb} 4éx{(F-a)xé} =6,
+
+then T is equal to:
+
+(1) sli+b +) (2) $(24+5-8)
+
+6) s(a+b+2) (4) 5(4+b+28)

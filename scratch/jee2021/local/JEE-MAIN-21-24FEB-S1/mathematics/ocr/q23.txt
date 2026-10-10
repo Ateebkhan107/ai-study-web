@@ -1,0 +1,9 @@
+Let A= {n € N: nis a 3-digit number}
+B= {9k+2:keN}
+and C= {9k+1:k € N} for some1 (0 <1 <9)
+
+If the sum of all the elements of the set
+AO (BUC) is 274 x 400, then | is equal
+
+to
+

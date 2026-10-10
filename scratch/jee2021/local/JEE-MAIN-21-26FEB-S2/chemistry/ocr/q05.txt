@@ -1,0 +1,8 @@
+A ball weighing 10 g is moving with a velocity
+of 90 ms“!. If the uncertainty in its velocity is
+5%, then the uncertainty in its position
+is _x10-33 m. (Rounded off to the
+
+nearest integer)
+
+[Given : h = 6.63 x 10-4 Js]

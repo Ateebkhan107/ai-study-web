@@ -1,0 +1,135 @@
+~Saral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP >
+
+11.
+
+Sol.
+
+12.
+
+JEE Exam Solution
+
+. 1 .
+As sin@#+——; which has been already
+
+V2
+
+considered
+
+Let the lines (2 - i)z = (2 + i)zand
+(2+1)z+ (i-2)z - 41 = 0, (here i2 = - 1) be
+normal to a circle C. If the line iz+z+1+i = 0
+
+is tangent to this circle C, then its radius is:
+
+3 1 3
+OR AR 8 3/2 (4) 2
+Official Ans. by NTA (4)
+
+@ 2-D)z= 24+)
+
+y=
+
+x
+2
+
+Gi) 2+1)2+G@-2) Z-4i=0
+
+(ili) iz+z+1+i=0
+
+Eq" of tangent
+
+Solving (i) and (11)
+iyi
+x=l,y= 5
+
+1—-—+1
+
+Now, p="t>
+
+Ss
+
+>r
+
+3
+“2
+The image of the point (3, 5) in the line
+x-y +1=0, lies on:
+(1) & - 2P + (y - 2)? = 12
+(2) (x — 4)? + (y + 2)? = 16
+(3) «-4P + (y-4 =8
+(4) K-27 + (y- 4)? =4
+Official Ans. by NTA (4)
+
+Sol.
+
+13.
+
+Sol.
+
+14.
+
+Sol.
+
+www .esaral.com
+
+P(3,5)
+x-y+1=0
+Py)
+x=3_y-5__, 3-5+1
+1 -1 14+1
+So, x=4,y=4
+
+Hence, (x — 2)? + (y - 4)? =4
+
+2 2 2 2
+
+If the curves, —+——=1 and XY 14
+a b Cc d
+
+intersect each other at an angle of 90°, then
+which of the following relations is TRUE?
+G)a+b=c+d
+
+(2)a-b=c-d
+
+(3)a-c=b+4+d
+
+(4) ab = £149
+a+b
+
+Official Ans. by NTA (2)
+For orthogonal curves a—-c=b-d
+>a-b=c-d
+
+n
+
+1+ aa. +—
+lim 1+ 7 ny is equal to :
+1 1
+M5 (2) 0 3) ~ (4) 1
+e
+
+Official Ans. by NTA (4)
+Given limit is of 1° form
+
+So, 1=exp} lim
+no n
+
+Now,
+
+1
+
+z
+
+o<ittasty pbc be tie
+
+n V2 V3
+<2Vn-1
+
+exp (0) (from sandwich theorem)
+=1
+
+So, 1
+

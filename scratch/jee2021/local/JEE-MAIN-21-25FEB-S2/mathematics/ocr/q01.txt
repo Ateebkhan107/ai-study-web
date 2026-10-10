@@ -1,0 +1,6 @@
+Let A be a3 x 3 matrix with det(A) = 4. Let R;
+denote the it row of A. If a matrix B is obtained
+by performing the operation R, > 2R, + 5R; on
+2A, then det(B) is equal to :
+
+(1) 16 (2) 80 (3)128 (4) 64

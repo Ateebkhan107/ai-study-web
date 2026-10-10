@@ -1,0 +1,8 @@
+The relation between time t and distance x for a
+moving body is given as t = mx” + nx, where m
+and n are constants. The retardation of the motion
+is : (When v stands for velocity)
+
+(1) 2 mv° (2) 2 mnv*
+
+(3) 2nv* (4) 2n°v°

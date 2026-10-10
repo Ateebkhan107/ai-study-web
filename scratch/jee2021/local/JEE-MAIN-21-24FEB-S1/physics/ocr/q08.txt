@@ -1,0 +1,10 @@
+In the given figure, a mass M is attached to a
+horizontal spring which is fixed on one side to
+a rigid support. The spring constant of the
+spring is k. The mass oscillates on a frictionless
+surface with time period T and amplitude A.
+When the mass is in equilibrium position, as
+shown in the figure, another mass m is gently
+fixed upon it. The new amplitude of oscillation
+will be :
+

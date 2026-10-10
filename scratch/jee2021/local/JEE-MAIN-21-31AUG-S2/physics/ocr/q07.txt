@@ -1,0 +1,12 @@
+7. If Va and Vx are the input voltages (either 5V
+or OV) and V, is the output voltage then the two
+gates represented in the following circuit (A) and
+(B) are:-
+
+D
+
+(A)
+(1) AND and OR Gate
+(2) OR and NOT Gate
+(3) NAND and NOR Gate
+(4) AND and NOT Gate

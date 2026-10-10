@@ -1,0 +1,7 @@
+A heat engine operates between a cold reservoir at
+temperature T, = 400 K and a hot reservoir at
+temperature T). It takes 300 J of heat from the hot
+reservoir and delivers 240 J of heat to the cold
+reservoir in a cycle. The minimum temperature of
+
+the hot reservoir has to be K.

@@ -1,0 +1,9 @@
+A natural number has prime factorization given
+
+by n = 2*3Y5%, where y and z are such that
+
+5
+y+z=S5andy!+z'= —,y > z. Then the
+
+number of odd divisors of n, including 1, is :
+(1) 11 (2) 6 (3) 6x (4) 12

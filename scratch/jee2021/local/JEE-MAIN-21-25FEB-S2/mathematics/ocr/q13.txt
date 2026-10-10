@@ -1,0 +1,5 @@
+13. If for the matrix, A= | : 8 | , AAT = L,, then
+a
+
+the value of a4 + B4 is :
+(1) 4 (2) 2 (3) 3 (4) 1

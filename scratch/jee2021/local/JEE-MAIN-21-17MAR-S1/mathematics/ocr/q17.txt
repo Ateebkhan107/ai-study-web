@@ -1,0 +1,20 @@
+17.
+
+Choose the incorrect statement about the two
+
+circles whose equations are given below :
+
+x2 + y?2 — 10x — 10y + 41 = 0 and
+
+x2 + y2 — 16x - 10y + 80 =0
+
+(1) Distance between two centres is the average
+of radii of both the circles.
+
+(2) Both circles' centres lie inside region of one
+another.
+
+(3) Both circles pass through the centre of each
+other.
+
+(4) Circles have two intersection points.

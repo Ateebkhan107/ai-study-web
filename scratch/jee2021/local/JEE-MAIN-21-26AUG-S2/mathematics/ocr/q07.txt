@@ -1,0 +1,13 @@
+Consider the two statements :
+
+(SD :(p>q)vV(~q—p) is a tautology.
+(S2):(pA~q)A(~pvq) isa fallacy.
+Then :
+
+(1) only (S1) is true.
+
+(2) both (S1) and (S2) are false.
+
+(3) both (S1) and (S2) are true.
+
+(4) only (S2) is true.

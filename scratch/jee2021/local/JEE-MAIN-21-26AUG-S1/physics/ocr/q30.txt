@@ -1,0 +1,13 @@
+10.
+
+Consider a badminton racket with length scales as
+shown in the figure.
+
+If the mass of the linear and circular portions of the
+badminton racket are same (M) and the mass of the
+threads are negligible, the moment of inertia of the
+racket about an axis perpendicular to the handle
+
+and in the plane of the ring at, 5 distance from the
+
+end A of the handle will be ........ Mr’.

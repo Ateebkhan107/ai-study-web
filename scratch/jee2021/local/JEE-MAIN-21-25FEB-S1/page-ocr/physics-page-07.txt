@@ -1,0 +1,84 @@
+wSaral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP 3
+
+Sol. Att = 0, current through inductor is zero, Sol. 2» = 960 m
+
+18
+hence R,, = (5+1) || 6+4) = 5
+
+: E _5E
+
+"18/5 18
+
+At t = ©, inductor becomes a simple wire and
+now the circuit will be as shown in figure
+
+33
+hence R,, = (S][5) + (41) = —— ; (|| = parallel)
+
+C = 2.56 uF = 2.56 x 10-6 F
+c=3 x 108 m/s
+
+L=?
+
+1
+
+VLC
+
+[Resoant frequency]
+
+Now at resonance, @ =
+
+10
+5/2
+33/10 33 T E VLC
+4/5
+20. Two coherent light sources having intensity in On siiiiine £ Cc h c 1
+: : n substituting =>, we have 2x7— =—_——
+the ratio 2x produce an interference pattern. 07 4 VLC
+Tax hin
+The ratio I, +1, will be : ce 1
+Squaring both sides : 4° — =——
+A” ~=6LC
+2V2x V2x
+() (2)
+x+1 2x+1
+_ 4x10x(3x10°)? 1
+V2x 2V2x ~ (960)? ~ Lx2,56x10°
+(3) (4)
+x+1 2x+1
+Official Ans. by NTA (4) - 4x10x9x10!°x2.56x10°°
+I, mane 960x960
+Sol. Given that, | ~ x
+2
+= -8
+We know, >L=10x10°8H
+2 2 The electric field in a region is given
+Tax = (1, +v1,) & Tain = (V1, - yi, )
+=~ (3 2 4 4\N
+E=| —E,i+—E,j |= i
+Tuo —Linin 7 LL wih _ aJox (2 one iE. The ratio of flux of
+‘ Tanax + Livin ~ I, +I, ~ I, 1 ~ 2x+1
+1 reported field through the rectangular surface
+of area 0.2 m? (parallel to y — z plane) to that
+SECTION-B of the surface of area 0.3 m? (parallel to
+1. A transmitting station releases waves of x —z plane) isa: b, wherea=__
+
+JEE Exam Solution
+
+wavelength 960 m. A capacitor of 2.56 UF is
+used in the resonant circuit. The self inductance
+of coil necessary for resonance is
+
+___ x 10°° H.
+
+Official Ans. by NTA (10)
+
+[Here ij and {are unit vectors along x, y and
+z-axes respectively]
+
+Official Ans. by NTA (1)
+
+www .esaral.com
+

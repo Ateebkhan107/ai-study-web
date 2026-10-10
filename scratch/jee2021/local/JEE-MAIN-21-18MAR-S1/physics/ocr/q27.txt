@@ -1,0 +1,18 @@
+A ball of mass 10 kg moving with a velocity
+10/3 m/s along the x-axis, hits another ball of
+
+mass 20 kg which is at rest. After the collision,
+first ball comes to rest while the second ball
+disintegrates into two equal pieces. One piece
+starts moving along y-axis with a speed of 10
+m/s. The second piece starts moving at an angle
+of 30° with respect to the x-axis. The velocity
+of the ball moving at 30° with x-axis is x m/s.
+The configuration of pieces after collision is
+shown in the figure below. The value of x to
+the nearest integer is _
+
+y-axis
+
+Piece-1
+

@@ -1,0 +1,11 @@
+Let S, be the sum of the first n terms of an
+
+arithmetic progression. If S, = 3S,, then the value
+
+- San:
+of =" is:
+2n
+
+(1) 6 (2) 4 (3)2
+
+(4) 8

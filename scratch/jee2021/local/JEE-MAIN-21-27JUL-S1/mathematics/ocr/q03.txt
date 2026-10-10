@@ -1,0 +1,16 @@
+Let a=i+j+2k and b=-i+2j+3k. Then the
+
+vector product (a + b} x ((@ x ((4 - b} x 6)} xb
+
+equal to :
+(1)5(34i 5} +3k]
+
+(3)7(30i -5) + 7k)
+
+(2) 7(341 ~5j+
+
+(4) 5(301 —5j+
+
+is
+
+7k}

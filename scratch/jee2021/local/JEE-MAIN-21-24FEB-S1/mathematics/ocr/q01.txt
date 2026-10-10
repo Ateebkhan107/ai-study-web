@@ -1,0 +1,10 @@
+1
+is qt Three stones A, B and C are placed at the
+
+points (1,1), (2, 2) and (4, 4) respectively. Then
+which of these stones is / are on the path of the
+man ?
+
+(1) A only (2) C only
+
+(3) All the three (4) B only

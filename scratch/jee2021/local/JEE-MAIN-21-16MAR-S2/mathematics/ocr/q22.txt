@@ -1,0 +1,12 @@
+Consider the statistics of two sets of
+
+observations as follows :
+
+Size Mean Variance
+ObservationI 10 2 2
+Observation II n 3 1
+
+If the variance of the combined set of these two
+
+17
+observations is 9. then the value of n is equal to

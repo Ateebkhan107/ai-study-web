@@ -1,0 +1,10 @@
+Let B; (i = 1, 2, 3) be three independent events
+in a sample space. The probability that only B,
+occur is a, only B, occurs is B and only B;
+occurs is y. Let p be the probability that none of
+the events B; occurs and these 4 probabilities
+satisfy the equations (a — 28) p = of and
+(B — 3y)p = 2By (AII the probabilities are
+
+assumed to lie in the interval (0,1)). Then
+

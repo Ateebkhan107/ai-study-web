@@ -1,0 +1,11 @@
+19.
+
+Five identical cells each of internal resistance 10
+and emf 5V are connected in series and in parallel
+with an external resistance 'R'. For what value of
+'R', current in series and parallel combination will
+remain the same ?
+
+q)1Q (2) 250
+
+(3)5Q (4) 100

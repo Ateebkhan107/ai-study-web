@@ -1,0 +1,9 @@
+12.
+
+The locus of the mid points of the chords of the
+hyperbola x° — y’ = 4, which touch the parabola
+y = 8x, is:
+
+(1) y'(x=2)=x? (2) x*(x-2)=y?
+
+(3) y°(x-2) =x? (4) x*(x-2)=y"

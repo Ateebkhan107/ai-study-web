@@ -1,0 +1,6 @@
+If the normal to the curve
+y(x) = f(t? -15t+10)dt at a point (a,b) is
+0
+
+parallel to the line x + 3y = —5, a> 1, then the
+value of la + 6bl is equal to __

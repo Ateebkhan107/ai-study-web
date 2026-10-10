@@ -1,0 +1,5 @@
+A block moving horizontally on a smooth surface
+with a speed of 40 ms” splits into two equal parts.
+If one of the parts moves at 60 ms” in the same
+direction, then the fractional change in the kinetic
+energy will be x : 4 where x = .

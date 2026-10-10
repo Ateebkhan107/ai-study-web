@@ -1,0 +1,25 @@
+n mole a perfect gas undergoes a cyclic process
+
+ABCA (see figure) consisting of the following
+
+processes.
+
+A — B: Isothermal expansion at temperature
+T so that the volume is doubled from
+V, to V, = 2V, and pressure changes
+from P, to Py.
+
+B —C: Isobaric compression at pressure P,
+to initial volume V,.
+
+C-—- A: Isochoric change leading to change
+of pressure from P, to Pj.
+
+Total workdone in the complete cycle ABCA
+
+is :
+
+(1) 0 (2) aT (In2+ |
+
+1
+(3) nRTIn2 (4) nRT (m2-5)

@@ -1,0 +1,14 @@
+An oil drop of radius 2 mm with a density 3g
+cm’? is held stationary under a constant electric
+field 3.55 x 105 V nr! in the Millikan's oil drop
+experiment. What is the number of excess
+electrons that the oil drop will possess ?
+(consider g = 9.81 m/s?)
+
+(1) 48.8 x 101!
+
+(2) 1.73 x 10!0
+
+(3) 17.3 x 1010
+
+(4) 1.73 x 1012

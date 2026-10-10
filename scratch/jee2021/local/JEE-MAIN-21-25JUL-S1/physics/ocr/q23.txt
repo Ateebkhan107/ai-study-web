@@ -1,0 +1,8 @@
+An inductor of 10 mH is connected to a 20 V
+battery through a resistor of 10 kQ and a switch.
+After a long time, when maximum current is set up
+in the circuit, the current is switched off. The
+
+current in the circuit after 1 ps is ——~mA. Then x
+
+is equal to . (Take e! = 0.37)

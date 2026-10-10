@@ -1,0 +1,15 @@
+10.
+
+A ray of laser of a wavelength 630 nm is incident
+at an angle of 30° at the diamond-air interface. It is
+going from diamond to air. The refractive index of
+diamond is 2.42 and that of air is 1. Choose the
+correct option.
+
+(1) angle of refraction is 24.41°
+
+(2) angle of refraction is 30°
+
+(3) refraction is not possible
+
+(4) angle of refraction is 53.4°

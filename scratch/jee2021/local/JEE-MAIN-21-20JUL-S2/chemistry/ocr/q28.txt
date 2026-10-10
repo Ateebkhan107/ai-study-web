@@ -1,0 +1,6 @@
+Diamond has a three dimensional structure of C
+atoms formed by covalent bonds. The structure of
+diamond has face centred cubic lattice where 50%
+of the tetrahedral voids are also occupied by
+carbon atoms. The number of carbon atoms present
+per unit cell of diamond is

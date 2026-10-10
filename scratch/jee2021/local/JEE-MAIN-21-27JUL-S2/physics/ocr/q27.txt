@@ -1,0 +1,20 @@
+7.
+
+For the circuit shown, the value of current at time
+
+t=3.2s will be A.
+a |
+Vit) I
+2. rT
+0 1 2 3 4
+t(s) —>
+
+Figure 1
+R=1Q
+Vit)
+1) 5V
+Figure-2
+
+[Voltage distribution V(t) is shown by Fig. (1) and
+
+the circuit is shown in Fig. (2)]

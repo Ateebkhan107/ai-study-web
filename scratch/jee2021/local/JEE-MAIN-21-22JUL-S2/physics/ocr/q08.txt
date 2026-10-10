@@ -1,0 +1,12 @@
+A bullet of '4g' mass is fired from a gun of mass
+4 kg. If the bullet moves with the muzzle speed of
+50 ms", the impulse imparted to the gun and
+velocity of recoil of gun are :
+
+(1) 0.4kg ms", 0.1 ms"
+
+(2) 0.2 kg ms ', 0.05 ms !
+
+(3) 0.2 kg ms", 0.1 ms
+
+(4) 0.4 kg ms", 0.05 ms

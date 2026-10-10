@@ -1,0 +1,28 @@
+14. The position, velocity and acceleration of <
+particle moving with a constant acceleratior
+can be represented by :
+
+Cc
+g x(0) g v(t) 3 a(t)
+2 ae} 2
+(1) & $ 3
+Ss
+—t —t —
+=I
+5 | w/ 2] Ea
+a 3 3
+(2) & S 8
+s
+ST —T —T
+t
+s ea a) va g “
+ZB Bo] sc
+3) & $ 8
+s
+— t —t —t
+<
+g > v(t) 3 a(t
+g x(t) 3 Se E ()
+(4) 2 $ 8
+Ss
+—_ 7 —T —T

@@ -1,0 +1,31 @@
+The two thin coaxial rings, each of radius 'a' and
+
+having charges +Q and -Q respectively are
+
+tol
+
+separated by a distance of 's'. The potential
+
+difference between the centres of the two rings is :
+
+ay 2} ++
+
+2m) | a Js* +a? |
+Q/1 1
+
+4ne,,a Js? +a?
+
+(2)
+
+Q f1 1
+
+4ne, [| a Ss? +a? |
+
+(3)
+
+Q |i 1
+
+2m) | a Js* +a? |
+
+(4)
+

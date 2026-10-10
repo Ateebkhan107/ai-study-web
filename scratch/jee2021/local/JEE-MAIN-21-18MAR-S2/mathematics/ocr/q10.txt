@@ -1,0 +1,14 @@
+10.
+
+Let a complex number be w = 1 - V3i. Let
+
+another complex number z be such that |zw| = 1
+
+and arg(z) — arg(w) = 5 . Then the area of the
+
+triangle with vertices origin, z and w is equal
+
+to:
+
+1 1
+(1) 4 (2) 5 GB) 4 (4) 2

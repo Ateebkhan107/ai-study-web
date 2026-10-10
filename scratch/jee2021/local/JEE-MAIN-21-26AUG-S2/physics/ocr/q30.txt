@@ -1,0 +1,12 @@
+10.
+
+The coefficient of static friction between two
+blocks is 0.5 and the table is smooth. The
+maximum horizontal force that can be applied to
+
+move the blocks together is ....... N.
+
+(take g = 10 ms”)
+
+Table kg] p=0.5
+F

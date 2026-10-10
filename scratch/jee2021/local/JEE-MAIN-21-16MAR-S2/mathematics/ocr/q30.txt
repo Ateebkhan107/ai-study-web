@@ -1,0 +1,8 @@
+10.
+
+Let
+S,(x) = log in x+ log us x+ log us x
++ log int X+ log ins x+ log uz Xt.
+
+up to n-terms, where a > 1. If S,,(x) = 1093 and
+S,2(2x) = 265, then value of a is equal to

@@ -1,0 +1,15 @@
+Let the position vectors of two points P and |
+
+be 3i-j+2k and i+2j—4k, respectively. Li
+R and S be two points such that the directio
+ratios of lines PR and QS are (4, -1, 2) an
+(-2, 1, —2), respectively. Let lines PR an
+
+QS intersect at T. If the vector TA |
+perpendicular to both PR and Qs and th
+
+length of vector TA is V5 units, then th
+modulus of a position vector of A is :
+
+(1) 482 (2) Ji71
+(3) V5 (4) 227

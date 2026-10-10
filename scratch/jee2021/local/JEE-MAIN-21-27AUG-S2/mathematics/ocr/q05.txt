@@ -1,0 +1,15 @@
+A differential equation representing the family of
+parabolas with axis parallel to y-axis and whose
+length of latus rectum is the distance of the point
+
+(2, —3) form the line 3x + 4y = 5, is given by :
+
+2 2
+(102% =11 2) 12% =10
+dx dy
+d’*x d’y
+
+om
+
+(3) 10—+=11 (4) 11
+dy

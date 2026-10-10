@@ -1,0 +1,16 @@
+[
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/chemistry/crops/q01.png", "box": [240, 120, 930, 360], "output": "q1.png"},
+  {"page": 1, "box": [1050, 650, 1900, 1360], "output": "q3.png"},
+  {"page": 2, "box": [1050, 250, 1900, 1140], "output": "q5.png"},
+  {"page": 3, "box": [1050, 250, 1900, 1080], "output": "q8.png"},
+  {"page": 4, "box": [100, 250, 950, 940], "output": "q10.png"},
+  {"page": 4, "box": [1100, 580, 1550, 760], "output": "q13_opt_a.png"},
+  {"page": 4, "box": [1100, 750, 1550, 930], "output": "q13_opt_b.png"},
+  {"page": 4, "box": [1100, 920, 1550, 1045], "output": "q13_opt_c.png"},
+  {"page": 4, "box": [1100, 1050, 1600, 1190], "output": "q13_opt_d.png"},
+  {"page": 5, "box": [1100, 1430, 1480, 1620], "output": "q19_opt_a.png"},
+  {"page": 5, "box": [1480, 1430, 1850, 1620], "output": "q19_opt_b.png"},
+  {"page": 5, "box": [1100, 1610, 1480, 1810], "output": "q19_opt_c.png"},
+  {"page": 5, "box": [1480, 1610, 1850, 1810], "output": "q19_opt_d.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/chemistry/crops/q21.png", "output": "q21.png"}
+]

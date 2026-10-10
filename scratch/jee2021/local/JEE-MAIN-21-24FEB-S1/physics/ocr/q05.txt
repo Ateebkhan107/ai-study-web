@@ -1,0 +1,8 @@
+A current through a wire depends on time as
+i = Got + Bt? where a = 20 A/s and
+B = 8 As~. Find the charge crossed through a
+section of the wire in 15 s.
+
+(1) 2250 C (2) 11250 C
+
+(3) 2100 C (4) 260 C

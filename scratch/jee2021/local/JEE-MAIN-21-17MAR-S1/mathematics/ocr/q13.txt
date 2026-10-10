@@ -1,0 +1,10 @@
+13.
+
+The area of the triangle with vertices A(z), B(iz)
+and C (z + iz) is:
+
+Lip
+() 1 (2) 5/2!
+
+1 1 2
+3) > (4) 5 lz+iz|

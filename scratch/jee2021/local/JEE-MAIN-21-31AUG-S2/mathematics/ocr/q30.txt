@@ -1,0 +1,7 @@
+10.
+
+Let f(x) be a cubic polynomial with f(1) = —10,
+f(-1) = 6, and has a local minima at x = 1, and
+f'(x) has a local minima at x = —1. Then f(3) is
+
+equal to .

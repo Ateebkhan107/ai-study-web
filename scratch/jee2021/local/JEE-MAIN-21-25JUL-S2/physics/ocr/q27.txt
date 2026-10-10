@@ -1,0 +1,5 @@
+A force of F = (Sy + 20) j N acts on a particle. The
+
+workdone by this force when the particle is moved
+
+from y=0m to y=10mis J.

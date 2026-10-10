@@ -1,0 +1,115 @@
+wSaral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP 3
+
+14.
+
+Sol.
+
+15.
+
+JEE Exam Solution
+
+Magnetic fields at two points on the axis of a
+circular coil at a distance of 0.05m and 0.2 m
+from the centre are in the ratio 8 : 1. The radius
+
+of coilis >
+(1) 0.2 m (2) 0.1m
+(3) 0.15 m (4) 1.0m
+
+Official Ans. by NTA (2)
+
+We know, the magnetic field on the axis of a
+current carrying circular ring is given by
+
+uu 2NIA
+B=-* 3/2
+
+4m (R? 4x2)
+
+=
+
+B, 8 | R°+02y |”
+R? +(0.05)°
+
+4[R2 + (0.05)2] = [R2 + (0.2)2]
+4R?2 — R2 = (0.2)? — 4 x (0.05)2
+4R2 — R2 = (0.2)? — (0.1)?
+
+3R2 = 0.3 x 0.1
+
+R2 = (0.12 >R=0.1
+
+A solid sphere of radius R gravitationally
+attracts a particle placed at 3R form its centre
+
+with a force F,. Now a spherical cavity of
+R
+radius (4) is made in the sphere
+
+(as shown in figure) and the force becomes F).
+The value of F, : F, is:
+
+(1) 25 : 36 (2) 36 : 25
+(3) 50: 41
+
+Official Ans. by NTA (3)
+
+(4) 41 : 50
+
+Sol.
+
+16.
+
+Sol.
+
+Let initial mass of sphere is m'. Hence mass of
+
+removed portion will be m'/8
+
+F, -n| Sa
+
+G.m'/8
+on Gait |
+
+Gan!
+= oR?
+
+11 \Gm'
+~\9 50) R?
+
+_ 41 Gm'
+2" 50x9° R?
+
+Gm'x4
+8x25
+
+50x9 50
+41 41
+
+x
+
+Rl
+F, 9
+Two radioactive substances X and Y originally
+have N, and N, nuclei respectively. Half life
+of X is half of the half life of Y. After three half
+
+lives of Y, number of nuclei of both are equal.
+
+The ratio x will be equal to :
+1 3
+() 5 Oe
+8 1
+GQ) 7 3
+Official Ans. by NTA (3)
+T, =t3; Ty =2t
+3T, = 6t,
+N,' = Ny’
+
+- -h
+Ne 2, 6t =N,e 2 6t
+
+www .esaral.com
+

@@ -1,0 +1,7 @@
+A source and a detector move away from each
+other in absence of wind with a speed of 20 m/s
+with respect to the ground. If the detector detects a
+frequency of 1800 Hz of the sound coming from
+the source, then the original frequency of source
+
+considering speed of sound in air 340 m/s will be

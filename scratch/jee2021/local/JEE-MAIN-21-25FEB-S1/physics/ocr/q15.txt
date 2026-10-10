@@ -1,0 +1,16 @@
+15.
+
+A solid sphere of radius R gravitationally
+attracts a particle placed at 3R form its centre
+with a force F,. Now a spherical cavity of
+
+; R
+radius (4
+(as shown in figure) and the force becomes F).
+
+The value of F, : F, is:
+
+is made in the sphere
+
+(1) 25 : 36 (2) 36 : 25
+(3) 50: 41 (4) 41 : 50

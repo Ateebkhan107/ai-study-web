@@ -1,0 +1,8 @@
+The parameters of the unit cell of a substance are
+a= 2.5, b =3.0, c = 4.0, a = 90°, B = 120° y = 90°.
+The crystal system of the substance is :
+
+(1) Hexagonal (2) Orthorhombic
+
+(3) Monoclinic (4) Triclinic
+

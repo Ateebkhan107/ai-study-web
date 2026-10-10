@@ -1,0 +1,9 @@
+For the reaction
+
+C,H; > C,H, + H,
+
+the reaction enthalpy A,H = kJ mol.
+(Round off to the Nearest Integer).
+
+[Given : Bond enthalpies in kJ mol"! : C-C :
+347, C=C : 611; C-H: 414, H-H : 436]

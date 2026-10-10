@@ -1,0 +1,12 @@
+The point P(-26, V3) lies on the hyperbola
+
+xy . _ NS
+2b =1 having eccentricity 3 If the tangent
+
+and normal at P to the hyperbola intersect its
+conjugate axis at the point Q and R respectively,
+then QR is equal to :
+
+(1) 4y3 (2) 6
+
+(3) 6v3 (4) 3V6

@@ -1,0 +1,9 @@
+A huge circular arc of length 4.4 ly subtends an
+angle '4s' at the centre of the circle. How long it
+would take for a body to complete 4 revolution if
+its speed is 8 AU per second ?
+Given : 1 ly =9.46 x 10° m
+
+1AU=1.5 x 10'"'m
+(1) 4.1 x 108s (2) 4.5 x 10's
+(3) 3.5 x 10°s (4) 7.2 x 10°s

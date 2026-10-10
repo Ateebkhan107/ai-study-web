@@ -1,0 +1,3 @@
+6. If A=|) af then the value of
+
+det(A‘) + det (A'° —(Adj(2A))") is equal to

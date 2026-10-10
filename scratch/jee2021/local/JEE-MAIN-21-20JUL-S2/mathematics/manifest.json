@@ -1,0 +1,106 @@
+[
+  {
+    "local_number": 1,
+    "question_number": 61,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q01.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q01.txt"
+  },
+  {
+    "local_number": 2,
+    "question_number": 62,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q02.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q02.txt"
+  },
+  {
+    "local_number": 3,
+    "question_number": 63,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q03.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q03.txt"
+  },
+  {
+    "local_number": 4,
+    "question_number": 64,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q04.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q04.txt"
+  },
+  {
+    "local_number": 10,
+    "question_number": 70,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q10.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q10.txt"
+  },
+  {
+    "local_number": 11,
+    "question_number": 71,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q11.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q11.txt"
+  },
+  {
+    "local_number": 12,
+    "question_number": 72,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q12.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q12.txt"
+  },
+  {
+    "local_number": 13,
+    "question_number": 73,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q13.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q13.txt"
+  },
+  {
+    "local_number": 20,
+    "question_number": 80,
+    "question_type": "MCQ",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q20.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q20.txt"
+  },
+  {
+    "local_number": 21,
+    "question_number": 81,
+    "question_type": "NUMERICAL",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q21.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q21.txt"
+  },
+  {
+    "local_number": 22,
+    "question_number": 82,
+    "question_type": "NUMERICAL",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q22.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q22.txt"
+  },
+  {
+    "local_number": 23,
+    "question_number": 83,
+    "question_type": "NUMERICAL",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q23.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q23.txt"
+  },
+  {
+    "local_number": 24,
+    "question_number": 84,
+    "question_type": "NUMERICAL",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/crops/q24.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-20JUL-S2/mathematics/ocr/q24.txt"
+  }
+]

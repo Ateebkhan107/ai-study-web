@@ -1,0 +1,5 @@
+Let f : [- 1, 1] > R be defined as f(x) = ax? + bx +
+for all x © [-1, 1], where a, b, c € R such th
+f(-1) = 2, f'(-1) = 1 and for x € (-1, 1) tt
+maximum value of f(x) is 7 If f(x) < «
+x € [-1, 1], then the least value of o is equ

@@ -1,0 +1,15 @@
+A bullet of 10 g, moving with velocity v, collides
+head-on with the stationary bob of a pendulum and
+recoils with velocity 100 m/s. The length of the
+pendulum is 0.5 m and mass of the bob is 1 kg.
+The minimum value of v=_____ m/s so that the
+pendulum describes a circle. (Assume the string to
+be inextensible and g = 10 m/s’)
+
+1
+
+0.5m
+
+v idl
+
+10g 1 kg

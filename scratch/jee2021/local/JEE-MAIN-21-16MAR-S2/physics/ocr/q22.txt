@@ -1,0 +1,13 @@
+In a parallel plate capacitor set up, the plate area
+of capacitor is 2 m2 and the plates are separated
+by Im. If the space between the plates are filled
+with a dielectric material of thickness 0.5 m and
+area 2m? (see fig.) the capacitance of the
+
+set-up will be
+
+(Dielectric constant of the material = 3.2)
+
+(Round off to the Nearest Integer)
+
+ISS)

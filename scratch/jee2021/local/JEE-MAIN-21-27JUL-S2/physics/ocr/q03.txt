@@ -1,0 +1,12 @@
+A raindrop with radius R = 0.2 mm falls from a
+cloud at a height h = 2000 m above the ground.
+Assume that the drop is spherical throughout its
+fall and the force of buoyance may be neglected,
+then the terminal speed attained by the raindrop is :
+[Density of water f, = 1000 kg m®° and Density of
+air f,=1.2kgm”°, g=10 m/s’
+
+Coefficient of viscosity of air = 1.8 x 10° Nsm7*]
+(1) 250.6 ms" (2) 43.56 ms!
+
+(3) 4.94 ms” (4) 14.4 ms”

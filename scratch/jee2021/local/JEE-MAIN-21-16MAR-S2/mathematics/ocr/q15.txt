@@ -1,0 +1,21 @@
+15.
+
+Let f be a real valued function, defined on
+R — {-1, 1} and given by
+2
+
+x-l°
+
+f(x) = 3log, x41
+
+Then in which of the following intervals,
+
+function f(x) is increasing?
+
+(i) c2,-v4[]3-)-10]
+
+(2) (-«, %) — {-1, 1}
+1
+
+1
+(4) (-= Re.

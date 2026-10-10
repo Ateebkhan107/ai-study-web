@@ -1,0 +1,5 @@
+A ball of mass 4 kg, moving with a velocity of
+10 ms7!, collides with a spring of length 8 m
+and force constant 100 Nm-!. The length of the
+compressed spring is x m. The value of x, to
+the nearest integer, is_

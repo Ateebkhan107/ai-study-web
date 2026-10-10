@@ -1,0 +1,5 @@
+A reversible heat engine converts one-fourth
+of the heat input into work. When the
+temperature of the sink is reduced by 52 K, its
+efficiency is doubled. The temperature in
+Kelvin of the source will be

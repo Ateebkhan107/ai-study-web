@@ -1,0 +1,16 @@
+If f : R > R is a function defined by
+
+f(x) =[x- ioos{ 7
+
+the greatest integer function, then f is:
+
+Jr where [.] denotes
+
+(1) discontinuous at all integral values of x
+
+except at x = 1
+(2) continuous only at x = 1
+(3) continuous for every real x
+
+(4) discontinuous only at x = 1
+

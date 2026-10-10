@@ -1,0 +1,107 @@
+WW
+WS a fa JEE | NEET | Class 8 - 10 Download eSaral APP -
+
+6. Given below are two statement : 8.
+
+Statement-I: A speech signal of 2 kHz is used
+to modulate a carrier signal of
+1 MHz. The band width
+requirement for the signal is
+
+4 kHz.
+
+Statement-II : The side band frequencies are
+1002 kHz. and 998 kHz.
+
+In the light of the above statements, choose the
+
+correct answer from the options given below:
+
+(1) Statement I is true but Statement II is false
+(2) Statement I is false but Statement II is true
+(3) Both Statement I and Statement II are true Sol.
+(4) Both Statement I and Statement II are false
+
+Official Ans. by NTA (3)
+Sol. f,, = 2kHz
+f, = 1MHz = 1000 kHz
+Band width = 2f,, = 4kHz
+“. Side frequencies will be
+=f,+f,
+= (1000 + 2) kHz
+= 998 kHz & 1002 kHz
+So statement-I & statement-II both are correct.
+
+7. If the time period of a two meter long simple
+pendulum is 2s, the acceleration due to gravity
+at the place where pendulum is executing
+S.H.M. is :
+
+(1) 7ms-2 (2) 9.8 ms-2
+
+(3) 2n2ms-2 (4) 16 m/s2
+Official Ans. by NTA (3)
+
+l
+
+Sol. T = 27 4/—
+g
+
+2
+
+2 = 2n4/—
+
+g
+
+=> g = 2n?
+
+JEE Exam Solution www .esaral.com
+
+The pitch of the screw gauge is 1mm and there
+are 100 divisions on the circular scale. When
+nothing is put in between the jaws, the zero of
+the circular scale lies 8 divisions below the
+reference line. When a wire is placed between
+the jaws, the first linear scale division is clearly
+visible while 72™4 division on circular scale
+
+coincides with the reference line. The radius of
+
+the wire is
+(1) 1.64 mm (2) 0.82 mm
+(3) 1.80 mm (4) 0.90 mm
+
+Official Ans. by NTA (2)
+
+Least count = ™™ = 0.01
+east count = 100 =U. mm
+
+zero error = + 8 xX LC = + 0.08 mm
+True reading (Diameter)
+= (1 mm + 72 x LC) - (Zero error)
+
+= (Imm+72x0.01mm) — 0.08 mm
+
+= 1.72 mm — 0.08 mm
+= 1.64 mm
+
+1.64
+therefore, radius = a = 0.82 mm.
+
+A 5V battery is connected across the points X
+and Y. Assume D, and D, to be normal silicon
+diodes. Find the current supplied by the battery
+
+if the +ve terminal of the battery is connected
+
+to point X.
+D, 10Q
+———>-——$_ Was
+D, 50
+JK] Www
+XY
+(1)~05A (2)~15A
+(3) ~ 0.86 A (4) ~ 0.43 A
+
+Official Ans. by NTA (4)
+

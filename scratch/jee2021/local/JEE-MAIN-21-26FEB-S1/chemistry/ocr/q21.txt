@@ -1,0 +1,8 @@
+For a chemical reaction A+ B —=C+D
+(A,H° = 80kJ mol-') the entropy change AS?
+depends on the temperature T (in K) as
+(AS° = 2T (J K-! mol").
+
+Minimum temperature at which it will become
+
+spontaneous is___——_—s&K..(Integer)

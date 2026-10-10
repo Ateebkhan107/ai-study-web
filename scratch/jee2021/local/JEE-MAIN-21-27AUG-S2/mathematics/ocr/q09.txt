@@ -1,0 +1,15 @@
+Let A(a, 0), B(b, 2b +1) and C(O, b), b # 0, Ibl ¥ 1,
+be points such that the area of triangle ABC is 1 sq.
+unit, then the sum of all possible values of ais :
+
+~2b 2b
+
+1) — 2) ——
+
+(1) b+1 @) b+1
+2b? —2b?
+a 4
+
+(3) bal (4)
+
+b+1

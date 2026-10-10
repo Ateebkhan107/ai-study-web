@@ -1,0 +1,11 @@
+The normal density of a material is p and its
+bulk modulus of elasticity is K. The magnitude
+of increase in density of material, when a
+pressure P is applied uniformly on all sides, will
+be:
+
+pk pP
+() Oe
+
+» » 2K
+(3) Sp (4) =

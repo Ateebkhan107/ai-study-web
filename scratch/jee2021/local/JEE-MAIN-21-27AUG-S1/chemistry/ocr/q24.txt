@@ -1,0 +1,7 @@
+1 kg of 0.75 molal aqueous solution of sucrose can
+be cooled up to -4°C before freezing. The amount
+of ice (in g) that will be separated out is
+
+(Nearest integer)
+
+[Given : K(H,O) = 1.86 K kg mol]

@@ -1,0 +1,12 @@
+A current of 1.5 A is flowing through a triangle, of
+side 9 cm each. The magnetic field at the centroid
+of the triangle is :
+
+(Assume that the current is flowing in the
+clockwise direction.)
+
+(1)3 x 10” T, outside the plane of triangle
+(2) 23 x 10°’ T, outside the plane of triangle
+(3) 23 x 10° T, inside the plane of triangle
+
+(4) 3 x 10° T, inside the plane of triangle

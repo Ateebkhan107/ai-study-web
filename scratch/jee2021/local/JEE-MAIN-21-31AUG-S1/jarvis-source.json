@@ -1,0 +1,996 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A helicopter is flying horizontally with a speed 'v' at an altitude 'h' has to drop a food packet for a man on the ground. What is the distance of helicopter from the man when the food packet is dropped?",
+    "options": [
+      "$\\sqrt{\\frac{2ghv^{2}+1}{h^{2}}}$",
+      "$\\sqrt{2ghv^{2}+h^{2}}$",
+      "$\\sqrt{\\frac{2v^{2}h}{g}+h^{2}}$",
+      "$\\sqrt{\\frac{2gh}{v^{2}}+h^{2}}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "In the following logic circuit the sequence of the inputs A, B are (0, 0), (0,1), (1, 0) and (1, 1). The output Y for this sequence will be :",
+    "options": [
+      "1, 0, 1, 0",
+      "0, 1, 0, 1",
+      "1, 1, 1, 0",
+      "0, 0, 1, 1"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f0b43657-6bc6-4862-8689-dc53d5460300_fig.png"
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "Two particles A and B having charges 20 $\\mu$C and $-5$ $\\mu$C respectively are held fixed with a separation of 5 cm. At what position a third charged particle should be placed so that it does not experience a net electric force?",
+    "options": [
+      "At 5 cm from 20 $\\mu$C on the left side of system",
+      "At 5 cm from $-$ 5 $\\mu$C on the right side",
+      "At 1.25 cm from $-$ 5 $\\mu$C between two charges",
+      "At midpoint between two charges"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/3f1d1751-ee17-4b95-9d9d-058d7f3f1bd1_fig.png"
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "An object is placed at the focus of concave lens having focal length $f$. What is the magnification and distance of the image from the optical centre of the lens?",
+    "options": [
+      "1, $\\infty$",
+      "Very high, $\\infty$",
+      "$\\frac{1}{2},\\frac{f}{2}$",
+      "$\\frac{1}{4},\\frac{f}{4}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "A sample of a radioactive nucleus A disintegrates to another radioactive nucleus B, which in turn disintegrates to some other stable nucleus C. Plot of a graph showing the variation of number of atoms of nucleus B vesus time is : (Assume that at t = 0, there are no B atoms in the sample)",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/2b1b302b-5e2c-46f2-96c0-8490ab591c07_fig.png"
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "A coil having N turns is wound tightly in the form of a spiral with inner and outer radii 'a' and 'b' respectively. Find the magnetic field at centre, when a current I passes through coil :",
+    "options": [
+      "$\\frac{\\mu_{0}\\,IN}{2(b-a)}\\log_{e}\\left(\\frac{b}{a}\\right)$",
+      "$\\frac{\\mu_{0}I}{8}\\left[\\frac{a+b}{a-b}\\right]$",
+      "$\\frac{\\mu_{0}I}{4(a-b)}\\left[\\frac{1}{a}-\\frac{1}{b}\\right]$",
+      "$\\frac{\\mu_{0}I}{8}\\left(\\frac{a-b}{a+b}\\right)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "A body of mass M moving at speed $V_{0}$ collides elastically with a mass 'm' at rest. After the collision, the two masses move at angles $\\theta_{1}$ and $\\theta_{2}$ with respect to the initial direction of motion of the body of mass M. The largest possible value of the ratio M/m, for which the angles $\\theta_{1}$ and $\\theta_{2}$ will be equal, is :",
+    "options": [
+      "4",
+      "1",
+      "3",
+      "2"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "The masses and radii of the earth and moon are ($M_{1}$, $R_{1}$) and ($M_{2}$, $R_{2}$) respectively. Their centres are at a distance 'r' apart. Find the minimum escape velocity for a particle of mass 'm' to be projected from the middle of these two masses:",
+    "options": [
+      "$V=\\frac{1}{2}\\sqrt{\\frac{4G(M_{1}+M_{2})}{r}}$",
+      "$V=\\sqrt{\\frac{4G(M_{1}+M_{2})}{r}}$",
+      "$V=\\frac{1}{2}\\sqrt{\\frac{2G(M_{1}+M_{2})}{r}}$",
+      "$V=\\frac{\\sqrt{2G}\\,(M_{1}+M_{2})}{r}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "A small square loop of side 'a' and one turn is placed inside a larger square loop of side b and one turn (b >> a). The two loops are coplanar with their centres coinciding. If a current I is passed in the square loop of side 'b', then the coefficient of mutual inductance between the two loops is :",
+    "options": [
+      "$\\frac{\\mu_{0}}{4\\pi}8\\sqrt{2}\\,\\frac{a^{2}}{b}$",
+      "$\\frac{\\mu_{0}}{4\\pi}\\frac{8\\sqrt{2}}{a}$",
+      "$\\frac{\\mu_{0}}{4\\pi}8\\sqrt{2}\\,\\frac{b^{2}}{a}$",
+      "$\\frac{\\mu_{0}}{4\\pi}\\frac{8\\sqrt{2}}{b}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "A uniform heavy rod of weight 10 kg ms$^{-2}$, cross-sectional area 100 cm$^{2}$ and length 20 cm is hanging from a fixed support. Young modulus of the material of the rod is $2\\times10^{11}$ Nm$^{-2}$. Neglecting the lateral contraction, find the elongation of rod due to its own weight.",
+    "options": [
+      "$2\\times10^{-9}$ m",
+      "$5\\times10^{-8}$ m",
+      "$4\\times10^{-8}$ m",
+      "$5\\times10^{-10}$ m"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "Two plane mirrors $M_{1}$ and $M_{2}$ are at right angle to each other shown. A point source 'P' is placed at 'a' and '2a' meter away from $M_{1}$ and $M_{2}$ respectively. The shortest distance between the images thus formed is : (Take $\\sqrt{5}$ = 2.3)",
+    "options": [
+      "3a",
+      "4.6 a",
+      "2.3 a",
+      "$2\\sqrt{10}$ a"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f72d3a36-98f4-473a-8030-b4255768a450_fig.png"
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "Match List-I with List-II. List-I (a) Torque (b) Impulse (c) Tension (d) Surface Tension List-II (i) $MLT^{-1}$ (ii) $MT^{-2}$ (iii) $ML^{2}T^{-2}$ (iv) $MLT^{-2}$ Choose the most appropriate answer from the option given below :",
+    "options": [
+      "(a)–(iii), (b)–(i), (c)–(iv), (d)–(ii)",
+      "(a)–(ii), (b)–(i), (c)–(iv), (d)–(iii)",
+      "(a)–(i), (b)–(iii), (c)–(iv), (d)–(ii)",
+      "(a)–(iii), (b)–(iv), (c)–(i), (d)–(ii)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "For an ideal gas the instantaneous change in pressure 'p' with volume 'v' is given by the equation $\\frac{dp}{dv}=-ap$. If p = $p_{0}$ at v = 0 is the given boundary condition, then the maximum temperature one mole of gas can attain is : (Here R is the gas constant)",
+    "options": [
+      "$\\frac{p_{0}}{a\\,e\\,R}$",
+      "$\\frac{ap_{0}}{e\\,R}$",
+      "infinity",
+      "0$^\\circ$C"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Which of the following equations is dimensionally incorrect ? Where t = time, h = height, s = surface tension, $\\theta$ = angle, $\\rho$ = density, a, r = radius, g = acceleration due to gravity, v = volume , p = pressure, W = work done, $\\Gamma$ = torque, $\\in$ = permittivity, E = electric field, J = current density, L = length.",
+    "options": [
+      "$v=\\frac{\\pi\\,p\\,a^{4}}{8\\eta\\,L}$",
+      "$h=\\frac{2s\\cos\\theta}{\\rho\\,r\\,g}$",
+      "$J=\\in\\frac{\\partial E}{\\partial t}$",
+      "$W=\\Gamma\\theta$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "Angular momentum of a single particle moving with constant speed along circular path :",
+    "options": [
+      "changes in magnitude but remains same in the direction",
+      "remains same in magnitude and direction",
+      "remains same in magnitude but changes in the direction",
+      "is zero"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "In an ac circuit, an inductor, a capacitor and a resistor are connected in series with $X_{L}=R=X_{C}$. Impedance of this circuit is :",
+    "options": [
+      "$2R^{2}$",
+      "Zero",
+      "R",
+      "$R\\sqrt{2}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "A moving proton and electron have the same de-Broglie wavelength. If K and P denote the K.E. and momentum respectively. Then choose the correct option :",
+    "options": [
+      "$K_{p}<K_{e}$ and $P_{p}=P_{e}$",
+      "$K_{p}=K_{e}$ and $P_{p}=P_{e}$",
+      "$K_{p}<K_{e}$ and $P_{p}<P_{e}$",
+      "$K_{p}>K_{e}$ and $P_{p}=P_{e}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "Consider a galvanometer shunted with 5$\\Omega$ resistance and 2% of current passes through it. What is the resistance of the given galvanometer ?",
+    "options": [
+      "300 $\\Omega$",
+      "344 $\\Omega$",
+      "245 $\\Omega$",
+      "226 $\\Omega$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "When a rubber ball is taken to a depth of ______ m in deep sea, its volume decreases by 0.5%. (The bulk modulus of rubber = 9.8 $\\times$ 10$^{8}$ Nm$^{-2}$ Density of sea water = 10$^{3}$ kgm$^{-3}$ g = 9.8 m/s$^{2}$)",
+    "options": [],
+    "correct": "500",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "A particle of mass 1 kg is hanging from a spring of force constant 100 Nm$^{-1}$. The mass is pulled slightly downward and released so that it executes free simple harmonic motion with time period T. The time when the kinetic energy and potential energy of the system will become equal, is $\\frac{T}{x}$ .The value of x is ____.",
+    "options": [],
+    "correct": "8",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "If the sum of the heights of transmitting and receiving antennas in the line of sight of communication is fixed at 160 m, then the maximum range of LOS communication is _ km. (Take radius of Earth = 6400 km)",
+    "options": [],
+    "correct": "64",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "A square shaped wire with resistance of each side 3$\\Omega$ is bent to form a complete circle. The resistance between two diametrically opposite points of the circle in unit of $\\Omega$ will be ___.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "A wire having a linear mass density 9.0 $\\times$ 10$^{-4}$ kg/m is stretched between two rigid supports with a tension of 900 N. The wire resonates at a frequency of 500 Hz. The next higher frequency at which the same wire resonates is 550 Hz. The length of the wire is ___ m.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "The voltage drop across 15$\\Omega$ resistance in the given figure will be_______V.",
+    "options": [],
+    "correct": "6",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/76de7d6e-2da0-4b13-8cf1-9811792f7339_fig.png"
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A block moving horizontally on a smooth surface with a speed of 40 ms$^{-1}$ splits into two equal parts. If one of the parts moves at 60 ms$^{-1}$ in the same direction, then the fractional change in the kinetic energy will be x : 4 where x = _______.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "The electric field in an electromagnetic wave is given by E = (50 NC$^{-1}$) sin$\\omega$ (t$-$x/c) The energy contained in a cylinder of volume V is 5.5 $\\times$ 10$^{-12}$ J. The value of V is ______ cm$^{3}$. $\\left(\\text{given } \\in_0 = 8.8\\times10^{-12}\\ \\text{C}^2\\text{N}^{-1}\\text{m}^{-2}\\right)$",
+    "options": [],
+    "correct": "500",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "A capacitor of 50 $\\mu$F is connected in a circuit as shown in figure. The charge on the upper plate of the capacitor is ______ $\\mu$C.",
+    "options": [],
+    "correct": "100",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/a0aa2cb7-15ac-42aa-80d0-59cdca622fec_fig.png"
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "A car is moving on a plane inclined at 30$^\\circ$ to the horizontal with an acceleration of 10 ms$^{-2}$ parallel to the plane upward. A bob is suspended by a string from the roof of the car.The angle in degrees which the string makes with the vertical is_______. (Take g = 10 ms$^{-2}$)",
+    "options": [],
+    "correct": "30",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Chemistry",
+    "question": "The correct order of reactivity of the given chlorides with acetate in acetic acid is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/089b7910-e426-4d2e-b45c-e47316bb1093_fig.png"
+  },
+  {
+    "source_number": 30,
+    "subject": "Chemistry",
+    "question": "Select the graph that correctly describes the adsorption isotherms at two temperatures $\\mathrm{T_1}$ and $\\mathrm{T_2}$ ($\\mathrm{T_1} > \\mathrm{T_2}$) for a gas : (x – mass of the gas adsorbed ; m – mass of adsorbent ; P – pressure)",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/14418814-7113-44b4-9211-d5a97d3d553d_fig.png"
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "The major component/ingredient of Portland Cement is :",
+    "options": [
+      "tricalcium aluminate",
+      "tricalcium silicate",
+      "dicalcium aluminate",
+      "dicalcium silicate"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "In the structure of the dichromate ion, there is a :",
+    "options": [
+      "linear symmetrical Cr–O–Cr bond.",
+      "non-linear symmetrical Cr–O–Cr bond.",
+      "linear unsymmetrical Cr–O–Cr bond.",
+      "non-linear unsymmetrical Cr–O–Cr bond."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Which one of the following compounds contains $\\beta\\text{-}\\mathrm{C_1}\\text{-}\\mathrm{C_4}$ glycosidic linkage ?",
+    "options": [
+      "Lactose",
+      "Sucrose",
+      "Maltose",
+      "Amylose"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "The major products A and B in the following set of reactions are :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/9afecf41-f12b-41b8-8282-656533287d34_fig.png"
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Which one of the following lanthanides exhibits +2 oxidation state with diamagnetic nature ? (Given Z for Nd = 60, Yb = 70, La = 57, Ce = 58)",
+    "options": [
+      "Nd",
+      "Yb",
+      "La",
+      "Ce"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R). Assertion (A) : Aluminium is extracted from bauxite by the electrolysis of molten mixture of $\\mathrm{Al_2O_3}$ with cryolite. Reason (R) : The oxidation state of Al in cryolite is +3. In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true.",
+      "Both (A) and (R) are correct and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are correct but (R) is not the correct explanation of (A)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The major product formed in the following reaction is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f5775bde-2fdd-448c-8260-b5b46bc79c08_fig.png"
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Monomer of Novolac is :",
+    "options": [
+      "3-Hydroxybutanoic acid",
+      "phenol and melamine",
+      "o-Hydroxymethylphenol",
+      "1,3-Butadiene and styrene"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement-I : The process of producing syn-gas is called gasification of coal. Statement-II : The composition of syn-gas is $\\mathrm{CO} + \\mathrm{CO_2} + \\mathrm{H_2}$ (1 : 1 : 1) In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "Statement-I is false but Statement-II is true",
+      "Statement-I is true but Statement-II is false",
+      "Both Statement-I and Statement-II are false",
+      "Both Statement-I and Statement-II are true"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R). Assertion (A) : Treatment of bromine water with propene yields 1-bromopropan-2-ol. Reason (R) : Attack of water on bromonium ion follows Markovnikov rule and results in 1-bromopropan-2-ol. In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "Both (A) and (R) are true but (R) is NOT the correct explanation of (A)",
+      "(A) is false but (R) is true.",
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "(A) is true but (R) is false"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "The denticity of an organic ligand, biuret is :",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "6"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R). Assertion (A) : Metallic character decreases and non-metallic character increases on moving from left to right in a period. Reason (R) : It is due to increase in ionisation enthalpy and decrease in electron gain enthalpy, when one moves from left to right in a period. In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "(A) is false but (R) is true.",
+      "(A) is true but (R) is false",
+      "Both (A) and (R) are correct and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are correct but (R) is not the correct explanation of (A)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "Choose the correct name for compound given below :",
+    "options": [
+      "(4E)-5-Bromo-hex-4-en-2-yne",
+      "(2E)-2-Bromo-hex-4-yn-2-ene",
+      "(2E)-2-Bromo-hex-2-en-4-yne",
+      "(4E)-5-Bromo-hex-2-en-4-yne"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-08-31-morning/498e1152-ce00-45a1-8daa-eec795b67810_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Which one of the following is the correct PV vs P plot at constant temperature for an ideal gas ? (P and V stand for pressure and volume of the gas respectively)",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/c24220f1-1e44-4871-9925-3113d757804f_fig.png"
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R) : Assertion (A) : A simple distillation can be used to separate a mixture of propanol and propanone. Reason (R) : Two liquids with a difference of more than $20^\\circ\\mathrm{C}$ in their boiling points can be separated by simple distillations. In the light of the above statements, choose the most appropriate answer from the options given below :",
+    "options": [
+      "(A) is false but (R) is true.",
+      "Both (A) and (R) are correct but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "Both (A) and (R) are correct and (R) is the correct explanation of (A)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Which one of the following 0.10 M aqueous solutions will exhibit the largest freezing point depression ?",
+    "options": [
+      "hydrazine",
+      "glucose",
+      "glycine",
+      "$\\mathrm{KHSO_4}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "BOD values (in ppm) for clean water (A) and polluted water (B) are expected respectively :",
+    "options": [
+      "A > 50, B < 27",
+      "A > 25, B < 17",
+      "A < 5, B > 17",
+      "A > 15, B > 47"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "The structure of product C, formed by the following sequence of reactions is : $\\mathrm{CH_3COOH} + \\mathrm{SOCl_2} \\longrightarrow \\mathrm{A} \\xrightarrow[\\mathrm{AlCl_3}]{\\text{Benzene}} \\mathrm{B} \\xrightarrow[-\\mathrm{OH}]{\\mathrm{KCN}} \\mathrm{C}$",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/d2d78a9e-a6c1-46e8-ae44-abdc4e3622de_fig.png"
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "Consider the following cell reaction : $\\mathrm{Cd_{(s)}+Hg_2SO_{4(s)}+\\frac{9}{5}H_2O_{(l)}\\rightleftharpoons CdSO_4.\\frac{9}{5}H_2O_{(s)}+2Hg_{(l)}}$ The value of $\\mathrm{E^{0}_{cell}}$ is 4.315 V at 25°C. If $\\Delta$H° = $-$825.2 kJ mol$^{-1}$, the standard entropy change $\\Delta$S° in J K$^{-1}$ is __. (Nearest integer) [Given : Faraday constant = 96487 C mol$^{-1}$]",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The molarity of the solution prepared by dissolving 6.3 g of oxalic acid ($\\mathrm{H_2C_2O_4.2H_2O}$) in 250 mL of water in mol L$^{-1}$ is x $\\times$ 10$^{-2}$. The value of x is ____. (Nearest integer) [Atomic mass : H : 1.0, C : 12.0, O : 16.0]",
+    "options": [],
+    "correct": "20",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "Consider the sulphides HgS, PbS, CuS, $\\mathrm{Sb_2S_3}$, $\\mathrm{As_2S_3}$ and CdS. Number of these sulphides soluble in 50% $\\mathrm{HNO_3}$ is ____.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "The total number of reagents from those given below, that can convert nitrobenzene into aniline is __. (Integer answer) I. Sn $-$ HCl II. Sn $-$ $\\mathrm{NH_4OH}$ III. Fe $-$ HCl IV. Zn $-$ HCl V. $\\mathrm{H_2}$ $-$ Pd VI. $\\mathrm{H_2}$ $-$ Raney Nickel",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "The number of halogen/(s) forming halic (V) acid is ______.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "For a first order reaction, the ratio of the time for 75% completion of a reaction to the time for 50% completion is ___. (Integer answer)",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "The number of hydrogen bonded water molecule(s) associated with stoichiometry $\\mathrm{CuSO_4.5H_2O}$ is ____.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "According to the following figure, the magnitude of the enthalpy change of the reaction A + B $\\rightarrow$ M + N in kJ mol$^{-1}$ is equal to _____. (Integer answer)",
+    "options": [],
+    "correct": "45",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/d0dd35ec-d385-48e7-a356-6983b61813a5_fig.png"
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "Ge(Z = 32) in its ground state electronic configuration has x completely filled orbitals with $\\mathrm{m_{l}}$ = 0. The value of x is ___.",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "$\\mathrm{A_3B_2}$ is a sparingly soluble salt of molar mass M (g mol$^{-1}$) and solubility x g L$^{-1}$ . The solubility product satisfies $\\mathrm{K_{sp}} = a\\left(\\dfrac{\\mathrm{x}}{\\mathrm{M}}\\right)^{5}$ . The value of $a$ is ____. (Integer answer)",
+    "options": [],
+    "correct": "108",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Mathematics",
+    "question": "Let $*, \\square \\in \\{\\wedge, \\vee\\}$ be such that the Boolean expression $(p * \\sim q) \\Rightarrow (p \\square q)$ is a tautology. Then :",
+    "options": [
+      "$* = \\vee,\\ \\square = \\vee$",
+      "$* = \\wedge,\\ \\square = \\wedge$",
+      "$* = \\wedge,\\ \\square = \\vee$",
+      "$* = \\vee,\\ \\square = \\wedge$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "The number of real roots of the equation $e^{4x} + 2e^{3x} - e^{x} - 6 = 0$ is :",
+    "options": [
+      "2",
+      "4",
+      "1",
+      "0"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The sum of 10 terms of the series $\\frac{3}{1^{2} \\times 2^{2}} + \\frac{5}{2^{2} \\times 3^{2}} + \\frac{7}{3^{2} \\times 4^{2}} + ....$ is :",
+    "options": [
+      "1",
+      "$\\frac{120}{121}$",
+      "$\\frac{99}{100}$",
+      "$\\frac{143}{144}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "Let the equation of the plane, that passes through the point $(1, 4, -3)$ and contains the line of intersection of the planes $3x - 2y + 4z - 7 = 0$ and $x + 5y - 2z + 9 = 0$, be $\\alpha x + \\beta y + \\gamma z + 3 = 0$, then $\\alpha + \\beta + \\gamma$ is equal to :",
+    "options": [
+      "$-23$",
+      "$-15$",
+      "23",
+      "15"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "Let f be a non-negative function in $[0, 1]$ and twice differentiable in $(0, 1)$. If $\\int_{0}^{x} \\sqrt{1 - \\left(f'(t)\\right)^{2}}\\, dt = \\int_{0}^{x} f(t)\\, dt$, $0 \\le x \\le 1$ and $f(0) = 0$, then $\\lim_{x \\to 0} \\frac{1}{x^{2}} \\int_{0}^{x} f(t)\\, dt$ :",
+    "options": [
+      "equals 0",
+      "equals 1",
+      "does not exist",
+      "equals $\\frac{1}{2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{a}$ and $\\vec{b}$ be two vectors such that $\\left|2\\vec{a} + 3\\vec{b}\\right| = \\left|3\\vec{a} + \\vec{b}\\right|$ and the angle between $\\vec{a}$ and $\\vec{b}$ is $60^{\\circ}$. If $\\frac{1}{8}\\vec{a}$ is a unit vector, then $\\left|\\vec{b}\\right|$ is equal to :",
+    "options": [
+      "4",
+      "6",
+      "5",
+      "8"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "The function $f(x) = \\left|x^{2} - 2x - 3\\right| \\cdot e^{\\left|9x^{2} - 12x + 4\\right|}$ is not differentiable at exactly :",
+    "options": [
+      "four points",
+      "three points",
+      "two points",
+      "one point"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "Three numbers are in an increasing geometric progression with common ratio r. If the middle number is doubled, then the new numbers are in an arithmetic progression with common difference d. If the fourth term of GP is $3r^{2}$, then $r^{2} - d$ is equal to :",
+    "options": [
+      "$7 - 7\\sqrt{3}$",
+      "$7 + \\sqrt{3}$",
+      "$7 - \\sqrt{3}$",
+      "$7 + 3\\sqrt{3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "Which of the following is not correct for relation R on the set of real numbers ?",
+    "options": [
+      "$(x, y) \\in R \\Leftrightarrow 0 < |x| - |y| \\le 1$ is neither transitive nor symmetric.",
+      "$(x, y) \\in R \\Leftrightarrow 0 < |x - y| \\le 1$ is symmetric and transitive.",
+      "$(x, y) \\in R \\Leftrightarrow |x| - |y| \\le 1$ is reflexive but not symmetric.",
+      "$(x, y) \\in R \\Leftrightarrow |x - y| \\le 1$ is reflexive and symmetric."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "The integral $\\int \\frac{1}{\\sqrt[4]{(x - 1)^{3} (x + 2)^{5}}} dx$ is equal to : (where C is a constant of integration)",
+    "options": [
+      "$\\frac{3}{4}\\left(\\frac{x + 2}{x - 1}\\right)^{\\frac{1}{4}} + C$",
+      "$\\frac{3}{4}\\left(\\frac{x + 2}{x - 1}\\right)^{\\frac{5}{4}} + C$",
+      "$\\frac{4}{3}\\left(\\frac{x - 1}{x + 2}\\right)^{\\frac{1}{4}} + C$",
+      "$\\frac{4}{3}\\left(\\frac{x - 1}{x + 2}\\right)^{\\frac{5}{4}} + C$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "If p and q are the lengths of the perpendiculars from the origin on the lines, $x \\operatorname{cosec} \\alpha - y \\sec \\alpha = k \\cot 2\\alpha$ and $x \\sin \\alpha + y \\cos \\alpha = k \\sin 2\\alpha$ respectively, then $k^{2}$ is equal to :",
+    "options": [
+      "$4p^{2} + q^{2}$",
+      "$2p^{2} + q^{2}$",
+      "$p^{2} + 2q^{2}$",
+      "$p^{2} + 4q^{2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "$\\operatorname{cosec} 18^{\\circ}$ is a root of the equation :",
+    "options": [
+      "$x^{2} + 2x - 4 = 0$",
+      "$4x^{2} + 2x - 1 = 0$",
+      "$x^{2} - 2x + 4 = 0$",
+      "$x^{2} - 2x - 4 = 0$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "If the following system of linear equations $2x + y + z = 5$ $x - y + z = 3$ $x + y + az = b$ has no solution, then :",
+    "options": [
+      "$a = -\\frac{1}{3},\\ b \\ne \\frac{7}{3}$",
+      "$a \\ne \\frac{1}{3},\\ b = \\frac{7}{3}$",
+      "$a \\ne -\\frac{1}{3},\\ b = \\frac{7}{3}$",
+      "$a = \\frac{1}{3},\\ b \\ne \\frac{7}{3}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "The length of the latus rectum of a parabola, whose vertex and focus are on the positive x-axis at a distance R and S $(> R)$ respectively from the origin, is :",
+    "options": [
+      "$4(S + R)$",
+      "$2(S - R)$",
+      "$4(S - R)$",
+      "$2(S + R)$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "If the function $f(x) = \\begin{cases} \\frac{1}{x} \\log_{e}\\left(\\frac{1 + \\frac{x}{a}}{1 - \\frac{x}{b}}\\right), & x < 0 \\\\ k, & x = 0 \\\\ \\frac{\\cos^{2} x - \\sin^{2} x - 1}{\\sqrt{x^{2} + 1} - 1}, & x > 0 \\end{cases}$ is continuous at $x = 0$, then $\\frac{1}{a} + \\frac{1}{b} + \\frac{4}{k}$ is equal to :",
+    "options": [
+      "$-5$",
+      "5",
+      "$-4$",
+      "4"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "If $\\frac{dy}{dx} = \\frac{2^{x+y} - 2^{x}}{2^{y}}$, $y(0) = 1$, then $y(1)$ is equal to :",
+    "options": [
+      "$\\log_{2}(2 + e)$",
+      "$\\log_{2}(1 + e)$",
+      "$\\log_{2}(2e)$",
+      "$\\log_{2}(1 + e^{2})$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "$\\lim_{x \\to 0} \\frac{\\sin^{2}\\left(\\pi \\cos^{4} x\\right)}{x^{4}}$ is equal to :",
+    "options": [
+      "$\\pi^{2}$",
+      "$2\\pi^{2}$",
+      "$4\\pi^{2}$",
+      "$4\\pi$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "A vertical pole fixed to the horizontal ground is divided in the ratio $3 : 7$ by a mark on it with lower part shorter than the upper part. If the two parts subtend equal angles at a point on the ground 18 m away from the base of the pole, then the height of the pole (in meters) is :",
+    "options": [
+      "$12\\sqrt{15}$",
+      "$12\\sqrt{10}$",
+      "$8\\sqrt{10}$",
+      "$6\\sqrt{10}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "If $a_{r} = \\cos\\frac{2r\\pi}{9} + i \\sin\\frac{2r\\pi}{9}$, $r = 1, 2, 3, \\ldots$, $i = \\sqrt{-1}$, then the determinant $\\begin{vmatrix} a_{1} & a_{2} & a_{3} \\\\ a_{4} & a_{5} & a_{6} \\\\ a_{7} & a_{8} & a_{9} \\end{vmatrix}$ is equal to :",
+    "options": [
+      "$a_{2}a_{6} - a_{4}a_{8}$",
+      "$a_{9}$",
+      "$a_{1}a_{9} - a_{3}a_{7}$",
+      "$a_{5}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "The line $12x \\cos\\theta + 5y \\sin\\theta = 60$ is tangent to which of the following curves?",
+    "options": [
+      "$x^{2} + y^{2} = 169$",
+      "$144x^{2} + 25y^{2} = 3600$",
+      "$25x^{2} + 12y^{2} = 3600$",
+      "$x^{2} + y^{2} = 60$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let [t] denote the greatest integer $\\le t$. Then the value of $8 \\cdot \\int_{-\\frac{1}{2}}^{1} \\left( [2x] + |x| \\right) dx$ is ______.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "A point z moves in the complex plane such that $\\arg\\left( \\frac{z-2}{z+2} \\right) = \\frac{\\pi}{4}$, then the minimum value of $\\left| z - 9\\sqrt{2} - 2i \\right|^{2}$ is equal to ______.",
+    "options": [],
+    "correct": "98",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "The square of the distance of the point of intersection of the line $\\frac{x-1}{2} = \\frac{y-2}{3} = \\frac{z+1}{6}$ and the plane $2x - y + z = 6$ from the point $(-1, -1, 2)$ is ______.",
+    "options": [],
+    "correct": "61",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "If 'R' is the least value of 'a' such that the function $f(x) = x^{2} + ax + 1$ is increasing on $[1, 2]$ and 'S' is the greatest value of 'a' such that the function $f(x) = x^{2} + ax + 1$ is decreasing on $[1, 2]$, then the value of $\\left| R - S \\right|$ is ______.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "The mean of 10 numbers $7 \\times 8,\\ 10 \\times 10,\\ 13 \\times 12,\\ 16 \\times 14,\\ \\ldots.$ is ______.",
+    "options": [],
+    "correct": "398",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "If the variable line $3x + 4y = \\alpha$ lies between the two circles $(x - 1)^{2} + (y - 1)^{2} = 1$ and $(x - 9)^{2} + (y - 1)^{2} = 4$, without intercepting a chord on either circle, then the sum of all the integral values of $\\alpha$ is ______.",
+    "options": [],
+    "correct": "165",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "The number of six letter words (with or without meaning), formed using all the letters of the word 'VOWELS', so that all the consonants never come together, is ______.",
+    "options": [],
+    "correct": "576",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "If $x\\,\\phi(x) = \\int_{5}^{x} \\left( 3t^{2} - 2\\phi'(t) \\right) dt$, $x > -2$, and $\\phi(0) = 4$, then $\\phi(2)$ is ______.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "If $\\left( \\frac{3^{6}}{4^{4}} \\right) k$ is the term, independent of x, in the binomial expansion of $\\left( \\frac{x}{4} - \\frac{12}{x^{2}} \\right)^{12}$, then k is equal to ______.",
+    "options": [],
+    "correct": "55",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "An electric instrument consists of two units. Each unit must function independently for the instrument to operate. The probability that the first unit functions is 0.9 and that of the second unit is 0.8. The instrument is switched on and it fails to operate. If the probability that only the first unit failed and second unit is functioning is p, then 98 p is equal to ______.",
+    "options": [],
+    "correct": "28",
+    "source_image": null
+  }
+]

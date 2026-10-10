@@ -1,0 +1,19 @@
+10.
+
+Given below are two statements :
+
+Statement I :
+
+The pH of rain water is normally ~5.6.
+Statement II :
+
+If the pH of rain water drops below 5.6, it is
+called acid rain.
+
+In the light of the above statements, choose the
+
+correct answer from the options given below:
+(1) Statement I is true but Statement II is false.
+(2) Both Statement I and Statement II are false.
+(3) Statement I is false but Statement II is true.
+(4) Both Statement I and Statement II are true.

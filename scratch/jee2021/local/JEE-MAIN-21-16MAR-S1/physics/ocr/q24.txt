@@ -1,0 +1,10 @@
+The first three spectral lines of H-atom in the
+Balmer series are given Aj, Aj, A3 considering
+the Bohr atomic model, the wave lengths of first
+
+Xr
+and third spectral lines [*) are related by a
+3
+
+factor of approximately 'x' x 10-!. The value
+of x, to the nearest integer, is

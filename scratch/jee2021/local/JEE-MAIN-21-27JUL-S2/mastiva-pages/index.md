@@ -1,0 +1,112 @@
+Title: JEE Main 27 July 2021 Shift 2 Question Paper with Solutions | Mastiva
+
+URL Source: http://mastiva.com/pyq/jee-main-2021-july-27-shift-2
+
+Markdown Content:
+[All JEE papers](https://mastiva.com/pyq) / JEE Main 2021
+JEE Main 27 July 2021 Shift 2: every question in paper order (Maths, Physics, Chemistry), each with its answer key and worked solution. Free to read; attempt the whole paper as a timed 3-hour mock test.
+
+[Register free](https://mastiva.com/register) to attempt this shift as a timed 180-minute test with instant scoring and chapter-wise analysis.
+
+Answers and worked solutions open on the page - a few free each day, then [register free](https://mastiva.com/register) for unlimited access.
+
+## Maths
+
+1.   [Question 1 Straight Lines and Pair of Straight Lines · Single correct](https://mastiva.com/q/xugmnw2tfq)
+2.   [Question 2 Binomial Theorem · Single correct](https://mastiva.com/q/v3n4m2hojo)
+3.   [Question 3 Three Dimensional Geometry · Single correct](https://mastiva.com/q/infufv2ccr)
+4.   [Question 4 Trigonometric Functions · Single correct](https://mastiva.com/q/adulogf32y)
+5.   [Question 5 Complex Numbers and Quadratic Equations · Single correct](https://mastiva.com/q/xi32ouctlo)
+6.   [Question 6 Probability · Single correct](https://mastiva.com/q/qpmhbchrzr)
+7.   [Question 7 Trigonometric Functions · Single correct](https://mastiva.com/q/bz4kalfgap)
+8.   [Question 8 Statistics · Single correct](https://mastiva.com/q/mmnrrmj2wa)
+9.   [Question 9 Applications of Integrals · Single correct](https://mastiva.com/q/3fwvzo6te2)
+10.   [Question 10 Differential Equations · Single correct](https://mastiva.com/q/wkmv7mfu2r)
+11.   [Question 11 Limits and Derivatives · Single correct](https://mastiva.com/q/sxcesxw2am)
+12.   [Question 12 Straight Lines and Pair of Straight Lines · Single correct](https://mastiva.com/q/mxtoo5pmn4)
+13.   [Question 13 Relations and Functions · Single correct](https://mastiva.com/q/gmqxo2nuqy)
+14.   [Question 14 Continuity and Differentiability · Single correct](https://mastiva.com/q/cznbzhdujh)
+15.   [Question 15 Sets · Single correct](https://mastiva.com/q/uq6jpkcb5v)
+16.   [Question 16 Mathematical Reasoning · Single correct](https://mastiva.com/q/et425g37my)
+17.   [Question 17 Conic Sections · Single correct](https://mastiva.com/q/df6jgoyqjv)
+18.   [Question 18 Vector Algebra · Single correct](https://mastiva.com/q/yesezxwchf)
+19.   [Question 19 Matrices · Single correct](https://mastiva.com/q/slllbgmj3e)
+20.   [Question 20 Applications of Derivatives · Single correct](https://mastiva.com/q/b4oyooy3em)
+21.   [Question 21 Vector Algebra · Numerical](https://mastiva.com/q/svtuftuatq)
+22.   [Question 22 Three Dimensional Geometry · Numerical](https://mastiva.com/q/67jjhoiilx)
+23.   [Question 23 Complex Numbers and Quadratic Equations · Numerical](https://mastiva.com/q/ncdognywfg)
+24.   [Question 24 Conic Sections · Numerical](https://mastiva.com/q/ohqr34mnct)
+25.   [Question 25 Integrals · Numerical](https://mastiva.com/q/lmu7ljkzww)
+26.   [Question 26 Complex Numbers and Quadratic Equations · Numerical](https://mastiva.com/q/gtahbfpydu)
+27.   [Question 27 Differential Equations · Numerical](https://mastiva.com/q/nmdxsmewop)
+28.   [Question 28 Permutations and Combinations · Numerical](https://mastiva.com/q/ehcfk77lzr)
+29.   [Question 29 Sets · Numerical](https://mastiva.com/q/ledjrhep7x)
+30.   [Question 30 Matrices · Numerical](https://mastiva.com/q/5kmdtvirni)
+
+## Physics
+
+1.   [Question 31 Dual Nature of Radiation and Matter · Single correct](https://mastiva.com/q/xs2yfnjpct)
+2.   [Question 32 Ray Optics and Optical Instruments · Single correct](https://mastiva.com/q/dhfbybtvsk)
+3.   [Question 33 Mechanical Properties of Fluids · Single correct](https://mastiva.com/q/3dr4adpyjq)
+4.   [Question 34 Thermodynamics · Single correct](https://mastiva.com/q/3ofupwq2el)
+5.   [Question 35 Oscillations · Single correct](https://mastiva.com/q/4uk2hs4h46)
+6.   [Question 36 Physical World, Units and Measurements · Single correct](https://mastiva.com/q/r4oii33czx)
+7.   [Question 37 Work, Energy and Power · Single correct](https://mastiva.com/q/gozar75ty6)
+8.   [Question 38 Alternating Current · Single correct](https://mastiva.com/q/4jxgmdu23v)
+9.   [Question 39 Electric Charges and Fields · Single correct](https://mastiva.com/q/lzzci45o2b)
+10.   [Question 40 Thermodynamics · Single correct](https://mastiva.com/q/gbt6vrfb5q)
+11.   [Question 41 Semiconductor Electronics: Materials, Devices and Simple Circuits · Single correct](https://mastiva.com/q/uudz47wroy)
+12.   [Question 42 Moving Charges and Magnetism · Single correct](https://mastiva.com/q/msmwze72mo)
+13.   [Question 43 Gravitation · Single correct](https://mastiva.com/q/swxcnz3e4p)
+14.   [Question 44 Nuclei · Single correct](https://mastiva.com/q/pduxm7hzhr)
+15.   [Question 45 Electric Charges and Fields · Single correct](https://mastiva.com/q/xoql5l7mfn)
+16.   [Question 46 Mathematics in Physics · Single correct](https://mastiva.com/q/asfglxjaax)
+17.   [Question 47 Work, Energy and Power · Single correct](https://mastiva.com/q/qr3mq73bfk)
+18.   [Question 48 Gravitation · Single correct](https://mastiva.com/q/aq6az7jm2p)
+19.   [Question 49 Motion in a Straight Line · Single correct](https://mastiva.com/q/xys5srgyed)
+20.   [Question 50 Current Electricity · Single correct](https://mastiva.com/q/kpek2zty3w)
+21.   [Question 51 System of Particles and Rotational Motion · Numerical](https://mastiva.com/q/4kwka5bj3c)
+22.   [Question 52 Wave Optics · Numerical](https://mastiva.com/q/ymo7swrejw)
+23.   [Question 53 Communication Systems · Numerical](https://mastiva.com/q/2tzlsnb4iw)
+24.   [Question 54 Electromagnetic Induction · Numerical](https://mastiva.com/q/2dglmwgq77)
+25.   [Question 55 Oscillations · Numerical](https://mastiva.com/q/bgzzdrxwq3)
+26.   [Question 56 Motion in a Plane · Numerical](https://mastiva.com/q/vbxgj4dy4h)
+27.   [Question 57 Current Electricity · Numerical](https://mastiva.com/q/ampv7wmjv3)
+28.   [Question 58 Motion in a Plane · Numerical](https://mastiva.com/q/pffgh4xzew)
+29.   [Question 59 Atoms · Numerical](https://mastiva.com/q/nuxa4ourmf)
+30.   [Question 60 Motion in a Plane · Numerical](https://mastiva.com/q/leri2gki7s)
+
+## Chemistry
+
+1.   [Question 61 Organic Chemistry — Some Basic Principles & Techniques · Single correct](https://mastiva.com/q/5a572yzzxw)
+2.   [Question 62 Aldehydes, Ketones and Carboxylic Acids · Single correct](https://mastiva.com/q/eb4f2kz6j6)
+3.   [Question 63 Hydrogen · Single correct](https://mastiva.com/q/ladtmpvaen)
+4.   [Question 64 Co-ordination Compounds · Single correct](https://mastiva.com/q/4noy53afs5)
+5.   [Question 65 Surface Chemistry · Single correct](https://mastiva.com/q/lb5vkorfao)
+6.   [Question 66 Classification of Elements and Periodicity in Properties · Single correct](https://mastiva.com/q/3bttlxotol)
+7.   [Question 67 Organic Chemistry — Some Basic Principles & Techniques · Single correct](https://mastiva.com/q/3zvoesipa3)
+8.   [Question 68 Co-ordination Compounds · Single correct](https://mastiva.com/q/dku23bwgox)
+9.   [Question 69 Analytical Chemistry · Single correct](https://mastiva.com/q/dh67okhlgc)
+10.   [Question 70 Chemistry in Everyday Life · Single correct](https://mastiva.com/q/zfkeaejyqg)
+11.   [Question 71 Biomolecules · Single correct](https://mastiva.com/q/eptqsrezpr)
+12.   [Question 72 Amines · Single correct](https://mastiva.com/q/63gnxxpeip)
+13.   [Question 73 Hydrocarbons · Single correct](https://mastiva.com/q/ntsygxniqe)
+14.   [Question 74 Co-ordination Compounds · Single correct](https://mastiva.com/q/lclzcxhena)
+15.   [Question 75 Structure of Atom · Single correct](https://mastiva.com/q/h4hy3wlatr)
+16.   [Question 76 The p-Block Elements (Group 15, 16, 17 & 18) · Single correct](https://mastiva.com/q/mfx27oinzu)
+17.   [Question 77 The Solid State · Multiple correct](https://mastiva.com/q/uoci33adab)
+18.   [Question 78 Aldehydes, Ketones and Carboxylic Acids · Single correct](https://mastiva.com/q/wfwskljt2s)
+19.   [Question 79 Hydrocarbons · Single correct](https://mastiva.com/q/kaahp5gvsi)
+20.   [Question 80 General Principles and Processes of Isolation of Elements · Single correct](https://mastiva.com/q/brmqcfuldh)
+21.   [Question 81 Equilibrium · Numerical](https://mastiva.com/q/mqrgja2q2z)
+22.   [Question 82 Thermodynamics · Numerical](https://mastiva.com/q/buvw2kozvn)
+23.   [Question 83 Some Basic Concepts of Chemistry · Numerical](https://mastiva.com/q/7btun6mbol)
+24.   [Question 84 Redox Reactions · Numerical](https://mastiva.com/q/j5233dvz6j)
+25.   [Question 85 Chemical Bonding and Molecular Structure · Numerical](https://mastiva.com/q/3pyxpcuvqy)
+26.   [Question 86 Co-ordination Compounds · Numerical](https://mastiva.com/q/7pxyzekots)
+27.   [Question 87 Solutions · Numerical](https://mastiva.com/q/fqcx6rk7fh)
+28.   [Question 88 Organic Chemistry — Some Basic Principles & Techniques · Numerical](https://mastiva.com/q/wm5i55cgqc)
+29.   [Question 89 Chemical Kinetics and Nuclear Chemistry · Fill in the blank](https://mastiva.com/q/uzimzidoja)
+30.   [Question 90 Electrochemistry · Numerical](https://mastiva.com/q/taelfbgqlt)
+
+[← JEE Main 27 July 2021 Shift 1](https://mastiva.com/pyq/jee-main-2021-july-27-shift-1) | [JEE Main 26 August 2021 Shift 1 →](https://mastiva.com/pyq/jee-main-2021-august-26-shift-1)

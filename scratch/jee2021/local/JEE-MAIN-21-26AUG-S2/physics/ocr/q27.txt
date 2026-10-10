@@ -1,0 +1,8 @@
+A coil in the shape of an equilateral triangle of side
+10 cm lies in a vertical plane between the pole
+pieces of permanent magnet producing a horizontal
+magnetic field 20 mT. The torque acting on the
+coil when a current of 0.2 A is passed through it
+and its plane becomes parallel to the magnetic field
+
+will be Vx x10° Nm. The value of x is...........

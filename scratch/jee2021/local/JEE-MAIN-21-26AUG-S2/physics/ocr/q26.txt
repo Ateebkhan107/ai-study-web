@@ -1,0 +1,8 @@
+Two simple harmonic motions are represented by
+
+the equations
+x, =5 sin (2x 4) and x. =5 V2 (sin 2mt + cos2mt).
+
+The amplitude of second motion is .............. times
+
+the amplitude in first motion.

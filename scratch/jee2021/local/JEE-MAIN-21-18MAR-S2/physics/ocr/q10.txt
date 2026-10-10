@@ -1,0 +1,17 @@
+10.
+
+If the angular velocity of earth's spin i:
+increased such that the bodies at the equato
+start floating, the duration of the day would b:
+approximately :
+
+(Take : g = 10 ms~?, the radius of earth
+R = 6400 x 103 m, Take x = 3.14)
+
+(1) 60 minutes
+
+(2) does not change
+
+(3) 1200 minutes
+
+(4) 84 minutes

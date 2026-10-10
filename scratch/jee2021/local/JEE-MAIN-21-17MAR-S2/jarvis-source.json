@@ -1,0 +1,980 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A rubber ball is released from a height of 5 m above the floor. It bounces back repeatedly, always rising to $\\frac{81}{100}$ of the height through which it falls. Find the average speed of the ball. (Take g = 10 ms$^{-2}$)",
+    "options": [
+      "3.0 ms$^{-1}$",
+      "3.50 ms$^{-1}$",
+      "2.0 ms$^{-1}$",
+      "2.50 ms$^{-1}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "If one mole of the polyatomic gas is having two vibrational modes and β is the ratio of molar specific heats for polyatomic gas $\\left(\\beta = \\frac{C_{P}}{C_{V}}\\right)$ then the value of β is :",
+    "options": [
+      "1.02",
+      "1.2",
+      "1.25",
+      "1.35"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "Which one of the following will be the output of the given circuit ?",
+    "options": [
+      "NOR Gate",
+      "NAND Gate",
+      "AND Gate",
+      "XOR Gate"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/8b58485a-514b-4769-87fa-00cbef86960b_fig.png"
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "An object is located at 2 km beneath the surface of the water. If the fractional compression $\\frac{\\Delta V}{V}$ is 1.36% , the ratio of hydraulic stress to the corresponding hydraulic strain will be ___________. [Given : density of water is 1000 kg m$^{-3}$ and g = 9.8 ms$^{-2}$.]",
+    "options": [
+      "1.96 × 10$^{7}$ Nm$^{-2}$",
+      "1.44 × 10$^{7}$ Nm$^{-2}$",
+      "2.26 × 10$^{9}$ Nm$^{-2}$",
+      "1.44 × 10$^{9}$ Nm$^{-2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "A geostationary satellite is orbiting around an arbitary planet 'P' at a height of 11R above the surface of 'P' , R being the radius of 'P'. The time period of another satellite in hours at a height of 2R from the surface of 'P' is__________.'P' has the time period of 24 hours.",
+    "options": [
+      "$6\\sqrt{2}$",
+      "$\\frac{6}{\\sqrt{2}}$",
+      "3",
+      "5"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "A sound wave of frequency 245 Hz travels with the speed of 300 ms$^{-1}$ along the positive x-axis. Each point of the wave moves to and fro through a total distance of 6 cm. What will be the mathematical expression of this travelling wave ?",
+    "options": [
+      "Y(x,t) = 0.03 [sin 5.1 x − (0.2 × 10$^{3}$)t]",
+      "Y(x,t) = 0.06 [sin 5.1 x − (1.5 × 10$^{3}$)t]",
+      "Y(x,t) = 0.06 [sin 0.8 x − (0.5 × 10$^{3}$)t]",
+      "Y(x,t) = 0.03 [sin 5.1 x − (1.5 × 10$^{3}$)t]"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "Which one is the correct option for the two different thermodynamic processes ?",
+    "options": [
+      "(c) and (a)",
+      "(c) and (d)",
+      "(a) only",
+      "(b) and (c)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/8562e7fa-36e2-497c-a1c7-61efdb6b12b9_fig.png"
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "The velocity of a particle is v = v$_{0}$ + gt + Ft$^{2}$. Its position is x = 0 at t = 0 ; then its displacement after time (t = 1) is :",
+    "options": [
+      "v$_{0}$ + g + F",
+      "v$_{0}$ + $\\frac{g}{2}$ + $\\frac{F}{3}$",
+      "v$_{0}$ + $\\frac{g}{2}$ + F",
+      "v$_{0}$ + 2g + 3F"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "A carrier signal C(t) = 25 sin (2.512 × 10$^{10}$ t) is amplitude modulated by a message signal m(t) = 5 sin (1.57 × 10$^{8}$ t) and transmitted through an antenna.What will be the bandwidth of the modulated signal ?",
+    "options": [
+      "8 GHz",
+      "2.01 GHz",
+      "1987.5 MHz",
+      "50 MHz"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "Two cells of emf 2E and E with internal resistance r$_{1}$ and r$_{2}$ respectively are connected in series to an external resistor R (see figure). The value of R, at which the potential difference across the terminals of the first cell becomes zero is",
+    "options": [
+      "r$_{1}$ + r$_{2}$",
+      "$\\frac{r_{1}}{2} - r_{2}$",
+      "$\\frac{r_{1}}{2} + r_{2}$",
+      "r$_{1}$ − r$_{2}$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/d8873b75-e412-49ae-ad03-91d272370427_fig.png"
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "A hairpin like shape as shown in figure is made by bending a long current carrying wire. What is the magnitude of a magnetic field at point P which lies on the centre of the semicircle ?",
+    "options": [
+      "$\\frac{\\mu_{0}I}{4\\pi r}\\left(2 - \\pi\\right)$",
+      "$\\frac{\\mu_{0}I}{4\\pi r}\\left(2 + \\pi\\right)$",
+      "$\\frac{\\mu_{0}I}{2\\pi r}\\left(2 + \\pi\\right)$",
+      "$\\frac{\\mu_{0}I}{2\\pi r}\\left(2 - \\pi\\right)$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/7c532c62-78fc-4310-becc-d58ecde4989c_fig.png"
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "The four arms of a Wheatstone bridge have resistances as shown in the figure. A galvanometer of 15 Ω resistance is connected across BD. Calculate the current through the galvanometer when a potential difference of 10V is maintained across AC.",
+    "options": [
+      "2.44 μA",
+      "2.44 mA",
+      "4.87 mA",
+      "4.87 μA"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/139bd1aa-4369-4d46-aa29-534bf02a2138_fig.png"
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "Two particles A and B of equal masses are suspended from two massless springs of spring constants K$_{1}$ and K$_{2}$ respectively.If the maximum velocities during oscillations are equal, the ratio of the amplitude of A and B is",
+    "options": [
+      "$\\frac{K_{2}}{K_{1}}$",
+      "$\\frac{K_{1}}{K_{2}}$",
+      "$\\sqrt{\\frac{K_{1}}{K_{2}}}$",
+      "$\\sqrt{\\frac{K_{2}}{K_{1}}}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(a)−(i),(b)−(iii),(c)−(iv),(d)−(ii)",
+      "(a)−(ii),(b)−(iv),(c)−(iii),(d)−(i)",
+      "(a)−(ii),(b)−(iii),(c)−(iv),(d)−(i)",
+      "(a)−(ii),(b)−(iii),(c)−(i),(d)−(iv)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "The atomic hydrogen emits a line spectrum consisting of various series.Which series of hydrogen atomic spectra is lying in the visible region ?",
+    "options": [
+      "Brackett series",
+      "Paschen series",
+      "Lyman series",
+      "Balmer series"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "Two identical photocathodes receive the light of frequencies f$_{1}$ and f$_{2}$ respectively. If the velocities of the photo-electrons coming out are v$_{1}$ and v$_{2}$ respectively, then",
+    "options": [
+      "$v_{1}^{2} - v_{2}^{2} = \\frac{2h}{m}\\left[f_{1} - f_{2}\\right]$",
+      "$v_{1}^{2} + v_{2}^{2} = \\frac{2h}{m}\\left[f_{1} + f_{2}\\right]$",
+      "$v_{1} + v_{2} = \\left[\\frac{2h}{m}\\left(f_{1} + f_{2}\\right)\\right]^{\\frac{1}{2}}$",
+      "$v_{1} - v_{2} = \\left[\\frac{2h}{m}\\left(f_{1} - f_{2}\\right)\\right]^{1/2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "What happens to the inductive reactance and the current in a purely inductive circuit if the frequency is halved ?",
+    "options": [
+      "Both, inductive reactance and current will be halved.",
+      "Inductive reactance will be halved and current will be doubled.",
+      "Inductive reactance will be doubled and current will be halved.",
+      "Both, inducting reactance and current will be doubled."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "A sphere of mass 2kg and radius 0.5 m is rolling with an initial speed of 1 ms$^{-1}$ goes up an inclined plane which makes an angle of 30° with the horizontal plane, without slipping. How low will the sphere take to return to the starting point A ?",
+    "options": [
+      "0.60 s",
+      "0.52 s",
+      "0.57 s",
+      "0.80 s"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/262bd279-877d-41b0-ab63-c4c080ae5b43_fig.png"
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "The electric field intensity produced by the radiation coming from a 100 W bulb at a distance of 3m is E. The electric field intensity produced by the radiation coming from 60 W at the same distance is $\\sqrt{\\frac{x}{5}}$E. Where the value of x =_________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "A body of mass 1 kg rests on a horizontal floor with which it has a coefficient of static friction $\\frac{1}{\\sqrt{3}}$ . It is desired to make the body move by applying the minimum possible force F N. The value of F will be ___________. (Round off to the Nearest Integer) [Take g = 10 ms$^{-2}$]",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "A boy of mass 4 kg is standing on a piece of wood having mass 5kg . If the coefficient of friction between the wood and the floor is 0.5, the maximum force that the boy can exert on the rope so that the piece of wood does not move from its place is _________N.(Round off to the Nearest Integer) [Take g = 10 ms$^{-2}$]",
+    "options": [],
+    "correct": "30",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/7b574a7c-334c-4cb6-b28b-0a68f5e12d5a_fig.png"
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "Suppose you have taken a dilute solution of oleic acid in such a way that its concentration becomes 0.01 cm$^{3}$ of oleic acid per cm$^{3}$ of the solution. Then you make a thin film of this solution (monomolecular thickness) of area 4 cm$^{2}$ by considering 100 spherical drops of radius $\\left(\\frac{3}{40\\pi}\\right)^{\\frac{1}{3}} \\times 10^{-3}$ cm. Then the thickness of oleic acid layer will be x × 10$^{-14}$ m. Where x is___________.",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "A particle of mass m moves in a circular orbit in a central potential field U(r) = U$_{0}$r$^{4}$ . If Bohr's quantization conditions are applied, radii of possible orbitals r$_{n}$ vary with n$^{1/\\alpha}$ , where α is___________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "The electric field in a region is given by $\\vec{E} = \\frac{2}{5}E_{0}\\hat{i} + \\frac{3}{5}E_{0}\\hat{j}$ with E$_{0}$ = 4.0 × 10$^{3}$ $\\frac{N}{C}$ .The flux of this field through a rectangular surface area 0.4 m$^{2}$ parallel to the Y − Z plane is _________Nm$^{2}$C$^{-1}$.",
+    "options": [],
+    "correct": "640",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "The disc of mass M with uniform surface mass density σ is shown in the figure. The centre of mass of the quarter disc (the shaded area) is at the position $\\frac{x}{3}\\frac{a}{\\pi}$ , $\\frac{x}{3}\\frac{a}{\\pi}$ where x is ________. (Round off to the Nearest Integer) [a is an area as shown in the figure]",
+    "options": [],
+    "correct": "4",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/65abde0d-95fa-42a2-9451-f8706d69dd3f_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "The image of an object placed in air formed by a convex refracting surface is at a distance of 10 m behind the surface. The image is real and is at $\\frac{2^{rd}}{3}$ of the distance of the object from the surface .The wavelength of light inside the surface is $\\frac{2}{3}$ times the wavelength in air. The radius of the curved surface is $\\frac{x}{13}$ m. the value of 'x' is__________.",
+    "options": [],
+    "correct": "30",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "A 2 μF capacitor C$_{1}$ is first charged to a potential difference of 10 V using a battery.Then the battery is removed and the capacitor is connected to an uncharged capacitor C$_{2}$ of 8μF. The charge in C$_{2}$ on equilibrium condition is_______μC. (Round off to the Nearest Integer)",
+    "options": [],
+    "correct": "16",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/9476c354-ee49-4615-b4b3-7809fe7b0a7b_fig.png"
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "Seawater at a frequency f = 9 × 10$^{2}$ Hz, has permittivity ε = 80ε$_{0}$ and resistivity ρ = 0.25 Ωm. Imagine a parallel plate capacitor is immersed in seawater and is driven by an alternating voltage source V(t)=V$_{0}$ sin (2πft). Then the conduction current density becomes 10$^{x}$ times the displacement current density after time t = $\\frac{1}{800}$ s. The value of x is ________ (Given : $\\frac{1}{4\\pi\\varepsilon_{0}} = 9 \\times 10^{9}\\,\\mathrm{Nm}^{2}\\mathrm{C}^{-2}$)",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Chemistry",
+    "question": "Fructose is an example of :-",
+    "options": [
+      "Pyranose",
+      "Ketohexose",
+      "Aldohexose",
+      "Heptose"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Chemistry",
+    "question": "The set of elements that differ in mutual relationship from those of the other sets is :",
+    "options": [
+      "Li – Mg",
+      "B – Si",
+      "Be – Al",
+      "Li – Na"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "The functional groups that are responsible for the ion-exchange property of cation and anion exchange resins, respectively, are :",
+    "options": [
+      "–SO$_{3}$H and –NH$_{2}$",
+      "–SO$_{3}$H and –COOH",
+      "–NH$_{2}$ and –COOH",
+      "–NH$_{2}$ and –SO$_{3}$H"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "Match List-I and List-II : Choose the correct answer from the options given below :",
+    "options": [
+      "(a)-(ii), (b)-(iii), (c)-(i), (d)-(iv)",
+      "(a)-(iv), (b)-(i), (c)-(ii), (d)-(iii)",
+      "(a)-(i), (b)-(iii), (c)-(ii), (d)-(iv)",
+      "(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "The correct pair(s) of the ambident nucleophiles is (are) : (A) AgCN/KCN (B) RCOOAg/RCOOK (C) AgNO$_{2}$/KNO$_{2}$ (D) AgI/KI",
+    "options": [
+      "(B) and (C) only",
+      "(A) only",
+      "(A) and (C) only",
+      "(B) only"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "The set that represents the pair of neutral oxides of nitrogen is :",
+    "options": [
+      "NO and N$_{2}$O",
+      "N$_{2}$O and N$_{2}$O$_{3}$",
+      "N$_{2}$O and NO$_{2}$",
+      "NO and NO$_{2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II : Choose the correct answer from the options given below :",
+    "options": [
+      "(a)-(iii), (b)-(i), (c)-(ii), (d)-(iv)",
+      "(a)-(iv), (b)-(ii), (c)-(iii), (d)-(i)",
+      "(a)-(ii), (b)-(i), (c)-(iii), (d)-(iv)",
+      "(a)-(i), (b)-(ii), (c)-(iii), (d)-(iv)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Primary, secondary and tertiary amines can be separated using :-",
+    "options": [
+      "Para-Toluene sulphonyl chloride",
+      "Chloroform and KOH",
+      "Benzene sulphonic acid",
+      "Acetyl amide"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The common positive oxidation states for an element with atomic number 24, are :",
+    "options": [
+      "+2 to +6",
+      "+1 and +3 to +6",
+      "+1 and +3",
+      "+1 to +6"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II : Choose the correct match :",
+    "options": [
+      "(a)-(iv), (b)-(iii), (c)-(ii), (d)-(i)",
+      "(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)",
+      "(a)-(iii), (b)-(ii), (c)-(iv), (d)-(i)",
+      "(a)-(i), (b)-(ii), (c)-(iv), (d)-(iii)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement-I : 2-methylbutane on oxidation with KMnO$_{4}$ gives 2-methylbutan-2-ol. Statement-II : n-alkanes can be easily oxidised to corresponding alcohol with KMnO$_{4}$. Choose the correct option :",
+    "options": [
+      "Both statement I and statement II are correct",
+      "Both statement I and statement II are incorrect",
+      "Statement I is correct but Statement II is incorrect",
+      "Statement I is incorrect but Statement II is correct"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "Nitrogen can be estimated by Kjeldahl's method for which of the following compound ?",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/ba5b47ed-5f34-437b-8efb-3f273e35ecc6_fig.png"
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Amongst the following, the linear species is :",
+    "options": [
+      "NO$_{2}$",
+      "Cl$_{2}$O",
+      "O$_{3}$",
+      "N$_{3}^{-}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "C$_{12}$H$_{22}$O$_{11}$ (Sucrose) + H$_{2}$O $\\xrightarrow{\\text{Enzyme A}}$ C$_{6}$H$_{12}$O$_{6}$ (Glucose) + C$_{6}$H$_{12}$O$_{6}$ (Fructose) C$_{6}$H$_{12}$O$_{6}$ (Glucose) $\\xrightarrow{\\text{Enzyme B}}$ 2C$_{2}$H$_{5}$OH + 2CO$_{2}$ In the above reactions, the enzyme A and enzyme B respectively are :-",
+    "options": [
+      "Amylase and Invertase",
+      "Invertase and Amylase",
+      "Invertase and Zymase",
+      "Zymase and Invertase"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "One of the by-products formed during the recovery of NH$_{3}$ from Solvay process is :",
+    "options": [
+      "Ca(OH)$_{2}$",
+      "NaHCO$_{3}$",
+      "CaCl$_{2}$",
+      "NH$_{4}$Cl"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "In the above reaction, the structural formula of (A), \"X\" and \"Y\" respectively are :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/7e80f554-001a-4d9e-a94c-604e9b8242a8_fig.png"
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "For the coagulation of a negative sol, the species below, that has the highest flocculating power is :",
+    "options": [
+      "SO$_{4}^{2-}$",
+      "Ba$^{2+}$",
+      "Na$^{+}$",
+      "PO$_{4}^{3-}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Which of the following statement(s) is (are) incorrect reason for eutrophication ? (A) excess usage of fertilisers (B) excess usage of detergents (C) dense plant population in water bodies (D) lack of nutrients in water bodies that prevent plant growth Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(A) only",
+      "(C) only",
+      "(B) and (D) only",
+      "(D) only"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "Choose the correct statement regarding the formation of carbocations A and B given :-",
+    "options": [
+      "Carbocation B is more stable and formed relatively at faster rate",
+      "Carbocation A is more stable and formed relatively at slow rate",
+      "Carbocation B is more stable and formed relatively at slow rate",
+      "Carbocation A is more stable and formed relatively at faster rate"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/5e60fc31-aa5a-418b-8016-f4438cb9c8e1_fig.png"
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "During which of the following processes, does entropy decrease ? (A) Freezing of water to ice at 0°C (B) Freezing of water to ice at –10°C (C) N$_{2}$(g) + 3H$_{2}$(g) $\\rightarrow$ 2NH$_{3}$(g) (D) Adsorption of CO(g) and lead surface (E) Dissolution of NaCl in water",
+    "options": [
+      "(A), (B), (C) and (D) only",
+      "(B) and (C) only",
+      "(A) and (E) only",
+      "(A), (C) and (E) only"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "A KCl solution of conductivity 0.14 S m$^{-1}$ shows a resistance of 4.19 $\\Omega$ in a conductivity cell. If the same cell is filled with an HCl solution, the resistance drops to 1.03 $\\Omega$. The conductivity of the HCl solution is ____ $\\times$ 10$^{-2}$ S m$^{-1}$. (Round off to the Nearest Integer).",
+    "options": [],
+    "correct": "57",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "On complete reaction of FeCl$_{3}$ with oxalic acid in aqueous solution containing KOH, resulted in the formation of product A. The secondary valency of Fe in the product A is ____. (Round off to the Nearest Integer).",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "The reaction 2A + B$_{2}$ $\\rightarrow$ 2AB is an elementary reaction. For a certain quantity of reactants, if the volume of the reaction vessel is reduced by a factor of 3, the rate of the reaction increases by a factor of ____. (Round off to the Nearest Integer).",
+    "options": [],
+    "correct": "27",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "The total number of C–C sigma bond/s in mesityl oxide (C$_{6}$H$_{10}$O) is____. (Round off to the Nearest Integer).",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "A 1 molal K$_{4}$Fe(CN)$_{6}$ solution has a degree of dissociation of 0.4. Its boiling point is equal to that of another solution which contains 18.1 weight percent of a non electrolytic solute A. The molar mass of A is____ u. (Round off to the Nearest Integer). [Density of water = 1.0 g cm$^{-3}$]",
+    "options": [],
+    "correct": "85",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "In the ground state of atomic Fe(Z = 26), the spin-only magnetic moment is ______ $\\times$ 10$^{-1}$ BM. (Round off to the Nearest Integer). [Given : $\\sqrt{3}$ = 1.73, $\\sqrt{2}$ = 1.41]",
+    "options": [],
+    "correct": "49",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "Consider the reaction N$_{2}$O$_{4}$(g) $\\rightleftharpoons$ 2NO$_{2}$(g). The temperature at which K$_{C}$ = 20.4 and K$_{P}$ = 600.1, is_____K. (Round off to the Nearest Integer). [Assume all gases are ideal and R = 0.0831 L bar K$^{-1}$ mol$^{-1}$]",
+    "options": [],
+    "correct": "354",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "Consider the above reaction. The percentage yield of amide product is ______. (Round off to the Nearest Integer). (Given : Atomic mass : C : 12.0 u, H : 1.0u, N : 14.0 u, O : 16.0 u, Cl : 35.5 u)",
+    "options": [],
+    "correct": "77",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/762eb425-66be-4855-8f70-298f913f05dc_fig.png"
+  },
+  {
+    "source_number": 57,
+    "subject": "Mathematics",
+    "question": "Let $f : R \\rightarrow R$ be defined as $f(x) = e^{-x}\\sin x$. If $F : [0, 1] \\rightarrow R$ is a differentiable function such that $F(x) = \\int_{0}^{x} f(t)\\,dt$, then the value of $\\int_{0}^{1}\\left(F'(x) + f(x)\\right)e^{x}dx$ lies in the interval",
+    "options": [
+      "$\\left[\\frac{327}{360}, \\frac{329}{360}\\right]$",
+      "$\\left[\\frac{330}{360}, \\frac{331}{360}\\right]$",
+      "$\\left[\\frac{331}{360}, \\frac{334}{360}\\right]$",
+      "$\\left[\\frac{335}{360}, \\frac{336}{360}\\right]$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Mathematics",
+    "question": "If the integral $\\int_{0}^{10}\\frac{[\\sin 2\\pi x]}{e^{x-[x]}}dx = \\alpha e^{-1} + \\beta e^{-\\frac{1}{2}} + \\gamma$, where $\\alpha, \\beta, \\gamma$ are integers and $[x]$ denotes the greatest integer less than or equal to $x$, then the value of $\\alpha + \\beta + \\gamma$ is equal to :",
+    "options": [
+      "$0$",
+      "$20$",
+      "$25$",
+      "$10$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Mathematics",
+    "question": "Let $y = y(x)$ be the solution of the differential equation $\\cos x\\,(3\\sin x + \\cos x + 3)dy = (1 + y\\sin x\\,(3\\sin x + \\cos x + 3))dx$, $0 \\le x \\le \\frac{\\pi}{2}$, $y(0) = 0$. Then, $y\\left(\\frac{\\pi}{3}\\right)$ is equal to:",
+    "options": [
+      "$2\\log_{e}\\left(\\frac{2\\sqrt{3}+9}{6}\\right)$",
+      "$2\\log_{e}\\left(\\frac{2\\sqrt{3}+10}{11}\\right)$",
+      "$2\\log_{e}\\left(\\frac{\\sqrt{3}+7}{2}\\right)$",
+      "$2\\log_{e}\\left(\\frac{3\\sqrt{3}-8}{4}\\right)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "The value of $\\sum_{r=0}^{6}\\left({}^{6}C_{r}\\cdot{}^{6}C_{6-r}\\right)$ is equal to :",
+    "options": [
+      "$1124$",
+      "$1324$",
+      "$1024$",
+      "$924$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The value of $\\lim_{n\\rightarrow\\infty}\\frac{[r]+[2r]+.....+[nr]}{n^{2}}$, where $r$ is non-zero real number and $[r]$ denotes the greatest integer less than or equal to $r$, is equal to :",
+    "options": [
+      "$\\frac{r}{2}$",
+      "$r$",
+      "$2r$",
+      "$0$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "The number of solutions of the equation $\\sin^{-1}\\left[x^{2}+\\frac{1}{3}\\right]+\\cos^{-1}\\left[x^{2}-\\frac{2}{3}\\right] = x^{2}$, for $x \\in [-1, 1]$, and $[x]$ denotes the greatest integer less than or equal to $x$, is :",
+    "options": [
+      "$2$",
+      "$0$",
+      "$4$",
+      "Infinite"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "Let a computer program generate only the digits 0 and 1 to form a string of binary numbers with probability of occurrence of 0 at even places be $\\frac{1}{2}$ and probability of occurrence of 0 at the odd place be $\\frac{1}{3}$. Then the probability that '10' is followed by '01' is equal to :",
+    "options": [
+      "$\\frac{1}{18}$",
+      "$\\frac{1}{3}$",
+      "$\\frac{1}{6}$",
+      "$\\frac{1}{9}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "The number of solutions of the equation $x + 2\\tan x = \\frac{\\pi}{2}$ in the interval $[0, 2\\pi]$ is :",
+    "options": [
+      "$3$",
+      "$4$",
+      "$2$",
+      "$5$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "Let $S_{1}$, $S_{2}$ and $S_{3}$ be three sets defined as $S_{1} = \\left\\{z \\in \\mathbb{C} : |z-1| \\le \\sqrt{2}\\right\\}$ $S_{2} = \\left\\{z \\in \\mathbb{C} : \\mathrm{Re}\\left((1-i)z\\right) \\ge 1\\right\\}$ $S_{3} = \\left\\{z \\in \\mathbb{C} : \\mathrm{Im}(z) \\le 1\\right\\}$ Then the set $S_{1} \\cap S_{2} \\cap S_{3}$",
+    "options": [
+      "is a singleton",
+      "has exactly two elements",
+      "has infinitely many elements",
+      "has exactly three elements"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "If the curve $y = y(x)$ is the solution of the differential equation $2(x^{2} + x^{5/4})dy - y(x + x^{1/4})dx = 2x^{9/4}dx$ , $x > 0$ which passes through the point $\\left(1, 1-\\frac{4}{3}\\log_{e}2\\right)$, then the value of $y(16)$ is equal to :",
+    "options": [
+      "$4\\left(\\frac{31}{3}+\\frac{8}{3}\\log_{e}3\\right)$",
+      "$\\left(\\frac{31}{3}+\\frac{8}{3}\\log_{e}3\\right)$",
+      "$4\\left(\\frac{31}{3}-\\frac{8}{3}\\log_{e}3\\right)$",
+      "$\\left(\\frac{31}{3}-\\frac{8}{3}\\log_{e}3\\right)$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "If the sides AB, BC and CA of a triangle ABC have 3, 5 and 6 interior points respectively, then the total number of triangles that can be constructed using these points as vertices, is equal to :",
+    "options": [
+      "$364$",
+      "$240$",
+      "$333$",
+      "$360$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "If $x, y, z$ are in arithmetic progression with common difference $d$, $x \\neq 3d$, and the determinant of the matrix $\\begin{bmatrix} 3 & 4\\sqrt{2} & x \\\\ 4 & 5\\sqrt{2} & y \\\\ 5 & k & z \\end{bmatrix}$ is zero, then the value of $k^{2}$ is",
+    "options": [
+      "$72$",
+      "$12$",
+      "$36$",
+      "$6$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "Let O be the origin. Let $\\overrightarrow{OP} = x\\hat{i}+y\\hat{j}-\\hat{k}$ and $\\overrightarrow{OQ} = -\\hat{i}+2\\hat{j}+3x\\hat{k}$, $x, y \\in R$, $x > 0$, be such that $\\left|\\overrightarrow{PQ}\\right| = \\sqrt{20}$ and the vector $\\overrightarrow{OP}$ is perpendicular to $\\overrightarrow{OQ}$. If $\\overrightarrow{OR} = 3\\hat{i}+z\\hat{j}-7\\hat{k}$, $z \\in R$, is coplanar with $\\overrightarrow{OP}$ and $\\overrightarrow{OQ}$, then the value of $x^{2}+y^{2}+z^{2}$ is equal to",
+    "options": [
+      "$7$",
+      "$9$",
+      "$2$",
+      "$1$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "Two tangents are drawn from a point P to the circle $x^{2}+y^{2}-2x-4y+4=0$, such that the angle between these tangents is $\\tan^{-1}\\left(\\frac{12}{5}\\right)$, where $\\tan^{-1}\\left(\\frac{12}{5}\\right) \\in (0, \\pi)$. If the centre of the circle is denoted by C and these tangents touch the circle at points A and B, then the ratio of the areas of $\\Delta PAB$ and $\\Delta CAB$ is :",
+    "options": [
+      "$11 : 4$",
+      "$9 : 4$",
+      "$3 : 1$",
+      "$2 : 1$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "Consider the function $f : R \\rightarrow R$ defined by $f(x) = \\begin{cases} \\left(2-\\sin\\left(\\frac{1}{x}\\right)\\right)|x|, & x \\neq 0 \\\\ 0, & x = 0 \\end{cases}$. Then $f$ is :",
+    "options": [
+      "monotonic on $(-\\infty, 0) \\cup (0, \\infty)$",
+      "not monotonic on $(-\\infty, 0)$ and $(0, \\infty)$",
+      "monotonic on $(0, \\infty)$ only",
+      "monotonic on $(-\\infty, 0)$ only"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "Let L be a tangent line to the parabola $y^{2} = 4x - 20$ at $(6, 2)$. If L is also a tangent to the ellipse $\\frac{x^{2}}{2}+\\frac{y^{2}}{b} = 1$, then the value of $b$ is equal to :",
+    "options": [
+      "$11$",
+      "$14$",
+      "$16$",
+      "$20$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "The value of the limit $\\lim_{\\theta\\rightarrow 0}\\frac{\\tan\\left(\\pi\\cos^{2}\\theta\\right)}{\\sin\\left(2\\pi\\sin^{2}\\theta\\right)}$ is equal to :",
+    "options": [
+      "$-\\frac{1}{2}$",
+      "$-\\frac{1}{4}$",
+      "$0$",
+      "$\\frac{1}{4}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "Let the tangent to the circle $x^{2}+y^{2}=25$ at the point $R(3, 4)$ meet x-axis and y-axis at point P and Q, respectively. If $r$ is the radius of the circle passing through the origin O and having centre at the incentre of the triangle OPQ, then $r^{2}$ is equal to",
+    "options": [
+      "$\\frac{529}{64}$",
+      "$\\frac{125}{72}$",
+      "$\\frac{625}{72}$",
+      "$\\frac{585}{66}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "If the Boolean expression $(p \\wedge q) \\circledast (p \\otimes q)$ is a tautology, then $\\circledast$ and $\\otimes$ are respectively given by",
+    "options": [
+      "$\\rightarrow, \\rightarrow$",
+      "$\\wedge, \\vee$",
+      "$\\vee, \\rightarrow$",
+      "$\\wedge, \\rightarrow$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "If the equation of plane passing through the mirror image of a point $(2, 3, 1)$ with respect to line $\\frac{x+1}{2}=\\frac{y-3}{1}=\\frac{z+2}{-1}$ and containing the line $\\frac{x-2}{3}=\\frac{1-y}{2}=\\frac{z+1}{1}$ is $\\alpha x + \\beta y + \\gamma z = 24$, then $\\alpha + \\beta + \\gamma$ is equal to :",
+    "options": [
+      "$20$",
+      "$19$",
+      "$18$",
+      "$21$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "If $1$, $\\log_{10}(4^{x}-2)$ and $\\log_{10}\\left(4^{x}+\\frac{18}{5}\\right)$ are in arithmetic progression for a real number $x$, then the value of the determinant $\\begin{vmatrix} 2\\left(x-\\frac{1}{2}\\right) & x-1 & x^{2} \\\\ 1 & 0 & x \\\\ x & 1 & 0 \\end{vmatrix}$ is equal to :",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "Let $f : [-1, 1] \\rightarrow R$ be defined as $f(x) = ax^{2}+bx+c$ for all $x \\in [-1, 1]$, where $a, b, c \\in R$ such that $f(-1) = 2$, $f'(-1) = 1$ and for $x \\in (-1, 1)$ the maximum value of $f''(x)$ is $\\frac{1}{2}$. If $f(x) \\le \\alpha$, $x \\in [-1, 1]$, then the least value of $\\alpha$ is equal to ______.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let $f : [-3, 1] \\rightarrow R$ be given as $f(x) = \\begin{cases} \\min\\left\\{(x+6), x^{2}\\right\\}, & -3 \\le x \\le 0 \\\\ \\max\\left\\{\\sqrt{x}, x^{2}\\right\\}, & 0 \\le x \\le 1. \\end{cases}$ If the area bounded by $y = f(x)$ and x-axis is A, then the value of $6A$ is equal to ______.",
+    "options": [],
+    "correct": "41",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "Let $\\tan\\alpha$, $\\tan\\beta$ and $\\tan\\gamma$; $\\alpha, \\beta, \\gamma \\neq \\frac{(2n-1)\\pi}{2}$, $n \\in N$ be the slopes of three line segments OA, OB and OC, respectively, where O is origin. If circumcentre of $\\Delta ABC$ coincides with origin and its orthocentre lies on y-axis, then the value of $\\left(\\frac{\\cos 3\\alpha + \\cos 3\\beta + \\cos 3\\gamma}{\\cos\\alpha\\cos\\beta\\cos\\gamma}\\right)^{2}$ is equal to :",
+    "options": [],
+    "correct": "144",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Consider a set of $3n$ numbers having variance 4. In this set, the mean of first $2n$ numbers is 6 and the mean of the remaining $n$ numbers is 3. A new set is constructed by adding 1 into each of first $2n$ numbers, and subtracting 1 from each of the remaining $n$ numbers. If the variance of the new set is $k$, then $9k$ is equal to ______.",
+    "options": [],
+    "correct": "68",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "Let the coefficients of third, fourth and fifth terms in the expansion of $\\left(x+\\frac{a}{x^{2}}\\right)^{n}$, $x \\neq 0$, be in the ratio $12 : 8 : 3$. Then the term independent of $x$ in the expansion, is equal to ________.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "Let $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$ and $B = \\begin{bmatrix} \\alpha \\\\ \\beta \\end{bmatrix} \\neq \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}$ such that $AB = B$ and $a + d = 2021$, then the value of $ad - bc$ is equal to ________.",
+    "options": [],
+    "correct": "2020",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{x}$ be a vector in the plane containing vectors $\\vec{a} = 2\\hat{i}-\\hat{j}+\\hat{k}$ and $\\vec{b} = \\hat{i}+2\\hat{j}-\\hat{k}$. If the vector $\\vec{x}$ is perpendicular to $\\left(3\\hat{i}+2\\hat{j}-\\hat{k}\\right)$ and its projection on $\\vec{a}$ is $\\frac{17\\sqrt{6}}{2}$, then the value of $\\left|\\vec{x}\\right|^{2}$ is equal to ________.",
+    "options": [],
+    "correct": "486",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "Let $I_{n} = \\int_{1}^{e} x^{19}\\left(\\log|x|\\right)^{n}dx$, where $n \\in N$. If $(20)I_{10} = \\alpha I_{9} + \\beta I_{8}$, for natural numbers $\\alpha$ and $\\beta$, then $\\alpha - \\beta$ equal to _______.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "Let P be an arbitrary point having sum of the squares of the distance from the planes $x+y+z=0$, $lx-nz=0$ and $x-2y+z=0$, equal to 9. If the locus of the point P is $x^{2}+y^{2}+z^{2}=9$, then the value of $l-n$ is equal to _______.",
+    "options": [],
+    "correct": "0",
+    "source_image": null
+  }
+]

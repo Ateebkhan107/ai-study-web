@@ -1,0 +1,11 @@
+10.
+
+An unpolarized light beam is incident on the
+polarizer of a polarization experiment and the
+intensity of light beam emerging from the
+analyzer is measured as 100 Lumens. Now, if
+the analyzer is rotated around the horizontal
+axis (direction of light) by 30° in clockwise
+direction, the intensity of emerging light will
+be _ _ Lumens.
+

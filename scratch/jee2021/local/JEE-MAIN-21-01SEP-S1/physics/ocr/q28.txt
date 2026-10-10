@@ -1,0 +1,7 @@
+A 2 kg steel rod of length 0.6 m is clamped on a
+table vertically at its lower end and is free to rotate
+in vertical plane. The upper end is pushed so that
+the rod falls under gravity, Ignoring the friction
+due to clamping at its lower end, the speed of the
+free end of rod when it passes through its lowest
+position is... ms‘. (Take g = 10 ms”)

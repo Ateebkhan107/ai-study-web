@@ -1,0 +1,18 @@
+12.
+
+Figure A and B shown two long straight wires of
+circular cross-section (a and b with a < b), carrying
+current I which is uniformly distributed across the
+cross-section. The magnitude of magnetic field B
+varies with radius r and can be represented as :
+
+t t
+
+I
+
+Fig. B
+
+(2) ®
+
+@ ® (4) ©
+

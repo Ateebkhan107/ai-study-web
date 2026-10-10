@@ -1,0 +1,9 @@
+10.
+
+Let y = y(x) be the solution of the differential
+equation xdy — ydx =\/(x? —y*) dx , x= 1, with
+
+y(1) = 0. If the area bounded by the line
+x=1,x =e%, y = 0 and y = y(x) is ae?" + 8,
+
+then the value of 10(a + 8) is equal to

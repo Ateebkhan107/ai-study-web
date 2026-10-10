@@ -1,0 +1,10 @@
+14. A bar magnet is passing through a conducting loop
+of radius R with velocity v. The radius of the bar
+magnet is such that it just passes through the loop.
+The induced e.m.f. in the loop can be represented
+by the approximate curve :
+
+(3)
+
+(4)
+

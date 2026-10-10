@@ -1,0 +1,10 @@
+Four identical long solenoids A, B, C and D ar
+connected to each other as shown in the figure
+If the magnetic field at the center of A is 31
+the field at the center of C would be : (Assum
+that the magnetic field is confined with in th
+
+volume of respective solenoid).
+
+(1) 12T (2) 6T
+(3) 9T (4) 1T

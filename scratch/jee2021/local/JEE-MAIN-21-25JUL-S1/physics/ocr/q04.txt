@@ -1,0 +1,7 @@
+4. Identify the logic operation carried out.
+
+A
+Y
+B
+
+()OR  (2)AND. (3)NOR_ (4) NAND

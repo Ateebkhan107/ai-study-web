@@ -1,0 +1,5 @@
+B
+The logic circuit shown above is equivalent
+to:
+
+A

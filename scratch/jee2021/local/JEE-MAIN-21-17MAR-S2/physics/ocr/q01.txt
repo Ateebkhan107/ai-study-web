@@ -1,0 +1,13 @@
+A rubber ball is released from a height of 5 n
+
+above the floor. It bounces back repeatedly
+
+81
+always rising to Too! the height throug]
+
+which it falls. Find the average speed of the ball
+(Take g = 10 ms~)
+
+(1) 3.0 ms-! (2) 3.50 ms-!
+
+(3) 2.0 ms-! (4) 2.50 ms-!

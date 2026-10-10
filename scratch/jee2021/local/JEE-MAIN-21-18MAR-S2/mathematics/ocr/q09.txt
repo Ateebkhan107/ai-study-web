@@ -1,0 +1,8 @@
+Let S, be the sum of first 2n terms of an
+arithmetic progression. Let S, be the sum of first
+4n terms of the same arithmetic progression. If
+(S, - S,) is 1000, then the sum of the first 6n
+
+terms of the arithmetic progression is equal to:
+
+(1) 1000 = (2) 7000 (3) 5000 = (4) 3000

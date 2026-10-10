@@ -1,0 +1,15 @@
+14.
+
+Two masses A and B, each of mass M are fixed
+together by a massless spring. A force acts on the
+mass B as shown in figure. If the mass A starts
+moving away from mass B with acceleration ‘a’,
+
+then the acceleration of mass B wil be :-
+
+— — ror. ——_e
+F B A
+1 Ma-—F >
+) M (2) F+Ma
+3 F+Ma 4 F-—Ma
+3) 4)

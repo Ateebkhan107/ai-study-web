@@ -1,0 +1,7 @@
+15.
+
+The area of the region bounded by the parabola
+(y-2)’ = (x-1), the tangent to it at the point whose
+ordinate is 3 and the x-axis is :
+
+d)9 (2) 10 (3) 4 (4) 6

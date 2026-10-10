@@ -1,0 +1,7 @@
+8. Let y = y(x) be the solution of the differential
+equation = =2(y+2sinx-—5) x—2cosx such
+X
+
+that y(0) = 7. Then y(z) is equal to :
+(1) 2e” +5 (2) e +5
+(3) 3e" +5 (4) Te” +5

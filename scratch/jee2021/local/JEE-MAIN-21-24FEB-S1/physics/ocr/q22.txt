@@ -1,0 +1,2 @@
+both are 2. Its velocity in this medium is
+__x 107 m/s.

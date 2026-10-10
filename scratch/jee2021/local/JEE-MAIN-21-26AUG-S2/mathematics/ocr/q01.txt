@@ -1,0 +1,15 @@
+Let [t] denote the greatest integer less than or equal
+
+to t. Let f(x) = x — [x], g(x) = 1 — x + [x], and
+
+h(x) = min{f(x), g(x)}, x € [-2, 2]. Then h is :
+
+(1) continuous in [—2, 2] but not differentiable at
+more than four points in (—2, 2)
+
+(2) not continuous at exactly three points in [—2, 2]
+
+(3) continuous in [—2, 2] but not differentiable at
+exactly three points in (—2, 2)
+
+(4) not continuous at exactly four points in [—2, 2]

@@ -1,0 +1,11 @@
+14.
+
+A scientific committee is to be formed from 6
+Indians and 8 foreigners, which includes at
+least 2 Indians and double the number of
+foreigners as Indians. Then the number of
+ways, the committee can be formed, is :
+
+(1) 1625 (2) 575
+
+(3) 560 (4) 1050

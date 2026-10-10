@@ -1,0 +1,7 @@
+In the sulphur estimation, 0.471 g of an organic
+compound gave 1.44 g of barium sulphate. The
+percentage of sulphur in the compound is %.
+
+(Nearest integer)
+
+(Atomic Mass of Ba = 137 u)

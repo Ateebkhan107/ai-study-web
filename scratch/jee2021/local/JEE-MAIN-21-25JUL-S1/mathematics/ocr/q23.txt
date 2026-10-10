@@ -1,0 +1,9 @@
+Consider the following frequency distribution :
+
+class : 10-20 | 20-30 | 30-40 | 40-50 | 50-60
+
+Frequency : a 110 54 30 B
+
+If the sum of all frequencies is 584 and median is
+
+45, then la — B| is equal to

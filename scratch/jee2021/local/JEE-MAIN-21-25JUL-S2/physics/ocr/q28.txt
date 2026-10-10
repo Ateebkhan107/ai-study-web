@@ -1,0 +1,7 @@
+A solid disc of radius 20 cm and mass 10 kg is
+rotating with an angular velocity of 600 rpm, about
+an axis normal to its circular plane and passing
+through its centre of mass. The retarding torque
+required to bring the disc at rest in 10 s is
+
+nx 10' Nm.

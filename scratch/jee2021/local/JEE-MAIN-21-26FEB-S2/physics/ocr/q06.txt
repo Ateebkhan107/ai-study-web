@@ -1,0 +1,17 @@
+The trajectory of a projectile in a vertical plane
+is y = ax — Bx?2, where a and B are constants
+and x & y are respectively the horizontal and
+vertical distances of the projectile from the point
+of projection. The angle of projection @ and the
+maximum height attained H are respectively given
+by :-
+2
+
+(1) tan! 0, (2) tan" B.o—
+4B 2B
+
+4. 407 afB) o&
+‘ , ; (2)5
+(3) tan! 3 (4) tan 3
+
+a

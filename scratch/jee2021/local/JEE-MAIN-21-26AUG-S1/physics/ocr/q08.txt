@@ -1,0 +1,8 @@
+A series LCR circuit driven by 300 V at a
+frequency of 50 Hz contains a resistance R = 3 kQ,
+an inductor of inductive reactance X; = 250 27Q
+and an unknown capacitor. The value of
+capacitance to maximize the average power should
+be : (Take x’ = 10)
+
+(1) 4 pF (2)25 uF (3)400 uF (4) 40 uF

@@ -1,0 +1,11 @@
+15.
+
+A pack of cards has one card missing. Tw
+cards are drawn randomly and are found to b
+spades. The probability that the missing car
+is not a spade, is :
+
+3 52
+Q) 4 (2) 867
+39 22
+(3) 50 (4) a5

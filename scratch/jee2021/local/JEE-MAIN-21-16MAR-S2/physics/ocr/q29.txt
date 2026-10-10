@@ -1,0 +1,11 @@
+A solid disc of radius 'a' and mass 'm' rolls
+down without slipping on an inclined plane
+making an angle 0 with the horizontal. The
+
+2),
+acceleration of the disc will be pesne where
+
+b is . (Round off to the Nearest Integer)
+(g = acceleration due to gravity)
+
+(9 = angle as shown in figure)

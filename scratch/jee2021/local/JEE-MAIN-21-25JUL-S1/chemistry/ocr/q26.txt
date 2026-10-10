@@ -1,0 +1,10 @@
+Consider the cell at 25°C
+
+Zn | Zn°'(aq), (1 M) || Fe*'(aq), Fe”'(aq) | Pt(s)
+
+The fraction of total iron present as Fe*” ion at the
+cell potential of 1.500 V is x x 10°. The value of x
+
+is . (Nearest integer)
+: . Bo _ 0 _
+(Given : E, s,,.2+ =0.77V, E, .,,, =—0.76V )

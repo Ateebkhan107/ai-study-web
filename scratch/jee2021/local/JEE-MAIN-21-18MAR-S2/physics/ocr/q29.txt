@@ -1,0 +1,6 @@
+Two wires of same length and thickness having
+specific resistances 60 cm and 3Q cm
+respectively are connected in parallel. The
+effective resistivity is p Q cm. The value of p,
+
+to the nearest integer, is

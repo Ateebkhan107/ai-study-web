@@ -1,0 +1,18 @@
+16. Four NOR gates are connected as shown in figure.
+
+The truth table for the given figure is :
+
+A
+Y
+B
+A B/Y A B/Y
+0 0} 1 0 0/0
+()o 140 (2)0 1) 1
+1 Oj; 1 1 Oj; 1
+1 110 1 110
+A BI/Y A B/Y
+0 0/0 0 0} 1
+(3) 0 1] 1 (4)0 1/0
+1 0]; 0 1 0]; 0
+1 1] 1 1 i] i1
+

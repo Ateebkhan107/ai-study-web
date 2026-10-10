@@ -1,0 +1,18 @@
+14,
+
+Match List-I with List-II.
+List-I List-II
+
+(a) Ry (Rydberg constant) (i) kg m' ss"
+(b) h(Planck's constant) (ii) kg m? s*
+(c) Hy (Magnetic field (iii) m|
+
+energy density)
+(d) n(coefficient of viscocity) (iv) kg m' s?
+Choose the most appropriate answer from the
+options given below :
+(1) (aH), (b)H{iti), (iv), (di)
+(2) (a)iii), (b)-Gi), (civ), (di)
+(3) (aH{iv), (6}H(ii), (Gi), (d) aii)
+(4) (a)H{iii), (b)-Gi), ()(i), (div)
+

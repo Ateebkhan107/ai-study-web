@@ -1,0 +1,21 @@
+13.
+
+Let g : N > N be defined as
+
+g(3n + 1) =3n+2,
+
+g(3n + 2) = 3n+ 3,
+
+g(3n + 3) =3n+ 1, for alln > 0.
+
+Then which of the following statements is true ?
+
+(1) There exists an onto function f : N > N such
+that fog =f
+
+(2) There exists a one-one function f: N > N such
+that fog =f
+
+(3) gogog = g
+
+(4) There exists a function f : NN such that gof =f

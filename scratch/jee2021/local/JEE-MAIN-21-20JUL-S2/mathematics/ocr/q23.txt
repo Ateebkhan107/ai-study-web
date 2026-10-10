@@ -1,0 +1,8 @@
+Let a curve y = y(x) be given by the solution of the
+differential equation
+
+cos{ boos We) Jen =ve* -1dy
+
+If it intersects y-axis at y = —1, and the intersection
+point of the curve with x-axis is (a, 0), then e® is
+equal to

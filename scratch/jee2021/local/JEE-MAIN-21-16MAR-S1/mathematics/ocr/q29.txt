@@ -1,0 +1,8 @@
+Let f : R > R be a continuous function such
+that f(x) + f(x + 1) = 2, for all x € R. If
+
+8 3
+1, = | fOddx and I, = J fO0dx, then the value
+0 -l
+
+of I, + 21, is equal to

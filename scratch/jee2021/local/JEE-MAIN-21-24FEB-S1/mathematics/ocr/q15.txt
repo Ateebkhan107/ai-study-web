@@ -1,0 +1,7 @@
+The area (in sq. units) of the part of the circle
+x? + y? = 36, which is outside the parabola
+
+y? = 9x, is:
+(1) 242 +33 (2) 12n-3V3
+(3) 24n-33 (4) 120 +3V3
+

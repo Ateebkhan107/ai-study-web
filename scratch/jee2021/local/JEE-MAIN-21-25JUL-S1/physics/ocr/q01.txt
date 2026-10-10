@@ -1,0 +1,8 @@
+For a gas Cp — Cy = R in a state P and
+Cp — Cy = 1.10 R in a state Q, Tp and Tg are the
+temperatures in two different states P and Q
+respectively. Then
+
+(1) Tp =Te (2) Tp< Tg
+
+(3) Tp =0.9 Tg (4) Tp >To

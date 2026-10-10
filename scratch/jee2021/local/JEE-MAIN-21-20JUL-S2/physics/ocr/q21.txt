@@ -1,0 +1,10 @@
+A zener diode having zener voltage 8 V and power
+dissipation rating of 0.5 W is connected across a
+potential divider arranged with maximum potential
+drop across zener diode is as shown in the diagram.
+
+The value of protective resistance Ry is ........... oO
+
+Rp
+
+20 V

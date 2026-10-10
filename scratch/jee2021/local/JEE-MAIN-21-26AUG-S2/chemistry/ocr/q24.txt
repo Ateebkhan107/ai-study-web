@@ -1,0 +1,7 @@
+A metal surface is exposed to 500 nm radiation.
+The threshold frequency of the metal for
+photoelectric current is 4.3 x 10'4 Hz. The velocity
+of ejected electron is x 10° ms! (Nearest
+integer)
+
+[Use : h= 6.63 x 10“ Js, m. = 9.0 x 10" kg]

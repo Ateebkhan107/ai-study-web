@@ -1,0 +1,15 @@
+13.
+
+A bimetallic strip consists of metals A and B.
+It is mounted rigidly as shown. The metal A has
+higher coefficient of expansion compared to
+that of metal B. When the bimetallic strip is
+placed in a cold both, it will :
+
+qe
+
+(1) Bend towards the right
+(2) Not bend but shrink
+
+(3) Neither bend nor shrink
+(4) Bend towards the left

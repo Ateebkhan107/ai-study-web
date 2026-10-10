@@ -1,0 +1,9 @@
+The value of lim—————_,—, where 1
+noo
+
+is non-zero real number and [r] denotes the
+greatest integer less than or equal to r, is equal
+
+to:
+
+(1) 5 (2) r (3) 2r (4) 0

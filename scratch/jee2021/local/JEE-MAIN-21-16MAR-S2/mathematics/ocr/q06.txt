@@ -1,0 +1,7 @@
+Let C be the locus of the mirror image of a point
+on the parabola y? = 4x with respect to the line
+y =x. Then the equation of tangent to C at P(2,1)
+
+is:
+(d)x-y=l1 (2) 2x +y =5
+(3) x + 3y =5 (4)x+2y =4

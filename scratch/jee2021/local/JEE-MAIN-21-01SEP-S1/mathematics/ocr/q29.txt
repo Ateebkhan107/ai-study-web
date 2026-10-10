@@ -1,0 +1,10 @@
+9. Let [t] denote the greatest integer < t. The number
+
+of points where the function
+
+f(x) =[x]}x? | t sal [x +1],x ¢(-2,2)
+
+T
+[x]+3
+
+is not continuous is

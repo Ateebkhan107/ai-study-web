@@ -1,0 +1,13 @@
+A helicopter is flying horizontally with a speed 'v'
+at an altitude 'h' has to drop a food packet for a
+man on the ground. What is the distance of
+helicopter from the man when the food packet is
+dropped?
+
+Qghv? +1
+(1) ae (2) 2ghv? +h?
+
+2v7h
+—+
+
+(3) h? (4) .|-2 +h?

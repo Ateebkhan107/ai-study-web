@@ -1,0 +1,1009 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A ray of light entering from air into a denser medium of refractive index $\\frac{4}{3}$, as shown in figure. The light ray suffers total internal reflection at the adjacent surface as shown. The maximum value of angle $\\theta$ should be equal to :",
+    "options": [
+      "$\\sin^{-1}\\frac{\\sqrt{5}}{4}$",
+      "$\\sin^{-1}\\frac{\\sqrt{7}}{3}$",
+      "$\\sin^{-1}\\frac{\\sqrt{7}}{4}$",
+      "$\\sin^{-1}\\frac{\\sqrt{5}}{3}$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/7506ab1f-6ea4-43c6-96e9-e0443d35efaa_fig.png"
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "In the given potentiometer circuit arrangement, the balancing length AC is measured to be 250 cm. When the galvanometer connection is shifted from point $(1)$ to point $(2)$ in the given diagram, the balancing length becomes 400 cm. The ratio of the emf of two cells, $\\frac{\\varepsilon_1}{\\varepsilon_2}$ is:",
+    "options": [
+      "$\\frac{4}{3}$",
+      "$\\frac{8}{5}$",
+      "$\\frac{3}{2}$",
+      "$\\frac{5}{3}$"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/d4b5132d-b8e6-4250-97e6-50a0fabfb962_fig.png"
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "A balloon was moving upwards with a uniform velocity of 10 m/s. An object of finite mass is dropped from the balloon when it was at a height of 75 m from the ground level. The height of the balloon from the ground when object strikes the ground was around : (takes the value of g as 10 m /s$^2$)",
+    "options": [
+      "250 m",
+      "300 m",
+      "200 m",
+      "125 m"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "An electron moving with speed v and a photon moving with speed c, have same D-Broglie wavelength. The ratio of kinetic energy of electron to that of photon is :",
+    "options": [
+      "$\\frac{v}{2c}$",
+      "$\\frac{2c}{v}$",
+      "$\\frac{v}{3c}$",
+      "$\\frac{3c}{v}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "Two vectors $\\vec{X}$ and $\\vec{Y}$ have equal magnitude. The magnitude of $\\left(\\vec{X}-\\vec{Y}\\right)$ is n times the magnitude of $\\left(\\vec{X}+\\vec{Y}\\right)$. The angle between $\\vec{X}$ and $\\vec{Y}$ is :",
+    "options": [
+      "$\\cos^{-1}\\left(\\frac{n^2+1}{n^2-1}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{-n^2-1}{n^2-1}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{n^2-1}{-n^2-1}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{n^2+1}{-n^2-1}\\right)$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "Two ideal electric dipoles A and B, having their dipole moment $p_1$ and $p_2$ respectively are placed on a plane with their centres at O as shown in the figure. At point C on the axis of dipole A, the resultant electric field is making an angle of $37^\\circ$ with the axis. The ratio of the dipole moment of A and B, $\\frac{p_1}{p_2}$ is : (take $\\sin 37^\\circ = \\frac{3}{5}$)",
+    "options": [
+      "$\\frac{3}{8}$",
+      "$\\frac{3}{2}$",
+      "$\\frac{4}{3}$",
+      "$\\frac{2}{3}$"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/94ea1ffa-0906-4c15-b49a-d8731f47d82d_fig.png"
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "A $10\\,\\Omega$ resistance is connected across 220 V $-$ 50 Hz AC supply. The time taken by the current to change from its maximum value to the rms value is :",
+    "options": [
+      "2.5 ms",
+      "4.5 ms",
+      "3.0 ms",
+      "1.5 ms"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "The relation between time t and distance x for a moving body is given as $t = mx^2 + nx$, where m and n are constants. The retardation of the motion is : (Where v stands for velocity)",
+    "options": [
+      "$2n^2v^2$",
+      "$2mnv^3$",
+      "$2mv^3$",
+      "$2nv^3$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "A prism of refractive index $\\mu$ and angle of prism A is placed in the position of minimum angle of deviation. If minimum angle of deviation is also A, then in terms of refractive index value of A is :",
+    "options": [
+      "$2\\cos^{-1}\\left(\\frac{\\mu}{2}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{\\mu}{2}\\right)$",
+      "$\\sin^{-1}\\left(\\frac{\\mu}{2}\\right)$",
+      "$\\sin^{-1}\\left(\\sqrt{\\frac{\\mu-1}{2}}\\right)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "Consider a planet in some solar system which has a mass double the mass of earth and density equal to the average density of earth. If the weight of an object on earth is W, the weight of the same object on that planet will be :",
+    "options": [
+      "2 W",
+      "W",
+      "$\\sqrt{2}$ W",
+      "$2^{\\frac{1}{3}}$ W"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "A force $\\vec{F} = \\left(40\\hat{i} + 10\\hat{j}\\right)$ N acts on a body of mass 5 kg. If the body starts from rest, its position vector $\\vec{r}$ at time t $=$ 10 s, will be :",
+    "options": [
+      "$\\left(100\\hat{i} + 100\\hat{j}\\right)$ m",
+      "$\\left(400\\hat{i} + 100\\hat{j}\\right)$ m",
+      "$\\left(400\\hat{i} + 400\\hat{j}\\right)$ m",
+      "$\\left(100\\hat{i} + 400\\hat{j}\\right)$ m"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "Two ions having same mass have charges in the ratio 1 : 2. They are projected normally in a uniform magnetic field with their speeds in the ratio 2 : 3. The ratio of the radii of their circular trajectories is :",
+    "options": [
+      "3 : 1",
+      "2 : 3",
+      "4 : 3",
+      "1 : 4"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "If $q_f$ is the free charge on the capacitor plates and $q_b$ is the bound charge on the dielectric slab of dielectric constant k placed between the capacitor plates, then bound charge $q_b$ can be expressed as :",
+    "options": [
+      "$q_b = q_f\\left(1 + \\frac{1}{\\sqrt{k}}\\right)$",
+      "$q_b = q_f\\left(1 - \\frac{1}{\\sqrt{k}}\\right)$",
+      "$q_b = q_f\\left(1 - \\frac{1}{k}\\right)$",
+      "$q_b = q_f\\left(1 + \\frac{1}{k}\\right)$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Two spherical soap bubbles of radii $r_1$ and $r_2$ in vacuum combine under isothermal conditions. The resulting bubble has radius equal to :",
+    "options": [
+      "$\\sqrt{r_1 r_2}$",
+      "$\\sqrt{r_1^2 + r_2^2}$",
+      "$\\frac{r_1 r_2}{r_1 + r_2}$",
+      "$\\frac{r_1 + r_2}{2}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "A heat engine has an efficiency of $\\frac{1}{6}$. When the temperature of sink is reduced by $62^\\circ$ C, its efficiency get doubled. The temperature of the source is :",
+    "options": [
+      "124$^\\circ$C",
+      "99$^\\circ$C",
+      "37$^\\circ$C",
+      "62$^\\circ$C"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "The instantaneous velocity of a particle moving in a straight line is given as $v = \\alpha t + \\beta t^2$, where $\\alpha$ and $\\beta$ are constants. The distance travelled by the particle between 1s and 2s is :",
+    "options": [
+      "$\\frac{\\alpha}{2} + \\frac{\\beta}{3}$",
+      "$\\frac{3}{2}\\alpha + \\frac{7}{3}\\beta$",
+      "$\\frac{3}{2}\\alpha + \\frac{7}{2}\\beta$",
+      "$3\\alpha + 7\\beta$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "The force is given in terms of time t and displacement x by the equation F = A cos Bx + C sin Dt The dimensional formula of $\\frac{AD}{B}$ is :",
+    "options": [
+      "$\\left[\\mathrm{M}^2\\mathrm{L}^2\\mathrm{T}^{-3}\\right]$",
+      "$\\left[\\mathrm{M}^1\\mathrm{L}^1\\mathrm{T}^{-2}\\right]$",
+      "$\\left[\\mathrm{M}\\mathrm{L}^2\\mathrm{T}^{-3}\\right]$",
+      "$\\left[\\mathrm{M}^0\\mathrm{L}\\mathrm{T}^{-1}\\right]$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "When radiation of wavelength $\\lambda$ is incident on a metallic surface, the stopping potential of ejected photoelectrons is 4.8 V. If the same surface is illuminated by radiation of double the previous wavelength, then the stopping potential becomes 1.6 V. The threshold wavelength of the metal is:",
+    "options": [
+      "$6\\lambda$",
+      "$8\\lambda$",
+      "$2\\lambda$",
+      "$4\\lambda$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "The given potentiometer has its wire of resistance $10\\,\\Omega$. When the sliding contact is in the middle of the potentiometer wire, the potential drop across $2\\,\\Omega$ resistor is :",
+    "options": [
+      "$\\frac{40}{11}$ V",
+      "10 V",
+      "$\\frac{40}{9}$ V",
+      "5 V"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/f0d3f23e-79dd-49aa-985c-3cedf59a0e31_fig.png"
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "In a simple harmonic oscillation, what fraction of total mechanical energy is in the form of kinetic energy, when the particle is midway between mean and extreme position.",
+    "options": [
+      "$\\frac{1}{2}$",
+      "$\\frac{3}{4}$",
+      "$\\frac{1}{3}$",
+      "$\\frac{1}{4}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "From the given data, the amount of energy required to break the nucleus of aluminium $^{27}_{13}\\text{Al}$ is ________ $x \\times 10^{-3}$ J. Mass of neutron = 1.00866u Mass of proton = 1.00726 u Mass of Aluminium nucleus = 27.18846 u (Assume 1 u corresponds to x J of energy) (Round off to the nearest integer)",
+    "options": [],
+    "correct": "27",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "A force of $F = (5y + 20)\\hat{j}$ N acts on a particle. The work done by this force when the particle is moved from y = 0m to y = 10m is ________ J.",
+    "options": [],
+    "correct": "450",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "A solid disc of radius 20 cm and mass 10 kg is rotating with an angular velocity of 600 rpm, about an axis normal to its circular plane and passing through its centre of mass. The retarding torque required to bring the disc at rest in 10s is ________ $\\pi \\times 10^{-1}$ Nm.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "A $16\\,\\Omega$ wire is bend to form a square loop. A 9V supply having internal resistance of $1\\,\\Omega$ is connected across one of its sides. The potential drop across the diagonals of the square loop is ________ $\\times 10^{-1}$ V.",
+    "options": [],
+    "correct": "45",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "Two circuits are shown in the figure (a) & (b). At a frequency of ________ rad /s the average power dissipated in one cycle will be same in both the circuits.",
+    "options": [],
+    "correct": "500",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/d39921bd-57d3-4ab2-a44b-b9d39ef37821_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "A light beam of wavelength 500 nm is incident on a metal having work function of 1.25 eV, placed in a magnetic field of intensity B. The electrons emitted perpendicular to the magnetic field B, with maximum kinetic energy are bent into circular arc of radius 30cm. The value of B is ________ $\\times 10^{-7}$ T. Given hc = $20 \\times 10^{-26}$ J − m, mass of electron = $9 \\times 10^{-31}$ kg",
+    "options": [],
+    "correct": "125",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "A message single of frequency 20 kHz and peak voltage of 20 volt is used to modulate a carrier wave of frequency 1 MHz and peak voltage of 20 volt. The modulation index will be ________.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "A system consists of two types of gas molecules A and B having same number density $2 \\times 10^{25}$ / m³. The diameter of A and B are 10 Å and 5 Å respectively. They suffer collision at room temperature. The ratio of average distance covered by the molecule A to that of B between two successive collision is ________ $\\times 10^{-2}$.",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "In a semiconductor, the number density of intrinsic charge carriers at 27°C is $1.5 \\times 10^{16}$ / m³. If the semiconductor is doped with impurity atom, the hole density increases to $4.5 \\times 10^{22}$ / m³. The electron density in the doped semiconductor is ________ $\\times 10^{9}$ / m³.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Physics",
+    "question": "The nuclear activity of a radioactive element becomes $\\left(\\frac{1}{8}\\right)^{\\text{th}}$ of its initial value in 30 years. The half –life of radioactive element is ________ years.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Given below are two statements: Statement I : Chlorofluoro carbons breakdown by radiation in the visible energy region and release chlorine gas in the atmosphere which then reacts with stratospheric ozone. Statement II : Atmospheric ozone reacts with nitric oxide to give nitrogen and oxygen gases, which add to the atmosphere. For the above statements choose the correct answer from the options given below:",
+    "options": [
+      "Statement I is incorrect but Statement II is true",
+      "Both Statement I and II are correct",
+      "Both Statement I and II are false",
+      "Statement I is correct but Statement II is false"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "Maleic anhydride can be prepared by:",
+    "options": [
+      "Heating cis-but-2-enedioic acid",
+      "Treating cis-but-2-enedioic acid with alcohol and acid",
+      "Heating trans- but-2- enedioic acid",
+      "Treating trans-but-2-enedioic acid with alcohol and acid"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/a16a05d8-1d94-42a9-a7d9-2d3c9ad480da_fig.png"
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "The ionic radii of $F^{-}$ and $O^{2-}$ respectively are 1.33 Å and 1.4 Å, while the covalent radius of N is 0.74 Å. The correct statement for the ionic radius of $N^{3-}$ from the following is:",
+    "options": [
+      "It is smaller than $O^{2-}$ and $F^{-}$, but bigger than of N",
+      "It is bigger than $F^{-}$ and N, but smaller than of $O^{2-}$",
+      "It is smaller than $F^{-}$ and N",
+      "It is bigger than $O^{2-}$ and $F^{-}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "The spin only magnetic moments (in BM) for free $Ti^{3+}, V^{2+}$ and $Sc^{3+}$ ions respectively are (At. No. Sc: 21; Ti:22; V:23)",
+    "options": [
+      "1.73,0,3.87",
+      "0,3.87,1.73",
+      "3.87,1.73,0",
+      "1.73, 3.87,0"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Which one of the following metal complexes is most stable?",
+    "options": [
+      "$\\left[Co(en)_2(NH_3)_2\\right]Cl_2$",
+      "$\\left[Co(NH_3)_6\\right]Cl_2$",
+      "$\\left[Co(en)_3\\right]Cl_2$",
+      "$\\left[Co(en)(NH_3)_4\\right]Cl_2$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Match List – I with List – II: List – I Elements (a) Li (b) Na (c) K (d) Cs List – II Properties (i) Poor water solubility of $I^-$ salt (ii) Most abundant element in cell fluid (iii) Bicarbonate salt used in fire extinguisher (iv) Carbonate salt decomposes easily on heating Choose the correct answer from the options given below:",
+    "options": [
+      "(a) – (iv), (b) – (ii), (c) – (iii), (d) – (i)",
+      "(a) – (i), (b) –(ii), (c) – (iii), (d) – (iv)",
+      "(a) –(i), (b) – (iii), (c) – (ii), (d) – (iv)",
+      "(a) – (iv), (b) –(iii), (c) –(ii), (d) –(i)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "In the following the correct bond order sequence is:",
+    "options": [
+      "$O_2 > O_2^- > O_2^{2-} > O_2^+$",
+      "$O_2^+ > O_2 > O_2^- > O_2^{2-}$",
+      "$O_2^{2-} > O_2^+ > O_2^- > O_2$",
+      "$O_2^+ > O_2^- > O_2^{2-} > O_2$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Match List – I with List – II: Choose the most appropriate answer from the option given below:",
+    "options": [
+      "(a) – (iii), (b) –(iv), (c) –(i), (d) –(ii)",
+      "(a) –(iv), (b) –(iii), (c) –(ii), (d) – (i)",
+      "(a) –(iv), (b) –(iii), (c) –(i), (d) –(ii)",
+      "(a) –(iv), (b) –(i), (c) –(iii), (d) –(ii)"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "[where Et ⇒ $C_2H_5$, t − Bu ⇒ $(CH_3)_3C$ −] Consider the above reaction sequence, product \"A\" and product \"B\" formed respectively are:",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-25-evening/5af5bfc7-3b51-4674-961f-b9ec6c311dc6_fig.png"
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "Which among the following is the strongest acid?",
+    "options": [
+      "$CH_3CH_2CH_2CH_3$",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-25-evening/699cda07-bd30-4447-9d65-840f0b8ab567_fig.png"
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Which one of the following is correct structure for cytosine?",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-25-evening/d9058b5a-845c-4535-825f-11054cbc4828_fig.png"
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Identify the species having one π-bond and maximum number of canonical forms from the following:",
+    "options": [
+      "$SO_2$",
+      "$CO_3^{2-}$",
+      "$O_2$",
+      "$SO_3$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "A biodegradable polyamide can be made from:",
+    "options": [
+      "Glycine and aminocaproic acid",
+      "Hexamethylene diamine and adipic acid",
+      "Glycine and isoprene",
+      "Styrene and caproic acid"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Match List – I with List – II: Choose the correct answer from the options given below:",
+    "options": [
+      "(a) –(iii), (b) –(ii), (c) –(i), (d) –(iv)",
+      "(a) –(iii), (b) – (iv), (c) –(i), (d) – (ii)",
+      "(a) – (iv), (b) – (i), (c) – (iii), (d) – (ii)",
+      "(a) –(iv), (b) – (iii), (c) – (ii), (d) –(i)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Consider the above reaction, the product \"P\" is:",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-25-evening/39dba5e5-d6af-4695-9c79-4844e884cc3f_fig.png"
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "The correct decreasing order of densities of the following compounds is:",
+    "options": [
+      "(C) > (B) > (A) > (D)",
+      "(A) > (B) > (C) > (D)",
+      "(D) > (C) > (B) > (A)",
+      "(C) > (D) > (A) > (B)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/96c23022-f96c-4501-a0ad-25d8f7e483c0_fig.png"
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "What is the major product \"P\" of the following reaction?",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-07-25-evening/dc03e625-eed5-42ff-9f69-3f4f8d199990_fig.png"
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "Identify the process in which change in the oxidation state is five:",
+    "options": [
+      "$CrO_4^{2-}$ → $Cr^{3+}$",
+      "$MnO_4^-$ → $Mn^{2+}$",
+      "$Cr_2O_7^{2-}$ → $2Cr^{3+}$",
+      "$C_2O_4^{2-}$ → $2CO_2$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "A reaction of benzonitrile with one equivalent $CH_3MgBr$ followed by hydrolysis produces a yellow liquid \"P\". The compound \"P\" will give positive______.",
+    "options": [
+      "Iodoform test",
+      "Schiff's test",
+      "Ninhydrin's test",
+      "Tollen's test"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The number of significant figure in 0.00340 is______________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "An LPG cylinder contains gas at a pressure of 300 kPa at $27^{\\circ}C$. The cylinder can withstand the pressure of $1.2\\times10^{6}$ Pa. The room in which the cylinder is kept catches fire. The minimum temperature at which the bursting of cylinder will take place is______ $^{\\circ}C$. (Nearest integer)",
+    "options": [],
+    "correct": "927",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "An accelerated electron has speed of $5\\times10^{6}$ ms$^{-1}$ with an uncertainty of 0.02%. The uncertainty in finding its location while in motion is x $\\times$ $10^{-9}$ m . The value of x is________. (Nearest integer) [Use mass of electron = $9.1\\times10^{-31}$ kg, h = $6.63\\times10^{-34}$ Js, $\\pi$=3.14]",
+    "options": [],
+    "correct": "58",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "Number of electrons present in 4f orbital of Ho$^{3+}$ ion is____________________. (Given atomic number of Ho = 67)",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "Consider the above chemical reaction. The total number of stereoisomers possible for product ‘P’ is___________.",
+    "options": [],
+    "correct": "2",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/723c49a5-6a38-4eb4-9a64-4223aa15996e_fig.png"
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "Assuming that Ba(OH)$_2$ is completely ionized in aqueous solution under the given conditions the concentration of H$_3$O$^{+}$ ions in 0.005 M aqueous solution of Ba(OH)$_2$ at 298 K is ___________ $\\times$ $10^{-12}$ mol L$^{-1}$. (nearest integer)",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "For a chemical reaction A→B, it was found that concentration of B is increased by 0.2 mol L$^{-1}$ in 30 min. The average rate of the reaction is __________$\\times10^{-1}$ mol L$^{-1}$ h$^{-1}$ . (in nearest integer)",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "When 3.00 g of substance ‘X” is dissolved in 100 g of CCl$_4$, it raises the boiling point by 0.60K. The molar mass of the substance ‘X” is __________ g mol$^{-1}$. (nearest integer) [Given K$_b$ for CCl$_4$ is 5.0 K kg mol$^{-1}$]",
+    "options": [],
+    "correct": "250",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "A system does 200 J of work and at the same time absorbs 150 J of heat. The magnitude of the change in internal energy is _________J. (Nearest integer)",
+    "options": [],
+    "correct": "50",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "0.8 g of an organic compound was analysed by Kjeldahl’s method for the estimation of nitrogen. If the percentage of nitrogen in the compound was found to be 42%, then ___________ ml. of 1 M H$_2$SO$_4$ would have been neutralized by the ammonia evolved during the analysis.",
+    "options": [],
+    "correct": "12",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "If [x] be the greatest integer less than or equal to x, then $\\sum_{n=8}^{100}\\left[\\frac{(-1)^n n}{2}\\right]$ is equal to :",
+    "options": [
+      "4",
+      "-2",
+      "2",
+      "0"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The number of distinct real roots of $\\begin{vmatrix} \\sin x & \\cos x & \\cos x \\\\ \\cos x & \\sin x & \\cos x \\\\ \\cos x & \\cos x & \\sin x \\end{vmatrix} = 0$ in the interval $-\\frac{\\pi}{4} \\leq x \\leq \\frac{\\pi}{4}$ is:",
+    "options": [
+      "2",
+      "4",
+      "1",
+      "3"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "Let a, b and c be distinct positive numbers. If the vectors $a\\hat{i}+a\\hat{j}+c\\hat{k},\\hat{i}+\\hat{k}$ and $c\\hat{i}+c\\hat{j}+b\\hat{k}$ are co-planar, then c is equal to :",
+    "options": [
+      "$\\frac{2}{\\frac{1}{a}+\\frac{1}{b}}$",
+      "$\\frac{a+b}{2}$",
+      "$\\frac{1}{a}+\\frac{1}{b}$",
+      "$\\sqrt{ab}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "If a tangent to the ellipse $x^{2}+4y^{2}=4$ meets the tangents at the extremities of its major axis at B and C, then the circle with BC as diameter passes through the point :",
+    "options": [
+      "$(1,1)$",
+      "$(\\sqrt{2},0)$",
+      "$(\\sqrt{3},0)$",
+      "$(-1,1)$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "If $P=\\begin{bmatrix} 1 & 0 \\\\ \\frac{1}{2} & 1 \\end{bmatrix}$, then $P^{50}$ is :",
+    "options": [
+      "$\\begin{bmatrix} 1 & 0 \\\\ 25 & 1 \\end{bmatrix}$",
+      "$\\begin{bmatrix} 1 & 25 \\\\ 0 & 1 \\end{bmatrix}$",
+      "$\\begin{bmatrix} 1 & 0 \\\\ 50 & 1 \\end{bmatrix}$",
+      "$\\begin{bmatrix} 1 & 50 \\\\ 0 & 1 \\end{bmatrix}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "The sum of all those terms which are rational numbers in the expansion of $\\left(2^{\\frac{1}{3}} + 3^{\\frac{1}{4}}\\right)^{12}$ is :",
+    "options": [
+      "89",
+      "35",
+      "27",
+      "43"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "Let the equation of the pair of lines, y = px and y = qx, can be written as $\\left( y - px \\right)\\left( y - qx \\right) = 0$. Then the equation of the pair of the angle bisectors of the lines $x^2 - 4xy - 5y^2 = 0$ is :",
+    "options": [
+      "$x^2 - 3xy + y^2 = 0$",
+      "$x^2 + 3xy - y^2 = 0$",
+      "$x^2 - 3xy - y^2 = 0$",
+      "$x^2 + 4xy - y^2 = 0$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "The number of real solutions of the equation, $x^2 - \\left|x\\right| - 12 = 0$ is :",
+    "options": [
+      "1",
+      "4",
+      "3",
+      "2"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "The lowest integer which is greater than $\\left(1 + \\frac{1}{10^{100}}\\right)^{10^{100}}$ is..........",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "If $\\left|\\vec{a}\\right| = 2, \\left|\\vec{b}\\right| = 5$ and $\\left|\\vec{a} \\times \\vec{b}\\right| = 8$, then $\\left|\\vec{a} . \\vec{b}\\right|$ is equal to :",
+    "options": [
+      "5",
+      "4",
+      "6",
+      "3"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "The value of $\\cot\\frac{\\pi}{24}$ is :",
+    "options": [
+      "$\\sqrt{2} + \\sqrt{3} + 2 + \\sqrt{6}$",
+      "$3\\sqrt{2} - \\sqrt{3} - \\sqrt{6}$",
+      "$\\sqrt{2} - \\sqrt{3} - 2 + \\sqrt{6}$",
+      "$\\sqrt{2} + \\sqrt{3} + 2 - \\sqrt{6}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "Let X be a random variable such that the probability function of a distribution is given by $P\\left(X = 0\\right) = \\frac{1}{2}, P\\left(X = j\\right) = \\frac{1}{3^j}\\left(j = 1,2,3,.....,\\infty\\right)$. Then the mean of the distribution and P(X is positive and even) respectively are :",
+    "options": [
+      "$\\frac{3}{4}$ and $\\frac{1}{9}$",
+      "$\\frac{3}{4}$ and $\\frac{1}{16}$",
+      "$\\frac{3}{4}$ and $\\frac{1}{8}$",
+      "$\\frac{3}{8}$ and $\\frac{1}{8}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "Consider functions $f : A \\to B$ and $g : B \\to C\\left(A,B,C \\subseteq R\\right)$ such that $\\left(gof\\right)^{-1}$ exists, then :",
+    "options": [
+      "f and g both are onto",
+      "f is onto and g is one-one",
+      "f is one-one and g is onto",
+      "f and g both are one-one"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "The first of the two samples in a group has 100 items with mean 15 and standard deviation 3. If the whole group has 250 items with mean 15.6 and standard deviation $\\sqrt{13.44}$, then the standard deviation of the second sample is :",
+    "options": [
+      "4",
+      "6",
+      "5",
+      "8"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "Let $y = y\\left(x\\right)$ be the solution of the differential equation $xdy = \\left(y + x^3\\cos x\\right)dx$ with $y\\left(\\pi\\right) = 0$, then $y\\left(\\frac{\\pi}{2}\\right)$ is equal to :",
+    "options": [
+      "$\\frac{\\pi^2}{4} - \\frac{\\pi}{2}$",
+      "$\\frac{\\pi^2}{4} + \\frac{\\pi}{2}$",
+      "$\\frac{\\pi^2}{2} - \\frac{\\pi}{4}$",
+      "$\\frac{\\pi^2}{2} + \\frac{\\pi}{4}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "The value of the integral $\\int_{-1}^{1} \\log\\left(x + \\sqrt{x^2 + 1}\\right)dx$ is :",
+    "options": [
+      "-1",
+      "1",
+      "2",
+      "0"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "If the greatest value of the term independent of 'x' in the expansion of $\\left(x\\sin\\alpha + a\\frac{\\cos\\alpha}{x}\\right)^{10}$ is $\\frac{10!}{\\left(5!\\right)^2}$, then the value of 'a' is equal to :",
+    "options": [
+      "-1",
+      "2",
+      "-2",
+      "1"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "If $f\\left(x\\right) = \\begin{cases} \\int\\limits_{0}^{x} \\left(5 + \\left|1 - t\\right|\\right)dt, & x > 2 \\\\ 5x + 1, & x \\leq 2 \\end{cases}$, then",
+    "options": [
+      "f(x) is not continuous at x = 2",
+      "f(x) is not differentiable at x = 1",
+      "f(x) is continuous but not differentiable at x = 2",
+      "f(x) is everywhere differentiable"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "If ${}^n P_r = {}^n P_{r+1}$ and ${}^n C_r = {}^n C_{r-1}$, then the value of r is equal to :",
+    "options": [
+      "4",
+      "1",
+      "3",
+      "2"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Consider the statement \"The match will be played only if the weather is good and ground is not wet\". Select the correct negation from the following :",
+    "options": [
+      "The match will not be played or weather is good and ground is not wet.",
+      "The match will not be played or weather is not good and ground is wet.",
+      "If the match will not be played, then either weather is not good or ground is wet.",
+      "The match will be played and weather is not good or ground is wet."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "Consider the function $f(x) = \\dfrac{P(x)}{\\sin(x-2)}$ , $x \\neq 2$ $= 7$ , $x = 2$ where P(x) is a polynomial such that P''(x) is always a constant and P(3) = 9. If (x) is continuous at x = 2, then P(5) is equal to.......",
+    "options": [],
+    "correct": "39",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "If a + b + c = 1, ab + bc + ca = 2 and abc = 3, then the value of $a^{4} + b^{4} + c^{4}$ is equal to.....",
+    "options": [],
+    "correct": "13",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "If the co-efficients of $x^{7}$ and $x^{8}$ in the expansion of $\\left(2 + \\dfrac{x}{3}\\right)^{n}$ are equal, then the value of n is equal to .........",
+    "options": [],
+    "correct": "55",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "If the lines $\\dfrac{x-k}{1} = \\dfrac{y-2}{2} = \\dfrac{z-3}{3}$ and $\\dfrac{x+1}{3} = \\dfrac{y+2}{2} = \\dfrac{z+3}{1}$ are co-planar, then the value of k is......",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "If a rectangle is inscribed in an equilateral triangle of side length $2\\sqrt{2}$ as shown in the figure, then the square of the largest area of such a rectangle is .........",
+    "options": [],
+    "correct": "3",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/July/5e4d70aa-e76b-4ad3-9024-65d66c7c8b0b_fig.png"
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "If $\\left(\\vec{a} + 3\\vec{b}\\right)$ is perpendicular to $\\left(7\\vec{a} - 5\\vec{b}\\right)$ and $\\left(\\vec{a} - 4\\vec{b}\\right)$ is perpendicular to $\\left(7\\vec{a} - 2\\vec{b}\\right)$ , then the angle between $\\vec{a}$ and $\\vec{b}$ (in degrees) is.......",
+    "options": [],
+    "correct": "60",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "Let $n \\in N$ and [x] denote the greatest integer less than or equal to x. If the sum of (n+1) terms $^{n}C_{0}, 3.^{n}C_{1}, 5.^{n}C_{2}, 7.^{n}C_{3},.....$ is equal to $2^{100}.101$, then $2\\left[\\dfrac{n-1}{2}\\right]$ is equal to",
+    "options": [],
+    "correct": "98",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "A fair coin is tossed n-times such that the probability of getting at least one head is at least 0.9. Then the minimum value of n is...........",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "Let a curve $y = f(x)$ pass through the point $\\left(2, \\left(\\log_{e}2\\right)^{2}\\right)$ and have slope $\\dfrac{2y}{x\\log_{e}x}$ for all positive real value of x. Then the value of $f(e)$ is equal to..........",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 89,
+    "subject": "Mathematics",
+    "question": "The equation of a circle is $Re\\left(z^{2}\\right) + 2\\left(Im(z)\\right)^{2} + 2Re(z) = 0$, where $z = x + iy$. A line which passes through the center of the given circle and the vertex of the parabola, $x^{2} - 6x - y + 13 = 0$, has y-intercept equal to.........",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  }
+]

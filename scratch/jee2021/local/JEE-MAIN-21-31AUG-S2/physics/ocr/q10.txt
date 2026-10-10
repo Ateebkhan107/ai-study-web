@@ -1,0 +1,28 @@
+10.
+
+Statement :1
+
+If three forces F,,F, and F, are represented by
+
+three sides of a triangle and F,+F, =-F,, then
+these three forces are concurrent forces and satisfy
+the condition for equilibrium.
+
+Statement : IT
+
+A triangle made up of three forces F,,F, and F, as
+
+its sides taken in the same order, satisfy the
+condition for translatory equilibrium.
+
+In the light of the above statements, choose the
+most appropriate answer from the options given
+below:
+
+(1) Statement-I is false but Statement-II is true
+
+(2) Statement-I is true but Statement-II is false
+
+(3) Both Statement-I and Statement-II are false
+
+(4) Both Statement-I and Statement-II are true.

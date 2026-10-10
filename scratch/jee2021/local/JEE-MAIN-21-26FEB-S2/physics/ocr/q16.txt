@@ -1,0 +1,17 @@
+16.
+
+A radioactive sample is undergoing a decay.
+
+At any time t,, its activity is A and another time
+
+A
+t,, the activity is 5° What is the average life
+
+time for the sample ?
+
+; én5 7 t, —t,
+
+MD) ot, (2) “Ts
+t,—t, én(t, +t,)
+
+3) Ts (4) -

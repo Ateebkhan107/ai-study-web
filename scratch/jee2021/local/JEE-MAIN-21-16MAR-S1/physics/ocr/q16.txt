@@ -1,0 +1,8 @@
+16.
+
+For an electromagnetic wave travelling in free
+space, the relation between average energy
+densities due to electric (U,) and magnetic (U,,)
+fields is :
+
+(3) U. < Un (4) U, # Uy

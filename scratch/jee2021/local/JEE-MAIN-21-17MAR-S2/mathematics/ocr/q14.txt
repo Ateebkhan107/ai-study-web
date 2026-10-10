@@ -1,0 +1,17 @@
+14.
+
+Two tangents are drawn from a point P to the
+
+circle x2 + y2 — 2x — 4y + 4 = 0, such that the
+
+12
+angle between these tangents is tan (2) ;
+
+(12
+where tan (2) € (0, 2). If the centre of the
+
+circle is denoted by C and these tangents touch
+the circle at points A and B, then the ratio of
+the areas of APAB and ACAB is :
+
+(Q)11:4 (@)9:4 (3)3:1 (4)2:1

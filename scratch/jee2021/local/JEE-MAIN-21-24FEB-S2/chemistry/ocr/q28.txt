@@ -1,0 +1,9 @@
+Sucrose hydrolyses in acid solution into
+glucose and fructose following first order rate
+law with a half-life of 3.33 h at 25°C. After
+9 h, the fraction of sucrose remaining is f. The
+
+value of log, (+} is x 10-2, (Rounded
+
+off to the nearest integer)
+[Assume : In 10 = 2.303, In 2 = 0.693]

@@ -1,0 +1,7 @@
+Two dices are rolled. If both dices have six faces
+numbered 1,2,3,5,7 and 11, then the probability
+that the sum of the numbers on the top faces
+is less than or equal to 8 is :
+
+4 17 5 1
+OF OR OF @;

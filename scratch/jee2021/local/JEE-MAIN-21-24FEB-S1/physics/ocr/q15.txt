@@ -1,0 +1,21 @@
+15.
+
+Match List-I with List-II :
+
+List-I List-II
+
+(a) Isothermal (i) Pressure constant
+
+(b) Isochoric (ii) Temperature constant
+(c) Adiabatic (iii) Volume constant
+
+(d) Isobaric (iv) Heat content is constant
+
+Choose the correct answer from the options
+given below :
+
+(1) (a) > @, (0) > Gi), ©) > Gi), @ > Gv)
+(2) (a) > Gi), (b) > Gi), ©) > Gv), @) > @
+(3) (a) > Gi), (b) > Gv), ©) > Gi), @) > @)
+(4) (a) > (iii), (b) > (ii), (C) > G), (d) > (iv)
+

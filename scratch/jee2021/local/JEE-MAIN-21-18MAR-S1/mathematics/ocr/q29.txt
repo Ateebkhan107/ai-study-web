@@ -1,0 +1,4 @@
+A square ABCD has all its vertices on the curve
+x’y? = 1. The midpoints of its sides also lie on the
+same curve. Then, the square of area of ABCD
+is

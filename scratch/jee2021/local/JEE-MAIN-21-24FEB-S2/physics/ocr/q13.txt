@@ -1,0 +1,10 @@
+13.
+
+Which of the following equations represents a
+travelling wave ?
+
+(1) y = Asin(15x —- 22)
+(2) y = Ae* (1t +8)
+
+(3) y = Ae*cos(at — 8)
+(4) y = Asinx cost

@@ -1,0 +1,18 @@
+A monoatomic ideal gas, initially at temperature T,
+is enclosed in a cylinder fitted with a frictionless
+piston. The gas is allowed to expand adiabatically
+to a temperature T, by releasing the piston
+suddenly. If J, and J, are the lengths of the gas
+column, before and after the expansion
+
+T,
+respectively, then the value of — will be :
+2
+
+l, 3 L 3
+oft) ay
+
+L, L
+(3) ‘a (4) i
+
+1 2

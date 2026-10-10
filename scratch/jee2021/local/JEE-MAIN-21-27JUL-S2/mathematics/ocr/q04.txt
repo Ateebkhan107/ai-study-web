@@ -1,0 +1,13 @@
+Let f : R > R be defined as
+f(x + y) + f(x — y) = 2 f(x) f(y), (4) =-1. Then,
+
+the value of S 1! is equal to :
+ku Sin(k) sin(k + f (k))
+
+(1) cosec’(21) cos(20) cos(2)
+
+(2) sec’(1) sec(21) cos(20)
+
+(3) cosec’(1) cosec(21) sin(20)
+
+(4) sec’(21) sin(20) sin(2)

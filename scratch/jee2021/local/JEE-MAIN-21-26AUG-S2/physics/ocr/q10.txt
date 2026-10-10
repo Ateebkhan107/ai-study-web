@@ -1,0 +1,11 @@
+10.
+
+A parallel - plate capacitor with plate area A has
+
+separation d between the plates. Two dielectric
+slabs of dielectric constant K, and K, of same area
+A/2 and thickness d/2 are inserted in the space
+between the plates. The capacitance of the
+
+capacitor will be given by :
+

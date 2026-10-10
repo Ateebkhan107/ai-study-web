@@ -1,0 +1,9 @@
+Let a curve y = f(x) pass through the point
+
+(2, (log,2)’) and have slope
+
+for all positive
+xlo
+
+real value of x. Then the value of f(e) is equal
+to.

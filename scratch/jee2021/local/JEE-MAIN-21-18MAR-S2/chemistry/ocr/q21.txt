@@ -1,0 +1,7 @@
+A reaction has a half life of 1 min. The tir
+required for 99.9% completion of the reacti
+is min. (Round off to the Neare
+
+integer)
+
+[Use : In 2= 0.69, In 10 = 2.3]

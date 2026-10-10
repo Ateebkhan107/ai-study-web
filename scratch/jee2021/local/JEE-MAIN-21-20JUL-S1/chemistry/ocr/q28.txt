@@ -1,0 +1,9 @@
+The inactivation rate of a viral preparation is
+proportional to the amount of virus. In the first
+minute after preparation, 10% of the virus is
+inactivated. The rate constant for viral inactivation
+is x 10° min. (Nearest integer)
+
+[Use : In 10 = 2.303 ; logig 3 = 0.477;
+
+property of logarithm : log x” = y log x]

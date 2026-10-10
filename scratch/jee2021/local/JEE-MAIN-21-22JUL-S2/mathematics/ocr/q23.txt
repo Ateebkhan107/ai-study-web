@@ -1,0 +1,5 @@
+35 Let A=|1 O OJ. Then the number of 3 x 3
+001
+matrices B with entries from the set {1, 2, 3, 4, 5}
+
+and satisfying AB = BA is .

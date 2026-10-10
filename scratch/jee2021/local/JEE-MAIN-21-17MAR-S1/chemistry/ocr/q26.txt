@@ -1,0 +1,6 @@
+For a certain first order reaction 32% of the
+reactant is left after 570 s. The rate constant o
+this reaction is x 10-3 s-!. (Round of
+to the Nearest Integer).
+
+[Given : log,)2 = 0.301, Inl0 = 2.303]

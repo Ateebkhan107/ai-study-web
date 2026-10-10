@@ -1,0 +1,15 @@
+10.
+
+A carrier signal C(t) = 25 sin (2.512 x 10!9 t)
+is amplitude modulated by a message signal
+m(t) = 5 sin (1.57 x 108 t) and transmitted
+through an antenna.What will be the bandwidth
+of the modulated signal ?
+
+(1) 8 GHz
+
+(2) 2.01 GHz
+
+(3) 1987.5 MHz
+
+(4) 50 MHz

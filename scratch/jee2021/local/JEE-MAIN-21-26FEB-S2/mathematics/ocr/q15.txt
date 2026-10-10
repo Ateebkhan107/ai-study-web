@@ -1,0 +1,11 @@
+15.
+
+Let f(x) be a differentiable function at x = a with
+
+xf(a)—af(x)
+
+f'(a) = 2 and f(a) = 4. Then lim cna
+
+equals :
+(1) 2a +4 (2) 4 — 2a
+(3) 2a - 4 (4)a+4

@@ -1,0 +1,27 @@
+12.
+
+For the four circles M, N, O and P, followi
+four equations are given :
+
+Circle M : x? + y?=1
+
+Circle N : x? + y?—- 2x =0
+
+Circle O : x? + y?- 2x -2y+1=0
+
+Circle P : x? + y?- 2y =0
+
+If the centre of circle M is joined with centre
+the circle N, further centre of circle N is join
+with centre of the circle O, centre of circle O
+joined with the centre of circle P and lastly, cen
+of circle P is joined with centre of circle M, th
+
+these lines form the sides of a :
+(1) Rhombus
+
+(2) Square
+
+(3) Rectangle
+
+(4) Parallelogram

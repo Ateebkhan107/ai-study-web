@@ -1,0 +1,985 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "An oil drop of radius 2 mm with a density 3g cm$^{-3}$ is held stationary under a constant electric field 3.55 × 10$^{5}$ V m$^{-1}$ in the Millikan's oil drop experiment. What is the number of excess electrons that the oil drop will possess ? (consider g = 9.81 m/s$^{2}$)",
+    "options": [
+      "48.8 × 10$^{11}$",
+      "1.73 × 10$^{10}$",
+      "17.3 × 10$^{10}$",
+      "1.73 × 10$^{12}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "Match List–I with List–II. List–I (a) 10 km height over earth's surface (b) 70 km height over earth's surface (c) 180 km height over earth's surface (d) 270 km height over earth's surface List–II (i) Thermosphere (ii) Mesosphere (iii) Stratosphere (iv) Troposphere",
+    "options": [
+      "(a)–(iv), (b)–(iii), (c)–(ii), (d)–(i)",
+      "(a)–(i), (b)–(iv), (c)–(iii), (d)–(ii)",
+      "(a)–(iii), (b)–(ii), (c)–(i), (d)–(iv)",
+      "(a)–(ii), (b)–(i), (c)–(iv), (d)–(iii)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "Imagine that the electron in a hydrogen atom is replaced by a muon (µ). The mass of muon particle is 207 times that of an electron and charge is equal to the charge of an electron. The ionization potential of this hydrogen atom will be :-",
+    "options": [
+      "13.6 eV",
+      "2815.2 eV",
+      "331.2 eV",
+      "27.2 eV"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "A plane electromagnetic wave of frequency 100 MHz is travelling in vacuum along the x-direction. At a particular point in space and time, $\\vec{B} = 2.0 \\times 10^{-8}\\hat{k}\\,\\text{T}$. (where, $\\hat{k}$ is unit vector along z-direction) What is $\\vec{E}$ at this point ?",
+    "options": [
+      "0.6 $\\hat{j}$ V/m",
+      "6.0 $\\hat{k}$ V/m",
+      "6.0 $\\hat{j}$ V/m",
+      "0.6 $\\hat{k}$ V/m"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "A thin circular ring of mass M and radius r is rotating about its axis with an angular speed ω. Two particles having mass m each are now attached at diametrically opposite points. The angular speed of the ring will become :",
+    "options": [
+      "$\\omega\\dfrac{M}{M+m}$",
+      "$\\omega\\dfrac{M+2m}{M}$",
+      "$\\omega\\dfrac{M}{M+2m}$",
+      "$\\omega\\dfrac{M-2m}{M+2m}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "Four identical long solenoids A, B, C and D are connected to each other as shown in the figure. If the magnetic field at the center of A is 3T, the field at the center of C would be : (Assume that the magnetic field is confined with in the volume of respective solenoid).",
+    "options": [
+      "12T",
+      "6T",
+      "9T",
+      "1T"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/b35bbc00-2514-4bc3-98e0-fb1ff985a6b2_fig.png"
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "The time period of a simple pendulum is given by $T = 2\\pi\\sqrt{\\dfrac{\\ell}{g}}$ . The measured value of the length of pendulum is 10 cm known to a 1mm accuracy. The time for 200 oscillations of the pendulum is found to be 100 second using a clock of 1s resolution. The percentage accuracy in the determination of 'g' using this pendulum is 'x'. The value of 'x' to the nearest integer is:-",
+    "options": [
+      "2%",
+      "3%",
+      "5%",
+      "4%"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "A constant power delivering machine has towed a box, which was initially at rest, along a horizontal straight line. The distance moved by the box in time 't' is proportional to :-",
+    "options": [
+      "t$^{2/3}$",
+      "t$^{3/2}$",
+      "t",
+      "t$^{1/2}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "What will be the average value of energy along one degree of freedom for an ideal gas in thermal equilibrium at a temperature T ? (k$_{B}$ is Boltzmann constant)",
+    "options": [
+      "$\\dfrac{1}{2}k_{B}T$",
+      "$\\dfrac{2}{3}k_{B}T$",
+      "$\\dfrac{3}{2}k_{B}T$",
+      "$k_{B}T$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "A radioactive sample disintegrates via two independent decay processes having half lives $T_{1/2}^{(1)}$ and $T_{1/2}^{(2)}$ respectively. The effective half-life $T_{1/2}$ of the nuclei is :",
+    "options": [
+      "None of the above",
+      "$T_{1/2} = T_{1/2}^{(1)} + T_{1/2}^{(2)}$",
+      "$T_{1/2} = \\dfrac{T_{1/2}^{(1)}T_{1/2}^{(2)}}{T_{1/2}^{(1)} + T_{1/2}^{(2)}}$",
+      "$T_{1/2} = \\dfrac{T_{1/2}^{(1)} + T_{1/2}^{(2)}}{T_{1/2}^{(1)} - T_{1/2}^{(2)}}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "The P-V diagram of a diatomic ideal gas system going under cyclic process as shown in figure. The work done during an adiabatic process CD is (use γ = 1.4) :",
+    "options": [
+      "–500 J",
+      "–400 J",
+      "400 J",
+      "200 J"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/59ce9cec-f8f7-4bc3-a3fa-1e3f35508149_fig.png"
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "In Young's double slit arrangement, slits are separated by a gap of 0.5 mm, and the screen is placed at a distance of 0.5 m from them. The distance between the first and the third bright fringe formed when the slits are illuminated by a monochromatic light of 5890 Å is :-",
+    "options": [
+      "1178 × 10$^{-9}$ m",
+      "1178 × 10$^{-6}$ m",
+      "1178 × 10$^{-12}$ m",
+      "5890 × 10$^{-7}$ m"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "A particle is travelling 4 times as fast as an electron. Assuming the ratio of de-Broglie wavelength of a particle to that of electron is 2 : 1, the mass of the particle is :-",
+    "options": [
+      "$\\dfrac{1}{16}$ times the mass of e$^{-}$",
+      "8 times the mass of e$^{-}$",
+      "16 times the mass of e$^{-}$",
+      "$\\dfrac{1}{8}$ times the mass of e$^{-}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "The position, velocity and acceleration of a particle moving with a constant acceleration can be represented by :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/0cca90e0-baab-4815-a6b5-d1b3d99c1686_fig.png"
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "In the experiment of Ohm's law, a potential difference of 5.0 V is applied across the end of a conductor of length 10.0 cm and diameter of 5.00 mm. The measured current in the conductor is 2.00 A. The maximum permissible percentage error in the resistivity of the conductor is :-",
+    "options": [
+      "3.9",
+      "8.4",
+      "7.5",
+      "3.0"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "In a series LCR resonance circuit, if we change the resistance only, from a lower to higher value :",
+    "options": [
+      "The bandwidth of resonance circuit will increase.",
+      "The resonance frequency will increase.",
+      "The quality factor will increase.",
+      "The quality factor and the resonance frequency will remain constant."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "An AC source rated 220 V, 50 Hz is connected to a resistor. The time taken by the current to change from its maximum to the rms value is :",
+    "options": [
+      "2.5 ms",
+      "25 ms",
+      "2.5 s",
+      "0.25 ms"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "Your friend is having eye sight problem. She is not able to see clearly a distant uniform window mesh and it appears to her as non-uniform and distorted. The doctor diagnosed the problem as :",
+    "options": [
+      "Astigmatism",
+      "Myopia with Astigmatism",
+      "Presbyopia with Astigmatism",
+      "Myopia and hypermetropia"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "A loop of flexible wire of irregular shape carrying current is placed in an external magnetic field. Identify the effect of the field on the wire.",
+    "options": [
+      "Loop assumes circular shape with its plane normal to the field.",
+      "Loop assumes circular shape with its plane parallel to the field.",
+      "Wire gets stretched to become straight.",
+      "Shape of the loop remains unchanged."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "The time period of a satellite in a circular orbit of radius R is T. The period of another satellite in a circular orbit of radius 9R is :",
+    "options": [
+      "9 T",
+      "27 T",
+      "12 T",
+      "3 T"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "A particle performs simple harmonic motion with a period of 2 second. The time taken by the particle to cover a displacement equal to half of its amplitude from the mean position is $\\dfrac{1}{a}$ s. The value of 'a' to the nearest integer is _______ .",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "The circuit shown in the figure consists of a charged capacitor of capacity 3 µF and a charge of 30 µC. At time t = 0, when the key is closed, the value of current flowing through the 5 MΩ resistor is 'x' µ-A. The value of 'x to the nearest integer is _______.",
+    "options": [],
+    "correct": "2",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/bba20fc5-d0ea-4109-b13d-d73763e585a0_fig.png"
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "The voltage across the 10Ω resistor in the given circuit is x volt. The value of 'x' to the nearest integer is _____.",
+    "options": [],
+    "correct": "70",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/a4bb1d1e-2f40-4c46-98dc-dbdfd70a0e4d_fig.png"
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "Two separate wires A and B are stretched by 2 mm and 4 mm respectively, when they are subjected to a force of 2 N. Assume that both the wires are made up of same material and the radius of wire B is 4 times that of the radius of wire A. The length of the wires A and B are in the ratio of a : b. Then a/b can be expressed as 1/x where x is _______ .",
+    "options": [],
+    "correct": "32",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A person is swimming with a speed of 10 m/s at an angle of 120° with the flow and reaches to a point directly opposite on the other side of the river. The speed of the flow is 'x' m/s. The value of 'x' to the nearest integer is ______.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "A parallel plate capacitor has plate area 100 m$^{2}$ and plate separation of 10 m. The space between the plates is filled up to a thickness 5 m with a material of dielectric constant of 10. The resultant capacitance of the system is 'x' pF. The value of ε$_{0}$ = 8.85 × 10$^{-12}$ F.m$^{-1}$. The value of 'x' to the nearest integer is_____.",
+    "options": [],
+    "correct": "161",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "A ball of mass 10 kg moving with a velocity $10\\sqrt{3}$ m/s along the x-axis, hits another ball of mass 20 kg which is at rest. After the collision, first ball comes to rest while the second ball disintegrates into two equal pieces. One piece starts moving along y-axis with a speed of 10 m/s. The second piece starts moving at an angle of 30° with respect to the x-axis. The velocity of the ball moving at 30° with x-axis is x m/s. The configuration of pieces after collision is shown in the figure below. The value of x to the nearest integer is _______ .",
+    "options": [],
+    "correct": "20",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/67c92b4b-5703-427d-a0ca-d76cf856d702_fig.png"
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "As shown in the figure, a particle of mass 10 kg is placed at a point A. When the particle is slightly displaced to its right, it starts moving and reaches the point B. The speed of the particle at B is x m/s. (Take g = 10 m/s$^{2}$) The value of 'x' to the nearest integer is_____.",
+    "options": [],
+    "correct": "10",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/02fa0b51-4495-4ce5-b999-033d69c8b272_fig.png"
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "An npn transistor operates as a common emitter amplifier with a power gain of 10$^{6}$. The input circuit resistance is 100Ω and the output load resistance is 10 KΩ. The common emitter current gain 'β' will be ______. (Round off to the Nearest Integer)",
+    "options": [],
+    "correct": "100",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Physics",
+    "question": "A bullet of mass 0.1 kg is fired on a wooden block to pierce through it, but it stops after moving a distance of 50 cm into it. If the velocity of bullet before hitting the wood is 10 m/s and it slows down with uniform deceleration, then the magnitude of effective retarding force on the bullet is 'x' N. The value of 'x' to the nearest integer is ______ .",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Considering the above reaction, X and Y respectively are :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/1ea36899-f359-4f29-b9b4-50da97b07bca_fig.png"
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "The ionic radius of Na$^{+}$ ions is 1.02 Å. The ionic radii (in Å) of Mg$^{2+}$ and Al$^{3+}$, respectively, are-",
+    "options": [
+      "1.05 and 0.99",
+      "0.72 and 0.54",
+      "0.85 and 0.99",
+      "0.68 and 0.72"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Reaction of Grignard reagent, C$_{2}$H$_{5}$MgBr with C$_{8}$H$_{8}$O followed by hydrolysis gives compound \"A\" which reacts instantly with Lucas reagent to give compound B, C$_{10}$H$_{13}$Cl. The Compound B is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/eb4491e2-ebcb-46ef-b239-e5466452af37_fig.png"
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "Reagent, 1-naphthylamine and sulphanilic acid in acetic acid is used for the detection of",
+    "options": [
+      "N$_{2}$O",
+      "NO$_{3}^{-}$",
+      "NO",
+      "NO$_{2}^{-}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "A non-reducing sugar \"A\" hydrolyses to give two reducing mono saccharides. Sugar A is-",
+    "options": [
+      "Fructose",
+      "Galactose",
+      "Glucose",
+      "Sucrose"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Match the list -I with list - II",
+    "options": [
+      "(a) – (ii), (b) – (iv), (c) – (i), (d) – (iii)",
+      "(a) – (iv), (b) – (i), (c) – (ii), (d) – (iii)",
+      "(a) – (iv), (b) – (iii), (c) – (i), (d) – (ii)",
+      "(a) – (ii), (b) – (iv), (c) – (iii), (d) – (i)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "Consider the above chemical reaction and identify product \"A\"",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/76cb516b-c879-4a4e-b790-a269ebcbbe1f_fig.png"
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :",
+    "options": [
+      "a-iii, b-ii, c-iv, d-i",
+      "a-iv, b-iii, c-ii, d-i",
+      "a-iv, b-iii, c-i, d-ii",
+      "a-iv, b-ii, c-iii, d-i"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II : Choose the most appropriate match :",
+    "options": [
+      "a-ii, b-i, c-iv, d-iii",
+      "a-iii, b-iv, c-ii, d-i",
+      "a-iii, b-i, c-iv, d-ii",
+      "a-ii, b-iv, c-i, d-iii"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "The satements that are TRUE : (A) Methane leads to both global warming and photochemical smog (B) Methane is generated from paddy fields (C) Methane is a stronger global warming gas than CO$_{2}$ (D) Methane is a part of reducing smog Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(A), (B), (C) only",
+      "(A) and (B) only",
+      "(B), (C), (D) only",
+      "(A), (B), (D) only"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :",
+    "options": [
+      "a-i, b-iv, c-iii, d-ii",
+      "a-iii, b-ii, c-iv, d-i",
+      "a-iii, b-iv, c-ii, d-i",
+      "a-iii, b-ii, c-i, d-iv"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Compound with molecular formula C$_{3}$H$_{6}$O can show :",
+    "options": [
+      "Positional isomerism",
+      "Both positional isomerism and metamerism",
+      "Metamerism",
+      "Functional group isomerism"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "The correct structures of trans-[NiBr$_{2}$(PPh$_{3}$)$_{2}$] and meridonial-[Co(NH$_{3}$)$_{3}$(NO$_{2}$)$_{3}$], respectively, are",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/8df9f47a-3080-4d7e-9b48-31045e7ad33b_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "A certain orbital has no angular nodes and two radial nodes. The orbital is :",
+    "options": [
+      "2s",
+      "3s",
+      "3p",
+      "2p"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Considering the above chemical reaction, identify the product \"X\" :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/0c1417a2-50b0-46e5-8b57-ae0d69152b4f_fig.png"
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II Choose the most appropriate answer from the options given below -",
+    "options": [
+      "a-ii, b-iv, c-i, d-iii",
+      "a-i, b-iii, c-ii, d-iv",
+      "a-iii, b-i, c-iv, d-ii",
+      "a-iv, b-ii, c-i, d-iii"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "The number of ionisable hydrogens present in the product obtained from a reaction of phosphorus trichloride and phosphonic acid is:",
+    "options": [
+      "3",
+      "0",
+      "2",
+      "1"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "In a binary compound, atoms of element A form a hcp structure and those of element M occupy 2/3 of the tetrahedral voids of the hcp structure. The formula of the binary compound is :",
+    "options": [
+      "M$_{2}$A$_{3}$",
+      "M$_{4}$A$_{3}$",
+      "M$_{4}$A",
+      "MA$_{3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "The chemical that is added to reduce the melting point of the reaction mixture during the extraction of aluminium is :",
+    "options": [
+      "Cryolite",
+      "Bauxite",
+      "Calamine",
+      "Kaolite"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "In order to prepare a buffer solution of pH 5.74, sodium acetate is added to acetic acid. If the concentration of acetic acid in the buffer is 1.0 M, the concentration of sodium acetate in the buffer is ________ M. (Round off to the Nearest Integer). [Given : pKa (acetic acid) = 4.74]",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "2 NO(g) + Cl$_{2}$(g) ⇌ 2 NOCl(s) This reaction was studied at −10°C and the following data was obtained run [NO]$_{0}$ [Cl$_{2}$]$_{0}$ r$_{0}$ 1 0.10 0.10 0.18 2 0.10 0.20 0.35 3 0.20 0.20 1.40 [NO]$_{0}$ and [Cl$_{2}$]$_{0}$ are the initial concentrations and r$_{0}$ is the initial reaction rate. The overall order of the reaction is ______. (Round off to the Nearest Integer).",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "For the reaction C$_{2}$H$_{6}$ → C$_{2}$H$_{4}$ + H$_{2}$ the reaction enthalpy Δ$_{r}$H = ______ kJ mol$^{-1}$. (Round off to the Nearest Integer). [Given : Bond enthalpies in kJ mol$^{-1}$ : C–C : 347, C=C : 611; C–H : 414, H–H : 436]",
+    "options": [],
+    "correct": "128",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "______ grams of 3-Hydroxy propanal (MW=74) must be dehydrated to produce 7.8 g of acrolein (MW = 56) (C$_{3}$H$_{4}$O) if the percentage yield is 64. (Round off to the Nearest Integer). [Given : Atomic masses : C : 12.0 u, H : 1.0 u, O : 16.0 u]",
+    "options": [],
+    "correct": "16",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "A reaction of 0.1 mole of Benzylamine with bromomethane gave 23 g of Benzyl trimethyl ammonium bromide. The number of moles of bromomethane consumed in this reaction are n × 10$^{-1}$, when n = ______. (Round off to the Nearest Integer). (Given : Atomic masses : C : 12.0 u, H : 1.0 u, N : 14.0 u, Br : 80.0 u]",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "The total number of unpaired electrons present in the complex K$_{3}$[Cr(oxalate)$_{3}$] is ______.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "For the reaction 2Fe$^{3+}$(aq) + 2I$^{-}$(aq) → 2Fe$^{2+}$(aq) + I$_{2}$(s) the magnitude of the standard molar free energy change, $\\Delta_{r}G^{\\circ}_{m}$ = – ______ kJ (Round off to the Nearest Integer). [$E^{\\circ}_{Fe^{2+}/Fe(s)}$ = −0.440 V; $E^{\\circ}_{Fe^{3+}/Fe(s)}$ = −0.036 V; $E^{\\circ}_{I_{2}/2I^{-}}$ = 0.539 V; F = 96500 C]",
+    "options": [],
+    "correct": "45",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "Complete combustion of 3 g of ethane gives x × 10$^{22}$ molecules of water. The value of x is ______. (Round off to the Nearest Integer). [Use : N$_{A}$ = 6.023 × 10$^{23}$; Atomic masses in u : C : 12.0 ; O : 16.0 ; H : 1.0]",
+    "options": [],
+    "correct": "18",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Mathematics",
+    "question": "The differential equation satisfied by the system of parabolas $y^{2} = 4a(x + a)$ is :",
+    "options": [
+      "$y\\left(\\dfrac{dy}{dx}\\right)^{2} - 2x\\left(\\dfrac{dy}{dx}\\right) - y = 0$",
+      "$y\\left(\\dfrac{dy}{dx}\\right)^{2} - 2x\\left(\\dfrac{dy}{dx}\\right) + y = 0$",
+      "$y\\left(\\dfrac{dy}{dx}\\right)^{2} + 2x\\left(\\dfrac{dy}{dx}\\right) - y = 0$",
+      "$y\\left(\\dfrac{dy}{dx}\\right) + 2x\\left(\\dfrac{dy}{dx}\\right) - y = 0$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Mathematics",
+    "question": "The number of integral values of m so that the abscissa of point of intersection of lines $3x + 4y = 9$ and $y = mx + 1$ is also an integer, is :",
+    "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$0$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "Let $(1 + x + 2x^{2})^{20} = a_{0} + a_{1}x + a_{2}x^{2} + ... + a_{40}x^{40}$. then $a_{1} + a_{3} + a_{5} + ... + a_{37}$ is equal to",
+    "options": [
+      "$2^{20}(2^{20} - 21)$",
+      "$2^{19}(2^{20} - 21)$",
+      "$2^{19}(2^{20} + 21)$",
+      "$2^{20}(2^{20} + 21)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The solutions of the equation $\\begin{vmatrix} 1+\\sin^{2}x & \\sin^{2}x & \\sin^{2}x \\\\ \\cos^{2}x & 1+\\cos^{2}x & \\cos^{2}x \\\\ 4\\sin 2x & 4\\sin 2x & 1+4\\sin 2x \\end{vmatrix} = 0,\\left(0 < x < \\pi\\right)$, are",
+    "options": [
+      "$\\dfrac{\\pi}{12}, \\dfrac{\\pi}{6}$",
+      "$\\dfrac{\\pi}{6}, \\dfrac{5\\pi}{6}$",
+      "$\\dfrac{5\\pi}{12}, \\dfrac{7\\pi}{12}$",
+      "$\\dfrac{7\\pi}{12}, \\dfrac{11\\pi}{12}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "Choose the correct statement about two circles whose equations are given below : $x^{2} + y^{2} - 10x - 10y + 41 = 0$ $x^{2} + y^{2} - 22x - 10y + 137 = 0$",
+    "options": [
+      "circles have same centre",
+      "circles have no meeting point",
+      "circles have only one meeting point",
+      "circles have two meeting points"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "Let $\\alpha, \\beta, \\gamma$ be the real roots of the equation, $x^{3} + ax^{2} + bx + c = 0$, $(a, b, c \\in R$ and $a, b \\neq 0)$. If the system of equations (in, u, v, w) given by $\\alpha u + \\beta v + \\gamma w = 0$, $\\beta u + \\gamma v + \\alpha w = 0$; $\\gamma u + \\alpha v + \\beta w = 0$ has non-trivial solution, then the value of $\\dfrac{a^{2}}{b}$ is",
+    "options": [
+      "$5$",
+      "$3$",
+      "$1$",
+      "$0$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "The integral $\\displaystyle\\int \\dfrac{(2x-1)\\cos\\sqrt{(2x-1)^{2}+5}}{\\sqrt{4x^{2}-4x+6}}\\,dx$ is equal to (where c is a constant of integration)",
+    "options": [
+      "$\\dfrac{1}{2}\\sin\\sqrt{\\left(2x-1\\right)^{2}+5} + c$",
+      "$\\dfrac{1}{2}\\cos\\sqrt{\\left(2x+1\\right)^{2}+5} + c$",
+      "$\\dfrac{1}{2}\\cos\\sqrt{\\left(2x-1\\right)^{2}+5} + c$",
+      "$\\dfrac{1}{2}\\sin\\sqrt{\\left(2x+1\\right)^{2}+5} + c$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "The equation of one of the straight lines which passes through the point $(1,3)$ and makes an angles $\\tan^{-1}\\left(\\sqrt{2}\\right)$ with the straight line, $y + 1 = 3\\sqrt{2}\\,x$ is",
+    "options": [
+      "$4\\sqrt{2}x + 5y - \\left(15 + 4\\sqrt{2}\\right) = 0$",
+      "$5\\sqrt{2}x + 4y - \\left(15 + 4\\sqrt{2}\\right) = 0$",
+      "$4\\sqrt{2}x + 5y - 4\\sqrt{2} = 0$",
+      "$4\\sqrt{2}x - 5y - \\left(5 + 4\\sqrt{2}\\right) = 0$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "If $\\lim_{x \\to 0} \\dfrac{\\sin^{-1}x - \\tan^{-1}x}{3x^{3}}$ is equal to L, then the value of $(6L + 1)$ is",
+    "options": [
+      "$\\dfrac{1}{6}$",
+      "$\\dfrac{1}{2}$",
+      "$6$",
+      "$2$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "A vector $\\vec{a}$ has components $3p$ and $1$ with respect to a rectangular cartesian system. This system is rotated through a certain angle about the origin in the counter clockwise sense. If, with respect to new system, $\\vec{a}$ has components $p + 1$ and $\\sqrt{10}$, then a value of p is equal to:",
+    "options": [
+      "$1$",
+      "$-\\dfrac{5}{4}$",
+      "$\\dfrac{4}{5}$",
+      "$-1$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "If the equation $a\\left|z\\right|^{2} + \\overline{\\alpha}z + \\alpha\\overline{z} + d = 0$ represents a circle where a,d are real constants then which of the following condition is correct ?",
+    "options": [
+      "$\\left|\\alpha\\right|^{2} - ad \\neq 0$",
+      "$|\\alpha|^{2} - ad > 0$ and $a \\in R - \\{0\\}$",
+      "$|\\alpha|^{2} - ad \\geq 0$ and $a \\in R$",
+      "$\\alpha = 0$, $a, d \\in R^{+}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "For the four circles M, N, O and P, following four equations are given : Circle M : $x^{2} + y^{2} = 1$ Circle N : $x^{2} + y^{2} - 2x = 0$ Circle O : $x^{2} + y^{2} - 2x - 2y + 1 = 0$ Circle P : $x^{2} + y^{2} - 2y = 0$ If the centre of circle M is joined with centre of the circle N, further centre of circle N is joined with centre of the circle O, centre of circle O is joined with the centre of circle P and lastly, centre of circle P is joined with centre of circle M, then these lines form the sides of a :",
+    "options": [
+      "Rhombus",
+      "Square",
+      "Rectangle",
+      "Parallelogram"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "If $\\alpha, \\beta$ are natural numbers such that $100^{\\alpha} - 199\\beta = (100)(100) + (99)(101) + (98)(102) + ..... + (1)(199)$, then the slope of the line passing through $(\\alpha, \\beta)$ and origin is :",
+    "options": [
+      "$540$",
+      "$550$",
+      "$530$",
+      "$510$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "The real valued function $f\\left(x\\right) = \\dfrac{\\mathrm{cosec}^{-1}x}{\\sqrt{x - \\left[x\\right]}}$, where $[x]$ denotes the greatest integer less than or equal to x, is defined for all x belonging to :",
+    "options": [
+      "all reals except integers",
+      "all non-integers except the interval $[-1,1]$",
+      "all integers except $0, -1, 1$",
+      "all reals except the Interval $[-1,1]$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "$\\dfrac{1}{3^{2}-1} + \\dfrac{1}{5^{2}-1} + \\dfrac{1}{7^{2}-1} + ... + \\dfrac{1}{\\left(201\\right)^{2}-1}$ is equal to",
+    "options": [
+      "$\\dfrac{101}{404}$",
+      "$\\dfrac{25}{101}$",
+      "$\\dfrac{101}{408}$",
+      "$\\dfrac{99}{400}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "If the functions are defined as $f\\left(x\\right) = \\sqrt{x}$ and $g\\left(x\\right) = \\sqrt{1 - x}$, then what is the common domain of the following functions : $f + g$, $f - g$, $f/g$, $g/f$, $g - f$ where $(f \\pm g)(x) = f(x) \\pm g(x)$, $(f/g)(x) = \\dfrac{f\\left(x\\right)}{g\\left(x\\right)}$",
+    "options": [
+      "$0 \\leq x \\leq 1$",
+      "$0 \\leq x < 1$",
+      "$0 < x < 1$",
+      "$0 < x \\leq 1$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "If $f\\left(x\\right) = \\begin{cases} \\dfrac{1}{\\left|x\\right|} & ; \\;\\; \\left|x\\right| \\geq 1 \\\\ ax^{2} + b & ; \\;\\; \\left|x\\right| < 1 \\end{cases}$ is differentiable at every point of the domain, then the values of a and b are respectively :",
+    "options": [
+      "$\\dfrac{1}{2}, \\dfrac{1}{2}$",
+      "$\\dfrac{1}{2}, -\\dfrac{3}{2}$",
+      "$\\dfrac{5}{2}, -\\dfrac{3}{2}$",
+      "$-\\dfrac{1}{2}, \\dfrac{3}{2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "Let $A + 2B = \\begin{bmatrix} 1 & 2 & 0 \\\\ 6 & -3 & 3 \\\\ -5 & 3 & 1 \\end{bmatrix}$ and $2A - B = \\begin{bmatrix} 2 & -1 & 5 \\\\ 2 & -1 & 6 \\\\ 0 & 1 & 2 \\end{bmatrix}$. If Tr(A) denotes the sum of all diagonal elements of the matrix A, then Tr(A) $-$ Tr(B) has value equal to",
+    "options": [
+      "$1$",
+      "$2$",
+      "$0$",
+      "$3$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "The sum of all the 4-digit distinct numbers that can be formed with the digits 1, 2, 2 and 3 is:",
+    "options": [
+      "$26664$",
+      "$122664$",
+      "$122234$",
+      "$22264$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "The value of $3 + \\cfrac{1}{4 + \\cfrac{1}{3 + \\cfrac{1}{4 + \\cfrac{1}{3 + ...\\infty}}}}$ is equal to",
+    "options": [
+      "$1.5 + \\sqrt{3}$",
+      "$2 + \\sqrt{3}$",
+      "$3 + 2\\sqrt{3}$",
+      "$4 + \\sqrt{3}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "The number of times the digit 3 will be written when listing the integers from 1 to 1000 is",
+    "options": [],
+    "correct": "300",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let the plane $ax + by + cz + d = 0$ bisect the line joining the points $(4, -3, 1)$ and $(2, 3, -5)$ at the right angles. If a, b, c, d are integers, then the minimum value of $(a^{2} + b^{2} + c^{2} + d^{2})$ is",
+    "options": [],
+    "correct": "28",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "The missing value in the following figure is",
+    "options": [],
+    "correct": "4",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/March/b1d7ff66-8336-45a8-b316-ff241bc58251_fig.png"
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Let $z_{1}, z_{2}$ be the roots of the equation $z^{2} + az + 12 = 0$ and $z_{1}, z_{2}$ form an equilateral triangle with origin. Then, the value of $|a|$ is",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "The equation of the planes parallel to the plane $x - 2y + 2z - 3 = 0$ which are at unit distance from the point $(1, 2, 3)$ is $ax + by + cz + d = 0$. If $(b - d) = K(c - a)$, then the positive value of K is",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "The mean age of 25 teachers in a school is 40 years. A teacher retires at the age of 60 years and a new teacher is appointed in his place. If the mean age of the teachers in this school now is 39 years, then the age (in years) of the newly appointed teacher is_.",
+    "options": [],
+    "correct": "35",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "If $f\\left(x\\right) = \\displaystyle\\int \\dfrac{5x^{8} + 7x^{6}}{\\left(x^{2} + 1 + 2x^{7}\\right)^{2}}\\,dx, \\left(x \\geq 0\\right), f\\left(0\\right) = 0$ and $f\\left(1\\right) = \\dfrac{1}{K}$, then the value of K is",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "A square ABCD has all its vertices on the curve $x^{2}y^{2} = 1$. The midpoints of its sides also lie on the same curve. Then, the square of area of ABCD is",
+    "options": [],
+    "correct": "80",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "The number of solutions of the equation $\\left|\\cot x\\right| = \\cot x + \\dfrac{1}{\\sin x}$ in the interval $[0, 2\\pi]$ is",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  }
+]

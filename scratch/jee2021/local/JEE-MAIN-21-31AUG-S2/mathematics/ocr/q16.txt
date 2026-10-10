@@ -1,0 +1,14 @@
+16.
+
+Let A be the set of all points (a, B) such that the
+area of triangle formed by the points (5, 6), (3, 2)
+and (a, B) is 12 square units. Then the least
+possible length of a line segment joining the origin
+to a point in A, is:
+
+4
+(1) 5 (2)
+
+@lS Ge
+
+G) x (4)

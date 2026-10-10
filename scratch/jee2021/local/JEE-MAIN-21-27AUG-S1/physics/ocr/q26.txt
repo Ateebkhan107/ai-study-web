@@ -1,0 +1,7 @@
+Two cars X and Y are approaching each other with
+velocities 36 km/h and 72 km/h respectively. The
+frequency of a whistle sound as emitted by a
+passenger in car X, heard by the passenger in car Y
+is 1320 Hz. If the velocity of sound in air is
+340 m/s, the actual frequency of the whistle sound
+produced is ........ Hz.

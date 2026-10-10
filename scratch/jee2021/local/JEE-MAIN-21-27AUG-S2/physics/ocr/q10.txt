@@ -1,0 +1,13 @@
+10.
+
+A constant magnetic field of 1 T is applied in the
+x > 0 region. A metallic circular ring of radius 1m
+is moving with a constant velocity of 1 m/s along
+the x-axis. At t = 0s, the centre of O of the ring is
+at x =— 1m. What will be the value of the induced
+emf in the ring at t = 1s? (Assume the velocity of
+
+the ring does not change.)
+
+()1Vv (2)2nV
+B)2V (4)0V

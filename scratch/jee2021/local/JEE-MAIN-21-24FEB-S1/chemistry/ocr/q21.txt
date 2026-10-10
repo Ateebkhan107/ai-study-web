@@ -1,0 +1,4 @@
+!_ The value of x is _
+
+(Rounded off to the nearest integer)
+(Mass of Li3* = 8.3 mass of proton)

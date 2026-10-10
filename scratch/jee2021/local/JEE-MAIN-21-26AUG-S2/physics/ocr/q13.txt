@@ -1,0 +1,12 @@
+13.
+
+A transmitting antenna at top of a tower has a
+height of 50 m and the height of receiving antenna
+is 80 m. What is range of communication for Line
+of Sight (LoS) mode ?
+
+[use radius of earth = 6400 km]
+
+(1) 45.5 km (2) 80.2 km
+
+(3) 144.1 km (4) 57.28 km

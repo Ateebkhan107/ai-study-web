@@ -1,0 +1,12 @@
+A circular conducting coil of radius 1 m is being
+heated by the change of magnetic field B passing
+perpendicular to the plane in which the coil is laid.
+The resistance of the coil is 2 tO. The magnetic
+field is slowly switched off such that its magnitude
+changes in time as
+B ~4.a0"1[1-75]
+T 100
+
+The energy dissipated by the coil before the
+magnetic field is switched off completely is
+E= mJ.

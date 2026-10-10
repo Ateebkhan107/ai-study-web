@@ -1,0 +1,9 @@
+14.
+
+A resistor develops 500 J of thermal energy in
+20s when a current of 1.5 A is passed through
+it. If the current is increased from 1.5 A to 3A,
+what will be the energy developed in 20 s.
+(1) 1500 J (2) 1000 J
+
+(3) 500 J (4) 2000 J

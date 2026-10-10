@@ -1,0 +1,14 @@
+17.
+
+A cell E, of emf 6V and internal resistance 2Q
+is connected with another cell E, of emf 4V and
+internal resistance 8Q (as shown in the figure).
+The potential difference across points X and Y
+is : Ey E
+a
+AV, 8Q
+
+Y
+
+(1) 10.0 V (2) 3.6 V
+(3) 5.6V (4) 2.0 V

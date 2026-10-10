@@ -1,0 +1,20 @@
+Given below are two statement :
+
+Statement-I: A speech signal of 2 kHz is used
+to modulate a carrier signal of
+1 MHz. The band width
+
+requirement for the signal is
+4 kHz.
+
+Statement-II : The side band frequencies are
+1002 kHz. and 998 kHz.
+
+In the light of the above statements, choose the
+
+correct answer from the options given below:
+
+(1) Statement I is true but Statement II is false
+(2) Statement I is false but Statement II is true
+(3) Both Statement I and Statement II are true
+(4) Both Statement I and Statement II are false

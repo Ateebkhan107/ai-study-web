@@ -1,0 +1,11 @@
+The distance of the point (1, 1, 9) from the point
+-3 y-4_ 2-5
+2 2
+
+of intersection of the line
+
+and the planex+y+z=17is:
+
+(1) 2/19 (2) 19./2
+(3) 38 (4) 38
+

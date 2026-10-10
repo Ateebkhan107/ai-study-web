@@ -1,0 +1,19 @@
+12.
+
+Let f : R > R be defined as f(x) = 2x — 1 and
+1
+
+x—-—
+
+g:R-—-{1} SR be defined as a(x) =—*.
+x—
+
+Then the composition function f(g(x)) is :
+
+(1) onto but not one-one
+
+(2) both one-one and onto
+
+(3) one-one but not onto
+
+(4) neither one-one nor onto

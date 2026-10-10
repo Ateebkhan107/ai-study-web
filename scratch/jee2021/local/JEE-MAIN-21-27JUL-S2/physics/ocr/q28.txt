@@ -1,0 +1,9 @@
+A small block slides down from the top of
+hemisphere of radius R = 3 m as shown in the
+figure. The height 'h' at which the block will lose
+contact with the surface of the sphere is sm.
+
+(Assume there is no friction between the block and
+
+the hemisphere)
+

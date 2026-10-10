@@ -1,0 +1,13 @@
+15.
+
+Consider the function f : R > R defined by
+
+1
+2-sin{ 1) |xI.x#0
+fo)= [ x . Then f is :
+
+0 »x=0
+(1) monotonic on (-«, 0) U (0, ~)
+(2) not monotonic on (-o0, 0) and (0, 0)
+(3) monotonic on (0, ©) only
+(4) monotonic on (—00, 0) only

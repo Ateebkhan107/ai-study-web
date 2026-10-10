@@ -1,0 +1,13 @@
+11.
+
+If velocity [V], time [T] and force [F] are chosen
+as the base quantities, the dimensions of the mass
+will be :
+
+(1) (FT! V"}
+
+(2) [FTV ']
+
+(3) [FT’ V]
+
+(4) [FVT ']

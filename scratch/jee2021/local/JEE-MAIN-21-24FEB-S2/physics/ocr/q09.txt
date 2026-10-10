@@ -1,0 +1,9 @@
+Figure shows a circuit that contains
+four identical resistors with resistance
+R = 2.0 Q, two identical inductors with
+inductance L = 2.0 mH and an ideal battery with
+emf E=9 V. The current ‘7’ just after the switch
+'S' is closed will be :
+
+(1) 2.25 A (2)3.0A
+(3) 3.37 A (49 A

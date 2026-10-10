@@ -1,0 +1,12 @@
+Two flasks I and I shown below are connected by
+a valve of negligible volume.
+
+When the valve is opened, the final pressure of the
+system in bar is x x 10°. The value of x is
+
+(Integer answer)
+
+[Assume-Ideal gas; 1 bar = 10° Pa; Molar mass of
+
+N, = 28.0 g mol' ; R= 8.31 J mol 'K']
+2 g

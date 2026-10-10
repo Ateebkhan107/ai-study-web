@@ -1,0 +1,10 @@
+Let f, g : NN such that f(n + 1) = f(n) + f(1)
+vy n é N and g be any arbitrary function.
+Which of the following statements is NOT true?
+(1) If fog is one-one, then g is one-one
+
+(2) If f is onto, then f(n) = n yneN
+
+(3) f is one-one
+
+(4) If g is onto, then fog is one-one

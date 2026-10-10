@@ -1,0 +1,11 @@
+A triangular plate is shown. A force F= 4i-3]
+
+is applied at point P. The torque at point P with
+respect to point 'O' and 'Q' are :
+
+(1) - 15 - 20/3, 15 - 20/3
+(2) 15 + 20/3, 15 - 20/3
+(3) 15 - 20/3, 15 + 20/3
+
+(4) — 15 + 20/3, 15 + 20/3
+

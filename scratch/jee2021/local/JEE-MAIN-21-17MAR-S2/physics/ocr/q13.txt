@@ -1,0 +1,12 @@
+13.
+
+The four arms of a Wheatstone bridge have
+resistances as shown in the figure. A
+galvanometer of 15 © resistance is connected
+across BD. Calculate the current through the
+galvanometer when a potential difference of
+10V is maintained across AC.
+
+(1) 2.44 pA (2) 2.44 mA
+(3) 4.87 mA (4) 4.87 pA
+

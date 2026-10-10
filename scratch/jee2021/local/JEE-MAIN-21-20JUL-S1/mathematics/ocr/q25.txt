@@ -1,0 +1,5 @@
+If the shortest distance between the lines
+ =ai+2j+2k+A(i-2j+2k), 24 eR, a> 0
+and 1 =-4i-k+u(3i-2j-2k), p € Ris 9, then
+
+@ is equal to

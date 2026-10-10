@@ -1,0 +1,5 @@
+If the curve, y = y(x) represented by the solution
+of the differential equation
+(2xy2 — y)dx + xdy = 0, passes through the
+intersection of the lines, 2x —- 3y = 1 and
+3x + 2y = 8, then ly(1)I is equal to .

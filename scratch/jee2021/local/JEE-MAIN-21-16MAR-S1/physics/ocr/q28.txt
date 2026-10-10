@@ -1,0 +1,5 @@
+The resistance R = T , where V = (50 + 2)V
+
+and I = (20 + 0.2)A. The percentage error in R
+is 'x' %. The value of 'x' to the nearest integer
+is

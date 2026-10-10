@@ -1,0 +1,7 @@
+10. The zener diode has a V, = 30 V. The current
+passing through the diode for the following
+circuit is ......... mA.
+
+4k
+
+90 V 5k

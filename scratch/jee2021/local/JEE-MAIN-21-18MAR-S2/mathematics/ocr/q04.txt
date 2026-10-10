@@ -1,0 +1,11 @@
+Let f : R —- {3} > R — {1} be defined by
+
+2
+f(x)=— 3° Let g: RR be given a
+
+g(x) = 2x — 3. Then, the sum of all the value:
+
+13
+of x for which f-!(x) + g(x) = > is equal t
+
+(1) 7 (2) 2 (3) 5 (4) 3

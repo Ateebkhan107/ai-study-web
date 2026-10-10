@@ -1,0 +1,15 @@
+With respect to drug-enzyme interaction,
+
+identify the wrong statement:
+
+(1) Non-Competitive inhibitor binds to the
+allosteric site
+
+(2) Allosteric inhibitor changes the enzyme's
+active site
+
+(3) Allosteric inhibitor competes with the
+enzyme's active site
+
+(4) Competitive inhibitor binds to the enzyme's
+active site

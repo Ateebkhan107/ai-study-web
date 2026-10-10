@@ -1,0 +1,9 @@
+In a Young's double slit experiment, the width
+of the one of the slit is three times the other slit.
+The amplitude of the light coming from a slit
+is proportional to the slit-width. Find the ratio
+of the maximum to the minimum intensity in
+the interference pattern.
+
+Q)1:4 @3:1 @8)4:1 42:1
+

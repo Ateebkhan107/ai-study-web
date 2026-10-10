@@ -1,0 +1,1022 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A tuning fork A of unknown frequency produces 5beats/s with a fork of known frequency 340 HZ. When fork A filed, the beat frequency decreases to 2beats/s. What is the frequency of fork A?",
+    "options": [
+      "342 Hz",
+      "335 Hz",
+      "338 Hz",
+      "345 Hz"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "The trajectory a projectile in a vertical plane is y = αx − βx$^{2}$, where α and β are constants and x & y are respectively the horizontal and vertical distance of the projectile from the point of projection. The angle of projection θ and the maximum height attained H are respectively given by:",
+    "options": [
+      "$\\tan^{-1}\\alpha,\\ \\frac{\\alpha^{2}}{4\\beta}$",
+      "$\\tan^{-1}\\beta,\\ \\frac{\\alpha^{2}}{2\\beta}$",
+      "$\\tan^{-1}\\left(\\frac{\\beta}{\\alpha}\\right),\\ \\frac{\\alpha^{2}}{\\beta}$",
+      "$\\tan^{-1}\\alpha,\\ \\frac{4\\alpha^{2}}{\\beta}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "A cord is wound round the circumference of wheel of radius r. The axis of the wheel is horizontal and the moment of inertia about it is I. A weight mg is attached to the cord at the end. The weight falls from rest. After falling through a distance ‘h’, the square of angular velocity of wheel will be:",
+    "options": [
+      "$\\frac{2gh}{I+mr^{2}}$",
+      "2gh",
+      "$\\frac{2mgh}{I+2mr^{2}}$",
+      "$\\frac{2mgh}{I+mr^{2}}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "Find the peak current and resonant frequency of the following circuit (as shown in figure)",
+    "options": [
+      "0.2 A and 100 Hz",
+      "2 A and 50 Hz",
+      "2 A and 100 Hz",
+      "0.2 A and 50 Hz"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/9f46753a-b393-4761-a67c-34be90b87f34_fig.png"
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "The incident ray, reflected ray and the outward drawn normal are denoted by the unit vectors $\\vec{a}, \\vec{b}$ and $\\vec{c}$ respectively. Then choose the correct relation for these vectors.",
+    "options": [
+      "$\\vec{b} = 2\\vec{a} + \\vec{c}$",
+      "$\\vec{b} = \\vec{a} - \\vec{c}$",
+      "$\\vec{b} = \\vec{a} + 2\\vec{c}$",
+      "$\\vec{b} = \\vec{a} - 2\\left(\\vec{a}\\cdot\\vec{c}\\right)\\vec{c}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "A radioactive sample is undergoing α decay. At any time t$_{1}$, its activity is A and another time t$_{2}$, the activity is $\\frac{A}{5}$. What is the average life time for the sample?",
+    "options": [
+      "$\\frac{t_{2}-t_{1}}{\\ln 5}$",
+      "$\\frac{\\ln\\left(t_{2}+t_{1}\\right)}{2}$",
+      "$\\frac{t_{1}-t_{2}}{\\ln 5}$",
+      "$\\frac{\\ln 5}{t_{2}-t_{1}}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "A particle executes S.H.M., the graph of velocity as a function of displacement is:",
+    "options": [
+      "a circle",
+      "a parabola",
+      "an ellipse",
+      "a helix"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "A scooter accelerates from rest for time t$_{1}$ at constant rate a$_{1}$ and then retards at constant rate a$_{2}$ for time t$_{2}$ and comes to rest. The correct value of $\\frac{t_{1}}{t_{2}}$ will be:",
+    "options": [
+      "$\\frac{a_{1}+a_{2}}{a_{2}}$",
+      "$\\frac{a_{2}}{a_{1}}$",
+      "$\\frac{a_{1}+a_{2}}{a_{1}}$",
+      "$\\frac{a_{1}}{a_{2}}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "Draw the output Y in the given combination of gates.",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-02-26-evening/a3e74923-207f-4d7b-b503-dc86fac04ab7_fig.png"
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "An inclined plane making an angle of 30° with horizontal is placed in a uniform horizontal electric field $200\\frac{N}{C}$ as shown in the figure. A body of mass 1 kg and charge 5mC is allowed to slide down from rest at a height of 1m. If the coefficient of frication is 0.2, find the time taken by the body to reach the bottom. $\\left[g = 9.8\\,m/s^{2},\\ \\sin 30^{\\circ} = \\frac{1}{2};\\ \\cos 30^{\\circ} = \\frac{\\sqrt{3}}{2}\\right]$",
+    "options": [
+      "2.3 s",
+      "0.46 s",
+      "1.3 s",
+      "0.92 s"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/75cce476-a244-436d-9569-765046053bd0_fig.png"
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "If ‘C’ and ‘V’ represent capacity and voltage respectively then what are the dimensions of λ where C/V = λ?",
+    "options": [
+      "$\\left[M^{-2}L^{-4}I^{3}T^{7}\\right]$",
+      "$\\left[M^{-2}L^{-3}I^{2}T^{6}\\right]$",
+      "$\\left[M^{-1}L^{-3}I^{-2}T^{-7}\\right]$",
+      "$\\left[M^{-3}L^{-4}I^{3}T^{7}\\right]$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "Given below are two statements: One is labeled as Assertion A and the other is labeled as Reason R. Assertion A : For a simple microscope, the angular size of the object equals the angular size of the image. Reason R : Magnification is achieved as the small object can be kept much closer to the eye than 25 cm and hence it subtends a large angle. In the light of the above statements, choose the most appropriate answer from the options given below:",
+    "options": [
+      "Both A and R are true but R is NOT the correct explanationof A",
+      "Both A and R are true and R is the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "The recoil speed of a hydrogen atom after it emits a photon in going from n = 5 state to n = 1 state will be:",
+    "options": [
+      "4.17 m/s",
+      "4.34 m/s",
+      "219 m/s",
+      "3.25 m/s"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Two masses A and B, each of mass M are fixed together by a massless springs. A force acts on the mass B as shown in figure. If the mass A starts moving away from mass B with acceleration ‘a’, than the acceleration of mass B will be:",
+    "options": [
+      "$\\frac{F+Ma}{M}$",
+      "$\\frac{F-Ma}{M}$",
+      "$\\frac{Ma-F}{M}$",
+      "$\\frac{MF}{F+Ma}$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-02-26-evening/ff4a6086-601f-4f7a-8581-986d264a14de_fig.png"
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "A wire of 1Ω has a length of 1 m. It is stretched till its length increases by 25%. The percentage change in a resistance to the nearest integer is:",
+    "options": [
+      "25%",
+      "12.5%",
+      "76%",
+      "56%"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "Given below are two statements : Statement (1) :- A second's pendulum has a time period of 1 second. Statement (2) :- It takes precisely one second to move between the two extreme positions. In the light of the above statements, choose the correct answer from the options give below.",
+    "options": [
+      "Both Statement I and Statement II are false",
+      "Statement I is true but Statement II is false",
+      "Statement I is false but Statement II is true",
+      "Both Statement I and Statement II is true"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "An aeroplane, with its wings spread 10 m, is flying at a speed of 180 km/h in a horizontal direction. The total intensity of earth's field at that part is $2.5 \\times 10^{-4}$ Wb/m$^2$ and the angle of dip is 60°. The emf induced between the tips of the plane wings will be __________.",
+    "options": [
+      "88.37 mV",
+      "62.50 mV",
+      "54.125 mV",
+      "108.25 mV"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "The length of metallic wire is $l_1$ when tension in it is $T_1$. It is $l_2$ when the tension is $T_2$. The original length of the wire will be :",
+    "options": [
+      "$\\frac{l_1 + l_2}{2}$",
+      "$\\frac{T_1 l_1 - T_2 l_2}{T_2 - T_1}$",
+      "$\\frac{T_2 l_1 + T_1 l_2}{T_1 + T_2}$",
+      "$\\frac{T_2 l_1 - T_1 l_2}{T_2 - T_1}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "The internal energy (U), pressure (P) and volume (V) of an ideal gas are related as U = 3PV + 4. The gas is :",
+    "options": [
+      "polyatomic only",
+      "monoatomic only",
+      "either monoatomic or diatomic",
+      "diatomic only."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "Given below are two statements : Statement – I : An electric dipole is placed at the centre of a hollow sphere. The flux of electric field through the sphere is zero but the electric field is not zero anywhere in the sphere. Statement – II : If R is the radius of a solid metallic sphere and Q be the total charge on it. The electric field at any point on the spherical surface of radius r ( < R) is zero but theelectric flux passing through this closed spherical surface of radius r is not zero. In the light of the above statements. Choose the correct answerfrom the option given below :",
+    "options": [
+      "Statement I is true but Statement II is false",
+      "Statement I is false but Statement II is true",
+      "Both Statement I and Statement II are true",
+      "Both Statement I and Statement II are false"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "If thehighest frequency modulating a carrier is 5 kHz, then the number of AM broadcast stations accommodated in a 90 kHz bandwidth are ____________________.",
+    "options": [],
+    "correct": "9",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "1 mole of rigid diatomic gas performs a work of $\\frac{Q}{5}$ when heat Q is supplied to it. The molar heat capacity of the gas during this transformation is $\\frac{xR}{8}$. The value of x is __________.",
+    "options": [],
+    "correct": "25",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "A particle excutes S.H.M with amplitude 'a' and time period T. The displacement of the particle when its speed is half of maximum speed is $\\frac{\\sqrt{x}\\,a}{2}$. The value of x is ______________",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "Two stream of photons, possessing energies equal to twice and ten times the work function of metal are incident on the metal surface successively. The value of ratio of maximum velocities of the photoelectrons emitted in the two respective cases is x : y. The value of x is ________.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A point source of light S, placed at a distance 60 cm infront of the centre of plane mirror of width 50 cm, hangs vertically on a wall. A man walks infront of the mirror along a line parallel to the mirror at a distance 1.2 m from it (see in the figure). The distance between the extreme points where he can see the image of the light source in the mirror is _______________cm",
+    "options": [],
+    "correct": "150",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/1090efe8-88c6-409a-9ee2-132bb331295f_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "The zener diode has a $V_Z$= 30 V. The current passing through the diode for the following ciruit is ________________mA.",
+    "options": [],
+    "correct": "9",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/e6578c41-898a-40d3-ac51-d3d7f3bfd327_fig.png"
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "In the reported figure of earth, the value of acceleration due to gravity is same at point A and C but it is smaller than that of its value at point B (surface of the earth). The value of OA : AB will be x : y. The value of x is ________________.",
+    "options": [],
+    "correct": "4",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/1f010bad-d3d0-4824-84d8-3aff35133c84_fig.png"
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "27 similar drops of mercury are maintained at 10 V each. All these spherical drops combine into a single big drop. The potential energy of the bigger drop is ___________________ times that of a smaller drop.",
+    "options": [],
+    "correct": "243",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "The volume V of a given mass of monatomic gas changes with temperature T according to the relation $V = KT^{\\frac{2}{3}}$. The work done when temperature changes by 90 K will be xR. The value of x is ____________________. [R =universal gas constant]",
+    "options": [],
+    "correct": "60",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Physics",
+    "question": "Time period of a simple pendulum is T. The time taken to complete $\\frac{5}{8}$ oscillations starting from mean position is $\\frac{\\alpha}{\\beta}$T. The value of $\\alpha$ is _____________.",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "2,4-DNP test can be used to identify:",
+    "options": [
+      "aldehyde",
+      "halogens",
+      "ether",
+      "amine"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "Identify A in the following chemical reaction.",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/b5d18b02-8873-44e9-b5f4-85dc8e6498d5_fig.png"
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "The nature of charge on resulting colloidal particles when FeCl$_3$ is added to excess of hot water is:",
+    "options": [
+      "positive",
+      "neutral",
+      "sometimes positive and sometimes negative",
+      "negative"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II List-I (c) 2CH$_3$CH$_2$Cl + 2Na $\\xrightarrow{\\text{Ether}}$ C$_2$H$_5$– C$_2$H$_5$ + 2NaCl (d) 2C$_2$H$_5$Cl +2Na $\\xrightarrow{\\text{Ether}}$ C$_6$H$_5$– C$_6$H$_5$ + 2NaCl List-II (i) Wurtz reaction (ii) Sandmeyer reaction (iii) Fitting reaction (iv) Gatterman reaction Choose the correct answer from the option given below:",
+    "options": [
+      "(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)",
+      "(a)-(iii), (b)-(iv), (c)-(i), (d)-(ii)",
+      "(a)-(ii), (b)-(iv), (c)-(i), (d)-(iii)",
+      "(a)-(iii), (b)-(i), (c)-(iv), (d)-(ii)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/8b530d1f-3c28-45af-b03b-18b10267fb63_fig.png"
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "In CH$_2$ = C = CH–CH$_3$ molecule, the hybridization of carbon 1, 2, 3 and 4 respectively are:",
+    "options": [
+      "sp$^2$, sp, sp$^2$, sp$^3$",
+      "sp$^2$, sp$^2$, sp$^2$, sp$^3$",
+      "sp$^2$, sp$^3$, sp$^2$, sp$^3$",
+      "sp$^3$, sp, sp$^3$, sp$^3$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II. List-I (a) Sucrose (b) Lactose (c) Maltose List-II (i) β-D-Galactose and β-D-Glucose (ii) α-D-Glucose and β-D-Fructose (iii) α-D- Glucose and α-D-Glucose Choose the correct answer from the options given below:",
+    "options": [
+      "(a)-(iii), (b)-(ii), (c)-(i)",
+      "(a)-(iii), (b)-(i), (c)-(ii)",
+      "(a)-(i), (b)-(iii), (c)-(ii)",
+      "(a)-(ii), (b)-(i), (c)-(iii)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "Which pair of oxides is acidic in nature?",
+    "options": [
+      "N$_2$O, BaO",
+      "CaO, SiO$_2$",
+      "B$_2$O$_3$, CaO",
+      "B$_2$O$_3$, SiO$_2$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Calgon is used for water treatment. Which of the following statement is NOT true about calgon?",
+    "options": [
+      "Calgon contains the 2$^{nd}$ most abundant element by weight in the earth's crust.",
+      "It is also known as Graham's salt.",
+      "It is polymeric compound and is water soluble.",
+      "It doesnot remove Ca$^{2+}$ ion by precipitation."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Ceric ammonium nitrate and CHCl$_3$/alc. KOH are used for the identification of functional groups present in __________and_________respectively.",
+    "options": [
+      "alcohol, amine",
+      "amine, alcohol",
+      "alcohol, phenol",
+      "amine, phenol"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "Given below are two statements: one is labelled as Assertion A and the other is labelled as Reason R. Assertion A: In TlI$_3$, isomorphous to CsI$_3$, the metal is present in +1 oxidation state. Reason R: Tl metals has fourteen f electrons in its electronic configuration. In the light of the above statements, choose the most appropriate answer from the options given below:",
+    "options": [
+      "Both A and R are correct and R is the correct explanation of A",
+      "A is not correct but R is correct",
+      "Both A and R are correct R is NOT the correct explanation of A",
+      "A is correct but R is not correct"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "The correct order of electron gain enthalpy is:",
+    "options": [
+      "S > Se > Te > O",
+      "O > S > Se > Te",
+      "S > O > Se > Te",
+      "Te > Se > S > O"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "Identify A in the given chemical reaction.",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/4a21b01f-8162-487c-a0e5-09be6f0db024_fig.png"
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II List-I (a) Siderite (b) Calamine (c) Malachite (d) Cryolite List-II (i) Cu (ii) Ca (iii) Fe (iv) Al (v) Zn Choose the correct answer from the options given below:",
+    "options": [
+      "(a)-(i), (b)-(ii), (c)-(v), (d)-(iii)",
+      "(a)-(iii), (b)-(v), (c)-(i), (d)-(iv)",
+      "(a)-(i), (b)-(ii), (c)-(iii), (d)-(iv)",
+      "(a)-(iii), (b)-(i), (c)-(v), (d)-(ii)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Identify A in the given reaction",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/84e8b7d1-7535-4509-a8c5-32b57fff29a5_fig.png"
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II. List-I (a) Sodium Carbonate (b) Titanium (c) Chlorine (d) Sodium hydroxide List-II (i) Deacon (ii) Caster-Kellner (iii) Van-Arkel (iv) Solvay Choose the correct answer from the option given below:",
+    "options": [
+      "(a)-(iii), (b)-(ii), (c)-(i), (d)-(iv)",
+      "(a)-(iv), (b)-(iii), (c)-(i), (d)-(ii)",
+      "(a)-(iv), (b)-(i), (c)-(ii), (d)-(iii)",
+      "(a)-(i), (b)-(iii), (c)-(iv), (d)-(ii)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II. List-I (Molecule) List-II (Bond order) (a) $Ne_2$ (i) 1 (b) $N_2$ (ii) 2 (c) $F_2$ (iii) 0 (d) $O_2$ (iv) 3 Choose the correct answer from the options given below:",
+    "options": [
+      "(a)-(iii), (b)-(iv), (c)-(i), (d)-(ii)",
+      "(a)-(i), (b)-(ii), (c)-(iii), (d)-(iv)",
+      "(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)",
+      "(a)-(iv), (b)-(iii), (c)-(ii), (d)-(i)"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "Which of the following forms of hydrogen emits low energy $\\beta^-$ particles?",
+    "options": [
+      "Proton $H^+$",
+      "Deuterium $_1^2H$",
+      "Protium $_1^1H$",
+      "Tritium $_1^3H$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "A. Phenyl methanamine B. N, N-Dimethylaniline C. N-Methyl aniline D. Benzenamine Choose the correct order of basic nature of the above amines.",
+    "options": [
+      "D > C > B > A",
+      "D > B > C > A",
+      "A > C > B > D",
+      "A > B > C > D"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "Considering the above reaction, the major product among the following is:",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-02-26-evening/c3cd5e72-f8d3-4cd6-834c-2d40f72a7d16_fig.png"
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "Seliwanoff test and Xanthoproteic test are used for the identification of ___________ and ____________ respectively",
+    "options": [
+      "ketoses, proteins",
+      "proteins, ketoses",
+      "aldoses, ketoses",
+      "ketoses, aldoses"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "The $NaNO_3$ weighed out to make 50 mL of an aqueous solution containing 70.0 mg $Na^+$ per mL is_________g. (Rounded off to the nearest integer) [Given: Atomic weight in g $mol^{-1}$. Na: 23; N: 14; O : 16]",
+    "options": [],
+    "correct": "13",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "The number of stereoisomers possible for $[Co(ox)_2(Br)(NH_3)]^{2-}$ is _____________[ox = oxalate]",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "The average S−F bond energy in kJ $mol^{-1}$ of $SF_6$ is ____________. (Rounded off to the nearest integer) [Given : The values of standard enthalpy of formation of $SF_6$(g), S(g) and F(g) are - 1100, 275 and 80 kJ $mol^{-1}$ respectively.]",
+    "options": [],
+    "correct": "309",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "Emf of the following cell at 298 K in V is x $\\times10^{-2}$. $Zn|Zn^{2+}$ (0.1 M)$||Ag^+$(0.01 M)$|$ Ag The value of x is ___________. (Rounded off to the nearest integer) [Given: $E^0_{Zn^{2+}/Zn}$ = −0.76V; $E^0_{Ag^+/Ag}$ = +0.80V; $\\frac{2.303RT}{F}$ = 0.059]",
+    "options": [],
+    "correct": "147",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "A ball weighing 10g is moving with a velocity of 90ms$^{-1}$. If the uncertainty in its velocity is 5%, then the uncertainty in its position is _________$\\times10^{-33}$m. (Rounded off to the nearest integer) [Given : h = $6.63\\times10^{-34}$ Js]",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "In mildly alkaline medium, thiosulphate ion is oxidized by $MnO_4^-$ to \"A\". The oxidation state of sulphur in \"A\" is_________.",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "When 12.2 g of benzoic acid is dissolved in 100g of water, the freezing point of solution was found to be −0.93°C ($K_f$ ($H_2O$) = 1.86 K kg $mol^{-1}$). The number (n) of benzoic acid molecules associated (assuming 100% association ) is_______________.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "If the activation energy of a reaction is 80.9 kJ $mol^{-1}$, the fraction of molecules at 700K, having enough energy to react to form products is $e^{-x}$. The value of x is _______. (Rounded off to the nearest integer) [Use R = 8.31 $JK^{-1}$ $mol^{-1}$]",
+    "options": [],
+    "correct": "14",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "The pH of ammonium phosphate solution, if $pk_a$ of phosphoric acid and $pk_b$ of ammonium hydroxide are 5.23 and 4.75 respectively, is_______________.",
+    "options": [],
+    "correct": "7",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Chemistry",
+    "question": "The number of octahedral voids per lattice site in a lattice is ___________. (Rounded off to the nearest integer)",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "Let L be a line obtained from the intersection of two planes x + 2y + z = 6 and y + 2z = 4. If point P(α, β, γ) is the foot of perpendicular from (3, 2, 1) on L, then the value of 21(α + β + γ) equals :",
+    "options": [
+      "142",
+      "68",
+      "136",
+      "102"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "The sum of the series $\\sum_{n=1}^{\\infty} \\frac{n^{2} + 6n + 10}{(2n+1)!}$ is equal to :",
+    "options": [
+      "$\\frac{41}{8} e + \\frac{19}{8} e^{-1} - 10$",
+      "$-\\frac{41}{8} e + \\frac{19}{8} e^{-1} - 10$",
+      "$\\frac{41}{8} e - \\frac{19}{8} e^{-1} - 10$",
+      "$\\frac{41}{8} e + \\frac{19}{8} e^{-1} + 10$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "Let f(x) be a differentiable function at x = a with $f'(a) = 2$ and f(a) = 4. Then $\\lim_{x \\to a} \\frac{xf(a) - af(x)}{x - a}$ equals :",
+    "options": [
+      "2a + 4",
+      "2a − 4",
+      "4 − 2a",
+      "a + 4"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "Let A (1, 4) and B(1, −5) be two points. Let P be a point on the circle $(x - 1)^{2} + (y - 1)^{2} = 1$ such that $(PA)^{2} + (PB)^{2}$ have maximum value, then the points, P, A and B lie on :",
+    "options": [
+      "a parabola",
+      "a straight line",
+      "a hyperbola",
+      "an ellipse"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "If the locus of the mid-point of the line segment from the point (3, 2) to a point on the circle, $x^{2} + y^{2} = 1$ is a circle of the radius r, then r is equal to :",
+    "options": [
+      "$\\frac{1}{4}$",
+      "$\\frac{1}{2}$",
+      "1",
+      "$\\frac{1}{3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "Let slope of the tangent line to a curve at any point P(x, y) be given by $\\frac{xy^{2} + y}{x}$. If the curve intersects the line x + 2y = 4 at x = − 2, then the value of y, for which the point (3, y) lies on the curve, is :",
+    "options": [
+      "$-\\frac{18}{11}$",
+      "$-\\frac{18}{19}$",
+      "$-\\frac{4}{3}$",
+      "$\\frac{18}{35}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "Let $A_{1}$ be the area of the region bounded by the curves y = sinx, y = cos x and y-axis in the first quadrant. Also, let $A_{2}$ be the area of the region bounded by the curves y = sin x, y = cos x, x-axis and x= $\\frac{\\pi}{2}$ in the first quadrant. Then,",
+    "options": [
+      "$A_{1} = A_{2}$ and $A_{1} + A_{2} = \\sqrt{2}$",
+      "$A_{1} : A_{2} = 1 : 2$ and $A_{1} + A_{2} = 1$",
+      "$2A_{1} = A_{2}$ and $A_{1} + A_{2} = 1 + \\sqrt{2}$",
+      "$A_{1} : A_{2} = 1 : \\sqrt{2}$ and $A_{1} + A_{2} = 1$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "If 0 < a, b < 1, and $\\tan^{-1} a + \\tan^{-1} b = \\frac{\\pi}{4}$, then the value of $(a + b) - \\left(\\frac{a^{2} + b^{2}}{2}\\right) + \\left(\\frac{a^{3} + b^{3}}{3}\\right) - \\left(\\frac{a^{4} + b^{4}}{4}\\right) + \\ldots$ is :",
+    "options": [
+      "$\\log_{e} 2$",
+      "$\\log_{e}\\left(\\frac{e}{2}\\right)$",
+      "e",
+      "$e^{2} - 1$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "Let $F_{1}$(A, B, C) = (A ∧ ~B) ∨ [~C ∧ (A ∨ B)] ∨ ~A and $F_{2}$(A, B) = (A ∨ B) ∨ (B → ~A) be two logical expressions. Then :",
+    "options": [
+      "$F_{1}$ is not a tautology but $F_{2}$ is a tautology",
+      "$F_{1}$ is a tautology but $F_{2}$ is not a tautology",
+      "$F_{1}$ and $F_{2}$ both area tautologies",
+      "Both $F_{1}$ and $F_{2}$ are not tautologies"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "Consider the following system of equations : x + 2y − 3z = a 2x + 6y − 11 z = b x − 2y + 7z = c, Where a, b and c are real constants. Then the system of equations :",
+    "options": [
+      "has a unique solution when 5a = 2b + c",
+      "has infinite number of solutions when 5a = 2b +c",
+      "has no solution for all a, b and c",
+      "has a unique solution for all a, b and c"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "A seven digit number is formed using digit 3, 3, 4, 4, 4, 5, 5. The probability, that number so formed is divisible by 2, is :",
+    "options": [
+      "$\\frac{6}{7}$",
+      "$\\frac{4}{7}$",
+      "$\\frac{3}{7}$",
+      "$\\frac{1}{7}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "If vectors $\\vec{a}_{1} = x\\hat{i} - \\hat{j} + \\hat{k}$ and $\\vec{a}_{2} = \\hat{i} + y\\hat{j} + z\\hat{k}$ are collinear, then a possible unit vector parallel to the vector $x\\hat{i} + y\\hat{j} + z\\hat{k}$ is :",
+    "options": [
+      "$\\frac{1}{\\sqrt{2}} (-\\hat{j} + \\hat{k})$",
+      "$\\frac{1}{\\sqrt{2}} (\\hat{i} - \\hat{j})$",
+      "$\\frac{1}{\\sqrt{3}} (\\hat{i} - \\hat{j} + \\hat{k})$",
+      "$\\frac{1}{\\sqrt{3}} (\\hat{i} + \\hat{j} - \\hat{k})$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "For x>0, if $f(x) = \\int_{1}^{x} \\frac{\\log_{e} t}{(1+t)} dt$, then $f(e) + f\\left(\\frac{1}{e}\\right)$ is equal to :",
+    "options": [
+      "$\\frac{1}{2}$",
+      "−1",
+      "1",
+      "0"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "Let f : R → R be defined as $f(x) = \\begin{cases} 2\\sin\\left(-\\frac{\\pi x}{2}\\right), & \\text{if } x < -1 \\\\ |ax^{2} + x + b|, & \\text{if } -1 \\le x \\le 1 \\\\ \\sin(\\pi x) & \\text{if } x > 1 \\end{cases}$ If f(x) is continuous on R, then a + b equals :",
+    "options": [
+      "3",
+      "−1",
+      "−3",
+      "1"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "Let A = {1,2,3……,10} and f: A→ A be defined as $f(k) = \\begin{cases} k + 1 & \\text{if k is odd} \\\\ k & \\text{if k is even} \\end{cases}$ Then the number of possible functions g : A→A such that gof = f is :",
+    "options": [
+      "$10^{5}$",
+      "$^{10}C_{5}$",
+      "$5^{5}$",
+      "5!"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "A natural number has prime factorization given by $n = 2^{x} 3^{y} 5^{z}$, where y and z are such that $y + z = 5$ and $y^{-1} + z^{-1} = \\frac{5}{6}$, $y > z$. Then the number of odd divisors of n, including 1, is :",
+    "options": [
+      "11",
+      "6x",
+      "12",
+      "6"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "Let $f(x) = \\sin^{-1} x$ and $g(x) = \\frac{x^{2}-x-2}{2x^{2}-x-6}$. If $g(2) = \\lim_{x \\to 2} g(x)$, then the domain of the function fog is :",
+    "options": [
+      "$(-\\infty, -2] \\cup \\left[-\\frac{4}{3}, \\infty\\right)$",
+      "$(-\\infty, -1] \\cup [2, \\infty)$",
+      "$(-\\infty, -2] \\cup [-1, \\infty)$",
+      "$(-\\infty, -2] \\cup \\left[-\\frac{3}{2}, \\infty\\right)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "If the mirror image of the point (1,3,5) with respect to the plane $4x-5y+2z = 8$ is $(\\alpha, \\beta, \\gamma)$, then $5(\\alpha + \\beta + \\gamma)$ equals:",
+    "options": [
+      "47",
+      "39",
+      "43",
+      "41"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let $f(x) = \\int_{0}^{x} e^{t} f(t)dt + e^{x}$ be a differentiable function for all $x \\in R$. Then f(x) equals.",
+    "options": [
+      "$2e^{(e^{x}-1)} - 1$",
+      "$e^{(e^{x}-1)}$",
+      "$2e^{e^{x}} - 1$",
+      "$e^{e^{x}} - 1$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "The triangle of maximum area that can be inscribed in a given circle of radius 'r' is:",
+    "options": [
+      "A right angle triangle having two of its sides of length 2r and r.",
+      "An equilateral triangle of height $\\frac{2r}{3}$.",
+      "An isosceles triangle with base equal to 2r.",
+      "An equilateral triangle having each of its side of length $\\sqrt{3}$ r."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "The total number of 4-digit numbers whose greatest common divisor with 18 is 3, is",
+    "options": [],
+    "correct": "1000",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "Let $\\alpha$ and $\\beta$ be two real numbers such that $\\alpha + \\beta = 1$ and $\\alpha\\beta = -1$. Let $P_{n} = (\\alpha)^{n} + (\\beta)^{n}$, $P_{n-1} = 11$ and $P_{n+1} = 29$ for some integer $n \\geq 1$. Then, the value of $P_{n}^{2}$ is ________________.",
+    "options": [],
+    "correct": "324",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "Let $X_{1}$, $X_{2}$,……….. $X_{18}$ be eighteen observation such that $\\sum_{i=1}^{18}\\left(X_{i}-\\alpha\\right) = 36$ and $\\sum_{i=1}^{18}\\left(X_{i}-\\beta\\right)^{2} = 90$, where $\\alpha$ and $\\beta$ are distinct real numbers. If the standard deviation of these observations is 1, then the value of $|\\alpha - \\beta|$ is ________________.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "In $I_{m,n} = \\int_{0}^{1} x^{m-1}\\left(1-x\\right)^{n-1} dx$, for m, n $\\geq$ 1 and $\\int_{0}^{1}\\frac{x^{m-1}+x^{n-1}}{\\left(1+x\\right)^{m+n}}dx = \\alpha I_{m,n}$, $\\alpha \\in R$, then $\\alpha$ equals______________ .",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "Let L be a common tangent line to the curves $4x^{2} + 9y^{2} = 36$ and $(2x)^{2} + (2y)^{2} = 31$. Then the square of the slope of the line L is ________________.",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "If the matrix $A = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 3 & 0 & -1 \\end{bmatrix}$ satisfies the equation $A^{20} + \\alpha A^{19} + \\beta A = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$ for some real numbers $\\alpha$ and $\\beta$, then $\\beta - \\alpha$ is equal to________________.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "If the arithmetic mean and geometric mean of the $p^{th}$ and $q^{th}$ terms of the sequence $-16$, 8, $-4$, 2, ………… satisfy the equation $4x^{2} - 9x + 5 = 0$, then p+q is equal to ________________.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 88,
+    "subject": "Mathematics",
+    "question": "Let the normals at all the points on a given curve pass through a fixed point (a, b). If the curve passes through (3, -3) and $\\left(4, -2\\sqrt{2}\\right)$, and given that $a - 2\\sqrt{2}\\ b = 3$, then $(a^{2}+b^{2}+ab)$ is equal to________________.",
+    "options": [],
+    "correct": "9",
+    "source_image": null
+  },
+  {
+    "source_number": 89,
+    "subject": "Mathematics",
+    "question": "Let z be those complex number which satisfy $|z+5| \\leq 4$ and $z(1+i) + \\bar{z}\\left(1-i\\right) \\geq -10, i = \\sqrt{-1}$. If the maximum value of $|z+1|^{2}$ is $\\alpha + \\beta\\sqrt{2}$, then the value of $\\left(\\alpha + \\beta\\right)$ is ________________.",
+    "options": [],
+    "correct": "48",
+    "source_image": null
+  },
+  {
+    "source_number": 90,
+    "subject": "Mathematics",
+    "question": "Let a be an integer such that all the real roots of the polynomial $2x^{5}+5x^{4}+10x^{3}+10x^{2}+10x+10$ lie in the interval (a, a + 1). Then, $|a|$ is equal to________________.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  }
+]

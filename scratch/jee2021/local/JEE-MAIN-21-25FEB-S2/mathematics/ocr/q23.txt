@@ -1,0 +1,6 @@
+Let 4=i+aj+3k and b=3i-ajt+k. If the
+area of the parallelogram whose adjacent sides are
+
+represented by the vectors a and b is
+
+8V3 square units, then 4- b is equal to :

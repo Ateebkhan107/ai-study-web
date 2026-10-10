@@ -1,0 +1,10 @@
+10.
+
+If the fourth term in the expansion of
+(x+x'*)’ is 4480, then the value of x where
+
+x € N is equal to:
+(1) 2
+(2) 4
+(3) 3
+(4) 1

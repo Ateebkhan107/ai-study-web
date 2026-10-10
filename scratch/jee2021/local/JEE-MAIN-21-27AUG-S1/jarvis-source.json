@@ -1,0 +1,988 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "A uniformly charged disc of radius R having surface charge density $\\sigma$ is placed in the xy plane with its center at the origin. Find the electric field intensity along the z-axis at a distance Z from origin :-",
+    "options": [
+      "$E = \\frac{\\sigma}{2\\varepsilon_0}\\left(1 - \\frac{Z}{(Z^2 + R^2)^{1/2}}\\right)$",
+      "$E = \\frac{\\sigma}{2\\varepsilon_0}\\left(1 + \\frac{Z}{(Z^2 + R^2)^{1/2}}\\right)$",
+      "$E = \\frac{2\\varepsilon_0}{\\sigma}\\left(\\frac{1}{(Z^2 + R^2)^{1/2}} + Z\\right)$",
+      "$E = \\frac{\\sigma}{2\\varepsilon_0}\\left(\\frac{1}{(Z^2 + R^2)} + \\frac{1}{Z^2}\\right)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "There are $10^{10}$ radioactive nuclei in a given radioactive element, Its half-life time is 1 minute. How many nuclei will remain after 30 seconds ? $\\left(\\sqrt{2} = 1.414\\right)$",
+    "options": [
+      "$2 \\times 10^{10}$",
+      "$7 \\times 10^{9}$",
+      "$10^{5}$",
+      "$4 \\times 10^{10}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "Which of the following is not a dimensionless quantity ?",
+    "options": [
+      "Relative magnetic permeability ($\\mu_r$)",
+      "Power factor",
+      "Permeability of free space ($\\mu_0$)",
+      "Quality factor"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "If E and H represents the intensity of electric field and magnetising field respectively, then the unit of E/H will be :",
+    "options": [
+      "ohm",
+      "mho",
+      "joule",
+      "newton"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "A balloon carries a total load of 185 kg at normal pressure and temperature of 27$^\\circ$C. What load will the balloon carry on rising to a height at which the barometric pressure is 45 cm of Hg and the temperature is $-7^\\circ$C. Assuming the volume constant ?",
+    "options": [
+      "181.46 kg",
+      "214.15 kg.",
+      "219.07 kg",
+      "123.54 kg"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "An object is placed beyond the centre of curvature C of the given concave mirror. If the distance of the object is $d_1$ from C and the distance of the image formed is $d_2$ from C, the radius of curvature of this mirror is :",
+    "options": [
+      "$\\frac{2d_1d_2}{d_1 - d_2}$",
+      "$\\frac{2d_1d_2}{d_1 + d_2}$",
+      "$\\frac{d_1d_2}{d_1 + d_2}$",
+      "$\\frac{d_1d_2}{d_1 - d_2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "A huge circular arc of length 4.4 ly subtends an angle '4s' at the centre of the circle. How long it would take for a body to complete 4 revolution if its speed is 8 AU per second ? Given : 1 ly = $9.46 \\times 10^{15}$ m $\\qquad$ 1 AU = $1.5 \\times 10^{11}$ m",
+    "options": [
+      "$4.1 \\times 10^{8}$ s",
+      "$4.5 \\times 10^{10}$ s",
+      "$3.5 \\times 10^{6}$ s",
+      "$7.2 \\times 10^{8}$ s"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "Calculate the amount of charge on capacitor of 4 $\\mu$F. The internal resistance of battery is 1$\\Omega$ :",
+    "options": [
+      "8 $\\mu$C",
+      "zero",
+      "16 $\\mu$C",
+      "4 $\\mu$C"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/3c976ab1-72da-4894-ae1c-eb1be5f057dd_fig.png"
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "Moment of inertia of a square plate of side $l$ about the axis passing through one of the corner and perpendicular to the plane of square plate is given by :",
+    "options": [
+      "$\\frac{Ml^2}{6}$",
+      "$Ml^2$",
+      "$\\frac{Ml^2}{12}$",
+      "$\\frac{2}{3}Ml^2$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "For a transistor in CE mode to be used as an amplifier, it must be operated in :",
+    "options": [
+      "Both cut-off and Saturation",
+      "Saturation region only",
+      "Cut-off region only",
+      "The active region only"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "An ideal gas is expanding such that $PT^3$ = constant. The coefficient of volume expansion of the gas is :",
+    "options": [
+      "$\\frac{1}{T}$",
+      "$\\frac{2}{T}$",
+      "$\\frac{4}{T}$",
+      "$\\frac{3}{T}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "In a photoelectric experiment, increasing the intensity of incident light :",
+    "options": [
+      "increases the number of photons incident and also increases the K.E. of the ejected electrons",
+      "increases the frequency of photons incident and increases the K.E. of the ejected electrons.",
+      "increases the frequency of photons incident and the K.E. of the ejected electrons remains unchanged",
+      "increases the number of photons incident and the K.E. of the ejected electrons remains unchanged"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "Two ions of masses 4 amu and 16 amu have charges +2e and +3e respectively. These ions pass through the region of constant perpendicular magnetic field. The kinetic energy of both ions is same. Then :",
+    "options": [
+      "lighter ion will be deflected less than heavier ion",
+      "lighter ion will be deflected more than heavier ion",
+      "both ions will be deflected equally",
+      "no ion will be deflected."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "Find the distance of the image from object O, formed by the combination of lenses in the figure :",
+    "options": [
+      "75 cm",
+      "10 cm",
+      "20 cm",
+      "infinity"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/cc68518d-f648-4d37-9dad-6826b02eff2c_fig.png"
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "In Millikan's oil drop experiment, what is viscous force acting on an uncharged drop of radius $2.0 \\times 10^{-5}$ m and density $1.2 \\times 10^{3}$ kgm$^{-3}$ ? Take viscosity of liquid = $1.8 \\times 10^{-5}$ Nsm$^{-2}$. (Neglect buoyancy due to air).",
+    "options": [
+      "$3.8 \\times 10^{-11}$ N",
+      "$3.9 \\times 10^{-10}$ N",
+      "$1.8 \\times 10^{-10}$ N",
+      "$5.8 \\times 10^{-10}$ N"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "Electric field in a plane electromagnetic wave is given by $E = 50 \\sin(500x - 10 \\times 10^{10}t)$ V/m The velocity of electromagnetic wave in this medium is : (Given C = speed of light in vacuum)",
+    "options": [
+      "$\\frac{3}{2}C$",
+      "$C$",
+      "$\\frac{2}{3}C$",
+      "$\\frac{C}{2}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "Five identical cells each of internal resistance 1$\\Omega$ and emf 5V are connected in series and in parallel with an external resistance 'R'. For what value of 'R', current in series and parallel combination will remain the same ?",
+    "options": [
+      "1 $\\Omega$",
+      "25 $\\Omega$",
+      "5 $\\Omega$",
+      "10 $\\Omega$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "The variation of displacement with time of a particle executing free simple harmonic motion is shown in the figure. The potential energy U(x) versus time (t) plot of the particle is correctly shown in figure :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/409cc225-069e-452d-be73-e6cad5350fa5_fig.png"
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "A body of mass (2M) splits into four masses $\\{m, M - m, m, M - m\\}$, which are rearranged to form a square as shown in the figure. The ratio of $\\frac{M}{m}$ for which, the gravitational potential energy of the system becomes maximum is x : 1. The value of x is ....... .",
+    "options": [],
+    "correct": "2",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/01ea282c-ac57-4258-addd-02956c8f51af_fig.png"
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "The alternating current is given by $i = \\left\\{\\sqrt{42}\\sin\\left(\\frac{2\\pi}{T}t\\right) + 10\\right\\}A$ The r.m.s. value of this current is ........ A.",
+    "options": [],
+    "correct": "11",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "A uniform conducting wire of length is 24a, and resistance R is wound up as a current carrying coil in the shape of an equilateral triangle of side 'a' and then in the form of a square of side 'a'. The coil is connected to a voltage source $V_0$. The ratio of magnetic moment of the coils in case of equilateral triangle to that for square is $1 : \\sqrt{y}$ where y is ....... .",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "A circuit is arranged as shown in figure. The output voltage $V_0$ is equal to ....... V.",
+    "options": [],
+    "correct": "5",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/7ad0b145-11ca-4666-b6cf-33907188b57a_fig.png"
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "First, a set of n equal resistors of 10 $\\Omega$ each are connected in series to a battery of emf 20V and internal resistance 10 $\\Omega$. A current I is observed to flow. Then, the n resistors are connected in parallel to the same battery. It is observed that the current is increased 20 times, then the value of n is ......... .",
+    "options": [],
+    "correct": "20",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "Two cars X and Y are approaching each other with velocities 36 km/h and 72 km/h respectively. The frequency of a whistle sound as emitted by a passenger in car X, heard by the passenger in car Y is 1320 Hz. If the velocity of sound in air is 340 m/s, the actual frequency of the whistle sound produced is ........ Hz.",
+    "options": [],
+    "correct": "1210",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "If the velocity of a body related to displacement x is given by $\\upsilon = \\sqrt{5000 + 24x}$ m/s, then the acceleration of the body is ....... $m/s^2$.",
+    "options": [],
+    "correct": "12",
+    "source_image": null
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "A rod CD of thermal resistance 10.0 $KW^{-1}$ is joined at the middle of an identical rod AB as shown in figure, The end A, B and D are maintained at 200$^\\circ$C, 100$^\\circ$C and 125$^\\circ$C respectively. The heat current in CD is P watt. The value of P is ....... .",
+    "options": [],
+    "correct": "2",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/750f3906-4067-42b4-a20c-d7664aeef592_fig.png"
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "Two persons A and B perform same amount of work in moving a body through a certain distance d with application of forces acting at angle 45$^\\circ$ and 60$^\\circ$ with the direction of displacement respectively. The ratio of force applied by person A to the force applied by person B is $\\frac{1}{\\sqrt{x}}$. The value of x is ....... .",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "A transmitting antenna has a height of 320 m and that of receiving antenna is 2000 m. The maximum distance between them for satisfactory communication in line of sight mode is 'd'. The value of 'd' is ........ km.",
+    "options": [],
+    "correct": "224",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Chemistry",
+    "question": "In the following sequence of reactions, the final product D is :",
+    "options": [
+      "$\\mathrm{H_3C-CH_2-CH_2-CH_2-CH_2-}\\overset{\\mathrm{O}}{\\overset{\\|}{\\mathrm{C}}}\\mathrm{-H}$",
+      "$\\mathrm{CH_3-CH=CH-CH_2-CH_2-CH_2-COOH}$",
+      "$\\mathrm{H_3C-CH=CH-CH(OH)-CH_2-CH_2-CH_3}$",
+      "$\\mathrm{CH_3-CH_2-CH_2-CH_2-CH_2-}\\overset{\\mathrm{O}}{\\overset{\\|}{\\mathrm{C}}}\\mathrm{-CH_3}$"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/4c2d0f67-8b5c-4b2f-b7c0-c9df906c9838_fig.png"
+  },
+  {
+    "source_number": 30,
+    "subject": "Chemistry",
+    "question": "The structure of the starting compound $\\mathbf{P}$ used in the reaction given below is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/9e443c2d-e1c6-4997-ba74-41fd18232319_fig.png"
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Match List-I with List-II : List-I (Species) List-II (Number of lone pairs of electrons on the central atom) (a) $\\mathrm{XeF_2}$ (b) $\\mathrm{XeO_2F_2}$ (c) $\\mathrm{XeO_3F_2}$ (d) $\\mathrm{XeF_4}$ (i) 0 (ii) 1 (iii) 2 (iv) 3 Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(a)-(iv), (b)-(i), (c)-(ii), (d)-(iii)",
+      "(a)-(iii), (b)-(iv), (c)-(ii), (d)-(i)",
+      "(a)-(iii), (b)-(ii), (c)-(iv), (d)-(i)",
+      "(a)-(iv), (b)-(ii), (c)-(i), (d)-(iii)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "In which one of the following molecules strongest back donation of an electron pair from halide to boron is expected?",
+    "options": [
+      "$\\mathrm{BCl_3}$",
+      "$\\mathrm{BF_3}$",
+      "$\\mathrm{BBr_3}$",
+      "$\\mathrm{BI_3}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Deuterium resembles hydrogen in properties but :",
+    "options": [
+      "reacts slower than hydrogen",
+      "reacts vigorously than hydrogen",
+      "reacts just as hydrogen",
+      "emits $\\beta^+$ particles"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "Which refining process is generally used in the purification of low melting metals ?",
+    "options": [
+      "Chromatographic method",
+      "Liquation",
+      "Electrolysis",
+      "Zone refining"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "Match items of List-I with those of List-II : List-I (Property) List-II (Example) (a) Diamagnetism (b) Ferrimagnetism (c) Paramagnetism (d) Antiferromagnetism (i) MnO (ii) $\\mathrm{O_2}$ (iii) NaCl (iv) $\\mathrm{Fe_3O_4}$ Choose the most appropriate answer from the options given below :",
+    "options": [
+      "(a)-(ii), (b)-(i), (c)-(iii), (d)-(iv)",
+      "(a)-(i), (b)-(iii), (c)-(iv), (d)-(ii)",
+      "(a)-(iii), (b)-(iv), (c)-(ii), (d)-(i)",
+      "(a)-(iv), (b)-(ii), (c)-(i), (d)-(iii)"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "The correct statement about (A), (B), (C) and (D) is :",
+    "options": [
+      "(A), (B) and (C) are narcotic analgesics",
+      "(B), (C) and (D) are tranquillizers",
+      "(A) and (D) are tranquillizers",
+      "(B) and (C) are tranquillizers"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-08-27-morning/4d1cadf6-900f-4701-af58-0abe246e2b20_fig.png"
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The major product of the following reaction is :",
+    "options": [
+      "$\\mathrm{CH_3-}\\underset{\\mathrm{CH_3}}{\\underset{|}{\\mathrm{CH}}}\\mathrm{-}\\overset{\\mathrm{Br}}{\\overset{|}{\\mathrm{CH}}}\\mathrm{-CH_2OH}$",
+      "$\\mathrm{CH_3-}\\underset{\\mathrm{CH_3}}{\\underset{|}{\\mathrm{CH}}}\\mathrm{-CH_2-CH_2-CH_2OH}$",
+      "$\\mathrm{CH_3-}\\underset{\\mathrm{CH_3}}{\\underset{|}{\\mathrm{CH}}}\\mathrm{-CH_2-CH_2OH}$",
+      "$\\mathrm{CH_3-}\\underset{\\mathrm{CH_3}}{\\underset{|}{\\mathrm{CH}}}\\mathrm{-CH_2-CH_2-Cl}$"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-08-27-morning/0f741469-8e9d-4416-a346-4cb5b06aeeb0_fig.png"
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "Which of the following is not a correct statement for primary aliphatic amines?",
+    "options": [
+      "The intermolecular association in primary amines is less than the intermolecular association in secondary amines.",
+      "Primary amines on treating with nitrous acid solution form corresponding alcohols except methyl amine.",
+      "Primary amines are less basic than the secondary amines.",
+      "Primary amines can be prepared by the Gabriel phthalimide synthesis."
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "Acidic ferric chloride solution on treatment with excess of potassium ferrocyanide gives a Prussian blue coloured colloidal species. It is :",
+    "options": [
+      "$\\mathrm{Fe_4[Fe(CN)_6]_3}$",
+      "$\\mathrm{K_5Fe[Fe(CN)_6]_2}$",
+      "$\\mathrm{HFe[Fe(CN)_6]}$",
+      "$\\mathrm{KFe[Fe(CN)_6]}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "The gas 'A' is having very low reactivity reaches to stratosphere. It is non-toxic and non-flammable but dissociated by UV-radiations in stratosphere. The intermediates formed initially from the gas 'A' are :",
+    "options": [
+      "$\\mathrm{Cl}\\dot{\\mathrm{O}} + \\dot{\\mathrm{C}}\\mathrm{F_2Cl}$",
+      "$\\mathrm{Cl}\\dot{\\mathrm{O}} + \\dot{\\mathrm{C}}\\mathrm{H_3}$",
+      "$\\dot{\\mathrm{C}}\\mathrm{H_3} + \\dot{\\mathrm{C}}\\mathrm{F_2Cl}$",
+      "$\\dot{\\mathrm{C}}\\mathrm{l} + \\dot{\\mathrm{C}}\\mathrm{F_2Cl}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "The number of water molecules in gypsum, dead burnt plaster and plaster of paris, respectively are:",
+    "options": [
+      "2, 0 and 1",
+      "0.5, 0 and 2",
+      "5, 0 and 0.5",
+      "2, 0 and 0.5"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "The nature of oxides $\\mathrm{V_2O_3}$ and CrO is indexed as 'X' and 'Y' type respectively. The correct set of X and Y is:",
+    "options": [
+      "X = basic Y = amphoteric",
+      "X = amphoteric Y = basic",
+      "X = acidic Y = acidic",
+      "X = basic Y = basic"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "Out of following isomeric forms of uracil, which one is present in RNA ?",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/3537d6ac-30c7-4cf7-acf7-8186c0df5932_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R). Assertion (A): Synthesis of ethyl phenyl ether may be achieved by Williamson synthesis. Reason (R): Reaction of bromobenzene with sodium ethoxide yields ethyl phenyl ether. In the light of the above statements, choose the most appropriate answer from the options given below:",
+    "options": [
+      "Both (A) and (R) are correct and (R) is the correct explanation of (A)",
+      "(A) is correct but (R) is not correct",
+      "(A) is not correct but (R) is correct",
+      "Both (A) and (R) are correct but (R) is NOT the correct explanation of (A)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "In the following sequence of reactions the P is :",
+    "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/August/f9c6dd84-3460-4136-bc74-a1fa1a382319_fig.png"
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "The unit of the van der Waals gas equation parameter 'a' in $\\left(\\mathrm{P}+\\dfrac{\\mathrm{an^2}}{\\mathrm{V^2}}\\right)(\\mathrm{V-nb}) = \\mathrm{nRT}$ is :",
+    "options": [
+      "$\\mathrm{kg\\ m\\ s^{-2}}$",
+      "$\\mathrm{dm^3\\ mol^{-1}}$",
+      "$\\mathrm{kg\\ m\\ s^{-1}}$",
+      "$\\mathrm{atm\\ dm^6\\ mol^{-2}}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "In polythionic acid, $\\mathrm{H_2S_xO_6}$ (x = 3 to 5) the oxidation state(s) of sulphur is/are :",
+    "options": [
+      "+ 5 only",
+      "+ 6 only",
+      "+ 3 and + 5 only",
+      "0 and + 5 only"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "Tyndall effect is more effectively shown by :",
+    "options": [
+      "true solution",
+      "lyophilic colloid",
+      "lyophobic colloid",
+      "suspension"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "In Carius method for estimation of halogens, 0.2 g of an organic compound gave 0.188 g of AgBr. The percentage of bromine in the compound is ________ . (Nearest integer) [Atomic mass : Ag = 108, Br = 80]",
+    "options": [],
+    "correct": "40",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "The reaction that occurs in a breath analyser, a device used to determine the alcohol level in a person's blood stream is $2K_2Cr_2O_7 + 8H_2SO_4 + 3C_2H_6O \\rightarrow 2Cr_2(SO_4)_3 + 3C_2H_4O_2 + 2K_2SO_4 + 11H_2O$ If the rate of appearance of $Cr_2(SO_4)_3$ is 2.67 mol $min^{-1}$ at a particular time, the rate of disappearance of $C_2H_6O$ at the same time is ________ mol $min^{-1}$. (Nearest integer)",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "The kinetic energy of an electron in the second Bohr orbit of a hydrogen atom is equal to $\\dfrac{h^2}{xma_0^2}$ . The value of 10x is ________ . ($a_0$ is radius of Bohr's orbit) (Nearest integer) [Given : $\\pi = 3.14$]",
+    "options": [],
+    "correct": "3155",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "1 kg of 0.75 molal aqueous solution of sucrose can be cooled up to $-4^\\circ C$ before freezing. The amount of ice (in g) that will be separated out is ________ . (Nearest integer) [Given : $K_f(H_2O) = 1.86$ K kg $mol^{-1}$]",
+    "options": [],
+    "correct": "518",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "1 mol of an octahedral metal complex with formula $MCl_3 \\cdot 2L$ on reaction with excess of $AgNO_3$ gives 1 mol of AgCl. The denticity of Ligand L is ________ . (Integer answer)",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "The number of moles of CuO, that will be utilized in Dumas method for estimation nitrogen in a sample of 57.5g of N, N-dimethylaminopentane is ________ $\\times 10^{-2}$. (Nearest integer)",
+    "options": [],
+    "correct": "1125",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "The number of $f$ electrons in the ground state electronic configuration of Np (Z = 93) is ________ . (Nearest integer)",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "200 mL of 0.2 M HCl is mixed with 300 mL of 0.1 M NaOH. The molar heat of neutralization of this reaction is $-57.1$ kJ. The increase in temperature in $^\\circ C$ of the system on mixing is $x \\times 10^{-2}$. The value of x is ________ . (Nearest integer) [Given : Specific heat of water = 4.18 J $g^{-1}$ $K^{-1}$ Density of water = 1.00 g $cm^{-3}$] (Assume no volume change on mixing)",
+    "options": [],
+    "correct": "82",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "The number of moles of $NH_3$, that must be added to 2 L of 0.80 M $AgNO_3$ in order to reduce the concentration of $Ag^+$ ions to $5.0 \\times 10^{-8}$ M ($K_{formation}$ for $[Ag(NH_3)_2]^+ = 1.0 \\times 10^8$) is ________ . (Nearest integer) [Assume no volume change on adding $NH_3$]",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "When 10 mL of an aqueous solution of $KMnO_4$ was titrated in acidic medium, equal volume of 0.1 M of an aqueous solution of ferrous sulphate was required for complete discharge of colour. The strength of $KMnO_4$ in grams per litre is ________ $\\times 10^{-2}$. (Nearest integer) [Atomic mass of K = 39, Mn = 55, O = 16]",
+    "options": [],
+    "correct": "316",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Mathematics",
+    "question": "If $0 < x < 1$, then $\\frac{3}{2}x^2 + \\frac{5}{3}x^3 + \\frac{7}{4}x^4 + .....$ , is equal to :",
+    "options": [
+      "$x\\left(\\frac{1+x}{1-x}\\right) + \\log_e(1-x)$",
+      "$x\\left(\\frac{1-x}{1+x}\\right) + \\log_e(1-x)$",
+      "$\\frac{1-x}{1+x} + \\log_e(1-x)$",
+      "$\\frac{1+x}{1-x} + \\log_e(1-x)$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "If for $x, y \\in \\mathbf{R}$, $x > 0$, $y = \\log_{10}x + \\log_{10}x^{1/3} + \\log_{10}x^{1/9} + .....$ upto $\\infty$ terms and $\\frac{2+4+6+....+2y}{3+6+9+....+3y} = \\frac{4}{\\log_{10} x}$ , then the ordered pair $(x, y)$ is equal to :",
+    "options": [
+      "$(10^6, 6)$",
+      "$(10^4, 6)$",
+      "$(10^2, 3)$",
+      "$(10^6, 9)$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "Let A be a fixed point $(0, 6)$ and B be a moving point $(2t, 0)$. Let M be the mid-point of AB and the perpendicular bisector of AB meets the y-axis at C. The locus of the mid-point P of MC is :",
+    "options": [
+      "$3x^2 - 2y - 6 = 0$",
+      "$3x^2 + 2y - 6 = 0$",
+      "$2x^2 + 3y - 9 = 0$",
+      "$2x^2 - 3y + 9 = 0$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "If $(\\sin^{-1} x)^2 - (\\cos^{-1} x)^2 = a$; $0 < x < 1$, $a \\neq 0$, then the value of $2x^2 - 1$ is :",
+    "options": [
+      "$\\cos\\left(\\frac{4a}{\\pi}\\right)$",
+      "$\\sin\\left(\\frac{2a}{\\pi}\\right)$",
+      "$\\cos\\left(\\frac{2a}{\\pi}\\right)$",
+      "$\\sin\\left(\\frac{4a}{\\pi}\\right)$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "If the matrix $A = \\begin{pmatrix} 0 & 2 \\\\ K & -1 \\end{pmatrix}$ satisfies $A(A^3 + 3I) = 2I$, then the value of K is :",
+    "options": [
+      "$\\frac{1}{2}$",
+      "$-\\frac{1}{2}$",
+      "$-1$",
+      "$1$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "The distance of the point $(1, -2, 3)$ from the plane $x - y + z = 5$ measured parallel to a line, whose direction ratios are $2, 3, -6$ is :",
+    "options": [
+      "$3$",
+      "$5$",
+      "$2$",
+      "$1$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "If $S = \\left\\{ z \\in \\mathbb{C} : \\frac{z-i}{z+2i} \\in \\mathbb{R} \\right\\}$, then :",
+    "options": [
+      "S contains exactly two elements",
+      "S contains only one element",
+      "S is a circle in the complex plane",
+      "S is a straight line in the complex plane"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "Let $y = y(x)$ be the solution of the differential equation $\\frac{dy}{dx} = 2(y + 2\\sin x - 5)\\, x - 2\\cos x$ such that $y(0) = 7$. Then $y(\\pi)$ is equal to :",
+    "options": [
+      "$2e^{\\pi^2} + 5$",
+      "$e^{\\pi^2} + 5$",
+      "$3e^{\\pi^2} + 5$",
+      "$7e^{\\pi^2} + 5$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "Equation of a plane at a distance $\\sqrt{\\frac{2}{21}}$ from the origin, which contains the line of intersection of the planes $x - y - z - 1 = 0$ and $2x + y - 3z + 4 = 0$, is :",
+    "options": [
+      "$3x - y - 5z + 2 = 0$",
+      "$3x - 4z + 3 = 0$",
+      "$-x + 2y + 2z - 3 = 0$",
+      "$4x - y - 5z + 2 = 0$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "If $U_n = \\left(1 + \\frac{1}{n^2}\\right)\\left(1 + \\frac{2^2}{n^2}\\right)^2 .... \\left(1 + \\frac{n^2}{n^2}\\right)^n$, then $\\lim_{n \\to \\infty} (U_n)^{\\frac{-4}{n^2}}$ is equal to :",
+    "options": [
+      "$\\frac{e^2}{16}$",
+      "$\\frac{4}{e}$",
+      "$\\frac{16}{e^2}$",
+      "$\\frac{4}{e^2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "The statement $(p \\wedge (p \\to q) \\wedge (q \\to r)) \\to r$ is :",
+    "options": [
+      "a tautology",
+      "equivalent to $p \\to \\sim r$",
+      "a fallacy",
+      "equivalent to $q \\to \\sim r$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "Let us consider a curve, $y = f(x)$ passing through the point $(-2, 2)$ and the slope of the tangent to the curve at any point $(x, f(x))$ is given by $f(x) + xf'(x) = x^2$. Then :",
+    "options": [
+      "$x^2 + 2xf(x) - 12 = 0$",
+      "$x^3 + xf(x) + 12 = 0$",
+      "$x^3 - 3xf(x) - 4 = 0$",
+      "$x^2 + 2xf(x) + 4 = 0$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "$\\sum_{k=0}^{20} \\left({}^{20}C_k\\right)^2$ is equal to :",
+    "options": [
+      "${}^{40}C_{21}$",
+      "${}^{40}C_{19}$",
+      "${}^{40}C_{20}$",
+      "${}^{41}C_{20}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "A tangent and a normal are drawn at the point $P(2, -4)$ on the parabola $y^2 = 8x$, which meet the directrix of the parabola at the points A and B respectively. If $Q(a, b)$ is a point such that AQBP is a square, then $2a + b$ is equal to :",
+    "options": [
+      "$-16$",
+      "$-18$",
+      "$-12$",
+      "$-20$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "Let $\\frac{\\sin A}{\\sin B} = \\frac{\\sin(A-C)}{\\sin(C-B)}$ , where A, B, C are angles of a triangle ABC. If the lengths of the sides opposite these angles are a, b, c respectively, then :",
+    "options": [
+      "$b^2 - a^2 = a^2 + c^2$",
+      "$b^2,\\ c^2, a^2$ are in A.P.",
+      "$c^2, a^2, b^2$ are in A.P.",
+      "$a^2, b^2, c^2$ are in A.P."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "If $\\alpha, \\beta$ are the distinct roots of $x^2 + bx + c = 0$, then $\\lim_{x \\to \\beta} \\frac{e^{2\\left(x^2+bx+c\\right)} - 1 - 2\\left(x^2 + bx + c\\right)}{\\left(x - \\beta\\right)^2}$ is equal to:",
+    "options": [
+      "$b^2 + 4c$",
+      "$2(b^2 + 4c)$",
+      "$2(b^2 - 4c)$",
+      "$b^2 - 4c$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "When a certain biased die is rolled, a particular face occurs with probability $\\frac{1}{6} - x$ and its opposite face occurs with probability $\\frac{1}{6} + x$ . All other faces occur with probability $\\frac{1}{6}$ . Note that opposite faces sum to 7 in any die. If $0 < x < \\frac{1}{6}$ , and the probability of obtaining total sum $= 7$, when such a die is rolled twice, is $\\frac{13}{96}$ , then the value of x is:",
+    "options": [
+      "$\\frac{1}{16}$",
+      "$\\frac{1}{8}$",
+      "$\\frac{1}{9}$",
+      "$\\frac{1}{12}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "If $x^2 + 9y^2 - 4x + 3 = 0$, $x, y \\in \\mathbb{R}$ , then x and y respectively lie in the intervals:",
+    "options": [
+      "$\\left[-\\frac{1}{3}, \\frac{1}{3}\\right]$ and $\\left[-\\frac{1}{3}, \\frac{1}{3}\\right]$",
+      "$\\left[-\\frac{1}{3}, \\frac{1}{3}\\right]$ and $[1, 3]$",
+      "$[1, 3]$ and $[1, 3]$",
+      "$[1, 3]$ and $\\left[-\\frac{1}{3}, \\frac{1}{3}\\right]$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "$\\int_{6}^{16} \\frac{\\log_e x^2}{\\log_e x^2 + \\log_e\\left(x^2 - 44x + 484\\right)} dx$ is equal to:",
+    "options": [
+      "$6$",
+      "$8$",
+      "$5$",
+      "$10$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "A wire of length 20 m is to be cut into two pieces. One of the pieces is to be made into a square and the other into a regular hexagon. Then the length of the side (in meters) of the hexagon, so that the combined area of the square and the hexagon is minimum, is:",
+    "options": [
+      "$\\frac{5}{2+\\sqrt{3}}$",
+      "$\\frac{10}{2+3\\sqrt{3}}$",
+      "$\\frac{5}{3+\\sqrt{3}}$",
+      "$\\frac{10}{3+2\\sqrt{3}}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "Let $\\vec{a} = \\hat{i} + 5\\hat{j} + \\alpha\\hat{k}$, $\\vec{b} = \\hat{i} + 3\\hat{j} + \\beta\\hat{k}$ and $\\vec{c} = -\\hat{i} + 2\\hat{j} - 3\\hat{k}$ be three vectors such that, $\\left|\\vec{b} \\times \\vec{c}\\right| = 5\\sqrt{3}$ and $\\vec{a}$ is perpendicular to $\\vec{b}$. Then the greatest amongst the values of $\\left|\\vec{a}\\right|^{2}$ is _______.",
+    "options": [],
+    "correct": "90",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "The number of distinct real roots of the equation $3x^{4} + 4x^{3} - 12x^{2} + 4 = 0$ is _________.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "Let the equation $x^{2} + y^{2} + px + (1 - p)y + 5 = 0$ represent circles of varying radius $r \\in (0, 5]$. Then the number of elements in the set $S = \\{q : q = p^{2} \\text{ and } q \\text{ is an integer}\\}$ is _________.",
+    "options": [],
+    "correct": "61",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "If $A = \\{x \\in \\mathbf{R} : |x - 2| > 1\\}$, $B = \\left\\{x \\in \\mathbf{R} : \\sqrt{x^{2} - 3} > 1\\right\\}$, $C = \\left\\{x \\in \\mathbf{R} : |x - 4| \\geq 2\\right\\}$ and $\\mathbf{Z}$ is the set of all integers, then the number of subsets of the set $(A \\cap B \\cap C)^{c} \\cap \\mathbf{Z}$ is ___________.",
+    "options": [],
+    "correct": "256",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "If $\\int \\frac{dx}{\\left(x^{2} + x + 1\\right)^{2}} = a\\tan^{-1}\\left(\\frac{2x + 1}{\\sqrt{3}}\\right) + b\\left(\\frac{2x + 1}{x^{2} + x + 1}\\right) + C$, $x > 0$ where $C$ is the constant of integration, then the value of $9\\left(\\sqrt{3}a + b\\right)$ is equal to ________.",
+    "options": [],
+    "correct": "15",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "If the system of linear equations $2x + y - z = 3$ $x - y - z = \\alpha$ $3x + 3y + \\beta z = 3$ has infinitely many solution, then $\\alpha + \\beta - \\alpha\\beta$ is equal to __________.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "Let $n$ be an odd natural number such that the variance of $1, 2, 3, 4, ..., n$ is 14. Then $n$ is equal to ________.",
+    "options": [],
+    "correct": "13",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "A number is called a palindrome if it reads the same backward as well as forward. For example 285582 is a six digit palindrome. The number of six digit palindromes, which are divisible by 55, is __________.",
+    "options": [],
+    "correct": "100",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "If $y^{1/4} + y^{-1/4} = 2x$, and $\\left(x^{2} - 1\\right)\\frac{d^{2}y}{dx^{2}} + \\alpha x\\frac{dy}{dx} + \\beta y = 0$, then $|\\alpha - \\beta|$ is equal to ___________.",
+    "options": [],
+    "correct": "17",
+    "source_image": null
+  }
+]

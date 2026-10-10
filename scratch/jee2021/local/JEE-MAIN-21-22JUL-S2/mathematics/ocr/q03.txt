@@ -1,0 +1,14 @@
+Let f:R—-R be defined as
+
+f(x)=
+
+~F x8 + 2x? 43x , x>0
+axe” » x<0
+
+increasing function in the interval
+
+(1) (-4. 2) (2) (0,2)
+
+3) (-13) (4) (3-1)
+
+Then f is

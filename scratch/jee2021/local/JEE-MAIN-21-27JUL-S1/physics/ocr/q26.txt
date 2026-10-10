@@ -1,0 +1,15 @@
+A prism of refractive index n, and another prism of
+refractive index n, are stuck together (as shown in
+the figure). n; and n) depend on A, the wavelength
+
+of light, according to the relation
+
+10.810" 8x10
+ny = 1.2 + 810 and ny = 1.45 + 28%1
+nN nN
+
+The wavelength for which rays incident at any
+angle on the interface BC pass through without
+
+bending at that interface will be nm.
+

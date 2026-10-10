@@ -1,0 +1,6 @@
+A plane electromagnetic wave with frequency of
+30 MHz travels in free space. At particular point in
+space and time, electric field is 6 V/m. The
+magnetic field at this point will be x x 10° T. The
+
+value of x is

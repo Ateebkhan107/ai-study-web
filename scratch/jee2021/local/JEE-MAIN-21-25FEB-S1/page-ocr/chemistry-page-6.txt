@@ -1,0 +1,116 @@
+WS alfa JEE | NEET | Class 8 - 10 Download eSaral APP_ >
+
+SECTION-B 5,
+
+1. Among the following, the number of halide(s)
+which is/are inert to hydrolysis is
+(A) BF; (B) SiCl,
+
+(C) PCI; (D) SF,
+Official Ans. by NTA (1)
+Sol. SF, is inert towards hydrolysis
+answere is (1)
+
+2. 1 molal aqueous solution of an electrolyte A,B,
+is 60% ionised. The boiling point of the solution
+atlatmis___—_—_—s&K.. (Rounded-off to the
+nearest integer)
+
+[Given K, for (H,O) = 0.52 K kg mol!] Sol.
+Official Ans. by NTA (375)
+Sol. AT, = ik,m
+= (1 + 4a) x 0.52 x 1
+= 3.4 x 0.52 x 1 = 1.768
+T, = 1.768 + 313.15 = 374.918 K
+= 375K
+Hence answer is (375)
+
+3. In basic medium CrO7 oxidises S,O; to form
+SO,? and itself changes into Cr(OH),. The
+volume of 0.154 M CrO} required to react
+
+with 40 mL of 0.25 M S,O7 is mL.
+
+(Rounded-off to the nearest integer)
+Official Ans. by NTA (173)
+
++6 42 +6 43
+
+Sol. CrO} +820; — SO} +Cr(OH),
+gm equi. of CrO 4, = S,0,”
+0.154 x 3 x v = 0.25 x 40 x 8
+
+v = 173.16 = 173 ml
+
+Hence answer is (173)
+
+4. A car tyre is filled with nitrogen gas at 35 psi
+at 27°C. It will burst if pressure exceeds 40 psi.
+The temperature in °C at which the car tyre will
+burst is . (Rounded-off to the nearest
+integer)
+Official Ans. by NTA (70)
+
+Sol. P « T Sol.
+
+P, _T _, 40_ 7,
+
+PT, 35 300
+T, = 342.854 K
+
+= 69.70°C = 70°C
+Hence answer is (70)
+
+JEE Exam Solution www .esaral.com
+
+The reaction of cyanamide, NH,CN,,) with
+oxygen was run in a bomb calorimeter and AU
+was found to be —742.24 kJ mol-!. The
+magnitude of AH» for the reaction
+
+3
+NH,CN,) + 5 On(8) —> Nye) + On(g) + H20—
+
+is_____kJ. (Rounded off to the nearest integer)
+[Assume ideal gases and R = 8.314 J mol! K-!]
+Official Ans. by NTA (741)
+
+AH = AU + An RT
+
+1 8.314
+=_ —x 298
+742.24 + > 1000 x
+= —741 kJ/mol
+
+Hence answer is (741)
+
+Using the provided information in the following
+paper chromatogram :
+
+a <<
+in Solvent front
+Be
+Scm 2em
+Ae
+2cm
+i. ae
+v4 =y
+Spot Base line
+
+Figure : Paper chromatography
+for compounds A and B.
+
+the calculate Ry value of A x 10-7.
+Official Ans. by NTA (4)
+
+Distance travelled by compound
+
+f Distance travelled by solvent
+
+on chromatogram distance travelled by
+cmopound is > 2 cm
+Distance travelled by solvent = 5 cm
+
+2 “I
+So Rp= 7= 4x10" =0.4
+

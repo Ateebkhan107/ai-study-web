@@ -1,0 +1,4 @@
+A series LCR circuit of R = 5Q, L = 20 mH an
+C = 0.5 uF is connected across an AC supply c
+250 V, having variable frequency. The powe
+dissipated at resonance condition is___x 10 2 Ww

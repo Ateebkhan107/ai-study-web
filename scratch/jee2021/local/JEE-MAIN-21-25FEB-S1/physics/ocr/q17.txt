@@ -1,0 +1,15 @@
+17.
+
+In an octagon ABCDEFGH of equal side, what
+is the sum of
+
+AB+AC +AD +AE +AF+AG +AH'
+
+if, AO=2i+3j-4k
+
+(1) -161-24}+32k
+(2) 161+24j-32k
+
+(3) 161+24}+32k
+
+(4) 161-24}+32k

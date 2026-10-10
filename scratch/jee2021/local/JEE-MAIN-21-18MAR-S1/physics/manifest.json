@@ -1,0 +1,98 @@
+[
+  {
+    "local_number": 1,
+    "question_number": 1,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q01.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q01.txt"
+  },
+  {
+    "local_number": 2,
+    "question_number": 2,
+    "question_type": "MCQ",
+    "source_page": 1,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q02.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q02.txt"
+  },
+  {
+    "local_number": 5,
+    "question_number": 5,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q05.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q05.txt"
+  },
+  {
+    "local_number": 6,
+    "question_number": 6,
+    "question_type": "MCQ",
+    "source_page": 2,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q06.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q06.txt"
+  },
+  {
+    "local_number": 9,
+    "question_number": 9,
+    "question_type": "MCQ",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q09.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q09.txt"
+  },
+  {
+    "local_number": 10,
+    "question_number": 10,
+    "question_type": "MCQ",
+    "source_page": 3,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q10.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q10.txt"
+  },
+  {
+    "local_number": 13,
+    "question_number": 13,
+    "question_type": "MCQ",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q13.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q13.txt"
+  },
+  {
+    "local_number": 14,
+    "question_number": 14,
+    "question_type": "MCQ",
+    "source_page": 4,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q14.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q14.txt"
+  },
+  {
+    "local_number": 23,
+    "question_number": 23,
+    "question_type": "NUMERICAL",
+    "source_page": 6,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q23.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q23.txt"
+  },
+  {
+    "local_number": 24,
+    "question_number": 24,
+    "question_type": "NUMERICAL",
+    "source_page": 6,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q24.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q24.txt"
+  },
+  {
+    "local_number": 27,
+    "question_number": 27,
+    "question_type": "NUMERICAL",
+    "source_page": 7,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q27.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q27.txt"
+  },
+  {
+    "local_number": 28,
+    "question_number": 28,
+    "question_type": "NUMERICAL",
+    "source_page": 7,
+    "crop": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/crops/q28.png",
+    "ocr": "/Users/ateebfatmi/Desktop/prepzii/scratch/jee2021/local/JEE-MAIN-21-18MAR-S1/physics/ocr/q28.txt"
+  }
+]

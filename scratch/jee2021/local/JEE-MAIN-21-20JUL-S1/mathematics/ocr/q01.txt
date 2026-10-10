@@ -1,0 +1,6 @@
+The Boolean expression (p A ~ q) > (qv ~p) is
+equivalent to :
+
+(qa>p Q)p>4
+
+B)~q>Rp ()p>~q

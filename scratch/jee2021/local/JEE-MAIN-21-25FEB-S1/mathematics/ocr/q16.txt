@@ -1,0 +1,4 @@
+16. The total number of positive integral solutions
+
+(x, y, z) such that xyz = 24 is:
+(1) 36 (2) 24 (3) 45 (4) 30

@@ -1,0 +1,5 @@
+In a solvent 50% of an acid HA dimerizes and the
+rest dissociates. The van't Hoff factor of the acid is
+x 10°.
+
+(Round off to the nearest integer)

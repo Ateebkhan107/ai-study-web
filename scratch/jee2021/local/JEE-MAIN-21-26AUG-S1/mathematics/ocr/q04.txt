@@ -1,0 +1,15 @@
+Let y = y(x) be a solution curve of the differential
+
+equation (y + 1) tan’x dx + tanx dy + y dx = 0,
+
+xe( 0,2). If lim xy(x)=1, then the value of
+
+x0+
+4 ‘
+1
+
+Tl
+qd) “7 (2) a0
+
+T 1
+(3) 47) (4) 4

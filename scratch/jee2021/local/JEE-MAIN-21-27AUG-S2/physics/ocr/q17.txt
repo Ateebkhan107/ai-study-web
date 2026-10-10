@@ -1,0 +1,15 @@
+17.
+
+The height of victoria falls is 63 m. What is the
+difference in temperature of water at the top and at
+the bottom of fall ?
+
+[Given 1 cal = 4.2 J and specific heat of water
+=lcalg/°C1]
+
+(1) 0.147° C
+
+(2) 14.76°C
+(3) 1.476°
+
+(4) 0.014° C

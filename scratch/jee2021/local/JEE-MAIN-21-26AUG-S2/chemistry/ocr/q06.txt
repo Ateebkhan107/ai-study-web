@@ -1,0 +1,19 @@
+Given below are two statements : one is labelled as
+Assertion (A) and other is labelled as Reason (R).
+Assertion (A) : Sucrose is a disaccharide and a
+
+non-reducing sugar.
+
+Reason (R) : Sucrose involves glycosidic linkage
+between C, of B-glucose and C, of a-fructose.
+Choose the most appropriate answer from the
+
+options given below :
+
+(1) Both (A) and (R) are true but (R) is not the true
+explanation of (A)
+(2) (A) is false but (R) is true.
+
+(3) (A) is true but (R) is false
+(4) Both (A) and (R) are true and (R) is the true
+explanation of (A)

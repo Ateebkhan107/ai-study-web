@@ -1,0 +1,6 @@
+The empirical formula for a compound with a
+cubic close packed arrangement of anions and with
+cations occupying all the octahedral sites in AB.
+The value of x is
+
+(Integer answer)

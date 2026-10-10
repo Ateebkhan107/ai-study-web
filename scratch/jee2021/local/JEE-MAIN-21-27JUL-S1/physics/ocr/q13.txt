@@ -1,0 +1,14 @@
+13.
+
+A particle starts executing simple harmonic motion
+
+(SHM) of amplitude 'a' and total energy E. At any
+instant, its kinetic energy is a then its
+
+displacement 'y' is given by :
+
+()y=a
+a
+2)y= ol
+av3
+Oy >

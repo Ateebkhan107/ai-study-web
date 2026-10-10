@@ -1,0 +1,6 @@
+Let Ay, Ag, Az, wo. be squares such that for
+each n > 1, the length of the side of A, equals
+the length of diagonal of A,,,. If the length of
+A, is 12 cm, then the smallest value of n for
+
+which area of A, is less than one, is

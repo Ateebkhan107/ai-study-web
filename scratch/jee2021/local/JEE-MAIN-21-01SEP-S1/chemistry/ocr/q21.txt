@@ -1,0 +1,9 @@
+An empty LPG cylinder weighs 14.8 kg. When
+full, it weighs 29.0 kg and shows a pressure of 3.47
+atm. In the course of use at ambient temperature,
+the mass of the cylinder is reduced to 23.0 kg. The
+final pressure inside of the cylinder is atm.
+
+(Nearest integer)
+
+(Assume LPG of be an ideal gas)

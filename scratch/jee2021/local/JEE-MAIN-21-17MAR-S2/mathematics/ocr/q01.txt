@@ -1,0 +1,15 @@
+Let f : R > R be defined as f(x) = e~ sinx. |
+F : [0, 1] — R is a differentiable functio
+
+such that F(x) = [ F(t) dt, then the value o
+0
+
+1
+
+f( F(x) +f(x)) e*dx lies in the interval
+0
+
+) 360° 360 (2) 360’ 360
+
+|. 4) 7 BE 2S)
+) [360° 360 | 360° 360

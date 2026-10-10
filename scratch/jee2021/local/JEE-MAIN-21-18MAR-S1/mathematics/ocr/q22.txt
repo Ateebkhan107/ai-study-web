@@ -1,0 +1,4 @@
+Let the plane ax + by + cz + d= 0 bisect the
+line joining the points (4,-3,1) and (2, 3, —5)
+at the right angles. If a, b, c, d are integers, then
+the minimum value of (@& + b? + c? + d?) is

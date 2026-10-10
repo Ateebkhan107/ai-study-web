@@ -1,0 +1,11 @@
+If you are provided a set of resistances 20, 4Q,
+
+6Q and 8Q. Connect these resistances so as to
+
+. . . 46
+obtain an equivalent resistance of 3°
+
+(1) 4Q and 6Q are in parallel with 2Q and 8 Q in series
+(2) 6Q and 8Q are in parallel with 2Q and 4Q in series
+(3) 2Q and 6Q are in parallel with 4Q and 8 Q in series
+(4) 2Q and 4Q are in parallel with 6Q and 8Q in series

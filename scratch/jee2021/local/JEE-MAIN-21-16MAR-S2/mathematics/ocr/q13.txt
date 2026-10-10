@@ -1,0 +1,10 @@
+13.
+
+Given that the inverse trigonometric functions
+take principal values only. Then, the number of
+
+real values of x which _ satisfy
+. 1 ({ 3x . -1{ 4x ee
+sin = +sin = =sin™ x is equal to:
+
+(1) 2 (2) 1 (3) 3 (4) 0

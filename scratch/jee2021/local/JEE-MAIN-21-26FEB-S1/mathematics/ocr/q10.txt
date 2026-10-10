@@ -1,0 +1,14 @@
+10.
+
+The rate of growth of bacteria in a culture is
+proportional to the number of bacteris present and
+the bacteria count is 1000 at initial time
+t =0. The number of bacteria is increased by 20%
+in 2 hours. If the population of bacteria is 2000 after
+
+k k ).
+— 6\ hours, then is equal to
+log, (2) log, 2
+
+(1) 4 (2) 8 (3) 2 (4) 16
+

@@ -1,0 +1,10 @@
+Lett P=|2 0 a |, where ae R. Suppose
+3 -5 0
+
+Q= [qi] is a matrix satisfying PQ = k1; for some
+
+k kK?
+non-zero k € R. If 43 “3 and Q= >.
+
+then a? + k? is equal to _
+

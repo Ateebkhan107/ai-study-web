@@ -1,0 +1,6 @@
+A ball will a speed of 9 m/s collides with
+another identical ball at rest. After the collision,
+the direction of each ball makes an angle of 30°
+with the original direction. The ratio of
+velocities of the balls after collision is x: y,
+where x is

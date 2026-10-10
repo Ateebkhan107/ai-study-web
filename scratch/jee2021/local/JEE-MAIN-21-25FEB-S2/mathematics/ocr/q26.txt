@@ -1,0 +1,6 @@
+A line is a common tangent to the circle
+(x — 3)? + y? = 9 and the parabola y? = 4x.
+If the two points of contact (a, b) and (c, d) are
+distinct and lie in the first quadrant, then
+
+2(a + c) is equal to _

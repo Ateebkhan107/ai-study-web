@@ -1,0 +1,8 @@
+A ray of light passing through a prism (u = V3 )
+
+suffers minimum deviation. It is found that the
+
+angle of incidence is double the angle of refraction
+
+within the prism. Then, the angle of prism is
+(in degrees)

@@ -1,0 +1,10 @@
+When two soap bubbles of radii a and
+b (b > a) coalesce, the radius of curvature of
+
+common surface is :
+
+1 ab 4 atb
+(1) ba (2) ab
+3 b-a 4 ab
+(3) ab 4) a+b
+

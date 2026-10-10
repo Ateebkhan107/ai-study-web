@@ -1,0 +1,5 @@
+A fringe width of 6 mm was produced for two
+slits separated by 1 mm apart. The screen is
+placed 10 m away. The wavelength of light
+used is 'x' nm. The value of 'x' to the nearest
+integer is

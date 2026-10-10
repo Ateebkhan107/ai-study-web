@@ -1,0 +1,6 @@
+In AABC, the lengths of sides AC and AB are
+12 cm and 5 cm, respectively. If the area of
+AABC is 30 cm? and R and r are respectively
+the radii of circumcircle and incircle of AABC,
+
+then the value of 2R + r (in cm) is equal to

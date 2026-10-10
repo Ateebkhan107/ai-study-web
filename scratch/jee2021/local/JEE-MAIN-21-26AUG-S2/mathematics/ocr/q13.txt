@@ -1,0 +1,14 @@
+13. The value of
+
+; (=}s (2) (==) (2s (Ss (7)
+2 sin sin sin sin sin sin
+8 8 8 8 8 8
+
+is:
+
+(2) 4
+
+qd) cB 4
+
+3) — 4
+@) ® 5

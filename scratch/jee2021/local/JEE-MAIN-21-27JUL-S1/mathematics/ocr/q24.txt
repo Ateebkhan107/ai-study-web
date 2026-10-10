@@ -1,0 +1,11 @@
+Let the domain of the function
+
+f(x)=log, (log, (log, (18x x? -71))) be (a, b).
+Then the value of the integral
+
+b :
+f sin? xX
+
+: (sin? x + sin?(a +b —x))
+
+dx is equal to

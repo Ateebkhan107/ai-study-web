@@ -1,0 +1,7 @@
+The area of cross-section of a railway track is
+0.01 m*. The temperature variation is 10°C.
+Coefficient of linear expansion of material of track
+is 10 °/°C. The energy stored per meter in the track
+is J/m.
+
+(Young's modulus of material of track is 10'' Nm”)

@@ -1,0 +1,7 @@
+10.
+
+Let y = y(x) be the solution of the differential
+equation (x — x)dy = (y + yx’ — 3x‘)dx, x > 2.
+If y(3) =3, then y(4) is equal to :
+
+(1) 4 (2) 12 (3) 8 (4) 16

@@ -1,0 +1,6 @@
+A bandwidth of 6 MHz is available for A.M.
+transmission. If the maximum audio signal
+frequency used for modulating the carrier wave is
+not to exceed 6 kHz. The number of stations that
+can be broadcasted within this band simultaneously
+without interfering with each other will be

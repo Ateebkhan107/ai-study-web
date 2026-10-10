@@ -1,0 +1,20 @@
+For changing the capacitance of a given paralle
+plate capacitor, a dielectric material of dielectri
+constant K is used, which has the same area a
+the plates of the capacitor. The thickness of th
+
+3
+dielectric slab is a d, where 'd' is the separatio:
+
+between the plates of parallel plate capacito1
+The new capacitance (C') in terms of origina
+capacitance (C,) is given by the followin.
+relation :
+
+3+K 4+K
+C'= Cc C'=——C
+(I) C=C, 2) C'= Cy
+4K
+(3) C'= Cy (4) C'= Cy
+
+K+3 3+K

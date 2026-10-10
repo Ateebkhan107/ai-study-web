@@ -1,0 +1,9 @@
+The value of power dissipated across the zener
+diode (V, = 15 V) connected in the circuit as
+shown in the figure is x x 10-! watt.
+
+R,=352
+
+yy  Vza15V R,=902
+
+The value of x, to the nearest integer, is

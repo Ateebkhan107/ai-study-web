@@ -1,0 +1,10 @@
+Let A and B be independent events such that
+P(A) = p, P(B) = 2p. The largest value of p, for
+
+which P (exactly one of A, B occurs) = >, is:
+
+1 2
+Or 2) 5
+
+4 5
+(3) 9 (4) 12

@@ -1,0 +1,7 @@
+If [(xl+lx—2)dx = 22, (a>2) and [x]
+
+-a
+
+denotes the greatest integer < x, then
+
+} (x +[x]) dx is equal to

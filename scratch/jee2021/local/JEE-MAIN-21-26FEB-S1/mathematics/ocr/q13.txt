@@ -1,0 +1,7 @@
+13.
+
+The number of seven digit integers with sum of
+the digits equal to 10 and formed by using the digits
+
+1,2 and 3 only is
+(1) 42 (2) 82 (3) 77 (4) 35

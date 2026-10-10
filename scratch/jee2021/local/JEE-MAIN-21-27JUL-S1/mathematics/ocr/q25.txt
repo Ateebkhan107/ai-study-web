@@ -1,0 +1,7 @@
+Let
+
+sin? x —2+c0s7x  cos2x
+f(x) =|2+sin? x cos” x cos2x |,x €[0,7]
+sin? x cos’ x 1+cos2x
+
+Then the maximum value of f(x) is equal to

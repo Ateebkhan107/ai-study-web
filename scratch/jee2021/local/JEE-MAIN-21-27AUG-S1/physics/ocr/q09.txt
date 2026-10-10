@@ -1,0 +1,8 @@
+Calculate the amount of charge on capacitor of
+4 uF. The internal resistance of battery is 10:
+2uF
+4uF 60 2
+4Q
+
+(1) 8 pc (2) zero
+(3) 16 wc (4) 4 uc

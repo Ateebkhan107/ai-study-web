@@ -1,0 +1,9 @@
+1.
+
+Let y = y(x) be solution of the following
+differential equation
+
+e dy —2e¥ sinx + sinx cos’x = 0, {2} =0
+dx 2
+
+If y(O) = log(a + Be”), then 4(a + B) is equal to

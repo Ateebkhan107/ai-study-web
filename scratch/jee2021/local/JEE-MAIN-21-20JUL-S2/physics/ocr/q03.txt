@@ -1,0 +1,9 @@
+A satellite is launched into a circular orbit of radius
+R around earth, while a second satellite is
+launched into a circular orbit of radius 1.02 R. The
+percentage difference in the time periods of the
+two satellites is :
+
+(1) 1.5 (2) 2.0
+
+(3) 0.7 (4) 3.0

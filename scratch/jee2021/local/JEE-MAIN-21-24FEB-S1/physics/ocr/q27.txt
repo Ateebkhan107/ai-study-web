@@ -1,0 +1,5 @@
+An audio signal v,, = 20 sin 2m (1500 t)
+amplitude modulates a carrier
+
+Vc = 80 sin 27 (100,000 t).
+The value of percent modulation is

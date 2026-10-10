@@ -1,0 +1,5 @@
+A particle of mass m moves in a circular orbit
+in a central potential field U(r) = Upr* . If Bohr's
+quantization conditions are applied, radii of
+
+possible orbitals r, vary with n'/“, where a

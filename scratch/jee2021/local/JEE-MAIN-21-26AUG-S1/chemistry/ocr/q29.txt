@@ -1,0 +1,4 @@
+9. The total number of negative charge in the
+tetrapeptide, Gly-Glu-Asp-Tyr, at pH 12.5 will be
+
+. (Integer answer)

@@ -1,0 +1,10 @@
+For p > 0, a vector V, = 2i+ (p+ Dj is obtained by
+rotating the vector v,= V3pi + j by an angle
+
+0 about origin in counter clockwise direction. If
+
+(aV3 -2)
+
+tan 0 = ————. , then the value of a is equal to
+
+(4V3 +3)

@@ -1,0 +1,5 @@
+Which of the following is equivalent to the
+Boolean expression p A ~q ?
+
+()~@q@->p) (2)~p>~q
+(3) ~ (Pp > ~q) (4)~(p>q)

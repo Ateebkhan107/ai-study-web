@@ -1,0 +1,9 @@
+If P and Q are two statements, then which of
+the following compound statement is a
+tautology ?
+
+MP >QaA~Q>Q
+2(P>QaA~Q>~P
+B(P>QaA~Q>P
+
+AP a>QA~Q>C0CAQ)

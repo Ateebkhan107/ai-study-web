@@ -1,0 +1,12 @@
+The locus of mid—points of the line segments
+joining (—3, -5) and the points on the ellipse
+
+2 2
+x 4y -y is:
+4 9
+
+(1) 9x? + 4y” +18x+8y +145 =0
+(2) 36x? + 16y? + 90x + 56y +145 =0
+(3) 36x? + 16y? +108x + 80y +145 =0
+
+(4) 36x? + 16y? +72x +32y+145=0

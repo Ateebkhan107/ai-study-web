@@ -1,0 +1,12 @@
+14.
+
+The function of time representing a simple
+
+harmonic motion with a period of — is:
+@
+
+(1) sin(wt) + cos (at)
+(2) cos(@t) + cos (2mt) + cos (3at)
+(3) sin2(ot)
+
+(4) 3cos (G - 20)

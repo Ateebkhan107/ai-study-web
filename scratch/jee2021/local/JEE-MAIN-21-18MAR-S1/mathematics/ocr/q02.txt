@@ -1,0 +1,5 @@
+The number of integral values of m so that the
+abscissa of point of intersection of lines
+
+3x + 4y = 9 and y = mx + 1 is also an integer, is :
+() 1 (2) 2 (3) 3 (4) 0

@@ -1,0 +1,10 @@
+14.
+
+A Carnot's engine working between 400 K and
+800 K has a work output of 1200 J per cycle.
+The amount of heat energy supplied to the
+engine from the source in each cycle is :
+
+(1) 3200 J (2) 1800 J
+
+(3) 1600 J (4) 2400 J

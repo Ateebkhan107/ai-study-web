@@ -1,0 +1,15 @@
+A cord is wound round the circumference of wheel
+of radius r. The axis of the wheel is horizontal
+and the moment of inertia about it is I. A weight
+mg is attached to the cord at the end. The weight
+falls from rest. After falling through a distance ‘h',
+
+the square of angular velocity of wheel will be :-
+
+1 2mgh 7 2mgh
+()) 1+ 2mr? 2) I+ mr?
+
+2gh
+(3) 2gh (4)
+
+1+ mr’

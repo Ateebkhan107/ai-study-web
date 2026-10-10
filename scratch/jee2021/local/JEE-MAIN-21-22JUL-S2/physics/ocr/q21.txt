@@ -1,0 +1,11 @@
+In a given circuit diagram, a 5 V zener diode along
+with a series resistance is connected across a 50 V
+power supply. The minimum value of the
+
+resistance required, if the maximum zener current
+is 90 mA will be Q.
+
+I L
+
+Vi=50V
+

@@ -1,0 +1,8 @@
+Two waves are simultaneously passing through a
+string and their equations are :
+
+y, = A, sin k(x-vt), y2 = Ap sin k(x—vt + Xo). Given
+amplitudes A; = 12 mm and A, = 5 mm,
+Xo = 3.5 cm and wave number k = 6.28 cm’!. The
+
+amplitude of resulting wave will be .......... mm.

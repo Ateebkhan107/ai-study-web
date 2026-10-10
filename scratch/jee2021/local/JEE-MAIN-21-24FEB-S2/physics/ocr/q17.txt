@@ -1,0 +1,16 @@
+17.
+
+Zener breakdown occurs in a p-n junction
+
+having p and n both :
+
+(1) lightly doped and have wide depletion layer.
+
+(2) heavily doped and have narrow depletion
+layer.
+
+(3) lightly doped and have narrow depletion
+layer.
+
+(4) heavily doped and have wide depletion
+layer.

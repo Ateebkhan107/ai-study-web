@@ -1,0 +1,9 @@
+What will be the average value of energy along
+one degree of freedom for an ideal gas in
+thermal equilibrium at a temperature T ? (kg is
+Boltzmann constant)
+
+1 2
+(1) Sst (2) FkeT
+
+3) SkeT (4) kyT

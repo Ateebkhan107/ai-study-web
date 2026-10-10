@@ -1,0 +1,2102 @@
+[
+  {
+    "code": "fvdva4zv64",
+    "source_number": 1,
+    "subject": "Maths",
+    "chapter": "Continuity and Differentiability",
+    "section": "Piecewise Functions",
+    "question_type": "SingleChoice",
+    "question": "Let [t] denote the greatest integer less than or equal to t. Let f(x) = x - [x], g(x) = 1 - x + [x], and h(x) = $\\min$$\\{$f(x), g(x)$\\}$, x $\\in$ [-2, 2]. Then h is :",
+    "options": [
+      "continuous in [-2, 2] but not differentiable at more than four points in (-2, 2)",
+      "not continuous at exactly three points in [-2, 2]",
+      "continuous in [-2, 2] but not differentiable at exactly three points in (-2, 2)",
+      "not continuous at exactly four points in [-2, 2]"
+    ],
+    "images": {
+      "Question": "a4c04232-2a21-425a-b833-468ba1862ae6.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          520
+        ]
+      }
+    }
+  },
+  {
+    "code": "ko3qvl22d5",
+    "source_number": 2,
+    "subject": "Maths",
+    "chapter": "Matrices",
+    "section": "Matrix Powers and Properties",
+    "question_type": "SingleChoice",
+    "question": "Let $A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$. Then $A^{2025} - A^{2020}$ is equal to:",
+    "options": [
+      "$A^6 - A$",
+      "$A^5$",
+      "$A^5 - A$",
+      "$A^6$"
+    ],
+    "images": {
+      "Question": "9dfddc19-356f-4145-a506-81438ab7d1ce.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          528
+        ]
+      }
+    }
+  },
+  {
+    "code": "ub7pwgrr6t",
+    "source_number": 3,
+    "subject": "Maths",
+    "chapter": "Applications of Derivatives",
+    "section": "Exponential Functions",
+    "question_type": "SingleChoice",
+    "question": "The local maximum value of the function\n$$f(x) = \\left( \\frac{2}{x} \\right)^{x^2}, \\; x > 0,$$ is",
+    "options": [
+      "$\\left( 2 \\sqrt{e} \\right)^{\\frac{1}{e}}$",
+      "$\\left( \\frac{4}{\\sqrt{e}} \\right)^{\\frac{e}{4}}$",
+      "$(e)^{\\frac{2}{e}}$",
+      "$1$"
+    ],
+    "images": {
+      "Question": "c72995be-6d3e-4da7-a2fa-a1621ec1d574.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          551
+        ]
+      }
+    }
+  },
+  {
+    "code": "zfb4iqyvs3",
+    "source_number": 4,
+    "subject": "Maths",
+    "chapter": "Integrals",
+    "section": "Definite Integrals",
+    "question_type": "SingleChoice",
+    "question": "If the value of the integral $\\int_{0}^{5} \\frac{x + \\lfloor x \\rfloor}{e^{x - \\lfloor x \\rfloor}} \\, dx = \\alpha e^{-1} + \\beta$, where $\\alpha, \\beta \\in \\mathbb{R}$, $5\\alpha + 6\\beta = 0$, and $\\lfloor x \\rfloor$ denotes the greatest integer less than or equal to $x$; then the value of $(\\alpha + \\beta)^2$ is equal to:",
+    "options": [
+      "100",
+      "25",
+      "16",
+      "36"
+    ],
+    "images": {
+      "Question": "997913b9-dec8-4789-bece-b4e1a00e0232.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          597
+        ]
+      }
+    }
+  },
+  {
+    "code": "vm4potyzxp",
+    "source_number": 5,
+    "subject": "Maths",
+    "chapter": "Conic Sections",
+    "section": "Tangent and Normal",
+    "question_type": "SingleChoice",
+    "question": "The point $\\mathrm{P}(-2\\sqrt{6}, \\sqrt{3})$ lies on the hyperbola $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$ having eccentricity $\\frac{\\sqrt{5}}{2}$. If the tangent and normal at $\\mathrm{P}$ to the hyperbola intersect its conjugate axis at the point $\\mathrm{Q}$ and $\\mathrm{R}$ respectively, then $\\mathrm{QR}$ is equal to:",
+    "options": [
+      "$4\\sqrt{3}$",
+      "$6$",
+      "$6\\sqrt{3}$",
+      "$3\\sqrt{6}$"
+    ],
+    "images": {
+      "Question": "92d227c2-494f-45a1-804f-34f85ed1f6fd.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          530
+        ]
+      }
+    }
+  },
+  {
+    "code": "57gvryz5nk",
+    "source_number": 6,
+    "subject": "Maths",
+    "chapter": "Differential Equations",
+    "section": "First Order Differential Equations",
+    "question_type": "SingleChoice",
+    "question": "Let $y(x)$ be the solution of the differential equation\n$$2x^2 \\, dy + (e^y - 2x) \\, dx = 0, x > 0.$$ If $y(e) = 1$, then $y(1)$ is equal to:",
+    "options": [
+      "0",
+      "2",
+      "$\\log$_e 2",
+      "$\\log$_e (2e)"
+    ],
+    "images": {
+      "Question": "942e8aec-db64-4aeb-aa49-79c6b5fd2222.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          536
+        ]
+      }
+    }
+  },
+  {
+    "code": "psmygerdf6",
+    "source_number": 7,
+    "subject": "Maths",
+    "chapter": "Mathematical Reasoning",
+    "section": "Logical Equivalence",
+    "question_type": "SingleChoice",
+    "question": "Consider the two statements:\n(S1) : (p $\\rightarrow$ q) $\\lor$ ($\\sim$ q $\\rightarrow$ p) is a tautology.\n(S2) : (p $\\land$ $\\sim$ q) $\\land$ ($\\sim$ p $\\lor$ q) is a fallacy.\nThen :",
+    "options": [
+      "only (S1) is true.",
+      "both (S1) and (S2) are false.",
+      "both (S1) and (S2) are true.",
+      "only (S2) is true."
+    ],
+    "images": {
+      "Question": "6921831f-f02d-483a-b0a3-734027d1782f.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          662
+        ]
+      }
+    }
+  },
+  {
+    "code": "cuyot55f7x",
+    "source_number": 8,
+    "subject": "Maths",
+    "chapter": "Inverse Trigonometric Functions",
+    "section": "Domain of Inverse Functions",
+    "question_type": "SingleChoice",
+    "question": "The domain of the function $\\operatorname{cosec}^{-1}\\!\\left(\\dfrac{1+x}{x}\\right)$ is:",
+    "options": [
+      "(-1, -$\\frac{1}{2}$] $\\cup$ (0, $\\infty$)",
+      "[-$\\frac{1}{2}$, 0) $\\cup$ [1, $\\infty$)",
+      "(-$\\frac{1}{2}$, $\\infty$) - {0}",
+      "[-$\\frac{1}{2}$, $\\infty$) - {0}"
+    ],
+    "images": {
+      "Question": "df81d78b-f623-495b-a72d-fb010463f627.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          485
+        ]
+      }
+    }
+  },
+  {
+    "code": "52ix62xumy",
+    "source_number": 9,
+    "subject": "Maths",
+    "chapter": "Probability",
+    "section": "Conditional Probability",
+    "question_type": "SingleChoice",
+    "question": "A fair die is tossed until six is obtained on it. Let $X$ be the number of required tosses, then the conditional probability $\\mathbb{P}(X \\geq 5 \\mid X > 2)$ is:",
+    "options": [
+      "$\\frac{125}{216}$",
+      "$\\frac{11}{36}$",
+      "$\\frac{5}{6}$",
+      "$\\frac{25}{36}$"
+    ],
+    "images": {
+      "Question": "ae8e1c8f-1a80-49a6-9f30-8e97395e69b3.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          540
+        ]
+      }
+    }
+  },
+  {
+    "code": "3a75fu5tyj",
+    "source_number": 10,
+    "subject": "Maths",
+    "chapter": "Inverse Trigonometric Functions",
+    "section": "Summation of Inverse Functions",
+    "question_type": "SingleChoice",
+    "question": "If $\\sum_{r=1}^{50}$ $\\tan^{-1}$ $\\frac{1}{2r^2}$ = p, then the value of $\\tan$ p is :",
+    "options": [
+      "$\\frac{101}{102}$",
+      "$\\frac{50}{51}$",
+      "100",
+      "$\\frac{51}{50}$"
+    ],
+    "images": {
+      "Question": "7d448d29-72c3-4f24-bfb6-d0b4a3505dc0.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          474
+        ]
+      }
+    }
+  },
+  {
+    "code": "2swsnrshev",
+    "source_number": 11,
+    "subject": "Maths",
+    "chapter": "Determinants",
+    "section": "Probability in Linear Systems",
+    "question_type": "SingleChoice",
+    "question": "Two fair dice are thrown. The numbers on them are taken as $\\lambda$ and $\\mu$, and a system of linear equations $$x + y + z = 5$$\n$$x + 2y + 3z = \\mu$$\n$$x + 3y + \\lambda z = 1$$ is constructed. If $p$ is the probability that the system has a unique solution and $q$ is the probability that the system has no solution, then :",
+    "options": [
+      "$p = \\frac{1}{6}$ and $q = \\frac{1}{36}$",
+      "$p = \\frac{5}{6}$ and $q = \\frac{5}{36}$",
+      "$p = \\frac{5}{6}$ and $q = \\frac{1}{36}$",
+      "$p = \\frac{1}{6}$ and $q = \\frac{5}{36}$"
+    ],
+    "images": {
+      "Question": "fd7f9c21-db32-4108-9035-73a0b918b530.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          807
+        ]
+      }
+    }
+  },
+  {
+    "code": "ih757u5orh",
+    "source_number": 12,
+    "subject": "Maths",
+    "chapter": "Conic Sections",
+    "section": "Locus Problems",
+    "question_type": "SingleChoice",
+    "question": "The locus of the mid points of the chords of the hyperbola $x^2 - y^2 = 4$, which touch the parabola $y^2 = 8x$, is :",
+    "options": [
+      "$y^3(x - 2) = x^2$",
+      "$x^3(x - 2) = y^2$",
+      "$y^2(x - 2) = x^3$",
+      "$x^2(x - 2) = y^3$"
+    ],
+    "images": {
+      "Question": "78692b9f-90a1-4668-89c9-caffdc88af6f.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          464
+        ]
+      }
+    }
+  },
+  {
+    "code": "yg7xdfe73j",
+    "source_number": 13,
+    "subject": "Maths",
+    "chapter": "Trigonometric Functions",
+    "section": "Product of Sines",
+    "question_type": "SingleChoice",
+    "question": "The value of $$2 \\sin\\left(\\frac{\\pi}{8}\\right) \\sin\\left(\\frac{2\\pi}{8}\\right) \\sin\\left(\\frac{3\\pi}{8}\\right) \\sin\\left(\\frac{5\\pi}{8}\\right) \\sin\\left(\\frac{6\\pi}{8}\\right) \\sin\\left(\\frac{7\\pi}{8}\\right)$$ is:",
+    "options": [
+      "$\\frac{1}{4\\sqrt{2}}$",
+      "$\\frac{1}{4}$",
+      "$\\frac{1}{8}$",
+      "$\\frac{1}{8\\sqrt{2}}$"
+    ],
+    "images": {
+      "Question": "6505e2e9-114c-451c-b507-bbca5a6547dc.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          620
+        ]
+      }
+    }
+  },
+  {
+    "code": "tizupo3gfs",
+    "source_number": 14,
+    "subject": "Maths",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "section": "Complex Powers and Roots",
+    "question_type": "SingleChoice",
+    "question": "If $\\left( \\sqrt{3} + i \\right)^{100} = 2^{99}(p + iq)$, then $p$ and $q$ are roots of the equation:",
+    "options": [
+      "$x^2 - (\\sqrt{3} - 1)x - \\sqrt{3} = 0$",
+      "$x^2 + (\\sqrt{3} + 1)x + \\sqrt{3} = 0$",
+      "$x^2 + (\\sqrt{3} - 1)x - \\sqrt{3} = 0$",
+      "$x^2 - (\\sqrt{3} + 1)x + \\sqrt{3} = 0$"
+    ],
+    "images": {
+      "Question": "d874b2ba-4214-49c2-9633-69d8ff794fa9.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          464
+        ]
+      }
+    }
+  },
+  {
+    "code": "qmkktkpnco",
+    "source_number": 15,
+    "subject": "Maths",
+    "chapter": "Three Dimensional Geometry",
+    "section": "Angle Between Diagonals",
+    "question_type": "SingleChoice",
+    "question": "A hall has a square floor of dimension $10 \\, \\mathrm{m} \\times 10 \\, \\mathrm{m}$ (see the figure) and vertical walls.\nIf the angle GPH between the diagonals AG and BH is $\\cos^{-1} \\frac{1}{5}$, then the height of the hall (in meters) is:\n\\includegraphics[width=729px,height=539px]{0783c6b4-6992-443f-88e0-17426dfb3008.png}",
+    "options": [
+      "5",
+      "2$\\sqrt{10}$",
+      "5$\\sqrt{3}$",
+      "5$\\sqrt{2}$"
+    ],
+    "images": {
+      "Question": "e1cd80cf-6e5c-4aea-ae10-72aded973a75.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1148
+        ]
+      }
+    }
+  },
+  {
+    "code": "xibcohx5os",
+    "source_number": 16,
+    "subject": "Maths",
+    "chapter": "Three Dimensional Geometry",
+    "section": "Plane Geometry",
+    "question_type": "SingleChoice",
+    "question": "Let P be the plane passing through the point (1, 2, 3) and the line of intersection of the planes\n$$\\vec{r} \\cdot (\\hat{i} + \\hat{j} + 4\\hat{k}) = 16$$ and $$\\vec{r} \\cdot (-\\hat{i} + \\hat{j} + \\hat{k}) = 6$$. Then which of the following points does NOT lie on P?",
+    "options": [
+      "(3, 3, 2)",
+      "(6, -6, 2)",
+      "(4, 2, 2)",
+      "(-8, 8, 6)"
+    ],
+    "images": {
+      "Question": "f237c11a-d5e8-45c9-88ef-9479bff13482.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          530
+        ]
+      }
+    }
+  },
+  {
+    "code": "gwbh5yxehq",
+    "source_number": 17,
+    "subject": "Maths",
+    "chapter": "Inverse Trigonometric Functions",
+    "section": "Inverse Trigonometry",
+    "question_type": "SingleChoice",
+    "question": "A 10 inches long pencil AB with mid point C and a small eraser P are placed on the horizontal top of a table such that PC = $\\sqrt{5}$ inches and $\\angle$ PCB = $\\tan^{-1}(2)$. The acute angle through which the pencil must be rotated about C so that the perpendicular distance between eraser and pencil becomes exactly 1 inch is:\n\\includegraphics[width=595px,height=237px]{289140dc-6c8a-4b12-9d6f-a0dc1ad5a80c.png}",
+    "options": [
+      "\\tan^{-1}\\left(\\frac{3}{4}\\right)",
+      "\\tan^{-1}(1)",
+      "\\tan^{-1}\\left(\\frac{4}{3}\\right)",
+      "\\tan^{-1}\\left(\\frac{1}{2}\\right)"
+    ],
+    "images": {
+      "Question": "476c379d-6c48-4b42-a12d-8342e8212332.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          861
+        ]
+      }
+    }
+  },
+  {
+    "code": "rugx2gf77h",
+    "source_number": 18,
+    "subject": "Maths",
+    "chapter": "Integrals",
+    "section": "Definite Integrals",
+    "question_type": "SingleChoice",
+    "question": "The value of $\\int_{-\\frac{\\pi}{2}}^{\\frac{\\pi}{2}} \\left( \\frac{1+\\sin^2 x}{1+\\pi^{sin x}} \\right) dx$ is",
+    "options": [
+      "$\\frac{\\pi}{2}$",
+      "$\\frac{5\\pi}{4}$",
+      "$\\frac{3\\pi}{4}$",
+      "$\\frac{3\\pi}{2}$"
+    ],
+    "images": {
+      "Question": "7d85aa3d-bd33-4c3f-95e6-7224adbef1d4.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          486
+        ]
+      }
+    }
+  },
+  {
+    "code": "x4wjzbbwxq",
+    "source_number": 19,
+    "subject": "Maths",
+    "chapter": "Conic Sections",
+    "section": "Circle Geometry",
+    "question_type": "SingleChoice",
+    "question": "A circle $C$ touches the line $x = 2y$ at the point $(2, 1)$ and intersects the circle $C_1 : x^2 + y^2 + 2y - 5 = 0$ at two points $P$ and $Q$ such that $PQ$ is a diameter of $C_1$. Then the diameter of $C$ is :",
+    "options": [
+      "$7\\sqrt{5}$",
+      "$15$",
+      "$\\sqrt{285}$",
+      "$4\\sqrt{15}$"
+    ],
+    "images": {
+      "Question": "378031ab-04e6-447d-8f65-2696cdbf1c2d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          518
+        ]
+      }
+    }
+  },
+  {
+    "code": "jqg5tub3h6",
+    "source_number": 20,
+    "subject": "Maths",
+    "chapter": "Limits and Derivatives",
+    "section": "Limit Evaluation",
+    "question_type": "SingleChoice",
+    "question": "$\\lim_{x \\to 2} \\left( \\sum_{n=1}^{9} \\frac{x}{n(n+1)x^2 + 2(2n+1)x + 4} \\right)$ is equal to:",
+    "options": [
+      "$\\frac{9}{44}$",
+      "$\\frac{5}{24}$",
+      "$\\frac{1}{5}$",
+      "$\\frac{7}{36}$"
+    ],
+    "images": {
+      "Question": "26b32fb9-1735-4ce2-8020-a68ba5af2ff3.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          476
+        ]
+      }
+    }
+  },
+  {
+    "code": "wownd2nzti",
+    "source_number": 21,
+    "subject": "Maths",
+    "chapter": "Permutations and Combinations",
+    "section": "Number Properties",
+    "question_type": "Numerical",
+    "question": "The sum of all 3-digit numbers less than or equal to 500, that are formed without using the digit \"1\" and they all are multiple of 11, is.",
+    "options": [],
+    "images": {
+      "Question": "5c3fdd52-4d54-4436-8e2f-6f2c90238fc7.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          247
+        ]
+      }
+    }
+  },
+  {
+    "code": "cdnxrkqwr6",
+    "source_number": 22,
+    "subject": "Maths",
+    "chapter": "Applications of Integrals",
+    "section": "Local Extrema",
+    "question_type": "Numerical",
+    "question": "Let a and b respectively be the points of local maximum and local minimum of the function $f(x) = 2x^3 - 3x^2 - 12x$. If $A$ is the total area of the region bounded by $y = f(x)$, the x-axis and the lines $x = a$ and $x = b$, then $4A$ is equal to .",
+    "options": [],
+    "images": {
+      "Question": "2adb473b-248d-4af9-a23f-63981aa80614.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          313
+        ]
+      }
+    }
+  },
+  {
+    "code": "rmulvgff35",
+    "source_number": 23,
+    "subject": "Maths",
+    "chapter": "Vector Algebra",
+    "section": "Vector Projections",
+    "question_type": "Numerical",
+    "question": "If the projection of the vector $\\hat{i} + 2\\hat{j} + \\hat{k}$ on the sum of the two vectors $2\\hat{i} + 4\\hat{j} - 5\\hat{k}$ and $-\\lambda \\hat{i} + 2\\hat{j} + 3\\hat{k}$ is 1, then $\\lambda$ is equal to .",
+    "options": [],
+    "images": {
+      "Question": "648a615f-d43a-4827-8d68-09f00511043d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          246
+        ]
+      }
+    }
+  },
+  {
+    "code": "yonsaf4fnb",
+    "source_number": 24,
+    "subject": "Maths",
+    "chapter": "Sequences and Series",
+    "section": "Arithmetic and Geometric Progressions",
+    "question_type": "Numerical",
+    "question": "Let $a_1, a_2, \\ldots, a_{10}$ be an $AP$ with common difference $-3$ and $b_1, b_2, \\ldots, b_{10}$ be a $GP$ with common ratio $2$. Let $c_k = a_k + b_k, k = 1, 2, \\ldots, 10$. If $c_2 = 12$ and $c_3 = 13$, then $\\sum_{k=1}^{10} c_k$ is equal to.",
+    "options": [],
+    "images": {
+      "Question": "81da3df3-c5cf-4cd8-b29b-6a741693442b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          258
+        ]
+      }
+    }
+  },
+  {
+    "code": "5fyad72dn2",
+    "source_number": 25,
+    "subject": "Maths",
+    "chapter": "Three Dimensional Geometry",
+    "section": "Plane Geometry",
+    "question_type": "Numerical",
+    "question": "Let Q be the foot of the perpendicular from the point P(7, -2, 13) on the plane containing the lines $\\frac{x+1}{6} = \\frac{y-1}{7} = \\frac{z-3}{8}$ and $\\frac{x-1}{3} = \\frac{y-2}{5} = \\frac{z-3}{7}$. Then $(PQ)^2$, is equal to .",
+    "options": [],
+    "images": {
+      "Question": "62cc4128-9286-447e-9b14-82ba6e6e0ea4.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          257
+        ]
+      }
+    }
+  },
+  {
+    "code": "yh2a4hnb7r",
+    "source_number": 26,
+    "subject": "Maths",
+    "chapter": "Permutations and Combinations",
+    "section": "Advanced Combinatorics",
+    "question_type": "Numerical",
+    "question": "$$\n\\text{Let }\\binom{n}{k}\\text{ denote the usual binomial coefficient, and let}\n$$ $$\n\\left[\\begin{array}{c} n \\\\ k \\end{array}\\right] =\n\\begin{cases}\n\\dbinom{n}{k}, & \\text{if } 0 \\leq k \\leq n \\\\\n0, & \\text{otherwise}\n\\end{cases}\n$$ $$\n\\text{If } A_k = \\sum_{i=0}^{9}\\binom{9}{i}\\left[\\begin{array}{c} 12 \\\\ 12-k+i \\end{array}\\right] + \\sum_{i=0}^{8}\\binom{8}{i}\\left[\\begin{array}{c} 13 \\\\ 13-k+i \\end{array}\\right]\n$$ $$\n\\text{and } A_4 - A_3 = 190p, \\text{ then } p \\text{ is equal to :}\n$$",
+    "options": [],
+    "images": {
+      "Question": "c1c3274e-3cee-49e0-afc1-41de3f0fb06e.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          410
+        ]
+      }
+    }
+  },
+  {
+    "code": "uy6iwm6cts",
+    "source_number": 27,
+    "subject": "Maths",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "section": "Common Roots",
+    "question_type": "Numerical",
+    "question": "Let $\\lambda \\neq 0$ be in $\\mathbb{R}$. If $\\alpha$ and $\\beta$ are the roots of the equation $x^2 - x + 2\\lambda = 0$, and $\\alpha$ and $\\gamma$ are the roots of equation $3x^2 - 10x + 27\\lambda = 0$, then $\\frac{\\beta \\gamma}{\\lambda}$ is equal to .",
+    "options": [],
+    "images": {
+      "Question": "9c643b1b-8464-4cdb-942a-7da3fe3e6e9b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          258
+        ]
+      }
+    }
+  },
+  {
+    "code": "mishuvtsau",
+    "source_number": 28,
+    "subject": "Maths",
+    "chapter": "Statistics",
+    "section": "Mean Calculation",
+    "question_type": "Numerical",
+    "question": "Let the mean and variance of four numbers $3, 7, x$ and $y (x > y)$ be $5$ and $10$ respectively. Then the mean of four numbers $3 + 2x, 7 + 2y, x + y$ and $x - y$ is.",
+    "options": [],
+    "images": {
+      "Question": "65fa6dfe-e0b9-4f2b-8a6d-33ad41aae3ef.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          247
+        ]
+      }
+    }
+  },
+  {
+    "code": "igxdyldqts",
+    "source_number": 29,
+    "subject": "Maths",
+    "chapter": "Matrices",
+    "section": "Matrix Determinants",
+    "question_type": "Numerical",
+    "question": "Let A be a $3 \\times 3$ real matrix. If $\\det(2 \\ \\mathrm{Adj}(2 \\ \\mathrm{Adj}(\\mathrm{Adj}(2 \\ A)))) = 2^{41}$, then the value of $\\det(A^2)$ equal .",
+    "options": [],
+    "images": {
+      "Question": "c214dbb2-8216-4dc3-8431-f72e428b69fa.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          260
+        ]
+      }
+    }
+  },
+  {
+    "code": "h6mjt7rgoi",
+    "source_number": 30,
+    "subject": "Maths",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "section": "Complex Number Expressions",
+    "question_type": "Numerical",
+    "question": "The least positive integer $n$ such that $\\frac{{(2i)^n}}{{(1-i)^{n-2}}}, \\ i = \\sqrt{-1}$ is a positive integer, is.",
+    "options": [],
+    "images": {
+      "Question": "613b2d41-ba20-4656-bc41-bf8e29d3638f.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          186
+        ]
+      }
+    }
+  },
+  {
+    "code": "wniiskubqp",
+    "source_number": 31,
+    "subject": "Physics",
+    "chapter": "Thermal Properties of Matter",
+    "section": "Temperature Mixing",
+    "question_type": "SingleChoice",
+    "question": "The temperature of equal masses of three different liquids $x$, $y$ and $z$ are $10^\\circ \\mathrm{C}$, $20^\\circ \\mathrm{C}$ and $30^\\circ \\mathrm{C}$ respectively. The temperature of mixture when $x$ is mixed with $y$ is $16^\\circ \\mathrm{C}$ and that when $y$ is mixed with $z$ is $26^\\circ \\mathrm{C}$. The temperature of mixture when $x$ and $z$ are mixed will be:",
+    "options": [
+      "$28.32^\\circ \\mathrm{C}$",
+      "$25.62^\\circ \\mathrm{C}$",
+      "$23.84^\\circ \\mathrm{C}$",
+      "$20.28^\\circ \\mathrm{C}$"
+    ],
+    "images": {
+      "Question": "0c513a99-6aaa-4423-96ad-995d62cee39b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          597
+        ]
+      }
+    }
+  },
+  {
+    "code": "5jm2xbu4ex",
+    "source_number": 32,
+    "subject": "Physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "section": "de-Broglie Wavelength",
+    "question_type": "SingleChoice",
+    "question": "The de-Broglie wavelength of a particle having kinetic energy $E$ is $\\lambda$. How much extra energy must be given to this particle so that the de-Broglie wavelength reduces to 75$\\%$ of the initial value?",
+    "options": [
+      "$\\frac{1}{9}E$",
+      "$\\frac{7}{9}E$",
+      "$E$",
+      "$\\frac{16}{9}E$"
+    ],
+    "images": {
+      "Question": "07a6c9b0-9112-4515-b870-72e08f05376d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          541
+        ]
+      }
+    }
+  },
+  {
+    "code": "xhxioks6y7",
+    "source_number": 33,
+    "subject": "Physics",
+    "chapter": "Motion in a Plane",
+    "section": "Circular Motion",
+    "question_type": "SingleChoice",
+    "question": "A particle of mass m is suspended from a ceiling through a string of length L. The particle moves in a horizontal circle of radius r such that $r = \\frac{L}{\\sqrt{2}}$. The speed of particle will be :",
+    "options": [
+      "$\\sqrt{rg}$",
+      "$\\sqrt{2rg}$",
+      "2$\\sqrt{rg}$",
+      "$\\sqrt{\\frac{rg}{2}}$"
+    ],
+    "images": {
+      "Question": "ce5f3b6c-b40a-445a-9973-500af27e9ac3.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          490
+        ]
+      }
+    }
+  },
+  {
+    "code": "abfyomhno3",
+    "source_number": 34,
+    "subject": "Physics",
+    "chapter": "Kinetic Theory",
+    "section": "Ideal Gas Law",
+    "question_type": "SingleChoice",
+    "question": "A cylindrical container of volume $4.0 \\times 10^{-3} \\, \\mathrm{m}^3$ contains one mole of hydrogen and two moles of carbon dioxide. Assume the temperature of the mixture is $400 \\, \\mathrm{K}$. The pressure of the mixture of gases is:\n[Take gas constant as $8.3 \\, \\mathrm{J} \\, \\mathrm{mol}^{-1} \\, \\mathrm{K}^{-1}$]",
+    "options": [
+      "$249 \\times 10^1 \\, \\mathrm{Pa}$",
+      "$24.9 \\times 10^3 \\, \\mathrm{Pa}$",
+      "$24.9 \\times 10^5 \\, \\mathrm{Pa}$",
+      "$24.9 \\, \\mathrm{Pa}$"
+    ],
+    "images": {
+      "Question": "e05f0edf-3066-43f6-b64a-26bd6f291c49.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          600
+        ]
+      }
+    }
+  },
+  {
+    "code": "dordo3gid6",
+    "source_number": 35,
+    "subject": "Physics",
+    "chapter": "Motion in a Plane",
+    "section": "Vector Angles",
+    "question_type": "SingleChoice",
+    "question": "The angle between vector $\\vec{A}$ and $\\vec{A} - \\vec{B}$ is:\n\\includegraphics[width=654px,height=604px]{bbe12f0a-dcc9-4fcc-a2de-37591e431fb5.png}",
+    "options": [
+      "$\\tan^{-1}\\left(\\frac{-B}{A - B \\frac{\\sqrt{3}}{2}}\\right)$",
+      "$\\tan^{-1}\\left(\\frac{A}{0.7B}\\right)$",
+      "$\\tan^{-1}\\left(\\frac{\\sqrt{3}B}{2A - B}\\right)$",
+      "$\\tan^{-1}\\left(\\frac{B \\cos \\theta}{A - B \\sin \\theta}\\right)$"
+    ],
+    "images": {
+      "Question": "2a4e226f-a461-4389-88f5-9b163bec2395.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1143
+        ]
+      }
+    }
+  },
+  {
+    "code": "h5qlstqnat",
+    "source_number": 36,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Waves",
+    "section": "Magnetic Force on Charged Particles",
+    "question_type": "SingleChoice",
+    "question": "A light beam is described by $E = 800 \\sin \\omega \\left( t - \\frac{x}{c} \\right)$ . An electron is allowed to move normal to the propagation of light beam with a speed of $3 \\times 10^7 \\, \\mathrm{ms}^{-1}$. What is the maximum magnetic force exerted on the electron?",
+    "options": [
+      "$1.28 \\times 10^{-18} \\, \\mathrm{N}$",
+      "$1.28 \\times 10^{-21} \\, \\mathrm{N}$",
+      "$12.8 \\times 10^{-17} \\, \\mathrm{N}$",
+      "$12.8 \\times 10^{-18} \\, \\mathrm{N}$"
+    ],
+    "images": {
+      "Question": "112387c7-5415-4aec-8f11-e84a1ac117de.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          597
+        ]
+      }
+    }
+  },
+  {
+    "code": "77pi54a2mq",
+    "source_number": 37,
+    "subject": "Physics",
+    "chapter": "Electric Charges and Fields",
+    "section": "Potential Difference",
+    "question_type": "SingleChoice",
+    "question": "The two thin coaxial rings, each of radius 'a' and having charges +Q and -Q respectively are separated by a distance of 's'. The potential difference between the centres of the two rings is :",
+    "options": [
+      "$\\frac{Q}{2\\pi\\varepsilon_0} \\left[ \\frac{1}{a} + \\frac{1}{\\sqrt{s^2+a^2}} \\right]$",
+      "$\\frac{Q}{4\\pi\\varepsilon_0} \\left[ \\frac{1}{a} + \\frac{1}{\\sqrt{s^2+a^2}} \\right]$",
+      "$\\frac{Q}{4\\pi\\varepsilon_0} \\left[ \\frac{1}{a} - \\frac{1}{\\sqrt{s^2+a^2}} \\right]$",
+      "$\\frac{Q}{2\\pi\\varepsilon_0} \\left[ \\frac{1}{a} - \\frac{1}{\\sqrt{s^2+a^2}} \\right]$"
+    ],
+    "images": {
+      "Question": "aae4bcf9-39c5-455b-8b04-7dab92be27b4.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          557
+        ]
+      }
+    }
+  },
+  {
+    "code": "pus4nbx2kt",
+    "source_number": 38,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "section": "Resistor Networks",
+    "question_type": "SingleChoice",
+    "question": "If you are provided a set of resistances $2\\,\\Omega$, $4\\,\\Omega$, $6\\,\\Omega$ and $8\\,\\Omega$. Connect these resistances so as to obtain an equivalent resistance of $\\frac{46}{3}\\,\\Omega$",
+    "options": [
+      "$4\\,\\Omega$ and $6\\,\\Omega$ are in parallel with $2\\,\\Omega$ and $8\\,\\Omega$ in series",
+      "$6\\,\\Omega$ and $8\\,\\Omega$ are in parallel with $2\\,\\Omega$ and $4\\,\\Omega$ in series",
+      "$2\\,\\Omega$ and $6\\,\\Omega$ are in parallel with $4\\,\\Omega$ and $8\\,\\Omega$ in series",
+      "$2\\,\\Omega$ and $4\\,\\Omega$ are in parallel with $6\\,\\Omega$ and $8\\,\\Omega$ in series"
+    ],
+    "images": {
+      "Question": "f40e1d1f-a09f-41a0-b6ab-255003f2660b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          530
+        ]
+      }
+    }
+  },
+  {
+    "code": "23tlkhgkcx",
+    "source_number": 39,
+    "subject": "Physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "section": "Moment of Inertia Calculation",
+    "question_type": "SingleChoice",
+    "question": "The solid cylinder of length 80 cm and mass M has a radius of 20 cm. Calculate the density of the material used if the moment of inertia of the cylinder about an axis CD parallel to AB as shown in figure is 2.7 kg m^2.\n\\includegraphics[width=650px,height=519px]{6d8efba7-cc76-4fe4-971a-a282f6ef539e.png}",
+    "options": [
+      "$14.9\\,\\mathrm{kg\\,m^{-3}}$",
+      "$7.5 \\times 10^{1}\\,\\mathrm{kg\\,m^{-3}}$",
+      "$7.5 \\times 10^{2}\\,\\mathrm{kg\\,m^{-3}}$",
+      "$1.49 \\times 10^{2}\\,\\mathrm{kg\\,m^{-3}}$"
+    ],
+    "images": {
+      "Question": "1d8682fc-2963-4b05-bf9a-601784734fd1.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1063
+        ]
+      }
+    }
+  },
+  {
+    "code": "4lflt2t6gq",
+    "source_number": 40,
+    "subject": "Physics",
+    "chapter": "Electrostatic Potential and Capacitance",
+    "section": "Capacitor with Dielectrics",
+    "question_type": "SingleChoice",
+    "question": "A parallel-plate capacitor with plate area $A$ has separation $d$ between the plates. Two dielectric slabs of dielectric constant $K_1$ and $K_2$ of same area $A/2$ and thickness $d/2$ are inserted in the space between the plates. The capacitance of the capacitor will be given by:\n\\includegraphics[width=472px,height=454px]{17c3e263-bdca-4046-a779-3eff71be2ca0.png}",
+    "options": [
+      "$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{1}{2} + \\frac{K_1 K_2}{K_1 + K_2} \\right)$",
+      "$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{1}{2} + \\frac{K_1 K_2}{2(K_1 + K_2)} \\right)$",
+      "$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{1}{2} + \\frac{K_1 + K_2}{K_1 K_2} \\right)$",
+      "$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{1}{2} + \\frac{2(K_1 + K_2)}{K_1 K_2} \\right)$"
+    ],
+    "images": {
+      "Question": "81fa363d-6b0d-4b3d-b0fb-63a7e5da610e.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1073
+        ]
+      }
+    }
+  },
+  {
+    "code": "udnpg5kfws",
+    "source_number": 41,
+    "subject": "Physics",
+    "chapter": "Motion in a Plane",
+    "section": "Relative Motion",
+    "question_type": "SingleChoice",
+    "question": "A bomb is dropped by fighter plane flying horizontally. To an observer sitting in the plane, the trajectory of the bomb is a :",
+    "options": [
+      "hyperbola",
+      "parabola in the direction of motion of plane",
+      "straight line vertically down the plane",
+      "parabola in a direction opposite to the motion of plane"
+    ],
+    "images": {
+      "Question": "2fad1094-8ebe-4abd-b433-35849092be4d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          508
+        ]
+      }
+    }
+  },
+  {
+    "code": "zqdjrsgphk",
+    "source_number": 42,
+    "subject": "Physics",
+    "chapter": "Nuclei",
+    "section": "Radioactive Decay Chains",
+    "question_type": "SingleChoice",
+    "question": "At time $t = 0$, a material is composed of two radioactive atoms A and B, where $N_A(0) = 2 \\, N_B(0)$. The decay constant of both kind of radioactive atoms is $\\lambda$. However, A disintegrates to B and B disintegrates to C. Which of the following figures represents the evolution of $N_B(t)/N_B(0)$ with respect to time $t$ ? $\\begin{aligned} N_A(0) &= No. of A atoms at t = 0 \\\\ N_B(0) &= No. of B atoms at t = 0 \\end{aligned}$",
+    "options": [
+      "\\includegraphics[width=575px,height=516px]{43107ab0-c12f-4d87-a3d4-3a83de9e6b5a.png}",
+      "\\includegraphics[width=618px,height=459px]{3767696b-af69-4508-a4f0-a66059539020.png}",
+      "\\includegraphics[width=666px,height=507px]{e769daa9-cda0-4da9-a51c-b39a4522e53b.png}",
+      "\\includegraphics[width=592px,height=465px]{721b1f63-5e27-4b7c-95ad-710ec2942510.png}"
+    ],
+    "images": {
+      "Question": "d9e81c0a-c32a-47f3-a93b-503e42adc15b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          2464
+        ]
+      }
+    }
+  },
+  {
+    "code": "ol5dc7faep",
+    "source_number": 43,
+    "subject": "Physics",
+    "chapter": "Communication Systems",
+    "section": "Line of Sight Communication",
+    "question_type": "SingleChoice",
+    "question": "A transmitting antenna at top of a tower has a height of 50 m and the height of receiving antenna is 80 m.\nWhat is range of communication for Line of Sight (LoS) mode ?\n[use radius of earth = 6400 km ]",
+    "options": [
+      "45.5 km",
+      "80.2 km",
+      "144.1 km",
+      "57.28 km"
+    ],
+    "images": {
+      "Question": "e47899e7-cfb4-4c14-9abc-a087eca7ac7f.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          597
+        ]
+      }
+    }
+  },
+  {
+    "code": "teetpeed33",
+    "source_number": 44,
+    "subject": "Physics",
+    "chapter": "Thermodynamics",
+    "section": "Heat Engines, Carnot Cycle & Second Law",
+    "question_type": "SingleChoice",
+    "question": "A refrigerator consumes an average $35 \\, \\mathrm{W}$ power to operate between temperature $-10^\\circ \\mathrm{C}$ to $25^\\circ \\mathrm{C}$. If there is no loss of energy then how much average heat per second does it transfer?",
+    "options": [
+      "$263 \\, \\mathrm{J/s}$",
+      "$298 \\, \\mathrm{J/s}$",
+      "$350 \\, \\mathrm{J/s}$",
+      "$35 \\, \\mathrm{J/s}$"
+    ],
+    "images": {
+      "Question": "25b0a2f7-9810-42f6-9d02-e5b51037f8a2.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          968,
+          94
+        ]
+      }
+    }
+  },
+  {
+    "code": "cpi225ux2p",
+    "source_number": 45,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "section": "Power and Resistance",
+    "question_type": "SingleChoice",
+    "question": "An electric bulb of 500 watt at 100 volt is used in a circuit having a 200 V supply. Calculate the resistance R to be connected in series with the bulb so that the power delivered by the bulb is 500 W.",
+    "options": [
+      "20$\\Omega$",
+      "30$\\Omega$",
+      "5$\\Omega$",
+      "10$\\Omega$"
+    ],
+    "images": {
+      "Question": "3f0da07a-2d03-40f8-bc0e-af93e9b9f355.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          531
+        ]
+      }
+    }
+  },
+  {
+    "code": "nop42bdkel",
+    "source_number": 46,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "section": "Logic Gate Circuits",
+    "question_type": "SingleChoice",
+    "question": "Four NOR gates are connected as shown in figure.\nThe truth table for the given figure is :\n\\includegraphics[width=652px,height=250px]{1b26aa19-9580-494d-9354-a7a49b2841d9.png}",
+    "options": [
+      "\\includegraphics[width=186px,height=253px]{390b46d6-fde3-4c6c-970d-c04a68336986.png}",
+      "\\includegraphics[width=193px,height=265px]{f9db6b49-f8fe-47f6-8e87-9202782da6bd.png}",
+      "\\includegraphics[width=195px,height=280px]{55fbeda0-e04e-41a2-9e4b-b2888d675723.png}",
+      "\\includegraphics[width=187px,height=264px]{3b6c03c8-b1b7-4659-a1f4-5b7fae5458c6.png}"
+    ],
+    "images": {
+      "Question": "ee3c2d0d-36b4-4528-85c1-29fe62503c4b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1984
+        ]
+      }
+    }
+  },
+  {
+    "code": "wguvrffmzs",
+    "source_number": 47,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "section": "Circuit Analysis",
+    "question_type": "SingleChoice",
+    "question": "Match List-I with List-II. \\includegraphics[width=1165px,height=285px]{1ef355e1-ba61-46cc-b62f-11f8e369cdb4.png} Choose the most appropriate answer from the options given below:",
+    "options": [
+      "$(a)-(ii), (b)-(iv), (c)-(i), (d)-(iii)$",
+      "$(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)$",
+      "$(a)-(iii), (b)-(ii), (c)-(iv), (d)-(i)$",
+      "$(a)-(iii), (b)-(i), (c)-(iv), (d)-(ii)$"
+    ],
+    "images": {
+      "Question": "df629702-ee52-404c-b7e9-c14a8d851135.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          897
+        ]
+      }
+    }
+  },
+  {
+    "code": "p7pm2qbqk5",
+    "source_number": 48,
+    "subject": "Physics",
+    "chapter": "Alternating Current",
+    "section": "AC Circuit Analysis",
+    "question_type": "SingleChoice",
+    "question": "In the given circuit the AC source has $\\omega = 100 \\, \\mathrm{rads}^{-1}$. Considering the inductor and capacitor to be ideal, what will be the current $I$ flowing through the circuit?\n\\includegraphics[width=687px,height=481px]{1c4b3f69-c833-4c71-9c25-163292f3842e.png}",
+    "options": [
+      "5.9 $\\mathrm{A}$",
+      "4.24 $\\mathrm{A}$",
+      "0.94 $\\mathrm{A}$",
+      "6 $\\mathrm{A}$"
+    ],
+    "images": {
+      "Question": "1f971f13-bee0-4d3b-ba51-c06cee124b82.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1021
+        ]
+      }
+    }
+  },
+  {
+    "code": "4gxqgbwjfc",
+    "source_number": 49,
+    "subject": "Physics",
+    "chapter": "Mathematics in Physics",
+    "section": "Pendulum Clocks",
+    "question_type": "SingleChoice",
+    "question": "If the length of the pendulum in pendulum clock increases by 0.1$\\%$, then the error in time per day is",
+    "options": [
+      "$86.4 \\, \\mathrm{s}$",
+      "$4.32 \\, \\mathrm{s}$",
+      "$43.2 \\, \\mathrm{s}$",
+      "$8.64 \\, \\mathrm{s}$"
+    ],
+    "images": {
+      "Question": "e3515d8d-a4a8-4a8b-98f8-5ee570b73e51.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          464
+        ]
+      }
+    }
+  },
+  {
+    "code": "5dpfroiy3a",
+    "source_number": 50,
+    "subject": "Physics",
+    "chapter": "Mechanical Properties of Solids",
+    "section": "Stress and Strain",
+    "question_type": "SingleChoice",
+    "question": "Two blocks of masses 3 kg and 5 kg are connected by a metal wire going over a smooth pulley. The breaking stress of the metal is $\\frac{24}{\\pi} \\times 10^2 \\, \\mathrm{Nm}^{-2}$. What is the minimum radius of the wire? (Take $g = 10 \\, \\mathrm{ms}^{-2}$)\n\\includegraphics[width=327px,height=486px]{f91c906d-42f3-47e7-8eac-359c1a155c1b.png}",
+    "options": [
+      "125 cm",
+      "1250 cm",
+      "12.5 cm",
+      "1.25 cm"
+    ],
+    "images": {
+      "Question": "8607e74e-e8ac-43a6-85a6-b47aa56933cb.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          970
+        ]
+      }
+    }
+  },
+  {
+    "code": "xc64pkrjpt",
+    "source_number": 51,
+    "subject": "Physics",
+    "chapter": "Waves",
+    "section": "Wave Superposition",
+    "question_type": "Numerical",
+    "question": "Two waves are simultaneously passing through a string and their equations are : $$y_1 = A_1 \\sin k(x - vt), y_2 = A_2 \\sin k(x - vt + x_0)$$. Given amplitudes $A_1 = 12 \\, \\mathrm{mm}$ and $A_2 = 5 \\, \\mathrm{mm}$ $x_0 = 3.5 \\, \\mathrm{cm}$ and wave number $k = 6.28 \\, \\mathrm{cm}^{-1}$. The amplitude of resulting wave will be mm",
+    "options": [],
+    "images": {
+      "Question": "2ee9d338-75dc-4146-a38e-e0bffc60595e.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          318
+        ]
+      }
+    }
+  },
+  {
+    "code": "xsxrsjpwn3",
+    "source_number": 52,
+    "subject": "Physics",
+    "chapter": "Wave Optics",
+    "section": "Polarisation",
+    "question_type": "Numerical",
+    "question": "A source of light is placed in front of a screen. Intensity of light on the screen is I. Two Polaroids $P_1$ and $P_2$ are so placed in between the source of light and screen that the intensity of light on screen is $I/2$. $P_2$ should be rotated by an angle of (degrees) so that the intensity of light on the screen becomes $\\frac{3I}{8}$.",
+    "options": [],
+    "images": {
+      "Question": "f84950d9-2947-4741-bcfe-833f59068e67.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          324
+        ]
+      }
+    }
+  },
+  {
+    "code": "wkrc7gi2wa",
+    "source_number": 53,
+    "subject": "Physics",
+    "chapter": "Moving Charges and Magnetism",
+    "section": "Cyclotron Motion",
+    "question_type": "Numerical",
+    "question": "If the maximum value of accelerating potential provided by a radio frequency oscillator is $12\\ \\mathrm{kV}$, the number of revolutions made by a proton in a cyclotron to achieve one sixth of the speed of light is $m_{p}=1.67\\times10^{-27}\\ \\mathrm{kg}$ $e=1.6\\times10^{-19}\\ \\mathrm{C}$ Speed of light $=3\\times10^{8}\\ \\mathrm{m/s}$",
+    "options": [],
+    "images": {
+      "Question": "b7735b44-060c-4d2f-9a0e-4e3f1d6ddd88.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          496
+        ]
+      }
+    }
+  },
+  {
+    "code": "5cfhcliee5",
+    "source_number": 54,
+    "subject": "Physics",
+    "chapter": "Oscillations",
+    "section": "Pendulum Energy Estimation",
+    "question_type": "FIB",
+    "question": "The acceleration due to gravity is found upto an accuracy of 4$\\%$ on a planet. The energy supplied to a simple pendulum to known mass 'm' to undertake oscillations of time period $T$ is being estimated. If time period is measured to an accuracy of 3$\\%$, the accuracy to which $E$ is known as ..........%",
+    "options": [],
+    "images": {
+      "Question": "98ad645e-4720-4f1f-86b5-843415f4ddc2.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          313
+        ]
+      }
+    }
+  },
+  {
+    "code": "ngmuaasxoi",
+    "source_number": 55,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Induction",
+    "section": "Induced EMF Calculation",
+    "question_type": "Numerical",
+    "question": "A circular coil of radius $8.0\\,\\mathrm{cm}$ and $20$ turns is rotated about its vertical diameter with an angular speed of $50\\,\\mathrm{rad\\,s}^{-1}$ in a uniform horizontal magnetic field of $3.0 \\times 10^{-2}\\,\\mathrm{T}$. The maximum emf induced in the coil will be $\\ldots \\times 10^{-2}\\,\\mathrm{volt}$ (rounded off to the nearest integer).",
+    "options": [],
+    "images": {
+      "Question": "017c5b34-80e3-4d41-8986-f4dbf24a21cb.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          314
+        ]
+      }
+    }
+  },
+  {
+    "code": "7hx46lw3ud",
+    "source_number": 56,
+    "subject": "Physics",
+    "chapter": "Oscillations",
+    "section": "Amplitude Comparison",
+    "question_type": "Numerical",
+    "question": "Two simple harmonic motions are represented by the equations $$x_1 = 5 \\sin \\left( 2\\pi t + \\frac{\\pi}{4} \\right)$$ and $$x_2 = 5\\sqrt{2}(\\sin 2\\pi t - \\cos 2\\pi t)$$ The amplitude of second motion is times the amplitude in first motion.",
+    "options": [],
+    "images": {
+      "Question": "41adadab-7603-4e02-91ac-9bc349857fcc.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          424
+        ]
+      }
+    }
+  },
+  {
+    "code": "5lhx4nlzj3",
+    "source_number": 57,
+    "subject": "Physics",
+    "chapter": "Moving Charges and Magnetism",
+    "section": "Magnetic Torque",
+    "question_type": "Numerical",
+    "question": "A coil in the shape of an equilateral triangle of side 10 cm lies in a vertical plane between the pole pieces of permanent magnet producing a horizontal magnetic field 20 $\\mathrm{mT}$. The torque acting on the coil when a current of 0.2 $\\mathrm{A}$ is passed through it and its plane becomes parallel to the magnetic field will be $\\sqrt{x} \\times 10^{-5}$ $\\mathrm{Nm}$. The value of $x$ is.",
+    "options": [],
+    "images": {
+      "Question": "091d40fe-f08f-4ae5-8c2d-27cfebe46ffa.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          381
+        ]
+      }
+    }
+  },
+  {
+    "code": "qwklklkqf5",
+    "source_number": 58,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "section": "Zener Diode Circuits",
+    "question_type": "Numerical",
+    "question": "For the given circuit, the power across zener diode is mW\n\\includegraphics[width=749px,height=286px]{dd81e184-ecb7-46b8-8b37-0b5e0e1edcc1.png}",
+    "options": [],
+    "images": {
+      "Question": "73d575af-2d72-4843-bf60-a9adfe113916.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          490
+        ]
+      }
+    }
+  },
+  {
+    "code": "ann75ql2xr",
+    "source_number": 59,
+    "subject": "Physics",
+    "chapter": "Ray Optics and Optical Instruments",
+    "section": "Lens and Mirror Combination",
+    "question_type": "Numerical",
+    "question": "An object is placed at a distance of 12 cm from a convex lens. A convex mirror of focal length 15 cm is placed on other side of lens at 8 cm as shown in the figure. Image of object coincides with the object. When the convex mirror is removed, a real and inverted image is formed at a position. The distance of the image from the object will be (cm)\n\\includegraphics[width=741px,height=237px]{04134eaa-d645-4dce-9c5f-6a9e9429e539.png}",
+    "options": [],
+    "images": {
+      "Question": "fdd99730-1325-4dc3-908e-1c67e72bfa5d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          695
+        ]
+      }
+    }
+  },
+  {
+    "code": "fzk4ko4vvu",
+    "source_number": 60,
+    "subject": "Physics",
+    "chapter": "Laws of Motion",
+    "section": "Static Friction",
+    "question_type": "Numerical",
+    "question": "The coefficient of static friction between two blocks is 0.5 and the table is smooth. The maximum horizontal force that can be applied to move the blocks together is $\\ldots$$\\ldots$ N. (take $g = 10 \\, \\mathrm{ms}^{-2}$)\n\\includegraphics[width=573px,height=221px]{41042f0d-eeaf-4b8b-bbbc-9d74158949db.png}",
+    "options": [],
+    "images": {
+      "Question": "1ca30cae-5198-467f-bdae-8aeeec4f818e.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          470
+        ]
+      }
+    }
+  },
+  {
+    "code": "qfreqmqrpf",
+    "source_number": 61,
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "section": "Phenol Reactions",
+    "question_type": "SingleChoice",
+    "question": "Which one of the following phenols does not give colour when condensed with phthalic anhydride in presence of conc. $\\mathrm{H_2SO_4}$ ?",
+    "options": [
+      "\\includegraphics[width=776px,height=536px]{9517ad1e-2374-45dc-affb-bbef31eb049b.png}",
+      "\\includegraphics[width=123px,height=233px]{19e34e3b-e191-4833-8eb4-4e47b2f6ed3e.png}",
+      "\\includegraphics[width=194px,height=181px]{5662a711-f8a6-48cc-b430-bed1cdafb95f.png}",
+      "\\includegraphics[width=192px,height=192px]{09244895-d220-4235-bbb0-ff9c67897f17.png}"
+    ],
+    "images": {
+      "Question": "07abc2be-03de-45be-97db-5d657bc7071c.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1128
+        ]
+      }
+    }
+  },
+  {
+    "code": "o64zsd7lxw",
+    "source_number": 62,
+    "subject": "Chemistry",
+    "chapter": "Environmental Chemistry",
+    "section": "Photochemical Smog",
+    "question_type": "SingleChoice",
+    "question": "Given below are two statements : one is labelled as Assertion $(A)$ and the other is labelled as Reason $(R)$. Assertion $(A)$ : Photochemical smog causes cracking of rubber. Reason $(R)$ : Presence of ozone, nitric oxide, acrolein, formaldehyde and peroxyacetyl nitrate in photochemical smog makes it oxidizing. Choose the most appropriate answer from the options given below :",
+    "options": [
+      "Both $(A)$ and $(R)$ are true but $(R)$ is not the true explanation of $(A)$",
+      "$(A)$ is false but $(R)$ is true.",
+      "$(A)$ is true but $(R)$ is false",
+      "Both $(A)$ and $(R)$ are true and $(R)$ is the true explanation of $(A)$"
+    ],
+    "images": {
+      "Question": "29f85271-2efa-4120-9de9-3ef4cabb71d8.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          730
+        ]
+      }
+    }
+  },
+  {
+    "code": "eafy6irgs3",
+    "source_number": 63,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "section": "Intermolecular Forces",
+    "question_type": "SingleChoice",
+    "question": "The interaction energy of London forces between two particles is proportional to $r^x$, where $r$ is the distance between the particles. The value of $x$ is :",
+    "options": [
+      "3",
+      "-3",
+      "-6",
+      "6"
+    ],
+    "images": {
+      "Question": "38d2acbe-5fc4-42a5-b18d-466298578c79.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          529
+        ]
+      }
+    }
+  },
+  {
+    "code": "5577d5e46g",
+    "source_number": 64,
+    "subject": "Chemistry",
+    "chapter": "The p-Block Elements (Group 15, 16, 17 & 18)",
+    "section": "Hydrolysis Reactions",
+    "question_type": "SingleChoice",
+    "question": "The number of non-ionisable hydrogen atoms present in the final product obtained from the hydrolysis of $\\mathrm{PCl}_5$ is :",
+    "options": [
+      "0",
+      "2",
+      "1",
+      "3"
+    ],
+    "images": {
+      "Question": "ffaea9d6-c03a-4678-a38d-dc8aef00220a.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          509
+        ]
+      }
+    }
+  },
+  {
+    "code": "raizsizqog",
+    "source_number": 65,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "section": "Molecular Orbital Theory",
+    "question_type": "SingleChoice",
+    "question": "The bond order and magnetic behaviour of $\\mathrm{O}_2^{-}$ ion are, respectively:",
+    "options": [
+      "1.5 and paramagnetic",
+      "1.5 and diamagnetic",
+      "2 and diamagnetic",
+      "1 and paramagnetic"
+    ],
+    "images": {
+      "Question": "acec1a00-36f8-4632-acf8-28966147ab71.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          462
+        ]
+      }
+    }
+  },
+  {
+    "code": "ydiegolcru",
+    "source_number": 66,
+    "subject": "Chemistry",
+    "chapter": "Biomolecules",
+    "section": "Disaccharides",
+    "question_type": "SingleChoice",
+    "question": "Given below are two statements: one is labelled as Assertion $(A)$ and other is labelled as Reason $(R)$. Assertion $(A)$: Sucrose is a disaccharide and a non-reducing sugar. Reason $(R)$: Sucrose involves glycosidic linkage between $\\mathrm{C_1}$ of $\\beta$-glucose and $\\mathrm{C_2}$ of $\\alpha$-fructose. Choose the most appropriate answer from the options given below:",
+    "options": [
+      "Both $(A)$ and $(R)$ are true but $(R)$ is not the true explanation of $(A)$",
+      "$(A)$ is false but $(R)$ is true.",
+      "$(A)$ is true but $(R)$ is false",
+      "Both $(A)$ and $(R)$ are true and $(R)$ is the true explanation of $(A)$"
+    ],
+    "images": {
+      "Question": "4243961e-e96a-4d69-92fa-98e11bbca928.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          709
+        ]
+      }
+    }
+  },
+  {
+    "code": "5rztlj6cjg",
+    "source_number": 67,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "Reagent Matching",
+    "question_type": "SingleChoice",
+    "question": "Match List I with List II: List-I (Chemical Reaction) List-II (Reagent used) \\includegraphics[width=741px,height=429px]{2e906c5d-366a-48e3-bce1-1780a49063cf.png} Choose the most appropriate match:",
+    "options": [
+      "a - ii, b - iv, c - iii, d - i",
+      "a - iv, b - ii, c - iii, d - i",
+      "a - ii, b - iii, c - iv, d - i",
+      "a - iii, b - ii, c - i, d - iv"
+    ],
+    "images": {
+      "Question": "61404684-f52d-45c7-9efd-c14da60e7c76.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          951
+        ]
+      }
+    }
+  },
+  {
+    "code": "zgemdispaz",
+    "source_number": 68,
+    "subject": "Chemistry",
+    "chapter": "The s-Block Elements",
+    "section": "Solubility and Stability",
+    "question_type": "SingleChoice",
+    "question": "Given below are two statements : one is labelled as Assertion $(\\mathbf{A})$ and the other is labelled as Reason $(\\mathbf{R})$. Assertion $(\\mathbf{A})$: Barium carbonate is insoluble in water and is highly stable. Reason $(\\mathbf{R})$: The thermal stability of the carbonates increases with increasing cationic size.",
+    "options": [
+      "Both $(\\mathbf{A})$ and $(\\mathbf{R})$ are true but $(\\mathbf{R})$ is the true explanation of $(\\mathbf{A})$",
+      "$(\\mathbf{A})$ is true but $(\\mathbf{R})$ is false",
+      "Both $(\\mathbf{A})$ and $(\\mathbf{R})$ are true and $(\\mathbf{R})$ is not the true explanation of $(\\mathbf{A})$",
+      "$(\\mathbf{A})$ is false but $(\\mathbf{R})$ is true"
+    ],
+    "images": {
+      "Question": "1d1dcd64-7d95-4604-91bb-98e52f1a22b5.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          597
+        ]
+      }
+    }
+  },
+  {
+    "code": "bzftjh4ij6",
+    "source_number": 69,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "Organic Reaction Products",
+    "question_type": "SingleChoice",
+    "question": "\\includegraphics[width=372px,height=138px]{4ba1ff78-3123-4d7c-927c-de1818f53bd2.png}The major product in the above reaction is:",
+    "options": [
+      "\\includegraphics[width=166px,height=128px]{5e8e82cd-c7ae-4e20-8136-876a98f71852.png}",
+      "\\includegraphics[width=192px,height=136px]{472ad0ac-2b21-4237-8c49-60f9c0d38f02.png}",
+      "\\includegraphics[width=176px,height=135px]{df24dd8d-b8d0-4ef4-a389-de839605be4a.png}",
+      "\\includegraphics[width=140px,height=136px]{b316bb84-a7fe-44aa-adf0-d8c40ad60845.png}"
+    ],
+    "images": {
+      "Question": "eb82f213-4e73-4d55-bd40-a2dc46d5ed51.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          295,
+          277
+        ]
+      }
+    }
+  },
+  {
+    "code": "6ylbqhnmc5",
+    "source_number": 70,
+    "subject": "Chemistry",
+    "chapter": "Co-ordination Compounds",
+    "section": "Geometrical Isomerism",
+    "question_type": "SingleChoice",
+    "question": "Indicate the complex/complex ion which did not show any geometrical isomerism:",
+    "options": [
+      "$[CoCl_2(en)_2]$",
+      "$[Co(CN)_5(NC)]^{3-}$",
+      "$[Co(NH_3)_3(NO_2)_3]$",
+      "$[Co(NH_3)_4Cl_2]^+$"
+    ],
+    "images": {
+      "Question": "52d825a8-c8c9-4e6e-b18f-05631d36fc2e.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          472
+        ]
+      }
+    }
+  },
+  {
+    "code": "zekn65icsh",
+    "source_number": 71,
+    "subject": "Chemistry",
+    "chapter": "Surface Chemistry",
+    "section": "Colloidal Solutions",
+    "question_type": "SingleChoice",
+    "question": "The sol given below with negatively charged colloidal particles is :",
+    "options": [
+      "$\\mathrm{FeCl}_3$ added to hot water",
+      "$\\mathrm{KI}$ added to $\\mathrm{AgNO}_3$ solution",
+      "$\\mathrm{AgNO}_3$ added to $\\mathrm{KI}$ solution",
+      "$\\mathrm{Al}_2\\mathrm{O}_3 \\cdot x\\mathrm{H}_2\\mathrm{O}$ in water"
+    ],
+    "images": {
+      "Question": "76629195-dea5-4031-a57b-751303c8ab4f.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          468
+        ]
+      }
+    }
+  },
+  {
+    "code": "sw26oeep55",
+    "source_number": 72,
+    "subject": "Chemistry",
+    "chapter": "General Principles and Processes of Isolation of Elements",
+    "section": "Froth Flotation Method",
+    "question_type": "SingleChoice",
+    "question": "Given below are two statements : Statement I : Sphalerite is a sulphide ore of zinc and copper glance is a sulphide ore of copper. Statement II : It is possible to separate two sulphide ores by adjusting proportion of oil to water or by using 'depressants' in a froth flotation method. Choose the most appropriate answer from the options given below :",
+    "options": [
+      "Statement I is true but Statement II is false.",
+      "Both Statement I and Statement II are true.",
+      "Statement I is false but Statement II is true.",
+      "Both Statement I and Statement II are false."
+    ],
+    "images": {
+      "Question": "3b908a10-237a-41b7-a089-5a73b9c5ded8.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          702
+        ]
+      }
+    }
+  },
+  {
+    "code": "5md4uyfwue",
+    "source_number": 73,
+    "subject": "Chemistry",
+    "chapter": "Hydrogen",
+    "section": "Reaction Mechanisms",
+    "question_type": "SingleChoice",
+    "question": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R). Assertion (A) : Heavy water is used for the study of reaction mechanism. Reason (R): The rate of reaction for the cleavage of O - H bond is slower than that of O - D bond. Choose the most appropriate answer from the options given below :",
+    "options": [
+      "Both (A) and (R) are true but (R) is not the true explanation of (A).",
+      "Both (A) and (R) are true and (R) is the true explanation of (A).",
+      "is false but (R) is true.",
+      "is true but (R) is false."
+    ],
+    "images": {
+      "Question": "b07ac004-c22b-444b-a5ff-ac3423c572f6.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          664
+        ]
+      }
+    }
+  },
+  {
+    "code": "3hkig7nszp",
+    "source_number": 74,
+    "subject": "Chemistry",
+    "chapter": "Co-ordination Compounds",
+    "section": "Crystal Field Theory",
+    "question_type": "SingleChoice",
+    "question": "Arrange the following Cobalt complexes in the order of increasing Crystal Field Stabilization Energy (CFSE) value. Complexes : \\[\n\\begin{aligned}\nA &= [\\mathrm{CoF}_6]^{3-} \\\\\nB &= [\\mathrm{Co(H_2O)}_6]^{2+} \\\\\nC &= [\\mathrm{Co(NH_3)}_6]^{3+} \\\\\nD &= [\\mathrm{Co(en)}_3]^{3+}\n\\end{aligned}\n\\] Therefore, the correct order is:",
+    "options": [
+      "A < B < C < D",
+      "B < A < C < D",
+      "B < C < D < A",
+      "C < D < B < A"
+    ],
+    "images": {
+      "Question": "11ccf865-2354-41fa-a27d-50569b098cd3.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          728
+        ]
+      }
+    }
+  },
+  {
+    "code": "ynyzypuxtc",
+    "source_number": 75,
+    "subject": "Chemistry",
+    "chapter": "Chemistry in Everyday Life",
+    "section": "Drug Classification",
+    "question_type": "SingleChoice",
+    "question": "The class of drug to which chlordiazepoxide with above structure belongs is :\n\\includegraphics[width=587px,height=508px]{8ad30214-433d-4a7e-aef0-5559bf74531f.png}",
+    "options": [
+      "Antacid",
+      "Analgesic",
+      "Tranquilizer",
+      "Antibiotic"
+    ],
+    "images": {
+      "Question": "1039e21d-7d34-46ad-bc32-2d694d58c60b.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1037
+        ]
+      }
+    }
+  },
+  {
+    "code": "7okygrn5a3",
+    "source_number": 76,
+    "subject": "Chemistry",
+    "chapter": "Classification of Elements and Periodicity in Properties",
+    "section": "Periodic Table Groups",
+    "question_type": "SingleChoice",
+    "question": "Chalcogen group elements are :",
+    "options": [
+      "Se, Tb and Pu.",
+      "Se, TeTe and Po.",
+      "S, Te and Pm.",
+      "O, Ti and Po."
+    ],
+    "images": {
+      "Question": "ea9ecfb0-9cd2-4dd2-bd8f-8bed5a89b127.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          464
+        ]
+      }
+    }
+  },
+  {
+    "code": "hqflsbnypa",
+    "source_number": 77,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "Aromaticity",
+    "question_type": "SingleChoice",
+    "question": "Which one of the following compounds is not aromatic ?",
+    "options": [
+      "\\includegraphics[width=468px,height=600px]{c5540782-01e0-4a24-b97d-11c3d2155361.png}",
+      "\\includegraphics[width=412px,height=576px]{f9bea0b4-db10-4014-99ad-03b704966a7a.png}",
+      "\\includegraphics[width=476px,height=492px]{33f861bd-1886-463d-8432-312dcdf92220.png}",
+      "\\includegraphics[width=944px,height=624px]{ad0092c3-59a3-4655-8fc9-c1d68fd9ce11.png}"
+    ],
+    "images": {
+      "Question": "57688beb-36f4-45f8-a9e5-01dc6cdaaeca.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          884
+        ]
+      }
+    }
+  },
+  {
+    "code": "42ponxpyz6",
+    "source_number": 78,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "Stereochemistry",
+    "question_type": "SingleChoice",
+    "question": "The number of stereoisomers possible for 1,2 dimethyl cyclopropane is:",
+    "options": [
+      "One",
+      "Four",
+      "Two",
+      "Three"
+    ],
+    "images": {
+      "Question": "f9c381c6-5fa4-4692-90e8-1a3622049683.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          462
+        ]
+      }
+    }
+  },
+  {
+    "code": "vwpix4vwir",
+    "source_number": 79,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "Organic Reaction Mechanisms",
+    "question_type": "SingleChoice",
+    "question": "Consider the given reaction, Identify 'X' and 'Y':\n\\includegraphics[width=637px,height=276px]{ae9af8ed-3fa6-4b00-94d8-b684961d6308.png}",
+    "options": [
+      "\\includegraphics[width=507px,height=134px]{56dc52f5-6ce0-466b-a1c1-b89e1647b3be.png}",
+      "\\includegraphics[width=527px,height=147px]{f2ea1e04-9920-4fe2-9ee9-b59ae14a8741.png}",
+      "\\includegraphics[width=530px,height=143px]{deeb579a-7baa-4c0a-8588-d1ac514b3a7b.png}",
+      "\\includegraphics[width=496px,height=136px]{c4fe2e44-d8bf-4b2e-872a-8f481b740642.png}"
+    ],
+    "images": {
+      "Question": "8199020b-66c6-4a0d-99f1-600b8554f996.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1420
+        ]
+      }
+    }
+  },
+  {
+    "code": "jdmh7nwj6t",
+    "source_number": 80,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "Organic Reaction Mechanisms",
+    "question_type": "SingleChoice",
+    "question": "Consider the given reaction, the product A is:\n\\includegraphics[width=700px,height=156px]{441028d2-3908-42e4-be74-6ccf6314bc3c.png}",
+    "options": [
+      "\\includegraphics[width=305px,height=181px]{06e869c1-71b2-4510-93ff-ef42ab5a5f4e.png}",
+      "\\includegraphics[width=355px,height=193px]{26510338-97cf-41f5-8389-6b92fc34f32d.png}",
+      "\\includegraphics[width=281px,height=235px]{d65deafb-26d5-4e58-8356-e0eda7af94cd.png}",
+      "\\includegraphics[width=280px,height=171px]{372a3535-9f64-4a19-bde1-88b3c0a1daf0.png}"
+    ],
+    "images": {
+      "Question": "3c1858b7-8b16-458c-bc0b-781cbf144449.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          1426
+        ]
+      }
+    }
+  },
+  {
+    "code": "u3h4eqilth",
+    "source_number": 81,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "Sulphur Estimation",
+    "question_type": "Numerical",
+    "question": "In the sulphur estimation, 0.471 g of an organic compound gave 1.44 g of barium sulphate. The percentage of sulphur in the compound is ____ $\\%$. (Nearest integer) (Atomic Mass of Ba = 137 u)",
+    "options": [],
+    "images": {
+      "Question": "d040f8fd-ff7f-4333-adc2-8e48ea2abdd8.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          381
+        ]
+      }
+    }
+  },
+  {
+    "code": "hpkps57lko",
+    "source_number": 82,
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "section": "Equilibrium Calculations",
+    "question_type": "Numerical",
+    "question": "The equilibrium constant $K_c$ at 298 K for the reaction $\\mathrm{A} + \\mathrm{B} \\rightleftharpoons \\mathrm{C} + \\mathrm{D}$ is 100. Starting with an equimolar solution with concentrations of $\\mathrm{A}$, $\\mathrm{B}$, $\\mathrm{C}$ and $\\mathrm{D}$ all equal to 1 M, the equilibrium concentration of $\\mathrm{D}$ is ___ $\\times 10^{-2}$ M. (Nearest integer)",
+    "options": [],
+    "images": {
+      "Question": "72267b77-715c-4bf5-9211-2c4a93fda2b8.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          314
+        ]
+      }
+    }
+  },
+  {
+    "code": "zbgk3atmv7",
+    "source_number": 83,
+    "subject": "Chemistry",
+    "chapter": "Thermodynamics",
+    "section": "Enthalpy and Internal Energy",
+    "question_type": "Numerical",
+    "question": "For water $\\Delta_{vap} H = 41 \\, \\mathrm{kJ \\, mol^{-1}}$ at $373 \\, \\mathrm{K}$ and $1 \\, \\mathrm{bar}$ pressure. Assuming that water vapour is an ideal gas that occupies a much larger volume than liquid water, the internal energy change during evaporation of water is ____ $\\mathrm{kJ \\, mol^{-1}}$ [ Use : $R = 8.3 \\, \\mathrm{J \\, mol^{-1} \\, K^{-1}}$ ]",
+    "options": [],
+    "images": {
+      "Question": "8d104787-35f9-4aff-9a6c-bf27dd00f166.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          394
+        ]
+      }
+    }
+  },
+  {
+    "code": "c3yqdbmuqq",
+    "source_number": 84,
+    "subject": "Chemistry",
+    "chapter": "Structure of Atom",
+    "section": "Photoelectric Effect",
+    "question_type": "Numerical",
+    "question": "A metal surface is exposed to $500\\,\\mathrm{nm}$ radiation. The threshold frequency of the metal for photoelectric current is $4.3 \\times 10^{14}\\,\\mathrm{Hz}$. The velocity of ejected electron is ____ $\\times 10^5\\,\\mathrm{ms}^{-1}$. (Nearest integer) (Given: $h = 6.63 \\times 10^{-34}\\,\\mathrm{Js}$, $m_e = 9.0 \\times 10^{-31}\\,\\mathrm{kg}$)",
+    "options": [],
+    "images": {
+      "Question": "3e9dcd46-e22b-418f-aede-ed74ecf1d825.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          318
+        ]
+      }
+    }
+  },
+  {
+    "code": "3bvoliy5cp",
+    "source_number": 85,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "section": "Nernst Equation Application",
+    "question_type": "Numerical",
+    "question": "For the galvanic cell, $$\\text{Zn(s)} + \\text{Cu}^{2+}(0.02\\text{M}) \\rightarrow \\text{Zn}^{2+}(0.04\\text{M}) + \\text{Cu(s),}$$ $$E_{\\text{cell}} = \\ldots \\times 10^{-2} \\ \\text{V.} \\ ( \\text{Nearest integer} )$$ $$\\left[ \\text{Use}: E^0_{\\text{Cu/Cu}^{2+}} = -0.34 \\ \\text{V}, \\quad E^0_{\\text{Zn/Zn}^{2+}} = +0.76 \\ \\text{V} \\right.$$ $$\\left. \\frac{2.303RT}{F} = 0.059 \\ \\text{V} \\right]$$",
+    "options": [],
+    "images": {
+      "Question": "a10dfd2c-55ea-468e-90db-a645b219adea.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          462
+        ]
+      }
+    }
+  },
+  {
+    "code": "2ilfcv3ph6",
+    "source_number": 86,
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "section": "Molarity Calculation",
+    "question_type": "Numerical",
+    "question": "100 $\\mathrm{mL}$ of $\\mathrm{Na_3PO_4}$ solution contains 3.45 $\\mathrm{g}$ of sodium. The molarity of the solution is ____ $\\times$ $10^{-2}$ $\\mathrm{mol \\, L^{-1}}$. (Nearest integer) [Atomic Masses - Na : 23.0 $\\mathrm{u}$, O : 16.0 $\\mathrm{u}$, P : 31.0 $\\mathrm{u}$]",
+    "options": [],
+    "images": {
+      "Question": "a216177f-a616-4f09-8fc4-679cc9b5d053.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          314
+        ]
+      }
+    }
+  },
+  {
+    "code": "coes7dhwi7",
+    "source_number": 87,
+    "subject": "Chemistry",
+    "chapter": "Co-ordination Compounds",
+    "section": "Stability Constants",
+    "question_type": "Numerical",
+    "question": "The overall stability constant of the complex ion $$[\\mathrm{Cu(NH_3)_4}]^{2+}$$ is $2.1 \\times 10^{13}$. The overall dissociation constant is $y \\times 10^{-14}$. Then $y$ is ____. (Nearest integer)",
+    "options": [],
+    "images": {
+      "Question": "f2ade801-fd43-44bc-a3ce-e27e30f53ff3.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          313
+        ]
+      }
+    }
+  },
+  {
+    "code": "qnzwl7bszb",
+    "source_number": 88,
+    "subject": "Chemistry",
+    "chapter": "Solutions",
+    "section": "Freezing Point Depression",
+    "question_type": "Numerical",
+    "question": "83 g of ethylene glycol is dissolved in 625 g of water. The freezing point of the solution is ____ K. (Nearest integer) [Use: Molal freezing point depression constant of water = $1.86\\ \\mathrm{K\\,kg\\,mol^{-1}}$] Freezing point of water = $273\\ \\mathrm{K}$ Atomic masses: $\\mathrm{C}=12.0\\,\\mathrm{u}$, $\\mathrm{O}=16.0\\,\\mathrm{u}$, $\\mathrm{H}=1.0\\,\\mathrm{u}$",
+    "options": [],
+    "images": {
+      "Question": "333bed43-e32b-4cb2-9613-5e58c88dd3d5.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          449
+        ]
+      }
+    }
+  },
+  {
+    "code": "d2clelziii",
+    "source_number": 89,
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "section": "Reaction Rates",
+    "question_type": "FIB",
+    "question": "The reaction rate for the reaction $\\mathrm{[PtCl_4]^{2-} + H_2O \\rightleftharpoons [Pt(H_2O)Cl_3]^- + Cl^-}$ was measured as a function of the concentrations of different species. It was observed that $-\\dfrac{d[\\mathrm{PtCl_4}^{2-}]}{dt}=4.8\\times10^{-5}[\\mathrm{PtCl_4}^{2-}]-2.4\\times10^{-3}[\\mathrm{Pt(H_2O)Cl_3}^{-}][\\mathrm{Cl^-}]$ where square brackets denote molar concentrations. The equilibrium constant, $K_c=$ _____ (Round off to the nearest integer.)",
+    "options": [],
+    "images": {
+      "Question": "5bc58cef-442a-4849-8cf7-b2e242e3498d.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          600
+        ]
+      }
+    }
+  },
+  {
+    "code": "54mj4xqoar",
+    "source_number": 90,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "Molecular Formula Determination",
+    "question_type": "Numerical",
+    "question": "A chloro compound \"A\".\n(i) forms aldehydes on ozonolysis followed by the hydrolysis.\n(ii) when vaporized completely 1.53 g of A, gives 448 $\\mathrm{mL}$ of vapour at STP.\nThe number of carbon atoms in a molecule of compound A is ____.",
+    "options": [],
+    "images": {
+      "Question": "cd909499-e53b-4d5a-b8f8-e02fe519e6ba.png",
+      "Fundamentals": "",
+      "Sizes": {
+        "Question": [
+          1503,
+          380
+        ]
+      }
+    }
+  }
+]

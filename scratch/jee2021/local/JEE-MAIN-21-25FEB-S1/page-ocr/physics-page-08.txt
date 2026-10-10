@@ -1,0 +1,57 @@
+WW
+WS a fa JEE | NEET | Class 8 - 10 Download eSaral APP -
+
+4. A small bob tied at one end of a thin string of
+= (3E,; 4E,+\N
+Sol. E= 3 TS Ie length 1m is describing a vertical circle so that
+the maximum and minimum tension in the
+A, = 0.2 m? [parallel to y — z plane] . . ; ;
+string are in the ratio 5 : 1. The velocity of the
+—-i=-= 27
+= A,= 0.2 mj bob at the height position is_ m/s.
+A, = 0.3 m? [parallel to x — z plane
+2 IP plane] (Take g = 10 m/s?)
+A, =0.3m? j
+Official Ans. by NTA (5)
+3E,> 4E,+ A 3x0.2 Sol. Let the speed of bob at lowest position be v
+Now |e] : [0.2i] = * E, : . ws P
+5 5 and at the highest position be v>.
+Maximum tension is at lowest position and
+3E,> 4E, + A 4x0.3 minimum tension is at the highest position.
+& a -[is +i]. [0.33] = * E, . ; s P .
+5 5 Now, using, conservation of mechanical
+energy,
+now 2 0518 1 we,
+ow Oo, 12> 2 ~»b sm = smi + mg 21
+>a:b=1:2 >vP=v2+4el ... (1)
+>a=l
+2
+3. In a certain thermodynamical process, the Now Tinax-Mg = =
+pressure of a gas depends on its volume as kV3. H 4
+The work done when the temperature changes mv? a ;
+; => Tax = Mg + —
+from 100°C to 300°C will be ___ nR, where n I
+denotes number of moles of a gas. 3
+mv
+& Ti = 2
+Official Ans. by NTA (50) min + ME =
+Sol. P=kvV3 2
+mv,
+T; = 100°C & T; = 300°C => Thin = ji —mg
+AT = 300 — 100
+AT = 200°C Trax _ 5
+P = kv3 Thin
+now PV = nRT
+2
+now 4kV3 dV = nRdT — “7
+“. PdV = nRdT/4 ~ _mg
+nRdT nR
+“. Work = | PdV= = —AT
+J J 4 4 my, | mv;
+— mg+ , = | ms 5
+= Soak =50nR
+5 2
+> mg+—| v3 +4g/ |= —5mg
+
+JEE Exam Solution www .esaral.com 8
+

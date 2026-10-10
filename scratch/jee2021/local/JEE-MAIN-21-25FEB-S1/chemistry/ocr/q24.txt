@@ -1,0 +1,5 @@
+A car tyre is filled with nitrogen gas at 35 psi
+at 27°C. It will burst if pressure exceeds 40 psi.
+The temperature in °C at which the car tyre will
+burst is . (Rounded-off to the nearest
+integer)

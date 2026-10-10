@@ -1,0 +1,12 @@
+11.
+
+A solenoid of 1000 turns per metre has a core
+with relative permeability 500. Insulated
+windings of the solenoid carry an electric
+current of 5A. The magnetic flux density
+produced by the solenoid is :
+
+(permeability of free space = 4m x 10-7 H/m)
+(1) xT (2) 2 x 10-3 xT
+
+(3) =T (4) 104xT

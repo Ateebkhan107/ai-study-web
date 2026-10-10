@@ -1,0 +1,6 @@
+Let a=i+jt+k,b and é=j-k be three vectors
+such that 4xb=¢ and 4-b=1. If the length of
+
+projection vector of the vector b on the vector
+
+4x is /, then the value of 3/ is equal to

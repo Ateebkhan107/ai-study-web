@@ -1,0 +1,14 @@
+18.
+
+A player kicks a football with an initial speed of
+25 ms” at an angle of 45° from the ground. What
+are the maximum height and the time taken by the
+football to reach at the highest point during
+motion ? (Take g = 10 ms)
+
+(1) Binax= 10 m T=2.5s
+
+(2) bnax= 15.625m T=3.54s
+(3) bmx = 15.625m T=1.77s
+
+(4) Bmax = 3.54 m T=0.125s

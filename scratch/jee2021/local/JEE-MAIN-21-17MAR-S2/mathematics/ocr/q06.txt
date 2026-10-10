@@ -1,0 +1,11 @@
+The number of solutions of the equation
+
+sin” i +4 +cos! x -2| = x,
+3 3
+
+for x € [-1, 1], and [x] denotes the greatest
+integer less than or equal to x, is :
+
+(1) 2 (2) 0
+
+(3) 4 (4) Infinite

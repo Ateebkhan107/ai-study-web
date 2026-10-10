@@ -1,0 +1,11 @@
+The temperature of 3.00 mol of an ideal diatomic
+gas is increased by 40.0 °C without changing the
+pressure of the gas. The molecules in the gas rotate
+but do not oscillate. If the ratio of change in
+internal energy of the gas to the amount of
+
+workdone by the gas is Oo Then the value of x
+
+(round off to the nearest integer) is___
+
+(Given R = 8.31 J mol’ K”")

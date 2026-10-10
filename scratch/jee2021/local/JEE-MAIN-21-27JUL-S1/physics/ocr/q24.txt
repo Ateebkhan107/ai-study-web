@@ -1,0 +1,7 @@
+A radioactive sample has an average life of 30 ms
+and is decaying. A capacitor of capacitance 200 uF
+is first charged and later connected with resistor
+'R'. If the ratio of charge on capacitor to the
+activity of radioactive sample is fixed with respect
+
+to time then the value of 'R' should be Q.

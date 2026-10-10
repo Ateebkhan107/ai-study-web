@@ -1,0 +1,10 @@
+2SO2(g) + O2(g) > 2SO3(g)
+The above reaction is carried out in a vessel
+starting with partial pressure P,. =250mbar,
+
+Po, =750m bar and Py, =O bar. When the
+
+reaction is complete, the total pressure in the
+reaction vessel is m bar. (Round off of the
+
+nearest integer).

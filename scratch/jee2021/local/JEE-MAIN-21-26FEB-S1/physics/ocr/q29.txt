@@ -1,0 +1,6 @@
+In a series LCR resonant circuit, the quality
+factor is measured as 100. If the inductance is
+increased by two fold and resistance is
+decreased by two fold, then the quality factor
+
+after this change will be

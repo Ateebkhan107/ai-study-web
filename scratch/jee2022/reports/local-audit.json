@@ -1,0 +1,15 @@
+{
+  "expected_papers": 24,
+  "audited_papers": 1,
+  "questions": 90,
+  "images": 19,
+  "failures": [],
+  "papers": [
+    {
+      "paper_code": "JEE-MAIN-22-29JUN-S2",
+      "questions": 90,
+      "images": 19,
+      "failures": 0
+    }
+  ]
+}

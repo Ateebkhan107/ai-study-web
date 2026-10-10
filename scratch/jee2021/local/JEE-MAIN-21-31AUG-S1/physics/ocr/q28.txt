@@ -1,0 +1,7 @@
+The electric field in an electromagnetic wave is
+given by E = (50 NC‘) sina (t-x/c)
+
+The energy contained in a cylinder of volume V is
+5.5 x 10°” J. The value of V is em’,
+
+(given €,=8.8x 10 °C°N 'm*)

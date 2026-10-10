@@ -1,0 +1,39 @@
+The plots of radial distribution functions for
+various orbitals of hydrogen atom against 'r' are
+given below:
+
+e 8
+ye
+"s 4
+(A) +
+5 10
+(A) —>
+3
+&
+wel
+~
+“SY
+(B) +
+oA
+5 10
+(A) —>
+3
+&
+wi2
+~
+“SY
+(C) +
+0
+5 10
+(A) —>
+2.0
+© 1.5
+‘~ 1.0
+Sos JN
+OANA
+5 10
+(A) —>
+
+The correct plot for 3s orbital is:
+(1) (B) (2) (A)
+(3) (D) (4) (©)

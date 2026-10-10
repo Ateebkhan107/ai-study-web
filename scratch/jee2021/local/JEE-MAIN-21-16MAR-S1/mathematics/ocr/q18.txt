@@ -1,0 +1,15 @@
+18.
+
+The locus of the midpoints of the chord of the
+
+circle, x2 + y2 = 25 which is tangent to the
+2 2
+
+x" sy .
+hyperbola, ——==1 is:
+¥P 9 16
+
+(1) (x2 + y?)? — 16x? + 9y2 = 0
+(2) (x? + y?)2 — 9x2 + 144y2 = 0
+(3) (x2 + y?)2 — 9x? — loy? = 0
+(4) (x2 + y?)? — 9x2 + l6y2 = 0

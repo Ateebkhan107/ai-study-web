@@ -1,0 +1,13 @@
+[
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q05.png", "output": "q5.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q05.png", "box": [220, 155, 900, 285], "output": "q5_opt_a.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q05.png", "box": [220, 285, 900, 415], "output": "q5_opt_b.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q05.png", "box": [220, 405, 900, 535], "output": "q5_opt_c.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q05.png", "box": [220, 520, 900, 645], "output": "q5_opt_d.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q08.png", "box": [250, 300, 900, 610], "output": "q8.png"},
+  {"source": "scratch/jee2021/local/JEE-MAIN-21-24FEB-S2/physics/crops/q09.png", "box": [250, 285, 900, 620], "output": "q9.png"},
+  {"page": 3, "box": [1050, 1500, 1900, 2500], "output": "q11.png"},
+  {"page": 4, "box": [1050, 1900, 1900, 2510], "output": "q16.png"},
+  {"page": 7, "box": [1050, 1800, 1900, 2460], "output": "q26.png"},
+  {"page": 8, "box": [1050, 350, 1900, 1080], "output": "q29.png"}
+]

@@ -1,0 +1,15 @@
+The circuit contains two diodes each with a
+forward resistance of 50 Q and with infinite
+reverse resistance. If the battery voltage is 6 V,
+the current through the 120 Q resistance is_
+
+mA.
+
+D, 130Q
+>
+D, 100Q
+<q
+
+120Q
+
+6V

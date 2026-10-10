@@ -1,0 +1,7 @@
+A coil of inductance 2H having negligible
+resistance is connected to a source of supply
+whose voltage is given by V = 3t volt.
+(where t is in second). If the voltage is applied
+when t = 0, then the energy stored in the coil
+
+after 4s is ss sSdZ:C.

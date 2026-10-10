@@ -1,0 +1,14 @@
+12.
+
+If x, y, z are in arithmetic progression wit
+
+common difference d, x # 3d, and th
+
+3 4/2 x
+
+determinant of the matrix | 4 5/2 y | is zer
+5 k z
+
+then the value of k? is
+
+(1) 72 (2) 12 (3) 36 (4) 6

@@ -1,0 +1,20 @@
+In a circuit consisting of a capacitance and a
+generator with alternating emf E, =E, sinwt , Vc
+
+and Ic are the voltage and current. Correct phasor
+
+diagram for such circuit is :
+
+Vc
+ot
+qd)
+Ic
+Ic
+V
+(2)
+ot
+Ic Ve
+@) ot
+Ve
+ot
+(4)

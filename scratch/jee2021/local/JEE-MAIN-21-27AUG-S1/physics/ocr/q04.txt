@@ -1,0 +1,7 @@
+If E and H represents the intensity of electric field
+and magnetising field respectively, then the unit of
+E/H will be:
+
+(1) ohm (2) mho
+
+(3) joule (4) newton

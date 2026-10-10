@@ -1,0 +1,11 @@
+A source of monochromatic radiation of
+wavelength 400 nm provides 1000 J of energy in
+10 seconds. When this radiation falls on the
+surface of sodium, x x 10” electrons are ejected
+per second. Assume that wavelength 400 nm is
+sufficient for ejection of electron from the surface
+of sodium metal. The value of x is
+
+(Nearest integer)
+
+(h= 6.626 x 10" Js)

@@ -1,0 +1,7 @@
+The ranges and heights for two projectiles
+projected with the same initial velocity at angles
+42° and 48° with the horizontal are R;, R2 and H;,
+H, respectively. Choose the correct option :
+
+(1) R;>R2andH,;=H, (2) Rj =R> and H, < Hy
+(3) R; < Ry. and H; <H, (4) Rj =R> and H,; = Hy

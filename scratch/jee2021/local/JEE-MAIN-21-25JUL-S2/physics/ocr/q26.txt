@@ -1,0 +1,12 @@
+From the given data, the amount of energy
+required to break the nucleus of aluminium 77 Al is
+x x 107 J.
+
+Mass of neutron = 1.00866 u
+
+Mass of proton = 1.00726 u
+
+Mass of Aluminium nucleus = 27.18846 u
+(Assume 1 u corresponds to x J of energy)
+
+(Round off to the nearest integer)

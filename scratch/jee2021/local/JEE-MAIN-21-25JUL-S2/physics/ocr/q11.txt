@@ -1,0 +1,10 @@
+11.
+
+Consider a planet in some solar system which has a
+mass double the mass of earth and density equal to
+the average density of earth. If the weight of an
+object on earth is W, the weight of the same object
+
+on that planet will be :
+
+Q)2w (Q2)W (3) Ww (4) J2 W

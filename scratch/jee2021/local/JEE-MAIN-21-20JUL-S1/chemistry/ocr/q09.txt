@@ -1,0 +1,27 @@
+Given below are two statements : One is labelled
+
+as Assertion A and other is labelled as Reason R.
+
+Assertion A : The dihedral angles in HO, in
+
+gaseous phase is 90.2° and in solid phase is 111.5°.
+
+Reason R : The change in dihedral angle in solid
+
+and gaseous phase is due to the difference in the
+
+intermolecular forces.
+
+Choose the most appropriate answer from the
+
+options given below for A and R.
+
+(1) A is correct but R is not correct.
+
+(2) Both Boa R are correct but R is not the
+correct explanation of A.
+
+(3) Both A and R are correct and R is the correct
+explanation of A.
+
+(4) A is not correct but R is correct.

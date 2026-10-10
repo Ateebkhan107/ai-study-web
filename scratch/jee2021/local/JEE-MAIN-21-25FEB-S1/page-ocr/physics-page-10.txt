@@ -1,0 +1,96 @@
+wSaral
+
+JEE | NEET | Class 8 - 10 Download eSaral APP >
+
+8. A coil of inductance 2H having negligible
+resistance is connected to a source of supply
+whose voltage is given by V = 3t volt.
+(where t is in second). If the voltage is applied
+when t = 0, then the energy stored in the coil
+
+after 4s is siSd;SC
+Official Ans. by NTA (144)
+
+Sol -- Lal
+ol. dt
+
+om
+tf
+onl
+
+4 I
+3ft dt =2/ dl
+0 0
+
+3 16 =21
+2
+T= 12
+Vv = ALP = x2(12)? = 1445
+=5 =7 =
+9. A monoatomic gas of mass 4.0 u is kept in an
+
+insulated container. Container is moving with
+velocity 30 m/s. If container is suddenly
+
+stopped then change in temperature of the gas
+
+x
+(R = gas constant) is BR: Value of x is ___
+
+Official Ans. by NTA (3600)
+
+Sol. Given that mass of gas is 4u hence its molar
+
+mass M is 4g/mol
+
+. i v? =nC,AT
+2
+
+m 3R
+
++ mx(30)? =—x—xAT
+2 M 2
+
+_ 3600
+3R
+
+-, AT
+
+JEE Exam Solution
+
+10.
+
+Sol.
+
+www .esaral.com
+
+The potential energy (U) of a diatomic molecule
+is a function dependent on r (interatomic
+distance) as
+
+a
+yt BL
+
+1
+r° r
+
+where, a and B are positive constants. The
+
+equilibrium distance between two atoms will be
+
+20 \e
+(22) , Wherea=_
+B
+
+Official Ans. by NTA (1)
+
+For equilibrium
+
+au _y
+dr
+
+10a 5B
+ye °
+
+10
+

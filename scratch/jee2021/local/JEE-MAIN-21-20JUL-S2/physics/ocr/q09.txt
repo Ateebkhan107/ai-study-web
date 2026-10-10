@@ -1,0 +1,15 @@
+A particle is making simple harmonic motion
+along the X-axis. If at a distances x; and x2 from
+the mean position the velocities of the particle are
+v, and v2 respectively. The time period of its
+
+oscillation is given as :
+
+2 2 2 2
+(1) T=2n, 22) TH2n |
+vy V3, Vj+V2
+xe —x? xx?
+Q) T=2nJ2—1 (4) T= 20 |
+
+2: ~ 2:
+\Ryi* v5 vv;

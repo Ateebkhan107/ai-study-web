@@ -1,0 +1,16 @@
+7. For the reaction, aA + bB > cC + dD, the plo
+
+1
+of log k vs T is given below :
+
+I slope = —10000 K
+log k
+
+1/T —
+
+The temperature at which the rate constant of
+the reaction is 10+ s~! is K.
+(Rounded-off to the nearest integer)
+
+[Given : The rate constant of the reaction is 10> s“! at
+500 K.]

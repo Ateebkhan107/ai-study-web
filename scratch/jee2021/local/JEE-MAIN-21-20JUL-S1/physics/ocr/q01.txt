@@ -1,0 +1,5 @@
+20Q 50
+
+The value of current in the 6Q resistance is :
+
+(1) 4A (2) 8A (3) 10A (4) 6A

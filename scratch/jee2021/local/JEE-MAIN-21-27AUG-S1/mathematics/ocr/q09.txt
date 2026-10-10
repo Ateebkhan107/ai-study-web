@@ -1,0 +1,9 @@
+Equation of a plane at a distance Va from the
+
+origin, which contains the line of intersection of
+the planes x - y—z-—1=0 and 2x+y-3z+4=0,
+is :
+
+(1) 3x-y-5z+2=0 (2)3x-4z+3=0
+
+(3) -x+2y+2z-3=0 (4)4x-y-5z+2=0

@@ -1,0 +1,15 @@
+The angular frequency of alternating current in
+a L-C-R circuit is 100 rad/s. The components
+connected are shown in the figure. Find the
+
+value of inductance of the coil and capacity of
+
+condenser.
+R=60Q
+15V
+Cc 10V R'=40 Lg 20V
+
+(1) 0.8 H and 150 pF
+(2) 0.8 H and 250 pF
+(3) 1.33 H and 250 pF
+(4) 1.33 H and 150 pF

@@ -1,0 +1,9 @@
+The velocity of a particle is v = Vo + gt + Ft?.
+Its position is x = 0 at t = 0 ; then its
+
+displacement after time (t = 1) is :
+
+g F
+()vo+g+F Avot 5 +a
+
+QB) vor 5 +F (4) vo + 2g + 3F

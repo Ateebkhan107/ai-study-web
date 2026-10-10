@@ -1,0 +1,8 @@
+14,
+
+The rms speeds of the molecules of Hydrogen,
+Oxygen and Carbondioxide at the same
+temperature are Vy, Vo and Vc respectively then :
+(1) Va > Vo > Ve (2) Ve > Vo> Vu
+
+(3) Vu= Vo> Ve (4) Vu= Vo= Ve

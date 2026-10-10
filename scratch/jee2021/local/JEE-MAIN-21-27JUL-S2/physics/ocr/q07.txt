@@ -1,0 +1,20 @@
+Given below is the plot of a potential energy
+function U(x) for a system, in which a particle is in
+one dimensional motion, while a conservative
+force F(x) acts on it. Suppose that Enecn = 8 J, the
+
+incorrect statement for this system is :
+
+X, X_ X, X4 x
+
+{where K.E. = kinetic energy]
+
+(1) at x > x4, KLE. is constant throughout the region.
+
+(2) at x < x), K_E. is smallest and the particle is
+moving at the slowest speed.
+
+(3) at xX = X, K.E. is greatest and the particle is
+moving at the fastest speed.
+
+(4) atx =x3, KLE. =4 J.

@@ -1,0 +1,118 @@
+JEE | NEET | Class 8 - 10 Download eSaral APP 3
+
+11
+1 _ ,(A,-A,)6t ina ts. )xoe
+—=e _ t 2t = el! 2%3 =elns =8
+
+= | 00
+
+N
+N,
+
+17. In an octagon ABCDEFGH of equal side, what
+
+is the sum of
+AB+AC +AD +AE +AF+AG +AH'
+if, AO=2i+3j-4k
+A___B
+fe
+G D
+FE
+(1) -161-24}+32k
+(2) 161+24j-32k
+(3) 161+24}+32k
+(4) 161-245+32k
+
+Official Ans. by NTA (2)
+
+Sol. We know,
+
+‘OA +OB+OC+OD + OE + OF + OG +0H =0
+
+By triangle law of vector addition, we can write
+AB=AO+O0B ; AC=A0+0C
+AD=A0+OD ; AE=AO+OE
+AF=AO+OF ; AG=A0+0G
+
+AH = AO+0H
+
+Now
+
+AB+AC +AD +AE +AF+AG +AH
+
+= (7A0)+ 6-OA
+
+= (7A0)+A0
+
+8AO = 8(21+3j—-4k)
+
+161+24j-32k
+
+JEE Exam Solution
+
+18.
+
+Sol.
+
+19.
+
+Given below are two statements : one is labelled
+as Assertion A and the other is labelled as
+Reason R.
+
+Assertion A: The escape velocities of planet
+A and B are same. But A and
+
+B are of unequal mass.
+
+Reason R: The product of their mass and
+radius must be same,
+M;R, = MDR,
+
+In the light of the above statements, choose the
+
+most appropriate answer from the options given
+
+below :
+
+(1) Both A and R are correct but R is NOT the
+correct explanation of A
+
+(2) A is correct but R is not correct
+
+(3) Both A and R are correct and R is the correct
+explanation of A
+
+(4) A is not correct but R is correct
+
+Official Ans. by NTA (2)
+
+V.= 2GM.
+R
+
+wih By
+
+R, R,
+
+M,R, = MR,
+
+Hence reason R is not correct.
+The current (i) at time t = 0 and t = © respectively
+
+for the given circuit is :
+
+5Q 5Q
+VVVVV fi
+1 E
+10. 40
+LUO S000
+L
+18E 5E 10E 5E
+55°18 33°18
+3) 5B 18E yy SE 10E
+@) 18°55 () 13°33
+
+Official Ans. by NTA (4)
+
+www .esaral.com 6
+

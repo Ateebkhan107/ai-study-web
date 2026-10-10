@@ -1,0 +1,19 @@
+Student A and Student B used two screw gauges of
+equal pitch and 100 equal circular divisions to
+measure the radius of a given wire. The actual
+value of the radius of the wire is 0.322 cm. The
+absolute value of the difference between the final
+circular scale readings observed by the students A
+and B is :
+
+[Figure shows position of reference 'O' when jaws
+of screw gauge are closed]
+
+Given pitch = 0.1 cm.
+
+O O
+10
+5 90 92 95
+Screw gauge Screw gauge
+
+(A) (B)

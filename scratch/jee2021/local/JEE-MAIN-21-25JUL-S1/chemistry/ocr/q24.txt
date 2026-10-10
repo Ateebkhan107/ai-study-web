@@ -1,0 +1,9 @@
+CO, gas is bubbled through water during a soft
+drink manufacturing process at 298 K. If CO
+exerts a partial pressure of 0.835 bar then x m mol
+of CO, would dissolve in 0.9 L of water. The value
+
+of x is . (Nearest integer)
+
+(Henry's law constant for CO, at 298 K is
+1.67 x 10° bar)

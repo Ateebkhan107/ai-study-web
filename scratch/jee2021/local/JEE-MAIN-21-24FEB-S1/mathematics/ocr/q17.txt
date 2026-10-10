@@ -1,0 +1,13 @@
+17.
+
+Two vertical poles are 150 m apart and the
+height of one is three times that of the other.
+If from the middle point of the line joining
+their feet, an observer finds the angles of
+elevation of their tops to be complementary,
+then the height of the shorter pole (in meters)
+is:
+
+(1) 203 (2) 25.3
+
+(3) 30 (4) 25

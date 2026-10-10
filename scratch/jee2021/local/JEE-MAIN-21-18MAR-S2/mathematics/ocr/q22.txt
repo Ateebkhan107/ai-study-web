@@ -1,0 +1,6 @@
+2. Let I be an identity matrix of order 2 x 2 and
+
+2 -l
+pals 3}: Then the value of n € N for
+
+which P" = 5I —- 8P is equal to ___

@@ -1,0 +1,11 @@
+A certain element crystallises in a bcc lattice of
+unit cell edge length 27 A. If the same element
+under the same conditions crystallises in the fec
+lattice, the edge length of the unit cell in A will
+be . (Round off to the Nearest
+
+Integer).
+
+[Assume each lattice point has a single atom]
+
+[Assume /3 = 1.73, J2 = 1.41]

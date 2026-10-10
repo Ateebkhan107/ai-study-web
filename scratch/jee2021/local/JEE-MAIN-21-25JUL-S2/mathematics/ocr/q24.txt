@@ -1,0 +1,7 @@
+If a rectangle is inscribed in an equilateral triangle
+
+of side length 2/2 as shown in the figure, then the
+
+square of the largest area of such a rectangle
+
+1s

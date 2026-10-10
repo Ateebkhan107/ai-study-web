@@ -1,0 +1,12 @@
+5.
+
+The angle between vector (A) and (A - B) is :
+
+B
+(1) tan? 2
+A-B»?
+2
+A
+
+Bcos@
+A-Bsin®@

@@ -1,0 +1,25 @@
+Given below are two statement : one is labelled
+
+as Assertion A and the other is labelled as
+
+Reason R :
+
+Assertion A : Size of Bk3* ion is less than Np3* ion.
+
+Reason R : The above is a consequence of the
+
+lanthanoid contraction.
+
+In the light of the above statements, choose the
+
+correct answer from the options given below :
+
+(1) A is false but R is true
+
+(2) Both A and R are true but R is not the correct
+explanation of A
+
+(3) Both A and R are true and R is the correct
+explanation of A
+
+(4) A is true but R is false

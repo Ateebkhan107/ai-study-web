@@ -1,0 +1,16 @@
+Ifa+ f+y= 2z, then the system of equations
+X + (cos y)y + (cos B)z =0
+
+(cos y)x + y + (cos a)z = 0
+
+(cos B)x + (cos a)y +z=0
+
+has :
+
+(1) no solution
+
+(2) infinitely many solution
+
+(3) exactly two solutions
+
+(4) a unique solution

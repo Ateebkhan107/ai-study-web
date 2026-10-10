@@ -1,0 +1,14 @@
+16.
+
+Each side of a box made of metal sheet in cubic
+shape is 'a' at room temperature 'T', the
+coefficient of linear expansion of the metal
+sheet is 'a'. The metal sheet is heated uniformly,
+by a small temperature AT, so that its new
+temperature is T + AT. Calculate the increase
+in the volume of the metal box.
+
+(1) 3a30AT (2) 4a30 AT
+
+4
+(3) 4nxna3aAT (4) 3 TP OAT

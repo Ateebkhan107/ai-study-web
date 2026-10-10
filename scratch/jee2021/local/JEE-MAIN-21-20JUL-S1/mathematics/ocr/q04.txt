@@ -1,0 +1,12 @@
+The value of the integral [ log, (i=x +V/1+x)dx
+“1
+
+is equal to :
+
+a 3 1
+1 5 24+--= 2) 2log,2+—-1
+(1) Slog, ao (2) 2log. A
+
+t nol
+3) log, 2+=-1 4) 2 log, 2+--—
+(3) log. 2+4 (4) 2log. 2+ 5 ——

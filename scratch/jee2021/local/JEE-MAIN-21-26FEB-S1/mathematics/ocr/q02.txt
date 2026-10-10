@@ -1,0 +1,15 @@
+A fair coin is tossed a fixed number of times. If
+the probability of getting 7 heads is equal to
+probability of getting 9 heads, then the probability
+of getting 2 heads is
+
+15
+78
+
+15
+(2)
+
+qd) 72
+
+15 15
+(3) 8 (4) Pine

@@ -1,0 +1,6 @@
+3.
+
+If log, 2,log,(2* ~5),log,| 2" >) are in an
+
+arithmetic progression, then the value of x is equal
+to

@@ -1,0 +1,5 @@
+The mole fraction of a solute in a 100 mola
+aqueous solution x 10-2,
+(Round off to the Nearest Integer).
+[Given : Atomic masses : H: 1.0 u,O: 16.0u
+

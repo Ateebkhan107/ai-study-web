@@ -1,0 +1,10 @@
+4.
+
+Let y = y(x) be the solution of the differential equation
+
+cosec’xdy + 2dx = (1 + y cos2x) cosec’xdx, with
+s[Z}=0, Then, the value of (y(0) + 1)’ is equal
+
+to:
+
+(1) e” (2)e"" (3) e! (4)e

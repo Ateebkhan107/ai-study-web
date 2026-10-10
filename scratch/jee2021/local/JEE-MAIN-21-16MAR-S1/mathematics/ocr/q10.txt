@@ -1,0 +1,12 @@
+10.
+
+Which of the following Boolean expression is
+a tautology ?
+
+(1) (pa q) v (Pv q)
+
+(2) (pagv@e-q)
+
+GB) Pragaw-> gq)
+
+(4) (pag > pq)

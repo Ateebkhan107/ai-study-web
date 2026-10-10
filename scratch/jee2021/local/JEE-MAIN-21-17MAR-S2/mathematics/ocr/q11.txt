@@ -1,0 +1,9 @@
+11.
+
+If the sides AB, BC and CA of a triangle AB
+have 3, 5 and 6 interior points respectively, the
+the total number of triangles that can t
+constructed using these points as vertices, -
+
+equal to :
+(1) 364 (2) 240 (3) 333 (4) 360

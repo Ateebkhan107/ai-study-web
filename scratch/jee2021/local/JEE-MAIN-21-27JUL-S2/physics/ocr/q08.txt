@@ -1,0 +1,8 @@
+A 100 Q resistance, a 0.1 uF capacitor and an
+inductor are connected in series across a 250 V
+supply at variable frequency. Calculate the value of
+inductance of inductor at which resonance will
+occur. Given that the resonant frequency is 60 Hz.
+(1) 0.70 H (2) 70.3 mH
+
+(3) 7.03 x 10° H (4) 70.3 H

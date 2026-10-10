@@ -1,0 +1,314 @@
+[
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S1",
+    "exam_date": "2021-02-24",
+    "session": "February",
+    "attempt": "February 24 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15353-2402-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/1503-2402-Physics-Paper-With-Ans-Solution-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15650-2402-Chemistry-Paper-With-Ans-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-24FEB-S2",
+    "exam_date": "2021-02-24",
+    "session": "February",
+    "attempt": "February 24 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15410-2402-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15017-2402-Physics-Paper-With-Ans-Solution-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15715-2402-Chemistry-Paper-With-Ans-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S1",
+    "exam_date": "2021-02-25",
+    "session": "February",
+    "attempt": "February 25 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15429-2502-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15051-2502-Physics-Paper-With-Ans-Solution-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15734-2502-Chemistry-Paper-With-Ans-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25FEB-S2",
+    "exam_date": "2021-02-25",
+    "session": "February",
+    "attempt": "February 25 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15449-2502-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/1517-2502-Physics-Paper-With-Ans-Solution-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/1585-2502-Chemistry-Paper-With-Ans-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S1",
+    "exam_date": "2021-02-26",
+    "session": "February",
+    "attempt": "February 26 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/1552-2602-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15133-2602-Physics-Paper-With-Ans-Solution-Morning%20UPDATED.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15830-2602-Chemistry-Paper-With-Ans-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26FEB-S2",
+    "exam_date": "2021-02-26",
+    "session": "February",
+    "attempt": "February 26 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15512-2602-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/1520-2602-Physics-Paper-With-Ans-Solution-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15850-2602-Chemistry-Paper-With-Ans-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S1",
+    "exam_date": "2021-03-16",
+    "session": "March",
+    "attempt": "March 16 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/152041-16-3-21%20maths%20morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/152543-16-3-21%20physics%20morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/153239-16-3-21%20chemistry%20morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-16MAR-S2",
+    "exam_date": "2021-03-16",
+    "session": "March",
+    "attempt": "March 16 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/152054-16-3-21%20maths%20evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15264-16-03-21%20physics%20evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/153251-16-3-21%20chemistry%20evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S1",
+    "exam_date": "2021-03-17",
+    "session": "March",
+    "attempt": "March 17 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/152112-17-3-21%20maths%20morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/152618-17-3-21%20physics%20morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15337-17-3-21%20chemistry%20morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-17MAR-S2",
+    "exam_date": "2021-03-17",
+    "session": "March",
+    "attempt": "March 17 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/152132-17-3-21%20maths%20evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/152636-17-3-21%20physics%20evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/153322-17-3-21%20chemistry%20evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S1",
+    "exam_date": "2021-03-18",
+    "session": "March",
+    "attempt": "March 18 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/152151-18-03-maths-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/152651-18-03-21%20physics%20-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/153335-18-03-chemistry-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-18MAR-S2",
+    "exam_date": "2021-03-18",
+    "session": "March",
+    "attempt": "March 18 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15224-18-3-21%20maths%20evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15276-18-3-21%20physics%20evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/153345-18-3-21%20chemistry%20evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S1",
+    "exam_date": "2021-07-20",
+    "session": "July",
+    "attempt": "July 20 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/153619-Math%2020%20July%20Shift%201.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154319-Physics%2020%20July%20Shift%201.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155138-Chemistry%2020%20July%20Shift%201.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-20JUL-S2",
+    "exam_date": "2021-07-20",
+    "session": "July",
+    "attempt": "July 20 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/153635-Math%2020%20July%20Shift%202.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154333-Physics%2020%20July%20Shift%202.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155151-Chemistry%2020%20July%20Shift%202.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-22JUL-S2",
+    "exam_date": "2021-07-22",
+    "session": "July",
+    "attempt": "July 22 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/153734-Math%2022%20July%20Shift%202.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154349-Physics%2022%20July%20Shift%202.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155253-Chemistry%2022%20July%20Shift%202.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S1",
+    "exam_date": "2021-07-25",
+    "session": "July",
+    "attempt": "July 25 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15378-Math%2025%20July%20Shift%201.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/15443-Physics%2025%20July%20Shift%201.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/15535-Chemistry%2025%20July%20Shift%201.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-25JUL-S2",
+    "exam_date": "2021-07-25",
+    "session": "July",
+    "attempt": "July 25 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/153839-Math%2025%20July%20Shift%202.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154417-Physics%2025%20July%20Shift%202.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155329-Chemistry%2025%20July%20Shift%202.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S1",
+    "exam_date": "2021-07-27",
+    "session": "July",
+    "attempt": "July 27 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/153851-Math%2027%20July%20Shift%201.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154432-Physics%2027%20July%20Shift%201.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155345-Chemistry%2027%20July%20Shift%201.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27JUL-S2",
+    "exam_date": "2021-07-27",
+    "session": "July",
+    "attempt": "July 27 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15395-Math%2027%20July%20Shift%202.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/154445-Physics%2027%20July%20Shift%202.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/155357-Chemistry%2027%20July%20Shift%202.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S1",
+    "exam_date": "2021-08-26",
+    "session": "August",
+    "attempt": "August 26 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/15569-2608-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/155933-2608-Physics-Paper-With-Sol-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16312-2608-Chemistry-Paper-With-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-26AUG-S2",
+    "exam_date": "2021-08-26",
+    "session": "August",
+    "attempt": "August 26 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155624-2608-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/155945-2608-Physics-Paper-With-Sol-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16324-2608-Chemistry-Paper-With-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S1",
+    "exam_date": "2021-08-27",
+    "session": "August",
+    "attempt": "August 27 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155639-2708-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/1603-2708-Physics-Paper-With-Sol-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16336-2708-Chemistry-Paper-With-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-27AUG-S2",
+    "exam_date": "2021-08-27",
+    "session": "August",
+    "attempt": "August 27 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155654-2708-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/16021-2708-Physics-Paper-With-Sol-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16352-2708-Chemistry-Paper-With-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S1",
+    "exam_date": "2021-08-31",
+    "session": "August",
+    "attempt": "August 31 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155710-3108-Mathematics-Paper-With-Solution-Morning.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/16040-3108-Physics-Paper-With-Sol-Morning.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/1643-3108-Chemistry-Paper-With-Solution-Morning.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-31AUG-S2",
+    "exam_date": "2021-08-31",
+    "session": "August",
+    "attempt": "August 31 - Shift 2",
+    "shift": "Shift 2",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155739-3108-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/16055-3108-Physics-Paper-With-Sol-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16415-3108-Chemistry-Paper-With-Solution-Evening.pdf"
+    }
+  },
+  {
+    "paper_code": "JEE-MAIN-21-01SEP-S1",
+    "exam_date": "2021-09-01",
+    "session": "August",
+    "attempt": "September 1 - Shift 1",
+    "shift": "Shift 1",
+    "sources": {
+      "mathematics": "https://www.esaral.com/media/uploads/2023/9/27/155752-0109-Mathematics-Paper-With-Solution-Evening.pdf",
+      "physics": "https://www.esaral.com/media/uploads/2023/9/27/1619-0109-Physics-Paper-With-Sol-Evening.pdf",
+      "chemistry": "https://www.esaral.com/media/uploads/2023/9/27/16428-0109-Chemistry-Paper-With-Solution-Evening.pdf"
+    }
+  }
+]

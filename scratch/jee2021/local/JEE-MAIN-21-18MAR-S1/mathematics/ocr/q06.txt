@@ -1,0 +1,11 @@
+Let a,f,y be the real roots of the equation,
+x? + ax? + bx +c = 0, (a,b,c € R and a,b ¥ 0).
+If the system of equations (in, u,v,w) given by
+au + Bv + yw = 0, Bu + yv + aw = 0;
+yu+ av + Bw =0 has non-trivial solution, then the
+
+2
+a.
+value of — is
+
+(1) 5 (2) 3 (3) 1 (4) 0

@@ -1,0 +1,5544 @@
+[
+  {
+    "paper_code": "JEE-MAIN-22-24JUN-S1",
+    "question_count": 90,
+    "answers_filled": 82,
+    "missing_answers": [
+      65,
+      69,
+      71,
+      75,
+      77,
+      79,
+      80,
+      88
+    ],
+    "conflicts": [
+      {
+        "question_number": 19,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 34,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 37,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 44,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "d",
+            "score": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-24JUN-S2",
+    "question_count": 90,
+    "answers_filled": 84,
+    "missing_answers": [
+      67,
+      73,
+      75,
+      78,
+      79,
+      88
+    ],
+    "conflicts": [
+      {
+        "question_number": 2,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 9,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 11,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 33,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question_number": 45,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "Jeenify answer text",
+            "answer": "a",
+            "score": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUL-S1",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "60"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(60)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "45"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(45)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 37,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 50,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "104"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(104)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "56"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(56)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 74,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 75,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "17"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(17)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1492"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1492)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6006"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6006)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "38"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(38)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUN-S1",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5418"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5418)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "300"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(300)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(15)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "710"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(710)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "23"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(23)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "766"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(745)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1143"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1136)"
+          }
+        ]
+      },
+      {
+        "question_number": 64,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 65,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 66,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 68,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 69,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 71,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 72,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 73,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 74,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 75,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 78,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 79,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 80,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(286)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "63"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(63)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "576"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(7)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "7"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "414"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(414)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUN-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 14,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 20,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(d )"
+          }
+        ]
+      },
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12 )"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "250"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(250)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "198"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(198)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "300"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(300)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "22"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(22 )"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "25"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(25)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "20"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(20)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "62"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(62)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "83"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(83)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "21"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(21)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "14"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(14)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "243"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(243)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "51"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(51)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-26JUL-S1",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 1,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "60"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(60)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "20"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(20)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "44"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(44)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "9"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(9)"
+          }
+        ]
+      },
+      {
+        "question_number": 48,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1758"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1758)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "200"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(200)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "54"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "( 54)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 77,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "d"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "272"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(272)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "180"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(180)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "45"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(45)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "153"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(153)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-26JUL-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "27"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(27)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "26"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(26)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "25"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(25)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "17"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(17)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 40,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "57"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(57)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 64,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 75,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "30"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(30)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "238"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(238)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "112"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(125)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "53"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(53)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "50"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(50)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-26JUN-S1",
+    "question_count": 90,
+    "answers_filled": 87,
+    "missing_answers": [
+      7,
+      18,
+      20
+    ],
+    "conflicts": [
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "727"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(727)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "98"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(99 or 98)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "476"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(476)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "200"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(200)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "7"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(7)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "9"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(9)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "36"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(36)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1120"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1120)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "21"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(21)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "80"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(80)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5264"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5264)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1100"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1100)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "42"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(42)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-26JUN-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "36"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(36)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "42"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(42)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "152"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(152)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "9"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(9)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "35"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(35)"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "143"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(143)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "38"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(38)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "415"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(415)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2735"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2735)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "983"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(983)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "225"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(225)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "248"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(248)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "150"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(150)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "40"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(40)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "100"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "33"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(33)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUL-S1",
+    "question_count": 90,
+    "answers_filled": 83,
+    "missing_answers": [
+      61,
+      65,
+      71,
+      73,
+      76,
+      83,
+      86
+    ],
+    "conflicts": [
+      {
+        "question_number": 16,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2400"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2400)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "412"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(412)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "136"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(136)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "16"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(16)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "48"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(48)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 37,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 44,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "42"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(42)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "30"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(30)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUL-S2",
+    "question_count": 90,
+    "answers_filled": 79,
+    "missing_answers": [
+      64,
+      65,
+      72,
+      73,
+      76,
+      78,
+      79,
+      80,
+      81,
+      84,
+      89
+    ],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "40"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(40)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "240"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(240)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "120"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(120)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "35"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(35)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "165"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(165)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "530"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(530)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUN-S1",
+    "question_count": 90,
+    "answers_filled": 79,
+    "missing_answers": [
+      34,
+      36,
+      37,
+      38,
+      39,
+      40,
+      42,
+      43,
+      48,
+      50,
+      51
+    ],
+    "conflicts": [
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "975"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(975)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "450"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(450)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "114"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(114)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "48"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(48)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "125"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(125)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "300"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(300)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "99"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(99)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "45"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(45)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "56"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(56)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "16"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(16)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUN-S2",
+    "question_count": 90,
+    "answers_filled": 82,
+    "missing_answers": [
+      62,
+      63,
+      64,
+      65,
+      73,
+      80,
+      84,
+      89
+    ],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1400"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1400)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "23"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(23)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "16"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(16)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8630"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8630)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "45"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(45)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "11"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(11)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "51or103"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(51)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "59"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(59)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "40"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(40)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUL-S1",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "630"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(630)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "250"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(250)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "11"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(11)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "15"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(15)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "27"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(27)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "100"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(100)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "46"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(46)"
+          }
+        ]
+      },
+      {
+        "question_number": 76,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "c"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "7073"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(7073)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "450"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(450)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "50"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(50)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "142"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(142)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUL-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "392"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(392)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "30"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(30)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "750"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(750)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "14"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(14)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "400"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(400)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "15"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(15)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "25"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(25)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "22"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(22)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 76,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 77,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "c"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "57"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(57)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "17"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(17)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "57"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(56)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "104"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(104)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUN-S1",
+    "question_count": 90,
+    "answers_filled": 83,
+    "missing_answers": [
+      31,
+      32,
+      34,
+      35,
+      37,
+      40,
+      48
+    ],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "19"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(19)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "15"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(15)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "91"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(91)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "7479"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(7479)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "100"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(100)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "17"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(17)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "150"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(150)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "31"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(31)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "702"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(702)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "40"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(40)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUN-S2",
+    "question_count": 90,
+    "answers_filled": 81,
+    "missing_answers": [
+      35,
+      37,
+      38,
+      40,
+      41,
+      42,
+      48,
+      50,
+      51
+    ],
+    "conflicts": [
+      {
+        "question_number": 14,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "d"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "b"
+          }
+        ]
+      },
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "150"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(150)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "100"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(100)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "50"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(50)"
+          }
+        ]
+      },
+      {
+        "question_number": 28,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "24"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(24)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "125"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(125)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "11"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(11)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "41651"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(41651)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "58"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(58)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "25"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(25)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "37"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(37)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-29JUL-S1",
+    "question_count": 90,
+    "answers_filled": 76,
+    "missing_answers": [
+      18,
+      35,
+      37,
+      38,
+      41,
+      49,
+      52,
+      62,
+      63,
+      71,
+      72,
+      81,
+      84,
+      88
+    ],
+    "conflicts": []
+  },
+  {
+    "paper_code": "JEE-MAIN-22-29JUL-S2",
+    "question_count": 90,
+    "answers_filled": 78,
+    "missing_answers": [
+      11,
+      15,
+      25,
+      29,
+      38,
+      39,
+      42,
+      47,
+      48,
+      51,
+      57,
+      60
+    ],
+    "conflicts": [
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "16"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(16)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 84,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "79"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(79)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "72"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(72)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "14"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(14)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "27"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(27)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-29JUN-S1",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "15"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(15)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "43"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(43)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "21"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(21)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "700"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(700)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "144"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(144)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "225"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(225)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "10"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "117"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(117)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "127"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(127)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "0"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(0)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "64"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(64)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "26"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(26)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "29"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(29)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3395"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3395)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "88"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(88)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18915"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18915)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-29JUN-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": [
+      {
+        "question_number": 21,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "180"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(180)"
+          }
+        ]
+      },
+      {
+        "question_number": 22,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "20"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(20)"
+          }
+        ]
+      },
+      {
+        "question_number": 23,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "104"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(104)"
+          }
+        ]
+      },
+      {
+        "question_number": 24,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 25,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "14"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(14)"
+          }
+        ]
+      },
+      {
+        "question_number": 26,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 27,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 29,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "600"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(600)"
+          }
+        ]
+      },
+      {
+        "question_number": 30,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 36,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "b"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "a"
+          }
+        ]
+      },
+      {
+        "question_number": 51,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "29"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(29)"
+          }
+        ]
+      },
+      {
+        "question_number": 52,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "195"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(195)"
+          }
+        ]
+      },
+      {
+        "question_number": 53,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "3"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(3)"
+          }
+        ]
+      },
+      {
+        "question_number": 54,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "7"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(7)"
+          }
+        ]
+      },
+      {
+        "question_number": 55,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "216"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(216)"
+          }
+        ]
+      },
+      {
+        "question_number": 56,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "6"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(6)"
+          }
+        ]
+      },
+      {
+        "question_number": 57,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 58,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 59,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "8"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(8)"
+          }
+        ]
+      },
+      {
+        "question_number": 60,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4s)"
+          }
+        ]
+      },
+      {
+        "question_number": 71,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "a"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(dropped)"
+          }
+        ]
+      },
+      {
+        "question_number": 81,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "bonus"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(10)"
+          }
+        ]
+      },
+      {
+        "question_number": 82,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "14"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(14)"
+          }
+        ]
+      },
+      {
+        "question_number": 83,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "2223"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(2223)"
+          }
+        ]
+      },
+      {
+        "question_number": 85,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "12"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(12)"
+          }
+        ]
+      },
+      {
+        "question_number": 86,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "4"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(4)"
+          }
+        ]
+      },
+      {
+        "question_number": 87,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "5"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(5)"
+          }
+        ]
+      },
+      {
+        "question_number": 88,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1086"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1086)"
+          }
+        ]
+      },
+      {
+        "question_number": 89,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "1"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(1)"
+          }
+        ]
+      },
+      {
+        "question_number": 90,
+        "candidates": [
+          {
+            "source": "ExamSIDE",
+            "answer": "18"
+          },
+          {
+            "source": "eSaral official NTA label",
+            "answer": "(18)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paper_code": "JEE-MAIN-22-30JUL-S2",
+    "question_count": 90,
+    "answers_filled": 90,
+    "missing_answers": [],
+    "conflicts": []
+  }
+]

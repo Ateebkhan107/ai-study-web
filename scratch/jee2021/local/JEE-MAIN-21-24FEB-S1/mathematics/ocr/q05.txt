@@ -1,0 +1,16 @@
+The system of linear equations
+3x — 2y — kz = 10
+
+2x — 4y - 2z =6
+
+x + 2y -—z=5m
+
+is inconsistent if :
+
+(1) k=3,m= (2) k#3,meR
+
+(3) k#3,m#
+
+nalR n|
+
+(4) k=3,me2

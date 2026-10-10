@@ -1,0 +1,12 @@
+In a typical combustion engine the work done
+
+Bx?
+by a gas molecule is given W=a7Be #7 ,
+
+where x is the displacement, k is the Boltzmann
+constant and T is the temperature. If a and B
+are constants, dimensions of a will be :
+
+(1) [MLT-?] (2) [M°LT®°]
+
+(3) [M?LT~] (4) [MLT-"]

@@ -1,0 +1,8 @@
+12. Let us consider a curve, y = f(x) passing through
+the point (2, 2) and the slope of the tangent to the curve
+at any point (x, f(x)) is given by f(x) + xf(x) = x.
+Then :
+(1) x’ + 2xf(x) -— 12 =0
+(2) x° + xf(x) + 12=0
+(3) x — 3xf(x) -4 =0
+(4) x’ + 2xf(x) +4 =0

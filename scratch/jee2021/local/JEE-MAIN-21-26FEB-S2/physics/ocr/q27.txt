@@ -1,0 +1,5 @@
+Time period of a simple pendulum is T. The
+time taken to complete 5/8 oscillations
+
+a
+starting from mean position is B T . The value

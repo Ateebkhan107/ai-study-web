@@ -1,0 +1,16 @@
+The correct sequence of reagents used in the
+preparation of 4-bromo-2-nitroethyl benzene
+
+from benzene is :
+
+(1) HNO,/H,SO,, Br,/AICl;, CH,;COCI/AICIL,,
+Zn-Hg/HCl
+
+(2) Br,/AIBr3, CH;COCI/AIC1,, HNO,/H,SO,,
+Zn/HCl
+
+(3) CH,COCI/AICI,, Br,/AIBr,, HNO,/H,SO,,
+Zn/HCl
+
+(4) CH,;COCI/AICI;, Zn-Hg/HCl, Br,/AIBr;,
+HNO,/H,SO,

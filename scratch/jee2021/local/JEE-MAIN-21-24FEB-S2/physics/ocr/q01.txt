@@ -1,0 +1,7 @@
+When a particle executes SHM, the nature of
+graphical representation of velocity as a
+function of displacement is :
+
+(1) circular (2) elliptical
+
+(3) parabolic (4) straight line

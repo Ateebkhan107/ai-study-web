@@ -1,0 +1,6 @@
+Let a be a positive real number such_ that
+Ler dx = 10e — 9 where [x] is the greatest
+integer less than or equal to x. Then a is equal to :
+
+(1) 10 —log.(1 + e) (2) 10 + log.2
+(3) 10 + log.3 (4) 10 + log.(1+ e)

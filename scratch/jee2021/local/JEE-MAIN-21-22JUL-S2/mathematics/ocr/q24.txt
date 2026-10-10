@@ -1,0 +1,8 @@
+Consider the following frequency distribution :
+
+Class : 0-6 6-12 12-18 18-24 24-30
+Frequency: a b 12 9 5
+
+If mean = = and median = 14, then the value (a — by
+
+is equal to

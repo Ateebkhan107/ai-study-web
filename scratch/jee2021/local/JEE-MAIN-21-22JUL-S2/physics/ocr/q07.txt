@@ -1,0 +1,17 @@
+Statement I : The ferromagnetic property depends
+on temperature. At high temperature, ferromagnet
+becomes paramagnet.
+
+Statement II : At high temperature, the domain
+wall area of a ferromagnetic substance increases.
+
+In the light of the above statements, choose the
+most appropriate answer from the options given
+below :
+
+(1) Statement I is true but Statement II is false
+(2) Both Statement I and Statement II are true
+
+(3) Both Statement I and Statement II are false
+
+(4) Statement I is false but Statement II is true

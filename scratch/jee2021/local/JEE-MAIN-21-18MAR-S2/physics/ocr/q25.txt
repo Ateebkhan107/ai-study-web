@@ -1,0 +1,13 @@
+A TV transmission tower antenna is at a height
+of 20 m. Suppose that the receiving antenna is
+
+at.
+
+(i) ground level
+
+(ii) a height of 5 m.
+
+The increase in antenna range in case (ii)
+relative to case (i) is n%.
+
+The value of n, to the nearest integer, is .

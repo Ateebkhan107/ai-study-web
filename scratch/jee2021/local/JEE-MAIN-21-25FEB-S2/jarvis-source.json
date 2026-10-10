@@ -1,0 +1,988 @@
+[
+  {
+    "source_number": 1,
+    "subject": "Physics",
+    "question": "Match List I with List II. List I List II (a) Rectifier (i) Used either for stepping up or stepping down the a.c. Voltage (b) Stabilizer (ii) Used to convert a.c. voltage into d.c. voltage (c) Transformer (iii) Used to remove any ripple in the rectified output voltage (d) Filter (iv) Used for constant output voltage even when the input voltage or load current change Choose the correct answer form the options given below:",
+    "options": [
+      "(a)-(ii), (b)- (i), (c)-(iv), (d)-(iii)",
+      "(a)-(ii), (b)- (iv), (c)-(i), (d)-(iii)",
+      "(a)-(ii), (b)- (i), (c)-(iii), (d)-(iv)",
+      "(a)-(iii), (b)- (iv), (c)-(i), (d)-(ii)"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 2,
+    "subject": "Physics",
+    "question": "Y = A sin(ωt + φ0) is the time – displacement equation of a SHM, At t = 0 the displacement of A the particle is Y = and it is moving along negative x-direction. Then the initial phase angle φ0 2 will be.",
+    "options": [
+      "$\\dfrac{\\pi}{6}$",
+      "$\\dfrac{\\pi}{3}$",
+      "$\\dfrac{2\\pi}{3}$",
+      "$\\dfrac{5\\pi}{6}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 3,
+    "subject": "Physics",
+    "question": "Two identical spring of spring constant '2K' are attached to a block of mass m and to fixed support (see figure). When the mass is displaced from equilibrium position on either side, it executes simple harmonic motion. Then time period of oscillations of this system is: 2km2k mmmm",
+    "options": [
+      "$\\pi\\sqrt{\\dfrac{m}{k}}$",
+      "$\\pi\\sqrt{\\dfrac{m}{2k}}$",
+      "$2\\pi\\sqrt{\\dfrac{m}{k}}$",
+      "$2\\pi\\sqrt{\\dfrac{m}{2k}}$"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/b8455632-f9a0-4cea-9591-60e5ac3f5ecc_fig.png"
+  },
+  {
+    "source_number": 4,
+    "subject": "Physics",
+    "question": "The wavelength of the photon emitted by a hydrogen atom when an electron makes a transition from n = 2 to n = 1 state is:",
+    "options": [
+      "194.8 nm",
+      "490.7 nm",
+      "913.3 nm",
+      "121.8 nm"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 5,
+    "subject": "Physics",
+    "question": "In a ferromagnetic material, below the curie temperature, a domain is defined as:",
+    "options": [
+      "a macroscopic region with consecutive magnetic diploes oriented in opposite direction.",
+      "a macroscopic region with zero magnetization.",
+      "a macroscopic region with saturation magnetization.",
+      "a macroscopic region with randomly oriented magnetic dipoles."
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 6,
+    "subject": "Physics",
+    "question": "The point A moves with a uniform speed along the circumference of a circle of radius 0.36m and cover 30$^{o}$ in 0.1s. The perpendicular projection 'P' form 'A' on the diameter MN represents the simple harmonic motion of 'P'. The restoration force per unit mass when P touches M will be: A 0.1s 0.36m30$^{o}$ MN OP",
+    "options": [
+      "100 N",
+      "50 N",
+      "9.87 N",
+      "0.49 N"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/0291aab8-41c2-43fe-b173-fe16b37d6147_fig.png"
+  },
+  {
+    "source_number": 7,
+    "subject": "Physics",
+    "question": "The stopping potential for electrons emitted from a photosensitive surface illuminated by light of wavelength 491 nm is 0.710 V. When the incident wavelength is changed to a new value, the stopping potential is 1.43V. The new wavelength is:",
+    "options": [
+      "400 NM",
+      "382 nm",
+      "309 nm",
+      "329 nm"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 8,
+    "subject": "Physics",
+    "question": "A charge 'q' is placed at one corner of a cube as shown in figure. The flux of electrostatic field E though the shaded area is: Z qY X qqqq",
+    "options": [
+      "$\\dfrac{q}{48\\varepsilon_{0}}$",
+      "$\\dfrac{q}{8\\varepsilon_{0}}$",
+      "$\\dfrac{q}{24\\varepsilon_{0}}$",
+      "$\\dfrac{q}{4\\varepsilon_{0}}$"
+    ],
+    "correct": "C",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/8f460fe7-4257-4f43-ad58-bb564a4fa8d8_fig.png"
+  },
+  {
+    "source_number": 9,
+    "subject": "Physics",
+    "question": "A sphere of radius 'a' and mass 'm' rolls along horizontal plane with constant speed υ0. It encounters an inclined plane at angle θ and climbs upward. Assuming that it rolls without slipping how far up the sphere will travel ?",
+    "options": [
+      "$\\frac{2}{5}\\frac{\\upsilon_{0}^{2}}{g\\sin\\theta}$",
+      "$\\frac{7\\upsilon_{0}^{2}}{10g\\sin\\theta}$",
+      "$\\frac{\\upsilon_{0}^{2}}{5g\\sin\\theta}$",
+      "$\\frac{\\upsilon_{0}^{2}}{2g\\sin\\theta}$"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/a49e9f79-876b-4efb-a7b7-3ae7cf39cb7e_fig.png"
+  },
+  {
+    "source_number": 10,
+    "subject": "Physics",
+    "question": "Consider the diffraction pattern obtained from the sunlight incident on a pinhole of diameter 0.1 µm. If the diameter of the pinhole is slightly increased, it will affect the diffraction pattern such that:",
+    "options": [
+      "its size decreases, but intensity increases",
+      "its size increases, but intensity decreases",
+      "its size increases, and intensity increases",
+      "its size decreases, and intensity decreases"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 11,
+    "subject": "Physics",
+    "question": "An electron of mass me and a proton of mass mp = 1836 me are moving with the same speed. The ratio of their de Broglie wavelength λ$^{electron}$ will be: λProton 1",
+    "options": [
+      "$918$",
+      "$1836$",
+      "$\\dfrac{1}{1836}$",
+      "$1$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 12,
+    "subject": "Physics",
+    "question": "thermodynamic process is shown below on a P-V diagram for one mole of an ideal gas. If V2 = 2V1 then the ratio of temperature T2/T1 is: P1(P$^{1}$V$^{1}$T$^{1}$)PV$^{1/2}$=constant 2(P2V2T2) V V$_{1}$V$_{2}$",
+    "options": [
+      "$\\dfrac{1}{\\sqrt{2}}$",
+      "$\\dfrac{1}{2}$",
+      "$2$",
+      "$\\sqrt{2}$"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/c355372d-3b31-4d29-9540-128e79cdce6e_fig.png"
+  },
+  {
+    "source_number": 13,
+    "subject": "Physics",
+    "question": "A stone is dropped from the top of a building. When it crosses a point 5m below the top, another stone starts to fall from a point 25m below the top, Both stones reach the bottom of building simultaneously. The height of the building is:",
+    "options": [
+      "45 m",
+      "35 m",
+      "25 m",
+      "50 m"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 14,
+    "subject": "Physics",
+    "question": "if a message signal of frequency 'ƒm' is amplitude modulated with a carrier signal of frequency 'ƒc' and radiated through an antenna, the wavelength of the corresponding signal in air is: cccc",
+    "options": [
+      "$\\dfrac{c}{f_{c}+f_{m}}$",
+      "$\\dfrac{c}{f_{c}-f_{m}}$",
+      "$\\dfrac{c}{f_{m}}$",
+      "$\\dfrac{c}{f_{c}}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 15,
+    "subject": "Physics",
+    "question": "Given below are two statements: Statement I: In a diatomic molecule, the rotational energy at a given temperature obeys Maxwell's distribution. Statement II: in a diatomic molecule, the rotational energy at a given temperature equals the translational kinetic energy for each molecule. In the light of the above statements, choose the correct answer from the options given below:",
+    "options": [
+      "Both statement I and statement II are false.",
+      "Both statement I and statement II are true.",
+      "Statement I is false but statement II is true",
+      "Statement I is true but statement II is false."
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 16,
+    "subject": "Physics",
+    "question": "An electron with kinetic energy K1 enters between parallel plates of a capacitor at an angle 'α’ with the plates. It leaves the plates at angle 'β' with kinetic energy K2. Then the ratio of kinetic energies K1 : K2 will be:",
+    "options": [
+      "$\\frac{\\sin^{2}\\beta}{\\cos^{2}\\alpha}$",
+      "$\\frac{\\cos^{2}\\beta}{\\cos^{2}\\alpha}$",
+      "$\\frac{\\cos\\beta}{\\sin\\alpha}$",
+      "$\\frac{\\cos\\beta}{\\cos\\alpha}$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 17,
+    "subject": "Physics",
+    "question": "An LCR circuit contains resistance of 110Ω and a supply of 220 V at 300 rad/s angular frequency. If only capacitance is removed from the circuit, current lags behind the voltage by 45$^{o}$. If on the other hand, only inductor is removed the current leads by 45$^{o}$ with the applied voltage. The rms current flowing in the circuit will be:",
+    "options": [
+      "2.5A",
+      "2A",
+      "1A",
+      "1.5 A"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 18,
+    "subject": "Physics",
+    "question": "For extrinsic semiconductors: when doping level is increased;",
+    "options": [
+      "Fermi–level of p and n-type semiconductors will not be affected.",
+      "Fermi–level of p-type semiconductors will go downward and Fermi–level of n-type semiconductor will go upward.",
+      "Fermi–level of both p–type and n–type semiconductors will go upward for T > TF K and downward for T< TFK, where TF is Fermi temperature.",
+      "Fermi–level of p-type semiconductor will go upward and Fermi–level of n–type semiconductors will go downward."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 19,
+    "subject": "Physics",
+    "question": "If e is the electronic charged, c is the speed of light in free space and h is planck's constant, the 1e$^{2}$ quantity has dimensions of : 4πε$_{0}$hc",
+    "options": [
+      "[ LC$^{-1}$]",
+      "[M$^{0}$ L$^{0}$ T$^{0}$]",
+      "[ M L T$^{0}$]",
+      "[M L T$^{-1}$]"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 20,
+    "subject": "Physics",
+    "question": "The percentage increase in the speed of transverse waves produced in a stretched string if the tension is increased by 4% will be___________%.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 21,
+    "subject": "Physics",
+    "question": "Two small spheres each of mass 10 mg are suspended from a point by threads 0.5 m long. They are equally charged and repel each other to a distance of 0.20 m . Then charge on each of the sphere is $\\frac{a}{21}\\times10^{-8}$ C. The value of 'a' will be________.",
+    "options": [],
+    "correct": "20",
+    "source_image": null
+  },
+  {
+    "source_number": 22,
+    "subject": "Physics",
+    "question": "The peak electric field produced by the radiation coming from the 8 W bulb at a distance of 10 m is $\\frac{x}{10}\\sqrt{\\frac{\\mu_{0}c}{\\pi}}$ V/m. The efficiency of the bulb is 10% and it is a point source. The value of x is ___.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 23,
+    "subject": "Physics",
+    "question": "Two identical conducting spheres with negligible volume have 2.1nC and -0.1nC charges, respectively. They are brought into contact and then separated by a distance of 0.5 m. The electrostatic force acting between the spheres is _______× 10$^{-9}$ N. 1 [Given : 4πε$_{0}$=9×10$_{9}$ SI unit]",
+    "options": [],
+    "correct": "36",
+    "source_image": null
+  },
+  {
+    "source_number": 24,
+    "subject": "Physics",
+    "question": "The initial velocity υi required to project a body vertically upward from the surface of the earth to reach a height of 10R, where R is the radius of the earth, may be described in terms of x escape velocity υe such that υi = y ×υ$_{e}$. The value of x will be_______.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 25,
+    "subject": "Physics",
+    "question": "A current of 6A enters one corner P of an equilateral triangle PQR having 3 wires of resistance 2Ω each and leaves by the corner R. The currents i1 in ampere is______. 6A 2Ω P i$_{1}$i$_{2}$ 2Ω2Ω QR 2Ω",
+    "options": [],
+    "correct": "2",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/a0385bfa-9291-453c-8849-0d0c960f1678_fig.png"
+  },
+  {
+    "source_number": 26,
+    "subject": "Physics",
+    "question": "The wavelength of an X-ray beam is 10 Å. The mass of a fictitious particle having the same energy as that of the X – ray photons is $\\dfrac{x}{3}$ h kg. The value of x is _______.",
+    "options": [],
+    "correct": "10",
+    "source_image": null
+  },
+  {
+    "source_number": 27,
+    "subject": "Physics",
+    "question": "A reversible heat engine converts one- fourth of the heat input into work. When the temperature of the sink is reduced by 52K, its efficiency is doubled. The temperature in Kelvin of the source will be_______.",
+    "options": [],
+    "correct": "208",
+    "source_image": null
+  },
+  {
+    "source_number": 28,
+    "subject": "Physics",
+    "question": "Two particles having masses 4g and 16g respectively are moving with equal kinetic energies. The ratio of the magnitudes of their linear momentum is n:2. The value of n will be_____.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 29,
+    "subject": "Physics",
+    "question": "If P×Q=Q×P, the angle between P and Q is θ(0$^{o}$ < θ < 360$^{o}$). The value of 'θ' will be____.",
+    "options": [],
+    "correct": "180",
+    "source_image": null
+  },
+  {
+    "source_number": 30,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement I : The identification of Ni$^{2+}$ is carried out by dimethyl glyoxime in the presence of NH4OH Statement II : The dimethyl glyoxime is a bidentate neutral ligand. In the light of the above statements, choose the correct answer from the options given below :",
+    "options": [
+      "Both statement I and statement II are true",
+      "Both statement I and statement II are false",
+      "Statement I is false but statement II is true",
+      "Statement I is true but statement II is false"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 31,
+    "subject": "Chemistry",
+    "question": "Carbylamine test is used to detect the presence of primary amino group in an organic compound. Which of the following compound is formed when this test is performed with aniline ? CONH2NC NHCH$^{3}$CN",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "B",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/repairs/2021-02-25-evening/4b5e611c-5469-417a-8ff9-4afd9e96893d_fig.png"
+  },
+  {
+    "source_number": 32,
+    "subject": "Chemistry",
+    "question": "The correct order of bond dissociation enthalpy of halogen is :",
+    "options": [
+      "F2>Cl2>Br2>I2",
+      "Cl2>F2>Br2>I2",
+      "Cl2>Br2>F2>I2",
+      "I2>Br2>Cl2>F2"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 33,
+    "subject": "Chemistry",
+    "question": "Which one of the following statements is FALSE for hydrophilic sols ?",
+    "options": [
+      "These sols are reversible in nature",
+      "The sols cannot be easily coagulated",
+      "They do not require electrolytes for stability.",
+      "Their viscosity is of the order of that of H2O"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 34,
+    "subject": "Chemistry",
+    "question": "Water does not produce CO on reacting with :",
+    "options": [
+      "C3H8",
+      "C",
+      "CH4",
+      "CO2"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 35,
+    "subject": "Chemistry",
+    "question": "What is ‘X’ in the given reaction ? CH $^{2}$OH+ oxalic acid210$^{0}$Cx (major product) CH2OH CH 2 CH—OHCH$_{2}$OHCHO CH$^{2}$ CH$^{2}$ CHO CHO",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/2846ec12-2043-4650-bce2-97b95fdcb394_fig.png"
+  },
+  {
+    "source_number": 36,
+    "subject": "Chemistry",
+    "question": "If which of the following order the given complex ions are arranged correctly with respect to their decreasing spin only magnetic moment ? (i) [FeF6]$^{3-}$ (ii) [Co(NH3)6]$^{3+}$ (iii) [NiCl4]$^{2-}$ (iv) [Cu(NH3)4]$^{2+}$",
+    "options": [
+      "(ii)>(i)>(iii)>(iv)",
+      "(iii)>(iv)>(ii)>(i)",
+      "(ii)>(iii)>(i)>(iv)",
+      "(i)>(iii)>(iv)>(ii)"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 37,
+    "subject": "Chemistry",
+    "question": "The major product of the following reaction is : NO2 H2SO4 NO2",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/24b1a976-3f96-472e-aa0d-b52104a317cb_fig.png"
+  },
+  {
+    "source_number": 38,
+    "subject": "Chemistry",
+    "question": "The correct sequence of reagents used in the preparation of 4-bromo-2-nitroethyl benzene from benezene is :",
+    "options": [
+      "CH$_{3}$COCl/AlCl$_{3}$, Br$_{2}$/AlBr$_{3}$, HNO$_{3}$/H$_{2}$SO$_{4}$, Zn/HCl",
+      "CH$_{3}$COCl/AlCl$_{3}$, Zn-Hg/HCl, Br$_{2}$/AlBr$_{3}$, HNO$_{3}$/H$_{2}$SO$_{4}$",
+      "Br$_{2}$/AlBr$_{3}$, CH$_{3}$COCl/AlCl$_{3}$, HNO$_{3}$/H$_{2}$SO$_{4}$, Zn/HCl",
+      "HNO$_{3}$/H$_{2}$SO$_{4}$, Br$_{2}$/AlCl$_{3}$, CH$_{3}$COCl/AlCl$_{3}$, Zn-Hg/HCl"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 39,
+    "subject": "Chemistry",
+    "question": "The major components of German Silver are :",
+    "options": [
+      "Cu, Zn and Ag",
+      "Ge, Cu and Ag",
+      "Zn, Ni and Ag",
+      "Cu, Zn and Ni"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 40,
+    "subject": "Chemistry",
+    "question": "The method used for the purification of Indium is :",
+    "options": [
+      "van Arkel method",
+      "vapour phase refining",
+      "zone refining",
+      "Liquation"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 41,
+    "subject": "Chemistry",
+    "question": "Which of the following is correct structure of α-anomer of maltose : H CH2OHOHHCH2OHOOH",
+    "options": [
+      "(A)",
+      "(B)",
+      "(C)",
+      "(D)"
+    ],
+    "correct": "D",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/e925b1d7-9837-459f-9f96-ef88cb8496ce_fig.png"
+  },
+  {
+    "source_number": 42,
+    "subject": "Chemistry",
+    "question": "The major product of the following reaction is : H2/CO CH3CH2CH=CH2 Rh catalyst",
+    "options": [
+      "CH3CH2CH2CHO",
+      "CH3CH2CH=CH–CHO",
+      "CH3CH2CH2CH2CHO",
+      "CH3CH2C=CH2 CHO"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 43,
+    "subject": "Chemistry",
+    "question": "The correct order of acid character of the following compounds is : OHCOOHCOOHCOOH NO2CH3 IIIIIIIV",
+    "options": [
+      "II>III>IV>I",
+      "III>II>I>IV",
+      "IV>III>II>I",
+      "I>II>III>IV"
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/987f0093-8856-41ea-afac-053037e0dcf8_fig.png"
+  },
+  {
+    "source_number": 44,
+    "subject": "Chemistry",
+    "question": "Which among the following species has unequal bond lengths ?",
+    "options": [
+      "XeF4",
+      "SiF4",
+      "BF$^{4}$ $^{-}$",
+      "SF4"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 45,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement I : α and β forms of sulphur can change reversibly between themselves with slow heating or slow cooling. Statement II : At room temperature the stable crystalline form of sulphur is monoclinic sulphur. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      "Both statement I and statement II are false",
+      "Statement I is true but statement II is false",
+      "Both statement I and statement II are true",
+      "Statement I is false but statement II is true"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 46,
+    "subject": "Chemistry",
+    "question": "$^{288K}$NO2 NO2 (A) (B) (C) Correct statement about the given chemical reaction is :",
+    "options": [
+      "Reaction is possible and compound (A) will be major product.",
+      "The reaction will form sulphonated product instead of nitration. ¨",
+      "— N H $_{2}$group is ortho and para directive, so product (B) is not possible.",
+      "Reaction is possible and compound (B) will be the major product."
+    ],
+    "correct": "A",
+    "source_image": "https://vkrqzeezphqsbagfnzcn.supabase.co/storage/v1/object/public/question-figures/2021/February/780cfdda-1a57-49c5-a16a-45ec37baf11b_fig.png"
+  },
+  {
+    "source_number": 47,
+    "subject": "Chemistry",
+    "question": "Which of the following compound is added to the sodium extract before addition of silver nitrate for testing of halogens ?",
+    "options": [
+      "Nitric acid",
+      "Sodium hydroxide",
+      "Hydrochloric acid",
+      "Ammonia"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 48,
+    "subject": "Chemistry",
+    "question": "Given below are two statements : Statement I : The pH of rain water is normally ~5.6. Statement II : If the pH of rain water drops below 5.6, it is called acid rain. In the light of the above statements, choose the correct answer from the option given below.",
+    "options": [
+      "Statement I is false but Statement II is true",
+      "Both statement I and statement II are true",
+      "Both statement I and statement II are false",
+      "Statement I is true but statement II is false"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 49,
+    "subject": "Chemistry",
+    "question": "The solubility of Ca(OH)2 in water is : [Given : The solubility product of Ca(OH)2 in water = 5.5×10$^{-6}$]",
+    "options": [
+      "1.11 ×10$^{-6}$",
+      "1.77 ×10$^{-6}$",
+      "1.77×10$^{-2}$",
+      "1.11×10$^{-2}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 50,
+    "subject": "Chemistry",
+    "question": "If a compound AB dissociates to the extent of 75% in an aqueous solution, the molality of the solution which shows a 2.5 K rise in the boiling point of the solution is ______molal. (Rounded-off to the nearest integer) [Kb=0.52 K kg mol$^{-1}$]",
+    "options": [],
+    "correct": "3",
+    "source_image": null
+  },
+  {
+    "source_number": 51,
+    "subject": "Chemistry",
+    "question": "5 = [1+(2-1)3/4]×0.52 ×m (2) The spin only magnetic moment of a divalent ion in aqueous solution (atomic number 29) is ____BM.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  },
+  {
+    "source_number": 52,
+    "subject": "Chemistry",
+    "question": "The number of compound/s given below which contain/s —COOH group is ______. (1) Sulphanilic acid (2) Picric acid (3) Aspirin (4) Ascorbic acid",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 53,
+    "subject": "Chemistry",
+    "question": "The unit cell of copper corresponds to a face centered cube of edge length 3.596 Å with one copper atom at each lattice point. The calculated density of copper in kg/m$^{3}$ is ______. [Molar mass of Cu : 63.54 g; Avogadro number = 6.022×10$^{23}$]",
+    "options": [],
+    "correct": "9076",
+    "source_image": null
+  },
+  {
+    "source_number": 54,
+    "subject": "Chemistry",
+    "question": "Consider titration of NaOH solution versus 1.25 M oxalic acid solution. At the end point following burette readings were obtained. (i) 4.5 ml. (ii) 4.5 ml. (iii) 4.4 ml. (iv) 4.4 ml (v) 4.4 ml If the volume of oxalic acid taken was 10.0 ml. then the molarity of the NaOH solution is ____M. (Rounded-off to the nearest integer)",
+    "options": [],
+    "correct": "6",
+    "source_image": null
+  },
+  {
+    "source_number": 55,
+    "subject": "Chemistry",
+    "question": "Electromagnetic radiation of wavelength 663 nm is just sufficient to ionize the atom of metal A. The ionization energy of metal A in kJ mol$^{—1}$ is____. (Rounded off to the nearest integer) [h=6.63×10$^{-34}$Js, c = 3.00×10$^{8}$ms$^{-1}$, NA=6.02×10$^{23}$ mol$^{-1}$]",
+    "options": [],
+    "correct": "180",
+    "source_image": null
+  },
+  {
+    "source_number": 56,
+    "subject": "Chemistry",
+    "question": "The rate constant of a reaction increases by five times on increase in temperature from 27$^{0}$C to 52$^{0}$C. The value of activation energy in kJ mol$^{-1}$ is ______. (Rounded off to the nearest integer) [R=8.314 J K$^{-1}$ mol$^{-1}$]",
+    "options": [],
+    "correct": "52",
+    "source_image": null
+  },
+  {
+    "source_number": 57,
+    "subject": "Chemistry",
+    "question": "Copper reduces NO$_{3}$ −into NO and NO2 depending upon the concentration of HNO3 in solution. (Assuming fixed [Cu$^{2+}$] and PNO=PNO2), the HNO3 concentration at which the thermodynamic tendency for reduction of NO$_{3}$ − into NO and NO2 by copper is same is 10$^{x}$ M. The value of 2x is ______. (Rounded-off to the nearest integer) [Given : $E^{0}_{Cu^{2+}/Cu}=0.34\\,V$ , $E^{0}_{NO_{3}^{-}/NO}=0.96\\,V$ , $E^{0}_{NO_{3}^{-}/NO_{2}}=0.79\\,V$ and at 298 K, $\\frac{RT}{F}(2.303)=0.059$]",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 58,
+    "subject": "Chemistry",
+    "question": "Five moles of an ideal gas at 293 K is expanded isothermally from an initial pressure of 2.1 MPa to 1.3 MPa against at constant external 4.3 MPa. The heat transferred in this process is ____kJ mol$^{-1}$. (Rounded-off of the nearest integer) [Use R = 8.314 J mol$^{-1}$ K$^{-1}$]",
+    "options": [],
+    "correct": "15",
+    "source_image": null
+  },
+  {
+    "source_number": 59,
+    "subject": "Chemistry",
+    "question": "Among the following, number of metal/s which can be used as electrodes in the photoelectric cell is _____(Integer answer). (A) Li (B) Na (C) Rb (D) Cs",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 60,
+    "subject": "Mathematics",
+    "question": "A plane passes through the points A(1, 2, 3), B(2, 3, 1) and C(2, 4, 2). If O is the origin and P is (2, –1, 1), then the projection of OP on this plane is of length:",
+    "options": [
+      "2 5",
+      "2 3",
+      "2 11",
+      "2 7"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 61,
+    "subject": "Mathematics",
+    "question": "The contrapositive of the statement “If you will work, you will earn money” is:",
+    "options": [
+      "If you will not earn money, you will not work",
+      "You will earn money, if you will not work",
+      "If you will earn money, you will work",
+      "To earn money, you need to work"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 62,
+    "subject": "Mathematics",
+    "question": "If α, β∈ R are such that 1 – 2i (here i$^{2}$ = –1) is a root of z$^{2}$ + αz + β = 0, then (α – β) is equal to:",
+    "options": [
+      "7",
+      "–3",
+      "3",
+      "–7"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 63,
+    "subject": "Mathematics",
+    "question": "If In= ∫cot$^{n}$ x dx , then: π/4",
+    "options": [
+      "I$_{2}$1+I$_{4}$, I$_{3}$1+I$_{5}$ , I$_{4}$1+I$_{6}$ are in G.P.",
+      "I$_{2}$1+I$_{4}$, I$_{3}$1+I$_{5}$ , I$_{4}$1+I$_{6}$ are in A.P.",
+      "I2 + I4, I3 + I5, I4 + I6 are in A.P.",
+      "I2 + I4, (I3 + I5)$^{2}$, I4 + I6 are in G.P."
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 64,
+    "subject": "Mathematics",
+    "question": "If for the matrix, A = [1α–βα], AA$^{T}$ = I2, then the value of α$^{4}$ + β$^{4}$ is:",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 65,
+    "subject": "Mathematics",
+    "question": "Let x denote the total number of one-one functions from a set A with 3 elements to a set B with 5 elements and y denote the total number of one-one functions from the set A to the set A × B. Then:",
+    "options": [
+      "y = 273x",
+      "2y = 91x",
+      "y = 91x",
+      "2y = 273x"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 66,
+    "subject": "Mathematics",
+    "question": "If the curve x$^{2}$ + 2y$^{2}$ = 2 intersects the line x + y = 1 at two points P and Q, then the angle subtended by the line segment PQ at the origin is:",
+    "options": [
+      "2π+tan$^{–1}$ (14 )",
+      "2π– tan$^{–1}$ (14 )",
+      "2π+tan$^{–1}$ (13 )",
+      "2π– tan$^{–1}$ (13 )"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 67,
+    "subject": "Mathematics",
+    "question": "The integral $\\int \\frac{e^{3\\log_{e} 2x}+5e^{2\\log_{e} 2x}}{e^{4\\log_{e} x}+5e^{3\\log_{e} x}-7e^{2\\log_{e} x}}dx$, x > 0, is equal to: (where c is a constant of integration)",
+    "options": [
+      "$\\log_{e}|x^{2}+5x-7|$ + c",
+      "$\\frac{1}{4}\\log_{e}|x^{2}+5x-7|$ + c",
+      "$4\\log_{e}|x^{2}+5x-7|$ + c",
+      "$\\log_{e}\\sqrt{x^{2}+5x-7}$ + c"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 68,
+    "subject": "Mathematics",
+    "question": "A hyperbola passes through the foci of the ellipse $\\dfrac{x^{2}}{25}+\\dfrac{y^{2}}{16}=1$ and its transverse and conjugate axes coincide with major and minor axes of the ellipse, respectively. If the product of their eccentricities is one, then the equation of the hyperbola is:",
+    "options": [
+      "$\\dfrac{x^{2}}{9}-\\dfrac{y^{2}}{4}=1$",
+      "$\\dfrac{x^{2}}{9}-\\dfrac{y^{2}}{16}=1$",
+      "$x^{2}-y^{2}=9$",
+      "$\\dfrac{x^{2}}{9}-\\dfrac{y^{2}}{25}=1$"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 69,
+    "subject": "Mathematics",
+    "question": "In a group of 400 people, 160 are smokers and non-vegetarian; 100 are smokers and vegetarian and the remaining 140 are non-smokers and vegetarian. Their chances of getting a particular chest disorder are 35%, 20% and 10% respectively. A person is chosen from the group at random and is found to be suffering from the chest disorder. The probability that the selected person is a smoker and non-vegetarian is:",
+    "options": [
+      "457",
+      "458",
+      "1445",
+      "2845"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 70,
+    "subject": "Mathematics",
+    "question": "The following system of linear equations 3x + 3y + 2z = 9 3x + 2y + 2z = 9 x – y + 4z = 8",
+    "options": [
+      "does not have any solution",
+      "has a unique solution",
+      "has a solution (α, β, γ) satisfying α + β$^{2}$ + γ$^{3}$ = 12",
+      "has infinitely many solutions"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 71,
+    "subject": "Mathematics",
+    "question": "The minimum value of f(x) = $a^{a^{x}}+a^{1-a^{x}}$, where a, x ∈ R and a > 0, is equal to:",
+    "options": [
+      "a + $\\frac{1}{a}$",
+      "a + 1",
+      "2a",
+      "$2\\sqrt{a}$"
+    ],
+    "correct": "D",
+    "source_image": null
+  },
+  {
+    "source_number": 72,
+    "subject": "Mathematics",
+    "question": "A function f(x) is given by f(x) = $\\frac{5^{x}}{5^{x}+5}$, then the sum of the series f$\\left(\\frac{1}{20}\\right)$ + f$\\left(\\frac{2}{20}\\right)$ + f$\\left(\\frac{3}{20}\\right)$ + ...... + f$\\left(\\frac{39}{20}\\right)$ is equal to:",
+    "options": [
+      "$\\frac{19}{2}$",
+      "$\\frac{49}{2}$",
+      "$\\frac{39}{2}$",
+      "$\\frac{29}{2}$"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 73,
+    "subject": "Mathematics",
+    "question": "Let α and β be the roots of x$^{2}$ – 6x – 2 = 0. If an = α$^{n}$ – β$^{n}$ for n ≥ 1, then the value of a$^{10}$– 2a$^{8}$ 3a$_{9}$ is:",
+    "options": [
+      "4",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 74,
+    "subject": "Mathematics",
+    "question": "Let A be a 3 × 3 matrix with det(A) = 4. Let Ri denote the i$^{th}$ row of A. If a matrix B is obtained by performing the operation R2→ 2R2 + 5R3 on 2A, then det(B) is equal to:",
+    "options": [
+      "64",
+      "16",
+      "80",
+      "128"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 75,
+    "subject": "Mathematics",
+    "question": "The shortest distance between the line x – y = 1 and the curve x$^{2}$ = 2y is:",
+    "options": [
+      "12",
+      "0",
+      "1 2 2",
+      "1 2"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 76,
+    "subject": "Mathematics",
+    "question": "Let A be a set of all 4-digit natural numbers whose exactly one digit is 7. Then the probability that a randomly chosen element of A leaves remainder 2 when divided by 5 is:",
+    "options": [
+      "15",
+      "29",
+      "29797",
+      "122297"
+    ],
+    "correct": "C",
+    "source_image": null
+  },
+  {
+    "source_number": 77,
+    "subject": "Mathematics",
+    "question": "cosec [2cot$^{–1}$(5)+cos$^{–1}$ (54)] is equal to:",
+    "options": [
+      "5675",
+      "5665",
+      "5633",
+      "3365"
+    ],
+    "correct": "B",
+    "source_image": null
+  },
+  {
+    "source_number": 78,
+    "subject": "Mathematics",
+    "question": "If $0 < x, y < \\pi$ and $\\cos x + \\cos y - \\cos(x+y) = \\dfrac{3}{2}$, then $\\sin x + \\cos y$ is equal to:",
+    "options": [
+      "$\\dfrac{1+\\sqrt3}{2}$",
+      "$\\dfrac{1-\\sqrt3}{2}$",
+      "$\\dfrac{\\sqrt3}{2}$",
+      "$\\dfrac{1}{2}$"
+    ],
+    "correct": "A",
+    "source_image": null
+  },
+  {
+    "source_number": 79,
+    "subject": "Mathematics",
+    "question": "If $\\lim\\limits_{x \\to 0} \\frac{ax-(e^{4x}-1)}{ax(e^{4x}-1)}$ exists and is equal to b, then the value of a – 2b is ______.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 80,
+    "subject": "Mathematics",
+    "question": "A line is a common tangent to the circle (x – 3)$^{2}$+y$^{2}$=9and the parabola y$^{2}$ = 4x. If the two points of contact (a, b) and (c, d) are distinct and lie in the first quadrant, then 2(a+c) is equal to ______.",
+    "options": [],
+    "correct": "9",
+    "source_image": null
+  },
+  {
+    "source_number": 81,
+    "subject": "Mathematics",
+    "question": "The value of $\\int_{-2}^{2}\\left|3x^{2}-3x-6\\right|dx$ is ______.",
+    "options": [],
+    "correct": "19",
+    "source_image": null
+  },
+  {
+    "source_number": 82,
+    "subject": "Mathematics",
+    "question": "If the remainder when x is divided by 4 is 3, then the remainder when (2020+x)$^{2022}$is divided by 8 is ______.",
+    "options": [],
+    "correct": "1",
+    "source_image": null
+  },
+  {
+    "source_number": 83,
+    "subject": "Mathematics",
+    "question": "A line ‘λ’ passing through origin is perpendicular to the lines $_{1}$ :r=(3+t )ˆi+−+(12t )ˆj+(4+2t)kˆ $_{2}$ :r=(3+2s )ˆi+(3+2s )ˆj+(2+s )kˆ If the co-ordinates of the point in the first octant on ‘λ2’ at the distance of 17 from the point of intersection of ‘λ’ and ‘λ1’ are (a, b, c), then 18(a+b+c) is equal to ______.",
+    "options": [],
+    "correct": "44",
+    "source_image": null
+  },
+  {
+    "source_number": 84,
+    "subject": "Mathematics",
+    "question": "A function f is defined on [–3,3] as f ()x={min {| x |,2−x$^{2}$}, −2≤x≤2 [| x |],2<| x |≤3 where [x] denotes the greatest integer ≤ x. The number of points, where f is not differentiable in (–3,3) is ______.",
+    "options": [],
+    "correct": "5",
+    "source_image": null
+  },
+  {
+    "source_number": 85,
+    "subject": "Mathematics",
+    "question": "If the curves x = y$^{4}$ and xy = k cut at right angles, then (4k)$^{6}$ is equal to ______.",
+    "options": [],
+    "correct": "4",
+    "source_image": null
+  },
+  {
+    "source_number": 86,
+    "subject": "Mathematics",
+    "question": "The total number of two digit numbers ‘n’, such that 3$^{n}$+7$^{n}$ is a multiple of 10, is ______.",
+    "options": [],
+    "correct": "45",
+    "source_image": null
+  },
+  {
+    "source_number": 87,
+    "subject": "Mathematics",
+    "question": "Let a=ˆi+α+ˆj3kˆ andb=3iˆ−α+ˆjkˆ . If the area of the parallelogram whose adjacent sides are represented by the vectors a and b is 8 3 square units, then a·b is equal to ______.",
+    "options": [],
+    "correct": "2",
+    "source_image": null
+  }
+]

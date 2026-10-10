@@ -1,0 +1,5 @@
+Let a, b,c be three mutually perpendicular
+vectors of the same magnitude and equally inclined
+at an angle 0, with the vector a+b+c. Then
+
+36 cos’20 is equal to

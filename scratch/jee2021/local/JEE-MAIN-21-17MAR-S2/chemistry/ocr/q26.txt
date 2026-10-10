@@ -1,0 +1,5 @@
+In the ground state of atomic Fe(Z = 26
+the spin-only magnetic moment is
+
+x 10-! BM. (Round off to the Nearest Integer
+[Given : /3 = 1.73, J2 = 1.41]

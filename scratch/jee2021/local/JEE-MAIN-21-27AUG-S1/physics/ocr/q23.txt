@@ -1,0 +1,9 @@
+A uniform conducting wire of length is 24a, and
+resistance R is wound up as a current carrying coil
+in the shape of an equilateral triangle of side 'a' and
+then in the form of a square of side 'a'. The coil is
+connected to a voltage source Vo. The ratio of
+
+magnetic moment of the coils in case of equilateral
+
+triangle to that for square is 1: Vy where y is ...... .

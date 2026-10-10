@@ -1,0 +1,17 @@
+12.
+
+Let A = [aj] be a 3 x 3 matrix, where
+1 » ifi=j
+aj;=) -x if |i—jl=l
+2x 80 otherwise.
+Let a function f : R — R be defined as f(x) = det(A).
+Then the sum of maximum and minimum values of
+
+f on R is equal to:
+
+20 88
+— 2) =
+() 27 @) 27
+
+20 88
+O) FF @) a

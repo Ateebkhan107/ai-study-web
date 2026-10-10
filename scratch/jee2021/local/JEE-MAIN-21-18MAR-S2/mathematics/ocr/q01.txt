@@ -1,0 +1,18 @@
+Let y = y(x) be the solution of the differential
+
+d 2
+equation i, =(y +1)((y-+t)e" 12 -x),0<x<21,
+
+d
+with y(2) = 0. Then the value of i at
+IX
+
+x = 1 is equal to:
+
+3/2 2
+1) — 9) 28
+© (e? +1) ” (1+e)
+5/2 1/2
+3) —___ 4) >
+” Tey ” ea
+

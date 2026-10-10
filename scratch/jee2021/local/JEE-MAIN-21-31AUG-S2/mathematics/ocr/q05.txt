@@ -1,0 +1,8 @@
+Let f : N > N be a function such that
+
+f(m + n) = f(m) + f(n) for every m,n EN. If f(6) = 18,
+then f(2) - f(3) is equal to :
+
+(1) 6 (2) 54
+
+(3) 18 (4) 36

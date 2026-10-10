@@ -1,0 +1,9 @@
+11.
+
+A mass of 50 kg is placed at the centre of a
+uniform spherical shell of mass 100 kg and radius
+50 m. If the gravitational potential at a point, 25 m
+from the centre is V kg/m. The value of V is :
+(1)-60G (2)+2G
+
+(3)-20G (4)-4G

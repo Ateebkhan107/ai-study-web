@@ -1,0 +1,16 @@
+9. Which of the following is not correct for relation R
+
+on the set of real numbers ?
+
+Gk yeRSO0< |x| - ly| < 1 is neither
+transitive nor symmetric.
+
+QAxyeRSO0< |x —y| < 1 is symmetric and
+transitive.
+
+BAayeRS Ix| — ly| < 1 is reflexive but not
+symmetric.
+
+4 «wy eRS x-y| < 1 is reflexive and
+
+symmetric.

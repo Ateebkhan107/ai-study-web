@@ -1,0 +1,3 @@
+The number of elements in the set
+{x e€ R: ([xl — 3) Ix + 41 = 6} is equal to
+(1) 3 (2) 2 (3) 4 (4) 1

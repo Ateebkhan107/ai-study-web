@@ -1,0 +1,155 @@
+[
+  {
+    "paper_code": "JEE-MAIN-22-24JUN-S1",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      20,
+      43,
+      45,
+      46
+    ],
+    "min_alignment": 0.4375
+  },
+  {
+    "paper_code": "JEE-MAIN-22-24JUN-S2",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [],
+    "min_alignment": 0.4545
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUL-S1",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      10,
+      20,
+      44,
+      45,
+      47
+    ],
+    "min_alignment": 0
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUN-S1",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      14,
+      42,
+      43,
+      46,
+      47,
+      48
+    ],
+    "min_alignment": 0.5556
+  },
+  {
+    "paper_code": "JEE-MAIN-22-25JUN-S2",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      17,
+      45,
+      47,
+      48,
+      49
+    ],
+    "min_alignment": 0.4762
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUL-S1",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      2,
+      45
+    ],
+    "min_alignment": 0
+  },
+  {
+    "paper_code": "JEE-MAIN-22-27JUL-S2",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      33,
+      42,
+      43,
+      46
+    ],
+    "min_alignment": 0.2
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUL-S1",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      19,
+      44,
+      45,
+      48
+    ],
+    "min_alignment": 0
+  },
+  {
+    "paper_code": "JEE-MAIN-22-28JUL-S2",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [
+      13,
+      39,
+      42,
+      43,
+      50
+    ],
+    "min_alignment": 0
+  },
+  {
+    "paper_code": "JEE-MAIN-22-29JUN-S2",
+    "count": 90,
+    "subject_counts": {
+      "Physics": 30,
+      "Chemistry": 30,
+      "Mathematics": 30
+    },
+    "empty_mcq_options": [],
+    "min_alignment": 0.3043
+  }
+]

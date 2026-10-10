@@ -1,0 +1,9 @@
+Car B overtakes another car A at a relative speed
+of 40 ms’. How fast will the image of car B
+appear to move in the mirror of focal length 10 cm
+fitted in car A, when the car B is 1.9 m away from
+the car A?
+
+(1)4 ms” (2) 0.2 ms
+
+(3) 40 ms"! (4) 0.1 ms?

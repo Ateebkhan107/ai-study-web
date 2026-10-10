@@ -1,0 +1,13 @@
+9. Consider a frame that is made up of two thin
+massless rods AB and AC as shown in the
+
+figure. A vertical force p of magnitude 100 N
+is applied at point A of the frame.
+
+Suppose the force is p resolved parallel to the
+arms AB and AC of the frame. The magnitude
+of the resolved component along the arm AC
+is XN. The value of x, to the nearest integer, is
+
+[Given : sin(35°) = 0.573, cos(35°) = 0.819
+sin(110°) = 0.939, cos(110°) = —0.342 ]

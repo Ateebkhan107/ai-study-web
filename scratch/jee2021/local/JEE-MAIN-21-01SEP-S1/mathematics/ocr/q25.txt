@@ -1,0 +1,4 @@
+5. Let f(x) be a polynomial of degree 3 such that
+fk) =-2 for k = 2, 3, 4, 5. Then the value of
+
+52 — 10 f(10) is equal to :

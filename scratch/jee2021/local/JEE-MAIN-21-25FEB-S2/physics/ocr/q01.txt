@@ -1,0 +1,18 @@
+For extrinsic semiconductors; when doping
+level is increased;
+
+(1) Fermi-level of p-type semiconductor will go
+upward and Fermi-level of n-type
+semiconductors will go downward.
+
+(2) Fermi-level of p-type semiconductors will
+go downward and Fermi-level of n-type
+semiconductor will go upward.
+
+(3) Fermi-level of both p-type and n-type
+semiconductros will go upward for T > Tp
+K and downward for T < T; K, where Tp
+is Fermi temperature.
+
+(4) Fermi-level of p and n-type semiconductors
+will not be affected.

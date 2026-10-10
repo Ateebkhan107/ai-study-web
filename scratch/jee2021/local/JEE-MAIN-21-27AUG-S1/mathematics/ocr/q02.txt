@@ -1,0 +1,14 @@
+If forx, ye R,x>0,
+
+y = log,,x + log,x'" + log,,x"” + ..... upto 0 terms
+
+24+44+6+...42y 4
+34+64+9+4+....4+3y  logiyx
+
+and
+
+, then the ordered
+
+pair (x, y) is equal to :
+(1) (10°, 6) (2) (10", 6)
+(3) (10°, 3) (4) (10°, 9)

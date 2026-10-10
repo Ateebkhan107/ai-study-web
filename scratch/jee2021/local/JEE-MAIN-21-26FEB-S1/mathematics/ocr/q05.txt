@@ -1,0 +1,7 @@
+The value of » ] e* dx , where [x] is the
+
+n=l n-1
+
+greatest integer < x, is
+(1) 100(e - 1) (2) 100(1 - e)
+(3) 100e (4) 100 (1 + e)

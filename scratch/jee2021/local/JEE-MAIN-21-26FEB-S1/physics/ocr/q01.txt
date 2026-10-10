@@ -1,0 +1,17 @@
+Find the gravitational force of attraction
+between the ring and sphere as shown in the
+diagram, where the plane of the ring is
+perpendicular to the line joining the centres. If
+
+V8R is the distance between the centres of a
+
+ring (of mass 'm') and a sphere (mass 'M') where
+both have equal radius 'R'.
+
+m M
+V8R
+1 /8 GmM , 2V2 GMm
+() 2)
+1 GMm V8 GmM
+
+378 R? 4) 37?

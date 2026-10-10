@@ -1,0 +1,11 @@
+14. Let f : [0, ©) — [0, 3] be a function defined by
+Te O<x<t
+2+COSx, X>T7
+Then which of the following is true ?
+(1) f is continuous everywhere but not differentiable
+exactly at one point in (0, 00)
+(2) f is differentiable everywhere in (0, «)
+(3) f is not continuous exactly at two points in (0, 00)
+(4) f is continuous everywhere but not differentiable
+
+exactly at two points in (0, 00)

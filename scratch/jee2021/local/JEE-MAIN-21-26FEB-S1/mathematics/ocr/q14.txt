@@ -1,0 +1,16 @@
+14.
+
+Let f be any function defined on R and let it satisfy
+the condition :
+
+If(x) — fy < x — yl, V Gy) e R
+
+If f(O0) = 1, then :
+
+(1) f(x) can take any value in R
+
+(2) fx~%)<0,VxeER
+
+(3) f~#)=0,VxeER
+
+(4) f~%)>0,VxeER

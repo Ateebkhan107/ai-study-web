@@ -1,0 +1,13 @@
+6.
+
+Two squares are chosen at random on a chessboard
+(see figure). The probability that they have a side
+in common is :
+
+Pt tt Tt tt
+
+Tey ty 4 64 square
+| {tt tt tt
+
+| | |
+

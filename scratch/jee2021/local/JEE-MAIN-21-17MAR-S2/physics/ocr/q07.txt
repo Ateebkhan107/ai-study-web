@@ -1,0 +1,11 @@
+A sound wave of frequency 245 Hz travels
+with the speed of 300 ms-! along the positive
+x-axis. Each point of the wave moves to and
+fro through a total distance of 6 cm. What will
+be the mathematical expression of this
+travelling wave ?
+
+(1) Y(x,t) = 0.03 [sin 5.1 x - (0.2 x 103)t]
+(2) Y(x,t) = 0.06 [sin 5.1 x — (1.5 x 103)t]
+(3) Y(x,t) = 0.06 [sin 0.8 x — (0.5 x 103)t]
+(4) Y(x,t) = 0.03 [sin 5.1 x — (1.5 x 103)t]

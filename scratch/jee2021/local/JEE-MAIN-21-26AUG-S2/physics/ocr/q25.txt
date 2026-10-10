@@ -1,0 +1,7 @@
+A circular coil of radius 8.0 cm and 20 turns is
+rotated about its vertical diameter with an angular
+speed of 50 rad s' in a uniform horizontal
+magnetic field of 3.0 x 10° T. The maximum
+emf induced the coil will be .......... x10” volt
+
+(rounded off to the nearest integer)

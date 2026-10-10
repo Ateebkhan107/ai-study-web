@@ -1,0 +1,7 @@
+If the least and the largest real values of a, for
+
+which the equation z + alz —- ll + 21=0
+
+(z € C and j= J-1) has a solution, are p and
+
+q respectively; then 4(p? + q?) is equal to

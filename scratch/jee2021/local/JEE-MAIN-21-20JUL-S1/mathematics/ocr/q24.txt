@@ -1,0 +1,4 @@
+4. The number of rational terms in the binomial
+
+I 1 120
+expansion of (43 + 5) is

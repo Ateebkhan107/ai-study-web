@@ -1,0 +1,13 @@
+The differential equation satisfied by the system
+
+of parabolas y” = 4a(x + a) is :
+
+dy d
+
+ay ” 2x ms y=0
+dy , dy
+
+2 Yay 2x dx ty =0
+
+(3) Y dy 42x dy y=0
+dx dx

@@ -1,0 +1,12 @@
+10.
+
+Let z and w be two complex numbers such that
+
+Z+i
+1 and Re(w) has
+Z-31
+
+w=2ZZ-2z+2,
+
+minimum value. Then, the minimum value of
+n € N for which w*® is real, is equal to _all

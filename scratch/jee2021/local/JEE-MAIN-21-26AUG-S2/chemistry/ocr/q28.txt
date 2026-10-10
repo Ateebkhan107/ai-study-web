@@ -1,0 +1,10 @@
+83 g of ethylene glycol dissolved in 625 g of water.
+The freezing point of the solution is K.
+(Nearest integer)
+
+[Use : Molal Freezing point depression constant of
+water = 1.86 K kg mol]
+
+Freezing Point of water = 273 K
+
+Atomic masses: C: 12.0u,0:16.0u,H: 1.0 u]

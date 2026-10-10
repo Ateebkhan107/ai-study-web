@@ -1,0 +1,7 @@
+A and B decompose via first order kinetics with
+half-lives 54.0 min and 18.0 min respectively.
+Starting from an equimolar non reactive mixture
+of A and B, the time taken for the concentration
+of A to become 16 times that of B is
+
+min. (Round off to the Nearest Integer).

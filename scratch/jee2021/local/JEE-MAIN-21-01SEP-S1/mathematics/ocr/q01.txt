@@ -1,0 +1,10 @@
+Let f : R — R be a continuous function. Then
+
+sec” x
+
+; J f(x)dx
+lim —2 5 is equal to:
+oF x? ae
+() f 2) (2) 2f (2)
+
+(3) 2f (V2) (4) 4 f (2)

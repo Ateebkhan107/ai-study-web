@@ -1,0 +1,36 @@
+10.
+
+In the given figure, the energy levels of
+hydrogen atom have been shown along with
+some transitions marked A, B, C, D and E. The
+transitions A, B and C respectively represent :
+
++eV
+
+OeV
+—0.54 eV
+—0.85 eV
+
+—-1.51 eV
+
+Continuum
+
+3.4eV
+
+—13.6 eV
+
+(1) The ionization potential of hydrogen,
+second member of Balmer series and third
+member of Paschen series.
+
+(2) The first member of the Lyman series, third
+member of Balmer series and second
+member of Paschen series.
+
+(3) The series limit of Lyman series, third
+member of Balmer series and second
+member of Paschen series.
+
+(4) The series limit of Lyman series, second
+member of Balmer series and second
+member of Paschen series.

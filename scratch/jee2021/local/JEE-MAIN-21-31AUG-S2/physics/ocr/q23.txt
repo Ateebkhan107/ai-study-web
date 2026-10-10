@@ -1,0 +1,10 @@
+A long solenoid with 1000 turns/m has a core
+material with relative permeability 500 and volume
+10° cm’. If the core material is replaced by another
+material having relative permeability of 750 with
+same volume maintaining same current of 0.75 A
+in the solenoid, the fractional change in the
+
+magnetic moment of the core would be
+
+approximately (35) . Find the value of x.

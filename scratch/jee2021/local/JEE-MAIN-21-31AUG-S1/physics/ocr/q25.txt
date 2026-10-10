@@ -1,0 +1,6 @@
+A wire having a linear mass density 9.0 x 10“ kg/m
+is stretched between two rigid supports with a
+tension of 900 N. The wire resonates at a
+frequency of 500 Hz. The next higher frequency at
+which the same wire resonates is 550 Hz. The
+length of the wire is m.

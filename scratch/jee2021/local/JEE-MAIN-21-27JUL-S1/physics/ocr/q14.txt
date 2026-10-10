@@ -1,0 +1,12 @@
+14.
+
+If 'f denotes the ratio of the number of nuclei
+decayed (Ng) to the number of nuclei at t = 0 (No)
+then for a collection of radioactive nuclei, the rate
+of change of '/' with respect to time is given as :
+
+[A is the radioactive decay constant]
+
+(1I)-A(-e *) (2)A(l-e “)
+
+(3) re (4)-re ™

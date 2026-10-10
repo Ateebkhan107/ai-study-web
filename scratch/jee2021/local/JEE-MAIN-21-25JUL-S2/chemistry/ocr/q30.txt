@@ -1,0 +1,8 @@
+10.
+
+An LPG cylinder contains gas at a pressure of 300
+kPa at 27°C. The cylinder can withstand the
+pressure of 1.2 x 10° Pa. The room in which the
+cylinder is kept catches fire. The minimum
+temperature at which the bursting of cylinder will
+take place is °C. (Nearest integer)

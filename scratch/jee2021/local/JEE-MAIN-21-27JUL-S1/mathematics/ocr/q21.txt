@@ -1,0 +1,8 @@
+For real numbers a and £, consider the following
+
+system of linear equations :
+x+y—-z=2,x+2y+oz=1,2x-y+z=f.
+
+If the system has infinite solutions, then a+ is
+
+equal to

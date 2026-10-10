@@ -1,0 +1,4 @@
+Let the equation x’ + y’ + px + (1 - p)y +5=0
+represent circles of varying radius r € (0, 5]. Then
+the number of elements in the set S = {q:q=p
+and q is an integer} is

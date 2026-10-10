@@ -1,0 +1,12 @@
+Ina group of 400 people, 160 are smokers and non-
+vegetarian; 100 are smokers and vegetarian and
+the remaining 140 are non-smokers and vegetarian.
+Their chances of getting a particular chest disorder
+are 35%, 20% and 10% respectively. A person is
+chosen from the group at random and is found to
+be suffering from the chest disorder. The
+probability that the selected person is a smoker and
+non-vegetarian is :
+
+7 14 28 8
+() 5 (2) 75 G3) 75 4) 75

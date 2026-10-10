@@ -1,0 +1,11 @@
+3.
+
+The typical output characteristics curve for a
+transistor working in the common-emitter
+configuration is shown in the figure.
+
+I.(mA)
+
+Vee(V)
+
+The estimated current gain from the figure is

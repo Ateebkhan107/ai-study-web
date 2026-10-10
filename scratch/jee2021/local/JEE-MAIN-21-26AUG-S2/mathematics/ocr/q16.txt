@@ -1,0 +1,8 @@
+16.
+
+Let P be the plane passing through the point (1,2,3)
+and the line of intersection of the planes
+F-(i+j+4k)=16 and #-(-i+j+k)=6. Then
+which of the following points does NOT lie on P ?
+(1) @, 3, 2) (2) (6, -6, 2)
+(3) (4, 2, 2) (4) (-8, 8, 6)

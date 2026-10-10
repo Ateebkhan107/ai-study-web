@@ -1,0 +1,9 @@
+A wire of length 36 m is cut into two pieces, one of
+the pieces is bent to form a square and the other is
+bent to form a circle. If the sum of the areas of the
+
+two figures is minimum, and the circumference of
+
+4
+the circle is k (meter), then (++i is equal to
+T

@@ -1,0 +1,1264 @@
+[
+  {
+    "code": "f77j74qa62",
+    "source_number": 1,
+    "subject": "Maths",
+    "chapter": "Binomial Theorem",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "For the natural numbers $m$, $n$, if $(1-y)^m (1+y)^n = 1 + a_1 y + a_2 y^2 + \\ldots + a_{m+n} y^{m+n}$ and $a_1 = a_2 = 10$, then the value of $(m+n)$ is equal to:",
+    "options": [
+      "88",
+      "64",
+      "100",
+      "80"
+    ],
+    "images": {}
+  },
+  {
+    "code": "zbrycu6gdq",
+    "source_number": 2,
+    "subject": "Maths",
+    "chapter": "Inverse Trigonometric Functions",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The value of $\\tan \\left( 2 \\tan^{-1} \\left( \\frac{3}{5} \\right) + \\sin^{-1} \\left( \\frac{5}{13} \\right) \\right)$ is equal to:",
+    "options": [
+      "$\\frac{-181}{69}$",
+      "$\\frac{220}{21}$",
+      "$\\frac{-291}{76}$",
+      "$\\frac{151}{63}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "x2oj47wa3m",
+    "source_number": 3,
+    "subject": "Maths",
+    "chapter": "Conic Sections",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let $r_1$ and $r_2$ be the radii of the largest and smallest circles, respectively, which pass through the point $(-4, 1)$ and having their centres on the circumference of the circle $x^2 + y^2 + 2x + 4y - 4 = 0$ If $\\frac{r_1}{r_2} = a + b\\sqrt{2}$, then $a + b$ is equal to:",
+    "options": [
+      "3",
+      "11",
+      "5",
+      "7"
+    ],
+    "images": {}
+  },
+  {
+    "code": "f23ieqshct",
+    "source_number": 4,
+    "subject": "Maths",
+    "chapter": "Mathematical Reasoning",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Consider the following three statements: $(A)$ If $3 + 3 = 7$ then $4 + 3 = 8$. $(B)$ If $5 + 3 = 8$ then earth is flat. $(C)$ If both $(A)$ and $(B)$ are true then $5 + 6 = 17$. Then, which of the following statements is correct?",
+    "options": [
+      "$(A)$ is false, but $(B)$ and $(C)$ are true",
+      "$(A)$ and $(C)$ are true while $(B)$ is false",
+      "$(A)$ is true while $(B)$ and $(C)$ are false",
+      "$(A)$ and $(B)$ are false while $(C)$ is true"
+    ],
+    "images": {}
+  },
+  {
+    "code": "vxbx2slifg",
+    "source_number": 5,
+    "subject": "Maths",
+    "chapter": "Three Dimensional Geometry",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The lines $x = ay - 1 = z - 2$ and $x = 3y - 2 = bz - 2$, $(ab \\neq 0)$ are coplanar, if:",
+    "options": [
+      "$b = 1, a \\in \\mathbb{R} - \\{0\\}$",
+      "$a = 1, b \\in \\mathbb{R} - \\{0\\}$",
+      "$a = 2, b = 2$",
+      "$a = 2, b = 3$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "2hi7qkgvqb",
+    "source_number": 6,
+    "subject": "Maths",
+    "chapter": "Integrals",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If [x] denotes the greatest integer less than or equal to x, then the value of the integral $$\\int_{-\\pi/2}^{\\pi/2} [x] - \\sin x \\, dx$$ is equal to :",
+    "options": [
+      "-$\\pi$",
+      "$\\pi$",
+      "0",
+      "1"
+    ],
+    "images": {}
+  },
+  {
+    "code": "cmmoxqjhzp",
+    "source_number": 7,
+    "subject": "Maths",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If the real part of the complex number $$\\left(1 - \\cos \\theta + 2i \\sin \\theta \\right)^{-1}$$ is $\\frac{1}{5}$ for $\\theta \\in (0, \\pi)$, then the value of the integral $$\\int_{0}^{\\theta} \\sin x \\, dx$$ is equal to:",
+    "options": [
+      "1",
+      "2",
+      "-1",
+      "0"
+    ],
+    "images": {}
+  },
+  {
+    "code": "o64yokvdnw",
+    "source_number": 8,
+    "subject": "Maths",
+    "chapter": "Relations and Functions",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let $f : \\mathbb{R} - \\left\\{ \\frac{\\alpha}{6} \\right\\} \\to \\mathbb{R}$ be defined by $f(x) = \\frac{5x+3}{6x-\\alpha}$. Then the value of $\\alpha$ for which $(f \\circ f)(x) = x$, for all $x \\in \\mathbb{R} - \\left\\{ \\frac{\\alpha}{6} \\right\\}$, is",
+    "options": [
+      "No such $\\alpha$ exists",
+      "5",
+      "8",
+      "6"
+    ],
+    "images": {}
+  },
+  {
+    "code": "zg457dky6p",
+    "source_number": 9,
+    "subject": "Maths",
+    "chapter": "Limits and Derivatives",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If $f : \\mathbb{R} \\to \\mathbb{R}$ is given by $f(x) = x + 1$, then the value of $$\\lim_{n \\to \\infty} \\frac{1}{n} \\left[ f(0) + f\\left( \\frac{5}{n} \\right) + f\\left( \\frac{10}{n} \\right) + \\ldots + f\\left( \\frac{5(n-1)}{n} \\right) \\right]$$ is:",
+    "options": [
+      "$\\frac{3}{2}$",
+      "$\\frac{5}{2}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{7}{2}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "xyn73q6aig",
+    "source_number": 10,
+    "subject": "Maths",
+    "chapter": "Probability",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let A, B and C be three events such that the probability that exactly one of A and B occurs is $(1-k)$, the probability that exactly one of B and C occurs is $(1-2k)$, the probability that exactly one of C and A occurs is $(1-k)$ and the probability of all A, B and C occur simultaneously is $k^2$, where $0 < k < 1$. Then the probability that at least one of A, B and C occur is:",
+    "options": [
+      "greater than $\\frac{1}{8}$ but less than $\\frac{1}{4}$",
+      "greater than $\\frac{1}{2}$",
+      "greater than $\\frac{1}{4}$ but less than $\\frac{1}{2}$",
+      "exactly equal to $\\frac{1}{2}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "ggkneh5dfs",
+    "source_number": 11,
+    "subject": "Maths",
+    "chapter": "Applications of Derivatives",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The sum of all the local minimum values of the twice differentiable function $f : \\mathbb{R} \\to \\mathbb{R}$ defined by $$f(x) = x^3 - 3x^2 - \\frac{3f''(2)}{2}x + f''(1)$$ is :",
+    "options": [
+      "-22",
+      "5",
+      "-27",
+      "0"
+    ],
+    "images": {}
+  },
+  {
+    "code": "tmdn5ih7lw",
+    "source_number": 12,
+    "subject": "Maths",
+    "chapter": "Properties of Triangles",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let in a right angled triangle, the smallest angle be $\\theta$. If a triangle formed by taking the reciprocal of its sides is also a right angled triangle, then $\\sin \\theta$ is equal to:",
+    "options": [
+      "$\\frac{\\sqrt{5}+1}{4}$",
+      "$\\frac{\\sqrt{5}-1}{2}$",
+      "$\\frac{\\sqrt{2}-1}{2}$",
+      "$\\frac{\\sqrt{5}-1}{4}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "ubgf3ijtla",
+    "source_number": 13,
+    "subject": "Maths",
+    "chapter": "Differential Equations",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let $y = y(x)$ satisfies the equation $\\frac{dy}{dx} - \\left| A \\right| = 0$, for all $x > 0$, where $$A = \\begin{bmatrix} y & \\sin x & 1 \\\\ 0 & -1 & 1 \\\\ 2 & 0 & \\frac{1}{x} \\end{bmatrix}$$. If $y(\\pi) = \\pi + 2$, then the value of $y\\left(\\frac{\\pi}{2}\\right)$ is:",
+    "options": [
+      "$\\frac{\\pi}{2} + \\frac{4}{\\pi}$",
+      "$\\frac{\\pi}{2} - \\frac{1}{\\pi}$",
+      "$\\frac{3\\pi}{2} - \\frac{1}{\\pi}$",
+      "$\\frac{\\pi}{2} - \\frac{4}{\\pi}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "3t3owlao6p",
+    "source_number": 14,
+    "subject": "Maths",
+    "chapter": "Three Dimensional Geometry",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Consider the line $L$ given by the equation $$\\frac{x-3}{2} = \\frac{y-1}{1} = \\frac{z-2}{1}.$$ Let $Q$ be the mirror image of the point $(2, 3, -1)$ with respect to $L$. Let a plane $P$ be such that it passes through $Q$, and the line $L$ is perpendicular to $P$. Then which of the following points is on the plane $P$?",
+    "options": [
+      "$(-1, 1, 2)$",
+      "$(1, 1, 1)$",
+      "$(1, 1, 2)$",
+      "$(1, 2, 2)$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "5ninfapln7",
+    "source_number": 15,
+    "subject": "Maths",
+    "chapter": "Statistics",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If the mean and variance of six observations 7, 10, 11, 15, a, b are 10 and $\\frac{20}{3}$, respectively, then the value of |a - b| is equal to:",
+    "options": [
+      "9",
+      "11",
+      "7",
+      "1"
+    ],
+    "images": {}
+  },
+  {
+    "code": "fsof3k45el",
+    "source_number": 16,
+    "subject": "Maths",
+    "chapter": "Integrals",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let $g(t) = \\displaystyle\\int_{-\\pi/2}^{\\pi/2} \\cos\\left(\\frac{\\pi}{4}t + f(x)\\right)dx$, where \\[ f(x) = \\log_e\\left(x+\\sqrt{x^2+1}\\right), \\quad x \\in \\mathbb{R}. \\] Then which one of the following is correct?",
+    "options": [
+      "\\[ \\text{(1)}\\quad g(1) = g(0) \\]",
+      "\\[ \\text{(2)}\\quad \\sqrt{2}\\,g(1) = g(0) \\]",
+      "\\[ \\text{(3)}\\quad g(1) = \\sqrt{2}\\,g(0) \\]",
+      "\\[ \\text{(4)}\\quad g(1) + g(0) = 0 \\]"
+    ],
+    "images": {}
+  },
+  {
+    "code": "yg7tkk77un",
+    "source_number": 17,
+    "subject": "Maths",
+    "chapter": "Conic Sections",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Let P be a variable point on the parabola $y = 4x^2 + 1$. Then, the locus of the mid-point of the point P and the foot of the perpendicular drawn from the point P to the line $y = x$ is:",
+    "options": [
+      "$(3x - y)^2 + (x - 3y) + 2 = 0$",
+      "$2(3x - y)^2 + (x - 3y) + 2 = 0$",
+      "$(3x - y)^2 + 2(x - 3y) + 2 = 0$",
+      "$2(x - 3y)^2 + (3x - y) + 2 = 0$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "s5qk3ro4f5",
+    "source_number": 18,
+    "subject": "Maths",
+    "chapter": "Determinants",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The value of $k \\in \\mathbb{R}$, for which the following system of linear equations $$3x - y + 4z = 3$$ $$x + 2y - 3z = -2$$ $$6x + 5y + kz = -3$$ has infinitely many solutions, is:",
+    "options": [
+      "3",
+      "-5",
+      "5",
+      "-3"
+    ],
+    "images": {}
+  },
+  {
+    "code": "7oik5anx2x",
+    "source_number": 19,
+    "subject": "Maths",
+    "chapter": "Sequences and Series",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If sum of the first 21 terms of the series $\\log_{9^{1/2}} x + \\log_{9^{1/3}} x + \\log_{9^{1/4}} x + \\ldots$, where $x > 0$ is 504, then $x$ is equal to",
+    "options": [
+      "243",
+      "9",
+      "7",
+      "81"
+    ],
+    "images": {}
+  },
+  {
+    "code": "k4xxme4ely",
+    "source_number": 20,
+    "subject": "Maths",
+    "chapter": "Vector Algebra",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "In a triangle ABC, if $|\\overrightarrow{BC}| = 3$, $|\\overrightarrow{CA}| = 5$ and $|\\overrightarrow{BA}| = 7$, then the projection of the vector $\\overrightarrow{BA}$ on $\\overrightarrow{BC}$ is equal to",
+    "options": [
+      "$\\frac{19}{2}$",
+      "$\\frac{13}{2}$",
+      "$\\frac{11}{2}$",
+      "$\\frac{15}{2}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "r5dz64q2ez",
+    "source_number": 21,
+    "subject": "Maths",
+    "chapter": "Matrices",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Let $A = \\{ a_{ij} \\}$ be a $3 \\times 3$ matrix, where $$a_{ij} = \\begin{cases} (-1)^{j-i} & \\text{if } i j \\end{cases}$$ then $\\det(3 \\text{ Adj}(2A^{-1}))$ is equal to",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "jfhyvkqexi",
+    "source_number": 22,
+    "subject": "Maths",
+    "chapter": "Relations and Functions",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "The number of solutions of the equation $$\\log_{(x+1)}\\left(2x^2 + 7x + 5\\right) + \\log_{(2x+5)}\\left(x+1\\right)^2 - 4 = 0$$ $x > 0$, is",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "zl5zdihki7",
+    "source_number": 23,
+    "subject": "Maths",
+    "chapter": "Differential Equations",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Let a curve $y = y(x)$ be given by the solution of the differential equation $$\\cos\\left(\\frac{1}{2}\\cos^{-1}(e^{-x})\\right) dx = \\sqrt{e^{2x} - 1} dy$$ If it intersects $y$-axis at $y = -1$, and the intersection point of the curve with $x$-axis is $(\\alpha, 0)$, then $e^{\\alpha}$ is equal to",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "jfbx2rvnou",
+    "source_number": 24,
+    "subject": "Maths",
+    "chapter": "Vector Algebra",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "For $p > 0$, a vector $\\vec{v}_2 = 2\\hat{i} + (p + 1)\\hat{j}$ is obtained by rotating the vector $\\vec{v}_1 = \\sqrt{3}p\\hat{i} + \\hat{j}$ by an angle $\\theta$ about origin in counter clockwise direction. If $\\tan \\theta = \\frac{(\\alpha \\sqrt{3} - 2)}{(4\\sqrt{3} + 3)}$, then the value of $\\alpha$ is equal to",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "5pylfyldlq",
+    "source_number": 25,
+    "subject": "Maths",
+    "chapter": "Straight Lines and Pair of Straight Lines",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Consider a triangle having vertices A(-2, 3), B(1, 9) and C(3, 8). If a line L passing through the circum-centre of triangle ABC, bisects line BC, and intersects y-axis at point $\\left(0, \\frac{\\alpha}{2}\\right)$, then the value of real number $\\alpha$ is",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "j6skcifsbc",
+    "source_number": 26,
+    "subject": "Maths",
+    "chapter": "Applications of Derivatives",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "If the point on the curve $y^2 = 6x$, nearest to the point $\\left(3, \\frac{3}{2}\\right)$ is $(\\alpha, \\beta)$, then $2(\\alpha + \\beta)$ is equal to",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "yvfn6j7twl",
+    "source_number": 27,
+    "subject": "Maths",
+    "chapter": "Continuity and Differentiability",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Let a function $g:[0,4]\\to\\mathbb{R}$ be defined as \\[ g(x)= \\begin{cases} \\displaystyle \\max_{0\\leq t\\leq x}\\{t^3-6t^2+9t-3\\}, & 0\\leq x\\leq 3,\\\\ 4-x, & 3<x\\leq 4. \\end{cases} \\] Then the number of points in the interval $(0,4)$ where $g(x)$ is NOT differentiable is ________.",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "lfnqktxcuw",
+    "source_number": 28,
+    "subject": "Maths",
+    "chapter": "Sequences and Series",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "For $k \\in \\mathbb{N}$, let $$\\frac{1}{\\alpha(\\alpha+1)(\\alpha+2)\\ldots(\\alpha+20)} = \\sum_{K=0}^{20} \\frac{A_k}{\\alpha+k},$$ where $\\alpha > 0$. Then the value of $100 \\left( \\frac{A_{14} + A_{15}}{A_{13}} \\right)^2$ is equal to",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "rqvuujnm25",
+    "source_number": 29,
+    "subject": "Maths",
+    "chapter": "Sequences and Series",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Let $\\{a_n\\}_{n=1}^{\\infty}$ be a sequence such that $a_1 = 1$, $a_2 = 1$ and $a_{n+2} = 2a_{n+1} + a_n$ for all $n \\geq 1$. Then the value of $47 \\sum_{n=1}^{\\infty} \\frac{a_n}{2^{3n}}$ is equal to:",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "62kwe3c57s",
+    "source_number": 30,
+    "subject": "Maths",
+    "chapter": "Limits and Derivatives",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "If $\\lim_{x \\to 0} \\frac{\\alpha x e^{-x} - \\beta \\log_e (1+x) + \\gamma x^2 e^{-x}}{x \\sin^2 x} = 10$, $\\alpha, \\beta, \\gamma \\in \\mathbb{R}$, then the value of $\\alpha + \\beta + \\gamma$ is",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "v3ro6373w6",
+    "source_number": 31,
+    "subject": "Physics",
+    "chapter": "Work, Energy and Power",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If the Kinetic energy of a moving body becomes four times its initial Kinetic energy, then the percentage change in its momentum will be :",
+    "options": [
+      "100$\\%$",
+      "200$\\%$",
+      "300$\\%$",
+      "400$\\%$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "zays5p2kub",
+    "source_number": 32,
+    "subject": "Physics",
+    "chapter": "Motion in a Plane",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A boy reaches the airport and finds that the escalator is not working. He walks up the stationary escalator in time $t_1$. If he remains stationary on a moving escalator then the escalator takes him up in time $t_2$. The time taken by him to walk up on the moving escalator will be:",
+    "options": [
+      "$\\frac{t_1 t_2}{t_2 - t_1}$",
+      "$\\frac{t_1 + t_2}{2}$",
+      "$\\frac{t_1 t_2}{t_2 + t_1}$",
+      "$t_2 - t_1$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "f2ylrqxyox",
+    "source_number": 33,
+    "subject": "Physics",
+    "chapter": "Gravitation",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A satellite is launched into a circular orbit of radius R around earth, while a second satellite is launched into a circular orbit of radius 1.02R. The percentage difference in the time periods of the two satellites is:",
+    "options": [
+      "1.5",
+      "2.0",
+      "0.7",
+      "3.0"
+    ],
+    "images": {}
+  },
+  {
+    "code": "4ggdz6gduu",
+    "source_number": 34,
+    "subject": "Physics",
+    "chapter": "Waves",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "With what speed should a galaxy move outward with respect to earth so that the sodium-D line at wavelength 5890$\\AA$ is observed at 5896$\\AA$?",
+    "options": [
+      "306 km/sec",
+      "322 km/sec",
+      "296 km/sec",
+      "336 km/sec"
+    ],
+    "images": {}
+  },
+  {
+    "code": "5zzr6txwci",
+    "source_number": 35,
+    "subject": "Physics",
+    "chapter": "Mechanical Properties of Solids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The length of a metal wire is $\\ell_1$, when the tension in it is $T_1$ and is $\\ell_2$ when the tension is $T_2$. The natural length of the wire is:",
+    "options": [
+      "$\\sqrt{\\ell_1 \\ell_2}$",
+      "$\\frac{\\ell_1 \\, T_2 - \\ell_2 \\, T_1}{T_2 - T_1}$",
+      "$\\frac{\\ell_1 \\, T_2 + \\ell_2 \\, T_1}{T_2 + T_1}$",
+      "$\\frac{\\ell_1 + \\ell_2}{2}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "qayqrtvbnp",
+    "source_number": 36,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Waves",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "In an electromagnetic wave the electric field vector and magnetic field vector are given as $\\vec{E} = E_0 \\hat{i}$ and $\\vec{B} = B_0 \\hat{k}$ respectively. The direction of propagation of electromagnetic wave is along:",
+    "options": [
+      "$\\hat{k}$",
+      "$\\hat{j}$",
+      "$-\\hat{k}$",
+      "$-\\hat{j}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "cofibrmz5y",
+    "source_number": 37,
+    "subject": "Physics",
+    "chapter": "Alternating Current",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "For a series LCR circuit with $R = 100\\Omega$, $L = 0.5\\,\\mathrm{mH}$ and $C = 0.1\\,\\mathrm{pF}$ connected across $220\\,\\mathrm{V} - 50\\,\\mathrm{Hz}$ AC supply, the phase angle between current and supplied voltage and the nature of the circuit is:",
+    "options": [
+      "$0^\\circ$, resistive circuit",
+      "$\\approx 90^\\circ$, predominantly inductive circuit",
+      "$0^\\circ$, resonance circuit",
+      "$\\approx 90^\\circ$, predominantly capacitive circuit"
+    ],
+    "images": {}
+  },
+  {
+    "code": "pgy3ixppgr",
+    "source_number": 38,
+    "subject": "Physics",
+    "chapter": "Thermodynamics",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Which of the following graphs represent the behavior of an ideal gas ? Symbols have their usual meaning.",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "st3vy6mvlz",
+    "source_number": 39,
+    "subject": "Physics",
+    "chapter": "Oscillations",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A particle is making simple harmonic motion along the X-axis. If at a distances $x_1$ and $x_2$ from the mean position the velocities of the particle are $v_1$ and $v_2$ respectively. The time period of its oscillation is given as:",
+    "options": [
+      "$T = 2\\pi \\sqrt{\\frac{x_2^2 + x_1^2}{v_1^2 - v_2^2}}$",
+      "$T = 2\\pi \\sqrt{\\frac{x_2^2 + x_1^2}{v_1^2 + v_2^2}}$",
+      "$T = 2\\pi \\sqrt{\\frac{x_2^2 - x_1^2}{v_1^2 + v_2^2}}$",
+      "$T = 2\\pi \\sqrt{\\frac{x_2^2 - x_1^2}{v_1^2 - v_2^2}}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "3quwa4ss7t",
+    "source_number": 40,
+    "subject": "Physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "An electron having de-Broglie wavelength $\\lambda$ is incident on a target in a X-ray tube. Cut-off wavelength of emitted X-ray is:",
+    "options": [
+      "0",
+      "$\\frac{2 m^2 c^2 \\lambda^2}{h^2}$",
+      "$\\frac{2mc\\lambda^2}{h}$",
+      "$\\frac{hc}{mc}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "odzfwjuu26",
+    "source_number": 41,
+    "subject": "Physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A body rolls down an inclined plane without slipping. The kinetic energy of rotation is 50$\\%$ of its translational kinetic energy. The body is :",
+    "options": [
+      "Solid sphere",
+      "Solid cylinder",
+      "Hollow cylinder",
+      "Ring"
+    ],
+    "images": {}
+  },
+  {
+    "code": "3eam32ge7e",
+    "source_number": 42,
+    "subject": "Physics",
+    "chapter": "Physical World, Units and Measurements",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "If time $(t)$, velocity $(v)$, and angular momentum $(l)$ are taken as the fundamental units. Then the dimension of mass $(m)$ in terms of $t$, $v$ and $l$ is:",
+    "options": [
+      "$[t^{-1}v^{1}l^{-2}]$",
+      "$[t^{1}v^{2}l^{-1}]$",
+      "$[t^{-2}v^{-1}l^{1}]$",
+      "$[t^{-1}v^{-2}l^{1}]$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "3est3nnweq",
+    "source_number": 43,
+    "subject": "Physics",
+    "chapter": "Kinetic Theory",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The correct relation between the degrees of freedom $f$ and the ratio of specific heat $\\gamma$ is:",
+    "options": [
+      "$f = \\frac{2}{\\gamma - 1}$",
+      "$f = \\frac{2}{\\gamma + 1}$",
+      "$f = \\frac{\\gamma + 1}{2}$",
+      "$f = \\frac{1}{\\gamma + 1}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "huf6rk45fo",
+    "source_number": 44,
+    "subject": "Physics",
+    "chapter": "Nuclei",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "For a certain radioactive process the graph between $\\ln R$ and $t(\\mathrm{sec})$ is obtained as shown in the figure. Then the value of half life for the unknown radioactive material is approximately:",
+    "options": [
+      "9.15$\\mathrm{sec}$",
+      "6.93$\\mathrm{sec}$",
+      "2.62$\\mathrm{sec}$",
+      "4.62$\\mathrm{sec}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "vaxemwvogr",
+    "source_number": 45,
+    "subject": "Physics",
+    "chapter": "Gravitation",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Consider a binary star system of star A and star B with masses $m_A$ and $m_B$ revolving in a circular orbit of radii $r_A$ and $r_B$, respectively. If $T_A$ and $T_B$ are the time period of star A and star B, respectively, then:",
+    "options": [
+      "$\\frac{T_A}{T_B} = \\left(\\frac{r_A}{r_B}\\right)^{\\frac{3}{2}}$",
+      "$T_A = T_B$",
+      "$T_A > T_B$ (if $m_A > m_B$)",
+      "$T_A > T_B$ (if $r_A > r_B$)"
+    ],
+    "images": {}
+  },
+  {
+    "code": "kfg4bsq6f3",
+    "source_number": 46,
+    "subject": "Physics",
+    "chapter": "Magnetism and Matter",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "At an angle of $30^\\circ$ to the magnetic meridian, the apparent dip is $45^\\circ$. Find the true dip:",
+    "options": [
+      "$\\tan^{-1} \\sqrt{3}$",
+      "$\\tan^{-1} \\frac{1}{\\sqrt{3}}$",
+      "$\\tan^{-1} \\frac{2}{\\sqrt{3}}$",
+      "$\\tan^{-1} \\frac{\\sqrt{3}}{2}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "3kawn6micy",
+    "source_number": 47,
+    "subject": "Physics",
+    "chapter": "Motion in a Straight Line",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A body at rest is moved along a horizontal straight line by a machine delivering a constant power. The distance moved by the body in time ' $t$ ' is proportional to:",
+    "options": [
+      "$t^{\\frac{3}{2}}$",
+      "$t^{\\frac{1}{2}}$",
+      "$t^{\\frac{1}{4}}$",
+      "$t^{\\frac{3}{4}}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "rubva345af",
+    "source_number": 48,
+    "subject": "Physics",
+    "chapter": "Mathematics in Physics",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Two vectors $\\vec{P}$ and $\\vec{Q}$ have equal magnitudes. If the magnitude of $\\vec{P} + \\vec{Q}$ is $n$ times the magnitude of $\\vec{P} - \\vec{Q}$, then angle between $\\vec{P}$ and $\\vec{Q}$ is:",
+    "options": [
+      "$\\sin^{-1}\\left(\\frac{n-1}{n+1}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{n-1}{n+1}\\right)$",
+      "$\\sin^{-1}\\left(\\frac{n^2-1}{n^2+1}\\right)$",
+      "$\\cos^{-1}\\left(\\frac{n^2-1}{n^2+1}\\right)$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "7kquyclll6",
+    "source_number": 49,
+    "subject": "Physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Two small drops of mercury each of radius R coalesce to form a single large drop. The ratio of total surface energy before and after the change is:",
+    "options": [
+      "$2^{\\frac{1}{3}} : 1$",
+      "$1 : 2^{\\frac{1}{3}}$",
+      "2 : 1",
+      "1 : 2"
+    ],
+    "images": {}
+  },
+  {
+    "code": "2kym77ago5",
+    "source_number": 50,
+    "subject": "Physics",
+    "chapter": "Magnetism and Matter",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The magnetic susceptibility of a material of a rod is 499. Permeability in vacuum is $4\\pi \\times 10^{-7} \\, \\mathrm{H/m}$. Absolute permeability of the material of the rod is:",
+    "options": [
+      "$4\\pi \\times 10^{-4} \\, \\mathrm{H/m}$",
+      "$2\\pi \\times 10^{-4} \\, \\mathrm{H/m}$",
+      "$3\\pi \\times 10^{-4} \\, \\mathrm{H/m}$",
+      "$\\pi \\times 10^{-4} \\, \\mathrm{H/m}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "vgcvwzti5l",
+    "source_number": 51,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A zener diode having zener voltage 8 V and power dissipation rating of 0.5 W is connected across a potential divider arranged with maximum potential drop across zener diode is as shown in the diagram. The value of protective resistance $R_P$ is $\\ldots$$\\ldots$$\\ldots$$\\ldots$ $\\Omega$.",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "dsqbq5g4gf",
+    "source_number": 52,
+    "subject": "Physics",
+    "chapter": "Laws of Motion",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A body of mass 'm' is launched up on a rough inclined plane making an angle of 30^$\\circ$ with the horizontal. The coefficient of friction between the body and plane is $\\frac{\\sqrt{x}}{5}$ if the time of ascent is half of the time of descent. The value of x is",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "eceudl4lla",
+    "source_number": 53,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "In the given figure switches $S_1$ and $S_2$ are in open condition. The resistance across $ab$ when the switches $S_1$ and $S_2$ are closed is _____ $\\Omega$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "or73gwcy3k",
+    "source_number": 54,
+    "subject": "Physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Two bodies, a ring and a solid cylinder of same material are rolling down without slipping an inclined plane. The radii of the bodies are same. The ratio of velocity of the centre of mass at the bottom of the inclined plane of the ring to that of the cylinder is $\\frac{\\sqrt{x}}{2}$. Then, the value of $x$ is _____.",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "qhmmeps34m",
+    "source_number": 55,
+    "subject": "Physics",
+    "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "For the forward biased diode characteristics shown in the figure, the dynamic resistance at $I_D = 3 \\, \\mathrm{mA}$ will be _____ $\\Omega$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "pzebyirw5q",
+    "source_number": 56,
+    "subject": "Physics",
+    "chapter": "Alternating Current",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A series LCR circuit of $R = 5\\, \\Omega$, $L = 20\\, mH$ and $C = 0.5\\, \\mu F$ is connected across an AC supply of $250\\, V$, having variable frequency. The power dissipated at resonance condition is $\\times 10^2\\, W$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "sov5fu7tb4",
+    "source_number": 57,
+    "subject": "Physics",
+    "chapter": "Thermodynamics",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "One mole of an ideal gas at 27°C is taken from A to B as shown in the given PV indicator diagram. The work done by the system will be $\\times 10^{-1}$ J. [ Given : $R = 8.3 \\, \\mathrm{J/moleK}$, $\\ln 2 = 0.6931$] (Round off to the nearest integer)",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "4f4ln7btfq",
+    "source_number": 58,
+    "subject": "Physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A certain metallic surface is illuminated by monochromatic radiation of wavelength $\\lambda$. The stopping potential for photoelectric current for this radiation is $3 \\, V_0$. If the same surface is illuminated with a radiation of wavelength $2\\lambda$, the stopping potential is $V_0$. The threshold wavelength of this surface for photoelectric effect is $\\lambda$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "bhs5gpow26",
+    "source_number": 59,
+    "subject": "Physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A body rotating with an angular speed of 600 $\\mathrm{rpm}$ is uniformly accelerated to 1800 $\\mathrm{rpm}$ in 10 $\\mathrm{sec}$. The number of rotations made in the process is",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "wg2iamho44",
+    "source_number": 60,
+    "subject": "Physics",
+    "chapter": "Nuclei",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "A radioactive substance decays to $\\left( \\frac{1}{16} \\right)^{th}$ of its initial activity in 80 days. The half life of the radioactive substance expressed in days is _____.",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "wbbynwqv47",
+    "source_number": 61,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Which one of the following pairs of isomers is an example of metamerism?",
+    "options": [
+      "$\\mathrm{CH_3CH_2CH_2CH_2CH_3}$ and"
+    ],
+    "images": {}
+  },
+  {
+    "code": "ublowfj3u4",
+    "source_number": 62,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "In the above reactions, product $A$ and product $B$ respectively are:",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "yq67x3l25k",
+    "source_number": 63,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The major product (P) in the following reaction is:",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "lhdrowve7z",
+    "source_number": 64,
+    "subject": "Chemistry",
+    "chapter": "Hydrogen",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The single largest industrial application of dihydrogen is:",
+    "options": [
+      "Manufacture of metal hydrides",
+      "Rocket fuel in space research",
+      "In the synthesis of ammonia",
+      "In the synthesis of nitric acid"
+    ],
+    "images": {}
+  },
+  {
+    "code": "mawa2davp2",
+    "source_number": 65,
+    "subject": "Chemistry",
+    "chapter": "General Principles and Processes of Isolation of Elements",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Consider two chemical reactions (A) and (B) that take place during metallurgical process : (A) $\\mathrm{ZnCO_3}_{(s)} \\xrightarrow{\\Delta} \\mathrm{ZnO}_{(s)} + \\mathrm{CO_2}_{(g)}$ (B) $\\mathrm{2ZnS}_{(s)} + \\mathrm{3O_2}_{(g)} \\xrightarrow{\\Delta} \\mathrm{2ZnO}_{(s)} + \\mathrm{2SO_2}_{(g)}$ The correct option of names given to them respectively is :",
+    "options": [
+      "is calcination and (B) is roasting",
+      "Both (A) and (B) are producing same product so both are roasting",
+      "Both (A) and (B) are producing same product so both are calcination",
+      "is roasting and (B) is calcination"
+    ],
+    "images": {}
+  },
+  {
+    "code": "wvq2f4gac3",
+    "source_number": 66,
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "A solution is $0.1\\,\\mathrm{M}$ in $\\mathrm{Cl^-}$ and $0.001\\,\\mathrm{M}$ in $\\mathrm{CrO_4^{2-}}$. Solid $\\mathrm{AgNO_3}$ is gradually added to it. Assuming that the addition does not change the volume and $K_{sp}(\\mathrm{AgCl})=1.7\\times10^{-10}\\,\\mathrm{M^2}$ and $K_{sp}(\\mathrm{Ag_2CrO_4})=1.9\\times10^{-12}\\,\\mathrm{M^3}$, select the correct statement from the following:",
+    "options": [
+      "AgCl precipitates first because its $K_{sp}$ is high.",
+      "Ag_2CrO_4 precipitates first as its $K_{sp}$ is low.",
+      "$Ag_2CrO_4$ precipitates first because the amount of $Ag^+$ needed is low.",
+      "AgCl will precipitate first as the amount of $Ag^+$ needed to precipitate is low."
+    ],
+    "images": {}
+  },
+  {
+    "code": "2nuwd5x7ix",
+    "source_number": 67,
+    "subject": "Chemistry",
+    "chapter": "Structure of Atom",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Outermost electronic configuration of a group 13 element, E, is $4 \\, s^2, 4p^1$. The electronic configuration of an element of p-block period-five placed diagonally to element, E is:",
+    "options": [
+      "$[\\mathrm{Kr}]3 \\, d^{10} 4 \\, s^2 4p^2$",
+      "$[\\mathrm{Ar}]3 \\, d^{10} 4 \\, s^2 4p^2$",
+      "$[\\mathrm{Xe}]5 \\, d^{10} 6 \\, s^2 6p^2$",
+      "$[\\mathrm{Kr}]4 \\, d^{10} 5 \\, s^2 5p^2$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "wov5sjgiwb",
+    "source_number": 68,
+    "subject": "Chemistry",
+    "chapter": "The s-Block Elements",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Metallic sodium does not react normally with:",
+    "options": [
+      "gaseous ammonia",
+      "But-2-yne",
+      "Ethyne",
+      "tert-butyl alcohol"
+    ],
+    "images": {}
+  },
+  {
+    "code": "zkm4gnqu33",
+    "source_number": 69,
+    "subject": "Chemistry",
+    "chapter": "Co-ordination Compounds",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Spin only magnetic moment of an octahedral complex of $\\mathrm{Fe}^{2+}$ in the presence of a strong field ligand in BM is :",
+    "options": [
+      "4.89",
+      "2.82",
+      "0",
+      "3.46"
+    ],
+    "images": {}
+  },
+  {
+    "code": "azk46jwjds",
+    "source_number": 70,
+    "subject": "Chemistry",
+    "chapter": "Structure of Atom",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Which one of the following species doesn't have a magnetic moment of 1.73BM, (spin only value) ?",
+    "options": [
+      "$\\mathrm{O_2^+}$",
+      "$\\mathrm{CuI}$",
+      "$\\mathrm{[Cu(NH_3)_4]Cl_2}$",
+      "$\\mathrm{O_2^-}$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "yolwb7jbnt",
+    "source_number": 71,
+    "subject": "Chemistry",
+    "chapter": "Chemistry in Everyday Life",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Which one of the following statements is not true about enzymes?",
+    "options": [
+      "Enzymes are non-specific for a reaction and substrate.",
+      "Almost all enzymes are proteins.",
+      "Enzymes work as catalysts by lowering the activation energy of a biochemical reaction.",
+      "The action of enzymes is temperature and pH specific."
+    ],
+    "images": {}
+  },
+  {
+    "code": "j2xrpfaysr",
+    "source_number": 72,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The hybridisations of the atomic orbitals of nitrogen in $\\mathrm{NO}_2^-$, $\\mathrm{NO}_2^+$ and $\\mathrm{NH}_4^+$ respectively are.",
+    "options": [
+      "$\\mathrm{sp}^3$, $\\mathrm{sp}^2$ and $\\mathrm{sp}$",
+      "$\\mathrm{sp}$, $\\mathrm{sp}^2$ and $\\mathrm{sp}^3$",
+      "$\\mathrm{sp}^3$, $\\mathrm{sp}$ and $\\mathrm{sp}^2$",
+      "$\\mathrm{sp}^2$, $\\mathrm{sp}$ and $\\mathrm{sp}^3$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "tflxfbnpja",
+    "source_number": 73,
+    "subject": "Chemistry",
+    "chapter": "Polymers",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Bakelite is a cross-linked polymer of formaldehyde and:",
+    "options": [
+      "PHBV",
+      "Buna-S",
+      "Novolac",
+      "Dacron"
+    ],
+    "images": {}
+  },
+  {
+    "code": "viyk7vrwwl",
+    "source_number": 74,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Benzene on nitration gives nitrobenzene in presence of $\\mathrm{HNO}_3$ and $\\mathrm{H}_2\\mathrm{SO}_4$ mixture, where:",
+    "options": [
+      "both $\\mathrm{H}_2\\mathrm{SO}_4$ and $\\mathrm{HNO}_3$ act as a bases",
+      "$\\mathrm{HNO}_3$ acts as an acid and $\\mathrm{H}_2\\mathrm{SO}_4$ acts as a base",
+      "both $\\mathrm{H}_2\\mathrm{SO}_4$ and $\\mathrm{HNO}_3$ act as an acids",
+      "$\\mathrm{HNO}_3$ acts as a base and $\\mathrm{H}_2\\mathrm{SO}_4$ acts as an acid"
+    ],
+    "images": {}
+  },
+  {
+    "code": "y34qcbxmcz",
+    "source_number": 75,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Consider the above reaction, compound B is :",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "tcbfphyw5j",
+    "source_number": 76,
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Major product P of above reaction, is:",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "aamzr26db2",
+    "source_number": 77,
+    "subject": "Chemistry",
+    "chapter": "Redox Reactions",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "$Cu^{2+}$ salt reacts with potassium iodide to give",
+    "options": [
+      "$Cu_2I_2$",
+      "$Cu_2I_3$",
+      "$CuI$",
+      "$Cu(I_3)_2$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "yuzwk6ewyp",
+    "source_number": 78,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "In Carius method, halogen containing organic compound is heated with fuming nitric acid in the presence of :",
+    "options": [
+      "HNO_3",
+      "AgNO_3",
+      "CuSO_4",
+      "BaSO_4"
+    ],
+    "images": {}
+  },
+  {
+    "code": "brq3shropg",
+    "source_number": 79,
+    "subject": "Chemistry",
+    "chapter": "Environmental Chemistry",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "Which one of the following gases is reported to retard photosynthesis?",
+    "options": [
+      "CO",
+      "CFCs",
+      "CO_2",
+      "NO_2"
+    ],
+    "images": {}
+  },
+  {
+    "code": "ee4hvtfy4k",
+    "source_number": 80,
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "section": "A",
+    "question_type": "Single correct",
+    "question": "The correct order of their reactivity towards hydrolysis at room temperature is:",
+    "options": [
+      "$(A) > (B) > (C) > (D)$",
+      "$(D) > (A) > (B) > (C)$",
+      "$(D) > (B) > (A) > (C)$",
+      "$(A) > (C) > (B) > (D)$"
+    ],
+    "images": {}
+  },
+  {
+    "code": "beg75w6wbv",
+    "source_number": 81,
+    "subject": "Chemistry",
+    "chapter": "Thermodynamics",
+    "section": "B",
+    "question_type": "Fill in the blank",
+    "question": "For a given chemical reaction $\\mathrm{A} \\rightarrow \\mathrm{B}$ at $300 \\, \\mathrm{K}$ the free energy change is $-49.4 \\, \\mathrm{kJ} \\, \\mathrm{mol}^{-1}$ and the enthalpy of reaction is $51.4 \\, \\mathrm{kJ} \\, \\mathrm{mol}^{-1}$. The entropy change of the reaction is $\\mathrm{JK}^{-1} \\mathrm{mol}^{-1}$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "xy24er2qy6",
+    "source_number": 82,
+    "subject": "Chemistry",
+    "chapter": "Structure of Atom",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "The wavelength of electrons accelerated from rest through a potential difference of 40 $\\mathrm{kV}$ is $x \\times 10^{-12}$ $\\mathrm{m}$. The value of $x$ is ___ (Nearest integer) Given : Mass of electron = $9.1 \\times 10^{-31}$ $\\mathrm{kg}$ Charge on an electron = $1.6 \\times 10^{-19}$ $\\mathrm{C}$ Planck's constant = $6.63 \\times 10^{-34}$ $\\mathrm{Js}$",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "g4bnp4m5ts",
+    "source_number": 83,
+    "subject": "Chemistry",
+    "chapter": "Solutions",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "The vapour pressures of A and B at $25^\\circ C$ are $90 \\, \\mathrm{mmHg}$ and $15 \\, \\mathrm{mmHg}$ respectively. If A and B are mixed such that the mole fraction of A in the mixture is $0.6$, then the mole fraction of B in the vapour phase is $x \\times 10^{-1}$. The value of $x$ is ___ (Nearest integer)",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "4aq5papro5",
+    "source_number": 84,
+    "subject": "Chemistry",
+    "chapter": "Redox Reactions",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "$4\\,\\mathrm{g}$ equimolar mixture of $\\mathrm{NaOH}$ and $\\mathrm{Na_2CO_3}$ contains $x\\,\\mathrm{g}$ of $\\mathrm{NaOH}$ and $y\\,\\mathrm{g}$ of $\\mathrm{Na_2CO_3}$. The value of $x$ is \\_\\_\\_\\_ $\\mathrm{g}$ (Nearest integer)",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "3bx55iilau",
+    "source_number": 85,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry — Some Basic Principles & Techniques",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "When 0.15 g of an organic compound was analyzed using Carius method for estimation of bromine, 0.2397 g of AgBr was obtained. The percentage of bromine in the organic compound is ___ (Nearest integer) [Atomic mass: Silver = 108, Bromine = 80 ]",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "xsym4pk6ze",
+    "source_number": 86,
+    "subject": "Chemistry",
+    "chapter": "Surface Chemistry",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "100 ml of 0.0018$\\%$ (w/v) solution of $\\mathrm{Cl}^-$ ion was the minimum concentration of $\\mathrm{Cl}^-$ required to precipitate a negative sol in one h. The coagulating value of $\\mathrm{Cl}^-$ ion is ___ (Nearest integer)",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "dz2npkeamn",
+    "source_number": 87,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics and Nuclear Chemistry",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "$\\mathrm{PCl}_5\\,(\\mathrm{g}) \\rightarrow \\mathrm{PCl}_3\\,(\\mathrm{g}) + \\mathrm{Cl}_2\\,(\\mathrm{g})$ In the above first order reaction the concentration of $\\mathrm{PCl}_5$ reduces from initial concentration $50 \\, \\mathrm{mol} \\, \\mathrm{L}^{-1}$ to $10 \\, \\mathrm{mol} \\, \\mathrm{L}^{-1}$ in $120 \\, \\mathrm{minutes}$ at $300 \\, \\mathrm{K}$. The rate constant for the reaction at $300 \\, \\mathrm{K}$ is $x \\times 10^{-2} \\, \\mathrm{min}^{-1}$. The value of $x$ is [Given $\\log 5 = 0.6989$]",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "cup3qdffgg",
+    "source_number": 88,
+    "subject": "Chemistry",
+    "chapter": "The Solid State",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Diamond has a three dimensional structure of C atoms formed by covalent bonds. The structure of diamond has face centred cubic lattice where 50$\\%$ of the tetrahedral voids are also occupied by carbon atoms. The number of carbon atoms present per unit cell of diamond is ___",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "sjq4odopsb",
+    "source_number": 89,
+    "subject": "Chemistry",
+    "chapter": "Co-ordination Compounds",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "An aqueous solution of $\\mathrm{NiCl_2}$ was heated with excess sodium cyanide in presence of strong oxidizing agent to form $[Ni(CN)_6]^{2-}$. The total change in number of unpaired electrons on metal centre is ___",
+    "options": [],
+    "images": {}
+  },
+  {
+    "code": "cx3grexatb",
+    "source_number": 90,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "section": "B",
+    "question_type": "Numerical",
+    "question": "Potassium chlorate is prepared by electrolysis of KCl in basic solution as shown by following equation. $$6\\mathrm{OH}^- + \\mathrm{Cl}^- \\rightarrow \\mathrm{ClO}_3^- + 3\\mathrm{H}_2\\mathrm{O} + 6e^-$$ A current of $x\\,\\mathrm{A}$ has to be passed for 10 h to produce 10.0 g of potassium chlorate. the value of $x$ is ___ (Nearest integer) (Molar mass of $\\mathrm{KClO}_3 = 122.6 \\, \\mathrm{g \\, mol}^{-1}$) $F = 96500\\,\\mathrm{C}$",
+    "options": [],
+    "images": {}
+  }
+]

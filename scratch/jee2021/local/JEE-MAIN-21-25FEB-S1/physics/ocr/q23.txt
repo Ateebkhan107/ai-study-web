@@ -1,0 +1,6 @@
+In a certain thermodynamical process, the
+pressure of a gas depends on its volume as kV3.
+The work done when the temperature changes
+from 100°C to 300°C will be ___ nR, where n
+
+denotes number of moles of a gas.

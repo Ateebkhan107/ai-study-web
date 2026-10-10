@@ -1,0 +1,12 @@
+Let A=} [x] [x+3] [x+3]], where  [t]
+[x] [x+2] [x+4]
+
+denotes the greatest integer less than or equal to t.
+
+If det(A) = 192, then the set of values of x is the
+
+interval:
+
+(1) [68, 69) (2) [62, 63)
+
+(3) [65, 66) (4) [60, 61)

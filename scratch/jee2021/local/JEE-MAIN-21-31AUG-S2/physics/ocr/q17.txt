@@ -1,0 +1,17 @@
+17.
+
+A coil is placed in a magnetic field B as shown
+
+below :
+
+Coil Induced
+current
+
+A current is induced in the coil because B is :
+
+(1) Outward and decreasing with time
+
+(2) Parallel to the plane of coil and decreasing with time
+(3) Outward and increasing with time
+
+(4) Parallel to the plane of coil and increasing with time

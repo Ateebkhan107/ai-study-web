@@ -1,0 +1,10 @@
+A free electron of 2.6 eV energy collides with a
+H’ ion. This results in the formation of a hydrogen
+atom in the first excited state and a photon is
+released. Find the frequency of the emitted photon.
+(h=6.6 x 10“ Js)
+
+(1) 1.45 = 10'® MHz
+(2) 0.19 x 10'° MHz
+(3) 1.45 x 10° MHz
+(4) 9.0 x 10°’ MHz

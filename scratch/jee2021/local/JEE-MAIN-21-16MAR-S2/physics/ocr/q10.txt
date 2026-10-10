@@ -1,0 +1,10 @@
+10.
+
+Calculate the value of mean free path (A) for
+oxygen molecules at temperature 27°C
+and pressure 1.01 x 105 Pa. Assume the
+molecular diameter 0.3 nm and the gas is ideal.
+(k = 1.38 x 10-23 JK-1)
+
+(1) 58 nm (2) 32 nm
+(3) 86 nm (4) 102 nm

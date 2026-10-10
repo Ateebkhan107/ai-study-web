@@ -1,0 +1,22 @@
+18.
+
+Identify A and B in the chemical reaction.
+
+HCl [A] = Nal [B]
+5 y acetone .
+(major) (major)
+
+OCH, OCH,
+Cl
+(1) A= B=
+Cl
+NO, NO,
+OCH, I
+(2) A= B=
+cl cl
+NO, NO,
+OCH, I
+Cl Cl
+(3) A= B=
+NO, NO,
+OCH, OCH,

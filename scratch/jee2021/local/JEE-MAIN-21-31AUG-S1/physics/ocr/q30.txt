@@ -1,0 +1,9 @@
+10.
+
+A car is moving on a plane inclined at 30° to the
+horizontal with an acceleration of 10 ms” parallel
+to the plane upward. A bob is suspended by a
+string from the roof of the car.The angle in degrees
+which the string makes with the vertical is
+
+(Take g = 10 ms”)

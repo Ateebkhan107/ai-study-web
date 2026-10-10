@@ -1,0 +1,4 @@
+If (a+3b) is perpendicular to (7a -5b) and
+(a—4b) is perpendicular to (7a-2b), then the
+
+angle between a and b (in degrees) is

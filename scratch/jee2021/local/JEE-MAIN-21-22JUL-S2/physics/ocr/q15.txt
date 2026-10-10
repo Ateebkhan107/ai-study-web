@@ -1,0 +1,19 @@
+15.
+
+What should be the height of transmitting antenn<
+and the population covered if the television telecas
+is to cover a radius of 150 km ? The average
+population density around the tower is 2000/km
+and the value of R. = 6.5 x 10° m.
+(1) Height = 1731 m
+
+Population Covered = 1413 x 10°
+(2) Height = 1241 m
+
+Population Covered = 7 x 10°
+(3) Height = 1600 m
+
+Population Covered = 2 x 10°
+(4) Height = 1800 m
+
+Population Covered = 1413 x 10°

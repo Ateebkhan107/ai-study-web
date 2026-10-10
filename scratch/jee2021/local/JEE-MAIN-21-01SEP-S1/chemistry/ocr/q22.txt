@@ -1,0 +1,6 @@
+The molar solubility of Zn(OH), in 0.1 M NaOH
+solution is x x 10" M. The value of x is
+____(Nearest integer)
+
+(Given : The solubility product of Zn(OH), is
+2x10”)

@@ -1,0 +1,3 @@
+6. An amplitude modulated wave is represented by
+C,,(t) = 10(1 + 0.2 cos12560t) sin(1 11 x 10°t) volts.
+The modulating frequency in kHz will be ....... .

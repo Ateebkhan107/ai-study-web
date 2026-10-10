@@ -1,0 +1,7 @@
+When 3.00 g of a substance 'X’ is dissolved in 100 g of
+CCl, it raises the boiling point by 0.60 K. The molar
+mass of the substance 'X' is g mol’.
+
+(Nearest integer).
+
+[Given K, for CCl, is 5.0 K kg mol]

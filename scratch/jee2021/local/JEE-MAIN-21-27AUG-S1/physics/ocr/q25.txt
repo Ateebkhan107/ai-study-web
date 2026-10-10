@@ -1,0 +1,7 @@
+First, a set of n equal resistors of 10 © each are
+connected in series to a battery of emf 20V and
+internal resistance 10 Q. A current I is observed to
+flow. Then, the n resistors are connected in parallel
+to the same battery. It is observed that the current
+is increased 20 times, then the value of n is ....
+

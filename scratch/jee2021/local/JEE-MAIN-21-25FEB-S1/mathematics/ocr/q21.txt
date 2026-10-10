@@ -1,0 +1,10 @@
+Let f(x) be a polynomial of degree 6 in x, in
+
+which the coefficient of x® is unity and it has
+
+f(x)
+
+extrema at x =—1 and x = 1. If lim 7 =1, then
+x20 Xx
+
+5-£(2) is equal to __

@@ -1,0 +1,4 @@
+If the area of the triangle formed by the positive
+x-axis, the normal and the tangent to the circle
+(x — 2) + (y — 3)? = 25 at the point (5, 7) is A,
+then 24A is equal to____

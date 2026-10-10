@@ -1,0 +1,9 @@
+cos” (cos (—5)) + sin’ (sin (6)) — tan” (tan (12)) is
+equal to :
+
+(The inverse trigonometric functions take the
+principal values)
+
+(1) 3n- 11 (2)42-9
+
+(3)42-11 (4) 3x+1

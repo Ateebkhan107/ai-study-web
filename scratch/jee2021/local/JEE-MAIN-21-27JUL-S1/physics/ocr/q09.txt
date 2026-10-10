@@ -1,0 +1,14 @@
+In Young's double slit experiment, if the source of
+
+light changes from orange to blue then :
+
+(1) the central bright fringe will become a dark
+fringe.
+
+(2) the distance between consecutive fringes will
+decrease.
+
+(3) the distance between consecutive fringes will
+increase.
+
+(4) the intensity of the minima will increase.

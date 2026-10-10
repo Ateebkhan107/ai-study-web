@@ -1,0 +1,10 @@
+Let a vector q@i+pj be obtained by rotating
+
+vector V3i+j by an angle 45° about the ori
+
+in counterclockwise direction in the fi
+quadrant. Then the area of triangle havi
+vertices (a, B), (0, B) and (0, 0) is equal t
+
+1 1
+5 (2) 1 OR 2n

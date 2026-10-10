@@ -1,0 +1,8 @@
+1. Let A= {a,} be a 3 x 3 matrix, where
+
+(-I)" ifi<j,
+aj=} 2 ifisj,
+
+(-p! ifi>j,
+
+then det (3Adj(2A')) is equal to .

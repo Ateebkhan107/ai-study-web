@@ -1,0 +1,5 @@
+A number is called a palindrome if it reads the
+same backward as well as forward. For example
+285582 is a six digit palindrome. The number of
+
+six digit palindromes, which are divisible by 55, is
