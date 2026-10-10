@@ -18,6 +18,8 @@ import {
   BarChart2,
   Stethoscope,
   CheckCircle2,
+  Award,
+  Users,
 } from "lucide-react";
 
 const FREE_FEATURES = [
@@ -63,7 +65,7 @@ const PLANS = [
     total: 49,
     badge: null,
     savings: null,
-    perMonthCalc: "₹49/mo",
+    perMonthCalc: "₹49 / mo",
   },
   {
     id: "quarterly",
@@ -73,9 +75,9 @@ const PLANS = [
     discount: 74,
     per: "3 months",
     total: 129,
-    badge: "Most Popular",
+    badge: "MOST POPULAR",
     savings: "Save ₹370",
-    perMonthCalc: "₹43/mo",
+    perMonthCalc: "₹43 / mo",
   },
   {
     id: "yearly",
@@ -85,9 +87,9 @@ const PLANS = [
     discount: 78,
     per: "year",
     total: 399,
-    badge: "Best Value",
+    badge: "BEST VALUE",
     savings: "Save ₹1,400",
-    perMonthCalc: "₹33/mo",
+    perMonthCalc: "₹33 / mo",
   },
   {
     id: "ai_mode",
@@ -97,9 +99,9 @@ const PLANS = [
     discount: 54,
     per: "month",
     total: 1999,
-    badge: "Premium AI",
+    badge: "PREMIUM AI",
     savings: "Save ₹1,700",
-    perMonthCalc: "₹1,999/mo",
+    perMonthCalc: "₹1,999 / mo",
   },
 ];
 
@@ -108,42 +110,42 @@ const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 const BENTO_CARDS = [
   {
     icon: Target,
-    title: "Chapter PYQ Mastery",
-    desc: "Target high-yield chapters with 15+ years of authentic PYQs and instant filters.",
+    title: "Chapter-wise PYQ Mastery",
+    desc: "Target high-yield chapters with 15+ years of authentic PYQs, instant difficulty filters, and paper-wise breakdowns.",
   },
   {
     icon: RotateCcw,
-    title: "Smart Mistake Redo",
-    desc: "Wrong answers are saved automatically into your redo deck for spaced repetition.",
+    title: "Smart Mistake Redo Deck",
+    desc: "Every wrong answer is automatically cataloged in your redo deck. Practice until concepts are completely mastered.",
   },
   {
     icon: BarChart2,
-    title: "Precision Analytics",
-    desc: "Visual charts reveal accuracy trends, subject bottlenecks, and revision alerts.",
+    title: "Precision Weak-Area Analytics",
+    desc: "Visual topic breakdown charts pinpoint accuracy gaps, time spent per question, and high-frequency revision alerts.",
   },
   {
     icon: Brain,
-    title: "Zi AI Doubt Solver",
-    desc: "Ask any PYQ question and get instant step-by-step visual breakdowns.",
+    title: "Zi AI Instant Doubt Solver",
+    desc: "Ask any conceptual PYQ question and get instant step-by-step voice and visual problem breakdowns.",
   },
 ];
 
 const FAQS = [
   {
-    q: "Can I upgrade or change my subscription anytime?",
-    a: "Yes! You can upgrade anytime. New pass duration will be added directly to your account.",
+    q: "Can I cancel or upgrade my subscription anytime?",
+    a: "PrepZii passes are fixed-duration instant activation passes. You can upgrade to a higher tier anytime, and new duration will be added immediately to your existing pass.",
   },
   {
     q: "Which payment methods are supported?",
-    a: "We support UPI (GPay, PhonePe, Paytm), credit/debit cards, Net Banking, and wallets via Razorpay.",
+    a: "We support UPI (GPay, PhonePe, Paytm), credit/debit cards, Net Banking, and major Indian wallets via secure 256-bit encrypted Razorpay checkout.",
   },
   {
-    q: "Will my test data be saved if my plan expires?",
-    a: "Yes, 100%! All your attempt history, accuracy stats, and bookmarks are permanently saved.",
+    q: "Will my practice progress and test data be saved if my plan expires?",
+    a: "Yes, 100%! All your test attempts, accuracy records, bookmarks, and mistake redo lists are permanently preserved on your account.",
   },
   {
-    q: "What is the difference between Pro and AI Mode?",
-    a: "Pro includes unlimited mocks, chapter PYQs, and mistake redo. AI Mode includes all Pro features plus full Zi AI Voice & Visual companion and higher prompt limits.",
+    q: "What is the key difference between Pro and AI Mode?",
+    a: "Pro includes all unlimited mock testing, 15+ years chapter PYQs, mistake redo deck, and deep analytics. AI Mode includes all Pro features plus full Zi AI Voice & Visual companion and higher prompt limits.",
   },
 ];
 
@@ -216,174 +218,244 @@ export default function ProPage() {
 
   return (
     <PageWrapper
-      title="Unlock PrepZii Pro"
-      subtitle="Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo, and instant AI doubt solving."
+      title=""
       badge="PREPZII PASS"
-      badgeIcon={<Sparkles className="h-3.5 w-3.5" />}
+      badgeIcon={<Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />}
       badgeVariant="brand"
     >
-      <div className="space-y-8 sm:space-y-10">
+      <div className="relative mx-auto max-w-6xl space-y-10 sm:space-y-14 pb-20">
 
-        {/* ── Exam Track Selector ── */}
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Exam Track:</span>
-          <div className="inline-flex rounded-xl border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-900 shadow-sm">
-            <button
-              type="button"
-              onClick={() => setSelectedTrack("JEE")}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                selectedTrack === "JEE"
-                  ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-              }`}
-            >
-              <Zap className="h-3.5 w-3.5 fill-current" />
-              <span>JEE Main & Adv</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedTrack("NEET")}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                selectedTrack === "NEET"
-                  ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-              }`}
-            >
-              <Stethoscope className="h-3.5 w-3.5" />
-              <span>NEET UG</span>
-            </button>
+        {/* ── Hero Section ── */}
+        <section className="space-y-6 text-center animate-slideUp">
+          {/* Top Pill Badge with High Contrast */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/15 dark:border-amber-400/40 dark:bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 shadow-sm backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+            <span className="tracking-wide font-extrabold">Academic Intelligence Pass</span>
+            <span className="text-amber-400">•</span>
+            <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">{selectedTrack} Aspirants</span>
           </div>
-        </div>
 
-        {/* ── Plan Switcher Tabs ── */}
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 max-w-3xl">
-          {PLANS.map((p) => {
-            const isSelected = selectedPlan === p.id;
-            return (
+          {/* Main Title matching user screenshot */}
+          <div className="space-y-2">
+            <h1 className="text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
+              Master Every PYQ With <br />
+              <span className="text-amber-500 dark:text-amber-400 font-black">
+                Precision & Confidence
+              </span>
+            </h1>
+            <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg font-medium leading-relaxed pt-2">
+              Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo decks, and AI assistance tuned for{" "}
+              <strong className="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-500 decoration-2 underline-offset-4">
+                {selectedTrack}
+              </strong>.
+            </p>
+          </div>
+
+          {/* Exam Track Switcher */}
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Track:</span>
+            <div className="inline-flex rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-900/90 p-1.5 shadow-sm">
               <button
-                key={p.id}
                 type="button"
-                onClick={() => setSelectedPlan(p.id)}
-                className={`relative flex flex-col items-center justify-center rounded-xl border p-3 text-center transition-all duration-200 cursor-pointer ${
-                  isSelected
-                    ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-950 shadow-md"
-                    : "border-slate-200 bg-white hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 text-slate-800 dark:text-slate-200"
+                onClick={() => setSelectedTrack("JEE")}
+                className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
+                  selectedTrack === "JEE"
+                    ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
+                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
-                {p.badge && (
-                  <span
-                    className={`absolute -top-2.5 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${
-                      isSelected
-                        ? "bg-slate-200 text-slate-950 dark:bg-slate-800 dark:text-white"
-                        : "bg-amber-500 text-slate-950"
-                    }`}
-                  >
-                    {p.badge}
-                  </span>
-                )}
-                <span className="text-xs font-extrabold">{p.label}</span>
-                <span className={`text-xs font-bold ${isSelected ? "text-slate-200 dark:text-slate-800" : "text-slate-500 dark:text-slate-400"}`}>
-                  ₹{p.price}
-                </span>
-                <span className={`text-[10px] ${isSelected ? "text-slate-300 dark:text-slate-700" : "text-slate-400 dark:text-slate-500"}`}>
-                  {p.perMonthCalc}
-                </span>
+                <Zap className="h-3.5 w-3.5 fill-current" />
+                <span>JEE Track</span>
               </button>
-            );
-          })}
-        </div>
-
-        {/* ── Main Featured Pricing Box ── */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900 shadow-sm max-w-3xl">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-800 dark:bg-slate-800 dark:text-slate-200">
-                  {selectedTrack} {plan.label} Pass
-                </span>
-                <span className="rounded-md bg-amber-500/20 text-amber-800 dark:text-amber-300 px-2 py-0.5 text-xs font-extrabold">
-                  {plan.discount}% OFF
-                </span>
-                {plan.savings && (
-                  <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                    {plan.savings}
-                  </span>
-                )}
-              </div>
-
-              <div className="flex items-baseline gap-2">
-                <span className="text-lg font-bold text-slate-400 line-through dark:text-slate-500">
-                  ₹{plan.originalPrice}
-                </span>
-                <span className="text-4xl font-black font-display text-slate-900 dark:text-white">
-                  ₹{plan.price}
-                </span>
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  /{plan.per}
-                </span>
-              </div>
-
-              <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>Instant access to 15+ years authentic chapter PYQs</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>Automated Mistake Redo Deck & Spaced Repetition</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>Unlimited timed mock tests & diagnostic analytics</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-3">
               <button
                 type="button"
-                onClick={() => handleSubscribe()}
-                disabled={loading || isCurrentPlanSelected}
-                className="w-full md:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 font-extrabold text-sm transition-all duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => setSelectedTrack("NEET")}
+                className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
+                  selectedTrack === "NEET"
+                    ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                }`}
               >
-                {loading ? (
-                  <span>Processing...</span>
-                ) : (
-                  <>
-                    <span>{getCtaLabel()}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
+                <Stethoscope className="h-3.5 w-3.5" />
+                <span>NEET Track</span>
               </button>
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
-                <Shield className="h-3.5 w-3.5" />
-                <span>256-bit Encrypted Checkout via Razorpay</span>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Interactive Pricing & Plan Selector ── */}
+        <section className="space-y-6 animate-slideUp" style={{ animationDelay: "100ms" }}>
+          {/* Plan Selector Buttons Bar */}
+          <div className="mx-auto max-w-3xl">
+            <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-slate-800 dark:bg-slate-900/80 sm:grid-cols-4 shadow-sm">
+              {PLANS.map((p) => {
+                const isSelected = selectedPlan === p.id;
+                const isAi = p.id === "ai_mode";
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => setSelectedPlan(p.id)}
+                    className={`relative flex min-h-[78px] flex-col items-center justify-center rounded-xl p-2.5 text-center transition-all duration-200 cursor-pointer ${
+                      isSelected
+                        ? isAi
+                          ? "bg-purple-600 text-white shadow-lg ring-2 ring-purple-400/50"
+                          : "bg-amber-500 text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
+                        : "hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                    }`}
+                  >
+                    {p.badge && (
+                      <span
+                        className={`absolute -top-3 rounded-full px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider shadow-sm ${
+                          isSelected
+                            ? "bg-white text-slate-950"
+                            : isAi
+                            ? "bg-purple-600 text-white"
+                            : "bg-amber-500 text-slate-950"
+                        }`}
+                      >
+                        {p.badge}
+                      </span>
+                    )}
+
+                    <span className="text-xs font-black sm:text-sm">{p.label}</span>
+                    <span className={`text-xs font-bold ${isSelected ? (isAi ? "text-white" : "text-slate-950") : "text-slate-500 dark:text-slate-400"}`}>
+                      ₹{p.price}
+                    </span>
+                    <span className={`text-[10px] font-medium ${isSelected ? (isAi ? "text-purple-100" : "text-slate-900") : "text-slate-400 dark:text-slate-500"}`}>
+                      {p.perMonthCalc}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Central Featured Pricing Box */}
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 text-white p-6 sm:p-8 shadow-2xl">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
+              {/* Left Column: Details & Price */}
+              <div className="space-y-4 text-center md:text-left">
+                <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+                  <span className="rounded-full bg-amber-500 text-slate-950 px-3.5 py-1 text-xs font-black">
+                    {selectedTrack} {plan.label} Pass
+                  </span>
+                  <span className="rounded-full bg-emerald-500 text-white px-3 py-1 text-[11px] font-black uppercase tracking-wider shadow-sm">
+                    {plan.discount}% OFF
+                  </span>
+                  {plan.savings && (
+                    <span className="rounded-full bg-slate-800 text-slate-200 px-3 py-1 text-[11px] font-bold border border-slate-700">
+                      {plan.savings}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-baseline justify-center gap-2.5 md:justify-start">
+                  <span className="text-xl font-bold text-slate-400 line-through sm:text-2xl">
+                    ₹{plan.originalPrice}
+                  </span>
+                  <span className="text-5xl font-black font-display tracking-tight text-white sm:text-6xl">
+                    ₹{plan.price}
+                  </span>
+                  <span className="text-sm font-bold text-slate-400">
+                    /{plan.per}
+                  </span>
+                </div>
+
+                <p className="text-xs font-bold text-amber-400">
+                  ⚡ Limited-time discounted academic pass active
+                </p>
+
+                {/* Instant Highlights */}
+                <div className="space-y-2.5 pt-2 text-xs text-slate-200">
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
+                    <span>Instant access to 15+ years chapter PYQs & tests</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
+                    <span>Automated Mistake Redo Deck & Spaced Repetition</span>
+                  </div>
+                  {selectedPlan === "ai_mode" ? (
+                    <div className="flex items-center gap-2.5 text-purple-300 font-bold">
+                      <Sparkles className="h-4 w-4 shrink-0 text-purple-400" />
+                      <span>Full Zi AI Voice, Visual & Memory Study Companion</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2.5">
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-400" />
+                      <span>Step-by-step AI question hints & explanations</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: CTA & Trust */}
+              <div className="flex flex-col items-center justify-center space-y-3.5 rounded-2xl bg-slate-800/80 p-5 border border-slate-700 sm:p-6">
+                <button
+                  onClick={() => handleSubscribe()}
+                  disabled={loading || isCurrentPlanSelected}
+                  className={`group w-full py-4 px-6 rounded-2xl text-base font-black transition-all duration-200 flex items-center justify-center gap-2.5 shadow-xl cursor-pointer ${
+                    isCurrentPlanSelected
+                      ? "bg-slate-700 text-slate-400 cursor-not-allowed shadow-none"
+                      : selectedPlan === "ai_mode"
+                      ? "bg-purple-600 hover:bg-purple-500 text-white active:scale-[0.98]"
+                      : "bg-amber-500 hover:bg-amber-400 text-slate-950 font-black active:scale-[0.98]"
+                  }`}
+                >
+                  {loading ? (
+                    <span>Securing Order...</span>
+                  ) : (
+                    <>
+                      <span>{getCtaLabel()}</span>
+                      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    </>
+                  )}
+                </button>
+
+                <div className="flex flex-col items-center gap-1.5 text-center text-[11px] text-slate-400">
+                  <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
+                    <Shield className="h-3.5 w-3.5" />
+                    <span>256-Bit SSL Encrypted Razorpay Checkout</span>
+                  </div>
+                  <span>Instant activation • Works on Mobile & Desktop</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* ── 3-Column Plan Cards ── */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">
-            Plan Comparison
-          </h2>
+        {/* ── Feature Comparison Matrix ── */}
+        <section className="space-y-6 animate-slideUp" style={{ animationDelay: "150ms" }}>
+          <div className="text-center space-y-1">
+            <span className="text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400">
+              Transparent Pricing
+            </span>
+            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+              Compare Plans & Capabilities
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Free */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 flex flex-col justify-between">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {/* Free Plan */}
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 flex flex-col justify-between">
               <div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Free Plan</h3>
-                <p className="text-2xl font-black text-slate-400 dark:text-slate-500 mt-1">₹0</p>
-                <div className="space-y-2.5 mt-4 text-xs">
+                <div className="mb-4">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Free Tier</span>
+                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">Basic</h3>
+                  <p className="mt-1 text-3xl font-black text-slate-400 dark:text-slate-500">
+                    ₹0<span className="text-sm font-normal">/forever</span>
+                  </p>
+                </div>
+                <div className="space-y-3 pt-2">
                   {FREE_FEATURES.map((f) => (
-                    <div key={f.text} className="flex items-start gap-2">
+                    <div key={f.text} className="flex items-start gap-2.5 text-xs">
                       {f.included ? (
-                        <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 shrink-0 text-emerald-500 mt-0.5 stroke-[3]" />
                       ) : (
-                        <X className="h-4 w-4 text-slate-300 dark:text-slate-700 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 shrink-0 text-slate-300 dark:text-slate-700 mt-0.5" />
                       )}
-                      <span className={f.included ? "text-slate-700 dark:text-slate-300" : "text-slate-400 dark:text-slate-600 line-through"}>
+                      <span className={f.included ? "text-slate-700 dark:text-slate-300 font-medium" : "text-slate-400 dark:text-slate-600 line-through"}>
                         {f.text}
                       </span>
                     </div>
@@ -392,25 +464,41 @@ export default function ProPage() {
               </div>
               <button
                 disabled
-                className="mt-6 w-full py-2.5 rounded-xl bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 text-xs font-bold cursor-default"
+                className="mt-6 w-full py-3 rounded-2xl bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 text-xs font-bold cursor-default text-center"
               >
                 Current Default
               </button>
             </div>
 
-            {/* Pro */}
-            <div className="rounded-2xl border-2 border-slate-900 dark:border-white bg-white p-5 dark:bg-slate-900 flex flex-col justify-between relative shadow-sm">
-              <span className="absolute -top-3 right-4 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider">
+            {/* PRO Plan (Highlighted Gold Border) */}
+            <div className="relative rounded-3xl border-2 border-amber-500 bg-white p-6 shadow-xl dark:bg-slate-900 flex flex-col justify-between">
+              <div className="absolute -top-3.5 right-6 rounded-full bg-amber-500 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-slate-950 shadow-md">
                 Recommended
-              </span>
+              </div>
               <div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">{selectedTrack} Pro</h3>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">₹129 <span className="text-xs font-normal text-slate-500">/3mo</span></p>
-                <div className="space-y-2.5 mt-4 text-xs">
+                <div className="mb-4">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Unlimited Exam Prep</span>
+                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">
+                    {selectedTrack} PRO
+                  </h3>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[1].originalPrice}</span>
+                    <span className="text-3xl font-black text-slate-900 dark:text-white">
+                      ₹{PLANS[1].price}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">/3 months</span>
+                    <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-black text-white">
+                      {PLANS[1].discount}% OFF
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-3 pt-2">
                   {PRO_FEATURES.map((f) => (
-                    <div key={f.text} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                      <span className={f.hot ? "font-bold text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"}>
+                    <div key={f.text} className="flex items-start gap-2.5 text-xs">
+                      <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-amber-500 text-slate-950 font-bold" : "bg-emerald-500 text-white"}`}>
+                        <Check className="h-2.5 w-2.5 stroke-[3]" />
+                      </div>
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -421,22 +509,42 @@ export default function ProPage() {
                 type="button"
                 onClick={() => handleSubscribe("quarterly")}
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["quarterly"] <= PLAN_RANK[currentPlan])}
-                className="mt-6 w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 text-xs font-extrabold transition-all duration-200 cursor-pointer disabled:opacity-50"
+                className="mt-6 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                Get {selectedTrack} Pro
+                <span>Get {selectedTrack} Pro • ₹{PLANS[1].total}</span>
+                <ArrowRight className="h-4 w-4" />
               </button>
             </div>
 
-            {/* AI Mode */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 flex flex-col justify-between">
+            {/* AI Mode Plan (Highlighted Purple Border) */}
+            <div className="relative rounded-3xl border-2 border-purple-500 bg-white p-6 shadow-xl dark:bg-slate-900 flex flex-col justify-between">
+              <div className="absolute -top-3.5 right-6 rounded-full bg-purple-600 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-md">
+                AI Powered
+              </div>
               <div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">AI Mode</h3>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">₹1,999 <span className="text-xs font-normal text-slate-500">/mo</span></p>
-                <div className="space-y-2.5 mt-4 text-xs">
+                <div className="mb-4">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">The Complete AI Co-pilot</span>
+                  <h3 className="text-2xl font-black font-display text-slate-900 dark:text-white">
+                    Zi AI Mode
+                  </h3>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[3].originalPrice}</span>
+                    <span className="text-3xl font-black text-slate-900 dark:text-white">
+                      ₹{PLANS[3].price}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">/month</span>
+                    <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-black text-white">
+                      {PLANS[3].discount}% OFF
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-3 pt-2">
                   {AI_MODE_FEATURES.map((f) => (
-                    <div key={f.text} className="flex items-start gap-2">
-                      <Sparkles className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
-                      <span className={f.hot ? "font-bold text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"}>
+                    <div key={f.text} className="flex items-start gap-2.5 text-xs">
+                      <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${f.hot ? "bg-purple-600 text-white font-bold" : "bg-indigo-500 text-white"}`}>
+                        <Sparkles className="h-2.5 w-2.5" />
+                      </div>
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -447,59 +555,141 @@ export default function ProPage() {
                 type="button"
                 onClick={() => handleSubscribe("ai_mode")}
                 disabled={loading || Boolean(currentPlan && PLAN_RANK["ai_mode"] <= PLAN_RANK[currentPlan])}
-                className="mt-6 w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 text-xs font-extrabold transition-all duration-200 cursor-pointer disabled:opacity-50"
+                className="mt-6 w-full py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs transition-all duration-200 shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                Get AI Mode
+                <span>Get AI Mode • ₹{PLANS[3].total}</span>
+                <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* ── Feature Cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {BENTO_CARDS.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div key={card.title} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 shadow-sm">
-                <div className="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3 text-slate-900 dark:text-white">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{card.title}</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{card.desc}</p>
-              </div>
-            );
-          })}
-        </div>
+        {/* ── Value Proposition Bento Grid ── */}
+        <section className="space-y-6 animate-slideUp" style={{ animationDelay: "200ms" }}>
+          <div className="text-center space-y-1">
+            <span className="text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400">Built For High Scorers</span>
+            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+              Everything You Need to Boost Your Percentile
+            </h2>
+          </div>
 
-        {/* ── FAQ ── */}
-        <div className="space-y-3 max-w-3xl">
-          <h2 className="text-lg font-black font-display text-slate-900 dark:text-white">
-            Frequently Asked Questions
-          </h2>
-          {FAQS.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={faq.q}
-                className="rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  className="w-full p-4 text-left text-xs font-bold text-slate-900 dark:text-white flex items-center justify-between cursor-pointer"
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {BENTO_CARDS.map((card) => {
+              const Icon = card.icon;
+              return (
+                <div
+                  key={card.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isOpen && (
-                  <div className="px-4 pb-4 text-xs leading-relaxed text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 pt-3">
-                    {faq.a}
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                    <Icon className="h-6 w-6" />
                   </div>
-                )}
+                  <h3 className="text-base font-black font-display text-slate-900 dark:text-white">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                    {card.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Social Proof & Trust Metrics ── */}
+        <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
+          <div className="grid grid-cols-3 gap-3 rounded-3xl border border-slate-200 bg-white p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+            <div className="space-y-1">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <Users className="h-5 w-5" />
               </div>
-            );
-          })}
-        </div>
+              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">12,000+</p>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Active Aspirants</p>
+            </div>
+
+            <div className="space-y-1 border-x border-slate-200 dark:border-slate-800">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <Zap className="h-5 w-5 fill-current" />
+              </div>
+              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">94%</p>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Reported Higher Speed</p>
+            </div>
+
+            <div className="space-y-1">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                <Award className="h-5 w-5" />
+              </div>
+              <p className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-4xl">3.2x</p>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Faster Mistake Mastery</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ Section ── */}
+        <section className="mx-auto max-w-3xl space-y-6 animate-slideUp" style={{ animationDelay: "300ms" }}>
+          <div className="text-center space-y-1">
+            <span className="text-xs font-black uppercase tracking-widest text-slate-400">Got Questions?</span>
+            <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white sm:text-3xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="space-y-3">
+            {FAQS.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div
+                  key={faq.q}
+                  className={`overflow-hidden rounded-2xl border transition-all duration-200 bg-white dark:bg-slate-900 ${
+                    isOpen ? "border-amber-500/60 shadow-sm" : "border-slate-200 dark:border-slate-800"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    className="flex w-full items-center justify-between p-4 text-left font-bold text-sm text-slate-900 dark:text-white sm:p-5 cursor-pointer"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-amber-500" : ""
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="border-t border-slate-100 dark:border-slate-800 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300 sm:px-5 sm:pb-5">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Bottom Finale CTA Banner ── */}
+        <section className="animate-slideUp" style={{ animationDelay: "350ms" }}>
+          <div className="relative overflow-hidden rounded-3xl bg-slate-900 text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800">
+            <div className="relative z-10 mx-auto max-w-2xl space-y-5">
+              <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
+                Ready to Boost Your Rank?
+              </h2>
+              <p className="text-slate-300 text-sm font-semibold sm:text-base">
+                Join thousands of students mastering previous years questions and timed mock tests on PrepZii.
+              </p>
+              <div className="pt-2">
+                <button
+                  onClick={() => handleSubscribe()}
+                  disabled={loading || isCurrentPlanSelected}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-4 text-sm font-black text-slate-950 shadow-xl transition-all duration-200 hover:bg-amber-400 cursor-pointer active:scale-[0.98]"
+                >
+                  <span>{getCtaLabel()}</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
 
       </div>
     </PageWrapper>
