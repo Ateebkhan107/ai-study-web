@@ -40,7 +40,7 @@ function getZiGreetingName(user) {
   return "";
 }
 
-export default function ZiLauncher({ plan }) {
+export default function ZiLauncher({ plan, ziFreeUsage }) {
   const { isLoaded, isSignedIn, user } = useUser();
   const pathname = usePathname();
   const pageContext = useZiPageContext();
@@ -50,8 +50,19 @@ export default function ZiLauncher({ plan }) {
   const [isThinking, setIsThinking] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isStartupGreetingActive, setIsStartupGreetingActive] = useState(false);
+  const [remainingFreePrompts, setRemainingFreePrompts] = useState(
+    ziFreeUsage?.remaining !== undefined ? ziFreeUsage.remaining : 3
+  );
   const abortControllerRef = useRef(null);
   const greetingName = getZiGreetingName(user);
+
+  useEffect(() => {
+    if (ziFreeUsage?.remaining !== undefined) {
+      setRemainingFreePrompts(ziFreeUsage.remaining);
+    }
+  }, [ziFreeUsage?.remaining]);
+
+  const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -126,9 +137,14 @@ export default function ZiLauncher({ plan }) {
       });
 
       if (!response.ok || !response.body) {
+        if (response.status === 403) {
+          setRemainingFreePrompts(0);
+        }
         const statusMessage =
           response.status === 401
             ? "Please sign in again to chat with Zi."
+            : response.status === 403
+            ? "You've used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi."
             : response.status === 400
             ? "That message could not be sent. Try a shorter question."
             : response.status === 429
@@ -140,6 +156,10 @@ export default function ZiLauncher({ plan }) {
           status: "error",
         }));
         return;
+      }
+
+      if (plan !== "AI_MODE") {
+        setRemainingFreePrompts((prev) => Math.max(0, prev - 1));
       }
 
       const reader = response.body.getReader();
@@ -266,8 +286,9 @@ export default function ZiLauncher({ plan }) {
         onSend={() => sendMessage(input)}
         onStop={stopGeneration}
         onSuggestionSelect={sendMessage}
-        isLocked={plan !== "AI_MODE"}
+        isLocked={isLocked}
         plan={plan}
+        remainingFreePrompts={remainingFreePrompts}
       />
     </>
   );

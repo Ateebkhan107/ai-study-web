@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const maxDuration = 60;
 
-import { getUserAccessContext, canUseFeature } from "@/lib/accessControl";
+import { getUserAccessContext, canUseFeature, incrementZiFreePromptsUsage } from "@/lib/accessControl";
 import { checkZiRateLimit } from "@/lib/zi/rateLimit";
 import { attachStudyPlanStepActions } from "@/lib/zi/actionResolver.server";
 import { buildZiEntityContext } from "@/lib/zi/entityContext.server";
@@ -40,8 +40,19 @@ export async function POST(request) {
   }
 
   const access = await getUserAccessContext({ userId });
-  if (!access.isAiMode) {
-    return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "Zi AI requires AI Mode." }, { status: 403 });
+  const isAiMode = access.isAiMode;
+  const freeUsage = access.ziFreeUsage || { used: 0, limit: 3, remaining: 3 };
+
+  if (!isAiMode && freeUsage.remaining <= 0) {
+    return NextResponse.json(
+      { error: "AI_MODE_REQUIRED", message: "You have used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi." },
+      { status: 403 }
+    );
+  }
+
+  // Deduct 1 free prompt if user is using free trial
+  if (!isAiMode) {
+    await incrementZiFreePromptsUsage(userId);
   }
 
   let body;

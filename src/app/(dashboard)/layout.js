@@ -37,7 +37,7 @@ export default async function DashboardLayout({ children }) {
             <ProductTourManager />
           </Suspense>
           <Suspense fallback={null}>
-            <ZiLauncher plan={accessContext.plan} />
+            <ZiLauncher plan={accessContext.plan} ziFreeUsage={accessContext.ziFreeUsage} />
           </Suspense>
         </ZiEntityContextProvider>
       </div>

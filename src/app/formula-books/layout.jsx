@@ -15,7 +15,7 @@ export default async function FormulaBooksLayout({ children }) {
     <ZiEntityContextProvider>
       {children}
       <Suspense fallback={null}>
-        <ZiLauncher plan={accessContext?.plan} />
+        <ZiLauncher plan={accessContext?.plan} ziFreeUsage={accessContext?.ziFreeUsage} />
       </Suspense>
     </ZiEntityContextProvider>
   );

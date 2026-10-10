@@ -81,7 +81,7 @@ const PLANS = [
     label: "AI Mode",
     price: 1999,
     originalPrice: 3699,
-    discount: 75,
+    discount: 54,
     per: "month",
     total: 1999,
     badge: "Premium AI",

@@ -7,7 +7,7 @@ import ZiHeader from "@/components/zi/ZiHeader";
 import ZiMessages from "@/components/zi/ZiMessages";
 import ZiSuggestions from "@/components/zi/ZiSuggestions";
 
-import { Lock, X } from "lucide-react";
+import { Check, Lock, X } from "lucide-react";
 import Link from "next/link";
 
 export default function ZiPanel({
@@ -25,6 +25,7 @@ export default function ZiPanel({
   onSuggestionSelect,
   isLocked,
   plan,
+  remainingFreePrompts,
 }) {
   const pathname = usePathname();
 
@@ -75,17 +76,33 @@ export default function ZiPanel({
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10 text-brand">
               <Lock className="h-10 w-10" strokeWidth={2} />
             </div>
-            <h2 className="mb-3 font-display text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-              AI Mode
+            <h2 className="mb-2 font-display text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Unlock Zi AI
             </h2>
-            <div className="mb-2 text-lg font-bold text-slate-800 dark:text-slate-200">
-              ₹2,000/month
+            <div className="mb-1 text-lg font-bold text-slate-800 dark:text-slate-200">
+              ₹1,999/month
             </div>
-            <p className="mb-8 text-[0.95rem] font-medium leading-relaxed text-slate-600 dark:text-slate-400">
-              Unlock Zi AI and the complete AI study companion experience.
+            <p className="mb-5 text-[0.95rem] font-medium leading-relaxed text-slate-600 dark:text-slate-400">
+              You've used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi.
             </p>
+            <ul className="mb-7 w-full max-w-[280px] space-y-2 text-left text-sm font-medium text-slate-700 dark:text-slate-300">
+              {[
+                "Everything included in Pro",
+                "Full Zi AI companion",
+                "Higher AI usage limits",
+                "Voice interaction",
+                "Visual explanations",
+                "Personalized study memory",
+                "Personalized study plans",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" strokeWidth={3} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <Link
-              href="/pricing"
+              href="/pro"
               onClick={onClose}
               className="inline-flex h-12 w-full max-w-[240px] items-center justify-center rounded-xl bg-brand px-6 font-display text-lg font-bold text-white shadow-lg shadow-brand/25 transition-all hover:scale-105 active:scale-95"
             >
@@ -128,7 +145,13 @@ export default function ZiPanel({
           Zi assistant panel
         </span>
         <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-brand/80 to-transparent" aria-hidden="true" />
-        <ZiHeader plan={plan} onClose={onClose} assistantState={assistantState} />
+        <ZiHeader
+          plan={plan}
+          onClose={onClose}
+          assistantState={assistantState}
+          remainingFreePrompts={remainingFreePrompts}
+          isAiMode={plan === "AI_MODE"}
+        />
         <ZiMessages messages={messages} isThinking={isThinking} />
         <ZiSuggestions
           onSelect={onSuggestionSelect}

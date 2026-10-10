@@ -28,6 +28,7 @@ export async function GET() {
         member_status: membership.status,
       })),
       customTestUsage: access.customTestUsage,
+      ziFreeUsage: access.ziFreeUsage,
       features: buildFeaturePermissions(access),
     });
   } catch (error) {

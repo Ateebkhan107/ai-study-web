@@ -91,7 +91,7 @@ export default function PricingPage() {
             title="AI Mode"
             price={1999}
             originalPrice={3699}
-            discount={75}
+            discount={54}
             duration="month"
             plan="ai_mode"
             examTrack={examTrack}

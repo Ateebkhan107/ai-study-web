@@ -303,8 +303,50 @@ export async function getProfileAccountType(userId) {
   return profile.accountType;
 }
 
+export const FREE_ZI_PROMPT_LIMIT = 3;
+
+export async function getZiFreePromptsUsage(userId) {
+  if (!userId) return { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
+  try {
+    const { data } = await supabaseAdmin
+      .from("zi_preferences")
+      .select("preference_value")
+      .eq("clerk_user_id", userId)
+      .eq("preference_key", "zi_free_prompts_used")
+      .maybeSingle();
+
+    const used = Math.max(0, parseInt(data?.preference_value || "0", 10) || 0);
+    const limit = FREE_ZI_PROMPT_LIMIT;
+    const remaining = Math.max(0, limit - used);
+    return { used, limit, remaining };
+  } catch (err) {
+    console.error("[ZI_FREE_PROMPTS_USAGE_ERROR]", err);
+    return { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
+  }
+}
+
+export async function incrementZiFreePromptsUsage(userId) {
+  if (!userId) return;
+  try {
+    const usage = await getZiFreePromptsUsage(userId);
+    const newUsed = usage.used + 1;
+    await supabaseAdmin
+      .from("zi_preferences")
+      .upsert({
+        clerk_user_id: userId,
+        preference_key: "zi_free_prompts_used",
+        preference_value: String(newUsed),
+        updated_at: new Date().toISOString(),
+      }, {
+        onConflict: "clerk_user_id,preference_key"
+      });
+  } catch (err) {
+    console.error("[ZI_INCREMENT_FREE_PROMPTS_ERROR]", err);
+  }
+}
+
 export async function getUserAccessContext({ userId, email, examTrack, clerkMetadata } = {}) {
-  const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks] = await Promise.all([
+  const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks, ziFreeUsage] = await Promise.all([
     getActiveInstituteMemberships(userId, email),
     clerkMetadata
       ? Promise.resolve({
@@ -317,6 +359,7 @@ export async function getUserAccessContext({ userId, email, examTrack, clerkMeta
     getProfileAccessProfile(userId),
     getPersonalCustomTestUsage(userId),
     getActiveSubscriptionTracks(userId),
+    getZiFreePromptsUsage(userId),
   ]);
 
   const activeExamTrack = normalizeExamTrack(examTrack || profileAccess.examTrack);
@@ -345,6 +388,7 @@ export async function getUserAccessContext({ userId, email, examTrack, clerkMeta
     isPlatformAdmin: clerkAccessMetadata.isPlatformAdmin,
     instituteMemberships: memberships,
     customTestUsage,
+    ziFreeUsage,
   };
 }
 
@@ -367,9 +411,11 @@ export function canUseFeature(access, feature, options = {}) {
       : { allowed: false, reason: "PRO_REQUIRED", upgradeUrl: "/pro" };
   }
   if (rule.plan === "AI_MODE") {
-    return access?.isAiMode
-      ? { allowed: true }
-      : { allowed: false, reason: "AI_MODE_REQUIRED", upgradeUrl: "/pro" };
+    if (access?.isAiMode) return { allowed: true, unlimited: true };
+    const ziUsage = access?.ziFreeUsage || { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
+    return ziUsage.remaining > 0
+      ? { allowed: true, usage: ziUsage }
+      : { allowed: false, reason: "AI_MODE_REQUIRED", usage: ziUsage, upgradeUrl: "/pro" };
   }
   if (rule.plan === "LIMITED_FREE") {
     if (access?.isPro) return { allowed: true, unlimited: true };

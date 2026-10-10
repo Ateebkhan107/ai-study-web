@@ -1,7 +1,7 @@
 import { X, Sparkles } from "lucide-react";
 import Logo from "@/components/Logo";
 
-export default function ZiHeader({ onClose, assistantState = "idle" }) {
+export default function ZiHeader({ onClose, assistantState = "idle", remainingFreePrompts, isAiMode }) {
   return (
     <header className="relative shrink-0 border-b border-[var(--border-subtle)] bg-[var(--card)]/50 px-4 pb-5 pt-6 sm:px-6">
       <div className="flex items-center justify-between gap-4">
@@ -10,12 +10,17 @@ export default function ZiHeader({ onClose, assistantState = "idle" }) {
             <Logo size={28} showText={false} forceLight={true} />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 flex-wrap">
               <h2 className="font-display text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
                 Zi Assistant
               </h2>
               {assistantState === "thinking" && (
                 <Sparkles className="h-3.5 w-3.5 text-brand animate-pulse" />
+              )}
+              {!isAiMode && remainingFreePrompts !== undefined && remainingFreePrompts > 0 && (
+                <span className="rounded-full bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 text-[10px] font-bold text-amber-600 dark:text-amber-400">
+                  {remainingFreePrompts} Free Prompt{remainingFreePrompts === 1 ? "" : "s"} Left
+                </span>
               )}
             </div>
             <p className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-brand/80">
