@@ -126,24 +126,28 @@ const BENTO_CARDS = [
     icon: Target,
     title: "Chapter-wise PYQ Mastery",
     tag: "High Yield",
+    color: "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border-indigo-200/80 dark:border-indigo-800/80",
     desc: "Target specific topics with 15+ years of authentic past paper questions, instant difficulty filters, and paper-wise breakdowns.",
   },
   {
     icon: RotateCcw,
     title: "Smart Mistake Redo Deck",
     tag: "Auto Spaced Repetition",
+    color: "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200/80 dark:border-emerald-800/80",
     desc: "Every wrong answer is automatically cataloged in your redo deck. Practice until concepts are completely mastered.",
   },
   {
     icon: BarChart2,
-    title: "Precision Weak-Area Analytics",
+    title: "Precision Analytics",
     tag: "Deep Diagnostic",
+    color: "bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border-sky-200/80 dark:border-sky-800/80",
     desc: "Visual topic breakdown charts pinpoint accuracy gaps, time spent per question, and high-frequency revision alerts.",
   },
   {
     icon: Brain,
-    title: "Zi AI Study Co-pilot",
+    title: "Zi AI Doubt Companion",
     tag: "Instant Doubts",
+    color: "bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 border-violet-200/80 dark:border-violet-800/80",
     desc: "Clear any complex Physics, Chemistry, Math, or Biology query with step-by-step interactive breakdowns and hints.",
   },
 ];
@@ -239,7 +243,7 @@ export default function ProPage() {
     <PageWrapper
       title=""
       badge="PREPZII PASS"
-      badgeIcon={<Sparkles className="h-3.5 w-3.5 text-slate-700 dark:text-slate-300" />}
+      badgeIcon={<Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />}
       badgeVariant="brand"
     >
       <div className="relative mx-auto max-w-6xl space-y-12 sm:space-y-16 pb-20">
@@ -247,38 +251,37 @@ export default function ProPage() {
         {/* ── HERO SECTION ── */}
         <section className="space-y-6 text-center animate-slideUp">
           {/* Top Pill Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-4 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-md">
-            <span className="flex h-2 w-2 rounded-full bg-slate-900 dark:bg-white animate-pulse" />
-            <span className="tracking-wide">Academic Pass for Serious Aspirants</span>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="font-extrabold text-slate-900 dark:text-white uppercase tracking-wider">{selectedTrack}</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/80 dark:border-indigo-900/80 bg-indigo-50/80 dark:bg-indigo-950/60 px-4 py-1.5 text-xs font-semibold text-indigo-900 dark:text-indigo-200 shadow-sm backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
+            <span className="tracking-wide">Academic Intelligence Pass</span>
+            <span className="text-indigo-300 dark:text-indigo-700">•</span>
+            <span className="font-extrabold text-indigo-950 dark:text-white uppercase tracking-wider">{selectedTrack} Aspirants</span>
           </div>
 
           {/* Main Title */}
           <div className="space-y-3">
             <h1 className="text-4xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
               Master Every PYQ With <br className="hidden sm:inline" />
-              <span className="relative inline-block text-slate-900 dark:text-white">
+              <span className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-600 dark:from-indigo-400 dark:via-indigo-300 dark:to-violet-400 bg-clip-text text-transparent font-black">
                 Precision & Confidence
-                <span className="absolute bottom-1 left-0 h-2 w-full bg-slate-200/80 dark:bg-slate-800/80 -z-10 rounded-sm" />
               </span>
             </h1>
             <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg font-normal leading-relaxed">
               Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo decks, and AI assistance tuned for{" "}
-              <strong className="text-slate-900 dark:text-white font-bold">{selectedTrack}</strong>.
+              <strong className="text-indigo-700 dark:text-indigo-300 font-bold">{selectedTrack}</strong>.
             </p>
           </div>
 
           {/* Exam Track Switcher */}
           <div className="flex items-center justify-center gap-3 pt-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Track:</span>
-            <div className="inline-flex rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-900/90 p-1 shadow-inner">
+            <div className="inline-flex rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-1.5 shadow-sm">
               <button
                 type="button"
                 onClick={() => setSelectedTrack("JEE")}
                 className={`flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
                   selectedTrack === "JEE"
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-md"
+                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20"
                     : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
@@ -290,7 +293,7 @@ export default function ProPage() {
                 onClick={() => setSelectedTrack("NEET")}
                 className={`flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
                   selectedTrack === "NEET"
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-md"
+                    ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/20"
                     : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
@@ -307,35 +310,40 @@ export default function ProPage() {
 
           {/* Duration Selector Tabs */}
           <div className="mx-auto max-w-3xl">
-            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 p-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 p-2 sm:grid-cols-4">
               {PLANS.map((p) => {
                 const isSelected = selectedPlan === p.id;
+                const isAi = p.id === "ai_mode";
                 return (
                   <button
                     key={p.id}
                     onClick={() => setSelectedPlan(p.id)}
                     className={`relative flex min-h-[76px] flex-col items-center justify-center rounded-xl p-3 text-center transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-lg ring-1 ring-slate-400/50"
-                        : "hover:bg-white/60 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300"
+                        ? isAi
+                          ? "bg-violet-600 text-white shadow-lg shadow-violet-600/25 ring-2 ring-violet-400/40"
+                          : "bg-indigo-600 text-white shadow-lg shadow-indigo-600/25 ring-2 ring-indigo-400/40"
+                        : "hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
                     }`}
                   >
                     {p.badge && (
                       <span
                         className={`absolute -top-2.5 rounded-full px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${
                           isSelected
-                            ? "bg-slate-200 text-slate-950 dark:bg-slate-800 dark:text-white"
-                            : "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950"
+                            ? "bg-white text-slate-950"
+                            : isAi
+                            ? "bg-violet-600 text-white"
+                            : "bg-indigo-600 text-white"
                         }`}
                       >
                         {p.badge}
                       </span>
                     )}
                     <span className="text-xs font-extrabold">{p.label}</span>
-                    <span className={`text-xs font-semibold ${isSelected ? "text-slate-300 dark:text-slate-700" : "text-slate-500 dark:text-slate-400"}`}>
+                    <span className={`text-xs font-semibold ${isSelected ? "text-indigo-100" : "text-slate-500 dark:text-slate-400"}`}>
                       ₹{p.price}
                     </span>
-                    <span className={`text-[10px] ${isSelected ? "text-slate-300 dark:text-slate-700" : "text-slate-400 dark:text-slate-500"}`}>
+                    <span className={`text-[10px] ${isSelected ? "text-indigo-200" : "text-slate-400 dark:text-slate-500"}`}>
                       {p.perMonthCalc}
                     </span>
                   </button>
@@ -344,64 +352,64 @@ export default function ProPage() {
             </div>
           </div>
 
-          {/* Central Featured Pass Card */}
-          <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl relative overflow-hidden">
+          {/* Central Featured Pass Card (Rich Midnight & Indigo Palette) */}
+          <div className="mx-auto max-w-3xl rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 shadow-2xl relative overflow-hidden">
             
-            {/* Top Accent Strip */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-slate-900 dark:bg-white" />
+            {/* Top Indigo Accent Line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500" />
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
               
               {/* Left Column: Pricing Info */}
               <div className="space-y-4 text-center md:text-left">
                 <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
-                  <span className="rounded-full bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 px-3 py-1 text-xs font-extrabold">
+                  <span className="rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 px-3.5 py-1 text-xs font-extrabold">
                     {selectedTrack} {plan.label} Pass
                   </span>
-                  <span className="rounded-full bg-emerald-600 text-white px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide">
+                  <span className="rounded-full bg-emerald-500 text-slate-950 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide">
                     {plan.discount}% OFF
                   </span>
                   {plan.savings && (
-                    <span className="rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 text-[10px] font-bold border border-slate-200 dark:border-slate-700">
+                    <span className="rounded-full bg-slate-800 text-slate-300 px-2.5 py-0.5 text-[10px] font-bold border border-slate-700">
                       {plan.savings}
                     </span>
                   )}
                 </div>
 
                 <div className="flex items-baseline justify-center gap-3 md:justify-start">
-                  <span className="text-xl font-bold text-slate-400 line-through dark:text-slate-500 sm:text-2xl">
+                  <span className="text-xl font-bold text-slate-400 line-through sm:text-2xl">
                     ₹{plan.originalPrice}
                   </span>
-                  <span className="text-5xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white sm:text-6xl">
+                  <span className="text-5xl font-extrabold font-display tracking-tight text-white sm:text-6xl">
                     ₹{plan.price}
                   </span>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  <span className="text-xs font-semibold text-slate-300">
                     /{plan.per}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  {plan.highlight} • Instant activation across all devices
+                <p className="text-xs text-indigo-200/90 font-medium">
+                  {plan.highlight} • Instant access across all devices
                 </p>
 
                 {/* Key Bullet Highlights */}
-                <div className="space-y-2 pt-1 text-xs text-slate-700 dark:text-slate-300">
+                <div className="space-y-2 pt-1 text-xs text-slate-200">
                   <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-slate-900 dark:text-white" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                     <span>Instant access to 15+ years authentic chapter PYQs</span>
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-slate-900 dark:text-white" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                     <span>Automated Spaced-Repetition Mistake Redo Deck</span>
                   </div>
                   {isAiSelected ? (
-                    <div className="flex items-center gap-2.5 font-bold text-slate-900 dark:text-white">
-                      <Sparkles className="h-4 w-4 shrink-0" />
+                    <div className="flex items-center gap-2.5 font-bold text-violet-300">
+                      <Sparkles className="h-4 w-4 shrink-0 text-violet-400" />
                       <span>Full Zi AI Voice, Visual & Memory Study Companion</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-slate-900 dark:text-white" />
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                       <span>Step-by-step AI question explanations & hints</span>
                     </div>
                   )}
@@ -409,20 +417,22 @@ export default function ProPage() {
               </div>
 
               {/* Right Column: Primary CTA */}
-              <div className="flex flex-col items-center justify-center space-y-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 p-6 border border-slate-200/80 dark:border-slate-800">
+              <div className="flex flex-col items-center justify-center space-y-4 rounded-2xl bg-slate-800/60 p-6 border border-indigo-500/20 backdrop-blur-md">
                 <button
                   onClick={() => handleSubscribe()}
                   disabled={loading || isCurrentPlanSelected}
-                  className={`group w-full py-4 px-6 rounded-xl text-sm font-extrabold transition-all duration-200 flex items-center justify-center gap-2 shadow-md cursor-pointer ${
+                  className={`group w-full py-4 px-6 rounded-xl text-sm font-black transition-all duration-200 flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
                     isCurrentPlanSelected
-                      ? "bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500 cursor-not-allowed shadow-none"
-                      : "bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 active:scale-[0.98]"
+                      ? "bg-slate-800 text-slate-500 cursor-not-allowed shadow-none"
+                      : isAiSelected
+                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white active:scale-[0.98]"
+                      : "bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white active:scale-[0.98]"
                   }`}
                 >
                   {loading ? (
                     <>
                       <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                      <span>Processing Order...</span>
+                      <span>Securing Order...</span>
                     </>
                   ) : (
                     <>
@@ -432,12 +442,12 @@ export default function ProPage() {
                   )}
                 </button>
 
-                <div className="flex flex-col items-center gap-1 text-center text-[11px] text-slate-500 dark:text-slate-400">
-                  <div className="flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-300">
+                <div className="flex flex-col items-center gap-1 text-center text-[11px] text-slate-300">
+                  <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
                     <Shield className="h-3.5 w-3.5" />
                     <span>256-Bit SSL Encrypted Razorpay Checkout</span>
                   </div>
-                  <span>100% Ad-Free • Unlimited Mocks</span>
+                  <span className="text-slate-400">100% Ad-Free • Unlimited Mocks</span>
                 </div>
               </div>
 
@@ -449,7 +459,7 @@ export default function ProPage() {
         {/* ── THREE-COLUMN COMPARISON CARDS ── */}
         <section className="space-y-6 animate-slideUp" style={{ animationDelay: "150ms" }}>
           <div className="text-center space-y-1">
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
               Clear & Honest Comparison
             </span>
             <h2 className="text-2xl font-extrabold font-display text-slate-900 dark:text-white sm:text-3xl">
@@ -473,7 +483,7 @@ export default function ProPage() {
                   {FREE_FEATURES.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
                       {f.included ? (
-                        <Check className="h-4 w-4 shrink-0 text-slate-900 dark:text-white mt-0.5 stroke-[2.5]" />
+                        <Check className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5 stroke-[2.5]" />
                       ) : (
                         <X className="h-4 w-4 shrink-0 text-slate-300 dark:text-slate-700 mt-0.5" />
                       )}
@@ -494,14 +504,14 @@ export default function ProPage() {
               </div>
             </div>
 
-            {/* 2. Pro Pass (Highlighted) */}
-            <div className="relative rounded-2xl border-2 border-slate-900 dark:border-slate-100 bg-white dark:bg-slate-900 p-6 shadow-lg flex flex-col justify-between">
-              <div className="absolute -top-3 right-6 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-3 py-0.5 text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
+            {/* 2. Pro Pass (Highlighted Indigo) */}
+            <div className="relative rounded-2xl border-2 border-indigo-600 dark:border-indigo-500 bg-indigo-50/20 dark:bg-indigo-950/20 p-6 shadow-xl flex flex-col justify-between">
+              <div className="absolute -top-3 right-6 rounded-full bg-indigo-600 text-white px-3 py-0.5 text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
                 Recommended
               </div>
               <div>
-                <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Full PYQ & Mock Access</span>
+                <div className="pb-4 border-b border-indigo-100 dark:border-indigo-900/50">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Full PYQ & Mock Access</span>
                   <h3 className="text-2xl font-extrabold font-display text-slate-900 dark:text-white mt-1">
                     {selectedTrack} Pro Pass
                   </h3>
@@ -516,8 +526,8 @@ export default function ProPage() {
                 <div className="space-y-3 pt-4">
                   {PRO_FEATURES.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
-                      <Check className="h-4 w-4 shrink-0 text-slate-900 dark:text-white mt-0.5 stroke-[3]" />
-                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
+                      <Check className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400 mt-0.5 stroke-[3]" />
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-indigo-950 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -529,7 +539,7 @@ export default function ProPage() {
                   type="button"
                   onClick={() => handleSubscribe("quarterly")}
                   disabled={loading || Boolean(currentPlan && PLAN_RANK["quarterly"] <= PLAN_RANK[currentPlan])}
-                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 text-xs font-extrabold transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span>Get {selectedTrack} Pro • ₹{PLANS[1].total}</span>
                   <ArrowRight className="h-4 w-4" />
@@ -537,11 +547,14 @@ export default function ProPage() {
               </div>
             </div>
 
-            {/* 3. AI Mode Pass */}
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
+            {/* 3. AI Mode Pass (Highlighted Violet) */}
+            <div className="relative rounded-2xl border-2 border-violet-600 dark:border-violet-500 bg-violet-50/20 dark:bg-violet-950/20 p-6 shadow-xl flex flex-col justify-between">
+              <div className="absolute -top-3 right-6 rounded-full bg-violet-600 text-white px-3 py-0.5 text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
+                AI Powered
+              </div>
               <div>
-                <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Full AI Companion</span>
+                <div className="pb-4 border-b border-violet-100 dark:border-violet-900/50">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-violet-600 dark:text-violet-400">Full AI Companion</span>
                   <h3 className="text-2xl font-extrabold font-display text-slate-900 dark:text-white mt-1">Zi AI Mode</h3>
                   <div className="mt-2 flex items-baseline gap-2">
                     <span className="text-sm font-bold text-slate-400 line-through">₹{PLANS[3].originalPrice}</span>
@@ -554,8 +567,8 @@ export default function ProPage() {
                 <div className="space-y-3 pt-4">
                   {AI_MODE_FEATURES.map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 text-xs">
-                      <Sparkles className="h-4 w-4 shrink-0 text-slate-900 dark:text-white mt-0.5" />
-                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-slate-900 dark:text-white" : "font-medium"}`}>
+                      <Sparkles className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400 mt-0.5" />
+                      <span className={`text-slate-800 dark:text-slate-200 ${f.hot ? "font-bold text-violet-950 dark:text-white" : "font-medium"}`}>
                         {f.text}
                       </span>
                     </div>
@@ -567,7 +580,7 @@ export default function ProPage() {
                   type="button"
                   onClick={() => handleSubscribe("ai_mode")}
                   disabled={loading || Boolean(currentPlan && PLAN_RANK["ai_mode"] <= PLAN_RANK[currentPlan])}
-                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 text-xs font-extrabold transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-xs font-extrabold transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span>Get AI Mode • ₹{PLANS[3].total}</span>
                   <ArrowRight className="h-4 w-4" />
@@ -582,7 +595,7 @@ export default function ProPage() {
         {/* ── BENTO GRID: KEY CAPABILITIES ── */}
         <section className="space-y-6 animate-slideUp" style={{ animationDelay: "200ms" }}>
           <div className="text-center space-y-1">
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Engineered For Efficiency</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Engineered For Efficiency</span>
             <h2 className="text-2xl font-extrabold font-display text-slate-900 dark:text-white sm:text-3xl">
               Four Core Tools to Raise Your Percentile
             </h2>
@@ -597,7 +610,7 @@ export default function ProPage() {
                   className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
                 >
                   <div>
-                    <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white">
+                    <div className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border ${card.color}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <span className="inline-block rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-slate-600 dark:text-slate-300 mb-2">
@@ -621,16 +634,16 @@ export default function ProPage() {
         <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center shadow-sm">
             <div className="space-y-1 p-2">
-              <p className="text-3xl font-extrabold font-display text-slate-900 dark:text-white sm:text-4xl">12,000+</p>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Active Aspirants Practicing</p>
+              <p className="text-3xl font-extrabold font-display text-indigo-600 dark:text-indigo-400 sm:text-4xl">12,000+</p>
+              <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">Active Aspirants Practicing</p>
             </div>
             <div className="space-y-1 p-2 border-t sm:border-t-0 sm:border-x border-slate-100 dark:border-slate-800">
-              <p className="text-3xl font-extrabold font-display text-slate-900 dark:text-white sm:text-4xl">94%</p>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Reported Higher Exam Speed</p>
+              <p className="text-3xl font-extrabold font-display text-emerald-600 dark:text-emerald-400 sm:text-4xl">94%</p>
+              <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">Reported Higher Exam Speed</p>
             </div>
             <div className="space-y-1 p-2 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-              <p className="text-3xl font-extrabold font-display text-slate-900 dark:text-white sm:text-4xl">3.2x</p>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Faster Mistake Mastery</p>
+              <p className="text-3xl font-extrabold font-display text-violet-600 dark:text-violet-400 sm:text-4xl">3.2x</p>
+              <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">Faster Mistake Mastery</p>
             </div>
           </div>
         </section>
@@ -652,7 +665,7 @@ export default function ProPage() {
                 <div
                   key={faq.q}
                   className={`overflow-hidden rounded-xl border transition-all duration-200 bg-white dark:bg-slate-900 ${
-                    isOpen ? "border-slate-400 dark:border-slate-600 shadow-sm" : "border-slate-200 dark:border-slate-800"
+                    isOpen ? "border-indigo-400 dark:border-indigo-600 shadow-sm" : "border-slate-200 dark:border-slate-800"
                   }`}
                 >
                   <button
@@ -663,7 +676,7 @@ export default function ProPage() {
                     <span>{faq.q}</span>
                     <ChevronDown
                       className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 text-slate-900 dark:text-white" : ""
+                        isOpen ? "rotate-180 text-indigo-600 dark:text-indigo-400" : ""
                       }`}
                     />
                   </button>
@@ -681,19 +694,19 @@ export default function ProPage() {
 
         {/* ── BOTTOM FINALE CTA ── */}
         <section className="animate-slideUp" style={{ animationDelay: "350ms" }}>
-          <div className="rounded-3xl bg-slate-900 dark:bg-slate-950 text-white p-8 sm:p-12 text-center shadow-xl border border-slate-800">
+          <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-8 sm:p-12 text-center shadow-xl border border-indigo-500/20">
             <div className="mx-auto max-w-2xl space-y-4">
               <h2 className="text-3xl font-extrabold font-display sm:text-4xl tracking-tight">
                 Ready to Boost Your Rank?
               </h2>
-              <p className="text-slate-300 text-xs sm:text-sm font-normal">
+              <p className="text-indigo-200/90 text-xs sm:text-sm font-normal">
                 Join thousands of students practicing previous years questions and timed mock tests on PrepZii.
               </p>
               <div className="pt-3">
                 <button
                   onClick={() => handleSubscribe()}
                   disabled={loading || isCurrentPlanSelected}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-slate-950 px-8 py-3.5 text-xs font-extrabold shadow-md hover:bg-slate-100 transition-all duration-200 cursor-pointer active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg hover:bg-slate-100 transition-all duration-200 cursor-pointer active:scale-[0.98]"
                 >
                   <span>{getCtaLabel()}</span>
                   <ArrowRight className="h-4 w-4" />
