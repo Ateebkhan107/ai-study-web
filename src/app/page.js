@@ -5,7 +5,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, startTransition } from "react";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion, MotionConfig } from "framer-motion";
 import Logo from "@/components/Logo";
 import { GraphVisual } from "@/components/ui/educational-visuals";
@@ -30,19 +29,6 @@ import {
   Calculator,
   MessageSquare,
 } from "lucide-react";
-
-/* ── Fonts ─────────────────────────────────────────────────── */
-const displayFont = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-prepzii-landing-display",
-  display: "swap",
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-prepzii-landing-body",
-  display: "swap",
-});
 
 // Shorthand class references
 const D = "font-[family-name:var(--font-prepzii-landing-display)]";
@@ -375,7 +361,7 @@ export default function PublicLandingPage() {
         </motion.div>
       )}
       <div
-        className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
+        className={`min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
       >
       {/* ════════════════════════════════════════════════════════
           NAVBAR

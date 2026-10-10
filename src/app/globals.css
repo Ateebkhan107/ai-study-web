@@ -3,6 +3,12 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
+  --font-rajdhani: Rajdhani, "Arial Narrow", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-space-grotesk: "Space Grotesk", Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-prepzii-landing-display: Fraunces, Georgia, "Times New Roman", serif;
+  --font-prepzii-landing-body: "Source Sans 3", Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+
   /* PrepZii Light Mode: scientific notebook paper + ink */
   --background: #FFFDF2;
   --background-secondary: #F8F1D9;

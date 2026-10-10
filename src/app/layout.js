@@ -1,5 +1,4 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import Script from "next/script";
 
 import "@awesome.me/webawesome/dist/styles/themes/default.css";
 
@@ -14,28 +13,6 @@ import "./globals.css";
 
 import Footer from "@/components/Footer";
 import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
-
-import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
-
-const displayFont = Rajdhani({
-  variable: "--font-rajdhani",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const sansFont = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const monoFont = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata = {
   // Resolves all relative URLs in OG images etc. against this base.
@@ -223,12 +200,55 @@ const themeInitScript = `
     document.documentElement.style.colorScheme = "light";
   }
 
-  // Remove extension-only hydration attributes that may already exist in the
-  // parsed HTML. Avoid observing the whole DOM because that can fight with the
-  // extension code that owns those nodes.
-  document
-    .querySelectorAll("[bis_skin_checked]")
-    .forEach((el) => el.removeAttribute("bis_skin_checked"));
+  // Some browser/security extensions inject attributes while React hydrates,
+  // which can trip the dev overlay even though the app rendered correctly.
+  const stripExtensionHydrationAttributes = (root = document.documentElement) => {
+    if (!root) return;
+
+    if (root.nodeType === Node.ELEMENT_NODE && root.hasAttribute("bis_skin_checked")) {
+      root.removeAttribute("bis_skin_checked");
+    }
+
+    root
+      .querySelectorAll?.("[bis_skin_checked]")
+      .forEach((el) => el.removeAttribute("bis_skin_checked"));
+  };
+
+  const extensionAttributeObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === "attributes") {
+        mutation.target.removeAttribute("bis_skin_checked");
+        return;
+      }
+
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          stripExtensionHydrationAttributes(node);
+        }
+      });
+    });
+  });
+
+  stripExtensionHydrationAttributes();
+  extensionAttributeObserver.observe(document.documentElement, {
+    attributeFilter: ["bis_skin_checked"],
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+
+  document.addEventListener("DOMContentLoaded", () => stripExtensionHydrationAttributes(), {
+    once: true,
+  });
+  window.addEventListener(
+    "load",
+    () => {
+      stripExtensionHydrationAttributes();
+      setTimeout(() => extensionAttributeObserver.disconnect(), 1000);
+    },
+    { once: true },
+  );
+  setTimeout(() => extensionAttributeObserver.disconnect(), 5000);
 })();
 `;
 
@@ -299,8 +319,10 @@ export default function RootLayout({ children }) {
         className="h-full"
       >
         <head>
-          {/* DNS prefetch + TLS preconnect for external origins */}
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <script
+            id="theme-init"
+            dangerouslySetInnerHTML={{ __html: themeInitScript }}
+          />
           {/* Structured data for Google rich results */}
           <script
             type="application/ld+json"
@@ -312,13 +334,8 @@ export default function RootLayout({ children }) {
 
         <body
           suppressHydrationWarning
-          className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
+          className="font-sans min-h-full flex flex-col antialiased"
         >
-          <Script
-            id="theme-init"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{ __html: themeInitScript }}
-          />
           <WebAwesomeProvider />
           {/* The payment checkout script is loaded only on pages that need it (/pro, /pricing).
               It was intentionally moved out of the global layout to avoid loading it everywhere. */}
