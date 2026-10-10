@@ -50,11 +50,6 @@ export async function POST(request) {
     );
   }
 
-  // Deduct 1 free prompt if user is using free trial
-  if (!isAiMode) {
-    await incrementZiFreePromptsUsage(userId);
-  }
-
   let body;
   try {
     body = await request.json();
@@ -82,6 +77,11 @@ export async function POST(request) {
         },
       }
     );
+  }
+
+  // Deduct 1 free prompt if user is using free trial
+  if (!isAiMode) {
+    await incrementZiFreePromptsUsage(userId);
   }
 
   let providerStream;

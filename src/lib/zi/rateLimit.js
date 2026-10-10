@@ -1,7 +1,7 @@
 import "server-only";
 
 const ZI_RATE_LIMIT = {
-  FREE: { count: 0, windowMs: 60 * 1000 },
+  FREE: { count: 10, windowMs: 60 * 1000 },
   PRO: { count: 50, windowMs: 60 * 1000 },
   AI_MODE: { count: 200, windowMs: 60 * 1000 },
 };
