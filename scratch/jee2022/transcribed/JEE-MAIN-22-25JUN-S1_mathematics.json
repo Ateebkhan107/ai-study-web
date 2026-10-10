@@ -450,7 +450,7 @@
     "option_b": "$\\tan^{-1}\\left(\\frac{24}{7}\\right) - \\pi$",
     "option_c": "$\\tan^{-1}(3) - \\pi$",
     "option_d": "$\\tan^{-1}\\left(\\frac{3}{4}\\right) - \\pi$",
-    "correct_option": "(286)",
+    "correct_option": "b",
     "embedded_image_sources": [],
     "question_image": null,
     "option_a_image": null,

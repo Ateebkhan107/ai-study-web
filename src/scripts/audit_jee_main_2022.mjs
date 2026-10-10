@@ -60,6 +60,7 @@ for (const paperCode of paperCodes) {
     if (numerical && ["a", "b", "c", "d"].some((letter) => String(row[`option_${letter}`] ?? "") !== "")) fail(paperCode, `Q${number} numerical options are not empty`);
     if (!numerical) {
       if (row.question_type !== "MCQ") fail(paperCode, `Q${number} must be MCQ`);
+      if (!/^(?:[abcd]|none)$/.test(String(row.correct_option || "").trim())) fail(paperCode, `Q${number} MCQ answer must be a, b, c, d, or none for an officially dropped question`);
       for (const letter of ["a", "b", "c", "d"]) {
         const text = String(row[`option_${letter}`] ?? "").trim();
         const image = row[`option_${letter}_image`];

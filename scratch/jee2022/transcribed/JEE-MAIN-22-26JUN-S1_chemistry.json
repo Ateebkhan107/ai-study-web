@@ -80,8 +80,8 @@
     "question": "Consider the ions/molecule $O_2^+$, $O_2$, $O_2^-$, $O_2^{2-}$ For increasing bond order the correct option is:",
     "option_a": "$O_2^{2-} < O_2^- < O_2 < O_2^+$",
     "option_b": "$O_2^- < O_2^{2-} < O_2 < O_2^+$",
-    "option_c": "$O_2^- < O_2^{2-} < O_2^+ < O_2",
-    "option_d": "$O_2^- < O_2^+ < O_2^{2-} < O_2",
+    "option_c": "$O_2^- < O_2^{2-} < O_2^+ < O_2$",
+    "option_d": "$O_2^- < O_2^+ < O_2^{2-} < O_2$",
     "correct_option": "a",
     "embedded_image_sources": [],
     "question_image": null,
@@ -317,8 +317,8 @@
     "question_image": null,
     "option_a_image": null,
     "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q44_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q44_opt_d.png",
     "alignment_score": 0.7
   },
   {
@@ -339,11 +339,11 @@
     "embedded_image_sources": [
       "37a35381-9a3c-47be-8a93-a4a8ca8210a8.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q45.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q45_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q45_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q45_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q45_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -363,10 +363,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q46_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q46_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q46_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q46_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -386,10 +386,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q47_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q47_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q47_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q47_opt_d.png",
     "alignment_score": 1
   },
   {

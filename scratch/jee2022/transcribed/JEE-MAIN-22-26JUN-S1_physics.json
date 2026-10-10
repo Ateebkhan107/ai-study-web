@@ -86,11 +86,11 @@
     "embedded_image_sources": [
       "ac2f2633-216f-4f85-bc64-0f02d0b9bdb4.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q4.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q4_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q4_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q4_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q4_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -133,10 +133,10 @@
     "correct_option": "a",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q6_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q6_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q6_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q6_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -153,7 +153,7 @@
     "option_b": "37.81$\\%$",
     "option_c": "47.81$\\%$",
     "option_d": "57.81$\\%$",
-    "correct_option": "",
+    "correct_option": "a",
     "embedded_image_sources": [],
     "question_image": null,
     "option_a_image": null,
@@ -408,7 +408,7 @@
     "option_b": "6 alpha particles and 4 beta particles",
     "option_c": "4 alpha particles and 5 beta particles",
     "option_d": "8 alpha particles and 6 beta particles",
-    "correct_option": "",
+    "correct_option": "d",
     "embedded_image_sources": [],
     "question_image": null,
     "option_a_image": null,
@@ -456,7 +456,7 @@
     "option_b": "Amplitude of modulated is varied in accordance with the information signal.",
     "option_c": "Amplitude of carrier signal is varied in accordance with the information signal.",
     "option_d": "Amplitude of modulated is varied in accordance with the modulating signal.",
-    "correct_option": "",
+    "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
     "option_a_image": null,

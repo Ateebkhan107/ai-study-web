@@ -69,6 +69,7 @@ for (const row of rows) {
     if (imageFields[field]) imageCount += 1;
   }
   const numerical = row.question_type === "NUMERICAL";
+  const dropped = String(row.correct_option).toLowerCase() === "none";
   const numericalAnswer = numerical && Number.isFinite(Number(row.correct_option)) ? Number(row.correct_option) : null;
   const payload = {
     exam_id: examId, exam: "JEE", exam_type: "JEE Main", year: 2022,
@@ -77,7 +78,7 @@ for (const row of rows) {
     question_type: row.question_type, question: row.question, option_a: row.option_a,
     option_b: row.option_b, option_c: row.option_c, option_d: row.option_d,
     ...imageFields, correct_option: row.correct_option, numerical_answer: numericalAnswer,
-    status: "PUBLISHED", marks_positive: 4, marks_negative: 1,
+    status: "PUBLISHED", marks_positive: dropped ? 0 : 4, marks_negative: dropped ? 0 : 1,
   };
   if (!APPLY) continue;
   const id = ids.get(row.question_number);

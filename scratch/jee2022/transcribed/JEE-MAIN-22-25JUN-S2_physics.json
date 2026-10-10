@@ -384,10 +384,10 @@
     "correct_option": "b",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q17_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q17_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q17_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q17_opt_d.png",
     "alignment_score": 0.8
   },
   {
@@ -454,7 +454,7 @@
     "option_b": "$\\frac{(G+S)}{nKS}$",
     "option_c": "$\\frac{nKS}{(G+S)}$",
     "option_d": "$\\frac{nK(G+S)}{S}$",
-    "correct_option": "(d )",
+    "correct_option": "d",
     "embedded_image_sources": [],
     "question_image": null,
     "option_a_image": null,

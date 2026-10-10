@@ -269,10 +269,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q42_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q42_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q42_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q42_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -293,11 +293,11 @@
     "embedded_image_sources": [
       "ab6093d1-8ae8-4371-baa5-2a79e7672bb5.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q43.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q43_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q43_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q43_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q43_opt_d.png",
     "alignment_score": 0.6667
   },
   {
@@ -366,11 +366,11 @@
     "embedded_image_sources": [
       "d52c556e-5495-462a-84dc-da8d2d21ebca.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q46.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q46_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q46_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q46_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q46_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -391,11 +391,11 @@
     "embedded_image_sources": [
       "36ffc287-e463-4092-8e37-dbbfd0a08d19.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q47.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q47_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q47_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q47_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q47_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -407,7 +407,7 @@
     "chapter": "Amines",
     "section": "Hofmann Bromamide Reaction",
     "question_type": "MCQ",
-    "question": "The reaction of \\begin{array}{c}\nR-C-NH_2\\\\\n\\| \\ \\\\\\\n\\ O \\ \\end{array} with bromine and $KOH$ gives $RNH_2$ as the end product. Which one of the following is the intermediate product formed in this reaction?",
+    "question": "The reaction of $R-\\mathrm{C}(=O)-\\mathrm{NH}_2$ with bromine and $\\mathrm{KOH}$ gives $R\\mathrm{NH}_2$ as the end product. Which one of the following is the intermediate product formed in this reaction?",
     "option_a": "",
     "option_b": "R−NH−Br",
     "option_c": "R−N=C=O",
@@ -415,10 +415,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q48_opt_a.png",
     "option_b_image": null,
     "option_c_image": null,
-    "option_d_image": null,
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q48_opt_d.png",
     "alignment_score": 0.875
   },
   {

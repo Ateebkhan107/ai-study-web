@@ -341,11 +341,11 @@
     "embedded_image_sources": [
       "49914022-c236-4c84-a81c-695489224e01.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q45.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q45_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q45_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q45_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q45_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -390,10 +390,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q47_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q47_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q47_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q47_opt_d.png",
     "alignment_score": 0.9091
   },
   {
@@ -414,11 +414,11 @@
     "embedded_image_sources": [
       "d76cb705-5e25-4eaf-bfc2-cbbc5dd9f88d.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q48.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q48_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q48_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q48_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q48_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -438,10 +438,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q49_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q49_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q49_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q49_opt_d.png",
     "alignment_score": 0.9231
   },
   {

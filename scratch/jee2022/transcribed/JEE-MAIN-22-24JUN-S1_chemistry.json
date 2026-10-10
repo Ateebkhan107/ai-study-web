@@ -298,10 +298,10 @@
     "correct_option": "b",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q43_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q43_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q43_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q43_opt_d.png",
     "alignment_score": 0.4
   },
   {
@@ -344,10 +344,10 @@
     "correct_option": "c",
     "embedded_image_sources": [],
     "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q45_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q45_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q45_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q45_opt_d.png",
     "alignment_score": 1
   },
   {
@@ -368,11 +368,11 @@
     "embedded_image_sources": [
       "7da23d21-9b71-4ef9-9405-d6e90ddb14cb.png"
     ],
-    "question_image": null,
-    "option_a_image": null,
-    "option_b_image": null,
-    "option_c_image": null,
-    "option_d_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q46.png",
+    "option_a_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q46_opt_a.png",
+    "option_b_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q46_opt_b.png",
+    "option_c_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q46_opt_c.png",
+    "option_d_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q46_opt_d.png",
     "alignment_score": 0.75
   },
   {
