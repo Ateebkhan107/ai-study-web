@@ -142,6 +142,61 @@ function normalizeFlattenedTables(value) {
       .replace(/\|\s+\|(?=\s*(?:\:?---|\(?[a-zivx]+\)?\b))/gi, "|\n|");
   }
 
+  // Parse flattened match-the-following questions into structured markdown tables
+  if (/(?:List|Column)[\s-]*[I1]\s*(?:with|and|&)?\s*\|?\s*(?:List|Column)[\s-]*[II2]+/i.test(text) && !/\|[^\n]+\|\s*\n\s*\|[\s:\-\|]+\|/.test(text)) {
+    let s = text;
+    s = s.replace(/([^\n])\s+((?:List|Column)[\s-]*[I1]\s*\|?\s*(?:List|Column)[\s-]*[II2]+)/i, "$1\n$2");
+    s = s.replace(/([^\n])\s+(\([a-eA-E]\)\s+[^\(\n]+\s*\|\s*\(?[ivx1-5p-tIVX]+\)?)/g, "$1\n$2");
+    s = s.replace(/([^\n])\s+(Choose the (?:correct|most appropriate) answer)/gi, "$1\n\n$2");
+
+    const lines = s.split("\n");
+    const tableRows = [];
+    let col1Title = "List-I";
+    let col2Title = "List-II";
+    let headerIndex = -1;
+    let firstRowIndex = -1;
+    let lastRowIndex = -1;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      const headerMatch = line.match(/^(?:\|\s*)?(List[\s-]*[I1]|Column[\s-]*[I1])\s*(?:with|and|&)?\s*\|?\s*(List[\s-]*[II2]+|Column[\s-]*[II2]+)(?:\s*\|)?$/i);
+      if (headerMatch && !line.includes("Match")) {
+        col1Title = headerMatch[1].replace(/\s+/g, "-");
+        col2Title = headerMatch[2].replace(/\s+/g, "-");
+        headerIndex = i;
+        continue;
+      }
+
+      const rowMatch = line.match(/^\(?([a-eA-E])\)?\s*([^\|]+?)\s*\|\s*\(?([ivx1-5p-tIVX]+)\)?\s*(.+)$/);
+      if (rowMatch) {
+        if (firstRowIndex === -1) firstRowIndex = i;
+        lastRowIndex = i;
+        tableRows.push({
+          letter: rowMatch[1],
+          left: rowMatch[2].trim(),
+          num: rowMatch[3],
+          right: rowMatch[4].trim(),
+        });
+      }
+    }
+
+    if (tableRows.length >= 2) {
+      const markdownTable = [
+        "",
+        `| ${col1Title} | ${col2Title} |`,
+        "| :--- | :--- |",
+        ...tableRows.map((r) => `| (${r.letter}) ${r.left} | (${r.num}) ${r.right} |`),
+        "",
+      ].join("\n");
+
+      const start = headerIndex !== -1 ? Math.min(headerIndex, firstRowIndex) : firstRowIndex;
+      const before = lines.slice(0, start).join("\n").trim();
+      const after = lines.slice(lastRowIndex + 1).join("\n").trim();
+
+      text = [before, markdownTable, after].filter(Boolean).join("\n\n");
+    }
+  }
+
   return text;
 }
 

@@ -1,33 +1,312 @@
 [
-  {"page": 1, "box": [255, 670, 850, 865], "output": "q1.png"},
-  {"page": 1, "box": [255, 930, 850, 1070], "output": "q1_opt_a.png"},
-  {"page": 1, "box": [255, 1060, 850, 1215], "output": "q1_opt_b.png"},
-  {"page": 1, "box": [255, 1205, 850, 1390], "output": "q1_opt_c.png"},
-  {"page": 1, "box": [255, 1360, 850, 1545], "output": "q1_opt_d.png"},
-  {"page": 1, "box": [1070, 560, 1780, 730], "output": "q3.png"},
-  {"page": 1, "box": [1100, 770, 1780, 955], "output": "q3_opt_a.png"},
-  {"page": 1, "box": [1100, 945, 1780, 1125], "output": "q3_opt_b.png"},
-  {"page": 1, "box": [1100, 1115, 1780, 1275], "output": "q3_opt_c.png"},
-  {"page": 1, "box": [1100, 1270, 1780, 1440], "output": "q3_opt_d.png"},
-  {"page": 2, "box": [1110, 1880, 1790, 2100], "output": "q7.png"},
-  {"page": 2, "box": [1100, 2130, 1450, 2335], "output": "q7_opt_a.png"},
-  {"page": 2, "box": [1450, 2130, 1810, 2335], "output": "q7_opt_b.png"},
-  {"page": 2, "box": [1100, 2315, 1450, 2545], "output": "q7_opt_c.png"},
-  {"page": 2, "box": [1450, 2315, 1810, 2415], "output": "q7_opt_d.png"},
-  {"page": 3, "box": [210, 820, 910, 1060], "output": "q8.png"},
-  {"page": 3, "box": [365, 1900, 760, 2180], "output": "q9.png"},
-  {"page": 4, "box": [470, 360, 840, 550], "output": "q11.png"},
-  {"page": 4, "box": [255, 560, 860, 760], "output": "q11_opt_a.png"},
-  {"page": 4, "box": [255, 745, 860, 940], "output": "q11_opt_b.png"},
-  {"page": 4, "box": [255, 970, 860, 1160], "output": "q11_opt_c.png"},
-  {"page": 4, "box": [255, 1170, 860, 1350], "output": "q11_opt_d.png"},
-  {"page": 5, "box": [1140, 1170, 1780, 1300], "output": "q19.png"},
-  {"page": 5, "box": [1100, 1370, 1810, 1555], "output": "q19_opt_a.png"},
-  {"page": 5, "box": [1100, 1560, 1810, 1750], "output": "q19_opt_b.png"},
-  {"page": 5, "box": [1100, 1755, 1810, 2000], "output": "q19_opt_c.png"},
-  {"page": 5, "box": [1100, 2005, 1810, 2160], "output": "q19_opt_d.png"},
-  {"page": 6, "box": [245, 500, 800, 660], "output": "q20_opt_a.png"},
-  {"page": 6, "box": [245, 680, 800, 900], "output": "q20_opt_b.png"},
-  {"page": 6, "box": [245, 885, 800, 1085], "output": "q20_opt_c.png"},
-  {"page": 6, "box": [245, 1070, 800, 1240], "output": "q20_opt_d.png"}
+  {
+    "page": 1,
+    "box": [
+      249,
+      664,
+      856,
+      871
+    ],
+    "output": "q1.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      245,
+      935,
+      850,
+      1065
+    ],
+    "output": "q1_opt_a.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      245,
+      1070,
+      850,
+      1195
+    ],
+    "output": "q1_opt_b.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      245,
+      1200,
+      850,
+      1350
+    ],
+    "output": "q1_opt_c.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      245,
+      1355,
+      850,
+      1545
+    ],
+    "output": "q1_opt_d.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      1064,
+      554,
+      1786,
+      736
+    ],
+    "output": "q3.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      1100,
+      755,
+      1780,
+      946
+    ],
+    "output": "q3_opt_a.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      1100,
+      950,
+      1780,
+      1136
+    ],
+    "output": "q3_opt_b.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      1100,
+      1140,
+      1780,
+      1297
+    ],
+    "output": "q3_opt_c.png"
+  },
+  {
+    "page": 1,
+    "box": [
+      1100,
+      1300,
+      1780,
+      1460
+    ],
+    "output": "q3_opt_d.png"
+  },
+  {
+    "page": 2,
+    "box": [
+      1104,
+      1874,
+      1796,
+      2106
+    ],
+    "output": "q7.png"
+  },
+  {
+    "page": 2,
+    "box": [
+      1090,
+      2120,
+      1460,
+      2285
+    ],
+    "output": "q7_opt_a.png"
+  },
+  {
+    "page": 2,
+    "box": [
+      1440,
+      2120,
+      1816,
+      2285
+    ],
+    "output": "q7_opt_b.png"
+  },
+  {
+    "page": 2,
+    "box": [
+      1090,
+      2320,
+      1445,
+      2485
+    ],
+    "output": "q7_opt_c.png"
+  },
+  {
+    "page": 2,
+    "box": [
+      1445,
+      2300,
+      1816,
+      2485
+    ],
+    "output": "q7_opt_d.png"
+  },
+  {
+    "page": 3,
+    "box": [
+      200,
+      810,
+      930,
+      1135
+    ],
+    "output": "q8.png"
+  },
+  {
+    "page": 3,
+    "box": [
+      359,
+      1894,
+      766,
+      2186
+    ],
+    "output": "q9.png"
+  },
+  {
+    "page": 4,
+    "box": [
+      464,
+      350,
+      846,
+      556
+    ],
+    "output": "q11.png"
+  },
+  {
+    "page": 4,
+    "box": [
+      249,
+      553,
+      866,
+      766
+    ],
+    "output": "q11_opt_a.png"
+  },
+  {
+    "page": 4,
+    "box": [
+      249,
+      739,
+      866,
+      946
+    ],
+    "output": "q11_opt_b.png"
+  },
+  {
+    "page": 4,
+    "box": [
+      249,
+      964,
+      866,
+      1166
+    ],
+    "output": "q11_opt_c.png"
+  },
+  {
+    "page": 4,
+    "box": [
+      249,
+      1164,
+      866,
+      1300
+    ],
+    "output": "q11_opt_d.png"
+  },
+  {
+    "page": 5,
+    "box": [
+      1134,
+      1164,
+      1786,
+      1306
+    ],
+    "output": "q19.png"
+  },
+  {
+    "page": 5,
+    "box": [
+      1090,
+      1315,
+      1820,
+      1475
+    ],
+    "output": "q19_opt_a.png"
+  },
+  {
+    "page": 5,
+    "box": [
+      1090,
+      1475,
+      1820,
+      1640
+    ],
+    "output": "q19_opt_b.png"
+  },
+  {
+    "page": 5,
+    "box": [
+      1090,
+      1640,
+      1820,
+      1925
+    ],
+    "output": "q19_opt_c.png"
+  },
+  {
+    "page": 5,
+    "box": [
+      1090,
+      1925,
+      1820,
+      2075
+    ],
+    "output": "q19_opt_d.png"
+  },
+  {
+    "page": 6,
+    "box": [
+      240,
+      485,
+      750,
+      645
+    ],
+    "output": "q20_opt_a.png"
+  },
+  {
+    "page": 6,
+    "box": [
+      240,
+      680,
+      750,
+      850
+    ],
+    "output": "q20_opt_b.png"
+  },
+  {
+    "page": 6,
+    "box": [
+      240,
+      885,
+      750,
+      1055
+    ],
+    "output": "q20_opt_c.png"
+  },
+  {
+    "page": 6,
+    "box": [
+      240,
+      1085,
+      750,
+      1250
+    ],
+    "output": "q20_opt_d.png"
+  }
 ]
