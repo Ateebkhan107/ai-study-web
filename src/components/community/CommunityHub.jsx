@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import {
   Users,
   Plus,
@@ -13,6 +14,7 @@ import {
 import Link from "next/link";
 import GroupCard from "./GroupCard";
 import CreateGroupForm from "./CreateGroupForm";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 
 const SECTIONS = ["Discover", "My Groups"];
 
@@ -41,6 +43,7 @@ function GroupGridSkeleton({ count = 6 }) {
 
 export default function CommunityHub({ examTrack, initialGroups = [], initialHasMore = false }) {
   const router = useRouter();
+  const { user } = useUser();
   const [activeSection, setActiveSection] = useState("Discover");
   const [groups, setGroups] = useState(initialGroups);
   const [myGroups, setMyGroups] = useState([]);
@@ -53,6 +56,24 @@ export default function CommunityHub({ examTrack, initialGroups = [], initialHas
   const [error, setError] = useState(null);
   const loadedMineRef = useRef(false);
   const skipInitialDiscoverFetchRef = useRef(true);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const [authGateConfig, setAuthGateConfig] = useState({
+    targetUrl: "/community",
+    featureName: "Study Groups",
+    title: "Sign in to continue your preparation",
+    message: "Create your free account to join study groups and collaborate with peers.",
+  });
+
+  const openAuthGate = ({ targetUrl = "/community", featureName = "Study Groups", title, message }) => {
+    setAuthGateConfig({
+      targetUrl,
+      featureName,
+      title: title || "Sign in to continue your preparation",
+      message: message || "Create your free account to join study groups and collaborate with peers.",
+    });
+    setShowAuthGate(true);
+    return false;
+  };
 
   useEffect(() => {
     if (activeSection !== "Discover") return;
@@ -117,6 +138,15 @@ export default function CommunityHub({ examTrack, initialGroups = [], initialHas
   }
 
   function handleSectionChange(section) {
+    if (!user && section === "My Groups") {
+      openAuthGate({
+        targetUrl: "/community",
+        featureName: "My Groups",
+        title: "Sign in to view your study groups",
+        message: "Sign in or create your free account to view groups you have joined.",
+      });
+      return;
+    }
     setActiveSection(section);
     if (section === "My Groups" && !loadedMineRef.current) setLoadingMine(true);
   }
@@ -140,7 +170,18 @@ export default function CommunityHub({ examTrack, initialGroups = [], initialHas
           </p>
         </div>
         <button
-          onClick={() => setActiveSection("Create Group")}
+          onClick={() => {
+            if (!user) {
+              openAuthGate({
+                targetUrl: "/community",
+                featureName: "Create Group",
+                title: "Sign in to create a study group",
+                message: "Create your free account to start and manage your own study group.",
+              });
+              return;
+            }
+            setActiveSection("Create Group");
+          }}
           id="community-create-group-btn"
           className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-800 transition-colors hover:border-brand/50 hover:text-slate-950 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-100 dark:hover:border-brand/50"
         >
@@ -213,6 +254,17 @@ export default function CommunityHub({ examTrack, initialGroups = [], initialHas
                     group={g}
                     myRole={g.myRole}
                     myStatus={g.myStatus}
+                    onAuthRequired={() => {
+                      if (!user) {
+                        return openAuthGate({
+                          targetUrl: "/community",
+                          featureName: g.name || "Study Group",
+                          title: "Sign in to join this study group",
+                          message: "Create your free account to connect with peers and study together.",
+                        });
+                      }
+                      return true;
+                    }}
 	                    onJoin={(groupId, status) => {
 	                      setGroups((prev) => prev.map((item) => (
 	                        item.id === groupId
@@ -302,6 +354,15 @@ export default function CommunityHub({ examTrack, initialGroups = [], initialHas
           onCancel={() => setActiveSection("Discover")}
         />
       )}
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl={authGateConfig.targetUrl}
+        featureName={authGateConfig.featureName}
+        title={authGateConfig.title}
+        message={authGateConfig.message}
+      />
     </div>
   );
 }

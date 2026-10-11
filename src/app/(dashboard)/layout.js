@@ -12,24 +12,25 @@ import { ZiEntityContextProvider } from "@/lib/zi/ZiEntityContext";
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
-  if (!onboardingComplete) {
+  // Only redirect to onboarding if the user is authenticated but hasn't completed onboarding
+  if (userId && !onboardingComplete) {
     redirect(ONBOARDING_ROUTE);
   }
 
   const email = user?.primaryEmailAddress?.emailAddress || "";
-  const accessContext = await getUserAccessContext({ userId, email });
-  await initUserLeaderboard(userId, user?.firstName || "Student");
+  const accessContext = userId
+    ? await getUserAccessContext({ userId, email })
+    : { plan: "free", isPro: false, ziFreeUsage: { remaining: 3, used: 0, limit: 3 } };
+
+  if (userId) {
+    await initUserLeaderboard(userId, user?.firstName || "Student");
+  }
 
   return (
     <div className="relative min-h-screen bg-[var(--background)] transition-colors duration-200">
       <div className="relative z-10">
         <ZiEntityContextProvider>
-          {/* Passed control prop to conditionally unmount the text line */}
-          <Navbar plan={accessContext.plan} />
+          <Navbar plan={accessContext.plan} isPro={accessContext.isPro} />
           <TrackWrapper>
             {children}
           </TrackWrapper>

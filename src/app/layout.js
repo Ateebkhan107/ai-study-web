@@ -13,6 +13,7 @@ import "./globals.css";
 
 import Footer from "@/components/Footer";
 import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
+import Script from "next/script";
 
 import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 
@@ -192,8 +193,8 @@ const themeInitScript = `
   ${
     process.env.NODE_ENV === "development"
       ? `
-  // Next's dev overlay listens for global errors. Browser-extension errors are
-  // outside the app, but can still bubble into the page and cover the UI.
+  // Next's dev overlay listens for global errors and console.error.
+  // Suppress browser-extension errors and React 19's false-positive inline script warning.
   const stopExtensionError = (event) => {
     if (!isExtensionError(event)) return;
     event.preventDefault();
@@ -201,6 +202,16 @@ const themeInitScript = `
   };
   window.addEventListener("error", stopExtensionError, true);
   window.addEventListener("unhandledrejection", stopExtensionError, true);
+
+  if (typeof console !== "undefined" && console.error) {
+    const origConsoleError = console.error;
+    console.error = function(...args) {
+      if (typeof args[0] === "string" && args[0].indexOf("Encountered a script tag") !== -1) {
+        return;
+      }
+      return origConsoleError.apply(console, args);
+    };
+  }
 `
       : ""
   }
@@ -339,26 +350,25 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
       >
-        <script
+        <Script
           id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
         />
         {/* Structured data for Google rich results */}
-        <script
+        <Script
           id="organization-jsonld"
           type="application/ld+json"
-          suppressHydrationWarning
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: organizationSchemaJson,
           }}
         />
         <ClerkProvider
           allowedRedirectOrigins={clerkAllowedRedirectOrigins}
-          afterSignOutUrl={SIGN_IN_ROUTE}
+          afterSignOutUrl="/"
           signInUrl={SIGN_IN_ROUTE}
           signUpUrl={SIGN_UP_ROUTE}
-          signInForceRedirectUrl={DASHBOARD_ROUTE}
-          signUpForceRedirectUrl={ONBOARDING_ROUTE}
           signInFallbackRedirectUrl={DASHBOARD_ROUTE}
           signUpFallbackRedirectUrl={ONBOARDING_ROUTE}
         >

@@ -34,7 +34,7 @@ const AVATAR_GRADIENTS = [
   "from-emerald-300 to-teal-400 dark:from-emerald-700 dark:to-teal-900",
 ];
 
-export default function GroupCard({ group, myRole, myStatus, onJoin }) {
+export default function GroupCard({ group, myRole, myStatus, onJoin, onAuthRequired }) {
   const [joining, setJoining] = useState(false);
   const [joined, setJoined] = useState(false);
   const [requestSent, setRequestSent] = useState(false);
@@ -46,6 +46,9 @@ export default function GroupCard({ group, myRole, myStatus, onJoin }) {
   async function handleJoin(e) {
     e.preventDefault();
     if (joining || isActiveMember) return;
+    if (onAuthRequired && !onAuthRequired()) {
+      return;
+    }
     setJoining(true);
     setError(null);
 

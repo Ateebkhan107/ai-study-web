@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import { Target, Atom, FlaskConical, Calculator, Dna, ClipboardList, Hospital, Sun } from "lucide-react";
 import SubjectVisual from "@/components/SubjectVisual";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 import posthog from "posthog-js";
 
 const QUICK_OPTIONS = [
@@ -110,7 +112,11 @@ function isDailyWarmup(option) {
 // 1. Accept the parent track context (defaults to "jee" for fallback safety)
 export default function QuickTest({ track = "jee", isPro = false }) {
   const router = useRouter();
+  const { user } = useUser();
   const [launching, setLaunching] = useState(null);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const [authGateTarget, setAuthGateTarget] = useState("/test/session");
+  const [authGateFeature, setAuthGateFeature] = useState(null);
 
   const activeTrack = track?.toLowerCase() || "jee";
 
@@ -120,6 +126,22 @@ export default function QuickTest({ track = "jee", isPro = false }) {
   );
 
   const handleLaunch = (option) => {
+    const targetSession = `/test/session?${new URLSearchParams({
+      subject: option.subject,
+      duration: option.duration.toString(),
+      count: option.count.toString(),
+      difficulty: option.difficulty,
+      mode: "quick",
+      label: option.label,
+    }).toString()}`;
+
+    if (!user) {
+      setAuthGateTarget(targetSession);
+      setAuthGateFeature(option.label);
+      setShowAuthGate(true);
+      return;
+    }
+
     if (!isPro && !isDailyWarmup(option)) {
       posthog.capture("pro_upgrade_clicked", {
         source: "quick_test",
@@ -139,15 +161,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
     });
     setLaunching(option.label);
     setTimeout(() => {
-      const params = new URLSearchParams({
-        subject: option.subject,
-        duration: option.duration.toString(),
-        count: option.count.toString(),
-        difficulty: option.difficulty,
-        mode: "quick",
-        label: option.label,
-      });
-      router.push(`/test/session?${params.toString()}`);
+      router.push(targetSession);
     }, 400);
   };
 
@@ -239,6 +253,15 @@ export default function QuickTest({ track = "jee", isPro = false }) {
           })()
         ))}
       </div>
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl={authGateTarget}
+        featureName={authGateFeature || "Quick Test"}
+        title={authGateFeature ? `Sign in to start ${authGateFeature}` : "Sign in to start test"}
+        message="Create your free account to start practicing and track your progress."
+      />
     </div>
   );
 }

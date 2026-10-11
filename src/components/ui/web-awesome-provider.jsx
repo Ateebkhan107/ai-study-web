@@ -4,6 +4,16 @@ import { useEffect, useRef } from "react";
 import { useUser } from "@clerk/nextjs";
 import posthog from "posthog-js";
 
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  const origError = console.error;
+  console.error = function (...args) {
+    if (typeof args[0] === "string" && args[0].includes("Encountered a script tag")) {
+      return;
+    }
+    return origError.apply(console, args);
+  };
+}
+
 const WEB_AWESOME_COMPONENTS = [
   () => import("@awesome.me/webawesome/dist/components/tooltip/tooltip.js"),
   () => import("@awesome.me/webawesome/dist/components/dialog/dialog.js"),

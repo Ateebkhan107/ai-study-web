@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { Atom, Dna, FlaskConical, Sigma } from "lucide-react";
 import PYQAnalytics from "@/components/pyq/PYQAnalytics";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -90,6 +91,15 @@ const PRO_ONLY_PRACTICE_MODES = new Set(["chapter", "mistakes"]);
 const MASTER_SAVED = []; // Unused, fetching dynamically now
 
 function getCookieTrack() {
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const queryTrack = params.get("track");
+    if (queryTrack) {
+      const normalized = queryTrack.toUpperCase() === "NEET" ? "neet" : "jee";
+      document.cookie = `prepzii_track=${normalized}; path=/; max-age=31536000; SameSite=Lax;`;
+      return normalized;
+    }
+  }
   if (typeof document === "undefined") return "jee";
   const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
   return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
@@ -170,7 +180,7 @@ function StatCard({ Icon: IconComp, label, value, sublabel, accent }) {
 }
 
 // ─── Practice Tab ─────────────────────────────────────────────────────────────
-function PracticeTab({ subjects, track, isPro }) {
+function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
   const router = useRouter();
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedYears,    setSelectedYears]    = useState([]);
@@ -320,11 +330,15 @@ function PracticeTab({ subjects, track, isPro }) {
       if (selectedPaper) {
         params.set("exam_id", selectedPaper.id);
         params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
-        params.set("shift_label", selectedPaper.shift_label || selectedPaper.shift);
       }
     }
 
-    router.push(`/pyq/session?${params.toString()}`);
+    const targetUrl = `/pyq/session?${params.toString()}`;
+    if (onAuthRequired && !onAuthRequired(targetUrl, "PYQ Practice")) {
+      return;
+    }
+
+    router.push(targetUrl);
   }
 
   const toggleSubject = (id) => setSelectedSubjects((p) => p.includes(id) ? p.filter((s) => s !== id) : [...p, id]);
@@ -833,9 +847,27 @@ export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
   const router = useRouter();
-  const [track, setTrack] = useState("jee");
+  const [track, setTrack] = useState(getCookieTrack);
   const [access, setAccess] = useState(null);
   const [, setAccessLoading] = useState(true);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const [authGateConfig, setAuthGateConfig] = useState({
+    targetUrl: "/pyq",
+    featureName: "PYQ Practice",
+    title: "Sign in to continue your preparation",
+    message: "Create your free account to start practicing and track your progress.",
+  });
+
+  const openAuthGate = ({ targetUrl = "/pyq", featureName = "PYQ Practice", title, message }) => {
+    setAuthGateConfig({
+      targetUrl,
+      featureName,
+      title: title || "Sign in to continue your preparation",
+      message: message || "Create your free account to start practicing and track your progress.",
+    });
+    setShowAuthGate(true);
+    return false;
+  };
 
   useEffect(() => {
     async function syncTrack() {
@@ -999,7 +1031,34 @@ export default function PYQPage() {
     params.set("subjects", chapter.subject);
     params.set("mode", "chapter");
     params.set("chapter", chapter.chapter);
-    router.push(`/pyq/session?${params.toString()}`);
+    const targetSession = `/pyq/session?${params.toString()}`;
+
+    if (!user) {
+      openAuthGate({
+        targetUrl: targetSession,
+        featureName: chapter.chapter || "Chapter PYQ",
+        title: `Sign in to practice ${chapter.chapter || "this chapter"}`,
+        message: "Create your free account to start practicing and track your progress.",
+      });
+      return;
+    }
+
+    router.push(targetSession);
+  };
+
+  const handleTabClick = (tabId) => {
+    if (!user && (tabId === "analytics" || tabId === "saved")) {
+      openAuthGate({
+        targetUrl: "/pyq",
+        featureName: tabId === "analytics" ? "PYQ Analytics" : "Saved Questions",
+        title: tabId === "analytics" ? "Sign in to view PYQ analytics" : "Sign in to view saved questions",
+        message: tabId === "analytics"
+          ? "Track your accuracy, streaks, and subject breakdown by creating a free account or signing in."
+          : "Access and review your bookmarked PYQ questions anytime.",
+      });
+      return;
+    }
+    setActiveTab(tabId);
   };
 
   const handleUnsave = async (qId) => {
@@ -1034,7 +1093,7 @@ export default function PYQPage() {
                 <button
                   key={tab.id}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabClick(tab.id)}
                   className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black transition-colors ${
                     active
                       ? "bg-brand text-black"
@@ -1058,7 +1117,22 @@ export default function PYQPage() {
 
         <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
           {activeTab === "practice"  && (
-            <PracticeTab subjects={filteredSubjects} track={track} isPro={isPro} />
+            <PracticeTab
+              subjects={filteredSubjects}
+              track={track}
+              isPro={isPro}
+              onAuthRequired={(targetUrl, featureName) => {
+                if (!user) {
+                  return openAuthGate({
+                    targetUrl,
+                    featureName,
+                    title: "Sign in to start PYQ practice",
+                    message: "Create your free account to start practicing and track your progress.",
+                  });
+                }
+                return true;
+              }}
+            />
           )}
           {activeTab === "analytics" && (
             isPro ? (
@@ -1080,6 +1154,15 @@ export default function PYQPage() {
           {activeTab === "saved" && <SavedTab track={track} savedQuestions={savedQuestions} onUnsave={handleUnsave} />}
         </section>
       </div>
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl={authGateConfig.targetUrl}
+        featureName={authGateConfig.featureName}
+        title={authGateConfig.title}
+        message={authGateConfig.message}
+      />
     </div>
   );
 }

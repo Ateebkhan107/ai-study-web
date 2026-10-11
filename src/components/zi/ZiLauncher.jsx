@@ -56,11 +56,11 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
   const abortControllerRef = useRef(null);
   const greetingName = getZiGreetingName(user);
 
-  useEffect(() => {
-    if (ziFreeUsage?.remaining !== undefined) {
-      setRemainingFreePrompts(ziFreeUsage.remaining);
-    }
-  }, [ziFreeUsage?.remaining]);
+  const [prevPropRemaining, setPrevPropRemaining] = useState(ziFreeUsage?.remaining);
+  if (ziFreeUsage?.remaining !== prevPropRemaining) {
+    setPrevPropRemaining(ziFreeUsage?.remaining);
+    setRemainingFreePrompts(ziFreeUsage?.remaining !== undefined ? ziFreeUsage.remaining : 3);
+  }
 
   const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0;
 

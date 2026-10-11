@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import { Check, LockKeyhole } from "lucide-react";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 import posthog from "posthog-js";
 
 export default function PricingCard({
@@ -17,10 +19,17 @@ export default function PricingCard({
   examTrack = "JEE",
   isAiMode = false,
 }) {
+  const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const [showAuthGate, setShowAuthGate] = useState(false);
 
   async function handlePayment() {
     if (loading) return;
+
+    if (!user) {
+      setShowAuthGate(true);
+      return;
+    }
 
     try {
       setLoading(true);
@@ -114,6 +123,15 @@ export default function PricingCard({
           Secure payment powered by Razorpay
         </span>
       </p>
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl="/pricing"
+        featureName={isAiMode ? `${examTrack} AI Mode` : `${examTrack} Pro`}
+        title={`Sign in to upgrade to ${isAiMode ? examTrack + " AI Mode" : examTrack + " Pro"}`}
+        message="Create your free account or sign in to complete your subscription and unlock full access."
+      />
     </div>
   );
 }

@@ -83,7 +83,7 @@ export default function ZiPanel({
               ₹1,999/month
             </div>
             <p className="mb-5 text-[0.95rem] font-medium leading-relaxed text-slate-600 dark:text-slate-400">
-              You've used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi.
+              You&apos;ve used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi.
             </p>
             <ul className="mb-7 w-full max-w-[280px] space-y-2 text-left text-sm font-medium text-slate-700 dark:text-slate-300">
               {[

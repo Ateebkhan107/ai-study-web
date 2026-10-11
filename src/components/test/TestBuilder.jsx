@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import SubjectVisual from "@/components/SubjectVisual";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 import {
   Atom,
   FlaskConical,
@@ -183,6 +185,7 @@ const colorMap = {
 
 export default function TestBuilder({ track = "jee", access = null }) {
   const router = useRouter();
+  const { user } = useUser();
 
   const activeTrack = track?.toLowerCase() || "jee";
 
@@ -195,6 +198,8 @@ export default function TestBuilder({ track = "jee", access = null }) {
   const [biologyAvailability, setBiologyAvailability] = useState({});
   const [availabilityLoading, setAvailabilityLoading] = useState(activeTrack === "neet");
   const [availabilityMessage, setAvailabilityMessage] = useState("");
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const [authGateTarget, setAuthGateTarget] = useState("/test/session");
 
   // Filter allowed subjects for current track
   const isSubjectAllowed = (name) => {
@@ -378,13 +383,20 @@ export default function TestBuilder({ track = "jee", access = null }) {
       params.set("sourceType", "PREPZII_PRACTICE");
     }
 
+    const sessionTarget = `/test/session?${params.toString()}`;
+    if (!user) {
+      setAuthGateTarget(sessionTarget);
+      setShowAuthGate(true);
+      return;
+    }
+
     sessionStorage.removeItem("tb_subjects");
     sessionStorage.removeItem("tb_chapters");
     sessionStorage.removeItem("tb_duration");
     sessionStorage.removeItem("tb_count");
     sessionStorage.removeItem("tb_difficulty");
 
-    router.push(`/test/session?${params.toString()}`);
+    router.push(sessionTarget);
   };
 
   return (
@@ -692,6 +704,15 @@ export default function TestBuilder({ track = "jee", access = null }) {
           </div>
         </div>
       </aside>
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl={authGateTarget}
+        featureName="Custom Test"
+        title="Sign in to start your custom test"
+        message="Create your free account to start practicing and track your progress."
+      />
     </div>
   );
 }

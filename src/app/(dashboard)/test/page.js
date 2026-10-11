@@ -23,6 +23,15 @@ const TEST_TOOLS = [
 ];
 
 function getCookieTrack() {
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const queryTrack = params.get("track");
+    if (queryTrack) {
+      const normalized = queryTrack.toUpperCase() === "NEET" ? "neet" : "jee";
+      document.cookie = `prepzii_track=${normalized}; path=/; max-age=31536000; SameSite=Lax;`;
+      return normalized;
+    }
+  }
   if (typeof document === "undefined") return "jee";
   const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
   return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
@@ -81,7 +90,7 @@ function TestPageShell({ mode, setMode, children }) {
 export default function TestPage() {
   const [mode, setMode] = useState("build");
   const { user } = useUser();
-  const [track, setTrack] = useState("jee");
+  const [track, setTrack] = useState(getCookieTrack);
   const [access, setAccess] = useState(null);
   const [, setAccessLoading] = useState(true);
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
@@ -42,6 +43,8 @@ export default function Navbar({
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [pendingHref, setPendingHref] = useState(null);
+
+  const { isLoaded, isSignedIn, user } = useUser();
 
   const toggleTheme = () => {
     const dark = document.documentElement.classList.contains("dark");
@@ -92,10 +95,15 @@ export default function Navbar({
       "/analytics": "tour-analytics",
     }[item.href];
 
+    const isProtectedNav = item.href === "/analytics" || item.href === "/profile";
+    const targetHref = (!isSignedIn && isLoaded && isProtectedNav)
+      ? `/sign-in?redirect_url=${encodeURIComponent(item.href)}`
+      : item.href;
+
     return (
     <Link
       key={item.href}
-      href={item.href}
+      href={targetHref}
       data-tour={tourAttr}
       prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
       onMouseEnter={() => router.prefetch(item.href)}
@@ -163,12 +171,12 @@ export default function Navbar({
         <div className="flex min-w-0 shrink-0 items-center">
           <Link
             href="/dashboard"
-            className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2 lg:h-12 lg:gap-2.5"
+            className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2.5 lg:h-12 lg:gap-3"
             aria-label="PrepZii dashboard"
           >
-            <Logo size={24} showText={false} className="lg:hidden shrink-0" />
-            <Logo size={30} showText={false} className="hidden lg:flex shrink-0" />
-            <span className="block text-[13px] min-[360px]:text-[15px] sm:text-[18px] font-black uppercase tracking-tight lg:tracking-normal lg:text-[21px] truncate">
+            <Logo size={28} showText={false} className="lg:hidden shrink-0" />
+            <Logo size={36} showText={false} className="hidden lg:flex shrink-0" />
+            <span className="block text-[15px] min-[360px]:text-[17px] sm:text-[20px] font-black uppercase tracking-tight lg:tracking-normal lg:text-[24px] truncate">
               PREPZII
             </span>
           </Link>
@@ -199,13 +207,24 @@ export default function Navbar({
             </span>
           </button>
 
-          <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
-            <NotificationBell track={track} />
-          </div>
+          {isSignedIn ? (
+            <>
+              <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
+                <NotificationBell track={track} />
+              </div>
 
-          <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
-            <ProfileMenu plan={plan} />
-          </div>
+              <div className="flex h-8 w-8 items-center justify-center min-[360px]:h-9 min-[360px]:w-9 sm:h-[38px] sm:w-[38px]">
+                <ProfileMenu plan={plan} />
+              </div>
+            </>
+          ) : isLoaded ? (
+            <Link
+              href="/sign-in"
+              className="inline-flex h-8 sm:h-9 items-center justify-center rounded-xl bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 px-3.5 sm:px-4 text-xs sm:text-[13px] font-black text-slate-950 transition-colors shadow-sm"
+            >
+              Sign In
+            </Link>
+          ) : null}
 
           <button
             onClick={() => setMobileOpen((value) => !value)}
@@ -226,6 +245,17 @@ export default function Navbar({
             {proLink && (
               <div className="col-span-2 mt-1 flex min-h-11 items-center">
                 {proLink}
+              </div>
+            )}
+            {!isSignedIn && isLoaded && (
+              <div className="col-span-2 mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center">
+                <Link
+                  href="/sign-in"
+                  onClick={() => setMobileOpen(false)}
+                  className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 text-center text-xs font-black shadow-sm transition-colors"
+                >
+                  Sign In
+                </Link>
               </div>
             )}
           </nav>

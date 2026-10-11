@@ -112,9 +112,11 @@ export default function DailyGoals({ compact = false }) {
 
       <div className="relative z-10 mt-6 sm:mt-8">
         {goals.length === 0 ? (
-          <p className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-semibold text-slate-500 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] dark:text-slate-400">
-            No active goals for today.
-          </p>
+          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-3.5 text-center dark:border-[#2A2A2A] dark:bg-[#1A1A1A]">
+            <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
+              {user ? "No active goals for today." : "Sign in to set daily missions and track your preparation streak."}
+            </p>
+          </div>
         ) : (
           <div className="flex flex-col gap-0 pb-2">
             {goals.map((goal, index) => {

@@ -10,6 +10,7 @@ import BattleFloatingButton from "@/components/battle/BattleFloatingButton";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { Sparkles } from "lucide-react";
+import SignedOutDashboard from "@/components/SignedOutDashboard";
 
 async function getDashboardProfile() {
   const { userId, sessionClaims } = await auth();
@@ -95,6 +96,8 @@ function DashboardCardFallback({ className = "h-48" }) {
 }
 
 export default async function DashboardPage() {
+  const { userId } = await auth();
+
   const cookieStore = await cookies();
   const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
   const activeTrackKey =
@@ -104,6 +107,10 @@ export default async function DashboardPage() {
     ...EXAM_CONFIG[activeTrackKey],
     dashboardTitle: activeTrackKey === "NEET" ? "NEET Overview" : "JEE Overview",
   };
+
+  if (!userId) {
+    return <SignedOutDashboard />;
+  }
 
   return (
     <div className="relative min-h-screen w-full min-w-0">

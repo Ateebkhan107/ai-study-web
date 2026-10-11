@@ -3,8 +3,7 @@
 // NOTE: 'use client' is retained for Framer Motion entrance animations only.
 // All CTA navigation uses <Link> so crawlers and prefetching work correctly.
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState, startTransition } from "react";
+import { useUser } from "@clerk/nextjs";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { motion, MotionConfig } from "framer-motion";
 import Logo from "@/components/Logo";
@@ -325,69 +324,10 @@ function ProductPreview() {
 
 /* ── Main Page ──────────────────────────────────────────────── */
 export default function PublicLandingPage() {
-  const router = useRouter();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const handleStartClick = (e) => {
-    e.preventDefault();
-    setIsTransitioning(true);
-    router.prefetch("/sign-up");
-    setTimeout(() => {
-      startTransition(() => {
-        router.push("/sign-up");
-      });
-      setTimeout(() => setIsTransitioning(false), 2000);
-    }, 1500);
-  };
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <MotionConfig reducedMotion="user">
-      {isTransitioning && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[99999] bg-[#09090B] flex flex-col items-center justify-center p-4"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-            className="flex flex-col items-center justify-center relative"
-          >
-            {/* Glow effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-brand/15 blur-3xl rounded-full pointer-events-none" />
-            
-            {/* Logo */}
-            <div className="relative z-10 mb-8">
-              <Logo forceDark size={48} />
-            </div>
-            
-            {/* Loader dots */}
-            <div className="flex gap-1.5 mb-6">
-              <motion.div 
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                className="w-1.5 h-1.5 bg-brand rounded-full"
-              />
-              <motion.div 
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                className="w-1.5 h-1.5 bg-brand rounded-full"
-              />
-              <motion.div 
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                className="w-1.5 h-1.5 bg-brand rounded-full"
-              />
-            </div>
-            
-            <p className={`${B} text-white/60 text-sm font-medium tracking-wide animate-pulse`}>
-              Preparing your experience...
-            </p>
-          </motion.div>
-        </motion.div>
-      )}
       <div
         className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
       >
@@ -396,7 +336,9 @@ export default function PublicLandingPage() {
       ════════════════════════════════════════════════════════ */}
       <header className="sticky top-0 z-50 border-b-[3px] border-[#111111] bg-[#FFF9E6] shadow-[0_5px_0_#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-          <Logo forceLight size={44} />
+          <Link href="/" aria-label="PrepZii Home" className="flex items-center">
+            <Logo forceLight size={44} />
+          </Link>
 
           {/* Nav links — desktop only */}
           <nav className="hidden md:flex items-center gap-2">
@@ -422,19 +364,20 @@ export default function PublicLandingPage() {
 
           {/* Auth CTAs */}
           <div className="flex items-center gap-2">
+            {!isSignedIn && isLoaded && (
+              <Link
+                href="/sign-in"
+                className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
+              >
+                Log in
+              </Link>
+            )}
             <Link
-              href="/sign-in"
-              className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
-            >
-              Log in
-            </Link>
-            <Link
-              href="/sign-up"
-              onClick={handleStartClick}
+              href="/dashboard"
               prefetch
               className={`${B} inline-flex items-center gap-1.5 border-[3px] border-[#111111] bg-[#F4B400] px-4 py-2 text-sm font-black text-black shadow-[4px_4px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#111111]`}
             >
-              Get Started
+              {isSignedIn ? "Dashboard" : "Get Started"}
               <ChevronRight className="w-3.5 h-3.5" strokeWidth={3} />
             </Link>
           </div>
@@ -510,8 +453,7 @@ export default function PublicLandingPage() {
               >
                 <motion.div {...pressMotion}>
                   <Link
-                    href="/sign-up"
-                    onClick={handleStartClick}
+                    href="/dashboard"
                     prefetch
                     className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-[#F4B400] px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-7 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
                   >
@@ -999,8 +941,7 @@ export default function PublicLandingPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <motion.div {...pressMotion}>
                 <Link
-                  href="/sign-up"
-                  onClick={handleStartClick}
+                  href="/dashboard"
                   prefetch
                   className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-white px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-8 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
                 >

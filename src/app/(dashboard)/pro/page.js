@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
+import AuthGateModal from "@/components/auth/AuthGateModal";
 import {
   Check,
   X,
@@ -108,11 +109,13 @@ const PLANS = [
 
 const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
 
-const getBentoCards = (track) => [
+const getBentoCards = (track, isSignedOut = false) => [
   {
     icon: Target,
-    title: `Chapter-wise ${track} PYQ Mastery`,
-    desc: `Target high-yield chapters with 15+ years of authentic ${track} PYQs, instant difficulty filters, and paper-wise breakdowns.`,
+    title: isSignedOut ? "Chapter-wise JEE & NEET PYQ Mastery" : `Chapter-wise ${track} PYQ Mastery`,
+    desc: isSignedOut
+      ? "Target high-yield chapters with 15+ years of authentic JEE and NEET PYQs, instant difficulty filters, and paper-wise breakdowns."
+      : `Target high-yield chapters with 15+ years of authentic ${track} PYQs, instant difficulty filters, and paper-wise breakdowns.`,
   },
   {
     icon: RotateCcw,
@@ -127,7 +130,9 @@ const getBentoCards = (track) => [
   {
     icon: Brain,
     title: "Zi AI Instant Doubt Solver",
-    desc: `Ask any conceptual ${track} PYQ question and get instant step-by-step voice and visual problem breakdowns.`,
+    desc: isSignedOut
+      ? "Ask any conceptual JEE or NEET PYQ question and get instant step-by-step voice and visual problem breakdowns."
+      : `Ask any conceptual ${track} PYQ question and get instant step-by-step voice and visual problem breakdowns.`,
   },
 ];
 
@@ -150,19 +155,30 @@ const FAQS = [
   },
 ];
 
+function getInitialTrack() {
+  if (typeof document !== "undefined") {
+    const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
+    const savedTrack = match ? match[2].toUpperCase() : null;
+    if (savedTrack === "NEET" || savedTrack === "JEE") return savedTrack;
+  }
+  return "JEE";
+}
+
 export default function ProPage() {
   const [selectedPlan, setSelectedPlan] = useState("quarterly");
-  const [selectedTrack, setSelectedTrack] = useState("JEE");
+  const [selectedTrack, setSelectedTrack] = useState(getInitialTrack);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showAuthGate, setShowAuthGate] = useState(false);
   const { user } = useUser();
 
+  const isSignedOut = !user;
   const router = useRouter();
   const plan = PLANS.find((p) => p.id === selectedPlan) || PLANS[1];
   const proFeatures = getProFeatures(selectedTrack);
   const aiFeatures = getAiFeatures(selectedTrack);
-  const bentoCards = getBentoCards(selectedTrack);
+  const bentoCards = getBentoCards(selectedTrack, isSignedOut);
 
   useEffect(() => {
     let cancelled = false;
@@ -195,13 +211,19 @@ export default function ProPage() {
     };
   }, [user]);
 
+  const handleTrackChange = (newTrack) => {
+    setSelectedTrack(newTrack);
+    if (typeof document !== "undefined") {
+      document.cookie = `prepzii_track=${newTrack.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
+    }
+  };
+
   const handleSubscribe = async (planId = selectedPlan) => {
     const targetPlan = planId || selectedPlan;
     setSelectedPlan(targetPlan);
 
     if (!user) {
-      const returnUrl = typeof window !== "undefined" ? window.location.pathname : "/pro";
-      router.push(`/sign-in?redirect_url=${encodeURIComponent(returnUrl)}`);
+      setShowAuthGate(true);
       return;
     }
 
@@ -246,32 +268,77 @@ export default function ProPage() {
             <span className="tracking-wide font-extrabold">Academic Intelligence Pass</span>
             <span className="text-amber-400">•</span>
             <span className="text-amber-700 dark:text-amber-300 font-extrabold uppercase tracking-wider">
-              {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
+              {isSignedOut ? "JEE & NEET Tracks" : selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
             </span>
           </div>
 
           {/* Main Title matching PrepZii typography */}
           <div className="space-y-2">
             <h1 className="text-4xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
-              Master Every {selectedTrack} PYQ With <br />
-              <span className="text-amber-500 dark:text-amber-400 font-black">
-                Precision & Confidence
-              </span>
+              {isSignedOut ? (
+                <>
+                  Master Every JEE & NEET PYQ With <br />
+                  <span className="text-amber-500 dark:text-amber-400 font-black">
+                    Precision & Confidence
+                  </span>
+                </>
+              ) : (
+                <>
+                  Master Every {selectedTrack} PYQ With <br />
+                  <span className="text-amber-500 dark:text-amber-400 font-black">
+                    Precision & Confidence
+                  </span>
+                </>
+              )}
             </h1>
             <p className="mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg font-medium leading-relaxed pt-2">
               Unlimited timed exam mocks, 15+ years authentic chapter PYQs, automated mistake redo decks, and AI assistance tuned for{" "}
               <strong className="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-500 decoration-2 underline-offset-4">
-                {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
+                {isSignedOut ? "JEE & NEET Tracks" : selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
               </strong>.
             </p>
           </div>
 
-          {/* Track Badge */}
+          {/* Track Badge / Switcher */}
           <div className="pt-1">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-500/30 dark:border-amber-400/20 bg-amber-500/10 dark:bg-amber-400/10 text-xs font-black text-amber-600 dark:text-amber-400 shadow-sm">
-              <Zap className="h-3.5 w-3.5 fill-current" />
-              {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
-            </span>
+            {isSignedOut ? (
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Select Exam Track:
+                </span>
+                <div className="inline-flex items-center p-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-[#141415] shadow-sm">
+                  <button
+                    type="button"
+                    onClick={() => handleTrackChange("JEE")}
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black transition-all cursor-pointer ${
+                      selectedTrack === "JEE"
+                        ? "bg-amber-500 text-slate-950 dark:bg-amber-400 shadow-sm"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
+                    }`}
+                  >
+                    <Zap className="h-3.5 w-3.5 fill-current" />
+                    JEE Track
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleTrackChange("NEET")}
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black transition-all cursor-pointer ${
+                      selectedTrack === "NEET"
+                        ? "bg-amber-500 text-slate-950 dark:bg-amber-400 shadow-sm"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
+                    }`}
+                  >
+                    <Zap className="h-3.5 w-3.5 fill-current" />
+                    NEET Track
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-500/30 dark:border-amber-400/20 bg-amber-500/10 dark:bg-amber-400/10 text-xs font-black text-amber-600 dark:text-amber-400 shadow-sm">
+                <Zap className="h-3.5 w-3.5 fill-current" />
+                {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
+              </span>
+            )}
           </div>
         </section>
 
@@ -583,7 +650,9 @@ export default function ProPage() {
                 <Users className="h-5 w-5" />
               </div>
               <p className="text-2xl font-black font-display text-slate-950 dark:text-white sm:text-4xl">12,000+</p>
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">Active {selectedTrack} Aspirants</p>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 sm:text-xs">
+                Active {isSignedOut ? "JEE & NEET" : selectedTrack} Aspirants
+              </p>
             </div>
 
             <div className="space-y-1 border-x border-slate-200 dark:border-white/10">
@@ -651,10 +720,10 @@ export default function ProPage() {
           <div className="relative overflow-hidden rounded-3xl bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800/80 dark:border-white/10">
             <div className="relative z-10 mx-auto max-w-2xl space-y-5">
               <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
-                Ready to Boost Your {selectedTrack} Rank?
+                Ready to Boost Your {isSignedOut ? "JEE or NEET" : selectedTrack} Rank?
               </h2>
               <p className="text-slate-300 dark:text-slate-400 text-sm font-semibold sm:text-base">
-                Join thousands of {selectedTrack} aspirants mastering previous years questions and timed mock tests on PrepZii.
+                Join thousands of {isSignedOut ? "JEE and NEET" : selectedTrack} aspirants mastering previous years questions and timed mock tests on PrepZii.
               </p>
               <div className="pt-2">
                 <button
@@ -671,6 +740,15 @@ export default function ProPage() {
         </section>
 
       </div>
+
+      <AuthGateModal
+        isOpen={showAuthGate}
+        onClose={() => setShowAuthGate(false)}
+        targetUrl="/pro"
+        featureName={`${selectedTrack} Pro Pass`}
+        title={`Sign in to get ${selectedTrack} Pro`}
+        message={`Create your free account or sign in to complete your subscription and unlock full access to ${selectedTrack} Pro.`}
+      />
     </PageWrapper>
   );
 }
