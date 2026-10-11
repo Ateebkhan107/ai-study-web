@@ -29,7 +29,7 @@ export default function OverviewCards({ stats }) {
       icon: Zap,
       color: "text-amber-600 dark:text-amber-400",
       bg: "bg-amber-500/10 dark:bg-amber-500/20",
-      border: "border-amber-200/60 dark:border-amber-500/20",
+      border: "border-amber-300/80 dark:border-amber-500/30",
       gradient: "from-amber-50/40 to-transparent dark:from-amber-950/10 dark:to-transparent",
     },
     {
@@ -42,7 +42,7 @@ export default function OverviewCards({ stats }) {
       icon: Target,
       color: "text-emerald-600 dark:text-emerald-400",
       bg: "bg-emerald-500/10 dark:bg-emerald-500/20",
-      border: "border-emerald-200/60 dark:border-emerald-500/20",
+      border: "border-emerald-300/80 dark:border-emerald-500/30",
       gradient: "from-emerald-50/40 to-transparent dark:from-emerald-950/10 dark:to-transparent",
     },
     {
@@ -55,7 +55,7 @@ export default function OverviewCards({ stats }) {
       icon: FileText,
       color: "text-blue-600 dark:text-blue-400",
       bg: "bg-blue-500/10 dark:bg-blue-500/20",
-      border: "border-blue-200/60 dark:border-blue-500/20",
+      border: "border-blue-300/80 dark:border-blue-500/30",
       gradient: "from-blue-50/40 to-transparent dark:from-blue-950/10 dark:to-transparent",
     },
     {
@@ -68,7 +68,7 @@ export default function OverviewCards({ stats }) {
       icon: Trophy,
       color: "text-orange-600 dark:text-orange-400",
       bg: "bg-orange-500/10 dark:bg-orange-500/20",
-      border: "border-orange-200/60 dark:border-orange-500/20",
+      border: "border-orange-300/80 dark:border-orange-500/30",
       gradient: "from-orange-50/40 to-transparent dark:from-orange-950/10 dark:to-transparent",
     },
   ];
@@ -81,15 +81,15 @@ export default function OverviewCards({ stats }) {
         return (
           <div
             key={card.id}
-            className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-[var(--card)] bg-gradient-to-br ${card.gradient} p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-5 ${card.border}`}
+            className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border-[1.5px] bg-[var(--card)] bg-gradient-to-br ${card.gradient} p-4 shadow-[var(--snb-shadow-interactive)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] dark:bg-[var(--surface)] sm:p-5 ${card.border}`}
           >
             {/* Top Eyebrow Row */}
             <div className="flex items-center justify-between gap-2">
               <span className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 sm:text-[11px]">
                 {card.label}
               </span>
-              <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${card.bg}`}>
-                <Icon className={`h-3.5 w-3.5 ${card.color}`} />
+              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-black/5 dark:border-white/10 ${card.bg} shadow-[1px_1px_0px_rgba(30,42,68,0.08)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.4)]`}>
+                <Icon className={`h-4 w-4 ${card.color}`} />
               </div>
             </div>
 
@@ -100,7 +100,7 @@ export default function OverviewCards({ stats }) {
                   {card.value}
                 </p>
                 {card.badge && (
-                  <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-300">
+                  <span className="rounded-full border border-amber-400/50 bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-300 shadow-[1px_1px_0px_rgba(202,138,4,0.15)]">
                     {card.badge}
                   </span>
                 )}

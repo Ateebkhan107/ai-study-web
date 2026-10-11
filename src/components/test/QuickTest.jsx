@@ -184,12 +184,12 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 key={option.label}
                 onClick={() => handleLaunch(option)}
                 disabled={launching === option.label}
-                className={`group relative flex flex-col items-start rounded-2xl border-2 p-3 text-left transition-all duration-200 cursor-pointer sm:p-5
+                className={`group relative flex flex-col items-start rounded-2xl border-[1.5px] p-3 text-left transition-all duration-180 cursor-pointer sm:p-5
                   ${locked
-                    ? "border-dashed border-gray-200 dark:border-[var(--border)] bg-gray-50 dark:bg-[var(--surface-elevated)]/30 opacity-75 hover:opacity-100 hover:border-indigo-300 dark:hover:border-indigo-500/50"
+                    ? "border-dashed border-[var(--snb-border)] bg-gray-50 dark:bg-[var(--surface-elevated)]/30 opacity-75 hover:opacity-100 hover:border-slate-400"
                     : launching === option.label
-                    ? "border-indigo-300 dark:border-indigo-700/60 bg-indigo-50 dark:bg-indigo-950/40 scale-95"
-                    : "border-gray-100 dark:border-[var(--border-subtle)] bg-[var(--card)] dark:bg-[var(--surface)] hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md"
+                    ? "border-[#CA8A04] bg-[#FEF9C3]/70 text-slate-950 shadow-[2px_2px_0px_rgba(202,138,4,0.35)] scale-98 dark:border-brand dark:bg-brand/20 dark:shadow-[2px_2px_0px_rgba(234,179,8,0.3)]"
+                    : "border-[var(--snb-border-interactive)] bg-[var(--card)] shadow-[var(--snb-shadow-interactive)] hover:border-slate-400 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[var(--snb-shadow-active)] dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)] dark:hover:border-slate-400"
                   }`}
               >
                 {showSubjectVisual && (
@@ -200,14 +200,14 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 )}
                 {/* Tag */}
                 {tag && (
-                  <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide
+                  <span className={`absolute top-3 right-3 text-[9px] font-black px-2 py-0.5 rounded-md border uppercase tracking-wide
                     ${tag === "PRO"
-                      ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                      ? "border-amber-300/80 bg-brand text-black shadow-[1px_1px_0px_rgba(30,42,68,0.15)] dark:border-brand"
                       : tag === "Popular"
-                      ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300"
+                      ? "border-amber-400/80 bg-[#FEF9C3] text-amber-900 shadow-[1px_1px_0px_rgba(202,138,4,0.2)] dark:border-amber-400/30 dark:bg-amber-950/40 dark:text-amber-300"
                       : tag === "Hard"
-                      ? "bg-red-500 text-white"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                      ? "border-red-600 bg-red-500 text-white shadow-[1px_1px_0px_rgba(0,0,0,0.15)]"
+                      : "border-[var(--snb-border)] bg-slate-100 text-slate-700 shadow-[1px_1px_0px_rgba(0,0,0,0.06)] dark:bg-slate-800 dark:text-slate-300"
                     }`}
                   >
                     {tag}
@@ -218,7 +218,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
 
                 <p className={`mb-1 text-sm font-black leading-tight transition-colors
                   ${launching === option.label
-                    ? "text-indigo-700 dark:text-indigo-300"
+                    ? "text-amber-800 dark:text-brand"
                     : "text-black dark:text-white"
                   }`}
                 >
@@ -226,7 +226,7 @@ export default function QuickTest({ track = "jee", isPro = false }) {
                 </p>
                 <p className={`text-[11px] leading-snug transition-colors sm:text-xs
                   ${launching === option.label
-                    ? "text-indigo-700/70 dark:text-indigo-300/70"
+                    ? "text-amber-700/80 dark:text-brand/80"
                     : "text-gray-400"
                   }`}
                 >
@@ -235,15 +235,15 @@ export default function QuickTest({ track = "jee", isPro = false }) {
 
                 {launching === option.label && (
                   <div className="mt-3 flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-300 animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 )}
 
                 {locked && (
                   <span
-                    className="mt-3 rounded-lg bg-amber-100 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                    className="mt-3 rounded-lg border border-[#9A7407]/40 bg-brand px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-black shadow-[1.5px_1.5px_0px_rgba(30,42,68,0.15)] dark:border-brand"
                   >
                     Upgrade to Pro
                   </span>

@@ -7,34 +7,26 @@ const SUBJECT_META = {
   Chemistry: { 
     icon: FlaskConical, 
     color: "text-emerald-700 dark:text-emerald-400", 
-    border: "border-emerald-200 dark:border-[#2A2A2A]",
-    gradient: "",
-    hoverBorder: "hover:border-emerald-400 dark:hover:border-emerald-500",
-    hoverShadow: "hover:shadow-none"
+    border: "border-emerald-300/90 dark:border-emerald-700/60",
+    hoverBorder: "hover:border-emerald-500 dark:hover:border-emerald-400",
   },
   Mathematics: { 
     icon: Calculator, 
     color: "text-orange-700 dark:text-orange-400", 
-    border: "border-orange-200 dark:border-[#2A2A2A]",
-    gradient: "",
-    hoverBorder: "hover:border-orange-400 dark:hover:border-orange-500",
-    hoverShadow: "hover:shadow-none"
+    border: "border-orange-300/90 dark:border-orange-700/60",
+    hoverBorder: "hover:border-orange-500 dark:hover:border-orange-400",
   },
   Physics: { 
     icon: Atom,
     color: "text-amber-700 dark:text-amber-400", 
-    border: "border-amber-200 dark:border-[#2A2A2A]",
-    gradient: "",
-    hoverBorder: "hover:border-amber-400 dark:hover:border-amber-500",
-    hoverShadow: "hover:shadow-none"
+    border: "border-amber-300/90 dark:border-amber-700/60",
+    hoverBorder: "hover:border-amber-500 dark:hover:border-amber-400",
   },
   Biology: { 
     icon: Dna, 
     color: "text-rose-700 dark:text-rose-400", 
-    border: "border-rose-200 dark:border-[#2A2A2A]",
-    gradient: "",
-    hoverBorder: "hover:border-rose-400 dark:hover:border-rose-500",
-    hoverShadow: "hover:shadow-none"
+    border: "border-rose-300/90 dark:border-rose-700/60",
+    hoverBorder: "hover:border-rose-500 dark:hover:border-rose-400",
   },
 };
 
@@ -42,10 +34,8 @@ function getMeta(subject) {
   return SUBJECT_META[subject] || { 
     icon: BookOpen, 
     color: "text-blue-700 dark:text-blue-400", 
-    border: "border-blue-200 dark:border-[#2A2A2A]",
-    gradient: "",
-    hoverBorder: "hover:border-blue-400 dark:hover:border-blue-500",
-    hoverShadow: "hover:shadow-none"
+    border: "border-blue-300/90 dark:border-blue-700/60",
+    hoverBorder: "hover:border-blue-500 dark:hover:border-blue-400",
   };
 }
 
@@ -83,7 +73,7 @@ export default async function DashboardSection({ config, compact = false }) {
             return (
               <Link href={`/formula-cards/${book.subject.toLowerCase()}?exam=${book.stream}`} key={book.id} className="block group outline-none">
                 <div 
-                  className={`relative flex flex-col justify-between h-full overflow-hidden rounded-[20px] border bg-white dark:bg-[#141414] transition-all duration-300 hover:-translate-y-1 ${meta.border} ${meta.hoverBorder} ${meta.hoverShadow} ${
+                  className={`relative flex flex-col justify-between h-full overflow-hidden rounded-2xl border-[1.5px] bg-white shadow-[var(--snb-shadow-interactive)] dark:bg-[#141414] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[var(--snb-shadow-active)] ${meta.border} ${meta.hoverBorder} ${
                     compact ? "min-h-[110px] sm:min-h-[110px]" : "min-h-[120px] sm:min-h-[130px]"
                   }`}
                 >

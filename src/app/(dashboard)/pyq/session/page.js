@@ -196,17 +196,17 @@ const QuestionOption = memo(function QuestionOption({
   return (
     <button
       onClick={() => onSelect(optionKey)}
-      className={`group flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left transition-colors ${isSelected ? "test-option-selected" : ""} ${
+      className={`group flex w-full items-start gap-2.5 rounded-xl border-[1.5px] px-3.5 py-2.5 text-left transition-all duration-150 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"} ${
         isSelected
-          ? "border-brand bg-brand/15 text-slate-950 shadow-sm dark:bg-indigo-500/10 dark:text-white"
-          : "border-slate-200/70 bg-[var(--card)] text-slate-700 hover:border-indigo-300 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/40 dark:text-slate-300 dark:hover:border-indigo-500/40"
+          ? "border-[var(--snb-border-selected)] bg-[#FEF9C3] text-slate-950 dark:bg-amber-400/15 dark:text-white"
+          : "border-[var(--snb-border-interactive)] bg-[var(--card)] text-slate-700 hover:border-[var(--snb-border-interactive-hover)] hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/60 dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/40"
       }`}
     >
       <span
-        className={`mt-0.5 flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-md border text-[11px] font-bold ${
+        className={`mt-0.5 flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-[11px] font-bold ${
           isSelected
-            ? "border-brand bg-brand text-slate-950 dark:text-white"
-            : "border-slate-300 text-slate-500 dark:border-slate-600 dark:text-slate-400"
+            ? "border-[#9A7407] bg-brand text-slate-950 shadow-[1px_1px_0px_rgba(30,42,68,0.2)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.6)]"
+            : "border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-400"
         }`}
       >
         {LETTERS[index]}

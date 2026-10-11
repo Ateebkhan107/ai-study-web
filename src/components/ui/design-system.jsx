@@ -9,13 +9,16 @@ function cx(...classes) {
 }
 
 const cardVariants = {
-  paper: "border-[var(--border)] bg-[var(--card)] shadow-[var(--prepzii-shadow-soft)] dark:bg-[var(--surface)]",
-  exam: "prepzii-paper-surface border-[var(--border)] shadow-[var(--prepzii-shadow-soft)] dark:bg-[var(--surface)]",
-  primary: "border-brand/45 bg-[var(--card)] shadow-[var(--prepzii-shadow-soft)] dark:bg-[var(--surface)]",
-  secondary: "border-[var(--border)] bg-[var(--card)] shadow-sm dark:bg-[var(--surface)] dark:shadow-none",
-  interactive: "border-[var(--border)] bg-[var(--card)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/55 dark:bg-[var(--surface)] dark:hover:border-brand/45",
-  stat: "border-[var(--border)] bg-[var(--surface-secondary)] shadow-sm dark:bg-[#151513] dark:shadow-none",
-  content: "border-[var(--border)] bg-[var(--card)] dark:bg-[var(--surface)]",
+  paper: "border-[1.5px] border-[var(--snb-border)] bg-[var(--card)] shadow-[var(--snb-shadow)] rounded-[14px] dark:bg-[var(--surface)]",
+  exam: "prepzii-paper-surface border-[1.5px] border-[var(--snb-border)] shadow-[var(--snb-shadow)] rounded-[14px] dark:bg-[var(--surface)]",
+  primary: "border-[1.5px] border-brand/50 bg-[var(--card)] shadow-[var(--snb-shadow)] rounded-[14px] dark:bg-[var(--surface)]",
+  secondary: "border-[1.5px] border-[var(--snb-border)] bg-[var(--card)] shadow-[var(--snb-shadow)] rounded-[14px] dark:bg-[var(--surface)]",
+  interactive: "border-[1.5px] border-[var(--snb-border-interactive)] bg-[var(--card)] shadow-[var(--snb-shadow-interactive)] rounded-[14px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] hover:border-brand/60 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[var(--snb-shadow-active)] dark:bg-[var(--surface)] dark:hover:border-brand/50",
+  stat: "border-[1.5px] border-[var(--snb-border)] bg-[var(--surface-secondary)] shadow-[var(--snb-shadow)] rounded-[14px] dark:bg-[#151513]",
+  content: "border-[1.5px] border-[var(--snb-border)] bg-[var(--card)] rounded-[14px] dark:bg-[var(--surface)]",
+  softBrutal: "snb-card",
+  softBrutalInteractive: "snb-card-interactive",
+  softBrutalSelected: "snb-card-selected",
   flat: "border-transparent bg-transparent",
 };
 
@@ -407,11 +410,15 @@ export function SubjectCard({ icon, title, description, meta, selected = false, 
       type="button"
       variant="interactive"
       padding="md"
-      className={cx("text-left", selected && "border-brand bg-brand/10", className)}
+      className={cx(
+        "text-left cursor-pointer",
+        selected && "border-[1.5px] border-[#CA8A04] bg-[#FEF9C3]/70 shadow-[var(--snb-shadow-brand)] dark:border-brand dark:bg-brand/15 -translate-y-0.5",
+        className
+      )}
       {...props}
     >
       <div className="flex items-start gap-3">
-        {icon && <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">{icon}</div>}
+        {icon && <div className={cx("flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand shadow-[1.5px_1.5px_0px_rgba(202,138,4,0.2)]", selected && "border-[#9A7407] bg-brand text-black dark:border-brand")}>{icon}</div>}
         <div className="min-w-0">
           <h3 className="text-base font-black text-slate-950 dark:text-white">{title}</h3>
           {description && <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{description}</p>}

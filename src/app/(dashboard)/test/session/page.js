@@ -262,19 +262,19 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
             <button
               key={`${activeQuestion.id}-${optionIndex}`}
               onClick={() => onSelect(activeQuestion, optionIndex)}
-              className={`prepzii-interactive group flex w-full cursor-pointer items-start gap-3 rounded-lg border px-3.5 py-3 text-left sm:gap-4 sm:px-4 sm:py-3.5 ${isSelected ? "test-option-selected shadow-sm shadow-amber-500/10" : ""}
+              className={`prepzii-interactive group flex w-full cursor-pointer items-start gap-3 rounded-xl border-[1.5px] px-3.5 py-3 text-left transition-all duration-150 sm:gap-4 sm:px-4 sm:py-3.5 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"}
                 ${
                   isSelected
-                    ? "border-brand bg-brand/10 text-slate-950 dark:bg-brand/10 dark:text-white"
-                    : "border-slate-200 bg-white text-slate-700 hover:border-brand/50 hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/45"
+                    ? "border-[var(--snb-border-selected)] bg-[#FEF9C3] text-slate-950 dark:bg-amber-400/15 dark:text-white"
+                    : "border-[var(--snb-border-interactive)] bg-white text-slate-700 hover:border-[var(--snb-border-interactive-hover)] hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/45"
                 }`}
             >
               <span
-                className={`prepzii-interactive-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-md border text-sm font-semibold sm:h-8 sm:w-8
+                className={`prepzii-interactive-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-sm font-bold sm:h-8 sm:w-8
                   ${
                     isSelected
-                      ? "border-brand bg-brand text-slate-950"
-                      : "border-slate-300 text-slate-500 group-hover:border-brand/50 dark:border-slate-600 dark:text-slate-400"
+                      ? "border-[#9A7407] bg-brand text-slate-950 shadow-[1px_1px_0px_rgba(30,42,68,0.2)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.6)]"
+                      : "border-slate-300 text-slate-600 group-hover:border-slate-400 dark:border-slate-600 dark:text-slate-400"
                   }`}
               >
                 {LETTERS[optionIndex]}

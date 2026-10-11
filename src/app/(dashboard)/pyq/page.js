@@ -364,7 +364,7 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
   return (
     <div className="grid min-w-0 grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
       {/* Left — selectors */}
-      <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/80 p-4 shadow-sm animate-slideUp dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/80 sm:p-6" style={{ animationDelay: "100ms" }}>
+      <div className="rounded-2xl border-[1.5px] border-[var(--snb-border)] bg-[var(--card)]/90 p-4 shadow-[var(--snb-shadow)] animate-slideUp dark:border-[var(--snb-border)] dark:bg-[var(--surface)]/90 sm:p-6" style={{ animationDelay: "100ms" }}>
         {/* Subject selector */}
         <div>
           <h2 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">Subject</h2>
@@ -373,13 +373,13 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
               const active = selectedSubjects.includes(s.id);
               return (
                 <button key={s.id} onClick={() => toggleSubject(s.id)}
-                  className={`group relative flex min-h-14 sm:min-h-20 items-center gap-2.5 sm:gap-4 overflow-hidden rounded-xl border p-3 sm:p-4 text-left transition-all cursor-pointer duration-200 ${
+                  className={`group relative flex min-h-14 sm:min-h-20 items-center gap-2.5 sm:gap-4 overflow-hidden rounded-xl border-[1.5px] p-3 sm:p-4 text-left transition-all cursor-pointer duration-180 ${
                     active
-                      ? "border-brand bg-brand/10 text-slate-950 dark:text-white"
-                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
+                      ? "border-[#CA8A04] bg-[#FEF9C3]/70 text-slate-950 shadow-[2.5px_2.5px_0px_rgba(202,138,4,0.35)] -translate-y-0.5 dark:border-brand dark:bg-brand/15 dark:text-white dark:shadow-[2.5px_2.5px_0px_rgba(234,179,8,0.25)]"
+                      : "border-[var(--snb-border-interactive)] bg-[var(--card)] text-slate-700 shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] hover:border-slate-400 dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:border-slate-400"
                   }`}
                 >
-                  <s.Icon className={`h-4 w-4 sm:h-5 sm:w-5 shrink-0 ${active ? "text-brand" : ""}`} />
+                  <s.Icon className={`h-4 w-4 sm:h-5 sm:w-5 shrink-0 ${active ? "text-amber-800 dark:text-brand" : "text-slate-400"}`} />
                   <span className="min-w-0">
                     <span className="block text-xs sm:text-sm font-black truncate">{s.label}</span>
                     <span className="mt-0.5 block text-[10px] sm:text-xs font-bold opacity-80">
@@ -504,22 +504,22 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
                     setSelectedYears([selectedYears[0]]);
                   }
                 }}
-                  className={`flex items-center gap-3 rounded-xl border p-3 sm:p-4 text-left transition-all cursor-pointer duration-200 ${
+                  className={`flex items-center gap-3 rounded-xl border-[1.5px] p-3 sm:p-4 text-left transition-all cursor-pointer duration-180 ${
                     active
                       ? locked
-                        ? "border-brand/70 bg-brand/10 text-slate-950 dark:text-white"
-                        : "border-brand bg-brand/10 text-slate-950 dark:text-white"
+                        ? "border-brand/70 bg-brand/10 text-slate-950 shadow-[2px_2px_0px_rgba(202,138,4,0.25)] dark:text-white"
+                        : "border-[#CA8A04] bg-[#FEF9C3]/70 text-slate-950 shadow-[2.5px_2.5px_0px_rgba(202,138,4,0.35)] -translate-y-0.5 dark:border-brand dark:bg-brand/15 dark:text-white dark:shadow-[2.5px_2.5px_0px_rgba(234,179,8,0.25)]"
                       : locked
-                        ? "border-dashed border-slate-200 bg-slate-50/80 text-slate-400 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-500"
-                      : `${BORDER} ${BG_SUNKEN} ${TXT_MUTED} hover:border-brand/45 hover:text-slate-900 dark:hover:text-white`
+                        ? "border-dashed border-[var(--snb-border)] bg-slate-50/80 text-slate-400 dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/30 dark:text-slate-500"
+                      : "border-[var(--snb-border-interactive)] bg-[var(--card)] text-slate-700 shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] hover:border-slate-400 dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:border-slate-400"
                   }`}
                 >
-                  <m.Icon size={18} className="shrink-0 sm:size-5" />
+                  <m.Icon size={18} className={`shrink-0 sm:size-5 ${active ? "text-amber-800 dark:text-brand" : "text-slate-400"}`} />
                   <span className="min-w-0">
                     <span className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold">
                       {m.label}
                       {locked && (
-                        <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:bg-brand dark:text-white">
+                        <span className="rounded-full border border-slate-900 bg-slate-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white dark:border-brand dark:bg-brand dark:text-black">
                           Pro
                         </span>
                       )}

@@ -64,7 +64,7 @@ export default function DailyGoals({ compact = false }) {
   const nextGoal = goals.find((goal) => !goal.completed);
 
   return (
-    <div className={`relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-[#2A2A2A] dark:bg-[#141414] ${
+    <div className={`relative h-full overflow-hidden rounded-2xl border-[1.5px] border-[var(--snb-border)] bg-white shadow-[var(--snb-shadow)] dark:border-[var(--snb-border)] dark:bg-[#141414] ${
       compact ? "p-3 sm:p-4" : "p-4 sm:p-5"
     }`}>
 
@@ -80,7 +80,7 @@ export default function DailyGoals({ compact = false }) {
                     ? (
                       <span className="inline-flex items-center gap-1">
                         All done
-                        <CheckCircle2 className="h-3.5 w-3.5" />
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                       </span>
                     )
                     : `${completed} of ${goals.length} done`}
@@ -112,7 +112,7 @@ export default function DailyGoals({ compact = false }) {
 
       <div className="relative z-10 mt-6 sm:mt-8">
         {goals.length === 0 ? (
-          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-3.5 text-center dark:border-[#2A2A2A] dark:bg-[#1A1A1A]">
+          <div className="rounded-xl border-[1.5px] border-[var(--snb-border)] bg-slate-50 p-3.5 text-center dark:border-[var(--snb-border)] dark:bg-[#1A1A1A]">
             <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
               {user ? "No active goals for today." : "Sign in to set daily missions and track your preparation streak."}
             </p>
@@ -139,33 +139,33 @@ export default function DailyGoals({ compact = false }) {
                   
                   {/* Node */}
                   <div className="relative z-10 flex flex-col items-center py-2 shrink-0">
-                    <div className={`flex h-8 w-8 items-center justify-center rounded-md border ${
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-lg border-[1.5px] ${
                       isComplete 
-                        ? "bg-emerald-500 border-emerald-500 text-white" 
+                        ? "bg-emerald-500 border-emerald-600 text-white shadow-[1.5px_1.5px_0px_rgba(0,0,0,0.1)]" 
                         : isCurrent
-                          ? "bg-[#F5C518] border-[#F5C518] text-black"
-                          : "bg-slate-50 border-slate-200 text-slate-400 dark:bg-[#1A1A1A] dark:border-[#2A2A2A] dark:text-slate-500"
+                          ? "bg-brand border-[#9A7407] text-black shadow-[1.5px_1.5px_0px_rgba(30,42,68,0.2)] dark:border-brand"
+                          : "bg-slate-50 border-[var(--snb-border)] text-slate-400 dark:bg-[#1A1A1A] dark:border-[var(--snb-border)] dark:text-slate-500"
                     }`}>
                        {isComplete ? <CheckCircle2 className="h-4.5 w-4.5" /> : <Icon className="h-4 w-4" />}
                     </div>
                   </div>
                   
                   {/* Content Card */}
-                  <div className={`mb-4 flex-1 rounded-md border p-3 sm:p-4 ${
+                  <div className={`mb-4 flex-1 rounded-xl border-[1.5px] p-3 sm:p-4 transition-all duration-200 ${
                     isCurrent 
-                      ? "border-[#F5C518] bg-slate-50 dark:bg-[#18181A]" 
+                      ? "border-[#CA8A04] bg-[#FEF9C3]/50 shadow-[2px_2px_0px_rgba(202,138,4,0.35)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_rgba(202,138,4,0.4)] dark:border-brand dark:bg-brand/10 dark:shadow-[2px_2px_0px_rgba(234,179,8,0.25)]" 
                       : isComplete
-                        ? "border-slate-200 bg-white opacity-60 dark:border-[#2A2A2A] dark:bg-[#141414]"
-                        : "border-slate-200 bg-white dark:border-[#2A2A2A] dark:bg-[#141414]"
+                        ? "border-[var(--snb-border)] bg-white opacity-60 shadow-[1px_1px_0px_rgba(30,42,68,0.06)] dark:border-[var(--snb-border)] dark:bg-[#141414]"
+                        : "border-[var(--snb-border)] bg-white shadow-[var(--snb-shadow)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] dark:border-[var(--snb-border)] dark:bg-[#141414]"
                   }`}>
                     <div className="flex items-start justify-between gap-3">
                        <div className="min-w-0">
                           {isCurrent && (
-                             <span className="mb-1.5 inline-block rounded bg-[#F5C518] px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black">
+                             <span className="mb-1.5 inline-block rounded border border-[#9A7407]/40 bg-brand px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-[1px_1px_0px_rgba(30,42,68,0.18)] dark:border-brand">
                                Do This Now
                              </span>
                           )}
-                          <h3 className={`text-sm font-bold truncate ${isCurrent ? "text-slate-900 dark:text-slate-100" : isComplete ? "text-slate-500 dark:text-slate-400 line-through" : "text-slate-600 dark:text-slate-300"}`}>
+                          <h3 className={`text-sm font-bold truncate ${isCurrent ? "text-slate-900 dark:text-slate-100" : isComplete ? "text-slate-500 dark:text-slate-400 line-through" : "text-slate-700 dark:text-slate-300"}`}>
                             {goal.title}
                           </h3>
                           {goal.description && (
@@ -176,8 +176,10 @@ export default function DailyGoals({ compact = false }) {
                        </div>
                        {/* XP Badge */}
                        {!isComplete && (
-                         <div className={`flex items-center gap-1 shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold ${
-                           isCurrent ? "bg-[#F5C518] text-black" : "bg-slate-100 text-slate-500 dark:bg-[#2A2A2A] dark:text-slate-400"
+                         <div className={`flex items-center gap-1 shrink-0 rounded-md border px-1.5 py-0.5 text-[10px] font-black ${
+                           isCurrent
+                             ? "border-[#9A7407]/40 bg-brand text-black shadow-[1.5px_1.5px_0px_rgba(30,42,68,0.18)] dark:border-brand"
+                             : "border-amber-300/60 bg-amber-100 text-amber-900 shadow-[1px_1px_0px_rgba(30,42,68,0.1)] dark:border-amber-400/30 dark:bg-amber-950/40 dark:text-amber-300"
                          }`}>
                            <Zap className="h-3 w-3 fill-current" />
                            {goal.xp} XP
@@ -192,8 +194,8 @@ export default function DailyGoals({ compact = false }) {
                              <span>Progress</span>
                              <span>{progress} / {targetValue}</span>
                           </div>
-                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-[#2A2A2A]">
-                             <div className="h-full bg-[#F5C518] transition-all duration-500" style={{ width: `${progressPct}%` }} />
+                          <div className="h-2 w-full overflow-hidden rounded-full border border-amber-300/40 bg-amber-100/50 dark:border-amber-500/20 dark:bg-[#2A2A2A]">
+                             <div className="h-full bg-brand transition-all duration-500" style={{ width: `${progressPct}%` }} />
                           </div>
                        </div>
                     )}

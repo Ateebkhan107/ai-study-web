@@ -401,7 +401,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
 
   return (
     <div className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start xl:grid-cols-[minmax(0,1fr)_320px]">
-      <div className="min-w-0 rounded-xl sm:rounded-2xl border border-slate-200/70 bg-[var(--card)]/82 p-3 sm:p-5 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/82">
+      <div className="min-w-0 rounded-2xl border-[1.5px] border-[var(--snb-border)] bg-[var(--card)]/90 p-4 sm:p-6 shadow-[var(--snb-shadow)] backdrop-blur-xl dark:border-[var(--snb-border)] dark:bg-[var(--surface)]/90">
         <div className="space-y-5 sm:space-y-7">
           <section>
             <h2 className="text-sm font-black text-slate-900 dark:text-white">
@@ -418,17 +418,21 @@ export default function TestBuilder({ track = "jee", access = null }) {
                     key={name}
                     type="button"
                     onClick={() => toggleSubject(name)}
-                    className={`relative flex min-h-[64px] min-w-0 items-center gap-2.5 overflow-hidden rounded-xl border px-3 py-2.5 text-left transition-colors cursor-pointer
+                    className={`relative flex min-h-[64px] min-w-0 items-center gap-2.5 overflow-hidden rounded-xl border-[1.5px] px-3 py-2.5 text-left transition-all duration-180 cursor-pointer
                       ${isSelected
-                        ? "border-brand bg-brand/15 text-slate-950 ring-1 ring-brand/25 dark:text-white"
-                        : "border-slate-200/70 bg-slate-50/45 text-slate-600 hover:border-brand/35 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]/25 dark:text-slate-400"
+                        ? "border-[#CA8A04] bg-[#FEF9C3]/70 text-slate-950 shadow-[2.5px_2.5px_0px_rgba(202,138,4,0.35)] -translate-y-0.5 dark:border-brand dark:bg-brand/15 dark:text-white dark:shadow-[2.5px_2.5px_0px_rgba(234,179,8,0.25)]"
+                        : "border-[var(--snb-border-interactive)] bg-[var(--card)] text-slate-600 shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] hover:border-slate-400 dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)] dark:text-slate-400 dark:hover:border-slate-400"
                       }`}
                   >
                     <SubjectVisual
                       subject={name}
                       className={`pointer-events-none absolute -bottom-5 -right-4 h-20 w-20 ${isSelected ? "opacity-[0.09]" : "opacity-[0.035]"} ${c.text}`}
                     />
-                    <span className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isSelected ? c.text : "text-slate-400"} [&>svg]:h-4.5 [&>svg]:w-4.5`}>
+                    <span className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-[1.5px] ${
+                      isSelected
+                        ? "border-[#CA8A04] bg-brand text-black shadow-[1px_1px_0px_rgba(202,138,4,0.2)] dark:border-brand"
+                        : "border-[var(--snb-border)] bg-slate-50 text-slate-400 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]"
+                    } [&>svg]:h-4.5 [&>svg]:w-4.5`}>
                       {data.icon}
                     </span>
                     <span className="relative z-10 min-w-0 flex-1">
@@ -439,7 +443,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
                         {isSelected ? `${chapterCount} chapters` : "Select"}
                       </span>
                     </span>
-                    {isSelected && <Check className="relative z-10 h-4 w-4 shrink-0 text-brand" strokeWidth={3} />}
+                    {isSelected && <Check className="relative z-10 h-4 w-4 shrink-0 text-amber-700 dark:text-brand" strokeWidth={3} />}
                   </button>
                 );
               })}
@@ -543,10 +547,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   key={n}
                   type="button"
                   onClick={() => saveCount(n)}
-                  className={`h-9 min-w-12 rounded-full px-3 text-sm font-black transition-colors cursor-pointer
+                  className={`h-9 min-w-12 rounded-full px-3 text-sm font-black transition-all cursor-pointer duration-150
                     ${questionCount === n
-                      ? "bg-brand text-black"
-                      : "bg-slate-50 text-slate-600 hover:bg-brand/10 dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
+                      ? "border-[1.5px] border-[#9A7407] bg-brand text-black shadow-[2px_2px_0px_rgba(30,42,68,0.2)] dark:border-brand dark:bg-brand dark:shadow-[2px_2px_0px_rgba(0,0,0,0.6)]"
+                      : "border-[1.5px] border-[var(--snb-border)] bg-slate-50 text-slate-600 shadow-[1px_1px_0px_rgba(30,42,68,0.06)] hover:bg-brand/10 hover:border-slate-400 hover:-translate-y-0.5 dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
                     }`}
                 >
                   {n}
@@ -565,10 +569,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   key={d}
                   type="button"
                   onClick={() => saveDuration(d)}
-                  className={`inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-black transition-colors cursor-pointer
+                  className={`inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-black transition-all cursor-pointer duration-150
                     ${duration === d
-                      ? "bg-brand text-black"
-                      : "bg-slate-50 text-slate-600 hover:bg-brand/10 dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
+                      ? "border-[1.5px] border-[#9A7407] bg-brand text-black shadow-[2px_2px_0px_rgba(30,42,68,0.2)] dark:border-brand dark:bg-brand dark:shadow-[2px_2px_0px_rgba(0,0,0,0.6)]"
+                      : "border-[1.5px] border-[var(--snb-border)] bg-slate-50 text-slate-600 shadow-[1px_1px_0px_rgba(30,42,68,0.06)] hover:bg-brand/10 hover:border-slate-400 hover:-translate-y-0.5 dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
                     }`}
                 >
                   <Clock3 className="h-3.5 w-3.5" />
@@ -588,10 +592,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
                   key={d}
                   type="button"
                   onClick={() => saveDifficulty(d)}
-                  className={`h-9 rounded-full px-3 text-sm font-black capitalize transition-colors cursor-pointer
+                  className={`h-9 rounded-full px-3 text-sm font-black capitalize transition-all cursor-pointer duration-150
                     ${difficulty === d
-                      ? "bg-brand text-black"
-                      : "bg-slate-50 text-slate-600 hover:bg-brand/10 dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
+                      ? "border-[1.5px] border-[#9A7407] bg-brand text-black shadow-[2px_2px_0px_rgba(30,42,68,0.2)] dark:border-brand dark:bg-brand dark:shadow-[2px_2px_0px_rgba(0,0,0,0.6)]"
+                      : "border-[1.5px] border-[var(--snb-border)] bg-slate-50 text-slate-600 shadow-[1px_1px_0px_rgba(30,42,68,0.06)] hover:bg-brand/10 hover:border-slate-400 hover:-translate-y-0.5 dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/55 dark:text-slate-400"
                     }`}
                 >
                   {d}
@@ -603,7 +607,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
       </div>
 
       <aside className="lg:sticky lg:top-24">
-        <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/85 p-3 sm:p-4 shadow-sm backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/85">
+        <div className="rounded-2xl border-[1.5px] border-[var(--snb-border)] bg-[var(--card)]/90 p-4 sm:p-5 shadow-[var(--snb-shadow)] backdrop-blur-xl dark:border-[var(--snb-border)] dark:bg-[var(--surface)]/90">
           <h2 className="hidden sm:block text-sm font-black text-slate-900 dark:text-white">
             Your Test
           </h2>
@@ -683,10 +687,10 @@ export default function TestBuilder({ track = "jee", access = null }) {
               type="button"
               onClick={handleStart}
               disabled={!canStart || customTestBlocked}
-              className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 sm:mt-5 text-sm font-black transition-colors ${
+              className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 sm:mt-5 text-sm font-black transition-all ${
                 !canStart || customTestBlocked
                   ? "cursor-not-allowed bg-slate-200 text-slate-500 dark:bg-[var(--surface-elevated)] dark:text-slate-500"
-                  : "cursor-pointer bg-brand text-black hover:bg-brand-hover"
+                  : "cursor-pointer border-[1.5px] border-[#9A7407] bg-brand text-black shadow-[2.5px_2.5px_0px_rgba(30,42,68,0.25)] hover:-translate-y-0.5 hover:shadow-[3.5px_3.5px_0px_rgba(30,42,68,0.3)] hover:bg-brand-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_rgba(30,42,68,0.15)] dark:border-brand"
               }`}
             >
               <Play className="h-4 w-4" fill="currentColor" />
@@ -696,7 +700,7 @@ export default function TestBuilder({ track = "jee", access = null }) {
             {customTestBlocked && (
               <Link
                 href="/pro"
-                className="flex w-full items-center justify-center rounded-xl border border-brand/35 px-4 py-3 text-sm font-black text-amber-700 transition-colors hover:bg-brand hover:text-black dark:text-brand sm:mt-3"
+                className="flex w-full items-center justify-center rounded-xl border-[1.5px] border-brand/50 px-4 py-3 text-sm font-black text-amber-700 shadow-[2px_2px_0px_rgba(202,138,4,0.2)] transition-all hover:-translate-y-0.5 hover:bg-brand hover:text-black dark:text-brand sm:mt-3"
               >
                 Upgrade to Pro
               </Link>

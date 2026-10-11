@@ -509,7 +509,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
 
           {/* ── PROGRESS ── */}
           <section className="animate-slideUp" style={{ animationDelay: "150ms" }}>
-            <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-[var(--card)] p-4 sm:p-8 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)]">
+            <div className="rounded-xl sm:rounded-2xl border-[1.5px] border-[var(--snb-border-interactive)] bg-[var(--card)] p-4 sm:p-8 shadow-[var(--snb-shadow-interactive)] dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)]">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center justify-between sm:block">
@@ -554,13 +554,13 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
 
                 {/* ELEVATED STAT CHIPS */}
                 <div className="hidden sm:flex flex-row gap-2 sm:gap-4 shrink-0">
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-3 sm:px-5 sm:py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[80px] sm:min-w-[100px] shadow-sm">
+                  <div className="flex flex-col items-center justify-center rounded-xl border-[1.5px] border-[var(--snb-border)] bg-slate-50/70 px-3 py-3 sm:px-5 sm:py-4 shadow-[1.5px_1.5px_0px_rgba(30,42,68,0.08)] dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/30 dark:shadow-[1.5px_1.5px_0px_rgba(0,0,0,0.5)] min-w-[80px] sm:min-w-[100px]">
                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 text-center">Global Rank</p>
                     <p className={`mt-1.5 text-xl sm:text-3xl font-black font-display tabular-nums tracking-tighter ${tierColor.text}`}>
                       {activeUser.rank ? `#${activeUser.rank}` : "—"}
                     </p>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-3 sm:px-5 sm:py-4 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 min-w-[80px] sm:min-w-[100px] shadow-sm">
+                  <div className="flex flex-col items-center justify-center rounded-xl border-[1.5px] border-[var(--snb-border)] bg-slate-50/70 px-3 py-3 sm:px-5 sm:py-4 shadow-[1.5px_1.5px_0px_rgba(30,42,68,0.08)] dark:border-[var(--snb-border)] dark:bg-[var(--surface-elevated)]/30 dark:shadow-[1.5px_1.5px_0px_rgba(0,0,0,0.5)] min-w-[80px] sm:min-w-[100px]">
                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 text-center">Progress</p>
                     <p className={`mt-1.5 text-xl sm:text-3xl font-black font-display tabular-nums tracking-tighter text-slate-900 dark:text-white`}>
                       {progressPercentage.toFixed(0)}%
@@ -582,12 +582,12 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                   Badges unlocked through practice, tests, and streaks.
                 </p>
               </div>
-              <div className="shrink-0 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] px-3 py-1 text-[11px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[var(--border-subtle)]">
+              <div className="shrink-0 rounded-full bg-slate-100 dark:bg-[var(--surface-elevated)] px-3 py-1 text-[11px] font-bold text-slate-700 dark:text-slate-300 border-[1.5px] border-slate-300 dark:border-slate-700 shadow-[1px_1px_0px_rgba(30,42,68,0.08)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.4)]">
                 {earnedCount}/{badgeDefs.length} earned
               </div>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface)] sm:p-6">
+            <div className="rounded-xl sm:rounded-2xl border-[1.5px] border-[var(--snb-border-interactive)] bg-white p-4 shadow-[var(--snb-shadow-interactive)] dark:border-[var(--snb-border-interactive)] dark:bg-[var(--surface)] sm:p-6">
               {badgesLoading ? (
                 <div className="grid grid-cols-1 gap-2 sm:gap-3 sm:grid-cols-2 lg:gap-4">
                   {Array.from({ length: 4 }).map((_, index) => (
@@ -602,11 +602,11 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                 </div>
               ) : badgeDefs.length === 0 || earnedCount === 0 ? (
                 // TROPHY CABINET EMPTY STATE
-                <div className="flex flex-row sm:flex-col items-center sm:justify-center rounded-xl sm:rounded-2xl border border-dashed border-amber-200/60 bg-amber-50/50 p-4 sm:p-10 text-left sm:text-center dark:border-brand/30 dark:bg-brand/5 relative overflow-hidden">
+                <div className="flex flex-row sm:flex-col items-center sm:justify-center rounded-xl sm:rounded-2xl border-[1.5px] border-dashed border-amber-300 bg-amber-50/60 p-4 sm:p-10 text-left sm:text-center dark:border-brand/40 dark:bg-brand/5 relative overflow-hidden shadow-[2px_2px_0px_rgba(202,138,4,0.1)]">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-amber-100/30 dark:to-brand/10 pointer-events-none hidden sm:block" />
                   
-                  <div className="flex h-10 w-10 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-amber-200 shadow-sm dark:from-brand/20 dark:to-brand/10 sm:mb-4 mr-3 sm:mr-0 z-10 border border-amber-200/50 dark:border-brand/30 ring-2 sm:ring-4 ring-amber-50 dark:ring-brand/5">
-                    <Trophy className="h-5 w-5 sm:h-8 sm:w-8 text-amber-600 dark:text-brand" strokeWidth={2} />
+                  <div className="flex h-10 w-10 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-amber-300 shadow-[2px_2px_0px_rgba(202,138,4,0.3)] dark:from-brand/30 dark:to-brand/10 sm:mb-4 mr-3 sm:mr-0 z-10 border-[1.5px] border-[#9A7407] ring-2 sm:ring-4 ring-amber-50 dark:ring-brand/5">
+                    <Trophy className="h-5 w-5 sm:h-8 sm:w-8 text-amber-950 dark:text-brand" strokeWidth={2} />
                   </div>
                   
                   <div className="z-10">
@@ -625,18 +625,18 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                     return (
                       <div
                         key={index}
-                        className={`flex items-center gap-3 sm:gap-4 rounded-xl border p-3 sm:p-4 transition-colors ${
+                        className={`flex items-center gap-3 sm:gap-4 rounded-xl border-[1.5px] p-3 sm:p-4 transition-all duration-150 ${
                           badge.earned
-                            ? "border-brand/40 bg-brand/5 shadow-sm"
+                            ? "border-[#CA8A04] bg-amber-50/60 shadow-[2px_2px_0px_rgba(202,138,4,0.22)] hover:-translate-y-0.5 hover:shadow-[2.5px_2.5px_0px_rgba(202,138,4,0.3)] dark:border-amber-500/50 dark:bg-amber-950/20 dark:shadow-[2px_2px_0px_rgba(0,0,0,0.6)]"
                             : "border-slate-200 bg-slate-50 opacity-60 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30"
                         }`}
                       >
-                        <div className={`flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border ${
+                        <div className={`flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border-[1.5px] ${
                           badge.earned
-                            ? "border-brand/40 bg-brand/10 shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+                            ? "border-[#CA8A04] bg-brand text-slate-950 shadow-[1.5px_1.5px_0px_rgba(202,138,4,0.35)] dark:shadow-[1.5px_1.5px_0px_rgba(0,0,0,0.6)]"
                             : "border-slate-200 bg-white dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]"
                         }`}>
-                          <IconComponent className={`h-6 w-6 ${badge.earned ? "text-brand" : "text-slate-400"}`} strokeWidth={2} />
+                          <IconComponent className={`h-6 w-6 ${badge.earned ? "text-slate-950" : "text-slate-400"}`} strokeWidth={2} />
                         </div>
                         <div className="min-w-0">
                           <h4 className="truncate text-sm font-bold text-slate-950 dark:text-white">
