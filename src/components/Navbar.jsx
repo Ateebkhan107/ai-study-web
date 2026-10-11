@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 import ProfileMenu from "@/components/ProfileMenu";
 import Logo from "@/components/Logo";
@@ -101,41 +103,62 @@ export default function Navbar({
       : item.href;
 
     return (
-    <Link
-      key={item.href}
-      href={targetHref}
-      data-tour={tourAttr}
-      prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
-      onMouseEnter={() => router.prefetch(item.href)}
-      onFocus={() => router.prefetch(item.href)}
-      onClick={() => {
-        setPendingHref(item.href);
-        if (mobile) setMobileOpen(false);
-      }}
-      className={`group prepzii-interactive relative overflow-hidden font-bold ${
-        mobile
-          ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm"
-          : "inline-flex h-9 items-center justify-center rounded-xl px-3.5 text-[13px] mx-0.5"
-      } ${
-        active
-          ? mobile
-            ? "bg-amber-500/15 text-amber-700 dark:bg-amber-400/15 dark:text-amber-400"
-            : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 shadow-[inset_0_0_0_1px_rgba(245,158,11,0.2)] dark:shadow-[inset_0_0_0_1px_rgba(251,191,36,0.15)]"
-          : mobile
-            ? "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
-            : "text-slate-500 hover:bg-slate-100/50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-elevated)]/50 dark:hover:text-white"
-      }`}
-    >
-      {Icon && (
-        <Icon
-          className={`prepzii-interactive-icon relative z-10 shrink-0 ${
-            mobile ? "mr-2 h-4 w-4" : "mr-1.5 h-3.5 w-3.5"
-          } ${active ? "text-amber-600 dark:text-amber-400" : ""}`}
-          strokeWidth={2.4}
-        />
-      )}
-      <span className="relative z-10 whitespace-nowrap">{item.name}</span>
-    </Link>
+      <Link
+        key={item.href}
+        href={targetHref}
+        data-tour={tourAttr}
+        prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
+        onMouseEnter={() => router.prefetch(item.href)}
+        onFocus={() => router.prefetch(item.href)}
+        onClick={() => {
+          setPendingHref(item.href);
+          if (mobile) setMobileOpen(false);
+        }}
+        className={cn(
+          "relative cursor-pointer select-none transition-colors duration-200",
+          mobile
+            ? "flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm font-bold"
+            : "inline-flex h-9 items-center justify-center rounded-full px-4 text-[13px] font-bold mx-0.5",
+          active
+            ? mobile
+              ? "bg-amber-500/15 text-amber-700 dark:bg-amber-400/15 dark:text-amber-400 font-extrabold"
+              : "text-amber-800 dark:text-amber-300 font-black"
+            : mobile
+              ? "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
+              : "text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
+        )}
+      >
+        {Icon && (
+          <Icon
+            className={cn(
+              "relative z-10 shrink-0",
+              mobile ? "mr-2 h-4 w-4" : "mr-1.5 h-3.5 w-3.5",
+              active ? "text-amber-600 dark:text-amber-400" : ""
+            )}
+            strokeWidth={2.4}
+          />
+        )}
+        <span className="relative z-10 whitespace-nowrap">{item.name}</span>
+
+        {active && !mobile && (
+          <motion.div
+            layoutId="tubelight-lamp"
+            className="absolute inset-0 w-full rounded-full bg-amber-500/15 dark:bg-amber-400/15 -z-10 shadow-sm"
+            initial={false}
+            transition={{
+              type: "spring",
+              stiffness: 350,
+              damping: 30,
+            }}
+          >
+            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-amber-500 dark:bg-amber-400 rounded-t-full">
+              <div className="absolute w-12 h-5 bg-amber-500/35 dark:bg-amber-400/35 rounded-full blur-md -top-2 -left-2" />
+              <div className="absolute w-8 h-5 bg-amber-500/35 dark:bg-amber-400/35 rounded-full blur-md -top-1" />
+              <div className="absolute w-4 h-3 bg-amber-500/40 dark:bg-amber-400/40 rounded-full blur-sm top-0 left-2" />
+            </div>
+          </motion.div>
+        )}
+      </Link>
     );
   };
 
@@ -186,8 +209,8 @@ export default function Navbar({
           className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
           aria-label="Primary navigation"
         >
-          <div className="flex h-12 max-w-full items-center gap-2 xl:gap-3">
-          {visibleNavItems.map((item) => renderNavLink(item))}
+          <div className="relative flex items-center gap-1 rounded-full border border-slate-200/80 bg-slate-100/60 p-1 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-black/30">
+            {visibleNavItems.map((item) => renderNavLink(item))}
           </div>
         </nav>
 

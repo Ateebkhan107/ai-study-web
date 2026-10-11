@@ -341,22 +341,22 @@ export default function PublicLandingPage() {
           </Link>
 
           {/* Nav links — desktop only */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-1 rounded-full border-2 border-[#111111] bg-white p-1 shadow-[3px_3px_0_#111111]">
             <Link
               href="/jee"
-              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
+              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
             >
               JEE
             </Link>
             <Link
               href="/neet"
-              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
+              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
             >
               NEET
             </Link>
             <Link
               href="/pricing"
-              className={`${B} border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none`}
+              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
             >
               Pricing
             </Link>

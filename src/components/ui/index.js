@@ -5,6 +5,7 @@ export * from "./flickering-grid";
 export * from "./breathing-text";
 export * from "./stars-background";
 export { default as WebAwesomeProvider } from "./web-awesome-provider";
+export * from "./tubelight-navbar";
 
 
 
