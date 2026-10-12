@@ -45,7 +45,8 @@ export function useZiPageContext() {
     (pageType === "cards" && entity?.type === "revision_card") ||
     (pageType === "test" && (
       entity?.type === "test_question" ||
-      entity?.type === "test_result"
+      entity?.type === "test_result" ||
+      entity?.type === "test_review_question"
     ));
 
   if (!entityMatchesPage) return { pageType };

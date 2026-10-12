@@ -114,6 +114,32 @@ const TEST_RESULT_ANSWERS_SELECT = `
   )
 `;
 
+const TEST_REVIEW_ANSWER_SELECT = `
+  id,
+  attempt_id,
+  selected_option,
+  correct_option,
+  is_correct,
+  question_id,
+  questions:question_id(
+    id,
+    exam,
+    subject,
+    chapter,
+    topic,
+    difficulty,
+    question_type,
+    question_text,
+    option_a,
+    option_b,
+    option_c,
+    option_d,
+    explanation,
+    marks,
+    negative_marks
+  )
+`;
+
 function cleanText(value, maxLength = 900) {
   if (value === null || value === undefined) return "";
   return String(value).replace(/\s+/g, " ").trim().slice(0, maxLength);
@@ -679,6 +705,158 @@ function formatTestResultContext(attempt, session, answers) {
   return lines.filter(Boolean).join("\n");
 }
 
+function formatAnswerOptionText(question, optionKey) {
+  const normalized = cleanText(optionKey, 40).toUpperCase();
+  const optionMap = {
+    A: question.option_a,
+    B: question.option_b,
+    C: question.option_c,
+    D: question.option_d,
+  };
+
+  if (!normalized) return "Not attempted";
+  if (normalized.includes(",")) {
+    return normalized
+      .split(",")
+      .map((part) => formatAnswerOptionText(question, part))
+      .join("; ");
+  }
+  if (!optionMap[normalized]) return normalized;
+
+  return `${normalized}. ${cleanText(optionMap[normalized], 500)}`;
+}
+
+function formatTestReviewQuestionContext({ answer, attempt, session, questionNumber }) {
+  const question = answer.questions || {};
+  const selected = cleanText(answer.selected_option, 80);
+  const correct = cleanText(answer.correct_option, 80);
+  const status = !selected ? "skipped" : answer.is_correct ? "correct" : "incorrect";
+  const totalQuestions = Number(attempt.total_questions) || 0;
+
+  const lines = [
+    "Trusted current entity context: Completed test review question.",
+    "This test attempt is completed and belongs to the authenticated student. Use the verified question, selected answer, correct answer, and existing explanation below. If a field is missing, say it is unavailable instead of inventing it.",
+    `Test: ${cleanText(session?.exam, 80) || "Mock Test"}`,
+    `Question number: ${cleanText(questionNumber, 24) || "Unknown"}${totalQuestions ? ` of ${totalQuestions}` : ""}`,
+    `Score for attempt: ${Number(attempt.score) || 0} / ${Number(attempt.total_marks) || 0}`,
+    `Question status in this attempt: ${status}`,
+    `Subject: ${cleanText(question.subject, 120) || "Unknown"}`,
+    `Chapter: ${cleanText(question.chapter, 160) || "Unknown"}`,
+  ];
+
+  const topic = cleanText(question.topic, 160);
+  if (topic) lines.push(`Topic: ${topic}`);
+
+  const meta = [
+    cleanText(question.question_type, 48),
+    cleanText(question.difficulty, 48),
+  ].filter(Boolean);
+  if (meta.length) lines.push(`Question metadata: ${meta.join(" | ")}`);
+
+  lines.push(`Question: ${cleanText(question.question_text, 1800) || "Question text is unavailable."}`);
+
+  const options = [
+    ["A", question.option_a],
+    ["B", question.option_b],
+    ["C", question.option_c],
+    ["D", question.option_d],
+  ]
+    .map(([label, value]) => [label, cleanText(value, 650)])
+    .filter(([, value]) => value);
+
+  if (options.length) {
+    lines.push("Options:");
+    for (const [label, value] of options) {
+      lines.push(`${label}. ${value}`);
+    }
+  }
+
+  lines.push(`Student selected: ${formatAnswerOptionText(question, selected)}`);
+  lines.push(`Verified correct answer: ${formatAnswerOptionText(question, correct)}`);
+
+  const explanation = cleanText(question.explanation, 1400);
+  if (explanation) {
+    lines.push(`Existing explanation: ${explanation}`);
+  } else {
+    lines.push("Existing explanation: Unavailable.");
+  }
+
+  lines.push("Tutoring instruction for this turn: explain the underlying concept, why the selected answer was wrong when applicable, the correct reasoning step by step, important formulas/calculations, and practical tips for similar questions. Keep follow-ups anchored to this same verified question.");
+
+  return lines.filter(Boolean).join("\n");
+}
+
+async function fetchTestReviewQuestionContext({ userId, id }) {
+  try {
+    const { data: answer, error: answerError } = await supabaseAdmin
+      .from("user_answers")
+      .select(TEST_REVIEW_ANSWER_SELECT)
+      .eq("id", id)
+      .maybeSingle();
+
+    if (answerError) {
+      logEntityContextError("test-review-answer", answerError);
+      return "";
+    }
+    if (!answer?.attempt_id) return "";
+
+    const { data: attempt, error: attemptError } = await supabaseAdmin
+      .from("test_attempts")
+      .select(TEST_RESULT_SELECT)
+      .eq("id", answer.attempt_id)
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (attemptError) {
+      logEntityContextError("test-review-attempt", attemptError);
+      return "";
+    }
+    if (!attempt) return "";
+
+    const [{ data: session, error: sessionError }, { data: questionLink, error: linkError }] =
+      await Promise.all([
+        attempt.session_id
+          ? supabaseAdmin
+            .from("test_sessions")
+            .select("id, exam, subjects, chapters, difficulty, total_questions, duration_minutes, status")
+            .eq("id", attempt.session_id)
+            .eq("user_id", userId)
+            .maybeSingle()
+          : Promise.resolve({ data: null, error: null }),
+        attempt.session_id && answer.question_id
+          ? supabaseAdmin
+            .from("test_questions")
+            .select("question_order")
+            .eq("session_id", attempt.session_id)
+            .eq("question_id", answer.question_id)
+            .maybeSingle()
+          : Promise.resolve({ data: null, error: null }),
+      ]);
+
+    if (sessionError) {
+      logEntityContextError("test-review-session", sessionError);
+    }
+    if (linkError) {
+      logEntityContextError("test-review-question-link", linkError);
+    }
+
+    const exam = session?.exam || answer.questions?.exam;
+    if (exam && !(await userCanAccessExam(userId, exam))) {
+      return "";
+    }
+
+    return formatTestReviewQuestionContext({
+      answer,
+      attempt,
+      session,
+      questionNumber: questionLink?.question_order,
+    });
+  } catch (error) {
+    logEntityContextError("test-review-question", error);
+    return "";
+  }
+}
+
 export async function buildZiEntityContext({ userId, pageContext }) {
   const entity = pageContext?.entity;
   if (!entity?.type || !entity?.id) return "";
@@ -697,6 +875,10 @@ export async function buildZiEntityContext({ userId, pageContext }) {
 
   if (entity.type === "test_result" && pageContext.pageType === "test") {
     return fetchTestResultContext({ userId, id: entity.id });
+  }
+
+  if (entity.type === "test_review_question" && pageContext.pageType === "test") {
+    return fetchTestReviewQuestionContext({ userId, id: entity.id });
   }
 
   return "";

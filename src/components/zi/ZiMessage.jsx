@@ -43,17 +43,18 @@ function formatActivity(activity) {
 }
 
 function buildPreparedCustomTestRoute(action) {
+  if (action.trustedRoute) return action.trustedRoute;
+
   const subjectsList = (action.subjects || []).map((subject) => subject.name);
   const isNeetBiology =
     (action.exam || "NEET") === "NEET" &&
-    subjectsList.length === 1 &&
-    subjectsList[0] === "Biology";
+    subjectsList.some((subject) => subject === "Biology");
 
   const params = new URLSearchParams({
     exam: action.exam || "NEET",
     subjects: subjectsList.join(","),
     chapters: (action.chapters || []).map((chapter) => chapter.name).join(","),
-    duration: ((action.questionCount || 10) * 1.5).toString(),
+    duration: Math.max(10, Math.ceil((action.questionCount || 10) * 1.5)).toString(),
     count: (action.questionCount || 10).toString(),
     difficulty: "Mixed",
     mode: "custom",
@@ -237,6 +238,22 @@ export default function ZiMessage({
             route: action.trustedRoute
          };
       }
+    } else if (action.type === "test_unavailable") {
+       destMeta = {
+          isUnavailable: true,
+          label: "No Test Available",
+          title: "No matching test found",
+          description: (
+             <div className="flex flex-col gap-0.5 mt-1">
+                <div className="font-medium text-slate-300">
+                  {action.reason || "Zi could not find enough existing PrepZii questions for that exact request."}
+                </div>
+                <div className="text-slate-400">
+                  Try a broader subject, more chapters, or a smaller focused test.
+                </div>
+             </div>
+          )
+       };
     } else if (action.type === "prepared_custom_test") {
        const subjectNames = (action.subjects || []).map(s => s.name).join(", ");
        const chapterNames = (action.chapters || []).length > 0 ? action.chapters.map(c => c.name).join(" · ") : "All Chapters";
@@ -327,7 +344,10 @@ export default function ZiMessage({
   }
 
   const [apiActionStatus, setApiActionStatus] = useState("idle");
-  const showAction = destMeta && (destMeta.isApiAction ? apiActionStatus === "idle" || apiActionStatus === "error" : pathname !== destMeta.route);
+  const showAction = destMeta && (
+    destMeta.isUnavailable ||
+    (destMeta.isApiAction ? apiActionStatus === "idle" || apiActionStatus === "error" : pathname !== destMeta.route)
+  );
   const studyPlan = action?.type === "study_plan" ? action.plan : null;
   const visual = action?.type === "visual_explanation" ? action.visual : null;
 
@@ -387,7 +407,7 @@ export default function ZiMessage({
               </div>
             )}
 
-            {destMeta.isApiAction ? (
+            {destMeta.isUnavailable ? null : destMeta.isApiAction ? (
                <div className="flex gap-2">
                  <button
                    type="button"

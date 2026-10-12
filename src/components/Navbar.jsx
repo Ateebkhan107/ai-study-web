@@ -17,6 +17,7 @@ import {
   LineChart,
   Menu,
   Moon,
+  Sparkles,
   Star,
   Sun,
   UserRound,
@@ -26,6 +27,7 @@ import {
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: Compass },
+  { name: "Zi", href: "/zi", icon: Sparkles },
   { name: "Test", href: "/test", icon: Target },
   { name: "PYQ", href: "/pyq", icon: Scroll },
   { name: "Community", href: "/community", icon: Swords },

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Inbox, Lightbulb } from "lucide-react";
+import { Inbox, Lightbulb, Sparkles } from "lucide-react";
 import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 export default function ResultPage() {
@@ -295,6 +295,14 @@ export default function ResultPage() {
 
           {/* CTA BUTTONS */}
           <div className="flex flex-col gap-3 border-t border-slate-200/80 mt-8 pt-7 dark:border-[var(--border)]/70 sm:flex-row">
+            <button
+              onClick={() => router.push(`/zi?attempt=${id}`)}
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-4 text-sm font-black text-white transition-colors duration-200 hover:bg-slate-800 shadow-sm dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+            >
+              <Sparkles className="h-4 w-4" strokeWidth={2.4} />
+              Review with Zi
+            </button>
+
             <button
               onClick={() => router.push(`/test/review/${id}`)}
               className="flex-1 rounded-xl bg-brand px-5 py-4 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover shadow-sm"

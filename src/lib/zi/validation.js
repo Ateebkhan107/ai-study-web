@@ -22,6 +22,7 @@ export const ZiEntityTypeSchema = z.enum([
   "revision_card",
   "test_question",
   "test_result",
+  "test_review_question",
 ]);
 
 const ZiChatMessageSchema = z.object({
@@ -49,6 +50,7 @@ const ZiPageContextSchema = z
       revision_card: "cards",
       test_question: "test",
       test_result: "test",
+      test_review_question: "test",
     };
     const expectedPageType = expectedPageTypeByEntity[pageContext.entity.type];
 

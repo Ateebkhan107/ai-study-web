@@ -44,23 +44,31 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
   const { isLoaded, isSignedIn, user } = useUser();
   const pathname = usePathname();
   const pageContext = useZiPageContext();
+  const usageRemaining = ziFreeUsage?.remaining !== undefined ? ziFreeUsage.remaining : 3;
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [isThinking, setIsThinking] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isStartupGreetingActive, setIsStartupGreetingActive] = useState(false);
-  const [remainingFreePrompts, setRemainingFreePrompts] = useState(
-    ziFreeUsage?.remaining !== undefined ? ziFreeUsage.remaining : 3
-  );
+  const [freePromptState, setFreePromptState] = useState({
+    sourceRemaining: usageRemaining,
+    remaining: usageRemaining,
+  });
   const abortControllerRef = useRef(null);
   const greetingName = getZiGreetingName(user);
+  const remainingFreePrompts = freePromptState.remaining;
 
-  const [prevPropRemaining, setPrevPropRemaining] = useState(ziFreeUsage?.remaining);
-  if (ziFreeUsage?.remaining !== prevPropRemaining) {
-    setPrevPropRemaining(ziFreeUsage?.remaining);
-    setRemainingFreePrompts(ziFreeUsage?.remaining !== undefined ? ziFreeUsage.remaining : 3);
-  }
+  useEffect(() => {
+    setFreePromptState((current) =>
+      current.sourceRemaining === usageRemaining
+        ? current
+        : {
+            sourceRemaining: usageRemaining,
+            remaining: usageRemaining,
+          }
+    );
+  }, [usageRemaining]);
 
   const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0;
 
@@ -138,7 +146,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
 
       if (!response.ok || !response.body) {
         if (response.status === 403) {
-          setRemainingFreePrompts(0);
+          setFreePromptState((current) => ({ ...current, remaining: 0 }));
         }
         const statusMessage =
           response.status === 401
@@ -159,7 +167,10 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
       }
 
       if (plan !== "AI_MODE") {
-        setRemainingFreePrompts((prev) => Math.max(0, prev - 1));
+        setFreePromptState((current) => ({
+          ...current,
+          remaining: Math.max(0, current.remaining - 1),
+        }));
       }
 
       const reader = response.body.getReader();
@@ -244,8 +255,9 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
   };
 
   const isSolvingSession = (pageContext.pageType === "test" || pageContext.pageType === "pyq") && pathname?.includes("/session");
+  const isZiWorkspace = pathname === "/zi";
 
-  if (isSolvingSession) {
+  if (isSolvingSession || isZiWorkspace) {
     return null;
   }
 

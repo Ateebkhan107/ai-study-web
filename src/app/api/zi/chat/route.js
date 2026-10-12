@@ -16,6 +16,8 @@ import { ZiChatRequestSchema } from "@/lib/zi/validation";
 import { validateZiVisualAction } from "@/lib/zi/visuals.server";
 import { getFormulaSubjectsForExam, getFormulaChaptersForSubject } from "@/lib/formulaCards";
 import { getCanonicalChaptersForSubject, normalizeChapterName } from "@/lib/pyqChapterMapping";
+import { getQuestions } from "@/lib/questions";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 const encoder = new TextEncoder();
 
@@ -31,6 +33,133 @@ function logZiProviderStatus(status, error) {
     console.error(`[Zi] provider error name: ${error?.name || "UnknownError"}`);
     console.error(`[Zi] provider error message: ${error?.message || "Unknown provider error"}`);
   }
+}
+
+function normalizeZiTestSubject(subjectName) {
+  const subject = String(subjectName || "").trim();
+  const lower = subject.toLowerCase();
+  if (["mathematics", "math", "maths"].includes(lower)) return "Maths";
+  if (["physics", "chemistry", "biology"].includes(lower)) {
+    return subject.charAt(0).toUpperCase() + subject.slice(1).toLowerCase();
+  }
+  return null;
+}
+
+function buildPreparedTestRoute({ exam, subjects, chapters, questionCount, sourceType }) {
+  const params = new URLSearchParams({
+    exam,
+    subjects: subjects.join(","),
+    chapters: chapters.join(","),
+    duration: Math.max(10, Math.ceil(questionCount * 1.5)).toString(),
+    count: questionCount.toString(),
+    difficulty: "Mixed",
+    mode: "custom",
+  });
+
+  if (sourceType) {
+    params.set("sourceType", sourceType);
+  }
+
+  return `/test/session?${params.toString()}`;
+}
+
+async function resolvePreparedCustomTestAction({ actionObj, exam }) {
+  let qCount = parseInt(actionObj.questionCount, 10);
+  if (isNaN(qCount) || qCount < 5) qCount = 5;
+  if (qCount > 30) qCount = 30;
+
+  const safeSubjects = [];
+  for (const subject of actionObj.subjects || []) {
+    const normalized = normalizeZiTestSubject(subject);
+    if (normalized && !safeSubjects.some((item) => item.name === normalized)) {
+      safeSubjects.push({ id: normalized.toLowerCase(), name: normalized });
+    }
+  }
+
+  if (safeSubjects.length === 0) {
+    safeSubjects.push({ id: "mixed", name: "Mixed Subjects" });
+  }
+
+  const safeChapters = [];
+  for (const chapter of actionObj.chapters || []) {
+    const requestedChapter = chapter || "";
+    const canonicalRequested = normalizeChapterName(requestedChapter);
+
+    for (const subject of safeSubjects) {
+      if (subject.name === "Mixed Subjects") continue;
+      const chapters = getCanonicalChaptersForSubject(subject.name);
+      if (!chapters) continue;
+
+      const exactChapter = chapters.find((candidate) => {
+        const candidateName = candidate.toLowerCase();
+        const requestedName = requestedChapter.toLowerCase();
+        if (candidateName === requestedName) return true;
+        const canonicalCandidate = normalizeChapterName(candidate);
+        return canonicalCandidate.toLowerCase() === canonicalRequested.toLowerCase() && canonicalCandidate !== "";
+      });
+
+      if (exactChapter && !safeChapters.some((item) => item.name === exactChapter && item.subject === subject.name)) {
+        safeChapters.push({
+          id: exactChapter.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+          name: exactChapter,
+          subject: subject.name,
+        });
+        break;
+      }
+    }
+  }
+
+  const subjectsForRoute = safeSubjects.map((subject) => subject.name);
+  const chaptersForRoute = safeChapters.map((chapter) => chapter.name);
+  const isNeetBiologyPractice =
+    exam === "NEET" &&
+    subjectsForRoute.some((subject) => subject.toLowerCase() === "biology");
+  const sourceType = isNeetBiologyPractice ? "PREPZII_PRACTICE" : "";
+
+  const availableQuestions = await getQuestions({
+    exam,
+    subject: subjectsForRoute.join(","),
+    chapter: chaptersForRoute.join(",") || "All Chapters",
+    difficulty: "Mixed",
+    limit: qCount,
+    client: supabaseAdmin,
+    sourceType: sourceType || undefined,
+    status: sourceType ? "PUBLISHED" : undefined,
+    activeOnly: Boolean(sourceType),
+    strictFilters: Boolean(sourceType),
+  });
+
+  if (availableQuestions.length < 5) {
+    return {
+      type: "test_unavailable",
+      exam,
+      requestedQuestionCount: qCount,
+      availableQuestionCount: availableQuestions.length,
+      subjects: safeSubjects,
+      chapters: safeChapters,
+      reason: "Zi could not find enough existing PrepZii questions for that exact test request.",
+    };
+  }
+
+  const resolvedQuestionCount = Math.min(qCount, availableQuestions.length);
+  const trustedRoute = buildPreparedTestRoute({
+    exam,
+    subjects: subjectsForRoute,
+    chapters: chaptersForRoute,
+    questionCount: resolvedQuestionCount,
+    sourceType,
+  });
+
+  return {
+    type: "prepared_custom_test",
+    questionCount: resolvedQuestionCount,
+    requestedQuestionCount: qCount,
+    subjects: safeSubjects,
+    chapters: safeChapters,
+    exam,
+    source: actionObj.source || "custom",
+    trustedRoute,
+  };
 }
 
 export async function POST(request) {
@@ -268,54 +397,7 @@ export async function POST(request) {
                         }
                      }
                   } else if (actionObj.type === "prepare_custom_test") {
-                     // 1. Clamp question count
-                     let qCount = parseInt(actionObj.questionCount, 10);
-                     if (isNaN(qCount) || qCount < 5) qCount = 5;
-                     if (qCount > 30) qCount = 30;
-
-                     // 2. Validate and normalize subjects
-                     const safeSubjects = [];
-                     for (const s of (actionObj.subjects || [])) {
-                        let normSubj = s.toLowerCase() === 'mathematics' || s.toLowerCase() === 'math' || s.toLowerCase() === 'maths' ? 'Maths' : s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-                        if (['Physics', 'Chemistry', 'Biology', 'Maths'].includes(normSubj)) {
-                           safeSubjects.push({ id: normSubj.toLowerCase(), name: normSubj });
-                        }
-                     }
-                     if (safeSubjects.length === 0) safeSubjects.push({ id: "mixed", name: "Mixed Subjects" });
-
-                     // 3. Validate and normalize chapters
-                     const safeChapters = [];
-                     for (const c of (actionObj.chapters || [])) {
-                        const requestedChapter = c || "";
-                        const canonicalRequested = normalizeChapterName(requestedChapter);
-
-                        // Find the chapter in the resolved subjects
-                        for (const subj of safeSubjects) {
-                           if (subj.name === "Mixed Subjects") continue;
-                           const pyqChapters = getCanonicalChaptersForSubject(subj.name);
-                           if (!pyqChapters) continue;
-                           const exactChap = pyqChapters.find(ch => {
-                              const cName = ch.toLowerCase();
-                              const reqName = requestedChapter.toLowerCase();
-                              if (cName === reqName) return true;
-                              const canonicalC = normalizeChapterName(ch);
-                              return canonicalC.toLowerCase() === canonicalRequested.toLowerCase() && canonicalC !== "";
-                           });
-                           if (exactChap) {
-                              safeChapters.push({ id: exactChap.toLowerCase().replace(/[^a-z0-9]+/g, '-'), name: exactChap, subject: subj.name });
-                              break;
-                           }
-                        }
-                     }
-
-                     safeAction = {
-                        type: "prepared_custom_test",
-                        questionCount: qCount,
-                        subjects: safeSubjects,
-                        chapters: safeChapters,
-                        exam: exam,
-                        source: actionObj.source || "custom"
-                     };
+                     safeAction = await resolvePreparedCustomTestAction({ actionObj, exam });
                   } else if (actionObj.type === "save_preference") {
                      const allowedKeys = ["preferred_language", "response_length", "explanation_style", "learning_style", "study_preference"];
                      if (allowedKeys.includes(actionObj.key) && typeof actionObj.value === "string") {
