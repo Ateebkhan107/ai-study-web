@@ -49,7 +49,7 @@ export default function AuthGateModal({
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 shadow-2xl dark:border-white/10 dark:bg-[#141415] text-slate-900 dark:text-white transition-all animate-in zoom-in-95 duration-200 sm:p-7">
+      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 shadow-2xl dark:border-white/20 dark:bg-[#0A0A0C] text-slate-900 dark:text-white transition-all animate-in zoom-in-95 duration-200 sm:p-7">
         {/* Close Button */}
         <button
           type="button"

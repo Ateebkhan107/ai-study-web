@@ -199,9 +199,9 @@ export default function Navbar({
             className="flex h-10 min-w-0 items-center gap-1.5 rounded-lg pr-1 text-slate-950 transition-colors duration-200 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-200 sm:gap-2.5 lg:h-12 lg:gap-3"
             aria-label="PrepZii dashboard"
           >
-            <Logo size={28} showText={false} className="lg:hidden shrink-0" />
-            <Logo size={36} showText={false} className="hidden lg:flex shrink-0" />
-            <span className="block text-[15px] min-[360px]:text-[17px] sm:text-[20px] font-black uppercase tracking-tight lg:tracking-normal lg:text-[24px] truncate">
+            <Logo size={36} showText={false} className="lg:hidden shrink-0" />
+            <Logo size={42} showText={false} className="hidden lg:flex shrink-0" />
+            <span className="block text-[16px] min-[360px]:text-[18px] sm:text-[21px] font-black uppercase tracking-tight lg:tracking-normal lg:text-[25px] truncate">
               PREPZII
             </span>
           </Link>

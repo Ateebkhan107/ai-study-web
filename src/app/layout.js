@@ -45,7 +45,7 @@ export const metadata = {
   ),
 
   title: {
-    default: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
+    default: "PrepZii",
     template: "%s | PrepZii",
   },
 
@@ -72,7 +72,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "PrepZii",
-    title: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
+    title: "PrepZii",
     description:
       "Practice JEE and NEET previous year questions, take full-length mock tests, revise formula books, track weak chapters, and analyze your performance with PrepZii.",
     url: "/",
@@ -89,7 +89,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "JEE & NEET Mock Tests, PYQs & Analytics | PrepZii",
+    title: "PrepZii",
     description:
       "Practice JEE and NEET previous year questions, take full-length mock tests, revise formula books, track weak chapters, and analyze your performance with PrepZii.",
     images: ["/images/branding/prepzii-logo-dark.png"],

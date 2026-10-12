@@ -87,14 +87,14 @@ function getAnswerStatus(answer) {
 function getStatusStyles(status, isSelected = false) {
   const styles = {
     incorrect: isSelected
-      ? "border-rose-300 bg-rose-50 text-rose-800"
-      : "border-stone-200 bg-white text-stone-700 hover:border-rose-200 hover:bg-rose-50/70",
+      ? "border-rose-300 bg-rose-50 text-rose-800 dark:border-rose-500/50 dark:bg-rose-950/40 dark:text-rose-300"
+      : "border-stone-200 bg-white text-stone-700 hover:border-rose-200 hover:bg-rose-50/70 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-rose-500/40 dark:hover:bg-rose-950/20",
     skipped: isSelected
-      ? "border-amber-300 bg-amber-50 text-amber-800"
-      : "border-stone-200 bg-white text-stone-700 hover:border-amber-200 hover:bg-amber-50/70",
+      ? "border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-500/50 dark:bg-amber-950/40 dark:text-amber-300"
+      : "border-stone-200 bg-white text-stone-700 hover:border-amber-200 hover:bg-amber-50/70 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-amber-500/40 dark:hover:bg-amber-950/20",
     correct: isSelected
-      ? "border-emerald-300 bg-emerald-50 text-emerald-800"
-      : "border-stone-200 bg-white text-stone-700 hover:border-emerald-200 hover:bg-emerald-50/70",
+      ? "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-500/50 dark:bg-emerald-950/40 dark:text-emerald-300"
+      : "border-stone-200 bg-white text-stone-700 hover:border-emerald-200 hover:bg-emerald-50/70 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-emerald-500/40 dark:hover:bg-emerald-950/20",
   };
 
   return styles[status] || styles.skipped;
@@ -223,12 +223,12 @@ function ConversationAction({ action }) {
 
   if (action?.type === "test_unavailable") {
     return (
-      <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm">
-        <div className="font-black text-stone-950">No matching test found</div>
-        <div className="mt-1 font-medium leading-6 text-stone-700">
+      <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm dark:border-amber-400/20 dark:bg-amber-950/30">
+        <div className="font-black text-stone-950 dark:text-white">No matching test found</div>
+        <div className="mt-1 font-medium leading-6 text-stone-700 dark:text-stone-300">
           {action.reason || "Zi could not find enough existing PrepZii questions for that exact request."}
         </div>
-        <div className="mt-3 text-xs font-bold text-stone-500">
+        <div className="mt-3 text-xs font-bold text-stone-500 dark:text-stone-400">
           Try choosing a broader subject, more chapters, or a smaller focused test.
         </div>
       </div>
@@ -238,11 +238,11 @@ function ConversationAction({ action }) {
   if (!meta?.route) return null;
 
   return (
-    <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50/70 p-3 text-sm">
+    <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50/70 p-3 text-sm dark:border-amber-400/20 dark:bg-amber-950/30">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <div className="font-bold text-stone-950">{meta.title || meta.label}</div>
-          <div className="mt-0.5 text-xs font-medium text-stone-600">
+          <div className="font-bold text-stone-950 dark:text-white">{meta.title || meta.label}</div>
+          <div className="mt-0.5 text-xs font-medium text-stone-600 dark:text-stone-400">
             Zi prepared a safe PrepZii destination for this step.
           </div>
         </div>
@@ -253,7 +253,7 @@ function ConversationAction({ action }) {
             setIsOpening(true);
             router.push(meta.route);
           }}
-          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-stone-950 px-4 text-sm font-bold text-white transition-colors hover:bg-stone-800 disabled:cursor-wait disabled:bg-stone-700"
+          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-stone-950 px-4 text-sm font-bold text-white transition-colors hover:bg-stone-800 disabled:cursor-wait disabled:bg-stone-700 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300"
         >
           {isOpening ? "Opening..." : meta.label}
           {!isOpening ? <ChevronRight className="h-4 w-4" strokeWidth={2.4} /> : null}
@@ -273,39 +273,39 @@ function WorkspaceMessage({ message }) {
 
   if (isUser) {
     return (
-      <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
-        <div className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-stone-500">
+      <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm dark:border-white/15 dark:bg-[#0A0A0C]">
+        <div className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
           You asked
         </div>
-        <p className="whitespace-pre-wrap text-[0.96rem] leading-7 text-stone-950">{message.text}</p>
+        <p className="whitespace-pre-wrap text-[0.96rem] leading-7 text-stone-950 dark:text-white">{message.text}</p>
       </article>
     );
   }
 
   return (
-    <article className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-      <div className="mb-4 flex items-center gap-2 border-b border-stone-100 pb-3">
+    <article className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6 dark:border-white/15 dark:bg-[#0A0A0C]">
+      <div className="mb-4 flex items-center gap-2 border-b border-stone-100 pb-3 dark:border-white/10">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400 text-stone-950">
           <Sparkles className="h-4 w-4" strokeWidth={2.4} />
         </span>
         <div>
-          <div className="text-sm font-black text-stone-950">Zi</div>
-          <div className="text-xs font-semibold text-stone-500">Personal AI Tutor</div>
+          <div className="text-sm font-black text-stone-950 dark:text-white">Zi</div>
+          <div className="text-xs font-semibold text-stone-500 dark:text-stone-400">Personal AI Tutor</div>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="flex items-center gap-3 text-sm font-semibold text-stone-600">
-          <Loader2 className="h-4 w-4 animate-spin text-amber-600" />
+        <div className="flex items-center gap-3 text-sm font-semibold text-stone-600 dark:text-stone-400">
+          <Loader2 className="h-4 w-4 animate-spin text-amber-600 dark:text-amber-400" />
           Zi is preparing the explanation...
         </div>
       ) : isError ? (
-        <div className="flex gap-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-semibold text-red-700">
+        <div className="flex gap-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-semibold text-red-700 dark:border-red-500/30 dark:bg-red-950/30 dark:text-red-300">
           <CircleAlert className="mt-0.5 h-4 w-4 shrink-0" />
           <span>{message.text || ZI_ERROR_MESSAGE}</span>
         </div>
       ) : (
-        <MathText className="zi-workspace-markdown text-[0.98rem] leading-8 text-stone-800 [&_blockquote]:my-4 [&_blockquote]:rounded-r-xl [&_blockquote]:border-l-4 [&_blockquote]:border-amber-400 [&_blockquote]:bg-amber-50 [&_blockquote]:py-3 [&_blockquote]:pl-4 [&_code]:rounded-md [&_code]:bg-amber-50 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-amber-800 [&_h1]:mb-3 [&_h1]:mt-2 [&_h1]:text-2xl [&_h1]:font-black [&_h1]:text-stone-950 [&_h2]:mb-3 [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-black [&_h2]:text-stone-950 [&_h3]:mb-2 [&_h3]:mt-5 [&_h3]:text-base [&_h3]:font-black [&_h3]:text-stone-950 [&_li]:pl-1 [&_pre]:my-4 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-stone-200 [&_pre]:bg-stone-50 [&_pre]:p-4">
+        <MathText className="zi-workspace-markdown text-[0.98rem] leading-8 text-stone-800 dark:text-stone-200 [&_blockquote]:my-4 [&_blockquote]:rounded-r-xl [&_blockquote]:border-l-4 [&_blockquote]:border-amber-400 [&_blockquote]:bg-amber-50 [&_blockquote]:py-3 [&_blockquote]:pl-4 dark:[&_blockquote]:bg-amber-950/20 [&_code]:rounded-md [&_code]:bg-amber-50 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-amber-800 dark:[&_code]:bg-amber-400/10 dark:[&_code]:text-amber-300 [&_h1]:mb-3 [&_h1]:mt-2 [&_h1]:text-2xl [&_h1]:font-black [&_h1]:text-stone-950 dark:[&_h1]:text-white [&_h2]:mb-3 [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-black [&_h2]:text-stone-950 dark:[&_h2]:text-white [&_h3]:mb-2 [&_h3]:mt-5 [&_h3]:text-base [&_h3]:font-black [&_h3]:text-stone-950 dark:[&_h3]:text-white [&_li]:pl-1 [&_pre]:my-4 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-stone-200 [&_pre]:bg-stone-50 [&_pre]:p-4 dark:[&_pre]:border-white/15 dark:[&_pre]:bg-[#121215]">
           {message.text}
         </MathText>
       )}
@@ -324,36 +324,36 @@ function ReviewSummary({ reviewData }) {
   const subjectLabel = attempt.subjects?.filter(Boolean).join(", ") || "Mixed subjects";
 
   return (
-    <section className="mb-4 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+    <section className="mb-4 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm dark:border-white/15 dark:bg-[#0A0A0C]">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="min-w-0">
-          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-700">
+          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-700 dark:text-amber-400">
             Post-test review
           </p>
-          <h2 className="mt-1 truncate font-display text-2xl font-black tracking-tight text-stone-950">
+          <h2 className="mt-1 truncate font-display text-2xl font-black tracking-tight text-stone-950 dark:text-white">
             {attempt.testName || "Mock Test"}
           </h2>
-          <p className="mt-1 text-sm font-semibold text-stone-500">
+          <p className="mt-1 text-sm font-semibold text-stone-500 dark:text-stone-400">
             {subjectLabel} · {attempt.totalQuestions} questions · {attempt.timeTaken}
           </p>
         </div>
 
         <div className="grid grid-cols-4 gap-2 text-center sm:min-w-[420px]">
-          <div className="rounded-xl border border-stone-200 bg-stone-50 p-3">
-            <div className="text-lg font-black text-stone-950">{scoreLabel}</div>
-            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-stone-500">Score</div>
+          <div className="rounded-xl border border-stone-200 bg-stone-50 p-3 dark:border-white/15 dark:bg-[#121215]">
+            <div className="text-lg font-black text-stone-950 dark:text-white">{scoreLabel}</div>
+            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-stone-500 dark:text-stone-400">Score</div>
           </div>
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3">
-            <div className="text-lg font-black text-emerald-700">{attempt.correct}</div>
-            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">Correct</div>
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 dark:border-emerald-500/30 dark:bg-emerald-950/30">
+            <div className="text-lg font-black text-emerald-700 dark:text-emerald-300">{attempt.correct}</div>
+            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">Correct</div>
           </div>
-          <div className="rounded-xl border border-rose-200 bg-rose-50 p-3">
-            <div className="text-lg font-black text-rose-700">{attempt.wrong}</div>
-            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-rose-700">Wrong</div>
+          <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 dark:border-rose-500/30 dark:bg-rose-950/30">
+            <div className="text-lg font-black text-rose-700 dark:text-rose-300">{attempt.wrong}</div>
+            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-rose-700 dark:text-rose-300">Wrong</div>
           </div>
-          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
-            <div className="text-lg font-black text-amber-700">{attempt.skipped}</div>
-            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700">Skipped</div>
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-500/30 dark:bg-amber-950/30">
+            <div className="text-lg font-black text-amber-700 dark:text-amber-300">{attempt.skipped}</div>
+            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700 dark:text-amber-300">Skipped</div>
           </div>
         </div>
       </div>
@@ -364,7 +364,7 @@ function ReviewSummary({ reviewData }) {
 function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
   if (!answer) {
     return (
-      <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-6 text-center text-sm font-semibold text-stone-500">
+      <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-6 text-center text-sm font-semibold text-stone-500 dark:border-white/15 dark:bg-[#0A0A0C] dark:text-stone-400">
         Select a question to review with Zi.
       </div>
     );
@@ -380,11 +380,11 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
   ].filter(([, value]) => value);
 
   return (
-    <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
-      <div className="mb-4 flex flex-col gap-3 border-b border-stone-100 pb-4 sm:flex-row sm:items-start sm:justify-between">
+    <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm dark:border-white/15 dark:bg-[#0A0A0C]">
+      <div className="mb-4 flex flex-col gap-3 border-b border-stone-100 pb-4 dark:border-white/10 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-black uppercase tracking-[0.16em] text-stone-500">
+            <span className="text-xs font-black uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
               Question {answer.questionNumber || ""}
             </span>
             <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] ${getStatusStyles(status, true)}`}>
@@ -392,7 +392,7 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
               {status}
             </span>
           </div>
-          <p className="mt-1 text-xs font-semibold text-stone-500">
+          <p className="mt-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
             {[question.subject, question.chapter, question.topic].filter(Boolean).join(" · ") || "Subject metadata unavailable"}
           </p>
         </div>
@@ -400,19 +400,19 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
           type="button"
           onClick={onStartReview}
           disabled={isGenerating}
-          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-stone-950 px-4 text-sm font-black text-white transition-colors hover:bg-stone-800 disabled:cursor-wait disabled:bg-stone-400"
+          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-stone-950 px-4 text-sm font-black text-white transition-colors hover:bg-stone-800 disabled:cursor-wait disabled:bg-stone-400 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300"
         >
           {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" strokeWidth={2.4} />}
           Explain with Zi
         </button>
       </div>
 
-      <MathText className="text-[0.98rem] font-semibold leading-7 text-stone-950">
+      <MathText className="text-[0.98rem] font-semibold leading-7 text-stone-950 dark:text-white">
         {question.question_text || "Question text is unavailable."}
       </MathText>
 
       {question.question_image ? (
-        <div className="mt-4 overflow-hidden rounded-xl border border-stone-200 bg-white p-2">
+        <div className="mt-4 overflow-hidden rounded-xl border border-stone-200 bg-white p-2 dark:border-white/15 dark:bg-[#121215]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={question.question_image}
@@ -430,15 +430,15 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
             const selected = String(answer.selected_option || "").split(",").includes(label);
             const correct = String(answer.correct_option || "").split(",").includes(label);
             const optionClass = correct
-              ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+              ? "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-500/40 dark:bg-emerald-950/40 dark:text-emerald-200"
               : selected
-              ? "border-rose-300 bg-rose-50 text-rose-800"
-              : "border-stone-200 bg-stone-50 text-stone-700";
+              ? "border-rose-300 bg-rose-50 text-rose-800 dark:border-rose-500/40 dark:bg-rose-950/40 dark:text-rose-200"
+              : "border-stone-200 bg-stone-50 text-stone-700 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300";
 
             return (
               <div key={label} className={`rounded-xl border p-3 ${optionClass}`}>
                 <div className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-black shadow-sm">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-black shadow-sm dark:bg-[#0A0A0C] dark:text-white">
                     {label}
                   </span>
                   <MathText className="min-w-0 text-sm font-semibold leading-6">
@@ -452,25 +452,25 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
       ) : null}
 
       <div className="mt-4 grid gap-2 text-sm font-semibold text-stone-600 sm:grid-cols-2">
-        <div className="rounded-xl border border-stone-200 bg-stone-50 p-3">
-          Your answer: <span className="font-black text-stone-950">{normalizeOptionLabel(answer.selected_option)}</span>
+        <div className="rounded-xl border border-stone-200 bg-stone-50 p-3 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300">
+          Your answer: <span className="font-black text-stone-950 dark:text-white">{normalizeOptionLabel(answer.selected_option)}</span>
         </div>
-        <div className="rounded-xl border border-stone-200 bg-stone-50 p-3">
-          Correct answer: <span className="font-black text-stone-950">{normalizeOptionLabel(answer.correct_option)}</span>
+        <div className="rounded-xl border border-stone-200 bg-stone-50 p-3 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300">
+          Correct answer: <span className="font-black text-stone-950 dark:text-white">{normalizeOptionLabel(answer.correct_option)}</span>
         </div>
       </div>
 
       {question.explanation ? (
-        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-          <div className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-amber-700">
+        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-950/30">
+          <div className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-amber-700 dark:text-amber-400">
             Existing explanation
           </div>
-          <MathText className="text-sm font-medium leading-7 text-stone-800">
+          <MathText className="text-sm font-medium leading-7 text-stone-800 dark:text-stone-200">
             {question.explanation}
           </MathText>
         </div>
       ) : (
-        <div className="mt-4 rounded-xl border border-stone-200 bg-stone-50 p-3 text-sm font-semibold text-stone-500">
+        <div className="mt-4 rounded-xl border border-stone-200 bg-stone-50 p-3 text-sm font-semibold text-stone-500 dark:border-white/15 dark:bg-[#121215] dark:text-stone-400">
           No stored explanation is available for this question. Zi will use the verified question and answer context.
         </div>
       )}
@@ -748,15 +748,26 @@ export default function ZiWorkspace() {
     sendMessage("Review this selected completed-test question. Explain the concept, why my answer was wrong if applicable, the correct reasoning step by step, and tips for similar questions.");
   };
 
+  const queryPrompt = searchParams.get("prompt") || searchParams.get("q") || "";
+  const queryPromptHandledRef = useRef(false);
+
+  useEffect(() => {
+    if (queryPrompt && !isReviewMode && !queryPromptHandledRef.current) {
+      queryPromptHandledRef.current = true;
+      sendMessage(queryPrompt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryPrompt, isReviewMode]);
+
   return (
-    <main className="min-h-[calc(100dvh-4rem)] bg-[#fbfaf7] text-stone-950 lg:min-h-[calc(100dvh-6rem)]">
+    <main className="min-h-[calc(100dvh-4rem)] bg-[#fbfaf7] text-stone-950 dark:bg-black dark:text-white lg:min-h-[calc(100dvh-6rem)]">
       <div className="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-6xl flex-col px-3 py-3 sm:px-5 sm:py-5 lg:min-h-[calc(100dvh-6rem)] lg:px-8">
-        <header className="mb-4 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur sm:px-5">
+        <header className="mb-4 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur dark:border-white/15 dark:bg-[#0A0A0C]/90 sm:px-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-3">
               <Link
                 href={isReviewMode && attemptId ? `/test/result/${attemptId}` : "/dashboard"}
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-stone-200 text-stone-600 transition-colors hover:border-amber-300 hover:bg-amber-50 hover:text-stone-950"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-stone-200 text-stone-600 transition-colors hover:border-amber-300 hover:bg-amber-50 hover:text-stone-950 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-amber-400/50 dark:hover:bg-amber-400/10 dark:hover:text-white"
                 aria-label={isReviewMode ? "Back to test result" : "Back to dashboard"}
               >
                 <ArrowLeft className="h-4 w-4" strokeWidth={2.4} />
@@ -767,14 +778,14 @@ export default function ZiWorkspace() {
                 </span>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <h1 className="truncate font-display text-xl font-black tracking-tight text-stone-950 sm:text-2xl">
+                    <h1 className="truncate font-display text-xl font-black tracking-tight text-stone-950 dark:text-white sm:text-2xl">
                       Zi
                     </h1>
-                    <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700">
+                    <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300">
                       24x7
                     </span>
                   </div>
-                  <p className="text-sm font-semibold text-stone-500">Your Personal AI Tutor</p>
+                  <p className="text-sm font-semibold text-stone-500 dark:text-stone-400">Your Personal AI Tutor</p>
                 </div>
               </div>
             </div>
@@ -784,7 +795,7 @@ export default function ZiWorkspace() {
                 <button
                   type="button"
                   onClick={clearConversation}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-stone-200 bg-white px-3 text-sm font-bold text-stone-600 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-700"
+                  className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-stone-200 bg-white px-3 text-sm font-bold text-stone-600 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-red-500/40 dark:hover:bg-red-950/30 dark:hover:text-red-300"
                 >
                   <Trash2 className="h-4 w-4" strokeWidth={2.4} />
                   Clear
@@ -794,7 +805,7 @@ export default function ZiWorkspace() {
                 <button
                   type="button"
                   onClick={stopGeneration}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-stone-200 bg-stone-950 px-3 text-sm font-bold text-white transition-colors hover:bg-stone-800"
+                  className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-stone-200 bg-stone-950 px-3 text-sm font-bold text-white transition-colors hover:bg-stone-800 dark:border-white/20 dark:bg-white dark:text-stone-950 dark:hover:bg-stone-200"
                 >
                   <Square className="h-3.5 w-3.5 fill-current" strokeWidth={2.4} />
                   Stop
@@ -806,14 +817,14 @@ export default function ZiWorkspace() {
 
         {isReviewMode ? (
           reviewLoading ? (
-            <div className="mb-4 rounded-2xl border border-stone-200 bg-white p-5 text-sm font-bold text-stone-500 shadow-sm">
+            <div className="mb-4 rounded-2xl border border-stone-200 bg-white p-5 text-sm font-bold text-stone-500 shadow-sm dark:border-white/15 dark:bg-[#0A0A0C] dark:text-stone-400">
               <div className="flex items-center gap-3">
-                <Loader2 className="h-4 w-4 animate-spin text-amber-600" />
+                <Loader2 className="h-4 w-4 animate-spin text-amber-600 dark:text-amber-400" />
                 Loading your completed test review...
               </div>
             </div>
           ) : reviewError ? (
-            <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm font-bold text-red-700 shadow-sm">
+            <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm font-bold text-red-700 shadow-sm dark:border-red-500/30 dark:bg-red-950/30 dark:text-red-300">
               <div className="flex items-start gap-3">
                 <CircleAlert className="mt-0.5 h-4 w-4 shrink-0" />
                 <span>{reviewError}</span>
@@ -826,19 +837,19 @@ export default function ZiWorkspace() {
 
         <section
           ref={transcriptRef}
-          className="min-h-0 flex-1 overflow-y-auto rounded-3xl border border-stone-200 bg-stone-50/80 px-3 py-4 shadow-sm [scrollbar-color:rgba(217,119,6,0.45)_transparent] sm:px-5 sm:py-6"
+          className="min-h-0 flex-1 overflow-y-auto rounded-3xl border border-stone-200 bg-stone-50/80 px-3 py-4 shadow-sm [scrollbar-color:rgba(217,119,6,0.45)_transparent] dark:border-white/15 dark:bg-[#0A0A0C] sm:px-5 sm:py-6"
           aria-live="polite"
         >
           {isReviewMode ? (
             reviewLoading || reviewError ? (
-              <div className="flex min-h-[360px] items-center justify-center text-sm font-bold text-stone-500">
+              <div className="flex min-h-[360px] items-center justify-center text-sm font-bold text-stone-500 dark:text-stone-400">
                 {reviewLoading ? "Preparing Zi's review workspace..." : "Open a completed result to review it with Zi."}
               </div>
             ) : !reviewData?.answers?.length ? (
-              <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center">
+              <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center dark:border-white/15 dark:bg-[#121215]">
                 <div>
-                  <h2 className="font-display text-2xl font-black text-stone-950">No question data found</h2>
-                  <p className="mt-2 max-w-md text-sm font-semibold leading-6 text-stone-500">
+                  <h2 className="font-display text-2xl font-black text-stone-950 dark:text-white">No question data found</h2>
+                  <p className="mt-2 max-w-md text-sm font-semibold leading-6 text-stone-500 dark:text-stone-400">
                     This attempt exists, but Zi could not find stored answer rows to review.
                   </p>
                 </div>
@@ -846,13 +857,13 @@ export default function ZiWorkspace() {
             ) : (
               <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
                 <aside className="min-w-0 lg:sticky lg:top-0 lg:self-start">
-                  <div className="rounded-2xl border border-stone-200 bg-white p-3 shadow-sm">
+                  <div className="rounded-2xl border border-stone-200 bg-white p-3 shadow-sm dark:border-white/15 dark:bg-[#0A0A0C]">
                     <div className="mb-3 flex items-center justify-between gap-2">
                       <div>
-                        <div className="text-xs font-black uppercase tracking-[0.16em] text-stone-500">
+                        <div className="text-xs font-black uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
                           Questions
                         </div>
-                        <div className="mt-1 text-xs font-semibold text-stone-500">
+                        <div className="mt-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
                           Select one to tutor with Zi
                         </div>
                       </div>
@@ -874,7 +885,7 @@ export default function ZiWorkspace() {
                         );
                       })}
                     </div>
-                    <div className="mt-4 grid gap-2 border-t border-stone-100 pt-3 text-xs font-bold text-stone-500">
+                    <div className="mt-4 grid gap-2 border-t border-stone-100 pt-3 text-xs font-bold text-stone-500 dark:border-white/10 dark:text-stone-400">
                       <div className="flex items-center gap-2"><StatusIcon status="incorrect" /> Incorrect</div>
                       <div className="flex items-center gap-2"><StatusIcon status="skipped" /> Skipped</div>
                       <div className="flex items-center gap-2"><StatusIcon status="correct" /> Correct</div>
@@ -896,8 +907,8 @@ export default function ZiWorkspace() {
                       ))}
                     </div>
                   ) : (
-                    <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-5 text-sm font-semibold leading-6 text-stone-500">
-                      Click <span className="font-black text-stone-950">Explain with Zi</span> or ask a specific doubt below. Zi will use the server-verified question, your selected answer, the correct answer, and any stored explanation.
+                    <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-5 text-sm font-semibold leading-6 text-stone-500 dark:border-white/15 dark:bg-[#121215] dark:text-stone-400">
+                      Click <span className="font-black text-stone-950 dark:text-white">Explain with Zi</span> or ask a specific doubt below. Zi will use the server-verified question, your selected answer, the correct answer, and any stored explanation.
                     </div>
                   )}
                 </div>
@@ -905,13 +916,13 @@ export default function ZiWorkspace() {
             )
           ) : !hasConversation ? (
             <div className="mx-auto flex max-w-4xl flex-col items-center justify-center py-8 text-center sm:py-14">
-              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-200 bg-amber-100 text-amber-700">
+              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-200 bg-amber-100 text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300">
                 <MessagesSquare className="h-6 w-6" strokeWidth={2.2} />
               </div>
-              <h2 className="font-display text-3xl font-black tracking-tight text-stone-950 sm:text-5xl">
+              <h2 className="font-display text-3xl font-black tracking-tight text-stone-950 dark:text-white sm:text-5xl">
                 What are we learning today?
               </h2>
-              <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-stone-600">
+              <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-stone-600 dark:text-stone-400">
                 Ask Zi to explain concepts, structure solutions, compare ideas, or turn confusion into a clean study path.
               </p>
 
@@ -926,13 +937,13 @@ export default function ZiWorkspace() {
                         setInput(card.prompt);
                         textareaRef.current?.focus();
                       }}
-                      className="group min-h-[132px] rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400"
+                      className="group min-h-[132px] rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 dark:border-white/15 dark:bg-[#121215] dark:hover:border-amber-400/50 dark:hover:bg-[#17171d]"
                     >
-                      <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-700 transition-colors group-hover:bg-amber-100">
+                      <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-700 transition-colors group-hover:bg-amber-100 dark:bg-amber-400/10 dark:text-amber-400 dark:group-hover:bg-amber-400/20">
                         <Icon className="h-5 w-5" strokeWidth={2.3} />
                       </span>
-                      <span className="block text-sm font-black text-stone-950">{card.title}</span>
-                      <span className="mt-1 block text-xs font-medium leading-5 text-stone-500">{card.description}</span>
+                      <span className="block text-sm font-black text-stone-950 dark:text-white">{card.title}</span>
+                      <span className="mt-1 block text-xs font-medium leading-5 text-stone-500 dark:text-stone-400">{card.description}</span>
                     </button>
                   );
                 })}
@@ -954,7 +965,7 @@ export default function ZiWorkspace() {
                 key={followUp}
                 type="button"
                 onClick={() => sendMessage(followUp)}
-                className="shrink-0 rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-bold text-stone-600 shadow-sm transition-colors hover:border-amber-300 hover:bg-amber-50 hover:text-stone-950"
+                className="shrink-0 rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-bold text-stone-600 shadow-sm transition-colors hover:border-amber-300 hover:bg-amber-50 hover:text-stone-950 dark:border-white/15 dark:bg-[#121215] dark:text-stone-300 dark:hover:border-amber-400/50 dark:hover:bg-amber-400/10 dark:hover:text-white"
               >
                 {followUp}
               </button>
@@ -963,7 +974,7 @@ export default function ZiWorkspace() {
         ) : null}
 
         {errorBanner ? (
-          <div className="mx-auto mt-3 flex w-full max-w-4xl items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">
+          <div className="mx-auto mt-3 flex w-full max-w-4xl items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 dark:border-red-500/30 dark:bg-red-950/30 dark:text-red-300">
             <CircleAlert className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{errorBanner}</span>
           </div>
@@ -971,7 +982,7 @@ export default function ZiWorkspace() {
 
         <form
           onSubmit={handleSubmit}
-          className="sticky bottom-0 mx-auto mt-3 w-full max-w-4xl rounded-2xl border border-stone-200 bg-white p-2 shadow-[0_-10px_30px_rgba(28,25,23,0.08)]"
+          className="sticky bottom-0 mx-auto mt-3 w-full max-w-4xl rounded-2xl border border-stone-200 bg-white p-2 shadow-[0_-10px_30px_rgba(28,25,23,0.08)] dark:border-white/15 dark:bg-[#0A0A0C] dark:shadow-[0_-10px_30px_rgba(0,0,0,0.8)]"
         >
           <label htmlFor="zi-workspace-composer" className="sr-only">
             Ask Zi a question
@@ -986,12 +997,12 @@ export default function ZiWorkspace() {
               rows={1}
               disabled={isGenerating || reviewLoading || Boolean(reviewError) || (isReviewMode && !selectedAnswer?.id)}
               placeholder={isReviewMode ? "Ask a follow-up about the selected question..." : "Ask Zi to explain, solve, compare, or quiz you..."}
-              className="max-h-40 min-h-12 flex-1 resize-none rounded-xl bg-stone-50 px-3 py-3 text-[0.96rem] font-medium leading-6 text-stone-950 outline-none ring-1 ring-transparent transition focus:bg-white focus:ring-amber-300 disabled:cursor-not-allowed disabled:text-stone-400"
+              className="max-h-40 min-h-12 flex-1 resize-none rounded-xl bg-stone-50 px-3 py-3 text-[0.96rem] font-medium leading-6 text-stone-950 outline-none ring-1 ring-transparent transition focus:bg-white focus:ring-amber-300 disabled:cursor-not-allowed disabled:text-stone-400 dark:bg-[#121215] dark:text-white dark:placeholder:text-stone-500 dark:focus:bg-[#16161c] dark:focus:ring-amber-400/50 dark:disabled:text-stone-600"
             />
             <button
               type="submit"
               disabled={!input.trim() || isGenerating || reviewLoading || Boolean(reviewError) || (isReviewMode && !selectedAnswer?.id)}
-              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-stone-950 shadow-sm transition-colors hover:bg-amber-300 disabled:cursor-not-allowed disabled:bg-stone-200 disabled:text-stone-400"
+              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-stone-950 shadow-sm transition-colors hover:bg-amber-300 disabled:cursor-not-allowed disabled:bg-stone-200 disabled:text-stone-400 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300 dark:disabled:bg-white/10 dark:disabled:text-stone-600"
               aria-label="Send message to Zi"
             >
               {isGenerating ? (

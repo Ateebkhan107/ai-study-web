@@ -24,6 +24,7 @@ function card(chapterId, slug, payload) {
     table_data: null,
     diagram_data: null,
     diagram_svg: null,
+    diagram_image: null,
     is_active: true,
     ...payload,
   };

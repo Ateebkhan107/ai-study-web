@@ -55,14 +55,14 @@ export default function PricingCard({
     <div
       className={`relative rounded-3xl border p-8 shadow-sm transition hover:shadow-xl ${
         isAiMode
-          ? "border-[#c49a45] bg-[#fffcf3] dark:bg-[#1a1712]"
+          ? "border-amber-500/50 bg-[#fffcf3] dark:bg-[#0A0A0C] dark:border-amber-400/40 dark:shadow-[0_0_35px_-10px_rgba(234,179,8,0.2)]"
           : popular
-          ? "border-blue-600 bg-blue-50 dark:bg-blue-950/20"
-          : "border-gray-200 bg-[var(--card)]"
+          ? "border-blue-600 bg-blue-50 dark:bg-[#0A0A0C] dark:border-blue-500/40"
+          : "border-gray-200 dark:border-white/20 bg-[var(--card)]"
       }`}
     >
       {isAiMode && (
-        <span className="absolute right-6 top-6 rounded-full bg-[#c49a45] px-3 py-1 text-xs font-semibold text-white shadow-sm">
+        <span className="absolute right-6 top-6 rounded-full bg-amber-500 px-3 py-1 text-xs font-black text-slate-950 shadow-sm">
           Premium
         </span>
       )}
@@ -76,42 +76,44 @@ export default function PricingCard({
 
       <div className="mt-5">
         <div className="mb-1 flex items-center gap-2">
-          <span className="text-lg font-bold text-gray-400 line-through decoration-2">₹{originalPrice}</span>
+          <span className="text-lg font-bold text-gray-400 dark:text-slate-500 line-through decoration-2">₹{originalPrice}</span>
           <span className="rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-white">
             {discount}% off
           </span>
         </div>
-        <span className="text-5xl font-black font-display">₹{price}</span>
+        <span className="text-5xl font-black font-display">{price ? `₹${price}` : ""}</span>
 
-        <span className="ml-2 text-gray-500">
+        <span className="ml-2 text-gray-500 dark:text-slate-400">
           / {duration}
         </span>
-        <p className="mt-2 text-sm font-semibold text-emerald-600">Limited-time discounted price</p>
+        <p className="mt-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">Limited-time discounted price</p>
       </div>
 
       <ul className="mt-8 space-y-3">
         {features.map((feature) => (
           <li
             key={feature}
-            className="flex items-center gap-2 text-sm"
+            className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"
           >
-            <Check className="h-4 w-4 text-green-600" />
+            <Check className="h-4 w-4 text-emerald-500 shrink-0" />
             {feature}
           </li>
         ))}
       </ul>
 
-      <div className="mt-6 rounded-2xl bg-blue-50 px-3 py-2 text-center text-sm font-bold text-[#1e3a5f]">
+      <div className="mt-6 rounded-2xl bg-blue-50 dark:bg-white/5 px-3 py-2 text-center text-sm font-bold text-[#1e3a5f] dark:text-amber-400">
         {isAiMode ? `${examTrack} AI Mode` : `${examTrack} Pro`}
       </div>
 
       <button
         onClick={handlePayment}
         disabled={loading}
-        className={`mt-8 w-full rounded-xl py-3 font-semibold text-white transition ${
+        className={`mt-8 w-full rounded-xl py-3 font-black text-sm transition ${
           loading
             ? "cursor-not-allowed bg-gray-400"
-            : "bg-[#1e3a5f] hover:opacity-90"
+            : isAiMode
+            ? "bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-300 text-slate-950 shadow-md"
+            : "bg-[#1e3a5f] hover:opacity-90 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-slate-950 text-white shadow-md"
         }`}
       >
         {loading ? "Processing..." : `Upgrade or renew ${isAiMode ? examTrack + " AI Mode" : examTrack + " Pro"}`}

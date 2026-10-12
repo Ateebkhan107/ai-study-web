@@ -27,6 +27,7 @@ function card(chapterId, slug, payload) {
     table_data: null,
     diagram_data: null,
     diagram_svg: null,
+    diagram_image: null,
     is_active: true,
     ...payload,
   };
@@ -259,6 +260,7 @@ function quadraticCards(chapterId) {
           ["$a=1$, $b,c\\in\\mathbb{I}$ and $D$ is a perfect square", "Roots are integral"],
         ],
       },
+      diagram_image: "/images/formula-cards/math/nature-of-roots-flowchart.png",
       importance: 5,
       source_page: 22,
       sort_order: 2,

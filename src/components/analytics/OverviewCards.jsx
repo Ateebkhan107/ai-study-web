@@ -81,7 +81,7 @@ export default function OverviewCards({ stats }) {
         return (
           <div
             key={card.id}
-            className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border-[1.5px] bg-[var(--card)] bg-gradient-to-br ${card.gradient} p-4 shadow-[var(--snb-shadow-interactive)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] dark:bg-[var(--surface)] sm:p-5 ${card.border}`}
+            className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border-[1.5px] bg-[var(--card)] bg-gradient-to-br ${card.gradient} p-4 shadow-[var(--snb-shadow-interactive)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] dark:bg-none dark:bg-[var(--surface)] sm:p-5 ${card.border}`}
           >
             {/* Top Eyebrow Row */}
             <div className="flex items-center justify-between gap-2">

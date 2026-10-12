@@ -306,7 +306,7 @@ export default function ProPage() {
                 <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Select Exam Track:
                 </span>
-                <div className="inline-flex items-center p-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-[#141415] shadow-sm">
+                <div className="inline-flex items-center p-1 rounded-full border border-slate-200 dark:border-white/20 bg-slate-100/90 dark:bg-[#0A0A0C] shadow-sm">
                   <button
                     type="button"
                     onClick={() => handleTrackChange("JEE")}
@@ -334,7 +334,7 @@ export default function ProPage() {
                 </div>
               </div>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-500/30 dark:border-amber-400/20 bg-amber-500/10 dark:bg-amber-400/10 text-xs font-black text-amber-600 dark:text-amber-400 shadow-sm">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-500/30 dark:border-amber-400/30 bg-amber-500/10 dark:bg-amber-400/10 text-xs font-black text-amber-600 dark:text-amber-400 shadow-sm">
                 <Zap className="h-3.5 w-3.5 fill-current" />
                 {selectedTrack === "NEET" ? "NEET Track" : "JEE Track"}
               </span>
@@ -346,7 +346,7 @@ export default function ProPage() {
         <section className="space-y-6 animate-slideUp" style={{ animationDelay: "100ms" }}>
           {/* Plan Selector Buttons Bar */}
           <div className="mx-auto max-w-3xl">
-            <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-white/10 dark:bg-[#141415] sm:grid-cols-4 shadow-sm">
+            <div className="grid grid-cols-2 gap-2.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-2.5 dark:border-white/20 dark:bg-[#0A0A0C] sm:grid-cols-4 shadow-sm">
               {PLANS.map((p) => {
                 const isSelected = selectedPlan === p.id;
                 return (
@@ -357,7 +357,7 @@ export default function ProPage() {
                     className={`relative flex min-h-[78px] flex-col items-center justify-center rounded-xl p-2.5 text-center transition-all duration-200 cursor-pointer ${
                       isSelected
                         ? "bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 font-black shadow-lg ring-2 ring-amber-400/50"
-                        : "hover:bg-white dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"
+                        : "hover:bg-white dark:hover:bg-white/10 text-slate-700 dark:text-slate-300"
                     }`}
                   >
                     {p.badge && (
@@ -386,7 +386,7 @@ export default function ProPage() {
           </div>
 
           {/* Central Featured Pricing Box */}
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800/80 dark:border-white/10 bg-[#141415] text-white p-6 sm:p-8 shadow-2xl">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-slate-800/80 dark:border-white/20 bg-[#0A0A0C] text-white p-6 sm:p-8 shadow-2xl dark:shadow-[0_0_60px_-15px_rgba(234,179,8,0.2)]">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
               {/* Left Column: Details & Price */}
               <div className="space-y-4 text-center md:text-left">
@@ -490,7 +490,7 @@ export default function ProPage() {
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {/* Free Plan */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#141415] flex flex-col justify-between">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/20 dark:bg-[#0A0A0C] flex flex-col justify-between hover:dark:border-white/30 transition-all">
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Free Tier</span>
@@ -516,14 +516,14 @@ export default function ProPage() {
               </div>
               <button
                 disabled
-                className="mt-6 w-full py-3 rounded-2xl bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 text-xs font-bold cursor-default text-center"
+                className="mt-6 w-full py-3 rounded-2xl bg-slate-100 text-slate-500 dark:bg-white/5 dark:text-slate-400 text-xs font-bold cursor-default text-center"
               >
                 Current Default
               </button>
             </div>
 
             {/* PRO Plan */}
-            <div className="relative rounded-3xl border border-amber-500/30 dark:border-amber-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-amber-500/50 flex flex-col justify-between">
+            <div className="relative rounded-3xl border border-amber-500/40 dark:border-amber-400/40 bg-white dark:bg-[#0A0A0C] p-6 shadow-md transition-all duration-200 hover:border-amber-500/70 hover:dark:border-amber-400/60 dark:shadow-[0_0_40px_-10px_rgba(234,179,8,0.2)] flex flex-col justify-between">
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Unlimited {selectedTrack} Prep</span>
@@ -566,7 +566,7 @@ export default function ProPage() {
             </div>
 
             {/* AI Mode Plan */}
-            <div className="relative rounded-3xl border border-amber-500/30 dark:border-amber-500/20 bg-white dark:bg-[#141415] p-6 shadow-md transition-all duration-200 hover:border-amber-500/50 flex flex-col justify-between">
+            <div className="relative rounded-3xl border border-amber-500/40 dark:border-amber-400/40 bg-white dark:bg-[#0A0A0C] p-6 shadow-md transition-all duration-200 hover:border-amber-500/70 hover:dark:border-amber-400/60 dark:shadow-[0_0_40px_-10px_rgba(234,179,8,0.2)] flex flex-col justify-between">
               <div>
                 <div className="mb-4">
                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Complete {selectedTrack} AI Co-pilot</span>
@@ -625,7 +625,7 @@ export default function ProPage() {
               return (
                 <div
                   key={card.title}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-[#141415]"
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-white/20 dark:bg-[#0A0A0C] hover:dark:border-white/35"
                 >
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400">
                     <Icon className="h-6 w-6" />
@@ -644,7 +644,7 @@ export default function ProPage() {
 
         {/* ── Social Proof & Trust Metrics ── */}
         <section className="animate-slideUp" style={{ animationDelay: "250ms" }}>
-          <div className="grid grid-cols-3 gap-3 rounded-3xl border border-slate-200 bg-white p-4 text-center shadow-sm dark:border-white/10 dark:bg-[#141415] sm:p-6">
+          <div className="grid grid-cols-3 gap-3 rounded-3xl border border-slate-200 bg-white p-4 text-center shadow-sm dark:border-white/20 dark:bg-[#0A0A0C] sm:p-6">
             <div className="space-y-1">
               <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
                 <Users className="h-5 w-5" />
@@ -655,7 +655,7 @@ export default function ProPage() {
               </p>
             </div>
 
-            <div className="space-y-1 border-x border-slate-200 dark:border-white/10">
+            <div className="space-y-1 border-x border-slate-200 dark:border-white/15">
               <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <Zap className="h-5 w-5 fill-current" />
               </div>
@@ -688,8 +688,8 @@ export default function ProPage() {
               return (
                 <div
                   key={faq.q}
-                  className={`overflow-hidden rounded-2xl border transition-all duration-200 bg-white dark:bg-[#141415] ${
-                    isOpen ? "border-amber-500/60 dark:border-amber-400/60 shadow-sm" : "border-slate-200 dark:border-white/10"
+                  className={`overflow-hidden rounded-2xl border transition-all duration-200 bg-white dark:bg-[#0A0A0C] ${
+                    isOpen ? "border-amber-500/60 dark:border-amber-400/70 shadow-sm" : "border-slate-200 dark:border-white/20"
                   }`}
                 >
                   <button
@@ -705,7 +705,7 @@ export default function ProPage() {
                     />
                   </button>
                   {isOpen && (
-                    <div className="border-t border-slate-100 dark:border-white/10 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:px-5 sm:pb-5">
+                    <div className="border-t border-slate-100 dark:border-white/15 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:px-5 sm:pb-5">
                       {faq.a}
                     </div>
                   )}
@@ -717,7 +717,7 @@ export default function ProPage() {
 
         {/* ── Bottom Finale CTA Banner ── */}
         <section className="animate-slideUp" style={{ animationDelay: "350ms" }}>
-          <div className="relative overflow-hidden rounded-3xl bg-[#141415] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800/80 dark:border-white/10">
+          <div className="relative overflow-hidden rounded-3xl bg-[#0A0A0C] text-white p-8 text-center shadow-2xl sm:p-12 border border-slate-800/80 dark:border-white/20 dark:shadow-[0_0_60px_-15px_rgba(234,179,8,0.2)]">
             <div className="relative z-10 mx-auto max-w-2xl space-y-5">
               <h2 className="text-3xl font-black font-display text-white sm:text-5xl tracking-tight leading-tight">
                 Ready to Boost Your {isSignedOut ? "JEE or NEET" : selectedTrack} Rank?

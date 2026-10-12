@@ -151,10 +151,43 @@ export default function QuestionCard({ question, index }) {
                 {option.id}
               </span>
 
-              {/* Option Text */}
-              <span className={`flex-1 text-sm ${style.text}`}>
-                {option.text}
-              </span>
+              {/* Option Text & Image */}
+              <div className="flex-1 min-w-0">
+                {(() => {
+                  const optionImage =
+                    option.image ||
+                    option.option_image ||
+                    option.url ||
+                    (option.id === "A" ? question.option_a_image || question.option_images?.[0] : null) ||
+                    (option.id === "B" ? question.option_b_image || question.option_images?.[1] : null) ||
+                    (option.id === "C" ? question.option_c_image || question.option_images?.[2] : null) ||
+                    (option.id === "D" ? question.option_d_image || question.option_images?.[3] : null);
+
+                  const isRedundant = optionImage && option.text && /^(option\s*)?\(?[A-D1-4]\)?$/i.test(String(option.text).trim());
+                  const displayText = isRedundant ? "" : option.text;
+
+                  return (
+                    <>
+                      {displayText ? (
+                        <span className={`block text-sm ${style.text}`}>
+                          {displayText}
+                        </span>
+                      ) : null}
+                      {optionImage ? (
+                        <div className="mt-1.5 inline-block overflow-hidden rounded-lg border border-slate-200 bg-white p-2 dark:bg-white shadow-sm">
+                          <img
+                            src={optionImage}
+                            alt={`Option ${option.id} diagram`}
+                            className="max-h-[140px] w-auto max-w-full object-contain"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ) : null}
+                    </>
+                  );
+                })()}
+              </div>
 
               {/* State Icon */}
               {style.icon}

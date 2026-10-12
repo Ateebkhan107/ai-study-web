@@ -46,6 +46,7 @@ const CARD_SELECT = `
   table_data,
   diagram_data,
   diagram_svg,
+  diagram_image,
   recall_data,
   importance,
   source_page,

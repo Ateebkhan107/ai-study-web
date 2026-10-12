@@ -1,45 +1,30 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Atom,
-  Baby,
-  BarChart3,
-  Box,
-  Brain,
-  CircleDot,
-  Dna,
-  FlaskConical,
-  Gauge,
-  HeartPulse,
-  Layers3,
-  Leaf,
-  Magnet,
-  Microscope,
-  Network,
-  Orbit,
-  Radio,
-  Route,
-  ShieldCheck,
-  Sigma,
-  Sparkles,
-  Sprout,
-  Trees,
-  TrendingUp,
-  Triangle,
-  Waves,
-} from "lucide-react";
-import FormulaChapterProgress from "@/components/formula-cards/FormulaChapterProgress";
-import { getFormulaChaptersForSubject } from "@/lib/formulaCards";
+import { auth } from "@clerk/nextjs/server";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import FormulaSubjectView from "@/components/formula-cards/FormulaSubjectView";
+import { getFormulaChaptersForSubject, getFormulaSubjectsForExam } from "@/lib/formulaCards";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params, searchParams }) {
+  const { subjectSlug } = await params;
+  const query = await searchParams;
+  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
+  const { subject } = await getFormulaChaptersForSubject(subjectSlug, exam);
+
+  if (!subject) return { title: "Formula Cards | PrepZii" };
+
+  return {
+    title: `${subject.name} Formula Cards (${exam}) | PrepZii`,
+    description: `Master high-yield formulas and concepts for ${subject.name} for ${exam} preparation.`,
+  };
+}
 
 const MATHEMATICS_SECTIONS = [
   {
     title: "Algebra",
     description: "Foundations, equations, sequences, binomial, complex & counting",
-    Icon: Sigma,
+    iconName: "Sigma",
     cue: "Core Algebra",
     accentClass: "border-l-indigo-500/80 dark:border-l-indigo-400/80",
     iconContainerClass:
@@ -75,7 +60,7 @@ const MATHEMATICS_SECTIONS = [
   {
     title: "Trigonometry",
     description: "Inverse functions, identities and triangle relations",
-    Icon: Triangle,
+    iconName: "Triangle",
     cue: "Identities & Triangles",
     accentClass: "border-l-violet-500/80 dark:border-l-violet-400/80",
     iconContainerClass:
@@ -97,7 +82,7 @@ const MATHEMATICS_SECTIONS = [
   {
     title: "Coordinate Geometry",
     description: "2D lines, circles, parabolas, ellipses and hyperbolas",
-    Icon: CircleDot,
+    iconName: "CircleDot",
     cue: "2D & Conics",
     accentClass: "border-l-emerald-500/80 dark:border-l-emerald-400/80",
     iconContainerClass:
@@ -124,7 +109,7 @@ const MATHEMATICS_SECTIONS = [
   {
     title: "Calculus",
     description: "Limits, derivatives, applications, definite & indefinite integrals",
-    Icon: TrendingUp,
+    iconName: "TrendingUp",
     cue: "Differential & Integral",
     accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
     iconContainerClass:
@@ -158,7 +143,7 @@ const MATHEMATICS_SECTIONS = [
   {
     title: "Vectors & 3D Geometry",
     description: "Vector algebra, cross products, 3D lines and planes",
-    Icon: Box,
+    iconName: "Box",
     cue: "Space & Geometry",
     accentClass: "border-l-sky-500/80 dark:border-l-sky-400/80",
     iconContainerClass:
@@ -180,7 +165,7 @@ const MATHEMATICS_SECTIONS = [
   {
     title: "Probability & Statistics",
     description: "Random experiments, probability distributions & data dispersion",
-    Icon: BarChart3,
+    iconName: "BarChart3",
     cue: "Chance & Data",
     accentClass: "border-l-rose-500/80 dark:border-l-rose-400/80",
     iconContainerClass:
@@ -205,7 +190,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Measurements & Basics",
     description: "Units, dimensions, errors and practical measurement techniques",
-    Icon: Gauge,
+    iconName: "Gauge",
     cue: "Core Foundations",
     accentClass: "border-l-sky-500/80 dark:border-l-sky-400/80",
     iconContainerClass:
@@ -226,7 +211,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Mechanics",
     description: "Kinematics, Newton's laws, work-energy, rotational dynamics, gravitation & fluids",
-    Icon: Gauge,
+    iconName: "Gauge",
     cue: "Kinematics & Dynamics",
     accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
     iconContainerClass:
@@ -268,7 +253,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Thermodynamics & Waves",
     description: "Heat, kinetic theory, simple harmonic motion and wave mechanics",
-    Icon: Waves,
+    iconName: "Waves",
     cue: "Thermal & Wave Motion",
     accentClass: "border-l-rose-500/80 dark:border-l-rose-400/80",
     iconContainerClass:
@@ -296,7 +281,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Electromagnetism",
     description: "Electrostatics, current electricity, capacitance, magnetism, induction, AC & EM waves",
-    Icon: Magnet,
+    iconName: "Magnet",
     cue: "Fields & Circuits",
     accentClass: "border-l-indigo-500/80 dark:border-l-indigo-400/80",
     iconContainerClass:
@@ -329,7 +314,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Optics",
     description: "Geometrical ray optics, optical instruments and wave optics",
-    Icon: Sparkles,
+    iconName: "Sparkles",
     cue: "Ray & Wave Optics",
     accentClass: "border-l-violet-500/80 dark:border-l-violet-400/80",
     iconContainerClass:
@@ -355,7 +340,7 @@ const PHYSICS_SECTIONS = [
   {
     title: "Modern Physics",
     description: "Atoms, nuclei, dual nature, semiconductors & communication systems",
-    Icon: Atom,
+    iconName: "Atom",
     cue: "Quantum & Electronic Devices",
     accentClass: "border-l-emerald-500/80 dark:border-l-emerald-400/80",
     iconContainerClass:
@@ -386,7 +371,7 @@ const CHEMISTRY_SECTIONS = [
   {
     title: "Physical Chemistry",
     description: "Formula maps, equilibrium, energy and rates",
-    Icon: FlaskConical,
+    iconName: "FlaskConical",
     cue: "Formula / Process",
     range: [1, 10],
     accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
@@ -396,7 +381,7 @@ const CHEMISTRY_SECTIONS = [
   {
     title: "Inorganic Chemistry",
     description: "Periodic patterns, bonding, groups and qualitative facts",
-    Icon: Layers3,
+    iconName: "Layers3",
     cue: "Classification / Facts",
     range: [11, 18],
     accentClass: "border-l-emerald-500/70 dark:border-l-emerald-400/70",
@@ -406,7 +391,7 @@ const CHEMISTRY_SECTIONS = [
   {
     title: "Organic Chemistry",
     description: "Mechanisms, reagents and reaction routes",
-    Icon: Route,
+    iconName: "Route",
     cue: "Reaction Focus",
     range: [19, Infinity],
     accentClass: "border-l-orange-500/80 dark:border-l-orange-400/80",
@@ -419,7 +404,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Diversity",
     description: "Living world, classification and kingdoms",
-    Icon: Network,
+    iconName: "Network",
     cue: "Taxonomy",
     range: [1, 4],
     accentClass: "border-l-emerald-500/70 dark:border-l-emerald-400/70",
@@ -429,7 +414,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Structural Organisation",
     description: "Plant anatomy, morphology and animal tissues",
-    Icon: Microscope,
+    iconName: "Microscope",
     cue: "Structures",
     range: [5, 7],
     accentClass: "border-l-lime-500/70 dark:border-l-lime-400/70",
@@ -439,7 +424,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Cell Biology",
     description: "Cell structure, organelles and division",
-    Icon: Dna,
+    iconName: "Dna",
     cue: "Cell Recall",
     range: [8, 9],
     accentClass: "border-l-sky-500/70 dark:border-l-sky-400/70",
@@ -449,7 +434,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Plant Physiology",
     description: "Transport, nutrition, photosynthesis and growth",
-    Icon: Leaf,
+    iconName: "Leaf",
     cue: "Pathways",
     range: [10, 14],
     accentClass: "border-l-green-500/70 dark:border-l-green-400/70",
@@ -459,7 +444,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Human Physiology",
     description: "Systems, coordination and regulation",
-    Icon: HeartPulse,
+    iconName: "HeartPulse",
     cue: "Mechanisms",
     range: [15, 20],
     accentClass: "border-l-rose-500/70 dark:border-l-rose-400/70",
@@ -469,7 +454,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Reproduction",
     description: "Organisms, flowering plants and human reproduction",
-    Icon: Baby,
+    iconName: "Baby",
     cue: "Sequences",
     range: [21, 24],
     accentClass: "border-l-pink-500/70 dark:border-l-pink-400/70",
@@ -479,7 +464,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Genetics & Evolution",
     description: "Inheritance, molecular genetics and evolution",
-    Icon: Brain,
+    iconName: "Brain",
     cue: "Ratios / DNA",
     range: [25, 27],
     accentClass: "border-l-violet-500/70 dark:border-l-violet-400/70",
@@ -489,7 +474,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Human Welfare",
     description: "Health, food production and useful microbes",
-    Icon: ShieldCheck,
+    iconName: "ShieldCheck",
     cue: "Disease / Use",
     range: [28, 30],
     accentClass: "border-l-teal-500/70 dark:border-l-teal-400/70",
@@ -499,7 +484,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Biotechnology",
     description: "Tools, processes and applications",
-    Icon: Sprout,
+    iconName: "Sprout",
     cue: "Tools",
     range: [31, 32],
     accentClass: "border-l-cyan-500/70 dark:border-l-cyan-400/70",
@@ -509,7 +494,7 @@ const BIOLOGY_SECTIONS = [
   {
     title: "Ecology",
     description: "Populations, ecosystems and conservation",
-    Icon: Trees,
+    iconName: "Trees",
     cue: "Systems",
     range: [33, 35],
     accentClass: "border-l-emerald-600/70 dark:border-l-emerald-300/70",
@@ -536,7 +521,6 @@ function buildMathSections(chapters) {
   const sections = MATHEMATICS_SECTIONS.map((section) => {
     const matchedChapters = [];
 
-    // 1. First add matching predefined slugs in pedagogical order
     if (section.slugs) {
       section.slugs.forEach((slug) => {
         const found = chapters.find((c) => c.slug === slug && remaining.has(c.id));
@@ -547,7 +531,6 @@ function buildMathSections(chapters) {
       });
     }
 
-    // 2. Add any additional chapters matching keywords
     if (section.match) {
       chapters.forEach((chapter) => {
         if (!remaining.has(chapter.id)) return;
@@ -571,7 +554,7 @@ function buildMathSections(chapters) {
     sections.push({
       title: "Additional Topics",
       description: "More mathematics revision decks",
-      Icon: Orbit,
+      iconName: "Orbit",
       cue: "Revision Deck",
       accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
       iconContainerClass:
@@ -589,7 +572,6 @@ function buildPhysicsSections(chapters) {
   const sections = PHYSICS_SECTIONS.map((section) => {
     const matchedChapters = [];
 
-    // 1. First add matching predefined slugs in pedagogical order
     if (section.slugs) {
       section.slugs.forEach((slug) => {
         const found = chapters.find((c) => c.slug === slug && remaining.has(c.id));
@@ -600,7 +582,6 @@ function buildPhysicsSections(chapters) {
       });
     }
 
-    // 2. Add any additional chapters matching keywords
     if (section.match) {
       chapters.forEach((chapter) => {
         if (!remaining.has(chapter.id)) return;
@@ -624,7 +605,7 @@ function buildPhysicsSections(chapters) {
     sections.push({
       title: "Additional Topics",
       description: "More physics formula decks",
-      Icon: Orbit,
+      iconName: "Orbit",
       cue: "Formula Deck",
       accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
       iconContainerClass:
@@ -657,7 +638,7 @@ function getChapterSections(subject, chapters) {
     {
       title: "Study Syllabus",
       description: "Chapter decks ready for revision",
-      Icon: Orbit,
+      iconName: "Orbit",
       cue: "Revision Deck",
       accentClass: "border-l-amber-500/80 dark:border-l-amber-400/80",
       iconContainerClass:
@@ -667,177 +648,53 @@ function getChapterSections(subject, chapters) {
   ];
 }
 
-function getWeightLevel(cardCount, maxCards) {
-  if (!maxCards || cardCount <= 0) return 1;
-  return Math.max(1, Math.min(4, Math.ceil((cardCount / maxCards) * 4)));
-}
-
-function ChapterWeight({ level, cardCount }) {
-  const label =
-    level >= 4
-      ? `Heavy deck (${cardCount} cards)`
-      : level === 3
-      ? `Comprehensive deck (${cardCount} cards)`
-      : level === 2
-      ? `Standard deck (${cardCount} cards)`
-      : `Quick deck (${cardCount} cards)`;
-
-  return (
-    <div className="flex items-end gap-0.5" title={label} aria-label={label}>
-      {[1, 2, 3, 4].map((bar) => (
-        <span
-          key={bar}
-          className={`w-1 rounded-full transition-colors ${
-            bar <= level ? "bg-amber-500 dark:bg-amber-400" : "bg-slate-200 dark:bg-stone-800"
-          }`}
-          style={{ height: `${bar * 2.5 + 4}px` }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default async function FormulaSubjectPage({ params, searchParams }) {
   const { subjectSlug } = await params;
   const query = await searchParams;
-  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
-  const { subject, chapters } = await getFormulaChaptersForSubject(subjectSlug, exam);
+
+  const { userId } = await auth();
+  let profileExam = null;
+  if (userId) {
+    const { data: profile } = await supabaseAdmin
+      .from("user_profiles")
+      .select("exam")
+      .eq("clerk_user_id", userId)
+      .maybeSingle();
+
+    if (profile?.exam) {
+      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
+    }
+  }
+
+  // When profile track is set, strictly use it; otherwise fallback to query param or JEE
+  const exam = profileExam || (String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE");
+
+  let resolvedSubjectSlug = subjectSlug;
+  if (exam === "JEE" && subjectSlug.toLowerCase() === "biology") {
+    resolvedSubjectSlug = "physics";
+  } else if (exam === "NEET" && (subjectSlug.toLowerCase() === "mathematics" || subjectSlug.toLowerCase() === "maths")) {
+    resolvedSubjectSlug = "physics";
+  }
+
+  const [{ subject, chapters }, availableSubjects] = await Promise.all([
+    getFormulaChaptersForSubject(resolvedSubjectSlug, exam),
+    getFormulaSubjectsForExam(exam),
+  ]);
 
   if (!subject) notFound();
 
-  const isBiologyRevision = subject.exam === "NEET" && subject.name === "Biology";
-  const deckTitle = isBiologyRevision ? "Revision Cards" : "Formula Cards";
   const chapterSections = getChapterSections(subject, chapters);
-  const maxCardCount = Math.max(...chapters.map((chapter) => chapter.card_count || 0), 0);
-  const totalCardsCount = chapters.reduce((sum, ch) => sum + (ch.card_count || 0), 0);
 
   return (
-    <main className="min-h-screen bg-[var(--background)] px-4 py-6 text-slate-950 dark:text-white sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl space-y-6 sm:space-y-7">
-        <header className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs font-bold sm:text-sm">
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-slate-600 transition-colors hover:text-slate-950 dark:text-stone-400 dark:hover:text-amber-300"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Back to Dashboard</span>
-            </Link>
-            <span className="text-slate-300 dark:text-stone-700">•</span>
-            <Link
-              href="/formula-cards"
-              className="text-slate-500 transition-colors hover:text-slate-900 dark:text-stone-400 dark:hover:text-amber-300"
-            >
-              {deckTitle}
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-amber-700 dark:text-amber-400 sm:text-[11px]">
-                {subject.exam} Syllabus
-              </p>
-              <div className="mt-1.5 flex flex-wrap items-baseline gap-3">
-                <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-5xl font-display">
-                  {subject.name}
-                </h1>
-                {chapters.length > 0 && (
-                  <span className="inline-flex items-center rounded-md border border-slate-200/80 bg-slate-100/80 px-2 py-0.5 text-xs font-bold text-slate-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300 tabular-nums">
-                    {chapters.length} {chapters.length === 1 ? "chapter" : "chapters"}
-                  </span>
-                )}
-                {totalCardsCount > 0 && (
-                  <span className="inline-flex items-center rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-xs font-bold text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 tabular-nums">
-                    {totalCardsCount} cards
-                  </span>
-                )}
-              </div>
-              <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-slate-600 dark:text-stone-300 sm:text-base">
-                Pick a chapter to open the interactive {isBiologyRevision ? "revision" : "formula"} deck. Structured by syllabus units for targeted {subject.exam || exam} revision.
-              </p>
-            </div>
-          </div>
-        </header>
-
-        {chapters.length > 0 ? (
-          <section className="space-y-6 sm:space-y-7">
-            {chapterSections.map(
-              ({ title, description, Icon, cue, accentClass, iconContainerClass, chapters: sectionChapters }) => (
-                <div key={title} className="space-y-3">
-                  <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-2 dark:border-stone-800/60">
-                    <div className="flex min-w-0 items-center gap-2.5">
-                      <span
-                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${
-                          iconContainerClass ||
-                          "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-400"
-                        }`}
-                      >
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <div className="min-w-0">
-                        <h2 className="text-sm font-black uppercase tracking-[0.14em] text-slate-900 dark:text-stone-100">
-                          {title}
-                        </h2>
-                        <p className="mt-0.5 text-xs font-medium text-slate-500 dark:text-stone-400">
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-2">
-                      {cue && (
-                        <span className="hidden rounded-md border border-slate-200/80 bg-slate-50/80 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-slate-600 dark:border-stone-800 dark:bg-stone-900/80 dark:text-stone-400 sm:inline-flex">
-                          {cue}
-                        </span>
-                      )}
-                      <span className="rounded-md border border-slate-200/60 bg-white px-2 py-0.5 text-xs font-bold tabular-nums text-slate-600 dark:border-stone-800 dark:bg-[#141414] dark:text-stone-400">
-                        {sectionChapters.length} {sectionChapters.length === 1 ? "chapter" : "chapters"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {sectionChapters.map((chapter) => {
-                      const cardCount = chapter.card_count || 0;
-                      const weightLevel = getWeightLevel(cardCount, maxCardCount);
-
-                      return (
-                        <Link
-                          key={chapter.id}
-                          href={`/formula-cards/${subject.slug}/${chapter.slug}?exam=${subject.exam}`}
-                          className={`prepzii-interactive group flex flex-col justify-between rounded-xl border border-l-[3px] border-slate-200/80 bg-white p-3.5 transition-all duration-150 hover:border-amber-400/80 hover:bg-amber-50/20 hover:shadow-sm dark:border-stone-800/80 dark:bg-[#131313] dark:hover:border-stone-700 dark:hover:bg-[#161616] ${
-                            accentClass || ""
-                          }`}
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="min-w-0 flex-1">
-                              <h3 className="truncate text-sm font-bold text-slate-900 transition-colors group-hover:text-amber-700 dark:text-stone-100 dark:group-hover:text-amber-300">
-                                {chapter.title}
-                              </h3>
-                            </div>
-
-                            <div className="flex shrink-0 items-center gap-2 pt-0.5">
-                              <ChapterWeight level={weightLevel} cardCount={cardCount} />
-                              <ArrowRight className="prepzii-interactive-icon h-4 w-4 text-slate-400 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:text-stone-600 dark:group-hover:text-amber-400" />
-                            </div>
-                          </div>
-
-                          <FormulaChapterProgress chapterId={chapter.id} cardCount={cardCount} />
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              )
-            )}
-          </section>
-        ) : (
-          <section className="rounded-xl border border-dashed border-slate-200 bg-white/60 p-8 text-center dark:border-stone-800 dark:bg-[#131313]">
-            <p className="text-sm font-medium text-slate-500 dark:text-stone-400">
-              {deckTitle} for {subject.name} are not available yet.
-            </p>
-          </section>
-        )}
-      </div>
+    <main className="min-h-screen bg-[var(--background)] py-4 text-slate-950 dark:text-white">
+      <FormulaSubjectView
+        subject={subject}
+        chapters={chapters}
+        sections={chapterSections}
+        availableSubjects={availableSubjects}
+        exam={exam}
+        hasProfileTrack={Boolean(profileExam)}
+      />
     </main>
   );
 }

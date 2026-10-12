@@ -479,12 +479,12 @@ export default function JEEMainPredictor({ stats }) {
                     </h4>
                     <div className="space-y-2">
                       {matchedColleges.likely.map((c, i) => (
-                        <div key={i} className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
-                          <div>
+                        <div key={i} className="flex justify-between items-start sm:items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
+                          <div className="min-w-0 flex-1">
                             <p className="text-xs font-bold text-slate-900 dark:text-slate-100">{c.institute_name}</p>
-                            <p className="text-[10px] text-slate-500 truncate w-48">{c.academic_program_name}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug" title={c.academic_program_name}>{c.academic_program_name}</p>
                           </div>
-                          <p className="text-[10px] font-medium text-slate-400">Closing: {c.closing_rank}</p>
+                          <p className="text-[10px] font-medium text-slate-400 shrink-0 text-right whitespace-nowrap">Closing: {c.closing_rank}</p>
                         </div>
                       ))}
                     </div>
@@ -498,12 +498,12 @@ export default function JEEMainPredictor({ stats }) {
                     </h4>
                     <div className="space-y-2">
                       {matchedColleges.possible.map((c, i) => (
-                        <div key={i} className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
-                          <div>
+                        <div key={i} className="flex justify-between items-start sm:items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
+                          <div className="min-w-0 flex-1">
                             <p className="text-xs font-bold text-slate-900 dark:text-slate-100">{c.institute_name}</p>
-                            <p className="text-[10px] text-slate-500 truncate w-48">{c.academic_program_name}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug" title={c.academic_program_name}>{c.academic_program_name}</p>
                           </div>
-                          <p className="text-[10px] font-medium text-slate-400">Closing: {c.closing_rank}</p>
+                          <p className="text-[10px] font-medium text-slate-400 shrink-0 text-right whitespace-nowrap">Closing: {c.closing_rank}</p>
                         </div>
                       ))}
                     </div>
@@ -517,12 +517,12 @@ export default function JEEMainPredictor({ stats }) {
                     </h4>
                     <div className="space-y-2">
                       {matchedColleges.stretch.map((c, i) => (
-                        <div key={i} className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
-                          <div>
+                        <div key={i} className="flex justify-between items-start sm:items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700">
+                          <div className="min-w-0 flex-1">
                             <p className="text-xs font-bold text-slate-900 dark:text-slate-100">{c.institute_name}</p>
-                            <p className="text-[10px] text-slate-500 truncate w-48">{c.academic_program_name}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug" title={c.academic_program_name}>{c.academic_program_name}</p>
                           </div>
-                          <p className="text-[10px] font-medium text-slate-400">Closing: {c.closing_rank}</p>
+                          <p className="text-[10px] font-medium text-slate-400 shrink-0 text-right whitespace-nowrap">Closing: {c.closing_rank}</p>
                         </div>
                       ))}
                     </div>

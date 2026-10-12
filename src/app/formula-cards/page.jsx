@@ -15,7 +15,7 @@ const SUBJECT_ICONS = {
 
 async function getPreferredExam() {
   const { userId } = await auth();
-  if (!userId) return "JEE";
+  if (!userId) return null;
 
   const { data } = await supabaseAdmin
     .from("user_profiles")
@@ -23,7 +23,7 @@ async function getPreferredExam() {
     .eq("clerk_user_id", userId)
     .maybeSingle();
 
-  return String(data?.exam || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
+  return data?.exam ? (String(data.exam).toUpperCase() === "NEET" ? "NEET" : "JEE") : null;
 }
 
 function SubjectGroup({ exam, subjects, preferred }) {
@@ -76,16 +76,12 @@ export default async function FormulaCardsPage() {
     getFormulaSubjectsForExam("JEE"),
     getFormulaSubjectsForExam("NEET"),
   ]);
-  const orderedGroups =
-    preferredExam === "NEET"
-      ? [
-          ["NEET", neetSubjects],
-          ["JEE", jeeSubjects],
-        ]
-      : [
-          ["JEE", jeeSubjects],
-          ["NEET", neetSubjects],
-        ];
+  const orderedGroups = preferredExam
+    ? [[preferredExam, preferredExam === "NEET" ? neetSubjects : jeeSubjects]]
+    : [
+        ["JEE", jeeSubjects],
+        ["NEET", neetSubjects],
+      ];
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-4 py-6 text-slate-950 dark:text-white sm:px-6 lg:px-8">

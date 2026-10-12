@@ -59,16 +59,12 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
   const greetingName = getZiGreetingName(user);
   const remainingFreePrompts = freePromptState.remaining;
 
-  useEffect(() => {
-    setFreePromptState((current) =>
-      current.sourceRemaining === usageRemaining
-        ? current
-        : {
-            sourceRemaining: usageRemaining,
-            remaining: usageRemaining,
-          }
-    );
-  }, [usageRemaining]);
+  if (freePromptState.sourceRemaining !== usageRemaining) {
+    setFreePromptState({
+      sourceRemaining: usageRemaining,
+      remaining: usageRemaining,
+    });
+  }
 
   const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0;
 
@@ -89,6 +85,23 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
     return () => {
       abortControllerRef.current?.abort();
     };
+  }, []);
+
+  const sendMessageRef = useRef(null);
+
+  useEffect(() => {
+    const handleOpenZi = (event) => {
+      setIsOpen(true);
+      const prompt = event?.detail?.prompt;
+      if (prompt && sendMessageRef.current) {
+        setTimeout(() => {
+          sendMessageRef.current?.(prompt);
+        }, 100);
+      }
+    };
+
+    window.addEventListener("prepzii:open-zi", handleOpenZi);
+    return () => window.removeEventListener("prepzii:open-zi", handleOpenZi);
   }, []);
 
   const buildRequestMessages = (nextUserMessage) => {
@@ -253,6 +266,10 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
       setIsGenerating(false);
     }
   };
+
+  useEffect(() => {
+    sendMessageRef.current = sendMessage;
+  });
 
   const isSolvingSession = (pageContext.pageType === "test" || pageContext.pageType === "pyq") && pathname?.includes("/session");
   const isZiWorkspace = pathname === "/zi";

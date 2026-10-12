@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function ZiPage() {
   return (
-    <Suspense fallback={<div className="min-h-[70vh] bg-[#fbfaf7]" />}>
+    <Suspense fallback={<div className="min-h-[70vh] bg-[#fbfaf7] dark:bg-black" />}>
       <ZiWorkspace />
     </Suspense>
   );

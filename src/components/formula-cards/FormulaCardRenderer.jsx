@@ -1,3 +1,4 @@
+import Image from "next/image";
 import MathText from "@/components/MathText";
 import MotionDiagram from "./MotionDiagram";
 
@@ -193,8 +194,37 @@ function RecallSection({ card }) {
   );
 }
 
+function CardDiagramImage({ image, title }) {
+  const src = typeof image === "string" ? image : image?.src || image?.url;
+  const imageTitle = typeof image === "object" ? image?.title : null;
+  const alt = typeof image === "object" ? image?.alt || imageTitle || title || "Handbook diagram" : title || "Handbook diagram";
+
+  if (!src) return null;
+
+  return (
+    <div className="overflow-hidden rounded-xl border border-slate-200/90 bg-white dark:border-stone-800/90 dark:bg-stone-900/40 shadow-xs">
+      {imageTitle && (
+        <div className="border-b border-slate-100 dark:border-stone-800/60 bg-slate-50/70 dark:bg-stone-900/60 px-3 py-1.5 text-center text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400">
+          {imageTitle}
+        </div>
+      )}
+      <div className="flex justify-center items-center bg-white p-3 sm:p-4 rounded-lg">
+        <Image
+          src={src}
+          alt={alt}
+          width={800}
+          height={500}
+          unoptimized
+          className="h-auto max-h-72 w-auto max-w-full object-contain filter contrast-[1.05]"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function FormulaCardRenderer({ card }) {
   const isPhysicsCard = String(card?.chapter_id || "").includes("-physics-");
+  const diagramImg = card?.diagram_image || card?.diagram_data?.image_url;
 
   return (
     <article className="relative min-h-[260px] sm:min-h-[300px] overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200/90 bg-[#FFFDF8] dark:border-stone-800/90 dark:bg-[#151515] shadow-sm dark:shadow-none">
@@ -239,7 +269,14 @@ export default function FormulaCardRenderer({ card }) {
 
           <DataTable table={card.table_data} />
 
-          {card.diagram_data?.type && <MotionDiagram type={card.diagram_data.type} compact={isPhysicsCard} />}
+          {diagramImg ? (
+            <CardDiagramImage
+              image={diagramImg}
+              title={card.diagram_data?.title}
+            />
+          ) : card.diagram_data?.type ? (
+            <MotionDiagram type={card.diagram_data.type} compact={isPhysicsCard} />
+          ) : null}
 
           <Variables variables={card.variables} />
           <Conditions conditions={card.conditions} />

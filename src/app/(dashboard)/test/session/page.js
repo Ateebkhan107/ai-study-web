@@ -117,7 +117,7 @@ const QuestionPalette = memo(function QuestionPalette({
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
         Question Palette
       </p>
-      <div className="grid max-h-[60vh] grid-cols-5 gap-1.5 overflow-y-auto pr-1 sm:max-h-none">
+      <div className="grid max-h-[60vh] grid-cols-5 gap-1.5 overflow-y-auto pr-1 sm:max-h-none content-start">
         {questions.map((question, index) => {
           const value = answers[question.id];
           const isAnswered = hasAnswer(value);
@@ -187,6 +187,11 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
   onNumericalChange,
   onClear,
   onToggleReview,
+  onPrev,
+  onNext,
+  onMarkForReviewAndNext,
+  hasPrev,
+  hasNext,
 }) {
   if (!activeQuestion) return null;
   const chapterLabel = activeQuestion.chapter && activeQuestion.chapter !== "Unmapped"
@@ -194,114 +199,186 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
     : "";
 
   return (
-    <div className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] sm:p-6 lg:p-8 animate-slideUp" style={{ animationDelay: "75ms" }}>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4 dark:border-[var(--border-subtle)] sm:mb-6">
+    <div className="min-w-0 flex-1 flex flex-col h-full min-h-0 rounded-xl border border-slate-200 bg-white shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] overflow-hidden animate-slideUp">
+      {/* Top Meta Bar */}
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 px-4 py-2.5 sm:px-6 sm:py-3 dark:border-[var(--border-subtle)]">
         <div>
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
-          Question {currentIdx + 1} of {totalQuestions}
-        </span>
-        <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-400">
-          {activeQuestion.subject}{chapterLabel}
-        </p>
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+            Question {currentIdx + 1} of {totalQuestions}
+          </span>
+          <p className="mt-0.5 text-xs font-normal text-slate-500 dark:text-slate-400 truncate max-w-[280px] sm:max-w-md">
+            {activeQuestion.subject}{chapterLabel}
+          </p>
         </div>
         <button
           type="button"
           onClick={() => onToggleReview(activeQuestion.id)}
-          className={`prepzii-interactive inline-flex min-h-9 items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold ${
+          className={`prepzii-interactive inline-flex min-h-8.5 items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-semibold ${
             isMarked
               ? "border-brand/70 bg-brand/10 text-slate-900 dark:text-brand"
               : "border-slate-200 bg-transparent text-slate-600 hover:border-brand/50 hover:text-slate-900 dark:border-[var(--border-subtle)] dark:text-slate-300 dark:hover:text-white"
           }`}
         >
           <BookmarkIcon filled={isMarked} />
-          {isMarked ? "Marked for Review" : "Mark for Review"}
+          <span>{isMarked ? "Marked for Review" : "Mark for Review"}</span>
         </button>
       </div>
 
-      <MathText className="mb-5 min-w-0 text-[15px] font-medium leading-8 text-slate-900 dark:text-white sm:mb-8 sm:text-lg lg:text-xl">
-        {activeQuestion.text}
-      </MathText>
+      {/* Main Question + Options Body (Internal Scroll If Overflow) */}
+      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-4 py-3 sm:px-6 sm:py-4">
+        <MathText className="mb-3 sm:mb-4 min-w-0 text-[15px] font-medium leading-relaxed text-slate-900 dark:text-white sm:text-base lg:text-[17px]">
+          {activeQuestion.text}
+        </MathText>
 
-      {activeQuestion.question_image && (
-        <div className="mb-5 inline-block overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-[var(--border-subtle)] dark:bg-white sm:mb-8">
-          <img
-            src={activeQuestion.question_image}
-            alt="Question visual"
-            className="mx-auto h-auto max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] object-contain"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      )}
+        {activeQuestion.question_image && (
+          <div className="mb-3 sm:mb-4 inline-block overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-[var(--border-subtle)] dark:bg-white">
+            <img
+              src={activeQuestion.question_image}
+              alt="Question visual"
+              className="mx-auto h-auto max-h-[140px] sm:max-h-[160px] lg:max-h-[180px] w-auto max-w-[440px] object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
 
-      {String(activeQuestion.question_type || "").toUpperCase() === "NUMERICAL" ? (
-        <div className="max-w-xl">
-          <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
-            Enter numerical answer
-          </label>
-          <input
-            type="text"
-            inputMode="decimal"
-            value={selectedAnswer ?? ""}
-            onChange={(event) => onNumericalChange(activeQuestion.id, event.target.value)}
-            className="prepzii-interactive w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40 dark:text-white"
-            placeholder="Enter answer"
-          />
-        </div>
-      ) : (
-      <div className="space-y-2">
-        {activeQuestion.options.map((option, optionIndex) => {
-          const isMultipleCorrect =
-            String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE_CORRECT" ||
-            String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE CORRECT";
-          const isSelected = isMultipleCorrect
-            ? Array.isArray(selectedAnswer) && selectedAnswer.includes(optionIndex)
-            : selectedAnswer === optionIndex;
+        {String(activeQuestion.question_type || "").toUpperCase() === "NUMERICAL" ? (
+          <div className="max-w-xl">
+            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500">
+              Enter numerical answer
+            </label>
+            <input
+              type="text"
+              inputMode="decimal"
+              value={selectedAnswer ?? ""}
+              onChange={(event) => onNumericalChange(activeQuestion.id, event.target.value)}
+              className="prepzii-interactive w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-base font-semibold text-slate-900 outline-none focus:border-brand dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/40 dark:text-white"
+              placeholder="Enter answer"
+            />
+          </div>
+        ) : (() => {
+          const hasAnyOptionImages = Boolean(
+            activeQuestion.option_images?.some(Boolean) ||
+            activeQuestion.option_a_image ||
+            activeQuestion.option_b_image ||
+            activeQuestion.option_c_image ||
+            activeQuestion.option_d_image
+          );
 
           return (
-            <button
-              key={`${activeQuestion.id}-${optionIndex}`}
-              onClick={() => onSelect(activeQuestion, optionIndex)}
-              className={`prepzii-interactive group flex w-full cursor-pointer items-start gap-3 rounded-xl border-[1.5px] px-3.5 py-3 text-left transition-all duration-150 sm:gap-4 sm:px-4 sm:py-3.5 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"}
-                ${
-                  isSelected
-                    ? "border-[var(--snb-border-selected)] bg-[#FEF9C3] text-slate-950 dark:bg-amber-400/15 dark:text-white"
-                    : "border-[var(--snb-border-interactive)] bg-white text-slate-700 hover:border-[var(--snb-border-interactive-hover)] hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/45"
-                }`}
-            >
-              <span
-                className={`prepzii-interactive-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-sm font-bold sm:h-8 sm:w-8
-                  ${
-                    isSelected
-                      ? "border-[#9A7407] bg-brand text-slate-950 shadow-[1px_1px_0px_rgba(30,42,68,0.2)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.6)]"
-                      : "border-slate-300 text-slate-600 group-hover:border-slate-400 dark:border-slate-600 dark:text-slate-400"
-                  }`}
-              >
-                {LETTERS[optionIndex]}
-              </span>
-              <MathText
-                className={`min-w-0 text-sm font-medium sm:text-base ${
-                  isSelected
-                    ? "text-slate-950 dark:text-white [&_*]:!text-slate-950 dark:[&_*]:!text-white"
-                    : "text-inherit"
-                }`}
-              >
-                {option}
-              </MathText>
-            </button>
-          );
-        })}
-      </div>
-      )}
+            <div className={hasAnyOptionImages ? "grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3" : "space-y-1.5 sm:space-y-2"}>
+              {activeQuestion.options.map((option, optionIndex) => {
+                const isMultipleCorrect =
+                  String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE_CORRECT" ||
+                  String(activeQuestion.question_type || "").toUpperCase() === "MULTIPLE CORRECT";
+                const isSelected = isMultipleCorrect
+                  ? Array.isArray(selectedAnswer) && selectedAnswer.includes(optionIndex)
+                  : selectedAnswer === optionIndex;
 
-      {selectedAnswer !== undefined && (
-        <button
-          onClick={() => onClear(activeQuestion.id)}
-          className="prepzii-interactive mt-4 text-xs font-semibold text-slate-500 hover:text-rose-500 dark:text-slate-500"
-        >
-          Clear Selection
-        </button>
-      )}
+                const optionImage =
+                  activeQuestion.option_images?.[optionIndex] ||
+                  (optionIndex === 0 ? activeQuestion.option_a_image : null) ||
+                  (optionIndex === 1 ? activeQuestion.option_b_image : null) ||
+                  (optionIndex === 2 ? activeQuestion.option_c_image : null) ||
+                  (optionIndex === 3 ? activeQuestion.option_d_image : null) ||
+                  (typeof option === "object" ? option?.image || option?.url : null);
+
+                const optionText = typeof option === "object" ? option?.text || option?.label || "" : option;
+                const isRedundantLabel = optionImage && optionText && /^(option\s*)?\(?[A-D1-4]\)?$/i.test(String(optionText).trim());
+                const displayOptionText = isRedundantLabel ? "" : optionText;
+
+                return (
+                  <button
+                    key={`${activeQuestion.id}-${optionIndex}`}
+                    onClick={() => onSelect(activeQuestion, optionIndex)}
+                    className={`prepzii-interactive group flex w-full cursor-pointer items-start gap-2.5 rounded-xl border-[1.5px] px-3.5 py-2.5 text-left transition-all duration-150 sm:gap-3 sm:px-4 sm:py-3 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"}
+                      ${
+                        isSelected
+                          ? "border-[var(--snb-border-selected)] bg-[#FEF9C3] text-slate-950 dark:bg-amber-400/15 dark:text-white"
+                          : "border-[var(--snb-border-interactive)] bg-white text-slate-700 hover:border-[var(--snb-border-interactive-hover)] hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/45"
+                      }`}
+                  >
+                    <span
+                      className={`prepzii-interactive-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-xs font-bold
+                        ${
+                          isSelected
+                            ? "border-[#9A7407] bg-brand text-slate-950 shadow-[1px_1px_0px_rgba(30,42,68,0.2)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.6)]"
+                            : "border-slate-300 text-slate-600 group-hover:border-slate-400 dark:border-slate-600 dark:text-slate-400"
+                        }`}
+                    >
+                      {LETTERS[optionIndex]}
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      {displayOptionText ? (
+                        <MathText
+                          className={`min-w-0 text-sm font-medium sm:text-[15px] pt-0.5 ${
+                            isSelected
+                              ? "text-slate-950 dark:text-white [&_*]:!text-slate-950 dark:[&_*]:!text-white"
+                              : "text-inherit"
+                          }`}
+                        >
+                          {displayOptionText}
+                        </MathText>
+                      ) : null}
+
+                      {optionImage && (
+                        <div className="mt-1.5 inline-block overflow-hidden rounded-lg border border-slate-200/80 bg-white p-2 dark:border-stone-800 dark:bg-white shadow-sm">
+                          <img
+                            src={optionImage}
+                            alt={`Option ${LETTERS[optionIndex]} diagram`}
+                            className="max-h-[140px] sm:max-h-[160px] w-auto max-w-full object-contain"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          );
+        })()}
+      </div>
+
+      {/* Permanently Docked Navigation Toolbar (Zero Page Scroll) */}
+      <div className="shrink-0 flex items-center justify-between gap-2 border-t border-slate-200 bg-slate-50/80 px-3 py-2 sm:gap-3 sm:px-6 sm:py-2.5 dark:border-[var(--border-subtle)] dark:bg-[var(--surface-elevated)]/30 overflow-x-hidden">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onPrev}
+            disabled={!hasPrev}
+            className="prepzii-interactive min-h-9 rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:px-5"
+          >
+            ← Previous
+          </button>
+          {selectedAnswer !== undefined && (
+            <button
+              onClick={() => onClear(activeQuestion.id)}
+              className="prepzii-interactive min-h-9 rounded-lg border border-transparent px-2.5 py-1.5 text-xs font-semibold text-slate-500 hover:text-rose-500 dark:text-slate-400"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onMarkForReviewAndNext}
+            disabled={!hasNext}
+            className="prepzii-interactive hidden min-h-9 rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:inline-flex sm:px-5"
+          >
+            Mark for Review &amp; Next
+          </button>
+          <button
+            onClick={onNext}
+            disabled={!hasNext}
+            className="prepzii-interactive min-h-9 rounded-lg bg-brand px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-brand-hover sm:px-5"
+          >
+            Save &amp; Next →
+          </button>
+        </div>
+      </div>
     </div>
   );
 });
@@ -585,7 +662,7 @@ function TestSessionContent() {
 
   // Active Test UI
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
+    <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       {finishing ? (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/25 backdrop-blur-[2px] dark:bg-black/35">
           <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-lg dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
@@ -595,10 +672,10 @@ function TestSessionContent() {
         </div>
       ) : null}
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-[#fffdf7]/95 px-2.5 py-2 sm:px-6 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/95">
+      <header className="shrink-0 z-50 border-b border-slate-200 bg-[#fffdf7]/95 px-3 py-2 sm:px-6 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2 sm:gap-4">
-            <Logo size={28} showText={true} className="hidden sm:flex" />
+            <Logo size={36} showText={true} className="hidden sm:flex" />
             <div className="hidden h-6 w-px bg-slate-200 dark:bg-[var(--border-subtle)] sm:block" />
             <span className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500 sm:block">
               {mode === "quick" ? "Quick Session" : "Custom Test"}
@@ -607,7 +684,7 @@ function TestSessionContent() {
 
           {/* Timer */}
           <div
-              className={`flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors duration-150 sm:gap-2 sm:px-4 ${
+              className={`flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm font-semibold tabular-nums transition-colors duration-150 sm:gap-2 sm:px-4 sm:py-2 ${
               isTimerDanger
                 ? "border-rose-200 bg-rose-50 text-rose-600 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-400"
                 : "border-slate-200 bg-white text-slate-900 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-white"
@@ -621,7 +698,7 @@ function TestSessionContent() {
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="prepzii-interactive inline-flex min-h-9 items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-2 text-xs font-semibold text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
+              className="prepzii-interactive inline-flex min-h-9 items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -642,7 +719,7 @@ function TestSessionContent() {
               onClick={handleSubmit}
               disabled={finishing}
               aria-busy={finishing}
-              className="prepzii-interactive inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2.5 text-sm font-semibold text-slate-950 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
+              className="prepzii-interactive inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-slate-950 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
             >
               {finishing ? (
                 "Submitting..."
@@ -657,7 +734,7 @@ function TestSessionContent() {
         </div>
       </header>
 
-      <main className="mx-auto grid w-full max-w-7xl min-w-0 flex-1 grid-cols-1 gap-3 p-2.5 pb-28 sm:gap-5 sm:p-6 sm:pb-28 lg:grid-cols-4 lg:pb-6">
+      <main className="mx-auto flex-1 min-h-0 w-full max-w-7xl min-w-0 grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-4 p-2.5 sm:p-4 overflow-hidden">
         {/* ── Question Palette ── */}
         <aside className="hidden lg:col-span-1 lg:order-1 lg:block">
           <QuestionPalette
@@ -670,8 +747,8 @@ function TestSessionContent() {
           />
         </aside>
 
-        {/* ── Question Content ── */}
-        <section className="min-w-0 lg:col-span-3 flex flex-col order-1 lg:order-2">
+        {/* ── Question Content & Docked Action Bar ── */}
+        <section className="min-w-0 lg:col-span-3 flex flex-col h-full min-h-0 order-1 lg:order-2">
           <TestQuestionPanel
             activeQuestion={activeQ}
             currentIdx={currentIdx}
@@ -682,32 +759,12 @@ function TestSessionContent() {
             onNumericalChange={handleNumericalChange}
             onClear={handleClearSelection}
             onToggleReview={handleToggleReview}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onMarkForReviewAndNext={handleMarkForReviewAndNext}
+            hasPrev={currentIdx > 0}
+            hasNext={currentIdx < questions.length - 1}
           />
-
-          {/* Navigation */}
-          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-2 border-t border-slate-200 bg-[#fffdf7]/95 px-3 py-3 dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/95 sm:gap-3 sm:px-6 lg:static lg:mt-5 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 animate-slideUp" style={{ animationDelay: "150ms" }}>
-            <button
-              onClick={handlePrev}
-              disabled={currentIdx === 0}
-              className="prepzii-interactive min-h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:flex-none sm:px-6"
-            >
-              ← Previous
-            </button>
-            <button
-              onClick={handleMarkForReviewAndNext}
-              disabled={currentIdx === questions.length - 1}
-              className="prepzii-interactive hidden min-h-11 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 hover:border-brand/50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-slate-200 sm:inline-flex"
-            >
-              Mark for Review &amp; Next
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIdx === questions.length - 1}
-              className="prepzii-interactive min-h-11 flex-1 rounded-lg bg-brand px-4 py-3 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-brand-hover sm:flex-none sm:px-6"
-            >
-              Save & Next →
-            </button>
-          </div>
         </section>
       </main>
 

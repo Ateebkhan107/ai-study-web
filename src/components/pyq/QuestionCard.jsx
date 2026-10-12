@@ -180,29 +180,54 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
         >
           {/* Options */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-            {q.options.map((opt, idx) => (
-              <button
-                key={idx}
-                className={optionClass(idx)}
-                onClick={(e) => handleSelectOption(e, idx)}
-                disabled={q.selected !== null}
-              >
-                <span
-                  className={`w-6 h-6 flex-shrink-0 rounded-full border-2 flex items-center justify-center text-[10px] font-black
-                    ${q.selected === null
-                      ? "border-gray-300 dark:border-gray-600 text-gray-500"
-                      : idx === q.correct
-                      ? "border-green-500 text-green-700 dark:text-green-400"
-                      : idx === q.selected
-                      ? "border-red-500 text-red-700 dark:text-red-400"
-                      : "border-gray-200 dark:border-[var(--border)] text-gray-400"
-                    }`}
+            {q.options.map((opt, idx) => {
+              const optImg =
+                q.option_images?.[idx] ||
+                (idx === 0 ? q.option_a_image : null) ||
+                (idx === 1 ? q.option_b_image : null) ||
+                (idx === 2 ? q.option_c_image : null) ||
+                (idx === 3 ? q.option_d_image : null);
+
+              const isRedundantLabel = optImg && opt && /^(option\s*)?\(?[A-D1-4]\)?$/i.test(String(opt).trim());
+              const displayOpt = isRedundantLabel ? "" : opt;
+
+              return (
+                <button
+                  key={idx}
+                  className={optionClass(idx)}
+                  onClick={(e) => handleSelectOption(e, idx)}
+                  disabled={q.selected !== null}
                 >
-                  {LETTERS[idx]}
-                </span>
-                {opt}
-              </button>
-            ))}
+                  <span
+                    className={`w-6 h-6 flex-shrink-0 rounded-full border-2 flex items-center justify-center text-[10px] font-black
+                      ${q.selected === null
+                        ? "border-gray-300 dark:border-gray-600 text-gray-500"
+                        : idx === q.correct
+                        ? "border-green-500 text-green-700 dark:text-green-400"
+                        : idx === q.selected
+                        ? "border-red-500 text-red-700 dark:text-red-400"
+                        : "border-gray-200 dark:border-[var(--border)] text-gray-400"
+                      }`}
+                  >
+                    {LETTERS[idx]}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    {displayOpt ? <span>{displayOpt}</span> : null}
+                    {optImg ? (
+                      <div className="mt-1 inline-block overflow-hidden rounded-lg border border-gray-200 bg-white p-1.5 dark:bg-white shadow-sm">
+                        <img
+                          src={optImg}
+                          alt={`Option ${LETTERS[idx]}`}
+                          className="max-h-[120px] w-auto max-w-full object-contain"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {/* AI Explanation */}

@@ -87,10 +87,10 @@ const PALETTE_LEGEND = [
 ];
 
 const compactQuestionImageClassName =
-  "max-h-[170px] sm:max-h-[200px] w-auto max-w-[460px] rounded-xl border border-slate-200/70 bg-white p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
+  "max-h-[140px] sm:max-h-[165px] lg:max-h-[180px] w-auto max-w-[440px] rounded-xl border border-slate-200/70 bg-white p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
 
 const compactOptionImageClassName =
-  "max-h-[70px] sm:max-h-[85px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1.5 object-contain dark:border-[var(--border)]/60";
+  "max-h-[60px] sm:max-h-[75px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1.5 object-contain dark:border-[var(--border)]/60";
 
 const PaletteButton = memo(function PaletteButton({
   label,
@@ -142,17 +142,17 @@ const QuestionPalette = memo(function QuestionPalette({
   onSelectQuestion,
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/95 p-3 shadow-sm dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95">
-      <div className="mb-3 flex items-center justify-between gap-2">
+    <div className="h-full flex flex-col rounded-xl border border-slate-200/70 bg-[var(--card)]/95 p-3 sm:p-3.5 shadow-sm dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 overflow-hidden">
+      <div className="shrink-0 mb-2 flex items-center justify-between gap-2">
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
           Question Palette
         </p>
-        <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300">
+        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300">
           {questions.length} Qs
         </span>
       </div>
 
-      <div className="grid max-h-[calc(100vh-11.5rem)] grid-cols-5 gap-2 overflow-y-auto pr-1">
+      <div className="flex-1 min-h-0 overflow-y-auto pr-1 grid grid-cols-5 gap-1.5 content-start">
         {questions.map((q, idx) => {
           const answer = answers[q.id];
           const isAnswered = answer !== undefined && answer !== null && String(answer).trim() !== "";
@@ -173,11 +173,11 @@ const QuestionPalette = memo(function QuestionPalette({
         })}
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-1.5 border-t border-slate-200/70 pt-3 text-[11px] text-slate-600 dark:border-[var(--border)]/60 dark:text-slate-400">
+      <div className="shrink-0 mt-2.5 pt-2 border-t border-slate-200/70 text-[11px] text-slate-600 dark:border-[var(--border)]/60 dark:text-slate-400 grid grid-cols-2 gap-x-2 gap-y-1">
         {PALETTE_LEGEND.map((item) => (
-          <div key={item.key} className="flex items-center gap-2">
-            <span className={`h-3 w-3 rounded-[4px] border ${item.className}`} />
-            <span>{item.label}</span>
+          <div key={item.key} className="flex items-center gap-1.5">
+            <span className={`h-2.5 w-2.5 rounded-[3px] border ${item.className}`} />
+            <span className="truncate">{item.label}</span>
           </div>
         ))}
       </div>
@@ -697,13 +697,13 @@ export default function PYQSessionPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[var(--background)]">
+    <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       <RemoveOrangeFilter />
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-2.5 py-2.5 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
+      <header className="shrink-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-2.5 py-2 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
         <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <Logo size={28} showText={true} className="hidden sm:flex" />
+            <Logo size={36} showText={true} className="hidden sm:flex" />
             <div className="hidden h-5 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
             <div className="min-w-0">
               <span className="flex items-center gap-1.5 truncate text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
@@ -737,7 +737,7 @@ export default function PYQSessionPage() {
             <button
               type="button"
               onClick={() => setPaletteOpen(true)}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-[var(--card)] px-2.5 py-2 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-[var(--card)] px-2.5 py-1.5 text-xs font-bold text-slate-700 shadow-sm dark:border-[var(--border)] dark:bg-[var(--surface)] dark:text-slate-200 sm:min-h-10 sm:gap-2 sm:px-3 lg:hidden"
             >
               <PaletteIcon />
               Palette
@@ -756,7 +756,7 @@ export default function PYQSessionPage() {
             <button
               onClick={handleFinishDeck}
               disabled={questions.length === 0 || finishing}
-              className="rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4"
+              className="rounded-lg bg-brand px-3 py-1.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4"
             >
               {finishing ? "Finishing..." : <><span className="sm:hidden">Finish</span><span className="hidden sm:inline">Finish Deck</span></>}
             </button>
@@ -764,31 +764,26 @@ export default function PYQSessionPage() {
         </div>
       </header>
 
-      <main className="mx-auto grid flex-1 w-full min-w-0 max-w-[1600px] grid-cols-1 gap-3 px-2.5 py-2.5 pb-24 sm:px-4 sm:py-3 sm:pb-28 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4 lg:pb-3">
+      <main className="mx-auto grid flex-1 min-h-0 w-full min-w-0 max-w-[1600px] grid-cols-1 gap-3 px-2.5 py-2 sm:px-4 sm:py-3 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-4 overflow-hidden">
         {/* ── Question Palette ── */}
-        <aside className="hidden lg:order-1 lg:block">
-          <div className="lg:sticky lg:top-[72px]">
-            <QuestionPalette
-              questions={questions}
-              answers={answers}
-              currentIndex={currentIndex}
-              visitedQuestionIds={visitedQuestionIds}
-              markedQuestionIds={markedQuestionIds}
-              mode={mode}
-              onSelectQuestion={handleSelectQuestion}
-            />
-          </div>
+        <aside className="hidden lg:order-1 lg:flex lg:flex-col lg:h-full lg:min-h-0">
+          <QuestionPalette
+            questions={questions}
+            answers={answers}
+            currentIndex={currentIndex}
+            visitedQuestionIds={visitedQuestionIds}
+            markedQuestionIds={markedQuestionIds}
+            mode={mode}
+            onSelectQuestion={handleSelectQuestion}
+          />
         </aside>
 
-        {/* ── Question Content ── */}
-        <section className="order-1 flex min-w-0 flex-col lg:order-2">
-          <div
-            className="rounded-2xl border border-slate-200/70 bg-[var(--card)]/95 p-3 shadow-sm dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:p-4"
-            style={{ animationDelay: "75ms" }}
-          >
-            {/* Question meta */}
-            <div className="mb-2 flex flex-wrap items-center justify-between gap-1.5">
-              <div className="flex min-w-0 flex-wrap items-center gap-2">
+        {/* ── Question Content & Docked Action Bar ── */}
+        <section className="order-1 flex min-w-0 flex-col h-full min-h-0 lg:order-2 rounded-xl border border-slate-200/70 bg-[var(--card)]/95 shadow-sm dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 overflow-hidden">
+          {/* Question Header Bar */}
+          <div className="shrink-0 border-b border-slate-200/70 px-3.5 py-2 sm:px-5 sm:py-2.5 dark:border-[var(--border)]/60">
+            <div className="flex flex-wrap items-center justify-between gap-1.5">
+              <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-2">
                 <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                   Question {displayedQuestionNumber} of {questions.length}
                 </span>
@@ -797,18 +792,24 @@ export default function PYQSessionPage() {
                     {qType === "MULTIPLE_CORRECT" ? "Multi-Select" : "Numerical"}
                   </span>
                 )}
+                <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
+                  {currentQuestion.subject}
+                </span>
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300 truncate max-w-[140px] sm:max-w-xs">
+                  {currentQuestion.chapter}
+                </span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
                   onClick={toggleCurrentMarkedForReview}
-                  className={`inline-flex min-h-9 items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors ${
+                  className={`inline-flex min-h-8 items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${
                     currentQuestionMarked
                       ? "border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300"
                       : "border-slate-200 bg-[var(--card)] text-slate-600 hover:border-violet-300 hover:text-violet-700 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/30 dark:text-slate-300 dark:hover:border-violet-500/40 dark:hover:text-violet-300"
                   }`}
                 >
-                  <Flag className="h-4 w-4" />
+                  <Flag className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">
                     {currentQuestionMarked ? "Marked for Review" : "Mark for Review"}
                   </span>
@@ -822,49 +823,40 @@ export default function PYQSessionPage() {
                     const qId = String(currentQuestion.id);
                     const isB = bookmarkedIds.has(qId);
                     
-                    // Optimistic
                     const previous = new Set(bookmarkedIds);
                     const next = new Set(bookmarkedIds);
                     if (isB) next.delete(qId); else next.add(qId);
                     setBookmarkedIds(next);
                     
-                    // DB
                     const saved = await toggleBookmark(user.id, qId);
                     if (saved === isB) {
                       setBookmarkedIds(previous);
                     }
                   }}
-                  className={`rounded-lg border p-2 transition-colors duration-200 ${
+                  className={`rounded-lg border p-1.5 transition-colors duration-200 ${
                     bookmarkedIds.has(String(currentQuestion.id))
                       ? "border-indigo-200 bg-indigo-50 text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-400"
                       : "border-slate-200 bg-[var(--card)] text-slate-400 hover:text-indigo-500 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/30 dark:text-slate-500"
                   }`}
                   title="Save Question"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill={bookmarkedIds.has(String(currentQuestion.id)) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill={bookmarkedIds.has(String(currentQuestion.id)) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
                   </svg>
                 </button>
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{currentQuestion.year}</span>
               </div>
             </div>
+          </div>
 
-            {/* Subject + Chapter tags */}
-            <div className="mb-2 flex flex-wrap items-center gap-1.5">
-              <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-[10px] font-semibold text-indigo-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
-                {currentQuestion.subject}
-              </span>
-              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-medium text-slate-600 dark:bg-[var(--surface-elevated)] dark:text-slate-300">
-                {currentQuestion.chapter}
-              </span>
-            </div>
-
+          {/* Question Body (Internal Scroll If Overflow) */}
+          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-3 sm:px-5 sm:py-3.5 space-y-2.5">
             {/* Question image */}
             {!hasNativeDiagram && shouldShowQuestionImageFallback(currentQuestion) && (
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
-                className={`${compactQuestionImageClassName} mb-2.5`}
+                className={`${compactQuestionImageClassName} mb-2`}
                 loading="lazy"
                 decoding="async"
                 style={{ filter: "url(#remove-orange)" }}
@@ -872,7 +864,7 @@ export default function PYQSessionPage() {
             )}
 
             {canShowStructuredQuestionText(currentQuestion) && (
-              <MathText className="max-w-[1100px] text-[14.5px] leading-6.5 text-slate-900 dark:text-white sm:text-[15px]">
+              <MathText className="max-w-[1100px] text-[14.5px] leading-relaxed text-slate-900 dark:text-white sm:text-[15px]">
                 {currentQuestion.question}
               </MathText>
             )}
@@ -883,7 +875,7 @@ export default function PYQSessionPage() {
               <img
                 src={currentQuestion.question_image}
                 alt="Question visual"
-                className={`${compactQuestionImageClassName} mt-3 mb-2.5`}
+                className={`${compactQuestionImageClassName} mt-2 mb-2`}
                 loading="lazy"
                 decoding="async"
                 style={{ filter: "url(#remove-orange)" }}
@@ -891,7 +883,7 @@ export default function PYQSessionPage() {
             )}
 
             {/* Options */}
-            <div className="mt-3">
+            <div className="mt-2.5">
               {qType === "NUMERICAL" ? (
                 <div>
                   <label className="mb-1 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
@@ -902,11 +894,11 @@ export default function PYQSessionPage() {
                     placeholder="Enter numerical answer"
                     value={selectedOption || ""}
                     onChange={(e) => handleNumericalChange(e.target.value)}
-                    className="w-full max-w-md rounded-lg border border-slate-200 bg-[var(--card)] px-4 py-2.5 text-[15px] font-medium text-slate-900 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/40 dark:text-white"
+                    className="w-full max-w-md rounded-lg border border-slate-200 bg-[var(--card)] px-3.5 py-2 text-[15px] font-medium text-slate-900 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/40 dark:text-white"
                   />
                 </div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   {["a", "b", "c", "d"].map((option, idx) => {
                     const isSelected =
                       qType === "MULTIPLE_CORRECT"
@@ -928,46 +920,49 @@ export default function PYQSessionPage() {
                 </div>
               )}
             </div>
-
-            {/* Clear selection */}
-            {selectedOption !== undefined && (
-              <button
-                onClick={() => {
-                  const newAnswers = { ...answers };
-                  delete newAnswers[currentQuestion.id];
-                  setAnswers(newAnswers);
-                }}
-                className="mt-2 text-xs font-medium text-slate-500 transition-colors hover:text-rose-500 dark:text-slate-400"
-              >
-                Clear Selection
-              </button>
-            )}
           </div>
 
-          {/* Navigation */}
-          <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-slate-200/70 bg-[var(--card)]/90 px-4 py-3 backdrop-blur-xl dark:border-[var(--border-subtle)] dark:bg-[var(--background)]/90 sm:px-6 lg:static lg:mt-2 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-0" style={{ animationDelay: "150ms" }}>
-            <button
-              onClick={handleBack}
-              disabled={currentIndex === 0}
-              className="min-h-11 flex-1 rounded-lg border border-slate-200 bg-[var(--card)] px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-indigo-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/90 dark:text-slate-200 sm:flex-none"
-            >
-              ← Previous
-            </button>
-            <button
-              type="button"
-              onClick={handleMarkForReviewAndNext}
-              className="min-h-11 flex-1 rounded-lg border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 transition-all duration-300 hover:border-violet-300 hover:bg-violet-100 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 dark:hover:bg-violet-500/15 sm:flex-none"
-            >
-              <span className="hidden sm:inline">Mark for Review & Next</span>
-              <span className="sm:hidden">Review & Next</span>
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex === questions.length - 1}
-              className="min-h-11 flex-1 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none"
-            >
-              Next →
-            </button>
+          {/* Permanently Docked Navigation Footer */}
+          <div className="shrink-0 flex items-center justify-between gap-2 sm:gap-3 border-t border-slate-200/70 bg-slate-50/70 px-3 py-2 sm:px-5 sm:py-2.5 dark:border-[var(--border)]/60 dark:bg-[var(--surface-elevated)]/30">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleBack}
+                disabled={currentIndex === 0}
+                className="min-h-9 rounded-lg border border-slate-200 bg-[var(--card)] px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-700 transition-all duration-200 hover:border-indigo-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/90 dark:text-slate-200 sm:px-5"
+              >
+                ← Previous
+              </button>
+              {selectedOption !== undefined && (
+                <button
+                  onClick={() => {
+                    const newAnswers = { ...answers };
+                    delete newAnswers[currentQuestion.id];
+                    setAnswers(newAnswers);
+                  }}
+                  className="min-h-9 rounded-lg border border-transparent px-2.5 py-1.5 text-xs font-semibold text-slate-500 hover:text-rose-500 dark:text-slate-400"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleMarkForReviewAndNext}
+                className="min-h-9 rounded-lg border border-violet-200 bg-violet-50 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 transition-all duration-200 hover:border-violet-300 hover:bg-violet-100 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 sm:px-5"
+              >
+                <span className="hidden sm:inline">Mark for Review & Next</span>
+                <span className="sm:hidden">Review & Next</span>
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={currentIndex === questions.length - 1}
+                className="min-h-9 rounded-lg bg-brand px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white transition-all duration-200 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50 sm:px-5"
+              >
+                Next →
+              </button>
+            </div>
           </div>
         </section>
       </main>
@@ -980,8 +975,8 @@ export default function PYQSessionPage() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setPaletteOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-slate-50 p-3 shadow-2xl dark:bg-[var(--background)] sm:p-4">
-            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
+          <div className="absolute bottom-0 left-0 right-0 max-h-[82vh] flex flex-col rounded-t-3xl bg-slate-50 p-3 shadow-2xl dark:bg-[var(--background)] sm:p-4">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700 shrink-0" />
             <QuestionPalette
               questions={questions}
               answers={answers}

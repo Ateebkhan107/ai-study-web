@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail } from "lucide-react";
+import Logo from "@/components/Logo";
 
 function LinkedInIcon({ className }) {
   return (
@@ -69,11 +70,9 @@ export default function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2">
-            <Link href="/dashboard" className="group inline-flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-slate-900 to-slate-800 text-white shadow-sm shadow-slate-900/10 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
-                <span className="text-sm font-black tracking-tighter">Pz</span>
-              </div>
-              <span className="text-sm font-black uppercase tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+            <Link href="/dashboard" className="group inline-flex items-center gap-2.5">
+              <Logo size={28} showText={false} className="shrink-0 transition-transform duration-300 group-hover:scale-105" />
+              <span className="text-sm font-black uppercase tracking-tight text-slate-900 transition-colors group-hover:text-amber-500 dark:text-white dark:group-hover:text-amber-400">
                 PREPZII
               </span>
             </Link>
