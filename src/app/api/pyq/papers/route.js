@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { compareAttemptLabels } from "@/lib/pyqDisplay";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -60,7 +61,12 @@ export async function GET(req) {
     })
     .sort((a, b) => {
       if (a.year !== b.year) return (b.year || 0) - (a.year || 0);
-      const attemptCompare = String(a.attempt_label || a.attempt || "").localeCompare(String(b.attempt_label || b.attempt || ""), undefined, { numeric: true });
+      const attemptCompare = compareAttemptLabels(
+        a.attempt_label || a.attempt,
+        b.attempt_label || b.attempt,
+        a.exam_date,
+        b.exam_date
+      );
       if (attemptCompare !== 0) return attemptCompare;
       const dateCompare = String(a.exam_date || "").localeCompare(String(b.exam_date || ""), undefined, { numeric: true });
       if (dateCompare !== 0) return dateCompare;

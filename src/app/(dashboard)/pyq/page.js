@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
@@ -9,6 +9,7 @@ import { Atom, Dna, FlaskConical, Sigma } from "lucide-react";
 import PYQAnalytics from "@/components/pyq/PYQAnalytics";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
 import AuthGateModal from "@/components/auth/AuthGateModal";
+import { compareAttemptLabels } from "@/lib/pyqDisplay";
 
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const Svg = ({ children, size = 16, className = "", style = {} }) => (
@@ -285,11 +286,27 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
     ? allTrackPapers.filter((paper) => selectedYears.includes(Number(paper.year)))
     : allTrackPapers;
 
-  // Derived Options
-  const availableAttempts = Array.from(new Set(papers.map((paper) => paper.attempt_label || paper.attempt).filter(Boolean)));
-  const availableShiftPapers = papers.filter(
-    (paper) => !selectedAttempt || (paper.attempt_label || paper.attempt) === selectedAttempt
-  );
+  // Derived Options (chronologically sorted)
+  const availableAttempts = useMemo(() => {
+    const rawAttempts = Array.from(
+      new Set(papers.map((paper) => paper.attempt_label || paper.attempt).filter(Boolean))
+    );
+    return rawAttempts.sort((a, b) => {
+      const aPaper = papers.find((p) => (p.attempt_label || p.attempt) === a);
+      const bPaper = papers.find((p) => (p.attempt_label || p.attempt) === b);
+      return compareAttemptLabels(a, b, aPaper?.exam_date, bPaper?.exam_date);
+    });
+  }, [papers]);
+
+  const availableShiftPapers = useMemo(() => {
+    return papers
+      .filter((paper) => !selectedAttempt || (paper.attempt_label || paper.attempt) === selectedAttempt)
+      .sort((a, b) => {
+        const dateCompare = String(a.exam_date || "").localeCompare(String(b.exam_date || ""), undefined, { numeric: true });
+        if (dateCompare !== 0) return dateCompare;
+        return String(a.shift || "").localeCompare(String(b.shift || ""), undefined, { numeric: true });
+      });
+  }, [papers, selectedAttempt]);
 
   function handleStartDeck() {
     if (selectedModeLocked) {
@@ -320,7 +337,12 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
     const params = new URLSearchParams();
     params.set("exam", track.toUpperCase());
     params.set("subjects", subjectLabels.join(","));
-    if (selectedYears.length > 0) params.set("years", selectedYears.join(","));
+    if (selectedYears.length > 0) {
+      params.set("years", selectedYears.join(","));
+      if (selectedYears.length === 1) {
+        params.set("year", String(selectedYears[0]));
+      }
+    }
     params.set("mode", practiceMode);
 
     if (practiceMode === "chapter" && selectedChapters.length > 0) params.set("chapter", selectedChapters.join(","));
@@ -329,7 +351,17 @@ function PracticeTab({ subjects, track, isPro, onAuthRequired }) {
       const selectedPaper = papers.find((paper) => paper.id === selectedShift);
       if (selectedPaper) {
         params.set("exam_id", selectedPaper.id);
-        params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
+        if (selectedPaper.year) params.set("year", String(selectedPaper.year));
+        if (selectedPaper.attempt) params.set("attempt", selectedPaper.attempt);
+        if (selectedPaper.attempt_label || selectedPaper.attempt) {
+          params.set("attempt_label", selectedPaper.attempt_label || selectedPaper.attempt);
+        }
+        if (selectedPaper.shift) params.set("shift", selectedPaper.shift);
+        if (selectedPaper.shift_label || selectedPaper.shift) {
+          params.set("shift_label", selectedPaper.shift_label || selectedPaper.shift);
+        }
+        if (selectedPaper.paper_code) params.set("paper_code", selectedPaper.paper_code);
+        if (selectedPaper.exam_type) params.set("exam_type", selectedPaper.exam_type);
       }
     }
 

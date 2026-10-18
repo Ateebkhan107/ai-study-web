@@ -10,7 +10,7 @@ import { hasStructuredQuestionText } from "@/lib/pyqDisplay";
 import MathText from "@/components/MathText";
 import QuestionDiagram from "@/components/pyq/QuestionDiagram";
 import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
-import { Lightbulb } from "lucide-react";
+import { Calendar, Lightbulb } from "lucide-react";
 
 // Practice mode display labels
 const modeLabels = {
@@ -32,11 +32,11 @@ const shouldHideReviewSolution = (exam, year) => {
 };
 
 const RemoveOrangeFilter = () => (
-  <svg width="0" height="0" className="absolute">
+  <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
     <filter id="remove-orange">
       <feColorMatrix
         type="matrix"
-        values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0"
+        values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
       />
     </filter>
   </svg>
@@ -61,10 +61,13 @@ export default function PYQResultsPage() {
   
   const mode = searchParams.get("mode") || "full";
   const examType = searchParams.get("exam_type") || "";
+  const yearParam = searchParams.get("year") || searchParams.get("years") || "";
   const attempt = searchParams.get("attempt") || "";
   const shift = searchParams.get("shift") || "";
   const attemptLabel = searchParams.get("attempt_label") || attempt;
   const shiftLabel = searchParams.get("shift_label") || shift;
+  const paperCode = searchParams.get("paper_code") || "";
+  const chapter = searchParams.get("chapter") || "";
 
   const total = parseInt(searchParams.get("total") || "0", 10);
   const correct = parseInt(searchParams.get("correct") || "0", 10);
@@ -195,13 +198,44 @@ export default function PYQResultsPage() {
   const modeMeta = modeLabels[mode] || modeLabels.full;
   const attempted = Math.max(0, total - skipped);
   const completion = total > 0 ? Math.round((attempted / total) * 100) : 0;
-  const paperLabel = [attemptLabel, shiftLabel].filter(Boolean).join(" · ");
-  const headlineMeta = [exam, modeMeta, `${total} Questions`].filter(Boolean).join(" · ");
-  const sessionDetails = [
-    subjectLabels.join(" · ") || "—",
-    examType ? `${exam} ${examType}` : exam,
-    paperLabel,
-    modeMeta,
+
+  const firstQ = reviewData[0] || {};
+  const resolvedYear = yearParam || (firstQ.year ? String(firstQ.year) : "");
+  const resolvedExamType = examType || firstQ.exam_type || "";
+  const resolvedAttempt = attempt || firstQ.attempt || "";
+  const resolvedShift = shift || firstQ.shift || "";
+  const resolvedAttemptLabel = attemptLabel || firstQ.attempt_label || resolvedAttempt;
+  const resolvedShiftLabel = shiftLabel || firstQ.shift_label || resolvedShift;
+  const resolvedPaperCode = paperCode || firstQ.paper_code || "";
+  const resolvedChapter = chapter || firstQ.chapter || "";
+
+  const displayExam = resolvedExamType ? `${exam} (${resolvedExamType})` : exam;
+
+  const shiftDetailParts = [];
+  if (resolvedYear) shiftDetailParts.push(resolvedYear);
+  if (resolvedAttemptLabel && !resolvedShiftLabel.toLowerCase().includes(resolvedAttemptLabel.toLowerCase())) {
+    shiftDetailParts.push(resolvedAttemptLabel);
+  }
+  if (resolvedShiftLabel) {
+    shiftDetailParts.push(resolvedShiftLabel);
+  } else if (resolvedShift) {
+    shiftDetailParts.push(resolvedShift);
+  } else if (resolvedChapter) {
+    shiftDetailParts.push(`Chapter: ${resolvedChapter}`);
+  }
+  const shiftHeaderLabel = shiftDetailParts.join(" · ");
+
+  const headlineMeta = [displayExam, modeMeta, `${total} Questions`].filter(Boolean).join(" · ");
+
+  const detailItems = [
+    { label: "Exam", value: displayExam },
+    resolvedYear ? { label: "Year", value: resolvedYear } : null,
+    resolvedAttemptLabel ? { label: "Attempt", value: resolvedAttemptLabel } : null,
+    (resolvedShiftLabel || resolvedShift) ? { label: "Shift", value: resolvedShiftLabel || resolvedShift } : null,
+    resolvedPaperCode ? { label: "Paper Code", value: resolvedPaperCode } : null,
+    resolvedChapter ? { label: "Chapter", value: resolvedChapter } : null,
+    { label: "Mode", value: modeMeta },
+    { label: "Subjects", value: subjectLabels.join(" · ") || "All Subjects" },
   ].filter(Boolean);
 
   let takeaway = "Review the attempt carefully and use the mistakes to plan your next practice session.";
@@ -238,6 +272,12 @@ export default function PYQResultsPage() {
             <p className="mt-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
               {headlineMeta}
             </p>
+            {shiftHeaderLabel && (
+              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 dark:bg-brand/15 px-4 py-1.5 text-xs sm:text-sm font-bold text-brand-pressed dark:text-brand shadow-sm">
+                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 text-brand" />
+                <span>{shiftHeaderLabel}</span>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-12">
@@ -325,12 +365,12 @@ export default function PYQResultsPage() {
           {/* SESSION DETAILS FOOTER */}
           <div className="border-t border-slate-200/80 dark:border-[var(--border)]/70 pt-6">
              <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3">Session Details</h2>
-             <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs font-bold text-slate-600 dark:text-slate-400">
-                {sessionDetails.map((item, index) => (
-                  <span key={`${item}-${index}`} className="inline-flex items-center gap-3">
-                    {index > 0 && <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600" />}
-                    <span>{item}</span>
-                  </span>
+             <div className="flex flex-wrap gap-2.5">
+                {detailItems.map((item, index) => (
+                  <div key={index} className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200/70 dark:border-[var(--border)]/70 bg-slate-50 dark:bg-[var(--surface-elevated)]/60 px-3 py-1.5 text-xs">
+                    <span className="font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px]">{item.label}:</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">{item.value}</span>
+                  </div>
                 ))}
              </div>
           </div>

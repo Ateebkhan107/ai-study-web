@@ -1,14 +1,152 @@
 {
   "expected_papers": 24,
-  "audited_papers": 1,
-  "questions": 90,
-  "images": 19,
+  "audited_papers": 24,
+  "questions": 2160,
+  "images": 527,
   "failures": [],
   "papers": [
+    {
+      "paper_code": "JEE-MAIN-22-24JUN-S1",
+      "questions": 90,
+      "images": 13,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-24JUN-S2",
+      "questions": 90,
+      "images": 0,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUN-S1",
+      "questions": 90,
+      "images": 21,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUN-S2",
+      "questions": 90,
+      "images": 22,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUN-S1",
+      "questions": 90,
+      "images": 24,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUN-S2",
+      "questions": 90,
+      "images": 29,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUN-S1",
+      "questions": 90,
+      "images": 22,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUN-S2",
+      "questions": 90,
+      "images": 30,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-28JUN-S1",
+      "questions": 90,
+      "images": 31,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-28JUN-S2",
+      "questions": 90,
+      "images": 34,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUN-S1",
+      "questions": 90,
+      "images": 17,
+      "failures": 0
+    },
     {
       "paper_code": "JEE-MAIN-22-29JUN-S2",
       "questions": 90,
       "images": 19,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-30JUN-S1",
+      "questions": 90,
+      "images": 31,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUL-S1",
+      "questions": 90,
+      "images": 25,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUL-S2",
+      "questions": 90,
+      "images": 8,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUL-S1",
+      "questions": 90,
+      "images": 20,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUL-S2",
+      "questions": 90,
+      "images": 8,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S1",
+      "questions": 90,
+      "images": 8,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "questions": 90,
+      "images": 27,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-28JUL-S1",
+      "questions": 90,
+      "images": 25,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-28JUL-S2",
+      "questions": 90,
+      "images": 24,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "questions": 90,
+      "images": 45,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S2",
+      "questions": 90,
+      "images": 19,
+      "failures": 0
+    },
+    {
+      "paper_code": "JEE-MAIN-22-30JUL-S2",
+      "questions": 90,
+      "images": 25,
       "failures": 0
     }
   ]

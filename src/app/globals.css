@@ -668,27 +668,29 @@ body {
   box-sizing: border-box;
 }
 
-#__next,
-main,
-section,
-article,
-aside,
-header,
-footer,
-div {
-  min-width: 0;
-}
+@layer base {
+  #__next,
+  main,
+  section,
+  article,
+  aside,
+  header,
+  footer,
+  div {
+    min-width: 0;
+  }
 
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-}
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
 
-img,
-video {
-  height: auto;
+  img,
+  video {
+    height: auto;
+  }
 }
 
 pre,

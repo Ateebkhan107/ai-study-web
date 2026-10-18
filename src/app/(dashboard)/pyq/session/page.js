@@ -37,11 +37,11 @@ const modeLabels = {
 };
 
 const RemoveOrangeFilter = () => (
-  <svg width="0" height="0" className="absolute">
+  <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
     <filter id="remove-orange">
       <feColorMatrix
         type="matrix"
-        values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0"
+        values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
       />
     </filter>
   </svg>
@@ -87,10 +87,10 @@ const PALETTE_LEGEND = [
 ];
 
 const compactQuestionImageClassName =
-  "max-h-[140px] sm:max-h-[165px] lg:max-h-[180px] w-auto max-w-[440px] rounded-xl border border-slate-200/70 bg-white p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
+  "h-auto max-h-[105px] sm:max-h-[120px] lg:max-h-[135px] w-auto max-w-[320px] sm:max-w-[380px] rounded-xl border border-slate-200/70 bg-white p-1.5 sm:p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
 
 const compactOptionImageClassName =
-  "max-h-[60px] sm:max-h-[75px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1.5 object-contain dark:border-[var(--border)]/60";
+  "h-auto max-h-[38px] sm:max-h-[46px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1 object-contain dark:border-[var(--border)]/60";
 
 const PaletteButton = memo(function PaletteButton({
   label,
@@ -256,7 +256,7 @@ export default function PYQSessionPage() {
 
   const exam = searchParams.get("exam") || "JEE";
   const subjectsParam = searchParams.get("subjects") || "";
-  const yearsParam = searchParams.get("years") || "";
+  const yearsParam = searchParams.get("years") || searchParams.get("year") || "";
   const mode = searchParams.get("mode") || "full";
   const chapter = searchParams.get("chapter") || "";
   const examType = searchParams.get("exam_type") || "";
@@ -265,6 +265,7 @@ export default function PYQSessionPage() {
   const examId = searchParams.get("exam_id") || "";
   const attemptLabel = searchParams.get("attempt_label") || attempt;
   const shiftLabel = searchParams.get("shift_label") || shift;
+  const paperCode = searchParams.get("paper_code") || "";
 
   const subjectLabels = subjectsParam ? subjectsParam.split(",") : [];
   const years = yearsParam ? yearsParam.split(",").map(Number) : [];
@@ -594,7 +595,9 @@ export default function PYQSessionPage() {
         display_order: q.display_order,
         attempt: q.attempt,
         shift: q.shift,
-        exam_type: q.exam_type,
+        attempt_label: attemptLabel || q.attempt_label || q.attempt || null,
+        shift_label: shiftLabel || q.shift_label || q.shift || null,
+        exam_type: examType || q.exam_type || null,
         question: q.question,
         question_image: q.question_image,
         exam: q.exam,
@@ -639,6 +642,15 @@ export default function PYQSessionPage() {
       sessionStorage.removeItem(reviewStorageKey);
     }
 
+    const firstQ = questions[0] || {};
+    const resolvedYear = yearsParam || (firstQ.year ? String(firstQ.year) : "");
+    const resolvedExamType = examType || firstQ.exam_type || "";
+    const resolvedAttempt = attempt || firstQ.attempt || "";
+    const resolvedShift = shift || firstQ.shift || "";
+    const resolvedAttemptLabel = attemptLabel || firstQ.attempt_label || resolvedAttempt;
+    const resolvedShiftLabel = shiftLabel || firstQ.shift_label || resolvedShift;
+    const resolvedPaperCode = paperCode || firstQ.paper_code || "";
+
     const resultParams = new URLSearchParams();
     resultParams.set("exam", exam);
     resultParams.set("subjects", subjectLabels.join(","));
@@ -650,11 +662,18 @@ export default function PYQSessionPage() {
     resultParams.set("accuracy", String(accuracy));
     resultParams.set("score", String(score));
     resultParams.set("maxScore", String(maxScore));
-    if (examType) resultParams.set("exam_type", examType);
-    if (attempt) resultParams.set("attempt", attempt);
-    if (shift) resultParams.set("shift", shift);
-    if (attemptLabel) resultParams.set("attempt_label", attemptLabel);
-    if (shiftLabel) resultParams.set("shift_label", shiftLabel);
+    if (resolvedYear) {
+      resultParams.set("year", String(resolvedYear));
+      resultParams.set("years", String(resolvedYear));
+    }
+    if (resolvedExamType) resultParams.set("exam_type", resolvedExamType);
+    if (resolvedAttempt) resultParams.set("attempt", resolvedAttempt);
+    if (resolvedShift) resultParams.set("shift", resolvedShift);
+    if (resolvedAttemptLabel) resultParams.set("attempt_label", resolvedAttemptLabel);
+    if (resolvedShiftLabel) resultParams.set("shift_label", resolvedShiftLabel);
+    if (resolvedPaperCode) resultParams.set("paper_code", resolvedPaperCode);
+    if (chapter) resultParams.set("chapter", chapter);
+    if (examId) resultParams.set("exam_id", examId);
 
     router.push(`/pyq/session/results?${resultParams.toString()}`);
   }
@@ -711,10 +730,10 @@ export default function PYQSessionPage() {
                 {modeMeta.label}
               </span>
               <p className="hidden truncate text-[11px] text-slate-500 dark:text-slate-400 min-[390px]:block">
-                {subjectLabels.join(", ")} · {exam}
-                {years.length > 0 ? ` · ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : ""}
-                {attemptLabel ? ` · ${attemptLabel}` : ""}
-                {shiftLabel ? ` · ${shiftLabel}` : ""}
+                {subjectLabels.join(", ")} · {examType ? `${exam} ${examType}` : exam}
+                {(years.length > 0 ? `${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : questions[0]?.year) ? ` · ${years.length > 0 ? `${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ""}` : questions[0]?.year}` : ""}
+                {(attemptLabel || questions[0]?.attempt) ? ` · ${attemptLabel || questions[0]?.attempt}` : ""}
+                {(shiftLabel || questions[0]?.shift) ? ` · ${shiftLabel || questions[0]?.shift}` : ""}
               </p>
             </div>
           </div>

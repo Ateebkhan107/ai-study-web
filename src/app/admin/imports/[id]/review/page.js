@@ -9,6 +9,17 @@ import {
   Loader2, FileText, Trash2, ShieldCheck
 } from "lucide-react";
 
+const RemoveOrangeFilter = () => (
+  <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
+    <filter id="remove-orange">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
+      />
+    </filter>
+  </svg>
+);
+
 export default function ReviewQueuePage() {
   const { id } = useParams();
   const router = useRouter();
@@ -229,6 +240,7 @@ export default function ReviewQueuePage() {
 
   return (
     <div className="flex min-h-[calc(100vh-64px)] flex-col overflow-hidden bg-gray-50 dark:bg-[var(--background)] -m-4 md:-m-6 xl:-m-8 lg:h-[calc(100vh-64px)] lg:flex-row">
+      <RemoveOrangeFilter />
       {/* Left Sidebar - Nav & Validation */}
       <div className="w-full bg-[var(--card)] dark:bg-[var(--surface)] border-b border-gray-200 dark:border-[var(--border-subtle)] flex flex-col lg:w-80 lg:border-b-0 lg:border-r">
         <div className="p-4 border-b border-gray-200 dark:border-[var(--border-subtle)] flex items-center justify-between">
