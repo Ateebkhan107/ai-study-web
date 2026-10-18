@@ -57,11 +57,11 @@ function QuestionImage({ block }) {
 
   return (
     <figure className="my-4 w-full">
-      <div className="mx-auto w-fit max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)] p-2 dark:border-[var(--border)]/60 dark:bg-[var(--background)]/40">
+      <div className="mx-auto w-fit max-w-full rounded-xl border border-slate-200/70 bg-[var(--card)] p-1.5 sm:p-2 dark:border-[var(--border)]/60 dark:bg-[var(--background)]/40">
         <img
           src={url}
           alt={block.alt || "Question diagram"}
-          className="max-h-[55vh] w-auto max-w-full object-contain"
+          className="h-auto max-h-[115px] sm:max-h-[135px] w-auto max-w-[340px] sm:max-w-[400px] object-contain"
           loading="lazy"
           decoding="async"
         />
@@ -203,7 +203,7 @@ export function OptionContentRenderer({
         <img
           src={optionImage}
           alt={structured?.alt || `Option ${resolvedId || "visual"}`}
-          className="mt-2 max-h-[42vh] w-auto max-w-full rounded-lg border border-slate-200/70 object-contain dark:border-[var(--border)]/60"
+          className="mt-1.5 h-auto max-h-[38px] sm:max-h-[46px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1 object-contain dark:border-[var(--border)]/60"
           loading="lazy"
           decoding="async"
         />

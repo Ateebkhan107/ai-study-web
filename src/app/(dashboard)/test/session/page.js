@@ -231,11 +231,11 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
         </MathText>
 
         {activeQuestion.question_image && (
-          <div className="mb-3 sm:mb-4 inline-block overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-[var(--border-subtle)] dark:bg-white">
+          <div className="mb-3 sm:mb-4 inline-block overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 sm:p-2 dark:border-[var(--border-subtle)] dark:bg-white">
             <img
               src={activeQuestion.question_image}
               alt="Question visual"
-              className="mx-auto h-auto max-h-[140px] sm:max-h-[160px] lg:max-h-[180px] w-auto max-w-[440px] object-contain"
+              className="mx-auto h-auto max-h-[105px] sm:max-h-[120px] lg:max-h-[135px] w-auto max-w-[340px] sm:max-w-[400px] object-contain"
               loading="lazy"
               decoding="async"
             />
@@ -323,11 +323,11 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
                       ) : null}
 
                       {optionImage && (
-                        <div className="mt-1.5 inline-block overflow-hidden rounded-lg border border-slate-200/80 bg-white p-2 dark:border-stone-800 dark:bg-white shadow-sm">
+                        <div className="mt-1 inline-block overflow-hidden rounded-lg border border-slate-200/80 bg-white p-1 dark:border-stone-800 dark:bg-white shadow-sm">
                           <img
                             src={optionImage}
                             alt={`Option ${LETTERS[optionIndex]} diagram`}
-                            className="max-h-[140px] sm:max-h-[160px] w-auto max-w-full object-contain"
+                            className="max-h-[38px] sm:max-h-[46px] w-auto max-w-full object-contain"
                             loading="lazy"
                             decoding="async"
                           />

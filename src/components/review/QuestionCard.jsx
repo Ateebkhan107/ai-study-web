@@ -174,11 +174,11 @@ export default function QuestionCard({ question, index }) {
                         </span>
                       ) : null}
                       {optionImage ? (
-                        <div className="mt-1.5 inline-block overflow-hidden rounded-lg border border-slate-200 bg-white p-2 dark:bg-white shadow-sm">
+                        <div className="mt-1 inline-block overflow-hidden rounded-lg border border-slate-200 bg-white p-1 dark:bg-white shadow-sm">
                           <img
                             src={optionImage}
                             alt={`Option ${option.id} diagram`}
-                            className="max-h-[140px] w-auto max-w-full object-contain"
+                            className="max-h-[38px] sm:max-h-[46px] w-auto max-w-full object-contain"
                             loading="lazy"
                             decoding="async"
                           />

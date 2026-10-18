@@ -350,6 +350,19 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}
       >
+        <svg
+          width="0"
+          height="0"
+          className="absolute pointer-events-none -left-full -top-full opacity-0"
+          aria-hidden="true"
+        >
+          <filter id="remove-orange">
+            <feColorMatrix
+              type="matrix"
+              values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
+            />
+          </filter>
+        </svg>
         <Script
           id="theme-init"
           strategy="beforeInteractive"

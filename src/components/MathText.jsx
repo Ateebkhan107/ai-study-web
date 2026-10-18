@@ -397,7 +397,7 @@ export default function MathText({ children, className = "" }) {
             <img
               src={src}
               alt={alt || "Diagram"}
-              className="my-3 max-h-56 max-w-full rounded-xl border border-slate-200 object-contain p-2 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]"
+              className="my-2 h-auto max-h-32 sm:max-h-36 max-w-[340px] sm:max-w-[400px] rounded-xl border border-slate-200 bg-white object-contain p-1.5 sm:p-2 dark:border-[var(--border)] dark:bg-[var(--surface-elevated)]"
               loading="lazy"
             />
           ),

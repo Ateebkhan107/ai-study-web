@@ -456,12 +456,14 @@ export default function PYQResultsPage() {
 
                   <div className="space-y-4 mb-6">
                     {q.question_image && !hasNativeQuestionDiagram(q) && !hasStructuredQuestionText(q.question) && (
-                      <img 
-                        src={q.question_image} 
-                        alt="Question visual" 
-                        className="max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] rounded-2xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
-                        style={{ filter: "url(#remove-orange)" }}
-                      />
+                      <div className="flex justify-start">
+                        <img 
+                          src={q.question_image} 
+                          alt="Question visual" 
+                          className="h-auto max-h-[120px] sm:max-h-[145px] w-auto max-w-[360px] sm:max-w-[420px] rounded-xl border border-slate-200/60 bg-white p-1.5 sm:p-2 object-contain dark:border-[var(--border)]/50"
+                          style={{ filter: "url(#remove-orange)" }}
+                        />
+                      </div>
                     )}
                     {hasStructuredQuestionText(q.question) && (
                       <MathText className="text-base font-medium text-slate-900 dark:text-slate-200 leading-relaxed">
@@ -470,14 +472,16 @@ export default function PYQResultsPage() {
                     )}
                     <QuestionDiagram question={q} />
                     {q.question_image && !hasNativeQuestionDiagram(q) && hasStructuredQuestionText(q.question) && (
-                      <img
-                        src={q.question_image}
-                        alt="Question visual"
-                        className="mt-3 max-h-[180px] sm:max-h-[220px] w-auto max-w-[460px] rounded-2xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
-                        loading="lazy"
-                        decoding="async"
-                        style={{ filter: "url(#remove-orange)" }}
-                      />
+                      <div className="flex justify-start my-2">
+                        <img
+                          src={q.question_image}
+                          alt="Question visual"
+                          className="h-auto max-h-[105px] sm:max-h-[125px] w-auto max-w-[340px] sm:max-w-[400px] rounded-xl border border-slate-200/60 bg-white p-1.5 sm:p-2 object-contain dark:border-[var(--border)]/50"
+                          loading="lazy"
+                          decoding="async"
+                          style={{ filter: "url(#remove-orange)" }}
+                        />
+                      </div>
                     )}
                   </div>
 
@@ -549,7 +553,7 @@ export default function PYQResultsPage() {
                                 <img 
                                   src={q[`option_${option}_image`]} 
                                   alt={`Option ${option.toUpperCase()} visual`} 
-                                  className="rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full w-auto"
+                                  className="h-auto max-h-[38px] sm:max-h-[46px] w-auto max-w-[280px] rounded-lg border border-slate-200/60 bg-white p-1 object-contain dark:border-[var(--border)]/50"
                                   style={{ filter: "url(#remove-orange)" }}
                                 />
                               )}
@@ -590,7 +594,7 @@ export default function PYQResultsPage() {
                             <img
                               src={correctOptionImage}
                               alt={`Correct option ${correctOptionKey.toUpperCase()}`}
-                              className="max-h-[360px] w-auto max-w-full rounded-xl border border-emerald-200/70 object-contain dark:border-emerald-500/30"
+                              className="max-h-[60px] sm:max-h-[75px] w-auto max-w-[280px] rounded-lg border border-emerald-200/70 bg-white p-1 object-contain dark:border-emerald-500/30"
                               loading="lazy"
                               decoding="async"
                             />

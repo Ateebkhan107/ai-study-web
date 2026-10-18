@@ -214,11 +214,11 @@ export default function QuestionCard({ question, updateQuestion, showExpanded = 
                   <div className="min-w-0 flex-1">
                     {displayOpt ? <span>{displayOpt}</span> : null}
                     {optImg ? (
-                      <div className="mt-1 inline-block overflow-hidden rounded-lg border border-gray-200 bg-white p-1.5 dark:bg-white shadow-sm">
+                      <div className="mt-1 inline-block overflow-hidden rounded-lg border border-gray-200 bg-white p-1 dark:bg-white shadow-sm">
                         <img
                           src={optImg}
                           alt={`Option ${LETTERS[idx]}`}
-                          className="max-h-[120px] w-auto max-w-full object-contain"
+                          className="max-h-[38px] sm:max-h-[46px] w-auto max-w-full object-contain"
                           loading="lazy"
                           decoding="async"
                         />
