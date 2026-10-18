@@ -196,14 +196,14 @@ const QuestionOption = memo(function QuestionOption({
   return (
     <button
       onClick={() => onSelect(optionKey)}
-      className={`group flex w-full items-start gap-2.5 rounded-xl border-[1.5px] px-3.5 py-2.5 text-left transition-all duration-150 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"} ${
+      className={`group flex w-full items-center gap-2.5 rounded-xl border-[1.5px] px-3 py-2 text-left transition-all duration-150 ${isSelected ? "test-option-selected" : "shadow-[var(--snb-shadow-interactive)] hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)]"} ${
         isSelected
           ? "border-[var(--snb-border-selected)] bg-[#FEF9C3] text-slate-950 dark:bg-amber-400/15 dark:text-white"
           : "border-[var(--snb-border-interactive)] bg-[var(--card)] text-slate-700 hover:border-[var(--snb-border-interactive-hover)] hover:bg-slate-50 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]/60 dark:text-slate-300 dark:hover:bg-[var(--surface-elevated)]/40"
       }`}
     >
       <span
-        className={`mt-0.5 flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-[11px] font-bold ${
+        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-[1.5px] text-[11px] font-bold ${
           isSelected
             ? "border-[#9A7407] bg-brand text-slate-950 shadow-[1px_1px_0px_rgba(30,42,68,0.2)] dark:shadow-[1px_1px_0px_rgba(0,0,0,0.6)]"
             : "border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-400"
@@ -436,6 +436,10 @@ export default function PYQSessionPage() {
   const qType = String(currentQuestion?.question_type || "MCQ").toUpperCase();
   const displayedQuestionNumber = currentIndex + 1;
   const hasNativeDiagram = hasNativeQuestionDiagram(currentQuestion);
+  const hasAnyOptionImages = Boolean(
+    currentQuestion &&
+      ["a", "b", "c", "d"].some((opt) => Boolean(currentQuestion[`option_${opt}_image`]))
+  );
   const answeredCount = useMemo(
     () =>
       Object.values(answers).filter(
@@ -872,14 +876,16 @@ export default function PYQSessionPage() {
           <div className="flex-1 min-h-0 overflow-y-auto px-4 py-3 sm:px-5 sm:py-3.5 space-y-2.5">
             {/* Question image */}
             {!hasNativeDiagram && shouldShowQuestionImageFallback(currentQuestion) && (
-              <img
-                src={currentQuestion.question_image}
-                alt="Question visual"
-                className={`${compactQuestionImageClassName} mb-2`}
-                loading="lazy"
-                decoding="async"
-                style={{ filter: "url(#remove-orange)" }}
-              />
+              <div className="flex justify-start mb-2">
+                <img
+                  src={currentQuestion.question_image}
+                  alt="Question visual"
+                  className={compactQuestionImageClassName}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ filter: "url(#remove-orange)" }}
+                />
+              </div>
             )}
 
             {canShowStructuredQuestionText(currentQuestion) && (
@@ -891,14 +897,16 @@ export default function PYQSessionPage() {
             <QuestionDiagram question={currentQuestion} />
 
             {!hasNativeDiagram && shouldShowRequiredQuestionImage(currentQuestion) && (
-              <img
-                src={currentQuestion.question_image}
-                alt="Question visual"
-                className={`${compactQuestionImageClassName} mt-2 mb-2`}
-                loading="lazy"
-                decoding="async"
-                style={{ filter: "url(#remove-orange)" }}
-              />
+              <div className="flex justify-start my-1.5">
+                <img
+                  src={currentQuestion.question_image}
+                  alt="Question visual"
+                  className={compactQuestionImageClassName}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ filter: "url(#remove-orange)" }}
+                />
+              </div>
             )}
 
             {/* Options */}
@@ -917,7 +925,7 @@ export default function PYQSessionPage() {
                   />
                 </div>
               ) : (
-                <div className="space-y-1.5 sm:space-y-2">
+                <div className={hasAnyOptionImages ? "grid grid-cols-1 sm:grid-cols-2 gap-2" : "space-y-1.5 sm:space-y-2"}>
                   {["a", "b", "c", "d"].map((option, idx) => {
                     const isSelected =
                       qType === "MULTIPLE_CORRECT"
