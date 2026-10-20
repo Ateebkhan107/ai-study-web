@@ -1,0 +1,40 @@
+{
+  "session": "August 2021",
+  "status": "complete",
+  "papers": [
+    "JEE-MAIN-21-26AUG-S1",
+    "JEE-MAIN-21-26AUG-S2",
+    "JEE-MAIN-21-27AUG-S1",
+    "JEE-MAIN-21-27AUG-S2",
+    "JEE-MAIN-21-31AUG-S1",
+    "JEE-MAIN-21-31AUG-S2"
+  ],
+  "paper_count": 6,
+  "question_count": 540,
+  "referenced_image_count": 215,
+  "repairs": {
+    "image_questions": [
+      "JEE-MAIN-21-26AUG-S1 Q13",
+      "JEE-MAIN-21-26AUG-S2 Q47",
+      "JEE-MAIN-21-26AUG-S2 Q50",
+      "JEE-MAIN-21-27AUG-S1 Q47",
+      "JEE-MAIN-21-31AUG-S1 Q50",
+      "JEE-MAIN-21-31AUG-S2 Q33",
+      "JEE-MAIN-21-31AUG-S2 Q48",
+      "JEE-MAIN-21-31AUG-S2 Q49"
+    ],
+    "notes": [
+      "Removed neighboring choices, answer-key text, and question prose from dedicated image crops.",
+      "Re-segmented graphical options from pristine source figures and normalized display bounds."
+    ]
+  },
+  "validation": {
+    "questions_per_paper": 90,
+    "unbalanced_math_delimiters": 0,
+    "dummy_options": 0,
+    "unmapped_chapters": 0,
+    "invalid_image_urls": 0,
+    "live_database_rows": 540,
+    "existing_question_ids_preserved": 540
+  }
+}

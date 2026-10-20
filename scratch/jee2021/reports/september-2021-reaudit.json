@@ -1,0 +1,29 @@
+{
+  "session": "September 2021",
+  "status": "complete",
+  "papers": [
+    "JEE-MAIN-21-01SEP-S1"
+  ],
+  "paper_count": 1,
+  "question_count": 90,
+  "referenced_image_count": 33,
+  "repairs": {
+    "image_questions": [
+      "JEE-MAIN-21-01SEP-S1 Q15",
+      "JEE-MAIN-21-01SEP-S1 Q35"
+    ],
+    "notes": [
+      "Resized and re-segmented the force-versus-distance graph alternatives.",
+      "Removed option-number fragments from the chemistry structure choices."
+    ]
+  },
+  "validation": {
+    "questions_per_paper": 90,
+    "unbalanced_math_delimiters": 0,
+    "dummy_options": 0,
+    "unmapped_chapters": 0,
+    "invalid_image_urls": 0,
+    "live_database_rows": 90,
+    "existing_question_ids_preserved": 90
+  }
+}

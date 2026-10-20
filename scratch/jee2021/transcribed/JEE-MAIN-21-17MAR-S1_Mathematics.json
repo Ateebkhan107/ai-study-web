@@ -450,7 +450,12 @@
     "option_b": "$g(\\alpha)$ has an inflection point at $\\alpha = -\\frac{1}{2}$",
     "option_c": "$g(\\alpha)$ is a strictly decreasing function",
     "option_d": "$g(\\alpha)$ is an even function",
-    "correct_option": "a) or (b) or (c",
+    "correct_option": "a",
+    "correct_options": [
+      "a",
+      "b",
+      "c"
+    ],
     "needs_question_image": false,
     "option_a_needs_image": false,
     "option_b_needs_image": false,

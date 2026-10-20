@@ -1,0 +1,42 @@
+{
+  "session": "July 2021",
+  "status": "complete",
+  "papers": [
+    "JEE-MAIN-21-20JUL-S1",
+    "JEE-MAIN-21-20JUL-S2",
+    "JEE-MAIN-21-22JUL-S2",
+    "JEE-MAIN-21-25JUL-S1",
+    "JEE-MAIN-21-25JUL-S2",
+    "JEE-MAIN-21-27JUL-S1",
+    "JEE-MAIN-21-27JUL-S2"
+  ],
+  "paper_count": 7,
+  "question_count": 630,
+  "referenced_image_count": 190,
+  "repairs": {
+    "image_questions": [
+      "JEE-MAIN-21-20JUL-S2 Q32",
+      "JEE-MAIN-21-20JUL-S2 Q33",
+      "JEE-MAIN-21-20JUL-S2 Q45",
+      "JEE-MAIN-21-20JUL-S2 Q46",
+      "JEE-MAIN-21-25JUL-S1 Q33",
+      "JEE-MAIN-21-25JUL-S1 Q37",
+      "JEE-MAIN-21-25JUL-S2 Q46",
+      "JEE-MAIN-21-27JUL-S2 Q11",
+      "JEE-MAIN-21-27JUL-S2 Q12"
+    ],
+    "question_text": [
+      "JEE-MAIN-21-22JUL-S2 Q36: rebuilt List-I/List-II as a readable table",
+      "JEE-MAIN-21-25JUL-S2 Q47: rebuilt List-I/List-II as a readable table"
+    ]
+  },
+  "validation": {
+    "questions_per_paper": 90,
+    "unbalanced_math_delimiters": 0,
+    "dummy_options": 0,
+    "unmapped_chapters": 0,
+    "invalid_image_urls": 0,
+    "live_database_rows": 630,
+    "existing_question_ids_preserved": 630
+  }
+}

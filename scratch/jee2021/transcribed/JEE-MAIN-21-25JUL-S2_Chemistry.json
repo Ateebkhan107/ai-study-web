@@ -419,7 +419,7 @@
     "local_number": 17,
     "question_type": "MCQ",
     "chapter": "Surface Chemistry",
-    "question": "Match List I with List II : \\begin{tabular}{|c|c|} \\hline List-I & List-II \\\\ \\hline Example of colloids & Classification \\\\ \\hline (a) Cheese & (i) dispersion of liquid in liquid \\\\ \\hline (b) Pumice stone & (ii) dispersion of liquid in gas \\\\ \\hline (c) Hair cream & (iii) dispersion of gas in solid \\\\ \\hline (d) Cloud & (iv) dispersion of liquid in solid \\\\ \\hline \\end{tabular} Choose the most appropriate answer from the options given below.",
+    "question": "Match List-I with List-II:\n\n| List-I (example of colloid) | List-II (classification) |\n|---|---|\n| (a) Cheese | (i) Dispersion of liquid in liquid |\n| (b) Pumice stone | (ii) Dispersion of liquid in gas |\n| (c) Hair cream | (iii) Dispersion of gas in solid |\n| (d) Cloud | (iv) Dispersion of liquid in solid |\n\nChoose the most appropriate answer from the options given below.",
     "option_a": "(a)-(iv), (b)-(iii), (c)-(ii), (d)-(i)",
     "option_b": "(a)-(iv), (b)-(i), (c)-(iii), (d)-(ii)",
     "option_c": "(a)-(iii), (b)-(iv), (c)-(i), (d)-(ii)",

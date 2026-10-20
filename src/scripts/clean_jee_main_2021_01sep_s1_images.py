@@ -52,8 +52,8 @@ def split(number, question_box, option_boxes):
 
 # Physics Q15: surface profile followed by four vertically stacked force graphs.
 split(15, (80, 0, 650, 250), [
-    (120, 250, 650, 665), (120, 665, 650, 1190),
-    (120, 1190, 650, 1715), (120, 1715, 650, 2514),
+    (150, 250, 650, 800), (150, 800, 650, 1350),
+    (150, 1350, 650, 1900), (150, 1900, 650, 2514),
 ])
 
 # Chemistry Q4: four rate-constant graphs in a 2x2 grid.
@@ -64,8 +64,8 @@ split(34, None, [
 
 # Chemistry Q5: reaction scheme followed by four vertically stacked structures.
 split(35, (200, 0, 1000, 310), [
-    (80, 310, 700, 690), (80, 690, 700, 930),
-    (80, 930, 700, 1130), (80, 1130, 700, 1348),
+    (200, 310, 700, 650), (200, 650, 700, 930),
+    (200, 930, 700, 1130), (200, 1130, 700, 1348),
 ])
 
 # Chemistry Q16: four structural choices in a 2x2 grid.

@@ -69,8 +69,8 @@ split(45, None, [
 
 # Grignard reaction and four vertical structural alternatives.
 split(47, (0, 0, 1170, 150), [
-    (120, 165, 1170, 310), (120, 290, 1170, 445),
-    (120, 425, 1170, 580), (120, 560, 1170, 709),
+    (250, 155, 1170, 300), (250, 300, 1170, 445),
+    (250, 445, 1170, 585), (250, 585, 1170, 709),
 ])
 
 # Recover the two Jarvis omissions from the cleanest available source pages.

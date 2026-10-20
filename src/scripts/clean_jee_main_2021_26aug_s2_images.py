@@ -50,11 +50,11 @@ split(12, None, [(0, 0, 710, 490), (0, 485, 710, 975), (0, 970, 710, 1460), (0, 
 split(31, None, [(0, 0, 315, 238), (0, 230, 315, 475), (0, 465, 315, 710), (0, 700, 315, 944)])
 split(39, (0, 0, 942, 330), [(0, 305, 471, 665), (471, 305, 942, 665), (0, 640, 471, 1000), (471, 640, 942, 1000)])
 split(49, (0, 0, 821, 420), [(0, 400, 821, 610), (0, 590, 821, 810), (0, 790, 821, 1010), (0, 990, 821, 1202)])
-split(50, (0, 0, 928, 300), [(0, 280, 464, 600), (464, 280, 928, 600), (0, 575, 464, 878), (464, 575, 928, 878)])
+split(50, (0, 0, 928, 285), [(55, 285, 464, 585), (500, 285, 928, 585), (55, 585, 464, 878), (500, 585, 928, 878)])
 
 # Jarvis omitted Chemistry Q17; recover its four structural choices from the paper page.
 page4 = Image.open(ROOT / "scratch/jee2021/local" / PAPER / "chemistry/pages/page-4.png").convert("RGB")
-for letter, box in zip("abcd", [(180, 1600, 430, 1900), (430, 1600, 700, 1900), (180, 1880, 430, 2180), (430, 1880, 700, 2180)]):
+for letter, box in zip("abcd", [(250, 1590, 390, 1810), (405, 1590, 615, 1810), (245, 1805, 400, 1990), (410, 1805, 625, 1990)]):
     save_crop(page4, box, f"q47_opt_{letter}.png")
 
 print({"normalized_sources": len(originals), "recovered_option_questions": 1, "graphical_option_questions": 6, "option_images": 24})

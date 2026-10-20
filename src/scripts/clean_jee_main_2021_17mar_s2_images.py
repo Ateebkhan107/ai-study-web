@@ -36,12 +36,12 @@ for name, image in originals.items():
 
 source = originals["q42.png"]
 (IMAGE_DIR / "q42.png").unlink(missing_ok=True)
-for letter, box in zip("abcd", [(65, 0, 610, 220), (680, 0, 1231, 220), (65, 210, 610, 435), (680, 210, 1231, 435)]):
+for letter, box in zip("abcd", [(65, 26, 610, 202), (680, 26, 1231, 202), (65, 245, 610, 435), (680, 245, 1231, 435)]):
     save_crop(source, box, f"q42_opt_{letter}.png")
 
 source = originals["q46.png"]
-save_crop(source, (0, 0, 939, 235), "q46.png")
-for letter, box in zip("abcd", [(55, 225, 939, 500), (55, 485, 939, 755), (55, 740, 939, 1010), (55, 990, 939, 1247)]):
+save_crop(source, (0, 0, 939, 224), "q46.png")
+for letter, box in zip("abcd", [(55, 224, 939, 466), (55, 492, 939, 722), (55, 738, 939, 978), (55, 993, 939, 1235)]):
     save_crop(source, box, f"q46_opt_{letter}.png")
 
 print({"normalized_sources": len(originals), "graphical_option_questions": 2, "option_images": 8})

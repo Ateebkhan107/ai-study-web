@@ -367,7 +367,7 @@
     "local_number": 15,
     "question_type": "MCQ",
     "chapter": "Electromagnetic Induction & Alternating Current",
-    "question": "Match List-I with List-II List-I \\begin{tabular}{|c|p{7cm}|c|p{5cm}|} \\hline \\multicolumn{2}{|c|}{List-I} & \\multicolumn{2}{c|}{List-II} \\\\ \\hline (a) & Phase difference between current and voltage in a purely resistive AC circuit & (i) & $\\dfrac{\\pi}{2}$ ; current leads voltage \\\\ \\hline (b) & Phase difference between current and voltage in a pure inductive AC circuit & (ii) & zero \\\\ \\hline (c) & Phase difference between current and voltage in a pure capacitive AC circuit & (iii) & $\\dfrac{\\pi}{2}$ ; current lags voltage \\\\ \\hline (d) & Phase difference between current and voltage in an LCR series AC circuit & (iv) & $\\tan^{-1}\\left(\\dfrac{X_C-X_L}{R}\\right)$ \\\\ \\hline \\end{tabular}",
+    "question": "Match List-I with List-II:\n\n| | List-I | | List-II |\n|---|---|---|---|\n| (a) | Phase difference between current and voltage in a purely resistive AC circuit | (i) | $\\dfrac{\\pi}{2}$; current leads voltage |\n| (b) | Phase difference between current and voltage in a pure inductive AC circuit | (ii) | zero |\n| (c) | Phase difference between current and voltage in a pure capacitive AC circuit | (iii) | $\\dfrac{\\pi}{2}$; current lags voltage |\n| (d) | Phase difference between current and voltage in an LCR series AC circuit | (iv) | $\\tan^{-1}\\left(\\dfrac{X_C-X_L}{R}\\right)$ |",
     "option_a": "(a)- (i), (b) - (iii), \\text(c)\\ - (iv), (d) - (ii)",
     "option_b": "(a)- (ii), (b) - (iv), \\text(c)\\ - (iii), (d) - (i)",
     "option_c": "(a)- (ii), (b) - (iii), \\text(c)\\ - (iv), (d) - (i)",

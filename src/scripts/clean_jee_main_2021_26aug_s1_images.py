@@ -38,8 +38,8 @@ page1 = Image.open(ROOT / "scratch/jee2021/local" / PAPER / "physics/pages/page-
 save_crop(page1, (1250, 430, 1725, 850), "q2.png")
 
 page4 = Image.open(ROOT / "scratch/jee2021/local" / PAPER / "physics/pages/page-4.png").convert("RGB")
-save_crop(page4, (1180, 300, 1780, 700), "q13.png")
-for letter, box in zip("abcd", [(1100, 650, 1850, 1050), (1100, 1000, 1850, 1350), (1100, 1320, 1850, 1660), (1100, 1630, 1850, 1950)]):
+save_crop(page4, (1280, 560, 1780, 900), "q13.png")
+for letter, box in zip("abcd", [(1210, 900, 1780, 1200), (1210, 1200, 1780, 1490), (1210, 1490, 1780, 1770), (1210, 1770, 1780, 2070)]):
     save_crop(page4, box, f"q13_opt_{letter}.png")
 
 

@@ -38,14 +38,14 @@ for name, image in originals.items():
 # Chemistry Q13: all four choices are condensed structural formulae.
 source = originals["q43.png"]
 (IMAGE_DIR / "q43.png").unlink(missing_ok=True)
-for letter, box in zip("abcd", [(45, 0, 742, 115), (45, 105, 742, 255), (45, 245, 742, 350), (45, 340, 742, 454)]):
+for letter, box in zip("abcd", [(45, 25, 742, 139), (45, 181, 742, 303), (45, 336, 742, 380), (45, 399, 742, 444)]):
     save_crop(source, box, f"q43_opt_{letter}.png")
 
 # Chemistry Q20: retain the reaction scheme above the prompt and split the
 # four molecular choices, omitting their printed option numbers.
 source = originals["q50.png"]
 save_crop(source, (0, 0, 930, 285), "q50.png")
-for letter, box in zip("abcd", [(40, 330, 465, 635), (500, 330, 930, 635), (40, 620, 465, 935), (500, 620, 930, 935)]):
+for letter, box in zip("abcd", [(40, 338, 465, 535), (500, 338, 930, 535), (40, 611, 465, 889), (500, 611, 930, 889)]):
     save_crop(source, box, f"q50_opt_{letter}.png")
 
 print({"normalized_sources": len(originals), "graphical_option_questions": 2, "option_images": 8})

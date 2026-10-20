@@ -24,6 +24,11 @@ function evaluateAttempt(question, selectedOption) {
   }
 
   if (type === "MCQ") {
+    if (Array.isArray(question.correct_options) && question.correct_options.length > 0) {
+      return question.correct_options
+        .map((value) => String(value).trim().toLowerCase())
+        .includes(String(selectedOption).trim().toLowerCase());
+    }
     return String(question.correct_option).toLowerCase() === String(selectedOption).toLowerCase();
   }
 

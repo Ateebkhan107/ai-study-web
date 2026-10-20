@@ -133,7 +133,7 @@
     "local_number": 6,
     "question_type": "MCQ",
     "chapter": "The s-Block Elements",
-    "question": "Match List-I with List-II \\begin{tabular}{|c|l|c|l|} \\hline \\multicolumn{2}{|c|}{\\textbf{List-I (Elements)}} & \\multicolumn{2}{c|}{\\textbf{List-II (Properties)}} \\\\ \\hline (a) & Ba & (i) & Organic solvent soluble compounds \\\\ \\hline (b) & Ca & (ii) & Outer electronic configuration $6s^2$ \\\\ \\hline (c) & Li & (iii) & Oxalate insoluble in water \\\\ \\hline (d) & Na & (iv) & Formation of very strong monoacidic base \\\\ \\hline \\end{tabular}",
+    "question": "Match List-I with List-II:\n\n| | List-I (Elements) | | List-II (Properties) |\n|---|---|---|---|\n| (a) | Ba | (i) | Organic-solvent-soluble compounds |\n| (b) | Ca | (ii) | Outer electronic configuration $6s^2$ |\n| (c) | Li | (iii) | Oxalate insoluble in water |\n| (d) | Na | (iv) | Formation of a very strong monoacidic base |",
     "option_a": "(a) − (ii), (b) − (iii), (c) − (i) and (d) − (iv)",
     "option_b": "(a) − (iv), (b) − (i), (c) − (ii) and (d) − (iii)",
     "option_c": "(a) − (i), (b) − (iv), (iii) − (ii) and (d) − (iii)",

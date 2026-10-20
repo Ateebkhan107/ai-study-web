@@ -1,0 +1,41 @@
+{
+  "completed_at": "2026-10-21",
+  "scope": {
+    "papers": 6,
+    "questions": 540,
+    "subjects_per_paper": { "Physics": 30, "Chemistry": 30, "Mathematics": 30 },
+    "image_assets_audited": 172
+  },
+  "papers": {
+    "JEE-MAIN-21-16MAR-S1": { "questions": 90, "images": 39, "repaired_questions": [34, 37, 41] },
+    "JEE-MAIN-21-16MAR-S2": { "questions": 90, "images": 18, "repaired_questions": [43, 50] },
+    "JEE-MAIN-21-17MAR-S1": { "questions": 90, "images": 34, "repaired_questions": [33, 36, 41], "corrected_answer_keys": [78] },
+    "JEE-MAIN-21-17MAR-S2": { "questions": 90, "images": 20, "repaired_questions": [42, 46], "corrected_text_questions": [15] },
+    "JEE-MAIN-21-18MAR-S1": { "questions": 90, "images": 34, "repaired_questions": [31, 33, 37, 43, 45] },
+    "JEE-MAIN-21-18MAR-S2": { "questions": 90, "images": 27, "repaired_questions": [7, 17, 44] }
+  },
+  "repairs": {
+    "image_backed_questions": 18,
+    "regenerated_and_uploaded_assets": 83,
+    "details": [
+      "Removed adjacent-option leakage and clipped chemical structures/graphs.",
+      "Restored the missing reaction stem for JEE-MAIN-21-16MAR-S1 Q37.",
+      "Converted JEE-MAIN-21-17MAR-S2 Q15 from an unsupported raw LaTeX tabular block to a rendered Markdown table.",
+      "Represented the official accepted alternatives for JEE-MAIN-21-17MAR-S1 Q78 as correct_options [a, b, c], while retaining a valid primary correct_option."
+    ]
+  },
+  "validation": {
+    "question_count_failures": 0,
+    "subject_count_failures": 0,
+    "sequence_failures": 0,
+    "unbalanced_math_delimiters": 0,
+    "dummy_options": 0,
+    "unmapped_chapters": 0,
+    "numerical_option_failures": 0,
+    "exact_duplicate_image_groups_within_papers": 0,
+    "missing_local_images": 0,
+    "published_image_url_failures": 0,
+    "live_database_rows": 540,
+    "existing_question_ids_preserved": true
+  }
+}
