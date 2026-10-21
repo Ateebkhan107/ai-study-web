@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import Image from "next/image";
 
 const DiagramSizeContext = createContext({ compact: false });
 
@@ -49,83 +50,45 @@ function DiagramFrame({ title, children }) {
 
 function PositionTimeDiagram() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="a > 0">
-        <Axis xLabel="t" yLabel="x" />
-        <path
-          d="M44 154 C72 150 98 131 122 94 C140 66 159 45 180 36"
-          fill="none"
-          className="stroke-amber-500"
-          strokeLinecap="round"
-          strokeWidth="3.5"
-        />
-        <line x1="34" y1="120" x2="54" y2="120" className="stroke-slate-400 dark:stroke-stone-500" strokeDasharray="3 3" />
-        <text x="8" y="124" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          xi
-        </text>
-      </DiagramFrame>
-      <DiagramFrame title="a < 0">
-        <Axis xLabel="t" yLabel="x" />
-        <path
-          d="M44 54 C72 58 98 77 122 114 C140 142 159 158 180 162"
-          fill="none"
-          className="stroke-amber-500"
-          strokeLinecap="round"
-          strokeWidth="3.5"
-        />
-        <line x1="34" y1="72" x2="54" y2="72" className="stroke-slate-400 dark:stroke-stone-500" strokeDasharray="3 3" />
-        <text x="8" y="76" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          xi
-        </text>
-      </DiagramFrame>
+    <div className="rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden">
+      <Image
+        src="/images/formula-cards/position-time-graphs.png"
+        alt="Position-Time graphs for uniformly accelerated motion showing concave-up positive acceleration and concave-down negative acceleration"
+        className="h-auto w-full rounded-md object-contain"
+        width={2752}
+        height={1536}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
 
 function VelocityTimeDiagram() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="positive acceleration">
-        <Axis xLabel="t" yLabel="v" />
-        <line x1="44" y1="126" x2="180" y2="54" className="stroke-amber-500" strokeLinecap="round" strokeWidth="3.5" />
-        <text x="16" y="130" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          u
-        </text>
-        <text x="100" y="82" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">
-          slope = a
-        </text>
-      </DiagramFrame>
-      <DiagramFrame title="negative acceleration">
-        <Axis xLabel="t" yLabel="v" />
-        <line x1="44" y1="74" x2="180" y2="144" className="stroke-amber-500" strokeLinecap="round" strokeWidth="3.5" />
-        <text x="16" y="78" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          u
-        </text>
-        <text x="98" y="112" className="fill-amber-600 text-[12px] font-bold dark:fill-amber-300">
-          slope = a
-        </text>
-      </DiagramFrame>
+    <div className="rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden">
+      <Image
+        src="/images/formula-cards/velocity-time-graphs.png"
+        alt="Velocity-Time graphs for uniformly accelerated motion showing positive and negative acceleration"
+        className="h-auto w-full rounded-md object-contain"
+        width={2400}
+        height={1792}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
 
 function AccelerationTimeDiagram() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="positive acceleration">
-        <Axis xLabel="t" yLabel="a" />
-        <line x1="44" y1="78" x2="180" y2="78" className="stroke-amber-500" strokeLinecap="round" strokeWidth="3.5" />
-        <text x="17" y="82" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          a
-        </text>
-      </DiagramFrame>
-      <DiagramFrame title="negative acceleration">
-        <Axis xLabel="t" yLabel="a" />
-        <line x1="44" y1="140" x2="180" y2="140" className="stroke-amber-500" strokeLinecap="round" strokeWidth="3.5" />
-        <text x="17" y="144" className="fill-slate-500 text-[11px] dark:fill-stone-400">
-          a
-        </text>
-      </DiagramFrame>
+    <div className="rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden">
+      <Image
+        src="/images/formula-cards/acceleration-time-graphs.png"
+        alt="Acceleration-Time graphs for uniformly accelerated motion showing constant positive and negative acceleration"
+        className="h-auto w-full rounded-md object-contain"
+        width={2400}
+        height={1792}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
@@ -164,21 +127,25 @@ function DiagramDefs() {
 }
 
 function ProjectileInclineDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="projection on inclined plane">
-      <DiagramDefs />
-      <line x1="34" y1="150" x2="180" y2="82" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <line x1="78" y1="130" x2="176" y2="130" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="1.8" />
-      <line x1="78" y1="130" x2="56" y2="82" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="1.8" />
-      <path d="M80 128 C96 101 122 91 156 78" fill="none" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
-      <Arrow x1="78" y1="130" x2="101" y2="88" label="u" labelX="107" labelY="91" />
-      <path d="M89 125 A25 25 0 0 1 101 107" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="1.6" />
-      <text x="101" y="119" className="fill-slate-700 text-[11px] dark:fill-stone-200">alpha</text>
-      <path d="M118 130 A43 43 0 0 0 156 101" fill="none" className="stroke-slate-500 dark:stroke-stone-400" strokeWidth="1.6" />
-      <text x="142" y="120" className="fill-slate-700 text-[11px] dark:fill-stone-200">beta</text>
-      <Arrow x1="68" y1="135" x2="40" y2="148" label="x" labelX="36" labelY="164" />
-      <Arrow x1="70" y1="126" x2="54" y2="90" label="y" labelX="47" labelY="82" />
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        projection on inclined plane
+      </div>
+      <Image
+        src="/images/formula-cards/projection-inclined-plane.png"
+        alt="Projection on an inclined plane diagram showing the inclined axes, launch velocity, alpha angle, and beta incline angle"
+        className="h-auto w-full rounded-md object-contain"
+        width={2400}
+        height={1792}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
@@ -220,202 +187,234 @@ function RiverBase({ shortestPath = false }) {
 }
 
 function PulleySystemDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="pulley relation">
-      <DiagramDefs />
-      <line x1="55" y1="28" x2="155" y2="28" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="3" />
-      <circle cx="88" cy="58" r="18" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="112" cy="112" r="18" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <path d="M70 58 V96 H94 V112" fill="none" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <path d="M106 58 V94 M130 112 V154" fill="none" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <rect x="54" y="94" width="22" height="22" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      <rect x="98" y="148" width="22" height="22" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      <rect x="128" y="150" width="22" height="22" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      <Arrow x1="48" y1="130" x2="48" y2="158" label="V1" labelX="30" labelY="149" />
-      <Arrow x1="150" y1="126" x2="150" y2="160" label="V2" labelX="154" labelY="150" />
-      <Arrow x1="145" y1="92" x2="145" y2="126" label="Vp" labelX="150" labelY="112" />
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        pulley relation
+      </div>
+      <Image
+        src="/images/formula-cards/pulley-relation.png"
+        alt="Pulley relation diagram showing vp equals v1 plus v2 over 2"
+        className="h-auto w-full rounded-md object-contain"
+        width={2400}
+        height={1792}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function AtwoodMachineDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="atwood machine">
-      <DiagramDefs />
-      <line x1="52" y1="30" x2="168" y2="30" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="3" />
-      <circle cx="110" cy="72" r="28" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="110" cy="72" r="3" className="fill-slate-700 dark:fill-stone-300" />
-      <path d="M82 72 V136 M138 72 V154" fill="none" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <rect x="68" y="136" width="28" height="28" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      <rect x="124" y="154" width="28" height="28" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      <text x="72" y="155" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">m1</text>
-      <text x="128" y="173" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">m2</text>
-      <Arrow x1="58" y1="160" x2="58" y2="125" label="a" labelX="44" labelY="142" />
-      <Arrow x1="164" y1="135" x2="164" y2="170" label="a" labelX="170" labelY="154" />
-      <Arrow x1="84" y1="118" x2="84" y2="89" label="T" labelX="68" labelY="102" />
-      <Arrow x1="136" y1="130" x2="136" y2="100" label="T" labelX="141" labelY="116" />
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        atwood machine
+      </div>
+      <Image
+        src="/images/formula-cards/atwood-machine.png"
+        alt="Atwood machine diagram showing two masses connected over a pulley with tension and acceleration directions"
+        className="h-auto w-full rounded-md object-contain"
+        width={2400}
+        height={1792}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function WedgeConstraintDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="wedge constraint">
-      <DiagramDefs />
-      <path d="M40 154 H166 L166 56 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
-      <g transform="translate(88 106) rotate(-42)">
-        <rect x="-18" y="-11" width="36" height="22" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" />
-      </g>
-      <Arrow x1="166" y1="124" x2="202" y2="124" label="V1" labelX="205" labelY="128" />
-      <Arrow x1="88" y1="106" x2="62" y2="126" label="V2" labelX="50" labelY="130" />
-      <Arrow x1="88" y1="106" x2="112" y2="132" label="V3" labelX="114" labelY="136" />
-      <text x="72" y="150" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta</text>
-      <text x="72" y="174" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">V3 = V1 sin theta</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        wedge constraint
+      </div>
+      <Image
+        src="/images/formula-cards/wedge-constraint.png"
+        alt="Wedge constraint diagram showing velocity components perpendicular and parallel to the inclined plane"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={764}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function FrictionGraphDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="block under applied force">
-        <DiagramDefs />
-        <line x1="28" y1="146" x2="176" y2="146" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-        <rect x="78" y="100" width="48" height="46" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2.5" />
-        <text x="96" y="128" className="fill-slate-700 text-[14px] font-bold dark:fill-stone-200">M</text>
-        <Arrow x1="126" y1="123" x2="170" y2="123" label="F" labelX="175" labelY="127" />
-        <Arrow x1="78" y1="134" x2="40" y2="134" label="f" labelX="26" labelY="138" />
-        <text x="74" y="164" className="fill-slate-700 text-[12px] dark:fill-stone-200">mu_s, mu_k</text>
-      </DiagramFrame>
-      <DiagramFrame title="friction vs applied force">
-        <DiagramDefs />
-        <Axis xLabel="" yLabel="" />
-        <path d="M34 166 L102 82 Q116 62 132 84 L178 84" fill="none" className="stroke-amber-500" strokeWidth="3.5" />
-        <line x1="104" y1="166" x2="104" y2="82" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <line x1="146" y1="166" x2="146" y2="84" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <text x="7" y="78" className="fill-slate-700 text-[12px] dark:fill-stone-200" transform="rotate(-90 7 78)">Friction</text>
-        <text x="112" y="181" className="fill-slate-700 text-[12px] dark:fill-stone-200">Applied Force</text>
-        <text x="57" y="126" className="fill-slate-700 text-[12px] dark:fill-stone-200" transform="rotate(-43 57 126)">static</text>
-        <text x="108" y="103" className="fill-slate-700 text-[12px] dark:fill-stone-200">mu_s N</text>
-        <text x="149" y="103" className="fill-slate-700 text-[12px] dark:fill-stone-200">mu_k N</text>
-      </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        friction vs applied force
+      </div>
+      <Image
+        src="/images/formula-cards/friction-graph.png"
+        alt="Friction versus applied force diagram showing a block under applied force alongside the static and kinetic friction graph"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={571}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
 
 function CircularAngularVelocityDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="angular displacement">
-      <DiagramDefs />
-      <circle cx="110" cy="96" r="50" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="110" cy="96" r="3" className="fill-slate-700 dark:fill-stone-300" />
-      <line x1="110" y1="96" x2="160" y2="96" className="stroke-slate-600 dark:stroke-stone-400" strokeWidth="2" />
-      <line x1="110" y1="96" x2="151" y2="68" className="stroke-slate-600 dark:stroke-stone-400" strokeWidth="2" />
-      <path d="M139 96 A29 29 0 0 0 134 80" fill="none" className="stroke-amber-500" strokeWidth="3" markerEnd="url(#arrow)" />
-      <Arrow x1="110" y1="96" x2="110" y2="36" label="omega" labelX="116" labelY="44" />
-      <text x="132" y="88" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">theta</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        angular displacement
+      </div>
+      <Image
+        src="/images/formula-cards/angular-displacement.png"
+        alt="Angular displacement diagram showing a circle with angular displacement theta and angular velocity omega"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={764}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function CircularAccelerationDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="acceleration components">
-      <DiagramDefs />
-      <circle cx="94" cy="104" r="48" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="94" cy="104" r="3" className="fill-slate-700 dark:fill-stone-300" />
-      <circle cx="142" cy="104" r="4" className="fill-amber-500" />
-      <line x1="94" y1="104" x2="142" y2="104" className="stroke-slate-600 dark:stroke-stone-400" strokeWidth="2" />
-      <Arrow x1="142" y1="104" x2="142" y2="58" label="v, at" labelX="148" labelY="68" />
-      <Arrow x1="142" y1="104" x2="103" y2="104" label="ar" labelX="112" labelY="96" />
-      <Arrow x1="142" y1="104" x2="128" y2="61" label="a" labelX="119" labelY="56" dashed />
-      <text x="84" y="121" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
-      <text x="146" y="121" className="fill-slate-700 text-[12px] dark:fill-stone-200">P</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        acceleration components
+      </div>
+      <Image
+        src="/images/formula-cards/acceleration-components.png"
+        alt="Radial and tangential acceleration components diagram showing total acceleration a with radial ar and tangential at components"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={764}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function BridgeReactionsDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="concave bridge">
-        <DiagramDefs />
-        <path d="M35 102 Q110 174 185 102" fill="none" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="4" />
-        <rect x="62" y="107" width="36" height="18" rx="3" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" transform="rotate(26 80 116)" />
-        <Arrow x1="80" y1="116" x2="97" y2="82" label="N" labelX="100" labelY="87" />
-        <Arrow x1="80" y1="116" x2="80" y2="153" label="mg" labelX="58" labelY="147" />
-        <Arrow x1="97" y1="128" x2="132" y2="140" label="v" labelX="137" labelY="145" />
-        <line x1="110" y1="70" x2="110" y2="148" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <text x="117" y="74" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
-      </DiagramFrame>
-      <DiagramFrame title="convex bridge">
-        <DiagramDefs />
-        <path d="M35 145 Q110 74 185 145" fill="none" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="4" />
-        <rect x="61" y="111" width="36" height="18" rx="3" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" transform="rotate(-25 79 120)" />
-        <Arrow x1="80" y1="118" x2="64" y2="84" label="N" labelX="52" labelY="88" />
-        <Arrow x1="80" y1="118" x2="80" y2="154" label="mg" labelX="58" labelY="150" />
-        <Arrow x1="98" y1="111" x2="134" y2="100" label="v" labelX="139" labelY="103" />
-        <line x1="112" y1="121" x2="112" y2="176" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <text x="118" y="176" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
-      </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        concave and convex bridge
+      </div>
+      <Image
+        src="/images/formula-cards/concave-convex-bridge.png"
+        alt="Concave and convex bridge diagram showing normal reaction, gravity, velocity, center O, and radius r for valley and hill"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={571}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
 
 function BankedRoadDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="banked road">
-      <DiagramDefs />
-      <line x1="42" y1="132" x2="178" y2="88" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="4" />
-      <line x1="48" y1="142" x2="180" y2="142" className="stroke-slate-400 dark:stroke-stone-600" strokeWidth="1.5" />
-      <rect x="88" y="93" width="42" height="20" rx="3" className="fill-white stroke-slate-700 dark:fill-stone-950 dark:stroke-stone-300" strokeWidth="2" transform="rotate(-18 109 103)" />
-      <Arrow x1="108" y1="103" x2="92" y2="59" label="N" labelX="80" labelY="64" />
-      <Arrow x1="108" y1="103" x2="108" y2="148" label="mg" labelX="113" labelY="139" />
-      <Arrow x1="129" y1="98" x2="168" y2="86" label="v" labelX="172" labelY="89" />
-      <path d="M76 142 A36 36 0 0 1 109 122" fill="none" className="stroke-amber-500" strokeWidth="2.5" />
-      <text x="88" y="139" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">theta</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        banked road
+      </div>
+      <Image
+        src="/images/formula-cards/banked-road.png"
+        alt="Banked road diagram showing a car on an inclined banked track with normal force N, gravity mg, and banking angle theta"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={765}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function VerticalLoopDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="vertical loop">
-      <DiagramDefs />
-      <circle cx="104" cy="93" r="50" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="104" cy="93" r="3" className="fill-slate-700 dark:fill-stone-300" />
-      <circle cx="104" cy="143" r="4" className="fill-amber-500" />
-      <circle cx="154" cy="93" r="4" className="fill-amber-500" />
-      <circle cx="104" cy="43" r="4" className="fill-amber-500" />
-      <text x="100" y="37" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">C</text>
-      <text x="158" y="96" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">B</text>
-      <text x="101" y="160" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">A</text>
-      <line x1="104" y1="93" x2="137" y2="130" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="2" />
-      <Arrow x1="137" y1="130" x2="171" y2="130" label="N" labelX="175" labelY="134" />
-      <Arrow x1="137" y1="130" x2="137" y2="92" label="v" labelX="142" labelY="106" />
-      <text x="78" y="96" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
-      <text x="72" y="118" className="fill-slate-700 text-[12px] dark:fill-stone-200">L</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        vertical loop
+      </div>
+      <Image
+        src="/images/formula-cards/vertical-loop.png"
+        alt="Vertical loop critical speed diagram showing positions A, B, and C with velocities, normal forces, and gravity"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={765}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function ConicalPendulumDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="conical pendulum">
-      <DiagramDefs />
-      <line x1="110" y1="28" x2="110" y2="62" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <line x1="76" y1="30" x2="144" y2="30" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="3" />
-      <line x1="110" y1="62" x2="82" y2="126" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2.5" />
-      <line x1="110" y1="62" x2="110" y2="126" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-      <ellipse cx="110" cy="126" rx="50" ry="14" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <circle cx="82" cy="126" r="5" className="fill-amber-500" />
-      <Arrow x1="82" y1="126" x2="82" y2="166" label="mg" labelX="62" labelY="158" />
-      <Arrow x1="82" y1="126" x2="102" y2="82" label="T" labelX="88" labelY="94" />
-      <line x1="82" y1="126" x2="110" y2="126" className="stroke-slate-600 dark:stroke-stone-400" strokeDasharray="4 4" />
-      <text x="94" y="121" className="fill-slate-700 text-[12px] dark:fill-stone-200">r</text>
-      <text x="117" y="96" className="fill-slate-700 text-[12px] dark:fill-stone-200">h</text>
-      <text x="91" y="67" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        conical pendulum
+      </div>
+      <div className="flex justify-center">
+        <Image
+          src="/images/formula-cards/conical-pendulum.png"
+          alt="Conical pendulum diagram showing length L, height h, radius r, angle theta, tension T, and gravity mg"
+          className="h-auto w-full max-w-[340px] sm:max-w-[380px] rounded-md object-contain"
+          width={765}
+          height={1024}
+          sizes="(min-width: 640px) 380px, calc(100vw - 5rem)"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -478,8 +477,8 @@ function ComSemicirclesDiagram() {
       <DiagramFrame title="semi-circular disc">
         <path d="M58 132 A52 52 0 0 1 162 132 L58 132 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
         <line x1="110" y1="52" x2="110" y2="154" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" />
-        <circle cx="110" cy="88" r="4" className="fill-amber-500" />
-        <text x="117" y="92" className="fill-slate-700 text-[12px] dark:fill-stone-200">c.m.</text>
+        <circle cx="110" cy="110" r="4" className="fill-amber-500" />
+        <text x="117" y="114" className="fill-slate-700 text-[12px] dark:fill-stone-200">c.m.</text>
       </DiagramFrame>
     </div>
   );
@@ -492,35 +491,44 @@ function ComCurvedBodiesDiagram() {
         <path d="M58 126 A52 52 0 0 1 162 126" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
         <ellipse cx="110" cy="126" rx="52" ry="13" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
         <line x1="110" y1="54" x2="110" y2="150" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" />
-        <circle cx="110" cy="102" r="4" className="fill-amber-500" />
-        <text x="116" y="106" className="fill-slate-700 text-[12px] dark:fill-stone-200">c.m.</text>
+        <circle cx="110" cy="100" r="3" className="fill-amber-500" />
+        <text x="103" y="103.5" textAnchor="end" className="fill-slate-700 text-[11px] font-medium dark:fill-stone-200">shell: R/2</text>
+        <circle cx="110" cy="106.5" r="3" className="fill-amber-500" />
+        <text x="117" y="110" textAnchor="start" className="fill-slate-700 text-[11px] font-medium dark:fill-stone-200">solid: 3R/8</text>
       </DiagramFrame>
       <DiagramFrame title="circular cone">
         <path d="M110 38 L62 148 Q110 162 158 148 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
         <ellipse cx="110" cy="148" rx="48" ry="13" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
         <line x1="110" y1="38" x2="110" y2="160" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" />
-        <circle cx="110" cy="120" r="4" className="fill-amber-500" />
-        <text x="116" y="124" className="fill-slate-700 text-[12px] dark:fill-stone-200">c.m.</text>
+        <circle cx="110" cy="111.3" r="3" className="fill-amber-500" />
+        <text x="103" y="115" textAnchor="end" className="fill-slate-700 text-[11px] font-medium dark:fill-stone-200">hollow: h/3</text>
+        <circle cx="110" cy="120.5" r="3" className="fill-amber-500" />
+        <text x="117" y="124" textAnchor="start" className="fill-slate-700 text-[11px] font-medium dark:fill-stone-200">solid: h/4</text>
       </DiagramFrame>
     </div>
   );
 }
 
 function RigidBodyConstraintDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="rigid body velocities">
-      <DiagramDefs />
-      <line x1="80" y1="54" x2="128" y2="142" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="3" />
-      <circle cx="80" cy="54" r="5" className="fill-slate-700 dark:fill-stone-300" />
-      <circle cx="128" cy="142" r="5" className="fill-slate-700 dark:fill-stone-300" />
-      <Arrow x1="80" y1="54" x2="128" y2="46" label="VA" labelX="132" labelY="50" />
-      <Arrow x1="128" y1="142" x2="80" y2="156" label="VB" labelX="59" labelY="162" />
-      <Arrow x1="128" y1="142" x2="100" y2="167" label="VBA" labelX="103" labelY="177" />
-      <text x="66" y="48" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">A</text>
-      <text x="134" y="146" className="fill-slate-700 text-[12px] font-bold dark:fill-stone-200">B</text>
-      <text x="94" y="91" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta1</text>
-      <text x="108" y="126" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta2</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        rigid body velocities
+      </div>
+      <Image
+        src="/images/formula-cards/rigid-body-velocities.png"
+        alt="Rigid body velocities diagram showing points A and B, velocity vectors, relative velocity, and velocity constraint formulas"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={765}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
@@ -565,81 +573,102 @@ function MoiDiscsCylindersDiagram() {
       <line x1="124" y1="62" x2="124" y2="132" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
       <line x1="184" y1="62" x2="184" y2="132" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
       <ellipse cx="154" cy="132" rx="30" ry="10" className="fill-transparent stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <line x1="154" y1="28" x2="154" y2="160" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="2" />
-      <text x="54" y="150" className="fill-slate-700 text-[12px] dark:fill-stone-200">disc</text>
-      <text x="132" y="150" className="fill-slate-700 text-[12px] dark:fill-stone-200">cylinder</text>
+      <line x1="154" y1="28" x2="154" y2="146" className="stroke-slate-500 dark:stroke-stone-500" strokeWidth="2" />
+      <text x="66" y="162" textAnchor="middle" className="fill-slate-700 text-[12px] dark:fill-stone-200">disc</text>
+      <text x="154" y="162" textAnchor="middle" className="fill-slate-700 text-[12px] dark:fill-stone-200">cylinder</text>
     </DiagramFrame>
   );
 }
 
 function MoiRodsPlatesDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="rods and plates">
-      <line x1="44" y1="52" x2="44" y2="126" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <rect x="44" y="86" width="76" height="8" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="1.5" />
-      <line x1="134" y1="52" x2="134" y2="126" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <rect x="98" y="86" width="72" height="8" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="1.5" />
-      <rect x="65" y="133" width="50" height="32" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
-      <line x1="90" y1="121" x2="90" y2="176" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <path d="M138 132 L180 132 L190 160 L148 160 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2" />
-      <line x1="164" y1="118" x2="164" y2="174" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <text x="33" y="144" className="fill-slate-700 text-[11px] dark:fill-stone-200">rod</text>
-      <text x="67" y="181" className="fill-slate-700 text-[11px] dark:fill-stone-200">plate</text>
-      <text x="144" y="181" className="fill-slate-700 text-[11px] dark:fill-stone-200">plate</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        rods and plates
+      </div>
+      <Image
+        src="/images/formula-cards/moi-rods-plates.png"
+        alt="Moment of inertia diagrams for thin uniform rod, uniform square plate, uniform rectangular plate, and uniform cuboid"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={572}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function TorqueLineActionDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="line of action">
-      <DiagramDefs />
-      <path d="M44 134 C30 70 60 38 116 45 C176 34 200 82 176 134 C134 160 80 160 44 134 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="82" cy="122" r="4" className="fill-slate-700 dark:fill-stone-300" />
-      <circle cx="134" cy="92" r="4" className="fill-slate-700 dark:fill-stone-300" />
-      <Arrow x1="82" y1="122" x2="134" y2="92" label="r" labelX="105" labelY="100" />
-      <Arrow x1="134" y1="92" x2="180" y2="72" label="F" labelX="184" labelY="75" />
-      <line x1="88" y1="82" x2="170" y2="48" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-      <text x="72" y="137" className="fill-slate-700 text-[12px] dark:fill-stone-200">Q</text>
-      <text x="138" y="87" className="fill-slate-700 text-[12px] dark:fill-stone-200">P</text>
-      <text x="92" y="76" className="fill-slate-700 text-[12px] dark:fill-stone-200">line of action</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        line of action
+      </div>
+      <Image
+        src="/images/formula-cards/torque-line-action.png"
+        alt="Torque and line of action diagram showing points Q and P, position vector r, force vector F, angles, perpendicular lever arm d, and torque formula"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={765}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function AngularMomentumParticleDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="particle angular momentum">
-      <DiagramDefs />
-      <line x1="38" y1="148" x2="188" y2="148" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <line x1="72" y1="168" x2="72" y2="36" className="stroke-slate-700 dark:stroke-stone-300" strokeWidth="2" />
-      <Arrow x1="72" y1="148" x2="144" y2="72" label="r" labelX="106" labelY="98" />
-      <Arrow x1="144" y1="72" x2="186" y2="72" label="P" labelX="190" labelY="76" />
-      <Arrow x1="144" y1="72" x2="170" y2="48" label="P cos theta" labelX="118" labelY="42" />
-      <Arrow x1="144" y1="72" x2="168" y2="98" label="P sin theta" labelX="151" labelY="114" />
-      <line x1="72" y1="72" x2="144" y2="72" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-      <text x="57" y="164" className="fill-slate-700 text-[12px] dark:fill-stone-200">O</text>
-      <text x="154" y="64" className="fill-slate-700 text-[12px] dark:fill-stone-200">theta</text>
-      <text x="50" y="110" className="fill-slate-700 text-[12px] dark:fill-stone-200">r_perp</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        particle angular momentum
+      </div>
+      <Image
+        src="/images/formula-cards/angular-momentum-particle.png"
+        alt="Angular momentum of a particle diagram showing origin O, point P, position vector r, linear momentum vector p, components, angles, perpendicular distance, and formulas"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={765}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function CombinedRigidMotionDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="combined rigid motion">
-      <DiagramDefs />
-      <path d="M42 128 C32 74 68 44 118 52 C178 40 198 84 174 132 C130 158 72 154 42 128 Z" className="fill-slate-100 stroke-slate-700 dark:fill-stone-900 dark:stroke-stone-300" strokeWidth="2.5" />
-      <circle cx="77" cy="118" r="4" className="fill-slate-700 dark:fill-stone-300" />
-      <circle cx="135" cy="80" r="4" className="fill-amber-500" />
-      <line x1="77" y1="118" x2="135" y2="80" className="stroke-slate-600 dark:stroke-stone-400" strokeWidth="2" strokeDasharray="4 4" />
-      <Arrow x1="77" y1="118" x2="47" y2="101" label="omega" labelX="32" labelY="98" />
-      <Arrow x1="135" y1="80" x2="184" y2="80" label="VQ" labelX="188" labelY="84" />
-      <Arrow x1="135" y1="80" x2="154" y2="112" label="omega r" labelX="151" labelY="126" />
-      <text x="68" y="134" className="fill-slate-700 text-[12px] dark:fill-stone-200">Q</text>
-      <text x="139" y="75" className="fill-slate-700 text-[12px] dark:fill-stone-200">P</text>
-      <text x="104" y="96" className="fill-slate-700 text-[12px] dark:fill-stone-200">r</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        combined rigid motion
+      </div>
+      <Image
+        src="/images/formula-cards/combined-rigid-motion.png"
+        alt="Combined rigid motion diagram showing points Q and P, position vector r, rotation omega, velocities VQ, omega cross r, and total velocity VP"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={592}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
@@ -1484,66 +1513,94 @@ function SingleSlitDiffractionDiagram() {
 }
 
 function GravitationVectorDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="force pair">
-      <DiagramDefs />
-      <circle cx="62" cy="96" r="12" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
-      <circle cx="158" cy="96" r="16" className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/15" strokeWidth="2" />
-      <Arrow x1="76" y1="96" x2="120" y2="96" label="F12" labelX="88" labelY="84" />
-      <Arrow x1="144" y1="96" x2="102" y2="96" label="F21" labelX="124" labelY="116" />
-      <line x1="62" y1="132" x2="158" y2="132" className="stroke-slate-500 dark:stroke-stone-500" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
-      <text x="105" y="148" className="fill-slate-700 text-[12px] dark:fill-stone-200">r</text>
-      <text x="54" y="101" className="fill-slate-700 text-[12px] dark:fill-stone-200">m1</text>
-      <text x="150" y="101" className="fill-slate-700 text-[12px] dark:fill-stone-200">m2</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        force pair
+      </div>
+      <Image
+        src="/images/formula-cards/gravitation-force-pair.png"
+        alt="Newton's Gravitational Force Pair diagram showing masses m1 and m2, distance r, and action-reaction force pair F12 = -F21"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={472}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function GravRingDiscDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <DiagramFrame title="ring axis">
-        <DiagramDefs />
-        <ellipse cx="82" cy="98" rx="22" ry="52" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
-        <line x1="82" y1="98" x2="178" y2="98" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <Arrow x1="82" y1="98" x2="82" y2="46" label="a" labelX="90" labelY="72" />
-        <Arrow x1="92" y1="98" x2="150" y2="98" label="r" labelX="120" labelY="88" />
-      </DiagramFrame>
-      <DiagramFrame title="disc axis">
-        <DiagramDefs />
-        <ellipse cx="82" cy="98" rx="36" ry="58" className="fill-amber-100/40 stroke-amber-500 dark:fill-amber-500/10" strokeWidth="2.5" />
-        <line x1="82" y1="98" x2="180" y2="98" className="stroke-slate-500 dark:stroke-stone-500" strokeDasharray="4 4" />
-        <Arrow x1="82" y1="98" x2="82" y2="40" label="a" labelX="91" labelY="68" />
-        <Arrow x1="94" y1="98" x2="154" y2="98" label="r" labelX="124" labelY="88" />
-      </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        ring and disc
+      </div>
+      <Image
+        src="/images/formula-cards/grav-ring-disc.png"
+        alt="Gravitational field and potential diagrams for thin circular ring and uniform thin disc along their axes"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={572}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
     </div>
   );
 }
 
 function GravSphereShellDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="sphere and shell">
-      <circle cx="78" cy="98" r="48" className="fill-amber-100/50 stroke-amber-500 dark:fill-amber-500/10" strokeWidth="2.5" />
-      <circle cx="148" cy="98" r="42" className="fill-transparent stroke-slate-700 dark:stroke-stone-200" strokeWidth="2.5" />
-      <circle cx="78" cy="98" r="3" className="fill-slate-700 dark:fill-stone-200" />
-      <line x1="78" y1="98" x2="126" y2="98" className="stroke-slate-500 dark:stroke-stone-500" />
-      <text x="93" y="90" className="fill-slate-700 text-[12px] dark:fill-stone-200">a</text>
-      <text x="48" y="164" className="fill-slate-700 text-[12px] dark:fill-stone-200">solid sphere</text>
-      <text x="128" y="164" className="fill-slate-700 text-[12px] dark:fill-stone-200">shell</text>
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        sphere and shell
+      </div>
+      <Image
+        src="/images/formula-cards/grav-sphere-shell.png"
+        alt="Gravitational field and potential diagrams for solid sphere and thin spherical shell showing regions r < a and r > a"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={590}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 
 function SatelliteOrbitDiagram() {
+  const { compact } = useContext(DiagramSizeContext);
+  const frameClassName = compact
+    ? "rounded-lg border border-slate-200/80 bg-white/50 p-2 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden"
+    : "rounded-lg border border-slate-200/80 bg-white/50 p-2.5 sm:p-3 dark:border-stone-800/80 dark:bg-stone-900/20 overflow-hidden";
+
   return (
-    <DiagramFrame title="satellite orbit">
-      <DiagramDefs />
-      <circle cx="104" cy="98" r="34" className="fill-amber-100/50 stroke-amber-500 dark:fill-amber-500/10" strokeWidth="2.5" />
-      <circle cx="104" cy="98" r="66" className="fill-transparent stroke-slate-500 dark:stroke-stone-500" strokeDasharray="5 5" strokeWidth="2" />
-      <circle cx="169" cy="89" r="5" className="fill-slate-700 dark:fill-stone-200" />
-      <Arrow x1="104" y1="98" x2="169" y2="89" label="Re+h" labelX="125" labelY="82" />
-      <Arrow x1="169" y1="89" x2="164" y2="62" label="v0" labelX="172" labelY="70" />
-    </DiagramFrame>
+    <div className={frameClassName}>
+      <div className={`text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-stone-400 ${compact ? "mb-1.5" : "mb-2"}`}>
+        satellite orbit
+      </div>
+      <Image
+        src="/images/formula-cards/satellite-orbit.png"
+        alt="Satellite in circular orbit around Earth showing Earth radius Re, altitude h, gravitational force Fg, and orbital speed v0"
+        className="h-auto w-full rounded-md object-contain"
+        width={1024}
+        height={572}
+        sizes="(min-width: 640px) 520px, calc(100vw - 5rem)"
+      />
+    </div>
   );
 }
 

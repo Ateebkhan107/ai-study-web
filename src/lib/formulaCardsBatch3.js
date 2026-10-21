@@ -471,7 +471,7 @@ function rigidBodyCards(chapterId) {
         columns: ["Object", "Moment of inertia"],
         rows: [
           ["Solid sphere", "$\\frac{2}{5}MR^2$ (Uniform)"],
-          ["Hollow sphere", "$\\frac{2}{3}MR^2$ (Uniform)"],
+          ["Hollow sphere (thin spherical shell)", "$\\frac{2}{3}MR^2$ (Uniform)"],
           ["Ring", "$MR^2$ (Uniform or Non Uniform)"],
         ],
       },
@@ -491,7 +491,7 @@ function rigidBodyCards(chapterId) {
         columns: ["Object", "Moment of inertia"],
         rows: [
           ["Disc", "$\\frac{MR^2}{2}$ (Uniform)"],
-          ["Hollow cylinder", "$MR^2$ (Uniform or Non Uniform)"],
+          ["Hollow cylinder (thin-walled)", "$MR^2$ (Uniform or Non Uniform)"],
           ["Solid cylinder", "$\\frac{MR^2}{2}$ (Uniform)"],
         ],
       },

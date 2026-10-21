@@ -1,0 +1,1179 @@
+{
+  "inspectedAt": "2026-10-15T20:44:09.756Z",
+  "access": "GET only; raw IDs and scores not persisted",
+  "requestCount": 7,
+  "attempts": {
+    "rowsInspected": 207,
+    "exactVisibleCount": 207,
+    "completeSnapshot": true
+  },
+  "summary": {
+    "duplicateGroups": 21,
+    "attemptsInDuplicateGroups": 57,
+    "excessAttempts": 36,
+    "groupsWithDifferentStudents": 0,
+    "groupsWithDifferentScores": 0,
+    "groupsWithCloseGaps": 20,
+    "groupsWithGapsOverFiveMinutes": 0,
+    "groupsMissingBaseSession": 0,
+    "groupsWithOwnerMismatch": 0,
+    "theoreticalAdditionalCorrectXP": 375
+  },
+  "groups": [
+    {
+      "sessionFingerprint": "18b79e201d4b",
+      "attempts": 3,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.145,
+      "maxGapSeconds": 2.115,
+      "spanSeconds": 3.26,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 3,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "2549eacb81ed",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.485,
+      "maxGapSeconds": 1.485,
+      "spanSeconds": 1.485,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "345ab0fa6097",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.288,
+      "maxGapSeconds": 1.288,
+      "spanSeconds": 1.288,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "42323089ffa1",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 2.194,
+      "maxGapSeconds": 2.194,
+      "spanSeconds": 2.194,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 45
+    },
+    {
+      "sessionFingerprint": "4eaeed5beb0a",
+      "attempts": 3,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.898,
+      "maxGapSeconds": 3.517,
+      "spanSeconds": 4.415,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 3,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 210
+    },
+    {
+      "sessionFingerprint": "615746afc92e",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.446,
+      "maxGapSeconds": 1.446,
+      "spanSeconds": 1.446,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "99913642ec47",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.226,
+      "maxGapSeconds": 1.226,
+      "spanSeconds": 1.226,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "9c3eca0aa0c6",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 3.521,
+      "maxGapSeconds": 3.521,
+      "spanSeconds": 3.521,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 30
+    },
+    {
+      "sessionFingerprint": "9c6ab13da725",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.866,
+      "maxGapSeconds": 1.866,
+      "spanSeconds": 1.866,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "9d7101056100",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 6.034,
+      "maxGapSeconds": 6.034,
+      "spanSeconds": 6.034,
+      "anyGapWithinFiveSeconds": false,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "a950ff39cb58",
+      "attempts": 6,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.067,
+      "maxGapSeconds": 0.302,
+      "spanSeconds": 0.722,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 6,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "b887dd0425b0",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 2.3,
+      "maxGapSeconds": 2.3,
+      "spanSeconds": 2.3,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "ba305e3b9a7c",
+      "attempts": 3,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.829,
+      "maxGapSeconds": 1.649,
+      "spanSeconds": 2.478,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 3,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "bdc833c9a0f5",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.7,
+      "maxGapSeconds": 0.7,
+      "spanSeconds": 0.7,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "c4e5e4037b18",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.445,
+      "maxGapSeconds": 1.445,
+      "spanSeconds": 1.445,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 15
+    },
+    {
+      "sessionFingerprint": "c7bbbfb6b3fe",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 2.735,
+      "maxGapSeconds": 2.735,
+      "spanSeconds": 2.735,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 15
+    },
+    {
+      "sessionFingerprint": "c9787a562797",
+      "attempts": 5,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.121,
+      "maxGapSeconds": 4.006,
+      "spanSeconds": 6.747,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 5,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 60
+    },
+    {
+      "sessionFingerprint": "cbb833654e29",
+      "attempts": 7,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.134,
+      "maxGapSeconds": 0.688,
+      "spanSeconds": 2.357,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 7,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "ce04f3074a34",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 0.952,
+      "maxGapSeconds": 0.952,
+      "spanSeconds": 0.952,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "cf3d7bf3a38c",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 2.75,
+      "maxGapSeconds": 2.75,
+      "spanSeconds": 2.75,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    },
+    {
+      "sessionFingerprint": "eec32bd21265",
+      "attempts": 2,
+      "distinctStudents": 1,
+      "missingStudentIds": 0,
+      "baseSessionFound": true,
+      "allMatchBaseOwner": true,
+      "identicalScores": true,
+      "distinctScores": 1,
+      "missingScores": 0,
+      "identicalScoreCounts": true,
+      "minGapSeconds": 1.931,
+      "maxGapSeconds": 1.931,
+      "spanSeconds": 1.931,
+      "anyGapWithinFiveSeconds": true,
+      "anyGapOverFiveMinutes": false,
+      "distinctStoredStarts": 2,
+      "statuses": [
+        "in_progress"
+      ],
+      "submittedTimestampCount": 0,
+      "bankTestAssociationCount": 0,
+      "answerRowsPerAttempt": [
+        0,
+        0
+      ],
+      "references": [
+        {
+          "table": "test_questions",
+          "column": "test_attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "institute_test_attempts",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        },
+        {
+          "table": "user_answers",
+          "column": "attempt_id",
+          "rows": 0,
+          "attemptsReferenced": 0,
+          "complete": true
+        }
+      ],
+      "theoreticalAdditionalCorrectXP": 0
+    }
+  ],
+  "referenceCoverage": [
+    {
+      "table": "test_questions",
+      "column": "test_attempt_id",
+      "complete": true,
+      "status": 200,
+      "code": null,
+      "rows": 0
+    },
+    {
+      "table": "institute_test_attempts",
+      "column": "attempt_id",
+      "complete": true,
+      "status": 200,
+      "code": null,
+      "rows": 0
+    },
+    {
+      "table": "user_answers",
+      "column": "attempt_id",
+      "complete": true,
+      "status": 200,
+      "code": null,
+      "rows": 0
+    }
+  ],
+  "sessionCoverage": {
+    "complete": true,
+    "status": 200
+  },
+  "rewardTables": [
+    {
+      "table": "user_xp",
+      "attemptLinkColumns": []
+    },
+    {
+      "table": "user_badges",
+      "attemptLinkColumns": []
+    },
+    {
+      "table": "community_moderation_logs",
+      "attemptLinkColumns": []
+    },
+    {
+      "table": "daily_goals",
+      "attemptLinkColumns": []
+    },
+    {
+      "table": "badges",
+      "attemptLinkColumns": []
+    },
+    {
+      "table": "user_daily_goals",
+      "attemptLinkColumns": []
+    }
+  ],
+  "rewardAttribution": "Cannot prove historical XP/streak/goal/badge effects from current aggregate balances. No reward RPCs invoked. Hidden tables, triggers, old code and external writers remain unverified.",
+  "catalogAccess": {
+    "status": 406,
+    "code": "PGRST106"
+  },
+  "limitations": [
+    "Multiple GETs are not one PostgreSQL snapshot; records can change between reads.",
+    "At most 1000 attempts and 5000 rows per related table; completeness is reported.",
+    "References are only those advertised by OpenAPI; unknown catalog FKs/triggers and logical/JSON references remain unverified.",
+    "Close timing suggests retries/races but does not identify the historical originating request.",
+    "Different timestamps or scores do not by themselves establish an intentional retake.",
+    "Session fingerprints are pseudonymous correlation labels, not anonymization guarantees; keep this operational report private."
+  ]
+}

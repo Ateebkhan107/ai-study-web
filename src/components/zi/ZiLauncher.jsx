@@ -1,5 +1,6 @@
 "use client";
 
+import { readBuilderToken, rememberBuilderAction, clearBuilderToken } from "@/components/zi/testBuilderSession";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useRef, useState } from "react";
 import Logo from "@/components/Logo";
@@ -59,6 +60,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
   const greetingName = getZiGreetingName(user);
   const remainingFreePrompts = freePromptState.remaining;
 
+  // Adjust state when the server's usage snapshot changes, without an effect.
   if (freePromptState.sourceRemaining !== usageRemaining) {
     setFreePromptState({
       sourceRemaining: usageRemaining,
@@ -153,15 +155,17 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
       const response = await fetch("/api/zi/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: requestMessages, pageContext }),
+        body: JSON.stringify({ messages: requestMessages, pageContext, testBuilderToken: readBuilderToken(user?.id) }),
         signal: abortController.signal,
       });
 
       if (!response.ok || !response.body) {
-        if (response.status === 403) {
+        if ([400, 410].includes(response.status)) clearBuilderToken(user?.id);
+        const payload = await response.json().catch(() => ({}));
+        if (payload.error === "AI_MODE_REQUIRED") {
           setFreePromptState((current) => ({ ...current, remaining: 0 }));
         }
-        const statusMessage =
+        const statusMessage = (typeof payload.error === "string" && payload.error !== "AI_MODE_REQUIRED" ? payload.error : payload.message) || (
           response.status === 401
             ? "Please sign in again to chat with Zi."
             : response.status === 403
@@ -170,7 +174,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
             ? "That message could not be sent. Try a shorter question."
             : response.status === 429
             ? "Zi needs a short breather. Try again in a moment."
-            : ZI_ERROR_MESSAGE;
+            : ZI_ERROR_MESSAGE);
 
         updateAssistantMessage(assistantMessage.id, () => ({
           text: statusMessage,
@@ -179,7 +183,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
         return;
       }
 
-      if (plan !== "AI_MODE") {
+      if (plan !== "AI_MODE" && response.headers.get("X-Zi-Prompt-Charged") !== "0") {
         setFreePromptState((current) => ({
           ...current,
           remaining: Math.max(0, current.remaining - 1),
@@ -240,6 +244,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
          } catch(e) {}
       }
 
+      rememberBuilderAction(user?.id, finalAction);
       updateAssistantMessage(assistantMessage.id, () => ({
         text: finalText || ZI_ERROR_MESSAGE,
         action: finalAction,
@@ -315,7 +320,8 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
         onSend={() => sendMessage(input)}
         onStop={stopGeneration}
         onSuggestionSelect={sendMessage}
-        isLocked={isLocked}
+        isLocked={isLocked && !messages.some((message) => message.action?.type === "ai_test_builder")}
+        onConfigureTest={() => sendMessage("Create an AI practice test")}
         plan={plan}
         remainingFreePrompts={remainingFreePrompts}
       />

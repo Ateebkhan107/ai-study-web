@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Inbox, Lightbulb, Sparkles } from "lucide-react";
 import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 
 export default function ResultPage() {
   const { id } = useParams();
   const router = useRouter();
+  const isGenerated = useSearchParams().get("sourceType") === "AI_GENERATED";
+  const sourceQuery = isGenerated ? "?sourceType=AI_GENERATED" : "";
 
   const [attempt, setAttempt] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +21,7 @@ export default function ResultPage() {
   useEffect(() => {
     async function loadResult() {
       try {
-        const res = await fetch(`/api/test-attempts/${id}`, {
+        const res = await fetch(`/api/test-attempts/${id}${sourceQuery}`, {
           cache: "no-store",
         });
 
@@ -36,13 +38,14 @@ export default function ResultPage() {
         setAttempt(data);
       } catch (err) {
 //         console.log(err);
+        setAttempt(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
 
     loadResult();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, sourceQuery]);
 
   // ── ANIMATIONS ──
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function ResultPage() {
   }, [attempt]);
 
   useRegisterZiEntity(
-    attempt?.id
+    attempt?.id && !isGenerated
       ? { type: "test_result", id: attempt.id }
       : null
   );
@@ -154,7 +157,7 @@ export default function ResultPage() {
   const offset = showAnim ? circumference - (scorePct / 100) * circumference : circumference;
 
   const completion = total > 0 ? Math.round((attempted / total) * 100) : 0;
-  const headlineMeta = ["Mock Test", `${total} Questions`].filter(Boolean).join(" · ");
+  const headlineMeta = [isGenerated ? "AI-Generated Practice Results" : "Mock Test", `${total} Questions`].filter(Boolean).join(" · ");
 
   let takeaway = "Review every wrong or skipped question before starting another test.";
   if (total > 0 && attempted <= Math.max(1, Math.floor(total * 0.1))) {
@@ -198,6 +201,7 @@ export default function ResultPage() {
             </p>
           </div>
 
+          {attempt.sourceType === "AI_GENERATED" ? <section aria-label="Topic performance" className="mb-6 text-sm"><h2 className="font-bold">Topic performance</h2>{Object.entries(attempt.topic_performance || {}).map(([topic, p]) => <p key={topic} className="mt-2">{topic}: {p.correct} correct · {p.incorrect} incorrect · {p.unanswered} unanswered</p>)}</section> : null}
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-12">
             {/* SCORE RING */}
             <div className="flex flex-col items-center">
@@ -295,16 +299,16 @@ export default function ResultPage() {
 
           {/* CTA BUTTONS */}
           <div className="flex flex-col gap-3 border-t border-slate-200/80 mt-8 pt-7 dark:border-[var(--border)]/70 sm:flex-row">
-            <button
+            {!isGenerated ? <button
               onClick={() => router.push(`/zi?attempt=${id}`)}
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-4 text-sm font-black text-white transition-colors duration-200 hover:bg-slate-800 shadow-sm dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
             >
               <Sparkles className="h-4 w-4" strokeWidth={2.4} />
               Review with Zi
-            </button>
+            </button> : null}
 
             <button
-              onClick={() => router.push(`/test/review/${id}`)}
+              onClick={() => router.push(`/test/review/${id}${sourceQuery}`)}
               className="flex-1 rounded-xl bg-brand px-5 py-4 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover shadow-sm"
             >
               Review Answers

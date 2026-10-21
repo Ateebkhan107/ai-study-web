@@ -36,6 +36,15 @@ export async function POST(req) {
 
     } = body;
 
+    // Test submission is the sole authority for test rewards. Old clients must
+    // not award the same test again through this generic counter endpoint.
+    if (source === "test") {
+      return NextResponse.json(
+        { error: "Test rewards are handled by the test submission endpoint." },
+        { status: 409 }
+      );
+    }
+
 
 
     // XP RULE

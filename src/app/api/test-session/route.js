@@ -7,8 +7,24 @@ import { getQuestionMarking } from "@/lib/analyticsHelpers";
 import { getInstituteContext } from "@/lib/instituteAuth";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 import { getFirstNameFromClaims } from "@/lib/auth";
+import { sessionQuestion } from "@/lib/tests/questionSource.server";
+import { mcqIndex, hasNumericAnswer } from "@/lib/tests/answers";
+import { assertGeneratedEngineEnabled, generatedEngineEnabled, GeneratedStart, startGeneratedTest, saveGeneratedAnswers, submitGeneratedTest } from "@/lib/tests/generatedTests.server";
+import { checkZiRateLimit } from "@/lib/zi/rateLimit";
+import { bankAtomicSubmissionEnabled, findCompletedBankAttempt, withBankSubmissionLock } from "@/lib/tests/bankSubmission.server";
 
 const LETTERS = ["A", "B", "C", "D"];
+
+function checkGeneratedAccess(userId) {
+  assertGeneratedEngineEnabled();
+  const rate = checkZiRateLimit(`generated-test:${userId}`, "AI_MODE");
+  if (!rate.allowed) throw Object.assign(new Error("Too many test updates. Try again shortly."), { status: 429 });
+}
+function testError(error, label) {
+  if (error.status) return NextResponse.json({ error: error.message }, { status: error.status, headers: { "Cache-Control": "no-store" } });
+  console.error(label, error);
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+}
 
 function normalizeOptionSet(value) {
   return String(value || "")
@@ -363,6 +379,12 @@ export async function POST(request) {
     }
 
     const body = await request.json();
+    if (body.sourceType === "AI_GENERATED") {
+      checkGeneratedAccess(userId);
+      const parsed = GeneratedStart.safeParse(body);
+      if (!parsed.success) return NextResponse.json({ error: "Invalid generated test request" }, { status: 400 });
+      return NextResponse.json(await startGeneratedTest({ userId, testId: parsed.data.generatedTestId, client: supabaseAdmin }), { headers: { "Cache-Control": "no-store" } });
+    }
     const {
       duration = 30,
       count = 20,
@@ -549,30 +571,7 @@ export async function POST(request) {
       }
     }
 
-    const safeQuestions = questions.map((question) => ({
-      id: question.id,
-      exam: question.exam,
-      subject: question.subject,
-      chapter: question.chapter,
-      topic: question.topic,
-      question_type: question.question_type,
-      difficulty: question.difficulty,
-      text: question.text,
-      question_image: question.question_image,
-      options: question.options,
-      option_images: question.option_images || [
-        question.option_a_image,
-        question.option_b_image,
-        question.option_c_image,
-        question.option_d_image,
-      ],
-      option_a_image: question.option_a_image || question.option_images?.[0] || null,
-      option_b_image: question.option_b_image || question.option_images?.[1] || null,
-      option_c_image: question.option_c_image || question.option_images?.[2] || null,
-      option_d_image: question.option_d_image || question.option_images?.[3] || null,
-      marks: question.marks,
-      negative_marks: question.negative_marks,
-    }));
+    const safeQuestions = questions.map((question) => sessionQuestion(question));
 
     return NextResponse.json({
       track,
@@ -586,11 +585,7 @@ export async function POST(request) {
       } : null,
     });
   } catch (error) {
-    console.error("[TEST_SESSION_START_ERROR]", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return testError(error, "[TEST_SESSION_START_ERROR]");
   }
 }
 
@@ -605,7 +600,11 @@ export async function PUT(request) {
     const name = getFirstNameFromClaims(sessionClaims) || "Student";
 
     const body = await request.json();
-    const { sessionId, answers = {}, timeTakenSeconds = 0 } = body;
+    if (body.sourceType === "AI_GENERATED") {
+      checkGeneratedAccess(userId);
+      return NextResponse.json(await submitGeneratedTest({ userId, request: body, client: supabaseAdmin }), { headers: { "Cache-Control": "no-store" } });
+    }
+    const { sessionId, answers = {} } = body;
 
     if (!sessionId) {
       return NextResponse.json(
@@ -614,196 +613,224 @@ export async function PUT(request) {
       );
     }
 
-    const { data: session, error: sessionError } = await supabaseAdmin
-      .from("test_sessions")
-      .select("id, duration_minutes")
-      .eq("id", sessionId)
-      .eq("user_id", userId)
-      .maybeSingle();
+    return await withBankSubmissionLock({ userId, sessionId }, async () => {
+      const { data: session, error: sessionError } = await supabaseAdmin
+        .from("test_sessions")
+        .select("id, duration_minutes, started_at")
+        .eq("id", sessionId)
+        .eq("user_id", userId)
+        .maybeSingle();
 
-    if (sessionError) {
-      throw sessionError;
-    }
-
-    if (!session) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
-    }
-
-    const { data: sessionQuestions, error: questionsError } = await supabaseAdmin
-      .from("test_questions")
-      .select(`
-        question_order,
-        question_id,
-        questions(
-          id,
-          exam,
-          correct_option,
-          question_type,
-          marks,
-          negative_marks
-        )
-      `)
-      .eq("session_id", sessionId)
-      .order("question_order", { ascending: true });
-
-    if (questionsError) {
-      throw questionsError;
-    }
-
-    const questionRows = (sessionQuestions || [])
-      .map((row) => ({
-        id: row.question_id,
-        exam: row.questions?.exam,
-        correct_option: row.questions?.correct_option,
-        question_type: row.questions?.question_type || "MCQ",
-        marks: row.questions?.marks,
-        negative_marks: row.questions?.negative_marks,
-      }))
-      .filter((row) => row.id && row.correct_option);
-
-    if (!questionRows.length) {
-      return NextResponse.json(
-        { error: "No questions found for session" },
-        { status: 400 }
-      );
-    }
-
-    let correct = 0;
-    let wrong = 0;
-    let attempted = 0;
-    let score = 0;
-    let totalMarks = 0;
-
-    const answerRows = questionRows.map((question) => {
-      const rawAnswer = answers[String(question.id)];
-      const isNumerical = question.question_type === "Numerical";
-      const isMultipleCorrect = question.question_type === "Multiple Correct";
-      const selectedIndex = Number(rawAnswer);
-      const attemptedQuestion = isNumerical
-        ? rawAnswer !== undefined && String(rawAnswer).trim() !== ""
-        : isMultipleCorrect
-        ? Array.isArray(rawAnswer) && rawAnswer.length > 0 && rawAnswer.every(
-            (index) => Number.isInteger(index) && index >= 0 && index < LETTERS.length
-          )
-        : Number.isInteger(selectedIndex) && selectedIndex >= 0 && selectedIndex < LETTERS.length;
-      const selectedOption = !attemptedQuestion
-        ? null
-        : isNumerical
-        ? String(rawAnswer).trim()
-        : isMultipleCorrect
-        ? rawAnswer.map((index) => LETTERS[index]).sort().join(",")
-        : LETTERS[selectedIndex];
-      const selectedNumber = Number(selectedOption);
-      const correctNumber = Number(question.correct_option);
-      const isCorrect = attemptedQuestion && (isNumerical
-        ? (Number.isFinite(selectedNumber) && Number.isFinite(correctNumber)
-          ? Math.abs(selectedNumber - correctNumber) <= 1e-9
-          : selectedOption === String(question.correct_option).trim())
-        : isMultipleCorrect
-        ? normalizeOptionSet(selectedOption) === normalizeOptionSet(question.correct_option)
-        : selectedOption === question.correct_option);
-      const marking = getQuestionMarking(
-        {
-          marks: question.marks,
-          negative_marks: question.negative_marks,
-        },
-        question.exam
-      );
-
-      totalMarks += marking.positive;
-
-      if (attemptedQuestion) {
-        attempted += 1;
-
-        if (isCorrect) {
-          correct += 1;
-          score += marking.positive;
-        } else {
-          wrong += 1;
-          score -= marking.negative;
-        }
+      if (sessionError) {
+        throw sessionError;
       }
 
-      return {
-        attempt_id: null,
-        question_id: question.id,
-        selected_option: selectedOption,
-        correct_option: question.correct_option,
-        is_correct: isCorrect,
-      };
-    });
+      if (!session) {
+        return NextResponse.json({ error: "Not found" }, { status: 404 });
+      }
 
-    const safeTimeTakenSeconds = Math.max(
-      0,
-      Math.min(Number(timeTakenSeconds) || 0, (session.duration_minutes || 0) * 60)
-    );
-
-    const { data: attempt, error: attemptError } = await supabaseAdmin
-      .from("test_attempts")
-      .insert({
-        user_id: userId,
-        session_id: sessionId,
-        score,
-        total_marks: totalMarks,
-        correct_answers: correct,
-        wrong_answers: wrong,
-        attempted,
-        total_questions: questionRows.length,
-        duration_minutes: session.duration_minutes || 0,
-        time_taken_seconds: safeTimeTakenSeconds,
-      })
-      .select()
-      .single();
-
-    if (attemptError) {
-      throw attemptError;
-    }
-
-    const finalAnswerRows = answerRows.map((row) => ({
-      ...row,
-      attempt_id: attempt.id,
-    }));
-
-    const [{ error: instituteAttemptError }, { error: answersError }] = await Promise.all([
-      supabaseAdmin
-        .from("institute_test_attempts")
-        .update({
-          attempt_id: attempt.id,
-          status: "SUBMITTED",
-          submitted_at: new Date().toISOString(),
-        })
+      const { data: sessionQuestions, error: questionsError } = await supabaseAdmin
+        .from("test_questions")
+        .select(`
+          question_order,
+          question_id,
+          questions(
+            id,
+            exam,
+            correct_option,
+            question_type,
+            marks,
+            negative_marks
+          )
+        `)
         .eq("session_id", sessionId)
-        .eq("user_id", userId),
-      supabaseAdmin
-        .from("user_answers")
-        .insert(finalAnswerRows),
-    ]);
+        .order("question_order", { ascending: true });
 
-    if (instituteAttemptError) {
-      throw instituteAttemptError;
-    }
+      if (questionsError) {
+        throw questionsError;
+      }
 
-    if (answersError) {
-      throw answersError;
-    }
+      const questionRows = (sessionQuestions || [])
+        .map((row) => ({
+          id: row.question_id,
+          exam: row.questions?.exam,
+          correct_option: row.questions?.correct_option,
+          question_type: row.questions?.question_type || "MCQ",
+          marks: row.questions?.marks,
+          negative_marks: row.questions?.negative_marks,
+        }))
+        .filter((row) => row.id && row.correct_option);
 
-    after(() => {
-      return runPostSubmitProgressUpdates({
-        userId,
-        correct,
-        questionCount: questionRows.length,
-        name,
+      if (!questionRows.length) {
+        return NextResponse.json(
+          { error: "No questions found for session" },
+          { status: 400 }
+        );
+      }
+
+      const previousAttemptId = await findCompletedBankAttempt({
+        client: supabaseAdmin, userId, sessionId, questionIds: questionRows.map((row) => row.id),
+      });
+      if (previousAttemptId) {
+        return NextResponse.json({ attemptId: previousAttemptId }, { headers: { "Cache-Control": "no-store" } });
+      }
+
+      let correct = 0;
+      let wrong = 0;
+      let attempted = 0;
+      let score = 0;
+      let totalMarks = 0;
+
+      const answerRows = questionRows.map((question) => {
+        const rawAnswer = answers[String(question.id)];
+        const isNumerical = question.question_type === "Numerical";
+        const isMultipleCorrect = question.question_type === "Multiple Correct";
+        const selectedIndex = mcqIndex(rawAnswer);
+        const attemptedQuestion = isNumerical
+          ? hasNumericAnswer(rawAnswer)
+          : isMultipleCorrect
+          ? Array.isArray(rawAnswer) && rawAnswer.length > 0 && rawAnswer.every(
+              (index) => Number.isInteger(index) && index >= 0 && index < LETTERS.length
+            )
+          : Number.isInteger(selectedIndex) && selectedIndex >= 0 && selectedIndex < LETTERS.length;
+        const selectedOption = !attemptedQuestion
+          ? null
+          : isNumerical
+          ? String(rawAnswer).trim()
+          : isMultipleCorrect
+          ? rawAnswer.map((index) => LETTERS[index]).sort().join(",")
+          : LETTERS[selectedIndex];
+        const selectedNumber = Number(selectedOption);
+        const correctNumber = Number(question.correct_option);
+        const isCorrect = attemptedQuestion && (isNumerical
+          ? (Number.isFinite(selectedNumber) && Number.isFinite(correctNumber)
+            ? Math.abs(selectedNumber - correctNumber) <= 1e-9
+            : selectedOption === String(question.correct_option).trim())
+          : isMultipleCorrect
+          ? normalizeOptionSet(selectedOption) === normalizeOptionSet(question.correct_option)
+          : selectedOption === question.correct_option);
+        const marking = getQuestionMarking(
+          {
+            marks: question.marks,
+            negative_marks: question.negative_marks,
+          },
+          question.exam
+        );
+
+        totalMarks += marking.positive;
+
+        if (attemptedQuestion) {
+          attempted += 1;
+
+          if (isCorrect) {
+            correct += 1;
+            score += marking.positive;
+          } else {
+            wrong += 1;
+            score -= marking.negative;
+          }
+        }
+
+        return {
+          attempt_id: null,
+          question_id: question.id,
+          selected_option: selectedOption,
+          correct_option: question.correct_option,
+          is_correct: isCorrect,
+        };
+      });
+
+      const safeTimeTakenSeconds = Math.max(
+        0,
+        Math.min(Math.floor((Date.now() - Date.parse(session.started_at)) / 1000) || 0, (session.duration_minutes || 0) * 60)
+      );
+
+      // Activate only after the reviewed migration is applied. Legacy deployments
+      // remain compatible while migrations await approval.
+      if (generatedEngineEnabled() || bankAtomicSubmissionEnabled()) {
+        const { data, error } = await supabaseAdmin.rpc("zi_commit_bank_submission", {
+          p_owner: userId, p_session: sessionId,
+          p_result: { score, total_marks: totalMarks, correct_answers: correct, wrong_answers: wrong, attempted, total_questions: questionRows.length },
+          p_answers: answerRows,
+        });
+        if (error?.code === "PZ409") throw Object.assign(new Error("This session has an unresolved saved submission. No new attempt was created. Please contact support."), { status: 409 });
+        if (error) throw error;
+        if (data.created) after(() => runPostSubmitProgressUpdates({ userId, correct, questionCount: questionRows.length, name }));
+        return NextResponse.json({ attemptId: data.attemptId });
+      }
+
+      const { data: attempt, error: attemptError } = await supabaseAdmin
+        .from("test_attempts")
+        .insert({
+          user_id: userId,
+          session_id: sessionId,
+          score,
+          total_marks: totalMarks,
+          correct_answers: correct,
+          wrong_answers: wrong,
+          attempted,
+          total_questions: questionRows.length,
+          duration_minutes: session.duration_minutes || 0,
+          time_taken_seconds: safeTimeTakenSeconds,
+        })
+        .select()
+        .single();
+
+      if (attemptError) {
+        throw attemptError;
+      }
+
+      const finalAnswerRows = answerRows.map((row) => ({
+        ...row,
+        attempt_id: attempt.id,
+      }));
+
+      const [{ error: instituteAttemptError }, { error: answersError }] = await Promise.all([
+        supabaseAdmin
+          .from("institute_test_attempts")
+          .update({
+            attempt_id: attempt.id,
+            status: "SUBMITTED",
+            submitted_at: new Date().toISOString(),
+          })
+          .eq("session_id", sessionId)
+          .eq("user_id", userId),
+        supabaseAdmin
+          .from("user_answers")
+          .insert(finalAnswerRows),
+      ]);
+
+      if (instituteAttemptError) {
+        throw instituteAttemptError;
+      }
+
+      if (answersError) {
+        throw answersError;
+      }
+
+      after(() => {
+        return runPostSubmitProgressUpdates({
+          userId,
+          correct,
+          questionCount: questionRows.length,
+          name,
+        });
+      });
+
+      return NextResponse.json({
+        attemptId: attempt.id,
       });
     });
-
-    return NextResponse.json({
-      attemptId: attempt.id,
-    });
   } catch (error) {
-    console.error("[TEST_SESSION_SUBMIT_ERROR]", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return testError(error, "[TEST_SESSION_SUBMIT_ERROR]");
   }
+}
+
+export async function PATCH(request) {
+  try {
+    const { userId } = await auth();
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    checkGeneratedAccess(userId);
+    return NextResponse.json(await saveGeneratedAnswers({ userId, request: await request.json(), client: supabaseAdmin }), { headers: { "Cache-Control": "no-store" } });
+  } catch (error) { return testError(error, "[GENERATED_ANSWERS_SAVE_ERROR]"); }
 }

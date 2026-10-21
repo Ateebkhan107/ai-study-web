@@ -1,0 +1,20 @@
+-- PROPOSAL ONLY. NOT AN EXECUTABLE MIGRATION. No data cleanup is authorized.
+-- Phase 5.2 alternative: see zi-phase52-submission-integrity.md for a private
+-- submission registry that can preserve all historical rows. This index is optional,
+-- not a prerequisite to preserving history and blocking new writes via that protocol.
+-- Production read-only snapshot: 21 duplicate session groups / 36 excess attempts.
+-- Thus the following index CANNOT currently be built successfully.
+-- Prerequisites for a separately approved migration:
+-- 1. Obtain full catalog/trigger/FK/privilege/index evidence from db/audits.
+-- 2. Determine intended retake semantics and every writer, including deployed old versions.
+-- 3. Separately review a preservation/reconciliation plan for existing duplicates,
+--    their user_answers, institute associations, analytics and rewards. Never blindly delete.
+-- 4. Move/drain all session-bearing writers to the atomic commit protocol and handle
+--    unique-conflict retries by fetching the existing attempt without repeating rewards.
+-- 5. Verify zero duplicates and no equivalent index, including in-flight transactions.
+-- 6. Obtain explicit approval. Build CONCURRENTLY outside a transaction, inspect
+--    indisvalid/indisready, and separately handle any invalid index after failure.
+-- Candidate SQL (intentionally commented to prevent accidental application):
+-- CREATE UNIQUE INDEX CONCURRENTLY test_attempts_one_per_session_idx
+-- ON public.test_attempts(session_id) WHERE session_id IS NOT NULL;
+-- NULL-session legacy attempts remain outside this proposed uniqueness rule.

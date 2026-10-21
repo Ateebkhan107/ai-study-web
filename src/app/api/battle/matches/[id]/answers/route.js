@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { getBattleForUser, isAnswerCorrect } from "@/lib/battle";
+import { isAnswerCorrect } from "@/lib/battle";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 const SCORING_SELECT = "id, correct_answer";
@@ -21,14 +21,29 @@ export async function POST(request, context) {
 
     if (!questionId) return NextResponse.json({ error: "Question is required." }, { status: 400 });
 
-    const battle = await getBattleForUser({ battleId: id, userId });
-    if (battle.status !== "ACTIVE") return NextResponse.json({ error: "Battle is already finished." }, { status: 400 });
-    if (!battle.question_ids.map(String).includes(questionId)) {
+    const [{ data: match, error: matchError }, { data: player, error: playerError }] = await Promise.all([
+      supabaseAdmin
+        .from("battle_matches")
+        .select("id, status, question_ids")
+        .eq("id", id)
+        .maybeSingle(),
+      supabaseAdmin
+        .from("battle_players")
+        .select("id, completed_at")
+        .eq("battle_id", id)
+        .eq("user_id", userId)
+        .maybeSingle(),
+    ]);
+
+    if (matchError) throw matchError;
+    if (playerError) throw playerError;
+    if (!match) return NextResponse.json({ error: "Battle not found." }, { status: 404 });
+    if (!player) return NextResponse.json({ error: "You are not a player in this battle." }, { status: 403 });
+    if (match.status !== "ACTIVE") return NextResponse.json({ error: "Battle is already finished." }, { status: 400 });
+    if (!match.question_ids?.map(String).includes(questionId)) {
       return NextResponse.json({ error: "Question is not part of this battle." }, { status: 400 });
     }
-
-    const currentPlayer = battle.players.find((player) => player.user_id === userId);
-    if (currentPlayer?.completed_at) {
+    if (player.completed_at) {
       return NextResponse.json({ error: "You have already finished this battle." }, { status: 400 });
     }
 
@@ -40,7 +55,9 @@ export async function POST(request, context) {
     if (questionError) throw questionError;
     if (!question) return NextResponse.json({ error: "Question not found." }, { status: 404 });
 
-    const isCorrect = isAnswerCorrect(question, selectedAnswer);
+    const isAnswerEmpty = selectedAnswer === null || selectedAnswer === undefined || selectedAnswer === "";
+    const isCorrect = isAnswerEmpty ? null : isAnswerCorrect(question, selectedAnswer);
+
     const { error } = await supabaseAdmin
       .from("battle_answers")
       .upsert(
@@ -48,7 +65,7 @@ export async function POST(request, context) {
           battle_id: id,
           user_id: userId,
           question_id: questionId,
-          selected_answer: selectedAnswer ?? null,
+          selected_answer: isAnswerEmpty ? null : selectedAnswer,
           is_correct: isCorrect,
           answered_at: new Date().toISOString(),
         },

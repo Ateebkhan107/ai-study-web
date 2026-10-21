@@ -3,7 +3,7 @@
 import MathText from "@/components/MathText";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
 import { Lightbulb } from "lucide-react";
 import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
@@ -11,6 +11,8 @@ import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
 export default function ReviewPage() {
   const { id } = useParams();
   const router = useRouter();
+  const isGenerated = useSearchParams().get("sourceType") === "AI_GENERATED";
+  const sourceQuery = isGenerated ? "?sourceType=AI_GENERATED" : "";
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +21,7 @@ export default function ReviewPage() {
   useEffect(() => {
     async function loadReview() {
       try {
-        const response = await fetch(`/api/test-attempts/${id}/review`, {
+        const response = await fetch(`/api/test-attempts/${id}/review${sourceQuery}`, {
           cache: "no-store",
         });
 
@@ -40,17 +42,17 @@ export default function ReviewPage() {
     if (id) {
       loadReview();
     }
-  }, [id]);
+  }, [id, sourceQuery]);
 
   useRegisterZiEntity(
-    hasReviewAccess && id
+    hasReviewAccess && id && !isGenerated
       ? { type: "test_result", id }
       : null
   );
 
   if (loading) {
     return (
-      <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
+      <PageWrapper title={isGenerated ? "AI-Generated Practice Review" : "Review Answers"} subtitle="Test Analysis" badge="REVIEW">
         <div className="p-10 flex flex-col items-center justify-center min-h-[50vh]">
           <div className="h-10 w-10 border-4 border-slate-200/60 dark:border-[var(--border)]/50 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
           <span className="text-slate-400 dark:text-slate-500 font-bold skeleton-shimmer">Loading review...</span>
@@ -60,12 +62,12 @@ export default function ReviewPage() {
   }
 
   return (
-    <PageWrapper title="Review Answers" subtitle="Test Analysis" badge="REVIEW">
+    <PageWrapper title={isGenerated ? "AI-Generated Practice Review" : "Review Answers"} subtitle="Test Analysis" badge="REVIEW">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex justify-end mb-8">
           <button
             onClick={() => {
-              router.push(`/test/result/${id}`);
+              router.push(`/test/result/${id}${sourceQuery}`);
             }}
             className="px-5 py-2.5 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 bg-[var(--card)]/70 dark:bg-[var(--surface)]/60 backdrop-blur-xl font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500/30 transition-all duration-300 shadow-sm"
           >

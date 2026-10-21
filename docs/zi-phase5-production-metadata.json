@@ -1,0 +1,732 @@
+{
+  "inspectedAt": "2026-10-15T20:26:24.176Z",
+  "access": "PostgREST GET only; no admin SQL connection available",
+  "tableDefinitions": {
+    "test_sessions": {
+      "required": [
+        "id",
+        "user_id",
+        "exam"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "text",
+          "type": "string"
+        },
+        "exam": {
+          "format": "text",
+          "type": "string"
+        },
+        "subjects": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "chapters": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "difficulty": {
+          "format": "text",
+          "type": "string"
+        },
+        "total_questions": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "duration_minutes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "score": {
+          "default": 0,
+          "format": "numeric",
+          "type": "number"
+        },
+        "correct_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "wrong_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "skipped_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "status": {
+          "default": "in_progress",
+          "format": "text",
+          "type": "string"
+        },
+        "started_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "test_questions": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "test_id": {
+          "description": "Note:\nThis is a Foreign Key to `tests.id`.<fk table='tests' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "exam": {
+          "format": "text",
+          "type": "string"
+        },
+        "question_id": {
+          "description": "Note:\nThis is a Foreign Key to `questions.id`.<fk table='questions' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "test_attempt_id": {
+          "description": "Note:\nThis is a Foreign Key to `test_attempts.id`.<fk table='test_attempts' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "question_order": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "session_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "test_attempts": {
+      "required": [
+        "id",
+        "user_id",
+        "duration_minutes",
+        "total_questions"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "text",
+          "type": "string"
+        },
+        "test_id": {
+          "description": "Note:\nThis is a Foreign Key to `tests.id`.<fk table='tests' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "mode": {
+          "default": "custom",
+          "format": "text",
+          "type": "string"
+        },
+        "subject": {
+          "format": "text",
+          "type": "string"
+        },
+        "difficulty": {
+          "format": "text",
+          "type": "string"
+        },
+        "duration_minutes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "total_questions": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "started_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "submitted_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "time_taken_seconds": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "correct": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "wrong": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "skipped": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "accuracy": {
+          "default": 0,
+          "format": "numeric",
+          "type": "number"
+        },
+        "score": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "status": {
+          "default": "in_progress",
+          "format": "text",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "attempted": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "correct_answers": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "wrong_answers": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "session_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "total_marks": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "user_answers": {
+      "required": [
+        "id",
+        "attempt_id",
+        "question_id"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "attempt_id": {
+          "description": "Note:\nThis is a Foreign Key to `test_attempts.id`.<fk table='test_attempts' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "question_id": {
+          "description": "Note:\nThis is a Foreign Key to `questions.id`.<fk table='questions' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "selected_option": {
+          "format": "text",
+          "type": "string"
+        },
+        "correct_option": {
+          "format": "text",
+          "type": "string"
+        },
+        "is_correct": {
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "time_spent_seconds": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "questions": {
+      "required": [
+        "id",
+        "exam",
+        "subject",
+        "chapter",
+        "difficulty",
+        "question_text",
+        "correct_option",
+        "source_type",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "exam": {
+          "format": "text",
+          "type": "string"
+        },
+        "subject": {
+          "format": "text",
+          "type": "string"
+        },
+        "chapter": {
+          "format": "text",
+          "type": "string"
+        },
+        "topic": {
+          "format": "text",
+          "type": "string"
+        },
+        "difficulty": {
+          "format": "text",
+          "type": "string"
+        },
+        "question_type": {
+          "default": "mcq",
+          "format": "text",
+          "type": "string"
+        },
+        "question_text": {
+          "format": "text",
+          "type": "string"
+        },
+        "question_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_a": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_b": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_c": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_d": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_a_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_b_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_c_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_d_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "correct_option": {
+          "format": "text",
+          "type": "string"
+        },
+        "explanation": {
+          "format": "text",
+          "type": "string"
+        },
+        "explanation_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "marks": {
+          "default": 4,
+          "format": "integer",
+          "type": "integer"
+        },
+        "negative_marks": {
+          "default": 1,
+          "format": "numeric",
+          "type": "number"
+        },
+        "is_active": {
+          "default": true,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "question_order": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "source_type": {
+          "default": "LEGACY",
+          "description": "Question bank origin, for example PREPZII_PRACTICE or LEGACY.",
+          "format": "text",
+          "type": "string"
+        },
+        "status": {
+          "default": "PUBLISHED",
+          "description": "Publication state used by admin review and student-facing practice selection.",
+          "format": "text",
+          "type": "string"
+        },
+        "question_content": {
+          "description": "Native structured question content blocks/options/media for PrepZii rendering. Legacy scalar fields remain fallback.",
+          "format": "jsonb"
+        },
+        "explanation_content": {
+          "description": "Native structured explanation/solution content blocks for PrepZii rendering.",
+          "format": "jsonb"
+        }
+      },
+      "type": "object"
+    },
+    "pyq_questions": {
+      "required": [
+        "id",
+        "exam",
+        "subject",
+        "chapter",
+        "question",
+        "option_a",
+        "option_b",
+        "option_c",
+        "option_d",
+        "correct_option",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "exam": {
+          "format": "text",
+          "type": "string"
+        },
+        "subject": {
+          "format": "text",
+          "type": "string"
+        },
+        "chapter": {
+          "format": "text",
+          "type": "string"
+        },
+        "question": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_a": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_b": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_c": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_d": {
+          "format": "text",
+          "type": "string"
+        },
+        "correct_option": {
+          "format": "text",
+          "type": "string"
+        },
+        "explanation": {
+          "format": "text",
+          "type": "string"
+        },
+        "year": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp without time zone",
+          "type": "string"
+        },
+        "exam_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "attempt": {
+          "format": "text",
+          "type": "string"
+        },
+        "shift": {
+          "format": "text",
+          "type": "string"
+        },
+        "question_type": {
+          "default": "MCQ",
+          "format": "text",
+          "type": "string"
+        },
+        "numerical_answer": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "marks_positive": {
+          "default": 4,
+          "format": "integer",
+          "type": "integer"
+        },
+        "marks_negative": {
+          "default": 1,
+          "format": "integer",
+          "type": "integer"
+        },
+        "question_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "correct_options": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numerical_min": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "numerical_max": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "paper_code": {
+          "format": "text",
+          "type": "string"
+        },
+        "explanation_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_a_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_b_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_c_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "option_d_image": {
+          "format": "text",
+          "type": "string"
+        },
+        "exam_id": {
+          "description": "Note:\nThis is a Foreign Key to `pyq_exams.id`.<fk table='pyq_exams' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "question_number": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "display_order": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "difficulty": {
+          "default": "Medium",
+          "format": "text",
+          "type": "string"
+        },
+        "topic": {
+          "format": "text",
+          "type": "string"
+        },
+        "import_package_id": {
+          "description": "Note:\nThis is a Foreign Key to `pyq_import_packages.id`.<fk table='pyq_import_packages' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "status": {
+          "default": "PUBLISHED",
+          "format": "text",
+          "type": "string"
+        },
+        "confidence_score": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "question_content": {
+          "description": "Native structured PYQ content blocks/options/media for PrepZii rendering. Legacy scalar fields remain fallback.",
+          "format": "jsonb"
+        },
+        "explanation_content": {
+          "description": "Native structured PYQ explanation/solution content blocks for PrepZii rendering.",
+          "format": "jsonb"
+        }
+      },
+      "type": "object"
+    },
+    "institute_test_attempts": {
+      "required": [
+        "id",
+        "institute_id",
+        "institute_test_id",
+        "user_id",
+        "status",
+        "started_at"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "institute_id": {
+          "description": "Note:\nThis is a Foreign Key to `institutes.id`.<fk table='institutes' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "institute_test_id": {
+          "description": "Note:\nThis is a Foreign Key to `institute_tests.id`.<fk table='institute_tests' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "text",
+          "type": "string"
+        },
+        "session_id": {
+          "description": "Note:\nThis is a Foreign Key to `test_sessions.id`.<fk table='test_sessions' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "attempt_id": {
+          "description": "Note:\nThis is a Foreign Key to `test_attempts.id`.<fk table='test_attempts' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "status": {
+          "default": "IN_PROGRESS",
+          "format": "text",
+          "type": "string"
+        },
+        "started_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "submitted_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "zi_generated_tests": null,
+    "zi_generated_questions": null,
+    "zi_generated_sessions": null
+  },
+  "advertisedRPCPaths": [
+    "/rpc/community_is_active_group_member",
+    "/rpc/community_current_user_id",
+    "/rpc/increment_xp",
+    "/rpc/community_has_group_role",
+    "/rpc/community_is_group_owner"
+  ],
+  "catalogAccess": {
+    "status": 406,
+    "code": "PGRST106",
+    "message": "Invalid schema: pg_catalog"
+  },
+  "duplicateAttempts": {
+    "status": 200,
+    "rowsInspected": 207,
+    "totalNonNullSessionRows": 207,
+    "completeSnapshot": true,
+    "duplicateSessionGroupsObserved": 21,
+    "excessAttemptsObserved": 36,
+    "limitation": "Only session IDs read, max 1000. No identities/answers/scores saved. A complete snapshot is not an ongoing uniqueness guarantee."
+  },
+  "observedLegacyValues": {
+    "zeroDurationSessions": 0,
+    "completedSessions": 0,
+    "limitation": "Existing records do not establish current CHECK/trigger compatibility."
+  },
+  "inaccessible": [
+    "pg_constraint/check definitions and FK actions",
+    "pg_trigger",
+    "pg_policies and table/schema ACLs",
+    "pg_default_acl",
+    "pg_proc ownership/ACL/search_path",
+    "pg_roles/pg_auth_members and inherited privileges",
+    "public-schema CREATE privileges",
+    "pg_index uniqueness definitions"
+  ]
+}

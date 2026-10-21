@@ -6,6 +6,7 @@ import { BookOpen, Check, ChevronRight, UserRound } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 
 import MathText from "@/components/MathText";
+import ZiTestBuilder from "@/components/zi/ZiTestBuilder";
 import ZiSpeakButton from "@/components/zi/ZiSpeakButton";
 import ZiVisual from "@/components/zi/ZiVisual";
 import Logo from "@/components/Logo";
@@ -386,6 +387,7 @@ export default function ZiMessage({
           )
         )}
 
+        {action?.type === "ai_test_builder" ? <ZiTestBuilder key={action.token} action={action} /> : null}
         {studyPlan ? <ZiStudyPlan plan={studyPlan} /> : null}
         {visual ? <ZiVisual visual={visual} /> : null}
 

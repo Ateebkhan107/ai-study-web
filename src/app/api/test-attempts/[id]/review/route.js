@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { assertGeneratedEngineEnabled, generatedResult } from "@/lib/tests/generatedTests.server";
 
 export async function GET(_request, { params }) {
   try {
@@ -11,6 +12,10 @@ export async function GET(_request, { params }) {
     }
 
     const { id } = await params;
+    if (new URL(_request.url).searchParams.get("sourceType") === "AI_GENERATED") {
+      assertGeneratedEngineEnabled();
+      return NextResponse.json(await generatedResult({ userId, sessionId: id, client: supabaseAdmin, review: true }), { headers: { "Cache-Control": "no-store" } });
+    }
 
     const { data: attempt, error: attemptError } = await supabaseAdmin
       .from("test_attempts")
@@ -54,6 +59,7 @@ export async function GET(_request, { params }) {
 
     return NextResponse.json({ answers: data || [] });
   } catch (error) {
+    if (error.status) return NextResponse.json({ error: error.message }, { status: error.status });
     console.error("[TEST_ATTEMPT_REVIEW_FETCH_ERROR]", error);
     return NextResponse.json(
       { error: "Internal Server Error" },

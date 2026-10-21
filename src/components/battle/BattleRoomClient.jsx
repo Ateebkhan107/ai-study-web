@@ -16,23 +16,19 @@ import {
   Trophy,
   Volume2,
   VolumeX,
-  Zap,
 } from "lucide-react";
 import { OptionContentRenderer, QuestionContentRenderer } from "@/components/questions/QuestionRenderer";
 import { useClerkSupabase } from "@/lib/useClerkSupabase";
 import {
   getSoundEnabled,
-  getVoiceEnabled,
   playAnswerSelect,
   playDefeatChime,
-  playTimerWarning,
   playVictoryFanfare,
   setSoundEnabled,
   speakAnnouncer,
   unlockAudioContext,
 } from "@/lib/battleAudio";
 import { StarsBackground } from "@/components/ui/stars-background";
-
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -48,9 +44,11 @@ async function fetchJson(url, options) {
 }
 
 function normalizeOption(value) {
-  if (Array.isArray(value)) return value;
-  if (value === undefined || value === null) return null;
-  return value;
+  if (Array.isArray(value)) return value.map(normalizeOption).filter(Boolean);
+  if (value === undefined || value === null || value === "") return null;
+  const str = String(value).trim().toUpperCase();
+  if (/^[0-3]$/.test(str)) return LETTERS[Number(str)];
+  return str;
 }
 
 function formatElapsed(startedAt, completedAt) {
@@ -76,8 +74,10 @@ function getMe(battle, userId) {
 }
 
 function answerMatches(selected, optionId) {
-  if (Array.isArray(selected)) return selected.includes(optionId);
-  return selected === optionId;
+  if (selected === undefined || selected === null) return false;
+  const target = String(optionId).toUpperCase();
+  if (Array.isArray(selected)) return selected.map((s) => String(s).toUpperCase()).includes(target);
+  return String(selected).toUpperCase() === target;
 }
 
 function ResultPanel({
@@ -93,7 +93,7 @@ function ResultPanel({
   const opponent = getOpponent(battle, userId);
   const soundPlayedRef = useRef(false);
 
-  const isWinner = battle.winner_user_id === userId;
+  const isWinner = Boolean(userId && battle.winner_user_id === userId);
   const isDraw = !battle.winner_user_id;
 
   useEffect(() => {
@@ -121,7 +121,6 @@ function ResultPanel({
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-6 sm:py-10 animate-in fade-in zoom-in-95 duration-300">
-      
       {/* MAIN RESULT CARD */}
       <div className={cx(
         "relative overflow-hidden rounded-3xl border p-6 sm:p-10 shadow-2xl text-center",
@@ -133,7 +132,7 @@ function ResultPanel({
       )}>
         {/* Subtle Stars Background */}
         <StarsBackground className="pointer-events-none -z-10 opacity-70" />
-        
+
         {/* Glow backdrop */}
         <div className={cx(
           "pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-3xl opacity-30",
@@ -141,7 +140,6 @@ function ResultPanel({
         )} />
 
         <div className="relative z-10 flex flex-col items-center">
-          
           {/* Outcome Emblem */}
           <div className={cx(
             "mb-3 inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-black uppercase tracking-[0.2em]",
@@ -253,9 +251,9 @@ function ResultPanel({
           <h3 className="text-lg font-black font-display text-white uppercase tracking-wide">
             Question Review & Solutions
           </h3>
-          {battle.questions.map((question, index) => {
+          {(battle.questions || []).map((question, index) => {
             const myAnswer = battle.answers?.[question.id];
-            const isCorrect = myAnswer === question.correct_option;
+            const isCorrect = answerMatches(normalizeOption(myAnswer), question.correct_option);
             return (
               <div
                 key={question.id}
@@ -335,13 +333,22 @@ export default function BattleRoomClient({ battleId }) {
   const hasFinished = Boolean(me?.completed_at);
 
   const loadBattle = useCallback(async () => {
-    const data = await fetchJson(`/api/battle/matches/${battleId}`);
-    setBattle(data.battle);
-    setAnswers(data.battle.answers || {});
-    if (data.battle.started_at) {
-      setElapsed(Math.max(0, Math.round((Date.now() - new Date(data.battle.started_at).getTime()) / 1000)));
+    try {
+      const data = await fetchJson(`/api/battle/matches/${battleId}`);
+      setBattle(data.battle);
+      // Safely merge server answers with local answers so any in-flight local choice is preserved
+      setAnswers((previous) => ({
+        ...(data.battle?.answers || {}),
+        ...previous,
+      }));
+      if (data.battle?.started_at) {
+        setElapsed(Math.max(0, Math.round((Date.now() - new Date(data.battle.started_at).getTime()) / 1000)));
+      }
+    } catch (err) {
+      // Don't flash background refresh error if match already loaded
+      if (!battle) setError(err.message);
     }
-  }, [battleId]);
+  }, [battleId, battle]);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -377,7 +384,9 @@ export default function BattleRoomClient({ battleId }) {
 
       const channel = supabase
         .channel(`battle-${battleId}`)
-        .on("broadcast", { event: "progress" }, () => {
+        .on("broadcast", { event: "progress" }, ({ payload }) => {
+          // If the broadcast was sent by this user, ignore it to prevent race overwrites
+          if (payload?.senderId && payload.senderId === userId) return;
           loadBattle().catch(() => {});
         })
         .on(
@@ -405,57 +414,119 @@ export default function BattleRoomClient({ battleId }) {
         channelRef.current = null;
       }
     };
-  }, [battleId, isLoaded, loadBattle, session, supabase]);
+  }, [battleId, isLoaded, loadBattle, session, supabase, userId]);
 
-  async function broadcastProgress() {
+  const broadcastProgress = useCallback(async () => {
     try {
       await channelRef.current?.send({
         type: "broadcast",
         event: "progress",
-        payload: { battleId },
+        payload: { battleId, senderId: userId },
       });
     } catch {
       // Fallback polling keeps state authoritative
     }
-  }
+  }, [battleId, userId]);
 
-  async function saveAnswer(question, value) {
+  const saveAnswer = useCallback(async (question, value) => {
     if (!question || hasFinished || battle?.status !== "ACTIVE") return;
     playAnswerSelect();
     setSaving(true);
     setError("");
-    setAnswers((previous) => ({ ...previous, [question.id]: value }));
+
+    // 1. Optimistic update: instantly update UI
+    setAnswers((previous) => {
+      const updated = { ...previous };
+      if (value === null || value === undefined || value === "") {
+        delete updated[question.id];
+      } else {
+        updated[question.id] = value;
+      }
+      return updated;
+    });
+
     try {
       await fetchJson(`/api/battle/matches/${battleId}/answers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ questionId: question.id, selectedAnswer: value }),
       });
+      // 2. Broadcast to opponent
       await broadcastProgress();
-      await loadBattle();
     } catch (err) {
-      setError(err.message);
-      await loadBattle().catch(() => {});
+      console.error("[SAVE_ANSWER_ERROR]", err);
+      setError(err.message || "Failed to save answer");
     } finally {
       setSaving(false);
     }
-  }
+  }, [battle?.status, battleId, broadcastProgress, hasFinished]);
 
-  function selectOption(question, optionId) {
+  const selectOption = useCallback((question, optionId) => {
+    if (!question || hasFinished || battle?.status !== "ACTIVE") return;
     const type = String(question.question_type || "MCQ").toLowerCase();
+    
     if (type.includes("multiple")) {
       const current = Array.isArray(answers[question.id]) ? answers[question.id] : [];
       const next = current.includes(optionId)
         ? current.filter((item) => item !== optionId)
         : [...current, optionId].sort();
-      saveAnswer(question, next);
+      saveAnswer(question, next.length > 0 ? next : null);
       return;
     }
-    saveAnswer(question, optionId);
-  }
+
+    // Single-choice MCQ: tapping the same option deselects it
+    const current = normalizeOption(answers[question.id]);
+    if (answerMatches(current, optionId)) {
+      saveAnswer(question, null);
+    } else {
+      saveAnswer(question, optionId);
+    }
+  }, [answers, battle?.status, hasFinished, saveAnswer]);
+
+  const clearAnswer = useCallback((question) => {
+    if (!question || hasFinished || battle?.status !== "ACTIVE") return;
+    saveAnswer(question, null);
+  }, [battle?.status, hasFinished, saveAnswer]);
+
+  // Keyboard Navigation: A-D / 1-4 for options, Arrows for navigation
+  useEffect(() => {
+    if (hasFinished || battle?.status !== "ACTIVE" || !currentQuestion) return;
+
+    function handleKeyDown(event) {
+      if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
+
+      const key = event.key.toUpperCase();
+      if (["A", "B", "C", "D"].includes(key)) {
+        event.preventDefault();
+        selectOption(currentQuestion, key);
+      } else if (["1", "2", "3", "4"].includes(event.key)) {
+        event.preventDefault();
+        const letter = LETTERS[Number(event.key) - 1];
+        if (letter) selectOption(currentQuestion, letter);
+      } else if (event.key === "ArrowRight" || event.key === "Enter") {
+        event.preventDefault();
+        setCurrentIdx((idx) => Math.min((battle.questions || []).length - 1, idx + 1));
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setCurrentIdx((idx) => Math.max(0, idx - 1));
+      } else if (event.key === "Backspace" || event.key === "Delete") {
+        event.preventDefault();
+        clearAnswer(currentQuestion);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [hasFinished, battle?.status, currentQuestion, battle?.questions, selectOption, clearAnswer]);
 
   async function finishBattle() {
-    if (!window.confirm("Finish and submit your battle answers?")) return;
+    const totalQ = (battle?.questions || []).length || 10;
+    const unanswered = totalQ - myAnswered;
+    const promptMsg = unanswered > 0
+      ? `You have ${unanswered} unanswered question(s). Submit and finalize your battle answers?`
+      : "Submit and finalize your battle answers?";
+    if (!window.confirm(promptMsg)) return;
+
     setFinishing(true);
     setError("");
     try {
@@ -463,7 +534,7 @@ export default function BattleRoomClient({ battleId }) {
       setBattle(data.battle);
       await broadcastProgress();
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Failed to submit battle");
     } finally {
       setFinishing(false);
     }
@@ -478,6 +549,12 @@ export default function BattleRoomClient({ battleId }) {
       setRematchMessage(err.message);
     }
   }
+
+  const myAnswered = Object.values(answers).filter((val) => {
+    if (val === undefined || val === null || val === "") return false;
+    if (Array.isArray(val) && val.length === 0) return false;
+    return true;
+  }).length;
 
   if (loading) {
     return (
@@ -508,238 +585,329 @@ export default function BattleRoomClient({ battleId }) {
     );
   }
 
-  const myAnswered = Object.keys(answers).length;
   const totalQuestions = (battle?.questions || []).length || 10;
   const oppAnswered = opponent?.answeredCount || 0;
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-3 py-4 sm:px-6 lg:px-8 space-y-4">
-      
-      {/* ARENA BATTLE HEADER BAR */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-        
-        {/* Matchup & Opponent Live State */}
-        <div className="flex items-center gap-3 min-w-0">
-          <Link
-            href="/battle"
-            className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:text-slate-900 dark:border-[var(--border-subtle)] dark:text-slate-400 dark:hover:text-white transition"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-wider text-brand">{battle.exam} 1v1 Arena</span>
-              <span className="rounded-full bg-emerald-500/20 px-2 py-0.2 text-[9px] font-black text-emerald-400 uppercase">Live</span>
-            </div>
-            <div className="flex items-center gap-2 mt-0.5">
-              <span className="text-sm font-black text-slate-900 dark:text-white">You</span>
-              <span className="text-xs text-slate-400">vs</span>
-              <span className="text-sm font-black text-slate-900 dark:text-white truncate max-w-[140px]">
-                {opponent?.profile?.displayName || "Opponent"}
-              </span>
-            </div>
-          </div>
-        </div>
+    <div className="relative min-h-[85vh] py-2 sm:py-6">
+      {/* Ambient Arena Stars Background */}
+      <StarsBackground className="pointer-events-none -z-10 opacity-50" />
+      <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-brand/10 blur-3xl -z-10" />
 
-        {/* Live Counters, Timer & Audio */}
-        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
-          
-          {/* Opponent Progress Badge */}
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 dark:border-white/5 dark:bg-white/5 dark:text-slate-300">
-            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-            Opponent: {oppAnswered}/{totalQuestions}
-          </div>
-
-          {/* Player Progress Badge */}
-          <div className="rounded-xl border border-brand/40 bg-brand/10 px-3 py-1.5 text-xs font-black text-brand">
-            You: {myAnswered}/{totalQuestions}
-          </div>
-
-          {/* Clock */}
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white">
-            <Clock className="h-3.5 w-3.5 text-brand" />
-            {formatClock(elapsed)}
-          </div>
-
-          {/* Audio toggle */}
-          <button
-            type="button"
-            onClick={toggleSound}
-            className="rounded-xl border border-slate-200 p-2 text-slate-400 hover:text-white dark:border-white/10"
-          >
-            {soundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-          </button>
-        </div>
-      </div>
-
-      {hasFinished && (
-        <div className="rounded-xl border border-brand/40 bg-brand/10 p-3.5 text-xs sm:text-sm font-semibold text-brand text-center animate-pulse">
-          Your answers have been submitted. Waiting for opponent to complete the battle.
-        </div>
-      )}
-
-      {error && (
-        <div className="rounded-xl border border-amber-300 bg-amber-100 p-3 text-xs font-semibold text-amber-900 dark:border-brand/30 dark:bg-brand/10 dark:text-brand">
-          {error}
-        </div>
-      )}
-
-      {/* QUESTION ARENA GRID */}
-      <div className="grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)]">
-        
-        {/* Question Palette Sidebar */}
-        <aside className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] lg:sticky lg:top-20 h-fit">
-          <div className="mb-3 flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Questions</span>
-            {saving && <Loader2 className="h-3.5 w-3.5 animate-spin text-brand" />}
-          </div>
-
-          <div className="grid grid-cols-5 gap-1.5">
-            {(battle.questions || []).map((q, index) => {
-              const active = index === currentIdx;
-              const answered = answers[q.id] !== undefined && answers[q.id] !== null;
-              return (
-                <button
-                  key={q.id}
-                  type="button"
-                  onClick={() => setCurrentIdx(index)}
-                  className={cx(
-                    "aspect-square rounded-lg border text-xs font-black transition",
-                    active
-                      ? "border-brand bg-brand text-slate-950 shadow-sm"
-                      : answered
-                      ? "border-emerald-500/30 bg-emerald-500/15 text-emerald-400"
-                      : "border-slate-200 bg-slate-50 text-slate-500 hover:border-brand/40 dark:border-white/5 dark:bg-white/5 dark:text-slate-300"
-                  )}
-                >
-                  {index + 1}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 space-y-1.5 text-[10px] font-bold text-slate-400">
-            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-brand" /> Current</div>
-            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-emerald-500/20 border border-emerald-500/40" /> Answered</div>
-            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-white/5 border border-white/10" /> Unanswered</div>
-          </div>
-        </aside>
-
-        {/* Question Reading & Answer Section */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 shadow-sm dark:border-[var(--border-subtle)] dark:bg-[var(--surface)]">
-          {currentQuestion && (
-            <>
-              {/* Question Header */}
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 dark:border-white/5">
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-brand">
-                    Question {currentIdx + 1} of {battle.questions.length}
-                  </span>
-                  <p className="text-xs font-bold text-slate-400">
-                    {currentQuestion.subject}{currentQuestion.chapter ? ` · ${currentQuestion.chapter}` : ""}
-                  </p>
-                </div>
-                <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[11px] font-black text-slate-400 dark:border-white/10">
-                  +4 / -1
+      <main className="mx-auto w-full max-w-6xl px-3 sm:px-6 lg:px-8 space-y-4">
+        {/* ARENA BATTLE HEADER BAR */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-md px-4 py-3.5 shadow-sm dark:border-white/10 dark:bg-[var(--surface)]">
+          {/* Matchup & Opponent Live State */}
+          <div className="flex items-center gap-3 min-w-0">
+            <Link
+              href="/battle"
+              className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:text-slate-900 dark:border-white/10 dark:text-slate-400 dark:hover:text-white transition active:scale-95"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-brand font-display">{battle.exam} 1v1 Arena</span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[9px] font-black text-emerald-500 dark:text-emerald-400 uppercase">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" /> Live
                 </span>
               </div>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-sm font-black text-slate-900 dark:text-white">You</span>
+                <span className="text-xs text-slate-400 font-bold">vs</span>
+                <span className="text-sm font-black text-slate-900 dark:text-white truncate max-w-[140px]">
+                  {opponent?.profile?.displayName || "Opponent"}
+                </span>
+              </div>
+            </div>
+          </div>
 
-              {/* Question Statement */}
-              <QuestionContentRenderer
-                question={currentQuestion}
-                legacyText={currentQuestion.question}
-                legacyImage={currentQuestion.question_image}
-                className="text-base sm:text-lg leading-8"
-              />
+          {/* Live Counters, Timer & Audio */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            {/* Opponent Progress Badge */}
+            <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+              Opponent: {oppAnswered}/{totalQuestions}
+            </div>
 
-              {/* Options */}
-              {String(currentQuestion.question_type || "").toLowerCase().includes("numerical") ? (
-                <div className="mt-6 max-w-md">
-                  <label className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">Numerical Value</label>
-                  <input
-                    defaultValue={answers[currentQuestion.id] || ""}
-                    disabled={hasFinished}
-                    onBlur={(event) => saveAnswer(currentQuestion, event.target.value.trim())}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none transition focus:border-brand dark:border-white/10 dark:bg-white/5 dark:text-white"
-                    placeholder="Enter answer"
-                  />
-                </div>
-              ) : (
-                <div className="mt-6 space-y-3">
-                  {LETTERS.map((letter) => {
-                    const optionText = currentQuestion[`option_${letter.toLowerCase()}`];
-                    const optionImage = currentQuestion[`option_${letter.toLowerCase()}_image`];
-                    if (!optionText && !optionImage) return null;
-                    const selected = answerMatches(normalizeOption(answers[currentQuestion.id]), letter);
-                    return (
-                      <button
-                        key={letter}
-                        type="button"
-                        disabled={hasFinished}
-                        onClick={() => selectOption(currentQuestion, letter)}
-                        className={cx(
-                          "group flex w-full items-start gap-3 rounded-xl border p-3.5 sm:p-4 text-left transition disabled:cursor-not-allowed",
-                          selected
-                            ? "border-brand bg-brand/10 text-white shadow-sm"
-                            : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-brand/40 hover:bg-slate-100 dark:border-white/5 dark:bg-white/[0.02] dark:text-slate-200 dark:hover:bg-white/5"
-                        )}
-                      >
-                        <span className={cx(
-                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-xs font-black transition",
-                          selected ? "border-brand bg-brand text-slate-950" : "border-slate-300 text-slate-400 dark:border-slate-700"
-                        )}>
-                          {letter}
-                        </span>
-                        <OptionContentRenderer
-                          option={optionText}
-                          fallbackText={optionText}
-                          fallbackImage={optionImage}
-                          optionId={letter}
-                          className="text-sm sm:text-base font-medium"
-                        />
-                      </button>
-                    );
-                  })}
+            {/* Player Progress Badge */}
+            <div className="rounded-xl border border-brand/40 bg-brand/10 px-3 py-1.5 text-xs font-black text-amber-700 dark:text-brand shadow-sm">
+              You: {myAnswered}/{totalQuestions}
+            </div>
+
+            {/* Clock */}
+            <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white shadow-sm font-mono">
+              <Clock className="h-3.5 w-3.5 text-brand" />
+              {formatClock(elapsed)}
+            </div>
+
+            {/* Audio toggle */}
+            <button
+              type="button"
+              onClick={toggleSound}
+              className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:text-slate-900 dark:border-white/10 dark:text-slate-400 dark:hover:text-white transition active:scale-95"
+              title={soundOn ? "Sound On" : "Sound Muted"}
+            >
+              {soundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
+
+        {hasFinished && (
+          <div className="rounded-xl border border-brand/40 bg-brand/10 p-3.5 text-xs sm:text-sm font-bold text-amber-800 dark:text-brand text-center animate-pulse">
+            Your answers have been submitted. Waiting for opponent to complete the battle.
+          </div>
+        )}
+
+        {error && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs font-semibold text-amber-900 dark:border-brand/30 dark:bg-brand/10 dark:text-brand">
+            {error}
+          </div>
+        )}
+
+        {/* QUESTION ARENA GRID */}
+        <div className="grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)]">
+          {/* Question Palette Sidebar */}
+          <aside className="rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-md p-4 sm:p-5 shadow-sm dark:border-white/10 dark:bg-[var(--surface)] lg:sticky lg:top-20 h-fit space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Questions</span>
+                <p className="text-xs font-bold text-slate-600 dark:text-slate-300">
+                  {myAnswered}/{totalQuestions} Answered
+                </p>
+              </div>
+              {saving && (
+                <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-brand">
+                  <Loader2 className="h-3 w-3 animate-spin" /> Saving
                 </div>
               )}
+            </div>
 
-              {/* Navigation & Submit */}
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100 dark:border-white/5">
-                <button
-                  type="button"
-                  onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
-                  disabled={currentIdx === 0}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-black uppercase text-slate-500 hover:text-white disabled:opacity-30 dark:border-white/10 transition"
-                >
-                  <ArrowLeft className="h-3.5 w-3.5" /> Prev
-                </button>
+            {/* Progress Bar */}
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-white/10">
+              <div
+                className="h-full bg-gradient-to-r from-amber-500 to-brand transition-all duration-300"
+                style={{ width: `${(myAnswered / totalQuestions) * 100}%` }}
+              />
+            </div>
 
-                <div className="flex gap-2">
-                  {currentIdx < battle.questions.length - 1 ? (
-                    <button
-                      type="button"
-                      onClick={() => setCurrentIdx((i) => Math.min(battle.questions.length - 1, i + 1))}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-6 py-2.5 text-xs font-black uppercase text-slate-950 hover:bg-brand-hover transition active:scale-95"
-                    >
-                      Next <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={finishBattle}
-                      disabled={finishing || hasFinished}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-6 py-2.5 text-xs font-black uppercase text-slate-950 hover:bg-brand-hover transition active:scale-95 disabled:opacity-50"
-                    >
-                      {finishing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
-                      Finish Battle
-                    </button>
-                  )}
+            <div className="grid grid-cols-5 gap-1.5">
+              {(battle.questions || []).map((q, index) => {
+                const active = index === currentIdx;
+                const isAnswered = answers[q.id] !== undefined && answers[q.id] !== null && answers[q.id] !== "";
+                return (
+                  <button
+                    key={q.id}
+                    type="button"
+                    onClick={() => setCurrentIdx(index)}
+                    className={cx(
+                      "relative aspect-square rounded-xl border text-xs font-black transition-all duration-150 flex items-center justify-center active:scale-95",
+                      active
+                        ? "border-brand bg-brand text-slate-950 shadow-md ring-2 ring-brand/40 scale-105 z-10"
+                        : isAnswered
+                        ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold"
+                        : "border-slate-200 bg-slate-50 text-slate-500 hover:border-brand/40 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10"
+                    )}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="pt-3 border-t border-slate-100 dark:border-white/5 space-y-1.5 text-[10px] font-bold text-slate-400">
+              <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-brand" /> Current</div>
+              <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-emerald-500/20 border border-emerald-500/40" /> Answered</div>
+              <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10" /> Unanswered</div>
+            </div>
+
+            <button
+              type="button"
+              onClick={finishBattle}
+              disabled={finishing || hasFinished}
+              className="w-full mt-2 rounded-xl border border-brand/50 bg-brand/10 py-2.5 text-xs font-black uppercase tracking-wider text-amber-700 hover:bg-brand hover:text-slate-950 dark:text-brand dark:hover:text-slate-950 transition active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {finishing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+              Finish Match
+            </button>
+          </aside>
+
+          {/* Question Reading & Answer Section */}
+          <section className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur-md p-5 sm:p-7 shadow-sm dark:border-white/10 dark:bg-[var(--surface)]">
+            {currentQuestion ? (
+              <>
+                {/* Question Header */}
+                <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4 dark:border-white/10">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-md border border-brand/40 bg-brand/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-700 dark:text-brand font-display">
+                        Question {currentIdx + 1} of {battle.questions.length}
+                      </span>
+                      <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-slate-500 dark:border-white/10 dark:text-slate-400">
+                        {currentQuestion.subject || "General"}
+                      </span>
+                    </div>
+                    {currentQuestion.chapter && (
+                      <p className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                        {currentQuestion.chapter}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-black text-emerald-600 dark:text-emerald-400">
+                      +4
+                    </span>
+                    <span className="rounded-md border border-rose-500/30 bg-rose-500/10 px-2.5 py-0.5 text-[11px] font-black text-rose-600 dark:text-rose-400">
+                      -1
+                    </span>
+                  </div>
                 </div>
+
+                {/* Question Statement */}
+                <div className="my-4">
+                  <QuestionContentRenderer
+                    question={currentQuestion}
+                    legacyText={currentQuestion.question}
+                    legacyImage={currentQuestion.question_image}
+                    className="text-base sm:text-lg leading-relaxed font-medium text-slate-900 dark:text-white"
+                  />
+                </div>
+
+                {/* Options */}
+                {String(currentQuestion.question_type || "").toLowerCase().includes("numerical") ? (
+                  <div className="mt-6 max-w-md space-y-2">
+                    <label className="block text-xs font-black uppercase tracking-wider text-slate-400">Numerical Value</label>
+                    <input
+                      key={currentQuestion.id}
+                      type="text"
+                      inputMode="decimal"
+                      value={answers[currentQuestion.id] ?? ""}
+                      disabled={hasFinished}
+                      onChange={(event) => {
+                        const val = event.target.value;
+                        setAnswers((prev) => ({ ...prev, [currentQuestion.id]: val }));
+                      }}
+                      onBlur={(event) => saveAnswer(currentQuestion, event.target.value.trim())}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") {
+                          saveAnswer(currentQuestion, event.currentTarget.value.trim());
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30 dark:border-white/10 dark:bg-white/5 dark:text-white"
+                      placeholder="Type numerical value"
+                    />
+                  </div>
+                ) : (
+                  <div className="mt-6 space-y-3">
+                    {LETTERS.map((letter) => {
+                      const optionText = currentQuestion[`option_${letter.toLowerCase()}`];
+                      const optionImage = currentQuestion[`option_${letter.toLowerCase()}_image`];
+                      if (!optionText && !optionImage) return null;
+                      const selected = answerMatches(normalizeOption(answers[currentQuestion.id]), letter);
+                      return (
+                        <button
+                          key={letter}
+                          type="button"
+                          disabled={hasFinished}
+                          onClick={() => selectOption(currentQuestion, letter)}
+                          className={cx(
+                            "group relative flex w-full items-start gap-3.5 sm:gap-4 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-150 disabled:cursor-not-allowed",
+                            selected
+                              ? "border-brand bg-amber-500/10 text-slate-950 ring-2 ring-brand/60 shadow-[0_0_20px_rgba(234,179,8,0.18)] dark:bg-brand/15 dark:text-white dark:ring-brand"
+                              : "border-slate-200 bg-white text-slate-800 hover:border-brand/40 hover:bg-slate-50/80 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 dark:hover:border-brand/40 dark:hover:bg-white/[0.06] hover:shadow-sm"
+                          )}
+                        >
+                          <span
+                            className={cx(
+                              "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-xs sm:text-sm font-black transition-transform duration-150",
+                              selected
+                                ? "border-brand bg-brand text-slate-950 shadow-sm scale-105 font-display"
+                                : "border-slate-300 text-slate-500 group-hover:border-slate-400 group-hover:text-slate-700 dark:border-white/15 dark:text-slate-400 dark:group-hover:border-white/30 dark:group-hover:text-white"
+                            )}
+                          >
+                            {letter}
+                          </span>
+                          <div className="flex-1 min-w-0 pt-0.5">
+                            <OptionContentRenderer
+                              option={optionText}
+                              fallbackText={optionText}
+                              fallbackImage={optionImage}
+                              optionId={letter}
+                              className={cx(
+                                "text-sm sm:text-base leading-relaxed",
+                                selected
+                                  ? "text-slate-950 dark:text-white font-semibold [&_*]:!text-slate-950 dark:[&_*]:!text-white"
+                                  : "text-inherit"
+                              )}
+                            />
+                          </div>
+                          {selected && (
+                            <span className="shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-brand text-slate-950 self-center shadow-sm animate-in zoom-in-75 duration-150">
+                              <Check className="h-4 w-4 stroke-[3]" />
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                    {answers[currentQuestion.id] !== undefined && answers[currentQuestion.id] !== null && !hasFinished && (
+                      <div className="flex items-center justify-between pt-1">
+                        <button
+                          type="button"
+                          onClick={() => clearAnswer(currentQuestion)}
+                          className="text-xs font-bold text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition"
+                        >
+                          Clear choice
+                        </button>
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
+                          Press <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">A-D</kbd> or <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">1-4</kbd> to answer
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Navigation & Submit */}
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-slate-100 dark:border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
+                    disabled={currentIdx === 0}
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-brand/40 hover:bg-slate-50 disabled:opacity-30 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10 transition active:scale-95"
+                  >
+                    <ArrowLeft className="h-4 w-4" /> Previous
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {currentIdx < battle.questions.length - 1 ? (
+                      <button
+                        type="button"
+                        onClick={() => setCurrentIdx((i) => Math.min(battle.questions.length - 1, i + 1))}
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-brand-hover shadow-sm transition active:scale-95 font-display"
+                      >
+                        Next <ArrowRight className="h-4 w-4" />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={finishBattle}
+                        disabled={finishing || hasFinished}
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-brand-hover shadow-md transition active:scale-95 disabled:opacity-50 font-display"
+                      >
+                        {finishing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
+                        Finish Battle
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="py-12 text-center text-slate-400">
+                No question available.
               </div>
-            </>
-          )}
-        </section>
-      </div>
-    </main>
+            )}
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }

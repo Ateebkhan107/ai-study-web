@@ -199,7 +199,7 @@ export async function getPersonalCustomTestUsage(userId, now = new Date()) {
 
   const { start, end } = getCurrentMonthWindow(now);
 
-  const [{ data: sessions, error: sessionsError }, { data: instituteAttempts, error: instituteError }] = await Promise.all([
+  const [{ data: sessions, error: sessionsError }, { data: instituteAttempts, error: instituteError }, { data: generatedSessions, error: generatedError }] = await Promise.all([
     supabaseAdmin
       .from("test_sessions")
       .select("id,chapters,started_at")
@@ -212,12 +212,17 @@ export async function getPersonalCustomTestUsage(userId, now = new Date()) {
       .eq("user_id", userId)
       .gte("started_at", start.toISOString())
       .lt("started_at", end.toISOString()),
+    process.env.ZI_GENERATED_TEST_ENGINE_ENABLED === "true"
+      ? supabaseAdmin.from("zi_generated_sessions").select("session_id").eq("owner_id", userId)
+        .gte("started_at", start.toISOString()).lt("started_at", end.toISOString())
+      : Promise.resolve({ data: [], error: null }),
   ]);
 
   if (sessionsError) throw sessionsError;
   if (instituteError) throw instituteError;
+  if (generatedError) throw generatedError;
 
-  const instituteSessionIds = new Set((instituteAttempts || []).map((row) => row.session_id).filter(Boolean));
+  const instituteSessionIds = new Set([...(instituteAttempts || []), ...(generatedSessions || [])].map((row) => row.session_id).filter(Boolean));
   const used = (sessions || []).filter((row) => !instituteSessionIds.has(row.id) && isPersonalCustomSession(row)).length;
 
   return {

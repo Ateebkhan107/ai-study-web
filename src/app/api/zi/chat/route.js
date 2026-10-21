@@ -18,6 +18,7 @@ import { getFormulaSubjectsForExam, getFormulaChaptersForSubject } from "@/lib/f
 import { getCanonicalChaptersForSubject, normalizeChapterName } from "@/lib/pyqChapterMapping";
 import { getQuestions } from "@/lib/questions";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { handleBuilder, parseBuilderText } from "@/lib/zi/testGenerator/builder.server";
 
 const encoder = new TextEncoder();
 
@@ -172,13 +173,6 @@ export async function POST(request) {
   const isAiMode = access.isAiMode;
   const freeUsage = access.ziFreeUsage || { used: 0, limit: 3, remaining: 3 };
 
-  if (!isAiMode && freeUsage.remaining <= 0) {
-    return NextResponse.json(
-      { error: "AI_MODE_REQUIRED", message: "You have used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi." },
-      { status: 403 }
-    );
-  }
-
   let body;
   try {
     body = await request.json();
@@ -206,6 +200,23 @@ export async function POST(request) {
         },
       }
     );
+  }
+
+  // Configuration is deterministic, authenticated and rate limited, and does not
+  // consume a Gemini call or an AI trial prompt. Never accept model-proposed drafts.
+  const latestText = parsed.data.messages.at(-1).content;
+  if (parsed.data.testBuilderToken || parseBuilderText(latestText).handled) {
+    try {
+      const action = handleBuilder({ userId, access, text: latestText, token: parsed.data.testBuilderToken });
+      if (action) return new Response(`${action.prompt}\n\n__ZI_VALIDATED_ACTION__=${JSON.stringify(action)}`, {
+        headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Zi-Prompt-Charged": "0" },
+      });
+    } catch (error) {
+      return NextResponse.json({ error: error.status ? error.message : "Test configuration is unavailable." }, { status: error.status || 503 });
+    }
+  }
+  if (!isAiMode && freeUsage.remaining <= 0) {
+    return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "You have used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi." }, { status: 403 });
   }
 
   // Deduct 1 free prompt if user is using free trial

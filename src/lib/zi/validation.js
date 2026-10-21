@@ -64,6 +64,7 @@ const ZiPageContextSchema = z
   });
 
 export const ZiChatRequestSchema = z.object({
+  testBuilderToken: z.string().min(1).max(4096).optional(),
   messages: z
     .array(ZiChatMessageSchema)
     .min(1)

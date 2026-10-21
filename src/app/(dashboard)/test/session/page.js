@@ -2,6 +2,8 @@
 
 import { memo, useCallback, useEffect, useRef, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { createGeneratedAnswerQueue } from "@/lib/tests/generatedSessionClient";
+import { submitTestSessionRequest } from "@/lib/tests/submissionClient";
 import Logo from "@/components/Logo";
 import { useUser } from "@clerk/nextjs";
 import { useStrictExamMode } from "@/hooks/useStrictExamMode";
@@ -402,6 +404,14 @@ function TestSessionContent() {
   const sourceTypeParam = searchParams.get("sourceType") || "";
   const instituteSlugParam = searchParams.get("instituteSlug") || "";
   const instituteTestIdParam = searchParams.get("instituteTestId") || "";
+  const generatedTestId = searchParams.get("generatedTestId") || "";
+  const isGenerated = sourceTypeParam === "AI_GENERATED";
+  const [generatedMode, setGeneratedMode] = useState(null);
+  const isPractice = isGenerated && generatedMode === "practice";
+  const [loadError, setLoadError] = useState("");
+  const [saveError, setSaveError] = useState("");
+  const answerQueueRef = useRef(null);
+  const clockRef = useRef(null);
 
   // 2. State Management
   const [questions, setQuestions] = useState([]);
@@ -417,7 +427,7 @@ function TestSessionContent() {
   const submitInFlightRef = useRef(false);
 
   // Apply Strict Exam Mode while the session is active and not finishing
-  useStrictExamMode(!finishing && questions.length > 0);
+  useStrictExamMode(!finishing && questions.length > 0 && !isPractice);
   useQuestionImagePreload(questions, currentIdx, 2);
 
   // 3. Initialize the Test Pool
@@ -430,7 +440,7 @@ function TestSessionContent() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
+          body: JSON.stringify(isGenerated ? { sourceType: "AI_GENERATED", generatedTestId } : {
             duration: durationParam,
             count: countParam,
             subject: subjectParam,
@@ -451,6 +461,10 @@ function TestSessionContent() {
 
         const data = await response.json();
 
+        if (isGenerated && data.submitted) {
+          router.replace(`/test/result/${data.attemptId}?sourceType=AI_GENERATED`);
+          return;
+        }
         if (!data.questions?.length) {
           alert("No questions found.");
           return;
@@ -461,54 +475,67 @@ function TestSessionContent() {
 
         setExam(data.track || "JEE");
         setQuestions(data.questions);
-        setTimeLeft(durationParam * 60);
+        if (isGenerated) {
+          setGeneratedMode(data.mode);
+          clockRef.current = { initial: data.deadlineAt ? Math.max(0, (Date.parse(data.deadlineAt) - Date.parse(data.serverNow)) / 1000) : null, loadedAt: performance.now() };
+          answerQueueRef.current = createGeneratedAnswerQueue({ sessionId: nextSessionId, revision: data.revision });
+          setTimeLeft(clockRef.current.initial === null ? null : Math.ceil(clockRef.current.initial));
+        } else setTimeLeft(durationParam * 60);
         setSessionId(nextSessionId);
-        setAnswers({});
+        setAnswers(isGenerated ? data.answers || {} : {});
         setMarkedForReview(storedReviewState);
         setVisitedQuestions(data.questions[0]?.id ? { [data.questions[0].id]: true } : {});
       } catch (err) {
         console.error(err);
-        alert("Failed to load questions.");
+        setLoadError(err.message || "Failed to load questions.");
       }
     }
     loadQuestions();
-  }, [subjectParam, chapterParam, difficultyParam, mode, labelParam, sourceTypeParam, instituteSlugParam, instituteTestIdParam, countParam, durationParam, user]);
+  }, [subjectParam, chapterParam, difficultyParam, mode, labelParam, sourceTypeParam, instituteSlugParam, instituteTestIdParam, countParam, durationParam, user, isGenerated, generatedTestId, router]);
 
   useEffect(() => {
     writeStoredReviewState(sessionId, markedForReview);
   }, [markedForReview, sessionId]);
+
+  useEffect(() => {
+    if (!isGenerated || !sessionId || finishing || !answerQueueRef.current) return;
+    const timeout = setTimeout(() => {
+      answerQueueRef.current.save(answers).then((data) => {
+        if (data.expired) submitRef.current?.();
+      }).catch((error) => setSaveError(error.message));
+    }, 250);
+    return () => clearTimeout(timeout);
+  }, [answers, sessionId, isGenerated, finishing]);
 
   const handleSubmit = useCallback(async () => {
     if (submitInFlightRef.current) return;
     submitInFlightRef.current = true;
     setFinishing(true);
     try {
-      const response = await fetch("/api/test-session", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const revision = isGenerated ? await answerQueueRef.current.flush() : undefined;
+      const data = await submitTestSessionRequest(isGenerated ? { sourceType: "AI_GENERATED", sessionId, revision, answers } : {
           sessionId,
           answers,
           timeTakenSeconds: durationParam * 60 - timeLeft,
-        }),
       });
-
-      if (!response.ok) {
-        throw new Error(`Failed to submit test: ${response.status}`);
-      }
-
-      const data = await response.json();
 
       clearStoredReviewState(sessionId);
       clearInterval(timerRef.current);
-      router.replace(`/test/result/${data.attemptId}`);
+      router.replace(`/test/result/${data.attemptId}${isGenerated ? "?sourceType=AI_GENERATED" : ""}`);
     } catch (err) {
       console.error("SAVE ERROR", err);
+      if (!isGenerated && err.status === 409) {
+        // A partial/conflicting historical submission needs review. Keep the
+        // submit latch closed so an expired timer cannot repeatedly retry it.
+        clearInterval(timerRef.current);
+        setLoadError(err.message);
+        return;
+      }
       alert(err.message);
       submitInFlightRef.current = false;
       setFinishing(false);
     }
-  }, [answers, durationParam, router, sessionId, timeLeft]);
+  }, [answers, durationParam, router, sessionId, timeLeft, isGenerated]);
 
   useEffect(() => {
     submitRef.current = handleSubmit;
@@ -516,8 +543,14 @@ function TestSessionContent() {
 
   // 4. Timer Logic
   useEffect(() => {
-    if (questions.length === 0 || finishing) return;
+    if (questions.length === 0 || finishing || isPractice) return;
     timerRef.current = setInterval(() => {
+      if (isGenerated && clockRef.current?.initial !== null) {
+        const remaining = Math.max(0, Math.ceil(clockRef.current.initial - (performance.now() - clockRef.current.loadedAt) / 1000));
+        setTimeLeft(remaining);
+        if (remaining === 0) { clearInterval(timerRef.current); submitRef.current?.(); }
+        return;
+      }
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current);
@@ -528,7 +561,7 @@ function TestSessionContent() {
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [questions.length, finishing]);
+  }, [questions.length, finishing, isPractice, isGenerated]);
 
   // 5. Handlers
   const handleSelect = useCallback((question, optIdx) => {
@@ -621,16 +654,18 @@ function TestSessionContent() {
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   };
 
-  const isTimerDanger = timeLeft < 300;
+  const isTimerDanger = !isPractice && timeLeft < 300;
   const activeQ = questions[currentIdx];
   const answeredCount = Object.values(answers).filter(hasAnswer).length;
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
   useRegisterZiEntity(
-    activeQ?.id
+    activeQ?.id && !isGenerated
       ? { type: "test_question", id: activeQ.id }
       : null
   );
+
+  if (loadError) return <div role="alert" className="mx-auto max-w-lg p-6"><p>{loadError}</p><button type="button" className="mt-4 underline" onClick={() => router.push("/test")}>Back to tests</button></div>;
 
   if (!exam) {
     return (
@@ -650,7 +685,7 @@ function TestSessionContent() {
         <div className="flex flex-col items-center gap-4 animate-slideUp">
           <div className="w-10 h-10 rounded-full border-4 border-slate-200 dark:border-[var(--border-subtle)] border-t-indigo-500 animate-spin" />
           <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-            Generating Test...
+            {isGenerated ? "Loading AI-generated practice test…" : "Generating Test..."}
           </p>
           <p className="text-xs text-slate-400 dark:text-slate-500">
             {subjectParam} · {countParam} questions · {durationParam} min
@@ -678,7 +713,7 @@ function TestSessionContent() {
             <Logo size={36} showText={true} className="hidden sm:flex" />
             <div className="hidden h-6 w-px bg-slate-200 dark:bg-[var(--border-subtle)] sm:block" />
             <span className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-500 sm:block">
-              {mode === "quick" ? "Quick Session" : "Custom Test"}
+              {isGenerated ? "AI-Generated Practice Test" : mode === "quick" ? "Quick Session" : "Custom Test"}
             </span>
           </div>
 
@@ -690,7 +725,7 @@ function TestSessionContent() {
                 : "border-slate-200 bg-white text-slate-900 dark:border-[var(--border-subtle)] dark:bg-[var(--surface)] dark:text-white"
             }`}
           >
-            {formatTime(timeLeft)}
+            {isPractice ? "Practice · Untimed" : formatTime(timeLeft)}
           </div>
 
           {/* Progress + Submit */}
@@ -734,6 +769,18 @@ function TestSessionContent() {
         </div>
       </header>
 
+      {isGenerated ? (
+        <p className="px-4 pt-3 text-xs text-slate-500">
+          {isPractice
+            ? "AI-generated practice · Untimed. Answers save automatically."
+            : "AI-generated practice. Answers save automatically; when time expires, your latest saved answers count."}
+        </p>
+      ) : null}
+      {saveError ? (
+        <p role="alert" className="px-4 py-2 text-sm text-red-600">
+          {saveError} Reload to resume your saved answers.
+        </p>
+      ) : null}
       <main className="mx-auto flex-1 min-h-0 w-full max-w-7xl min-w-0 grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-4 p-2.5 sm:p-4 overflow-hidden">
         {/* ── Question Palette ── */}
         <aside className="hidden lg:col-span-1 lg:order-1 lg:block">

@@ -1,6 +1,9 @@
 "use client";
 "use no memo";
 
+import { useUser } from "@clerk/nextjs";
+import ZiTestBuilder from "@/components/zi/ZiTestBuilder";
+import { readBuilderToken, rememberBuilderAction, clearBuilderToken } from "@/components/zi/testBuilderSession";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -221,6 +224,8 @@ function ConversationAction({ action }) {
   const meta = getActionMeta(action);
   const [isOpening, setIsOpening] = useState(false);
 
+  if (action?.type === "ai_test_builder") return <ZiTestBuilder key={action.token} action={action} />;
+
   if (action?.type === "test_unavailable") {
     return (
       <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm dark:border-amber-400/20 dark:bg-amber-950/30">
@@ -263,7 +268,7 @@ function ConversationAction({ action }) {
   );
 }
 
-function WorkspaceMessage({ message }) {
+export function WorkspaceMessage({ message }) {
   const isUser = message.role === "user";
   const isError = message.status === "error";
   const isLoading = message.status === "streaming" && !message.text;
@@ -479,6 +484,7 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
 }
 
 export default function ZiWorkspace() {
+  const { user } = useUser();
   const basePageContext = useZiPageContext();
   const searchParams = useSearchParams();
   const attemptId = searchParams.get("attempt") || "";
@@ -637,12 +643,14 @@ export default function ZiWorkspace() {
       const response = await fetch("/api/zi/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: requestMessages, pageContext }),
+        body: JSON.stringify({ messages: requestMessages, pageContext, testBuilderToken: readBuilderToken(user?.id) }),
         signal: abortController.signal,
       });
 
       if (!response.ok || !response.body) {
-        const statusMessage =
+        if ([400, 410].includes(response.status)) clearBuilderToken(user?.id);
+        const payload = await response.json().catch(() => ({}));
+        const statusMessage = (typeof payload.error === "string" && payload.error !== "AI_MODE_REQUIRED" ? payload.error : payload.message) || (
           response.status === 401
             ? "Please sign in again to use Zi."
             : response.status === 403
@@ -651,7 +659,7 @@ export default function ZiWorkspace() {
             ? "That question could not be sent. Try shortening it."
             : response.status === 429
             ? "Zi needs a short breather. Try again in a moment."
-            : ZI_ERROR_MESSAGE;
+            : ZI_ERROR_MESSAGE);
 
         setErrorBanner(statusMessage);
         updateMessage(assistantMessage.id, () => ({
@@ -685,6 +693,7 @@ export default function ZiWorkspace() {
       if (trailingText) streamedText += trailingText;
 
       const parsed = parseStreamPayload(streamedText);
+      rememberBuilderAction(user?.id, parsed.action);
       updateMessage(assistantMessage.id, () => ({
         text: parsed.text || ZI_ERROR_MESSAGE,
         action: parsed.action,

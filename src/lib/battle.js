@@ -415,7 +415,11 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
 
   const profileById = new Map((profiles || []).map((profile) => [profile.clerk_user_id, profile]));
   const statsById = new Map((statsList || []).map((s) => [s.user_id, s]));
-  const answerMap = Object.fromEntries((answers || []).map((answer) => [String(answer.question_id), answer.selected_answer]));
+  const answerMap = Object.fromEntries(
+    (answers || [])
+      .filter((answer) => answer.selected_answer !== null && answer.selected_answer !== undefined && answer.selected_answer !== "")
+      .map((answer) => [String(answer.question_id), answer.selected_answer])
+  );
 
   return {
     ...match,
@@ -449,14 +453,17 @@ export async function getBattleForUser({ battleId, userId, includeReview = false
 export async function hydratePlayerProgress(battle) {
   const { data, error } = await supabaseAdmin
     .from("battle_answers")
-    .select("user_id, question_id")
-    .eq("battle_id", battle.id);
+    .select("user_id, question_id, selected_answer")
+    .eq("battle_id", battle.id)
+    .not("selected_answer", "is", null);
 
   if (error) throw error;
 
   const counts = new Map();
   for (const answer of data || []) {
-    counts.set(answer.user_id, (counts.get(answer.user_id) || 0) + 1);
+    if (answer.selected_answer !== null && answer.selected_answer !== undefined && answer.selected_answer !== "") {
+      counts.set(answer.user_id, (counts.get(answer.user_id) || 0) + 1);
+    }
   }
 
   return {

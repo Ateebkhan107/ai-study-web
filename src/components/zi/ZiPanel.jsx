@@ -24,6 +24,7 @@ export default function ZiPanel({
   onStop,
   onSuggestionSelect,
   isLocked,
+  onConfigureTest,
   plan,
   remainingFreePrompts,
 }) {
@@ -101,6 +102,7 @@ export default function ZiPanel({
                 </li>
               ))}
             </ul>
+            <button type="button" onClick={onConfigureTest} className="mb-4 text-sm font-bold underline">Configure an AI practice test (no AI prompt used)</button>
             <Link
               href="/pro"
               onClick={onClose}
