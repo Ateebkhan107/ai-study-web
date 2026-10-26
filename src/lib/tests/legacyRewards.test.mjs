@@ -26,9 +26,9 @@ test("legacy reward endpoint rejects repeated client-supplied test rewards befor
   for (let i = 0; i < 2; i++) assert.equal((await POST(request("test"))).status, 409);
   assert.equal(reads, 0); assert.equal(awards.length, 0);
 });
-test("legacy reward endpoint retains existing non-test behavior", async () => {
-  assert.equal((await POST(request("pyq"))).status, 200);
-  assert.equal(awards.length, 1); assert.equal(awards[0][1], 20);
+test("legacy reward endpoint rejects fabricated same-user PYQ counters", async () => {
+  assert.equal((await POST(request("pyq"))).status, 409);
+  assert.equal(awards.length, 0); assert.equal(reads, 0);
 });
 test("unauthenticated legacy reward requests are denied", async () => {
   userId = null; assert.equal((await POST(request("test"))).status, 401);

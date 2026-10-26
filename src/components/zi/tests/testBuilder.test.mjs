@@ -40,12 +40,25 @@ const hooks = registerHooks({
     return next(url, context);
   },
 });
-const { ZiTestBuilderForm } = await import("../ZiTestBuilder.jsx");
+const { ZiTestBuilderForm, default: ZiTestBuilder } = await import("../ZiTestBuilder.jsx");
 const { default: ZiMessages } = await import("../ZiMessages.jsx");
 const { WorkspaceMessage } = await import("../ZiWorkspace.jsx");
 const { rememberBuilderAction, readBuilderToken, clearBuilderToken } = await import("../testBuilderSession.js");
 const draft = { type: "ai_test_builder", token: "opaque-token", config: { exam: "JEE Main", subject: "Physics", topic: "Rotational Motion", difficulty: "Medium", questionCount: 15, mode: "timed", durationMinutes: 30 }, missing: [], errors: [], confirmed: false, prompt: "Review the summary below.", availability: { state: "quota_blocked", generationEnabled: false, message: "AI generation is unavailable because the provider quota is blocked." } };
 const render = (component, props) => renderToStaticMarkup(React.createElement(component, props));
+test("public builder renders no generation or execution controls", () => {
+  const html = render(ZiTestBuilder, { action: { ...draft, confirmed: true } });
+  assert.doesNotMatch(html, /Generate confirmed test|Continue reserved job|Private generation pilot/);
+});
+test("private confirmed pilot exposes explicit generation and status controls without a premature Start link", () => {
+  const html = render(ZiTestBuilder, { action: { ...draft, confirmed: true, availability: { ...draft.availability, orchestrationEnabled: true } } });
+  assert.match(html, /Generate confirmed test/); assert.match(html, /Resume status/);
+  assert.doesNotMatch(html, /href=.*generatedTestId=/);
+});
+test("an unconfirmed pilot draft cannot render the generation button", () => {
+  const html = render(ZiTestBuilder, { action: { ...draft, availability: { ...draft.availability, orchestrationEnabled: true } } });
+  assert.doesNotMatch(html, /Generate confirmed test/);
+});
 test("shared controls render full summary, limits and quota message", () => {
   const html = render(ZiTestBuilderForm, { draft });
   for (const text of ["AI test configuration", "Rotational Motion", "15 questions", "30 minutes", 'min="5"', 'max="30"', "Confirm configuration", "quota is blocked"]) assert.ok(html.includes(text), text);

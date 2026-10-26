@@ -1,5 +1,12 @@
 import { fetchJsonCached, invalidateFetchCache } from "@/lib/fetchCache";
 
+const requestKeys = new WeakMap();
+function requestKey(payload) {
+  if (payload.request_key) return payload.request_key;
+  if (!requestKeys.has(payload)) requestKeys.set(payload, crypto.randomUUID());
+  return requestKeys.get(payload);
+}
+
 function isStablePyqMode(mode) {
   return mode !== "mistakes" && mode !== "random";
 }
@@ -40,6 +47,7 @@ export async function savePYQAttempt(attempt) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      request_key: requestKey(attempt),
       question_id: attempt.question_id,
       selected_option: attempt.selected_option,
       is_correct: attempt.is_correct,
@@ -74,6 +82,7 @@ export async function savePYQAttempts(attempts) {
     },
     body: JSON.stringify({
       attempts,
+      request_key: requestKey(attempts),
     }),
   });
 

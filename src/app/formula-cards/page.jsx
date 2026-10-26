@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { publicMetadata } from "@/lib/seo.mjs";
 import { auth } from "@clerk/nextjs/server";
 import { Atom, Calculator, Dna, FlaskConical, Layers3 } from "lucide-react";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getFormulaSubjectsForExam } from "@/lib/formulaCards";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = publicMetadata({
+  title: "JEE & NEET Formula and Revision Cards",
+  description: "Explore Physics, Chemistry, Mathematics and Biology revision cards by subject and chapter for JEE and NEET preparation.",
+  path: "/formula-cards",
+});
 
 const SUBJECT_ICONS = {
   Physics: Atom,

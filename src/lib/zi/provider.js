@@ -134,7 +134,7 @@ export async function streamZiResponse({
 
 // Separate non-streaming analysis entry point; the existing tutor stream and
 // its in-progress configuration are deliberately unchanged.
-async function completeZiStructuredTask({ systemPrompt, prompt, responseJsonSchema, signal, onProviderUsage }) {
+async function completeZiStructuredTask({ systemPrompt, prompt, responseJsonSchema, signal, onProviderUsage, maxAttempts = 3 }) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     const error = new Error("Zi AI provider is not configured.");
@@ -150,7 +150,7 @@ async function completeZiStructuredTask({ systemPrompt, prompt, responseJsonSche
   let failure = null;
   try {
     const response = await runStructuredRequest({
-      models, signal: abortSignal, deadlineAt: Date.now() + 45000,
+      models, signal: abortSignal, deadlineAt: Date.now() + 45000, maxAttempts,
       cooldownKey: createHash("sha256").update(`${apiKey}:${modelName}`).digest("hex"),
       operation: async (model) => {
         // The installed SDK discards Retry-After headers when constructing an

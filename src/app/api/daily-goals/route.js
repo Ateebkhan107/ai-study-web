@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { reconcileGoalRewards } from "@/lib/goalRewards.mjs";
 
 export async function GET() {
   try {
@@ -10,6 +11,8 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Retry durable delivery; interruption cannot permanently consume a reward.
+    await reconcileGoalRewards(supabaseAdmin, userId);
     const today = new Date().toISOString().split("T")[0];
 
     const { data: profile, error: profileError } = await supabaseAdmin

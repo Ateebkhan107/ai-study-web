@@ -1,71 +1,14 @@
-/**
- * Next.js App Router robots.js
- * Generates /robots.txt at build time.
- *
- * Strategy:
- *  - Allow public informational/marketing pages
- *  - Disallow all authenticated/private areas and API routes
- */
-export default function robots() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com";
+import { ROBOTS_DISALLOW, SITE_URL } from "@/lib/seo.mjs";
 
+export default function robots() {
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: [
-          "/",
-          "/jee",
-          "/jee/pyq",
-          "/jee/mock-tests",
-          "/neet",
-          "/neet/pyq",
-          "/neet/mock-tests",
-          "/pricing",
-          "/about",
-          "/careers",
-          "/contact",
-          "/help",
-          "/privacy",
-          "/terms",
-          "/subscriptions",
-        ],
-        disallow: [
-          "/dashboard",
-          "/dashboard/",
-          "/test",
-          "/test/",
-          "/pyq",
-          "/pyq/",
-          "/analytics",
-          "/analytics/",
-          "/profile",
-          "/profile/",
-          "/community",
-          "/community/",
-          "/pro",
-          "/pro/",
-          "/history",
-          "/history/",
-          "/formula-books",
-          "/formula-books/",
-          "/admin",
-          "/admin/",
-          "/institute",
-          "/institute/",
-          "/onboarding",
-          "/onboarding/",
-          "/payment",
-          "/payment/",
-          "/notifications",
-          "/notifications/",
-          "/sign-in",
-          "/sign-up",
-          "/api/",
-        ],
-      },
-    ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    rules: [{
+      userAgent: "*",
+      // Public app entry points can be crawled to read their noindex tags.
+      // Authentication and authorization remain independent of robots.txt.
+      allow: "/",
+      disallow: ROBOTS_DISALLOW,
+    }],
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

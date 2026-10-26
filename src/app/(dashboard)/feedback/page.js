@@ -2,7 +2,7 @@ import PageWrapper from "@/components/PageWrapper";
 import { MessageSquarePlus, Lightbulb, PenTool, Sparkles, Send } from "lucide-react";
 
 export const metadata = {
-  title: "Feedback | PrepZii",
+  title: { absolute: "Feedback | PrepZii" },
   description: "Share your thoughts, feature requests, and feedback to help us build a better PrepZii.",
 };
 

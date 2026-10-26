@@ -36,6 +36,10 @@ globalThis.__phase5RouteFixture = {
   auth: () => ({ userId, sessionClaims: {} }),
   client: { from: query, rpc: async (name, args) => {
     calls.push({ rpc: name, args });
+    if (name === "prepzii_commit_test") {
+      if (bankRpcConflict) return { error: { code: "PZ409", message: "Private SQL detail" } };
+      return { data: { attemptId: fixtureId(60), created: !bankCommitted } };
+    }
     if (args.p_owner !== "owner") return { error: { code: "P0002" } };
     if (name === "zi_start_generated_test") return { data: { ...generatedSession, submitted_at: submitted ? new Date().toISOString() : null } };
     if (name === "zi_submit_generated_test") { submitted = true; return { data: { attemptId: fixtureId(50) } }; }
@@ -65,7 +69,7 @@ const hooks = registerHooks({ resolve(specifier, context, next) {
     "@/lib/zi/rateLimit": 'export const checkZiRateLimit=()=>({allowed:true});',
   };
   if (mocks[specifier]) return { url: data(mocks[specifier]), shortCircuit: true };
-  if (specifier.startsWith("@/")) { const filename = path.join(root, specifier.slice(2)); if (existsSync(`${filename}.js`)) return next(pathToFileURL(`${filename}.js`).href, context); }
+  if (specifier.startsWith("@/")) { const filename = path.join(root, specifier.slice(2)); if (existsSync(filename)) return next(pathToFileURL(filename).href, context); if (existsSync(`${filename}.js`)) return next(pathToFileURL(`${filename}.js`).href, context); }
   return next(specifier, context);
 } });
 const { POST, PUT, PATCH } = await import("../../app/api/test-session/route.js");
@@ -79,6 +83,21 @@ test.beforeEach(() => {
   bankQuestion = { id: fixtureId(1), exam: "JEE Main", subject: "Physics", question_type: "MCQ", correct_option: "A", correct: 0, text: "Bank fixture", options: ["one", "two", "three", "four"], marks: 4, negative_marks: 1 };
   delete process.env.ZI_GENERATED_TEST_ENGINE_ENABLED;
   delete process.env.ZI_BANK_ATOMIC_SUBMISSIONS_ENABLED;
+  delete process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED;
+});
+test("integrity cutover sends only verified identity and answer choices and never falls back", async () => {
+  process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED = "true";
+  const body = { sessionId: fixtureId(50), answers: { [fixtureId(1)]: 0 }, score: 999999, correct: 999999 };
+  assert.equal((await PUT(request("PUT", body))).status, 200);
+  const rpc = calls.find(c => c.rpc === "prepzii_commit_test");
+  assert.deepEqual(rpc.args, { p_user: "owner", p_session: fixtureId(50), p_answers: [{question_id:fixtureId(1),selected_option:"A"}] });
+  assert.equal(rewardCallbacks, 0);
+  assert.equal(calls.some(c => c.op === "insert" || c.op === "update"), false);
+  bankRpcConflict = true;
+  const failure = await PUT(request("PUT", body));
+  assert.equal(failure.status, 409);
+  assert.equal(JSON.stringify(await failure.json()).includes("Private SQL"), false);
+  assert.equal(calls.some(c => c.op === "insert" || c.op === "update"), false);
 });
 test("existing normal starts keep their original safe DTO and bank source", async () => {
   const response = await POST(request("POST", { count: 1 }));
@@ -205,4 +224,4 @@ test("normal submission ownership is checked before previous attempts or writes"
   assert.equal((await PUT(request("PUT", { sessionId: fixtureId(50), answers: {} }))).status, 404);
   assert.equal(calls.some((c) => c.table === "test_attempts"), false);
 });
-test.after(() => { hooks.deregister(); delete process.env.ZI_GENERATED_TEST_ENGINE_ENABLED; delete process.env.ZI_BANK_ATOMIC_SUBMISSIONS_ENABLED; delete globalThis.__phase5RouteFixture; });
+test.after(() => { hooks.deregister(); delete process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED; delete process.env.ZI_GENERATED_TEST_ENGINE_ENABLED; delete process.env.ZI_BANK_ATOMIC_SUBMISSIONS_ENABLED; delete globalThis.__phase5RouteFixture; });

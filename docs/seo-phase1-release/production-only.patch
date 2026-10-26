@@ -1,0 +1,3128 @@
+--- /dev/null
++++ b/docs/seo-phase1-local-implementation-20261026.md
+@@ -0,0 +1,63 @@
++# SEO Phase 1 — local implementation and verification
++
++Date: 26 October 2026. **Local only; not deployed.** No database writes, migrations, pricing changes, access-rule changes, or new SEO landing-page expansion were performed.
++
++## Changes
++
++- Added `src/lib/seo.mjs` as the canonical origin and metadata policy: search URLs always use `https://www.prepzii.com`, independently of local/preview app and Clerk redirect settings.
++- Removed the root homepage canonical inherited by unrelated routes. Root metadata now defaults to noindex/follow; the homepage, six exam landing pages, pricing, six informational pages and eligible formula resources explicitly opt into indexing.
++- Moved the existing interactive homepage to `src/app/HomePageClient.jsx`, retaining its existing fonts, hooks, animations and CTA behavior. `page.js` is a small server wrapper with homepage-specific metadata.
++- Updated public page titles/descriptions and social metadata. Existing branded app/utility titles use absolute titles to avoid the root template appending the brand again.
++- Formula subject/chapter metadata now describes the actual resource and uses a self-canonical. The JEE default consolidates to the clean path, while NEET retains `?exam=NEET`. Tracking parameters do not enter the canonical. Invalid/empty resources are not opted into indexing.
++- Retained the existing profile-first subject selection and subject fallback behavior. Request-scoped React caching shares the metadata/page reads; no data-access permissions changed.
++- Replaced the sitemap with an explicit 14-URL public allowlist. Removed protected `/subscriptions`. No deck enumeration or invented modification timestamps were added.
++- Public app entry points and auth forms are crawlable so bots can read noindex. Protected descendants, APIs, account views, admin, institute, payments and formula books remain excluded from crawling. robots.txt is not used as an authorization mechanism.
++- Exam resource cards and hub secondary discovery links now point to the public PYQ/mock-test landing pages. Primary practice CTAs still use the original `/go/{track}/{destination}` flow.
++- Added a native details/summary mobile menu linking JEE, NEET, both PYQ pages, both mock pages and pricing; no menu-specific client state or new dependency is needed.
++- Removed unsupported homepage catalog/year totals, mock counts and authenticity guarantees. Labelled sample question/analytics values as illustrative examples, qualified subject/chapter availability, and stated Pro access for mock tests. Existing free/Pro behavior is untouched.
++
++## Results
++
++| Check | Result | Details |
++| --- | --- | --- |
++| Application source lint | PASS | `npm run lint -- src scripts/seo next.config.mjs`: 0 errors, 32 existing warnings |
++| Unrestricted repository lint | FAIL | `npm run lint` includes third-party JavaScript in `venv/`; 44 errors and 53 warnings overall. No vendor files or unrelated lint policy were changed. |
++| Production build | PASS | `npm run build -- --webpack`, Next.js 16.3.0, Node 24.10.0; compiled and generated 123 static outputs |
++| Default Turbopack attempt | INCOMPLETE | Stalled in compilation and was interrupted. Verification used the completed webpack build; default bundler configuration was not changed. |
++| Unit/regression tests | PASS | 32 passed, 0 failed: SEO, offline font integrity and existing test-session/API route regression suite |
++| Local production HTTP suite | PASS | 41 checks passed, 0 failed against the final build |
++| Mobile browser | PASS | 390px viewport: menu opens, all seven links are accessible, navigation from JEE PYQs to NEET PYQs succeeds, menu resets closed on navigation; homepage header and qualified copy also inspected |
++| Auth/access/analytics preservation | PASS | SHA-256 comparison with the pre-task working copy confirms 9 guarded files unchanged: proxy, auth, access matrix, admin layout, dashboard layout, formula-book layout, track redirect handler, PostHog initialization and Clerk identity bridge |
++| Patch whitespace | PASS | `git diff --check` |
++
++The HTTP suite checks all 14 public sitemap pages for anonymous HTTP 200, one brand occurrence in the title, descriptions, self-canonicals, H1 presence and consistent index directives. It checks 11 app/auth/utility pages for noindex and no inherited homepage canonical; five formula routes/variants; the robots/sitemap policy; eight anonymous protected-route responses; invalid chapter 404; and existing practice/slash redirects.
++
++The homepage's origin-only canonical is normalized by Next.js to omit the trailing slash. The HTTP suite compares normalized URLs rather than treating equivalent root URL spellings as a failure.
++
++The local server initially failed while bound to `127.0.0.1`, because Next.js's internal loopback proxy targeted `localhost`. Binding the verification server to `localhost:3472` resolved it without changing application or auth code. Sandbox restrictions also required permission to bind/read the local port.
++
++## Reproduce
++
++Use a supported Node runtime (verification used `/opt/homebrew/opt/node@24/bin` on this machine):
++
++```sh
++npm run lint -- src scripts/seo next.config.mjs
++npm run build -- --webpack
++node --conditions=react-server --test src/lib/tests/seo.test.mjs src/lib/tests/offlineFonts.test.mjs src/lib/tests/routes.test.mjs
++npm run start -- --hostname localhost --port 3472
++# In another terminal:
++node scripts/seo/verify.mjs http://localhost:3472
++```
++
++## Remaining issues / limits
++
++- No deployment was attempted. Production verification and Google recrawling remain pending an approved deployment.
++- The default Turbopack stall and the broad lint command's inclusion of `venv/` remain unresolved tooling issues. The final webpack build and source lint passed.
++- The runtime logged the existing formula-card database fallback for a missing `diagram_image` column. No schema change was made; a tested deck used the existing fallback. Data completeness and solution quality still need editorial review.
++- Formula decks have not been mass-added to the sitemap. Thin content, complete server-rendered deck references, paper/chapter landing pages and predictor methodology remain later-phase work.
++- Search Console indexing/field Core Web Vitals and actual ranking effects were not verified. No ranking or traffic outcome is claimed.
++- The separate Vercel alias hostname redirect remains a hosting follow-up; canonical metadata now consistently selects www.
++- Full authenticated student, administrator and institute journeys were not exercised with real accounts. Preservation evidence consists of unchanged guards/access logic, existing route regression tests and anonymous protected-route checks.
++- The repository already contained extensive unrelated changes. They were retained; this task did not commit, revert or deploy them.
++
++Temporary local evidence: `/tmp/prepzii-seo-http.txt`, `/tmp/prepzii-seo-tests.txt`, `/tmp/prepzii-seo-project-lint.txt`, `/tmp/prepzii-seo-lint.txt`, `/tmp/prepzii-seo-build-webpack.txt`, `/tmp/prepzii-seo-phase1-mobile.png`.
+--- /dev/null
++++ b/scripts/seo/verify.mjs
+@@ -0,0 +1,98 @@
++// Run against a local production build: node scripts/seo/verify.mjs [origin].
++import assert from "node:assert/strict";
++import { PUBLIC_SITEMAP_PATHS, SITE_URL } from "../../src/lib/seo.mjs";
++
++const origin = process.argv[2] || "http://localhost:3471";
++assert.ok(["localhost", "127.0.0.1"].includes(new URL(origin).hostname), "Local verification only");
++let failures = 0;
++const results = [];
++async function check(label, fn) {
++  try { await fn(); results.push({ check: label, status: "PASS" }); }
++  catch (error) { failures++; results.push({ check: label, status: "FAIL", reason: error.message }); }
++}
++async function read(path) {
++  const response = await fetch(new URL(path, origin), { redirect: "manual", signal: AbortSignal.timeout(60000) });
++  return { response, html: await response.text() };
++}
++function tags(html) {
++  const meta = [...html.matchAll(/<meta\b[^>]*>/gi)].map(([tag]) => Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, key, value]) => [key, value])));
++  const canonicalTag = [...html.matchAll(/<link\b[^>]*>/gi)].map(([tag]) => tag).find((tag) => tag.includes('rel="canonical"'));
++  return {
++    canonical: canonicalTag?.match(/href="([^"]*)"/)?.[1].replaceAll("&amp;", "&"),
++    robots: meta.filter((tag) => ["robots", "googlebot"].includes(tag.name)),
++    title: html.match(/<title[^>]*>(.*?)<\/title>/s)?.[1],
++    description: meta.find((tag) => tag.name === "description")?.content,
++  };
++}
++
++for (const path of PUBLIC_SITEMAP_PATHS) await check(`anonymous public metadata ${path}`, async () => {
++  const { response, html } = await read(path);
++  assert.equal(response.status, 200);
++  const metadata = tags(html);
++  // Next.js serializes the origin-only home canonical without a final slash.
++  assert.equal(new URL(metadata.canonical).href, new URL(path, SITE_URL).href);
++  assert.ok(metadata.description);
++  assert.equal((metadata.title?.match(/PrepZii/g) || []).length, 1);
++  assert.ok(metadata.robots.some((tag) => /\bindex\b/.test(tag.content)));
++  assert.ok(metadata.robots.every((tag) => !/noindex/.test(tag.content)));
++  assert.match(html, /<h1\b/);
++});
++
++await check("public sitemap and robots agree", async () => {
++  const { response, html } = await read("/sitemap.xml");
++  assert.equal(response.status, 200);
++  const urls = [...html.matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => url);
++  assert.deepEqual(urls.sort(), PUBLIC_SITEMAP_PATHS.map((path) => new URL(path, SITE_URL).href).sort());
++  const { html: robots } = await read("/robots.txt");
++  assert.ok(robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`));
++  assert.ok(!/^Disallow: \/(?:dashboard|test|pyq|sign-in|sign-up)$/m.test(robots));
++  assert.match(robots, /Disallow: \/test\//);
++});
++
++for (const path of ["/dashboard", "/test", "/pyq", "/pro", "/sign-in", "/sign-up", "/history", "/notifications", "/zi", "/feedback", "/report-bug"]) {
++  await check(`app/utility noindex ${path}`, async () => {
++    const { response, html } = await read(path);
++    assert.equal(response.status, 200);
++    const metadata = tags(html);
++    assert.ok(metadata.robots.some((tag) => /noindex/.test(tag.content)));
++    assert.ok(metadata.robots.every((tag) => !/(^|,\s*)index(,|$)/.test(tag.content)));
++    assert.equal(metadata.canonical, undefined);
++  });
++}
++
++for (const [path, canonical] of [
++  ["/formula-cards", "/formula-cards"],
++  ["/formula-cards/physics?exam=JEE&utm_source=audit", "/formula-cards/physics"],
++  ["/formula-cards/physics?exam=NEET&utm_source=audit", "/formula-cards/physics?exam=NEET"],
++  ["/formula-cards/biology?exam=NEET", "/formula-cards/biology?exam=NEET"],
++  ["/formula-cards/physics/unit-and-dimensions?exam=JEE", "/formula-cards/physics/unit-and-dimensions"],
++]) await check(`formula canonical ${path}`, async () => {
++  const { response, html } = await read(path);
++  assert.equal(response.status, 200);
++  const metadata = tags(html);
++  assert.equal(metadata.canonical, new URL(canonical, SITE_URL).href);
++  assert.equal((metadata.title?.match(/PrepZii/g) || []).length, 1);
++  assert.ok(metadata.description);
++  assert.ok(metadata.robots.every((tag) => !/noindex/.test(tag.content)));
++});
++
++for (const path of ["/analytics", "/profile", "/subscriptions", "/test/session", "/pyq/session", "/admin", "/institute", "/formula-books/test"]) await check(`anonymous protection ${path}`, async () => {
++  const { response } = await read(path);
++  assert.ok([301, 302, 303, 307, 308, 401, 403, 404].includes(response.status), `Unexpected status ${response.status}`);
++});
++
++await check("invalid formula chapter stays 404", async () => {
++  const { response } = await read("/formula-cards/physics/seo-missing-chapter");
++  assert.equal(response.status, 404);
++});
++await check("practice CTA and slash redirects unchanged", async () => {
++  for (const [path, destination] of [["/go/jee/pyq", "/pyq"], ["/go/neet/mock-tests", "/test"], ["/jee/pyq/", "/jee/pyq"]]) {
++    const { response } = await read(path);
++    assert.ok([307, 308].includes(response.status));
++    assert.equal(new URL(response.headers.get("location"), origin).pathname, destination);
++  }
++});
++
++for (const result of results) console.log(JSON.stringify(result));
++console.log(JSON.stringify({ passed: results.length - failures, failed: failures }));
++process.exitCode = failures ? 1 : 0;
+--- a/src/app/(dashboard)/about/page.js
++++ b/src/app/(dashboard)/about/page.js
+@@ -1,11 +1,12 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import PageWrapper from "@/components/PageWrapper";
+ import { Target, Lightbulb, ShieldCheck, Rocket, Zap, Heart } from "lucide-react";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "About Us",
+   description: "Learn more about PrepZii, our mission, vision, and how we're revolutionizing JEE & NEET preparation.",
+-  alternates: { canonical: "/about" },
+-};
++  path: "/about",
++});
+ 
+ export default function AboutPage() {
+   return (
+--- a/src/app/(dashboard)/battle/[id]/page.js
++++ b/src/app/(dashboard)/battle/[id]/page.js
+@@ -1,7 +1,7 @@
+ import BattleRoomClient from "@/components/battle/BattleRoomClient";
+ 
+ export const metadata = {
+-  title: "Battle Room | PrepZii",
++  title: { absolute: "Battle Room | PrepZii" },
+ };
+ 
+ export default async function BattleRoomPage({ params }) {
+--- a/src/app/(dashboard)/battle/page.js
++++ b/src/app/(dashboard)/battle/page.js
+@@ -1,7 +1,7 @@
+ import BattleArenaClient from "@/components/battle/BattleArenaClient";
+ 
+ export const metadata = {
+-  title: "Battle Arena | PrepZii",
++  title: { absolute: "Battle Arena | PrepZii" },
+ };
+ 
+ export default function BattleArenaPage() {
+--- a/src/app/(dashboard)/careers/page.js
++++ b/src/app/(dashboard)/careers/page.js
+@@ -1,11 +1,12 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import PageWrapper from "@/components/PageWrapper";
+ import { Code2, Brain, PenTool, Edit3, Megaphone, Users, Send } from "lucide-react";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "Careers",
+   description: "Join the team at PrepZii and help us revolutionize education for JEE and NEET aspirants.",
+-  alternates: { canonical: "/careers" },
+-};
++  path: "/careers",
++});
+ 
+ const DEPARTMENTS = [
+   { icon: Code2, name: "Software Engineering", desc: "Build scalable architecture and seamless user experiences." },
+--- a/src/app/(dashboard)/community/groups/[id]/page.js
++++ b/src/app/(dashboard)/community/groups/[id]/page.js
+@@ -5,7 +5,7 @@
+ import { getCommunityGroupForUser, listCommunityGroupsForUser } from "@/services/community.server";
+ 
+ export const metadata = {
+-  title: "Study Group — PrepZii Community",
++  title: { absolute: "Study Group — PrepZii Community" },
+ };
+ 
+ export default async function GroupDetailPage({ params }) {
+--- a/src/app/(dashboard)/community/groups/new/page.js
++++ b/src/app/(dashboard)/community/groups/new/page.js
+@@ -5,7 +5,7 @@
+ import CreateGroupForm from "@/components/community/CreateGroupForm";
+ 
+ export const metadata = {
+-  title: "Create Study Group — PrepZii Community",
++  title: { absolute: "Create Study Group — PrepZii Community" },
+ };
+ 
+ export default async function NewGroupPage() {
+--- a/src/app/(dashboard)/community/messages/[id]/page.js
++++ b/src/app/(dashboard)/community/messages/[id]/page.js
+@@ -4,7 +4,7 @@
+ import DMChat from "@/components/community/DMChat";
+ 
+ export const metadata = {
+-  title: "Chat — PrepZii Community",
++  title: { absolute: "Chat — PrepZii Community" },
+ };
+ 
+ export default async function DMChatPage({ params }) {
+--- a/src/app/(dashboard)/community/messages/page.js
++++ b/src/app/(dashboard)/community/messages/page.js
+@@ -4,7 +4,7 @@
+ import DMInbox from "@/components/community/DMInbox";
+ 
+ export const metadata = {
+-  title: "Messages — PrepZii Community",
++  title: { absolute: "Messages — PrepZii Community" },
+ };
+ 
+ export default async function MessagesPage() {
+--- a/src/app/(dashboard)/community/page.js
++++ b/src/app/(dashboard)/community/page.js
+@@ -5,7 +5,7 @@
+ import { listCommunityGroupsForUser } from "@/services/community.server";
+ 
+ export const metadata = {
+-  title: "Study Community — PrepZii",
++  title: { absolute: "Study Community — PrepZii" },
+   description: "Connect with JEE and NEET aspirants. Join study groups, chat, and collaborate.",
+ };
+ 
+--- a/src/app/(dashboard)/contact/page.js
++++ b/src/app/(dashboard)/contact/page.js
+@@ -1,11 +1,12 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import PageWrapper from "@/components/PageWrapper";
+ import { Mail, MessageSquare, Clock, ArrowUpRight } from "lucide-react";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "Contact Us",
+   description: "Get in touch with the PrepZii team for support, business inquiries, or general questions.",
+-  alternates: { canonical: "/contact" },
+-};
++  path: "/contact",
++});
+ 
+ export default function ContactPage() {
+   return (
+--- a/src/app/(dashboard)/feedback/page.js
++++ b/src/app/(dashboard)/feedback/page.js
+@@ -2,7 +2,7 @@
+ import { MessageSquarePlus, Lightbulb, PenTool, Sparkles, Send } from "lucide-react";
+ 
+ export const metadata = {
+-  title: "Feedback | PrepZii",
++  title: { absolute: "Feedback | PrepZii" },
+   description: "Share your thoughts, feature requests, and feedback to help us build a better PrepZii.",
+ };
+ 
+--- a/src/app/(dashboard)/help/page.js
++++ b/src/app/(dashboard)/help/page.js
+@@ -1,10 +1,11 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import HelpClient from "./HelpClient";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "Help Center",
+   description: "Find answers to frequently asked questions about PrepZii, XP, rankings, and subscriptions.",
+-  alternates: { canonical: "/help" },
+-};
++  path: "/help",
++});
+ 
+ export default function HelpPage() {
+   return <HelpClient />;
+--- a/src/app/(dashboard)/privacy/page.js
++++ b/src/app/(dashboard)/privacy/page.js
+@@ -1,11 +1,12 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import PageWrapper from "@/components/PageWrapper";
+ import { Shield } from "lucide-react";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "Privacy Policy",
+   description: "Read about how PrepZii collects, uses, and protects your personal data.",
+-  alternates: { canonical: "/privacy" },
+-};
++  path: "/privacy",
++});
+ 
+ const SECTIONS = [
+   {
+--- a/src/app/(dashboard)/report-bug/page.js
++++ b/src/app/(dashboard)/report-bug/page.js
+@@ -2,7 +2,7 @@
+ import { Bug, Send, Monitor, MonitorSmartphone, Camera, Info, Search } from "lucide-react";
+ 
+ export const metadata = {
+-  title: "Report a Bug | PrepZii",
++  title: { absolute: "Report a Bug | PrepZii" },
+   description: "Help us improve PrepZii by reporting any bugs or issues you encounter.",
+ };
+ 
+--- a/src/app/(dashboard)/terms/page.js
++++ b/src/app/(dashboard)/terms/page.js
+@@ -1,11 +1,12 @@
++import { publicMetadata } from "@/lib/seo.mjs";
+ import PageWrapper from "@/components/PageWrapper";
+ import { Scale } from "lucide-react";
+ 
+-export const metadata = {
++export const metadata = publicMetadata({
+   title: "Terms & Conditions",
+   description: "Read the terms and conditions for using PrepZii.",
+-  alternates: { canonical: "/terms" },
+-};
++  path: "/terms",
++});
+ 
+ const SECTIONS = [
+   {
+--- a/src/app/(dashboard)/zi/page.jsx
++++ b/src/app/(dashboard)/zi/page.jsx
+@@ -2,7 +2,7 @@
+ import { Suspense } from "react";
+ 
+ export const metadata = {
+-  title: "Zi Personal AI Tutor | PrepZii",
++  title: { absolute: "Zi Personal AI Tutor | PrepZii" },
+   description: "A dedicated PrepZii learning workspace for concept explanations, problem solving, and follow-up questions.",
+ };
+ 
+--- /dev/null
++++ b/src/app/HomePageClient.jsx
+@@ -0,0 +1,987 @@
++"use client";
++
++// NOTE: 'use client' is retained for Framer Motion entrance animations only.
++// All CTA navigation uses <Link> so crawlers and prefetching work correctly.
++import Link from "next/link";
++import { useUser } from "@clerk/nextjs";
++import { Fraunces, Source_Sans_3 } from "next/font/google";
++import { motion, MotionConfig } from "framer-motion";
++import Logo from "@/components/Logo";
++import PublicExamNavigation from "@/components/seo/PublicExamNavigation";
++import { GraphVisual } from "@/components/ui/educational-visuals";
++import {
++  Target,
++  BookOpen,
++  CheckCircle2,
++  TestTube2,
++  LineChart,
++  Brain,
++  History,
++  ChevronRight,
++  BarChart,
++  Globe,
++  ArrowRight,
++  FileText,
++  Clock,
++  Zap,
++  FlaskConical,
++  Dna,
++  Calculator,
++  MessageSquare,
++} from "lucide-react";
++
++/* ── Fonts ─────────────────────────────────────────────────── */
++const displayFont = Fraunces({
++  subsets: ["latin"],
++  variable: "--font-prepzii-landing-display",
++  display: "swap",
++});
++
++const bodyFont = Source_Sans_3({
++  subsets: ["latin"],
++  variable: "--font-prepzii-landing-body",
++  display: "swap",
++});
++
++// Shorthand class references
++const D = "font-[family-name:var(--font-space-grotesk)]";
++const B = "font-[family-name:var(--font-prepzii-landing-body)]";
++
++/* ── Shared animation variants ──────────────────────────────── */
++const fadeUp = {
++  hidden: { opacity: 0, y: 22 },
++  visible: (delay = 0) => ({
++    opacity: 1,
++    y: 0,
++    transition: { duration: 0.5, delay, ease: "easeOut" },
++  }),
++};
++
++const pressMotion = {
++  whileTap: { x: 3, y: 3, transition: { duration: 0.08 } },
++};
++
++/* ── WorkflowStep ───────────────────────────────────────────── */
++function WorkflowStep({ number, icon: Icon, title, desc, delay }) {
++  return (
++    <motion.div
++      initial="hidden"
++      whileInView="visible"
++      viewport={{ once: true, margin: "-40px" }}
++      custom={delay}
++      variants={fadeUp}
++      whileHover={{ y: -5, transition: { duration: 0.16 } }}
++      className="relative flex flex-col border-[3px] border-[#111111] bg-white p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[210px] sm:p-4 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#F4B400]"
++    >
++      <div className="mb-3 flex items-start justify-between gap-2 sm:mb-5 sm:gap-3">
++        <span className={`${D} flex h-8 w-8 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] text-sm font-black leading-none text-black shadow-[3px_3px_0_#111111] sm:h-11 sm:w-11 sm:text-lg sm:shadow-[4px_4px_0_#111111]`}>
++          {number}
++        </span>
++        <Icon className="h-5 w-5 text-[#111111] sm:h-7 sm:w-7" strokeWidth={2.6} />
++      </div>
++      <h4 className={`${D} mb-1 text-base font-black uppercase tracking-normal text-[#111111] sm:mb-2 sm:text-xl`}>
++        {title}
++      </h4>
++      <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{desc}</p>
++    </motion.div>
++  );
++}
++
++/* ── WorkflowConnector ──────────────────────────────────────── */
++function WorkflowConnector({ delay = 0 }) {
++  return (
++    <div className="hidden lg:flex items-center shrink-0 px-1 pt-24">
++      <motion.div
++        initial={{ width: 0, opacity: 0 }}
++        whileInView={{ width: 28, opacity: 1 }}
++        viewport={{ once: true, margin: "-40px" }}
++        transition={{ delay, duration: 0.4, ease: "easeOut" }}
++        className="h-[3px] bg-[#111111]"
++      />
++      <motion.div
++        initial={{ opacity: 0, x: -4 }}
++        whileInView={{ opacity: 1, x: 0 }}
++        viewport={{ once: true, margin: "-40px" }}
++        transition={{ delay: delay + 0.2, duration: 0.3 }}
++      >
++        <ChevronRight className="-ml-1.5 h-5 w-5 text-[#111111]" strokeWidth={3} />
++      </motion.div>
++    </div>
++  );
++}
++
++/* ── PillarCard ─────────────────────────────────────────────── */
++function PillarCard({ icon: Icon, title, items, accentClass, label, delay }) {
++  return (
++    <motion.div
++      initial="hidden"
++      whileInView="visible"
++      viewport={{ once: true, margin: "-40px" }}
++      custom={delay}
++      variants={fadeUp}
++      whileHover={{ y: -6, x: -2, transition: { duration: 0.16 } }}
++      className="group flex flex-col border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[360px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400]"
++    >
++      <div className="mb-4 flex items-start justify-between gap-2 sm:mb-6 sm:gap-4">
++        <span className={`${B} border-2 border-[#111111] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-[#111111] sm:px-2 sm:py-1 sm:text-[11px] ${accentClass}`}>
++          {label}
++        </span>
++        <div className={`flex h-9 w-9 items-center justify-center border-[3px] border-[#111111] ${accentClass} shadow-[3px_3px_0_#111111] transition-transform duration-200 group-hover:-rotate-3 sm:h-14 sm:w-14 sm:shadow-[4px_4px_0_#111111]`}>
++          <Icon className="h-5 w-5 text-[#111111] sm:h-7 sm:w-7" strokeWidth={2.8} />
++        </div>
++      </div>
++      <h3 className={`${D} mb-3 text-xl font-black tracking-normal text-[#111111] sm:mb-6 sm:text-3xl`}>{title}</h3>
++      <ul className="mt-auto space-y-2 sm:space-y-3">
++        {items.map((item, i) => (
++          <li
++            key={i}
++            className={`${B} flex items-start gap-2 text-[12px] font-semibold leading-5 text-[#334155] sm:gap-3 sm:text-sm sm:leading-normal`}
++          >
++            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#111111] sm:h-4 sm:w-4" strokeWidth={2.8} />
++            <span>{item}</span>
++          </li>
++        ))}
++      </ul>
++    </motion.div>
++  );
++}
++
++/* ── TrustItem ──────────────────────────────────────────────── */
++function TrustItem({ icon: Icon = CheckCircle2, title, desc, delay, isZi = false }) {
++  return (
++    <motion.div
++      initial="hidden"
++      whileInView="visible"
++      viewport={{ once: true }}
++      custom={delay}
++      variants={fadeUp}
++      whileHover={{ x: 4, transition: { duration: 0.16 } }}
++      className="flex items-start gap-3 border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] sm:gap-4 sm:p-4 sm:shadow-[5px_5px_0_#111111]"
++    >
++      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] sm:h-11 sm:w-11">
++        {isZi ? (
++          <div className="flex gap-1">
++            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="h-1.5 w-1.5 bg-black" />
++            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} className="h-1.5 w-1.5 bg-black" />
++            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="h-1.5 w-1.5 bg-black" />
++          </div>
++        ) : (
++          <Icon className="h-4 w-4 text-[#111111] sm:h-5 sm:w-5" strokeWidth={3} />
++        )}
++      </div>
++      <div>
++        <h4 className={`${D} mb-0.5 text-base font-black leading-snug text-[#111111] sm:mb-1 sm:text-lg`}>
++          {title}
++        </h4>
++        <p className={`${B} text-[13px] font-semibold leading-5 text-[#475569] sm:text-sm sm:leading-6`}>{desc}</p>
++      </div>
++    </motion.div>
++  );
++}
++
++/* ── StatItem ───────────────────────────────────────────────── */
++function StatItem({ value, label, delay, tone }) {
++  return (
++    <motion.div
++      initial="hidden"
++      whileInView="visible"
++      viewport={{ once: true }}
++      custom={delay}
++      variants={fadeUp}
++      whileHover={{ y: -5, transition: { duration: 0.16 } }}
++      className={`min-h-[104px] border-[3px] border-[#111111] p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#111111] sm:min-h-[150px] sm:p-5 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111] ${tone}`}
++    >
++      <div className={`${D} mb-1 text-[1.72rem] font-black leading-none tracking-normal text-[#111111] sm:mb-2 sm:text-4xl md:text-5xl`}>
++        {value}
++      </div>
++      <div className={`${B} max-w-[12rem] text-[10px] font-black uppercase leading-4 tracking-wide text-[#111111] sm:text-sm sm:leading-5`}>{label}</div>
++    </motion.div>
++  );
++}
++
++/* ── ProductPreview — mock PYQ question card ────────────────── */
++function ProductPreview() {
++  return (
++    <motion.div
++      initial={{ opacity: 0, y: 28 }}
++      animate={{ opacity: 1, y: 0 }}
++      transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
++      className="relative bg-white border-[3px] border-[#111111] shadow-[5px_5px_0_#111111] overflow-visible sm:shadow-[12px_12px_0_#111111]"
++    >
++      <div className="absolute -left-5 -top-5 hidden h-20 w-20 border-[3px] border-[#111111] bg-[#F4B400] md:block" />
++      <div className="absolute -bottom-6 -right-6 hidden h-24 w-24 rotate-6 border-[3px] border-[#111111] bg-[#FFEE99] md:block" />
++      <div className="absolute -right-7 top-16 hidden border-[3px] border-[#111111] bg-white px-3 py-1 text-xs font-black uppercase tracking-widest text-[#111111] shadow-[4px_4px_0_#111111] md:block">
++        Practice preview
++      </div>
++      {/* Exam header bar */}
++      <div className="relative z-10 bg-[#111111] px-3 py-3 flex items-center justify-between gap-2 sm:px-4 sm:py-4 sm:gap-3">
++        <div className="flex items-center gap-2 min-w-0">
++          <FileText className="w-4 h-4 text-[#F4B400] shrink-0" />
++          <span className={`${B} text-white text-[12px] font-black truncate sm:text-sm`}>
++            Illustrative Physics question
++          </span>
++        </div>
++        <div className="flex items-center gap-2 shrink-0 sm:gap-3">
++          <span className={`${B} text-white/70 text-[11px] flex items-center gap-1 font-bold sm:text-xs`}>
++            <Clock className="w-3 h-3" />
++            2:45
++          </span>
++          <span className="bg-[#F4B400] text-black text-[11px] px-1.5 py-0.5 font-black sm:text-xs sm:px-2 sm:py-1">
++            Q 12 / 30
++          </span>
++        </div>
++      </div>
++
++      {/* Question body */}
++      <div className="relative z-10 p-3 sm:p-6">
++        <p className={`${B} text-[13px] font-semibold text-[#111111] leading-6 mb-3 sm:mb-5 sm:text-base sm:leading-7`}>
++          A particle of mass <strong>m</strong> moves in a circular orbit of radius{" "}
++          <strong>r</strong> in a central force potential{" "}
++          <code className="text-[12px] bg-[#FFEE99] border-2 border-[#111111] px-1 py-0.5 font-mono sm:text-sm sm:px-1.5">
++            V(r) = k·r²
++          </code>
++          . The time period of the orbit is proportional to:
++        </p>
++
++        <div className="grid grid-cols-2 gap-2">
++          {[
++            { label: "A", text: "r⁰", selected: false, correct: false },
++            { label: "B", text: "r¹", selected: true, correct: true },
++            { label: "C", text: "r²", selected: false, correct: false },
++            { label: "D", text: "r³/²", selected: false, correct: false },
++          ].map((opt, i) => (
++            <motion.div
++              key={opt.label}
++              initial={{ opacity: 0, x: -5 }}
++              animate={{ opacity: 1, x: 0 }}
++              transition={{ delay: 0.6 + i * 0.1, duration: 0.3 }}
++              className={`flex items-center gap-1.5 border-2 px-2 py-2 text-sm cursor-default select-none sm:gap-2.5 sm:px-3 sm:py-3
++                ${
++                  opt.correct
++                    ? "border-[#111111] bg-[#D8F7D8] text-[#111111] shadow-[3px_3px_0_#111111] sm:shadow-[4px_4px_0_#111111]"
++                    : "border-[#111111] bg-white text-[#111111]"
++                }`}
++            >
++              <span
++                className={`w-5 h-5 text-[11px] font-black flex items-center justify-center shrink-0 border-2 border-[#111111] sm:h-6 sm:w-6 sm:text-xs
++                  ${opt.correct ? "bg-[#00B85C] text-white" : "bg-[#F8F1D9] text-[#111111]"}`}
++              >
++                {opt.label}
++              </span>
++              <span className={`${B} text-[12px] font-black sm:text-sm`}>{opt.text}</span>
++            </motion.div>
++          ))}
++        </div>
++
++        {/* Stats strip */}
++        <div className="mt-3 border-t-[3px] border-[#111111] pt-3 flex flex-row items-center justify-between gap-2 overflow-hidden sm:mt-5 sm:pt-4">
++          <div className="flex items-center gap-2 sm:gap-4">
++            <motion.span 
++              initial={{ opacity: 0, y: 10 }}
++              animate={{ opacity: 1, y: 0 }}
++              transition={{ delay: 1.1, duration: 0.4 }}
++              className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
++            >
++              <span className="font-black text-[#111111]">Demo</span> preview
++            </motion.span>
++            <motion.span 
++              initial={{ opacity: 0, y: 10 }}
++              animate={{ opacity: 1, y: 0 }}
++              transition={{ delay: 1.2, duration: 0.4 }}
++              className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
++            >
++              Illustrative content
++            </motion.span>
++          </div>
++          <motion.span
++            initial={{ opacity: 0, scale: 0.8 }}
++            animate={{ opacity: 1, scale: 1 }}
++            transition={{ delay: 1.3, duration: 0.3 }}
++            className={`${B} w-fit bg-[#F4B400] px-1.5 py-0.5 text-[10px] font-black uppercase text-black border-2 border-[#111111] sm:px-2 sm:py-1 sm:text-xs`}
++          >
++            Medium
++          </motion.span>
++        </div>
++      </div>
++
++      {/* Bottom progress bar */}
++      <div className="relative z-10 px-3 pb-4 sm:px-6 sm:pb-5">
++        <div className="flex items-center justify-between mb-1">
++          <span className={`${B} text-xs font-black uppercase text-[#111111]`}>Progress</span>
++          <span className={`${B} text-xs font-bold text-[#334155]`}>12 / 30 questions</span>
++        </div>
++        <div className="h-3 w-full overflow-hidden border-2 border-[#111111] bg-white">
++          <motion.div 
++            initial={{ width: 0 }}
++            animate={{ width: "40%" }}
++            transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
++            className="h-full bg-[#F4B400]" 
++          />
++        </div>
++      </div>
++    </motion.div>
++  );
++}
++
++/* ── Main Page ──────────────────────────────────────────────── */
++export default function PublicLandingPage() {
++  const { isSignedIn, isLoaded } = useUser();
++
++  return (
++    <MotionConfig reducedMotion="user">
++      <div
++        className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
++      >
++      {/* ════════════════════════════════════════════════════════
++          NAVBAR
++      ════════════════════════════════════════════════════════ */}
++      <header className="sticky top-0 z-50 border-b-[3px] border-[#111111] bg-[#FFF9E6] shadow-[0_5px_0_#111111]">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
++          <Link href="/" aria-label="PrepZii Home" className="flex items-center">
++            <Logo forceLight size={44} />
++          </Link>
++
++          {/* Nav links — desktop only */}
++          <nav className="hidden lg:flex items-center gap-1 rounded-full border-2 border-[#111111] bg-white p-1 shadow-[3px_3px_0_#111111]">
++            <Link
++              href="/jee"
++              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
++            >
++              JEE
++            </Link>
++            <Link
++              href="/neet"
++              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
++            >
++              NEET
++            </Link>
++            <Link
++              href="/pricing"
++              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
++            >
++              Pricing
++            </Link>
++          </nav>
++
++          {/* Auth CTAs */}
++          <div className="flex items-center gap-2">
++            {!isSignedIn && isLoaded && (
++              <Link
++                href="/sign-in"
++                className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
++              >
++                Log in
++              </Link>
++            )}
++            <Link
++              href="/dashboard"
++              prefetch
++              className={`${B} inline-flex items-center gap-1.5 border-[3px] border-[#111111] bg-[#F4B400] px-4 py-2 text-sm font-black text-black shadow-[4px_4px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#111111]`}
++            >
++              {isSignedIn ? "Dashboard" : "Get Started"}
++              <ChevronRight className="w-3.5 h-3.5" strokeWidth={3} />
++            </Link>
++          </div>
++        </div>
++        <div className="mx-auto max-w-7xl px-4 pb-3 sm:px-6 lg:hidden">
++          <PublicExamNavigation mobileOnly />
++        </div>
++      </header>
++
++      {/* ════════════════════════════════════════════════════════
++          HERO
++      ════════════════════════════════════════════════════════ */}
++      <section className="relative overflow-hidden bg-[#FFF9E6] border-b-[3px] border-[#111111]">
++        <div className="absolute left-0 top-24 hidden h-24 w-24 -translate-x-1/2 rotate-12 border-[3px] border-[#111111] bg-white md:block" />
++        <div className="absolute right-8 top-28 hidden h-12 w-36 -rotate-6 border-[3px] border-[#111111] bg-[#F4B400] lg:block" />
++        <div className="absolute bottom-14 left-[48%] hidden h-16 w-16 rotate-45 border-[3px] border-[#111111] bg-[#FFEE99] lg:block" />
++        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-7 sm:py-12 md:py-20 lg:py-24">
++          <div className="grid gap-7 sm:gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center lg:gap-14">
++            {/* Left: Copy */}
++            <div className="max-w-3xl">
++              {/* Eyebrow badge */}
++              <motion.div
++                initial="hidden"
++                animate="visible"
++                custom={0}
++                variants={fadeUp}
++                className={`${B} mb-4 inline-flex -rotate-1 items-center gap-2 border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[4px_4px_0_#111111] sm:mb-6 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[5px_5px_0_#111111]`}
++              >
++                <BookOpen className="w-3.5 h-3.5" />
++                JEE &amp; NEET Preparation Platform
++              </motion.div>
++
++              {/* Heading */}
++              <motion.h1
++                initial="hidden"
++                animate="visible"
++                variants={{
++                  hidden: { opacity: 0 },
++                  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
++                }}
++                className={`${D} mb-4 max-w-[880px] text-[2.55rem] font-black leading-[0.95] tracking-normal text-[#111111] min-[375px]:text-5xl sm:mb-6 sm:text-6xl md:text-7xl lg:text-[5.7rem]`}
++              >
++                <motion.span variants={fadeUp} className="block">The structured way</motion.span>
++                <motion.span variants={fadeUp} className="block">to crack</motion.span>
++                <motion.span variants={fadeUp} className="relative mt-1 inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-2 pb-1.5 pt-0.5 text-black shadow-[5px_5px_0_#111111] sm:mt-2 sm:px-3 sm:pb-2 sm:pt-1 sm:shadow-[8px_8px_0_#111111]">
++                  JEE &amp; NEET
++                  <motion.span
++                    initial={{ width: 0, opacity: 0 }}
++                    animate={{ width: "100%", opacity: 1 }}
++                    transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
++                    className="absolute -bottom-3 left-0 h-[5px] bg-[#111111]"
++                  />
++                </motion.span>
++              </motion.h1>
++
++              {/* Subtitle */}
++              <motion.p
++                initial="hidden"
++                animate="visible"
++                custom={0.4}
++                variants={fadeUp}
++                className={`${B} mb-5 max-w-2xl border-l-[5px] border-[#111111] pl-3 text-[15px] font-semibold leading-6 text-[#334155] sm:mb-8 sm:border-l-[6px] sm:pl-5 sm:text-xl sm:leading-8`}
++              >
++                Practice with previous-year questions, take full-length mock tests, revise
++                formula books, detect weak chapters, and track your performance —
++                all in one focused workspace.
++              </motion.p>
++
++              {/* CTA buttons */}
++              <motion.div
++                initial="hidden"
++                animate="visible"
++                custom={0.3}
++                variants={fadeUp}
++                className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-8"
++              >
++                <motion.div {...pressMotion}>
++                  <Link
++                    href="/dashboard"
++                    prefetch
++                    className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-[#F4B400] px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-7 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
++                  >
++                    Start Preparing Free
++                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
++                  </Link>
++                </motion.div>
++              </motion.div>
++
++              {/* Trust signals */}
++              <motion.div
++                initial="hidden"
++                animate="visible"
++                custom={0.4}
++                variants={fadeUp}
++                className={`${B} grid grid-cols-2 gap-2 text-[12px] text-[#111111] sm:flex sm:flex-wrap sm:text-sm`}
++              >
++                {[
++                  "Free to start",
++                  "PYQ practice",
++                  "Real exam interface",
++                  "No clutter",
++                ].map((t) => (
++                  <span key={t} className="flex items-center gap-1.5 border-2 border-[#111111] bg-white px-2 py-1 font-black shadow-[2px_2px_0_#111111] sm:px-3 sm:py-1.5 sm:shadow-[3px_3px_0_#111111]">
++                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00A651] shrink-0" strokeWidth={3} />
++                    {t}
++                  </span>
++                ))}
++              </motion.div>
++            </div>
++
++            {/* Right: Product preview */}
++            <div className="w-full lg:pl-2">
++              <ProductPreview />
++            </div>
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          STATS BAND
++      ════════════════════════════════════════════════════════ */}
++      <section className="bg-white border-b-[3px] border-[#111111] py-6 sm:py-8 md:py-12">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6">
++          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
++            <StatItem value="PYQs" label="Previous-year paper practice" delay={0.05} tone="bg-[#F4B400]" />
++            <StatItem value="Mock Tests" label="Exam-style practice · Pro access" delay={0.1} tone="bg-[#111111] [&_*]:text-white" />
++            <StatItem value="4 Subjects" label="Physics, Chemistry, Bio, Maths" delay={0.15} tone="bg-[#FFEE99]" />
++            <StatItem value="Revision" label="Formula and concept cards" delay={0.2} tone="bg-white" />
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          PREPARATION WORKFLOW
++      ════════════════════════════════════════════════════════ */}
++      <section className="relative overflow-hidden bg-[#FFF9E6] py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
++        <div className="absolute right-0 top-12 hidden h-28 w-28 translate-x-10 border-[3px] border-[#111111] bg-white lg:block" />
++        <div className="max-w-7xl mx-auto px-4 sm:px-6">
++          <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
++            <motion.p
++              initial="hidden"
++              whileInView="visible"
++              viewport={{ once: true }}
++              custom={0}
++              variants={fadeUp}
++              className={`${B} w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
++            >
++              How PrepZii works
++            </motion.p>
++            <div>
++              <motion.h2
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={0.1}
++                variants={fadeUp}
++                className={`${D} mb-2 text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-4 sm:text-4xl md:text-6xl`}
++              >
++                Your complete preparation workflow
++              </motion.h2>
++              <motion.p
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={0.2}
++                variants={fadeUp}
++                className={`${B} max-w-3xl text-sm font-semibold leading-6 text-[#334155] sm:text-lg sm:leading-8`}
++              >
++                Move from concept review to PYQ practice, full mock tests, deep
++                analysis, and targeted improvement — without switching tools.
++              </motion.p>
++            </div>
++          </div>
++
++          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:flex lg:flex-row lg:flex-nowrap lg:items-stretch lg:justify-center lg:gap-0">
++            <WorkflowStep
++              number="1"
++              icon={BookOpen}
++              title="Learn"
++              desc="Review formulas and concepts with digital handbooks"
++              delay={0.05}
++            />
++            <WorkflowConnector delay={0.15} />
++            <WorkflowStep
++              number="2"
++              icon={Target}
++              title="Practice"
++              desc="Solve chapter-wise PYQs from JEE & NEET past papers"
++              delay={0.2}
++            />
++            <WorkflowConnector delay={0.3} />
++            <WorkflowStep
++              number="3"
++              icon={TestTube2}
++              title="Test"
++              desc="Take full-length timed mocks under real exam conditions"
++              delay={0.35}
++            />
++            <WorkflowConnector delay={0.45} />
++            <WorkflowStep
++              number="4"
++              icon={LineChart}
++              title="Analyze"
++              desc="Review accuracy, speed, and performance metrics"
++              delay={0.5}
++            />
++            <WorkflowConnector delay={0.6} />
++            <WorkflowStep
++              number="5"
++              icon={Brain}
++              title="Improve"
++              desc="Target the weak chapters your analytics surface"
++              delay={0.65}
++            />
++            <WorkflowConnector delay={0.75} />
++            <WorkflowStep
++              number="6"
++              icon={MessageSquare}
++              title="Discuss"
++              desc="Resolve doubts with AI or peer study groups"
++              delay={0.8}
++            />
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          FOUR PILLARS
++      ════════════════════════════════════════════════════════ */}
++      <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6">
++          <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-12 sm:gap-5 md:flex-row md:items-end">
++            <motion.h2
++              initial="hidden"
++              whileInView="visible"
++              viewport={{ once: true }}
++              custom={0}
++              variants={fadeUp}
++              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
++            >
++              Everything you need to prepare
++            </motion.h2>
++            <motion.p
++              initial="hidden"
++              whileInView="visible"
++              viewport={{ once: true }}
++              custom={0.1}
++              variants={fadeUp}
++              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#F4B400] p-3 text-sm font-black leading-5 text-[#111111] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
++            >
++              Four focused tools. One distraction-free workspace.
++            </motion.p>
++          </div>
++
++          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
++            <PillarCard
++              icon={Target}
++              title="Practice"
++              items={[
++                "Extensive PYQ library",
++                "Full-length mock tests",
++                "Chapter-wise drills",
++                "Custom test creation",
++              ]}
++              accentClass="bg-[#F4B400]"
++              label="PYQ"
++              delay={0.05}
++            />
++            <PillarCard
++              icon={History}
++              title="Revise"
++              items={[
++                "Digital formula handbook",
++                "Saved important questions",
++                "Mistake revision engine",
++                "Quick concept recap",
++              ]}
++              accentClass="bg-[#DDEBFF]"
++              label="Loop"
++              delay={0.1}
++            />
++            <PillarCard
++              icon={BarChart}
++              title="Analyze"
++              items={[
++                "Granular performance analytics",
++                "Weak chapter detection",
++                "Time management insights",
++                "Detailed solution review",
++              ]}
++              accentClass="bg-[#D8F7D8]"
++              label="Data"
++              delay={0.15}
++            />
++            <PillarCard
++              icon={Globe}
++              title="Connect"
++              items={[
++                "Active study community",
++                "Peer discussions",
++                "Doubt resolution",
++                "Global leaderboards",
++              ]}
++              accentClass="bg-[#FFE0E6]"
++              label="Peer"
++              delay={0.2}
++            />
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          TRUST / AUTHENTICITY
++      ════════════════════════════════════════════════════════ */}
++      <section className="relative overflow-hidden bg-[#FFF9E6] py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6">
++          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6 sm:gap-10 lg:gap-14 items-center">
++            {/* Left: copy */}
++            <div>
++              <motion.p
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={0}
++                variants={fadeUp}
++                className={`${B} mb-4 w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:mb-5 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
++              >
++                Why PrepZii
++              </motion.p>
++              <motion.h2
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={0.1}
++                variants={fadeUp}
++                className={`${D} mb-4 max-w-2xl text-[2rem] font-black leading-[1.02] tracking-normal text-[#111111] sm:mb-6 sm:text-4xl md:text-6xl`}
++              >
++                Built around{" "}
++                <span className="inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-1.5 pb-0.5 text-black shadow-[4px_4px_0_#111111] sm:px-2 sm:pb-1 sm:shadow-[5px_5px_0_#111111]">real exam work,</span>
++                {" "}with AI that helps
++              </motion.h2>
++              <motion.p
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={0.2}
++                variants={fadeUp}
++                className={`${B} mb-5 max-w-2xl text-sm font-semibold leading-6 text-[#334155] sm:mb-8 sm:text-lg sm:leading-8`}
++              >
++                PrepZii brings together previous-year questions and focused exam
++                workflows. Zi helps you understand, revise, plan, and improve
++                without getting in the way of your preparation.
++              </motion.p>
++
++              <div className="space-y-3 sm:space-y-5">
++                <TrustItem
++                  title="PYQ practice"
++                  desc="Choose from available previous-year papers and practice options for your exam."
++                  delay={0.1}
++                />
++                <TrustItem
++                  title="Real exam UI"
++                  desc="Practice in an environment that closely mirrors the actual CBT interface."
++                  delay={0.15}
++                />
++                <TrustItem
++                  title="Zi — your study companion"
++                  desc="Ask Zi to explain any question, suggest what to revise next, or help you understand a concept you're stuck on."
++                  delay={0.2}
++                  isZi={true}
++                />
++                <TrustItem
++                  title="Habits that stick"
++                  desc="Streaks, XP, and personalised revision plans built around your weak chapters and exam schedule."
++                  delay={0.25}
++                />
++              </div>
++            </div>
++
++            {/* Right: analytics illustration */}
++            <motion.div
++              initial={{ opacity: 0, x: 20 }}
++              whileInView={{ opacity: 1, x: 0 }}
++              viewport={{ once: true }}
++              transition={{ duration: 0.7, ease: "easeOut" }}
++              className="flex items-center justify-center"
++            >
++              <div className="relative w-full max-w-[270px] aspect-square border-[3px] border-[#111111] bg-white shadow-[5px_5px_0_#111111] min-[375px]:max-w-[300px] sm:max-w-md sm:shadow-[12px_12px_0_#111111]">
++                {/* Decorative rings */}
++                <div className="absolute left-4 top-4 h-16 w-16 border-[3px] border-[#111111] bg-[#F4B400] sm:left-6 sm:top-6 sm:h-24 sm:w-24" />
++                <div className="absolute bottom-5 right-5 h-14 w-14 rotate-12 border-[3px] border-[#111111] bg-[#FFEE99] sm:bottom-7 sm:right-8 sm:h-20 sm:w-20" />
++                <div className="absolute inset-7 border-[3px] border-dashed border-[#111111] sm:inset-10" />
++
++                {/* Central graph visual */}
++                <div className="absolute inset-11 flex items-center justify-center border-[3px] border-[#111111] bg-[#FFF9E6] p-5 sm:inset-16 sm:p-8">
++                  <GraphVisual className="w-full h-full text-[#41667D]" />
++                </div>
++
++                {/* Stat pill — top right */}
++                <motion.div
++                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
++                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
++                  viewport={{ once: true }}
++                  transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
++                  className="absolute right-2 top-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:right-4 sm:top-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
++                >
++                  <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Example accuracy</div>
++                  <div className={`${D} text-lg font-black text-[#111111] sm:text-2xl`}>88%</div>
++                </motion.div>
++
++                {/* Stat pill — bottom left */}
++                <motion.div
++                  initial={{ opacity: 0, scale: 0.9, y: -10 }}
++                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
++                  viewport={{ once: true }}
++                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
++                  className="absolute bottom-4 left-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-7 sm:left-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
++                >
++                  <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Weak chapter</div>
++                  <div className={`${D} text-[12px] font-black text-[#111111] sm:text-base`}>Thermodynamics</div>
++                  <div className="w-20 bg-white border-2 border-[#111111] h-2 mt-1.5 overflow-hidden sm:mt-2 sm:w-24">
++                    <motion.div
++                      initial={{ width: 0 }}
++                      whileInView={{ width: "30%" }}
++                      viewport={{ once: true }}
++                      transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
++                      className="h-full bg-[#B44436]"
++                    />
++                  </div>
++                </motion.div>
++
++                {/* Streak pill — bottom right */}
++                <motion.div
++                  initial={{ opacity: 0, scale: 0.9, x: -10 }}
++                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
++                  viewport={{ once: true }}
++                  transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
++                  className="absolute bottom-3 right-2 bg-[#F4B400] border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-5 sm:right-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
++                >
++                  <div className={`${B} text-[10px] font-black uppercase text-black/60 mb-0.5`}>Example streak</div>
++                  <div className={`${D} text-base font-black text-black sm:text-xl`}>14 days</div>
++                </motion.div>
++              </div>
++            </motion.div>
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          SUBJECTS
++      ════════════════════════════════════════════════════════ */}
++      <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6">
++          <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 md:grid-cols-[1fr_auto] md:items-end">
++            <motion.h2
++              initial="hidden"
++              whileInView="visible"
++              viewport={{ once: true }}
++              custom={0}
++              variants={fadeUp}
++              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
++            >
++              Explore your exam subjects.
++            </motion.h2>
++            <motion.p
++              initial="hidden"
++              whileInView="visible"
++              viewport={{ once: true }}
++              custom={0.1}
++              variants={fadeUp}
++              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#FFF9E6] p-3 text-sm font-bold leading-5 text-[#334155] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
++            >
++              Practice and revision resources for JEE and NEET subjects. Availability varies by exam and chapter.
++            </motion.p>
++          </div>
++
++          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
++            {[
++              {
++                subject: "Physics",
++                icon: Zap,
++                desc: "Mechanics · Optics · Electricity · Modern Physics",
++                bgClass: "bg-[#DDEBFF]",
++                rotate: "-rotate-1",
++                tag: "PH",
++              },
++              {
++                subject: "Chemistry",
++                icon: FlaskConical,
++                desc: "Organic · Inorganic · Physical · Coordination",
++                bgClass: "bg-[#D8F7D8]",
++                rotate: "rotate-1",
++                tag: "CH",
++              },
++              {
++                subject: "Biology",
++                icon: Dna,
++                desc: "Botany · Zoology · Human Physiology · Genetics",
++                bgClass: "bg-[#FFE0E6]",
++                rotate: "-rotate-1",
++                tag: "BIO",
++              },
++              {
++                subject: "Mathematics",
++                icon: Calculator,
++                desc: "Calculus · Algebra · Coordinate Geometry · Probability",
++                bgClass: "bg-[#FFEE99]",
++                rotate: "rotate-1",
++                tag: "MATH",
++              },
++            ].map((s, i) => (
++              <motion.div
++                key={s.subject}
++                initial="hidden"
++                whileInView="visible"
++                viewport={{ once: true }}
++                custom={i * 0.07}
++                variants={fadeUp}
++                whileHover={{ y: -6, rotate: 0, transition: { duration: 0.16 } }}
++                className={`group border-[3px] border-[#111111] p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[230px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400] ${s.bgClass} ${s.rotate}`}
++              >
++                <div className="mb-4 flex items-start justify-between gap-2 sm:mb-8 sm:gap-3">
++                  <s.icon className="h-6 w-6 text-[#111111] sm:h-9 sm:w-9" strokeWidth={2.8} />
++                  <span className={`${D} border-[3px] border-[#111111] bg-white px-1.5 py-0.5 text-[11px] font-black text-[#111111] shadow-[2px_2px_0_#111111] sm:px-2 sm:py-1 sm:text-sm sm:shadow-[3px_3px_0_#111111]`}>
++                    {s.tag}
++                  </span>
++                </div>
++                <h3 className={`${D} mb-2 text-xl font-black tracking-normal text-[#111111] sm:mb-3 sm:text-3xl`}>
++                  {s.subject}
++                </h3>
++                <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{s.desc}</p>
++              </motion.div>
++            ))}
++          </div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          FINAL CTA
++      ════════════════════════════════════════════════════════ */}
++      <section className="relative overflow-hidden bg-[#111111] py-8 sm:py-14 md:py-20">
++        <div className="absolute left-6 top-6 hidden h-20 w-20 border-[3px] border-white bg-[#F4B400] md:block" />
++        <div className="absolute bottom-8 right-8 hidden h-28 w-28 rotate-12 border-[3px] border-white bg-transparent md:block" />
++        <div className="max-w-5xl mx-auto px-4 sm:px-6">
++          <motion.div
++            initial={{ opacity: 0, y: 24 }}
++            whileInView={{ opacity: 1, y: 0 }}
++            viewport={{ once: true }}
++            transition={{ duration: 0.6, ease: "easeOut" }}
++            className="border-[3px] border-white bg-[#F4B400] p-4 text-center shadow-[6px_6px_0_#FFFFFF] sm:p-6 sm:shadow-[12px_12px_0_#FFFFFF] md:p-10"
++          >
++            <h2
++              className={`${D} mx-auto mb-3 max-w-4xl text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-5 sm:text-4xl md:text-6xl`}
++            >
++              Ready for a clearer{" "}
++              <span className="inline-block bg-[#111111] px-2 pb-1 text-white">study routine?</span>
++            </h2>
++            <p
++              className={`${B} mx-auto mb-5 max-w-2xl text-sm font-bold leading-6 text-[#111111] sm:mb-8 sm:text-lg sm:leading-8`}
++            >
++              Start with a workspace built for PYQs, mock tests, formula
++              revision, and steady performance improvement. Free to begin.
++            </p>
++            <div className="flex flex-col sm:flex-row gap-3 justify-center">
++              <motion.div {...pressMotion}>
++                <Link
++                  href="/dashboard"
++                  prefetch
++                  className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-white px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-8 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
++                >
++                  Start Preparing Free
++                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
++                </Link>
++              </motion.div>
++            </div>
++          </motion.div>
++        </div>
++      </section>
++
++      {/* ════════════════════════════════════════════════════════
++          FOOTER
++      ════════════════════════════════════════════════════════ */}
++      <footer className="bg-[#0F1720] py-5 sm:py-8 border-t-[3px] border-white">
++        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-5 text-xs sm:text-sm text-gray-400">
++          <div className="flex items-center gap-2 font-bold sm:gap-3">
++            <Logo forceDark size={36} />
++            <span>© {new Date().getFullYear()} PrepZii Systems</span>
++          </div>
++          <nav className={`${B} flex items-center gap-2 font-black uppercase tracking-wide`}>
++            <Link href="/jee" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
++              JEE
++            </Link>
++            <Link href="/neet" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
++              NEET
++            </Link>
++            <Link href="/pricing" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
++              Pricing
++            </Link>
++          </nav>
++          <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 sm:text-xs">Built for focused exam preparation.</p>
++        </div>
++      </footer>
++    </div>
++    </MotionConfig>
++  );
++}
+--- a/src/app/formula-cards/[subjectSlug]/[chapterSlug]/page.jsx
++++ b/src/app/formula-cards/[subjectSlug]/[chapterSlug]/page.jsx
+@@ -1,4 +1,6 @@
+ import Link from "next/link";
++import { cache } from "react";
++import { formulaExam, formulaPath, NOINDEX, publicMetadata } from "@/lib/seo.mjs";
+ import { notFound } from "next/navigation";
+ import { ArrowLeft } from "lucide-react";
+ import FormulaCardDeck from "@/components/formula-cards/FormulaCardDeck";
+@@ -6,11 +8,30 @@
+ 
+ export const dynamic = "force-dynamic";
+ 
++const loadDeck = cache(getFormulaChapterDeck);
++
++export async function generateMetadata({ params, searchParams }) {
++  const { subjectSlug, chapterSlug } = await params;
++  const query = await searchParams;
++  const { subject, chapter, cards } = await loadDeck(subjectSlug, chapterSlug, formulaExam(query?.exam));
++  if (!subject || !chapter) return { robots: NOINDEX };
++
++  const resource = subject.name === "Biology" ? "Revision Cards" : "Formula Cards";
++  return {
++    ...publicMetadata({
++      title: `${chapter.title} ${resource} for ${subject.exam}`,
++      description: `Revise ${chapter.title} with ${subject.name} study cards for ${subject.exam}. Explore available formulas, definitions and concept checks on PrepZii.`,
++      path: formulaPath(subject.slug, chapter.slug, subject.exam),
++    }),
++    ...(cards.length ? {} : { robots: NOINDEX }),
++  };
++}
++
+ export default async function FormulaDeckPage({ params, searchParams }) {
+   const { subjectSlug, chapterSlug } = await params;
+   const query = await searchParams;
+-  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
+-  const { subject, chapter, cards } = await getFormulaChapterDeck(subjectSlug, chapterSlug, exam);
++  const exam = formulaExam(query?.exam);
++  const { subject, chapter, cards } = await loadDeck(subjectSlug, chapterSlug, exam);
+ 
+   if (!subject || !chapter) notFound();
+ 
+--- a/src/app/formula-cards/[subjectSlug]/page.jsx
++++ b/src/app/formula-cards/[subjectSlug]/page.jsx
+@@ -1,4 +1,6 @@
+ import { notFound } from "next/navigation";
++import { cache } from "react";
++import { formulaExam, formulaPath, NOINDEX, publicMetadata } from "@/lib/seo.mjs";
+ import { auth } from "@clerk/nextjs/server";
+ import { supabaseAdmin } from "@/lib/supabaseAdmin";
+ import FormulaSubjectView from "@/components/formula-cards/FormulaSubjectView";
+@@ -6,17 +8,53 @@
+ 
+ export const dynamic = "force-dynamic";
+ 
++const loadChapters = cache(getFormulaChaptersForSubject);
++
++const resolveSubject = cache(async (subjectSlug, requestedExam) => {
++  const { userId } = await auth();
++  let profileExam = null;
++  if (userId) {
++    const { data: profile } = await supabaseAdmin
++      .from("user_profiles")
++      .select("exam")
++      .eq("clerk_user_id", userId)
++      .maybeSingle();
++
++    if (profile?.exam) {
++      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
++    }
++  }
++
++  // When profile track is set, strictly use it; otherwise fallback to query param or JEE
++  const exam = profileExam || requestedExam;
++
++  let resolvedSubjectSlug = subjectSlug;
++  if (exam === "JEE" && subjectSlug.toLowerCase() === "biology") {
++    resolvedSubjectSlug = "physics";
++  } else if (exam === "NEET" && (subjectSlug.toLowerCase() === "mathematics" || subjectSlug.toLowerCase() === "maths")) {
++    resolvedSubjectSlug = "physics";
++  }
++
++  return { exam, resolvedSubjectSlug, hasProfileTrack: Boolean(profileExam) };
++});
++
++
+ export async function generateMetadata({ params, searchParams }) {
+   const { subjectSlug } = await params;
+   const query = await searchParams;
+-  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
+-  const { subject } = await getFormulaChaptersForSubject(subjectSlug, exam);
+-
+-  if (!subject) return { title: "Formula Cards | PrepZii" };
+-
++  const { exam, resolvedSubjectSlug } = await resolveSubject(subjectSlug, formulaExam(query?.exam));
++  const { subject, chapters } = await loadChapters(resolvedSubjectSlug, exam);
++
++  if (!subject) return { title: "Formula Cards", robots: NOINDEX };
++
++  const resource = subject.name === "Biology" ? "Revision Cards" : "Formula Cards";
+   return {
+-    title: `${subject.name} Formula Cards (${exam}) | PrepZii`,
+-    description: `Master high-yield formulas and concepts for ${subject.name} for ${exam} preparation.`,
++    ...publicMetadata({
++      title: `${subject.name} ${resource} for ${exam}`,
++      description: `Browse ${subject.name} formulas and revision concepts by chapter for ${exam} preparation. Explore available study cards on PrepZii.`,
++      path: formulaPath(subject.slug, null, subject.exam),
++    }),
++    ...(chapters.some((chapter) => chapter.card_count > 0) ? {} : { robots: NOINDEX }),
+   };
+ }
+ 
+@@ -652,32 +690,10 @@
+   const { subjectSlug } = await params;
+   const query = await searchParams;
+ 
+-  const { userId } = await auth();
+-  let profileExam = null;
+-  if (userId) {
+-    const { data: profile } = await supabaseAdmin
+-      .from("user_profiles")
+-      .select("exam")
+-      .eq("clerk_user_id", userId)
+-      .maybeSingle();
+-
+-    if (profile?.exam) {
+-      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
+-    }
+-  }
+-
+-  // When profile track is set, strictly use it; otherwise fallback to query param or JEE
+-  const exam = profileExam || (String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE");
+-
+-  let resolvedSubjectSlug = subjectSlug;
+-  if (exam === "JEE" && subjectSlug.toLowerCase() === "biology") {
+-    resolvedSubjectSlug = "physics";
+-  } else if (exam === "NEET" && (subjectSlug.toLowerCase() === "mathematics" || subjectSlug.toLowerCase() === "maths")) {
+-    resolvedSubjectSlug = "physics";
+-  }
++  const { exam, resolvedSubjectSlug, hasProfileTrack } = await resolveSubject(subjectSlug, formulaExam(query?.exam));
+ 
+   const [{ subject, chapters }, availableSubjects] = await Promise.all([
+-    getFormulaChaptersForSubject(resolvedSubjectSlug, exam),
++    loadChapters(resolvedSubjectSlug, exam),
+     getFormulaSubjectsForExam(exam),
+   ]);
+ 
+@@ -693,7 +709,7 @@
+         sections={chapterSections}
+         availableSubjects={availableSubjects}
+         exam={exam}
+-        hasProfileTrack={Boolean(profileExam)}
++        hasProfileTrack={hasProfileTrack}
+       />
+     </main>
+   );
+--- a/src/app/formula-cards/page.jsx
++++ b/src/app/formula-cards/page.jsx
+@@ -1,10 +1,17 @@
+ import Link from "next/link";
++import { publicMetadata } from "@/lib/seo.mjs";
+ import { auth } from "@clerk/nextjs/server";
+ import { Atom, Calculator, Dna, FlaskConical, Layers3 } from "lucide-react";
+ import { supabaseAdmin } from "@/lib/supabaseAdmin";
+ import { getFormulaSubjectsForExam } from "@/lib/formulaCards";
+ 
+ export const dynamic = "force-dynamic";
++
++export const metadata = publicMetadata({
++  title: "JEE & NEET Formula and Revision Cards",
++  description: "Explore Physics, Chemistry, Mathematics and Biology revision cards by subject and chapter for JEE and NEET preparation.",
++  path: "/formula-cards",
++});
+ 
+ const SUBJECT_ICONS = {
+   Physics: Atom,
+--- a/src/app/layout.js
++++ b/src/app/layout.js
+@@ -14,6 +14,7 @@
+ import Footer from "@/components/Footer";
+ import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
+ import Script from "next/script";
++import { SITE_URL } from "@/lib/seo.mjs";
+ 
+ import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+ 
+@@ -38,19 +39,12 @@
+ });
+ 
+ export const metadata = {
+-  // Resolves all relative URLs in OG images etc. against this base.
+-  // Change to your production domain before deploying.
+-  metadataBase: new URL(
+-    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com"
+-  ),
++  // Canonical search identity must not depend on local or preview app URLs.
++  metadataBase: new URL(SITE_URL),
+ 
+   title: {
+     default: "PrepZii",
+     template: "%s | PrepZii",
+-  },
+-
+-  alternates: {
+-    canonical: "/",
+   },
+ 
+   description:
+@@ -95,11 +89,12 @@
+     images: ["/images/branding/prepzii-logo-dark.png"],
+   },
+ 
++  // Public resources opt in at their leaf. Account/app views default to noindex.
+   robots: {
+-    index: true,
++    index: false,
+     follow: true,
+     googleBot: {
+-      index: true,
++      index: false,
+       follow: true,
+       "max-video-preview": -1,
+       "max-image-preview": "large",
+--- a/src/app/page.js
++++ b/src/app/page.js
+@@ -1,983 +1,12 @@
+-"use client";
++import HomePageClient from "./HomePageClient";
++import { publicMetadata } from "@/lib/seo.mjs";
+ 
+-// NOTE: 'use client' is retained for Framer Motion entrance animations only.
+-// All CTA navigation uses <Link> so crawlers and prefetching work correctly.
+-import Link from "next/link";
+-import { useUser } from "@clerk/nextjs";
+-import { Fraunces, Source_Sans_3 } from "next/font/google";
+-import { motion, MotionConfig } from "framer-motion";
+-import Logo from "@/components/Logo";
+-import { GraphVisual } from "@/components/ui/educational-visuals";
+-import {
+-  Target,
+-  BookOpen,
+-  CheckCircle2,
+-  TestTube2,
+-  LineChart,
+-  Brain,
+-  History,
+-  ChevronRight,
+-  BarChart,
+-  Globe,
+-  ArrowRight,
+-  FileText,
+-  Clock,
+-  Zap,
+-  FlaskConical,
+-  Dna,
+-  Calculator,
+-  MessageSquare,
+-} from "lucide-react";
+-
+-/* ── Fonts ─────────────────────────────────────────────────── */
+-const displayFont = Fraunces({
+-  subsets: ["latin"],
+-  variable: "--font-prepzii-landing-display",
+-  display: "swap",
++export const metadata = publicMetadata({
++  title: "JEE Main & NEET Practice, PYQs and Mock Tests",
++  description: "Explore JEE Main and NEET previous-year questions, mock-test options and revision resources. See available practice and access plans on PrepZii.",
++  path: "/",
+ });
+ 
+-const bodyFont = Source_Sans_3({
+-  subsets: ["latin"],
+-  variable: "--font-prepzii-landing-body",
+-  display: "swap",
+-});
+-
+-// Shorthand class references
+-const D = "font-[family-name:var(--font-space-grotesk)]";
+-const B = "font-[family-name:var(--font-prepzii-landing-body)]";
+-
+-/* ── Shared animation variants ──────────────────────────────── */
+-const fadeUp = {
+-  hidden: { opacity: 0, y: 22 },
+-  visible: (delay = 0) => ({
+-    opacity: 1,
+-    y: 0,
+-    transition: { duration: 0.5, delay, ease: "easeOut" },
+-  }),
+-};
+-
+-const pressMotion = {
+-  whileTap: { x: 3, y: 3, transition: { duration: 0.08 } },
+-};
+-
+-/* ── WorkflowStep ───────────────────────────────────────────── */
+-function WorkflowStep({ number, icon: Icon, title, desc, delay }) {
+-  return (
+-    <motion.div
+-      initial="hidden"
+-      whileInView="visible"
+-      viewport={{ once: true, margin: "-40px" }}
+-      custom={delay}
+-      variants={fadeUp}
+-      whileHover={{ y: -5, transition: { duration: 0.16 } }}
+-      className="relative flex flex-col border-[3px] border-[#111111] bg-white p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[210px] sm:p-4 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#F4B400]"
+-    >
+-      <div className="mb-3 flex items-start justify-between gap-2 sm:mb-5 sm:gap-3">
+-        <span className={`${D} flex h-8 w-8 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] text-sm font-black leading-none text-black shadow-[3px_3px_0_#111111] sm:h-11 sm:w-11 sm:text-lg sm:shadow-[4px_4px_0_#111111]`}>
+-          {number}
+-        </span>
+-        <Icon className="h-5 w-5 text-[#111111] sm:h-7 sm:w-7" strokeWidth={2.6} />
+-      </div>
+-      <h4 className={`${D} mb-1 text-base font-black uppercase tracking-normal text-[#111111] sm:mb-2 sm:text-xl`}>
+-        {title}
+-      </h4>
+-      <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{desc}</p>
+-    </motion.div>
+-  );
++export default function HomePage() {
++  return <HomePageClient />;
+ }
+-
+-/* ── WorkflowConnector ──────────────────────────────────────── */
+-function WorkflowConnector({ delay = 0 }) {
+-  return (
+-    <div className="hidden lg:flex items-center shrink-0 px-1 pt-24">
+-      <motion.div
+-        initial={{ width: 0, opacity: 0 }}
+-        whileInView={{ width: 28, opacity: 1 }}
+-        viewport={{ once: true, margin: "-40px" }}
+-        transition={{ delay, duration: 0.4, ease: "easeOut" }}
+-        className="h-[3px] bg-[#111111]"
+-      />
+-      <motion.div
+-        initial={{ opacity: 0, x: -4 }}
+-        whileInView={{ opacity: 1, x: 0 }}
+-        viewport={{ once: true, margin: "-40px" }}
+-        transition={{ delay: delay + 0.2, duration: 0.3 }}
+-      >
+-        <ChevronRight className="-ml-1.5 h-5 w-5 text-[#111111]" strokeWidth={3} />
+-      </motion.div>
+-    </div>
+-  );
+-}
+-
+-/* ── PillarCard ─────────────────────────────────────────────── */
+-function PillarCard({ icon: Icon, title, items, accentClass, label, delay }) {
+-  return (
+-    <motion.div
+-      initial="hidden"
+-      whileInView="visible"
+-      viewport={{ once: true, margin: "-40px" }}
+-      custom={delay}
+-      variants={fadeUp}
+-      whileHover={{ y: -6, x: -2, transition: { duration: 0.16 } }}
+-      className="group flex flex-col border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[360px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400]"
+-    >
+-      <div className="mb-4 flex items-start justify-between gap-2 sm:mb-6 sm:gap-4">
+-        <span className={`${B} border-2 border-[#111111] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-[#111111] sm:px-2 sm:py-1 sm:text-[11px] ${accentClass}`}>
+-          {label}
+-        </span>
+-        <div className={`flex h-9 w-9 items-center justify-center border-[3px] border-[#111111] ${accentClass} shadow-[3px_3px_0_#111111] transition-transform duration-200 group-hover:-rotate-3 sm:h-14 sm:w-14 sm:shadow-[4px_4px_0_#111111]`}>
+-          <Icon className="h-5 w-5 text-[#111111] sm:h-7 sm:w-7" strokeWidth={2.8} />
+-        </div>
+-      </div>
+-      <h3 className={`${D} mb-3 text-xl font-black tracking-normal text-[#111111] sm:mb-6 sm:text-3xl`}>{title}</h3>
+-      <ul className="mt-auto space-y-2 sm:space-y-3">
+-        {items.map((item, i) => (
+-          <li
+-            key={i}
+-            className={`${B} flex items-start gap-2 text-[12px] font-semibold leading-5 text-[#334155] sm:gap-3 sm:text-sm sm:leading-normal`}
+-          >
+-            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#111111] sm:h-4 sm:w-4" strokeWidth={2.8} />
+-            <span>{item}</span>
+-          </li>
+-        ))}
+-      </ul>
+-    </motion.div>
+-  );
+-}
+-
+-/* ── TrustItem ──────────────────────────────────────────────── */
+-function TrustItem({ icon: Icon = CheckCircle2, title, desc, delay, isZi = false }) {
+-  return (
+-    <motion.div
+-      initial="hidden"
+-      whileInView="visible"
+-      viewport={{ once: true }}
+-      custom={delay}
+-      variants={fadeUp}
+-      whileHover={{ x: 4, transition: { duration: 0.16 } }}
+-      className="flex items-start gap-3 border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] sm:gap-4 sm:p-4 sm:shadow-[5px_5px_0_#111111]"
+-    >
+-      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] sm:h-11 sm:w-11">
+-        {isZi ? (
+-          <div className="flex gap-1">
+-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="h-1.5 w-1.5 bg-black" />
+-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} className="h-1.5 w-1.5 bg-black" />
+-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="h-1.5 w-1.5 bg-black" />
+-          </div>
+-        ) : (
+-          <Icon className="h-4 w-4 text-[#111111] sm:h-5 sm:w-5" strokeWidth={3} />
+-        )}
+-      </div>
+-      <div>
+-        <h4 className={`${D} mb-0.5 text-base font-black leading-snug text-[#111111] sm:mb-1 sm:text-lg`}>
+-          {title}
+-        </h4>
+-        <p className={`${B} text-[13px] font-semibold leading-5 text-[#475569] sm:text-sm sm:leading-6`}>{desc}</p>
+-      </div>
+-    </motion.div>
+-  );
+-}
+-
+-/* ── StatItem ───────────────────────────────────────────────── */
+-function StatItem({ value, label, delay, tone }) {
+-  return (
+-    <motion.div
+-      initial="hidden"
+-      whileInView="visible"
+-      viewport={{ once: true }}
+-      custom={delay}
+-      variants={fadeUp}
+-      whileHover={{ y: -5, transition: { duration: 0.16 } }}
+-      className={`min-h-[104px] border-[3px] border-[#111111] p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#111111] sm:min-h-[150px] sm:p-5 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111] ${tone}`}
+-    >
+-      <div className={`${D} mb-1 text-[1.72rem] font-black leading-none tracking-normal text-[#111111] sm:mb-2 sm:text-4xl md:text-5xl`}>
+-        {value}
+-      </div>
+-      <div className={`${B} max-w-[12rem] text-[10px] font-black uppercase leading-4 tracking-wide text-[#111111] sm:text-sm sm:leading-5`}>{label}</div>
+-    </motion.div>
+-  );
+-}
+-
+-/* ── ProductPreview — mock PYQ question card ────────────────── */
+-function ProductPreview() {
+-  return (
+-    <motion.div
+-      initial={{ opacity: 0, y: 28 }}
+-      animate={{ opacity: 1, y: 0 }}
+-      transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+-      className="relative bg-white border-[3px] border-[#111111] shadow-[5px_5px_0_#111111] overflow-visible sm:shadow-[12px_12px_0_#111111]"
+-    >
+-      <div className="absolute -left-5 -top-5 hidden h-20 w-20 border-[3px] border-[#111111] bg-[#F4B400] md:block" />
+-      <div className="absolute -bottom-6 -right-6 hidden h-24 w-24 rotate-6 border-[3px] border-[#111111] bg-[#FFEE99] md:block" />
+-      <div className="absolute -right-7 top-16 hidden border-[3px] border-[#111111] bg-white px-3 py-1 text-xs font-black uppercase tracking-widest text-[#111111] shadow-[4px_4px_0_#111111] md:block">
+-        Live PYQ
+-      </div>
+-      {/* Exam header bar */}
+-      <div className="relative z-10 bg-[#111111] px-3 py-3 flex items-center justify-between gap-2 sm:px-4 sm:py-4 sm:gap-3">
+-        <div className="flex items-center gap-2 min-w-0">
+-          <FileText className="w-4 h-4 text-[#F4B400] shrink-0" />
+-          <span className={`${B} text-white text-[12px] font-black truncate sm:text-sm`}>
+-            JEE Advanced 2023 · Physics
+-          </span>
+-        </div>
+-        <div className="flex items-center gap-2 shrink-0 sm:gap-3">
+-          <span className={`${B} text-white/70 text-[11px] flex items-center gap-1 font-bold sm:text-xs`}>
+-            <Clock className="w-3 h-3" />
+-            2:45
+-          </span>
+-          <span className="bg-[#F4B400] text-black text-[11px] px-1.5 py-0.5 font-black sm:text-xs sm:px-2 sm:py-1">
+-            Q 12 / 30
+-          </span>
+-        </div>
+-      </div>
+-
+-      {/* Question body */}
+-      <div className="relative z-10 p-3 sm:p-6">
+-        <p className={`${B} text-[13px] font-semibold text-[#111111] leading-6 mb-3 sm:mb-5 sm:text-base sm:leading-7`}>
+-          A particle of mass <strong>m</strong> moves in a circular orbit of radius{" "}
+-          <strong>r</strong> in a central force potential{" "}
+-          <code className="text-[12px] bg-[#FFEE99] border-2 border-[#111111] px-1 py-0.5 font-mono sm:text-sm sm:px-1.5">
+-            V(r) = k·r²
+-          </code>
+-          . The time period of the orbit is proportional to:
+-        </p>
+-
+-        <div className="grid grid-cols-2 gap-2">
+-          {[
+-            { label: "A", text: "r⁰", selected: false, correct: false },
+-            { label: "B", text: "r¹", selected: true, correct: true },
+-            { label: "C", text: "r²", selected: false, correct: false },
+-            { label: "D", text: "r³/²", selected: false, correct: false },
+-          ].map((opt, i) => (
+-            <motion.div
+-              key={opt.label}
+-              initial={{ opacity: 0, x: -5 }}
+-              animate={{ opacity: 1, x: 0 }}
+-              transition={{ delay: 0.6 + i * 0.1, duration: 0.3 }}
+-              className={`flex items-center gap-1.5 border-2 px-2 py-2 text-sm cursor-default select-none sm:gap-2.5 sm:px-3 sm:py-3
+-                ${
+-                  opt.correct
+-                    ? "border-[#111111] bg-[#D8F7D8] text-[#111111] shadow-[3px_3px_0_#111111] sm:shadow-[4px_4px_0_#111111]"
+-                    : "border-[#111111] bg-white text-[#111111]"
+-                }`}
+-            >
+-              <span
+-                className={`w-5 h-5 text-[11px] font-black flex items-center justify-center shrink-0 border-2 border-[#111111] sm:h-6 sm:w-6 sm:text-xs
+-                  ${opt.correct ? "bg-[#00B85C] text-white" : "bg-[#F8F1D9] text-[#111111]"}`}
+-              >
+-                {opt.label}
+-              </span>
+-              <span className={`${B} text-[12px] font-black sm:text-sm`}>{opt.text}</span>
+-            </motion.div>
+-          ))}
+-        </div>
+-
+-        {/* Stats strip */}
+-        <div className="mt-3 border-t-[3px] border-[#111111] pt-3 flex flex-row items-center justify-between gap-2 overflow-hidden sm:mt-5 sm:pt-4">
+-          <div className="flex items-center gap-2 sm:gap-4">
+-            <motion.span 
+-              initial={{ opacity: 0, y: 10 }}
+-              animate={{ opacity: 1, y: 0 }}
+-              transition={{ delay: 1.1, duration: 0.4 }}
+-              className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
+-            >
+-              <span className="font-black text-[#111111]">68%</span> accuracy
+-            </motion.span>
+-            <motion.span 
+-              initial={{ opacity: 0, y: 10 }}
+-              animate={{ opacity: 1, y: 0 }}
+-              transition={{ delay: 1.2, duration: 0.4 }}
+-              className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
+-            >
+-              <span className="font-black text-[#111111]">2.4k</span> attempts
+-            </motion.span>
+-          </div>
+-          <motion.span
+-            initial={{ opacity: 0, scale: 0.8 }}
+-            animate={{ opacity: 1, scale: 1 }}
+-            transition={{ delay: 1.3, duration: 0.3 }}
+-            className={`${B} w-fit bg-[#F4B400] px-1.5 py-0.5 text-[10px] font-black uppercase text-black border-2 border-[#111111] sm:px-2 sm:py-1 sm:text-xs`}
+-          >
+-            Medium
+-          </motion.span>
+-        </div>
+-      </div>
+-
+-      {/* Bottom progress bar */}
+-      <div className="relative z-10 px-3 pb-4 sm:px-6 sm:pb-5">
+-        <div className="flex items-center justify-between mb-1">
+-          <span className={`${B} text-xs font-black uppercase text-[#111111]`}>Progress</span>
+-          <span className={`${B} text-xs font-bold text-[#334155]`}>12 / 30 questions</span>
+-        </div>
+-        <div className="h-3 w-full overflow-hidden border-2 border-[#111111] bg-white">
+-          <motion.div 
+-            initial={{ width: 0 }}
+-            animate={{ width: "40%" }}
+-            transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+-            className="h-full bg-[#F4B400]" 
+-          />
+-        </div>
+-      </div>
+-    </motion.div>
+-  );
+-}
+-
+-/* ── Main Page ──────────────────────────────────────────────── */
+-export default function PublicLandingPage() {
+-  const { isSignedIn, isLoaded } = useUser();
+-
+-  return (
+-    <MotionConfig reducedMotion="user">
+-      <div
+-        className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
+-      >
+-      {/* ════════════════════════════════════════════════════════
+-          NAVBAR
+-      ════════════════════════════════════════════════════════ */}
+-      <header className="sticky top-0 z-50 border-b-[3px] border-[#111111] bg-[#FFF9E6] shadow-[0_5px_0_#111111]">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+-          <Link href="/" aria-label="PrepZii Home" className="flex items-center">
+-            <Logo forceLight size={44} />
+-          </Link>
+-
+-          {/* Nav links — desktop only */}
+-          <nav className="hidden md:flex items-center gap-1 rounded-full border-2 border-[#111111] bg-white p-1 shadow-[3px_3px_0_#111111]">
+-            <Link
+-              href="/jee"
+-              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
+-            >
+-              JEE
+-            </Link>
+-            <Link
+-              href="/neet"
+-              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
+-            >
+-              NEET
+-            </Link>
+-            <Link
+-              href="/pricing"
+-              className={`${B} rounded-full px-4 py-1 text-sm font-black text-[#111111] transition-all duration-150 hover:bg-[#FFF9E6]`}
+-            >
+-              Pricing
+-            </Link>
+-          </nav>
+-
+-          {/* Auth CTAs */}
+-          <div className="flex items-center gap-2">
+-            {!isSignedIn && isLoaded && (
+-              <Link
+-                href="/sign-in"
+-                className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
+-              >
+-                Log in
+-              </Link>
+-            )}
+-            <Link
+-              href="/dashboard"
+-              prefetch
+-              className={`${B} inline-flex items-center gap-1.5 border-[3px] border-[#111111] bg-[#F4B400] px-4 py-2 text-sm font-black text-black shadow-[4px_4px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#111111]`}
+-            >
+-              {isSignedIn ? "Dashboard" : "Get Started"}
+-              <ChevronRight className="w-3.5 h-3.5" strokeWidth={3} />
+-            </Link>
+-          </div>
+-        </div>
+-      </header>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          HERO
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="relative overflow-hidden bg-[#FFF9E6] border-b-[3px] border-[#111111]">
+-        <div className="absolute left-0 top-24 hidden h-24 w-24 -translate-x-1/2 rotate-12 border-[3px] border-[#111111] bg-white md:block" />
+-        <div className="absolute right-8 top-28 hidden h-12 w-36 -rotate-6 border-[3px] border-[#111111] bg-[#F4B400] lg:block" />
+-        <div className="absolute bottom-14 left-[48%] hidden h-16 w-16 rotate-45 border-[3px] border-[#111111] bg-[#FFEE99] lg:block" />
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-7 sm:py-12 md:py-20 lg:py-24">
+-          <div className="grid gap-7 sm:gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center lg:gap-14">
+-            {/* Left: Copy */}
+-            <div className="max-w-3xl">
+-              {/* Eyebrow badge */}
+-              <motion.div
+-                initial="hidden"
+-                animate="visible"
+-                custom={0}
+-                variants={fadeUp}
+-                className={`${B} mb-4 inline-flex -rotate-1 items-center gap-2 border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[4px_4px_0_#111111] sm:mb-6 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[5px_5px_0_#111111]`}
+-              >
+-                <BookOpen className="w-3.5 h-3.5" />
+-                JEE &amp; NEET Preparation Platform
+-              </motion.div>
+-
+-              {/* Heading */}
+-              <motion.h1
+-                initial="hidden"
+-                animate="visible"
+-                variants={{
+-                  hidden: { opacity: 0 },
+-                  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+-                }}
+-                className={`${D} mb-4 max-w-[880px] text-[2.55rem] font-black leading-[0.95] tracking-normal text-[#111111] min-[375px]:text-5xl sm:mb-6 sm:text-6xl md:text-7xl lg:text-[5.7rem]`}
+-              >
+-                <motion.span variants={fadeUp} className="block">The structured way</motion.span>
+-                <motion.span variants={fadeUp} className="block">to crack</motion.span>
+-                <motion.span variants={fadeUp} className="relative mt-1 inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-2 pb-1.5 pt-0.5 text-black shadow-[5px_5px_0_#111111] sm:mt-2 sm:px-3 sm:pb-2 sm:pt-1 sm:shadow-[8px_8px_0_#111111]">
+-                  JEE &amp; NEET
+-                  <motion.span
+-                    initial={{ width: 0, opacity: 0 }}
+-                    animate={{ width: "100%", opacity: 1 }}
+-                    transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
+-                    className="absolute -bottom-3 left-0 h-[5px] bg-[#111111]"
+-                  />
+-                </motion.span>
+-              </motion.h1>
+-
+-              {/* Subtitle */}
+-              <motion.p
+-                initial="hidden"
+-                animate="visible"
+-                custom={0.4}
+-                variants={fadeUp}
+-                className={`${B} mb-5 max-w-2xl border-l-[5px] border-[#111111] pl-3 text-[15px] font-semibold leading-6 text-[#334155] sm:mb-8 sm:border-l-[6px] sm:pl-5 sm:text-xl sm:leading-8`}
+-              >
+-                Practice from verified PYQs, take full-length mock tests, revise
+-                formula books, detect weak chapters, and track your performance —
+-                all in one focused workspace.
+-              </motion.p>
+-
+-              {/* CTA buttons */}
+-              <motion.div
+-                initial="hidden"
+-                animate="visible"
+-                custom={0.3}
+-                variants={fadeUp}
+-                className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-8"
+-              >
+-                <motion.div {...pressMotion}>
+-                  <Link
+-                    href="/dashboard"
+-                    prefetch
+-                    className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-[#F4B400] px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-7 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
+-                  >
+-                    Start Preparing Free
+-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
+-                  </Link>
+-                </motion.div>
+-              </motion.div>
+-
+-              {/* Trust signals */}
+-              <motion.div
+-                initial="hidden"
+-                animate="visible"
+-                custom={0.4}
+-                variants={fadeUp}
+-                className={`${B} grid grid-cols-2 gap-2 text-[12px] text-[#111111] sm:flex sm:flex-wrap sm:text-sm`}
+-              >
+-                {[
+-                  "Free to start",
+-                  "Verified PYQs",
+-                  "Real exam interface",
+-                  "No clutter",
+-                ].map((t) => (
+-                  <span key={t} className="flex items-center gap-1.5 border-2 border-[#111111] bg-white px-2 py-1 font-black shadow-[2px_2px_0_#111111] sm:px-3 sm:py-1.5 sm:shadow-[3px_3px_0_#111111]">
+-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00A651] shrink-0" strokeWidth={3} />
+-                    {t}
+-                  </span>
+-                ))}
+-              </motion.div>
+-            </div>
+-
+-            {/* Right: Product preview */}
+-            <div className="w-full lg:pl-2">
+-              <ProductPreview />
+-            </div>
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          STATS BAND
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="bg-white border-b-[3px] border-[#111111] py-6 sm:py-8 md:py-12">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+-            <StatItem value="10,000+" label="PYQs from 2017–2026" delay={0.05} tone="bg-[#F4B400]" />
+-            <StatItem value="50+" label="Full-length mock tests" delay={0.1} tone="bg-[#111111] [&_*]:text-white" />
+-            <StatItem value="4 Subjects" label="Physics, Chemistry, Bio, Maths" delay={0.15} tone="bg-[#FFEE99]" />
+-            <StatItem value="100%" label="Authentic exam questions" delay={0.2} tone="bg-white" />
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          PREPARATION WORKFLOW
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="relative overflow-hidden bg-[#FFF9E6] py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
+-        <div className="absolute right-0 top-12 hidden h-28 w-28 translate-x-10 border-[3px] border-[#111111] bg-white lg:block" />
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+-          <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+-            <motion.p
+-              initial="hidden"
+-              whileInView="visible"
+-              viewport={{ once: true }}
+-              custom={0}
+-              variants={fadeUp}
+-              className={`${B} w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
+-            >
+-              How PrepZii works
+-            </motion.p>
+-            <div>
+-              <motion.h2
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={0.1}
+-                variants={fadeUp}
+-                className={`${D} mb-2 text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-4 sm:text-4xl md:text-6xl`}
+-              >
+-                Your complete preparation workflow
+-              </motion.h2>
+-              <motion.p
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={0.2}
+-                variants={fadeUp}
+-                className={`${B} max-w-3xl text-sm font-semibold leading-6 text-[#334155] sm:text-lg sm:leading-8`}
+-              >
+-                Move from concept review to PYQ practice, full mock tests, deep
+-                analysis, and targeted improvement — without switching tools.
+-              </motion.p>
+-            </div>
+-          </div>
+-
+-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:flex lg:flex-row lg:flex-nowrap lg:items-stretch lg:justify-center lg:gap-0">
+-            <WorkflowStep
+-              number="1"
+-              icon={BookOpen}
+-              title="Learn"
+-              desc="Review formulas and concepts with digital handbooks"
+-              delay={0.05}
+-            />
+-            <WorkflowConnector delay={0.15} />
+-            <WorkflowStep
+-              number="2"
+-              icon={Target}
+-              title="Practice"
+-              desc="Solve chapter-wise PYQs from JEE & NEET past papers"
+-              delay={0.2}
+-            />
+-            <WorkflowConnector delay={0.3} />
+-            <WorkflowStep
+-              number="3"
+-              icon={TestTube2}
+-              title="Test"
+-              desc="Take full-length timed mocks under real exam conditions"
+-              delay={0.35}
+-            />
+-            <WorkflowConnector delay={0.45} />
+-            <WorkflowStep
+-              number="4"
+-              icon={LineChart}
+-              title="Analyze"
+-              desc="Review accuracy, speed, and performance metrics"
+-              delay={0.5}
+-            />
+-            <WorkflowConnector delay={0.6} />
+-            <WorkflowStep
+-              number="5"
+-              icon={Brain}
+-              title="Improve"
+-              desc="Target the weak chapters your analytics surface"
+-              delay={0.65}
+-            />
+-            <WorkflowConnector delay={0.75} />
+-            <WorkflowStep
+-              number="6"
+-              icon={MessageSquare}
+-              title="Discuss"
+-              desc="Resolve doubts with AI or peer study groups"
+-              delay={0.8}
+-            />
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          FOUR PILLARS
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+-          <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-12 sm:gap-5 md:flex-row md:items-end">
+-            <motion.h2
+-              initial="hidden"
+-              whileInView="visible"
+-              viewport={{ once: true }}
+-              custom={0}
+-              variants={fadeUp}
+-              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
+-            >
+-              Everything you need to prepare
+-            </motion.h2>
+-            <motion.p
+-              initial="hidden"
+-              whileInView="visible"
+-              viewport={{ once: true }}
+-              custom={0.1}
+-              variants={fadeUp}
+-              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#F4B400] p-3 text-sm font-black leading-5 text-[#111111] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
+-            >
+-              Four focused tools. One distraction-free workspace.
+-            </motion.p>
+-          </div>
+-
+-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+-            <PillarCard
+-              icon={Target}
+-              title="Practice"
+-              items={[
+-                "Extensive PYQ library",
+-                "Full-length mock tests",
+-                "Chapter-wise drills",
+-                "Custom test creation",
+-              ]}
+-              accentClass="bg-[#F4B400]"
+-              label="PYQ"
+-              delay={0.05}
+-            />
+-            <PillarCard
+-              icon={History}
+-              title="Revise"
+-              items={[
+-                "Digital formula handbook",
+-                "Saved important questions",
+-                "Mistake revision engine",
+-                "Quick concept recap",
+-              ]}
+-              accentClass="bg-[#DDEBFF]"
+-              label="Loop"
+-              delay={0.1}
+-            />
+-            <PillarCard
+-              icon={BarChart}
+-              title="Analyze"
+-              items={[
+-                "Granular performance analytics",
+-                "Weak chapter detection",
+-                "Time management insights",
+-                "Detailed solution review",
+-              ]}
+-              accentClass="bg-[#D8F7D8]"
+-              label="Data"
+-              delay={0.15}
+-            />
+-            <PillarCard
+-              icon={Globe}
+-              title="Connect"
+-              items={[
+-                "Active study community",
+-                "Peer discussions",
+-                "Doubt resolution",
+-                "Global leaderboards",
+-              ]}
+-              accentClass="bg-[#FFE0E6]"
+-              label="Peer"
+-              delay={0.2}
+-            />
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          TRUST / AUTHENTICITY
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="relative overflow-hidden bg-[#FFF9E6] py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+-          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6 sm:gap-10 lg:gap-14 items-center">
+-            {/* Left: copy */}
+-            <div>
+-              <motion.p
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={0}
+-                variants={fadeUp}
+-                className={`${B} mb-4 w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:mb-5 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
+-              >
+-                Why PrepZii
+-              </motion.p>
+-              <motion.h2
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={0.1}
+-                variants={fadeUp}
+-                className={`${D} mb-4 max-w-2xl text-[2rem] font-black leading-[1.02] tracking-normal text-[#111111] sm:mb-6 sm:text-4xl md:text-6xl`}
+-              >
+-                Built around{" "}
+-                <span className="inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-1.5 pb-0.5 text-black shadow-[4px_4px_0_#111111] sm:px-2 sm:pb-1 sm:shadow-[5px_5px_0_#111111]">real exam work,</span>
+-                {" "}with AI that helps
+-              </motion.h2>
+-              <motion.p
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={0.2}
+-                variants={fadeUp}
+-                className={`${B} mb-5 max-w-2xl text-sm font-semibold leading-6 text-[#334155] sm:mb-8 sm:text-lg sm:leading-8`}
+-              >
+-                PrepZii starts with verified previous year papers and focused exam
+-                workflows. Zi helps you understand, revise, plan, and improve
+-                without getting in the way of your preparation.
+-              </motion.p>
+-
+-              <div className="space-y-3 sm:space-y-5">
+-                <TrustItem
+-                  title="Verified PYQs"
+-                  desc="100% authentic questions from 2017–2026 with detailed step-by-step solutions."
+-                  delay={0.1}
+-                />
+-                <TrustItem
+-                  title="Real exam UI"
+-                  desc="Practice in an environment that closely mirrors the actual CBT interface."
+-                  delay={0.15}
+-                />
+-                <TrustItem
+-                  title="Zi — your study companion"
+-                  desc="Ask Zi to explain any question, suggest what to revise next, or help you understand a concept you're stuck on."
+-                  delay={0.2}
+-                  isZi={true}
+-                />
+-                <TrustItem
+-                  title="Habits that stick"
+-                  desc="Streaks, XP, and personalised revision plans built around your weak chapters and exam schedule."
+-                  delay={0.25}
+-                />
+-              </div>
+-            </div>
+-
+-            {/* Right: analytics illustration */}
+-            <motion.div
+-              initial={{ opacity: 0, x: 20 }}
+-              whileInView={{ opacity: 1, x: 0 }}
+-              viewport={{ once: true }}
+-              transition={{ duration: 0.7, ease: "easeOut" }}
+-              className="flex items-center justify-center"
+-            >
+-              <div className="relative w-full max-w-[270px] aspect-square border-[3px] border-[#111111] bg-white shadow-[5px_5px_0_#111111] min-[375px]:max-w-[300px] sm:max-w-md sm:shadow-[12px_12px_0_#111111]">
+-                {/* Decorative rings */}
+-                <div className="absolute left-4 top-4 h-16 w-16 border-[3px] border-[#111111] bg-[#F4B400] sm:left-6 sm:top-6 sm:h-24 sm:w-24" />
+-                <div className="absolute bottom-5 right-5 h-14 w-14 rotate-12 border-[3px] border-[#111111] bg-[#FFEE99] sm:bottom-7 sm:right-8 sm:h-20 sm:w-20" />
+-                <div className="absolute inset-7 border-[3px] border-dashed border-[#111111] sm:inset-10" />
+-
+-                {/* Central graph visual */}
+-                <div className="absolute inset-11 flex items-center justify-center border-[3px] border-[#111111] bg-[#FFF9E6] p-5 sm:inset-16 sm:p-8">
+-                  <GraphVisual className="w-full h-full text-[#41667D]" />
+-                </div>
+-
+-                {/* Stat pill — top right */}
+-                <motion.div
+-                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+-                  viewport={{ once: true }}
+-                  transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+-                  className="absolute right-2 top-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:right-4 sm:top-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+-                >
+-                  <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Accuracy</div>
+-                  <div className={`${D} text-lg font-black text-[#111111] sm:text-2xl`}>88%</div>
+-                </motion.div>
+-
+-                {/* Stat pill — bottom left */}
+-                <motion.div
+-                  initial={{ opacity: 0, scale: 0.9, y: -10 }}
+-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+-                  viewport={{ once: true }}
+-                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+-                  className="absolute bottom-4 left-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-7 sm:left-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+-                >
+-                  <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Weak chapter</div>
+-                  <div className={`${D} text-[12px] font-black text-[#111111] sm:text-base`}>Thermodynamics</div>
+-                  <div className="w-20 bg-white border-2 border-[#111111] h-2 mt-1.5 overflow-hidden sm:mt-2 sm:w-24">
+-                    <motion.div
+-                      initial={{ width: 0 }}
+-                      whileInView={{ width: "30%" }}
+-                      viewport={{ once: true }}
+-                      transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+-                      className="h-full bg-[#B44436]"
+-                    />
+-                  </div>
+-                </motion.div>
+-
+-                {/* Streak pill — bottom right */}
+-                <motion.div
+-                  initial={{ opacity: 0, scale: 0.9, x: -10 }}
+-                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+-                  viewport={{ once: true }}
+-                  transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
+-                  className="absolute bottom-3 right-2 bg-[#F4B400] border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-5 sm:right-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+-                >
+-                  <div className={`${B} text-[10px] font-black uppercase text-black/60 mb-0.5`}>Streak</div>
+-                  <div className={`${D} text-base font-black text-black sm:text-xl`}>14 days</div>
+-                </motion.div>
+-              </div>
+-            </motion.div>
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          SUBJECTS
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+-          <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 md:grid-cols-[1fr_auto] md:items-end">
+-            <motion.h2
+-              initial="hidden"
+-              whileInView="visible"
+-              viewport={{ once: true }}
+-              custom={0}
+-              variants={fadeUp}
+-              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
+-            >
+-              Every subject. Every chapter.
+-            </motion.h2>
+-            <motion.p
+-              initial="hidden"
+-              whileInView="visible"
+-              viewport={{ once: true }}
+-              custom={0.1}
+-              variants={fadeUp}
+-              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#FFF9E6] p-3 text-sm font-bold leading-5 text-[#334155] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
+-            >
+-              Full PYQ and mock test coverage across all JEE and NEET subjects.
+-            </motion.p>
+-          </div>
+-
+-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+-            {[
+-              {
+-                subject: "Physics",
+-                icon: Zap,
+-                desc: "Mechanics · Optics · Electricity · Modern Physics",
+-                bgClass: "bg-[#DDEBFF]",
+-                rotate: "-rotate-1",
+-                tag: "PH",
+-              },
+-              {
+-                subject: "Chemistry",
+-                icon: FlaskConical,
+-                desc: "Organic · Inorganic · Physical · Coordination",
+-                bgClass: "bg-[#D8F7D8]",
+-                rotate: "rotate-1",
+-                tag: "CH",
+-              },
+-              {
+-                subject: "Biology",
+-                icon: Dna,
+-                desc: "Botany · Zoology · Human Physiology · Genetics",
+-                bgClass: "bg-[#FFE0E6]",
+-                rotate: "-rotate-1",
+-                tag: "BIO",
+-              },
+-              {
+-                subject: "Mathematics",
+-                icon: Calculator,
+-                desc: "Calculus · Algebra · Coordinate Geometry · Probability",
+-                bgClass: "bg-[#FFEE99]",
+-                rotate: "rotate-1",
+-                tag: "MATH",
+-              },
+-            ].map((s, i) => (
+-              <motion.div
+-                key={s.subject}
+-                initial="hidden"
+-                whileInView="visible"
+-                viewport={{ once: true }}
+-                custom={i * 0.07}
+-                variants={fadeUp}
+-                whileHover={{ y: -6, rotate: 0, transition: { duration: 0.16 } }}
+-                className={`group border-[3px] border-[#111111] p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[230px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400] ${s.bgClass} ${s.rotate}`}
+-              >
+-                <div className="mb-4 flex items-start justify-between gap-2 sm:mb-8 sm:gap-3">
+-                  <s.icon className="h-6 w-6 text-[#111111] sm:h-9 sm:w-9" strokeWidth={2.8} />
+-                  <span className={`${D} border-[3px] border-[#111111] bg-white px-1.5 py-0.5 text-[11px] font-black text-[#111111] shadow-[2px_2px_0_#111111] sm:px-2 sm:py-1 sm:text-sm sm:shadow-[3px_3px_0_#111111]`}>
+-                    {s.tag}
+-                  </span>
+-                </div>
+-                <h3 className={`${D} mb-2 text-xl font-black tracking-normal text-[#111111] sm:mb-3 sm:text-3xl`}>
+-                  {s.subject}
+-                </h3>
+-                <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{s.desc}</p>
+-              </motion.div>
+-            ))}
+-          </div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          FINAL CTA
+-      ════════════════════════════════════════════════════════ */}
+-      <section className="relative overflow-hidden bg-[#111111] py-8 sm:py-14 md:py-20">
+-        <div className="absolute left-6 top-6 hidden h-20 w-20 border-[3px] border-white bg-[#F4B400] md:block" />
+-        <div className="absolute bottom-8 right-8 hidden h-28 w-28 rotate-12 border-[3px] border-white bg-transparent md:block" />
+-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+-          <motion.div
+-            initial={{ opacity: 0, y: 24 }}
+-            whileInView={{ opacity: 1, y: 0 }}
+-            viewport={{ once: true }}
+-            transition={{ duration: 0.6, ease: "easeOut" }}
+-            className="border-[3px] border-white bg-[#F4B400] p-4 text-center shadow-[6px_6px_0_#FFFFFF] sm:p-6 sm:shadow-[12px_12px_0_#FFFFFF] md:p-10"
+-          >
+-            <h2
+-              className={`${D} mx-auto mb-3 max-w-4xl text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-5 sm:text-4xl md:text-6xl`}
+-            >
+-              Ready for a clearer{" "}
+-              <span className="inline-block bg-[#111111] px-2 pb-1 text-white">study routine?</span>
+-            </h2>
+-            <p
+-              className={`${B} mx-auto mb-5 max-w-2xl text-sm font-bold leading-6 text-[#111111] sm:mb-8 sm:text-lg sm:leading-8`}
+-            >
+-              Start with a workspace built for PYQs, mock tests, formula
+-              revision, and steady performance improvement. Free to begin.
+-            </p>
+-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+-              <motion.div {...pressMotion}>
+-                <Link
+-                  href="/dashboard"
+-                  prefetch
+-                  className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-white px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-8 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
+-                >
+-                  Start Preparing Free
+-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
+-                </Link>
+-              </motion.div>
+-            </div>
+-          </motion.div>
+-        </div>
+-      </section>
+-
+-      {/* ════════════════════════════════════════════════════════
+-          FOOTER
+-      ════════════════════════════════════════════════════════ */}
+-      <footer className="bg-[#0F1720] py-5 sm:py-8 border-t-[3px] border-white">
+-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-5 text-xs sm:text-sm text-gray-400">
+-          <div className="flex items-center gap-2 font-bold sm:gap-3">
+-            <Logo forceDark size={36} />
+-            <span>© {new Date().getFullYear()} PrepZii Systems</span>
+-          </div>
+-          <nav className={`${B} flex items-center gap-2 font-black uppercase tracking-wide`}>
+-            <Link href="/jee" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
+-              JEE
+-            </Link>
+-            <Link href="/neet" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
+-              NEET
+-            </Link>
+-            <Link href="/pricing" className="border-2 border-transparent px-2 py-1 transition-colors hover:border-white hover:text-white">
+-              Pricing
+-            </Link>
+-          </nav>
+-          <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 sm:text-xs">Built for top national ranks.</p>
+-        </div>
+-      </footer>
+-    </div>
+-    </MotionConfig>
+-  );
+-}
+--- a/src/app/pricing/layout.jsx
++++ b/src/app/pricing/layout.jsx
+@@ -1,17 +1,10 @@
+-export const metadata = {
+-  title: "Pricing – PrepZii Pro Plans",
+-  description:
+-    "Choose a PrepZii Pro plan and unlock unlimited mock tests, chapter-wise PYQs, AI explanations, formula books, and advanced analytics for JEE or NEET preparation.",
+-  openGraph: {
+-    title: "PrepZii Pro – Pricing Plans",
+-    description:
+-      "Unlock unlimited JEE & NEET prep with PrepZii Pro. Monthly, Quarterly, and Yearly plans available.",
+-    url: "/pricing",
+-  },
+-  alternates: {
+-    canonical: "/pricing",
+-  },
+-};
++import { publicMetadata } from "@/lib/seo.mjs";
++
++export const metadata = publicMetadata({
++  title: "Pricing and Pro Plans for JEE & NEET",
++  description: "Compare PrepZii plans for JEE and NEET practice, chapter-wise PYQs, mock tests and analytics. Review available features and access requirements.",
++  path: "/pricing",
++});
+ 
+ export default function PricingLayout({ children }) {
+   return children;
+--- a/src/app/robots.js
++++ b/src/app/robots.js
+@@ -1,71 +1,14 @@
+-/**
+- * Next.js App Router robots.js
+- * Generates /robots.txt at build time.
+- *
+- * Strategy:
+- *  - Allow public informational/marketing pages
+- *  - Disallow all authenticated/private areas and API routes
+- */
++import { ROBOTS_DISALLOW, SITE_URL } from "@/lib/seo.mjs";
++
+ export default function robots() {
+-  const baseUrl =
+-    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com";
+-
+   return {
+-    rules: [
+-      {
+-        userAgent: "*",
+-        allow: [
+-          "/",
+-          "/jee",
+-          "/jee/pyq",
+-          "/jee/mock-tests",
+-          "/neet",
+-          "/neet/pyq",
+-          "/neet/mock-tests",
+-          "/pricing",
+-          "/about",
+-          "/careers",
+-          "/contact",
+-          "/help",
+-          "/privacy",
+-          "/terms",
+-          "/subscriptions",
+-        ],
+-        disallow: [
+-          "/dashboard",
+-          "/dashboard/",
+-          "/test",
+-          "/test/",
+-          "/pyq",
+-          "/pyq/",
+-          "/analytics",
+-          "/analytics/",
+-          "/profile",
+-          "/profile/",
+-          "/community",
+-          "/community/",
+-          "/pro",
+-          "/pro/",
+-          "/history",
+-          "/history/",
+-          "/formula-books",
+-          "/formula-books/",
+-          "/admin",
+-          "/admin/",
+-          "/institute",
+-          "/institute/",
+-          "/onboarding",
+-          "/onboarding/",
+-          "/payment",
+-          "/payment/",
+-          "/notifications",
+-          "/notifications/",
+-          "/sign-in",
+-          "/sign-up",
+-          "/api/",
+-        ],
+-      },
+-    ],
+-    sitemap: `${baseUrl}/sitemap.xml`,
++    rules: [{
++      userAgent: "*",
++      // Public app entry points can be crawled to read their noindex tags.
++      // Authentication and authorization remain independent of robots.txt.
++      allow: "/",
++      disallow: ROBOTS_DISALLOW,
++    }],
++    sitemap: `${SITE_URL}/sitemap.xml`,
+   };
+ }
+--- a/src/app/sitemap.js
++++ b/src/app/sitemap.js
+@@ -1,92 +1,8 @@
+-/**
+- * Next.js App Router sitemap.js
+- * Generates /sitemap.xml at build time.
+- *
+- * Only public, non-authenticated pages are listed.
+- * Private dashboard/app routes are intentionally excluded.
+- *
+- * lastModified is intentionally omitted — hardcoded dates are inaccurate
+- * and Google ignores them when they don't match the HTTP Last-Modified header.
+- */
++import { PUBLIC_SITEMAP_PATHS, SITE_URL } from "@/lib/seo.mjs";
++
+ export default function sitemap() {
+-  const baseUrl =
+-    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com";
+-
+-  return [
+-    {
+-      url: baseUrl,
+-      changeFrequency: "monthly",
+-      priority: 1.0,
+-    },
+-    {
+-      url: `${baseUrl}/pricing`,
+-      changeFrequency: "monthly",
+-      priority: 0.9,
+-    },
+-    {
+-      url: `${baseUrl}/jee`,
+-      changeFrequency: "monthly",
+-      priority: 0.85,
+-    },
+-    {
+-      url: `${baseUrl}/neet`,
+-      changeFrequency: "monthly",
+-      priority: 0.85,
+-    },
+-    {
+-      url: `${baseUrl}/jee/pyq`,
+-      changeFrequency: "monthly",
+-      priority: 0.8,
+-    },
+-    {
+-      url: `${baseUrl}/neet/pyq`,
+-      changeFrequency: "monthly",
+-      priority: 0.8,
+-    },
+-    {
+-      url: `${baseUrl}/jee/mock-tests`,
+-      changeFrequency: "monthly",
+-      priority: 0.8,
+-    },
+-    {
+-      url: `${baseUrl}/neet/mock-tests`,
+-      changeFrequency: "monthly",
+-      priority: 0.8,
+-    },
+-    {
+-      url: `${baseUrl}/about`,
+-      changeFrequency: "yearly",
+-      priority: 0.7,
+-    },
+-    {
+-      url: `${baseUrl}/careers`,
+-      changeFrequency: "monthly",
+-      priority: 0.6,
+-    },
+-    {
+-      url: `${baseUrl}/contact`,
+-      changeFrequency: "yearly",
+-      priority: 0.6,
+-    },
+-    {
+-      url: `${baseUrl}/help`,
+-      changeFrequency: "monthly",
+-      priority: 0.7,
+-    },
+-    {
+-      url: `${baseUrl}/privacy`,
+-      changeFrequency: "yearly",
+-      priority: 0.4,
+-    },
+-    {
+-      url: `${baseUrl}/terms`,
+-      changeFrequency: "yearly",
+-      priority: 0.4,
+-    },
+-    {
+-      url: `${baseUrl}/subscriptions`,
+-      changeFrequency: "monthly",
+-      priority: 0.6,
+-    },
+-  ];
++  // No guessed lastModified dates or database access during sitemap builds.
++  return PUBLIC_SITEMAP_PATHS.map((path) => ({
++    url: new URL(path, SITE_URL).href,
++  }));
+ }
+--- /dev/null
++++ b/src/components/seo/PublicExamNavigation.jsx
+@@ -0,0 +1,35 @@
++import Link from "next/link";
++
++const resources = [
++  ["JEE Main", "/jee"],
++  ["NEET", "/neet"],
++  ["JEE PYQs", "/jee/pyq"],
++  ["NEET PYQs", "/neet/pyq"],
++  ["JEE mock tests", "/jee/mock-tests"],
++  ["NEET mock tests", "/neet/mock-tests"],
++  ["Pricing", "/pricing"],
++];
++
++export default function PublicExamNavigation({ mobileOnly = false }) {
++  return (
++    <>
++      {!mobileOnly && (
++        <nav aria-label="Public exam resources" className="hidden flex-wrap items-center justify-end gap-4 text-sm font-semibold text-secondary lg:flex">
++          {resources.map(([label, href]) => (
++            <Link key={href} href={href} className="hover:underline">{label}</Link>
++          ))}
++        </nav>
++      )}
++      <details className="relative text-sm font-semibold text-slate-900 lg:hidden">
++        <summary className="cursor-pointer rounded-lg border border-slate-300 bg-white px-3 py-3 focus-visible:outline-2 focus-visible:outline-offset-2">
++          Exam resources
++        </summary>
++        <nav aria-label="Mobile exam resources" className="absolute right-0 top-full z-50 mt-2 grid w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
++          {resources.map(([label, href]) => (
++            <Link key={href} href={href} className="rounded-md px-3 py-3 hover:bg-amber-50 focus-visible:bg-amber-50">{label}</Link>
++          ))}
++        </nav>
++      </details>
++    </>
++  );
++}
+--- a/src/components/seo/SeoLandingPage.jsx
++++ b/src/components/seo/SeoLandingPage.jsx
+@@ -11,6 +11,7 @@
+ } from "lucide-react";
+ 
+ import Logo from "@/components/Logo";
++import PublicExamNavigation from "./PublicExamNavigation";
+ import { buildBreadcrumbJsonLd } from "@/lib/seoLandingPages";
+ 
+ const featureIcons = [BookOpen, ClipboardList, Timer, LineChart];
+@@ -37,17 +38,7 @@
+         <Link href="/" aria-label="PrepZii home">
+           <Logo forceLight size={44} />
+         </Link>
+-        <nav aria-label="Public exam pages" className="hidden items-center gap-5 text-sm font-semibold text-secondary sm:flex">
+-          <Link href="/jee" className="transition-colors hover:text-brand-hover">
+-            JEE
+-          </Link>
+-          <Link href="/neet" className="transition-colors hover:text-brand-hover">
+-            NEET
+-          </Link>
+-          <Link href="/pricing" className="transition-colors hover:text-brand-hover">
+-            Pricing
+-          </Link>
+-        </nav>
++        <PublicExamNavigation />
+       </div>
+     </header>
+   );
+@@ -170,7 +161,7 @@
+       </div>
+       <h2 className="text-2xl font-black font-display tracking-tight text-foreground">Practice previews</h2>
+       <p className="mt-4 leading-7 text-secondary">
+-        Public pages do not expose private attempts, but the practice flow is organized around these safe, exam-focused paths.
++        Explore the subjects and practice options below. Full-paper PYQ practice is free with an account; chapter-wise practice requires Pro access.
+       </p>
+       <div className="mt-6 grid gap-4 lg:grid-cols-2">
+         <div className="rounded-2xl border border-border-subtle bg-[var(--background)] p-5">
+--- /dev/null
++++ b/src/lib/seo.mjs
+@@ -0,0 +1,51 @@
++// Search identity is independent of app/auth redirect environment variables.
++export const SITE_URL = "https://www.prepzii.com";
++export const INDEXABLE = { index: true, follow: true };
++export const NOINDEX = { index: false, follow: true };
++
++export function publicMetadata({ title, description, path }) {
++  const url = new URL(path, SITE_URL).href;
++  return {
++    title: { absolute: `${title} | PrepZii` },
++    description,
++    alternates: { canonical: url },
++    robots: INDEXABLE,
++    openGraph: {
++      type: "website",
++      siteName: "PrepZii",
++      title: `${title} | PrepZii`,
++      description,
++      url,
++      images: [{ url: `${SITE_URL}/images/branding/prepzii-logo-dark.png` }],
++    },
++    twitter: {
++      card: "summary_large_image",
++      title: `${title} | PrepZii`,
++      description,
++      images: [`${SITE_URL}/images/branding/prepzii-logo-dark.png`],
++    },
++  };
++}
++
++export function formulaExam(value) {
++  return String(value || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
++}
++
++export function formulaPath(subjectSlug, chapterSlug, exam = "JEE") {
++  const path = `/formula-cards/${encodeURIComponent(subjectSlug)}${chapterSlug ? `/${encodeURIComponent(chapterSlug)}` : ""}`;
++  // JEE is the existing default. NEET selects a distinct subject/deck.
++  return `${path}${formulaExam(exam) === "NEET" ? "?exam=NEET" : ""}`;
++}
++
++// Deliberately curated: no private routes or unreviewed deck expansion.
++export const PUBLIC_SITEMAP_PATHS = [
++  "/", "/pricing", "/jee", "/neet", "/jee/pyq", "/neet/pyq",
++  "/jee/mock-tests", "/neet/mock-tests", "/about", "/careers",
++  "/contact", "/help", "/privacy", "/terms",
++];
++
++export const ROBOTS_DISALLOW = [
++  "/api/", "/admin", "/institute", "/onboarding", "/subscriptions",
++  "/formula-books", "/test/", "/pyq/", "/analytics", "/profile",
++  "/battle", "/community/", "/payment", "/go/",
++];
+--- a/src/lib/seoLandingPages.js
++++ b/src/lib/seoLandingPages.js
+@@ -1,12 +1,12 @@
+-const SITE_URL = "https://www.prepzii.com";
++import { INDEXABLE, SITE_URL } from "./seo.mjs";
+ const OG_IMAGE = "/images/branding/prepzii-logo-dark.png";
+ 
+ export const SEO_PAGES = {
+   jee: {
+     path: "/jee",
+-    title: "JEE Preparation, PYQs & Mock Tests | PrepZii",
++    title: "JEE Main Preparation: PYQs, Mocks & Revision | PrepZii",
+     description:
+-      "Prepare for JEE Main with previous year questions, full-length mock tests, formula revision, chapter-wise practice, and performance analytics on PrepZii.",
++      "Explore JEE Main previous-year question practice, mock-test options and revision resources. Check available practice tools and access plans on PrepZii.",
+     h1: "JEE Preparation with PYQs, Mock Tests and Analytics",
+     eyebrow: "JEE Main preparation",
+     intro:
+@@ -15,7 +15,7 @@
+     parentPath: null,
+     breadcrumb: [{ name: "Home", path: "/" }, { name: "JEE", path: "/jee" }],
+     primaryCta: { label: "Start JEE Practice", href: "/go/jee/dashboard" },
+-    secondaryCta: { label: "View JEE PYQs", href: "/go/jee/pyq" },
++    secondaryCta: { label: "View JEE PYQs", href: "/jee/pyq" },
+     sections: [
+       {
+         title: "What JEE students can organize on PrepZii",
+@@ -43,13 +43,13 @@
+     linkCards: [
+       {
+         title: "JEE Main Previous Year Questions",
+-        href: "/go/jee/pyq",
++        href: "/jee/pyq",
+         description:
+           "Practice JEE Main PYQs by subject, chapter and year with focused review.",
+       },
+       {
+         title: "JEE Main Mock Tests",
+-        href: "/go/jee/mock-tests",
++        href: "/jee/mock-tests",
+         description:
+           "Take exam-style mock tests and review accuracy, speed and weak areas.",
+       },
+@@ -80,9 +80,9 @@
+   },
+   neet: {
+     path: "/neet",
+-    title: "NEET Preparation, PYQs & Mock Tests | PrepZii",
++    title: "NEET Preparation: PYQs, Mocks & Revision | PrepZii",
+     description:
+-      "Prepare for NEET with previous year questions, full-length mock tests, formula revision, chapter-wise practice, and performance analytics on PrepZii.",
++      "Explore NEET Physics, Chemistry and Biology practice, mock-test options and revision resources. Check available tools and access plans on PrepZii.",
+     h1: "NEET Preparation with PYQs, Mock Tests and Analytics",
+     eyebrow: "NEET preparation",
+     intro:
+@@ -91,7 +91,7 @@
+     parentPath: null,
+     breadcrumb: [{ name: "Home", path: "/" }, { name: "NEET", path: "/neet" }],
+     primaryCta: { label: "Start NEET Practice", href: "/go/neet/dashboard" },
+-    secondaryCta: { label: "View NEET PYQs", href: "/go/neet/pyq" },
++    secondaryCta: { label: "View NEET PYQs", href: "/neet/pyq" },
+     sections: [
+       {
+         title: "A focused NEET practice workspace",
+@@ -119,13 +119,13 @@
+     linkCards: [
+       {
+         title: "NEET Previous Year Questions",
+-        href: "/go/neet/pyq",
++        href: "/neet/pyq",
+         description:
+           "Practice NEET PYQs by year and chapter across Physics, Chemistry and Biology.",
+       },
+       {
+         title: "NEET Mock Tests",
+-        href: "/go/neet/mock-tests",
++        href: "/neet/mock-tests",
+         description:
+           "Take full-length NEET mock tests and review accuracy, speed and weak chapters.",
+       },
+@@ -158,7 +158,7 @@
+     path: "/jee/pyq",
+     title: "JEE Main Previous Year Questions (PYQs) | PrepZii",
+     description:
+-      "Practice JEE Main previous year questions by subject, chapter, and year with focused practice tools and performance tracking on PrepZii.",
++      "Explore JEE Main previous-year question practice by paper, subject and chapter. Learn how practice works and check access options on PrepZii.",
+     h1: "JEE Main Previous Year Questions (PYQs)",
+     eyebrow: "JEE PYQ practice",
+     intro:
+@@ -237,7 +237,7 @@
+     path: "/neet/pyq",
+     title: "NEET Previous Year Questions (PYQs) | PrepZii",
+     description:
+-      "Practice NEET previous year questions for Physics, Chemistry, and Biology by year and chapter with PrepZii.",
++      "Explore NEET previous-year question practice for Physics, Chemistry and Biology. Learn about paper and chapter practice and check access options.",
+     h1: "NEET Previous Year Questions (PYQs)",
+     eyebrow: "NEET PYQ practice",
+     intro:
+@@ -314,9 +314,9 @@
+   },
+   jeeMockTests: {
+     path: "/jee/mock-tests",
+-    title: "JEE Main Mock Tests & Full-Length Practice | PrepZii",
++    title: "JEE Main Mock Tests: Practice & Review | PrepZii",
+     description:
+-      "Take JEE Main mock tests in a realistic exam-style environment and review accuracy, speed, weak chapters, and performance on PrepZii.",
++      "Explore JEE Main mock-test practice, timing and review features on PrepZii. Full-length mock tests require Pro access; compare plans before starting.",
+     h1: "JEE Main Mock Tests and Full-Length Practice",
+     eyebrow: "JEE mock tests",
+     intro:
+@@ -385,9 +385,9 @@
+   },
+   neetMockTests: {
+     path: "/neet/mock-tests",
+-    title: "NEET Mock Tests & Full-Length Practice | PrepZii",
++    title: "NEET Mock Tests: Practice & Review | PrepZii",
+     description:
+-      "Take full-length NEET mock tests with exam-style practice, detailed review, accuracy tracking, and performance analytics on PrepZii.",
++      "Explore NEET mock-test practice, subject coverage and review features on PrepZii. Full-length mock tests require Pro access; compare plans before starting.",
+     h1: "NEET Mock Tests and Full-Length Practice",
+     eyebrow: "NEET mock tests",
+     intro:
+@@ -462,8 +462,9 @@
+       absolute: page.title,
+     },
+     description: page.description,
++    robots: INDEXABLE,
+     alternates: {
+-      canonical: page.path,
++      canonical: new URL(page.path, SITE_URL).href,
+     },
+     openGraph: {
+       type: "website",
+--- /dev/null
++++ b/src/lib/tests/seo.test.mjs
+@@ -0,0 +1,59 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { formulaExam, formulaPath, INDEXABLE, publicMetadata, PUBLIC_SITEMAP_PATHS, ROBOTS_DISALLOW, SITE_URL } from "../seo.mjs";
++import { buildLandingMetadata, SEO_PAGES } from "../seoLandingPages.js";
++
++test("canonical identity ignores preview/local app configuration", () => {
++  const previous = process.env.NEXT_PUBLIC_APP_URL;
++  try {
++    process.env.NEXT_PUBLIC_APP_URL = "http://localhost:3000";
++    const metadata = publicMetadata({ title: "Physics revision", description: "Study cards", path: "/formula-cards/physics" });
++    assert.equal(metadata.alternates.canonical, "https://www.prepzii.com/formula-cards/physics");
++    assert.equal(metadata.openGraph.url, metadata.alternates.canonical);
++    assert.equal(metadata.title.absolute, "Physics revision | PrepZii");
++    assert.deepEqual(metadata.robots, INDEXABLE);
++  } finally {
++    if (previous === undefined) delete process.env.NEXT_PUBLIC_APP_URL;
++    else process.env.NEXT_PUBLIC_APP_URL = previous;
++  }
++});
++
++test("formula canonicalization retains distinct NEET resources and consolidates the JEE default", () => {
++  assert.equal(formulaExam(undefined), "JEE");
++  assert.equal(formulaExam("neet"), "NEET");
++  assert.equal(formulaExam("unknown"), "JEE");
++  assert.equal(formulaPath("physics", null, "JEE"), "/formula-cards/physics");
++  assert.equal(formulaPath("physics", "unit-and-dimensions", "NEET"), "/formula-cards/physics/unit-and-dimensions?exam=NEET");
++  assert.equal(formulaPath("biology", null, "NEET"), "/formula-cards/biology?exam=NEET");
++});
++
++test("sitemap excludes account, application and unreviewed resources", () => {
++  assert.equal(new Set(PUBLIC_SITEMAP_PATHS).size, PUBLIC_SITEMAP_PATHS.length);
++  for (const path of PUBLIC_SITEMAP_PATHS) {
++    assert.equal(new URL(path, SITE_URL).origin, SITE_URL);
++    assert.doesNotMatch(path, /^\/(subscriptions|admin|api|test|pyq|dashboard|payment|formula-books|formula-cards)(\/|$)/);
++    assert.ok(!ROBOTS_DISALLOW.some((blocked) => path.startsWith(blocked)));
++  }
++});
++
++test("robots permits harmless app entry points to expose noindex while blocking private descendants", () => {
++  for (const path of ["/dashboard", "/test", "/pyq", "/pro", "/history", "/notifications", "/zi", "/sign-in", "/sign-up"]) {
++    assert.ok(!ROBOTS_DISALLOW.some((blocked) => path.startsWith(blocked)), path);
++  }
++  for (const path of ["/test/session", "/pyq/session", "/admin", "/institute", "/subscriptions", "/api/profile"]) {
++    assert.ok(ROBOTS_DISALLOW.some((blocked) => path.startsWith(blocked)), path);
++  }
++});
++
++test("exam discovery links are public and actual practice CTAs retain the track redirect", () => {
++  for (const page of Object.values(SEO_PAGES)) {
++    const metadata = buildLandingMetadata(page);
++    assert.equal(metadata.alternates.canonical, new URL(page.path, SITE_URL).href);
++    assert.deepEqual(metadata.robots, INDEXABLE);
++    assert.equal((metadata.title.absolute.match(/PrepZii/g) || []).length, 1);
++    assert.match(page.primaryCta.href, /^\/go\/(jee|neet)\//);
++    for (const card of page.linkCards || []) assert.ok(!card.href.startsWith("/go/"));
++  }
++  assert.equal(SEO_PAGES.jee.secondaryCta.href, "/jee/pyq");
++  assert.equal(SEO_PAGES.neet.secondaryCta.href, "/neet/pyq");
++});

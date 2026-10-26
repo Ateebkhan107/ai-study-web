@@ -14,43 +14,22 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import WebAwesomeProvider from "@/components/ui/web-awesome-provider";
 import Script from "next/script";
+import { SITE_URL } from "@/lib/seo.mjs";
 
-import { Rajdhani, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import fontStyles from "./fonts/root.module.css";
+import fontPreloads from "./fonts/preloads.json";
 
-const displayFont = Rajdhani({
-  variable: "--font-rajdhani",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const sansFont = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const monoFont = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const displayFont = { variable: fontStyles.display };
+const sansFont = { variable: fontStyles.sans };
+const monoFont = { variable: fontStyles.mono };
 
 export const metadata = {
-  // Resolves all relative URLs in OG images etc. against this base.
-  // Change to your production domain before deploying.
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://www.prepzii.com"
-  ),
+  // Canonical search identity must not depend on local or preview app URLs.
+  metadataBase: new URL(SITE_URL),
 
   title: {
     default: "PrepZii",
     template: "%s | PrepZii",
-  },
-
-  alternates: {
-    canonical: "/",
   },
 
   description:
@@ -95,11 +74,12 @@ export const metadata = {
     images: ["/images/branding/prepzii-logo-dark.png"],
   },
 
+  // Public resources opt in at their leaf. Account/app views default to noindex.
   robots: {
-    index: true,
+    index: false,
     follow: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
@@ -346,6 +326,9 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className="h-full"
     >
+      <head>
+        {fontPreloads.root.map(href => <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />)}
+      </head>
       <body
         suppressHydrationWarning
         className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} font-sans min-h-full flex flex-col antialiased`}

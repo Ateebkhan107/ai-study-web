@@ -4,7 +4,7 @@ import PageWrapper from "@/components/PageWrapper";
 import DMInbox from "@/components/community/DMInbox";
 
 export const metadata = {
-  title: "Messages — PrepZii Community",
+  title: { absolute: "Messages — PrepZii Community" },
 };
 
 export default async function MessagesPage() {

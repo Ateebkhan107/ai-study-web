@@ -5,7 +5,7 @@ import CommunityHub from "@/components/community/CommunityHub";
 import { listCommunityGroupsForUser } from "@/services/community.server";
 
 export const metadata = {
-  title: "Study Community — PrepZii",
+  title: { absolute: "Study Community — PrepZii" },
   description: "Connect with JEE and NEET aspirants. Join study groups, chat, and collaborate.",
 };
 

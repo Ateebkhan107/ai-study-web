@@ -2,15 +2,10 @@
 
 import { useEffect } from "react";
 import posthog from "posthog-js";
-import { Space_Grotesk } from "next/font/google";
+import fontStyles from "./fonts/root.module.css";
 import "./globals.css";
 
-const sansFont = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
+const sansFont = { variable: fontStyles.sans };
 
 export default function GlobalError({ error, reset }) {
   useEffect(() => {

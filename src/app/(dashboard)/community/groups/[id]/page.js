@@ -5,7 +5,7 @@ import { getDisplayNameFromClaims } from "@/lib/auth";
 import { getCommunityGroupForUser, listCommunityGroupsForUser } from "@/services/community.server";
 
 export const metadata = {
-  title: "Study Group — PrepZii Community",
+  title: { absolute: "Study Group — PrepZii Community" },
 };
 
 export default async function GroupDetailPage({ params }) {

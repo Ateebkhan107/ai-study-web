@@ -1,8 +1,9 @@
+import { integrityEnabled, commitBank } from "@/lib/integrity.server.mjs";
+import { reconcileGoalRewards } from "@/lib/goalRewards.mjs";
 import { auth } from "@clerk/nextjs/server";
 import { after, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getQuestions } from "@/lib/questions";
-import { getLevelFromXP } from "@/utils/levelEngine";
 import { getQuestionMarking } from "@/lib/analyticsHelpers";
 import { getInstituteContext } from "@/lib/instituteAuth";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
@@ -161,213 +162,9 @@ async function loadInstituteTest({ slug, testId, userId }) {
   };
 }
 
-async function addXpWithAdmin(userId, amount, name = "Student", stats = {}) {
-  if (!userId || amount <= 0) {
-    return null;
-  }
-
-  const { data, error } = await supabaseAdmin
-    .from("user_xp")
-    .select("*")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (error) {
-    throw error;
-  }
-
-  const newXP = (data?.xp || 0) + amount;
-  const levelStats = getLevelFromXP(newXP);
-
-  const badgeTitle = levelStats.title;
-
-  const { error: updateError } = await supabaseAdmin
-    .from("user_xp")
-    .upsert(
-      {
-        user_id: userId,
-        name: data?.name || name,
-        xp: newXP,
-        level: levelStats.currentLevel,
-        badge: badgeTitle,
-        ...stats,
-      },
-      {
-        onConflict: "user_id",
-      }
-    );
-
-  if (updateError) {
-    throw updateError;
-  }
-
-  return {
-    xp: newXP,
-    level: levelStats.currentLevel,
-    badge: badgeTitle,
-  };
-}
-
-async function updateStreakWithAdmin(userId) {
-  if (!userId) return;
-
-  const today = new Date();
-  const todayString = today.toISOString().split("T")[0];
-
-  const { data: userData, error } = await supabaseAdmin
-    .from("user_xp")
-    .select("streak, last_study_date")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (error) {
-    throw error;
-  }
-
-  const currentStreak = userData?.streak || 0;
-  const lastStudyDate = userData?.last_study_date;
-
-  if (lastStudyDate === todayString) {
-    return;
-  }
-
-  let newStreak = 1;
-
-  if (lastStudyDate) {
-    const last = new Date(lastStudyDate);
-    const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 1) {
-      newStreak = currentStreak + 1;
-    }
-  }
-
-  const { error: updateError } = await supabaseAdmin
-    .from("user_xp")
-    .upsert(
-      {
-        user_id: userId,
-        streak: newStreak,
-        last_study_date: todayString,
-      },
-      {
-        onConflict: "user_id",
-      }
-    );
-
-  if (updateError) {
-    throw updateError;
-  }
-}
-
-async function updateGoalProgressWithAdmin(userId, goalType, amount, name) {
-  if (!userId || !goalType) return;
-
-  const today = new Date().toISOString().split("T")[0];
-
-  const { data: goals, error } = await supabaseAdmin
-    .from("daily_goals")
-    .select("*")
-    .eq("is_active", true)
-    .eq("goal_type", goalType);
-
-  if (error) {
-    throw error;
-  }
-
-  for (const goal of goals || []) {
-    const { data: existing, error: existingError } = await supabaseAdmin
-      .from("user_daily_goals")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("goal_id", goal.id)
-      .maybeSingle();
-
-    if (existingError) {
-      throw existingError;
-    }
-
-    let newProgress = amount;
-    let isNewDay = false;
-
-    if (existing) {
-      if (existing.goal_date === today) {
-        newProgress = (existing.progress || 0) + amount;
-      } else {
-        isNewDay = true;
-      }
-    }
-
-    const completed = newProgress >= goal.target_value;
-
-    if (existing) {
-      const { error: updateError } = await supabaseAdmin
-        .from("user_daily_goals")
-        .update({
-          goal_date: today,
-          progress: newProgress,
-          completed,
-          completed_at:
-            completed && (!existing.completed || isNewDay)
-              ? new Date().toISOString()
-              : existing.completed_at,
-        })
-        .eq("id", existing.id);
-
-      if (updateError) {
-        throw updateError;
-      }
-    } else {
-      const { error: insertError } = await supabaseAdmin
-        .from("user_daily_goals")
-        .insert({
-          user_id: userId,
-          goal_id: goal.id,
-          goal_date: today,
-          progress: newProgress,
-          completed,
-          completed_at: completed ? new Date().toISOString() : null,
-        });
-
-      if (insertError) {
-        throw insertError;
-      }
-    }
-
-    if (completed && (!existing?.completed || isNewDay)) {
-      await addXpWithAdmin(userId, goal.xp, name);
-    }
-  }
-}
-
-async function runPostSubmitProgressUpdates({ userId, correct, questionCount, name }) {
-  try {
-    const { data: xpRowBefore, error: xpRowBeforeError } = await supabaseAdmin
-      .from("user_xp")
-      .select("pyq_solved, correct_answers")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    if (xpRowBeforeError) {
-      throw xpRowBeforeError;
-    }
-
-    const newSolved = (xpRowBefore?.pyq_solved || 0) + questionCount;
-    const newCorrect = (xpRowBefore?.correct_answers || 0) + correct;
-    const newAccuracy = newSolved > 0 ? Math.round((newCorrect / newSolved) * 100) : 0;
-
-    await updateStreakWithAdmin(userId);
-
-    await addXpWithAdmin(userId, correct * 15, name, {
-      pyq_solved: newSolved,
-      correct_answers: newCorrect,
-      accuracy: newAccuracy,
-    });
-
-    await updateGoalProgressWithAdmin(userId, "TEST", 1, name);
-  } catch (error) {
-    console.error("[TEST_SESSION_POST_SUBMIT_PROGRESS_ERROR]", error);
-  }
+async function runPostSubmitProgressUpdates({ userId }) {
+  // Compatibility callback: authoritative base XP/streak already commits in DB.
+  await reconcileGoalRewards(supabaseAdmin, userId);
 }
 
 export async function POST(request) {
@@ -668,7 +465,7 @@ export async function PUT(request) {
         );
       }
 
-      const previousAttemptId = await findCompletedBankAttempt({
+      const previousAttemptId = integrityEnabled() ? null : await findCompletedBankAttempt({
         client: supabaseAdmin, userId, sessionId, questionIds: questionRows.map((row) => row.id),
       });
       if (previousAttemptId) {
@@ -744,6 +541,11 @@ export async function PUT(request) {
         0,
         Math.min(Math.floor((Date.now() - Date.parse(session.started_at)) / 1000) || 0, (session.duration_minutes || 0) * 60)
       );
+
+      if (integrityEnabled()) {
+        const result = await commitBank(supabaseAdmin, userId, sessionId, answerRows);
+        return NextResponse.json({ attemptId: result.attemptId }, { headers: { "Cache-Control": "no-store" } });
+      }
 
       // Activate only after the reviewed migration is applied. Legacy deployments
       // remain compatible while migrations await approval.

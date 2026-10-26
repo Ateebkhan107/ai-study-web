@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { recordFormulaAccess } from "@/lib/goalRewards.mjs";
 
 export async function GET(request, { params }) {
   const { userId } = await auth();
@@ -38,5 +40,11 @@ export async function GET(request, { params }) {
     );
   }
 
-  return NextResponse.json(data);
+  try {
+    await recordFormulaAccess(supabaseAdmin, userId, data.id);
+  } catch {
+    // Preserve access; never claim progress/XP after failed event persistence.
+    console.error("[FORMULA_ACTIVITY_PENDING]");
+  }
+  return NextResponse.json(data, { headers: { "Cache-Control": "private, no-store" } });
 }

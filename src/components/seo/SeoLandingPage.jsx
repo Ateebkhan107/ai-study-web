@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import Logo from "@/components/Logo";
+import PublicExamNavigation from "./PublicExamNavigation";
 import { buildBreadcrumbJsonLd } from "@/lib/seoLandingPages";
 
 const featureIcons = [BookOpen, ClipboardList, Timer, LineChart];
@@ -37,17 +38,7 @@ function PageHeader() {
         <Link href="/" aria-label="PrepZii home">
           <Logo forceLight size={44} />
         </Link>
-        <nav aria-label="Public exam pages" className="hidden items-center gap-5 text-sm font-semibold text-secondary sm:flex">
-          <Link href="/jee" className="transition-colors hover:text-brand-hover">
-            JEE
-          </Link>
-          <Link href="/neet" className="transition-colors hover:text-brand-hover">
-            NEET
-          </Link>
-          <Link href="/pricing" className="transition-colors hover:text-brand-hover">
-            Pricing
-          </Link>
-        </nav>
+        <PublicExamNavigation />
       </div>
     </header>
   );
@@ -170,7 +161,7 @@ function PyqPreview({ page }) {
       </div>
       <h2 className="text-2xl font-black font-display tracking-tight text-foreground">Practice previews</h2>
       <p className="mt-4 leading-7 text-secondary">
-        Public pages do not expose private attempts, but the practice flow is organized around these safe, exam-focused paths.
+        Explore the subjects and practice options below. Full-paper PYQ practice is free with an account; chapter-wise practice requires Pro access.
       </p>
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-border-subtle bg-[var(--background)] p-5">

@@ -1,0 +1,193 @@
+▲ Next.js 16.3.0 (webpack)
+✓ Running next.config.mjs took 5ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 13.7s
+  Running TypeScript ...
+  Finished TypeScript in 4ms ...
+  Collecting page data using 9 workers ...
+  Generating static pages using 9 workers (0/121) ...
+  Generating static pages using 9 workers (30/121) 
+  Generating static pages using 9 workers (60/121) 
+  Generating static pages using 9 workers (90/121) 
+✓ Generating static pages using 9 workers (121/121) in 337ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /about
+├ ƒ /admin
+├ ƒ /admin/analytics
+├ ƒ /admin/badges
+├ ƒ /admin/community
+├ ƒ /admin/exams
+├ ƒ /admin/goals
+├ ƒ /admin/images
+├ ƒ /admin/import
+├ ƒ /admin/imports
+├ ƒ /admin/imports/[id]
+├ ƒ /admin/imports/[id]/review
+├ ƒ /admin/mock-tests
+├ ƒ /admin/notifications
+├ ƒ /admin/questions
+├ ƒ /admin/reviews
+├ ƒ /admin/settings
+├ ƒ /admin/solutions
+├ ƒ /admin/students
+├ ƒ /analytics
+├ ƒ /api/access
+├ ƒ /api/admin/badges
+├ ƒ /api/admin/community/moderate
+├ ƒ /api/admin/community/reports
+├ ƒ /api/admin/dashboard-stats
+├ ƒ /api/admin/exams
+├ ƒ /api/admin/goals
+├ ƒ /api/admin/import-packages
+├ ƒ /api/admin/import-packages/[id]
+├ ƒ /api/admin/notifications
+├ ƒ /api/admin/pyq
+├ ƒ /api/admin/pyq-upload
+├ ƒ /api/admin/pyq/image
+├ ƒ /api/admin/single-pyq
+├ ƒ /api/admin/students
+├ ƒ /api/admin/upload-image
+├ ƒ /api/analytics
+├ ƒ /api/battle/challenges
+├ ƒ /api/battle/challenges/[id]
+├ ƒ /api/battle/champion
+├ ƒ /api/battle/feed
+├ ƒ /api/battle/history
+├ ƒ /api/battle/leaderboard
+├ ƒ /api/battle/matches/[id]
+├ ƒ /api/battle/matches/[id]/answers
+├ ƒ /api/battle/matches/[id]/finish
+├ ƒ /api/battle/matches/[id]/rematch
+├ ƒ /api/battle/queue
+├ ƒ /api/chapters
+├ ƒ /api/community/blocks
+├ ƒ /api/community/direct/conversations
+├ ƒ /api/community/direct/conversations/[id]/messages
+├ ƒ /api/community/direct/conversations/[id]/messages/[msgId]
+├ ƒ /api/community/direct/requests
+├ ƒ /api/community/direct/requests/[id]
+├ ƒ /api/community/groups
+├ ƒ /api/community/groups/[id]
+├ ƒ /api/community/groups/[id]/join
+├ ƒ /api/community/groups/[id]/leave
+├ ƒ /api/community/groups/[id]/members
+├ ƒ /api/community/groups/[id]/messages
+├ ƒ /api/community/groups/[id]/messages/[msgId]
+├ ƒ /api/community/groups/[id]/requests
+├ ƒ /api/community/reports
+├ ƒ /api/daily-goals
+├ ƒ /api/dashboard-stats
+├ ƒ /api/explain
+├ ƒ /api/formula-books
+├ ƒ /api/formula-books/[id]
+├ ƒ /api/institutes
+├ ƒ /api/institutes/[slug]
+├ ƒ /api/institutes/[slug]/batches
+├ ƒ /api/institutes/[slug]/questions
+├ ƒ /api/institutes/[slug]/students
+├ ƒ /api/institutes/[slug]/tests
+├ ƒ /api/institutes/[slug]/tests/[testId]
+├ ƒ /api/institutes/[slug]/tests/[testId]/import-csv
+├ ƒ /api/institutes/[slug]/tests/[testId]/publish
+├ ƒ /api/institutes/[slug]/tests/[testId]/questions
+├ ƒ /api/institutes/[slug]/tests/[testId]/results
+├ ƒ /api/institutes/[slug]/upload-image
+├ ƒ /api/notifications
+├ ƒ /api/payment/create-order
+├ ƒ /api/payment/verify
+├ ƒ /api/profile
+├ ƒ /api/profile/badges
+├ ƒ /api/profile/update
+├ ƒ /api/pyq
+├ ƒ /api/pyq-answers
+├ ƒ /api/pyq-attempts
+├ ƒ /api/pyq-bookmarks
+├ ƒ /api/pyq/analytics
+├ ƒ /api/pyq/chapters
+├ ƒ /api/pyq/leaderboard
+├ ƒ /api/pyq/overview
+├ ƒ /api/pyq/papers
+├ ƒ /api/study-sessions/recent
+├ ƒ /api/subscription
+├ ƒ /api/test-attempts
+├ ƒ /api/test-attempts/[id]
+├ ƒ /api/test-attempts/[id]/review
+├ ƒ /api/test-attempts/[id]/zi-review
+├ ƒ /api/test-db
+├ ƒ /api/test-session
+├ ƒ /api/test/practice-availability
+├ ƒ /api/update
+├ ƒ /api/user/tour-complete
+├ ƒ /api/username/availability
+├ ƒ /api/users/search
+├ ƒ /api/webhooks/clerk
+├ ƒ /api/zi/chat
+├ ƒ /api/zi/memories
+├ ƒ /api/zi/preferences
+├ ƒ /api/zi/transcribe
+├ ƒ /battle
+├ ƒ /battle/[id]
+├ ƒ /careers
+├ ƒ /community
+├ ƒ /community/groups/[id]
+├ ƒ /community/groups/new
+├ ƒ /community/messages
+├ ƒ /community/messages/[id]
+├ ƒ /contact
+├ ƒ /dashboard
+├ ƒ /feedback
+├ ƒ /formula-books/[id]
+├ ƒ /formula-cards
+├ ƒ /formula-cards/[subjectSlug]
+├ ƒ /formula-cards/[subjectSlug]/[chapterSlug]
+├ ƒ /go/[track]/[destination]
+├ ƒ /help
+├ ƒ /history
+├ ƒ /institute
+├ ƒ /institute/[slug]
+├ ƒ /institute/[slug]/tests/[testId]/edit
+├ ○ /jee
+├ ○ /jee/mock-tests
+├ ○ /jee/pyq
+├ ○ /neet
+├ ○ /neet/mock-tests
+├ ○ /neet/pyq
+├ ○ /notifications
+├ ƒ /onboarding
+├ ○ /payment/failed
+├ ○ /payment/return
+├ ○ /payment/success
+├ ○ /pricing
+├ ƒ /privacy
+├ ƒ /pro
+├ ƒ /profile
+├ ƒ /pyq
+├ ƒ /pyq/session
+├ ƒ /pyq/session/results
+├ ƒ /report-bug
+├ ○ /robots.txt
+├ ƒ /sign-in/[[...sign-in]]
+├ ƒ /sign-up/[[...sign-up]]
+├ ○ /sitemap.xml
+├ ƒ /subscriptions
+├ ƒ /terms
+├ ƒ /test
+├ ƒ /test/history
+├ ƒ /test/result/[id]
+├ ƒ /test/review
+├ ƒ /test/review/[id]
+├ ƒ /test/session
+└ ƒ /zi
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

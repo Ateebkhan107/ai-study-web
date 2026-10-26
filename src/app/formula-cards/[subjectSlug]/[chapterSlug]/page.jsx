@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cache } from "react";
+import { formulaExam, formulaPath, NOINDEX, publicMetadata } from "@/lib/seo.mjs";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import FormulaCardDeck from "@/components/formula-cards/FormulaCardDeck";
@@ -6,11 +8,30 @@ import { getFormulaChapterDeck } from "@/lib/formulaCards";
 
 export const dynamic = "force-dynamic";
 
+const loadDeck = cache(getFormulaChapterDeck);
+
+export async function generateMetadata({ params, searchParams }) {
+  const { subjectSlug, chapterSlug } = await params;
+  const query = await searchParams;
+  const { subject, chapter, cards } = await loadDeck(subjectSlug, chapterSlug, formulaExam(query?.exam));
+  if (!subject || !chapter) return { robots: NOINDEX };
+
+  const resource = subject.name === "Biology" ? "Revision Cards" : "Formula Cards";
+  return {
+    ...publicMetadata({
+      title: `${chapter.title} ${resource} for ${subject.exam}`,
+      description: `Revise ${chapter.title} with ${subject.name} study cards for ${subject.exam}. Explore available formulas, definitions and concept checks on PrepZii.`,
+      path: formulaPath(subject.slug, chapter.slug, subject.exam),
+    }),
+    ...(cards.length ? {} : { robots: NOINDEX }),
+  };
+}
+
 export default async function FormulaDeckPage({ params, searchParams }) {
   const { subjectSlug, chapterSlug } = await params;
   const query = await searchParams;
-  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
-  const { subject, chapter, cards } = await getFormulaChapterDeck(subjectSlug, chapterSlug, exam);
+  const exam = formulaExam(query?.exam);
+  const { subject, chapter, cards } = await loadDeck(subjectSlug, chapterSlug, exam);
 
   if (!subject || !chapter) notFound();
 

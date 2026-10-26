@@ -15,6 +15,21 @@ test("natural request infers subject/topic and uses exam preference without Gemi
   assert.match(a.config.chapter, /Rotational Motion/); assert.equal(a.preferenceUsed, true);
   assert.deepEqual(a.missing, ["difficulty", "questionCount", "mode"]);
 });
+test("noun-first Hinglish test request opens a draft and retains leading count", () => {
+  for (const text of ["10 Rotational Motion questions ka test generate kro", "10 Rotational Motion questions ka test banao", "Rotational Motion test generate karo with 10 questions"]) {
+    assert.equal(parseBuilderText(text).handled, true);
+    const a = run({ text });
+    assert.equal(a.config.questionCount, 10); assert.equal(a.config.subject, "Physics");
+    assert.match(a.config.chapter, /Rotational Motion$/); assert.equal(a.config.topic, "Rotational Motion"); assert.equal(a.config.exam, "JEE Main");
+    assert.equal(a.confirmed, false); assert.deepEqual(a.missing, ["difficulty", "mode"]);
+  }
+});
+test("noun-first recognition preserves count limits and official-bank/tutor routing", () => {
+  for (const count of [0, 31, 10.5, -10]) assert.match(run({ text: `${count} Rotational Motion questions ka test generate kro` }).errors.join(), /5 to 30/);
+  assert.equal(run({ text: "Explain Rotational Motion" }), null);
+  assert.equal(run({ text: "10 official PYQ questions ka test generate kro" }), null);
+  assert.equal(parseBuilderText("My test was difficult yesterday").handled, false);
+});
 test("complete natural request captures every supplied detail", () => {
   const a = run({ text: "Generate 20 difficult JEE Main questions on Electrostatics in a timed test for 40 minutes" });
   assert.equal(a.config.questionCount, 20); assert.equal(a.config.difficulty, "Hard");

@@ -5,7 +5,7 @@ import PageWrapper from "@/components/PageWrapper";
 import CreateGroupForm from "@/components/community/CreateGroupForm";
 
 export const metadata = {
-  title: "Create Study Group — PrepZii Community",
+  title: { absolute: "Create Study Group — PrepZii Community" },
 };
 
 export default async function NewGroupPage() {

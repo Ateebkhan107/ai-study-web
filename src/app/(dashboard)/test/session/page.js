@@ -410,6 +410,8 @@ function TestSessionContent() {
   const isPractice = isGenerated && generatedMode === "practice";
   const [loadError, setLoadError] = useState("");
   const [saveError, setSaveError] = useState("");
+  const [savedSnapshot, setSavedSnapshot] = useState(null);
+  const [submissionError, setSubmissionError] = useState("");
   const answerQueueRef = useRef(null);
   const clockRef = useRef(null);
 
@@ -480,6 +482,7 @@ function TestSessionContent() {
           clockRef.current = { initial: data.deadlineAt ? Math.max(0, (Date.parse(data.deadlineAt) - Date.parse(data.serverNow)) / 1000) : null, loadedAt: performance.now() };
           answerQueueRef.current = createGeneratedAnswerQueue({ sessionId: nextSessionId, revision: data.revision });
           setTimeLeft(clockRef.current.initial === null ? null : Math.ceil(clockRef.current.initial));
+          setSavedSnapshot(JSON.stringify(data.answers || {}));
         } else setTimeLeft(durationParam * 60);
         setSessionId(nextSessionId);
         setAnswers(isGenerated ? data.answers || {} : {});
@@ -498,14 +501,15 @@ function TestSessionContent() {
   }, [markedForReview, sessionId]);
 
   useEffect(() => {
-    if (!isGenerated || !sessionId || finishing || !answerQueueRef.current) return;
+    if (!isGenerated || !sessionId || finishing || submissionError || !answerQueueRef.current) return;
     const timeout = setTimeout(() => {
       answerQueueRef.current.save(answers).then((data) => {
+        setSavedSnapshot(JSON.stringify(answers));
         if (data.expired) submitRef.current?.();
       }).catch((error) => setSaveError(error.message));
     }, 250);
     return () => clearTimeout(timeout);
-  }, [answers, sessionId, isGenerated, finishing]);
+  }, [answers, sessionId, isGenerated, finishing, submissionError]);
 
   const handleSubmit = useCallback(async () => {
     if (submitInFlightRef.current) return;
@@ -524,6 +528,14 @@ function TestSessionContent() {
       router.replace(`/test/result/${data.attemptId}${isGenerated ? "?sourceType=AI_GENERATED" : ""}`);
     } catch (err) {
       console.error("SAVE ERROR", err);
+      if (isGenerated) {
+        // An unknown save/submit acknowledgement requires server reconciliation.
+        // Stop automatic expiry retries; reload/start resolves committed state.
+        clearInterval(timerRef.current);
+        setSubmissionError(err.message || "Submission could not be confirmed.");
+        setFinishing(false);
+        return;
+      }
       if (!isGenerated && err.status === 409) {
         // A partial/conflicting historical submission needs review. Keep the
         // submit latch closed so an expired timer cannot repeatedly retry it.
@@ -543,7 +555,7 @@ function TestSessionContent() {
 
   // 4. Timer Logic
   useEffect(() => {
-    if (questions.length === 0 || finishing || isPractice) return;
+    if (questions.length === 0 || finishing || isPractice || submissionError) return;
     timerRef.current = setInterval(() => {
       if (isGenerated && clockRef.current?.initial !== null) {
         const remaining = Math.max(0, Math.ceil(clockRef.current.initial - (performance.now() - clockRef.current.loadedAt) / 1000));
@@ -561,7 +573,7 @@ function TestSessionContent() {
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [questions.length, finishing, isPractice, isGenerated]);
+  }, [questions.length, finishing, isPractice, isGenerated, submissionError]);
 
   // 5. Handlers
   const handleSelect = useCallback((question, optIdx) => {
@@ -752,7 +764,7 @@ function TestSessionContent() {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={finishing}
+              disabled={finishing || (isGenerated && Boolean(saveError || submissionError))}
               aria-busy={finishing}
               className="prepzii-interactive inline-flex min-w-[92px] items-center justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-slate-950 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[132px] sm:px-6"
             >
@@ -770,16 +782,23 @@ function TestSessionContent() {
       </header>
 
       {isGenerated ? (
-        <p className="px-4 pt-3 text-xs text-slate-500">
-          {isPractice
+        <div className="px-4 pt-3 text-xs text-slate-500">
+          <p>{isPractice
             ? "AI-generated practice · Untimed. Answers save automatically."
-            : "AI-generated practice. Answers save automatically; when time expires, your latest saved answers count."}
-        </p>
+            : "AI-generated practice. Answers save automatically; when time expires, your latest saved answers count."}</p>
+          <p role="status" className="mt-1">{saveError || submissionError ? "Saving paused. Reload to reconcile server state." : savedSnapshot === JSON.stringify(answers) ? "Answers saved. Safe to refresh." : "Saving answers… Wait for confirmation before refreshing."}</p>
+        </div>
       ) : null}
       {saveError ? (
         <p role="alert" className="px-4 py-2 text-sm text-red-600">
           {saveError} Reload to resume your saved answers.
         </p>
+      ) : null}
+      {submissionError ? (
+        <div role="alert" className="px-4 py-2 text-sm text-red-600">
+          {submissionError} Reload to check whether submission completed and resume your saved answers.
+          <button type="button" className="ml-2 underline" onClick={() => window.location.reload()}>Reload saved session</button>
+        </div>
       ) : null}
       <main className="mx-auto flex-1 min-h-0 w-full max-w-7xl min-w-0 grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-4 p-2.5 sm:p-4 overflow-hidden">
         {/* ── Question Palette ── */}

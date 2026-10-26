@@ -1,5 +1,7 @@
 # Phase 5 production catalog review — 16 October 2026
 
+> Continued in the [22 October security/deployment review](zi-phase5-security-deployment-readiness-20261022.md), which adds current writer dependencies, fresh manual audits and stage-specific decisions. This document records the original supplied snapshot.
+
 **Decision: NO-GO for production application or activation.** Structural compatibility checks pass against the supplied metadata. The remaining gates below require private review and separately approved deployment work. No production changes, audit execution, duplicate cleanup, rollback execution or generation activation occurred in this review.
 
 ## Evidence and scope

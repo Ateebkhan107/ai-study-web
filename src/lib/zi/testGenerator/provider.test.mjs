@@ -69,6 +69,12 @@ test("missing Gemini credentials fail clearly without any SDK call", async (t) =
   assert.equal(mock.mock.callCount(), 0);
 });
 
+test("job single-attempt mode never retries or falls back after an uncertain availability failure", async (t) => {
+  const mock = setup(t, async () => Response.json({ error: { code: 503, status: "UNAVAILABLE" } }, { status: 503 }));
+  await assert.rejects(completeZiQuestionTask({ ...request, maxAttempts: 1 }), (e) => e.providerRequests === 1);
+  assert.equal(mock.mock.callCount(), 1);
+});
+
 test("structured transport preserves actual Retry-After headers when retry must be deferred", async (t) => {
   const mock = setup(t, async () => Response.json({ error: { code: 429, status: "RESOURCE_EXHAUSTED" } }, { status: 429, headers: { "retry-after": "60" } }));
   await assert.rejects(completeZiQuestionTask(request), (e) => e.providerRequests === 1 && e.providerDiagnostic.retryAfterMs === 60000 && e.providerDiagnostic.retryDeferred === true);

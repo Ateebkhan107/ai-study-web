@@ -1,11 +1,12 @@
+import { publicMetadata } from "@/lib/seo.mjs";
 import PageWrapper from "@/components/PageWrapper";
 import { Shield } from "lucide-react";
 
-export const metadata = {
+export const metadata = publicMetadata({
   title: "Privacy Policy",
   description: "Read about how PrepZii collects, uses, and protects your personal data.",
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 const SECTIONS = [
   {

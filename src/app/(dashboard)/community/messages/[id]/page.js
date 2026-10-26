@@ -4,7 +4,7 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import DMChat from "@/components/community/DMChat";
 
 export const metadata = {
-  title: "Chat — PrepZii Community",
+  title: { absolute: "Chat — PrepZii Community" },
 };
 
 export default async function DMChatPage({ params }) {

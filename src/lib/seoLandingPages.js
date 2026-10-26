@@ -1,12 +1,12 @@
-const SITE_URL = "https://www.prepzii.com";
+import { INDEXABLE, SITE_URL } from "./seo.mjs";
 const OG_IMAGE = "/images/branding/prepzii-logo-dark.png";
 
 export const SEO_PAGES = {
   jee: {
     path: "/jee",
-    title: "JEE Preparation, PYQs & Mock Tests | PrepZii",
+    title: "JEE Main Preparation: PYQs, Mocks & Revision | PrepZii",
     description:
-      "Prepare for JEE Main with previous year questions, full-length mock tests, formula revision, chapter-wise practice, and performance analytics on PrepZii.",
+      "Explore JEE Main previous-year question practice, mock-test options and revision resources. Check available practice tools and access plans on PrepZii.",
     h1: "JEE Preparation with PYQs, Mock Tests and Analytics",
     eyebrow: "JEE Main preparation",
     intro:
@@ -15,7 +15,7 @@ export const SEO_PAGES = {
     parentPath: null,
     breadcrumb: [{ name: "Home", path: "/" }, { name: "JEE", path: "/jee" }],
     primaryCta: { label: "Start JEE Practice", href: "/go/jee/dashboard" },
-    secondaryCta: { label: "View JEE PYQs", href: "/go/jee/pyq" },
+    secondaryCta: { label: "View JEE PYQs", href: "/jee/pyq" },
     sections: [
       {
         title: "What JEE students can organize on PrepZii",
@@ -43,13 +43,13 @@ export const SEO_PAGES = {
     linkCards: [
       {
         title: "JEE Main Previous Year Questions",
-        href: "/go/jee/pyq",
+        href: "/jee/pyq",
         description:
           "Practice JEE Main PYQs by subject, chapter and year with focused review.",
       },
       {
         title: "JEE Main Mock Tests",
-        href: "/go/jee/mock-tests",
+        href: "/jee/mock-tests",
         description:
           "Take exam-style mock tests and review accuracy, speed and weak areas.",
       },
@@ -80,9 +80,9 @@ export const SEO_PAGES = {
   },
   neet: {
     path: "/neet",
-    title: "NEET Preparation, PYQs & Mock Tests | PrepZii",
+    title: "NEET Preparation: PYQs, Mocks & Revision | PrepZii",
     description:
-      "Prepare for NEET with previous year questions, full-length mock tests, formula revision, chapter-wise practice, and performance analytics on PrepZii.",
+      "Explore NEET Physics, Chemistry and Biology practice, mock-test options and revision resources. Check available tools and access plans on PrepZii.",
     h1: "NEET Preparation with PYQs, Mock Tests and Analytics",
     eyebrow: "NEET preparation",
     intro:
@@ -91,7 +91,7 @@ export const SEO_PAGES = {
     parentPath: null,
     breadcrumb: [{ name: "Home", path: "/" }, { name: "NEET", path: "/neet" }],
     primaryCta: { label: "Start NEET Practice", href: "/go/neet/dashboard" },
-    secondaryCta: { label: "View NEET PYQs", href: "/go/neet/pyq" },
+    secondaryCta: { label: "View NEET PYQs", href: "/neet/pyq" },
     sections: [
       {
         title: "A focused NEET practice workspace",
@@ -119,13 +119,13 @@ export const SEO_PAGES = {
     linkCards: [
       {
         title: "NEET Previous Year Questions",
-        href: "/go/neet/pyq",
+        href: "/neet/pyq",
         description:
           "Practice NEET PYQs by year and chapter across Physics, Chemistry and Biology.",
       },
       {
         title: "NEET Mock Tests",
-        href: "/go/neet/mock-tests",
+        href: "/neet/mock-tests",
         description:
           "Take full-length NEET mock tests and review accuracy, speed and weak chapters.",
       },
@@ -158,7 +158,7 @@ export const SEO_PAGES = {
     path: "/jee/pyq",
     title: "JEE Main Previous Year Questions (PYQs) | PrepZii",
     description:
-      "Practice JEE Main previous year questions by subject, chapter, and year with focused practice tools and performance tracking on PrepZii.",
+      "Explore JEE Main previous-year question practice by paper, subject and chapter. Learn how practice works and check access options on PrepZii.",
     h1: "JEE Main Previous Year Questions (PYQs)",
     eyebrow: "JEE PYQ practice",
     intro:
@@ -237,7 +237,7 @@ export const SEO_PAGES = {
     path: "/neet/pyq",
     title: "NEET Previous Year Questions (PYQs) | PrepZii",
     description:
-      "Practice NEET previous year questions for Physics, Chemistry, and Biology by year and chapter with PrepZii.",
+      "Explore NEET previous-year question practice for Physics, Chemistry and Biology. Learn about paper and chapter practice and check access options.",
     h1: "NEET Previous Year Questions (PYQs)",
     eyebrow: "NEET PYQ practice",
     intro:
@@ -314,9 +314,9 @@ export const SEO_PAGES = {
   },
   jeeMockTests: {
     path: "/jee/mock-tests",
-    title: "JEE Main Mock Tests & Full-Length Practice | PrepZii",
+    title: "JEE Main Mock Tests: Practice & Review | PrepZii",
     description:
-      "Take JEE Main mock tests in a realistic exam-style environment and review accuracy, speed, weak chapters, and performance on PrepZii.",
+      "Explore JEE Main mock-test practice, timing and review features on PrepZii. Full-length mock tests require Pro access; compare plans before starting.",
     h1: "JEE Main Mock Tests and Full-Length Practice",
     eyebrow: "JEE mock tests",
     intro:
@@ -385,9 +385,9 @@ export const SEO_PAGES = {
   },
   neetMockTests: {
     path: "/neet/mock-tests",
-    title: "NEET Mock Tests & Full-Length Practice | PrepZii",
+    title: "NEET Mock Tests: Practice & Review | PrepZii",
     description:
-      "Take full-length NEET mock tests with exam-style practice, detailed review, accuracy tracking, and performance analytics on PrepZii.",
+      "Explore NEET mock-test practice, subject coverage and review features on PrepZii. Full-length mock tests require Pro access; compare plans before starting.",
     h1: "NEET Mock Tests and Full-Length Practice",
     eyebrow: "NEET mock tests",
     intro:
@@ -462,8 +462,9 @@ export function buildLandingMetadata(page) {
       absolute: page.title,
     },
     description: page.description,
+    robots: INDEXABLE,
     alternates: {
-      canonical: page.path,
+      canonical: new URL(page.path, SITE_URL).href,
     },
     openGraph: {
       type: "website",

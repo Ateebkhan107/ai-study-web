@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { generationJobRequest } from "./generationJobClient";
 import { useUser } from "@clerk/nextjs";
 import { rememberBuilderAction, clearBuilderToken, subscribeBuilder, readBuilderToken } from "./testBuilderSession";
 
@@ -32,7 +33,7 @@ export function ZiTestBuilderForm({ draft, busy, error, onSubmit, onReset }) {
       </form>
       {!draft.missing.length ? <p className="mt-3 border-t border-stone-200 pt-3 text-xs leading-5" aria-label="Configuration summary">{c.exam} · {c.subject} · {c.topic || c.chapter} · {c.difficulty} · {c.questionCount} questions · {c.mode === "timed" ? `Timed Test · ${c.durationMinutes} minutes` : "Practice Quiz · Untimed"}</p> : null}
       {draft.confirmed ? <p className="mt-2 text-sm font-bold">Configuration confirmed. No test has been created.</p> : null}
-      <p className="mt-3 text-xs leading-5 text-stone-600">{draft.availability.message}</p>
+      <p className="mt-3 text-xs leading-5 text-stone-600">{draft.availability.orchestrationEnabled ? "Private pilot only. Provider execution requires separate server approval; public generation remains disabled." : draft.availability.message}</p>
       {error ? <p role="alert" className="mt-2 text-sm text-red-700">{error}</p> : null}
     </section>
   );
@@ -44,6 +45,45 @@ export default function ZiTestBuilder({ action }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const activeToken = useSyncExternalStore(subscribeBuilder, () => readBuilderToken(user?.id), () => undefined);
+  const [job, setJob] = useState(null);
+  const [polling, setPolling] = useState(0);
+  const pilot = Boolean(user?.id && draft.availability.orchestrationEnabled);
+  useEffect(() => {
+    if (!pilot) return;
+    let cancelled = false;
+    let timer;
+    async function poll() {
+      try {
+        const next = await generationJobRequest();
+        if (cancelled) return;
+        setJob({ ...next, viewer: user.id });
+        if (["running", "reserved"].includes(next.state)) timer = setTimeout(poll, 3000);
+      } catch (e) {
+        if (!cancelled && e.status !== 404) setError("Status could not be confirmed. Resume status before starting another job.");
+      }
+    }
+    poll();
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [pilot, user?.id, polling]);
+  async function generate() {
+    if (busy || !draft.confirmed) return;
+    setBusy(true); setError("");
+    try {
+      const next = await generationJobRequest("", { token: draft.token });
+      setJob({ ...next, viewer: user.id });
+      setPolling((n) => n + 1);
+      if (next.state === "reserved") await generationJobRequest(`/${next.id}/execute`, {});
+      setPolling((n) => n + 1);
+    } catch (e) { setError(e.message); setPolling((n) => n + 1); }
+    finally { setBusy(false); }
+  }
+  async function resumeExecution() {
+    if (busy || job?.viewer !== user?.id || !job.retrySafe) return;
+    setBusy(true); setError("");
+    try { await generationJobRequest(`/${job.id}/execute`, {}); }
+    catch (e) { setError(e.message); }
+    finally { setBusy(false); setPolling((n) => n + 1); }
+  }
   async function update(operation, patch) {
     if (busy) return;
     setBusy(true); setError("");
@@ -60,7 +100,7 @@ export default function ZiTestBuilder({ action }) {
     finally { setBusy(false); }
   }
   if (activeToken && activeToken !== draft.token) return <p className="mt-3 text-xs">This configuration has been updated. Use the latest configuration card or send Zi your changes.</p>;
-  return <ZiTestBuilderForm draft={draft} busy={busy} error={error} onReset={() => update("reset")} onSubmit={(event) => {
+  return <><ZiTestBuilderForm draft={draft} busy={busy} error={error} onReset={() => update("reset")} onSubmit={(event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const patch = Object.fromEntries(["exam", "subject", "topic", "difficulty", "mode"].map((name) => [name, String(form.get(name))]));
@@ -68,5 +108,10 @@ export default function ZiTestBuilder({ action }) {
     patch.questionCount = Number(form.get("questionCount"));
     if (form.get("durationMinutes")) patch.durationMinutes = Number(form.get("durationMinutes"));
     update(event.nativeEvent.submitter?.name === "confirm" ? "confirm" : "update", patch);
-  }} />;
+  }} />{pilot ? <div className="mt-3 text-sm" aria-label="Private generation pilot">
+    {draft.confirmed ? <button disabled={busy} onClick={generate} className="rounded-md bg-amber-300 px-3 py-2 font-bold disabled:opacity-50">{busy ? "Preparing test…" : "Generate confirmed test"}</button> : null}
+    <button onClick={() => setPolling((n) => n + 1)} className="ml-3 underline">Resume status</button>
+    {job?.viewer === user?.id && job.retrySafe ? <button disabled={busy} onClick={resumeExecution} className="ml-3 underline disabled:opacity-50">Continue reserved job</button> : null}
+    {job?.viewer === user?.id ? <p role="status">{job.message || `${job.state} · ${job.stage} · ${job.acceptedCount}/${job.requestedCount} verified`}{job.startRoute ? <> · <a className="underline" href={job.startRoute}>Start test</a></> : null}</p> : null}
+  </div> : null}</>;
 }

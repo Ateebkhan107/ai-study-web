@@ -1,11 +1,12 @@
+import { publicMetadata } from "@/lib/seo.mjs";
 import PageWrapper from "@/components/PageWrapper";
 import { Target, Lightbulb, ShieldCheck, Rocket, Zap, Heart } from "lucide-react";
 
-export const metadata = {
+export const metadata = publicMetadata({
   title: "About Us",
   description: "Learn more about PrepZii, our mission, vision, and how we're revolutionizing JEE & NEET preparation.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

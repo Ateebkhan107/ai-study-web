@@ -1,11 +1,12 @@
+import { publicMetadata } from "@/lib/seo.mjs";
 import PageWrapper from "@/components/PageWrapper";
 import { Code2, Brain, PenTool, Edit3, Megaphone, Users, Send } from "lucide-react";
 
-export const metadata = {
+export const metadata = publicMetadata({
   title: "Careers",
   description: "Join the team at PrepZii and help us revolutionize education for JEE and NEET aspirants.",
-  alternates: { canonical: "/careers" },
-};
+  path: "/careers",
+});
 
 const DEPARTMENTS = [
   { icon: Code2, name: "Software Engineering", desc: "Build scalable architecture and seamless user experiences." },

@@ -1,0 +1,42 @@
+{"check":"anonymous public metadata /","status":"PASS"}
+{"check":"anonymous public metadata /pricing","status":"PASS"}
+{"check":"anonymous public metadata /jee","status":"PASS"}
+{"check":"anonymous public metadata /neet","status":"PASS"}
+{"check":"anonymous public metadata /jee/pyq","status":"PASS"}
+{"check":"anonymous public metadata /neet/pyq","status":"PASS"}
+{"check":"anonymous public metadata /jee/mock-tests","status":"PASS"}
+{"check":"anonymous public metadata /neet/mock-tests","status":"PASS"}
+{"check":"anonymous public metadata /about","status":"PASS"}
+{"check":"anonymous public metadata /careers","status":"PASS"}
+{"check":"anonymous public metadata /contact","status":"PASS"}
+{"check":"anonymous public metadata /help","status":"PASS"}
+{"check":"anonymous public metadata /privacy","status":"PASS"}
+{"check":"anonymous public metadata /terms","status":"PASS"}
+{"check":"public sitemap and robots agree","status":"PASS"}
+{"check":"app/utility noindex /dashboard","status":"PASS"}
+{"check":"app/utility noindex /test","status":"PASS"}
+{"check":"app/utility noindex /pyq","status":"PASS"}
+{"check":"app/utility noindex /pro","status":"PASS"}
+{"check":"app/utility noindex /sign-in","status":"PASS"}
+{"check":"app/utility noindex /sign-up","status":"PASS"}
+{"check":"app/utility noindex /history","status":"PASS"}
+{"check":"app/utility noindex /notifications","status":"PASS"}
+{"check":"app/utility noindex /zi","status":"PASS"}
+{"check":"app/utility noindex /feedback","status":"PASS"}
+{"check":"app/utility noindex /report-bug","status":"PASS"}
+{"check":"formula canonical /formula-cards","status":"PASS"}
+{"check":"formula canonical /formula-cards/physics?exam=JEE&utm_source=audit","status":"PASS"}
+{"check":"formula canonical /formula-cards/physics?exam=NEET&utm_source=audit","status":"PASS"}
+{"check":"formula canonical /formula-cards/biology?exam=NEET","status":"PASS"}
+{"check":"formula canonical /formula-cards/physics/unit-and-dimensions?exam=JEE","status":"PASS"}
+{"check":"anonymous protection /analytics","status":"PASS"}
+{"check":"anonymous protection /profile","status":"PASS"}
+{"check":"anonymous protection /subscriptions","status":"PASS"}
+{"check":"anonymous protection /test/session","status":"PASS"}
+{"check":"anonymous protection /pyq/session","status":"PASS"}
+{"check":"anonymous protection /admin","status":"PASS"}
+{"check":"anonymous protection /institute","status":"PASS"}
+{"check":"anonymous protection /formula-books/test","status":"PASS"}
+{"check":"invalid formula chapter stays 404","status":"PASS"}
+{"check":"practice CTA and slash redirects unchanged","status":"PASS"}
+{"passed":41,"failed":0}

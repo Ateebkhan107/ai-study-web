@@ -54,13 +54,14 @@ export function classifyGeminiError(error, now = Date.now()) {
 
 export function createGeminiRequestRunner({ wait = (ms, signal) => sleep(ms, undefined, { signal }), random = Math.random, now = Date.now } = {}) {
   const cooldowns = new Map();
-  async function run({ models, operation, signal, cooldownKey, deadlineAt = now() + 45000 }) {
+  async function run({ models, operation, signal, cooldownKey, deadlineAt = now() + 45000, maxAttempts = 3 }) {
+    if (![1, 2, 3].includes(maxAttempts)) throw new Error("Invalid provider attempt bound");
     for (const [key, value] of cooldowns) if (value.until <= now()) cooldowns.delete(key);
     const cached = cooldowns.get(cooldownKey);
     if (cached) throw Object.assign(new Error("Gemini quota cooldown is active."), { providerRequests: 0, status: cached.diagnostic.status, providerDiagnostic: { ...cached.diagnostic, retryAfterMs: cached.until - now(), cooldownHit: true } });
     let modelIndex = 0;
     const attempts = [];
-    for (let attempt = 0; attempt < 3; attempt += 1) {
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       if (signal?.aborted) throw Object.assign(new Error("Gemini request cancelled."), { providerRequests: attempt });
       try {
         const result = await operation(models[modelIndex]);
@@ -76,7 +77,7 @@ export function createGeminiRequestRunner({ wait = (ms, signal) => sleep(ms, und
         const fallback = [404, 503].includes(diagnostic.status) && modelIndex + 1 < models.length;
         const jitter = Math.min(4000, 500 * 2 ** attempt) * (0.5 + random() * 0.5);
         const delay = Math.max(diagnostic.retryAfterMs || 0, jitter);
-        const exhausted = attempt === 2;
+        const exhausted = attempt === maxAttempts - 1;
         const deferred = delay >= deadlineAt - now();
         if (hardQuota || (!diagnostic.retryable && !fallback) || exhausted || deferred || signal?.aborted) {
           throw Object.assign(new Error("Gemini structured request failed."), {

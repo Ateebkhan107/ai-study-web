@@ -1,5 +1,6 @@
 import "server-only";
-import { createCipheriv, createDecipheriv, hkdfSync, randomBytes } from "node:crypto";
+import { createCipheriv, createDecipheriv, createHash, hkdfSync, randomBytes } from "node:crypto";
+import { generationPilotAllowed } from "./jobPolicy.js";
 import { z } from "zod";
 import { TEST_PAGE_CHAPTERS, CHAPTER_ALIASES } from "../../pyqChapterMapping.js";
 import { chapterScope } from "./scope.server.js";
@@ -95,7 +96,9 @@ export function parseBuilderText(text, current = {}) {
     (word) => ({ "twenty five": "25", "twenty-five": "25", "thirty five": "35", "thirty-five": "35", five: "5", ten: "10", fifteen: "15", twenty: "20", thirty: "30", forty: "40", fifty: "50" })[word]);
   const patch = {};
   const errors = [];
-  const start = /\b(?:create|generate|make|build|prepare|set)\b.{0,160}\b(?:test|quiz|questions)\b|\b(?:want|need)\s+(?:an?\s+)?(?:ai\s+)?(?:practice\s+)?(?:test|quiz)\b|\btest me\b|\bquiz me\b|\b(?:ai|original|personalized) (?:test|quiz)\b/.test(lower);
+  // Accept both verb-first and noun-first requests, including common Hinglish
+  // phrasing. Recognition only opens a draft; confirmation is still mandatory.
+  const start = /\b(?:create|generate|make|build|prepare|set)\b.{0,160}\b(?:test|quiz|questions)\b|\b(?:test|quiz|questions?)\b.{0,80}\b(?:create|generate|make|build|prepare|banao|bnao|banado)\b|\b(?:want|need)\s+(?:an?\s+)?(?:ai\s+)?(?:practice\s+)?(?:test|quiz)\b|\btest me\b|\bquiz me\b|\b(?:ai|original|personalized) (?:test|quiz)\b/.test(lower);
   if (!start && /^(?:explain|teach|why|how|what|solve|help|show|tell)\b/.test(lower)) return { handled: false };
   // Explicit official/existing-bank requests retain the existing action flow.
   if (start && /\b(?:pyqs?|previous.year|official|existing question bank)\b/.test(lower)) return { handled: false };
@@ -109,8 +112,9 @@ export function parseBuilderText(text, current = {}) {
   if (difficulty) patch.difficulty = ({ moderate: "Medium", difficult: "Hard", harder: "Hard", easier: "Easy" })[difficulty] || difficulty[0].toUpperCase() + difficulty.slice(1);
   if (/\b(?:impossible|extreme|expert|beginner)\b|\bdifficulty\s*(?:is|to|:)?\s*(?!easy\b|medium\b|moderate\b|hard\b|difficult\b|mixed\b)[a-z]+/.test(lower) && !difficulty) errors.push("Choose Easy, Medium, Hard, or Mixed difficulty.");
   const count = lower.match(/(?<![\w.])(-?\d+(?:\.\d+)?)\s+(?:(?:easy|medium|moderate|hard|difficult|mixed|jee|mains?|neet|ug)\s+){0,5}(?:questions?|mcqs?)\b|\b(?:count|questions?|make it)\s*(?:to|:|=)?\s*(-?\d+(?:\.\d+)?)\b/);
+  const leadingCount = start ? lower.match(/^(-?\d+(?:\.\d+)?)\s+(?=.{0,120}\b(?:questions?|mcqs?)\b)/) : null;
   const bare = /^-?\d+(?:\.\d+)?$/.test(lower) ? Number(lower) : null;
-  const number = count ? Number(count[1] || count[2]) : bare !== null && (!current.questionCount || current.mode !== "timed" || current.durationMinutes) ? bare : null;
+  const number = count ? Number(count[1] || count[2]) : leadingCount ? Number(leadingCount[1]) : bare !== null && (!current.questionCount || current.mode !== "timed" || current.durationMinutes) ? bare : null;
   if (number !== null) {
     if (!Number.isInteger(number) || number < 5 || number > 30) errors.push("Choose a question count from 5 to 30.");
     else patch.questionCount = number;
@@ -184,10 +188,10 @@ export function handleBuilder({ userId, access, token, text, operation, patch },
   const prompt = errors.length ? errors.join(" ") : promptFor(config, state.confirmed);
   return { type: "ai_test_builder", token: seal(state, secret), config, revision: state.revision,
     expiresAt: state.expiresAt, confirmed: state.confirmed, preferenceUsed: state.preferenceUsed,
-    missing, errors, prompt, availability: generationAvailability(env) };
+    missing, errors, prompt, availability: { ...generationAvailability(env), orchestrationEnabled: generationPilotAllowed(userId, env) } };
 }
 
-// Integration seam only. No caller in Phase 4 invokes Phase 3 or saves a test.
+// Only authenticated server orchestration may consume a confirmed draft.
 export function confirmedGenerationConfiguration({ userId, access, token }, options = {}) {
   const state = unseal(token, userId, options.now ?? Date.now(), options.secret);
   enforceAccess(state.config, access);
@@ -202,4 +206,12 @@ export function confirmedGenerationConfiguration({ userId, access, token }, opti
     generationConfig: { exam, subject, difficulty, questionCount, ...(knownChapter ? { chapter: scopeLabel } : { topic: scopeLabel }) },
     sessionConfig: { mode, ...(mode === "timed" ? { durationMinutes } : {}) },
   };
+}
+
+export function confirmedGenerationDraft(input, options = {}) {
+  const configuration = confirmedGenerationConfiguration(input, options);
+  const state = unseal(input.token, input.userId, options.now ?? Date.now(), options.secret);
+  // Re-confirming/re-sealing the same draft must not create another paid job.
+  const draftKey = createHash("sha256").update(JSON.stringify([state.owner, state.expiresAt, state.config])).digest("hex");
+  return { configuration, draftKey };
 }

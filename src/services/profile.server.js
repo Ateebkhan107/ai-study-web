@@ -1,3 +1,4 @@
+import { initializeXp, integrityEnabled } from "@/lib/integrity.server.mjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { createProfileIfNotExists } from "@/services/profile.service";
@@ -52,6 +53,7 @@ async function getProfileXp(userId) {
     .maybeSingle();
 
   if (error) throw error;
+  if (!data && integrityEnabled()) return initializeXp(supabaseAdmin, userId);
   return data || null;
 }
 

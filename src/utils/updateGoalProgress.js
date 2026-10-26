@@ -1,118 +1,14 @@
 "use server";
 
-import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
-import { addXP } from "./xp";
+import { auth } from "@clerk/nextjs/server";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { reconcileGoalRewards } from "@/lib/goalRewards.mjs";
 
-
-export async function updateGoalProgress(
-userId,
-goalType,
-amount = 1
-){
-
-
-if(!userId || !goalType) return;
-
-
-const today = new Date().toISOString().split("T")[0];
-
-// 1. Find active goals
-
-
-const {data:goals,error}=await supabase
-
-.from("daily_goals")
-
-.select("*")
-
-.eq(
-"is_active",
-true
-)
-
-.eq(
-"goal_type",
-goalType
-);
-
-
-
-if(error){
-
-console.log(
-"Goal fetch error",
-error
-);
-
-return;
-
-}
-
-
-
-
-
-
-for(const goal of goals){
-
-
-
-    // 2. Check existing progress (ANY day)
-    const { data: existing } = await supabase
-      .from("user_daily_goals")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("goal_id", goal.id)
-      .maybeSingle();
-
-    let newProgress = amount;
-    let isNewDay = false;
-
-    if (existing) {
-      if (existing.goal_date === today) {
-        newProgress = (existing.progress || 0) + amount;
-      } else {
-        isNewDay = true;
-        newProgress = amount; // Reset for today
-      }
-    }
-
-    const completed = newProgress >= goal.target_value;
-
-    // 3. Save progress
-    if (existing) {
-      await supabase
-        .from("user_daily_goals")
-        .update({
-          goal_date: today,
-          progress: newProgress,
-          completed,
-          completed_at:
-            completed && (!existing.completed || isNewDay)
-              ? new Date().toISOString()
-              : existing.completed_at,
-        })
-        .eq("id", existing.id);
-    } else {
-      await supabase.from("user_daily_goals").insert({
-        user_id: userId,
-        goal_id: goal.id,
-        goal_date: today,
-        progress: newProgress,
-        completed,
-        completed_at: completed ? new Date().toISOString() : null,
-      });
-    }
-
-    // 4. Give XP only on first completion of the day
-    if (completed && (!existing?.completed || isNewDay)) {
-      await addXP(userId, goal.xp, "Student");
-    }
-
-
-
-}
-
-
-
+// Compatibility entry point: clients request delivery of persisted activity;
+// neither a supplied goal type nor an amount constitutes activity evidence.
+export async function updateGoalProgress(userId) {
+  const { userId: actor } = await auth();
+  if (!actor) throw new Error("Unauthorized");
+  if (userId !== actor) throw new Error("Forbidden");
+  return reconcileGoalRewards(supabaseAdmin, actor);
 }

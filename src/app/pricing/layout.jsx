@@ -1,17 +1,10 @@
-export const metadata = {
-  title: "Pricing – PrepZii Pro Plans",
-  description:
-    "Choose a PrepZii Pro plan and unlock unlimited mock tests, chapter-wise PYQs, AI explanations, formula books, and advanced analytics for JEE or NEET preparation.",
-  openGraph: {
-    title: "PrepZii Pro – Pricing Plans",
-    description:
-      "Unlock unlimited JEE & NEET prep with PrepZii Pro. Monthly, Quarterly, and Yearly plans available.",
-    url: "/pricing",
-  },
-  alternates: {
-    canonical: "/pricing",
-  },
-};
+import { publicMetadata } from "@/lib/seo.mjs";
+
+export const metadata = publicMetadata({
+  title: "Pricing and Pro Plans for JEE & NEET",
+  description: "Compare PrepZii plans for JEE and NEET practice, chapter-wise PYQs, mock tests and analytics. Review available features and access requirements.",
+  path: "/pricing",
+});
 
 export default function PricingLayout({ children }) {
   return children;

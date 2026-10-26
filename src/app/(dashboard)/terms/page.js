@@ -1,11 +1,12 @@
+import { publicMetadata } from "@/lib/seo.mjs";
 import PageWrapper from "@/components/PageWrapper";
 import { Scale } from "lucide-react";
 
-export const metadata = {
+export const metadata = publicMetadata({
   title: "Terms & Conditions",
   description: "Read the terms and conditions for using PrepZii.",
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+});
 
 const SECTIONS = [
   {

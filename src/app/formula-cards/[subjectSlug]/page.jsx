@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { cache } from "react";
+import { formulaExam, formulaPath, NOINDEX, publicMetadata } from "@/lib/seo.mjs";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import FormulaSubjectView from "@/components/formula-cards/FormulaSubjectView";
@@ -6,17 +8,53 @@ import { getFormulaChaptersForSubject, getFormulaSubjectsForExam } from "@/lib/f
 
 export const dynamic = "force-dynamic";
 
+const loadChapters = cache(getFormulaChaptersForSubject);
+
+const resolveSubject = cache(async (subjectSlug, requestedExam) => {
+  const { userId } = await auth();
+  let profileExam = null;
+  if (userId) {
+    const { data: profile } = await supabaseAdmin
+      .from("user_profiles")
+      .select("exam")
+      .eq("clerk_user_id", userId)
+      .maybeSingle();
+
+    if (profile?.exam) {
+      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
+    }
+  }
+
+  // When profile track is set, strictly use it; otherwise fallback to query param or JEE
+  const exam = profileExam || requestedExam;
+
+  let resolvedSubjectSlug = subjectSlug;
+  if (exam === "JEE" && subjectSlug.toLowerCase() === "biology") {
+    resolvedSubjectSlug = "physics";
+  } else if (exam === "NEET" && (subjectSlug.toLowerCase() === "mathematics" || subjectSlug.toLowerCase() === "maths")) {
+    resolvedSubjectSlug = "physics";
+  }
+
+  return { exam, resolvedSubjectSlug, hasProfileTrack: Boolean(profileExam) };
+});
+
+
 export async function generateMetadata({ params, searchParams }) {
   const { subjectSlug } = await params;
   const query = await searchParams;
-  const exam = String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
-  const { subject } = await getFormulaChaptersForSubject(subjectSlug, exam);
+  const { exam, resolvedSubjectSlug } = await resolveSubject(subjectSlug, formulaExam(query?.exam));
+  const { subject, chapters } = await loadChapters(resolvedSubjectSlug, exam);
 
-  if (!subject) return { title: "Formula Cards | PrepZii" };
+  if (!subject) return { title: "Formula Cards", robots: NOINDEX };
 
+  const resource = subject.name === "Biology" ? "Revision Cards" : "Formula Cards";
   return {
-    title: `${subject.name} Formula Cards (${exam}) | PrepZii`,
-    description: `Master high-yield formulas and concepts for ${subject.name} for ${exam} preparation.`,
+    ...publicMetadata({
+      title: `${subject.name} ${resource} for ${exam}`,
+      description: `Browse ${subject.name} formulas and revision concepts by chapter for ${exam} preparation. Explore available study cards on PrepZii.`,
+      path: formulaPath(subject.slug, null, subject.exam),
+    }),
+    ...(chapters.some((chapter) => chapter.card_count > 0) ? {} : { robots: NOINDEX }),
   };
 }
 
@@ -652,32 +690,10 @@ export default async function FormulaSubjectPage({ params, searchParams }) {
   const { subjectSlug } = await params;
   const query = await searchParams;
 
-  const { userId } = await auth();
-  let profileExam = null;
-  if (userId) {
-    const { data: profile } = await supabaseAdmin
-      .from("user_profiles")
-      .select("exam")
-      .eq("clerk_user_id", userId)
-      .maybeSingle();
-
-    if (profile?.exam) {
-      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
-    }
-  }
-
-  // When profile track is set, strictly use it; otherwise fallback to query param or JEE
-  const exam = profileExam || (String(query?.exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE");
-
-  let resolvedSubjectSlug = subjectSlug;
-  if (exam === "JEE" && subjectSlug.toLowerCase() === "biology") {
-    resolvedSubjectSlug = "physics";
-  } else if (exam === "NEET" && (subjectSlug.toLowerCase() === "mathematics" || subjectSlug.toLowerCase() === "maths")) {
-    resolvedSubjectSlug = "physics";
-  }
+  const { exam, resolvedSubjectSlug, hasProfileTrack } = await resolveSubject(subjectSlug, formulaExam(query?.exam));
 
   const [{ subject, chapters }, availableSubjects] = await Promise.all([
-    getFormulaChaptersForSubject(resolvedSubjectSlug, exam),
+    loadChapters(resolvedSubjectSlug, exam),
     getFormulaSubjectsForExam(exam),
   ]);
 
@@ -693,7 +709,7 @@ export default async function FormulaSubjectPage({ params, searchParams }) {
         sections={chapterSections}
         availableSubjects={availableSubjects}
         exam={exam}
-        hasProfileTrack={Boolean(profileExam)}
+        hasProfileTrack={hasProfileTrack}
       />
     </main>
   );

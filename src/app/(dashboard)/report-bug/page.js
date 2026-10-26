@@ -2,7 +2,7 @@ import PageWrapper from "@/components/PageWrapper";
 import { Bug, Send, Monitor, MonitorSmartphone, Camera, Info, Search } from "lucide-react";
 
 export const metadata = {
-  title: "Report a Bug | PrepZii",
+  title: { absolute: "Report a Bug | PrepZii" },
   description: "Help us improve PrepZii by reporting any bugs or issues you encounter.",
 };
 

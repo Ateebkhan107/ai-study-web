@@ -1,5 +1,5 @@
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
-import { addXP } from "@/utils/xp";
+import { claimBadge, integrityCall, integrityEnabled } from "@/lib/integrity.server.mjs";
 
 async function getUserXPWithAdmin(userId) {
   const { data, error } = await supabase
@@ -169,6 +169,15 @@ async function getBadgeProgressInputs(userId) {
     mock_tests: analytics?.bestMockScore || 0,
     speed_solver: analytics?.avgSolveSeconds || Infinity,
   };
+  if (integrityEnabled()) {
+    // Display the same historical-plus-verified basis used by atomic claims.
+    // A missing contract fails closed; legacy raw-row counts are not a fallback.
+    const verified = await integrityCall(supabase, "prepzii_badge_stats", { p_user: userId });
+    Object.assign(stats, verified, {
+      leaderboard_rank: verified.leaderboard_rank ?? Infinity,
+      speed_solver: verified.speed_solver ?? Infinity,
+    });
+  }
 
   return {
     badges: badges || [],
@@ -178,50 +187,15 @@ async function getBadgeProgressInputs(userId) {
   };
 }
 
-function hasMetBadgeRequirement(type, value, stats) {
-  switch (type) {
-    case 'tests_completed':
-      return stats.tests_completed >= value;
-    case 'pyq_completed':
-      return stats.pyq_completed >= value;
-    case 'total_questions':
-      return stats.total_questions >= value;
-    case 'total_xp':
-      return stats.total_xp >= value;
-    case 'streak':
-      return stats.streak >= value;
-    case 'accuracy':
-      return stats.accuracy >= value;
-    case 'leaderboard_rank':
-      return stats.leaderboard_rank <= value;
-    case 'mock_tests':
-      return stats.mock_tests >= value;
-    case 'speed_solver':
-      return stats.speed_solver !== Infinity && stats.speed_solver <= value;
-    default:
-      return false;
-  }
-}
-
-async function awardEligibleBadges(userId, { badges, earnedMap, stats, xpName }) {
+async function awardEligibleBadges(userId, { badges, earnedMap, stats }) {
+  if (!integrityEnabled()) return;
   for (const badge of badges) {
     if (earnedMap.has(badge.id)) continue;
-    if (!hasMetBadgeRequirement(badge.requirement_type, badge.requirement_value, stats)) continue;
-
-    const { error: insertError } = await supabase
-      .from("user_badges")
-      .insert({
-        user_id: userId,
-        badge_id: badge.id,
-      });
-
-    if (!insertError) {
-      earnedMap.set(badge.id, { badge_id: badge.id, earned_at: new Date().toISOString() });
-      if (badge.xp_reward > 0) {
-        await addXP(userId, badge.xp_reward, xpName, true);
-        stats.total_xp += badge.xp_reward;
-      }
-    }
+    // Eligibility, historical entitlement, badge row and XP are one DB claim.
+    const result = await claimBadge(supabase, userId, badge.id);
+    if (!result.earned) continue;
+    earnedMap.set(badge.id, { badge_id: badge.id, earned_at: new Date().toISOString() });
+    if (result.created) stats.total_xp += badge.xp_reward;
   }
 }
 
