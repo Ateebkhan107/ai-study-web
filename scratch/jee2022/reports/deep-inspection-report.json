@@ -1,0 +1,803 @@
+{
+  "timestamp": "2026-10-31T17:14:44.880Z",
+  "totalPapers": 24,
+  "totalQuestions": 2160,
+  "totalImages": 551,
+  "totalIssues": 129,
+  "summaryByType": {
+    "LEFTOVER_OPTION_PREFIX": 129
+  },
+  "issues": [
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q33 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q33 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (I), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q33 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q33 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q37 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) →(II), (B)→(IV), (C)→(I), \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q37 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) →(III), (B)→(IV), (C)→(I),\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q37 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) →(III), (B)→(I), (C)→(IV),\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q37 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) →(II), (B)→(I), (C)→(IV), \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q39 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and ( C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q40 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q40 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-24JUN-S1 Q40 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q31 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true but (R) is false.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q31 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false but (R) is true.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q32 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (I), (B) - (II), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q32 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q32 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q32 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q33 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (II), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q33 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q33 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q33 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (I), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q35 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true but (R) is false.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q35 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false but (R) is true.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q39 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) – (III), (B) – (II), $(C)$\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q39 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) – (IV), (B) – (I), $(C)$ –\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q39 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) – (II), (B) – (I), $(C)$ –\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q39 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) – (III), (B) – (IV), $(C)$\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q46 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(B) and (C)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q46 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(C) and (D)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q46 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (D)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q46 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) and (C)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q48 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) $-$ (II), (B) $-$ (III), (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q48 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) $-$ (I), (B) $-$ (II), (C)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q48 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) $-$ (IV), (B) $-$ (III), (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q48 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) $-$ (II), (B) $-$ (III), (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q50 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (II), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q50 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (II), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q50 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUN-S1 Q50 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q36 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q36 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (II), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q36 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (IV), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q36 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (I), (B) - (II), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q47 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (C) are correct statem\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q47 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (D) are correct statem\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q47 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(B) and (D) are correct statem\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUN-S2 Q47 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(B) and (C) are correct statem\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q10 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(a) and (d) only.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q10 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(b) and (d) only.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q10 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(a) and (c) only.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q10 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(b) and (c) only.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q32 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUN-S1 Q32 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q31 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (I), (B) - (II), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q31 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q31 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (IV), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q31 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q32 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (I), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q32 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (II), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q32 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q32 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (II), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q36 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(D) and (E)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q47 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) > (B) > (C) > (D)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q47 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) > (C) > (D) > (B)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q47 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(C) > (A) > (D) > (B)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q47 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(C) > (D) > (B) > (A)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q50 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true, but (R) is false.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-26JUL-S1 Q50 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false, but (R) is true.\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S1 Q37 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q9 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(B) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q9 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q9 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q9 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(C) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q11 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q11 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q11 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(B) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q11 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(B) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q15 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q15 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q17 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q17 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q17 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(C) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q17 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(D) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q31 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(D) > (B) > (C) > (A)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q31 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) > (D) > (C) > (A)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q31 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(C) > (B) > (D) > (A)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q31 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(B) > (C) > (D) > (A)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q35 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is correct but (R) is not \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q35 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is not correct but (R) is \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q36 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) < (B) < (C) < (D)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q36 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) < (A) < (D) < (C)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q36 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(B) < (D) < (A) < (C)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q36 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(B) < (A) < (C) < (D)\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q38 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true but (R) is false\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q38 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false but (R) is true\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q47 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (I), (C) -(I\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q47 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q47 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (I), (C) -(\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q47 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (I), (B) - (III), (C) -(\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q49 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q49 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (I), (C) - \""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q49 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-27JUL-S2 Q49 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q12 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(B) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q12 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(C) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q12 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q12 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q35 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q35 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q35 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q35 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(C) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q42 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) - (II), (B) - (I), (C) - (\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q42 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q42 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) - (III), (B) - (IV), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-28JUL-S1 Q42 [Chemistry] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) - (IV), (B) - (III), (C) -\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S1 Q1 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true but (R) is false\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S1 Q1 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false but (R) is true\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S1 Q7 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(A) is true but (R) is false\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S1 Q7 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) is false but (R) is true\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S2 Q11 [Physics] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S2 Q11 [Physics] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S2 Q11 [Physics] -> option_c",
+      "error": "Leftover option index prefix in: \"(B) and (E) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-29JUL-S2 Q11 [Physics] -> option_d",
+      "error": "Leftover option index prefix in: \"(A) and (C) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-30JUL-S2 Q34 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-30JUL-S2 Q34 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-30JUL-S2 Q37 [Chemistry] -> option_a",
+      "error": "Leftover option index prefix in: \"(A) and (B) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-30JUL-S2 Q37 [Chemistry] -> option_b",
+      "error": "Leftover option index prefix in: \"(A) and (D) only\""
+    },
+    {
+      "type": "LEFTOVER_OPTION_PREFIX",
+      "location": "JEE-MAIN-22-30JUL-S2 Q37 [Chemistry] -> option_c",
+      "error": "Leftover option index prefix in: \"(B) and (D) only\""
+    }
+  ],
+  "paperSummaries": [
+    {
+      "paper": "JEE-MAIN-22-24JUN-S1",
+      "questions": 90,
+      "images": 16,
+      "issuesCount": 12
+    },
+    {
+      "paper": "JEE-MAIN-22-24JUN-S2",
+      "questions": 90,
+      "images": 3,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-25JUN-S1",
+      "questions": 90,
+      "images": 22,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-25JUN-S2",
+      "questions": 90,
+      "images": 24,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-26JUN-S1",
+      "questions": 90,
+      "images": 30,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-26JUN-S2",
+      "questions": 90,
+      "images": 29,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-27JUN-S1",
+      "questions": 90,
+      "images": 22,
+      "issuesCount": 28
+    },
+    {
+      "paper": "JEE-MAIN-22-27JUN-S2",
+      "questions": 90,
+      "images": 30,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-28JUN-S1",
+      "questions": 90,
+      "images": 31,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-28JUN-S2",
+      "questions": 90,
+      "images": 34,
+      "issuesCount": 8
+    },
+    {
+      "paper": "JEE-MAIN-22-29JUN-S1",
+      "questions": 90,
+      "images": 17,
+      "issuesCount": 6
+    },
+    {
+      "paper": "JEE-MAIN-22-29JUN-S2",
+      "questions": 90,
+      "images": 19,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-30JUN-S1",
+      "questions": 90,
+      "images": 31,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-25JUL-S1",
+      "questions": 90,
+      "images": 25,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-25JUL-S2",
+      "questions": 90,
+      "images": 11,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-26JUL-S1",
+      "questions": 90,
+      "images": 22,
+      "issuesCount": 15
+    },
+    {
+      "paper": "JEE-MAIN-22-26JUL-S2",
+      "questions": 90,
+      "images": 11,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-27JUL-S1",
+      "questions": 90,
+      "images": 10,
+      "issuesCount": 1
+    },
+    {
+      "paper": "JEE-MAIN-22-27JUL-S2",
+      "questions": 90,
+      "images": 26,
+      "issuesCount": 34
+    },
+    {
+      "paper": "JEE-MAIN-22-28JUL-S1",
+      "questions": 90,
+      "images": 26,
+      "issuesCount": 12
+    },
+    {
+      "paper": "JEE-MAIN-22-28JUL-S2",
+      "questions": 90,
+      "images": 24,
+      "issuesCount": 0
+    },
+    {
+      "paper": "JEE-MAIN-22-29JUL-S1",
+      "questions": 90,
+      "images": 44,
+      "issuesCount": 4
+    },
+    {
+      "paper": "JEE-MAIN-22-29JUL-S2",
+      "questions": 90,
+      "images": 19,
+      "issuesCount": 4
+    },
+    {
+      "paper": "JEE-MAIN-22-30JUL-S2",
+      "questions": 90,
+      "images": 25,
+      "issuesCount": 5
+    }
+  ]
+}

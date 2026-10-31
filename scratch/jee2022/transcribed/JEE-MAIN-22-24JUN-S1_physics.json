@@ -454,7 +454,7 @@
     "embedded_image_sources": [
       "879ffb55-84a7-449a-b446-2872df1031fe.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q20.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -516,7 +516,7 @@
     "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
     "section": "Transistor Amplifiers",
     "question_type": "NUMERICAL",
-    "question": "A transistor is used in common-emitter mode in an amplifier circuit. When a signal of $10\\,\\mathrm{mV}$ is added to the base-emitter voltage, the base current changes by $10\\,\\mathrm{µA}$ and the collector current changes by $1.5\\,\\mathrm{mA}$. The load resistance is $5\\,\\mathrm{k\\Omega}$. The voltage gain of the transistor will be _____.",
+    "question": "A transistor is used in common-emitter mode in an amplifier circuit. When a signal of $10\\,\\mathrm{mV}$ is added to the base-emitter voltage, the base current changes by $1\\,\\mu\\text{A}$ and the collector current changes by $1.5\\,\\mathrm{mA}$. The load resistance is $5\\,\\mathrm{k\\Omega}$. The voltage gain of the transistor will be _____.",
     "option_a": "",
     "option_b": "",
     "option_c": "",
@@ -548,7 +548,7 @@
     "embedded_image_sources": [
       "61bd0376-b2e8-437b-b6e7-2eb6bcdb0af5.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q24.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -642,7 +642,7 @@
     "embedded_image_sources": [
       "c51f6288-dbc2-4c14-88ef-720c1c1ba6f2.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q28.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,

@@ -568,7 +568,7 @@
     "chapter": "Chemical Kinetics and Nuclear Chemistry",
     "section": "Arrhenius Equation",
     "question_type": "NUMERICAL",
-    "question": "The rate constants for decomposition of acetaldehyde have been measured over the temperature range 700 - 1000 K. The data has been analysed by plotting $\\ln k$ vs $\\frac{10^3}{T}$ graph. The value of activation energy for the reaction is ___ kJ mol$^{-1}$. (Nearest integer) (Given : $R = 8.31 \\, \\mathrm{J \\, K}^{-1} \\, \\mathrm{mol}^{-1}$)",
+    "question": "The rate constants for decomposition of acetaldehyde have been measured over the temperature range 700 - 1000 K. The data has been analysed by plotting $\\ln k$ vs $\\frac{10^3}{T}$ graph. The value of activation energy for the reaction is ___ kJ mo$l^{-1}$. (Nearest integer) (Given : $R = 8.31 \\, \\mathrm{J \\, K}^{-1} \\, \\mathrm{mol}^{-1}$)",
     "option_a": "",
     "option_b": "",
     "option_c": "",

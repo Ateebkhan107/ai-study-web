@@ -50,3 +50,12 @@ __pycache__/
 /.clerk/
 tmp/
 .DS_Store
+muxer
+test_muxed.mp4
+test_video.mp4
+
+prepzii_voiceover.*
+prepzii_audio_master.*
+scratch/clean_26feb_s2*
+scratch/q44_side_by_side.png
+

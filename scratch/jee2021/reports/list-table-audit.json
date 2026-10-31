@@ -1,0 +1,213 @@
+{
+  "generated_at": "2026-10-20T19:27:14.013Z",
+  "scope": "JEE Main 2021",
+  "summary": {
+    "total_list_questions": 57,
+    "already_markdown_tables": 5,
+    "flattened_but_convertible": 28,
+    "image_backed_lists": 4,
+    "missing_list_content": 20
+  },
+  "missing_content": [
+    {
+      "paper_code": "JEE-MAIN-21-01SEP-S1",
+      "question_number": 37,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List – I (Colloid Preparation Method) with List – II (Chemical Reaction). Choose the most appropriate answer from the options given below."
+    },
+    {
+      "paper_code": "JEE-MAIN-21-16MAR-S1",
+      "question_number": 35,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I (Industrial process) with List-II (Application) : Choose the correct answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-16MAR-S1",
+      "question_number": 47,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I (Name of oxo acid) with List-II (Oxidation state of 'P') : Choose the correct answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-16MAR-S2",
+      "question_number": 46,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II. The correct match is :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-17MAR-S2",
+      "question_number": 34,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I and List-II : Choose the correct answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-17MAR-S2",
+      "question_number": 37,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II : Choose the correct answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-17MAR-S2",
+      "question_number": 40,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II : Choose the correct match :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-17MAR-S2",
+      "question_number": 16,
+      "subject": "Physics",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S1",
+      "question_number": 36,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match the list -I with list - II"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S1",
+      "question_number": 38,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S1",
+      "question_number": 39,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II : Choose the most appropriate match :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S1",
+      "question_number": 41,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II Choose the most appropriate answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S1",
+      "question_number": 46,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I with List-II Choose the most appropriate answer from the options given below -"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-18MAR-S2",
+      "question_number": 48,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match list-I (metal) with list-II (refining process) : Choose the most appropriate answer from the option given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-22JUL-S2",
+      "question_number": 39,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List − I with List − II : Choose the correct answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-25JUL-S2",
+      "question_number": 33,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List – I with List – II: Choose the most appropriate answer from the option given below:"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-25JUL-S2",
+      "question_number": 35,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List – I with List – II: Choose the correct answer from the options given below:"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-26AUG-S2",
+      "question_number": 17,
+      "subject": "Physics",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List–I with List–II. Choose the most appropriate answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-27AUG-S2",
+      "question_number": 48,
+      "subject": "Chemistry",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I (Name of ore/mineral) with List – II (Chemical formula) : Choose the most appropriate answer from the options given below :"
+    },
+    {
+      "paper_code": "JEE-MAIN-21-27AUG-S2",
+      "question_number": 14,
+      "subject": "Physics",
+      "markdown": false,
+      "image": false,
+      "letters": 0,
+      "romans": 0,
+      "question": "Match List-I (physical quantity) with List-II (SI unit). Choose the most appropriate answer from the options given below :"
+    }
+  ]
+}

@@ -383,10 +383,17 @@ export async function GET(req) {
       }
     } else {
       // Full paper or random mode: apply all paper metadata filters
-      if (examType) query = query.eq("exam_type", examType);
-      if (attempt) query = query.eq("attempt", attempt);
-      if (shift) query = query.eq("shift", shift);
-      if (paperCode) query = query.eq("paper_code", paperCode);
+      // An exam ID already identifies one exact paper. The question rows may
+      // store a display-oriented attempt value (for example,
+      // "February 26 - Shift 1") while the exam row stores the session name
+      // ("February"). Combining both filters incorrectly produces an empty
+      // result for an otherwise complete paper.
+      if (!examId) {
+        if (examType) query = query.eq("exam_type", examType);
+        if (attempt) query = query.eq("attempt", attempt);
+        if (shift) query = query.eq("shift", shift);
+        if (paperCode) query = query.eq("paper_code", paperCode);
+      }
     }
 
     const { data, error } = await query;

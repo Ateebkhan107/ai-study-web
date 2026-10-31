@@ -279,7 +279,7 @@ export default function ManagePYQs() {
                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Student Preview</h4>
                 <div className="prose dark:prose-invert max-w-none text-sm">
                   <MathText>{editingQuestion.question || "*No question text*"}</MathText>
-                  {editingQuestion.question_image && <img src={editingQuestion.question_image} alt="Q" className="max-h-48 rounded my-2 object-contain" />}
+                  {editingQuestion.question_image && <img src={editingQuestion.question_image} alt="Q" className="max-h-48 rounded my-2 object-contain" style={{ filter: "url(#remove-orange)" }} />}
                   
                   {editingQuestion.question_type !== 'Numerical' && (
                     <div className="grid grid-cols-1 gap-2 mt-4 sm:grid-cols-2">
@@ -291,7 +291,7 @@ export default function ManagePYQs() {
                           <div key={opt} className="p-3 border dark:border-[var(--border)] rounded-lg bg-[var(--card)] dark:bg-[#0A0D1A]">
                             <span className="font-bold mr-2 uppercase">{opt}.</span>
                             {txt && <span className="inline"><MathText className="inline">{txt}</MathText></span>}
-                            {img && <img src={img} alt={opt} className="max-h-24 rounded mt-2 object-contain" />}
+                            {img && <img src={img} alt={opt} className="max-h-24 rounded mt-2 object-contain" style={{ filter: "url(#remove-orange)" }} />}
                           </div>
                         )
                       })}

@@ -105,6 +105,40 @@ function normalizeQuestionLayout(value) {
           s = s.replace(/([^\n])\s*\n*\s*\b(Identify the (?:correct|incorrect) statements?[^\n:]*:?)/g, "$1\n\n$2");
           s = s.replace(/([^\n])\s*\n*\s*\b(The (?:correct|most likely|major|final) (?:name|structure|product|statement|order|value)[^\n:]*:?)/g, "$1\n\n$2");
 
+          // Format inline systems of equations like:
+          // "Consider the following system of equations : x + 2y - 3z = a 2x + 6y - 11 z = b x - 2y + 7z = c, Where a, b and c are real constants."
+          s = s.replace(/((?:system of equations|equations)\s*:\s*)([a-zA-Z0-9\s\+\-\u2212\*\/\.\,\=]+?)(\s*,\s*(?:[Ww]here|[Ff]or|[Ii]f|[Tt]hen)\b)/g, (match, prefix, eqsStr, suffix) => {
+            const parts = eqsStr.split(/\s*=\s*/);
+            if (parts.length < 3) return match;
+
+            const equations = [];
+            let currentLhs = parts[0].trim();
+
+            for (let i = 1; i < parts.length; i++) {
+              const seg = parts[i].trim();
+              if (i === parts.length - 1) {
+                const cleanLhs = currentLhs.replace(/\u2212/g, "-").replace(/(\d+)\s+([a-zA-Z])/g, "$1$2").trim();
+                equations.push(`${cleanLhs} &= ${seg}`);
+              } else {
+                const spaceIdx = seg.indexOf(" ");
+                if (spaceIdx !== -1) {
+                  const rhs = seg.slice(0, spaceIdx).trim();
+                  const nextLhs = seg.slice(spaceIdx + 1).trim();
+                  const cleanLhs = currentLhs.replace(/\u2212/g, "-").replace(/(\d+)\s+([a-zA-Z])/g, "$1$2").trim();
+                  equations.push(`${cleanLhs} &= ${rhs}`);
+                  currentLhs = nextLhs;
+                }
+              }
+            }
+
+            if (equations.length >= 2) {
+              const mathBlock = "\n\n$$\\begin{aligned}\n" + equations.join(" \\\\\n") + "\n\\end{aligned}$$\n\n";
+              const cleanSuffix = suffix.replace(/^[\s,]+/, "").replace(/^Where\b/, "where");
+              return `${prefix.trim()}${mathBlock}${cleanSuffix}`;
+            }
+            return match;
+          });
+
           return s;
         })
         .join("");
@@ -143,9 +177,9 @@ function normalizeFlattenedTables(value) {
   }
 
   // Parse flattened match-the-following questions into structured markdown tables
-  if (/(?:List|Column)[\s-]*[I1]\s*(?:with|and|&)?\s*\|?\s*(?:List|Column)[\s-]*[II2]+/i.test(text) && !/\|[^\n]+\|\s*\n\s*\|[\s:\-\|]+\|/.test(text)) {
+  if (/(?:List|Column)[\s\-–−]*[I1]\s*(?:with|and|&)?\s*\|?\s*(?:List|Column)[\s\-–−]*[II2]+/i.test(text) && !/\|[^\n]+\|\s*\n\s*\|[\s:\-\|]+\|/.test(text)) {
     let s = text;
-    s = s.replace(/([^\n])\s+((?:List|Column)[\s-]*[I1]\s*\|?\s*(?:List|Column)[\s-]*[II2]+)/i, "$1\n$2");
+    s = s.replace(/([^\n])\s+((?:List|Column)[\s\-–−]*[I1]\s*\|?\s*(?:List|Column)[\s\-–−]*[II2]+)/i, "$1\n$2");
     s = s.replace(/([^\n])\s+(\([a-eA-E]\)\s+[^\(\n]+\s*\|\s*\(?[ivx1-5p-tIVX]+\)?)/g, "$1\n$2");
     s = s.replace(/([^\n])\s+(Choose the (?:correct|most appropriate) answer)/gi, "$1\n\n$2");
 
@@ -159,7 +193,7 @@ function normalizeFlattenedTables(value) {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      const headerMatch = line.match(/^(?:\|\s*)?(List[\s-]*[I1]|Column[\s-]*[I1])\s*(?:with|and|&)?\s*\|?\s*(List[\s-]*[II2]+|Column[\s-]*[II2]+)(?:\s*\|)?$/i);
+      const headerMatch = line.match(/^(?:\|\s*)?(List[\s\-–−]*[I1]|Column[\s\-–−]*[I1])\s*(?:with|and|&)?\s*\|?\s*(List[\s\-–−]*[II2]+|Column[\s\-–−]*[II2]+)(?:\s*\|)?$/i);
       if (headerMatch && !line.includes("Match")) {
         col1Title = headerMatch[1].replace(/\s+/g, "-");
         col2Title = headerMatch[2].replace(/\s+/g, "-");
@@ -194,6 +228,92 @@ function normalizeFlattenedTables(value) {
       const after = lines.slice(lastRowIndex + 1).join("\n").trim();
 
       text = [before, markdownTable, after].filter(Boolean).join("\n\n");
+    } else {
+      // Pattern A: Sequential lists: List-I (header1) (a) item1 (b) item2 ... List-II (header2) (i) itemA (ii) itemB ...
+      const seqMatch = text.match(/(?:Match\s+)?(?:the\s+)?(List|Column)[\s\-–−]*[I1]\s*(?:with|and|&)?\s*(List|Column)[\s\-–−]*[II2]+[\s\.:]*(?:(?:List|Column)[\s\-–−]*[I1]\s*(?::\s*([^\(]+?)|(\([^\)]+\)))?[\s\.:]*)?\s*(\([a-eA-E]\)[\s\S]+?)((?:List|Column)[\s\-–−]*[II2]+\s*(?::\s*([^\(]+?)|(\([^\)]+\)))?)[\s\.:]*\s*(\(?[ivx1-9IVX]+\)[\s\S]+?)(?=(?:Choose the correct|From the options|In the light|\n\n|$))/i);
+      
+      const parseItems = (listStr, isLetter) => {
+        const itemRegex = isLetter 
+          ? /(?:\(([a-eA-E])\)|\b([a-eA-E])\.)\s*([\s\S]*?)(?=(?:\([a-eA-E]\)|\b[a-eA-E]\.|$))/g
+          : /(?:\(([ivx1-9IVX]+)\)|\b([ivx1-9IVX]+)\.|\b([ivx1-9IVX]+)\b)\s*([\s\S]*?)(?=(?:\([ivx1-9IVX]+\)|\b[ivx1-9IVX]+\.|$))/g;
+        const items = [];
+        let m;
+        while ((m = itemRegex.exec(listStr)) !== null) {
+          const key = m[1] || m[2] || m[3];
+          const val = (m[m.length - 1] || "").trim();
+          if (key && val) items.push({ key: key.toLowerCase(), text: val });
+        }
+        return items;
+      };
+
+      if (seqMatch) {
+        const col1Detail = seqMatch[3] || seqMatch[4];
+        const col2Detail = seqMatch[7] || seqMatch[8];
+        const col1Header = "List-I" + (col1Detail ? ` (${col1Detail.trim().replace(/^\(|\)$/g, "")})` : "");
+        const col2Header = "List-II" + (col2Detail ? ` (${col2Detail.trim().replace(/^\(|\)$/g, "")})` : "");
+        const items1 = parseItems(seqMatch[5], true);
+        const items2 = parseItems(seqMatch[9], false);
+        const maxLen = Math.max(items1.length, items2.length);
+
+        if (maxLen >= 2) {
+          const rows = [];
+          for (let k = 0; k < maxLen; k++) {
+            const c1 = items1[k] ? `(${items1[k].key}) ${items1[k].text}` : "";
+            const c2 = items2[k] ? `(${items2[k].key}) ${items2[k].text}` : "";
+            rows.push(`| ${c1} | ${c2} |`);
+          }
+
+          const tableMd = [
+            "",
+            `| ${col1Header} | ${col2Header} |`,
+            "| :--- | :--- |",
+            ...rows,
+            "",
+          ].join("\n");
+
+          const matchIndex = seqMatch.index;
+          const before = text.slice(0, matchIndex).trim();
+          const after = text.slice(matchIndex + seqMatch[0].length).trim();
+          const preamble = "Match List-I with List-II:";
+          text = [before || preamble, tableMd, after].filter(Boolean).join("\n\n");
+        }
+      } else {
+        // Pattern B: Interleaved pairs: List-I (header1) List-II (header2) (a) item1 (i) item2 (b) item3 (ii) item4
+        const intMatch = text.match(/(?:Match\s+)?(?:the\s+)?(List|Column)[\s\-–−]*[I1]\s*(?:with|and|&)?\s*(List|Column)[\s\-–−]*[II2]+[\s\.:]*(?:(?:List|Column)[\s\-–−]*[I1]\s*(?::\s*([^\(]+?)|(\([^\)]+\)))?[\s\.:]*)?\s*(?:(?:List|Column)[\s\-–−]*[II2]+\s*(?::\s*([^\(]+?)|(\([^\)]+\)))?[\s\.:]*)?\s*(\([a-eA-E]\)[\s\S]+?)(?=(?:Choose the correct|From the options|In the light|\n\n|$))/i);
+        if (intMatch) {
+          const col1Detail = intMatch[3] || intMatch[4];
+          const col2Detail = intMatch[5] || intMatch[6];
+          const col1Header = "List-I" + (col1Detail ? ` (${col1Detail.trim().replace(/^\(|\)$/g, "")})` : "");
+          const col2Header = "List-II" + (col2Detail ? ` (${col2Detail.trim().replace(/^\(|\)$/g, "")})` : "");
+          const bodyStr = intMatch[7];
+          const pairRegex = /\(([a-eA-E])\)\s*([\s\S]*?)\s*\(([ivxIVX]+|[0-9]+)\)\s*([\s\S]*?)(?=(?:\([a-eA-E]\)|$))/g;
+          const rows = [];
+          let p;
+          while ((p = pairRegex.exec(bodyStr)) !== null) {
+            const letter = p[1].toLowerCase();
+            const leftVal = p[2].trim().replace(/\s*[—–−-]\s*$/, "");
+            const num = p[3].toLowerCase();
+            const rightVal = p[4].trim();
+            rows.push(`| (${letter}) ${leftVal} | (${num}) ${rightVal} |`);
+          }
+
+          if (rows.length >= 2) {
+            const tableMd = [
+              "",
+              `| ${col1Header} | ${col2Header} |`,
+              "| :--- | :--- |",
+              ...rows,
+              "",
+            ].join("\n");
+
+            const matchIndex = intMatch.index;
+            const before = text.slice(0, matchIndex).trim();
+            const after = text.slice(matchIndex + intMatch[0].length).trim();
+            const preamble = "Match List-I with List-II:";
+            text = [before || preamble, tableMd, after].filter(Boolean).join("\n\n");
+          }
+        }
+      }
     }
   }
 
@@ -229,7 +349,7 @@ function normalizeLegacyScientificNotation(value) {
     "α": "\\alpha", "β": "\\beta", "λ": "\\lambda", "ρ": "\\rho",
   };
 
-  return splitMathSegments(value)
+  const processed = splitMathSegments(value)
     .map((segment) => {
       // PRESERVE ALL MATH & IMAGE/LINK SEGMENTS EXACTLY AS THEY ARE
       if (isPreservedSegment(segment)) return segment;
@@ -273,6 +393,9 @@ function normalizeLegacyScientificNotation(value) {
       return text;
     })
     .join("");
+
+  // Merge adjacent math tokens (e.g. $\Delta$$_r$H$ or $a$$b$) to prevent unintended $$ display math
+  return processed.replace(/\$\s*\$/g, "");
 }
 
 function normalizeDisplayMathDelimiters(value) {
@@ -326,6 +449,16 @@ function autoFormatBareLatex(value) {
       // 2. Wrap bare algebraic expressions like "y = x - 5x^{2}" or "4y = 2x - 25x^{2}"
       s = s.replace(/([0-9]*[a-zA-Z]\s*=\s*[0-9a-zA-Z\s\+\-\*\/\^_\{\}]+(?:\^\{[0-9a-zA-Z\+\-]+\}|_\{[0-9a-zA-Z\+\-]+\})[0-9a-zA-Z\s\+\-\*\/\^_\{\}]*)/g, (match) => {
         return ` $${match.trim()}$ `;
+      });
+
+      // Wrap bare multi-term equations: "5a = 2b + c" or "5a = 2b +c"
+      s = s.replace(/(\b[0-9]*[a-zA-Z]\s*=\s*[0-9a-zA-Z\s\+\-\*\/\(\)]+[\+\-\*\/][0-9a-zA-Z\s\+\-\*\/\(\)]+)/g, (match) => {
+        return ` $${match.trim().replace(/\s*([+\-])\s*/g, " $1 ")}$ `;
+      });
+
+      // Wrap variable sets like "for all a, b and c"
+      s = s.replace(/\bfor all ([a-z]),\s*([a-z])\s*and\s*([a-z])\b/gi, (match, v1, v2, v3) => {
+        return `for all $${v1}$, $${v2}$ and $${v3}$`;
       });
 
       // 3. Fix adjacent variables and words: "$L$and" -> "$L$ and", "area$A$is" -> "area $A$ is"

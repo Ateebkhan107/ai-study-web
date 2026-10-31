@@ -192,7 +192,7 @@ export default function ImageManager() {
 
                 {currentQ[field] && (
                   <div className="mb-3 flex justify-center bg-gray-100 dark:bg-[var(--surface-elevated)] rounded-lg p-2 h-32">
-                    <img src={currentQ[field]} alt={field} className="max-h-full object-contain" />
+                    <img src={currentQ[field]} alt={field} className="max-h-full object-contain" style={{ filter: "url(#remove-orange)" }} />
                   </div>
                 )}
 

@@ -18,6 +18,29 @@ import { AlertTriangle, BookOpen, FileText, Flag, Inbox, RotateCcw, Shuffle } fr
 
 const LETTERS = ["A", "B", "C", "D"];
 
+const PALETTE_LEGEND = [
+  {
+    key: "current",
+    label: "Current",
+    className: "border-brand bg-brand",
+  },
+  {
+    key: "answered",
+    label: "Answered",
+    className: "border-emerald-600 bg-emerald-600",
+  },
+  {
+    key: "visited",
+    label: "Not answered",
+    className: "border-amber-300 bg-amber-50 dark:border-amber-500/50 dark:bg-amber-500/10",
+  },
+  {
+    key: "marked",
+    label: "For review",
+    className: "border-violet-300 bg-violet-50 dark:border-violet-500/50 dark:bg-violet-500/10",
+  },
+];
+
 function originalQuestionNumber(question, fallback) {
   if (Number.isFinite(Number(question?.question_number)) && Number(question.question_number) > 0) {
     return Number(question.question_number);
@@ -36,61 +59,18 @@ const modeLabels = {
   mistakes: { label: "Mistake Revision", Icon: RotateCcw },
 };
 
-const RemoveOrangeFilter = () => (
-  <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
-    <filter id="remove-orange">
-      <feColorMatrix
-        type="matrix"
-        values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
-      />
-    </filter>
-  </svg>
-);
-
 const PaletteIcon = () => (
   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
   </svg>
 );
 
-const PALETTE_LEGEND = [
-  {
-    key: "answered",
-    label: "Answered",
-    className: "bg-emerald-600 border-emerald-600 text-white",
-  },
-  {
-    key: "current",
-    label: "Current",
-    className: "bg-brand border-brand text-slate-950",
-  },
-  {
-    key: "marked",
-    label: "Marked",
-    className: "bg-violet-100 border-violet-300 text-violet-700",
-  },
-  {
-    key: "answeredMarked",
-    label: "Answered + Marked",
-    className: "bg-violet-600 border-violet-600 text-white",
-  },
-  {
-    key: "visited",
-    label: "Visited",
-    className: "bg-amber-100 border-amber-300 text-amber-700",
-  },
-  {
-    key: "notVisited",
-    label: "Not Visited",
-    className: "bg-slate-100 border-slate-200 text-slate-500",
-  },
-];
 
 const compactQuestionImageClassName =
-  "h-auto max-h-[105px] sm:max-h-[120px] lg:max-h-[135px] w-auto max-w-[320px] sm:max-w-[380px] rounded-xl border border-slate-200/70 bg-white p-1.5 sm:p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
+  "h-auto max-h-[180px] sm:max-h-[220px] lg:max-h-[260px] w-auto max-w-full rounded-xl border border-slate-200/70 bg-white p-1.5 sm:p-2 object-contain shadow-xs dark:border-[var(--border)]/60";
 
 const compactOptionImageClassName =
-  "h-auto max-h-[38px] sm:max-h-[46px] w-auto max-w-full rounded-lg border border-slate-200/70 bg-white p-1 object-contain dark:border-[var(--border)]/60";
+  "h-auto max-h-[60px] sm:max-h-[72px] w-auto max-w-full rounded-lg bg-white p-1 object-contain";
 
 const PaletteButton = memo(function PaletteButton({
   label,
@@ -219,7 +199,6 @@ const QuestionOption = memo(function QuestionOption({
             className={compactOptionImageClassName}
             loading="lazy"
             decoding="async"
-            style={{ filter: "url(#remove-orange)" }}
           />
         ) : (
           <MathText className="text-[14px] leading-5.5 text-inherit">{optionText}</MathText>
@@ -721,7 +700,6 @@ export default function PYQSessionPage() {
 
   return (
     <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-slate-50 dark:bg-[var(--background)]">
-      <RemoveOrangeFilter />
       {/* ── Header ── */}
       <header className="shrink-0 z-50 border-b border-slate-200/70 bg-[var(--card)]/95 px-2.5 py-2 backdrop-blur-xl dark:border-[var(--border)]/60 dark:bg-[var(--surface)]/95 sm:px-5">
         <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-2">
@@ -883,7 +861,6 @@ export default function PYQSessionPage() {
                   className={compactQuestionImageClassName}
                   loading="lazy"
                   decoding="async"
-                  style={{ filter: "url(#remove-orange)" }}
                 />
               </div>
             )}
@@ -904,7 +881,6 @@ export default function PYQSessionPage() {
                   className={compactQuestionImageClassName}
                   loading="lazy"
                   decoding="async"
-                  style={{ filter: "url(#remove-orange)" }}
                 />
               </div>
             )}

@@ -102,7 +102,7 @@
     "chapter": "System of Particles and Rotational Motion",
     "section": "Rotational Dynamics",
     "question_type": "MCQ",
-    "question": "A thin circular ring of mass M and radius R is rotating with a constant angular velocity 2 rads$^{-1}$ in a horizontal plane about an axis vertical to its plane and passing through the center of the ring. If two objects each of mass m be attached gently to the opposite ends of a diameter of ring, the ring will then rotate with an angular velocity (in rads$^{-1}$).",
+    "question": "A thin circular ring of mass M and radius R is rotating with a constant angular velocity 2 rad$s^{-1}$ in a horizontal plane about an axis vertical to its plane and passing through the center of the ring. If two objects each of mass m be attached gently to the opposite ends of a diameter of ring, the ring will then rotate with an angular velocity (in rad$s^{-1}$).",
     "option_a": "$\\frac{M}{(M + m)}$",
     "option_b": "$\\frac{(M + 2m)}{2M}$",
     "option_c": "$\\frac{2M}{(M + 2m)}$",
@@ -226,7 +226,7 @@
     "embedded_image_sources": [
       "59c94ce6-bec7-4bc7-bbe3-e2244d9e18b7.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q10.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -435,7 +435,7 @@
     "embedded_image_sources": [
       "de72274a-2b59-4ba4-bca7-dbe6f3b338e9.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q19.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -529,7 +529,7 @@
     "embedded_image_sources": [
       "64e1396e-a25b-49c7-b1b4-f1165e5da1f2.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q23.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -600,7 +600,7 @@
     "embedded_image_sources": [
       "da009650-ec9d-4fc4-9ed5-fa847677cef1.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q26.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -673,7 +673,7 @@
     "embedded_image_sources": [
       "bf29d7d7-f47f-42df-961e-f4116977d194.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q29.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -698,7 +698,7 @@
     "embedded_image_sources": [
       "3a235b3a-b1b0-499d-887e-61dcb6b98a25.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q30.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,

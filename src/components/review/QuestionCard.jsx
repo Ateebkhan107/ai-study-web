@@ -181,6 +181,7 @@ export default function QuestionCard({ question, index }) {
                             className="max-h-[38px] sm:max-h-[46px] w-auto max-w-full object-contain"
                             loading="lazy"
                             decoding="async"
+                            style={{ filter: "url(#remove-orange)" }}
                           />
                         </div>
                       ) : null}

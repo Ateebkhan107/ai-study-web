@@ -240,6 +240,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
               className="mx-auto h-auto max-h-[105px] sm:max-h-[120px] lg:max-h-[135px] w-auto max-w-[340px] sm:max-w-[400px] object-contain"
               loading="lazy"
               decoding="async"
+              style={{ filter: "url(#remove-orange)" }}
             />
           </div>
         )}
@@ -332,6 +333,7 @@ const TestQuestionPanel = memo(function TestQuestionPanel({
                             className="max-h-[38px] sm:max-h-[46px] w-auto max-w-full object-contain"
                             loading="lazy"
                             decoding="async"
+                            style={{ filter: "url(#remove-orange)" }}
                           />
                         </div>
                       )}

@@ -1,0 +1,410 @@
+{
+  "total_images": 551,
+  "total_issues": 32,
+  "issue_counts": {
+    "BORDER_CLIPPING": 30,
+    "OPTION_LABEL_IN_IMAGE": 2,
+    "QUESTION_NUMBER_IN_IMAGE": 1,
+    "RESIDUAL_PROSE_IN_IMAGE": 2
+  },
+  "unreferenced_count": 40,
+  "unreferenced_images": [
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q26.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q45.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q48.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q8.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q18.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q29.png",
+    "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q46.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q10.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q17.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q27.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q44.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q45.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q45_opt_c.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q45_opt_d.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q46.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q48_opt_a.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q48_opt_b.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q48_opt_c.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q48_opt_d.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q14.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q18.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q23.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q30.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q43_opt_c.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q46.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q47.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q28.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q44_opt_a.png",
+    "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q44_opt_b.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q19.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q21.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q26.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q44.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q45.png",
+    "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q60.png",
+    "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q10.png",
+    "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q36_opt_a.png",
+    "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q36_opt_b.png",
+    "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q36_opt_c.png",
+    "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q36_opt_d.png"
+  ],
+  "issues": [
+    {
+      "paper_code": "JEE-MAIN-22-24JUN-S1",
+      "question_number": 24,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q24.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(22px)"
+      ],
+      "dimensions": "284x133",
+      "ocr_text": "L=200 mH"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-24JUN-S1",
+      "question_number": 28,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S1/q28.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(22px)"
+      ],
+      "dimensions": "253x207",
+      "ocr_text": "@ th Platform 7"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-24JUN-S2",
+      "question_number": 30,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S2/q30.png",
+      "issues": [
+        "BORDER_CLIPPING: left(28px)"
+      ],
+      "dimensions": "287x315",
+      "ocr_text": "Time (minute)"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUN-S1",
+      "question_number": 28,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q28.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(23px)"
+      ],
+      "dimensions": "503x195",
+      "ocr_text": "5vxm 52"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-25JUN-S2",
+      "question_number": 47,
+      "field": "option_d_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q47_opt_d.png",
+      "issues": [
+        "OPTION_LABEL_IN_IMAGE: 'A'"
+      ],
+      "dimensions": "414x105",
+      "ocr_text": "fe) A Cols Cl + CH;MgBr + CdCl,"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUL-S1",
+      "question_number": 49,
+      "field": "option_d_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q49_opt_d.png",
+      "issues": [
+        "BORDER_CLIPPING: top(36px)"
+      ],
+      "dimensions": "266x275",
+      "ocr_text": "UTIs H OH HO H H OH H OH CH,OH"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUL-S1",
+      "question_number": 1,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-26JUL-S1/q1.png",
+      "issues": [
+        "BORDER_CLIPPING: top(98px)"
+      ],
+      "dimensions": "497x207",
+      "ocr_text": "20 kg"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUL-S2",
+      "question_number": 16,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-26JUL-S2/q16.png",
+      "issues": [
+        "BORDER_CLIPPING: top(20px)"
+      ],
+      "dimensions": "322x307",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-26JUN-S1",
+      "question_number": 26,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-26JUN-S1/q26.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(53px)"
+      ],
+      "dimensions": "444x295",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S1",
+      "question_number": 48,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q48.png",
+      "issues": [
+        "BORDER_CLIPPING: top(247px)",
+        "QUESTION_NUMBER_IN_IMAGE: '1. Anti-depressant'"
+      ],
+      "dimensions": "909x990",
+      "ocr_text": "List IT 1. Anti-depressant II. 550 times sweeter than cane sugar. cH; CH, B cl NHNH, III. Narcotic a"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S1",
+      "question_number": 7,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S1/q7.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(35px)"
+      ],
+      "dimensions": "1234x276",
+      "ocr_text": "18\u00b0C \u2014\u2014 Insulating material"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 43,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q43.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(19px)"
+      ],
+      "dimensions": "1010x149",
+      "ocr_text": "Bry HI CH, -C=CH-CH, \u2014\u2014\u2014> A\u2014\u2014> B | CH,OH (major product) Carr"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 46,
+      "field": "option_a_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q46_opt_a.png",
+      "issues": [
+        "BORDER_CLIPPING: top(24px), right(106px)"
+      ],
+      "dimensions": "172x178",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 46,
+      "field": "option_b_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q46_opt_b.png",
+      "issues": [
+        "BORDER_CLIPPING: top(46px)"
+      ],
+      "dimensions": "302x333",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 46,
+      "field": "option_c_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q46_opt_c.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(163px)"
+      ],
+      "dimensions": "296x327",
+      "ocr_text": "Tr CH, NH,C1~"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 70,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q70.png",
+      "issues": [
+        "BORDER_CLIPPING: top(80px)"
+      ],
+      "dimensions": "727x431",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 22,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q22.png",
+      "issues": [
+        "BORDER_CLIPPING: top(42px)"
+      ],
+      "dimensions": "625x366",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 29,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q29.png",
+      "issues": [
+        "BORDER_CLIPPING: top(118px)"
+      ],
+      "dimensions": "1103x310",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUL-S2",
+      "question_number": 30,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUL-S2/q30.png",
+      "issues": [
+        "BORDER_CLIPPING: top(34px)"
+      ],
+      "dimensions": "503x298",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-27JUN-S2",
+      "question_number": 59,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-27JUN-S2/q59.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(16px)"
+      ],
+      "dimensions": "380x265",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-28JUL-S1",
+      "question_number": 43,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-28JUL-S1/q43.png",
+      "issues": [
+        "BORDER_CLIPPING: right(19px)"
+      ],
+      "dimensions": "1051x228",
+      "ocr_text": "CH, (BH3), | Hg(OAc), H,O = H,C-C-CH=CH, H,0,/OH | NaBH, CH,"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 45,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q45.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(48px)"
+      ],
+      "dimensions": "1057x370",
+      "ocr_text": "OH ruYT Trt Bry A NH,OH \u2014\u2014\u2014> B POs"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 46,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q46.png",
+      "issues": [
+        "BORDER_CLIPPING: right(16px)"
+      ],
+      "dimensions": "1068x320",
+      "ocr_text": "CI \u2018A\u2019 (CgHgClhO \u2014\u20143, CeHeCINO 2 o (CsHeC20) Bes NaOH we H)N"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 48,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q48.png",
+      "issues": [
+        "BORDER_CLIPPING: left(55px)"
+      ],
+      "dimensions": "572x250",
+      "ocr_text": "(i) AIH (i-Bu) CH; CHO | 2 oo - B (ii) HO. dil NaOH, A (Major Product) The product 'B\u2019 is :"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 48,
+      "field": "option_a_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q48_opt_a.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(62px)"
+      ],
+      "dimensions": "443x105",
+      "ocr_text": "nS _/ N=CH-CH3"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 48,
+      "field": "option_d_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q48_opt_d.png",
+      "issues": [
+        "BORDER_CLIPPING: top(59px)"
+      ],
+      "dimensions": "478x120",
+      "ocr_text": "YS fe) DN tf \\ (-N=cHCHO"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S1",
+      "question_number": 25,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S1/q25.png",
+      "issues": [
+        "BORDER_CLIPPING: bottom(24px)"
+      ],
+      "dimensions": "779x306",
+      "ocr_text": ""
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S2",
+      "question_number": 44,
+      "field": "option_c_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q44_opt_c.png",
+      "issues": [
+        "OPTION_LABEL_IN_IMAGE: 'D'"
+      ],
+      "dimensions": "302x125",
+      "ocr_text": "\u00bb< Chiral D"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S2",
+      "question_number": 45,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q45.png",
+      "issues": [
+        "BORDER_CLIPPING: top(17px), bottom(23px)",
+        "RESIDUAL_PROSE_IN_IMAGE: 'Statement I: The compound |\u201d H'",
+        "RESIDUAL_PROSE_IN_IMAGE: 'Statement II: \u201c2'"
+      ],
+      "dimensions": "885x440",
+      "ocr_text": "NO, Statement I: The compound |\u201d H is optically active. Oo cu, (A) CH, NI oO. Statement II: \u201c2 HWS i"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S2",
+      "question_number": 56,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q56.png",
+      "issues": [
+        "BORDER_CLIPPING: top(57px)"
+      ],
+      "dimensions": "660x123",
+      "ocr_text": "(Given: bpy = i \\ pp \u2014N N="
+    },
+    {
+      "paper_code": "JEE-MAIN-22-29JUL-S2",
+      "question_number": 28,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-29JUL-S2/q28.png",
+      "issues": [
+        "BORDER_CLIPPING: top(280px), bottom(23px)"
+      ],
+      "dimensions": "485x225",
+      "ocr_text": "WV"
+    },
+    {
+      "paper_code": "JEE-MAIN-22-30JUL-S2",
+      "question_number": 78,
+      "field": "question_image",
+      "rel_path": "scratch/jee2022/images/JEE-MAIN-22-30JUL-S2/q78.png",
+      "issues": [
+        "BORDER_CLIPPING: top(34px)"
+      ],
+      "dimensions": "822x71",
+      "ocr_text": ""
+    }
+  ]
+}

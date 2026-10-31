@@ -31,17 +31,6 @@ const shouldHideReviewSolution = (exam, year) => {
   return normalizedExam.startsWith("NEET") || isScopedJee;
 };
 
-const RemoveOrangeFilter = () => (
-  <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
-    <filter id="remove-orange">
-      <feColorMatrix
-        type="matrix"
-        values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0"
-      />
-    </filter>
-  </svg>
-);
-
 export default function PYQResultsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -254,37 +243,36 @@ export default function PYQResultsPage() {
   const skippedWidth = total > 0 ? (skipped / total) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-4 sm:p-6 lg:p-8 flex items-start justify-center relative overflow-x-hidden overflow-y-auto">
-      <RemoveOrangeFilter />
-      <div className="w-full max-w-4xl z-10 animate-slideUp py-6 sm:py-10">
+    <div className="min-h-screen bg-slate-50 dark:bg-[var(--background)] text-slate-900 dark:text-white p-3 sm:p-4 lg:p-5 flex items-start justify-center relative overflow-x-hidden overflow-y-auto">
+      <div className="w-full max-w-3xl z-10 animate-slideUp py-3 sm:py-5">
         
         {/* Main Report */}
-        <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-3xl border border-slate-200/80 dark:border-[var(--border)]/70 shadow-sm p-6 sm:p-8 lg:p-10 mb-8 relative">
+        <div className="bg-[var(--card)] dark:bg-[var(--surface)] rounded-2xl border border-slate-200/80 dark:border-[var(--border)]/70 shadow-sm p-5 sm:p-6 lg:p-7 mb-6 relative">
           
           {/* HEADER / TITLE */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
               Test Result
             </p>
-            <h1 className="mt-3 text-3xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            <h1 className="mt-2 text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-3xl">
               Deck Submitted
             </h1>
             <p className="mt-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
               {headlineMeta}
             </p>
             {shiftHeaderLabel && (
-              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 dark:bg-brand/15 px-4 py-1.5 text-xs sm:text-sm font-bold text-brand-pressed dark:text-brand shadow-sm">
+              <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 dark:bg-brand/15 px-3.5 py-1.5 text-xs font-bold text-brand-pressed dark:text-brand shadow-sm">
                 <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 text-brand" />
                 <span>{shiftHeaderLabel}</span>
               </div>
             )}
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-12">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-7 md:gap-10 mb-8">
             {/* SCORE RING */}
             <div className="flex flex-col items-center">
               <div className="relative flex items-center justify-center">
-                <svg className="w-48 h-48 sm:w-56 sm:h-56 transform -rotate-90" viewBox="0 0 200 200">
+                <svg className="w-40 h-40 sm:w-44 sm:h-44 transform -rotate-90" viewBox="0 0 200 200">
                   <circle cx="100" cy="100" r={radius} fill="none" strokeWidth="12" className="stroke-slate-100 dark:stroke-[var(--surface-elevated)]" />
                   <circle 
                     cx="100" 
@@ -299,7 +287,7 @@ export default function PYQResultsPage() {
                   />
                 </svg>
                 <div className="absolute flex flex-col items-center justify-center text-center">
-                  <span className="text-5xl sm:text-6xl font-black font-display text-slate-950 dark:text-white tabular-nums tracking-tighter">
+                  <span className="text-4xl sm:text-5xl font-black font-display text-slate-950 dark:text-white tabular-nums tracking-tighter">
                     {Math.round(animatedScore)}
                   </span>
                   <span className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
@@ -307,20 +295,20 @@ export default function PYQResultsPage() {
                   </span>
                 </div>
               </div>
-              <span className={`mt-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-black uppercase tracking-wider ${tier.badge}`}>
+              <span className={`mt-4 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-[11px] font-black uppercase tracking-wider ${tier.badge}`}>
                 {tier.label}
               </span>
             </div>
 
             {/* BREAKDOWN & STATS */}
-            <div className="flex-1 w-full max-w-sm sm:max-w-md">
+            <div className="flex-1 w-full max-w-sm">
               {/* Correct/Wrong/Skipped Bar */}
-              <div className="mb-8">
+              <div className="mb-5">
                 <div className="flex justify-between items-baseline mb-3 text-sm font-bold text-slate-900 dark:text-white">
                   <span>Question Split</span>
                   <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{total} Total</span>
                 </div>
-                <div className="flex w-full h-3.5 sm:h-4 rounded-full overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)] shadow-inner">
+                <div className="flex w-full h-3 rounded-full overflow-hidden bg-slate-100 dark:bg-[var(--surface-elevated)] shadow-inner">
                   <div className="bg-emerald-500 transition-all duration-1000 ease-out" style={{ width: `${showAnim ? correctWidth : 0}%` }} />
                   <div className="bg-rose-500 transition-all duration-1000 ease-out" style={{ width: `${showAnim ? wrongWidth : 0}%` }} />
                   <div className="bg-slate-200 dark:bg-slate-600 transition-all duration-1000 ease-out" style={{ width: `${showAnim ? skippedWidth : 0}%` }} />
@@ -334,13 +322,13 @@ export default function PYQResultsPage() {
 
               {/* Grid for Accuracy & Attempted */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                 <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-2xl p-4 sm:p-5 border border-slate-100 dark:border-[var(--border-subtle)]/50">
+                 <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-3.5 sm:p-4 border border-slate-100 dark:border-[var(--border-subtle)]/50">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-1.5">Accuracy</p>
-                    <p className="text-2xl sm:text-3xl font-black font-display text-slate-900 dark:text-white">{accuracy}%</p>
+                    <p className="text-2xl font-black font-display text-slate-900 dark:text-white">{accuracy}%</p>
                  </div>
-                 <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-2xl p-4 sm:p-5 border border-slate-100 dark:border-[var(--border-subtle)]/50">
+                 <div className="bg-slate-50 dark:bg-[var(--surface-elevated)]/50 rounded-xl p-3.5 sm:p-4 border border-slate-100 dark:border-[var(--border-subtle)]/50">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-1.5">Attempted</p>
-                    <p className="text-2xl sm:text-3xl font-black font-display text-slate-900 dark:text-white">
+                    <p className="text-2xl font-black font-display text-slate-900 dark:text-white">
                       {attempted}<span className="text-base sm:text-lg text-slate-400 dark:text-slate-500 ml-1">/ {total}</span>
                     </p>
                  </div>
@@ -349,21 +337,21 @@ export default function PYQResultsPage() {
           </div>
 
           {/* TAKEAWAY CARD */}
-          <div className="mb-10">
-            <div className="p-5 sm:p-6 bg-brand/5 dark:bg-brand/10 border border-brand/20 dark:border-brand/30 rounded-2xl flex gap-4 sm:gap-5 items-start relative overflow-hidden">
+          <div className="mb-7">
+            <div className="p-4 sm:p-5 bg-brand/5 dark:bg-brand/10 border border-brand/20 dark:border-brand/30 rounded-xl flex gap-3.5 items-start relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1.5 h-full bg-brand" />
               <div className="p-2 sm:p-2.5 rounded-full bg-brand/10 dark:bg-brand/20 text-brand-pressed dark:text-brand shrink-0 ml-1">
                 <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
               </div>
               <div className="pt-0.5">
                 <h3 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-pressed dark:text-brand/80 mb-1.5">Today&apos;s Takeaway</h3>
-                <p className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">{takeaway}</p>
+                <p className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white leading-relaxed">{takeaway}</p>
               </div>
             </div>
           </div>
 
           {/* SESSION DETAILS FOOTER */}
-          <div className="border-t border-slate-200/80 dark:border-[var(--border)]/70 pt-6">
+          <div className="border-t border-slate-200/80 dark:border-[var(--border)]/70 pt-5">
              <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3">Session Details</h2>
              <div className="flex flex-wrap gap-2.5">
                 {detailItems.map((item, index) => (
@@ -376,16 +364,16 @@ export default function PYQResultsPage() {
           </div>
 
           {/* CTA BUTTONS */}
-          <div className="flex flex-col gap-3 border-t border-slate-200/80 mt-8 pt-7 dark:border-[var(--border)]/70 sm:flex-row">
+          <div className="flex flex-col gap-3 border-t border-slate-200/80 mt-6 pt-5 dark:border-[var(--border)]/70 sm:flex-row">
             <button
               onClick={() => setShowReview(v => !v)}
-              className="flex-1 rounded-xl bg-brand px-5 py-4 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover shadow-sm"
+              className="flex-1 rounded-xl bg-brand px-5 py-3 text-sm font-black text-black transition-colors duration-200 hover:bg-brand-hover shadow-sm"
             >
               {showReview ? "Hide Review" : "Review Answers"}
             </button>
             <button
               onClick={() => router.push("/pyq")}
-              className="flex-1 rounded-xl border border-slate-200/80 bg-[var(--card)] px-5 py-4 text-sm font-black text-slate-700 transition-colors duration-200 hover:border-brand/50 dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-200 shadow-sm"
+              className="flex-1 rounded-xl border border-slate-200/80 bg-[var(--card)] px-5 py-3 text-sm font-black text-slate-700 transition-colors duration-200 hover:border-brand/50 dark:border-[var(--border)]/70 dark:bg-[var(--surface)] dark:text-slate-200 shadow-sm"
             >
               Back to Setup
             </button>
@@ -460,8 +448,7 @@ export default function PYQResultsPage() {
                         <img 
                           src={q.question_image} 
                           alt="Question visual" 
-                          className="h-auto max-h-[120px] sm:max-h-[145px] w-auto max-w-[360px] sm:max-w-[420px] rounded-xl border border-slate-200/60 bg-white p-1.5 sm:p-2 object-contain dark:border-[var(--border)]/50"
-                          style={{ filter: "url(#remove-orange)" }}
+                          className="h-auto max-h-[260px] sm:max-h-[320px] lg:max-h-[380px] w-auto max-w-full rounded-xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
                         />
                       </div>
                     )}
@@ -476,10 +463,9 @@ export default function PYQResultsPage() {
                         <img
                           src={q.question_image}
                           alt="Question visual"
-                          className="h-auto max-h-[105px] sm:max-h-[125px] w-auto max-w-[340px] sm:max-w-[400px] rounded-xl border border-slate-200/60 bg-white p-1.5 sm:p-2 object-contain dark:border-[var(--border)]/50"
+                          className="h-auto max-h-[260px] sm:max-h-[320px] lg:max-h-[380px] w-auto max-w-full rounded-xl border border-slate-200/60 bg-white p-2 object-contain dark:border-[var(--border)]/50"
                           loading="lazy"
                           decoding="async"
-                          style={{ filter: "url(#remove-orange)" }}
                         />
                       </div>
                     )}
@@ -510,7 +496,10 @@ export default function PYQResultsPage() {
                   ) : (
                     <div className="space-y-3 mb-6">
                       {["a", "b", "c", "d"].map(option => {
-                        const isCorrectOption = qType === "MULTIPLE_CORRECT"
+                        const hasAcceptedMcqAlternatives = qType === "MCQ"
+                          && Array.isArray(q.correct_options)
+                          && q.correct_options.length > 0;
+                        const isCorrectOption = qType === "MULTIPLE_CORRECT" || hasAcceptedMcqAlternatives
                           ? (Array.isArray(q.correct_options) && q.correct_options.map(o => String(o).toLowerCase()).includes(option))
                         : (String(q.correct_option).toLowerCase() === option);
 
@@ -553,8 +542,7 @@ export default function PYQResultsPage() {
                                 <img 
                                   src={q[`option_${option}_image`]} 
                                   alt={`Option ${option.toUpperCase()} visual`} 
-                                  className="h-auto max-h-[38px] sm:max-h-[46px] w-auto max-w-[280px] rounded-lg border border-slate-200/60 bg-white p-1 object-contain dark:border-[var(--border)]/50"
-                                  style={{ filter: "url(#remove-orange)" }}
+                                  className="h-auto max-h-[80px] sm:max-h-[96px] w-auto max-w-full rounded-lg bg-white p-1.5 object-contain"
                                 />
                               )}
                             </div>
@@ -617,7 +605,6 @@ export default function PYQResultsPage() {
                             src={q.explanation_image}
                             alt="Explanation visual"
                             className="mt-2 rounded-xl border border-slate-200/60 dark:border-[var(--border)]/50 max-w-full"
-                            style={{ filter: "url(#remove-orange)" }}
                           />
                         )}
                       </div>

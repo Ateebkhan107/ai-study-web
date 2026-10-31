@@ -195,10 +195,10 @@
     "section": "Electrical Devices",
     "question_type": "MCQ",
     "question": "Match List-I with List-II List-I\n\nChoose the correct answer from the options given below :-",
-    "option_a": "(A)–(II), (B)–(I), (C)–(IV), (D)–(III)",
-    "option_b": "(A)–(II), (B)–(I), (C)–(III), (D)–(IV)",
-    "option_c": "(A)–(III), (B)–(IV), (C)–(II), (D)–(I)",
-    "option_d": "(A)–(III), (B)–(I), (C)–(II), (D)–(IV)",
+    "option_a": "(A)\u2013(II), (B)\u2013(I), (C)\u2013(IV), (D)\u2013(III)",
+    "option_b": "(A)\u2013(II), (B)\u2013(I), (C)\u2013(III), (D)\u2013(IV)",
+    "option_c": "(A)\u2013(III), (B)\u2013(IV), (C)\u2013(II), (D)\u2013(I)",
+    "option_d": "(A)\u2013(III), (B)\u2013(I), (C)\u2013(II), (D)\u2013(IV)",
     "correct_option": "a",
     "embedded_image_sources": [
       "65fe13a7-d3a0-4d16-a355-48891d5e79ed.png"
@@ -642,7 +642,7 @@
     "embedded_image_sources": [
       "09974bed-baa1-4283-a6b5-a57d8338581a.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q28.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,

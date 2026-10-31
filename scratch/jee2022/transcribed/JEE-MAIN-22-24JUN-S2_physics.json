@@ -100,7 +100,7 @@
     "chapter": "Thermodynamics",
     "section": "Heat Engines, Carnot Cycle & Second Law",
     "question_type": "MCQ",
-    "question": "A Carnot engine take 5000 kcal of heat from a reservoir at 727°C and gives heat to a sink at 127°C. The work done by the engine is :",
+    "question": "A Carnot engine take 5000 kcal of heat from a reservoir at 727\u00b0C and gives heat to a sink at 127\u00b0C. The work done by the engine is :",
     "option_a": "$3 \\times 10^6\\,\\mathrm{J}$",
     "option_b": "Zero",
     "option_c": "$12.6 \\times 10^6\\,\\mathrm{J}$",
@@ -569,7 +569,7 @@
     "embedded_image_sources": [
       "425c241f-44e4-439e-af38-ab12ca16e865.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S2/q25.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -686,7 +686,7 @@
     "embedded_image_sources": [
       "7149f718-bf90-48bd-9caa-726275098384.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-24JUN-S2/q30.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
