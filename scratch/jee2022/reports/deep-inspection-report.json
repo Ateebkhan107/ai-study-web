@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-31T17:14:44.880Z",
+  "timestamp": "2026-11-01T17:34:38.724Z",
   "totalPapers": 24,
   "totalQuestions": 2160,
-  "totalImages": 551,
+  "totalImages": 565,
   "totalIssues": 129,
   "summaryByType": {
     "LEFTOVER_OPTION_PREFIX": 129
@@ -670,19 +670,19 @@
     {
       "paper": "JEE-MAIN-22-25JUN-S1",
       "questions": 90,
-      "images": 22,
+      "images": 25,
       "issuesCount": 0
     },
     {
       "paper": "JEE-MAIN-22-25JUN-S2",
       "questions": 90,
-      "images": 24,
+      "images": 27,
       "issuesCount": 0
     },
     {
       "paper": "JEE-MAIN-22-26JUN-S1",
       "questions": 90,
-      "images": 30,
+      "images": 31,
       "issuesCount": 0
     },
     {
@@ -748,19 +748,19 @@
     {
       "paper": "JEE-MAIN-22-26JUL-S1",
       "questions": 90,
-      "images": 22,
+      "images": 25,
       "issuesCount": 15
     },
     {
       "paper": "JEE-MAIN-22-26JUL-S2",
       "questions": 90,
-      "images": 11,
+      "images": 14,
       "issuesCount": 0
     },
     {
       "paper": "JEE-MAIN-22-27JUL-S1",
       "questions": 90,
-      "images": 10,
+      "images": 11,
       "issuesCount": 1
     },
     {

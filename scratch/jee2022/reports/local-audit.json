@@ -2,7 +2,7 @@
   "expected_papers": 24,
   "audited_papers": 24,
   "questions": 2160,
-  "images": 551,
+  "images": 565,
   "failures": [],
   "papers": [
     {
@@ -20,19 +20,19 @@
     {
       "paper_code": "JEE-MAIN-22-25JUN-S1",
       "questions": 90,
-      "images": 22,
+      "images": 25,
       "failures": 0
     },
     {
       "paper_code": "JEE-MAIN-22-25JUN-S2",
       "questions": 90,
-      "images": 24,
+      "images": 27,
       "failures": 0
     },
     {
       "paper_code": "JEE-MAIN-22-26JUN-S1",
       "questions": 90,
-      "images": 30,
+      "images": 31,
       "failures": 0
     },
     {
@@ -98,19 +98,19 @@
     {
       "paper_code": "JEE-MAIN-22-26JUL-S1",
       "questions": 90,
-      "images": 22,
+      "images": 25,
       "failures": 0
     },
     {
       "paper_code": "JEE-MAIN-22-26JUL-S2",
       "questions": 90,
-      "images": 11,
+      "images": 14,
       "failures": 0
     },
     {
       "paper_code": "JEE-MAIN-22-27JUL-S1",
       "questions": 90,
-      "images": 10,
+      "images": 11,
       "failures": 0
     },
     {

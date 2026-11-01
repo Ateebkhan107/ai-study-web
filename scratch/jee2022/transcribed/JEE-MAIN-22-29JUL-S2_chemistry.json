@@ -50,7 +50,7 @@
     "subject": "Chemistry",
     "chapter": "Some Basic Concepts of Chemistry",
     "question_type": "MCQ",
-    "question": "$\\begin{matrix} & C ( s ) + {O}_{2} ( \\text{ } g ) \\to {CO}_{2} ( \\text{ } g ) + 400 \\text{ } kJ \\\\ & C ( s ) + \\frac{1}{2} {O}_{2} ( \\text{ } g ) \\to CO ( g ) + 100 \\text{ } kJ\\end{matrix}$\n\nWhen coal of purity 60% is allowed to burn in presence of insufficient oxygen, 60% of carbon is converted into 'CO' and the remaining is converted into '${CO}_{2}$'. The heat generated when $0.6 \\text{ } kg$ of coal is burnt is _________.",
+    "question": "$\\bigl[[C ( s ) + {O}_{2} ( \\text{ } g ) \\to {CO}_{2} ( \\text{ } g ) + 400 \\text{ } kJ], [C ( s ) + \\frac{1}{2} {O}_{2} ( \\text{ } g ) \\to CO ( g ) + 100 \\text{ } kJ]\\bigr]$\n\nWhen coal of purity 60% is allowed to burn in presence of insufficient oxygen, 60% of carbon is converted into 'CO' and the remaining is converted into '${CO}_{2}$'. The heat generated when $0.6 \\text{ } kg$ of coal is burnt is _________.",
     "option_a": "1600 kJ",
     "option_b": "3200 kJ",
     "option_c": "4400 kJ",

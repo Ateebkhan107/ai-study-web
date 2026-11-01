@@ -16,7 +16,7 @@ const [, day, monthCode, shiftNumber] = match;
 const month = monthCode === "JUN" ? "June" : "July";
 const monthNumber = monthCode === "JUN" ? "06" : "07";
 const shift = `Shift ${shiftNumber}`;
-const attempt = `${month} ${Number(day)} - ${shift}`;
+const attempt = month;
 const examDate = `2022-${monthNumber}-${day}`;
 const ROOT = process.cwd();
 const WORK = path.join(ROOT, "scratch", "jee2022");

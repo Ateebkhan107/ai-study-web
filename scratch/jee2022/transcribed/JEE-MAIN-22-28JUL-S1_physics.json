@@ -454,7 +454,7 @@
     "subject": "Physics",
     "chapter": "Vector Algebra",
     "question_type": "NUMERICAL",
-    "question": "If the projection of $2 \\overset{ˆ}{i} + 4 \\overset{ˆ}{j} - 2 \\overset{ˆ}{k}$ on $\\overset{ˆ}{i} + 2 \\overset{ˆ}{j} + α \\overset{ˆ}{k}$ is zero. Then, the value of $α$ will be ___________.",
+    "question": "If the projection of $2 \\hat{i} + 4 \\hat{j} - 2 \\hat{k}$ on $\\hat{i} + 2 \\hat{j} + α \\hat{k}$ is zero. Then, the value of $α$ will be ___________.",
     "option_a": "",
     "option_b": "",
     "option_c": "",

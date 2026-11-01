@@ -365,7 +365,7 @@
     "subject": "Mathematics",
     "chapter": "Vector Algebra",
     "question_type": "MCQ",
-    "question": "Let S be the set of all a $∈ R$ for which the angle between the vectors $\\overset{⃗}{u} = a ( {log}_{e}  b ) \\overset{ˆ}{i} - 6 \\overset{ˆ}{j} + 3 \\overset{ˆ}{k}$ and $\\overset{⃗}{v} = ( {log}_{e}  b ) \\overset{ˆ}{i} + 2 \\overset{ˆ}{j} + 2 a ( {log}_{e}  b ) \\overset{ˆ}{k}$, $( b > 1 )$ is acute. Then S is equal to :",
+    "question": "Let S be the set of all a $∈ R$ for which the angle between the vectors $\\vec{u} = a ( {log}_{e}  b ) \\hat{i} - 6 \\hat{j} + 3 \\hat{k}$ and $\\vec{v} = ( {log}_{e}  b ) \\hat{i} + 2 \\hat{j} + 2 a ( {log}_{e}  b ) \\hat{k}$, $( b > 1 )$ is acute. Then S is equal to :",
     "option_a": "$( - ∞ , - \\frac{4}{3} )$",
     "option_b": "$Φ$",
     "option_c": "$( - \\frac{4}{3} , 0 )$",

@@ -100,7 +100,7 @@
     "chapter": "Thermal Properties of Matter",
     "section": "Heat Transfer",
     "question_type": "MCQ",
-    "question": "A copper block of mass 5.0 kg is heated to a temperature of 500°C and is placed on a large ice block. What is the maximum amount of ice that can melt? [Specific heat of copper: 0.39 J g⁻¹ °C⁻¹ and latent heat of fusion of water : 335 J g⁻¹]",
+    "question": "A copper block of mass 5.0 kg is heated to a temperature of 500\u00b0C and is placed on a large ice block. What is the maximum amount of ice that can melt? [Specific heat of copper: 0.39 J g⁻¹ \u00b0C⁻¹ and latent heat of fusion of water : 335 J g⁻¹]",
     "option_a": "1.5 kg",
     "option_b": "5.8 kg",
     "option_c": "2.9 kg",
@@ -408,7 +408,7 @@
     "embedded_image_sources": [
       "557e39f0-7d29-49f1-8091-8d69578fce29.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q18.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -589,7 +589,7 @@
     "chapter": "Kinetic Theory",
     "section": "Ideal Gas Law",
     "question_type": "NUMERICAL",
-    "question": "When a gas filled in a closed vessel is heated by raising the temperature by 1°C, its pressure increase by 0.4$\\%$. The initial temperature of the gas is_____ K.",
+    "question": "When a gas filled in a closed vessel is heated by raising the temperature by 1\u00b0C, its pressure increase by 0.4$\\%$. The initial temperature of the gas is_____ K.",
     "option_a": "",
     "option_b": "",
     "option_c": "",
@@ -667,7 +667,7 @@
     "embedded_image_sources": [
       "e5a4efd2-8b0d-4b83-a24e-7a4e27bb0f6b.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q29.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,

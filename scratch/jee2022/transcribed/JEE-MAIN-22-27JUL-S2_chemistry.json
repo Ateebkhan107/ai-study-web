@@ -528,7 +528,7 @@
     "subject": "Chemistry",
     "chapter": "Chemical Kinetics and Nuclear Chemistry",
     "question_type": "NUMERICAL",
-    "question": "$\\begin{matrix}[ A ] & \\to & [ B ] \\\\ Reactant & & Product\\end{matrix}$\n\nIf formation of compound $[ B ]$ follows the first order of kinetics and after 70 minutes the concentration of $[ A ]$ was found to be half of its initial concentration. Then the rate constant of the reaction is $x \\times {10}^{- 6} {\\text{ } s}^{- 1}$. The value of $x$ is ______________. (Nearest Integer)",
+    "question": "$\\bigl[[[ A ], \\to, [ B ]], [Reactant, Product]\\bigr]$\n\nIf formation of compound $[ B ]$ follows the first order of kinetics and after 70 minutes the concentration of $[ A ]$ was found to be half of its initial concentration. Then the rate constant of the reaction is $x \\times {10}^{- 6} {\\text{ } s}^{- 1}$. The value of $x$ is ______________. (Nearest Integer)",
     "option_a": "",
     "option_b": "",
     "option_c": "",

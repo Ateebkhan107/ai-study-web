@@ -31,7 +31,7 @@
     "chapter": "Thermodynamics",
     "section": "Enthalpy Calculations",
     "question_type": "MCQ",
-    "question": "At 25°C and 1 atm pressure, the enthalpy of combustion of benzene (l) and acetylene (g) are $-3268 \\, \\mathrm{kJ \\, mol^{-1}}$ and $-1300 \\, \\mathrm{kJ \\, mol^{-1}}$, respectively. The change in enthalpy for the reaction\n$$3 \\, \\mathrm{C_2H_2(g)} \\rightarrow \\mathrm{C_6H_6(l)}$$ is",
+    "question": "At 25\u00b0C and 1 atm pressure, the enthalpy of combustion of benzene (l) and acetylene (g) are $-3268 \\, \\mathrm{kJ \\, mol^{-1}}$ and $-1300 \\, \\mathrm{kJ \\, mol^{-1}}$, respectively. The change in enthalpy for the reaction\n$$3 \\, \\mathrm{C_2H_2(g)} \\rightarrow \\mathrm{C_6H_6(l)}$$ is",
     "option_a": "$+324 \\, \\mathrm{kJ \\, mol^{-1}}$",
     "option_b": "$+632 \\, \\mathrm{kJ \\, mol^{-1}}$",
     "option_c": "$-632 \\, \\mathrm{kJ \\, mol^{-1}}$",
@@ -366,7 +366,7 @@
     "embedded_image_sources": [
       "7b28c6d9-87f5-43b4-be9e-568a92bc836b.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S2/q46.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,

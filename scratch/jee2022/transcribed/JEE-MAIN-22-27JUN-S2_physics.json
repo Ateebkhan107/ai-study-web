@@ -246,7 +246,7 @@
     "subject": "Physics",
     "chapter": "Magnetics",
     "question_type": "MCQ",
-    "question": "Two long parallel conductors $S_{1}$ and $S_{2}$ are separated by a distance 10 cm and carrying currents of 4A and 2A respectively. The conductors are placed along x-axis in X-Y plane. There is a point P located between the conductors (as shown in figure).\n\nA charge particle of 3$π$ coulomb is passing through the point P with velocity $\\overset{\\to }{v} = ( 2 \\overset{ˆ}{i} + 3 \\overset{ˆ}{j} )$ m/s; where $\\overset{ˆ}{i}$ and $\\overset{ˆ}{j}$ represents unit vector along x & y axis respectively.\n\nThe force acting on the charge particle is $4 π \\times {10}^{- 5} ( - x \\overset{ˆ}{i} + 2 \\overset{ˆ}{j} )$ N. The value of x is :",
+    "question": "Two long parallel conductors $S_{1}$ and $S_{2}$ are separated by a distance 10 cm and carrying currents of 4A and 2A respectively. The conductors are placed along x-axis in X-Y plane. There is a point P located between the conductors (as shown in figure).\n\nA charge particle of 3$\\pi$ coulomb is passing through the point P with velocity $\\vec{v} = ( 2 \\hat{i} + 3 \\hat{j} )$ m/s; where $\\hat{i}$ and $\\hat{j}$ represents unit vector along x & y axis respectively.\n\nThe force acting on the charge particle is $4 \\pi \\times {10}^{- 5} ( - x \\hat{i} + 2 \\hat{j} )$ N. The value of x is :",
     "option_a": "$2$",
     "option_b": "$1$",
     "option_c": "$3$",

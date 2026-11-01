@@ -483,7 +483,7 @@
     "subject": "Physics",
     "chapter": "Rotational Motion",
     "question_type": "NUMERICAL",
-    "question": "The position vector of 1 kg object is $\\overset{\\to }{r} = ( 3 \\overset{ˆ}{i} - \\overset{ˆ}{j} ) m$ and its velocity $\\overset{\\to }{v} = ( 3 \\overset{ˆ}{j} + \\overset{ˆ}{k} ) m {s}^{- 1}$. The magnitude of its angular momentum is $\\sqrt{x}$ Nm where x is ___________.",
+    "question": "The position vector of 1 kg object is $\\vec{r} = ( 3 \\hat{i} - \\hat{j} ) m$ and its velocity $\\vec{v} = ( 3 \\hat{j} + \\hat{k} ) m {s}^{- 1}$. The magnitude of its angular momentum is $\\sqrt{x}$ Nm where x is ___________.",
     "option_a": "",
     "option_b": "",
     "option_c": "",

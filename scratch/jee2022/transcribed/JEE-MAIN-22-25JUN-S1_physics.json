@@ -178,7 +178,7 @@
     "embedded_image_sources": [
       "4087ed37-e7b8-4249-8e2f-35282012e7e3.png"
     ],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q8.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
@@ -195,10 +195,10 @@
     "section": "Electrical Devices",
     "question_type": "MCQ",
     "question": "Match List-I with List-II List-I\n\nChoose the correct answer from the options given below :-",
-    "option_a": "(A)\u2013(II), (B)\u2013(I), (C)\u2013(IV), (D)\u2013(III)",
-    "option_b": "(A)\u2013(II), (B)\u2013(I), (C)\u2013(III), (D)\u2013(IV)",
-    "option_c": "(A)\u2013(III), (B)\u2013(IV), (C)\u2013(II), (D)\u2013(I)",
-    "option_d": "(A)\u2013(III), (B)\u2013(I), (C)\u2013(II), (D)\u2013(IV)",
+    "option_a": "(A)–(II), (B)–(I), (C)–(IV), (D)–(III)",
+    "option_b": "(A)–(II), (B)–(I), (C)–(III), (D)–(IV)",
+    "option_c": "(A)–(III), (B)–(IV), (C)–(II), (D)–(I)",
+    "option_d": "(A)–(III), (B)–(I), (C)–(II), (D)–(IV)",
     "correct_option": "a",
     "embedded_image_sources": [
       "65fe13a7-d3a0-4d16-a355-48891d5e79ed.png"
@@ -594,7 +594,7 @@
     "option_d": "",
     "correct_option": "6",
     "embedded_image_sources": [],
-    "question_image": null,
+    "question_image": "scratch/jee2022/images/JEE-MAIN-22-25JUN-S1/q26.png",
     "option_a_image": null,
     "option_b_image": null,
     "option_c_image": null,
