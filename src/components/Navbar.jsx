@@ -123,7 +123,7 @@ export default function Navbar({
             : "inline-flex h-9 items-center justify-center rounded-full px-4 text-[13px] font-bold mx-0.5",
           active
             ? mobile
-              ? "bg-amber-500/15 text-amber-700 dark:bg-amber-400/15 dark:text-amber-400 font-extrabold"
+              ? "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400 font-extrabold"
               : "text-amber-800 dark:text-amber-300 font-black"
             : mobile
               ? "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-[var(--surface-hover)] dark:hover:text-slate-100"
@@ -145,7 +145,7 @@ export default function Navbar({
         {active && !mobile && (
           <motion.div
             layoutId="tubelight-lamp"
-            className="absolute inset-0 w-full rounded-full bg-amber-500/15 dark:bg-amber-400/15 -z-10 shadow-sm"
+            className="absolute inset-0 w-full rounded-full bg-amber-100 dark:bg-amber-950 -z-10"
             initial={false}
             transition={{
               type: "spring",
@@ -153,11 +153,7 @@ export default function Navbar({
               damping: 30,
             }}
           >
-            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-amber-500 dark:bg-amber-400 rounded-t-full">
-              <div className="absolute w-12 h-5 bg-amber-500/35 dark:bg-amber-400/35 rounded-full blur-md -top-2 -left-2" />
-              <div className="absolute w-8 h-5 bg-amber-500/35 dark:bg-amber-400/35 rounded-full blur-md -top-1" />
-              <div className="absolute w-4 h-3 bg-amber-500/40 dark:bg-amber-400/40 rounded-full blur-sm top-0 left-2" />
-            </div>
+            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-amber-500 dark:bg-amber-400 rounded-t-full" />
           </motion.div>
         )}
       </Link>

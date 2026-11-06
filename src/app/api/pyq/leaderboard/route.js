@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { getDisplayNameFromClaims } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getLevelFromXP } from "@/utils/levelEngine";
 
@@ -57,14 +58,23 @@ async function getCurrentUserRankRow(userId, topRows) {
 }
 
 export async function GET() {
-  const { userId } = await auth();
+  const { userId, sessionClaims } = await auth();
 
-  const { data, error } = await supabaseAdmin
-    .from("user_xp")
-    .select(LEADERBOARD_COLUMNS)
-    .order("xp", { ascending: false })
-    .order("updated_at", { ascending: true })
-    .limit(10);
+  const [{ data, error }, { data: profile }] = await Promise.all([
+    supabaseAdmin
+      .from("user_xp")
+      .select(LEADERBOARD_COLUMNS)
+      .order("xp", { ascending: false })
+      .order("updated_at", { ascending: true })
+      .limit(10),
+    userId
+      ? supabaseAdmin
+          .from("user_profiles")
+          .select("full_name")
+          .eq("clerk_user_id", userId)
+          .maybeSingle()
+      : { data: null },
+  ]);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -80,6 +90,14 @@ export async function GET() {
       ...currentUserRow,
       isCurrentUserAppended: true,
     });
+  }
+
+  const ownRow = userId && leaderboard.find((row) => row.user_id === userId);
+  if (ownRow) {
+    ownRow.name =
+      profile?.full_name?.trim() ||
+      getDisplayNameFromClaims(sessionClaims).trim() ||
+      ownRow.name;
   }
 
   return NextResponse.json(leaderboard);
