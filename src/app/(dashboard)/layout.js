@@ -8,6 +8,7 @@ import { initUserLeaderboard } from "@/utils/leaderboard";
 import ProductTourManager from "@/components/tour/ProductTourManager"; 
 import ZiLauncher from "@/components/zi/ZiLauncher";
 import { ZiEntityContextProvider } from "@/lib/zi/ZiEntityContext";
+import { getClassroomFixtureOwner } from "@/lib/zi/classroom/availability.server";
 
 export default async function DashboardLayout({ children }) {
   const { userId, user, onboardingComplete } = await getAuthContext();
@@ -38,7 +39,8 @@ export default async function DashboardLayout({ children }) {
             <ProductTourManager />
           </Suspense>
           <Suspense fallback={null}>
-            <ZiLauncher plan={accessContext.plan} ziFreeUsage={accessContext.ziFreeUsage} />
+            <ZiLauncher plan={accessContext.plan} ziFreeUsage={accessContext.ziFreeUsage}
+              classroomFixtureOwner={getClassroomFixtureOwner(userId)} />
           </Suspense>
         </ZiEntityContextProvider>
       </div>

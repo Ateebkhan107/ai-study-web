@@ -69,7 +69,8 @@ export async function POST(request) {
       const { error } = await supabaseAdmin
         .from("zi_preferences")
         .delete()
-        .eq("clerk_user_id", userId);
+        .eq("clerk_user_id", userId)
+        .in("preference_key", ALLOWED_KEYS);
         
       if (error) throw error;
       return NextResponse.json({ success: true });

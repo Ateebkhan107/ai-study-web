@@ -203,6 +203,7 @@ export default function ZiMessage({
   isLoading = false,
   tone = "default",
   action = null,
+  onOpenClassroom,
 }) {
   const isUser = role === "user";
   const isError = tone === "error";
@@ -389,7 +390,14 @@ export default function ZiMessage({
 
         {action?.type === "ai_test_builder" ? <ZiTestBuilder key={action.token} action={action} /> : null}
         {studyPlan ? <ZiStudyPlan plan={studyPlan} /> : null}
-        {visual ? <ZiVisual visual={visual} /> : null}
+        {visual?.visualType === "classroom_lesson" ? (
+          onOpenClassroom ? (
+            <button type="button" className="prepzii-interactive mt-3 min-h-11 rounded-lg border border-brand/40 px-3 font-semibold focus-visible:outline-2 focus-visible:outline-brand"
+              onClick={() => onOpenClassroom(visual.lesson)}>
+              Open whiteboard
+            </button>
+          ) : null
+        ) : visual ? <ZiVisual visual={visual} /> : null}
 
         {!isUser && !isError && !isLoading ? <ZiSpeakButton text={children} /> : null}
 

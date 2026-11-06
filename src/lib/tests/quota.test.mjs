@@ -20,7 +20,15 @@ const hooks = registerHooks({ resolve(specifier, context, next) {
   if (mocks[specifier]) return { url: data(mocks[specifier]), shortCircuit: true };
   return next(specifier, context);
 } });
-const { getPersonalCustomTestUsage } = await import("../accessControl.js");
+const { getPersonalCustomTestUsage, canUseFeature, FEATURES, getZiFreePromptsUsage } = await import("../accessControl.js");
+test("Zi accounting failure cannot grant trial access or affect premium entitlement", async () => {
+  const usage = await getZiFreePromptsUsage("owner");
+  assert.equal(usage.available, false);
+  assert.equal(usage.remaining, 0);
+  assert.equal(canUseFeature({ ziFreeUsage: usage }, FEATURES.ZI_ACCESS).allowed, false);
+  assert.equal(canUseFeature({}, FEATURES.ZI_ACCESS).allowed, false);
+  assert.equal(canUseFeature({ isAiMode: true, ziFreeUsage: usage }, FEATURES.ZI_ACCESS).allowed, true);
+});
 test("generated sessions do not consume the normal custom-test quota", async () => {
   process.env.ZI_GENERATED_TEST_ENGINE_ENABLED = "true";
   try { assert.equal((await getPersonalCustomTestUsage("owner")).used, 1); assert.equal(generatedReads, 1); }

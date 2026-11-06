@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const maxDuration = 60;
 
-import { getUserAccessContext, canUseFeature, incrementZiFreePromptsUsage } from "@/lib/accessControl";
+import { getUserAccessContext, canUseFeature } from "@/lib/accessControl";
 import { checkZiRateLimit } from "@/lib/zi/rateLimit";
 import { attachStudyPlanStepActions } from "@/lib/zi/actionResolver.server";
 import { buildZiEntityContext } from "@/lib/zi/entityContext.server";
@@ -20,7 +20,12 @@ import { getQuestions } from "@/lib/questions";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { handleBuilder, parseBuilderText } from "@/lib/zi/testGenerator/builder.server";
 
-const encoder = new TextEncoder();
+import { reserveZiFreePrompt, promptUsageOperation } from "@/lib/zi/promptUsage.server";
+
+import { ziChatFrame, ziChatReply, ziChatResponse } from "@/lib/zi/chatFrames";
+import { readZiProviderAction } from "@/lib/zi/providerActionStream.server";
+import { resolveZiVisualReveal, ziVisualsAllowed, ZI_PROTECTED_CONCEPT_REPLY } from "@/lib/zi/visualReveal.server";
+import { classroomCommand, classroomSelectionAllowed, resolveClassroomSelection } from "@/lib/zi/classroom/selection.server";
 
 function jsonError(message, status) {
   return NextResponse.json({ error: message }, { status });
@@ -163,15 +168,121 @@ async function resolvePreparedCustomTestAction({ actionObj, exam }) {
   };
 }
 
+async function resolveZiAction(actionObj, { studentContext, requestedPlanDuration, pageContext, trustedEntityContext }) {
+  if (actionObj.type === "navigate") {
+    const destinations = ["dashboard", "analytics", "pyq", "revision", "arena", "profile", "community", "test"];
+    return destinations.includes(actionObj.destination) ? { type: "navigate", destination: actionObj.destination } : null;
+  }
+  let safeAction = null;
+  const exam = studentContext?.profile?.exam || "JEE";
+  const subjectName = actionObj.subject || "";
+
+  if (actionObj.type.startsWith("open_revision_")) {
+    const subjects = await getFormulaSubjectsForExam(exam);
+    const matchedSubj = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase() || (subjectName.toLowerCase() === 'maths' && s.name.toLowerCase() === 'mathematics') || (subjectName.toLowerCase() === 'mathematics' && s.name.toLowerCase() === 'maths'));
+
+    if (matchedSubj) {
+      if (actionObj.type === "open_revision_subject") {
+        safeAction = { type: actionObj.type, subject: matchedSubj.name, trustedRoute: `/formula-cards/${matchedSubj.slug}` };
+      } else if (actionObj.type === "open_revision_chapter") {
+        const chapters = await getFormulaChaptersForSubject(matchedSubj.slug, exam);
+        const requestedChapter = actionObj.chapter || "";
+        const canonicalRequested = normalizeChapterName(requestedChapter);
+
+        const matchedChap = chapters.find(c => {
+          const cName = c.name.toLowerCase();
+          const reqName = requestedChapter.toLowerCase();
+          if (cName === reqName) return true;
+          const canonicalC = normalizeChapterName(c.name);
+          return canonicalC.toLowerCase() === canonicalRequested.toLowerCase() && canonicalC !== "";
+        });
+
+        if (matchedChap) {
+          safeAction = { type: actionObj.type, subject: matchedSubj.name, chapter: matchedChap.name, trustedRoute: `/formula-cards/${matchedSubj.slug}/${matchedChap.slug}` };
+        }
+      }
+    }
+  } else if (actionObj.type.startsWith("open_pyq_")) {
+    const normSubj = subjectName.toLowerCase() === 'mathematics' || subjectName.toLowerCase() === 'math' || subjectName.toLowerCase() === 'maths' ? 'Maths' : subjectName.charAt(0).toUpperCase() + subjectName.slice(1).toLowerCase();
+    const pyqChapters = getCanonicalChaptersForSubject(normSubj);
+
+    if (pyqChapters && pyqChapters.length > 0) {
+      if (actionObj.type === "open_pyq_subject") {
+        safeAction = { type: actionObj.type, subject: normSubj, trustedRoute: `/pyq/session?mode=random&exam=${exam}&subjects=${normSubj}` };
+      } else if (actionObj.type === "open_pyq_chapter") {
+        const requestedChapter = actionObj.chapter || "";
+        const canonicalRequested = normalizeChapterName(requestedChapter);
+
+        const exactChap = pyqChapters.find(c => {
+          const cName = c.toLowerCase();
+          const reqName = requestedChapter.toLowerCase();
+          if (cName === reqName) return true;
+          const canonicalC = normalizeChapterName(c);
+          return canonicalC.toLowerCase() === canonicalRequested.toLowerCase() && canonicalC !== "";
+        });
+
+        if (exactChap) {
+          safeAction = { type: actionObj.type, subject: normSubj, chapter: exactChap, trustedRoute: `/pyq/session?mode=chapter&exam=${exam}&subjects=${normSubj}&chapter=${encodeURIComponent(exactChap)}` };
+        }
+      }
+    }
+  } else if (actionObj.type === "prepare_custom_test") {
+    safeAction = await resolvePreparedCustomTestAction({ actionObj, exam });
+  } else if (actionObj.type === "save_preference") {
+    const allowedKeys = ["preferred_language", "response_length", "explanation_style", "learning_style", "study_preference"];
+    if (allowedKeys.includes(actionObj.key) && typeof actionObj.value === "string") {
+      const val = actionObj.value.trim().substring(0, 150); // Validate length
+      if (val.length > 0) {
+        safeAction = {
+          type: "save_preference",
+          key: actionObj.key,
+          value: val
+        };
+      }
+    }
+  } else if (actionObj.type === "delete_preference") {
+    const allowedKeys = ["preferred_language", "response_length", "explanation_style", "learning_style", "study_preference"];
+    if (allowedKeys.includes(actionObj.key)) {
+      safeAction = {
+        type: "delete_preference",
+        key: actionObj.key
+      };
+    }
+  } else if (actionObj.type === "reset_preferences") {
+    safeAction = { type: "reset_preferences" };
+  } else if (
+    actionObj.type === "save_learning_memory" ||
+    actionObj.type === "update_learning_memory" ||
+    actionObj.type === "delete_learning_memory"
+  ) {
+    safeAction = validateZiLearningMemoryAction(actionObj);
+  } else if (actionObj.type === "study_plan") {
+    safeAction = validateZiStudyPlanAction(actionObj, {
+      requestedDurationMinutes: requestedPlanDuration,
+    });
+    safeAction = await attachStudyPlanStepActions({
+      planAction: safeAction,
+      studentContext,
+      pageContext,
+      entityContext: trustedEntityContext,
+    });
+  } else if (actionObj.type === "visual_explanation") {
+    safeAction = validateZiVisualAction(actionObj);
+  }
+  return safeAction;
+}
+
 export async function POST(request) {
   const { userId } = await auth();
   if (!userId) {
     return jsonError("Unauthorized", 401);
   }
 
-  const access = await getUserAccessContext({ userId });
+  let access;
+  try { access = await getUserAccessContext({ userId }); }
+  catch { return jsonError("Zi access is temporarily unavailable", 503); }
   const isAiMode = access.isAiMode;
-  const freeUsage = access.ziFreeUsage || { used: 0, limit: 3, remaining: 3 };
+  const freeUsage = access.ziFreeUsage;
 
   let body;
   try {
@@ -205,30 +316,60 @@ export async function POST(request) {
   // Configuration is deterministic, authenticated and rate limited, and does not
   // consume a Gemini call or an AI trial prompt. Never accept model-proposed drafts.
   const latestText = parsed.data.messages.at(-1).content;
-  if (parsed.data.testBuilderToken || parseBuilderText(latestText).handled) {
+  const selection = classroomCommand(latestText);
+  if (!selection && (parsed.data.testBuilderToken || parseBuilderText(latestText).handled)) {
     try {
       const action = handleBuilder({ userId, access, text: latestText, token: parsed.data.testBuilderToken });
-      if (action) return new Response(`${action.prompt}\n\n__ZI_VALIDATED_ACTION__=${JSON.stringify(action)}`, {
-        headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Zi-Prompt-Charged": "0" },
-      });
+      if (action) return ziChatReply(action.prompt, action);
     } catch (error) {
       return NextResponse.json({ error: error.status ? error.message : "Test configuration is unavailable." }, { status: error.status || 503 });
     }
+  }
+  if (!isAiMode && (!freeUsage || freeUsage.available === false)) {
+    return jsonError("Zi usage accounting is temporarily unavailable", 503);
+  }
+  if (!isAiMode && freeUsage.remaining <= 0 && freeUsage.pending > 0 && freeUsage.used < 3) {
+    return jsonError("Zi trial requests are pending. Please try again later.", 503);
   }
   if (!isAiMode && freeUsage.remaining <= 0) {
     return NextResponse.json({ error: "AI_MODE_REQUIRED", message: "You have used all 3 free trial prompts. Upgrade to AI Mode to continue chatting with Zi." }, { status: 403 });
   }
 
-  // Deduct 1 free prompt if user is using free trial
-  if (!isAiMode) {
-    await incrementZiFreePromptsUsage(userId);
+  if (selection && !classroomSelectionAllowed(userId, access)) {
+    return jsonError("Classroom lesson selection is unavailable", 403);
   }
 
+  const { pageContext, messages } = parsed.data;
+  const revealInput = { client: supabaseAdmin, userId, examTrack: access.examTrack, pageContext };
+  const reveal = await resolveZiVisualReveal(revealInput);
+  if (!ziVisualsAllowed(reveal)) return ziChatReply(ZI_PROTECTED_CONCEPT_REPLY);
+
+  if (selection) {
+    const student = await getZiStudentContext(userId).catch(() => null);
+    const action = resolveClassroomSelection({
+      type: "visual_explanation",
+      visual: { visualType: "classroom_lesson", schemaVersion: 1, templateKey: selection.templateKey },
+    }, { exam: student?.profile?.exam, examTrack: access.examTrack, language: selection.language });
+    if (!action) return jsonError("Choose an available Classroom topic for your exam track", 422);
+    if (!ziVisualsAllowed(await resolveZiVisualReveal(revealInput))) return ziChatReply(ZI_PROTECTED_CONCEPT_REPLY);
+    return ziChatReply("Open the whiteboard to explore this lesson step by step.", action);
+  }
+
+  const streamAbort = new AbortController();
+  const signal = AbortSignal.any([request.signal, streamAbort.signal]);
+  let reservation = null;
+  let providerDispatched = false;
   let providerStream;
   let studentContext = null;
   let trustedEntityContext = "";
   let requestedPlanDuration = null;
   try {
+    if (!isAiMode) {
+      reservation = await reserveZiFreePrompt(userId);
+      if (!reservation.allowed) return reservation.used >= 3
+        ? jsonError("AI_MODE_REQUIRED", 403)
+        : jsonError("Zi trial requests are pending. Please try again later.", 503);
+    }
     const [entityContext, fetchedStudentContext] = await Promise.all([
       buildZiEntityContext({
         userId,
@@ -250,35 +391,38 @@ export async function POST(request) {
     });
     requestedPlanDuration = inferRequestedPlanDuration(parsed.data.messages);
 
-    let finalMessages = [...parsed.data.messages];
-    if (finalMessages.length >= 3) {
-      const latestMsg = finalMessages[finalMessages.length - 1];
-      const prevMsg = finalMessages[finalMessages.length - 2];
-      const prevPriorMsg = finalMessages[finalMessages.length - 3];
-
-      if (latestMsg.role === "user" && prevMsg.role === "zi" && prevPriorMsg.role === "user") {
-        const latestText = latestMsg.content.toLowerCase().trim();
-        const isSubjectClarification = ["physics", "chemistry", "maths", "mathematics", "biology"].includes(latestText);
-        const assistantAsked = prevMsg.content.toLowerCase().includes("which") || prevMsg.content.toLowerCase().includes("or");
-        if (isSubjectClarification && assistantAsked) {
-          console.log("[Zi Action] clarification turn detected: true");
-          console.log("[Zi Action] prior intent:", prevPriorMsg.content);
-        }
-      }
-    }
-
     providerStream = await streamZiResponse({
-      messages: finalMessages,
+      messages,
       systemPrompt: buildZiSystemPrompt(
         parsed.data.pageContext?.pageType,
         entityContext,
         studentContext,
         learningMemories
       ),
-      signal: request.signal,
+      signal,
       accessContext: access,
+      beforeDispatch: async () => {
+        if (!ziVisualsAllowed(await resolveZiVisualReveal(revealInput))) {
+          throw Object.assign(new Error("Assessment reveal state changed"), { code: "ZI_REVEAL_CHANGED" });
+        }
+        signal.throwIfAborted();
+        if (reservation) await promptUsageOperation(userId, "dispatch", reservation.requestId);
+        providerDispatched = true;
+      },
     });
+
+    if (reservation) {
+      if (!providerDispatched) throw new Error("Provider did not confirm dispatch boundary");
+      await promptUsageOperation(userId, "consume", reservation.requestId);
+    }
   } catch (error) {
+    if (reservation && !providerDispatched) {
+      // Release only before provider dispatch; the RPC never releases dispatched work.
+      try { await promptUsageOperation(userId, "release", reservation.requestId); }
+      catch { /* Unknown accounting outcome remains held; never grant a fresh allowance. */ }
+    }
+    if (error?.code === "ZI_REVEAL_CHANGED") return ziChatReply(ZI_PROTECTED_CONCEPT_REPLY);
+    if (error?.code === "ZI_USAGE_UNAVAILABLE") return jsonError("Zi usage accounting is temporarily unavailable", 503);
     if (error?.code === "ZI_PROVIDER_NOT_CONFIGURED") {
       logZiProviderStatus("configuration-error", error);
       console.error("[ZI_PROVIDER_CONFIG_ERROR]", error.message);
@@ -295,203 +439,38 @@ export async function POST(request) {
 
   const stream = new ReadableStream({
     async start(controller) {
-      let buffer = "";
-      let foundAction = false;
-      let actionString = "";
-
       try {
-        for await (const chunk of providerStream) {
-          if (request.signal.aborted) break;
-          const text =
-            typeof chunk.text === "function" ? chunk.text() : chunk.text;
-          if (text) {
-             if (foundAction) {
-                actionString += text;
-             } else {
-                buffer += text;
-                const actionIndex = buffer.indexOf("__ZI_ACTION__=");
-                if (actionIndex !== -1) {
-                   const before = buffer.substring(0, actionIndex);
-                   if (before) controller.enqueue(encoder.encode(before));
-                   foundAction = true;
-                   actionString = buffer.substring(actionIndex + "__ZI_ACTION__=".length);
-                } else {
-                   const safeLength = Math.max(0, buffer.length - "__ZI_ACTION__=".length);
-                   if (safeLength > 0) {
-                      controller.enqueue(encoder.encode(buffer.substring(0, safeLength)));
-                      buffer = buffer.substring(safeLength);
-                   }
-                }
-             }
+        controller.enqueue(ziChatFrame("text", "_Gemini-generated response_\n\n"));
+        const proposal = await readZiProviderAction(providerStream, (text) => {
+          controller.enqueue(ziChatFrame("text", text));
+        }, signal);
+        if (proposal) {
+          let action;
+          try {
+            action = await resolveZiAction(proposal, { studentContext, requestedPlanDuration, pageContext, trustedEntityContext });
+            // Recheck after provider work. A new assessment or a lookup failure
+            // while the response was streaming must suppress the visual.
+            if (action?.type === "visual_explanation" &&
+              !ziVisualsAllowed(await resolveZiVisualReveal(revealInput))) action = null;
+          } catch {
+            action = null; // Preserve the preceding chat prose.
           }
+          signal.throwIfAborted();
+          if (action) controller.enqueue(ziChatFrame("action", action));
         }
-
-        if (!foundAction && buffer) {
-          controller.enqueue(encoder.encode(buffer));
-        }
-
-        if (foundAction && actionString) {
-           try {
-              const actionObj = JSON.parse(actionString.trim());
-              if (actionObj && actionObj.type === "navigate") {
-                  const VALID_DESTS = ["dashboard", "analytics", "pyq", "revision", "arena", "profile", "community", "test"];
-                  if (VALID_DESTS.includes(actionObj.destination)) {
-                      const safeAction = { type: "navigate", destination: actionObj.destination };
-                      controller.enqueue(encoder.encode(`\n\n__ZI_VALIDATED_ACTION__=${JSON.stringify(safeAction)}`));
-                  }
-              } else if (actionObj && typeof actionObj.type === "string") {
-                  let safeAction = null;
-                  const exam = studentContext?.exam || "JEE";
-                  const subjectName = actionObj.subject || "";
-
-                  if (actionObj.type.startsWith("open_revision_")) {
-                     const subjects = await getFormulaSubjectsForExam(exam);
-                     const matchedSubj = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase() || (subjectName.toLowerCase() === 'maths' && s.name.toLowerCase() === 'mathematics') || (subjectName.toLowerCase() === 'mathematics' && s.name.toLowerCase() === 'maths'));
-
-                     if (matchedSubj) {
-                        if (actionObj.type === "open_revision_subject") {
-                           safeAction = { type: actionObj.type, subject: matchedSubj.name, trustedRoute: `/formula-cards/${matchedSubj.slug}` };
-                        } else if (actionObj.type === "open_revision_chapter") {
-                           const chapters = await getFormulaChaptersForSubject(matchedSubj.slug, exam);
-                           const requestedChapter = actionObj.chapter || "";
-                           const canonicalRequested = normalizeChapterName(requestedChapter);
-
-                           console.log("[Zi Action] raw proposed action:", actionObj);
-                           console.log("[Zi Action] resolved subject:", matchedSubj.name);
-
-                           const matchedChap = chapters.find(c => {
-                              const cName = c.name.toLowerCase();
-                              const reqName = requestedChapter.toLowerCase();
-                              if (cName === reqName) return true;
-                              const canonicalC = normalizeChapterName(c.name);
-                              return canonicalC.toLowerCase() === canonicalRequested.toLowerCase() && canonicalC !== "";
-                           });
-
-                           if (matchedChap) {
-                              console.log("[Zi Action] resolved chapter:", matchedChap.name);
-                              safeAction = { type: actionObj.type, subject: matchedSubj.name, chapter: matchedChap.name, trustedRoute: `/formula-cards/${matchedSubj.slug}/${matchedChap.slug}` };
-                              console.log("[Zi Action] trusted route:", safeAction.trustedRoute);
-                           } else {
-                              console.log("[Zi Action] no matched chapter for:", requestedChapter);
-                           }
-                        }
-                     }
-                  } else if (actionObj.type.startsWith("open_pyq_")) {
-                     let normSubj = subjectName.toLowerCase() === 'mathematics' || subjectName.toLowerCase() === 'math' || subjectName.toLowerCase() === 'maths' ? 'Maths' : subjectName.charAt(0).toUpperCase() + subjectName.slice(1).toLowerCase();
-                     const pyqChapters = getCanonicalChaptersForSubject(normSubj);
-
-                     if (pyqChapters && pyqChapters.length > 0) {
-                        if (actionObj.type === "open_pyq_subject") {
-                           safeAction = { type: actionObj.type, subject: normSubj, trustedRoute: `/pyq/session?mode=random&exam=${exam}&subjects=${normSubj}` };
-                        } else if (actionObj.type === "open_pyq_chapter") {
-                           const requestedChapter = actionObj.chapter || "";
-                           const canonicalRequested = normalizeChapterName(requestedChapter);
-
-                           console.log("[Zi Action] raw proposed action:", actionObj);
-                           console.log("[Zi Action] resolved subject:", normSubj);
-
-                           const exactChap = pyqChapters.find(c => {
-                              const cName = c.toLowerCase();
-                              const reqName = requestedChapter.toLowerCase();
-                              if (cName === reqName) return true;
-                              const canonicalC = normalizeChapterName(c);
-                              return canonicalC.toLowerCase() === canonicalRequested.toLowerCase() && canonicalC !== "";
-                           });
-
-                           if (exactChap) {
-                              console.log("[Zi Action] resolved chapter:", exactChap);
-                              safeAction = { type: actionObj.type, subject: normSubj, chapter: exactChap, trustedRoute: `/pyq/session?mode=chapter&exam=${exam}&subjects=${normSubj}&chapter=${encodeURIComponent(exactChap)}` };
-                              console.log("[Zi Action] trusted route:", safeAction.trustedRoute);
-                           } else {
-                              console.log("[Zi Action] no matched chapter for:", requestedChapter);
-                           }
-                        }
-                     }
-                  } else if (actionObj.type === "prepare_custom_test") {
-                     safeAction = await resolvePreparedCustomTestAction({ actionObj, exam });
-                  } else if (actionObj.type === "save_preference") {
-                     const allowedKeys = ["preferred_language", "response_length", "explanation_style", "learning_style", "study_preference"];
-                     if (allowedKeys.includes(actionObj.key) && typeof actionObj.value === "string") {
-                        const val = actionObj.value.trim().substring(0, 150); // Validate length
-                        if (val.length > 0) {
-                           safeAction = {
-                              type: "save_preference",
-                              key: actionObj.key,
-                              value: val
-                           };
-                        }
-                     }
-                  } else if (actionObj.type === "delete_preference") {
-                     const allowedKeys = ["preferred_language", "response_length", "explanation_style", "learning_style", "study_preference"];
-                     if (allowedKeys.includes(actionObj.key)) {
-                        safeAction = {
-                           type: "delete_preference",
-                           key: actionObj.key
-                        };
-                     }
-                  } else if (actionObj.type === "reset_preferences") {
-                     safeAction = { type: "reset_preferences" };
-                  } else if (
-                     actionObj.type === "save_learning_memory" ||
-                     actionObj.type === "update_learning_memory" ||
-                     actionObj.type === "delete_learning_memory"
-                  ) {
-                     safeAction = validateZiLearningMemoryAction(actionObj);
-                  } else if (actionObj.type === "study_plan") {
-                     safeAction = validateZiStudyPlanAction(actionObj, {
-                        requestedDurationMinutes: requestedPlanDuration,
-                     });
-                     safeAction = await attachStudyPlanStepActions({
-                        planAction: safeAction,
-                        studentContext,
-                        pageContext: parsed.data.pageContext,
-                        entityContext: trustedEntityContext,
-                     });
-                  } else if (actionObj.type === "visual_explanation") {
-                     safeAction = validateZiVisualAction(actionObj);
-                     if (!safeAction && process.env.NODE_ENV !== "production") {
-                        console.warn("[ZI_VISUAL_VALIDATION_REJECTED]", {
-                           visualType: actionObj?.visual?.visualType,
-                        });
-                     }
-                  }
-
-                  if (safeAction) {
-                      console.log("[Zi Action] validated action emitted:", safeAction);
-                      controller.enqueue(encoder.encode(`\n\n__ZI_VALIDATED_ACTION__=${JSON.stringify(safeAction)}`));
-                  }
-              }
-           } catch(e) {
-              // Ignore invalid JSON action
-           }
-        }
-
-        controller.close();
+        controller.enqueue(ziChatFrame("done"));
       } catch (error) {
-        if (request.signal.aborted || error?.name === "AbortError") {
-          controller.close();
-          return;
+        if (!signal.aborted && error?.name !== "AbortError") {
+          controller.enqueue(ziChatFrame("text", "Zi couldn't respond right now. Try again in a moment."));
+          controller.enqueue(ziChatFrame("done"));
         }
-
-        logZiProviderStatus("stream-error", error);
-        console.error("[ZI_STREAM_ERROR]", {
-          message: error?.message,
-          name: error?.name,
-        });
-        controller.enqueue(
-          encoder.encode("Zi couldn't respond right now. Try again in a moment.")
-        );
-        controller.close();
+      } finally {
+        // cancel() closes the stream itself. A request abort may leave it open.
+        if (!streamAbort.signal.aborted) controller.close();
       }
     },
-    cancel() {},
+    cancel() { streamAbort.abort(); },
   });
 
-  return new Response(stream, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-    },
-  });
+  return ziChatResponse(stream);
 }

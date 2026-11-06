@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getActingUser, slugifyInstituteName, unauthorized } from "@/lib/instituteAuth";
+import { getActiveInstituteMemberships } from "@/lib/instituteMembership";
 import { InstituteCreateSchema } from "@/lib/validations";
 
 export async function GET() {
@@ -8,29 +9,12 @@ export async function GET() {
     const actor = await getActingUser();
     if (!actor) return unauthorized();
 
-    if (actor.email) {
-      const { error: bindError } = await supabaseAdmin
-        .from("institute_members")
-        .update({ user_id: actor.userId, status: "ACTIVE" })
-        .eq("email", actor.email.toLowerCase())
-        .is("user_id", null);
-
-      if (bindError) throw bindError;
-    }
-
-    const { data: memberships, error: membershipError } = await supabaseAdmin
-      .from("institute_members")
-      .select("role,status,institutes(id,name,slug,logo_url,status,owner_user_id)")
-      .eq("user_id", actor.userId)
-      .eq("status", "ACTIVE");
-
-    if (membershipError) throw membershipError;
-
+    const memberships = await getActiveInstituteMemberships(actor.userId);
     return NextResponse.json({
-      institutes: (memberships || []).map((row) => ({
-        ...row.institutes,
-        role: row.role,
-        member_status: row.status,
+      institutes: memberships.map(({ institute, role, status }) => ({
+        ...institute,
+        role,
+        member_status: status,
       })),
     });
   } catch (error) {

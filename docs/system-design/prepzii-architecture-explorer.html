@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepzii — Interactive Architecture Explorer</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-glow: rgba(59, 130, 246, 0.2);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --purple: #8b5cf6;
+      --sidebar-w: 260px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+
+    /* Sidebar */
+    #sidebar {
+      width: var(--sidebar-w);
+      background-color: var(--card-bg);
+      border-right: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .brand {
+      padding: 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      font-size: 18px;
+    }
+    .brand h1 { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .brand p { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+
+    .nav-list { list-style: none; padding: 16px 8px; overflow-y: auto; flex-grow: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 4px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #fff; }
+    .nav-item.active { background-color: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-glow); }
+
+    /* Main Content */
+    #main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 40%);
+    }
+    header {
+      height: 64px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(17, 24, 39, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    .header-title h2 { font-size: 17px; font-weight: 600; }
+    .header-search input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      width: 240px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .header-search input:focus { border-color: var(--accent); }
+
+    .content-area {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 28px;
+    }
+
+    /* Views */
+    .view-panel { display: none; }
+    .view-panel.active { display: block; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Grid layout for modules */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .card-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-implemented { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-partial { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    
+    .card-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { background: rgba(255, 255, 255, 0.05); padding: 3px 8px; border-radius: 4px; font-size: 11px; color: #cbd5e1; }
+
+    /* Diagram Containers */
+    .diagram-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    /* Tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+    .data-table th, .data-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .data-table th { background: rgba(255, 255, 255, 0.03); color: #fff; font-weight: 600; }
+    .data-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+    .method-badge {
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .method-get { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .method-post { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+
+    /* Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #modal.open { display: flex; }
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">P</div>
+      <div>
+        <h1>Prepzii Core</h1>
+        <p>System Design Explorer</p>
+      </div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item active" onclick="switchView('hld')">🌐 High Level Design</li>
+      <li class="nav-item" onclick="switchView('modules')">📦 Module Catalog</li>
+      <li class="nav-item" onclick="switchView('journeys')">🗺️ User Journeys</li>
+      <li class="nav-item" onclick="switchView('database')">🗄️ Database (63 Tables)</li>
+      <li class="nav-item" onclick="switchView('apis')">🔌 API Reference (~75)</li>
+      <li class="nav-item" onclick="switchView('zi-ai')">🤖 Zi AI Architecture</li>
+      <li class="nav-item" onclick="switchView('deployment')">🚀 Deployment & Cloud</li>
+      <li class="nav-item" onclick="switchView('glossary')">📖 Hinglish Glossary</li>
+    </ul>
+  </aside>
+
+  <!-- Main View -->
+  <main id="main">
+    <header>
+      <div class="header-title">
+        <h2 id="view-title">High Level Design Architecture</h2>
+      </div>
+      <div class="header-search">
+        <input type="text" id="searchInput" placeholder="Search tables, APIs, modules..." onkeyup="filterContent()">
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- View 1: HLD -->
+      <section id="view-hld" class="view-panel active">
+        <h3 style="margin-bottom: 8px;">Macro System Architecture</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          Student browser se request kaise Vercel Edge, Next.js 16 Gateway (<code>src/proxy.js</code>), Supabase Database, aur Google Gemini AI tak travel karti hai.
+        </p>
+
+        <div class="diagram-container">
+          <div class="mermaid">
+graph LR
+    Browser["Student Browser<br/>(Desktop / Mobile)"] -->|HTTPS / Port 443| Edge["Vercel Edge Gateway<br/>(src/proxy.js)"]
+    Edge -->|Verify Auth Cookie| RSC["Next.js 16 App Server<br/>(React Server Components)"]
+    Edge -->|API Calls| API["Next.js API Routes<br/>(src/app/api/*)"]
+    
+    RSC -->|Admin Client| DB[("Supabase PostgreSQL<br/>63+ Tables")]
+    API -->|Service Role| DB
+    
+    API -->|Session JWT Check| Clerk["Clerk Auth Cloud"]
+    API -->|Stream AI Tutor| Gemini["Google Gemini 3.6<br/>Flash & Pro"]
+    API -->|Legacy Explanations| Claude["Anthropic Claude"]
+    API -->|HMAC Verification| Razorpay["Razorpay Gateway"]
+          </div>
+        </div>
+
+        <div class="module-grid">
+          <div class="card" onclick="showModuleDetails('auth')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Authentication & Gateway</h4>
+            <p class="card-desc">Clerk Auth sessions, Next 16 <code>src/proxy.js</code> route matching, and user profile sync via webhooks.</p>
+            <div class="card-tags"><span class="tag">Clerk</span><span class="tag">src/proxy.js</span><span class="tag">user_profiles</span></div>
+          </div>
+
+          <div class="card" onclick="showModuleDetails('test-engine')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Mock Test Engine & Scoring</h4>
+            <p class="card-desc">Timed mock tests, answer hiding for anti-cheat, atomic submission locks, and +4 / -1 evaluation.</p>
+            <div class="card-tags"><span class="tag">test_sessions</span><span class="tag">test_attempts</span><span class="tag">Next after()</span></div>
+          </div>
+
+          <div class="card" onclick="showModuleDetails('zi-ai')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Zi AI Companion</h4>
+            <p class="card-desc">Gemini 3.6 Flash/Pro SSE token streaming, LaTeX equations, learning memory extraction, and voice notes.</p>
+            <div class="card-tags"><span class="tag">@google/genai</span><span class="tag">zi_memories</span><span class="tag">SSE</span></div>
+          </div>
+
+          <div class="card" onclick="showModuleDetails('battle')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Battle Zone Arena</h4>
+            <p class="card-desc">Real-time 1v1 PvP quiz matchmaking, ELO rating updates, live ticker feed, and competitive seasons.</p>
+            <div class="card-tags"><span class="tag">battle_queue</span><span class="tag">battle_matches</span><span class="tag">ELO</span></div>
+          </div>
+
+          <div class="card" onclick="showModuleDetails('analytics')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Analytics & Predictors</h4>
+            <p class="card-desc">Readiness Index, weak chapter detection, JEE Main JoSAA College Predictor, and NEET rank forecast.</p>
+            <div class="card-tags"><span class="tag">josaa_cutoffs</span><span class="tag">rankForecast.js</span><span class="tag">Pro Gated</span></div>
+          </div>
+
+          <div class="card" onclick="showModuleDetails('billing')">
+            <span class="card-badge badge-implemented">Verified</span>
+            <h4 class="card-title">Razorpay Billing & Access</h4>
+            <p class="card-desc">Monthly, quarterly, yearly, and AI Mode subscriptions with timing-safe HMAC SHA256 validation.</p>
+            <div class="card-tags"><span class="tag">Razorpay</span><span class="tag">HMAC SHA256</span><span class="tag">subscriptions</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- View 2: Module Catalog -->
+      <section id="view-modules" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Prepzii Functional Module Catalog</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          All 18 core functional modules verified in the repository. Click any card to inspect code paths and tables.
+        </p>
+        <div class="module-grid" id="full-module-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- View 3: User Journeys -->
+      <section id="view-journeys" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Critical Real-World User Journeys</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          Select a journey to trace its exact sequence diagram and ordered function calls.
+        </p>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px;">
+          <button class="nav-item active" style="margin: 0;" onclick="showJourney(1)">1. Student Signup</button>
+          <button class="nav-item" style="margin: 0;" onclick="showJourney(2)">2. Mock Test</button>
+          <button class="nav-item" style="margin: 0;" onclick="showJourney(3)">3. Analytics</button>
+          <button class="nav-item" style="margin: 0;" onclick="showJourney(4)">4. Zi AI Chat</button>
+          <button class="nav-item" style="margin: 0;" onclick="showJourney(5)">5. College Predictor</button>
+          <button class="nav-item" style="margin: 0;" onclick="showJourney(6)">6. Battle Zone</button>
+        </div>
+
+        <div class="diagram-container" id="journey-diagram-box">
+          <div id="journey-mermaid" class="mermaid">
+sequenceDiagram
+    actor Student
+    participant Clerk
+    participant Webhook as /api/webhooks/clerk
+    participant Onboarding as Server Action
+    participant DB as Supabase
+    Student->>Clerk: Google Signup
+    Clerk-->>Webhook: user.created
+    Webhook->>DB: UPSERT user_profiles
+    Student->>Onboarding: Selects Exam (NEET) & Username
+    Onboarding->>DB: UPDATE user_profiles
+    Onboarding->>Clerk: Set onboardingComplete: true
+    Onboarding-->>Student: Set cookie prepzii_track & Redirect /dashboard
+          </div>
+        </div>
+        <div id="journey-explanation" style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px; border-radius: 12px; font-size: 14px; line-height: 1.6;">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- View 4: Database Explorer -->
+      <section id="view-database" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Supabase PostgreSQL Database (63 Tables)</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          Comprehensive schema analysis of all tables queried across the application.
+        </p>
+
+        <div class="diagram-container">
+          <table class="data-table" id="db-table">
+            <thead>
+              <tr>
+                <th>Table Name</th>
+                <th>Cluster / Domain</th>
+                <th>Primary Key</th>
+                <th>Foreign Keys</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="db-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- View 5: API Catalog -->
+      <section id="view-apis" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Verified API Endpoint Reference (~75 Routes)</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          All Next.js 16 serverless API endpoints implemented in <code>src/app/api/</code>.
+        </p>
+
+        <div class="diagram-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Authentication</th>
+                <th>Database / Service</th>
+                <th>Source File</th>
+              </tr>
+            </thead>
+            <tbody id="api-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- View 6: Zi AI Architecture -->
+      <section id="view-zi-ai" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Zi AI Companion Engine</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          Dual AI architecture with Google Gemini 3.6 Flash / Pro and Server-Sent Events (SSE).
+        </p>
+
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    User["Student Prompt / Voice Note"] --> Rate["checkZiRateLimit()<br/>(10/50/200 req/min)"]
+    Rate --> Quota["promptUsageOperation()<br/>(3 Free Prompts via DB RPC)"]
+    
+    Quota --> ContextPipeline["Multi-Layer Context Pipeline"]
+    ContextPipeline --> C1["getZiStudentContext()<br/>(Track, Exam Year, Weak Topics)"]
+    ContextPipeline --> C2["getZiLearningMemories()<br/>(zi_memories Table)"]
+    ContextPipeline --> C3["buildZiEntityContext()<br/>(Current Screen, Formula)"]
+    
+    C1 --> PromptBuilder["buildZiSystemPrompt()<br/>(Strict Hinglish & KaTeX Rules)"]
+    C2 --> PromptBuilder
+    C3 --> PromptBuilder
+    
+    PromptBuilder --> GenAI["Google Gen AI SDK<br/>(@google/genai)"]
+    GenAI --> Flash["gemini-3.6-flash (Free/Pro)"]
+    GenAI --> Pro["gemini-3.6-pro (AI Mode)"]
+    
+    Flash --> SSE["Stream Tokens to Client via SSE"]
+    Pro --> SSE
+    SSE --> Extract["Extract Learning Memories -> Save to zi_memories"]
+          </div>
+        </div>
+      </section>
+
+      <!-- View 7: Deployment -->
+      <section id="view-deployment" class="view-panel">
+        <h3 style="margin-bottom: 8px;">Deployment Topology & Cloud Infrastructure</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          How Prepzii operates as an optimized serverless monolith on Vercel with managed BaaS backends.
+        </p>
+
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TB
+    subgraph BrowserClient["Student Browser"]
+        ClientReact["React 19 Components"]
+        ClientStorage["Cookies: Clerk JWT + prepzii_track"]
+    end
+    
+    subgraph VercelEdge["Vercel Global Network"]
+        DNS["DNS / Cloudflare"]
+        EdgeProxy["src/proxy.js (Clerk Middleware Matcher)"]
+        EdgeStatic["Static CDN (_next/static, images, fonts)"]
+    end
+    
+    subgraph VercelLambdas["Vercel Serverless Functions (Node.js 22)"]
+        RSC["React Server Components"]
+        APIs["API Routes (/api/* - 60s max)"]
+    end
+    
+    subgraph SupabaseBaaS["Supabase Cloud"]
+        Postgres[("PostgreSQL 15/17 DB")]
+        S3Storage[("Question Images Storage")]
+    end
+    
+    BrowserClient -->|HTTPS Port 443| DNS
+    DNS --> EdgeProxy
+    EdgeProxy --> RSC
+    EdgeProxy --> APIs
+    RSC --> Postgres
+    APIs --> Postgres
+    APIs --> S3Storage
+          </div>
+        </div>
+      </section>
+
+      <!-- View 8: Glossary -->
+      <section id="view-glossary" class="view-panel">
+        <h3 style="margin-bottom: 8px;">System Design Hinglish Glossary</h3>
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 20px;">
+          Complex technical terms explained with real Prepzii analogies.
+        </p>
+        <div class="module-grid" id="glossary-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <h3 id="modal-title" style="margin-bottom: 12px; font-size: 20px;">Module Title</h3>
+      <div id="modal-content" style="color: var(--text-muted); font-size: 14px; line-height: 1.6;"></div>
+    </div>
+  </div>
+
+  <script>
+    const MODULES = [
+      { id: "landing", title: "Landing & SEO Hub", badge: "Implemented", desc: "Fast SSR public pages for JEE & NEET with optimized font preloads.", files: "src/app/page.js, src/app/HomePageClient.jsx", apis: "None (ISR)", tables: "None" },
+      { id: "auth", title: "Authentication & Gateway", badge: "Implemented", desc: "Clerk session JWT validation, Next 16 src/proxy.js matcher, and profile sync.", files: "src/proxy.js, src/lib/auth.js", apis: "/api/webhooks/clerk", tables: "user_profiles" },
+      { id: "onboarding", title: "Student Onboarding", badge: "Implemented", desc: "Collects target exam, year, unique username via Server Actions.", files: "src/app/onboarding/page.js, src/lib/username.js", apis: "completeOnboarding (Action)", tables: "user_profiles" },
+      { id: "dashboard", title: "Unified Dashboard", badge: "Implemented", desc: "Track-aware central hub (JEE/NEET) displaying XP, streak, and daily goals.", files: "src/app/(dashboard)/dashboard/page.js", apis: "/api/dashboard-stats, /api/daily-goals", tables: "user_xp, daily_goals, study_sessions" },
+      { id: "pyq", title: "PYQ Explorer & Practice", badge: "Implemented", desc: "Official exam shifts from 2017 to 2026, chapter drill, and bookmarking.", files: "src/app/(dashboard)/pyq/, src/lib/pyqData.js", apis: "/api/pyq, /api/pyq-attempts, /api/pyq-bookmarks", tables: "pyq_exams, pyq_questions, pyq_attempts" },
+      { id: "test", title: "Mock Test Engine", badge: "Implemented", desc: "Custom test builder, proctored session with countdown timer, anti-cheat answer hiding.", files: "src/app/api/test-session/route.js, src/lib/tests/answers.js", apis: "/api/test-session", tables: "test_sessions, test_questions, test_attempts" },
+      { id: "analytics", title: "Performance Analytics", badge: "Implemented", desc: "Readiness Index, score trend graphs, weak topic heatmap (Prepzii Pro gated).", files: "src/services/analytics.server.js, src/lib/analyticsAggregate.js", apis: "/api/analytics", tables: "test_attempts, pyq_attempts, user_answers" },
+      { id: "jee-pred", title: "JEE College Predictor", badge: "Implemented", desc: "Marks-to-percentile interpolation + JoSAA round cutoff search for NITs/IITs.", files: "src/components/analytics/JEEMainPredictor.jsx", apis: "Direct Supabase client query", tables: "josaa_cutoffs" },
+      { id: "neet-pred", title: "NEET Rank Forecast", badge: "Implemented", desc: "Piecewise mathematical rank and percentile prediction for NEET scores (0-720).", files: "src/lib/neet/rankForecast.js, historicalData.js", apis: "Pure in-memory algorithm", tables: "historical dataset" },
+      { id: "battle", title: "Battle Zone Arena (1v1)", badge: "Implemented", desc: "Competitive 1v1 PvP quiz engine with queue matchmaking and ELO ranking.", files: "src/lib/battle.js, src/app/api/battle/queue/route.js", apis: "/api/battle/queue, /api/battle/matches/[id]", tables: "battle_queue, battle_matches, battle_stats" },
+      { id: "community", title: "Community & Peer Chat", badge: "Implemented", desc: "Study groups, group messaging, direct 1v1 conversations, and moderation.", files: "src/services/community.server.js", apis: "/api/community/groups, /api/community/direct", tables: "community_groups, community_messages" },
+      { id: "zi-ai", title: "Zi AI Companion", badge: "Implemented", desc: "Google Gemini 3.6 Flash/Pro streaming tutor with KaTeX and long-term memory.", files: "src/lib/zi/provider.js, src/app/api/zi/chat/route.js", apis: "/api/zi/chat, /api/zi/memories", tables: "zi_memories, zi_preferences" },
+      { id: "ai-gen", title: "AI Test Generator", badge: "Partially Implemented", desc: "Wizard with AES-256-GCM tokens; live execution gated by feature flag.", files: "src/lib/zi/testGenerator/builder.server.js", apis: "/api/zi/test-builder, /api/zi/generation-jobs", tables: "zi_generated_tests, zi_generation.jobs" },
+      { id: "gamification", title: "Gamification & XP", badge: "Implemented", desc: "Quadratic level scaling (Lvl 1-50), daily login streaks, and milestone badges.", files: "src/utils/xp.js, src/utils/levelEngine.js, streak.js", apis: "/api/daily-goals", tables: "user_xp, badges, user_badges" },
+      { id: "billing", title: "Razorpay Subscriptions", badge: "Implemented", desc: "Monthly, quarterly, yearly, and AI Mode plans with HMAC SHA256 verification.", files: "src/lib/payment.js, src/app/api/payment/verify/route.js", apis: "/api/payment/create-order, /api/payment/verify", tables: "subscriptions" },
+      { id: "formulas", title: "Formula Handbooks", badge: "Implemented", desc: "Subject flashcards and downloadable PDF formula revision books.", files: "src/lib/formulaCards.js, src/lib/formulaBooks.js", apis: "/api/formula-books", tables: "formula_cards, formula_books" },
+      { id: "institute", title: "Coaching Institute Portal", badge: "Implemented", desc: "B2B tenant management for batches, custom test assignments, and CSV imports.", files: "src/lib/instituteAuth.js, src/app/institute/", apis: "/api/institutes/*", tables: "institutes, institute_batches, institute_tests" },
+      { id: "admin", title: "Admin CMS", badge: "Implemented", desc: "Backoffice portal for question moderation, announcements, and image assets.", files: "src/app/admin/, src/lib/admin.js", apis: "/api/admin/*", tables: "questions, pyq_import_packages, reports" }
+    ];
+
+    const DB_TABLES = [
+      { name: "user_profiles", cluster: "Auth & Core", pk: "id (UUID)", fk: "clerk_user_id (Unique)", desc: "Student identity, target exam (JEE/NEET), target year, onboarding status." },
+      { name: "subscriptions", cluster: "Billing", pk: "id (UUID)", fk: "clerk_user_id", desc: "Active subscription plan, track, expiry timestamp, Razorpay order reference." },
+      { name: "user_xp", cluster: "Gamification", pk: "id (UUID)", fk: "user_id", desc: "Student accumulated XP, current level, active streak, and last active date." },
+      { name: "badges", cluster: "Gamification", pk: "id (UUID)", fk: "None", desc: "Master badge definitions (First Test, Streak Master, Physics Prodigy)." },
+      { name: "user_badges", cluster: "Gamification", pk: "id (UUID)", fk: "user_id, badge_id", desc: "Badges awarded to students with unlock timestamp." },
+      { name: "daily_goals", cluster: "Gamification", pk: "id (UUID)", fk: "None", desc: "Predefined study targets (e.g. solve 20 questions in a day)." },
+      { name: "user_daily_goals", cluster: "Gamification", pk: "id (UUID)", fk: "user_id, goal_id", desc: "Student progress towards daily goals." },
+      { name: "questions", cluster: "Test Engine", pk: "id (UUID)", fk: "None", desc: "Mock test question bank with question_text, options, correct_option, marks." },
+      { name: "test_sessions", cluster: "Test Engine", pk: "id (UUID)", fk: "user_id", desc: "Active in-progress test timer, exam track, mode, and revision counter." },
+      { name: "test_attempts", cluster: "Test Engine", pk: "id (UUID)", fk: "session_id, user_id", desc: "Evaluated test result: score, total_marks, accuracy, time_taken_seconds." },
+      { name: "user_answers", cluster: "Test Engine", pk: "id (UUID)", fk: "attempt_id, question_id", desc: "Selected option, correctness, and question reference for detailed review." },
+      { name: "pyq_exams", cluster: "PYQ Bank", pk: "id (UUID)", fk: "None", desc: "Official exam shifts (e.g. JEE Main 2026 Jan 24 Shift 1)." },
+      { name: "pyq_questions", cluster: "PYQ Bank", pk: "id (UUID)", fk: "exam_id, chapter_id", desc: "Official PYQ questions with marks and negative marks." },
+      { name: "pyq_attempts", cluster: "PYQ Bank", pk: "id (UUID)", fk: "user_id, question_id", desc: "Practice history and answers for past year questions." },
+      { name: "battle_queue", cluster: "Battle Arena", pk: "id (UUID)", fk: "user_id", desc: "Matchmaking queue of students waiting for a 1v1 quiz opponent." },
+      { name: "battle_matches", cluster: "Battle Arena", pk: "id (UUID)", fk: "None", desc: "Active 1v1 battle match state, winner_id, created_at." },
+      { name: "battle_stats", cluster: "Battle Arena", pk: "id (UUID)", fk: "user_id", desc: "Student ELO rating, total matches, wins, losses, win streak." },
+      { name: "zi_memories", cluster: "Zi AI", pk: "id (UUID)", fk: "user_id", desc: "Long-term student memory facts (concept confusions, priorities) extracted by Zi." },
+      { name: "josaa_cutoffs", cluster: "Admissions", pk: "id (BigInt)", fk: "None", desc: "JoSAA counseling opening and closing ranks for NITs, IITs, IIITs (50k+ rows)." }
+    ];
+
+    const APIS = [
+      { method: "GET", path: "/api/profile", auth: "Clerk Auth", target: "user_profiles", file: "src/app/api/profile/route.js" },
+      { method: "GET", path: "/api/dashboard-stats", auth: "Clerk Auth", target: "user_xp, attempts", file: "src/app/api/dashboard-stats/route.js" },
+      { method: "POST", path: "/api/test-session", auth: "Clerk Auth", target: "test_sessions, attempts", file: "src/app/api/test-session/route.js" },
+      { method: "GET", path: "/api/test-attempts/[id]/review", auth: "Clerk Auth", target: "user_answers, questions", file: "src/app/api/test-attempts/[id]/review/route.js" },
+      { method: "GET", path: "/api/analytics", auth: "Clerk + Pro", target: "attempts, answers", file: "src/app/api/analytics/route.js" },
+      { method: "POST", path: "/api/zi/chat", auth: "Clerk Auth", target: "Gemini 3.6 Flash/Pro", file: "src/app/api/zi/chat/route.js" },
+      { method: "POST", path: "/api/zi/transcribe", auth: "Clerk Auth", target: "Gemini Multimodal STT", file: "src/app/api/zi/transcribe/route.js" },
+      { method: "POST", path: "/api/battle/queue", auth: "Clerk Auth", target: "battle_queue, matches", file: "src/app/api/battle/queue/route.js" },
+      { method: "POST", path: "/api/payment/create-order", auth: "Clerk Auth", target: "Razorpay SDK", file: "src/app/api/payment/create-order/route.js" },
+      { method: "POST", path: "/api/payment/verify", auth: "Clerk Auth", target: "subscriptions, HMAC", file: "src/app/api/payment/verify/route.js" },
+      { method: "POST", path: "/api/webhooks/clerk", auth: "Clerk Secret", target: "user_profiles", file: "src/app/api/webhooks/clerk/route.js" }
+    ];
+
+    const GLOSSARY = [
+      { term: "SSR vs CSR", def: "SSR HTML ko server par pehle hi bana deta hai (fast SEO). CSR browser mein JavaScript run karke screen banata hai (dynamic UI jaise Battle Arena)." },
+      { term: "React Server Components (RSC)", def: "Aise React components jo sirf server par execute hote hain. Database credentials browser ko dikhe bina secure queries execute hoti hain." },
+      { term: "src/proxy.js", def: "Next.js 16 ka modern middleware convention jo protected routes par Clerk JWT check karke gatekeeping karta hai." },
+      { term: "Row Level Security (RLS)", def: "PostgreSQL level par rules jo ensure karte hain ki Student A kabhi bhi Student B ke attempts ya personal notes na dekh sake." },
+      { term: "Server-Sent Events (SSE)", def: "HTTP streaming connection jisse Zi AI apna answer word-by-word real time mein screen par bhejta hai." },
+      { term: "HMAC SHA256", def: "Cryptographic secret stamp jo ensure karta hai ki Razorpay payment response real hai aur raste mein kisi hacker ne tamper nahi kiya." },
+      { term: "Cold Start", def: "Serverless container ka pehli baar boot hone mein 1 second ka extra delay jab koi user kaafi der baad request bhejta hai." },
+      { term: "Connection Pooling (PgBouncer)", def: "Smart traffic manager jo thousands of serverless functions ko limited database connections mein queue karta hai taaki database crash na ho." }
+    ];
+
+    function init() {
+      // Populate full module grid
+      const grid = document.getElementById('full-module-grid');
+      MODULES.forEach(m => {
+        const c = document.createElement('div');
+        c.className = 'card';
+        c.onclick = () => showModuleDetails(m.id);
+        c.innerHTML = `
+          <span class="card-badge ${m.badge === 'Implemented' ? 'badge-implemented' : 'badge-partial'}">${m.badge}</span>
+          <h4 class="card-title">${m.title}</h4>
+          <p class="card-desc">${m.desc}</p>
+          <div class="card-tags"><span class="tag">${m.files.split(',')[0]}</span></div>
+        `;
+        grid.appendChild(c);
+      });
+
+      // Populate DB table
+      const tbody = document.getElementById('db-tbody');
+      DB_TABLES.forEach(t => {
+        const r = document.createElement('tr');
+        r.innerHTML = `<td><b>${t.name}</b></td><td><span class="tag">${t.cluster}</span></td><td><code>${t.pk}</code></td><td><code>${t.fk}</code></td><td>${t.desc}</td>`;
+        tbody.appendChild(r);
+      });
+
+      // Populate APIs table
+      const apiTbody = document.getElementById('api-tbody');
+      APIS.forEach(a => {
+        const r = document.createElement('tr');
+        r.innerHTML = `<td><span class="method-badge method-${a.method.toLowerCase()}">${a.method}</span></td><td><code>${a.path}</code></td><td>${a.auth}</td><td>${a.target}</td><td><small style="color:var(--text-muted)">${a.file}</small></td>`;
+        apiTbody.appendChild(r);
+      });
+
+      // Populate Glossary
+      const gGrid = document.getElementById('glossary-grid');
+      GLOSSARY.forEach(g => {
+        const c = document.createElement('div');
+        c.className = 'card';
+        c.innerHTML = `<h4 class="card-title" style="color: #60a5fa;">${g.term}</h4><p class="card-desc" style="color: #e2e8f0;">${g.def}</p>`;
+        gGrid.appendChild(c);
+      });
+
+      showJourney(1);
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.add('active');
+      event.currentTarget.classList.add('active');
+      document.getElementById('view-title').innerText = event.currentTarget.innerText;
+    }
+
+    function showModuleDetails(id) {
+      const m = MODULES.find(x => x.id === id);
+      if (!m) return;
+      document.getElementById('modal-title').innerText = m.title;
+      document.getElementById('modal-content').innerHTML = `
+        <p><b>Status:</b> <span class="tag" style="background:#10b981; color:#fff;">${m.badge}</span></p><br/>
+        <p><b>Purpose:</b> ${m.desc}</p><br/>
+        <p><b>Source Files:</b><br/><code>${m.files}</code></p><br/>
+        <p><b>APIs Called:</b><br/><code>${m.apis}</code></p><br/>
+        <p><b>Database Tables:</b><br/><code>${m.tables}</code></p>
+      `;
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    const JOURNEYS = {
+      1: {
+        title: "Journey 1: Student Signs Up & Completes Onboarding",
+        text: "Student Google One-Tap se signup karta hai. Clerk user create karke webhook bhejta hai jo Supabase mein user_profiles row insert karta hai. Onboarding page par Server Action exam track (NEET) aur username validate karke Clerk metadata update karta hai aur 1-year persistent cookie prepzii_track set karta hai.",
+        diagram: `sequenceDiagram\nactor Student\nparticipant Clerk\nparticipant Hook as /api/webhooks/clerk\nparticipant Action as completeOnboarding()\nparticipant DB as Supabase\nStudent->>Clerk: Google Signup\nClerk-->>Hook: POST user.created\nHook->>DB: UPSERT user_profiles\nStudent->>Action: Form submit (NEET, 2026, username)\nAction->>DB: UPDATE user_profiles\nAction->>Clerk: updateUserMetadata(onboardingComplete)\nAction-->>Student: Set cookie prepzii_track & Redirect /dashboard`
+      },
+      2: {
+        title: "Journey 2: Student Takes & Submits a Mock Test",
+        text: "Student 30 questions ka test start karta hai. Server questions return karta hai par anti-cheat policy ke tehat correct_option ko strip kar deta hai. Test submit karne par in-memory lock lagta hai, score calculate hota hai (+4, -1), test_attempts aur user_answers tables mein insert hota hai, aur Next.js after() background worker XP aur daily goals reconcile karta hai.",
+        diagram: `sequenceDiagram\nactor Student\nparticipant API as /api/test-session\nparticipant Lock as withBankSubmissionLock\nparticipant DB as Supabase\nparticipant After as Next.js after()\nStudent->>API: POST /api/test-session (Start)\nAPI->>DB: SELECT questions (strip answers!)\nAPI-->>Student: { sessionId, questions }\nStudent->>API: POST /api/test-session (Submit)\nAPI->>Lock: Acquire atomic lock\nAPI->>DB: INSERT into test_attempts\nAPI->>DB: INSERT into user_answers\nAPI->>After: Queue runPostSubmitProgressUpdates()\nAPI-->>Student: 200 OK { attemptId }`
+      },
+      3: {
+        title: "Journey 3: Student Views Performance Analytics",
+        text: "Student analytics kholta hai. Server pehle subscription verify karta hai. Pro allowed hone par parallel mein test_attempts, pyq_attempts, aur user_answers query hoti hain. In-memory aggregator aggregateAnalytics overall accuracy, weak chapters, aur Readiness Index compute karta hai.",
+        diagram: `sequenceDiagram\nactor Student\nparticipant API as /api/analytics\nparticipant Access as getUserAccessContext\nparticipant DB as Supabase\nStudent->>API: GET /api/analytics?track=JEE\nAPI->>Access: Check isSubscriptionActive()\nAccess-->>API: allowed = true\npar Query Attempts\nAPI->>DB: SELECT test_attempts\nand Query Answers\nAPI->>DB: SELECT user_answers\nend\nAPI-->>Student: 200 OK { stats, readinessIndex, weakTopics }`
+      },
+      4: {
+        title: "Journey 4: Student Asks Zi AI a Question",
+        text: "Student Zi AI se rotational motion ka formula poochta hai. Server sliding-window rate limit check karta hai aur free user ke liye 3 trial prompts mein se 1 prompt database procedure zi_trial_prompt_usage se reserve karta hai. Past memories aur active screen context ko combine karke Gemini 3.6 Flash ko stream kiya jata hai via Server-Sent Events (SSE).",
+        diagram: `sequenceDiagram\nactor Student\nparticipant API as /api/zi/chat\nparticipant Rate as RateLimiter\nparticipant Gemini as Google GenAI (Gemini 3.6)\nparticipant DB as Supabase\nStudent->>API: POST /api/zi/chat { message }\nAPI->>Rate: Check 10 req/min limit\nAPI->>DB: Fetch zi_memories\nAPI->>Gemini: Stream prompt with context\nloop Stream Tokens via SSE\nGemini-->>Student: data: { delta: 'Torque = I * alpha' }\nend\nAPI->>DB: Save new concept confusion memory`
+      },
+      5: {
+        title: "Journey 5: Student Uses JEE College Predictor",
+        text: "Component mock test average ya custom marks (180) read karta hai. Piece-wise linear interpolation se NTA Percentile (98.2%) aur CRL rank (~25,000) estimate hoti hai. Supabase josaa_cutoffs table se category aur home-state cutoffs filter karke Safe, Target, aur Dream college branches render hoti hain.",
+        diagram: `sequenceDiagram\nactor Student\nparticipant UI as JEEMainPredictor.jsx\nparticipant Math as interpolatePercentile()\nparticipant DB as josaa_cutoffs (Supabase)\nStudent->>UI: Enters Marks: 180, OBC-NCL, Delhi\nUI->>Math: Calculate CRL Rank (~25,000)\nUI->>DB: Query cutoffs where seat_type = 'OBC-NCL'\nDB-->>UI: 50 matching institute cutoffs\nUI-->>Student: Display Dream, Target, Safe college cards`
+      },
+      6: {
+        title: "Journey 6: Student Competes in Battle Zone (1v1)",
+        text: "Student 'Find Match' click karta hai. Server battle_queue check karta hai. Opponent milte hi battle_matches row banti hai aur dono players arena room mein enter karte hain. Match khatam hone par standard chess ELO rating update hoti hai (+25 winner, -15 loser) aur live feed par ticker update hota hai.",
+        diagram: `sequenceDiagram\nactor P1 as Player 1\nactor P2 as Player 2\nparticipant API as /api/battle/queue\nparticipant DB as Supabase\nP1->>API: POST /api/battle/queue\nAPI->>DB: INSERT into battle_queue\nP2->>API: POST /api/battle/queue\nAPI->>DB: Opponent Found -> Create match!\nAPI-->>P1: { status: 'matched', battleId }\nAPI-->>P2: { status: 'matched', battleId }\nNote over P1, P2: Live 1v1 Quiz Round\nAPI->>DB: Conclude match & Update ELO Ratings`
+      }
+    };
+
+    function showJourney(num) {
+      const j = JOURNEYS[num];
+      if (!j) return;
+      document.getElementById('journey-mermaid').innerHTML = j.diagram;
+      document.getElementById('journey-mermaid').removeAttribute('data-processed');
+      if (window.mermaid) mermaid.run();
+      document.getElementById('journey-explanation').innerHTML = `
+        <h4 style="color: #60a5fa; margin-bottom: 8px;">${j.title}</h4>
+        <p>${j.text}</p>
+      `;
+    }
+
+    function filterContent() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.card').forEach(c => {
+        const text = c.innerText.toLowerCase();
+        c.style.display = text.includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('#db-tbody tr').forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#api-tbody tr').forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

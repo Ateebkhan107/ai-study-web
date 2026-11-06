@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { readZiChat } from '../../src/lib/zi/chatFrames.js';
 import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
 import { existsSync } from 'node:fs';
@@ -30,7 +31,7 @@ const body = text => ({messages:[{role:'user',content:text}]});
 test('exact reported Hinglish request returns a builder without any provider/context dependency',async()=>{
   const response=await POST(request(body('10 Rotational Motion questions ka test generate kro')));
   assert.equal(response.status,200);assert.equal(response.headers.get('x-zi-prompt-charged'),'0');
-  const text=await response.text();const action=JSON.parse(text.split('__ZI_VALIDATED_ACTION__=')[1]);
+  const {action}=await readZiChat(response);
   assert.equal(action.type,'ai_test_builder');assert.equal(action.config.questionCount,10);assert.equal(action.config.subject,'Physics');assert.equal(action.confirmed,false);
 });
 test('unrelated tutoring and official PYQ requests fail explicitly without context/provider or prompt debit',async()=>{

@@ -17,7 +17,7 @@ const hooks = registerHooks({
   resolve(specifier, context, next) {
     const mocks = {
       "@clerk/nextjs": 'export const useUser=()=>({user:{id:"student-1"},isLoaded:true,isSignedIn:true});',
-      "next/navigation": 'export const useRouter=()=>({push(){}}); export const usePathname=()=>"/zi"; export const useSearchParams=()=>new URLSearchParams();',
+      "next/navigation": 'export const useRouter=()=>({push(){}}); export const usePathname=()=>globalThis.__ziTestPathname||"/zi"; export const useSearchParams=()=>new URLSearchParams();',
       "next/link": 'export default function Link(){return null}',
       "@/components/MathText": 'export default function MathText({children}){return children}',
       "@/components/Logo": 'export default function Logo(){return null}',
@@ -41,6 +41,7 @@ const hooks = registerHooks({
   },
 });
 const { ZiTestBuilderForm, default: ZiTestBuilder } = await import("../ZiTestBuilder.jsx");
+const { default: ZiLauncher } = await import("../ZiLauncher.jsx");
 const { default: ZiMessages } = await import("../ZiMessages.jsx");
 const { WorkspaceMessage } = await import("../ZiWorkspace.jsx");
 const { rememberBuilderAction, readBuilderToken, clearBuilderToken } = await import("../testBuilderSession.js");
@@ -92,3 +93,15 @@ test("both surfaces share tokens while separating students", () => {
   clearBuilderToken("student-1"); assert.equal(readBuilderToken("student-1"), undefined);
 });
 test.after(() => hooks.deregister());
+
+test("accounting outages and held trials do not display a false exhaustion upsell", () => {
+  globalThis.__ziTestPathname="/dashboard";
+  try {
+  for (const usage of [{ used: 0, pending: 0, remaining: 0, available: false }, { used: 2, pending: 1, remaining: 0, available: true }]) {
+    const html = render(ZiLauncher, { plan: "FREE", ziFreeUsage: usage });
+    assert.doesNotMatch(html, /used all 3 free trial prompts/);
+  }
+  const exhausted = render(ZiLauncher, { plan: "FREE", ziFreeUsage: { used: 3, pending: 0, remaining: 0, available: true } });
+  assert.match(exhausted, /used all 3 free trial prompts/);
+  } finally { delete globalThis.__ziTestPathname; }
+});

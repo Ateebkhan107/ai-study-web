@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { findClerkUserByEmail, getInstituteContext } from "@/lib/instituteAuth";
+import { getInstituteContext } from "@/lib/instituteAuth";
 import { StudentAddSchema } from "@/lib/validations";
 
 export async function POST(request, { params }) {
@@ -22,24 +22,7 @@ export async function POST(request, { params }) {
     }
 
     const { email, batch_id: batchId } = parsed.data;
-
-    const clerkUser = await findClerkUserByEmail(email);
-    const userId = clerkUser?.id || null;
-    const status = userId ? "ACTIVE" : "PENDING";
-
-    const { data: member, error: memberError } = await supabaseAdmin
-      .from("institute_members")
-      .upsert({
-        institute_id: context.institute.id,
-        user_id: userId,
-        email,
-        role: "STUDENT",
-        status,
-      }, { onConflict: "institute_id,email" })
-      .select("*")
-      .single();
-
-    if (memberError) throw memberError;
+    const normalizedEmail = email.toLowerCase();
 
     if (batchId) {
       const { data: batch, error: batchError } = await supabaseAdmin
@@ -50,7 +33,44 @@ export async function POST(request, { params }) {
         .maybeSingle();
       if (batchError) throw batchError;
       if (!batch) return NextResponse.json({ error: "Batch not found" }, { status: 404 });
+    }
 
+    // Preserve memberships created before emails were normalized. The schema
+    // accepts underscores, which need escaping in a LIKE pattern.
+    const lookupMember = async () => {
+      const { data, error } = await supabaseAdmin
+        .from("institute_members")
+        .select("*")
+        .eq("institute_id", context.institute.id)
+        .ilike("email", normalizedEmail.replaceAll("_", "\\_"))
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    };
+
+    let member = await lookupMember();
+    if (!member) {
+      // An insert racing another add must preserve the existing row.
+      const { data, error } = await supabaseAdmin
+        .from("institute_members")
+        .upsert({
+          institute_id: context.institute.id,
+          user_id: null,
+          email: normalizedEmail,
+          role: "STUDENT",
+          status: "PENDING",
+        }, { onConflict: "institute_id,email", ignoreDuplicates: true })
+        .select("*")
+        .maybeSingle();
+      if (error) throw error;
+      member = data ?? await lookupMember();
+    }
+
+    if (!member || member.role !== "STUDENT" || !["ACTIVE", "PENDING"].includes(member.status)) {
+      return NextResponse.json({ error: "This membership cannot be added as a student." }, { status: 409 });
+    }
+
+    if (batchId) {
       const { error: batchMemberError } = await supabaseAdmin
         .from("institute_batch_members")
         .upsert({

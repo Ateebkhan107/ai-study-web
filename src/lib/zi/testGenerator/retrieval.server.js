@@ -7,7 +7,7 @@ export const MAX_CANDIDATES = 120;
 export const MIN_REFERENCES = 5;
 const QUERY_LIMIT = MAX_CANDIDATES / 2;
 const MAX_REFERENCE_CHARS = 6000;
-const FIELDS = `id, exam, exam_type, subject, chapter, topic, year, exam_id,
+export const PYQ_REFERENCE_FIELDS = `id, exam, exam_type, subject, chapter, topic, year, exam_id,
   difficulty, question_type, status, question, option_a, option_b, option_c, option_d,
   correct_option, correct_options, numerical_answer, numerical_min, numerical_max,
   explanation, question_image, option_a_image, option_b_image, option_c_image, option_d_image,
@@ -92,7 +92,7 @@ export async function retrievePYQReferences(input, { client, signal } = {}) {
   const filters = databaseFilters(scope);
   const querySignal = signal ? AbortSignal.any([signal, AbortSignal.timeout(12000)]) : AbortSignal.timeout(12000);
   const buildQuery = (ascending) => {
-    let query = client.from("pyq_questions").select(FIELDS)
+    let query = client.from("pyq_questions").select(PYQ_REFERENCE_FIELDS)
       .in("exam", filters.exams).in("exam_type", filters.examTypes).in("subject", filters.subjects)
       .in("status", filters.statuses).eq("paper.is_published", true)
       .in("paper.status", filters.statuses).in("paper.exam", filters.exams).in("paper.exam_type", filters.examTypes);

@@ -5,6 +5,7 @@ import { assertLocal } from '@/lib/localGuard.server';
 import { ZiChatRequestSchema } from '@/lib/zi/validation';
 import { checkZiRateLimit } from '@/lib/zi/rateLimit';
 import { handleBuilder, parseBuilderText } from '@/lib/zi/testGenerator/builder.server';
+import { ziChatReply } from '@/lib/zi/chatFrames';
 import { generationPilotAllowed } from '@/lib/zi/testGenerator/jobPolicy';
 
 const headers = { 'Cache-Control': 'no-store', 'X-Zi-Prompt-Charged': '0' };
@@ -28,9 +29,7 @@ export async function POST(request) {
     });
     const action = handleBuilder({ userId, access, text, token: parsed.data.testBuilderToken });
     if (!action) return unavailable();
-    return new Response(`${action.prompt}\n\n__ZI_VALIDATED_ACTION__=${JSON.stringify(action)}`, {
-      headers: { ...headers, 'Content-Type': 'text/plain; charset=utf-8' },
-    });
+    return ziChatReply(action.prompt, action);
   } catch (error) {
     return Response.json({ error: error.status ? error.message : 'Local test configuration is unavailable. Please retry.' }, { status: error.status || 503, headers });
   }

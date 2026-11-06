@@ -23,50 +23,46 @@ function uniqueLeaderboardUsers(users = []) {
 
 export default function Leaderboard({ compact = false }) {
   const { user: currentUser } = useUser();
-  const [users, setUsers] = useState([]);
-  const [currentUserData, setCurrentUserData] = useState(null);
+  const currentUserId = currentUser?.id;
+  const [leaderboard, setLeaderboard] = useState([]);
 
   // =============================
   // LOAD GLOBAL LEADERBOARD
   // =============================
 
   useEffect(() => {
+    if (!currentUserId) return;
+
+    const controller = new AbortController();
+
     async function loadLeaderboard() {
       try {
-        const response = await fetch("/api/pyq/leaderboard", { cache: "no-store" });
+        const response = await fetch("/api/pyq/leaderboard", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
         if (!response.ok) {
           throw new Error("Failed to load leaderboard");
         }
 
         const allUsers = uniqueLeaderboardUsers(await response.json());
-        const limit = compact ? 5 : 10;
-        const topUsers = Array.isArray(allUsers) ? allUsers.slice(0, limit) : [];
-        const rankedTopUsers = topUsers.map((u, i) => ({ ...u, rank: i + 1 }));
-        setUsers(rankedTopUsers);
-
-        if (currentUser?.id) {
-          const userFullIndex = Array.isArray(allUsers)
-            ? allUsers.findIndex((u) => u.user_id === currentUser.id)
-            : -1;
-            
-          if (userFullIndex >= limit) {
-            setCurrentUserData({
-              ...allUsers[userFullIndex],
-              rank: userFullIndex + 1,
-            });
-          } else {
-            setCurrentUserData(null);
-          }
+        if (!controller.signal.aborted) {
+          setLeaderboard(allUsers);
         }
-      } catch (error) {
-//         console.log("Leaderboard error:", error);
+      } catch {
+        // Keep the last successful result if the request fails.
       }
     }
 
-    if (currentUser?.id !== undefined) {
-      loadLeaderboard();
-    }
-  }, [compact, currentUser?.id]);
+    loadLeaderboard();
+    return () => controller.abort();
+  }, [currentUserId]);
+
+  const limit = compact ? 5 : 10;
+  const users = leaderboard.filter((user) => !user.isCurrentUserAppended).slice(0, limit);
+  const currentUserData = users.some((user) => user.user_id === currentUserId)
+    ? null
+    : leaderboard.find((user) => user.user_id === currentUserId);
 
   return (
     <div className={`relative bg-white dark:bg-[#141414] rounded-xl border border-slate-200 dark:border-[#2A2A2A] transition-colors duration-200 ${
@@ -126,7 +122,7 @@ export default function Leaderboard({ compact = false }) {
             {users[0] && (
               <RankOneCard 
                 user={users[0]} 
-                isCurrentUser={currentUser?.id === users[0].user_id} 
+                isCurrentUser={currentUserId === users[0].user_id}
                 compact={compact} 
               />
             )}
@@ -138,7 +134,7 @@ export default function Leaderboard({ compact = false }) {
                   <StandardRow 
                     key={user.user_id} 
                     user={user} 
-                    isCurrentUser={currentUser?.id === user.user_id} 
+                    isCurrentUser={currentUserId === user.user_id}
                     compact={compact} 
                   />
                 ))}

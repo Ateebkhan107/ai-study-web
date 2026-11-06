@@ -23,6 +23,7 @@ export const ZiEntityTypeSchema = z.enum([
   "test_question",
   "test_result",
   "test_review_question",
+  "generated_test_review_question",
 ]);
 
 const ZiChatMessageSchema = z.object({
@@ -37,6 +38,7 @@ const ZiPageContextSchema = z
       .object({
         type: ZiEntityTypeSchema,
         id: z.string().trim().min(1).max(ZI_MAX_ENTITY_ID_LENGTH),
+        sessionId: z.uuid().optional(),
       })
       .strict()
       .optional(),
@@ -51,7 +53,13 @@ const ZiPageContextSchema = z
       test_question: "test",
       test_result: "test",
       test_review_question: "test",
+      generated_test_review_question: "test",
     };
+    const generatedReview = pageContext.entity.type === "generated_test_review_question";
+    if (generatedReview !== Boolean(pageContext.entity.sessionId) ||
+      (generatedReview && !z.uuid().safeParse(pageContext.entity.id).success)) {
+      context.addIssue({ code: z.ZodIssueCode.custom, path: ["entity", "sessionId"], message: "Invalid generated review session." });
+    }
     const expectedPageType = expectedPageTypeByEntity[pageContext.entity.type];
 
     if (pageContext.pageType !== expectedPageType) {

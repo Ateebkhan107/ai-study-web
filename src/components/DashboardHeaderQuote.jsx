@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DASHBOARD_HEADER_MESSAGES = [
   "One solid session. That's enough.",
@@ -98,28 +98,24 @@ function getRandomMessage() {
   return DASHBOARD_HEADER_MESSAGES[nextIndex];
 }
 
-function getInitialMessage() {
-  if (typeof window === "undefined") {
-    return DASHBOARD_HEADER_MESSAGES[0];
-  }
-
-  return getRandomMessage();
-}
-
 export default function DashboardHeaderQuote() {
-  const [dateLabel] = useState(() => getDateLabel());
-  const [message] = useState(() => getInitialMessage());
+  const [header, setHeader] = useState({ dateLabel: "", message: DASHBOARD_HEADER_MESSAGES[0] });
+
+  useEffect(() => {
+    // Locale, time zone and session storage are only reliable after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- synchronize browser-only display values after mount.
+    setHeader({ dateLabel: getDateLabel(), message: getRandomMessage() });
+  }, []);
 
   return (
     <div className="max-w-full min-w-0 lg:col-start-2 lg:max-w-[440px] lg:pt-6">
       <p className="text-[11px] font-black uppercase tracking-[0.2em] text-amber-700/75 dark:text-brand/70">
-        {dateLabel}
+        {header.dateLabel || "\u00a0"}
       </p>
       <p
         className="mt-1 max-w-[440px] text-base font-semibold leading-snug text-slate-700 dark:text-slate-100 sm:text-lg lg:text-[21px]"
-        suppressHydrationWarning
       >
-        {message}
+        {header.message}
       </p>
     </div>
   );

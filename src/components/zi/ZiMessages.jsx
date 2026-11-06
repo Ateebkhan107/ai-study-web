@@ -1,6 +1,6 @@
 import ZiMessage from "@/components/zi/ZiMessage";
 
-export default function ZiMessages({ messages, isThinking }) {
+export default function ZiMessages({ messages, isThinking, onOpenClassroom }) {
   return (
     <div
       className="flex-1 space-y-4 overflow-y-auto px-4 py-4 [scrollbar-color:rgba(234,179,8,0.45)_transparent] sm:px-5"
@@ -13,6 +13,7 @@ export default function ZiMessages({ messages, isThinking }) {
           tone={message.status === "error" ? "error" : "default"}
           isLoading={message.status === "streaming" && !message.text}
           action={message.action}
+          onOpenClassroom={onOpenClassroom}
         >
           {message.text}
         </ZiMessage>

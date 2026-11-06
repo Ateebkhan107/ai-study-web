@@ -1,4 +1,5 @@
 import test from "node:test";
+import { readZiChat } from "../chatFrames.js";
 import assert from "node:assert/strict";
 import { registerHooks } from "node:module";
 import { existsSync } from "node:fs";
@@ -6,18 +7,20 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
-globalThis.__builderRouteTest = { userId: "route-student", allowed: true, charged: 0, providerCalls: 0 };
+globalThis.__builderRouteTest = { userId: "route-student", allowed: true, charged: 0, providerCalls: 0, remaining: 0 };
 process.env.ZI_TEST_BUILDER_SECRET = "route-test-secret-only";
 const data = (code) => `data:text/javascript,${encodeURIComponent(code)}`;
-const unused = (names) => names.map((name) => `export const ${name}=()=>{throw new Error("Unexpected unrelated service call")};`).join("\n");
+const unused = (names) => names.map((name) => `export const ${name}=()=>{if(globalThis.__builderRouteTest.tutorEnabled)return ${["buildZiEntityContext", "getZiStudentContext", "getZiLearningMemories"].includes(name) ? "Promise.resolve(null)" : "null"};throw new Error("Unexpected unrelated service call")};`).join("\n");
 const hooks = registerHooks({ resolve(specifier, context, next) {
   if (specifier === "next/server") return next("next/server.js", context);
   const mocks = {
     "@clerk/nextjs/server": 'export const auth=async()=>({userId:globalThis.__builderRouteTest.userId});',
-    "@/lib/accessControl": 'export const getUserAccessContext=async({userId})=>({userId,examTrack:"JEE",proTracks:[],plan:"FREE",isAiMode:false,ziFreeUsage:{remaining:0}}); export const canUseFeature=()=>false; export const incrementZiFreePromptsUsage=async()=>{globalThis.__builderRouteTest.charged++};',
+    "@/lib/accessControl": 'export const getUserAccessContext=async({userId})=>({userId,examTrack:"JEE",proTracks:[],plan:"FREE",isAiMode:false,ziFreeUsage:{remaining:globalThis.__builderRouteTest.remaining}}); export const canUseFeature=()=>false; export const incrementZiFreePromptsUsage=async()=>{globalThis.__builderRouteTest.charged++};',
+    "@/lib/zi/promptUsage.server": 'export const reserveZiFreePrompt=async()=>({allowed:true,requestId:"test-reservation"}); export const promptUsageOperation=async(u,op)=>{if(op==="consume")globalThis.__builderRouteTest.charged++};',
     "@/lib/zi/rateLimit": 'export const checkZiRateLimit=()=>({allowed:globalThis.__builderRouteTest.allowed,remaining:0,resetMs:2000});',
-    "@/lib/zi/provider": 'export const streamZiResponse=()=>{globalThis.__builderRouteTest.providerCalls++;throw new Error("Provider must not run")};',
+    "@/lib/zi/provider": 'export const streamZiResponse=async({beforeDispatch})=>{globalThis.__builderRouteTest.providerCalls++;if(globalThis.__builderRouteTest.tutorEnabled){if(globalThis.__builderRouteTest.providerError)throw Object.assign(new Error("Missing test provider"),{code:"ZI_PROVIDER_NOT_CONFIGURED"});await beforeDispatch();return (async function*(){yield {text:"Test response"}})();}throw new Error("Provider must not run")};',
     "@/lib/zi/actionResolver.server": unused(["attachStudyPlanStepActions"]),
+    "@/lib/zi/visualReveal.server": 'export const resolveZiVisualReveal=async()=>"general"; export const ziVisualsAllowed=()=>true; export const ZI_PROTECTED_CONCEPT_REPLY="Generic guidance";',
     "@/lib/zi/entityContext.server": unused(["buildZiEntityContext"]),
     "@/lib/zi/memories.server": unused(["getZiLearningMemories", "validateZiLearningMemoryAction"]),
     "@/lib/zi/studentContext.server": unused(["getZiStudentContext"]),
@@ -49,10 +52,10 @@ test("both actual route handlers require Clerk authentication", async () => {
 test("chat configures without Gemini or trial deduction, even with no free AI prompts", async () => {
   const response = await chat(req({ messages: [{ role: "user", content: "Create a test on Rotational Motion" }] }));
   assert.equal(response.status, 200); assert.equal(response.headers.get("X-Zi-Prompt-Charged"), "0");
-  const action = JSON.parse((await response.text()).split("__ZI_VALIDATED_ACTION__=")[1]);
+  const { action } = await readZiChat(response);
   assert.equal(action.type, "ai_test_builder"); assert.equal(action.config.subject, "Physics");
   const followup = await chat(req({ messages: [{ role: "user", content: "15 medium questions" }], testBuilderToken: action.token }));
-  const updated = JSON.parse((await followup.text()).split("__ZI_VALIDATED_ACTION__=")[1]);
+  const { action: updated } = await readZiChat(followup);
   assert.equal(updated.config.questionCount, 15); assert.deepEqual(updated.missing, ["mode"]);
   assert.equal(globalThis.__builderRouteTest.providerCalls, 0); assert.equal(globalThis.__builderRouteTest.charged, 0);
 });
@@ -96,5 +99,21 @@ test("quota-unavailable configuration never calls Gemini even with enabled futur
     assert.equal(confirmed.availability.state, "quota_blocked"); assert.equal(confirmed.availability.generationEnabled, false);
     assert.equal(globalThis.__builderRouteTest.providerCalls, 0); assert.equal(globalThis.__builderRouteTest.charged, 0);
   } finally { delete process.env.ZI_AI_TEST_GENERATION_ENABLED; delete process.env.ZI_AI_TEST_PROVIDER_STATUS; }
+});
+test("provider startup failure preserves trial prompts, successful startup charges once", async () => {
+  const state = globalThis.__builderRouteTest;
+  const before = state.charged;
+  Object.assign(state, { tutorEnabled: true, remaining: 3, providerError: true });
+  try {
+    const failed = await chat(req({ messages: [{ role: "user", content: "Explain angular momentum" }] }));
+    assert.equal(failed.status, 503);
+    assert.equal((await failed.json()).error, "Zi provider is not configured");
+    assert.equal(state.charged, before);
+    state.providerError = false;
+    const success = await chat(req({ messages: [{ role: "user", content: "Explain angular momentum" }] }));
+    assert.equal(success.status, 200);
+    assert.equal((await readZiChat(success)).text, "_Gemini-generated response_\n\nTest response");
+    assert.equal(state.charged, before + 1);
+  } finally { Object.assign(state, { tutorEnabled: false, remaining: 0, providerError: false }); }
 });
 test.after(() => { hooks.deregister(); delete process.env.ZI_TEST_BUILDER_SECRET; delete globalThis.__builderRouteTest; });

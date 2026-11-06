@@ -69,6 +69,7 @@ export async function streamZiResponse({
   systemPrompt,
   signal,
   accessContext,
+  beforeDispatch,
 }) {
   const isAiMode = accessContext?.isAiMode || false;
 
@@ -99,12 +100,19 @@ export async function streamZiResponse({
       console.info(`[Zi] model: ${currentModel}`);
     }
 
+    // Initialization/configuration above cannot consume a trial prompt.
+    signal?.throwIfAborted();
+    await beforeDispatch?.();
     try {
       const result = await ai.models.generateContentStream(
         {
           model: currentModel,
           contents: toGeminiContents(messages),
           config: {
+            // No tools are used by this tutor. Disable the SDK's lazy AFC wrapper
+            // so this await establishes the HTTP stream before trial consumption.
+            automaticFunctionCalling: { disable: true },
+            abortSignal: signal,
             systemInstruction: systemPrompt,
             maxOutputTokens: 3500,
             temperature: 0.6,
@@ -113,8 +121,7 @@ export async function streamZiResponse({
               thinkingLevel: "LOW",
             },
           },
-        },
-        { abortSignal: signal }
+        }
       );
 
       logZiProviderStatus("stream-started");

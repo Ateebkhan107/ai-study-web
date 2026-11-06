@@ -32,7 +32,7 @@ export default function Logo({ size, showText = true, forceDark = false, forceLi
             fill
             sizes={sizesAttr}
             className="object-contain"
-            priority
+            loading={forceDark ? "eager" : "lazy"}
           />
         </div>
       )}

@@ -8,30 +8,10 @@ import {
 } from "@/lib/formulaCards";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
-const PYQ_STATUS_ALLOWLIST = ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"];
+import { normalizeReference, PYQ_REFERENCE_FIELDS } from "./testGenerator/retrieval.server.js";
+import { normalizeScope } from "./testGenerator/scope.server.js";
 
-const PYQ_ZI_SELECT = `
-  id,
-  exam,
-  exam_type,
-  year,
-  subject,
-  chapter,
-  difficulty,
-  question,
-  option_a,
-  option_b,
-  option_c,
-  option_d,
-  question_type,
-  correct_option,
-  correct_options,
-  numerical_answer,
-  numerical_min,
-  numerical_max,
-  explanation,
-  status
-`;
+const PYQ_UNAVAILABLE = "Current PYQ context is unavailable or ineligible. Do not reconstruct it from chat history, invent its answer, or present it as verified. Offer general concepts only.";
 
 const FORMULA_CARD_ZI_SELECT = `
   id,
@@ -58,19 +38,7 @@ const ACTIVE_TEST_QUESTION_SELECT = `
     chapter,
     topic,
     difficulty,
-    question_type,
-    question_text,
-    question_image,
-    option_a,
-    option_b,
-    option_c,
-    option_d,
-    option_a_image,
-    option_b_image,
-    option_c_image,
-    option_d_image,
-    marks,
-    negative_marks
+    question_type
   )
 `;
 
@@ -202,7 +170,7 @@ async function hasAttemptedPyqQuestion(userId, questionId) {
 
 function formatPyqQuestionContext(question, answerRevealed) {
   const lines = [
-    "Trusted current entity context: PYQ question.",
+    "Eligible published PrepZii PYQ context. Publication/approval is not independent scientific verification.",
     `Subject: ${cleanText(question.subject, 120) || "Unknown"}`,
     `Chapter: ${cleanText(question.chapter, 160) || "Unknown"}`,
   ];
@@ -240,14 +208,14 @@ function formatPyqQuestionContext(question, answerRevealed) {
       formatMaybeJson(question.correct_options, 160),
       cleanText(question.numerical_answer, 80),
     ].filter(Boolean);
-    if (answerParts.length) lines.push(`Revealed answer: ${answerParts.join(", ")}`);
+    if (answerParts.length) lines.push(`Stored answer key (not independently verified): ${answerParts.join(", ")}`);
     if (question.numerical_min || question.numerical_max) {
       lines.push(`Accepted numerical range: ${cleanText(question.numerical_min, 80)} to ${cleanText(question.numerical_max, 80)}`);
     }
     const explanation = cleanText(question.explanation, 1200);
-    if (explanation) lines.push(`Existing explanation: ${explanation}`);
+    if (explanation) lines.push(`Stored solution (review status unavailable): ${explanation}`);
   } else {
-    lines.push("Answer and official explanation are not included because this question has not been revealed for this student. Give hints, concepts, and strategy without revealing the correct answer.");
+    lines.push("Answer and stored solution are not included because this question has not been revealed for this student. Give hints, concepts, and strategy without revealing the correct answer.");
   }
 
   return lines.filter(Boolean).join("\n");
@@ -257,25 +225,31 @@ async function fetchPyqQuestionContext({ userId, id }) {
   try {
     const { data: question, error } = await supabaseAdmin
       .from("pyq_questions")
-      .select(PYQ_ZI_SELECT)
+      .select(PYQ_REFERENCE_FIELDS)
       .eq("id", id)
-      .in("status", PYQ_STATUS_ALLOWLIST)
       .maybeSingle();
 
     if (error) {
       logEntityContextError("pyq-question", error);
-      return "";
+      return PYQ_UNAVAILABLE;
     }
-    if (!question) return "";
+    if (!question) return PYQ_UNAVAILABLE;
+    // Exactly the generator's published-paper, status, exam, content and answer policy.
+    // Do not run Gemini or infer eligibility from the browser's question content.
+    const scope = normalizeScope({ exam: question.exam_type, subject: question.subject,
+      ...(question.chapter ? { chapter: question.chapter } : {}),
+      ...(question.topic ? { topic: question.topic } : {}) });
+    const { reference } = normalizeReference(question, scope);
+    if (!reference) return PYQ_UNAVAILABLE;
 
     const canAccessExam = await userCanAccessExam(userId, question.exam);
-    if (!canAccessExam) return "";
+    if (!canAccessExam) return PYQ_UNAVAILABLE;
 
     const answerRevealed = await hasAttemptedPyqQuestion(userId, question.id);
-    return formatPyqQuestionContext(question, answerRevealed);
+    return formatPyqQuestionContext({ ...question, explanation: reference.explanation }, answerRevealed);
   } catch (error) {
     logEntityContextError("pyq-question", error);
-    return "";
+    return PYQ_UNAVAILABLE;
   }
 }
 
@@ -491,36 +465,7 @@ function formatActiveTestQuestionContext(question, session, questionOrder) {
   ].filter(Boolean);
   if (meta.length) lines.push(`Question metadata: ${meta.join(" | ")}`);
 
-  lines.push(`Question: ${cleanText(question.question_text, 1600) || "Question text is unavailable."}`);
-
-  const options = [
-    ["A", question.option_a],
-    ["B", question.option_b],
-    ["C", question.option_c],
-    ["D", question.option_d],
-  ]
-    .map(([label, value]) => [label, cleanText(value, 500)])
-    .filter(([, value]) => value);
-
-  if (options.length) {
-    lines.push("Options:");
-    for (const [label, value] of options) {
-      lines.push(`${label}. ${value}`);
-    }
-  }
-
-  const hasQuestionImage = Boolean(question.question_image);
-  const hasOptionImages = [
-    question.option_a_image,
-    question.option_b_image,
-    question.option_c_image,
-    question.option_d_image,
-  ].some(Boolean);
-  if (hasQuestionImage || hasOptionImages) {
-    lines.push("Image note: The current question has image-based content in the app, but Zi receives no image URL or visual pixels in this phase.");
-  }
-
-  lines.push("Hidden answer fields intentionally omitted: correct answer, solution, explanation, and marking key.");
+  lines.push("Question text, options, images, and solutions are withheld during the assessment.");
 
   return lines.filter(Boolean).join("\n");
 }
@@ -638,11 +583,11 @@ function formatFocusQuestions(answers) {
         `${cleanText(question.subject, 80) || "Unknown subject"} / ${cleanText(question.chapter, 120) || "Unknown chapter"}`,
         `Question: ${cleanText(question.question_text, 420) || "Unavailable"}`,
         answer.selected_option ? `Selected: ${cleanText(answer.selected_option, 80)}` : "Selected: not attempted",
-        `Correct: ${cleanText(answer.correct_option, 80) || "Unavailable"}`,
+        `Stored answer key (not independently verified): ${cleanText(answer.correct_option, 80) || "Unavailable"}`,
       ];
 
       const explanation = cleanText(question.explanation, 420);
-      if (explanation) parts.push(`Explanation: ${explanation}`);
+      if (explanation) parts.push(`Stored solution (review status unavailable): ${explanation}`);
 
       return parts.join(" | ");
     });
@@ -735,7 +680,7 @@ function formatTestReviewQuestionContext({ answer, attempt, session, questionNum
 
   const lines = [
     "Trusted current entity context: Completed test review question.",
-    "This test attempt is completed and belongs to the authenticated student. Use the verified question, selected answer, correct answer, and existing explanation below. If a field is missing, say it is unavailable instead of inventing it.",
+    "This test attempt is completed and belongs to the authenticated student. Use the stored question, selected answer, stored answer key, and stored solution below. Database storage alone does not establish independent review. If a field is missing, say it is unavailable instead of inventing it.",
     `Test: ${cleanText(session?.exam, 80) || "Mock Test"}`,
     `Question number: ${cleanText(questionNumber, 24) || "Unknown"}${totalQuestions ? ` of ${totalQuestions}` : ""}`,
     `Score for attempt: ${Number(attempt.score) || 0} / ${Number(attempt.total_marks) || 0}`,
@@ -772,16 +717,16 @@ function formatTestReviewQuestionContext({ answer, attempt, session, questionNum
   }
 
   lines.push(`Student selected: ${formatAnswerOptionText(question, selected)}`);
-  lines.push(`Verified correct answer: ${formatAnswerOptionText(question, correct)}`);
+  lines.push(`Stored answer key (not independently verified): ${formatAnswerOptionText(question, correct)}`);
 
   const explanation = cleanText(question.explanation, 1400);
   if (explanation) {
-    lines.push(`Existing explanation: ${explanation}`);
+    lines.push(`Stored solution (review status unavailable): ${explanation}`);
   } else {
-    lines.push("Existing explanation: Unavailable.");
+    lines.push("Stored solution: Unavailable.");
   }
 
-  lines.push("Tutoring instruction for this turn: explain the underlying concept, why the selected answer was wrong when applicable, the correct reasoning step by step, important formulas/calculations, and practical tips for similar questions. Keep follow-ups anchored to this same verified question.");
+  lines.push("Tutoring instruction for this turn: explain the underlying concept, why the selected answer was wrong when applicable, the correct reasoning step by step, important formulas/calculations, and practical tips for similar questions. Keep follow-ups anchored to this same stored question.");
 
   return lines.filter(Boolean).join("\n");
 }

@@ -1,6 +1,7 @@
-import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { resolveInstituteMembership } from "./instituteMembership.js";
 
 export function slugifyInstituteName(name) {
   return String(name || "")
@@ -52,55 +53,13 @@ export async function getInstituteContext(slug, allowedRoles = ["COACHING_ADMIN"
     .from("institute_members")
     .select("*")
     .eq("institute_id", institute.id)
-    .eq("user_id", actor.userId)
-    .maybeSingle();
+    .eq("user_id", actor.userId);
 
   if (memberError) throw memberError;
-  let activeMember = member;
+  const access = resolveInstituteMembership(institute, actor.userId, member || []);
+  if (!access || !allowedRoles.includes(access.role)) return { error: forbidden() };
 
-  if (!activeMember && actor.email) {
-    const { data: pendingMember, error: pendingError } = await supabaseAdmin
-      .from("institute_members")
-      .select("*")
-      .eq("institute_id", institute.id)
-      .eq("email", actor.email.toLowerCase())
-      .maybeSingle();
-
-    if (pendingError) throw pendingError;
-
-    if (pendingMember && !pendingMember.user_id) {
-      const { data: updatedMember, error: updateError } = await supabaseAdmin
-        .from("institute_members")
-        .update({ user_id: actor.userId, status: "ACTIVE" })
-        .eq("id", pendingMember.id)
-        .select("*")
-        .single();
-
-      if (updateError) throw updateError;
-      activeMember = updatedMember;
-    } else {
-      activeMember = pendingMember;
-    }
-  }
-
-  const ownerAccess = institute.owner_user_id === actor.userId;
-  const role = ownerAccess ? "COACHING_ADMIN" : activeMember?.role;
-  const active = ownerAccess || activeMember?.status === "ACTIVE";
-
-  if (!active || !allowedRoles.includes(role)) {
-    return { error: forbidden() };
-  }
-
-  return { actor, institute, member: activeMember, role };
-}
-
-export async function findClerkUserByEmail(email) {
-  const normalizedEmail = String(email || "").trim().toLowerCase();
-  if (!normalizedEmail) return null;
-
-  const client = await clerkClient();
-  const users = await client.users.getUserList({ emailAddress: [normalizedEmail], limit: 1 });
-  return users?.data?.[0] || null;
+  return { actor, institute, ...access };
 }
 
 export async function getProfileMap(userIds = []) {

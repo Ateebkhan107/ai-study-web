@@ -30,6 +30,7 @@ import Logo from "@/components/Logo";
 import MathText from "@/components/MathText";
 import ZiVisual from "@/components/zi/ZiVisual";
 import { useZiPageContext } from "@/lib/zi/pageContext";
+import { readZiChat } from "@/lib/zi/chatFrames";
 
 const WELCOME_MESSAGE = {
   id: "welcome",
@@ -198,25 +199,6 @@ function getActionMeta(action) {
   }
 
   return null;
-}
-
-function parseStreamPayload(streamedText) {
-  const actionIdx = streamedText.indexOf("__ZI_VALIDATED_ACTION__=");
-  if (actionIdx === -1) {
-    return { text: streamedText, action: null };
-  }
-
-  const text = streamedText.substring(0, actionIdx).trim();
-  const actionStr = streamedText.substring(actionIdx + "__ZI_VALIDATED_ACTION__=".length).trim();
-
-  try {
-    return {
-      text,
-      action: actionStr ? JSON.parse(actionStr) : null,
-    };
-  } catch {
-    return { text, action: null };
-  }
 }
 
 function ConversationAction({ action }) {
@@ -669,30 +651,9 @@ export default function ZiWorkspace() {
         return;
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let streamedText = "";
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value, { stream: true });
-        if (!chunk) continue;
-        streamedText += chunk;
-
-        const parsed = parseStreamPayload(streamedText);
-        updateMessage(assistantMessage.id, () => ({
-          text: parsed.text,
-          action: parsed.action,
-          status: "streaming",
-        }));
-      }
-
-      const trailingText = decoder.decode();
-      if (trailingText) streamedText += trailingText;
-
-      const parsed = parseStreamPayload(streamedText);
+      const parsed = await readZiChat(response, (text) => {
+        updateMessage(assistantMessage.id, () => ({ text, status: "streaming" }));
+      }, abortController.signal);
       rememberBuilderAction(user?.id, parsed.action);
       updateMessage(assistantMessage.id, () => ({
         text: parsed.text || ZI_ERROR_MESSAGE,

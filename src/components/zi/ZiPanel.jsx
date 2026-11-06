@@ -1,16 +1,53 @@
 "use client";
 
-import { useEffect } from "react";
+import { Component, lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import ZiComposer from "@/components/zi/ZiComposer";
 import ZiHeader from "@/components/zi/ZiHeader";
 import ZiMessages from "@/components/zi/ZiMessages";
 import ZiSuggestions from "@/components/zi/ZiSuggestions";
 
-import { Check, Lock, X } from "lucide-react";
+import { Check, Lock, Maximize2, Minimize2, Presentation, X } from "lucide-react";
 import Link from "next/link";
 
+const ZiClassroom = lazy(() => import("./classroom/ZiClassroom"));
+const DESKTOP_CLASSROOM = "(min-width: 1024px)";
+const tabClass = "prepzii-interactive inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] px-2.5 text-xs font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand aria-pressed:border-brand aria-pressed:bg-brand/15";
+
+function subscribeToDesktop(callback) {
+  const query = window.matchMedia(DESKTOP_CLASSROOM);
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
+}
+
+function isDesktop() {
+  return window.matchMedia(DESKTOP_CLASSROOM).matches;
+}
+
+function isCompact() {
+  return false;
+}
+
+function noSubscription() {
+  return () => {};
+}
+
+class ClassroomBoundary extends Component {
+  state = { unavailable: false };
+
+  static getDerivedStateFromError() {
+    return { unavailable: true };
+  }
+
+  render() {
+    return this.state.unavailable
+      ? <p className="p-4 text-sm" role="status">The whiteboard is unavailable. You can continue in Chat.</p>
+      : this.props.children;
+  }
+}
+
 export default function ZiPanel({
+  classroomAvailable = false,
   isOpen,
   messages,
   input,
@@ -29,6 +66,55 @@ export default function ZiPanel({
   remainingFreePrompts,
 }) {
   const pathname = usePathname();
+  const dialogRef = useRef(null);
+  const boardRef = useRef(null);
+  const expandRef = useRef(null);
+  const exitRef = useRef(null);
+  const restoreExpandFocus = useRef(false);
+  const [visitedBoard, setVisitedBoard] = useState(false);
+  const [openedLesson, setOpenedLesson] = useState(null);
+  const [chatSelected, setChatSelected] = useState(true);
+  const [expanded, setExpanded] = useState(false);
+  const desktop = useSyncExternalStore(
+    classroomAvailable ? subscribeToDesktop : noSubscription,
+    classroomAvailable ? isDesktop : isCompact,
+    isCompact,
+  );
+  const showBoard = classroomAvailable && (!chatSelected || (expanded && desktop));
+  const fullscreen = classroomAvailable && isOpen && expanded;
+
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (!classroomAvailable || !dialog || !isOpen) return;
+    dialog.showModal();
+    return () => dialog.close();
+  }, [classroomAvailable, isOpen]);
+
+  useLayoutEffect(() => {
+    if (!fullscreen) {
+      if (restoreExpandFocus.current) {
+        restoreExpandFocus.current = false;
+        expandRef.current?.focus();
+      }
+      return;
+    }
+    exitRef.current?.focus();
+    if (boardRef.current) boardRef.current.scrollTop = 0;
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+    return () => { root.style.overflow = previousOverflow; };
+  }, [fullscreen]);
+
+  const collapse = () => {
+    restoreExpandFocus.current = true;
+    setChatSelected(false);
+    setExpanded(false);
+  };
+  const closePanel = () => {
+    if (fullscreen) collapse();
+    else onClose();
+  };
 
   useEffect(() => {
     if (isOpen || typeof window === "undefined" || !window.speechSynthesis) return;
@@ -117,6 +203,7 @@ export default function ZiPanel({
   }
 
   const assistantState = isThinking || isGenerating ? "thinking" : "idle";
+  const PanelSurface = classroomAvailable ? "dialog" : "aside";
 
   return (
     <div
@@ -125,7 +212,7 @@ export default function ZiPanel({
       }`}
       aria-hidden={!isOpen}
     >
-      <button
+      {!classroomAvailable ? <button
         type="button"
         className={`absolute inset-0 z-0 bg-slate-950/45 backdrop-blur-[2px] transition-opacity duration-300 motion-reduce:transition-none ${
           isOpen ? "pointer-events-auto opacity-100" : "opacity-0"
@@ -133,43 +220,106 @@ export default function ZiPanel({
         aria-label="Close Zi panel"
         onClick={onClose}
         tabIndex={isOpen ? 0 : -1}
-      />
+      /> : null}
 
-      <aside
+      <PanelSurface
+        ref={classroomAvailable ? dialogRef : undefined}
+        onCancel={classroomAvailable ? (event) => {
+          event.preventDefault();
+          closePanel();
+        } : undefined}
+        onClick={classroomAvailable && !fullscreen ? (event) => {
+          if (event.target !== event.currentTarget) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (event.clientX < bounds.left || event.clientX > bounds.right ||
+              event.clientY < bounds.top || event.clientY > bounds.bottom) closePanel();
+        } : undefined}
         role="dialog"
         aria-modal="true"
         aria-labelledby="zi-panel-title"
-        className={`zi-console-surface pointer-events-auto absolute bottom-0 right-0 z-10 flex h-[min(94dvh,calc(100dvh-0.5rem))] w-full max-w-full flex-col overflow-hidden rounded-t-[1.75rem] border border-brand/20 text-slate-900 dark:text-white shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none sm:bottom-4 sm:right-4 sm:top-4 sm:h-auto sm:w-[min(460px,calc(100vw-2rem))] sm:rounded-[1.75rem] ${
+        className={`zi-console-surface pointer-events-auto z-10 flex flex-col overflow-hidden text-slate-900 shadow-2xl dark:text-white ${
+          classroomAvailable ? "fixed m-0 max-h-none max-w-none not-open:hidden backdrop:bg-slate-950/45 backdrop:backdrop-blur-[2px]" : "absolute"
+        } ${
+          fullscreen
+            ? "inset-0 h-dvh min-h-dvh w-full rounded-none border-0 bg-[var(--background)]"
+            : "bottom-0 right-0 left-auto top-auto h-[min(94dvh,calc(100dvh-0.5rem))] w-full max-w-full rounded-t-[1.75rem] border border-brand/20 sm:bottom-4 sm:right-4 sm:top-4 sm:h-auto sm:w-[min(460px,calc(100vw-2rem))] sm:rounded-[1.75rem] transition-transform duration-300 ease-out motion-reduce:transition-none"
+        } ${
           isOpen ? "zi-panel-reveal" : ""
         } ${panelTransformClass}`}
       >
         <span id="zi-panel-title" className="sr-only">
-          Zi assistant panel
+          {fullscreen ? "Zi Visual Classroom" : "Zi assistant panel"}
         </span>
         <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-brand/80 to-transparent" aria-hidden="true" />
         <ZiHeader
           plan={plan}
-          onClose={onClose}
+          onClose={closePanel}
           assistantState={assistantState}
           remainingFreePrompts={remainingFreePrompts}
           isAiMode={plan === "AI_MODE"}
         />
-        <ZiMessages messages={messages} isThinking={isThinking} />
-        <ZiSuggestions
-          onSelect={onSuggestionSelect}
-          disabled={isThinking}
-          pageType={pageType}
-          entityType={entityType}
-        />
-        <ZiComposer
-          value={input}
-          onChange={onInputChange}
-          onSend={onSend}
-          onStop={onStop}
-          disabled={isGenerating}
-          isGenerating={isGenerating}
-        />
-      </aside>
+        {classroomAvailable ? (
+          <div className="flex shrink-0 items-center gap-1.5 border-b border-[var(--border)] px-2 py-1.5 sm:px-4" role="group" aria-label="Zi views">
+            <button type="button" className={tabClass} aria-pressed={chatSelected} aria-controls="zi-classroom-chat"
+              onClick={() => setChatSelected(fullscreen ? !chatSelected : true)}>Chat</button>
+            <button type="button" className={tabClass} aria-pressed={!chatSelected} aria-controls="zi-classroom-board"
+              onClick={() => {
+                setVisitedBoard(true);
+                setChatSelected(false);
+              }}>
+              <Presentation size={15} aria-hidden="true" />
+              {visitedBoard ? "Whiteboard" : "Visual Classroom"}
+            </button>
+            {showBoard || fullscreen ? (
+              <button type="button" ref={fullscreen ? exitRef : expandRef} className={`${tabClass} ml-auto`}
+                onClick={fullscreen ? collapse : () => setExpanded(true)}>
+                {fullscreen ? <Minimize2 size={15} aria-hidden="true" /> : <Maximize2 size={15} aria-hidden="true" />}
+                {fullscreen ? "Exit full screen" : "Expand"}
+              </button>
+            ) : null}
+          </div>
+        ) : null}
+        <div className={`flex min-h-0 flex-1 ${fullscreen && desktop && chatSelected ? "divide-x divide-[var(--border)]" : ""}`}>
+          {classroomAvailable ? (
+            <section id="zi-classroom-board" ref={boardRef} hidden={!showBoard} tabIndex={-1} aria-label="Whiteboard"
+              className="min-w-0 flex-1 overflow-y-auto overscroll-contain">
+              {visitedBoard ? (
+                <ClassroomBoundary>
+                  <Suspense fallback={<p className="p-4 text-sm" role="status">Loading whiteboard…</p>}>
+                    <ZiClassroom key={openedLesson?.revision} initialLesson={openedLesson?.lesson}
+                      active={showBoard && isOpen} interrupted={isGenerating} />
+                  </Suspense>
+                </ClassroomBoundary>
+              ) : null}
+            </section>
+          ) : null}
+          <div id="zi-classroom-chat" hidden={classroomAvailable && !chatSelected}
+            className={`min-w-0 flex-col ${classroomAvailable && !chatSelected ? "hidden" : "flex"} ${
+              fullscreen && desktop ? "w-[min(38%,30rem)]" : "flex-1"
+            }`}>
+            <ZiMessages messages={messages} isThinking={isThinking} onOpenClassroom={classroomAvailable ? (lesson) => {
+              setOpenedLesson((current) => ({ lesson, revision: (current?.revision ?? 0) + 1 }));
+              setVisitedBoard(true);
+              setChatSelected(false);
+              requestAnimationFrame(() => boardRef.current?.focus());
+            } : undefined} />
+            <ZiSuggestions
+              onSelect={onSuggestionSelect}
+              disabled={isThinking}
+              pageType={pageType}
+              entityType={entityType}
+            />
+            <ZiComposer
+              value={input}
+              onChange={onInputChange}
+              onSend={onSend}
+              onStop={onStop}
+              disabled={isGenerating}
+              isGenerating={isGenerating}
+            />
+          </div>
+        </div>
+      </PanelSurface>
     </div>
   );
 }

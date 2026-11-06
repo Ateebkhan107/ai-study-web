@@ -1,0 +1,138 @@
+.zi-board, .zi-board-picker {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  width: min(100%, 58rem);
+  margin-inline: auto;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  color: var(--foreground);
+}
+
+.zi-board-picker { max-width: 43rem; }
+.zi-board-picker h2, .zi-board-heading h2 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 750;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  line-height: 1.12;
+}
+
+.zi-board-kicker {
+  color: var(--brand-pressed);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.zi-board-language {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.zi-board-language select, .zi-board-button, .zi-board-labels button {
+  min-height: 44px;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--surface-elevated);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.zi-board-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.zi-board-button:disabled { opacity: 0.48; }
+.zi-board-primary { background: #facc15; color: #172033; border-color: #facc15; }
+
+.zi-board-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 0.55rem;
+}
+
+.zi-board-options button {
+  display: grid;
+  gap: 0.3rem;
+  text-align: start;
+  background: var(--surface-elevated);
+  padding: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+}
+
+.zi-board-options button span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.zi-board button:not(:disabled):hover, .zi-board-picker button:hover { border-color: var(--brand); }
+.zi-board :focus-visible, .zi-board-picker :focus-visible { outline: 2px solid var(--brand-hover); outline-offset: 2px; }
+.zi-board-heading, .zi-board-metric { display: flex; align-items: center; justify-content: space-between; gap: 0.65rem; }
+
+.zi-board-step {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.zi-board-step progress {
+  display: block;
+  width: 100%;
+  height: 0.45rem;
+  margin-top: 0.4rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  appearance: none;
+  background: var(--border);
+  color: var(--brand);
+}
+.zi-board-step progress::-webkit-progress-bar { background: var(--border); }
+.zi-board-step progress::-webkit-progress-value { background: var(--brand); }
+.zi-board-step progress::-moz-progress-bar { background: var(--brand); }
+
+.zi-board-canvas {
+  display: grid;
+  place-items: center;
+  border: 1px solid #334155;
+  border-radius: 1rem;
+  background-color: #0f172a;
+  background-image: linear-gradient(#94a3b812 1px, transparent 1px), linear-gradient(90deg, #94a3b812 1px, transparent 1px);
+  background-size: 20px 20px;
+  overflow: hidden;
+}
+
+.zi-board-canvas svg { height: auto; max-height: min(39dvh, 22rem); }
+.zi-board-metric { flex-wrap: wrap; font-size: 0.83rem; }
+.zi-board-metric strong { font-variant-numeric: tabular-nums; }
+.zi-board-copy { font-size: 0.94rem; line-height: 1.55; overflow-wrap: anywhere; }
+.zi-board-copy details { margin-top: 0.4rem; }
+.zi-board-copy details > div { overflow-x: auto; }
+.zi-board-copy summary, .zi-board-outline summary { cursor: pointer; font-weight: 700; font-size: 0.85rem; }
+
+.zi-board-actions, .zi-board-labels { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.zi-board-actions {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  padding-block: 0.35rem;
+  background: var(--card);
+}
+.zi-board-labels button[aria-pressed="true"], .zi-board-outline button[aria-current="step"] {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+
+.zi-board-outline ol { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+.zi-board-outline button { min-height: 44px; padding: 0.35rem 0.55rem; border-radius: 0.45rem; font-size: 0.8rem; }
+.zi-board-review { color: var(--text-muted); font-size: 0.72rem; }

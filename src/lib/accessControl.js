@@ -1,6 +1,10 @@
+import { FREE_ZI_PROMPT_LIMIT, getZiFreePromptsUsage } from "./zi/promptUsage.server.js";
+export { FREE_ZI_PROMPT_LIMIT, getZiFreePromptsUsage };
 import { clerkClient } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { ACCOUNT_TYPES } from "@/lib/auth";
+import { getActiveInstituteMemberships } from "./instituteMembership.js";
+export { getActiveInstituteMemberships };
 
 export const FEATURES = {
   PYQ_FULL: "PYQ_FULL",
@@ -152,37 +156,6 @@ export async function getActiveSubscriptionTracks(userId) {
   ];
 }
 
-export async function getActiveInstituteMemberships(userId, email) {
-  if (!userId) return [];
-
-  if (email) {
-    const { error: bindError } = await supabaseAdmin
-      .from("institute_members")
-      .update({ user_id: userId, status: "ACTIVE" })
-      .eq("email", email.toLowerCase())
-      .is("user_id", null);
-
-    if (bindError) throw bindError;
-  }
-
-  const { data, error } = await supabaseAdmin
-    .from("institute_members")
-    .select("id,role,status,institutes(id,name,slug,logo_url,status,owner_user_id)")
-    .eq("user_id", userId)
-    .eq("status", "ACTIVE");
-
-  if (error) throw error;
-
-  return (data || [])
-    .filter((row) => row.institutes?.status === "ACTIVE")
-    .map((row) => ({
-      member_id: row.id,
-      role: row.role,
-      status: row.status,
-      institute: row.institutes,
-    }));
-}
-
 function isPersonalCustomSession(row) {
   const chapters = Array.isArray(row.chapters) ? row.chapters : [];
   if (!chapters.length) return false;
@@ -308,51 +281,9 @@ export async function getProfileAccountType(userId) {
   return profile.accountType;
 }
 
-export const FREE_ZI_PROMPT_LIMIT = 3;
-
-export async function getZiFreePromptsUsage(userId) {
-  if (!userId) return { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
-  try {
-    const { data } = await supabaseAdmin
-      .from("zi_preferences")
-      .select("preference_value")
-      .eq("clerk_user_id", userId)
-      .eq("preference_key", "zi_free_prompts_used")
-      .maybeSingle();
-
-    const used = Math.max(0, parseInt(data?.preference_value || "0", 10) || 0);
-    const limit = FREE_ZI_PROMPT_LIMIT;
-    const remaining = Math.max(0, limit - used);
-    return { used, limit, remaining };
-  } catch (err) {
-    console.error("[ZI_FREE_PROMPTS_USAGE_ERROR]", err);
-    return { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
-  }
-}
-
-export async function incrementZiFreePromptsUsage(userId) {
-  if (!userId) return;
-  try {
-    const usage = await getZiFreePromptsUsage(userId);
-    const newUsed = usage.used + 1;
-    await supabaseAdmin
-      .from("zi_preferences")
-      .upsert({
-        clerk_user_id: userId,
-        preference_key: "zi_free_prompts_used",
-        preference_value: String(newUsed),
-        updated_at: new Date().toISOString(),
-      }, {
-        onConflict: "clerk_user_id,preference_key"
-      });
-  } catch (err) {
-    console.error("[ZI_INCREMENT_FREE_PROMPTS_ERROR]", err);
-  }
-}
-
-export async function getUserAccessContext({ userId, email, examTrack, clerkMetadata } = {}) {
+export async function getUserAccessContext({ userId, examTrack, clerkMetadata } = {}) {
   const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks, ziFreeUsage] = await Promise.all([
-    getActiveInstituteMemberships(userId, email),
+    getActiveInstituteMemberships(userId),
     clerkMetadata
       ? Promise.resolve({
         accountType: clerkMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN
@@ -417,7 +348,8 @@ export function canUseFeature(access, feature, options = {}) {
   }
   if (rule.plan === "AI_MODE") {
     if (access?.isAiMode) return { allowed: true, unlimited: true };
-    const ziUsage = access?.ziFreeUsage || { used: 0, limit: FREE_ZI_PROMPT_LIMIT, remaining: FREE_ZI_PROMPT_LIMIT };
+    const ziUsage = access?.ziFreeUsage;
+    if (!ziUsage || ziUsage.available === false) return { allowed: false, reason: "ZI_USAGE_UNAVAILABLE" };
     return ziUsage.remaining > 0
       ? { allowed: true, usage: ziUsage }
       : { allowed: false, reason: "AI_MODE_REQUIRED", usage: ziUsage, upgradeUrl: "/pro" };

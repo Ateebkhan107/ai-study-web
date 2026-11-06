@@ -774,6 +774,9 @@ export default function InstituteWorkspace({ slug }) {
             <div>
               <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Student email</label>
               <input value={studentEmail} onChange={(event) => setStudentEmail(event.target.value)} placeholder="student@email.com" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold outline-none focus:border-indigo-400 dark:border-[var(--border-subtle)] dark:bg-[var(--background)] dark:text-white" />
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                To activate a pending student, send them an invitation from Members &amp; Invites in Prepzii LMS.
+              </p>
             </div>
             <div>
               <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Batch</label>

@@ -24,12 +24,13 @@ function stripForSpeech(text) {
 
 export default function ZiSpeakButton({ text, disabled = false }) {
   const utteranceRef = useRef(null);
-  const [isSupported, setIsSupported] = useState(() =>
-    typeof window === "undefined" ? null : isSpeechSupported()
-  );
+  const [isSupported, setIsSupported] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   useEffect(() => {
+    // Keep server and initial browser markup identical on unsupported browsers.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser capability is unavailable during SSR.
+    setIsSupported(isSpeechSupported());
     return () => {
       if (isSpeechSupported()) window.speechSynthesis.cancel();
       utteranceRef.current = null;

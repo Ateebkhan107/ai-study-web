@@ -8,6 +8,7 @@ import ZiPanel from "@/components/zi/ZiPanel";
 import ZiStartupGreeting from "@/components/zi/ZiStartupGreeting";
 import { usePathname } from "next/navigation";
 import { useZiPageContext } from "@/lib/zi/pageContext";
+import { readZiChat } from "@/lib/zi/chatFrames";
 
 const WELCOME_MESSAGE = {
   id: "welcome",
@@ -41,7 +42,7 @@ function getZiGreetingName(user) {
   return "";
 }
 
-export default function ZiLauncher({ plan, ziFreeUsage }) {
+export default function ZiLauncher({ plan, ziFreeUsage, classroomFixtureOwner }) {
   const { isLoaded, isSignedIn, user } = useUser();
   const pathname = usePathname();
   const pageContext = useZiPageContext();
@@ -68,10 +69,20 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
     });
   }
 
-  const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0;
+  // An accounting outage or held request is not an exhausted trial. Keep the
+  // existing composer available to show the server's retryable error; it remains
+  // the authority for admission and never dispatches without a reservation.
+  const trialUnavailable = ziFreeUsage?.available === false ||
+    (ziFreeUsage?.pending > 0 && ziFreeUsage?.used < 3 && usageRemaining <= 0);
+  const isLocked = plan !== "AI_MODE" && remainingFreePrompts <= 0 && !trialUnavailable;
+  const panelLocked = isLocked && !messages.some((message) => message.action?.type === "ai_test_builder");
+  const classroomAvailable = Boolean(
+    classroomFixtureOwner && isSignedIn && user?.id === classroomFixtureOwner &&
+    !panelLocked && !["test", "pyq", "arena"].includes(pageContext.pageType)
+  );
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || classroomAvailable) return;
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -81,7 +92,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, classroomAvailable]);
 
   useEffect(() => {
     return () => {
@@ -190,59 +201,10 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
         }));
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let streamedText = "";
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value, { stream: true });
-        if (!chunk) continue;
-
-        streamedText += chunk;
+      const { text: finalText, action: finalAction } = await readZiChat(response, (text) => {
         setIsThinking(false);
-
-        let displayText = streamedText;
-        let displayAction = null;
-        const actionIdx = streamedText.indexOf("__ZI_VALIDATED_ACTION__=");
-        if (actionIdx !== -1) {
-          displayText = streamedText.substring(0, actionIdx).trim();
-          try {
-            const actionStr = streamedText.substring(actionIdx + "__ZI_VALIDATED_ACTION__=".length).trim();
-            if (actionStr) {
-               displayAction = JSON.parse(actionStr);
-            }
-          } catch(e) {
-            // ignore partial JSON during streaming
-          }
-        }
-
-        updateAssistantMessage(assistantMessage.id, () => ({
-          text: displayText,
-          action: displayAction,
-          status: "streaming",
-        }));
-      }
-
-      const trailingText = decoder.decode();
-      if (trailingText) {
-        streamedText += trailingText;
-      }
-
-      let finalText = streamedText;
-      let finalAction = null;
-      const actionIdxFinal = streamedText.indexOf("__ZI_VALIDATED_ACTION__=");
-      if (actionIdxFinal !== -1) {
-         finalText = streamedText.substring(0, actionIdxFinal).trim();
-         try {
-            const actionStr = streamedText.substring(actionIdxFinal + "__ZI_VALIDATED_ACTION__=".length).trim();
-            if (actionStr) {
-               finalAction = JSON.parse(actionStr);
-            }
-         } catch(e) {}
-      }
+        updateAssistantMessage(assistantMessage.id, () => ({ text, status: "streaming" }));
+      }, abortController.signal);
 
       rememberBuilderAction(user?.id, finalAction);
       updateAssistantMessage(assistantMessage.id, () => ({
@@ -307,7 +269,9 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
         </span>
       </button>
 
-            <ZiPanel
+      <ZiPanel
+        key={classroomAvailable ? classroomFixtureOwner : "zi-panel"}
+        classroomAvailable={classroomAvailable}
         isOpen={isOpen}
         messages={messages}
         input={input}
@@ -320,7 +284,7 @@ export default function ZiLauncher({ plan, ziFreeUsage }) {
         onSend={() => sendMessage(input)}
         onStop={stopGeneration}
         onSuggestionSelect={sendMessage}
-        isLocked={isLocked && !messages.some((message) => message.action?.type === "ai_test_builder")}
+        isLocked={panelLocked}
         onConfigureTest={() => sendMessage("Create an AI practice test")}
         plan={plan}
         remainingFreePrompts={remainingFreePrompts}
