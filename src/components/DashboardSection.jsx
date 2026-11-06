@@ -97,7 +97,7 @@ export default async function DashboardSection({ config, compact = false }) {
                       </div>
 
                       <h3 className="text-base sm:text-xl font-black font-display leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-6 sm:pr-10">
-                        {book.title}
+                        {book.subject} Cards
                       </h3>
                     </div>
 

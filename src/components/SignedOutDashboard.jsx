@@ -23,7 +23,6 @@ import { getCachedFormulaBookSummaries } from "@/lib/formulaBooks";
 const GENERAL_SUBJECTS = [
   {
     subject: "Physics",
-    title: "Physics Handbook",
     stream: "JEE",
     tag: "JEE & NEET",
     icon: Atom,
@@ -34,7 +33,6 @@ const GENERAL_SUBJECTS = [
   },
   {
     subject: "Chemistry",
-    title: "Chemistry Handbook",
     stream: "JEE",
     tag: "JEE & NEET",
     icon: FlaskConical,
@@ -45,7 +43,6 @@ const GENERAL_SUBJECTS = [
   },
   {
     subject: "Mathematics",
-    title: "Mathematics Handbook",
     stream: "JEE",
     tag: "JEE PCM",
     icon: Calculator,
@@ -56,7 +53,6 @@ const GENERAL_SUBJECTS = [
   },
   {
     subject: "Biology",
-    title: "Biology Handbook",
     stream: "NEET",
     tag: "NEET PCB",
     icon: Dna,
@@ -246,7 +242,7 @@ export default async function SignedOutDashboard() {
                               </div>
 
                               <h3 className="text-sm sm:text-base font-black font-display leading-tight text-slate-900 transition-colors group-hover:text-black dark:text-white dark:group-hover:text-white pr-6">
-                                {card.title}
+                                {card.subject} Cards
                               </h3>
                             </div>
 
