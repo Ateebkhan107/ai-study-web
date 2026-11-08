@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import { Check, LockKeyhole } from "lucide-react";
 import AuthGateModal from "@/components/auth/AuthGateModal";
+import DiwaliCouponCheckout from "@/components/pricing/DiwaliCouponCheckout";
 import posthog from "posthog-js";
 
 export default function PricingCard({
@@ -20,8 +22,15 @@ export default function PricingCard({
   isAiMode = false,
 }) {
   const { user } = useUser();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
+  const [showCouponCheckout, setShowCouponCheckout] = useState(false);
+
+  async function startPaidCheckout() {
+    const order = await createOrder(plan, examTrack);
+    await openRazorpayCheckout(order);
+  }
 
   async function handlePayment() {
     if (loading) return;
@@ -41,9 +50,12 @@ export default function PricingCard({
         discount_percent: discount,
       });
 
-      const order = await createOrder(plan, examTrack);
+      if (plan === "quarterly") {
+        setShowCouponCheckout(true);
+        return;
+      }
 
-      await openRazorpayCheckout(order);
+      await startPaidCheckout();
     } catch (error) {
       alert(error.message || "Unable to start payment.");
     } finally {
@@ -133,6 +145,16 @@ export default function PricingCard({
         featureName={isAiMode ? `${examTrack} AI Mode` : `${examTrack} Pro`}
         title={`Sign in to upgrade to ${isAiMode ? examTrack + " AI Mode" : examTrack + " Pro"}`}
         message="Create your free account or sign in to complete your subscription and unlock full access."
+      />
+      <DiwaliCouponCheckout
+        isOpen={showCouponCheckout}
+        examTrack={examTrack}
+        onClose={() => setShowCouponCheckout(false)}
+        onPaidCheckout={startPaidCheckout}
+        onRedeemed={() => {
+          setShowCouponCheckout(false);
+          router.push("/payment/success?promotion=DIWALIPREPZII");
+        }}
       />
     </div>
   );

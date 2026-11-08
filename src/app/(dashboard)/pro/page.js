@@ -6,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { createOrder, openRazorpayCheckout } from "@/lib/payment";
 import PageWrapper from "@/components/PageWrapper";
 import AuthGateModal from "@/components/auth/AuthGateModal";
+import DiwaliCouponCheckout from "@/components/pricing/DiwaliCouponCheckout";
 import {
   Check,
   X,
@@ -171,6 +172,7 @@ export default function ProPage() {
   const [openFaq, setOpenFaq] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
+  const [showCouponCheckout, setShowCouponCheckout] = useState(false);
   const { user } = useUser();
 
   const isSignedOut = !user;
@@ -229,6 +231,11 @@ export default function ProPage() {
 
     if (loading || (currentPlan && PLAN_RANK[targetPlan] <= PLAN_RANK[currentPlan])) return;
 
+    if (targetPlan === "quarterly") {
+      setShowCouponCheckout(true);
+      return;
+    }
+
     try {
       setLoading(true);
       const order = await createOrder(targetPlan, selectedTrack);
@@ -237,6 +244,16 @@ export default function ProPage() {
       if (err?.message && !err.message.includes("cancelled")) {
         alert(err.message || "Unable to start payment. Please try again.");
       }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const startQuarterlyPaidCheckout = async () => {
+    setLoading(true);
+    try {
+      const order = await createOrder("quarterly", selectedTrack);
+      await openRazorpayCheckout(order);
     } finally {
       setLoading(false);
     }
@@ -748,6 +765,16 @@ export default function ProPage() {
         featureName={`${selectedTrack} Pro Pass`}
         title={`Sign in to get ${selectedTrack} Pro`}
         message={`Create your free account or sign in to complete your subscription and unlock full access to ${selectedTrack} Pro.`}
+      />
+      <DiwaliCouponCheckout
+        isOpen={showCouponCheckout}
+        examTrack={selectedTrack}
+        onClose={() => setShowCouponCheckout(false)}
+        onPaidCheckout={startQuarterlyPaidCheckout}
+        onRedeemed={() => {
+          setShowCouponCheckout(false);
+          router.push("/payment/success?promotion=DIWALIPREPZII");
+        }}
       />
     </PageWrapper>
   );

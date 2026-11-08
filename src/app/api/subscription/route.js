@@ -18,7 +18,9 @@ export async function GET(request) {
     const isPro = isSubscriptionActive(data);
 
     return NextResponse.json({
-      subscription: data,
+      subscription: data
+        ? { ...data, plan: data.plan === "quarterly_promo" ? "quarterly" : data.plan }
+        : data,
       isPro,
       examTrack,
     });
