@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { allocateQuestionCounts, normalizeSubjectName } from "@/lib/questionDistribution";
 import { getChapterTargets, getSubjectTargets } from "@/lib/pyqChapterMapping";
-import { FEATURES, canUseFeature, getProfileAccessProfile, getUserAccessContext, normalizeExamTrack } from "@/lib/accessControl";
+import { FEATURES, canUseFeature, getProfileAccessProfile, getUserAccessContext } from "@/lib/accessControl";
+import { examMatchesTrack } from "@/lib/analyticsHelpers";
 
 const PYQ_SESSION_SELECT = `
   id,
@@ -54,6 +55,9 @@ const REVEAL_FIELDS = [
 ];
 
 const ATTEMPT_LOOKUP_CHUNK_SIZE = 100;
+const PAPER_BATCH_SIZE = 4;
+const PAPER_METADATA_PAGE_SIZE = 300;
+const PRACTICE_STATUSES = ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"];
 const FULL_PAPER_CONFIG = {
   JEE: { total: 75, subjects: ["Physics", "Chemistry", "Maths", "Mathematics"] },
   NEET: { total: 180, subjects: ["Physics", "Chemistry", "Biology"] },
@@ -84,11 +88,12 @@ async function getAttemptedQuestionIds(userId, questionIds) {
     return new Set();
   }
 
-  const attemptedQuestionIds = new Set();
   const uniqueQuestionIds = [...new Set(questionIds.filter(Boolean).map(String))];
-
+  const chunks = [];
   for (let index = 0; index < uniqueQuestionIds.length; index += ATTEMPT_LOOKUP_CHUNK_SIZE) {
-    const chunk = uniqueQuestionIds.slice(index, index + ATTEMPT_LOOKUP_CHUNK_SIZE);
+    chunks.push(uniqueQuestionIds.slice(index, index + ATTEMPT_LOOKUP_CHUNK_SIZE));
+  }
+  const results = await Promise.all(chunks.map(async (chunk) => {
     const { data, error } = await supabaseAdmin
       .from("pyq_attempts")
       .select("question_id")
@@ -99,16 +104,18 @@ async function getAttemptedQuestionIds(userId, questionIds) {
       throw error;
     }
 
-    for (const attempt of data || []) {
-      attemptedQuestionIds.add(String(attempt.question_id));
-    }
-  }
-
-  return attemptedQuestionIds;
+    return (data || []).map((attempt) => String(attempt.question_id));
+  }));
+  return new Set(results.flat());
 }
 
 function shuffleQuestions(questions) {
-  return [...questions].sort(() => Math.random() - 0.5);
+  const shuffled = [...questions];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
 }
 
 function sortByDisplayOrder(a, b) {
@@ -123,27 +130,29 @@ function sortByDisplayOrder(a, b) {
   return new Date(a.created_at) - new Date(b.created_at);
 }
 
-function buildBalancedPaper(questions, exam, shuffle = true) {
+function buildBalancedPaper(questions, exam, { randomSession = false, shuffle = false } = {}) {
   const config = FULL_PAPER_CONFIG[exam];
   if (!config) return [];
-  const targetCounts = allocateQuestionCounts(exam, config.total, config.subjects);
+  const subjects = [...new Set(config.subjects.map(normalizeSubjectName))];
+  const targetCounts = allocateQuestionCounts(exam, config.total, subjects);
   const papers = new Map();
 
   for (const question of questions) {
-    if (!config.subjects.includes(question.subject) || !question.exam_id) continue;
+    const subject = normalizeSubjectName(question.subject);
+    if (!subjects.includes(subject) || !question.exam_id) continue;
 
     if (!papers.has(question.exam_id)) {
       papers.set(question.exam_id, {
-        subjects: new Map(config.subjects.map((subjectName) => [subjectName, []])),
+        subjects: new Map(subjects.map((subjectName) => [subjectName, []])),
       });
     }
 
-    papers.get(question.exam_id).subjects.get(question.subject).push(question);
+    papers.get(question.exam_id).subjects.get(subject).push(question);
   }
 
   const completePapers = [...papers.entries()].filter(([, paper]) =>
-    config.subjects.every(
-      (subjectName) => (paper.subjects.get(subjectName) || []).length >= 25 // Minimum required for a JEE subject is 25
+    subjects.every(
+      (subjectName) => paper.subjects.get(subjectName).length >= (randomSession ? targetCounts[subjectName] : 25)
     )
   );
 
@@ -155,7 +164,7 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
     ? completePapers[Math.floor(Math.random() * completePapers.length)]
     : completePapers[0];
 
-  return config.subjects.flatMap((subjectName) => {
+  return subjects.flatMap((subjectName) => {
     let pool = selectedPaper.subjects.get(subjectName) || [];
     if (shuffle) pool = shuffleQuestions(pool);
 
@@ -165,6 +174,12 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
     if (isJee) {
       const mcqs = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() !== "numerical");
       const nums = pool.filter(q => String(q.question_type || "MCQ").toLowerCase() === "numerical");
+
+      if (randomSession) {
+        const target = targetCounts[subjectName];
+        const numericalTarget = nums.length ? target - 20 : 0;
+        return [...mcqs.slice(0, target - numericalTarget), ...nums.slice(0, numericalTarget)].sort(sortByDisplayOrder);
+      }
 
       if (nums.length === 0) {
         // Legacy paper with all MCQs (e.g., 30 MCQs per subject in JEE 2013)
@@ -184,7 +199,7 @@ function buildBalancedPaper(questions, exam, shuffle = true) {
     }
 
     // Default fallback
-    return pool.slice(0, targetCounts[normalizeSubjectName(subjectName)]).sort(sortByDisplayOrder);
+    return pool.slice(0, targetCounts[subjectName]).sort(sortByDisplayOrder);
   });
 }
 
@@ -208,21 +223,50 @@ async function getBalancedRandomPaperQuestions({ exam, year }) {
     throw papersError;
   }
 
-  for (const paper of shuffleQuestions(papers || [])) {
+  const [firstPaper, ...remainingPapers] = shuffleQuestions(papers || []);
+  if (!firstPaper) return [];
+
+  async function loadPaper(paperId) {
     const { data: questions, error: questionsError } = await supabaseAdmin
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
-      .eq("exam_id", paper.id)
+      .eq("exam_id", paperId)
       .in("subject", config.subjects)
-      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"]);
+      .in("status", PRACTICE_STATUSES);
 
     if (questionsError) {
       throw questionsError;
     }
 
-    const randomPaper = buildBalancedPaper(questions || [], exam, true);
-    if (randomPaper.length === config.total) {
-      return randomPaper;
+    return buildBalancedPaper(questions || [], exam, { randomSession: true, shuffle: true });
+  }
+
+  const firstDeck = await loadPaper(firstPaper.id);
+  if (firstDeck.length === config.total) return firstDeck;
+
+  // Check the next candidates with the same balancing rules using only the fields
+  // that determine eligibility. Fetch full question content for eligible papers.
+  for (let start = 0; start < remainingPapers.length; start += PAPER_BATCH_SIZE) {
+    const batch = remainingPapers.slice(start, start + PAPER_BATCH_SIZE);
+    const metadataByPaper = new Map(batch.map((paper) => [paper.id, []]));
+    for (let offset = 0; ; offset += PAPER_METADATA_PAGE_SIZE) {
+      const { data, error } = await supabaseAdmin
+        .from("pyq_questions")
+        .select("exam_id, subject, question_type, display_order, question_number, created_at")
+        .in("exam_id", batch.map((paper) => paper.id))
+        .in("subject", config.subjects)
+        .in("status", PRACTICE_STATUSES)
+        .order("id")
+        .range(offset, offset + PAPER_METADATA_PAGE_SIZE - 1);
+      if (error) throw error;
+      for (const row of data || []) metadataByPaper.get(row.exam_id)?.push(row);
+      if (!data || data.length < PAPER_METADATA_PAGE_SIZE) break;
+    }
+
+    for (const [paperId, metadata] of metadataByPaper) {
+      if (buildBalancedPaper(metadata, exam, { randomSession: true }).length !== config.total) continue;
+      const deck = await loadPaper(paperId);
+      if (deck.length === config.total) return deck;
     }
   }
 
@@ -233,7 +277,7 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const { userId } = await auth();
 
-  const exam = searchParams.get("exam");
+  let exam = searchParams.get("exam");
   const subject = searchParams.get("subject");
   const year = searchParams.get("year");
   const chapter = searchParams.get("chapter");
@@ -245,14 +289,15 @@ export async function GET(req) {
   const paperCode = searchParams.get("paper_code");
   const examId = searchParams.get("exam_id");
 
-  if (userId && exam) {
+  if (userId) {
     const profile = await getProfileAccessProfile(userId);
-    if (normalizeExamTrack(exam) !== profile.examTrack) {
+    if (exam && !examMatchesTrack(exam, profile.examTrack)) {
       return NextResponse.json(
         { error: "EXAM_TRACK_MISMATCH", message: `Your account has access to ${profile.examTrack} content only.` },
         { status: 403 }
       );
     }
+    exam ||= profile.examTrack;
   }
 
   if (mode === "chapter" || mode === "mistakes") {
@@ -299,7 +344,7 @@ export async function GET(req) {
     let mistakeQuery = supabaseAdmin
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
-      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
+      .in("status", PRACTICE_STATUSES)
       .not("exam_id", "is", null)
       .in("id", questionIds);
 
@@ -358,7 +403,7 @@ export async function GET(req) {
     let query = supabaseAdmin
       .from("pyq_questions")
       .select(PYQ_SESSION_SELECT)
-      .in("status", ["PUBLISHED", "APPROVED", "NEEDS_REVIEW"])
+      .in("status", PRACTICE_STATUSES)
       .not("exam_id", "is", null);
 
     if (examId) query = query.eq("exam_id", examId);
@@ -405,7 +450,7 @@ export async function GET(req) {
 
     result = data || [];
     if (mode === "full" && !subject && FULL_PAPER_CONFIG[exam]) {
-      result = buildBalancedPaper(result, exam, false);
+      result = buildBalancedPaper(result, exam);
     }
     result = mode === "random" ? shuffleQuestions(result) : [...result].sort(sortByDisplayOrder);
   }

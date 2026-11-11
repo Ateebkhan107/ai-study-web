@@ -40,7 +40,8 @@ async function getCurrentUserRankRow(userId, topRows) {
     .eq("user_id", userId)
     .maybeSingle();
 
-  if (userError || !userRow) return null;
+  if (userError) throw userError;
+  if (!userRow) return null;
 
   const xp = Number(userRow.xp) || 0;
   const rankFilter = userRow.updated_at
@@ -52,13 +53,14 @@ async function getCurrentUserRankRow(userId, topRows) {
     .select("user_id", { count: "exact", head: true })
     .or(rankFilter);
 
-  if (countError) return null;
+  if (countError) throw countError;
 
   return toLeaderboardRow(userRow, (count || 0) + 1);
 }
 
-export async function GET() {
+export async function GET(request) {
   const { userId, sessionClaims } = await auth();
+  const topOnly = new URL(request.url).searchParams.get("view") === "top";
 
   const [{ data, error }, { data: profile }] = await Promise.all([
     supabaseAdmin
@@ -83,7 +85,18 @@ export async function GET() {
   const leaderboard = (data || []).map((user, index) =>
     toLeaderboardRow(user, index + 1)
   );
-  const currentUserRow = await getCurrentUserRankRow(userId, leaderboard);
+  const displayName = profile?.full_name?.trim() || getDisplayNameFromClaims(sessionClaims).trim();
+  let currentUserRow;
+  let rankUnavailable = false;
+
+  if (!topOnly) {
+    try {
+      currentUserRow = await getCurrentUserRankRow(userId, leaderboard);
+    } catch (rankError) {
+      console.error("[PYQ_LEADERBOARD_RANK_ERROR]", rankError);
+      rankUnavailable = true;
+    }
+  }
 
   if (currentUserRow) {
     leaderboard.push({
@@ -94,11 +107,13 @@ export async function GET() {
 
   const ownRow = userId && leaderboard.find((row) => row.user_id === userId);
   if (ownRow) {
-    ownRow.name =
-      profile?.full_name?.trim() ||
-      getDisplayNameFromClaims(sessionClaims).trim() ||
-      ownRow.name;
+    ownRow.name = displayName || ownRow.name;
   }
 
-  return NextResponse.json(leaderboard);
+  return NextResponse.json(topOnly ? { rows: leaderboard, displayName } : leaderboard, {
+    headers: {
+      "Cache-Control": "private, no-store",
+      ...(rankUnavailable ? { "X-PrepZii-Rank-Unavailable": "1" } : {}),
+    },
+  });
 }

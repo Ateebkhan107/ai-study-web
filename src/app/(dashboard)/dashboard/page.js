@@ -11,6 +11,7 @@ import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { Sparkles } from "lucide-react";
 import SignedOutDashboard from "@/components/SignedOutDashboard";
+import DashboardPerformanceProvider from "@/components/dashboard/DashboardPerformanceProvider";
 
 async function getDashboardProfile() {
   const { userId, sessionClaims } = await auth();
@@ -33,7 +34,7 @@ async function getDashboardProfile() {
 
   return {
     fullName: profile?.full_name || claimsName || "Student",
-    exam: String(profile?.exam || "").toUpperCase() === "NEET" ? "NEET" : "JEE",
+    exam: profile?.exam ? (String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE") : null,
     targetYear: profile?.target_year || null,
   };
 }
@@ -96,9 +97,7 @@ function DashboardCardFallback({ className = "h-48" }) {
 }
 
 export default async function DashboardPage() {
-  const { userId } = await auth();
-
-  const cookieStore = await cookies();
+  const [{ userId }, cookieStore] = await Promise.all([auth(), cookies()]);
   const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
   const activeTrackKey =
     String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
@@ -127,27 +126,29 @@ export default async function DashboardPage() {
           <DashboardHeaderQuote />
         </div>
 
-        <div className="relative z-10 grid gap-4 sm:gap-5 lg:gap-6 mt-4 sm:mt-0">
-          <section className="grid min-w-0 grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(280px,0.75fr)] lg:items-stretch">
-            <div className="min-w-0">
-              <DailyGoals compact />
-            </div>
-            <div className="min-w-0">
-              <StatsCards compact stacked />
-            </div>
-          </section>
+        <DashboardPerformanceProvider userId={userId}>
+          <div className="relative z-10 grid gap-4 sm:gap-5 lg:gap-6 mt-4 sm:mt-0">
+            <section className="grid min-w-0 grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(280px,0.75fr)] lg:items-stretch">
+              <div className="min-w-0">
+                <DailyGoals compact />
+              </div>
+              <div className="min-w-0">
+                <StatsCards compact stacked />
+              </div>
+            </section>
 
-          <section className="grid min-w-0 grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
-            <div className="min-w-0">
-              <Suspense fallback={<DashboardCardFallback className="h-[350px]" />}>
-                <DashboardSection config={activeConfig} compact />
-              </Suspense>
-            </div>
-            <div className="min-w-0">
-              <Leaderboard compact />
-            </div>
-          </section>
-        </div>
+            <section className="grid min-w-0 grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+              <div className="min-w-0">
+                <Suspense fallback={<DashboardCardFallback className="h-[350px]" />}>
+                  <DashboardSection config={activeConfig} compact />
+                </Suspense>
+              </div>
+              <div className="min-w-0">
+                <Leaderboard compact />
+              </div>
+            </section>
+          </div>
+        </DashboardPerformanceProvider>
       </div>
       <BattleFloatingButton />
     </div>

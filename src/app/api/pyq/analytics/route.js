@@ -5,10 +5,12 @@ import {
   calculateStudyStreak,
   examMatchesTrack,
   normalizeTrack,
+  TRACK_EXAM_MATCHERS,
 } from "@/lib/analyticsHelpers";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
 
 const MIN_CHAPTER_ATTEMPTS = 5;
+const ATTEMPT_PAGE_SIZE = 500;
 const INVALID_CHAPTERS = new Set(["", "unmapped", "unknown", "invalid", "null", "undefined"]);
 const SUBJECT_ORDER = {
   JEE: ["Mathematics", "Maths", "Physics", "Chemistry"],
@@ -70,7 +72,7 @@ export async function GET(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const access = await getUserAccessContext({ userId, examTrack: track });
+    const access = await getUserAccessContext({ userId });
     if (track !== access.examTrack) {
       return NextResponse.json(
         { error: "EXAM_TRACK_MISMATCH", message: `Your account has access to ${access.examTrack} analytics only.` },
@@ -91,18 +93,23 @@ export async function GET(request) {
       );
     }
 
-    const { data: rawPyqAttempts, error: pyqError } = await supabaseAdmin
-      .from("pyq_attempts")
-      .select("id, question_id, selected_option, is_correct, attempted_at, pyq_questions(exam, subject, chapter)")
-      .eq("user_id", userId)
-      .order("attempted_at", { ascending: true });
+    const examFilters = TRACK_EXAM_MATCHERS[track].map((label) => `exam.ilike.*${label}*`).join(",");
+    const pyqAttempts = [];
+    for (let offset = 0; ; offset += ATTEMPT_PAGE_SIZE) {
+      const { data, error } = await supabaseAdmin
+        .from("pyq_attempts")
+        .select("is_correct, attempted_at, pyq_questions!inner(exam, subject, chapter)")
+        .eq("user_id", userId)
+        .or(examFilters, { referencedTable: "pyq_questions" })
+        .order("attempted_at", { ascending: true })
+        .order("id", { ascending: true })
+        .range(offset, offset + ATTEMPT_PAGE_SIZE - 1);
 
-    if (pyqError) {
-      return NextResponse.json({ error: pyqError.message }, { status: 500 });
+      if (error) throw error;
+      const page = data || [];
+      pyqAttempts.push(...page.filter((attempt) => examMatchesTrack(attempt.pyq_questions?.exam, track)));
+      if (page.length < ATTEMPT_PAGE_SIZE) break;
     }
-
-    const allPyqAttempts = rawPyqAttempts || [];
-    const pyqAttempts = allPyqAttempts.filter((attempt) => examMatchesTrack(attempt.pyq_questions?.exam, track));
 
     const attempted = pyqAttempts.length;
     const correctAnswers = pyqAttempts.filter((attempt) => attempt.is_correct).length;

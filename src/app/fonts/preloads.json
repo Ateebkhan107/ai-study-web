@@ -1,13 +1,8 @@
 {
   "root": [
-    "/fonts/1e06740a02a443fb7f3eeda8.woff2",
-    "/fonts/35f7e628ec8e7dd3bf434e95.woff2",
-    "/fonts/4745b75b6e92d917e2402925.woff2",
-    "/fonts/7597c31a957ae3d2e1ebc786.woff2",
     "/fonts/a0d054c4af557de20afd6ca5.woff2"
   ],
   "landing": [
-    "/fonts/587435ca9d90732b8c1ce495.woff2",
-    "/fonts/88e17be075f1be50ab67b057.woff2"
+    "/fonts/587435ca9d90732b8c1ce495.woff2"
   ]
 }

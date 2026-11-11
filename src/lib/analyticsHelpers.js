@@ -1,4 +1,4 @@
-const TRACK_EXAM_MATCHERS = {
+export const TRACK_EXAM_MATCHERS = {
   JEE: ["JEE"],
   NEET: ["NEET", "AIPMT"],
 };

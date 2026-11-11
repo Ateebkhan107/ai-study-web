@@ -467,6 +467,10 @@ function ReviewQuestionPanel({ answer, onStartReview, isGenerating }) {
 
 export default function ZiWorkspace() {
   const { user } = useUser();
+  return <ZiWorkspaceSession key={user?.id || "signed-out"} user={user} />;
+}
+
+function ZiWorkspaceSession({ user }) {
   const basePageContext = useZiPageContext();
   const searchParams = useSearchParams();
   const attemptId = searchParams.get("attempt") || "";
@@ -602,7 +606,7 @@ export default function ZiWorkspace() {
 
   const sendMessage = async (text) => {
     const trimmed = text.trim();
-    if (!trimmed || isGenerating) return;
+    if (!trimmed || abortControllerRef.current) return;
     if (isReviewMode && !selectedAnswer?.id) {
       setErrorBanner("Select a completed-test question before asking Zi to review it.");
       return;
@@ -614,7 +618,6 @@ export default function ZiWorkspace() {
     const pageContext = getPageContextForRequest();
     const abortController = new AbortController();
 
-    abortControllerRef.current?.abort();
     abortControllerRef.current = abortController;
     setErrorBanner("");
     setMessages((current) => [...current, userMessage, assistantMessage]);
@@ -677,9 +680,9 @@ export default function ZiWorkspace() {
     } finally {
       if (abortControllerRef.current === abortController) {
         abortControllerRef.current = null;
+        setIsGenerating(false);
+        textareaRef.current?.focus();
       }
-      setIsGenerating(false);
-      textareaRef.current?.focus();
     }
   };
 

@@ -15,19 +15,55 @@ function shuffleCards(cards) {
   return next;
 }
 
-export default function FormulaCardDeck({ cards, chapterId }) {
+export default function FormulaCardDeck({ cards, initialCards, chapterId, deckUrl }) {
   const [orderedCards, setOrderedCards] = useState(cards || []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [bookmarkedIds, setBookmarkedIds] = useState(() => new Set());
   const [importantOnly, setImportantOnly] = useState(false);
+  const [loadRequested, setLoadRequested] = useState(false);
+  const [loadedCards, setLoadedCards] = useState(null);
+  const [loadError, setLoadError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const shouldLoad = loadRequested && cards.length > initialCards.length;
+  useEffect(() => {
+    if (!shouldLoad) return;
+    const controller = new AbortController();
+
+    async function loadDeck() {
+      try {
+        const response = await fetch(deckUrl, { cache: "no-store", signal: controller.signal });
+        if (!response.ok) throw new Error("Could not load revision cards");
+        const data = await response.json();
+        if (!Array.isArray(data.cards)) throw new Error("Invalid deck response");
+        if (!controller.signal.aborted) setLoadedCards(data.cards);
+      } catch {
+        if (!controller.signal.aborted) setLoadError(true);
+      }
+    }
+
+    loadDeck();
+    return () => controller.abort();
+  }, [deckUrl, retryCount, shouldLoad]);
+
+  const cardById = useMemo(
+    () => new Map((loadedCards ?? initialCards).map((card) => [card.id, card])),
+    [initialCards, loadedCards]
+  );
 
   const visibleCards = useMemo(() => {
-    if (!importantOnly) return orderedCards;
-    return orderedCards.filter((card) => Number(card.importance || 0) >= 5);
-  }, [importantOnly, orderedCards]);
+    const availableCards = loadedCards
+      ? orderedCards.flatMap((card) => {
+        const publishedCard = cardById.get(card.id);
+        return publishedCard ? [publishedCard] : [];
+      })
+      : orderedCards;
+    if (!importantOnly) return availableCards;
+    return availableCards.filter((card) => Number(card.importance || 0) >= 5);
+  }, [cardById, importantOnly, loadedCards, orderedCards]);
 
   const safeIndex = Math.min(currentIndex, Math.max(visibleCards.length - 1, 0));
-  const currentCard = visibleCards[safeIndex];
+  const currentCard = cardById.get(visibleCards[safeIndex]?.id);
   const isBookmarked = currentCard ? bookmarkedIds.has(currentCard.id) : false;
 
   useRegisterZiEntity(
@@ -58,8 +94,10 @@ export default function FormulaCardDeck({ cards, chapterId }) {
   }, [visibleCards.length]);
 
   function goToCard(offset) {
+    if (visibleCards.length === 0) return;
+    setLoadRequested(true);
     setCurrentIndex((index) => {
-      const nextIndex = index + offset;
+      const nextIndex = Math.min(index, visibleCards.length - 1) + offset;
       if (nextIndex < 0) return 0;
       if (nextIndex >= visibleCards.length) return visibleCards.length - 1;
       return nextIndex;
@@ -77,6 +115,7 @@ export default function FormulaCardDeck({ cards, chapterId }) {
   }
 
   function shuffleDeck() {
+    setLoadRequested(true);
     setOrderedCards((previous) => shuffleCards(previous));
     setCurrentIndex(0);
   }
@@ -87,11 +126,12 @@ export default function FormulaCardDeck({ cards, chapterId }) {
   }
 
   function toggleImportantOnly() {
+    setLoadRequested(true);
     setImportantOnly((value) => !value);
     setCurrentIndex(0);
   }
 
-  if (!currentCard) {
+  if (cards.length === 0 || loadedCards?.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-300 bg-[var(--card)] p-8 text-center dark:border-stone-700 dark:bg-[var(--surface)]">
         <p className="text-sm font-bold text-slate-500 dark:text-stone-400">No cards are available for this chapter yet.</p>
@@ -104,12 +144,12 @@ export default function FormulaCardDeck({ cards, chapterId }) {
       <div className="mb-3 flex items-center justify-between rounded-xl border border-slate-200/80 bg-white/90 px-3.5 py-2 shadow-none dark:border-stone-800/80 dark:bg-[#141414]">
         <div className="flex items-center gap-3">
           <span className="font-mono text-xs font-bold text-slate-700 dark:text-stone-300 tabular-nums">
-            {safeIndex + 1} <span className="text-slate-300 dark:text-stone-600">/</span> {visibleCards.length}
+            {visibleCards.length ? safeIndex + 1 : 0} <span className="text-slate-300 dark:text-stone-600">/</span> {visibleCards.length}
           </span>
           <div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-200 dark:bg-stone-800 sm:w-36">
             <div
               className="h-full rounded-full bg-amber-500 transition-all duration-200"
-              style={{ width: `${((safeIndex + 1) / visibleCards.length) * 100}%` }}
+              style={{ width: visibleCards.length ? `${((safeIndex + 1) / visibleCards.length) * 100}%` : "0%" }}
             />
           </div>
         </div>
@@ -118,6 +158,7 @@ export default function FormulaCardDeck({ cards, chapterId }) {
           <button
             type="button"
             onClick={toggleBookmark}
+            disabled={!currentCard}
             className={`prepzii-interactive group inline-flex h-8 w-8 items-center justify-center rounded-lg ${
               isBookmarked
                 ? "bg-amber-500/15 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400"
@@ -149,7 +190,20 @@ export default function FormulaCardDeck({ cards, chapterId }) {
         </div>
       </div>
 
-      <FormulaCardRenderer card={currentCard} />
+      {currentCard ? <FormulaCardRenderer card={currentCard} /> : (
+        <div className="grid min-h-[260px] place-content-center rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 text-center sm:min-h-[300px]" aria-live="polite">
+          {visibleCards.length === 0 ? <p className="text-sm font-semibold">No cards match this filter.</p> : loadError || loadedCards ? (
+            <>
+              <p className="text-sm font-semibold">Could not load this card.</p>
+              <button type="button" className="mt-2 text-sm font-bold underline" onClick={() => {
+                setLoadError(false);
+                setLoadedCards(null);
+                setRetryCount((count) => count + 1);
+              }}>Try again</button>
+            </>
+          ) : <p className="motion-safe:animate-pulse text-sm font-semibold">Loading card…</p>}
+        </div>
+      )}
 
       <div className="mt-3.5 flex flex-col gap-2 rounded-xl border border-slate-200/80 bg-white/90 p-2 dark:border-stone-800/80 dark:bg-[#141414] sm:flex-row sm:items-center sm:justify-between sm:p-2.5">
         <div className="grid grid-cols-2 gap-2 sm:contents">
@@ -167,7 +221,9 @@ export default function FormulaCardDeck({ cards, chapterId }) {
           <button
             type="button"
             onClick={() => goToCard(1)}
-            disabled={safeIndex === visibleCards.length - 1}
+            onPointerEnter={() => setLoadRequested(true)}
+            onFocus={() => setLoadRequested(true)}
+            disabled={safeIndex >= visibleCards.length - 1}
             aria-label="Next card"
             className="prepzii-interactive group inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-lg bg-amber-500 px-3 sm:px-4 text-xs sm:text-sm font-bold text-black hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-amber-500 sm:order-last"
           >

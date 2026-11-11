@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
-import { getUserAccessContext } from "@/lib/accessControl";
-import TrackWrapper from "@/components/TrackWrapper"; 
-import { initUserLeaderboard } from "@/utils/leaderboard"; 
+import { FREE_ZI_PROMPT_LIMIT, getUserNavigationAccess, getZiFreePromptsUsage } from "@/lib/accessControl";
+import TrackWrapper from "@/components/TrackWrapper";
+import { initializeXp, integrityEnabled } from "@/lib/integrity.server.mjs";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import ProductTourManager from "@/components/tour/ProductTourManager"; 
 import ZiLauncher from "@/components/zi/ZiLauncher";
 import { ZiEntityContextProvider } from "@/lib/zi/ZiEntityContext";
@@ -18,14 +20,21 @@ export default async function DashboardLayout({ children }) {
     redirect(ONBOARDING_ROUTE);
   }
 
-  const email = user?.primaryEmailAddress?.emailAddress || "";
-  const accessContext = userId
-    ? await getUserAccessContext({ userId, email })
-    : { plan: "free", isPro: false, ziFreeUsage: { remaining: 3, used: 0, limit: 3 } };
-
-  if (userId) {
-    await initUserLeaderboard(userId, user?.firstName || "Student");
+  if (userId && integrityEnabled()) {
+    const name = user?.firstName || "Student";
+    after(async () => {
+      try {
+        await initializeXp(supabaseAdmin, userId, name);
+      } catch (error) {
+        console.error("[DASHBOARD_XP_INITIALIZATION_ERROR]", error);
+      }
+    });
   }
+
+  const [accessContext, ziFreeUsage] = await Promise.all([
+    getUserNavigationAccess(userId),
+    userId ? getZiFreePromptsUsage(userId) : { remaining: FREE_ZI_PROMPT_LIMIT },
+  ]);
 
   return (
     <div className="relative min-h-screen bg-[var(--background)] transition-colors duration-200">
@@ -39,7 +48,7 @@ export default async function DashboardLayout({ children }) {
             <ProductTourManager />
           </Suspense>
           <Suspense fallback={null}>
-            <ZiLauncher plan={accessContext.plan} ziFreeUsage={accessContext.ziFreeUsage}
+            <ZiLauncher plan={accessContext.plan} ziFreeUsage={ziFreeUsage}
               classroomFixtureOwner={getClassroomFixtureOwner(userId)} />
           </Suspense>
         </ZiEntityContextProvider>

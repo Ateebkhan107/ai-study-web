@@ -21,11 +21,11 @@ test('all five original font families retain exact cached bytes and complete fon
   }
  }
 });
-test('font preloads preserve exactly the original Latin subset assets',()=>{
+test('only the first-paint Latin faces are preloaded',()=>{
  const preloads=JSON.parse(read('src/app/fonts/preloads.json'));
- for(const group of ['root','landing']){
-  const families=manifest.families.filter(f=>['Fraunces','Source Sans 3'].includes(f.family)===(group==='landing'));
-  const expected=[...new Set(families.flatMap(f=>f.files.filter(x=>x.preload).map(x=>'/fonts/'+x.sha256.slice(0,24)+'.woff2')))].sort();
+ for(const [group, family] of [['root', 'Space Grotesk'], ['landing', 'Source Sans 3']]){
+  const files=manifest.families.find(entry=>entry.family===family).files;
+  const expected=[...new Set(files.filter(x=>x.preload).map(x=>'/fonts/'+x.sha256.slice(0,24)+'.woff2'))].sort();
   assert.deepEqual(preloads[group],expected);
  }
 });

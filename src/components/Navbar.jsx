@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,6 @@ const navItems = [
   { name: "Analytics", href: "/analytics", icon: LineChart },
   { name: "Profile", href: "/profile", icon: UserRound },
 ];
-const PREFETCHED_NAV_HREFS = new Set(["/dashboard", "/test", "/pyq", "/community", "/analytics"]);
 
 export default function Navbar({
   plan,
@@ -65,26 +64,6 @@ export default function Navbar({
   };
 
   const visibleNavItems = navItems;
-  const prefetchHrefKey = [
-    ...visibleNavItems.map((item) => item.href),
-    "/pro",
-  ].filter(Boolean).join("|");
-
-  useEffect(() => {
-    const prefetchVisibleRoutes = () => {
-      prefetchHrefKey.split("|").forEach((href) => {
-        if (href && href !== pathname) router.prefetch(href);
-      });
-    };
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(prefetchVisibleRoutes, { timeout: 1200 });
-      return () => window.cancelIdleCallback(idleId);
-    }
-
-    const timeoutId = window.setTimeout(prefetchVisibleRoutes, 250);
-    return () => window.clearTimeout(timeoutId);
-  }, [pathname, prefetchHrefKey, router]);
 
   const renderNavLink = (item, mobile = false) => {
     const Icon = item.icon;
@@ -109,7 +88,6 @@ export default function Navbar({
         key={item.href}
         href={targetHref}
         data-tour={tourAttr}
-        prefetch={PREFETCHED_NAV_HREFS.has(item.href) ? true : undefined}
         onMouseEnter={() => router.prefetch(item.href)}
         onFocus={() => router.prefetch(item.href)}
         onClick={() => {

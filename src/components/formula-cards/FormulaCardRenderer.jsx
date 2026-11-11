@@ -214,7 +214,8 @@ function CardDiagramImage({ image, title }) {
           alt={alt}
           width={800}
           height={500}
-          unoptimized
+          unoptimized={!src.startsWith("/images/") || /\.svg(?:[?#]|$)/i.test(src)}
+          sizes="(min-width: 1024px) 760px, calc(100vw - 4rem)"
           className="h-auto max-h-72 w-auto max-w-full object-contain filter contrast-[1.05]"
         />
       </div>

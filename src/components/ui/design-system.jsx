@@ -1,8 +1,28 @@
 "use client";
 
-import { forwardRef, useId } from "react";
+import { forwardRef, useEffect, useId } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faXmark } from "@fortawesome/free-solid-svg-icons";
+import "@awesome.me/webawesome/dist/styles/themes/default.css";
+
+const loadTooltip = () => import("@awesome.me/webawesome/dist/components/tooltip/tooltip.js");
+const loadDialog = () => import("@awesome.me/webawesome/dist/components/dialog/dialog.js");
+const loadDropdown = () => Promise.all([
+  import("@awesome.me/webawesome/dist/components/dropdown/dropdown.js"),
+  import("@awesome.me/webawesome/dist/components/dropdown-item/dropdown-item.js"),
+]);
+const loadTabs = () => Promise.all([
+  import("@awesome.me/webawesome/dist/components/tab-group/tab-group.js"),
+  import("@awesome.me/webawesome/dist/components/tab/tab.js"),
+  import("@awesome.me/webawesome/dist/components/tab-panel/tab-panel.js"),
+]);
+const loadSwitch = () => import("@awesome.me/webawesome/dist/components/switch/switch.js");
+
+function useWebAwesome(load) {
+  useEffect(() => {
+    load().catch((error) => console.warn("[WEB_AWESOME_COMPONENT_LOAD_ERROR]", error));
+  }, [load]);
+}
 
 function cx(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -172,6 +192,7 @@ export function Tabs({ tabs, activeTab, onChange, className = "" }) {
 }
 
 export function Tooltip({ content, placement = "top", children }) {
+  useWebAwesome(loadTooltip);
   const id = useId().replaceAll(":", "-");
 
   return (
@@ -187,6 +208,7 @@ export function Tooltip({ content, placement = "top", children }) {
 }
 
 export function Dialog({ open = false, label, children, footer, onClose, className = "" }) {
+  useWebAwesome(loadDialog);
   return (
     <wa-dialog
       open={open || undefined}
@@ -203,6 +225,7 @@ export function Dialog({ open = false, label, children, footer, onClose, classNa
 }
 
 export function Dropdown({ trigger, items = [], placement = "bottom-start", onSelect, className = "" }) {
+  useWebAwesome(loadDropdown);
   return (
     <wa-dropdown placement={placement} class={cx("prepzii-wa-dropdown", className)} onWaSelect={onSelect}>
       <span slot="trigger" className="inline-flex">
@@ -223,6 +246,7 @@ export function Dropdown({ trigger, items = [], placement = "bottom-start", onSe
 }
 
 export function WebAwesomeTabs({ tabs, activeTab, className = "" }) {
+  useWebAwesome(loadTabs);
   return (
     <wa-tab-group active={activeTab} class={cx("prepzii-wa-tabs", className)}>
       {tabs.map((tab) => (
@@ -240,6 +264,7 @@ export function WebAwesomeTabs({ tabs, activeTab, className = "" }) {
 }
 
 export function Switch({ checked, children, onChange, className = "", ...props }) {
+  useWebAwesome(loadSwitch);
   return (
     <wa-switch
       checked={checked || undefined}

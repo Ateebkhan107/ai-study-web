@@ -1,4 +1,4 @@
-import HomePageClient from "./HomePageClient";
+import PublicLandingPage from "./HomePage";
 import { publicMetadata } from "@/lib/seo.mjs";
 
 export const metadata = publicMetadata({
@@ -8,5 +8,5 @@ export const metadata = publicMetadata({
 });
 
 export default function HomePage() {
-  return <HomePageClient />;
+  return <PublicLandingPage />;
 }

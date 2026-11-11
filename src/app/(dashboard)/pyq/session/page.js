@@ -291,6 +291,8 @@ export default function PYQSessionPage() {
     async function loadPYQ() {
       const requestedSubjects = shouldLoadBalancedRandom
         ? [""]
+        : mode === "full" && examId && subjectLabels.length > 0
+          ? [subjectLabels.join(",")]
         : shouldLoadWholePaper && subjectLabels.length === 0
           ? [""]
           : subjectLabels;

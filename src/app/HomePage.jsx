@@ -1,12 +1,8 @@
-"use client";
-
-// NOTE: 'use client' is retained for Framer Motion entrance animations only.
-// All CTA navigation uses <Link> so crawlers and prefetching work correctly.
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
 import fontStyles from "./fonts/landing.module.css";
 import fontPreloads from "./fonts/preloads.json";
-import { motion, MotionConfig } from "framer-motion";
+import LandingAuthLinks from "./LandingAuthLinks";
+import styles from "./landing.module.css";
 import Logo from "@/components/Logo";
 import PublicExamNavigation from "@/components/seo/PublicExamNavigation";
 import { GraphVisual } from "@/components/ui/educational-visuals";
@@ -38,31 +34,11 @@ const bodyFont = { variable: fontStyles.body };
 const D = "font-[family-name:var(--font-space-grotesk)]";
 const B = "font-[family-name:var(--font-prepzii-landing-body)]";
 
-/* ── Shared animation variants ──────────────────────────────── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay, ease: "easeOut" },
-  }),
-};
-
-const pressMotion = {
-  whileTap: { x: 3, y: 3, transition: { duration: 0.08 } },
-};
-
 /* ── WorkflowStep ───────────────────────────────────────────── */
-function WorkflowStep({ number, icon: Icon, title, desc, delay }) {
+function WorkflowStep({ number, icon: Icon, title, desc }) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
-      custom={delay}
-      variants={fadeUp}
-      whileHover={{ y: -5, transition: { duration: 0.16 } }}
-      className="relative flex flex-col border-[3px] border-[#111111] bg-white p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[210px] sm:p-4 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#F4B400]"
+    <div
+      className={`${styles.reveal} motion-safe:hover:-translate-y-1 motion-safe:transition relative flex flex-col border-[3px] border-[#111111] bg-white p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[210px] sm:p-4 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#F4B400]`}
     >
       <div className="mb-3 flex items-start justify-between gap-2 sm:mb-5 sm:gap-3">
         <span className={`${D} flex h-8 w-8 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] text-sm font-black leading-none text-black shadow-[3px_3px_0_#111111] sm:h-11 sm:w-11 sm:text-lg sm:shadow-[4px_4px_0_#111111]`}>
@@ -74,44 +50,30 @@ function WorkflowStep({ number, icon: Icon, title, desc, delay }) {
         {title}
       </h4>
       <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{desc}</p>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── WorkflowConnector ──────────────────────────────────────── */
-function WorkflowConnector({ delay = 0 }) {
+function WorkflowConnector() {
   return (
     <div className="hidden lg:flex items-center shrink-0 px-1 pt-24">
-      <motion.div
-        initial={{ width: 0, opacity: 0 }}
-        whileInView={{ width: 28, opacity: 1 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ delay, duration: 0.4, ease: "easeOut" }}
-        className="h-[3px] bg-[#111111]"
+      <div
+        className={`w-7 h-[3px] bg-[#111111]`}
       />
-      <motion.div
-        initial={{ opacity: 0, x: -4 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ delay: delay + 0.2, duration: 0.3 }}
+      <div
       >
         <ChevronRight className="-ml-1.5 h-5 w-5 text-[#111111]" strokeWidth={3} />
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 /* ── PillarCard ─────────────────────────────────────────────── */
-function PillarCard({ icon: Icon, title, items, accentClass, label, delay }) {
+function PillarCard({ icon: Icon, title, items, accentClass, label }) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
-      custom={delay}
-      variants={fadeUp}
-      whileHover={{ y: -6, x: -2, transition: { duration: 0.16 } }}
-      className="group flex flex-col border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[360px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400]"
+    <div
+      className={`${styles.reveal} motion-safe:hover:-translate-y-1 motion-safe:transition group flex flex-col border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[360px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400]`}
     >
       <div className="mb-4 flex items-start justify-between gap-2 sm:mb-6 sm:gap-4">
         <span className={`${B} border-2 border-[#111111] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-[#111111] sm:px-2 sm:py-1 sm:text-[11px] ${accentClass}`}>
@@ -133,28 +95,22 @@ function PillarCard({ icon: Icon, title, items, accentClass, label, delay }) {
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── TrustItem ──────────────────────────────────────────────── */
-function TrustItem({ icon: Icon = CheckCircle2, title, desc, delay, isZi = false }) {
+function TrustItem({ icon: Icon = CheckCircle2, title, desc, isZi = false }) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      custom={delay}
-      variants={fadeUp}
-      whileHover={{ x: 4, transition: { duration: 0.16 } }}
-      className="flex items-start gap-3 border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] sm:gap-4 sm:p-4 sm:shadow-[5px_5px_0_#111111]"
+    <div
+      className={`${styles.reveal} motion-safe:hover:translate-x-1 motion-safe:transition-transform flex items-start gap-3 border-[3px] border-[#111111] bg-white p-3 shadow-[4px_4px_0_#111111] sm:gap-4 sm:p-4 sm:shadow-[5px_5px_0_#111111]`}
     >
       <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center border-[3px] border-[#111111] bg-[#F4B400] sm:h-11 sm:w-11">
         {isZi ? (
           <div className="flex gap-1">
-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="h-1.5 w-1.5 bg-black" />
-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} className="h-1.5 w-1.5 bg-black" />
-            <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="h-1.5 w-1.5 bg-black" />
+            <div className={`${styles.dot} h-1.5 w-1.5 bg-black`} />
+            <div className={`${styles.dot} h-1.5 w-1.5 bg-black`} />
+            <div className={`${styles.dot} h-1.5 w-1.5 bg-black`} />
           </div>
         ) : (
           <Icon className="h-4 w-4 text-[#111111] sm:h-5 sm:w-5" strokeWidth={3} />
@@ -166,38 +122,29 @@ function TrustItem({ icon: Icon = CheckCircle2, title, desc, delay, isZi = false
         </h4>
         <p className={`${B} text-[13px] font-semibold leading-5 text-[#475569] sm:text-sm sm:leading-6`}>{desc}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── StatItem ───────────────────────────────────────────────── */
-function StatItem({ value, label, delay, tone }) {
+function StatItem({ value, label, tone }) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      custom={delay}
-      variants={fadeUp}
-      whileHover={{ y: -5, transition: { duration: 0.16 } }}
-      className={`min-h-[104px] border-[3px] border-[#111111] p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#111111] sm:min-h-[150px] sm:p-5 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111] ${tone}`}
+    <div
+      className={`${styles.reveal} motion-safe:hover:-translate-y-1 motion-safe:transition min-h-[104px] border-[3px] border-[#111111] p-3 text-left shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#111111] sm:min-h-[150px] sm:p-5 sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111] ${tone}`}
     >
       <div className={`${D} mb-1 text-[1.72rem] font-black leading-none tracking-normal text-[#111111] sm:mb-2 sm:text-4xl md:text-5xl`}>
         {value}
       </div>
       <div className={`${B} max-w-[12rem] text-[10px] font-black uppercase leading-4 tracking-wide text-[#111111] sm:text-sm sm:leading-5`}>{label}</div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── ProductPreview — mock PYQ question card ────────────────── */
 function ProductPreview() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-      className="relative bg-white border-[3px] border-[#111111] shadow-[5px_5px_0_#111111] overflow-visible sm:shadow-[12px_12px_0_#111111]"
+    <div
+      className={`${styles.preview} relative bg-white border-[3px] border-[#111111] shadow-[5px_5px_0_#111111] overflow-visible sm:shadow-[12px_12px_0_#111111]`}
     >
       <div className="absolute -left-5 -top-5 hidden h-20 w-20 border-[3px] border-[#111111] bg-[#F4B400] md:block" />
       <div className="absolute -bottom-6 -right-6 hidden h-24 w-24 rotate-6 border-[3px] border-[#111111] bg-[#FFEE99] md:block" />
@@ -240,12 +187,9 @@ function ProductPreview() {
             { label: "B", text: "r¹", selected: true, correct: true },
             { label: "C", text: "r²", selected: false, correct: false },
             { label: "D", text: "r³/²", selected: false, correct: false },
-          ].map((opt, i) => (
-            <motion.div
+          ].map((opt) => (
+            <div
               key={opt.label}
-              initial={{ opacity: 0, x: -5 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + i * 0.1, duration: 0.3 }}
               className={`flex items-center gap-1.5 border-2 px-2 py-2 text-sm cursor-default select-none sm:gap-2.5 sm:px-3 sm:py-3
                 ${
                   opt.correct
@@ -260,38 +204,29 @@ function ProductPreview() {
                 {opt.label}
               </span>
               <span className={`${B} text-[12px] font-black sm:text-sm`}>{opt.text}</span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Stats strip */}
         <div className="mt-3 border-t-[3px] border-[#111111] pt-3 flex flex-row items-center justify-between gap-2 overflow-hidden sm:mt-5 sm:pt-4">
           <div className="flex items-center gap-2 sm:gap-4">
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.4 }}
+            <span
               className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
             >
               <span className="font-black text-[#111111]">Demo</span> preview
-            </motion.span>
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.4 }}
+            </span>
+            <span
               className={`${B} text-[11px] font-bold text-[#334155] sm:text-xs`}
             >
               Illustrative content
-            </motion.span>
+            </span>
           </div>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.3, duration: 0.3 }}
+          <span
             className={`${B} w-fit bg-[#F4B400] px-1.5 py-0.5 text-[10px] font-black uppercase text-black border-2 border-[#111111] sm:px-2 sm:py-1 sm:text-xs`}
           >
             Medium
-          </motion.span>
+          </span>
         </div>
       </div>
 
@@ -302,24 +237,19 @@ function ProductPreview() {
           <span className={`${B} text-xs font-bold text-[#334155]`}>12 / 30 questions</span>
         </div>
         <div className="h-3 w-full overflow-hidden border-2 border-[#111111] bg-white">
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: "40%" }}
-            transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-            className="h-full bg-[#F4B400]" 
+          <div
+            className={`w-2/5 ${styles.progress} h-full bg-[#F4B400]`}
           />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── Main Page ──────────────────────────────────────────────── */
 export default function PublicLandingPage() {
-  const { isSignedIn, isLoaded } = useUser();
-
   return (
-    <MotionConfig reducedMotion="user">
+    <>
       {fontPreloads.landing.map(href => <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />)}
       <div
         className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-white text-[#334155] ${B} selection:bg-yellow-100`}
@@ -356,24 +286,7 @@ export default function PublicLandingPage() {
           </nav>
 
           {/* Auth CTAs */}
-          <div className="flex items-center gap-2">
-            {!isSignedIn && isLoaded && (
-              <Link
-                href="/sign-in"
-                className={`${B} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
-              >
-                Log in
-              </Link>
-            )}
-            <Link
-              href="/dashboard"
-              prefetch
-              className={`${B} inline-flex items-center gap-1.5 border-[3px] border-[#111111] bg-[#F4B400] px-4 py-2 text-sm font-black text-black shadow-[4px_4px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#111111]`}
-            >
-              {isSignedIn ? "Dashboard" : "Get Started"}
-              <ChevronRight className="w-3.5 h-3.5" strokeWidth={3} />
-            </Link>
-          </div>
+          <LandingAuthLinks />
         </div>
         <div className="mx-auto max-w-7xl px-4 pb-3 sm:px-6 lg:hidden">
           <PublicExamNavigation mobileOnly />
@@ -392,79 +305,54 @@ export default function PublicLandingPage() {
             {/* Left: Copy */}
             <div className="max-w-3xl">
               {/* Eyebrow badge */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                custom={0}
-                variants={fadeUp}
+              <div
                 className={`${B} mb-4 inline-flex -rotate-1 items-center gap-2 border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[4px_4px_0_#111111] sm:mb-6 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[5px_5px_0_#111111]`}
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 JEE &amp; NEET Preparation Platform
-              </motion.div>
+              </div>
 
               {/* Heading */}
-              <motion.h1
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-                }}
+              <h1
                 className={`${D} mb-4 max-w-[880px] text-[2.55rem] font-black leading-[0.95] tracking-normal text-[#111111] min-[375px]:text-5xl sm:mb-6 sm:text-6xl md:text-7xl lg:text-[5.7rem]`}
               >
-                <motion.span variants={fadeUp} className="block">The structured way</motion.span>
-                <motion.span variants={fadeUp} className="block">to crack</motion.span>
-                <motion.span variants={fadeUp} className="relative mt-1 inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-2 pb-1.5 pt-0.5 text-black shadow-[5px_5px_0_#111111] sm:mt-2 sm:px-3 sm:pb-2 sm:pt-1 sm:shadow-[8px_8px_0_#111111]">
+                <span className="block">The structured way</span>
+                <span className="block">to crack</span>
+                <span className="relative mt-1 inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-2 pb-1.5 pt-0.5 text-black shadow-[5px_5px_0_#111111] sm:mt-2 sm:px-3 sm:pb-2 sm:pt-1 sm:shadow-[8px_8px_0_#111111]">
                   JEE &amp; NEET
-                  <motion.span
-                    initial={{ width: 0, opacity: 0 }}
-                    animate={{ width: "100%", opacity: 1 }}
-                    transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
-                    className="absolute -bottom-3 left-0 h-[5px] bg-[#111111]"
+                  <span
+                    className={`w-full ${styles.progress} absolute -bottom-3 left-0 h-[5px] bg-[#111111]`}
                   />
-                </motion.span>
-              </motion.h1>
+                </span>
+              </h1>
 
               {/* Subtitle */}
-              <motion.p
-                initial="hidden"
-                animate="visible"
-                custom={0.4}
-                variants={fadeUp}
+              <p
                 className={`${B} mb-5 max-w-2xl border-l-[5px] border-[#111111] pl-3 text-[15px] font-semibold leading-6 text-[#334155] sm:mb-8 sm:border-l-[6px] sm:pl-5 sm:text-xl sm:leading-8`}
               >
                 Practice with previous-year questions, take full-length mock tests, revise
                 formula books, detect weak chapters, and track your performance —
                 all in one focused workspace.
-              </motion.p>
+              </p>
 
               {/* CTA buttons */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                custom={0.3}
-                variants={fadeUp}
+              <div
                 className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-8"
               >
-                <motion.div {...pressMotion}>
+                <div>
                   <Link
                     href="/dashboard"
-                    prefetch
+                    prefetch={false}
                     className={`${B} group inline-flex items-center justify-center gap-2 border-[3px] border-[#111111] bg-[#F4B400] px-5 py-3 text-sm font-black text-black shadow-[5px_5px_0_#111111] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#111111] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0_#111111] sm:gap-3 sm:px-7 sm:py-4 sm:text-base sm:shadow-[7px_7px_0_#111111] sm:hover:shadow-[10px_10px_0_#111111]`}
                   >
                     Start Preparing Free
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
                   </Link>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
               {/* Trust signals */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                custom={0.4}
-                variants={fadeUp}
+              <div
                 className={`${B} grid grid-cols-2 gap-2 text-[12px] text-[#111111] sm:flex sm:flex-wrap sm:text-sm`}
               >
                 {[
@@ -478,7 +366,7 @@ export default function PublicLandingPage() {
                     {t}
                   </span>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* Right: Product preview */}
@@ -495,10 +383,10 @@ export default function PublicLandingPage() {
       <section className="bg-white border-b-[3px] border-[#111111] py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            <StatItem value="PYQs" label="Previous-year paper practice" delay={0.05} tone="bg-[#F4B400]" />
-            <StatItem value="Mock Tests" label="Exam-style practice · Pro access" delay={0.1} tone="bg-[#111111] [&_*]:text-white" />
-            <StatItem value="4 Subjects" label="Physics, Chemistry, Bio, Maths" delay={0.15} tone="bg-[#FFEE99]" />
-            <StatItem value="Revision" label="Formula and concept cards" delay={0.2} tone="bg-white" />
+            <StatItem value="PYQs" label="Previous-year paper practice" tone="bg-[#F4B400]" />
+            <StatItem value="Mock Tests" label="Exam-style practice · Pro access" tone="bg-[#111111] [&_*]:text-white" />
+            <StatItem value="4 Subjects" label="Physics, Chemistry, Bio, Maths" tone="bg-[#FFEE99]" />
+            <StatItem value="Revision" label="Formula and concept cards" tone="bg-white" />
           </div>
         </div>
       </section>
@@ -510,38 +398,23 @@ export default function PublicLandingPage() {
         <div className="absolute right-0 top-12 hidden h-28 w-28 translate-x-10 border-[3px] border-[#111111] bg-white lg:block" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              variants={fadeUp}
-              className={`${B} w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
+            <p
+              className={`${styles.reveal} ${B} w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
             >
               How PrepZii works
-            </motion.p>
+            </p>
             <div>
-              <motion.h2
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0.1}
-                variants={fadeUp}
-                className={`${D} mb-2 text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-4 sm:text-4xl md:text-6xl`}
+              <h2
+                className={`${styles.reveal} ${D} mb-2 text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-4 sm:text-4xl md:text-6xl`}
               >
                 Your complete preparation workflow
-              </motion.h2>
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0.2}
-                variants={fadeUp}
-                className={`${B} max-w-3xl text-sm font-semibold leading-6 text-[#334155] sm:text-lg sm:leading-8`}
+              </h2>
+              <p
+                className={`${styles.reveal} ${B} max-w-3xl text-sm font-semibold leading-6 text-[#334155] sm:text-lg sm:leading-8`}
               >
                 Move from concept review to PYQ practice, full mock tests, deep
                 analysis, and targeted improvement — without switching tools.
-              </motion.p>
+              </p>
             </div>
           </div>
 
@@ -551,47 +424,47 @@ export default function PublicLandingPage() {
               icon={BookOpen}
               title="Learn"
               desc="Review formulas and concepts with digital handbooks"
-              delay={0.05}
+
             />
-            <WorkflowConnector delay={0.15} />
+            <WorkflowConnector />
             <WorkflowStep
               number="2"
               icon={Target}
               title="Practice"
               desc="Solve chapter-wise PYQs from JEE & NEET past papers"
-              delay={0.2}
+
             />
-            <WorkflowConnector delay={0.3} />
+            <WorkflowConnector />
             <WorkflowStep
               number="3"
               icon={TestTube2}
               title="Test"
               desc="Take full-length timed mocks under real exam conditions"
-              delay={0.35}
+
             />
-            <WorkflowConnector delay={0.45} />
+            <WorkflowConnector />
             <WorkflowStep
               number="4"
               icon={LineChart}
               title="Analyze"
               desc="Review accuracy, speed, and performance metrics"
-              delay={0.5}
+
             />
-            <WorkflowConnector delay={0.6} />
+            <WorkflowConnector />
             <WorkflowStep
               number="5"
               icon={Brain}
               title="Improve"
               desc="Target the weak chapters your analytics surface"
-              delay={0.65}
+
             />
-            <WorkflowConnector delay={0.75} />
+            <WorkflowConnector />
             <WorkflowStep
               number="6"
               icon={MessageSquare}
               title="Discuss"
               desc="Resolve doubts with AI or peer study groups"
-              delay={0.8}
+
             />
           </div>
         </div>
@@ -603,26 +476,16 @@ export default function PublicLandingPage() {
       <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-12 sm:gap-5 md:flex-row md:items-end">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              variants={fadeUp}
-              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
+            <h2
+              className={`${styles.reveal} ${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
             >
               Everything you need to prepare
-            </motion.h2>
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0.1}
-              variants={fadeUp}
-              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#F4B400] p-3 text-sm font-black leading-5 text-[#111111] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
+            </h2>
+            <p
+              className={`${styles.reveal} ${B} max-w-sm border-[3px] border-[#111111] bg-[#F4B400] p-3 text-sm font-black leading-5 text-[#111111] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
             >
               Four focused tools. One distraction-free workspace.
-            </motion.p>
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
@@ -637,7 +500,7 @@ export default function PublicLandingPage() {
               ]}
               accentClass="bg-[#F4B400]"
               label="PYQ"
-              delay={0.05}
+
             />
             <PillarCard
               icon={History}
@@ -650,7 +513,7 @@ export default function PublicLandingPage() {
               ]}
               accentClass="bg-[#DDEBFF]"
               label="Loop"
-              delay={0.1}
+
             />
             <PillarCard
               icon={BarChart}
@@ -663,7 +526,7 @@ export default function PublicLandingPage() {
               ]}
               accentClass="bg-[#D8F7D8]"
               label="Data"
-              delay={0.15}
+
             />
             <PillarCard
               icon={Globe}
@@ -676,7 +539,7 @@ export default function PublicLandingPage() {
               ]}
               accentClass="bg-[#FFE0E6]"
               label="Peer"
-              delay={0.2}
+
             />
           </div>
         </div>
@@ -690,73 +553,54 @@ export default function PublicLandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6 sm:gap-10 lg:gap-14 items-center">
             {/* Left: copy */}
             <div>
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0}
-                variants={fadeUp}
-                className={`${B} mb-4 w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:mb-5 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
+              <p
+                className={`${styles.reveal} ${B} mb-4 w-fit border-[3px] border-[#111111] bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#111111] shadow-[3px_3px_0_#111111] sm:mb-5 sm:px-3 sm:py-2 sm:text-xs sm:shadow-[4px_4px_0_#111111]`}
               >
                 Why PrepZii
-              </motion.p>
-              <motion.h2
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0.1}
-                variants={fadeUp}
-                className={`${D} mb-4 max-w-2xl text-[2rem] font-black leading-[1.02] tracking-normal text-[#111111] sm:mb-6 sm:text-4xl md:text-6xl`}
+              </p>
+              <h2
+                className={`${styles.reveal} ${D} mb-4 max-w-2xl text-[2rem] font-black leading-[1.02] tracking-normal text-[#111111] sm:mb-6 sm:text-4xl md:text-6xl`}
               >
                 Built around{" "}
                 <span className="inline-block -rotate-1 border-[3px] border-[#111111] bg-[#F4B400] px-1.5 pb-0.5 text-black shadow-[4px_4px_0_#111111] sm:px-2 sm:pb-1 sm:shadow-[5px_5px_0_#111111]">real exam work,</span>
                 {" "}with AI that helps
-              </motion.h2>
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0.2}
-                variants={fadeUp}
-                className={`${B} mb-5 max-w-2xl text-sm font-semibold leading-6 text-[#334155] sm:mb-8 sm:text-lg sm:leading-8`}
+              </h2>
+              <p
+                className={`${styles.reveal} ${B} mb-5 max-w-2xl text-sm font-semibold leading-6 text-[#334155] sm:mb-8 sm:text-lg sm:leading-8`}
               >
                 PrepZii brings together previous-year questions and focused exam
                 workflows. Zi helps you understand, revise, plan, and improve
                 without getting in the way of your preparation.
-              </motion.p>
+              </p>
 
               <div className="space-y-3 sm:space-y-5">
                 <TrustItem
                   title="PYQ practice"
                   desc="Choose from available previous-year papers and practice options for your exam."
-                  delay={0.1}
+
                 />
                 <TrustItem
                   title="Real exam UI"
                   desc="Practice in an environment that closely mirrors the actual CBT interface."
-                  delay={0.15}
+
                 />
                 <TrustItem
                   title="Zi — your study companion"
                   desc="Ask Zi to explain any question, suggest what to revise next, or help you understand a concept you're stuck on."
-                  delay={0.2}
+
                   isZi={true}
                 />
                 <TrustItem
                   title="Habits that stick"
                   desc="Streaks, XP, and personalised revision plans built around your weak chapters and exam schedule."
-                  delay={0.25}
+
                 />
               </div>
             </div>
 
             {/* Right: analytics illustration */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex items-center justify-center"
+            <div
+              className={`${styles.reveal} flex items-center justify-center`}
             >
               <div className="relative w-full max-w-[270px] aspect-square border-[3px] border-[#111111] bg-white shadow-[5px_5px_0_#111111] min-[375px]:max-w-[300px] sm:max-w-md sm:shadow-[12px_12px_0_#111111]">
                 {/* Decorative rings */}
@@ -770,51 +614,35 @@ export default function PublicLandingPage() {
                 </div>
 
                 {/* Stat pill — top right */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
-                  className="absolute right-2 top-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:right-4 sm:top-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+                <div
+                  className={`${styles.reveal} absolute right-2 top-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:right-4 sm:top-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]`}
                 >
                   <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Example accuracy</div>
                   <div className={`${D} text-lg font-black text-[#111111] sm:text-2xl`}>88%</div>
-                </motion.div>
+                </div>
 
                 {/* Stat pill — bottom left */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                  className="absolute bottom-4 left-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-7 sm:left-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+                <div
+                  className={`${styles.reveal} absolute bottom-4 left-2 bg-white border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-7 sm:left-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]`}
                 >
                   <div className={`${B} text-[10px] font-black uppercase text-[#64748B] mb-0.5`}>Weak chapter</div>
                   <div className={`${D} text-[12px] font-black text-[#111111] sm:text-base`}>Thermodynamics</div>
                   <div className="w-20 bg-white border-2 border-[#111111] h-2 mt-1.5 overflow-hidden sm:mt-2 sm:w-24">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "30%" }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-                      className="h-full bg-[#B44436]"
+                    <div
+                      className={`w-[30%] h-full bg-[#B44436]`}
                     />
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Streak pill — bottom right */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, x: -10 }}
-                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
-                  className="absolute bottom-3 right-2 bg-[#F4B400] border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-5 sm:right-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]"
+                <div
+                  className={`${styles.reveal} absolute bottom-3 right-2 bg-[#F4B400] border-[3px] border-[#111111] px-2.5 py-2 shadow-[3px_3px_0_#111111] text-left sm:bottom-5 sm:right-4 sm:px-4 sm:py-3 sm:shadow-[5px_5px_0_#111111]`}
                 >
                   <div className={`${B} text-[10px] font-black uppercase text-black/60 mb-0.5`}>Example streak</div>
                   <div className={`${D} text-base font-black text-black sm:text-xl`}>14 days</div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -825,26 +653,16 @@ export default function PublicLandingPage() {
       <section className="bg-white py-8 sm:py-14 md:py-20 border-b-[3px] border-[#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="mb-6 grid gap-4 sm:mb-12 sm:gap-5 md:grid-cols-[1fr_auto] md:items-end">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              variants={fadeUp}
-              className={`${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
+            <h2
+              className={`${styles.reveal} ${D} max-w-2xl text-[2rem] font-black leading-none tracking-normal text-[#111111] sm:text-4xl md:text-6xl`}
             >
               Explore your exam subjects.
-            </motion.h2>
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0.1}
-              variants={fadeUp}
-              className={`${B} max-w-sm border-[3px] border-[#111111] bg-[#FFF9E6] p-3 text-sm font-bold leading-5 text-[#334155] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
+            </h2>
+            <p
+              className={`${styles.reveal} ${B} max-w-sm border-[3px] border-[#111111] bg-[#FFF9E6] p-3 text-sm font-bold leading-5 text-[#334155] shadow-[4px_4px_0_#111111] sm:p-4 sm:text-base sm:leading-6 sm:shadow-[5px_5px_0_#111111]`}
             >
               Practice and revision resources for JEE and NEET subjects. Availability varies by exam and chapter.
-            </motion.p>
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
@@ -881,16 +699,10 @@ export default function PublicLandingPage() {
                 rotate: "rotate-1",
                 tag: "MATH",
               },
-            ].map((s, i) => (
-              <motion.div
+            ].map((s) => (
+              <div
                 key={s.subject}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i * 0.07}
-                variants={fadeUp}
-                whileHover={{ y: -6, rotate: 0, transition: { duration: 0.16 } }}
-                className={`group border-[3px] border-[#111111] p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[230px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400] ${s.bgClass} ${s.rotate}`}
+                className={`${styles.reveal} motion-safe:hover:-translate-y-1 motion-safe:transition motion-safe:hover:rotate-0 group border-[3px] border-[#111111] p-3 shadow-[4px_4px_0_#111111] transition-shadow duration-200 hover:shadow-[6px_6px_0_#F4B400] sm:min-h-[230px] sm:p-5 sm:shadow-[8px_8px_0_#111111] sm:hover:shadow-[11px_11px_0_#F4B400] ${s.bgClass} ${s.rotate}`}
               >
                 <div className="mb-4 flex items-start justify-between gap-2 sm:mb-8 sm:gap-3">
                   <s.icon className="h-6 w-6 text-[#111111] sm:h-9 sm:w-9" strokeWidth={2.8} />
@@ -902,7 +714,7 @@ export default function PublicLandingPage() {
                   {s.subject}
                 </h3>
                 <p className={`${B} text-[12px] font-semibold leading-5 text-[#334155] sm:text-sm sm:leading-6`}>{s.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -915,12 +727,8 @@ export default function PublicLandingPage() {
         <div className="absolute left-6 top-6 hidden h-20 w-20 border-[3px] border-white bg-[#F4B400] md:block" />
         <div className="absolute bottom-8 right-8 hidden h-28 w-28 rotate-12 border-[3px] border-white bg-transparent md:block" />
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="border-[3px] border-white bg-[#F4B400] p-4 text-center shadow-[6px_6px_0_#FFFFFF] sm:p-6 sm:shadow-[12px_12px_0_#FFFFFF] md:p-10"
+          <div
+            className={`${styles.reveal} border-[3px] border-white bg-[#F4B400] p-4 text-center shadow-[6px_6px_0_#FFFFFF] sm:p-6 sm:shadow-[12px_12px_0_#FFFFFF] md:p-10`}
           >
             <h2
               className={`${D} mx-auto mb-3 max-w-4xl text-[2rem] font-black leading-[0.98] tracking-normal text-[#111111] sm:mb-5 sm:text-4xl md:text-6xl`}
@@ -935,7 +743,7 @@ export default function PublicLandingPage() {
               revision, and steady performance improvement. Free to begin.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <motion.div {...pressMotion}>
+              <div>
                 <Link
                   href="/dashboard"
                   prefetch
@@ -944,9 +752,9 @@ export default function PublicLandingPage() {
                   Start Preparing Free
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={3} />
                 </Link>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -974,6 +782,6 @@ export default function PublicLandingPage() {
         </div>
       </footer>
     </div>
-    </MotionConfig>
+    </>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Send, Sparkles } from "lucide-react";
-import { useUser } from "@clerk/nextjs";
+import { useDashboardPerformance } from "@/components/dashboard/DashboardPerformanceProvider";
+import WidgetRetry from "@/components/dashboard/WidgetRetry";
 import AnimatedNumber from "@/components/AnimatedNumber";
 
 function CustomRankIcon(props) {
@@ -61,43 +62,8 @@ function TrendBadge({ value, fallback, positiveIsGood = true }) {
 }
 
 export default function StatsCards() {
-  const { user, isLoaded } = useUser();
-
-  const [stats, setStats] = useState({
-    rank: null,
-    rankTrend: null,
-    streak: null,
-    xp: null,
-    xpToday: null,
-  });
-
-  useEffect(() => {
-    if (!isLoaded || !user) return;
-
-    async function loadStats() {
-      try {
-        const statsResponse = await fetch("/api/dashboard-stats", { cache: "no-store" });
-
-        if (!statsResponse.ok) {
-          throw new Error(`Failed to load stats: ${statsResponse.status}`);
-        }
-
-        const data = await statsResponse.json();
-
-        setStats({
-          rank: data.rank ?? null,
-          rankTrend: data.rankTrend ?? null,
-          streak: data.streak ?? null,
-          xp: data.xp ?? null,
-          xpToday: data.xpToday ?? null,
-        });
-      } catch (error) {
-        console.error("Failed to load dashboard stats:", error);
-      }
-    }
-
-    loadStats();
-  }, [isLoaded, user]);
+  const { data, status, retry } = useDashboardPerformance();
+  const stats = data || { rank: null, streak: null, xp: null };
 
   const [quickQuestion, setQuickQuestion] = useState("");
 
@@ -116,23 +82,6 @@ export default function StatsCards() {
     setQuickQuestion("");
   };
 
-  if (!isLoaded) {
-    return (
-      <div className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-4 dark:border-[#2A2A2A] dark:bg-[#141414]">
-        <div>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div
-              key={index}
-              className="mb-3 h-12 animate-pulse overflow-hidden rounded-xl bg-slate-100 last:mb-0 dark:bg-[#1A1A1A]"
-            >
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 h-40 animate-pulse rounded-xl bg-slate-100 dark:bg-[#1A1A1A]" />
-      </div>
-    );
-  }
-
   return (
     <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border-[1.5px] border-[var(--snb-border)] bg-white p-4 shadow-[var(--snb-shadow)] dark:border-[var(--snb-border)] dark:bg-[#141414] sm:p-5">
       <div>
@@ -145,6 +94,21 @@ export default function StatsCards() {
           </span>
         </div>
 
+        {status === "error" && (
+          <div className="mt-4"><WidgetRetry message="Could not refresh your performance stats." retry={retry} /></div>
+        )}
+        {status === "success" && stats.rankUnavailable && (
+          <div className="mt-4"><WidgetRetry message="Your rank is temporarily unavailable." retry={retry} /></div>
+        )}
+        {status === "success" && !stats.position && (
+          <p className="mt-4 text-sm text-[var(--text-secondary)]">No ranking recorded yet.</p>
+        )}
+        {status === "loading" && !data && (
+          <div role="status" className="mt-4 space-y-3">
+            <span className="sr-only">Loading performance stats</span>
+            {[0, 1, 2].map((index) => <div key={index} className="h-16 rounded-xl bg-[var(--surface-secondary)] motion-safe:animate-pulse" />)}
+          </div>
+        )}
         <div className="mt-4 sm:mt-4 grid grid-cols-2 gap-3 sm:gap-3 lg:grid-cols-1">
           {stats.rank !== null && (
             <div className="rounded-xl border-[1.5px] border-[var(--snb-border)] bg-[var(--surface-secondary)] p-3 shadow-[var(--snb-shadow)] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[var(--snb-shadow-hover)] dark:border-[var(--snb-border)] dark:bg-[#1A1A1A] sm:p-3.5">

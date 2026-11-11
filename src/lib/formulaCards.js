@@ -1,4 +1,3 @@
-import { unstable_cache } from "next/cache";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getBatch2Cards, getBatch2Chapters } from "@/lib/formulaCardsBatch2";
 import { getBatch3Cards, getBatch3Chapters } from "@/lib/formulaCardsBatch3";
@@ -503,17 +502,6 @@ export const FORMULA_CARD_SEED_CARDS = [
   ...getBiologyBatch11Cards(),
 ];
 
-function sortByOrder(items) {
-  return [...items].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
-}
-
-function mergeById(primary = [], fallback = []) {
-  const rows = new Map();
-  fallback.forEach((item) => rows.set(item.id, item));
-  primary.forEach((item) => rows.set(item.id, item));
-  return [...rows.values()];
-}
-
 async function readDbOrFallback(queryFn, fallback) {
   try {
     const { data, error } = await queryFn();
@@ -528,25 +516,21 @@ async function readDbOrFallback(queryFn, fallback) {
   }
 }
 
-export const getCachedFormulaSubjects = unstable_cache(
-  async () =>
-    readDbOrFallback(
-      () =>
-        supabaseAdmin
-          .from("formula_subjects")
-          .select(SUBJECT_SELECT)
-          .order("exam", { ascending: true })
-          .order("sort_order", { ascending: true }),
-      FORMULA_CARD_SUBJECTS
-    ),
-  ["formula-card-subjects"],
-  { revalidate: 3600, tags: ["formula-cards"] }
-);
+// Publication state comes from the database on every request. Cached or
+// bundled content could outlive a withdrawal or a deleted chapter.
+async function readFormulaData(query) {
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
 
 export async function getFormulaSubjectsForExam(exam) {
-  const normalizedExam = String(exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
-  const subjects = await getCachedFormulaSubjects();
-  return sortByOrder(subjects.filter((subject) => subject.exam === normalizedExam));
+  const track = String(exam || "JEE").toUpperCase() === "NEET" ? "NEET" : "JEE";
+  return readFormulaData(supabaseAdmin
+    .from("formula_subjects")
+    .select(SUBJECT_SELECT)
+    .eq("exam", track)
+    .order("sort_order", { ascending: true }));
 }
 
 export async function getFormulaSubjectBySlug(subjectSlug, exam = "JEE") {
@@ -558,57 +542,42 @@ export async function getFormulaChaptersForSubject(subjectSlug, exam = "JEE") {
   const subject = await getFormulaSubjectBySlug(subjectSlug, exam);
   if (!subject) return { subject: null, chapters: [] };
 
-  const fallbackChapters = FORMULA_CARD_CHAPTERS.filter((chapter) => chapter.subject_id === subject.id);
-  const dbChapters = await readDbOrFallback(
-    () =>
-      supabaseAdmin
-        .from("formula_chapters")
-        .select("id, subject_id, title, slug, sort_order, formula_cards(id)")
-        .eq("subject_id", subject.id)
-        .order("sort_order", { ascending: true }),
-    []
-  );
-  const chapters = mergeById(
-    dbChapters,
-    fallbackChapters.map((chapter) => ({
-      ...chapter,
-      formula_cards: FORMULA_CARD_SEED_CARDS.filter((card) => card.chapter_id === chapter.id && card.is_active).map((card) => ({
-        id: card.id,
-      })),
-    }))
-  );
+  const chapters = await readFormulaData(supabaseAdmin
+    .from("formula_chapters")
+    .select("id, subject_id, title, slug, sort_order, formula_cards(id)")
+    .eq("subject_id", subject.id)
+    .eq("formula_cards.is_active", true)
+    .order("sort_order", { ascending: true }));
 
   return {
     subject,
-    chapters: sortByOrder(chapters).map((chapter) => ({
+    chapters: chapters.map(({ formula_cards, ...chapter }) => ({
       ...chapter,
-      card_count: Array.isArray(chapter.formula_cards) ? chapter.formula_cards.length : chapter.card_count || 0,
+      card_count: formula_cards?.length || 0,
     })),
   };
 }
 
 export async function getFormulaChapterDeck(subjectSlug, chapterSlug, exam = "JEE") {
-  const { subject, chapters } = await getFormulaChaptersForSubject(subjectSlug, exam);
-  const chapter = chapters.find((item) => item.slug === chapterSlug) || null;
-  if (!subject || !chapter) return { subject, chapter: null, cards: [] };
+  const subject = await getFormulaSubjectBySlug(subjectSlug, exam);
+  if (!subject) return { subject: null, chapter: null, cards: [] };
 
-  const fallbackCards = FORMULA_CARD_SEED_CARDS.filter((card) => card.chapter_id === chapter.id && card.is_active);
-  const dbCards = await readDbOrFallback(
-    () =>
-      supabaseAdmin
-        .from("formula_cards")
-        .select(CARD_SELECT)
-        .eq("chapter_id", chapter.id)
-        .eq("is_active", true)
-        .order("sort_order", { ascending: true }),
-    []
-  );
+  const [chapter] = await readFormulaData(supabaseAdmin
+    .from("formula_chapters")
+    .select("id, subject_id, title, slug, sort_order")
+    .eq("subject_id", subject.id)
+    .eq("slug", chapterSlug)
+    .limit(1));
+  if (!chapter) return { subject, chapter: null, cards: [] };
 
-  return {
-    subject,
-    chapter,
-    cards: sortByOrder(mergeById(dbCards, fallbackCards)),
-  };
+  const cards = await readFormulaData(supabaseAdmin
+    .from("formula_cards")
+    .select(CARD_SELECT)
+    .eq("chapter_id", chapter.id)
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true }));
+
+  return { subject, chapter, cards };
 }
 
 export async function getOriginalFormulaBook(subject, exam) {

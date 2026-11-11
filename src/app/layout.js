@@ -1,7 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
 
-import "@awesome.me/webawesome/dist/styles/themes/default.css";
-
 import {
   DASHBOARD_ROUTE,
   ONBOARDING_ROUTE,

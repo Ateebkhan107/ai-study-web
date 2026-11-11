@@ -281,8 +281,27 @@ export async function getProfileAccountType(userId) {
   return profile.accountType;
 }
 
+function getSubscriptionAccess(subscriptions) {
+  const active = subscriptions.filter((subscription) => isSubscriptionActive(subscription));
+  const isPro = active.length > 0;
+  const isAiMode = active.some((subscription) => subscription.plan === "ai_mode");
+  return { plan: isAiMode ? "AI_MODE" : isPro ? "PRO" : "FREE", isAiMode, isPro, subscription: active[0] || null };
+}
+
+// This only describes navigation and launcher UI. Protected features use the full access context.
+export async function getUserNavigationAccess(userId) {
+  if (!userId) return getSubscriptionAccess([]);
+  const { examTrack } = await getProfileAccessProfile(userId);
+  return getSubscriptionAccess(await getActiveSubscriptionsForUser(userId, examTrack));
+}
+
 export async function getUserAccessContext({ userId, examTrack, clerkMetadata } = {}) {
-  const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks, ziFreeUsage] = await Promise.all([
+  const profileAccessPromise = getProfileAccessProfile(userId);
+  const activeExamTrackPromise = examTrack
+    ? Promise.resolve(normalizeExamTrack(examTrack))
+    : profileAccessPromise.then((profile) => profile.examTrack);
+  const subscriptionsPromise = activeExamTrackPromise.then((track) => getActiveSubscriptionsForUser(userId, track));
+  const [memberships, clerkAccessMetadata, profileAccess, customTestUsage, proTracks, ziFreeUsage, activeExamTrack, subscriptions] = await Promise.all([
     getActiveInstituteMemberships(userId),
     clerkMetadata
       ? Promise.resolve({
@@ -292,19 +311,14 @@ export async function getUserAccessContext({ userId, examTrack, clerkMetadata } 
         isPlatformAdmin: clerkMetadata.role === "admin",
       })
       : getClerkAccessMetadata(userId),
-    getProfileAccessProfile(userId),
+    profileAccessPromise,
     getPersonalCustomTestUsage(userId),
     getActiveSubscriptionTracks(userId),
     getZiFreePromptsUsage(userId),
+    activeExamTrackPromise,
+    subscriptionsPromise,
   ]);
 
-  const activeExamTrack = normalizeExamTrack(examTrack || profileAccess.examTrack);
-  const subscriptions = await getActiveSubscriptionsForUser(userId, activeExamTrack);
-  const activeSubs = subscriptions.filter(s => isSubscriptionActive(s));
-  const aiModeSub = activeSubs.find(s => s.plan === "ai_mode");
-  const isPro = activeSubs.length > 0;
-  const isAiMode = !!aiModeSub;
-  const subscription = activeSubs[0] || null;
   const hasCoachingAdminMembership = memberships.some((membership) => membership.role === "COACHING_ADMIN");
   const accountType = clerkAccessMetadata.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
     profileAccess.accountType === ACCOUNT_TYPES.INSTITUTE_ADMIN ||
@@ -314,12 +328,9 @@ export async function getUserAccessContext({ userId, examTrack, clerkMetadata } 
 
   return {
     userId,
-    plan: isAiMode ? "AI_MODE" : isPro ? "PRO" : "FREE",
-    isAiMode,
+    ...getSubscriptionAccess(subscriptions),
     examTrack: activeExamTrack,
     accountType,
-    isPro,
-    subscription,
     proTracks,
     isPlatformAdmin: clerkAccessMetadata.isPlatformAdmin,
     instituteMemberships: memberships,

@@ -94,7 +94,7 @@ export async function getAuthContext() {
 
     if (error) {
       console.error("Supabase onboarding profile lookup failed:", error);
-      onboardingComplete = true;
+      throw new Error("Unable to verify onboarding status", { cause: error });
     } else if (profile) {
       onboardingComplete = true;
       user.publicMetadata = {

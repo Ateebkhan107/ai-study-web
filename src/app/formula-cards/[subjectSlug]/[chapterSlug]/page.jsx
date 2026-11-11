@@ -82,7 +82,13 @@ export default async function FormulaDeckPage({ params, searchParams }) {
           </div>
         </header>
 
-        <FormulaCardDeck cards={cards} chapterId={chapter.id} />
+        <FormulaCardDeck
+          key={chapter.id}
+          cards={cards.map(({ id, importance }) => ({ id, importance }))}
+          initialCards={cards.slice(0, 2)}
+          chapterId={chapter.id}
+          deckUrl={`/api/formula-cards/${encodeURIComponent(subjectSlug)}/${encodeURIComponent(chapterSlug)}?exam=${exam}`}
+        />
       </div>
     </main>
   );

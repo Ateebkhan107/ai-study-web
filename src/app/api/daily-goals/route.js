@@ -12,14 +12,12 @@ export async function GET() {
     }
 
     // Retry durable delivery; interruption cannot permanently consume a reward.
-    await reconcileGoalRewards(supabaseAdmin, userId);
     const today = new Date().toISOString().split("T")[0];
 
-    const { data: profile, error: profileError } = await supabaseAdmin
-      .from("user_profiles")
-      .select("exam")
-      .eq("clerk_user_id", userId)
-      .maybeSingle();
+    const [{ data: profile, error: profileError }] = await Promise.all([
+      supabaseAdmin.from("user_profiles").select("exam").eq("clerk_user_id", userId).maybeSingle(),
+      reconcileGoalRewards(supabaseAdmin, userId),
+    ]);
 
     if (profileError) {
       throw profileError;
@@ -57,8 +55,9 @@ export async function GET() {
       throw progressError;
     }
 
+    const progressByGoal = new Map((progressData || []).map((item) => [item.goal_id, item]));
     const goals = goalsList.map((goal) => {
-      const progress = progressData?.find((item) => item.goal_id === goal.id);
+      const progress = progressByGoal.get(goal.id);
 
       return {
         ...goal,

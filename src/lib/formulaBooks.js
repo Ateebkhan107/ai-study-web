@@ -21,7 +21,7 @@ export const getCachedFormulaBookSummaries = unstable_cache(
 
     if (error) {
       console.error("[FORMULA_BOOKS_CACHE_ERROR]", error);
-      return [];
+      throw error;
     }
 
     return data || [];

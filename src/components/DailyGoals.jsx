@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { usePathname } from "next/navigation";
+import { useDashboardWidget } from "@/components/dashboard/useDashboardWidget";
+import WidgetRetry from "@/components/dashboard/WidgetRetry";
 import { CheckCircle2, Zap, MessageCircle, FileText, BookOpen, Layers, Target } from "lucide-react";
 import AnimatedNumber from "@/components/AnimatedNumber";
 
@@ -20,45 +20,9 @@ function getIconForGoal(title) {
 }
 
 export default function DailyGoals({ compact = false }) {
-  const { user } = useUser();
-  const pathname = usePathname();
-
-  const [goals, setGoals] = useState([]);
-
-  // =============================
-  // LOAD DAILY GOALS
-  // =============================
-
-  useEffect(() => {
-    if (!user?.id) return;
-
-    async function loadGoals() {
-      try {
-        const response = await fetch("/api/daily-goals", {
-          cache: "no-store",
-        });
-
-        if (!response.ok) {
-          return;
-        }
-
-        const data = await response.json();
-        setGoals(data.goals || []);
-      } catch (error) {
-        return;
-      }
-    }
-
-    loadGoals();
-
-    // Listen for tab focus to silently refresh goals
-    const handleFocus = () => loadGoals();
-    window.addEventListener("focus", handleFocus);
-    
-    return () => {
-      window.removeEventListener("focus", handleFocus);
-    };
-  }, [user?.id, pathname]);
+  const { user, isLoaded } = useUser();
+  const { data, status, retry } = useDashboardWidget("/api/daily-goals", user?.id, { refreshOnFocus: true });
+  const goals = data?.goals || [];
 
   const completed = goals.filter((g) => g.completed).length;
   const nextGoal = goals.find((goal) => !goal.completed);
@@ -111,13 +75,21 @@ export default function DailyGoals({ compact = false }) {
       </div>
 
       <div className="relative z-10 mt-6 sm:mt-8">
-        {goals.length === 0 ? (
+        {status === "error" && <WidgetRetry message="Could not refresh today's goals." retry={retry} />}
+        {status === "loading" && !data && (!isLoaded || user) && (
+          <div role="status" className="space-y-3">
+            <span className="sr-only">Loading daily goals</span>
+            {[0, 1].map((index) => <div key={index} className="h-16 rounded-xl bg-[var(--surface-secondary)] motion-safe:animate-pulse" />)}
+          </div>
+        )}
+        {((status === "success" && goals.length === 0) || (isLoaded && !user)) && (
           <div className="rounded-xl border-[1.5px] border-[var(--snb-border)] bg-slate-50 p-3.5 text-center dark:border-[var(--snb-border)] dark:bg-[#1A1A1A]">
             <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
               {user ? "No active goals for today." : "Sign in to set daily missions and track your preparation streak."}
             </p>
           </div>
-        ) : (
+        )}
+        {goals.length > 0 && (
           <div className="flex flex-col gap-0 pb-2">
             {goals.map((goal, index) => {
               const isComplete = goal.completed;

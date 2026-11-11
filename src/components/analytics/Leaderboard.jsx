@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Trophy, Crown } from "lucide-react";
 import { getLevelFromXP } from "@/utils/levelEngine";
 import Link from "next/link";
 import AnimatedNumber from "@/components/AnimatedNumber";
+import { useDashboardPerformance } from "@/components/dashboard/DashboardPerformanceProvider";
+import { useDashboardWidget } from "@/components/dashboard/useDashboardWidget";
+import WidgetRetry from "@/components/dashboard/WidgetRetry";
 
 function uniqueLeaderboardUsers(users = []) {
   const usersById = new Map();
@@ -22,47 +24,23 @@ function uniqueLeaderboardUsers(users = []) {
 }
 
 export default function Leaderboard({ compact = false }) {
-  const { user: currentUser } = useUser();
+  const { user: currentUser, isLoaded } = useUser();
   const currentUserId = currentUser?.id;
-  const [leaderboard, setLeaderboard] = useState([]);
-
-  // =============================
-  // LOAD GLOBAL LEADERBOARD
-  // =============================
-
-  useEffect(() => {
-    if (!currentUserId) return;
-
-    const controller = new AbortController();
-
-    async function loadLeaderboard() {
-      try {
-        const response = await fetch("/api/pyq/leaderboard", {
-          cache: "no-store",
-          signal: controller.signal,
-        });
-        if (!response.ok) {
-          throw new Error("Failed to load leaderboard");
-        }
-
-        const allUsers = uniqueLeaderboardUsers(await response.json());
-        if (!controller.signal.aborted) {
-          setLeaderboard(allUsers);
-        }
-      } catch {
-        // Keep the last successful result if the request fails.
-      }
-    }
-
-    loadLeaderboard();
-    return () => controller.abort();
-  }, [currentUserId]);
-
+  const performance = useDashboardPerformance();
+  const leaderboardUrl = performance ? "/api/pyq/leaderboard?view=top" : "/api/pyq/leaderboard";
+  const { data, status, retry, rankUnavailable } = useDashboardWidget(leaderboardUrl, currentUserId);
+  const leaderboard = uniqueLeaderboardUsers((performance ? data?.rows : data) || []);
   const limit = compact ? 5 : 10;
   const users = leaderboard.filter((user) => !user.isCurrentUserAppended).slice(0, limit);
+  const ownLeaderboardRow = leaderboard.find((row) => row.user_id === currentUserId);
+  const position = performance?.data?.position;
   const currentUserData = users.some((user) => user.user_id === currentUserId)
     ? null
-    : leaderboard.find((user) => user.user_id === currentUserId);
+    : ownLeaderboardRow || (position && position.user_id === currentUserId ? {
+      ...position,
+      name: data?.displayName || position.name,
+      rank: performance.data.rank,
+    } : null);
 
   return (
     <div className={`relative bg-white dark:bg-[#141414] rounded-xl border border-slate-200 dark:border-[#2A2A2A] transition-colors duration-200 ${
@@ -107,7 +85,16 @@ export default function Leaderboard({ compact = false }) {
 
       {/* ── LIST ── */}
       <div className="relative z-10">
-        {users.length === 0 && (
+        {status === "error" && <WidgetRetry message="Could not refresh the leaderboard." retry={retry} />}
+        {rankUnavailable && <WidgetRetry message="Your rank is temporarily unavailable." retry={retry} />}
+        {status === "loading" && !data && (!isLoaded || currentUserId) && (
+          <div role="status" className="space-y-2.5">
+            <span className="sr-only">Loading leaderboard</span>
+            {[0, 1, 2].map((index) => <div key={index} className="h-12 rounded-xl bg-[var(--surface-secondary)] motion-safe:animate-pulse" />)}
+          </div>
+        )}
+        {isLoaded && !currentUserId && <p className="text-sm text-[var(--text-secondary)]">Sign in to see your leaderboard position.</p>}
+        {status === "success" && users.length === 0 && (
           <div className="text-center py-10 rounded-xl border border-dashed border-slate-200 dark:border-[var(--border-subtle)]">
             <Trophy className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
@@ -239,7 +226,7 @@ function StandardRow({ user, isCurrentUser, compact, isDocked, transparent }) {
           ? "border-black/20 bg-black/10 text-black" 
           : "border-slate-200 dark:border-[#2A2A2A] bg-slate-50 dark:bg-[#1A1A1A] text-slate-400 dark:text-slate-500"
       } ${compact ? "w-6 h-6" : "w-7 h-7"}`}>
-        <span className="font-bold text-[10px] sm:text-xs">{user.rank}</span>
+        <span className="font-bold text-[10px] sm:text-xs">{user.rank ?? "—"}</span>
       </div>
     );
   }

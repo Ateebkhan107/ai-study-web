@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Atom, FlaskConical, Calculator, Dna, BookOpen, ArrowRight } from "lucide-react";
 import { getCachedFormulaBookSummaries } from "@/lib/formulaBooks";
 import SubjectVisual from "@/components/SubjectVisual";
+import WidgetRetry from "@/components/dashboard/WidgetRetry";
 
 const SUBJECT_META = {
   Chemistry: { 
@@ -41,7 +42,12 @@ function getMeta(subject) {
 
 export default async function DashboardSection({ config, compact = false }) {
   const isNeet = config?.badge?.toLowerCase().includes("neet");
-  const formulaBooks = await getCachedFormulaBookSummaries();
+  let formulaBooks;
+  try {
+    formulaBooks = await getCachedFormulaBookSummaries();
+  } catch {
+    return <WidgetRetry message="Could not load Quick Study resources." />;
+  }
 
   const filteredFormulas = formulaBooks.filter((book) =>
     isNeet ? book.stream === "NEET" : book.stream === "JEE"

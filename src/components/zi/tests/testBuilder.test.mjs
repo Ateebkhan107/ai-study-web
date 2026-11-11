@@ -41,7 +41,8 @@ const hooks = registerHooks({
   },
 });
 const { ZiTestBuilderForm, default: ZiTestBuilder } = await import("../ZiTestBuilder.jsx");
-const { default: ZiLauncher } = await import("../ZiLauncher.jsx");
+const { default: ZiLauncher, isZiTrialLocked } = await import("../ZiLauncher.jsx");
+const { default: ZiPanel } = await import("../ZiPanel.jsx");
 const { default: ZiMessages } = await import("../ZiMessages.jsx");
 const { WorkspaceMessage } = await import("../ZiWorkspace.jsx");
 const { rememberBuilderAction, readBuilderToken, clearBuilderToken } = await import("../testBuilderSession.js");
@@ -95,13 +96,21 @@ test("both surfaces share tokens while separating students", () => {
 test.after(() => hooks.deregister());
 
 test("accounting outages and held trials do not display a false exhaustion upsell", () => {
-  globalThis.__ziTestPathname="/dashboard";
+  globalThis.__ziTestPathname = "/dashboard";
+  const panel = (usage) => render(ZiPanel, {
+    plan: "FREE", isOpen: true, messages: [], input: "",
+    isLocked: isZiTrialLocked("FREE", usage, usage.remaining),
+  });
   try {
-  for (const usage of [{ used: 0, pending: 0, remaining: 0, available: false }, { used: 2, pending: 1, remaining: 0, available: true }]) {
-    const html = render(ZiLauncher, { plan: "FREE", ziFreeUsage: usage });
-    assert.doesNotMatch(html, /used all 3 free trial prompts/);
+    for (const usage of [{ used: 0, pending: 0, remaining: 0, available: false }, { used: 2, pending: 1, remaining: 0, available: true }]) {
+      assert.doesNotMatch(panel(usage), /used all 3 free trial prompts/);
+    }
+    const exhausted = { used: 3, pending: 0, remaining: 0, available: true };
+    assert.match(panel(exhausted), /used all 3 free trial prompts/);
+    const launcher = render(ZiLauncher, { plan: "FREE", ziFreeUsage: exhausted });
+    assert.match(launcher, /Open Zi study companion/);
+    assert.doesNotMatch(launcher, /used all 3 free trial prompts/);
+  } finally {
+    delete globalThis.__ziTestPathname;
   }
-  const exhausted = render(ZiLauncher, { plan: "FREE", ziFreeUsage: { used: 3, pending: 0, remaining: 0, available: true } });
-  assert.match(exhausted, /used all 3 free trial prompts/);
-  } finally { delete globalThis.__ziTestPathname; }
 });

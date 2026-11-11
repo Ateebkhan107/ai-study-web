@@ -1,11 +1,6 @@
 import "server-only";
 
 import { FEATURES, canUseFeature, getProfileAccessProfile, getUserAccessContext, normalizeExamTrack } from "@/lib/accessControl";
-import {
-  FORMULA_CARD_CHAPTERS,
-  FORMULA_CARD_SEED_CARDS,
-  FORMULA_CARD_SUBJECTS,
-} from "@/lib/formulaCards";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 import { normalizeReference, PYQ_REFERENCE_FIELDS } from "./testGenerator/retrieval.server.js";
@@ -320,14 +315,6 @@ async function fetchDbFormulaCardLocation(chapterId) {
   }
 }
 
-async function findFormulaCardLocation(card) {
-  const chapter = FORMULA_CARD_CHAPTERS.find((item) => item.id === card?.chapter_id) || null;
-  const subject = FORMULA_CARD_SUBJECTS.find((item) => item.id === chapter?.subject_id) || null;
-  if (chapter && subject) return { chapter, subject };
-
-  return fetchDbFormulaCardLocation(card?.chapter_id);
-}
-
 function formatRevisionCardContext(card, chapter, subject) {
   const lines = [
     "CURRENT CONTEXT:",
@@ -368,12 +355,11 @@ function formatRevisionCardContext(card, chapter, subject) {
 }
 
 async function fetchRevisionCardContext({ userId, id }) {
-  const card = (await fetchDbFormulaCard(id)) ||
-    FORMULA_CARD_SEED_CARDS.find((item) => item.id === id && item.is_active);
+  const card = await fetchDbFormulaCard(id);
 
   if (!card) return "";
 
-  const { chapter, subject } = await findFormulaCardLocation(card);
+  const { chapter, subject } = await fetchDbFormulaCardLocation(card.chapter_id);
   if (!chapter || !subject) return "";
 
   const canAccess = await userCanAccessRevisionCard(userId, subject);
