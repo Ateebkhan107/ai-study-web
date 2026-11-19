@@ -89,7 +89,6 @@ export async function savePYQAttempts(attempts, { signal } = {}) {
 
   if (!res.ok) {
     const error = await res.json().catch(() => ({}));
-    console.log("SAVE ATTEMPTS ERROR:", error);
     throw new Error(error.error || "Failed to save attempts");
   }
 

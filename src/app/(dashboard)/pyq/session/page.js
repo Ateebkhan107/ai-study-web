@@ -562,7 +562,7 @@ export default function PYQSessionPage() {
     try {
       await submitDeck(submissionRef.current);
     } catch (error) {
-      console.error("Failed to submit PYQ session:", error);
+      console.warn("Failed to submit PYQ session:", error);
       setSubmitError("We couldn’t finish submitting your test. Your answers are still here. Please try again.");
       submissionInProgress.current = false;
       setFinishing(false);

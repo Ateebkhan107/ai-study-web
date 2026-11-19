@@ -40,11 +40,34 @@ test("PYQ requires stable bounded request keys and nonempty bounded batches",asy
   for(const extra of [{request_key:null},{request_key:"short"},{attempts:[]},{attempts:Array(201).fill({question_id:"q"})}])assert.equal((await POST(request(extra))).status,400);
   assert.equal(calls.length,0);
 });
-test("disabled or unavailable integrity contract fails closed with no fallback",async()=>{
-  delete process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED;
-  assert.equal((await POST(request())).status,503);assert.deepEqual(await initializeXP("owner"),{status:"pending_migration"});assert.equal(calls.length,0);
-  process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED="true";failure={code:"XX000",message:"Private definition SECRET"};
+test("unavailable full integrity contract fails closed with no fallback",async()=>{
+  failure={code:"XX000",message:"Private definition SECRET"};
   const response=await POST(request());assert.equal(response.status,503);assert.equal(JSON.stringify(await response.json()).includes("SECRET"),false);
+  assert.deepEqual(calls.map(call=>call.name),["prepzii_commit_pyq"]);
+});
+test("PYQ submissions use the dedicated RPC while the global contract is disabled", async () => {
+  delete process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED;
+  const response = await POST(request({ user_id: "victim" }));
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("cache-control"), "private, no-store");
+  assert.deepEqual(calls, [{
+    name: "prepzii_submit_pyq",
+    args: {
+      p_user: "owner",
+      p_key: "synthetic-stable-key",
+      p_answers: [{ question_id: "synthetic-question", selected_option: "A" }],
+    },
+  }]);
+  assert.deepEqual(await initializeXP("owner"), { status: "pending_migration" });
+  assert.equal(calls.length, 1);
+});
+test("missing PYQ migration returns a retryable error without another write path", async () => {
+  delete process.env.PREPZII_INTEGRITY_CONTRACT_ENABLED;
+  failure = { code: "PGRST202", message: "Private definition SECRET" };
+  const response = await POST(request());
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "Activity persistence unavailable" });
+  assert.deepEqual(calls.map(call => call.name), ["prepzii_submit_pyq"]);
 });
 test("PYQ conflicting replay is a redacted 409",async()=>{
   failure={code:"PZ409",message:"Private definition SECRET"};const response=await POST(request());assert.equal(response.status,409);assert.equal(JSON.stringify(await response.json()).includes("SECRET"),false);
