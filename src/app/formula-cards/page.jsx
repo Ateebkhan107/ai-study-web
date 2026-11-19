@@ -2,7 +2,7 @@ import Link from "next/link";
 import { publicMetadata } from "@/lib/seo.mjs";
 import { auth } from "@clerk/nextjs/server";
 import { Atom, Calculator, Dna, FlaskConical, Layers3 } from "lucide-react";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getProfileAccessProfile } from "@/lib/accessControl";
 import { getFormulaSubjectsForExam } from "@/lib/formulaCards";
 
 export const dynamic = "force-dynamic";
@@ -19,19 +19,6 @@ const SUBJECT_ICONS = {
   Mathematics: Calculator,
   Biology: Dna,
 };
-
-async function getPreferredExam() {
-  const { userId } = await auth();
-  if (!userId) return null;
-
-  const { data } = await supabaseAdmin
-    .from("user_profiles")
-    .select("exam")
-    .eq("clerk_user_id", userId)
-    .maybeSingle();
-
-  return data?.exam ? (String(data.exam).toUpperCase() === "NEET" ? "NEET" : "JEE") : null;
-}
 
 function SubjectGroup({ exam, subjects, preferred }) {
   return (
@@ -78,17 +65,13 @@ function SubjectGroup({ exam, subjects, preferred }) {
 }
 
 export default async function FormulaCardsPage() {
-  const preferredExam = await getPreferredExam();
-  const [jeeSubjects, neetSubjects] = await Promise.all([
-    getFormulaSubjectsForExam("JEE"),
-    getFormulaSubjectsForExam("NEET"),
-  ]);
-  const orderedGroups = preferredExam
-    ? [[preferredExam, preferredExam === "NEET" ? neetSubjects : jeeSubjects]]
-    : [
-        ["JEE", jeeSubjects],
-        ["NEET", neetSubjects],
-      ];
+  const { userId } = await auth();
+  const preferredExam = userId ? (await getProfileAccessProfile(userId)).examTrack : null;
+  const exams = preferredExam ? [preferredExam] : ["JEE", "NEET"];
+  const orderedGroups = await Promise.all(exams.map(async (exam) => [
+    exam,
+    await getFormulaSubjectsForExam(exam),
+  ]));
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-4 py-6 text-slate-950 dark:text-white sm:px-6 lg:px-8">

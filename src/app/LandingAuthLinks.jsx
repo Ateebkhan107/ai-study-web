@@ -14,6 +14,7 @@ export default function LandingAuthLinks() {
       {!isSignedIn && isLoaded && (
         <Link
           href="/sign-in"
+          prefetch={false}
           className={`${bodyFont} hidden border-2 border-transparent px-3 py-1.5 text-sm font-black text-[#111111] transition-all duration-150 hover:border-[#111111] hover:bg-white hover:shadow-[3px_3px_0_#111111] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none sm:inline-flex`}
         >
           Log in

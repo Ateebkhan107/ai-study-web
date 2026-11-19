@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Logo({ size, showText = true, forceDark = false, forceLight = false, className = "" }) {
+export default function Logo({ size, showText = true, forceDark = false, forceLight = false, loading, className = "" }) {
   const containerStyle = size ? { width: size, height: size } : {};
   const containerClass = size ? "" : "w-[36px] h-[36px] md:w-[46px] md:h-[46px]";
 
@@ -18,7 +18,7 @@ export default function Logo({ size, showText = true, forceDark = false, forceLi
             fill
             sizes={sizesAttr}
             className="object-contain"
-            loading={forceLight ? "eager" : "lazy"}
+            loading={loading ?? (forceLight ? "eager" : "lazy")}
           />
         </div>
       )}
@@ -32,7 +32,7 @@ export default function Logo({ size, showText = true, forceDark = false, forceLi
             fill
             sizes={sizesAttr}
             className="object-contain"
-            loading={forceDark ? "eager" : "lazy"}
+            loading={loading ?? (forceDark ? "eager" : "lazy")}
           />
         </div>
       )}

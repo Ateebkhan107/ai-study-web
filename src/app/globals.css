@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Keep mobile, archived imports, and local tooling out of the web utility CSS. */
+@import "tailwindcss" source("..");
 
 @variant dark (&:where(.dark, .dark *));
 

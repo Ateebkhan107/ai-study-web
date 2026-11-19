@@ -7,6 +7,7 @@ export default function OnboardingForm({
   action,
   accountTypes,
   exams,
+  defaultExam,
   yearOptions,
   defaultYear,
   defaultFullName,
@@ -154,7 +155,7 @@ export default function OnboardingForm({
                 type="radio"
                 name="targetExam"
                 value={exam}
-                defaultChecked={exam === "JEE"}
+                defaultChecked={exam === defaultExam}
                 className="relative z-10 h-4 w-4"
               />
               <span className="relative z-10">{exam}</span>

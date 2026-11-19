@@ -45,7 +45,6 @@ const CARD_SELECT = `
   table_data,
   diagram_data,
   diagram_svg,
-  diagram_image,
   recall_data,
   importance,
   source_page,
@@ -570,12 +569,21 @@ export async function getFormulaChapterDeck(subjectSlug, chapterSlug, exam = "JE
     .limit(1));
   if (!chapter) return { subject, chapter: null, cards: [] };
 
-  const cards = await readFormulaData(supabaseAdmin
+  const selectCards = (columns) => supabaseAdmin
     .from("formula_cards")
-    .select(CARD_SELECT)
+    .select(columns)
     .eq("chapter_id", chapter.id)
     .eq("is_active", true)
-    .order("sort_order", { ascending: true }));
+    .order("sort_order", { ascending: true });
+
+  let cards;
+  try {
+    cards = await readFormulaData(selectCards(CARD_SELECT + ", diagram_image"));
+  } catch (error) {
+    // Older catalogs store diagrams in diagram_data and have no image column.
+    if (error?.code !== "42703" || !/\bdiagram_image\b/.test(error.message || "")) throw error;
+    cards = await readFormulaData(selectCards(CARD_SELECT));
+  }
 
   return { subject, chapter, cards };
 }

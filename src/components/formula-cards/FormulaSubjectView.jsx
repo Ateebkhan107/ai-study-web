@@ -412,6 +412,7 @@ export default function FormulaSubjectView({
                         <Link
                           key={chapter.id}
                           href={`/formula-cards/${subject.slug}/${chapter.slug}?exam=${subject.exam}`}
+                          prefetch={false}
                           className={`prepzii-interactive group flex flex-col justify-between rounded-xl border border-l-[3.5px] border-slate-200/90 bg-white p-4 transition-all duration-150 hover:border-amber-400/90 hover:bg-amber-50/20 hover:shadow-md dark:border-stone-800/90 dark:bg-[#131313] dark:hover:border-amber-500/50 dark:hover:bg-[#171717] ${
                             accentClass || ""
                           }`}

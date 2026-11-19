@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getPYQAnalytics, getPYQOverview } from "@/lib/pyq";
 
 import { useUser } from "@clerk/nextjs";
+import { usePracticeExamTrack } from "@/components/TrackWrapper";
 import { Atom, Dna, FlaskConical, Sigma } from "lucide-react";
 import PYQAnalytics from "@/components/pyq/PYQAnalytics";
 import { getBookmarks, removeBookmark } from "@/utils/bookmarks";
@@ -90,21 +91,6 @@ const PRACTICE_MODE_SUMMARY_LABEL = {
 const PRO_ONLY_PRACTICE_MODES = new Set(["chapter", "mistakes"]);
 
 const MASTER_SAVED = []; // Unused, fetching dynamically now
-
-function getCookieTrack() {
-  if (typeof window !== "undefined") {
-    const params = new URLSearchParams(window.location.search);
-    const queryTrack = params.get("track");
-    if (queryTrack) {
-      const normalized = queryTrack.toUpperCase() === "NEET" ? "neet" : "jee";
-      document.cookie = `prepzii_track=${normalized}; path=/; max-age=31536000; SameSite=Lax;`;
-      return normalized;
-    }
-  }
-  if (typeof document === "undefined") return "jee";
-  const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
-  return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
-}
 
 const SUBJECT_BAR_COLORS = {
   Physics:     "#4F6F86",
@@ -879,9 +865,9 @@ export default function PYQPage() {
   const [activeTab, setActiveTab] = useState("practice");
   const { user } = useUser();
   const router = useRouter();
-  const [track, setTrack] = useState(getCookieTrack);
-  const [access, setAccess] = useState(null);
-  const [, setAccessLoading] = useState(true);
+  const track = usePracticeExamTrack().toLowerCase();
+  const [accessData, setAccess] = useState(null);
+  const access = accessData?.examTrack?.toLowerCase() === track ? accessData : null;
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [authGateConfig, setAuthGateConfig] = useState({
     targetUrl: "/pyq",
@@ -902,41 +888,26 @@ export default function PYQPage() {
   };
 
   useEffect(() => {
-    async function syncTrack() {
-      await Promise.resolve();
-      const cookieTrack = getCookieTrack();
-      if (cookieTrack && cookieTrack !== track) {
-        setTrack(cookieTrack);
-      }
-    }
-    syncTrack();
-  }, [track]);
+    if (!user) return;
+    const controller = new AbortController();
 
-  useEffect(() => {
-    let cancelled = false;
     async function loadAccess() {
-      if (!user) return;
-
-      const response = await fetch("/api/access", {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        if (!cancelled) setAccessLoading(false);
-        return;
-      }
-
-      const data = await response.json();
-      if (!cancelled) {
-        setAccess(data);
-        setTrack(data?.examTrack === "NEET" ? "neet" : "jee");
-        setAccessLoading(false);
+      try {
+        const response = await fetch("/api/access", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!controller.signal.aborted) setAccess(data);
+      } catch (error) {
+        if (error.name !== "AbortError") console.error("Could not load study access", error);
       }
     }
 
     loadAccess();
-    return () => { cancelled = true; };
-  }, [user]);
+    return () => controller.abort();
+  }, [user, track]);
 
   const isPro = Boolean(access?.isPro);
   const filteredSubjects = MASTER_SUBJECTS.filter((s) => s.tracks.includes(track));
@@ -1150,6 +1121,7 @@ export default function PYQPage() {
         <section className="animate-slideUp" style={{ animationDelay: "100ms" }}>
           {activeTab === "practice"  && (
             <PracticeTab
+              key={track}
               subjects={filteredSubjects}
               track={track}
               isPro={isPro}

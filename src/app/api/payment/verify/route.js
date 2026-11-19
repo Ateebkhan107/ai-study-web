@@ -1,127 +1,47 @@
-import { NextResponse } from "next/server";
-import crypto from "crypto";
 import { auth } from "@clerk/nextjs/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
-import { getRazorpayOrder, getRazorpayPayment } from "@/lib/razorpay";
+import {
+  getCheckoutOrder,
+  isRazorpayOrderId,
+  isRazorpayPaymentId,
+  redeemRazorpayPayment,
+  verifyRazorpaySignature,
+} from "@/lib/razorpayPayments.server";
 
-const PLAN_DURATION = { monthly: 30, quarterly: 90, yearly: 365, ai_mode: 30 };
-const PLAN_AMOUNT = { monthly: 49, quarterly: 129, yearly: 399, ai_mode: 2000 };
-const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
-
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
     const { userId } = await auth();
+    if (!userId) return Response.json({ success: false, message: "Unauthorized" }, { status: 401 });
 
-    if (!userId) {
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+    const body = await request.json().catch(() => null);
+    const { razorpay_order_id: orderId, razorpay_payment_id: paymentId, razorpay_signature: signature } = body || {};
+    if (!isRazorpayOrderId(orderId) || !isRazorpayPaymentId(paymentId)) {
+      return Response.json({ success: false, message: "Invalid order" }, { status: 400 });
     }
 
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      return NextResponse.json({ success: false, message: "Invalid order" }, { status: 400 });
+    const checkout = await getCheckoutOrder(orderId);
+    if (!checkout || checkout.clerk_user_id !== userId) {
+      return Response.json({ success: false, message: "Checkout order not found. Contact support for older payments." }, { status: 404 });
+    }
+    if (!verifyRazorpaySignature(process.env.RAZORPAY_KEY_SECRET, `${checkout.provider_order_id}|${paymentId}`, signature)) {
+      return Response.json({ success: false, message: "Invalid payment signature" }, { status: 400 });
     }
 
-    const expectedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "")
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-      .digest("hex");
-    const suppliedSignature = String(razorpay_signature);
-
-    if (expectedSignature.length !== suppliedSignature.length ||
-      !crypto.timingSafeEqual(Buffer.from(expectedSignature), Buffer.from(suppliedSignature))) {
-      return NextResponse.json({ success: false, message: "Invalid payment signature" }, { status: 400 });
+    const result = await redeemRazorpayPayment(checkout, paymentId);
+    if (result === "applied" || result === "already_applied") {
+      return Response.json({ success: true, message: "Subscription activated successfully" });
     }
-
-    const [order, payment] = await Promise.all([
-      getRazorpayOrder(razorpay_order_id),
-      getRazorpayPayment(razorpay_payment_id),
-    ]);
-    const plan = String(order.notes?.plan || "");
-    const orderUserId = String(order.notes?.user_id || "");
-    const orderTrack = normalizeExamTrack(order.notes?.exam_track);
-    const profile = await getProfileAccessProfile(userId);
-
-    if (
-      !PLAN_DURATION[plan] ||
-      orderUserId !== userId ||
-      orderTrack !== normalizeExamTrack(profile.examTrack) ||
-      order.status !== "paid" ||
-      Number(order.amount) !== PLAN_AMOUNT[plan] * 100 ||
-      Number(order.amount_paid) !== PLAN_AMOUNT[plan] * 100 ||
-      order.currency !== "INR" ||
-      payment.order_id !== order.id ||
-      payment.status !== "captured" ||
-      Number(payment.amount) !== PLAN_AMOUNT[plan] * 100 ||
-      payment.currency !== "INR"
-    ) {
-      return NextResponse.json(
-        { success: false, message: "Payment is not complete or does not match this subscription." },
-        { status: 400 }
-      );
+    if (result === "pending_capture") {
+      return Response.json({ success: false, message: "Payment capture is still pending. Check your subscription shortly." }, { status: 409 });
     }
-
-    const startsAt = new Date();
-    const { data: existingSubscription, error: subscriptionError } = await supabaseAdmin
-      .from("subscriptions")
-      .select("plan,status,expires_at,razorpay_order_id")
-      .eq("clerk_user_id", userId)
-      .eq("exam_track", orderTrack)
-      .eq("plan", plan)
-      .maybeSingle();
-
-    if (subscriptionError) throw subscriptionError;
-
-    if (existingSubscription?.razorpay_order_id === order.id) {
-      return NextResponse.json({ success: true, message: "Subscription already activated" });
+    if (["superseded", "conflict", "historical_consumed"].includes(result)) {
+      return Response.json({ success: false, message: "This payment needs review. Contact support and keep your payment reference." }, { status: 409 });
     }
-
-    const activeCurrentPlan = existingSubscription?.status === "active" &&
-      new Date(existingSubscription.expires_at) > startsAt
-      ? existingSubscription.plan
-      : null;
-
-    if (activeCurrentPlan && PLAN_RANK[plan] <= PLAN_RANK[activeCurrentPlan]) {
-      return NextResponse.json(
-        { success: false, message: "Only upgrades to a higher plan are allowed." },
-        { status: 409 }
-      );
+    if (result === "invalid") {
+      return Response.json({ success: false, message: "Payment does not match this checkout." }, { status: 400 });
     }
-
-    const currentExpiry = existingSubscription?.expires_at
-      ? new Date(existingSubscription.expires_at)
-      : null;
-    const expiresAt = currentExpiry && currentExpiry > startsAt
-      ? currentExpiry
-      : new Date(startsAt);
-    expiresAt.setDate(expiresAt.getDate() + PLAN_DURATION[plan]);
-
-    const { error } = await supabaseAdmin.from("subscriptions").upsert({
-      clerk_user_id: userId,
-      plan,
-      exam_track: orderTrack,
-      amount: PLAN_AMOUNT[plan],
-      currency: "INR",
-      razorpay_order_id: order.id,
-      razorpay_payment_id: payment.id,
-      razorpay_signature: suppliedSignature,
-      status: "active",
-      starts_at: startsAt,
-      expires_at: expiresAt,
-      updated_at: new Date(),
-    }, { onConflict: "clerk_user_id,exam_track,plan" });
-
-    if (error) throw error;
-
-    return NextResponse.json({
-      success: true,
-      message: "Subscription activated successfully",
-    });
+    throw new Error("Unexpected Razorpay redemption result");
   } catch (error) {
-    console.error("Razorpay verification failed:", error.details || error);
-    return NextResponse.json(
-      { success: false, message: error.message || "Verification failed" },
-      { status: 500 }
-    );
+    console.error("[RAZORPAY_VERIFY_ERROR]", error?.code || error?.statusCode || "unexpected");
+    return Response.json({ success: false, message: "Unable to verify payment right now. Check your subscription before paying again." }, { status: 503 });
   }
 }

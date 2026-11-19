@@ -20,6 +20,12 @@ if (!posthogKey) {
     api_host: posthogHost,
     defaults: "2026-01-30",
     capture_exceptions: true,
+    prepare_external_dependency_script(script) {
+      if (window.location.pathname === "/" && /\/surveys\.js(?:[?#]|$)/.test(script.src)) {
+        script.fetchPriority = "low";
+      }
+      return script;
+    },
     debug: process.env.NODE_ENV === "development",
   });
 }

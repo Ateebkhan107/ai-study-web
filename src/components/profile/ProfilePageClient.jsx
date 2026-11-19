@@ -1,6 +1,7 @@
 "use client";
 
 import { SignOutButton, useClerk, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   Award,
@@ -72,6 +73,7 @@ function getXpData(profile) {
 }
 
 export default function ProfilePageClient({ initialProfile = null, plan = "FREE" }) {
+  const router = useRouter();
   const { user: clerkUser } = useUser();
   const { openUserProfile } = useClerk();
 
@@ -92,6 +94,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
     message: "",
   });
   const [profileError, setProfileError] = useState("");
+  const [savingProfile, setSavingProfile] = useState(false);
   const [editExam, setEditExam] = useState(initialProfile?.current_track?.toUpperCase() || "JEE");
   const [editYear, setEditYear] = useState(initialProfile?.target_year || 2026);
   const [saved, setSaved] = useState(false);
@@ -247,36 +250,39 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
   // CHANGE TRACK (JEE / NEET toggle)
   const handleTrackToggle = async (newExam) => {
     const currentActiveTrack = user?.current_track || "jee";
-    if (newExam.toLowerCase() === currentActiveTrack.toLowerCase()) return;
-
-    // eslint-disable-next-line react-hooks/immutability
-    document.cookie = `prepzii_track=${newExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
-
-    setUser((prev) => ({
-      ...prev,
-      current_track: newExam.toLowerCase(),
-    }));
-
-    setEditExam(newExam);
-    setSaved(true);
+    if (savingProfile || newExam.toLowerCase() === currentActiveTrack.toLowerCase()) return;
+    setProfileError("");
+    setSavingProfile(true);
 
     try {
-      await fetch("/api/profile/update", {
+      const response = await fetch("/api/profile/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ current_track: newExam.toLowerCase() }),
       });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setProfileError(data.error || "Unable to switch exam focus.");
+        return;
+      }
+
+      const data = await response.json();
+      setUser((prev) => ({ ...prev, ...data }));
+      setEditExam(data.current_track.toUpperCase());
+      router.refresh();
+      setSaved(true);
+      setTimeout(() => setSaved(false), 1000);
     } catch (err) {
       console.error(err);
+      setProfileError("Unable to switch exam focus.");
+    } finally {
+      setSavingProfile(false);
     }
-
-    setTimeout(() => {
-      setSaved(false);
-    }, 1000);
   };
 
   // SAVE PROFILE (from edit modal)
   const handleSave = async () => {
+    if (savingProfile) return;
     const normalizedUsername = editUsername.trim().toLowerCase();
     setProfileError("");
 
@@ -285,7 +291,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
       return;
     }
 
-    document.cookie = `prepzii_track=${editExam.toLowerCase()}; path=/; max-age=31536000; SameSite=Lax;`;
+    setSavingProfile(true);
 
     try {
       const response = await fetch("/api/profile/update", {
@@ -306,22 +312,17 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
       }
 
       const data = await response.json();
-      setUser((prev) => ({
-        ...prev,
-        ...data,
-        full_name: editName,
-        username: normalizedUsername,
-        current_track: editExam.toLowerCase(),
-        target_year: editYear,
-      }));
+      setUser((prev) => ({ ...prev, ...data }));
+      if (data.current_track !== user?.current_track) router.refresh();
       setEditing(false);
       setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
     } catch (err) {
       console.error(err);
       setProfileError("Unable to save profile.");
+    } finally {
+      setSavingProfile(false);
     }
-
-    setTimeout(() => setSaved(false), 2500);
   };
 
   if (loading) {
@@ -444,6 +445,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                   type="button"
                   onClick={() => {
                     setProfileError("");
+                    setEditExam(activeUser.exam);
                     setEditing(true);
                   }}
                   className="shrink-0 inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl border border-slate-200/80 bg-white px-2.5 py-1.5 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-bold text-slate-700 transition-colors hover:border-brand/50 hover:text-slate-950 hover:shadow-sm dark:border-[var(--border)]/70 dark:bg-[var(--surface-elevated)] dark:text-slate-200 dark:hover:text-white"
@@ -467,6 +469,9 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                     return (
                       <button
                         key={trackOption}
+                        type="button"
+                        disabled={savingProfile}
+                        aria-pressed={isActive}
                         onClick={() => handleTrackToggle(trackOption)}
                         className={`rounded-md sm:rounded-lg px-3 py-1.5 sm:px-6 sm:py-2.5 text-[10px] sm:text-xs font-black tracking-wide uppercase transition-all duration-300 ${
                           isActive
@@ -480,6 +485,11 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                   })}
                 </div>
               </div>
+              {!editing && profileError && (
+                <p role="alert" className="mt-2 text-xs font-semibold text-red-600 dark:text-red-300">
+                  {profileError}
+                </p>
+              )}
             </div>
           </section>
 
@@ -497,6 +507,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
                   type="button"
                   onClick={() => {
                     setProfileError("");
+                    setEditExam(activeUser.exam);
                     setEditing(true);
                   }}
                   className="mt-4 rounded-xl bg-brand px-6 py-2.5 text-sm font-black text-slate-950 transition-colors hover:bg-brand-hover shadow-sm"
@@ -910,7 +921,7 @@ export default function ProfilePageClient({ initialProfile = null, plan = "FREE"
               <button
                 type="button"
                 onClick={handleSave}
-                disabled={!usernameStatus.available}
+                disabled={savingProfile || !usernameStatus.available}
                 className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Save

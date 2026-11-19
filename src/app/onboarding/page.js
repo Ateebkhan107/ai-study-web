@@ -142,6 +142,8 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
 
   const yearOptions = getYearOptions();
   const defaultYear = yearOptions[0];
+  const previewExam = (await cookies()).get("prepzii_track")?.value?.toUpperCase();
+  const defaultExam = EXAMS.includes(previewExam) ? previewExam : "JEE";
   const displayName =
     user?.firstName || user?.username || user?.primaryEmailAddress?.emailAddress || "there";
 
@@ -165,6 +167,7 @@ cookieStore.set("prepzii_track", normalizedExam.toLowerCase(), {
           action={completeOnboarding}
           accountTypes={ACCOUNT_TYPES}
           exams={EXAMS}
+          defaultExam={defaultExam}
           yearOptions={yearOptions}
           defaultYear={defaultYear}
           defaultFullName={user?.fullName || ""}

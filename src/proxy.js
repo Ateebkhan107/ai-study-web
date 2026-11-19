@@ -1,4 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
@@ -17,7 +18,7 @@ const isProtectedRoute = createRouteMatcher([
   "/admin(.*)",
 ]);
 
-export default clerkMiddleware(async (auth, req) => {
+const clerkProxy = clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
     if (process.env.CLERK_AUTH_DEBUG === "true") {
       const { userId, sessionId } = await auth();
@@ -33,6 +34,12 @@ export default clerkMiddleware(async (auth, req) => {
     await auth.protect();
   }
 });
+
+export default function proxy(request, event) {
+  // Razorpay authenticates this server-to-server endpoint with its raw-body HMAC.
+  if (request.nextUrl.pathname === "/api/webhooks/razorpay") return NextResponse.next();
+  return clerkProxy(request, event);
+}
 
 export const config = {
   matcher: [

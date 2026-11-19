@@ -4,6 +4,7 @@ import Link from "next/link";
 import TestBuilder from "@/components/test/TestBuilder";
 import QuickTest from "@/components/test/QuickTest";
 import { useUser } from "@clerk/nextjs";
+import { usePracticeExamTrack } from "@/components/TrackWrapper";
 import { ArrowRight, BarChart3, ClipboardList, Sparkles, Zap } from "lucide-react";
 
 // ─── Test Tools Data ──────────────────────────────────────────────────────────
@@ -21,21 +22,6 @@ const TEST_TOOLS = [
     icon: <BarChart3 className="h-5 w-5" />,
   },
 ];
-
-function getCookieTrack() {
-  if (typeof window !== "undefined") {
-    const params = new URLSearchParams(window.location.search);
-    const queryTrack = params.get("track");
-    if (queryTrack) {
-      const normalized = queryTrack.toUpperCase() === "NEET" ? "neet" : "jee";
-      document.cookie = `prepzii_track=${normalized}; path=/; max-age=31536000; SameSite=Lax;`;
-      return normalized;
-    }
-  }
-  if (typeof document === "undefined") return "jee";
-  const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
-  return match && decodeURIComponent(match[2]).toUpperCase() === "NEET" ? "neet" : "jee";
-}
 
 function TestPageShell({ mode, setMode, children }) {
   return (
@@ -90,47 +76,31 @@ function TestPageShell({ mode, setMode, children }) {
 export default function TestPage() {
   const [mode, setMode] = useState("build");
   const { user } = useUser();
-  const [track, setTrack] = useState(getCookieTrack);
-  const [access, setAccess] = useState(null);
-  const [, setAccessLoading] = useState(true);
+  const track = usePracticeExamTrack().toLowerCase();
+  const [accessData, setAccess] = useState(null);
+  const access = accessData?.examTrack?.toLowerCase() === track ? accessData : null;
 
   useEffect(() => {
-    async function syncTrack() {
-      await Promise.resolve();
-      const cookieTrack = getCookieTrack();
-      if (cookieTrack && cookieTrack !== track) {
-        setTrack(cookieTrack);
+    if (!user) return;
+    const controller = new AbortController();
+
+    async function loadAccess() {
+      try {
+        const response = await fetch("/api/access", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!controller.signal.aborted) setAccess(data);
+      } catch (error) {
+        if (error.name !== "AbortError") console.error("Could not load study access", error);
       }
     }
-    syncTrack();
-  }, [track]);
 
-  useEffect(() => {
-    let cancelled = false;
-    async function loadTrack() {
-      if (!user) return;
-      const accessResponse = await fetch("/api/access", { cache: "no-store" });
-
-      if (!accessResponse.ok) {
-        if (!cancelled) setAccessLoading(false);
-        return;
-      }
-
-      const accessData = await accessResponse.json();
-      if (cancelled) return;
-
-      if (accessData?.examTrack === "NEET") {
-        setTrack("neet");
-      } else {
-        setTrack("jee");
-      }
-
-      setAccess(accessData);
-      setAccessLoading(false);
-    }
-    loadTrack();
-    return () => { cancelled = true; };
-  }, [user]);
+    loadAccess();
+    return () => controller.abort();
+  }, [user, track]);
 
   return (
     <TestPageShell
@@ -138,9 +108,9 @@ export default function TestPage() {
       setMode={setMode}
     >
       {mode === "build" ? (
-        <TestBuilder track={track} access={access} />
+        <TestBuilder key={track} track={track} access={access} />
       ) : (
-        <QuickTest track={track} isPro={Boolean(access?.isPro)} />
+        <QuickTest key={track} track={track} isPro={Boolean(access?.isPro)} />
       )}
 
       <section className="animate-slideUp mt-5" style={{ animationDelay: "175ms" }}>

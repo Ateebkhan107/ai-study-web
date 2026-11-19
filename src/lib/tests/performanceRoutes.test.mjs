@@ -125,9 +125,10 @@ test("withdrawn cards disappear from the deck and database outages do not resurr
   const card = { id: "jee-physics-unit-and-dimensions-unit-definition", is_active: true };
   let published = true;
   let failed = false;
+  let chapterDeleted = false;
   respond = ({ table, calls }) => {
     if (table === "formula_subjects") return reply([{ id: "jee-physics", slug: "physics" }]);
-    if (table === "formula_chapters") return reply([chapter]);
+    if (table === "formula_chapters") return reply(chapterDeleted ? [] : [chapter]);
     assert.equal(table, "formula_cards");
     assert.ok(calls.some(([method, column, value]) => method === "eq" && column === "is_active" && value === true));
     if (failed) return { error: new Error("Database unavailable") };
@@ -143,6 +144,30 @@ test("withdrawn cards disappear from the deck and database outages do not resurr
   assert.deepEqual(await (await getDeck()).json(), { cards: [] });
   failed = true;
   assert.equal((await getDeck()).status, 503);
+  chapterDeleted = true;
+  const missing = await getDeck();
+  assert.equal(missing.status, 404);
+  assert.equal(missing.headers.get("cache-control"), "no-store");
+});
+
+test("older Formula Cards schemas retry only the optional image column and keep the publication filter", async () => {
+  const published = { id: "card-live", is_active: true, diagram_data: { image_url: "/images/fixture.png" } };
+  respond = ({ table, calls }) => {
+    if (table === "formula_subjects") return reply([{ id: "jee-physics", slug: "physics" }]);
+    if (table === "formula_chapters") return reply([{ id: "jee-physics-unit-and-dimensions" }]);
+    assert.equal(table, "formula_cards");
+    assert.ok(calls.some(([method, column, value]) => method === "eq" && column === "is_active" && value === true));
+    const columns = calls.find(([method]) => method === "select")[1];
+    return columns.includes("diagram_image")
+      ? { error: { code: "42703", message: "column formula_cards.diagram_image does not exist" } }
+      : reply([published]);
+  };
+  const response = await formulaDeck(request("/api/formula-cards/physics/unit-and-dimensions"), {
+    params: Promise.resolve({ subjectSlug: "physics", chapterSlug: "unit-and-dimensions" }),
+  });
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { cards: [published] });
+  assert.equal(queries.filter(({ table }) => table === "formula_cards").length, 2);
 });
 
 test("rank failure preserves XP, accuracy and streak and does not share a private cache", async () => {

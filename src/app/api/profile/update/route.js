@@ -48,10 +48,26 @@ export async function POST(req) {
       throw error;
     }
 
-    return NextResponse.json({
+    if (!data) {
+      return NextResponse.json({ error: "Profile not found." }, { status: 404 });
+    }
+
+    const currentTrack = data.exam?.toLowerCase() || "jee";
+    const response = NextResponse.json({
       ...data,
-      current_track: data?.current_track || data?.exam?.toLowerCase() || body.current_track || "jee",
+      current_track: currentTrack,
     });
+
+    if (updateData.exam) {
+      response.cookies.set("prepzii_track", currentTrack, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+        secure: new URL(req.url).protocol === "https:",
+      });
+    }
+
+    return response;
   } catch (error) {
     console.error("[PROFILE_UPDATE_ERROR]", error);
     return new NextResponse("Internal Server Error", { status: 500 });

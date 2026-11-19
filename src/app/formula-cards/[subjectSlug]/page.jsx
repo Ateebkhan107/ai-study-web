@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { formulaExam, formulaPath, NOINDEX, publicMetadata } from "@/lib/seo.mjs";
 import { auth } from "@clerk/nextjs/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getProfileAccessProfile } from "@/lib/accessControl";
 import FormulaSubjectView from "@/components/formula-cards/FormulaSubjectView";
 import { getFormulaChaptersForSubject, getFormulaSubjectsForExam } from "@/lib/formulaCards";
 
@@ -12,18 +12,7 @@ const loadChapters = cache(getFormulaChaptersForSubject);
 
 const resolveSubject = cache(async (subjectSlug, requestedExam) => {
   const { userId } = await auth();
-  let profileExam = null;
-  if (userId) {
-    const { data: profile } = await supabaseAdmin
-      .from("user_profiles")
-      .select("exam")
-      .eq("clerk_user_id", userId)
-      .maybeSingle();
-
-    if (profile?.exam) {
-      profileExam = String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE";
-    }
-  }
+  const profileExam = userId ? (await getProfileAccessProfile(userId)).examTrack : null;
 
   // When profile track is set, strictly use it; otherwise fallback to query param or JEE
   const exam = profileExam || requestedExam;

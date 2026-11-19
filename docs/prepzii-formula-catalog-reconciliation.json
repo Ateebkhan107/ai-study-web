@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "unsupportedHostedFields": [
+    "diagram_image"
+  ],
+  "comparedAt": "2026-11-11T19:29:37.023Z",
+  "method": "Read-only comparison of current hosted rows with bundled seed IDs and normalized fields. Intent and publication history require editorial evidence.",
+  "counts": {
+    "bundledChapters": 181,
+    "bundledCards": 1990,
+    "hostedChapters": 171,
+    "hostedCards": 1892,
+    "hostedInactive": 0,
+    "anonymousInactiveCount": 0,
+    "anonymousProbeStatus": 200
+  },
+  "editorialDisposition": {
+    "confirmedUnpublished": [],
+    "confirmedWithdrawn": [],
+    "confirmedIntentionalEdits": [],
+    "note": "No editorial decisions inferred from snapshots. Missing IDs can represent unseeded or intentionally removed content."
+  },
+  "chapters": {
+    "missing": [
+      {
+        "id": "jee-physics-alternating-current",
+        "subject_id": "jee-physics"
+      },
+      {
+        "id": "jee-physics-capacitance",
+        "subject_id": "jee-physics"
+      },
+      {
+        "id": "jee-physics-current-electricity",
+        "subject_id": "jee-physics"
+      },
+      {
+        "id": "jee-physics-electrostatics",
+        "subject_id": "jee-physics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics",
+        "subject_id": "jee-physics"
+      },
+      {
+        "id": "neet-physics-alternating-current",
+        "subject_id": "neet-physics"
+      },
+      {
+        "id": "neet-physics-capacitance",
+        "subject_id": "neet-physics"
+      },
+      {
+        "id": "neet-physics-current-electricity",
+        "subject_id": "neet-physics"
+      },
+      {
+        "id": "neet-physics-electrostatics",
+        "subject_id": "neet-physics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics",
+        "subject_id": "neet-physics"
+      }
+    ],
+    "inactivePublicationHistoryUnknown": [],
+    "publishedDifferencesIntentUnknown": [
+      {
+        "id": "jee-chemistry-alcohol",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-chemistry-aldehyde-ketones",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-chemistry-alkyl-halide",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-chemistry-carboxylic-acid-derivatives",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-3-dimension",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-complex-number",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-fundamental-of-mathematics",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-limit-of-function",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-method-of-differentiation",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-permutation-and-combination",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-sets-and-relation",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "jee-mathematics-solution-of-triangle",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-biology-cells-the-unit-of-life",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-biology-organisms-and-population",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-biology-principles-of-inheritance-and-variations",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-biology-structural-organization-in-animals",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-biology-transportation-in-plants",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-chemistry-alcohol",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-chemistry-aldehyde-ketones",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-chemistry-alkyl-halide",
+        "fields": [
+          "title"
+        ]
+      },
+      {
+        "id": "neet-chemistry-carboxylic-acid-derivatives",
+        "fields": [
+          "title"
+        ]
+      }
+    ],
+    "hostedOnly": [],
+    "matchingPublished": 150
+  },
+  "cards": {
+    "missing": [
+      {
+        "id": "jee-physics-alternating-current-ac-dc",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-alternating-current-capacitive-phase",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-alternating-current-definitions",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-alternating-current-pure-capacitive",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-alternating-current-pure-resistive",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-alternating-current-rms-power-factor",
+        "chapter_id": "jee-physics-alternating-current"
+      },
+      {
+        "id": "jee-physics-capacitance-capacitor-types",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-charge-redistribution",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-definition-energy-density",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-dielectric-capacitor",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-force-on-dielectric",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-heat-loss-combinations",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-plate-field-force",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-rc-charging",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-capacitance-rc-discharging",
+        "chapter_id": "jee-physics-capacitance"
+      },
+      {
+        "id": "jee-physics-current-electricity-ammeter",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-cells-grouping",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-current-drift-density",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-kirchhoff-resistors",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-metre-bridge",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-potentiometer-applications",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-potentiometer-base",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-resistance-ohm-law",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-temperature-power-heating",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-voltmeter",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-current-electricity-wheatstone",
+        "chapter_id": "jee-physics-current-electricity"
+      },
+      {
+        "id": "jee-physics-electrostatics-conducting-surface-pressure",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-coulomb-field-potential",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-dipole-energy-torque-potential",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-dipole-field",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-field-potential-point-line-sheet",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-flux-gauss",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-relation-e-v",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-ring-spheres-disc",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-electrostatics-work-energy-self-energy",
+        "chapter_id": "jee-physics-electrostatics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-adiabatic-cyclic-mixtures",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-basic-processes",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-calorimetry-conduction",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-carnot-engine",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-degrees-equipartition-internal-energy",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-heat-engine",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-kinetic-theory-speeds",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-radiation-cooling",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-refrigerator",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-second-law-entropy",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-specific-heats-gamma",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-thermal-expansion-stress",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-thermal-resistance-combinations",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "jee-physics-heat-thermodynamics-thermometers",
+        "chapter_id": "jee-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-alternating-current-ac-dc",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-alternating-current-capacitive-phase",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-alternating-current-definitions",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-alternating-current-pure-capacitive",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-alternating-current-pure-resistive",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-alternating-current-rms-power-factor",
+        "chapter_id": "neet-physics-alternating-current"
+      },
+      {
+        "id": "neet-physics-capacitance-capacitor-types",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-charge-redistribution",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-definition-energy-density",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-dielectric-capacitor",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-force-on-dielectric",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-heat-loss-combinations",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-plate-field-force",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-rc-charging",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-capacitance-rc-discharging",
+        "chapter_id": "neet-physics-capacitance"
+      },
+      {
+        "id": "neet-physics-current-electricity-ammeter",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-cells-grouping",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-current-drift-density",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-kirchhoff-resistors",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-metre-bridge",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-potentiometer-applications",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-potentiometer-base",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-resistance-ohm-law",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-temperature-power-heating",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-voltmeter",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-current-electricity-wheatstone",
+        "chapter_id": "neet-physics-current-electricity"
+      },
+      {
+        "id": "neet-physics-electrostatics-conducting-surface-pressure",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-coulomb-field-potential",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-dipole-energy-torque-potential",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-dipole-field",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-field-potential-point-line-sheet",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-flux-gauss",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-relation-e-v",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-ring-spheres-disc",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-electrostatics-work-energy-self-energy",
+        "chapter_id": "neet-physics-electrostatics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-adiabatic-cyclic-mixtures",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-basic-processes",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-calorimetry-conduction",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-carnot-engine",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-degrees-equipartition-internal-energy",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-heat-engine",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-kinetic-theory-speeds",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-radiation-cooling",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-refrigerator",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-second-law-entropy",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-specific-heats-gamma",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-thermal-expansion-stress",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-thermal-resistance-combinations",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      },
+      {
+        "id": "neet-physics-heat-thermodynamics-thermometers",
+        "chapter_id": "neet-physics-heat-thermodynamics"
+      }
+    ],
+    "inactivePublicationHistoryUnknown": [],
+    "publishedDifferencesIntentUnknown": [
+      {
+        "id": "jee-mathematics-3-dimension-line-plane-angle-and-incidence",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-3-dimension-point-plane-distance-foot-image",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-3-dimension-skew-lines",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-3-dimension-sphere",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-3-dimension-tetrahedron-volume",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-application-of-derivatives-angle-shortest-distance",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-application-of-derivatives-tangent-normal-equations",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-application-of-derivatives-tangent-normal-lengths",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-circle-intercepts-parametric",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-complex-number-form-conjugate-equality",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-complex-number-rotation-demoivre-unity",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-ellipse-standard-geometry",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-hyperbola-asymptotes",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-hyperbola-rectangular-hyperbola",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-hyperbola-standard-geometry",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-parabola-standard-geometry",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-solution-of-triangle-pedal-triangle",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-solution-of-triangle-radii",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-solution-of-triangle-sine-cosine-projection",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-straight-line-distances-reflection-foot",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-vectors-cross-product-basics",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-vectors-dot-product-projection-angle",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-mathematics-vectors-scalar-triple-product",
+        "fields": [
+          "diagram_data"
+        ]
+      },
+      {
+        "id": "jee-physics-rigid-body-dynamics-moi-discs-cylinders",
+        "fields": [
+          "table_data"
+        ]
+      },
+      {
+        "id": "jee-physics-rigid-body-dynamics-moi-spheres-rings",
+        "fields": [
+          "table_data"
+        ]
+      },
+      {
+        "id": "neet-physics-rigid-body-dynamics-moi-discs-cylinders",
+        "fields": [
+          "table_data"
+        ]
+      },
+      {
+        "id": "neet-physics-rigid-body-dynamics-moi-spheres-rings",
+        "fields": [
+          "table_data"
+        ]
+      }
+    ],
+    "hostedOnly": [],
+    "matchingPublished": 1865
+  },
+  "bundledDiagramReferencesForReview": [
+    {
+      "id": "jee-mathematics-application-of-derivatives-external-point-tangent",
+      "chapter_id": "jee-mathematics-application-of-derivatives",
+      "diagram_image": "/images/formula-cards/math/tangent-external-point.png"
+    },
+    {
+      "id": "jee-mathematics-application-of-derivatives-tangent-normal-lengths",
+      "chapter_id": "jee-mathematics-application-of-derivatives",
+      "diagram_image": "/images/formula-cards/math/subtangent-subnormal.png"
+    },
+    {
+      "id": "jee-mathematics-quadratic-equation-nature-of-roots",
+      "chapter_id": "jee-mathematics-quadratic-equation",
+      "diagram_image": "/images/formula-cards/math/nature-of-roots-flowchart.png"
+    },
+    {
+      "id": "jee-mathematics-solution-of-triangle-area-and-m-n-rule",
+      "chapter_id": "jee-mathematics-solution-of-triangle",
+      "diagram_image": "/images/formula-cards/math/triangle-mn-rule.png"
+    },
+    {
+      "id": "jee-mathematics-solution-of-triangle-bisector-median-altitude",
+      "chapter_id": "jee-mathematics-solution-of-triangle",
+      "diagram_image": "/images/formula-cards/math/triangle-bisectors-medians.png"
+    },
+    {
+      "id": "jee-mathematics-solution-of-triangle-pedal-triangle",
+      "chapter_id": "jee-mathematics-solution-of-triangle",
+      "diagram_image": "/images/formula-cards/math/pedal-triangle-orthocentre.png"
+    }
+  ]
+}

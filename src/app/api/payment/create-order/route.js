@@ -1,28 +1,10 @@
 import { NextResponse } from "next/server";
+import { randomUUID } from "node:crypto";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { createRazorpayOrder, getRazorpayKeyId } from "@/lib/razorpay";
-import { getProfileAccessProfile, normalizeExamTrack } from "@/lib/accessControl";
+import { getActiveSubscriptionsForUser, getProfileAccessProfile, isSubscriptionActive, normalizeExamTrack } from "@/lib/accessControl";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-
-const PLAN_DETAILS = {
-  monthly: {
-    amount: 49,
-    duration: 30,
-  },
-  quarterly: {
-    amount: 129,
-    duration: 90,
-  },
-  yearly: {
-    amount: 399,
-    duration: 365,
-  },
-  ai_mode: {
-    amount: 2000,
-    duration: 30,
-  },
-};
-const PLAN_RANK = { monthly: 1, quarterly: 2, yearly: 3, ai_mode: 4 };
+import { isRazorpayOrderId, RAZORPAY_PLANS } from "@/lib/razorpayPayments.server";
 
 export async function POST(req) {
   try {
@@ -33,7 +15,7 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
     }
 
-    if (!PLAN_DETAILS[plan]) {
+    if (typeof plan !== "string" || !Object.hasOwn(RAZORPAY_PLANS, plan)) {
       return NextResponse.json(
         {
           success: false,
@@ -50,7 +32,7 @@ export async function POST(req) {
     }
 
     const profile = await getProfileAccessProfile(userId);
-    const selectedPlan = PLAN_DETAILS[plan];
+    const selectedPlan = RAZORPAY_PLANS[plan];
     const normalizedTrack = normalizeExamTrack(profile.examTrack);
 
     if (normalizeExamTrack(examTrack) !== normalizedTrack) {
@@ -60,41 +42,47 @@ export async function POST(req) {
       );
     }
 
-    const { data: currentSubscription, error: subscriptionError } = await supabaseAdmin
-      .from("subscriptions")
-      .select("plan,status,expires_at")
-      .eq("clerk_user_id", userId)
-      .eq("exam_track", normalizedTrack)
-      .eq("plan", plan)
-      .maybeSingle();
-
-    if (subscriptionError) throw subscriptionError;
-
-    const currentPlan = currentSubscription?.status === "active" &&
-      new Date(currentSubscription.expires_at) > new Date()
-      ? currentSubscription.plan
-      : null;
-
-    if (currentPlan && PLAN_RANK[plan] <= PLAN_RANK[currentPlan]) {
-      return NextResponse.json(
-        { success: false, message: currentPlan === "yearly" ? "Your Yearly plan is already active." : "Choose a higher plan to upgrade." },
-        { status: 409 }
-      );
+    const subscriptions = await getActiveSubscriptionsForUser(userId, normalizedTrack);
+    const hasSameOrHigherPlan = subscriptions.some((subscription) => {
+      const activePlan = subscription.plan === "quarterly_promo" ? "quarterly" : subscription.plan;
+      return isSubscriptionActive(subscription) && RAZORPAY_PLANS[activePlan]?.rank >= selectedPlan.rank;
+    });
+    if (hasSameOrHigherPlan) {
+      return NextResponse.json({ success: false, message: "Choose a higher plan to upgrade." }, { status: 409 });
     }
 
     const clerkUser = await currentUser();
     const customerEmail = clerkUser?.primaryEmailAddress?.emailAddress || undefined;
     const customerPhone = clerkUser?.primaryPhoneNumber?.phoneNumber?.replace(/\D/g, "").slice(-10);
-    const razorpayOrder = await createRazorpayOrder({
-      amount: selectedPlan.amount * 100,
+    const receipt = randomUUID();
+    const { error: intentError } = await supabaseAdmin.from("razorpay_checkout_orders").insert({
+      receipt,
+      clerk_user_id: userId,
+      exam_track: normalizedTrack,
+      plan,
+      amount_paise: selectedPlan.amountPaise,
       currency: "INR",
-      receipt: `prepzii_${Date.now()}`,
-      notes: {
-        user_id: userId,
-        plan,
-        exam_track: normalizedTrack,
-      },
+      duration_days: selectedPlan.durationDays,
     });
+    if (intentError) throw intentError;
+
+    const razorpayOrder = await createRazorpayOrder({
+      amount: selectedPlan.amountPaise,
+      currency: "INR",
+      receipt,
+      notes: { user_id: userId, plan, exam_track: normalizedTrack },
+    });
+    if (!isRazorpayOrderId(razorpayOrder?.id) || razorpayOrder.receipt !== receipt ||
+        razorpayOrder.amount !== selectedPlan.amountPaise || razorpayOrder.currency !== "INR") {
+      throw new Error("Razorpay returned an order that did not match the checkout intent");
+    }
+    const { data: bound, error: bindError } = await supabaseAdmin.from("razorpay_checkout_orders")
+      .update({ provider_order_id: razorpayOrder.id })
+      .eq("receipt", receipt)
+      .is("provider_order_id", null)
+      .select("provider_order_id")
+      .maybeSingle();
+    if (bindError || !bound) throw bindError || new Error("Checkout order could not be bound");
 
     return NextResponse.json({
       success: true,
@@ -113,20 +101,10 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.error("Razorpay order creation failed:", error.details || error);
-
-    const providerAuthFailed = error.status === 401;
-
+    console.error("[RAZORPAY_ORDER_ERROR]", error?.code || error?.status || "unexpected");
     return NextResponse.json(
-      {
-        success: false,
-        message: providerAuthFailed
-          ? "Payments are temporarily unavailable. Please contact support."
-          : error.message || "Unable to create order",
-      },
-      {
-        status: providerAuthFailed ? 503 : 500,
-      }
+      { success: false, message: "Payments are temporarily unavailable. Please try again." },
+      { status: 503 }
     );
   }
 }

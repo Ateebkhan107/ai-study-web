@@ -48,12 +48,6 @@ const TABS = [
   { id: "leaderboard", label: "Leaderboard", Icon: Trophy },
 ];
 
-function getCookieTrack() {
-  if (typeof document === "undefined") return "JEE";
-  const match = document.cookie.match(new RegExp("(^| )prepzii_track=([^;]+)"));
-  return match ? decodeURIComponent(match[2]).toUpperCase() : "JEE";
-}
-
 function ContentBlockSkeleton({ className = "h-48" }) {
   return <div className={`rounded-2xl skeleton-shimmer ${className}`} />;
 }
@@ -103,7 +97,7 @@ export default function AnalyticsPageClient({
 }) {
   const [stats, setStats] = useState(initialStats);
   const [loading, setLoading] = useState(false);
-  const [activeTrack, setActiveTrack] = useState(initialTrack);
+  const activeTrack = initialTrack;
   const [activeTab, setActiveTab] = useState("overview");
   const [advancedAnalyticsAllowed, setAdvancedAnalyticsAllowed] = useState(initialAdvancedAnalyticsAllowed);
   const analyticsCacheRef = useRef(new Map(initialStats ? [[initialStats.track || initialTrack, initialStats]] : []));
@@ -118,16 +112,6 @@ export default function AnalyticsPageClient({
 
     syncTabFromHash();
   }, []);
-
-  useEffect(() => {
-    async function syncTrackFromCookie() {
-      await Promise.resolve();
-      const cookieTrack = getCookieTrack();
-      if (cookieTrack !== activeTrack) setActiveTrack(cookieTrack);
-    }
-
-    syncTrackFromCookie();
-  }, [activeTrack]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -158,7 +142,6 @@ export default function AnalyticsPageClient({
         analyticsCacheRef.current.set(cacheKey, data);
         setStats(data);
         setAdvancedAnalyticsAllowed(true);
-        if (data?.track) setActiveTrack(data.track);
       } catch (error) {
         if (error?.name === "AbortError") return;
         if (error?.status !== 403) {

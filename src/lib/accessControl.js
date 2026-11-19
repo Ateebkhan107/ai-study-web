@@ -1,6 +1,7 @@
 import { FREE_ZI_PROMPT_LIMIT, getZiFreePromptsUsage } from "./zi/promptUsage.server.js";
 export { FREE_ZI_PROMPT_LIMIT, getZiFreePromptsUsage };
 import { clerkClient } from "@clerk/nextjs/server";
+import { cache } from "react";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { ACCOUNT_TYPES } from "@/lib/auth";
 import { getActiveInstituteMemberships } from "./instituteMembership.js";
@@ -244,7 +245,7 @@ export async function getClerkAccessMetadata(userId) {
   }
 }
 
-export async function getProfileAccessProfile(userId) {
+export const getProfileAccessProfile = cache(async function getProfileAccessProfile(userId) {
   if (!userId) {
     return {
       accountType: ACCOUNT_TYPES.STUDENT,
@@ -274,7 +275,7 @@ export async function getProfileAccessProfile(userId) {
       : ACCOUNT_TYPES.STUDENT,
     examTrack: normalizeExamTrack(data?.exam),
   };
-}
+});
 
 export async function getProfileAccountType(userId) {
   const profile = await getProfileAccessProfile(userId);
@@ -290,9 +291,9 @@ function getSubscriptionAccess(subscriptions) {
 
 // This only describes navigation and launcher UI. Protected features use the full access context.
 export async function getUserNavigationAccess(userId) {
-  if (!userId) return getSubscriptionAccess([]);
+  if (!userId) return { ...getSubscriptionAccess([]), examTrack: null };
   const { examTrack } = await getProfileAccessProfile(userId);
-  return getSubscriptionAccess(await getActiveSubscriptionsForUser(userId, examTrack));
+  return { ...getSubscriptionAccess(await getActiveSubscriptionsForUser(userId, examTrack)), examTrack };
 }
 
 export async function getUserAccessContext({ userId, examTrack, clerkMetadata } = {}) {

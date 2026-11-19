@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { Suspense } from "react";
 import Leaderboard from "@/components/analytics/Leaderboard";
 import { EXAM_CONFIG } from "@/constants/examConfig";
@@ -8,15 +7,13 @@ import DailyGoals from "@/components/DailyGoals";
 import DashboardHeaderQuote from "@/components/DashboardHeaderQuote";
 import BattleFloatingButton from "@/components/battle/BattleFloatingButton";
 import { auth } from "@clerk/nextjs/server";
+import { normalizeExamTrack } from "@/lib/accessControl";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { Sparkles } from "lucide-react";
 import SignedOutDashboard from "@/components/SignedOutDashboard";
 import DashboardPerformanceProvider from "@/components/dashboard/DashboardPerformanceProvider";
 
-async function getDashboardProfile() {
-  const { userId, sessionClaims } = await auth();
-  if (!userId) return null;
-
+async function getDashboardProfile(userId, sessionClaims) {
   const { data: profile, error } = await supabaseAdmin
     .from("user_profiles")
     .select("full_name, exam, target_year")
@@ -34,7 +31,7 @@ async function getDashboardProfile() {
 
   return {
     fullName: profile?.full_name || claimsName || "Student",
-    exam: profile?.exam ? (String(profile.exam).toUpperCase() === "NEET" ? "NEET" : "JEE") : null,
+    exam: normalizeExamTrack(profile?.exam),
     targetYear: profile?.target_year || null,
   };
 }
@@ -43,30 +40,9 @@ function getFirstName(name) {
   return String(name || "Student").trim().split(/\s+/)[0] || "Student";
 }
 
-function DashboardHeaderFallback({ activeTrackKey }) {
-  const futureLabel = activeTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
-
-  return (
-    <div className="min-w-0">
-      <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700 dark:border-brand/30 dark:bg-brand/10 dark:text-brand sm:text-[11px]">
-        <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-        {futureLabel}
-      </div>
-
-      <h1 className="mt-2 flex flex-wrap items-center gap-1.5 break-words text-2xl font-black font-display tracking-tight text-slate-950 dark:text-white sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
-        <span>Hey,</span>
-        <span>Student</span>
-        <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-brand" aria-hidden="true" />
-      </h1>
-    </div>
-  );
-}
-
-async function DashboardGreeting({ activeTrackKey }) {
-  const profile = await getDashboardProfile();
-  const resolvedTrackKey = profile?.exam || activeTrackKey;
-  const futureLabel = resolvedTrackKey === "NEET" ? "Future Doctor" : "Future Engineer";
-  const examTargetLine = [resolvedTrackKey, profile?.targetYear].filter(Boolean).join(" ");
+function DashboardGreeting({ profile }) {
+  const futureLabel = profile.exam === "NEET" ? "Future Doctor" : "Future Engineer";
+  const examTargetLine = [profile.exam, profile.targetYear].filter(Boolean).join(" ");
 
   return (
     <div className="min-w-0">
@@ -97,19 +73,12 @@ function DashboardCardFallback({ className = "h-48" }) {
 }
 
 export default async function DashboardPage() {
-  const [{ userId }, cookieStore] = await Promise.all([auth(), cookies()]);
-  const activeTrackCookie = cookieStore.get("prepzii_track")?.value;
-  const activeTrackKey =
-    String(activeTrackCookie || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
-
-  const activeConfig = {
-    ...EXAM_CONFIG[activeTrackKey],
-    dashboardTitle: activeTrackKey === "NEET" ? "NEET Overview" : "JEE Overview",
-  };
-
+  const { userId, sessionClaims } = await auth();
   if (!userId) {
     return <SignedOutDashboard />;
   }
+
+  const profile = await getDashboardProfile(userId, sessionClaims);
 
   return (
     <div className="relative min-h-screen w-full min-w-0">
@@ -119,9 +88,7 @@ export default async function DashboardPage() {
 
         <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 space-y-4 px-4 py-4 sm:space-y-5 sm:px-6 sm:py-6 lg:px-8">
           <div className="relative grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.82fr)_minmax(0,0.33fr)] lg:items-start">
-          <Suspense fallback={<DashboardHeaderFallback activeTrackKey={activeTrackKey} />}>
-            <DashboardGreeting activeTrackKey={activeTrackKey} />
-          </Suspense>
+          <DashboardGreeting profile={profile} />
 
           <DashboardHeaderQuote />
         </div>
@@ -140,7 +107,7 @@ export default async function DashboardPage() {
             <section className="grid min-w-0 grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
               <div className="min-w-0">
                 <Suspense fallback={<DashboardCardFallback className="h-[350px]" />}>
-                  <DashboardSection config={activeConfig} compact />
+                  <DashboardSection exam={profile.exam} config={EXAM_CONFIG[profile.exam]} compact />
                 </Suspense>
               </div>
               <div className="min-w-0">

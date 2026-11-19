@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { after } from "next/server";
 import { getAuthContext, ONBOARDING_ROUTE } from "@/lib/auth";
-import { FREE_ZI_PROMPT_LIMIT, getUserNavigationAccess, getZiFreePromptsUsage } from "@/lib/accessControl";
+import { FREE_ZI_PROMPT_LIMIT, getUserNavigationAccess, getZiFreePromptsUsage, normalizeExamTrack } from "@/lib/accessControl";
 import TrackWrapper from "@/components/TrackWrapper";
 import { initializeXp, integrityEnabled } from "@/lib/integrity.server.mjs";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
@@ -35,13 +36,15 @@ export default async function DashboardLayout({ children }) {
     getUserNavigationAccess(userId),
     userId ? getZiFreePromptsUsage(userId) : { remaining: FREE_ZI_PROMPT_LIMIT },
   ]);
+  const examTrack = accessContext.examTrack
+    || normalizeExamTrack((await cookies()).get("prepzii_track")?.value);
 
   return (
     <div className="relative min-h-screen bg-[var(--background)] transition-colors duration-200">
       <div className="relative z-10">
         <ZiEntityContextProvider>
           <Navbar plan={accessContext.plan} isPro={accessContext.isPro} />
-          <TrackWrapper>
+          <TrackWrapper examTrack={examTrack} isSignedIn={Boolean(userId)}>
             {children}
           </TrackWrapper>
           <Suspense fallback={null}>

@@ -764,7 +764,7 @@ export default function PublicLandingPage() {
       <footer className="bg-[#0F1720] py-5 sm:py-8 border-t-[3px] border-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-5 text-xs sm:text-sm text-gray-400">
           <div className="flex items-center gap-2 font-bold sm:gap-3">
-            <Logo forceDark size={36} />
+            <Logo forceDark size={36} loading="lazy" />
             <span>© {new Date().getFullYear()} PrepZii Systems</span>
           </div>
           <nav className={`${B} flex items-center gap-2 font-black uppercase tracking-wide`}>
