@@ -74,9 +74,10 @@ export async function savePYQAttempt(attempt) {
   return attemptData;
 }
 
-export async function savePYQAttempts(attempts) {
+export async function savePYQAttempts(attempts, { signal } = {}) {
   const res = await fetch("/api/pyq-attempts", {
     method: "POST",
+    signal,
     headers: {
       "Content-Type": "application/json",
     },

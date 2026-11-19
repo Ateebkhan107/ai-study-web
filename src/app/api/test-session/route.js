@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { after, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { getQuestions } from "@/lib/questions";
+import { uniqueMockQuestions } from "@/lib/questionUniqueness";
 import { getQuestionMarking } from "@/lib/analyticsHelpers";
 import { getInstituteContext } from "@/lib/instituteAuth";
 import { FEATURES, canUseFeature, getUserAccessContext } from "@/lib/accessControl";
@@ -295,9 +296,13 @@ export async function POST(request) {
       });
     }
 
+    if (!instituteTest) fetchedQuestions = uniqueMockQuestions(fetchedQuestions);
+
     if (fetchedQuestions.length !== Number(count)) {
       return NextResponse.json(
-        { error: "Not enough questions are available in the required subject ratio." },
+        { error: instituteTest
+          ? "Not enough questions are available in the required subject ratio."
+          : "There aren’t enough unique questions for these selections. Try fewer questions or more chapters." },
         { status: 422 }
       );
     }

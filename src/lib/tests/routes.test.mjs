@@ -105,6 +105,22 @@ test("existing normal starts keep their original safe DTO and bank source", asyn
   assert.equal(payload.questions[0].text, "Bank fixture"); assert.equal(payload.questions[0].correct, undefined);
   assert.equal(calls.some((c) => c.rpc || c.table?.startsWith("zi_generated")), false);
 });
+test("a mock test with too few unique questions is rejected before creating a session", async () => {
+  const fixture = globalThis.__phase5RouteFixture;
+  const previousQuestions = fixture.questions;
+  fixture.questions = () => [
+    bankQuestion,
+    { ...bankQuestion, id: fixtureId(2), text: `Question 7: ${bankQuestion.text}` },
+  ];
+  try {
+    const response = await POST(request("POST", { count: 2 }));
+    assert.equal(response.status, 422);
+    assert.match((await response.json()).error, /enough unique questions/i);
+    assert.equal(calls.some((call) => call.op === "insert"), false);
+  } finally {
+    fixture.questions = previousQuestions;
+  }
+});
 test("generated endpoints fail closed before migration/engine activation", async () => {
   const response = await POST(request("POST", { sourceType: "AI_GENERATED", generatedTestId: fixtureId(40) }));
   assert.equal(response.status, 503); assert.equal(calls.length, 0);

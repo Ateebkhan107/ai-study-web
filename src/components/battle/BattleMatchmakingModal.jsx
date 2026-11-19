@@ -12,11 +12,6 @@ import {
 } from "@/lib/battleAudio";
 import { StarsBackground } from "@/components/ui/stars-background";
 
-
-function cx(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 function initials(name) {
   return String(name || "Student")
     .trim()
@@ -32,6 +27,7 @@ export function BattleMatchmakingModal({
   profile,
   matchedData, // { battleId, opponent } if matched
   onCancel,
+  cancelDisabled,
 }) {
   const router = useRouter();
   const [phase, setPhase] = useState("searching"); // "searching" | "vs" | "countdown"
@@ -62,67 +58,53 @@ export function BattleMatchmakingModal({
     };
   }, [isOpen, phase]);
 
-  // Trigger VS screen and countdown when matched
+  const matchedBattleId = matchedData?.battleId;
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    if (!isOpen) {
+    if (!isOpen || !matchedBattleId) {
       setPhase("searching");
       setCount(3);
       return;
     }
 
-    if (matchedData?.battleId) {
-      if (pulseIntervalRef.current) clearInterval(pulseIntervalRef.current);
-      setPhase("vs");
-      playOpponentFound();
-      speakAnnouncer("Opponent found");
+    setPhase("vs");
+    playOpponentFound();
+    speakAnnouncer("Opponent found");
 
-      const vsTimer = setTimeout(() => {
+    const timers = [
+      setTimeout(() => {
         setPhase("countdown");
         setCount(3);
         playCountdownTick(3);
         speakAnnouncer("Three");
+      }, 1600),
+      setTimeout(() => {
+        setCount(2);
+        playCountdownTick(2);
+        speakAnnouncer("Two");
+      }, 2400),
+      setTimeout(() => {
+        setCount(1);
+        playCountdownTick(1);
+        speakAnnouncer("One");
+      }, 3200),
+      setTimeout(() => {
+        setCount("GO!");
+        playGoSound();
+        speakAnnouncer("Go!");
+      }, 4000),
+      setTimeout(() => router.push(`/battle/${matchedBattleId}`), 4600),
+    ];
 
-        const c2 = setTimeout(() => {
-          setCount(2);
-          playCountdownTick(2);
-          speakAnnouncer("Two");
-        }, 800);
-
-        const c1 = setTimeout(() => {
-          setCount(1);
-          playCountdownTick(1);
-          speakAnnouncer("One");
-        }, 1600);
-
-        const cGo = setTimeout(() => {
-          setCount("GO!");
-          playGoSound();
-          speakAnnouncer("Go!");
-        }, 2400);
-
-        const cStart = setTimeout(() => {
-          router.push(`/battle/${matchedData.battleId}`);
-        }, 3000);
-
-        return () => {
-          clearTimeout(c2);
-          clearTimeout(c1);
-          clearTimeout(cGo);
-          clearTimeout(cStart);
-        };
-      }, 1600);
-
-      return () => clearTimeout(vsTimer);
-    }
-  }, [isOpen, matchedData, router]);
+    return () => timers.forEach(clearTimeout);
+  }, [isOpen, matchedBattleId, router]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   if (!isOpen) return null;
 
   const opponentName = matchedData?.opponent?.displayName || matchedData?.opponent?.username || "Opponent";
-  const opponentRating = matchedData?.opponent?.arena_rating || 1000;
-  const myRating = profile?.arena_rating || 1000;
+  const opponentRating = matchedData?.opponent?.arena_rating ?? 1000;
+  const myRating = profile?.arena_rating ?? 1000;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl animate-in fade-in duration-200">
@@ -155,13 +137,13 @@ export function BattleMatchmakingModal({
               Searching for Opponent
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-slate-400 font-semibold max-w-md">
-              Pairing you with a same-track <span className="text-brand">{profile?.exam || "JEE"}</span> contender of comparable rating.
+              Pairing you with a same-track <span className="text-brand">{profile?.exam || "JEE"}</span> contender.
             </p>
 
             <div className="mt-8 flex items-center justify-center gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-3">
               <div className="text-left">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Your Rating</p>
-                <p className="text-base font-black text-white">{myRating} Elo</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Your Marks</p>
+                <p className="text-base font-black text-white">{myRating} Marks</p>
               </div>
               <div className="h-6 w-px bg-white/10" />
               <div className="text-left">
@@ -173,6 +155,7 @@ export function BattleMatchmakingModal({
             <button
               type="button"
               onClick={onCancel}
+              disabled={cancelDisabled}
               className="mt-8 rounded-full border border-white/20 bg-white/5 px-8 py-2.5 text-xs font-black uppercase tracking-wider text-slate-300 hover:border-rose-500 hover:bg-rose-500/10 hover:text-rose-400 transition"
             >
               Cancel Search
@@ -195,7 +178,7 @@ export function BattleMatchmakingModal({
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-brand">YOU</span>
                 <span className="text-sm sm:text-lg font-black text-white truncate max-w-[120px]">{profile?.full_name || profile?.username}</span>
-                <span className="text-xs text-slate-400 font-semibold">{myRating} Elo</span>
+                <span className="text-xs text-slate-400 font-semibold">{myRating} Marks</span>
               </div>
 
               {/* VS Emblem */}
@@ -210,7 +193,7 @@ export function BattleMatchmakingModal({
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">OPPONENT</span>
                 <span className="text-sm sm:text-lg font-black text-white truncate max-w-[120px]">{opponentName}</span>
-                <span className="text-xs text-slate-400 font-semibold">{opponentRating} Elo</span>
+                <span className="text-xs text-slate-400 font-semibold">{opponentRating} Marks</span>
               </div>
             </div>
 

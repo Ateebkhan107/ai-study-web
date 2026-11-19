@@ -1,8 +1,8 @@
 import "server-only";
+import { after } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { normalizeUsername } from "@/lib/username";
 
-export const BATTLE_QUESTION_COUNT = 10;
 export const BATTLE_EXPIRES_MINUTES = 10;
 
 export const SAFE_BATTLE_QUESTION_SELECT = `
@@ -16,65 +16,11 @@ export const SAFE_BATTLE_QUESTION_SELECT = `
   expected_time_seconds
 `;
 
-const SCORING_QUESTION_SELECT = `
-  id,
-  correct_answer
-`;
-
 const REVIEW_QUESTION_SELECT = `
   ${SAFE_BATTLE_QUESTION_SELECT},
   correct_answer,
   explanation
 `;
-
-// ==========================================
-// MARKS & RANKING CALCULATIONS
-// ==========================================
-
-/**
- * Threshold for "significantly different" Marks.
- * If opponent's Marks differ by this amount or more, the reward/penalty adjusts.
- */
-const MARKS_THRESHOLD = 100;
-
-/**
- * Calculates Marks change for two players after a ranked battle.
- * @param {number} marksA - Player A's current Marks
- * @param {number} marksB - Player B's current Marks
- * @param {"win"|"loss"|"draw"} resultForA - Result from Player A's perspective
- * @returns {{ changeA: number, changeB: number, newMarksA: number, newMarksB: number }}
- */
-export function calculateMarksChange(marksA = 1000, marksB = 1000, resultForA = "win") {
-  const ma = Math.max(0, Number(marksA) || 1000);
-  const mb = Math.max(0, Number(marksB) || 1000);
-  const diff = mb - ma; // positive = B is stronger, negative = A is stronger
-
-  let changeA = 0;
-  let changeB = 0;
-
-  if (resultForA === "draw") {
-    // No Marks change on draw
-    return { changeA: 0, changeB: 0, newMarksA: ma, newMarksB: mb };
-  }
-
-  if (resultForA === "win") {
-    // A wins
-    changeA = diff >= MARKS_THRESHOLD ? 30 : diff <= -MARKS_THRESHOLD ? 20 : 25;
-    // B loses — mirror penalty
-    changeB = diff >= MARKS_THRESHOLD ? -20 : diff <= -MARKS_THRESHOLD ? -30 : -25;
-  } else {
-    // A loses
-    changeA = diff >= MARKS_THRESHOLD ? -20 : diff <= -MARKS_THRESHOLD ? -30 : -25;
-    // B wins — mirror reward
-    changeB = diff >= MARKS_THRESHOLD ? 30 : diff <= -MARKS_THRESHOLD ? 20 : 25;
-  }
-
-  const newMarksA = Math.max(0, ma + changeA);
-  const newMarksB = Math.max(0, mb + changeB);
-
-  return { changeA, changeB, newMarksA, newMarksB };
-}
-
 
 export const ARENA_TIERS = [
   { name: "Bronze", key: "bronze", color: "#CD7F32", min: 0, max: 1099, icon: "shield" },
@@ -87,7 +33,7 @@ export const ARENA_TIERS = [
 ];
 
 export function getRatingTier(rating = 1000) {
-  const safeRating = Math.max(0, Number(rating) || 1000);
+  const safeRating = Math.max(0, Number(rating ?? 1000));
   return (
     ARENA_TIERS.find((tier) => safeRating >= tier.min && safeRating <= tier.max) ||
     ARENA_TIERS[0]
@@ -171,10 +117,6 @@ function normalizeExam(exam) {
   return String(exam || "").toUpperCase() === "NEET" ? "NEET" : "JEE";
 }
 
-function shuffle(values) {
-  return [...values].sort(() => Math.random() - 0.5);
-}
-
 function orderByQuestionIds(questions, questionIds) {
   const byId = new Map((questions || []).map((question) => [String(question.id), question]));
   return questionIds.map((id) => byId.get(String(id))).filter(Boolean);
@@ -215,11 +157,6 @@ function mapBattleQuestionForClient(question, revealAnswers = false) {
   return mapped;
 }
 
-function parseAnswer(value) {
-  if (value === undefined || value === null || value === "") return null;
-  return value;
-}
-
 function normalizeOption(value) {
   if (value === undefined || value === null) return "";
   const text = String(value).trim().toUpperCase();
@@ -227,15 +164,8 @@ function normalizeOption(value) {
   return text;
 }
 
-export function isAnswerCorrect(question, selectedAnswer) {
-  if (!question) return false;
-  const answer = parseAnswer(selectedAnswer);
-  if (answer === null) return false;
-  return normalizeOption(answer) === normalizeOption(question.correct_answer);
-}
-
 export async function getBattleProfile(userId) {
-  const [{ data: profile, error: profileError }, { data: stats, error: statsError }] = await Promise.all([
+  const [{ data: profile, error: profileError }, { data: stats }] = await Promise.all([
     supabaseAdmin
       .from("user_profiles")
       .select("id, clerk_user_id, full_name, username, exam, target_year")
@@ -273,69 +203,29 @@ export async function getBattleProfile(userId) {
 export async function requireBattleProfile(userId) {
   const profile = await getBattleProfile(userId);
   if (!profile) {
-    const error = new Error("Profile not found");
-    error.status = 404;
-    throw error;
+    throw Object.assign(new Error("Profile not found"), { status: 404 });
   }
   if (!profile.username) {
-    const error = new Error("Choose a username before using Battle Arena.");
-    error.status = 428;
-    throw error;
+    throw Object.assign(new Error("Choose a username before using Battle Arena."), { status: 428 });
   }
   return profile;
 }
 
-export async function selectBattleQuestionIds(exam) {
-  const { data, error } = await supabaseAdmin
-    .from("battle_questions")
-    .select("id")
-    .eq("exam", normalizeExam(exam))
-    .eq("is_active", true)
-    .limit(250);
-
-  if (error) throw error;
-
-  const ids = shuffle((data || []).map((question) => String(question.id))).slice(0, BATTLE_QUESTION_COUNT);
-  if (ids.length < BATTLE_QUESTION_COUNT) {
-    const battleError = new Error("Not enough active Battle Arena questions yet.");
-    battleError.status = 503;
-    throw battleError;
-  }
-  return ids;
+export function battleDatabaseError(error) {
+  const statusCode = /^PT([45]\d{2})$/.exec(error.code)?.[1];
+  if (!statusCode) return error;
+  return Object.assign(new Error(error.message), { status: Number(statusCode) });
 }
 
-export async function createBattleForPlayers({ exam, playerAId, playerBId }) {
-  if (!playerAId || !playerBId || playerAId === playerBId) {
-    const error = new Error("Battle requires two different players.");
-    error.status = 400;
-    throw error;
-  }
-
-  const questionIds = await selectBattleQuestionIds(exam);
-
-  const { data: match, error: matchError } = await supabaseAdmin
-    .from("battle_matches")
-    .insert({
-      exam: normalizeExam(exam),
-      status: "ACTIVE",
-      question_ids: questionIds,
-    })
-    .select("id, exam, status, question_ids, started_at, created_at")
-    .single();
-
-  if (matchError) throw matchError;
-
-  const { error: playersError } = await supabaseAdmin
-    .from("battle_players")
-    .insert([
-      { battle_id: match.id, user_id: playerAId },
-      { battle_id: match.id, user_id: playerBId },
-    ]);
-
-  if (playersError) throw playersError;
-
-  await supabaseAdmin.from("battle_queue").delete().in("user_id", [playerAId, playerBId]);
-  return match;
+export async function createBattleForPlayers({ exam, playerAId, playerBId, challengeId }) {
+  const { data: id, error } = await supabaseAdmin.rpc("battle_create_match", {
+    p_exam: normalizeExam(exam),
+    p_first: playerAId,
+    p_second: playerBId,
+    p_challenge_id: challengeId ?? null,
+  });
+  if (error) throw battleDatabaseError(error);
+  return { id };
 }
 
 export async function getBattleForUser({ battleId, userId, includeReview = false }) {
@@ -475,153 +365,19 @@ export async function hydratePlayerProgress(battle) {
   };
 }
 
-// ==========================================
-// MATCH FINISH & DETERMINISTIC ELO PROCESSING
-// ==========================================
-
 export async function finishBattleForUser({ battleId, userId }) {
-  const battle = await getBattleForUser({ battleId, userId });
-  if (battle.status !== "ACTIVE") {
-    return hydratePlayerProgress(battle);
-  }
+  const { data: finalized, error } = await supabaseAdmin.rpc("battle_submit", {
+    p_battle_id: battleId,
+    p_user_id: userId,
+  });
+  if (error) throw battleDatabaseError(error);
 
-  const { data: scoringQuestions, error: scoringError } = await supabaseAdmin
-    .from("battle_questions")
-    .select(SCORING_QUESTION_SELECT)
-    .in("id", battle.question_ids || []);
-  if (scoringError) throw scoringError;
-
-  const { data: answers, error: answerError } = await supabaseAdmin
-    .from("battle_answers")
-    .select("question_id, selected_answer")
-    .eq("battle_id", battleId)
-    .eq("user_id", userId);
-  if (answerError) throw answerError;
-
-  const answerByQuestion = new Map((answers || []).map((answer) => [String(answer.question_id), answer.selected_answer]));
-  const questionById = new Map((scoringQuestions || []).map((question) => [String(question.id), question]));
-  let correctCount = 0;
-  let wrongCount = 0;
-
-  for (const questionId of battle.question_ids || []) {
-    const selectedAnswer = answerByQuestion.get(String(questionId));
-    if (selectedAnswer === undefined || selectedAnswer === null || selectedAnswer === "") continue;
-    if (isAnswerCorrect(questionById.get(String(questionId)), selectedAnswer)) {
-      correctCount++;
-    } else {
-      wrongCount++;
-    }
-  }
-
-  const skippedCount = Math.max(0, (battle.question_ids || []).length - correctCount - wrongCount);
-  const score = correctCount * 4 - wrongCount;
-
-  const { error: updatePlayerError } = await supabaseAdmin
-    .from("battle_players")
-    .update({
-      score,
-      correct_count: correctCount,
-      wrong_count: wrongCount,
-      skipped_count: skippedCount,
-      completed_at: new Date().toISOString(),
-    })
-    .eq("battle_id", battleId)
-    .eq("user_id", userId)
-    .is("completed_at", null);
-  if (updatePlayerError) throw updatePlayerError;
-
-  const refreshed = await getBattleForUser({ battleId, userId });
-  const bothFinished = refreshed.players.length === 2 && refreshed.players.every((player) => player.completed_at);
-
-  if (bothFinished && refreshed.status === "ACTIVE") {
-    const [pA, pB] = refreshed.players;
-    let winnerUserId = null;
-    let isDraw = false;
-
-    if (pA.score !== pB.score) {
-      winnerUserId = pA.score > pB.score ? pA.user_id : pB.user_id;
-    } else {
-      const aTime = new Date(pA.completed_at).getTime();
-      const bTime = new Date(pB.completed_at).getTime();
-      if (aTime !== bTime) winnerUserId = aTime < bTime ? pA.user_id : pB.user_id;
-      else isDraw = true;
-    }
-
-    // Fetch existing stats for Elo calculations
-    let { data: statsRows } = await supabaseAdmin
-      .from("battle_stats")
-      .select("user_id, arena_rating, peak_rating, win_streak, best_streak")
-      .in("user_id", [pA.user_id, pB.user_id]);
-
-    if (!statsRows) {
-      const fallbackStats = await supabaseAdmin
-        .from("battle_stats")
-        .select("user_id, wins, losses, total_battles")
-        .in("user_id", [pA.user_id, pB.user_id]);
-      statsRows = fallbackStats.data;
-    }
-
-    const statsMap = new Map((statsRows || []).map((s) => [s.user_id, s]));
-    const marksA = statsMap.get(pA.user_id)?.arena_rating ?? 1000;
-    const marksB = statsMap.get(pB.user_id)?.arena_rating ?? 1000;
-
-    const resultForA = isDraw ? "draw" : pA.user_id === winnerUserId ? "win" : "loss";
-    const { changeA, changeB, newMarksA, newMarksB } = calculateMarksChange(marksA, marksB, resultForA);
-
-    // Update match status and winner
-    const { error: finishError } = await supabaseAdmin
-      .from("battle_matches")
-      .update({
-        status: "FINISHED",
-        finished_at: new Date().toISOString(),
-        winner_user_id: winnerUserId,
-      })
-      .eq("id", battleId);
-    if (finishError) throw finishError;
-
-    // Update match player Marks deltas if columns exist
-    await Promise.all([
-      supabaseAdmin
-        .from("battle_players")
-        .update({
-          rating_before: marksA,
-          rating_after: newMarksA,
-          rating_change: changeA,
-        })
-        .eq("battle_id", battleId)
-        .eq("user_id", pA.user_id),
-      supabaseAdmin
-        .from("battle_players")
-        .update({
-          rating_before: marksB,
-          rating_after: newMarksB,
-          rating_change: changeB,
-        })
-        .eq("battle_id", battleId)
-        .eq("user_id", pB.user_id),
-    ]).catch(() => {});
-
-    // Ensure current season is registered
-    const seasonId = getCurrentSeasonId();
-    await ensureSeason(seasonId).catch(() => {});
-
-    // Update all-time & seasonal stats for both players
-    const resultA = isDraw ? "draw" : pA.user_id === winnerUserId ? "win" : "loss";
-    const resultB = isDraw ? "draw" : pB.user_id === winnerUserId ? "win" : "loss";
-
-    const [updatedStatsA, updatedStatsB] = await Promise.all([
-      updateBattleStats(pA.user_id, resultA, changeA),
-      updateBattleStats(pB.user_id, resultB, changeB),
-      updateSeasonBattleStats(seasonId, pA.user_id, resultA, changeA),
-      updateSeasonBattleStats(seasonId, pB.user_id, resultB, changeB),
-    ]);
-
-    // Record Live Feed Events
-    try {
-      const winner = pA.user_id === winnerUserId ? pA : pB;
-      const loser = pA.user_id === winnerUserId ? pB : pA;
-
-      if (!isDraw && winner) {
+  const battle = await hydratePlayerProgress(await getBattleForUser({ battleId, userId }));
+  const winner = battle.players.find((player) => player.user_id === battle.winner_user_id);
+  if (finalized && winner) {
+    const loser = battle.players.find((player) => player.user_id !== winner.user_id);
+    after(async () => {
+      try {
         await recordBattleEvent({
           eventType: "match_finish",
           userId: winner.user_id,
@@ -629,20 +385,17 @@ export async function finishBattleForUser({ battleId, userId }) {
           message: `${winner.profile.displayName} defeated ${loser.profile.displayName} ${winner.score}–${loser.score}`,
           metadata: { score: `${winner.score}-${loser.score}`, battleId },
         });
-
-        const winningStats = winner.user_id === pA.user_id ? updatedStatsA : updatedStatsB;
-        if (winningStats && winningStats.win_streak >= 3 && winningStats.win_streak % 2 !== 0) {
+        if (winner.win_streak >= 3 && winner.win_streak % 2 !== 0) {
           await recordBattleEvent({
             eventType: "streak",
             userId: winner.user_id,
             opponentId: null,
-            message: `${winner.profile.displayName} reached a ${winningStats.win_streak}-win streak`,
-            metadata: { streak: winningStats.win_streak },
+            message: `${winner.profile.displayName} reached a ${winner.win_streak}-win streak`,
+            metadata: { streak: winner.win_streak },
           });
         }
-
-        const tierBefore = getRatingTier(winner.user_id === pA.user_id ? marksA : marksB);
-        const tierAfter = getRatingTier(winner.user_id === pA.user_id ? newMarksA : newMarksB);
+        const tierBefore = getRatingTier(winner.rating_before);
+        const tierAfter = getRatingTier(winner.rating_after);
         if (tierAfter.min > tierBefore.min) {
           await recordBattleEvent({
             eventType: "tier_up",
@@ -652,150 +405,13 @@ export async function finishBattleForUser({ battleId, userId }) {
             metadata: { tier: tierAfter.name },
           });
         }
+      } catch (eventError) {
+        console.error("[RECORD_BATTLE_EVENT_ERROR]", eventError);
       }
-    } catch (eventErr) {
-      console.error("[RECORD_BATTLE_EVENT_ERROR]", eventErr);
-    }
+    });
   }
 
-  return hydratePlayerProgress(await getBattleForUser({ battleId, userId }));
-}
-
-async function updateBattleStats(userId, result, ratingChange = 0) {
-  const defaults = {
-    user_id: userId,
-    wins: 0,
-    losses: 0,
-    draws: 0,
-    total_battles: 0,
-    arena_rating: 1000,
-    peak_rating: 1000,
-    win_streak: 0,
-    best_streak: 0,
-  };
-
-  let hasEloColumns = true;
-  let { data: current, error: readError } = await supabaseAdmin
-    .from("battle_stats")
-    .select("user_id, wins, losses, draws, total_battles, arena_rating, peak_rating, win_streak, best_streak")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (readError) {
-    const fallback = await supabaseAdmin
-      .from("battle_stats")
-      .select("user_id, wins, losses, draws, total_battles")
-      .eq("user_id", userId)
-      .maybeSingle();
-    current = fallback.data;
-    hasEloColumns = false;
-  }
-
-  const next = current || defaults;
-  next.total_battles = (next.total_battles || 0) + 1;
-  if (result === "win") {
-    next.wins = (next.wins || 0) + 1;
-    next.win_streak = (next.win_streak || 0) + 1;
-    next.best_streak = Math.max(next.best_streak || 0, next.win_streak);
-  } else if (result === "loss") {
-    next.losses = (next.losses || 0) + 1;
-    next.win_streak = 0;
-  } else if (result === "draw") {
-    next.draws = (next.draws || 0) + 1;
-  }
-
-  next.arena_rating = Math.max(0, (next.arena_rating || 1000) + ratingChange);
-  next.peak_rating = Math.max(next.peak_rating || 1000, next.arena_rating);
-
-  const payload = hasEloColumns
-    ? { ...next, updated_at: new Date().toISOString() }
-    : {
-        user_id: next.user_id,
-        wins: next.wins,
-        losses: next.losses,
-        draws: next.draws,
-        total_battles: next.total_battles,
-        updated_at: new Date().toISOString(),
-      };
-
-  const { error } = await supabaseAdmin
-    .from("battle_stats")
-    .upsert(payload, { onConflict: "user_id" });
-
-  if (error && hasEloColumns) {
-    await supabaseAdmin
-      .from("battle_stats")
-      .upsert(
-        {
-          user_id: next.user_id,
-          wins: next.wins,
-          losses: next.losses,
-          draws: next.draws,
-          total_battles: next.total_battles,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "user_id" }
-      )
-      .catch((e) => console.error("[UPDATE_BATTLE_STATS_FALLBACK_ERROR]", e));
-  }
-
-  return next;
-}
-
-async function updateSeasonBattleStats(seasonId, userId, result, ratingChange = 0) {
-  const defaults = {
-    season_id: seasonId,
-    user_id: userId,
-    arena_rating: 1000,
-    peak_rating: 1000,
-    wins: 0,
-    losses: 0,
-    draws: 0,
-    win_streak: 0,
-    best_streak: 0,
-    total_battles: 0,
-  };
-
-  const { data: current, error: readError } = await supabaseAdmin
-    .from("battle_season_stats")
-    .select("season_id, user_id, arena_rating, peak_rating, wins, losses, draws, win_streak, best_streak, total_battles")
-    .eq("season_id", seasonId)
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (readError) {
-    // If season stats table not ready, safely skip
-    return null;
-  }
-
-  const next = current || defaults;
-  next.total_battles += 1;
-  if (result === "win") {
-    next.wins += 1;
-    next.win_streak = (next.win_streak || 0) + 1;
-    next.best_streak = Math.max(next.best_streak || 0, next.win_streak);
-  } else if (result === "loss") {
-    next.losses += 1;
-    next.win_streak = 0;
-  } else if (result === "draw") {
-    next.draws += 1;
-  }
-
-  next.arena_rating = Math.max(0, (next.arena_rating || 1000) + ratingChange);
-  next.peak_rating = Math.max(next.peak_rating || 1000, next.arena_rating);
-
-  const { error } = await supabaseAdmin
-    .from("battle_season_stats")
-    .upsert(
-      { ...next, updated_at: new Date().toISOString() },
-      { onConflict: "season_id,user_id" }
-    );
-
-  if (error) {
-    console.error("[UPDATE_SEASON_BATTLE_STATS_ERROR]", error);
-  }
-
-  return next;
+  return battle;
 }
 
 export async function recordBattleEvent({ eventType, userId, opponentId, message, metadata = {} }) {

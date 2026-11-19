@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import posthog from "posthog-js";
@@ -14,9 +14,14 @@ import MathText from "@/components/MathText";
 import QuestionDiagram from "@/components/pyq/QuestionDiagram";
 import { hasNativeQuestionDiagram } from "@/lib/questionDiagrams";
 import { useRegisterZiEntity } from "@/lib/zi/ZiEntityContext";
-import { AlertTriangle, BookOpen, FileText, Flag, Inbox, RotateCcw, Shuffle } from "lucide-react";
+import { AlertTriangle, BookOpen, FileText, Flag, Inbox, LoaderCircle, RotateCcw, Shuffle } from "lucide-react";
 
 const LETTERS = ["A", "B", "C", "D"];
+const PYQ_ATTEMPT_BATCH_SIZE = 200;
+
+function hasAnswer(value) {
+  return value != null && String(value).trim() !== "";
+}
 
 const PALETTE_LEGEND = [
   {
@@ -221,10 +226,12 @@ export default function PYQSessionPage() {
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finishing, setFinishing] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [visitedQuestionIds, setVisitedQuestionIds] = useState(() => new Set());
   const [markedQuestionIds, setMarkedQuestionIds] = useState(() => new Set());
-  const completionType = useRef("manual");
+  const submissionRef = useRef(null);
+  const submissionInProgress = useRef(false);
   
   // Timer state for Full Paper mode (180 mins = 10800 secs)
   const [timeLeft, setTimeLeft] = useState(180 * 60);
@@ -268,22 +275,19 @@ export default function PYQSessionPage() {
   const shouldLoadWholePaper = mode === "full";
   const shouldLoadBalancedRandom = mode === "random" && (exam === "JEE" || exam === "NEET");
 
+  const timerRunning = mode === "full" && questions.length > 0 && timeLeft > 0 && !finishing && !submitError;
   useEffect(() => {
-    if (finishing || questions.length === 0 || mode !== "full") return;
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          completionType.current = "timeout";
-          handleFinishDeck(); // Auto-submit when time's up
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    if (!timerRunning) return;
+    const interval = setInterval(() => setTimeLeft((previous) => Math.max(0, previous - 1)), 1000);
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finishing, questions.length, mode]);
+  }, [timerRunning]);
+
+  const submitOnTimeout = useEffectEvent(() => {
+    if (!submissionRef.current) void handleFinishDeck("timeout");
+  });
+  useEffect(() => {
+    if (mode === "full" && questions.length > 0 && timeLeft === 0) submitOnTimeout();
+  }, [mode, questions.length, timeLeft]);
 
   useEffect(() => {
     let cancelled = false;
@@ -423,9 +427,7 @@ export default function PYQSessionPage() {
   );
   const answeredCount = useMemo(
     () =>
-      Object.values(answers).filter(
-        (value) => value !== undefined && value !== null && String(value).trim() !== ""
-      ).length,
+      Object.values(answers).filter(hasAnswer).length,
     [answers]
   );
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
@@ -531,27 +533,62 @@ export default function PYQSessionPage() {
     handleNext();
   }, [currentQuestion, handleNext]);
 
-  async function handleFinishDeck() {
-    if (questions.length === 0 || finishing) return;
-    setFinishing(true);
+  async function handleFinishDeck(completionType = "manual") {
+    if (questions.length === 0 || submissionInProgress.current) return;
 
-    const answeredQuestions = questions.filter((q) => answers[q.id]);
-    const submission = answeredQuestions.map((q) => ({
-      question_id: q.id,
-      selected_option: answers[q.id],
-      chapter: q.chapter,
-      subject: q.subject,
-      exam: q.exam,
-    }));
-
-    let gradingResults = [];
-
-    if (submission.length > 0) {
-      const response = await savePYQAttempts(submission);
-      gradingResults = Array.isArray(response?.results) ? response.results : [];
+    if (!submissionRef.current) {
+      const attempts = questions.filter((question) => hasAnswer(answers[question.id])).map((question) => ({
+        question_id: question.id,
+        selected_option: answers[question.id],
+      }));
+      const batches = [];
+      for (let start = 0; start < attempts.length; start += PYQ_ATTEMPT_BATCH_SIZE) {
+        batches.push(attempts.slice(start, start + PYQ_ATTEMPT_BATCH_SIZE));
+      }
+      submissionRef.current = {
+        questions,
+        answers,
+        attempts,
+        batches,
+        completionType,
+        timeTaken: mode === "full" ? 180 * 60 - timeLeft : null,
+      };
     }
 
-    const resultMap = new Map(gradingResults.map((result) => [result.question_id, result]));
+    submissionInProgress.current = true;
+    setSubmitError("");
+    setFinishing(true);
+
+    try {
+      await submitDeck(submissionRef.current);
+    } catch (error) {
+      console.error("Failed to submit PYQ session:", error);
+      setSubmitError("We couldn’t finish submitting your test. Your answers are still here. Please try again.");
+      submissionInProgress.current = false;
+      setFinishing(false);
+    }
+  }
+
+  async function submitDeck(submission) {
+    const { questions } = submission;
+    const resultMap = new Map();
+    // Keep each batch object stable so the API can replay a retry without duplicating attempts.
+    for (const batch of submission.batches) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30_000);
+      try {
+        const response = await savePYQAttempts(batch, { signal: controller.signal });
+        for (const result of response?.results || []) {
+          resultMap.set(String(result.question_id), result);
+        }
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    if (submission.attempts.some(({ question_id }) => typeof resultMap.get(String(question_id))?.is_correct !== "boolean")) {
+      throw new Error("Missing PYQ grades in submission response");
+    }
 
     let correct = 0;
     let wrong = 0;
@@ -561,9 +598,9 @@ export default function PYQSessionPage() {
     const reviewData = questions.map((q) => {
       maxScore += (Number(q.marks_positive) || 4);
       
-      const selected = answers[q.id];
-      const isAnswered = selected !== undefined && selected !== null && selected !== "";
-      const serverResult = resultMap.get(q.id);
+      const selected = submission.answers[q.id];
+      const isAnswered = hasAnswer(selected);
+      const serverResult = resultMap.get(String(q.id));
       const isCorrect = isAnswered && Boolean(serverResult?.is_correct);
       if (isAnswered && isCorrect) {
         correct += 1;
@@ -601,7 +638,7 @@ export default function PYQSessionPage() {
         correct_option: serverResult?.correct_option ?? null,
         explanation: serverResult?.explanation ?? null,
         explanation_image: serverResult?.explanation_image ?? null,
-        selected: selected || null,
+        selected: isAnswered ? selected : null,
         question_type: q.question_type || "MCQ",
         numerical_answer: serverResult?.numerical_answer ?? null,
         correct_options: serverResult?.correct_options ?? null,
@@ -610,22 +647,22 @@ export default function PYQSessionPage() {
       };
     });
 
-    const skipped = questions.length - answeredQuestions.length;
+    const skipped = questions.length - submission.attempts.length;
     const attempted = correct + wrong;
     const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));
+      sessionStorage.removeItem(reviewStorageKey);
+    }
+
     posthog.capture("pyq_practice_completed", {
       question_count: questions.length,
       questions_attempted: attempted,
       correct_answers: correct,
       accuracy_percent: accuracy,
-      time_taken_seconds: mode === "full" ? 180 * 60 - timeLeft : null,
-      completion_type: completionType.current,
+      time_taken_seconds: submission.timeTaken,
+      completion_type: submission.completionType,
     });
-
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("pyq_session_review", JSON.stringify(reviewData));
-      sessionStorage.removeItem(reviewStorageKey);
-    }
 
     const firstQ = questions[0] || {};
     const resolvedYear = yearsParam || (firstQ.year ? String(firstQ.year) : "");
@@ -700,6 +737,32 @@ export default function PYQSessionPage() {
     );
   }
 
+  if (finishing || submitError) {
+    return (
+      <div className="grid h-screen place-items-center bg-slate-50 px-4 dark:bg-[var(--background)]">
+        <div className="w-full max-w-sm rounded-xl border border-slate-200 bg-[var(--card)] p-6 text-center shadow-sm dark:border-[var(--border)]">
+          {finishing ? (
+            <div role="status" className="flex items-center justify-center gap-3 text-sm font-bold text-slate-800 dark:text-slate-100">
+              <LoaderCircle aria-hidden="true" className="h-5 w-5 text-indigo-500 motion-safe:animate-spin" />
+              Submitting…
+            </div>
+          ) : (
+            <>
+              <p role="alert" className="text-sm text-slate-700 dark:text-slate-200">{submitError}</p>
+              <button
+                type="button"
+                onClick={() => void handleFinishDeck()}
+                className="mt-4 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white"
+              >
+                Retry submission
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-slate-50 dark:bg-[var(--background)]">
       {/* ── Header ── */}
@@ -757,11 +820,11 @@ export default function PYQSessionPage() {
               </div>
             </div>
             <button
-              onClick={handleFinishDeck}
-              disabled={questions.length === 0 || finishing}
+              type="button"
+              onClick={() => void handleFinishDeck()}
               className="rounded-lg bg-brand px-3 py-1.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4"
             >
-              {finishing ? "Finishing..." : <><span className="sm:hidden">Finish</span><span className="hidden sm:inline">Finish Deck</span></>}
+              <span className="sm:hidden">Finish</span><span className="hidden sm:inline">Finish Deck</span>
             </button>
           </div>
         </div>

@@ -6,5 +6,5 @@ export const metadata = {
 
 export default async function BattleRoomPage({ params }) {
   const { id } = await params;
-  return <BattleRoomClient battleId={id} />;
+  return <BattleRoomClient key={id} battleId={id} />;
 }

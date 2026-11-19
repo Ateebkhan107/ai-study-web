@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession, useUser } from "@clerk/nextjs";
@@ -41,6 +41,13 @@ async function fetchJson(url, options) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || "Request failed");
   return data;
+}
+
+function withAnswer(answers, questionId, value) {
+  const next = { ...answers };
+  if (value == null) delete next[questionId];
+  else next[questionId] = value;
+  return next;
 }
 
 function normalizeOption(value) {
@@ -173,10 +180,10 @@ function ResultPanel({
             </div>
           </div>
 
-          {/* Elo Rating Change Pill */}
+          {/* Arena Marks changes */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-3.5 backdrop-blur-sm">
-            <span className="text-xs font-black uppercase tracking-wider text-slate-400">Arena Rating:</span>
-            <span className="text-lg font-black font-display text-white">{ratingAfter} Elo</span>
+            <span className="text-xs font-black uppercase tracking-wider text-slate-400">Arena Marks:</span>
+            <span className="text-lg font-black font-display text-white">{ratingAfter} Marks</span>
             <span className={cx(
               "rounded-lg px-2.5 py-0.5 text-xs font-black",
               ratingChange > 0
@@ -185,7 +192,7 @@ function ResultPanel({
                 ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
                 : "bg-white/10 text-slate-300"
             )}>
-              {ratingChange >= 0 ? `+${ratingChange}` : ratingChange} Elo
+              {ratingChange >= 0 ? `+${ratingChange}` : ratingChange} Marks
             </span>
             {me?.win_streak >= 2 && (
               <span className="inline-flex items-center gap-1 rounded-lg bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 text-xs font-black text-amber-400">
@@ -309,6 +316,13 @@ export default function BattleRoomClient({ battleId }) {
   const [battle, setBattle] = useState(null);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState({});
+  const latestAnswers = useRef({});
+  const savedAnswers = useRef({});
+  const pendingAnswers = useRef(new Map());
+  const saveQueue = useRef(Promise.resolve());
+  const answerVersion = useRef(0);
+  const snapshotRequest = useRef(0);
+  const submissionPending = useRef(false);
   const [elapsed, setElapsed] = useState(0);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -331,32 +345,45 @@ export default function BattleRoomClient({ battleId }) {
   const me = getMe(battle, userId);
   const opponent = getOpponent(battle, userId);
   const hasFinished = Boolean(me?.completed_at);
+  const answersLocked = hasFinished || finishing || battle?.status !== "ACTIVE";
+
+  const displayAnswers = useCallback((next) => {
+    latestAnswers.current = next;
+    setAnswers(next);
+  }, []);
 
   const loadBattle = useCallback(async () => {
+    const requestId = ++snapshotRequest.current;
+    const version = answerVersion.current;
     try {
-      const data = await fetchJson(`/api/battle/matches/${battleId}`);
-      setBattle(data.battle);
-      // Safely merge server answers with local answers so any in-flight local choice is preserved
-      setAnswers((previous) => ({
-        ...(data.battle?.answers || {}),
-        ...previous,
-      }));
-      if (data.battle?.started_at) {
-        setElapsed(Math.max(0, Math.round((Date.now() - new Date(data.battle.started_at).getTime()) / 1000)));
+      const { battle: snapshot } = await fetchJson(`/api/battle/matches/${battleId}`, { cache: "no-store" });
+      if (requestId !== snapshotRequest.current) return;
+      setBattle(snapshot);
+      if (version === answerVersion.current && pendingAnswers.current.size === 0) {
+        savedAnswers.current = snapshot.answers || {};
+        displayAnswers(savedAnswers.current);
       }
-    } catch (err) {
-      // Don't flash background refresh error if match already loaded
-      if (!battle) setError(err.message);
+      if (snapshot.started_at) {
+        setElapsed(Math.max(0, Math.round((Date.now() - new Date(snapshot.started_at).getTime()) / 1000)));
+      }
+    } catch (error) {
+      if (requestId === snapshotRequest.current) throw error;
     }
-  }, [battleId, battle]);
+  }, [battleId, displayAnswers]);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     loadBattle()
-      .catch((err) => setError(err.message))
+      .catch((error) => setError(error.message))
       .finally(() => setLoading(false));
   }, [loadBattle]);
   /* eslint-enable react-hooks/set-state-in-effect */
+
+  useEffect(() => {
+    if (battle?.status === "FINISHED" || battle?.status === "CANCELLED") return;
+    const fallback = setInterval(() => loadBattle().catch(() => {}), 4000);
+    return () => clearInterval(fallback);
+  }, [battle?.status, loadBattle]);
 
   useEffect(() => {
     if (!battle?.started_at || battle.status === "FINISHED") return;
@@ -404,11 +431,9 @@ export default function BattleRoomClient({ battleId }) {
       channelRef.current = channel;
     }
 
-    subscribe();
-    const fallback = setInterval(() => loadBattle().catch(() => {}), 4000);
+    subscribe().catch(() => {});
     return () => {
       cancelled = true;
-      clearInterval(fallback);
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
@@ -428,72 +453,55 @@ export default function BattleRoomClient({ battleId }) {
     }
   }, [battleId, userId]);
 
-  const saveAnswer = useCallback(async (question, value) => {
-    if (!question || hasFinished || battle?.status !== "ACTIVE") return;
+  const saveAnswer = useCallback((question, value) => {
+    if (!question || answersLocked || submissionPending.current) return;
+    const questionId = question.id;
+    const version = ++answerVersion.current;
+    pendingAnswers.current.set(questionId, version);
+    displayAnswers(withAnswer(latestAnswers.current, questionId, value));
     playAnswerSelect();
     setSaving(true);
     setError("");
 
-    // 1. Optimistic update: instantly update UI
-    setAnswers((previous) => {
-      const updated = { ...previous };
-      if (value === null || value === undefined || value === "") {
-        delete updated[question.id];
-      } else {
-        updated[question.id] = value;
+    // Write optimistic selections in the same order in which they were made.
+    saveQueue.current = saveQueue.current.then(async () => {
+      try {
+        await fetchJson(`/api/battle/matches/${battleId}/answers`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ questionId, selectedAnswer: value }),
+        });
+        savedAnswers.current = withAnswer(savedAnswers.current, questionId, value);
+        void broadcastProgress();
+      } catch (error) {
+        if (pendingAnswers.current.get(questionId) === version) {
+          displayAnswers(withAnswer(latestAnswers.current, questionId, savedAnswers.current[questionId]));
+          setError(error.message || "Failed to save answer");
+        }
+      } finally {
+        answerVersion.current++;
+        if (pendingAnswers.current.get(questionId) === version) pendingAnswers.current.delete(questionId);
+        setSaving(pendingAnswers.current.size > 0);
       }
-      return updated;
     });
-
-    try {
-      await fetchJson(`/api/battle/matches/${battleId}/answers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ questionId: question.id, selectedAnswer: value }),
-      });
-      // 2. Broadcast to opponent
-      await broadcastProgress();
-    } catch (err) {
-      console.error("[SAVE_ANSWER_ERROR]", err);
-      setError(err.message || "Failed to save answer");
-    } finally {
-      setSaving(false);
-    }
-  }, [battle?.status, battleId, broadcastProgress, hasFinished]);
+  }, [answersLocked, battleId, broadcastProgress, displayAnswers]);
 
   const selectOption = useCallback((question, optionId) => {
-    if (!question || hasFinished || battle?.status !== "ACTIVE") return;
-    const type = String(question.question_type || "MCQ").toLowerCase();
-    
-    if (type.includes("multiple")) {
-      const current = Array.isArray(answers[question.id]) ? answers[question.id] : [];
-      const next = current.includes(optionId)
-        ? current.filter((item) => item !== optionId)
-        : [...current, optionId].sort();
-      saveAnswer(question, next.length > 0 ? next : null);
-      return;
-    }
+    if (!question || answersLocked) return;
+    const current = normalizeOption(latestAnswers.current[question.id]);
+    saveAnswer(question, answerMatches(current, optionId) ? null : optionId);
+  }, [answersLocked, saveAnswer]);
 
-    // Single-choice MCQ: tapping the same option deselects it
-    const current = normalizeOption(answers[question.id]);
-    if (answerMatches(current, optionId)) {
-      saveAnswer(question, null);
-    } else {
-      saveAnswer(question, optionId);
-    }
-  }, [answers, battle?.status, hasFinished, saveAnswer]);
-
-  const clearAnswer = useCallback((question) => {
-    if (!question || hasFinished || battle?.status !== "ACTIVE") return;
-    saveAnswer(question, null);
-  }, [battle?.status, hasFinished, saveAnswer]);
+  const clearAnswer = useCallback((question) => saveAnswer(question, null), [saveAnswer]);
 
   // Keyboard Navigation: A-D / 1-4 for options, Arrows for navigation
   useEffect(() => {
-    if (hasFinished || battle?.status !== "ACTIVE" || !currentQuestion) return;
+    if (answersLocked || !currentQuestion) return;
 
     function handleKeyDown(event) {
-      if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey
+        || event.target.closest?.("input, textarea, select, [contenteditable]")
+        || (event.key === "Enter" && event.target.closest?.("button, a"))) return;
 
       const key = event.key.toUpperCase();
       if (["A", "B", "C", "D"].includes(key)) {
@@ -517,9 +525,10 @@ export default function BattleRoomClient({ battleId }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [hasFinished, battle?.status, currentQuestion, battle?.questions, selectOption, clearAnswer]);
+  }, [answersLocked, currentQuestion, battle?.questions, selectOption, clearAnswer]);
 
   async function finishBattle() {
+    if (answersLocked || submissionPending.current || pendingAnswers.current.size > 0) return;
     const totalQ = (battle?.questions || []).length || 10;
     const unanswered = totalQ - myAnswered;
     const promptMsg = unanswered > 0
@@ -527,15 +536,20 @@ export default function BattleRoomClient({ battleId }) {
       : "Submit and finalize your battle answers?";
     if (!window.confirm(promptMsg)) return;
 
+    submissionPending.current = true;
     setFinishing(true);
     setError("");
     try {
       const data = await fetchJson(`/api/battle/matches/${battleId}/finish`, { method: "POST" });
+      snapshotRequest.current++;
       setBattle(data.battle);
-      await broadcastProgress();
+      savedAnswers.current = data.battle.answers || {};
+      displayAnswers(savedAnswers.current);
+      void broadcastProgress();
     } catch (err) {
       setError(err.message || "Failed to submit battle");
     } finally {
+      submissionPending.current = false;
       setFinishing(false);
     }
   }
@@ -564,10 +578,10 @@ export default function BattleRoomClient({ battleId }) {
     );
   }
 
-  if (error && !battle) {
+  if (!battle || battle.status === "CANCELLED") {
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
-        <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-6 text-rose-300">{error}</div>
+        <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-6 text-rose-300">{error || "This battle is no longer active."}</div>
       </div>
     );
   }
@@ -724,7 +738,7 @@ export default function BattleRoomClient({ battleId }) {
             <button
               type="button"
               onClick={finishBattle}
-              disabled={finishing || hasFinished}
+              disabled={saving || answersLocked}
               className="w-full mt-2 rounded-xl border border-brand/50 bg-brand/10 py-2.5 text-xs font-black uppercase tracking-wider text-amber-700 hover:bg-brand hover:text-slate-950 dark:text-brand dark:hover:text-slate-950 transition active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {finishing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
@@ -774,97 +788,73 @@ export default function BattleRoomClient({ battleId }) {
                 </div>
 
                 {/* Options */}
-                {String(currentQuestion.question_type || "").toLowerCase().includes("numerical") ? (
-                  <div className="mt-6 max-w-md space-y-2">
-                    <label className="block text-xs font-black uppercase tracking-wider text-slate-400">Numerical Value</label>
-                    <input
-                      key={currentQuestion.id}
-                      type="text"
-                      inputMode="decimal"
-                      value={answers[currentQuestion.id] ?? ""}
-                      disabled={hasFinished}
-                      onChange={(event) => {
-                        const val = event.target.value;
-                        setAnswers((prev) => ({ ...prev, [currentQuestion.id]: val }));
-                      }}
-                      onBlur={(event) => saveAnswer(currentQuestion, event.target.value.trim())}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") {
-                          saveAnswer(currentQuestion, event.currentTarget.value.trim());
-                        }
-                      }}
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30 dark:border-white/10 dark:bg-white/5 dark:text-white"
-                      placeholder="Type numerical value"
-                    />
-                  </div>
-                ) : (
-                  <div className="mt-6 space-y-3">
-                    {LETTERS.map((letter) => {
-                      const optionText = currentQuestion[`option_${letter.toLowerCase()}`];
-                      const optionImage = currentQuestion[`option_${letter.toLowerCase()}_image`];
-                      if (!optionText && !optionImage) return null;
-                      const selected = answerMatches(normalizeOption(answers[currentQuestion.id]), letter);
-                      return (
-                        <button
-                          key={letter}
-                          type="button"
-                          disabled={hasFinished}
-                          onClick={() => selectOption(currentQuestion, letter)}
+                <div className="mt-6 space-y-3">
+                  {LETTERS.map((letter) => {
+                    const optionText = currentQuestion[`option_${letter.toLowerCase()}`];
+                    const optionImage = currentQuestion[`option_${letter.toLowerCase()}_image`];
+                    if (!optionText && !optionImage) return null;
+                    const selected = answerMatches(normalizeOption(answers[currentQuestion.id]), letter);
+                    return (
+                      <button
+                        key={letter}
+                        type="button"
+                        disabled={answersLocked}
+                        aria-pressed={selected}
+                        onClick={() => selectOption(currentQuestion, letter)}
+                        className={cx(
+                          "group relative flex w-full items-start gap-3.5 sm:gap-4 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-150 disabled:cursor-not-allowed",
+                          selected
+                            ? "border-brand bg-amber-500/10 text-slate-950 ring-2 ring-brand/60 shadow-[0_0_20px_rgba(234,179,8,0.18)] dark:bg-brand/15 dark:text-white dark:ring-brand"
+                            : "border-slate-200 bg-white text-slate-800 hover:border-brand/40 hover:bg-slate-50/80 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 dark:hover:border-brand/40 dark:hover:bg-white/[0.06] hover:shadow-sm"
+                        )}
+                      >
+                        <span
                           className={cx(
-                            "group relative flex w-full items-start gap-3.5 sm:gap-4 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-150 disabled:cursor-not-allowed",
+                            "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-xs sm:text-sm font-black transition-transform duration-150",
                             selected
-                              ? "border-brand bg-amber-500/10 text-slate-950 ring-2 ring-brand/60 shadow-[0_0_20px_rgba(234,179,8,0.18)] dark:bg-brand/15 dark:text-white dark:ring-brand"
-                              : "border-slate-200 bg-white text-slate-800 hover:border-brand/40 hover:bg-slate-50/80 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 dark:hover:border-brand/40 dark:hover:bg-white/[0.06] hover:shadow-sm"
+                              ? "border-brand bg-brand text-slate-950 shadow-sm scale-105 font-display"
+                              : "border-slate-300 text-slate-500 group-hover:border-slate-400 group-hover:text-slate-700 dark:border-white/15 dark:text-slate-400 dark:group-hover:border-white/30 dark:group-hover:text-white"
                           )}
                         >
-                          <span
-                            className={cx(
-                              "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-xs sm:text-sm font-black transition-transform duration-150",
-                              selected
-                                ? "border-brand bg-brand text-slate-950 shadow-sm scale-105 font-display"
-                                : "border-slate-300 text-slate-500 group-hover:border-slate-400 group-hover:text-slate-700 dark:border-white/15 dark:text-slate-400 dark:group-hover:border-white/30 dark:group-hover:text-white"
-                            )}
-                          >
-                            {letter}
-                          </span>
-                          <div className="flex-1 min-w-0 pt-0.5">
-                            <OptionContentRenderer
-                              option={optionText}
-                              fallbackText={optionText}
-                              fallbackImage={optionImage}
-                              optionId={letter}
-                              className={cx(
-                                "text-sm sm:text-base leading-relaxed",
-                                selected
-                                  ? "text-slate-950 dark:text-white font-semibold [&_*]:!text-slate-950 dark:[&_*]:!text-white"
-                                  : "text-inherit"
-                              )}
-                            />
-                          </div>
-                          {selected && (
-                            <span className="shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-brand text-slate-950 self-center shadow-sm animate-in zoom-in-75 duration-150">
-                              <Check className="h-4 w-4 stroke-[3]" />
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                    {answers[currentQuestion.id] !== undefined && answers[currentQuestion.id] !== null && !hasFinished && (
-                      <div className="flex items-center justify-between pt-1">
-                        <button
-                          type="button"
-                          onClick={() => clearAnswer(currentQuestion)}
-                          className="text-xs font-bold text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition"
-                        >
-                          Clear choice
-                        </button>
-                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
-                          Press <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">A-D</kbd> or <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">1-4</kbd> to answer
+                          {letter}
                         </span>
-                      </div>
-                    )}
-                  </div>
-                )}
+                        <div className="flex-1 min-w-0 pt-0.5">
+                          <OptionContentRenderer
+                            option={optionText}
+                            fallbackText={optionText}
+                            fallbackImage={optionImage}
+                            optionId={letter}
+                            className={cx(
+                              "text-sm sm:text-base leading-relaxed",
+                              selected
+                                ? "text-slate-950 dark:text-white font-semibold [&_*]:!text-slate-950 dark:[&_*]:!text-white"
+                                : "text-inherit"
+                            )}
+                          />
+                        </div>
+                        {selected && (
+                          <span className="shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-brand text-slate-950 self-center shadow-sm animate-in zoom-in-75 duration-150">
+                            <Check className="h-4 w-4 stroke-[3]" />
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                  {answers[currentQuestion.id] !== undefined && answers[currentQuestion.id] !== null && !answersLocked && (
+                    <div className="flex items-center justify-between pt-1">
+                      <button
+                        type="button"
+                        onClick={() => clearAnswer(currentQuestion)}
+                        className="text-xs font-bold text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition"
+                      >
+                        Clear choice
+                      </button>
+                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
+                        Press <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">A-D</kbd> or <kbd className="rounded border px-1 py-0.5 border-slate-200 dark:border-white/10 font-mono text-[9px]">1-4</kbd> to answer
+                      </span>
+                    </div>
+                  )}
+                </div>
 
                 {/* Navigation & Submit */}
                 <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-slate-100 dark:border-white/10">
@@ -890,7 +880,7 @@ export default function BattleRoomClient({ battleId }) {
                       <button
                         type="button"
                         onClick={finishBattle}
-                        disabled={finishing || hasFinished}
+                        disabled={saving || answersLocked}
                         className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-brand-hover shadow-md transition active:scale-95 disabled:opacity-50 font-display"
                       >
                         {finishing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}

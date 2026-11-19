@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 import posthog from "posthog-js";
 import { Volume2, VolumeX, Mic, MicOff, Flame, Trophy, Shield, Swords, Crown, Gem, Sparkles, Users, RefreshCw } from "lucide-react";
 import { getSoundEnabled, setSoundEnabled, getVoiceEnabled, setVoiceEnabled, unlockAudioContext } from "@/lib/battleAudio";
@@ -133,9 +132,9 @@ function ChallengeRow({ challenge, onRespond }) {
 }
 
 export default function BattleArenaClient() {
-  const router = useRouter();
   const [profile, setProfile] = useState(null);
   const [history, setHistory] = useState([]);
+  const [arenaStats, setArenaStats] = useState(null);
   const [challenges, setChallenges] = useState([]);
   const [queueStatus, setQueueStatus] = useState("idle");
   const [username, setUsername] = useState("");
@@ -152,6 +151,30 @@ export default function BattleArenaClient() {
   // Matchmaking Modal State
   const [matchModalOpen, setMatchModalOpen] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
+  const [queueChanging, setQueueChanging] = useState(false);
+  const queueMutation = useRef(false);
+  const queueRequest = useRef(0);
+
+  const applyQueue = useCallback((data) => {
+    setQueueStatus(data.status);
+    setMatchModalOpen(data.status === "queued" || data.status === "matched");
+    setMatchedData((previous) => {
+      if (data.status !== "matched") return null;
+      if (previous?.battleId === data.battleId) return previous;
+      return { battleId: data.battleId, opponent: data.opponent };
+    });
+  }, []);
+
+  const refreshQueue = useCallback(async () => {
+    if (queueMutation.current) return;
+    const requestId = ++queueRequest.current;
+    try {
+      const data = await fetchJson("/api/battle/queue");
+      if (requestId === queueRequest.current) applyQueue(data);
+    } catch (error) {
+      if (requestId === queueRequest.current) setError(error.message);
+    }
+  }, [applyQueue]);
 
   function toggleSound() {
     const next = !soundOn;
@@ -179,22 +202,15 @@ export default function BattleArenaClient() {
       return;
     }
 
-    const [historyData, challengeData, queueData] = await Promise.all([
+    const [historyData, challengeData] = await Promise.all([
       fetchJson("/api/battle/history"),
       fetchJson("/api/battle/challenges"),
-      fetchJson("/api/battle/queue"),
+      refreshQueue(),
     ]);
-
     setHistory(historyData.history || []);
+    setArenaStats(historyData.arena);
     setChallenges(challengeData.challenges || []);
-    setQueueStatus(queueData.status || "idle");
-    setError("");
-
-    if (queueData.status === "matched" && queueData.battleId) {
-      setMatchedData({ battleId: queueData.battleId, opponent: queueData.opponent });
-      setMatchModalOpen(true);
-    }
-  }, []);
+  }, [refreshQueue]);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -205,42 +221,41 @@ export default function BattleArenaClient() {
   /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
+    if (matchedData?.battleId) return;
     const interval = setInterval(() => {
       refreshBasics().catch(() => {});
     }, queueStatus === "queued" || matchModalOpen ? 2500 : 8000);
     return () => clearInterval(interval);
-  }, [queueStatus, matchModalOpen, refreshBasics]);
+  }, [queueStatus, matchModalOpen, matchedData?.battleId, refreshBasics]);
 
-  async function findOpponent() {
-    unlockAudioContext();
-    setBusy(true);
+  async function changeQueue(method) {
+    if (queueMutation.current) return;
+    queueMutation.current = true;
+    queueRequest.current++;
+    setQueueChanging(true);
     setError("");
-    setMatchModalOpen(true);
-    try {
-      const data = await fetchJson("/api/battle/queue", { method: "POST" });
-      posthog.capture("battle_matchmaking_started", {
-        exam: profile?.exam,
-        matched_immediately: Boolean(data.status === "matched" && data.battleId),
-      });
 
-      if (data.status === "matched" && data.battleId) {
-        setMatchedData({ battleId: data.battleId, opponent: data.opponent });
-      } else {
-        setQueueStatus("queued");
+    if (method === "POST") {
+      unlockAudioContext();
+      setMatchModalOpen(true);
+    }
+
+    try {
+      const data = await fetchJson("/api/battle/queue", { method });
+      applyQueue(data);
+      if (method === "POST") {
+        posthog.capture("battle_matchmaking_started", {
+          exam: profile?.exam,
+          matched_immediately: data.status === "matched",
+        });
       }
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
       setMatchModalOpen(false);
     } finally {
-      setBusy(false);
+      queueMutation.current = false;
+      setQueueChanging(false);
     }
-  }
-
-  async function leaveQueue() {
-    await fetchJson("/api/battle/queue", { method: "DELETE" }).catch(() => {});
-    setQueueStatus("idle");
-    setMatchModalOpen(false);
-    setMatchedData(null);
   }
 
   async function searchUsername(e) {
@@ -300,8 +315,8 @@ export default function BattleArenaClient() {
         match_created: Boolean(data.battleId),
       });
       if (data.battleId) {
-        setMatchedData({ battleId: data.battleId, opponent: null });
-        setMatchModalOpen(true);
+        queueRequest.current++;
+        applyQueue({ status: "matched", battleId: data.battleId, opponent: data.opponent });
         return;
       }
       await refreshBasics();
@@ -320,9 +335,9 @@ export default function BattleArenaClient() {
     );
   }
 
-  const myRating = profile?.arena_rating || 1000;
-  const myStreak = profile?.win_streak || 0;
-  const myTier = profile?.tier || { name: "Bronze", key: "bronze" };
+  const myRating = arenaStats?.marks ?? 1000;
+  const myStreak = arenaStats?.streak ?? 0;
+  const myTier = arenaStats?.tier || { name: "Bronze", key: "bronze" };
 
   return (
     <main className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-6">
@@ -337,7 +352,8 @@ export default function BattleArenaClient() {
         isOpen={matchModalOpen}
         profile={{ ...profile, arena_rating: myRating }}
         matchedData={matchedData}
-        onCancel={leaveQueue}
+        onCancel={() => changeQueue("DELETE")}
+        cancelDisabled={queueChanging}
       />
 
       {/* HEADER CONTROLS (Title + Sound & Voice Toggles) */}
@@ -474,8 +490,8 @@ export default function BattleArenaClient() {
               <div className="mt-6">
                 <button
                   type="button"
-                  onClick={findOpponent}
-                  disabled={busy}
+                  onClick={() => changeQueue("POST")}
+                  disabled={busy || queueChanging}
                   className="rounded-full bg-slate-950 px-8 py-3.5 text-sm font-black uppercase tracking-wider text-white shadow-md hover:bg-slate-900 transition active:scale-95 disabled:opacity-50"
                 >
                   Start Matchmaking

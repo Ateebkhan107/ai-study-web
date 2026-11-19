@@ -1,13 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { isAnswerCorrect } from "@/lib/battle";
+import { battleDatabaseError } from "@/lib/battle";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-
-const SCORING_SELECT = "id, correct_answer";
-
-function jsonError(error, fallback = 500) {
-  return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: error.status || fallback });
-}
 
 export async function POST(request, context) {
   try {
@@ -15,67 +9,29 @@ export async function POST(request, context) {
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await context.params;
-    const body = await request.json();
-    const questionId = String(body.questionId || "");
-    const selectedAnswer = body.selectedAnswer;
-
-    if (!questionId) return NextResponse.json({ error: "Question is required." }, { status: 400 });
-
-    const [{ data: match, error: matchError }, { data: player, error: playerError }] = await Promise.all([
-      supabaseAdmin
-        .from("battle_matches")
-        .select("id, status, question_ids")
-        .eq("id", id)
-        .maybeSingle(),
-      supabaseAdmin
-        .from("battle_players")
-        .select("id, completed_at")
-        .eq("battle_id", id)
-        .eq("user_id", userId)
-        .maybeSingle(),
-    ]);
-
-    if (matchError) throw matchError;
-    if (playerError) throw playerError;
-    if (!match) return NextResponse.json({ error: "Battle not found." }, { status: 404 });
-    if (!player) return NextResponse.json({ error: "You are not a player in this battle." }, { status: 403 });
-    if (match.status !== "ACTIVE") return NextResponse.json({ error: "Battle is already finished." }, { status: 400 });
-    if (!match.question_ids?.map(String).includes(questionId)) {
-      return NextResponse.json({ error: "Question is not part of this battle." }, { status: 400 });
+    const body = await request.json().catch(() => null);
+    if (typeof body?.questionId !== "string" || !body.questionId) {
+      return NextResponse.json({ error: "Question is required." }, { status: 400 });
     }
-    if (player.completed_at) {
-      return NextResponse.json({ error: "You have already finished this battle." }, { status: 400 });
+    if (body.selectedAnswer !== null && !/^[A-D]$/.test(
+      typeof body.selectedAnswer === "string" ? body.selectedAnswer : ""
+    )) {
+      return NextResponse.json({ error: "Choose a valid answer." }, { status: 400 });
     }
 
-    const { data: question, error: questionError } = await supabaseAdmin
-      .from("battle_questions")
-      .select(SCORING_SELECT)
-      .eq("id", questionId)
-      .maybeSingle();
-    if (questionError) throw questionError;
-    if (!question) return NextResponse.json({ error: "Question not found." }, { status: 404 });
-
-    const isAnswerEmpty = selectedAnswer === null || selectedAnswer === undefined || selectedAnswer === "";
-    const isCorrect = isAnswerEmpty ? null : isAnswerCorrect(question, selectedAnswer);
-
-    const { error } = await supabaseAdmin
-      .from("battle_answers")
-      .upsert(
-        {
-          battle_id: id,
-          user_id: userId,
-          question_id: questionId,
-          selected_answer: isAnswerEmpty ? null : selectedAnswer,
-          is_correct: isCorrect,
-          answered_at: new Date().toISOString(),
-        },
-        { onConflict: "battle_id,user_id,question_id" }
-      );
-    if (error) throw error;
+    const { error } = await supabaseAdmin.rpc("battle_save_answer", {
+      p_battle_id: id,
+      p_user_id: userId,
+      p_question_id: body.questionId,
+      p_answer: body.selectedAnswer,
+    });
+    if (error) throw battleDatabaseError(error);
 
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[BATTLE_ANSWER_POST_ERROR]", error);
-    return jsonError(error);
+    return NextResponse.json({ error: error.status ? error.message : "Unable to save your answer." }, {
+      status: error.status || 500,
+    });
   }
 }

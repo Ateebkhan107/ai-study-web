@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { getRatingTier } from "@/lib/battle";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 function resultFor(match, userId) {
@@ -12,16 +13,21 @@ export async function GET() {
     const { userId } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const { data: playerRows, error: playersError } = await supabaseAdmin
-      .from("battle_players")
-      .select("battle_id, score, correct_count, wrong_count, skipped_count, completed_at")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false })
-      .limit(20);
+    const [{ data: playerRows, error: playersError }, { data: stats, error: statsError }] = await Promise.all([
+      supabaseAdmin.from("battle_players").select("battle_id").eq("user_id", userId)
+        .order("created_at", { ascending: false }).limit(20),
+      supabaseAdmin.from("battle_stats").select("arena_rating, win_streak").eq("user_id", userId).maybeSingle(),
+    ]);
     if (playersError) throw playersError;
+    if (statsError) throw statsError;
 
+    const arena = {
+      marks: stats?.arena_rating ?? 1000,
+      streak: stats?.win_streak ?? 0,
+      tier: getRatingTier(stats?.arena_rating),
+    };
     const battleIds = (playerRows || []).map((row) => row.battle_id);
-    if (battleIds.length === 0) return NextResponse.json({ history: [] });
+    if (battleIds.length === 0) return NextResponse.json({ history: [], arena });
 
     const [{ data: matches, error: matchesError }, { data: allPlayers, error: allPlayersError }] = await Promise.all([
       supabaseAdmin
@@ -76,7 +82,7 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ history });
+    return NextResponse.json({ history, arena });
   } catch (error) {
     console.error("[BATTLE_HISTORY_GET_ERROR]", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

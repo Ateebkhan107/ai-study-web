@@ -1,5 +1,6 @@
 import { supabase } from "./supabase.js";
 import { allocateQuestionCounts } from "./questionDistribution.js";
+import { uniqueMockQuestions } from "./questionUniqueness.js";
 import { getChapterTargets } from "./pyqChapterMapping.js";
 
 // Keep the public questions API compatible for test/institute routes that use
@@ -141,16 +142,6 @@ const QUESTION_SELECT_FIELDS = `
   negative_marks
 `;
 
-function shuffleUniqueQuestions(questions) {
-  const unique = new Map();
-  for (const question of questions || []) {
-    if (question?.id && !unique.has(question.id)) {
-      unique.set(question.id, question);
-    }
-  }
-  return [...unique.values()].sort(() => Math.random() - 0.5);
-}
-
 function pickBalancedByDifficulty(questions, limit) {
   const buckets = {
     Easy: [],
@@ -159,22 +150,20 @@ function pickBalancedByDifficulty(questions, limit) {
     Other: [],
   };
 
-  shuffleUniqueQuestions(questions).forEach((question) => {
+  shuffleArray(questions).forEach((question) => {
     const key = buckets[question.difficulty] ? question.difficulty : "Other";
     buckets[key].push(question);
   });
 
   const result = [];
-  const seen = new Set();
   const order = ["Easy", "Medium", "Hard", "Other"];
 
   while (result.length < limit) {
     let added = false;
     for (const key of order) {
       const question = buckets[key].shift();
-      if (!question || seen.has(question.id)) continue;
+      if (!question) continue;
       result.push(question);
-      seen.add(question.id);
       added = true;
       if (result.length >= limit) break;
     }
@@ -306,7 +295,7 @@ export async function getQuestions({
       subject.trim().toLowerCase() === "mixed subjects";
 
     if (!isAllSubjects) {
-      subjects = subject.split(",").map((s) => fixSubject(s.trim()));
+      subjects = [...new Set(subject.split(",").map((s) => fixSubject(s.trim())).filter(Boolean))];
     } else {
       if (exam === "NEET") {
         subjects = ["Physics", "Chemistry", "Biology"];
@@ -318,17 +307,13 @@ export async function getQuestions({
     const distribution = allocateQuestionCounts(exam, limit, subjects);
     const isJee = exam === "JEE Main" || exam === "JEE";
 
-    const finalQuestions = await Promise.all(
+    const subjectPools = await Promise.all(
       subjects.map(async (sub) => {
-        let subjectLimit = limit;
-        if (subjects.length > 1) {
-          subjectLimit = distribution[sub] || 0;
-        }
-
-        if (subjectLimit <= 0) return [];
+        const subjectLimit = subjects.length === 1 ? Number(limit) : distribution[sub] || 0;
+        if (subjectLimit <= 0) return { data: [], subjectLimit };
 
         const buildQuery = () => {
-          let query = client.from("questions").select(QUESTION_SELECT_FIELDS);
+          let query = client.from("questions").select(QUESTION_SELECT_FIELDS).order("id");
           query = isJee
             ? query.in("exam", ["JEE Main", "JEE"])
             : query.eq("exam", exam);
@@ -402,12 +387,10 @@ export async function getQuestions({
         }
 
         if (data && data.length > 0) {
-          return distributeEvenlyByChapter(data, subjectLimit, isJee, difficulty);
+          return { data, subjectLimit };
         }
 
-        if (strictFilters) {
-          return [];
-        }
+        if (strictFilters) return { data: [], subjectLimit };
 
         // Fallback 1: Relax chapter filter if no questions found
         let fallbackQuery = client.from("questions").select(QUESTION_SELECT_FIELDS);
@@ -429,7 +412,7 @@ export async function getQuestions({
 
         const fallbackRes = await fallbackQuery.range(0, 999);
         if (fallbackRes.data && fallbackRes.data.length > 0) {
-          return distributeEvenlyByChapter(fallbackRes.data, subjectLimit, isJee, difficulty);
+          return { data: fallbackRes.data, subjectLimit };
         }
 
         // Fallback 2: Relax difficulty too
@@ -446,14 +429,20 @@ export async function getQuestions({
         }
         const anyRes = await anyQuery.range(0, 999);
         if (anyRes.data && anyRes.data.length > 0) {
-          return distributeEvenlyByChapter(anyRes.data, subjectLimit, isJee, difficulty);
+          return { data: anyRes.data, subjectLimit };
         }
 
-        return [];
+        return { data: [], subjectLimit };
       })
     );
 
-    return finalQuestions.flat().map((q) => ({
+    const selected = [];
+    for (const { data, subjectLimit } of subjectPools) {
+      const uniquePool = uniqueMockQuestions(data, selected);
+      selected.push(...distributeEvenlyByChapter(uniquePool, subjectLimit, isJee, difficulty));
+    }
+
+    return selected.map((q) => ({
       id: q.id,
       exam: q.exam,
       subject: q.subject,

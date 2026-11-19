@@ -76,7 +76,7 @@ export function BattleChampionCelebration() {
               {award.badge_name || "Arena Champion"}
             </p>
             <p className="text-xs text-slate-400 mt-1">
-              Final Rating: <span className="text-brand font-bold">{award.arena_rating} Elo</span> · {award.wins} Victories
+              Final Arena Marks: <span className="text-brand font-bold">{award.arena_rating}</span> · {award.wins} Victories
             </p>
           </div>
 

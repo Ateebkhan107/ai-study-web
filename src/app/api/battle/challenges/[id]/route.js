@@ -24,10 +24,13 @@ export async function PATCH(request, context) {
     if (challengeError) throw challengeError;
     if (!challenge) return NextResponse.json({ error: "Challenge not found." }, { status: 404 });
     if (challenge.challenged_id !== userId) return NextResponse.json({ error: "Only the challenged student can respond." }, { status: 403 });
+    if (action === "accept" && challenge.status === "ACCEPTED" && challenge.battle_id) {
+      return NextResponse.json({ challenge, battleId: challenge.battle_id });
+    }
     if (challenge.status !== "PENDING") return NextResponse.json({ error: "Challenge is no longer pending." }, { status: 400 });
 
     if (challengeIsExpired(challenge)) {
-      await supabaseAdmin.from("battle_challenges").update({ status: "EXPIRED" }).eq("id", challenge.id);
+      await supabaseAdmin.from("battle_challenges").update({ status: "EXPIRED" }).eq("id", challenge.id).eq("status", "PENDING");
       return NextResponse.json({ error: "Challenge expired." }, { status: 400 });
     }
 
@@ -36,9 +39,11 @@ export async function PATCH(request, context) {
         .from("battle_challenges")
         .update({ status: "DECLINED" })
         .eq("id", challenge.id)
+        .eq("status", "PENDING")
         .select("id, status")
-        .single();
+        .maybeSingle();
       if (error) throw error;
+      if (!data) return NextResponse.json({ error: "Challenge is no longer pending." }, { status: 409 });
       return NextResponse.json({ challenge: data });
     }
 
@@ -57,17 +62,14 @@ export async function PATCH(request, context) {
       exam: challenged.exam,
       playerAId: challenge.challenger_id,
       playerBId: challenge.challenged_id,
+      challengeId: challenge.id,
     });
 
-    const { data, error } = await supabaseAdmin
-      .from("battle_challenges")
-      .update({ status: "ACCEPTED", battle_id: match.id })
-      .eq("id", challenge.id)
-      .select("id, status, battle_id")
-      .single();
-    if (error) throw error;
-
-    return NextResponse.json({ challenge: data, battleId: match.id });
+    return NextResponse.json({
+      challenge: { id: challenge.id, status: "ACCEPTED", battle_id: match.id },
+      battleId: match.id,
+      opponent: { displayName: challenger.displayName, username: challenger.username, arena_rating: challenger.arena_rating },
+    });
   } catch (error) {
     console.error("[BATTLE_CHALLENGE_PATCH_ERROR]", error);
     return jsonError(error);

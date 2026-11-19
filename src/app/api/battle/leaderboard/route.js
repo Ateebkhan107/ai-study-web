@@ -59,7 +59,7 @@ export async function GET(request) {
 
       leaderboardRows = (allTimeStats || []).map((row, idx) => {
         const p = profileMap.get(row.user_id);
-        const rating = row.arena_rating || 1000;
+        const rating = row.arena_rating ?? 1000;
         return {
           rank: idx + 1,
           userId: row.user_id,
@@ -93,10 +93,10 @@ export async function GET(request) {
             const { count: higherCount } = await supabaseAdmin
               .from("battle_stats")
               .select("user_id", { count: "exact", head: true })
-              .gt("arena_rating", myStats.arena_rating || 1000);
+              .gt("arena_rating", myStats.arena_rating ?? 1000);
 
             const p = profileMap.get(userId);
-            const rating = myStats.arena_rating || 1000;
+            const rating = myStats.arena_rating ?? 1000;
             myRankData = {
               rank: (higherCount || 0) + 1,
               userId,
@@ -139,7 +139,7 @@ export async function GET(request) {
 
         leaderboardRows = seasonStats.map((row, idx) => {
           const p = profileMap.get(row.user_id);
-          const rating = row.arena_rating || 1000;
+          const rating = row.arena_rating ?? 1000;
           return {
             rank: idx + 1,
             userId: row.user_id,
@@ -174,10 +174,10 @@ export async function GET(request) {
                 .from("battle_season_stats")
                 .select("user_id", { count: "exact", head: true })
                 .eq("season_id", requestedSeason)
-                .gt("arena_rating", myStats.arena_rating || 1000);
+                .gt("arena_rating", myStats.arena_rating ?? 1000);
 
               const p = profileMap.get(userId);
-              const rating = myStats.arena_rating || 1000;
+              const rating = myStats.arena_rating ?? 1000;
               myRankData = {
                 rank: (higherCount || 0) + 1,
                 userId,
@@ -225,7 +225,7 @@ export async function GET(request) {
 
         leaderboardRows = (fallbackStats || []).map((row, idx) => {
           const p = profileMap.get(row.user_id);
-          const rating = row.arena_rating || 1000;
+          const rating = row.arena_rating ?? 1000;
           return {
             rank: idx + 1,
             userId: row.user_id,
